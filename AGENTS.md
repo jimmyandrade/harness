@@ -1,0 +1,56 @@
+---
+locale: en
+---
+
+# Agent instructions
+
+## Layers
+
+- This repository is the core harness. It is public. Never add a company name, a business rule, a workspace, a database, a page, a person, or a secret to it.
+- A business harness is its own repository. It keeps business skills, data source schemas and mappings, the glossary, and output styles. It uses this repository for the checker, the Notion sync, the vocabulary API and MCP, and shared skills.
+- A skill moves from a business harness to this repository one at a time, after an audit. The audit removes every company name, business rule, and workspace or database name, and moves what still differs between businesses into project instructions. Keep the name, the version, and `metadata.aliases` when a skill moves, so the Notion page of each business keeps its history.
+- Do not move a skill here because two businesses have similar ones. Move it when one text works for both.
+
+## Project instructions
+
+- A skill reads what differs between projects from the project instructions. In a repository, those are `AGENTS.md`. In Notion, they are the page titled `AGENTS.md` in that workspace. When both exist, the repository wins for repository work.
+- The skill text says "instruções do projeto". It does not name a file, a path, a workspace, or a page.
+- A parameter that the project instructions do not set uses the default written in the skill. When the skill has no default, ask once and stop.
+- Never edit the project instructions page in Notion. It belongs to the people of that workspace.
+
+## Git
+
+- Every change lands through a pull request. Do not push to `main`.
+- Write every commit subject in `locale.commit_subject` from `.agents/config.yml`.
+- Use a Conventional Commits subject: `type: description`. When the change affects one skill, the subject is `type(skill-name): description`. The types are `feat`, `fix`, `docs`, `refactor`, `test`, `chore`, and `ci`.
+- A change to CI or to an action uses `ci`, even when it adds behavior.
+
+## Configuration
+
+- Defaults are in `.agents/config.yml`. Comments in that file explain each one. A business harness keeps only the keys that differ, and a missing key falls back to the value here.
+- A script finds the project from `HARNESS_ROOT`, or from the working directory. It finds this repository from its own location. Do not make a script read a file of this repository when the project has one.
+- Each Markdown document states its `locale` in frontmatter.
+
+## Skills
+
+- Save every skill as `.agents/skills/<name>/SKILL.md`. `name` matches the directory. A skill that must not sync to Notion sets `metadata.notion` to `"false"`.
+- The skill text does not mention files or paths, except when proposing to move detail into `references/` after the skill would pass the line or token limit, except when pointing at a template, and except in the final `Scripts disponíveis` section, which names each script and how to run it.
+- When a skill changes, bump `metadata.version`: patch for a fix, minor for a feature, major for a breaking change.
+- Renaming a skill is a breaking change. Put `!` after the type, start the footer with `BREAKING CHANGE:`, and put every previous name in `metadata.aliases`.
+- Lefthook runs `.agents/scripts/check-skill/run-check.sh` on commit. Do not commit if it fails.
+
+## Notion sync
+
+- GitHub is the write source. The sync action is the only writer of the Habilidades pages. Do not edit those pages or that database in Notion.
+- The schema of a skill page is `.agents/schemas/skill-page.schema.json`. Each business keeps its own mapping, with its data source id, property names, and status option names. `.agents/mappings/skill-page.notion.example.json` is the template.
+- A version below 0.1.0 is the draft option. A version from 0.1.0 whose major number is 0 is the validation option. A version from 1 onward is the production option.
+
+## Data sources
+
+- Describe a data source with JSON Schema and a separate Notion mapping, as in `docs/adr/0001-describe-data-sources-with-json-schema.md`. Those files live in the business harness, not here.
+- The vocabulary API validates a request body and a glossary row with Zod, as in `docs/adr/0004-validate-the-api-with-zod.md`. The glossary is one JSON file per language in the project, as in `docs/adr/0003-store-the-brand-glossary-as-json.md`.
+
+## Documents
+
+- `FEATURES.md` lists what a person or a repository uses directly. `INSTALL.md` is how to use it. `CONTRIBUTING.md` is CI and actions. `TROUBLESHOOTING.md` is failure diagnosis. Do not copy one into another.
+- Architecture decisions are in `docs/adr/`, in English.

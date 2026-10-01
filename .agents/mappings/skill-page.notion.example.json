@@ -1,0 +1,16 @@
+{
+  "data_source_id": "00000000-0000-4000-8000-000000000000",
+  "properties": {
+    "name": "Nome da habilidade",
+    "description": "Descrição",
+    "version": "Versão da skill",
+    "aliases": "Aliases",
+    "tags": "Tags",
+    "status": "Status"
+  },
+  "status_options": {
+    "draft": "Rascunho",
+    "validation": "Em validação",
+    "production": "Em produção"
+  }
+}

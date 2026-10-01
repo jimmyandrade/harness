@@ -1,0 +1,23 @@
+name: Check skills
+description: Check every changed SKILL.md of the calling repository against the harness rules and its .agents/config.yml.
+inputs:
+  base:
+    description: Commit the change starts from. Empty checks every skill.
+    required: false
+    default: ""
+  head:
+    description: Commit the change ends at.
+    required: false
+    default: ${{ github.sha }}
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-python@v6
+      with:
+        python-version: "3.14"
+    - shell: bash
+      env:
+        HARNESS_ROOT: ${{ github.workspace }}
+        CHECK_SKILL_BASE: ${{ inputs.base }}
+        CHECK_SKILL_HEAD: ${{ inputs.head }}
+      run: '"$GITHUB_ACTION_PATH/../../../.agents/scripts/check-skill/run-check.sh"'
