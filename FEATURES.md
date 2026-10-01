@@ -37,8 +37,10 @@ locale: en
   - The mapping lives in the calling repository: data source id, property names, and status option names
   - `mapping` points at another mapping file. A change to that file republishes every skill
   - The page icon comes from `notion.page_icon_name` and `notion.page_icon_color`, with the core fallback
+  - `include-core` also publishes the skills of the core harness into the caller's Notion
 - **Test Criteria**:
   - [x] A mapping can rename every status option
+  - [x] Core skills publish when the project moves the core version or its mapping, and a name in both stops the sync
   - [x] The project root is `HARNESS_ROOT`, or the working directory
   - [ ] A business workflow that calls the action creates one page per new skill
 
