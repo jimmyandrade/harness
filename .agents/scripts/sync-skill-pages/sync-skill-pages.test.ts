@@ -23,6 +23,7 @@ import {
   replaceArgs,
   skillStatus,
   DEFAULT_MAPPING_PATH,
+  coreNamesToPublish,
   projectRoot,
   repoRoot,
   statusOptions,
@@ -535,4 +536,11 @@ test("mapping file matches the schema fields", () => {
     assert.ok(stored.properties[field])
   }
   assert.ok(stored.data_source_id)
+})
+
+test("core skills publish when the project moves the core version or its mapping", () => {
+  assert.deepEqual(coreNamesToPublish(["lancar-venda"], ["criar-commit"], false, false), [])
+  assert.deepEqual(coreNamesToPublish(["lancar-venda"], ["criar-commit"], false, true), ["criar-commit"])
+  assert.deepEqual(coreNamesToPublish(["lancar-venda"], ["criar-commit"], true, false), ["criar-commit"])
+  assert.throws(() => coreNamesToPublish(["criar-commit"], ["criar-commit"], true, true), /criar-commit exists/)
 })

@@ -30,6 +30,8 @@ Business harnesses call two composite actions from this repository. Each one run
 
 `sync-skill-pages` installs Node.js 24 and the runtime dependencies of this repository, then runs `.agents/scripts/sync-skill-pages/sync-skill-pages.ts` with `HARNESS_ROOT` set to the caller. It reads the mapping from `mapping`, the page icon from the caller's `.agents/config.yml` with the core fallback, and the token from `notion-token`. It creates or updates a page for each changed skill that does not set `metadata.notion` to `"false"`. A change to the mapping republishes every skill. A skill removed from git does not remove the page. A rename keeps the page whose title is the previous name when the new skill lists it in `metadata.aliases`.
 
+With `include-core`, which is on by default, the action also publishes the skills of this repository into the caller's Notion, with the caller's mapping. It does that when the caller's push changes its mapping, a file under `.github/workflows/`, `package.json`, or `package-lock.json`, which is where a business harness moves the version of this repository it uses. A skill name that exists in both repositories stops the sync.
+
 ## Releases
 
 A release is a tag `vMAJOR.MINOR.PATCH` and a moving `vMAJOR` tag. Business harnesses pin the actions to `vMAJOR`, and the plugin and the Node.js dependency to the full tag. Bump `version` in `.claude-plugin/plugin.json` and `package.json` with the tag.
