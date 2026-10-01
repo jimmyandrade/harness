@@ -1,0 +1,34 @@
+name: Sync skill pages
+description: Create or update one Notion page per changed skill of the calling repository, with that repository's mapping.
+inputs:
+  notion-token:
+    description: Notion integration token with access to the Habilidades data source.
+    required: true
+  base:
+    description: Commit the change starts from.
+    required: true
+  head:
+    description: Commit the change ends at.
+    required: false
+    default: ${{ github.sha }}
+  mapping:
+    description: Mapping file in the calling repository.
+    required: false
+    default: .agents/mappings/skill-page.notion.json
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@v7
+      with:
+        node-version: 24
+    - shell: bash
+      run: npm ci --omit=dev --no-audit --no-fund --prefix "$GITHUB_ACTION_PATH/../../.."
+    - shell: bash
+      env:
+        HARNESS_ROOT: ${{ github.workspace }}
+        NOTION_TOKEN: ${{ inputs.notion-token }}
+      run: >-
+        node "$GITHUB_ACTION_PATH/../../../.agents/scripts/sync-skill-pages/sync-skill-pages.ts"
+        --base "${{ inputs.base }}"
+        --head "${{ inputs.head }}"
+        --mapping "${{ inputs.mapping }}"
