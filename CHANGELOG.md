@@ -1,5 +1,30 @@
 # Changelog
 
+## [0.3.0](https://github.com/jimmyandrade/harness/compare/v0.2.0...v0.3.0) (2026-10-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* **publicar-habilidade:** publicar-habilidade 0.5.0 no longer commits on the main branch by default in a repository session. A harness that wants that sets "Commit direto na base": "sim" in its project instructions.
+
+### Features
+
+* **check-skill:** check the language and the Given of Gherkin files ([#31](https://github.com/jimmyandrade/harness/issues/31)) ([1bbff88](https://github.com/jimmyandrade/harness/commit/1bbff88a78859b52d475bd356ac323db443d941a))
+* **criar-habilidade:** move the skill to the core ([#22](https://github.com/jimmyandrade/harness/issues/22)) ([02493eb](https://github.com/jimmyandrade/harness/commit/02493eb5150102589fce81ea5e5ddf7cea7212f0))
+* **descrever-habilidade-ou-schema:** move the skill to the core ([#20](https://github.com/jimmyandrade/harness/issues/20)) ([6ebcfa9](https://github.com/jimmyandrade/harness/commit/6ebcfa9c2a43fe8332615c7fca1f0baab765a27c))
+* **evoluir-habilidade:** move the skill to the core ([#21](https://github.com/jimmyandrade/harness/issues/21)) ([a7c69be](https://github.com/jimmyandrade/harness/commit/a7c69beb0f010ed89bf65e14afa5ffb3d96e0389))
+* **medir-habilidade:** move the skill to the core ([#23](https://github.com/jimmyandrade/harness/issues/23)) ([df2a0b8](https://github.com/jimmyandrade/harness/commit/df2a0b89ec3bb67811fb8b6c65b9154f0c412483))
+* **publicar-habilidade:** move the skill to the core ([#24](https://github.com/jimmyandrade/harness/issues/24)) ([b4c6834](https://github.com/jimmyandrade/harness/commit/b4c6834a58c9f04885b2837a6a9e65a27babcf81))
+* **resolver-comentarios-de-revisao:** handle the review comments of a pull request ([#28](https://github.com/jimmyandrade/harness/issues/28)) ([35f5144](https://github.com/jimmyandrade/harness/commit/35f5144a0d46ae32908a2d0379e8053aee8e5569))
+* **revisar-habilidade:** move the skill to the core ([#18](https://github.com/jimmyandrade/harness/issues/18)) ([fc24a09](https://github.com/jimmyandrade/harness/commit/fc24a09a792a8abf0f9526c4d265de0816df2ab2))
+
+
+### Bug Fixes
+
+* **criar-habilidade:** keep diacritics and sentence case in the skill title ([#29](https://github.com/jimmyandrade/harness/issues/29)) ([af5b75e](https://github.com/jimmyandrade/harness/commit/af5b75e5ab0cfbbf11a88c5f7a7f7e9f96454fe6))
+* **skill-graph:** keep only the graph in .agents/skills/README.md ([#25](https://github.com/jimmyandrade/harness/issues/25)) ([c459092](https://github.com/jimmyandrade/harness/commit/c4590922c9cc58edbef2b51e0adc436d20e04e54))
+* start every Gherkin Given with "Dado que" ([#30](https://github.com/jimmyandrade/harness/issues/30)) ([2021751](https://github.com/jimmyandrade/harness/commit/202175119a6275a89ddada31a32606003c68876b))
+
 ## [0.2.0](https://github.com/jimmyandrade/harness/compare/v0.1.1...v0.2.0) (2026-10-02)
 
 
