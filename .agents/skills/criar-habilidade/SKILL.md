@@ -3,10 +3,11 @@ name: criar-habilidade
 description: Use essa habilidade sempre que for criar, adicionar ou escrever uma skill, mesmo sem dizer skill. NÃO use para editar código, escrever página que não seja skill, otimizar só a descrição, nem gravar a skill no Notion. Pedido vindo do Notion segue publicar-habilidade.
 metadata:
   author: jimmyandrade
-  version: "3.6.0"
+  version: "3.6.1"
   related:
     - descrever-habilidade-ou-schema
     - evoluir-habilidade
+    - publicar-habilidade
 ---
 
 # Criar habilidade

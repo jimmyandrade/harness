@@ -3,10 +3,11 @@ name: evoluir-habilidade
 description: Use essa habilidade sempre que for testar uma skill, mesmo sem dizer evoluir, inclusive o Gherkin e a comparação com e sem skill, resultado inconsistente, falha de chamada ou correção da pessoa. O teste sempre edita a skill validada. NÃO use para criar a primeira versão, só ver se a descrição dispara, só revisar sem executar, nem gravar a página no Notion. Pedido vindo do Notion segue publicar-habilidade.
 metadata:
   author: jimmyandrade
-  version: "0.15.6"
+  version: "0.15.7"
   related:
     - descrever-habilidade-ou-schema
     - medir-habilidade
+    - publicar-habilidade
     - revisar-habilidade
 ---
 

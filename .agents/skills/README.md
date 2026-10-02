@@ -19,31 +19,39 @@ flowchart LR
     descrever_habilidade_ou_schema["descrever-habilidade-ou-schema"]
     evoluir_habilidade["evoluir-habilidade"]
     medir_habilidade["medir-habilidade"]
+    publicar_habilidade["publicar-habilidade"]
     revisar_habilidade["revisar-habilidade"]
   end
   criar_commit -.-> criar_pull_request
   criar_habilidade --> descrever_habilidade_ou_schema
   criar_habilidade --> evoluir_habilidade
+  criar_habilidade --> publicar_habilidade
   criar_pull_request -.-> criar_commit
   descrever_habilidade_ou_schema --> evoluir_habilidade
+  descrever_habilidade_ou_schema --> publicar_habilidade
   descrever_habilidade_ou_schema --> revisar_habilidade
   evoluir_habilidade --> descrever_habilidade_ou_schema
   evoluir_habilidade --> medir_habilidade
+  evoluir_habilidade --> publicar_habilidade
   evoluir_habilidade --> revisar_habilidade
   medir_habilidade --> evoluir_habilidade
+  publicar_habilidade --> criar_commit
+  publicar_habilidade --> criar_pull_request
   revisar_habilidade --> criar_habilidade
   revisar_habilidade --> descrever_habilidade_ou_schema
   revisar_habilidade --> evoluir_habilidade
+  revisar_habilidade --> publicar_habilidade
 ```
 
 ## Skills
 
 | Skill | Layer | Version | Depends on | Used by |
 | --- | --- | --- | --- | --- |
-| `criar-commit` | Core | 0.2.0 | `criar-pull-request` | `criar-pull-request` |
-| `criar-habilidade` | Core | 3.6.0 | `descrever-habilidade-ou-schema`, `evoluir-habilidade` | `revisar-habilidade` |
-| `criar-pull-request` | Core | 0.4.0 | `criar-commit` | `criar-commit` |
-| `descrever-habilidade-ou-schema` | Core | 0.15.3 | `evoluir-habilidade`, `revisar-habilidade` | `criar-habilidade`, `evoluir-habilidade`, `revisar-habilidade` |
-| `evoluir-habilidade` | Core | 0.15.6 | `descrever-habilidade-ou-schema`, `medir-habilidade`, `revisar-habilidade` | `criar-habilidade`, `descrever-habilidade-ou-schema`, `medir-habilidade`, `revisar-habilidade` |
+| `criar-commit` | Core | 0.2.0 | `criar-pull-request` | `criar-pull-request`, `publicar-habilidade` |
+| `criar-habilidade` | Core | 3.6.1 | `descrever-habilidade-ou-schema`, `evoluir-habilidade`, `publicar-habilidade` | `revisar-habilidade` |
+| `criar-pull-request` | Core | 0.4.0 | `criar-commit` | `criar-commit`, `publicar-habilidade` |
+| `descrever-habilidade-ou-schema` | Core | 0.15.4 | `evoluir-habilidade`, `publicar-habilidade`, `revisar-habilidade` | `criar-habilidade`, `evoluir-habilidade`, `revisar-habilidade` |
+| `evoluir-habilidade` | Core | 0.15.7 | `descrever-habilidade-ou-schema`, `medir-habilidade`, `publicar-habilidade`, `revisar-habilidade` | `criar-habilidade`, `descrever-habilidade-ou-schema`, `medir-habilidade`, `revisar-habilidade` |
 | `medir-habilidade` | Core | 0.3.2 | `evoluir-habilidade` | `evoluir-habilidade` |
-| `revisar-habilidade` | Core | 0.2.9 | `criar-habilidade`, `descrever-habilidade-ou-schema`, `evoluir-habilidade` | `descrever-habilidade-ou-schema`, `evoluir-habilidade` |
+| `publicar-habilidade` | Core | 0.5.0 | `criar-commit`, `criar-pull-request` | `criar-habilidade`, `descrever-habilidade-ou-schema`, `evoluir-habilidade`, `revisar-habilidade` |
+| `revisar-habilidade` | Core | 0.2.10 | `criar-habilidade`, `descrever-habilidade-ou-schema`, `evoluir-habilidade`, `publicar-habilidade` | `descrever-habilidade-ou-schema`, `evoluir-habilidade` |
