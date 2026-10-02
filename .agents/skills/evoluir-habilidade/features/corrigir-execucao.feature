@@ -7,18 +7,18 @@ Funcionalidade: Corrigir a execução pelo feedback
   Regra: Falha de execução melhora a instrução
 
     Exemplo: Resultado inconsistente
-      Dado um resultado diferente na mesma tarefa
+      Dado que a mesma tarefa deu um resultado diferente
       Quando a skill é evoluída
       Então a instrução fica mais específica
       E o teste edita a skill nesta conversa
 
     Exemplo: Falha de chamada
-      Dado uma chamada que falhou
+      Dado que uma chamada falhou
       Quando a skill é evoluída
       Então a instrução ganha o tratamento do erro
 
     Exemplo: Correção da pessoa
-      Dado uma correção feita pela pessoa
+      Dado que a pessoa fez uma correção
       Quando a skill é evoluída
       Então a correção entra na instrução
       E a abordagem anterior sai

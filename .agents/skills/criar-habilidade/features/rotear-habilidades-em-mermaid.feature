@@ -5,7 +5,7 @@ Funcionalidade: Rotear habilidades em Mermaid
   Regra: Roteamento não fica em frase
 
     Exemplo: Passo que encaminha
-      Dado um passo que roteia para outra habilidade
+      Dado que um passo roteia para outra habilidade
       Quando a skill é escrita
       Então o roteamento fica num flowchart Mermaid
       E o sentido é o configurado

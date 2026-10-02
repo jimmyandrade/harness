@@ -7,13 +7,13 @@ Funcionalidade: Carregar a skill nos momentos certos
   Regra: Tarefa óbvia e paráfrase carregam a skill
 
     Exemplo: Tarefa óbvia
-      Dada uma descrição que começa com "Use essa habilidade sempre que"
-      E uma consulta que pede o que a descrição cobre
+      Dado que a descrição começa com "Use essa habilidade sempre que"
+      E a consulta pede o que a descrição cobre
       Quando a pessoa faz esse pedido
       Então a skill é carregada
 
     Exemplo: Pedido parafraseado
-      Dada a mesma intenção em outras palavras
+      Dado que a pessoa diz a mesma intenção em outras palavras
       E a pessoa não nomeia o domínio
       Quando a pessoa faz esse pedido
       Então a skill é carregada
@@ -21,12 +21,12 @@ Funcionalidade: Carregar a skill nos momentos certos
   Regra: Tópico sem relação e quase-acerto ficam de fora
 
     Exemplo: Tópico sem relação
-      Dada uma consulta sem relação com o propósito
+      Dado que a consulta não tem relação com o propósito
       Quando a pessoa faz esse pedido
       Então a skill fica de fora
 
     Exemplo: Quase-acerto fora do propósito
-      Dada uma consulta com palavras em comum e outra tarefa
+      Dado que a consulta tem palavras em comum e pede outra tarefa
       E o propósito não inclui essa tarefa
       Quando a pessoa faz esse pedido
       Então a skill fica de fora

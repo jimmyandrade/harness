@@ -7,23 +7,23 @@ Funcionalidade: Conferir a saída da skill
   Regra: O critério vira um exemplo observável
 
     Exemplo: Saída válida
-      Dado o critério de aceite que a pessoa enviou
+      Dado que a pessoa enviou um critério de aceite
       Quando a skill executa o fluxo
       Então a saída observável corresponde ao critério
 
     Exemplo: Chamada que sucede
-      Dado um critério que fala da chamada
+      Dado que um critério fala da chamada
       Quando a skill executa o fluxo
       Então a chamada sucede
       E a pessoa vê o efeito da chamada
 
     Exemplo: Erro tratado
-      Dado um critério que fala de erro
+      Dado que um critério fala de erro
       Quando a chamada falha
       Então o erro é tratado
       E a pessoa vê o que faltou
 
     Exemplo: Limite
-      Dado um critério no limite do propósito
+      Dado que um critério está no limite do propósito
       Quando a skill executa o fluxo
       Então a saída observável cobre esse limite
