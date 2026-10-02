@@ -4,6 +4,9 @@
  * The mapping is .agents/mappings/skill-page.notion.json in the project, or --mapping.
  * The page icon name and color are in the project .agents/config.yml.
  * A key missing there falls back to the .agents/config.yml of this harness.
+ * With --include-core, the skills of this harness are published too, when the
+ * project changes its mapping, a workflow, or its package files. Those are the
+ * places where a project moves the version of this harness it uses.
  */
 
 import { spawnSync } from "node:child_process"
@@ -508,6 +511,19 @@ export function gate(names: string[], token: string): 0 | 2 | null {
 
 export const DEFAULT_MAPPING_PATH = ".agents/mappings/skill-page.notion.json"
 
+export const CORE_VERSION_PATHS = [".github/workflows", "package.json", "package-lock.json"]
+
+export function coreNamesToPublish(
+  projectNames: string[],
+  coreNames: string[],
+  rulesChanged: boolean,
+  coreVersionChanged: boolean,
+): string[] {
+  const shared = coreNames.filter((name) => projectNames.includes(name))
+  if (shared.length) throw new Error(`${shared.join(", ")} exists in the project and in the core harness`)
+  return rulesChanged || coreVersionChanged ? coreNames : []
+}
+
 export function projectRoot(env: Record<string, string | undefined>, cwd: string): string {
   return repoRoot(env.HARNESS_ROOT || cwd)
 }
@@ -529,11 +545,17 @@ export async function main(argv: string[]): Promise<number> {
     readFileSync(join(root, ".agents", "config.yml"), "utf8"),
     readFileSync(join(core, ".agents", "config.yml"), "utf8"),
   )
-  const names = namesToPublish(
-    skillNamesFromPaths(gitChangedFiles(root, base, head)),
-    publisherChanged(root, base, head, mappingPath),
-    allSkillNames(root),
-  )
+  const rulesChanged = publisherChanged(root, base, head, mappingPath)
+  const names = namesToPublish(skillNamesFromPaths(gitChangedFiles(root, base, head)), rulesChanged, allSkillNames(root))
+  const coreNames =
+    argv.includes("--include-core") && core !== root
+      ? coreNamesToPublish(
+          allSkillNames(root),
+          allSkillNames(core),
+          rulesChanged,
+          gitNames(root, base, head, CORE_VERSION_PATHS).length > 0,
+        )
+      : []
   const previous = previousNames(gitSkillStatus(root, base, head), (name) => {
     let text: string
     try {
@@ -548,7 +570,7 @@ export async function main(argv: string[]): Promise<number> {
     return page.aliases ?? []
   })
   const token = process.env.NOTION_TOKEN ?? ""
-  const code = gate(names, token)
+  const code = gate([...names, ...coreNames], token)
   if (code === 0) {
     console.log("no changed skill")
     return 0
@@ -557,8 +579,12 @@ export async function main(argv: string[]): Promise<number> {
     console.error("NOTION_TOKEN is missing")
     return 2
   }
-  for (const line of await publish(root, names, notionClient(token, icon), mapping, previous)) {
+  const notion = notionClient(token, icon)
+  for (const line of await publish(root, names, notion, mapping, previous)) {
     console.log(line)
+  }
+  for (const line of await publish(core, coreNames, notion, mapping)) {
+    console.log(`core ${line}`)
   }
   return 0
 }

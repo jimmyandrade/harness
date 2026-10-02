@@ -11,12 +11,31 @@ locale: en
 - **Description**: Claude Code plugin with the shared skills and the vocabulary MCP
 - **Properties**:
   - Manifest at `.claude-plugin/plugin.json`, listed in `.claude-plugin/marketplace.json` with source `.`
-  - Skills come from `.agents/skills/`. The plugin starts with none, and each one arrives after its audit
+  - Skills come from `.agents/skills/`. Each one arrives after its audit
   - Starts the `vocabulary` MCP server through `api/mcp/launch.sh`, with `HARNESS_ROOT` set to the open project
   - A business marketplace lists it with a `github` source pinned to a tag
 - **Test Criteria**:
   - [ ] Adding a business marketplace installs that plugin and `harness-core`
   - [ ] `lookup_term` reads the glossary of the open project
+
+### criar-commit
+- **Stability**: experimental
+- **Description**: Commit finished work as atomic commits with a message in the project language and pattern
+- **Properties**:
+  - Skill at `.agents/skills/criar-commit/`
+  - Reads the base branch, whether to commit without asking, the message language and pattern, and the test, build, and lint commands from the project instructions
+- **Test Criteria**:
+  - [ ] A project without test or build commands commits and says nothing was verified
+
+### criar-pull-request
+- **Stability**: experimental
+- **Description**: Open, update, and merge a pull request without pushing to the base branch
+- **Properties**:
+  - Skill at `.agents/skills/criar-pull-request/`
+  - Reads the repository, base branch, merge method, PR language, test and build commands, and push timing from the project instructions
+  - Follows the pull request template of the repository when there is one
+- **Test Criteria**:
+  - [ ] A request to push to the base branch opens a pull request instead
 
 ### check-skill
 - **Stability**: experimental
@@ -37,8 +56,10 @@ locale: en
   - The mapping lives in the calling repository: data source id, property names, and status option names
   - `mapping` points at another mapping file. A change to that file republishes every skill
   - The page icon comes from `notion.page_icon_name` and `notion.page_icon_color`, with the core fallback
+  - `include-core` also publishes the skills of the core harness into the caller's Notion
 - **Test Criteria**:
   - [x] A mapping can rename every status option
+  - [x] Core skills publish when the project moves the core version or its mapping, and a name in both stops the sync
   - [x] The project root is `HARNESS_ROOT`, or the working directory
   - [ ] A business workflow that calls the action creates one page per new skill
 
