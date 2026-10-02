@@ -88,6 +88,12 @@ pre-commit:
       run: node_modules/harness/.agents/scripts/check-skill/run-check.sh {staged_files}
 ```
 
+The same script fails when `.agents/skills/README.md` does not match the skill graph. Write it from the business root:
+
+```bash
+node_modules/harness/.agents/scripts/skill-graph/run-graph.sh
+```
+
 Check: `node_modules/harness/.agents/scripts/check-skill/run-check.sh` exits 0 from the business root.
 
 ### 5. Publish the plugins
