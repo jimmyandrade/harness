@@ -33,7 +33,7 @@ locale: en
 
 ## Skills
 
-- Save every skill as `.agents/skills/<name>/SKILL.md`. `name` matches the directory. A skill that must not sync to Notion sets `metadata.notion` to `"false"`.
+- Save every skill as `.agents/skills/<name>/SKILL.md`. `name` matches the directory. The level-1 title is the name with spaces for hyphens and only the first letter capitalized, so it has no diacritics, as `criar-habilidade` says. A review that asks for diacritics in that title is declined. A skill that must not sync to Notion sets `metadata.notion` to `"false"`.
 - The skill text does not mention files or paths, except when proposing to move detail into `references/` after the skill would pass the line or token limit, except when pointing at a template, and except in the final `Scripts disponíveis` section, which names each script and how to run it.
 - A skill that cites another skill lists it in `metadata.related`, one name per line. The checker fails when a listed name is not a skill in the project or in this harness, or when the body cites a skill missing from the list. A skill without `metadata.related` is not checked, so a business harness can adopt it one skill at a time. Every skill that moves here declares it as soon as one skill it cites is in this repository. Each later move adds its name to the skills already here that cite it.
 - When a skill changes, bump `metadata.version`: patch for a fix, minor for a feature, major for a breaking change.
