@@ -32,6 +32,10 @@ Business harnesses call two composite actions from this repository. Each one run
 
 ## Releases
 
-A release is a tag `vMAJOR.MINOR.PATCH` and a moving `vMAJOR` tag. Business harnesses pin the actions to `vMAJOR`, and the plugin and the Node.js dependency to the full tag. Bump `version` in `.claude-plugin/plugin.json` and `package.json` with the tag.
+A release is a tag `vMAJOR.MINOR.PATCH`. Business harnesses pin the actions, the plugin, and the Node.js dependency to that full tag. Bump `version` in `.claude-plugin/plugin.json` and `package.json` with the tag.
+
+## Renovate
+
+`default.json` is the shared Renovate preset. This repository extends it from `renovate.json`, and business harnesses extend it as `github>jimmyandrade/harness`. It runs before 9 a.m. on Mondays, São Paulo time, with semantic commits. A major update waits for approval on the Dependency Dashboard. Every pin of this repository, in a workflow, in `package.json`, or in `.claude-plugin/marketplace.json`, moves in one `harness core` pull request as soon as a release exists. The marketplace pin is read by a regex manager, because Renovate does not know that file.
 
 When a workflow or an action changes, update this file from the diff.
