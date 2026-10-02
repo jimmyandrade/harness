@@ -127,6 +127,23 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses editing the Habilidades page and merging in the same request
 
+### resolver-comentarios-de-revisao
+- **Stability**: experimental
+- **Description**: When a pull request has comments from people or bots, handle each one: fix, decline, or ask, then reply and resolve
+- **Properties**:
+  - Lives at `.agents/skills/resolver-comentarios-de-revisao/SKILL.md`
+  - Runs only when the pull request has comments to handle. A pull request without comments does not load it
+  - Reads review threads, review bodies such as a bot's summary, and pull request conversation comments
+  - Checks each comment against the current head of the pull request, and marks it valid, already fixed, outdated, or duplicate
+  - Fixes bugs, missing error handling, security issues, and project convention violations; declines style and low-impact details with a reason; takes intent, product, and architecture questions to the person
+  - Records a lesson that outlives the pull request in the project instructions
+  - Replies on each thread before resolving it, and leaves open a thread that waits for the person's decision
+  - Ends with a tally of accepted, declined, outdated, and open comments by author, and hands back to the caller. The merge, and whether failing checks block it, stay with criar-pull-request
+- **Test Criteria**:
+  - [ ] A comment that still applies is fixed, answered, and resolved
+  - [ ] A comment that no longer applies is answered with why, and resolved
+  - [ ] A thread without an answer stays open and shows in the tally
+
 ### revisar-habilidade
 - **Stability**: experimental
 - **Description**: Review a written skill, flag description and structure issues, and suggest tests from its purpose

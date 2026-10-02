@@ -18,6 +18,7 @@ flowchart LR
     evoluir_habilidade["evoluir-habilidade"]
     medir_habilidade["medir-habilidade"]
     publicar_habilidade["publicar-habilidade"]
+    resolver_comentarios_de_revisao["resolver-comentarios-de-revisao"]
     revisar_habilidade["revisar-habilidade"]
   end
   criar_commit -.-> criar_pull_request
@@ -35,6 +36,8 @@ flowchart LR
   medir_habilidade --> evoluir_habilidade
   publicar_habilidade --> criar_commit
   publicar_habilidade --> criar_pull_request
+  resolver_comentarios_de_revisao --> criar_commit
+  resolver_comentarios_de_revisao --> criar_pull_request
   revisar_habilidade --> criar_habilidade
   revisar_habilidade --> descrever_habilidade_ou_schema
   revisar_habilidade --> evoluir_habilidade
