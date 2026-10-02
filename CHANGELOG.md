@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.0](https://github.com/jimmyandrade/harness/compare/v0.1.1...v0.2.0) (2026-10-02)
+
+
+### Features
+
+* **check-skill:** check the skills a skill relates to ([#14](https://github.com/jimmyandrade/harness/issues/14)) ([7dc69ec](https://github.com/jimmyandrade/harness/commit/7dc69ecdc0953aad1abe6e68d85ddb3bafe4694e))
+* **skill-graph:** draw how skills relate in .agents/skills/README.md ([#17](https://github.com/jimmyandrade/harness/issues/17)) ([49bff62](https://github.com/jimmyandrade/harness/commit/49bff62d7e30b4935d58eb10bcdbeefef42618e2))
+
 ## [0.1.1](https://github.com/jimmyandrade/harness/compare/v0.1.0...v0.1.1) (2026-10-02)
 
 
