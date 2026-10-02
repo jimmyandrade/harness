@@ -29,7 +29,7 @@ locale: en
 
 - Defaults are in `.agents/config.yml`. Comments in that file explain each one. A business harness keeps only the keys that differ, and a missing key falls back to the value here.
 - A script finds the project from `HARNESS_ROOT`, or from the working directory. It finds this repository from its own location. Do not make a script read a file of this repository when the project has one.
-- Each Markdown document states its `locale` in frontmatter.
+- Each Markdown document states its `locale` in frontmatter, except: `CHANGELOG.md`, which Release Please writes and rewrites on every release; `LICENSE.md`, which keeps the license text unchanged; `CLAUDE.md`, which only imports `AGENTS.md`; and each `SKILL.md`, whose frontmatter follows the skill format and whose language is `locale.skill`.
 
 ## Skills
 
