@@ -32,7 +32,7 @@ How these skills relate is in `README.md`, in this folder.
   - An empty placeholder stays on 0.0.x and its body may be only the title
   - Does not store a person, a date, or an alias in SKILL.md except inside Exemplos de entrada e saída, which opens with "Estes exemplos ilustram fatos. Eles podem não estar no data source."; the checker requires that sentence in every skill; the fact stays in the data source, and a test in features/ or evals.json may use it
   - When a skill is renamed, keeps every previous name in metadata.aliases
-  - Writes each input example in `dt` and each output example in `dd`, with a blank line between pairs
+  - Writes each input example as a level-3 heading and its output as the next paragraph, with a blank line between pairs. The checker rejects `dl`, `dt`, and `dd`, which Notion does not show
   - Ends every skill with Scripts disponíveis, naming each script and the command that runs it
   - Does not edit code, write a non-skill page, only tune a description, or write the skill page in Notion
   - A request that comes from Notion follows publicar-habilidade
