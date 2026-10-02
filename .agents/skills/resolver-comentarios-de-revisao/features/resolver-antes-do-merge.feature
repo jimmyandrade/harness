@@ -15,7 +15,7 @@ Funcionalidade: Resolver os comentários antes do merge
     Exemplo: Comentário que não faz mais sentido
       Dado que o problema apontado por um comentário não está mais no código atual do PR
       Quando a pessoa pede o merge
-      Então a thread recebe uma resposta que explica por que ele não faz mais sentido
+      Então a thread recebe uma resposta que explica por que o comentário não faz mais sentido
       E a thread é resolvida
 
     Exemplo: Comentário sem resposta
