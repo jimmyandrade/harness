@@ -15,6 +15,7 @@ flowchart LR
   subgraph core["Core"]
     criar_commit["criar-commit"]
     criar_pull_request["criar-pull-request"]
+    revisar_habilidade["revisar-habilidade"]
   end
   criar_commit -.-> criar_pull_request
   criar_pull_request -.-> criar_commit
@@ -26,3 +27,4 @@ flowchart LR
 | --- | --- | --- | --- | --- |
 | `criar-commit` | Core | 0.2.0 | `criar-pull-request` | `criar-pull-request` |
 | `criar-pull-request` | Core | 0.4.0 | `criar-commit` | `criar-commit` |
+| `revisar-habilidade` | Core | 0.2.6 | — | — |
