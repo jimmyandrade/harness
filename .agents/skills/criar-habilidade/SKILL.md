@@ -3,7 +3,7 @@ name: criar-habilidade
 description: Use essa habilidade sempre que for criar, adicionar ou escrever uma skill, mesmo sem dizer skill. NÃO use para editar código, escrever página que não seja skill, otimizar só a descrição, nem gravar a skill no Notion. Pedido vindo do Notion segue publicar-habilidade.
 metadata:
   author: jimmyandrade
-  version: "3.6.1"
+  version: "3.6.2"
   related:
     - descrever-habilidade-ou-schema
     - evoluir-habilidade
@@ -57,7 +57,7 @@ Se o escopo da skill, de um script ou de um workflow mudar, o nome muda junto. O
 
 ### Passo 7
 
-- Título: nível 1. Troque os hífens do nome por espaços e deixe só a primeira letra maiúscula.
+- Título: nível 1. O nome com espaço no lugar do hífen e a grafia correta, com acento e hífen da palavra. Maiúscula só no começo e em nome próprio.
 - Descrição: segue `descrever-habilidade-ou-schema`. `Use essa habilidade sempre que`, intenção de quem pede, `NÃO use para`.
 - Nome e descrição, juntos, não passam de `Tokens do catálogo`.
 - A descrição é lida em todo roteamento. O corpo só é lido quando a skill dispara. Os dois ficam curtos. O teto é `Tokens do catálogo`, `Linhas` e `Tokens do corpo`. Se alongar, separe antes.
@@ -297,7 +297,7 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 - O exemplo de entrada e saída: heading de nível 3 é a entrada e o parágrafo seguinte é a saída.
 - O texto do usuário já está no idioma deste texto: entra sem mudança. Em outro idioma, traduza nome, descrição e corpo.
-- O nome tem acento: o kebab-case tira o acento. O título de nível 1 troca cada hífen por espaço e deixa só a primeira letra maiúscula.
+- O nome tem acento: só o kebab-case tira. O título e o corpo mantêm a grafia correta.
 - A entidade precisa de mais de uma palavra: mantenha as palavras, até 64 caracteres.
 - Uma tabela literal faria a skill passar de `Linhas` ou de `Tokens do corpo`: separe a tabela e aponte uma vez.
 - A skill ainda é experimental: `metadata.version` fica em `0.x`.
