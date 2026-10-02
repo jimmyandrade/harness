@@ -3,13 +3,13 @@ name: resolver-comentarios-de-revisao
 description: Use essa habilidade sempre que um pull request tiver comentário de pessoa ou bot para tratar, responder ou resolver, inclusive antes do merge, mesmo sem dizer revisão. NÃO use em PR sem comentário, para abrir o PR, nem para revisar o PR de outra pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.1.1"
+  version: "0.1.2"
   related:
     - criar-commit
     - criar-pull-request
 ---
 
-# Resolver comentarios de revisao
+# Resolver comentários de revisão
 
 ## Parâmetros de configuração
 
