@@ -3,7 +3,7 @@ name: resolver-comentarios-de-revisao
 description: Use essa habilidade sempre que um pull request tiver comentário de pessoa ou bot para tratar, responder ou resolver, inclusive antes do merge, mesmo sem dizer revisão. NÃO use em PR sem comentário, para abrir o PR, nem para revisar o PR de outra pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
   related:
     - criar-commit
     - criar-pull-request
@@ -47,7 +47,7 @@ Corrija na branch do PR, seguindo `criar-commit`. Lógica do projeto ganha ou aj
 
 ### Passo 5
 
-Se a decisão vale além deste PR, grave a lição nas instruções do projeto. Uma recusa que vai se repetir também entra, para não ser rediscutida. Correção pontual fica só na resposta.
+Se a decisão vale além deste PR, grave a lição nas instruções do projeto e commite, seguindo `criar-commit`, antes de responder. Uma recusa que vai se repetir também entra, para não ser rediscutida. Correção pontual fica só na resposta.
 
 ### Passo 6
 
@@ -133,15 +133,17 @@ Recusei: o gerador reescreve o arquivo a cada release. Gravei a exceção nas in
 - Resolver pede o id da thread, que vem da API GraphQL. O id do comentário, da API REST, não serve.
 - A resposta vai como réplica do primeiro comentário da thread. Comentário novo no PR não fica na thread.
 - Aprovar o PR não resolve as threads dele.
+- A consulta de threads traz uma página. Se `pageInfo.hasNextPage` for verdadeiro, peça a próxima com `after`, antes de dizer que não há mais thread.
+- Resposta com apóstrofo quebra `-f body='...'` no shell. Grave a resposta num arquivo e envie com `-F body=@<arquivo>`.
 
 ## Scripts disponíveis
 
 - `gh pr view <número> --repo <Repositório> --json reviews,comments`: revisões e conversa do Passo 1.
-- `gh api graphql -f query='query{repository(owner:"<dono>",name:"<nome>"){pullRequest(number:<número>){reviewThreads(first:100){nodes{id isResolved isOutdated comments(first:20){nodes{databaseId author{login} path body}}}}}}}'`: threads e respostas.
-- `gh api repos/<Repositório>/pulls/<número>/comments/<id do comentário>/replies -f body='<resposta>'`: resposta na thread.
+- `gh api graphql -f query='query{repository(owner:"<dono>",name:"<nome>"){pullRequest(number:<número>){reviewThreads(first:100){pageInfo{hasNextPage endCursor} nodes{id isResolved isOutdated comments(first:100){nodes{databaseId author{login} path body}}}}}}}'`: threads e respostas.
+- `gh api repos/<Repositório>/pulls/<número>/comments/<id do comentário>/replies -F body=@<arquivo da resposta>`: resposta na thread.
 - `gh api graphql -f query='mutation{resolveReviewThread(input:{threadId:"<id da thread>"}){thread{isResolved}}}'`: resolução.
 
 1. Leia as revisões, a conversa e as threads.
-2. Corrija e commite, se for o caso.
+2. Corrija e commite, inclusive a lição nas instruções do projeto, se for o caso.
 3. Para cada thread, confira as respostas, responda e resolva.
 4. Entregue o placar do Passo 7.

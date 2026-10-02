@@ -19,7 +19,7 @@ Funcionalidade: Resolver os comentários antes do merge
       E a thread é resolvida
 
     Exemplo: Comentário sem resposta
-      Dado uma thread que ainda não foi atendida nem explicada
+      Dada uma thread que ainda não foi atendida nem explicada
       Quando a pessoa pede o merge
       Então o placar mostra a thread aberta
       Mas a thread não é resolvida sem resposta
