@@ -35,6 +35,7 @@ locale: en
 
 - Save every skill as `.agents/skills/<name>/SKILL.md`. `name` matches the directory. A skill that must not sync to Notion sets `metadata.notion` to `"false"`.
 - The skill text does not mention files or paths, except when proposing to move detail into `references/` after the skill would pass the line or token limit, except when pointing at a template, and except in the final `Scripts disponíveis` section, which names each script and how to run it.
+- A skill that cites another skill lists it in `metadata.related`, one name per line. The checker fails when a listed name is not a skill in the project or in this harness, or when the body cites a skill missing from the list. A skill without `metadata.related` is not checked, so a business harness can adopt it one skill at a time. Every skill that moves here declares it.
 - When a skill changes, bump `metadata.version`: patch for a fix, minor for a feature, major for a breaking change.
 - Renaming a skill is a breaking change. Put `!` after the type, start the footer with `BREAKING CHANGE:`, and put every previous name in `metadata.aliases`.
 - Lefthook runs `.agents/scripts/check-skill/run-check.sh` on commit. Do not commit if it fails.

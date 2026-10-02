@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """Fail when a SKILL.md exceeds a limit in .agents/config.yml.
 
+A skill that lists metadata.related names only skills that exist in the project
+or in this harness, and lists every skill its body cites.
+
 The project is HARNESS_ROOT, or the working directory when it is unset.
 A key missing from the project .agents/config.yml falls back to the one in this harness.
 """
@@ -443,7 +446,7 @@ def metadata_list_errors(block: str) -> list[Finding]:
         key, value = stripped.split(":", 1)
         key = key.strip()
         value = value.strip()
-        if key in {"aliases", "tags"}:
+        if key in {"aliases", "tags", "related"}:
             if value:
                 errors.append(Finding(f"metadata.{key} must be a list", lineno))
                 list_key = None
@@ -451,6 +454,69 @@ def metadata_list_errors(block: str) -> list[Finding]:
                 list_key = key
             continue
         list_key = None
+    return errors
+
+
+def metadata_list(block: str, wanted: str) -> tuple[list[str], int] | None:
+    in_metadata = False
+    items: list[str] | None = None
+    line = 0
+    for index, raw in enumerate(block.splitlines()):
+        if raw and not raw.startswith(" ") and not raw.startswith("\t"):
+            in_metadata = raw == "metadata:"
+            if items is not None:
+                break
+            continue
+        if not in_metadata or not raw.strip():
+            continue
+        if re.match(r"^\s+-\s+", raw):
+            if items is not None:
+                items.append(re.sub(r"^\s+-\s+", "", raw).strip().strip('"'))
+            continue
+        if items is not None:
+            break
+        key = raw.strip().split(":", 1)[0].strip()
+        if key == wanted:
+            items = []
+            line = index + 2
+    return None if items is None else (items, line)
+
+
+def known_skill_names() -> set[str]:
+    names: set[str] = set()
+    for root in dict.fromkeys([ROOT, CORE]):
+        names.update(path.parent.name for path in skill_files(root))
+    return names
+
+
+def mentioned_skills(body: str, name: str, known: set[str]) -> set[str]:
+    return {
+        other
+        for other in known
+        if other != name
+        and re.search(r"(?<![a-z0-9-])" + re.escape(other) + r"(?![a-z0-9-])", body)
+    }
+
+
+def related_errors(block: str, body: str, name: str, known: set[str]) -> list[Finding]:
+    declared = metadata_list(block, "related")
+    if declared is None:
+        return []
+    related, line = declared
+    errors: list[Finding] = []
+    seen: set[str] = set()
+    for item in related:
+        if item in seen:
+            errors.append(Finding(f"metadata.related repeats {item}", line))
+        seen.add(item)
+        if item == name:
+            errors.append(Finding("metadata.related must not name the skill itself", line))
+        elif item not in known:
+            errors.append(
+                Finding(f"metadata.related names {item}, which is not a skill here or in the core", line)
+            )
+    for other in sorted(mentioned_skills(body, name, known) - seen):
+        errors.append(Finding(f"the body cites {other}; add it to metadata.related", line))
     return errors
 
 
@@ -1072,6 +1138,7 @@ def main() -> int:
     failed = False
     results: dict[str, list[tuple[Path, Finding]]] = {}
     measures: dict[str, tuple[str | None, int | None]] = {}
+    known = known_skill_names()
     for path in requested_files(ROOT, sys.argv[1:]):
         relative = path.relative_to(ROOT)
         key = skill_key(relative)
@@ -1120,6 +1187,8 @@ def main() -> int:
                 for finding in flowchart_errors(body, direction):
                     add(finding)
             for finding in metadata_list_errors(block):
+                add(finding)
+            for finding in related_errors(block, body_text, name, known):
                 add(finding)
             if skill_author != author:
                 author_line = next(
