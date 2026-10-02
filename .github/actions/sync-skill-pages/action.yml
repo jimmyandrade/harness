@@ -22,12 +22,15 @@ inputs:
 runs:
   using: composite
   steps:
-    - uses: actions/setup-node@v7
+    - name: Set up Node.js
+      uses: actions/setup-node@v7
       with:
         node-version: 24
-    - shell: bash
+    - name: Install the sync dependencies
+      shell: bash
       run: npm ci --omit=dev --no-audit --no-fund --prefix "$GITHUB_ACTION_PATH/../../.."
-    - shell: bash
+    - name: Publish changed skills to Notion
+      shell: bash
       env:
         HARNESS_ROOT: ${{ github.workspace }}
         NOTION_TOKEN: ${{ inputs.notion-token }}
