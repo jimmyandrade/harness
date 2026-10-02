@@ -37,6 +37,17 @@ locale: en
 - **Test Criteria**:
   - [ ] A request to push to the base branch opens a pull request instead
 
+### renovate-preset
+- **Stability**: experimental
+- **Description**: Renovate preset that keeps a repository and its pins of the core harness current
+- **Properties**:
+  - Preset at `default.json`, extended as `github>jimmyandrade/harness`
+  - Groups every pin of the core harness, in workflows, `package.json`, and `.claude-plugin/marketplace.json`, into one `harness core` pull request
+  - A major update waits for approval on the Dependency Dashboard
+- **Test Criteria**:
+  - [x] The marketplace regex reads the repository and the tag of a `github` plugin source
+  - [ ] A release of the core opens one `harness core` pull request in a business harness
+
 ### check-skill
 - **Stability**: experimental
 - **Description**: Check the skills of a repository against the harness rules
