@@ -47,7 +47,7 @@ jobs:
       - uses: actions/checkout@v7
         with:
           fetch-depth: 0
-      - uses: jimmyandrade/harness/.github/actions/check-skill@v0
+      - uses: jimmyandrade/harness/.github/actions/check-skill@v0.1.0
         with:
           base: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before }}
           head: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
@@ -60,7 +60,7 @@ jobs:
       - uses: actions/checkout@v7
         with:
           fetch-depth: 0
-      - uses: jimmyandrade/harness/.github/actions/sync-skill-pages@v0
+      - uses: jimmyandrade/harness/.github/actions/sync-skill-pages@v0.1.0
         with:
           notion-token: ${{ secrets.NOTION_TOKEN }}
           base: ${{ github.event.before }}
@@ -114,6 +114,21 @@ claude plugin marketplace add example/harness
 An organization can install them for every member through managed settings, with `extraKnownMarketplaces` and `enabledPlugins`.
 
 Check: `/plugin` lists both plugins as installed.
+
+### 6. Keep the core version current
+
+The actions, the Node.js dependency, and the marketplace each pin a release of this repository. The Renovate preset in `default.json` moves the three pins in one pull request when a release exists. Extend it from `renovate.json` in the business repository.
+
+```json
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["github>jimmyandrade/harness"]
+}
+```
+
+That pull request changes a workflow and the package files, so the next sync on the default branch also publishes the core skills.
+
+Check: the Dependency Dashboard issue of the business repository lists `harness core`.
 
 ## Work in this repository
 
