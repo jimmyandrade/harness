@@ -3,9 +3,10 @@ name: revisar-habilidade
 description: Use essa habilidade sempre que for revisar uma skill já escrita, sinalizar descrição vaga, gatilho faltando ou problema de estrutura, ver risco de disparar demais ou de menos, ou sugerir casos a partir do propósito. NÃO use para criar a primeira versão, executar o teste e editar a skill, só medir tamanho, nem gravar a página no Notion. Pedido vindo do Notion segue publicar-habilidade.
 metadata:
   author: jimmyandrade
-  version: "0.2.7"
+  version: "0.2.8"
   related:
     - descrever-habilidade-ou-schema
+    - evoluir-habilidade
 ---
 
 # Revisar habilidade
