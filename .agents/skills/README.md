@@ -18,6 +18,7 @@ flowchart LR
     criar_pull_request["criar-pull-request"]
     descrever_habilidade_ou_schema["descrever-habilidade-ou-schema"]
     evoluir_habilidade["evoluir-habilidade"]
+    medir_habilidade["medir-habilidade"]
     revisar_habilidade["revisar-habilidade"]
   end
   criar_commit -.-> criar_pull_request
@@ -27,7 +28,9 @@ flowchart LR
   descrever_habilidade_ou_schema --> evoluir_habilidade
   descrever_habilidade_ou_schema --> revisar_habilidade
   evoluir_habilidade --> descrever_habilidade_ou_schema
+  evoluir_habilidade --> medir_habilidade
   evoluir_habilidade --> revisar_habilidade
+  medir_habilidade --> evoluir_habilidade
   revisar_habilidade --> criar_habilidade
   revisar_habilidade --> descrever_habilidade_ou_schema
   revisar_habilidade --> evoluir_habilidade
@@ -41,5 +44,6 @@ flowchart LR
 | `criar-habilidade` | Core | 3.6.0 | `descrever-habilidade-ou-schema`, `evoluir-habilidade` | `revisar-habilidade` |
 | `criar-pull-request` | Core | 0.4.0 | `criar-commit` | `criar-commit` |
 | `descrever-habilidade-ou-schema` | Core | 0.15.3 | `evoluir-habilidade`, `revisar-habilidade` | `criar-habilidade`, `evoluir-habilidade`, `revisar-habilidade` |
-| `evoluir-habilidade` | Core | 0.15.5 | `descrever-habilidade-ou-schema`, `revisar-habilidade` | `criar-habilidade`, `descrever-habilidade-ou-schema`, `revisar-habilidade` |
+| `evoluir-habilidade` | Core | 0.15.6 | `descrever-habilidade-ou-schema`, `medir-habilidade`, `revisar-habilidade` | `criar-habilidade`, `descrever-habilidade-ou-schema`, `medir-habilidade`, `revisar-habilidade` |
+| `medir-habilidade` | Core | 0.3.2 | `evoluir-habilidade` | `evoluir-habilidade` |
 | `revisar-habilidade` | Core | 0.2.9 | `criar-habilidade`, `descrever-habilidade-ou-schema`, `evoluir-habilidade` | `descrever-habilidade-ou-schema`, `evoluir-habilidade` |
