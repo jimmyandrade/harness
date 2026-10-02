@@ -61,9 +61,10 @@ class SkillGraphTest(unittest.TestCase):
         self.assertIn('subgraph project["example"]', text)
         self.assertIn('subgraph core["Core"]', text)
 
-    def test_the_table_lists_who_uses_a_skill(self) -> None:
+    def test_the_readme_has_only_the_graph(self) -> None:
         text = graph.build(self.core, self.core)
-        self.assertIn("| `criar-pull-request` | Core | 0.1.0 | — | `criar-commit` |", text)
+        self.assertNotIn("| ", text)
+        self.assertTrue(text.rstrip().endswith("```"))
 
     def test_a_longer_name_is_not_a_citation_of_a_shorter_one(self) -> None:
         write_skill(self.project, "abrir-pedido", None, "Veja criar-commit-antigo.")
