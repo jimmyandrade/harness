@@ -55,8 +55,10 @@ locale: en
   - Composite action at `.github/actions/check-skill/` and script `.agents/scripts/check-skill/run-check.sh`
   - Reads the project from `HARNESS_ROOT` or the working directory, and its `.agents/config.yml` with the core fallback
   - `base` and `head` limit the check to the skills that changed
+  - When a skill declares `metadata.related`, each name must be a skill in the project or in the core, and every skill the body cites must be listed
 - **Test Criteria**:
   - [x] A project with a partial `.agents/config.yml` uses the core limits
+  - [x] A related name that is not a skill fails, and a cited skill missing from `metadata.related` fails
   - [ ] A business workflow that calls the action fails on a skill that breaks a rule
 
 ### sync-skill-pages
