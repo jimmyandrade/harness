@@ -3,9 +3,10 @@ name: descrever-habilidade-ou-schema
 description: Use essa habilidade sempre que for redigir, corrigir ou testar se a descrição de uma skill ou schema dispara, mesmo sem dizer descrição, em subdisparo ou sobredisparo, em tarefa óbvia, em paráfrase e fora de tópico sem relação. NÃO use para escrever o corpo da skill, avaliar a qualidade da saída, descrever produto, nem gravar a página no Notion. Pedido vindo do Notion segue publicar-habilidade.
 metadata:
   author: jimmyandrade
-  version: "0.15.3"
+  version: "0.15.4"
   related:
     - evoluir-habilidade
+    - publicar-habilidade
     - revisar-habilidade
   aliases:
     - otimizar-descricao

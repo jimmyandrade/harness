@@ -131,6 +131,27 @@ locale: en
   - [x] The skill is present at that path
   - [x] The description refuses creating the first version, running the test and editing the skill, only measuring size, and writing the skill page in Notion
 
+### publicar-habilidade
+- **Stability**: experimental
+- **Description**: Publish a skill change from Notion through GitHub, and follow the project's commit flow from Cursor, Claude, or the repository
+- **Properties**:
+  - Lives at `.agents/skills/publicar-habilidade/SKILL.md`
+  - Treats the Habilidades database as read-only and the repository as the write source
+  - From Notion, uses its own branch, an English Conventional Commits subject, and a pull request, then stops
+  - Waits for another person's review; a green check does not replace that review
+  - Merges only in a later request, after that review and an explicit merge authorization
+  - Does not edit a Habilidades page, including when the person calls the edit an emergency
+  - A Notion chat that asks to create or activate a skill does not create or activate the page, including when the database text explains how to fill the description
+  - A page that exists only in that database stays there; sync covers a page it already writes and does not remove the extra page
+  - If that chat cannot reach GitHub, it stops and says so
+  - From Cursor, Claude, or the repository, reads `Commit direto na base` from the project instructions: `sim` commits on the main branch without a pull request, and `não`, the default, follows criar-commit and criar-pull-request
+  - After an approved and authorized merge, lets GitHub Actions sync and then checks the Notion page
+  - A synced version below 0.1.0 gets the draft option of the mapping, a version from 0.1.0 whose major number is 0 gets the validation option, and 1.x onward gets the production option
+  - A rename keeps the same Notion page and writes the new name on it. Sync stops when the new name and the previous name are already both pages
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses editing the Habilidades page and merging in the same request
+
 ### renovate-preset
 - **Stability**: experimental
 - **Description**: Renovate preset that keeps a repository and its pins of the core harness current
