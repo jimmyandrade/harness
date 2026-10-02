@@ -165,12 +165,11 @@ locale: en
 
 ### skill-graph
 - **Stability**: experimental
-- **Description**: Show how the skills of a repository relate, as a Mermaid graph and a table
+- **Description**: Show how the skills of a repository relate, as a Mermaid graph
 - **Properties**:
   - Script `.agents/scripts/skill-graph/run-graph.sh` writes `.agents/skills/README.md`, which GitHub renders when the folder is opened
   - In a business harness, the project skills and the core skills are separate groups
   - A solid arrow comes from `metadata.related`. A dotted arrow is a skill cited in the body of a skill that does not declare `metadata.related` yet
-  - The table lists, for each skill, its layer, its version, what it depends on, and what uses it
   - `run-check.sh` fails when the README is out of date
 - **Test Criteria**:
   - [x] Declared related skills draw solid arrows, and cited skills draw dotted arrows
