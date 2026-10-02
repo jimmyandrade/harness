@@ -98,6 +98,24 @@ locale: en
   - [x] The skill is present at that path
   - [x] The description says the test edits the validated skill, and refuses creating the first version, only checking whether the description triggers, only reviewing without running, and writing the skill page in Notion
 
+### medir-habilidade
+- **Stability**: experimental
+- **Description**: Measure a skill's size and the profile of a run
+- **Properties**:
+  - Lives at `.agents/skills/medir-habilidade/SKILL.md`
+  - Reports body tokens and their share of the body limit, plus lines, words, body characters, and catalog tokens
+  - Uses the same body slice and token encoding as the skill check
+  - Reads the limits from the project of the measured skill, with the core configuration as fallback
+  - Treats a body or a line count at the limit as failing, and a word or catalog count at the limit as passing
+  - Profiles a run that already happened: duration and the step that spent the time
+  - Does not decide whether the skill met the case, and does not write the eval JSON
+  - Runs in Claude, Cursor, or another harness
+  - A Notion session stops before looking for the script, does not open the repository to run it, and does not estimate numbers
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses Notion, opening the repository from Notion, testing whether the skill met the case, evolving the skill, and writing the eval
+  - [x] A limit missing from the project comes from the harness that ships the skill, and a limit in the project wins
+
 ### revisar-habilidade
 - **Stability**: experimental
 - **Description**: Review a written skill, flag description and structure issues, and suggest tests from its purpose
