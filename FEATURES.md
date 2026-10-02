@@ -37,6 +37,21 @@ locale: en
 - **Test Criteria**:
   - [ ] A request to push to the base branch opens a pull request instead
 
+### revisar-habilidade
+- **Stability**: experimental
+- **Description**: Review a written skill, flag description and structure issues, and suggest tests from its purpose
+- **Properties**:
+  - Lives at `.agents/skills/revisar-habilidade/SKILL.md`
+  - Flags a vague description, a missing trigger, and a structural problem
+  - Identifies the risk of triggering too often or too rarely
+  - Suggests an obvious task and a paraphrased request that should trigger, and an unrelated topic plus a near miss that should not
+  - Suggests each acceptance criterion already written as a Portuguese Gherkin example, and a with-skill against without-skill comparison
+  - Does not write the feature file, create the first version, run the test, or write the skill page in Notion
+  - A request that comes from Notion follows publicar-habilidade
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses creating the first version, running the test and editing the skill, only measuring size, and writing the skill page in Notion
+
 ### renovate-preset
 - **Stability**: experimental
 - **Description**: Renovate preset that keeps a repository and its pins of the core harness current
