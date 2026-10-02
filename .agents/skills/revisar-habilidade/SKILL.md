@@ -3,7 +3,7 @@ name: revisar-habilidade
 description: Use essa habilidade sempre que for revisar uma skill já escrita, sinalizar descrição vaga, gatilho faltando ou problema de estrutura, ver risco de disparar demais ou de menos, ou sugerir casos a partir do propósito. NÃO use para criar a primeira versão, executar o teste e editar a skill, só medir tamanho, nem gravar a página no Notion. Pedido vindo do Notion segue publicar-habilidade.
 metadata:
   author: jimmyandrade
-  version: "0.2.10"
+  version: "0.2.11"
   related:
     - criar-habilidade
     - descrever-habilidade-ou-schema
@@ -75,7 +75,7 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### revise a skill de criar projeto no ProjectHub
 
-Deve disparar: montar um workspace novo, criar um projeto, iniciar um projeto para o planejamento do trimestre. Não deve disparar: o clima, escrever código Python, criar uma planilha, salvo se o propósito incluir planilha. Funcional: Dado o nome "Planejamento do trimestre" e 5 descrições de tarefa. Quando a skill executa. Então o projeto existe, as 5 tarefas têm as propriedades certas, estão ligadas ao projeto e não há erro de chamada. Sem skill, a pessoa repete a instrução, há mais idas e vindas, chamadas que falham e mais tokens. Com skill, o fluxo executa e só pergunta o que falta. A sugestão não entra no eval.
+Deve disparar: montar um workspace novo, criar um projeto, iniciar um projeto para o planejamento do trimestre. Não deve disparar: o clima, escrever código Python, criar uma planilha, salvo se o propósito incluir planilha. Funcional: Dado que há o nome "Planejamento do trimestre" e 5 descrições de tarefa. Quando a skill executa. Então o projeto existe, as 5 tarefas têm as propriedades certas, estão ligadas ao projeto e não há erro de chamada. Sem skill, a pessoa repete a instrução, há mais idas e vindas, chamadas que falham e mais tokens. Com skill, o fluxo executa e só pergunta o que falta. A sugestão não entra no eval.
 
 ## Casos-limite
 

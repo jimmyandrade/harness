@@ -3,7 +3,7 @@ name: evoluir-habilidade
 description: Use essa habilidade sempre que for testar uma skill, mesmo sem dizer evoluir, inclusive o Gherkin e a comparação com e sem skill, resultado inconsistente, falha de chamada ou correção da pessoa. O teste sempre edita a skill validada. NÃO use para criar a primeira versão, só ver se a descrição dispara, só revisar sem executar, nem gravar a página no Notion. Pedido vindo do Notion segue publicar-habilidade.
 metadata:
   author: jimmyandrade
-  version: "0.15.7"
+  version: "0.15.8"
   related:
     - descrever-habilidade-ou-schema
     - medir-habilidade
@@ -33,7 +33,7 @@ Quando houver mais de um caso, varie a redação, o detalhe e a formalidade. Pel
 Saber se um prompt dispara a skill fica em `descrever-habilidade-ou-schema`. Esse teste entra no mesmo `evals/evals.json`, com `should_trigger` e `split`. Não crie outro arquivo de eval. Para a qualidade da saída, use o caso cujo `expected_output` descreve o resultado da tarefa.
 O teste funcional é um arquivo Gherkin em `features/`, um arquivo por funcionalidade. O Gherkin testa o que a pessoa usa. Passo interno, formato do texto e diff não são funcionalidade. Não crie um arquivo por passo. A primeira linha é `# language: pt`. O texto fica em português. As palavras são `Funcionalidade`, `Regra`, `Exemplo`, `Contexto`, `Esquema do Cenário`, `Exemplos`, `Dado`, `Quando`, `Então`, `E` e `Mas`. `Funcionalidade`, `Regra`, `Exemplo`, `Contexto`, `Esquema do Cenário` e `Exemplos` levam dois-pontos. O passo não leva.
 Cada critério de aceite que a pessoa enviou vira um `Exemplo`. Grave quando ela enviar. Não invente critério. Ele só conta como validado depois da execução com você.
-O `Exemplo` tem de 3 a 5 passos. `Dado` é o contexto já ocorrido. `Quando` é a ação. `Então` é a saída observável. `E` e `Mas` continuam o passo anterior. Saída válida, chamada que sucede, erro tratado e limite entram quando o critério falar disso.
+O `Exemplo` tem de 3 a 5 passos. `Dado` é o contexto já ocorrido e abre sempre com `Dado que`: a palavra-chave não concorda com o substantivo. `Quando` é a ação. `Então` é a saída observável. `E` e `Mas` continuam o passo anterior. Saída válida, chamada que sucede, erro tratado e limite entram quando o critério falar disso.
 Uma `Regra` agrupa os exemplos da mesma regra. O `Contexto` só repete um `Dado` curto em todos os exemplos da funcionalidade ou da regra. Valores que variam usam `Esquema do Cenário` e `Exemplos`.
 
 ```json
@@ -171,7 +171,7 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### compare criar um projeto com 5 tarefas, com skill e sem skill.
 
-Dado o nome "Planejamento do trimestre" e 5 descrições de tarefa. Quando a skill executa o fluxo. Então o projeto existe, as 5 tarefas têm as propriedades certas, estão ligadas ao projeto e não há erro de chamada. Sem skill, o registro mostrou 15 idas e vindas, 3 chamadas que falharam e 12000 tokens. Com skill, o fluxo executou e fez 2 perguntas. Esses números só entram se o registro mostrar.
+Dado que há o nome "Planejamento do trimestre" e 5 descrições de tarefa. Quando a skill executa o fluxo. Então o projeto existe, as 5 tarefas têm as propriedades certas, estão ligadas ao projeto e não há erro de chamada. Sem skill, o registro mostrou 15 idas e vindas, 3 chamadas que falharam e 12000 tokens. Com skill, o fluxo executou e fez 2 perguntas. Esses números só entram se o registro mostrar.
 
 ## Casos-limite
 
