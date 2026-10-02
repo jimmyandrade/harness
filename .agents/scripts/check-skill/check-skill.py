@@ -1024,10 +1024,13 @@ def eval_file_errors(skill_dir: Path, name: str, version: str) -> list[Finding]:
 
 
 def skill_files(root: Path) -> list[Path]:
+    skills = root / ".agents" / "skills"
+    if not skills.is_dir():
+        return []
     return sorted(
         path
-        for path in root.rglob("*")
-        if path.name in SKILL_NAMES and path.is_file() and ".git" not in path.parts
+        for path in skills.glob("*/*")
+        if path.name in SKILL_NAMES and path.is_file()
     )
 
 
