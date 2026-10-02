@@ -15,7 +15,7 @@ This repository is the core layer. A business keeps its own harness repository w
 
 A skill starts in a business harness. It moves here once it carries no company name, no business rule, and no workspace or database name.
 
-Start with `INSTALL.md`. Features are in `FEATURES.md`.
+Start with `INSTALL.md`. Tools are in `FEATURES.md`. Skills are in `.agents/skills/FEATURES.md`, and how they relate is in `.agents/skills/README.md`.
 
 ## License
 

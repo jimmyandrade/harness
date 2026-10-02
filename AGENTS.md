@@ -54,5 +54,5 @@ locale: en
 
 ## Documents
 
-- `FEATURES.md` lists what a person or a repository uses directly. `INSTALL.md` is how to use it. `CONTRIBUTING.md` is CI and actions. `TROUBLESHOOTING.md` is failure diagnosis. Do not copy one into another.
+- `FEATURES.md` lists the tools a person or a repository uses directly. Each skill has its entry in `.agents/skills/FEATURES.md`, written by hand. `.agents/skills/README.md` is the generated graph. When a skill moves here, its entry moves to `.agents/skills/FEATURES.md`. `INSTALL.md` is how to use it. `CONTRIBUTING.md` is CI and actions. `TROUBLESHOOTING.md` is failure diagnosis. Do not copy one into another.
 - Architecture decisions are in `docs/adr/`, in English.
