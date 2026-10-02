@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/jimmyandrade/harness/compare/v0.1.0...v0.1.1) (2026-10-02)
+
+
+### Bug Fixes
+
+* **check-skill:** check only skills under .agents/skills ([#12](https://github.com/jimmyandrade/harness/issues/12)) ([813dbc9](https://github.com/jimmyandrade/harness/commit/813dbc98d1c95026f2ad8b7263e222d4b0f0779c))
+
 ## 0.1.0 (2026-10-02)
 
 
