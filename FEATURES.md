@@ -37,6 +37,24 @@ locale: en
 - **Test Criteria**:
   - [ ] A request to push to the base branch opens a pull request instead
 
+### descrever-habilidade-ou-schema
+- **Stability**: experimental
+- **Description**: Write or correct a skill or schema description, and test whether a skill description triggers, even when the person does not say description
+- **Properties**:
+  - Lives at `.agents/skills/descrever-habilidade-ou-schema/SKILL.md`
+  - Does not write the skill body, grade output quality, describe a product, or write the skill page in Notion
+  - Starts every description with "Use essa habilidade sempre que", which is the objective the Notion router searches
+  - Keeps the triggers in the description, because Notion automatic use loads that property and decides from it whether to load the skill
+  - Requires a trigger suite with an obvious task and a paraphrased request that should load the skill, and an unrelated topic plus a near miss the skill does not cover that should not
+  - On undertriggering, when the skill does not load, the person enables it by hand, or asks when to use it, adds detail and the technical term
+  - On overtriggering, when the skill loads for an irrelevant query, the person disables it, or the purpose is confusing, tightens the negative triggers
+  - Leaves the skill name and the prompt examples out of the description; the examples stay in the body
+  - A request that comes from Notion follows publicar-habilidade
+  - Rewrites a schema description and each property description that already has text, and keeps every fact already there
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses writing the body, grading output, describing a product, and writing the skill page in Notion
+
 ### revisar-habilidade
 - **Stability**: experimental
 - **Description**: Review a written skill, flag description and structure issues, and suggest tests from its purpose
