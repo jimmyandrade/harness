@@ -1033,6 +1033,26 @@ def committed_text(relative: Path) -> str | None:
     return result.stdout
 
 
+GIVEN_PT = re.compile(r"^\s*(Dado|Dada|Dados|Dadas)\b(.*)$")
+
+
+def gherkin_errors(skill_dir: Path, language: str) -> list[Finding]:
+    errors: list[Finding] = []
+    for path in sorted((skill_dir / "features").glob("*.feature")):
+        file = path.relative_to(ROOT).as_posix()
+        lines = path.read_text(encoding="utf-8").splitlines()
+        first = next(((index, line.strip()) for index, line in enumerate(lines, 1) if line.strip()), None)
+        if first is None or first[1] != f"# language: {language}":
+            errors.append(Finding(f"a feature must start with # language: {language}", first[0] if first else 1, file))
+        if language != "pt":
+            continue
+        for index, line in enumerate(lines, 1):
+            match = GIVEN_PT.match(line)
+            if match and (match.group(1) != "Dado" or not match.group(2).startswith(" que ")):
+                errors.append(Finding('a Given starts with "Dado que"', index, file))
+    return errors
+
+
 def eval_file_errors(skill_dir: Path, name: str, version: str) -> list[Finding]:
     path = skill_dir / "evals" / "evals.json"
     file = path.relative_to(ROOT).as_posix()
@@ -1130,6 +1150,7 @@ def main() -> int:
     author = section_value(config, "organization", "name")
     license_required = section_value(config, "license", "required") == "true"
     direction = section_value(config, "mermaid", "flowchart_direction")
+    gherkin = section_value(config, "locale", "gherkin")
     if direction not in FLOWCHART_DIRECTIONS:
         raise SystemExit(
             "mermaid.flowchart_direction must be LR, RL, TD, TB, or BT"
@@ -1213,6 +1234,8 @@ def main() -> int:
                 add(Finding("metadata.version must be a double-quoted semver", version_line))
             for finding in eval_file_errors(path.parent, name, version):
                 add(finding, Path(finding.file) if finding.file else relative)
+            for finding in gherkin_errors(path.parent, gherkin):
+                add(finding, Path(finding.file))
             previous = committed_text(relative)
             new_key = semver_key(version)
             if previous is not None and previous != text and new_key is not None:

@@ -88,5 +88,48 @@ class RelatedSkillsTest(unittest.TestCase):
         self.assertEqual(self.errors([], "Use fechar-pedido-antigo."), [])
 
 
+class GherkinTest(unittest.TestCase):
+    def setUp(self) -> None:
+        self.tmp = tempfile.TemporaryDirectory()
+        self.project = Path(self.tmp.name).resolve()
+        (self.project / ".agents").mkdir()
+        (self.project / ".agents" / "config.yml").write_text("organization:\n  name: example\n")
+        write_skill(self.project, "abrir-pedido")
+        self.checker = load_checker(self.project)
+        self.skill = self.project / ".agents" / "skills" / "abrir-pedido"
+
+    def tearDown(self) -> None:
+        self.tmp.cleanup()
+        os.environ.pop("HARNESS_ROOT", None)
+
+    def errors(self, text: str, language: str = "pt") -> list[tuple[str, int | None]]:
+        (self.skill / "features").mkdir(exist_ok=True)
+        (self.skill / "features" / "abrir.feature").write_text(text, encoding="utf-8")
+        return [(finding.message, finding.line) for finding in self.checker.gherkin_errors(self.skill, language)]
+
+    def test_a_feature_that_starts_with_the_language_and_dado_que_passes(self) -> None:
+        text = "# language: pt\n\nFuncionalidade: Abrir\n  Exemplo: Pedido\n    Dado que existe um pedido\n    E o pedido está aberto\n"
+        self.assertEqual(self.errors(text), [])
+
+    def test_a_feature_without_the_language_line_fails(self) -> None:
+        self.assertEqual(self.errors("Funcionalidade: Abrir\n"), [("a feature must start with # language: pt", 1)])
+
+    def test_a_feature_in_another_language_than_the_config_fails(self) -> None:
+        self.assertEqual(self.errors("# language: pt\n", "en"), [("a feature must start with # language: en", 1)])
+
+    def test_a_given_that_agrees_with_the_noun_fails(self) -> None:
+        text = "# language: pt\n  Dada uma thread aberta\n  Dados dois pedidos\n  Dado um pedido\n"
+        self.assertEqual(
+            self.errors(text),
+            [('a Given starts with "Dado que"', 2), ('a Given starts with "Dado que"', 3), ('a Given starts with "Dado que"', 4)],
+        )
+
+    def test_the_dado_que_rule_applies_only_to_portuguese(self) -> None:
+        self.assertEqual(self.errors("# language: en\n  Dado um pedido\n", "en"), [])
+
+    def test_a_skill_without_features_passes(self) -> None:
+        self.assertEqual(self.checker.gherkin_errors(self.skill, "pt"), [])
+
+
 if __name__ == "__main__":
     unittest.main()
