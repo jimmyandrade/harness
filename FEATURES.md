@@ -37,6 +37,29 @@ locale: en
 - **Test Criteria**:
   - [ ] A request to push to the base branch opens a pull request instead
 
+### criar-habilidade
+- **Stability**: production
+- **Description**: Write the smallest skill that still triggers
+- **Properties**:
+  - Lives at `.agents/skills/criar-habilidade/SKILL.md`
+  - Treats the skill as a living document and repeats while feedback asks for it
+  - Sends undertriggering and overtriggering to descrever-habilidade-ou-schema, and inconsistent results, failed calls, and corrections to evoluir-habilidade
+  - Keeps the skill test as Portuguese Gherkin in features/
+  - When creating, reviewing, and editing an entity share the same criteria, names one skill `definir-` plus the entity
+  - The entity may be more than one word, up to 64 characters
+  - Does not create a skill whose job is to delete a resource
+  - When a step routes to another skill, or routes more than one outcome, that step contains a Mermaid flowchart in the direction from mermaid.flowchart_direction
+  - An empty placeholder stays on 0.0.x and its body may be only the title
+  - Does not store a person, a date, or an alias in SKILL.md except inside Exemplos de entrada e saída, which opens with "Estes exemplos ilustram fatos. Eles podem não estar no data source."; the checker requires that sentence in every skill; the fact stays in the data source, and a test in features/ or evals.json may use it
+  - When a skill is renamed, keeps every previous name in metadata.aliases
+  - Writes each input example in `dt` and each output example in `dd`, with a blank line between pairs
+  - Ends every skill with Scripts disponíveis, naming each script and the command that runs it
+  - Does not edit code, write a non-skill page, only tune a description, or write the skill page in Notion
+  - A request that comes from Notion follows publicar-habilidade
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses code edits, a non-skill page, description-only work, and writing the skill in Notion
+
 ### descrever-habilidade-ou-schema
 - **Stability**: experimental
 - **Description**: Write or correct a skill or schema description, and test whether a skill description triggers, even when the person does not say description

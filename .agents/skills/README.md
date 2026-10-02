@@ -14,17 +14,21 @@ Solid arrows come from `metadata.related`. Dotted arrows are skills cited in the
 flowchart LR
   subgraph core["Core"]
     criar_commit["criar-commit"]
+    criar_habilidade["criar-habilidade"]
     criar_pull_request["criar-pull-request"]
     descrever_habilidade_ou_schema["descrever-habilidade-ou-schema"]
     evoluir_habilidade["evoluir-habilidade"]
     revisar_habilidade["revisar-habilidade"]
   end
   criar_commit -.-> criar_pull_request
+  criar_habilidade --> descrever_habilidade_ou_schema
+  criar_habilidade --> evoluir_habilidade
   criar_pull_request -.-> criar_commit
   descrever_habilidade_ou_schema --> evoluir_habilidade
   descrever_habilidade_ou_schema --> revisar_habilidade
   evoluir_habilidade --> descrever_habilidade_ou_schema
   evoluir_habilidade --> revisar_habilidade
+  revisar_habilidade --> criar_habilidade
   revisar_habilidade --> descrever_habilidade_ou_schema
   revisar_habilidade --> evoluir_habilidade
 ```
@@ -34,7 +38,8 @@ flowchart LR
 | Skill | Layer | Version | Depends on | Used by |
 | --- | --- | --- | --- | --- |
 | `criar-commit` | Core | 0.2.0 | `criar-pull-request` | `criar-pull-request` |
+| `criar-habilidade` | Core | 3.6.0 | `descrever-habilidade-ou-schema`, `evoluir-habilidade` | `revisar-habilidade` |
 | `criar-pull-request` | Core | 0.4.0 | `criar-commit` | `criar-commit` |
-| `descrever-habilidade-ou-schema` | Core | 0.15.3 | `evoluir-habilidade`, `revisar-habilidade` | `evoluir-habilidade`, `revisar-habilidade` |
-| `evoluir-habilidade` | Core | 0.15.5 | `descrever-habilidade-ou-schema`, `revisar-habilidade` | `descrever-habilidade-ou-schema`, `revisar-habilidade` |
-| `revisar-habilidade` | Core | 0.2.8 | `descrever-habilidade-ou-schema`, `evoluir-habilidade` | `descrever-habilidade-ou-schema`, `evoluir-habilidade` |
+| `descrever-habilidade-ou-schema` | Core | 0.15.3 | `evoluir-habilidade`, `revisar-habilidade` | `criar-habilidade`, `evoluir-habilidade`, `revisar-habilidade` |
+| `evoluir-habilidade` | Core | 0.15.5 | `descrever-habilidade-ou-schema`, `revisar-habilidade` | `criar-habilidade`, `descrever-habilidade-ou-schema`, `revisar-habilidade` |
+| `revisar-habilidade` | Core | 0.2.9 | `criar-habilidade`, `descrever-habilidade-ou-schema`, `evoluir-habilidade` | `descrever-habilidade-ou-schema`, `evoluir-habilidade` |

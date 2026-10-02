@@ -1,0 +1,29 @@
+{
+  "skill_name": "criar-habilidade",
+  "evals": [
+    {
+      "id": "descrever-habilidade",
+      "prompt": "Tô pensando, como descrição de uma skill é muito delicada, será que vale a pena ter uma skill dedicada a escrever e otimizar descriptions?",
+      "expected_output": "Existe a skill descrever-habilidade-ou-schema. Ela escreve e testa a descrição da habilidade ou a do schema. Não escreve o corpo da skill.",
+      "files": []
+    },
+    {
+      "id": "evoluir-habilidade",
+      "prompt": "Mas então teremos que deixar bem evidente que a skill separada será focada em evoluir a habilidade a partir de testes, casos e validações, né?",
+      "expected_output": "Existe a skill evoluir-habilidade. O teste edita a skill validada. Não serve para criar a primeira versão.",
+      "files": []
+    },
+    {
+      "id": "procurar-tarefa",
+      "prompt": "/criar-habilidade para verificar se uma tarefa já existe ou não (isso pode ser útil antes de eu criar uma nova tarefa)",
+      "expected_output": "Existe a skill procurar-tarefa. Ela diz se a tarefa já existe. Não cria, não edita e não conclui.",
+      "files": []
+    },
+    {
+      "id": "definir-tarefa",
+      "prompt": "Super de acordo em definir-tarefa. Atualize isso para ser sempre um padrão a partir de agora! E mescle as habilidades, mas depois rode /evoluir-habilidade pra garantir que a mesclagem não gerou regressões",
+      "expected_output": "Existe uma skill só, definir-tarefa, para cadastrar, revisar e editar. criar-tarefa e revisar-tarefa não existem mais.",
+      "files": []
+    }
+  ]
+}
