@@ -56,4 +56,5 @@ locale: en
 
 - `ARCHITECTURE.md` is the map of files, components, and boundaries, following the ARCHITECTURE.md format. Do not describe the layout in another document; link to it. Update it when a directory, a component, or a boundary changes.
 - `FEATURES.md` lists the tools a person or a repository uses directly. Each skill has its entry in `.agents/skills/FEATURES.md`, written by hand. When a skill moves here, its entry moves to `.agents/skills/FEATURES.md`. Do not copy one document into another.
+- `INSTALL.md` is the index of the setup runbooks in `docs/runbooks/`, one per tool, each a list of steps with a command and a check. Business harnesses link to them and keep only business values in their own `INSTALL.md`.
 - Architecture decisions are in `docs/adr/`, in English.
