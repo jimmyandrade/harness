@@ -55,6 +55,26 @@ locale: en
   - [x] The skill is present at that path
   - [x] The description refuses writing the body, grading output, describing a product, and writing the skill page in Notion
 
+### evoluir-habilidade
+- **Stability**: experimental
+- **Description**: Test a skill and edit that skill from the run
+- **Properties**:
+  - Lives at `.agents/skills/evoluir-habilidade/SKILL.md`
+  - A request to test a skill uses this skill
+  - Treats the skill as a living document and iterates from feedback
+  - On inconsistent results, a failed call, or a correction from the person, improves the instructions and adds error handling
+  - Sends undertriggering and overtriggering to descrever-habilidade-ou-schema
+  - Compares the current skill, the previous version when it exists, and a run without the skill
+  - Records each acceptance criterion the person sent as a Portuguese Gherkin feature in features/, one feature per functionality the person uses, starting with # language: pt, and counts it as validated only after that run. A step, the text format, and a diff are not a feature
+  - Compares the run without the skill and with the skill on back-and-forth, failed calls, and tokens, from the run record
+  - Edits the skill that was validated in that same conversation
+  - Does not create the first version of a skill, only check whether the description triggers, only review without running, or write the skill page in Notion
+  - A request that comes from Notion follows publicar-habilidade
+  - Size and run profile follow medir-habilidade
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description says the test edits the validated skill, and refuses creating the first version, only checking whether the description triggers, only reviewing without running, and writing the skill page in Notion
+
 ### revisar-habilidade
 - **Stability**: experimental
 - **Description**: Review a written skill, flag description and structure issues, and suggest tests from its purpose
