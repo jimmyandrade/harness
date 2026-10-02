@@ -20,7 +20,7 @@ Subjects follow [Conventional Commits](https://www.conventionalcommits.org/): `t
 
 ## CI
 
-The workflow is `.github/workflows/ci.yml`. It runs on every push and pull request on `ubuntu-26.04`. It checks out the full history, runs the `check-skill` action of this repository against itself, runs the checker tests in `.agents/scripts/check-skill/test_check_skill.py` with the checker's own Python, typechecks, and runs `npm test`.
+The workflow is `.github/workflows/ci.yml`. It runs on every push and pull request on `ubuntu-26.04`. It checks out the full history, runs the `check-skill` action of this repository against itself, runs every `.agents/scripts/*/test_*.py` with the checker's own Python, typechecks, and runs `npm test`.
 
 ## Actions
 

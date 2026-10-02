@@ -15,8 +15,8 @@ jobs:
         with:
           base: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before }}
           head: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
-      - name: Run checker tests
-        run: .venv/bin/python .agents/scripts/check-skill/test_check_skill.py
+      - name: Run script tests
+        run: for test in .agents/scripts/*/test_*.py; do .venv/bin/python "$test" || exit 1; done
       - uses: actions/setup-node@v7
         with:
           node-version: 24

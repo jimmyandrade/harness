@@ -48,6 +48,20 @@ locale: en
   - [x] The marketplace regex reads the repository and the tag of a `github` plugin source
   - [ ] A release of the core opens one `harness core` pull request in a business harness
 
+### skill-graph
+- **Stability**: experimental
+- **Description**: Show how the skills of a repository relate, as a Mermaid graph and a table
+- **Properties**:
+  - Script `.agents/scripts/skill-graph/run-graph.sh` writes `.agents/skills/README.md`, which GitHub renders when the folder is opened
+  - In a business harness, the project skills and the core skills are separate groups
+  - A solid arrow comes from `metadata.related`. A dotted arrow is a skill cited in the body of a skill that does not declare `metadata.related` yet
+  - The table lists, for each skill, its layer, its version, what it depends on, and what uses it
+  - `run-check.sh` fails when the README is out of date
+- **Test Criteria**:
+  - [x] Declared related skills draw solid arrows, and cited skills draw dotted arrows
+  - [x] The project and the core are separate groups
+  - [x] A stale README fails the check
+
 ### check-skill
 - **Stability**: experimental
 - **Description**: Check the skills of a repository against the harness rules
