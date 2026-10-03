@@ -29,7 +29,7 @@ Check: `test -d node_modules/harness && echo ok` prints `ok`.
 
 ## 3. Copy the example files
 
-`examples/business-harness/` holds every file this runbook needs: `.agents/config.yml`, `lefthook.yml`, the `skills` workflow, the Claude Code plugin and marketplace, `.claude/settings.json`, and `renovate.json`. Copy them without overwriting a file that already exists, then pin them to the tag.
+`examples/business-harness/` holds every file this runbook needs: `.agents/config.yml`, `.mcp.json`, `lefthook.yml`, the `skills` workflow, the Claude Code plugin and marketplace, `.claude/settings.json`, and `renovate.json`. Copy them without overwriting a file that already exists, then pin them to the tag.
 
 ```bash
 cp -Rn node_modules/harness/examples/business-harness/. .
@@ -61,3 +61,4 @@ Check: the `check` job of the `skills` workflow passes. After the merge, the Dep
 - `cursor.md` to load the skills in Cursor.
 - `claude-code.md` to load the skills in Claude Code.
 - `notion.md` to publish the skills as Notion pages.
+- `mcp-hosts.md` to connect Claude Desktop, Windsurf, and Cline to the vocabulary server.

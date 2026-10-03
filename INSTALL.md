@@ -18,6 +18,7 @@ Each runbook is a list of steps with a command and a check, written for an agent
 | [`docs/runbooks/cursor.md`](docs/runbooks/cursor.md) | Once per project | The links Cursor follows to the project and core skills |
 | [`docs/runbooks/claude-code.md`](docs/runbooks/claude-code.md) | Once per project, and the install step once per machine | The project skills link and the `harness-core` plugin |
 | [`docs/runbooks/notion.md`](docs/runbooks/notion.md) | Once per business repository | The mapping, the token, and the sync job |
+| [`docs/runbooks/mcp-hosts.md`](docs/runbooks/mcp-hosts.md) | Once per project, and the host links once per machine | The `.mcp.json` server list and the links Cursor, Claude Desktop, Windsurf, and Cline read |
 
 ## Work in this repository
 
