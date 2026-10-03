@@ -3,7 +3,7 @@ name: avaliar-atualizacoes-de-dependencia
 description: Use essa habilidade sempre que houver PR de atualização de dependência do Dependabot ou do Renovate para avaliar, testar ou mesclar, mesmo sem dizer o nome do bot. NÃO use para atualizar uma dependência à mão nem para PR que não seja de bot.
 metadata:
   author: jimmyandrade
-  version: "0.3.4"
+  version: "0.3.5"
   notion: "false"
   related:
     - criar-commit
@@ -44,7 +44,7 @@ Compare a versão que o PR traz com a mais recente do pacote direto. Leia as not
 
 ### Passo 4
 
-Ache cada ponto de uso do pacote direto, no código e nos testes. Numa action, os pontos de uso são os jobs que a usam. Numa ferramenta de desenvolvimento, como bundler ou executor de testes, os pontos de uso são as ferramentas e os comandos que a rodam, não imports no código. Confira se cada ponto tem teste de integração: o teste exercita o código do projeto usando o pacote e falharia se a integração quebrasse. Nunca teste o pacote em si, que já tem os próprios testes. Num pacote que lê conteúdo do projeto, como traduções ou esquemas, passe todo esse conteúdo pela versão nova, sem gravar teste. Se faltar, escreva o teste na própria branch do PR, seguindo `criar-commit`, e envie a branch.
+Ache cada ponto de uso do pacote direto, no código e nos testes. Numa action, os pontos de uso são os jobs que a usam. Numa ferramenta de desenvolvimento, como bundler ou executor de testes, os pontos de uso são as ferramentas e os comandos que a rodam, não imports no código. Num linter ou formatador, compare a contagem de avisos por regra antes e depois, só nos arquivos versionados. Confira se cada ponto tem teste de integração: o teste exercita o código do projeto usando o pacote e falharia se a integração quebrasse. Nunca teste o pacote em si, que já tem os próprios testes. Num pacote que lê conteúdo do projeto, como traduções ou esquemas, passe todo esse conteúdo pela versão nova, sem gravar teste. Se faltar, escreva o teste na própria branch do PR, seguindo `criar-commit`, e envie a branch.
 
 ### Passo 5
 
