@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.5](https://github.com/jimmyandrade/harness/compare/v0.3.4...v0.3.5) (2026-10-03)
+
+
+### Bug Fixes
+
+* **resolver-comentarios-de-revisao:** push the branch before replying ([#46](https://github.com/jimmyandrade/harness/issues/46)) ([e839c8b](https://github.com/jimmyandrade/harness/commit/e839c8b70fd71d7bcc81448f1acdaebfcf483346))
+
 ## [0.3.4](https://github.com/jimmyandrade/harness/compare/v0.3.3...v0.3.4) (2026-10-03)
 
 
