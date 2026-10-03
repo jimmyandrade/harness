@@ -3,7 +3,7 @@ name: comunicar-novidade-do-produto
 description: Use essa habilidade sempre que um PR for mesclado ou alguém perguntar o que há de novo no produto para quem o usa, mesmo sem dizer novidade, para decidir se há o que contar e escrever o comunicado sem termos técnicos. NÃO use para a descrição do PR, o changelog nem release notes técnicas.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   related:
     - evoluir-habilidade
 ---
@@ -25,7 +25,7 @@ Leia cada valor nas instruções do projeto. Quando um valor não estiver lá, u
 
 ### Passo 1
 
-Junte o que entrou: um PR mesclado, vários, ou um período. Leia o título, a descrição, os arquivos alterados e as issues ligadas de cada um.
+Junte o que entrou: um PR mesclado, vários, ou um período. Leia o título, a descrição, os arquivos alterados e as issues ligadas de cada um. Quando o pedido inclui outras ferramentas, como o Notion, junte também o que a pessoa criou ou editou nelas no período.
 
 ### Passo 2
 
@@ -37,15 +37,15 @@ flowchart LR
   A -->|sim| C[Escreva o comunicado]
 ```
 
-Sem novidade: dependência, refatoração, CI, teste, documentação interna. Com novidade: tela, texto, fluxo, comportamento, desempenho que se nota, correção de algo que alguém sentia, dado novo ou que sumiu.
+Sem novidade: dependência, refatoração, CI, teste, documentação interna, reunião. Com novidade: tela, texto, fluxo, comportamento, desempenho que se nota, correção de algo que alguém sentia, dado novo ou que sumiu, e organização dos dados que o público usa, como cadastros consolidados, bancos reorganizados e páginas antigas retiradas.
 
 ### Passo 3
 
-Escreva o comunicado no `Idioma do comunicado`, para quem não é técnico: o que muda na prática, onde a pessoa percebe, quem é afetado, se precisa fazer algo e a partir de quando. Nunca cite PR, commit, biblioteca, arquivo nem ferramenta interna.
+Escreva o comunicado no `Idioma do comunicado`, para quem não é técnico: o que muda na prática, onde a pessoa percebe, quem é afetado, se precisa fazer algo e a partir de quando. Nunca cite PR, commit, biblioteca, arquivo nem ferramenta interna. Conte a correção pelo problema que a pessoa sentia: "corrigimos um problema que fazia a página demorar", não o novo comportamento isolado. Um período vira um comunicado só, agrupado por área e com o intervalo corrido no título, como "últimos 15 dias", sem uma seção por semana ou sprint.
 
 ### Passo 4
 
-Entregue no `Canal do comunicado`. Se houver uma ferramenta para esse canal, mostre o texto e peça o ok antes de publicar. Se não houver, ou se o canal estiver vazio, entregue o texto pronto para copiar.
+Entregue no `Canal do comunicado`, com a formatação dele. Se houver uma ferramenta para esse canal, mostre o texto e peça o ok antes de publicar. Se não houver, ou se o canal estiver vazio, entregue o texto pronto para copiar.
 
 ### Passo 5
 
@@ -74,6 +74,13 @@ Se você publicar no canal sem mostrar o texto, a pessoa perde a chance de corri
 1. Mostre o texto.
 2. Publique só depois do ok.
 
+### Correção contada pelo resultado
+
+Se você escrever "a página parou de pedir a localização", a pessoa não reconhece o problema que ela sentia.
+
+1. Comece com "corrigimos um problema que".
+2. Descreva o incômodo como a pessoa o percebia.
+
 ### Ação escondida
 
 Se você deixar de dizer que a pessoa precisa fazer algo, a mudança vira problema para ela.
@@ -96,6 +103,7 @@ Três PRs entraram: duas atualizações de dependência e uma correção no form
 
 ## Pegadinhas
 
+- WhatsApp não é Markdown: o negrito é `*texto*`, com um asterisco, o itálico é `_texto_`, e não há título, separador nem link `[texto](url)`. Entregue o texto num bloco de código, para a formatação não se perder ao copiar.
 - O tipo no título do PR engana: um `fix` pode mudar o que a pessoa vê, e um `chore` pode mudar um texto da tela. Classifique pelo diff, não pelo tipo.
 
 ## Scripts disponíveis
