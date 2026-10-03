@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.1](https://github.com/jimmyandrade/harness/compare/v0.7.0...v0.7.1) (2026-10-03)
+
+
+### Bug Fixes
+
+* **avaliar-atualizacoes-de-dependencia:** lessons from the Renovate queue ([#65](https://github.com/jimmyandrade/harness/issues/65)) ([c6fe09d](https://github.com/jimmyandrade/harness/commit/c6fe09d190ad46318912b1ac05d19df29c74bd8f))
+
 ## [0.7.0](https://github.com/jimmyandrade/harness/compare/v0.6.2...v0.7.0) (2026-10-03)
 
 
