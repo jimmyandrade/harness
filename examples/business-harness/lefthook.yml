@@ -1,0 +1,7 @@
+pre-commit:
+  commands:
+    skill-check:
+      glob:
+        - ".agents/skills/**/SKILL.md"
+        - ".agents/config.yml"
+      run: node_modules/harness/.agents/scripts/check-skill/run-check.sh {staged_files}

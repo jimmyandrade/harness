@@ -1,0 +1,10 @@
+{
+  "extraKnownMarketplaces": {
+    "harness": {
+      "source": { "source": "github", "repo": "jimmyandrade/harness", "ref": "vX.Y.Z" }
+    }
+  },
+  "enabledPlugins": {
+    "harness-core@harness": true
+  }
+}

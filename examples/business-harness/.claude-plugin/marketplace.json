@@ -1,0 +1,8 @@
+{
+  "name": "example",
+  "owner": { "name": "Example" },
+  "plugins": [
+    { "name": "example", "source": "." },
+    { "name": "harness-core", "source": { "source": "github", "repo": "jimmyandrade/harness", "ref": "vX.Y.Z" } }
+  ]
+}
