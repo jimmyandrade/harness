@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/jimmyandrade/harness/compare/v0.3.5...v0.4.0) (2026-10-03)
+
+
+### Features
+
+* **criar-pull-request:** check comments and checks before merging ([#48](https://github.com/jimmyandrade/harness/issues/48)) ([056beb7](https://github.com/jimmyandrade/harness/commit/056beb77fa29e2924ad19c35f8bb77b55289ee66))
+
 ## [0.3.5](https://github.com/jimmyandrade/harness/compare/v0.3.4...v0.3.5) (2026-10-03)
 
 
