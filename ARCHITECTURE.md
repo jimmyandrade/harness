@@ -148,7 +148,7 @@ None. People reach the core through their agent (Claude Code, Cursor), GitHub, a
 ## 8. Development & Testing Environment
 
 - Setup: `INSTALL.md`, section "Work in this repository"
-- Testing frameworks: `node --test` for TypeScript, Python test scripts for the checker and the graph
+- Testing frameworks: `node --test` for TypeScript, as decided in `docs/adr/0006-test-with-the-node-test-runner.md`; Python test scripts for the checker and the graph
 - Code quality tools: `tsc --noEmit`, the skill checker, Lefthook
 
 ## 9. Future Considerations / Roadmap
