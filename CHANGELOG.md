@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.1](https://github.com/jimmyandrade/harness/compare/v0.6.0...v0.6.1) (2026-10-03)
+
+
+### Continuous Integration
+
+* **sync-skill-pages:** fail fast when the Notion token is missing ([#54](https://github.com/jimmyandrade/harness/issues/54)) ([f926758](https://github.com/jimmyandrade/harness/commit/f926758d7f1cc2247cf5cd5f379794f89ff57831))
+
 ## [0.6.0](https://github.com/jimmyandrade/harness/compare/v0.5.0...v0.6.0) (2026-10-03)
 
 
