@@ -138,6 +138,7 @@ How these skills relate is in `README.md`, in this folder.
   - Checks each comment against the current head of the pull request, and marks it valid, already fixed, outdated, or duplicate
   - Fixes bugs, missing error handling, security issues, and project convention violations; declines style and low-impact details with a reason; takes intent, product, and architecture questions to the person
   - Records a lesson that outlives the pull request in the project instructions
+  - Pushes the branch after each fix and before replying, so a reply never cites a commit missing from the pull request
   - Replies on each thread before resolving it, and leaves open a thread that waits for the person's decision
   - Ends with a tally of accepted, declined, outdated, and open comments by author, and hands back to the caller. The merge, and whether failing checks block it, stay with criar-pull-request
 - **Test Criteria**:

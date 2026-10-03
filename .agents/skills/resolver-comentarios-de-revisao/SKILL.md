@@ -3,7 +3,7 @@ name: resolver-comentarios-de-revisao
 description: Use essa habilidade sempre que um pull request tiver comentário de pessoa ou bot para tratar, responder ou resolver, inclusive antes do merge, mesmo sem dizer revisão. NÃO use em PR sem comentário, para abrir o PR, nem para revisar o PR de outra pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.1.2"
+  version: "0.1.3"
   related:
     - criar-commit
     - criar-pull-request
@@ -43,7 +43,7 @@ flowchart LR
 
 ### Passo 4
 
-Corrija na branch do PR, seguindo `criar-commit`. Lógica do projeto ganha ou ajusta teste.
+Corrija na branch do PR, seguindo `criar-commit`. Lógica do projeto ganha ou ajusta teste. Envie a branch, seguindo `criar-pull-request`, antes de responder, para que o commit citado na resposta já esteja no PR.
 
 ### Passo 5
 
@@ -144,6 +144,6 @@ Recusei: o gerador reescreve o arquivo a cada release. Gravei a exceção nas in
 - `gh api graphql -f query='mutation{resolveReviewThread(input:{threadId:"<id da thread>"}){thread{isResolved}}}'`: resolução.
 
 1. Leia as revisões, a conversa e as threads.
-2. Corrija e commite, inclusive a lição nas instruções do projeto, se for o caso.
+2. Corrija e commite, inclusive a lição nas instruções do projeto, se for o caso, e envie a branch.
 3. Para cada thread, confira as respostas, responda e resolva.
 4. Entregue o placar do Passo 7.
