@@ -20,7 +20,7 @@ Subjects follow [Conventional Commits](https://www.conventionalcommits.org/): `t
 
 ## CI
 
-The workflow is `.github/workflows/ci.yml`. It runs on every push and pull request on `ubuntu-26.04`. It checks out the full history, runs the `check-skill` action of this repository against itself, runs every `.agents/scripts/*/test_*.py` and `.agents/skills/*/scripts/test_*.py` with the checker's own Python, typechecks, and runs `npm test`.
+The workflow is `.github/workflows/ci.yml`. It runs on every pull request and on every push to `main`, on `ubuntu-26.04`. A push to another branch does not run it, so a pull request runs the checks once. It checks out the full history, runs the `check-skill` action of this repository against itself, runs every `.agents/scripts/*/test_*.py` and `.agents/skills/*/scripts/test_*.py` with the checker's own Python, typechecks, and runs `npm test`.
 
 Every step in a workflow or a composite action has a `name`: a short imperative phrase in English, such as `Install dependencies`. The run log and the pull request checks show that name instead of the command.
 
