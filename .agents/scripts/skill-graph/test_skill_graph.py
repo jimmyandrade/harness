@@ -40,7 +40,7 @@ class SkillGraphTest(unittest.TestCase):
         base = Path(self.tmp.name)
         self.core = make_root(base / "core", "core")
         self.project = make_root(base / "project", "example")
-        write_skill(self.core, "criar-commit", ["criar-pull-request"], "Siga criar-pull-request.")
+        write_skill(self.core, "criar-commit", ["criar-pull-request"], "Siga `criar-pull-request`.")
         write_skill(self.core, "criar-pull-request")
 
     def tearDown(self) -> None:
@@ -51,7 +51,7 @@ class SkillGraphTest(unittest.TestCase):
         self.assertIn("criar_commit --> criar_pull_request", text)
 
     def test_a_skill_without_related_draws_dotted_arrows_from_its_body(self) -> None:
-        write_skill(self.project, "abrir-pedido", None, "Depois, fechar-pedido.")
+        write_skill(self.project, "abrir-pedido", None, "Depois, `fechar-pedido`.")
         write_skill(self.project, "fechar-pedido")
         text = graph.build(self.project, self.core)
         self.assertIn("abrir_pedido -.-> fechar_pedido", text)
@@ -105,6 +105,16 @@ class SkillGraphTest(unittest.TestCase):
         before = graph.build(self.project, self.core)
         write_skill(self.core, "revisar-pedido")
         self.assertEqual(graph.build(self.project, self.core), before)
+
+    def test_a_plain_name_in_prose_draws_no_arrow(self) -> None:
+        write_skill(self.project, "abrir-pedido", None, "Depois, fechar-pedido.")
+        write_skill(self.project, "fechar-pedido")
+        self.assertNotIn("abrir_pedido -.-> fechar_pedido", graph.build(self.project, self.core))
+
+    def test_a_name_in_a_mermaid_diagram_draws_a_dotted_arrow(self) -> None:
+        write_skill(self.project, "abrir-pedido", None, "```mermaid\nflowchart LR\n  A --> B[Siga fechar-pedido]\n```\n")
+        write_skill(self.project, "fechar-pedido")
+        self.assertIn("abrir_pedido -.-> fechar_pedido", graph.build(self.project, self.core))
 
 
 if __name__ == "__main__":

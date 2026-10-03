@@ -58,6 +58,7 @@ How these skills relate is in `README.md`, in this folder.
   - Ends every skill with Scripts disponíveis, naming each script and the command that runs it
   - Does not edit code, write a non-skill page, only tune a description, or write the skill page in Notion
   - A request that comes from Notion follows publicar-habilidade
+  - Cites another skill by its name between backticks, or in a Mermaid diagram node, so the checker and the skill graph recognize the citation
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses code edits, a non-skill page, description-only work, and writing the skill in Notion
