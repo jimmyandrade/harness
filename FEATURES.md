@@ -38,12 +38,13 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
 - **Description**: Show how the skills of a repository relate, as a Mermaid graph
 - **Properties**:
   - Script `.agents/scripts/skill-graph/run-graph.sh` writes `.agents/skills/README.md`, which GitHub renders when the folder is opened
-  - In a business harness, the project skills and the core skills are separate groups
+  - In a business harness, the project skills and the core skills are separate groups. The Core group shows a fixed `harness-core` node and only the core skills the project cites, and arrows only leave project skills, so a core release that adds or relates core skills leaves the project graph unchanged
   - A solid arrow comes from `metadata.related`. A dotted arrow is a skill cited in the body of a skill that does not declare `metadata.related` yet
   - `run-check.sh` fails when the README is out of date
 - **Test Criteria**:
   - [x] Declared related skills draw solid arrows, and cited skills draw dotted arrows
   - [x] The project and the core are separate groups
+  - [x] A core release that adds or relates skills leaves a project graph unchanged
   - [x] A stale README fails the check
 
 ### check-skill
