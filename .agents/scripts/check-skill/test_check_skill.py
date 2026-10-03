@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import importlib.util
 import os
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -129,6 +130,46 @@ class GherkinTest(unittest.TestCase):
 
     def test_a_skill_without_features_passes(self) -> None:
         self.assertEqual(self.checker.gherkin_errors(self.skill, "pt"), [])
+
+
+class VersionReferenceTest(unittest.TestCase):
+    def setUp(self) -> None:
+        self.tmp = tempfile.TemporaryDirectory()
+        self.project = Path(self.tmp.name).resolve()
+        (self.project / ".agents").mkdir()
+        (self.project / ".agents" / "config.yml").write_text("organization:\n  name: example\n")
+        self.git("init", "-q")
+        write_skill(self.project, "abrir-pedido", body="Primeira versão.")
+        self.base = self.commit("base")
+        write_skill(self.project, "abrir-pedido", body="Segunda versão, sem subir a versão.")
+        self.head = self.commit("head")
+        self.relative = Path(".agents/skills/abrir-pedido/SKILL.md")
+
+    def tearDown(self) -> None:
+        self.tmp.cleanup()
+        for key in ("HARNESS_ROOT", "CHECK_SKILL_BASE", "CHECK_SKILL_HEAD"):
+            os.environ.pop(key, None)
+
+    def git(self, *args: str) -> str:
+        return subprocess.run(
+            ["git", "-c", "user.name=t", "-c", "user.email=t@example.com", *args],
+            cwd=self.project, check=True, capture_output=True, text=True,
+        ).stdout.strip()
+
+    def commit(self, message: str) -> str:
+        self.git("add", "-A")
+        self.git("commit", "-q", "-m", message)
+        return self.git("rev-parse", "HEAD")
+
+    def test_a_committed_change_is_compared_with_the_base(self) -> None:
+        os.environ["CHECK_SKILL_BASE"] = self.base
+        os.environ["CHECK_SKILL_HEAD"] = self.head
+        checker = load_checker(self.project)
+        self.assertIn("Primeira versão.", checker.committed_text(self.relative))
+
+    def test_without_a_base_the_change_is_compared_with_head(self) -> None:
+        checker = load_checker(self.project)
+        self.assertIn("Segunda versão", checker.committed_text(self.relative))
 
 
 if __name__ == "__main__":
