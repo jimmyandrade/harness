@@ -3,8 +3,11 @@ name: criar-pull-request
 description: Use essa habilidade sempre que for abrir PR, subir uma correção, mandar para a branch principal ou mesclar mudança no repositório, mesmo sem dizer PR. NÃO use para responder comentário de revisão nem para só commitar (use criar-commit).
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.5.0"
   notion: "false"
+  related:
+    - criar-commit
+    - resolver-comentarios-de-revisao
 ---
 
 # Criar pull request
@@ -22,6 +25,7 @@ Leia cada valor nas instruções do projeto. Quando um valor não estiver lá, u
 "Comando de build": ""
 "Timeout do push (ms)": 600000
 "Duração do hook de pre-push (min)": 0
+"Exigir CI verde": "sim"
 ```
 
 ## Instruções
@@ -64,11 +68,18 @@ Depois de abrir, leia o status do PR pelas ferramentas de PR do app e vincule o 
 ```mermaid
 flowchart LR
   A{Pessoa pediu merge?} -->|não| B[Informe o link e pare]
-  A -->|sim| C[Merge com delete-branch]
-  C -->|bloqueado pelo modo automático| D[Dê o comando e pare]
-  C -->|ok| E[Confirme o estado MERGED e o hash]
+  A -->|sim| C{Comentário pendente?}
+  C -->|sim| D[Siga resolver-comentarios-de-revisao]
+  D --> C
+  C -->|não| E{Checks}
+  E -->|falhando ou pendentes, com Exigir CI verde| F[Diga quais e pare]
+  E -->|verdes, ou sem Exigir CI verde| G[Merge com delete-branch]
+  G -->|bloqueado pelo modo automático| H[Dê o comando e pare]
+  G -->|ok| I[Confirme o estado MERGED e o hash]
 ```
 
+Comentário pendente é thread de revisão sem resolver, revisão que pede mudança ou comentário da conversa sem resposta, de pessoa ou de bot. Aviso de bot que só informa, como link de preview, não conta. Thread que espera decisão da pessoa segura o merge até ela decidir.
+Leia os checks uma vez. Se estiverem pendentes, não espere em loop: diga quais faltam e pare. Com `Exigir CI verde` igual a `não`, mescle mesmo assim e diga na resposta quais checks não passaram.
 Mescle só com `Merge`. Se o modo automático negar o merge, não tente de outro jeito: nada de auto-merge, API ou outra ferramenta. Entregue o comando pronto e diga que a decisão é da pessoa.
 
 ### Passo 9
@@ -147,6 +158,8 @@ O pedido autoriza push e merge. Push sem o hook, porque o commit já passou em t
 - `GIT_TERMINAL_PROMPT=0 git -c credential.helper= -c 'credential.helper=!gh auth git-credential' ls-remote origin HEAD`: teste de acesso do Passo 5.
 - `LEFTHOOK=0 GIT_TERMINAL_PROMPT=0 git -c credential.helper= -c 'credential.helper=!gh auth git-credential' push -u origin <branch>`: push sem o hook. Tire o `LEFTHOOK=0` para rodar o hook.
 - `gh pr create --repo <Repositório> --base <Branch base> --head <branch> --title "<assunto>" --body "<corpo>"`: Passo 6.
+- `gh api graphql -f query='query{repository(owner:"<dono>",name:"<nome>"){pullRequest(number:<número>){reviewDecision reviewThreads(first:100){nodes{isResolved}}}}}'`: threads sem resolver e pedido de mudança do Passo 8.
+- `gh pr checks <número> --repo <Repositório>`: checks do Passo 8.
 - `gh pr merge <número> --repo <Repositório> --<Merge> --delete-branch`: Passo 8.
 
-1. Rode as verificações, depois o rebase, o teste de acesso, o push, a criação do PR e, só com pedido, o merge.
+1. Rode as verificações, depois o rebase, o teste de acesso, o push, a criação do PR e, só com pedido, os comentários, os checks e o merge.
