@@ -28,9 +28,9 @@
   ],
   "customManagers": [
     {
-      "description": "Plugin sources pinned in a Claude Code marketplace.",
+      "description": "Plugin sources pinned in a Claude Code marketplace or in the Claude Code project settings.",
       "customType": "regex",
-      "managerFilePatterns": ["/(^|\/)\\.claude-plugin\/marketplace\\.json$/"],
+      "managerFilePatterns": ["/(^|\/)\\.claude-plugin\/marketplace\\.json$/", "/(^|\/)\\.claude\/settings\\.json$/"],
       "matchStrings": [
         "\"source\":\\s*\"github\",\\s*\"repo\":\\s*\"(?<depName>[^\"]+)\",\\s*\"ref\":\\s*\"(?<currentValue>v[^\"]+)\""
       ],

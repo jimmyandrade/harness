@@ -25,10 +25,11 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
 - **Description**: Renovate preset that keeps a repository and its pins of the core harness current
 - **Properties**:
   - Preset at `default.json`, extended as `github>jimmyandrade/harness`
-  - Groups every pin of the core harness, in workflows, `package.json`, and `.claude-plugin/marketplace.json`, into one `harness core` pull request
+  - Groups every pin of the core harness, in workflows, `package.json`, `.claude-plugin/marketplace.json`, and `.claude/settings.json`, into one `harness core` pull request
   - A major update waits for approval on the Dependency Dashboard
 - **Test Criteria**:
   - [x] The marketplace regex reads the repository and the tag of a `github` plugin source
+  - [x] The same regex reads the pin in `.claude/settings.json`, and `.claude/settings.local.json` is not matched
   - [ ] A release of the core opens one `harness core` pull request in a business harness
 
 ### skill-graph
