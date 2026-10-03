@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/jimmyandrade/harness/compare/v0.5.0...v0.6.0) (2026-10-03)
+
+
+### Features
+
+* move the core pin in .claude/settings.json with Renovate ([#52](https://github.com/jimmyandrade/harness/issues/52)) ([3f7f033](https://github.com/jimmyandrade/harness/commit/3f7f033ba46fd85173d6bb317c9c768cfd6c5647))
+
 ## [0.5.0](https://github.com/jimmyandrade/harness/compare/v0.4.0...v0.5.0) (2026-10-03)
 
 
