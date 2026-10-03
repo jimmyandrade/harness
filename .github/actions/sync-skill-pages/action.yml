@@ -22,6 +22,15 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: Check the Notion token
+      shell: bash
+      env:
+        NOTION_TOKEN: ${{ inputs.notion-token }}
+      run: |
+        if [ -z "$NOTION_TOKEN" ]; then
+          echo "::error title=NOTION_TOKEN is missing::The notion-token input is empty. Add the NOTION_TOKEN repository secret, from a Notion integration with access to the skills database, as in docs/runbooks/notion.md of jimmyandrade/harness."
+          exit 1
+        fi
     - name: Set up Node.js
       uses: actions/setup-node@v7
       with:
