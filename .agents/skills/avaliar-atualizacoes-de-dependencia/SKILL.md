@@ -40,7 +40,7 @@ Mude para a branch do PR e veja quantos commits ela está atrás da base. Se est
 
 ### Passo 3
 
-Compare a versão que o PR traz com a mais recente do pacote direto. Leia as notas de versão do intervalo do PR. Aponte breaking change, correção de segurança e exigência de peer dependency. Breaking change sem migração clara no projeto para a fila: pergunte à pessoa.
+Compare a versão que o PR traz com a mais recente do pacote direto. Leia as notas de cada versão do intervalo do PR, no repositório do pacote. Num salto grande, a descrição do PR do bot corta as versões mais antigas. Aponte breaking change, correção de segurança e exigência de peer dependency. Breaking change sem migração clara no projeto para a fila: pergunte à pessoa.
 
 ### Passo 4
 
@@ -115,6 +115,7 @@ A biblioteca era transitiva. A árvore levou ao pacote direto que a puxa, e os p
 ## Pegadinhas
 
 - Depois que outra pessoa envia commit para a branch, o Dependabot para de fazer rebase dela e o Renovate para de atualizá-la. Daí em diante, quem mantém a branch em dia é você.
+- Uma mudança que depende do ambiente de execução, como bloquear algo no navegador, vale também para o ambiente dos testes, como jsdom. Confira o ambiente configurado para os testes.
 - Uma atualização só de tipos pode quebrar a checagem de tipos e o build sem falhar nenhum teste. Rode o build mesmo com os testes verdes.
 - A árvore de dependências só mostra o pacote depois da instalação na branch do PR. Antes dela, ela mostra a versão antiga ou nada.
 
