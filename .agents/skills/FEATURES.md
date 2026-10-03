@@ -8,6 +8,20 @@ How these skills relate is in `README.md`, in this folder.
 
 ## Features
 
+### avaliar-atualizacoes-de-dependencia
+- **Stability**: experimental
+- **Description**: Work through the open dependency update pull requests from Dependabot and Renovate, oldest first, one at a time
+- **Properties**:
+  - Lives at `.agents/skills/avaliar-atualizacoes-de-dependencia/SKILL.md`
+  - Reads the bot authors, the install, test, and build commands, and the reviewers from the project instructions
+  - Walks a transitive package up to the direct one before looking for call sites and tests
+  - Reads the release notes of the range and stops for the person on a breaking change without a clear migration
+  - Adds missing tests on the bot's branch instead of a separate pull request
+  - Hands comments to resolver-comentarios-de-revisao and the merge to criar-pull-request, and starts the next pull request only after the base branch CI is green
+- **Test Criteria**:
+  - [ ] Three open bot pull requests are handled oldest first, each merged only after the previous one turned the base branch green
+  - [ ] An update to a transitive package finds the call sites of the direct package
+
 ### criar-commit
 - **Stability**: experimental
 - **Description**: Commit finished work as atomic commits with a message in the project language and pattern
