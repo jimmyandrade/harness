@@ -3,7 +3,7 @@ name: comunicar-novidade-do-produto
 description: Use essa habilidade sempre que um PR for mesclado ou alguém perguntar o que há de novo no produto para quem o usa, mesmo sem dizer novidade, para decidir se há o que contar e escrever o comunicado sem termos técnicos. NÃO use para a descrição do PR, o changelog nem release notes técnicas.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   related:
     - evoluir-habilidade
 ---
@@ -15,6 +15,9 @@ metadata:
 Leia cada valor nas instruções do projeto. Quando um valor não estiver lá, use o padrão abaixo.
 
 ```yaml
+"Fontes do comunicado":
+  - "pull requests mesclados na base"
+  - "commits na base fora de pull request"
 "Público do comunicado": ""
 "Canal do comunicado": ""
 "Idioma do comunicado": "português"
@@ -25,7 +28,7 @@ Leia cada valor nas instruções do projeto. Quando um valor não estiver lá, u
 
 ### Passo 1
 
-Junte o que entrou: um PR mesclado, vários, ou um período. Leia o título, a descrição, os arquivos alterados e as issues ligadas de cada um. Quando o pedido inclui outras ferramentas, como o Notion, junte também o que a pessoa criou ou editou nelas no período.
+Junte o que entrou, um PR mesclado, vários ou um período, de cada uma das `Fontes do comunicado`, na ordem da lista. De um PR, leia o título, a descrição, os arquivos alterados e as issues ligadas. De um commit fora de PR, leia a mensagem e o diff. Uma fonte de outra ferramenta, como páginas do Notion criadas ou editadas pela pessoa, entra filtrada pelo período e pela autoria que ela diz. Quando o pedido cita uma fonte fora da lista, junte essa também.
 
 ### Passo 2
 
@@ -110,5 +113,6 @@ Três PRs entraram: duas atualizações de dependência e uma correção no form
 
 - `gh pr view <número> --repo <repositório> --json title,body,files,closingIssuesReferences`: o que mudou no Passo 1.
 - `gh pr list --repo <repositório> --state merged --search "merged:>=<data>"`: PRs de um período no Passo 1.
+- `git log <base> --since=<data> --first-parent --oneline`: commits da base no Passo 1. Os que não citam `(#<número>)` estão fora de PR.
 
-1. Liste os PRs, leia cada um, classifique, escreva e entregue.
+1. Junte cada fonte, leia cada item, classifique, escreva e entregue.
