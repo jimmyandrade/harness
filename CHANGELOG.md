@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1](https://github.com/jimmyandrade/harness/compare/v0.3.0...v0.3.1) (2026-10-03)
+
+
+### Miscellaneous Chores
+
+* release the setup runbooks ([#36](https://github.com/jimmyandrade/harness/issues/36)) ([0bd089f](https://github.com/jimmyandrade/harness/commit/0bd089fee0d64666c988abe9d6560726fe6ac139))
+
 ## [0.3.0](https://github.com/jimmyandrade/harness/compare/v0.2.0...v0.3.0) (2026-10-02)
 
 
