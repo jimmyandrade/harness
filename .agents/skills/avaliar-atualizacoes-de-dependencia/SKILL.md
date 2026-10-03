@@ -3,7 +3,7 @@ name: avaliar-atualizacoes-de-dependencia
 description: Use essa habilidade sempre que houver PR de atualização de dependência do Dependabot ou do Renovate para avaliar, testar ou mesclar, mesmo sem dizer o nome do bot. NÃO use para atualizar uma dependência à mão nem para PR que não seja de bot.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.3.1"
   notion: "false"
   related:
     - criar-commit
@@ -36,11 +36,11 @@ Liste os PRs abertos de cada um dos `Autores dos bots`, do mais antigo ao mais n
 
 ### Passo 2
 
-Mude para a branch do PR e veja quantos commits ela está atrás da base. Se estiver em conflito ou muito atrás, peça rebase ao bot e espere a branch nova. Rode o `Comando de instalação`. Se o PR muda um subprojeto com manifesto próprio, instale, teste e faça o build nele, com os comandos dele, e não na raiz. Ache o pacote atualizado e veja se ele é direto ou transitivo. Se for transitivo, suba pela árvore até o pacote direto. Numa action do GitHub, a própria action é o pacote direto. Registre a cadeia na checklist.
+Mude para a branch do PR e veja quantos commits ela está atrás da base. Se estiver em conflito ou muito atrás, peça rebase ao bot e espere a branch nova. Rode o `Comando de instalação`. Se o PR muda um subprojeto com manifesto próprio, instale, teste e faça o build nele, com os comandos dele, e não na raiz. Ache o pacote atualizado e veja se ele é direto ou transitivo. Se for transitivo, suba pela árvore até o pacote direto. Procure também imports do pacote transitivo no código: se o projeto o importa, ele é ponto de uso direto, mesmo fora do manifesto. Numa action do GitHub, a própria action é o pacote direto. Registre a cadeia na checklist.
 
 ### Passo 3
 
-Compare a versão que o PR traz com a mais recente do pacote direto. Leia as notas de cada versão do intervalo do PR, no repositório do pacote. Num salto grande, a descrição do PR do bot corta as versões mais antigas. Sem notas nem repositório público, compare a API pública das duas versões, como os arquivos de tipos. Aponte breaking change, correção de segurança e exigência de peer dependency. Breaking change sem migração clara no projeto para a fila: pergunte à pessoa.
+Compare a versão que o PR traz com a mais recente do pacote direto. Leia as notas de cada versão do intervalo do PR, no repositório do pacote. Num salto grande, a descrição do PR do bot corta as versões mais antigas. Sem notas nem repositório público, compare a API pública das duas versões, como os arquivos de tipos. Aponte breaking change, correção de segurança e exigência de peer dependency. Breaking change sem migração clara no projeto para a fila: pergunte à pessoa. Se as notas mudam retry, timeout ou prazo, meça o caminho degradado do projeto antes e depois e leve o número para a análise.
 
 ### Passo 4
 
