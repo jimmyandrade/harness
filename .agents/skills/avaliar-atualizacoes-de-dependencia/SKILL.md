@@ -106,7 +106,7 @@ A biblioteca era transitiva. A árvore levou ao pacote direto que a puxa, e os p
 ## Casos-limite
 
 - O bot já substituiu o PR por um mais novo do mesmo pacote: siga o mais novo.
-- O PR agrupa vários pacotes: faça os passos 2 a 4 para cada um.
+- O PR agrupa vários pacotes: faça os passos 2 a 4 para cada um. Um pacote 0.x do grupo pode quebrar ao subir o minor: leia as notas dele à parte.
 - A atualização de major espera aprovação no painel de dependências e ainda não virou PR: fica fora da fila.
 - Dois PRs conflitam depois de um merge e a ordem fica ambígua: pergunte à pessoa.
 - Uma revisão obrigatória que você não consegue cumprir bloqueia o merge: pare e diga quem precisa aprovar.
@@ -117,6 +117,7 @@ A biblioteca era transitiva. A árvore levou ao pacote direto que a puxa, e os p
 - Depois que outra pessoa envia commit para a branch, o Dependabot para de fazer rebase dela e o Renovate para de atualizá-la. Daí em diante, quem mantém a branch em dia é você.
 - Uma mudança que depende do ambiente de execução, como bloquear algo no navegador, vale também para o ambiente dos testes, como jsdom. Confira o ambiente configurado para os testes.
 - Uma atualização só de tipos pode quebrar a checagem de tipos e o build sem falhar nenhum teste. Rode o build mesmo com os testes verdes.
+- A instalação limpa apaga o que foi instalado dentro da pasta de dependências, como o navegador de testes. As suítes fora do `Comando de testes` podem pedir esse passo de novo, e também as variáveis de ambiente do projeto.
 - A árvore de dependências só mostra o pacote depois da instalação na branch do PR. Antes dela, ela mostra a versão antiga ou nada.
 
 ## Scripts disponíveis
