@@ -20,6 +20,10 @@ How these skills relate is in `README.md`, in this folder.
   - Adds missing integration tests, which exercise the project's code using the package, never the package itself, on the bot's branch instead of a separate pull request
   - Fixes project code that the update breaks on the same branch, and runs the build even when the tests pass
   - Stops and proposes a Renovate or Dependabot group when a package arrives without the types, peer dependency, or monorepo packages that move with it
+  - Evaluates a stale branch without conflict on a local merge with the base, and a subproject with its own commands
+  - Reads every release in the range from the package repository, or compares the public types when there are no notes, and finds direct imports of transitive packages
+  - Measures the degraded path when notes change retries or timeouts, checks project content a package parses, and compares linter diagnostics per rule on tracked files
+  - Commits files a package regenerates on install, and says when a merge needs a new deploy or new binaries on every machine
   - Hands comments to resolver-comentarios-de-revisao and the merge to criar-pull-request, and starts the next pull request only after the checks of the merge commit on the base branch, from any service, are green
 - **Test Criteria**:
   - [ ] Three open bot pull requests are handled oldest first, each merged only after the previous one turned the base branch green

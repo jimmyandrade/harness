@@ -6,6 +6,12 @@
       "prompt": "pode abrir a issue e começar o #5",
       "expected_output": "A fila de PRs do Renovate aparece do mais antigo ao mais novo. No PR do React, os quatro pacotes são diretos e as notas de versão não trazem breaking change. Os pontos de uso afetados pela mudança de comportamento são listados. O build quebra pelos tipos novos, a correção vai na branch do bot, testes e build passam, a análise é comentada no PR, e o merge espera o ok da pessoa e os checks verdes. Depois do merge, os checks do commit na base ficam verdes.",
       "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "pode seguir com o #9",
+      "expected_output": "A fila de nove PRs do Renovate é processada do mais antigo ao mais novo, um por vez, parando antes de cada merge. Cada PR tem a árvore de dependência, as notas de todas as versões do intervalo, os pontos de uso, a verificação no merge local quando a branch está atrás sem conflito, testes e build, e uma análise comentada no PR. A regressão de tempo da Vercel Flags é medida e levada à pessoa; o script do msw e um teste de integração vão na branch do bot; e a base fica verde depois de cada merge.",
+      "files": []
     }
   ]
 }
