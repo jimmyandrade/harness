@@ -36,14 +36,16 @@ harness/
 │   ├── routes/                     # One HTTP endpoint per directory
 │   └── shared/                     # Glossary access, Zod schemas, HTTP server
 ├── docs/
-│   └── adr/                        # Architecture decisions
+│   ├── adr/                        # Architecture decisions
+│   └── runbooks/                   # Setup steps, one runbook per tool
+├── examples/                       # Files the runbooks copy into a project, pinned as vX.Y.Z
 ├── default.json                    # Renovate preset extended by business harnesses
 ├── lefthook.yml                    # Pre-commit checker for this repository
 ├── AGENTS.md                       # Rules for agents working here
 ├── ARCHITECTURE.md                 # This map
 ├── CONTRIBUTING.md                 # Commits, CI, actions, releases
 ├── FEATURES.md                     # Tools a person or a repository uses directly
-├── INSTALL.md                      # How to use and set up this repository
+├── INSTALL.md                      # Index of the runbooks
 ├── SECURITY.md                     # Supported runtimes, secrets, reporting
 └── TROUBLESHOOTING.md              # Failure diagnosis
 ```

@@ -13,6 +13,7 @@ Each step ends with a check.
 Skip this step when the project has no skills of its own.
 
 ```bash
+mkdir -p .claude
 ln -s ../.agents/skills .claude/skills
 ```
 
@@ -22,20 +23,13 @@ Check: `ls .claude/skills/` lists the skills of the project.
 
 ## 2. Enable the plugin in the repository
 
-`.claude/settings.json` names the marketplace and enables the plugin. A business harness points at its own marketplace, which brings `harness-core` too. A project that only uses the core points at this repository.
+`.claude/settings.json` names the marketplace and enables `harness-core`. A business harness already has it from `business-repository.md`, step 3, pointing at its own marketplace. A project that only uses the core copies the example that points at this repository.
 
-```json
-{
-  "extraKnownMarketplaces": {
-    "harness": {
-      "source": { "source": "github", "repo": "jimmyandrade/harness", "ref": "vX.Y.Z" }
-    }
-  },
-  "enabledPlugins": { "harness-core@harness": true }
-}
+```bash
+TAG="$(gh release view --repo jimmyandrade/harness --json tagName --jq .tagName)"
+cp -Rn node_modules/harness/examples/project/. .
+perl -pi -e "s/vX\.Y\.Z/$TAG/g" .claude/settings.json
 ```
-
-Replace `vX.Y.Z` with the tag from `business-repository.md`, step 2.
 
 Check: `jq '.enabledPlugins' .claude/settings.json` shows `harness-core@<marketplace>` as `true`.
 
@@ -43,20 +37,22 @@ Check: `jq '.enabledPlugins' .claude/settings.json` shows `harness-core@<marketp
 
 Run this once per machine. It installs the plugin for the user, so it works in every project. In the desktop app, typing `/plugin` opens the plugin screen and does not take arguments, so use the terminal.
 
-Find the `claude` command. When it is not on `PATH`, macOS has the copy bundled with the desktop app:
+Find the `claude` command. When it is not on `PATH`, macOS has the copy bundled with the desktop app.
 
 ```bash
 CLAUDE="$(command -v claude || find "$HOME/Library/Application Support/Claude/claude-code" -path '*/MacOS/claude' -type f | sort -V | tail -1)"
 ```
 
-Add the marketplace and install the plugin. Use the marketplace name from step 2.
+Read the marketplace from `.claude/settings.json`, add it, and install the plugin.
 
 ```bash
-"$CLAUDE" plugin marketplace add jimmyandrade/harness
-"$CLAUDE" plugin install harness-core@harness
+MARKETPLACE="$(jq -r '.extraKnownMarketplaces | keys | first' .claude/settings.json)"
+REPO="$(jq -r --arg m "$MARKETPLACE" '.extraKnownMarketplaces[$m].source.repo' .claude/settings.json)"
+"$CLAUDE" plugin marketplace add "$REPO"
+"$CLAUDE" plugin install "harness-core@$MARKETPLACE"
 ```
 
-Check: the last command prints `Successfully installed plugin: harness-core@harness`.
+Check: the last command prints `Successfully installed plugin: harness-core@<marketplace>`.
 
 ## 4. Confirm in a new session
 

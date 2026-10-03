@@ -22,6 +22,7 @@ Check: `test -d node_modules/harness/.agents/skills && echo ok` prints `ok`.
 A project with skills of its own:
 
 ```bash
+mkdir -p .cursor
 ln -s ../node_modules/harness/.agents/skills .cursor/skills
 ```
 

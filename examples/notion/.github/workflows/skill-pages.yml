@@ -1,0 +1,23 @@
+name: skill-pages
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  sync:
+    runs-on: ubuntu-26.04
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: Check skills
+        uses: jimmyandrade/harness/.github/actions/check-skill@vX.Y.Z
+        with:
+          base: ${{ github.event.before }}
+      - name: Sync skill pages
+        uses: jimmyandrade/harness/.github/actions/sync-skill-pages@vX.Y.Z
+        with:
+          notion-token: ${{ secrets.NOTION_TOKEN }}
+          base: ${{ github.event.before }}

@@ -1,0 +1,10 @@
+{
+  "extraKnownMarketplaces": {
+    "example": {
+      "source": { "source": "github", "repo": "example/harness" }
+    }
+  },
+  "enabledPlugins": {
+    "harness-core@example": true
+  }
+}

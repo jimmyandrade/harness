@@ -1,0 +1,5 @@
+{
+  "name": "example",
+  "description": "Skills of this business.",
+  "skills": "./.agents/skills/"
+}
