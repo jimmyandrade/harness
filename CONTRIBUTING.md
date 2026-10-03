@@ -14,6 +14,7 @@ Subjects follow [Conventional Commits](https://www.conventionalcommits.org/): `t
 | `fix` | A defect |
 | `docs` | Documentation only |
 | `refactor` | A behavior-preserving restructure |
+| `perf` | A change that makes something faster or lighter, with no other behavior change |
 | `test` | Tests only |
 | `chore` | Upkeep that is none of the above |
 | `ci` | CI and the actions under `.github/actions/` |

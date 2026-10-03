@@ -22,7 +22,7 @@ locale: en
 
 - Every change lands through a pull request. Do not push to `main`.
 - Write every commit subject in `locale.commit_subject` from `.agents/config.yml`.
-- Use a Conventional Commits subject: `type: description`. When the change affects one skill, the subject is `type(skill-name): description`. The types are `feat`, `fix`, `docs`, `refactor`, `test`, `chore`, and `ci`.
+- Use a Conventional Commits subject: `type: description`. When the change affects one skill, the subject is `type(skill-name): description`. The types are `feat`, `fix`, `perf`, `docs`, `refactor`, `test`, `chore`, and `ci`.
 - A change to CI or to an action uses `ci`, even when it adds behavior.
 
 ## Configuration
