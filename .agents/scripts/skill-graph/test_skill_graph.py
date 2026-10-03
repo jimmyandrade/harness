@@ -40,7 +40,7 @@ class SkillGraphTest(unittest.TestCase):
         base = Path(self.tmp.name)
         self.core = make_root(base / "core", "core")
         self.project = make_root(base / "project", "example")
-        write_skill(self.core, "criar-commit", ["criar-pull-request"], "Siga criar-pull-request.")
+        write_skill(self.core, "criar-commit", ["criar-pull-request"], "Siga `criar-pull-request`.")
         write_skill(self.core, "criar-pull-request")
 
     def tearDown(self) -> None:
@@ -51,12 +51,13 @@ class SkillGraphTest(unittest.TestCase):
         self.assertIn("criar_commit --> criar_pull_request", text)
 
     def test_a_skill_without_related_draws_dotted_arrows_from_its_body(self) -> None:
-        write_skill(self.project, "abrir-pedido", None, "Depois, criar-commit.")
+        write_skill(self.project, "abrir-pedido", None, "Depois, `fechar-pedido`.")
+        write_skill(self.project, "fechar-pedido")
         text = graph.build(self.project, self.core)
-        self.assertIn("abrir_pedido -.-> criar_commit", text)
+        self.assertIn("abrir_pedido -.-> fechar_pedido", text)
 
     def test_the_project_and_the_core_are_separate_groups(self) -> None:
-        write_skill(self.project, "abrir-pedido")
+        write_skill(self.project, "abrir-pedido", ["criar-commit"], "Depois, criar-commit.")
         text = graph.build(self.project, self.core)
         self.assertIn('subgraph project["example"]', text)
         self.assertIn('subgraph core["Core"]', text)
@@ -70,6 +71,50 @@ class SkillGraphTest(unittest.TestCase):
         write_skill(self.project, "abrir-pedido", None, "Veja criar-commit-antigo.")
         text = graph.build(self.project, self.core)
         self.assertNotIn("abrir_pedido -.-> criar_commit", text)
+
+    def test_a_project_graph_shows_only_the_core_skills_it_cites(self) -> None:
+        write_skill(self.project, "abrir-pedido", ["criar-commit"], "Depois, criar-commit.")
+        text = graph.build(self.project, self.core)
+        self.assertIn('criar_commit["criar-commit"]', text)
+        self.assertNotIn('criar_pull_request["criar-pull-request"]', text)
+
+    def test_a_project_graph_draws_no_arrows_between_core_skills(self) -> None:
+        write_skill(self.project, "abrir-pedido", ["criar-commit", "criar-pull-request"], "Depois, criar-commit e criar-pull-request.")
+        text = graph.build(self.project, self.core)
+        self.assertNotIn("criar_commit --> criar_pull_request", text)
+
+    def test_a_core_release_that_adds_or_relates_skills_leaves_the_project_graph_unchanged(self) -> None:
+        write_skill(self.project, "abrir-pedido", ["criar-commit"], "Depois, criar-commit.")
+        before = graph.build(self.project, self.core)
+        write_skill(self.core, "revisar-pedido")
+        write_skill(self.core, "criar-commit", ["criar-pull-request", "revisar-pedido"], "Siga criar-pull-request.")
+        self.assertEqual(graph.build(self.project, self.core), before)
+
+    def test_a_project_graph_keeps_the_core_group_without_citations(self) -> None:
+        write_skill(self.project, "abrir-pedido")
+        text = graph.build(self.project, self.core)
+        self.assertIn('subgraph core["Core"]', text)
+        self.assertIn('harness_core(["harness-core"])', text)
+        self.assertNotIn('criar_commit["criar-commit"]', text)
+
+    def test_the_core_graph_has_no_harness_core_node(self) -> None:
+        self.assertNotIn("harness_core", graph.build(self.core, self.core))
+
+    def test_a_body_citation_of_a_core_skill_added_later_leaves_the_project_graph_unchanged(self) -> None:
+        write_skill(self.project, "abrir-pedido", None, "Depois, revisar-pedido.")
+        before = graph.build(self.project, self.core)
+        write_skill(self.core, "revisar-pedido")
+        self.assertEqual(graph.build(self.project, self.core), before)
+
+    def test_a_plain_name_in_prose_draws_no_arrow(self) -> None:
+        write_skill(self.project, "abrir-pedido", None, "Depois, fechar-pedido.")
+        write_skill(self.project, "fechar-pedido")
+        self.assertNotIn("abrir_pedido -.-> fechar_pedido", graph.build(self.project, self.core))
+
+    def test_a_name_in_a_mermaid_diagram_draws_a_dotted_arrow(self) -> None:
+        write_skill(self.project, "abrir-pedido", None, "```mermaid\nflowchart LR\n  A --> B[Siga fechar-pedido]\n```\n")
+        write_skill(self.project, "fechar-pedido")
+        self.assertIn("abrir_pedido -.-> fechar_pedido", graph.build(self.project, self.core))
 
 
 if __name__ == "__main__":

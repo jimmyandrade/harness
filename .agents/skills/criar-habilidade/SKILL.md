@@ -3,7 +3,7 @@ name: criar-habilidade
 description: Use essa habilidade sempre que for criar, adicionar ou escrever uma skill, mesmo sem dizer skill. NÃO use para editar código, escrever página que não seja skill, otimizar só a descrição, nem gravar a skill no Notion. Pedido vindo do Notion segue publicar-habilidade.
 metadata:
   author: jimmyandrade
-  version: "3.6.2"
+  version: "3.7.0"
   related:
     - descrever-habilidade-ou-schema
     - evoluir-habilidade
@@ -59,8 +59,8 @@ Se o escopo da skill, de um script ou de um workflow mudar, o nome muda junto. O
 
 - Título: nível 1. O nome com espaço no lugar do hífen e a grafia correta, com acento e hífen da palavra. Maiúscula só no começo e em nome próprio.
 - Descrição: segue `descrever-habilidade-ou-schema`. `Use essa habilidade sempre que`, intenção de quem pede, `NÃO use para`.
-- Nome e descrição, juntos, não passam de `Tokens do catálogo`.
-- A descrição é lida em todo roteamento. O corpo só é lido quando a skill dispara. Os dois ficam curtos. O teto é `Tokens do catálogo`, `Linhas` e `Tokens do corpo`. Se alongar, separe antes.
+- Cite outra habilidade pelo nome entre crases, ou no nó de um fluxograma Mermaid. Só assim a checagem e o grafo a reconhecem.
+- Nome e descrição, juntos, não passam de `Tokens do catálogo`. O corpo não passa de `Linhas` nem de `Tokens do corpo`. Se alongar, separe antes.
 - Texto exato do usuário entra sem mudança quando já está no idioma deste texto. Caso contrário, traduza nome, descrição e corpo.
 
 ### Passo 8

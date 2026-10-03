@@ -38,12 +38,13 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
 - **Description**: Show how the skills of a repository relate, as a Mermaid graph
 - **Properties**:
   - Script `.agents/scripts/skill-graph/run-graph.sh` writes `.agents/skills/README.md`, which GitHub renders when the folder is opened
-  - In a business harness, the project skills and the core skills are separate groups
-  - A solid arrow comes from `metadata.related`. A dotted arrow is a skill cited in the body of a skill that does not declare `metadata.related` yet
+  - In a business harness, the project skills and the core skills are separate groups. The Core group shows a fixed `harness-core` node and only the core skills that project skills declare in `metadata.related`; body citations only link project skills, and arrows only leave project skills, so a core release that adds or relates core skills leaves the project graph unchanged
+  - A solid arrow comes from `metadata.related`. A dotted arrow is a skill cited in the body of a skill that does not declare `metadata.related` yet. A citation is a skill name between backticks in prose, or a name in a Mermaid diagram
   - `run-check.sh` fails when the README is out of date
 - **Test Criteria**:
   - [x] Declared related skills draw solid arrows, and cited skills draw dotted arrows
   - [x] The project and the core are separate groups
+  - [x] A core release that adds or relates skills leaves a project graph unchanged, including a core skill whose name a project body already mentions
   - [x] A stale README fails the check
 
 ### check-skill
@@ -54,7 +55,7 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
   - Reads the project from `HARNESS_ROOT` or the working directory, and its `.agents/config.yml` with the core fallback
   - `base` and `head` limit the check to the skills that changed
   - A changed skill must raise `metadata.version` above its copy at `base` when `base` and `head` are given, and above its copy at `HEAD` otherwise
-  - When a skill declares `metadata.related`, each name must be a skill in the project or in the core, and every skill the body cites must be listed
+  - When a skill declares `metadata.related`, each name must be a skill in the project or in the core, and every skill the body cites must be listed. A citation is a skill name between backticks in prose, or a name in a Mermaid diagram; a plain name in prose is not one
   - Each Gherkin file in a skill's `features/` starts with `# language: <locale.gherkin>`. With `pt`, every Given starts with `Dado que`, because `Dado` is the reserved keyword and does not agree with the noun
 - **Test Criteria**:
   - [x] A project with a partial `.agents/config.yml` uses the core limits
@@ -62,6 +63,16 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
   - [x] A feature without the configured language line fails, and in Portuguese a Given such as `Dada uma` or `Dado um` fails
   - [x] A committed change is compared with the base, and without a base with `HEAD`
   - [ ] A business workflow that calls the action fails on a skill that breaks a rule
+
+### backtick-skill-citations
+- **Stability**: deprecated
+- **Description**: Temporary codemod that wraps plain skill names in skill bodies in backticks, so existing citations keep counting under the backtick rule
+- **Properties**:
+  - Script `.agents/scripts/backtick-skill-citations/run.sh`, run from the project root or with `HARNESS_ROOT`; `--check` lists the changes without writing
+  - Leaves the frontmatter, fenced code blocks, inline code, paths, and the skill's own name alone
+  - Removed once every business harness has run it
+- **Test Criteria**:
+  - [x] A plain citation gets backticks, and code blocks, inline code, and paths stay as they are
 
 ### sync-skill-pages
 - **Stability**: experimental

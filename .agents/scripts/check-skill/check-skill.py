@@ -489,13 +489,24 @@ def known_skill_names() -> set[str]:
     return names
 
 
+MERMAID_BLOCK = re.compile(r"^```mermaid[^\n]*\n(.*?)^```", re.M | re.S)
+BACKTICKED = re.compile(r"`([a-z0-9][a-z0-9-]*)`")
+
+
+def cited_names(body: str, candidates: set[str]) -> set[str]:
+    """Skill names cited in a body: between backticks in prose, or as a name in a Mermaid diagram."""
+    found = set(BACKTICKED.findall(MERMAID_BLOCK.sub("", body))) & candidates
+    for block in MERMAID_BLOCK.findall(body):
+        found.update(
+            name
+            for name in candidates
+            if re.search(r"(?<![a-z0-9-])" + re.escape(name) + r"(?![a-z0-9-])", block)
+        )
+    return found
+
+
 def mentioned_skills(body: str, name: str, known: set[str]) -> set[str]:
-    return {
-        other
-        for other in known
-        if other != name
-        and re.search(r"(?<![a-z0-9-])" + re.escape(other) + r"(?![a-z0-9-])", body)
-    }
+    return cited_names(body, known) - {name}
 
 
 def related_errors(block: str, body: str, name: str, known: set[str]) -> list[Finding]:
