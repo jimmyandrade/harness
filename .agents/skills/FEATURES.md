@@ -29,6 +29,20 @@ How these skills relate is in `README.md`, in this folder.
   - [ ] Three open bot pull requests are handled oldest first, each merged only after the previous one turned the base branch green
   - [ ] An update to a transitive package finds the call sites of the direct package
 
+### comunicar-novidade-do-produto
+- **Stability**: experimental
+- **Description**: Decide whether merged work brings anything new for the people who use the product and, when it does, write the announcement without technical terms
+- **Properties**:
+  - Lives at `.agents/skills/comunicar-novidade-do-produto/SKILL.md`
+  - Reads the audience, the channel, and the language of the announcement from the project instructions
+  - Reads each pull request of a merge or a period, and decides by the diff, not by the commit type
+  - Without anything new for the audience, says so and writes no announcement, even when asked for one
+  - Writes what changes in practice, where people notice it, who is affected, what to do, and from when
+  - Shows the text and asks before publishing to a channel it can reach; otherwise hands the text over to copy
+- **Test Criteria**:
+  - [x] A day of 21 maintenance pull requests yields no announcement
+  - [ ] A period with a visible change yields an announcement without technical terms
+
 ### criar-commit
 - **Stability**: experimental
 - **Description**: Commit finished work as atomic commits with a message in the project language and pattern

@@ -1,0 +1,11 @@
+{
+  "skill_name": "comunicar-novidade-do-produto",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "O que mudou hoje no site? Quero avisar o time no grupo do WhatsApp.",
+      "expected_output": "Os 21 PRs do dia são lidos e classificados um a um, com o diff aberto quando o título não basta. Nenhum muda o que quem usa o site vê: atualizações de dependência, ferramentas internas e documentação. A resposta diz que não há novidade e que não precisa comunicar o time, sem escrever um comunicado.",
+      "files": []
+    }
+  ]
+}

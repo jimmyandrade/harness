@@ -12,6 +12,7 @@ Solid arrows come from `metadata.related`. Dotted arrows are skills cited in the
 flowchart LR
   subgraph core["Core"]
     avaliar_atualizacoes_de_dependencia["avaliar-atualizacoes-de-dependencia"]
+    comunicar_novidade_do_produto["comunicar-novidade-do-produto"]
     criar_commit["criar-commit"]
     criar_habilidade["criar-habilidade"]
     criar_pull_request["criar-pull-request"]
@@ -26,6 +27,7 @@ flowchart LR
   avaliar_atualizacoes_de_dependencia --> criar_pull_request
   avaliar_atualizacoes_de_dependencia --> evoluir_habilidade
   avaliar_atualizacoes_de_dependencia --> resolver_comentarios_de_revisao
+  comunicar_novidade_do_produto --> evoluir_habilidade
   criar_commit -.-> criar_pull_request
   criar_commit -.-> evoluir_habilidade
   criar_habilidade --> descrever_habilidade_ou_schema
