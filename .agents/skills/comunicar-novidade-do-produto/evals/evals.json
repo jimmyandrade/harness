@@ -1,0 +1,17 @@
+{
+  "skill_name": "comunicar-novidade-do-produto",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "O que mudou hoje no site? Quero avisar o time no grupo do WhatsApp.",
+      "expected_output": "Os 21 PRs do dia são lidos e classificados um a um, com o diff aberto quando o título não basta. Nenhum muda o que quem usa o site vê: atualizações de dependência, ferramentas internas e documentação. A resposta diz que não há novidade e que não precisa comunicar o time, sem escrever um comunicado.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Quero passar para a pessoa que entrou no time o que mudou nas duas últimas sprints, no site e no Notion, mas só o que eu criei ou alterei lá.",
+      "expected_output": "Os PRs do site e as páginas que a pessoa criou ou editou no Notion no período são lidos. Reuniões ficam de fora; consolidação de cadastros, reorganização de bancos e limpeza de páginas antigas entram como entrega. Correções são contadas pelo problema que se sentia (\"corrigimos um problema que...\"). O resultado é um comunicado só, com o período corrido no título e agrupado por área. Para o WhatsApp, o texto vem num bloco de código, com negrito de um asterisco, sem título nem separador.",
+      "files": []
+    }
+  ]
+}
