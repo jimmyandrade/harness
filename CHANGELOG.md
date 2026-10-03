@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.4](https://github.com/jimmyandrade/harness/compare/v0.3.3...v0.3.4) (2026-10-03)
+
+
+### Bug Fixes
+
+* install the core plugin per project in the Claude Code runbook ([#43](https://github.com/jimmyandrade/harness/issues/43)) ([7cf3478](https://github.com/jimmyandrade/harness/commit/7cf3478c29db8fea4d6d5869f01684677500fbb7))
+
 ## [0.3.3](https://github.com/jimmyandrade/harness/compare/v0.3.2...v0.3.3) (2026-10-03)
 
 
