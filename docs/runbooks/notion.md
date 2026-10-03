@@ -19,9 +19,30 @@ Set `data_source_id` to the data source of the skills database. Rename a propert
 
 Check: every value under `properties` and `status_options` names a property or an option of that data source.
 
-## 2. Give the integration access
+## 2. Create a connection for the sync
 
-Create a Notion integration, or reuse one, and share the skills database with it. Store its token as the repository secret `NOTION_TOKEN`. The command asks for the value.
+Create a Notion connection used only by the sync. Do not reuse one that a website, an automation, or a person also uses: a leaked token then reaches only the skills database, the token can be rotated alone, and page history names the sync as the editor.
+
+In the Notion integrations page (notion.so/profile/integrations), create a connection in the workspace of the skills database, with the API token method (an internal integration), not OAuth. Name it after the harness, since the name shows as the editor of each page.
+
+| Capability | Value |
+|---|---|
+| Read content | on |
+| Update content | on |
+| Insert content | on |
+| Read comments, insert comments | off |
+| User information | none |
+| Agent access | off |
+
+The sync queries the data source, creates pages, and updates them. It never deletes a page and never reads people, comments, or other pages.
+
+In the access tab of the connection, select only the skills database, not the page that contains it, which would grant everything under it. If another connection had access to the skills database, remove it there.
+
+Check: the access tab of the connection lists the skills database and nothing else.
+
+## 3. Store the token
+
+Store the token of the connection as the repository secret `NOTION_TOKEN`. The command asks for the value.
 
 ```bash
 gh secret set NOTION_TOKEN
@@ -29,7 +50,7 @@ gh secret set NOTION_TOKEN
 
 Check: `gh secret list` shows `NOTION_TOKEN`.
 
-## 3. Copy the sync workflow
+## 4. Copy the sync workflow
 
 The `skill-pages` workflow checks the skills again and then syncs them, on each push to `main`. Change `main` when the default branch has another name.
 
@@ -38,4 +59,4 @@ cp -Rn node_modules/harness/examples/notion/. .
 perl -pi -e "s/vX\.Y\.Z/$TAG/g" .github/workflows/skill-pages.yml
 ```
 
-Check: after a push to `main` that changes one skill, the sync step log has one line, `create` or `update`, and the page shows the new version.
+Check: after a push to `main` that changes one skill, the sync step log has one line, `create` or `update`, and the page shows the new version. An `object_not_found` error that asks to share the data source with the integration means the connection of step 2 has no access to the skills database.
