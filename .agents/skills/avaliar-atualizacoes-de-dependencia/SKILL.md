@@ -3,7 +3,7 @@ name: avaliar-atualizacoes-de-dependencia
 description: Use essa habilidade sempre que houver PR de atualização de dependência do Dependabot ou do Renovate para avaliar, testar ou mesclar, mesmo sem dizer o nome do bot. NÃO use para atualizar uma dependência à mão nem para PR que não seja de bot.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   notion: "false"
   related:
     - criar-commit
@@ -36,11 +36,11 @@ Liste os PRs abertos de cada um dos `Autores dos bots`, do mais antigo ao mais n
 
 ### Passo 2
 
-Mude para a branch do PR e veja quantos commits ela está atrás da base. Se estiver em conflito ou muito atrás, peça rebase ao bot e espere a branch nova. Rode o `Comando de instalação`. Ache o pacote atualizado e veja se ele é direto ou transitivo. Se for transitivo, suba pela árvore até o pacote direto. Numa action do GitHub, a própria action é o pacote direto. Registre a cadeia na checklist.
+Mude para a branch do PR e veja quantos commits ela está atrás da base. Se estiver em conflito ou muito atrás, peça rebase ao bot e espere a branch nova. Rode o `Comando de instalação`. Se o PR muda um subprojeto com manifesto próprio, instale, teste e faça o build nele, com os comandos dele, e não na raiz. Ache o pacote atualizado e veja se ele é direto ou transitivo. Se for transitivo, suba pela árvore até o pacote direto. Numa action do GitHub, a própria action é o pacote direto. Registre a cadeia na checklist.
 
 ### Passo 3
 
-Compare a versão que o PR traz com a mais recente do pacote direto. Leia as notas de cada versão do intervalo do PR, no repositório do pacote. Num salto grande, a descrição do PR do bot corta as versões mais antigas. Aponte breaking change, correção de segurança e exigência de peer dependency. Breaking change sem migração clara no projeto para a fila: pergunte à pessoa.
+Compare a versão que o PR traz com a mais recente do pacote direto. Leia as notas de cada versão do intervalo do PR, no repositório do pacote. Num salto grande, a descrição do PR do bot corta as versões mais antigas. Sem notas nem repositório público, compare a API pública das duas versões, como os arquivos de tipos. Aponte breaking change, correção de segurança e exigência de peer dependency. Breaking change sem migração clara no projeto para a fila: pergunte à pessoa.
 
 ### Passo 4
 
@@ -109,6 +109,7 @@ A biblioteca era transitiva. A árvore levou ao pacote direto que a puxa, e os p
 - O PR agrupa vários pacotes: faça os passos 2 a 4 para cada um. Um pacote 0.x do grupo pode quebrar ao subir o minor: leia as notas dele à parte.
 - A atualização de major espera aprovação no painel de dependências e ainda não virou PR: fica fora da fila.
 - Dois PRs conflitam depois de um merge e a ordem fica ambígua: pergunte à pessoa.
+- O pacote vai num artefato publicado à parte, como um worker ou uma função: o merge não atualiza o que está rodando. Diga na análise que falta publicar de novo.
 - Uma revisão obrigatória que você não consegue cumprir bloqueia o merge: pare e diga quem precisa aprovar.
 - O PR atualiza um pacote sem os que andam junto com ele, como os tipos, a peer dependency ou outro pacote do mesmo monorepo: pare e proponha agrupá-los, em `packageRules` com `groupName` no Renovate ou em `groups` no Dependabot.
 
