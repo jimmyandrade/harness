@@ -64,16 +64,6 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
   - [x] A committed change is compared with the base, and without a base with `HEAD`
   - [ ] A business workflow that calls the action fails on a skill that breaks a rule
 
-### backtick-skill-citations
-- **Stability**: deprecated
-- **Description**: Temporary codemod that wraps plain skill names in skill bodies in backticks, so existing citations keep counting under the backtick rule
-- **Properties**:
-  - Script `.agents/scripts/backtick-skill-citations/run.sh`, run from the project root or with `HARNESS_ROOT`; `--check` lists the changes without writing
-  - Leaves the frontmatter, fenced code blocks, inline code, paths, and the skill's own name alone
-  - Removed once every business harness has run it
-- **Test Criteria**:
-  - [x] A plain citation gets backticks, and code blocks, inline code, and paths stay as they are
-
 ### sync-skill-pages
 - **Stability**: experimental
 - **Description**: Publish each changed skill of a repository as a page in its Notion skills database
