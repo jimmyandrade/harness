@@ -3,8 +3,9 @@ name: resolver-comentarios-de-revisao
 description: Use essa habilidade sempre que um pull request tiver comentário de pessoa ou bot para tratar, responder ou resolver, inclusive antes do merge, mesmo sem dizer revisão. NÃO use em PR sem comentário, para abrir o PR, nem para revisar o PR de outra pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.1.3"
+  version: "0.2.0"
   related:
+    - evoluir-habilidade
     - criar-commit
     - criar-pull-request
 ---
@@ -18,6 +19,7 @@ Leia cada valor nas instruções do projeto. Quando um valor não estiver lá, u
 ```yaml
 "Repositório": ""
 "Idioma da resposta": "inglês"
+"Modo de aprendizado": "perguntar"
 ```
 
 ## Instruções
@@ -56,6 +58,10 @@ Responda cada thread em `Idioma da resposta`: o que mudou, com o commit, ou por 
 ### Passo 7
 
 Entregue um placar curto: aceitos, recusados, desatualizados e abertos, por autor. Diga se ainda há thread aberta. Devolva para quem chamou. O merge segue `criar-pull-request`, que decide também pelos checks.
+
+### Passo 8
+
+Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
 

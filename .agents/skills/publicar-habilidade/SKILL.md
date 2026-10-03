@@ -3,8 +3,9 @@ name: publicar-habilidade
 description: Use essa habilidade sempre que o pedido vier do Notion para criar, ativar, alterar, renomear, versionar, publicar, excluir, restaurar, revisar ou reorganizar uma habilidade. No Cursor, no Claude ou na sessão do repositório, segue o fluxo de commit do projeto. NÃO use para editar a página ou o banco Habilidades, nem para mesclar na mesma solicitação.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.6.0"
   related:
+    - evoluir-habilidade
     - criar-commit
     - criar-pull-request
 compatibility: Precisa de internet.
@@ -18,6 +19,7 @@ Leia cada valor nas instruções do projeto. Quando um valor não estiver lá, u
 
 ```yaml
 "Commit direto na base": "não"
+"Modo de aprendizado": "perguntar"
 ```
 
 ## Instruções
@@ -49,6 +51,10 @@ Não presuma autorização pelo pedido inicial, pela aprovação, pelos checks, 
 ### Passo 6
 
 Depois do merge aprovado e autorizado, deixe o GitHub Actions sincronizar com o Notion. Abaixo de 0.1.0 fica a opção de rascunho do mapeamento. Da 0.1.0 até antes da 1.0.0, a de validação. Da 1.x em diante, a de produção. Um rename mantém a mesma página e grava o nome novo. Se já houver página com o nome novo e outra com o nome anterior, a sincronização para. Em seguida, confira a sincronização no Notion.
+
+### Passo 7
+
+Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
 

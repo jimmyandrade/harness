@@ -3,7 +3,7 @@ name: criar-commit
 description: Use essa habilidade sempre que terminar um trabalho que mudou o repositório ou for commitar, separar commits ou escrever a mensagem, mesmo sem dizer commit. NÃO use para push, abrir PR, rebase nem merge (use criar-pull-request).
 metadata:
   author: jimmyandrade
-  version: "0.2.1"
+  version: "0.3.0"
   notion: "false"
 ---
 
@@ -22,6 +22,7 @@ Leia cada valor nas instruções do projeto. Quando um valor não estiver lá, u
 "Comando de testes": ""
 "Comando de build": ""
 "Comando de lint dos arquivos tocados": ""
+"Modo de aprendizado": "perguntar"
 ```
 
 ## Instruções
@@ -57,6 +58,10 @@ flowchart LR
   A{Pediu push ou PR?} -->|sim| B[criar-pull-request]
   A -->|não| C[Informe os hashes e pare]
 ```
+
+### Passo 8
+
+Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
 

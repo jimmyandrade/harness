@@ -3,7 +3,7 @@ name: revisar-habilidade
 description: Use essa habilidade sempre que for revisar uma skill já escrita, sinalizar descrição vaga, gatilho faltando ou problema de estrutura, ver risco de disparar demais ou de menos, ou sugerir casos a partir do propósito. NÃO use para criar a primeira versão, executar o teste e editar a skill, só medir tamanho, nem gravar a página no Notion. Pedido vindo do Notion segue publicar-habilidade.
 metadata:
   author: jimmyandrade
-  version: "0.2.11"
+  version: "0.3.0"
   related:
     - criar-habilidade
     - descrever-habilidade-ou-schema
@@ -16,7 +16,7 @@ metadata:
 ## Parâmetros de configuração
 
 ```yaml
-{}
+"Modo de aprendizado": "perguntar"
 ```
 
 ## Instruções
@@ -42,6 +42,10 @@ Não deve disparar: um tópico sem relação e um quase-acerto que o propósito 
 Funcional: cada critério de aceite já escrito, como `Exemplo` Gherkin em português. Cubra saída válida, chamada que sucede, erro tratado e limite, quando o propósito falar disso. Quem grava o arquivo é `evoluir-habilidade`.
 Comparação: o mesmo caso sem skill e com skill. Sem skill, idas e vindas, chamadas que falharam e tokens. Com skill, as perguntas que ainda faltaram.
 Quem grava e roda o disparo é `descrever-habilidade-ou-schema`. Quem grava o funcional, compara e edita a skill é `evoluir-habilidade`. Quem cria a primeira versão é `criar-habilidade`.
+
+### Passo 5
+
+Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
 

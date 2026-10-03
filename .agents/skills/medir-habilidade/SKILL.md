@@ -3,7 +3,7 @@ name: medir-habilidade
 description: Use essa habilidade sempre que for medir o tamanho de uma skill ou o profiling de uma execução no Claude, no Cursor ou em outro harness, mesmo sem dizer token, linha ou tempo. NÃO use no Notion, nem abra o repositório a partir dele, nem para testar se a skill atendeu o caso, evoluir a skill, nem gravar o eval.
 metadata:
   author: jimmyandrade
-  version: "0.3.2"
+  version: "0.4.0"
   related:
     - evoluir-habilidade
 compatibility: Precisa de Python.
@@ -14,7 +14,7 @@ compatibility: Precisa de Python.
 ## Parâmetros de configuração
 
 ```yaml
-{}
+"Modo de aprendizado": "perguntar"
 ```
 
 ## Instruções
@@ -38,6 +38,10 @@ Se o próximo trecho deixar o corpo sem folga abaixo do limite de tokens, diga i
 
 O profiling lê uma execução que já aconteceu. Diga a duração e o passo que gastou o tempo. Se a duração não estiver no registro, diga que falta. Não invente o número.
 Não diga se a skill atendeu o caso. Isso fica em `evoluir-habilidade`. Não grave `timing.json`, `grading.json` nem `benchmark.json`.
+
+### Passo 5
+
+Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
 

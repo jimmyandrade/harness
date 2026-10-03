@@ -3,9 +3,10 @@ name: avaliar-atualizacoes-de-dependencia
 description: Use essa habilidade sempre que houver PR de atualização de dependência do Dependabot ou do Renovate para avaliar, testar ou mesclar, mesmo sem dizer o nome do bot. NÃO use para atualizar uma dependência à mão nem para PR que não seja de bot.
 metadata:
   author: jimmyandrade
-  version: "0.3.5"
+  version: "0.4.0"
   notion: "false"
   related:
+    - evoluir-habilidade
     - criar-commit
     - criar-pull-request
     - resolver-comentarios-de-revisao
@@ -26,6 +27,7 @@ Leia cada valor nas instruções do projeto. Quando um valor não estiver lá, u
 "Comando de testes": ""
 "Comando de build": ""
 "Revisores": ""
+"Modo de aprendizado": "perguntar"
 ```
 
 ## Instruções
@@ -67,6 +69,10 @@ flowchart LR
 ```
 
 Os checks da base são os do commit de merge, de qualquer serviço: workflow, deploy ou outro. A fila termina quando não sobra PR de nenhum dos `Autores dos bots`.
+
+### Passo 8
+
+Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
 
