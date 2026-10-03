@@ -16,8 +16,11 @@ How these skills relate is in `README.md`, in this folder.
   - Reads the bot authors, the install, test, and build commands, and the reviewers from the project instructions
   - Walks a transitive package up to the direct one before looking for call sites and tests
   - Reads the release notes of the range and stops for the person on a breaking change without a clear migration
-  - Adds missing tests on the bot's branch instead of a separate pull request
-  - Hands comments to resolver-comentarios-de-revisao and the merge to criar-pull-request, and starts the next pull request only after the base branch CI is green
+  - Checks how far the bot's branch is behind the base and asks the bot to rebase when needed
+  - Adds missing integration tests, which exercise the project's code using the package, never the package itself, on the bot's branch instead of a separate pull request
+  - Fixes project code that the update breaks on the same branch, and runs the build even when the tests pass
+  - Stops and proposes a Renovate or Dependabot group when a package arrives without the types, peer dependency, or monorepo packages that move with it
+  - Hands comments to resolver-comentarios-de-revisao and the merge to criar-pull-request, and starts the next pull request only after the checks of the merge commit on the base branch, from any service, are green
 - **Test Criteria**:
   - [ ] Three open bot pull requests are handled oldest first, each merged only after the previous one turned the base branch green
   - [ ] An update to a transitive package finds the call sites of the direct package

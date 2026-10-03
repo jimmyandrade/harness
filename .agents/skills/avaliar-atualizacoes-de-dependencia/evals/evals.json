@@ -1,4 +1,11 @@
 {
   "skill_name": "avaliar-atualizacoes-de-dependencia",
-  "evals": []
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "pode abrir a issue e começar o #5",
+      "expected_output": "A fila de PRs do Renovate aparece do mais antigo ao mais novo. No PR do React, os quatro pacotes são diretos e as notas de versão não trazem breaking change. Os pontos de uso afetados pela mudança de comportamento são listados. O build quebra pelos tipos novos, a correção vai na branch do bot, testes e build passam, a análise é comentada no PR, e o merge espera o ok da pessoa e os checks verdes. Depois do merge, os checks do commit na base ficam verdes.",
+      "files": []
+    }
+  ]
 }
