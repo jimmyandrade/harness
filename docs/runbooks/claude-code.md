@@ -33,9 +33,9 @@ perl -pi -e "s/vX\.Y\.Z/$TAG/g" .claude/settings.json
 
 Check: `jq '.enabledPlugins' .claude/settings.json` shows `harness-core@<marketplace>` as `true`.
 
-## 3. Install the plugin on the machine
+## 3. Install the plugin for the project
 
-Run this once per machine. It installs the plugin for the user, so it works in every project. In the desktop app, typing `/plugin` opens the plugin screen and does not take arguments, so use the terminal.
+Run this once per machine, from the root of each project that enables the plugin. Install it with `--scope project`: a user install enables the plugin in every project, including one that already gets the core skills through a link, where each skill then shows twice. In the desktop app, typing `/plugin` opens the plugin screen and does not take arguments, so use the terminal.
 
 Find the `claude` command. When it is not on `PATH`, macOS has the copy bundled with the desktop app.
 
@@ -49,10 +49,10 @@ Read the marketplace from `.claude/settings.json`, add it, and install the plugi
 MARKETPLACE="$(jq -r '.extraKnownMarketplaces | keys | first' .claude/settings.json)"
 REPO="$(jq -r --arg m "$MARKETPLACE" '.extraKnownMarketplaces[$m].source.repo' .claude/settings.json)"
 "$CLAUDE" plugin marketplace add "$REPO"
-"$CLAUDE" plugin install "harness-core@$MARKETPLACE"
+"$CLAUDE" plugin install "harness-core@$MARKETPLACE" --scope project
 ```
 
-Check: the last command prints `Successfully installed plugin: harness-core@<marketplace>`.
+Check: the last command prints `Successfully installed plugin: harness-core@<marketplace> (scope: project)`. When `.claude/settings.json` only changes in formatting, discard that change.
 
 ## 4. Confirm in a new session
 
