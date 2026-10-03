@@ -59,6 +59,7 @@ How these skills relate is in `README.md`, in this folder.
   - Does not edit code, write a non-skill page, only tune a description, or write the skill page in Notion
   - A request that comes from Notion follows publicar-habilidade
   - Cites another skill by its name between backticks, or in a Mermaid diagram node, so the checker and the skill graph recognize the citation
+  - Gives every new skill the `Modo de aprendizado` parameter and a last step that hands over to evoluir-habilidade
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses code edits, a non-skill page, description-only work, and writing the skill in Notion
@@ -111,6 +112,7 @@ How these skills relate is in `README.md`, in this folder.
   - Does not create the first version of a skill, only check whether the description triggers, only review without running, or write the skill page in Notion
   - A request that comes from Notion follows publicar-habilidade
   - Size and run profile follow medir-habilidade
+  - Runs at the end of every core skill, following the `Modo de aprendizado` parameter (`sim`, `não`, `perguntar`, default `perguntar`): with yes, one commit per lesson on an English-named branch, pushed, with a draft pull request from the first commit, marked ready when the person ends the sequence
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description says the test edits the validated skill, and refuses creating the first version, only checking whether the description triggers, only reviewing without running, and writing the skill page in Notion

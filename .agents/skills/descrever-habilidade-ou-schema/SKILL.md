@@ -3,7 +3,7 @@ name: descrever-habilidade-ou-schema
 description: Use essa habilidade sempre que for redigir, corrigir ou testar se a descrição de uma skill ou schema dispara, mesmo sem dizer descrição, em subdisparo ou sobredisparo, em tarefa óbvia, em paráfrase e fora de tópico sem relação. NÃO use para escrever o corpo da skill, avaliar a qualidade da saída, descrever produto, nem gravar a página no Notion. Pedido vindo do Notion segue publicar-habilidade.
 metadata:
   author: jimmyandrade
-  version: "0.15.4"
+  version: "0.16.0"
   related:
     - evoluir-habilidade
     - publicar-habilidade
@@ -21,6 +21,7 @@ metadata:
 ```yaml
 "Tokens do catálogo": 100
 "Caracteres da descrição": 1024
+"Modo de aprendizado": "perguntar"
 ```
 
 ## Instruções
@@ -88,6 +89,10 @@ Antes de aceitar, confira:
 3. Fecha com `NÃO use para`.
 4. Cabe em `Caracteres da descrição`, e nome mais descrição cabem em `Tokens do catálogo`.
 5. O treino passa, ou a melhora parou e a validação escolheu a rodada.
+
+### Passo 9
+
+Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
 

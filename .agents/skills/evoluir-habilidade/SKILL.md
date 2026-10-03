@@ -3,7 +3,7 @@ name: evoluir-habilidade
 description: Use essa habilidade sempre que for testar uma skill, mesmo sem dizer evoluir, inclusive o Gherkin e a comparação com e sem skill, resultado inconsistente, falha de chamada ou correção da pessoa. O teste sempre edita a skill validada. NÃO use para criar a primeira versão, só ver se a descrição dispara, só revisar sem executar, nem gravar a página no Notion. Pedido vindo do Notion segue publicar-habilidade.
 metadata:
   author: jimmyandrade
-  version: "0.15.8"
+  version: "0.16.0"
   related:
     - descrever-habilidade-ou-schema
     - medir-habilidade
@@ -17,6 +17,7 @@ metadata:
 
 ```yaml
 "Tokens do corpo": 5000
+"Modo de aprendizado": "perguntar"
 ```
 
 ## Instruções
@@ -70,6 +71,10 @@ Leia o registro da execução, não só o resultado final. Se o agente gasta tem
 
 Sempre que a skill for executada, compare os rastros do agente entre os casos. Se ele reinventar sozinho a mesma lógica em cada execução, como gerar um gráfico, analisar um formato ou validar a saída, avise a pessoa.
 Proponha um script testado uma vez. Com o aceite, grave em `scripts/` quando só esta skill usa, ou em `.agents/scripts/<nome>/` quando várias usam. Passe a chamá-lo. A lógica deixa de ser reescrita a cada execução. O script que valida as próprias skills é o caso global: a checagem roda igual, em vez de o agente rederivar as regras.
+
+### Passo 7
+
+Quando outra habilidade chega aqui ao terminar, siga `Modo de aprendizado`. Com `não`, encerre. Com `perguntar`, pergunte uma vez se a pessoa quer registrar as lições da execução. Com `sim`, ou com a resposta sim, grave cada lição como um commit numa branch com nome em inglês e envie a branch. No primeiro commit, abra um PR em rascunho e, a cada lição, atualize a descrição dele. Tire do rascunho quando a pessoa encerrar a sequência.
 
 ## Problemas comuns
 

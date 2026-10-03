@@ -3,7 +3,7 @@ name: criar-habilidade
 description: Use essa habilidade sempre que for criar, adicionar ou escrever uma skill, mesmo sem dizer skill. NÃO use para editar código, escrever página que não seja skill, otimizar só a descrição, nem gravar a skill no Notion. Pedido vindo do Notion segue publicar-habilidade.
 metadata:
   author: jimmyandrade
-  version: "3.7.0"
+  version: "3.8.0"
   related:
     - descrever-habilidade-ou-schema
     - evoluir-habilidade
@@ -18,6 +18,7 @@ metadata:
 "Tokens do catálogo": 100
 "Linhas": 500
 "Tokens do corpo": 5000
+"Modo de aprendizado": "perguntar"
 ```
 
 ## Instruções
@@ -36,7 +37,7 @@ Leia relatórios reais da equipe. Incorpore o esquema, o modo de falha e o proce
 ### Passo 3
 
 Escreva nome, descrição, metadados e corpo.
-O primeiro heading de nível 2 é `Parâmetros de configuração`, com um bloco `yaml`. O passo cita a chave. Depois vêm `Instruções`, `Problemas comuns`, `Exemplos de entrada e saída`, `Casos-limite`, `Pegadinhas` e `Scripts disponíveis`. A primeira frase é `Estes exemplos ilustram fatos. Eles podem não estar no data source.` A entrada é um heading de nível 3 e a saída é o parágrafo seguinte, com uma linha em branco entre pares. Não escreva `Entrada:` nem `Saída:`. Cada heading de nível 3 em `Instruções` é `Passo 1`, `Passo 2`. Roteamento para outra habilidade, ou mais de um desfecho, fica num flowchart Mermaid no sentido configurado. Em `Problemas comuns`, cada problema é um heading de nível 3, um parágrafo que começa com `Se você` e, em seguida, uma lista ordenada.
+O primeiro heading de nível 2 é `Parâmetros de configuração`, com um bloco `yaml`. O passo cita a chave. Depois vêm `Instruções`, `Problemas comuns`, `Exemplos de entrada e saída`, `Casos-limite`, `Pegadinhas` e `Scripts disponíveis`. A primeira frase é `Estes exemplos ilustram fatos. Eles podem não estar no data source.` A entrada é um heading de nível 3 e a saída é o parágrafo seguinte, com uma linha em branco entre pares. Não escreva `Entrada:` nem `Saída:`. Cada heading de nível 3 em `Instruções` é `Passo 1`, `Passo 2`. Roteamento para outra habilidade, ou mais de um desfecho, fica num flowchart Mermaid no sentido configurado. Em `Problemas comuns`, cada problema é um heading de nível 3, um parágrafo que começa com `Se você` e, em seguida, uma lista ordenada. O bloco de parâmetros inclui `"Modo de aprendizado": "perguntar"`, e o último passo de `Instruções` é `Ao terminar, siga evoluir-habilidade conforme Modo de aprendizado.`
 
 ### Passo 4
 
@@ -134,6 +135,10 @@ Os passos não citam comando nem nome de arquivo. O passo diz o que será feito.
 Comando curto fica nessa seção, com versão fixa quando o ecossistema permite. Comando longo vira script testado em `scripts/`.
 Se um pacote já resolve, cite o comando nessa seção e não crie `scripts/`. O pré-requisito também vai em `compatibility`.
 No Notion o script pode faltar. A lista ordenada separa os dois caminhos. O passo escolhe no início, sem repetir o comando.
+
+### Passo 17
+
+Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
 
@@ -245,19 +250,6 @@ Se você for saber se algo já existe e o nome não começar com `procurar-`, se
 1. Para saber se já existe, comece com `procurar-` e termine com a entidade.
 2. Quando cadastrar, revisar e editar usam os mesmos critérios, comece com `definir-` e termine com a entidade. Uma skill só.
 3. Para só cadastrar, comece com `criar-`. Para só revisar, comece com `revisar-`. Venda ou despesa começa com `lancar-`.
-
-### Skill para apagar
-
-Se você criar `apagar-tarefa`, ou o mesmo verbo para outra entidade, a skill executa uma ação destrutiva.
-
-1. Não crie a skill.
-
-### Entidade espremida
-
-Se você cortar a entidade para caber em duas palavras, o nome deixa de dizer o que a skill faz.
-
-1. A primeira palavra é o verbo.
-2. As seguintes formam a entidade, até 64 caracteres.
 
 ### Nome do escopo antigo
 

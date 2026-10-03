@@ -3,9 +3,10 @@ name: criar-pull-request
 description: Use essa habilidade sempre que for abrir PR, subir uma correção, mandar para a branch principal ou mesclar mudança no repositório, mesmo sem dizer PR. NÃO use para responder comentário de revisão nem para só commitar (use criar-commit).
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.6.0"
   notion: "false"
   related:
+    - evoluir-habilidade
     - criar-commit
     - resolver-comentarios-de-revisao
 ---
@@ -26,6 +27,7 @@ Leia cada valor nas instruções do projeto. Quando um valor não estiver lá, u
 "Timeout do push (ms)": 600000
 "Duração do hook de pre-push (min)": 0
 "Exigir CI verde": "sim"
+"Modo de aprendizado": "perguntar"
 ```
 
 ## Instruções
@@ -85,6 +87,10 @@ Mescle só com `Merge`. Se o modo automático negar o merge, não tente de outro
 ### Passo 9
 
 Na resposta final, diga o estado de cada etapa: commit, push, PR, CI e merge. Se perguntarem "já mesclou?", responda primeiro sim ou não e depois o que falta.
+
+### Passo 10
+
+Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
 
