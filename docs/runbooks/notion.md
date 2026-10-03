@@ -4,7 +4,7 @@ locale: en
 
 # Publish the skills in Notion
 
-GitHub is the write source. On each push to the default branch, the sync action writes one Habilidades page per changed skill, including the core skills. Nobody edits those pages in Notion. Run this runbook from the root of the business repository, after `business-repository.md`, with `TAG` from its step 1.
+GitHub is the write source. On each push to the default branch, the sync action writes one page per changed skill, including the core skills, into the skills database of the workspace. Nobody edits those pages in Notion. The database can have any name; businesses in Brazil often call it Habilidades. Run this runbook from the root of the business repository, after `business-repository.md`, with `TAG` from its step 1.
 
 Each step ends with a check.
 
@@ -15,13 +15,13 @@ mkdir -p .agents/mappings
 cp -n node_modules/harness/.agents/mappings/skill-page.notion.example.json .agents/mappings/skill-page.notion.json
 ```
 
-Set `data_source_id` to the Habilidades data source of the workspace. Rename a property or a status option when the database uses another name. The status follows the version: below 0.1.0 is `draft`, from 0.1.0 with major 0 is `validation`, from 1 onward is `production`.
+Set `data_source_id` to the data source of the skills database. Rename a property or a status option when the database uses another name. The status follows the version: below 0.1.0 is `draft`, from 0.1.0 with major 0 is `validation`, from 1 onward is `production`.
 
 Check: every value under `properties` and `status_options` names a property or an option of that data source.
 
 ## 2. Give the integration access
 
-Create a Notion integration, or reuse one, and share the Habilidades database with it. Store its token as the repository secret `NOTION_TOKEN`. The command asks for the value.
+Create a Notion integration, or reuse one, and share the skills database with it. Store its token as the repository secret `NOTION_TOKEN`. The command asks for the value.
 
 ```bash
 gh secret set NOTION_TOKEN
