@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/jimmyandrade/harness/compare/v0.4.0...v0.5.0) (2026-10-03)
+
+
+### Features
+
+* **avaliar-atualizacoes-de-dependencia:** work through dependency update pull requests ([#50](https://github.com/jimmyandrade/harness/issues/50)) ([831551d](https://github.com/jimmyandrade/harness/commit/831551d0541278565bb1780345f5223fa9f51f96))
+
 ## [0.4.0](https://github.com/jimmyandrade/harness/compare/v0.3.5...v0.4.0) (2026-10-03)
 
 
