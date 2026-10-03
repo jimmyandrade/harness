@@ -3,7 +3,7 @@ name: avaliar-atualizacoes-de-dependencia
 description: Use essa habilidade sempre que houver PR de atualização de dependência do Dependabot ou do Renovate para avaliar, testar ou mesclar, mesmo sem dizer o nome do bot. NÃO use para atualizar uma dependência à mão nem para PR que não seja de bot.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   notion: "false"
   related:
     - criar-commit
@@ -36,7 +36,7 @@ Liste os PRs abertos de cada um dos `Autores dos bots`, do mais antigo ao mais n
 
 ### Passo 2
 
-Mude para a branch do PR e rode o `Comando de instalação`. Ache o pacote atualizado e veja se ele é direto ou transitivo. Se for transitivo, suba pela árvore até o pacote direto. Numa action do GitHub, a própria action é o pacote direto. Registre a cadeia na checklist.
+Mude para a branch do PR e veja quantos commits ela está atrás da base. Se estiver em conflito ou muito atrás, peça rebase ao bot e espere a branch nova. Rode o `Comando de instalação`. Ache o pacote atualizado e veja se ele é direto ou transitivo. Se for transitivo, suba pela árvore até o pacote direto. Numa action do GitHub, a própria action é o pacote direto. Registre a cadeia na checklist.
 
 ### Passo 3
 
@@ -44,11 +44,11 @@ Compare a versão que o PR traz com a mais recente do pacote direto. Leia as not
 
 ### Passo 4
 
-Ache cada ponto de uso do pacote direto, no código e nos testes. Numa action, os pontos de uso são os jobs que a usam. Confira se cada ponto tem teste que falharia se a integração quebrasse. Se faltar, escreva o teste na própria branch do PR, seguindo `criar-commit`, e envie a branch.
+Ache cada ponto de uso do pacote direto, no código e nos testes. Numa action, os pontos de uso são os jobs que a usam. Confira se cada ponto tem teste de integração: o teste exercita o código do projeto usando o pacote e falharia se a integração quebrasse. Nunca teste o pacote em si, que já tem os próprios testes. Se faltar, escreva o teste na própria branch do PR, seguindo `criar-commit`, e envie a branch.
 
 ### Passo 5
 
-Rode o `Comando de testes` e o `Comando de build`. Falha que pede decisão de produto, e não só teste, para a fila: pergunte à pessoa.
+Rode o `Comando de testes` e o `Comando de build`. Se a atualização quebrar o código do projeto, corrija na própria branch do PR, seguindo `criar-commit`, e envie a branch. Falha que pede decisão de produto, e não só código, para a fila: pergunte à pessoa.
 
 ### Passo 6
 
@@ -61,12 +61,12 @@ flowchart LR
   A{PR tem comentário?} -->|sim| B[Siga resolver-comentarios-de-revisao]
   B --> C[Mescle seguindo criar-pull-request]
   A -->|não| C
-  C --> D{CI da base depois do merge}
+  C --> D{Checks do commit de merge na base}
   D -->|verde| E[Próximo PR da fila]
   D -->|vermelho| F[Pare e mostre a falha]
 ```
 
-A fila termina quando não sobra PR de nenhum dos `Autores dos bots`.
+Os checks da base são os do commit de merge, de qualquer serviço: workflow, deploy ou outro. A fila termina quando não sobra PR de nenhum dos `Autores dos bots`.
 
 ## Problemas comuns
 
@@ -110,10 +110,12 @@ A biblioteca era transitiva. A árvore levou ao pacote direto que a puxa, e os p
 - A atualização de major espera aprovação no painel de dependências e ainda não virou PR: fica fora da fila.
 - Dois PRs conflitam depois de um merge e a ordem fica ambígua: pergunte à pessoa.
 - Uma revisão obrigatória que você não consegue cumprir bloqueia o merge: pare e diga quem precisa aprovar.
+- O PR atualiza um pacote sem os que andam junto com ele, como os tipos, a peer dependency ou outro pacote do mesmo monorepo: pare e proponha agrupá-los, em `packageRules` com `groupName` no Renovate ou em `groups` no Dependabot.
 
 ## Pegadinhas
 
 - Depois que outra pessoa envia commit para a branch, o Dependabot para de fazer rebase dela e o Renovate para de atualizá-la. Daí em diante, quem mantém a branch em dia é você.
+- Uma atualização só de tipos pode quebrar a checagem de tipos e o build sem falhar nenhum teste. Rode o build mesmo com os testes verdes.
 - A árvore de dependências só mostra o pacote depois da instalação na branch do PR. Antes dela, ela mostra a versão antiga ou nada.
 
 ## Scripts disponíveis
