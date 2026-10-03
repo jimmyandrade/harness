@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.2](https://github.com/jimmyandrade/harness/compare/v0.3.1...v0.3.2) (2026-10-03)
+
+
+### Documentation
+
+* add a runbook to connect MCP hosts to the project servers ([#38](https://github.com/jimmyandrade/harness/issues/38)) ([fcdf720](https://github.com/jimmyandrade/harness/commit/fcdf720f0fb6027f47ed771598ad45a5e33106cc))
+
 ## [0.3.1](https://github.com/jimmyandrade/harness/compare/v0.3.0...v0.3.1) (2026-10-03)
 
 
