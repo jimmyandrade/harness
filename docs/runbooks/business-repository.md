@@ -54,7 +54,7 @@ Check: the checker exits 0, and `.agents/skills/README.md` exists.
 
 Commit the files and open a pull request.
 
-Check: the `check` job of the `skills` workflow passes. After the merge, the Dependency Dashboard issue lists `harness core`.
+Check: the `check` job of the `skills` workflow passes.
 
 ## Next
 
@@ -62,3 +62,4 @@ Check: the `check` job of the `skills` workflow passes. After the merge, the Dep
 - `claude-code.md` to load the skills in Claude Code.
 - `notion.md` to publish the skills as Notion pages.
 - `mcp-hosts.md` to connect Claude Desktop, Windsurf, and Cline to the vocabulary server.
+- `renovate.md`, optional, to move the core pins on each release.
