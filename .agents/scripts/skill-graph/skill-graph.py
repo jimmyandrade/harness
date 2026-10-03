@@ -3,7 +3,8 @@
 
 The project is HARNESS_ROOT, or the working directory when it is unset. When the
 project is not this harness, the core group shows a fixed harness-core node and
-only the core skills that the project cites, and only the project draws arrows, so a core release that adds or
+only the core skills that project skills declare in metadata.related; body
+citations only link project skills, and only the project draws arrows, so a core release that adds or
 relates core skills leaves the project graph unchanged.
 A skill that lists metadata.related draws solid arrows to those skills. A skill
 without that list draws dotted arrows to the skills its body cites.
@@ -73,8 +74,9 @@ def read_skills(root: Path, layer: str) -> list[Skill]:
     return skills
 
 
-def link(skills: list[Skill]) -> None:
+def link(skills: list[Skill], cite_layers: set[str] | None = None) -> None:
     names = {skill.name for skill in skills}
+    citable = {skill.name for skill in skills if cite_layers is None or skill.layer in cite_layers}
     for skill in skills:
         if skill.related is not None:
             skill.declared = True
@@ -82,7 +84,7 @@ def link(skills: list[Skill]) -> None:
         else:
             skill.edges = {
                 other
-                for other in names
+                for other in citable
                 if other != skill.name
                 and re.search(r"(?<![a-z0-9-])" + re.escape(other) + r"(?![a-z0-9-])", skill.body)
             }
@@ -139,13 +141,13 @@ def build(project: Path, core: Path) -> str:
         organization = config_value(roots, "organization", "name")
         skills = read_skills(project, "project") + read_skills(core, "core")
         groups = [("project", organization), ("core", "Core")]
-        link(skills)
+        link(skills, cite_layers={"project"})
         cited = {target for skill in skills if skill.layer == "project" for target in skill.edges}
         skills = [skill for skill in skills if skill.layer == "project" or skill.name in cited]
         for skill in skills:
             if skill.layer == "core":
                 skill.edges = set()
-        note = " The Core group shows harness-core and only the core skills this project cites; the core repository has the full graph."
+        note = " The Core group shows harness-core and only the core skills that project skills declare in `metadata.related`; the core repository has the full graph."
         return render(skills, groups, direction, note, marker=True)
     link(skills)
     return render(skills, groups, direction)
