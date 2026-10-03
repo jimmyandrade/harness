@@ -2,7 +2,7 @@ name: Sync skill pages
 description: Create or update one Notion page per changed skill of the calling repository, with that repository's mapping.
 inputs:
   notion-token:
-    description: Notion integration token with access to the Habilidades data source.
+    description: Notion integration token with access to the skills data source.
     required: true
   base:
     description: Commit the change starts from.
