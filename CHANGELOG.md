@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.0](https://github.com/jimmyandrade/harness/compare/v0.7.3...v0.8.0) (2026-10-03)
+
+
+### Features
+
+* add a learning mode at the end of every core skill ([#78](https://github.com/jimmyandrade/harness/issues/78)) ([15ce741](https://github.com/jimmyandrade/harness/commit/15ce741142e603e1b1a4acdacd2afe7ff829c90c))
+
 ## [0.7.3](https://github.com/jimmyandrade/harness/compare/v0.7.2...v0.7.3) (2026-10-03)
 
 
