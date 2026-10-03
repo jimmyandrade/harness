@@ -68,7 +68,7 @@ flowchart LR
   business -- "npm dependency, actions, marketplace, pinned to a tag" --> core
   checker -- "checks" --> bskills
   sync -- "reads" --> mapping
-  sync -- "writes pages" --> notion[("Notion Habilidades")]
+  sync -- "writes pages" --> notion[("Notion skills database")]
   vocab -- "reads" --> glossary
   skills -- "harness-core plugin" --> claude["Claude Code"]
   bskills -- "links in .claude/skills, .cursor/skills" --> agents["Claude Code, Cursor"]
@@ -121,7 +121,7 @@ None. People reach the core through their agent (Claude Code, Cursor), GitHub, a
 
 ### 4.2. Notion
 
-- Name: Habilidades database of each business
+- Name: Skills database of each business
 - Type: Notion data source
 - Purpose: Readable copy of the skills for the people of that workspace; only the sync writes it
 
@@ -141,7 +141,7 @@ None. People reach the core through their agent (Claude Code, Cursor), GitHub, a
 ## 7. Security Considerations
 
 - Authentication: The Notion token is a secret of each business harness, passed to the sync action.
-- Authorization: The Notion integration sees only the Habilidades database shared with it.
+- Authorization: The Notion integration sees only the skills database shared with it.
 - Data Encryption: Delegated to GitHub secrets and the Notion API over HTTPS.
 - Key Security Tools/Practices: This repository is public and holds no token, workspace, database, or business name. Details are in `SECURITY.md`.
 
