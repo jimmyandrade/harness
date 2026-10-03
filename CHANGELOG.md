@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.3](https://github.com/jimmyandrade/harness/compare/v0.3.2...v0.3.3) (2026-10-03)
+
+
+### Bug Fixes
+
+* keep the MCP server list out of the plugin root ([#41](https://github.com/jimmyandrade/harness/issues/41)) ([ea1d499](https://github.com/jimmyandrade/harness/commit/ea1d499fcdffa0ef025a6b098d3cbdb2830814e4))
+
 ## [0.3.2](https://github.com/jimmyandrade/harness/compare/v0.3.1...v0.3.2) (2026-10-03)
 
 
