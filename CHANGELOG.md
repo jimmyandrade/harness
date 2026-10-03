@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/jimmyandrade/harness/compare/v0.6.2...v0.7.0) (2026-10-03)
+
+
+### Features
+
+* **avaliar-atualizacoes-de-dependencia:** apply the lessons of the first real run ([#63](https://github.com/jimmyandrade/harness/issues/63)) ([b11e238](https://github.com/jimmyandrade/harness/commit/b11e23898df7bca6412a5a08dfd13b6df5344208))
+
 ## [0.6.2](https://github.com/jimmyandrade/harness/compare/v0.6.1...v0.6.2) (2026-10-03)
 
 
