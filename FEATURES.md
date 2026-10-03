@@ -61,7 +61,7 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
 
 ### sync-skill-pages
 - **Stability**: experimental
-- **Description**: Publish each changed skill of a repository as a page in its Notion Habilidades database
+- **Description**: Publish each changed skill of a repository as a page in its Notion skills database
 - **Properties**:
   - Composite action at `.github/actions/sync-skill-pages/` and script `.agents/scripts/sync-skill-pages/sync-skill-pages.ts`
   - The mapping lives in the calling repository: data source id, property names, and status option names

@@ -43,7 +43,7 @@ locale: en
 
 ## Notion sync
 
-- GitHub is the write source. The sync action is the only writer of the Habilidades pages. Do not edit those pages or that database in Notion.
+- GitHub is the write source. The sync action is the only writer of the skill pages in Notion. Do not edit those pages or that database in Notion.
 - The schema of a skill page is `.agents/schemas/skill-page.schema.json`. Each business keeps its own mapping, with its data source id, property names, and status option names. `.agents/mappings/skill-page.notion.example.json` is the template.
 - A version below 0.1.0 is the draft option. A version from 0.1.0 whose major number is 0 is the validation option. A version from 1 onward is the production option.
 
