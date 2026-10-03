@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.2](https://github.com/jimmyandrade/harness/compare/v0.7.1...v0.7.2) (2026-10-03)
+
+
+### Bug Fixes
+
+* **check-skill:** compare the skill version with the base commit ([#71](https://github.com/jimmyandrade/harness/issues/71)) ([c7f278a](https://github.com/jimmyandrade/harness/commit/c7f278ad49dda68760efd833857920c9422ab258)), closes [#70](https://github.com/jimmyandrade/harness/issues/70)
+
 ## [0.7.1](https://github.com/jimmyandrade/harness/compare/v0.7.0...v0.7.1) (2026-10-03)
 
 
