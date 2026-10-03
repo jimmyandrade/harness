@@ -1020,17 +1020,12 @@ def rename_alias_findings() -> list[tuple[Path, Finding]]:
     ]
 
 
+def version_reference() -> str:
+    return summary_base() or "HEAD"
+
+
 def committed_text(relative: Path) -> str | None:
-    result = subprocess.run(
-        ["git", "show", f"HEAD:{relative.as_posix()}"],
-        cwd=ROOT,
-        capture_output=True,
-        text=True,
-        check=False,
-    )
-    if result.returncode != 0:
-        return None
-    return result.stdout
+    return revision_text(version_reference(), relative.as_posix())
 
 
 GIVEN_PT = re.compile(r"^\s*(Dado|Dada|Dados|Dadas)\b(.*)$")
