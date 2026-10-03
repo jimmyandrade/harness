@@ -48,8 +48,12 @@ How these skills relate is in `README.md`, in this folder.
   - Skill at `.agents/skills/criar-pull-request/`
   - Reads the repository, base branch, merge method, PR language, test and build commands, and push timing from the project instructions
   - Follows the pull request template of the repository when there is one
+  - Before a merge, hands pending review comments from people or bots to resolver-comentarios-de-revisao, and holds the merge while a thread waits for the person
+  - `Exigir CI verde`, on by default, holds the merge while a check fails or is pending; off, it merges and reports the checks that did not pass
 - **Test Criteria**:
   - [ ] A request to push to the base branch opens a pull request instead
+  - [ ] A merge request on a pull request with an unresolved thread runs resolver-comentarios-de-revisao first
+  - [ ] A merge request with a failing check stops and names the check while `Exigir CI verde` is on
 
 ### descrever-habilidade-ou-schema
 - **Stability**: experimental
