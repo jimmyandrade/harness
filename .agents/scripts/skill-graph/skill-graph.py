@@ -7,7 +7,8 @@ only the core skills that project skills declare in metadata.related; body
 citations only link project skills, and only the project draws arrows, so a core release that adds or
 relates core skills leaves the project graph unchanged.
 A skill that lists metadata.related draws solid arrows to those skills. A skill
-without that list draws dotted arrows to the skills its body cites.
+without that list draws dotted arrows to the skills its body cites: names between
+backticks in prose, or names in a Mermaid diagram.
 --check exits 1 when the README differs from what this script would write.
 """
 
@@ -82,12 +83,23 @@ def link(skills: list[Skill], cite_layers: set[str] | None = None) -> None:
             skill.declared = True
             skill.edges = {item for item in skill.related if item in names and item != skill.name}
         else:
-            skill.edges = {
-                other
-                for other in citable
-                if other != skill.name
-                and re.search(r"(?<![a-z0-9-])" + re.escape(other) + r"(?![a-z0-9-])", skill.body)
-            }
+            skill.edges = cited_names(skill.body, citable) - {skill.name}
+
+
+MERMAID_BLOCK = re.compile(r"^```mermaid[^\n]*\n(.*?)^```", re.M | re.S)
+BACKTICKED = re.compile(r"`([a-z0-9][a-z0-9-]*)`")
+
+
+def cited_names(body: str, candidates: set[str]) -> set[str]:
+    """Skill names cited in a body: between backticks in prose, or as a name in a Mermaid diagram."""
+    found = set(BACKTICKED.findall(MERMAID_BLOCK.sub("", body))) & candidates
+    for block in MERMAID_BLOCK.findall(body):
+        found.update(
+            name
+            for name in candidates
+            if re.search(r"(?<![a-z0-9-])" + re.escape(name) + r"(?![a-z0-9-])", block)
+        )
+    return found
 
 
 def node(name: str) -> str:

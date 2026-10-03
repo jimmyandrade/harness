@@ -19,6 +19,7 @@ harness/
 │   ├── scripts/
 │   │   ├── check-skill/            # Skill checker (Python), run by Lefthook and the check-skill action
 │   │   ├── skill-graph/            # Writes .agents/skills/README.md, the Mermaid graph of skills
+│   │   ├── backtick-skill-citations/  # Temporary codemod: backticks around plain skill citations
 │   │   ├── skill-folder-icon/      # macOS folder icon for each skill, run by Lefthook
 │   │   └── sync-skill-pages/       # Notion sync (TypeScript), run by the sync-skill-pages action
 │   └── skills/                     # Shared skills, one <name>/SKILL.md each

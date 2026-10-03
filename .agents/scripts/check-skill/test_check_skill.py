@@ -59,10 +59,10 @@ class RelatedSkillsTest(unittest.TestCase):
         self.assertIn("criar-commit", self.known)
 
     def test_a_skill_without_related_is_not_checked(self) -> None:
-        self.assertEqual(self.errors(None, "Siga fechar-pedido."), [])
+        self.assertEqual(self.errors(None, "Siga `fechar-pedido`."), [])
 
     def test_a_listed_skill_that_the_body_cites_passes(self) -> None:
-        self.assertEqual(self.errors(["fechar-pedido", "criar-commit"], "Siga fechar-pedido e criar-commit."), [])
+        self.assertEqual(self.errors(["fechar-pedido", "criar-commit"], "Siga `fechar-pedido` e `criar-commit`."), [])
 
     def test_a_name_that_is_not_a_skill_fails(self) -> None:
         self.assertEqual(
@@ -72,7 +72,16 @@ class RelatedSkillsTest(unittest.TestCase):
 
     def test_a_cited_skill_missing_from_the_list_fails(self) -> None:
         self.assertEqual(
-            self.errors([], "Depois, siga fechar-pedido."),
+            self.errors([], "Depois, siga `fechar-pedido`."),
+            ["the body cites fechar-pedido; add it to metadata.related"],
+        )
+
+    def test_a_plain_name_in_prose_is_not_a_citation(self) -> None:
+        self.assertEqual(self.errors([], "Depois, siga fechar-pedido."), [])
+
+    def test_a_name_in_a_mermaid_diagram_is_a_citation(self) -> None:
+        self.assertEqual(
+            self.errors([], "```mermaid\nflowchart LR\n  A --> B[Siga fechar-pedido]\n```\n"),
             ["the body cites fechar-pedido; add it to metadata.related"],
         )
 
@@ -86,7 +95,7 @@ class RelatedSkillsTest(unittest.TestCase):
         )
 
     def test_a_longer_name_is_not_a_citation_of_a_shorter_one(self) -> None:
-        self.assertEqual(self.errors([], "Use fechar-pedido-antigo."), [])
+        self.assertEqual(self.errors([], "Use `fechar-pedido-antigo`."), [])
 
 
 class GherkinTest(unittest.TestCase):
