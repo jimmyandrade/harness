@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.2](https://github.com/jimmyandrade/harness/compare/v0.6.1...v0.6.2) (2026-10-03)
+
+
+### Documentation
+
+* add an optional Renovate runbook ([#60](https://github.com/jimmyandrade/harness/issues/60)) ([c3633c0](https://github.com/jimmyandrade/harness/commit/c3633c08eba2be05c2e4309aaeb36b5b0505ddb5))
+
 ## [0.6.1](https://github.com/jimmyandrade/harness/compare/v0.6.0...v0.6.1) (2026-10-03)
 
 
