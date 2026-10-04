@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.0](https://github.com/jimmyandrade/harness/compare/v0.11.1...v0.12.0) (2026-10-04)
+
+
+### Features
+
+* **check-skill:** comment the skill table on the pull request ([#94](https://github.com/jimmyandrade/harness/issues/94)) ([3d20650](https://github.com/jimmyandrade/harness/commit/3d2065030e7e717faf117f4ed3a325626f6e1aa2))
+
 ## [0.11.1](https://github.com/jimmyandrade/harness/compare/v0.11.0...v0.11.1) (2026-10-04)
 
 
