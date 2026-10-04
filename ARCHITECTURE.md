@@ -18,6 +18,7 @@ harness/
 │   ├── schemas/                    # JSON Schema of a skill page
 │   ├── scripts/
 │   │   ├── check-skill/            # Skill checker (Python), run by Lefthook and the check-skill action
+│   │   ├── compose-skill/          # Composes a business extension with the core skill it extends
 │   │   ├── skill-graph/            # Writes .agents/skills/README.md, the Mermaid graph of skills
 │   │   ├── skill-folder-icon/      # macOS folder icon for each skill, run by Lefthook
 │   │   └── sync-skill-pages/       # Notion sync (TypeScript), run by the sync-skill-pages action
@@ -91,21 +92,28 @@ None. People reach the core through their agent (Claude Code, Cursor), GitHub, a
 - Technologies: Python 3.14
 - Deployment: Lefthook on commit; composite action in CI
 
-#### 3.2.2. Notion sync
+#### 3.2.2. Skill composer
+
+- Name: `compose-skill`
+- Description: Composes a business skill that declares `metadata.extends` with the core skill of the same name, filling its extension points, as decided in `docs/adr/0007-extend-a-core-skill-in-a-business-harness.md`. The checker measures the composed text.
+- Technologies: Python 3.14, standard library
+- Deployment: Imported by the checker; CLI for one skill
+
+#### 3.2.3. Notion sync
 
 - Name: `sync-skill-pages`
 - Description: Creates or updates one Notion page per changed skill, through the caller's mapping.
 - Technologies: TypeScript on Node.js 24, `@notionhq/client`
 - Deployment: Composite action on push to the default branch of a business harness
 
-#### 3.2.3. Vocabulary API and MCP
+#### 3.2.4. Vocabulary API and MCP
 
 - Name: `vocabulary`
 - Description: Reads and writes the glossary of the open project: look up a term, report which tokens of a text exist, insert and update terms.
 - Technologies: TypeScript on Node.js 24, Zod
 - Deployment: MCP server started by the `core` plugin; local HTTP server on 127.0.0.1; CLI
 
-#### 3.2.4. Claude Code plugin
+#### 3.2.5. Claude Code plugin
 
 - Name: `core`
 - Description: Ships the shared skills and starts the vocabulary MCP server.

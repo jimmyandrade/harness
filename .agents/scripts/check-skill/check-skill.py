@@ -11,6 +11,7 @@ A key missing from the project .agents/config.yml falls back to the one in this 
 from __future__ import annotations
 
 import hashlib
+import importlib.util
 import json
 import os
 import re
@@ -61,6 +62,17 @@ def repo_root(start: Path) -> Path:
 ROOT = repo_root(Path(os.environ.get("HARNESS_ROOT") or Path.cwd()).resolve())
 CORE = repo_root(Path(__file__).resolve().parent)
 CONFIGS = [ROOT / ".agents" / "config.yml", CORE / ".agents" / "config.yml"]
+
+
+def load_composer():
+    path = CORE / ".agents" / "scripts" / "compose-skill" / "compose-skill.py"
+    spec = importlib.util.spec_from_file_location("compose_skill", path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+composer = load_composer()
 
 
 @dataclass(frozen=True)
@@ -642,6 +654,37 @@ def spec_errors(
     return errors
 
 
+def extension_point_errors(body_text: str) -> list[Finding]:
+    try:
+        declared = composer.points(body_text)
+    except ValueError as exc:
+        return [Finding(str(exc))]
+    if declared and composer.CORE_NOTICE not in body_text:
+        return [Finding(f'a skill with extension points must say "{composer.CORE_NOTICE}"')]
+    return []
+
+
+def extension_errors(
+    name: str, extends: str, body_text: str, core_names: set[str]
+) -> list[Finding]:
+    if ROOT == CORE:
+        return [Finding("a core skill cannot extend another skill")]
+    if extends != f"core:{name}":
+        return [Finding(f"metadata.extends must be core:{name}")]
+    if name not in core_names:
+        return [Finding(f"the core has no skill {name} to extend")]
+    errors: list[Finding] = []
+    paragraphs = [part.strip() for part in re.split(r"\n\s*\n", body_text) if part.strip()]
+    opening = paragraphs[1] if len(paragraphs) > 1 and paragraphs[0].startswith("# ") else None
+    if opening != composer.extension_notice(name):
+        errors.append(Finding(f'an extension opens with "{composer.extension_notice(name)}"'))
+    allowed = {composer.POINTS_SECTION, *composer.APPENDABLE}
+    for title in composer.sections(body_text):
+        if title not in allowed:
+            errors.append(Finding(f"an extension has only {composer.POINTS_SECTION} and the sections it appends, not {title}"))
+    return errors
+
+
 def instruction_errors(body: list[tuple[int, str]], name: str) -> list[Finding]:
     in_fence = False
     h2s: list[tuple[int, str]] = []
@@ -1166,6 +1209,7 @@ def main() -> int:
     results: dict[str, list[tuple[Path, Finding]]] = {}
     measures: dict[str, tuple[str | None, int | None]] = {}
     known = known_skill_names()
+    core_names = {path.parent.name for path in skill_files(CORE)} if ROOT != CORE else set()
     for path in requested_files(ROOT, sys.argv[1:]):
         relative = path.relative_to(ROOT)
         key = skill_key(relative)
@@ -1207,8 +1251,26 @@ def main() -> int:
                 body_line = body[-1][0] if body else last_line
                 add(Finding(f"{body_tokens} body tokens (limit {body_limit})", body_line))
             skill_author, version = metadata_fields(block, relative)
+            extends = composer.extends(text)
+            for finding in extension_point_errors(body_text):
+                add(finding)
+            if extends is not None:
+                for finding in extension_errors(name, extends, body_text, core_names):
+                    add(finding)
+                core_path = CORE / ".agents" / "skills" / name / "SKILL.md"
+                if ROOT != CORE and core_path.is_file():
+                    try:
+                        composed = composer.compose(core_path.read_text(encoding="utf-8"), text)
+                        composed_tokens = len(encoding.encode(composed[composed.find("\n---", 4) + 4 :]))
+                        if composed_tokens >= body_limit:
+                            body_line = body[-1][0] if body else last_line
+                            add(Finding(f"{composed_tokens} composed body tokens with the core (limit {body_limit})", body_line))
+                    except ValueError as exc:
+                        add(Finding(str(exc)))
+            elif name in core_names:
+                add(Finding(f"{name} exists in the core; declare metadata.extends: core:{name} to extend it"))
             draft = semver_key(version)
-            if draft is None or draft[0] != 0 or draft[1] != 0:
+            if extends is None and (draft is None or draft[0] != 0 or draft[1] != 0):
                 for finding in instruction_errors(body, name):
                     add(finding)
                 for finding in flowchart_errors(body, direction):

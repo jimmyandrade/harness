@@ -40,6 +40,8 @@ class Skill:
     body: str
     edges: set[str] = field(default_factory=set)
     declared: bool = False
+    extends: str | None = None
+    node_id: str = ""
 
 
 def config_value(roots: list[Path], section: str, key: str) -> str:
@@ -70,6 +72,7 @@ def read_skills(root: Path, layer: str) -> list[Skill]:
                 layer=layer,
                 related=[str(item) for item in related] if isinstance(related, list) else None,
                 body=text[end + 4 :],
+                extends=str(metadata["extends"]) if metadata.get("extends") else None,
             )
         )
     return skills
@@ -134,11 +137,14 @@ def render(
         lines.append(f'  subgraph {layer}["{title}"]')
         if show_marker:
             lines.append(f"    {CORE_MARKER}")
-        lines.extend(f'    {node(skill.name)}["{skill.name}"]' for skill in members)
+        lines.extend(f'    {skill.node_id or node(skill.name)}["{skill.name}"]' for skill in members)
         lines.append("  end")
     for skill in skills:
         arrow = "-->" if skill.declared else "-.->"
-        lines.extend(f"  {node(skill.name)} {arrow} {node(target)}" for target in sorted(skill.edges))
+        lines.extend(f"  {skill.node_id or node(skill.name)} {arrow} {node(target)}" for target in sorted(skill.edges))
+    for skill in skills:
+        if skill.layer == "project" and skill.extends:
+            lines.append(f"  {node(skill.name)} -- extends --> {node(skill.name)}_core")
     lines.append("```")
     return "\n".join(lines) + "\n"
 
@@ -155,11 +161,16 @@ def build(project: Path, core: Path) -> str:
         groups = [("project", organization), ("core", "Core")]
         link(skills, cite_layers={"project"})
         cited = {target for skill in skills if skill.layer == "project" for target in skill.edges}
-        skills = [skill for skill in skills if skill.layer == "project" or skill.name in cited]
+        extended = {skill.name for skill in skills if skill.layer == "project" and skill.extends}
+        skills = [skill for skill in skills if skill.layer == "project" or skill.name in cited | extended]
         for skill in skills:
             if skill.layer == "core":
                 skill.edges = set()
+                if skill.name in extended:
+                    skill.node_id = node(skill.name) + "_core"
         note = " The Core group shows the core plugin and only the core skills that project skills declare in `metadata.related`; the core repository has the full graph."
+        if extended:
+            note += " An arrow labeled extends goes from a project skill to the core skill it extends."
         return render(skills, groups, direction, note, marker=True)
     link(skills)
     return render(skills, groups, direction)

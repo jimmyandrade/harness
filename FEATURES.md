@@ -40,11 +40,13 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
   - Script `.agents/scripts/skill-graph/run-graph.sh` writes `.agents/skills/README.md`, which GitHub renders when the folder is opened
   - In a business harness, the project skills and the core skills are separate groups. The Core group shows a fixed node for the `core` plugin and only the core skills that project skills declare in `metadata.related`; body citations only link project skills, and arrows only leave project skills, so a core release that adds or relates core skills leaves the project graph unchanged
   - A solid arrow comes from `metadata.related`. A dotted arrow is a skill cited in the body of a skill that does not declare `metadata.related` yet. A citation is a skill name between backticks in prose, or a name in a Mermaid diagram
+  - A project skill that declares `metadata.extends` draws an arrow labeled extends to a separate node for the core skill it extends
   - `run-check.sh` fails when the README is out of date
 - **Test Criteria**:
   - [x] Declared related skills draw solid arrows, and cited skills draw dotted arrows
   - [x] The project and the core are separate groups
   - [x] A core release that adds or relates skills leaves a project graph unchanged, including a core skill whose name a project body already mentions
+  - [x] An extension draws an arrow to a separate core node, and a graph without extensions does not change
   - [x] A stale README fails the check
 
 ### check-skill
@@ -57,12 +59,27 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
   - A changed skill must raise `metadata.version` above its copy at `base` when `base` and `head` are given, and above its copy at `HEAD` otherwise
   - When a skill declares `metadata.related`, each name must be a skill in the project or in the core, and every skill the body cites must be listed. A citation is a skill name between backticks in prose, or a name in a Mermaid diagram; a plain name in prose is not one
   - Each Gherkin file in a skill's `features/` starts with `# language: <locale.gherkin>`. With `pt`, every Given starts with `Dado que`, because `Dado` is the reserved keyword and does not agree with the noun
+  - A project skill with the name of a core skill must declare `metadata.extends: core:<name>`. An extension opens with the fixed sentence, fills only points the core declares, and has no other sections than `Pontos de extensão` and the ones it appends. Its body composed with the core stays under the body token limit
+  - A core skill with extension points says that an extension comes first
 - **Test Criteria**:
+  - [x] An extension that names another skill, a skill the core lacks, or a section it cannot append fails
   - [x] A project with a partial `.agents/config.yml` uses the core limits
   - [x] A related name that is not a skill fails, and a cited skill missing from `metadata.related` fails
   - [x] A feature without the configured language line fails, and in Portuguese a Given such as `Dada uma` or `Dado um` fails
   - [x] A committed change is compared with the base, and without a base with `HEAD`
   - [ ] A business workflow that calls the action fails on a skill that breaks a rule
+
+### compose-skill
+- **Stability**: experimental
+- **Description**: Compose a business extension with the core skill it extends into one skill
+- **Properties**:
+  - Script `.agents/scripts/compose-skill/compose-skill.py <project root> <core root> <skill name>` prints the composed `SKILL.md`
+  - Each `<!-- extension-point: <name> -->` block takes the extension text, or keeps its default. The markers are dropped, the frontmatter comes from the extension, and the extension sections are appended to the core sections with the same title
+  - Format and rules: `docs/adr/0007-extend-a-core-skill-in-a-business-harness.md`
+- **Test Criteria**:
+  - [x] A filled point replaces the default, and an unfilled one keeps it
+  - [x] A point the core does not declare, a point declared twice, and an unclosed marker fail
+  - [ ] The Notion sync publishes the composed page
 
 ### sync-skill-pages
 - **Stability**: experimental

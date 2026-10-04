@@ -119,3 +119,32 @@ class SkillGraphTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ExtensionGraphTest(unittest.TestCase):
+    def setUp(self) -> None:
+        self.tmp = tempfile.TemporaryDirectory()
+        base = Path(self.tmp.name)
+        self.core = make_root(base / "core", "core")
+        self.project = make_root(base / "project", "example")
+        write_skill(self.core, "definir-pedido")
+        folder = self.project / ".agents" / "skills" / "definir-pedido"
+        folder.mkdir(parents=True)
+        (folder / "SKILL.md").write_text(
+            "---\nname: definir-pedido\ndescription: x\nmetadata:\n  author: example\n"
+            '  version: "0.1.0"\n  extends: core:definir-pedido\n---\n\n# Definir pedido\n'
+        )
+
+    def tearDown(self) -> None:
+        self.tmp.cleanup()
+
+    def test_should_draw_an_extends_arrow_to_a_separate_core_node(self) -> None:
+        text = graph.build(self.project, self.core)
+        self.assertIn('definir_pedido["definir-pedido"]', text)
+        self.assertIn('definir_pedido_core["definir-pedido"]', text)
+        self.assertIn("definir_pedido -- extends --> definir_pedido_core", text)
+
+    def test_should_leave_a_graph_without_extensions_unchanged(self) -> None:
+        (self.project / ".agents" / "skills" / "definir-pedido" / "SKILL.md").unlink()
+        write_skill(self.project, "abrir-pedido")
+        self.assertNotIn("extends", graph.build(self.project, self.core))

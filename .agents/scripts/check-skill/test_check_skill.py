@@ -183,3 +183,46 @@ class VersionReferenceTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ExtensionTest(unittest.TestCase):
+    def setUp(self) -> None:
+        self.tmp = tempfile.TemporaryDirectory()
+        self.project = Path(self.tmp.name)
+        (self.project / ".agents").mkdir()
+        (self.project / ".agents" / "config.yml").write_text("organization:\n  name: example\n")
+        self.checker = load_checker(self.project)
+        self.core_names = {path.parent.name for path in self.checker.skill_files(self.checker.CORE)}
+        self.notice = self.checker.composer.extension_notice("criar-commit")
+
+    def tearDown(self) -> None:
+        self.tmp.cleanup()
+        os.environ.pop("HARNESS_ROOT", None)
+
+    def errors(self, body: str, extends: str = "core:criar-commit", name: str = "criar-commit") -> list[str]:
+        return [finding.message for finding in self.checker.extension_errors(name, extends, body, self.core_names)]
+
+    def test_should_accept_points_and_appended_sections(self) -> None:
+        body = f"\n# Criar commit\n\n{self.notice}\n\n## Pontos de extensão\n\n### tipo\n\nX.\n\n## Pegadinhas\n\n- Y.\n"
+        self.assertEqual(self.errors(body), [])
+
+    def test_should_reject_an_extension_without_the_opening(self) -> None:
+        self.assertEqual(len(self.errors("\n# Criar commit\n\nOutra frase.\n")), 1)
+
+    def test_should_reject_a_section_that_is_not_appendable(self) -> None:
+        body = f"\n# Criar commit\n\n{self.notice}\n\n## Instruções\n\nX.\n"
+        self.assertEqual(
+            self.errors(body),
+            ["an extension has only Pontos de extensão and the sections it appends, not Instruções"],
+        )
+
+    def test_should_require_extends_to_name_the_same_core_skill(self) -> None:
+        self.assertEqual(self.errors("", extends="core:criar-pull-request"), ["metadata.extends must be core:criar-commit"])
+
+    def test_should_reject_a_skill_the_core_does_not_have(self) -> None:
+        self.assertEqual(self.errors("", extends="core:abrir-pedido", name="abrir-pedido"), ["the core has no skill abrir-pedido to extend"])
+
+    def test_should_require_the_notice_on_a_skill_with_extension_points(self) -> None:
+        body = "<!-- extension-point: tipo -->\nX.\n<!-- /extension-point -->\n"
+        self.assertEqual(len(self.checker.extension_point_errors(body)), 1)
+        self.assertEqual(self.checker.extension_point_errors(body + self.checker.composer.CORE_NOTICE + "\n"), [])
