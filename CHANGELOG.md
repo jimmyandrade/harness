@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.11.1](https://github.com/jimmyandrade/harness/compare/v0.11.0...v0.11.1) (2026-10-04)
+
+
+### Bug Fixes
+
+* **sync-skill-pages:** skip files at the root of the skills folder ([#92](https://github.com/jimmyandrade/harness/issues/92)) ([a9489f7](https://github.com/jimmyandrade/harness/commit/a9489f737fca2cb7dc7f57f4ff14ce934edffa10))
+
 ## [0.11.0](https://github.com/jimmyandrade/harness/compare/v0.10.0...v0.11.0) (2026-10-04)
 
 
