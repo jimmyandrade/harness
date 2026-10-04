@@ -5,6 +5,6 @@
     }
   },
   "enabledPlugins": {
-    "harness-core@harness": true
+    "core@harness": true
   }
 }

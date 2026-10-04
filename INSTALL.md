@@ -16,7 +16,7 @@ Each runbook is a list of steps with a command and a check, written for an agent
 |---|---|---|
 | [`docs/runbooks/business-repository.md`](docs/runbooks/business-repository.md) | Once per business repository | Layout, core pin, checker, CI check, marketplace |
 | [`docs/runbooks/cursor.md`](docs/runbooks/cursor.md) | Once per project | The links Cursor follows to the project and core skills |
-| [`docs/runbooks/claude-code.md`](docs/runbooks/claude-code.md) | Once per project, and the install step once per machine | The project skills link and the `harness-core` plugin |
+| [`docs/runbooks/claude-code.md`](docs/runbooks/claude-code.md) | Once per project, and the install step once per machine | The project skills link and the `core` plugin |
 | [`docs/runbooks/notion.md`](docs/runbooks/notion.md) | Once per business repository | The mapping, a connection used only by the sync, the token, and the sync job |
 | [`docs/runbooks/mcp-hosts.md`](docs/runbooks/mcp-hosts.md) | Once per project, and the host links once per machine | The `.agents/mcp.json` server list and the links Cursor, Claude Desktop, Windsurf, and Cline read |
 | [`docs/runbooks/renovate.md`](docs/runbooks/renovate.md) | Once per repository, optional | The Renovate preset, app, and portal settings that move the core pins on each release |
@@ -35,4 +35,4 @@ Check: both commands exit 0.
 
 ## Vocabulary MCP
 
-The `harness-core` plugin starts the `vocabulary` server. It reads the glossary of the project that is open, in `.agents/glossary/`. `HARNESS_GLOSSARY_DIR` points it at another directory. Inside this repository, `.mcp.json` starts the same server from the source tree.
+The `core` plugin starts the `vocabulary` server. It reads the glossary of the project that is open, in `.agents/glossary/`. `HARNESS_GLOSSARY_DIR` points it at another directory. Inside this repository, `.mcp.json` starts the same server from the source tree.

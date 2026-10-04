@@ -2,7 +2,7 @@
 """Write .agents/skills/README.md: a Mermaid graph of how skills relate.
 
 The project is HARNESS_ROOT, or the working directory when it is unset. When the
-project is not this harness, the core group shows a fixed harness-core node and
+project is not this harness, the core group shows a fixed node for the core plugin and
 only the core skills that project skills declare in metadata.related; body
 citations only link project skills, and only the project draws arrows, so a core release that adds or
 relates core skills leaves the project graph unchanged.
@@ -106,7 +106,7 @@ def node(name: str) -> str:
     return re.sub(r"[^a-z0-9]", "_", name)
 
 
-CORE_MARKER = 'harness_core(["harness-core"])'
+CORE_MARKER = 'core_plugin(["core"])'
 
 
 def render(
@@ -159,7 +159,7 @@ def build(project: Path, core: Path) -> str:
         for skill in skills:
             if skill.layer == "core":
                 skill.edges = set()
-        note = " The Core group shows harness-core and only the core skills that project skills declare in `metadata.related`; the core repository has the full graph."
+        note = " The Core group shows the core plugin and only the core skills that project skills declare in `metadata.related`; the core repository has the full graph."
         return render(skills, groups, direction, note, marker=True)
     link(skills)
     return render(skills, groups, direction)

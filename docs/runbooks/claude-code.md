@@ -4,7 +4,7 @@ locale: en
 
 # Load the skills in Claude Code
 
-Claude Code reads project skills only from `.claude/skills`, and follows symbolic links. The core skills come from the `harness-core` plugin, named `harness-core:<skill>`. The repository can enable the plugin, but each machine installs it once. Run this runbook from the root of the project.
+Claude Code reads project skills only from `.claude/skills`, and follows symbolic links. The core skills come from the `core` plugin, named `core:<skill>`. The repository can enable the plugin, but each machine installs it once. Run this runbook from the root of the project.
 
 Each step ends with a check.
 
@@ -23,7 +23,7 @@ Check: `ls .claude/skills/` lists the skills of the project.
 
 ## 2. Enable the plugin in the repository
 
-`.claude/settings.json` names the marketplace and enables `harness-core`. A business harness already has it from `business-repository.md`, step 3, pointing at its own marketplace. A project that only uses the core copies the example that points at this repository.
+`.claude/settings.json` names the marketplace and enables `core`. A business harness already has it from `business-repository.md`, step 3, pointing at its own marketplace. A project that only uses the core copies the example that points at this repository.
 
 ```bash
 TAG="$(gh release view --repo jimmyandrade/harness --json tagName --jq .tagName)"
@@ -31,7 +31,7 @@ cp -Rn node_modules/harness/examples/project/. .
 perl -pi -e "s/vX\.Y\.Z/$TAG/g" .claude/settings.json
 ```
 
-Check: `jq '.enabledPlugins' .claude/settings.json` shows `harness-core@<marketplace>` as `true`.
+Check: `jq '.enabledPlugins' .claude/settings.json` shows `core@<marketplace>` as `true`.
 
 ## 3. Install the plugin for the project
 
@@ -49,16 +49,16 @@ Read the marketplace from `.claude/settings.json`, add it, and install the plugi
 MARKETPLACE="$(jq -r '.extraKnownMarketplaces | keys | first' .claude/settings.json)"
 REPO="$(jq -r --arg m "$MARKETPLACE" '.extraKnownMarketplaces[$m].source.repo' .claude/settings.json)"
 "$CLAUDE" plugin marketplace add "$REPO"
-"$CLAUDE" plugin install "harness-core@$MARKETPLACE" --scope project
+"$CLAUDE" plugin install "core@$MARKETPLACE" --scope project
 ```
 
-Check: the last command prints `Successfully installed plugin: harness-core@<marketplace> (scope: project)`. When `.claude/settings.json` only changes in formatting, discard that change.
+Check: the last command prints `Successfully installed plugin: core@<marketplace> (scope: project)`. When `.claude/settings.json` only changes in formatting, discard that change.
 
 ## 4. Confirm in a new session
 
 Open a new Claude Code session in the project. Sessions opened before the install do not see the plugin.
 
-Check: typing `/harness-core:` lists the core skills, and typing the start of a project skill lists it with `(project)`.
+Check: typing `/core:` lists the core skills, and typing the start of a project skill lists it with `(project)`.
 
 ## Do not
 

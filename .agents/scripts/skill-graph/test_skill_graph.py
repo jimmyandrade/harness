@@ -94,11 +94,11 @@ class SkillGraphTest(unittest.TestCase):
         write_skill(self.project, "abrir-pedido")
         text = graph.build(self.project, self.core)
         self.assertIn('subgraph core["Core"]', text)
-        self.assertIn('harness_core(["harness-core"])', text)
+        self.assertIn('core_plugin(["core"])', text)
         self.assertNotIn('criar_commit["criar-commit"]', text)
 
-    def test_the_core_graph_has_no_harness_core_node(self) -> None:
-        self.assertNotIn("harness_core", graph.build(self.core, self.core))
+    def test_the_core_graph_has_no_core_plugin_node(self) -> None:
+        self.assertNotIn("core_plugin", graph.build(self.core, self.core))
 
     def test_a_body_citation_of_a_core_skill_added_later_leaves_the_project_graph_unchanged(self) -> None:
         write_skill(self.project, "abrir-pedido", None, "Depois, revisar-pedido.")
