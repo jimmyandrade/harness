@@ -111,6 +111,8 @@ test("paths collapse to the skill directory", () => {
       ".agents/skills/definir-tarefa/SKILL.md",
       ".agents/skills/definir-tarefa/workspace/note.md",
       ".agents/skills/procurar-tarefa/SKILL.md",
+      ".agents/skills/README.md",
+      ".agents/skills/FEATURES.md",
       "CONTRIBUTING.md",
     ]),
     ["definir-tarefa", "procurar-tarefa"],
