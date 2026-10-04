@@ -3,12 +3,13 @@ name: criar-pull-request
 description: Use essa habilidade sempre que for abrir PR, subir uma correção, mandar para a branch principal ou mesclar mudança no repositório, mesmo sem dizer PR. NÃO use para responder comentário de revisão nem para só commitar (use criar-commit).
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.7.0"
   notion: "false"
   related:
     - evoluir-habilidade
     - criar-commit
     - resolver-comentarios-de-revisao
+    - comunicar-novidade-do-produto
 ---
 
 # Criar pull request
@@ -27,6 +28,7 @@ Leia cada valor nas instruções do projeto. Quando um valor não estiver lá, u
 "Timeout do push (ms)": 600000
 "Duração do hook de pre-push (min)": 0
 "Exigir CI verde": "sim"
+"Comunicar novidade após o merge": "sim"
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -78,11 +80,13 @@ flowchart LR
   E -->|verdes, ou sem Exigir CI verde| G[Merge com delete-branch]
   G -->|bloqueado pelo modo automático| H[Dê o comando e pare]
   G -->|ok| I[Confirme o estado MERGED e o hash]
+  I --> J[Siga comunicar-novidade-do-produto]
 ```
 
 Comentário pendente é thread de revisão sem resolver, revisão que pede mudança ou comentário da conversa sem resposta, de pessoa ou de bot. Aviso de bot que só informa, como link de preview, não conta. Thread que espera decisão da pessoa segura o merge até ela decidir.
 Leia os checks uma vez. Se estiverem pendentes, não espere em loop: diga quais faltam e pare. Com `Exigir CI verde` igual a `não`, mescle mesmo assim e diga na resposta quais checks não passaram.
 Mescle só com `Merge`. Se o modo automático negar o merge, não tente de outro jeito: nada de auto-merge, API ou outra ferramenta. Entregue o comando pronto e diga que a decisão é da pessoa.
+Com `Comunicar novidade após o merge` igual a `sim`, siga `comunicar-novidade-do-produto` para o PR mesclado. Faça o mesmo quando a pessoa avisar que mesclou: confirme o estado MERGED antes.
 
 ### Passo 9
 

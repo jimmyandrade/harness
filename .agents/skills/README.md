@@ -33,6 +33,7 @@ flowchart LR
   criar_habilidade --> descrever_habilidade_ou_schema
   criar_habilidade --> evoluir_habilidade
   criar_habilidade --> publicar_habilidade
+  criar_pull_request --> comunicar_novidade_do_produto
   criar_pull_request --> criar_commit
   criar_pull_request --> evoluir_habilidade
   criar_pull_request --> resolver_comentarios_de_revisao
