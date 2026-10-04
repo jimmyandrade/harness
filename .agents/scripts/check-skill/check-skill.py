@@ -269,8 +269,24 @@ def write_summary(
     encoding,
 ) -> None:
     path = os.environ.get("GITHUB_STEP_SUMMARY")
-    if not path:
-        return
+    if path:
+        with Path(path).open("a", encoding="utf-8") as summary:
+            summary.write(summary_markdown(results, measures, body_limit, encoding))
+    report = os.environ.get("CHECK_SKILL_REPORT")
+    if report:
+        text = summary_markdown(results, measures, body_limit, encoding, only_changed=True)
+        if text:
+            Path(report).write_text(text, encoding="utf-8")
+
+
+def summary_markdown(
+    results: dict[str, list[tuple[Path, Finding]]],
+    measures: dict[str, tuple[str | None, int | None]],
+    body_limit: int,
+    encoding,
+    only_changed: bool = False,
+) -> str:
+    """The skill check table. With only_changed, only new, changed, or failing skills, and "" when none."""
     changed = changed_skill_names()
     base = summary_base()
     head = summary_head()
@@ -290,6 +306,8 @@ def write_summary(
             kind = "changed"
         else:
             kind = "unchanged"
+        if only_changed and kind not in {"new", "changed"} and not items:
+            continue
         label = result_label(not items, kind)
         version_text = pair_text(old_version, version, compared=compared)
         token_text = pair_text(
@@ -330,6 +348,8 @@ def write_summary(
             for target, finding in items:
                 where = f"{target}:{finding.line}" if finding.line else str(target)
                 finding_lines.append(f"  - `{where}` {finding.message}")
+    if only_changed and not ranked:
+        return ""
     lines = [
         "## Skill check",
         "",
@@ -344,8 +364,7 @@ def write_summary(
         lines.append("")
         lines.extend(finding_lines)
         lines.append("")
-    with Path(path).open("a", encoding="utf-8") as summary:
-        summary.write("\n".join(lines) + "\n")
+    return "\n".join(lines) + "\n"
 
 
 def section_value(texts: str | list[str], section: str, key: str) -> str:

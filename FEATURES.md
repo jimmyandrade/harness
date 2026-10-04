@@ -54,6 +54,7 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
   - Composite action at `.github/actions/check-skill/` and script `.agents/scripts/check-skill/run-check.sh`
   - Reads the project from `HARNESS_ROOT` or the working directory, and its `.agents/config.yml` with the core fallback
   - `base` and `head` limit the check to the skills that changed
+  - On a pull request, the action keeps one comment with the table of the skills the pull request adds, changes, or fails: version, body tokens, and share of the limit, before and after. Each push edits that comment. `comment: false` turns it off. The calling workflow needs `permissions: pull-requests: write`; without it the step warns and the check result stands
   - A changed skill must raise `metadata.version` above its copy at `base` when `base` and `head` are given, and above its copy at `HEAD` otherwise
   - When a skill declares `metadata.related`, each name must be a skill in the project or in the core, and every skill the body cites must be listed. A citation is a skill name between backticks in prose, or a name in a Mermaid diagram; a plain name in prose is not one
   - Each Gherkin file in a skill's `features/` starts with `# language: <locale.gherkin>`. With `pt`, every Given starts with `Dado que`, because `Dado` is the reserved keyword and does not agree with the noun
@@ -62,6 +63,8 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
   - [x] A related name that is not a skill fails, and a cited skill missing from `metadata.related` fails
   - [x] A feature without the configured language line fails, and in Portuguese a Given such as `Dada uma` or `Dado um` fails
   - [x] A committed change is compared with the base, and without a base with `HEAD`
+  - [x] The comment is created when none has the marker, edited when one has it, and says no skill changes when a later push reverts them
+  - [ ] A business pull request that changes a skill shows the comment, and a second push edits it
   - [ ] A business workflow that calls the action fails on a skill that breaks a rule
 
 ### sync-skill-pages
