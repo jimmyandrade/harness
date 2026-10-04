@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.9.0](https://github.com/jimmyandrade/harness/compare/v0.8.0...v0.9.0) (2026-10-03)
+
+
+### Features
+
+* **comunicar-novidade-do-produto:** communicate product news to non-technical readers ([#80](https://github.com/jimmyandrade/harness/issues/80)) ([b3be67f](https://github.com/jimmyandrade/harness/commit/b3be67f6b24325f617b3dee3c84269184f95f8e0))
+* **comunicar-novidade-do-produto:** read the sources from a parameter ([#82](https://github.com/jimmyandrade/harness/issues/82)) ([879334b](https://github.com/jimmyandrade/harness/commit/879334b064c00e8a27aae648881a471a16955d9d))
+
 ## [0.8.0](https://github.com/jimmyandrade/harness/compare/v0.7.3...v0.8.0) (2026-10-03)
 
 
