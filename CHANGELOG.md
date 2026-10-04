@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.10.0](https://github.com/jimmyandrade/harness/compare/v0.9.1...v0.10.0) (2026-10-04)
+
+
+### Features
+
+* **criar-pull-request:** announce product news after each merge ([#85](https://github.com/jimmyandrade/harness/issues/85)) ([f1034b4](https://github.com/jimmyandrade/harness/commit/f1034b4f52521115775c582dada0031609f9725d))
+
+
+### Bug Fixes
+
+* **criar-pull-request:** respect the opt-out in the merge flowchart ([#87](https://github.com/jimmyandrade/harness/issues/87)) ([54a20f0](https://github.com/jimmyandrade/harness/commit/54a20f0e0377e901d3b8529450bf9e11539788b0))
+
 ## [0.9.1](https://github.com/jimmyandrade/harness/compare/v0.9.0...v0.9.1) (2026-10-04)
 
 

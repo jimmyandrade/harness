@@ -1,7 +1,7 @@
 {
   "name": "harness-core",
   "description": "Skills, checks, and the vocabulary MCP shared by every project.",
-  "version": "0.9.1",
+  "version": "0.10.0",
   "author": {
     "name": "Jimmy Andrade",
     "url": "https://github.com/jimmyandrade"
