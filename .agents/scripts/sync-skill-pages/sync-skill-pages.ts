@@ -341,7 +341,7 @@ export function skillNamesFromPaths(paths: string[]): string[] {
   const names: string[] = []
   for (const path of paths) {
     const parts = path.split("/")
-    if (parts.length >= 3 && parts[0] === ".agents" && parts[1] === "skills" && !names.includes(parts[2])) {
+    if (parts.length >= 4 && parts[0] === ".agents" && parts[1] === "skills" && !names.includes(parts[2])) {
       names.push(parts[2])
     }
   }
