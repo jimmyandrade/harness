@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.11.0](https://github.com/jimmyandrade/harness/compare/v0.10.0...v0.11.0) (2026-10-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* the plugin harness-core is now core. Replace harness-core@<marketplace> with core@<marketplace> in enabledPlugins and in each business marketplace, then install core@<marketplace>.
+
+### Features
+
+* rename the Claude Code plugin to core ([#88](https://github.com/jimmyandrade/harness/issues/88)) ([5a7c2f6](https://github.com/jimmyandrade/harness/commit/5a7c2f6e136ad4d5dc8a2223b17deea4fb22acf7))
+
 ## [0.10.0](https://github.com/jimmyandrade/harness/compare/v0.9.1...v0.10.0) (2026-10-04)
 
 
