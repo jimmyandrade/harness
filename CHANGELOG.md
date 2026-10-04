@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.1](https://github.com/jimmyandrade/harness/compare/v0.9.0...v0.9.1) (2026-10-04)
+
+
+### Bug Fixes
+
+* **comunicar-novidade-do-produto:** resolve the base branch and pull request links ([#83](https://github.com/jimmyandrade/harness/issues/83)) ([c59bd4b](https://github.com/jimmyandrade/harness/commit/c59bd4b8053564136cd2695f556adc5ce3bbb673))
+
 ## [0.9.0](https://github.com/jimmyandrade/harness/compare/v0.8.0...v0.9.0) (2026-10-03)
 
 
