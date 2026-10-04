@@ -9,6 +9,14 @@ inputs:
     description: Commit the change ends at.
     required: false
     default: ${{ github.sha }}
+  comment:
+    description: On a pull request, keep one comment with the table of the skills it changes, edited on each push. Needs permissions pull-requests write.
+    required: false
+    default: "true"
+  github-token:
+    description: Token that writes the comment.
+    required: false
+    default: ${{ github.token }}
 runs:
   using: composite
   steps:
@@ -22,4 +30,15 @@ runs:
         HARNESS_ROOT: ${{ github.workspace }}
         CHECK_SKILL_BASE: ${{ inputs.base }}
         CHECK_SKILL_HEAD: ${{ inputs.head }}
+        CHECK_SKILL_REPORT: ${{ runner.temp }}/check-skill-report.md
       run: '"$GITHUB_ACTION_PATH/../../../.agents/scripts/check-skill/run-check.sh"'
+    - name: Comment the skill check on the pull request
+      if: always() && inputs.comment == 'true' && github.event_name == 'pull_request'
+      shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.github-token }}
+      run: >-
+        python3 "$GITHUB_ACTION_PATH/../../../.agents/scripts/check-skill/comment-report.py"
+        "${{ github.repository }}"
+        "${{ github.event.pull_request.number }}"
+        "${{ runner.temp }}/check-skill-report.md"

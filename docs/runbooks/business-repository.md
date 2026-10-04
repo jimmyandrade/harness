@@ -54,7 +54,7 @@ Check: the checker exits 0, and `.agents/skills/README.md` exists.
 
 Commit the files and open a pull request.
 
-Check: the `check` job of the `skills` workflow passes.
+Check: the `check` job of the `skills` workflow passes, and the pull request gets a Skill check comment with the table of the skills it adds.
 
 ## Next
 
