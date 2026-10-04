@@ -6,9 +6,9 @@ locale: en
 
 An MCP host is the application a person talks to. It reads a list of MCP servers and starts them. The project list is `.agents/mcp.json`, with `mcpServers` as the first key. It starts the `vocabulary` server, which reads the glossary in `.agents/glossary/`.
 
-Claude Code loads the vocabulary server through the `harness-core` plugin (`claude-code.md`). Cursor reads `.cursor/mcp.json`. Claude Desktop, Windsurf, and Cline keep their list outside the repository, so each one gets a link to `.agents/mcp.json`. VS Code expects `servers` as the first key, so it does not use this list.
+Claude Code loads the vocabulary server through the `core` plugin (`claude-code.md`). Cursor reads `.cursor/mcp.json`. Claude Desktop, Windsurf, and Cline keep their list outside the repository, so each one gets a link to `.agents/mcp.json`. VS Code expects `servers` as the first key, so it does not use this list.
 
-The list is not `.mcp.json` at the root. A business harness is also a Claude Code plugin whose root is the repository, and Claude Code always loads `.mcp.json` from a plugin root: the server would start a second time, from the folder of whatever project has the plugin, and fail there. In Claude Code the `harness-core` plugin already starts the vocabulary server.
+The list is not `.mcp.json` at the root. A business harness is also a Claude Code plugin whose root is the repository, and Claude Code always loads `.mcp.json` from a plugin root: the server would start a second time, from the folder of whatever project has the plugin, and fail there. In Claude Code the `core` plugin already starts the vocabulary server.
 
 Run this runbook from the root of the project. Each step ends with a check. A link replaces the whole file it points from: copy anything you still need into `.agents/mcp.json` first. If you move the clone, create the links again.
 

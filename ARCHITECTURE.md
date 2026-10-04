@@ -24,7 +24,7 @@ harness/
 │   └── skills/                     # Shared skills, one <name>/SKILL.md each
 │       ├── FEATURES.md             # One entry per skill, written by hand
 │       └── README.md               # Generated skill graph; do not edit
-├── .claude-plugin/                 # Claude Code plugin harness-core and the harness marketplace
+├── .claude-plugin/                 # Claude Code plugin core and the harness marketplace
 ├── .github/
 │   ├── actions/                    # Composite actions called by business harnesses
 │   │   ├── check-skill/
@@ -72,7 +72,7 @@ flowchart LR
   sync -- "reads" --> mapping
   sync -- "writes pages" --> notion[("Notion skills database")]
   vocab -- "reads" --> glossary
-  skills -- "harness-core plugin" --> claude["Claude Code"]
+  skills -- "core plugin" --> claude["Claude Code"]
   bskills -- "links in .claude/skills, .cursor/skills" --> agents["Claude Code, Cursor"]
 ```
 
@@ -103,11 +103,11 @@ None. People reach the core through their agent (Claude Code, Cursor), GitHub, a
 - Name: `vocabulary`
 - Description: Reads and writes the glossary of the open project: look up a term, report which tokens of a text exist, insert and update terms.
 - Technologies: TypeScript on Node.js 24, Zod
-- Deployment: MCP server started by the `harness-core` plugin; local HTTP server on 127.0.0.1; CLI
+- Deployment: MCP server started by the `core` plugin; local HTTP server on 127.0.0.1; CLI
 
 #### 3.2.4. Claude Code plugin
 
-- Name: `harness-core`
+- Name: `core`
 - Description: Ships the shared skills and starts the vocabulary MCP server.
 - Technologies: Claude Code plugin manifest
 - Deployment: Marketplace `harness` in this repository, or a business marketplace that lists it pinned to a tag

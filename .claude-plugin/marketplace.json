@@ -3,6 +3,6 @@
   "owner": { "name": "Jimmy Andrade", "url": "https://github.com/jimmyandrade" },
   "description": "Skills shared by every project. Business plugins live in their own harness repositories.",
   "plugins": [
-    { "name": "harness-core", "source": "." }
+    { "name": "core", "source": "." }
   ]
 }

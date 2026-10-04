@@ -41,3 +41,5 @@ The core is public, so nothing in it can name a business, a workspace, a databas
 A business that renames a property edits its mapping. It does not edit the core.
 
 Until a skill is audited, it stays in its business harness, even when another business has a similar one.
+
+The plugin was later renamed from `harness-core` to `core`, so its skills read `core:<skill>` next to the business prefixes.
