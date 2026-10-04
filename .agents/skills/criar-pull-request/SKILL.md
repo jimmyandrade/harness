@@ -3,7 +3,7 @@ name: criar-pull-request
 description: Use essa habilidade sempre que for abrir PR, subir uma correção, mandar para a branch principal ou mesclar mudança no repositório, mesmo sem dizer PR. NÃO use para responder comentário de revisão nem para só commitar (use criar-commit).
 metadata:
   author: jimmyandrade
-  version: "0.7.0"
+  version: "0.7.1"
   notion: "false"
   related:
     - evoluir-habilidade
@@ -80,7 +80,9 @@ flowchart LR
   E -->|verdes, ou sem Exigir CI verde| G[Merge com delete-branch]
   G -->|bloqueado pelo modo automático| H[Dê o comando e pare]
   G -->|ok| I[Confirme o estado MERGED e o hash]
-  I --> J[Siga comunicar-novidade-do-produto]
+  I --> J{Comunicar novidade após o merge}
+  J -->|sim| K[Siga comunicar-novidade-do-produto]
+  J -->|não| L[Passo 9]
 ```
 
 Comentário pendente é thread de revisão sem resolver, revisão que pede mudança ou comentário da conversa sem resposta, de pessoa ou de bot. Aviso de bot que só informa, como link de preview, não conta. Thread que espera decisão da pessoa segura o merge até ela decidir.
