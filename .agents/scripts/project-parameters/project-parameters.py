@@ -120,6 +120,27 @@ def setting(roots: list[Path], key: str):
     raise SystemExit(f'"{key}" is missing from the parameter block of {INSTRUCTIONS}')
 
 
+def skill_parameter(roots: list[Path], skill: str, key: str, skill_file: Path | None = None):
+    """The value a skill script should use for one of its parameters.
+
+    In each root, the entry named after the skill comes first, then Global or the
+    top level. Without a value there, the default from the skill's own block.
+    """
+    for root in dict.fromkeys(roots):
+        data = instructions_block(root)
+        entry = data.get(skill)
+        if isinstance(entry, dict) and key in entry:
+            return entry[key]
+        value = global_value(data, key)
+        if value is not None:
+            return value
+    if skill_file is not None and skill_file.is_file():
+        defaults, _, error = yaml_block(skill_file.read_text(encoding="utf-8"), SKILL_HEADING)
+        if error is None and isinstance(defaults, dict):
+            return defaults.get(key)
+    return None
+
+
 def skill_parameter_keys(roots: list[Path]) -> dict[str, set[str]]:
     """The parameter keys of every skill in the given roots, by skill name."""
     keys: dict[str, set[str]] = {}
