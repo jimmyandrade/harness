@@ -14,11 +14,11 @@ This repository is the core harness. A business harness is a separate, private r
 harness/
 ├── .agents/
 │   ├── assets/templates/           # Output templates that skills read when they write a file
-│   ├── config.yml                  # Defaults; a business harness overrides only the keys that differ
 │   ├── mappings/                   # Template of the Notion mapping a business harness copies
 │   ├── schemas/                    # JSON Schema of a skill page
 │   ├── scripts/
 │   │   ├── check-skill/            # Skill checker (Python), run by Lefthook and the check-skill action
+│   │   ├── project-parameters/     # Reads and validates the parameter block of AGENTS.md, for every script
 │   │   ├── skill-graph/            # Writes .agents/skills/README.md, the Mermaid graph of skills
 │   │   ├── skill-folder-icon/      # macOS folder icon for each skill, run by Lefthook
 │   │   └── sync-skill-pages/       # Notion sync (TypeScript), run by the sync-skill-pages action
@@ -88,7 +88,7 @@ None. People reach the core through their agent (Claude Code, Cursor), GitHub, a
 #### 3.2.1. Skill checker
 
 - Name: `check-skill`
-- Description: Checks each changed `SKILL.md` against the harness rules and the project `.agents/config.yml`, including related skills, Gherkin files, and the skill graph.
+- Description: Checks each changed `SKILL.md` against the harness rules and the settings in the project `AGENTS.md`, including related skills, Gherkin files, and the skill graph.
 - Technologies: Python 3.14
 - Deployment: Lefthook on commit; composite action in CI
 
@@ -120,7 +120,7 @@ None. People reach the core through their agent (Claude Code, Cursor), GitHub, a
 - Name: Skills, configuration, mappings, glossary
 - Type: Markdown, YAML, and JSON files
 - Purpose: Git is the write source of every skill and setting
-- Key Schemas/Collections: `.agents/skills/<name>/SKILL.md`, `.agents/config.yml`, `.agents/mappings/skill-page.notion.json`, `.agents/glossary/<language>.json`
+- Key Schemas/Collections: `.agents/skills/<name>/SKILL.md`, `AGENTS.md` and its parameter block, `.agents/mappings/skill-page.notion.json`, `.agents/glossary/<language>.json`
 
 ### 4.2. Notion
 

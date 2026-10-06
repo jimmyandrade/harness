@@ -21,12 +21,12 @@ The message names a skill, a config key, or a mapping that belongs to another re
 1. A script reads the project in `HARNESS_ROOT`, or the working directory when it is unset.
 2. Run it from the project root, or set `HARNESS_ROOT` to that root.
 
-## A config key is missing
+## A setting is missing or invalid
 
-The message is `section.key is missing from .agents/config.yml`.
+The message is `"<key>" is missing from the parameter block of AGENTS.md`, or a finding on `AGENTS.md` such as `"<key>" is not a parameter of any skill nor a script setting`.
 
-1. The key is missing from the project and from this harness.
-2. Update the harness dependency or the action tag, or add the key to the project `.agents/config.yml`.
+1. A missing setting is absent from the project block and from the core block. Update the harness dependency or the action tag, or add the key under `Global` in the project `AGENTS.md`.
+2. An unknown key is usually misspelled. Copy the key from the skill's `Parâmetros de configuração` block, or from the core `AGENTS.md` for a script setting.
 
 ## The vocabulary MCP rejects a language
 

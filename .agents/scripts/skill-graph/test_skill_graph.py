@@ -28,8 +28,9 @@ def write_skill(root: Path, name: str, related: list[str] | None = None, body: s
 
 def make_root(path: Path, organization: str) -> Path:
     (path / ".agents").mkdir(parents=True)
-    (path / ".agents" / "config.yml").write_text(
-        f"organization:\n  name: {organization}\nmermaid:\n  flowchart_direction: LR\n"
+    (path / "AGENTS.md").write_text(
+        f'## Parâmetros das habilidades\n\n```yaml\n"Global":\n  "Organização": "{organization}"\n  "Direção dos fluxogramas": "LR"\n```\n',
+        encoding="utf-8",
     )
     return path
 

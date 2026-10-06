@@ -1,50 +1,28 @@
 #!/usr/bin/env python3
-"""Print the size of one skill. Reads limits from .agents/config.yml.
+"""Print the size of one skill. Reads limits from the AGENTS.md parameter block.
 
 The limits come from the project of the measured skill. A key missing there
-falls back to the .agents/config.yml of the harness that ships this script.
+falls back to the AGENTS.md of the harness that ships this script.
 """
 
 from __future__ import annotations
 
+import importlib.util
 import sys
 from pathlib import Path
 
 USAGE = "usage: one SKILL.md"
+CORE = Path(__file__).resolve().parents[4]
 UNREADABLE = "unreadable skill"
 LIMIT_MISSING = "skill limits are missing"
 
 
-def repo_root(start: Path) -> Path:
-    for parent in (start, *start.parents):
-        if (parent / ".agents" / "config.yml").is_file():
-            return parent
-    print(LIMIT_MISSING, file=sys.stderr)
-    raise SystemExit(2)
-
-
-def section_value(texts: list[str], section: str, key: str) -> str:
-    for text in texts:
-        value = find_section_value(text, section, key)
-        if value is not None:
-            return value
-    print(f"{section}.{key} is missing from .agents/config.yml", file=sys.stderr)
-    raise SystemExit(2)
-
-
-def find_section_value(text: str, section: str, key: str) -> str | None:
-    in_section = False
-    prefix = f"{key}:"
-    for raw in text.splitlines():
-        line = raw.split("#", 1)[0].rstrip()
-        if not line.strip():
-            continue
-        if not line.startswith(" ") and not line.startswith("\t"):
-            in_section = line == f"{section}:"
-            continue
-        if in_section and line.strip().startswith(prefix):
-            return line.split(":", 1)[1].strip()
-    return None
+def load_parameters():
+    path = CORE / ".agents" / "scripts" / "project-parameters" / "project-parameters.py"
+    spec = importlib.util.spec_from_file_location("project_parameters", path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
 
 
 def front_value(block: str, key: str) -> str:
@@ -85,12 +63,12 @@ def main() -> int:
     except ImportError:
         print("tiktoken is required", file=sys.stderr)
         return 2
-    roots = dict.fromkeys([repo_root(path.resolve()), repo_root(Path(__file__).resolve())])
-    config = [(root / ".agents" / "config.yml").read_text(encoding="utf-8") for root in roots]
-    word_limit = int(section_value(config, "limits", "skill_words"))
-    line_limit = int(section_value(config, "limits", "skill_lines"))
-    catalog_limit = int(section_value(config, "limits", "skill_catalog_tokens"))
-    body_limit = int(section_value(config, "limits", "skill_body_tokens"))
+    parameters = load_parameters()
+    roots = [parameters.project_root(path.resolve().parent), CORE]
+    word_limit = int(parameters.setting(roots, "Palavras"))
+    line_limit = int(parameters.setting(roots, "Linhas"))
+    catalog_limit = int(parameters.setting(roots, "Tokens do catálogo"))
+    body_limit = int(parameters.setting(roots, "Tokens do corpo"))
     encoding = tiktoken.get_encoding("o200k_base")
     body = body_slice(text)
     front = text[4 : text.find("\n---", 4)]

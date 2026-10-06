@@ -4,5 +4,4 @@ pre-commit:
       glob:
         - ".agents/skills/**/SKILL.md"
         - "AGENTS.md"
-        - ".agents/config.yml"
       run: node_modules/harness/.agents/scripts/check-skill/run-check.sh {staged_files}

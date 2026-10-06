@@ -29,16 +29,16 @@ Check: `test -d node_modules/harness && echo ok` prints `ok`.
 
 ## 3. Copy the example files
 
-`examples/business-harness/` holds every file this runbook needs: `.agents/config.yml`, `.agents/mcp.json`, `lefthook.yml`, the `skills` workflow, the Claude Code plugin and marketplace, `.claude/settings.json`, and `renovate.json`. Copy them without overwriting a file that already exists, then pin them to the tag.
+`examples/business-harness/` holds every file this runbook needs: `AGENTS.md`, `.agents/mcp.json`, `lefthook.yml`, the `skills` workflow, the Claude Code plugin and marketplace, `.claude/settings.json`, and `renovate.json`. Copy them without overwriting a file that already exists, then pin them to the tag.
 
 ```bash
 cp -Rn node_modules/harness/examples/business-harness/. .
 grep -rl 'vX\.Y\.Z' .github .claude-plugin | while read -r file; do perl -pi -e "s/vX\.Y\.Z/$TAG/g" "$file"; done
 ```
 
-Replace `example` with the name of the business in `.agents/config.yml`, `.claude-plugin/`, and `.claude/settings.json`. A file that already existed was not copied; merge the example into it by hand.
+Replace `example` with the name of the business in `AGENTS.md`, `.claude-plugin/`, and `.claude/settings.json`. A file that already existed was not copied; merge the example into it by hand.
 
-Check: `grep -rn 'vX\.Y\.Z\|example' .agents/config.yml .github .claude-plugin .claude` prints nothing.
+Check: `grep -rn 'vX\.Y\.Z\|example' AGENTS.md .github .claude-plugin .claude` prints nothing.
 
 ## 4. Write the skill graph and run the checker
 

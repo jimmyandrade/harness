@@ -14,6 +14,7 @@ backticks in prose, or names in a Mermaid diagram.
 
 from __future__ import annotations
 
+import importlib.util
 import os
 import re
 import sys
@@ -25,11 +26,15 @@ import yaml
 README = Path(".agents") / "skills" / "README.md"
 
 
-def repo_root(start: Path) -> Path:
-    for path in (start, *start.parents):
-        if (path / ".agents" / "config.yml").is_file():
-            return path
-    raise SystemExit(".agents/config.yml not found")
+def load_parameters():
+    path = Path(__file__).resolve().parents[1] / "project-parameters" / "project-parameters.py"
+    spec = importlib.util.spec_from_file_location("project_parameters", path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+parameters = load_parameters()
 
 
 @dataclass
@@ -42,13 +47,8 @@ class Skill:
     declared: bool = False
 
 
-def config_value(roots: list[Path], section: str, key: str) -> str:
-    for root in roots:
-        data = yaml.safe_load((root / ".agents" / "config.yml").read_text(encoding="utf-8")) or {}
-        value = (data.get(section) or {}).get(key)
-        if value is not None:
-            return str(value)
-    raise SystemExit(f"{section}.{key} is missing from .agents/config.yml")
+def config_value(roots: list[Path], key: str) -> str:
+    return str(parameters.setting(roots, key))
 
 
 def read_skills(root: Path, layer: str) -> list[Skill]:
@@ -145,12 +145,12 @@ def render(
 
 def build(project: Path, core: Path) -> str:
     roots = list(dict.fromkeys([project, core]))
-    direction = config_value(roots, "mermaid", "flowchart_direction")
+    direction = config_value(roots, "Direção dos fluxogramas")
     if project == core:
         skills = read_skills(core, "core")
         groups = [("core", "Core")]
     else:
-        organization = config_value(roots, "organization", "name")
+        organization = config_value(roots, "Organização")
         skills = read_skills(project, "project") + read_skills(core, "core")
         groups = [("project", organization), ("core", "Core")]
         link(skills, cite_layers={"project"})
@@ -166,8 +166,8 @@ def build(project: Path, core: Path) -> str:
 
 
 def main(argv: list[str]) -> int:
-    project = repo_root(Path(os.environ.get("HARNESS_ROOT") or Path.cwd()).resolve())
-    core = repo_root(Path(__file__).resolve().parent)
+    project = parameters.project_root(Path(os.environ.get("HARNESS_ROOT") or Path.cwd()).resolve())
+    core = parameters.core_root()
     text = build(project, core)
     target = project / README
     if "--check" in argv:

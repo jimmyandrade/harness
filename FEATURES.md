@@ -52,7 +52,7 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
 - **Description**: Check the skills of a repository against the harness rules
 - **Properties**:
   - Composite action at `.github/actions/check-skill/` and script `.agents/scripts/check-skill/run-check.sh`
-  - Reads the project from `HARNESS_ROOT` or the working directory, and its `.agents/config.yml` with the core fallback
+  - Reads the project from `HARNESS_ROOT` or the working directory, and its settings from the parameter block of its `AGENTS.md`, with the core block as fallback. It validates that block: the heading and YAML exist and parse, every key belongs to a skill or a script, and script settings have the right type. A project that links `.agents/skills` to the core gets only its `AGENTS.md` checked
   - `base` and `head` limit the check to the skills that changed
   - The project's root `AGENTS.md` gets the size limits of a skill body (words, lines, body tokens), because it loads in every session, as ADR 0008 decides. The structure rules of a skill do not apply to it. It shows in the summary table and in the pull request comment when it changes
   - On a pull request, the action keeps one comment with the table of the skills the pull request adds, changes, or fails: version, body tokens, and share of the limit, before and after. Each push edits that comment. `comment: false` turns it off. The calling workflow needs `permissions: pull-requests: write`; without it the step warns and the check result stands
@@ -60,7 +60,7 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
   - When a skill declares `metadata.related`, each name must be a skill in the project or in the core, and every skill the body cites must be listed. A citation is a skill name between backticks in prose, or a name in a Mermaid diagram; a plain name in prose is not one
   - Each Gherkin file in a skill's `features/` starts with `# language: <locale.gherkin>`. With `pt`, every Given starts with `Dado que`, because `Dado` is the reserved keyword and does not agree with the noun
 - **Test Criteria**:
-  - [x] A project with a partial `.agents/config.yml` uses the core limits
+  - [x] A project block without a limit uses the core limit, and a misspelled key or a wrong type fails
   - [x] A related name that is not a skill fails, and a cited skill missing from `metadata.related` fails
   - [x] A feature without the configured language line fails, and in Portuguese a Given such as `Dada uma` or `Dado um` fails
   - [x] A committed change is compared with the base, and without a base with `HEAD`

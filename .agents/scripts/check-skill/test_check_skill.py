@@ -11,6 +11,7 @@ import unittest
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
+PARAMETERS = '## Parâmetros das habilidades\n\n```yaml\n"Global":\n  "Organização": "example"\n```\n'
 
 
 def load_checker(project: Path):
@@ -38,7 +39,7 @@ class RelatedSkillsTest(unittest.TestCase):
         self.tmp = tempfile.TemporaryDirectory()
         self.project = Path(self.tmp.name)
         (self.project / ".agents").mkdir()
-        (self.project / ".agents" / "config.yml").write_text("organization:\n  name: example\n")
+        (self.project / "AGENTS.md").write_text(PARAMETERS, encoding="utf-8")
         write_skill(self.project, "abrir-pedido")
         write_skill(self.project, "fechar-pedido")
         self.checker = load_checker(self.project)
@@ -103,7 +104,7 @@ class GherkinTest(unittest.TestCase):
         self.tmp = tempfile.TemporaryDirectory()
         self.project = Path(self.tmp.name).resolve()
         (self.project / ".agents").mkdir()
-        (self.project / ".agents" / "config.yml").write_text("organization:\n  name: example\n")
+        (self.project / "AGENTS.md").write_text(PARAMETERS, encoding="utf-8")
         write_skill(self.project, "abrir-pedido")
         self.checker = load_checker(self.project)
         self.skill = self.project / ".agents" / "skills" / "abrir-pedido"
@@ -146,7 +147,7 @@ class VersionReferenceTest(unittest.TestCase):
         self.tmp = tempfile.TemporaryDirectory()
         self.project = Path(self.tmp.name).resolve()
         (self.project / ".agents").mkdir()
-        (self.project / ".agents" / "config.yml").write_text("organization:\n  name: example\n")
+        (self.project / "AGENTS.md").write_text(PARAMETERS, encoding="utf-8")
         self.git("init", "-q")
         write_skill(self.project, "abrir-pedido", body="Primeira versão.")
         self.base = self.commit("base")
@@ -186,7 +187,7 @@ class InstructionsTest(unittest.TestCase):
         self.tmp = tempfile.TemporaryDirectory()
         self.project = Path(self.tmp.name)
         (self.project / ".agents").mkdir()
-        (self.project / ".agents" / "config.yml").write_text("organization:\n  name: example\n")
+        (self.project / "AGENTS.md").write_text(PARAMETERS, encoding="utf-8")
         self.checker = load_checker(self.project)
         import tiktoken
 
