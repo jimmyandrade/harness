@@ -3,7 +3,7 @@ name: resolver-comentarios-de-revisao
 description: Use essa habilidade sempre que um pull request tiver comentário de pessoa ou bot para tratar, responder ou resolver, inclusive antes do merge, mesmo sem dizer revisão. NÃO use em PR sem comentário, para abrir o PR, nem para revisar o PR de outra pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   related:
     - evoluir-habilidade
     - criar-commit
@@ -14,11 +14,11 @@ metadata:
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto. Quando um valor não estiver lá, use o padrão abaixo. `Repositório` vem do remoto `origin` quando as instruções não dizem.
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Repositório` vem do remoto `origin` quando as instruções não dizem.
 
 ```yaml
 "Repositório": ""
-"Idioma da resposta": "inglês"
+"Idioma da resposta à revisão": "inglês"
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -53,7 +53,7 @@ Se a decisão vale além deste PR, grave a lição nas instruções do projeto e
 
 ### Passo 6
 
-Responda cada thread em `Idioma da resposta`: o que mudou, com o commit, ou por que não muda. Comentário desatualizado ganha a explicação do que mudou desde então. Depois de responder, resolva a thread. Thread que espera decisão da pessoa fica aberta.
+Responda cada thread em `Idioma da resposta à revisão`: o que mudou, com o commit, ou por que não muda. Comentário desatualizado ganha a explicação do que mudou desde então. Depois de responder, resolva a thread. Thread que espera decisão da pessoa fica aberta.
 
 ### Passo 7
 

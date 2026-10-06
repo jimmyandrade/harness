@@ -3,7 +3,7 @@ name: publicar-habilidade
 description: Use essa habilidade sempre que o pedido vier do Notion para criar, ativar, alterar, renomear, versionar, publicar, excluir, restaurar, revisar ou reorganizar uma habilidade. No Cursor, no Claude ou na sessão do repositório, segue o fluxo de commit do projeto. NÃO use para editar a página ou o banco Habilidades, nem para mesclar na mesma solicitação.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.7.0"
   related:
     - evoluir-habilidade
     - criar-commit
@@ -15,7 +15,7 @@ compatibility: Precisa de internet.
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto. Quando um valor não estiver lá, use o padrão abaixo.
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo.
 
 ```yaml
 "Commit direto na base": "não"
