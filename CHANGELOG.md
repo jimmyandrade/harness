@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.17.0](https://github.com/jimmyandrade/harness/compare/v0.16.0...v0.17.0) (2026-10-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* move the parameters of each AGENTS.md from the yaml block under "## Parâmetros das habilidades" to metadata.parameters in its frontmatter, indented under metadata, and add description and metadata.version to the frontmatter of a business harness.
+
+### Features
+
+* publish the project instructions to Notion from the AGENTS.md frontmatter ([#114](https://github.com/jimmyandrade/harness/issues/114)) ([4be623e](https://github.com/jimmyandrade/harness/commit/4be623ecc19a115b38b9fb351f5cfb288030d681))
+
 ## [0.16.0](https://github.com/jimmyandrade/harness/compare/v0.15.0...v0.16.0) (2026-10-06)
 
 
