@@ -30,6 +30,14 @@ TEXT_SETTINGS = {
 }
 CHOICE_SETTINGS = {"Licença obrigatória": {"sim", "não"}}
 SCRIPT_SETTINGS = INTEGER_SETTINGS | TEXT_SETTINGS | set(CHOICE_SETTINGS)
+# A script setting that is also a parameter of a skill reads that skill's entry first.
+SETTING_SKILL = {
+    "Palavras": "criar-habilidade",
+    "Linhas": "criar-habilidade",
+    "Tokens do catálogo": "criar-habilidade",
+    "Tokens do corpo": "criar-habilidade",
+}
+FLOW_STYLE = re.compile(r'^\s*(?:-\s*)?(?:"[^"]*"|[^:"]+)?\s*:?\s*[{\[]')
 
 
 def core_root() -> Path:
@@ -97,11 +105,18 @@ def global_value(data: dict, key: str):
 
 
 def setting(roots: list[Path], key: str):
-    """The value of a script setting: the first root that sets it wins."""
+    """The value of a script setting: the first root that sets a valid value wins.
+
+    In each root, the entry of the skill that shares the setting comes before Global.
+    An invalid value is skipped here; the checker reports it.
+    """
     for root in dict.fromkeys(roots):
-        value = global_value(instructions_block(root), key)
-        if value is not None:
-            return value
+        data = instructions_block(root)
+        owner = data.get(SETTING_SKILL.get(key, ""))
+        candidates = [owner.get(key) if isinstance(owner, dict) else None, global_value(data, key)]
+        for value in candidates:
+            if value is not None and setting_type_error(key, value) is None:
+                return value
     raise SystemExit(f'"{key}" is missing from the parameter block of {INSTRUCTIONS}')
 
 
@@ -146,6 +161,11 @@ def validate(text: str, skills: dict[str, set[str]], required: bool) -> list[tup
         return [(error, line)]
     known = set().union(*skills.values()) if skills else set()
     errors: list[tuple[str, int | None]] = []
+    lines = text.splitlines()
+    end = next((index for index in range(line, len(lines)) if lines[index].strip() == "```"), len(lines))
+    for index in range(line, end):
+        if FLOW_STYLE.match(lines[index]):
+            errors.append(("write the block in block style, not with { } or [ ]", index + 1))
 
     def check_global(key: str, value) -> None:
         if key not in known and key not in SCRIPT_SETTINGS:
@@ -168,9 +188,13 @@ def validate(text: str, skills: dict[str, set[str]], required: bool) -> list[tup
             if key not in skills:
                 errors.append((f'"{key}" is not a skill here or in the core', key_line(text, key)))
                 continue
-            for inner in value:
+            for inner, inner_value in value.items():
                 if str(inner) not in skills[key]:
                     errors.append((f'"{inner}" is not a parameter of {key}', key_line(text, str(inner))))
+                elif str(inner) in SCRIPT_SETTINGS:
+                    problem = setting_type_error(str(inner), inner_value)
+                    if problem:
+                        errors.append((problem, key_line(text, str(inner))))
         else:
             check_global(key, value)
     return errors

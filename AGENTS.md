@@ -22,7 +22,7 @@ locale: en
 ## Git
 
 - Every change lands through a pull request. Do not push to `main`.
-- Write every commit subject in the language of `Idioma da mensagem de commit`, in the parameter block below.
+- Write every commit subject in the language of `Idioma da mensagem de commit`, a parameter of `criar-commit`, which defaults to English.
 - Use a Conventional Commits subject: `type: description`. When the change affects one skill, the subject is `type(skill-name): description`. The types are `feat`, `fix`, `perf`, `docs`, `refactor`, `test`, `chore`, and `ci`.
 - A change to CI or to an action uses `ci`, even when it adds behavior.
 
@@ -30,7 +30,7 @@ locale: en
 
 - Every setting lives in the parameter block of `AGENTS.md`, as ADR 0009 decides. The block at the end of this file holds the defaults. A business harness keeps only the values that differ, and a missing value falls back to the one here. The checker validates every block.
 - A script finds the project from `HARNESS_ROOT`, or from the working directory. It finds this repository from its own location. Do not make a script read a file of this repository when the project has one.
-- Each Markdown document states its `locale` in frontmatter, except: `CHANGELOG.md`, which Release Please writes and rewrites on every release; `LICENSE.md`, which keeps the license text unchanged; `CLAUDE.md`, which only imports `AGENTS.md`; and each `SKILL.md`, whose frontmatter follows the skill format and whose text is in Portuguese.
+- Each Markdown document states its `locale` in frontmatter, except: `CHANGELOG.md`, which Release Please writes and rewrites on every release; `LICENSE.md`, which keeps the license text unchanged; `CLAUDE.md`, which only imports `AGENTS.md`; a project's `AGENTS.md` written from the instructions template, whose language is the `Idioma das instruções do projeto` parameter; and each `SKILL.md`, whose frontmatter follows the skill format and whose text is in Portuguese.
 
 ## Skills
 

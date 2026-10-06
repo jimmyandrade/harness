@@ -168,6 +168,8 @@ def build(project: Path, core: Path) -> str:
 def main(argv: list[str]) -> int:
     project = parameters.project_root(Path(os.environ.get("HARNESS_ROOT") or Path.cwd()).resolve())
     core = parameters.core_root()
+    if project != core and not parameters.is_harness(project):
+        return 0
     text = build(project, core)
     target = project / README
     if "--check" in argv:

@@ -118,5 +118,25 @@ class SkillGraphTest(unittest.TestCase):
         self.assertIn("abrir_pedido -.-> fechar_pedido", graph.build(self.project, self.core))
 
 
+
+class CoreOnlyProjectTest(unittest.TestCase):
+    def test_should_skip_the_graph_in_a_project_that_links_its_skills_to_the_core(self) -> None:
+        import os
+        import subprocess
+
+        with tempfile.TemporaryDirectory() as tmp:
+            project = Path(tmp)
+            (project / ".git").mkdir()
+            (project / ".agents").mkdir()
+            (project / ".agents" / "skills").symlink_to(HERE.parents[1] / "skills")
+            result = subprocess.run(
+                [sys.executable, str(HERE / "skill-graph.py"), "--check"],
+                env={**os.environ, "HARNESS_ROOT": str(project)},
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(result.returncode, 0, result.stderr)
+
+
 if __name__ == "__main__":
     unittest.main()

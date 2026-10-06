@@ -62,6 +62,19 @@ class ValidateTest(unittest.TestCase):
         self.assertEqual(self.errors(block('"Global":\n  "Licença obrigatória": "talvez"\n')), ['"Licença obrigatória" must be one of: não, sim'])
 
 
+    def test_should_reject_flow_style(self) -> None:
+        self.assertEqual(
+            self.errors(block('"Global": {"Organização": "x"}\n')),
+            ["write the block in block style, not with { } or [ ]"],
+        )
+
+    def test_should_check_the_type_of_a_script_setting_under_its_skill(self) -> None:
+        self.assertEqual(
+            self.errors(block('"criar-habilidade":\n  "Tokens do corpo": "muitos"\n')),
+            ['"Tokens do corpo" must be a positive integer'],
+        )
+
+
 class SettingTest(unittest.TestCase):
     def test_should_read_the_project_first_and_fall_back_to_the_next_root(self) -> None:
         with tempfile.TemporaryDirectory() as first, tempfile.TemporaryDirectory() as second:
@@ -70,6 +83,19 @@ class SettingTest(unittest.TestCase):
             roots = [Path(first), Path(second)]
             self.assertEqual(parameters.setting(roots, "Tokens do corpo"), 1000)
             self.assertEqual(parameters.setting(roots, "Linhas"), 500)
+
+    def test_should_read_the_entry_of_the_skill_that_shares_the_setting_first(self) -> None:
+        with tempfile.TemporaryDirectory() as root:
+            Path(root, parameters.INSTRUCTIONS).write_text(
+                block('"Global":\n  "Tokens do corpo": 5000\n"criar-habilidade":\n  "Tokens do corpo": 3000\n'), encoding="utf-8"
+            )
+            self.assertEqual(parameters.setting([Path(root)], "Tokens do corpo"), 3000)
+
+    def test_should_skip_an_invalid_value_and_fall_back(self) -> None:
+        with tempfile.TemporaryDirectory() as first, tempfile.TemporaryDirectory() as second:
+            Path(first, parameters.INSTRUCTIONS).write_text(block('"Global":\n  "Tokens do corpo": "muitos"\n'), encoding="utf-8")
+            Path(second, parameters.INSTRUCTIONS).write_text(block('"Global":\n  "Tokens do corpo": 5000\n'), encoding="utf-8")
+            self.assertEqual(parameters.setting([Path(first), Path(second)], "Tokens do corpo"), 5000)
 
     def test_should_ignore_a_key_under_a_skill_entry(self) -> None:
         self.assertIsNone(parameters.global_value({"criar-commit": {"Organização": "x"}}, "Organização"))

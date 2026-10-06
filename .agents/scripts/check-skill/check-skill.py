@@ -1193,7 +1193,7 @@ def main() -> int:
     gherkin = str(parameters.setting(roots, "Idioma do Gherkin"))
     if direction not in FLOWCHART_DIRECTIONS:
         raise SystemExit(
-            "mermaid.flowchart_direction must be LR, RL, TD, TB, or BT"
+            '"Direção dos fluxogramas" must be LR, RL, TD, TB, or BT'
         )
     encoding = tiktoken.get_encoding("o200k_base")
     failed = False
