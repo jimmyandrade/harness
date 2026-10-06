@@ -596,6 +596,17 @@ export async function publishInstructions(root: string, notion: PageWriter, mapp
   return `update ${page.name}: ${existing}`
 }
 
+/** Whether the project instructions page must be published in this push. */
+export function instructionsToPublish(changes: {
+  isCore: boolean
+  instructionsChanged: boolean
+  rulesChanged: boolean
+  coreVersionChanged: boolean
+}): boolean {
+  if (changes.isCore) return false
+  return changes.instructionsChanged || changes.rulesChanged || changes.coreVersionChanged
+}
+
 export function gate(names: string[], token: string): 0 | 2 | null {
   if (names.length === 0) return 0
   if (!token) return 2
@@ -664,8 +675,12 @@ export async function main(argv: string[]): Promise<number> {
     return page.aliases ?? []
   })
   const token = process.env.NOTION_TOKEN ?? ""
-  const instructionsChanged =
-    core !== root && (rulesChanged || coreVersionChanged || gitNames(root, base, head, [INSTRUCTIONS_FILE]).length > 0)
+  const instructionsChanged = instructionsToPublish({
+    isCore: core === root,
+    instructionsChanged: gitNames(root, base, head, [INSTRUCTIONS_FILE]).length > 0,
+    rulesChanged,
+    coreVersionChanged,
+  })
   const code = gate([...names, ...coreNames, ...(instructionsChanged ? [INSTRUCTIONS_FILE] : [])], token)
   if (code === 0) {
     console.log("no changed skill")

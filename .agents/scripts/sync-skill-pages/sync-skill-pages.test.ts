@@ -13,6 +13,7 @@ import {
   blockSetting,
   INSTRUCTIONS_FILE,
   instructionsPage,
+  instructionsToPublish,
   publishInstructions,
   PARAMETERS_HEADING,
   coreRoot,
@@ -605,4 +606,16 @@ test("the instructions page is created once, then updated", async () => {
   writeFileSync(join(root, INSTRUCTIONS_FILE), instructions("0.2.0", "segunda"))
   assert.equal(await publishInstructions(root, writer, mapping), `update ${INSTRUCTIONS_FILE}: id-${INSTRUCTIONS_FILE}`)
   assert.equal(pages.get(INSTRUCTIONS_FILE)?.version, "0.2.0")
+})
+
+test("the instructions page publishes on its own change, on rule or mapping changes, and on a core version move", () => {
+  const none = { isCore: false, instructionsChanged: false, rulesChanged: false, coreVersionChanged: false }
+  assert.equal(instructionsToPublish(none), false)
+  assert.equal(instructionsToPublish({ ...none, instructionsChanged: true }), true)
+  assert.equal(instructionsToPublish({ ...none, rulesChanged: true }), true)
+  assert.equal(instructionsToPublish({ ...none, coreVersionChanged: true }), true)
+  assert.equal(
+    instructionsToPublish({ isCore: true, instructionsChanged: true, rulesChanged: true, coreVersionChanged: true }),
+    false,
+  )
 })

@@ -83,6 +83,19 @@ class ValidateTest(unittest.TestCase):
         self.assertIsNone(parameters.instructions_version(block('"Global":\n  "Organização": "x"\n')))
 
 
+    def test_should_reject_what_the_notion_sync_cannot_read(self) -> None:
+        text = block('"Global":\n  "Organização": "x"\n').replace(
+            "metadata:\n", 'description: >\n  Uma descrição.\nmetadata:\n  version: "0.1.0" # primeira\n', 1
+        )
+        self.assertEqual(
+            self.errors(text),
+            ["write each frontmatter value on one line, not with > or |", "remove comments from the frontmatter"],
+        )
+
+    def test_should_accept_a_hash_inside_quotes(self) -> None:
+        self.assertEqual(self.errors(block('"Global":\n  "Organização": "x # y"\n')), [])
+
+
 class SettingTest(unittest.TestCase):
     def test_should_read_the_project_first_and_fall_back_to_the_next_root(self) -> None:
         with tempfile.TemporaryDirectory() as first, tempfile.TemporaryDirectory() as second:

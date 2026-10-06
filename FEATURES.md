@@ -77,7 +77,7 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
   - The mapping lives in the calling repository: data source id, property names, and status option names
   - `mapping` points at another mapping file. A change to that file republishes every skill
   - The page icon comes from the `Ícone das páginas no Notion` and `Cor do ícone das páginas no Notion` settings, with the core fallback
-  - The project instructions file becomes one more page of the skills database, titled with the file name, with a fixed description that tells the Notion agent to load it for any task, with the description and `metadata.version` of its frontmatter, and with its parameters in a YAML code block at the end of the page. It publishes when the file changes, when the mapping or the publisher changes, or when the project moves the core version
+  - The project instructions file becomes one more page of the skills database, titled with the file name. Its description and version properties come from `description` and `metadata.version` in the frontmatter, and the description tells the Notion agent to load the page for any task. The page body ends with its parameters in a YAML code block. It publishes when the file changes, when the mapping or the publisher changes, or when the project moves the core version
   - `include-core` also publishes the skills of the core harness into the caller's Notion
 - **Test Criteria**:
   - [x] A mapping can rename every status option

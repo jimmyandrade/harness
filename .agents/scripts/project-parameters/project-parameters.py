@@ -38,6 +38,9 @@ SETTING_SKILL = {
     "Tokens do catálogo": "criar-habilidade",
     "Tokens do corpo": "criar-habilidade",
 }
+# The Notion sync reads the frontmatter line by line, so the checker rejects what it cannot read.
+BLOCK_SCALAR = re.compile(r':\s*[>|][+-]?\s*$')
+QUOTED = re.compile(r'"[^"]*"|\'[^\']*\'')
 FLOW_STYLE = re.compile(r'^\s*(?:-\s*)?(?:"[^"]*"|[^:"]+)?\s*:?\s*[{\[]')
 
 
@@ -227,8 +230,14 @@ def validate(text: str, skills: dict[str, set[str]], required: bool) -> list[tup
     errors: list[tuple[str, int | None]] = []
     lines = text.splitlines()
     for index in range(1, (end or 1) - 1):
-        if FLOW_STYLE.match(lines[index]):
+        line = lines[index]
+        if FLOW_STYLE.match(line):
             errors.append(("write the frontmatter in block style, not with { } or [ ]", index + 1))
+        if BLOCK_SCALAR.search(line):
+            errors.append(("write each frontmatter value on one line, not with > or |", index + 1))
+        unquoted = QUOTED.sub("", line)
+        if unquoted.lstrip().startswith("#") or " #" in unquoted:
+            errors.append(("remove comments from the frontmatter", index + 1))
 
     def check_global(key: str, value) -> None:
         if key not in known and key not in SCRIPT_SETTINGS:
