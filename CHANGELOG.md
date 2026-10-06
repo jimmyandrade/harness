@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.15.0](https://github.com/jimmyandrade/harness/compare/v0.14.0...v0.15.0) (2026-10-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* .agents/config.yml is no longer read. Move its values to the Global entry of the parameter block in AGENTS.md, under these keys: limits.skill_words -> "Palavras", limits.skill_lines -> "Linhas", limits.skill_catalog_tokens -> "Tokens do catálogo", limits.skill_body_tokens -> "Tokens do corpo", organization.name -> "Organização", license.required -> "Licença obrigatória" ("sim" or "não"), locale.gherkin -> "Idioma do Gherkin", mermaid.flowchart_direction -> "Direção dos fluxogramas", notion.page_icon_name -> "Ícone das páginas no Notion", notion.page_icon_color -> "Cor do ícone das páginas no Notion", macos.folder_icon_symbol -> "Símbolo da pasta no macOS". locale.skill, locale.commit_subject, and recognition.languages are dropped; the commit language is "Idioma da mensagem de commit". A harness needs the parameter block, or the check fails.
+
+### Features
+
+* **definir-instrucoes-do-projeto:** learn from the first real run ([#107](https://github.com/jimmyandrade/harness/issues/107)) ([7be2952](https://github.com/jimmyandrade/harness/commit/7be2952afe2949caabaf5487a768387f41b2fc41))
+* read every harness setting from the AGENTS.md parameter block ([#109](https://github.com/jimmyandrade/harness/issues/109)) ([45e0c1d](https://github.com/jimmyandrade/harness/commit/45e0c1d259cd37394514a4f243b7675ce674d9f5))
+
 ## [0.14.0](https://github.com/jimmyandrade/harness/compare/v0.13.1...v0.14.0) (2026-10-06)
 
 
