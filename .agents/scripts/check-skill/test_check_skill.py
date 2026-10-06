@@ -181,10 +181,6 @@ class VersionReferenceTest(unittest.TestCase):
         self.assertIn("Segunda versão", checker.committed_text(self.relative))
 
 
-if __name__ == "__main__":
-    unittest.main()
-
-
 class InstructionsTest(unittest.TestCase):
     def setUp(self) -> None:
         self.tmp = tempfile.TemporaryDirectory()
@@ -217,6 +213,15 @@ class InstructionsTest(unittest.TestCase):
         self.assertIsNone(version)
         self.assertGreater(tokens, 0)
 
+    def test_should_measure_the_whole_file_when_the_frontmatter_does_not_close(self) -> None:
+        version, tokens = self.checker.body_measure("---\nname: x\n" + "palavra " * 100, self.encoding)
+        self.assertIsNone(version)
+        self.assertGreater(tokens, 50)
+
     def test_should_point_the_instructions_at_the_repository_root(self) -> None:
         self.assertEqual(self.checker.item_path("AGENTS.md"), "AGENTS.md")
         self.assertEqual(self.checker.item_path("criar-commit"), ".agents/skills/criar-commit/SKILL.md")
+
+
+if __name__ == "__main__":
+    unittest.main()

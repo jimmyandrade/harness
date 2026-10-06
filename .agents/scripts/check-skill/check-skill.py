@@ -140,7 +140,9 @@ def item_path(name: str) -> str:
 def body_measure(text: str, encoding) -> tuple[str | None, int | None]:
     """Version and body tokens of a skill, or of a file without frontmatter."""
     if text.startswith("---\n"):
-        return skill_measure(text, encoding)
+        version, tokens = skill_measure(text, encoding)
+        if tokens is not None:
+            return version, tokens
     return None, len(encoding.encode(text))
 
 
