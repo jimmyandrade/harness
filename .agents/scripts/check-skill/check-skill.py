@@ -58,9 +58,23 @@ def repo_root(start: Path) -> Path:
     raise SystemExit(".agents/config.yml not found")
 
 
-ROOT = repo_root(Path(os.environ.get("HARNESS_ROOT") or Path.cwd()).resolve())
+def project_root(start: Path) -> Path:
+    """The harness root, or, in a project that only installs the core, its git root."""
+    for path in (start, *start.parents):
+        if (path / ".agents" / "config.yml").is_file():
+            return path
+    for path in (start, *start.parents):
+        if (path / ".git").exists():
+            return path
+    return start
+
+
+ROOT = project_root(Path(os.environ.get("HARNESS_ROOT") or Path.cwd()).resolve())
 CORE = repo_root(Path(__file__).resolve().parent)
-CONFIGS = [ROOT / ".agents" / "config.yml", CORE / ".agents" / "config.yml"]
+# A project without its own .agents/config.yml only installs the core: its skills
+# are the core skills, so only its instructions are checked, with the core config.
+HAS_OWN_CONFIG = (ROOT / ".agents" / "config.yml").is_file()
+CONFIGS = [path for path in (ROOT / ".agents" / "config.yml", CORE / ".agents" / "config.yml") if path.is_file()]
 
 
 @dataclass(frozen=True)
@@ -1229,7 +1243,7 @@ def main() -> int:
             failed = True
             results[INSTRUCTIONS].append((Path(INSTRUCTIONS), finding))
             report(Path(INSTRUCTIONS), finding)
-    if args and not skill_args:
+    if (args and not skill_args) or not HAS_OWN_CONFIG:
         write_summary(results, measures, body_limit, encoding)
         return 1 if failed else 0
     for path in requested_files(ROOT, skill_args):

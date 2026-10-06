@@ -223,5 +223,24 @@ class InstructionsTest(unittest.TestCase):
         self.assertEqual(self.checker.item_path("criar-commit"), ".agents/skills/criar-commit/SKILL.md")
 
 
+
+class ProjectWithoutConfigTest(unittest.TestCase):
+    def test_should_check_instructions_in_a_project_that_only_installs_the_core(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            project = Path(tmp)
+            subprocess.run(["git", "init", "-q"], cwd=project, check=True)
+            (project / "AGENTS.md").write_text("palavra " * 6000, encoding="utf-8")
+            result = subprocess.run(
+                [sys.executable, str(HERE / "check-skill.py"), "AGENTS.md"],
+                cwd=project,
+                env={**os.environ, "HARNESS_ROOT": str(project)},
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(result.returncode, 1)
+            self.assertIn("body tokens (limit 5000)", result.stdout + result.stderr)
+            self.assertNotIn("config.yml not found", result.stdout + result.stderr)
+
+
 if __name__ == "__main__":
     unittest.main()

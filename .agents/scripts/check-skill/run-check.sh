@@ -31,5 +31,8 @@ if [ "$only_skills" -eq 1 ]; then
 else
   "$VENV/bin/python" "$SCRIPT/check-skill.py" || status=1
 fi
-"$VENV/bin/python" "$GRAPH" --check || status=1
+# A project that only installs the core has no skill graph of its own.
+if [ -f ".agents/config.yml" ]; then
+  "$VENV/bin/python" "$GRAPH" --check || status=1
+fi
 exit "$status"
