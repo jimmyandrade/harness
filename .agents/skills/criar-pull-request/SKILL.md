@@ -3,7 +3,7 @@ name: criar-pull-request
 description: Use essa habilidade sempre que for abrir PR, subir uma correção, mandar para a branch principal ou mesclar mudança no repositório, mesmo sem dizer PR. NÃO use para responder comentário de revisão nem para só commitar (use criar-commit).
 metadata:
   author: jimmyandrade
-  version: "0.7.1"
+  version: "0.8.0"
   notion: "false"
   related:
     - evoluir-habilidade
@@ -16,12 +16,12 @@ metadata:
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto. Quando um valor não estiver lá, use o padrão abaixo. `Repositório` vem do remoto `origin` quando as instruções não dizem.
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global`. Quando um valor não estiver lá, use o padrão abaixo. `Repositório` vem do remoto `origin` quando as instruções não dizem.
 
 ```yaml
 "Repositório": ""
 "Branch base": "main"
-"Merge": "squash"
+"Tipo de merge": "squash"
 "Idioma do PR": "inglês"
 "Comando de testes": ""
 "Comando de build": ""
@@ -34,7 +34,7 @@ Leia cada valor nas instruções do projeto. Quando um valor não estiver lá, u
 
 ## Instruções
 
-Nada entra na `Branch base` sem pull request. Nunca dê push na `Branch base`, nem com pedido explícito. Nunca dê force-push na `Branch base`. Toda mudança chega por PR mesclado com `Merge`.
+Nada entra na `Branch base` sem pull request. Nunca dê push na `Branch base`, nem com pedido explícito. Nunca dê force-push na `Branch base`. Toda mudança chega por PR mesclado com `Tipo de merge`.
 
 ### Passo 1
 
@@ -87,7 +87,7 @@ flowchart LR
 
 Comentário pendente é thread de revisão sem resolver, revisão que pede mudança ou comentário da conversa sem resposta, de pessoa ou de bot. Aviso de bot que só informa, como link de preview, não conta. Thread que espera decisão da pessoa segura o merge até ela decidir.
 Leia os checks uma vez. Se estiverem pendentes, não espere em loop: diga quais faltam e pare. Com `Exigir CI verde` igual a `não`, mescle mesmo assim e diga na resposta quais checks não passaram.
-Mescle só com `Merge`. Se o modo automático negar o merge, não tente de outro jeito: nada de auto-merge, API ou outra ferramenta. Entregue o comando pronto e diga que a decisão é da pessoa.
+Mescle só com `Tipo de merge`. Se o modo automático negar o merge, não tente de outro jeito: nada de auto-merge, API ou outra ferramenta. Entregue o comando pronto e diga que a decisão é da pessoa.
 Com `Comunicar novidade após o merge` igual a `sim`, siga `comunicar-novidade-do-produto` para o PR mesclado. Faça o mesmo quando a pessoa avisar que mesclou: confirme o estado MERGED antes.
 
 ### Passo 9
@@ -141,7 +141,7 @@ Branch `fix/…` a partir da base, testes e build no commit, commit no idioma do
 
 ### Só coloca isso na main
 
-O pedido autoriza push e merge. Push sem o hook, porque o commit já passou em testes e build, PR aberto, merge com `Merge`. Se o modo automático negar, o comando de merge vai pronto na resposta.
+O pedido autoriza push e merge. Push sem o hook, porque o commit já passou em testes e build, PR aberto, merge com `Tipo de merge`. Se o modo automático negar, o comando de merge vai pronto na resposta.
 
 ## Casos-limite
 
@@ -172,6 +172,6 @@ O pedido autoriza push e merge. Push sem o hook, porque o commit já passou em t
 - `gh pr create --repo <Repositório> --base <Branch base> --head <branch> --title "<assunto>" --body "<corpo>"`: Passo 6.
 - `gh api graphql -f query='query{repository(owner:"<dono>",name:"<nome>"){pullRequest(number:<número>){reviewDecision reviewThreads(first:100){nodes{isResolved}}}}}'`: threads sem resolver e pedido de mudança do Passo 8.
 - `gh pr checks <número> --repo <Repositório>`: checks do Passo 8.
-- `gh pr merge <número> --repo <Repositório> --<Merge> --delete-branch`: Passo 8.
+- `gh pr merge <número> --repo <Repositório> --<Tipo de merge> --delete-branch`: Passo 8.
 
 1. Rode as verificações, depois o rebase, o teste de acesso, o push, a criação do PR e, só com pedido, os comentários, os checks e o merge.

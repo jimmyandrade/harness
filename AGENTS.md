@@ -15,6 +15,7 @@ locale: en
 
 - A skill reads what differs between projects from the project instructions. In a repository, those are `AGENTS.md`. In Notion, they are the page titled `AGENTS.md` in that workspace. When both exist, the repository wins for repository work.
 - The skill text says "instruções do projeto". It does not name a file, a path, a workspace, or a page.
+- Parameter values form a tree, as ADR 0008 decides: an entry named after the skill, then an entry named `Global`. A skill reads its own entry first, then `Global`.
 - A parameter that the project instructions do not set uses the default written in the skill. When the skill has no default, ask once and stop.
 - Never edit the project instructions page in Notion. It belongs to the people of that workspace.
 

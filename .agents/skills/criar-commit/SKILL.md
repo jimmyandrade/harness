@@ -3,7 +3,7 @@ name: criar-commit
 description: Use essa habilidade sempre que terminar um trabalho que mudou o repositório ou for commitar, separar commits ou escrever a mensagem, mesmo sem dizer commit. NÃO use para push, abrir PR, rebase nem merge (use criar-pull-request).
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.4.0"
   notion: "false"
 ---
 
@@ -11,14 +11,14 @@ metadata:
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto. Quando um valor não estiver lá, use o padrão abaixo.
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global`. Quando um valor não estiver lá, use o padrão abaixo.
 
 ```yaml
 "Branch base": "main"
 "Commit direto na base": "não"
 "Commitar sem perguntar": "sim"
-"Idioma da mensagem": "inglês"
-"Padrão da mensagem": "Conventional Commits"
+"Idioma da mensagem de commit": "inglês"
+"Padrão da mensagem de commit": "Conventional Commits"
 "Comando de testes": ""
 "Comando de build": ""
 "Comando de lint dos arquivos tocados": ""
@@ -49,7 +49,7 @@ Adicione ao índice cada arquivo pelo caminho. Confira o que entrou antes de com
 
 ### Passo 6
 
-Mensagem em `Idioma da mensagem`, no `Padrão da mensagem`. O assunto diz por que a mudança existe. Corpo só quando precisa de contexto. Renomear ou quebrar compatibilidade leva `!` no tipo e rodapé `BREAKING CHANGE:`. Termine com o trailer de coautoria da sessão.
+Mensagem em `Idioma da mensagem de commit`, no `Padrão da mensagem de commit`. O assunto diz por que a mudança existe. Corpo só quando precisa de contexto. Renomear ou quebrar compatibilidade leva `!` no tipo e rodapé `BREAKING CHANGE:`. Termine com o trailer de coautoria da sessão.
 
 ### Passo 7
 
