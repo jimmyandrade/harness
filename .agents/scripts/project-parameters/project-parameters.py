@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Read and validate the parameter block of a project's AGENTS.md (ADR 0009).
+"""Read and validate the parameter block of a project's instructions file (ADR 0009).
 
 The block is the first yaml code block after the heading HEADING. Skills read
 it for their parameters, and the harness scripts read their settings from its

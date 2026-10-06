@@ -2,8 +2,8 @@
  * Publish changed skill pages with the Notion JavaScript SDK.
  * The project is HARNESS_ROOT, or the working directory when it is unset.
  * The mapping is .agents/mappings/skill-page.notion.json in the project, or --mapping.
- * The page icon name and color are in the parameter block of the project AGENTS.md.
- * A setting missing there falls back to the AGENTS.md of this harness (ADR 0009).
+ * The page icon name and color are in the parameter block of the project instructions file.
+ * A setting missing there falls back to the instructions file of this harness (ADR 0009).
  * With --include-core, the skills of this harness are published too, when the
  * project changes its mapping, a workflow, or its package files. Those are the
  * places where a project moves the version of this harness it uses.
@@ -85,7 +85,7 @@ export type PageIcon = {
 export const PARAMETERS_HEADING = "## Parâmetros das habilidades"
 export const INSTRUCTIONS_FILE = "AGENTS.md"
 
-/** A setting from the Global entry, or the top level, of the AGENTS.md parameter block. */
+/** A setting from the Global entry, or the top level, of the instructions parameter block. */
 export function blockSetting(text: string, key: string): string | null {
   const lines = text.split("\n")
   const heading = lines.findIndex((line) => line.trim() === PARAMETERS_HEADING)
@@ -112,7 +112,7 @@ function settingValue(texts: string[], key: string): string {
     const value = blockSetting(text, key)
     if (value !== null) return value
   }
-  throw new Error(`"${key}" is missing from the parameter block of AGENTS.md`)
+  throw new Error(`"${key}" is missing from the parameter block of ${INSTRUCTIONS_FILE}`)
 }
 
 export function pageIcon(text: string, fallback = ""): PageIcon {

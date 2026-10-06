@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Print the size of one skill. Reads limits from the AGENTS.md parameter block.
+"""Print the size of one skill. Reads limits from the instructions parameter block.
 
 The limits come from the project of the measured skill. A key missing there
-falls back to the AGENTS.md of the harness that ships this script.
+falls back to the instructions file of the harness that ships this script.
 """
 
 from __future__ import annotations

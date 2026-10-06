@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Fail when a SKILL.md or AGENTS.md breaks a harness rule or passes a limit.
+"""Fail when a SKILL.md or the project instructions file breaks a harness rule or passes a limit.
 
 A skill that lists metadata.related names only skills that exist in the project
 or in this harness, and lists every skill its body cites.
 
 The project is HARNESS_ROOT, or the working directory when it is unset.
-Settings come from the parameter block of the project AGENTS.md, then of this harness (ADR 0009).
+Settings come from the parameter block of the project instructions file, then of this harness (ADR 0009).
 """
 
 from __future__ import annotations

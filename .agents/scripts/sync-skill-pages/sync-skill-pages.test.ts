@@ -508,7 +508,7 @@ test("two pages with the same name stop", async () => {
   await assert.rejects(() => notion.findPage(mapping, "definir-tarefa"))
 })
 
-test("page icon name and color come from the AGENTS.md parameter block", () => {
+test("page icon name and color come from the instructions parameter block", () => {
   assert.deepEqual(icon, { type: "icon", icon: { name: "magic-wand", color: "gray" } })
   const stored = pageIcon(readFileSync(join(coreRoot(), INSTRUCTIONS_FILE), "utf8"))
   assert.equal(stored.type, "icon")

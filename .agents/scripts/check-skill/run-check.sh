@@ -18,11 +18,13 @@ if ! "$VENV/bin/python" -c "import tiktoken" >/dev/null 2>&1; then
   "$VENV/bin/pip" install -q -r "$SCRIPT/requirements.txt"
 fi
 
+# The project instructions file, also named in the project-parameters module.
+INSTRUCTIONS=AGENTS.md
 status=0
 only_skills=1
 for arg in "$@"; do
   case "$arg" in
-    */SKILL.md|AGENTS.md|*/AGENTS.md) ;;
+    */SKILL.md|"$INSTRUCTIONS"|*/"$INSTRUCTIONS") ;;
     *) only_skills=0 ;;
   esac
 done
