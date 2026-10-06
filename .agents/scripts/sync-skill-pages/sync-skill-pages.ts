@@ -2,7 +2,7 @@
  * Publish changed skill pages with the Notion JavaScript SDK.
  * The project is HARNESS_ROOT, or the working directory when it is unset.
  * The mapping is .agents/mappings/skill-page.notion.json in the project, or --mapping.
- * The page icon name and color are in the parameter block of the project instructions file.
+ * The page icon name and color are in metadata.parameters of the project instructions file.
  * A setting missing there falls back to the instructions file of this harness (ADR 0009).
  * The project instructions file is published as one more page of the skills
  * database when it changes, when the mapping or this publisher changes, or when
@@ -88,17 +88,63 @@ export type PageIcon = {
 export const PARAMETERS_HEADING = "## Parâmetros das habilidades"
 export const INSTRUCTIONS_FILE = "AGENTS.md"
 
-/** A setting from the Global entry, or the top level, of the instructions parameter block. */
+/** The frontmatter lines and the body of a Markdown text, or null without frontmatter. */
+function frontmatterParts(text: string): { front: string[]; body: string } | null {
+  if (!text.startsWith("---\n")) return null
+  const end = text.indexOf("\n---\n", 4)
+  if (end < 0) return null
+  return { front: text.slice(4, end).split("\n"), body: text.slice(end + 5).replace(/^\n/, "") }
+}
+
+/** A field at the top of the frontmatter, or one level under metadata. */
+function frontmatterField(text: string, key: string, inMetadata: boolean): string | null {
+  const parts = frontmatterParts(text)
+  if (!parts) return null
+  let metadata = false
+  for (const line of parts.front) {
+    if (line && !line.startsWith(" ")) metadata = line.startsWith("metadata:")
+    const match = /^( *)([^\s:#][^:]*):\s*(.*)$/.exec(line)
+    if (!match) continue
+    const indent = (match[1] ?? "").length
+    const wanted = inMetadata ? metadata && indent === 2 : indent === 0
+    if (wanted && unquote((match[2] ?? "").trim()) === key) {
+      const value = unquote((match[3] ?? "").trim())
+      return value || null
+    }
+  }
+  return null
+}
+
+/** metadata.parameters of an instructions text, as YAML at the left margin. */
+export function parametersYaml(text: string): string | null {
+  const parts = frontmatterParts(text)
+  if (!parts) return null
+  let metadata = false
+  let start = -1
+  for (const [index, line] of parts.front.entries()) {
+    if (line && !line.startsWith(" ")) metadata = line.startsWith("metadata:")
+    if (metadata && /^ {2}parameters:\s*$/.test(line)) {
+      start = index + 1
+      break
+    }
+  }
+  if (start < 0) return null
+  const lines: string[] = []
+  for (const line of parts.front.slice(start)) {
+    if (line.trim() && !line.startsWith("    ")) break
+    lines.push(line.slice(4))
+  }
+  const yaml = lines.join("\n").replace(/\s+$/, "")
+  return yaml ? `${yaml}\n` : null
+}
+
+/** A setting from the Global entry, or the top level, of metadata.parameters. */
 export function blockSetting(text: string, key: string): string | null {
-  const lines = text.split("\n")
-  const heading = lines.findIndex((line) => line.trim() === PARAMETERS_HEADING)
-  if (heading === -1) return null
-  const fence = lines.findIndex((line, index) => index > heading && /^```ya?ml\s*$/.test(line.trim()))
-  if (fence === -1) return null
+  const yaml = parametersYaml(text)
+  if (yaml === null) return null
   const pattern = new RegExp(`^(\\s*)"?${key.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"?\\s*:\\s*(.*)$`)
   let inGlobal = false
-  for (const raw of lines.slice(fence + 1)) {
-    if (raw.trim() === "```") break
+  for (const raw of yaml.split("\n")) {
     const line = (raw.split(" #", 1)[0] ?? "").replace(/\s+$/, "")
     if (!line.trim()) continue
     if (!line.startsWith(" ")) inGlobal = /^"?Global"?\s*:\s*$/.test(line)
@@ -115,7 +161,7 @@ function settingValue(texts: string[], key: string): string {
     const value = blockSetting(text, key)
     if (value !== null) return value
   }
-  throw new Error(`"${key}" is missing from the parameter block of ${INSTRUCTIONS_FILE}`)
+  throw new Error(`"${key}" is missing from metadata.parameters of ${INSTRUCTIONS_FILE}`)
 }
 
 export function pageIcon(text: string, fallback = ""): PageIcon {
@@ -521,19 +567,20 @@ export async function publish(
   return lines
 }
 
-/** Description of the instructions page, read by the Notion agent to decide when to load it. */
-export const INSTRUCTIONS_DESCRIPTION =
-  "Use essa habilidade sempre que for executar qualquer tarefa neste espaço de trabalho, inclusive outra habilidade, para seguir as instruções gerais e ler os parâmetros das habilidades. NÃO use para criar nem alterar estas instruções: a mudança vai no repositório."
-
-export const INSTRUCTIONS_VERSION = "Versão das instruções do projeto"
-
-/** The project instructions file as a page of the skills database (ADR 0008), with its own version. */
+/** The project instructions file as a page of the skills database (ADR 0008). */
 export function instructionsPage(text: string): SkillPage {
-  const version = blockSetting(text, INSTRUCTIONS_VERSION)
+  const parts = frontmatterParts(text)
+  const description = frontmatterField(text, "description", false)
+  const version = frontmatterField(text, "version", true)
+  if (!parts || !description) throw new Error(`${INSTRUCTIONS_FILE} is missing description in its frontmatter`)
   if (!version || !/^\d+\.\d+\.\d+$/.test(version)) {
-    throw new Error(`"${INSTRUCTIONS_VERSION}" is missing from the parameter block of ${INSTRUCTIONS_FILE}`)
+    throw new Error(`${INSTRUCTIONS_FILE} is missing metadata.version in its frontmatter`)
   }
-  return { name: INSTRUCTIONS_FILE, description: INSTRUCTIONS_DESCRIPTION, version, body: text }
+  const yaml = parametersYaml(text)
+  const body = yaml
+    ? `${parts.body.replace(/\s+$/, "")}\n\n${PARAMETERS_HEADING}\n\n\`\`\`yaml\n${yaml}\`\`\`\n`
+    : parts.body
+  return { name: INSTRUCTIONS_FILE, description, version, body }
 }
 
 export async function publishInstructions(root: string, notion: PageWriter, mapping: SkillMapping): Promise<string> {

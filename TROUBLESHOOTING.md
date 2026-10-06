@@ -23,9 +23,9 @@ The message names a skill, a config key, or a mapping that belongs to another re
 
 ## A setting is missing or invalid
 
-The message is `"<key>" is missing from the parameter block of AGENTS.md`, or a finding on `AGENTS.md` such as `"<key>" is not a parameter of any skill nor a script setting`.
+The message is `"<key>" is missing from metadata.parameters of AGENTS.md`, or a finding on `AGENTS.md` such as `"<key>" is not a parameter of any skill nor a script setting`.
 
-1. A missing setting is absent from the project block and from the core block. Update the harness dependency or the action tag, or add the key under `Global` in the project `AGENTS.md`.
+1. A missing setting is absent from the project and from the core. Update the harness dependency or the action tag, or add the key under `metadata.parameters.Global` in the frontmatter of the project `AGENTS.md`.
 2. An unknown key is usually misspelled. Copy the key from the skill's `Parâmetros de configuração` block, or from the core `AGENTS.md` for a script setting.
 
 ## The vocabulary MCP rejects a language

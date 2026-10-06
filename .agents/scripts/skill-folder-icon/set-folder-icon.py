@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Write the macOS folder symbol from the instructions parameter block onto each skill folder.
+"""Write the macOS folder symbol from the instructions parameters onto each skill folder.
 
 The project is HARNESS_ROOT, or the working directory when it is unset.
 A setting missing from the project instructions file falls back to the one in this harness.

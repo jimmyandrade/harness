@@ -11,7 +11,6 @@ import {
   blankBase,
   createArgs,
   blockSetting,
-  INSTRUCTIONS_DESCRIPTION,
   INSTRUCTIONS_FILE,
   instructionsPage,
   publishInstructions,
@@ -40,7 +39,15 @@ import {
 } from "./sync-skill-pages.ts"
 
 function block(yaml: string): string {
-  return `${PARAMETERS_HEADING}\n\n\`\`\`yaml\n${yaml}\`\`\`\n`
+  const indented = yaml
+    .split("\n")
+    .map((line) => (line ? `    ${line}` : line))
+    .join("\n")
+  return `---\nmetadata:\n  parameters:\n${indented}---\n\n# Instruções do projeto\n`
+}
+
+function instructions(version: string, rule: string): string {
+  return `---\ndescription: Use essa habilidade sempre que for executar qualquer tarefa.\nmetadata:\n  version: "${version}"\n  parameters:\n    "Global":\n      "Organização": "example"\n---\n\n# Instruções do projeto\n\n${rule}\n`
 }
 
 function parameters(lines: string): string {
@@ -511,7 +518,7 @@ test("two pages with the same name stop", async () => {
   await assert.rejects(() => notion.findPage(mapping, "definir-tarefa"))
 })
 
-test("page icon name and color come from the instructions parameter block", () => {
+test("page icon name and color come from the instructions parameters", () => {
   assert.deepEqual(icon, { type: "icon", icon: { name: "magic-wand", color: "gray" } })
   const stored = pageIcon(readFileSync(join(coreRoot(), INSTRUCTIONS_FILE), "utf8"))
   assert.equal(stored.type, "icon")
@@ -565,16 +572,17 @@ test("core skills publish when the project moves the core version or its mapping
   assert.throws(() => coreNamesToPublish(["criar-commit"], ["criar-commit"], true, true), /criar-commit exists/)
 })
 
-test("the instructions file becomes a page with its own version and a fixed description", () => {
-  const text = parameters('  "Versão das instruções do projeto": "0.5.0"\n')
-  const page = instructionsPage(text)
+test("the instructions file becomes a page with its frontmatter version and description", () => {
+  const page = instructionsPage(instructions("0.5.0", "Uma regra."))
   assert.equal(page.name, INSTRUCTIONS_FILE)
-  assert.equal(page.description, INSTRUCTIONS_DESCRIPTION)
+  assert.equal(page.description, "Use essa habilidade sempre que for executar qualquer tarefa.")
   assert.equal(page.version, "0.5.0")
-  assert.equal(page.body, text)
+  assert.ok(page.body.startsWith("# Instruções do projeto\n\nUma regra."))
+  assert.ok(page.body.includes(`${PARAMETERS_HEADING}\n\n\`\`\`yaml\n"Global":\n  "Organização": "example"\n\`\`\``))
+  assert.equal(page.body.includes("description:"), false)
   assert.deepEqual(properties(page, mapping)[mapping.properties.status], { status: { name: skillStatus("0.5.0", statusOptions(mapping)) } })
   assert.throws(() => instructionsPage("# Instruções do projeto\n"))
-  assert.throws(() => instructionsPage(parameters('  "Versão das instruções do projeto": "cinco"\n')))
+  assert.throws(() => instructionsPage(instructions("cinco", "x")))
 })
 
 test("the instructions page is created once, then updated", async () => {
@@ -592,9 +600,9 @@ test("the instructions page is created once, then updated", async () => {
     },
   }
   assert.equal(await publishInstructions(root, writer, mapping), `skip ${INSTRUCTIONS_FILE}: missing`)
-  writeFileSync(join(root, INSTRUCTIONS_FILE), parameters('  "Versão das instruções do projeto": "0.1.0"\n'))
+  writeFileSync(join(root, INSTRUCTIONS_FILE), instructions("0.1.0", "primeira"))
   assert.equal(await publishInstructions(root, writer, mapping), `create ${INSTRUCTIONS_FILE}: id-${INSTRUCTIONS_FILE}`)
-  writeFileSync(join(root, INSTRUCTIONS_FILE), parameters('  "Versão das instruções do projeto": "0.2.0"\n'))
+  writeFileSync(join(root, INSTRUCTIONS_FILE), instructions("0.2.0", "segunda"))
   assert.equal(await publishInstructions(root, writer, mapping), `update ${INSTRUCTIONS_FILE}: id-${INSTRUCTIONS_FILE}`)
   assert.equal(pages.get(INSTRUCTIONS_FILE)?.version, "0.2.0")
 })

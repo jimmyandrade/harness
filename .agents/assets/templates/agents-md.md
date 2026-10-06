@@ -1,3 +1,15 @@
+---
+description: Use essa habilidade sempre que for executar qualquer tarefa neste espaço de trabalho, inclusive outra habilidade, para seguir as instruções gerais e ler os parâmetros das habilidades. NÃO use para criar nem alterar estas instruções; a mudança vai no repositório.
+metadata:
+  version: "0.1.0"
+  parameters:
+    "Global":
+      "Idioma das instruções do projeto": "português"
+      "<chave exata usada por mais de uma habilidade>": "<valor>"
+    "<nome-da-habilidade>":
+      "<chave exata desta habilidade>": "<valor>"
+---
+
 # Instruções do projeto
 
 Este documento contém instruções que, dependendo da ferramenta utilizada, podem servir como instruções para <ferramentas>, seja para <tipos de tarefa> de <negócio>.
@@ -29,14 +41,3 @@ Esta seção descreve o estilo de comunicação que você usa nas interações d
 ## Em ferramentas de código
 
 Antes de qualquer mudança no código, leia o `CONTRIBUTING.md` inteiro. As regras dele valem como se estivessem aqui.
-
-## Parâmetros das habilidades
-
-```yaml
-"Global":
-  "Idioma das instruções do projeto": "português"
-  "Versão das instruções do projeto": "0.1.0"
-  "<chave exata usada por mais de uma habilidade>": "<valor>"
-"<nome-da-habilidade>":
-  "<chave exata desta habilidade>": "<valor>"
-```

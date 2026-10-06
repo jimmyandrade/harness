@@ -17,7 +17,7 @@ _spec = importlib.util.spec_from_file_location(
 project_parameters = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(project_parameters)
 INSTRUCTIONS = project_parameters.INSTRUCTIONS
-PARAMETERS = f'{project_parameters.HEADING}\n\n```yaml\n"Global":\n  "Organização": "example"\n```\n'
+PARAMETERS = '---\nmetadata:\n  parameters:\n    "Global":\n      "Organização": "example"\n---\n\n# Instruções\n'
 
 
 def load_checker(project: Path):
@@ -242,33 +242,35 @@ class InstructionsVersionTest(unittest.TestCase):
         self.tmp.cleanup()
         os.environ.pop("HARNESS_ROOT", None)
 
-    def test_should_require_the_version_in_a_business_harness(self) -> None:
+    @staticmethod
+    def text(version: str, rule: str = "Uma regra.") -> str:
+        return PARAMETERS.replace(
+            "---\nmetadata:\n", f'---\ndescription: Use essa habilidade sempre que for executar qualquer tarefa.\nmetadata:\n  version: "{version}"\n', 1
+        ).replace("# Instruções\n", f"# Instruções\n\n{rule}\n")
+
+    def test_should_require_description_and_version_in_a_business_harness(self) -> None:
         self.assertEqual(
             [message for message, _ in self.checker.instructions_version_errors(PARAMETERS)],
-            ['"Versão das instruções do projeto" is required in a business harness'],
+            [
+                "description is required in the frontmatter of a business harness",
+                'metadata.version is required in a business harness, as a quoted version such as "0.1.0"',
+            ],
         )
 
     def test_should_require_a_higher_version_when_the_instructions_change(self) -> None:
-        def text(version: str, rule: str) -> str:
-            return f"# Instruções\n\n{rule}\n\n" + PARAMETERS.replace(
-                '"Global":\n', f'"Global":\n  "Versão das instruções do projeto": "{version}"\n'
-            )
-
         git = ["git", "-c", "user.email=t@example.com", "-c", "user.name=t"]
         subprocess.run(["git", "init", "-q"], cwd=self.project, check=True)
-        (self.project / INSTRUCTIONS).write_text(text("0.5.0", "Regra antiga."), encoding="utf-8")
+        (self.project / INSTRUCTIONS).write_text(self.text("0.5.0", "Regra antiga."), encoding="utf-8")
         subprocess.run(git + ["add", "."], cwd=self.project, check=True)
         subprocess.run(git + ["commit", "-q", "-m", "x"], cwd=self.project, check=True)
         self.assertEqual(
-            [message for message, _ in self.checker.instructions_version_errors(text("0.5.0", "Regra nova."))],
-            ['"Versão das instruções do projeto" must increase when the instructions change'],
+            [message for message, _ in self.checker.instructions_version_errors(self.text("0.5.0", "Regra nova."))],
+            ["metadata.version must increase when the instructions change"],
         )
-        self.assertEqual(self.checker.instructions_version_errors(text("0.6.0", "Regra nova.")), [])
+        self.assertEqual(self.checker.instructions_version_errors(self.text("0.6.0", "Regra nova.")), [])
 
     def test_should_accept_a_version_without_history(self) -> None:
-        text = PARAMETERS.replace('"Global":\n', '"Global":\n  "Versão das instruções do projeto": "0.5.0"\n')
-        self.assertEqual(self.checker.instructions_version_errors(text), [])
-
+        self.assertEqual(self.checker.instructions_version_errors(self.text("0.5.0")), [])
 
 if __name__ == "__main__":
     unittest.main()

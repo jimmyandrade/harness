@@ -52,7 +52,7 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
 - **Description**: Check the skills of a repository against the harness rules
 - **Properties**:
   - Composite action at `.github/actions/check-skill/` and script `.agents/scripts/check-skill/run-check.sh`
-  - Reads the project from `HARNESS_ROOT` or the working directory, and its settings from the parameter block of its `AGENTS.md`, with the core block as fallback. It validates that block: the heading and YAML exist and parse, every key belongs to a skill or a script, and script settings have the right type. A project that links `.agents/skills` to the core gets only its `AGENTS.md` checked
+  - Reads the project from `HARNESS_ROOT` or the working directory, and its settings from `metadata.parameters` in the frontmatter of its `AGENTS.md`, with the core as fallback. It validates them: the frontmatter exists and parses, every key belongs to a skill or a script, and script settings have the right type. A project that links `.agents/skills` to the core gets only its `AGENTS.md` checked
   - `base` and `head` limit the check to the skills that changed
   - The project's root `AGENTS.md` gets the size limits of a skill body (words, lines, body tokens), because it loads in every session, as ADR 0008 decides. The structure rules of a skill do not apply to it. It shows in the summary table and in the pull request comment when it changes
   - On a pull request, the action keeps one comment with the table of the skills the pull request adds, changes, or fails: version, body tokens, and share of the limit, before and after. Each push edits that comment. `comment: false` turns it off. The calling workflow needs `permissions: pull-requests: write`; without it the step warns and the check result stands
@@ -77,14 +77,14 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
   - The mapping lives in the calling repository: data source id, property names, and status option names
   - `mapping` points at another mapping file. A change to that file republishes every skill
   - The page icon comes from the `Ícone das páginas no Notion` and `Cor do ícone das páginas no Notion` settings, with the core fallback
-  - The project instructions file becomes one more page of the skills database, titled with the file name, with a fixed description that tells the Notion agent to load it for any task, and with the version and status taken from `Versão das instruções do projeto` in its parameter block. It publishes when the file changes, when the mapping or the publisher changes, or when the project moves the core version
+  - The project instructions file becomes one more page of the skills database, titled with the file name, with a fixed description that tells the Notion agent to load it for any task, with the description and `metadata.version` of its frontmatter, and with its parameters in a YAML code block at the end of the page. It publishes when the file changes, when the mapping or the publisher changes, or when the project moves the core version
   - `include-core` also publishes the skills of the core harness into the caller's Notion
 - **Test Criteria**:
   - [x] A mapping can rename every status option
   - [x] Core skills publish when the project moves the core version or its mapping, and a name in both stops the sync
   - [x] The project root is `HARNESS_ROOT`, or the working directory
   - [x] The instructions page is created once and then updated, with the version of its block
-  - [x] A business harness needs `Versão das instruções do projeto`, and it must rise when the instructions change
+  - [x] A business harness needs `description` and `metadata.version` in the frontmatter of `AGENTS.md`, and the version must rise when the instructions change
   - [ ] A business workflow that calls the action creates one page per new skill
 
 ### classify-term
