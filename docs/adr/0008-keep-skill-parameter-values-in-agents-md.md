@@ -6,7 +6,7 @@ locale: en
 
 ## Status
 
-Accepted
+Accepted. ADR 0009 supersedes the part that keeps `.agents/config.yml` for what scripts read.
 
 ## Context
 
