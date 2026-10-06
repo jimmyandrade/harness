@@ -76,12 +76,14 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
   - Composite action at `.github/actions/sync-skill-pages/` and script `.agents/scripts/sync-skill-pages/sync-skill-pages.ts`
   - The mapping lives in the calling repository: data source id, property names, and status option names
   - `mapping` points at another mapping file. A change to that file republishes every skill
-  - The page icon comes from `notion.page_icon_name` and `notion.page_icon_color`, with the core fallback
+  - The page icon comes from the `Ícone das páginas no Notion` and `Cor do ícone das páginas no Notion` settings, with the core fallback
+  - The project instructions file becomes one more page of the skills database, titled with the file name, with a fixed description that tells the Notion agent to load it for any task and a production status. It publishes when the file changes, or when the mapping or the publisher changes
   - `include-core` also publishes the skills of the core harness into the caller's Notion
 - **Test Criteria**:
   - [x] A mapping can rename every status option
   - [x] Core skills publish when the project moves the core version or its mapping, and a name in both stops the sync
   - [x] The project root is `HARNESS_ROOT`, or the working directory
+  - [x] The instructions page is created once and then updated
   - [ ] A business workflow that calls the action creates one page per new skill
 
 ### classify-term

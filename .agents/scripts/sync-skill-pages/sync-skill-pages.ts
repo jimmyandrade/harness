@@ -4,6 +4,8 @@
  * The mapping is .agents/mappings/skill-page.notion.json in the project, or --mapping.
  * The page icon name and color are in the parameter block of the project instructions file.
  * A setting missing there falls back to the instructions file of this harness (ADR 0009).
+ * The project instructions file is published as one more page of the skills
+ * database when it changes, or when the mapping or this publisher changes.
  * With --include-core, the skills of this harness are published too, when the
  * project changes its mapping, a workflow, or its package files. Those are the
  * places where a project moves the version of this harness it uses.
@@ -518,6 +520,28 @@ export async function publish(
   return lines
 }
 
+/** Description of the instructions page, read by the Notion agent to decide when to load it. */
+export const INSTRUCTIONS_DESCRIPTION =
+  "Use essa habilidade sempre que for executar qualquer tarefa neste espaço de trabalho, inclusive outra habilidade, para seguir as instruções gerais e ler os parâmetros das habilidades. NÃO use para criar nem alterar estas instruções: a mudança vai no repositório."
+
+/** The project instructions file as a page of the skills database (ADR 0008). */
+export function instructionsPage(text: string): SkillPage {
+  return { name: INSTRUCTIONS_FILE, description: INSTRUCTIONS_DESCRIPTION, version: "1.0.0", body: text }
+}
+
+export async function publishInstructions(root: string, notion: PageWriter, mapping: SkillMapping): Promise<string> {
+  const path = join(root, INSTRUCTIONS_FILE)
+  if (!existsSync(path)) return `skip ${INSTRUCTIONS_FILE}: missing`
+  const page = instructionsPage(readFileSync(path, "utf8"))
+  const existing = await notion.findPage(mapping, page.name)
+  if (existing === null) {
+    const created = await notion.createPage(page, mapping)
+    return `create ${page.name}: ${created.url ?? created.id ?? ""}`
+  }
+  await notion.updatePage(existing, page, mapping)
+  return `update ${page.name}: ${existing}`
+}
+
 export function gate(names: string[], token: string): 0 | 2 | null {
   if (names.length === 0) return 0
   if (!token) return 2
@@ -585,7 +609,9 @@ export async function main(argv: string[]): Promise<number> {
     return page.aliases ?? []
   })
   const token = process.env.NOTION_TOKEN ?? ""
-  const code = gate([...names, ...coreNames], token)
+  const instructionsChanged =
+    core !== root && (rulesChanged || gitNames(root, base, head, [INSTRUCTIONS_FILE]).length > 0)
+  const code = gate([...names, ...coreNames, ...(instructionsChanged ? [INSTRUCTIONS_FILE] : [])], token)
   if (code === 0) {
     console.log("no changed skill")
     return 0
@@ -598,6 +624,7 @@ export async function main(argv: string[]): Promise<number> {
   for (const line of await publish(root, names, notion, mapping, previous)) {
     console.log(line)
   }
+  if (instructionsChanged) console.log(await publishInstructions(root, notion, mapping))
   for (const line of await publish(core, coreNames, notion, mapping)) {
     console.log(`core ${line}`)
   }

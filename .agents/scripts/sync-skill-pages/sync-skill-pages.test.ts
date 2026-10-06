@@ -11,7 +11,10 @@ import {
   blankBase,
   createArgs,
   blockSetting,
+  INSTRUCTIONS_DESCRIPTION,
   INSTRUCTIONS_FILE,
+  instructionsPage,
+  publishInstructions,
   PARAMETERS_HEADING,
   coreRoot,
   pageIcon,
@@ -560,4 +563,35 @@ test("core skills publish when the project moves the core version or its mapping
   assert.deepEqual(coreNamesToPublish(["lancar-venda"], ["criar-commit"], false, true), ["criar-commit"])
   assert.deepEqual(coreNamesToPublish(["lancar-venda"], ["criar-commit"], true, false), ["criar-commit"])
   assert.throws(() => coreNamesToPublish(["criar-commit"], ["criar-commit"], true, true), /criar-commit exists/)
+})
+
+test("the instructions file becomes a production page with a fixed description", () => {
+  const page = instructionsPage("# Instruções do projeto\n")
+  assert.equal(page.name, INSTRUCTIONS_FILE)
+  assert.equal(page.description, INSTRUCTIONS_DESCRIPTION)
+  assert.equal(page.body, "# Instruções do projeto\n")
+  assert.deepEqual(properties(page, mapping)[mapping.properties.status], { status: { name: skillStatus("1.0.0", statusOptions(mapping)) } })
+  assert.equal(skillStatus(page.version), skillStatus("1.0.0"))
+})
+
+test("the instructions page is created once, then updated", async () => {
+  const root = mkdtempSync(join(tmpdir(), "instructions-"))
+  const pages = new Map<string, SkillPage>()
+  const writer = {
+    findPage: async (_mapping: SkillMapping, name: string) => (pages.has(name) ? `id-${name}` : null),
+    createPage: async (page: SkillPage) => {
+      pages.set(page.name, page)
+      return { id: `id-${page.name}` }
+    },
+    updatePage: async (pageId: string, page: SkillPage) => {
+      pages.set(page.name, page)
+      return { id: pageId }
+    },
+  }
+  assert.equal(await publishInstructions(root, writer, mapping), `skip ${INSTRUCTIONS_FILE}: missing`)
+  writeFileSync(join(root, INSTRUCTIONS_FILE), "primeira\n")
+  assert.equal(await publishInstructions(root, writer, mapping), `create ${INSTRUCTIONS_FILE}: id-${INSTRUCTIONS_FILE}`)
+  writeFileSync(join(root, INSTRUCTIONS_FILE), "segunda\n")
+  assert.equal(await publishInstructions(root, writer, mapping), `update ${INSTRUCTIONS_FILE}: id-${INSTRUCTIONS_FILE}`)
+  assert.equal(pages.get(INSTRUCTIONS_FILE)?.body, "segunda\n")
 })
