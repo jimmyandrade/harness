@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.13.0](https://github.com/jimmyandrade/harness/compare/v0.12.0...v0.13.0) (2026-10-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* rename these parameter keys in the project instructions:
+    - criar-commit: "Idioma da mensagem" is now "Idioma da mensagem de commit",
+      and "Padrão da mensagem" is now "Padrão da mensagem de commit".
+    - criar-pull-request: "Merge" is now "Tipo de merge".
+    - resolver-comentarios-de-revisao: "Idioma da resposta" is now
+      "Idioma da resposta à revisão".
+    A project that keeps an old key falls back to the default of the skill.
+
+### Features
+
+* **check-skill:** measure AGENTS.md with the skill body limits ([#101](https://github.com/jimmyandrade/harness/issues/101)) ([169f0a8](https://github.com/jimmyandrade/harness/commit/169f0a8e92e5edb197de74f62426bc0f6a181600))
+* read skill parameters from a tree with unambiguous keys ([#99](https://github.com/jimmyandrade/harness/issues/99)) ([bdaacf8](https://github.com/jimmyandrade/harness/commit/bdaacf848026e087e297f1cf6f85b893d8338e58))
+
 ## [0.12.0](https://github.com/jimmyandrade/harness/compare/v0.11.1...v0.12.0) (2026-10-04)
 
 
