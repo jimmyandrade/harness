@@ -22,7 +22,7 @@ ADR 0005 already keeps a skill in its business harness until it is audited. This
 - Claude Code namespaces skills by plugin, so `core:<skill>` and `<business>:<skill>` can coexist. Cursor and Copilot have no namespace: a skill is named after its folder.
 - Claude Code and the Copilot CLI read skills one level deep. Cursor reads nested folders. Each tool reads a different set of folders: Claude Code `.claude/skills`; Copilot `.github/skills`, `.claude/skills`, and `.agents/skills`; Cursor `.agents/skills` and `.cursor/skills`.
 - A business Notion skills database has no namespace, and Notion cannot read this repository. The Notion sync runs in the business repository, where the core is installed.
-- A composed text must stay under the body token limit of `.agents/config.yml`.
+- A composed text must stay under the body token limit set in `AGENTS.md`.
 
 ### Options considered
 
