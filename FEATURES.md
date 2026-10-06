@@ -84,7 +84,7 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
   - [x] Core skills publish when the project moves the core version or its mapping, and a name in both stops the sync
   - [x] The project root is `HARNESS_ROOT`, or the working directory
   - [x] The instructions page is created once and then updated, with the version of its block
-  - [x] A business harness needs `description` and `metadata.version` in the frontmatter of `AGENTS.md`, and the version must rise when the instructions change
+  - [x] Every checked `AGENTS.md` needs `metadata.version`, which must rise when the instructions change, and a business harness also needs `description`
   - [ ] A business workflow that calls the action creates one page per new skill
 
 ### classify-term

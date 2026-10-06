@@ -1,6 +1,7 @@
 ---
 locale: en
 metadata:
+  version: "0.1.0"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -42,6 +43,7 @@ metadata:
 
 ## Configuration
 
+- When `AGENTS.md` changes, bump its `metadata.version` like a skill: patch for a fix, minor for a new rule, major for a breaking change.
 - Every setting lives in `metadata.parameters` of the frontmatter of `AGENTS.md`, as ADR 0009 decides. The frontmatter of this file holds the defaults. A business harness keeps only the values that differ, and a missing value falls back to the one here. The checker validates the parameters of every project.
 - A script finds the project from `HARNESS_ROOT`, or from the working directory. It finds this repository from its own location. Do not make a script read a file of this repository when the project has one.
 - Each Markdown document states its `locale` in frontmatter, except: `CHANGELOG.md`, which Release Please writes and rewrites on every release; `LICENSE.md`, which keeps the license text unchanged; `CLAUDE.md`, which only imports `AGENTS.md`; a project's `AGENTS.md` written from the instructions template, whose language is the `Idioma das instruções do projeto` parameter; and each `SKILL.md`, whose frontmatter follows the skill format and whose text is in Portuguese.

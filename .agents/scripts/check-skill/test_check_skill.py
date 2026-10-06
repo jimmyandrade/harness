@@ -253,7 +253,7 @@ class InstructionsVersionTest(unittest.TestCase):
             [message for message, _ in self.checker.instructions_version_errors(PARAMETERS)],
             [
                 "description is required in the frontmatter of a business harness",
-                'metadata.version is required in a business harness, as a quoted version such as "0.1.0"',
+                'metadata.version is required, as a quoted version such as "0.1.0"',
             ],
         )
 
@@ -268,6 +268,17 @@ class InstructionsVersionTest(unittest.TestCase):
             ["metadata.version must increase when the instructions change"],
         )
         self.assertEqual(self.checker.instructions_version_errors(self.text("0.6.0", "Regra nova.")), [])
+
+    def test_should_require_only_the_version_outside_a_business_harness(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            project = Path(tmp)
+            (project / ".git").mkdir()
+            checker = load_checker(project)
+            self.assertEqual(
+                [message for message, _ in checker.instructions_version_errors(PARAMETERS)],
+                ['metadata.version is required, as a quoted version such as "0.1.0"'],
+            )
+        self.checker = load_checker(self.project)
 
     def test_should_accept_a_version_without_history(self) -> None:
         self.assertEqual(self.checker.instructions_version_errors(self.text("0.5.0")), [])

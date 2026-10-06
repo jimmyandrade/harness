@@ -1058,19 +1058,20 @@ def committed_text(relative: Path) -> str | None:
 
 
 def instructions_version_errors(text: str) -> list[tuple[str, int | None]]:
-    """A business harness publishes its instructions with a description and a version that rises."""
-    if not IS_HARNESS or ROOT == CORE:
-        return []
+    """Every instructions file has a version that rises on each change, like a skill.
+
+    A business harness also needs a description, because it publishes the file to Notion.
+    """
     data, end, error = parameters.frontmatter(text)
     if error is not None:
         return []
     errors: list[tuple[str, int | None]] = []
     description = data.get("description")
-    if not isinstance(description, str) or not description.strip():
+    if IS_HARNESS and ROOT != CORE and (not isinstance(description, str) or not description.strip()):
         errors.append(("description is required in the frontmatter of a business harness", end))
     version = parameters.instructions_version(text)
     if version is None:
-        errors.append(('metadata.version is required in a business harness, as a quoted version such as "0.1.0"', end))
+        errors.append(('metadata.version is required, as a quoted version such as "0.1.0"', end))
         return errors
     previous = committed_text(Path(INSTRUCTIONS))
     if previous is not None and previous != text:

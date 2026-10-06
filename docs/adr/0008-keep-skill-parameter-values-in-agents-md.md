@@ -58,7 +58,7 @@ metadata:
 - A value that more than one skill uses goes in `Global`, under a key that names what it belongs to.
 - A value that only one skill uses goes under that skill's name.
 - The parameters list only values that differ from the defaults.
-- `metadata.version` versions the instructions like a skill, and `description` tells the Notion agent when to load them. The Notion page gets both as properties, and the parameters as a YAML code block at the end of its body, because the sync publishes the body without the frontmatter.
+- `metadata.version` versions the instructions like a skill, in every repository, and rises on each change. In a business harness, `description` tells the Notion agent when to load them. The Notion page gets both as properties, and the parameters as a YAML code block at the end of its body, because the sync publishes the body without the frontmatter.
 - Core skills rename every ambiguous key, such as `Idioma da mensagem` to `Idioma da mensagem de commit`. The rename is announced in the release notes, because a project that keeps the old key silently falls back to the default.
 
 ### What a core skill never carries
