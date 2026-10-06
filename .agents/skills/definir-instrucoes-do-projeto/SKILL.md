@@ -3,7 +3,7 @@ name: definir-instrucoes-do-projeto
 description: Use essa habilidade sempre que for criar, revisar, enxugar ou reorganizar as instruções do projeto, inclusive os parâmetros das habilidades, mesmo sem dizer AGENTS. NÃO use para escrever uma skill, o guia de contribuição, o mapa da arquitetura nem a documentação do produto.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.6.0"
   related:
     - criar-habilidade
     - evoluir-habilidade
@@ -39,7 +39,7 @@ flowchart LR
   A -->|procedimento com passos| S[criar-habilidade]
   A -->|funcionalidade do produto| P[Documentação do produto]
   A -->|fato do negócio| N[Nos dados, fora do texto]
-  A -->|valor de parâmetro| B[Bloco de parâmetros]
+  A -->|valor de parâmetro| B[Parâmetros no frontmatter]
 ```
 
 Na dúvida entre ficar e sair, saia: o destino continua a um link de distância.
@@ -52,7 +52,7 @@ Leia .agents/assets/templates/agents-md.md quando for gerar a saída.
 
 ### Passo 4
 
-Monte o bloco de parâmetros como árvore: a entrada `Global` e uma entrada por nome de habilidade. Copie cada chave do bloco de parâmetros da própria habilidade, letra por letra. Um valor que mais de uma habilidade usa fica em `Global`. O resto fica sob o nome da habilidade. Entra só o valor que difere do padrão da habilidade. Um valor que a habilidade calcula sozinha, como o repositório a partir do remoto, também conta como padrão e sai do bloco.
+Monte os parâmetros no frontmatter, em `metadata.parameters`, como árvore: a entrada `Global` e uma entrada por nome de habilidade. Copie cada chave do bloco de parâmetros da própria habilidade, letra por letra. Um valor que mais de uma habilidade usa fica em `Global`. O resto fica sob o nome da habilidade. Entra só o valor que difere do padrão da habilidade. Num harness de negócio, o frontmatter também tem `description` e `metadata.version`. Suba a versão a cada mudança: patch para correção, minor para regra nova, major para mudança que quebra. Ela vira a versão da página no Notion, e os parâmetros aparecem no fim da página, num bloco de código. Um valor que a habilidade calcula sozinha, como o repositório a partir do remoto, também conta como padrão e sai do bloco.
 
 ### Passo 5
 
@@ -102,7 +102,7 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### as instruções do projeto passaram de 7000 tokens
 
-O conteúdo foi para o guia de contribuição, sem mudança. As instruções ficaram com a ordem de ler o guia e o bloco de parâmetros. As regras de segurança ficaram só no guia. Os documentos e os comentários que citavam as instruções passaram a citar o guia.
+O conteúdo foi para o guia de contribuição, sem mudança. As instruções ficaram com a ordem de ler o guia e os parâmetros no frontmatter. As regras de segurança ficaram só no guia. Os documentos e os comentários que citavam as instruções passaram a citar o guia.
 
 ### acrescente o idioma das mensagens de commit
 
@@ -110,8 +110,8 @@ O valor entrou em `Global`, com a chave "Idioma da mensagem de commit", copiada 
 
 ## Casos-limite
 
-- O projeto ainda não tem instruções: comece pelo modelo, só com a parte do Notion, a ordem de ler o guia e o bloco de parâmetros.
-- O bloco atual não tem árvore: ele continua valendo como `Global`. Reorganize quando mexer nele.
+- O projeto ainda não tem instruções: comece pelo modelo, só com o frontmatter, a parte do Notion e a ordem de ler o guia.
+- Os parâmetros não têm árvore: o primeiro nível continua valendo como `Global`. Reorganize quando mexer neles.
 - Uma habilidade renomeou uma chave numa versão nova: troque a chave junto com a subida da versão.
 - O trecho é um esquema de dados ou um fato do negócio: ele não entra no texto. O esquema fica no repositório do negócio, e o fato fica nos dados.
 - As instruções estão em outro idioma: reescreva no `Idioma das instruções do projeto`. O guia de contribuição mantém o idioma dele.

@@ -35,7 +35,8 @@ class MeasureTest(unittest.TestCase):
             (root / ".agents" / "skills" / "abrir-pedido").mkdir(parents=True)
             (root / ".git").mkdir()
             (root / project_parameters.INSTRUCTIONS).write_text(
-                f'{project_parameters.HEADING}\n\n```yaml\n"Global":\n{config}```\n', encoding="utf-8"
+                '---\nmetadata:\n  parameters:\n    "Global":\n' + "".join(f"    {line}" for line in config.splitlines(keepends=True)) + "---\n",
+                encoding="utf-8",
             )
             skill = root / ".agents" / "skills" / "abrir-pedido" / "SKILL.md"
             skill.write_text(SKILL, encoding="utf-8")

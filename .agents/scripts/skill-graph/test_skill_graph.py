@@ -29,7 +29,7 @@ def write_skill(root: Path, name: str, related: list[str] | None = None, body: s
 def make_root(path: Path, organization: str) -> Path:
     (path / ".agents").mkdir(parents=True)
     (path / graph.parameters.INSTRUCTIONS).write_text(
-        f'{graph.parameters.HEADING}\n\n```yaml\n"Global":\n  "Organização": "{organization}"\n  "Direção dos fluxogramas": "LR"\n```\n',
+        f'---\nmetadata:\n  parameters:\n    "Global":\n      "Organização": "{organization}"\n      "Direção dos fluxogramas": "LR"\n---\n',
         encoding="utf-8",
     )
     return path

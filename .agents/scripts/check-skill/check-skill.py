@@ -5,7 +5,7 @@ A skill that lists metadata.related names only skills that exist in the project
 or in this harness, and lists every skill its body cites.
 
 The project is HARNESS_ROOT, or the working directory when it is unset.
-Settings come from the parameter block of the project instructions file, then of this harness (ADR 0009).
+Settings come from metadata.parameters in the frontmatter of the project instructions file, then of this harness (ADR 0009).
 """
 
 from __future__ import annotations
@@ -1057,6 +1057,30 @@ def committed_text(relative: Path) -> str | None:
     return revision_text(version_reference(), relative.as_posix())
 
 
+def instructions_version_errors(text: str) -> list[tuple[str, int | None]]:
+    """Every instructions file has a version that rises on each change, like a skill.
+
+    A business harness also needs a description, because it publishes the file to Notion.
+    """
+    data, end, error = parameters.frontmatter(text)
+    if error is not None:
+        return []
+    errors: list[tuple[str, int | None]] = []
+    description = data.get("description")
+    if IS_HARNESS and ROOT != CORE and (not isinstance(description, str) or not description.strip()):
+        errors.append(("description is required in the frontmatter of a business harness", end))
+    version = parameters.instructions_version(text)
+    if version is None:
+        errors.append(('metadata.version is required, as a quoted version such as "0.1.0"', end))
+        return errors
+    previous = committed_text(Path(INSTRUCTIONS))
+    if previous is not None and previous != text:
+        earlier = parameters.instructions_version(previous)
+        if earlier is not None and version <= earlier:
+            errors.append(("metadata.version must increase when the instructions change", parameters.key_line(text, "version")))
+    return errors
+
+
 GIVEN_PT = re.compile(r"^\s*(Dado|Dada|Dados|Dadas)\b(.*)$")
 
 
@@ -1210,7 +1234,7 @@ def main() -> int:
         block_errors = parameters.validate(
             text, parameters.skill_parameter_keys(roots), required=IS_HARNESS or ROOT == CORE
         )
-        for message, line in block_errors:
+        for message, line in block_errors + instructions_version_errors(text):
             failed = True
             finding = Finding(message, line)
             results[INSTRUCTIONS].append((Path(INSTRUCTIONS), finding))

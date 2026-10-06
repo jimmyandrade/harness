@@ -1,5 +1,20 @@
 ---
 locale: en
+metadata:
+  version: "0.1.0"
+  parameters:
+    "Global":
+      "Organização": "jimmyandrade"
+      "Licença obrigatória": "não"
+      "Idioma do Gherkin": "pt"
+      "Palavras": 5000
+      "Linhas": 500
+      "Tokens do catálogo": 100
+      "Tokens do corpo": 5000
+      "Direção dos fluxogramas": "LR"
+      "Ícone das páginas no Notion": "magic-wand"
+      "Cor do ícone das páginas no Notion": "gray"
+      "Símbolo da pasta no macOS": "wand.and.sparkles"
 ---
 
 # Agent instructions
@@ -13,11 +28,11 @@ locale: en
 
 ## Project instructions
 
-- A skill reads what differs between projects from the project instructions. In a repository, those are `AGENTS.md`. In Notion, they are the page titled `AGENTS.md` in that workspace. When both exist, the repository wins for repository work.
+- A skill reads what differs between projects from the project instructions. In a repository, those are `AGENTS.md`. In Notion, they are the page titled `AGENTS.md` in the skills database of that workspace. When both exist, the repository wins for repository work.
 - The skill text says "instruções do projeto". It does not name a file, a path, a workspace, or a page.
-- Parameter values form a tree, as ADR 0008 decides: an entry named after the skill, then an entry named `Global`. A skill reads its own entry first, then `Global`. A value at the top level of the block counts as `Global`, so a flat block keeps working.
+- Parameter values form a tree under `metadata.parameters`, as ADR 0008 decides: an entry named after the skill, then an entry named `Global`. A skill reads its own entry first, then `Global`. A value at the top level of the parameters counts as `Global`.
 - A parameter that the project instructions do not set uses the default written in the skill. When the skill has no default, ask once and stop.
-- Never edit the project instructions page in Notion. It belongs to the people of that workspace.
+- The sync writes the project instructions page in Notion from `AGENTS.md`, as ADR 0008 decides, with the description and `metadata.version` of its frontmatter, and its parameters in a YAML code block at the end of the page. Never edit that page by hand: change `AGENTS.md` in the business harness.
 
 ## Git
 
@@ -28,7 +43,8 @@ locale: en
 
 ## Configuration
 
-- Every setting lives in the parameter block of `AGENTS.md`, as ADR 0009 decides. The block at the end of this file holds the defaults. A business harness keeps only the values that differ, and a missing value falls back to the one here. The checker validates every block.
+- When `AGENTS.md` changes, bump its `metadata.version` like a skill: patch for a fix, minor for a new rule, major for a breaking change.
+- Every setting lives in `metadata.parameters` of the frontmatter of `AGENTS.md`, as ADR 0009 decides. The frontmatter of this file holds the defaults. A business harness keeps only the values that differ, and a missing value falls back to the one here. The checker validates the parameters of every project.
 - A script finds the project from `HARNESS_ROOT`, or from the working directory. It finds this repository from its own location. Do not make a script read a file of this repository when the project has one.
 - Each Markdown document states its `locale` in frontmatter, except: `CHANGELOG.md`, which Release Please writes and rewrites on every release; `LICENSE.md`, which keeps the license text unchanged; `CLAUDE.md`, which only imports `AGENTS.md`; a project's `AGENTS.md` written from the instructions template, whose language is the `Idioma das instruções do projeto` parameter; and each `SKILL.md`, whose frontmatter follows the skill format and whose text is in Portuguese.
 
@@ -60,22 +76,3 @@ locale: en
 - `INSTALL.md` is the index of the setup runbooks in `docs/runbooks/`, one per tool, each a list of steps with a command and a check. Business harnesses link to them and keep only business values in their own `INSTALL.md`. A runbook copies a configuration file from `examples/` instead of showing it inline; the pin in an example is `vX.Y.Z`, replaced by the runbook.
 - No Markdown document names a release, such as `v1.2.3`, except `CHANGELOG.md`. Name the file that pins it instead, such as `package.json`. A business harness follows the same rule in its own documents. Renovate moves the pins, not the text, so a version in the text goes stale on the next release. An example pin is `vX.Y.Z`.
 - Architecture decisions are in `docs/adr/`, in English.
-
-## Parâmetros das habilidades
-
-The defaults of every harness setting, read by the scripts when a project does not set them (ADR 0009).
-
-```yaml
-"Global":
-  "Organização": "jimmyandrade"
-  "Licença obrigatória": "não"
-  "Idioma do Gherkin": "pt"
-  "Palavras": 5000
-  "Linhas": 500
-  "Tokens do catálogo": 100
-  "Tokens do corpo": 5000
-  "Direção dos fluxogramas": "LR"
-  "Ícone das páginas no Notion": "magic-wand"
-  "Cor do ícone das páginas no Notion": "gray"
-  "Símbolo da pasta no macOS": "wand.and.sparkles"
-```

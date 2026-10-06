@@ -12,6 +12,9 @@ import {
   createArgs,
   blockSetting,
   INSTRUCTIONS_FILE,
+  instructionsPage,
+  instructionsToPublish,
+  publishInstructions,
   PARAMETERS_HEADING,
   coreRoot,
   pageIcon,
@@ -37,7 +40,15 @@ import {
 } from "./sync-skill-pages.ts"
 
 function block(yaml: string): string {
-  return `${PARAMETERS_HEADING}\n\n\`\`\`yaml\n${yaml}\`\`\`\n`
+  const indented = yaml
+    .split("\n")
+    .map((line) => (line ? `    ${line}` : line))
+    .join("\n")
+  return `---\nmetadata:\n  parameters:\n${indented}---\n\n# Instruções do projeto\n`
+}
+
+function instructions(version: string, rule: string): string {
+  return `---\ndescription: Use essa habilidade sempre que for executar qualquer tarefa.\nmetadata:\n  version: "${version}"\n  parameters:\n    "Global":\n      "Organização": "example"\n---\n\n# Instruções do projeto\n\n${rule}\n`
 }
 
 function parameters(lines: string): string {
@@ -508,7 +519,7 @@ test("two pages with the same name stop", async () => {
   await assert.rejects(() => notion.findPage(mapping, "definir-tarefa"))
 })
 
-test("page icon name and color come from the instructions parameter block", () => {
+test("page icon name and color come from the instructions parameters", () => {
   assert.deepEqual(icon, { type: "icon", icon: { name: "magic-wand", color: "gray" } })
   const stored = pageIcon(readFileSync(join(coreRoot(), INSTRUCTIONS_FILE), "utf8"))
   assert.equal(stored.type, "icon")
@@ -560,4 +571,51 @@ test("core skills publish when the project moves the core version or its mapping
   assert.deepEqual(coreNamesToPublish(["lancar-venda"], ["criar-commit"], false, true), ["criar-commit"])
   assert.deepEqual(coreNamesToPublish(["lancar-venda"], ["criar-commit"], true, false), ["criar-commit"])
   assert.throws(() => coreNamesToPublish(["criar-commit"], ["criar-commit"], true, true), /criar-commit exists/)
+})
+
+test("the instructions file becomes a page with its frontmatter version and description", () => {
+  const page = instructionsPage(instructions("0.5.0", "Uma regra."))
+  assert.equal(page.name, INSTRUCTIONS_FILE)
+  assert.equal(page.description, "Use essa habilidade sempre que for executar qualquer tarefa.")
+  assert.equal(page.version, "0.5.0")
+  assert.ok(page.body.startsWith("# Instruções do projeto\n\nUma regra."))
+  assert.ok(page.body.includes(`${PARAMETERS_HEADING}\n\n\`\`\`yaml\n"Global":\n  "Organização": "example"\n\`\`\``))
+  assert.equal(page.body.includes("description:"), false)
+  assert.deepEqual(properties(page, mapping)[mapping.properties.status], { status: { name: skillStatus("0.5.0", statusOptions(mapping)) } })
+  assert.throws(() => instructionsPage("# Instruções do projeto\n"))
+  assert.throws(() => instructionsPage(instructions("cinco", "x")))
+})
+
+test("the instructions page is created once, then updated", async () => {
+  const root = mkdtempSync(join(tmpdir(), "instructions-"))
+  const pages = new Map<string, SkillPage>()
+  const writer = {
+    findPage: async (_mapping: SkillMapping, name: string) => (pages.has(name) ? `id-${name}` : null),
+    createPage: async (page: SkillPage) => {
+      pages.set(page.name, page)
+      return { id: `id-${page.name}` }
+    },
+    updatePage: async (pageId: string, page: SkillPage) => {
+      pages.set(page.name, page)
+      return { id: pageId }
+    },
+  }
+  assert.equal(await publishInstructions(root, writer, mapping), `skip ${INSTRUCTIONS_FILE}: missing`)
+  writeFileSync(join(root, INSTRUCTIONS_FILE), instructions("0.1.0", "primeira"))
+  assert.equal(await publishInstructions(root, writer, mapping), `create ${INSTRUCTIONS_FILE}: id-${INSTRUCTIONS_FILE}`)
+  writeFileSync(join(root, INSTRUCTIONS_FILE), instructions("0.2.0", "segunda"))
+  assert.equal(await publishInstructions(root, writer, mapping), `update ${INSTRUCTIONS_FILE}: id-${INSTRUCTIONS_FILE}`)
+  assert.equal(pages.get(INSTRUCTIONS_FILE)?.version, "0.2.0")
+})
+
+test("the instructions page publishes on its own change, on rule or mapping changes, and on a core version move", () => {
+  const none = { isCore: false, instructionsChanged: false, rulesChanged: false, coreVersionChanged: false }
+  assert.equal(instructionsToPublish(none), false)
+  assert.equal(instructionsToPublish({ ...none, instructionsChanged: true }), true)
+  assert.equal(instructionsToPublish({ ...none, rulesChanged: true }), true)
+  assert.equal(instructionsToPublish({ ...none, coreVersionChanged: true }), true)
+  assert.equal(
+    instructionsToPublish({ isCore: true, instructionsChanged: true, rulesChanged: true, coreVersionChanged: true }),
+    false,
+  )
 })

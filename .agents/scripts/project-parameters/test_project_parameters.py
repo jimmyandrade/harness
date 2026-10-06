@@ -18,7 +18,8 @@ SKILLS = {"criar-commit": {"Idioma da mensagem de commit", "Comando de testes"},
 
 
 def block(yaml: str) -> str:
-    return f"# Instruções\n\n{parameters.HEADING}\n\n```yaml\n{yaml}```\n"
+    indented = "".join(f"    {line}" if line.strip() else line for line in yaml.splitlines(keepends=True))
+    return f"---\nmetadata:\n  parameters:\n{indented}---\n\n# Instruções\n"
 
 
 class ValidateTest(unittest.TestCase):
@@ -65,7 +66,7 @@ class ValidateTest(unittest.TestCase):
     def test_should_reject_flow_style(self) -> None:
         self.assertEqual(
             self.errors(block('"Global": {"Organização": "x"}\n')),
-            ["write the block in block style, not with { } or [ ]"],
+            ["write the frontmatter in block style, not with { } or [ ]"],
         )
 
     def test_should_check_the_type_of_a_script_setting_under_its_skill(self) -> None:
@@ -73,6 +74,26 @@ class ValidateTest(unittest.TestCase):
             self.errors(block('"criar-habilidade":\n  "Tokens do corpo": "muitos"\n')),
             ['"Tokens do corpo" must be a positive integer'],
         )
+
+
+    def test_should_read_the_instructions_version_from_metadata(self) -> None:
+        text = block('"Global":\n  "Organização": "x"\n').replace("metadata:\n", 'metadata:\n  version: "0.5.0"\n', 1)
+        self.assertEqual(parameters.instructions_version(text), (0, 5, 0))
+        self.assertIsNone(parameters.instructions_version(text.replace('"0.5.0"', "5")))
+        self.assertIsNone(parameters.instructions_version(block('"Global":\n  "Organização": "x"\n')))
+
+
+    def test_should_reject_what_the_notion_sync_cannot_read(self) -> None:
+        text = block('"Global":\n  "Organização": "x"\n').replace(
+            "metadata:\n", 'description: >\n  Uma descrição.\nmetadata:\n  version: "0.1.0" # primeira\n', 1
+        )
+        self.assertEqual(
+            self.errors(text),
+            ["write each frontmatter value on one line, not with > or |", "remove comments from the frontmatter"],
+        )
+
+    def test_should_accept_a_hash_inside_quotes(self) -> None:
+        self.assertEqual(self.errors(block('"Global":\n  "Organização": "x # y"\n')), [])
 
 
 class SettingTest(unittest.TestCase):

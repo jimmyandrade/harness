@@ -22,7 +22,7 @@ Keep one public core repository and one private repository per business.
 
 The core holds the checker, the Notion sync, the vocabulary API and MCP, the skill-page schema, the default configuration, and the skills that work for any business. It ships them three ways: a Claude Code plugin named `harness-core`, two composite GitHub Actions, and a Node.js package for the local hook.
 
-A business harness holds its skills, its data source schemas and mappings, its glossary, its output styles, and a parameter block in its `AGENTS.md` with only the values that differ from the core. Its marketplace lists its own plugin and `harness-core`, pinned to a tag.
+A business harness holds its skills, its data source schemas and mappings, its glossary, its output styles, and parameters in the frontmatter of its `AGENTS.md` with only the values that differ from the core. Its marketplace lists its own plugin and `harness-core`, pinned to a tag.
 
 Scripts find the project from `HARNESS_ROOT` or the working directory, and find the core from their own location. A config key missing from the project falls back to the core.
 

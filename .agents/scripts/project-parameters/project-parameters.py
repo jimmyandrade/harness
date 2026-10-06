@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Read and validate the parameter block of a project's instructions file (ADR 0009).
+"""Read and validate the parameters of a project's instructions file (ADR 0009).
 
-The block is the first yaml code block after the heading HEADING. Skills read
-it for their parameters, and the harness scripts read their settings from its
-Global entry, or from its top level. A setting the project does not set comes
-from the block of this harness, which holds the defaults.
+The parameters live in the frontmatter of that file, under metadata.parameters,
+and its version under metadata.version. Skills read their parameters there, and
+the harness scripts read their settings from its Global entry, or from its top
+level. A setting the project does not set comes from the instructions file of
+this harness, which holds the defaults.
 """
 
 from __future__ import annotations
@@ -14,7 +15,6 @@ from pathlib import Path
 
 import yaml
 
-HEADING = "## Parâmetros das habilidades"
 SKILL_HEADING = "## Parâmetros de configuração"
 INSTRUCTIONS = "AGENTS.md"
 GLOBAL = "Global"
@@ -29,6 +29,7 @@ TEXT_SETTINGS = {
     "Símbolo da pasta no macOS",
 }
 CHOICE_SETTINGS = {"Licença obrigatória": {"sim", "não"}}
+VERSION = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$")
 SCRIPT_SETTINGS = INTEGER_SETTINGS | TEXT_SETTINGS | set(CHOICE_SETTINGS)
 # A script setting that is also a parameter of a skill reads that skill's entry first.
 SETTING_SKILL = {
@@ -37,6 +38,9 @@ SETTING_SKILL = {
     "Tokens do catálogo": "criar-habilidade",
     "Tokens do corpo": "criar-habilidade",
 }
+# The Notion sync reads the frontmatter line by line, so the checker rejects what it cannot read.
+BLOCK_SCALAR = re.compile(r':\s*[>|][+-]?\s*$')
+QUOTED = re.compile(r'"[^"]*"|\'[^\']*\'')
 FLOW_STYLE = re.compile(r'^\s*(?:-\s*)?(?:"[^"]*"|[^:"]+)?\s*:?\s*[{\[]')
 
 
@@ -87,12 +91,45 @@ def yaml_block(text: str, heading: str) -> tuple[object, int | None, str | None]
     return data, fence + 1, None
 
 
+def frontmatter(text: str) -> tuple[dict | None, int | None, str | None]:
+    """(data, last line of the frontmatter, error) of a Markdown text."""
+    lines = text.splitlines()
+    if not lines or lines[0].strip() != "---":
+        return None, None, "the frontmatter is missing"
+    end = next((index for index in range(1, len(lines)) if lines[index].strip() == "---"), None)
+    if end is None:
+        return None, 1, "the frontmatter is not closed"
+    try:
+        data = yaml.safe_load("\n".join(lines[1:end])) or {}
+    except yaml.YAMLError as error:
+        mark = getattr(error, "problem_mark", None)
+        line = 2 + mark.line if mark is not None else 1
+        return None, line, f"the frontmatter does not parse: {getattr(error, 'problem', error)}"
+    if not isinstance(data, dict):
+        return None, 1, "the frontmatter must be a mapping"
+    return data, end + 1, None
+
+
+def instructions_parameters(text: str) -> tuple[dict | None, int | None, str | None]:
+    """(metadata.parameters, last frontmatter line, error) of an instructions text."""
+    data, end, error = frontmatter(text)
+    if error is not None:
+        return None, end, error
+    metadata = data.get("metadata")
+    if metadata is None or not isinstance(metadata, dict) or "parameters" not in metadata:
+        return None, end, "metadata.parameters is missing from the frontmatter"
+    parameters = metadata["parameters"] or {}
+    if not isinstance(parameters, dict):
+        return None, end, "metadata.parameters must be a mapping"
+    return parameters, end, None
+
+
 def instructions_block(root: Path) -> dict:
     path = root / INSTRUCTIONS
     if not path.is_file():
         return {}
-    data, _, error = yaml_block(path.read_text(encoding="utf-8"), HEADING)
-    return data if error is None and isinstance(data, dict) else {}
+    data, _, error = instructions_parameters(path.read_text(encoding="utf-8"))
+    return data if error is None and data is not None else {}
 
 
 def global_value(data: dict, key: str):
@@ -117,7 +154,16 @@ def setting(roots: list[Path], key: str):
         for value in candidates:
             if value is not None and setting_type_error(key, value) is None:
                 return value
-    raise SystemExit(f'"{key}" is missing from the parameter block of {INSTRUCTIONS}')
+    raise SystemExit(f'"{key}" is missing from metadata.parameters of {INSTRUCTIONS}')
+
+
+def instructions_version(text: str) -> tuple[int, int, int] | None:
+    """metadata.version of an instructions text, if it is a valid version."""
+    data, _, error = frontmatter(text)
+    metadata = data.get("metadata") if error is None and data else None
+    value = metadata.get("version") if isinstance(metadata, dict) else None
+    match = VERSION.fullmatch(value) if isinstance(value, str) else None
+    return (int(match.group(1)), int(match.group(2)), int(match.group(3))) if match else None
 
 
 def skill_parameter(roots: list[Path], skill: str, key: str, skill_file: Path | None = None):
@@ -174,19 +220,24 @@ def setting_type_error(key: str, value) -> str | None:
 
 
 def validate(text: str, skills: dict[str, set[str]], required: bool) -> list[tuple[str, int | None]]:
-    """Problems of the parameter block, with their line."""
-    data, line, error = yaml_block(text, HEADING)
+    """Problems of metadata.parameters in the frontmatter, with their line."""
+    data, end, error = instructions_parameters(text)
     if error is not None:
-        if not required and data is None and "is missing" in error:
+        if not required and "is missing" in error:
             return []
-        return [(error, line)]
+        return [(error, end)]
     known = set().union(*skills.values()) if skills else set()
     errors: list[tuple[str, int | None]] = []
     lines = text.splitlines()
-    end = next((index for index in range(line, len(lines)) if lines[index].strip() == "```"), len(lines))
-    for index in range(line, end):
-        if FLOW_STYLE.match(lines[index]):
-            errors.append(("write the block in block style, not with { } or [ ]", index + 1))
+    for index in range(1, (end or 1) - 1):
+        line = lines[index]
+        if FLOW_STYLE.match(line):
+            errors.append(("write the frontmatter in block style, not with { } or [ ]", index + 1))
+        if BLOCK_SCALAR.search(line):
+            errors.append(("write each frontmatter value on one line, not with > or |", index + 1))
+        unquoted = QUOTED.sub("", line)
+        if unquoted.lstrip().startswith("#") or " #" in unquoted:
+            errors.append(("remove comments from the frontmatter", index + 1))
 
     def check_global(key: str, value) -> None:
         if key not in known and key not in SCRIPT_SETTINGS:

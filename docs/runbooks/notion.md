@@ -4,7 +4,7 @@ locale: en
 
 # Publish the skills in Notion
 
-GitHub is the write source. On each push to the default branch, the sync action writes one page per changed skill, including the core skills, into the skills database of the workspace. Nobody edits those pages in Notion. The database can have any name; businesses in Brazil often call it Habilidades. Run this runbook from the root of the business repository, after `business-repository.md`, with `TAG` from its step 1.
+GitHub is the write source. On each push to the default branch, the sync action writes one page per changed skill, including the core skills, into the skills database of the workspace, and one page for the project instructions, `AGENTS.md`, when that file changes. Nobody edits those pages in Notion. The database can have any name; businesses in Brazil often call it Habilidades. Run this runbook from the root of the business repository, after `business-repository.md`, with `TAG` from its step 1.
 
 Each step ends with a check.
 
@@ -59,4 +59,4 @@ cp -Rn node_modules/harness/examples/notion/. .
 perl -pi -e "s/vX\.Y\.Z/$TAG/g" .github/workflows/skill-pages.yml
 ```
 
-Check: after a push to `main` that changes one skill, the sync step log has one line, `create` or `update`, and the page shows the new version. An `object_not_found` error that asks to share the data source with the integration means the connection of step 2 has no access to the skills database.
+Check: after a push to `main` that changes one skill, the sync step log has one line, `create` or `update`, and the page shows the new version. After a push that changes `AGENTS.md`, the log has a line for `AGENTS.md`, and the skills database has a page with that title. If the workspace already had a page titled `AGENTS.md` outside the skills database, archive it by hand, so the Notion agent reads only the synced one. An `object_not_found` error that asks to share the data source with the integration means the connection of step 2 has no access to the skills database.

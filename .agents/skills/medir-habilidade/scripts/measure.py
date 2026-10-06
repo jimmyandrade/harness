@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Print the size of one skill. Reads limits from the instructions parameter block.
+"""Print the size of one skill. Reads limits from the instructions parameters.
 
 The limits come from the project of the measured skill. A key missing there
 falls back to the instructions file of the harness that ships this script.

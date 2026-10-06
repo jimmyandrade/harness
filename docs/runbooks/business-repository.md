@@ -39,7 +39,7 @@ grep -rl 'vX\.Y\.Z' .github .claude-plugin | while read -r file; do perl -pi -e 
 
 Replace `example` with the name of the business in `.claude-plugin/` and `.claude/settings.json`. A file that already existed was not copied; merge the example into it by hand.
 
-Fill `AGENTS.md` with the `definir-instrucoes-do-projeto` skill: replace each placeholder between `<` and `>`, keep the Notion section word for word, and replace the placeholder entries of the parameter block with `"Organização"` under `Global`, set to the name of the business.
+Fill `AGENTS.md` with the `definir-instrucoes-do-projeto` skill: replace each placeholder between `<` and `>`, keep the Notion section word for word, and replace the placeholder entries of `metadata.parameters` in the frontmatter with `"Organização"` under `Global`, set to the name of the business. Keep `metadata.version` at `"0.1.0"` for a new business.
 
 Check: `grep -rn 'vX\.Y\.Z\|example' .github .claude-plugin .claude` and `grep -n '<[^a/]' AGENTS.md` print nothing, and `grep -n '"Organização"' AGENTS.md` prints one line.
 

@@ -17,7 +17,7 @@ The question became concrete when skills that read a business data source were p
 Two places were considered for the values:
 
 1. **A separate settings file in each project, filled into the Notion page by the sync.** Scripts already read such a file, for limits, languages, and the page icon. But no agent reads it on its own: a skill would need an instruction to open it, and the sync would need to rewrite the parameter block of each core skill page.
-2. **A YAML block in `AGENTS.md` of each project.** Every tool reads it without being told. Cursor and Copilot read `AGENTS.md`, and Claude Code reads `CLAUDE.md`, which imports `AGENTS.md`. A consumer project already keeps the values of the core product news skill there.
+2. **YAML in `AGENTS.md` of each project.** Every tool reads it without being told. Cursor and Copilot read `AGENTS.md`, and Claude Code reads `CLAUDE.md`, which imports `AGENTS.md`. A consumer project already keeps the values of the core product news skill there.
 
 Three problems showed up once a project wrote those values:
 
@@ -38,20 +38,27 @@ The values of skill parameters live in `AGENTS.md`. A separate settings file kee
 
 ### Parameters form a tree
 
-The parameter block of `AGENTS.md` has one entry named `Global` and one entry per skill name:
+The parameters live in the frontmatter of `AGENTS.md`, under `metadata.parameters`, with one entry named `Global` and one entry per skill name:
 
 ```yaml
-"Global":
-  "Branch base": "main"
-  "Idioma da mensagem de commit": "inglês"
-"criar-pull-request":
-  "Duração do hook de pre-push (min)": 1
+---
+description: Use essa habilidade sempre que…
+metadata:
+  version: "0.5.0"
+  parameters:
+    "Global":
+      "Branch base": "main"
+      "Idioma da mensagem de commit": "inglês"
+    "criar-pull-request":
+      "Duração do hook de pre-push (min)": 1
+---
 ```
 
 - A skill reads each value from its own entry, then from `Global`, then uses the default written in the skill.
 - A value that more than one skill uses goes in `Global`, under a key that names what it belongs to.
 - A value that only one skill uses goes under that skill's name.
-- The block lists only values that differ from the defaults.
+- The parameters list only values that differ from the defaults.
+- `metadata.version` versions the instructions like a skill, in every repository, and rises on each change. In a business harness, `description` tells the Notion agent when to load them. The Notion page gets both as properties, and the parameters as a YAML code block at the end of its body, because the sync publishes the body without the frontmatter.
 - Core skills rename every ambiguous key, such as `Idioma da mensagem` to `Idioma da mensagem de commit`. The rename is announced in the release notes, because a project that keeps the old key silently falls back to the default.
 
 ### What a core skill never carries
