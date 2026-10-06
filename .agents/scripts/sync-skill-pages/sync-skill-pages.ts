@@ -5,7 +5,8 @@
  * The page icon name and color are in the parameter block of the project instructions file.
  * A setting missing there falls back to the instructions file of this harness (ADR 0009).
  * The project instructions file is published as one more page of the skills
- * database when it changes, or when the mapping or this publisher changes.
+ * database when it changes, when the mapping or this publisher changes, or when
+ * the project moves the version of this harness.
  * With --include-core, the skills of this harness are published too, when the
  * project changes its mapping, a workflow, or its package files. Those are the
  * places where a project moves the version of this harness it uses.
@@ -586,13 +587,14 @@ export async function main(argv: string[]): Promise<number> {
   )
   const rulesChanged = publisherChanged(root, base, head, mappingPath)
   const names = namesToPublish(skillNamesFromPaths(gitChangedFiles(root, base, head)), rulesChanged, allSkillNames(root))
+  const coreVersionChanged = gitNames(root, base, head, CORE_VERSION_PATHS).length > 0
   const coreNames =
     argv.includes("--include-core") && core !== root
       ? coreNamesToPublish(
           allSkillNames(root),
           allSkillNames(core),
           rulesChanged,
-          gitNames(root, base, head, CORE_VERSION_PATHS).length > 0,
+          coreVersionChanged,
         )
       : []
   const previous = previousNames(gitSkillStatus(root, base, head), (name) => {
@@ -610,7 +612,7 @@ export async function main(argv: string[]): Promise<number> {
   })
   const token = process.env.NOTION_TOKEN ?? ""
   const instructionsChanged =
-    core !== root && (rulesChanged || gitNames(root, base, head, [INSTRUCTIONS_FILE]).length > 0)
+    core !== root && (rulesChanged || coreVersionChanged || gitNames(root, base, head, [INSTRUCTIONS_FILE]).length > 0)
   const code = gate([...names, ...coreNames, ...(instructionsChanged ? [INSTRUCTIONS_FILE] : [])], token)
   if (code === 0) {
     console.log("no changed skill")
