@@ -11,6 +11,8 @@ import {
   blankBase,
   createArgs,
   blockSetting,
+  INSTRUCTIONS_FILE,
+  PARAMETERS_HEADING,
   coreRoot,
   pageIcon,
   gate,
@@ -34,8 +36,12 @@ import {
   type SkillPage,
 } from "./sync-skill-pages.ts"
 
+function block(yaml: string): string {
+  return `${PARAMETERS_HEADING}\n\n\`\`\`yaml\n${yaml}\`\`\`\n`
+}
+
 function parameters(lines: string): string {
-  return `## Parâmetros das habilidades\n\n\`\`\`yaml\n"Global":\n${lines}\`\`\`\n`
+  return block(`"Global":\n${lines}`)
 }
 
 const icon = pageIcon(parameters('  "Ícone das páginas no Notion": "magic-wand"\n  "Cor do ícone das páginas no Notion": "gray"\n'))
@@ -504,7 +510,7 @@ test("two pages with the same name stop", async () => {
 
 test("page icon name and color come from the AGENTS.md parameter block", () => {
   assert.deepEqual(icon, { type: "icon", icon: { name: "magic-wand", color: "gray" } })
-  const stored = pageIcon(readFileSync(join(coreRoot(), "AGENTS.md"), "utf8"))
+  const stored = pageIcon(readFileSync(join(coreRoot(), INSTRUCTIONS_FILE), "utf8"))
   assert.equal(stored.type, "icon")
   assert.equal(stored.icon.name.length > 0, true)
   assert.equal(stored.icon.color.length > 0, true)
@@ -517,8 +523,8 @@ test("page icon name and color come from the AGENTS.md parameter block", () => {
     { type: "icon", icon: { name: "rocket", color: "blue" } },
   )
   assert.throws(() => pageIcon(parameters('  "Ícone das páginas no Notion": "magic-wand"\n  "Cor do ícone das páginas no Notion": "silver"\n')))
-  assert.equal(blockSetting('## Parâmetros das habilidades\n\n```yaml\n"Cor do ícone das páginas no Notion": "red"\n```\n', "Cor do ícone das páginas no Notion"), "red")
-  assert.equal(blockSetting('## Parâmetros das habilidades\n\n```yaml\n"criar-commit":\n  "Organização": "x"\n```\n', "Organização"), null)
+  assert.equal(blockSetting(block('"Cor do ícone das páginas no Notion": "red"\n'), "Cor do ícone das páginas no Notion"), "red")
+  assert.equal(blockSetting(block('"criar-commit":\n  "Organização": "x"\n'), "Organização"), null)
 })
 
 test("the project root is HARNESS_ROOT, or the working directory", () => {

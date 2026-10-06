@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import importlib.util
 import subprocess
 import sys
 import tempfile
@@ -9,6 +10,12 @@ import unittest
 from pathlib import Path
 
 SCRIPT = Path(__file__).resolve().parent / "measure.py"
+_spec = importlib.util.spec_from_file_location(
+    "project_parameters",
+    Path(__file__).resolve().parents[4] / ".agents" / "scripts" / "project-parameters" / "project-parameters.py",
+)
+project_parameters = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(project_parameters)
 SKILL = """---
 name: abrir-pedido
 description: Use essa habilidade sempre que for abrir um pedido.
@@ -27,8 +34,8 @@ class MeasureTest(unittest.TestCase):
             root = Path(tmp)
             (root / ".agents" / "skills" / "abrir-pedido").mkdir(parents=True)
             (root / ".git").mkdir()
-            (root / "AGENTS.md").write_text(
-                f'## Parâmetros das habilidades\n\n```yaml\n"Global":\n{config}```\n', encoding="utf-8"
+            (root / project_parameters.INSTRUCTIONS).write_text(
+                f'{project_parameters.HEADING}\n\n```yaml\n"Global":\n{config}```\n', encoding="utf-8"
             )
             skill = root / ".agents" / "skills" / "abrir-pedido" / "SKILL.md"
             skill.write_text(SKILL, encoding="utf-8")

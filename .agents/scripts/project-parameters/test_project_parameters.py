@@ -18,7 +18,7 @@ SKILLS = {"criar-commit": {"Idioma da mensagem de commit", "Comando de testes"},
 
 
 def block(yaml: str) -> str:
-    return f"# Instruções\n\n## Parâmetros das habilidades\n\n```yaml\n{yaml}```\n"
+    return f"# Instruções\n\n{parameters.HEADING}\n\n```yaml\n{yaml}```\n"
 
 
 class ValidateTest(unittest.TestCase):
@@ -65,8 +65,8 @@ class ValidateTest(unittest.TestCase):
 class SettingTest(unittest.TestCase):
     def test_should_read_the_project_first_and_fall_back_to_the_next_root(self) -> None:
         with tempfile.TemporaryDirectory() as first, tempfile.TemporaryDirectory() as second:
-            Path(first, "AGENTS.md").write_text(block('"Global":\n  "Tokens do corpo": 1000\n'), encoding="utf-8")
-            Path(second, "AGENTS.md").write_text(block('"Global":\n  "Tokens do corpo": 5000\n  "Linhas": 500\n'), encoding="utf-8")
+            Path(first, parameters.INSTRUCTIONS).write_text(block('"Global":\n  "Tokens do corpo": 1000\n'), encoding="utf-8")
+            Path(second, parameters.INSTRUCTIONS).write_text(block('"Global":\n  "Tokens do corpo": 5000\n  "Linhas": 500\n'), encoding="utf-8")
             roots = [Path(first), Path(second)]
             self.assertEqual(parameters.setting(roots, "Tokens do corpo"), 1000)
             self.assertEqual(parameters.setting(roots, "Linhas"), 500)

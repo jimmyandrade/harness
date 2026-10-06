@@ -134,7 +134,7 @@ def skill_measure(text: str, encoding) -> tuple[str | None, int | None]:
     return version, body_tokens
 
 
-INSTRUCTIONS = "AGENTS.md"
+INSTRUCTIONS = parameters.INSTRUCTIONS
 
 
 def item_path(name: str) -> str:

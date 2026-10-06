@@ -82,7 +82,8 @@ export type PageIcon = {
   icon: { name: string; color: IconColor }
 }
 
-const PARAMETERS_HEADING = "## Parâmetros das habilidades"
+export const PARAMETERS_HEADING = "## Parâmetros das habilidades"
+export const INSTRUCTIONS_FILE = "AGENTS.md"
 
 /** A setting from the Global entry, or the top level, of the AGENTS.md parameter block. */
 export function blockSetting(text: string, key: string): string | null {
@@ -183,7 +184,7 @@ export function coreRoot(): string {
 }
 
 function instructionsText(root: string): string {
-  const path = join(root, "AGENTS.md")
+  const path = join(root, INSTRUCTIONS_FILE)
   return existsSync(path) ? readFileSync(path, "utf8") : ""
 }
 
