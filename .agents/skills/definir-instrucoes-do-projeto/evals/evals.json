@@ -1,4 +1,11 @@
 {
   "skill_name": "definir-instrucoes-do-projeto",
-  "evals": []
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Reescreva o AGENTS.md do projeto com a skill de instruções do projeto: português, a parte do Notion do modelo, a parte de código só mandando ler o guia de contribuição, as regras de segurança só no guia, e os parâmetros como árvore com as chaves novas do core.",
+      "expected_output": "O plano por trecho aparece antes da escrita. As instruções ficam em português, com a parte do Notion copiada do modelo e a abertura descrevendo o documento, para quais ferramentas e tarefas ele serve. A parte de código é só a ordem de ler o guia. A regra sobre segredos, que o guia não tinha, entra no guia antes de sair das instruções. O bloco vira árvore com as chaves copiadas das habilidades instaladas e só com valores diferentes do padrão, sem o repositório, que vem do remoto. O tamanho é medido antes e depois.",
+      "files": []
+    }
+  ]
 }

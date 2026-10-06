@@ -3,7 +3,7 @@ name: definir-instrucoes-do-projeto
 description: Use essa habilidade sempre que for criar, revisar, enxugar ou reorganizar as instruções do projeto, inclusive os parâmetros das habilidades, mesmo sem dizer AGENTS. NÃO use para escrever uma skill, o guia de contribuição, o mapa da arquitetura nem a documentação do produto.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.4.0"
   related:
     - criar-habilidade
     - evoluir-habilidade
@@ -46,13 +46,13 @@ Na dúvida entre ficar e sair, saia: o destino continua a um link de distância.
 
 ### Passo 3
 
-Escreva no `Idioma das instruções do projeto`, uma regra por linha, no imperativo, sem justificar. Separe o que vale em qualquer lugar, o que vale só no Notion e o que vale só em ferramentas de código. A regra de código, inclusive a de segurança, como comando, branch, build e segredo, vai para o guia de contribuição e nunca entra na parte do Notion. A parte do Notion copia do modelo, palavra por palavra, a abertura, o aviso e as duas subseções. Só as regras sob a identidade do agente e a interação de chat mudam de um projeto para outro. A parte de ferramentas de código é só a ordem de ler o guia, copiada do modelo.
+Escreva no `Idioma das instruções do projeto`, uma regra por linha, no imperativo, sem justificar. Separe o que vale em qualquer lugar, o que vale só no Notion e o que vale só em ferramentas de código. A regra de código, inclusive a de segurança, como comando, branch, build e segredo, vai para o guia de contribuição e nunca entra na parte do Notion. A parte do Notion copia do modelo, palavra por palavra, a abertura, o aviso e as duas subseções. Só as regras sob a identidade do agente e a interação de chat mudam de um projeto para outro. A parte de ferramentas de código é só a ordem de ler o guia, copiada do modelo. A abertura descreve o documento, não o repositório: para quais ferramentas e quais tarefas ele serve.
 
 Leia .agents/assets/templates/agents-md.md quando for gerar a saída.
 
 ### Passo 4
 
-Monte o bloco de parâmetros como árvore: a entrada `Global` e uma entrada por nome de habilidade. Copie cada chave do bloco de parâmetros da própria habilidade, letra por letra. Um valor que mais de uma habilidade usa fica em `Global`. O resto fica sob o nome da habilidade. Entra só o valor que difere do padrão da habilidade.
+Monte o bloco de parâmetros como árvore: a entrada `Global` e uma entrada por nome de habilidade. Copie cada chave do bloco de parâmetros da própria habilidade, letra por letra. Um valor que mais de uma habilidade usa fica em `Global`. O resto fica sob o nome da habilidade. Entra só o valor que difere do padrão da habilidade. Um valor que a habilidade calcula sozinha, como o repositório a partir do remoto, também conta como padrão e sai do bloco.
 
 ### Passo 5
 
@@ -118,8 +118,8 @@ O valor entrou em `Global`, com a chave "Idioma da mensagem de commit", copiada 
 
 ## Pegadinhas
 
-- O Claude Code lê o arquivo de instruções do Claude, não o do agente. Esse arquivo precisa importar as instruções do projeto, ou o Claude Code não as vê.
-- A checagem mede as instruções do projeto como corpo de skill, mesmo sem frontmatter. As regras de estrutura de skill não valem para elas.
+- O Claude Code lê as instruções do projeto mesmo sem o arquivo de instruções do Claude. Não crie esse arquivo só para importar as instruções.
+- A checagem mede as instruções do projeto como corpo de skill, mesmo sem frontmatter e mesmo num projeto que só instala o core. As regras de estrutura de skill não valem para elas.
 - A ordem de ler o guia é a única ligação entre as instruções e as regras de código. O guia só vale se o agente obedecer a essa ordem, então ela fica escrita como ordem, não como sugestão. Regra que não pode depender dessa leitura ganha uma verificação automática, como um teste ou uma checagem no commit.
 - No Notion, as instruções do projeto são uma página escrita pela sincronização. Não edite essa página. A mudança vai no repositório.
 - Mover o arquivo inteiro e criar outro com o nome antigo não aparece como renomeação no histórico. O histórico das linhas movidas fica no nome antigo.
