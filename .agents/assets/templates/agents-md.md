@@ -1,6 +1,6 @@
 # Instruções do projeto
 
-<Uma frase: o que é este projeto. Uma frase: onde ficam as outras regras.>
+Este documento contém instruções que, dependendo da ferramenta utilizada, podem servir como instruções para <ferramentas>, seja para <tipos de tarefa> de <negócio>.
 
 ## Em qualquer lugar
 
