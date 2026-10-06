@@ -97,6 +97,21 @@ class SettingTest(unittest.TestCase):
             Path(second, parameters.INSTRUCTIONS).write_text(block('"Global":\n  "Tokens do corpo": 5000\n'), encoding="utf-8")
             self.assertEqual(parameters.setting([Path(first), Path(second)], "Tokens do corpo"), 5000)
 
+    def test_should_read_a_skill_parameter_from_its_entry_then_global_then_its_default(self) -> None:
+        with tempfile.TemporaryDirectory() as root:
+            skill = Path(root, "SKILL.md")
+            skill.write_text(
+                f'{parameters.SKILL_HEADING}\n\n```yaml\n"Idiomas":\n  - "pt-BR"\n"Modo": "a"\n"Outro": "x"\n```\n', encoding="utf-8"
+            )
+            Path(root, parameters.INSTRUCTIONS).write_text(
+                block('"Global":\n  "Modo": "b"\n"ler-imagem":\n  "Idiomas":\n    - "en-US"\n'), encoding="utf-8"
+            )
+            roots = [Path(root)]
+            self.assertEqual(parameters.skill_parameter(roots, "ler-imagem", "Idiomas", skill), ["en-US"])
+            self.assertEqual(parameters.skill_parameter(roots, "ler-imagem", "Modo", skill), "b")
+            self.assertEqual(parameters.skill_parameter(roots, "ler-imagem", "Outro", skill), "x")
+            self.assertIsNone(parameters.skill_parameter(roots, "ler-imagem", "Ausente", skill))
+
     def test_should_ignore_a_key_under_a_skill_entry(self) -> None:
         self.assertIsNone(parameters.global_value({"criar-commit": {"Organização": "x"}}, "Organização"))
 
