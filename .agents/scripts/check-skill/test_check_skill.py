@@ -183,3 +183,40 @@ class VersionReferenceTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class InstructionsTest(unittest.TestCase):
+    def setUp(self) -> None:
+        self.tmp = tempfile.TemporaryDirectory()
+        self.project = Path(self.tmp.name)
+        (self.project / ".agents").mkdir()
+        (self.project / ".agents" / "config.yml").write_text("organization:\n  name: example\n")
+        self.checker = load_checker(self.project)
+        import tiktoken
+
+        self.encoding = tiktoken.get_encoding("o200k_base")
+
+    def tearDown(self) -> None:
+        self.tmp.cleanup()
+        os.environ.pop("HARNESS_ROOT", None)
+
+    def errors(self, text: str, words: int = 5000, lines: int = 500, tokens: int = 5000) -> list[str]:
+        return [finding.message for finding in self.checker.instructions_errors(text, self.encoding, words, lines, tokens)]
+
+    def test_should_pass_small_instructions(self) -> None:
+        self.assertEqual(self.errors("# AGENTS\n\nLeia CONTRIBUTING.md.\n"), [])
+
+    def test_should_fail_instructions_over_the_body_token_limit(self) -> None:
+        self.assertEqual(len(self.errors("palavra " * 100, tokens=50)), 1)
+
+    def test_should_fail_instructions_over_the_line_limit(self) -> None:
+        self.assertEqual(len(self.errors("x\n" * 20, lines=10)), 1)
+
+    def test_should_measure_a_file_without_frontmatter_as_body(self) -> None:
+        version, tokens = self.checker.body_measure("# AGENTS\n", self.encoding)
+        self.assertIsNone(version)
+        self.assertGreater(tokens, 0)
+
+    def test_should_point_the_instructions_at_the_repository_root(self) -> None:
+        self.assertEqual(self.checker.item_path("AGENTS.md"), "AGENTS.md")
+        self.assertEqual(self.checker.item_path("criar-commit"), ".agents/skills/criar-commit/SKILL.md")
