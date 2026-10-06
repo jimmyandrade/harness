@@ -36,9 +36,9 @@ cp -Rn node_modules/harness/examples/business-harness/. .
 grep -rl 'vX\.Y\.Z' .github .claude-plugin | while read -r file; do perl -pi -e "s/vX\.Y\.Z/$TAG/g" "$file"; done
 ```
 
-Replace `example` with the name of the business in `AGENTS.md`, `.claude-plugin/`, and `.claude/settings.json`. A file that already existed was not copied; merge the example into it by hand.
+Replace `example` with the name of the business in `AGENTS.md`, `.claude-plugin/`, and `.claude/settings.json`. A file that already existed was not copied; merge the example into it by hand. Then fill the placeholders between `<` and `>` in `AGENTS.md` with the `definir-instrucoes-do-projeto` skill, keeping the Notion section word for word.
 
-Check: `grep -rn 'vX\.Y\.Z\|example' AGENTS.md .github .claude-plugin .claude` prints nothing.
+Check: `grep -rn 'vX\.Y\.Z\|example' AGENTS.md .github .claude-plugin .claude` and `grep -n '<[^a/]' AGENTS.md` print nothing.
 
 ## 4. Write the skill graph and run the checker
 
