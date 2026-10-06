@@ -16,6 +16,7 @@ flowchart LR
     criar_commit["criar-commit"]
     criar_habilidade["criar-habilidade"]
     criar_pull_request["criar-pull-request"]
+    definir_instrucoes_do_projeto["definir-instrucoes-do-projeto"]
     descrever_habilidade_ou_schema["descrever-habilidade-ou-schema"]
     evoluir_habilidade["evoluir-habilidade"]
     medir_habilidade["medir-habilidade"]
@@ -37,6 +38,8 @@ flowchart LR
   criar_pull_request --> criar_commit
   criar_pull_request --> evoluir_habilidade
   criar_pull_request --> resolver_comentarios_de_revisao
+  definir_instrucoes_do_projeto --> criar_habilidade
+  definir_instrucoes_do_projeto --> evoluir_habilidade
   descrever_habilidade_ou_schema --> evoluir_habilidade
   descrever_habilidade_ou_schema --> publicar_habilidade
   descrever_habilidade_ou_schema --> revisar_habilidade
