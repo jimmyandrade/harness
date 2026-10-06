@@ -22,7 +22,7 @@ status=0
 only_skills=1
 for arg in "$@"; do
   case "$arg" in
-    */SKILL.md) ;;
+    */SKILL.md|AGENTS.md|*/AGENTS.md) ;;
     *) only_skills=0 ;;
   esac
 done

@@ -129,6 +129,21 @@ def skill_measure(text: str, encoding) -> tuple[str | None, int | None]:
     return version, body_tokens
 
 
+INSTRUCTIONS = "AGENTS.md"
+
+
+def item_path(name: str) -> str:
+    """Repository path of a checked item: a skill name, or the project instructions."""
+    return INSTRUCTIONS if name == INSTRUCTIONS else f".agents/skills/{name}/SKILL.md"
+
+
+def body_measure(text: str, encoding) -> tuple[str | None, int | None]:
+    """Version and body tokens of a skill, or of a file without frontmatter."""
+    if text.startswith("---\n"):
+        return skill_measure(text, encoding)
+    return None, len(encoding.encode(text))
+
+
 def changed_skill_names() -> set[str] | None:
     base = os.environ.get("CHECK_SKILL_BASE", "")
     head = os.environ.get("CHECK_SKILL_HEAD", "")
@@ -136,13 +151,13 @@ def changed_skill_names() -> set[str] | None:
         if not base or not head or set(base) <= {"0"}:
             return None
         raw = git_output(
-            ["git", "diff", "--name-only", base, head, "--", ".agents/skills"]
+            ["git", "diff", "--name-only", base, head, "--", ".agents/skills", INSTRUCTIONS]
         )
     else:
         chunks: list[str] = []
         for args in (
-            ["git", "diff", "--name-only", "--", ".agents/skills"],
-            ["git", "diff", "--cached", "--name-only", "--", ".agents/skills"],
+            ["git", "diff", "--name-only", "--", ".agents/skills", INSTRUCTIONS],
+            ["git", "diff", "--cached", "--name-only", "--", ".agents/skills", INSTRUCTIONS],
         ):
             raw = git_output(args)
             if raw is None:
@@ -225,14 +240,14 @@ def skill_file_url(name: str, head: str) -> str | None:
     root = github_base_url()
     if root is None or not head:
         return None
-    return f"{root}/blob/{head}/.agents/skills/{name}/SKILL.md"
+    return f"{root}/blob/{head}/{item_path(name)}"
 
 
 def skill_diff_url(name: str, base: str, head: str) -> str | None:
     root = github_base_url()
     if root is None or not base or not head:
         return None
-    path = f".agents/skills/{name}/SKILL.md"
+    path = item_path(name)
     digest = hashlib.sha256(path.encode()).hexdigest()
     return f"{root}/compare/{base}...{head}#diff-{digest}"
 
@@ -248,10 +263,10 @@ def previous_measure(
 ) -> tuple[str | None, int | None] | None:
     if base is None:
         return None
-    text = revision_text(base, f".agents/skills/{name}/SKILL.md")
+    text = revision_text(base, item_path(name))
     if text is None:
         return None
-    return skill_measure(text, encoding)
+    return body_measure(text, encoding)
 
 
 def pair_text(before: str | None, after: str | None, *, compared: bool) -> str:
@@ -309,7 +324,7 @@ def summary_markdown(
         if only_changed and kind not in {"new", "changed"} and not items:
             continue
         label = result_label(not items, kind)
-        version_text = pair_text(old_version, version, compared=compared)
+        version_text = "—" if name == INSTRUCTIONS else pair_text(old_version, version, compared=compared)
         token_text = pair_text(
             str(old_tokens) if old_tokens is not None else None,
             str(body_tokens) if body_tokens is not None else None,
@@ -1145,6 +1160,22 @@ def skill_files(root: Path) -> list[Path]:
     )
 
 
+def instructions_errors(text: str, encoding, word_limit: int, line_limit: int, body_limit: int) -> list[Finding]:
+    """The project instructions load in every session, so they get the size limits of a skill body."""
+    errors: list[Finding] = []
+    lines = text.splitlines()
+    last_line = len(lines) or 1
+    words = len(text.split())
+    if words > word_limit:
+        errors.append(Finding(f"{words} words (limit {word_limit})", last_line))
+    if len(lines) >= line_limit:
+        errors.append(Finding(f"{len(lines)} lines (limit {line_limit})", line_limit))
+    _, tokens = body_measure(text, encoding)
+    if tokens is not None and tokens >= body_limit:
+        errors.append(Finding(f"{tokens} body tokens (limit {body_limit})", last_line))
+    return errors
+
+
 def requested_files(root: Path, args: list[str]) -> list[Path]:
     if not args:
         return skill_files(root)
@@ -1185,7 +1216,21 @@ def main() -> int:
     results: dict[str, list[tuple[Path, Finding]]] = {}
     measures: dict[str, tuple[str | None, int | None]] = {}
     known = known_skill_names()
-    for path in requested_files(ROOT, sys.argv[1:]):
+    args = sys.argv[1:]
+    skill_args = [arg for arg in args if Path(arg).name != INSTRUCTIONS]
+    instructions = ROOT / INSTRUCTIONS
+    if instructions.is_file() and (not args or len(skill_args) < len(args)):
+        results.setdefault(INSTRUCTIONS, [])
+        text = instructions.read_text(encoding="utf-8")
+        measures[INSTRUCTIONS] = body_measure(text, encoding)
+        for finding in instructions_errors(text, encoding, word_limit, line_limit, body_limit):
+            failed = True
+            results[INSTRUCTIONS].append((Path(INSTRUCTIONS), finding))
+            report(Path(INSTRUCTIONS), finding)
+    if args and not skill_args:
+        write_summary(results, measures, body_limit, encoding)
+        return 1 if failed else 0
+    for path in requested_files(ROOT, skill_args):
         relative = path.relative_to(ROOT)
         key = skill_key(relative)
         results.setdefault(key, [])
