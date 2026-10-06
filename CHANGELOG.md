@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.13.1](https://github.com/jimmyandrade/harness/compare/v0.13.0...v0.13.1) (2026-10-06)
+
+
+### Bug Fixes
+
+* **check-skill:** run the instructions tests and measure an unclosed frontmatter ([#102](https://github.com/jimmyandrade/harness/issues/102)) ([0fb555d](https://github.com/jimmyandrade/harness/commit/0fb555d5a7fdc740701e8a145be1ca2d9ffe2c81))
+
 ## [0.13.0](https://github.com/jimmyandrade/harness/compare/v0.12.0...v0.13.0) (2026-10-06)
 
 

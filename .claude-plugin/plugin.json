@@ -1,7 +1,7 @@
 {
   "name": "core",
   "description": "Skills, checks, and the vocabulary MCP shared by every project.",
-  "version": "0.13.0",
+  "version": "0.13.1",
   "author": {
     "name": "Jimmy Andrade",
     "url": "https://github.com/jimmyandrade"
