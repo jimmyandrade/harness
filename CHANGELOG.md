@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.16.0](https://github.com/jimmyandrade/harness/compare/v0.15.0...v0.16.0) (2026-10-06)
+
+
+### Features
+
+* **project-parameters:** let a skill script read its own parameters ([#112](https://github.com/jimmyandrade/harness/issues/112)) ([c782340](https://github.com/jimmyandrade/harness/commit/c782340c5f3b1bb7446ad093e77d3f6d97f08d83))
+
 ## [0.15.0](https://github.com/jimmyandrade/harness/compare/v0.14.0...v0.15.0) (2026-10-06)
 
 
