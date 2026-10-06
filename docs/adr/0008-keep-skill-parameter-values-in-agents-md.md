@@ -6,7 +6,7 @@ locale: en
 
 ## Status
 
-Accepted. ADR 0009 supersedes the part that keeps `.agents/config.yml` for what scripts read.
+Accepted. ADR 0009 supersedes the part that keeps a separate settings file for what scripts read.
 
 ## Context
 
@@ -16,7 +16,7 @@ The question became concrete when skills that read a business data source were p
 
 Two places were considered for the values:
 
-1. **`.agents/config.yml` of each project, filled into the Notion page by the sync.** Scripts already read this file, for limits, languages, and the page icon. But no agent reads it on its own: a skill would need an instruction to open it, and the sync would need to rewrite the parameter block of each core skill page.
+1. **A separate settings file in each project, filled into the Notion page by the sync.** Scripts already read such a file, for limits, languages, and the page icon. But no agent reads it on its own: a skill would need an instruction to open it, and the sync would need to rewrite the parameter block of each core skill page.
 2. **A YAML block in `AGENTS.md` of each project.** Every tool reads it without being told. Cursor and Copilot read `AGENTS.md`, and Claude Code reads `CLAUDE.md`, which imports `AGENTS.md`. A consumer project already keeps the values of the core product news skill there.
 
 Three problems showed up once a project wrote those values:
@@ -27,7 +27,7 @@ Three problems showed up once a project wrote those values:
 
 ## Decision
 
-The values of skill parameters live in `AGENTS.md`. `.agents/config.yml` keeps only what scripts read.
+The values of skill parameters live in `AGENTS.md`. A separate settings file keeps only what scripts read.
 
 ### AGENTS.md is written like a skill
 

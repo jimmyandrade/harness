@@ -6,19 +6,19 @@ locale: en
 
 ## Status
 
-Accepted. Supersedes the part of ADR 0008 that kept `.agents/config.yml` for what scripts read.
+Accepted. Supersedes the part of ADR 0008 that kept a separate settings file for what scripts read.
 
 ## Context
 
-ADR 0008 split settings by reader: skills read `AGENTS.md`, and scripts read `.agents/config.yml`. That left two files of settings per harness, and some values in both. The language of commit subjects, for example, was `locale.commit_subject` for nothing and `Idioma da mensagem de commit` for the commit skill. The limits of a skill were `limits.*` for the checker and `Tokens do corpo`, `Linhas`, and `Tokens do catálogo` for the skill creation skill. Two keys, `locale.skill` and `recognition.languages`, were read by no script at all.
+ADR 0008 split settings by reader: skills read `AGENTS.md`, and scripts read a separate settings file. That left two files of settings per harness, and some values in both. The language of commit subjects was set once for no script and once for the commit skill. The limits of a skill were set once for the checker and once for the skill creation skill. Two settings were read by no script at all.
 
-The scripts that read `.agents/config.yml` are the checker, the skill graph, the folder icon script, and the Notion sync. They can read the same YAML from the parameter block of `AGENTS.md` instead. The block is found under the heading `Parâmetros das habilidades`, as the first `yaml` code block after it.
+The scripts that read that file are the checker, the skill graph, the folder icon script, and the Notion sync. They can read the same YAML from the parameter block of `AGENTS.md` instead. The block is found under the heading `Parâmetros das habilidades`, as the first `yaml` code block after it.
 
 The risk is that people and agents edit `AGENTS.md` often, so the block can break: invalid YAML, a renamed heading, or a misspelled key.
 
 ## Decision
 
-Every setting lives in the parameter block of `AGENTS.md`. No repository keeps `.agents/config.yml`.
+Every setting lives in the parameter block of `AGENTS.md`. No repository keeps a separate settings file.
 
 - A script reads a setting from the `Global` entry of the project block, or from its top level. When the project does not set it, the script reads the core block, which holds the defaults.
 - A setting that a skill also reads keeps the skill's key, so one value serves both. The checker reads `Tokens do corpo`, `Linhas`, and `Tokens do catálogo`, the keys of the skill creation skill.
