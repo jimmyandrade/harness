@@ -3,7 +3,7 @@ name: definir-instrucoes-do-projeto
 description: Use essa habilidade sempre que for criar, revisar, enxugar ou reorganizar as instruções do projeto, inclusive os parâmetros das habilidades, mesmo sem dizer AGENTS. NÃO use para escrever uma skill, o guia de contribuição, o mapa da arquitetura nem a documentação do produto.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   related:
     - criar-habilidade
     - evoluir-habilidade
@@ -32,8 +32,8 @@ Classifique cada trecho pelo destino, antes de escrever. Grave o plano como uma 
 
 ```mermaid
 flowchart LR
-  A{O trecho é} -->|regra que toda sessão precisa| F[Fica nas instruções]
-  A -->|regra para quem contribui| C[Guia de contribuição]
+  A{O trecho é} -->|regra do Notion ou de qualquer lugar| F[Fica nas instruções]
+  A -->|regra de código, inclusive de segurança| C[Guia de contribuição]
   A -->|mapa de arquivos, pastas e dados| R[Mapa da arquitetura]
   A -->|interface, tipografia e tom| D[Documento de design]
   A -->|procedimento com passos| S[criar-habilidade]
@@ -46,7 +46,7 @@ Na dúvida entre ficar e sair, saia: o destino continua a um link de distância.
 
 ### Passo 3
 
-Escreva no `Idioma das instruções do projeto`, uma regra por linha, no imperativo, sem justificar. Separe o que vale em qualquer lugar, o que vale só no Notion e o que vale só em ferramentas de código. A regra de código, como comando, branch e build, nunca entra na parte do Notion. A parte do Notion copia do modelo, palavra por palavra, a abertura, o aviso e as duas subseções. Só as regras sob a identidade do agente e a interação de chat mudam de um projeto para outro. A primeira regra de código manda ler o guia de contribuição.
+Escreva no `Idioma das instruções do projeto`, uma regra por linha, no imperativo, sem justificar. Separe o que vale em qualquer lugar, o que vale só no Notion e o que vale só em ferramentas de código. A regra de código, inclusive a de segurança, como comando, branch, build e segredo, vai para o guia de contribuição e nunca entra na parte do Notion. A parte do Notion copia do modelo, palavra por palavra, a abertura, o aviso e as duas subseções. Só as regras sob a identidade do agente e a interação de chat mudam de um projeto para outro. A parte de ferramentas de código é só a ordem de ler o guia, copiada do modelo.
 
 Leia .agents/assets/templates/agents-md.md quando for gerar a saída.
 
@@ -75,12 +75,12 @@ Se você escrever "Idioma da mensagem" quando a habilidade lê "Idioma da mensag
 1. Abra o bloco de parâmetros da habilidade instalada.
 2. Copie a chave exata.
 
-### Regra de segurança fora daqui
+### Regra de código duplicada
 
-Se você mover para o guia de contribuição uma regra que toda sessão precisa, como não enviar direto para a branch principal ou não expor segredo, o agente só a vê quando alguém manda ler o guia.
+Se você deixar nas instruções do projeto uma regra de código que também está no guia de contribuição, como não enviar direto para a branch principal ou não expor segredo, as duas cópias divergem com o tempo.
 
-1. Deixe essas regras nas instruções do projeto.
-2. Mova só o que pode esperar um link.
+1. Deixe a regra só no guia de contribuição.
+2. Nas instruções, mantenha só a ordem de ler o guia.
 
 ### Técnica no Notion
 
@@ -102,7 +102,7 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### as instruções do projeto passaram de 7000 tokens
 
-O conteúdo foi para o guia de contribuição, sem mudança. As instruções ficaram com a leitura obrigatória do guia, três regras de segurança e o bloco de parâmetros, com cerca de 330 tokens. Os documentos e os comentários que citavam as instruções passaram a citar o guia.
+O conteúdo foi para o guia de contribuição, sem mudança. As instruções ficaram com a ordem de ler o guia e o bloco de parâmetros. As regras de segurança ficaram só no guia. Os documentos e os comentários que citavam as instruções passaram a citar o guia.
 
 ### acrescente o idioma das mensagens de commit
 
@@ -110,7 +110,7 @@ O valor entrou em `Global`, com a chave "Idioma da mensagem de commit", copiada 
 
 ## Casos-limite
 
-- O projeto ainda não tem instruções: comece pelo modelo, só com o bloco de parâmetros e as regras de segurança.
+- O projeto ainda não tem instruções: comece pelo modelo, só com a parte do Notion, a ordem de ler o guia e o bloco de parâmetros.
 - O bloco atual não tem árvore: ele continua valendo como `Global`. Reorganize quando mexer nele.
 - Uma habilidade renomeou uma chave numa versão nova: troque a chave junto com a subida da versão.
 - O trecho é um esquema de dados ou um fato do negócio: ele não entra no texto. O esquema fica no repositório do negócio, e o fato fica nos dados.
@@ -120,6 +120,7 @@ O valor entrou em `Global`, com a chave "Idioma da mensagem de commit", copiada 
 
 - O Claude Code lê o arquivo de instruções do Claude, não o do agente. Esse arquivo precisa importar as instruções do projeto, ou o Claude Code não as vê.
 - A checagem mede as instruções do projeto como corpo de skill, mesmo sem frontmatter. As regras de estrutura de skill não valem para elas.
+- A ordem de ler o guia é a única ligação entre as instruções e as regras de código. O guia só vale se o agente obedecer a essa ordem, então ela fica escrita como ordem, não como sugestão. Regra que não pode depender dessa leitura ganha uma verificação automática, como um teste ou uma checagem no commit.
 - No Notion, as instruções do projeto são uma página escrita pela sincronização. Não edite essa página. A mudança vai no repositório.
 - Mover o arquivo inteiro e criar outro com o nome antigo não aparece como renomeação no histórico. O histórico das linhas movidas fica no nome antigo.
 

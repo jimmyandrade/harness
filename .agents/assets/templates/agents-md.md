@@ -28,8 +28,7 @@ Esta seção descreve o estilo de comunicação que você usa nas interações d
 
 ## Em ferramentas de código
 
-- Leia `CONTRIBUTING.md` antes de mudar o código.
-- <Regra que toda sessão de código precisa, como nunca enviar direto para a branch principal.>
+Antes de qualquer mudança no código, leia o `CONTRIBUTING.md` inteiro. As regras dele valem como se estivessem aqui.
 
 ## Parâmetros das habilidades
 
