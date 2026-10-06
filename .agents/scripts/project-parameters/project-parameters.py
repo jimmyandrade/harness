@@ -29,7 +29,10 @@ TEXT_SETTINGS = {
     "Símbolo da pasta no macOS",
 }
 CHOICE_SETTINGS = {"Licença obrigatória": {"sim", "não"}}
-SCRIPT_SETTINGS = INTEGER_SETTINGS | TEXT_SETTINGS | set(CHOICE_SETTINGS)
+# The version of the instructions file, which the Notion sync writes on its page.
+VERSION_SETTING = "Versão das instruções do projeto"
+VERSION = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$")
+SCRIPT_SETTINGS = INTEGER_SETTINGS | TEXT_SETTINGS | set(CHOICE_SETTINGS) | {VERSION_SETTING}
 # A script setting that is also a parameter of a skill reads that skill's entry first.
 SETTING_SKILL = {
     "Palavras": "criar-habilidade",
@@ -120,6 +123,16 @@ def setting(roots: list[Path], key: str):
     raise SystemExit(f'"{key}" is missing from the parameter block of {INSTRUCTIONS}')
 
 
+def instructions_version(text: str) -> tuple[int, int, int] | None:
+    """The version set in the parameter block of an instructions text, if valid."""
+    data, _, error = yaml_block(text, HEADING)
+    if error is not None or not isinstance(data, dict):
+        return None
+    value = global_value(data, VERSION_SETTING)
+    match = VERSION.fullmatch(value) if isinstance(value, str) else None
+    return (int(match.group(1)), int(match.group(2)), int(match.group(3))) if match else None
+
+
 def skill_parameter(roots: list[Path], skill: str, key: str, skill_file: Path | None = None):
     """The value a skill script should use for one of its parameters.
 
@@ -168,6 +181,8 @@ def setting_type_error(key: str, value) -> str | None:
         return f'"{key}" must be a positive integer'
     if key in TEXT_SETTINGS and (not isinstance(value, str) or not value.strip()):
         return f'"{key}" must be a non-empty text'
+    if key == VERSION_SETTING and (not isinstance(value, str) or VERSION.fullmatch(value) is None):
+        return f'"{key}" must be a version such as "0.1.0", in quotes'
     if key in CHOICE_SETTINGS and value not in CHOICE_SETTINGS[key]:
         return f'"{key}" must be one of: ' + ", ".join(sorted(CHOICE_SETTINGS[key]))
     return None

@@ -17,7 +17,7 @@ locale: en
 - The skill text says "instruções do projeto". It does not name a file, a path, a workspace, or a page.
 - Parameter values form a tree, as ADR 0008 decides: an entry named after the skill, then an entry named `Global`. A skill reads its own entry first, then `Global`. A value at the top level of the block counts as `Global`, so a flat block keeps working.
 - A parameter that the project instructions do not set uses the default written in the skill. When the skill has no default, ask once and stop.
-- The sync writes the project instructions page in Notion from `AGENTS.md`, as ADR 0008 decides. Never edit that page by hand: change `AGENTS.md` in the business harness.
+- The sync writes the project instructions page in Notion from `AGENTS.md`, as ADR 0008 decides, with the version in `Versão das instruções do projeto`. Never edit that page by hand: change `AGENTS.md` in the business harness.
 
 ## Git
 

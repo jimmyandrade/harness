@@ -1057,6 +1057,24 @@ def committed_text(relative: Path) -> str | None:
     return revision_text(version_reference(), relative.as_posix())
 
 
+def instructions_version_errors(text: str) -> list[tuple[str, int | None]]:
+    """A business harness publishes its instructions with a version that rises on every change."""
+    if not IS_HARNESS or ROOT == CORE:
+        return []
+    key = parameters.VERSION_SETTING
+    line = parameters.key_line(text, key)
+    version = parameters.instructions_version(text)
+    if version is None:
+        return [] if line is not None else [(f'"{key}" is required in a business harness', None)]
+    previous = committed_text(Path(INSTRUCTIONS))
+    if previous is None or previous == text:
+        return []
+    earlier = parameters.instructions_version(previous)
+    if earlier is not None and version <= earlier:
+        return [(f'"{key}" must increase when the instructions change', line)]
+    return []
+
+
 GIVEN_PT = re.compile(r"^\s*(Dado|Dada|Dados|Dadas)\b(.*)$")
 
 
@@ -1210,7 +1228,7 @@ def main() -> int:
         block_errors = parameters.validate(
             text, parameters.skill_parameter_keys(roots), required=IS_HARNESS or ROOT == CORE
         )
-        for message, line in block_errors:
+        for message, line in block_errors + instructions_version_errors(text):
             failed = True
             finding = Finding(message, line)
             results[INSTRUCTIONS].append((Path(INSTRUCTIONS), finding))

@@ -75,6 +75,18 @@ class ValidateTest(unittest.TestCase):
         )
 
 
+    def test_should_require_a_quoted_version_for_the_instructions(self) -> None:
+        self.assertEqual(self.errors(block('"Global":\n  "Versão das instruções do projeto": "0.5.0"\n')), [])
+        self.assertEqual(
+            self.errors(block('"Global":\n  "Versão das instruções do projeto": 5\n')),
+            ['"Versão das instruções do projeto" must be a version such as "0.1.0", in quotes'],
+        )
+
+    def test_should_read_the_instructions_version(self) -> None:
+        self.assertEqual(parameters.instructions_version(block('"Global":\n  "Versão das instruções do projeto": "0.5.0"\n')), (0, 5, 0))
+        self.assertIsNone(parameters.instructions_version(block('"Global":\n  "Organização": "x"\n')))
+
+
 class SettingTest(unittest.TestCase):
     def test_should_read_the_project_first_and_fall_back_to_the_next_root(self) -> None:
         with tempfile.TemporaryDirectory() as first, tempfile.TemporaryDirectory() as second:

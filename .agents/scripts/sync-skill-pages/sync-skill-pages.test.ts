@@ -565,13 +565,16 @@ test("core skills publish when the project moves the core version or its mapping
   assert.throws(() => coreNamesToPublish(["criar-commit"], ["criar-commit"], true, true), /criar-commit exists/)
 })
 
-test("the instructions file becomes a production page with a fixed description", () => {
-  const page = instructionsPage("# Instruções do projeto\n")
+test("the instructions file becomes a page with its own version and a fixed description", () => {
+  const text = parameters('  "Versão das instruções do projeto": "0.5.0"\n')
+  const page = instructionsPage(text)
   assert.equal(page.name, INSTRUCTIONS_FILE)
   assert.equal(page.description, INSTRUCTIONS_DESCRIPTION)
-  assert.equal(page.body, "# Instruções do projeto\n")
-  assert.deepEqual(properties(page, mapping)[mapping.properties.status], { status: { name: skillStatus("1.0.0", statusOptions(mapping)) } })
-  assert.equal(skillStatus(page.version), skillStatus("1.0.0"))
+  assert.equal(page.version, "0.5.0")
+  assert.equal(page.body, text)
+  assert.deepEqual(properties(page, mapping)[mapping.properties.status], { status: { name: skillStatus("0.5.0", statusOptions(mapping)) } })
+  assert.throws(() => instructionsPage("# Instruções do projeto\n"))
+  assert.throws(() => instructionsPage(parameters('  "Versão das instruções do projeto": "cinco"\n')))
 })
 
 test("the instructions page is created once, then updated", async () => {
@@ -589,9 +592,9 @@ test("the instructions page is created once, then updated", async () => {
     },
   }
   assert.equal(await publishInstructions(root, writer, mapping), `skip ${INSTRUCTIONS_FILE}: missing`)
-  writeFileSync(join(root, INSTRUCTIONS_FILE), "primeira\n")
+  writeFileSync(join(root, INSTRUCTIONS_FILE), parameters('  "Versão das instruções do projeto": "0.1.0"\n'))
   assert.equal(await publishInstructions(root, writer, mapping), `create ${INSTRUCTIONS_FILE}: id-${INSTRUCTIONS_FILE}`)
-  writeFileSync(join(root, INSTRUCTIONS_FILE), "segunda\n")
+  writeFileSync(join(root, INSTRUCTIONS_FILE), parameters('  "Versão das instruções do projeto": "0.2.0"\n'))
   assert.equal(await publishInstructions(root, writer, mapping), `update ${INSTRUCTIONS_FILE}: id-${INSTRUCTIONS_FILE}`)
-  assert.equal(pages.get(INSTRUCTIONS_FILE)?.body, "segunda\n")
+  assert.equal(pages.get(INSTRUCTIONS_FILE)?.version, "0.2.0")
 })

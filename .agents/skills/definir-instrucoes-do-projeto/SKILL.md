@@ -3,7 +3,7 @@ name: definir-instrucoes-do-projeto
 description: Use essa habilidade sempre que for criar, revisar, enxugar ou reorganizar as instruções do projeto, inclusive os parâmetros das habilidades, mesmo sem dizer AGENTS. NÃO use para escrever uma skill, o guia de contribuição, o mapa da arquitetura nem a documentação do produto.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.5.0"
   related:
     - criar-habilidade
     - evoluir-habilidade
@@ -52,7 +52,7 @@ Leia .agents/assets/templates/agents-md.md quando for gerar a saída.
 
 ### Passo 4
 
-Monte o bloco de parâmetros como árvore: a entrada `Global` e uma entrada por nome de habilidade. Copie cada chave do bloco de parâmetros da própria habilidade, letra por letra. Um valor que mais de uma habilidade usa fica em `Global`. O resto fica sob o nome da habilidade. Entra só o valor que difere do padrão da habilidade. Um valor que a habilidade calcula sozinha, como o repositório a partir do remoto, também conta como padrão e sai do bloco.
+Monte o bloco de parâmetros como árvore: a entrada `Global` e uma entrada por nome de habilidade. Copie cada chave do bloco de parâmetros da própria habilidade, letra por letra. Um valor que mais de uma habilidade usa fica em `Global`. O resto fica sob o nome da habilidade. Entra só o valor que difere do padrão da habilidade. Num harness de negócio, suba a `Versão das instruções do projeto` a cada mudança: patch para correção, minor para regra nova, major para mudança que quebra. Ela vira a versão da página no Notion. Um valor que a habilidade calcula sozinha, como o repositório a partir do remoto, também conta como padrão e sai do bloco.
 
 ### Passo 5
 

@@ -230,5 +230,45 @@ class InstructionsTest(unittest.TestCase):
         self.assertEqual(self.checker.item_path("criar-commit"), ".agents/skills/criar-commit/SKILL.md")
 
 
+
+class InstructionsVersionTest(unittest.TestCase):
+    def setUp(self) -> None:
+        self.tmp = tempfile.TemporaryDirectory()
+        self.project = Path(self.tmp.name)
+        (self.project / ".agents" / "skills").mkdir(parents=True)
+        self.checker = load_checker(self.project)
+
+    def tearDown(self) -> None:
+        self.tmp.cleanup()
+        os.environ.pop("HARNESS_ROOT", None)
+
+    def test_should_require_the_version_in_a_business_harness(self) -> None:
+        self.assertEqual(
+            [message for message, _ in self.checker.instructions_version_errors(PARAMETERS)],
+            ['"Versão das instruções do projeto" is required in a business harness'],
+        )
+
+    def test_should_require_a_higher_version_when_the_instructions_change(self) -> None:
+        def text(version: str, rule: str) -> str:
+            return f"# Instruções\n\n{rule}\n\n" + PARAMETERS.replace(
+                '"Global":\n', f'"Global":\n  "Versão das instruções do projeto": "{version}"\n'
+            )
+
+        git = ["git", "-c", "user.email=t@example.com", "-c", "user.name=t"]
+        subprocess.run(["git", "init", "-q"], cwd=self.project, check=True)
+        (self.project / INSTRUCTIONS).write_text(text("0.5.0", "Regra antiga."), encoding="utf-8")
+        subprocess.run(git + ["add", "."], cwd=self.project, check=True)
+        subprocess.run(git + ["commit", "-q", "-m", "x"], cwd=self.project, check=True)
+        self.assertEqual(
+            [message for message, _ in self.checker.instructions_version_errors(text("0.5.0", "Regra nova."))],
+            ['"Versão das instruções do projeto" must increase when the instructions change'],
+        )
+        self.assertEqual(self.checker.instructions_version_errors(text("0.6.0", "Regra nova.")), [])
+
+    def test_should_accept_a_version_without_history(self) -> None:
+        text = PARAMETERS.replace('"Global":\n', '"Global":\n  "Versão das instruções do projeto": "0.5.0"\n')
+        self.assertEqual(self.checker.instructions_version_errors(text), [])
+
+
 if __name__ == "__main__":
     unittest.main()

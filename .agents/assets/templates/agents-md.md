@@ -35,6 +35,7 @@ Antes de qualquer mudança no código, leia o `CONTRIBUTING.md` inteiro. As regr
 ```yaml
 "Global":
   "Idioma das instruções do projeto": "português"
+  "Versão das instruções do projeto": "0.1.0"
   "<chave exata usada por mais de uma habilidade>": "<valor>"
 "<nome-da-habilidade>":
   "<chave exata desta habilidade>": "<valor>"

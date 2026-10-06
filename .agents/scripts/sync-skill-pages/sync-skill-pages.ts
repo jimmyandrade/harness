@@ -525,9 +525,15 @@ export async function publish(
 export const INSTRUCTIONS_DESCRIPTION =
   "Use essa habilidade sempre que for executar qualquer tarefa neste espaço de trabalho, inclusive outra habilidade, para seguir as instruções gerais e ler os parâmetros das habilidades. NÃO use para criar nem alterar estas instruções: a mudança vai no repositório."
 
-/** The project instructions file as a page of the skills database (ADR 0008). */
+export const INSTRUCTIONS_VERSION = "Versão das instruções do projeto"
+
+/** The project instructions file as a page of the skills database (ADR 0008), with its own version. */
 export function instructionsPage(text: string): SkillPage {
-  return { name: INSTRUCTIONS_FILE, description: INSTRUCTIONS_DESCRIPTION, version: "1.0.0", body: text }
+  const version = blockSetting(text, INSTRUCTIONS_VERSION)
+  if (!version || !/^\d+\.\d+\.\d+$/.test(version)) {
+    throw new Error(`"${INSTRUCTIONS_VERSION}" is missing from the parameter block of ${INSTRUCTIONS_FILE}`)
+  }
+  return { name: INSTRUCTIONS_FILE, description: INSTRUCTIONS_DESCRIPTION, version, body: text }
 }
 
 export async function publishInstructions(root: string, notion: PageWriter, mapping: SkillMapping): Promise<string> {
