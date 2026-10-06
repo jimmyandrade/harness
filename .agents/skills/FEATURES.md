@@ -92,6 +92,20 @@ How these skills relate is in `README.md`, in this folder.
   - [ ] A merge request on a pull request with an unresolved thread runs resolver-comentarios-de-revisao first
   - [ ] A merge request with a failing check stops and names the check while `Exigir CI verde` is on
 
+### definir-instrucoes-do-projeto
+- **Stability**: experimental
+- **Description**: Write and review a project's instructions file so that it holds only what every session needs, as ADR 0008 decides
+- **Properties**:
+  - Lives at `.agents/skills/definir-instrucoes-do-projeto/SKILL.md`, with the output template at `.agents/assets/templates/agents-md.md`
+  - Measures the instructions with the skill checker before and after, against the skill body limits
+  - Classifies each passage by destination: stays, contributing guide, architecture map, design document, a new skill, product documentation, the data, or the parameter block
+  - Writes in the language set by "Idioma das instruções do projeto", one rule per line, with separate parts for anywhere, Notion only, and coding tools only
+  - Builds the parameter block as a tree, a `Global` entry and one entry per skill, copying each key from the skill and listing only values that differ from the defaults
+  - Creates each destination before removing the passage, then updates the references to the old location
+- **Test Criteria**:
+  - [ ] Instructions over the body token limit end under it, with every moved passage reachable from its destination
+  - [ ] A parameter added for two skills lands in `Global` under the exact key the skills read
+
 ### descrever-habilidade-ou-schema
 - **Stability**: experimental
 - **Description**: Write or correct a skill or schema description, and test whether a skill description triggers, even when the person does not say description
