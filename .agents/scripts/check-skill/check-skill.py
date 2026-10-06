@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
-"""Fail when a SKILL.md exceeds a limit in .agents/config.yml.
+"""Fail when a SKILL.md or the project instructions file breaks a harness rule or passes a limit.
 
 A skill that lists metadata.related names only skills that exist in the project
 or in this harness, and lists every skill its body cites.
 
 The project is HARNESS_ROOT, or the working directory when it is unset.
-A key missing from the project .agents/config.yml falls back to the one in this harness.
+Settings come from the parameter block of the project instructions file, then of this harness (ADR 0009).
 """
 
 from __future__ import annotations
 
 import hashlib
+import importlib.util
 import json
 import os
 import re
@@ -51,16 +52,20 @@ SEMVER = re.compile(
 )
 
 
-def repo_root(start: Path) -> Path:
-    for path in (start, *start.parents):
-        if (path / ".agents" / "config.yml").is_file():
-            return path
-    raise SystemExit(".agents/config.yml not found")
+def load_parameters():
+    path = Path(__file__).resolve().parents[1] / "project-parameters" / "project-parameters.py"
+    spec = importlib.util.spec_from_file_location("project_parameters", path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
 
 
-ROOT = repo_root(Path(os.environ.get("HARNESS_ROOT") or Path.cwd()).resolve())
-CORE = repo_root(Path(__file__).resolve().parent)
-CONFIGS = [ROOT / ".agents" / "config.yml", CORE / ".agents" / "config.yml"]
+parameters = load_parameters()
+ROOT = parameters.project_root(Path(os.environ.get("HARNESS_ROOT") or Path.cwd()).resolve())
+CORE = parameters.core_root()
+# A project that links its skills to the core only uses the core skills, so only
+# its instructions are checked.
+IS_HARNESS = parameters.is_harness(ROOT)
 
 
 @dataclass(frozen=True)
@@ -129,7 +134,7 @@ def skill_measure(text: str, encoding) -> tuple[str | None, int | None]:
     return version, body_tokens
 
 
-INSTRUCTIONS = "AGENTS.md"
+INSTRUCTIONS = parameters.INSTRUCTIONS
 
 
 def item_path(name: str) -> str:
@@ -382,29 +387,6 @@ def summary_markdown(
         lines.extend(finding_lines)
         lines.append("")
     return "\n".join(lines) + "\n"
-
-
-def section_value(texts: str | list[str], section: str, key: str) -> str:
-    for text in [texts] if isinstance(texts, str) else texts:
-        value = find_section_value(text, section, key)
-        if value is not None:
-            return value
-    raise SystemExit(f"{section}.{key} is missing from .agents/config.yml")
-
-
-def find_section_value(text: str, section: str, key: str) -> str | None:
-    in_section = False
-    prefix = f"{key}:"
-    for raw in text.splitlines():
-        line = raw.split("#", 1)[0].rstrip()
-        if not line.strip():
-            continue
-        if not line.startswith(" ") and not line.startswith("\t"):
-            in_section = line == f"{section}:"
-            continue
-        if in_section and line.strip().startswith(prefix):
-            return line.split(":", 1)[1].strip()
-    return None
 
 
 def frontmatter(text: str, path: Path) -> str:
@@ -1200,18 +1182,18 @@ def main() -> int:
         raise SystemExit(
             "tiktoken is required. Install .agents/scripts/check-skill/requirements.txt"
         )
-    config = [path.read_text(encoding="utf-8") for path in dict.fromkeys(CONFIGS)]
-    word_limit = int(section_value(config, "limits", "skill_words"))
-    line_limit = int(section_value(config, "limits", "skill_lines"))
-    catalog_limit = int(section_value(config, "limits", "skill_catalog_tokens"))
-    body_limit = int(section_value(config, "limits", "skill_body_tokens"))
-    author = section_value(config, "organization", "name")
-    license_required = section_value(config, "license", "required") == "true"
-    direction = section_value(config, "mermaid", "flowchart_direction")
-    gherkin = section_value(config, "locale", "gherkin")
+    roots = [ROOT, CORE]
+    word_limit = int(parameters.setting(roots, "Palavras"))
+    line_limit = int(parameters.setting(roots, "Linhas"))
+    catalog_limit = int(parameters.setting(roots, "Tokens do catálogo"))
+    body_limit = int(parameters.setting(roots, "Tokens do corpo"))
+    author = str(parameters.setting(roots, "Organização"))
+    license_required = parameters.setting(roots, "Licença obrigatória") == "sim"
+    direction = str(parameters.setting(roots, "Direção dos fluxogramas"))
+    gherkin = str(parameters.setting(roots, "Idioma do Gherkin"))
     if direction not in FLOWCHART_DIRECTIONS:
         raise SystemExit(
-            "mermaid.flowchart_direction must be LR, RL, TD, TB, or BT"
+            '"Direção dos fluxogramas" must be LR, RL, TD, TB, or BT'
         )
     encoding = tiktoken.get_encoding("o200k_base")
     failed = False
@@ -1225,11 +1207,19 @@ def main() -> int:
         results.setdefault(INSTRUCTIONS, [])
         text = instructions.read_text(encoding="utf-8")
         measures[INSTRUCTIONS] = body_measure(text, encoding)
+        block_errors = parameters.validate(
+            text, parameters.skill_parameter_keys(roots), required=IS_HARNESS or ROOT == CORE
+        )
+        for message, line in block_errors:
+            failed = True
+            finding = Finding(message, line)
+            results[INSTRUCTIONS].append((Path(INSTRUCTIONS), finding))
+            report(Path(INSTRUCTIONS), finding)
         for finding in instructions_errors(text, encoding, word_limit, line_limit, body_limit):
             failed = True
             results[INSTRUCTIONS].append((Path(INSTRUCTIONS), finding))
             report(Path(INSTRUCTIONS), finding)
-    if args and not skill_args:
+    if (args and not skill_args) or not IS_HARNESS:
         write_summary(results, measures, body_limit, encoding)
         return 1 if failed else 0
     for path in requested_files(ROOT, skill_args):

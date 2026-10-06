@@ -2,8 +2,8 @@
  * Publish changed skill pages with the Notion JavaScript SDK.
  * The project is HARNESS_ROOT, or the working directory when it is unset.
  * The mapping is .agents/mappings/skill-page.notion.json in the project, or --mapping.
- * The page icon name and color are in the project .agents/config.yml.
- * A key missing there falls back to the .agents/config.yml of this harness.
+ * The page icon name and color are in the parameter block of the project instructions file.
+ * A setting missing there falls back to the instructions file of this harness (ADR 0009).
  * With --include-core, the skills of this harness are published too, when the
  * project changes its mapping, a workflow, or its package files. Those are the
  * places where a project moves the version of this harness it uses.
@@ -11,7 +11,7 @@
 
 import { spawnSync } from "node:child_process"
 import { existsSync, readdirSync, readFileSync } from "node:fs"
-import { dirname, join } from "node:path"
+import { dirname, join, resolve } from "node:path"
 import { fileURLToPath, pathToFileURL } from "node:url"
 import { Client } from "@notionhq/client"
 
@@ -82,36 +82,46 @@ export type PageIcon = {
   icon: { name: string; color: IconColor }
 }
 
-function findSectionValue(text: string, section: string, key: string): string | null {
-  let inSection = false
-  const prefix = `${key}:`
-  for (const raw of text.split("\n")) {
-    const line = (raw.split("#", 1)[0] ?? "").replace(/\s+$/, "")
+export const PARAMETERS_HEADING = "## Parâmetros das habilidades"
+export const INSTRUCTIONS_FILE = "AGENTS.md"
+
+/** A setting from the Global entry, or the top level, of the instructions parameter block. */
+export function blockSetting(text: string, key: string): string | null {
+  const lines = text.split("\n")
+  const heading = lines.findIndex((line) => line.trim() === PARAMETERS_HEADING)
+  if (heading === -1) return null
+  const fence = lines.findIndex((line, index) => index > heading && /^```ya?ml\s*$/.test(line.trim()))
+  if (fence === -1) return null
+  const pattern = new RegExp(`^(\\s*)"?${key.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"?\\s*:\\s*(.*)$`)
+  let inGlobal = false
+  for (const raw of lines.slice(fence + 1)) {
+    if (raw.trim() === "```") break
+    const line = (raw.split(" #", 1)[0] ?? "").replace(/\s+$/, "")
     if (!line.trim()) continue
-    if (!line.startsWith(" ") && !line.startsWith("\t")) {
-      inSection = line === `${section}:`
-      continue
-    }
-    if (inSection && line.trim().startsWith(prefix)) return unquote(line.split(":").slice(1).join(":").trim())
+    if (!line.startsWith(" ")) inGlobal = /^"?Global"?\s*:\s*$/.test(line)
+    const match = pattern.exec(line)
+    if (!match) continue
+    const indent = (match[1] ?? "").length
+    if (indent === 0 || (inGlobal && indent > 0)) return unquote((match[2] ?? "").trim())
   }
   return null
 }
 
-function sectionValue(texts: string[], section: string, key: string): string {
+function settingValue(texts: string[], key: string): string {
   for (const text of texts) {
-    const value = findSectionValue(text, section, key)
+    const value = blockSetting(text, key)
     if (value !== null) return value
   }
-  throw new Error(`${section}.${key} is missing from .agents/config.yml`)
+  throw new Error(`"${key}" is missing from the parameter block of ${INSTRUCTIONS_FILE}`)
 }
 
 export function pageIcon(text: string, fallback = ""): PageIcon {
   const texts = [text, fallback]
-  const name = sectionValue(texts, "notion", "page_icon_name")
-  const color = sectionValue(texts, "notion", "page_icon_color")
-  if (!name) throw new Error("notion.page_icon_name is missing from .agents/config.yml")
+  const name = settingValue(texts, "Ícone das páginas no Notion")
+  const color = settingValue(texts, "Cor do ícone das páginas no Notion")
+  if (!name) throw new Error('"Ícone das páginas no Notion" is empty')
   if (!ICON_COLORS.includes(color as IconColor)) {
-    throw new Error("notion.page_icon_color is not a Notion icon color")
+    throw new Error('"Cor do ícone das páginas no Notion" is not a Notion icon color')
   }
   return { type: "icon", icon: { name, color: color as IconColor } }
 }
@@ -157,20 +167,25 @@ export type PageWriter = {
   updatePage: (pageId: string, page: SkillPage, mapping: SkillMapping) => Promise<{ id: string }>
 }
 
+/** The root of the git repository that contains start, or start itself. */
 export function repoRoot(start: string): string {
   let path = start
   for (;;) {
-    try {
-      readFileSync(join(path, ".agents", "config.yml"))
-      return path
-    } catch (error) {
-      const code = error instanceof Error && "code" in error ? error.code : undefined
-      if (code !== "ENOENT" && code !== "ENOTDIR") throw error
-    }
+    if (existsSync(join(path, ".git"))) return path
     const parent = dirname(path)
-    if (parent === path) throw new Error("repository root not found")
+    if (parent === path) return start
     path = parent
   }
+}
+
+/** The root of this harness, also when it is installed under node_modules. */
+export function coreRoot(): string {
+  return resolve(dirname(fileURLToPath(import.meta.url)), "..", "..", "..")
+}
+
+function instructionsText(root: string): string {
+  const path = join(root, INSTRUCTIONS_FILE)
+  return existsSync(path) ? readFileSync(path, "utf8") : ""
 }
 
 function unquote(value: string): string {
@@ -538,12 +553,12 @@ export async function main(argv: string[]): Promise<number> {
   const head = argValue(argv, "--head")
   if (base === undefined || head === undefined) throw new Error("--base and --head are required")
   const root = projectRoot(process.env, process.cwd())
-  const core = repoRoot(dirname(fileURLToPath(import.meta.url)))
+  const core = coreRoot()
   const mappingPath = argValue(argv, "--mapping") || DEFAULT_MAPPING_PATH
   const mapping = JSON.parse(readFileSync(join(root, mappingPath), "utf8")) as SkillMapping
   const icon = pageIcon(
-    readFileSync(join(root, ".agents", "config.yml"), "utf8"),
-    readFileSync(join(core, ".agents", "config.yml"), "utf8"),
+    instructionsText(root),
+    instructionsText(core),
   )
   const rulesChanged = publisherChanged(root, base, head, mappingPath)
   const names = namesToPublish(skillNamesFromPaths(gitChangedFiles(root, base, head)), rulesChanged, allSkillNames(root))

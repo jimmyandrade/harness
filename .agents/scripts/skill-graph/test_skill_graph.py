@@ -28,8 +28,9 @@ def write_skill(root: Path, name: str, related: list[str] | None = None, body: s
 
 def make_root(path: Path, organization: str) -> Path:
     (path / ".agents").mkdir(parents=True)
-    (path / ".agents" / "config.yml").write_text(
-        f"organization:\n  name: {organization}\nmermaid:\n  flowchart_direction: LR\n"
+    (path / graph.parameters.INSTRUCTIONS).write_text(
+        f'{graph.parameters.HEADING}\n\n```yaml\n"Global":\n  "Organização": "{organization}"\n  "Direção dos fluxogramas": "LR"\n```\n',
+        encoding="utf-8",
     )
     return path
 
@@ -115,6 +116,26 @@ class SkillGraphTest(unittest.TestCase):
         write_skill(self.project, "abrir-pedido", None, "```mermaid\nflowchart LR\n  A --> B[Siga fechar-pedido]\n```\n")
         write_skill(self.project, "fechar-pedido")
         self.assertIn("abrir_pedido -.-> fechar_pedido", graph.build(self.project, self.core))
+
+
+
+class CoreOnlyProjectTest(unittest.TestCase):
+    def test_should_skip_the_graph_in_a_project_that_links_its_skills_to_the_core(self) -> None:
+        import os
+        import subprocess
+
+        with tempfile.TemporaryDirectory() as tmp:
+            project = Path(tmp)
+            (project / ".git").mkdir()
+            (project / ".agents").mkdir()
+            (project / ".agents" / "skills").symlink_to(HERE.parents[1] / "skills")
+            result = subprocess.run(
+                [sys.executable, str(HERE / "skill-graph.py"), "--check"],
+                env={**os.environ, "HARNESS_ROOT": str(project)},
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(result.returncode, 0, result.stderr)
 
 
 if __name__ == "__main__":

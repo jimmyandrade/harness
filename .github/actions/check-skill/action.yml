@@ -1,5 +1,5 @@
 name: Check skills
-description: Check every changed SKILL.md of the calling repository against the harness rules and its .agents/config.yml.
+description: Check every changed SKILL.md of the calling repository against the harness rules and the settings in its main instructions file.
 inputs:
   base:
     description: Commit the change starts from. Empty checks every skill.

@@ -8,7 +8,6 @@ pre-commit:
       glob:
         - ".agents/skills/**/SKILL.md"
         - "AGENTS.md"
-        - ".agents/config.yml"
         - ".agents/scripts/**"
       run: .agents/scripts/check-skill/run-check.sh {staged_files}
     skill-folder-icon:

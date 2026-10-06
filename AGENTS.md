@@ -22,15 +22,15 @@ locale: en
 ## Git
 
 - Every change lands through a pull request. Do not push to `main`.
-- Write every commit subject in `locale.commit_subject` from `.agents/config.yml`.
+- Write every commit subject in the language of `Idioma da mensagem de commit`, a parameter of `criar-commit`, which defaults to English.
 - Use a Conventional Commits subject: `type: description`. When the change affects one skill, the subject is `type(skill-name): description`. The types are `feat`, `fix`, `perf`, `docs`, `refactor`, `test`, `chore`, and `ci`.
 - A change to CI or to an action uses `ci`, even when it adds behavior.
 
 ## Configuration
 
-- Defaults are in `.agents/config.yml`. Comments in that file explain each one. A business harness keeps only the keys that differ, and a missing key falls back to the value here.
+- Every setting lives in the parameter block of `AGENTS.md`, as ADR 0009 decides. The block at the end of this file holds the defaults. A business harness keeps only the values that differ, and a missing value falls back to the one here. The checker validates every block.
 - A script finds the project from `HARNESS_ROOT`, or from the working directory. It finds this repository from its own location. Do not make a script read a file of this repository when the project has one.
-- Each Markdown document states its `locale` in frontmatter, except: `CHANGELOG.md`, which Release Please writes and rewrites on every release; `LICENSE.md`, which keeps the license text unchanged; `CLAUDE.md`, which only imports `AGENTS.md`; and each `SKILL.md`, whose frontmatter follows the skill format and whose language is `locale.skill`.
+- Each Markdown document states its `locale` in frontmatter, except: `CHANGELOG.md`, which Release Please writes and rewrites on every release; `LICENSE.md`, which keeps the license text unchanged; `CLAUDE.md`, which only imports `AGENTS.md`; a project's `AGENTS.md` written from the instructions template, whose language is the `Idioma das instruções do projeto` parameter; and each `SKILL.md`, whose frontmatter follows the skill format and whose text is in Portuguese.
 
 ## Skills
 
@@ -60,3 +60,22 @@ locale: en
 - `INSTALL.md` is the index of the setup runbooks in `docs/runbooks/`, one per tool, each a list of steps with a command and a check. Business harnesses link to them and keep only business values in their own `INSTALL.md`. A runbook copies a configuration file from `examples/` instead of showing it inline; the pin in an example is `vX.Y.Z`, replaced by the runbook.
 - No Markdown document names a release, such as `v1.2.3`, except `CHANGELOG.md`. Name the file that pins it instead, such as `package.json`. A business harness follows the same rule in its own documents. Renovate moves the pins, not the text, so a version in the text goes stale on the next release. An example pin is `vX.Y.Z`.
 - Architecture decisions are in `docs/adr/`, in English.
+
+## Parâmetros das habilidades
+
+The defaults of every harness setting, read by the scripts when a project does not set them (ADR 0009).
+
+```yaml
+"Global":
+  "Organização": "jimmyandrade"
+  "Licença obrigatória": "não"
+  "Idioma do Gherkin": "pt"
+  "Palavras": 5000
+  "Linhas": 500
+  "Tokens do catálogo": 100
+  "Tokens do corpo": 5000
+  "Direção dos fluxogramas": "LR"
+  "Ícone das páginas no Notion": "magic-wand"
+  "Cor do ícone das páginas no Notion": "gray"
+  "Símbolo da pasta no macOS": "wand.and.sparkles"
+```

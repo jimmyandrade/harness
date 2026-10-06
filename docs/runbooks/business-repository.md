@@ -27,18 +27,21 @@ npm install --save-dev "github:jimmyandrade/harness#$TAG"
 
 Check: `test -d node_modules/harness && echo ok` prints `ok`.
 
-## 3. Copy the example files
+## 3. Copy the example files and the instructions template
 
-`examples/business-harness/` holds every file this runbook needs: `.agents/config.yml`, `.agents/mcp.json`, `lefthook.yml`, the `skills` workflow, the Claude Code plugin and marketplace, `.claude/settings.json`, and `renovate.json`. Copy them without overwriting a file that already exists, then pin them to the tag.
+`examples/business-harness/` holds the files this runbook needs: `.agents/mcp.json`, `lefthook.yml`, the `skills` workflow, the Claude Code plugin and marketplace, `.claude/settings.json`, and `renovate.json`. The project instructions start from the template the `definir-instrucoes-do-projeto` skill uses. Copy them without overwriting a file that already exists, then pin them to the tag.
 
 ```bash
 cp -Rn node_modules/harness/examples/business-harness/. .
+cp -n node_modules/harness/.agents/assets/templates/agents-md.md AGENTS.md
 grep -rl 'vX\.Y\.Z' .github .claude-plugin | while read -r file; do perl -pi -e "s/vX\.Y\.Z/$TAG/g" "$file"; done
 ```
 
-Replace `example` with the name of the business in `.agents/config.yml`, `.claude-plugin/`, and `.claude/settings.json`. A file that already existed was not copied; merge the example into it by hand.
+Replace `example` with the name of the business in `.claude-plugin/` and `.claude/settings.json`. A file that already existed was not copied; merge the example into it by hand.
 
-Check: `grep -rn 'vX\.Y\.Z\|example' .agents/config.yml .github .claude-plugin .claude` prints nothing.
+Fill `AGENTS.md` with the `definir-instrucoes-do-projeto` skill: replace each placeholder between `<` and `>`, keep the Notion section word for word, and replace the placeholder entries of the parameter block with `"Organização"` under `Global`, set to the name of the business.
+
+Check: `grep -rn 'vX\.Y\.Z\|example' .github .claude-plugin .claude` and `grep -n '<[^a/]' AGENTS.md` print nothing, and `grep -n '"Organização"' AGENTS.md` prints one line.
 
 ## 4. Write the skill graph and run the checker
 

@@ -11,6 +11,13 @@ import unittest
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
+_spec = importlib.util.spec_from_file_location(
+    "project_parameters", HERE.parent / "project-parameters" / "project-parameters.py"
+)
+project_parameters = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(project_parameters)
+INSTRUCTIONS = project_parameters.INSTRUCTIONS
+PARAMETERS = f'{project_parameters.HEADING}\n\n```yaml\n"Global":\n  "Organização": "example"\n```\n'
 
 
 def load_checker(project: Path):
@@ -38,7 +45,7 @@ class RelatedSkillsTest(unittest.TestCase):
         self.tmp = tempfile.TemporaryDirectory()
         self.project = Path(self.tmp.name)
         (self.project / ".agents").mkdir()
-        (self.project / ".agents" / "config.yml").write_text("organization:\n  name: example\n")
+        (self.project / INSTRUCTIONS).write_text(PARAMETERS, encoding="utf-8")
         write_skill(self.project, "abrir-pedido")
         write_skill(self.project, "fechar-pedido")
         self.checker = load_checker(self.project)
@@ -103,7 +110,7 @@ class GherkinTest(unittest.TestCase):
         self.tmp = tempfile.TemporaryDirectory()
         self.project = Path(self.tmp.name).resolve()
         (self.project / ".agents").mkdir()
-        (self.project / ".agents" / "config.yml").write_text("organization:\n  name: example\n")
+        (self.project / INSTRUCTIONS).write_text(PARAMETERS, encoding="utf-8")
         write_skill(self.project, "abrir-pedido")
         self.checker = load_checker(self.project)
         self.skill = self.project / ".agents" / "skills" / "abrir-pedido"
@@ -146,7 +153,7 @@ class VersionReferenceTest(unittest.TestCase):
         self.tmp = tempfile.TemporaryDirectory()
         self.project = Path(self.tmp.name).resolve()
         (self.project / ".agents").mkdir()
-        (self.project / ".agents" / "config.yml").write_text("organization:\n  name: example\n")
+        (self.project / INSTRUCTIONS).write_text(PARAMETERS, encoding="utf-8")
         self.git("init", "-q")
         write_skill(self.project, "abrir-pedido", body="Primeira versão.")
         self.base = self.commit("base")
@@ -186,7 +193,7 @@ class InstructionsTest(unittest.TestCase):
         self.tmp = tempfile.TemporaryDirectory()
         self.project = Path(self.tmp.name)
         (self.project / ".agents").mkdir()
-        (self.project / ".agents" / "config.yml").write_text("organization:\n  name: example\n")
+        (self.project / INSTRUCTIONS).write_text(PARAMETERS, encoding="utf-8")
         self.checker = load_checker(self.project)
         import tiktoken
 
@@ -219,7 +226,7 @@ class InstructionsTest(unittest.TestCase):
         self.assertGreater(tokens, 50)
 
     def test_should_point_the_instructions_at_the_repository_root(self) -> None:
-        self.assertEqual(self.checker.item_path("AGENTS.md"), "AGENTS.md")
+        self.assertEqual(self.checker.item_path(INSTRUCTIONS), INSTRUCTIONS)
         self.assertEqual(self.checker.item_path("criar-commit"), ".agents/skills/criar-commit/SKILL.md")
 
 

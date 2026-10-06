@@ -10,6 +10,10 @@ import {
   bindNotion,
   blankBase,
   createArgs,
+  blockSetting,
+  INSTRUCTIONS_FILE,
+  PARAMETERS_HEADING,
+  coreRoot,
   pageIcon,
   gate,
   gitChangedFiles,
@@ -25,7 +29,6 @@ import {
   DEFAULT_MAPPING_PATH,
   coreNamesToPublish,
   projectRoot,
-  repoRoot,
   statusOptions,
   skillNamesFromPaths,
   type NotionApi,
@@ -33,7 +36,15 @@ import {
   type SkillPage,
 } from "./sync-skill-pages.ts"
 
-const icon = pageIcon("notion:\n  page_icon_name: magic-wand\n  page_icon_color: gray\n")
+function block(yaml: string): string {
+  return `${PARAMETERS_HEADING}\n\n\`\`\`yaml\n${yaml}\`\`\`\n`
+}
+
+function parameters(lines: string): string {
+  return block(`"Global":\n${lines}`)
+}
+
+const icon = pageIcon(parameters('  "Ícone das páginas no Notion": "magic-wand"\n  "Cor do ícone das páginas no Notion": "gray"\n'))
 
 const mapping: SkillMapping = {
   data_source_id: "00000000-0000-4000-8000-000000000000",
@@ -326,7 +337,7 @@ test("update existing, create missing, and skip private through the SDK methods"
   } satisfies NotionApi, icon)
   const root = mkdtempSync(join(tmpdir(), "skill-pages-"))
   mkdirSync(join(root, ".agents"), { recursive: true })
-  writeFileSync(join(root, ".agents", "config.yml"), "locale: en\n")
+  mkdirSync(join(root, ".git"), { recursive: true })
   for (const [name, text] of [
     ["definir-tarefa", skill],
     ["criar-habilidade", privateSkill],
@@ -497,32 +508,36 @@ test("two pages with the same name stop", async () => {
   await assert.rejects(() => notion.findPage(mapping, "definir-tarefa"))
 })
 
-test("page icon name and color come from config", () => {
+test("page icon name and color come from the instructions parameter block", () => {
   assert.deepEqual(icon, { type: "icon", icon: { name: "magic-wand", color: "gray" } })
-  const root = repoRoot(dirname(fileURLToPath(import.meta.url)))
-  const stored = pageIcon(readFileSync(join(root, ".agents", "config.yml"), "utf8"))
+  const stored = pageIcon(readFileSync(join(coreRoot(), INSTRUCTIONS_FILE), "utf8"))
   assert.equal(stored.type, "icon")
   assert.equal(stored.icon.name.length > 0, true)
   assert.equal(stored.icon.color.length > 0, true)
-  assert.throws(() => pageIcon("notion:\n  page_icon_name: magic-wand\n"))
-  assert.deepEqual(pageIcon("notion:\n  page_icon_name: rocket\n", "notion:\n  page_icon_name: magic-wand\n  page_icon_color: blue\n"), {
-    type: "icon",
-    icon: { name: "rocket", color: "blue" },
-  })
-  assert.throws(() => pageIcon("notion:\n  page_icon_name: magic-wand\n  page_icon_color: silver\n"))
+  assert.throws(() => pageIcon(parameters('  "Ícone das páginas no Notion": "magic-wand"\n')))
+  assert.deepEqual(
+    pageIcon(
+      parameters('  "Ícone das páginas no Notion": "rocket"\n'),
+      parameters('  "Ícone das páginas no Notion": "magic-wand"\n  "Cor do ícone das páginas no Notion": "blue"\n'),
+    ),
+    { type: "icon", icon: { name: "rocket", color: "blue" } },
+  )
+  assert.throws(() => pageIcon(parameters('  "Ícone das páginas no Notion": "magic-wand"\n  "Cor do ícone das páginas no Notion": "silver"\n')))
+  assert.equal(blockSetting(block('"Cor do ícone das páginas no Notion": "red"\n'), "Cor do ícone das páginas no Notion"), "red")
+  assert.equal(blockSetting(block('"criar-commit":\n  "Organização": "x"\n'), "Organização"), null)
 })
 
 test("the project root is HARNESS_ROOT, or the working directory", () => {
   const project = mkdtempSync(join(tmpdir(), "harness-project-"))
   mkdirSync(join(project, ".agents", "skills", "uma"), { recursive: true })
-  writeFileSync(join(project, ".agents", "config.yml"), "locale: en\n")
-  const core = repoRoot(dirname(fileURLToPath(import.meta.url)))
+  mkdirSync(join(project, ".git"), { recursive: true })
+  const core = coreRoot()
   assert.equal(projectRoot({ HARNESS_ROOT: project }, core), project)
   assert.equal(projectRoot({}, join(project, ".agents", "skills", "uma")), project)
 })
 
 test("mapping file matches the schema fields", () => {
-  const root = repoRoot(dirname(fileURLToPath(import.meta.url)))
+  const root = coreRoot()
   const schema = JSON.parse(readFileSync(join(root, ".agents", "schemas", "skill-page.schema.json"), "utf8")) as {
     properties: Record<string, unknown>
   }
