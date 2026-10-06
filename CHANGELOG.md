@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.14.0](https://github.com/jimmyandrade/harness/compare/v0.13.1...v0.14.0) (2026-10-06)
+
+
+### Features
+
+* **definir-instrucoes-do-projeto:** write and review the project instructions ([#104](https://github.com/jimmyandrade/harness/issues/104)) ([49da52c](https://github.com/jimmyandrade/harness/commit/49da52c9d655457b8bb49db796f4a29f3e58266a))
+
 ## [0.13.1](https://github.com/jimmyandrade/harness/compare/v0.13.0...v0.13.1) (2026-10-06)
 
 
