@@ -43,6 +43,7 @@ flowchart LR
   descrever_habilidade_ou_schema --> evoluir_habilidade
   descrever_habilidade_ou_schema --> publicar_habilidade
   descrever_habilidade_ou_schema --> revisar_habilidade
+  evoluir_habilidade --> definir_instrucoes_do_projeto
   evoluir_habilidade --> descrever_habilidade_ou_schema
   evoluir_habilidade --> medir_habilidade
   evoluir_habilidade --> publicar_habilidade
