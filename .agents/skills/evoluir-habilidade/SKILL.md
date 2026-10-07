@@ -1,10 +1,11 @@
 ---
 name: evoluir-habilidade
-description: Use essa habilidade sempre que for testar uma skill, mesmo sem dizer evoluir, inclusive o Gherkin e a comparação com e sem skill, resultado inconsistente, falha de chamada ou correção da pessoa. O teste sempre edita a skill validada. NÃO use para criar a primeira versão, só ver se a descrição dispara, só revisar sem executar, nem gravar a página no Notion. Pedido vindo do Notion segue publicar-habilidade.
+description: Use essa habilidade sempre que for testar uma skill ou evoluir as instruções do projeto, mesmo sem dizer evoluir, inclusive o Gherkin e a comparação com e sem skill, resultado inconsistente, falha de chamada ou correção da pessoa. NÃO use para criar a primeira versão, só ver se a descrição dispara, só revisar sem executar, nem gravar a página no Notion. Pedido vindo do Notion segue publicar-habilidade.
 metadata:
   author: jimmyandrade
-  version: "0.16.0"
+  version: "0.17.0"
   related:
+    - definir-instrucoes-do-projeto
     - descrever-habilidade-ou-schema
     - medir-habilidade
     - publicar-habilidade
@@ -24,7 +25,7 @@ metadata:
 
 ### Passo 1
 
-Exija o nome ou o caminho da skill, a tarefa, os arquivos ou links de entrada e as saídas. Se faltar algum, peça antes de avaliar. Um pedido para testar uma skill entra aqui, mesmo sem dizer evoluir.
+Exija o nome ou o caminho da skill, a tarefa, os arquivos ou links de entrada e as saídas. Se faltar algum, peça antes de avaliar. Um pedido para testar uma skill entra aqui, mesmo sem dizer evoluir. Um feedback sobre o comportamento do agente também entra aqui: o alvo são as instruções do projeto, tratadas como uma skill. Edite seguindo o formato de `definir-instrucoes-do-projeto` e suba `metadata.version`. Elas não têm `evals/` nem `features/`.
 
 ### Passo 2
 
