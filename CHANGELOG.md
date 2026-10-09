@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.17.1](https://github.com/jimmyandrade/harness/compare/v0.17.0...v0.17.1) (2026-10-09)
+
+
+### Bug Fixes
+
+* write the Notion notice of the instructions template as a heading ([#116](https://github.com/jimmyandrade/harness/issues/116)) ([9c43111](https://github.com/jimmyandrade/harness/commit/9c43111dde0820467d45c7b59a45aa91b20ff4cd))
+
 ## [0.17.0](https://github.com/jimmyandrade/harness/compare/v0.16.0...v0.17.0) (2026-10-06)
 
 
