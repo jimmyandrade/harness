@@ -46,7 +46,7 @@ None. An agent calls the MCP tools, the CLI, or the local HTTP server.
 
 - Name: `vocabulary`
 - Description: Looks up a term, reports which tokens of a text exist, classifies a term or a text, and inserts or updates glossary rows.
-- Technologies: TypeScript on Node.js 24, Zod
+- Technologies: TypeScript on Node.js 24, Zod. The type check is TypeScript 7, as `docs/adr/0005-typecheck-with-typescript-7.md` decides.
 - Deployment: `node api/mcp/index.ts` from this repository, or `node node_modules/vocabulary/api/mcp/index.ts` from a project that installed it. The HTTP server listens on 127.0.0.1.
 
 #### 3.2.2. Voice skills
@@ -83,7 +83,7 @@ None. Crowdin and Transifex are an export, not this file format.
 
 - Setup: `README.md`, section "Work in this repository"
 - Testing frameworks: `node --test`, as the harness decided for its TypeScript
-- Code quality tools: `tsc --noEmit`
+- Code quality tools: `tsc --noEmit`, as `docs/adr/0005-typecheck-with-typescript-7.md` decides
 
 ## 9. Future Considerations / Roadmap
 
