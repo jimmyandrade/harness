@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "vocabulary": {
+      "command": "node",
+      "args": ["api/mcp/index.ts"]
+    }
+  }
+}

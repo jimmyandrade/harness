@@ -1,0 +1,93 @@
+---
+locale: en
+---
+
+# Architecture Overview
+
+This document is the map of this repository. The glossary of a project stays in that project. This repository is the engine that reads and writes it.
+
+## 1. Project Structure
+
+```text
+vocabulary/
+├── api/
+│   ├── cli.ts                 # Writes glossary terms from the command line
+│   ├── mcp/                   # MCP server and the launcher a host can call
+│   ├── routes/                # One HTTP endpoint per directory
+│   └── shared/                # Glossary access, Zod schemas, HTTP server
+├── docs/
+│   ├── adr/                   # Architecture decisions
+│   └── runbooks/              # Setup steps for MCP hosts
+├── examples/mcp.json          # Server list a project copies
+├── .mcp.json                  # Starts the server from this source tree
+└── package.json
+```
+
+## 2. High-Level System Diagram
+
+```mermaid
+flowchart LR
+  host["Agent host"] -- "MCP, CLI, or HTTP" --> api["Vocabulary API"]
+  api -- "reads and writes" --> glossary[".agents/glossary of the open project"]
+```
+
+## 3. Core Components
+
+### 3.1. Frontend
+
+None. An agent calls the MCP tools, the CLI, or the local HTTP server.
+
+### 3.2. Backend Services
+
+#### 3.2.1. Vocabulary API, CLI, and MCP
+
+- Name: `vocabulary`
+- Description: Looks up a term, reports which tokens of a text exist, classifies a term or a text, and inserts or updates glossary rows.
+- Technologies: TypeScript on Node.js 24, Zod
+- Deployment: `node api/mcp/index.ts` from this repository, or `node node_modules/vocabulary/api/mcp/index.ts` from a project that installed it. The HTTP server listens on 127.0.0.1.
+
+## 4. Data Stores
+
+### 4.1. Files in the open project
+
+- Name: Brand glossary
+- Type: One UTF-8 JSON file per language
+- Purpose: The project owns the terms. This repository ships no glossary.
+- Key Schemas/Collections: `.agents/glossary/<language>.json`, or the directory in `HARNESS_GLOSSARY_DIR`
+
+## 5. External Integrations / APIs
+
+None. Crowdin and Transifex are an export, not this file format.
+
+## 6. Deployment & Infrastructure
+
+- Cloud Provider: GitHub
+- CI/CD Pipeline: `.github/workflows/ci.yml` typechecks and runs `npm test`
+
+## 7. Security Considerations
+
+- Authentication: The server trusts the host that starts it. It does not take a token.
+- Data Encryption: The glossary is a file in the project.
+
+## 8. Development & Testing Environment
+
+- Setup: `README.md`, section "Work in this repository"
+- Testing frameworks: `node --test`, as the harness decided for its TypeScript
+- Code quality tools: `tsc --noEmit`
+
+## 9. Future Considerations / Roadmap
+
+- Publish a tagged release so a project can pin this package the way it pins the harness.
+
+## 10. Project Identification
+
+- Project Name: vocabulary
+- Repository URL: https://github.com/jimmyandrade/vocabulary
+- Primary Contact/Team: Jimmy Andrade
+- Date of Last Update: 2026-10-12
+
+## 11. Glossary / Acronyms
+
+- Glossary: the per-language list of allowed, forbidden, and situational terms of a project.
+- MCP: Model Context Protocol, how an agent calls `lookup_term`, `exists_in_text`, and `write_terms`.
+- ADR: Architecture Decision Record, in `docs/adr/`.
