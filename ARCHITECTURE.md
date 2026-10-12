@@ -4,7 +4,7 @@ locale: en
 
 # Architecture Overview
 
-This document is the map of this repository. The glossary of a project stays in that project. This repository is the engine that reads and writes it.
+This document is the map of this repository. The glossary of a project stays in that project. This repository is the engine that reads and writes it, and the skills that teach an agent to register terms and to write in that project's voice.
 
 ## 1. Project Structure
 
@@ -15,11 +15,13 @@ vocabulary/
 │   ├── mcp/                   # MCP server and the launcher a host can call
 │   ├── routes/                # One HTTP endpoint per directory
 │   └── shared/                # Glossary access, Zod schemas, HTTP server
+├── .agents/skills/            # definir-vocabulario and redigir-com-tom-de-voz
 ├── docs/
 │   ├── adr/                   # Architecture decisions
 │   └── runbooks/              # Setup steps for MCP hosts
 ├── examples/mcp.json          # Server list a project copies
 ├── .mcp.json                  # Starts the server from this source tree
+├── AGENTS.md                  # Instructions for work in this repository
 └── package.json
 ```
 
@@ -28,6 +30,7 @@ vocabulary/
 ```mermaid
 flowchart LR
   host["Agent host"] -- "MCP, CLI, or HTTP" --> api["Vocabulary API"]
+  skills["Voice skills"] -- "call" --> api
   api -- "reads and writes" --> glossary[".agents/glossary of the open project"]
 ```
 
@@ -46,6 +49,13 @@ None. An agent calls the MCP tools, the CLI, or the local HTTP server.
 - Technologies: TypeScript on Node.js 24, Zod
 - Deployment: `node api/mcp/index.ts` from this repository, or `node node_modules/vocabulary/api/mcp/index.ts` from a project that installed it. The HTTP server listens on 127.0.0.1.
 
+#### 3.2.2. Voice skills
+
+- Name: `definir-vocabulario` and `redigir-com-tom-de-voz`
+- Description: Register glossary terms, and write in the voice of the project that is open. The catalog is `.agents/skills/FEATURES.md`.
+- Technologies: Markdown skills, checked by the harness
+- Deployment: `npx skills add jimmyandrade/vocabulary` from the project that holds the glossary
+
 ## 4. Data Stores
 
 ### 4.1. Files in the open project
@@ -62,7 +72,7 @@ None. Crowdin and Transifex are an export, not this file format.
 ## 6. Deployment & Infrastructure
 
 - Cloud Provider: GitHub
-- CI/CD Pipeline: `.github/workflows/ci.yml` typechecks and runs `npm test`
+- CI/CD Pipeline: `.github/workflows/ci.yml` typechecks and runs `npm test`. `.github/workflows/skill-check.yml` checks the skills with the harness action.
 
 ## 7. Security Considerations
 

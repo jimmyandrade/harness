@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Vocabulary API, CLI, and MCP for a project's brand glossary.",
+  "description": "Vocabulary API, CLI, MCP, and voice skills for a project's brand glossary.",
   "engines": {
     "node": ">=24"
   },
