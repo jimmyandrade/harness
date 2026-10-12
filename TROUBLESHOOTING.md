@@ -27,10 +27,3 @@ The message is `"<key>" is missing from metadata.parameters of AGENTS.md`, or a 
 
 1. A missing setting is absent from the project and from the core. Update the harness dependency or the action tag, or add the key under `metadata.parameters.Global` in the frontmatter of the project `AGENTS.md`.
 2. An unknown key is usually misspelled. Copy the key from the skill's `Parâmetros de configuração` block, or from the core `AGENTS.md` for a script setting.
-
-## The vocabulary MCP rejects a language
-
-The message is `Unknown language.`
-
-1. The server reads `.agents/glossary/<language>.json` in the open project, or `HARNESS_GLOSSARY_DIR`.
-2. Add that file with `{}` as its content, or point `HARNESS_GLOSSARY_DIR` at the directory that has it.

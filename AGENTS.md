@@ -1,7 +1,7 @@
 ---
 locale: en
 metadata:
-  version: "0.1.0"
+  version: "1.0.0"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -22,7 +22,7 @@ metadata:
 ## Layers
 
 - This repository is the core harness. It is public. Never add a company name, a business rule, a workspace, a database, a page, a person, or a secret to it.
-- A business harness is its own repository. It keeps business skills, data source schemas and mappings, the glossary, and output styles. It uses this repository for the checker, the Notion sync, the vocabulary API and MCP, and shared skills.
+- A business harness is its own repository. It keeps business skills, data source schemas and mappings, the glossary, and output styles. It uses this repository for the checker, the Notion sync, and shared skills. The vocabulary API and MCP live in their own repository, jimmyandrade/vocabulary.
 - A skill moves from a business harness to this repository one at a time, after an audit. The audit removes every company name, business rule, and workspace or database name, and moves what still differs between businesses into project instructions. Keep the name, the version, and `metadata.aliases` when a skill moves, so the Notion page of each business keeps its history.
 - Do not move a skill here because two businesses have similar ones. Move it when one text works for both.
 
@@ -67,7 +67,7 @@ metadata:
 ## Data sources
 
 - Describe a data source with JSON Schema and a separate Notion mapping, as in `docs/adr/0001-describe-data-sources-with-json-schema.md`. Those files live in the business harness, not here.
-- The vocabulary API validates a request body and a glossary row with Zod, as in `docs/adr/0004-validate-the-api-with-zod.md`. The glossary is one JSON file per language in the project, as in `docs/adr/0003-store-the-brand-glossary-as-json.md`.
+- The glossary of a project stays in that project. The engine that reads and writes it is jimmyandrade/vocabulary, as ADR 0010 decides.
 
 ## Documents
 

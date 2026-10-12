@@ -5,8 +5,7 @@
     "node": ">=24"
   },
   "dependencies": {
-    "@notionhq/client": "5.26.0",
-    "zod": "4.6.5"
+    "@notionhq/client": "5.26.0"
   },
   "devDependencies": {
     "@types/node": "24.19.1",
@@ -15,7 +14,7 @@
   "name": "harness",
   "version": "0.17.0",
   "scripts": {
-    "test": "node --test \".agents/scripts/**/*.test.ts\" \"api/**/*.test.ts\""
+    "test": "node --test \".agents/scripts/**/*.test.ts\""
   },
   "license": "PolyForm-Noncommercial-1.0.0"
 }
