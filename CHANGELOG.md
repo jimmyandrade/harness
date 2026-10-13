@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.18.1](https://github.com/jimmyandrade/harness/compare/v0.18.0...v0.18.1) (2026-10-13)
+
+
+### Bug Fixes
+
+* **deps:** update dependency zod to v4.6.7 ([#120](https://github.com/jimmyandrade/harness/issues/120)) ([c2d88ca](https://github.com/jimmyandrade/harness/commit/c2d88ca22800147c131de2609566a5d269319d40))
+
 ## [0.18.0](https://github.com/jimmyandrade/harness/compare/v0.17.1...v0.18.0) (2026-10-13)
 
 
