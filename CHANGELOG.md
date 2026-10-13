@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.17.1](https://github.com/jimmyandrade/harness/compare/v0.17.0...v0.17.1) (2026-10-13)
+
+
+### Bug Fixes
+
+* run the folder icon hook in the harness virtual environment ([#124](https://github.com/jimmyandrade/harness/issues/124)) ([8c5fb5d](https://github.com/jimmyandrade/harness/commit/8c5fb5d5da344cb55610c5c65e50f0d89deae5a7))
+* write the Notion notice of the instructions template as a heading ([#116](https://github.com/jimmyandrade/harness/issues/116)) ([9c43111](https://github.com/jimmyandrade/harness/commit/9c43111dde0820467d45c7b59a45aa91b20ff4cd))
+
 ## [0.17.0](https://github.com/jimmyandrade/harness/compare/v0.16.0...v0.17.0) (2026-10-06)
 
 
