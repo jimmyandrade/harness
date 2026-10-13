@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.18.2](https://github.com/jimmyandrade/harness/compare/v0.18.1...v0.18.2) (2026-10-13)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @notionhq/client to v5.27.0 ([#122](https://github.com/jimmyandrade/harness/issues/122)) ([6f05001](https://github.com/jimmyandrade/harness/commit/6f05001bbb01412e1bcae791c3bb12377a07765a))
+
 ## [0.18.1](https://github.com/jimmyandrade/harness/compare/v0.18.0...v0.18.1) (2026-10-13)
 
 
