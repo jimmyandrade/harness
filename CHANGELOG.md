@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.18.0](https://github.com/jimmyandrade/harness/compare/v0.17.1...v0.18.0) (2026-10-13)
+
+
+### Features
+
+* evolve and describe the project instructions like a skill ([#117](https://github.com/jimmyandrade/harness/issues/117)) ([53341fb](https://github.com/jimmyandrade/harness/commit/53341fbc8088bb78b16c0aa50189e2a3a8c409cc))
+
 ## [0.17.1](https://github.com/jimmyandrade/harness/compare/v0.17.0...v0.17.1) (2026-10-13)
 
 
