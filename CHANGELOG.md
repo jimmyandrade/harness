@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.19.0](https://github.com/jimmyandrade/harness/compare/v0.18.2...v0.19.0) (2026-10-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* the vocabulary API, CLI, and MCP server are no longer part of this package or the core plugin. Install jimmyandrade/vocabulary and point the host at its server.
+
+### Features
+
+* move the vocabulary API to its own repository ([#123](https://github.com/jimmyandrade/harness/issues/123)) ([8ddd2eb](https://github.com/jimmyandrade/harness/commit/8ddd2eb457d171bcab8cfc60b864268b260387d3))
+
 ## [0.18.2](https://github.com/jimmyandrade/harness/compare/v0.18.1...v0.18.2) (2026-10-13)
 
 
