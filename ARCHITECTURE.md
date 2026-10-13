@@ -20,7 +20,7 @@ harness/
 │   │   ├── check-skill/            # Skill checker (Python), run by Lefthook and the check-skill action
 │   │   ├── project-parameters/     # Reads and validates the parameters in the AGENTS.md frontmatter, for every script
 │   │   ├── skill-graph/            # Writes .agents/skills/README.md, the Mermaid graph of skills
-│   │   ├── skill-folder-icon/      # macOS folder icon for each skill, run by Lefthook
+│   │   ├── skill-folder-icon/      # macOS folder icon for each skill, run by Lefthook in the checker's virtual environment
 │   │   └── sync-skill-pages/       # Notion sync (TypeScript), run by the sync-skill-pages action
 │   └── skills/                     # Shared skills, one <name>/SKILL.md each
 │       ├── FEATURES.md             # One entry per skill, written by hand
