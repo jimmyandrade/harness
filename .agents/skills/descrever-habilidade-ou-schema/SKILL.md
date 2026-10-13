@@ -1,9 +1,9 @@
 ---
 name: descrever-habilidade-ou-schema
-description: Use essa habilidade sempre que for redigir, corrigir ou testar se a descrição de uma skill ou schema dispara, mesmo sem dizer descrição, em subdisparo ou sobredisparo, em tarefa óbvia, em paráfrase e fora de tópico sem relação. NÃO use para escrever o corpo da skill, avaliar a qualidade da saída, descrever produto, nem gravar a página no Notion. Pedido vindo do Notion segue publicar-habilidade.
+description: Use essa habilidade sempre que for redigir, corrigir ou testar se a descrição de uma skill, das instruções do projeto ou de um schema dispara, mesmo sem dizer descrição, em subdisparo, sobredisparo, paráfrase ou tópico sem relação. NÃO use para escrever o corpo da skill, avaliar a qualidade da saída, descrever produto, nem gravar a página no Notion. Pedido vindo do Notion segue publicar-habilidade.
 metadata:
   author: jimmyandrade
-  version: "0.16.0"
+  version: "0.17.0"
   related:
     - evoluir-habilidade
     - publicar-habilidade
@@ -34,9 +34,10 @@ Exija a descrição atual, ou o aviso de que ainda não existe, e as consultas d
 flowchart LR
   A{O que descrever?} -->|habilidade| B[Descrição de catálogo]
   A -->|schema| C[Reescreve e mantém cada fato]
+  A -->|instruções do projeto| D[Descrição que dispara em toda tarefa]
 ```
 
-No schema, leia a descrição que já está. Reescreva juntando o fato novo. Cada fato que já estava permanece, na descrição do schema e na de cada propriedade. Não substitua por uma frase mais curta. O começo `Use essa habilidade sempre que` fica na habilidade. No schema, a descrição diz o que a fonte é. Sem descrição anterior, escreva a primeira com o fato que a pessoa passou. O nome do banco e o nome da propriedade, inclusive o antigo, não entram na descrição. O nome antigo fica no mapeamento.
+Nas instruções do projeto, a descrição fica no frontmatter e segue as regras de uma habilidade. Ela dispara em qualquer tarefa do espaço de trabalho, e o `NÃO use para` cobre a mudança das próprias instruções. No schema, leia a descrição que já está. Reescreva juntando o fato novo. Cada fato que já estava permanece, na descrição do schema e na de cada propriedade. Não substitua por uma frase mais curta. O começo `Use essa habilidade sempre que` fica na habilidade. No schema, a descrição diz o que a fonte é. Sem descrição anterior, escreva a primeira com o fato que a pessoa passou. O nome do banco e o nome da propriedade, inclusive o antigo, não entram na descrição. O nome antigo fica no mapeamento.
 
 ### Passo 2
 

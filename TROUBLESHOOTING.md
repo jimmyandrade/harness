@@ -14,6 +14,15 @@ The message names `.agents/scripts/check-skill/requirements.txt`.
 2. The script creates `.venv` inside this harness when it is missing and installs the dependency. `HARNESS_VENV` points it at another directory.
 3. Run it again. Exit code 0 closes the case.
 
+## The folder icon hook cannot import yaml
+
+The Lefthook `skill-folder-icon` command fails on checkout or commit with `ModuleNotFoundError: No module named 'yaml'`, raised from `project-parameters.py`.
+
+1. The hook ran `set-folder-icon.py` with the system `python3`, which has no PyYAML. In a business harness, `lefthook.yml` still calls `python3 node_modules/harness/.agents/scripts/skill-folder-icon/set-folder-icon.py`.
+2. Update the harness dependency, then replace that command, under `pre-commit` and `post-checkout`, with `node_modules/harness/.agents/scripts/skill-folder-icon/run-folder-icon.sh`, as in `examples/business-harness/lefthook.yml`. The script uses the virtual environment of the checker and installs PyYAML in it when it is missing. `HARNESS_VENV` points it at another directory.
+3. When the message is `skill folder symbol is missing` instead, `node_modules/harness` is older than the version `package.json` pins, and reads a configuration file that no longer exists. Run `npm ci`.
+4. Run `npx lefthook run post-checkout`. Exit code 0 closes the case.
+
 ## The checker or the sync reads the wrong project
 
 The message names a skill, a config key, or a mapping that belongs to another repository.

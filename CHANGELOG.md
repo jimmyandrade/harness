@@ -1,5 +1,34 @@
 # Changelog
 
+## [0.18.2](https://github.com/jimmyandrade/harness/compare/v0.18.1...v0.18.2) (2026-10-13)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @notionhq/client to v5.27.0 ([#122](https://github.com/jimmyandrade/harness/issues/122)) ([6f05001](https://github.com/jimmyandrade/harness/commit/6f05001bbb01412e1bcae791c3bb12377a07765a))
+
+## [0.18.1](https://github.com/jimmyandrade/harness/compare/v0.18.0...v0.18.1) (2026-10-13)
+
+
+### Bug Fixes
+
+* **deps:** update dependency zod to v4.6.7 ([#120](https://github.com/jimmyandrade/harness/issues/120)) ([c2d88ca](https://github.com/jimmyandrade/harness/commit/c2d88ca22800147c131de2609566a5d269319d40))
+
+## [0.18.0](https://github.com/jimmyandrade/harness/compare/v0.17.1...v0.18.0) (2026-10-13)
+
+
+### Features
+
+* evolve and describe the project instructions like a skill ([#117](https://github.com/jimmyandrade/harness/issues/117)) ([53341fb](https://github.com/jimmyandrade/harness/commit/53341fbc8088bb78b16c0aa50189e2a3a8c409cc))
+
+## [0.17.1](https://github.com/jimmyandrade/harness/compare/v0.17.0...v0.17.1) (2026-10-13)
+
+
+### Bug Fixes
+
+* run the folder icon hook in the harness virtual environment ([#124](https://github.com/jimmyandrade/harness/issues/124)) ([8c5fb5d](https://github.com/jimmyandrade/harness/commit/8c5fb5d5da344cb55610c5c65e50f0d89deae5a7))
+* write the Notion notice of the instructions template as a heading ([#116](https://github.com/jimmyandrade/harness/issues/116)) ([9c43111](https://github.com/jimmyandrade/harness/commit/9c43111dde0820467d45c7b59a45aa91b20ff4cd))
+
 ## [0.17.0](https://github.com/jimmyandrade/harness/compare/v0.16.0...v0.17.0) (2026-10-06)
 
 
