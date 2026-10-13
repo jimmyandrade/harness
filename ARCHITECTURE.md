@@ -31,11 +31,6 @@ harness/
 │   │   ├── check-skill/
 │   │   └── sync-skill-pages/
 │   └── workflows/                  # CI and Release Please for this repository
-├── api/                            # Vocabulary API, CLI, and MCP server (TypeScript)
-│   ├── cli.ts                      # Writes glossary terms from the command line
-│   ├── mcp/                        # MCP server and the launcher the plugin calls
-│   ├── routes/                     # One HTTP endpoint per directory
-│   └── shared/                     # Glossary access, Zod schemas, HTTP server
 ├── docs/
 │   ├── adr/                        # Architecture decisions
 │   └── runbooks/                   # Setup steps, one runbook per tool
@@ -51,7 +46,7 @@ harness/
 └── TROUBLESHOOTING.md              # Failure diagnosis
 ```
 
-A business harness has the same `.agents/` layout with its own skills, mappings, and glossary, and `node_modules/harness` holding a pinned release of this repository.
+A business harness has the same `.agents/` layout with its own skills, mappings, and glossary, and `node_modules/harness` holding a pinned release of this repository. The vocabulary engine is [jimmyandrade/vocabulary](https://github.com/jimmyandrade/vocabulary).
 
 ## 2. High-Level System Diagram
 
@@ -61,18 +56,15 @@ flowchart LR
     skills["Shared skills"]
     checker["check-skill"]
     sync["sync-skill-pages"]
-    vocab["Vocabulary API and MCP"]
   end
   subgraph business["Business harness"]
     bskills["Business skills"]
     mapping["Notion mapping"]
-    glossary["Glossary"]
   end
   business -- "npm dependency, actions, marketplace, pinned to a tag" --> core
   checker -- "checks" --> bskills
   sync -- "reads" --> mapping
   sync -- "writes pages" --> notion[("Notion skills database")]
-  vocab -- "reads" --> glossary
   skills -- "core plugin" --> claude["Claude Code"]
   bskills -- "links in .claude/skills, .cursor/skills" --> agents["Claude Code, Cursor"]
 ```
@@ -99,17 +91,10 @@ None. People reach the core through their agent (Claude Code, Cursor), GitHub, a
 - Technologies: TypeScript on Node.js 24, `@notionhq/client`
 - Deployment: Composite action on push to the default branch of a business harness
 
-#### 3.2.3. Vocabulary API and MCP
-
-- Name: `vocabulary`
-- Description: Reads and writes the glossary of the open project: look up a term, report which tokens of a text exist, insert and update terms.
-- Technologies: TypeScript on Node.js 24, Zod
-- Deployment: MCP server started by the `core` plugin; local HTTP server on 127.0.0.1; CLI
-
-#### 3.2.4. Claude Code plugin
+#### 3.2.3. Claude Code plugin
 
 - Name: `core`
-- Description: Ships the shared skills and starts the vocabulary MCP server.
+- Description: Ships the shared skills.
 - Technologies: Claude Code plugin manifest
 - Deployment: Marketplace `harness` in this repository, or a business marketplace that lists it pinned to a tag
 
@@ -117,10 +102,10 @@ None. People reach the core through their agent (Claude Code, Cursor), GitHub, a
 
 ### 4.1. Files in git
 
-- Name: Skills, configuration, mappings, glossary
+- Name: Skills, configuration, mappings
 - Type: Markdown, YAML, and JSON files
 - Purpose: Git is the write source of every skill and setting
-- Key Schemas/Collections: `.agents/skills/<name>/SKILL.md`, `AGENTS.md` and the parameters in its frontmatter, `.agents/mappings/skill-page.notion.json`, `.agents/glossary/<language>.json`
+- Key Schemas/Collections: `.agents/skills/<name>/SKILL.md`, `AGENTS.md` and the parameters in its frontmatter, `.agents/mappings/skill-page.notion.json`
 
 ### 4.2. Notion
 
@@ -164,7 +149,7 @@ None. People reach the core through their agent (Claude Code, Cursor), GitHub, a
 - Project Name: haRness (core)
 - Repository URL: https://github.com/jimmyandrade/harness
 - Primary Contact/Team: Jimmy Andrade
-- Date of Last Update: 2026-10-02
+- Date of Last Update: 2026-10-12
 
 ## 11. Glossary / Acronyms
 
@@ -172,7 +157,6 @@ None. People reach the core through their agent (Claude Code, Cursor), GitHub, a
 - Business harness: a private repository with the skills and data of one business.
 - Skill: a `SKILL.md` with instructions an agent loads for one kind of task.
 - Mapping: the JSON file that names the Notion data source, properties, and status options of one business.
-- Glossary: the per-language list of allowed, forbidden, and situational terms of a business.
+- Glossary: the per-language list of allowed, forbidden, and situational terms of a business. The engine that reads it is jimmyandrade/vocabulary.
 - Marketplace: the Claude Code catalog that lists plugins to install.
 - ADR: Architecture Decision Record, in `docs/adr/`.
-- MCP: Model Context Protocol, how agents call the vocabulary tools.

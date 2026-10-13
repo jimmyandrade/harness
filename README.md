@@ -4,9 +4,9 @@ locale: en
 
 # haRness
 
-Shared agent skills, skill checks, Notion skill sync, and the vocabulary API and MCP, for any project.
+Shared agent skills, skill checks, and Notion skill sync, for any project.
 
-This repository is the core layer. A business keeps its own harness repository with its own skills, schemas, mappings, glossary, and output styles, and uses this one for everything they share.
+This repository is the core layer. A business keeps its own harness repository with its own skills, schemas, mappings, glossary, and output styles, and uses this one for the skills and the checks they share. The vocabulary API and MCP are [jimmyandrade/vocabulary](https://github.com/jimmyandrade/vocabulary).
 
 A skill starts in a business harness. It moves here once it carries no company name, no business rule, and no workspace or database name.
 

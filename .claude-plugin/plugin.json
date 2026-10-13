@@ -1,6 +1,6 @@
 {
   "name": "core",
-  "description": "Skills, checks, and the vocabulary MCP shared by every project.",
+  "description": "Skills and checks shared by every project.",
   "version": "0.18.2",
   "author": {
     "name": "Jimmy Andrade",
@@ -8,13 +8,5 @@
   },
   "repository": "https://github.com/jimmyandrade/harness",
   "license": "PolyForm-Noncommercial-1.0.0",
-  "skills": "./.agents/skills/",
-  "mcpServers": {
-    "vocabulary": {
-      "command": "${CLAUDE_PLUGIN_ROOT}/api/mcp/launch.sh",
-      "env": {
-        "HARNESS_ROOT": "${CLAUDE_PROJECT_DIR}"
-      }
-    }
-  }
+  "skills": "./.agents/skills/"
 }
