@@ -120,6 +120,7 @@ How these skills relate is in `README.md`, in this folder.
   - Leaves the skill name and the prompt examples out of the description; the examples stay in the body
   - A request that comes from Notion follows publicar-habilidade
   - Rewrites a schema description and each property description that already has text, and keeps every fact already there
+  - Writes the description of the project instructions too, in their frontmatter: it fires on any task of the workspace, and `NÃO use para` covers changing the instructions themselves
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses writing the body, grading output, describing a product, and writing the skill page in Notion
@@ -141,6 +142,7 @@ How these skills relate is in `README.md`, in this folder.
   - A request that comes from Notion follows publicar-habilidade
   - Size and run profile follow medir-habilidade
   - Runs at the end of every core skill, following the `Modo de aprendizado` parameter (`sim`, `não`, `perguntar`, default `perguntar`): with yes, one commit per lesson on an English-named branch, pushed, with a draft pull request from the first commit, marked ready when the person ends the sequence
+  - Takes the project instructions as a target too: feedback on the agent's behavior edits them in the format of `definir-instrucoes-do-projeto` and raises `metadata.version`, without evals or features of their own
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description says the test edits the validated skill, and refuses creating the first version, only checking whether the description triggers, only reviewing without running, and writing the skill page in Notion
