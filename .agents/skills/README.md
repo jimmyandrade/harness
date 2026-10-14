@@ -20,6 +20,7 @@ flowchart LR
     criar_pull_request["criar-pull-request"]
     definir_agenda["definir-agenda"]
     definir_ativo_imobilizado["definir-ativo-imobilizado"]
+    definir_convidado["definir-convidado"]
     definir_data_significativa["definir-data-significativa"]
     definir_empresa["definir-empresa"]
     definir_grafia["definir-grafia"]
@@ -69,6 +70,7 @@ flowchart LR
   criar_pull_request --> criar_commit
   criar_pull_request --> evoluir_habilidade
   criar_pull_request --> resolver_comentarios_de_revisao
+  definir_agenda --> definir_convidado
   definir_agenda --> definir_data_significativa
   definir_agenda --> definir_grafia
   definir_agenda --> definir_reserva
@@ -81,6 +83,9 @@ flowchart LR
   definir_ativo_imobilizado --> mesclar_registro
   definir_ativo_imobilizado --> reconhecer_imagem
   definir_ativo_imobilizado --> registrar_ciclo_do_ativo
+  definir_convidado --> definir_agenda
+  definir_convidado --> definir_inscricao
+  definir_convidado --> procurar_agenda
   definir_data_significativa --> procurar_data_significativa
   definir_empresa --> definir_grafia
   definir_empresa --> definir_perfil_social

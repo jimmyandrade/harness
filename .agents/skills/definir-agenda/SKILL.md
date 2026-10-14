@@ -5,8 +5,9 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.41.3"
+  version: "0.41.4"
   related:
+    - definir-convidado
     - definir-data-significativa
     - definir-grafia
     - definir-reserva
