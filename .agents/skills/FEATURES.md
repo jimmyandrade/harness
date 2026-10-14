@@ -115,6 +115,26 @@ How these skills relate is in `README.md`, in this folder.
   - [ ] A merge request on a pull request with an unresolved thread runs resolver-comentarios-de-revisao first
   - [ ] A merge request with a failing check stops and names the check while `Exigir CI verde` is on
 
+### definir-data-significativa
+- **Stability**: experimental
+- **Description**: Register, review, or alter a record in the list of significant dates
+- **Properties**:
+  - Lives at `.agents/skills/definir-data-significativa/SKILL.md`
+  - Reads the list of significant dates and its property names from the data mapping of the project
+  - Registers, reviews, and alters a commemorative date, holiday, milestone, season, or window in that list
+  - Before creating a record, searches the main term and useful variations in the event title, filters by the same month or year when that window separates records, and compares the date, the category, and the source on each possible match
+  - When an equivalent record is confirmed as the same event and date, points to it as canonical and fills the source or the notes when the material already has them
+  - When similar names are confirmed as different editions, years, cities, or contexts, creates the record with a name that includes the year, edition, city, or country that separates them
+  - Puts the year at the end of an annual event title, renames a record that lacks the year, and keeps different years as different records
+  - Reads the date-with-weekday format, the annual-title pattern, the calendar URL, and the calendar country from the project instructions, and asks the country when `País do calendário` is empty, its default
+  - When a holiday or commemorative date has no source in the material, follows the calendar URL Notion usually uses for that year and country, without restricting the source to that URL, and reads a missing date from the page consulted
+  - Writes the weekday beside each date in replies, summaries, tables, and descriptions, after checking it against the event date, time, and time zone, and keeps the structured field valid
+  - Leaves a question about when the date falls, or whether it is already listed, to procurar-data-significativa
+  - Leaves the day or week lookup and the calendar event to other skills
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses looking up when the date falls, the day or week lookup, creating or changing the calendar event, reverse planning, managing travel, registering the opportunity, organizing the contact point, and creating the task
+
 ### definir-instrucoes-do-projeto
 - **Stability**: experimental
 - **Description**: Write and review a project's instructions file so that it holds only what every session needs, as ADR 0008 decides
