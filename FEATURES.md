@@ -24,12 +24,14 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
 - **Properties**:
   - Preset at `default.json`, extended as `github>jimmyandrade/harness`
   - Groups every pin of the core harness, in workflows, `package.json`, `.claude-plugin/marketplace.json`, and `.claude/settings.json`, into one `harness core` pull request
+  - Moves a release-tag pin of jimmyandrade/vocabulary in `package.json` in one `vocabulary` pull request, as soon as a release exists
   - A major update waits for approval on the Dependency Dashboard
   - Names the Dependency Dashboard issue `chore(deps): dependency dashboard`, a Conventional Commits title matching the `chore(deps)` and `fix(deps)` pull requests it lists
 - **Test Criteria**:
   - [x] The marketplace regex reads the repository and the tag of a `github` plugin source
   - [x] The same regex reads the pin in `.claude/settings.json`, and `.claude/settings.local.json` is not matched
   - [ ] A release of the core opens one `harness core` pull request in a business harness
+  - [ ] A release of jimmyandrade/vocabulary opens one `vocabulary` pull request in a business harness that pins a tag
 
 ### skill-graph
 - **Stability**: experimental

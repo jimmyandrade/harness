@@ -4,7 +4,7 @@ locale: en
 
 # Keep the core current with Renovate
 
-Renovate is optional. With it, each release of this repository opens one pull request in the business repository that moves every pin of the core at once: the workflows, `package.json`, `.claude-plugin/marketplace.json`, and `.claude/settings.json`. Without it, someone moves those pins by hand. Run this runbook once per repository, after `business-repository.md`.
+Renovate is optional. With it, each release of this repository opens one pull request in the business repository that moves every pin of the core at once: the workflows, `package.json`, `.claude-plugin/marketplace.json`, and `.claude/settings.json`. A release of jimmyandrade/vocabulary opens its own `vocabulary` pull request when `package.json` pins it to a tag. Without it, someone moves those pins by hand. Run this runbook once per repository, after `business-repository.md`.
 
 Each step ends with a check.
 
