@@ -36,3 +36,11 @@ The message is `"<key>" is missing from metadata.parameters of AGENTS.md`, or a 
 
 1. A missing setting is absent from the project and from the core. Update the harness dependency or the action tag, or add the key under `metadata.parameters.Global` in the frontmatter of the project `AGENTS.md`.
 2. An unknown key is usually misspelled. Copy the key from the skill's `Parâmetros de configuração` block, or from the core `AGENTS.md` for a script setting.
+
+## The plugin manifests disagree
+
+The checker prints a line that starts with `.cursor-plugin/plugin.json` or `.claude-plugin/marketplace.json`.
+
+1. `.claude-plugin/` is the source of truth. A line on `.cursor-plugin/plugin.json` names the field and both values. Copy the value from `.claude-plugin/plugin.json`.
+2. A line that names a plugin `source` Codex skips is usually the `core` entry of a marketplace copied before Codex support. Replace it with the `core` entry of `examples/business-harness/.claude-plugin/marketplace.json`, with `vX.Y.Z` replaced by the tag the other pins use.
+3. Run `run-check.sh` again. Exit code 0 closes the case.

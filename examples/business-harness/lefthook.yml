@@ -4,6 +4,8 @@ pre-commit:
       glob:
         - ".agents/skills/**/SKILL.md"
         - "AGENTS.md"
+        - ".claude-plugin/*.json"
+        - ".cursor-plugin/*.json"
       run: node_modules/harness/.agents/scripts/check-skill/run-check.sh {staged_files}
     skill-folder-icon:
       run: node_modules/harness/.agents/scripts/skill-folder-icon/run-folder-icon.sh

@@ -10,6 +10,8 @@ pre-commit:
         - ".agents/skills/**/SKILL.md"
         - "AGENTS.md"
         - ".agents/scripts/**"
+        - ".claude-plugin/*.json"
+        - ".cursor-plugin/*.json"
       run: .agents/scripts/check-skill/run-check.sh {staged_files}
     skill-folder-icon:
       run: .agents/scripts/skill-folder-icon/run-folder-icon.sh

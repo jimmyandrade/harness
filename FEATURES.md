@@ -10,13 +10,27 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
 
 ### core
 - **Stability**: experimental
-- **Description**: Claude Code plugin with the shared skills
+- **Description**: Plugin with the shared skills, for Claude Code, Codex, and Cursor
 - **Properties**:
-  - Manifest at `.claude-plugin/plugin.json`, listed in `.claude-plugin/marketplace.json` with source `.`
+  - Manifest at `.claude-plugin/plugin.json`, listed in `.claude-plugin/marketplace.json` with source `.`. Claude Code and Codex read both files
+  - Cursor reads `.cursor-plugin/plugin.json`, which repeats the shared fields of `.claude-plugin/plugin.json`. Release Please bumps `version` in both
   - Skills come from `.agents/skills/`. Each one arrives after its audit
-  - A business marketplace lists it with a `github` source pinned to a tag
+  - A business marketplace lists it with a `url` source, `https://github.com/jimmyandrade/harness.git` pinned to a tag, because Codex skips a `github` source. Cursor cannot list it from another repository, so a team imports this repository as its own Cursor marketplace, which follows the default branch
 - **Test Criteria**:
-  - [ ] Adding a business marketplace installs that plugin and `core`
+  - [ ] Adding a business marketplace installs that plugin and `core`, in Claude Code and in Codex
+  - [ ] Importing a business repository and this repository as Cursor team marketplaces installs both plugins
+
+### plugin-manifests
+- **Stability**: experimental
+- **Description**: Keep the plugin manifests of a repository in agreement, so Claude Code, Codex, and Cursor install the same plugin
+- **Properties**:
+  - Script `.agents/scripts/plugin-manifests/plugin-manifests.py`, run by `run-check.sh` on commit and in the `check-skill` action
+  - `.claude-plugin/` is the source of truth. The check fails when `.cursor-plugin/plugin.json` differs from `.claude-plugin/plugin.json` in `name`, `version`, `description`, `author`, `homepage`, `repository`, `license`, `keywords`, or `skills`, or exists without it
+  - It fails when a plugin source in `.claude-plugin/marketplace.json` is one that Codex skips, such as `github`
+- **Test Criteria**:
+  - [x] Matching manifests pass, and a different or missing shared field fails
+  - [x] A `github` plugin source fails, and a `./` path or a `url` source passes
+  - [x] This repository and `examples/business-harness/` pass
 
 ### renovate-preset
 - **Stability**: experimental
@@ -29,6 +43,7 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
   - Names the Dependency Dashboard issue `chore(deps): dependency dashboard`, a Conventional Commits title matching the `chore(deps)` and `fix(deps)` pull requests it lists
 - **Test Criteria**:
   - [x] The marketplace regex reads the repository and the tag of a `github` plugin source
+  - [x] A second regex reads the repository and the tag of a `url` plugin source on github.com, as in the business marketplace
   - [x] The same regex reads the pin in `.claude/settings.json`, and `.claude/settings.local.json` is not matched
   - [ ] A release of the core opens one `harness core` pull request in a business harness
   - [ ] A release of jimmyandrade/vocabulary opens one `vocabulary` pull request in a business harness that pins a tag
