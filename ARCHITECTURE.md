@@ -11,7 +11,7 @@ This document is the map of this repository. The glossary of a project stays in 
 ```text
 vocabulary/
 ├── api/
-│   ├── cli.ts                 # Writes glossary terms from the command line
+│   ├── cli.ts                 # Reads and writes glossary terms from the command line
 │   ├── mcp/                   # MCP server and the launcher a host can call
 │   ├── routes/                # One HTTP endpoint per directory
 │   └── shared/                # Glossary access, Zod schemas, HTTP server

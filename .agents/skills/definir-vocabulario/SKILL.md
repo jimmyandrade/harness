@@ -3,7 +3,7 @@ name: definir-vocabulario
 description: Use essa habilidade sempre que for cadastrar ou atualizar um ou mais termos do vocabulário do tom de voz, ou perguntar quais variações de gênero, número ou grafia foram cadastradas, mesmo sem dizer glossário, lote ou estado. NÃO use para escrever, revisar ou aprovar o texto da marca, classificar uma frase, nem inventar um termo que a pessoa não enviou.
 metadata:
   author: jimmyandrade
-  version: "0.19.1"
+  version: "0.20.0"
   related:
     - evoluir-habilidade
     - redigir-com-tom-de-voz
@@ -61,7 +61,7 @@ Valide o plano antes de gravar.
 
 ### Passo 5
 
-Pesquise a grafia no vocabulário antes de gravar. No chat, use a consulta de Scripts disponíveis. Outra caixa e acento que não muda a letra são o mesmo termo: a linha que já está recebe a orientação. Não cadastre uma segunda linha dessa grafia. Uma forma igual, com os mesmos campos, volta sem alteração.
+Pesquise a grafia no vocabulário antes de gravar, com a consulta de Scripts disponíveis. Com terminal, rode o comando. Sem terminal, chame a ferramenta do servidor `vocabulary`. Sem os dois, como num agente do Notion, pare antes de pesquisar. Diga que o cadastro roda numa ferramenta de código com o projeto aberto. Não leia o vocabulário de memória. Outra caixa e acento que não muda a letra são o mesmo termo: a linha que já está recebe a orientação. Não cadastre uma segunda linha dessa grafia. Uma forma igual, com os mesmos campos, volta sem alteração.
 
 Plural, singular, feminino, masculino e outra palavra do mesmo assunto são linhas próprias. Cada uma tem o próprio estado. Casas e moradias convivem. Casa e casas convivem. Gato e gata convivem. Não junte essas linhas.
 
@@ -75,7 +75,7 @@ Se a pessoa perguntar as variações de gênero, número ou grafia de um termo q
 
 ### Passo 6
 
-Grave o plano inteiro numa escrita só. No chat, use a ferramenta de Scripts disponíveis. No terminal, use o comando dessa seção. Termo que não existia fica em minúsculas. A linha que já existia conserva a grafia guardada. Se nenhum termo do plano existia, a resposta começa com a quantidade e segue com a lista do que entrou. Depois sugira plural, singular, feminino, masculino e outra grafia quando a palavra tiver. Não grave a sugestão. Pergunte o estado de cada forma. Pontuação e emoji não ganham essa sugestão. Diga também o que foi atualizado e o que já existia sem alteração. Um exemplo que também vem completo no lote permanece com essa linha. Um exemplo citado e ausente do lote nasce no estado desse vínculo. Uma falha deixa o vocabulário como estava. Não confirme o cadastro sem essa resposta.
+Grave o plano inteiro numa escrita só, com a escrita de Scripts disponíveis. Com terminal, rode o comando. Sem terminal, chame a ferramenta do servidor `vocabulary`. Termo que não existia fica em minúsculas. A linha que já existia conserva a grafia guardada. Se nenhum termo do plano existia, a resposta começa com a quantidade e segue com a lista do que entrou. Depois sugira plural, singular, feminino, masculino e outra grafia quando a palavra tiver. Não grave a sugestão. Pergunte o estado de cada forma. Pontuação e emoji não ganham essa sugestão. Diga também o que foi atualizado e o que já existia sem alteração. Um exemplo que também vem completo no lote permanece com essa linha. Um exemplo citado e ausente do lote nasce no estado desse vínculo. Uma falha deixa o vocabulário como estava. Não confirme o cadastro sem essa resposta.
 
 ### Passo 7
 
@@ -282,6 +282,7 @@ Casa ficou permitida. Casas ganhou a própria linha, proibida. Moradias ganhou a
 - O termo já existe e a pessoa manda descrição, exemplos, estado, termos relacionados ou outra orientação: isso entra na linha dessa grafia.
 - A busca acha duas grafias da mesma palavra, por caixa ou acento: pare, nomeie, sugira a que permanece e espere. Não apague e não junte.
 - Falta uma fonte da marca que as instruções do projeto nomeiam: pare e peça. Não invente.
+- Sem terminal e sem o servidor `vocabulary`, como num agente do Notion: pare. O cadastro roda numa ferramenta de código com o projeto aberto. Não confirme nada.
 - O termo só cabe num contexto: `situationally_allowed` com `when`. Não use `allowed` nem `forbidden`.
 - O termo é emoji, combinação ou uso simbólico: grave estado, descrição e exemplo. A combinação junta é um termo. Não é decoração.
 - Evitar, proibido, ruim, desalinhado ou restrito: o estado é `forbidden` e o exemplo ruim fica em `rejected`.
@@ -312,11 +313,13 @@ Casa ficou permitida. Casas ganhou a própria linha, proibida. Moradias ganhou a
 
 ## Scripts disponíveis
 
-- `node node_modules/vocabulary/dist/cli.js terms` grava o lote. `--language` e `--mode` valem para o lote. Cada `--term` abre um termo, com `--state`, `--category`, `--description`, `--reason`, `--when` e `--substitution`. `--examples`, `--rejected`, `--alternatives` e `--related` repetem, um valor por vez. `--glossary` aponta outro vocabulário.
-- `lookup_term`, no servidor `vocabulary`, lê um termo e devolve se ele existe e a linha guardada.
-- `exists_in_text`, no servidor `vocabulary`, recebe um trecho e devolve só o registro de cada token para se ele existe.
-- `write_terms`, no servidor `vocabulary`, grava o mesmo plano no chat.
+- `node node_modules/vocabulary/dist/cli.js lookup --language <idioma> --term <termo>` lê um termo e devolve se ele existe e a linha guardada.
+- `node node_modules/vocabulary/dist/cli.js exists --language <idioma> --text <trecho>` devolve só o registro de cada token do trecho para se ele existe.
+- `node node_modules/vocabulary/dist/cli.js terms` grava o lote. `--language` e `--mode` valem para o lote. Cada `--term` abre um termo, com `--state`, `--category`, `--description`, `--reason`, `--when` e `--substitution`. `--examples`, `--rejected`, `--alternatives` e `--related` repetem, um valor por vez.
+- `--glossary`, antes do comando, aponta outro vocabulário.
+- `lookup_term`, `exists_in_text` e `write_terms`, no servidor `vocabulary`, fazem a mesma consulta e a mesma escrita quando não há terminal.
 
-1. No terminal, rode `node node_modules/vocabulary/dist/cli.js terms` com `--language`, `--mode` e um `--term` para cada termo.
-2. No chat, chame `lookup_term` para um termo e `exists_in_text` para um trecho.
-3. No chat, chame `write_terms` com idioma, modo e termos.
+1. Com terminal, rode `lookup` para um termo e `exists` para um trecho.
+2. Com terminal, rode `terms` com `--language`, `--mode` e um `--term` para cada termo.
+3. Sem terminal, chame `lookup_term`, `exists_in_text` e `write_terms` com os mesmos campos.
+4. Sem terminal e sem o servidor `vocabulary`, pare.

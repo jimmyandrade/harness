@@ -3,7 +3,7 @@ name: redigir-com-tom-de-voz
 description: Use essa habilidade sempre que for criar, adaptar, lapidar ou validar texto da marca no tom de voz, mesmo sem dizer copy, como slogan, legenda, e-mail, WhatsApp, campanha, CTA, microcopy ou título de evento externo. NÃO use para responder quem conversa com a IA, descrever uma skill, titular tarefa ou oportunidade, cravar a grafia, alterar formato de conteúdo, nem assumir cliente, peça, oportunidade ou histórico.
 metadata:
   author: jimmyandrade
-  version: "0.10.0"
+  version: "0.11.0"
   aliases:
     - escreva-usando-o-tom-de-voz
   related:
@@ -36,6 +36,8 @@ flowchart LR
 ### Passo 2
 
 Antes de escrever ou aprovar, o texto tem contexto, canal, público, as fontes da marca que as instruções do projeto nomeiam, o vocabulário e a intenção criativa. Falta algum: pare e peça. Não aprove. Não invente persona, posicionamento, vocabulário nem termo proibido. A pessoa informa a fonte. Se ela não estiver no workspace conectado, pare.
+
+Consulte o vocabulário com Scripts disponíveis. Com terminal, rode o comando. Sem terminal, chame a ferramenta do servidor `vocabulary`. Sem os dois, como num agente do Notion, o vocabulário vem de uma fonte do workspace conectado que as instruções do projeto nomeiam. Sem essa fonte, pare e diga que a consulta roda numa ferramenta de código com o projeto aberto. Não leia o vocabulário de memória.
 
 Intenção clara, recorte específico e conexão humana. O que a pessoa precisa entender para agir. Como o texto se conecta com ela. Se faz ela sentir algo. Não fale para todo mundo. Não escreva fórmula genérica, ritmo previsível nem chamada vazia.
 
@@ -179,6 +181,7 @@ O título ficou específico, com o nome canônico que a fonte já tinha. Não vi
 
 - Falta contexto, canal, público, fonte da marca, vocabulário ou intenção criativa: pare e peça. Não aprove.
 - A fonte da persona, do posicionamento, do vocabulário ou do termo proibido não está no workspace conectado: pare. Não invente.
+- Sem terminal e sem o servidor `vocabulary`, como num agente do Notion, e sem fonte do vocabulário no workspace: pare. Não aprove.
 - A copy depende de cliente, peça, oportunidade ou histórico comercial: consulte a fonte que a pessoa indicou. Não assuma.
 - O pedido altera um formato de conteúdo: pare. A copy não muda esse formato.
 - O pedido é gravar o evento, e não o título: pare. Esta habilidade não grava o evento.
@@ -207,6 +210,10 @@ O título ficou específico, com o nome canônico que a fonte já tinha. Não vi
 
 ## Scripts disponíveis
 
-- Nenhum.
+- `node node_modules/vocabulary/dist/cli.js lookup --language <idioma> --term <termo>` lê um termo e devolve se ele existe e a linha guardada.
+- `node node_modules/vocabulary/dist/cli.js exists --language <idioma> --text <trecho>` devolve só o registro de cada token do trecho para se ele existe.
+- `lookup_term` e `exists_in_text`, no servidor `vocabulary`, fazem a mesma consulta quando não há terminal.
 
-1. Não há script para executar.
+1. Com terminal, rode `exists` com o texto e `lookup` para cada termo que precisar da linha inteira.
+2. Sem terminal, chame `exists_in_text` e `lookup_term` com os mesmos campos.
+3. Sem terminal e sem o servidor `vocabulary`, use a fonte do vocabulário que as instruções do projeto nomeiam. Sem ela, pare.

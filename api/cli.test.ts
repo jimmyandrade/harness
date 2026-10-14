@@ -242,3 +242,33 @@ test("terms keeps a plural on its own row", () => {
   assert.equal(entries.find((entry) => entry.term === "casa")?.description, "lugar")
   assert.equal(entries.find((entry) => entry.term === "casas")?.description, "moradias")
 })
+
+test("lookup and exists read the glossary with flags", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  writeFileSync(join(root, "pt-BR.json"), `${JSON.stringify({ casa: { state: "allowed" } }, null, 2)}\n`)
+  const lines: string[] = []
+  const errors: string[] = []
+  const write = console.log
+  const warn = console.error
+  console.log = (line: string) => lines.push(line)
+  console.error = (line: string) => errors.push(line)
+  try {
+    assert.equal(run(["--glossary", root, "lookup", "--language", "pt-BR", "--term", "Casa"]), 0)
+    assert.deepEqual(JSON.parse(lines.at(-1) ?? "{}"), {
+      language: "pt-BR",
+      submitted: "Casa",
+      exists: true,
+      term: "casa",
+      state: "allowed",
+    })
+    assert.equal(run(["--glossary", root, "exists", "--language=pt-BR", "--text", "Casa nova"]), 0)
+    assert.deepEqual(JSON.parse(lines.at(-1) ?? "{}"), { Casa: true, nova: false })
+    assert.equal(run(["--glossary", root, "lookup", "--language", "pt-BR"]), 2)
+    assert.equal(errors.at(-1), "Provide the term.")
+    assert.equal(run(["--glossary", root, "exists", "--language", "pt-BR", "--term", "casa"]), 2)
+    assert.equal(errors.at(-1), 'Unknown argument "--term".')
+  } finally {
+    console.log = write
+    console.error = warn
+  }
+})
