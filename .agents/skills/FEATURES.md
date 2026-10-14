@@ -168,6 +168,21 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The description refuses Notion, opening the repository from Notion, testing whether the skill met the case, evolving the skill, and writing the eval
   - [x] A limit missing from the project comes from the harness that ships the skill, and a limit in the project wins
 
+### procurar-oportunidade
+- **Stability**: experimental
+- **Description**: Check whether an opportunity already exists before another skill creates it
+- **Properties**:
+  - Lives at `.agents/skills/procurar-oportunidade/SKILL.md`
+  - Reads the opportunity list and its property names from the data mapping of the project
+  - Searches a fragment of the edition name in the title and in the name variations, with a direct query and a semantic search
+  - Treats the same name on another date as another edition
+  - When one edition matches, shows the title, the date, and the link, and a confirmed order continues to the skill the project instructions name, in that same reply
+  - When several might match, lists them and does not pick
+  - When none match, says it does not exist, links the list, repeats the name, the date with the weekday, and the place, and does not create it
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses creating the opportunity, organizing the participation, creating a task, and reading an image
+
 ### publicar-habilidade
 - **Stability**: experimental
 - **Description**: Publish a skill change from Notion through GitHub, and follow the project's commit flow from Cursor, Claude, or the repository
