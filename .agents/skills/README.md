@@ -23,6 +23,7 @@ flowchart LR
     definir_inscricao["definir-inscricao"]
     definir_instrucoes_do_projeto["definir-instrucoes-do-projeto"]
     definir_perfil_social["definir-perfil-social"]
+    definir_pessoa["definir-pessoa"]
     definir_tarefa["definir-tarefa"]
     descrever_habilidade_ou_schema["descrever-habilidade-ou-schema"]
     evoluir_habilidade["evoluir-habilidade"]
@@ -64,8 +65,12 @@ flowchart LR
   definir_inscricao --> procurar_oportunidade
   definir_instrucoes_do_projeto --> criar_habilidade
   definir_instrucoes_do_projeto --> evoluir_habilidade
+  definir_perfil_social --> definir_pessoa
   definir_perfil_social --> identificar_duplicata
   definir_perfil_social --> mesclar_registro
+  definir_pessoa --> definir_empresa
+  definir_pessoa --> definir_perfil_social
+  definir_pessoa --> identificar_duplicata
   definir_tarefa --> procurar_tarefa
   descrever_habilidade_ou_schema --> evoluir_habilidade
   descrever_habilidade_ou_schema --> publicar_habilidade

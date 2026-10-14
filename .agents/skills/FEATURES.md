@@ -222,6 +222,22 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses an existence-only check, merging a record from another list, locking a person's or company's spelling, and deleting without an order
 
+### definir-pessoa
+- **Stability**: experimental
+- **Description**: Register or update a person
+- **Properties**:
+  - Lives at `.agents/skills/definir-pessoa/SKILL.md`
+  - Reads the list of people and its property names from the data mapping of the project
+  - Creates a missing person in the list of people when a spelling screenshot shows that person
+  - Writes the full name as the person's name and keeps the handle out of that name
+  - Relates the social profile after the profile exists, and leaves the profile to definir-perfil-social
+  - Uses an existing person instead of creating another, and lists several matches without creating
+  - Does not invent email, phone, pronouns, audience, or a company
+  - Does not only check existence, lock the spelling of someone already listed, register the profile, register the company, or delete without an order
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses an existence-only check, locking the spelling of someone already listed, registering the profile, registering the company, and deleting without an order
+
 ### definir-tarefa
 - **Stability**: experimental
 - **Description**: Register, review, edit, or judge a merge of tasks with one set of criteria
