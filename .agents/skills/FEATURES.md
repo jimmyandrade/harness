@@ -811,6 +811,25 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses creating the first version, running the test and editing the skill, only measuring size, and writing the skill page in Notion
 
+### revisar-uso-do-tempo
+- **Stability**: experimental
+- **Description**: Audit whether planned time supports the priority objective, and review the body of work
+- **Properties**:
+  - Lives at `.agents/skills/revisar-uso-do-tempo/SKILL.md`
+  - Audits creation, visibility, revenue, and personal life against the priority objectives the person or the source named, and says whether more than half of the planned time supports them and where to adjust
+  - Reads the priority-time share from the YAML mapping under Parâmetros de configuração
+  - Sums only durations Google Calendar shows, and does not estimate a share or choose the priority objective
+  - Classifies each commitment by the objective and life area the person or the source already named, and reports a missing classification as an absence
+  - Identifies absences, excesses, and recurring reschedules that Google Calendar shows, and does not invent the count or reschedule the event
+  - Answers with the proportion of aligned commitments, gaps by area, recurring reschedules, and recommended adjustments, and does not estimate that proportion
+  - Answers a bulk action as a table with one row per commitment and columns for alignment, gap by area, recurring reschedule, and recommended adjustment, and does not invent a column
+  - Does not write the Google Calendar event
+  - Checks that the agenda tool is connected, active, and ready before concluding it cannot audit, starts the connection when the tool is available but not ready, and continues the original audit once it is ready
+  - Leaves the event to definir-agenda, career structure to definir-agenda-de-popstar, and a question about what is already on a day or a week to procurar-agenda
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses creating, reviewing, altering, or reserving the event, the popstar agenda, reverse planning, life protection, the day or week lookup, and choosing the priority objective
+
 ### sincronizar-cronograma
 - **Stability**: experimental
 - **Description**: Keep a dated item with no confirmed time off the calendar

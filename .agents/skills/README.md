@@ -54,6 +54,7 @@ flowchart LR
     resolver_comentarios_de_revisao["resolver-comentarios-de-revisao"]
     revisar_financas["revisar-financas"]
     revisar_habilidade["revisar-habilidade"]
+    revisar_uso_do_tempo["revisar-uso-do-tempo"]
     sincronizar_cronograma["sincronizar-cronograma"]
   end
   avaliar_atualizacoes_de_dependencia --> criar_commit
@@ -79,6 +80,7 @@ flowchart LR
   definir_agenda --> definir_reserva
   definir_agenda --> definir_tipo_do_evento
   definir_agenda --> procurar_agenda
+  definir_agenda --> revisar_uso_do_tempo
   definir_agenda --> sincronizar_cronograma
   definir_ativo_imobilizado --> definir_empresa
   definir_ativo_imobilizado --> gerenciar_estoque
@@ -90,6 +92,7 @@ flowchart LR
   definir_convidado --> definir_agenda
   definir_convidado --> definir_inscricao
   definir_convidado --> procurar_agenda
+  definir_convidado --> revisar_uso_do_tempo
   definir_convidado --> sincronizar_cronograma
   definir_data_significativa --> procurar_data_significativa
   definir_empresa --> definir_grafia
@@ -126,6 +129,7 @@ flowchart LR
   definir_planejamento_financeiro --> gerenciar_estoque
   definir_planejamento_financeiro --> revisar_financas
   definir_reserva --> definir_agenda
+  definir_reserva --> revisar_uso_do_tempo
   definir_reserva --> sincronizar_cronograma
   definir_tarefa --> definir_grafia
   definir_tarefa --> procurar_tarefa
@@ -165,6 +169,7 @@ flowchart LR
   procurar_agenda --> definir_data_significativa
   procurar_agenda --> definir_grupo_de_oportunidades
   procurar_agenda --> procurar_oportunidade
+  procurar_agenda --> revisar_uso_do_tempo
   procurar_data_significativa --> definir_data_significativa
   procurar_email --> definir_grafia
   procurar_email --> procurar_inscricao
@@ -195,6 +200,8 @@ flowchart LR
   revisar_habilidade --> descrever_habilidade_ou_schema
   revisar_habilidade --> evoluir_habilidade
   revisar_habilidade --> publicar_habilidade
+  revisar_uso_do_tempo --> definir_agenda
+  revisar_uso_do_tempo --> procurar_agenda
   sincronizar_cronograma --> definir_agenda
   sincronizar_cronograma --> definir_convidado
   sincronizar_cronograma --> definir_jornada_de_producao

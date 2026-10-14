@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.41.6"
+  version: "0.41.7"
   related:
     - definir-convidado
     - definir-data-significativa
@@ -14,6 +14,7 @@ metadata:
     - definir-reserva
     - definir-tipo-do-evento
     - procurar-agenda
+    - revisar-uso-do-tempo
     - sincronizar-cronograma
 ---
 
