@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.22.0](https://github.com/jimmyandrade/harness/compare/v0.21.0...v0.22.0) (2026-10-14)
+
+
+### Features
+
+* leave skills with metadata.internal true out of the Notion sync ([#134](https://github.com/jimmyandrade/harness/issues/134)) ([9f83005](https://github.com/jimmyandrade/harness/commit/9f83005f14b6c7cadcdb45650f78d1bde43a89fc))
+
 ## [0.21.0](https://github.com/jimmyandrade/harness/compare/v0.20.0...v0.21.0) (2026-10-14)
 
 
