@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.26.0](https://github.com/jimmyandrade/harness/compare/v0.25.0...v0.26.0) (2026-10-14)
+
+
+### Features
+
+* check that every pin of the core names the same tag ([#166](https://github.com/jimmyandrade/harness/issues/166)) ([01a7757](https://github.com/jimmyandrade/harness/commit/01a7757a928d6cfb2b4c498646ad164cf4f3ddd5))
+
 ## [0.25.0](https://github.com/jimmyandrade/harness/compare/v0.24.0...v0.25.0) (2026-10-14)
 
 
