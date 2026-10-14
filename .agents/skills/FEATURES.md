@@ -130,6 +130,33 @@ How these skills relate is in `README.md`, in this folder.
   - [ ] A merge request on a pull request with an unresolved thread runs resolver-comentarios-de-revisao first
   - [ ] A merge request with a failing check stops and names the check while `Exigir CI verde` is on
 
+### definir-ativo-imobilizado
+- **Stability**: experimental
+- **Description**: Register, review, and govern a durable fixed asset
+- **Properties**:
+  - Lives at `.agents/skills/definir-ativo-imobilizado/SKILL.md`
+  - Reads the fixed asset list and its property names from the data mapping of the project, when the person does not name another list
+  - Keeps durable, identifiable, non-fungible assets in the fixed asset list
+  - States whether the item goes to the fixed asset list or the stock list before creating or linking a page
+  - Keeps a durable good subject to depreciation, such as a machine, tool, rack, mannequin, display, computer, or structure, in the fixed asset list
+  - Sends fabric, trim, thread, buttons, labels, packaging, production inputs, and consumable office material to the stock list through gerenciar-estoque, including when the purchase was an investment
+  - Asks before creating or linking when the destination is unclear, including a hybrid item that wears and can be repaired, and when the choice is among fixed assets, stock, parts, production, or financial context alone
+  - On create or update, links the matching entry from the expense list through the cost and investment entries when that property exists, and keeps the amount paid, the purchase date, the supplier, and the evidence used
+  - Leaves the financial entry that originated the purchase to lancar-despesa, and does not treat the origin as resolved when no reliable entry exists
+  - Starts a purchase of a durable good from that entry, and records the amount paid, the purchase date, and the buyer as the responsible person
+  - Relates an existing cost category and an existing owner company, and does not treat the closed brand list as the company
+  - Sends a supplier, manufacturer, brand company, or owning company to definir-empresa for lookup, registration, or reconciliation
+  - Stores the SKU without a hyphen
+  - Leaves state, maintenance, repair, loan, partnership, write-off, disposal, sale, loss, exchange, and depreciation of an existing asset to registrar-ciclo-do-ativo
+  - Reads "do we have this asset today" as whether that fixed-asset record exists now, leaves that search to identificar-duplicata, and asks when the sentence does not separate the day from the asset
+  - Searches similar assets in Notion through identificar-duplicata before creating or updating one, using the name, category, kind, brand, model, SKU, open and closed dimensions, supplier, purchase date, price, photo, product link, and financial entry when they exist
+  - Shows what matches and what differs on a compatible asset, asks before merging, updating, linking, or creating, and does not create a duplicate from a slightly different title or description
+  - Reads a receipt, invoice, item photo, product link, or context when it brings useful data, fills the matching structured property, keeps the financial receipt on the expense entry, and uses the page body for context, a decision, a pending item, or a note without a property
+  - Leaves that search to identificar-duplicata and merging the same asset to mesclar-registro
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses stock, recording the payment, the asset life cycle, what is on today, an existence-only check, merging the same asset, creating the company, and creating the cost category
+
 ### definir-data-significativa
 - **Stability**: experimental
 - **Description**: Register, review, or alter a record in the list of significant dates
