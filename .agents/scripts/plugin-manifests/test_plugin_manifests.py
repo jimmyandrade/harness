@@ -2,13 +2,17 @@
 
 from __future__ import annotations
 
+import contextlib
 import importlib.util
+import io
 import json
+import os
 import re
 import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 HERE = Path(__file__).resolve().parent
 spec = importlib.util.spec_from_file_location("plugin_manifests", HERE / "plugin-manifests.py")
@@ -84,6 +88,29 @@ class PluginManifestsTest(unittest.TestCase):
         self.assertEqual(manifests.check(CORE), [])
         self.assertEqual(manifests.check(CORE / "examples" / "business-harness"), [])
 
+
+    def test_an_error_points_at_the_line_of_its_field(self) -> None:
+        (self.root / manifests.CURSOR_PLUGIN).parent.mkdir(parents=True)
+        (self.root / manifests.CURSOR_PLUGIN).write_text('{\n  "name": "example",\n  "skills": "./skills/"\n}\n', encoding="utf-8")
+        error = f"{manifests.CURSOR_PLUGIN}: `skills` is \"./skills/\", but {manifests.CLAUDE_PLUGIN} has \"./.agents/skills/\""
+        self.assertEqual(manifests.error_line(self.root, error), (manifests.CURSOR_PLUGIN.as_posix(), 3))
+
+    def test_a_marketplace_error_points_at_its_plugin(self) -> None:
+        (self.root / manifests.CLAUDE_MARKETPLACE).parent.mkdir(parents=True)
+        (self.root / manifests.CLAUDE_MARKETPLACE).write_text(
+            '{\n  "plugins": [\n    { "name": "core", "source": { "source": "github", "repo": "a/b" } }\n  ]\n}\n', encoding="utf-8"
+        )
+        error = manifests.check(self.root)[0]
+        self.assertEqual(manifests.error_line(self.root, error), (manifests.CLAUDE_MARKETPLACE.as_posix(), 3))
+
+    def test_github_actions_gets_an_inline_annotation(self) -> None:
+        out = io.StringIO()
+        with mock.patch.dict(os.environ, {"GITHUB_ACTIONS": "true"}), contextlib.redirect_stdout(out):
+            manifests.annotate(self.root, f"{manifests.CLAUDE_PLUGIN}: `name` is required")
+        self.assertEqual(
+            out.getvalue().strip(),
+            f"::error file={manifests.CLAUDE_PLUGIN.as_posix()},line=1,title=Plugin manifests::{manifests.CLAUDE_PLUGIN}: `name` is required",
+        )
 
 if __name__ == "__main__":
     unittest.main()

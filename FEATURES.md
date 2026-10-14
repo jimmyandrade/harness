@@ -20,6 +20,20 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
   - [ ] Adding a business marketplace installs that plugin and `core`, in Claude Code and in Codex
   - [ ] Importing a business repository and this repository as Cursor team marketplaces installs both plugins
 
+### core-pins
+- **Stability**: experimental
+- **Description**: Keep every pin of the core harness in a repository on the same tag, so a manual bump cannot leave one behind
+- **Properties**:
+  - Script `.agents/scripts/core-pins/core-pins.py`, run by `run-check.sh` on commit and in the `check-skill` action
+  - Reads the pins the Renovate preset moves: the `harness` dependency in `package.json` and `package-lock.json`, each `jimmyandrade/harness/...@<tag>` in `.github/workflows/`, and a `github` or `url` source of the core with a `ref` in `.claude-plugin/marketplace.json` and `.claude/settings.json`
+  - The pin in `package.json` is the reference. A pin on another tag fails at its line, and in GitHub Actions the pull request shows it inline
+  - A repository without pins, such as this one, passes
+- **Test Criteria**:
+  - [x] Every kind of pin is found at its line, and a commit in the lockfile is not a pin
+  - [x] Matching pins pass, and each pin on another tag fails at its line
+  - [x] In GitHub Actions each finding is an `::error` annotation with the file and the line
+  - [x] This repository and `examples/business-harness/` pass
+
 ### plugin-manifests
 - **Stability**: experimental
 - **Description**: Keep the plugin manifests of a repository in agreement, so Claude Code, Codex, and Cursor install the same plugin
@@ -27,6 +41,7 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
   - Script `.agents/scripts/plugin-manifests/plugin-manifests.py`, run by `run-check.sh` on commit and in the `check-skill` action
   - `.claude-plugin/` is the source of truth. The check fails when `.cursor-plugin/plugin.json` differs from `.claude-plugin/plugin.json` in `name`, `version`, `description`, `author`, `homepage`, `repository`, `license`, `keywords`, or `skills`, or exists without it
   - It fails when a plugin source in `.claude-plugin/marketplace.json` is one that Codex skips, such as `github`
+  - Each error points at the line of the field or plugin it is about, and in GitHub Actions the pull request shows it inline
 - **Test Criteria**:
   - [x] Matching manifests pass, and a different or missing shared field fails
   - [x] A `github` plugin source fails, and a `./` path or a `url` source passes
@@ -55,7 +70,7 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
   - Script `.agents/scripts/skill-graph/run-graph.sh` writes `.agents/skills/README.md`, which GitHub renders when the folder is opened
   - In a business harness, the project skills and the core skills are separate groups. The Core group shows a fixed node for the `core` plugin and only the core skills that project skills declare in `metadata.related`; body citations only link project skills, and arrows only leave project skills, so a core release that adds or relates core skills leaves the project graph unchanged
   - A solid arrow comes from `metadata.related`. A dotted arrow is a skill cited in the body of a skill that does not declare `metadata.related` yet. A citation is a skill name between backticks in prose, or a name in a Mermaid diagram
-  - `run-check.sh` fails when the README is out of date
+  - `run-check.sh` fails when the README is out of date, at the first line that differs, which a pull request shows inline in GitHub Actions
 - **Test Criteria**:
   - [x] Declared related skills draw solid arrows, and cited skills draw dotted arrows
   - [x] The project and the core are separate groups

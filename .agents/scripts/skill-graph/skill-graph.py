@@ -165,6 +165,24 @@ def build(project: Path, core: Path) -> str:
     return render(skills, groups, direction)
 
 
+def first_difference(current: str, expected: str) -> int:
+    """The first line where the README differs from the graph, counted from 1."""
+    old, new = current.splitlines(), expected.splitlines()
+    for index, (left, right) in enumerate(zip(old, new)):
+        if left != right:
+            return index + 1
+    return min(len(old), len(new)) + 1 if len(old) != len(new) else 1
+
+
+def annotate(relative: Path, line: int, message: str) -> None:
+    """In GitHub Actions, an error annotation, which a pull request shows inline at that line."""
+    if os.environ.get("GITHUB_ACTIONS") != "true":
+        return
+    escape = lambda value: value.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
+    file = escape(relative.as_posix()).replace(":", "%3A").replace(",", "%2C")
+    print(f"::error file={file},line={line},title=Skill graph::{escape(message)}")
+
+
 def main(argv: list[str]) -> int:
     project = parameters.project_root(Path(os.environ.get("HARNESS_ROOT") or Path.cwd()).resolve())
     core = parameters.core_root()
@@ -175,10 +193,9 @@ def main(argv: list[str]) -> int:
     if "--check" in argv:
         current = target.read_text(encoding="utf-8") if target.is_file() else ""
         if current != text:
-            print(
-                f"{README} is out of date. From the project root, run {core / '.agents/scripts/skill-graph/run-graph.sh'}.",
-                file=sys.stderr,
-            )
+            message = f"{README} is out of date. From the project root, run {core / '.agents/scripts/skill-graph/run-graph.sh'}."
+            print(message, file=sys.stderr)
+            annotate(README, first_difference(current, text), message)
             return 1
         return 0
     target.parent.mkdir(parents=True, exist_ok=True)
