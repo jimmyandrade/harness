@@ -371,6 +371,18 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses recording a sale or expense, building the income statement, moving stock, and projecting fair cash
 
+### definir-reserva
+- **Stability**: experimental
+- **Description**: Keep a reservation, a provisional block, a pending event, or a reminder provisional until participation is explicitly confirmed
+- **Properties**:
+  - Lives at `.agents/skills/definir-reserva/SKILL.md`
+  - Keeps that provisional nature when there is no explicit confirmation, and does not turn a reservation into confirmed participation only because an opportunity is approved
+  - Updates the title and the description when the person confirms participation, and records stock, payment, curation, agenda, travel, or a third-party confirmation as a pending condition
+  - Leaves the calendar write to definir-agenda, a career reservation made before demand to definir-agenda-de-popstar, and an untimed schedule item to sincronizar-cronograma
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses recording the event time, reserving career time, syncing an untimed item, and auditing time use
+
 ### definir-tarefa
 - **Stability**: experimental
 - **Description**: Register, review, edit, or judge a merge of tasks with one set of criteria

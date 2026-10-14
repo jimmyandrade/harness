@@ -30,6 +30,7 @@ flowchart LR
     definir_perfil_social["definir-perfil-social"]
     definir_pessoa["definir-pessoa"]
     definir_planejamento_financeiro["definir-planejamento-financeiro"]
+    definir_reserva["definir-reserva"]
     definir_tarefa["definir-tarefa"]
     descrever_habilidade_ou_schema["descrever-habilidade-ou-schema"]
     evoluir_habilidade["evoluir-habilidade"]
@@ -69,6 +70,7 @@ flowchart LR
   criar_pull_request --> resolver_comentarios_de_revisao
   definir_agenda --> definir_data_significativa
   definir_agenda --> definir_grafia
+  definir_agenda --> definir_reserva
   definir_agenda --> procurar_agenda
   definir_ativo_imobilizado --> definir_empresa
   definir_ativo_imobilizado --> gerenciar_estoque
@@ -109,6 +111,7 @@ flowchart LR
   definir_planejamento_financeiro --> definir_lancamento
   definir_planejamento_financeiro --> gerenciar_estoque
   definir_planejamento_financeiro --> revisar_financas
+  definir_reserva --> definir_agenda
   definir_tarefa --> definir_grafia
   definir_tarefa --> procurar_tarefa
   descrever_habilidade_ou_schema --> evoluir_habilidade
