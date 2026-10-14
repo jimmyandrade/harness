@@ -19,6 +19,8 @@ Subjects follow [Conventional Commits](https://www.conventionalcommits.org/): `t
 | `chore` | Upkeep that is none of the above |
 | `ci` | The workflows under `.github/workflows/` |
 
+Branches are named `type/short-description`, with one of these types and an ASCII kebab-case description, such as `fix/mcp-path`. A branch a tool created with another prefix, such as `claude/`, is renamed before the first push.
+
 Every change lands through a pull request. Do not push to `main`.
 
 ## CI
