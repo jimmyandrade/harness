@@ -203,6 +203,22 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses stock, recording the payment, the asset life cycle, what is on today, an existence-only check, merging the same asset, creating the company, and creating the cost category
 
+### definir-convidado
+- **Stability**: experimental
+- **Description**: Check each person's participation and locality before inviting them
+- **Properties**:
+  - Lives at `.agents/skills/definir-convidado/SKILL.md`
+  - Verifies one by one who will actually attend, using inscriptions, opportunities, the schedule, trips, responsibility, confirmed descriptions, and localities as evidence
+  - Does not invite every partner only because the commitment belongs to the company, sits on a shared calendar, or is a formative opportunity
+  - Invites each person only for the commitment that matches their physical presence, confirmed participation, or operational responsibility when they are in different cities or squares in the same period
+  - Treats a simultaneous geographic conflict as an agenda split
+  - Removes a wrong guest only after authorization and names that correction in the operation summary
+  - Asks before sending or removing an invite when individual participation stays ambiguous
+  - Leaves the event time to definir-agenda, an untimed schedule item to sincronizar-cronograma, the inscription status to definir-inscricao, and time audit to revisar-uso-do-tempo
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses recording the event time, syncing an untimed item, updating an inscription, and auditing time use
+
 ### definir-data-significativa
 - **Stability**: experimental
 - **Description**: Register, review, or alter a record in the list of significant dates
