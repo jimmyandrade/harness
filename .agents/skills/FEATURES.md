@@ -167,6 +167,37 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses only celebrating without saving, only looking up who registered, and deciding whether a task exists
 
+### definir-tarefa
+- **Stability**: experimental
+- **Description**: Register, review, edit, or judge a merge of tasks with one set of criteria
+- **Properties**:
+  - Lives at `.agents/skills/definir-tarefa/SKILL.md`
+  - Reads the property names and the status options of the task list from the data mapping of the project
+  - Rewrites the title so it says what will be accomplished and keeps the deadline out
+  - Does not accept a title that only says to go somewhere, such as going to print shops
+  - Records a target date in the deadline, not in the title or in the notes, and states that date with the weekday in the reply
+  - Writes the definition of done as a short checklist of verifiable evidence
+  - Leaves the physical contact point to the skill that `Habilidade do ponto de contato` names, when there is one, and keeps a reference link and a note in their properties, not in the page body
+  - Alerts the owner when the deadline has passed and the task is not complete
+  - Puts a blocking note in the notes, not in the title
+  - Starts the title with an infinitive verb
+  - Checks the title, the deadline, the owner, and the definition of done against specific, measurable, achievable, relevant, and time-bound
+  - Reports a verdict and what is missing for each task, and closes with the actions to take
+  - Suggests merging tasks the person named when they are the same work, and does not keep a vague title or copy a creation date
+  - Opens the task the person named, and opens the links the person passed without searching the list for other tasks
+  - When the person states the benefit, writes it into the notes in that reply, in the present, and keeps the note already there
+  - When a spelling is uncertain, follows the skill that `Habilidade de grafia` names, when there is one, and writes the correct form
+  - Writes the request date as the day the request arose in this conversation, leaves it empty when that day is only in a chat the agent cannot read, and does not copy the start or the deadline into that field
+  - On a recurring schedule trigger, scans the list and signals problems without writing
+  - On a page-added or property-updated trigger, reviews that page only
+  - Comments when the correction is not safe and mentions the accountable person of the RACI matrix, or the owners when the list has no such role
+  - With `Considerar pessoas consultadas` set to `sim`, also mentions the consulted people and asks their view; with `Considerar pessoas informadas` set to `sim`, comments what changed and mentions the informed people after applying a correction. Both default to `não`, and a role the list lacks is reported, not created
+  - Does not change the title, status, deadline, definition of done, or owner until the person asks to apply that correction
+  - Does not only check existence, mark a task complete, or turn a rule without a deliverable into a task
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses only checking existence, marking a task complete, and turning a rule without a deliverable into a task
+
 ### descrever-habilidade-ou-schema
 - **Stability**: experimental
 - **Description**: Write or correct a skill or schema description, and test whether a skill description triggers, even when the person does not say description
