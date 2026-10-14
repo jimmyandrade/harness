@@ -213,6 +213,37 @@ class VersionReferenceTest(unittest.TestCase):
         self.assertIn("Segunda versão", checker.committed_text(self.relative))
 
 
+class StagedBinaryTest(unittest.TestCase):
+    def setUp(self) -> None:
+        self.tmp = tempfile.TemporaryDirectory()
+        self.project = Path(self.tmp.name).resolve()
+        (self.project / ".agents").mkdir()
+        (self.project / INSTRUCTIONS).write_text(PARAMETERS, encoding="utf-8")
+        self.git("init", "-q")
+        self.git("commit", "-q", "--allow-empty", "-m", "base")
+
+    def tearDown(self) -> None:
+        self.tmp.cleanup()
+        for key in ("HARNESS_ROOT", "CHECK_SKILL_BASE", "CHECK_SKILL_HEAD"):
+            os.environ.pop(key, None)
+
+    def git(self, *args: str) -> None:
+        subprocess.run(
+            ["git", "-c", "user.name=t", "-c", "user.email=t@example.com", *args],
+            cwd=self.project, check=True, capture_output=True,
+        )
+
+    def test_a_staged_binary_eval_input_does_not_crash_the_check(self) -> None:
+        write_skill(self.project, "abrir-pedido")
+        image = self.project / ".agents/skills/abrir-pedido/evals/files/print.webp"
+        image.parent.mkdir(parents=True)
+        image.write_bytes(b"RIFF\xa2\x00\x00\x00WEBPVP8 \xff\xfe\x80")
+        self.git("add", "-A")
+        checker = load_checker(self.project)
+        self.assertEqual(checker.rename_alias_findings(), [])
+        self.assertIsNotNone(checker.git_output(["git", "show", ":.agents/skills/abrir-pedido/evals/files/print.webp"]))
+
+
 class InstructionsTest(unittest.TestCase):
     def setUp(self) -> None:
         self.tmp = tempfile.TemporaryDirectory()

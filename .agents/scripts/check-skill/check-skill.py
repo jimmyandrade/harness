@@ -953,6 +953,8 @@ def git_output(args: list[str]) -> str | None:
         cwd=ROOT,
         capture_output=True,
         text=True,
+        encoding="utf-8",
+        errors="replace",
         check=False,
     )
     if result.returncode != 0:
@@ -1049,11 +1051,12 @@ def rename_alias_findings() -> list[tuple[Path, Finding]]:
     if not raw:
         return []
     rows = name_status_rows(raw)
+    # Aliases live only in SKILL.md, so other files, such as a binary eval input, are not read.
     texts: dict[str, str] = {}
     for status, old, new in rows:
-        if old and old not in texts:
+        if old and old not in texts and skill_dir_name(old):
             texts[old] = revision_text(old_rev, old) or ""
-        if new and new not in texts:
+        if new and new not in texts and skill_dir_name(new):
             texts[new] = revision_text(new_rev, new) or ""
     return [
         (Path(path), Finding(f"metadata.aliases must include {name}", 1))
