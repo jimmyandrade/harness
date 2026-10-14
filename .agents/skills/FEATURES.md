@@ -18,7 +18,7 @@ How these skills relate is in `README.md`, in this folder.
   - Reads the brand sources named in the project instructions before answering or writing. An ambiguous channel, audience, line, commercial intent, or situation waits for a question
   - Keeps a term that only fits one context as situationally allowed, with when. allowed and forbidden stay general rules
   - Uses insert when the person is registering and does not name a mode, update when an existing term changes, and upsert when the batch does both
-  - Writes the batch with `node node_modules/vocabulary/api/cli.ts terms`, or with the MCP tools `lookup_term`, `exists_in_text`, and `write_terms`
+  - Writes the batch with `node node_modules/vocabulary/dist/cli.js terms`, or with the MCP tools `lookup_term`, `exists_in_text`, and `write_terms`
   - Leaves writing brand text to redigir-com-tom-de-voz, and does not invent a term
 - **Test Criteria**:
   - [x] The skill is present at that path

@@ -18,7 +18,7 @@ From the project that holds the glossary:
 npm install --save-dev github:jimmyandrade/vocabulary
 ```
 
-Check: `test -f node_modules/vocabulary/api/mcp/index.ts && echo ok` prints `ok`.
+Check: `node node_modules/vocabulary/dist/mcp/index.js < /dev/null && echo ok` prints `ok`.
 
 Add the skills for Cursor, Codex, or GitHub Copilot:
 
@@ -33,10 +33,11 @@ Check: `test -f .agents/skills/definir-vocabulario/SKILL.md && echo ok` prints `
 ```bash
 npm ci
 npx tsc --noEmit
+npm run build
 npm test
 ```
 
-Check: both commands exit 0.
+Check: every command exits 0, and `git status --porcelain dist` prints nothing after you commit. `npm run build` writes `dist/` from `api/`. Commit `dist/` with the source change, as `docs/adr/0006-ship-compiled-javascript.md` decides.
 
 ## License
 

@@ -208,3 +208,11 @@ test("the server answers initialize and write_terms on stdio", async () => {
     child.kill()
   }
 })
+
+test("initialize reports the version in package.json", () => {
+  const { version } = JSON.parse(readFileSync(new URL("../../package.json", import.meta.url), "utf8")) as { version: string }
+  const response = respond(tmpdir(), { jsonrpc: "2.0", id: 1, method: "initialize", params: {} }) as {
+    result?: { serverInfo?: { name: string; version: string } }
+  }
+  assert.deepEqual(response.result?.serverInfo, { name: "vocabulary", version })
+})

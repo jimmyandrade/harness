@@ -7,6 +7,7 @@
  * Run: node api/mcp/index.ts
  */
 
+import { readFileSync } from "node:fs"
 import { fileURLToPath } from "node:url"
 import type { Readable } from "node:stream"
 
@@ -18,6 +19,9 @@ import { readOptions } from "../shared/options.ts"
 import { classifyRequest, classifyTextRequest, termsRequest } from "../shared/schema.ts"
 
 const PROTOCOL = "2024-11-05"
+
+// Release Please bumps package.json. api/ and dist/ both sit two levels below it.
+const VERSION = (JSON.parse(readFileSync(new URL("../../package.json", import.meta.url), "utf8")) as { version: string }).version
 
 const languageProperty = { type: "string", description: "BCP 47 tag of the text, such as pt-BR." }
 
@@ -101,7 +105,7 @@ export function respond(directory: string, message: unknown): unknown | undefine
       result: {
         protocolVersion,
         capabilities: { tools: {} },
-        serverInfo: { name: "vocabulary", version: "0.1.0" },
+        serverInfo: { name: "vocabulary", version: VERSION },
       },
     }
   }

@@ -2,7 +2,7 @@
   "mcpServers": {
     "vocabulary": {
       "command": "node",
-      "args": ["node_modules/vocabulary/api/mcp/index.ts"]
+      "args": ["node_modules/vocabulary/dist/mcp/index.js"]
     }
   }
 }

@@ -3,7 +3,7 @@ name: definir-vocabulario
 description: Use essa habilidade sempre que for cadastrar ou atualizar um ou mais termos do vocabulário do tom de voz, ou perguntar quais variações de gênero, número ou grafia foram cadastradas, mesmo sem dizer glossário, lote ou estado. NÃO use para escrever, revisar ou aprovar o texto da marca, classificar uma frase, nem inventar um termo que a pessoa não enviou.
 metadata:
   author: jimmyandrade
-  version: "0.19.0"
+  version: "0.19.1"
   related:
     - evoluir-habilidade
     - redigir-com-tom-de-voz
@@ -312,11 +312,11 @@ Casa ficou permitida. Casas ganhou a própria linha, proibida. Moradias ganhou a
 
 ## Scripts disponíveis
 
-- `node node_modules/vocabulary/api/cli.ts terms` grava o lote. `--language` e `--mode` valem para o lote. Cada `--term` abre um termo, com `--state`, `--category`, `--description`, `--reason`, `--when` e `--substitution`. `--examples`, `--rejected`, `--alternatives` e `--related` repetem, um valor por vez. `--glossary` aponta outro vocabulário.
+- `node node_modules/vocabulary/dist/cli.js terms` grava o lote. `--language` e `--mode` valem para o lote. Cada `--term` abre um termo, com `--state`, `--category`, `--description`, `--reason`, `--when` e `--substitution`. `--examples`, `--rejected`, `--alternatives` e `--related` repetem, um valor por vez. `--glossary` aponta outro vocabulário.
 - `lookup_term`, no servidor `vocabulary`, lê um termo e devolve se ele existe e a linha guardada.
 - `exists_in_text`, no servidor `vocabulary`, recebe um trecho e devolve só o registro de cada token para se ele existe.
 - `write_terms`, no servidor `vocabulary`, grava o mesmo plano no chat.
 
-1. No terminal, rode `node node_modules/vocabulary/api/cli.ts terms` com `--language`, `--mode` e um `--term` para cada termo.
+1. No terminal, rode `node node_modules/vocabulary/dist/cli.js terms` com `--language`, `--mode` e um `--term` para cada termo.
 2. No chat, chame `lookup_term` para um termo e `exists_in_text` para um trecho.
 3. No chat, chame `write_terms` com idioma, modo e termos.
