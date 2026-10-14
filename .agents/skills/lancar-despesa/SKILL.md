@@ -5,9 +5,11 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.4.1"
   aliases:
     - definir-despesa
+  related:
+    - definir-lancamento
 ---
 
 # Lançar despesa

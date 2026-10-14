@@ -234,6 +234,22 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses only celebrating without saving, only looking up who registered, and deciding whether a task exists
 
+### definir-lancamento
+- **Stability**: experimental
+- **Description**: Interpret a simple sale or expense and route what is not that entry
+- **Properties**:
+  - Lives at `.agents/skills/definir-lancamento/SKILL.md`
+  - Reads `Moeda`, `Moedas estrangeiras`, `Habilidade de venda`, and `Habilidade de projeção de caixa` from the project instructions
+  - Records an expense in a foreign currency with the original amount, the exchange rate, and the amount in `Moeda`, and asks when the rate is missing
+  - Asks before recording when company or personal, sale or expense, or the payment form is missing
+  - Keeps a personal entry out of the company source and sends a company expense to lancar-despesa
+  - Sends a sale to the skill that `Habilidade de venda` names, when there is one, and does not store it in the expense list
+  - Classifies a company expense with the configured classes and does not create a missing category
+  - Adds the entry to what the source already has and does not rebuild or delete prior entries
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses the DRE, the cash-flow statement, the price, the monthly plan, the durable good, and the fair cash projection
+
 ### definir-perfil-social
 - **Stability**: experimental
 - **Description**: Normalize a social profile when registering or consolidating it
