@@ -17,6 +17,8 @@ jobs:
         uses: actions/checkout@v7
         with:
           fetch-depth: 0
+      - name: Check the branch name
+        uses: ./.github/actions/check-branch-name
       - name: Check skills
         uses: ./.github/actions/check-skill
         with:

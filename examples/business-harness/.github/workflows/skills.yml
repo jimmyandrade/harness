@@ -13,6 +13,8 @@ jobs:
   check:
     runs-on: ubuntu-26.04
     steps:
+      - name: Check the branch name
+        uses: jimmyandrade/harness/.github/actions/check-branch-name@vX.Y.Z
       - name: Check out the repository
         uses: actions/checkout@v7
         with:

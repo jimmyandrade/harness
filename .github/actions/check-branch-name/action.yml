@@ -1,0 +1,25 @@
+name: Check the branch name
+description: Fail a pull request whose branch is not named type/short-description, with a Conventional Commits type. Bot branches are skipped.
+inputs:
+  branch:
+    description: Branch to check. Empty, as on a push, skips the check.
+    required: false
+    default: ${{ github.head_ref }}
+  types:
+    description: Space-separated types allowed before the slash. Empty uses feat, fix, docs, refactor, perf, test, chore, and ci.
+    required: false
+    default: ""
+  exempt:
+    description: Space-separated prefixes that skip the check. Empty uses renovate/, dependabot/, and release-please--.
+    required: false
+    default: ""
+runs:
+  using: composite
+  steps:
+    - name: Check the branch name
+      shell: bash
+      env:
+        CHECK_BRANCH_TYPES: ${{ inputs.types }}
+        CHECK_BRANCH_EXEMPT: ${{ inputs.exempt }}
+        BRANCH: ${{ inputs.branch }}
+      run: python3 "$GITHUB_ACTION_PATH/../../../.agents/scripts/check-branch-name/check-branch-name.py" "$BRANCH"
