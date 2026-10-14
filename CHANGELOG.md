@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.25.0](https://github.com/jimmyandrade/harness/compare/v0.24.0...v0.25.0) (2026-10-14)
+
+
+### ⚠ BREAKING CHANGES
+
+* URL do calendário, País do calendário, and Uso da URL do calendário are gone. A project sets Fontes de calendário instead, with "URL" and "Código do país" in each item, and Uso das fontes de calendário when it differs from the default.
+
+### Features
+
+* list calendar sources, each with its own country code ([#164](https://github.com/jimmyandrade/harness/issues/164)) ([8ef5866](https://github.com/jimmyandrade/harness/commit/8ef58666a76c47bef0ede0a89f9eaea4884b1aaf))
+
 ## [0.24.0](https://github.com/jimmyandrade/harness/compare/v0.23.1...v0.24.0) (2026-10-14)
 
 
