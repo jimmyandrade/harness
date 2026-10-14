@@ -5,11 +5,12 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.4.1"
   aliases:
     - definir-grupo
   related:
     - procurar-oportunidade
+    - criar-oportunidade
 ---
 
 # Definir grupo de oportunidades

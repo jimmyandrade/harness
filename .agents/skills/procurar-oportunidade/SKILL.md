@@ -5,7 +5,9 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch
 compatibility: Precisa de internet. A busca semântica na lista de oportunidades usa notion-ai-search no servidor notion.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.5.1"
+  related:
+    - criar-oportunidade
 ---
 
 # Procurar oportunidade

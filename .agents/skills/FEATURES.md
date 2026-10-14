@@ -79,6 +79,26 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses code edits, a non-skill page, description-only work, and writing the skill in Notion
 
+### criar-oportunidade
+- **Stability**: experimental
+- **Description**: Register an opportunity that does not exist yet
+- **Properties**:
+  - Lives at `.agents/skills/criar-oportunidade/SKILL.md`
+  - Stops when procurar-oportunidade finds the same edition
+  - Reads the opportunity list and its property names from the data mapping of the project, stops before creating when the title, the date, or the required group is missing from it, and lists at the end each value that has no property, with a suggestion to add it
+  - Writes the title as edition name, date with the weekday, city, then group, and writes the interval on the edition date
+  - Rejects a date before `Ano mínimo da edição` when the project instructions set it
+  - With `Considerar grupos de oportunidades` at `sim`, links the edition to one existing group and leaves creating or correcting that group to definir-grupo-de-oportunidades; with `não`, registers the edition without a group
+  - Puts edition-specific facts, such as place, hours, price, form, and vacancies, on the edition
+  - Relates a profile on the edition only when that account belongs to that edition
+  - Does not create an opportunity page for selection, registration, an edital, or a call
+  - Keeps an existing notes block on the edition intact, and may copy a supported fact into a property
+  - Does not write the poster in the page body
+  - Does not treat free entry for a restricted audience as the visitor ticket or the exhibitor fee
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses the group, checking whether the opportunity exists, organizing the participation, registering someone, creating a task, and reading an image
+
 ### criar-pull-request
 - **Stability**: experimental
 - **Description**: Open, update, and merge a pull request without pushing to the base branch
