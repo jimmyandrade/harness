@@ -18,6 +18,8 @@ From the project that holds the glossary:
 npm install --save-dev github:jimmyandrade/vocabulary
 ```
 
+To pin a release, add its tag: `github:jimmyandrade/vocabulary#vMAJOR.MINOR.PATCH`. The releases are on the GitHub Releases page of this repository, and `CONTRIBUTING.md` explains how they are made.
+
 Check: `node node_modules/vocabulary/dist/mcp/index.js < /dev/null && echo ok` prints `ok`.
 
 Add the skills for Cursor, Codex, or GitHub Copilot:

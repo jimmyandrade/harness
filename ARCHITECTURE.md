@@ -24,6 +24,8 @@ vocabulary/
 ├── .mcp.json                  # Starts the server from this source tree
 ├── tsconfig.build.json        # Compiles api/ to dist/
 ├── AGENTS.md                  # Instructions for work in this repository
+├── CONTRIBUTING.md            # Commits, CI, releases
+├── release-please-config.json # Release Please for this package
 └── package.json
 ```
 
@@ -74,7 +76,7 @@ None. Crowdin and Transifex are an export, not this file format.
 ## 6. Deployment & Infrastructure
 
 - Cloud Provider: GitHub
-- CI/CD Pipeline: `.github/workflows/ci.yml` typechecks, checks that `dist/` matches `npm run build`, and runs `npm test`, which starts the server from an installed copy. `.github/workflows/skill-check.yml` checks the skills with the harness action.
+- CI/CD Pipeline: `.github/workflows/ci.yml` typechecks, checks that `dist/` matches `npm run build`, and runs `npm test`, which starts the server from an installed copy. `.github/workflows/release-please.yml` opens the release pull request, and merging it tags `vMAJOR.MINOR.PATCH`. Details are in `CONTRIBUTING.md`. `.github/workflows/skill-check.yml` checks the skills with the harness action.
 
 ## 7. Security Considerations
 
@@ -90,7 +92,7 @@ None. Crowdin and Transifex are an export, not this file format.
 
 ## 9. Future Considerations / Roadmap
 
-- Publish a tagged release so a project can pin this package the way it pins the harness.
+- None recorded.
 
 ## 10. Project Identification
 
