@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.27.0](https://github.com/jimmyandrade/harness/compare/v0.26.0...v0.27.0) (2026-10-14)
+
+
+### Features
+
+* **criar-ideia-de-conteudo:** move the skill to the core ([#169](https://github.com/jimmyandrade/harness/issues/169)) ([691ebec](https://github.com/jimmyandrade/harness/commit/691ebeca6415c0f5881113a0a81b119ebe0170b2))
+* **reconhecer-imagem:** move the skill to the core ([#168](https://github.com/jimmyandrade/harness/issues/168)) ([8adad0e](https://github.com/jimmyandrade/harness/commit/8adad0ea66fe5fdedcab4997d0d204de97ebe745))
+
 ## [0.26.0](https://github.com/jimmyandrade/harness/compare/v0.25.0...v0.26.0) (2026-10-14)
 
 
