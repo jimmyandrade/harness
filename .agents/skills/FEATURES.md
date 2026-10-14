@@ -367,6 +367,21 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses consolidating names, deleting, creating the record, locking spelling, and choosing among similar records
 
+### lancar-despesa
+- **Stability**: experimental
+- **Description**: Record a payment and trace the financial entry that originated a durable asset
+- **Properties**:
+  - Lives at `.agents/skills/lancar-despesa/SKILL.md`
+  - Reads the expense list and its property names from the data mapping of the project, when the person does not name another list
+  - Records a payment in a currency of `Moedas estrangeiras` with the original amount, the exchange rate, its date and source, and the amount in `Moeda`, and asks when the rate is missing
+  - Traces the financial entry that originated the purchase or acquisition of a durable asset
+  - Leaves the asset page, the split between fixed assets and stock, and a controllable-item purchase to definir-ativo-imobilizado
+  - Sends a sale or a mixed sale-and-expense sentence to definir-lancamento
+  - Does not invent the amount or the date
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses the opportunity, the signup update, the task, the agenda, and registering the asset
+
 ### medir-habilidade
 - **Stability**: experimental
 - **Description**: Measure a skill's size and the profile of a run

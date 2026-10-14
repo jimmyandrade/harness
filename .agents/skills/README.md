@@ -30,6 +30,7 @@ flowchart LR
     descrever_habilidade_ou_schema["descrever-habilidade-ou-schema"]
     evoluir_habilidade["evoluir-habilidade"]
     identificar_duplicata["identificar-duplicata"]
+    lancar_despesa["lancar-despesa"]
     medir_habilidade["medir-habilidade"]
     mesclar_registro["mesclar-registro"]
     procurar_data_significativa["procurar-data-significativa"]
