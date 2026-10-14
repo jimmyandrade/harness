@@ -3,7 +3,7 @@ name: criar-habilidade
 description: Use essa habilidade sempre que for criar, adicionar ou escrever uma skill, mesmo sem dizer skill. NÃO use para editar código, escrever página que não seja skill, otimizar só a descrição, nem gravar a skill no Notion. Pedido vindo do Notion segue publicar-habilidade.
 metadata:
   author: jimmyandrade
-  version: "3.8.0"
+  version: "3.9.0"
   related:
     - descrever-habilidade-ou-schema
     - evoluir-habilidade
@@ -84,7 +84,7 @@ Renomear leva `!` e rodapé `BREAKING CHANGE:` com o nome antigo e o novo. Cada 
 - Não inclua `license` enquanto o projeto não exigir licença.
 - Inclua `compatibility` só quando a skill precisar de internet ou de Python. Não cite produto, git, docker nem jq.
 - `allowed-tools`, se existir, é uma lista separada por espaço. `aliases` e `tags` em `metadata`, se existirem, são um item por linha, começando com `-`.
-- `metadata.notion` com o valor `"false"` deixa a skill fora da sincronização com o Notion. Omita o campo quando a skill for para o Notion. O único valor aceito é `"false"`.
+- `metadata.notion: "false"` deixa a skill fora do Notion. É o único valor aceito; sem ele, ela vai. Skill em construção leva `internal: true`, sem aspas: fica fora do Notion e do `npx skills add`.
 - Banco, página e workspace do Notion não entram na skill. A pessoa informa o data source na execução. Se ele não estiver no workspace conectado, pare e peça. Não troque por um banco de outro workspace.
 
 ### Passo 9
