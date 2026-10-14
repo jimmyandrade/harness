@@ -3,6 +3,7 @@
 
 A skill that lists metadata.related names only skills that exist in the project
 or in this harness, and lists every skill its body cites.
+When the opportunity skills consider groups, the opportunity mapping binds the group.
 
 The project is HARNESS_ROOT, or the working directory when it is unset.
 Settings come from metadata.parameters in the frontmatter of the project instructions file, then of this harness (ADR 0009).
@@ -66,6 +67,9 @@ CORE = parameters.core_root()
 # A project that links its skills to the core only uses the core skills, so only
 # its instructions are checked.
 IS_HARNESS = parameters.is_harness(ROOT)
+GROUPS = "Considerar grupos de oportunidades"
+GROUP_SKILLS = ("criar-oportunidade", "definir-grupo-de-oportunidades")
+OPPORTUNITY_MAPPING = ".agents/mappings/oportunidades.notion.json"
 
 
 @dataclass(frozen=True)
@@ -1096,6 +1100,31 @@ def instructions_version_errors(text: str) -> list[tuple[str, int | None]]:
     return errors
 
 
+def opportunity_group_errors(text: str, roots: list[Path]) -> list[tuple[str, int | None]]:
+    """With groups considered, the opportunity mapping must bind the group of an edition."""
+    path = ROOT / OPPORTUNITY_MAPPING
+    if not path.is_file():
+        return []
+    data = parameters.instructions_block(ROOT)
+    default = parameters.setting(roots, GROUPS)
+    values = set()
+    for skill in GROUP_SKILLS:
+        entry = data.get(skill)
+        values.add(entry[GROUPS] if isinstance(entry, dict) and GROUPS in entry else default)
+    if "sim" not in values:
+        return []
+    line = parameters.key_line(text, GROUPS) or 1
+    try:
+        mapping = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return [(f"{OPPORTUNITY_MAPPING} is invalid JSON", line)]
+    properties = mapping.get("properties") if isinstance(mapping, dict) else None
+    group = properties.get("group") if isinstance(properties, dict) else None
+    if isinstance(group, str) and group.strip():
+        return []
+    return [(f'"{GROUPS}" is sim, but {OPPORTUNITY_MAPPING} does not map group; map it or set não', line)]
+
+
 GIVEN_PT = re.compile(r"^\s*(Dado|Dada|Dados|Dadas)\b(.*)$")
 
 
@@ -1249,7 +1278,8 @@ def main() -> int:
         block_errors = parameters.validate(
             text, parameters.skill_parameter_keys(roots), required=IS_HARNESS or ROOT == CORE
         )
-        for message, line in block_errors + instructions_version_errors(text):
+        group_errors = opportunity_group_errors(text, roots) if not block_errors else []
+        for message, line in block_errors + group_errors + instructions_version_errors(text):
             failed = True
             finding = Finding(message, line)
             results[INSTRUCTIONS].append((Path(INSTRUCTIONS), finding))

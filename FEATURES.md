@@ -74,10 +74,12 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
   - `metadata.notion` is only `"false"`, and `metadata.internal` is only an unquoted `true`, the boolean the `skills` CLI reads
   - A changed skill must raise `metadata.version` above its copy at `base` when `base` and `head` are given, and above its copy at `HEAD` otherwise
   - When a skill declares `metadata.related`, each name must be a skill in the project or in the core, and every skill the body cites must be listed. A citation is a skill name between backticks in prose, or a name in a Mermaid diagram; a plain name in prose is not one
+  - `Considerar grupos de oportunidades` is `sim` or `não`. When it is `sim` for `criar-oportunidade` or `definir-grupo-de-oportunidades`, and the project has the opportunity mapping `.agents/mappings/oportunidades.notion.json`, that mapping must bind the logical field `group`
   - Each Gherkin file in a skill's `features/` starts with `# language: <locale.gherkin>`. With `pt`, every Given starts with `Dado que`, because `Dado` is the reserved keyword and does not agree with the noun
 - **Test Criteria**:
   - [x] A project block without a limit uses the core limit, and a misspelled key or a wrong type fails
   - [x] A related name that is not a skill fails, and a cited skill missing from `metadata.related` fails
+  - [x] An opportunity mapping without `group` fails while `Considerar grupos de oportunidades` is `sim`, and passes with `não`
   - [x] A feature without the configured language line fails, and in Portuguese a Given such as `Dada uma` or `Dado um` fails
   - [x] A committed change is compared with the base, and without a base with `HEAD`
   - [x] An `AGENTS.md` over the body token or line limit fails, and a change to it shows as a row with its tokens before and after

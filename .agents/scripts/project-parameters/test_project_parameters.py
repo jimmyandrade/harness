@@ -61,6 +61,10 @@ class ValidateTest(unittest.TestCase):
     def test_should_check_the_type_of_script_settings(self) -> None:
         self.assertEqual(self.errors(block('"Global":\n  "Tokens do corpo": "muitos"\n')), ['"Tokens do corpo" must be a positive integer'])
         self.assertEqual(self.errors(block('"Global":\n  "Licença obrigatória": "talvez"\n')), ['"Licença obrigatória" must be one of: não, sim'])
+        self.assertEqual(
+            self.errors(block('"Global":\n  "Considerar grupos de oportunidades": "planejado"\n')),
+            ['"Considerar grupos de oportunidades" must be one of: não, sim'],
+        )
 
 
     def test_should_reject_flow_style(self) -> None:

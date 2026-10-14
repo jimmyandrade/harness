@@ -28,7 +28,10 @@ TEXT_SETTINGS = {
     "Cor do ícone das páginas no Notion",
     "Símbolo da pasta no macOS",
 }
-CHOICE_SETTINGS = {"Licença obrigatória": {"sim", "não"}}
+CHOICE_SETTINGS = {
+    "Licença obrigatória": {"sim", "não"},
+    "Considerar grupos de oportunidades": {"sim", "não"},
+}
 VERSION = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$")
 SCRIPT_SETTINGS = INTEGER_SETTINGS | TEXT_SETTINGS | set(CHOICE_SETTINGS)
 # A script setting that is also a parameter of a skill reads that skill's entry first.
