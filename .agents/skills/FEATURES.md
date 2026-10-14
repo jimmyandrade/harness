@@ -644,6 +644,20 @@ How these skills relate is in `README.md`, in this folder.
   - [ ] A comment that no longer applies is answered with why, and resolved
   - [ ] A thread without an answer stays open and shows in the tally
 
+### revisar-financas
+- **Stability**: experimental
+- **Description**: Read cash, profit, the income statement, cash flow, diagnosis, audit, or selling price
+- **Properties**:
+  - Lives at `.agents/skills/revisar-financas/SKILL.md`
+  - Reads `Moeda` and `Habilidade de projeção de caixa` from the project instructions, and leaves the cash projection to the skill it names, when there is one
+  - Reads what is already recorded and does not create an entry
+  - Presents financial figures in `Moeda`, tables first, then a short summary, alerts, and practical guidance
+  - Uses the income-statement and cash-flow templates, with months across the columns
+  - Writes an audit in three parts only when the data is enough, and asks for the desired margin before suggesting a price
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses recording a sale or expense, moving stock, planning the month, and projecting fair cash
+
 ### revisar-habilidade
 - **Stability**: experimental
 - **Description**: Review a written skill, flag description and structure issues, and suggest tests from its purpose

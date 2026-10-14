@@ -45,6 +45,7 @@ flowchart LR
     reconhecer_imagem["reconhecer-imagem"]
     registrar_ciclo_do_ativo["registrar-ciclo-do-ativo"]
     resolver_comentarios_de_revisao["resolver-comentarios-de-revisao"]
+    revisar_financas["revisar-financas"]
     revisar_habilidade["revisar-habilidade"]
   end
   avaliar_atualizacoes_de_dependencia --> criar_commit
@@ -89,6 +90,7 @@ flowchart LR
   definir_lancamento --> definir_ativo_imobilizado
   definir_lancamento --> gerenciar_estoque
   definir_lancamento --> lancar_despesa
+  definir_lancamento --> revisar_financas
   definir_perfil_social --> definir_grafia
   definir_perfil_social --> definir_pessoa
   definir_perfil_social --> identificar_duplicata
@@ -145,6 +147,8 @@ flowchart LR
   resolver_comentarios_de_revisao --> criar_commit
   resolver_comentarios_de_revisao --> criar_pull_request
   resolver_comentarios_de_revisao --> evoluir_habilidade
+  revisar_financas --> definir_lancamento
+  revisar_financas --> gerenciar_estoque
   revisar_habilidade --> criar_habilidade
   revisar_habilidade --> descrever_habilidade_ou_schema
   revisar_habilidade --> evoluir_habilidade
