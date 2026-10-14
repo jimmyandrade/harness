@@ -15,6 +15,7 @@ flowchart LR
     comunicar_novidade_do_produto["comunicar-novidade-do-produto"]
     criar_commit["criar-commit"]
     criar_habilidade["criar-habilidade"]
+    criar_ideia_de_conteudo["criar-ideia-de-conteudo"]
     criar_oportunidade["criar-oportunidade"]
     criar_pull_request["criar-pull-request"]
     definir_data_significativa["definir-data-significativa"]
