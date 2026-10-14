@@ -17,6 +17,7 @@ from __future__ import annotations
 import importlib.util
 import json
 import os
+import re
 import sys
 from pathlib import Path
 
@@ -98,12 +99,40 @@ def check(root: Path) -> list[str]:
     return errors
 
 
+def error_line(root: Path, error: str) -> tuple[str, int]:
+    """The file an error names and the line of the field or plugin it is about, or line 1."""
+    relative, _, message = error.partition(": ")
+    path = root / relative
+    if not path.is_file():
+        return relative, 1
+    lines = path.read_text(encoding="utf-8").splitlines()
+    field = re.search(r"`([^`]+)`", message)
+    plugin = re.match(r"plugin (\S+) has source", message)
+    needle = f'"{field.group(1)}"' if field else f'"name": "{plugin.group(1)}"' if plugin else None
+    if needle:
+        for index, line in enumerate(lines):
+            if needle in line:
+                return relative, index + 1
+    return relative, 1
+
+
+def annotate(root: Path, error: str) -> None:
+    """In GitHub Actions, an error annotation, which a pull request shows inline at that line."""
+    if os.environ.get("GITHUB_ACTIONS") != "true":
+        return
+    relative, line = error_line(root, error)
+    escape = lambda value: value.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
+    file = escape(relative).replace(":", "%3A").replace(",", "%2C")
+    print(f"::error file={file},line={line},title=Plugin manifests::{escape(error)}")
+
+
 def main() -> int:
     parameters = load_parameters()
     root = parameters.project_root(Path(os.environ.get("HARNESS_ROOT") or Path.cwd()).resolve())
     errors = check(root)
     for error in errors:
         print(error, file=sys.stderr)
+        annotate(root, error)
     return 1 if errors else 0
 
 

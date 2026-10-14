@@ -2,11 +2,15 @@
 
 from __future__ import annotations
 
+import contextlib
 import importlib.util
+import io
+import os
 import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 HERE = Path(__file__).resolve().parent
 spec = importlib.util.spec_from_file_location("skill_graph", HERE / "skill-graph.py")
@@ -137,6 +141,24 @@ class CoreOnlyProjectTest(unittest.TestCase):
             )
             self.assertEqual(result.returncode, 0, result.stderr)
 
+
+class AnnotationTest(unittest.TestCase):
+    def test_the_first_different_line_is_reported(self) -> None:
+        self.assertEqual(graph.first_difference("a\nb\nc\n", "a\nx\nc\n"), 2)
+        self.assertEqual(graph.first_difference("a\n", "a\nb\n"), 2)
+        self.assertEqual(graph.first_difference("", "a\n"), 1)
+
+    def test_github_actions_gets_an_inline_annotation(self) -> None:
+        out = io.StringIO()
+        with mock.patch.dict(os.environ, {"GITHUB_ACTIONS": "true"}), contextlib.redirect_stdout(out):
+            graph.annotate(graph.README, 3, "README is out of date")
+        self.assertEqual(out.getvalue().strip(), "::error file=.agents/skills/README.md,line=3,title=Skill graph::README is out of date")
+
+    def test_outside_github_actions_there_is_no_annotation(self) -> None:
+        out = io.StringIO()
+        with mock.patch.dict(os.environ, {"GITHUB_ACTIONS": ""}), contextlib.redirect_stdout(out):
+            graph.annotate(graph.README, 3, "message")
+        self.assertEqual(out.getvalue(), "")
 
 if __name__ == "__main__":
     unittest.main()
