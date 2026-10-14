@@ -109,6 +109,25 @@ How these skills relate is in `README.md`, in this folder.
   - [ ] Instructions over the body token limit end under it, with every moved passage reachable from its destination
   - [ ] A parameter added for two skills lands in `Global` under the exact key the skills read
 
+### definir-grupo-de-oportunidades
+- **Stability**: experimental
+- **Description**: Create, review, or correct the canonical group of an opportunity
+- **Properties**:
+  - Lives at `.agents/skills/definir-grupo-de-oportunidades/SKILL.md`
+  - Reads `Considerar grupos de oportunidades` from the project instructions, and with `não` says the business does not use groups and stops
+  - Reads the group list, the opportunity list, and their property names from the data mapping of the project, and stops before creating when the group title or the edition group is missing from it
+  - Keeps the group title free of year, edition number, and date
+  - Searches title, canonical name, aliases, organizer, venue, profile, and event family before creating a group, and asks when the match is uncertain
+  - Puts recurring workshops of one organizer under one group, and leaves a program with its own audience in its own group
+  - Relates an official social profile on the group
+  - Turns a dateless page in the opportunity list into a group, and archives that page only after the stable facts are copied
+  - Links the dated editions that have no group, for a business that starts considering groups
+  - After linking an edition, checks for a duplicate group, relinks to the canonical one, merges useful data, and asks before archiving the duplicate
+  - Keeps a notes block on the group intact, and lists at the end each value that has no property to go to
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses registering the edition, checking whether the edition exists, organizing the participation, registering someone, creating a task, and reading an image
+
 ### descrever-habilidade-ou-schema
 - **Stability**: experimental
 - **Description**: Write or correct a skill or schema description, and test whether a skill description triggers, even when the person does not say description
