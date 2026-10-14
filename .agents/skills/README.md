@@ -24,6 +24,7 @@ flowchart LR
     definir_tarefa["definir-tarefa"]
     descrever_habilidade_ou_schema["descrever-habilidade-ou-schema"]
     evoluir_habilidade["evoluir-habilidade"]
+    identificar_duplicata["identificar-duplicata"]
     medir_habilidade["medir-habilidade"]
     procurar_data_significativa["procurar-data-significativa"]
     procurar_email["procurar-email"]
@@ -66,6 +67,7 @@ flowchart LR
   evoluir_habilidade --> medir_habilidade
   evoluir_habilidade --> publicar_habilidade
   evoluir_habilidade --> revisar_habilidade
+  identificar_duplicata --> definir_data_significativa
   medir_habilidade --> evoluir_habilidade
   procurar_data_significativa --> definir_data_significativa
   procurar_email --> procurar_inscricao
