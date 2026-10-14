@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.5.1"
+  version: "0.6.0"
   related:
     - definir-data-significativa
 ---
@@ -14,14 +14,15 @@ metadata:
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `País do calendário` vazio quer dizer que você pergunta o país antes de seguir a URL do calendário.
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Fontes de calendário` é uma lista. Cada fonte traz a URL e o código do país que aquele site usa, porque cada site tem o seu código. Código vazio numa URL com `{country}` quer dizer que você pergunta o código antes de seguir essa fonte.
 
 ```yaml
 "Formato da data com dia da semana": "terça-feira, 01/09/2026"
 "Título do evento anual": "nome do evento ano"
-"URL do calendário": "https://www.timeanddate.com/calendar/?year={year}&country={country}"
-"País do calendário": ""
-"Uso da URL do calendário": "a que o Notion costuma utilizar, sem se restringir a ela"
+"Fontes de calendário":
+  - "URL": "https://www.timeanddate.com/calendar/?year={year}&country={country}"
+    "Código do país": ""
+"Uso das fontes de calendário": "as que o Notion costuma utilizar, na ordem da lista, sem se restringir a elas"
 ```
 
 ## Instruções
@@ -48,7 +49,7 @@ Um registro com o mesmo nome: diga quando cai, no formato da data com dia da sem
 
 Vários anos ou vários registros parecidos: mostre o evento, a data e o link de cada um. Não escolha. Não responda com uma data só.
 
-Nenhum: diga que não está na lista de datas significativas. Outro evento não conta como este. Na mesma resposta, busque a data. Siga o uso da URL do calendário. `{year}` é o ano que a pessoa nomeou. Sem ano no pedido, use o ano corrente e diga qual ano a página cobre. `{country}` é o país do calendário. Sem o país do calendário, pergunte. Marque a data como vinda da web, no formato da data com dia da semana. A data da web não é o registro. Não invente a data. Não crie. Não narre a busca. Não nomeie a habilidade.
+Nenhum: diga que não está na lista de datas significativas. Outro evento não conta como este. Na mesma resposta, busque a data. Siga o uso das fontes de calendário. `{year}` é o ano que a pessoa nomeou. Sem ano no pedido, use o ano corrente e diga qual ano a página cobre. `{country}` é o código do país daquela fonte. Fonte com `{country}` e sem o código: pergunte. Marque a data como vinda da web, no formato da data com dia da semana. A data da web não é o registro. Não invente a data. Não crie. Não narre a busca. Não nomeie a habilidade.
 
 ### Passo 6
 
@@ -93,7 +94,7 @@ Se você só listar o evento, a data, a categoria e o método da busca, a pessoa
 Se você só disser que não está cadastrada, a pessoa fica sem a data.
 
 1. Diga que não está na lista de datas significativas.
-2. Busque na mesma resposta. Siga o uso da URL do calendário. `{year}` é o ano nomeado, ou o ano corrente. `{country}` é o país do calendário.
+2. Busque na mesma resposta. Siga o uso das fontes de calendário. `{year}` é o ano nomeado, ou o ano corrente. `{country}` é o código do país daquela fonte.
 3. A data da web não é o registro. Não crie.
 
 ### Criar na mesma habilidade
@@ -113,7 +114,7 @@ O registro traz o evento e a data no formato da data com dia da semana, com o li
 
 ### Quando será essa data?
 
-Ela não está na lista de datas significativas. Outro evento não conta como este. Busquei na web e segui o uso da URL do calendário. Marquei a data como vinda da web. Não criei o registro.
+Ela não está na lista de datas significativas. Outro evento não conta como este. Busquei na web e segui o uso das fontes de calendário. Marquei a data como vinda da web. Não criei o registro.
 
 ### a fonte diz segunda-feira, 01/09/2026
 
@@ -124,7 +125,7 @@ Ela não está na lista de datas significativas. Outro evento não conta como es
 - A lista de datas significativas não está no workspace conectado: pare.
 - Dois anos do mesmo evento: mostre os dois. Não escolha.
 - Data vazia: mostre a página e diga que a data está vazia. Não invente.
-- Nenhum registro: diga que não está na lista e busque na mesma resposta. Siga o uso da URL do calendário. A data da web não é o registro. Não crie.
+- Nenhum registro: diga que não está na lista e busque na mesma resposta. Siga o uso das fontes de calendário. A data da web não é o registro. Não crie.
 - O pedido é cadastrar, revisar ou alterar: pare e siga `definir-data-significativa`.
 - O pedido é saber o dia ou a semana: pare. É outra habilidade.
 - O pedido é criar ou alterar o evento na agenda: pare. É outra habilidade.
@@ -137,7 +138,8 @@ Ela não está na lista de datas significativas. Outro evento não conta como es
 - A data numérica parece bastar. A resposta leva o dia da semana, calculado com a data, o horário e o fuso. O campo estruturado continua válido.
 - A ficha e o relato da busca parecem a resposta. A pessoa quer a data do registro e o planejamento que as observações já trazem. A resposta não nomeia a habilidade.
 - Um nome de data real parece regra. Fora dos exemplos, a habilidade vale para qualquer evento. O fato fica no data source.
-- A ausência na lista parece o fim da resposta. Sem o registro, a busca vem na mesma resposta. Siga o uso da URL do calendário. A data da web não vira registro.
+- A ausência na lista parece o fim da resposta. Sem o registro, a busca vem na mesma resposta. Siga o uso das fontes de calendário. A data da web não vira registro.
+- O código do país parece valer para qualquer site. Cada fonte de calendário tem o seu código. Use o código da fonte que você está seguindo.
 
 ## Scripts disponíveis
 
