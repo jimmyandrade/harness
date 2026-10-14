@@ -37,6 +37,7 @@ flowchart LR
     procurar_oportunidade["procurar-oportunidade"]
     procurar_tarefa["procurar-tarefa"]
     publicar_habilidade["publicar-habilidade"]
+    reconhecer_imagem["reconhecer-imagem"]
     resolver_comentarios_de_revisao["resolver-comentarios-de-revisao"]
     revisar_habilidade["revisar-habilidade"]
   end
@@ -111,6 +112,10 @@ flowchart LR
   publicar_habilidade --> criar_commit
   publicar_habilidade --> criar_pull_request
   publicar_habilidade --> evoluir_habilidade
+  reconhecer_imagem --> criar_oportunidade
+  reconhecer_imagem --> definir_grafia
+  reconhecer_imagem --> definir_inscricao
+  reconhecer_imagem --> procurar_oportunidade
   resolver_comentarios_de_revisao --> criar_commit
   resolver_comentarios_de_revisao --> criar_pull_request
   resolver_comentarios_de_revisao --> evoluir_habilidade
