@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.23.1](https://github.com/jimmyandrade/harness/compare/v0.23.0...v0.23.1) (2026-10-14)
+
+
+### Bug Fixes
+
+* do not crash check-skill on a staged binary file ([#143](https://github.com/jimmyandrade/harness/issues/143)) ([71f9df3](https://github.com/jimmyandrade/harness/commit/71f9df3754b4bc97cf93cb4000ccd21caef812ee))
+
 ## [0.23.0](https://github.com/jimmyandrade/harness/compare/v0.22.0...v0.23.0) (2026-10-14)
 
 
