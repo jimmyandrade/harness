@@ -19,6 +19,8 @@ Subjects follow [Conventional Commits](https://www.conventionalcommits.org/): `t
 | `chore` | Upkeep that is none of the above |
 | `ci` | CI and the actions under `.github/actions/` |
 
+Branches are named `type/short-description`, with one of these types and an ASCII kebab-case description, such as `feat/build-on-install`. A branch a tool created with another prefix, such as `claude/` or `cursor/`, is renamed before the first push. `criar-commit` and `criar-pull-request` follow the same rule in every project.
+
 ## CI
 
 The workflow is `.github/workflows/ci.yml`. It runs on every pull request and on every push to `main`, on `ubuntu-26.04`. A push to another branch does not run it, so a pull request runs the checks once. It checks out the full history, runs the `check-skill` action of this repository against itself, runs every `.agents/scripts/*/test_*.py` and `.agents/skills/*/scripts/test_*.py` with the checker's own Python, typechecks, and runs `npm test`.

@@ -3,7 +3,7 @@ name: criar-commit
 description: Use essa habilidade sempre que terminar um trabalho que mudou o repositório ou for commitar, separar commits ou escrever a mensagem, mesmo sem dizer commit. NÃO use para push, abrir PR, rebase nem merge (use criar-pull-request).
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.5.0"
   notion: "false"
 ---
 
@@ -33,7 +33,7 @@ Se `Commitar sem perguntar` for `sim`, commite ao terminar um trabalho que mudou
 
 ### Passo 2
 
-Se `Commit direto na base` for `não` e a branch atual for a `Branch base`, crie uma branch a partir da `Branch base` remota atualizada, sem rastrear a base.
+Se `Commit direto na base` for `não` e a branch atual for a `Branch base`, crie uma branch a partir da `Branch base` remota atualizada, sem rastrear a base. O nome é `<tipo>/<descrição>`, com o tipo do Conventional Commits do commit e a descrição em ASCII kebab-case. Branch que a ferramenta criou com outro prefixo, como `claude/`, é renomeada para esse padrão antes do commit.
 
 ### Passo 3
 
@@ -116,6 +116,7 @@ Um commit `fix:` com o assunto dizendo o porquê da troca do texto. Sem teste no
 
 - `Comando de testes`, `Comando de build` e `Comando de lint dos arquivos tocados`: verificações do Passo 4.
 - `git fetch origin && git switch --no-track -c <branch> origin/<Branch base>`: Passo 2.
+- `git branch -m <tipo>/<descrição>`: renomeia a branch no Passo 2.
 - `git add <caminho>` e `git diff --cached --stat`: Passo 5.
 
 1. Rode a criação da branch se precisar, as verificações, o lint dos arquivos tocados, o índice por caminho e o commit.
