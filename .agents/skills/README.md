@@ -54,6 +54,7 @@ flowchart LR
     resolver_comentarios_de_revisao["resolver-comentarios-de-revisao"]
     revisar_financas["revisar-financas"]
     revisar_habilidade["revisar-habilidade"]
+    sincronizar_cronograma["sincronizar-cronograma"]
   end
   avaliar_atualizacoes_de_dependencia --> criar_commit
   avaliar_atualizacoes_de_dependencia --> criar_pull_request
@@ -78,6 +79,7 @@ flowchart LR
   definir_agenda --> definir_reserva
   definir_agenda --> definir_tipo_do_evento
   definir_agenda --> procurar_agenda
+  definir_agenda --> sincronizar_cronograma
   definir_ativo_imobilizado --> definir_empresa
   definir_ativo_imobilizado --> gerenciar_estoque
   definir_ativo_imobilizado --> identificar_duplicata
@@ -88,6 +90,7 @@ flowchart LR
   definir_convidado --> definir_agenda
   definir_convidado --> definir_inscricao
   definir_convidado --> procurar_agenda
+  definir_convidado --> sincronizar_cronograma
   definir_data_significativa --> procurar_data_significativa
   definir_empresa --> definir_grafia
   definir_empresa --> definir_perfil_social
@@ -123,6 +126,7 @@ flowchart LR
   definir_planejamento_financeiro --> gerenciar_estoque
   definir_planejamento_financeiro --> revisar_financas
   definir_reserva --> definir_agenda
+  definir_reserva --> sincronizar_cronograma
   definir_tarefa --> definir_grafia
   definir_tarefa --> procurar_tarefa
   definir_tipo_do_evento --> criar_oportunidade
@@ -191,4 +195,8 @@ flowchart LR
   revisar_habilidade --> descrever_habilidade_ou_schema
   revisar_habilidade --> evoluir_habilidade
   revisar_habilidade --> publicar_habilidade
+  sincronizar_cronograma --> definir_agenda
+  sincronizar_cronograma --> definir_convidado
+  sincronizar_cronograma --> definir_jornada_de_producao
+  sincronizar_cronograma --> procurar_agenda
 ```

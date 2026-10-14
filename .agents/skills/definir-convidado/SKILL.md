@@ -5,11 +5,12 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.2.1"
   related:
     - definir-agenda
     - definir-inscricao
     - procurar-agenda
+    - sincronizar-cronograma
 ---
 
 # Definir convidado
