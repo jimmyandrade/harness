@@ -38,6 +38,7 @@ flowchart LR
     lancar_despesa["lancar-despesa"]
     medir_habilidade["medir-habilidade"]
     mesclar_registro["mesclar-registro"]
+    procurar_agenda["procurar-agenda"]
     procurar_data_significativa["procurar-data-significativa"]
     procurar_email["procurar-email"]
     procurar_inscricao["procurar-inscricao"]
@@ -68,6 +69,7 @@ flowchart LR
   criar_pull_request --> resolver_comentarios_de_revisao
   definir_agenda --> definir_data_significativa
   definir_agenda --> definir_grafia
+  definir_agenda --> procurar_agenda
   definir_ativo_imobilizado --> definir_empresa
   definir_ativo_imobilizado --> gerenciar_estoque
   definir_ativo_imobilizado --> identificar_duplicata
@@ -132,6 +134,11 @@ flowchart LR
   mesclar_registro --> definir_grafia
   mesclar_registro --> definir_perfil_social
   mesclar_registro --> identificar_duplicata
+  procurar_agenda --> criar_oportunidade
+  procurar_agenda --> definir_agenda
+  procurar_agenda --> definir_data_significativa
+  procurar_agenda --> definir_grupo_de_oportunidades
+  procurar_agenda --> procurar_oportunidade
   procurar_data_significativa --> definir_data_significativa
   procurar_email --> definir_grafia
   procurar_email --> procurar_inscricao
