@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.28.0](https://github.com/jimmyandrade/harness/compare/v0.27.0...v0.28.0) (2026-10-14)
+
+
+### Features
+
+* **definir-ativo-imobilizado:** move the skill to the core ([#174](https://github.com/jimmyandrade/harness/issues/174)) ([620de08](https://github.com/jimmyandrade/harness/commit/620de083565bf1fb871ebcf61fb00b45673c50a1))
+* **definir-lancamento:** move the skill to the core ([#172](https://github.com/jimmyandrade/harness/issues/172)) ([5624d9d](https://github.com/jimmyandrade/harness/commit/5624d9dc2e0d8480083a20d41f4616cfc0f3beb5))
+* **definir-planejamento-financeiro:** move the skill to the core ([#177](https://github.com/jimmyandrade/harness/issues/177)) ([4bb4301](https://github.com/jimmyandrade/harness/commit/4bb43018b50d3c7c47afa8288974589153b53dc8))
+* **gerenciar-estoque:** move the skill to the core ([#173](https://github.com/jimmyandrade/harness/issues/173)) ([8af3d08](https://github.com/jimmyandrade/harness/commit/8af3d087be78888d50c5be1f373d29ee790720fa))
+* **lancar-despesa:** move the skill to the core ([#171](https://github.com/jimmyandrade/harness/issues/171)) ([89fb55c](https://github.com/jimmyandrade/harness/commit/89fb55c8e313dda2ea1df148486738c2aa2b7db2))
+* **registrar-ciclo-do-ativo:** move the skill to the core ([#175](https://github.com/jimmyandrade/harness/issues/175)) ([ddd7d54](https://github.com/jimmyandrade/harness/commit/ddd7d5404c91858a5bc6e7e40996011915f14bc2))
+* **revisar-financas:** move the skill to the core ([#179](https://github.com/jimmyandrade/harness/issues/179)) ([b1309f0](https://github.com/jimmyandrade/harness/commit/b1309f0a5e574cf0103d7af425c6a78d391ad858))
+
 ## [0.27.0](https://github.com/jimmyandrade/harness/compare/v0.26.0...v0.27.0) (2026-10-14)
 
 
