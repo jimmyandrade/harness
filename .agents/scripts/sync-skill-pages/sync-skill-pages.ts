@@ -258,8 +258,7 @@ function stringList(fields: Record<string, string | string[]>, key: string): str
   return value
 }
 
-export function parseSkill(text: string): SkillPage | null {
-  const [front, body] = splitFrontmatter(text)
+function frontmatterFields(front: string): Record<string, string | string[]> {
   const fields: Record<string, string | string[]> = {}
   let inMetadata = false
   let listKey: string | null = null
@@ -299,7 +298,21 @@ export function parseSkill(text: string): SkillPage | null {
       fields[name] = unquote(pieces.join(":").trim())
     }
   }
-  if (fields["metadata.notion"] === "false") return null
+  return fields
+}
+
+/** Why the sync leaves this skill out of Notion, or null when it publishes it. */
+export function skipReason(text: string): string | null {
+  const fields = frontmatterFields(splitFrontmatter(text)[0])
+  if (fields["metadata.notion"] === "false") return "stays in git"
+  if (fields["metadata.internal"] === "true") return "internal"
+  return null
+}
+
+export function parseSkill(text: string): SkillPage | null {
+  if (skipReason(text) !== null) return null
+  const [front, body] = splitFrontmatter(text)
+  const fields = frontmatterFields(front)
   const page: SkillPage = {
     name: typeof fields.name === "string" ? fields.name : "",
     description: typeof fields.description === "string" ? fields.description : "",
@@ -540,11 +553,13 @@ export async function publish(
       }
       throw error
     }
-    const page = parseSkill(text)
-    if (page === null) {
-      lines.push(`skip ${name}: stays in git`)
+    const reason = skipReason(text)
+    if (reason !== null) {
+      lines.push(`skip ${name}: ${reason}`)
       continue
     }
+    const page = parseSkill(text)
+    if (page === null) continue
     if (page.name !== name) throw new Error(`${name} frontmatter name is ${page.name}`)
     const previousName = previous[name]
     const current = await notion.findPage(mapping, page.name)
