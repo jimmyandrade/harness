@@ -1,7 +1,7 @@
 ---
 locale: en
 metadata:
-  version: "1.3.0"
+  version: "1.4.0"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -15,6 +15,7 @@ metadata:
       "Ícone das páginas no Notion": "magic-wand"
       "Cor do ícone das páginas no Notion": "gray"
       "Símbolo da pasta no macOS": "wand.and.sparkles"
+      "Considerar grupos de oportunidades": "sim"
 ---
 
 # Agent instructions
@@ -68,6 +69,8 @@ metadata:
 ## Data sources
 
 - Describe a data source with JSON Schema and a separate Notion mapping, as in `docs/adr/0001-describe-data-sources-with-json-schema.md`. Those files live in the business harness, not here.
+- A core skill that reads a business data source speaks of concepts, such as the edition title or the group of an edition. The mapping of each business binds them to its list and property names. A property the edition cannot exist without and that the mapping lacks stops the skill before it writes. A value for an optional property the mapping lacks is listed at the end, with a suggestion to add the property: the skill never creates schema and never writes that value into the page body.
+- `Considerar grupos de oportunidades` says whether the opportunity skills use groups. With `sim`, every edition belongs to exactly one group, and the checker fails when the opportunity mapping of the business, `.agents/mappings/oportunidades.notion.json`, does not bind `group`. With `não`, an edition has no group.
 - The glossary of a project stays in that project. The engine that reads and writes it is jimmyandrade/vocabulary, as ADR 0010 decides.
 
 ## Documents

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import importlib.util
+import json
 import os
 import subprocess
 import sys
@@ -341,3 +342,46 @@ class InstructionsVersionTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class OpportunityGroupTest(unittest.TestCase):
+    def setUp(self) -> None:
+        self.tmp = tempfile.TemporaryDirectory()
+        self.project = Path(self.tmp.name)
+        (self.project / ".agents" / "mappings").mkdir(parents=True)
+        self.checker = load_checker(self.project)
+        self.roots = [self.project, self.checker.CORE]
+
+    def tearDown(self) -> None:
+        self.tmp.cleanup()
+        os.environ.pop("HARNESS_ROOT", None)
+
+    def errors(self, parameters: str, properties: dict | None) -> list[str]:
+        text = f'---\nmetadata:\n  parameters:\n{parameters}---\n\n# Instruções\n'
+        (self.project / INSTRUCTIONS).write_text(text, encoding="utf-8")
+        mapping = self.project / ".agents" / "mappings" / "oportunidades.notion.json"
+        if properties is not None:
+            mapping.write_text(json.dumps({"properties": properties}), encoding="utf-8")
+        return [message for message, _ in self.checker.opportunity_group_errors(text, self.roots)]
+
+    def test_a_project_without_the_opportunity_mapping_passes(self) -> None:
+        self.assertEqual(self.errors('    "Global":\n      "Organização": "example"\n', None), [])
+
+    def test_the_default_sim_requires_the_group_in_the_mapping(self) -> None:
+        errors = self.errors('    "Global":\n      "Organização": "example"\n', {"opportunity": "Nome"})
+        self.assertEqual(len(errors), 1)
+        self.assertIn("does not map group", errors[0])
+
+    def test_a_mapped_group_passes(self) -> None:
+        self.assertEqual(self.errors('    "Global":\n      "Organização": "example"\n', {"group": "Grupo"}), [])
+
+    def test_nao_does_not_require_the_group(self) -> None:
+        parameters = '    "Global":\n      "Considerar grupos de oportunidades": "não"\n'
+        self.assertEqual(self.errors(parameters, {"opportunity": "Nome"}), [])
+
+    def test_sim_under_one_skill_requires_the_group(self) -> None:
+        parameters = (
+            '    "Global":\n      "Considerar grupos de oportunidades": "não"\n'
+            '    "criar-oportunidade":\n      "Considerar grupos de oportunidades": "sim"\n'
+        )
+        self.assertEqual(len(self.errors(parameters, {"opportunity": "Nome"})), 1)
