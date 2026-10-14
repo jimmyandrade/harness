@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.0](https://github.com/jimmyandrade/vocabulary/compare/v0.2.0...v0.3.0) (2026-10-14)
+
+
+### Features
+
+* build dist on install instead of committing it ([#11](https://github.com/jimmyandrade/vocabulary/issues/11)) ([3ecd54e](https://github.com/jimmyandrade/vocabulary/commit/3ecd54ee58f4a513e02227246e08fe45451445a9))
+* read the glossary from the command line and prefer it in the skills ([#12](https://github.com/jimmyandrade/vocabulary/issues/12)) ([1560123](https://github.com/jimmyandrade/vocabulary/commit/1560123339fb8aa6f9b50aaee1895e6aededd248))
+
 ## [0.2.0](https://github.com/jimmyandrade/vocabulary/compare/v0.1.0...v0.2.0) (2026-10-14)
 
 
