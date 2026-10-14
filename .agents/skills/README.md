@@ -20,6 +20,7 @@ flowchart LR
     definir_grupo_de_oportunidades["definir-grupo-de-oportunidades"]
     definir_inscricao["definir-inscricao"]
     definir_instrucoes_do_projeto["definir-instrucoes-do-projeto"]
+    definir_tarefa["definir-tarefa"]
     descrever_habilidade_ou_schema["descrever-habilidade-ou-schema"]
     evoluir_habilidade["evoluir-habilidade"]
     medir_habilidade["medir-habilidade"]
@@ -53,6 +54,7 @@ flowchart LR
   definir_inscricao --> procurar_oportunidade
   definir_instrucoes_do_projeto --> criar_habilidade
   definir_instrucoes_do_projeto --> evoluir_habilidade
+  definir_tarefa --> procurar_tarefa
   descrever_habilidade_ou_schema --> evoluir_habilidade
   descrever_habilidade_ou_schema --> publicar_habilidade
   descrever_habilidade_ou_schema --> revisar_habilidade
