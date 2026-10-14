@@ -87,7 +87,7 @@ How these skills relate is in `README.md`, in this folder.
   - Stops when procurar-oportunidade finds the same edition
   - Reads the opportunity list and its property names from the data mapping of the project, stops before creating when the title, the date, or the required group is missing from it, and lists at the end each value that has no property, with a suggestion to add it
   - Writes the title as edition name, date with the weekday, city, then group, and writes the interval on the edition date
-  - Rejects a date before `Ano mínimo da edição` when the project instructions set it
+  - Rejects a date before `Data mínima da edição`, which defaults to `Data de fundação do negócio`; both are YYYY-MM-DD in the project instructions, and both empty means no limit
   - With `Considerar grupos de oportunidades` at `sim`, links the edition to one existing group and leaves creating or correcting that group to definir-grupo-de-oportunidades; with `não`, registers the edition without a group
   - Puts edition-specific facts, such as place, hours, price, form, and vacancies, on the edition
   - Relates a profile on the edition only when that account belongs to that edition

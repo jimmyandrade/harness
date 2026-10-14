@@ -11,6 +11,7 @@ this harness, which holds the defaults.
 from __future__ import annotations
 
 import re
+from datetime import date
 from pathlib import Path
 
 import yaml
@@ -32,8 +33,10 @@ CHOICE_SETTINGS = {
     "Licença obrigatória": {"sim", "não"},
     "Considerar grupos de oportunidades": {"sim", "não"},
 }
+# A date setting is empty, for none, or a calendar date written YYYY-MM-DD.
+DATE_SETTINGS = {"Data de fundação do negócio", "Data mínima da edição"}
 VERSION = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$")
-SCRIPT_SETTINGS = INTEGER_SETTINGS | TEXT_SETTINGS | set(CHOICE_SETTINGS)
+SCRIPT_SETTINGS = INTEGER_SETTINGS | TEXT_SETTINGS | set(CHOICE_SETTINGS) | DATE_SETTINGS
 # A script setting that is also a parameter of a skill reads that skill's entry first.
 SETTING_SKILL = {
     "Palavras": "criar-habilidade",
@@ -212,6 +215,18 @@ def key_line(text: str, key: str) -> int | None:
     return None
 
 
+def is_date(value) -> bool:
+    if value == "":
+        return True
+    if not isinstance(value, str) or re.fullmatch(r"\d{4}-\d{2}-\d{2}", value) is None:
+        return False
+    try:
+        date.fromisoformat(value)
+    except ValueError:
+        return False
+    return True
+
+
 def setting_type_error(key: str, value) -> str | None:
     if key in INTEGER_SETTINGS and (not isinstance(value, int) or isinstance(value, bool) or value <= 0):
         return f'"{key}" must be a positive integer'
@@ -219,6 +234,8 @@ def setting_type_error(key: str, value) -> str | None:
         return f'"{key}" must be a non-empty text'
     if key in CHOICE_SETTINGS and value not in CHOICE_SETTINGS[key]:
         return f'"{key}" must be one of: ' + ", ".join(sorted(CHOICE_SETTINGS[key]))
+    if key in DATE_SETTINGS and not is_date(value):
+        return f'"{key}" must be empty or a date written YYYY-MM-DD'
     return None
 
 

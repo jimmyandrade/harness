@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.15.0"
+  version: "0.16.0"
   related:
     - procurar-oportunidade
     - definir-grupo-de-oportunidades
@@ -15,12 +15,13 @@ metadata:
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Considerar grupos de oportunidades` é `sim` ou `não`. `Ano mínimo da edição` vazio quer dizer sem limite.
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Considerar grupos de oportunidades` é `sim` ou `não`. As datas são AAAA-MM-DD. `Data mínima da edição` vazia vale a `Data de fundação do negócio`. As duas vazias: sem limite.
 
 ```yaml
 "Formato da data com dia da semana": "terça-feira, 01/09/2026"
 "Considerar grupos de oportunidades": "sim"
-"Ano mínimo da edição": ""
+"Data de fundação do negócio": ""
+"Data mínima da edição": ""
 ```
 
 ## Instruções
@@ -37,7 +38,7 @@ Confira o mapeamento antes de gravar. O título da edição e a data da edição
 
 ### Passo 3
 
-O título da edição começa pelo nome da edição, depois a data no formato da data com dia da semana, a cidade e, por fim, o grupo, quando há grupo. Não comece pelo grupo. Ano, número de edição e data entram nesse título quando separam uma data da outra. Dois dias entram os dois. A data da edição recebe o intervalo, com as horas. A data só no título não basta. Data anterior ao `Ano mínimo da edição` não entra.
+O título da edição começa pelo nome da edição, depois a data no formato da data com dia da semana, a cidade e, por fim, o grupo, quando há grupo. Não comece pelo grupo. Ano, número de edição e data entram nesse título quando separam uma data da outra. Dois dias entram os dois. A data da edição recebe o intervalo, com as horas. A data só no título não basta. Data anterior à `Data mínima da edição` não entra.
 
 ### Passo 4
 
@@ -115,7 +116,7 @@ Se você escrever a data só no título, a data da edição fica vazia.
 
 1. Grave o intervalo na propriedade, com as horas.
 2. O título também leva dia, mês e ano.
-3. Data anterior ao `Ano mínimo da edição` não entra.
+3. Data anterior à `Data mínima da edição` não entra.
 
 ### Cartaz no corpo
 
@@ -179,7 +180,7 @@ localidade só entra se a página já existe. Data e taxa ficaram vazias. A pend
 - `Considerar grupos de oportunidades` é `sim` e não há grupo: pare e passe para `definir-grupo-de-oportunidades`. Não crie o grupo aqui.
 - `Considerar grupos de oportunidades` é `não`: grave sem grupo e não chame `definir-grupo-de-oportunidades`.
 - O mapeamento não tem o título, a data ou, com `sim`, o grupo: pare antes de criar e diga qual.
-- A data é anterior ao `Ano mínimo da edição`: não grave. Pergunte.
+- A data é anterior à `Data mínima da edição`: não grave. Pergunte.
 - Dois dias com hora: a data da edição recebe o intervalo, com as horas. Cada data no texto leva o próprio dia da semana.
 - O texto não traz URL: o link de inscrição fica vazio.
 - A empresa ou a localidade não está na lista: pergunte. Não crie essa página aqui.
@@ -195,7 +196,7 @@ localidade só entra se a página já existe. Data e taxa ficaram vazias. A pend
 - O bloco de anotações parece rascunho que a limpeza apaga. Ele é evidência da pessoa. A propriedade recebe a cópia, e o bloco permanece.
 - Começar o título pelo grupo deixa as linhas iguais. O nome da edição vem primeiro.
 - A data numérica parece bastar. O título e a resposta levam o dia da semana, calculado com a data, o horário e o fuso. A data da edição continua um intervalo válido.
-- Data anterior ao `Ano mínimo da edição` parece válida. A propriedade não aceita.
+- Data anterior à `Data mínima da edição`, ou à fundação do negócio, parece válida. A propriedade não aceita.
 - "Link na bio" parece um endereço. Sem URL, o campo fica vazio.
 - Uma propriedade ausente parece pedir para ser criada. Esta habilidade não cria schema. Ela sugere.
 - Seleção, inscrição, edital e chamada parecem outra oportunidade. São conteúdo do grupo ou da edição.

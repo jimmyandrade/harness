@@ -65,6 +65,13 @@ class ValidateTest(unittest.TestCase):
             self.errors(block('"Global":\n  "Considerar grupos de oportunidades": "planejado"\n')),
             ['"Considerar grupos de oportunidades" must be one of: não, sim'],
         )
+        self.assertEqual(self.errors(block('"Global":\n  "Data de fundação do negócio": "2026-03-15"\n')), [])
+        self.assertEqual(self.errors(block('"Global":\n  "Data de fundação do negócio": ""\n')), [])
+        for value in ('"2026"', '"15/03/2026"', '"2026-02-30"', "2026-03-15"):
+            self.assertEqual(
+                self.errors(block(f'"Global":\n  "Data mínima da edição": {value}\n')),
+                ['"Data mínima da edição" must be empty or a date written YYYY-MM-DD'],
+            )
 
 
     def test_should_reject_flow_style(self) -> None:
