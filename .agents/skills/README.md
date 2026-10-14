@@ -26,6 +26,7 @@ flowchart LR
     procurar_email["procurar-email"]
     procurar_inscricao["procurar-inscricao"]
     procurar_oportunidade["procurar-oportunidade"]
+    procurar_tarefa["procurar-tarefa"]
     publicar_habilidade["publicar-habilidade"]
     resolver_comentarios_de_revisao["resolver-comentarios-de-revisao"]
     revisar_habilidade["revisar-habilidade"]
@@ -66,6 +67,7 @@ flowchart LR
   procurar_inscricao --> procurar_email
   procurar_oportunidade --> criar_oportunidade
   procurar_oportunidade --> definir_inscricao
+  procurar_tarefa --> procurar_inscricao
   publicar_habilidade --> criar_commit
   publicar_habilidade --> criar_pull_request
   publicar_habilidade --> evoluir_habilidade

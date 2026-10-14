@@ -278,6 +278,21 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses creating the opportunity, organizing the participation, creating a task, and reading an image
 
+### procurar-tarefa
+- **Stability**: experimental
+- **Description**: Check whether a task about a subject already exists before opening another
+- **Properties**:
+  - Lives at `.agents/skills/procurar-tarefa/SKILL.md`
+  - Searches a fragment of the subject in the task list the person supplies, with a direct query and a semantic search
+  - When the person does not name a list, reads the task list and its property names from the data mapping of the project, in the connected workspace
+  - When the task is absent, says so for that list, mentions a close note, and asks before a workspace-wide search
+  - When the subject is a ticket or a registration, follows procurar-inscricao and does not say whether the withdrawal happened
+  - Says which fragment it used and does not mention a task that only shares a word
+  - Does not create, edit, or complete the task, and does not search notes, meetings, or pages outside that list
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses creating, editing, or completing the task, and searching outside the task list
+
 ### publicar-habilidade
 - **Stability**: experimental
 - **Description**: Publish a skill change from Notion through GitHub, and follow the project's commit flow from Cursor, Claude, or the repository
