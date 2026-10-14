@@ -32,6 +32,7 @@ flowchart LR
     definir_planejamento_financeiro["definir-planejamento-financeiro"]
     definir_reserva["definir-reserva"]
     definir_tarefa["definir-tarefa"]
+    definir_tipo_do_evento["definir-tipo-do-evento"]
     descrever_habilidade_ou_schema["descrever-habilidade-ou-schema"]
     evoluir_habilidade["evoluir-habilidade"]
     gerenciar_estoque["gerenciar-estoque"]
@@ -71,6 +72,7 @@ flowchart LR
   definir_agenda --> definir_data_significativa
   definir_agenda --> definir_grafia
   definir_agenda --> definir_reserva
+  definir_agenda --> definir_tipo_do_evento
   definir_agenda --> procurar_agenda
   definir_ativo_imobilizado --> definir_empresa
   definir_ativo_imobilizado --> gerenciar_estoque
@@ -114,6 +116,14 @@ flowchart LR
   definir_reserva --> definir_agenda
   definir_tarefa --> definir_grafia
   definir_tarefa --> procurar_tarefa
+  definir_tipo_do_evento --> criar_oportunidade
+  definir_tipo_do_evento --> definir_agenda
+  definir_tipo_do_evento --> definir_grupo_de_oportunidades
+  definir_tipo_do_evento --> definir_reserva
+  definir_tipo_do_evento --> definir_tarefa
+  definir_tipo_do_evento --> lancar_despesa
+  definir_tipo_do_evento --> procurar_agenda
+  definir_tipo_do_evento --> procurar_oportunidade
   descrever_habilidade_ou_schema --> evoluir_habilidade
   descrever_habilidade_ou_schema --> publicar_habilidade
   descrever_habilidade_ou_schema --> revisar_habilidade
