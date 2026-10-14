@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.20.0](https://github.com/jimmyandrade/harness/compare/v0.19.0...v0.20.0) (2026-10-14)
+
+
+### Features
+
+* move vocabulary pins with Renovate as soon as a release exists ([#129](https://github.com/jimmyandrade/harness/issues/129)) ([7a6a1b0](https://github.com/jimmyandrade/harness/commit/7a6a1b0c0db2f8523c1f08be2eec9f449cdb5b9f))
+
 ## [0.19.0](https://github.com/jimmyandrade/harness/compare/v0.18.2...v0.19.0) (2026-10-13)
 
 
