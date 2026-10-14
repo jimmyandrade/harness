@@ -1,24 +1,24 @@
 ---
 name: procurar-oportunidade
-description: Use essa habilidade sempre que for saber se uma oportunidade já existe, mesmo sem dizer oportunidade ou duplicata. Um pedido confirmado, com a edição achada, segue a habilidade que o projeto indicar. NÃO use para cadastrar a oportunidade, organizar a participação, criar a tarefa, nem reconhecer o texto de uma imagem.
+description: Use essa habilidade sempre que for saber se uma oportunidade já existe, mesmo sem dizer oportunidade ou duplicata. Um pedido confirmado, com a edição achada, segue a inscrição. NÃO use para cadastrar a oportunidade, organizar a participação, criar a tarefa, nem reconhecer o texto de uma imagem.
 allowed-tools: notion:notion-ai-search notion:notion-fetch
 compatibility: Precisa de internet. A busca semântica na lista de oportunidades usa notion-ai-search no servidor notion.
 metadata:
   author: jimmyandrade
-  version: "0.5.1"
+  version: "0.6.0"
   related:
     - criar-oportunidade
+    - definir-inscricao
 ---
 
 # Procurar oportunidade
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Habilidade do pedido confirmado` vazia quer dizer que a resposta para na edição achada.
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo.
 
 ```yaml
 "Formato da data com dia da semana": "terça-feira, 01/09/2026"
-"Habilidade do pedido confirmado": ""
 ```
 
 ## Instruções
@@ -37,7 +37,7 @@ Leia cada página encontrada. A mesma edição tem o nome, ou uma variação, e 
 
 ### Passo 4
 
-Uma edição com o mesmo nome e a mesma data: ela existe. Mostre o título, a data e o link. Se entrou por uma variação, diga qual. Na mesma resposta, diga o pedaço buscado e que usou as duas buscas. Se o texto é um pedido realizado ou confirmado e as instruções do projeto indicam a `Habilidade do pedido confirmado`, siga essa habilidade nessa mesma resposta. Não pare na edição. Sem essa habilidade, pare na edição achada.
+Uma edição com o mesmo nome e a mesma data: ela existe. Mostre o título, a data e o link. Se entrou por uma variação, diga qual. Na mesma resposta, diga o pedaço buscado e que usou as duas buscas. Se o texto é um pedido realizado ou confirmado, siga `definir-inscricao` nessa mesma resposta. Não pare na edição.
 
 Várias que podem ser a edição: mostre título, data e link de cada uma. Não escolha. Não responda sim.
 
@@ -133,7 +133,6 @@ a oportunidade não existe na lista de oportunidades. Mostrei o link da lista. B
 - A pessoa não passa a lista: use a do mapeamento, no workspace conectado. Não peça.
 - A pessoa indicou outra lista e ela não está no workspace conectado: pare e peça a lista certa.
 - Nada igual nessa lista: diga que não existe. Não crie. Não busque o workspace inteiro.
-- Pedido confirmado e nenhuma `Habilidade do pedido confirmado` nas instruções: pare na edição achada.
 - O dia da semana da fonte não bate com a data: sinalize. Não grave.
 
 ## Pegadinhas
@@ -143,7 +142,7 @@ a oportunidade não existe na lista de oportunidades. Mostrei o link da lista. B
 - "Uma oportunidade para conhecer novidades" parece o título. É a legenda.
 - Uma variação nas variações de nome parece apelido solto. É a mesma oportunidade.
 - Não achar parece licença para cadastrar. Esta habilidade para na resposta. Cadastrar fica com `criar-oportunidade`.
-- Achar a edição parece o fim de um pedido confirmado. Quando as instruções do projeto indicam a `Habilidade do pedido confirmado`, ela segue na mesma resposta.
+- Achar a edição parece o fim de um pedido confirmado. A inscrição segue `definir-inscricao` na mesma resposta.
 - Grupo vazio parece pendência desta busca. Esta habilidade não pede o grupo e não preenche.
 - A data numérica parece bastar. A resposta leva o dia da semana, calculado com a data, o horário e o fuso.
 
