@@ -429,6 +429,23 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses recording a sale or expense, building the income statement, moving stock, and projecting fair cash
 
+### definir-recurso-de-aprendizado
+- **Stability**: experimental
+- **Description**: Keep a class in the list of learning resources and on Google Calendar, linked to the opportunity
+- **Properties**:
+  - Lives at `.agents/skills/definir-recurso-de-aprendizado/SKILL.md`
+  - Stores the class as a page in the list of learning resources, linked to the opportunity, for the transcription and the notes
+  - Keeps that page in sync with the event on Google Calendar, which is probably connected through Notion Calendar
+  - Searches the calendar by title variations before saying the resource is not registered
+  - Creates or updates the page from the event's date, times, title, location, meeting link, and description
+  - Links the page to the canonical opportunity or group when the relation is clear
+  - A class may be online or in person, and the difference waits for what the person teaches
+  - Leaves the day or week lookup to procurar-agenda, and the calendar event to definir-agenda
+  - Writes the weekday beside each class date in replies and descriptions, after checking it against the event date, time, and time zone, and keeps Data e hora as a valid start and end
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses the day or week lookup, creating or changing the Google Calendar event, registering the opportunity, organizing the contact point, and creating the task
+
 ### definir-reserva
 - **Stability**: experimental
 - **Description**: Keep a reservation, a provisional block, a pending event, or a reminder provisional until participation is explicitly confirmed

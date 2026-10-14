@@ -33,6 +33,7 @@ flowchart LR
     definir_perfil_social["definir-perfil-social"]
     definir_pessoa["definir-pessoa"]
     definir_planejamento_financeiro["definir-planejamento-financeiro"]
+    definir_recurso_de_aprendizado["definir-recurso-de-aprendizado"]
     definir_reserva["definir-reserva"]
     definir_tarefa["definir-tarefa"]
     definir_tipo_do_evento["definir-tipo-do-evento"]
@@ -135,6 +136,8 @@ flowchart LR
   definir_planejamento_financeiro --> definir_lancamento
   definir_planejamento_financeiro --> gerenciar_estoque
   definir_planejamento_financeiro --> revisar_financas
+  definir_recurso_de_aprendizado --> definir_agenda
+  definir_recurso_de_aprendizado --> procurar_agenda
   definir_reserva --> definir_agenda
   definir_reserva --> definir_agenda_de_popstar
   definir_reserva --> revisar_uso_do_tempo
@@ -145,6 +148,7 @@ flowchart LR
   definir_tipo_do_evento --> definir_agenda
   definir_tipo_do_evento --> definir_agenda_de_popstar
   definir_tipo_do_evento --> definir_grupo_de_oportunidades
+  definir_tipo_do_evento --> definir_recurso_de_aprendizado
   definir_tipo_do_evento --> definir_reserva
   definir_tipo_do_evento --> definir_tarefa
   definir_tipo_do_evento --> lancar_despesa
@@ -178,6 +182,7 @@ flowchart LR
   procurar_agenda --> definir_agenda_de_popstar
   procurar_agenda --> definir_data_significativa
   procurar_agenda --> definir_grupo_de_oportunidades
+  procurar_agenda --> definir_recurso_de_aprendizado
   procurar_agenda --> procurar_oportunidade
   procurar_agenda --> revisar_uso_do_tempo
   procurar_data_significativa --> definir_data_significativa
