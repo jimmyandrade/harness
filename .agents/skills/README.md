@@ -24,6 +24,7 @@ flowchart LR
     descrever_habilidade_ou_schema["descrever-habilidade-ou-schema"]
     evoluir_habilidade["evoluir-habilidade"]
     medir_habilidade["medir-habilidade"]
+    procurar_data_significativa["procurar-data-significativa"]
     procurar_email["procurar-email"]
     procurar_inscricao["procurar-inscricao"]
     procurar_oportunidade["procurar-oportunidade"]
