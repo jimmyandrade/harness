@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.21.0](https://github.com/jimmyandrade/harness/compare/v0.20.0...v0.21.0) (2026-10-14)
+
+
+### Features
+
+* name branches after the Conventional Commits type ([#131](https://github.com/jimmyandrade/harness/issues/131)) ([d36c0d5](https://github.com/jimmyandrade/harness/commit/d36c0d5af6c23fca731b398aa7e6909b4dbfdad2))
+
 ## [0.20.0](https://github.com/jimmyandrade/harness/compare/v0.19.0...v0.20.0) (2026-10-14)
 
 
