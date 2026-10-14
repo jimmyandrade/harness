@@ -226,6 +226,26 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The description refuses Notion, opening the repository from Notion, testing whether the skill met the case, evolving the skill, and writing the eval
   - [x] A limit missing from the project comes from the harness that ships the skill, and a limit in the project wins
 
+### procurar-email
+- **Stability**: experimental
+- **Description**: Find one or more emails about a subject and say what each message says
+- **Properties**:
+  - Lives at `.agents/skills/procurar-email/SKILL.md`
+  - Searches the mailbox connected to the workspace, not a Notion list
+  - Lists each matching message with subject, sender, and date
+  - Does not treat a ticket-available message as approval of another registration
+  - Does not reply, forward, or delete the message, and does not decide a registration or a task
+  - Spells names through the skill that `Habilidade de grafia` names in the project instructions, when there is one, and searches the correct first name plus the surname as plain text, even when the email property is empty, without the from: operator
+  - Treats a nickname and the correct first name of one record as the same person, and does not report a first-name search as a miss for the nickname
+  - When the person has already said the email exists, uses that account, including an event email that does not ask to register or withdraw a ticket again
+  - When the person opens a mailbox link the connected search missed, reports that message, and does not say she sent nothing
+  - Does not ask the person to name the skill
+  - After the name search, lists subject messages that are not from her, and does not say the mailbox is empty when the connected search returns no email from her
+  - Does not treat another person who shares the first name as her
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses replying, forwarding, or deleting, and deciding a registration or a task
+
 ### procurar-inscricao
 - **Stability**: experimental
 - **Description**: Answer who registered, whether the registration is confirmed, or whether a ticket was withdrawn
@@ -234,7 +254,7 @@ How these skills relate is in `README.md`, in this folder.
   - Reads the inscription list, its property names, and its status options from the data mapping of the project, and searches it in the title and in the notes
   - Names each person in the note and does not answer yes for the whole event
   - When several registrations match one event, says the answer depends on which withdrawal is meant, with status, date, and page link for each
-  - Treats a pre-registration as neither approval nor withdrawal, suggests the skill that `Habilidade de e-mail` names, when there is one, and points to the other contact channels with the organizer
+  - Treats a pre-registration as neither approval nor withdrawal, suggests procurar-email, and points to the other contact channels with the organizer
   - Treats the participant and the person who recorded the row as different people
   - Searches every form of a name through the skill that `Habilidade de grafia` names, when there is one, and uses the correct spelling only in the reply
   - When the person states that the inscription was made or confirmed, follows definir-inscricao so the celebration comes with the saved status
