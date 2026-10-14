@@ -85,7 +85,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Properties**:
   - Skill at `.agents/skills/criar-pull-request/`
   - Reads the repository, base branch, merge method, PR language, test and build commands, and push timing from the project instructions
-  - Opens a pull request only from a `type/short-description` branch, and renames a branch a tool created with another prefix before the push, or on GitHub once published
+  - Opens a pull request only from a `type/short-description` branch, and renames a branch a tool created with another prefix before the push. A rename after the pull request opens closes it, so a new pull request replaces it
   - Follows the pull request template of the repository when there is one
   - Before a merge, hands pending review comments from people or bots to resolver-comentarios-de-revisao, and holds the merge while a thread waits for the person
   - `Exigir CI verde`, on by default, holds the merge while a check fails or is pending; off, it merges and reports the checks that did not pass
