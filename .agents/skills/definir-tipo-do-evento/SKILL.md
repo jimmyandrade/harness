@@ -3,7 +3,7 @@ name: definir-tipo-do-evento
 description: Use essa habilidade sempre que for saber o tipo real de um compromisso antes de criar, revisar ou alterar a agenda, mesmo sem dizer tipo. NÃO use para gravar o evento no Google Agenda, reservar tempo de carreira, auditar o uso do tempo, nem saber o que já está no dia.
 metadata:
   author: jimmyandrade
-  version: "0.3.2"
+  version: "0.3.3"
   related:
     - criar-oportunidade
     - definir-agenda
@@ -12,6 +12,7 @@ metadata:
     - definir-recurso-de-aprendizado
     - definir-reserva
     - definir-tarefa
+    - definir-viagem
     - lancar-despesa
     - procurar-agenda
     - procurar-oportunidade

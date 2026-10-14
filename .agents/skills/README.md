@@ -37,6 +37,7 @@ flowchart LR
     definir_reserva["definir-reserva"]
     definir_tarefa["definir-tarefa"]
     definir_tipo_do_evento["definir-tipo-do-evento"]
+    definir_viagem["definir-viagem"]
     descrever_habilidade_ou_schema["descrever-habilidade-ou-schema"]
     evoluir_habilidade["evoluir-habilidade"]
     gerenciar_estoque["gerenciar-estoque"]
@@ -82,11 +83,13 @@ flowchart LR
   definir_agenda --> definir_jornada_de_producao
   definir_agenda --> definir_reserva
   definir_agenda --> definir_tipo_do_evento
+  definir_agenda --> definir_viagem
   definir_agenda --> procurar_agenda
   definir_agenda --> revisar_uso_do_tempo
   definir_agenda --> sincronizar_cronograma
   definir_agenda_de_popstar --> definir_agenda
   definir_agenda_de_popstar --> definir_reserva
+  definir_agenda_de_popstar --> definir_viagem
   definir_agenda_de_popstar --> procurar_agenda
   definir_agenda_de_popstar --> revisar_uso_do_tempo
   definir_ativo_imobilizado --> definir_empresa
@@ -151,9 +154,16 @@ flowchart LR
   definir_tipo_do_evento --> definir_recurso_de_aprendizado
   definir_tipo_do_evento --> definir_reserva
   definir_tipo_do_evento --> definir_tarefa
+  definir_tipo_do_evento --> definir_viagem
   definir_tipo_do_evento --> lancar_despesa
   definir_tipo_do_evento --> procurar_agenda
   definir_tipo_do_evento --> procurar_oportunidade
+  definir_viagem --> definir_agenda
+  definir_viagem --> definir_inscricao
+  definir_viagem --> evoluir_habilidade
+  definir_viagem --> lancar_despesa
+  definir_viagem --> procurar_oportunidade
+  definir_viagem --> sincronizar_cronograma
   descrever_habilidade_ou_schema --> evoluir_habilidade
   descrever_habilidade_ou_schema --> publicar_habilidade
   descrever_habilidade_ou_schema --> revisar_habilidade
@@ -183,6 +193,7 @@ flowchart LR
   procurar_agenda --> definir_data_significativa
   procurar_agenda --> definir_grupo_de_oportunidades
   procurar_agenda --> definir_recurso_de_aprendizado
+  procurar_agenda --> definir_viagem
   procurar_agenda --> procurar_oportunidade
   procurar_agenda --> revisar_uso_do_tempo
   procurar_data_significativa --> definir_data_significativa
@@ -221,5 +232,6 @@ flowchart LR
   sincronizar_cronograma --> definir_agenda
   sincronizar_cronograma --> definir_convidado
   sincronizar_cronograma --> definir_jornada_de_producao
+  sincronizar_cronograma --> definir_viagem
   sincronizar_cronograma --> procurar_agenda
 ```
