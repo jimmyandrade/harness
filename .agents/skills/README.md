@@ -18,6 +18,7 @@ flowchart LR
     criar_ideia_de_conteudo["criar-ideia-de-conteudo"]
     criar_oportunidade["criar-oportunidade"]
     criar_pull_request["criar-pull-request"]
+    definir_agenda["definir-agenda"]
     definir_ativo_imobilizado["definir-ativo-imobilizado"]
     definir_data_significativa["definir-data-significativa"]
     definir_empresa["definir-empresa"]
@@ -65,6 +66,8 @@ flowchart LR
   criar_pull_request --> criar_commit
   criar_pull_request --> evoluir_habilidade
   criar_pull_request --> resolver_comentarios_de_revisao
+  definir_agenda --> definir_data_significativa
+  definir_agenda --> definir_grafia
   definir_ativo_imobilizado --> definir_empresa
   definir_ativo_imobilizado --> gerenciar_estoque
   definir_ativo_imobilizado --> identificar_duplicata
