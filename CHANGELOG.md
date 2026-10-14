@@ -1,5 +1,36 @@
 # Changelog
 
+## [0.24.0](https://github.com/jimmyandrade/harness/compare/v0.23.1...v0.24.0) (2026-10-14)
+
+
+### ⚠ BREAKING CHANGES
+
+* **criar-oportunidade:** criar-oportunidade 0.15.0 no longer rejects dates before a fixed year. A harness that wants a cutoff sets "Ano mínimo da edição" in its project instructions.
+* **procurar-oportunidade:** procurar-oportunidade 0.5.0 no longer hands a confirmed order to a registration skill by default. A harness that wants it sets "Habilidade do pedido confirmado" in its project instructions.
+
+### Features
+
+* add the Considerar grupos de oportunidades parameter ([#147](https://github.com/jimmyandrade/harness/issues/147)) ([98c2feb](https://github.com/jimmyandrade/harness/commit/98c2feb6776dc86616ca799ff9574ebdda2ba8a4))
+* **criar-oportunidade:** move the skill to the core ([#148](https://github.com/jimmyandrade/harness/issues/148)) ([9a33119](https://github.com/jimmyandrade/harness/commit/9a33119cc5bd6e2c5af3b6b1677a2862189ab18b))
+* **criar-oportunidade:** set the cutoff by date, after the business founding date ([9a33119](https://github.com/jimmyandrade/harness/commit/9a33119cc5bd6e2c5af3b6b1677a2862189ab18b))
+* **definir-data-significativa:** move the skill to the core ([#155](https://github.com/jimmyandrade/harness/issues/155)) ([f38fc76](https://github.com/jimmyandrade/harness/commit/f38fc761c8b2ffdae328f31d7d517110779da451))
+* **definir-empresa:** move the skill to the core ([#158](https://github.com/jimmyandrade/harness/issues/158)) ([74857bb](https://github.com/jimmyandrade/harness/commit/74857bb66f2cd4b64285c8eefe41446b26d3953e))
+* **definir-grafia:** move the skill to the core ([#161](https://github.com/jimmyandrade/harness/issues/161)) ([dd05b06](https://github.com/jimmyandrade/harness/commit/dd05b06b80226b31d3c0f34cf5474691e29479ff))
+* **definir-grupo-de-oportunidades:** move the skill to the core ([#146](https://github.com/jimmyandrade/harness/issues/146)) ([a2d2c0f](https://github.com/jimmyandrade/harness/commit/a2d2c0f0289703839b98c908839deb40f666029a))
+* **definir-inscricao:** move the skill to the core ([#149](https://github.com/jimmyandrade/harness/issues/149)) ([e96c2e0](https://github.com/jimmyandrade/harness/commit/e96c2e0d07f1f4e57eb0b1555a740ffb5c37d75a))
+* **definir-perfil-social:** move the skill to the core ([#159](https://github.com/jimmyandrade/harness/issues/159)) ([1195b70](https://github.com/jimmyandrade/harness/commit/1195b70b5668c1edb34502036039e9257996ab7c))
+* **definir-pessoa:** move the skill to the core ([#160](https://github.com/jimmyandrade/harness/issues/160)) ([abfd925](https://github.com/jimmyandrade/harness/commit/abfd92529acf3c9c22946d901a214ec6284babc1))
+* **definir-tarefa:** move the skill to the core ([183b7a3](https://github.com/jimmyandrade/harness/commit/183b7a31c2fcd02eab3b5aa02cf1a7e65f631420))
+* **definir-tarefa:** move the skill to the core ([#153](https://github.com/jimmyandrade/harness/issues/153)) ([183b7a3](https://github.com/jimmyandrade/harness/commit/183b7a31c2fcd02eab3b5aa02cf1a7e65f631420))
+* **definir-tarefa:** read the RACI roles of the task list ([183b7a3](https://github.com/jimmyandrade/harness/commit/183b7a31c2fcd02eab3b5aa02cf1a7e65f631420))
+* **identificar-duplicata:** move the skill to the core ([#156](https://github.com/jimmyandrade/harness/issues/156)) ([fad1716](https://github.com/jimmyandrade/harness/commit/fad1716c352c0ccee907bb478fd5e84a71fdb920))
+* **mesclar-registro:** move the skill to the core ([#157](https://github.com/jimmyandrade/harness/issues/157)) ([be3f98a](https://github.com/jimmyandrade/harness/commit/be3f98aed41eb667b9cb42c31b20bb834fd369f5))
+* **procurar-data-significativa:** move the skill to the core ([#154](https://github.com/jimmyandrade/harness/issues/154)) ([05cb01b](https://github.com/jimmyandrade/harness/commit/05cb01bf71d6c3f2c57be1efbc4b5f3436ba9295))
+* **procurar-email:** move the skill to the core ([#151](https://github.com/jimmyandrade/harness/issues/151)) ([9221947](https://github.com/jimmyandrade/harness/commit/92219471e3d495decb9c0dfee230e770caa6420f))
+* **procurar-inscricao:** move the skill to the core ([#150](https://github.com/jimmyandrade/harness/issues/150)) ([dc2eafd](https://github.com/jimmyandrade/harness/commit/dc2eafdad3b8cddb7009d9047e21ba7df6555709))
+* **procurar-oportunidade:** move the skill to the core ([#145](https://github.com/jimmyandrade/harness/issues/145)) ([bbd3dbe](https://github.com/jimmyandrade/harness/commit/bbd3dbe0207f281863d04b4f4e1335ea71dc28d5))
+* **procurar-tarefa:** move the skill to the core ([#152](https://github.com/jimmyandrade/harness/issues/152)) ([347874f](https://github.com/jimmyandrade/harness/commit/347874f2ffb85046336660261470aac8a533027b))
+
 ## [0.23.1](https://github.com/jimmyandrade/harness/compare/v0.23.0...v0.23.1) (2026-10-14)
 
 
