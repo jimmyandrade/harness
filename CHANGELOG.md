@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1](https://github.com/jimmyandrade/vocabulary/compare/v0.3.0...v0.3.1) (2026-10-14)
+
+
+### Bug Fixes
+
+* **deps:** update dependency zod to v4.6.7 ([#15](https://github.com/jimmyandrade/vocabulary/issues/15)) ([6705cdf](https://github.com/jimmyandrade/vocabulary/commit/6705cdf4847d9827cf27285e65bbe036e9e3bee5))
+
 ## [0.3.0](https://github.com/jimmyandrade/vocabulary/compare/v0.2.0...v0.3.0) (2026-10-14)
 
 
