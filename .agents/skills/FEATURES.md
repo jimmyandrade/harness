@@ -151,6 +151,22 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses an existence-only check, spelling, social-profile normalization, merging the same item, and deleting without an order
 
+### definir-grafia
+- **Stability**: experimental
+- **Description**: Settle the spelling of a person or a company and keep a newly seen wrong form
+- **Properties**:
+  - Lives at `.agents/skills/definir-grafia/SKILL.md`
+  - Reads the list of people and the company list, with their property names, from the data mapping of the project, in the connected workspace
+  - Writes the full name or the company name in the reply, and searches with every variation plus the correct first name and surname as plain text, without the from: operator
+  - Treats a nickname and the correct first name of one record as the same person, and does not report a first-name search as a miss for the nickname
+  - Appends a previous or wrong form in the same bullet style, without replacing the record name or the existing items, and leaves a rename or a canonical-name consolidation to mesclar-registro
+  - Does not write when more than one record matches, and does not create the company
+  - When a screenshot shows a missing person or profile, follows definir-pessoa and definir-perfil-social for what is missing, and uses the record that already exists
+  - Returns the canonical spelling when a name arrives in an event title, and does not write the event
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses creating the company, changing the record name, and answering the email, the registration, or the task
+
 ### definir-instrucoes-do-projeto
 - **Stability**: experimental
 - **Description**: Write and review a project's instructions file so that it holds only what every session needs, as ADR 0008 decides

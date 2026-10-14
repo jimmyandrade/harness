@@ -19,6 +19,7 @@ flowchart LR
     criar_pull_request["criar-pull-request"]
     definir_data_significativa["definir-data-significativa"]
     definir_empresa["definir-empresa"]
+    definir_grafia["definir-grafia"]
     definir_grupo_de_oportunidades["definir-grupo-de-oportunidades"]
     definir_inscricao["definir-inscricao"]
     definir_instrucoes_do_projeto["definir-instrucoes-do-projeto"]
@@ -56,19 +57,26 @@ flowchart LR
   criar_pull_request --> evoluir_habilidade
   criar_pull_request --> resolver_comentarios_de_revisao
   definir_data_significativa --> procurar_data_significativa
+  definir_empresa --> definir_grafia
   definir_empresa --> definir_perfil_social
   definir_empresa --> identificar_duplicata
   definir_empresa --> mesclar_registro
+  definir_grafia --> definir_perfil_social
+  definir_grafia --> definir_pessoa
+  definir_grafia --> identificar_duplicata
+  definir_grafia --> mesclar_registro
   definir_grupo_de_oportunidades --> criar_oportunidade
   definir_grupo_de_oportunidades --> procurar_oportunidade
   definir_inscricao --> procurar_inscricao
   definir_inscricao --> procurar_oportunidade
   definir_instrucoes_do_projeto --> criar_habilidade
   definir_instrucoes_do_projeto --> evoluir_habilidade
+  definir_perfil_social --> definir_grafia
   definir_perfil_social --> definir_pessoa
   definir_perfil_social --> identificar_duplicata
   definir_perfil_social --> mesclar_registro
   definir_pessoa --> definir_empresa
+  definir_pessoa --> definir_grafia
   definir_pessoa --> definir_perfil_social
   definir_pessoa --> identificar_duplicata
   definir_tarefa --> procurar_tarefa
@@ -81,10 +89,12 @@ flowchart LR
   evoluir_habilidade --> publicar_habilidade
   evoluir_habilidade --> revisar_habilidade
   identificar_duplicata --> definir_data_significativa
+  identificar_duplicata --> definir_grafia
   identificar_duplicata --> definir_perfil_social
   identificar_duplicata --> mesclar_registro
   medir_habilidade --> evoluir_habilidade
   mesclar_registro --> definir_empresa
+  mesclar_registro --> definir_grafia
   mesclar_registro --> definir_perfil_social
   mesclar_registro --> identificar_duplicata
   procurar_data_significativa --> definir_data_significativa
