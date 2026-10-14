@@ -79,6 +79,21 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses code edits, a non-skill page, description-only work, and writing the skill in Notion
 
+### criar-ideia-de-conteudo
+- **Stability**: experimental
+- **Description**: Register a social content idea before it becomes a scheduled post
+- **Properties**:
+  - Lives at `.agents/skills/criar-ideia-de-conteudo/SKILL.md`
+  - Reads the list of content ideas, its property names, and its status options from the data mapping of the project
+  - Writes the idea with the draft status, the scene in the description, and the reference link in the original content URL
+  - Sets the capture date to the registration instant, including the time, so ideas captured on the same day stay distinct, and leaves the planned date empty unless the person gave a date
+  - Shows a similar idea that uses another URL, and still creates this one
+  - Writes dates in the reply with `Formato da data com dia da semana`
+  - Does not create a page in the list of posts, write a caption, schedule the post, register a profile, or create a task
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses publishing the post, writing the caption, scheduling the post, registering the profile, and creating the task
+
 ### criar-oportunidade
 - **Stability**: experimental
 - **Description**: Register an opportunity that does not exist yet
