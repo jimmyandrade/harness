@@ -49,6 +49,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Properties**:
   - Skill at `.agents/skills/criar-commit/`
   - Reads the base branch, whether to commit without asking, the message language and pattern, and the test, build, and lint commands from the project instructions
+  - Names a new branch `type/short-description` after the Conventional Commits type, and renames a branch a tool created with another prefix, such as `claude/`
 - **Test Criteria**:
   - [ ] A project without test or build commands commits and says nothing was verified
 
@@ -84,11 +85,13 @@ How these skills relate is in `README.md`, in this folder.
 - **Properties**:
   - Skill at `.agents/skills/criar-pull-request/`
   - Reads the repository, base branch, merge method, PR language, test and build commands, and push timing from the project instructions
+  - Opens a pull request only from a `type/short-description` branch, and renames a branch a tool created with another prefix before the push, or on GitHub once published
   - Follows the pull request template of the repository when there is one
   - Before a merge, hands pending review comments from people or bots to resolver-comentarios-de-revisao, and holds the merge while a thread waits for the person
   - `Exigir CI verde`, on by default, holds the merge while a check fails or is pending; off, it merges and reports the checks that did not pass
 - **Test Criteria**:
   - [ ] A request to push to the base branch opens a pull request instead
+  - [ ] A `claude/…` branch is renamed to `type/…` before its pull request opens
   - [ ] A merge request on a pull request with an unresolved thread runs resolver-comentarios-de-revisao first
   - [ ] A merge request with a failing check stops and names the check while `Exigir CI verde` is on
 
