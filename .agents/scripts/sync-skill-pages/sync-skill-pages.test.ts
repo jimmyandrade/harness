@@ -22,6 +22,7 @@ import {
   gitChangedFiles,
   namesToPublish,
   parseSkill,
+  skipReason,
   previousNames,
   properties,
   publish,
@@ -121,6 +122,15 @@ test("page uses the body after frontmatter", () => {
 
 test("notion false stays in git", () => {
   assert.equal(parseSkill(privateSkill), null)
+})
+
+test("internal true stays out of Notion, and other values publish", () => {
+  const internal = createdSkill.replace('version: "0.4.0"\n', 'version: "0.4.0"\n  internal: true\n')
+  assert.equal(parseSkill(internal), null)
+  assert.equal(skipReason(internal), "internal")
+  assert.equal(skipReason(privateSkill), "stays in git")
+  assert.equal(skipReason(createdSkill), null)
+  assert.ok(parseSkill(createdSkill.replace('version: "0.4.0"\n', 'version: "0.4.0"\n  internal: false\n')))
 })
 
 test("missing version fails", () => {
@@ -320,7 +330,7 @@ test("long description is split", () => {
   assert.equal(field.rich_text[0]?.text.content.length, 2000)
 })
 
-test("update existing, create missing, and skip private through the SDK methods", async () => {
+test("update existing, create missing, and skip private and internal through the SDK methods", async () => {
   const calls: [string, { properties?: object; type?: string; icon?: object }][] = []
   const notion = bindNotion({
     dataSources: {
@@ -353,6 +363,7 @@ test("update existing, create missing, and skip private through the SDK methods"
     ["definir-tarefa", skill],
     ["criar-habilidade", privateSkill],
     ["procurar-tarefa", createdSkill],
+    ["rascunho-interno", createdSkill.replace("procurar-tarefa", "rascunho-interno").replace('version: "0.4.0"\n', 'version: "0.4.0"\n  internal: true\n')],
   ] as const) {
     const dir = join(root, ".agents", "skills", name)
     mkdirSync(dir, { recursive: true })
@@ -360,7 +371,7 @@ test("update existing, create missing, and skip private through the SDK methods"
   }
   const lines = await publish(
     root,
-    ["definir-tarefa", "criar-habilidade", "sumiu", "procurar-tarefa"],
+    ["definir-tarefa", "criar-habilidade", "sumiu", "procurar-tarefa", "rascunho-interno"],
     notion,
     mapping,
   )
@@ -369,6 +380,7 @@ test("update existing, create missing, and skip private through the SDK methods"
     "skip criar-habilidade: stays in git",
     "skip sumiu: removed",
     "create procurar-tarefa: https://example.test/page-new",
+    "skip rascunho-interno: internal",
   ])
   const kinds = calls.map(([kind]) => kind)
   assert.ok(kinds.includes("query"))

@@ -56,6 +56,7 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
   - `base` and `head` limit the check to the skills that changed
   - The project's root `AGENTS.md` gets the size limits of a skill body (words, lines, body tokens), because it loads in every session, as ADR 0008 decides. The structure rules of a skill do not apply to it. It shows in the summary table and in the pull request comment when it changes
   - On a pull request, the action keeps one comment with the table of the skills the pull request adds, changes, or fails: version, body tokens, and share of the limit, before and after. Each push edits that comment. `comment: false` turns it off. The calling workflow needs `permissions: pull-requests: write`; without it the step warns and the check result stands
+  - `metadata.notion` is only `"false"`, and `metadata.internal` is only an unquoted `true`, the boolean the `skills` CLI reads
   - A changed skill must raise `metadata.version` above its copy at `base` when `base` and `head` are given, and above its copy at `HEAD` otherwise
   - When a skill declares `metadata.related`, each name must be a skill in the project or in the core, and every skill the body cites must be listed. A citation is a skill name between backticks in prose, or a name in a Mermaid diagram; a plain name in prose is not one
   - Each Gherkin file in a skill's `features/` starts with `# language: <locale.gherkin>`. With `pt`, every Given starts with `Dado que`, because `Dado` is the reserved keyword and does not agree with the noun
@@ -79,8 +80,10 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
   - The page icon comes from the `Ícone das páginas no Notion` and `Cor do ícone das páginas no Notion` settings, with the core fallback
   - The project instructions file becomes one more page of the skills database, titled with the file name. Its description and version properties come from `description` and `metadata.version` in the frontmatter, and the description tells the Notion agent to load the page for any task. The page body ends with its parameters in a YAML code block. It publishes when the file changes, when the mapping or the publisher changes, or when the project moves the core version
   - `include-core` also publishes the skills of the core harness into the caller's Notion
+  - Leaves out a skill with `metadata.notion: "false"`, logged as `stays in git`, and one with `metadata.internal: true`, logged as `internal`
 - **Test Criteria**:
   - [x] A mapping can rename every status option
+  - [x] A skill with `metadata.internal: true` is skipped as `internal`, and `internal: false` publishes
   - [x] Core skills publish when the project moves the core version or its mapping, and a name in both stops the sync
   - [x] The project root is `HARNESS_ROOT`, or the working directory
   - [x] The instructions page is created once and then updated, with the version of its block

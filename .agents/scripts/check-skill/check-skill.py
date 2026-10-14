@@ -549,7 +549,8 @@ def related_errors(block: str, body: str, name: str, known: set[str]) -> list[Fi
     return errors
 
 
-def metadata_notion(block: str) -> str | None:
+def metadata_value(block: str, key: str) -> str | None:
+    """The raw value of metadata.<key> in a frontmatter block, or None."""
     in_metadata = False
     for raw in block.splitlines():
         if raw and not raw.startswith(" ") and not raw.startswith("\t"):
@@ -558,9 +559,20 @@ def metadata_notion(block: str) -> str | None:
         if not in_metadata:
             continue
         stripped = raw.strip()
-        if stripped.startswith("notion:"):
+        if stripped.startswith(f"{key}:"):
             return stripped.split(":", 1)[1].strip()
     return None
+
+
+def metadata_flag_errors(block: str, front: list[tuple[int, str]]) -> list[Finding]:
+    """metadata.notion is only "false"; metadata.internal is only an unquoted true, as the skills CLI reads it."""
+    errors: list[Finding] = []
+    for key, allowed in (("notion", '"false"'), ("internal", "true")):
+        value = metadata_value(block, key)
+        if value is not None and value != allowed:
+            line = next((lineno for lineno, raw in front if raw.strip().startswith(f"{key}:")), None)
+            errors.append(Finding(f"metadata.{key} must be {allowed}", line))
+    return errors
 
 
 def spec_errors(
@@ -1303,13 +1315,8 @@ def main() -> int:
                     None,
                 )
                 add(Finding(f"metadata.author must be {author}", author_line))
-            notion = metadata_notion(block)
-            if notion is not None and notion != '"false"':
-                notion_line = next(
-                    (lineno for lineno, raw in front if raw.strip().startswith("notion:")),
-                    None,
-                )
-                add(Finding('metadata.notion must be "false"', notion_line))
+            for finding in metadata_flag_errors(block, front):
+                add(finding)
             for finding in notion_url_errors(file_lines):
                 add(finding)
             if SEMVER.fullmatch(version) is None:

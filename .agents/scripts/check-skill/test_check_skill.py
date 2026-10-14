@@ -105,6 +105,31 @@ class RelatedSkillsTest(unittest.TestCase):
         self.assertEqual(self.errors([], "Use `fechar-pedido-antigo`."), [])
 
 
+class MetadataFlagTest(unittest.TestCase):
+    def setUp(self) -> None:
+        self.checker = load_checker(Path(tempfile.mkdtemp()))
+
+    def errors(self, *lines: str) -> list[str]:
+        block = "\n".join(["name: x", "metadata:", '  version: "0.1.0"', *lines])
+        front = list(enumerate(block.splitlines(), start=2))
+        return [finding.message for finding in self.checker.metadata_flag_errors(block, front)]
+
+    def test_notion_false_and_internal_true_pass(self) -> None:
+        self.assertEqual(self.errors('  notion: "false"', "  internal: true"), [])
+
+    def test_a_skill_without_flags_passes(self) -> None:
+        self.assertEqual(self.errors(), [])
+
+    def test_a_quoted_internal_fails(self) -> None:
+        self.assertEqual(self.errors('  internal: "true"'), ["metadata.internal must be true"])
+
+    def test_internal_false_and_notion_true_fail(self) -> None:
+        self.assertEqual(
+            self.errors("  internal: false", '  notion: "true"'),
+            ['metadata.notion must be "false"', "metadata.internal must be true"],
+        )
+
+
 class GherkinTest(unittest.TestCase):
     def setUp(self) -> None:
         self.tmp = tempfile.TemporaryDirectory()
