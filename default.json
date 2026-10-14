@@ -25,6 +25,21 @@
       "groupName": "harness core",
       "schedule": ["at any time"],
       "dependencyDashboardApproval": false
+    },
+    {
+      "description": "Move every pin of the vocabulary package in one pull request, as soon as a release exists.",
+      "matchPackageNames": ["jimmyandrade/vocabulary"],
+      "groupName": "vocabulary",
+      "schedule": ["at any time"],
+      "dependencyDashboardApproval": false
+    },
+    {
+      "description": "The npm dependency on the vocabulary package is named vocabulary in package.json.",
+      "matchDepNames": ["vocabulary"],
+      "matchDatasources": ["github-tags"],
+      "groupName": "vocabulary",
+      "schedule": ["at any time"],
+      "dependencyDashboardApproval": false
     }
   ],
   "customManagers": [
