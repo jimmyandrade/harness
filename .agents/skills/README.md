@@ -18,6 +18,7 @@ flowchart LR
     criar_oportunidade["criar-oportunidade"]
     criar_pull_request["criar-pull-request"]
     definir_data_significativa["definir-data-significativa"]
+    definir_empresa["definir-empresa"]
     definir_grupo_de_oportunidades["definir-grupo-de-oportunidades"]
     definir_inscricao["definir-inscricao"]
     definir_instrucoes_do_projeto["definir-instrucoes-do-projeto"]
@@ -53,6 +54,8 @@ flowchart LR
   criar_pull_request --> evoluir_habilidade
   criar_pull_request --> resolver_comentarios_de_revisao
   definir_data_significativa --> procurar_data_significativa
+  definir_empresa --> identificar_duplicata
+  definir_empresa --> mesclar_registro
   definir_grupo_de_oportunidades --> criar_oportunidade
   definir_grupo_de_oportunidades --> procurar_oportunidade
   definir_inscricao --> procurar_inscricao
@@ -71,6 +74,7 @@ flowchart LR
   identificar_duplicata --> definir_data_significativa
   identificar_duplicata --> mesclar_registro
   medir_habilidade --> evoluir_habilidade
+  mesclar_registro --> definir_empresa
   mesclar_registro --> identificar_duplicata
   procurar_data_significativa --> definir_data_significativa
   procurar_email --> procurar_inscricao

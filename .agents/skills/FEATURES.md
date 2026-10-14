@@ -135,6 +135,22 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses looking up when the date falls, the day or week lookup, creating or changing the calendar event, reverse planning, managing travel, registering the opportunity, organizing the contact point, and creating the task
 
+### definir-empresa
+- **Stability**: experimental
+- **Description**: Register, update, validate, or consolidate a company, including a supplier
+- **Properties**:
+  - Lives at `.agents/skills/definir-empresa/SKILL.md`
+  - Reads the company list, its property names, and its options from the data mapping of the project, when the person does not name another list
+  - Leaves the existence check to identificar-duplicata, spelling to definir-grafia, the social profile to definir-perfil-social, and merging the same item to mesclar-registro
+  - Requires a responsible person when the company is an active, potential, or relevant supplier for a quote, purchase, partnership, or commercial relationship
+  - Prefers a manager, commercial representative, seller, owner, or the contact who handles service
+  - Adds the supplier option to the audience type when that fits, without removing the values already there
+  - Checks the related companies on the person and relates the company when that inverse link is missing
+  - Uses notes only to qualify the role, context, pending item, or certainty, and does not treat the owners or the reviewer as that person
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses an existence-only check, spelling, social-profile normalization, merging the same item, and deleting without an order
+
 ### definir-instrucoes-do-projeto
 - **Stability**: experimental
 - **Description**: Write and review a project's instructions file so that it holds only what every session needs, as ADR 0008 decides
