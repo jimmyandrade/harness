@@ -27,6 +27,7 @@ flowchart LR
     definir_grupo_de_oportunidades["definir-grupo-de-oportunidades"]
     definir_inscricao["definir-inscricao"]
     definir_instrucoes_do_projeto["definir-instrucoes-do-projeto"]
+    definir_jornada_de_producao["definir-jornada-de-producao"]
     definir_lancamento["definir-lancamento"]
     definir_perfil_social["definir-perfil-social"]
     definir_pessoa["definir-pessoa"]
@@ -73,6 +74,7 @@ flowchart LR
   definir_agenda --> definir_convidado
   definir_agenda --> definir_data_significativa
   definir_agenda --> definir_grafia
+  definir_agenda --> definir_jornada_de_producao
   definir_agenda --> definir_reserva
   definir_agenda --> definir_tipo_do_evento
   definir_agenda --> procurar_agenda
@@ -102,6 +104,8 @@ flowchart LR
   definir_inscricao --> procurar_oportunidade
   definir_instrucoes_do_projeto --> criar_habilidade
   definir_instrucoes_do_projeto --> evoluir_habilidade
+  definir_jornada_de_producao --> definir_agenda
+  definir_jornada_de_producao --> procurar_agenda
   definir_lancamento --> definir_ativo_imobilizado
   definir_lancamento --> definir_planejamento_financeiro
   definir_lancamento --> gerenciar_estoque

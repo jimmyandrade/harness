@@ -323,6 +323,20 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses only celebrating without saving, only looking up who registered, and deciding whether a task exists
 
+### definir-jornada-de-producao
+- **Stability**: experimental
+- **Description**: Decide whether a day is a production day and how long that block lasts
+- **Properties**:
+  - Lives at `.agents/skills/definir-jornada-de-producao/SKILL.md`
+  - Reads weekday production duration, reduced production duration, and reduced end time from the YAML mapping under Parâmetros de configuração
+  - Uses the weekday production duration inside the agreed window, and the reduced duration ending at the reduced end time on a holiday, Saturday, or Sunday only after an explicit request
+  - Leaves Saturdays committed to a fair, a pop-up, or a commercial event free of production, and follows the Saturday alternation interval the person defined
+  - Leaves recording the event, including the reduced-day note in the description, to definir-agenda
+  - Leaves the contact point to organizar-ponto-de-contato
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses recording the event, the day lookup, the popstar agenda, and organizing the contact point
+
 ### definir-lancamento
 - **Stability**: experimental
 - **Description**: Interpret a simple sale or expense and route what is not that entry
