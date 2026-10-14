@@ -5,8 +5,9 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.41.7"
+  version: "0.41.8"
   related:
+    - definir-agenda-de-popstar
     - definir-convidado
     - definir-data-significativa
     - definir-grafia

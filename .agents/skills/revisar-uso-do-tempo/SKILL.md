@@ -5,9 +5,10 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.5.1"
   related:
     - definir-agenda
+    - definir-agenda-de-popstar
     - procurar-agenda
 ---
 

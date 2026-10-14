@@ -3,9 +3,10 @@ name: definir-jornada-de-producao
 description: Use essa habilidade sempre que for definir a jornada de produção, o dia útil, o feriado, o sábado, o domingo ou a alternância de sábados, mesmo sem dizer jornada. NÃO use para gravar o evento, saber o que já está no dia, agenda de popstar, nem organizar o ponto de contato.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.2.1"
   related:
     - definir-agenda
+    - definir-agenda-de-popstar
     - procurar-agenda
 ---
 

@@ -5,9 +5,10 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.2"
+  version: "0.2.3"
   related:
     - definir-agenda
+    - definir-agenda-de-popstar
     - revisar-uso-do-tempo
     - sincronizar-cronograma
 ---

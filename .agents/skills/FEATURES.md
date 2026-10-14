@@ -176,6 +176,34 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The description refuses the production day, the day or week lookup, the popstar agenda, reverse planning, life protection, time audit, the body of work, a significant date, a trip itinerary, registering the opportunity, organizing the contact point, and creating a task
   - [x] Before saving, the skill delegates the event type to definir-tipo-do-evento
 
+### definir-agenda-de-popstar
+- **Stability**: experimental
+- **Description**: Turn a named intention into career structure, plan backward from a milestone, confirm each commitment's sense, and protect life
+- **Properties**:
+  - Lives at `.agents/skills/definir-agenda-de-popstar/SKILL.md`
+  - Weighs each commitment with `Critério de sentido` from the project instructions
+  - Turns a stated dream or objective into a milestone, commitments, responsible people, a duration, and completion evidence, and does not invent the person, the duration, or the evidence
+  - Follows the popstar agenda, which turns intention into structure by combining the named segment, business, communication, money, health, affection, and rest so a career can last
+  - Uses `Segmento` from the project instructions as the career segment, such as fashion or music, or the segment the person names
+  - Turns a dream into a business through dates, commitments, processes, costs, and expected results, and keeps rigor distinct from perfection
+  - Includes the `Atividades do segmento` of the project, and only what was named
+  - Uses "Não faça uma peça de sucesso, faça história" as the sense criterion, confirms how each commitment supports history, positioning, revenue, learning, health, or important relationships, and does not invent that support
+  - Records an investment of the person's own resources only with a hypothesis, a limit, a cost, a payback period, and a review criterion
+  - Reschedules a commitment instead of dropping it, and after more than six months asks for a review of the block and a care action without writing health guidance
+  - Organizes the next move for the career stage and prioritizes revenue and financial breath for authorial projects
+  - Reads the block-review threshold from the YAML mapping under Parâmetros de configuração
+  - Plans dependencies backward from the final date the person chose, includes the margin for review and unforeseen events only when the person or the source named it, and does not invent the slack
+  - Answers a reverse plan with the milestone date, stages, dependencies, margin, expected cost, and completion criterion, plus a short summary and the time zone, and does not invent the cost or the criterion
+  - Closes every reply with a short summary and the time zone when a date or time is present, and leaves each written event's status to definir-agenda
+  - Protects food, exercise, exams, appointments, prescribed treatment, spirituality, family, pets, romantic relationship, friendships, and rest that the person, the source, or Google Calendar already named, and does not let a career block erase them
+  - Does not write health guidance
+  - Sends each defined block to definir-agenda and does not write the Google Calendar event
+  - Reserves time for cultural activity, relationships, prospecting, communication, event participation, backstage, the activities of the segment, and lifestyle before spontaneous demand exists, only when the action coheres with the business, and does not register that block as an opportunity
+  - Leaves the provisional or confirmed nature of that block to definir-reserva, time audit and the body of work to revisar-uso-do-tempo, a question about what is already on a day or a week to procurar-agenda, and managing a trip to definir-viagem
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses writing, reviewing, or altering the Google Calendar event, auditing time use, the day or week lookup, a significant date, travel, and replacing health guidance
+
 ### definir-ativo-imobilizado
 - **Stability**: experimental
 - **Description**: Register, review, and govern a durable fixed asset
