@@ -259,6 +259,32 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description says the test edits the validated skill, and refuses creating the first version, only checking whether the description triggers, only reviewing without running, and writing the skill page in Notion
 
+### identificar-duplicata
+- **Stability**: experimental
+- **Description**: Check for an equivalent record before creating one, and point at the existing record
+- **Properties**:
+  - Lives at `.agents/skills/identificar-duplicata/SKILL.md`
+  - When the data mapping of the project describes the list, reads the property names from it
+  - Runs when the person searches or tries to register a new record, including when another skill asks for the check
+  - Searches the name as written, plus alternative names and different spellings: acronyms, nicknames, former names, and the name with and without an edition or year
+  - When one equivalent exists, points at that page as the existing canonical record
+  - Includes alias, name variation, and spelling fields the source already stores, and treats do-not-confuse-with as a different record
+  - Opens each possible match and compares official site, locality, dates, organizer, and social profiles when the page has them
+  - When two records of the same item already exist, the reply is a diff of what each page brings, including a field filled on one side and empty on the other, and it does not name a canonical record
+  - When similar names are confirmed as different entities, keeps each entity on its own canonical record and writes Não confundir com immediately when the list already has that property or an equivalent
+  - Follows a fixed order for a new item or a conflict: search the main name and the variations, compare the official link when it applies plus dates, place, and profiles, hand a duplicate to mesclar-registro, link a lookalike in Não confundir com, update Variações de nome in the standard format, and record a permanent difference in the disambiguation text with a time-bound fact in a dated comment
+  - Asks before saving when the pages to link are uncertain, and when a minimum disambiguation property is missing warns, proposes creating it, and does not treat the disambiguation as ready
+  - On every comparison of similar records, says whether Não confundir com exists, relates confirmed different records before finishing when that relation exists, and after authorization creates the relation and only then records the link
+  - Keeps a name variation for forms of the same canonical record, puts a permanent difference in the disambiguation text, links distinct records in Não confundir com, and puts a time-bound fact in a dated comment
+  - Keeps that permanent context out of name variations and out of spelling
+  - Leaves a social profile link to definir-perfil-social, and leaves the canonical choice of duplicates to mesclar-registro
+  - When one social profile exists, still searches the list of people for another record of the same person, reports the diff, and does not treat Não confundir com as the separator of that duplicate
+  - Does not ask the person to name the skill
+  - Does not create, merge, delete, lock spelling, or pick among similar records
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses consolidating names, deleting, creating the record, locking spelling, and choosing among similar records
+
 ### medir-habilidade
 - **Stability**: experimental
 - **Description**: Measure a skill's size and the profile of a run
