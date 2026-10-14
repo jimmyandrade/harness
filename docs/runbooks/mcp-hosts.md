@@ -21,7 +21,7 @@ cp -n node_modules/vocabulary/examples/mcp.json .agents/mcp.json
 ln -sfn .agents/mcp.json .mcp.json
 ```
 
-The list starts `node node_modules/vocabulary/dist/mcp/index.js`. Node.js does not strip TypeScript types under `node_modules`, so a list that starts `node_modules/vocabulary/api/mcp/index.ts` fails with `ERR_UNSUPPORTED_NODE_MODULES_TYPE_STRIPPING`. Change that path to `node_modules/vocabulary/dist/mcp/index.js`.
+The list starts `node node_modules/vocabulary/dist/mcp/index.js`. Node.js does not strip TypeScript types under `node_modules`, so a list that starts `node_modules/vocabulary/api/mcp/index.ts` fails with `ERR_UNSUPPORTED_NODE_MODULES_TYPE_STRIPPING`. Change that path to `node_modules/vocabulary/dist/mcp/index.js`. The `prepare` script of the package writes `dist/` during the install, so do not install with `--ignore-scripts`. npm may list that script as not covered by `allowScripts`. It still runs.
 
 Check: `jq -r '.mcpServers | keys[]' .agents/mcp.json` prints `vocabulary`, `readlink .mcp.json` prints `.agents/mcp.json`, and `node node_modules/vocabulary/dist/mcp/index.js < /dev/null && echo ok` prints `ok`.
 

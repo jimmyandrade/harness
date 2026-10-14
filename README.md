@@ -39,7 +39,7 @@ npm run build
 npm test
 ```
 
-Check: every command exits 0, and `git status --porcelain dist` prints nothing after you commit. `npm run build` writes `dist/` from `api/`. Commit `dist/` with the source change, as `docs/adr/0006-ship-compiled-javascript.md` decides.
+Check: every command exits 0. `npm ci` already runs `npm run build` through `prepare`, which writes `dist/` from `api/`. `dist/` is not committed, as `docs/adr/0007-build-on-install.md` decides.
 
 ## License
 

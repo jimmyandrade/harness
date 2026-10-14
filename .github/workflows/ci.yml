@@ -23,10 +23,5 @@ jobs:
         run: npm ci
       - name: Check types
         run: npx tsc --noEmit
-      - name: Check that dist matches the source
-        run: |
-          npm run build
-          git status --porcelain -- dist
-          test -z "$(git status --porcelain -- dist)"
       - name: Run unit tests
         run: npm test

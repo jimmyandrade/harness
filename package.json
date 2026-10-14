@@ -12,6 +12,13 @@
     "type": "git",
     "url": "git+https://github.com/jimmyandrade/vocabulary.git"
   },
+  "files": [
+    "dist",
+    "docs",
+    "examples",
+    ".agents",
+    "COMMERCIAL.md"
+  ],
   "dependencies": {
     "zod": "4.6.5"
   },
@@ -21,6 +28,7 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
+    "prepare": "npm run build",
     "test": "node --test \"api/**/*.test.ts\""
   }
 }

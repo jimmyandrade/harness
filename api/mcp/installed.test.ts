@@ -3,18 +3,22 @@ import { execFileSync, spawn } from "node:child_process"
 import { mkdtempSync, readFileSync, writeFileSync } from "node:fs"
 import { tmpdir } from "node:os"
 import { join } from "node:path"
+import { fileURLToPath } from "node:url"
 import test from "node:test"
 
 const NPM = process.platform === "win32" ? "npm.cmd" : "npm"
+const ROOT = fileURLToPath(new URL("../..", import.meta.url))
 
 type Frame = { id?: unknown; result?: { tools?: { name: string }[] } }
 
-test("the command in examples/mcp.json lists the tools from an installed copy", { timeout: 120_000 }, async () => {
+// Installs the committed HEAD from git, as a project does, so the prepare script builds dist/.
+// Uncommitted changes are not part of that install.
+test("the command in examples/mcp.json lists the tools from an installed copy", { timeout: 300_000 }, async () => {
   const project = mkdtempSync(join(tmpdir(), "vocabulary-install-"))
   writeFileSync(join(project, ".npmrc"), "save-exact=true\nallow-git=root\n")
   writeFileSync(join(project, "package.json"), `${JSON.stringify({ name: "scratch", private: true })}\n`)
-  const packed = execFileSync(NPM, ["pack", "--silent", "--pack-destination", project], { encoding: "utf8" }).trim()
-  execFileSync(NPM, ["install", "--save-dev", "--prefer-offline", "--no-audit", "--no-fund", "--silent", `./${packed}`], {
+  const head = execFileSync("git", ["rev-parse", "HEAD"], { cwd: ROOT, encoding: "utf8" }).trim()
+  execFileSync(NPM, ["install", "--save-dev", "--prefer-offline", "--no-audit", "--no-fund", "--silent", `git+file://${ROOT}#${head}`], {
     cwd: project,
     stdio: ["ignore", "ignore", "inherit"],
   })

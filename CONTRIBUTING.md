@@ -25,7 +25,7 @@ Every change lands through a pull request. Do not push to `main`.
 
 ## CI
 
-`.github/workflows/ci.yml` runs on every pull request and on every push to `main`, on `ubuntu-26.04`. It typechecks, runs `npm run build` and fails when `dist/` differs from the commit, and runs `npm test`. `.github/workflows/skill-check.yml` checks the skills with the harness action when a skill or `AGENTS.md` changes.
+`.github/workflows/ci.yml` runs on every pull request and on every push to `main`, on `ubuntu-26.04`. It typechecks and runs `npm test`. `npm ci` builds `dist/` through `prepare`, and one test installs the commit from git and starts the MCP server from that copy. `.github/workflows/skill-check.yml` checks the skills with the harness action when a skill or `AGENTS.md` changes.
 
 Every step in a workflow has a `name`: a short imperative phrase in English, such as `Install dependencies`.
 
@@ -35,7 +35,7 @@ A release is a tag `vMAJOR.MINOR.PATCH` and a GitHub Release. Business harnesses
 
 Release Please owns the version. `.github/workflows/release-please.yml` runs on every push to `main` and keeps one release pull request open. That pull request bumps `version` in `package.json` and `package-lock.json`, and writes `CHANGELOG.md` from the Conventional Commits since the last release. Merging it creates the tag and the GitHub Release. Before the first major version, a breaking change bumps the minor version. Do not bump the version or create a tag by hand. The configuration is `release-please-config.json`, and the last released version is in `.release-please-manifest.json`.
 
-The MCP server reads its version from `package.json`, so the release pull request does not touch `api/` or `dist/`.
+The MCP server reads its version from `package.json`, so the release pull request does not touch `api/`.
 
 The release pull request is opened with `GITHUB_TOKEN`, so CI does not run on it. Every commit it describes already passed CI on its own pull request.
 

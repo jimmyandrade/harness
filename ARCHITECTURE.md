@@ -15,7 +15,7 @@ vocabulary/
 │   ├── mcp/                   # MCP server and the launcher a host can call
 │   ├── routes/                # One HTTP endpoint per directory
 │   └── shared/                # Glossary access, Zod schemas, HTTP server
-├── dist/                      # JavaScript compiled from api/ for an installed copy
+├── dist/                      # JavaScript compiled from api/ on install, not committed
 ├── .agents/skills/            # definir-vocabulario and redigir-com-tom-de-voz
 ├── docs/
 │   ├── adr/                   # Architecture decisions
@@ -51,7 +51,7 @@ None. An agent calls the MCP tools, the CLI, or the local HTTP server.
 - Name: `vocabulary`
 - Description: Looks up a term, reports which tokens of a text exist, classifies a term or a text, and inserts or updates glossary rows.
 - Technologies: TypeScript on Node.js 24, Zod. The type check is TypeScript 7, as `docs/adr/0005-typecheck-with-typescript-7.md` decides.
-- Deployment: `node api/mcp/index.ts` from this repository, or `node node_modules/vocabulary/dist/mcp/index.js` from a project that installed it. Node.js does not strip types under `node_modules`, so an installed copy runs the compiled `dist/`, as `docs/adr/0006-ship-compiled-javascript.md` decides. The HTTP server listens on 127.0.0.1.
+- Deployment: `node api/mcp/index.ts` from this repository, or `node node_modules/vocabulary/dist/mcp/index.js` from a project that installed it. Node.js does not strip types under `node_modules`, so the `prepare` script compiles `dist/` when a project installs the package, as `docs/adr/0007-build-on-install.md` decides. The HTTP server listens on 127.0.0.1.
 
 #### 3.2.2. Voice skills
 
@@ -76,7 +76,7 @@ None. Crowdin and Transifex are an export, not this file format.
 ## 6. Deployment & Infrastructure
 
 - Cloud Provider: GitHub
-- CI/CD Pipeline: `.github/workflows/ci.yml` typechecks, checks that `dist/` matches `npm run build`, and runs `npm test`, which starts the server from an installed copy. `.github/workflows/release-please.yml` opens the release pull request, and merging it tags `vMAJOR.MINOR.PATCH`. Details are in `CONTRIBUTING.md`. `.github/workflows/skill-check.yml` checks the skills with the harness action.
+- CI/CD Pipeline: `.github/workflows/ci.yml` typechecks and runs `npm test`, which installs the commit from git and starts the server from that copy. `.github/workflows/release-please.yml` opens the release pull request, and merging it tags `vMAJOR.MINOR.PATCH`. Details are in `CONTRIBUTING.md`. `.github/workflows/skill-check.yml` checks the skills with the harness action.
 
 ## 7. Security Considerations
 
@@ -88,7 +88,7 @@ None. Crowdin and Transifex are an export, not this file format.
 - Setup: `README.md`, section "Work in this repository"
 - Testing frameworks: `node --test`, as the harness decided for its TypeScript
 - Code quality tools: `tsc --noEmit`, as `docs/adr/0005-typecheck-with-typescript-7.md` decides
-- Build: `npm run build` writes `dist/`, which is committed
+- Build: `npm run build` writes `dist/`. `npm ci` and an install from git run it through `prepare`
 
 ## 9. Future Considerations / Roadmap
 

@@ -6,7 +6,7 @@ locale: en
 
 ## Status
 
-Accepted.
+Superseded by `docs/adr/0007-build-on-install.md`. `dist/` is no longer committed.
 
 ## Context
 
