@@ -126,8 +126,8 @@ How these skills relate is in `README.md`, in this folder.
   - When an equivalent record is confirmed as the same event and date, points to it as canonical and fills the source or the notes when the material already has them
   - When similar names are confirmed as different editions, years, cities, or contexts, creates the record with a name that includes the year, edition, city, or country that separates them
   - Puts the year at the end of an annual event title, renames a record that lacks the year, and keeps different years as different records
-  - Reads the date-with-weekday format, the annual-title pattern, the calendar URL, and the calendar country from the project instructions, and asks the country when `País do calendário` is empty, its default
-  - When a holiday or commemorative date has no source in the material, follows the calendar URL Notion usually uses for that year and country, without restricting the source to that URL, and reads a missing date from the page consulted
+  - Reads the date-with-weekday format, the annual-title pattern, and the calendar sources from the project instructions. Each source in `Fontes de calendário` has its URL and the country code that site uses, and the skill asks the code when a URL needs it and it is empty, the default
+  - When a holiday or commemorative date has no source in the material, follows the calendar sources Notion usually uses, with that year and the country code of each source, without restricting the source to them, and reads a missing date from the page consulted
   - Writes the weekday beside each date in replies, summaries, tables, and descriptions, after checking it against the event date, time, and time zone, and keeps the structured field valid
   - Leaves a question about when the date falls, or whether it is already listed, to procurar-data-significativa
   - Leaves the day or week lookup and the calendar event to other skills
@@ -405,8 +405,8 @@ How these skills relate is in `README.md`, in this folder.
   - Treats another year of an annual event as another record and does not pick one when the question omits the year
   - Answers with the event, the date, and the link, and writes the weekday beside each date
   - Includes the planning the notes already have, signals when the notes contradict the date, and does not narrate the search or name the skill
-  - When no record matches, says so and searches in the same reply, following the calendar URL Notion usually uses, with the named year or the current year and the calendar country, without restricting the search to that URL, and does not treat the web date as a list record
-  - Asks the country when `País do calendário` is empty, its default
+  - When no record matches, says so and searches in the same reply, following the calendar sources Notion usually uses, with the named year or the current year and the country code of each source, without restricting the search to them, and does not treat the web date as a list record
+  - Follows `Fontes de calendário`, where each source has its URL and the country code that site uses, and asks the code when a URL needs it and it is empty, the default
   - Does not create or alter the record
   - Leaves registering, reviewing, and altering the record to definir-data-significativa
   - Leaves the day or week lookup and the calendar event to other skills

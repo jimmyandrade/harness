@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.6.0"
   related:
     - procurar-data-significativa
 ---
@@ -14,14 +14,15 @@ metadata:
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `País do calendário` vazio quer dizer que você pergunta o país antes de seguir a URL do calendário.
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Fontes de calendário` é uma lista. Cada fonte traz a URL e o código do país que aquele site usa, porque cada site tem o seu código. Código vazio numa URL com `{country}` quer dizer que você pergunta o código antes de seguir essa fonte.
 
 ```yaml
 "Formato da data com dia da semana": "terça-feira, 01/09/2026"
 "Título do evento anual": "nome do evento ano"
-"URL do calendário": "https://www.timeanddate.com/calendar/?year={year}&country={country}"
-"País do calendário": ""
-"Uso da URL do calendário": "a que o Notion costuma utilizar, sem se restringir a ela"
+"Fontes de calendário":
+  - "URL": "https://www.timeanddate.com/calendar/?year={year}&country={country}"
+    "Código do país": ""
+"Uso das fontes de calendário": "as que o Notion costuma utilizar, na ordem da lista, sem se restringir a elas"
 ```
 
 ## Instruções
@@ -32,7 +33,7 @@ Cadastrar, revisar e alterar um registro na lista de datas significativas é est
 
 ### Passo 2
 
-A lista de datas significativas e o nome de cada propriedade vêm do mapeamento de dados do projeto. Este texto usa os conceitos: o evento, que é o título, a data, a categoria, a fonte e as observações. Lista ausente da conexão: pare. Não use lista de outro workspace. Sem início e fim no material, peça. Não invente a janela. Número que não está no material: peça. Feriado ou data comemorativa sem fonte no material: siga o uso da URL do calendário. `{year}` é o ano da data. `{country}` é o país do calendário. Sem o país do calendário, pergunte. A data que não está no material sai da página consultada. Não invente a data.
+A lista de datas significativas e o nome de cada propriedade vêm do mapeamento de dados do projeto. Este texto usa os conceitos: o evento, que é o título, a data, a categoria, a fonte e as observações. Lista ausente da conexão: pare. Não use lista de outro workspace. Sem início e fim no material, peça. Não invente a janela. Número que não está no material: peça. Feriado ou data comemorativa sem fonte no material: siga o uso das fontes de calendário. `{year}` é o ano da data. `{country}` é o código do país daquela fonte. Fonte com `{country}` e sem o código: pergunte. A data que não está no material sai da página consultada. Não invente a data.
 
 ### Passo 3
 
@@ -98,8 +99,8 @@ Se você gravar o evento anual sem o ano no final, ou puser ano num evento que n
 
 Se você gravar a fonte de memória, o registro não aponta uma página.
 
-1. Aponte uma página que traga a data. Siga o uso da URL do calendário.
-2. `{year}` é o ano da data. `{country}` é o país do calendário.
+1. Aponte uma página que traga a data. Siga o uso das fontes de calendário.
+2. `{year}` é o ano da data. `{country}` é o código do país daquela fonte.
 3. A data que não está no material sai da página consultada. Não invente.
 
 ### Data sem o dia da semana
@@ -132,7 +133,7 @@ O título ficou no título do evento anual, com o ano no final. Se já existia s
 
 ### Cadastre esse feriado na lista de datas significativas. A fonte não veio no material.
 
-A fonte ficou numa página da data. Segui o uso da URL do calendário, com o ano da data e o país do calendário. Não inventei a data.
+A fonte ficou numa página da data. Segui o uso das fontes de calendário, com o ano da data e o código do país daquela fonte. Não inventei a data.
 
 ### a fonte diz segunda-feira, 01/09/2026
 
@@ -150,7 +151,7 @@ A fonte ficou numa página da data. Segui o uso da URL do calendário, com o ano
 - Evento anual sem o ano no título: renomeie e ponha o ano no final. Não crie outro para o mesmo ano.
 - Evento que não é anual: não acrescente ano ao título, salvo quando o ano é o que separa o registro parecido.
 - Sem o ano da data no evento anual: peça. Não invente o ano.
-- Feriado ou data comemorativa sem fonte no material: siga o uso da URL do calendário. A data que falta sai da página consultada. Não invente.
+- Feriado ou data comemorativa sem fonte no material: siga o uso das fontes de calendário. A data que falta sai da página consultada. Não invente.
 - O pedido é saber quando a data cai, ou se ela já está na lista: pare e siga `procurar-data-significativa`.
 - O pedido é saber o dia ou a semana: pare. É outra habilidade.
 - O pedido é criar ou alterar o evento na agenda: pare. É outra habilidade.
@@ -162,7 +163,8 @@ A fonte ficou numa página da data. Segui o uso da URL do calendário, com o ano
 - Um nome de data real parece regra. Fora dos exemplos, a habilidade vale para qualquer evento. O fato fica no data source.
 - A agenda parece o lugar do cadastro. O registro fica na lista de datas significativas. O evento da agenda é outra habilidade.
 - A data numérica parece bastar. O texto leva o dia da semana, calculado com a data, o horário e o fuso. O campo estruturado continua válido.
-- Uma fonte lembrada parece bastar. Feriado sem fonte no material segue o uso da URL do calendário.
+- Uma fonte lembrada parece bastar. Feriado sem fonte no material segue o uso das fontes de calendário.
+- O código do país parece valer para qualquer site. Cada fonte de calendário tem o seu código. Use o código da fonte que você está seguindo.
 
 ## Scripts disponíveis
 
