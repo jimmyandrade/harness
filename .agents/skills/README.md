@@ -43,6 +43,7 @@ flowchart LR
     procurar_tarefa["procurar-tarefa"]
     publicar_habilidade["publicar-habilidade"]
     reconhecer_imagem["reconhecer-imagem"]
+    registrar_ciclo_do_ativo["registrar-ciclo-do-ativo"]
     resolver_comentarios_de_revisao["resolver-comentarios-de-revisao"]
     revisar_habilidade["revisar-habilidade"]
   end
@@ -68,6 +69,7 @@ flowchart LR
   definir_ativo_imobilizado --> lancar_despesa
   definir_ativo_imobilizado --> mesclar_registro
   definir_ativo_imobilizado --> reconhecer_imagem
+  definir_ativo_imobilizado --> registrar_ciclo_do_ativo
   definir_data_significativa --> procurar_data_significativa
   definir_empresa --> definir_grafia
   definir_empresa --> definir_perfil_social
@@ -136,6 +138,10 @@ flowchart LR
   reconhecer_imagem --> definir_grafia
   reconhecer_imagem --> definir_inscricao
   reconhecer_imagem --> procurar_oportunidade
+  registrar_ciclo_do_ativo --> definir_ativo_imobilizado
+  registrar_ciclo_do_ativo --> identificar_duplicata
+  registrar_ciclo_do_ativo --> lancar_despesa
+  registrar_ciclo_do_ativo --> mesclar_registro
   resolver_comentarios_de_revisao --> criar_commit
   resolver_comentarios_de_revisao --> criar_pull_request
   resolver_comentarios_de_revisao --> evoluir_habilidade

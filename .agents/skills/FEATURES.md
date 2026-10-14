@@ -611,6 +611,21 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses registering an opportunity, organizing a contact point, creating a task, and reading text that is already written
 
+### registrar-ciclo-do-ativo
+- **Stability**: experimental
+- **Description**: Record what happens to a durable asset after it exists
+- **Properties**:
+  - Lives at `.agents/skills/registrar-ciclo-do-ativo/SKILL.md`
+  - Reads the fixed asset list and its property names from the data mapping of the project, when the person does not name another list
+  - Records state, maintenance, repair, loan, partnership, write-off, disposal, sale, loss, exchange, and depreciation on the existing asset
+  - Uses the partnerships and loans property for a loan or partnership, and the purchase date plus the price paid for depreciation
+  - Writes Observações patrimoniais when no structured property exists, and suggests a property without creating it before a yes
+  - Does not delete the page, invent a depreciation method, create a status property, or create the asset page
+  - Leaves a payment that has financial evidence to lancar-despesa, and does not create an expense without that evidence
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses registering the asset, choosing stock, recording the payment, and creating the company
+
 ### resolver-comentarios-de-revisao
 - **Stability**: experimental
 - **Description**: When a pull request has comments from people or bots, handle each one: fix, decline, or ask, then reply and resolve

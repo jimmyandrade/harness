@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.13.0"
+  version: "0.13.1"
   related:
     - definir-empresa
     - gerenciar-estoque
@@ -13,6 +13,7 @@ metadata:
     - lancar-despesa
     - mesclar-registro
     - reconhecer-imagem
+    - registrar-ciclo-do-ativo
 ---
 
 # Definir ativo imobilizado
