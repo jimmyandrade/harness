@@ -19,13 +19,13 @@ Subjects follow [Conventional Commits](https://www.conventionalcommits.org/): `t
 | `chore` | Upkeep that is none of the above |
 | `ci` | The workflows under `.github/workflows/` |
 
-Branches are named `type/short-description`, with one of these types and an ASCII kebab-case description, such as `fix/mcp-path`. A branch a tool created with another prefix, such as `claude/`, is renamed before the first push.
+Branches are named `type/short-description`, with one of these types and an ASCII kebab-case description, such as `fix/mcp-path`. A branch a tool created with another prefix, such as `claude/`, is renamed before the first push. CI fails a pull request from a branch outside that pattern.
 
 Every change lands through a pull request. Do not push to `main`.
 
 ## CI
 
-`.github/workflows/ci.yml` runs on every pull request and on every push to `main`, on `ubuntu-26.04`. It typechecks and runs `npm test`. `npm ci` builds `dist/` through `prepare`, and one test installs the commit from git and starts the MCP server from that copy. `.github/workflows/skill-check.yml` checks the skills with the harness action when a skill or `AGENTS.md` changes.
+`.github/workflows/ci.yml` runs on every pull request and on every push to `main`, on `ubuntu-26.04`. On a pull request it first checks that the branch is `type/short-description`, skipping Renovate, Dependabot, and Release Please branches. Then it typechecks and runs `npm test`. `npm ci` builds `dist/` through `prepare`, and one test installs the commit from git and starts the MCP server from that copy. `.github/workflows/skill-check.yml` checks the skills with the harness action when a skill or `AGENTS.md` changes.
 
 Every step in a workflow has a `name`: a short imperative phrase in English, such as `Install dependencies`.
 
