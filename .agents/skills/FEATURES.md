@@ -541,6 +541,29 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses avoiding a duplicate, registering the disambiguation relation, creating the record, locking spelling, and deleting without an order
 
+### procurar-agenda
+- **Stability**: experimental
+- **Description**: Say what is already on the agenda for a day or a week
+- **Properties**:
+  - Lives at `.agents/skills/procurar-agenda/SKILL.md`
+  - Reads `Agendas` from the project instructions: each calendar by name and optional ID, with its use (`padrão`, `em uso`, `só leitura`, `aposentada`, or `ignorada`) and an optional purpose. Without a `padrão` calendar, the default is the account's main calendar
+  - Reads `Apelidos da agenda`, the names the person calls the calendar by, from the project instructions
+  - Reads Google Calendar, the operational agenda, which is probably connected through Notion Calendar, and does not create, review, or change a commitment
+  - Checks that the agenda tool is connected, active, and ready before concluding it cannot look up the day, starts the connection when the tool is available but not ready, and continues the original lookup once it is ready
+  - Opens when the request calls the calendar by a name in `Apelidos da agenda`, or when the person asks how the day is, what they have today, or what is already on the day or the week, even without the words agenda, calendar, event, commitment, or time
+  - Sends a create or change to definir-agenda and popstar or reverse planning to definir-agenda-de-popstar in the same turn
+  - Resolves a request that is not the agenda and offers agenda help
+  - Checks context before treating the name as a client, a supplier, a brand, or a person, and asks when the doubt is real
+  - Does not invent a date, a time, or a duration
+  - Leaves the popstar agenda, reverse planning, and life protection to definir-agenda-de-popstar, time audit to revisar-uso-do-tempo, reservation and the calendar event to definir-agenda, a significant date to definir-data-significativa, and managing a trip to definir-viagem
+  - Leaves the learning-resource page to definir-recurso-de-aprendizado and keeps a question about whether a class is on the day
+  - Writes the weekday beside each date in the reply, after checking it against the event date, time, and time zone, and does not create or change the event
+  - Reads retired calendar products from the calendars whose use is `aposentada` in `Agendas`, matches the calendar name rather than the event title, covers that calendar when the person names it, asks for any day, or asks to look again, warns when it still has an event, and suggests moving that event to the default calendar. The move follows definir-agenda
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description opens on a nickname of the calendar from the project, and on a question about how the day is, what the person has today, or what is already on the day or the week
+  - [x] The description refuses reverse planning, auditing time use, reserving, creating or changing the agenda, registering a significant date, and managing travel
+
 ### procurar-data-significativa
 - **Stability**: experimental
 - **Description**: Say when a significant date falls, or whether it is already in the list of significant dates
