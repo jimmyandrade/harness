@@ -312,6 +312,19 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses an existence-only check, locking the spelling of someone already listed, registering the profile, registering the company, and deleting without an order
 
+### definir-planejamento-financeiro
+- **Stability**: experimental
+- **Description**: Build or revise one month of financial planning
+- **Properties**:
+  - Lives at `.agents/skills/definir-planejamento-financeiro/SKILL.md`
+  - Reads `Moeda` and `Habilidade de projeção de caixa` from the project instructions
+  - Plans sales, expenses, a profit goal, cash, and practical actions for the month
+  - Asks for a forecast or a goal the person did not state, and does not invent them
+  - Leaves recording to definir-lancamento, the statements of what already happened to revisar-financas, and the cash projection to the skill that `Habilidade de projeção de caixa` names, when there is one
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses recording a sale or expense, building the income statement, moving stock, and projecting fair cash
+
 ### definir-tarefa
 - **Stability**: experimental
 - **Description**: Register, review, edit, or judge a merge of tasks with one set of criteria

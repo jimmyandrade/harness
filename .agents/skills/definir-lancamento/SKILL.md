@@ -5,9 +5,10 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.3"
+  version: "0.3.4"
   related:
     - definir-ativo-imobilizado
+    - definir-planejamento-financeiro
     - gerenciar-estoque
     - lancar-despesa
     - revisar-financas
