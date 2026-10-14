@@ -5,11 +5,12 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet. A busca na lista de inscrições usa notion-ai-search no servidor notion.
 metadata:
   author: jimmyandrade
-  version: "0.7.0"
+  version: "0.7.1"
   aliases:
     - atualizar-inscricao
   related:
     - procurar-oportunidade
+    - procurar-inscricao
 ---
 
 # Definir inscrição
