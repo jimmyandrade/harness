@@ -30,6 +30,7 @@ flowchart LR
     definir_tarefa["definir-tarefa"]
     descrever_habilidade_ou_schema["descrever-habilidade-ou-schema"]
     evoluir_habilidade["evoluir-habilidade"]
+    gerenciar_estoque["gerenciar-estoque"]
     identificar_duplicata["identificar-duplicata"]
     lancar_despesa["lancar-despesa"]
     medir_habilidade["medir-habilidade"]
@@ -76,6 +77,7 @@ flowchart LR
   definir_inscricao --> procurar_oportunidade
   definir_instrucoes_do_projeto --> criar_habilidade
   definir_instrucoes_do_projeto --> evoluir_habilidade
+  definir_lancamento --> gerenciar_estoque
   definir_lancamento --> lancar_despesa
   definir_perfil_social --> definir_grafia
   definir_perfil_social --> definir_pessoa
@@ -95,6 +97,9 @@ flowchart LR
   evoluir_habilidade --> medir_habilidade
   evoluir_habilidade --> publicar_habilidade
   evoluir_habilidade --> revisar_habilidade
+  gerenciar_estoque --> definir_lancamento
+  gerenciar_estoque --> identificar_duplicata
+  gerenciar_estoque --> mesclar_registro
   identificar_duplicata --> definir_data_significativa
   identificar_duplicata --> definir_grafia
   identificar_duplicata --> definir_perfil_social
