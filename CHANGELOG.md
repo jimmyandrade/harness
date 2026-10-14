@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.23.0](https://github.com/jimmyandrade/harness/compare/v0.22.0...v0.23.0) (2026-10-14)
+
+
+### Features
+
+* publish the plugin to Codex and Cursor ([#140](https://github.com/jimmyandrade/harness/issues/140)) ([4a7cacb](https://github.com/jimmyandrade/harness/commit/4a7cacb87637a64374863058148b92dadb3ae688))
+
 ## [0.22.0](https://github.com/jimmyandrade/harness/compare/v0.21.0...v0.22.0) (2026-10-14)
 
 
