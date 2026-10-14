@@ -18,6 +18,7 @@ harness/
 │   ├── schemas/                    # JSON Schema of a skill page
 │   ├── scripts/
 │   │   ├── check-skill/            # Skill checker (Python), run by Lefthook and the check-skill action
+│   │   ├── plugin-manifests/       # Checks that the Cursor manifest and the Codex-readable marketplace agree with .claude-plugin/, run by check-skill
 │   │   ├── project-parameters/     # Reads and validates the parameters in the AGENTS.md frontmatter, for every script
 │   │   ├── skill-graph/            # Writes .agents/skills/README.md, the Mermaid graph of skills
 │   │   ├── skill-folder-icon/      # macOS folder icon for each skill, run by Lefthook in the checker's virtual environment
@@ -25,7 +26,8 @@ harness/
 │   └── skills/                     # Shared skills, one <name>/SKILL.md each
 │       ├── FEATURES.md             # One entry per skill, written by hand
 │       └── README.md               # Generated skill graph; do not edit
-├── .claude-plugin/                 # Claude Code plugin core and the harness marketplace
+├── .claude-plugin/                 # Plugin core and the harness marketplace, read by Claude Code and Codex
+├── .cursor-plugin/                 # Cursor manifest of the core plugin, kept equal to .claude-plugin/plugin.json
 ├── .github/
 │   ├── actions/                    # Composite actions called by business harnesses
 │   │   ├── check-skill/
@@ -65,7 +67,7 @@ flowchart LR
   checker -- "checks" --> bskills
   sync -- "reads" --> mapping
   sync -- "writes pages" --> notion[("Notion skills database")]
-  skills -- "core plugin" --> claude["Claude Code"]
+  skills -- "core plugin" --> claude["Claude Code, Codex, Cursor"]
   bskills -- "links in .claude/skills, .cursor/skills" --> agents["Claude Code, Cursor"]
 ```
 
@@ -91,12 +93,12 @@ None. People reach the core through their agent (Claude Code, Cursor), GitHub, a
 - Technologies: TypeScript on Node.js 24, `@notionhq/client`
 - Deployment: Composite action on push to the default branch of a business harness
 
-#### 3.2.3. Claude Code plugin
+#### 3.2.3. Plugin
 
 - Name: `core`
-- Description: Ships the shared skills.
-- Technologies: Claude Code plugin manifest
-- Deployment: Marketplace `harness` in this repository, or a business marketplace that lists it pinned to a tag
+- Description: Ships the shared skills to Claude Code, Codex, and Cursor, as `docs/adr/0011-publish-the-plugin-to-codex-and-cursor-from-the-claude-code-manifests.md` decides.
+- Technologies: `.claude-plugin/plugin.json`, read by Claude Code and Codex; `.cursor-plugin/plugin.json`, read by Cursor
+- Deployment: Marketplace `harness` in this repository, or a business marketplace that lists it with a `url` source pinned to a tag; in Cursor, a team marketplace imported from this repository
 
 ## 4. Data Stores
 
@@ -149,7 +151,7 @@ None. People reach the core through their agent (Claude Code, Cursor), GitHub, a
 - Project Name: haRness (core)
 - Repository URL: https://github.com/jimmyandrade/harness
 - Primary Contact/Team: Jimmy Andrade
-- Date of Last Update: 2026-10-12
+- Date of Last Update: 2026-10-13
 
 ## 11. Glossary / Acronyms
 
@@ -158,5 +160,5 @@ None. People reach the core through their agent (Claude Code, Cursor), GitHub, a
 - Skill: a `SKILL.md` with instructions an agent loads for one kind of task.
 - Mapping: the JSON file that names the Notion data source, properties, and status options of one business.
 - Glossary: the per-language list of allowed, forbidden, and situational terms of a business. The engine that reads it is jimmyandrade/vocabulary.
-- Marketplace: the Claude Code catalog that lists plugins to install.
+- Marketplace: the catalog that lists plugins to install. Claude Code and Codex read `.claude-plugin/marketplace.json`.
 - ADR: Architecture Decision Record, in `docs/adr/`.

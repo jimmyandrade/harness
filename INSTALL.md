@@ -6,7 +6,7 @@ locale: en
 
 ## Overview
 
-This repository is the core layer of every harness. A business harness is a separate repository that uses it in three ways: as a Claude Code plugin, as GitHub Actions, and as a Node.js dependency for the local hook.
+This repository is the core layer of every harness. A business harness is a separate repository that uses it in three ways: as a plugin for Claude Code, Codex, and Cursor, as GitHub Actions, and as a Node.js dependency for the local hook.
 
 ## Runbooks
 
@@ -15,8 +15,9 @@ Each runbook is a list of steps with a command and a check, written for an agent
 | Runbook | Run it | It sets up |
 |---|---|---|
 | [`docs/runbooks/business-repository.md`](docs/runbooks/business-repository.md) | Once per business repository | Layout, core pin, checker, CI check, marketplace |
-| [`docs/runbooks/cursor.md`](docs/runbooks/cursor.md) | Once per project | The links Cursor follows to the project and core skills |
+| [`docs/runbooks/cursor.md`](docs/runbooks/cursor.md) | Once per project | The links Cursor follows to the project and core skills, or the Cursor plugins |
 | [`docs/runbooks/claude-code.md`](docs/runbooks/claude-code.md) | Once per project, and the install step once per machine | The project skills link and the `core` plugin |
+| [`docs/runbooks/codex.md`](docs/runbooks/codex.md) | Once per machine and project | The marketplace and the plugins in Codex |
 | [`docs/runbooks/notion.md`](docs/runbooks/notion.md) | Once per business repository | The mapping, a connection used only by the sync, the token, and the sync job |
 | [`docs/runbooks/renovate.md`](docs/runbooks/renovate.md) | Once per repository, optional | The Renovate preset, app, and portal settings that move the core pins on each release |
 
