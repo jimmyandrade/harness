@@ -40,7 +40,7 @@ Nada entra na `Branch base` sem pull request. Nunca dê push na `Branch base`, n
 
 Se a branch atual for a `Branch base`, crie uma branch a partir da `Branch base` remota atualizada antes de qualquer commit, sem rastrear a base.
 
-O nome da branch é `<tipo>/<descrição>`. O tipo é o do Conventional Commits do commit principal: `feat`, `fix`, `docs`, `refactor`, `perf`, `test`, `chore` ou `ci`. A descrição é ASCII em kebab-case. Branch com outro prefixo, como `claude/` ou `cursor/`, que a ferramenta criou, é renomeada antes do push. Se ela já foi publicada, renomeie no GitHub: o PR aberto segue o nome novo. Não abra PR de branch fora desse padrão.
+O nome da branch é `<tipo>/<descrição>`. O tipo é o do Conventional Commits do commit principal: `feat`, `fix`, `docs`, `refactor`, `perf`, `test`, `chore` ou `ci`. A descrição é ASCII em kebab-case. Branch com outro prefixo, como `claude/` ou `cursor/`, que a ferramenta criou, é renomeada antes do push. Não abra PR de branch fora desse padrão. Se ela já tem PR aberto, renomear no GitHub fecha esse PR: abra um PR novo da branch renomeada, com o mesmo título e corpo, e comente no antigo o link do novo.
 
 ### Passo 2
 
@@ -150,7 +150,7 @@ O pedido autoriza push e merge. Push sem o hook, porque o commit já passou em t
 - Já existe PR aberto para a branch: não abra outro, atualize a branch e dê o link do existente.
 - O PR da branch já foi mesclado: não dê rebase nem push nessa branch. Os commits dela já estão na `Branch base` pelo squash, e o push recria a branch apagada.
 - A branch atual tem trabalho de outra tarefa: comece a nova branch da `Branch base` remota, não da branch atual.
-- A ferramenta criou a branch com outro prefixo, como `claude/…`: renomeie para `<tipo>/<descrição>` antes do push, ou no GitHub se já foi publicada.
+- A ferramenta criou a branch com outro prefixo, como `claude/…`: renomeie para `<tipo>/<descrição>` antes do push. Com PR aberto, a renomeação fecha o PR: abra outro e ligue os dois.
 - O teste novo passa também sem a correção: o teste não cobre o bug. Reescreva antes do commit.
 - A pessoa pede para não commitar: pare antes do Passo 3.
 - A pessoa pede para subir direto na `Branch base`: não suba. Abra o PR e explique a regra.
@@ -170,7 +170,7 @@ O pedido autoriza push e merge. Push sem o hook, porque o commit já passou em t
 - `Comando de testes` e `Comando de build`: verificações do Passo 2.
 - `git fetch origin && git switch --no-track -c <branch> origin/<Branch base>`: Passo 1.
 - `git branch -m <tipo>/<descrição>`: renomeia a branch local no Passo 1.
-- `gh api -X POST repos/<Repositório>/branches/<branch>/rename -f new_name=<tipo>/<descrição>`: renomeia a branch publicada no Passo 1. Depois, `git fetch origin --prune` e `git branch -u origin/<tipo>/<descrição>`.
+- `gh api -X POST repos/<Repositório>/branches/<branch>/rename -f new_name=<tipo>/<descrição>`: renomeia a branch publicada no Passo 1 e fecha o PR dela. Depois, `git fetch origin --prune`, `git branch -m <tipo>/<descrição>`, `git branch -u origin/<tipo>/<descrição>` e um PR novo.
 - `gh pr list --repo <Repositório> --head <branch> --state all --json number,state`: estado do PR no Passo 4.
 - `git fetch origin && git rebase origin/<Branch base>`: Passo 4.
 - `GIT_TERMINAL_PROMPT=0 git -c credential.helper= -c 'credential.helper=!gh auth git-credential' ls-remote origin HEAD`: teste de acesso do Passo 5.
