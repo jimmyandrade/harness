@@ -5,10 +5,11 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.12.1"
+  version: "0.12.2"
   related:
     - criar-oportunidade
     - definir-agenda
+    - definir-agenda-de-popstar
     - definir-data-significativa
     - definir-grupo-de-oportunidades
     - procurar-oportunidade

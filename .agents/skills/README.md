@@ -19,6 +19,7 @@ flowchart LR
     criar_oportunidade["criar-oportunidade"]
     criar_pull_request["criar-pull-request"]
     definir_agenda["definir-agenda"]
+    definir_agenda_de_popstar["definir-agenda-de-popstar"]
     definir_ativo_imobilizado["definir-ativo-imobilizado"]
     definir_convidado["definir-convidado"]
     definir_data_significativa["definir-data-significativa"]
@@ -73,6 +74,7 @@ flowchart LR
   criar_pull_request --> criar_commit
   criar_pull_request --> evoluir_habilidade
   criar_pull_request --> resolver_comentarios_de_revisao
+  definir_agenda --> definir_agenda_de_popstar
   definir_agenda --> definir_convidado
   definir_agenda --> definir_data_significativa
   definir_agenda --> definir_grafia
@@ -82,6 +84,10 @@ flowchart LR
   definir_agenda --> procurar_agenda
   definir_agenda --> revisar_uso_do_tempo
   definir_agenda --> sincronizar_cronograma
+  definir_agenda_de_popstar --> definir_agenda
+  definir_agenda_de_popstar --> definir_reserva
+  definir_agenda_de_popstar --> procurar_agenda
+  definir_agenda_de_popstar --> revisar_uso_do_tempo
   definir_ativo_imobilizado --> definir_empresa
   definir_ativo_imobilizado --> gerenciar_estoque
   definir_ativo_imobilizado --> identificar_duplicata
@@ -111,6 +117,7 @@ flowchart LR
   definir_instrucoes_do_projeto --> criar_habilidade
   definir_instrucoes_do_projeto --> evoluir_habilidade
   definir_jornada_de_producao --> definir_agenda
+  definir_jornada_de_producao --> definir_agenda_de_popstar
   definir_jornada_de_producao --> procurar_agenda
   definir_lancamento --> definir_ativo_imobilizado
   definir_lancamento --> definir_planejamento_financeiro
@@ -129,12 +136,14 @@ flowchart LR
   definir_planejamento_financeiro --> gerenciar_estoque
   definir_planejamento_financeiro --> revisar_financas
   definir_reserva --> definir_agenda
+  definir_reserva --> definir_agenda_de_popstar
   definir_reserva --> revisar_uso_do_tempo
   definir_reserva --> sincronizar_cronograma
   definir_tarefa --> definir_grafia
   definir_tarefa --> procurar_tarefa
   definir_tipo_do_evento --> criar_oportunidade
   definir_tipo_do_evento --> definir_agenda
+  definir_tipo_do_evento --> definir_agenda_de_popstar
   definir_tipo_do_evento --> definir_grupo_de_oportunidades
   definir_tipo_do_evento --> definir_reserva
   definir_tipo_do_evento --> definir_tarefa
@@ -166,6 +175,7 @@ flowchart LR
   mesclar_registro --> identificar_duplicata
   procurar_agenda --> criar_oportunidade
   procurar_agenda --> definir_agenda
+  procurar_agenda --> definir_agenda_de_popstar
   procurar_agenda --> definir_data_significativa
   procurar_agenda --> definir_grupo_de_oportunidades
   procurar_agenda --> procurar_oportunidade
@@ -201,6 +211,7 @@ flowchart LR
   revisar_habilidade --> evoluir_habilidade
   revisar_habilidade --> publicar_habilidade
   revisar_uso_do_tempo --> definir_agenda
+  revisar_uso_do_tempo --> definir_agenda_de_popstar
   revisar_uso_do_tempo --> procurar_agenda
   sincronizar_cronograma --> definir_agenda
   sincronizar_cronograma --> definir_convidado
