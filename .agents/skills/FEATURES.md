@@ -257,6 +257,25 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The description refuses Notion, opening the repository from Notion, testing whether the skill met the case, evolving the skill, and writing the eval
   - [x] A limit missing from the project comes from the harness that ships the skill, and a limit in the project wins
 
+### procurar-data-significativa
+- **Stability**: experimental
+- **Description**: Say when a significant date falls, or whether it is already in the list of significant dates
+- **Properties**:
+  - Lives at `.agents/skills/procurar-data-significativa/SKILL.md`
+  - Reads the list of significant dates and its property names from the data mapping of the project
+  - Searches the event title by a direct query and by a semantic search
+  - Treats another year of an annual event as another record and does not pick one when the question omits the year
+  - Answers with the event, the date, and the link, and writes the weekday beside each date
+  - Includes the planning the notes already have, signals when the notes contradict the date, and does not narrate the search or name the skill
+  - When no record matches, says so and searches in the same reply, following the calendar URL Notion usually uses, with the named year or the current year and the calendar country, without restricting the search to that URL, and does not treat the web date as a list record
+  - Asks the country when `País do calendário` is empty, its default
+  - Does not create or alter the record
+  - Leaves registering, reviewing, and altering the record to definir-data-significativa
+  - Leaves the day or week lookup and the calendar event to other skills
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses registering, reviewing, or altering the record, the day or week lookup, creating or changing the calendar event, and managing travel
+
 ### procurar-email
 - **Stability**: experimental
 - **Description**: Find one or more emails about a subject and say what each message says
