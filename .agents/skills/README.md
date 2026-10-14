@@ -28,6 +28,7 @@ flowchart LR
     definir_lancamento["definir-lancamento"]
     definir_perfil_social["definir-perfil-social"]
     definir_pessoa["definir-pessoa"]
+    definir_planejamento_financeiro["definir-planejamento-financeiro"]
     definir_tarefa["definir-tarefa"]
     descrever_habilidade_ou_schema["descrever-habilidade-ou-schema"]
     evoluir_habilidade["evoluir-habilidade"]
@@ -88,6 +89,7 @@ flowchart LR
   definir_instrucoes_do_projeto --> criar_habilidade
   definir_instrucoes_do_projeto --> evoluir_habilidade
   definir_lancamento --> definir_ativo_imobilizado
+  definir_lancamento --> definir_planejamento_financeiro
   definir_lancamento --> gerenciar_estoque
   definir_lancamento --> lancar_despesa
   definir_lancamento --> revisar_financas
@@ -99,6 +101,9 @@ flowchart LR
   definir_pessoa --> definir_grafia
   definir_pessoa --> definir_perfil_social
   definir_pessoa --> identificar_duplicata
+  definir_planejamento_financeiro --> definir_lancamento
+  definir_planejamento_financeiro --> gerenciar_estoque
+  definir_planejamento_financeiro --> revisar_financas
   definir_tarefa --> definir_grafia
   definir_tarefa --> procurar_tarefa
   descrever_habilidade_ou_schema --> evoluir_habilidade
@@ -148,6 +153,7 @@ flowchart LR
   resolver_comentarios_de_revisao --> criar_pull_request
   resolver_comentarios_de_revisao --> evoluir_habilidade
   revisar_financas --> definir_lancamento
+  revisar_financas --> definir_planejamento_financeiro
   revisar_financas --> gerenciar_estoque
   revisar_habilidade --> criar_habilidade
   revisar_habilidade --> descrever_habilidade_ou_schema

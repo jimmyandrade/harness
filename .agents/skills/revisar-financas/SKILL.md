@@ -5,9 +5,10 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.2.1"
   related:
     - definir-lancamento
+    - definir-planejamento-financeiro
     - gerenciar-estoque
 ---
 
