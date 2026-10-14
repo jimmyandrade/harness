@@ -130,6 +130,52 @@ How these skills relate is in `README.md`, in this folder.
   - [ ] A merge request on a pull request with an unresolved thread runs resolver-comentarios-de-revisao first
   - [ ] A merge request with a failing check stops and names the check while `Exigir CI verde` is on
 
+### definir-agenda
+- **Stability**: experimental
+- **Description**: Create, review, alter, reserve, create demand, or sync a Google Calendar event
+- **Properties**:
+  - Lives at `.agents/skills/definir-agenda/SKILL.md`
+  - Reads `Agendas` from the project instructions: each calendar by name and optional ID, with its use (`padrão`, `em uso`, `só leitura`, `aposentada`, or `ignorada`) and an optional purpose. Without a `padrão` calendar, the default is the account's main calendar
+  - Reads the list and property names from the data mapping of the project
+  - Creates, reviews, or alters a commitment, opportunity, meeting, delivery, or commercial event on Google Calendar, the operational agenda, which is probably connected through Notion Calendar, copying the name and time from the Notion source the person indicated
+  - Before changing the title, time, date, place, or context of an event tied to an opportunity, a deal, or a contact point, reads the canonical Notion page and prefers the structured property it already has
+  - When the agenda and Notion disagree, uses the most reliable and most recent canonical source, keeps the opportunity's structured date and time as the base, lets an explicit correction prevail, and says what the agenda updated and what it refused
+  - Delegates the real event type to definir-tipo-do-evento before creating, reviewing, or altering, and writes only a commercial meeting, an internal commitment, a deadline, or a delivery
+  - Searches the agenda by name variations before creating, updates a probable existing event, and asks before creating another when the match is uncertain
+  - Before creating or altering, reads the calendars whose use is `aposentada` in `Agendas`, warns when one still has an event, suggests moving it to the default calendar, and moves it there when the person asks to move. It does not write the new event on the retired calendar
+  - Checks that Calendar Tools, Google Calendar, Notion Calendar, or an equivalent agenda tool is connected, active, and ready before concluding it cannot act, starts the connection when the tool is available but not ready, continues the original task once it is ready, and explains a failed connection before offering a manual alternative
+  - Leaves the route for an opportunity, a contact point, a course, a call, a recurring edition, a task, travel, and cost or payment to definir-tipo-do-evento
+  - Writes, recreates, migrates, or reviews a contact-point event on the editable calendar named by organizar-ponto-de-contato, and does not use the removed dedicated calendar
+  - Does not classify opportunity, deal, and contact point on its own; that distinction lives in definir-tipo-do-evento
+  - Leaves a reservation, a provisional block, a pending event, or a reminder to definir-reserva
+  - Leaves a career reservation made before demand exists to definir-agenda-de-popstar
+  - Copies an annual Google Calendar title from the Datas significativas record and leaves that record to definir-data-significativa
+  - Reads the date-with-weekday format from the YAML mapping under Parâmetros de configuração, the first level-2 heading, outside the frontmatter
+  - Writes the weekday beside each date in replies, summaries, tables, and descriptions, after checking it against the event date, time, and time zone, and keeps the structured calendar field valid
+  - Leaves the production day, the reduced journey, and Saturday alternation to definir-jornada-de-producao, and records the reduced day and the reason in the event description when that skill says so
+  - Leaves a trip itinerary to definir-viagem
+  - Leaves a trip, mission, opportunity, or Cronograma item that has a date and no confirmed start and end to sincronizar-cronograma, unless the person states it as the plan for a named day
+  - Leaves the guest list to definir-convidado
+  - Does not invent a date, a time, or a duration
+  - When the person states what happens on a named day, records those blocks without asking permission, as all-day blocks when no hour was stated
+  - Asks for the departure hour of a confirmed trip and does not record it without one; for a trip not yet confirmed, offers a reservation at an approximate hour or for the whole day
+  - Does not write health guidance, and sends a block that would erase food, exercise, exams, appointments, spirituality, family, pets, romantic relationship, friendship, or rest to definir-agenda-de-popstar
+  - Leaves the opportunity, the fair, the course, the call for entries, the recurring edition, and the task with their own skills, and offers to create a missing opportunity without creating it
+  - Leaves a question about what is already on a day or a week to procurar-agenda
+  - Leaves the popstar agenda, reverse planning, and life protection to definir-agenda-de-popstar
+  - Leaves time audit to revisar-uso-do-tempo
+  - Leaves the learning-resource page, its transcription, and its notes to definir-recurso-de-aprendizado
+  - Checks spelling with definir-grafia before the title, sends an external event title to the skill that `Habilidade de tom de voz` names, when there is one, with the canonical name, and puts the canonical page link, one sentence, and only useful search variants in the description
+  - Writes a title that a person or an AI can search, with the most searchable canonical name, and with edition, date, city, and a short context when those help
+  - Does not save a title that is only Reservado, Evento, Reunião, or Feira, and a provisional title may start with Reservado para or A confirmar when it also carries the canonical name
+  - Asks whether a meeting is in person or remote before creating it, and creates a Google Meet link when it is remote
+  - Does not ask the person to name the skill
+  - Closes with a short summary, lists each event as created, altered, kept, removed, or provisional, and names the time zone used
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses the production day, the day or week lookup, the popstar agenda, reverse planning, life protection, time audit, the body of work, a significant date, a trip itinerary, registering the opportunity, organizing the contact point, and creating a task
+  - [x] Before saving, the skill delegates the event type to definir-tipo-do-evento
+
 ### definir-ativo-imobilizado
 - **Stability**: experimental
 - **Description**: Register, review, and govern a durable fixed asset
