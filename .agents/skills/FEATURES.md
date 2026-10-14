@@ -190,7 +190,8 @@ How these skills relate is in `README.md`, in this folder.
   - Writes the request date as the day the request arose in this conversation, leaves it empty when that day is only in a chat the agent cannot read, and does not copy the start or the deadline into that field
   - On a recurring schedule trigger, scans the list and signals problems without writing
   - On a page-added or property-updated trigger, reviews that page only
-  - Comments and mentions the owner when the correction is not safe
+  - Comments when the correction is not safe and mentions the accountable person of the RACI matrix, or the owners when the list has no such role
+  - With `Considerar pessoas consultadas` set to `sim`, also mentions the consulted people and asks their view; with `Considerar pessoas informadas` set to `sim`, comments what changed and mentions the informed people after applying a correction. Both default to `não`, and a role the list lacks is reported, not created
   - Does not change the title, status, deadline, definition of done, or owner until the person asks to apply that correction
   - Does not only check existence, mark a task complete, or turn a rule without a deliverable into a task
 - **Test Criteria**:

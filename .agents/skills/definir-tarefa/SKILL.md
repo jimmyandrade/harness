@@ -3,7 +3,7 @@ name: definir-tarefa
 description: Use essa habilidade sempre que for cadastrar, revisar, validar, auditar, editar ou mesclar tarefas, ou quando o gatilho for em um cronograma, página adicionada à base de dados ou propriedade atualizada, mesmo sem dizer definir. NÃO use para só saber se ela já existe, marcar tarefa como concluída, nem transformar uma regra sem entrega em tarefa.
 metadata:
   author: jimmyandrade
-  version: "0.14.0"
+  version: "0.15.0"
   aliases:
     - criar-tarefa
     - revisar-tarefa
@@ -15,19 +15,21 @@ metadata:
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Habilidade de grafia` vazia quer dizer que a grafia fica como a pessoa escreveu. `Habilidade do ponto de contato` vazia quer dizer que o ponto de contato só não entra no corpo da tarefa.
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Habilidade de grafia` vazia quer dizer que a grafia fica como a pessoa escreveu. `Habilidade do ponto de contato` vazia quer dizer que o ponto de contato só não entra no corpo da tarefa. `Considerar pessoas consultadas` e `Considerar pessoas informadas` são `sim` ou `não`.
 
 ```yaml
 "Formato da data com dia da semana": "terça-feira, 01/09/2026"
 "Habilidade de grafia": ""
 "Habilidade do ponto de contato": ""
+"Considerar pessoas consultadas": "não"
+"Considerar pessoas informadas": "não"
 ```
 
 ## Instruções
 
 ### Passo 1
 
-Peça o que será feito, ou as tarefas que já existem, e a lista. Se a pessoa passou o link de cada tarefa, essas são as tarefas. Não busque outras tarefas. Se a pessoa nomeou a tarefa que já existe e não passou o link, abra essa tarefa no workspace conectado. Se esse título não estiver nessa conexão, peça a lista e pare. Se não veio lista, nem link, nem o nome da tarefa que já existe, peça. Se ela não estiver no workspace conectado, pare. Não use a lista de outro workspace. O nome de cada propriedade e as opções de status vêm do mapeamento de dados do projeto. Este texto usa os conceitos: o título, o prazo, o status, a definição de concluído, os responsáveis, as observações, o link de referência, a data da demanda e a data do cadastro. O status concluído é a opção que encerra a tarefa.
+Peça o que será feito, ou as tarefas que já existem, e a lista. Se a pessoa passou o link de cada tarefa, essas são as tarefas. Não busque outras tarefas. Se a pessoa nomeou a tarefa que já existe e não passou o link, abra essa tarefa no workspace conectado. Se esse título não estiver nessa conexão, peça a lista e pare. Se não veio lista, nem link, nem o nome da tarefa que já existe, peça. Se ela não estiver no workspace conectado, pare. Não use a lista de outro workspace. O nome de cada propriedade e as opções de status vêm do mapeamento de dados do projeto. Este texto usa os conceitos: o título, o prazo, o status, a definição de concluído, os responsáveis, as observações, o link de referência, a data da demanda e a data do cadastro. Na matriz RACI, os responsáveis executam. Quem responde pela tarefa, as pessoas consultadas e as informadas são os outros papéis, quando a lista os tiver. O status concluído é a opção que encerra a tarefa.
 
 ### Passo 2
 
@@ -65,7 +67,7 @@ Se for tarefa que já existe, dê o veredicto e o que falta em específica, mens
 
 ### Passo 5
 
-Se a pessoa pedir para aplicar ou editar, grave só a correção que ela aceitou. Com mais de uma tarefa, mostre cada mudança antes de gravar. Grave na definição de concluído e nos responsáveis só o que a pessoa disse. Não invente. Não marque como concluída. Não crie tarefa nova nessa passada.
+Se a pessoa pedir para aplicar ou editar, grave só a correção que ela aceitou. Com mais de uma tarefa, mostre cada mudança antes de gravar. Grave na definição de concluído e nos responsáveis só o que a pessoa disse. Não invente. Não marque como concluída. Não crie tarefa nova nessa passada. Com `Considerar pessoas informadas` em `sim`, comente o que mudou e marque as pessoas informadas.
 
 ### Passo 6
 
@@ -73,20 +75,13 @@ Se o gatilho for recorrente, em um cronograma, varra a lista. Não leia o worksp
 
 Se o gatilho for página adicionada à base de dados ou propriedade atualizada na base de dados, revise só essa página. Grave a correção que a regra já determina, como tirar o prazo do nome. Garanta o nome sem prazo, a data no prazo quando houver data, a definição de concluído como checklist, e que boa prática não seja tarefa. Não varra a lista. A correção insegura fica no comentário.
 
-Se faltar contexto, houver conflito de prioridade, o responsável estiver indefinido ou a intenção estiver em dúvida, não corrija. Comente na tarefa e marque a pessoa nos responsáveis, ou quem estiver definido como responsável por revisar. O comentário diz o que foi encontrado, por que não corrigiu e qual decisão falta. Não invente a pessoa. Não marque como concluída.
+Se faltar contexto, houver conflito de prioridade, o responsável estiver indefinido ou a intenção estiver em dúvida, não corrija. Comente na tarefa e marque quem responde pela tarefa, ou, sem esse papel, os responsáveis. Com `Considerar pessoas consultadas` em `sim`, marque também as consultadas e peça o parecer delas. O comentário diz o que foi encontrado, por que não corrigiu e qual decisão falta. Não invente a pessoa. Não marque como concluída. Parâmetro de papel em `sim` e a lista sem esse papel: diga isso e siga. Não crie a propriedade.
 
 ### Passo 7
 
 Na resposta, no resumo e na tabela, a data sai no formato da data com dia da semana, calculada com a data, o horário e o fuso. Sem um deles, e se o dia puder mudar, peça. Cada data de um intervalo leva o próprio dia. Dia incompatível: sinalize e confirme antes de gravar o prazo. O prazo continua data válida. O título continua sem palavra de tempo.
 
 ## Problemas comuns
-
-### Substantivo no título
-
-Se você começar o título com "Benchmarking", "Relatório" ou "Reunião", o nome não começa com verbo.
-
-1. Reescreva com verbo no infinitivo.
-2. "Benchmarking" vira "Fazer benchmarking". "Relatório" vira "Escrever relatório". "Reunião" vira "Agendar reunião".
 
 ### Boa prática como tarefa
 
@@ -160,13 +155,6 @@ Se você só disser que o título passou ou falhou, a revisão perde o prazo ven
 2. Se o prazo for anterior ao dia da revisão, diga que venceu e avise quem está nos responsáveis.
 3. Feche com a lista do que fazer. Não aplique título, status, prazo, definição de concluído nem os responsáveis.
 
-### Busca no lugar do link
-
-Se você receber os links e buscar a lista, a revisão traz tarefa que ninguém pediu.
-
-1. Abra os links.
-2. Não busque a lista.
-
 ### Conteúdo no corpo
 
 Se você escrever oportunidade, link ou observação no corpo da página, a informação fica fora da propriedade.
@@ -182,14 +170,6 @@ Se você escrever uma intenção na definição de concluído, a tarefa não tem
 1. Escreva um checklist curto.
 2. Cada item é feito ou não feito: o que existe, foi enviado ou foi registrado.
 3. A boa prática vai para as observações.
-
-### Tempo nas observações
-
-Se você deixar "hoje" ou "amanhã" nas observações, o campo fala de tempo em vez do que será feito.
-
-1. Tire a palavra de tempo das observações.
-2. A data fica no prazo.
-3. Se o prazo já tiver a data, essa data permanece. Não invente outra.
 
 ### Prazo estourado sem aviso
 
@@ -234,7 +214,7 @@ Se você corrigir sem contexto, com conflito de prioridade, sem responsável ou 
 
 1. Não corrija.
 2. Comente o que foi encontrado, por que não corrigiu e qual decisão falta.
-3. Marque a pessoa nos responsáveis, ou quem estiver definido como responsável por revisar. Não invente a pessoa.
+3. Marque quem responde pela tarefa, ou, sem esse papel, os responsáveis. Não invente a pessoa.
 
 ### Cronograma que grava
 
@@ -314,7 +294,7 @@ gravei o benefício no presente, como viabiliza e amplia, junto do que já estav
 - Duas tarefas do mesmo trabalho: sugira mesclar. Não mescle. "Ir às gráficas" não permanece.
 - O prazo passou, a tarefa não está concluída e há responsável: avise pelo nome. Não marque concluído.
 - Gatilho em um cronograma: sinalize e não grave. Página adicionada ou propriedade atualizada: revise só essa página.
-- Falta contexto ou a intenção está em dúvida: comente e marque a pessoa. Não corrija.
+- Falta contexto ou a intenção está em dúvida: comente e marque quem responde pela tarefa, ou os responsáveis. Não corrija.
 
 ## Pegadinhas
 
@@ -329,6 +309,7 @@ gravei o benefício no presente, como viabiliza e amplia, junto do que já estav
 - Gatilho de comentário, página removida, Slack, calendário ou mail: não revise a lista.
 - O workspace conectado pode ser de outra empresa. A lista vem na execução. Se não estiver nessa conexão, pare. Não use a lista que a conexão mostrou no lugar.
 - Um cronograma parece licença para corrigir tudo. Ele só sinaliza.
+- Quem executa parece quem decide. A correção insegura vai para quem responde pela tarefa.
 
 ## Scripts disponíveis
 
