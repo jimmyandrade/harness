@@ -19,19 +19,21 @@ Subjects follow [Conventional Commits](https://www.conventionalcommits.org/): `t
 | `chore` | Upkeep that is none of the above |
 | `ci` | CI and the actions under `.github/actions/` |
 
-Branches are named `type/short-description`, with one of these types and an ASCII kebab-case description, such as `feat/build-on-install`. A branch a tool created with another prefix, such as `claude/` or `cursor/`, is renamed before the first push. `criar-commit` and `criar-pull-request` follow the same rule in every project.
+Branches are named `type/short-description`, with one of these types and an ASCII kebab-case description, such as `feat/build-on-install`. A branch a tool created with another prefix, such as `claude/` or `cursor/`, is renamed before the first push. `criar-commit` and `criar-pull-request` follow the same rule in every project, and the `check-branch-name` action fails a pull request that does not.
 
 ## CI
 
-The workflow is `.github/workflows/ci.yml`. It runs on every pull request and on every push to `main`, on `ubuntu-26.04`. A push to another branch does not run it, so a pull request runs the checks once. It checks out the full history, runs the `check-skill` action of this repository against itself, runs every `.agents/scripts/*/test_*.py` and `.agents/skills/*/scripts/test_*.py` with the checker's own Python, typechecks, and runs `npm test`.
+The workflow is `.github/workflows/ci.yml`. It runs on every pull request and on every push to `main`, on `ubuntu-26.04`. A push to another branch does not run it, so a pull request runs the checks once. It checks out the full history, runs the `check-branch-name` action and the `check-skill` action of this repository against itself, runs every `.agents/scripts/*/test_*.py` and `.agents/skills/*/scripts/test_*.py` with the checker's own Python, typechecks, and runs `npm test`.
 
 Every step in a workflow or a composite action has a `name`: a short imperative phrase in English, such as `Install dependencies`. The run log and the pull request checks show that name instead of the command.
 
 ## Actions
 
-Business harnesses call two composite actions from this repository. Each one runs the scripts of the tag the caller pins, against the caller's checkout in `github.workspace`.
+Business harnesses call three composite actions from this repository. Each one runs the scripts of the tag the caller pins, against the caller's checkout in `github.workspace`.
 
 `check-skill` installs Python 3.14 and runs `.agents/scripts/check-skill/run-check.sh` with `HARNESS_ROOT` set to the caller. `base` and `head` limit the check to the skills that changed. An error becomes an `::error` annotation with the file and the line, and the job summary is one table of skills.
+
+`check-branch-name` runs `.agents/scripts/check-branch-name/check-branch-name.py` with the system Python. On a pull request, it fails with an `::error` annotation and a job summary line when the branch is not `type/short-description`, with a Conventional Commits type and an ASCII kebab-case description. A dot may join two parts, as in a version. `types` and `exempt` replace the default types and the skipped prefixes, `renovate/`, `dependabot/`, and `release-please--`. On a push there is no pull request branch, so it skips.
 
 `sync-skill-pages` first stops with an `::error` annotation when `notion-token` is empty, before any install. Then it installs Node.js 24 and the runtime dependencies of this repository, then runs `.agents/scripts/sync-skill-pages/sync-skill-pages.ts` with `HARNESS_ROOT` set to the caller. It reads the mapping from `mapping`, the page icon from the parameters in the frontmatter of the caller's `AGENTS.md` with the core fallback, and the token from `notion-token`. It creates or updates a page for each changed skill that does not set `metadata.notion` to `"false"`, and a page for the caller's `AGENTS.md` when that file changes. A change to the mapping republishes every skill. A skill removed from git does not remove the page. A rename keeps the page whose title is the previous name when the new skill lists it in `metadata.aliases`.
 

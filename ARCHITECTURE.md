@@ -17,6 +17,7 @@ harness/
 │   ├── mappings/                   # Template of the Notion mapping a business harness copies
 │   ├── schemas/                    # JSON Schema of a skill page
 │   ├── scripts/
+│   │   ├── check-branch-name/      # Branch name check (Python), run by the check-branch-name action
 │   │   ├── check-skill/            # Skill checker (Python), run by Lefthook and the check-skill action
 │   │   ├── project-parameters/     # Reads and validates the parameters in the AGENTS.md frontmatter, for every script
 │   │   ├── skill-graph/            # Writes .agents/skills/README.md, the Mermaid graph of skills
@@ -28,6 +29,7 @@ harness/
 ├── .claude-plugin/                 # Claude Code plugin core and the harness marketplace
 ├── .github/
 │   ├── actions/                    # Composite actions called by business harnesses
+│   │   ├── check-branch-name/
 │   │   ├── check-skill/
 │   │   └── sync-skill-pages/
 │   └── workflows/                  # CI and Release Please for this repository

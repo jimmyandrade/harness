@@ -1,7 +1,7 @@
 ---
 locale: en
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -40,7 +40,7 @@ metadata:
 - Write every commit subject in the language of `Idioma da mensagem de commit`, a parameter of `criar-commit`, which defaults to English.
 - Use a Conventional Commits subject: `type: description`. When the change affects one skill, the subject is `type(skill-name): description`. The types are `feat`, `fix`, `perf`, `docs`, `refactor`, `test`, `chore`, and `ci`.
 - A change to CI or to an action uses `ci`, even when it adds behavior.
-- Name every branch `type/short-description`, with one of those types and an ASCII kebab-case description: `feat/build-on-install`, `fix/mcp-path`. A branch a tool created with another prefix, such as `claude/` or `cursor/`, is renamed before the first push. Renaming a branch that already has a pull request closes that pull request, so open a new one from the renamed branch with the same title and body, and link it from the old one.
+- Name every branch `type/short-description`, with one of those types and an ASCII kebab-case description: `feat/build-on-install`, `fix/mcp-path`. A branch a tool created with another prefix, such as `claude/` or `cursor/`, is renamed before the first push. Renaming a branch that already has a pull request closes that pull request, so open a new one from the renamed branch with the same title and body, and link it from the old one. The `check-branch-name` action fails a pull request from a branch outside that pattern.
 
 ## Configuration
 
