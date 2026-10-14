@@ -810,3 +810,23 @@ How these skills relate is in `README.md`, in this folder.
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses creating the first version, running the test and editing the skill, only measuring size, and writing the skill page in Notion
+
+### sincronizar-cronograma
+- **Stability**: experimental
+- **Description**: Keep a dated item with no confirmed time off the calendar
+- **Properties**:
+  - Lives at `.agents/skills/sincronizar-cronograma/SKILL.md`
+  - Reads the schedule list and its property names from the data mapping of the project
+  - Does not create an all-day event as a stand-in for a missing time
+  - Keeps the item on the schedule list, pending a time, and off the agenda until temporal evidence exists, unless the person confirms the commitment is all-day
+  - Updates the real start and the real end from later evidence and keeps the original plan
+  - Splits distinct real commitments into separate items
+  - Prefers one atomic event for each real schedule item, pointing at that canonical item, and removes a duplicate umbrella only after the safe atomic items exist and no exclusive data would be lost
+  - Uses the next milestone as the end only after the person authorizes that rule, records the rule, and otherwise leaves the end pending
+  - Converts, updates, or removes an all-day placeholder once a real time exists, then reads the agenda again
+  - Leaves an event that already has a start and an end, and a plan the person states for a named day, to definir-agenda
+  - Leaves registering, reviewing, or organizing the canonical trip to definir-viagem
+  - Leaves the guest list to definir-convidado
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses recording an event that already has a time, creating an all-day stand-in, deciding the guest, the production day, and the day lookup
