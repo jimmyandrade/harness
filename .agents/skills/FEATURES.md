@@ -226,6 +226,23 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The description refuses Notion, opening the repository from Notion, testing whether the skill met the case, evolving the skill, and writing the eval
   - [x] A limit missing from the project comes from the harness that ships the skill, and a limit in the project wins
 
+### procurar-inscricao
+- **Stability**: experimental
+- **Description**: Answer who registered, whether the registration is confirmed, or whether a ticket was withdrawn
+- **Properties**:
+  - Lives at `.agents/skills/procurar-inscricao/SKILL.md`
+  - Reads the inscription list, its property names, and its status options from the data mapping of the project, and searches it in the title and in the notes
+  - Names each person in the note and does not answer yes for the whole event
+  - When several registrations match one event, says the answer depends on which withdrawal is meant, with status, date, and page link for each
+  - Treats a pre-registration as neither approval nor withdrawal, suggests the skill that `Habilidade de e-mail` names, when there is one, and points to the other contact channels with the organizer
+  - Treats the participant and the person who recorded the row as different people
+  - Searches every form of a name through the skill that `Habilidade de grafia` names, when there is one, and uses the correct spelling only in the reply
+  - When the person states that the inscription was made or confirmed, follows definir-inscricao so the celebration comes with the saved status
+  - Does not decide whether a task exists, and does not create, edit, or complete the registration
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses deciding whether a task exists, and creating, editing, or completing the registration
+
 ### procurar-oportunidade
 - **Stability**: experimental
 - **Description**: Check whether an opportunity already exists before another skill creates it
