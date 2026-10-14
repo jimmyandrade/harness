@@ -67,6 +67,7 @@ flowchart LR
   definir_grafia --> mesclar_registro
   definir_grupo_de_oportunidades --> criar_oportunidade
   definir_grupo_de_oportunidades --> procurar_oportunidade
+  definir_inscricao --> definir_grafia
   definir_inscricao --> procurar_inscricao
   definir_inscricao --> procurar_oportunidade
   definir_instrucoes_do_projeto --> criar_habilidade
@@ -79,6 +80,7 @@ flowchart LR
   definir_pessoa --> definir_grafia
   definir_pessoa --> definir_perfil_social
   definir_pessoa --> identificar_duplicata
+  definir_tarefa --> definir_grafia
   definir_tarefa --> procurar_tarefa
   descrever_habilidade_ou_schema --> evoluir_habilidade
   descrever_habilidade_ou_schema --> publicar_habilidade
@@ -98,7 +100,9 @@ flowchart LR
   mesclar_registro --> definir_perfil_social
   mesclar_registro --> identificar_duplicata
   procurar_data_significativa --> definir_data_significativa
+  procurar_email --> definir_grafia
   procurar_email --> procurar_inscricao
+  procurar_inscricao --> definir_grafia
   procurar_inscricao --> definir_inscricao
   procurar_inscricao --> procurar_email
   procurar_oportunidade --> criar_oportunidade
