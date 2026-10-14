@@ -18,6 +18,7 @@ flowchart LR
     criar_oportunidade["criar-oportunidade"]
     criar_pull_request["criar-pull-request"]
     definir_grupo_de_oportunidades["definir-grupo-de-oportunidades"]
+    definir_inscricao["definir-inscricao"]
     definir_instrucoes_do_projeto["definir-instrucoes-do-projeto"]
     descrever_habilidade_ou_schema["descrever-habilidade-ou-schema"]
     evoluir_habilidade["evoluir-habilidade"]
@@ -45,6 +46,7 @@ flowchart LR
   criar_pull_request --> resolver_comentarios_de_revisao
   definir_grupo_de_oportunidades --> criar_oportunidade
   definir_grupo_de_oportunidades --> procurar_oportunidade
+  definir_inscricao --> procurar_oportunidade
   definir_instrucoes_do_projeto --> criar_habilidade
   definir_instrucoes_do_projeto --> evoluir_habilidade
   descrever_habilidade_ou_schema --> evoluir_habilidade
@@ -57,6 +59,7 @@ flowchart LR
   evoluir_habilidade --> revisar_habilidade
   medir_habilidade --> evoluir_habilidade
   procurar_oportunidade --> criar_oportunidade
+  procurar_oportunidade --> definir_inscricao
   publicar_habilidade --> criar_commit
   publicar_habilidade --> criar_pull_request
   publicar_habilidade --> evoluir_habilidade

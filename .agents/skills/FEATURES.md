@@ -148,6 +148,25 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses registering the edition, checking whether the edition exists, organizing the participation, registering someone, creating a task, and reading an image
 
+### definir-inscricao
+- **Stability**: experimental
+- **Description**: Define an inscription, including one that is not in the list yet
+- **Properties**:
+  - Lives at `.agents/skills/definir-inscricao/SKILL.md`
+  - Reads the inscription list, its property names, and its status options from the data mapping of the project, stops before creating when the edition, the status, who made it, or the person or company is missing from it, and lists at the end each value that has no property
+  - Updates one inscription, and creates the row when the person sends an inscription that is not there and the message or photo already names who made it and for which person or company
+  - When a message or a completed-order photo confirms that participation, or the person states that the inscription was made or confirmed, sets the status to the confirmed option
+  - Celebrates after the status is saved, and does not stop at the celebration
+  - When more than one inscription matches and no page was named, names each and asks which to change before celebrating that confirmation
+  - Leaves the other inscriptions of the event unchanged
+  - On an existing row, changes only the named property, attaches the confirmation photo to the receipts in that same write, and does not fill the confirmation date unless the person states it
+  - When the person states the day they sent the inscription, writes that day and does not ask for the hour
+  - Spells names through the skill that `Habilidade de grafia` names in the project instructions, when there is one
+  - Does not store the order number, does not put the photo in the page body, and does not decide whether a task exists
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses only celebrating without saving, only looking up who registered, and deciding whether a task exists
+
 ### descrever-habilidade-ou-schema
 - **Stability**: experimental
 - **Description**: Write or correct a skill or schema description, and test whether a skill description triggers, even when the person does not say description
@@ -215,7 +234,7 @@ How these skills relate is in `README.md`, in this folder.
   - Reads the opportunity list and its property names from the data mapping of the project
   - Searches a fragment of the edition name in the title and in the name variations, with a direct query and a semantic search
   - Treats the same name on another date as another edition
-  - When one edition matches, shows the title, the date, and the link, and a confirmed order continues to the skill the project instructions name, in that same reply
+  - When one edition matches, shows the title, the date, and the link, and a confirmed order continues to definir-inscricao in that same reply
   - When several might match, lists them and does not pick
   - When none match, says it does not exist, links the list, repeats the name, the date with the weekday, and the place, and does not create it
 - **Test Criteria**:
