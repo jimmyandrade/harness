@@ -213,7 +213,7 @@ How these skills relate is in `README.md`, in this folder.
   - Leaves the other inscriptions of the event unchanged
   - On an existing row, changes only the named property, attaches the confirmation photo to the receipts in that same write, and does not fill the confirmation date unless the person states it
   - When the person states the day they sent the inscription, writes that day and does not ask for the hour
-  - Spells names through the skill that `Habilidade de grafia` names in the project instructions, when there is one
+  - Spells names through definir-grafia
   - Does not store the order number, does not put the photo in the page body, and does not decide whether a task exists
 - **Test Criteria**:
   - [x] The skill is present at that path
@@ -273,7 +273,7 @@ How these skills relate is in `README.md`, in this folder.
   - Suggests merging tasks the person named when they are the same work, and does not keep a vague title or copy a creation date
   - Opens the task the person named, and opens the links the person passed without searching the list for other tasks
   - When the person states the benefit, writes it into the notes in that reply, in the present, and keeps the note already there
-  - When a spelling is uncertain, follows the skill that `Habilidade de grafia` names, when there is one, and writes the correct form
+  - When a spelling is uncertain, follows definir-grafia and writes the correct form
   - Writes the request date as the day the request arose in this conversation, leaves it empty when that day is only in a chat the agent cannot read, and does not copy the start or the deadline into that field
   - On a recurring schedule trigger, scans the list and signals problems without writing
   - On a page-added or property-updated trigger, reviews that page only
@@ -423,7 +423,7 @@ How these skills relate is in `README.md`, in this folder.
   - Lists each matching message with subject, sender, and date
   - Does not treat a ticket-available message as approval of another registration
   - Does not reply, forward, or delete the message, and does not decide a registration or a task
-  - Spells names through the skill that `Habilidade de grafia` names in the project instructions, when there is one, and searches the correct first name plus the surname as plain text, even when the email property is empty, without the from: operator
+  - Spells names through definir-grafia and searches the correct first name plus the surname as plain text, even when the email property is empty, without the from: operator
   - Treats a nickname and the correct first name of one record as the same person, and does not report a first-name search as a miss for the nickname
   - When the person has already said the email exists, uses that account, including an event email that does not ask to register or withdraw a ticket again
   - When the person opens a mailbox link the connected search missed, reports that message, and does not say she sent nothing
@@ -444,7 +444,7 @@ How these skills relate is in `README.md`, in this folder.
   - When several registrations match one event, says the answer depends on which withdrawal is meant, with status, date, and page link for each
   - Treats a pre-registration as neither approval nor withdrawal, suggests procurar-email, and points to the other contact channels with the organizer
   - Treats the participant and the person who recorded the row as different people
-  - Searches every form of a name through the skill that `Habilidade de grafia` names, when there is one, and uses the correct spelling only in the reply
+  - Searches every form of a name through definir-grafia, and uses the correct spelling only in the reply
   - When the person states that the inscription was made or confirmed, follows definir-inscricao so the celebration comes with the saved status
   - Does not decide whether a task exists, and does not create, edit, or complete the registration
 - **Test Criteria**:
