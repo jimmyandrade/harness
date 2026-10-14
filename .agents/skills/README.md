@@ -22,6 +22,7 @@ flowchart LR
     definir_grupo_de_oportunidades["definir-grupo-de-oportunidades"]
     definir_inscricao["definir-inscricao"]
     definir_instrucoes_do_projeto["definir-instrucoes-do-projeto"]
+    definir_perfil_social["definir-perfil-social"]
     definir_tarefa["definir-tarefa"]
     descrever_habilidade_ou_schema["descrever-habilidade-ou-schema"]
     evoluir_habilidade["evoluir-habilidade"]
@@ -54,6 +55,7 @@ flowchart LR
   criar_pull_request --> evoluir_habilidade
   criar_pull_request --> resolver_comentarios_de_revisao
   definir_data_significativa --> procurar_data_significativa
+  definir_empresa --> definir_perfil_social
   definir_empresa --> identificar_duplicata
   definir_empresa --> mesclar_registro
   definir_grupo_de_oportunidades --> criar_oportunidade
@@ -62,6 +64,8 @@ flowchart LR
   definir_inscricao --> procurar_oportunidade
   definir_instrucoes_do_projeto --> criar_habilidade
   definir_instrucoes_do_projeto --> evoluir_habilidade
+  definir_perfil_social --> identificar_duplicata
+  definir_perfil_social --> mesclar_registro
   definir_tarefa --> procurar_tarefa
   descrever_habilidade_ou_schema --> evoluir_habilidade
   descrever_habilidade_ou_schema --> publicar_habilidade
@@ -72,9 +76,11 @@ flowchart LR
   evoluir_habilidade --> publicar_habilidade
   evoluir_habilidade --> revisar_habilidade
   identificar_duplicata --> definir_data_significativa
+  identificar_duplicata --> definir_perfil_social
   identificar_duplicata --> mesclar_registro
   medir_habilidade --> evoluir_habilidade
   mesclar_registro --> definir_empresa
+  mesclar_registro --> definir_perfil_social
   mesclar_registro --> identificar_duplicata
   procurar_data_significativa --> definir_data_significativa
   procurar_email --> procurar_inscricao

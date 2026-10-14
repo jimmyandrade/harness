@@ -203,6 +203,25 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses only celebrating without saving, only looking up who registered, and deciding whether a task exists
 
+### definir-perfil-social
+- **Stability**: experimental
+- **Description**: Normalize a social profile when registering or consolidating it
+- **Properties**:
+  - Lives at `.agents/skills/definir-perfil-social/SKILL.md`
+  - Reads the social profile list and its property names from the data mapping of the project, when the person does not name another list
+  - Runs when a social profile is registered or consolidated, and leaves the existence check to identificar-duplicata and the page merge to mesclar-registro
+  - Does not treat a single profile as proof the person is unique; the related person check stays with identificar-duplicata, and two records of the same person go to mesclar-registro
+  - Writes the title as the normalized canonical identifier: a handle without @, in lowercase, and without spaces
+  - Stores a website's full URL on the profile URL property, and keeps that URL out of the title
+  - Records useful search forms in Variações de nome as a bullet list, one name per item, each item ending with a semicolon, including an @ form, letter case, a nickname, an alternate URL of the same origin, and forms with and without an acronym or a year
+  - Links a similar but different profile in Não confundir com immediately, adds a clarifying search form, asks before saving when the pages are uncertain, and proposes the property when it is missing
+  - Keeps each profile on its own canonical record
+  - Does not only check existence, merge a record from another list, lock a person's or company's spelling, or delete without an order
+  - When a spelling screenshot shows a missing profile, creates that profile, writes the fields the screenshot shows, stores the screenshot in the screenshots property, and relates the person
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses an existence-only check, merging a record from another list, locking a person's or company's spelling, and deleting without an order
+
 ### definir-tarefa
 - **Stability**: experimental
 - **Description**: Register, review, edit, or judge a merge of tasks with one set of criteria

@@ -5,9 +5,10 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.11.1"
+  version: "0.11.2"
   related:
     - definir-empresa
+    - definir-perfil-social
     - identificar-duplicata
 ---
 
