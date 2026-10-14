@@ -69,18 +69,6 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
   - [ ] A business pull request that changes a skill shows the comment, and a second push edits it
   - [ ] A business workflow that calls the action fails on a skill that breaks a rule
 
-### check-branch-name
-- **Stability**: experimental
-- **Description**: Fail a pull request whose branch is not named after its Conventional Commits type
-- **Properties**:
-  - Composite action at `.github/actions/check-branch-name/` and script `.agents/scripts/check-branch-name/check-branch-name.py`
-  - Accepts `type/short-description`, with a type from `feat`, `fix`, `docs`, `refactor`, `perf`, `test`, `chore`, `ci` and an ASCII kebab-case description, where a dot may join two parts
-  - Skips `renovate/`, `dependabot/`, and `release-please--` branches, and skips a push, which has no pull request branch
-  - `types` and `exempt` replace the defaults
-- **Test Criteria**:
-  - [x] `claude/…`, a branch without a type, and a description that is not kebab-case fail, and a bot branch passes
-  - [ ] A business pull request from a `claude/…` branch fails the check
-
 ### sync-skill-pages
 - **Stability**: experimental
 - **Description**: Publish each changed skill of a repository as a page in its Notion skills database
