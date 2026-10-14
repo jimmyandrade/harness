@@ -3,11 +3,12 @@ name: definir-tarefa
 description: Use essa habilidade sempre que for cadastrar, revisar, validar, auditar, editar ou mesclar tarefas, ou quando o gatilho for em um cronograma, página adicionada à base de dados ou propriedade atualizada, mesmo sem dizer definir. NÃO use para só saber se ela já existe, marcar tarefa como concluída, nem transformar uma regra sem entrega em tarefa.
 metadata:
   author: jimmyandrade
-  version: "0.15.0"
+  version: "0.16.0"
   aliases:
     - criar-tarefa
     - revisar-tarefa
   related:
+    - definir-grafia
     - procurar-tarefa
 ---
 
@@ -15,11 +16,10 @@ metadata:
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Habilidade de grafia` vazia quer dizer que a grafia fica como a pessoa escreveu. `Habilidade do ponto de contato` vazia quer dizer que o ponto de contato só não entra no corpo da tarefa. `Considerar pessoas consultadas` e `Considerar pessoas informadas` são `sim` ou `não`.
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Habilidade do ponto de contato` vazia quer dizer que o ponto de contato só não entra no corpo da tarefa. `Considerar pessoas consultadas` e `Considerar pessoas informadas` são `sim` ou `não`.
 
 ```yaml
 "Formato da data com dia da semana": "terça-feira, 01/09/2026"
-"Habilidade de grafia": ""
 "Habilidade do ponto de contato": ""
 "Considerar pessoas consultadas": "não"
 "Considerar pessoas informadas": "não"
@@ -63,7 +63,7 @@ A tarefa, no conjunto do título, da definição de concluído, dos responsávei
 
 Se for tarefa nova e faltar um ponto, pergunte antes de criar. Não invente. Quando criar, mostre o nome, o status e o link. Não marque como concluída. Se o prazo já passou, a tarefa não está concluída e há alguém nos responsáveis, avise essa pessoa pelo nome que a tarefa está atrasada. Não marque como concluída por causa do atraso.
 
-Se for tarefa que já existe, dê o veredicto e o que falta em específica, mensurável, atingível, relevante e temporal. Não pule um ponto. Título que não diz o que será realizado não é correção: "Ir às gráficas" não passa. Prazo vazio e título sem data: diga que está vazio. Não invente a data. Prazo anterior à revisão e status diferente de concluído: diga que venceu, há quantos dias, e avise quem está nos responsáveis. Não marque concluído. Palavra de tempo nas observações sai. A data que já está no prazo permanece. Boa prática sem entrega não permanece como item. Duas tarefas do mesmo trabalho: sugira mesclar e não mescle. "Ir às gráficas e avaliar opções" não permanece. Não copie a data de criação. Se só uma tiver prazo, essa data permanece. Não cite tarefa que a pessoa não pediu. Feche com a lista do que fazer. Não altere título, status, prazo, definição de concluído nem os responsáveis nesta passada. Se a pessoa disser o benefício, grave nas observações nessa resposta, mantendo o que já está, inclusive o fato que ela separou desta tarefa. O verbo fica no presente, como viabiliza e amplia. O status concluído não põe o fato no passado. Vai não entra. Grafia em dúvida: siga a `Habilidade de grafia`, quando as instruções do projeto a indicarem, e grave a forma correta. Não invente a grafia. Ao criar, siga o flowchart de Data fora do alcance.
+Se for tarefa que já existe, dê o veredicto e o que falta em específica, mensurável, atingível, relevante e temporal. Não pule um ponto. Título que não diz o que será realizado não é correção: "Ir às gráficas" não passa. Prazo vazio e título sem data: diga que está vazio. Não invente a data. Prazo anterior à revisão e status diferente de concluído: diga que venceu, há quantos dias, e avise quem está nos responsáveis. Não marque concluído. Palavra de tempo nas observações sai. A data que já está no prazo permanece. Boa prática sem entrega não permanece como item. Duas tarefas do mesmo trabalho: sugira mesclar e não mescle. "Ir às gráficas e avaliar opções" não permanece. Não copie a data de criação. Se só uma tiver prazo, essa data permanece. Não cite tarefa que a pessoa não pediu. Feche com a lista do que fazer. Não altere título, status, prazo, definição de concluído nem os responsáveis nesta passada. Se a pessoa disser o benefício, grave nas observações nessa resposta, mantendo o que já está, inclusive o fato que ela separou desta tarefa. O verbo fica no presente, como viabiliza e amplia. O status concluído não põe o fato no passado. Vai não entra. Grafia em dúvida: siga `definir-grafia` e grave a forma correta. Não invente a grafia. Ao criar, siga o flowchart de Data fora do alcance.
 
 ### Passo 5
 
@@ -282,7 +282,7 @@ reviso só essa página. O título fica "Escrever relatório de vendas". Não va
 
 ### revisar a inscrição de apresentador num festival e a pessoa dizer o benefício: quem apresenta participa sem pagar e ganha autoridade ao apresentar; a empresa expõe, sem esta inscrição depender disso. A data do pedido está numa conversa de mensagens.
 
-gravei o benefício no presente, como viabiliza e amplia, junto do que já estava. A grafia da empresa seguiu a habilidade de grafia. Pedi a data, uma captura ou a cópia dos trechos. Não preenchi a data da demanda nem o prazo.
+gravei o benefício no presente, como viabiliza e amplia, junto do que já estava. A grafia da empresa seguiu `definir-grafia`. Pedi a data, uma captura ou a cópia dos trechos. Não preenchi a data da demanda nem o prazo.
 
 ## Casos-limite
 
@@ -304,7 +304,7 @@ gravei o benefício no presente, como viabiliza e amplia, junto do que já estav
 - Os links já apontam as tarefas. Uma busca na lista traz tarefa que ninguém pediu.
 - "Hoje" nas observações parece contexto. É tempo. Sai. A data permanece no prazo.
 - O status concluído parece licença para viabilizou. O benefício fica no presente, como viabiliza e amplia. Vai não entra.
-- Uma grafia torta parece o nome. Grave a forma correta, pela `Habilidade de grafia` quando houver.
+- Uma grafia torta parece o nome. Grave a forma correta, por `definir-grafia`.
 - O pedido desta conversa parece data inventada. Siga o flowchart de Data fora do alcance.
 - Gatilho de comentário, página removida, Slack, calendário ou mail: não revise a lista.
 - O workspace conectado pode ser de outra empresa. A lista vem na execução. Se não estiver nessa conexão, pare. Não use a lista que a conexão mostrou no lugar.

@@ -5,19 +5,18 @@ allowed-tools: notion:notion-ai-search
 compatibility: Precisa de internet. A busca no e-mail conectado usa notion-ai-search no servidor notion.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.5.0"
   related:
     - procurar-inscricao
+    - definir-grafia
 ---
 
 # Procurar e-mail
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Habilidade de grafia` vazia quer dizer que a busca usa o nome como a pessoa escreveu, com e sem acento.
-
 ```yaml
-"Habilidade de grafia": ""
+{}
 ```
 
 ## Instruções
@@ -28,7 +27,7 @@ A pergunta é se chegou mensagem sobre um assunto, ou o que uma ou mais mensagen
 
 ### Passo 2
 
-Antes de buscar um nome, siga a `Habilidade de grafia`, quando as instruções do projeto indicarem uma. A busca conectada não entende o operador from:. Não mande from:. Esse operador devolve páginas que citam o texto e deixa a mensagem dela de fora. Busque, como texto, o primeiro nome que a variação marca como correto, e esse primeiro nome, ponto, e o sobrenome do nome completo. Se o registro diz que Bia é apelido de Beatriz, busque Beatriz e beatriz.lima, não só Bia. Bia Lima e Beatriz Lima são a mesma pessoa. O e-mail vazio no registro não dispensa essas buscas. O primeiro nome também devolve outra pessoa com esse nome. Essa mensagem não é dela. Busque o assunto uma vez no e-mail conectado, sem usar o nome dela como única consulta. Não limite a busca a uma lista do Notion, porque isso deixa a caixa de fora. Não exija o assunto inteiro. Um resultado só conta se o tipo for e-mail.
+Antes de buscar um nome, siga `definir-grafia`. A busca conectada não entende o operador from:. Não mande from:. Esse operador devolve páginas que citam o texto e deixa a mensagem dela de fora. Busque, como texto, o primeiro nome que a variação marca como correto, e esse primeiro nome, ponto, e o sobrenome do nome completo. Se o registro diz que Bia é apelido de Beatriz, busque Beatriz e beatriz.lima, não só Bia. Bia Lima e Beatriz Lima são a mesma pessoa. O e-mail vazio no registro não dispensa essas buscas. O primeiro nome também devolve outra pessoa com esse nome. Essa mensagem não é dela. Busque o assunto uma vez no e-mail conectado, sem usar o nome dela como única consulta. Não limite a busca a uma lista do Notion, porque isso deixa a caixa de fora. Não exija o assunto inteiro. Um resultado só conta se o tipo for e-mail.
 
 ### Passo 3
 
@@ -161,7 +160,6 @@ Bia Lima e Beatriz Lima são a mesma pessoa. Busquei Beatriz e beatriz.lima, com
 - A pessoa entregou um link da caixa: esse link é a mensagem. Diga o fato de cada uma.
 - A busca devolveu página do Notion: isso não é o e-mail.
 - O e-mail não está conectado: pare. Não use outra caixa.
-- Sem `Habilidade de grafia` nas instruções do projeto: busque o nome como a pessoa escreveu, com e sem acento, e o primeiro nome, ponto, e o sobrenome.
 - Nada com esse pedaço: diga que a busca conectada não devolveu a mensagem. Não crie tarefa nem inscrição.
 - A pergunta é se a inscrição foi confirmada: diga o que a mensagem afirma. Não altere a lista de inscrições.
 

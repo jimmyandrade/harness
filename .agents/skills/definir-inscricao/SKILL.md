@@ -5,22 +5,21 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet. A busca na lista de inscrições usa notion-ai-search no servidor notion.
 metadata:
   author: jimmyandrade
-  version: "0.7.1"
+  version: "0.8.0"
   aliases:
     - atualizar-inscricao
   related:
     - procurar-oportunidade
     - procurar-inscricao
+    - definir-grafia
 ---
 
 # Definir inscrição
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Habilidade de grafia` vazia quer dizer que o nome fica como a pessoa escreveu.
-
 ```yaml
-"Habilidade de grafia": ""
+{}
 ```
 
 ## Instruções
@@ -43,7 +42,7 @@ flowchart LR
   B -->|nenhuma sem os dois| N[Não crie]
 ```
 
-Sem quem fez a inscrição e sem a pessoa ou empresa, exija essas marcações. Não invente nenhum dos dois. A comemoração dessa confirmação espera a gravação. Antes de escrever um nome, siga a `Habilidade de grafia`, quando as instruções do projeto indicarem uma. Na frase, use a forma correta. A foto entra para saber o evento e se o pedido está confirmado. O arquivo dessa foto vai para os comprovantes. O número do pedido não entra na inscrição.
+Sem quem fez a inscrição e sem a pessoa ou empresa, exija essas marcações. Não invente nenhum dos dois. A comemoração dessa confirmação espera a gravação. Antes de escrever um nome, siga `definir-grafia`. Na frase, use a forma correta. A foto entra para saber o evento e se o pedido está confirmado. O arquivo dessa foto vai para os comprovantes. O número do pedido não entra na inscrição.
 
 ### Passo 3
 
@@ -143,7 +142,6 @@ busquei a inscrição da Loja Exemplo como expositora no Festival Rota Sul 2026.
 - A lista de inscrições não está no workspace conectado: pare. Não use outra lista.
 - O mapeamento não tem a edição, o status, quem fez a inscrição ou a pessoa ou empresa: pare antes de criar e diga qual falta.
 - A participação não está na lista e já há quem fez a inscrição e para quem ela foi feita: crie a linha. Sem isso, não cadastre e exija as duas marcações.
-- Sem `Habilidade de grafia` nas instruções do projeto: escreva o nome como a pessoa escreveu.
 - A pergunta é só quem se inscreveu: use `procurar-inscricao`. Não altere a página.
 
 ## Pegadinhas

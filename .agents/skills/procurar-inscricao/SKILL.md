@@ -5,22 +5,21 @@ allowed-tools: notion:notion-ai-search
 compatibility: Precisa de internet. A busca semântica na lista de inscrições usa notion-ai-search no servidor notion.
 metadata:
   author: jimmyandrade
-  version: "0.8.0"
+  version: "0.9.0"
   aliases:
     - responder-inscricao
   related:
     - definir-inscricao
     - procurar-email
+    - definir-grafia
 ---
 
 # Procurar inscrição
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Habilidade de grafia` vazia quer dizer que a busca usa o nome como a pessoa escreveu, com e sem acento.
-
 ```yaml
-"Habilidade de grafia": ""
+{}
 ```
 
 ## Instruções
@@ -31,7 +30,7 @@ A pergunta é sobre inscrição ou retirada de ingresso. A lista de inscrições
 
 ### Passo 2
 
-Nessa lista, busque o pedaço no título e nas observações, por consulta direta e por busca semântica. Se o pedaço for um nome e as instruções do projeto indicarem a `Habilidade de grafia`, siga essa habilidade e busque cada forma da variação, não só o nome do registro. Na frase, escreva a forma correta. Não exija o nome inteiro. Não busque no workspace inteiro.
+Nessa lista, busque o pedaço no título e nas observações, por consulta direta e por busca semântica. Se o pedaço for um nome, siga `definir-grafia` e busque cada forma da variação, não só o nome do registro. Na frase, escreva a forma correta. Não exija o nome inteiro. Não busque no workspace inteiro.
 
 ### Passo 3
 
@@ -123,7 +122,6 @@ depende do que se chama de retirada. A inscrição de apresentador no Festival R
 - A nota cita duas pessoas: diga o fato de cada uma. Não junte as duas num sim.
 - A pergunta veio depois de saber se a tarefa existe: responda a inscrição. Não diga que a tarefa existe.
 - A lista de inscrições não está no workspace conectado: pare. Não use outra lista.
-- Sem `Habilidade de grafia` nas instruções do projeto: busque o nome como a pessoa escreveu, com e sem acento.
 - Nada com esse pedaço, e a pessoa afirmou que a inscrição foi feita ou confirmada: siga `definir-inscricao`. Nos outros casos, diga que não está na lista de inscrições. Não crie inscrição nesta habilidade. Não crie tarefa.
 
 ## Pegadinhas
