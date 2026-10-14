@@ -20,6 +20,20 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
   - [ ] Adding a business marketplace installs that plugin and `core`, in Claude Code and in Codex
   - [ ] Importing a business repository and this repository as Cursor team marketplaces installs both plugins
 
+### core-pins
+- **Stability**: experimental
+- **Description**: Keep every pin of the core harness in a repository on the same tag, so a manual bump cannot leave one behind
+- **Properties**:
+  - Script `.agents/scripts/core-pins/core-pins.py`, run by `run-check.sh` on commit and in the `check-skill` action
+  - Reads the pins the Renovate preset moves: the `harness` dependency in `package.json` and `package-lock.json`, each `jimmyandrade/harness/...@<tag>` in `.github/workflows/`, and a `github` or `url` source of the core with a `ref` in `.claude-plugin/marketplace.json` and `.claude/settings.json`
+  - The pin in `package.json` is the reference. A pin on another tag fails at its line, and in GitHub Actions the pull request shows it inline
+  - A repository without pins, such as this one, passes
+- **Test Criteria**:
+  - [x] Every kind of pin is found at its line, and a commit in the lockfile is not a pin
+  - [x] Matching pins pass, and each pin on another tag fails at its line
+  - [x] In GitHub Actions each finding is an `::error` annotation with the file and the line
+  - [x] This repository and `examples/business-harness/` pass
+
 ### plugin-manifests
 - **Stability**: experimental
 - **Description**: Keep the plugin manifests of a repository in agreement, so Claude Code, Codex, and Cursor install the same plugin

@@ -1,12 +1,14 @@
 #!/bin/sh
 # Run the skill checker for the project in HARNESS_ROOT, or in the working directory,
-# then check that .agents/skills/README.md matches the skill graph and that the plugin manifests agree.
+# then check that .agents/skills/README.md matches the skill graph, that the plugin manifests agree,
+# and that every pin of the core names the same tag.
 # The virtual environment lives in this harness, so a project does not need its own.
 set -eu
 CORE="$(CDPATH= cd -- "$(dirname "$0")/../../.." && pwd)"
 SCRIPT="$CORE/.agents/scripts/check-skill"
 GRAPH="$CORE/.agents/scripts/skill-graph/skill-graph.py"
 MANIFESTS="$CORE/.agents/scripts/plugin-manifests/plugin-manifests.py"
+PINS="$CORE/.agents/scripts/core-pins/core-pins.py"
 VENV="${HARNESS_VENV:-$CORE/.venv}"
 if [ -n "${HARNESS_ROOT:-}" ]; then
   cd "$HARNESS_ROOT"
@@ -36,4 +38,5 @@ else
 fi
 "$VENV/bin/python" "$GRAPH" --check || status=1
 "$VENV/bin/python" "$MANIFESTS" || status=1
+"$VENV/bin/python" "$PINS" || status=1
 exit "$status"
