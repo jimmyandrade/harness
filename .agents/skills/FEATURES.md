@@ -502,6 +502,28 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses editing the Habilidades page and merging in the same request
 
+### reconhecer-imagem
+- **Stability**: experimental
+- **Description**: Read what an image says and pass that text to another skill
+- **Properties**:
+  - Lives at `.agents/skills/reconhecer-imagem/SKILL.md`
+  - Script `scripts/recognize.py` ships with the core, finds the project from `HARNESS_ROOT` or the working directory, and reads `Idiomas do reconhecimento` from its project instructions
+  - On a machine with the repository and swiftc, runs recognize.py and reuses the compiled cache
+  - On Notion, without that script, reads the image and does not run tesseract
+  - When the script is present, does not read the image file itself
+  - Reads the recognition languages from its `Idiomas do reconhecimento` parameter
+  - Drops the phone and ad chrome, and does not treat a stray syllable as a name
+  - Does not send the image to the connected workspace
+  - When the text has an edition name and a date, and the person did not name the next skill, passes that text to procurar-oportunidade without asking, then to criar-oportunidade when the edition is not found
+  - When the reading is a completed or confirmed order, passes it to definir-inscricao after the edition lookup, and does not write the inscription itself
+  - When the reading is a person or a social profile, passes it to definir-grafia and does not stop at the text
+  - When the next skill is not in the conversation's skill list, delivers the text and asks whether to call that skill by name, without saying it is unavailable
+  - Stops at the text when it is not an opportunity, a person, or a profile and the person did not name the next skill
+  - Does not register the opportunity itself, organize a fair, or create a task
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses registering an opportunity, organizing a contact point, creating a task, and reading text that is already written
+
 ### resolver-comentarios-de-revisao
 - **Stability**: experimental
 - **Description**: When a pull request has comments from people or bots, handle each one: fix, decline, or ask, then reply and resolve
