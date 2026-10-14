@@ -5,11 +5,12 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.41.4"
+  version: "0.41.5"
   related:
     - definir-convidado
     - definir-data-significativa
     - definir-grafia
+    - definir-jornada-de-producao
     - definir-reserva
     - definir-tipo-do-evento
     - procurar-agenda
