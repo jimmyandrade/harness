@@ -503,6 +503,28 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses writing the Google Calendar event, reserving career time, auditing time use, and looking up the day
 
+### definir-viagem
+- **Stability**: experimental
+- **Description**: Register, update, deduplicate, and organize one canonical trip of the business
+- **Properties**:
+  - Lives at `.agents/skills/definir-viagem/SKILL.md`
+  - Reads the trip, lodging, locality, and schedule lists and their property names from the data mapping of the project
+  - Keeps one canonical trip on the trip list, locates it by origin, destination, and equal or overlapping dates before any create, treats BH and Belo Horizonte as the same origin and RJ, Rio, and Rio de Janeiro as the same destination, updates a safe match, asks when several match or the match is unsafe, asks for a missing route or dates instead of creating, and creates one trip with only confirmed data when none matches. Keeps origin, destination, dates, lodging, and existing investments on that trip. Resolves origin and destination through Localidades e praças, links the page that already matches the name or the abbreviation, and does not create a locality
+  - Chooses the travel stage from the closed list. Saída is leaving home, the hotel, or a meeting point. Ida and Volta are the general outbound and return legs when no more specific milestone exists. Check-in confirms the trip or enters the lodging. Embarque is boarding. Decolagem and Pouso are the flight's actual departure and arrival. Transfer is organized ground movement. Atividade is a visit or program. Check-out is leaving the lodging. Airport arrival keeps an empty stage
+  - Updates a schedule row that already matches the trip, the name, the stage, and the date when its time is empty or equal, asks when that time differs or several rows match, and creates a separate row for each other operational milestone, linked to the trip and to the opportunity when that opportunity already exists. Puts an informed time on Início planejado, puts Fim planejado only when the source gives an end of that same event, fills each actual time only when that timestamp is known, keeps a future event as Planejado, and records a known date with a pending time as the date plus the pending note in Contexto e observações, without an approximate time
+  - Answers who will drive the person, or whether a bus is needed, from the flight number and the takeoff time of the outbound and return legs, and does not substitute boarding or another milestone for that takeoff
+  - Leaves an unconfirmed time empty, and does not copy the next milestone's time or use an all-day block in its place
+  - Distinguishes a confirmed fact, a pending item, and conflicting sources. Leaves the pending item empty and named, keeps both conflicting sources, and lets a more recent and explicitly official source prevail. Does not invent a city, an airport, a hotel, a time, a transfer, or a responsibility
+  - Links each lodging to the trip only when the name or the address is reliable, because a trip can have more than one. An address without a confirmed name becomes the lodging title. The written address, the address complement, the map place, the room, the breakfast, and a covered expense without a ledger entry stay on that lodging. A financial entry follows lancar-despesa and relates to the trip, and an organization-covered amount stays distinct from an expense the participant owes. General weather and packing guidance, such as cold, heat, dry weather, rain, and what kind of clothes to bring, stays named on the trip. It is not a product of the business, and no property is created for it. Cronograma keeps the operational event, its stage, its times, its owners, and the note for that event
+  - Puts a flight number, which has no property of its own, in the milestone context, without repeating date, time, or place
+  - Does not write the flight, the lodging, or the guidance on an opportunity or an inscription
+  - Does not create a trip when the person only asks whether one exists or which day it falls on
+  - Leaves a dated milestone with no confirmed start and end to sincronizar-cronograma, a confirmed calendar time and a named-day plan to definir-agenda, and a financial proof or an amount to lancar-despesa
+  - Does not promote the trip to confirmed without evidence, and does not cancel it without explicit evidence
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses recording an event that already has a time, syncing a date-only milestone, posting the amount, registering the opportunity, and registering someone
+
 ### descrever-habilidade-ou-schema
 - **Stability**: experimental
 - **Description**: Write or correct a skill or schema description, and test whether a skill description triggers, even when the person does not say description

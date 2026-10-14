@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.41.8"
+  version: "0.41.9"
   related:
     - definir-agenda-de-popstar
     - definir-convidado
@@ -14,6 +14,7 @@ metadata:
     - definir-jornada-de-producao
     - definir-reserva
     - definir-tipo-do-evento
+    - definir-viagem
     - procurar-agenda
     - revisar-uso-do-tempo
     - sincronizar-cronograma

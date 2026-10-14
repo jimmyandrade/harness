@@ -5,12 +5,13 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.6.1"
   aliases:
     - agenda de popstar
   related:
     - definir-agenda
     - definir-reserva
+    - definir-viagem
     - procurar-agenda
     - revisar-uso-do-tempo
 ---
