@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.12.4"
+  version: "0.12.5"
   related:
     - criar-oportunidade
     - definir-agenda
@@ -14,6 +14,7 @@ metadata:
     - definir-grupo-de-oportunidades
     - definir-recurso-de-aprendizado
     - definir-viagem
+    - organizar-ponto-de-contato
     - procurar-oportunidade
     - revisar-uso-do-tempo
 ---

@@ -664,6 +664,32 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses avoiding a duplicate, registering the disambiguation relation, creating the record, locking spelling, and deleting without an order
 
+### organizar-ponto-de-contato
+- **Stability**: experimental
+- **Description**: Plan and organize a physical contact point of the business, including a pop-up store
+- **Properties**:
+  - Lives at `.agents/skills/organizar-ponto-de-contato/SKILL.md`
+  - Reads `Agendas` from the project instructions: each calendar by name and optional ID, with its use (`padrão`, `em uso`, `só leitura`, `aposentada`, or `ignorada`) and an optional purpose. Without a `padrão` calendar, the default is the account's main calendar
+  - Previous name: organizar-feira
+  - Treats a fair as a physical contact point when it is the business's real participation
+  - Leaves a meeting or a review with an organization to definir-agenda, and does not create a contact point on the agenda from an approved opportunity until the participation days are confirmed
+  - Keeps on the agenda only the participation days the person confirmed or wanted, and removes or cancels a wrong-day event when the person corrects it
+  - Prefers one event per confirmed day of the same opportunity, marks the title with the day position, and uses an all-day event or a range only for a continuous trip or a long occupation
+  - Writes a contact-point event on the calendar of `Agendas` whose purpose is contact points, or the default calendar, ignores a calendar whose use is `ignorada` even when history still names it, records the contact point scope and the canonical page in the description, migrates an event from another editable calendar and cancels the old one, and when the old calendar cannot be edited creates the equivalent event and says the duplicate must be removed manually
+  - Treats Pontos de contato as the canonical order and number, does not split an event only because the calendar title number differs, updates that title after the other identifiers match, and asks before renaming when the match stays ambiguous
+  - Reads the editable calendar and the removed calendar from the YAML mapping under Parâmetros de configuração
+  - Leaves organizing a trip to definir-viagem
+  - Treats contact points as one list and opportunities as another
+  - When a reminder names that point, asks which contact point and which opportunity, and does not leave those relations empty
+  - Does not invent the page or create a second one with the same name
+  - Does not copy the reminder's day onto the contact point or the opportunity dates
+  - Does not write the task title, the deadline, or the definition of done
+  - When the person asks what is left to organize, lists open linked tasks and gaps already on the pages, orders them by the event date, states that date with the weekday, and does not create tasks in that reply
+  - Does not ask the person to name the skill
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses registering the opportunity, checking whether the opportunity already exists, organizing a trip, writing the task title, the deadline, and the definition of done, checking whether the task exists, and registering someone
+
 ### procurar-agenda
 - **Stability**: experimental
 - **Description**: Say what is already on the agenda for a day or a week
