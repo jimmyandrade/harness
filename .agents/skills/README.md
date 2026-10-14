@@ -18,6 +18,7 @@ flowchart LR
     criar_ideia_de_conteudo["criar-ideia-de-conteudo"]
     criar_oportunidade["criar-oportunidade"]
     criar_pull_request["criar-pull-request"]
+    definir_ativo_imobilizado["definir-ativo-imobilizado"]
     definir_data_significativa["definir-data-significativa"]
     definir_empresa["definir-empresa"]
     definir_grafia["definir-grafia"]
@@ -61,6 +62,12 @@ flowchart LR
   criar_pull_request --> criar_commit
   criar_pull_request --> evoluir_habilidade
   criar_pull_request --> resolver_comentarios_de_revisao
+  definir_ativo_imobilizado --> definir_empresa
+  definir_ativo_imobilizado --> gerenciar_estoque
+  definir_ativo_imobilizado --> identificar_duplicata
+  definir_ativo_imobilizado --> lancar_despesa
+  definir_ativo_imobilizado --> mesclar_registro
+  definir_ativo_imobilizado --> reconhecer_imagem
   definir_data_significativa --> procurar_data_significativa
   definir_empresa --> definir_grafia
   definir_empresa --> definir_perfil_social
@@ -77,6 +84,7 @@ flowchart LR
   definir_inscricao --> procurar_oportunidade
   definir_instrucoes_do_projeto --> criar_habilidade
   definir_instrucoes_do_projeto --> evoluir_habilidade
+  definir_lancamento --> definir_ativo_imobilizado
   definir_lancamento --> gerenciar_estoque
   definir_lancamento --> lancar_despesa
   definir_perfil_social --> definir_grafia
@@ -97,6 +105,7 @@ flowchart LR
   evoluir_habilidade --> medir_habilidade
   evoluir_habilidade --> publicar_habilidade
   evoluir_habilidade --> revisar_habilidade
+  gerenciar_estoque --> definir_ativo_imobilizado
   gerenciar_estoque --> definir_lancamento
   gerenciar_estoque --> identificar_duplicata
   gerenciar_estoque --> mesclar_registro
@@ -104,6 +113,7 @@ flowchart LR
   identificar_duplicata --> definir_grafia
   identificar_duplicata --> definir_perfil_social
   identificar_duplicata --> mesclar_registro
+  lancar_despesa --> definir_ativo_imobilizado
   lancar_despesa --> definir_lancamento
   medir_habilidade --> evoluir_habilidade
   mesclar_registro --> definir_empresa
