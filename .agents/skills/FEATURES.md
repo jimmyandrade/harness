@@ -414,6 +414,20 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses only checking existence, marking a task complete, and turning a rule without a deliverable into a task
 
+### definir-tipo-do-evento
+- **Stability**: experimental
+- **Description**: Decide the real type of a commitment before the agenda writes it
+- **Properties**:
+  - Lives at `.agents/skills/definir-tipo-do-evento/SKILL.md`
+  - Classifies the commitment before a create, review, or alter, and asks when the type is unclear
+  - Treats an opportunity as the edition, the date, the curation, and the chance to participate, a deal as the conversation or commercial meeting, and a contact point as real participation
+  - Does not turn a meeting or a review into a contact point, and does not record an approved opportunity as a contact point until the participation days are confirmed
+  - Sends an existing opportunity to procurar-oportunidade, a missing one to an offer of criar-oportunidade, a contact point to organizar-ponto-de-contato, a course to procurar-oportunidade and definir-recurso-de-aprendizado, a call to the opportunity regulation, a recurring edition to definir-grupo-de-oportunidades, a task to definir-tarefa, travel to definir-viagem, and cost or payment to lancar-despesa
+  - Leaves the write of a commercial meeting, an internal commitment, a deadline, or a delivery to definir-agenda, and keeps a deadline distinct from a delivery
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses writing the Google Calendar event, reserving career time, auditing time use, and looking up the day
+
 ### descrever-habilidade-ou-schema
 - **Stability**: experimental
 - **Description**: Write or correct a skill or schema description, and test whether a skill description triggers, even when the person does not say description
