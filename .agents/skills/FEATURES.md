@@ -303,6 +303,31 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The description refuses Notion, opening the repository from Notion, testing whether the skill met the case, evolving the skill, and writing the eval
   - [x] A limit missing from the project comes from the harness that ships the skill, and a limit in the project wins
 
+### mesclar-registro
+- **Stability**: experimental
+- **Description**: Consolidate records already identified as the same item into one canonical record
+- **Properties**:
+  - Lives at `.agents/skills/mesclar-registro/SKILL.md`
+  - Runs after the records are already the same item, and leaves the existence check to identificar-duplicata
+  - Routes skill handoffs from the first step in a flowchart
+  - Treats two person records of the same person as the same item even when only one social profile exists, and does not use Não confundir com to separate that duplicate
+  - Refuses similar names that are not the same entity, and leaves each entity on its own canonical record
+  - Leaves the disambiguation relation to identificar-duplicata, and a social profile link to definir-perfil-social, and does not leave that correction only in the chat
+  - Picks one canonical record, preferring a correct official link and then the record with more filled data
+  - Keeps the canonical name in the title and records a previous name, nickname, wrong spelling, or ambiguous form in the variation property the database already has, without deleting existing items
+  - Uses the variation property the data mapping of the project names for the list, or the variation field the list already has
+  - Warns and proposes the variation property when it is missing, and adds the previous name when a recent rename left that field empty
+  - Before copying, the reply is a diff of what the canonical page brings and what each duplicate brings, marking what only one page has and what conflicts
+  - Copies onto the canonical record any property or relation that only a duplicate has and that does not conflict
+  - Deletes the duplicate only when the person ordered it, after every property and relation merges safely; a conflict returns a diff and waits for which value is canonical
+  - In the lists `Listas que excluem a duplicata reconciliada` names, empty by default, deletes a reconciled duplicate instead of archiving it, after the useful data and relations are on the canonical record, and asks before deleting when that could lose information or the duplicate is uncertain
+  - Sends a consolidated supplier company to definir-empresa for the responsible person, and does not leave that person only in a note or only in the owners relation
+  - Records a retired value on the property the list already has for that, or in the page body
+  - Does not check existence alone, create the record, lock spelling, register the disambiguation relation, or delete without an order
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses avoiding a duplicate, registering the disambiguation relation, creating the record, locking spelling, and deleting without an order
+
 ### procurar-data-significativa
 - **Stability**: experimental
 - **Description**: Say when a significant date falls, or whether it is already in the list of significant dates

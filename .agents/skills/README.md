@@ -26,6 +26,7 @@ flowchart LR
     evoluir_habilidade["evoluir-habilidade"]
     identificar_duplicata["identificar-duplicata"]
     medir_habilidade["medir-habilidade"]
+    mesclar_registro["mesclar-registro"]
     procurar_data_significativa["procurar-data-significativa"]
     procurar_email["procurar-email"]
     procurar_inscricao["procurar-inscricao"]
@@ -68,7 +69,9 @@ flowchart LR
   evoluir_habilidade --> publicar_habilidade
   evoluir_habilidade --> revisar_habilidade
   identificar_duplicata --> definir_data_significativa
+  identificar_duplicata --> mesclar_registro
   medir_habilidade --> evoluir_habilidade
+  mesclar_registro --> identificar_duplicata
   procurar_data_significativa --> definir_data_significativa
   procurar_email --> procurar_inscricao
   procurar_inscricao --> definir_inscricao
