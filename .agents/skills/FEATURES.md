@@ -357,6 +357,20 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description says the test edits the validated skill, and refuses creating the first version, only checking whether the description triggers, only reviewing without running, and writing the skill page in Notion
 
+### gerenciar-estoque
+- **Stability**: experimental
+- **Description**: Update the balance of an exhaustible item and leave payment outside
+- **Properties**:
+  - Lives at `.agents/skills/gerenciar-estoque/SKILL.md`
+  - Reads the stock list and its property names from the data mapping of the project, when the person does not name another list
+  - Updates the current balance for an entry or an exit and leaves an unknown balance empty
+  - Accepts only metro, unidade, pacote, rolo, and kit as the balance unit
+  - Sends the cash effect to definir-lancamento and does not record the payment or create a cost category
+  - Asks the quantity before suggesting a replenishment
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses a durable good, recording the payment, and creating the cost category
+
 ### identificar-duplicata
 - **Stability**: experimental
 - **Description**: Check for an equivalent record before creating one, and point at the existing record
