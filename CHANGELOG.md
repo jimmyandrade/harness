@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.32.0](https://github.com/jimmyandrade/harness/compare/v0.31.0...v0.32.0) (2026-10-15)
+
+
+### Features
+
+* **definir-conta-bancaria:** require the Pix key when the project asks ([#197](https://github.com/jimmyandrade/harness/issues/197)) ([50ba7d0](https://github.com/jimmyandrade/harness/commit/50ba7d0f63c8fc283adb111e68f118912a3976cf))
+
+
+### Bug Fixes
+
+* **definir-conta-bancaria:** read the main Pix key from the account record ([#199](https://github.com/jimmyandrade/harness/issues/199)) ([0478abc](https://github.com/jimmyandrade/harness/commit/0478abcf9df76adc426d4b4e4a84619c591c0bd0))
+
 ## [0.31.0](https://github.com/jimmyandrade/harness/compare/v0.30.0...v0.31.0) (2026-10-15)
 
 
