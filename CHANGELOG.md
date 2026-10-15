@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/jimmyandrade/vocabulary/compare/v0.4.0...v0.5.0) (2026-10-15)
+
+
+### Features
+
+* tag situational terms and filter reads by tag ([#20](https://github.com/jimmyandrade/vocabulary/issues/20)) ([ace3f9b](https://github.com/jimmyandrade/vocabulary/commit/ace3f9b7736344ed2f0b88cbe437e731e006fd06))
+
 ## [0.4.0](https://github.com/jimmyandrade/vocabulary/compare/v0.3.1...v0.4.0) (2026-10-15)
 
 
