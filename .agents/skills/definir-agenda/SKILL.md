@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.41.10"
+  version: "0.42.0"
   related:
     - definir-agenda-de-popstar
     - definir-convidado
@@ -25,11 +25,22 @@ metadata:
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Agendas` lista cada agenda pelo `"Nome"` e pelo `"ID"` opcional, com o `"Uso"`: `padrão`, `em uso`, `só leitura`, `aposentada` ou `ignorada`, e a `"Finalidade"` opcional. O evento novo vai para a `padrão`, ou para a principal da conta. Nunca grave em `só leitura`, `aposentada` ou `ignorada`. `Habilidade de tom de voz` vazia quer dizer que o título de evento externo segue o nome canônico, sem tom próprio.
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Agendas` lista cada agenda pelo `"Nome"` e pelo `"ID"` opcional, com o `"Uso"`: `padrão`, `em uso`, `só leitura`, `aposentada` ou `ignorada`, e a `"Finalidade"` opcional. O evento novo vai para a `padrão`, ou para a principal da conta. Nunca grave em `só leitura`, `aposentada` ou `ignorada`. `Habilidade de tom de voz` vazia quer dizer que o título de evento externo segue o nome canônico, sem tom próprio. `Compromissos de vida` lista o que um bloco de carreira não apaga.
 
 ```yaml
 "Formato da data com dia da semana": "terça-feira, 01/09/2026"
 "Agendas": []
+"Compromissos de vida":
+  - "alimentação"
+  - "exercícios"
+  - "exames e consultas"
+  - "tratamentos prescritos"
+  - "espiritualidade"
+  - "família"
+  - "animais de estimação"
+  - "relacionamento amoroso"
+  - "amizades"
+  - "descanso"
 "Habilidade de tom de voz": ""
 ```
 
@@ -55,7 +66,7 @@ flowchart LR
   Q -->|convidado| C[definir-convidado]
 ```
 
-O tipo real segue `definir-tipo-do-evento` antes de criar, revisar ou alterar. O roteiro segue `definir-viagem`. O plano que a pessoa diz para um dia nomeado se grava, sem pedir permissão. Bloco sem hora entra como dia inteiro. Saída de viagem confirmada exige data e hora: peça a hora e não grave sem ela, porque a falta pode causar atraso. Saída não confirmada e sem hora: proponha reserva com horário aproximado ou de dia inteiro, por `definir-reserva`. Item do cronograma, de oportunidade ou de missão com data e sem início e fim confirmados segue `sincronizar-cronograma`. Convidado segue `definir-convidado`. Um bloco novo que cobriria alimentação, exercício, exame, consulta, espiritualidade, família, gatos, namoro, amizade ou descanso segue o flowchart, em `definir-agenda-de-popstar`. Não apague esse compromisso. Não escreva orientação de saúde.
+O tipo real segue `definir-tipo-do-evento` antes de criar, revisar ou alterar. O roteiro segue `definir-viagem`. O plano que a pessoa diz para um dia nomeado se grava, sem pedir permissão. Bloco sem hora entra como dia inteiro. Saída de viagem confirmada exige data e hora: peça a hora e não grave sem ela, porque a falta pode causar atraso. Saída não confirmada e sem hora: proponha reserva com horário aproximado ou de dia inteiro, por `definir-reserva`. Item do cronograma, de oportunidade ou de missão com data e sem início e fim confirmados segue `sincronizar-cronograma`. Convidado segue `definir-convidado`. Um bloco novo que cobriria um dos `Compromissos de vida` segue o flowchart, em `definir-agenda-de-popstar`. Não apague esse compromisso. Não escreva orientação de saúde.
 
 ### Passo 2
 
@@ -244,17 +255,9 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 Sugeri mover para a agenda padrão. A agenda padrão saiu de `Agendas`. Não perguntei qual agenda.
 
-### a agenda e o Notion têm horários diferentes
-
-A base foi a data e hora estruturadas da oportunidade. A correção explícita da pessoa prevaleceu. Onde a agenda recusou o horário, disse o que foi atualizado e o que não foi.
-
 ### crie na agenda a reunião que já está no Notion.
 
 O tipo seguiu `definir-tipo-do-evento`. A reunião copiou nome e horário da fonte. A resposta trouxe o resumo, o evento como criado e o fuso usado. Sem a fonte na conexão, parei. Sem fuso, e se o dia pudesse mudar, pedi.
-
-### reserve a feira
-
-«Feira» sozinho não entrou. O provisório levou «Reservado para» e o nome canônico.
 
 ### Dia 13 as malas e o carro. Dia 14 o cuidado e a viagem, sem hora de saída.
 
@@ -282,7 +285,7 @@ Conferi a grafia. O título usou o nome canônico e o papel do encontro. A descr
 - O pedido é cadastrar, revisar ou alterar na lista de datas significativas: pare e siga `definir-data-significativa`.
 - O evento anual no Google Agenda sem o registro na lista de datas significativas: pare. Não invente o título nem o ano.
 - A pessoa pede orientação de saúde: não escreva.
-- Bloco de alimentação, exercício, exame, consulta, espiritualidade, família, gatos, namoro, amizade ou descanso: pare e siga `definir-agenda-de-popstar`. Não apague o compromisso.
+- Bloco que cobre um dos `Compromissos de vida`: pare e siga `definir-agenda-de-popstar`. Não apague o compromisso.
 - Ferramenta de agenda não pronta: conecte, confirme e siga a tarefa. Falhou: explique o bloqueio antes da alternativa manual.
 - Jornada de produção, dia útil, feriado, sábado, domingo ou alternância de sábados: `definir-jornada-de-producao`.
 - O dia da semana da fonte não bate com a data: sinalize e confirme. Não grave o marco.

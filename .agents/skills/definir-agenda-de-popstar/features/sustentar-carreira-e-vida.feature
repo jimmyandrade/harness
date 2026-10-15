@@ -7,7 +7,7 @@ Funcionalidade: Sustentar a carreira sem abandonar a vida
   Regra: A carreira não apaga a vida
 
     Exemplo: Semana de entrega com compromissos de vida
-      Dado que alimentação, exercícios, exames, consultas, tratamento prescrito, espiritualidade, família, animais de estimação, relacionamento amoroso, amizades ou descanso já foram nomeados
+      Dado que compromissos de vida, das instruções do projeto, já foram nomeados
       E uma semana de entrega
       Quando a agenda é organizada
       Então esses compromissos permanecem no Google Agenda
