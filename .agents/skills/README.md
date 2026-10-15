@@ -192,7 +192,9 @@ flowchart LR
   identificar_duplicata --> definir_perfil_social
   identificar_duplicata --> mesclar_registro
   lancar_despesa --> definir_ativo_imobilizado
+  lancar_despesa --> definir_grafia
   lancar_despesa --> definir_lancamento
+  lancar_despesa --> reconhecer_imagem
   medir_habilidade --> evoluir_habilidade
   mesclar_registro --> definir_empresa
   mesclar_registro --> definir_grafia
@@ -230,6 +232,7 @@ flowchart LR
   reconhecer_imagem --> criar_oportunidade
   reconhecer_imagem --> definir_grafia
   reconhecer_imagem --> definir_inscricao
+  reconhecer_imagem --> lancar_despesa
   reconhecer_imagem --> procurar_oportunidade
   registrar_ciclo_do_ativo --> definir_ativo_imobilizado
   registrar_ciclo_do_ativo --> identificar_duplicata

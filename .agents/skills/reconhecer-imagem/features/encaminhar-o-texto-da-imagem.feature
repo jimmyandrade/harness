@@ -1,6 +1,6 @@
 # language: pt
 Funcionalidade: Encaminhar o texto da imagem
-  O texto de uma oportunidade lida na imagem segue para a busca de existência.
+  A leitura segue para a operação pedida, sem perder o comando que acompanha a imagem.
 
   Regra: Com nome da edição e data, a busca é o passo seguinte
 
@@ -25,3 +25,11 @@ Funcionalidade: Encaminhar o texto da imagem
       Quando a skill entrega o texto da imagem
       Então a resposta mostra a página da edição
       Mas não cria outra oportunidade
+
+  Regra: O comando financeiro acompanha a leitura do comprovante
+
+    Exemplo: Registrar despesa a partir de uma imagem com comando ditado
+      Dado que a pessoa anexou a imagem de um comprovante com um comando ditado para registrar a despesa
+      Quando a habilidade entrega a leitura
+      Então lancar-despesa recebe os dados lidos e a operação pedida
+      Mas a resposta não exige um novo pedido pelo nome da habilidade
