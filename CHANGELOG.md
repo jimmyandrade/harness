@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.31.0](https://github.com/jimmyandrade/harness/compare/v0.30.0...v0.31.0) (2026-10-15)
+
+
+### Features
+
+* **definir-conta-bancaria:** add the bank account skill ([#195](https://github.com/jimmyandrade/harness/issues/195)) ([76ba244](https://github.com/jimmyandrade/harness/commit/76ba244ed535ad4a87bc77665b872ee0b5aaa758))
+
 ## [0.30.0](https://github.com/jimmyandrade/harness/compare/v0.29.0...v0.30.0) (2026-10-15)
 
 
