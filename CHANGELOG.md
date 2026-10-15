@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.30.0](https://github.com/jimmyandrade/harness/compare/v0.29.0...v0.30.0) (2026-10-15)
+
+
+### Features
+
+* **definir-agenda-de-popstar:** list the life commitments as a parameter ([#193](https://github.com/jimmyandrade/harness/issues/193)) ([f1c8263](https://github.com/jimmyandrade/harness/commit/f1c8263b3208c72ea3b820e70e8f21e969d1f085))
+
 ## [0.29.0](https://github.com/jimmyandrade/harness/compare/v0.28.0...v0.29.0) (2026-10-15)
 
 
