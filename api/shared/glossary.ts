@@ -20,7 +20,11 @@
  * terms in the same file. A situationally allowed row registered with a
  * category also keeps category, description, when, and examples. when says
  * when to use the term. examples names other situationally allowed terms in
- * the same file. The row omits alternative when it has none.
+ * the same file. The row omits alternative when it has none. A situationally
+ * allowed row may also keep tags: short kebab-case names of the speaker, the
+ * event, or the channel the term belongs to. A missing example is created with
+ * those tags. A row without tags applies everywhere. A read given tags keeps
+ * the rows without tags and the rows that share at least one tag.
  *
  * writeTerms searches before it writes. Case and an accent that does not change
  * the letter are the same term. A plural, a gender, and another word for the
@@ -80,6 +84,7 @@ export type Entry = {
   when?: string
   examples?: readonly string[]
   related?: readonly string[]
+  tags?: readonly string[]
 }
 
 export function canonicalLanguage(tag: string): string {
@@ -134,6 +139,7 @@ export function load(text: string): Entry[] {
     if (row.when !== undefined) entry.when = row.when
     if (row.examples !== undefined) entry.examples = row.examples
     if (row.related !== undefined) entry.related = row.related
+    if (row.tags !== undefined) entry.tags = row.tags
     seen.add(key)
     previous = entry.order
     entries.push(entry)
@@ -155,6 +161,11 @@ export function lookup(entries: readonly Entry[], submitted: string): { query: s
   const found = entries[start]
   if (found === undefined || compareOrder(found.order, order) !== 0) return { query, entry: undefined }
   return { query, entry: found }
+}
+
+export function applicable(entries: readonly Entry[], tags: readonly string[]): readonly Entry[] {
+  if (tags.length === 0) return entries
+  return entries.filter((entry) => entry.tags === undefined || entry.tags.length === 0 || entry.tags.some((tag) => tags.includes(tag)))
 }
 
 export function register(
@@ -400,6 +411,7 @@ function serialize(entries: readonly Entry[]): string {
       when?: string
       examples?: readonly string[]
       related?: readonly string[]
+      tags?: readonly string[]
     } = { state: entry.state }
     if (entry.alternative !== null) row.alternative = entry.alternative
     if (entry.category !== undefined) row.category = entry.category
@@ -411,6 +423,7 @@ function serialize(entries: readonly Entry[]): string {
     if (entry.when !== undefined) row.when = entry.when
     if (entry.examples !== undefined) row.examples = entry.examples
     if (entry.related !== undefined && entry.related.length > 0) row.related = entry.related
+    if (entry.tags !== undefined && entry.tags.length > 0) row.tags = entry.tags
     file[entry.term] = row
   }
   return `${JSON.stringify(file, null, 2)}\n`
@@ -439,10 +452,16 @@ function fillTerm(
     shell.alternatives = alternatives
     return { rejected, alternatives, related }
   }
-  const examples = resolveLinks(entries, item.examples, item.state, writing)
-  if (item.state === "allowed") shell.reason = item.reason
-  else shell.when = item.when
+  if (item.state === "allowed") {
+    const examples = resolveLinks(entries, item.examples, item.state, writing)
+    shell.reason = item.reason
+    shell.examples = examples
+    return { examples, related }
+  }
+  const examples = resolveLinks(entries, item.examples, item.state, writing, item.tags)
+  shell.when = item.when
   shell.examples = examples
+  if (item.tags.length > 0) shell.tags = item.tags
   return { examples, related }
 }
 
@@ -486,6 +505,7 @@ function registrationFrom(
     when: item.when,
     examples: links.examples ?? [],
     related,
+    tags: item.tags.length > 0 ? item.tags : undefined,
   }
 }
 
@@ -525,6 +545,7 @@ function resolveLinks(
   submitted: readonly string[],
   state: State,
   writing: ReadonlyMap<string, BulkTerm>,
+  tags: readonly string[] = [],
 ): string[] {
   const linked: string[] = []
   for (const item of submitted) {
@@ -539,7 +560,9 @@ function resolveLinks(
       linked.push(found.term)
       continue
     }
-    entries.push(entryFrom(text, state, undefined))
+    const created = entryFrom(text, state, undefined)
+    if (tags.length > 0) created.tags = tags
+    entries.push(created)
     linked.push(text)
   }
   return linked
@@ -668,7 +691,7 @@ function sameFields(entry: Entry, item: BulkTerm): boolean {
   if (item.state === "allowed") {
     return (entry.reason ?? "") === item.reason && sameList(entry.examples, item.examples)
   }
-  return (entry.when ?? "") === item.when && sameList(entry.examples, item.examples)
+  return (entry.when ?? "") === item.when && sameList(entry.examples, item.examples) && sameList(entry.tags, item.tags)
 }
 
 function sameList(stored: readonly string[] | undefined, incoming: readonly string[]): boolean {

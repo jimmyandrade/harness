@@ -3,7 +3,8 @@
  *
  * For a snippet, a phrase, or a text, return which tokens exist.
  * The body is a record of token to boolean. A word, an emoji, and a
- * punctuation mark are each a key. A repeated token stays one key.
+ * punctuation mark are each a key. A repeated token stays one key. Given tags,
+ * a row tagged only for another speaker, event, or channel reads as absent.
  *
  * Run: node api/routes/exists/index.ts <language> <text>
  */
@@ -11,10 +12,10 @@
 import { fileURLToPath } from "node:url"
 
 import { tokensIn } from "../classify-text/index.ts"
-import { Glossary, InvalidGlossary, collapse, hasConcept, type Entry } from "../../shared/glossary.ts"
+import { Glossary, InvalidGlossary, applicable, collapse, hasConcept, type Entry } from "../../shared/glossary.ts"
 import { parseBody, type Route } from "../../shared/http.ts"
 import { readOptions, report } from "../../shared/options.ts"
-import { classifyTextRequest } from "../../shared/schema.ts"
+import { existsRequest } from "../../shared/schema.ts"
 
 export function existsInText(entries: readonly Entry[], submitted: string): Record<string, boolean> {
   const query = collapse(submitted)
@@ -27,9 +28,14 @@ export function existsInText(entries: readonly Entry[], submitted: string): Reco
   return found
 }
 
-export function existsPhrase(glossary: Glossary, language: string, submitted: string): Record<string, boolean> {
+export function existsPhrase(
+  glossary: Glossary,
+  language: string,
+  submitted: string,
+  tags: readonly string[] = [],
+): Record<string, boolean> {
   const { entries } = glossary.entries(language)
-  return existsInText(entries, submitted)
+  return existsInText(applicable(entries, tags), submitted)
 }
 
 export const existsRoute: Route = {
@@ -38,8 +44,8 @@ export const existsRoute: Route = {
   limit: 65536,
   emptyMessage: "Provide the text.",
   handle(glossary, record) {
-    const body = parseBody(classifyTextRequest, record)
-    return existsPhrase(glossary, body.language, body.text)
+    const body = parseBody(existsRequest, record)
+    return existsPhrase(glossary, body.language, body.text, body.tags)
   },
 }
 

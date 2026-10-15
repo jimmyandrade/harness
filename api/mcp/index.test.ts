@@ -216,3 +216,38 @@ test("initialize reports the version in package.json", () => {
   }
   assert.deepEqual(response.result?.serverInfo, { name: "vocabulary", version })
 })
+
+test("write_terms keeps tags and lookup_term and exists_in_text filter by them", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  const file = join(root, "pt-BR.json")
+  writeFileSync(file, "{}\n")
+  const written = callTool(root, {
+    name: "write_terms",
+    arguments: {
+      language: "pt-BR",
+      mode: "insert",
+      terms: [
+        {
+          state: "situationally_allowed",
+          term: "meu povo",
+          category: "greeting",
+          description: "saudação ao público",
+          when: "quando Maria Silva fala em primeira pessoa",
+          examples: [],
+          tags: ["maria-silva"],
+        },
+      ],
+    },
+  })
+  assert.equal(written.isError, undefined)
+  assert.deepEqual(load(readFileSync(file, "utf8")).find((entry) => entry.term === "meu povo")?.tags, ["maria-silva"])
+  const other = callTool(root, { name: "lookup_term", arguments: { language: "pt-BR", term: "meu povo", tags: ["palco"] } })
+  assert.equal((JSON.parse(other.content[0]?.text ?? "") as { exists: boolean }).exists, false)
+  const own = callTool(root, { name: "lookup_term", arguments: { language: "pt-BR", term: "meu povo", tags: ["maria-silva"] } })
+  assert.deepEqual((JSON.parse(own.content[0]?.text ?? "") as { tags: string[] }).tags, ["maria-silva"])
+  const mapped = callTool(root, { name: "exists_in_text", arguments: { language: "pt-BR", text: "meu povo", tags: ["palco"] } })
+  assert.equal(mapped.isError, undefined)
+  const refused = callTool(root, { name: "lookup_term", arguments: { language: "pt-BR", term: "meu povo", tags: "palco" } })
+  assert.equal(refused.isError, true)
+  assert.equal(refused.content[0]?.text, "Provide the tags as a list.")
+})

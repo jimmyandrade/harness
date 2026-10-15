@@ -272,3 +272,51 @@ test("lookup and exists read the glossary with flags", () => {
     console.error = warn
   }
 })
+
+test("terms repeats --tags and lookup and exists filter by --tags", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  const file = join(root, "pt-BR.json")
+  writeFileSync(file, "{}\n")
+  const lines: string[] = []
+  const write = console.log
+  console.log = (line: string) => lines.push(line)
+  try {
+    assert.equal(
+      run([
+        "--glossary",
+        root,
+        "terms",
+        "--language",
+        "pt-BR",
+        "--mode",
+        "insert",
+        "--state",
+        "situationally_allowed",
+        "--term",
+        "verão! (chegou!)",
+        "--category",
+        "chant",
+        "--description",
+        "grito do festival",
+        "--when",
+        "no palco do Festival de Verão",
+        "--tags",
+        "festival-de-verao",
+        "--tags=palco",
+      ]),
+      0,
+    )
+    assert.deepEqual(load(readFileSync(file, "utf8")).find((entry) => entry.term === "verão! (chegou!)")?.tags, [
+      "festival-de-verao",
+      "palco",
+    ])
+    assert.equal(run(["--glossary", root, "lookup", "--language", "pt-BR", "--term", "verão! (chegou!)", "--tags", "maria-silva"]), 0)
+    assert.equal(JSON.parse(lines.at(-1) ?? "{}").exists, false)
+    assert.equal(run(["--glossary", root, "lookup", "--language", "pt-BR", "--term", "verão! (chegou!)", "--tags", "maria-silva", "--tags", "palco"]), 0)
+    assert.equal(JSON.parse(lines.at(-1) ?? "{}").exists, true)
+    assert.equal(run(["--glossary", root, "exists", "--language", "pt-BR", "--text", "verão!", "--tags", "maria-silva"]), 0)
+    assert.deepEqual(JSON.parse(lines.at(-1) ?? "{}"), { "verão": false, "!": false })
+  } finally {
+    console.log = write
+  }
+})

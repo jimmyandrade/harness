@@ -425,3 +425,59 @@ test("a plural is its own row, and case or an unaccented form stays on the exist
     assert.equal(entries.find((entry) => entry.term === "Sao"), undefined)
   })
 })
+
+test("tags are stored in lowercase, compared on upsert, and dropped when sent empty", async () => {
+  await withGlossary("{}\n", async (port, root) => {
+    const file = join(root, "pt-BR.json")
+    const chant = {
+      ...situational("verão! (chegou!)", "grito do festival", ["Agora, faz barulho! VERÃO! (CHEGOU!)"]),
+      when: "no palco do Festival de Verão",
+      tags: ["Festival-De-Verao", " palco "],
+    }
+    const inserted = await post(port, { language: "pt-BR", mode: "insert", terms: [chant] })
+    assert.equal(inserted.status, 200)
+    assert.deepEqual((await inserted.json()).inserted[0].tags, ["festival-de-verao", "palco"])
+    const stored = JSON.parse(readFileSync(file, "utf8"))
+    assert.deepEqual(stored["verão! (chegou!)"].tags, ["festival-de-verao", "palco"])
+    assert.deepEqual(stored["Agora, faz barulho! VERÃO! (CHEGOU!)"].tags, ["festival-de-verao", "palco"])
+    const same = await post(port, { language: "pt-BR", mode: "upsert", terms: [chant] })
+    assert.deepEqual((await same.json()).unchanged, [{ term: "verão! (chegou!)", reason: "Already in the glossary." }])
+    const retagged = await post(port, { language: "pt-BR", mode: "upsert", terms: [{ ...chant, tags: ["festival-de-verao"] }] })
+    assert.deepEqual((await retagged.json()).updated[0].tags, ["festival-de-verao"])
+    const untagged = await post(port, { language: "pt-BR", mode: "upsert", terms: [{ ...chant, tags: [] }] })
+    assert.equal((await untagged.json()).updated[0].tags, undefined)
+    assert.equal(JSON.parse(readFileSync(file, "utf8"))["verão! (chegou!)"].tags, undefined)
+  })
+})
+
+test("a tag that is not kebab-case, repeats, or sits on a general rule is refused and leaves the file unchanged", async () => {
+  const initial = "{}\n"
+  await withGlossary(initial, async (port, root) => {
+    const file = join(root, "pt-BR.json")
+    const spaced = await post(port, {
+      language: "pt-BR",
+      mode: "insert",
+      terms: [{ ...situational("meu povo", "saudação"), tags: ["Maria Silva"] }],
+    })
+    assert.equal(spaced.status, 400)
+    assert.equal(
+      (await spaced.json()).error,
+      "A tag is a lowercase ASCII word or kebab-case phrase, such as festival-de-verao.",
+    )
+    const repeated = await post(port, {
+      language: "pt-BR",
+      mode: "insert",
+      terms: [{ ...situational("meu povo", "saudação"), tags: ["palco", "Palco"] }],
+    })
+    assert.equal(repeated.status, 400)
+    assert.equal((await repeated.json()).error, '"palco" is duplicated.')
+    const general = await post(port, {
+      language: "pt-BR",
+      mode: "insert",
+      terms: [{ ...allowed("!", "exclamação"), tags: ["palco"] }],
+    })
+    assert.equal(general.status, 400)
+    assert.equal((await general.json()).error, "A term tagged for one context is situationally_allowed.")
+    assert.equal(readFileSync(file, "utf8"), initial)
+  })
+})

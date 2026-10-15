@@ -3,17 +3,18 @@
  *
  * Read one term or expression. exists is false when that concept is absent.
  * Case and an accent that does not change the letter return the stored row.
- * A plural, a gender, and another word are their own rows.
+ * A plural, a gender, and another word are their own rows. Given tags, a row
+ * tagged only for another speaker, event, or channel reads as absent.
  *
  * Run: node api/routes/lookup/index.ts <language> <term>
  */
 
 import { fileURLToPath } from "node:url"
 
-import { Glossary, InvalidGlossary, collapse, duplicateSignal, findConcept, lookup, type Entry } from "../../shared/glossary.ts"
+import { Glossary, InvalidGlossary, applicable, collapse, duplicateSignal, findConcept, lookup, type Entry } from "../../shared/glossary.ts"
 import { parseBody, type Route } from "../../shared/http.ts"
 import { readOptions, report } from "../../shared/options.ts"
-import { classifyRequest } from "../../shared/schema.ts"
+import { lookupRequest } from "../../shared/schema.ts"
 
 export type TermLookup = {
   language: string
@@ -31,14 +32,16 @@ export type TermLookup = {
   when?: string
   examples?: readonly string[]
   related?: readonly string[]
+  tags?: readonly string[]
   duplicates?: readonly string[]
   canonical?: string
 }
 
-export function lookupTerm(glossary: Glossary, language: string, submitted: string): TermLookup {
+export function lookupTerm(glossary: Glossary, language: string, submitted: string, tags: readonly string[] = []): TermLookup {
   const query = collapse(submitted)
   if (query === "") throw new InvalidGlossary("Provide the term.")
-  const { tag, entries } = glossary.entries(language)
+  const { tag, entries: stored } = glossary.entries(language)
+  const entries = applicable(stored, tags)
   const signal = duplicateSignal(entries, query)
   if (signal !== undefined) {
     const exact = lookup(entries, query).entry
@@ -57,8 +60,8 @@ export const lookupRoute: Route = {
   limit: 8192,
   emptyMessage: "Provide the term.",
   handle(glossary, record) {
-    const body = parseBody(classifyRequest, record)
-    return lookupTerm(glossary, body.language, body.term)
+    const body = parseBody(lookupRequest, record)
+    return lookupTerm(glossary, body.language, body.term, body.tags)
   },
 }
 
@@ -74,6 +77,7 @@ function rowOf(entry: Entry): Omit<TermLookup, "language" | "submitted" | "exist
   if (entry.when !== undefined) row.when = entry.when
   if (entry.examples !== undefined) row.examples = entry.examples
   if (entry.related !== undefined && entry.related.length > 0) row.related = entry.related
+  if (entry.tags !== undefined && entry.tags.length > 0) row.tags = entry.tags
   return row
 }
 

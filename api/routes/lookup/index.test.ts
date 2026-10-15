@@ -82,3 +82,30 @@ test("POST names both rows and suggests the canonical one", async () => {
     await new Promise<void>((resolve, reject) => server.close((error) => (error ? reject(error) : resolve())))
   }
 })
+
+test("POST with tags reads a row tagged for another context as absent", async () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  writeFileSync(
+    join(root, "pt-BR.json"),
+    `${JSON.stringify({ casa: { state: "allowed" }, "meu povo": { state: "situationally_allowed", tags: ["maria-silva"] } }, null, 2)}\n`,
+  )
+  const server = createGlossaryServer(root)
+  await new Promise<void>((resolve) => server.listen(0, "127.0.0.1", resolve))
+  const port = (server.address() as AddressInfo).port
+  const read = async (body: unknown) =>
+    (await fetch(`http://127.0.0.1:${port}/v1/lookup`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(body),
+    })).json()
+  try {
+    const all = await read({ language: "pt-BR", term: "meu povo" })
+    assert.equal(all.exists, true)
+    assert.deepEqual(all.tags, ["maria-silva"])
+    assert.equal((await read({ language: "pt-BR", term: "meu povo", tags: ["maria-silva"] })).exists, true)
+    assert.equal((await read({ language: "pt-BR", term: "meu povo", tags: ["festival-de-verao"] })).exists, false)
+    assert.equal((await read({ language: "pt-BR", term: "casa", tags: ["festival-de-verao"] })).exists, true)
+  } finally {
+    await new Promise<void>((resolve, reject) => server.close((error) => (error ? reject(error) : resolve())))
+  }
+})

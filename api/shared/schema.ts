@@ -23,6 +23,25 @@ export const categorySchema = prose("Provide the category.")
   .transform((value) => value.toLowerCase())
   .pipe(z.string().regex(/^[a-z]+(?:-[a-z]+)*$/, { error: "A category is an English word." }))
 
+const TAG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
+const TAG_MESSAGE = "A tag is a lowercase ASCII word or kebab-case phrase, such as festival-de-verao."
+
+export const tagListSchema = z
+  .array(
+    z
+      .string({ error: TAG_MESSAGE })
+      .transform((value) => collapse(value).toLowerCase())
+      .pipe(z.string().regex(TAG, { error: TAG_MESSAGE })),
+    { error: "Provide the tags as a list." },
+  )
+  .superRefine((tags, ctx) => {
+    const seen = new Set<string>()
+    for (const tag of tags) {
+      if (seen.has(tag)) ctx.addIssue(`${JSON.stringify(tag)} is duplicated.`)
+      seen.add(tag)
+    }
+  })
+
 export const classifyRequest = z.object({
   language: prose("Unknown language."),
   term: prose("Provide the term."),
@@ -34,6 +53,12 @@ export const classifyTextRequest = z.object({
   text: prose("Provide the text."),
 })
 export type ClassifyTextRequest = z.infer<typeof classifyTextRequest>
+
+export const lookupRequest = classifyRequest.extend({ tags: tagListSchema.default([]) })
+export type LookupRequest = z.infer<typeof lookupRequest>
+
+export const existsRequest = classifyTextRequest.extend({ tags: tagListSchema.default([]) })
+export type ExistsRequest = z.infer<typeof existsRequest>
 
 const forbiddenRequestObject = z.object({
   language: prose("Unknown language."),
@@ -76,7 +101,7 @@ const allowedTerm = allowedRequestObject.omit({ language: true }).extend({ state
 const forbiddenTerm = forbiddenRequestObject.omit({ language: true }).extend({ state: z.literal("forbidden") })
 const situationalTerm = situationalRequestObject
   .omit({ language: true })
-  .extend({ state: z.literal("situationally_allowed") })
+  .extend({ state: z.literal("situationally_allowed"), tags: tagListSchema.default([]) })
 
 const bulkTermObject = z.discriminatedUnion("state", [allowedTerm, forbiddenTerm, situationalTerm], {
   error: "Provide the state.",
@@ -84,6 +109,7 @@ const bulkTermObject = z.discriminatedUnion("state", [allowedTerm, forbiddenTerm
 export const bulkTermSchema = guardGeneral(bulkTermObject, true)
 
 const SITUATION = "A term that only fits one situation is situationally_allowed."
+const TAGGED = "A term tagged for one context is situationally_allowed."
 const REJECTED = "A forbidden example belongs in rejected."
 const CLICHE = "A cliché is forbidden."
 
@@ -95,6 +121,7 @@ function guardGeneral<S extends z.ZodType>(schema: S, keyedByState: boolean) {
     if (keyedByState && record.state === "forbidden" && listHasText(record.examples)) ctx.addIssue(REJECTED)
     if (keyedByState && record.state !== "allowed" && record.state !== "forbidden") return
     if (typeof record.when === "string" && collapse(record.when) !== "") ctx.addIssue(SITUATION)
+    if (Array.isArray(record.tags) && record.tags.length > 0) ctx.addIssue(TAGGED)
   }).pipe(schema)
 }
 
@@ -184,6 +211,7 @@ export const situationalRegistrationSchema = z.object({
   when: z.string(),
   examples: z.array(z.string()),
   related: z.array(z.string()).optional(),
+  tags: z.array(z.string()).optional(),
 })
 export type SituationalRegistration = z.infer<typeof situationalRegistrationSchema>
 
@@ -238,6 +266,9 @@ export const glossaryRowSchema = z
       when: fileProse("when"),
       examples: fileTerms("examples"),
       related: fileTerms("related"),
+      tags: z
+        .array(z.string({ error: TAG_MESSAGE }).regex(TAG, { error: TAG_MESSAGE }), { error: "The glossary tags are not a list." })
+        .optional(),
     },
     { error: "A glossary row is not an object." },
   )

@@ -29,3 +29,27 @@ test("POST returns which tokens exist and nothing else", async () => {
     await new Promise<void>((resolve, reject) => server.close((error) => (error ? reject(error) : resolve())))
   }
 })
+
+test("POST with tags leaves out the rows of another speaker", async () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  writeFileSync(
+    join(root, "pt-BR.json"),
+    `${JSON.stringify({ casa: { state: "allowed" }, povo: { state: "allowed", tags: ["maria-silva", "palco"] } }, null, 2)}\n`,
+  )
+  const server = createGlossaryServer(root)
+  await new Promise<void>((resolve) => server.listen(0, "127.0.0.1", resolve))
+  const port = (server.address() as AddressInfo).port
+  const read = async (tags: string[]) =>
+    (await fetch(`http://127.0.0.1:${port}/v1/exists`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ language: "pt-BR", text: "casa povo", tags }),
+    })).json()
+  try {
+    assert.deepEqual(await read([]), { casa: true, povo: true })
+    assert.deepEqual(await read(["palco"]), { casa: true, povo: true })
+    assert.deepEqual(await read(["festival-de-verao"]), { casa: true, povo: false })
+  } finally {
+    await new Promise<void>((resolve, reject) => server.close((error) => (error ? reject(error) : resolve())))
+  }
+})

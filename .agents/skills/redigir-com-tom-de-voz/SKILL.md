@@ -3,7 +3,7 @@ name: redigir-com-tom-de-voz
 description: Use essa habilidade sempre que for criar, adaptar, lapidar ou validar texto da marca no tom de voz, mesmo sem dizer copy, como slogan, legenda, e-mail, WhatsApp, campanha, CTA, microcopy ou título de evento externo. NÃO use para responder quem conversa com a IA, descrever uma skill, titular tarefa ou oportunidade, cravar a grafia, alterar formato de conteúdo, nem assumir cliente, peça, oportunidade ou histórico.
 metadata:
   author: jimmyandrade
-  version: "0.11.0"
+  version: "0.12.0"
   aliases:
     - escreva-usando-o-tom-de-voz
   related:
@@ -37,13 +37,15 @@ flowchart LR
 
 Antes de escrever ou aprovar, o texto tem contexto, canal, público, as fontes da marca que as instruções do projeto nomeiam, o vocabulário e a intenção criativa. Falta algum: pare e peça. Não aprove. Não invente persona, posicionamento, vocabulário nem termo proibido. A pessoa informa a fonte. Se ela não estiver no workspace conectado, pare.
 
-Consulte o vocabulário com Scripts disponíveis. Com terminal, rode o comando. Sem terminal, chame a ferramenta do servidor `vocabulary`. Sem os dois, como num agente do Notion, o vocabulário vem de uma fonte do workspace conectado que as instruções do projeto nomeiam. Sem essa fonte, pare e diga que a consulta roda numa ferramenta de código com o projeto aberto. Não leia o vocabulário de memória.
+Consulte o vocabulário com Scripts disponíveis, com `tags` de quem fala, do evento e do canal do texto, como `maria-silva`, `festival-de-verao` ou `palco`. Use a tag que o vocabulário já tem para esse contexto. A consulta com tags deixa de fora o termo de outra pessoa, de outro evento ou de outro canal. Sem saber quem fala no texto, pergunte. Com terminal, rode o comando. Sem terminal, chame a ferramenta do servidor `vocabulary`. Sem os dois, como num agente do Notion, o vocabulário vem de uma fonte do workspace conectado que as instruções do projeto nomeiam. Sem essa fonte, pare e diga que a consulta roda numa ferramenta de código com o projeto aberto. Não leia o vocabulário de memória.
 
 Intenção clara, recorte específico e conexão humana. O que a pessoa precisa entender para agir. Como o texto se conecta com ela. Se faz ela sentir algo. Não fale para todo mundo. Não escreva fórmula genérica, ritmo previsível nem chamada vazia.
 
 ### Passo 3
 
 A copy respeita o tom de voz e o vocabulário, como a fonte diz. Termo proibido, frase genérica, texto com cara de IA e linguagem desalinhada ficam de fora, inclusive a pontuação e o diminutivo que o vocabulário proíbe. Escolha que enfraquece desejo, clareza, personalidade ou potência comercial fica de fora. Revisar e reescrever passam pelo mesmo portão.
+
+Termo situacional com tags entra só no texto desse contexto. A fala em primeira pessoa de uma pessoa não vai para o texto de outra. O grito de um evento não vai para outro evento. O `when` da linha continua valendo.
 
 Emoji, combinação de emojis e uso simbólico fazem parte do vocabulário e da identidade verbal. Não são decoração livre. Permitido entra. Proibido sai. Situacional só no contexto da linha. A combinação junta é um termo. Sem essa linha, pare. Não invente a regra de usar ou evitar. O cadastro segue `definir-vocabulario`.
 
@@ -100,6 +102,14 @@ Se você manter a palavra clichê, ou trocar por outro termo da mesma fórmula, 
 1. Tire a palavra literal e a frase em `rejected`.
 2. Escreva imagem, cena, ação, efeito ou situação com a mesma sensação.
 3. O termo ligado em `related` também fica de fora.
+
+### Fala de outra pessoa
+
+Se você consultar o vocabulário sem as tags do texto, a fala em primeira pessoa de uma pessoa, ou o grito de um evento, entra no texto de outro contexto.
+
+1. Diga quem fala, o evento e o canal do texto.
+2. Consulte com essas tags.
+3. Use só o que a consulta devolver, e respeite o `when` da linha.
 
 ### Emoji de enfeite
 
@@ -165,6 +175,10 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 Pedi contexto, canal, público, as fontes da marca, o vocabulário e a intenção. Não aprovei. Não assumi cliente, peça, oportunidade nem histórico. O formato de conteúdo ficou como está.
 
+### Escreva a abertura de outra pessoa no palco do Festival de Verão.
+
+Consultei o vocabulário com as tags de quem fala, do festival e do palco. As falas de Maria Silva em primeira pessoa ficaram de fora. O grito VERÃO! (CHEGOU!) entrou, com a plateia, como o when diz.
+
 ### A legenda fecha com um emoji que o vocabulário manda evitar.
 
 Consultei o vocabulário. O emoji saiu da versão final. Onde ele aparecia, ficou marcado como exemplo ruim. Não aprovei por gosto nem por tendência.
@@ -188,6 +202,7 @@ O título ficou específico, com o nome canônico que a fonte já tinha. Não vi
 - Título só «Reservado», «Evento», «Reunião» ou «Feira»: leve o nome canônico. Provisório pode abrir com «Reservado para» ou «A confirmar».
 - O título vivo cria ambiguidade na busca: mantenha o nome canônico.
 - A grafia ainda não foi conferida: pare. Use a grafia que a pessoa ou as instruções do projeto já fecharam. Não grave a forma do pedido.
+- O texto tem quem fala, evento ou canal: consulte com essas tags. Termo de outro contexto fica de fora. Sem saber quem fala, pergunte.
 - O texto traz emoji, combinação ou uso simbólico: o estado vem do vocabulário. Sem a linha, pare. Não invente. O cadastro segue `definir-vocabulario`.
 - Emoji marcado como evitar, proibido, ruim, desalinhado ou restrito: sai da versão final. Na dúvida, pergunte. Não aprove por gosto ou tendência.
 - Termo `cliche`: a palavra literal sai. Entra imagem, cena, ação, efeito ou situação. Frase em `rejected` e termo em `related` também saem.
@@ -198,6 +213,7 @@ O título ficou específico, com o nome canônico que a fonte já tinha. Não vi
 
 - Texto fluido parece aprovado. Sem contexto, canal, público, fonte da marca, vocabulário e intenção, a copy espera.
 - Pontuação e diminutivo parecem neutros. Os que o vocabulário proíbe saem quando enfraquecem desejo, clareza, personalidade ou potência comercial.
+- Uma frase cadastrada parece valer para qualquer texto. A fala em primeira pessoa de uma pessoa só entra no texto dela.
 - Emoji parece enfeite de legenda. Ele é vocabulário. Permitido, proibido e situacional vêm da linha. Sem linha, a copy espera.
 - Um emoji na moda parece melhor que a regra. Evitar, proibido, ruim, desalinhado e restrito saem da versão final.
 - Um sinônimo parece resolver o clichê. A troca é imagem, cena, ação, efeito ou situação. A palavra literal, a frase rejeitada e o termo ligado ficam de fora.
@@ -210,10 +226,11 @@ O título ficou específico, com o nome canônico que a fonte já tinha. Não vi
 
 ## Scripts disponíveis
 
-- `node node_modules/vocabulary/dist/cli.js lookup --language <idioma> --term <termo>` lê um termo e devolve se ele existe e a linha guardada.
-- `node node_modules/vocabulary/dist/cli.js exists --language <idioma> --text <trecho>` devolve só o registro de cada token do trecho para se ele existe.
-- `lookup_term` e `exists_in_text`, no servidor `vocabulary`, fazem a mesma consulta quando não há terminal.
+- `node node_modules/vocabulary/dist/cli.js lookup --language <idioma> --term <termo> --tags <tag>` lê um termo e devolve se ele existe e a linha guardada.
+- `node node_modules/vocabulary/dist/cli.js exists --language <idioma> --text <trecho> --tags <tag>` devolve só o registro de cada token do trecho para se ele existe.
+- `--tags` repete, um valor por vez. Termo sem tag vale em qualquer texto. Termo com tag só volta quando uma tag dele está na consulta.
+- `lookup_term` e `exists_in_text`, no servidor `vocabulary`, fazem a mesma consulta quando não há terminal, com o mesmo campo `tags`.
 
-1. Com terminal, rode `exists` com o texto e `lookup` para cada termo que precisar da linha inteira.
+1. Com terminal, rode `exists` com o texto e `lookup` para cada termo que precisar da linha inteira, com as tags de quem fala, do evento e do canal.
 2. Sem terminal, chame `exists_in_text` e `lookup_term` com os mesmos campos.
 3. Sem terminal e sem o servidor `vocabulary`, use a fonte do vocabulário que as instruções do projeto nomeiam. Sem ela, pare.

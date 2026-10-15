@@ -16,7 +16,7 @@ import { lookupTerm } from "../routes/lookup/index.ts"
 import { Glossary, writeTerms } from "../shared/glossary.ts"
 import { parseBody } from "../shared/http.ts"
 import { readOptions } from "../shared/options.ts"
-import { classifyRequest, classifyTextRequest, termsRequest } from "../shared/schema.ts"
+import { existsRequest, lookupRequest, termsRequest } from "../shared/schema.ts"
 
 const PROTOCOL = "2024-11-05"
 
@@ -24,6 +24,12 @@ const PROTOCOL = "2024-11-05"
 const VERSION = (JSON.parse(readFileSync(new URL("../../package.json", import.meta.url), "utf8")) as { version: string }).version
 
 const languageProperty = { type: "string", description: "BCP 47 tag of the text, such as pt-BR." }
+
+const tagsFilter = {
+  type: "array",
+  items: { type: "string" },
+  description: "Speaker, event, or channel of the text, such as maria-silva or festival-de-verao. A row tagged only for other contexts reads as absent. A row without tags always applies. Omit to read every row.",
+}
 
 const tools = [
   {
@@ -34,6 +40,7 @@ const tools = [
       properties: {
         language: languageProperty,
         term: { type: "string" },
+        tags: tagsFilter,
       },
       required: ["language", "term"],
     },
@@ -46,13 +53,14 @@ const tools = [
       properties: {
         language: languageProperty,
         text: { type: "string" },
+        tags: tagsFilter,
       },
       required: ["language", "text"],
     },
   },
   {
     name: "write_terms",
-    description: "Insert, update, or upsert vocabulary terms for one language, including an emoji. Searches first: case and accents keep the stored row, and a new term is stored in lowercase. A plural, a gender, and another word each keep their own row. Write only what the person gave: ask before the alternatives of a new forbidden term, and an empty list is valid. A cliché is category cliche and forbidden, and its description names the image, scene, action, effect, or situation that replaces it. The response lists inserted, updated, and unchanged. A refusal says why and leaves the file unchanged.",
+    description: "Insert, update, or upsert vocabulary terms for one language, including an emoji. Searches first: case and accents keep the stored row, and a new term is stored in lowercase. A plural, a gender, and another word each keep their own row. Write only what the person gave: ask before the alternatives of a new forbidden term, and an empty list is valid. A cliché is category cliche and forbidden, and its description names the image, scene, action, effect, or situation that replaces it. A situationally allowed term that belongs to one speaker, event, or channel keeps tags, and when still says the rule in words. The response lists inserted, updated, and unchanged. A refusal says why and leaves the file unchanged.",
     inputSchema: {
       type: "object",
       properties: {
@@ -74,6 +82,11 @@ const tools = [
               alternatives: { type: "array", items: { type: "string" } },
               related: { type: "array", items: { type: "string" } },
               when: { type: "string" },
+              tags: {
+                type: "array",
+                items: { type: "string" },
+                description: "Only on situationally_allowed. Lowercase kebab-case names of the speaker, event, or channel the term belongs to, such as maria-silva, festival-de-verao, or palco. A missing example is created with the same tags.",
+              },
             },
             required: ["state", "term", "category", "description"],
           },
@@ -120,12 +133,12 @@ export function callTool(directory: string, params: unknown): ToolResult {
   try {
     const glossary = new Glossary(directory)
     if (record?.name === "lookup_term") {
-      const body = parseBody(classifyRequest, record.arguments)
-      return reply(lookupTerm(glossary, body.language, body.term))
+      const body = parseBody(lookupRequest, record.arguments)
+      return reply(lookupTerm(glossary, body.language, body.term, body.tags))
     }
     if (record?.name === "exists_in_text") {
-      const body = parseBody(classifyTextRequest, record.arguments)
-      return reply(existsPhrase(glossary, body.language, body.text))
+      const body = parseBody(existsRequest, record.arguments)
+      return reply(existsPhrase(glossary, body.language, body.text, body.tags))
     }
     if (record?.name === "write_terms") {
       const body = parseBody(termsRequest, record.arguments)
