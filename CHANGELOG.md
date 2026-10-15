@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.29.0](https://github.com/jimmyandrade/harness/compare/v0.28.0...v0.29.0) (2026-10-15)
+
+
+### Features
+
+* **definir-agenda-de-popstar:** move the skill to the core ([#188](https://github.com/jimmyandrade/harness/issues/188)) ([a61cd69](https://github.com/jimmyandrade/harness/commit/a61cd69ec7797c053283e1d1245ea8b7ead58085))
+* **definir-agenda:** move the skill to the core ([#180](https://github.com/jimmyandrade/harness/issues/180)) ([403eeb4](https://github.com/jimmyandrade/harness/commit/403eeb48f8b4251fe1003c45eeaf5b04b147c3b6))
+* **definir-convidado:** move the skill to the core ([#184](https://github.com/jimmyandrade/harness/issues/184)) ([38f6faf](https://github.com/jimmyandrade/harness/commit/38f6faffff1d6895d6b4f7ba116e6ee42bc1d736))
+* **definir-jornada-de-producao:** move the skill to the core ([#185](https://github.com/jimmyandrade/harness/issues/185)) ([18ebd44](https://github.com/jimmyandrade/harness/commit/18ebd44ba77036e1b91899b0bac7530a4f09e397))
+* **definir-recurso-de-aprendizado:** move the skill to the core ([#189](https://github.com/jimmyandrade/harness/issues/189)) ([8fda37e](https://github.com/jimmyandrade/harness/commit/8fda37e24274cc9ee8f24e21aa7652e53351fa21))
+* **definir-reserva:** move the skill to the core ([#182](https://github.com/jimmyandrade/harness/issues/182)) ([16c19b9](https://github.com/jimmyandrade/harness/commit/16c19b9637ba1fdaf9dc7ac62760a27b8d3833f0))
+* **definir-tipo-do-evento:** move the skill to the core ([#183](https://github.com/jimmyandrade/harness/issues/183)) ([1b18287](https://github.com/jimmyandrade/harness/commit/1b182879c8a88bbb592d15b92036191a5c606849))
+* **definir-viagem:** move the skill to the core ([#190](https://github.com/jimmyandrade/harness/issues/190)) ([56dda91](https://github.com/jimmyandrade/harness/commit/56dda91f7ac25d5fc6501111f707e27fb270f805))
+* **organizar-ponto-de-contato:** move the skill to the core ([d00c040](https://github.com/jimmyandrade/harness/commit/d00c040869494571d33a7e95f050bbedbe4cd6c5))
+* **organizar-ponto-de-contato:** move the skill to the core ([#191](https://github.com/jimmyandrade/harness/issues/191)) ([d00c040](https://github.com/jimmyandrade/harness/commit/d00c040869494571d33a7e95f050bbedbe4cd6c5))
+* **procurar-agenda:** move the skill to the core ([#181](https://github.com/jimmyandrade/harness/issues/181)) ([6157b26](https://github.com/jimmyandrade/harness/commit/6157b26ae87c916d401216d7521762117d945419))
+* **revisar-uso-do-tempo:** move the skill to the core ([#187](https://github.com/jimmyandrade/harness/issues/187)) ([276e747](https://github.com/jimmyandrade/harness/commit/276e747853587775b11fb8220a682b3e877bb937))
+* **sincronizar-cronograma:** move the skill to the core ([#186](https://github.com/jimmyandrade/harness/issues/186)) ([de3f48b](https://github.com/jimmyandrade/harness/commit/de3f48b1f6891bcbaa0ea799b058153211c68ee2))
+
 ## [0.28.0](https://github.com/jimmyandrade/harness/compare/v0.27.0...v0.28.0) (2026-10-14)
 
 
