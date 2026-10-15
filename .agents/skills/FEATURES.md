@@ -231,6 +231,20 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses stock, recording the payment, the asset life cycle, what is on today, an existence-only check, merging the same asset, creating the company, and creating the cost category
 
+### definir-conta-bancaria
+- **Stability**: experimental
+- **Description**: Register, review, or update a bank or payment account, personal or business, and record what happened to it
+- **Properties**:
+  - Lives at `.agents/skills/definir-conta-bancaria/SKILL.md`
+  - Leaves the existence-only check to identificar-duplicata, expenses to lancar-despesa, a received sale to the skill the project names, a missing company to definir-empresa, and a missing person to definir-pessoa
+  - Treats a page whose title starts with a template title from the project instructions as a template and creates a new page instead of filling it
+  - Links a business account to the holding company and a personal account to the holding person, and keeps both accounts of the same person apart
+  - Fills branch, account, check digit, and holder only from the source
+  - Keeps the account history in dated comments, never in the page body, and mentions other pages by ID
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses recording the sale or the expense, registering the company or the holder, and an existence-only check
+
 ### definir-convidado
 - **Stability**: experimental
 - **Description**: Check each person's participation and locality before inviting them

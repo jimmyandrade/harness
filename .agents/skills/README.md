@@ -21,6 +21,7 @@ flowchart LR
     definir_agenda["definir-agenda"]
     definir_agenda_de_popstar["definir-agenda-de-popstar"]
     definir_ativo_imobilizado["definir-ativo-imobilizado"]
+    definir_conta_bancaria["definir-conta-bancaria"]
     definir_convidado["definir-convidado"]
     definir_data_significativa["definir-data-significativa"]
     definir_empresa["definir-empresa"]
@@ -101,6 +102,11 @@ flowchart LR
   definir_ativo_imobilizado --> mesclar_registro
   definir_ativo_imobilizado --> reconhecer_imagem
   definir_ativo_imobilizado --> registrar_ciclo_do_ativo
+  definir_conta_bancaria --> definir_empresa
+  definir_conta_bancaria --> definir_pessoa
+  definir_conta_bancaria --> evoluir_habilidade
+  definir_conta_bancaria --> identificar_duplicata
+  definir_conta_bancaria --> lancar_despesa
   definir_convidado --> definir_agenda
   definir_convidado --> definir_inscricao
   definir_convidado --> procurar_agenda
