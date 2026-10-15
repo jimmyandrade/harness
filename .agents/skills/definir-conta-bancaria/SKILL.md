@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.0.1"
+  version: "0.1.0"
   related:
     - definir-empresa
     - definir-pessoa
@@ -18,11 +18,12 @@ metadata:
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Títulos dos modelos` lista o começo do título das páginas que são modelos da lista de contas. `Habilidade de venda` vazia quer dizer que a venda recebida fica fora desta habilidade.
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Títulos dos modelos` lista o começo do título das páginas que são modelos da lista de contas. `Habilidade de venda` vazia quer dizer que a venda recebida fica fora desta habilidade. `Exigir chave Pix` com `sim` obriga a chave Pix sempre que a conta for repassada a quem vai pagar.
 
 ```yaml
 "Títulos dos modelos": []
 "Habilidade de venda": ""
+"Exigir chave Pix": "não"
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -48,7 +49,7 @@ Antes de criar, busque a conta pelo banco, pela conta, pela agência e pelo titu
 
 ### Passo 3
 
-Conta PJ liga a empresa titular e marca o tipo de conta como pessoa jurídica. Conta PF liga a pessoa titular e marca pessoa física. A mesma pessoa pode ter as duas no mesmo banco. São registros diferentes. Quando a fonte cita um CNPJ, a conta é a PJ. Ao repassar dados de uma conta, confira na fonte qual das duas foi usada.
+Conta PJ liga a empresa titular e marca o tipo de conta como pessoa jurídica. Conta PF liga a pessoa titular e marca pessoa física. A mesma pessoa pode ter as duas no mesmo banco. São registros diferentes. Quando a fonte cita um CNPJ, a conta é a PJ. Ao repassar dados de uma conta, confira na fonte qual das duas foi usada. Com `Exigir chave Pix` em `sim`, a mensagem para quem vai pagar leva a chave Pix da conta, mesmo que seja a aleatória. Sem a chave na fonte, peça a chave e não envie antes.
 
 ### Passo 4
 
@@ -87,6 +88,14 @@ Se você usar a conta PF de quem também tem PJ no mesmo banco, o dinheiro vai p
 2. Com CNPJ, use a conta PJ, ligada à empresa titular.
 3. Se a conta PJ não está na lista, cadastre antes de repassar.
 
+### Conta sem chave Pix
+
+Se você repassar agência e conta sem a chave Pix quando `Exigir chave Pix` é `sim`, quem vai pagar fica sem o jeito mais rápido de transferir.
+
+1. Procure a chave Pix da conta na fonte.
+2. Sem a chave, peça antes de enviar.
+3. Inclua a chave, mesmo aleatória, junto com os dados da conta.
+
 ### Menção quebrada
 
 Se você mencionar a página no comentário com a URL completa, o link aponta para uma página que não existe.
@@ -112,6 +121,7 @@ Copiei cada fato para um comentário datado, conferi as menções e pedi para li
 - A fonte não mostra a agência: deixe vazia. Não complete.
 - A mesma pessoa tem conta PF e PJ no mesmo banco: são duas páginas. Não junte.
 - `Títulos dos modelos` está vazio e a página parece um modelo sem dados: pergunte antes de preencher.
+- `Exigir chave Pix` é `sim` e só existe a chave aleatória: informe a aleatória.
 - O fato não tem data: pergunte a data. Não use a data de hoje no lugar.
 - A empresa ou a pessoa titular não está cadastrada: siga o flowchart do Passo 1 antes de ligar.
 
