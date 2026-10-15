@@ -1,0 +1,12 @@
+{
+  "name": "vocabulary",
+  "description": "Skills that register brand glossary terms and write in the voice of the project that is open.",
+  "version": "0.3.1",
+  "author": {
+    "name": "Jimmy Andrade",
+    "url": "https://github.com/jimmyandrade"
+  },
+  "repository": "https://github.com/jimmyandrade/vocabulary",
+  "license": "PolyForm-Noncommercial-1.0.0",
+  "skills": "./.agents/skills/"
+}

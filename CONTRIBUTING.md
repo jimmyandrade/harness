@@ -33,9 +33,11 @@ Every step in a workflow has a `name`: a short imperative phrase in English, suc
 
 A release is a tag `vMAJOR.MINOR.PATCH` and a GitHub Release. Business harnesses pin the npm dependency to that full tag, as in `github:jimmyandrade/vocabulary#vMAJOR.MINOR.PATCH`.
 
-Release Please owns the version. `.github/workflows/release-please.yml` runs on every push to `main` and keeps one release pull request open. That pull request bumps `version` in `package.json` and `package-lock.json`, and writes `CHANGELOG.md` from the Conventional Commits since the last release. Merging it creates the tag and the GitHub Release. Before the first major version, a breaking change bumps the minor version. Do not bump the version or create a tag by hand. The configuration is `release-please-config.json`, and the last released version is in `.release-please-manifest.json`.
+Release Please owns the version. `.github/workflows/release-please.yml` runs on every push to `main` and keeps one release pull request open. That pull request bumps `version` in `package.json`, `package-lock.json`, `.claude-plugin/plugin.json`, and `.cursor-plugin/plugin.json`, and writes `CHANGELOG.md` from the Conventional Commits since the last release. Merging it creates the tag and the GitHub Release. Before the first major version, a breaking change bumps the minor version. Do not bump the version or create a tag by hand. The configuration is `release-please-config.json`, and the last released version is in `.release-please-manifest.json`.
 
 The MCP server reads its version from `package.json`, so the release pull request does not touch `api/`.
+
+`.claude-plugin/` is the source of truth for the plugin, as ADR 0011 of the core harness decides. `.cursor-plugin/plugin.json` repeats its shared fields: `name`, `version`, `description`, `author`, `homepage`, `repository`, `license`, `keywords`, and `skills`. A field added to one goes into the other in the same commit.
 
 The release pull request is opened with `GITHUB_TOKEN`, so CI does not run on it. Every commit it describes already passed CI on its own pull request.
 

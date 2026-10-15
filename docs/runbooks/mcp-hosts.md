@@ -8,7 +8,7 @@ An MCP host is the application a person talks to. It reads a list of MCP servers
 
 Cursor reads `.cursor/mcp.json`. Claude Code reads `.mcp.json` at the project root. Claude Desktop, Windsurf, and Cline keep their list outside the repository, so each one gets a link to `.agents/mcp.json`. VS Code expects `servers` as the first key, so it does not use this list.
 
-`.mcp.json` is a link to `.agents/mcp.json`, not a second copy. The harness `core` plugin does not start this server.
+`.mcp.json` is a link to `.agents/mcp.json`, not a second copy. The harness `core` plugin and the `vocabulary` plugin do not start this server.
 
 Run this runbook from the root of the project, after the project has a `package.json`. Each step ends with a check. A link replaces the whole file it points from: copy anything you still need into `.agents/mcp.json` first. If you move the clone, create the links again.
 

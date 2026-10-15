@@ -22,7 +22,22 @@ To pin a release, add its tag: `github:jimmyandrade/vocabulary#vMAJOR.MINOR.PATC
 
 Check: `node node_modules/vocabulary/dist/mcp/index.js < /dev/null && echo ok` prints `ok`.
 
-Add the skills for Cursor, Codex, or GitHub Copilot:
+The skills also ship as the `vocabulary` plugin, from `.claude-plugin/` for Claude Code and Codex and from `.cursor-plugin/plugin.json` for Cursor. A business harness lists it in its own `.claude-plugin/marketplace.json`, pinned to the same tag as the npm dependency, beside the `core` plugin of `jimmyandrade/harness`:
+
+```json
+{ "name": "vocabulary", "source": { "source": "url", "url": "https://github.com/jimmyandrade/vocabulary.git", "ref": "vMAJOR.MINOR.PATCH" } }
+```
+
+and enables `vocabulary@<marketplace>` in `.claude/settings.json`. Outside a business harness, Claude Code installs it from this repository:
+
+```bash
+claude plugin marketplace add jimmyandrade/vocabulary
+claude plugin install vocabulary@vocabulary
+```
+
+Check: `claude plugin list` shows `vocabulary`. The plugin ships only the skills. The MCP server still comes from the npm dependency, as `docs/runbooks/mcp-hosts.md` explains.
+
+Add the skills for GitHub Copilot, or to a project without the plugin:
 
 ```bash
 npx skills add jimmyandrade/vocabulary

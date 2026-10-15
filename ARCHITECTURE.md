@@ -17,6 +17,8 @@ vocabulary/
 │   └── shared/                # Glossary access, Zod schemas, HTTP server
 ├── dist/                      # JavaScript compiled from api/ on install, not committed
 ├── .agents/skills/            # definir-vocabulario and redigir-com-tom-de-voz
+├── .claude-plugin/            # Plugin and marketplace for Claude Code and Codex
+├── .cursor-plugin/plugin.json # The same plugin for Cursor
 ├── docs/
 │   ├── adr/                   # Architecture decisions
 │   └── runbooks/              # Setup steps for MCP hosts
@@ -58,7 +60,7 @@ None. An agent calls the MCP tools, the CLI, or the local HTTP server.
 - Name: `definir-vocabulario` and `redigir-com-tom-de-voz`
 - Description: Register glossary terms, and write in the voice of the project that is open. The catalog is `.agents/skills/FEATURES.md`.
 - Technologies: Markdown skills, checked by the harness
-- Deployment: `npx skills add jimmyandrade/vocabulary` from the project that holds the glossary
+- Deployment: the `vocabulary` plugin, listed in the marketplace of a business harness at a release tag, or `npx skills add jimmyandrade/vocabulary` from the project that holds the glossary
 
 ## 4. Data Stores
 
