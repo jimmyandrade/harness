@@ -1,11 +1,12 @@
 # language: pt
-Funcionalidade: Compartilhar a conta com quem vai pagar
-  Quem vai pagar recebe a chave Pix junto com os dados da conta, quando o projeto exige.
+Funcionalidade: Informar dados para pagamento com a chave Pix
+  Quem vai pagar recebe a chave Pix principal junto com os dados da conta, quando o projeto exige.
 
-  Regra: Com a chave Pix exigida, a conta repassada leva a chave
+  Regra: Com a chave Pix obrigatória, os dados para pagamento levam a chave principal
 
-    Exemplo: Conta repassada a quem vai fazer o pagamento
-      Dado que as instruções do projeto exigem a chave Pix
-      E que a conta tem uma chave Pix aleatória
-      Quando a skill repassa a conta a uma pessoa que vai fazer o pagamento
+    Exemplo: Chave Pix principal já cadastrada na conta
+      Dado que as instruções do projeto tornam a chave Pix obrigatória nos dados para pagamento
+      E que a conta tem uma chave Pix principal aleatória cadastrada
+      Quando a skill informa os dados para pagamento a uma pessoa que vai pagar
       Então a mensagem traz a chave Pix aleatória junto com os dados da conta
+      Mas a skill não pergunta a chave à pessoa

@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
   related:
     - definir-empresa
     - definir-pessoa
@@ -18,12 +18,12 @@ metadata:
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Títulos dos modelos` lista o começo do título das páginas que são modelos da lista de contas. `Habilidade de venda` vazia quer dizer que a venda recebida fica fora desta habilidade. `Exigir chave Pix` com `sim` obriga a chave Pix sempre que a conta for repassada a quem vai pagar.
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Títulos dos modelos` lista o começo do título das páginas que são modelos da lista de contas. `Habilidade de venda` vazia quer dizer que a venda recebida fica fora desta habilidade. `Chave Pix nos dados para pagamento` com `obrigatória` faz os dados para pagamento, enviados a quem vai pagar, levarem a chave Pix principal da conta. Com `opcional`, a chave entra só se já estiver cadastrada.
 
 ```yaml
 "Títulos dos modelos": []
 "Habilidade de venda": ""
-"Exigir chave Pix": "não"
+"Chave Pix nos dados para pagamento": "opcional"
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -49,7 +49,7 @@ Antes de criar, busque a conta pelo banco, pela conta, pela agência e pelo titu
 
 ### Passo 3
 
-Conta PJ liga a empresa titular e marca o tipo de conta como pessoa jurídica. Conta PF liga a pessoa titular e marca pessoa física. A mesma pessoa pode ter as duas no mesmo banco. São registros diferentes. Quando a fonte cita um CNPJ, a conta é a PJ. Ao repassar dados de uma conta, confira na fonte qual das duas foi usada. Com `Exigir chave Pix` em `sim`, a mensagem para quem vai pagar leva a chave Pix da conta, mesmo que seja a aleatória. Sem a chave na fonte, peça a chave e não envie antes.
+Conta PJ liga a empresa titular e marca o tipo de conta como pessoa jurídica. Conta PF liga a pessoa titular e marca pessoa física. A mesma pessoa pode ter as duas no mesmo banco. São registros diferentes. Quando a fonte cita um CNPJ, a conta é a PJ. Ao repassar dados de uma conta, confira na fonte qual das duas foi usada. Ao informar dados para pagamento, leia a chave Pix principal no cadastro da conta e inclua junto com os dados, mesmo que seja a aleatória. Pergunte à pessoa só quando `Chave Pix nos dados para pagamento` for `obrigatória` e a chave faltar: com o campo vazio, peça a chave, grave no campo e então envie. Se a lista não tem um campo para a chave Pix principal, diga no fim e sugira criar o campo. Não grave a chave no corpo nem num comentário.
 
 ### Passo 4
 
@@ -90,11 +90,11 @@ Se você usar a conta PF de quem também tem PJ no mesmo banco, o dinheiro vai p
 
 ### Conta sem chave Pix
 
-Se você repassar agência e conta sem a chave Pix quando `Exigir chave Pix` é `sim`, quem vai pagar fica sem o jeito mais rápido de transferir.
+Se você informar dados para pagamento sem a chave Pix quando `Chave Pix nos dados para pagamento` é `obrigatória`, quem vai pagar fica sem o jeito mais rápido de transferir.
 
-1. Procure a chave Pix da conta na fonte.
-2. Sem a chave, peça antes de enviar.
-3. Inclua a chave, mesmo aleatória, junto com os dados da conta.
+1. Leia a chave Pix principal no cadastro da conta.
+2. Campo vazio: peça a chave, grave no campo e só então envie.
+3. Sem o campo na lista: avise e sugira criar.
 
 ### Menção quebrada
 
@@ -121,7 +121,8 @@ Copiei cada fato para um comentário datado, conferi as menções e pedi para li
 - A fonte não mostra a agência: deixe vazia. Não complete.
 - A mesma pessoa tem conta PF e PJ no mesmo banco: são duas páginas. Não junte.
 - `Títulos dos modelos` está vazio e a página parece um modelo sem dados: pergunte antes de preencher.
-- `Exigir chave Pix` é `sim` e só existe a chave aleatória: informe a aleatória.
+- `Chave Pix nos dados para pagamento` é `obrigatória` e só existe a chave aleatória: informe a aleatória.
+- A chave Pix principal já está no cadastro: use. Não pergunte à pessoa.
 - O fato não tem data: pergunte a data. Não use a data de hoje no lugar.
 - A empresa ou a pessoa titular não está cadastrada: siga o flowchart do Passo 1 antes de ligar.
 

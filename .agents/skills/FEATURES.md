@@ -241,7 +241,7 @@ How these skills relate is in `README.md`, in this folder.
   - Links a business account to the holding company and a personal account to the holding person, and keeps both accounts of the same person apart
   - Fills branch, account, check digit, and holder only from the source
   - Keeps the account history in dated comments, never in the page body, and mentions other pages by ID
-  - Includes the Pix key, even a random one, whenever it shares the account with someone who will pay and the project instructions require it, and asks for the key before sending when the source lacks it
+  - Reads the main Pix key from the account record and includes it, even a random one, when it gives payment details to someone who will pay; asks only when the project makes the key mandatory and the field is empty, then saves it in that field, and suggests the field when the list lacks it
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses recording the sale or the expense, registering the company or the holder, and an existence-only check
