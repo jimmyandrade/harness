@@ -45,6 +45,7 @@ flowchart LR
     lancar_despesa["lancar-despesa"]
     medir_habilidade["medir-habilidade"]
     mesclar_registro["mesclar-registro"]
+    organizar_ponto_de_contato["organizar-ponto-de-contato"]
     procurar_agenda["procurar-agenda"]
     procurar_data_significativa["procurar-data-significativa"]
     procurar_email["procurar-email"]
@@ -84,6 +85,7 @@ flowchart LR
   definir_agenda --> definir_reserva
   definir_agenda --> definir_tipo_do_evento
   definir_agenda --> definir_viagem
+  definir_agenda --> organizar_ponto_de_contato
   definir_agenda --> procurar_agenda
   definir_agenda --> revisar_uso_do_tempo
   definir_agenda --> sincronizar_cronograma
@@ -122,6 +124,7 @@ flowchart LR
   definir_instrucoes_do_projeto --> evoluir_habilidade
   definir_jornada_de_producao --> definir_agenda
   definir_jornada_de_producao --> definir_agenda_de_popstar
+  definir_jornada_de_producao --> organizar_ponto_de_contato
   definir_jornada_de_producao --> procurar_agenda
   definir_lancamento --> definir_ativo_imobilizado
   definir_lancamento --> definir_planejamento_financeiro
@@ -156,12 +159,14 @@ flowchart LR
   definir_tipo_do_evento --> definir_tarefa
   definir_tipo_do_evento --> definir_viagem
   definir_tipo_do_evento --> lancar_despesa
+  definir_tipo_do_evento --> organizar_ponto_de_contato
   definir_tipo_do_evento --> procurar_agenda
   definir_tipo_do_evento --> procurar_oportunidade
   definir_viagem --> definir_agenda
   definir_viagem --> definir_inscricao
   definir_viagem --> evoluir_habilidade
   definir_viagem --> lancar_despesa
+  definir_viagem --> organizar_ponto_de_contato
   definir_viagem --> procurar_oportunidade
   definir_viagem --> sincronizar_cronograma
   descrever_habilidade_ou_schema --> evoluir_habilidade
@@ -187,6 +192,13 @@ flowchart LR
   mesclar_registro --> definir_grafia
   mesclar_registro --> definir_perfil_social
   mesclar_registro --> identificar_duplicata
+  organizar_ponto_de_contato --> criar_oportunidade
+  organizar_ponto_de_contato --> definir_agenda
+  organizar_ponto_de_contato --> definir_grupo_de_oportunidades
+  organizar_ponto_de_contato --> definir_tarefa
+  organizar_ponto_de_contato --> definir_viagem
+  organizar_ponto_de_contato --> procurar_oportunidade
+  organizar_ponto_de_contato --> sincronizar_cronograma
   procurar_agenda --> criar_oportunidade
   procurar_agenda --> definir_agenda
   procurar_agenda --> definir_agenda_de_popstar
@@ -194,6 +206,7 @@ flowchart LR
   procurar_agenda --> definir_grupo_de_oportunidades
   procurar_agenda --> definir_recurso_de_aprendizado
   procurar_agenda --> definir_viagem
+  procurar_agenda --> organizar_ponto_de_contato
   procurar_agenda --> procurar_oportunidade
   procurar_agenda --> revisar_uso_do_tempo
   procurar_data_significativa --> definir_data_significativa

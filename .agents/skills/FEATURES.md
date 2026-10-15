@@ -149,7 +149,7 @@ How these skills relate is in `README.md`, in this folder.
   - Does not classify opportunity, deal, and contact point on its own; that distinction lives in definir-tipo-do-evento
   - Leaves a reservation, a provisional block, a pending event, or a reminder to definir-reserva
   - Leaves a career reservation made before demand exists to definir-agenda-de-popstar
-  - Copies an annual Google Calendar title from the Datas significativas record and leaves that record to definir-data-significativa
+  - Copies an annual Google Calendar title from the record in the list of significant dates and leaves that record to definir-data-significativa
   - Reads the date-with-weekday format from the YAML mapping under Parâmetros de configuração, the first level-2 heading, outside the frontmatter
   - Writes the weekday beside each date in replies, summaries, tables, and descriptions, after checking it against the event date, time, and time zone, and keeps the structured calendar field valid
   - Leaves the production day, the reduced journey, and Saturday alternation to definir-jornada-de-producao, and records the reduced day and the reason in the event description when that skill says so
@@ -509,7 +509,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Properties**:
   - Lives at `.agents/skills/definir-viagem/SKILL.md`
   - Reads the trip, lodging, locality, and schedule lists and their property names from the data mapping of the project
-  - Keeps one canonical trip on the trip list, locates it by origin, destination, and equal or overlapping dates before any create, treats BH and Belo Horizonte as the same origin and RJ, Rio, and Rio de Janeiro as the same destination, updates a safe match, asks when several match or the match is unsafe, asks for a missing route or dates instead of creating, and creates one trip with only confirmed data when none matches. Keeps origin, destination, dates, lodging, and existing investments on that trip. Resolves origin and destination through Localidades e praças, links the page that already matches the name or the abbreviation, and does not create a locality
+  - Keeps one canonical trip on the trip list, locates it by origin, destination, and equal or overlapping dates before any create, treats BH and Belo Horizonte as the same origin and RJ, Rio, and Rio de Janeiro as the same destination, updates a safe match, asks when several match or the match is unsafe, asks for a missing route or dates instead of creating, and creates one trip with only confirmed data when none matches. Keeps origin, destination, dates, lodging, and existing investments on that trip. Resolves origin and destination through the locality list, links the page that already matches the name or the abbreviation, and does not create a locality
   - Chooses the travel stage from the closed list. Saída is leaving home, the hotel, or a meeting point. Ida and Volta are the general outbound and return legs when no more specific milestone exists. Check-in confirms the trip or enters the lodging. Embarque is boarding. Decolagem and Pouso are the flight's actual departure and arrival. Transfer is organized ground movement. Atividade is a visit or program. Check-out is leaving the lodging. Airport arrival keeps an empty stage
   - Updates a schedule row that already matches the trip, the name, the stage, and the date when its time is empty or equal, asks when that time differs or several rows match, and creates a separate row for each other operational milestone, linked to the trip and to the opportunity when that opportunity already exists. Puts an informed time on Início planejado, puts Fim planejado only when the source gives an end of that same event, fills each actual time only when that timestamp is known, keeps a future event as Planejado, and records a known date with a pending time as the date plus the pending note in Contexto e observações, without an approximate time
   - Answers who will drive the person, or whether a bus is needed, from the flight number and the takeoff time of the outbound and return legs, and does not substitute boarding or another milestone for that takeoff
@@ -663,6 +663,32 @@ How these skills relate is in `README.md`, in this folder.
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses avoiding a duplicate, registering the disambiguation relation, creating the record, locking spelling, and deleting without an order
+
+### organizar-ponto-de-contato
+- **Stability**: experimental
+- **Description**: Plan and organize a physical contact point of the business, including a pop-up store
+- **Properties**:
+  - Lives at `.agents/skills/organizar-ponto-de-contato/SKILL.md`
+  - Reads `Agendas` from the project instructions: each calendar by name and optional ID, with its use (`padrão`, `em uso`, `só leitura`, `aposentada`, or `ignorada`) and an optional purpose. Without a `padrão` calendar, the default is the account's main calendar
+  - Previous name: organizar-feira
+  - Treats a fair as a physical contact point when it is the business's real participation
+  - Leaves a meeting or a review with an organization to definir-agenda, and does not create a contact point on the agenda from an approved opportunity until the participation days are confirmed
+  - Keeps on the agenda only the participation days the person confirmed or wanted, and removes or cancels a wrong-day event when the person corrects it
+  - Prefers one event per confirmed day of the same opportunity, marks the title with the day position, and uses an all-day event or a range only for a continuous trip or a long occupation
+  - Writes a contact-point event on the calendar of `Agendas` whose purpose is contact points, or the default calendar, ignores a calendar whose use is `ignorada` even when history still names it, records the contact point scope and the canonical page in the description, migrates an event from another editable calendar and cancels the old one, and when the old calendar cannot be edited creates the equivalent event and says the duplicate must be removed manually
+  - Treats Pontos de contato as the canonical order and number, does not split an event only because the calendar title number differs, updates that title after the other identifiers match, and asks before renaming when the match stays ambiguous
+  - Reads the editable calendar and the removed calendar from the YAML mapping under Parâmetros de configuração
+  - Leaves organizing a trip to definir-viagem
+  - Treats contact points as one list and opportunities as another
+  - When a reminder names that point, asks which contact point and which opportunity, and does not leave those relations empty
+  - Does not invent the page or create a second one with the same name
+  - Does not copy the reminder's day onto the contact point or the opportunity dates
+  - Does not write the task title, the deadline, or the definition of done
+  - When the person asks what is left to organize, lists open linked tasks and gaps already on the pages, orders them by the event date, states that date with the weekday, and does not create tasks in that reply
+  - Does not ask the person to name the skill
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses registering the opportunity, checking whether the opportunity already exists, organizing a trip, writing the task title, the deadline, and the definition of done, checking whether the task exists, and registering someone
 
 ### procurar-agenda
 - **Stability**: experimental
