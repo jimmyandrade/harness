@@ -159,7 +159,7 @@ How these skills relate is in `README.md`, in this folder.
   - Does not invent a date, a time, or a duration
   - When the person states what happens on a named day, records those blocks without asking permission, as all-day blocks when no hour was stated
   - Asks for the departure hour of a confirmed trip and does not record it without one; for a trip not yet confirmed, offers a reservation at an approximate hour or for the whole day
-  - Does not write health guidance, and sends a block that would erase food, exercise, exams, appointments, spirituality, family, pets, romantic relationship, friendship, or rest to definir-agenda-de-popstar
+  - Does not write health guidance, and sends a block that would erase one of the `Compromissos de vida` to definir-agenda-de-popstar
   - Leaves the opportunity, the fair, the course, the call for entries, the recurring edition, and the task with their own skills, and offers to create a missing opportunity without creating it
   - Leaves a question about what is already on a day or a week to procurar-agenda
   - Leaves the popstar agenda, reverse planning, and life protection to definir-agenda-de-popstar
@@ -195,7 +195,7 @@ How these skills relate is in `README.md`, in this folder.
   - Plans dependencies backward from the final date the person chose, includes the margin for review and unforeseen events only when the person or the source named it, and does not invent the slack
   - Answers a reverse plan with the milestone date, stages, dependencies, margin, expected cost, and completion criterion, plus a short summary and the time zone, and does not invent the cost or the criterion
   - Closes every reply with a short summary and the time zone when a date or time is present, and leaves each written event's status to definir-agenda
-  - Protects food, exercise, exams, appointments, prescribed treatment, spirituality, family, pets, romantic relationship, friendships, and rest that the person, the source, or Google Calendar already named, and does not let a career block erase them
+  - Protects the `Compromissos de vida` that the person, the source, or Google Calendar already named, and does not let a career block erase them
   - Does not write health guidance
   - Sends each defined block to definir-agenda and does not write the Google Calendar event
   - Reserves time for cultural activity, relationships, prospecting, communication, event participation, backstage, the activities of the segment, and lifestyle before spontaneous demand exists, only when the action coheres with the business, and does not register that block as an opportunity

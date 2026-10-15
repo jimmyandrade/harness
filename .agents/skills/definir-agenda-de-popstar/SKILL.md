@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.6.1"
+  version: "0.7.0"
   aliases:
     - agenda de popstar
   related:
@@ -20,13 +20,24 @@ metadata:
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Segmento` é o segmento da carreira, como moda ou música. Vazio quer dizer que o segmento é o que a pessoa nomeia. `Atividades do segmento` lista o que a agenda desse segmento inclui. `Critério de sentido` é a frase que pesa cada compromisso.
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Segmento` é o segmento da carreira, como moda ou música. Vazio quer dizer que o segmento é o que a pessoa nomeia. `Atividades do segmento` lista o que a agenda desse segmento inclui. `Critério de sentido` é a frase que pesa cada compromisso. `Compromissos de vida` lista o que um bloco de carreira não apaga.
 
 ```yaml
 "Revisão do bloqueio": mais de 6 meses
 "Segmento": ""
 "Atividades do segmento": []
 "Critério de sentido": "Não faça um sucesso, faça história"
+"Compromissos de vida":
+  - "alimentação"
+  - "exercícios"
+  - "exames e consultas"
+  - "tratamentos prescritos"
+  - "espiritualidade"
+  - "família"
+  - "animais de estimação"
+  - "relacionamento amoroso"
+  - "amizades"
+  - "descanso"
 ```
 
 ## Instruções
@@ -59,7 +70,7 @@ A resposta da agenda reversa leva a data marco, as etapas, as dependências, a m
 
 ### Passo 4
 
-Saúde, descanso e relação pessoal entram como a pessoa afirmou. Proteja alimentação, exercícios, exames, consultas, tratamentos prescritos, espiritualidade, família, animais de estimação, relacionamento amoroso, amizades e descanso que a pessoa ou a fonte nomeou, ou que já estão no Google Agenda. Um bloco de carreira não apaga esses compromissos. Sem horário, peça. Não invente a rotina. Tratamento prescrito entra como foi prescrito. Não escreva orientação de saúde. Não substitua orientação profissional. A gravação do que permanece segue o flowchart, em `definir-agenda`.
+Saúde, descanso e relação pessoal entram como a pessoa afirmou. Proteja os `Compromissos de vida` que a pessoa ou a fonte nomeou, ou que já estão no Google Agenda. Um bloco de carreira não apaga esses compromissos. Sem horário, peça. Não invente a rotina. Tratamento prescrito entra como foi prescrito. Não escreva orientação de saúde. Não substitua orientação profissional. A gravação do que permanece segue o flowchart, em `definir-agenda`.
 
 ### Passo 5
 
@@ -94,7 +105,7 @@ Se você inventar quantos dias antes do lançamento a criação, a produção, a
 
 ### Carreira que apaga a vida
 
-Se você tirar alimentação, exercícios, exames, consultas, tratamento prescrito, espiritualidade, família, animais de estimação, relacionamento amoroso, amizades ou descanso para caber a carreira, a agenda deixa de sustentar a vida.
+Se você tirar um dos `Compromissos de vida` para caber a carreira, a agenda deixa de sustentar a vida.
 
 1. Mantenha o compromisso que a pessoa, a fonte ou o Google Agenda já nomeou.
 2. Sem horário, peça. Não invente a rotina.
@@ -199,7 +210,7 @@ Organizei o próximo movimento. A agenda incluiu as atividades do segmento, só 
 
 ### Proteja saúde, família e descanso nesta semana de entrega
 
-Mantive alimentação, exercícios, exames, consultas, tratamento prescrito, espiritualidade, família, animais de estimação, relacionamento amoroso, amizades e descanso que já estavam nomeados. A entrega não apagou esses blocos. Sem horário, pedi. Não escrevi orientação de saúde. A gravação ficou com `definir-agenda`.
+Mantive os `Compromissos de vida` que já estavam nomeados. A entrega não apagou esses blocos. Sem horário, pedi. Não escrevi orientação de saúde. A gravação ficou com `definir-agenda`.
 
 ### reserve tempo para a carreira viva, antes de ter demanda
 
@@ -216,7 +227,7 @@ Tratei como responsabilidade a remarcar. Pedi a revisão do bloqueio e uma açã
 - A resposta não traz o resumo curto, ou há data sem fuso: escreva o resumo e peça o fuso se o dia puder mudar. Não invente o fuso.
 - Compromisso sem história, posicionamento, receita, aprendizado, saúde ou relação importante afirmados: peça. Não invente o sentido.
 - A pessoa pede orientação de saúde: não escreva. Descanso entra só como ela afirmou. Tratamento prescrito entra como foi prescrito.
-- Um bloco de carreira cobre alimentação, exercício, exame, consulta, espiritualidade, família, animal de estimação, relacionamento amoroso, amizade ou descanso: mantenha o compromisso. Não invente o horário.
+- Um bloco de carreira cobre um dos `Compromissos de vida`: mantenha o compromisso. Não invente o horário.
 - O compromisso alcançou a revisão do bloqueio: remarque, peça a revisão do bloqueio e uma ação de cuidado. Não invente a ação.
 - O espaço não adere à marca, ao trabalho ou aos objetivos: não prometa identidade profissional.
 - Falta hipótese, limite, custo, prazo de retorno ou critério de revisão do recurso próprio: peça. Não invente.
@@ -234,7 +245,7 @@ Tratei como responsabilidade a remarcar. Pedi a revisão do bloqueio e uma açã
 - O segmento parece sempre o mesmo. Ele é o `Segmento` das instruções do projeto, ou o que a pessoa nomeia. As `Atividades do segmento` valem só nesse segmento.
 - Rigor parece perfeição. A rotina leva a carreira a sério. Profissionalização não é perfeição.
 - Compromisso repetido parece item descartável. É responsabilidade a remarcar. Alcançou a revisão do bloqueio: revise o bloqueio e peça uma ação de cuidado, sem orientação de saúde.
-- Saúde e vínculos parecem folga descartável. Alimentação, exercícios, exames, consultas, tratamento prescrito, espiritualidade, família, animais de estimação, relacionamento amoroso, amizades e descanso sustentam a carreira. A carreira não os apaga.
+- Saúde e vínculos parecem folga descartável. Os `Compromissos de vida` sustentam a carreira. A carreira não os apaga.
 - O número no meio do passo parece o lugar da edição. O valor mora no bloco `yaml` de `Parâmetros de configuração`.
 - Definir a estrutura parece permissão para gravar o evento. O bloco vai para `definir-agenda`.
 - Esperar a demanda parece prudência. A presença de carreira se reserva antes, com o tempo nomeado e coerente com o negócio.
