@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/jimmyandrade/vocabulary/compare/v0.3.1...v0.4.0) (2026-10-15)
+
+
+### Features
+
+* ship the voice skills as a Claude Code and Cursor plugin ([#18](https://github.com/jimmyandrade/vocabulary/issues/18)) ([039e164](https://github.com/jimmyandrade/vocabulary/commit/039e1643f4645166720ba52905548fcf3c4ebf2f))
+
 ## [0.3.1](https://github.com/jimmyandrade/vocabulary/compare/v0.3.0...v0.3.1) (2026-10-14)
 
 
