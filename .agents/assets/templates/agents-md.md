@@ -1,5 +1,5 @@
 ---
-description: Use essa habilidade sempre que for executar qualquer tarefa neste espaço de trabalho, inclusive outra habilidade, para seguir as instruções gerais e ler os parâmetros das habilidades. NÃO use para criar nem alterar estas instruções; a mudança vai no repositório.
+description: Traz as instruções gerais e os parâmetros das habilidades deste espaço de trabalho. Usada em qualquer tarefa, inclusive outra habilidade. Não serve para criar nem alterar estas instruções; a mudança vai no repositório.
 metadata:
   version: "0.1.0"
   parameters:
