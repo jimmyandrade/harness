@@ -33,6 +33,7 @@ harness/
 │   ├── actions/                    # Composite actions called by business harnesses
 │   │   ├── check-skill/
 │   │   └── sync-skill-pages/
+│   ├── scripts/                    # Scripts the workflows of this repository call
 │   └── workflows/                  # CI and Release Please for this repository
 ├── docs/
 │   ├── adr/                        # Architecture decisions
