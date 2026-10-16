@@ -24,21 +24,50 @@ jobs:
         run: |
           case "$BRANCH" in renovate/*|dependabot/*|release-please--*) exit 0 ;; esac
           [[ "$BRANCH" =~ ^(feat|fix|docs|refactor|perf|test|chore|ci)/[a-z0-9]+([.-][a-z0-9]+)*$ ]] || { echo "::error title=Branch name::$BRANCH is not type/short-description. Rename it before the first push."; exit 1; }
+      - name: Decide whether the change is only documentation
+        id: scope
+        env:
+          BASE: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before }}
+          HEAD: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+        run: |
+          # Without a base to compare, as on the first push of a branch, check everything.
+          if [ -z "$BASE" ] || [ -z "${BASE//0/}" ] || ! git cat-file -e "$BASE^{commit}" 2>/dev/null; then
+            echo "code=true" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          # Documentation is docs/ and Markdown at the root, except AGENTS.md and CLAUDE.md, which the skill check reads.
+          code=false
+          while IFS= read -r path; do
+            case "$path" in
+              AGENTS.md|CLAUDE.md) code=true ;;
+              docs/*) ;;
+              */*) code=true ;;
+              *.md) ;;
+              *) code=true ;;
+            esac
+          done < <(git diff --name-only "$BASE" "$HEAD")
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+          [ "$code" = true ] || echo "::notice title=Documentation only::Skipping the skill check, tests, and type check."
       - name: Check skills
+        if: steps.scope.outputs.code == 'true'
         uses: ./.github/actions/check-skill
         with:
           base: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before }}
           head: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
       - name: Run script tests
+        if: steps.scope.outputs.code == 'true'
         run: for test in .agents/scripts/*/test_*.py .agents/skills/*/scripts/test_*.py; do .venv/bin/python "$test" || exit 1; done
       - name: Set up Node.js
+        if: steps.scope.outputs.code == 'true'
         uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: npm
       - name: Install dependencies
+        if: steps.scope.outputs.code == 'true'
         run: npm ci
       - name: Check types
+        if: steps.scope.outputs.code == 'true'
         run: npx tsc --noEmit
       - name: Run unit tests
+        if: steps.scope.outputs.code == 'true'
         run: npm test
