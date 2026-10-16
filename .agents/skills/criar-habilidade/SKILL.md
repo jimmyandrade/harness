@@ -3,7 +3,7 @@ name: criar-habilidade
 description: Use essa habilidade sempre que for criar, adicionar ou escrever uma skill, mesmo sem dizer skill. NÃO use para editar código, escrever página que não seja skill, otimizar só a descrição, nem gravar a skill no Notion. Pedido vindo do Notion segue publicar-habilidade.
 metadata:
   author: jimmyandrade
-  version: "3.9.0"
+  version: "3.10.0"
   related:
     - descrever-habilidade-ou-schema
     - evoluir-habilidade
@@ -120,7 +120,7 @@ Onde houver várias abordagens válidas, explique o porquê, escolha um padrão 
 Modelo de entrada ou saída não entra no corpo, nem quando é curto.
 Modelo de saída fica em `.agents/assets/templates/`, fora da skill. No corpo, uma frase e nada antes dela: `Leia .agents/assets/templates/<modelo> quando for gerar a saída.`
 Modelo de entrada de uma skill fica em `assets/` dela. Modelo de entrada de várias skills fica em `.agents/assets/`. No corpo: `Leia assets/<modelo> quando for pedir a entrada.` ou `Leia .agents/assets/<modelo> quando for pedir a entrada.`
-No Notion, o modelo de saída não entra na página de uma skill. O modelo de entrada da skill, anexe à página. `assets/<modelo>` viaja com a skill. Nos dois casos, o arquivo entra só quando a frase manda ler.
+No Notion, a sincronização troca o caminho pela menção à página do modelo. Use a frase exata. O modelo de entrada da skill, anexe à página. `assets/<modelo>` viaja com a skill. Nos dois casos, o arquivo entra só quando a frase manda ler.
 
 ### Passo 15
 
