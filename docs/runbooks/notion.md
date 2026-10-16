@@ -17,6 +17,8 @@ cp -n node_modules/harness/.agents/mappings/skill-page.notion.example.json .agen
 
 Set `data_source_id` to the data source of the skills database. Rename a property or a status option when the database uses another name. The status follows the version: below 0.1.0 is `draft`, from 0.1.0 with major 0 is `validation`, from 1 onward is `production`.
 
+When a skill points to an output template in `.agents/assets/templates/`, the Notion agent cannot open that path. Create one page for the templates, for example next to the skills database, and set its id in `templates_parent_page_id`. The sync then publishes each cited template as a child page of it, with the file in a code block, and the skill page mentions that child page instead of the path. Without `templates_parent_page_id`, the skill page keeps the path and the sync log says the template was skipped.
+
 Check: every value under `properties` and `status_options` names a property or an option of that data source.
 
 ## 2. Create a connection for the sync
@@ -34,11 +36,11 @@ In the Notion integrations page (notion.so/profile/integrations), create a conne
 | User information | none |
 | Agent access | off |
 
-The sync queries the data source, creates pages, and updates them. It never deletes a page and never reads people, comments, or other pages.
+The sync queries the data source, creates pages, and updates them. It also lists the child pages of the templates page, when the mapping sets one. It never deletes a page and never reads people, comments, or other pages.
 
-In the access tab of the connection, select only the skills database, not the page that contains it, which would grant everything under it. If another connection had access to the skills database, remove it there.
+In the access tab of the connection, select only the skills database, not the page that contains it, which would grant everything under it. When the mapping sets `templates_parent_page_id`, select that templates page too. If another connection had access to the skills database, remove it there.
 
-Check: the access tab of the connection lists the skills database and nothing else.
+Check: the access tab of the connection lists the skills database, the templates page when there is one, and nothing else.
 
 ## 3. Store the token
 
