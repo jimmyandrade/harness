@@ -1,7 +1,7 @@
 ---
 locale: en
 metadata:
-  version: "1.4.0"
+  version: "1.5.0"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -16,6 +16,7 @@ metadata:
       "Cor do ícone das páginas no Notion": "gray"
       "Símbolo da pasta no macOS": "wand.and.sparkles"
       "Considerar grupos de oportunidades": "sim"
+      "Idioma da issue": "português do Brasil"
 ---
 
 # Agent instructions

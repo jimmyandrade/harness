@@ -366,6 +366,19 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses only celebrating without saving, only looking up who registered, and deciding whether a task exists
 
+### definir-issue
+- **Stability**: experimental
+- **Description**: Open, review, edit, or translate a GitHub issue for a technical demand
+- **Properties**:
+  - Lives at `.agents/skills/definir-issue/SKILL.md`, with the output template at `.agents/assets/templates/issue-do-github.md`
+  - Reads `Repositório` from the project instructions or the `origin` remote, and `Idioma da issue`, declared in `Global` and overridden per project
+  - Searches open and closed issues before opening one, and stops when one already covers the demand
+  - Writes a Conventional Commits title whose type comes from the effect of the delivery, with the description and the body in `Idioma da issue`
+  - Writes the problem with the real case, the proposal, and a verifiable done criterion
+  - Translates an issue in another language without losing links or references
+- **Test Criteria**:
+  - [x] The skill is present at that path
+
 ### definir-jornada-de-producao
 - **Stability**: experimental
 - **Description**: Decide whether a day is a production day and how long that block lasts
