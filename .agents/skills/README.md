@@ -27,6 +27,7 @@ flowchart LR
     definir_empresa["definir-empresa"]
     definir_grafia["definir-grafia"]
     definir_grupo_de_oportunidades["definir-grupo-de-oportunidades"]
+    definir_historia_de_usuario["definir-historia-de-usuario"]
     definir_inscricao["definir-inscricao"]
     definir_instrucoes_do_projeto["definir-instrucoes-do-projeto"]
     definir_jornada_de_producao["definir-jornada-de-producao"]
