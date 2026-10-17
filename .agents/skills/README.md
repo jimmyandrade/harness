@@ -42,6 +42,7 @@ flowchart LR
     definir_pessoa["definir-pessoa"]
     definir_planejamento_financeiro["definir-planejamento-financeiro"]
     definir_recurso_de_aprendizado["definir-recurso-de-aprendizado"]
+    definir_reel_do_instagram["definir-reel-do-instagram"]
     definir_reserva["definir-reserva"]
     definir_roteiro_de_video["definir-roteiro-de-video"]
     definir_tarefa["definir-tarefa"]
@@ -190,6 +191,9 @@ flowchart LR
   definir_planejamento_financeiro --> revisar_financas
   definir_recurso_de_aprendizado --> definir_agenda
   definir_recurso_de_aprendizado --> procurar_agenda
+  definir_reel_do_instagram --> criar_ideia_de_conteudo
+  definir_reel_do_instagram --> definir_roteiro_de_video
+  definir_reel_do_instagram --> evoluir_habilidade
   definir_reserva --> definir_agenda
   definir_reserva --> definir_agenda_de_popstar
   definir_reserva --> revisar_uso_do_tempo

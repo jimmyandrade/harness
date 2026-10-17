@@ -545,6 +545,21 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses the day or week lookup, creating or changing the Google Calendar event, registering the opportunity, organizing the contact point, and creating the task
 
+### definir-reel-do-instagram
+- **Stability**: experimental
+- **Description**: Create, review, complete, or register an Instagram Reel in the list of posts
+- **Properties**:
+  - Lives at `.agents/skills/definir-reel-do-instagram/SKILL.md`
+  - Reads the list of posts, the list of content formats, and their property names from the data mapping of the project
+  - Gets the script from definir-roteiro-de-video and sends the caption wording to `Habilidade de tom de voz`
+  - Writes a caption that complements the video, fits the caption limit of the format, and ends with a measurable call to action, with hashtags in their own property
+  - Counts the Reels in the 7-day window of the posting date against the minimum and maximum goals of the format, and suggests another date without blocking
+  - Writes the caption only to the AI caption, keeps the human caption, keeps the notice that opens the page body, and writes the script below it
+  - Follows `Arquétipos da marca` or records the persona as inferred in the editorial notes, and does not invent the profile, the speaker, the date, or the format limits
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses choosing words in the tone of voice, registering only the idea, publishing the post, and creating a carousel
+
 ### definir-reserva
 - **Stability**: experimental
 - **Description**: Keep a reservation, a provisional block, a pending event, or a reminder provisional until participation is explicitly confirmed
