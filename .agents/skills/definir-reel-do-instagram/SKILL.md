@@ -4,7 +4,7 @@ description: Use essa habilidade sempre que for criar, revisar, completar ou cad
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.7.0"
+  version: "0.8.0"
   internal: true
   related:
     - criar-ideia-de-conteudo
@@ -94,16 +94,19 @@ Diga a qual objetivo o Reel serve, pela `Página da estratégia de conteúdo` ou
 
 ### Passo 5
 
-Grave ou atualize a página na lista de posts.
+Grave ou atualize a página na lista de posts. Um Reel tem uma página só: atualize a que já existe.
 
-1. O assunto é curto. O formato é Reel.
-2. Um Reel novo entra como rascunho. Agendado pede data e hora. Publicado pede a URL da postagem.
+1. O assunto é curto. O formato aponta para a página do Reel na lista de formatos. O perfil autor aponta para a página dele na lista de perfis sociais.
+2. Um Reel novo entra como rascunho. Agendado pede data e hora. Publicado pede a URL da postagem, que a pessoa informa quando o post sai.
 3. A data e a hora ficam vazias até a pessoa dar.
 4. A legenda vai na legenda revisada pela IA. Não altere a legenda redigida por humanos.
-5. O roteiro vai no corpo da página. Se o corpo abre com um aviso para humanos e IA, mantenha o aviso e escreva abaixo dele. A legenda e as hashtags não entram no corpo.
+5. O roteiro vai no corpo da página. Se o corpo abre com um aviso para humanos e IA, mantenha o aviso e escreva abaixo dele. A legenda, as hashtags, as contagens e as checagens não entram no corpo. Elas ficam velhas e vão na resposta.
 6. Os eixos escolhidos vão na propriedade de eixos narrativos.
 7. As observações editoriais guardam o objetivo, a persona, quem fala, o perfil autor, o que está pendente e as restrições de imagem e áudio.
 8. A referência e a página do evento vão nos links de referência.
+9. Um valor sem propriedade no mapeamento não entra no corpo. Liste no fim da resposta e sugira criar a propriedade.
+
+Depois de gravar, leia a página de novo e confira cada propriedade e o corpo. O que não gravou, grave de novo ou diga.
 
 ### Passo 6
 
@@ -157,6 +160,13 @@ Se você reescrever o corpo ou a legenda inteiros ao revisar, o que a pessoa esc
 1. Leia a página inteira antes.
 2. Mostre o antes, o depois e o motivo de cada item.
 3. Troque um trecho humano só com o sim para aquele trecho.
+
+### Checagem gravada no corpo
+
+Se você escrever contagens e checagens no corpo da página, elas ficam velhas e a próxima leitura confia num número errado.
+
+1. Deixe as contagens e as checagens na resposta.
+2. Deixe no corpo só o roteiro e o que a gravação usa.
 
 ### Aviso apagado
 
