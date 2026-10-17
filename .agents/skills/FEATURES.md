@@ -278,6 +278,20 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses stock, recording the payment, the asset life cycle, what is on today, an existence-only check, merging the same asset, creating the company, and creating the cost category
 
+### definir-campanha-de-conteudo
+- **Stability**: experimental
+- **Description**: Create, review, follow, or close a content campaign, including promoting a topic to a campaign
+- **Properties**:
+  - Lives at `.agents/skills/definir-campanha-de-conteudo/SKILL.md`
+  - Reads the list of content campaigns and its property names from the data mapping of the project, with the list of posts and the list of significant dates when the mapping has them
+  - Anchors the window on a significant date, moves a past reference date to its next occurrence, and avoids overlapping another campaign or another dated narrative
+  - Writes the strategy in the page body, with weekly stages that each carry an editorial role, suggested content, and metrics, and sends the promise and the call to action to `Habilidade de tom de voz`
+  - Keeps the status in line with the window, and records the origin when a post topic becomes a campaign without deleting that post
+  - Leaves the posts of the campaign to planejar-calendario-de-conteudo
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses creating the campaign posts, checking the calendar mix, writing the script or the caption, and registering the significant date
+
 ### definir-conta-bancaria
 - **Stability**: experimental
 - **Description**: Register, review, or update a bank or payment account, personal or business, and record what happened to it
@@ -885,6 +899,7 @@ How these skills relate is in `README.md`, in this folder.
   - Checks what already exists, what is planned, and what can be reused before it suggests a new topic, and cites the page behind each suggestion
   - Counts only a published status or a post URL as published
   - Shows the mix by format against the 7-day goals, by narrative axis, and by narrative, and does not put two narratives in the same week
+  - Treats a content campaign as occupying its window from start to end, even before it has posts, and assigns a post to a campaign by its relation when the mapping has one, or by its date inside the window
   - Builds an event sequence before the event from the event page, with pieces ready for sale only
   - Creates nothing before the person approves, and sends each approved Reel to definir-reel-do-instagram
 - **Test Criteria**:

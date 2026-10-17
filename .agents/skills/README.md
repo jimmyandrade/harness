@@ -25,6 +25,7 @@ flowchart LR
     definir_arquivos_da_habilidade["definir-arquivos-da-habilidade"]
     definir_artista["definir-artista"]
     definir_ativo_imobilizado["definir-ativo-imobilizado"]
+    definir_campanha_de_conteudo["definir-campanha-de-conteudo"]
     definir_conta_bancaria["definir-conta-bancaria"]
     definir_convidado["definir-convidado"]
     definir_data_significativa["definir-data-significativa"]
@@ -137,6 +138,8 @@ flowchart LR
   definir_ativo_imobilizado --> mesclar_registro
   definir_ativo_imobilizado --> reconhecer_imagem
   definir_ativo_imobilizado --> registrar_ciclo_do_ativo
+  definir_campanha_de_conteudo --> evoluir_habilidade
+  definir_campanha_de_conteudo --> planejar_calendario_de_conteudo
   definir_conta_bancaria --> definir_empresa
   definir_conta_bancaria --> definir_pessoa
   definir_conta_bancaria --> evoluir_habilidade
@@ -266,6 +269,7 @@ flowchart LR
   organizar_ponto_de_contato --> procurar_oportunidade
   organizar_ponto_de_contato --> sincronizar_cronograma
   planejar_calendario_de_conteudo --> criar_ideia_de_conteudo
+  planejar_calendario_de_conteudo --> definir_campanha_de_conteudo
   planejar_calendario_de_conteudo --> definir_reel_do_instagram
   planejar_calendario_de_conteudo --> evoluir_habilidade
   procurar_agenda --> criar_oportunidade
