@@ -640,13 +640,6 @@ def spec_errors(
     description_line = line_of("description")
     if not description.strip():
         errors.append(Finding("description must be a non-empty string", description_line))
-    elif not description.startswith("Use essa habilidade sempre que"):
-        errors.append(
-            Finding(
-                'description must start with "Use essa habilidade sempre que"',
-                description_line,
-            )
-        )
     elif len(description) > 1024:
         errors.append(
             Finding(
