@@ -4,7 +4,7 @@ description: Use essa habilidade sempre que for criar, revisar, completar ou cad
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.10.0"
+  version: "0.11.0"
   internal: true
   related:
     - criar-ideia-de-conteudo
@@ -17,13 +17,13 @@ metadata:
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Habilidade de tom de voz` vazia quer dizer que a legenda segue só esta habilidade. `Arquétipos da marca` lista os arquétipos que a voz da marca assume. Vazio quer dizer que a persona é inferida do perfil autor e anotada como inferida. `Página da estratégia de conteúdo` aponta a página com os objetivos de conteúdo do negócio. Vazia quer dizer que o objetivo vem só da pessoa. `Perfis sociais padrão` lista o perfil da marca em cada canal, com `"Canal"` e `"Perfil"`. `Perfis por praça` com `sim` quer dizer que a marca tem um perfil por praça: o perfil sai da lista de perfis sociais, pela praça, conforme o mapeamento de dados do projeto, e a lista de perfis padrão fica vazia.
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Habilidade de tom de voz` vazia quer dizer que a legenda segue só esta habilidade. `Arquétipos da marca` lista os arquétipos que a voz da marca assume. Vazio quer dizer que a persona é inferida do perfil autor e anotada como inferida. `Página da estratégia de conteúdo` aponta a página com os objetivos de conteúdo do negócio. Vazia quer dizer que o objetivo vem só da pessoa. `Empresa do negócio` é o nome do registro do próprio negócio na lista de empresas. Os perfis padrão, um por canal, saem dos perfis sociais dessa empresa. `Perfis por praça` com `sim` quer dizer que a marca tem um perfil por praça: o perfil sai da lista de perfis sociais, pela praça, conforme o mapeamento de dados do projeto.
 
 ```yaml
 "Habilidade de tom de voz": ""
 "Arquétipos da marca": []
 "Página da estratégia de conteúdo": ""
-"Perfis sociais padrão": []
+"Empresa do negócio": ""
 "Perfis por praça": "não"
 "Modo de aprendizado": "perguntar"
 ```
@@ -56,7 +56,7 @@ flowchart LR
 
 Tenha o tema, o objetivo e a data. O que não der para inferir com segurança das fontes, pergunte uma vez. Não invente perfil, narração, data, horário, local, objetivo nem limite do formato.
 
-Antes de redigir ou alterar o roteiro, leia as instruções do projeto inteiras, não só os parâmetros. Elas trazem as orientações gerais de uso da IA e as definições padrão do negócio e da pessoa fundadora. Quando o pedido não diz o perfil autor, quem fala ou a persona, parta dessas definições e diga que partiu delas. O perfil autor padrão é o do Instagram em `Perfis sociais padrão`. Com `Perfis por praça` em `sim`, ache o perfil pela praça do Reel. Sem praça no pedido, ou sem a praça no mapeamento, pergunte.
+Antes de redigir ou alterar o roteiro, leia as instruções do projeto inteiras, não só os parâmetros. Elas trazem as orientações gerais de uso da IA e as definições padrão do negócio e da pessoa fundadora. Quando o pedido não diz o perfil autor, quem fala ou a persona, parta dessas definições e diga que partiu delas. O perfil autor padrão é o perfil do Instagram ligado à `Empresa do negócio`. Com `Perfis por praça` em `sim`, ache o perfil pela praça do Reel. Sem empresa, sem perfil do canal, sem praça no pedido ou sem a praça no mapeamento, pergunte.
 
 Defina a voz: a persona, o perfil social autor e quem fala. Leia o perfil autor. A persona segue `Arquétipos da marca`. Sem arquétipo, infira do perfil autor e anote como inferida. Quando quem fala não é o dono do perfil autor e a página não diz se fala por si ou pela marca, pergunte. A voz decide:
 

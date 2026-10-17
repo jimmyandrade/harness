@@ -4,7 +4,7 @@ description: Use essa habilidade sempre que for sugerir o que postar, planejar u
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.5.0"
   internal: true
   related:
     - criar-ideia-de-conteudo
@@ -17,11 +17,11 @@ metadata:
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Perfis sociais padrão` lista o perfil da marca em cada canal, com `"Canal"` e `"Perfil"`. `Perfis por praça` com `sim` quer dizer que a marca tem um perfil por praça: o perfil sai da lista de perfis sociais, pela praça, conforme o mapeamento de dados do projeto, e a lista de perfis padrão fica vazia.
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Empresa do negócio` é o nome do registro do próprio negócio na lista de empresas. Os perfis padrão, um por canal, saem dos perfis sociais dessa empresa. `Perfis por praça` com `sim` quer dizer que a marca tem um perfil por praça: o perfil sai da lista de perfis sociais, pela praça, conforme o mapeamento de dados do projeto.
 
 ```yaml
 "Formato da data com dia da semana": "terça-feira, 01/09/2026"
-"Perfis sociais padrão": []
+"Empresa do negócio": ""
 "Perfis por praça": "não"
 "Modo de aprendizado": "perguntar"
 ```
@@ -76,7 +76,7 @@ Para divulgar um evento, os fatos vêm da página do evento na lista de oportuni
 
 ### Passo 5
 
-Mostre a janela e os posts propostos, cada um com formato, eixo, perfil autor, data, objetivo e fonte. O perfil autor padrão vem de `Perfis sociais padrão`, pelo canal do formato. Com `Perfis por praça` em `sim`, ele vem da praça do post ou do evento. Não crie nada antes do sim da pessoa.
+Mostre a janela e os posts propostos, cada um com formato, eixo, perfil autor, data, objetivo e fonte. O perfil autor padrão é o perfil da `Empresa do negócio` no canal do formato. Com `Perfis por praça` em `sim`, ele vem da praça do post ou do evento. Não crie nada antes do sim da pessoa.
 
 Com o sim, cada Reel segue `definir-reel-do-instagram`. Outro formato entra na lista de posts como rascunho, com assunto, formato, eixo, perfil autor, data aprovada e observações editoriais. Não escreva a legenda desse post.
 

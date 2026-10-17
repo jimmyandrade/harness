@@ -577,7 +577,7 @@ How these skills relate is in `README.md`, in this folder.
   - Reviews an existing Reel by reading the whole page first, shows the before, the after, and the gain for each changed item, treats body text without clear authorship as human, and replaces human text only with a yes for that passage
   - Follows `Arquétipos da marca` or records the persona as inferred in the editorial notes, and does not invent the profile, the speaker, the date, or the format limits
   - Reads the whole project instructions before writing, not only the parameters, and starts from the default definitions of the business and its founder when the request does not name the author profile, the speaker, or the persona
-  - Takes the default author profile from `Perfis sociais padrão`, or, with `Perfis por praça` set to `sim`, from the list of social profiles by the place of the Reel, and asks when the place is missing
+  - Takes the default author profile from the Instagram profile linked to `Empresa do negócio` in the list of companies, or, with `Perfis por praça` set to `sim`, from the list of social profiles by the place of the Reel, and asks when either is missing
   - Defines the voice before writing or changing the script: the speaker owns the lines, the author profile owns the caption, the delivery notes name the speaker, the call to action points to the author profile, and only the profiles the person named are tagged
 - **Test Criteria**:
   - [x] The skill is present at that path
@@ -910,7 +910,7 @@ How these skills relate is in `README.md`, in this folder.
   - Shows the mix by format against the 7-day goals, by narrative axis, and by narrative, and does not put two narratives in the same week
   - Treats a content campaign as occupying its window from start to end, even before it has posts, and assigns a post to a campaign by its relation when the mapping has one, or by its date inside the window
   - Builds an event sequence before the event from the event page, with pieces ready for sale only, and each post says on its own what happens, the date, the time, the address, why it is worth going, and the action
-  - Proposes the author profile of each post from `Perfis sociais padrão` by the channel of the format, or by the place of the post or event when `Perfis por praça` is `sim`
+  - Proposes the author profile of each post from the profiles linked to `Empresa do negócio`, by the channel of the format, or by the place of the post or event when `Perfis por praça` is `sim`
   - Creates nothing before the person approves, and sends each approved Reel to definir-reel-do-instagram
 - **Test Criteria**:
   - [x] The skill is present at that path
