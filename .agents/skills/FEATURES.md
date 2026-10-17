@@ -570,6 +570,7 @@ How these skills relate is in `README.md`, in this folder.
   - Writes a caption that complements the video, fits the caption limit of the format, and ends with a measurable call to action, with hashtags in their own property
   - Counts the Reels in the 7-day window of the posting date against the minimum and maximum goals of the format, and suggests another date without blocking
   - Writes the caption only to the AI caption, keeps the human caption, keeps the notice that opens the page body, and writes the script below it
+  - Reviews an existing Reel by reading the whole page first, shows the before, the after, and the gain for each changed item, treats body text without clear authorship as human, and replaces human text only with a yes for that passage
   - Follows `Arquétipos da marca` or records the persona as inferred in the editorial notes, and does not invent the profile, the speaker, the date, or the format limits
 - **Test Criteria**:
   - [x] The skill is present at that path

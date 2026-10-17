@@ -4,7 +4,7 @@ description: Use essa habilidade sempre que for criar, revisar, completar ou cad
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   internal: true
   related:
     - criar-ideia-de-conteudo
@@ -33,14 +33,16 @@ A lista de posts, a lista de formatos de conteúdo, a lista de eixos narrativos 
 
 Este texto usa os conceitos do post: o assunto, o formato, o perfil social autor, o status, a data e hora da postagem, a legenda redigida por humanos, a legenda revisada pela IA, a legenda consolidada, as hashtags, os eixos narrativos, as observações editoriais, os links de referência e a URL da postagem. Os status são rascunho, design existente, planejado, agendado e publicado. Do formato, usa a meta mínima e a máxima em 7 dias, o máximo de caracteres da legenda, o máximo de hashtags, a largura e a altura.
 
-Antes de criar, busque o assunto e o link de referência na lista de posts. Se o Reel já existe, revise essa página.
+Antes de criar, busque o assunto e o link de referência na lista de posts. Se o Reel já existe, revise essa página pelo Passo 2.
 
 ```mermaid
 flowchart LR
   Q{O pedido é?} -->|só guardar a ideia| I[criar-ideia-de-conteudo]
   Q -->|carrossel| X[Pare]
   Q -->|mix, semana ou campanha| C[planejar-calendario-de-conteudo]
-  Q -->|Reel| P2[Passo 2]
+  Q -->|Reel novo| P2[Passo 2]
+  Q -->|Reel existente| RV[Passo 2: revisar]
+  RV --> P3
   P2 --> R[definir-roteiro-de-video]
   R --> P3[Passo 3]
   P3 --> T[Habilidade de tom de voz]
@@ -56,6 +58,8 @@ Escolha um ou mais eixos narrativos da lista de eixos, pela descrição de cada 
 Um Reel de evento tira nome, data, horário e local da página do evento na lista de oportunidades ou de pontos de contato. Sem essa página, pergunte. A data do post é anterior à do evento.
 
 O roteiro vem de `definir-roteiro-de-video`, com a largura e a altura do formato.
+
+Para revisar um Reel que já existe, leia a página inteira antes de mudar: o corpo, as duas legendas, as hashtags e as observações editoriais. O que uma pessoa escreveu fica. Trecho do corpo sem autoria clara conta como humano. Para cada item que muda, entre gancho, roteiro, legenda, hashtags e CTA, mostre o antes, o depois e o que melhora: mais claro, mais curto, mais cativante ou dentro dos critérios de publicação. Item que não melhora fica como está. Grave só com o sim da pessoa. Trocar um trecho humano pede o sim para aquele trecho.
 
 ### Passo 3
 
@@ -95,6 +99,7 @@ Valide antes de mostrar. Corrija e repita até passar.
 - [ ] A contagem da janela de 7 dias foi dita.
 - [ ] O status bate com a data e com a URL.
 - [ ] O Reel tem ao menos um eixo narrativo.
+- [ ] Na revisão, nenhum texto humano foi apagado sem o sim para aquele trecho.
 
 Mostre o link da página, o status, as contagens e o que ficou pendente.
 
@@ -125,6 +130,14 @@ Se você marcar agendado sem data e hora, o calendário mostra um post que não 
 1. Deixe em rascunho ou planejado.
 2. Mude para agendado quando a pessoa der a data e a hora.
 
+### Contribuição humana apagada
+
+Se você reescrever o corpo ou a legenda inteiros ao revisar, o que a pessoa escreveu some sem ela ver.
+
+1. Leia a página inteira antes.
+2. Mostre o antes, o depois e o motivo de cada item.
+3. Troque um trecho humano só com o sim para aquele trecho.
+
 ### Aviso apagado
 
 Se você substituir o corpo inteiro, o aviso para humanos e IA some e a próxima execução perde as regras da página.
@@ -147,6 +160,8 @@ A legenda revisada pela IA ganhou um CTA para compartilhar e deixou de repetir a
 ## Casos-limite
 
 - O Reel já existe na lista: revise essa página e não crie outra.
+- Não dá para saber quem escreveu um trecho do corpo: trate como humano.
+- A revisão não melhora um item: diga que ele fica como está.
 - A pessoa só quer guardar a ideia: siga `criar-ideia-de-conteudo`.
 - O vídeo já está gravado: o roteiro registra a fala gravada e a legenda conta o que ficou de fora.
 - Quem fala não é o dono do perfil autor: as observações editoriais dizem quem fala e em que pessoa.
