@@ -64,3 +64,17 @@ A repository whose `skill-pages` workflow syncs on each push to `main` deletes `
 With Release Please, create the release with the token of a GitHub App, as `examples/release-please/.github/workflows/release-please.yml` does. A release that `GITHUB_TOKEN` creates fires no `release` workflow, so the sync would not run, and GitHub holds the `pull_request` checks of the release pull request it opens until someone approves them. Install the app only on the business repository, with Contents, Pull requests, and Issues read and write, store its client ID as the variable `RELEASE_APP_CLIENT_ID` and a private key as the secret `RELEASE_APP_PRIVATE_KEY`, and pass the token to the Release Please step. A Release Please workflow that still calls `sync-skills.yml` in a job of its own drops that job when it moves to the app token, or the release syncs twice. Without Release Please, publishing a release by hand fires the workflow.
 
 Check: after a release that changes one skill, the sync step log has one line, `create` or `update`, and the page shows the new version. After a release that changes `AGENTS.md`, the log has a line for `AGENTS.md`, and the skills database has a page with that title. If the workspace already had a page titled `AGENTS.md` outside the skills database, archive it by hand, so the Notion agent reads only the synced one. An `object_not_found` error that asks to share the data source with the integration means the connection of step 2 has no access to the skills database.
+
+## 5. Publish the models, optional
+
+Skip this step when the workspace keeps no models in Notion. A model is a file in `.agents/assets/templates/` with `name`, `description`, and `metadata.version` in its frontmatter, as ADR 0012 decides. Without the model mapping, the sync publishes no model.
+
+```bash
+cp -n node_modules/harness/.agents/mappings/template-page.notion.example.json .agents/mappings/template-page.notion.json
+```
+
+Set `data_source_id` to the data source of the models database. `name` and `version` are required. Delete `description`, `aliases`, `tags`, or `status` when the database has no such property: the sync then leaves it out, and a property it does not bind, such as a reviewer, keeps what people set. In the access tab of the connection of step 2, add the models database.
+
+A page that a person created before the sync, under another title, is replaced when the model lists that title in `metadata.aliases`. Its body becomes the file body on the first sync, so move what it still has into the file first.
+
+Check: after a release that changes one model, the sync step log has a `create template` or `update template` line, and the page shows the new version.
