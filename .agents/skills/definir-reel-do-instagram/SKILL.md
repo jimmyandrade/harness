@@ -4,7 +4,7 @@ description: Use essa habilidade sempre que for criar, revisar, completar ou cad
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.2"
+  version: "0.5.0"
   internal: true
   related:
     - criar-ideia-de-conteudo
@@ -31,7 +31,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 A lista de posts, a lista de formatos de conteúdo, a lista de eixos narrativos e o nome de cada propriedade vêm do mapeamento de dados do projeto, no workspace conectado. Se uma das listas não estiver nessa conexão, pare.
 
-Este texto usa os conceitos do post: o assunto, o formato, o perfil social autor, o status, a data e hora da postagem, a legenda redigida por humanos, a legenda revisada pela IA, a legenda consolidada, as hashtags, os eixos narrativos, as observações editoriais, os links de referência e a URL da postagem. Os status são rascunho, design existente, planejado, agendado e publicado. Do formato, usa a meta mínima e a máxima em 7 dias, o máximo de caracteres da legenda, o máximo de hashtags, a largura e a altura.
+Este texto usa os conceitos do post: o assunto, o formato, o perfil social autor, o status, a data e hora da postagem, a legenda redigida por humanos, a legenda revisada pela IA, a legenda consolidada, as hashtags, os eixos narrativos, as observações editoriais, os links de referência e a URL da postagem. Os status são rascunho, design existente, planejado, agendado e publicado. Do formato, usa a meta mínima e a máxima em 7 dias, o máximo de caracteres da legenda, o máximo e a quantidade ideal de hashtags, a largura e a altura.
 
 Antes de criar, busque o assunto e o link de referência na lista de posts. Se o Reel já existe, revise essa página pelo Passo 2.
 
@@ -76,9 +76,10 @@ Para revisar um Reel que já existe, leia a página inteira antes de mudar: o co
 A legenda complementa o vídeo. Conta o que a fala não contou e não repete o roteiro.
 
 - Cabe no máximo de caracteres do formato.
-- Fecha com um CTA mensurável: comentar, compartilhar, salvar ou abrir o link.
+- Fecha com um CTA principal, ligado ao objetivo do Reel. Ele diz a ação e onde fazer: comentar, compartilhar, salvar, mandar uma palavra no Direct ou abrir o link da bio. Um CTA secundário só entra se não competir com o principal.
+- O CTA da legenda e o do vídeo levam ao mesmo caminho, sem se contradizer. O destino existe quando o post sai: o link está na bio, a palavra no Direct tem quem responda.
 - Marcação de perfil e collab entram só quando a pessoa disse.
-- As hashtags vão na propriedade de hashtags, até o máximo do formato. Sem máximo no formato, o limite é 5, o do Instagram para Reel, post único e carrossel. Hashtag que a lista ainda não tem entra só com o sim da pessoa.
+- As hashtags vão na propriedade de hashtags. A quantidade segue a ideal do formato, sem passar do máximo. Sem máximo no formato, o limite é 5, o do Instagram para Reel, post único e carrossel. Cada hashtag liga o tema ao nicho do perfil. Hashtag genérica, só pelo volume, fica de fora. Hashtag que a lista ainda não tem entra só com o sim da pessoa.
 
 As palavras da legenda passam pela `Habilidade de tom de voz`.
 
@@ -104,7 +105,8 @@ Grave ou atualize a página na lista de posts.
 Valide antes de mostrar. Corrija e repita até passar.
 
 - [ ] A legenda cabe no máximo de caracteres. Diga a contagem.
-- [ ] As hashtags estão na propriedade e dentro do máximo. Diga a contagem.
+- [ ] As hashtags estão na propriedade, na quantidade ideal e dentro do máximo. Diga a contagem.
+- [ ] Há um CTA principal ligado ao objetivo, com ação e destino, coerente com o CTA do vídeo.
 - [ ] Nenhuma marcação de tom, ação de cena ou direção de gravação está na legenda.
 - [ ] A contagem da janela de 7 dias foi dita.
 - [ ] O status bate com a data e com a URL.
@@ -182,6 +184,8 @@ A legenda revisada pela IA ganhou um CTA para compartilhar e deixou de repetir a
 - Na revisão, a voz do roteiro não bate com quem fala ou com o perfil autor: mostre como item, com o antes e o depois.
 - A pessoa dá a data sem hora: o status fica em planejado.
 - A janela passa da meta máxima: diga a contagem e sugira outra data.
+- A página não deixa claro qual ação é a principal: siga o objetivo do Reel. Sem objetivo, pergunte.
+- O destino do CTA pode não existir quando o post sair, como um link só nos stories: diga o risco e sugira o link da bio.
 - A pessoa pede para conferir o mix ou planejar a semana: siga `planejar-calendario-de-conteudo`.
 - O evento não tem página: pergunte nome, data, horário e local antes de escrever.
 

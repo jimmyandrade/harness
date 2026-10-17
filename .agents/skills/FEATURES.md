@@ -567,7 +567,8 @@ How these skills relate is in `README.md`, in this folder.
   - Reads the list of posts, the list of content formats, and their property names from the data mapping of the project
   - Gets the script from definir-roteiro-de-video and sends the caption wording to `Habilidade de tom de voz`
   - Links the Reel to one or more narrative axes from the list of narrative axes, and takes the name, date, time, and place of an event from the event page
-  - Writes a caption that complements the video, fits the caption limit of the format, and ends with a measurable call to action, with hashtags in their own property
+  - Writes a caption that complements the video, fits the caption limit of the format, and ends with one main call to action tied to the goal, naming the action and where to do it, on the same path as the call to action of the video and with a destination that exists when the post goes out
+  - Puts hashtags in their own property, at the ideal count of the format without passing its maximum, or up to 5 when the format has none, each tying the topic to the niche of the profile
   - Counts the Reels in the 7-day window of the posting date against the minimum and maximum goals of the format, and suggests another date without blocking
   - Writes the caption only to the AI caption, keeps the human caption, keeps the notice that opens the page body, and writes the script below it
   - Reviews an existing Reel by reading the whole page first, shows the before, the after, and the gain for each changed item, treats body text without clear authorship as human, and replaces human text only with a yes for that passage
