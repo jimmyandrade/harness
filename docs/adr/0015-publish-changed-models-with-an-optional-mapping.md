@@ -24,12 +24,12 @@ The skills that cite a model cite it with a sentence the sync must rewrite into 
 - A file without frontmatter, or whose frontmatter has no `name`, is not yet a model and is logged as skipped. A file with a `name` needs `description` and `metadata.version`, and `name` equals the file name. The checker validates that frontmatter and the three sections of ADR 0012 for every model, with the same rule for what is a model, and the version must rise when the file changes.
 - The sync finds the page by the model name, or else by one of its `metadata.aliases`, so a model can take over a page that a person created with another title. It replaces the page body with the file body and never deletes a page, also when the file is removed.
 - A new page gets the icon of skill pages. An update leaves the icon as it is.
-- Rewriting the template sentence of a skill page into a mention of the model page stays as ADR 0012 describes, for a later change.
+- A skill page keeps the sentence that cites the model. ADR 0016 replaces the mention that ADR 0012 planned with a citation by name.
 
 ## Consequences
 
 A business points the mapping at its existing database and publishes its models on the next release, without changing the database first.
 
-Until the mention lands, a skill page in Notion still shows the path of its model, and the Notion agent finds the model by its name in the models database.
+The Notion agent finds a model by its name in the models database, as ADR 0016 decides.
 
 The files in `.agents/assets/templates/` that have no frontmatter keep working in git and stay out of Notion until they gain it.

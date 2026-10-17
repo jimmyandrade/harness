@@ -13,7 +13,7 @@ This repository is the core harness. A business harness is a separate, private r
 ```text
 harness/
 ├── .agents/
-│   ├── assets/templates/           # Models that skills read when they write a file, published to Notion when the project maps them
+│   ├── assets/templates/           # Models that skills cite by name when they write a file, published to Notion when the project maps them
 │   ├── mappings/                   # Templates of the Notion mappings a business harness copies, for skills and for models
 │   ├── schemas/                    # JSON Schema of a skill page and of a model page
 │   ├── scripts/

@@ -73,7 +73,7 @@ Skip this step when the workspace keeps no models in Notion. A model is a file i
 cp -n node_modules/harness/.agents/mappings/template-page.notion.example.json .agents/mappings/template-page.notion.json
 ```
 
-Set `data_source_id` to the data source of the models database. `name` and `version` are required. Delete `description`, `aliases`, `tags`, or `status` when the database has no such property: the sync then leaves it out, and a property it does not bind, such as a reviewer, keeps what people set. In the access tab of the connection of step 2, add the models database.
+Set `data_source_id` to the data source of the models database. `name` and `version` are required. Delete `description`, `aliases`, `tags`, or `status` when the database has no such property: the sync then leaves it out, and a property it does not bind, such as a reviewer, keeps what people set. In the access tab of the connection of step 2, add the models database. Set `Banco de modelos no Notion` in the `Global` entry of `metadata.parameters` of `AGENTS.md` to the link of that database, so the Notion agent finds a model a skill cites by name.
 
 A page that a person created before the sync, under another title, is replaced when the model lists that title in `metadata.aliases`. Its body becomes the file body on the first sync, so move what it still has into the file first.
 

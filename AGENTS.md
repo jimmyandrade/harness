@@ -1,7 +1,7 @@
 ---
 locale: en
 metadata:
-  version: "1.5.0"
+  version: "1.6.0"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -54,7 +54,8 @@ metadata:
 ## Skills
 
 - Save every skill as `.agents/skills/<name>/SKILL.md`. `name` matches the directory. The folder name and the frontmatter `name` are ASCII kebab-case. The level-1 title and the body are natural language for people and models, so they keep correct spelling and grammar, with every diacritic: `# Resolver comentários de revisão`. A skill that must not sync to Notion sets `metadata.notion` to `"false"`. A skill still in progress sets `metadata.internal` to `true`, unquoted: the `skills` CLI hides it from `npx skills add`, and the sync leaves it out of Notion.
-- The skill text does not mention files or paths, except when proposing to move detail into `references/` after the skill would pass the line or token limit, except when pointing at a template, and except in the final `Scripts disponíveis` section, which names each script and how to run it.
+- The skill text does not mention files or paths, except when proposing to move detail into `references/` after the skill would pass the line or token limit, except when pointing at an input model, and except in the final `Scripts disponíveis` section, which names each script and how to run it.
+- A skill cites an output model by name, as ADR 0016 decides: ``Leia o modelo de saída `<nome>` quando for gerar a saída.`` In a repository, the agent reads `.agents/assets/templates/<nome>.md` of the project, or else of this harness. Elsewhere, it opens the page with that title in the database that `Banco de modelos no Notion` names. The skill lists the model in `metadata.models`, one name per line, and the checker validates that list like `metadata.related`.
 - A skill that cites another skill lists it in `metadata.related`, one name per line. The checker fails when a listed name is not a skill in the project or in this harness, or when the body cites a skill missing from the list. A skill without `metadata.related` is not checked, so a business harness can adopt it one skill at a time. Every skill that moves here declares it as soon as one skill it cites is in this repository. Each later move adds its name to the skills already here that cite it.
 - When a skill changes, bump `metadata.version`: patch for a fix, minor for a feature, major for a breaking change. A skill below 1.0.0 without 3 validated evals bumps the minor for a breaking change instead, because the checker requires 3 evals from 1.0.0 on.
 - Renaming a skill is a breaking change. Put `!` after the type, start the footer with `BREAKING CHANGE:`, and put every previous name in `metadata.aliases`.
