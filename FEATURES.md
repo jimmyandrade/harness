@@ -90,6 +90,7 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
   - A changed skill must raise `metadata.version` above its copy at `base` when `base` and `head` are given, and above its copy at `HEAD` otherwise
   - When a skill declares `metadata.related`, each name must be a skill in the project or in the core, and every skill the body cites must be listed. A citation is a skill name between backticks in prose, or a name in a Mermaid diagram; a plain name in prose is not one
   - `Considerar grupos de oportunidades` is `sim` or `não`. When it is `sim` for `criar-oportunidade` or `definir-grupo-de-oportunidades`, and the project has the opportunity mapping `.agents/mappings/oportunidades.notion.json`, that mapping must bind the logical field `group`
+  - Each model in `.agents/assets/templates/`, a file whose frontmatter has `name`, needs `name` equal to the file name in ASCII kebab-case, `description`, and `metadata.version` as a double-quoted semver that rises when the file changes. `metadata.aliases` and `metadata.tags` are lists, and the body has `## Contexto`, `## Formato`, and `## Estilo`, in this order. A model name the core also uses fails. Files without frontmatter or without `name` are not models and are not checked
   - Each Gherkin file in a skill's `features/` starts with `# language: <locale.gherkin>`. With `pt`, every Given starts with `Dado que`, because `Dado` is the reserved keyword and does not agree with the noun
 - **Test Criteria**:
   - [x] A project block without a limit uses the core limit, and a misspelled key or a wrong type fails
@@ -98,6 +99,7 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
   - [x] A feature without the configured language line fails, and in Portuguese a Given such as `Dada uma` or `Dado um` fails
   - [x] A committed change is compared with the base, and without a base with `HEAD`
   - [x] An `AGENTS.md` over the body token or line limit fails, and a change to it shows as a row with its tokens before and after
+  - [x] A model without `description` or a quoted version, with a name other than its file, without the three sections, or changed without a higher version fails
   - [x] The comment is created when none has the marker, edited when one has it, and says no skill changes when a later push reverts them
   - [ ] A business pull request that changes a skill shows the comment, and a second push edits it
   - [ ] A business workflow that calls the action fails on a skill that breaks a rule

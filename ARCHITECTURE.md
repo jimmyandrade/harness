@@ -18,6 +18,7 @@ harness/
 │   ├── schemas/                    # JSON Schema of a skill page and of a model page
 │   ├── scripts/
 │   │   ├── check-skill/            # Skill checker (Python), run by Lefthook and the check-skill action
+│   │   ├── check-models/           # Checks the frontmatter and the sections of each model in assets/templates, run by check-skill
 │   │   ├── core-pins/              # Checks that every pin of the core in a project names the same tag, run by check-skill
 │   │   ├── plugin-manifests/       # Checks that the Cursor manifest and the Codex-readable marketplace agree with .claude-plugin/, run by check-skill
 │   │   ├── project-parameters/     # Reads and validates the parameters in the AGENTS.md frontmatter, for every script
