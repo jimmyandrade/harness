@@ -38,6 +38,13 @@ import {
   type NotionApi,
   type SkillMapping,
   type SkillPage,
+  linkTemplates,
+  publishTemplates,
+  skillsCitingTemplates,
+  templateMarkdown,
+  templateNames,
+  templateTitle,
+  type PageWriter,
 } from "./sync-skill-pages.ts"
 
 function block(yaml: string): string {
@@ -355,6 +362,7 @@ test("update existing, create missing, and skip private and internal through the
         return { id: args.page_id }
       },
     },
+    blocks: { children: { list: async () => ({ results: [], has_more: false }) } },
   } satisfies NotionApi, icon)
   const root = mkdtempSync(join(tmpdir(), "skill-pages-"))
   mkdirSync(join(root, ".agents"), { recursive: true })
@@ -443,6 +451,7 @@ test("a rename updates the previous page and stops when both pages exist", async
         return { id: "page-old" }
       },
     },
+    blocks: { children: { list: async () => ({ results: [], has_more: false }) } },
   })
   const kept = await publish(
     root,
@@ -527,6 +536,7 @@ test("two pages with the same name stop", async () => {
         return { id: "unused" }
       },
     },
+    blocks: { children: { list: async () => ({ results: [], has_more: false }) } },
   }, icon)
   await assert.rejects(() => notion.findPage(mapping, "definir-tarefa"))
 })
@@ -630,4 +640,119 @@ test("the instructions page publishes on its own change, on rule or mapping chan
     instructionsToPublish({ isCore: true, instructionsChanged: true, rulesChanged: true, coreVersionChanged: true }),
     false,
   )
+})
+
+const templateSkill = (name: string, file: string) => `---
+name: ${name}
+description: Use essa habilidade sempre que for gerar um relatório.
+metadata:
+  author: example
+  version: "0.1.0"
+---
+
+# Gerar relatório
+
+### Passo 1
+
+Leia .agents/assets/templates/${file} quando for gerar a saída.
+`
+
+function templateRoot(skills: [string, string][], templates: [string, string][]): string {
+  const root = mkdtempSync(join(tmpdir(), "templates-"))
+  mkdirSync(join(root, ".git"), { recursive: true })
+  for (const [name, file] of skills) {
+    mkdirSync(join(root, ".agents", "skills", name), { recursive: true })
+    writeFileSync(join(root, ".agents", "skills", name, "SKILL.md"), templateSkill(name, file))
+  }
+  mkdirSync(join(root, ".agents", "assets", "templates"), { recursive: true })
+  for (const [file, content] of templates) writeFileSync(join(root, ".agents", "assets", "templates", file), content)
+  return root
+}
+
+function templateWriter() {
+  const children = new Map<string, { id: string; markdown: string }>()
+  const writer: PageWriter = {
+    findPage: async () => null,
+    createPage: async (page) => ({ id: `id-${page.name}` }),
+    updatePage: async (pageId) => ({ id: pageId }),
+    findChildPage: async (_parent, title) => children.get(title)?.id ?? null,
+    createChildPage: async (_parent, title, markdown) => {
+      const id = `0000000${children.size}-0000-4000-8000-000000000000`
+      children.set(title, { id, markdown })
+      return { id, url: `https://example.test/${id}` }
+    },
+    replaceMarkdown: async (pageId, markdown) => {
+      for (const [title, child] of children) if (child.id === pageId) children.set(title, { id: pageId, markdown })
+      return { id: pageId }
+    },
+  }
+  return { writer, children }
+}
+
+test("a skill body names the output templates it cites, once each", () => {
+  const body = "Leia .agents/assets/templates/a.md quando for gerar a saída.\n\nLeia .agents/assets/templates/a.md quando for gerar a saída.\n"
+  assert.deepEqual(templateNames(body), ["a.md"])
+  assert.deepEqual(templateNames("Leia o arquivo quando quiser.\n"), [])
+})
+
+test("the template sentence points at the template page, and keeps its path without one", () => {
+  const body = "Leia .agents/assets/templates/a.md quando for gerar a saída.\n"
+  assert.equal(
+    linkTemplates(body, { "a.md": "https://example.test/a" }),
+    `Leia o modelo <mention-page url="https://example.test/a">${templateTitle("a.md")}</mention-page> quando for gerar a saída.\n`,
+  )
+  assert.equal(linkTemplates(body, {}), body)
+})
+
+test("a template page keeps the file literal in a code block", () => {
+  assert.equal(templateMarkdown("## Título\n<campo>\n\n"), "```markdown\n## Título\n<campo>\n```\n")
+})
+
+test("templates are created once under the mapping parent, then replaced", async () => {
+  const root = templateRoot([["gerar-relatorio", "relatorio.md"]], [["relatorio.md", "## Relatório\n"]])
+  const { writer, children } = templateWriter()
+  const withParent = { ...mapping, templates_parent_page_id: "parent" }
+  const first = await publishTemplates([{ root, names: ["gerar-relatorio"] }], [root], writer, withParent)
+  assert.equal(first.lines.length, 1)
+  assert.ok(first.lines[0].startsWith("create template relatorio.md: "))
+  assert.ok(first.urls["relatorio.md"])
+  writeFileSync(join(root, ".agents", "assets", "templates", "relatorio.md"), "## Relatório novo\n")
+  const second = await publishTemplates([{ root, names: ["gerar-relatorio"] }], [root], writer, withParent)
+  assert.ok(second.lines[0].startsWith("update template relatorio.md: "))
+  assert.equal(children.size, 1)
+  assert.ok(children.get(templateTitle("relatorio.md"))?.markdown.includes("Relatório novo"))
+  const published: SkillPage[] = []
+  const recording: PageWriter = { ...writer, createPage: async (page) => (published.push(page), { id: "new" }) }
+  await publish(root, ["gerar-relatorio"], recording, withParent, {}, second.urls)
+  assert.ok(published[0].body.includes("<mention-page"))
+  assert.equal(published[0].body.includes(".agents/assets/templates"), false)
+})
+
+test("without a parent page in the mapping, templates are skipped and the path stays", async () => {
+  const root = templateRoot([["gerar-relatorio", "relatorio.md"]], [["relatorio.md", "## Relatório\n"]])
+  const { writer, children } = templateWriter()
+  const result = await publishTemplates([{ root, names: ["gerar-relatorio"] }], [root], writer, mapping)
+  assert.deepEqual(result.lines, ["skip template relatorio.md: no templates_parent_page_id in the mapping"])
+  assert.equal(children.size, 0)
+  assert.deepEqual(result.urls, {})
+})
+
+test("a template missing from the project falls back to the core, and a missing file is skipped", async () => {
+  const project = templateRoot([["gerar-relatorio", "relatorio.md"], ["gerar-outro", "sumiu.md"]], [])
+  const core = templateRoot([], [["relatorio.md", "## Do core\n"]])
+  const { writer } = templateWriter()
+  const result = await publishTemplates(
+    [{ root: project, names: ["gerar-relatorio", "gerar-outro"] }],
+    [project, core],
+    writer,
+    { ...mapping, templates_parent_page_id: "parent" },
+  )
+  assert.ok(result.lines[0].startsWith("create template relatorio.md: "))
+  assert.equal(result.lines[1], "skip template sumiu.md: missing")
+})
+
+test("a changed template republishes the skills that cite it", () => {
+  const root = templateRoot([["gerar-relatorio", "relatorio.md"], ["gerar-outro", "outro.md"]], [])
+  assert.deepEqual(skillsCitingTemplates(root, ["relatorio.md"]), ["gerar-relatorio"])
+  assert.deepEqual(skillsCitingTemplates(root, []), [])
 })

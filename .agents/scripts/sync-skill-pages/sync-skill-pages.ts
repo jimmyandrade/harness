@@ -53,6 +53,8 @@ export type SkillMapping = {
     status: string
   }
   status_options?: Partial<StatusOptions>
+  /** Page whose child pages hold the output templates that skills cite. */
+  templates_parent_page_id?: string
 }
 
 type RichText = { text: { content: string } }
@@ -182,6 +184,18 @@ export type CreateArgs = {
   icon: PageIcon
 }
 
+export type ChildPageArgs = {
+  parent: { page_id: string }
+  properties: { title: { title: RichText[] } }
+  markdown: string
+}
+
+type ChildrenResult = {
+  results: { id: string; type?: string; child_page?: { title: string } }[]
+  has_more: boolean
+  next_cursor?: string | null
+}
+
 export type ReplaceArgs = {
   page_id: string
   type: "replace_content"
@@ -204,9 +218,14 @@ export type NotionApi = {
     }) => Promise<QueryResult>
   }
   pages: {
-    create: (args: CreateArgs) => Promise<{ id: string; url?: string }>
+    create: (args: CreateArgs | ChildPageArgs) => Promise<{ id: string; url?: string }>
     update: (args: { page_id: string; properties: PageProperties; icon: PageIcon }) => Promise<{ id: string }>
     updateMarkdown: (args: ReplaceArgs) => Promise<{ id: string }>
+  }
+  blocks: {
+    children: {
+      list: (args: { block_id: string; start_cursor?: string; page_size: number }) => Promise<ChildrenResult>
+    }
   }
 }
 
@@ -214,6 +233,10 @@ export type PageWriter = {
   findPage: (mapping: SkillMapping, name: string) => Promise<string | null>
   createPage: (page: SkillPage, mapping: SkillMapping) => Promise<{ id: string; url?: string }>
   updatePage: (pageId: string, page: SkillPage, mapping: SkillMapping) => Promise<{ id: string }>
+  /** The id of the child page with this title under the parent, or null. */
+  findChildPage?: (parentId: string, title: string) => Promise<string | null>
+  createChildPage?: (parentId: string, title: string, markdown: string) => Promise<{ id: string; url?: string }>
+  replaceMarkdown?: (pageId: string, markdown: string) => Promise<{ id: string }>
 }
 
 /** The root of the git repository that contains start, or start itself. */
@@ -524,7 +547,133 @@ export function bindNotion(notion: NotionApi, icon: PageIcon): PageWriter {
       await notion.pages.update({ page_id: pageId, properties: properties(page, mapping), icon })
       return notion.pages.updateMarkdown(replaceArgs(pageId, page))
     },
+    async findChildPage(parentId, title) {
+      const found: string[] = []
+      let startCursor: string | undefined
+      do {
+        const result = await notion.blocks.children.list({ block_id: parentId, start_cursor: startCursor, page_size: 100 })
+        for (const block of result.results) {
+          if (block.type === "child_page" && block.child_page?.title === title) found.push(block.id)
+        }
+        startCursor = result.has_more ? (result.next_cursor ?? undefined) : undefined
+      } while (startCursor)
+      if (found.length > 1) throw new Error(`more than one page is named ${title}`)
+      return found[0] ?? null
+    },
+    async createChildPage(parentId, title, markdown) {
+      return notion.pages.create({
+        parent: { page_id: parentId },
+        properties: { title: { title: richText(title) } },
+        markdown,
+      })
+    },
+    async replaceMarkdown(pageId, markdown) {
+      return notion.pages.updateMarkdown({ page_id: pageId, type: "replace_content", replace_content: { new_str: markdown } })
+    },
   }
+}
+
+/** The sentence a skill uses to point at an output template, as criar-habilidade writes it. */
+const TEMPLATE_SENTENCE = /^Leia \.agents\/assets\/templates\/(\S+?) quando for gerar a saída\.$/gm
+
+/** The output template files a skill body cites, in order, without repeats. */
+export function templateNames(body: string): string[] {
+  const names: string[] = []
+  for (const match of body.matchAll(TEMPLATE_SENTENCE)) {
+    if (!names.includes(match[1])) names.push(match[1])
+  }
+  return names
+}
+
+/** The title of the Notion page that holds an output template. */
+export function templateTitle(file: string): string {
+  return `Modelo de saída: ${file}`
+}
+
+/** The Notion page body of an output template: the file, kept literal in a code block. */
+export function templateMarkdown(content: string): string {
+  return `\`\`\`markdown\n${content.replace(/\s+$/, "")}\n\`\`\`\n`
+}
+
+export function notionPageUrl(id: string): string {
+  return `https://www.notion.so/${id.replace(/-/g, "")}`
+}
+
+/** The body with each template sentence pointing at its Notion page; a template without a page keeps its path. */
+export function linkTemplates(body: string, urls: Record<string, string>): string {
+  return body.replace(TEMPLATE_SENTENCE, (sentence, file: string) => {
+    const url = urls[file]
+    if (!url) return sentence
+    return `Leia o modelo <mention-page url="${url}">${templateTitle(file)}</mention-page> quando for gerar a saída.`
+  })
+}
+
+/** The skills of a root whose body cites one of these template files. */
+export function skillsCitingTemplates(root: string, files: string[]): string[] {
+  if (files.length === 0) return []
+  return allSkillNames(root).filter((name) => {
+    const page = parseSkill(readFileSync(join(root, ".agents", "skills", name, "SKILL.md"), "utf8"))
+    return page !== null && templateNames(page.body).some((file) => files.includes(file))
+  })
+}
+
+/** The template file in the project, or else in this harness, or null. */
+export function templatePath(roots: string[], file: string): string | null {
+  for (const root of roots) {
+    const path = join(root, ".agents", "assets", "templates", file)
+    if (existsSync(path)) return path
+  }
+  return null
+}
+
+/**
+ * Publish the output templates cited by these skills under the parent page of the mapping.
+ * Returns the page URL of each published template and one log line per template.
+ */
+export async function publishTemplates(
+  sources: { root: string; names: string[] }[],
+  roots: string[],
+  notion: PageWriter,
+  mapping: SkillMapping,
+): Promise<{ urls: Record<string, string>; lines: string[] }> {
+  const files: string[] = []
+  for (const { root, names } of sources) {
+    for (const name of names) {
+      const path = join(root, ".agents", "skills", name, "SKILL.md")
+      if (!existsSync(path)) continue
+      const page = parseSkill(readFileSync(path, "utf8"))
+      if (page === null) continue
+      for (const file of templateNames(page.body)) if (!files.includes(file)) files.push(file)
+    }
+  }
+  const urls: Record<string, string> = {}
+  const lines: string[] = []
+  if (files.length === 0) return { urls, lines }
+  const parentId = mapping.templates_parent_page_id
+  if (!parentId || !notion.findChildPage || !notion.createChildPage || !notion.replaceMarkdown) {
+    for (const file of files) lines.push(`skip template ${file}: no templates_parent_page_id in the mapping`)
+    return { urls, lines }
+  }
+  for (const file of files) {
+    const path = templatePath(roots, file)
+    if (path === null) {
+      lines.push(`skip template ${file}: missing`)
+      continue
+    }
+    const title = templateTitle(file)
+    const markdown = templateMarkdown(readFileSync(path, "utf8"))
+    const existing = await notion.findChildPage(parentId, title)
+    if (existing === null) {
+      const created = await notion.createChildPage(parentId, title, markdown)
+      urls[file] = created.url ?? notionPageUrl(created.id)
+      lines.push(`create template ${file}: ${urls[file]}`)
+    } else {
+      await notion.replaceMarkdown(existing, markdown)
+      urls[file] = notionPageUrl(existing)
+      lines.push(`update template ${file}: ${existing}`)
+    }
+  }
+  return { urls, lines }
 }
 
 export function notionClient(token: string, icon: PageIcon): PageWriter {
@@ -537,6 +686,7 @@ export async function publish(
   notion: PageWriter,
   mapping: SkillMapping,
   previous: Record<string, string> = {},
+  templateUrls: Record<string, string> = {},
 ): Promise<string[]> {
   const renamedFrom = new Set(Object.values(previous))
   const lines: string[] = []
@@ -558,9 +708,10 @@ export async function publish(
       lines.push(`skip ${name}: ${reason}`)
       continue
     }
-    const page = parseSkill(text)
-    if (page === null) continue
-    if (page.name !== name) throw new Error(`${name} frontmatter name is ${page.name}`)
+    const parsed = parseSkill(text)
+    if (parsed === null) continue
+    if (parsed.name !== name) throw new Error(`${name} frontmatter name is ${parsed.name}`)
+    const page = { ...parsed, body: linkTemplates(parsed.body, templateUrls) }
     const previousName = previous[name]
     const current = await notion.findPage(mapping, page.name)
     const earlier = previousName ? await notion.findPage(mapping, previousName) : null
@@ -630,6 +781,8 @@ export function gate(names: string[], token: string): 0 | 2 | null {
 
 export const DEFAULT_MAPPING_PATH = ".agents/mappings/skill-page.notion.json"
 
+export const TEMPLATES_DIR = ".agents/assets/templates"
+
 export const CORE_VERSION_PATHS = [".github/workflows", "package.json", "package-lock.json"]
 
 export function coreNamesToPublish(
@@ -665,7 +818,10 @@ export async function main(argv: string[]): Promise<number> {
     instructionsText(core),
   )
   const rulesChanged = publisherChanged(root, base, head, mappingPath)
-  const names = namesToPublish(skillNamesFromPaths(gitChangedFiles(root, base, head)), rulesChanged, allSkillNames(root))
+  const changedTemplates = gitNames(root, base, head, [TEMPLATES_DIR]).map((path) => path.slice(TEMPLATES_DIR.length + 1))
+  const changedNames = skillNamesFromPaths(gitChangedFiles(root, base, head))
+  for (const name of skillsCitingTemplates(root, changedTemplates)) if (!changedNames.includes(name)) changedNames.push(name)
+  const names = namesToPublish(changedNames, rulesChanged, allSkillNames(root))
   const coreVersionChanged = gitNames(root, base, head, CORE_VERSION_PATHS).length > 0
   const coreNames =
     argv.includes("--include-core") && core !== root
@@ -706,11 +862,21 @@ export async function main(argv: string[]): Promise<number> {
     return 2
   }
   const notion = notionClient(token, icon)
-  for (const line of await publish(root, names, notion, mapping, previous)) {
+  const templates = await publishTemplates(
+    [
+      { root, names },
+      { root: core, names: coreNames },
+    ],
+    [root, core],
+    notion,
+    mapping,
+  )
+  for (const line of templates.lines) console.log(line)
+  for (const line of await publish(root, names, notion, mapping, previous, templates.urls)) {
     console.log(line)
   }
   if (instructionsChanged) console.log(await publishInstructions(root, notion, mapping))
-  for (const line of await publish(core, coreNames, notion, mapping)) {
+  for (const line of await publish(core, coreNames, notion, mapping, {}, templates.urls)) {
     console.log(`core ${line}`)
   }
   return 0
