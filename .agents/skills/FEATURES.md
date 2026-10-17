@@ -576,6 +576,7 @@ How these skills relate is in `README.md`, in this folder.
   - Keeps one page per Reel, links the format and the author profile as relations, keeps counts and checks out of the page body, lists a value without a mapped property at the end instead of writing it in the body, and reads the page again after writing
   - Reviews an existing Reel by reading the whole page first, shows the before, the after, and the gain for each changed item, treats body text without clear authorship as human, and replaces human text only with a yes for that passage
   - Follows `Arquétipos da marca` or records the persona as inferred in the editorial notes, and does not invent the profile, the speaker, the date, or the format limits
+  - Reads the whole project instructions before writing, not only the parameters, and starts from the default definitions of the business and its founder when the request does not name the author profile, the speaker, or the persona
   - Defines the voice before writing or changing the script: the speaker owns the lines, the author profile owns the caption, the delivery notes name the speaker, the call to action points to the author profile, and only the profiles the person named are tagged
 - **Test Criteria**:
   - [x] The skill is present at that path

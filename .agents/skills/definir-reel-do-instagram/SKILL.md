@@ -4,7 +4,7 @@ description: Use essa habilidade sempre que for criar, revisar, completar ou cad
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.8.0"
+  version: "0.9.0"
   internal: true
   related:
     - criar-ideia-de-conteudo
@@ -54,7 +54,9 @@ flowchart LR
 
 Tenha o tema, o objetivo e a data. O que não der para inferir com segurança das fontes, pergunte uma vez. Não invente perfil, narração, data, horário, local, objetivo nem limite do formato.
 
-Antes de redigir ou alterar o roteiro, defina a voz: a persona, o perfil social autor e quem fala. Leia o perfil autor. A persona segue `Arquétipos da marca`. Sem arquétipo, infira do perfil autor e anote como inferida. Quando quem fala não é o dono do perfil autor e a página não diz se fala por si ou pela marca, pergunte. A voz decide:
+Antes de redigir ou alterar o roteiro, leia as instruções do projeto inteiras, não só os parâmetros. Elas trazem as orientações gerais de uso da IA e as definições padrão do negócio e da pessoa fundadora. Quando o pedido não diz o perfil autor, quem fala ou a persona, parta dessas definições e diga que partiu delas.
+
+Defina a voz: a persona, o perfil social autor e quem fala. Leia o perfil autor. A persona segue `Arquétipos da marca`. Sem arquétipo, infira do perfil autor e anote como inferida. Quando quem fala não é o dono do perfil autor e a página não diz se fala por si ou pela marca, pergunte. A voz decide:
 
 - A primeira pessoa: a fala é de quem fala, e a legenda é do perfil autor.
 - O vocabulário: a consulta leva quem fala e o perfil autor como contexto.
@@ -214,6 +216,7 @@ A legenda revisada pela IA ganhou um CTA para compartilhar e deixou de repetir a
 - O corpo da página pode abrir com um aviso para humanos e IA. Ele fica. O roteiro entra abaixo.
 - As hashtags parecem parte da legenda. Elas vão na propriedade de hashtags.
 - O limite de caracteres e a meta de 7 dias parecem fixos. Eles vêm da página do formato na lista de formatos.
+- As instruções do projeto parecem guardar só parâmetros. Elas também trazem as orientações gerais e as definições padrão do negócio e da pessoa fundadora.
 - Uma janela dentro da meta parece bastar. Ela não diz se o Reel repete o tema do post vizinho nem a que objetivo ele serve.
 - As checagens escritas no corpo ou nas observações editoriais parecem valer. Elas podem estar velhas, como uma janela que já passou ou uma contagem de hashtags que a propriedade não tem. Recalcule pelas propriedades.
 - A URL colada pela pessoa pode ter um trecho que a coluna de URL da lista não guarda. Busque a página pelo id.
