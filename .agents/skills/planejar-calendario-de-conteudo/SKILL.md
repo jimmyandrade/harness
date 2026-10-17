@@ -1,13 +1,14 @@
 ---
 name: planejar-calendario-de-conteudo
-description: Use essa habilidade sempre que for sugerir o que postar, planejar uma semana ou uma campanha de posts, divulgar um evento em vários posts ou conferir o mix do calendário por formato e eixo narrativo, mesmo sem dizer calendário. NÃO use para escrever roteiro, legenda ou o post de um Reel, cadastrar só a ideia, nem publicar.
+description: Use essa habilidade sempre que for sugerir o que postar, planejar uma semana de posts, divulgar um evento em vários posts ou conferir o mix do calendário por formato, eixo narrativo e campanha, mesmo sem dizer calendário. NÃO use para definir a estratégia da campanha, escrever roteiro, legenda ou o post de um Reel, cadastrar só a ideia, nem publicar.
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   internal: true
   related:
     - criar-ideia-de-conteudo
+    - definir-campanha-de-conteudo
     - definir-reel-do-instagram
     - evoluir-habilidade
 ---
@@ -27,13 +28,14 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ### Passo 1
 
-As listas e o nome de cada propriedade vêm do mapeamento de dados do projeto, no workspace conectado. A lista de posts, a lista de formatos de conteúdo e a lista de eixos narrativos são obrigatórias. Se uma delas não estiver nessa conexão, pare. As fontes que sustentam a pauta entram quando o mapeamento as tem: ideias de conteúdo, oportunidades, pontos de contato, datas significativas, viagens, peças e feedbacks.
+As listas e o nome de cada propriedade vêm do mapeamento de dados do projeto, no workspace conectado. A lista de posts, a lista de formatos de conteúdo e a lista de eixos narrativos são obrigatórias. Se uma delas não estiver nessa conexão, pare. As fontes que sustentam a pauta entram quando o mapeamento as tem: campanhas de conteúdo, ideias de conteúdo, oportunidades, pontos de contato, datas significativas, viagens, peças e feedbacks.
 
 ```mermaid
 flowchart LR
   Q{O pedido é?} -->|o que postar ou planejar| P2[Passo 2]
   Q -->|divulgar evento| P2E[Passo 2]
   Q -->|conferir o mix| P3[Passo 3]
+  Q -->|criar ou revisar campanha| C[definir-campanha-de-conteudo]
   P2 --> P3
   P2E --> P4[Passo 4]
   P4 --> P3
@@ -58,7 +60,7 @@ Monte o mix da janela numa tabela.
 
 - Por formato: a contagem contra a meta mínima e a máxima de 7 dias da página do formato.
 - Por eixo narrativo: os eixos e sub-eixos presentes, o eixo que falta e os posts sem eixo.
-- Por narrativa: a campanha ou o evento que já ocupa cada semana. Uma semana ocupada por uma narrativa não recebe outra de imediato. Sugira outra janela.
+- Por narrativa: a campanha ou o evento que já ocupa cada semana. A campanha ocupa a janela entre o início e o fim, mesmo antes de ter posts. Um post é da campanha pela relação com ela, quando o mapeamento a tem, ou pela data dentro da janela. Uma semana ocupada por uma narrativa não recebe outra de imediato. Sugira outra janela.
 
 As datas saem no `Formato da data com dia da semana`.
 
@@ -147,6 +149,7 @@ Os fatos vieram da página do evento. A semana atual já tinha outra narrativa, 
 - Uma semana sem Reels parece livre. Ela pode já estar ocupada por outra narrativa em outro formato.
 - Um evento aprovado parece pedir post imediato. A janela respeita a narrativa que já ocupa a semana.
 - Eixo e sub-eixo estão na mesma lista. O sub-eixo complementa um eixo.
+- Uma campanha planejada ainda sem posts parece deixar a semana livre. A janela dela já está ocupada.
 
 ## Scripts disponíveis
 
