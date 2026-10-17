@@ -4,7 +4,7 @@ description: Use essa habilidade sempre que for criar, revisar, completar ou cad
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.2"
+  version: "0.4.0"
   internal: true
   related:
     - criar-ideia-de-conteudo
@@ -51,7 +51,17 @@ flowchart LR
 
 ### Passo 2
 
-Tenha o tema, o perfil autor, quem fala, o objetivo e a data. Leia o perfil autor. A persona segue `Arquétipos da marca`. Sem arquétipo, infira do perfil autor e anote como inferida nas observações editoriais. O que não der para inferir com segurança das fontes, pergunte uma vez. Não invente perfil, narração, data, horário, local, objetivo nem limite do formato.
+Tenha o tema, o objetivo e a data. O que não der para inferir com segurança das fontes, pergunte uma vez. Não invente perfil, narração, data, horário, local, objetivo nem limite do formato.
+
+Antes de redigir ou alterar o roteiro, defina a voz: a persona, o perfil social autor e quem fala. Leia o perfil autor. A persona segue `Arquétipos da marca`. Sem arquétipo, infira do perfil autor e anote como inferida. Quando quem fala não é o dono do perfil autor e a página não diz se fala por si ou pela marca, pergunte. A voz decide:
+
+- A primeira pessoa: a fala é de quem fala, e a legenda é do perfil autor.
+- O vocabulário: a consulta leva quem fala e o perfil autor como contexto.
+- A assinatura e as marcações: entra só o perfil que a pessoa disse para marcar.
+- A entonação: cada marcação de tom nomeia quem fala.
+- O CTA: aponta para o perfil autor, como o link da bio dele.
+
+A persona, o perfil autor e quem fala, com a pessoa gramatical, vão nas observações editoriais.
 
 Escolha um ou mais eixos narrativos da lista de eixos, pela descrição de cada um. O sub-eixo complementa um eixo. Não crie eixo novo.
 
@@ -166,7 +176,8 @@ A legenda revisada pela IA ganhou um CTA para compartilhar e deixou de repetir a
 - O formato não tem máximo de hashtags: use 5 e sugira preencher o campo na página do formato.
 - A pessoa só quer guardar a ideia: siga `criar-ideia-de-conteudo`.
 - O vídeo já está gravado: o roteiro registra a fala gravada e a legenda conta o que ficou de fora.
-- Quem fala não é o dono do perfil autor: as observações editoriais dizem quem fala e em que pessoa.
+- Quem fala não é o dono do perfil autor: as observações editoriais dizem quem fala e em que pessoa. A legenda segue o perfil autor.
+- Na revisão, a voz do roteiro não bate com quem fala ou com o perfil autor: mostre como item, com o antes e o depois.
 - A pessoa dá a data sem hora: o status fica em planejado.
 - A janela passa da meta máxima: diga a contagem e sugira outra data.
 - A pessoa pede para conferir o mix ou planejar a semana: siga `planejar-calendario-de-conteudo`.
