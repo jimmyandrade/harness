@@ -557,6 +557,20 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses recording the event time, reserving career time, syncing an untimed item, and auditing time use
 
+### definir-roteiro-de-video
+- **Stability**: experimental
+- **Description**: Write, review, or adapt a ready-to-record script for a short video
+- **Properties**:
+  - Lives at `.agents/skills/definir-roteiro-de-video/SKILL.md`
+  - Writes the full lines scene by scene, with a hook in the first 3 seconds, time ranges, on-screen text, and a bracketed delivery note before each line that is never spoken, shown, or published
+  - Adapts a reference script by keeping its structure and narrative triggers and changing the literal theme, with real and verifiable people and a source link for every fact
+  - Gives a workable way around each likely obstacle to recording, such as unlicensed audio or someone who does not want to appear
+  - Ends with why the script will work, and follows `Arquétipos da marca` or marks the persona as inferred
+  - Sends the wording to `Habilidade de tom de voz`, and leaves the caption and the post to the skill that called it
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses choosing words in the tone of voice, writing the caption, registering the post, and generating the video with AI
+
 ### definir-tarefa
 - **Stability**: experimental
 - **Description**: Register, review, edit, or judge a merge of tasks with one set of criteria

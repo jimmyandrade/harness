@@ -43,6 +43,7 @@ flowchart LR
     definir_planejamento_financeiro["definir-planejamento-financeiro"]
     definir_recurso_de_aprendizado["definir-recurso-de-aprendizado"]
     definir_reserva["definir-reserva"]
+    definir_roteiro_de_video["definir-roteiro-de-video"]
     definir_tarefa["definir-tarefa"]
     definir_tipo_do_evento["definir-tipo-do-evento"]
     definir_viagem["definir-viagem"]
@@ -193,6 +194,7 @@ flowchart LR
   definir_reserva --> definir_agenda_de_popstar
   definir_reserva --> revisar_uso_do_tempo
   definir_reserva --> sincronizar_cronograma
+  definir_roteiro_de_video --> evoluir_habilidade
   definir_tarefa --> definir_grafia
   definir_tarefa --> procurar_tarefa
   definir_tipo_do_evento --> criar_oportunidade
