@@ -4,7 +4,7 @@ description: Use essa habilidade sempre que for criar, revisar, completar ou cad
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.1"
+  version: "0.3.2"
   internal: true
   related:
     - criar-ideia-de-conteudo
@@ -68,7 +68,7 @@ A legenda complementa o vídeo. Conta o que a fala não contou e não repete o r
 - Cabe no máximo de caracteres do formato.
 - Fecha com um CTA mensurável: comentar, compartilhar, salvar ou abrir o link.
 - Marcação de perfil e collab entram só quando a pessoa disse.
-- As hashtags vão na propriedade de hashtags, até o máximo do formato. Hashtag que a lista ainda não tem entra só com o sim da pessoa.
+- As hashtags vão na propriedade de hashtags, até o máximo do formato. Sem máximo no formato, o limite é 5, o do Instagram para Reel, post único e carrossel. Hashtag que a lista ainda não tem entra só com o sim da pessoa.
 
 As palavras da legenda passam pela `Habilidade de tom de voz`.
 
@@ -163,7 +163,7 @@ A legenda revisada pela IA ganhou um CTA para compartilhar e deixou de repetir a
 - Não dá para saber quem escreveu um trecho do corpo: trate como humano.
 - A revisão não melhora um item: diga que ele fica como está.
 - A fonte se contradiz sobre um fato do roteiro: mantenha o trecho como está e pergunte. Não tire nem reescreva antes da resposta.
-- O formato não tem máximo de hashtags: não invente limite. Diga que o campo está vazio e mantenha as hashtags que já existem.
+- O formato não tem máximo de hashtags: use 5 e sugira preencher o campo na página do formato.
 - A pessoa só quer guardar a ideia: siga `criar-ideia-de-conteudo`.
 - O vídeo já está gravado: o roteiro registra a fala gravada e a legenda conta o que ficou de fora.
 - Quem fala não é o dono do perfil autor: as observações editoriais dizem quem fala e em que pessoa.

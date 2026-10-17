@@ -4,7 +4,7 @@
     {
       "id": "revisar-reel-com-roteiro-curto",
       "prompt": "Revise o gancho, o roteiro, a legenda, as hashtags e o CTA deste Reel: <link da página do Reel>",
-      "expected_output": "A habilidade lê a página inteira e para antes de gravar. Para cada item que muda, mostra o antes, o depois e o ganho. O item que não melhora fica como está. O roteiro sem autoria clara conta como humano e só muda com o sim para cada trecho. A legenda nova vai na legenda revisada pela IA, dentro do limite do formato, e a legenda humana não muda. A janela de 7 dias é contada, e o máximo de hashtags vazio no formato fica como pendência, sem limite inventado.",
+      "expected_output": "A habilidade lê a página inteira e para antes de gravar. Para cada item que muda, mostra o antes, o depois e o ganho. O item que não melhora fica como está. O roteiro sem autoria clara conta como humano e só muda com o sim para cada trecho. A legenda nova vai na legenda revisada pela IA, dentro do limite do formato, e a legenda humana não muda. A janela de 7 dias é contada.",
       "files": []
     },
     {
