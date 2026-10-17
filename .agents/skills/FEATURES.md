@@ -566,6 +566,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Properties**:
   - Lives at `.agents/skills/definir-reel-do-instagram/SKILL.md`
   - Reads the list of posts, the list of content formats, and their property names from the data mapping of the project
+  - Finds the Reel format record by `Formato do Reel`, or, when it is empty, searches the list of formats for the Instagram Reel and asks when it finds more than one
   - Gets the script from definir-roteiro-de-video and sends the caption wording to `Habilidade de tom de voz`
   - Links the Reel to one or more narrative axes from the list of narrative axes, and takes the name, date, time, and address of an event from the event page
   - In an event Reel, makes the lines and the caption each say on their own what happens, the date, the time, the address, why it is worth going, and the action, without relying on comments or outside context

@@ -4,7 +4,7 @@ description: Use essa habilidade sempre que for criar, revisar, completar ou cad
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.12.0"
+  version: "0.13.0"
   internal: true
   related:
     - criar-ideia-de-conteudo
@@ -17,7 +17,7 @@ metadata:
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Habilidade de tom de voz` vazia quer dizer que a legenda segue só esta habilidade. `Arquétipos da marca` lista os arquétipos que a voz da marca assume. Vazio quer dizer que a persona é inferida do perfil autor e anotada como inferida. `Referências da estratégia de conteúdo` lista a página do Notion e outras referências com a estratégia de conteúdo original da marca. Uma referência que a pessoa der no pedido vale junto. Sem nenhuma, o objetivo vem só da pessoa. `Empresa do negócio` é o nome do registro do próprio negócio na lista de empresas. Os perfis padrão, um por canal, saem dos perfis sociais dessa empresa. `Perfis por praça` com `sim` quer dizer que a marca tem um perfil por praça: o perfil sai da lista de perfis sociais, pela praça, conforme o mapeamento de dados do projeto.
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Habilidade de tom de voz` vazia quer dizer que a legenda segue só esta habilidade. `Arquétipos da marca` lista os arquétipos que a voz da marca assume. Vazio quer dizer que a persona é inferida do perfil autor e anotada como inferida. `Referências da estratégia de conteúdo` lista a página do Notion e outras referências com a estratégia de conteúdo original da marca. Uma referência que a pessoa der no pedido vale junto. Sem nenhuma, o objetivo vem só da pessoa. `Empresa do negócio` é o nome do registro do próprio negócio na lista de empresas. Os perfis padrão, um por canal, saem dos perfis sociais dessa empresa. `Perfis por praça` com `sim` quer dizer que a marca tem um perfil por praça: o perfil sai da lista de perfis sociais, pela praça, conforme o mapeamento de dados do projeto. `Formato do Reel` é o nome do registro do Reel na lista de formatos. Vazio quer dizer que a skill busca o formato de Reel do canal Instagram nessa lista e pergunta quando acha mais de um.
 
 ```yaml
 "Habilidade de tom de voz": ""
@@ -25,6 +25,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Referências da estratégia de conteúdo": []
 "Empresa do negócio": ""
 "Perfis por praça": "não"
+"Formato do Reel": ""
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -35,6 +36,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 A lista de posts, a lista de formatos de conteúdo, a lista de eixos narrativos e o nome de cada propriedade vêm do mapeamento de dados do projeto, no workspace conectado. Se uma das listas não estiver nessa conexão, pare.
 
 Este texto usa os conceitos do post: o assunto, o formato, o perfil social autor, o status, a data e hora da postagem, a legenda redigida por humanos, a legenda revisada pela IA, a legenda consolidada, as hashtags, os eixos narrativos, as observações editoriais, os links de referência e a URL da postagem. Os status são rascunho, design existente, planejado, agendado e publicado. Do formato, usa a meta mínima e a máxima em 7 dias, o máximo de caracteres da legenda, o máximo e a quantidade ideal de hashtags, a largura e a altura.
+
+A página do formato é o registro de `Formato do Reel` na lista de formatos. Os limites e as metas saem dela.
 
 Antes de criar, busque o assunto e o link de referência na lista de posts. Se o Reel já existe, revise essa página pelo Passo 2.
 
@@ -90,7 +93,7 @@ As palavras da legenda passam pela `Habilidade de tom de voz`.
 
 ### Passo 4
 
-Conte os posts do formato Reel na janela de 7 dias que começa na data da postagem. Sem data, a janela começa hoje. Compare com a meta mínima e a máxima do formato. Abaixo da mínima ou acima da máxima, diga a contagem e sugira outra data. Mostre também os posts dos outros formatos na mesma janela.
+Conte os posts do `Formato do Reel` na janela de 7 dias que começa na data da postagem. Sem data, a janela começa hoje. Compare com a meta mínima e a máxima do formato. Abaixo da mínima ou acima da máxima, diga a contagem e sugira outra data. Mostre também os posts dos outros formatos na mesma janela.
 
 Compare o Reel com os posts dos 7 dias antes e depois. O mesmo tema, eixo ou narrativa em sequência pede outra data ou outro ângulo. Para conferir o mix do calendário inteiro, siga `planejar-calendario-de-conteudo`.
 
@@ -100,7 +103,7 @@ Diga a qual objetivo o Reel serve, pelas `Referências da estratégia de conteú
 
 Grave ou atualize a página na lista de posts. Um Reel tem uma página só: atualize a que já existe.
 
-1. O assunto é curto. O formato aponta para a página do Reel na lista de formatos. O perfil autor aponta para a página dele na lista de perfis sociais.
+1. O assunto é curto. O formato aponta para o registro de `Formato do Reel`. O perfil autor aponta para a página dele na lista de perfis sociais.
 2. Um Reel novo entra como rascunho. Agendado pede data e hora. Publicado pede a URL da postagem, que a pessoa informa quando o post sai.
 3. A data e a hora ficam vazias até a pessoa dar.
 4. A legenda vai na legenda revisada pela IA. Não altere a legenda redigida por humanos.
@@ -217,7 +220,8 @@ A legenda revisada pela IA ganhou um CTA para compartilhar e deixou de repetir a
 - A legenda consolidada parece o campo a preencher. Ela é calculada. A IA escreve na legenda revisada pela IA.
 - O corpo da página pode abrir com um aviso para humanos e IA. Ele fica. O roteiro entra abaixo.
 - As hashtags parecem parte da legenda. Elas vão na propriedade de hashtags.
-- O limite de caracteres e a meta de 7 dias parecem fixos. Eles vêm da página do formato na lista de formatos.
+- O limite de caracteres e a meta de 7 dias parecem fixos. Eles vêm do registro de `Formato do Reel` na lista de formatos.
+- O nome do formato parece óbvio. Cada negócio dá um nome ao registro do Reel, e um formato parecido de outro canal não serve.
 - As instruções do projeto parecem guardar só parâmetros. Elas também trazem as orientações gerais e as definições padrão do negócio e da pessoa fundadora.
 - Uma janela dentro da meta parece bastar. Ela não diz se o Reel repete o tema do post vizinho nem a que objetivo ele serve.
 - As checagens escritas no corpo ou nas observações editoriais parecem valer. Elas podem estar velhas, como uma janela que já passou ou uma contagem de hashtags que a propriedade não tem. Recalcule pelas propriedades.
