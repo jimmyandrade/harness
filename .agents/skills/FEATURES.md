@@ -566,7 +566,8 @@ How these skills relate is in `README.md`, in this folder.
   - Lives at `.agents/skills/definir-reel-do-instagram/SKILL.md`
   - Reads the list of posts, the list of content formats, and their property names from the data mapping of the project
   - Gets the script from definir-roteiro-de-video and sends the caption wording to `Habilidade de tom de voz`
-  - Links the Reel to one or more narrative axes from the list of narrative axes, and takes the name, date, time, and place of an event from the event page
+  - Links the Reel to one or more narrative axes from the list of narrative axes, and takes the name, date, time, and address of an event from the event page
+  - In an event Reel, makes the lines and the caption each say on their own what happens, the date, the time, the address, why it is worth going, and the action, without relying on comments or outside context
   - Writes a caption that complements the video, fits the caption limit of the format, and ends with one main call to action tied to the goal, naming the action and where to do it, on the same path as the call to action of the video and with a destination that exists when the post goes out
   - Puts hashtags in their own property, at the ideal count of the format without passing its maximum, or up to 5 when the format has none, each tying the topic to the niche of the profile
   - Counts the Reels in the 7-day window of the posting date against the minimum and maximum goals of the format, and suggests another date without blocking
@@ -904,7 +905,7 @@ How these skills relate is in `README.md`, in this folder.
   - Counts only a published status or a post URL as published
   - Shows the mix by format against the 7-day goals, by narrative axis, and by narrative, and does not put two narratives in the same week
   - Treats a content campaign as occupying its window from start to end, even before it has posts, and assigns a post to a campaign by its relation when the mapping has one, or by its date inside the window
-  - Builds an event sequence before the event from the event page, with pieces ready for sale only
+  - Builds an event sequence before the event from the event page, with pieces ready for sale only, and each post says on its own what happens, the date, the time, the address, why it is worth going, and the action
   - Creates nothing before the person approves, and sends each approved Reel to definir-reel-do-instagram
 - **Test Criteria**:
   - [x] The skill is present at that path

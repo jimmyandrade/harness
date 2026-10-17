@@ -4,7 +4,7 @@ description: Use essa habilidade sempre que for sugerir o que postar, planejar u
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   internal: true
   related:
     - criar-ideia-de-conteudo
@@ -66,9 +66,9 @@ As datas saem no `Formato da data com dia da semana`.
 
 ### Passo 4
 
-Para divulgar um evento, os fatos vêm da página do evento na lista de oportunidades ou de pontos de contato: nome, data, horário e local. Sem essa página, pergunte. Não invente nenhum desses fatos.
+Para divulgar um evento, os fatos vêm da página do evento na lista de oportunidades ou de pontos de contato: nome, data, horário e endereço. Sem essa página, pergunte. Não invente nenhum desses fatos.
 
-1. Monte a sequência de posts antes do evento. Cada post tem formato, data sugerida, objetivo e CTA.
+1. Monte a sequência de posts antes do evento. Cada post tem formato, data sugerida, objetivo e CTA. Cada um diz sozinho o que vai acontecer, a data, o horário, o endereço, por que vale ir e a ação, sem depender de outro post nem dos comentários.
 2. A data de cada post é anterior ao evento e não colide com a narrativa que ocupa a semana.
 3. Só entram peças prontas para venda segundo a lista de peças.
 

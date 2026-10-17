@@ -4,7 +4,7 @@ description: Use essa habilidade sempre que for criar, revisar, completar ou cad
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.6.0"
   internal: true
   related:
     - criar-ideia-de-conteudo
@@ -65,7 +65,7 @@ A persona, o perfil autor e quem fala, com a pessoa gramatical, vão nas observa
 
 Escolha um ou mais eixos narrativos da lista de eixos, pela descrição de cada um. O sub-eixo complementa um eixo. Não crie eixo novo.
 
-Um Reel de evento tira nome, data, horário e local da página do evento na lista de oportunidades ou de pontos de contato. Sem essa página, pergunte. A data do post é anterior à do evento.
+Um Reel de evento tira nome, data, horário e endereço da página do evento na lista de oportunidades ou de pontos de contato. Sem essa página, pergunte. A data do post é anterior à do evento. A fala e a legenda dizem, cada uma sozinha, o que vai acontecer, a data, o horário, o endereço, por que vale ir e a ação. Nenhuma depende de comentário, de outro post nem de contexto externo.
 
 O roteiro vem de `definir-roteiro-de-video`, com a largura e a altura do formato.
 
@@ -111,6 +111,7 @@ Valide antes de mostrar. Corrija e repita até passar.
 - [ ] A contagem da janela de 7 dias foi dita.
 - [ ] O status bate com a data e com a URL.
 - [ ] O Reel tem ao menos um eixo narrativo.
+- [ ] Num Reel de evento, a fala e a legenda têm, cada uma, data, horário e endereço.
 - [ ] Na revisão, nenhum texto humano foi apagado sem o sim para aquele trecho.
 
 Mostre o link da página, o status, as contagens e o que ficou pendente.
@@ -187,7 +188,8 @@ A legenda revisada pela IA ganhou um CTA para compartilhar e deixou de repetir a
 - A página não deixa claro qual ação é a principal: siga o objetivo do Reel. Sem objetivo, pergunte.
 - O destino do CTA pode não existir quando o post sair, como um link só nos stories: diga o risco e sugira o link da bio.
 - A pessoa pede para conferir o mix ou planejar a semana: siga `planejar-calendario-de-conteudo`.
-- O evento não tem página: pergunte nome, data, horário e local antes de escrever.
+- O evento não tem página: pergunte nome, data, horário e endereço antes de escrever.
+- A página do evento só tem o nome do lugar, sem endereço: pergunte o endereço. Não deixe para os comentários.
 
 ## Pegadinhas
 
