@@ -1,3 +1,12 @@
+---
+name: reel-do-instagram
+description: Formato da resposta que preenche a página de um Reel do Instagram na lista de posts, com um heading por propriedade e o roteiro no corpo.
+metadata:
+  version: "1.0.0"
+  aliases:
+    - reel
+---
+
 Cada item vira um heading na resposta, nesta ordem. Cada um corresponde a uma propriedade da página do post, menos o corpo.
 
 ## Assunto
