@@ -26,6 +26,12 @@
       "prompt": "(saída colada do terminal: npm cache clean --force, npm ls ~/.cache respondendo (empty), e ls de ~/.cache com codex-runtimes, puppeteer, prisma, node, gh e outros)",
       "expected_output": "Diz que npm ls só lista pacotes e não limpou a pasta. Mede cada subpasta e classifica: o runtime do Codex, o Chrome do Puppeteer e os binários do Prisma se recriam sozinhos, e o resto é pequeno demais para valer. Entrega o comando de apagar num bloco próprio para a pessoa rodar.",
       "files": []
+    },
+    {
+      "id": "cache-de-app-que-nao-uso",
+      "prompt": "Não uso mais o Cache do ChatGPT Atlas",
+      "expected_output": "Confere que o app não está instalado nem rodando. Entrega o comando que apaga o cache, de 2,4 GB, sem rodá-lo. Mostra à parte os dados do app, de 2,1 GB, com o que tem dentro e o que se perde, e não entrega o comando deles sem a pessoa pedir.",
+      "files": []
     }
   ]
 }

@@ -3,7 +3,7 @@ name: liberar-espaco-em-disco
 description: Use essa habilidade sempre que o disco do computador estiver cheio, um comando falhar por falta de espaço, ou for liberar espaço sem perder arquivo, mesmo sem dizer disco. NÃO use para apagar arquivo da pessoa, limpar worktree antigo de sessão, nem organizar pastas.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   notion: "false"
   related:
     - evoluir-habilidade
@@ -39,11 +39,11 @@ Mostre uma tabela com tamanho, o que é e como limpar, do maior para o menor.
 
 ### Passo 4
 
-Proponha só o grupo 1. Liste cada caminho e o total. Espere o sim da pessoa para cada lista. Se ela preferir rodar, entregue o comando num bloco próprio, e ela roda no terminal dela.
+Proponha só o grupo 1. Liste cada caminho e o total. Entregue o comando que apaga num bloco próprio, e a pessoa roda no terminal dela. Nunca apague por conta própria, nem depois do sim.
 
 ### Passo 5
 
-Depois de cada limpeza, meça de novo o espaço livre e a pasta limpa. Diga quanto liberou, contra a linha de base. Se o espaço não subir, siga o fluxo.
+Quando a pessoa disser que rodou, meça de novo o espaço livre e a pasta limpa. Diga quanto liberou, contra a linha de base. Se o espaço não subir, siga o fluxo.
 
 ```mermaid
 flowchart LR
@@ -73,7 +73,15 @@ Se você deixar passar um comando que só lista, como a árvore de pacotes do np
 
 1. Diga que o comando só lista.
 2. Meça a pasta.
-3. Entregue o comando que apaga, com o sim da pessoa.
+3. Entregue o comando que apaga.
+
+### Apagar por conta própria
+
+Se você rodar o comando que apaga, mesmo depois do sim, a pessoa perde o controle do que sai do disco.
+
+1. Entregue o comando num bloco próprio.
+2. Espere a pessoa dizer que rodou.
+3. Meça de novo.
 
 ### Processo culpado pelo total gravado
 
@@ -97,7 +105,8 @@ O espaço livre foi de 945 MB para 14 GB, e o cache do npm, de 9,3 GB para 1,5 G
 
 ## Casos-limite
 
-- O disco está tão cheio que o comando não grava a própria saída: apague primeiro o que você mesmo criou na sessão, como clones temporários, e meça de novo.
+- O disco está tão cheio que o comando não grava a própria saída: entregue primeiro o comando que apaga o que você mesmo criou na sessão, como clones temporários, e meça de novo.
+- Sobrou dado de um app que já foi desinstalado: mostre o que tem dentro e o que se perde. Entregue o comando só se a pessoa pedir.
 - A pessoa apagou por conta própria: confira se a pasta sumiu e meça o espaço livre.
 - O sistema bloqueia a medição de uma pasta, como a Lixeira: diga que não foi medida e peça para a pessoa ver no Finder.
 - O app está aberto: peça para fechar antes de apagar o cache dele, ou limpe pelo próprio app.
@@ -118,4 +127,4 @@ O espaço livre foi de 945 MB para 14 GB, e o cache do npm, de 9,3 GB para 1,5 G
 - `npm cache clean --force`: cache do npm, do grupo 1.
 - `rm -rf ~/.cache/codex-runtimes ~/.cache/puppeteer ~/.cache/prisma ~/Library/Caches/ms-playwright`: runtimes e navegadores baixados, do grupo 1.
 
-1. Meça o espaço livre e as pastas, em segundo plano. Depois, com o sim da pessoa, limpe um item do grupo 1 por vez e meça de novo.
+1. Meça o espaço livre e as pastas, em segundo plano. Depois entregue o comando de um item do grupo 1 por vez e meça de novo quando a pessoa disser que rodou.

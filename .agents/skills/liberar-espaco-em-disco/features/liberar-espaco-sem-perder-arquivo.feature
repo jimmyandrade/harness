@@ -8,7 +8,8 @@ Funcionalidade: Liberar espaço sem perder arquivo
     Então só o cache do npm é proposto para apagar
     E Downloads aparece só com o tamanho
 
-  Exemplo: Nada é apagado sem o sim da pessoa
+  Exemplo: A pessoa roda o comando que apaga
     Dado que a lista do que se recria sozinho foi mostrada
-    Quando a pessoa ainda não respondeu
-    Então nenhum caminho é apagado
+    Quando a pessoa diz que pode apagar
+    Então o comando que apaga aparece num bloco próprio
+    Mas nenhum caminho é apagado pelo agente

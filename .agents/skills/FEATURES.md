@@ -644,12 +644,12 @@ How these skills relate is in `README.md`, in this folder.
   - Does not sync to Notion, because it needs a shell
   - Measures free space and swap first, then the known folders in the background, one level deeper in the largest
   - Sorts each item into a cache that rebuilds itself, a cache its app clears better, or a file of the person, which it only sizes
-  - Deletes only after the person says yes to the list, or hands over the command for the person to run
+  - Never deletes by itself: hands over the delete command for the person to run, even after a yes
   - Measures again after each cleanup and reports the space freed against the baseline
   - Explains that Activity Monitor totals bytes written since boot and that swap moves free space up and down
 - **Test Criteria**:
   - [ ] Only caches that rebuild themselves are proposed for deletion, and the person's files show only their size
-  - [ ] Nothing is deleted before the person says yes
+  - [ ] The agent hands over the delete command and deletes nothing itself
 
 ### medir-habilidade
 - **Stability**: experimental
