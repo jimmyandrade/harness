@@ -4,7 +4,7 @@ description: Use essa habilidade sempre que for criar, revisar, completar ou cad
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.13.0"
+  version: "0.14.0"
   internal: true
   related:
     - criar-ideia-de-conteudo
@@ -103,7 +103,7 @@ Diga a qual objetivo o Reel serve, pelas `Referências da estratégia de conteú
 
 Grave ou atualize a página na lista de posts. Um Reel tem uma página só: atualize a que já existe.
 
-1. O assunto é curto. O formato aponta para o registro de `Formato do Reel`. O perfil autor aponta para a página dele na lista de perfis sociais.
+1. O assunto é curto. O formato aponta para o registro de `Formato do Reel`. O perfil autor é um perfil só, o que publica, e aponta para a página dele na lista de perfis sociais. Collab não entra nessa propriedade: vai nas observações editoriais.
 2. Um Reel novo entra como rascunho. Agendado pede data e hora. Publicado pede a URL da postagem, que a pessoa informa quando o post sai.
 3. A data e a hora ficam vazias até a pessoa dar.
 4. A legenda vai na legenda revisada pela IA. Não altere a legenda redigida por humanos.
@@ -131,7 +131,9 @@ Valide antes de mostrar. Corrija e repita até passar.
 - [ ] Num Reel de evento, a fala e a legenda têm, cada uma, data, horário e endereço.
 - [ ] Na revisão, nenhum texto humano foi apagado sem o sim para aquele trecho.
 
-Mostre o link da página, o status, as contagens e o que ficou pendente.
+Leia .agents/assets/templates/reel-do-instagram.md quando for gerar a saída.
+
+Mostre também o link da página, o status, as contagens e o que ficou pendente.
 
 ### Passo 7
 
@@ -208,6 +210,7 @@ A legenda revisada pela IA ganhou um CTA para compartilhar e deixou de repetir a
 - Quem fala não é o dono do perfil autor: as observações editoriais dizem quem fala e em que pessoa. A legenda segue o perfil autor.
 - Na revisão, a voz do roteiro não bate com quem fala ou com o perfil autor: mostre como item, com o antes e o depois.
 - A pessoa dá a data sem hora: o status fica em planejado.
+- O Reel vem de uma referência de benchmarking: a data e a hora podem não existir. Não use hoje no lugar.
 - A janela passa da meta máxima: diga a contagem e sugira outra data.
 - A página não deixa claro qual ação é a principal: siga o objetivo do Reel. Sem objetivo, pergunte.
 - O destino do CTA pode não existir quando o post sair, como um link só nos stories: diga o risco e sugira o link da bio.

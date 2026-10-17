@@ -575,6 +575,8 @@ How these skills relate is in `README.md`, in this folder.
   - Counts the Reels in the 7-day window that starts on the posting date against the minimum and maximum goals of the format, shows the other formats in that window, and suggests another date without blocking
   - Compares the Reel with the posts of the 7 days before and after, so the same topic, axis, or narrative does not repeat in a row, and states the goal it serves from `Referências da estratégia de conteúdo`, a Notion page or other references with the original content strategy, or from the person, asking before writing when there is none
   - Writes the caption only to the AI caption, keeps the human caption, keeps the notice that opens the page body, and writes the script below it
+  - Answers in the output template `.agents/assets/templates/reel-do-instagram.md`, one heading per page property plus the body, with the human caption left empty
+  - Links exactly one author profile, the one that publishes, and records a collab in the editorial notes instead
   - Keeps one page per Reel, links the format and the author profile as relations, keeps counts and checks out of the page body, lists a value without a mapped property at the end instead of writing it in the body, and reads the page again after writing
   - Reviews an existing Reel by reading the whole page first, shows the before, the after, and the gain for each changed item, treats body text without clear authorship as human, and replaces human text only with a yes for that passage
   - Follows `Arquétipos da marca` or records the persona as inferred in the editorial notes, and does not invent the profile, the speaker, the date, or the format limits
