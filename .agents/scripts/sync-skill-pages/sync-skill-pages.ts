@@ -10,6 +10,9 @@
  * With --include-core, the skills of this harness are published too, when the
  * project changes its mapping, a workflow, or its package files. Those are the
  * places where a project moves the version of this harness it uses.
+ * Models in .agents/assets/templates are published to the database that
+ * .agents/mappings/template-page.notion.json names, or --template-mapping.
+ * Without that file, the sync leaves models out (ADR 0012, ADR 0015).
  */
 
 import { spawnSync } from "node:child_process"
@@ -40,6 +43,30 @@ export const DEFAULT_STATUS_OPTIONS: StatusOptions = {
   draft: "Rascunho",
   validation: "Em validação",
   production: "Em produção",
+}
+
+/** A model in .agents/assets/templates, published like a skill (ADR 0012). */
+export type TemplatePage = {
+  name: string
+  description: string
+  version: string
+  body: string
+  aliases?: string[]
+  tags?: string[]
+}
+
+/** Only the name and the version are required: a property left out is not written. */
+export type TemplateMapping = {
+  data_source_id: string
+  properties: {
+    name: string
+    version: string
+    description?: string
+    aliases?: string
+    tags?: string
+    status?: string
+  }
+  status_options?: Partial<StatusOptions>
 }
 
 export type SkillMapping = {
@@ -205,15 +232,23 @@ export type NotionApi = {
   }
   pages: {
     create: (args: CreateArgs) => Promise<{ id: string; url?: string }>
-    update: (args: { page_id: string; properties: PageProperties; icon: PageIcon }) => Promise<{ id: string }>
+    update: (args: { page_id: string; properties: PageProperties; icon?: PageIcon }) => Promise<{ id: string }>
     updateMarkdown: (args: ReplaceArgs) => Promise<{ id: string }>
   }
 }
+
+type TitledSource = { data_source_id: string; properties: { name: string } }
 
 export type PageWriter = {
   findPage: (mapping: SkillMapping, name: string) => Promise<string | null>
   createPage: (page: SkillPage, mapping: SkillMapping) => Promise<{ id: string; url?: string }>
   updatePage: (pageId: string, page: SkillPage, mapping: SkillMapping) => Promise<{ id: string }>
+}
+
+export type TemplateWriter = {
+  findPage: (mapping: TemplateMapping, name: string) => Promise<string | null>
+  createPage: (page: TemplatePage, mapping: TemplateMapping) => Promise<{ id: string; url?: string }>
+  updatePage: (pageId: string, page: TemplatePage, mapping: TemplateMapping) => Promise<{ id: string }>
 }
 
 /** The root of the git repository that contains start, or start itself. */
@@ -491,7 +526,7 @@ export function createArgs(page: SkillPage, mapping: SkillMapping, icon: PageIco
   }
 }
 
-export function replaceArgs(pageId: string, page: SkillPage): ReplaceArgs {
+export function replaceArgs(pageId: string, page: { body: string }): ReplaceArgs {
   return {
     page_id: pageId,
     type: "replace_content",
@@ -499,24 +534,26 @@ export function replaceArgs(pageId: string, page: SkillPage): ReplaceArgs {
   }
 }
 
+async function findByTitle(notion: NotionApi, mapping: TitledSource, name: string): Promise<string | null> {
+  const found: string[] = []
+  let startCursor: string | undefined
+  do {
+    const result = await notion.dataSources.query({
+      data_source_id: mapping.data_source_id,
+      filter: { property: mapping.properties.name, title: { equals: name } },
+      page_size: 2,
+      start_cursor: startCursor,
+    })
+    found.push(...result.results.map((page) => page.id))
+    if (found.length > 1) throw new Error(`more than one page is named ${name}`)
+    startCursor = result.has_more ? (result.next_cursor ?? undefined) : undefined
+  } while (startCursor)
+  return found[0] ?? null
+}
+
 export function bindNotion(notion: NotionApi, icon: PageIcon): PageWriter {
   return {
-    async findPage(mapping, name) {
-      const found: string[] = []
-      let startCursor: string | undefined
-      do {
-        const result = await notion.dataSources.query({
-          data_source_id: mapping.data_source_id,
-          filter: { property: mapping.properties.name, title: { equals: name } },
-          page_size: 2,
-          start_cursor: startCursor,
-        })
-        found.push(...result.results.map((page) => page.id))
-        if (found.length > 1) throw new Error(`more than one page is named ${name}`)
-        startCursor = result.has_more ? (result.next_cursor ?? undefined) : undefined
-      } while (startCursor)
-      return found[0] ?? null
-    },
+    findPage: (mapping, name) => findByTitle(notion, mapping, name),
     async createPage(page, mapping) {
       return notion.pages.create(createArgs(page, mapping, icon))
     },
@@ -527,8 +564,31 @@ export function bindNotion(notion: NotionApi, icon: PageIcon): PageWriter {
   }
 }
 
+/** Model pages get the icon on create only, so an update keeps the icon a person chose. */
+export function bindTemplates(notion: NotionApi, icon: PageIcon): TemplateWriter {
+  return {
+    findPage: (mapping, name) => findByTitle(notion, mapping, name),
+    async createPage(page, mapping) {
+      return notion.pages.create({
+        parent: { data_source_id: mapping.data_source_id },
+        properties: templateProperties(page, mapping),
+        markdown: page.body,
+        icon,
+      })
+    },
+    async updatePage(pageId, page, mapping) {
+      await notion.pages.update({ page_id: pageId, properties: templateProperties(page, mapping) })
+      return notion.pages.updateMarkdown(replaceArgs(pageId, page))
+    },
+  }
+}
+
+function notionApi(token: string): NotionApi {
+  return new Client({ auth: token, notionVersion: NOTION_VERSION }) as unknown as NotionApi
+}
+
 export function notionClient(token: string, icon: PageIcon): PageWriter {
-  return bindNotion(new Client({ auth: token, notionVersion: NOTION_VERSION }) as unknown as NotionApi, icon)
+  return bindNotion(notionApi(token), icon)
 }
 
 export async function publish(
@@ -622,6 +682,130 @@ export function instructionsToPublish(changes: {
   return changes.instructionsChanged || changes.rulesChanged || changes.coreVersionChanged
 }
 
+export const TEMPLATES_DIR = ".agents/assets/templates"
+export const DEFAULT_TEMPLATE_MAPPING_PATH = ".agents/mappings/template-page.notion.json"
+
+const TEMPLATE_FILE = /^\.agents\/assets\/templates\/([^/]+)\.md$/
+
+export function templateNamesFromPaths(paths: string[]): string[] {
+  const names: string[] = []
+  for (const path of paths) {
+    const name = TEMPLATE_FILE.exec(path)?.[1]
+    if (name && !names.includes(name)) names.push(name)
+  }
+  return names
+}
+
+export function allTemplateNames(root: string): string[] {
+  const dir = join(root, TEMPLATES_DIR)
+  if (!existsSync(dir)) return []
+  return readdirSync(dir, { withFileTypes: true })
+    .filter((entry) => entry.isFile() && entry.name.endsWith(".md"))
+    .map((entry) => entry.name.slice(0, -3))
+    .sort()
+}
+
+/**
+ * A model page, or why the sync leaves the file out. A file without frontmatter
+ * or without a name in it is an output shape not yet written as a model.
+ */
+export function parseTemplate(text: string, fileName: string): TemplatePage | { skip: string } {
+  const parts = frontmatterParts(text)
+  if (!parts) return { skip: "no frontmatter" }
+  const fields = frontmatterFields(parts.front.join("\n"))
+  if (fields["metadata.notion"] === "false") return { skip: "stays in git" }
+  if (fields["metadata.internal"] === "true") return { skip: "internal" }
+  if (typeof fields.name !== "string" || !fields.name) return { skip: "no name in frontmatter" }
+  if (fields.name !== fileName) throw new Error(`${fileName} frontmatter name is ${fields.name}`)
+  const page: TemplatePage = {
+    name: fields.name,
+    description: typeof fields.description === "string" ? fields.description : "",
+    version: typeof fields["metadata.version"] === "string" ? fields["metadata.version"] : "",
+    body: parts.body,
+    aliases: stringList(fields, "aliases"),
+    tags: stringList(fields, "tags"),
+  }
+  const missing = (["description", "version", "body"] as const).filter((key) => !page[key])
+  if (missing.length) throw new Error(`${fileName} is missing ${missing.join(", ")}`)
+  return page
+}
+
+export function templateProperties(page: TemplatePage, mapping: TemplateMapping): PageProperties {
+  const names = mapping.properties
+  const result: PageProperties = {
+    [names.name]: { title: richText(page.name) },
+    [names.version]: { rich_text: richText(page.version) },
+  }
+  if (names.description) result[names.description] = { rich_text: richText(page.description) }
+  if (names.aliases && page.aliases !== undefined) {
+    result[names.aliases] = { rich_text: richText(page.aliases.join("\n")) }
+  }
+  if (names.tags && page.tags !== undefined) {
+    result[names.tags] = { multi_select: page.tags.map((name) => ({ name })) }
+  }
+  if (names.status) {
+    result[names.status] = { status: { name: skillStatus(page.version, statusOptions(mapping)) } }
+  }
+  return result
+}
+
+/** The page of a model, found by its name, or else by one of its aliases. */
+async function findTemplate(
+  notion: TemplateWriter,
+  mapping: TemplateMapping,
+  page: TemplatePage,
+): Promise<{ id: string; alias?: string } | null> {
+  const current = await notion.findPage(mapping, page.name)
+  if (current) return { id: current }
+  const earlier: { id: string; alias: string }[] = []
+  for (const alias of page.aliases ?? []) {
+    const id = await notion.findPage(mapping, alias)
+    if (id && !earlier.some((found) => found.id === id)) earlier.push({ id, alias })
+  }
+  if (earlier.length > 1) throw new Error(`more than one page matches an alias of ${page.name}`)
+  return earlier[0] ?? null
+}
+
+export async function publishTemplates(
+  root: string,
+  names: string[],
+  notion: TemplateWriter,
+  mapping: TemplateMapping,
+): Promise<string[]> {
+  const lines: string[] = []
+  for (const name of names) {
+    let text: string
+    try {
+      text = readFileSync(join(root, TEMPLATES_DIR, `${name}.md`), "utf8")
+    } catch (error) {
+      const code = error instanceof Error && "code" in error ? error.code : undefined
+      if (code === "ENOENT") {
+        lines.push(`skip template ${name}: removed`)
+        continue
+      }
+      throw error
+    }
+    const page = parseTemplate(text, name)
+    if ("skip" in page) {
+      lines.push(`skip template ${name}: ${page.skip}`)
+      continue
+    }
+    const existing = await findTemplate(notion, mapping, page)
+    if (existing === null) {
+      const created = await notion.createPage(page, mapping)
+      lines.push(`create template ${name}: ${created.url ?? created.id ?? ""}`)
+    } else {
+      await notion.updatePage(existing.id, page, mapping)
+      lines.push(
+        existing.alias
+          ? `rename template ${existing.alias} to ${name}: ${existing.id}`
+          : `update template ${name}: ${existing.id}`,
+      )
+    }
+  }
+  return lines
+}
+
 export function gate(names: string[], token: string): 0 | 2 | null {
   if (names.length === 0) return 0
   if (!token) return 2
@@ -689,6 +873,23 @@ export async function main(argv: string[]): Promise<number> {
     if (page === null) return null
     return page.aliases ?? []
   })
+  const templateMappingPath = argValue(argv, "--template-mapping") || DEFAULT_TEMPLATE_MAPPING_PATH
+  const templateMapping = existsSync(join(root, templateMappingPath))
+    ? (JSON.parse(readFileSync(join(root, templateMappingPath), "utf8")) as TemplateMapping)
+    : null
+  const changedTemplates = templateNamesFromPaths(gitNames(root, base, head, [TEMPLATES_DIR]))
+  let templateNames: string[] = []
+  let coreTemplateNames: string[] = []
+  if (templateMapping) {
+    const templateRulesChanged = publisherChanged(root, base, head, templateMappingPath)
+    templateNames = namesToPublish(changedTemplates, templateRulesChanged, allTemplateNames(root))
+    coreTemplateNames =
+      argv.includes("--include-core") && core !== root
+        ? coreNamesToPublish(allTemplateNames(root), allTemplateNames(core), templateRulesChanged, coreVersionChanged)
+        : []
+  } else if (changedTemplates.length) {
+    console.log(`skip templates: ${templateMappingPath} is missing`)
+  }
   const token = process.env.NOTION_TOKEN ?? ""
   const instructionsChanged = instructionsToPublish({
     isCore: core === root,
@@ -696,7 +897,10 @@ export async function main(argv: string[]): Promise<number> {
     rulesChanged,
     coreVersionChanged,
   })
-  const code = gate([...names, ...coreNames, ...(instructionsChanged ? [INSTRUCTIONS_FILE] : [])], token)
+  const code = gate(
+    [...names, ...coreNames, ...templateNames, ...coreTemplateNames, ...(instructionsChanged ? [INSTRUCTIONS_FILE] : [])],
+    token,
+  )
   if (code === 0) {
     console.log("no changed skill")
     return 0
@@ -705,13 +909,23 @@ export async function main(argv: string[]): Promise<number> {
     console.error("NOTION_TOKEN is missing")
     return 2
   }
-  const notion = notionClient(token, icon)
+  const api = notionApi(token)
+  const notion = bindNotion(api, icon)
   for (const line of await publish(root, names, notion, mapping, previous)) {
     console.log(line)
   }
   if (instructionsChanged) console.log(await publishInstructions(root, notion, mapping))
   for (const line of await publish(core, coreNames, notion, mapping)) {
     console.log(`core ${line}`)
+  }
+  if (templateMapping) {
+    const templates = bindTemplates(api, icon)
+    for (const line of await publishTemplates(root, templateNames, templates, templateMapping)) {
+      console.log(line)
+    }
+    for (const line of await publishTemplates(core, coreTemplateNames, templates, templateMapping)) {
+      console.log(`core ${line}`)
+    }
   }
   return 0
 }

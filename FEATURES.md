@@ -114,6 +114,8 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
   - `include-core` also publishes the skills of the core harness into the caller's Notion
   - The `sync-skills` example workflow runs it on each release, with the previous release as `base`, after `check-skill`. A Release Please workflow calls it, and a person can run it by hand with another `base`
   - Leaves out a skill with `metadata.notion: "false"`, logged as `stays in git`, and one with `metadata.internal: true`, logged as `internal`
+  - With a model mapping, `.agents/mappings/template-page.notion.json` or `template-mapping`, publishes each changed model of `.agents/assets/templates/` as a page of the models database, with the file body as the page body. The mapping binds `name` and `version`, and the other properties only when it names them. A change to that mapping republishes every model. Without it, no model is published
+  - A model page is found by its name, or else by one of its `metadata.aliases`, so it replaces a page a person created with another title. A removed model keeps its page. A file without `name` in frontmatter is logged as skipped
 - **Test Criteria**:
   - [x] A mapping can rename every status option
   - [x] A skill with `metadata.internal: true` is skipped as `internal`, and `internal: false` publishes
@@ -121,4 +123,6 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
   - [x] The project root is `HARNESS_ROOT`, or the working directory
   - [x] The instructions page is created once and then updated, with the version of its block
   - [x] Every checked `AGENTS.md` needs `metadata.version`, which must rise when the instructions change, and a business harness also needs `description`
+  - [x] A changed model is created, then updated in place, and an unchanged one is not published
+  - [x] Without a model mapping, no model is published
   - [ ] A business workflow that calls the action creates one page per new skill
