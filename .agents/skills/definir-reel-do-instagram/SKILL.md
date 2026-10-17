@@ -4,7 +4,7 @@ description: Use essa habilidade sempre que for criar, revisar, completar ou cad
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.4.1"
   internal: true
   related:
     - criar-ideia-de-conteudo
@@ -57,7 +57,7 @@ Antes de redigir ou alterar o roteiro, defina a voz: a persona, o perfil social 
 
 - A primeira pessoa: a fala é de quem fala, e a legenda é do perfil autor.
 - O vocabulário: a consulta leva quem fala e o perfil autor como contexto.
-- A assinatura e as marcações: entra só o perfil que a pessoa disse para marcar.
+- A assinatura e as marcações: marcação nova entra só com o sim da pessoa. A que já está na legenda fica até a pessoa responder.
 - A entonação: cada marcação de tom nomeia quem fala.
 - O CTA: aponta para o perfil autor, como o link da bio dele.
 
@@ -84,7 +84,7 @@ As palavras da legenda passam pela `Habilidade de tom de voz`.
 
 ### Passo 4
 
-Conte os posts do formato Reel na janela de 7 dias que contém a data da postagem. Sem data, conte os próximos 7 dias. Compare com a meta mínima e a máxima do formato. Abaixo da mínima ou acima da máxima, diga a contagem e sugira outra data. Não bloqueie o cadastro.
+Conte os posts do formato Reel na janela de 7 dias que começa na data da postagem. Sem data, a janela começa hoje. Compare com a meta mínima e a máxima do formato. Abaixo da mínima ou acima da máxima, diga a contagem e sugira outra data. Não bloqueie o cadastro.
 
 ### Passo 5
 
@@ -175,7 +175,9 @@ A legenda revisada pela IA ganhou um CTA para compartilhar e deixou de repetir a
 - A fonte se contradiz sobre um fato do roteiro: mantenha o trecho como está e pergunte. Não tire nem reescreva antes da resposta.
 - O formato não tem máximo de hashtags: use 5 e sugira preencher o campo na página do formato.
 - A pessoa só quer guardar a ideia: siga `criar-ideia-de-conteudo`.
-- O vídeo já está gravado: o roteiro registra a fala gravada e a legenda conta o que ficou de fora.
+- O vídeo já está gravado: o roteiro registra a fala gravada e a legenda conta o que ficou de fora. Não invente marcação de tom para a fala gravada.
+- A página do Reel e a da campanha ou do ponto de contato dizem vozes diferentes: vale a página do Reel. Diga o conflito.
+- O status é agendado, a data já passou e não há URL: pergunte se o post saiu. Não mude o status sozinho.
 - Quem fala não é o dono do perfil autor: as observações editoriais dizem quem fala e em que pessoa. A legenda segue o perfil autor.
 - Na revisão, a voz do roteiro não bate com quem fala ou com o perfil autor: mostre como item, com o antes e o depois.
 - A pessoa dá a data sem hora: o status fica em planejado.

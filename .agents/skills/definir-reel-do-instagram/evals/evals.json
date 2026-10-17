@@ -12,6 +12,12 @@
       "prompt": "Revise o gancho, o roteiro, a legenda, as hashtags e o CTA deste Reel: <link da página do Reel>",
       "expected_output": "A habilidade lê a página e a fonte da história antes de propor. Um fato em que a fonte se contradiz fica como está no roteiro, com uma pergunta para a pessoa, sem ser tirado nem reescrito. As marcações de tom incompletas são completadas trecho a trecho, com o antes e o depois. A contagem de hashtags escrita no corpo é conferida com a propriedade, que estava vazia. Nada é gravado antes do sim.",
       "files": []
+    },
+    {
+      "id": "revisar-voz-de-reel-gravado",
+      "prompt": "Revise o roteiro, a legenda e o CTA deste Reel: <link da página do Reel>",
+      "expected_output": "A habilidade define a voz antes de propor: quem fala, o perfil autor e a persona inferida. Quem fala é dono do perfil autor, então a fala e a legenda ficam na mesma primeira pessoa e o CTA aponta para a bio desse perfil. Quando a página da campanha pede outra voz, vale a página do Reel e o conflito é dito. A fala gravada fica como está, sem marcação de tom inventada. A marcação que já estava na legenda fica até a pessoa responder. O status agendado com data passada e sem URL vira pergunta.",
+      "files": []
     }
   ]
 }
