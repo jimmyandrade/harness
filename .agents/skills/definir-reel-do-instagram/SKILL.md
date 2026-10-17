@@ -4,7 +4,7 @@ description: Use essa habilidade sempre que for criar, revisar, completar ou cad
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.1"
+  version: "0.4.2"
   internal: true
   related:
     - criar-ideia-de-conteudo
@@ -105,7 +105,7 @@ Valide antes de mostrar. Corrija e repita até passar.
 
 - [ ] A legenda cabe no máximo de caracteres. Diga a contagem.
 - [ ] As hashtags estão na propriedade e dentro do máximo. Diga a contagem.
-- [ ] Nenhuma marcação de tom está na legenda.
+- [ ] Nenhuma marcação de tom, ação de cena ou direção de gravação está na legenda.
 - [ ] A contagem da janela de 7 dias foi dita.
 - [ ] O status bate com a data e com a URL.
 - [ ] O Reel tem ao menos um eixo narrativo.

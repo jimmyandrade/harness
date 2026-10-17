@@ -4,7 +4,7 @@ description: Use essa habilidade sempre que for criar, revisar ou adaptar o rote
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   internal: true
   related:
     - evoluir-habilidade
@@ -56,11 +56,14 @@ A originalidade está na estrutura e nos gatilhos reaproveitados, não em ficç�
 Leia .agents/assets/templates/roteiro-de-video.md quando for gerar a saída.
 
 - O gancho ocupa de 0 a 3 segundos. Começa no conflito, na provocação ou na pergunta, sem saudação.
-- Cada fala leva antes, entre colchetes, quem fala, o tom, o ritmo, o volume, a ênfase e a pausa. A marcação serve à gravação e à voz gerada por IA.
+- Cada fala vai em blockquote, com a marcação entre colchetes antes do texto falado. A marcação serve à gravação, à direção e à voz gerada por IA.
+- A marcação é específica: nomeia quem fala, o tom, o ritmo, o volume, a palavra da ênfase e o ponto da pausa. Tom genérico, como normal ou neutro, não serve.
 - Cada cena tem a faixa de tempo, a ação e o texto na tela.
 - Só entra fato confirmado nas fontes. Memória encenada leva o selo DRAMATIZAÇÃO na tela.
 - Obra de referência entra como inspiração de linguagem. Não reproduza trilha, personagem, figurino nem cena.
 - O fechamento traz um convite ligado à experiência de quem assiste.
+- A parte de gravar vem primeiro e curta: cenas, falas e texto na tela. Fontes, saídas para empecilhos e a análise vêm depois.
+- Marcação, ação de cena e direção de gravação nunca entram na fala, no texto na tela nem na legenda.
 
 As palavras das falas e do texto na tela passam pela `Habilidade de tom de voz`.
 
@@ -77,8 +80,8 @@ Feche com a análise de por que o roteiro vai funcionar: os princípios do Passo
 Valide antes de mostrar. Corrija e repita até passar.
 
 - [ ] Gancho sem saudação, em até 3 segundos.
-- [ ] Toda fala tem a marcação completa.
-- [ ] Nenhuma marcação aparece na fala, no texto na tela ou fora do roteiro.
+- [ ] Toda fala está em blockquote, com a marcação específica antes.
+- [ ] Nenhuma marcação, ação de cena ou direção de gravação aparece na fala, no texto na tela ou fora do roteiro.
 - [ ] Todo fato tem fonte. Nada foi inventado.
 - [ ] O áudio é licenciado ou recriado, e está no nicho.
 - [ ] Cada empecilho tem saída.
@@ -114,10 +117,11 @@ Se você criar personagem, fala ou situação para encaixar na estrutura, o rote
 
 ### Marcação que vai ao ar
 
-Se você deixar o texto entre colchetes entrar na fala, no texto na tela ou na legenda, a direção de entonação é publicada.
+Se você deixar o texto entre colchetes ou a direção de gravação entrar na fala, no texto na tela ou na legenda, a orientação de produção é publicada.
 
 1. Deixe a marcação só antes de cada fala.
-2. Confira o texto na tela e qualquer texto que sai do roteiro.
+2. Deixe a ação de cena e a direção de gravação nas seções delas.
+3. Confira o texto na tela e qualquer texto que sai do roteiro.
 
 ### Áudio pelo alcance
 

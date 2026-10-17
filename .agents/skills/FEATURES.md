@@ -594,7 +594,8 @@ How these skills relate is in `README.md`, in this folder.
 - **Description**: Write, review, or adapt a ready-to-record script for a short video
 - **Properties**:
   - Lives at `.agents/skills/definir-roteiro-de-video/SKILL.md`
-  - Writes the full lines scene by scene, with a hook in the first 3 seconds, time ranges, on-screen text, and a bracketed delivery note before each line that is never spoken, shown, or published
+  - Writes the full lines scene by scene, with a hook in the first 3 seconds, time ranges, on-screen text, and each line in a blockquote after a specific bracketed delivery note that names the speaker, tone, pace, volume, stressed word, and pause
+  - Puts the recording part first and short, and keeps delivery notes, scene actions, and recording direction out of the lines, the on-screen text, and the caption
   - Adapts a reference script by keeping its structure and narrative triggers and changing the literal theme, with real and verifiable people and a source link for every fact
   - Gives a workable way around each likely obstacle to recording, such as unlicensed audio or someone who does not want to appear
   - Ends with why the script will work, and follows `Arquétipos da marca` or marks the persona as inferred
