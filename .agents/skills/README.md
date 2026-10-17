@@ -59,6 +59,7 @@ flowchart LR
     mesclar_registro["mesclar-registro"]
     organizar_emails["organizar-emails"]
     organizar_ponto_de_contato["organizar-ponto-de-contato"]
+    planejar_calendario_de_conteudo["planejar-calendario-de-conteudo"]
     procurar_agenda["procurar-agenda"]
     procurar_artista["procurar-artista"]
     procurar_data_significativa["procurar-data-significativa"]
@@ -194,6 +195,7 @@ flowchart LR
   definir_reel_do_instagram --> criar_ideia_de_conteudo
   definir_reel_do_instagram --> definir_roteiro_de_video
   definir_reel_do_instagram --> evoluir_habilidade
+  definir_reel_do_instagram --> planejar_calendario_de_conteudo
   definir_reserva --> definir_agenda
   definir_reserva --> definir_agenda_de_popstar
   definir_reserva --> revisar_uso_do_tempo
@@ -263,6 +265,9 @@ flowchart LR
   organizar_ponto_de_contato --> definir_viagem
   organizar_ponto_de_contato --> procurar_oportunidade
   organizar_ponto_de_contato --> sincronizar_cronograma
+  planejar_calendario_de_conteudo --> criar_ideia_de_conteudo
+  planejar_calendario_de_conteudo --> definir_reel_do_instagram
+  planejar_calendario_de_conteudo --> evoluir_habilidade
   procurar_agenda --> criar_oportunidade
   procurar_agenda --> definir_agenda
   procurar_agenda --> definir_agenda_de_popstar

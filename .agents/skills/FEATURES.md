@@ -552,6 +552,7 @@ How these skills relate is in `README.md`, in this folder.
   - Lives at `.agents/skills/definir-reel-do-instagram/SKILL.md`
   - Reads the list of posts, the list of content formats, and their property names from the data mapping of the project
   - Gets the script from definir-roteiro-de-video and sends the caption wording to `Habilidade de tom de voz`
+  - Links the Reel to one or more narrative axes from the list of narrative axes, and takes the name, date, time, and place of an event from the event page
   - Writes a caption that complements the video, fits the caption limit of the format, and ends with a measurable call to action, with hashtags in their own property
   - Counts the Reels in the 7-day window of the posting date against the minimum and maximum goals of the format, and suggests another date without blocking
   - Writes the caption only to the AI caption, keeps the human caption, keeps the notice that opens the page body, and writes the script below it
@@ -874,6 +875,21 @@ How these skills relate is in `README.md`, in this folder.
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses registering the opportunity, checking whether the opportunity already exists, organizing a trip, writing the task title, the deadline, and the definition of done, checking whether the task exists, and registering someone
+
+### planejar-calendario-de-conteudo
+- **Stability**: experimental
+- **Description**: Suggest what to post, plan a week or a campaign, announce an event across posts, or check the calendar mix
+- **Properties**:
+  - Lives at `.agents/skills/planejar-calendario-de-conteudo/SKILL.md`
+  - Reads the list of posts, the list of content formats, the list of narrative axes, and the optional supporting lists from the data mapping of the project
+  - Checks what already exists, what is planned, and what can be reused before it suggests a new topic, and cites the page behind each suggestion
+  - Counts only a published status or a post URL as published
+  - Shows the mix by format against the 7-day goals, by narrative axis, and by narrative, and does not put two narratives in the same week
+  - Builds an event sequence before the event from the event page, with pieces ready for sale only
+  - Creates nothing before the person approves, and sends each approved Reel to definir-reel-do-instagram
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses writing the script, the caption, or the Reel post, registering only the idea, and publishing
 
 ### procurar-agenda
 - **Stability**: experimental
