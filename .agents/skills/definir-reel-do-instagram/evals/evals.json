@@ -1,4 +1,17 @@
 {
   "skill_name": "definir-reel-do-instagram",
-  "evals": []
+  "evals": [
+    {
+      "id": "revisar-reel-com-roteiro-curto",
+      "prompt": "Revise o gancho, o roteiro, a legenda, as hashtags e o CTA deste Reel: <link da página do Reel>",
+      "expected_output": "A habilidade lê a página inteira e para antes de gravar. Para cada item que muda, mostra o antes, o depois e o ganho. O item que não melhora fica como está. O roteiro sem autoria clara conta como humano e só muda com o sim para cada trecho. A legenda nova vai na legenda revisada pela IA, dentro do limite do formato, e a legenda humana não muda. A janela de 7 dias é contada, e o máximo de hashtags vazio no formato fica como pendência, sem limite inventado.",
+      "files": []
+    },
+    {
+      "id": "revisar-reel-com-fonte-contraditoria",
+      "prompt": "Revise o gancho, o roteiro, a legenda, as hashtags e o CTA deste Reel: <link da página do Reel>",
+      "expected_output": "A habilidade lê a página e a fonte da história antes de propor. Um fato em que a fonte se contradiz fica como está no roteiro, com uma pergunta para a pessoa, sem ser tirado nem reescrito. As marcações de tom incompletas são completadas trecho a trecho, com o antes e o depois. A contagem de hashtags escrita no corpo é conferida com a propriedade, que estava vazia. Nada é gravado antes do sim.",
+      "files": []
+    }
+  ]
 }

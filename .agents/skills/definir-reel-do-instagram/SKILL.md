@@ -4,7 +4,7 @@ description: Use essa habilidade sempre que for criar, revisar, completar ou cad
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.3.1"
   internal: true
   related:
     - criar-ideia-de-conteudo
@@ -162,6 +162,8 @@ A legenda revisada pela IA ganhou um CTA para compartilhar e deixou de repetir a
 - O Reel já existe na lista: revise essa página e não crie outra.
 - Não dá para saber quem escreveu um trecho do corpo: trate como humano.
 - A revisão não melhora um item: diga que ele fica como está.
+- A fonte se contradiz sobre um fato do roteiro: mantenha o trecho como está e pergunte. Não tire nem reescreva antes da resposta.
+- O formato não tem máximo de hashtags: não invente limite. Diga que o campo está vazio e mantenha as hashtags que já existem.
 - A pessoa só quer guardar a ideia: siga `criar-ideia-de-conteudo`.
 - O vídeo já está gravado: o roteiro registra a fala gravada e a legenda conta o que ficou de fora.
 - Quem fala não é o dono do perfil autor: as observações editoriais dizem quem fala e em que pessoa.
@@ -176,6 +178,8 @@ A legenda revisada pela IA ganhou um CTA para compartilhar e deixou de repetir a
 - O corpo da página pode abrir com um aviso para humanos e IA. Ele fica. O roteiro entra abaixo.
 - As hashtags parecem parte da legenda. Elas vão na propriedade de hashtags.
 - O limite de caracteres e a meta de 7 dias parecem fixos. Eles vêm da página do formato na lista de formatos.
+- As checagens escritas no corpo ou nas observações editoriais parecem valer. Elas podem estar velhas, como uma janela que já passou ou uma contagem de hashtags que a propriedade não tem. Recalcule pelas propriedades.
+- A URL colada pela pessoa pode ter um trecho que a coluna de URL da lista não guarda. Busque a página pelo id.
 
 ## Scripts disponíveis
 
