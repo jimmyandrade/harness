@@ -570,7 +570,8 @@ How these skills relate is in `README.md`, in this folder.
   - In an event Reel, makes the lines and the caption each say on their own what happens, the date, the time, the address, why it is worth going, and the action, without relying on comments or outside context
   - Writes a caption that complements the video, fits the caption limit of the format, and ends with one main call to action tied to the goal, naming the action and where to do it, on the same path as the call to action of the video and with a destination that exists when the post goes out
   - Puts hashtags in their own property, at the ideal count of the format without passing its maximum, or up to 5 when the format has none, each tying the topic to the niche of the profile
-  - Counts the Reels in the 7-day window of the posting date against the minimum and maximum goals of the format, and suggests another date without blocking
+  - Counts the Reels in the 7-day window that starts on the posting date against the minimum and maximum goals of the format, shows the other formats in that window, and suggests another date without blocking
+  - Compares the Reel with the posts of the 7 days before and after, so the same topic, axis, or narrative does not repeat in a row, and states the goal it serves from `Página da estratégia de conteúdo` or from the person, asking before writing when there is none
   - Writes the caption only to the AI caption, keeps the human caption, keeps the notice that opens the page body, and writes the script below it
   - Reviews an existing Reel by reading the whole page first, shows the before, the after, and the gain for each changed item, treats body text without clear authorship as human, and replaces human text only with a yes for that passage
   - Follows `Arquétipos da marca` or records the persona as inferred in the editorial notes, and does not invent the profile, the speaker, the date, or the format limits

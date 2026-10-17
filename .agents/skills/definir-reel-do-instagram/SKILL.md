@@ -4,7 +4,7 @@ description: Use essa habilidade sempre que for criar, revisar, completar ou cad
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.7.0"
   internal: true
   related:
     - criar-ideia-de-conteudo
@@ -17,11 +17,12 @@ metadata:
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Habilidade de tom de voz` vazia quer dizer que a legenda segue só esta habilidade. `Arquétipos da marca` lista os arquétipos que a voz da marca assume. Vazio quer dizer que a persona é inferida do perfil autor e anotada como inferida.
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Habilidade de tom de voz` vazia quer dizer que a legenda segue só esta habilidade. `Arquétipos da marca` lista os arquétipos que a voz da marca assume. Vazio quer dizer que a persona é inferida do perfil autor e anotada como inferida. `Página da estratégia de conteúdo` aponta a página com os objetivos de conteúdo do negócio. Vazia quer dizer que o objetivo vem só da pessoa.
 
 ```yaml
 "Habilidade de tom de voz": ""
 "Arquétipos da marca": []
+"Página da estratégia de conteúdo": ""
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -85,7 +86,11 @@ As palavras da legenda passam pela `Habilidade de tom de voz`.
 
 ### Passo 4
 
-Conte os posts do formato Reel na janela de 7 dias que começa na data da postagem. Sem data, a janela começa hoje. Compare com a meta mínima e a máxima do formato. Abaixo da mínima ou acima da máxima, diga a contagem e sugira outra data. Não bloqueie o cadastro.
+Conte os posts do formato Reel na janela de 7 dias que começa na data da postagem. Sem data, a janela começa hoje. Compare com a meta mínima e a máxima do formato. Abaixo da mínima ou acima da máxima, diga a contagem e sugira outra data. Mostre também os posts dos outros formatos na mesma janela.
+
+Compare o Reel com os posts dos 7 dias antes e depois. O mesmo tema, eixo ou narrativa em sequência pede outra data ou outro ângulo. Para conferir o mix do calendário inteiro, siga `planejar-calendario-de-conteudo`.
+
+Diga a qual objetivo o Reel serve, pela `Página da estratégia de conteúdo` ou pelo que a pessoa disse. Sem objetivo claro, pergunte antes de redigir. Não crie Reel sem intenção. Nada disso bloqueia o cadastro.
 
 ### Passo 5
 
@@ -97,7 +102,7 @@ Grave ou atualize a página na lista de posts.
 4. A legenda vai na legenda revisada pela IA. Não altere a legenda redigida por humanos.
 5. O roteiro vai no corpo da página. Se o corpo abre com um aviso para humanos e IA, mantenha o aviso e escreva abaixo dele. A legenda e as hashtags não entram no corpo.
 6. Os eixos escolhidos vão na propriedade de eixos narrativos.
-7. As observações editoriais guardam a persona, quem fala, o perfil autor, o que está pendente e as restrições de imagem e áudio.
+7. As observações editoriais guardam o objetivo, a persona, quem fala, o perfil autor, o que está pendente e as restrições de imagem e áudio.
 8. A referência e a página do evento vão nos links de referência.
 
 ### Passo 6
@@ -108,7 +113,9 @@ Valide antes de mostrar. Corrija e repita até passar.
 - [ ] As hashtags estão na propriedade, na quantidade ideal e dentro do máximo. Diga a contagem.
 - [ ] Há um CTA principal ligado ao objetivo, com ação e destino, coerente com o CTA do vídeo.
 - [ ] Nenhuma marcação de tom, ação de cena ou direção de gravação está na legenda.
-- [ ] A contagem da janela de 7 dias foi dita.
+- [ ] A contagem da janela de 7 dias foi dita, com os outros formatos.
+- [ ] O objetivo do Reel foi dito e ligado à estratégia ou ao pedido.
+- [ ] Tema, eixo ou narrativa não repetem os posts vizinhos sem motivo.
 - [ ] O status bate com a data e com a URL.
 - [ ] O Reel tem ao menos um eixo narrativo.
 - [ ] Num Reel de evento, a fala e a legenda têm, cada uma, data, horário e endereço.
@@ -197,6 +204,7 @@ A legenda revisada pela IA ganhou um CTA para compartilhar e deixou de repetir a
 - O corpo da página pode abrir com um aviso para humanos e IA. Ele fica. O roteiro entra abaixo.
 - As hashtags parecem parte da legenda. Elas vão na propriedade de hashtags.
 - O limite de caracteres e a meta de 7 dias parecem fixos. Eles vêm da página do formato na lista de formatos.
+- Uma janela dentro da meta parece bastar. Ela não diz se o Reel repete o tema do post vizinho nem a que objetivo ele serve.
 - As checagens escritas no corpo ou nas observações editoriais parecem valer. Elas podem estar velhas, como uma janela que já passou ou uma contagem de hashtags que a propriedade não tem. Recalcule pelas propriedades.
 - A URL colada pela pessoa pode ter um trecho que a coluna de URL da lista não guarda. Busque a página pelo id.
 
