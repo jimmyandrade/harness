@@ -4,11 +4,12 @@ description: Use essa habilidade sempre que for criar, revisar, completar ou cad
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.1"
+  version: "0.2.0"
   internal: true
   related:
     - criar-ideia-de-conteudo
     - definir-roteiro-de-video
+    - planejar-calendario-de-conteudo
     - evoluir-habilidade
 ---
 
@@ -28,9 +29,9 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ### Passo 1
 
-A lista de posts, a lista de formatos de conteúdo e o nome de cada propriedade vêm do mapeamento de dados do projeto, no workspace conectado. Se uma das listas não estiver nessa conexão, pare.
+A lista de posts, a lista de formatos de conteúdo, a lista de eixos narrativos e o nome de cada propriedade vêm do mapeamento de dados do projeto, no workspace conectado. Se uma das listas não estiver nessa conexão, pare.
 
-Este texto usa os conceitos do post: o assunto, o formato, o perfil social autor, o status, a data e hora da postagem, a legenda redigida por humanos, a legenda revisada pela IA, a legenda consolidada, as hashtags, as observações editoriais, os links de referência e a URL da postagem. Os status são rascunho, design existente, planejado, agendado e publicado. Do formato, usa a meta mínima e a máxima em 7 dias, o máximo de caracteres da legenda, o máximo de hashtags, a largura e a altura.
+Este texto usa os conceitos do post: o assunto, o formato, o perfil social autor, o status, a data e hora da postagem, a legenda redigida por humanos, a legenda revisada pela IA, a legenda consolidada, as hashtags, os eixos narrativos, as observações editoriais, os links de referência e a URL da postagem. Os status são rascunho, design existente, planejado, agendado e publicado. Do formato, usa a meta mínima e a máxima em 7 dias, o máximo de caracteres da legenda, o máximo de hashtags, a largura e a altura.
 
 Antes de criar, busque o assunto e o link de referência na lista de posts. Se o Reel já existe, revise essa página.
 
@@ -38,6 +39,7 @@ Antes de criar, busque o assunto e o link de referência na lista de posts. Se o
 flowchart LR
   Q{O pedido é?} -->|só guardar a ideia| I[criar-ideia-de-conteudo]
   Q -->|carrossel| X[Pare]
+  Q -->|mix, semana ou campanha| C[planejar-calendario-de-conteudo]
   Q -->|Reel| P2[Passo 2]
   P2 --> R[definir-roteiro-de-video]
   R --> P3[Passo 3]
@@ -48,6 +50,10 @@ flowchart LR
 ### Passo 2
 
 Tenha o tema, o perfil autor, quem fala, o objetivo e a data. Leia o perfil autor. A persona segue `Arquétipos da marca`. Sem arquétipo, infira do perfil autor e anote como inferida nas observações editoriais. O que não der para inferir com segurança das fontes, pergunte uma vez. Não invente perfil, narração, data, horário, local, objetivo nem limite do formato.
+
+Escolha um ou mais eixos narrativos da lista de eixos, pela descrição de cada um. O sub-eixo complementa um eixo. Não crie eixo novo.
+
+Um Reel de evento tira nome, data, horário e local da página do evento na lista de oportunidades ou de pontos de contato. Sem essa página, pergunte. A data do post é anterior à do evento.
 
 O roteiro vem de `definir-roteiro-de-video`, com a largura e a altura do formato.
 
@@ -75,8 +81,9 @@ Grave ou atualize a página na lista de posts.
 3. A data e a hora ficam vazias até a pessoa dar.
 4. A legenda vai na legenda revisada pela IA. Não altere a legenda redigida por humanos.
 5. O roteiro vai no corpo da página. Se o corpo abre com um aviso para humanos e IA, mantenha o aviso e escreva abaixo dele. A legenda e as hashtags não entram no corpo.
-6. As observações editoriais guardam a persona, quem fala, o perfil autor, o que está pendente e as restrições de imagem e áudio.
-7. A referência vai nos links de referência.
+6. Os eixos escolhidos vão na propriedade de eixos narrativos.
+7. As observações editoriais guardam a persona, quem fala, o perfil autor, o que está pendente e as restrições de imagem e áudio.
+8. A referência e a página do evento vão nos links de referência.
 
 ### Passo 6
 
@@ -87,6 +94,7 @@ Valide antes de mostrar. Corrija e repita até passar.
 - [ ] Nenhuma marcação de tom está na legenda.
 - [ ] A contagem da janela de 7 dias foi dita.
 - [ ] O status bate com a data e com a URL.
+- [ ] O Reel tem ao menos um eixo narrativo.
 
 Mostre o link da página, o status, as contagens e o que ficou pendente.
 
@@ -144,6 +152,8 @@ A legenda revisada pela IA ganhou um CTA para compartilhar e deixou de repetir a
 - Quem fala não é o dono do perfil autor: as observações editoriais dizem quem fala e em que pessoa.
 - A pessoa dá a data sem hora: o status fica em planejado.
 - A janela passa da meta máxima: diga a contagem e sugira outra data.
+- A pessoa pede para conferir o mix ou planejar a semana: siga `planejar-calendario-de-conteudo`.
+- O evento não tem página: pergunte nome, data, horário e local antes de escrever.
 
 ## Pegadinhas
 
