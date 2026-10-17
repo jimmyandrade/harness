@@ -44,6 +44,7 @@ flowchart LR
     gerenciar_estoque["gerenciar-estoque"]
     identificar_duplicata["identificar-duplicata"]
     lancar_despesa["lancar-despesa"]
+    liberar_espaco_em_disco["liberar-espaco-em-disco"]
     medir_habilidade["medir-habilidade"]
     mesclar_registro["mesclar-registro"]
     organizar_ponto_de_contato["organizar-ponto-de-contato"]
@@ -193,6 +194,7 @@ flowchart LR
   identificar_duplicata --> mesclar_registro
   lancar_despesa --> definir_ativo_imobilizado
   lancar_despesa --> definir_lancamento
+  liberar_espaco_em_disco --> evoluir_habilidade
   medir_habilidade --> evoluir_habilidade
   mesclar_registro --> definir_empresa
   mesclar_registro --> definir_grafia

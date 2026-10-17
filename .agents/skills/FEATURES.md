@@ -636,6 +636,21 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses the opportunity, the signup update, the task, the agenda, and registering the asset
 
+### liberar-espaco-em-disco
+- **Stability**: experimental
+- **Description**: Free disk space on a Mac without losing a file, only from caches that rebuild themselves
+- **Properties**:
+  - Lives at `.agents/skills/liberar-espaco-em-disco/SKILL.md`
+  - Does not sync to Notion, because it needs a shell
+  - Measures free space and swap first, then the known folders in the background, one level deeper in the largest
+  - Sorts each item into a cache that rebuilds itself, a cache its app clears better, or a file of the person, which it only sizes
+  - Deletes only after the person says yes to the list, or hands over the command for the person to run
+  - Measures again after each cleanup and reports the space freed against the baseline
+  - Explains that Activity Monitor totals bytes written since boot and that swap moves free space up and down
+- **Test Criteria**:
+  - [ ] Only caches that rebuild themselves are proposed for deletion, and the person's files show only their size
+  - [ ] Nothing is deleted before the person says yes
+
 ### medir-habilidade
 - **Stability**: experimental
 - **Description**: Measure a skill's size and the profile of a run

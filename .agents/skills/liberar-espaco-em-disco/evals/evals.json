@@ -1,0 +1,31 @@
+{
+  "skill_name": "liberar-espaco-em-disco",
+  "evals": [
+    {
+      "id": "worktree-com-disco-cheio",
+      "prompt": "Tem algum worktree que podemos limpar?",
+      "expected_output": "Mede os worktrees do app, que somam centenas de MB, e diz que nenhum se qualifica nem resolve. Mede o espaço livre e as maiores pastas, em segundo plano e sem o comando de tempo limite. Mostra onde está o espaço e o que se recria sozinho. Não apaga nada sem o sim da pessoa.",
+      "files": []
+    },
+    {
+      "id": "monitor-de-atividade-total-gravado",
+      "prompt": "(print do Monitor de Atividade, aba Disco, ordenado por bytes gravados)",
+      "expected_output": "Diz que a coluna de bytes gravados soma tudo desde que o computador ligou e que a taxa atual, perto de 1 MB/s, não mostra processo descontrolado. Explica que o espaço livre oscila com o swap. Segue medindo as pastas para achar onde estão os GB usados.",
+      "files": [
+        "files/monitor-de-atividade-disco.webp"
+      ]
+    },
+    {
+      "id": "conferir-depois-do-npm",
+      "prompt": "Verifica se mudou algo depois que eu limpei o npm",
+      "expected_output": "Mede o espaço livre e o cache do npm de novo e compara com a linha de base: o espaço livre foi de menos de 1 GB para 14 GB, e o cache, de 9,3 GB para 1,5 GB. Aponta os próximos itens que se recriam sozinhos.",
+      "files": []
+    },
+    {
+      "id": "pasta-cache-colada-do-terminal",
+      "prompt": "(saída colada do terminal: npm cache clean --force, npm ls ~/.cache respondendo (empty), e ls de ~/.cache com codex-runtimes, puppeteer, prisma, node, gh e outros)",
+      "expected_output": "Diz que npm ls só lista pacotes e não limpou a pasta. Mede cada subpasta e classifica: o runtime do Codex, o Chrome do Puppeteer e os binários do Prisma se recriam sozinhos, e o resto é pequeno demais para valer. Entrega o comando de apagar num bloco próprio para a pessoa rodar.",
+      "files": []
+    }
+  ]
+}
