@@ -4,7 +4,7 @@ description: Use essa habilidade sempre que for criar, revisar ou adaptar o rote
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   internal: true
   related:
     - evoluir-habilidade
@@ -14,11 +14,12 @@ metadata:
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Habilidade de tom de voz` vazia quer dizer que as falas seguem só esta habilidade. `Arquétipos da marca` lista os arquétipos que a voz da marca assume. Vazio quer dizer que a persona é inferida do perfil autor e sai marcada como inferida.
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Habilidade de tom de voz` vazia quer dizer que as falas seguem só esta habilidade. `Arquétipos da marca` lista os arquétipos que a voz da marca assume. Vazio quer dizer que a persona é inferida do perfil autor e sai marcada como inferida. `Referências da estratégia de conteúdo` lista a página do Notion e outras referências com a estratégia de conteúdo original da marca. Uma referência que a pessoa der no pedido vale junto. Sem nenhuma, o objetivo vem só da pessoa.
 
 ```yaml
 "Habilidade de tom de voz": ""
 "Arquétipos da marca": []
+"Referências da estratégia de conteúdo": []
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -28,7 +29,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 A saída padrão é um roteiro pronto para gravar no nicho da marca, rápido de aplicar. Não é pauta, lista de ideias nem tema solto. Esta habilidade devolve o roteiro. Guardar o roteiro num post é de quem chamou.
 
-Antes de escrever, tenha o tema, quem narra, o perfil autor, o público e o objetivo. O que as fontes não deixam inferir com segurança, pergunte uma vez. Não invente.
+Antes de escrever, leia as `Referências da estratégia de conteúdo` e tenha o tema, quem narra, o perfil autor, o público e o objetivo. O roteiro serve à estratégia que elas descrevem. O que as fontes não deixam inferir com segurança, pergunte uma vez. Não invente.
 
 ```mermaid
 flowchart LR

@@ -3,7 +3,7 @@ name: definir-campanha-de-conteudo
 description: Use essa habilidade sempre que for criar, revisar, acompanhar ou encerrar uma campanha de conteúdo, inclusive a janela, as etapas por semana, as métricas e promover uma pauta a campanha, mesmo sem dizer campanha. NÃO use para criar os posts da campanha, conferir o mix do calendário, escrever roteiro ou legenda, nem cadastrar a data significativa.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   internal: true
   related:
     - evoluir-habilidade
@@ -14,11 +14,12 @@ metadata:
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Habilidade de tom de voz` vazia quer dizer que a promessa e o CTA seguem só esta habilidade.
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Habilidade de tom de voz` vazia quer dizer que a promessa e o CTA seguem só esta habilidade. `Referências da estratégia de conteúdo` lista a página do Notion e outras referências com a estratégia de conteúdo original da marca. Uma referência que a pessoa der no pedido vale junto. Sem nenhuma, o objetivo vem só da pessoa.
 
 ```yaml
 "Formato da data com dia da semana": "terça-feira, 01/09/2026"
 "Habilidade de tom de voz": ""
+"Referências da estratégia de conteúdo": []
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -57,7 +58,7 @@ Uma pauta da lista de posts que ganhou janela própria e vários desdobramentos 
 
 Leia .agents/assets/templates/campanha-de-conteudo.md quando for gerar a saída.
 
-A estratégia fica no corpo da página: conceito, promessa, público, objetivo editorial, etapas por semana, desdobramentos por formato e canal, CTA principal, cadência e decisão editorial. Cada etapa tem a função editorial, os conteúdos sugeridos e as métricas. A promessa e o CTA passam pela `Habilidade de tom de voz`.
+O objetivo editorial parte das `Referências da estratégia de conteúdo`. A estratégia da campanha fica no corpo da página: conceito, promessa, público, objetivo editorial, etapas por semana, desdobramentos por formato e canal, CTA principal, cadência e decisão editorial. Cada etapa tem a função editorial, os conteúdos sugeridos e as métricas. A promessa e o CTA passam pela `Habilidade de tom de voz`.
 
 ### Passo 4
 

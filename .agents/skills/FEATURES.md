@@ -287,6 +287,7 @@ How these skills relate is in `README.md`, in this folder.
   - Anchors the window on a significant date, moves a past reference date to its next occurrence, and avoids overlapping another campaign or another dated narrative
   - Writes the strategy in the page body, with weekly stages that each carry an editorial role, suggested content, and metrics, and sends the promise and the call to action to `Habilidade de tom de voz`
   - Keeps the status in line with the window, and records the origin when a post topic becomes a campaign without deleting that post
+  - Starts the editorial goal from `Referências da estratégia de conteúdo`, and any reference the person gives
   - Leaves the posts of the campaign to planejar-calendario-de-conteudo
 - **Test Criteria**:
   - [x] The skill is present at that path
@@ -571,7 +572,7 @@ How these skills relate is in `README.md`, in this folder.
   - Writes a caption that complements the video, fits the caption limit of the format, and ends with one main call to action tied to the goal, naming the action and where to do it, on the same path as the call to action of the video and with a destination that exists when the post goes out
   - Puts hashtags in their own property, at the ideal count of the format without passing its maximum, or up to 5 when the format has none, each tying the topic to the niche of the profile
   - Counts the Reels in the 7-day window that starts on the posting date against the minimum and maximum goals of the format, shows the other formats in that window, and suggests another date without blocking
-  - Compares the Reel with the posts of the 7 days before and after, so the same topic, axis, or narrative does not repeat in a row, and states the goal it serves from `Página da estratégia de conteúdo` or from the person, asking before writing when there is none
+  - Compares the Reel with the posts of the 7 days before and after, so the same topic, axis, or narrative does not repeat in a row, and states the goal it serves from `Referências da estratégia de conteúdo`, a Notion page or other references with the original content strategy, or from the person, asking before writing when there is none
   - Writes the caption only to the AI caption, keeps the human caption, keeps the notice that opens the page body, and writes the script below it
   - Keeps one page per Reel, links the format and the author profile as relations, keeps counts and checks out of the page body, lists a value without a mapped property at the end instead of writing it in the body, and reads the page again after writing
   - Reviews an existing Reel by reading the whole page first, shows the before, the after, and the gain for each changed item, treats body text without clear authorship as human, and replaces human text only with a yes for that passage
@@ -605,6 +606,7 @@ How these skills relate is in `README.md`, in this folder.
   - Adapts a reference script by keeping its structure and narrative triggers and changing the literal theme, with real and verifiable people and a source link for every fact
   - Gives a workable way around each likely obstacle to recording, such as unlicensed audio or someone who does not want to appear
   - Ends with why the script will work, and follows `Arquétipos da marca` or marks the persona as inferred
+  - Reads `Referências da estratégia de conteúdo`, and any reference the person gives, before writing, so the script serves the brand's content strategy
   - Sends the wording to `Habilidade de tom de voz`, and leaves the caption and the post to the skill that called it
 - **Test Criteria**:
   - [x] The skill is present at that path
@@ -907,6 +909,7 @@ How these skills relate is in `README.md`, in this folder.
   - Reads the list of posts, the list of content formats, the list of narrative axes, and the optional supporting lists from the data mapping of the project
   - Checks what already exists, what is planned, and what can be reused before it suggests a new topic, and cites the page behind each suggestion
   - Counts only a published status or a post URL as published
+  - Uses `Referências da estratégia de conteúdo`, and any reference the person gives, as a source behind each suggestion
   - Shows the mix by format against the 7-day goals, by narrative axis, and by narrative, and does not put two narratives in the same week
   - Treats a content campaign as occupying its window from start to end, even before it has posts, and assigns a post to a campaign by its relation when the mapping has one, or by its date inside the window
   - Builds an event sequence before the event from the event page, with pieces ready for sale only, and each post says on its own what happens, the date, the time, the address, why it is worth going, and the action

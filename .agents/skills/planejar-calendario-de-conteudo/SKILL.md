@@ -4,7 +4,7 @@ description: Use essa habilidade sempre que for sugerir o que postar, planejar u
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.6.0"
   internal: true
   related:
     - criar-ideia-de-conteudo
@@ -17,12 +17,13 @@ metadata:
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Empresa do negócio` é o nome do registro do próprio negócio na lista de empresas. Os perfis padrão, um por canal, saem dos perfis sociais dessa empresa. `Perfis por praça` com `sim` quer dizer que a marca tem um perfil por praça: o perfil sai da lista de perfis sociais, pela praça, conforme o mapeamento de dados do projeto.
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Empresa do negócio` é o nome do registro do próprio negócio na lista de empresas. Os perfis padrão, um por canal, saem dos perfis sociais dessa empresa. `Perfis por praça` com `sim` quer dizer que a marca tem um perfil por praça: o perfil sai da lista de perfis sociais, pela praça, conforme o mapeamento de dados do projeto. `Referências da estratégia de conteúdo` lista a página do Notion e outras referências com a estratégia de conteúdo original da marca. Uma referência que a pessoa der no pedido vale junto. Sem nenhuma, o objetivo vem só da pessoa.
 
 ```yaml
 "Formato da data com dia da semana": "terça-feira, 01/09/2026"
 "Empresa do negócio": ""
 "Perfis por praça": "não"
+"Referências da estratégia de conteúdo": []
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -52,7 +53,7 @@ Planejamento não é improviso. Antes de sugerir pauta nova, levante na janela p
 
 1. O que já existe na lista de posts e em que status.
 2. O que dá para reaproveitar: ideia de conteúdo guardada, post em design existente ou em rascunho.
-3. O que sustenta a decisão: datas significativas, pontos de contato, viagens, coleções, drops, peças e feedbacks.
+3. O que sustenta a decisão: as `Referências da estratégia de conteúdo`, datas significativas, pontos de contato, viagens, coleções, drops, peças e feedbacks.
 
 Cada sugestão cita a página que a sustenta. Só o status publicado, ou a URL da postagem, prova que o post saiu. Agendado tem data e hora. Planejado, design existente e rascunho são intenção. Registro sem status não conta como publicado.
 

@@ -4,7 +4,7 @@ description: Use essa habilidade sempre que for criar, revisar, completar ou cad
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.11.0"
+  version: "0.12.0"
   internal: true
   related:
     - criar-ideia-de-conteudo
@@ -17,12 +17,12 @@ metadata:
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Habilidade de tom de voz` vazia quer dizer que a legenda segue só esta habilidade. `Arquétipos da marca` lista os arquétipos que a voz da marca assume. Vazio quer dizer que a persona é inferida do perfil autor e anotada como inferida. `Página da estratégia de conteúdo` aponta a página com os objetivos de conteúdo do negócio. Vazia quer dizer que o objetivo vem só da pessoa. `Empresa do negócio` é o nome do registro do próprio negócio na lista de empresas. Os perfis padrão, um por canal, saem dos perfis sociais dessa empresa. `Perfis por praça` com `sim` quer dizer que a marca tem um perfil por praça: o perfil sai da lista de perfis sociais, pela praça, conforme o mapeamento de dados do projeto.
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Habilidade de tom de voz` vazia quer dizer que a legenda segue só esta habilidade. `Arquétipos da marca` lista os arquétipos que a voz da marca assume. Vazio quer dizer que a persona é inferida do perfil autor e anotada como inferida. `Referências da estratégia de conteúdo` lista a página do Notion e outras referências com a estratégia de conteúdo original da marca. Uma referência que a pessoa der no pedido vale junto. Sem nenhuma, o objetivo vem só da pessoa. `Empresa do negócio` é o nome do registro do próprio negócio na lista de empresas. Os perfis padrão, um por canal, saem dos perfis sociais dessa empresa. `Perfis por praça` com `sim` quer dizer que a marca tem um perfil por praça: o perfil sai da lista de perfis sociais, pela praça, conforme o mapeamento de dados do projeto.
 
 ```yaml
 "Habilidade de tom de voz": ""
 "Arquétipos da marca": []
-"Página da estratégia de conteúdo": ""
+"Referências da estratégia de conteúdo": []
 "Empresa do negócio": ""
 "Perfis por praça": "não"
 "Modo de aprendizado": "perguntar"
@@ -94,7 +94,7 @@ Conte os posts do formato Reel na janela de 7 dias que começa na data da postag
 
 Compare o Reel com os posts dos 7 dias antes e depois. O mesmo tema, eixo ou narrativa em sequência pede outra data ou outro ângulo. Para conferir o mix do calendário inteiro, siga `planejar-calendario-de-conteudo`.
 
-Diga a qual objetivo o Reel serve, pela `Página da estratégia de conteúdo` ou pelo que a pessoa disse. Sem objetivo claro, pergunte antes de redigir. Não crie Reel sem intenção. Nada disso bloqueia o cadastro.
+Diga a qual objetivo o Reel serve, pelas `Referências da estratégia de conteúdo` ou pelo que a pessoa disse. Sem objetivo claro, pergunte antes de redigir. Não crie Reel sem intenção. Nada disso bloqueia o cadastro.
 
 ### Passo 5
 
