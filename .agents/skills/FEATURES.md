@@ -717,6 +717,8 @@ How these skills relate is in `README.md`, in this folder.
   - Reads the protected account in recovery copies, and keeps the security filter thematic rather than automatically personal
   - Preserves inbox and read state on security alerts, verifies applied labels and filters, and does not promise automatic archiving after human reading
   - Keeps account intent and unwanted newsletter preferences in project parameters, without copying email bodies or financial identifiers into the skill
+  - Reads the contexts and the context of each organization from project parameters, so a past or paused professional activity is not classified as current work
+  - Files automatic confirmations with no pending action, such as unsubscribes, under an archive subfolder by type without asking whether to keep them
 - **Test Criteria**:
   - [x] The skill is present and one user-requested read-only exploratory case is recorded
   - [x] User-provided acceptance examples are recorded in Portuguese Gherkin

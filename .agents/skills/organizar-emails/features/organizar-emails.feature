@@ -22,3 +22,18 @@ Funcionalidade: Organizar e-mails a partir de decisões confirmadas
       Quando a etiqueta é aplicada
       Então a mensagem permanece na entrada com a etiqueta de segurança
       E o estado de leitura anterior é preservado
+
+  Regra: Trabalho é só o trabalho atual
+    Exemplo: Descadastro de um software buscado para um escritório antigo
+      Dado que as instruções do projeto dão ao antigo escritório o contexto de histórico profissional
+      E que a confirmação de descadastro veio de um software buscado para esse escritório
+      Quando a mensagem é classificada
+      Então ela recebe o contexto de histórico profissional
+      E não recebe o contexto de trabalho
+
+  Regra: Confirmação automática vai para Arquivos sem pergunta
+    Exemplo: Confirmação de descadastro já concluído
+      Dado que a pessoa já se descadastrou da lista
+      Quando a confirmação de descadastro é classificada
+      Então o destino é Arquivos/Descadastros
+      E o agente não pergunta se vale conservar a mensagem

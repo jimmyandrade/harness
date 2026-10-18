@@ -3,7 +3,7 @@ name: organizar-emails
 description: Organiza e-mails por BASB e separa pessoal, trabalho e misto. Usada quando a pessoa quer triar a caixa, etiquetar ou configurar filtros. Não serve para responder mensagens, lançar despesas nem acompanhar veículos.
 metadata:
   author: jimmyandrade
-  version: "0.1.1"
+  version: "0.2.0"
   internal: true
   notion: "false"
   related:
@@ -19,8 +19,14 @@ Leia os valores nas instruções do projeto, na entrada desta habilidade. Na aus
 
 ```yaml
 "Contas": []
+"Contextos":
+  - "Pessoal"
+  - "Trabalho"
+  - "Misto"
+"Organizações": []
 "Comunicações indesejadas": []
 "Etiqueta de segurança": "Áreas/Segurança digital"
+"Destino de confirmações automáticas": "Arquivos/{tipo}"
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -44,20 +50,26 @@ Preserve uma classificação explicitamente confirmada para aquele caso e seu mo
 
 Use a finalidade original da viagem, compra ou obrigação. A separação financeira atual não transforma uma dívida histórica mista em pessoal. Uma intenção de abrir conta PJ não é conta criada. O remetente e a titularidade PF/PJ, isoladamente, não determinam o uso.
 
+O contexto é um dos `Contextos`. `Organizações` diz o contexto de cada organização. `Trabalho` é só o trabalho atual: atividade profissional antiga ou parada recebe o contexto que `Organizações` dá a ela. Uma organização ausente de `Organizações` não vira `Trabalho` por padrão; pergunte. A finalidade de uma caixa em `Contas` também não decide o contexto da mensagem.
+
 ```mermaid
 flowchart LR
   A{Objeto e finalidade conhecidos?} -->|não| Q[Consultar contexto e perguntar o motivo à pessoa]
   Q --> R[Incorporar critério confirmado à árvore]
   R --> A
   A -->|sim| B{Finalidade confirmada}
+  B -->|organização listada| O[Contexto dado em Organizações]
   B -->|pessoal| P[Contexto/Pessoal]
-  B -->|trabalho| T[Contexto/Trabalho e empresa ou projeto identificado]
+  B -->|trabalho atual| T[Contexto/Trabalho e organização]
   B -->|ambas| M[Contexto/Misto sem rateio inventado]
+  B -->|organização fora da lista| Q
 ```
 
 ### Passo 4
 
 Mantenha contexto e destino PARA como eixos independentes de BASB. Preserve etiquetas válidas; não transforme toda newsletter em referência. Consulte `Comunicações indesejadas` para reconhecer assinaturas que a pessoa já rejeitou, sem repetir cancelamento ou criar bloqueio por esse relato sozinho.
+
+Confirmação automática sem ação pendente, como descadastro ou inscrição em lista, vai para `Destino de confirmações automáticas`, com o tipo no lugar de `{tipo}`, no plural: `Arquivos/Descadastros`. Não pergunte se vale conservá-la. Pergunte o contexto só quando a resposta mudar o que a pessoa faz depois.
 
 ```mermaid
 flowchart LR
@@ -126,6 +138,14 @@ Se você classificar um banco ou uma concessionária inteira como pessoal, a pr�
 2. Pergunte o motivo que sustenta a classificação.
 3. Tire a generalização do filtro e preserve a decisão apenas no caso confirmado.
 
+### Atividade antiga como trabalho
+
+Se você classificar como `Trabalho` uma mensagem de atividade profissional antiga, o trabalho atual se mistura com o histórico.
+
+1. Leia o contexto da organização em `Organizações`.
+2. Organização fora da lista: pergunte, sem presumir `Trabalho`.
+3. Registre a correção da pessoa como critério do caso.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
@@ -142,6 +162,10 @@ A obrigação continua mista. A intenção de contratar pela PJ no futuro não m
 
 A conversa recebe a etiqueta de segurança e permanece na entrada, sem mudança de leitura. A pessoa pode arquivar após ler; o agente não promete observar esse momento automaticamente.
 
+### Confirmação de descadastro de um software que a pessoa buscava para um escritório que já fechou
+
+O contexto é o que `Organizações` dá ao antigo escritório, não `Trabalho`. O destino é `Arquivos/Descadastros`, sem perguntar se vale conservar. O descadastro não é repetido.
+
 ## Casos-limite
 
 - Uma conversa mistura finalidades: conserve o contexto misto sem repartir valores sem fonte.
@@ -155,6 +179,7 @@ A conversa recebe a etiqueta de segurança e permanece na entrada, sem mudança 
 - A consulta pode devolver a mensagem já lida antes de qualquer ação do agente; não atribua essa leitura à pessoa nem a desfaça por suposição.
 - A ferramenta de etiqueta e a leitura do filtro podem mostrar identificadores distintos; a lista disponível pode não expor a correspondência necessária para verificar o nome no filtro.
 - Criar um filtro não classifica retroativamente todas as conversas nem agenda uma ação depois que alguém lê.
+- Uma caixa de uma atividade antiga pode ter finalidade de trabalho em `Contas` e, mesmo assim, não ser o trabalho atual. `Organizações` decide o contexto.
 
 ## Scripts disponíveis
 
