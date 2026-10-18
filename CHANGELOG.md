@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.36.0](https://github.com/jimmyandrade/harness/compare/v0.35.0...v0.36.0) (2026-10-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* descriptions written by this skill no longer start with "Use essa habilidade sempre que".
+
+### Features
+
+* stop requiring "Use essa habilidade sempre que" in skill descriptions ([#220](https://github.com/jimmyandrade/harness/issues/220)) ([afc16a0](https://github.com/jimmyandrade/harness/commit/afc16a076d9428e99aea9cc576ed2a610158fa5f))
+
 ## [0.35.0](https://github.com/jimmyandrade/harness/compare/v0.34.0...v0.35.0) (2026-10-18)
 
 
