@@ -3,8 +3,7 @@ name: criar-commit
 description: Use essa habilidade sempre que terminar um trabalho que mudou o repositório ou for commitar, separar commits ou escrever a mensagem, mesmo sem dizer commit. NÃO use para push, abrir PR, rebase nem merge (use criar-pull-request).
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
-  notion: "false"
+  version: "0.6.0"
 ---
 
 # Criar commit
@@ -105,6 +104,7 @@ Um commit `fix:` com o assunto dizendo o porquê da troca do texto. Sem teste no
 - A mudança está na `Branch base` sem commit e `Commit direto na base` é `não`: leve as mudanças para a branch nova antes de commitar.
 - Commit cujo assunto começa com `merge:`: não crie. A base entra por rebase, em `criar-pull-request`.
 - O projeto não tem `Comando de testes` nem `Comando de build`: diga na resposta que nada foi verificado antes do commit.
+- O pedido vem do Notion, sem terminal: crie a branch do Passo 2 e faça o commit pela integração do GitHub, com a mensagem do Passo 6. Testes, build e lint não rodam no chat: quem verifica são os checks do CI no PR. Siga para `criar-pull-request`.
 
 ## Pegadinhas
 

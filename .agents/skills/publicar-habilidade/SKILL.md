@@ -3,7 +3,7 @@ name: publicar-habilidade
 description: Use essa habilidade sempre que o pedido vier do Notion para criar, ativar, alterar, renomear, versionar, publicar, excluir, restaurar, revisar ou reorganizar uma habilidade. No Cursor, no Claude ou na sessão do repositório, segue o fluxo de commit do projeto. NÃO use para editar a página ou o banco Habilidades, nem para mesclar na mesma solicitação.
 metadata:
   author: jimmyandrade
-  version: "0.8.0"
+  version: "0.9.0"
   related:
     - evoluir-habilidade
     - criar-commit
@@ -33,7 +33,7 @@ Se a sessão é Cursor, Claude ou o repositório, siga `Commit direto na base`. 
 ### Passo 2
 
 No caminho do Notion, a mudança fica só no GitHub, numa branch própria. Não faça commit na branch principal.
-O assunto do commit é em inglês, no Conventional Commits. Se a mudança afeta uma habilidade, o escopo é o nome dela, como `fix(resumir-reuniao): keep the meeting date`.
+Faça o commit seguindo `criar-commit`. Se a mudança afeta uma habilidade, o escopo é o nome dela, como `fix(resumir-reuniao): keep the meeting date`.
 
 ### Passo 3
 
@@ -97,7 +97,7 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### no Notion: cria a skill de publicar habilidade.
 
-não editei a página. Abri uma branch, fiz o commit em inglês e entreguei o link do pull request. Parei sem mesclar.
+não editei a página. Abri uma branch, fiz o commit seguindo `criar-commit` e entreguei o link do pull request. Parei sem mesclar.
 
 ### no Notion: crie uma habilidade para buscar compromissos na agenda.
 
