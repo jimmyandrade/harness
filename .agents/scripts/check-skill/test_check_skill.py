@@ -385,3 +385,26 @@ class OpportunityGroupTest(unittest.TestCase):
             '    "criar-oportunidade":\n      "Considerar grupos de oportunidades": "sim"\n'
         )
         self.assertEqual(len(self.errors(parameters, {"opportunity": "Nome"})), 1)
+
+
+class DescriptionOpeningTest(unittest.TestCase):
+    def setUp(self) -> None:
+        self.tmp = tempfile.TemporaryDirectory()
+        self.project = Path(self.tmp.name)
+        (self.project / ".agents" / "skills" / "abrir-pedido").mkdir(parents=True)
+        self.checker = load_checker(self.project)
+        self.path = self.project / ".agents" / "skills" / "abrir-pedido" / "SKILL.md"
+
+    def tearDown(self) -> None:
+        self.tmp.cleanup()
+
+    def messages(self, description: str) -> list[str]:
+        front = [(2, "name: abrir-pedido"), (3, f"description: {description}")]
+        errors = self.checker.spec_errors(front, self.path, "abrir-pedido", description, False)
+        return [error.message for error in errors if "description" in error.message]
+
+    def test_should_accept_a_description_in_the_third_person(self) -> None:
+        self.assertEqual(self.messages("Abre pedidos de compra. Usada quando chega um pedido novo. Não serve para pagar."), [])
+
+    def test_should_still_accept_the_old_opening_until_every_skill_moves(self) -> None:
+        self.assertEqual(self.messages("Use essa habilidade sempre que chegar um pedido. NÃO use para pagar."), [])

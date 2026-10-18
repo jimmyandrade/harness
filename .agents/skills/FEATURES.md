@@ -546,7 +546,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Properties**:
   - Lives at `.agents/skills/descrever-habilidade-ou-schema/SKILL.md`
   - Does not write the skill body, grade output quality, describe a product, or write the skill page in Notion
-  - Starts every description with "Use essa habilidade sempre que", which is the objective the Notion router searches
+  - Writes every description in the third person: what the skill does, "Usada quando" with the intent of whoever asks, and "Não serve para", as ADR 0013 decides
   - Keeps the triggers in the description, because Notion automatic use loads that property and decides from it whether to load the skill
   - Requires a trigger suite with an obvious task and a paraphrased request that should load the skill, and an unrelated topic plus a near miss the skill does not cover that should not
   - On undertriggering, when the skill does not load, the person enables it by hand, or asks when to use it, adds detail and the technical term
