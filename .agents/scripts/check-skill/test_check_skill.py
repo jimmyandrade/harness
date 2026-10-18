@@ -265,6 +265,8 @@ class RemovedSkillSummaryTest(unittest.TestCase):
 
 class InstructionsVersionSummaryTest(unittest.TestCase):
     def setUp(self) -> None:
+        # Without these, the cells carry no links, as outside GitHub Actions.
+        self.github = {key: os.environ.pop(key) for key in ("GITHUB_SERVER_URL", "GITHUB_REPOSITORY") if key in os.environ}
         self.tmp = tempfile.TemporaryDirectory()
         self.project = Path(self.tmp.name).resolve()
         (self.project / ".agents").mkdir()
@@ -274,6 +276,7 @@ class InstructionsVersionSummaryTest(unittest.TestCase):
         self.tmp.cleanup()
         for key in ("HARNESS_ROOT", "CHECK_SKILL_BASE", "CHECK_SKILL_HEAD"):
             os.environ.pop(key, None)
+        os.environ.update(self.github)
 
     def git(self, *args: str) -> str:
         return subprocess.run(
