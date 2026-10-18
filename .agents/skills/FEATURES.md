@@ -642,6 +642,21 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The description refuses the opportunity, the signup update, the task, the agenda, and registering the asset
   - [ ] A confirmed or inferable business expense is recorded after an existence search; an existing expense is reused
 
+### liberar-espaco-em-disco
+- **Stability**: experimental
+- **Description**: Free disk space on a Mac without losing a file, only from caches that rebuild themselves
+- **Properties**:
+  - Lives at `.agents/skills/liberar-espaco-em-disco/SKILL.md`
+  - Does not sync to Notion, because it needs a shell
+  - Measures free space and swap first, then the known folders in the background, one level deeper in the largest
+  - Sorts each item into a cache that rebuilds itself, a cache its app clears better, or a file of the person, which it only sizes
+  - Never deletes by itself: hands over the delete command for the person to run, even after a yes
+  - Measures again after each cleanup and reports the space freed against the baseline
+  - Explains that Activity Monitor totals bytes written since boot and that swap moves free space up and down
+- **Test Criteria**:
+  - [ ] Only caches that rebuild themselves are proposed for deletion, and the person's files show only their size
+  - [ ] The agent hands over the delete command and deletes nothing itself
+
 ### medir-habilidade
 - **Stability**: experimental
 - **Description**: Measure a skill's size and the profile of a run
