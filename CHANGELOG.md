@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.41.0](https://github.com/jimmyandrade/harness/compare/v0.40.1...v0.41.0) (2026-10-18)
+
+
+### Features
+
+* **organizar-emails:** move email triage skill to core ([#248](https://github.com/jimmyandrade/harness/issues/248)) ([87acb1f](https://github.com/jimmyandrade/harness/commit/87acb1fcbb46cc816c082c7c8de27cdd0c1ba356))
+
 ## [0.40.1](https://github.com/jimmyandrade/harness/compare/v0.40.0...v0.40.1) (2026-10-18)
 
 
