@@ -6,6 +6,12 @@
       "prompt": "Deixar uma tag usando BASB, não arquivar e nem marcar como lida até que eu veja a mensagem. Mas o interessante é que depois que eu ler a mensagem, eu arquive, caso precise de investigação futura.\n\nValidar agora com um agente separado, somente leitura e sem alterar o Gmail",
       "expected_output": "Na execução exploratória com as conversas de segurança fornecidas, apresentar somente o plano, diferenciar conta protegida de caixa de recuperação, preservar a classificação explicitamente confirmada para o caso, não reconhecer automaticamente todos os eventos de uma conversa, preservar entrada e leitura existentes e declarar a limitação de correspondência entre IDs das etiquetas do filtro. Não alterar o Gmail nem alegar benchmark ou validação de produção.",
       "files": []
+    },
+    {
+      "id": "descadastro-de-software-do-escritorio-antigo",
+      "prompt": "O ZWCAD é um software de CAD gratuito que eu estava tentando baixar para trabalhar no meu escritório de design de interiores, para substituir o AutoCAD. Mas já fizemos unsubscribe dele.",
+      "expected_output": "Na execução só de leitura, a confirmação de descadastro recebe o contexto que as instruções do projeto dão ao antigo escritório de design de interiores, que não é o trabalho atual: o agente não a classifica como Trabalho. O destino PARA é Arquivos/Descadastros, sem perguntar se vale conservar a mensagem. O descadastro não é repetido e a conta não é alterada.",
+      "files": []
     }
   ]
 }
