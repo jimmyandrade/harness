@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.40.0](https://github.com/jimmyandrade/harness/compare/v0.39.0...v0.40.0) (2026-10-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* `Commit direto na base` accepts only `nunca`, `só no terminal`, or `sempre`, and `Exigir aprovação de outra pessoa` only `nunca`, `só sem terminal`, or `sempre`. A project that sets `sim` or `não` must move to the new values.
+
+### Features
+
+* name the environment in the direct-commit and approval parameters ([#244](https://github.com/jimmyandrade/harness/issues/244)) ([36970b7](https://github.com/jimmyandrade/harness/commit/36970b7169b45b38271ffdb2fc664816625b6162))
+
 ## [0.39.0](https://github.com/jimmyandrade/harness/compare/v0.38.0...v0.39.0) (2026-10-18)
 
 
