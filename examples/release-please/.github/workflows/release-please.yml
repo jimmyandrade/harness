@@ -5,6 +5,7 @@ on:
     branches: [main]
 
 permissions:
+  actions: write
   contents: write
   pull-requests: write
 
@@ -21,6 +22,24 @@ jobs:
         with:
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
+      # A pull request that GITHUB_TOKEN opens or updates gets its pull_request
+      # runs held until someone with write access approves them. A
+      # workflow_dispatch runs at once, so the checks run on the release pull request.
+      # skills.yml is the CI workflow of examples/business-harness; name yours.
+      - name: Run CI on the release pull request
+        # Without a release pull request, `pr` is empty. The branch is read in the
+        # script: the job failed when fromJSON in the env got an empty `pr`.
+        if: steps.release.outputs.pr != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ steps.release.outputs.pr }}
+        run: |
+          branch=$(jq -r .headBranchName <<<"$PR")
+          if [ -z "$branch" ] || [ "$branch" = null ]; then
+            echo "::error::The release pull request output has no headBranchName: $PR"
+            exit 1
+          fi
+          gh workflow run skills.yml --repo "$GITHUB_REPOSITORY" --ref "$branch"
 
   # The release above does not fire `release` in other workflows, so this job
   # publishes the skills of the new release to Notion.

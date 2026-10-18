@@ -52,16 +52,16 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
 - **Description**: Renovate preset that keeps a repository and its pins of the core harness current
 - **Properties**:
   - Preset at `default.json`, extended as `github>jimmyandrade/harness`
-  - Groups every pin of the core harness, in workflows, `package.json`, `.claude-plugin/marketplace.json`, and `.claude/settings.json`, into one `harness core` pull request
-  - Moves a release-tag pin of jimmyandrade/vocabulary in `package.json` in one `vocabulary` pull request, as soon as a release exists
+  - Groups every pin of the core harness, in workflows, `package.json`, `.claude-plugin/marketplace.json`, and `.claude/settings.json`, and every release-tag pin of jimmyandrade/vocabulary in `package.json`, into one `core harness and vocabulary` pull request, as soon as a release exists
+  - Merges that pull request by itself for a minor or patch release, once its checks pass
   - A major update waits for approval on the Dependency Dashboard
   - Names the Dependency Dashboard issue `chore(deps): dependency dashboard`, a Conventional Commits title matching the `chore(deps)` and `fix(deps)` pull requests it lists
 - **Test Criteria**:
   - [x] The marketplace regex reads the repository and the tag of a `github` plugin source
   - [x] A second regex reads the repository and the tag of a `url` plugin source on github.com, as in the business marketplace
   - [x] The same regex reads the pin in `.claude/settings.json`, and `.claude/settings.local.json` is not matched
-  - [ ] A release of the core opens one `harness core` pull request in a business harness
-  - [ ] A release of jimmyandrade/vocabulary opens one `vocabulary` pull request in a business harness that pins a tag
+  - [x] A release of the core or of jimmyandrade/vocabulary opens one `core harness and vocabulary` pull request in a business harness
+  - [x] That pull request merges by itself once its checks pass, for a minor or patch release
 
 ### skill-graph
 - **Stability**: experimental

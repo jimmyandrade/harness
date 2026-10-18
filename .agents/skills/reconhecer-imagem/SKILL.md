@@ -1,14 +1,15 @@
 ---
 name: reconhecer-imagem
-description: Use essa habilidade sempre que for reconhecer o que uma imagem diz, para passar esse texto a outra habilidade, mesmo sem dizer imagem. Um pedido realizado segue a inscrição depois da edição. Um print de pessoa ou de perfil segue a grafia. NÃO use para cadastrar a oportunidade, organizar o ponto de contato, criar a tarefa, nem quando o texto já está escrito.
+description: Use essa habilidade sempre que for ler texto de imagem, mesmo sem dizer imagem. Nota, recibo ou transação segue a despesa; pedido de evento confirmado segue a inscrição; pessoa ou perfil segue a grafia. NÃO use para cadastrar a entidade, criar tarefa nem quando o texto já está escrito.
 compatibility: Precisa de Python.
 metadata:
   author: jimmyandrade
-  version: "0.10.0"
+  version: "0.11.0"
   related:
     - criar-oportunidade
     - definir-grafia
     - definir-inscricao
+    - lancar-despesa
     - procurar-oportunidade
 ---
 
@@ -34,11 +35,11 @@ Peça a imagem. Se o texto já estiver escrito, pare. Esta habilidade não entra
 
 Escolha o leitor no primeiro passo. Não procure o script no disco. Ele só está com o repositório. Se estiver, rode só ele. Não leia o arquivo. A primeira vez prepara o leitor. As seguintes reaproveitam o que já foi preparado. Não usa a rede.
 Se o script não estiver, ou se falhar, leia a imagem. Não rode de novo. Não rode o leitor do sistema para conferir. No Notion ele não está. Não instale. Não peça para a pessoa digitar o cartaz.
-Use só o que a leitura trouxe. Não envie a imagem adiante.
+Use só o que a leitura trouxe. Encaminhe o texto para a próxima habilidade, sem novo reconhecimento. Preserve o original como evidência para anexar ao lançamento financeiro; não o envie para outra leitura.
 
 ### Passo 3
 
-Tire o que é do aparelho ou do anúncio em volta: a hora da tela, a bateria, as curtidas, "Patrocinado", "Há N horas" e os botões de navegação. Mantenha o cartaz e a legenda. Uma sílaba que não forma palavra não é fato. Não invente o que a leitura não trouxe.
+Tire o que é do aparelho ou do anúncio em volta: a hora da tela, a bateria, as curtidas, "Patrocinado", "Há N horas" e os botões de navegação. Mantenha o cartaz, a legenda e os dados do documento ou da transação. A hora da transação não é o relógio da tela. Uma sílaba que não forma palavra não é fato. Não invente o que a leitura não trouxe.
 
 ### Passo 4
 
@@ -47,7 +48,9 @@ Entregue esse texto para a habilidade seguinte. Não faça o trabalho dela aqui.
 ```mermaid
 flowchart LR
   A{A pessoa nomeou a seguinte?} -->|sim| B[O texto é a entrada dela]
-  A -->|não| C{Pedido realizado ou confirmado?}
+  A -->|não| M{Nota, recibo, cobrança ou transação?}
+  M -->|sim| N[lancar-despesa]
+  M -->|não| C{Pedido de evento realizado ou confirmado?}
   C -->|sim| D[procurar-oportunidade e depois definir-inscricao]
   C -->|não| E{Nome da edição e data do evento?}
   E -->|sim| F[procurar-oportunidade]
@@ -60,6 +63,8 @@ flowchart LR
 ```
 
 Se a habilidade seguinte não veio na lista desta conversa, ela continua sendo a seguinte. Não diga que ela não existe nem que não está disponível. Entregue o texto e pergunte se a pessoa quer chamá-la pelo nome.
+
+A destinatária financeira cuida da busca e do lançamento, sem duplicar a compra. Não faça esse trabalho aqui.
 
 Chame a busca sem perguntar. Se ela não achar a edição, siga `criar-oportunidade` na mesma resposta. O cadastro é dela, não desta habilidade. Não grave a inscrição nesta habilidade. Não escolha organizar o ponto de contato nem criar a tarefa. A resposta não pede para nomear a habilidade nem fala de créditos.
 
@@ -86,8 +91,8 @@ Se você tratar a hora da tela, "Patrocinado" ou "Há N horas" como dado do even
 Se você cadastrar a oportunidade sem a busca, ou parar no texto quando ele já tem nome da edição e data, a pessoa ou ganha uma duplicata ou fica sem a busca e sem o cadastro.
 
 1. Esse texto entra em `procurar-oportunidade`, sem perguntar. Se a edição não existe, siga `criar-oportunidade`. Se existe, mostre a página e pare.
-2. Pedido realizado ou confirmado segue `definir-inscricao` depois da edição. Não grave a inscrição aqui.
-3. Se a pessoa nomeou outra habilidade, o texto é a entrada dela. Se o texto não é uma oportunidade e ela não nomeou, entregue o texto e pare.
+2. Pedido de evento realizado ou confirmado segue `definir-inscricao` depois da edição. Não grave a inscrição aqui.
+3. Não trate uma nota ou transação de compra como inscrição em evento. O fluxo tem uma destinatária financeira.
 
 ### Leitor inventado
 
@@ -113,6 +118,14 @@ Se você fechar pedindo para mencionar a habilidade na próxima vez, a pessoa re
 2. Não peça para nomear a habilidade.
 3. Não fale de créditos.
 
+### Despesa parada no texto
+
+Se você só transcrever uma nota ou transação, a pessoa pode achar que a despesa já foi lançada.
+
+1. Entregue o texto à destinatária financeira do fluxo.
+2. Não diga que lançou antes da gravação confirmada.
+3. Não mande o original para outra leitura; preserve-o como evidência.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
@@ -129,6 +142,10 @@ li a imagem. Saíram a hora da tela, as curtidas e "Há 3 horas". O texto trouxe
 
 o script não estava neste ambiente. Não rodei o leitor do sistema. Li a imagem. Saíram a hora da tela, "Há 18 horas" e "Patrocinado". O texto entrou em `procurar-oportunidade`. Não pedi para nomear a habilidade.
 
+### a foto de uma nota de tecido e o print da mesma compra no cartão, sem pedido escrito.
+
+Li os dados e entreguei o texto a `lancar-despesa`, que busca o gasto antes de criar. Os originais ficaram como evidências da mesma compra, sem novo reconhecimento. Não parei na transcrição nem tratei a compra como inscrição.
+
 ## Casos-limite
 
 - Não há imagem: peça. Não invente o texto.
@@ -137,9 +154,9 @@ o script não estava neste ambiente. Não rodei o leitor do sistema. Li a imagem
 - O script está neste ambiente: rode o script. Não leia o arquivo.
 - O script falhou: leia a imagem. Não rode de novo, não instale e não conserte o script.
 - A pessoa não nomeou a habilidade seguinte e o texto tem nome da edição e data: o texto entra em `procurar-oportunidade`. Se a edição não existe, siga `criar-oportunidade`. Se existe, mostre a página e não crie outra.
-- A leitura é um pedido realizado ou confirmado: depois da edição, siga `definir-inscricao`. Não pare na oportunidade.
+- A leitura é um pedido de evento realizado ou confirmado: depois da edição, siga `definir-inscricao`. Não confunda com compra em nota ou transação.
 - A leitura é uma pessoa ou um perfil social: siga `definir-grafia`. Não pare no texto.
-- A pessoa não nomeou e o texto não é uma oportunidade, uma pessoa nem um perfil: entregue o texto e pare.
+- Não há destinatária no fluxo e a pessoa não nomeou a seguinte: entregue o texto e pare.
 - A habilidade seguinte não veio na lista desta conversa: entregue o texto e pergunte se a pessoa quer chamá-la pelo nome. Não diga que não está disponível.
 - A pessoa nomeou a habilidade seguinte: o texto é a entrada dela. O trabalho dela não é feito aqui.
 
@@ -147,7 +164,7 @@ o script não estava neste ambiente. Não rodei o leitor do sistema. Li a imagem
 
 - "Há 18 horas" parece a data do evento. É a idade do post.
 - "Patrocinado" e o relógio do celular parecem parte do cartaz. Não são.
-- A imagem parece o jeito de mostrar o post no workspace. Ela gasta o crédito. Segue só o texto.
+- Anexar o original a um lançamento não é pedir novo reconhecimento. Para leitura, segue só o texto.
 - Instalar o leitor parece cuidado. Neste ambiente o instalador não existe. A imagem é a leitura que resta.
 - Procurar o script no disco parece conferir. Ele só está com o repositório.
 - O leitor do sistema parece estar no Notion. O comando não existe. Leia a imagem. Não rode para conferir.
@@ -156,7 +173,7 @@ o script não estava neste ambiente. Não rodei o leitor do sistema. Li a imagem
 - Uma sílaba solta, como a que o script leu no logo, parece um nome. Não é.
 - Parar no texto parece obedecer. Com nome da edição e data, a busca de existência é o passo seguinte. Sem a edição na lista, o cadastro vem depois, com `criar-oportunidade`.
 - Perguntar antes da busca parece cuidado. A busca só lê. Chame sem perguntar.
-- Parar na oportunidade parece o fim de um pedido confirmado. A inscrição segue `definir-inscricao`.
+- Parar na oportunidade parece o fim de um pedido de evento confirmado. A inscrição segue `definir-inscricao`.
 - Parar no texto parece o fim de um print de perfil. Pessoa ou perfil segue `definir-grafia`.
 - Uma habilidade fora da lista desta conversa parece indisponível. Ela continua sendo a seguinte. Pergunte se a pessoa quer chamá-la.
 - Vários modos de leitura parecem cuidado. Um uso basta.
