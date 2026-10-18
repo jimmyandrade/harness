@@ -63,3 +63,12 @@ The release exists, but the Dependency Dashboard of a business harness still lis
 2. Check the box at the end of the Dependency Dashboard issue to ask for another run, later. The `renovate.md` runbook, step 4, covers a run from the Mend portal.
 3. To move the pins now, open the pull request by hand, as in the previous section, step 3.
 4. The dashboard listing the new tag, or a `core harness and vocabulary` pull request, closes the case.
+
+## npm refuses a pin of the core with EALLOWGIT
+
+Moving a pin by hand, `npm install -D "harness@github:jimmyandrade/harness#vX.Y.Z"`, or the same for jimmyandrade/vocabulary, stops with `npm error code EALLOWGIT` and `Refusing to fetch`.
+
+1. The npm configuration sets `allow-git` to `root`, often in `~/.npmrc`. `npm config get allow-git` prints it. With that value, npm refuses to resolve a new git dependency, even one listed in `package.json`.
+2. Allow it for that one command: `npm install -D "harness@github:jimmyandrade/harness#vX.Y.Z" --allow-git=all`. The setting in `~/.npmrc` stays as it is.
+3. `npm ci` installs from `package-lock.json` and does not need the flag. Renovate does not read `~/.npmrc` and does not need it either.
+4. `package.json` and `package-lock.json` naming the new tag, and `run-check.sh` exiting 0, close the case.
