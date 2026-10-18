@@ -230,6 +230,7 @@ flowchart LR
   reconhecer_imagem --> criar_oportunidade
   reconhecer_imagem --> definir_grafia
   reconhecer_imagem --> definir_inscricao
+  reconhecer_imagem --> lancar_despesa
   reconhecer_imagem --> procurar_oportunidade
   registrar_ciclo_do_ativo --> definir_ativo_imobilizado
   registrar_ciclo_do_ativo --> identificar_duplicata
