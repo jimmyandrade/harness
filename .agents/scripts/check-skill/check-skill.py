@@ -368,7 +368,10 @@ def summary_markdown(
         if only_changed and kind not in {"new", "changed"} and not items:
             continue
         label = result_label(not items, kind)
-        version_text = "—" if name == INSTRUCTIONS else pair_text(old_version, version, compared=compared)
+        if name == INSTRUCTIONS and old_version is None and version is None:
+            version_text = "—"
+        else:
+            version_text = pair_text(old_version, version, compared=compared)
         token_text = pair_text(
             str(old_tokens) if old_tokens is not None else None,
             str(body_tokens) if body_tokens is not None else None,
