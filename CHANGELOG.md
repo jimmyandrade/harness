@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/jimmyandrade/vocabulary/compare/v0.5.0...v0.6.0) (2026-10-18)
+
+
+### Features
+
+* mark case-sensitive terms and report casing mismatches ([#22](https://github.com/jimmyandrade/vocabulary/issues/22)) ([7b140ef](https://github.com/jimmyandrade/vocabulary/commit/7b140ef9964ef3a471d49fd64fae56e59e484314))
+
 ## [0.5.0](https://github.com/jimmyandrade/vocabulary/compare/v0.4.0...v0.5.0) (2026-10-15)
 
 
