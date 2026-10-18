@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.1](https://github.com/jimmyandrade/vocabulary/compare/v0.6.0...v0.6.1) (2026-10-18)
+
+
+### Bug Fixes
+
+* **redigir-com-tom-de-voz:** use the MCP tools when the CLI is not available ([#27](https://github.com/jimmyandrade/vocabulary/issues/27)) ([477e77d](https://github.com/jimmyandrade/vocabulary/commit/477e77decefd62e7883233a8649dbc50b7cfd0f9))
+
 ## [0.6.0](https://github.com/jimmyandrade/vocabulary/compare/v0.5.0...v0.6.0) (2026-10-18)
 
 
