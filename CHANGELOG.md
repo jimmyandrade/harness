@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.42.0](https://github.com/jimmyandrade/harness/compare/v0.41.0...v0.42.0) (2026-10-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* **lancar-despesa-da-empresa:** lancar-despesa is now lancar-despesa-da-empresa. The old name stays in metadata.aliases, and every core skill that cited it now cites the new name.
+
+### Features
+
+* **lancar-despesa-da-empresa:** name the company in the expense skill ([#250](https://github.com/jimmyandrade/harness/issues/250)) ([b22a734](https://github.com/jimmyandrade/harness/commit/b22a7344e47103f7327683789624fff8cf9671bd))
+
+
+### Bug Fixes
+
+* report a renamed skill instead of a removed and a new one ([#251](https://github.com/jimmyandrade/harness/issues/251)) ([7dc948f](https://github.com/jimmyandrade/harness/commit/7dc948fbb5fbfd75eef69c763717c8fbb7623bf6))
+
 ## [0.41.0](https://github.com/jimmyandrade/harness/compare/v0.40.1...v0.41.0) (2026-10-18)
 
 
