@@ -50,6 +50,7 @@ How these skills relate is in `README.md`, in this folder.
   - Skill at `.agents/skills/criar-commit/`
   - Reads the base branch, whether to commit without asking, the message language and pattern, and the test, build, and lint commands from the project instructions
   - Names a new branch `type/short-description` after the Conventional Commits type, and renames a branch a tool created with another prefix, such as `claude/`
+  - Syncs to Notion. A request from Notion, without a terminal, creates the branch and the commit through the GitHub integration and goes on to criar-pull-request; the CI checks of the pull request do the verifying
 - **Test Criteria**:
   - [ ] A project without test or build commands commits and says nothing was verified
 
@@ -842,7 +843,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Properties**:
   - Lives at `.agents/skills/publicar-habilidade/SKILL.md`
   - Treats the Habilidades database as read-only and the repository as the write source
-  - From Notion, uses its own branch, an English Conventional Commits subject, and a pull request opened through criar-pull-request, then stops
+  - From Notion, uses its own branch, a commit through criar-commit, and a pull request opened through criar-pull-request, then stops
   - Waits for another person's review; a green check does not replace that review
   - Merges only in a later request, after that review and an explicit merge authorization
   - Does not edit a Habilidades page, including when the person calls the edit an emergency
