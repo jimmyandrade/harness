@@ -320,3 +320,45 @@ test("terms repeats --tags and lookup and exists filter by --tags", () => {
     console.log = write
   }
 })
+
+test("terms takes --case-sensitive and lookup and exists report the casing", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  const file = join(root, "pt-BR.json")
+  writeFileSync(file, "{}\n")
+  const lines: string[] = []
+  const errors: string[] = []
+  const write = console.log
+  const warn = console.error
+  console.log = (line: string) => lines.push(line)
+  console.error = (line: string) => errors.push(line)
+  const brand = ["--state", "allowed", "--category", "brand", "--description", "marca", "--reason", "nome"]
+  try {
+    assert.equal(
+      run([
+        "--glossary", root, "terms", "--language", "pt-BR", "--mode", "insert",
+        "--term", "eBay", ...brand, "--case-sensitive",
+        "--term", "iPhone", ...brand, "--case-sensitive", "true",
+        "--term", "Cueca", ...brand, "--case-sensitive=false",
+      ]),
+      0,
+    )
+    const stored = JSON.parse(readFileSync(file, "utf8"))
+    assert.deepEqual(Object.keys(stored), ["cueca", "eBay", "iPhone"])
+    assert.equal(stored.eBay.case_sensitive, true)
+    assert.equal(stored.iPhone.case_sensitive, true)
+    assert.equal("case_sensitive" in stored.cueca, false)
+    assert.equal(run(["--glossary", root, "lookup", "--language", "pt-BR", "--term", "Iphone"]), 0)
+    const looked = JSON.parse(lines.at(-1) ?? "{}")
+    assert.equal(looked.term, "iPhone")
+    assert.equal(looked.case_matches, false)
+    assert.equal(run(["--glossary", root, "exists", "--language", "pt-BR", "--text", "ebay Cueca"]), 0)
+    assert.deepEqual(JSON.parse(lines.at(-1) ?? "{}"), { ebay: { exists: true, term: "eBay", case_matches: false }, Cueca: true })
+    assert.equal(run(["--glossary", root, "terms", "--language", "pt-BR", "--mode", "insert", "--case-sensitive"]), 2)
+    assert.equal(errors.at(-1), '"--case-sensitive" follows a term.')
+    assert.equal(run(["--glossary", root, "terms", "--language", "pt-BR", "--mode", "insert", "--term", "x", "--case-sensitive=sim"]), 2)
+    assert.equal(errors.at(-1), "case_sensitive is true or false.")
+  } finally {
+    console.log = write
+    console.error = warn
+  }
+})

@@ -102,3 +102,26 @@ test("an existing example is linked and a category stays in English", async () =
     await new Promise<void>((resolve, reject) => server.close((error) => (error ? reject(error) : resolve())))
   }
 })
+
+test("POST keeps the casing of a case-sensitive term", async () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  writeFileSync(join(root, "pt-BR.json"), "{}\n")
+  const server = createGlossaryServer(root)
+  await new Promise<void>((resolve) => server.listen(0, "127.0.0.1", resolve))
+  const port = (server.address() as AddressInfo).port
+  try {
+    const response = await fetch(`http://127.0.0.1:${port}/v1/forbidden`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ ...BODY, term: "IPHONE", category: "brand", rejected: [], alternatives: [], case_sensitive: true }),
+    })
+    assert.equal(response.status, 200)
+    const body = await response.json()
+    assert.equal(body.term, "IPHONE")
+    assert.equal(body.case_sensitive, true)
+    const stored = JSON.parse(readFileSync(join(root, "pt-BR.json"), "utf8"))
+    assert.equal(stored["IPHONE"].case_sensitive, true)
+  } finally {
+    await new Promise<void>((resolve, reject) => server.close((error) => (error ? reject(error) : resolve())))
+  }
+})

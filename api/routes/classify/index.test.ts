@@ -122,3 +122,24 @@ test("POST classifies one language", async () => {
     await new Promise<void>((resolve, reject) => server.close((error) => (error ? reject(error) : resolve())))
   }
 })
+
+test("a case-sensitive term says when the casing does not match, and an ordinary term does not", () => {
+  const entries = load(`{\n  "cueca": { "state": "allowed" },\n  "iPhone": { "state": "allowed", "case_sensitive": true }\n}\n`)
+  assert.deepEqual(classify(entries, "Iphone", "pt-BR"), {
+    from: "query",
+    language: "pt-BR",
+    submitted: "Iphone",
+    to: "allowed",
+    term: "iPhone",
+    case_sensitive: true,
+    case_matches: false,
+  })
+  assert.equal(classify(entries, "iPhone", "pt-BR").case_matches, true)
+  assert.deepEqual(classify(entries, "Cueca", "pt-BR"), {
+    from: "query",
+    language: "pt-BR",
+    submitted: "Cueca",
+    to: "allowed",
+    term: "cueca",
+  })
+})

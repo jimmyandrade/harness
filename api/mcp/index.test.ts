@@ -251,3 +251,38 @@ test("write_terms keeps tags and lookup_term and exists_in_text filter by them",
   assert.equal(refused.isError, true)
   assert.equal(refused.content[0]?.text, "Provide the tags as a list.")
 })
+
+test("write_terms keeps the casing of a case-sensitive term and the reads report a mismatch", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  const file = join(root, "pt-BR.json")
+  writeFileSync(file, "{}\n")
+  const brand = { state: "allowed", category: "brand", description: "peça da marca", reason: "nome", examples: [] }
+  const written = callTool(root, {
+    name: "write_terms",
+    arguments: { language: "pt-BR", mode: "insert", terms: [{ ...brand, term: "macOS", case_sensitive: true }, { ...brand, term: "Cueca" }] },
+  })
+  assert.equal(written.isError, undefined)
+  const entries = load(readFileSync(file, "utf8"))
+  assert.equal(entries.find((entry) => entry.term === "macOS")?.caseSensitive, true)
+  assert.equal(entries.find((entry) => entry.term === "cueca")?.caseSensitive, undefined)
+  const looked = callTool(root, { name: "lookup_term", arguments: { language: "pt-BR", term: "MacOS" } })
+  assert.deepEqual(JSON.parse(looked.content[0]?.text ?? ""), {
+    language: "pt-BR",
+    submitted: "MacOS",
+    exists: true,
+    term: "macOS",
+    state: "allowed",
+    category: "brand",
+    description: "peça da marca",
+    reason: "nome",
+    examples: [],
+    case_sensitive: true,
+    case_matches: false,
+  })
+  const mapped = callTool(root, { name: "exists_in_text", arguments: { language: "pt-BR", text: "MacOS macOS cueca" } })
+  assert.deepEqual(JSON.parse(mapped.content[0]?.text ?? ""), {
+    MacOS: { exists: true, term: "macOS", case_matches: false },
+    macOS: true,
+    cueca: true,
+  })
+})

@@ -104,3 +104,12 @@ test("POST classifies each word", async () => {
     await new Promise<void>((resolve, reject) => server.close((error) => (error ? reject(error) : resolve())))
   }
 })
+
+test("each word of a case-sensitive term says whether its casing matches", () => {
+  const entries = load(`{\n  "cueca": { "state": "allowed" },\n  "eBay": { "state": "allowed", "case_sensitive": true }\n}\n`)
+  const words = classifyText(entries, "Cueca no Ebay e no eBay", "pt-BR").words
+  assert.deepEqual(
+    words.map((word) => [word.submitted, word.term, word.case_matches]),
+    [["Cueca", "cueca", undefined], ["no", undefined, undefined], ["Ebay", "eBay", false], ["e", undefined, undefined], ["no", undefined, undefined], ["eBay", "eBay", true]],
+  )
+})

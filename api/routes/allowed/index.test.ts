@@ -97,3 +97,35 @@ test("an existing example is linked and a category stays in English", async () =
     await new Promise<void>((resolve, reject) => server.close((error) => (error ? reject(error) : resolve())))
   }
 })
+
+test("POST keeps the casing of a case-sensitive term and lowercases an ordinary one", async () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  writeFileSync(join(root, "pt-BR.json"), "{}\n")
+  const server = createGlossaryServer(root)
+  await new Promise<void>((resolve) => server.listen(0, "127.0.0.1", resolve))
+  const port = (server.address() as AddressInfo).port
+  const post = (body: unknown) =>
+    fetch(`http://127.0.0.1:${port}/v1/allowed`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(body),
+    })
+  try {
+    const brand = await post({ ...BODY, term: "iPhone", category: "brand", examples: [], case_sensitive: true })
+    assert.equal(brand.status, 200)
+    const registered = await brand.json()
+    assert.equal(registered.term, "iPhone")
+    assert.equal(registered.case_sensitive, true)
+    const ordinary = await (await post({ ...BODY, term: "Cueca", category: "word", examples: [] })).json()
+    assert.equal(ordinary.term, "cueca")
+    assert.equal("case_sensitive" in ordinary, false)
+    const stored = JSON.parse(readFileSync(join(root, "pt-BR.json"), "utf8"))
+    assert.equal(stored.iPhone.case_sensitive, true)
+    assert.equal("case_sensitive" in stored.cueca, false)
+    const refused = await post({ ...BODY, term: "eBay", examples: [], case_sensitive: "sim" })
+    assert.equal(refused.status, 400)
+    assert.equal((await refused.json()).error, "case_sensitive is true or false.")
+  } finally {
+    await new Promise<void>((resolve, reject) => server.close((error) => (error ? reject(error) : resolve())))
+  }
+})

@@ -6,6 +6,7 @@
  * when it joins letters. Each emoji and each punctuation mark is classified on
  * its own. An emoji keeps its variation selector, skin tone, and ZWJ sequence
  * together. A glossary row of more than one word is not matched across words.
+ * A word that matches a case_sensitive row says whether its casing matches.
  *
  * Run: node api/routes/classify-text/index.ts <language> <text>
  */

@@ -4,14 +4,16 @@
  * Read one term or expression. exists is false when that concept is absent.
  * Case and an accent that does not change the letter return the stored row.
  * A plural, a gender, and another word are their own rows. Given tags, a row
- * tagged only for another speaker, event, or channel reads as absent.
+ * tagged only for another speaker, event, or channel reads as absent. A row
+ * with case_sensitive also returns case_matches, false when the submitted
+ * casing differs from the stored term.
  *
  * Run: node api/routes/lookup/index.ts <language> <term>
  */
 
 import { fileURLToPath } from "node:url"
 
-import { Glossary, InvalidGlossary, applicable, collapse, duplicateSignal, findConcept, lookup, type Entry } from "../../shared/glossary.ts"
+import { Glossary, InvalidGlossary, applicable, caseMatches, collapse, duplicateSignal, findConcept, lookup, type Entry } from "../../shared/glossary.ts"
 import { parseBody, type Route } from "../../shared/http.ts"
 import { readOptions, report } from "../../shared/options.ts"
 import { lookupRequest } from "../../shared/schema.ts"
@@ -33,6 +35,8 @@ export type TermLookup = {
   examples?: readonly string[]
   related?: readonly string[]
   tags?: readonly string[]
+  case_sensitive?: true
+  case_matches?: boolean
   duplicates?: readonly string[]
   canonical?: string
 }
@@ -47,11 +51,11 @@ export function lookupTerm(glossary: Glossary, language: string, submitted: stri
     const exact = lookup(entries, query).entry
     const reported = { language: tag, submitted: query, exists: true, ...signal }
     if (exact === undefined) return reported
-    return { ...reported, ...rowOf(exact) }
+    return { ...reported, ...rowOf(exact), ...casingOf(exact, query) }
   }
   const found = findConcept(entries, query)
   if (found === undefined) return { language: tag, submitted: query, exists: false }
-  return { language: tag, submitted: query, exists: true, ...rowOf(found) }
+  return { language: tag, submitted: query, exists: true, ...rowOf(found), ...casingOf(found, query) }
 }
 
 export const lookupRoute: Route = {
@@ -79,6 +83,11 @@ function rowOf(entry: Entry): Omit<TermLookup, "language" | "submitted" | "exist
   if (entry.related !== undefined && entry.related.length > 0) row.related = entry.related
   if (entry.tags !== undefined && entry.tags.length > 0) row.tags = entry.tags
   return row
+}
+
+function casingOf(entry: Entry, submitted: string): Pick<TermLookup, "case_sensitive" | "case_matches"> {
+  if (entry.caseSensitive !== true) return {}
+  return { case_sensitive: true, case_matches: caseMatches(entry, submitted) }
 }
 
 function main(argv: string[]): number {

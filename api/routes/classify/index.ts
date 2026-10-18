@@ -2,14 +2,16 @@
  * POST /v1/classify
  *
  * Classify one word or expression. The lookup starts at query and moves once,
- * to allowed, forbidden, situationally_allowed, or not_registered.
+ * to allowed, forbidden, situationally_allowed, or not_registered. A row with
+ * case_sensitive also returns case_matches, false when the submitted casing
+ * differs from the stored term.
  *
  * Run: node api/routes/classify/index.ts <language> <term>
  */
 
 import { fileURLToPath } from "node:url"
 
-import { Glossary, InvalidGlossary, lookup, type Entry } from "../../shared/glossary.ts"
+import { Glossary, InvalidGlossary, caseMatches, lookup, type Entry } from "../../shared/glossary.ts"
 import { parseBody, type Route } from "../../shared/http.ts"
 import { readOptions, report } from "../../shared/options.ts"
 import { classifyRequest, type Classification } from "../../shared/schema.ts"
@@ -25,6 +27,10 @@ export function classify(entries: readonly Entry[], submitted: string, language:
   if (found.entry.state === "forbidden" && found.entry.alternative !== null) response.recommended = found.entry.alternative
   if (found.entry.state === "situationally_allowed" && found.entry.alternative !== null) {
     response.always_allowed = found.entry.alternative
+  }
+  if (found.entry.caseSensitive === true) {
+    response.case_sensitive = true
+    response.case_matches = caseMatches(found.entry, found.query)
   }
   return response
 }

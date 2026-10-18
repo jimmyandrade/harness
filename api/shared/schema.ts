@@ -60,6 +60,8 @@ export type LookupRequest = z.infer<typeof lookupRequest>
 export const existsRequest = classifyTextRequest.extend({ tags: tagListSchema.default([]) })
 export type ExistsRequest = z.infer<typeof existsRequest>
 
+export const caseSensitiveSchema = z.boolean({ error: "case_sensitive is true or false." }).default(false)
+
 const forbiddenRequestObject = z.object({
   language: prose("Unknown language."),
   term: prose("Provide the term."),
@@ -69,6 +71,7 @@ const forbiddenRequestObject = z.object({
   rejected: termList("Provide the rejected examples."),
   alternatives: termList("Provide the alternatives."),
   related: termList("Provide the related terms.").default([]),
+  case_sensitive: caseSensitiveSchema,
 })
 export const forbiddenRequest = guardGeneral(rejectPositiveExamples(forbiddenRequestObject), false)
 export type ForbiddenRequest = z.infer<typeof forbiddenRequest>
@@ -81,6 +84,7 @@ const allowedRequestObject = z.object({
   reason: prose("Provide the reason."),
   examples: termList("Provide the examples."),
   related: termList("Provide the related terms.").default([]),
+  case_sensitive: caseSensitiveSchema,
 })
 export const allowedRequest = refuseCliche(guardGeneral(allowedRequestObject, false))
 export type AllowedRequest = z.infer<typeof allowedRequest>
@@ -93,6 +97,7 @@ const situationalRequestObject = z.object({
   when: prose("Provide when to use it."),
   examples: termList("Provide the examples."),
   related: termList("Provide the related terms.").default([]),
+  case_sensitive: caseSensitiveSchema,
 })
 export const situationalRequest = refuseCliche(situationalRequestObject)
 export type SituationalRequest = z.infer<typeof situationalRequest>
@@ -166,6 +171,8 @@ export const classificationSchema = z.object({
   term: z.string().optional(),
   recommended: z.string().optional(),
   always_allowed: z.string().optional(),
+  case_sensitive: z.literal(true).optional(),
+  case_matches: z.boolean().optional(),
 })
 export type Classification = z.infer<typeof classificationSchema>
 
@@ -187,6 +194,7 @@ export const forbiddenRegistrationSchema = z.object({
   rejected: z.array(z.string()),
   alternatives: z.array(z.string()),
   related: z.array(z.string()).optional(),
+  case_sensitive: z.literal(true).optional(),
 })
 export type ForbiddenRegistration = z.infer<typeof forbiddenRegistrationSchema>
 
@@ -199,6 +207,7 @@ export const allowedRegistrationSchema = z.object({
   reason: z.string(),
   examples: z.array(z.string()),
   related: z.array(z.string()).optional(),
+  case_sensitive: z.literal(true).optional(),
 })
 export type AllowedRegistration = z.infer<typeof allowedRegistrationSchema>
 
@@ -212,6 +221,7 @@ export const situationalRegistrationSchema = z.object({
   examples: z.array(z.string()),
   related: z.array(z.string()).optional(),
   tags: z.array(z.string()).optional(),
+  case_sensitive: z.literal(true).optional(),
 })
 export type SituationalRegistration = z.infer<typeof situationalRegistrationSchema>
 
@@ -269,6 +279,7 @@ export const glossaryRowSchema = z
       tags: z
         .array(z.string({ error: TAG_MESSAGE }).regex(TAG, { error: TAG_MESSAGE }), { error: "The glossary tags are not a list." })
         .optional(),
+      case_sensitive: z.boolean({ error: "A glossary case_sensitive is not true or false." }).optional(),
     },
     { error: "A glossary row is not an object." },
   )

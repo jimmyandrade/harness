@@ -6,12 +6,15 @@
  * --language and --mode apply to the whole batch. Each --term starts a term.
  * --examples, --rejected, --alternatives, --related, and --tags repeat once
  * per value. lookup and exists take --tags too, to read only the rows that
- * apply to that speaker, event, or channel.
+ * apply to that speaker, event, or channel. --case-sensitive marks the term
+ * it follows, keeping its casing as the key; it takes true or false, and alone
+ * it means true.
  *
  * Run: node api/cli.ts lookup --language pt-BR --term casa
  * Run: node api/cli.ts lookup --language pt-BR --term "verão! (chegou!)" --tags festival-de-verao
  * Run: node api/cli.ts exists --language pt-BR --text "Oi, tudo bem?"
  * Run: node api/cli.ts terms --language pt-BR --mode insert --state allowed --term "!" --category punctuation --description "Ponto de exclamação" --reason "..." 
+ * Run: node api/cli.ts terms --language pt-BR --mode upsert --state allowed --term iPhone --case-sensitive --category brand --description "..." --reason "..."
  */
 
 import { fileURLToPath } from "node:url"
@@ -25,6 +28,7 @@ import { existsRequest, lookupRequest, termsRequest } from "./shared/schema.ts"
 
 const GLOBAL = new Set(["language", "mode"])
 const LISTS = new Set(["examples", "rejected", "alternatives", "related", "tags"])
+const SWITCHES: Record<string, string> = { "case-sensitive": "case_sensitive" }
 const FIELDS = new Set([
   "state",
   "term",
@@ -53,7 +57,7 @@ const MISSING: Record<string, string> = {
   text: "Provide the text.",
 }
 
-type Draft = Record<string, string | string[]>
+type Draft = Record<string, string | string[] | boolean>
 
 export function run(argv: string[]): number {
   try {
@@ -114,8 +118,18 @@ export function termsFrom(args: readonly string[]): {
     if (!token.startsWith("--") || token === "--") throw new InvalidGlossary(`Unknown argument ${JSON.stringify(token)}.`)
     const split = token.indexOf("=")
     const name = (split === -1 ? token : token.slice(0, split)).slice(2)
-    if (!GLOBAL.has(name) && !FIELDS.has(name)) throw new InvalidGlossary(`Unknown argument ${JSON.stringify(token)}.`)
     const inline = split === -1 ? undefined : token.slice(split + 1)
+    const field = SWITCHES[name]
+    if (field !== undefined) {
+      if (current === null) throw new InvalidGlossary(`${JSON.stringify(token)} follows a term.`)
+      const next = args[index + 1]
+      const value = inline ?? (next === "true" || next === "false" ? next : "true")
+      if (value !== "true" && value !== "false") throw new InvalidGlossary("case_sensitive is true or false.")
+      if (inline === undefined && (next === "true" || next === "false")) index += 1
+      current[field] = value === "true"
+      continue
+    }
+    if (!GLOBAL.has(name) && !FIELDS.has(name)) throw new InvalidGlossary(`Unknown argument ${JSON.stringify(token)}.`)
     const value = inline ?? args[index + 1]
     if (value === undefined || (inline === undefined && value.startsWith("--"))) {
       throw new InvalidGlossary(MISSING[name] ?? "Provide the terms.")

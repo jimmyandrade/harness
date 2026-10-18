@@ -109,3 +109,37 @@ test("POST with tags reads a row tagged for another context as absent", async ()
     await new Promise<void>((resolve, reject) => server.close((error) => (error ? reject(error) : resolve())))
   }
 })
+
+test("POST finds a case-sensitive row in any casing and says when the casing does not match", async () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  writeFileSync(
+    join(root, "pt-BR.json"),
+    `${JSON.stringify({ cueca: { state: "allowed" }, iPhone: { state: "allowed", case_sensitive: true } }, null, 2)}\n`,
+  )
+  const server = createGlossaryServer(root)
+  await new Promise<void>((resolve) => server.listen(0, "127.0.0.1", resolve))
+  const port = (server.address() as AddressInfo).port
+  const read = async (term: string) =>
+    (await fetch(`http://127.0.0.1:${port}/v1/lookup`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ language: "pt-BR", term }),
+    })).json()
+  try {
+    const wrong = await read("Iphone")
+    assert.equal(wrong.exists, true)
+    assert.equal(wrong.term, "iPhone")
+    assert.equal(wrong.case_sensitive, true)
+    assert.equal(wrong.case_matches, false)
+    const right = await read("iPhone")
+    assert.equal(right.case_sensitive, true)
+    assert.equal(right.case_matches, true)
+    const ordinary = await read("Cueca")
+    assert.equal(ordinary.exists, true)
+    assert.equal(ordinary.term, "cueca")
+    assert.equal("case_sensitive" in ordinary, false)
+    assert.equal("case_matches" in ordinary, false)
+  } finally {
+    await new Promise<void>((resolve, reject) => server.close((error) => (error ? reject(error) : resolve())))
+  }
+})

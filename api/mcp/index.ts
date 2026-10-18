@@ -34,7 +34,7 @@ const tagsFilter = {
 const tools = [
   {
     name: "lookup_term",
-    description: "Read one vocabulary term or expression, including an emoji. Returns whether it exists and the stored row. Case and accents match the stored term. A plural, a gender, and another word are their own rows. When the person asks which variations were registered, read each form, name the ones that exist and the ones that do not, and ask the state before writing a missing form.",
+    description: "Read one vocabulary term or expression, including an emoji. Returns whether it exists and the stored row. Case and accents match the stored term. A row with case_sensitive also returns case_matches: when it is false, write the stored term, not the submitted casing. A plural, a gender, and another word are their own rows. When the person asks which variations were registered, read each form, name the ones that exist and the ones that do not, and ask the state before writing a missing form.",
     inputSchema: {
       type: "object",
       properties: {
@@ -47,7 +47,7 @@ const tools = [
   },
   {
     name: "exists_in_text",
-    description: "Return a record of each word, emoji, and punctuation mark in a text to whether that token exists in the vocabulary.",
+    description: "Return a record of each word, emoji, and punctuation mark in a text to whether that token exists in the vocabulary. A token that only matches a case_sensitive row in another casing maps to { exists, term, case_matches: false } instead of true: write term, the stored spelling.",
     inputSchema: {
       type: "object",
       properties: {
@@ -60,7 +60,7 @@ const tools = [
   },
   {
     name: "write_terms",
-    description: "Insert, update, or upsert vocabulary terms for one language, including an emoji. Searches first: case and accents keep the stored row, and a new term is stored in lowercase. A plural, a gender, and another word each keep their own row. Write only what the person gave: ask before the alternatives of a new forbidden term, and an empty list is valid. A cliché is category cliche and forbidden, and its description names the image, scene, action, effect, or situation that replaces it. A situationally allowed term that belongs to one speaker, event, or channel keeps tags, and when still says the rule in words. The response lists inserted, updated, and unchanged. A refusal says why and leaves the file unchanged.",
+    description: "Insert, update, or upsert vocabulary terms for one language, including an emoji. Searches first: case and accents keep the stored row, and a new term is stored in lowercase unless case_sensitive is true. A plural, a gender, and another word each keep their own row. Write only what the person gave: ask before the alternatives of a new forbidden term, and an empty list is valid. A cliché is category cliche and forbidden, and its description names the image, scene, action, effect, or situation that replaces it. A situationally allowed term that belongs to one speaker, event, or channel keeps tags, and when still says the rule in words. The response lists inserted, updated, and unchanged. A refusal says why and leaves the file unchanged.",
     inputSchema: {
       type: "object",
       properties: {
@@ -86,6 +86,10 @@ const tools = [
                 type: "array",
                 items: { type: "string" },
                 description: "Only on situationally_allowed. Lowercase kebab-case names of the speaker, event, or channel the term belongs to, such as maria-silva, festival-de-verao, or palco. A missing example is created with the same tags.",
+              },
+              case_sensitive: {
+                type: "boolean",
+                description: "True for a spelling whose casing is part of the term, such as a brand name like iPhone. The term keeps its casing as given, and a read in another casing reports case_matches false. Omit or false for an ordinary word.",
               },
             },
             required: ["state", "term", "category", "description"],

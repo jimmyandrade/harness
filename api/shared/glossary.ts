@@ -24,13 +24,16 @@
  * allowed row may also keep tags: short kebab-case names of the speaker, the
  * event, or the channel the term belongs to. A missing example is created with
  * those tags. A row without tags applies everywhere. A read given tags keeps
- * the rows without tags and the rows that share at least one tag.
+ * the rows without tags and the rows that share at least one tag. Any row may
+ * keep case_sensitive: true, for a brand spelling such as "iPhone". Its key
+ * keeps that casing. A read still finds it in another case and says the
+ * casing does not match.
  *
  * writeTerms searches before it writes. Case and an accent that does not change
  * the letter are the same term. A plural, a gender, and another word for the
  * same idea each keep their own row and their own state. A new term is stored
- * in lowercase. insert leaves a term
- * that is already in the file.
+ * in lowercase, unless it is written with case_sensitive, which keeps its
+ * casing as given. insert leaves a term that is already in the file.
  * update leaves a term that is absent. A row whose fields already match is
  * unchanged. A failure leaves the file unchanged.
  *
@@ -85,6 +88,7 @@ export type Entry = {
   examples?: readonly string[]
   related?: readonly string[]
   tags?: readonly string[]
+  caseSensitive?: boolean
 }
 
 export function canonicalLanguage(tag: string): string {
@@ -140,6 +144,7 @@ export function load(text: string): Entry[] {
     if (row.examples !== undefined) entry.examples = row.examples
     if (row.related !== undefined) entry.related = row.related
     if (row.tags !== undefined) entry.tags = row.tags
+    if (row.case_sensitive === true) entry.caseSensitive = true
     seen.add(key)
     previous = entry.order
     entries.push(entry)
@@ -194,7 +199,8 @@ export function registerForbidden(
   const tag = canonicalLanguage(language)
   const path = glossaryFile(directory, tag)
   const entries = load(readFileSync(path, "utf8"))
-  const created = entryFrom(lowercaseTerm(input.term), "forbidden", undefined)
+  const created = entryFrom(input.case_sensitive ? input.term : lowercaseTerm(input.term), "forbidden", undefined)
+  if (input.case_sensitive) created.caseSensitive = true
   if (entries.some((item) => matchKey(item.term) === matchKey(created.term))) {
     throw new InvalidGlossary(`${JSON.stringify(created.term)} is already in the glossary.`)
   }
@@ -217,6 +223,7 @@ export function registerForbidden(
     substitution: input.substitution,
     rejected,
     alternatives,
+    case_sensitive: input.case_sensitive ? true : undefined,
   }
 }
 
@@ -228,7 +235,8 @@ export function registerAllowed(
   const tag = canonicalLanguage(language)
   const path = glossaryFile(directory, tag)
   const entries = load(readFileSync(path, "utf8"))
-  const created = entryFrom(lowercaseTerm(input.term), "allowed", undefined)
+  const created = entryFrom(input.case_sensitive ? input.term : lowercaseTerm(input.term), "allowed", undefined)
+  if (input.case_sensitive) created.caseSensitive = true
   if (entries.some((item) => matchKey(item.term) === matchKey(created.term))) {
     throw new InvalidGlossary(`${JSON.stringify(created.term)} is already in the glossary.`)
   }
@@ -248,6 +256,7 @@ export function registerAllowed(
     description: input.description,
     reason: input.reason,
     examples,
+    case_sensitive: input.case_sensitive ? true : undefined,
   }
 }
 
@@ -259,7 +268,8 @@ export function registerSituational(
   const tag = canonicalLanguage(language)
   const path = glossaryFile(directory, tag)
   const entries = load(readFileSync(path, "utf8"))
-  const created = entryFrom(lowercaseTerm(input.term), "situationally_allowed", undefined)
+  const created = entryFrom(input.case_sensitive ? input.term : lowercaseTerm(input.term), "situationally_allowed", undefined)
+  if (input.case_sensitive) created.caseSensitive = true
   if (entries.some((item) => matchKey(item.term) === matchKey(created.term))) {
     throw new InvalidGlossary(`${JSON.stringify(created.term)} is already in the glossary.`)
   }
@@ -279,6 +289,7 @@ export function registerSituational(
     description: input.description,
     when: input.when,
     examples,
+    case_sensitive: input.case_sensitive ? true : undefined,
   }
 }
 
@@ -311,14 +322,15 @@ export function writeTerms(directory: string, language: string, mode: WriteMode,
         unchanged.push({ term: item.term, reason })
         continue
       }
-      writing.set(matchKey(found.term), { ...item, term: found.term })
+      const spelling = item.case_sensitive && matchKey(found.term) === matchKey(item.term) ? item.term : found.term
+      writing.set(matchKey(found.term), { ...item, term: spelling })
       continue
     }
     if (mode === "update") {
       skipped.push({ term: item.term, reason: "Not in the glossary." })
       continue
     }
-    writing.set(matchKey(item.term), { ...item, term: lowercaseTerm(item.term) })
+    writing.set(matchKey(item.term), { ...item, term: item.case_sensitive ? item.term : lowercaseTerm(item.term) })
   }
   const working = [...loaded]
   for (const item of writing.values()) {
@@ -412,6 +424,7 @@ function serialize(entries: readonly Entry[]): string {
       examples?: readonly string[]
       related?: readonly string[]
       tags?: readonly string[]
+      case_sensitive?: true
     } = { state: entry.state }
     if (entry.alternative !== null) row.alternative = entry.alternative
     if (entry.category !== undefined) row.category = entry.category
@@ -424,6 +437,7 @@ function serialize(entries: readonly Entry[]): string {
     if (entry.examples !== undefined) row.examples = entry.examples
     if (entry.related !== undefined && entry.related.length > 0) row.related = entry.related
     if (entry.tags !== undefined && entry.tags.length > 0) row.tags = entry.tags
+    if (entry.caseSensitive === true) row.case_sensitive = true
     file[entry.term] = row
   }
   return `${JSON.stringify(file, null, 2)}\n`
@@ -442,6 +456,7 @@ function fillTerm(
 ): { rejected?: string[]; alternatives?: string[]; examples?: string[]; related?: string[] } {
   shell.category = item.category
   shell.description = item.description
+  if (item.case_sensitive) shell.caseSensitive = true
   const related = resolveRegistered(entries, item.related, item.term, writing)
   if (related.length > 0) shell.related = related
   if (item.state === "forbidden") {
@@ -471,6 +486,7 @@ function registrationFrom(
   links: { rejected?: string[]; alternatives?: string[]; examples?: string[]; related?: string[] },
 ): TermsWrite["inserted"][number] {
   const related = links.related !== undefined && links.related.length > 0 ? links.related : undefined
+  const case_sensitive = item.case_sensitive ? (true as const) : undefined
   if (item.state === "forbidden") {
     return {
       language,
@@ -482,6 +498,7 @@ function registrationFrom(
       rejected: links.rejected ?? [],
       alternatives: links.alternatives ?? [],
       related,
+      case_sensitive,
     }
   }
   if (item.state === "allowed") {
@@ -494,6 +511,7 @@ function registrationFrom(
       reason: item.reason,
       examples: links.examples ?? [],
       related,
+      case_sensitive,
     }
   }
   return {
@@ -506,6 +524,7 @@ function registrationFrom(
     examples: links.examples ?? [],
     related,
     tags: item.tags.length > 0 ? item.tags : undefined,
+    case_sensitive,
   }
 }
 
@@ -641,8 +660,22 @@ function sameConcept(left: string, right: string): boolean {
   return conceptKey(left) === conceptKey(right)
 }
 
-export function hasConcept(entries: readonly Entry[], term: string): boolean {
-  return entries.some((entry) => sameConcept(entry.term, term))
+export function conceptMatches(entries: readonly Entry[], term: string): Entry[] {
+  return entries.filter((entry) => sameConcept(entry.term, term))
+}
+
+/**
+ * Whether the submitted form keeps the casing of a case-sensitive row. Only
+ * case counts: an accent that does not change the letter is ignored, as in
+ * every lookup. A row without case_sensitive always matches.
+ */
+export function caseMatches(entry: Entry, submitted: string): boolean {
+  if (entry.caseSensitive !== true) return true
+  return withoutMarks(collapse(submitted)) === withoutMarks(entry.term)
+}
+
+function withoutMarks(term: string): string {
+  return [...term.normalize("NFD")].filter((character) => !isCombining(character)).join("").normalize("NFC")
 }
 
 export function duplicateSignal(entries: readonly Entry[], term: string): { duplicates: string[]; canonical: string } | undefined {
@@ -680,6 +713,8 @@ function guidanceOf(entry: Entry): number {
 
 function sameFields(entry: Entry, item: BulkTerm): boolean {
   if (entry.state !== item.state) return false
+  if ((entry.caseSensitive === true) !== item.case_sensitive) return false
+  if (item.case_sensitive && matchKey(entry.term) === matchKey(item.term) && entry.term !== item.term) return false
   if ((entry.category ?? "") !== item.category) return false
   if ((entry.description ?? "") !== item.description) return false
   if (!sameList(entry.related, item.related)) return false

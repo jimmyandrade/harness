@@ -481,3 +481,62 @@ test("a tag that is not kebab-case, repeats, or sits on a general rule is refuse
     assert.equal(readFileSync(file, "utf8"), initial)
   })
 })
+
+test("a case-sensitive term keeps its casing as the key, and the flag is compared on upsert", async () => {
+  await withGlossary("{}\n", async (port, root) => {
+    const file = join(root, "pt-BR.json")
+    const inserted = await post(port, {
+      language: "pt-BR",
+      mode: "insert",
+      terms: [{ ...allowed("iPhone", "celular"), case_sensitive: true }, allowed("Cueca", "peça")],
+    })
+    assert.equal(inserted.status, 200)
+    const body = await inserted.json()
+    assert.deepEqual(
+      body.inserted.map((item: { term: string; case_sensitive?: boolean }) => [item.term, item.case_sensitive]),
+      [["iPhone", true], ["cueca", undefined]],
+    )
+    const stored = JSON.parse(readFileSync(file, "utf8"))
+    assert.deepEqual(Object.keys(stored), ["cueca", "iPhone"])
+    assert.equal(stored.iPhone.case_sensitive, true)
+    assert.equal("case_sensitive" in stored.cueca, false)
+    const same = await post(port, {
+      language: "pt-BR",
+      mode: "upsert",
+      terms: [{ ...allowed("iPhone", "celular"), case_sensitive: true }],
+    })
+    assert.equal((await same.json()).unchanged.length, 1)
+    const cleared = await post(port, { language: "pt-BR", mode: "upsert", terms: [allowed("iPhone", "celular")] })
+    assert.equal((await cleared.json()).updated.length, 1)
+    assert.equal("case_sensitive" in JSON.parse(readFileSync(file, "utf8")).iPhone, false)
+  })
+})
+
+test("marking a lowercase row case-sensitive renames its key and the links to it", async () => {
+  const initial = `${JSON.stringify({ aifone: { state: "forbidden", alternative: "iphone" }, iphone: { state: "allowed" } }, null, 2)}\n`
+  await withGlossary(initial, async (port, root) => {
+    const response = await post(port, {
+      language: "pt-BR",
+      mode: "update",
+      terms: [{ ...allowed("iPhone", "peça da marca"), case_sensitive: true }],
+    })
+    assert.equal(response.status, 200)
+    assert.deepEqual((await response.json()).updated.map((item: { term: string }) => item.term), ["iPhone"])
+    const stored = JSON.parse(readFileSync(join(root, "pt-BR.json"), "utf8"))
+    assert.equal(stored.iphone, undefined)
+    assert.equal(stored.iPhone.case_sensitive, true)
+    assert.equal(stored.aifone.alternative, "iPhone")
+  })
+})
+
+test("case_sensitive is refused when it is not true or false", async () => {
+  await withGlossary("{}\n", async (port) => {
+    const response = await post(port, {
+      language: "pt-BR",
+      mode: "insert",
+      terms: [{ ...allowed("iPhone", "celular"), case_sensitive: "yes" }],
+    })
+    assert.equal(response.status, 400)
+    assert.equal((await response.json()).error, "case_sensitive is true or false.")
+  })
+})

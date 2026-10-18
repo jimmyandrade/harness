@@ -8,6 +8,8 @@ API, command line, MCP server, and skills that read and write the brand glossary
 
 This repository holds the engine and the two skills, `definir-vocabulario` and `redigir-com-tom-de-voz`. Each project keeps its own glossary, one UTF-8 JSON file per language in `.agents/glossary/`, named with a BCP 47 tag such as `pt-BR.json`. `HARNESS_GLOSSARY_DIR` points the server at another directory. The files are not a translation memory: a term keeps a state for the language of the text. What still differs between projects stays in that project's instructions.
 
+A term is read in any casing. A name whose casing is part of the spelling, such as `iPhone`, keeps `case_sensitive: true` on its row: the write keeps that casing as the key, and `lookup` and `exists` say when the submitted casing does not match, as `docs/adr/0009-mark-case-sensitive-terms.md` decides.
+
 The engine moved out of [jimmyandrade/harness](https://github.com/jimmyandrade/harness) so that repository can stay focused on the other skills. The decisions are `docs/adr/0003-store-the-brand-glossary-as-json.md` and `docs/adr/0004-validate-the-api-with-zod.md`. The map of files is `ARCHITECTURE.md`. Setup for an agent host is `docs/runbooks/mcp-hosts.md`. The skill check uses the harness action pinned in `.github/workflows/skill-check.yml`.
 
 ## Use it

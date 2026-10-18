@@ -3,7 +3,7 @@ name: redigir-com-tom-de-voz
 description: Use essa habilidade sempre que for criar, adaptar, lapidar ou validar texto da marca no tom de voz, mesmo sem dizer copy, como slogan, legenda, e-mail, WhatsApp, campanha, CTA, microcopy ou título de evento externo. NÃO use para responder quem conversa com a IA, descrever uma skill, titular tarefa ou oportunidade, cravar a grafia, alterar formato de conteúdo, nem assumir cliente, peça, oportunidade ou histórico.
 metadata:
   author: jimmyandrade
-  version: "0.12.0"
+  version: "0.13.0"
   aliases:
     - escreva-usando-o-tom-de-voz
   related:
@@ -228,6 +228,7 @@ O título ficou específico, com o nome canônico que a fonte já tinha. Não vi
 
 - `node node_modules/vocabulary/dist/cli.js lookup --language <idioma> --term <termo> --tags <tag>` lê um termo e devolve se ele existe e a linha guardada.
 - `node node_modules/vocabulary/dist/cli.js exists --language <idioma> --text <trecho> --tags <tag>` devolve só o registro de cada token do trecho para se ele existe.
+- Com `case_matches` falso, a caixa do texto não é a guardada. Escreva a grafia de `term`.
 - `--tags` repete, um valor por vez. Termo sem tag vale em qualquer texto. Termo com tag só volta quando uma tag dele está na consulta.
 - `lookup_term` e `exists_in_text`, no servidor `vocabulary`, fazem a mesma consulta quando não há terminal, com o mesmo campo `tags`.
 
