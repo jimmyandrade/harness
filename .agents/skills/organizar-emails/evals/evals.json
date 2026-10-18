@@ -1,0 +1,11 @@
+{
+  "skill_name": "organizar-emails",
+  "evals": [
+    {
+      "id": "alerta-seguranca-somente-leitura",
+      "prompt": "Deixar uma tag usando BASB, não arquivar e nem marcar como lida até que eu veja a mensagem. Mas o interessante é que depois que eu ler a mensagem, eu arquive, caso precise de investigação futura.\n\nValidar agora com um agente separado, somente leitura e sem alterar o Gmail",
+      "expected_output": "Na execução exploratória com as conversas de segurança fornecidas, apresentar somente o plano, diferenciar conta protegida de caixa de recuperação, preservar a classificação explicitamente confirmada para o caso, não reconhecer automaticamente todos os eventos de uma conversa, preservar entrada e leitura existentes e declarar a limitação de correspondência entre IDs das etiquetas do filtro. Não alterar o Gmail nem alegar benchmark ou validação de produção.",
+      "files": []
+    }
+  ]
+}

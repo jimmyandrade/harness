@@ -707,6 +707,22 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses avoiding a duplicate, registering the disambiguation relation, creating the record, locking spelling, and deleting without an order
 
+### organizar-emails
+- **Stability**: experimental
+- **Description**: Triage email with BASB/PARA and learn personal, work, or mixed context from reviewed messages
+- **Properties**:
+  - Lives at `.agents/skills/organizar-emails/SKILL.md` and stays internal while the first decision tree is under construction
+  - Learns each decision and its reason from real messages instead of classifying an entire sender or mailbox from one example
+  - Separates the purpose of a historical obligation from a later intention to separate personal and business finances
+  - Reads the protected account in recovery copies, and keeps the security filter thematic rather than automatically personal
+  - Preserves inbox and read state on security alerts, verifies applied labels and filters, and does not promise automatic archiving after human reading
+  - Keeps account intent and unwanted newsletter preferences in project parameters, without copying email bodies or financial identifiers into the skill
+- **Test Criteria**:
+  - [x] The skill is present and one user-requested read-only exploratory case is recorded
+  - [x] User-provided acceptance examples are recorded in Portuguese Gherkin
+  - [x] A clean-session read-only exploratory run was completed and its findings refined the skill
+  - [ ] Revalidate the refined version and pass the official skill checker before enabling the skill
+
 ### organizar-ponto-de-contato
 - **Stability**: experimental
 - **Description**: Plan and organize a physical contact point of the business, including a pop-up store
