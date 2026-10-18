@@ -23,8 +23,16 @@ jobs:
       # A pull request opened with GITHUB_TOKEN fires no pull_request workflow,
       # but a workflow_dispatch does, so the required test check runs on it.
       - name: Run CI on the release pull request
-        if: steps.release.outputs.pr
+        # Without a release pull request, `pr` is empty. The branch is read in the
+        # script: the job failed when fromJSON in the env got an empty `pr`.
+        if: steps.release.outputs.pr != ''
         env:
           GH_TOKEN: ${{ github.token }}
-          BRANCH: ${{ fromJSON(steps.release.outputs.pr).headBranchName }}
-        run: gh workflow run ci.yml --repo "$GITHUB_REPOSITORY" --ref "$BRANCH"
+          PR: ${{ steps.release.outputs.pr }}
+        run: |
+          branch=$(jq -r .headBranchName <<<"$PR")
+          if [ -z "$branch" ] || [ "$branch" = null ]; then
+            echo "::error::The release pull request output has no headBranchName: $PR"
+            exit 1
+          fi
+          gh workflow run ci.yml --repo "$GITHUB_REPOSITORY" --ref "$branch"

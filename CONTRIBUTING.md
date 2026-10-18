@@ -43,7 +43,7 @@ A release is a tag `vMAJOR.MINOR.PATCH` and a GitHub Release. Business harnesses
 
 Release Please owns the version. `.github/workflows/release-please.yml` runs on every push to `main` and keeps one release pull request open. That pull request bumps `version` in `package.json`, `.claude-plugin/plugin.json`, and `.cursor-plugin/plugin.json`, and writes `CHANGELOG.md` from the Conventional Commits since the last release. Merging it creates the tag and the GitHub Release. The first release is 0.1.0. Before 1.0.0, a breaking change bumps the minor version. Do not bump either version or create a tag by hand. The configuration is `release-please-config.json`, and the last released version is in `.release-please-manifest.json`.
 
-The release pull request is opened with `GITHUB_TOKEN`, so it fires no `pull_request` workflow. After opening or updating it, `release-please.yml` starts `ci.yml` on its branch with `workflow_dispatch`, which `GITHUB_TOKEN` can fire, so the required `test` check runs and auto-merge can merge it. Without a base to compare, that run checks every skill and runs every test.
+The release pull request is opened with `GITHUB_TOKEN`, so it fires no `pull_request` workflow. After opening or updating it, `release-please.yml` starts `ci.yml` on its branch with `workflow_dispatch`, which `GITHUB_TOKEN` can fire, so the required `test` check runs and auto-merge can merge it. A push to `main` that leaves no release pull request open or updated skips that step: the step reads the branch from the `pr` output with `jq` in its script, never with `fromJSON` in its `env`, which fails the job when `pr` is empty. Without a base to compare, that run checks every skill and runs every test.
 
 ## Renovate
 
