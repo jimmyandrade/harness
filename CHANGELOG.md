@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.39.0](https://github.com/jimmyandrade/harness/compare/v0.38.0...v0.39.0) (2026-10-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* the publicar-habilidade skill is removed. A request to change a skill from any environment follows criar-commit and criar-pull-request. The sync does not remove its Notion page; archive it by hand.
+
+### Features
+
+* **check-skill:** show a removed skill in the skill check table ([#243](https://github.com/jimmyandrade/harness/issues/243)) ([900aa01](https://github.com/jimmyandrade/harness/commit/900aa01ad76728deaf42b25fb09a827c025ee5b5))
+* retire publicar-habilidade and let commit and PR skills adapt to the environment ([#241](https://github.com/jimmyandrade/harness/issues/241)) ([ded4e3a](https://github.com/jimmyandrade/harness/commit/ded4e3a0cf3841bc289c33520d073029db669f30))
+
 ## [0.38.0](https://github.com/jimmyandrade/harness/compare/v0.37.0...v0.38.0) (2026-10-18)
 
 
