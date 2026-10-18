@@ -5,6 +5,7 @@ on:
     branches: [main]
 
 permissions:
+  actions: write
   contents: write
   pull-requests: write
 
@@ -21,6 +22,15 @@ jobs:
         with:
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
+      # A pull request opened with GITHUB_TOKEN fires no pull_request workflow,
+      # but a workflow_dispatch does, so the checks run on the release pull request.
+      # skills.yml is the CI workflow of examples/business-harness; name yours.
+      - name: Run CI on the release pull request
+        if: steps.release.outputs.pr
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BRANCH: ${{ fromJSON(steps.release.outputs.pr).headBranchName }}
+        run: gh workflow run skills.yml --repo "$GITHUB_REPOSITORY" --ref "$BRANCH"
 
   # The release above does not fire `release` in other workflows, so this job
   # publishes the skills of the new release to Notion.
