@@ -23,7 +23,7 @@ Branches are named `type/short-description`, with one of these types and an ASCI
 
 ## CI
 
-The workflow is `.github/workflows/ci.yml`. It runs on every pull request and on every push to `main`, on `ubuntu-26.04`. A push to another branch does not run it, so a pull request runs the checks once. It checks out the full history, checks the branch name of a pull request, runs the `check-skill` action of this repository against itself, runs every `.agents/scripts/*/test_*.py` and `.agents/skills/*/scripts/test_*.py` with the checker's own Python, typechecks, and runs `npm test`. When `.github/scripts/change-scope.sh` finds that every changed file is under `docs/` or is Markdown at the root other than `AGENTS.md` and `CLAUDE.md`, it skips the skill check, the tests, the dependency install, and the typecheck, and still reports the required `test` check. Without a base to compare, it runs everything.
+The workflow is `.github/workflows/ci.yml`. It runs on every pull request, on every push to `main`, and on the release pull request when `release-please.yml` starts it, on `ubuntu-26.04`. A push to another branch does not run it, so a pull request runs the checks once. It checks out the full history, checks the branch name of a pull request, runs the `check-skill` action of this repository against itself, runs every `.agents/scripts/*/test_*.py` and `.agents/skills/*/scripts/test_*.py` with the checker's own Python, typechecks, and runs `npm test`. When `.github/scripts/change-scope.sh` finds that every changed file is under `docs/` or is Markdown at the root other than `AGENTS.md` and `CLAUDE.md`, it skips the skill check, the tests, the dependency install, and the typecheck, and still reports the required `test` check. Without a base to compare, it runs everything.
 
 Every step in a workflow or a composite action has a `name`: a short imperative phrase in English, such as `Install dependencies`. The run log and the pull request checks show that name instead of the command.
 
@@ -43,7 +43,7 @@ A release is a tag `vMAJOR.MINOR.PATCH` and a GitHub Release. Business harnesses
 
 Release Please owns the version. `.github/workflows/release-please.yml` runs on every push to `main` and keeps one release pull request open. That pull request bumps `version` in `package.json`, `.claude-plugin/plugin.json`, and `.cursor-plugin/plugin.json`, and writes `CHANGELOG.md` from the Conventional Commits since the last release. Merging it creates the tag and the GitHub Release. The first release is 0.1.0. Before 1.0.0, a breaking change bumps the minor version. Do not bump either version or create a tag by hand. The configuration is `release-please-config.json`, and the last released version is in `.release-please-manifest.json`.
 
-The release pull request is opened with `GITHUB_TOKEN`, so CI does not run on it. Every commit it describes already passed CI on its own pull request.
+The release pull request is opened with `GITHUB_TOKEN`, so it fires no `pull_request` workflow. After opening or updating it, `release-please.yml` starts `ci.yml` on its branch with `workflow_dispatch`, which `GITHUB_TOKEN` can fire, so the required `test` check runs and auto-merge can merge it. Without a base to compare, that run checks every skill and runs every test.
 
 ## Renovate
 
