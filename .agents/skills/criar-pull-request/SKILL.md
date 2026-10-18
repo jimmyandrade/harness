@@ -3,7 +3,7 @@ name: criar-pull-request
 description: Use essa habilidade sempre que for abrir PR, subir uma correção, mandar para a branch principal ou mesclar mudança no repositório, mesmo sem dizer PR. NÃO use para responder comentário de revisão nem para só commitar (use criar-commit).
 metadata:
   author: jimmyandrade
-  version: "0.11.0"
+  version: "0.12.0"
   related:
     - evoluir-habilidade
     - criar-commit
@@ -27,7 +27,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Timeout do push (ms)": 600000
 "Duração do hook de pre-push (min)": 0
 "Exigir CI verde": "sim"
-"Exigir aprovação de outra pessoa": "sem terminal"
+"Exigir aprovação de outra pessoa": "só sem terminal"
 "Comunicar novidade após o merge": "sim"
 "Modo de aprendizado": "perguntar"
 ```
@@ -91,7 +91,7 @@ flowchart LR
   J -->|não| L[Passo 9]
 ```
 
-`Exigir aprovação de outra pessoa` vale `sim`, `não` ou `sem terminal`, que exige só quando não há terminal. A aprovação é de outra pessoa no PR: check verde não conta, e ser dona do repositório não dispensa.
+`Exigir aprovação de outra pessoa` vale `nunca`, `só sem terminal` ou `sempre`. Os valores antigos `não`, `sem terminal` e `sim` valem como `nunca`, `só sem terminal` e `sempre`. A aprovação é de outra pessoa no PR: check verde não conta, e ser dona do repositório não dispensa.
 Comentário pendente é thread de revisão sem resolver, revisão que pede mudança ou comentário da conversa sem resposta, de pessoa ou de bot. Aviso de bot que só informa, como link de preview, não conta. Thread que espera decisão da pessoa segura o merge até ela decidir.
 Leia os checks uma vez. Se estiverem pendentes, não espere em loop: diga quais faltam e pare. Com `Exigir CI verde` igual a `não`, mescle mesmo assim e diga na resposta quais checks não passaram.
 Mescle só com `Tipo de merge`. Se o modo automático negar o merge, não tente de outro jeito: nada de auto-merge, API ou outra ferramenta. Entregue o comando pronto e diga que a decisão é da pessoa.
