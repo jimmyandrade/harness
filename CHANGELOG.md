@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.40.1](https://github.com/jimmyandrade/harness/compare/v0.40.0...v0.40.1) (2026-10-18)
+
+
+### Bug Fixes
+
+* **check-skill:** show the version of the project instructions in the table ([#246](https://github.com/jimmyandrade/harness/issues/246)) ([5c3e268](https://github.com/jimmyandrade/harness/commit/5c3e268b60436b95725f250f30b41e1d05182f8b))
+
 ## [0.40.0](https://github.com/jimmyandrade/harness/compare/v0.39.0...v0.40.0) (2026-10-18)
 
 
