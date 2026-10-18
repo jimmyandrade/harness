@@ -3,7 +3,7 @@ name: criar-commit
 description: Use essa habilidade sempre que terminar um trabalho que mudou o repositório ou for commitar, separar commits ou escrever a mensagem, mesmo sem dizer commit. NÃO use para push, abrir PR, rebase nem merge (use criar-pull-request).
 metadata:
   author: jimmyandrade
-  version: "0.8.0"
+  version: "0.9.0"
 ---
 
 # Criar commit
@@ -44,7 +44,7 @@ flowchart LR
   S -->|nunca ou só no terminal| D[Branch própria e commit pela integração]
 ```
 
-O repositório é a única fonte de escrita. Uma cópia sincronizada a partir dele, como a página de uma habilidade no Notion, é só leitura: não grave nela, nem quando a pessoa chamar de emergência, nem como saída quando o repositório não está ao alcance. `Commit direto na base` vale `nunca`, `só no terminal` ou `sempre`. O valor antigo `sim` vale como `só no terminal`, e `não` como `nunca`. Sem terminal, testes, build e lint não rodam: quem verifica são os checks do CI no PR, aberto por `criar-pull-request`.
+O repositório é a única fonte de escrita. Uma cópia sincronizada a partir dele, como a página de uma habilidade no Notion, é só leitura: não grave nela, nem quando a pessoa chamar de emergência, nem como saída quando o repositório não está ao alcance. `Commit direto na base` vale `nunca`, `só no terminal` ou `sempre`. Sem terminal, testes, build e lint não rodam: quem verifica são os checks do CI no PR, aberto por `criar-pull-request`.
 Na branch própria, se a branch atual for a `Branch base`, crie uma branch a partir da `Branch base` remota atualizada, sem rastrear a base. O nome é `<tipo>/<descrição>`, com o tipo do Conventional Commits do commit e a descrição em ASCII kebab-case. Branch que a ferramenta criou com outro prefixo, como `claude/`, é renomeada para esse padrão antes do commit.
 
 ### Passo 3
