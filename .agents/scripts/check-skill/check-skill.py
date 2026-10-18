@@ -184,7 +184,7 @@ def changed_skill_names() -> set[str] | None:
     }
 
 
-SUMMARY_GROUP = {"new": 0, "changed": 1, "unchanged": 2}
+SUMMARY_GROUP = {"new": 0, "changed": 1, "removed": 1, "unchanged": 2}
 
 
 def summary_order(kind: str | None, body_tokens: int | None, name: str) -> tuple[int, int, str]:
@@ -305,6 +305,39 @@ def write_summary(
             Path(report).write_text(text, encoding="utf-8")
 
 
+def removed_rows(
+    changed: set[str] | None,
+    checked: set[str],
+    base: str | None,
+    body_limit: int,
+    encoding,
+) -> list[tuple[tuple[int, int, str], str]]:
+    """Rows for skills that existed at the base and are gone from the project."""
+    if changed is None or base is None:
+        return []
+    rows = []
+    for name in sorted(changed - checked - {INSTRUCTIONS}):
+        if (ROOT / item_path(name)).exists():
+            continue
+        earlier = previous_measure(name, base, encoding)
+        if earlier is None:
+            continue
+        old_version, old_tokens = earlier
+        old_share = share_number(old_tokens, body_limit)
+        token_delta = signed_number(-old_tokens) if old_tokens is not None else "—"
+        share_delta = signed_share(-old_share) if old_share is not None else "—"
+        root = github_base_url()
+        file_url = f"{root}/blob/{base}/{item_path(name)}" if root else None
+        share = limit_share(old_tokens, body_limit) if old_tokens is not None else "unavailable"
+        rows.append(
+            (
+                summary_order("removed", old_tokens, name),
+                f"| {markdown_link(f'`{name}`', file_url)} | {old_version or 'unavailable'} → — | {old_tokens if old_tokens is not None else 'unavailable'} → — | {share} → — | {token_delta} | {share_delta} | 🗑️ removed |",
+            )
+        )
+    return rows
+
+
 def summary_markdown(
     results: dict[str, list[tuple[Path, Finding]]],
     measures: dict[str, tuple[str | None, int | None]],
@@ -312,7 +345,7 @@ def summary_markdown(
     encoding,
     only_changed: bool = False,
 ) -> str:
-    """The skill check table. With only_changed, only new, changed, or failing skills, and "" when none."""
+    """The skill check table. With only_changed, only new, changed, removed, or failing skills, and "" when none."""
     changed = changed_skill_names()
     base = summary_base()
     head = summary_head()
@@ -374,6 +407,7 @@ def summary_markdown(
             for target, finding in items:
                 where = f"{target}:{finding.line}" if finding.line else str(target)
                 finding_lines.append(f"  - `{where}` {finding.message}")
+    ranked.extend(removed_rows(changed, set(results), base, body_limit, encoding))
     if only_changed and not ranked:
         return ""
     lines = [
