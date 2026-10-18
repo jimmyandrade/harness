@@ -4,12 +4,12 @@ description: Use essa habilidade sempre que for ler texto de imagem, mesmo sem d
 compatibility: Precisa de Python.
 metadata:
   author: jimmyandrade
-  version: "0.11.0"
+  version: "0.11.1"
   related:
     - criar-oportunidade
     - definir-grafia
     - definir-inscricao
-    - lancar-despesa
+    - lancar-despesa-da-empresa
     - procurar-oportunidade
 ---
 
@@ -49,7 +49,7 @@ Entregue esse texto para a habilidade seguinte. Não faça o trabalho dela aqui.
 flowchart LR
   A{A pessoa nomeou a seguinte?} -->|sim| B[O texto é a entrada dela]
   A -->|não| M{Nota, recibo, cobrança ou transação?}
-  M -->|sim| N[lancar-despesa]
+  M -->|sim| N[lancar-despesa-da-empresa]
   M -->|não| C{Pedido de evento realizado ou confirmado?}
   C -->|sim| D[procurar-oportunidade e depois definir-inscricao]
   C -->|não| E{Nome da edição e data do evento?}
@@ -144,7 +144,7 @@ o script não estava neste ambiente. Não rodei o leitor do sistema. Li a imagem
 
 ### a foto de uma nota de tecido e o print da mesma compra no cartão, sem pedido escrito.
 
-Li os dados e entreguei o texto a `lancar-despesa`, que busca o gasto antes de criar. Os originais ficaram como evidências da mesma compra, sem novo reconhecimento. Não parei na transcrição nem tratei a compra como inscrição.
+Li os dados e entreguei o texto a `lancar-despesa-da-empresa`, que busca o gasto antes de criar. Os originais ficaram como evidências da mesma compra, sem novo reconhecimento. Não parei na transcrição nem tratei a compra como inscrição.
 
 ## Casos-limite
 

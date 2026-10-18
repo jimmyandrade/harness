@@ -5,13 +5,13 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.1"
+  version: "0.1.2"
   related:
     - definir-empresa
     - definir-pessoa
     - evoluir-habilidade
     - identificar-duplicata
-    - lancar-despesa
+    - lancar-despesa-da-empresa
 ---
 
 # Definir conta bancária
@@ -37,7 +37,7 @@ Cadastrar, revisar ou atualizar uma conta na lista de contas bancárias, e regis
 flowchart LR
   Q{O que é?} -->|conta ou histórico| A[Define aqui]
   Q -->|só saber se existe| I[identificar-duplicata]
-  Q -->|gasto pago pela conta| D[lancar-despesa]
+  Q -->|gasto pago pela conta| D[lancar-despesa-da-empresa]
   Q -->|venda recebida| V[Habilidade de venda]
   Q -->|empresa titular ausente| E[definir-empresa]
   Q -->|pessoa titular ausente| P[definir-pessoa]

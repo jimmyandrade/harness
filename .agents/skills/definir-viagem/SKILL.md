@@ -5,12 +5,12 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.1"
+  version: "0.2.2"
   related:
     - definir-agenda
     - definir-inscricao
     - evoluir-habilidade
-    - lancar-despesa
+    - lancar-despesa-da-empresa
     - organizar-ponto-de-contato
     - procurar-oportunidade
     - sincronizar-cronograma
@@ -39,7 +39,7 @@ flowchart LR
   Q -->|marco com data sem horário| S[sincronizar-cronograma]
   Q -->|horário já confirmado na agenda| G[definir-agenda]
   Q -->|dia nomeado de mala, cuidado ou saída| G
-  Q -->|comprovante financeiro ou valor| L[lancar-despesa]
+  Q -->|comprovante financeiro ou valor| L[lancar-despesa-da-empresa]
   Q -->|oportunidade| O[procurar-oportunidade]
   Q -->|inscrição| I[definir-inscricao]
   Q -->|ponto de contato| P[organizar-ponto-de-contato]
@@ -126,7 +126,7 @@ flowchart LR
   I -->|nome ou endereço confiável| H[Hospedagem]
   I -->|quarto, café ou despesa coberta| H
   I -->|clima ou vestuário| L[Nomeie na viagem, sem campo]
-  I -->|lançamento| E[lancar-despesa]
+  I -->|lançamento| E[lancar-despesa-da-empresa]
   I -->|acontecimento| K[O cronograma]
   I -->|missão que originou| O[A oportunidade, sem o roteiro]
 ```
@@ -337,7 +337,7 @@ A viagem que já casava foi atualizada. BH entrou como a mesma origem de Belo Ho
 - Mais de uma hospedagem: siga o flowchart do Passo 4.
 - Lacuna ou divergência: siga o flowchart do Passo 4.
 - Marco da mesma viagem, do mesmo nome, da mesma etapa e da mesma data: siga o flowchart do Passo 3.
-- Comprovante financeiro ou valor segue `lancar-despesa`. Passagem e reserva sem valor ficam na viagem.
+- Comprovante financeiro ou valor segue `lancar-despesa-da-empresa`. Passagem e reserva sem valor ficam na viagem.
 - A oportunidade ou inscrição não recebe o texto da viagem.
 
 ## Pegadinhas
