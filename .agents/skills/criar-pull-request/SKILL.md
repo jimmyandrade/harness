@@ -3,13 +3,13 @@ name: criar-pull-request
 description: Use essa habilidade sempre que for abrir PR, subir uma correção, mandar para a branch principal ou mesclar mudança no repositório, mesmo sem dizer PR. NÃO use para responder comentário de revisão nem para só commitar (use criar-commit).
 metadata:
   author: jimmyandrade
-  version: "0.9.0"
-  notion: "false"
+  version: "0.10.0"
   related:
     - evoluir-habilidade
     - criar-commit
     - resolver-comentarios-de-revisao
     - comunicar-novidade-do-produto
+    - publicar-habilidade
 ---
 
 # Criar pull request
@@ -154,6 +154,7 @@ O pedido autoriza push e merge. Push sem o hook, porque o commit já passou em t
 - O teste novo passa também sem a correção: o teste não cobre o bug. Reescreva antes do commit.
 - A pessoa pede para não commitar: pare antes do Passo 3.
 - A pessoa pede para subir direto na `Branch base`: não suba. Abra o PR e explique a regra.
+- O pedido vem do Notion, sem terminal: crie a branch e o commit pela integração do GitHub, pule testes, build, rebase e push, abra o PR do Passo 6, entregue o link e pare. O merge segue `publicar-habilidade`.
 
 ## Pegadinhas
 
