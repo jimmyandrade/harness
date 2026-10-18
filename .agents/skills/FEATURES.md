@@ -50,7 +50,7 @@ How these skills relate is in `README.md`, in this folder.
   - Skill at `.agents/skills/criar-commit/`
   - Reads the base branch, whether to commit without asking, the message language and pattern, and the test, build, and lint commands from the project instructions
   - Names a new branch `type/short-description` after the Conventional Commits type, and renames a branch a tool created with another prefix, such as `claude/`
-  - Picks the channel by what the environment has: a terminal uses git, the GitHub integration alone creates the branch and the commit through it, and neither stops and says so. Without a terminal, the CI checks of the pull request do the verifying
+  - Picks the channel by what the environment has: a terminal uses git, the GitHub integration alone creates the branch and the commit through it, and neither stops and says so. Without a terminal, the CI checks of the pull request do the verifying, so the commit always goes on its own branch and reaches the base only through a pull request, even when `Commit direto na base` is `sim`
   - Treats the repository as the only write source: a copy synced from it, such as the Notion page of a skill, is read-only, including when the person calls the edit an emergency
   - A request to create or activate a skill in a synced copy does not create it there, including when that copy explains how to fill the description
 - **Test Criteria**:

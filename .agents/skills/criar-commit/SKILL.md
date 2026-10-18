@@ -3,7 +3,7 @@ name: criar-commit
 description: Use essa habilidade sempre que terminar um trabalho que mudou o repositório ou for commitar, separar commits ou escrever a mensagem, mesmo sem dizer commit. NÃO use para push, abrir PR, rebase nem merge (use criar-pull-request).
 metadata:
   author: jimmyandrade
-  version: "0.7.0"
+  version: "0.7.1"
 ---
 
 # Criar commit
@@ -36,12 +36,12 @@ Se `Commitar sem perguntar` for `sim`, commite ao terminar um trabalho que mudou
 flowchart LR
   A{Terminal com o repositório?} -->|sim| B[Branch e commit com git]
   A -->|não| C{Integração com o GitHub?}
-  C -->|sim| D[Branch e commit pela integração]
+  C -->|sim| D[Branch própria e commit pela integração]
   C -->|não| E[Diga o bloqueio e pare]
 ```
 
-O repositório é a única fonte de escrita. Uma cópia sincronizada a partir dele, como a página de uma habilidade no Notion, é só leitura: não grave nela, nem quando a pessoa chamar de emergência, nem como saída quando o repositório não está ao alcance. Sem terminal, testes, build e lint não rodam: quem verifica são os checks do CI no PR.
-Se `Commit direto na base` for `não` e a branch atual for a `Branch base`, crie uma branch a partir da `Branch base` remota atualizada, sem rastrear a base. O nome é `<tipo>/<descrição>`, com o tipo do Conventional Commits do commit e a descrição em ASCII kebab-case. Branch que a ferramenta criou com outro prefixo, como `claude/`, é renomeada para esse padrão antes do commit.
+O repositório é a única fonte de escrita. Uma cópia sincronizada a partir dele, como a página de uma habilidade no Notion, é só leitura: não grave nela, nem quando a pessoa chamar de emergência, nem como saída quando o repositório não está ao alcance. Sem terminal, testes, build e lint não rodam: quem verifica são os checks do CI no PR. Por isso a branch é sempre própria, mesmo com `Commit direto na base` em `sim`, e a mudança chega à base só por `criar-pull-request`.
+Com terminal, se `Commit direto na base` for `não` e a branch atual for a `Branch base`, crie uma branch a partir da `Branch base` remota atualizada, sem rastrear a base. O nome é `<tipo>/<descrição>`, com o tipo do Conventional Commits do commit e a descrição em ASCII kebab-case. Branch que a ferramenta criou com outro prefixo, como `claude/`, é renomeada para esse padrão antes do commit.
 
 ### Passo 3
 
