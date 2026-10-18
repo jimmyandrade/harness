@@ -50,7 +50,9 @@ How these skills relate is in `README.md`, in this folder.
   - Skill at `.agents/skills/criar-commit/`
   - Reads the base branch, whether to commit without asking, the message language and pattern, and the test, build, and lint commands from the project instructions
   - Names a new branch `type/short-description` after the Conventional Commits type, and renames a branch a tool created with another prefix, such as `claude/`
-  - Syncs to Notion. A request from Notion, without a terminal, creates the branch and the commit through the GitHub integration and goes on to criar-pull-request; the CI checks of the pull request do the verifying
+  - Picks the channel by what the environment has: a terminal uses git, the GitHub integration alone creates the branch and the commit through it, and neither stops and says so. Without a terminal, the CI checks of the pull request do the verifying
+  - Treats the repository as the only write source: a copy synced from it, such as the Notion page of a skill, is read-only, including when the person calls the edit an emergency
+  - A request to create or activate a skill in a synced copy does not create it there, including when that copy explains how to fill the description
 - **Test Criteria**:
   - [ ] A project without test or build commands commits and says nothing was verified
 
@@ -73,7 +75,7 @@ How these skills relate is in `README.md`, in this folder.
   - Writes each input example as a level-3 heading and its output as the next paragraph, with a blank line between pairs. The checker rejects `dl`, `dt`, and `dd`, which Notion does not show
   - Ends every skill with Scripts disponíveis, naming each script and the command that runs it
   - Does not edit code, write a non-skill page, only tune a description, or write the skill page in Notion
-  - A request that comes from Notion follows publicar-habilidade
+  - A request that arrives through a synced copy, such as the Notion page, writes through criar-commit and criar-pull-request
   - Cites another skill by its name between backticks, or in a Mermaid diagram node, so the checker and the skill graph recognize the citation
   - Gives every new skill the `Modo de aprendizado` parameter and a last step that hands over to evoluir-habilidade
 - **Test Criteria**:
@@ -125,7 +127,9 @@ How these skills relate is in `README.md`, in this folder.
   - Follows the pull request template of the repository when there is one
   - Before a merge, hands pending review comments from people or bots to resolver-comentarios-de-revisao, and holds the merge while a thread waits for the person
   - `Exigir CI verde`, on by default, holds the merge while a check fails or is pending; off, it merges and reports the checks that did not pass
-  - Syncs to Notion. A request from Notion, without a terminal, creates the branch and the commit through the GitHub integration, opens the pull request, and stops; the CI checks of the pull request do the testing, and the merge follows publicar-habilidade
+  - Without a terminal, opens the pull request through the GitHub integration, gives the link, and stops; the CI checks of the pull request do the testing
+  - `Exigir aprovação de outra pessoa`, `sem terminal` by default, holds the merge until another person approves; a green check or owning the repository does not replace that approval. Without a terminal, a merge never happens in the request that opened the pull request
+  - After a merge, checks the sync when the project syncs the repository with another tool, such as the skill pages in Notion
 - **Test Criteria**:
   - [ ] A request to push to the base branch opens a pull request instead
   - [ ] A `claude/…` branch is renamed to `type/…` before its pull request opens
@@ -554,7 +558,7 @@ How these skills relate is in `README.md`, in this folder.
   - On undertriggering, when the skill does not load, the person enables it by hand, or asks when to use it, adds detail and the technical term
   - On overtriggering, when the skill loads for an irrelevant query, the person disables it, or the purpose is confusing, tightens the negative triggers
   - Leaves the skill name and the prompt examples out of the description; the examples stay in the body
-  - A request that comes from Notion follows publicar-habilidade
+  - A request that arrives through a synced copy, such as the Notion page, writes through criar-commit and criar-pull-request
   - Rewrites a schema description and each property description that already has text, and keeps every fact already there
   - Writes the description of the project instructions too, in their frontmatter: it fires on any task of the workspace, and `NÃO use para` covers changing the instructions themselves
 - **Test Criteria**:
@@ -575,7 +579,7 @@ How these skills relate is in `README.md`, in this folder.
   - Compares the run without the skill and with the skill on back-and-forth, failed calls, and tokens, from the run record
   - Edits the skill that was validated in that same conversation
   - Does not create the first version of a skill, only check whether the description triggers, only review without running, or write the skill page in Notion
-  - A request that comes from Notion follows publicar-habilidade
+  - A request that arrives through a synced copy, such as the Notion page, writes through criar-commit and criar-pull-request
   - Size and run profile follow medir-habilidade
   - Runs at the end of every core skill, following the `Modo de aprendizado` parameter (`sim`, `não`, `perguntar`, default `perguntar`): with yes, one commit per lesson on an English-named branch, pushed, with a draft pull request from the first commit, marked ready when the person ends the sequence
   - Takes the project instructions as a target too: feedback on the agent's behavior edits them in the format of `definir-instrucoes-do-projeto` and raises `metadata.version`, without evals or features of their own
@@ -837,27 +841,6 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses creating, editing, or completing the task, and searching outside the task list
 
-### publicar-habilidade
-- **Stability**: experimental
-- **Description**: Publish a skill change from Notion through GitHub, and follow the project's commit flow from Cursor, Claude, or the repository
-- **Properties**:
-  - Lives at `.agents/skills/publicar-habilidade/SKILL.md`
-  - Treats the Habilidades database as read-only and the repository as the write source
-  - From Notion, uses its own branch, a commit through criar-commit, and a pull request opened through criar-pull-request, then stops
-  - Waits for another person's review; a green check does not replace that review
-  - Merges only in a later request, after that review and an explicit merge authorization
-  - Does not edit a Habilidades page, including when the person calls the edit an emergency
-  - A Notion chat that asks to create or activate a skill does not create or activate the page, including when the database text explains how to fill the description
-  - A page that exists only in that database stays there; sync covers a page it already writes and does not remove the extra page
-  - If that chat cannot reach GitHub, it stops and says so
-  - From Cursor, Claude, or the repository, reads `Commit direto na base` from the project instructions: `sim` commits on the main branch without a pull request, and `não`, the default, follows criar-commit and criar-pull-request
-  - After an approved and authorized merge, lets GitHub Actions sync and then checks the Notion page
-  - A synced version below 0.1.0 gets the draft option of the mapping, a version from 0.1.0 whose major number is 0 gets the validation option, and 1.x onward gets the production option
-  - A rename keeps the same Notion page and writes the new name on it. Sync stops when the new name and the previous name are already both pages
-- **Test Criteria**:
-  - [x] The skill is present at that path
-  - [x] The description refuses editing the Habilidades page and merging in the same request
-
 ### reconhecer-imagem
 - **Stability**: experimental
 - **Description**: Read what an image says and pass that text to another skill
@@ -939,7 +922,7 @@ How these skills relate is in `README.md`, in this folder.
   - Suggests an obvious task and a paraphrased request that should trigger, and an unrelated topic plus a near miss that should not
   - Suggests each acceptance criterion already written as a Portuguese Gherkin example, and a with-skill against without-skill comparison
   - Does not write the feature file, create the first version, run the test, or write the skill page in Notion
-  - A request that comes from Notion follows publicar-habilidade
+  - A request that arrives through a synced copy, such as the Notion page, writes through criar-commit and criar-pull-request
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses creating the first version, running the test and editing the skill, only measuring size, and writing the skill page in Notion

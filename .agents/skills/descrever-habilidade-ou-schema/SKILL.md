@@ -1,12 +1,13 @@
 ---
 name: descrever-habilidade-ou-schema
-description: Redige, corrige e testa se a descrição de uma skill, das instruções do projeto ou de um schema dispara, em subdisparo, sobredisparo, paráfrase ou tópico sem relação. Usada quando a descrição é o assunto, mesmo sem dizer descrição. Não serve para escrever o corpo da skill, avaliar a qualidade da saída, descrever produto nem gravar a página no Notion. Pedido vindo do Notion segue publicar-habilidade.
+description: Redige, corrige e testa se a descrição de uma skill, das instruções do projeto ou de um schema dispara, em subdisparo, sobredisparo, paráfrase ou tópico sem relação. Usada quando a descrição é o assunto, mesmo sem dizer descrição. Não serve para escrever o corpo da skill, avaliar a qualidade da saída, descrever produto nem gravar a página no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.18.0"
+  version: "0.19.0"
   related:
+    - criar-commit
+    - criar-pull-request
     - evoluir-habilidade
-    - publicar-habilidade
     - revisar-habilidade
   aliases:
     - otimizar-descricao
@@ -197,7 +198,7 @@ Explora, resume, limpa e gera gráfico de CSV, TSV ou planilha. Usada quando a p
 - A descrição já passa no treino e na validação: pare. A qualidade da saída fica em `evoluir-habilidade`.
 - A pessoa não nomeia o domínio: a descrição cobre essa formulação.
 - A consulta está em outro arquivo: mova para `evals/evals.json` e apague o arquivo.
-- O pedido veio do Notion: não edite a página. A escrita segue `publicar-habilidade`.
+- O pedido chega por uma cópia sincronizada, como a página no Notion: não edite a cópia. A escrita segue `criar-commit` e `criar-pull-request`.
 - A descrição do schema já existe: reescreva e mantenha cada fato. Não substitua.
 - A descrição do schema ainda não existe: escreva a primeira com o fato que a pessoa passou.
 - A descrição do schema nomeia um banco ou uma propriedade, inclusive um nome antigo: tire o nome. O fato permanece. O nome antigo fica no mapeamento.
@@ -212,7 +213,7 @@ Explora, resume, limpa e gera gráfico de CSV, TSV ou planilha. Usada quando a p
 - A validação não guia a reescrita. Ela escolhe a rodada.
 - Pedido de um passo que o agente resolve sozinho não dispara, mesmo com a descrição certa.
 - Consulta de disparo entra em `evals/evals.json`, com `should_trigger` e `split`. Não crie outro arquivo.
-- Pedido vindo do Notion parece permissão para gravar a página. A página é só leitura. Siga `publicar-habilidade`.
+- Pedido feito na cópia sincronizada parece permissão para gravá-la. A cópia é só leitura. Siga `criar-commit`.
 - Uma descrição nova parece mais clara que a antiga. No schema, a frase nova entra junto. O fato que já estava permanece.
 - O nome antigo do banco parece parte do que a fonte é. Ele fica no mapeamento. A descrição fica com o que o dado é.
 
