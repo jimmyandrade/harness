@@ -24,11 +24,16 @@
   },
   "devDependencies": {
     "@types/node": "24.19.2",
+    "harness": "github:jimmyandrade/harness#v0.17.0",
+    "lefthook": "2.1.16",
     "typescript": "7.0.2"
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "prepare": "npm run build",
     "test": "node --test \"api/**/*.test.ts\""
+  },
+  "allowScripts": {
+    "lefthook": true
   }
 }

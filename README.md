@@ -56,6 +56,8 @@ npm test
 
 Check: every command exits 0. `npm ci` already runs `npm run build` through `prepare`, which writes `dist/` from `api/`. `dist/` is not committed, as `docs/adr/0007-build-on-install.md` decides.
 
+`npm ci` also installs a Lefthook pre-commit hook that runs the skill checker of the core harness on a staged `SKILL.md` or `AGENTS.md`, as `CONTRIBUTING.md` describes. A skill over a limit fails `git commit`.
+
 ## License
 
 PolyForm Noncommercial 1.0.0, in `LICENSE.md`. Commercial use needs a written license. See `COMMERCIAL.md`.

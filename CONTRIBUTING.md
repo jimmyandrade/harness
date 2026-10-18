@@ -29,6 +29,12 @@ Every change lands through a pull request. Do not push to `main`.
 
 Every step in a workflow has a `name`: a short imperative phrase in English, such as `Install dependencies`.
 
+## Hooks
+
+`lefthook.yml` runs the skill checker of the core harness on `git commit` when a staged file is a `SKILL.md` under `.agents/skills/` or `AGENTS.md`. A skill over a limit, such as the body token limit, fails the commit before it reaches `skill-check.yml`. The checker comes from the `harness` dev dependency, pinned to the same tag as the action in `skill-check.yml`. A change to one tag changes the other in the same commit, so the local and CI limits agree.
+
+`npm ci` installs the hook through the `postinstall` of `lefthook`, allowed in `allowScripts` of `package.json`. With install scripts off, run `npx lefthook install` once. On the first run the checker creates a Python virtual environment in `node_modules/harness/.venv` and installs `tiktoken` into it, so it needs `python3` and network access once.
+
 ## Releases
 
 A release is a tag `vMAJOR.MINOR.PATCH` and a GitHub Release. Business harnesses pin the npm dependency to that full tag, as in `github:jimmyandrade/vocabulary#vMAJOR.MINOR.PATCH`.

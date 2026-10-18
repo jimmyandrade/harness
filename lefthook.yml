@@ -1,0 +1,11 @@
+# Lefthook runs the skill checker of jimmyandrade/harness on commit,
+# at the same tag as .github/workflows/skill-check.yml, so the limits agree.
+# `**` matches one or more directories, so skills live at .agents/skills/<name>/SKILL.md.
+
+pre-commit:
+  commands:
+    skill-check:
+      glob:
+        - ".agents/skills/**/SKILL.md"
+        - "AGENTS.md"
+      run: node_modules/harness/.agents/scripts/check-skill/run-check.sh {staged_files}
