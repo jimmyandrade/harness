@@ -263,6 +263,53 @@ class RemovedSkillSummaryTest(unittest.TestCase):
         self.assertNotIn("`abrir-pedido`", self.report())
 
 
+class InstructionsVersionSummaryTest(unittest.TestCase):
+    def setUp(self) -> None:
+        self.tmp = tempfile.TemporaryDirectory()
+        self.project = Path(self.tmp.name).resolve()
+        (self.project / ".agents").mkdir()
+        self.git("init", "-q")
+
+    def tearDown(self) -> None:
+        self.tmp.cleanup()
+        for key in ("HARNESS_ROOT", "CHECK_SKILL_BASE", "CHECK_SKILL_HEAD"):
+            os.environ.pop(key, None)
+
+    def git(self, *args: str) -> str:
+        return subprocess.run(
+            ["git", "-c", "user.name=t", "-c", "user.email=t@example.com", *args],
+            cwd=self.project, check=True, capture_output=True, text=True,
+        ).stdout.strip()
+
+    def commit(self, message: str) -> str:
+        self.git("add", "-A")
+        self.git("commit", "-q", "-m", message)
+        return self.git("rev-parse", "HEAD")
+
+    def row(self, before: str, after: str) -> str:
+        import tiktoken
+
+        (self.project / INSTRUCTIONS).write_text(before, encoding="utf-8")
+        base = self.commit("base")
+        (self.project / INSTRUCTIONS).write_text(after, encoding="utf-8")
+        head = self.commit("head")
+        os.environ["CHECK_SKILL_BASE"] = base
+        os.environ["CHECK_SKILL_HEAD"] = head
+        checker = load_checker(self.project)
+        encoding = tiktoken.get_encoding("o200k_base")
+        measures = {INSTRUCTIONS: checker.body_measure(after, encoding)}
+        report = checker.summary_markdown({INSTRUCTIONS: []}, measures, 5000, encoding, only_changed=True)
+        return next(line for line in report.splitlines() if f"`{INSTRUCTIONS}`" in line)
+
+    def test_the_instructions_row_shows_the_version_change(self) -> None:
+        before = '---\nmetadata:\n  version: "0.9.0"\n---\n\n# Instruções\n'
+        after = '---\nmetadata:\n  version: "0.9.1"\n---\n\n# Instruções\n'
+        self.assertIn("0.9.0 → 0.9.1", self.row(before, after))
+
+    def test_instructions_without_a_version_show_a_dash(self) -> None:
+        self.assertIn("| — |", self.row("# Instruções\n", "# Instruções do projeto\n"))
+
+
 class StagedBinaryTest(unittest.TestCase):
     def setUp(self) -> None:
         self.tmp = tempfile.TemporaryDirectory()
