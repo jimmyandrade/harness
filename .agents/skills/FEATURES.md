@@ -628,6 +628,11 @@ How these skills relate is in `README.md`, in this folder.
   - Lives at `.agents/skills/lancar-despesa/SKILL.md`
   - Reads the expense list and its property names from the data mapping of the project, when the person does not name another list
   - Records a payment in a currency of `Moedas estrangeiras` with the original amount, the exchange rate, its date and source, and the amount in `Moeda`, and asks when the rate is missing
+  - Searches by recipient variations, document, amount, date, and payment method before creating an expense, without asking permission to search
+  - Reuses an existing entry and preserves its evidence instead of recording the same purchase twice
+  - Records an absent expense in the same execution when its business purpose is confirmed or inferable from context, and asks when that purpose is uncertain
+  - Keeps original evidence in the mapped attachment property and reports missing optional fields without inventing them
+  - Verifies the saved entry before reporting that it was recorded
   - Traces the financial entry that originated the purchase or acquisition of a durable asset
   - Leaves the asset page, the split between fixed assets and stock, and a controllable-item purchase to definir-ativo-imobilizado
   - Sends a sale or a mixed sale-and-expense sentence to definir-lancamento
@@ -635,6 +640,22 @@ How these skills relate is in `README.md`, in this folder.
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses the opportunity, the signup update, the task, the agenda, and registering the asset
+  - [ ] A confirmed or inferable business expense is recorded after an existence search; an existing expense is reused
+
+### liberar-espaco-em-disco
+- **Stability**: experimental
+- **Description**: Free disk space on a Mac without losing a file, only from caches that rebuild themselves
+- **Properties**:
+  - Lives at `.agents/skills/liberar-espaco-em-disco/SKILL.md`
+  - Does not sync to Notion, because it needs a shell
+  - Measures free space and swap first, then the known folders in the background, one level deeper in the largest
+  - Sorts each item into a cache that rebuilds itself, a cache its app clears better, or a file of the person, which it only sizes
+  - Never deletes by itself: hands over the delete command for the person to run, even after a yes
+  - Measures again after each cleanup and reports the space freed against the baseline
+  - Explains that Activity Monitor totals bytes written since boot and that swap moves free space up and down
+- **Test Criteria**:
+  - [ ] Only caches that rebuild themselves are proposed for deletion, and the person's files show only their size
+  - [ ] The agent hands over the delete command and deletes nothing itself
 
 ### medir-habilidade
 - **Stability**: experimental
@@ -846,16 +867,18 @@ How these skills relate is in `README.md`, in this folder.
   - When the script is present, does not read the image file itself
   - Reads the recognition languages from its `Idiomas do reconhecimento` parameter
   - Drops the phone and ad chrome, and does not treat a stray syllable as a name
-  - Does not send the image to the connected workspace
+  - Passes text to the next skill without another recognition pass; preserves originals as evidence for a financial entry
   - When the text has an edition name and a date, and the person did not name the next skill, passes that text to procurar-oportunidade without asking, then to criar-oportunidade when the edition is not found
-  - When the reading is a completed or confirmed order, passes it to definir-inscricao after the edition lookup, and does not write the inscription itself
+  - Routes a note, receipt, bill, or transaction to lancar-despesa before treating a completed order as an event signup
+  - When the reading is a completed or confirmed event order, passes it to definir-inscricao after the edition lookup, and does not write the inscription itself
   - When the reading is a person or a social profile, passes it to definir-grafia and does not stop at the text
   - When the next skill is not in the conversation's skill list, delivers the text and asks whether to call that skill by name, without saying it is unavailable
-  - Stops at the text when it is not an opportunity, a person, or a profile and the person did not name the next skill
+  - Stops at the text only when the routing flow has no recipient and the person did not name the next skill
   - Does not register the opportunity itself, organize a fair, or create a task
 - **Test Criteria**:
   - [x] The skill is present at that path
-  - [x] The description refuses registering an opportunity, organizing a contact point, creating a task, and reading text that is already written
+  - [x] The description refuses registering an entity, creating a task, and reading text that is already written
+  - [ ] A receipt and the matching transaction reach the expense workflow without a written request to record them
 
 ### registrar-ciclo-do-ativo
 - **Stability**: experimental

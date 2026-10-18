@@ -1,5 +1,33 @@
 # Changelog
 
+## [0.35.0](https://github.com/jimmyandrade/harness/compare/v0.34.0...v0.35.0) (2026-10-18)
+
+
+### Features
+
+* **liberar-espaco-em-disco:** add the disk cleanup skill ([#223](https://github.com/jimmyandrade/harness/issues/223)) ([e566b27](https://github.com/jimmyandrade/harness/commit/e566b2707afa839620dbcd675fcd22ed67e1b642))
+
+## [0.34.0](https://github.com/jimmyandrade/harness/compare/v0.33.1...v0.34.0) (2026-10-18)
+
+
+### Features
+
+* route financial evidence into expense recording ([#200](https://github.com/jimmyandrade/harness/issues/200)) ([6c2b13b](https://github.com/jimmyandrade/harness/commit/6c2b13bb3afdc54047f70e34496e03df5c124056))
+
+## [0.33.1](https://github.com/jimmyandrade/harness/compare/v0.33.0...v0.33.1) (2026-10-18)
+
+
+### Miscellaneous Chores
+
+* release 0.33.1 ([#226](https://github.com/jimmyandrade/harness/issues/226)) ([2c454c0](https://github.com/jimmyandrade/harness/commit/2c454c0a3d2047b58bd31791e29a5eb9a7080273))
+
+## [0.33.0](https://github.com/jimmyandrade/harness/compare/v0.32.0...v0.33.0) (2026-10-17)
+
+
+### Features
+
+* sync skills to Notion on each release instead of each push ([#221](https://github.com/jimmyandrade/harness/issues/221)) ([1a32f21](https://github.com/jimmyandrade/harness/commit/1a32f210df9c7d433b4148520490a3a2d9eb751c))
+
 ## [0.32.0](https://github.com/jimmyandrade/harness/compare/v0.31.0...v0.32.0) (2026-10-15)
 
 

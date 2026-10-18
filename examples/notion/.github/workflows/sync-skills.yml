@@ -1,0 +1,50 @@
+name: sync-skills
+
+# Publishes the skills that changed since the previous release. Release Please
+# creates the release with an app token, which fires `release`; see
+# examples/release-please/.
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      base:
+        description: Commit or tag the change starts from. Empty means the previous release.
+        type: string
+        required: false
+
+permissions:
+  contents: read
+
+jobs:
+  sync:
+    runs-on: ubuntu-26.04
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.release.tag_name || github.sha }}
+      - name: Find the previous release
+        id: range
+        env:
+          BASE: ${{ inputs.base }}
+        run: |
+          head="$(git rev-parse HEAD)"
+          if [ -z "$BASE" ]; then
+            BASE="$(git describe --tags --abbrev=0 "$head^" 2>/dev/null || git rev-list --max-parents=0 "$head" | tail -n 1)"
+          fi
+          echo "base=$BASE" >> "$GITHUB_OUTPUT"
+          echo "head=$head" >> "$GITHUB_OUTPUT"
+      - name: Check skills
+        uses: jimmyandrade/harness/.github/actions/check-skill@vX.Y.Z
+        with:
+          base: ${{ steps.range.outputs.base }}
+          head: ${{ steps.range.outputs.head }}
+          comment: "false"
+      - name: Sync skill pages
+        uses: jimmyandrade/harness/.github/actions/sync-skill-pages@vX.Y.Z
+        with:
+          notion-token: ${{ secrets.NOTION_TOKEN }}
+          base: ${{ steps.range.outputs.base }}
+          head: ${{ steps.range.outputs.head }}
