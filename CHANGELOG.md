@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.34.0](https://github.com/jimmyandrade/harness/compare/v0.33.1...v0.34.0) (2026-10-18)
+
+
+### Features
+
+* route financial evidence into expense recording ([#200](https://github.com/jimmyandrade/harness/issues/200)) ([6c2b13b](https://github.com/jimmyandrade/harness/commit/6c2b13bb3afdc54047f70e34496e03df5c124056))
+
 ## [0.33.1](https://github.com/jimmyandrade/harness/compare/v0.33.0...v0.33.1) (2026-10-18)
 
 
