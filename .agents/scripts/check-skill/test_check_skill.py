@@ -263,6 +263,63 @@ class RemovedSkillSummaryTest(unittest.TestCase):
         self.assertNotIn("`abrir-pedido`", self.report())
 
 
+class RenamedSkillSummaryTest(unittest.TestCase):
+    def setUp(self) -> None:
+        self.tmp = tempfile.TemporaryDirectory()
+        self.project = Path(self.tmp.name).resolve()
+        (self.project / ".agents").mkdir()
+        (self.project / INSTRUCTIONS).write_text(PARAMETERS, encoding="utf-8")
+        self.git("init", "-q")
+        write_skill(self.project, "fechar-pedido", body="Fecha o pedido.")
+        self.base = self.commit("base")
+        self.git("mv", ".agents/skills/fechar-pedido", ".agents/skills/fechar-pedido-da-loja")
+        skill = self.project / ".agents" / "skills" / "fechar-pedido-da-loja" / "SKILL.md"
+        skill.write_text(
+            "\n".join([
+                "---", "name: fechar-pedido-da-loja", "description: x", "metadata:", "  author: example",
+                '  version: "0.2.0"', "  aliases:", "    - fechar-pedido", "---", "", "Fecha o pedido.",
+            ]) + "\n",
+            encoding="utf-8",
+        )
+        self.head = self.commit("head")
+        os.environ["HARNESS_ROOT"] = str(self.project)
+        os.environ["CHECK_SKILL_BASE"] = self.base
+        os.environ["CHECK_SKILL_HEAD"] = self.head
+        self.checker = load_checker(self.project)
+        import tiktoken
+
+        self.encoding = tiktoken.get_encoding("o200k_base")
+
+    def tearDown(self) -> None:
+        self.tmp.cleanup()
+        for key in ("HARNESS_ROOT", "CHECK_SKILL_BASE", "CHECK_SKILL_HEAD"):
+            os.environ.pop(key, None)
+
+    def git(self, *args: str) -> str:
+        return subprocess.run(
+            ["git", "-c", "user.name=t", "-c", "user.email=t@example.com", *args],
+            cwd=self.project, check=True, capture_output=True, text=True,
+        ).stdout.strip()
+
+    def commit(self, message: str) -> str:
+        self.git("add", "-A")
+        self.git("commit", "-q", "-m", message)
+        return self.git("rev-parse", "HEAD")
+
+    def report(self) -> str:
+        results = {"fechar-pedido-da-loja": []}
+        measures = {"fechar-pedido-da-loja": ("0.2.0", 3)}
+        return self.checker.summary_markdown(results, measures, 5000, self.encoding, only_changed=True)
+
+    def test_a_renamed_skill_compares_with_its_previous_name(self) -> None:
+        row = next(line for line in self.report().splitlines() if "`fechar-pedido-da-loja`" in line)
+        self.assertIn("0.1.0 → 0.2.0", row)
+        self.assertIn("renamed from `fechar-pedido`", row)
+
+    def test_the_previous_name_gets_no_removed_row(self) -> None:
+        self.assertNotIn("🗑️ removed", self.report())
+
+
 class InstructionsVersionSummaryTest(unittest.TestCase):
     def setUp(self) -> None:
         # Without these, the cells carry no links, as outside GitHub Actions.
