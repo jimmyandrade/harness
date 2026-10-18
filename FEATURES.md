@@ -60,8 +60,8 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
   - [x] The marketplace regex reads the repository and the tag of a `github` plugin source
   - [x] A second regex reads the repository and the tag of a `url` plugin source on github.com, as in the business marketplace
   - [x] The same regex reads the pin in `.claude/settings.json`, and `.claude/settings.local.json` is not matched
-  - [ ] A release of the core or of jimmyandrade/vocabulary opens one `core harness and vocabulary` pull request in a business harness
-  - [ ] That pull request merges by itself once its checks pass, for a minor or patch release
+  - [x] A release of the core or of jimmyandrade/vocabulary opens one `core harness and vocabulary` pull request in a business harness
+  - [x] That pull request merges by itself once its checks pass, for a minor or patch release
 
 ### skill-graph
 - **Stability**: experimental
