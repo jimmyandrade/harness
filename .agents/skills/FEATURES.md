@@ -223,7 +223,7 @@ How these skills relate is in `README.md`, in this folder.
   - Sends fabric, trim, thread, buttons, labels, packaging, production inputs, and consumable office material to the stock list through gerenciar-estoque, including when the purchase was an investment
   - Asks before creating or linking when the destination is unclear, including a hybrid item that wears and can be repaired, and when the choice is among fixed assets, stock, parts, production, or financial context alone
   - On create or update, links the matching entry from the expense list through the cost and investment entries when that property exists, and keeps the amount paid, the purchase date, the supplier, and the evidence used
-  - Leaves the financial entry that originated the purchase to lancar-despesa, and does not treat the origin as resolved when no reliable entry exists
+  - Leaves the financial entry that originated the purchase to lancar-despesa-da-empresa, and does not treat the origin as resolved when no reliable entry exists
   - Starts a purchase of a durable good from that entry, and records the amount paid, the purchase date, and the buyer as the responsible person
   - Relates an existing cost category and an existing owner company, and does not treat the closed brand list as the company
   - Sends a supplier, manufacturer, brand company, or owning company to definir-empresa for lookup, registration, or reconciliation
@@ -243,7 +243,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Description**: Register, review, or update a bank or payment account, personal or business, and record what happened to it
 - **Properties**:
   - Lives at `.agents/skills/definir-conta-bancaria/SKILL.md`
-  - Leaves the existence-only check to identificar-duplicata, expenses to lancar-despesa, a received sale to the skill the project names, a missing company to definir-empresa, and a missing person to definir-pessoa
+  - Leaves the existence-only check to identificar-duplicata, expenses to lancar-despesa-da-empresa, a received sale to the skill the project names, a missing company to definir-empresa, and a missing person to definir-pessoa
   - Treats a page whose title starts with a template title from the project instructions as a template and creates a new page instead of filling it
   - Links a business account to the holding company and a personal account to the holding person, and keeps both accounts of the same person apart
   - Fills branch, account, check digit, and holder only from the source
@@ -395,7 +395,7 @@ How these skills relate is in `README.md`, in this folder.
   - Reads `Moeda`, `Moedas estrangeiras`, `Habilidade de venda`, and `Habilidade de projeção de caixa` from the project instructions
   - Records an expense in a foreign currency with the original amount, the exchange rate, and the amount in `Moeda`, and asks when the rate is missing
   - Asks before recording when company or personal, sale or expense, or the payment form is missing
-  - Keeps a personal entry out of the company source and sends a company expense to lancar-despesa
+  - Keeps a personal entry out of the company source and sends a company expense to lancar-despesa-da-empresa
   - Sends a sale to the skill that `Habilidade de venda` names, when there is one, and does not store it in the expense list
   - Classifies a company expense with the configured classes and does not create a missing category
   - Adds the entry to what the source already has and does not rebuild or delete prior entries
@@ -519,7 +519,7 @@ How these skills relate is in `README.md`, in this folder.
   - Classifies the commitment before a create, review, or alter, and asks when the type is unclear
   - Treats an opportunity as the edition, the date, the curation, and the chance to participate, a deal as the conversation or commercial meeting, and a contact point as real participation
   - Does not turn a meeting or a review into a contact point, and does not record an approved opportunity as a contact point until the participation days are confirmed
-  - Sends an existing opportunity to procurar-oportunidade, a missing one to an offer of criar-oportunidade, a contact point to organizar-ponto-de-contato, a course to procurar-oportunidade and definir-recurso-de-aprendizado, a call to the opportunity regulation, a recurring edition to definir-grupo-de-oportunidades, a task to definir-tarefa, travel to definir-viagem, and cost or payment to lancar-despesa
+  - Sends an existing opportunity to procurar-oportunidade, a missing one to an offer of criar-oportunidade, a contact point to organizar-ponto-de-contato, a course to procurar-oportunidade and definir-recurso-de-aprendizado, a call to the opportunity regulation, a recurring edition to definir-grupo-de-oportunidades, a task to definir-tarefa, travel to definir-viagem, and cost or payment to lancar-despesa-da-empresa
   - Leaves the write of a commercial meeting, an internal commitment, a deadline, or a delivery to definir-agenda, and keeps a deadline distinct from a delivery
 - **Test Criteria**:
   - [x] The skill is present at that path
@@ -537,11 +537,11 @@ How these skills relate is in `README.md`, in this folder.
   - Answers who will drive the person, or whether a bus is needed, from the flight number and the takeoff time of the outbound and return legs, and does not substitute boarding or another milestone for that takeoff
   - Leaves an unconfirmed time empty, and does not copy the next milestone's time or use an all-day block in its place
   - Distinguishes a confirmed fact, a pending item, and conflicting sources. Leaves the pending item empty and named, keeps both conflicting sources, and lets a more recent and explicitly official source prevail. Does not invent a city, an airport, a hotel, a time, a transfer, or a responsibility
-  - Links each lodging to the trip only when the name or the address is reliable, because a trip can have more than one. An address without a confirmed name becomes the lodging title. The written address, the address complement, the map place, the room, the breakfast, and a covered expense without a ledger entry stay on that lodging. A financial entry follows lancar-despesa and relates to the trip, and an organization-covered amount stays distinct from an expense the participant owes. General weather and packing guidance, such as cold, heat, dry weather, rain, and what kind of clothes to bring, stays named on the trip. It is not a product of the business, and no property is created for it. Cronograma keeps the operational event, its stage, its times, its owners, and the note for that event
+  - Links each lodging to the trip only when the name or the address is reliable, because a trip can have more than one. An address without a confirmed name becomes the lodging title. The written address, the address complement, the map place, the room, the breakfast, and a covered expense without a ledger entry stay on that lodging. A financial entry follows lancar-despesa-da-empresa and relates to the trip, and an organization-covered amount stays distinct from an expense the participant owes. General weather and packing guidance, such as cold, heat, dry weather, rain, and what kind of clothes to bring, stays named on the trip. It is not a product of the business, and no property is created for it. Cronograma keeps the operational event, its stage, its times, its owners, and the note for that event
   - Puts a flight number, which has no property of its own, in the milestone context, without repeating date, time, or place
   - Does not write the flight, the lodging, or the guidance on an opportunity or an inscription
   - Does not create a trip when the person only asks whether one exists or which day it falls on
-  - Leaves a dated milestone with no confirmed start and end to sincronizar-cronograma, a confirmed calendar time and a named-day plan to definir-agenda, and a financial proof or an amount to lancar-despesa
+  - Leaves a dated milestone with no confirmed start and end to sincronizar-cronograma, a confirmed calendar time and a named-day plan to definir-agenda, and a financial proof or an amount to lancar-despesa-da-empresa
   - Does not promote the trip to confirmed without evidence, and does not cancel it without explicit evidence
 - **Test Criteria**:
   - [x] The skill is present at that path
@@ -628,11 +628,11 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses consolidating names, deleting, creating the record, locking spelling, and choosing among similar records
 
-### lancar-despesa
+### lancar-despesa-da-empresa
 - **Stability**: experimental
 - **Description**: Record a payment and trace the financial entry that originated a durable asset
 - **Properties**:
-  - Lives at `.agents/skills/lancar-despesa/SKILL.md`
+  - Lives at `.agents/skills/lancar-despesa-da-empresa/SKILL.md`
   - Reads the expense list and its property names from the data mapping of the project, when the person does not name another list
   - Records a payment in a currency of `Moedas estrangeiras` with the original amount, the exchange rate, its date and source, and the amount in `Moeda`, and asks when the rate is missing
   - Searches by recipient variations, document, amount, date, and payment method before creating an expense, without asking permission to search
@@ -871,7 +871,7 @@ How these skills relate is in `README.md`, in this folder.
   - Drops the phone and ad chrome, and does not treat a stray syllable as a name
   - Passes text to the next skill without another recognition pass; preserves originals as evidence for a financial entry
   - When the text has an edition name and a date, and the person did not name the next skill, passes that text to procurar-oportunidade without asking, then to criar-oportunidade when the edition is not found
-  - Routes a note, receipt, bill, or transaction to lancar-despesa before treating a completed order as an event signup
+  - Routes a note, receipt, bill, or transaction to lancar-despesa-da-empresa before treating a completed order as an event signup
   - When the reading is a completed or confirmed event order, passes it to definir-inscricao after the edition lookup, and does not write the inscription itself
   - When the reading is a person or a social profile, passes it to definir-grafia and does not stop at the text
   - When the next skill is not in the conversation's skill list, delivers the text and asks whether to call that skill by name, without saying it is unavailable
@@ -892,7 +892,7 @@ How these skills relate is in `README.md`, in this folder.
   - Uses the partnerships and loans property for a loan or partnership, and the purchase date plus the price paid for depreciation
   - Writes Observações patrimoniais when no structured property exists, and suggests a property without creating it before a yes
   - Does not delete the page, invent a depreciation method, create a status property, or create the asset page
-  - Leaves a payment that has financial evidence to lancar-despesa, and does not create an expense without that evidence
+  - Leaves a payment that has financial evidence to lancar-despesa-da-empresa, and does not create an expense without that evidence
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses registering the asset, choosing stock, recording the payment, and creating the company

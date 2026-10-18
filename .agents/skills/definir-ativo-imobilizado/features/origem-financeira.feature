@@ -23,5 +23,5 @@ Funcionalidade: Vincular a origem financeira
 
     Exemplo: Lançamento confiável ausente
       Quando ainda não existe lançamento financeiro confiável
-      Então a análise aciona lancar-despesa ou pede os dados mínimos
+      Então a análise aciona lancar-despesa-da-empresa ou pede os dados mínimos
       Mas não considera a origem resolvida

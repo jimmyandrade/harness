@@ -43,7 +43,7 @@ flowchart LR
     evoluir_habilidade["evoluir-habilidade"]
     gerenciar_estoque["gerenciar-estoque"]
     identificar_duplicata["identificar-duplicata"]
-    lancar_despesa["lancar-despesa"]
+    lancar_despesa_da_empresa["lancar-despesa-da-empresa"]
     liberar_espaco_em_disco["liberar-espaco-em-disco"]
     medir_habilidade["medir-habilidade"]
     mesclar_registro["mesclar-registro"]
@@ -100,7 +100,7 @@ flowchart LR
   definir_ativo_imobilizado --> definir_empresa
   definir_ativo_imobilizado --> gerenciar_estoque
   definir_ativo_imobilizado --> identificar_duplicata
-  definir_ativo_imobilizado --> lancar_despesa
+  definir_ativo_imobilizado --> lancar_despesa_da_empresa
   definir_ativo_imobilizado --> mesclar_registro
   definir_ativo_imobilizado --> reconhecer_imagem
   definir_ativo_imobilizado --> registrar_ciclo_do_ativo
@@ -108,7 +108,7 @@ flowchart LR
   definir_conta_bancaria --> definir_pessoa
   definir_conta_bancaria --> evoluir_habilidade
   definir_conta_bancaria --> identificar_duplicata
-  definir_conta_bancaria --> lancar_despesa
+  definir_conta_bancaria --> lancar_despesa_da_empresa
   definir_convidado --> definir_agenda
   definir_convidado --> definir_inscricao
   definir_convidado --> procurar_agenda
@@ -137,7 +137,7 @@ flowchart LR
   definir_lancamento --> definir_ativo_imobilizado
   definir_lancamento --> definir_planejamento_financeiro
   definir_lancamento --> gerenciar_estoque
-  definir_lancamento --> lancar_despesa
+  definir_lancamento --> lancar_despesa_da_empresa
   definir_lancamento --> revisar_financas
   definir_perfil_social --> definir_grafia
   definir_perfil_social --> definir_pessoa
@@ -166,14 +166,14 @@ flowchart LR
   definir_tipo_do_evento --> definir_reserva
   definir_tipo_do_evento --> definir_tarefa
   definir_tipo_do_evento --> definir_viagem
-  definir_tipo_do_evento --> lancar_despesa
+  definir_tipo_do_evento --> lancar_despesa_da_empresa
   definir_tipo_do_evento --> organizar_ponto_de_contato
   definir_tipo_do_evento --> procurar_agenda
   definir_tipo_do_evento --> procurar_oportunidade
   definir_viagem --> definir_agenda
   definir_viagem --> definir_inscricao
   definir_viagem --> evoluir_habilidade
-  definir_viagem --> lancar_despesa
+  definir_viagem --> lancar_despesa_da_empresa
   definir_viagem --> organizar_ponto_de_contato
   definir_viagem --> procurar_oportunidade
   definir_viagem --> sincronizar_cronograma
@@ -195,8 +195,8 @@ flowchart LR
   identificar_duplicata --> definir_grafia
   identificar_duplicata --> definir_perfil_social
   identificar_duplicata --> mesclar_registro
-  lancar_despesa --> definir_ativo_imobilizado
-  lancar_despesa --> definir_lancamento
+  lancar_despesa_da_empresa --> definir_ativo_imobilizado
+  lancar_despesa_da_empresa --> definir_lancamento
   liberar_espaco_em_disco --> evoluir_habilidade
   medir_habilidade --> evoluir_habilidade
   mesclar_registro --> definir_empresa
@@ -234,11 +234,11 @@ flowchart LR
   reconhecer_imagem --> criar_oportunidade
   reconhecer_imagem --> definir_grafia
   reconhecer_imagem --> definir_inscricao
-  reconhecer_imagem --> lancar_despesa
+  reconhecer_imagem --> lancar_despesa_da_empresa
   reconhecer_imagem --> procurar_oportunidade
   registrar_ciclo_do_ativo --> definir_ativo_imobilizado
   registrar_ciclo_do_ativo --> identificar_duplicata
-  registrar_ciclo_do_ativo --> lancar_despesa
+  registrar_ciclo_do_ativo --> lancar_despesa_da_empresa
   registrar_ciclo_do_ativo --> mesclar_registro
   resolver_comentarios_de_revisao --> criar_commit
   resolver_comentarios_de_revisao --> criar_pull_request

@@ -1,19 +1,20 @@
 ---
-name: lancar-despesa
+name: lancar-despesa-da-empresa
 description: Use essa habilidade sempre que for buscar ou registrar gasto da empresa, inclusive nota, recibo, comprovante ou transação lidos de imagem sem pedido escrito. NÃO use para venda, gasto pessoal, cadastrar oportunidade, atualizar inscrição, criar tarefa, montar agenda nem cadastrar ativo.
 allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-data-sources notion:notion-create-pages notion:notion-update-page notion:notion-create-comment
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.6.0"
   aliases:
     - definir-despesa
+    - lancar-despesa
   related:
     - definir-ativo-imobilizado
     - definir-lancamento
 ---
 
-# Lançar despesa
+# Lançar despesa da empresa
 
 ## Parâmetros de configuração
 

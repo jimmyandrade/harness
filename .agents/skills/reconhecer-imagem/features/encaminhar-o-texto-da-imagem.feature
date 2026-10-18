@@ -31,5 +31,5 @@ Funcionalidade: Encaminhar o texto da imagem
     Exemplo: Nota e transação sem pedido escrito de lançamento
       Dado que a pessoa enviou uma nota de compra e o print da mesma transação
       Quando a skill lê as imagens sem um pedido escrito
-      Então o texto segue para lancar-despesa procurar o lançamento
+      Então o texto segue para lancar-despesa-da-empresa procurar o lançamento
       Mas a resposta não para só na transcrição
