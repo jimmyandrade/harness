@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.38.0](https://github.com/jimmyandrade/harness/compare/v0.37.0...v0.38.0) (2026-10-18)
+
+
+### Features
+
+* commit a Notion request through criar-commit ([#239](https://github.com/jimmyandrade/harness/issues/239)) ([de1241d](https://github.com/jimmyandrade/harness/commit/de1241d26fdc4865130d6ecf80cd9a12a1aef7d3))
+
 ## [0.37.0](https://github.com/jimmyandrade/harness/compare/v0.36.0...v0.37.0) (2026-10-18)
 
 
