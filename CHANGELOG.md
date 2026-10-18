@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.37.0](https://github.com/jimmyandrade/harness/compare/v0.36.0...v0.37.0) (2026-10-18)
+
+
+### Features
+
+* open the pull request of a Notion request through criar-pull-request ([#237](https://github.com/jimmyandrade/harness/issues/237)) ([a6419ea](https://github.com/jimmyandrade/harness/commit/a6419ea61a066893a4073c96c70492f953f2c4d1))
+
 ## [0.36.0](https://github.com/jimmyandrade/harness/compare/v0.35.0...v0.36.0) (2026-10-18)
 
 
