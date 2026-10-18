@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.43.0](https://github.com/jimmyandrade/harness/compare/v0.42.0...v0.43.0) (2026-10-18)
+
+
+### Features
+
+* **organizar-emails:** tell current work from past activity ([#253](https://github.com/jimmyandrade/harness/issues/253)) ([3f2f7ca](https://github.com/jimmyandrade/harness/commit/3f2f7cae90bd81a50406f6498c60e41910242339))
+
 ## [0.42.0](https://github.com/jimmyandrade/harness/compare/v0.41.0...v0.42.0) (2026-10-18)
 
 
