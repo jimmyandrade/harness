@@ -52,16 +52,16 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
 - **Description**: Renovate preset that keeps a repository and its pins of the core harness current
 - **Properties**:
   - Preset at `default.json`, extended as `github>jimmyandrade/harness`
-  - Groups every pin of the core harness, in workflows, `package.json`, `.claude-plugin/marketplace.json`, and `.claude/settings.json`, into one `harness core` pull request
-  - Moves a release-tag pin of jimmyandrade/vocabulary in `package.json` in one `vocabulary` pull request, as soon as a release exists
+  - Groups every pin of the core harness, in workflows, `package.json`, `.claude-plugin/marketplace.json`, and `.claude/settings.json`, and every release-tag pin of jimmyandrade/vocabulary in `package.json`, into one `core harness and vocabulary` pull request, as soon as a release exists
+  - Merges that pull request by itself for a minor or patch release, once its checks pass
   - A major update waits for approval on the Dependency Dashboard
   - Names the Dependency Dashboard issue `chore(deps): dependency dashboard`, a Conventional Commits title matching the `chore(deps)` and `fix(deps)` pull requests it lists
 - **Test Criteria**:
   - [x] The marketplace regex reads the repository and the tag of a `github` plugin source
   - [x] A second regex reads the repository and the tag of a `url` plugin source on github.com, as in the business marketplace
   - [x] The same regex reads the pin in `.claude/settings.json`, and `.claude/settings.local.json` is not matched
-  - [ ] A release of the core opens one `harness core` pull request in a business harness
-  - [ ] A release of jimmyandrade/vocabulary opens one `vocabulary` pull request in a business harness that pins a tag
+  - [x] A release of the core or of jimmyandrade/vocabulary opens one `core harness and vocabulary` pull request in a business harness
+  - [x] That pull request merges by itself once its checks pass, for a minor or patch release
 
 ### skill-graph
 - **Stability**: experimental
@@ -112,6 +112,7 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
   - The page icon comes from the `Ícone das páginas no Notion` and `Cor do ícone das páginas no Notion` settings, with the core fallback
   - The project instructions file becomes one more page of the skills database, titled with the file name. Its description and version properties come from `description` and `metadata.version` in the frontmatter, and the description tells the Notion agent to load the page for any task. The page body ends with its parameters in a YAML code block. It publishes when the file changes, when the mapping or the publisher changes, or when the project moves the core version
   - `include-core` also publishes the skills of the core harness into the caller's Notion
+  - The `sync-skills` example workflow runs it on each release, with the previous release as `base`, after `check-skill`. A Release Please workflow calls it, and a person can run it by hand with another `base`
   - Leaves out a skill with `metadata.notion: "false"`, logged as `stays in git`, and one with `metadata.internal: true`, logged as `internal`
 - **Test Criteria**:
   - [x] A mapping can rename every status option

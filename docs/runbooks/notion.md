@@ -4,7 +4,7 @@ locale: en
 
 # Publish the skills in Notion
 
-GitHub is the write source. On each push to the default branch, the sync action writes one page per changed skill, including the core skills, into the skills database of the workspace, and one page for the project instructions, `AGENTS.md`, when that file changes. Nobody edits those pages in Notion. The database can have any name; businesses in Brazil often call it Habilidades. Run this runbook from the root of the business repository, after `business-repository.md`, with `TAG` from its step 1.
+GitHub is the write source. On each release, the sync action writes one page per skill changed since the previous release, including the core skills, into the skills database of the workspace, and one page for the project instructions, `AGENTS.md`, when that file changes. Nobody edits those pages in Notion. The database can have any name; businesses in Brazil often call it Habilidades. Run this runbook from the root of the business repository, after `business-repository.md`, with `TAG` from its step 1.
 
 Each step ends with a check.
 
@@ -52,11 +52,15 @@ Check: `gh secret list` shows `NOTION_TOKEN`.
 
 ## 4. Copy the sync workflow
 
-The `skill-pages` workflow checks the skills again and then syncs them, on each push to `main`. Change `main` when the default branch has another name.
+The `sync-skills` workflow publishes the skills that changed since the previous release. It checks them first, so a skill that breaks a rule never reaches Notion. It runs when a release is published, when another workflow calls it, and by hand from the Actions tab, where `base` publishes the changes since another commit or tag, to test a skill in Notion before a release.
 
 ```bash
 cp -Rn node_modules/harness/examples/notion/. .
-perl -pi -e "s/vX\.Y\.Z/$TAG/g" .github/workflows/skill-pages.yml
+perl -pi -e "s/vX\.Y\.Z/$TAG/g" .github/workflows/sync-skills.yml
 ```
 
-Check: after a push to `main` that changes one skill, the sync step log has one line, `create` or `update`, and the page shows the new version. After a push that changes `AGENTS.md`, the log has a line for `AGENTS.md`, and the skills database has a page with that title. If the workspace already had a page titled `AGENTS.md` outside the skills database, archive it by hand, so the Notion agent reads only the synced one. An `object_not_found` error that asks to share the data source with the integration means the connection of step 2 has no access to the skills database.
+A repository whose `skill-pages` workflow syncs on each push to `main` deletes `.github/workflows/skill-pages.yml`, so a merge no longer publishes before the release.
+
+With Release Please, the release it creates with `GITHUB_TOKEN` does not fire `release` in other workflows. Add the `sync-skills` job of `examples/release-please/.github/workflows/release-please.yml` to the repository's Release Please workflow, with `id: release` on its step and the two `outputs` of its job. The same file also starts the CI workflow on the release pull request with `workflow_dispatch`, because a pull request opened with `GITHUB_TOKEN` fires no `pull_request` workflow. Copy that step as it is, with `actions: write`, since it reads the branch in its script so that a push without a release pull request does not fail, and add `workflow_dispatch` to the CI workflow it names. Without Release Please, publishing a release by hand fires the workflow.
+
+Check: after a release that changes one skill, the sync step log has one line, `create` or `update`, and the page shows the new version. After a release that changes `AGENTS.md`, the log has a line for `AGENTS.md`, and the skills database has a page with that title. If the workspace already had a page titled `AGENTS.md` outside the skills database, archive it by hand, so the Notion agent reads only the synced one. An `object_not_found` error that asks to share the data source with the integration means the connection of step 2 has no access to the skills database.
