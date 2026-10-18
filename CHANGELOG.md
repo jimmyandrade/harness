@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.35.0](https://github.com/jimmyandrade/harness/compare/v0.34.0...v0.35.0) (2026-10-18)
+
+
+### Features
+
+* **liberar-espaco-em-disco:** add the disk cleanup skill ([#223](https://github.com/jimmyandrade/harness/issues/223)) ([e566b27](https://github.com/jimmyandrade/harness/commit/e566b2707afa839620dbcd675fcd22ed67e1b642))
+
 ## [0.34.0](https://github.com/jimmyandrade/harness/compare/v0.33.1...v0.34.0) (2026-10-18)
 
 
