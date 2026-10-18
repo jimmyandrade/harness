@@ -5,35 +5,24 @@ on:
     branches:
       - main
 
-permissions:
-  actions: write
-  contents: write
-  pull-requests: write
+permissions: {}
 
 jobs:
   release-please:
     runs-on: ubuntu-26.04
     steps:
+      # GitHub holds the pull_request runs of a pull request that GITHUB_TOKEN
+      # opens or updates until someone approves them. A pull request the app
+      # opens runs ci.yml at once, so the required test check runs on it.
+      - name: Create a token for the release app
+        id: app-token
+        uses: actions/create-github-app-token@v3
+        with:
+          client-id: ${{ vars.RELEASE_APP_CLIENT_ID }}
+          private-key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
       - name: Open or update the release pull request
-        id: release
         uses: googleapis/release-please-action@v5
         with:
+          token: ${{ steps.app-token.outputs.token }}
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
-      # A pull request that GITHUB_TOKEN opens or updates gets its pull_request
-      # runs held until someone with write access approves them. A
-      # workflow_dispatch runs at once, so the required test check runs on it.
-      - name: Run CI on the release pull request
-        # Without a release pull request, `pr` is empty. The branch is read in the
-        # script: the job failed when fromJSON in the env got an empty `pr`.
-        if: steps.release.outputs.pr != ''
-        env:
-          GH_TOKEN: ${{ github.token }}
-          PR: ${{ steps.release.outputs.pr }}
-        run: |
-          branch=$(jq -r .headBranchName <<<"$PR")
-          if [ -z "$branch" ] || [ "$branch" = null ]; then
-            echo "::error::The release pull request output has no headBranchName: $PR"
-            exit 1
-          fi
-          gh workflow run ci.yml --repo "$GITHUB_REPOSITORY" --ref "$branch"
