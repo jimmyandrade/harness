@@ -3,7 +3,7 @@ name: publicar-habilidade
 description: Use essa habilidade sempre que o pedido vier do Notion para criar, ativar, alterar, renomear, versionar, publicar, excluir, restaurar, revisar ou reorganizar uma habilidade. No Cursor, no Claude ou na sessão do repositório, segue o fluxo de commit do projeto. NÃO use para editar a página ou o banco Habilidades, nem para mesclar na mesma solicitação.
 metadata:
   author: jimmyandrade
-  version: "0.7.0"
+  version: "0.8.0"
   related:
     - evoluir-habilidade
     - criar-commit
@@ -37,7 +37,7 @@ O assunto do commit é em inglês, no Conventional Commits. Se a mudança afeta 
 
 ### Passo 3
 
-Abra um pull request para a branch principal, entregue o link e pare. Não faça o merge na mesma solicitação em que criou ou alterou a habilidade.
+Abra o pull request para a branch principal seguindo `criar-pull-request`, entregue o link e pare. Não faça o merge na mesma solicitação em que criou ou alterou a habilidade.
 
 ### Passo 4
 
@@ -103,7 +103,7 @@ não editei a página. Abri uma branch, fiz o commit em inglês e entreguei o li
 
 não criei nem ativei a página. O texto do banco que manda preencher a descrição não autorizou a escrita. Este chat não alcança o GitHub, então parei e disse o bloqueio.
 
-### aqui no Cursor: ajusta o texto de uma habilidade.
+### Na sessão do repositório: ajusta o texto de uma habilidade.
 
 com `Commit direto na base` em `sim`, fiz o commit na branch principal e não abri pull request. Com `não`, segui `criar-pull-request`.
 

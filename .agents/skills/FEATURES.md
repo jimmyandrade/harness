@@ -124,6 +124,7 @@ How these skills relate is in `README.md`, in this folder.
   - Follows the pull request template of the repository when there is one
   - Before a merge, hands pending review comments from people or bots to resolver-comentarios-de-revisao, and holds the merge while a thread waits for the person
   - `Exigir CI verde`, on by default, holds the merge while a check fails or is pending; off, it merges and reports the checks that did not pass
+  - Syncs to Notion. A request from Notion, without a terminal, creates the branch and the commit through the GitHub integration, opens the pull request, and stops; the CI checks of the pull request do the testing, and the merge follows publicar-habilidade
 - **Test Criteria**:
   - [ ] A request to push to the base branch opens a pull request instead
   - [ ] A `claude/…` branch is renamed to `type/…` before its pull request opens
@@ -841,7 +842,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Properties**:
   - Lives at `.agents/skills/publicar-habilidade/SKILL.md`
   - Treats the Habilidades database as read-only and the repository as the write source
-  - From Notion, uses its own branch, an English Conventional Commits subject, and a pull request, then stops
+  - From Notion, uses its own branch, an English Conventional Commits subject, and a pull request opened through criar-pull-request, then stops
   - Waits for another person's review; a green check does not replace that review
   - Merges only in a later request, after that review and an explicit merge authorization
   - Does not edit a Habilidades page, including when the person calls the edit an emergency
