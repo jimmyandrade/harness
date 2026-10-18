@@ -51,6 +51,7 @@ How these skills relate is in `README.md`, in this folder.
   - Reads the base branch, whether to commit without asking, the message language and pattern, and the test, build, and lint commands from the project instructions
   - Names a new branch `type/short-description` after the Conventional Commits type, and renames a branch a tool created with another prefix, such as `claude/`
   - Picks the channel by what the environment has: a terminal uses git, the GitHub integration alone creates the branch and the commit through it, and neither stops and says so. Without a terminal, the CI checks of the pull request do the verifying
+  - `Commit direto na base` is `nunca`, the default, `só no terminal`, or `sempre`. Only `sempre` commits on the base without a terminal
   - Treats the repository as the only write source: a copy synced from it, such as the Notion page of a skill, is read-only, including when the person calls the edit an emergency
   - A request to create or activate a skill in a synced copy does not create it there, including when that copy explains how to fill the description
 - **Test Criteria**:
@@ -128,7 +129,7 @@ How these skills relate is in `README.md`, in this folder.
   - Before a merge, hands pending review comments from people or bots to resolver-comentarios-de-revisao, and holds the merge while a thread waits for the person
   - `Exigir CI verde`, on by default, holds the merge while a check fails or is pending; off, it merges and reports the checks that did not pass
   - Without a terminal, opens the pull request through the GitHub integration, gives the link, and stops; the CI checks of the pull request do the testing
-  - `Exigir aprovação de outra pessoa`, `sem terminal` by default, holds the merge until another person approves; a green check or owning the repository does not replace that approval. Without a terminal, a merge never happens in the request that opened the pull request
+  - `Exigir aprovação de outra pessoa` is `nunca`, `só sem terminal`, the default, or `sempre`. It holds the merge until another person approves; a green check or owning the repository does not replace that approval. Without a terminal, a merge never happens in the request that opened the pull request
   - After a merge, checks the sync when the project syncs the repository with another tool, such as the skill pages in Notion
 - **Test Criteria**:
   - [ ] A request to push to the base branch opens a pull request instead
