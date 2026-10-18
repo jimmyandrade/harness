@@ -1,14 +1,15 @@
 ---
 name: revisar-habilidade
-description: Use essa habilidade sempre que for revisar uma skill já escrita, sinalizar descrição vaga, gatilho faltando ou problema de estrutura, ver risco de disparar demais ou de menos, ou sugerir casos a partir do propósito. NÃO use para criar a primeira versão, executar o teste e editar a skill, só medir tamanho, nem gravar a página no Notion. Pedido vindo do Notion segue publicar-habilidade.
+description: Use essa habilidade sempre que for revisar uma skill já escrita, sinalizar descrição vaga, gatilho faltando ou problema de estrutura, ver risco de disparar demais ou de menos, ou sugerir casos a partir do propósito. NÃO use para criar a primeira versão, executar o teste e editar a skill, só medir tamanho, nem gravar a página no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.4.0"
   related:
+    - criar-commit
     - criar-habilidade
+    - criar-pull-request
     - descrever-habilidade-ou-schema
     - evoluir-habilidade
-    - publicar-habilidade
 ---
 
 # Revisar habilidade
@@ -87,13 +88,13 @@ Deve disparar: montar um workspace novo, criar um projeto, iniciar um projeto pa
 - O pedido é executar o teste: use `evoluir-habilidade`.
 - O pedido é só o disparo: use `descrever-habilidade-ou-schema`.
 - O propósito não fala de planilha, chamada ou limite: não sugira esse caso.
-- O pedido veio do Notion: não edite a página. A escrita segue `publicar-habilidade`.
+- O pedido chega por uma cópia sincronizada, como a página no Notion: não edite a cópia. A escrita segue `criar-commit` e `criar-pull-request`.
 
 ## Pegadinhas
 
 - Sugerir caso parece gravar o eval. A sugestão fica na resposta.
 - Descrição longa parece sem risco. O risco de disparar demais está no que o `NÃO use para` não cobre.
-- Pedido vindo do Notion parece permissão para gravar a página. A página é só leitura. Siga `publicar-habilidade`.
+- Pedido feito na cópia sincronizada parece permissão para gravá-la. A cópia é só leitura. Siga `criar-commit`.
 
 ## Scripts disponíveis
 

@@ -1,14 +1,15 @@
 ---
 name: evoluir-habilidade
-description: Use essa habilidade sempre que for testar uma skill ou evoluir as instruções do projeto, mesmo sem dizer evoluir, inclusive o Gherkin e a comparação com e sem skill, resultado inconsistente, falha de chamada ou correção da pessoa. NÃO use para criar a primeira versão, só ver se a descrição dispara, só revisar sem executar, nem gravar a página no Notion. Pedido vindo do Notion segue publicar-habilidade.
+description: Use essa habilidade sempre que for testar uma skill ou evoluir as instruções do projeto, mesmo sem dizer evoluir, inclusive o Gherkin e a comparação com e sem skill, resultado inconsistente, falha de chamada ou correção da pessoa. NÃO use para criar a primeira versão, só ver se a descrição dispara, só revisar sem executar, nem gravar a página no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.17.0"
+  version: "0.18.0"
   related:
+    - criar-commit
+    - criar-pull-request
     - definir-instrucoes-do-projeto
     - descrever-habilidade-ou-schema
     - medir-habilidade
-    - publicar-habilidade
     - revisar-habilidade
 ---
 
@@ -193,7 +194,7 @@ Dado que há o nome "Planejamento do trimestre" e 5 descrições de tarefa. Quan
 - O critério já foi enviado e ainda não rodou: grave em BDD e deixe sem validar até a execução.
 - O pedido muda um passo, o formato do texto ou o diff: edite a skill. Não grave Gherkin disso.
 - A comparação não tem o número no registro: diga que falta.
-- O pedido veio do Notion: não edite a página. A escrita segue `publicar-habilidade`.
+- O pedido chega por uma cópia sincronizada, como a página no Notion: não edite a cópia. A escrita segue `criar-commit` e `criar-pull-request`.
 - O pedido é só o tamanho ou o tempo: use `medir-habilidade`. Não edite a skill.
 
 ## Pegadinhas
@@ -206,7 +207,7 @@ Dado que há o nome "Planejamento do trimestre" e 5 descrições de tarefa. Quan
 - Cada execução começa limpa, sem a sessão em que a skill foi escrita.
 - Consulta de disparo não mede a qualidade da saída. Disparo fica em `descrever-habilidade-ou-schema`.
 - A mesma lógica reescrita em cada caso vira script, com o aceite da pessoa. Script de várias skills fica em `.agents/scripts/<nome>/`.
-- Pedido vindo do Notion parece permissão para gravar a página. A página é só leitura. Siga `publicar-habilidade`.
+- Pedido feito na cópia sincronizada parece permissão para gravá-la. A cópia é só leitura. Siga `criar-commit`.
 
 ## Scripts disponíveis
 

@@ -54,7 +54,6 @@ flowchart LR
     procurar_inscricao["procurar-inscricao"]
     procurar_oportunidade["procurar-oportunidade"]
     procurar_tarefa["procurar-tarefa"]
-    publicar_habilidade["publicar-habilidade"]
     reconhecer_imagem["reconhecer-imagem"]
     registrar_ciclo_do_ativo["registrar-ciclo-do-ativo"]
     resolver_comentarios_de_revisao["resolver-comentarios-de-revisao"]
@@ -70,15 +69,15 @@ flowchart LR
   comunicar_novidade_do_produto --> evoluir_habilidade
   criar_commit -.-> criar_pull_request
   criar_commit -.-> evoluir_habilidade
+  criar_habilidade --> criar_commit
+  criar_habilidade --> criar_pull_request
   criar_habilidade --> descrever_habilidade_ou_schema
   criar_habilidade --> evoluir_habilidade
-  criar_habilidade --> publicar_habilidade
   criar_oportunidade --> definir_grupo_de_oportunidades
   criar_oportunidade --> procurar_oportunidade
   criar_pull_request --> comunicar_novidade_do_produto
   criar_pull_request --> criar_commit
   criar_pull_request --> evoluir_habilidade
-  criar_pull_request --> publicar_habilidade
   criar_pull_request --> resolver_comentarios_de_revisao
   definir_agenda --> definir_agenda_de_popstar
   definir_agenda --> definir_convidado
@@ -177,13 +176,15 @@ flowchart LR
   definir_viagem --> organizar_ponto_de_contato
   definir_viagem --> procurar_oportunidade
   definir_viagem --> sincronizar_cronograma
+  descrever_habilidade_ou_schema --> criar_commit
+  descrever_habilidade_ou_schema --> criar_pull_request
   descrever_habilidade_ou_schema --> evoluir_habilidade
-  descrever_habilidade_ou_schema --> publicar_habilidade
   descrever_habilidade_ou_schema --> revisar_habilidade
+  evoluir_habilidade --> criar_commit
+  evoluir_habilidade --> criar_pull_request
   evoluir_habilidade --> definir_instrucoes_do_projeto
   evoluir_habilidade --> descrever_habilidade_ou_schema
   evoluir_habilidade --> medir_habilidade
-  evoluir_habilidade --> publicar_habilidade
   evoluir_habilidade --> revisar_habilidade
   gerenciar_estoque --> definir_ativo_imobilizado
   gerenciar_estoque --> definir_lancamento
@@ -227,9 +228,6 @@ flowchart LR
   procurar_oportunidade --> criar_oportunidade
   procurar_oportunidade --> definir_inscricao
   procurar_tarefa --> procurar_inscricao
-  publicar_habilidade --> criar_commit
-  publicar_habilidade --> criar_pull_request
-  publicar_habilidade --> evoluir_habilidade
   reconhecer_imagem --> criar_oportunidade
   reconhecer_imagem --> definir_grafia
   reconhecer_imagem --> definir_inscricao
@@ -245,10 +243,11 @@ flowchart LR
   revisar_financas --> definir_lancamento
   revisar_financas --> definir_planejamento_financeiro
   revisar_financas --> gerenciar_estoque
+  revisar_habilidade --> criar_commit
   revisar_habilidade --> criar_habilidade
+  revisar_habilidade --> criar_pull_request
   revisar_habilidade --> descrever_habilidade_ou_schema
   revisar_habilidade --> evoluir_habilidade
-  revisar_habilidade --> publicar_habilidade
   revisar_uso_do_tempo --> definir_agenda
   revisar_uso_do_tempo --> definir_agenda_de_popstar
   revisar_uso_do_tempo --> procurar_agenda

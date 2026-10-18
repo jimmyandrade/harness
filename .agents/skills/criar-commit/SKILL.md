@@ -3,7 +3,7 @@ name: criar-commit
 description: Use essa habilidade sempre que terminar um trabalho que mudou o repositório ou for commitar, separar commits ou escrever a mensagem, mesmo sem dizer commit. NÃO use para push, abrir PR, rebase nem merge (use criar-pull-request).
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.7.0"
 ---
 
 # Criar commit
@@ -32,6 +32,15 @@ Se `Commitar sem perguntar` for `sim`, commite ao terminar um trabalho que mudou
 
 ### Passo 2
 
+```mermaid
+flowchart LR
+  A{Terminal com o repositório?} -->|sim| B[Branch e commit com git]
+  A -->|não| C{Integração com o GitHub?}
+  C -->|sim| D[Branch e commit pela integração]
+  C -->|não| E[Diga o bloqueio e pare]
+```
+
+O repositório é a única fonte de escrita. Uma cópia sincronizada a partir dele, como a página de uma habilidade no Notion, é só leitura: não grave nela, nem quando a pessoa chamar de emergência, nem como saída quando o repositório não está ao alcance. Sem terminal, testes, build e lint não rodam: quem verifica são os checks do CI no PR.
 Se `Commit direto na base` for `não` e a branch atual for a `Branch base`, crie uma branch a partir da `Branch base` remota atualizada, sem rastrear a base. O nome é `<tipo>/<descrição>`, com o tipo do Conventional Commits do commit e a descrição em ASCII kebab-case. Branch que a ferramenta criou com outro prefixo, como `claude/`, é renomeada para esse padrão antes do commit.
 
 ### Passo 3
@@ -104,13 +113,14 @@ Um commit `fix:` com o assunto dizendo o porquê da troca do texto. Sem teste no
 - A mudança está na `Branch base` sem commit e `Commit direto na base` é `não`: leve as mudanças para a branch nova antes de commitar.
 - Commit cujo assunto começa com `merge:`: não crie. A base entra por rebase, em `criar-pull-request`.
 - O projeto não tem `Comando de testes` nem `Comando de build`: diga na resposta que nada foi verificado antes do commit.
-- O pedido vem do Notion, sem terminal: crie a branch do Passo 2 e faça o commit pela integração do GitHub, com a mensagem do Passo 6. Testes, build e lint não rodam no chat: quem verifica são os checks do CI no PR. Siga para `criar-pull-request`.
+- A pessoa pede para mudar a cópia sincronizada, como a página de uma habilidade: não grave nela. A mudança vai no repositório, e o sync atualiza a cópia depois do merge.
 
 ## Pegadinhas
 
 - `git switch -c <branch> origin/<base>` faz a branch rastrear a base. Use `--no-track`.
 - O type check do repositório inteiro pode falhar em arquivos que não são seus. Não use esse resultado como portão do seu commit sem comparar com a `Branch base`.
 - Um hook de pre-push pode rodar testes e build de novo. Rodar antes do commit permite publicar sem o hook depois.
+- O texto da cópia sincronizada que explica como preencher uma habilidade parece permissão para criá-la ali. Criar ou ativar a habilidade fora do repositório deixa uma cópia que o sync não remove.
 
 ## Scripts disponíveis
 
