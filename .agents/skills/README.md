@@ -47,6 +47,7 @@ flowchart LR
     liberar_espaco_em_disco["liberar-espaco-em-disco"]
     medir_habilidade["medir-habilidade"]
     mesclar_registro["mesclar-registro"]
+    organizar_emails["organizar-emails"]
     organizar_ponto_de_contato["organizar-ponto-de-contato"]
     procurar_agenda["procurar-agenda"]
     procurar_data_significativa["procurar-data-significativa"]
@@ -202,6 +203,8 @@ flowchart LR
   mesclar_registro --> definir_grafia
   mesclar_registro --> definir_perfil_social
   mesclar_registro --> identificar_duplicata
+  organizar_emails --> evoluir_habilidade
+  organizar_emails --> procurar_email
   organizar_ponto_de_contato --> criar_oportunidade
   organizar_ponto_de_contato --> definir_agenda
   organizar_ponto_de_contato --> definir_grupo_de_oportunidades
