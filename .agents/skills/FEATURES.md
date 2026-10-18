@@ -32,7 +32,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Description**: Write, suggest, review, and rewrite brand text in the project's voice
 - **Properties**:
   - Lives at `.agents/skills/redigir-com-tom-de-voz/SKILL.md`
-  - Writes in the voice of the project that is open and reads that project's glossary, with `node node_modules/vocabulary/dist/cli.js lookup` and `exists` when there is a terminal, and with the MCP tools otherwise
+  - Writes in the voice of the project that is open and reads that project's glossary, with `node node_modules/vocabulary/dist/cli.js lookup` and `exists` when there is a terminal and the CLI is installed, and with the MCP tools when there is no terminal or the CLI is not available
   - Without a terminal and without the MCP server, as in a Notion agent, reads the glossary only from a source the project instructions name, or stops
   - Reads the glossary with the tags of the speaker, the event, and the channel of the text, so a term of another context stays out
   - Writes the stored spelling of a case-sensitive term when a read reports case_matches false
