@@ -183,6 +183,7 @@ flowchart LR
   definir_tipo_do_evento --> organizar_ponto_de_contato
   definir_tipo_do_evento --> procurar_agenda
   definir_tipo_do_evento --> procurar_oportunidade
+  definir_viagem --> acompanhar_veiculo
   definir_viagem --> definir_agenda
   definir_viagem --> definir_inscricao
   definir_viagem --> evoluir_habilidade

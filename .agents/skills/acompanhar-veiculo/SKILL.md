@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.1"
+  version: "0.2.0"
   internal: true
   related:
     - definir-obrigacao-financeira
@@ -24,6 +24,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ```yaml
 "Moeda": "BRL"
+"Antecedência da extensão da proteção": "7 dias"
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -60,6 +61,10 @@ Aviso recebido não é situação conferida. Multa, pontos, IPVA e licenciamento
 A finalidade decide o contexto de cada gasto: uma viagem da empresa com o carro pessoal gera gasto da empresa, mesmo que o carro seja pessoal. Uma decisão nova sobre o uso do carro vale dali em diante e não muda o histórico. Quando outra pessoa paga, a despesa registra quem pagou. Se a pessoa da família pagou a um terceiro e espera receber de volta, o pagamento é uma despesa paga por ela e o reembolso é uma obrigação com ela; sem forma combinada, a obrigação fica `A verificar`, sem parcelas inventadas.
 
 ### Passo 6
+
+Viagem com o veículo exige pedir a extensão da proteção ou do seguro com `Antecedência da extensão da proteção` antes da partida. Crie o lembrete na agenda do contexto e registre na viagem e no veículo o pedido feito, com data e protocolo, ou a recusa explícita da pessoa. Sem um dos dois, diga que o veículo viaja sem a extensão. Proteção veicular não é seguro: confira o que ela cobre, como enchente ou perda de placa, em vez de supor.
+
+### Passo 7
 
 Toda fatura ou parcela citada traz o vencimento e o valor. Entregue as pendências do veículo em ordem de vencimento, com o total do mês, e diga o que ainda falta conferir. Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 

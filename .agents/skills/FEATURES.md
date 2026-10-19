@@ -17,6 +17,7 @@ How these skills relate is in `README.md`, in this folder.
   - Turns a regularization plan into one obligation per line and one expense per due date, and checks that installments add up to each total
   - Tells a received notice from a status checked at the traffic authority of the state of registration
   - Sets the context of each cost by purpose, and records who paid when someone else pays
+  - Requires asking for the vehicle protection extension before a trip by the person's own vehicle, with a reminder and the request or refusal recorded
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [ ] Three cases validated with the person
@@ -570,6 +571,7 @@ How these skills relate is in `README.md`, in this folder.
   - Does not create a trip when the person only asks whether one exists or which day it falls on
   - Leaves a dated milestone with no confirmed start and end to sincronizar-cronograma, a confirmed calendar time and a named-day plan to definir-agenda, and a financial proof or an amount to lancar-despesa-da-empresa
   - Does not promote the trip to confirmed without evidence, and does not cancel it without explicit evidence
+  - Does not close a trip by the person's own vehicle until acompanhar-veiculo has the protection extension requested or refused
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses recording an event that already has a time, syncing a date-only milestone, posting the amount, registering the opportunity, and registering someone
