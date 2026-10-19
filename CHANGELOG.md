@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.47.0](https://github.com/jimmyandrade/harness/compare/v0.46.0...v0.47.0) (2026-10-19)
+
+
+### Features
+
+* **acompanhar-veiculo:** track what a vehicle owes and costs ([#262](https://github.com/jimmyandrade/harness/issues/262)) ([da48a34](https://github.com/jimmyandrade/harness/commit/da48a341e4c5e14a9f3fb401ba01a6445baad24b))
+
 ## [0.46.0](https://github.com/jimmyandrade/harness/compare/v0.45.0...v0.46.0) (2026-10-19)
 
 
