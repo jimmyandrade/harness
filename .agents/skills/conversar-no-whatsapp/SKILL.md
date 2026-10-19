@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   internal: true
   notion: "false"
   related:
@@ -61,6 +61,8 @@ Para registrar a demanda, leve a data e o horário da primeira mensagem do pedid
 
 ### Passo 5
 
+Todo rascunho de mensagem aparece no chat, com o texto inteiro, para a pessoa conferir. Não diga só que o rascunho está pronto. Quando o cliente desenha widget, mostre o rascunho num widget com o destinatário, o texto editável, um botão para copiar e um botão que manda o texto aprovado de volta ao chat. Sem widget, mostre o texto num bloco de código, que preserva a formatação do WhatsApp ao copiar. Se a pessoa editar, o texto dela substitui o rascunho.
+
 Para responder ou enviar, mostre a conversa de destino, o texto exato e, se for resposta, a mensagem citada. Envie só depois do sim da pessoa a esse texto e a essa conversa. O sim vale para uma mensagem. Outra mensagem pede outro sim.
 
 Em conta comercial, veja se a conversa está com o agente de IA. Se estiver, avise antes de enviar: ele responde à próxima mensagem do contato.
@@ -108,6 +110,14 @@ Se você abrir uma conversa com mensagens não lidas sem avisar, quem enviou vê
 1. Diga quais conversas têm mensagens não lidas.
 2. Pergunte antes de abrir.
 3. Depois de abrir, não diga que nada foi marcado como lido.
+
+### Rascunho fora da vista
+
+Se você disser que o rascunho está pronto sem mostrar o texto, a pessoa não confere nem corrige antes do envio.
+
+1. Mostre o texto inteiro no chat.
+2. Com widget, deixe o texto editável, com copiar e aprovar.
+3. Sem widget, use um bloco de código.
 
 ### Envio sem confirmação
 
