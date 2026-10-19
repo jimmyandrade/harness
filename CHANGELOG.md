@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.44.0](https://github.com/jimmyandrade/harness/compare/v0.43.0...v0.44.0) (2026-10-19)
+
+
+### Features
+
+* add personal obligation and expense skills ([#256](https://github.com/jimmyandrade/harness/issues/256)) ([0d8bd27](https://github.com/jimmyandrade/harness/commit/0d8bd270ca9ee1353d9beeeaf0262a201aa907f0))
+
 ## [0.43.0](https://github.com/jimmyandrade/harness/compare/v0.42.0...v0.43.0) (2026-10-18)
 
 
