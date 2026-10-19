@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
   internal: true
   related:
     - definir-obrigacao-financeira
@@ -49,7 +49,7 @@ A pessoa informa o data source na execução. Sem essa indicação, use a lista 
 
 ### Passo 3
 
-Um plano de regularização, como uma planilha com dívida, total, parcelas e vencimentos, vira uma obrigação por linha e uma despesa por vencimento. Converta cada coluna de vencimento na data informada pela pessoa; sem o dia, deixe o vencimento pendente. Uma parcela com valor zero não vira despesa. Confira que a soma das parcelas bate com o total de cada linha e aponte a diferença, sem corrigi-la sozinho.
+Um plano de regularização, como uma planilha com dívida, total, parcelas e vencimentos, vira uma obrigação por linha e uma despesa por vencimento. Converta cada coluna de vencimento na data informada pela pessoa; sem o dia, deixe o vencimento pendente. Uma parcela com valor zero não vira despesa. Confira que a soma das parcelas bate com o total de cada linha e aponte a diferença, sem corrigi-la sozinho. Uma linha mensal pode ter no total só o primeiro mês.
 
 ### Passo 4
 
@@ -57,7 +57,7 @@ Aviso recebido não é situação conferida. Multa, pontos, IPVA e licenciamento
 
 ### Passo 5
 
-A finalidade decide o contexto de cada gasto: uma viagem da empresa com o carro pessoal gera gasto da empresa, mesmo que o carro seja pessoal. Uma decisão nova sobre o uso do carro vale dali em diante e não muda o histórico. Quando outra pessoa paga, a despesa registra quem pagou.
+A finalidade decide o contexto de cada gasto: uma viagem da empresa com o carro pessoal gera gasto da empresa, mesmo que o carro seja pessoal. Uma decisão nova sobre o uso do carro vale dali em diante e não muda o histórico. Quando outra pessoa paga, a despesa registra quem pagou. Se a pessoa da família pagou a um terceiro e espera receber de volta, o pagamento é uma despesa paga por ela e o reembolso é uma obrigação com ela; sem forma combinada, a obrigação fica `A verificar`, sem parcelas inventadas.
 
 ### Passo 6
 
@@ -96,10 +96,12 @@ Registrei como despesa pessoal, ligada ao carro e à viagem, com o prazo de paga
 - Várias pessoas dirigem o mesmo carro: a multa vai para quem a pessoa indicar como condutor.
 - O carro foi registrado numa cidade e a pessoa mora em outra: o estado de registro decide o órgão de trânsito.
 - Uma parcela já foi paga por outra pessoa: registre o pagamento e quem pagou.
+- A tag de pedágio está inativa por dívida: a tag fica registrada como inativa, e a dívida dela é uma obrigação.
 
 ## Pegadinhas
 
 - O endereço de quem dirige parece decidir o órgão de trânsito. Quem decide é o estado de registro do veículo.
+- Quem anda no carro parece motorista. Motorista é só quem dirige; passageiro não recebe pontos.
 - O e-mail da tag parece a fatura do pedágio sem praça. São cobranças diferentes.
 - Planilha com o ano escrito como "26/01" pode ser 2026, e não uma data.
 
