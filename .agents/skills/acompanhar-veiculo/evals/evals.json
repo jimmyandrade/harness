@@ -1,4 +1,17 @@
 {
   "skill_name": "acompanhar-veiculo",
-  "evals": []
+  "evals": [
+    {
+      "id": "plano-de-regularizacao-do-carro",
+      "prompt": "Vencimento 01 -> outubro de 2026, Vencimento 02 -> novembro de 2026, até Vencimento 06 -> março de 2027. Cada um tem o seu dia de vencimento. Do IPVA, a primeira data é 29/10/2026. A negociação do consórcio de outubro já foi paga pela minha mãe. Todas as multas estão a pagar e os pontos caem na minha CNH. O carro foi registrado em Sabará (MG), mas moro em Belo Horizonte.",
+      "expected_output": "O agente cria o veículo com o estado de registro em MG e uma obrigação por linha da planilha (IPVA, reparos, multas, consórcio, tag, proteção), ligadas ao veículo, e uma despesa por vencimento com valor e data; o dia que a pessoa não sabe fica pendente, sem inventar. Ele soma as parcelas de cada linha e aponta que o consórcio e a proteção mensal contam só o primeiro mês no total da planilha, sem corrigir a planilha. A negociação paga pela mãe vira despesa paga com quem pagou registrado. As multas ficam a verificar no órgão de trânsito do estado de registro, e o IPVA termina na quarta parcela, sem parcelas de valor zero.",
+      "files": []
+    },
+    {
+      "id": "reembolso-de-reparos-pagos-por-familiar",
+      "prompt": "Meu namorado e minha mãe não são motoristas do carro, só passageiros. A tag está inativa por enquanto porque temos que pagar. Minha mãe já pagou tudo ao mecânico. Ela e eu ainda não conversamos sobre como faremos os repasses. Parte do dinheiro foi no cartão de uma amiga dela.",
+      "expected_output": "Só quem dirige fica como motorista. A tag fica registrada como inativa por causa da dívida dela. Os reparos viram uma despesa já paga, com quem pagou registrado, e o reembolso à pessoa da família vira uma obrigação a verificar, com a próxima ação de combinar a forma, sem parcelas inventadas.",
+      "files": []
+    }
+  ]
 }
