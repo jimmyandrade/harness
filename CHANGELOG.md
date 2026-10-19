@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.46.0](https://github.com/jimmyandrade/harness/compare/v0.45.0...v0.46.0) (2026-10-19)
+
+
+### Features
+
+* **organizar-emails:** label collection agencies apart from creditors ([#260](https://github.com/jimmyandrade/harness/issues/260)) ([e808da7](https://github.com/jimmyandrade/harness/commit/e808da74f44355c28dd5db29d7e3faacfec97f8e))
+
 ## [0.45.0](https://github.com/jimmyandrade/harness/compare/v0.44.0...v0.45.0) (2026-10-19)
 
 
