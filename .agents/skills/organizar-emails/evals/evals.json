@@ -18,6 +18,12 @@
       "prompt": "Pessoal. É o consórcio do carro pessoal; decidimos que esse carro não será mais usado para coisas da empresa, então é despesa pessoal de um dos sócios. Enquanto a fatura não estiver paga, ela é uma pendência: me diga o valor e o número da parcela que aparecem no PDF.",
       "expected_output": "Na execução só de leitura, a fatura da parcela do consórcio recebe o contexto Pessoal pela finalidade do carro, não pela caixa que a recebeu, e o destino Áreas/Finanças com a etiqueta do credor. A resposta diz o vencimento, o valor do documento e a parcela no formato número/total, com o ajuste que explica a diferença para a parcela base. A fatura continua pendente enquanto não houver comprovante: o título \"Recibo do pagador\" no boleto não prova quitação. A conta não é alterada.",
       "files": []
+    },
+    {
+      "id": "cobrancas-do-historico-com-empresa-de-cobranca",
+      "prompt": "Toda mensagem da plataforma de cobrança recebe a etiqueta dela. As que citam o banco no corpo recebem também a etiqueta do banco e saem da entrada, porque são ofertas da dívida adiada. As que não identificam o credor ficam só com a etiqueta da plataforma e permanecem na entrada até sabermos de quem é a cobrança. Mantenha as exclusões de aviso formal, aplique também ao histórico, preserve a leitura e não apague nada.",
+      "expected_output": "Antes de alterar, o agente testa cada busca no histórico inteiro, mostra quantidades, períodos e assuntos, e separa as mensagens da plataforma que não identificam o credor. Depois da confirmação, aplica as etiquetas: a da plataforma em todas as mensagens dela, a do banco só nas que o citam no corpo e nas do próprio banco, e arquiva só as ofertas da dívida adiada. Assuntos alarmantes como interdição ou aviso de bloqueio não viram aviso formal sem a medida descrita no corpo, e 'pagamento aprovado' não vira comprovante. As faturas em aberto ficam na entrada com a etiqueta de contas a pagar, com vencimento e valor. A leitura de volta confere cada conversa, refaz o arquivamento que ficou incompleto e relata a falha parcial; nenhum estado de leitura muda e nada é apagado.",
+      "files": []
     }
   ]
 }
