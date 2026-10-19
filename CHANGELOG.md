@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.45.0](https://github.com/jimmyandrade/harness/compare/v0.44.0...v0.45.0) (2026-10-19)
+
+
+### Features
+
+* **organizar-emails:** triage billing messages by obligation ([#258](https://github.com/jimmyandrade/harness/issues/258)) ([efc1cb6](https://github.com/jimmyandrade/harness/commit/efc1cb665847fa3015bff3b81a128eaed7a2deb8))
+
 ## [0.44.0](https://github.com/jimmyandrade/harness/compare/v0.43.0...v0.44.0) (2026-10-19)
 
 
