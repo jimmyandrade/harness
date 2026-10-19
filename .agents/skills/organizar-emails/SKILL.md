@@ -3,12 +3,15 @@ name: organizar-emails
 description: Organiza e-mails por BASB e separa pessoal, trabalho e misto. Usada quando a pessoa quer triar a caixa, etiquetar ou configurar filtros. Não serve para responder mensagens, lançar despesas nem acompanhar veículos.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   internal: true
   notion: "false"
   related:
     - procurar-email
     - evoluir-habilidade
+    - definir-obrigacao-financeira
+    - lancar-despesa-pessoal
+    - lancar-despesa-da-empresa
 ---
 
 # Organizar e-mails
@@ -27,6 +30,14 @@ Leia os valores nas instruções do projeto, na entrada desta habilidade. Na aus
 "Comunicações indesejadas": []
 "Etiqueta de segurança": "Áreas/Segurança digital"
 "Destino de confirmações automáticas": "Arquivos/{tipo}"
+"Etiqueta de contas a pagar": "Áreas/Finanças/A pagar"
+"Termos de aviso formal":
+  - "protesto"
+  - "negativação"
+  - "negativado"
+  - "ação judicial"
+  - "citação"
+  - "execução"
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -86,6 +97,21 @@ Use `Etiqueta de segurança` para alertas de conta. Etiquetar não valida a aute
 
 ### Passo 5
 
+Cobrança é mensagem de um credor ou de uma empresa que cobra em nome dele. Procure a obrigação pelo remetente na lista de obrigações do mapeamento de dados do projeto. Sem obrigação cadastrada, proponha o cadastro por `definir-obrigacao-financeira`. Leia o corpo para saber o tipo: fatura com vencimento, oferta de negociação, aviso formal ou comprovante. Assunto como "seu CPF foi notificado" não prova aviso formal. Aviso formal é protesto, negativação ou ação judicial já tomada, e contém um dos `Termos de aviso formal`.
+
+```mermaid
+flowchart LR
+  T{Tipo da cobrança} -->|fatura em aberto| P[Entrada e Etiqueta de contas a pagar]
+  T -->|oferta de obrigação Adiada| A[Etiqueta do credor e fora da entrada]
+  T -->|obrigação A verificar| V[Entrada até a verificação]
+  T -->|aviso formal| F[Entrada sempre]
+  T -->|comprovante| C[Etiqueta do credor e pagamento lançado]
+```
+
+Fatura em aberto recebe `Etiqueta de contas a pagar` e fica na entrada. A resposta diz o vencimento e o valor. Sem o valor, como num PDF protegido por senha, diga que falta e onde a pessoa o encontra. Ofereça lançar a fatura por `lancar-despesa-pessoal` ou `lancar-despesa-da-empresa`, conforme o contexto da obrigação. Filtro que tira oferta de negociação da entrada usa só remetentes que, na amostra, enviaram apenas ofertas, e exclui os `Termos de aviso formal`. Não esconda cobrança de obrigação `A verificar`. Empresa de cobrança não confirma a dívida: não use os links nem os boletos dela.
+
+### Passo 6
+
 Teste cada critério de filtro na conta exata e examine também correspondências inesperadas. Separe o que é regra estática do que depende de contexto.
 
 ```mermaid
@@ -99,13 +125,13 @@ flowchart LR
 
 Para segurança, mantenha a etiqueta temática independente do contexto da conta protegida. Não encaminhe e-mails entre contas para resolver a classificação. Não use a categoria automática de promoções como autorização para esconder avisos financeiros. Confirme a capacidade real da integração; uma proposta não é filtro instalado, e filtro de entrada não observa uma leitura futura.
 
-### Passo 6
+### Passo 7
 
 Antes de alterações em lote ou de filtros, grave um plano estruturado com conta, evidência, classificação, critérios, etiquetas, mensagens atingidas, efeito futuro e preservação de leitura e entrada. Valide contra a mensagem, a resposta da pessoa e os filtros existentes. Execute apenas ações autorizadas; mantenha os casos não resolvidos fora do lote.
 
 Reutilize etiquetas existentes pelo nome e pelo identificador retornado. Crie somente as necessárias. Use os identificadores opacos completos das conversas na conta correspondente. Não aplique um filtro novo ao histórico inteiro sem escopo autorizado. Um piloto em uma conversa não autoriza outras da mesma instituição.
 
-### Passo 7
+### Passo 8
 
 Leia o filtro criado e a conversa alterada. Confira etiquetas, conta e permanência na entrada; preserve o estado de leitura anterior. Não deduza o nome de uma etiqueta a partir de identificadores diferentes. Registre separadamente o filtro armazenado, as etiquetas verificadas na conversa atual e a aplicação automática futura. Sem correspondência fornecida pela integração entre o identificador interno e o nativo, declare a validação do nome no filtro limitada. Uma conversa antiga sem etiqueta não testa um filtro criado depois. Relate o que foi aplicado, o que continua proposto e quais decisões faltam. Sem fonte oficial atual, não declare pendência financeira, de veículo ou de habilitação regularizada.
 
@@ -116,7 +142,7 @@ Checklist de conclusão:
 - [ ] Plano validado antes das alterações autorizadas.
 - [ ] Resultado lido de volta, sem arquivamento ou leitura indevidos.
 
-### Passo 8
+### Passo 9
 
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
@@ -166,6 +192,14 @@ A conversa recebe a etiqueta de segurança e permanece na entrada, sem mudança 
 
 O contexto é o que `Organizações` dá ao antigo escritório, não `Trabalho`. O destino é `Arquivos/Descadastros`, sem perguntar se vale conservar. O descadastro não é repetido.
 
+### Fatura de uma parcela do consórcio do carro pessoal, com o PDF anexo
+
+A fatura fica na entrada com a etiqueta de contas a pagar e a etiqueta do credor. A resposta diz o vencimento, o valor e a parcela, e oferece lançar a despesa ligada à obrigação. "Recibo do pagador" no boleto não vira comprovante.
+
+### Ofertas de negociação de uma dívida que a pessoa adiou
+
+As ofertas recebem a etiqueta do credor e saem da entrada por filtro dos remetentes que só enviaram ofertas. O filtro exclui os termos de aviso formal, que continuam na entrada.
+
 ## Casos-limite
 
 - Uma conversa mistura finalidades: conserve o contexto misto sem repartir valores sem fonte.
@@ -180,6 +214,8 @@ O contexto é o que `Organizações` dá ao antigo escritório, não `Trabalho`.
 - A ferramenta de etiqueta e a leitura do filtro podem mostrar identificadores distintos; a lista disponível pode não expor a correspondência necessária para verificar o nome no filtro.
 - Criar um filtro não classifica retroativamente todas as conversas nem agenda uma ação depois que alguém lê.
 - Uma caixa de uma atividade antiga pode ter finalidade de trabalho em `Contas` e, mesmo assim, não ser o trabalho atual. `Organizações` decide o contexto.
+- Empresa de cobrança escreve em nome do credor com assunto alarmante, como "seu CPF foi notificado", e o corpo traz só uma proposta de acordo.
+- Uma fatura de cartão no rotativo pode ter pagamento mínimo igual ao total.
 
 ## Scripts disponíveis
 
