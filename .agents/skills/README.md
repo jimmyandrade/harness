@@ -213,7 +213,10 @@ flowchart LR
   mesclar_registro --> definir_grafia
   mesclar_registro --> definir_perfil_social
   mesclar_registro --> identificar_duplicata
+  organizar_emails --> definir_obrigacao_financeira
   organizar_emails --> evoluir_habilidade
+  organizar_emails --> lancar_despesa_da_empresa
+  organizar_emails --> lancar_despesa_pessoal
   organizar_emails --> procurar_email
   organizar_ponto_de_contato --> criar_oportunidade
   organizar_ponto_de_contato --> definir_agenda

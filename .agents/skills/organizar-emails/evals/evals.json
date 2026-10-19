@@ -12,6 +12,12 @@
       "prompt": "O ZWCAD é um software de CAD gratuito que eu estava tentando baixar para trabalhar no meu escritório de design de interiores, para substituir o AutoCAD. Mas já fizemos unsubscribe dele.",
       "expected_output": "Na execução só de leitura, a confirmação de descadastro recebe o contexto que as instruções do projeto dão ao antigo escritório de design de interiores, que não é o trabalho atual: o agente não a classifica como Trabalho. O destino PARA é Arquivos/Descadastros, sem perguntar se vale conservar a mensagem. O descadastro não é repetido e a conta não é alterada.",
       "files": []
+    },
+    {
+      "id": "fatura-do-consorcio-do-carro-pessoal",
+      "prompt": "Pessoal. É o consórcio do carro pessoal; decidimos que esse carro não será mais usado para coisas da empresa, então é despesa pessoal de um dos sócios. Enquanto a fatura não estiver paga, ela é uma pendência: me diga o valor e o número da parcela que aparecem no PDF.",
+      "expected_output": "Na execução só de leitura, a fatura da parcela do consórcio recebe o contexto Pessoal pela finalidade do carro, não pela caixa que a recebeu, e o destino Áreas/Finanças com a etiqueta do credor. A resposta diz o vencimento, o valor do documento e a parcela no formato número/total, com o ajuste que explica a diferença para a parcela base. A fatura continua pendente enquanto não houver comprovante: o título \"Recibo do pagador\" no boleto não prova quitação. A conta não é alterada.",
+      "files": []
     }
   ]
 }
