@@ -11,6 +11,7 @@ Solid arrows come from `metadata.related`. Dotted arrows are skills cited in the
 ```mermaid
 flowchart LR
   subgraph core["Core"]
+    acompanhar_veiculo["acompanhar-veiculo"]
     avaliar_atualizacoes_de_dependencia["avaliar-atualizacoes-de-dependencia"]
     comunicar_novidade_do_produto["comunicar-novidade-do-produto"]
     criar_commit["criar-commit"]
@@ -65,6 +66,13 @@ flowchart LR
     revisar_uso_do_tempo["revisar-uso-do-tempo"]
     sincronizar_cronograma["sincronizar-cronograma"]
   end
+  acompanhar_veiculo --> definir_obrigacao_financeira
+  acompanhar_veiculo --> definir_viagem
+  acompanhar_veiculo --> evoluir_habilidade
+  acompanhar_veiculo --> lancar_despesa_da_empresa
+  acompanhar_veiculo --> lancar_despesa_pessoal
+  acompanhar_veiculo --> organizar_emails
+  acompanhar_veiculo --> sincronizar_cronograma
   avaliar_atualizacoes_de_dependencia --> criar_commit
   avaliar_atualizacoes_de_dependencia --> criar_pull_request
   avaliar_atualizacoes_de_dependencia --> evoluir_habilidade
@@ -145,6 +153,7 @@ flowchart LR
   definir_obrigacao_financeira --> lancar_despesa_da_empresa
   definir_obrigacao_financeira --> lancar_despesa_pessoal
   definir_obrigacao_financeira --> organizar_emails
+  definir_obrigacao_financeira --> procurar_data_significativa
   definir_perfil_social --> definir_grafia
   definir_perfil_social --> definir_pessoa
   definir_perfil_social --> identificar_duplicata
@@ -176,6 +185,7 @@ flowchart LR
   definir_tipo_do_evento --> organizar_ponto_de_contato
   definir_tipo_do_evento --> procurar_agenda
   definir_tipo_do_evento --> procurar_oportunidade
+  definir_viagem --> acompanhar_veiculo
   definir_viagem --> definir_agenda
   definir_viagem --> definir_inscricao
   definir_viagem --> evoluir_habilidade

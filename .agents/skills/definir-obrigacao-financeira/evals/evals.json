@@ -1,4 +1,17 @@
 {
   "skill_name": "definir-obrigacao-financeira",
-  "evals": []
+  "evals": [
+    {
+      "id": "obrigacoes-de-uma-caixa-pessoal",
+      "prompt": "Pode criar o banco de obrigações pessoais e cadastrar o consórcio do carro, o cartão vencido, a dívida do banco que está no backlog e a cobrança do plano de saúde que chegou por uma empresa de cobrança.",
+      "expected_output": "O consórcio fica Em dia, com a parcela atual e o total de parcelas. O cartão fica Em atraso com o valor vencido da fatura e a próxima ação de conferir o saldo atual no app do banco, porque a fatura no rotativo pode ter pagamento mínimo igual ao total. A dívida no backlog fica Adiada. A cobrança do plano fica A verificar, com a empresa de cobrança registrada e a orientação de usar o canal oficial do credor, sem os links do e-mail. Toda fatura citada traz vencimento e valor, ou diz que o valor falta e onde encontrá-lo.",
+      "files": []
+    },
+    {
+      "id": "divida-adiada-com-condicao",
+      "prompt": "Banco -> assim que tiver uma renda, sem data definida.",
+      "expected_output": "A obrigação continua Adiada, a condição 'negociar assim que houver renda' entra na próxima ação e a data de revisão fica vazia, sem uma data inventada.",
+      "files": []
+    }
+  ]
 }

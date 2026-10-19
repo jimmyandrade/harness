@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   internal: true
   related:
     - definir-obrigacao-financeira
@@ -46,7 +46,7 @@ A pessoa informa o data source na execução, que é a lista de despesas dela. S
 
 ### Passo 3
 
-Grave o nome curto, o valor original, o vencimento e, quando houver, a parcela no formato número/total e a obrigação de origem. Fatura em aberto não tem data de pagamento. Pagamento só entra com comprovante: data, valor pago, e juros ou multa como a diferença entre o pago e o original. Recibo do pagador num boleto não é comprovante. Não invente valor, data nem parcela. O histórico fica nos comentários, não no corpo.
+Grave o nome curto, o valor original, o vencimento e, quando houver, a parcela no formato número/total e a obrigação de origem. Fatura em aberto não tem data de pagamento. Pagamento só entra com comprovante: data, valor pago, e juros ou multa como a diferença entre o pago e o original. Recibo do pagador num boleto não é comprovante. Quando outra pessoa paga, registre quem pagou, separado de quem deve. Não invente valor, data nem parcela. O histórico fica nos comentários, não no corpo.
 
 ### Passo 4
 
