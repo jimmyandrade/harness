@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.47.1](https://github.com/jimmyandrade/harness/compare/v0.47.0...v0.47.1) (2026-10-19)
+
+
+### Bug Fixes
+
+* **organizar-emails:** state the limits of Gmail filters ([#264](https://github.com/jimmyandrade/harness/issues/264)) ([9ae5d58](https://github.com/jimmyandrade/harness/commit/9ae5d5893d44850dbb4887300d1c161bea15abff))
+
 ## [0.47.0](https://github.com/jimmyandrade/harness/compare/v0.46.0...v0.47.0) (2026-10-19)
 
 
