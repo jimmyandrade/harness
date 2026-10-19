@@ -426,6 +426,7 @@ How these skills relate is in `README.md`, in this folder.
   - Sets the context from the original purpose and the status from evidence, with a review date or a review condition for a postponed debt
   - Treats a collection agency, a negotiation offer, or a "CPF notified" subject as unconfirmed, and points to the creditor's official channel
   - Always states the due date with the amount, or says the amount is missing and where to find it
+  - Moves a due date that falls on a weekend or holiday to the next business day when the contract says so, checking holidays through procurar-data-significativa and the legal source
   - Sends due-date reminders to the calendar of the obligation's context
 - **Test Criteria**:
   - [x] The skill is present at that path

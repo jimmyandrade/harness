@@ -5,10 +5,11 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   internal: true
   related:
     - lancar-despesa-pessoal
+    - procurar-data-significativa
     - lancar-despesa-da-empresa
     - organizar-emails
     - evoluir-habilidade
@@ -70,6 +71,8 @@ flowchart LR
 ```
 
 ### Passo 5
+
+Quando o contrato leva o vencimento de fim de semana ou feriado para o próximo dia útil, ajuste a data de cada fatura. Confira os feriados nacionais e os da cidade de pagamento por `procurar-data-significativa`, e confirme na fonte legal: um feriado pode estar registrado na lista só como data comemorativa.
 
 Toda fatura vencida ou a vencer citada na resposta traz o vencimento e o valor. Sem o valor, diga que falta e onde a pessoa o encontra: o app ou o site do credor. Um PDF protegido por senha não fornece o valor.
 
