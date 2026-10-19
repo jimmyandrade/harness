@@ -3,7 +3,7 @@ name: definir-tipo-do-evento
 description: Use essa habilidade sempre que for saber o tipo real de um compromisso antes de criar, revisar ou alterar a agenda, mesmo sem dizer tipo. NÃO use para gravar o evento no Google Agenda, reservar tempo de carreira, auditar o uso do tempo, nem saber o que já está no dia.
 metadata:
   author: jimmyandrade
-  version: "0.3.4"
+  version: "0.3.5"
   related:
     - criar-oportunidade
     - definir-agenda
@@ -13,7 +13,7 @@ metadata:
     - definir-reserva
     - definir-tarefa
     - definir-viagem
-    - lancar-despesa
+    - lancar-despesa-da-empresa
     - organizar-ponto-de-contato
     - procurar-agenda
     - procurar-oportunidade
@@ -45,7 +45,7 @@ flowchart LR
   T -->|entrega| N
   T -->|reserva ou bloqueio| K[definir-reserva]
   T -->|viagem| V[definir-viagem]
-  T -->|custo ou pagamento| G[lancar-despesa]
+  T -->|custo ou pagamento| G[lancar-despesa-da-empresa]
   T -->|oficina ou curso| E[procurar-oportunidade e definir-recurso-de-aprendizado]
   T -->|edital| F[regulamento da oportunidade]
   T -->|edição recorrente| H[definir-grupo-de-oportunidades]
@@ -95,7 +95,7 @@ A oportunidade ficou como fonte da edição, da data, da curadoria e da possibil
 ## Casos-limite
 
 - O tipo não está claro: pergunte. Não grave.
-- Custo ou pagamento: siga `lancar-despesa`. Não grave como reunião, prazo ou entrega.
+- Custo ou pagamento: siga `lancar-despesa-da-empresa`. Não grave como reunião, prazo ou entrega.
 - Prazo e entrega são tipos diferentes. Os dois gravam em `definir-agenda`.
 - Negócio ou reunião comercial não é ponto de contato. Compromisso interno não é evento externo.
 - Reunião ou resenha com uma organização: é negócio. Não vira ponto de contato.

@@ -15,7 +15,7 @@ Funcionalidade: Interpretar o lançamento antes de gravar
       Dado que existe um gasto da empresa pago na hora
       Quando a skill interpreta a frase
       Então classifica o gasto
-      E segue lancar-despesa
+      E segue lancar-despesa-da-empresa
       Mas não apaga lançamento anterior
 
     Exemplo: Gasto parcelado incompleto

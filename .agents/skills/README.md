@@ -11,8 +11,10 @@ Solid arrows come from `metadata.related`. Dotted arrows are skills cited in the
 ```mermaid
 flowchart LR
   subgraph core["Core"]
+    acompanhar_veiculo["acompanhar-veiculo"]
     avaliar_atualizacoes_de_dependencia["avaliar-atualizacoes-de-dependencia"]
     comunicar_novidade_do_produto["comunicar-novidade-do-produto"]
+    conversar_no_whatsapp["conversar-no-whatsapp"]
     criar_commit["criar-commit"]
     criar_habilidade["criar-habilidade"]
     criar_ideia_de_conteudo["criar-ideia-de-conteudo"]
@@ -32,6 +34,7 @@ flowchart LR
     definir_instrucoes_do_projeto["definir-instrucoes-do-projeto"]
     definir_jornada_de_producao["definir-jornada-de-producao"]
     definir_lancamento["definir-lancamento"]
+    definir_obrigacao_financeira["definir-obrigacao-financeira"]
     definir_perfil_social["definir-perfil-social"]
     definir_pessoa["definir-pessoa"]
     definir_planejamento_financeiro["definir-planejamento-financeiro"]
@@ -44,9 +47,12 @@ flowchart LR
     evoluir_habilidade["evoluir-habilidade"]
     gerenciar_estoque["gerenciar-estoque"]
     identificar_duplicata["identificar-duplicata"]
-    lancar_despesa["lancar-despesa"]
+    lancar_despesa_da_empresa["lancar-despesa-da-empresa"]
+    lancar_despesa_pessoal["lancar-despesa-pessoal"]
+    liberar_espaco_em_disco["liberar-espaco-em-disco"]
     medir_habilidade["medir-habilidade"]
     mesclar_registro["mesclar-registro"]
+    organizar_emails["organizar-emails"]
     organizar_ponto_de_contato["organizar-ponto-de-contato"]
     procurar_agenda["procurar-agenda"]
     procurar_data_significativa["procurar-data-significativa"]
@@ -54,7 +60,6 @@ flowchart LR
     procurar_inscricao["procurar-inscricao"]
     procurar_oportunidade["procurar-oportunidade"]
     procurar_tarefa["procurar-tarefa"]
-    publicar_habilidade["publicar-habilidade"]
     reconhecer_imagem["reconhecer-imagem"]
     registrar_ciclo_do_ativo["registrar-ciclo-do-ativo"]
     resolver_comentarios_de_revisao["resolver-comentarios-de-revisao"]
@@ -63,16 +68,28 @@ flowchart LR
     revisar_uso_do_tempo["revisar-uso-do-tempo"]
     sincronizar_cronograma["sincronizar-cronograma"]
   end
+  acompanhar_veiculo --> definir_obrigacao_financeira
+  acompanhar_veiculo --> definir_viagem
+  acompanhar_veiculo --> evoluir_habilidade
+  acompanhar_veiculo --> lancar_despesa_da_empresa
+  acompanhar_veiculo --> lancar_despesa_pessoal
+  acompanhar_veiculo --> organizar_emails
+  acompanhar_veiculo --> sincronizar_cronograma
   avaliar_atualizacoes_de_dependencia --> criar_commit
   avaliar_atualizacoes_de_dependencia --> criar_pull_request
   avaliar_atualizacoes_de_dependencia --> evoluir_habilidade
   avaliar_atualizacoes_de_dependencia --> resolver_comentarios_de_revisao
   comunicar_novidade_do_produto --> evoluir_habilidade
+  conversar_no_whatsapp --> definir_pessoa
+  conversar_no_whatsapp --> definir_tarefa
+  conversar_no_whatsapp --> evoluir_habilidade
+  conversar_no_whatsapp --> procurar_tarefa
   criar_commit -.-> criar_pull_request
   criar_commit -.-> evoluir_habilidade
+  criar_habilidade --> criar_commit
+  criar_habilidade --> criar_pull_request
   criar_habilidade --> descrever_habilidade_ou_schema
   criar_habilidade --> evoluir_habilidade
-  criar_habilidade --> publicar_habilidade
   criar_oportunidade --> definir_grupo_de_oportunidades
   criar_oportunidade --> procurar_oportunidade
   criar_pull_request --> comunicar_novidade_do_produto
@@ -99,7 +116,7 @@ flowchart LR
   definir_ativo_imobilizado --> definir_empresa
   definir_ativo_imobilizado --> gerenciar_estoque
   definir_ativo_imobilizado --> identificar_duplicata
-  definir_ativo_imobilizado --> lancar_despesa
+  definir_ativo_imobilizado --> lancar_despesa_da_empresa
   definir_ativo_imobilizado --> mesclar_registro
   definir_ativo_imobilizado --> reconhecer_imagem
   definir_ativo_imobilizado --> registrar_ciclo_do_ativo
@@ -107,7 +124,7 @@ flowchart LR
   definir_conta_bancaria --> definir_pessoa
   definir_conta_bancaria --> evoluir_habilidade
   definir_conta_bancaria --> identificar_duplicata
-  definir_conta_bancaria --> lancar_despesa
+  definir_conta_bancaria --> lancar_despesa_da_empresa
   definir_convidado --> definir_agenda
   definir_convidado --> definir_inscricao
   definir_convidado --> procurar_agenda
@@ -136,8 +153,13 @@ flowchart LR
   definir_lancamento --> definir_ativo_imobilizado
   definir_lancamento --> definir_planejamento_financeiro
   definir_lancamento --> gerenciar_estoque
-  definir_lancamento --> lancar_despesa
+  definir_lancamento --> lancar_despesa_da_empresa
   definir_lancamento --> revisar_financas
+  definir_obrigacao_financeira --> evoluir_habilidade
+  definir_obrigacao_financeira --> lancar_despesa_da_empresa
+  definir_obrigacao_financeira --> lancar_despesa_pessoal
+  definir_obrigacao_financeira --> organizar_emails
+  definir_obrigacao_financeira --> procurar_data_significativa
   definir_perfil_social --> definir_grafia
   definir_perfil_social --> definir_pessoa
   definir_perfil_social --> identificar_duplicata
@@ -165,24 +187,27 @@ flowchart LR
   definir_tipo_do_evento --> definir_reserva
   definir_tipo_do_evento --> definir_tarefa
   definir_tipo_do_evento --> definir_viagem
-  definir_tipo_do_evento --> lancar_despesa
+  definir_tipo_do_evento --> lancar_despesa_da_empresa
   definir_tipo_do_evento --> organizar_ponto_de_contato
   definir_tipo_do_evento --> procurar_agenda
   definir_tipo_do_evento --> procurar_oportunidade
+  definir_viagem --> acompanhar_veiculo
   definir_viagem --> definir_agenda
   definir_viagem --> definir_inscricao
   definir_viagem --> evoluir_habilidade
-  definir_viagem --> lancar_despesa
+  definir_viagem --> lancar_despesa_da_empresa
   definir_viagem --> organizar_ponto_de_contato
   definir_viagem --> procurar_oportunidade
   definir_viagem --> sincronizar_cronograma
+  descrever_habilidade_ou_schema --> criar_commit
+  descrever_habilidade_ou_schema --> criar_pull_request
   descrever_habilidade_ou_schema --> evoluir_habilidade
-  descrever_habilidade_ou_schema --> publicar_habilidade
   descrever_habilidade_ou_schema --> revisar_habilidade
+  evoluir_habilidade --> criar_commit
+  evoluir_habilidade --> criar_pull_request
   evoluir_habilidade --> definir_instrucoes_do_projeto
   evoluir_habilidade --> descrever_habilidade_ou_schema
   evoluir_habilidade --> medir_habilidade
-  evoluir_habilidade --> publicar_habilidade
   evoluir_habilidade --> revisar_habilidade
   gerenciar_estoque --> definir_ativo_imobilizado
   gerenciar_estoque --> definir_lancamento
@@ -192,13 +217,23 @@ flowchart LR
   identificar_duplicata --> definir_grafia
   identificar_duplicata --> definir_perfil_social
   identificar_duplicata --> mesclar_registro
-  lancar_despesa --> definir_ativo_imobilizado
-  lancar_despesa --> definir_lancamento
+  lancar_despesa_da_empresa --> definir_ativo_imobilizado
+  lancar_despesa_da_empresa --> definir_lancamento
+  lancar_despesa_da_empresa --> lancar_despesa_pessoal
+  lancar_despesa_pessoal --> definir_obrigacao_financeira
+  lancar_despesa_pessoal --> evoluir_habilidade
+  lancar_despesa_pessoal --> lancar_despesa_da_empresa
+  liberar_espaco_em_disco --> evoluir_habilidade
   medir_habilidade --> evoluir_habilidade
   mesclar_registro --> definir_empresa
   mesclar_registro --> definir_grafia
   mesclar_registro --> definir_perfil_social
   mesclar_registro --> identificar_duplicata
+  organizar_emails --> definir_obrigacao_financeira
+  organizar_emails --> evoluir_habilidade
+  organizar_emails --> lancar_despesa_da_empresa
+  organizar_emails --> lancar_despesa_pessoal
+  organizar_emails --> procurar_email
   organizar_ponto_de_contato --> criar_oportunidade
   organizar_ponto_de_contato --> definir_agenda
   organizar_ponto_de_contato --> definir_grupo_de_oportunidades
@@ -225,16 +260,14 @@ flowchart LR
   procurar_oportunidade --> criar_oportunidade
   procurar_oportunidade --> definir_inscricao
   procurar_tarefa --> procurar_inscricao
-  publicar_habilidade --> criar_commit
-  publicar_habilidade --> criar_pull_request
-  publicar_habilidade --> evoluir_habilidade
   reconhecer_imagem --> criar_oportunidade
   reconhecer_imagem --> definir_grafia
   reconhecer_imagem --> definir_inscricao
+  reconhecer_imagem --> lancar_despesa_da_empresa
   reconhecer_imagem --> procurar_oportunidade
   registrar_ciclo_do_ativo --> definir_ativo_imobilizado
   registrar_ciclo_do_ativo --> identificar_duplicata
-  registrar_ciclo_do_ativo --> lancar_despesa
+  registrar_ciclo_do_ativo --> lancar_despesa_da_empresa
   registrar_ciclo_do_ativo --> mesclar_registro
   resolver_comentarios_de_revisao --> criar_commit
   resolver_comentarios_de_revisao --> criar_pull_request
@@ -242,10 +275,11 @@ flowchart LR
   revisar_financas --> definir_lancamento
   revisar_financas --> definir_planejamento_financeiro
   revisar_financas --> gerenciar_estoque
+  revisar_habilidade --> criar_commit
   revisar_habilidade --> criar_habilidade
+  revisar_habilidade --> criar_pull_request
   revisar_habilidade --> descrever_habilidade_ou_schema
   revisar_habilidade --> evoluir_habilidade
-  revisar_habilidade --> publicar_habilidade
   revisar_uso_do_tempo --> definir_agenda
   revisar_uso_do_tempo --> definir_agenda_de_popstar
   revisar_uso_do_tempo --> procurar_agenda

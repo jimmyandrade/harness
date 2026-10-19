@@ -1,5 +1,153 @@
 # Changelog
 
+## [0.47.1](https://github.com/jimmyandrade/harness/compare/v0.47.0...v0.47.1) (2026-10-19)
+
+
+### Bug Fixes
+
+* **organizar-emails:** state the limits of Gmail filters ([#264](https://github.com/jimmyandrade/harness/issues/264)) ([9ae5d58](https://github.com/jimmyandrade/harness/commit/9ae5d5893d44850dbb4887300d1c161bea15abff))
+
+## [0.47.0](https://github.com/jimmyandrade/harness/compare/v0.46.0...v0.47.0) (2026-10-19)
+
+
+### Features
+
+* **acompanhar-veiculo:** track what a vehicle owes and costs ([#262](https://github.com/jimmyandrade/harness/issues/262)) ([da48a34](https://github.com/jimmyandrade/harness/commit/da48a341e4c5e14a9f3fb401ba01a6445baad24b))
+
+## [0.46.0](https://github.com/jimmyandrade/harness/compare/v0.45.0...v0.46.0) (2026-10-19)
+
+
+### Features
+
+* **organizar-emails:** label collection agencies apart from creditors ([#260](https://github.com/jimmyandrade/harness/issues/260)) ([e808da7](https://github.com/jimmyandrade/harness/commit/e808da74f44355c28dd5db29d7e3faacfec97f8e))
+
+## [0.45.0](https://github.com/jimmyandrade/harness/compare/v0.44.0...v0.45.0) (2026-10-19)
+
+
+### Features
+
+* **organizar-emails:** triage billing messages by obligation ([#258](https://github.com/jimmyandrade/harness/issues/258)) ([efc1cb6](https://github.com/jimmyandrade/harness/commit/efc1cb665847fa3015bff3b81a128eaed7a2deb8))
+
+## [0.44.0](https://github.com/jimmyandrade/harness/compare/v0.43.0...v0.44.0) (2026-10-19)
+
+
+### Features
+
+* add personal obligation and expense skills ([#256](https://github.com/jimmyandrade/harness/issues/256)) ([0d8bd27](https://github.com/jimmyandrade/harness/commit/0d8bd270ca9ee1353d9beeeaf0262a201aa907f0))
+
+## [0.43.0](https://github.com/jimmyandrade/harness/compare/v0.42.0...v0.43.0) (2026-10-18)
+
+
+### Features
+
+* **organizar-emails:** tell current work from past activity ([#253](https://github.com/jimmyandrade/harness/issues/253)) ([3f2f7ca](https://github.com/jimmyandrade/harness/commit/3f2f7cae90bd81a50406f6498c60e41910242339))
+
+## [0.42.0](https://github.com/jimmyandrade/harness/compare/v0.41.0...v0.42.0) (2026-10-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* **lancar-despesa-da-empresa:** lancar-despesa is now lancar-despesa-da-empresa. The old name stays in metadata.aliases, and every core skill that cited it now cites the new name.
+
+### Features
+
+* **lancar-despesa-da-empresa:** name the company in the expense skill ([#250](https://github.com/jimmyandrade/harness/issues/250)) ([b22a734](https://github.com/jimmyandrade/harness/commit/b22a7344e47103f7327683789624fff8cf9671bd))
+
+
+### Bug Fixes
+
+* report a renamed skill instead of a removed and a new one ([#251](https://github.com/jimmyandrade/harness/issues/251)) ([7dc948f](https://github.com/jimmyandrade/harness/commit/7dc948fbb5fbfd75eef69c763717c8fbb7623bf6))
+
+## [0.41.0](https://github.com/jimmyandrade/harness/compare/v0.40.1...v0.41.0) (2026-10-18)
+
+
+### Features
+
+* **organizar-emails:** move email triage skill to core ([#248](https://github.com/jimmyandrade/harness/issues/248)) ([87acb1f](https://github.com/jimmyandrade/harness/commit/87acb1fcbb46cc816c082c7c8de27cdd0c1ba356))
+
+## [0.40.1](https://github.com/jimmyandrade/harness/compare/v0.40.0...v0.40.1) (2026-10-18)
+
+
+### Bug Fixes
+
+* **check-skill:** show the version of the project instructions in the table ([#246](https://github.com/jimmyandrade/harness/issues/246)) ([5c3e268](https://github.com/jimmyandrade/harness/commit/5c3e268b60436b95725f250f30b41e1d05182f8b))
+
+## [0.40.0](https://github.com/jimmyandrade/harness/compare/v0.39.0...v0.40.0) (2026-10-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* `Commit direto na base` accepts only `nunca`, `só no terminal`, or `sempre`, and `Exigir aprovação de outra pessoa` only `nunca`, `só sem terminal`, or `sempre`. A project that sets `sim` or `não` must move to the new values.
+
+### Features
+
+* name the environment in the direct-commit and approval parameters ([#244](https://github.com/jimmyandrade/harness/issues/244)) ([36970b7](https://github.com/jimmyandrade/harness/commit/36970b7169b45b38271ffdb2fc664816625b6162))
+
+## [0.39.0](https://github.com/jimmyandrade/harness/compare/v0.38.0...v0.39.0) (2026-10-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* the publicar-habilidade skill is removed. A request to change a skill from any environment follows criar-commit and criar-pull-request. The sync does not remove its Notion page; archive it by hand.
+
+### Features
+
+* **check-skill:** show a removed skill in the skill check table ([#243](https://github.com/jimmyandrade/harness/issues/243)) ([900aa01](https://github.com/jimmyandrade/harness/commit/900aa01ad76728deaf42b25fb09a827c025ee5b5))
+* retire publicar-habilidade and let commit and PR skills adapt to the environment ([#241](https://github.com/jimmyandrade/harness/issues/241)) ([ded4e3a](https://github.com/jimmyandrade/harness/commit/ded4e3a0cf3841bc289c33520d073029db669f30))
+
+## [0.38.0](https://github.com/jimmyandrade/harness/compare/v0.37.0...v0.38.0) (2026-10-18)
+
+
+### Features
+
+* commit a Notion request through criar-commit ([#239](https://github.com/jimmyandrade/harness/issues/239)) ([de1241d](https://github.com/jimmyandrade/harness/commit/de1241d26fdc4865130d6ecf80cd9a12a1aef7d3))
+
+## [0.37.0](https://github.com/jimmyandrade/harness/compare/v0.36.0...v0.37.0) (2026-10-18)
+
+
+### Features
+
+* open the pull request of a Notion request through criar-pull-request ([#237](https://github.com/jimmyandrade/harness/issues/237)) ([a6419ea](https://github.com/jimmyandrade/harness/commit/a6419ea61a066893a4073c96c70492f953f2c4d1))
+
+## [0.36.0](https://github.com/jimmyandrade/harness/compare/v0.35.0...v0.36.0) (2026-10-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* descriptions written by this skill no longer start with "Use essa habilidade sempre que".
+
+### Features
+
+* stop requiring "Use essa habilidade sempre que" in skill descriptions ([#220](https://github.com/jimmyandrade/harness/issues/220)) ([afc16a0](https://github.com/jimmyandrade/harness/commit/afc16a076d9428e99aea9cc576ed2a610158fa5f))
+
+## [0.35.0](https://github.com/jimmyandrade/harness/compare/v0.34.0...v0.35.0) (2026-10-18)
+
+
+### Features
+
+* **liberar-espaco-em-disco:** add the disk cleanup skill ([#223](https://github.com/jimmyandrade/harness/issues/223)) ([e566b27](https://github.com/jimmyandrade/harness/commit/e566b2707afa839620dbcd675fcd22ed67e1b642))
+
+## [0.34.0](https://github.com/jimmyandrade/harness/compare/v0.33.1...v0.34.0) (2026-10-18)
+
+
+### Features
+
+* route financial evidence into expense recording ([#200](https://github.com/jimmyandrade/harness/issues/200)) ([6c2b13b](https://github.com/jimmyandrade/harness/commit/6c2b13bb3afdc54047f70e34496e03df5c124056))
+
+## [0.33.1](https://github.com/jimmyandrade/harness/compare/v0.33.0...v0.33.1) (2026-10-18)
+
+
+### Miscellaneous Chores
+
+* release 0.33.1 ([#226](https://github.com/jimmyandrade/harness/issues/226)) ([2c454c0](https://github.com/jimmyandrade/harness/commit/2c454c0a3d2047b58bd31791e29a5eb9a7080273))
+
+## [0.33.0](https://github.com/jimmyandrade/harness/compare/v0.32.0...v0.33.0) (2026-10-17)
+
+
+### Features
+
+* sync skills to Notion on each release instead of each push ([#221](https://github.com/jimmyandrade/harness/issues/221)) ([1a32f21](https://github.com/jimmyandrade/harness/commit/1a32f210df9c7d433b4148520490a3a2d9eb751c))
+
 ## [0.32.0](https://github.com/jimmyandrade/harness/compare/v0.31.0...v0.32.0) (2026-10-15)
 
 

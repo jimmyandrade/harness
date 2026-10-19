@@ -1,0 +1,7 @@
+# What a project installs from git: the same files as .gitignore leaves out.
+# Without this file, npm falls back to .gitignore and warns on every install.
+.venv/
+.env
+__pycache__/
+node_modules/
+.DS_Store

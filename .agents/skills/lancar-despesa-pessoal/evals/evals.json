@@ -1,0 +1,17 @@
+{
+  "skill_name": "lancar-despesa-pessoal",
+  "evals": [
+    {
+      "id": "fatura-de-parcela-do-consorcio",
+      "prompt": "Sim, crie o banco de obrigações e lance a fatura da parcela 77 de 100 do consórcio, de R$ 167,79, que vence dia 20.",
+      "expected_output": "O agente busca antes de criar, lança uma despesa com o valor original, o vencimento e a parcela 77/100, ligada à obrigação do consórcio, e deixa a data de pagamento vazia até o comprovante.",
+      "files": []
+    },
+    {
+      "id": "negociacao-paga-por-outra-pessoa",
+      "prompt": "A negociação de R$ 664,22 do consórcio foi paga pela minha mãe. Não lembro a data.",
+      "expected_output": "A despesa registra o valor pago e quem pagou, ligada à obrigação do consórcio, e diz que a data do pagamento falta, sem inventá-la.",
+      "files": []
+    }
+  ]
+}

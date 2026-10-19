@@ -1,6 +1,6 @@
 # language: pt
 Funcionalidade: Encaminhar o texto da imagem
-  O texto de uma oportunidade lida na imagem segue para a busca de existência.
+  O texto lido segue para a habilidade da entidade, inclusive a despesa.
 
   Regra: Com nome da edição e data, a busca é o passo seguinte
 
@@ -25,3 +25,11 @@ Funcionalidade: Encaminhar o texto da imagem
       Quando a skill entrega o texto da imagem
       Então a resposta mostra a página da edição
       Mas não cria outra oportunidade
+
+  Regra: Evidência financeira segue para a despesa
+
+    Exemplo: Nota e transação sem pedido escrito de lançamento
+      Dado que a pessoa enviou uma nota de compra e o print da mesma transação
+      Quando a skill lê as imagens sem um pedido escrito
+      Então o texto segue para lancar-despesa-da-empresa procurar o lançamento
+      Mas a resposta não para só na transcrição

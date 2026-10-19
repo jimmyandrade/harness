@@ -3,8 +3,7 @@ name: criar-pull-request
 description: Use essa habilidade sempre que for abrir PR, subir uma correção, mandar para a branch principal ou mesclar mudança no repositório, mesmo sem dizer PR. NÃO use para responder comentário de revisão nem para só commitar (use criar-commit).
 metadata:
   author: jimmyandrade
-  version: "0.9.0"
-  notion: "false"
+  version: "0.13.0"
   related:
     - evoluir-habilidade
     - criar-commit
@@ -28,6 +27,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Timeout do push (ms)": 600000
 "Duração do hook de pre-push (min)": 0
 "Exigir CI verde": "sim"
+"Exigir aprovação de outra pessoa": "só sem terminal"
 "Comunicar novidade após o merge": "sim"
 "Modo de aprendizado": "perguntar"
 ```
@@ -74,7 +74,11 @@ Depois de abrir, leia o status do PR pelas ferramentas de PR do app e vincule o 
 ```mermaid
 flowchart LR
   A{Pessoa pediu merge?} -->|não| B[Informe o link e pare]
-  A -->|sim| C{Comentário pendente?}
+  A -->|sim| M{Sem terminal e PR aberto neste pedido?}
+  M -->|sim| B
+  M -->|não| N{Aprovação de outra pessoa exigida e ausente?}
+  N -->|sim| P[Diga que falta a aprovação e pare]
+  N -->|não| C{Comentário pendente?}
   C -->|sim| D[Siga resolver-comentarios-de-revisao]
   D --> C
   C -->|não| E{Checks}
@@ -87,9 +91,11 @@ flowchart LR
   J -->|não| L[Passo 9]
 ```
 
+`Exigir aprovação de outra pessoa` vale `nunca`, `só sem terminal` ou `sempre`. A aprovação é de outra pessoa no PR: check verde não conta, e ser dona do repositório não dispensa.
 Comentário pendente é thread de revisão sem resolver, revisão que pede mudança ou comentário da conversa sem resposta, de pessoa ou de bot. Aviso de bot que só informa, como link de preview, não conta. Thread que espera decisão da pessoa segura o merge até ela decidir.
 Leia os checks uma vez. Se estiverem pendentes, não espere em loop: diga quais faltam e pare. Com `Exigir CI verde` igual a `não`, mescle mesmo assim e diga na resposta quais checks não passaram.
 Mescle só com `Tipo de merge`. Se o modo automático negar o merge, não tente de outro jeito: nada de auto-merge, API ou outra ferramenta. Entregue o comando pronto e diga que a decisão é da pessoa.
+Se o projeto sincroniza o repositório com outra ferramenta, como as páginas de habilidade no Notion, confira a sincronização depois do merge.
 Com `Comunicar novidade após o merge` igual a `sim`, siga `comunicar-novidade-do-produto` para o PR mesclado. Faça o mesmo quando a pessoa avisar que mesclou: confirme o estado MERGED antes.
 
 ### Passo 9
@@ -154,6 +160,7 @@ O pedido autoriza push e merge. Push sem o hook, porque o commit já passou em t
 - O teste novo passa também sem a correção: o teste não cobre o bug. Reescreva antes do commit.
 - A pessoa pede para não commitar: pare antes do Passo 3.
 - A pessoa pede para subir direto na `Branch base`: não suba. Abra o PR e explique a regra.
+- Sem terminal: a branch e o commit vêm de `criar-commit`, pela integração do GitHub. Pule os Passos 2, 4 e 5, abra o PR do Passo 6 pela mesma integração, entregue o link e pare. Os checks do CI no PR testam a mudança.
 
 ## Pegadinhas
 

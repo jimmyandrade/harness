@@ -1,13 +1,14 @@
 ---
 name: criar-habilidade
-description: Use essa habilidade sempre que for criar, adicionar ou escrever uma skill, mesmo sem dizer skill. NÃO use para editar código, escrever página que não seja skill, otimizar só a descrição, nem gravar a skill no Notion. Pedido vindo do Notion segue publicar-habilidade.
+description: Cria, adiciona e escreve skills a partir de uma tarefa real. Usada quando a pessoa quer uma skill nova, mesmo sem dizer skill. Não serve para editar código, escrever página que não seja skill, otimizar só a descrição nem gravar a skill no Notion.
 metadata:
   author: jimmyandrade
-  version: "3.9.0"
+  version: "3.11.0"
   related:
+    - criar-commit
+    - criar-pull-request
     - descrever-habilidade-ou-schema
     - evoluir-habilidade
-    - publicar-habilidade
 ---
 
 # Criar habilidade
@@ -59,7 +60,7 @@ Se o escopo da skill, de um script ou de um workflow mudar, o nome muda junto. O
 ### Passo 7
 
 - Título: nível 1. O nome com espaço no lugar do hífen e a grafia correta, com acento e hífen da palavra. Maiúscula só no começo e em nome próprio.
-- Descrição: segue `descrever-habilidade-ou-schema`. `Use essa habilidade sempre que`, intenção de quem pede, `NÃO use para`.
+- Descrição: segue `descrever-habilidade-ou-schema`, em terceira pessoa. O nome fica no infinitivo, não no gerúndio, pela ADR 0013.
 - Cite outra habilidade pelo nome entre crases, ou no nó de um fluxograma Mermaid. Só assim a checagem e o grafo a reconhecem.
 - Nome e descrição, juntos, não passam de `Tokens do catálogo`. O corpo não passa de `Linhas` nem de `Tokens do corpo`. Se alongar, separe antes.
 - Texto exato do usuário entra sem mudança quando já está no idioma deste texto. Caso contrário, traduza nome, descrição e corpo.
@@ -144,10 +145,10 @@ Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ### Descrição sem gatilho
 
-Se você escrever a descrição sem dizer quando usar, ou sem `NÃO use para`, a skill não dispara no momento certo.
+Se você escrever a descrição sem dizer quando usar, ou sem `Não serve para`, a skill não dispara no momento certo.
 
-1. Siga `descrever-habilidade-ou-schema`: `Use essa habilidade sempre que`, com a intenção de quem pede.
-2. Feche com `NÃO use para` e o que fica de fora.
+1. Siga `descrever-habilidade-ou-schema`: terceira pessoa, com `Usada quando` e a intenção de quem pede.
+2. Feche com `Não serve para` e o que fica de fora.
 
 ### Corpo com prefácio
 
@@ -270,7 +271,7 @@ Se você gravar o endereço de um banco ou usar o banco que a conexão mostrou, 
 
 Se você criar ou alterar a habilidade na página do Notion, a próxima sincronização apaga essa escrita.
 
-1. Escreva no GitHub. Pedido vindo do Notion segue `publicar-habilidade`.
+1. Escreva no repositório, seguindo `criar-commit` e `criar-pull-request`.
 2. Não edite a página nem o banco Habilidades.
 
 ### Pegadinha genérica
@@ -314,7 +315,7 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 - Modelo de saída não entra no corpo. Fica em `.agents/assets/templates/`.
 - O fato que o agente erraria fica em `Pegadinhas`, antes de `Scripts disponíveis`. `references/` só entra se a frase disser quando abrir. Problema não óbvio o agente não reconhece sozinho.
 - A primeira versão fica em `0.x`. `1.0.0` pede 3 casos validados com a pessoa.
-- Skill sobre escrever skills também sincroniza. A página no Notion é só leitura. Pedido vindo do Notion segue `publicar-habilidade`.
+- Skill sobre escrever skills também sincroniza. A página no Notion é só leitura. A escrita segue `criar-commit`.
 - O workspace conectado pode ser de outra empresa. A skill não carrega banco, página nem workspace. O data source vem na execução. Se não estiver na conexão, pare. Não use o banco que a conexão mostrou no lugar.
 - Cadastrar e revisar a mesma entidade usam `definir` numa skill só. Venda e despesa usam `lancar`. O cedilha sai do nome.
 

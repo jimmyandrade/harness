@@ -5,12 +5,12 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.4"
+  version: "0.3.5"
   related:
     - definir-ativo-imobilizado
     - definir-planejamento-financeiro
     - gerenciar-estoque
-    - lancar-despesa
+    - lancar-despesa-da-empresa
     - revisar-financas
 ---
 
@@ -63,7 +63,7 @@ Interpretar uma venda, um gasto ou outra movimentação de dinheiro em frase sim
 
 ```mermaid
 flowchart LR
-  T{O que chegou?} -->|gasto da empresa| D[lancar-despesa]
+  T{O que chegou?} -->|gasto da empresa| D[lancar-despesa-da-empresa]
   T -->|venda| V[Habilidade de venda]
   T -->|pessoal| P[Fora da fonte da empresa]
   T -->|falta dado| Q[Pergunte e não grave]
@@ -80,7 +80,7 @@ Sem dizer se é da empresa ou pessoal, se é venda ou gasto, ou a forma de receb
 
 ### Passo 3
 
-Pessoal fica fora da fonte da empresa. Gasto da empresa segue `lancar-despesa`. Não crie uma segunda página. Venda segue a `Habilidade de venda`, quando as instruções do projeto a indicarem. Sem ela, diga que a venda fica fora desta habilidade e não grave. Não use a lista de despesas e investimentos para venda. Não invente a fonte.
+Pessoal fica fora da fonte da empresa. Gasto da empresa segue `lancar-despesa-da-empresa`. Não crie uma segunda página. Venda segue a `Habilidade de venda`, quando as instruções do projeto a indicarem. Sem ela, diga que a venda fica fora desta habilidade e não grave. Não use a lista de despesas e investimentos para venda. Não invente a fonte.
 
 ### Passo 4
 
@@ -126,7 +126,7 @@ A venda seguiu a habilidade de venda. Não gravei na lista de despesas e investi
 
 ### Gasto da empresa de R$ 80,00 pago na hora
 
-Era gasto da empresa, pago na hora. Classifiquei e segui `lancar-despesa`. Não apaguei o que já estava lançado.
+Era gasto da empresa, pago na hora. Classifiquei e segui `lancar-despesa-da-empresa`. Não apaguei o que já estava lançado.
 
 ### Gasto da empresa de R$ 300,00 parcelado
 
@@ -138,7 +138,7 @@ Era pessoal. Ficou fora da fonte da empresa.
 
 ### Assinatura cobrada em dólar
 
-O valor em dólar, o câmbio, a data e a fonte do câmbio vieram da fatura. O valor convertido ficou na `Moeda`. Segui `lancar-despesa`.
+O valor em dólar, o câmbio, a data e a fonte do câmbio vieram da fatura. O valor convertido ficou na `Moeda`. Segui `lancar-despesa-da-empresa`.
 
 ## Casos-limite
 

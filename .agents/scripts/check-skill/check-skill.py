@@ -184,7 +184,7 @@ def changed_skill_names() -> set[str] | None:
     }
 
 
-SUMMARY_GROUP = {"new": 0, "changed": 1, "unchanged": 2}
+SUMMARY_GROUP = {"new": 0, "renamed": 1, "changed": 1, "removed": 1, "unchanged": 2}
 
 
 def summary_order(kind: str | None, body_tokens: int | None, name: str) -> tuple[int, int, str]:
@@ -193,11 +193,13 @@ def summary_order(kind: str | None, body_tokens: int | None, name: str) -> tuple
     return (group, -tokens, name)
 
 
-def result_label(passed: bool, kind: str | None) -> str:
+def result_label(passed: bool, kind: str | None, renamed_from: str | None = None) -> str:
     if kind is None:
         return "✅ passing" if passed else "❌ failing"
     if kind == "new":
         return "✅ passing, new" if passed else "❌ failing, new"
+    if kind == "renamed":
+        return f"✅ passing, renamed from `{renamed_from}`" if passed else f"❌ failing, renamed from `{renamed_from}`"
     if kind == "changed":
         return "✅ passing, changed" if passed else "❌ failing, changed"
     return "⚪ passing" if passed else "⚠️ failing, unchanged"
@@ -305,6 +307,53 @@ def write_summary(
             Path(report).write_text(text, encoding="utf-8")
 
 
+def renamed_from(name: str, changed: set[str] | None, base: str | None) -> str | None:
+    """The base skill a new skill replaces: a name in its metadata.aliases that existed at the base and is gone now."""
+    if changed is None or base is None or name == INSTRUCTIONS:
+        return None
+    path = ROOT / item_path(name)
+    if not path.exists():
+        return None
+    for alias in metadata_aliases(path.read_text(encoding="utf-8")):
+        if alias in changed and not (ROOT / item_path(alias)).exists() and revision_text(base, item_path(alias)) is not None:
+            return alias
+    return None
+
+
+def removed_rows(
+    changed: set[str] | None,
+    checked: set[str],
+    base: str | None,
+    body_limit: int,
+    encoding,
+    renamed: set[str] = frozenset(),
+) -> list[tuple[tuple[int, int, str], str]]:
+    """Rows for skills that existed at the base and are gone from the project, except the ones renamed."""
+    if changed is None or base is None:
+        return []
+    rows = []
+    for name in sorted(changed - checked - renamed - {INSTRUCTIONS}):
+        if (ROOT / item_path(name)).exists():
+            continue
+        earlier = previous_measure(name, base, encoding)
+        if earlier is None:
+            continue
+        old_version, old_tokens = earlier
+        old_share = share_number(old_tokens, body_limit)
+        token_delta = signed_number(-old_tokens) if old_tokens is not None else "—"
+        share_delta = signed_share(-old_share) if old_share is not None else "—"
+        root = github_base_url()
+        file_url = f"{root}/blob/{base}/{item_path(name)}" if root else None
+        share = limit_share(old_tokens, body_limit) if old_tokens is not None else "unavailable"
+        rows.append(
+            (
+                summary_order("removed", old_tokens, name),
+                f"| {markdown_link(f'`{name}`', file_url)} | {old_version or 'unavailable'} → — | {old_tokens if old_tokens is not None else 'unavailable'} → — | {share} → — | {token_delta} | {share_delta} | 🗑️ removed |",
+            )
+        )
+    return rows
+
+
 def summary_markdown(
     results: dict[str, list[tuple[Path, Finding]]],
     measures: dict[str, tuple[str | None, int | None]],
@@ -312,30 +361,41 @@ def summary_markdown(
     encoding,
     only_changed: bool = False,
 ) -> str:
-    """The skill check table. With only_changed, only new, changed, or failing skills, and "" when none."""
+    """The skill check table. With only_changed, only new, renamed, changed, removed, or failing skills, and "" when none."""
     changed = changed_skill_names()
     base = summary_base()
     head = summary_head()
     ranked: list[tuple[tuple[int, int, str], str]] = []
     finding_lines: list[str] = []
+    renamed: set[str] = set()
     for name, items in results.items():
         version, body_tokens = measures.get(name, (None, None))
         earlier = previous_measure(name, base, encoding)
         compared = base is not None
-        old_version = earlier[0] if earlier else None
-        old_tokens = earlier[1] if earlier else None
+        old_name = None
         if changed is None:
             kind = None
         elif name in changed and earlier is None:
-            kind = "new"
+            old_name = renamed_from(name, changed, base)
+            if old_name:
+                kind = "renamed"
+                renamed.add(old_name)
+                earlier = previous_measure(old_name, base, encoding)
+            else:
+                kind = "new"
         elif name in changed:
             kind = "changed"
         else:
             kind = "unchanged"
-        if only_changed and kind not in {"new", "changed"} and not items:
+        old_version = earlier[0] if earlier else None
+        old_tokens = earlier[1] if earlier else None
+        if only_changed and kind not in {"new", "renamed", "changed"} and not items:
             continue
-        label = result_label(not items, kind)
-        version_text = "—" if name == INSTRUCTIONS else pair_text(old_version, version, compared=compared)
+        label = result_label(not items, kind, old_name)
+        if name == INSTRUCTIONS and old_version is None and version is None:
+            version_text = "—"
+        else:
+            version_text = pair_text(old_version, version, compared=compared)
         token_text = pair_text(
             str(old_tokens) if old_tokens is not None else None,
             str(body_tokens) if body_tokens is not None else None,
@@ -360,7 +420,7 @@ def summary_markdown(
         file_url = skill_file_url(name, head)
         version_url = (
             skill_diff_url(name, base, head)
-            if compared and base and kind in {"new", "changed"}
+            if compared and base and kind in {"new", "renamed", "changed"}
             else None
         )
         ranked.append(
@@ -374,6 +434,7 @@ def summary_markdown(
             for target, finding in items:
                 where = f"{target}:{finding.line}" if finding.line else str(target)
                 finding_lines.append(f"  - `{where}` {finding.message}")
+    ranked.extend(removed_rows(changed, set(results), base, body_limit, encoding, renamed))
     if only_changed and not ranked:
         return ""
     lines = [
@@ -640,13 +701,6 @@ def spec_errors(
     description_line = line_of("description")
     if not description.strip():
         errors.append(Finding("description must be a non-empty string", description_line))
-    elif not description.startswith("Use essa habilidade sempre que"):
-        errors.append(
-            Finding(
-                'description must start with "Use essa habilidade sempre que"',
-                description_line,
-            )
-        )
     elif len(description) > 1024:
         errors.append(
             Finding(

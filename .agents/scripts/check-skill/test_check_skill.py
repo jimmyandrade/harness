@@ -214,6 +214,162 @@ class VersionReferenceTest(unittest.TestCase):
         self.assertIn("Segunda versão", checker.committed_text(self.relative))
 
 
+class RemovedSkillSummaryTest(unittest.TestCase):
+    def setUp(self) -> None:
+        self.tmp = tempfile.TemporaryDirectory()
+        self.project = Path(self.tmp.name).resolve()
+        (self.project / ".agents").mkdir()
+        (self.project / INSTRUCTIONS).write_text(PARAMETERS, encoding="utf-8")
+        self.git("init", "-q")
+        write_skill(self.project, "abrir-pedido", body="Abre o pedido.")
+        write_skill(self.project, "fechar-pedido", body="Fecha o pedido.")
+        self.base = self.commit("base")
+        self.git("rm", "-q", "-r", ".agents/skills/fechar-pedido")
+        self.head = self.commit("head")
+        os.environ["CHECK_SKILL_BASE"] = self.base
+        os.environ["CHECK_SKILL_HEAD"] = self.head
+        self.checker = load_checker(self.project)
+        import tiktoken
+
+        self.encoding = tiktoken.get_encoding("o200k_base")
+
+    def tearDown(self) -> None:
+        self.tmp.cleanup()
+        for key in ("HARNESS_ROOT", "CHECK_SKILL_BASE", "CHECK_SKILL_HEAD"):
+            os.environ.pop(key, None)
+
+    def git(self, *args: str) -> str:
+        return subprocess.run(
+            ["git", "-c", "user.name=t", "-c", "user.email=t@example.com", *args],
+            cwd=self.project, check=True, capture_output=True, text=True,
+        ).stdout.strip()
+
+    def commit(self, message: str) -> str:
+        self.git("add", "-A")
+        self.git("commit", "-q", "-m", message)
+        return self.git("rev-parse", "HEAD")
+
+    def report(self) -> str:
+        results = {"abrir-pedido": []}
+        measures = {"abrir-pedido": ("0.1.0", 3)}
+        return self.checker.summary_markdown(results, measures, 5000, self.encoding, only_changed=True)
+
+    def test_a_removed_skill_gets_a_removed_row(self) -> None:
+        row = next(line for line in self.report().splitlines() if "`fechar-pedido`" in line)
+        self.assertIn("0.1.0 → —", row)
+        self.assertIn("🗑️ removed", row)
+
+    def test_an_unchanged_skill_stays_out_of_the_pull_request_report(self) -> None:
+        self.assertNotIn("`abrir-pedido`", self.report())
+
+
+class RenamedSkillSummaryTest(unittest.TestCase):
+    def setUp(self) -> None:
+        self.tmp = tempfile.TemporaryDirectory()
+        self.project = Path(self.tmp.name).resolve()
+        (self.project / ".agents").mkdir()
+        (self.project / INSTRUCTIONS).write_text(PARAMETERS, encoding="utf-8")
+        self.git("init", "-q")
+        write_skill(self.project, "fechar-pedido", body="Fecha o pedido.")
+        self.base = self.commit("base")
+        self.git("mv", ".agents/skills/fechar-pedido", ".agents/skills/fechar-pedido-da-loja")
+        skill = self.project / ".agents" / "skills" / "fechar-pedido-da-loja" / "SKILL.md"
+        skill.write_text(
+            "\n".join([
+                "---", "name: fechar-pedido-da-loja", "description: x", "metadata:", "  author: example",
+                '  version: "0.2.0"', "  aliases:", "    - fechar-pedido", "---", "", "Fecha o pedido.",
+            ]) + "\n",
+            encoding="utf-8",
+        )
+        self.head = self.commit("head")
+        os.environ["HARNESS_ROOT"] = str(self.project)
+        os.environ["CHECK_SKILL_BASE"] = self.base
+        os.environ["CHECK_SKILL_HEAD"] = self.head
+        self.checker = load_checker(self.project)
+        import tiktoken
+
+        self.encoding = tiktoken.get_encoding("o200k_base")
+
+    def tearDown(self) -> None:
+        self.tmp.cleanup()
+        for key in ("HARNESS_ROOT", "CHECK_SKILL_BASE", "CHECK_SKILL_HEAD"):
+            os.environ.pop(key, None)
+
+    def git(self, *args: str) -> str:
+        return subprocess.run(
+            ["git", "-c", "user.name=t", "-c", "user.email=t@example.com", *args],
+            cwd=self.project, check=True, capture_output=True, text=True,
+        ).stdout.strip()
+
+    def commit(self, message: str) -> str:
+        self.git("add", "-A")
+        self.git("commit", "-q", "-m", message)
+        return self.git("rev-parse", "HEAD")
+
+    def report(self) -> str:
+        results = {"fechar-pedido-da-loja": []}
+        measures = {"fechar-pedido-da-loja": ("0.2.0", 3)}
+        return self.checker.summary_markdown(results, measures, 5000, self.encoding, only_changed=True)
+
+    def test_a_renamed_skill_compares_with_its_previous_name(self) -> None:
+        row = next(line for line in self.report().splitlines() if "`fechar-pedido-da-loja`" in line)
+        self.assertIn("0.1.0 → 0.2.0", row)
+        self.assertIn("renamed from `fechar-pedido`", row)
+
+    def test_the_previous_name_gets_no_removed_row(self) -> None:
+        self.assertNotIn("🗑️ removed", self.report())
+
+
+class InstructionsVersionSummaryTest(unittest.TestCase):
+    def setUp(self) -> None:
+        # Without these, the cells carry no links, as outside GitHub Actions.
+        self.github = {key: os.environ.pop(key) for key in ("GITHUB_SERVER_URL", "GITHUB_REPOSITORY") if key in os.environ}
+        self.tmp = tempfile.TemporaryDirectory()
+        self.project = Path(self.tmp.name).resolve()
+        (self.project / ".agents").mkdir()
+        self.git("init", "-q")
+
+    def tearDown(self) -> None:
+        self.tmp.cleanup()
+        for key in ("HARNESS_ROOT", "CHECK_SKILL_BASE", "CHECK_SKILL_HEAD"):
+            os.environ.pop(key, None)
+        os.environ.update(self.github)
+
+    def git(self, *args: str) -> str:
+        return subprocess.run(
+            ["git", "-c", "user.name=t", "-c", "user.email=t@example.com", *args],
+            cwd=self.project, check=True, capture_output=True, text=True,
+        ).stdout.strip()
+
+    def commit(self, message: str) -> str:
+        self.git("add", "-A")
+        self.git("commit", "-q", "-m", message)
+        return self.git("rev-parse", "HEAD")
+
+    def row(self, before: str, after: str) -> str:
+        import tiktoken
+
+        (self.project / INSTRUCTIONS).write_text(before, encoding="utf-8")
+        base = self.commit("base")
+        (self.project / INSTRUCTIONS).write_text(after, encoding="utf-8")
+        head = self.commit("head")
+        os.environ["CHECK_SKILL_BASE"] = base
+        os.environ["CHECK_SKILL_HEAD"] = head
+        checker = load_checker(self.project)
+        encoding = tiktoken.get_encoding("o200k_base")
+        measures = {INSTRUCTIONS: checker.body_measure(after, encoding)}
+        report = checker.summary_markdown({INSTRUCTIONS: []}, measures, 5000, encoding, only_changed=True)
+        return next(line for line in report.splitlines() if f"`{INSTRUCTIONS}`" in line)
+
+    def test_the_instructions_row_shows_the_version_change(self) -> None:
+        before = '---\nmetadata:\n  version: "0.9.0"\n---\n\n# Instruções\n'
+        after = '---\nmetadata:\n  version: "0.9.1"\n---\n\n# Instruções\n'
+        self.assertIn("0.9.0 → 0.9.1", self.row(before, after))
+
+    def test_instructions_without_a_version_show_a_dash(self) -> None:
+        self.assertIn("| — |", self.row("# Instruções\n", "# Instruções do projeto\n"))
+
+
 class StagedBinaryTest(unittest.TestCase):
     def setUp(self) -> None:
         self.tmp = tempfile.TemporaryDirectory()
@@ -385,3 +541,26 @@ class OpportunityGroupTest(unittest.TestCase):
             '    "criar-oportunidade":\n      "Considerar grupos de oportunidades": "sim"\n'
         )
         self.assertEqual(len(self.errors(parameters, {"opportunity": "Nome"})), 1)
+
+
+class DescriptionOpeningTest(unittest.TestCase):
+    def setUp(self) -> None:
+        self.tmp = tempfile.TemporaryDirectory()
+        self.project = Path(self.tmp.name)
+        (self.project / ".agents" / "skills" / "abrir-pedido").mkdir(parents=True)
+        self.checker = load_checker(self.project)
+        self.path = self.project / ".agents" / "skills" / "abrir-pedido" / "SKILL.md"
+
+    def tearDown(self) -> None:
+        self.tmp.cleanup()
+
+    def messages(self, description: str) -> list[str]:
+        front = [(2, "name: abrir-pedido"), (3, f"description: {description}")]
+        errors = self.checker.spec_errors(front, self.path, "abrir-pedido", description, False)
+        return [error.message for error in errors if "description" in error.message]
+
+    def test_should_accept_a_description_in_the_third_person(self) -> None:
+        self.assertEqual(self.messages("Abre pedidos de compra. Usada quando chega um pedido novo. Não serve para pagar."), [])
+
+    def test_should_still_accept_the_old_opening_until_every_skill_moves(self) -> None:
+        self.assertEqual(self.messages("Use essa habilidade sempre que chegar um pedido. NÃO use para pagar."), [])

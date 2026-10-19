@@ -5,12 +5,12 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.13.1"
+  version: "0.13.2"
   related:
     - definir-empresa
     - gerenciar-estoque
     - identificar-duplicata
-    - lancar-despesa
+    - lancar-despesa-da-empresa
     - mesclar-registro
     - reconhecer-imagem
     - registrar-ciclo-do-ativo
@@ -39,7 +39,7 @@ flowchart LR
   Q -->|registro atual| I[identificar-duplicata]
   Q -->|dia ou bem| P[Pergunte]
   Q -->|ciclo do bem que existe| L[registrar-ciclo-do-ativo]
-  Q -->|registrar o pagamento| D[lancar-despesa]
+  Q -->|registrar o pagamento| D[lancar-despesa-da-empresa]
   Q -->|o bem já existe| I[identificar-duplicata]
   Q -->|juntar o mesmo bem| M[mesclar-registro]
   Q -->|fornecedor, fabricante, marca ou proprietária| C[definir-empresa]
@@ -83,7 +83,7 @@ flowchart LR
   E -->|não há| N[Não invente]
 ```
 
-Ao criar ou atualizar um bem comprado ou adquirido, relacione o lançamento correspondente nos lançamentos de custo e investimento, quando a propriedade existir. Sem ela, pare. Não crie a propriedade. O preço pago e a data de compra saem dele. O fornecedor é a página da empresa proprietária. O comprovante financeiro fica nesse lançamento. O responsável é quem comprou, quando nomeada. Sem valor, data ou responsável, pare. Não invente esses três. Sem lançamento confiável, acione `lancar-despesa` ou peça os dados mínimos. A origem não está resolvida. O pagamento continua em `lancar-despesa`.
+Ao criar ou atualizar um bem comprado ou adquirido, relacione o lançamento correspondente nos lançamentos de custo e investimento, quando a propriedade existir. Sem ela, pare. Não crie a propriedade. O preço pago e a data de compra saem dele. O fornecedor é a página da empresa proprietária. O comprovante financeiro fica nesse lançamento. O responsável é quem comprou, quando nomeada. Sem valor, data ou responsável, pare. Não invente esses três. Sem lançamento confiável, acione `lancar-despesa-da-empresa` ou peça os dados mínimos. A origem não está resolvida. O pagamento continua em `lancar-despesa-da-empresa`.
 
 Ao criar ou atualizar, dado útil do comprovante, da nota, do recibo, do link, da foto ou do contexto preenche a propriedade disponível: a categoria do investimento, o tipo, a marca, o modelo, SKU, medidas aberta e fechada, o preço pago, a quantidade, a data de compra, a empresa proprietária, o responsável, as fotos, o link do produto e os lançamentos de custo e investimento. O título é o da página. A sugestão de título, o ID interno e o grupo de categoria não se preenchem. A categoria do investimento é uma página que já existe, no máximo uma. Sem ela, pare e pergunte. Não crie a categoria. Fornecedor, fabricante, marca-empresa e proprietária, quando precisarem de consulta, cadastro ou reconciliação, seguem `definir-empresa`. A empresa proprietária é uma página que já existe. Não crie a empresa aqui. A marca é a lista fechada. Não grave a empresa nesse campo. A data de compra fica no formato da propriedade. O preço pago é o valor efetivamente pago. A quantidade é das unidades identificáveis. Saldo que se esgota fica na lista de estoque. SKU segue a chave `SKU`. As observações patrimoniais recebem só o que não tem propriedade adequada e não substituem categoria, empresa nem lançamento. O corpo guarda contexto, decisão, pendência e o que não tem propriedade. Não copie no corpo o que já está na propriedade. Foto do item fica nas fotos. O link do produto fica no link do produto. Sem inferência segura, não invente marca, modelo, preço, medidas, quantidade nem data.
 
@@ -126,7 +126,7 @@ Se você criar o bem sem valor pago, data de compra ou responsável, o item fica
 Se você escrever a compra só nas observações patrimoniais, o bem fica sem origem financeira.
 
 1. Ligue o lançamento que já existe nos lançamentos de custo e investimento.
-2. Sem lançamento confiável, acione `lancar-despesa` ou peça os dados mínimos. A origem não está resolvida.
+2. Sem lançamento confiável, acione `lancar-despesa-da-empresa` ou peça os dados mínimos. A origem não está resolvida.
 3. A nota não substitui a relação.
 
 ### Origem dada por resolvida
@@ -135,7 +135,7 @@ Se você criar ou atualizar o bem sem lançamento confiável e sem pedir os dado
 
 1. Relacione nos lançamentos de custo e investimento quando a propriedade existir.
 2. Preserve o preço pago, a data de compra, fornecedor e a evidência usada.
-3. Sem lançamento confiável, acione `lancar-despesa` ou peça os dados mínimos. A origem não está resolvida.
+3. Sem lançamento confiável, acione `lancar-despesa-da-empresa` ou peça os dados mínimos. A origem não está resolvida.
 
 ### Marca no lugar da empresa
 
@@ -251,7 +251,7 @@ Relacionei o lançamento correspondente nos lançamentos de custo e investimento
 
 ### cadastre o bem sem lançamento confiável
 
-Não havia lançamento confiável. Acionei `lancar-despesa` e pedi os dados mínimos. A origem não ficou resolvida. Não inventei o lançamento.
+Não havia lançamento confiável. Acionei `lancar-despesa-da-empresa` e pedi os dados mínimos. A origem não ficou resolvida. Não inventei o lançamento.
 
 ### o link traz modelo e medidas
 
@@ -276,7 +276,7 @@ A foto foi para as fotos. A nota financeira ficou no lançamento na lista de des
 - A categoria do investimento não existe: pare e pergunte. Não crie a categoria.
 - Fornecedor, fabricante, marca ou empresa proprietária precisa de consulta, cadastro ou reconciliação: `definir-empresa`. Não crie a empresa aqui. A marca fechada do ativo não é essa empresa.
 - Criar ou atualizar o bem comprado: ligue os lançamentos de custo e investimento quando a propriedade existir. Preserve o preço pago, a data de compra, fornecedor e a evidência usada.
-- Não há lançamento financeiro confiável: acione `lancar-despesa` ou peça os dados mínimos. A origem não está resolvida. Não invente o lançamento. Não crie a propriedade.
+- Não há lançamento financeiro confiável: acione `lancar-despesa-da-empresa` ou peça os dados mínimos. A origem não está resolvida. Não invente o lançamento. Não crie a propriedade.
 - A compra não traz valor pago, data de compra ou responsável: pare e pergunte. Não invente esses três.
 - A sugestão de título, o ID interno e o grupo de categoria: não preencha.
 

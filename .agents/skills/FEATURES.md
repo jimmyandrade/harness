@@ -8,6 +8,21 @@ How these skills relate is in `README.md`, in this folder.
 
 ## Features
 
+### acompanhar-veiculo
+- **Stability**: experimental
+- **Description**: See or organize what a car or motorcycle owes or costs, such as tax, insurance, fines, points, tolls, toll tag, installments, or repairs
+- **Properties**:
+  - Lives at `.agents/skills/acompanhar-veiculo/SKILL.md` and stays internal while it is validated
+  - Records contracts and debts through definir-obrigacao-financeira and each bill or payment through lancar-despesa-pessoal or lancar-despesa-da-empresa, linked to the vehicle
+  - Turns a regularization plan into one obligation per line and one expense per due date, and checks that installments add up to each total
+  - Tells a received notice from a status checked at the traffic authority of the state of registration
+  - Reads from a parameter where each kind of pending item arrives or is checked (email, app, or website), schedules a check for items that never arrive by email, and never takes a missing email as a clean status
+  - Sets the context of each cost by purpose, and records who paid when someone else pays
+  - Requires the vehicle protection extension by the contract's criterion, a coverage radius in a distance unit or a covered locality, asked a set number of calendar days ahead with a reminder and a trip timeline milestone; a refusal needs a reason, and a lack of cash on a work trip flags the cash projection and the participation for review
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [ ] Three cases validated with the person
+
 ### avaliar-atualizacoes-de-dependencia
 - **Stability**: experimental
 - **Description**: Work through the open dependency update pull requests from Dependabot and Renovate, oldest first, one at a time
@@ -50,6 +65,10 @@ How these skills relate is in `README.md`, in this folder.
   - Skill at `.agents/skills/criar-commit/`
   - Reads the base branch, whether to commit without asking, the message language and pattern, and the test, build, and lint commands from the project instructions
   - Names a new branch `type/short-description` after the Conventional Commits type, and renames a branch a tool created with another prefix, such as `claude/`
+  - Picks the channel by what the environment has: a terminal uses git, the GitHub integration alone creates the branch and the commit through it, and neither stops and says so. Without a terminal, the CI checks of the pull request do the verifying
+  - `Commit direto na base` is `nunca`, the default, `só no terminal`, or `sempre`. Only `sempre` commits on the base without a terminal
+  - Treats the repository as the only write source: a copy synced from it, such as the Notion page of a skill, is read-only, including when the person calls the edit an emergency
+  - A request to create or activate a skill in a synced copy does not create it there, including when that copy explains how to fill the description
 - **Test Criteria**:
   - [ ] A project without test or build commands commits and says nothing was verified
 
@@ -72,7 +91,7 @@ How these skills relate is in `README.md`, in this folder.
   - Writes each input example as a level-3 heading and its output as the next paragraph, with a blank line between pairs. The checker rejects `dl`, `dt`, and `dd`, which Notion does not show
   - Ends every skill with Scripts disponíveis, naming each script and the command that runs it
   - Does not edit code, write a non-skill page, only tune a description, or write the skill page in Notion
-  - A request that comes from Notion follows publicar-habilidade
+  - A request that arrives through a synced copy, such as the Notion page, writes through criar-commit and criar-pull-request
   - Cites another skill by its name between backticks, or in a Mermaid diagram node, so the checker and the skill graph recognize the citation
   - Gives every new skill the `Modo de aprendizado` parameter and a last step that hands over to evoluir-habilidade
 - **Test Criteria**:
@@ -124,6 +143,9 @@ How these skills relate is in `README.md`, in this folder.
   - Follows the pull request template of the repository when there is one
   - Before a merge, hands pending review comments from people or bots to resolver-comentarios-de-revisao, and holds the merge while a thread waits for the person
   - `Exigir CI verde`, on by default, holds the merge while a check fails or is pending; off, it merges and reports the checks that did not pass
+  - Without a terminal, opens the pull request through the GitHub integration, gives the link, and stops; the CI checks of the pull request do the testing
+  - `Exigir aprovação de outra pessoa` is `nunca`, `só sem terminal`, the default, or `sempre`. It holds the merge until another person approves; a green check or owning the repository does not replace that approval. Without a terminal, a merge never happens in the request that opened the pull request
+  - After a merge, checks the sync when the project syncs the repository with another tool, such as the skill pages in Notion
 - **Test Criteria**:
   - [ ] A request to push to the base branch opens a pull request instead
   - [ ] A `claude/…` branch is renamed to `type/…` before its pull request opens
@@ -216,7 +238,7 @@ How these skills relate is in `README.md`, in this folder.
   - Sends fabric, trim, thread, buttons, labels, packaging, production inputs, and consumable office material to the stock list through gerenciar-estoque, including when the purchase was an investment
   - Asks before creating or linking when the destination is unclear, including a hybrid item that wears and can be repaired, and when the choice is among fixed assets, stock, parts, production, or financial context alone
   - On create or update, links the matching entry from the expense list through the cost and investment entries when that property exists, and keeps the amount paid, the purchase date, the supplier, and the evidence used
-  - Leaves the financial entry that originated the purchase to lancar-despesa, and does not treat the origin as resolved when no reliable entry exists
+  - Leaves the financial entry that originated the purchase to lancar-despesa-da-empresa, and does not treat the origin as resolved when no reliable entry exists
   - Starts a purchase of a durable good from that entry, and records the amount paid, the purchase date, and the buyer as the responsible person
   - Relates an existing cost category and an existing owner company, and does not treat the closed brand list as the company
   - Sends a supplier, manufacturer, brand company, or owning company to definir-empresa for lookup, registration, or reconciliation
@@ -236,7 +258,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Description**: Register, review, or update a bank or payment account, personal or business, and record what happened to it
 - **Properties**:
   - Lives at `.agents/skills/definir-conta-bancaria/SKILL.md`
-  - Leaves the existence-only check to identificar-duplicata, expenses to lancar-despesa, a received sale to the skill the project names, a missing company to definir-empresa, and a missing person to definir-pessoa
+  - Leaves the existence-only check to identificar-duplicata, expenses to lancar-despesa-da-empresa, a received sale to the skill the project names, a missing company to definir-empresa, and a missing person to definir-pessoa
   - Treats a page whose title starts with a template title from the project instructions as a template and creates a new page instead of filling it
   - Links a business account to the holding company and a personal account to the holding person, and keeps both accounts of the same person apart
   - Fills branch, account, check digit, and holder only from the source
@@ -397,13 +419,28 @@ How these skills relate is in `README.md`, in this folder.
   - Reads `Moeda`, `Moedas estrangeiras`, `Habilidade de venda`, and `Habilidade de projeção de caixa` from the project instructions
   - Records an expense in a foreign currency with the original amount, the exchange rate, and the amount in `Moeda`, and asks when the rate is missing
   - Asks before recording when company or personal, sale or expense, or the payment form is missing
-  - Keeps a personal entry out of the company source and sends a company expense to lancar-despesa
+  - Keeps a personal entry out of the company source and sends a company expense to lancar-despesa-da-empresa
   - Sends a sale to the skill that `Habilidade de venda` names, when there is one, and does not store it in the expense list
   - Classifies a company expense with the configured classes and does not create a missing category
   - Adds the entry to what the source already has and does not rebuild or delete prior entries
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses the DRE, the cash-flow statement, the price, the monthly plan, the durable good, and the fair cash projection
+
+### definir-obrigacao-financeira
+- **Stability**: experimental
+- **Description**: Register or review a contract or debt that generates charges, such as a plan, a consortium, a card, or a loan
+- **Properties**:
+  - Lives at `.agents/skills/definir-obrigacao-financeira/SKILL.md` and stays internal while it is validated
+  - Keeps the obligation apart from each bill or payment, which goes to lancar-despesa-pessoal or lancar-despesa-da-empresa
+  - Sets the context from the original purpose and the status from evidence, with a review date or a review condition for a postponed debt
+  - Treats a collection agency, a negotiation offer, or a "CPF notified" subject as unconfirmed, and points to the creditor's official channel
+  - Always states the due date with the amount, or says the amount is missing and where to find it
+  - Moves a due date that falls on a weekend or holiday to the next business day when the contract says so, checking holidays through procurar-data-significativa and the legal source
+  - Sends due-date reminders to the calendar of the obligation's context
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [ ] Three cases validated with the person
 
 ### definir-perfil-social
 - **Stability**: experimental
@@ -521,7 +558,7 @@ How these skills relate is in `README.md`, in this folder.
   - Classifies the commitment before a create, review, or alter, and asks when the type is unclear
   - Treats an opportunity as the edition, the date, the curation, and the chance to participate, a deal as the conversation or commercial meeting, and a contact point as real participation
   - Does not turn a meeting or a review into a contact point, and does not record an approved opportunity as a contact point until the participation days are confirmed
-  - Sends an existing opportunity to procurar-oportunidade, a missing one to an offer of criar-oportunidade, a contact point to organizar-ponto-de-contato, a course to procurar-oportunidade and definir-recurso-de-aprendizado, a call to the opportunity regulation, a recurring edition to definir-grupo-de-oportunidades, a task to definir-tarefa, travel to definir-viagem, and cost or payment to lancar-despesa
+  - Sends an existing opportunity to procurar-oportunidade, a missing one to an offer of criar-oportunidade, a contact point to organizar-ponto-de-contato, a course to procurar-oportunidade and definir-recurso-de-aprendizado, a call to the opportunity regulation, a recurring edition to definir-grupo-de-oportunidades, a task to definir-tarefa, travel to definir-viagem, and cost or payment to lancar-despesa-da-empresa
   - Leaves the write of a commercial meeting, an internal commitment, a deadline, or a delivery to definir-agenda, and keeps a deadline distinct from a delivery
 - **Test Criteria**:
   - [x] The skill is present at that path
@@ -539,12 +576,13 @@ How these skills relate is in `README.md`, in this folder.
   - Answers who will drive the person, or whether a bus is needed, from the flight number and the takeoff time of the outbound and return legs, and does not substitute boarding or another milestone for that takeoff
   - Leaves an unconfirmed time empty, and does not copy the next milestone's time or use an all-day block in its place
   - Distinguishes a confirmed fact, a pending item, and conflicting sources. Leaves the pending item empty and named, keeps both conflicting sources, and lets a more recent and explicitly official source prevail. Does not invent a city, an airport, a hotel, a time, a transfer, or a responsibility
-  - Links each lodging to the trip only when the name or the address is reliable, because a trip can have more than one. An address without a confirmed name becomes the lodging title. The written address, the address complement, the map place, the room, the breakfast, and a covered expense without a ledger entry stay on that lodging. A financial entry follows lancar-despesa and relates to the trip, and an organization-covered amount stays distinct from an expense the participant owes. General weather and packing guidance, such as cold, heat, dry weather, rain, and what kind of clothes to bring, stays named on the trip. It is not a product of the business, and no property is created for it. Cronograma keeps the operational event, its stage, its times, its owners, and the note for that event
+  - Links each lodging to the trip only when the name or the address is reliable, because a trip can have more than one. An address without a confirmed name becomes the lodging title. The written address, the address complement, the map place, the room, the breakfast, and a covered expense without a ledger entry stay on that lodging. A financial entry follows lancar-despesa-da-empresa and relates to the trip, and an organization-covered amount stays distinct from an expense the participant owes. General weather and packing guidance, such as cold, heat, dry weather, rain, and what kind of clothes to bring, stays named on the trip. It is not a product of the business, and no property is created for it. Cronograma keeps the operational event, its stage, its times, its owners, and the note for that event
   - Puts a flight number, which has no property of its own, in the milestone context, without repeating date, time, or place
   - Does not write the flight, the lodging, or the guidance on an opportunity or an inscription
   - Does not create a trip when the person only asks whether one exists or which day it falls on
-  - Leaves a dated milestone with no confirmed start and end to sincronizar-cronograma, a confirmed calendar time and a named-day plan to definir-agenda, and a financial proof or an amount to lancar-despesa
+  - Leaves a dated milestone with no confirmed start and end to sincronizar-cronograma, a confirmed calendar time and a named-day plan to definir-agenda, and a financial proof or an amount to lancar-despesa-da-empresa
   - Does not promote the trip to confirmed without evidence, and does not cancel it without explicit evidence
+  - Does not close a trip by the person's own vehicle until acompanhar-veiculo has the protection extension requested or refused
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses recording an event that already has a time, syncing a date-only milestone, posting the amount, registering the opportunity, and registering someone
@@ -555,13 +593,13 @@ How these skills relate is in `README.md`, in this folder.
 - **Properties**:
   - Lives at `.agents/skills/descrever-habilidade-ou-schema/SKILL.md`
   - Does not write the skill body, grade output quality, describe a product, or write the skill page in Notion
-  - Starts every description with "Use essa habilidade sempre que", which is the objective the Notion router searches
+  - Writes every description in the third person: what the skill does, "Usada quando" with the intent of whoever asks, and "Não serve para", as ADR 0013 decides
   - Keeps the triggers in the description, because Notion automatic use loads that property and decides from it whether to load the skill
   - Requires a trigger suite with an obvious task and a paraphrased request that should load the skill, and an unrelated topic plus a near miss the skill does not cover that should not
   - On undertriggering, when the skill does not load, the person enables it by hand, or asks when to use it, adds detail and the technical term
   - On overtriggering, when the skill loads for an irrelevant query, the person disables it, or the purpose is confusing, tightens the negative triggers
   - Leaves the skill name and the prompt examples out of the description; the examples stay in the body
-  - A request that comes from Notion follows publicar-habilidade
+  - A request that arrives through a synced copy, such as the Notion page, writes through criar-commit and criar-pull-request
   - Rewrites a schema description and each property description that already has text, and keeps every fact already there
   - Writes the description of the project instructions too, in their frontmatter: it fires on any task of the workspace, and `NÃO use para` covers changing the instructions themselves
 - **Test Criteria**:
@@ -582,7 +620,7 @@ How these skills relate is in `README.md`, in this folder.
   - Compares the run without the skill and with the skill on back-and-forth, failed calls, and tokens, from the run record
   - Edits the skill that was validated in that same conversation
   - Does not create the first version of a skill, only check whether the description triggers, only review without running, or write the skill page in Notion
-  - A request that comes from Notion follows publicar-habilidade
+  - A request that arrives through a synced copy, such as the Notion page, writes through criar-commit and criar-pull-request
   - Size and run profile follow medir-habilidade
   - Runs at the end of every core skill, following the `Modo de aprendizado` parameter (`sim`, `não`, `perguntar`, default `perguntar`): with yes, one commit per lesson on an English-named branch, pushed, with a draft pull request from the first commit, marked ready when the person ends the sequence
   - Takes the project instructions as a target too: feedback on the agent's behavior edits them in the format of `definir-instrucoes-do-projeto` and raises `metadata.version`, without evals or features of their own
@@ -630,13 +668,18 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses consolidating names, deleting, creating the record, locking spelling, and choosing among similar records
 
-### lancar-despesa
+### lancar-despesa-da-empresa
 - **Stability**: experimental
 - **Description**: Record a payment and trace the financial entry that originated a durable asset
 - **Properties**:
-  - Lives at `.agents/skills/lancar-despesa/SKILL.md`
+  - Lives at `.agents/skills/lancar-despesa-da-empresa/SKILL.md`
   - Reads the expense list and its property names from the data mapping of the project, when the person does not name another list
   - Records a payment in a currency of `Moedas estrangeiras` with the original amount, the exchange rate, its date and source, and the amount in `Moeda`, and asks when the rate is missing
+  - Searches by recipient variations, document, amount, date, and payment method before creating an expense, without asking permission to search
+  - Reuses an existing entry and preserves its evidence instead of recording the same purchase twice
+  - Records an absent expense in the same execution when its business purpose is confirmed or inferable from context, and asks when that purpose is uncertain
+  - Keeps original evidence in the mapped attachment property and reports missing optional fields without inventing them
+  - Verifies the saved entry before reporting that it was recorded
   - Traces the financial entry that originated the purchase or acquisition of a durable asset
   - Leaves the asset page, the split between fixed assets and stock, and a controllable-item purchase to definir-ativo-imobilizado
   - Sends a sale or a mixed sale-and-expense sentence to definir-lancamento
@@ -644,6 +687,35 @@ How these skills relate is in `README.md`, in this folder.
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses the opportunity, the signup update, the task, the agenda, and registering the asset
+  - [ ] A confirmed or inferable business expense is recorded after an existence search; an existing expense is reused
+
+### lancar-despesa-pessoal
+- **Stability**: experimental
+- **Description**: Find or record a personal expense, such as a purchase, a bill, an installment, or a payment slip
+- **Properties**:
+  - Lives at `.agents/skills/lancar-despesa-pessoal/SKILL.md` and stays internal while it is validated
+  - Never records a personal expense in the company list, even for a partner
+  - Links a bill to the obligation that generated it, with the installment as number/total
+  - Leaves the payment date empty until there is a receipt, and keeps original and paid amounts apart
+  - Records who paid when someone other than the debtor pays
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [ ] Three cases validated with the person
+
+### liberar-espaco-em-disco
+- **Stability**: experimental
+- **Description**: Free disk space on a Mac without losing a file, only from caches that rebuild themselves
+- **Properties**:
+  - Lives at `.agents/skills/liberar-espaco-em-disco/SKILL.md`
+  - Does not sync to Notion, because it needs a shell
+  - Measures free space and swap first, then the known folders in the background, one level deeper in the largest
+  - Sorts each item into a cache that rebuilds itself, a cache its app clears better, or a file of the person, which it only sizes
+  - Never deletes by itself: hands over the delete command for the person to run, even after a yes
+  - Measures again after each cleanup and reports the space freed against the baseline
+  - Explains that Activity Monitor totals bytes written since boot and that swap moves free space up and down
+- **Test Criteria**:
+  - [ ] Only caches that rebuild themselves are proposed for deletion, and the person's files show only their size
+  - [ ] The agent hands over the delete command and deletes nothing itself
 
 ### medir-habilidade
 - **Stability**: experimental
@@ -687,6 +759,27 @@ How these skills relate is in `README.md`, in this folder.
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses avoiding a duplicate, registering the disambiguation relation, creating the record, locking spelling, and deleting without an order
+
+### organizar-emails
+- **Stability**: experimental
+- **Description**: Triage email with BASB/PARA and learn personal, work, or mixed context from reviewed messages
+- **Properties**:
+  - Lives at `.agents/skills/organizar-emails/SKILL.md` and stays internal while the first decision tree is under construction
+  - Learns each decision and its reason from real messages instead of classifying an entire sender or mailbox from one example
+  - Separates the purpose of a historical obligation from a later intention to separate personal and business finances
+  - Reads the protected account in recovery copies, and keeps the security filter thematic rather than automatically personal
+  - Preserves inbox and read state on security alerts, verifies applied labels and filters, and does not promise automatic archiving after human reading
+  - Keeps account intent and unwanted newsletter preferences in project parameters, without copying email bodies or financial identifiers into the skill
+  - Reads the contexts and the context of each organization from project parameters, so a past or paused professional activity is not classified as current work
+  - Files automatic confirmations with no pending action, such as unsubscribes, under an archive subfolder by type without asking whether to keep them
+  - Finds the obligation of a billing message by sender, keeps open bills visible with their due date and amount, moves negotiation offers of a postponed debt out of the inbox, and never hides a formal notice or a debt still to verify
+  - Gives a collection agency its own label and adds the creditor's label only when the body names it; an alarming subject is not a formal notice unless the body describes the measure taken
+  - Compares batch changes with the plan, redoes only what a partial failure left, and reports every failed call
+- **Test Criteria**:
+  - [x] The skill is present and one user-requested read-only exploratory case is recorded
+  - [x] User-provided acceptance examples are recorded in Portuguese Gherkin
+  - [x] A clean-session read-only exploratory run was completed and its findings refined the skill
+  - [ ] Revalidate the refined version and pass the official skill checker before enabling the skill
 
 ### organizar-ponto-de-contato
 - **Stability**: experimental
@@ -823,27 +916,6 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses creating, editing, or completing the task, and searching outside the task list
 
-### publicar-habilidade
-- **Stability**: experimental
-- **Description**: Publish a skill change from Notion through GitHub, and follow the project's commit flow from Cursor, Claude, or the repository
-- **Properties**:
-  - Lives at `.agents/skills/publicar-habilidade/SKILL.md`
-  - Treats the Habilidades database as read-only and the repository as the write source
-  - From Notion, uses its own branch, an English Conventional Commits subject, and a pull request, then stops
-  - Waits for another person's review; a green check does not replace that review
-  - Merges only in a later request, after that review and an explicit merge authorization
-  - Does not edit a Habilidades page, including when the person calls the edit an emergency
-  - A Notion chat that asks to create or activate a skill does not create or activate the page, including when the database text explains how to fill the description
-  - A page that exists only in that database stays there; sync covers a page it already writes and does not remove the extra page
-  - If that chat cannot reach GitHub, it stops and says so
-  - From Cursor, Claude, or the repository, reads `Commit direto na base` from the project instructions: `sim` commits on the main branch without a pull request, and `não`, the default, follows criar-commit and criar-pull-request
-  - After an approved and authorized merge, lets GitHub Actions sync and then checks the Notion page
-  - A synced version below 0.1.0 gets the draft option of the mapping, a version from 0.1.0 whose major number is 0 gets the validation option, and 1.x onward gets the production option
-  - A rename keeps the same Notion page and writes the new name on it. Sync stops when the new name and the previous name are already both pages
-- **Test Criteria**:
-  - [x] The skill is present at that path
-  - [x] The description refuses editing the Habilidades page and merging in the same request
-
 ### reconhecer-imagem
 - **Stability**: experimental
 - **Description**: Read what an image says and pass that text to another skill
@@ -855,16 +927,18 @@ How these skills relate is in `README.md`, in this folder.
   - When the script is present, does not read the image file itself
   - Reads the recognition languages from its `Idiomas do reconhecimento` parameter
   - Drops the phone and ad chrome, and does not treat a stray syllable as a name
-  - Does not send the image to the connected workspace
+  - Passes text to the next skill without another recognition pass; preserves originals as evidence for a financial entry
   - When the text has an edition name and a date, and the person did not name the next skill, passes that text to procurar-oportunidade without asking, then to criar-oportunidade when the edition is not found
-  - When the reading is a completed or confirmed order, passes it to definir-inscricao after the edition lookup, and does not write the inscription itself
+  - Routes a note, receipt, bill, or transaction to lancar-despesa-da-empresa before treating a completed order as an event signup
+  - When the reading is a completed or confirmed event order, passes it to definir-inscricao after the edition lookup, and does not write the inscription itself
   - When the reading is a person or a social profile, passes it to definir-grafia and does not stop at the text
   - When the next skill is not in the conversation's skill list, delivers the text and asks whether to call that skill by name, without saying it is unavailable
-  - Stops at the text when it is not an opportunity, a person, or a profile and the person did not name the next skill
+  - Stops at the text only when the routing flow has no recipient and the person did not name the next skill
   - Does not register the opportunity itself, organize a fair, or create a task
 - **Test Criteria**:
   - [x] The skill is present at that path
-  - [x] The description refuses registering an opportunity, organizing a contact point, creating a task, and reading text that is already written
+  - [x] The description refuses registering an entity, creating a task, and reading text that is already written
+  - [ ] A receipt and the matching transaction reach the expense workflow without a written request to record them
 
 ### registrar-ciclo-do-ativo
 - **Stability**: experimental
@@ -876,7 +950,7 @@ How these skills relate is in `README.md`, in this folder.
   - Uses the partnerships and loans property for a loan or partnership, and the purchase date plus the price paid for depreciation
   - Writes Observações patrimoniais when no structured property exists, and suggests a property without creating it before a yes
   - Does not delete the page, invent a depreciation method, create a status property, or create the asset page
-  - Leaves a payment that has financial evidence to lancar-despesa, and does not create an expense without that evidence
+  - Leaves a payment that has financial evidence to lancar-despesa-da-empresa, and does not create an expense without that evidence
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses registering the asset, choosing stock, recording the payment, and creating the company
@@ -923,7 +997,7 @@ How these skills relate is in `README.md`, in this folder.
   - Suggests an obvious task and a paraphrased request that should trigger, and an unrelated topic plus a near miss that should not
   - Suggests each acceptance criterion already written as a Portuguese Gherkin example, and a with-skill against without-skill comparison
   - Does not write the feature file, create the first version, run the test, or write the skill page in Notion
-  - A request that comes from Notion follows publicar-habilidade
+  - A request that arrives through a synced copy, such as the Notion page, writes through criar-commit and criar-pull-request
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses creating the first version, running the test and editing the skill, only measuring size, and writing the skill page in Notion
