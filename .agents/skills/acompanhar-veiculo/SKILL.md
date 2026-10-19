@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.5.0"
   internal: true
   related:
     - definir-obrigacao-financeira
@@ -25,6 +25,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ```yaml
 "Moeda": "BRL"
+"Canais das pendências": []
+"Frequência da consulta nos canais": "mensal"
 "Dias corridos de antecedência da extensão": 7
 "Critério da extensão da proteção": "raio"
 "Unidade de distância": "km"
@@ -58,7 +60,7 @@ Um plano de regularização, como uma planilha com dívida, total, parcelas e ve
 
 ### Passo 4
 
-Aviso recebido não é situação conferida. Multa, pontos, IPVA e licenciamento se conferem no órgão de trânsito do estado de registro ou no sistema nacional de trânsito; pedágio sem praça, na concessionária ou na tag; parcela, na administradora. Diga de onde veio cada situação. Pontos caem na habilitação de quem a pessoa indicar como condutor; sem indicação, pergunte. Pedágio eletrônico sem praça gera cobrança posterior com prazo: diga o prazo que a concessionária informar, sem inventar outro.
+Aviso recebido não é situação conferida. `Canais das pendências` diz, para cada tipo de pendência, onde ela chega ou se consulta: e-mail, aplicativo ou site do órgão. Pendência que não chega por e-mail ganha uma consulta no canal indicado, com `Frequência da consulta nos canais`, e a ausência de e-mail não vale como situação em dia. Tipo ausente do parâmetro: pergunte uma vez onde ele se consulta. Multa, pontos, IPVA e licenciamento se conferem no órgão de trânsito do estado de registro ou no sistema nacional de trânsito; pedágio sem praça, na concessionária ou na tag; parcela, na administradora. Diga de onde veio cada situação. Pontos caem na habilitação de quem a pessoa indicar como condutor; sem indicação, pergunte. Pedágio eletrônico sem praça gera cobrança posterior com prazo: diga o prazo que a concessionária informar, sem inventar outro.
 
 ### Passo 5
 

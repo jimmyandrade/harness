@@ -16,6 +16,7 @@ How these skills relate is in `README.md`, in this folder.
   - Records contracts and debts through definir-obrigacao-financeira and each bill or payment through lancar-despesa-pessoal or lancar-despesa-da-empresa, linked to the vehicle
   - Turns a regularization plan into one obligation per line and one expense per due date, and checks that installments add up to each total
   - Tells a received notice from a status checked at the traffic authority of the state of registration
+  - Reads from a parameter where each kind of pending item arrives or is checked (email, app, or website), schedules a check for items that never arrive by email, and never takes a missing email as a clean status
   - Sets the context of each cost by purpose, and records who paid when someone else pays
   - Requires the vehicle protection extension by the contract's criterion, a coverage radius in a distance unit or a covered locality, asked a set number of calendar days ahead with a reminder and a trip timeline milestone; a refusal needs a reason, and a lack of cash on a work trip flags the cash projection and the participation for review
 - **Test Criteria**:
