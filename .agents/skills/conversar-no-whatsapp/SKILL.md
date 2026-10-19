@@ -3,10 +3,11 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.4.0"
   internal: true
   notion: "false"
   related:
+    - definir-agenda
     - definir-tarefa
     - procurar-tarefa
     - definir-pessoa
@@ -55,6 +56,7 @@ flowchart LR
   Q -->|cadastrar quem pediu| P[definir-pessoa]
   Q -->|texto no tom de voz| V[redigir-com-tom-de-voz]
   Q -->|responder ou enviar| E[Passo 5]
+  Q -->|marcar call ou evento| A[definir-agenda e depois Passo 6]
 ```
 
 Para registrar a demanda, leve a data e o horário da primeira mensagem do pedido como data da demanda.
@@ -75,9 +77,23 @@ Depois de enviar, leia a conversa de novo, confira se a mensagem aparece e diga 
 
 ### Passo 6
 
-Ao terminar, deixe a aba do WhatsApp Web aberta, mesmo quando as outras abas da tarefa forem fechadas.
+Para marcar uma call ou um evento pela conversa, o evento já está na agenda por `definir-agenda`, com o link da chamada. O evento do WhatsApp copia o título, o início e o link de lá. Ele é uma mensagem e segue o sim do Passo 5.
+
+Checklist do evento:
+- [ ] Botão de anexar da conversa, depois Evento.
+- [ ] Nome do evento e descrição com o link da chamada.
+- [ ] Data de início: clique no campo e digite dia, mês e ano sem separador, como 19102026.
+- [ ] Hora de início: clique na hora e digite hora e minuto, como 1615.
+- [ ] Término, se houver, depois do início. Mudar um desloca o outro: confira os dois a cada mudança. Se não firmar, deixe o término vazio e diga isso.
+- [ ] Antes de criar, amplie o formulário e confira nome, descrição, data e hora.
+- [ ] Botão de criar cinza com o início no passado: diga isso e peça o novo horário. Não mude o horário sozinho.
+- [ ] Depois de criar, confira o cartão do evento na conversa, com o dia e a hora.
 
 ### Passo 7
+
+Ao terminar, deixe a aba do WhatsApp Web aberta, mesmo quando as outras abas da tarefa forem fechadas.
+
+### Passo 8
 
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
@@ -158,6 +174,10 @@ Mostrei a conversa do Caio e o texto "Podemos falar 15h00?". Enviei depois do si
 - O banco do aplicativo de desktop fica num contêiner protegido do sistema. A leitura direta é bloqueada, e contornar o bloqueio não é o caminho.
 - Em conta comercial, a conversa pode estar com o agente de IA, que responde à próxima mensagem do contato.
 - "Sexta-feira" no separador é a última sexta antes de hoje, não a sexta mais próxima de outra data da conversa.
+- No formulário de evento, o início e o término se empurram: mudar um muda o dia e a hora do outro.
+- O formulário de evento abre com uma data e uma hora padrão que não são as do pedido.
+- O WhatsApp não cria evento com início no passado. O botão de criar fica cinza, sem mensagem de erro.
+- O cartão do evento mostra a hora no formato de 12 horas, como "Hoje às 4:20".
 
 ## Scripts disponíveis
 
