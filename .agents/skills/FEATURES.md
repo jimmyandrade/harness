@@ -8,6 +8,19 @@ How these skills relate is in `README.md`, in this folder.
 
 ## Features
 
+### acompanhar-veiculo
+- **Stability**: experimental
+- **Description**: See or organize what a car or motorcycle owes or costs, such as tax, insurance, fines, points, tolls, toll tag, installments, or repairs
+- **Properties**:
+  - Lives at `.agents/skills/acompanhar-veiculo/SKILL.md` and stays internal while it is validated
+  - Records contracts and debts through definir-obrigacao-financeira and each bill or payment through lancar-despesa-pessoal or lancar-despesa-da-empresa, linked to the vehicle
+  - Turns a regularization plan into one obligation per line and one expense per due date, and checks that installments add up to each total
+  - Tells a received notice from a status checked at the traffic authority of the state of registration
+  - Sets the context of each cost by purpose, and records who paid when someone else pays
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [ ] Three cases validated with the person
+
 ### avaliar-atualizacoes-de-dependencia
 - **Stability**: experimental
 - **Description**: Work through the open dependency update pull requests from Dependabot and Renovate, oldest first, one at a time
@@ -409,7 +422,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Properties**:
   - Lives at `.agents/skills/definir-obrigacao-financeira/SKILL.md` and stays internal while it is validated
   - Keeps the obligation apart from each bill or payment, which goes to lancar-despesa-pessoal or lancar-despesa-da-empresa
-  - Sets the context from the original purpose and the status from evidence, with a review date for a postponed debt
+  - Sets the context from the original purpose and the status from evidence, with a review date or a review condition for a postponed debt
   - Treats a collection agency, a negotiation offer, or a "CPF notified" subject as unconfirmed, and points to the creditor's official channel
   - Always states the due date with the amount, or says the amount is missing and where to find it
   - Sends due-date reminders to the calendar of the obligation's context
@@ -671,6 +684,7 @@ How these skills relate is in `README.md`, in this folder.
   - Never records a personal expense in the company list, even for a partner
   - Links a bill to the obligation that generated it, with the installment as number/total
   - Leaves the payment date empty until there is a receipt, and keeps original and paid amounts apart
+  - Records who paid when someone other than the debtor pays
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [ ] Three cases validated with the person

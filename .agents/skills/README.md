@@ -11,6 +11,7 @@ Solid arrows come from `metadata.related`. Dotted arrows are skills cited in the
 ```mermaid
 flowchart LR
   subgraph core["Core"]
+    acompanhar_veiculo["acompanhar-veiculo"]
     avaliar_atualizacoes_de_dependencia["avaliar-atualizacoes-de-dependencia"]
     comunicar_novidade_do_produto["comunicar-novidade-do-produto"]
     criar_commit["criar-commit"]
@@ -65,6 +66,12 @@ flowchart LR
     revisar_uso_do_tempo["revisar-uso-do-tempo"]
     sincronizar_cronograma["sincronizar-cronograma"]
   end
+  acompanhar_veiculo --> definir_obrigacao_financeira
+  acompanhar_veiculo --> definir_viagem
+  acompanhar_veiculo --> evoluir_habilidade
+  acompanhar_veiculo --> lancar_despesa_da_empresa
+  acompanhar_veiculo --> lancar_despesa_pessoal
+  acompanhar_veiculo --> organizar_emails
   avaliar_atualizacoes_de_dependencia --> criar_commit
   avaliar_atualizacoes_de_dependencia --> criar_pull_request
   avaliar_atualizacoes_de_dependencia --> evoluir_habilidade

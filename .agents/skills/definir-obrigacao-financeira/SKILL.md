@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   internal: true
   related:
     - lancar-despesa-pessoal
@@ -54,7 +54,7 @@ A pessoa informa o data source na execução. Sem essa indicação, use a lista 
 
 ### Passo 3
 
-Grave credor, tipo, contexto, situação, dia de vencimento, valor da parcela ou da fatura, parcelas pagas e total, remetentes das cobranças e as empresas de cobrança que falam em nome do credor. O contexto vem da finalidade original, não do remetente nem da conta que recebeu o e-mail. Uma separação financeira posterior não muda a finalidade de uma dívida antiga. A situação é uma das `Situações`. Uma obrigação `Adiada` ou `A verificar` leva a próxima ação e a data de revisão, para continuar no radar. O histórico fica nos comentários da página, não no corpo.
+Grave credor, tipo, contexto, situação, dia de vencimento, valor da parcela ou da fatura, parcelas pagas e total, remetentes das cobranças e as empresas de cobrança que falam em nome do credor. O contexto vem da finalidade original, não do remetente nem da conta que recebeu o e-mail. Uma separação financeira posterior não muda a finalidade de uma dívida antiga. A situação é uma das `Situações`. Uma obrigação `Adiada` ou `A verificar` leva a próxima ação e a data de revisão, para continuar no radar. Quando a pessoa amarra a revisão a uma condição, como "quando houver renda", grave a condição na próxima ação e deixe a data vazia. O histórico fica nos comentários da página, não no corpo.
 
 ### Passo 4
 
