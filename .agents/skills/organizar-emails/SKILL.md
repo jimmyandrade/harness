@@ -3,7 +3,7 @@ name: organizar-emails
 description: Organiza e-mails por BASB e separa pessoal, trabalho e misto. Usada quando a pessoa quer triar a caixa, etiquetar ou configurar filtros. Não serve para responder mensagens, lançar despesas nem acompanhar veículos.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.4.1"
   internal: true
   notion: "false"
   related:
@@ -110,7 +110,7 @@ flowchart LR
 
 Fatura em aberto recebe `Etiqueta de contas a pagar` e fica na entrada. A resposta diz o vencimento e o valor. Sem o valor, como num PDF protegido por senha, diga que falta e onde a pessoa o encontra. Ofereça lançar a fatura por `lancar-despesa-pessoal` ou `lancar-despesa-da-empresa`, conforme o contexto da obrigação. Filtro que tira oferta de negociação da entrada usa só remetentes que, na amostra, enviaram apenas ofertas, e exclui os `Termos de aviso formal`. Não esconda cobrança de obrigação `A verificar`. Empresa de cobrança não confirma a dívida: não use os links nem os boletos dela.
 
-Empresa de cobrança recebe a própria etiqueta, porque pode cobrar por vários credores. A etiqueta do credor só entra quando o corpo o identifica; o filtro dela combina o remetente com o nome do credor. Mensagem sem credor identificado fica com a etiqueta da empresa e na entrada. Assunto alarmante, como interdição, bloqueio, CPF sob impedimento ou valor retido, só vira aviso formal se o corpo descrever a medida já tomada; a pessoa confere a medida real no banco, no cadastro de proteção ao crédito, no relatório oficial de dívidas e na consulta processual. "Pagamento aprovado" ou "parcela vence hoje" de uma plataforma de negociação não é pagamento nem parcela de acordo.
+Empresa de cobrança recebe a própria etiqueta, porque pode cobrar por vários credores. A etiqueta do credor só entra quando o corpo o identifica. Essa é a regra da classificação: o filtro combina o remetente com o nome do credor em qualquer parte da mensagem, porque não busca só no corpo. Mensagem sem credor identificado fica com a etiqueta da empresa e na entrada. Assunto alarmante, como interdição, bloqueio, CPF sob impedimento ou valor retido, só vira aviso formal se o corpo descrever a medida já tomada; a pessoa confere a medida real no banco, no cadastro de proteção ao crédito, no relatório oficial de dívidas e na consulta processual. "Pagamento aprovado" ou "parcela vence hoje" de uma plataforma de negociação não é pagamento nem parcela de acordo.
 
 ### Passo 6
 
@@ -219,6 +219,7 @@ As ofertas recebem a etiqueta do credor e saem da entrada por filtro dos remeten
 - Empresa de cobrança escreve em nome do credor com assunto alarmante, como "seu CPF foi notificado", e o corpo traz só uma proposta de acordo.
 - Uma fatura de cartão no rotativo pode ter pagamento mínimo igual ao total.
 - A ação em lote e a criação de filtro podem falhar só em parte e devolver sucesso no conjunto. A leitura de volta mostra o que faltou.
+- O filtro do Gmail busca no texto todo, não só no corpo, e aplica uma etiqueta de usuário por filtro: uma regra com duas etiquetas vira dois filtros com o mesmo critério.
 
 ## Scripts disponíveis
 
