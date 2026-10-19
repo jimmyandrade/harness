@@ -5,13 +5,14 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.6.1"
   aliases:
     - definir-despesa
     - lancar-despesa
   related:
     - definir-ativo-imobilizado
     - definir-lancamento
+    - lancar-despesa-pessoal
 ---
 
 # Lançar despesa da empresa
@@ -52,7 +53,7 @@ flowchart LR
   B -->|não encontrado| E{Gasto da empresa?}
   E -->|confirmado ou inferível do contexto| F{Valor e data disponíveis?}
   E -->|incerto| G[Pergunta se é gasto da empresa]
-  E -->|pessoal| H[Não lança na empresa]
+  E -->|pessoal| H[lancar-despesa-pessoal]
   F -->|sim| I[Registra nesta execução]
   F -->|não| J[Pergunta só o dado ausente]
   G --> K{A pessoa confirmou?}
