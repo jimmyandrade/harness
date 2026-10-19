@@ -17,7 +17,7 @@ How these skills relate is in `README.md`, in this folder.
   - Turns a regularization plan into one obligation per line and one expense per due date, and checks that installments add up to each total
   - Tells a received notice from a status checked at the traffic authority of the state of registration
   - Sets the context of each cost by purpose, and records who paid when someone else pays
-  - Requires asking for the vehicle protection extension before a trip by the person's own vehicle, with a reminder and the request or refusal recorded
+  - Requires the vehicle protection extension when a trip exceeds the contract's maximum coverage distance, or is interstate or intercity as the parameters say, asked a set number of calendar days ahead with a reminder and a trip timeline milestone; a refusal needs a reason, and a lack of cash on a work trip flags the cash projection and the participation for review
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [ ] Three cases validated with the person

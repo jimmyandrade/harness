@@ -72,6 +72,7 @@ flowchart LR
   acompanhar_veiculo --> lancar_despesa_da_empresa
   acompanhar_veiculo --> lancar_despesa_pessoal
   acompanhar_veiculo --> organizar_emails
+  acompanhar_veiculo --> sincronizar_cronograma
   avaliar_atualizacoes_de_dependencia --> criar_commit
   avaliar_atualizacoes_de_dependencia --> criar_pull_request
   avaliar_atualizacoes_de_dependencia --> evoluir_habilidade

@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   internal: true
   related:
     - definir-obrigacao-financeira
@@ -13,6 +13,7 @@ metadata:
     - lancar-despesa-da-empresa
     - organizar-emails
     - definir-viagem
+    - sincronizar-cronograma
     - evoluir-habilidade
 ---
 
@@ -24,7 +25,9 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ```yaml
 "Moeda": "BRL"
-"Antecedência da extensão da proteção": "7 dias"
+"Dias corridos de antecedência da extensão": 7
+"Exigir extensão em viagem interestadual": "sim"
+"Exigir extensão em viagem intermunicipal": "não"
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -62,7 +65,17 @@ A finalidade decide o contexto de cada gasto: uma viagem da empresa com o carro 
 
 ### Passo 6
 
-Viagem com o veículo exige pedir a extensão da proteção ou do seguro com `Antecedência da extensão da proteção` antes da partida. Crie o lembrete na agenda do contexto e registre na viagem e no veículo o pedido feito, com data e protocolo, ou a recusa explícita da pessoa. Sem um dos dois, diga que o veículo viaja sem a extensão. Proteção veicular não é seguro: confira o que ela cobre, como enchente ou perda de placa, em vez de supor.
+Viagem com o veículo exige pedir a extensão da proteção ou do seguro quando passa da cobertura máxima em quilômetros que o contrato dá ao veículo, ou quando é interestadual ou intermunicipal e o parâmetro correspondente diz `sim`. Sem a cobertura máxima registrada no veículo, pergunte uma vez e grave.
+
+```mermaid
+flowchart LR
+  V{Viagem com o veículo} -->|acima da cobertura máxima| E[Exige extensão]
+  V -->|interestadual com parâmetro sim| E
+  V -->|intermunicipal com parâmetro sim| E
+  V -->|dentro da cobertura e sem parâmetro| N[Não exige]
+```
+
+O pedido sai com `Dias corridos de antecedência da extensão` antes da partida. Crie o lembrete na agenda do contexto e o marco no cronograma da viagem por `sincronizar-cronograma`. Registre na viagem e no veículo o pedido feito, com data e protocolo, ou a recusa com justificativa. Recusa por falta de caixa numa viagem de trabalho mostra que a projeção de caixa não cobriu a extensão: diga isso e que a participação deve ser revista. Sem pedido nem recusa justificada, diga que o veículo viaja sem a extensão. Proteção veicular não é seguro: confira o que ela cobre, como enchente ou perda de placa, em vez de supor.
 
 ### Passo 7
 
