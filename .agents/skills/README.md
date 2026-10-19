@@ -14,6 +14,7 @@ flowchart LR
     acompanhar_veiculo["acompanhar-veiculo"]
     avaliar_atualizacoes_de_dependencia["avaliar-atualizacoes-de-dependencia"]
     comunicar_novidade_do_produto["comunicar-novidade-do-produto"]
+    conversar_no_whatsapp["conversar-no-whatsapp"]
     criar_commit["criar-commit"]
     criar_habilidade["criar-habilidade"]
     criar_ideia_de_conteudo["criar-ideia-de-conteudo"]
@@ -78,6 +79,10 @@ flowchart LR
   avaliar_atualizacoes_de_dependencia --> evoluir_habilidade
   avaliar_atualizacoes_de_dependencia --> resolver_comentarios_de_revisao
   comunicar_novidade_do_produto --> evoluir_habilidade
+  conversar_no_whatsapp --> definir_pessoa
+  conversar_no_whatsapp --> definir_tarefa
+  conversar_no_whatsapp --> evoluir_habilidade
+  conversar_no_whatsapp --> procurar_tarefa
   criar_commit -.-> criar_pull_request
   criar_commit -.-> evoluir_habilidade
   criar_habilidade --> criar_commit
