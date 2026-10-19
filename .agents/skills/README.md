@@ -31,6 +31,7 @@ flowchart LR
     definir_instrucoes_do_projeto["definir-instrucoes-do-projeto"]
     definir_jornada_de_producao["definir-jornada-de-producao"]
     definir_lancamento["definir-lancamento"]
+    definir_obrigacao_financeira["definir-obrigacao-financeira"]
     definir_perfil_social["definir-perfil-social"]
     definir_pessoa["definir-pessoa"]
     definir_planejamento_financeiro["definir-planejamento-financeiro"]
@@ -44,6 +45,7 @@ flowchart LR
     gerenciar_estoque["gerenciar-estoque"]
     identificar_duplicata["identificar-duplicata"]
     lancar_despesa_da_empresa["lancar-despesa-da-empresa"]
+    lancar_despesa_pessoal["lancar-despesa-pessoal"]
     liberar_espaco_em_disco["liberar-espaco-em-disco"]
     medir_habilidade["medir-habilidade"]
     mesclar_registro["mesclar-registro"]
@@ -139,6 +141,10 @@ flowchart LR
   definir_lancamento --> gerenciar_estoque
   definir_lancamento --> lancar_despesa_da_empresa
   definir_lancamento --> revisar_financas
+  definir_obrigacao_financeira --> evoluir_habilidade
+  definir_obrigacao_financeira --> lancar_despesa_da_empresa
+  definir_obrigacao_financeira --> lancar_despesa_pessoal
+  definir_obrigacao_financeira --> organizar_emails
   definir_perfil_social --> definir_grafia
   definir_perfil_social --> definir_pessoa
   definir_perfil_social --> identificar_duplicata
@@ -197,6 +203,10 @@ flowchart LR
   identificar_duplicata --> mesclar_registro
   lancar_despesa_da_empresa --> definir_ativo_imobilizado
   lancar_despesa_da_empresa --> definir_lancamento
+  lancar_despesa_da_empresa --> lancar_despesa_pessoal
+  lancar_despesa_pessoal --> definir_obrigacao_financeira
+  lancar_despesa_pessoal --> evoluir_habilidade
+  lancar_despesa_pessoal --> lancar_despesa_da_empresa
   liberar_espaco_em_disco --> evoluir_habilidade
   medir_habilidade --> evoluir_habilidade
   mesclar_registro --> definir_empresa

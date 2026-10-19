@@ -403,6 +403,20 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses the DRE, the cash-flow statement, the price, the monthly plan, the durable good, and the fair cash projection
 
+### definir-obrigacao-financeira
+- **Stability**: experimental
+- **Description**: Register or review a contract or debt that generates charges, such as a plan, a consortium, a card, or a loan
+- **Properties**:
+  - Lives at `.agents/skills/definir-obrigacao-financeira/SKILL.md` and stays internal while it is validated
+  - Keeps the obligation apart from each bill or payment, which goes to lancar-despesa-pessoal or lancar-despesa-da-empresa
+  - Sets the context from the original purpose and the status from evidence, with a review date for a postponed debt
+  - Treats a collection agency, a negotiation offer, or a "CPF notified" subject as unconfirmed, and points to the creditor's official channel
+  - Always states the due date with the amount, or says the amount is missing and where to find it
+  - Sends due-date reminders to the calendar of the obligation's context
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [ ] Three cases validated with the person
+
 ### definir-perfil-social
 - **Stability**: experimental
 - **Description**: Normalize a social profile when registering or consolidating it
@@ -648,6 +662,18 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses the opportunity, the signup update, the task, the agenda, and registering the asset
   - [ ] A confirmed or inferable business expense is recorded after an existence search; an existing expense is reused
+
+### lancar-despesa-pessoal
+- **Stability**: experimental
+- **Description**: Find or record a personal expense, such as a purchase, a bill, an installment, or a payment slip
+- **Properties**:
+  - Lives at `.agents/skills/lancar-despesa-pessoal/SKILL.md` and stays internal while it is validated
+  - Never records a personal expense in the company list, even for a partner
+  - Links a bill to the obligation that generated it, with the installment as number/total
+  - Leaves the payment date empty until there is a receipt, and keeps original and paid amounts apart
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [ ] Three cases validated with the person
 
 ### liberar-espaco-em-disco
 - **Stability**: experimental
