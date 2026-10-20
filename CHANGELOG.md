@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.48.0](https://github.com/jimmyandrade/harness/compare/v0.47.1...v0.48.0) (2026-10-19)
+
+
+### Features
+
+* add a skill to find, read and answer WhatsApp conversations ([#266](https://github.com/jimmyandrade/harness/issues/266)) ([89cb0ab](https://github.com/jimmyandrade/harness/commit/89cb0ab8ef5b1dcb10b305d9d365a2d2d9bbe048))
+* **definir-historia-de-usuario:** reserve the user story skill as a draft ([#204](https://github.com/jimmyandrade/harness/issues/204)) ([776da52](https://github.com/jimmyandrade/harness/commit/776da52b6371eb3e0714892656312ed65153debc))
+* **definir-issue:** open and translate GitHub issues in the project language ([#205](https://github.com/jimmyandrade/harness/issues/205)) ([f3f9dfd](https://github.com/jimmyandrade/harness/commit/f3f9dfdda3cda84a9b8bf4de28b7e90b31da64b5))
+
+
+### Bug Fixes
+
+* **definir-historia-de-usuario:** describe the draft in the third person ([#269](https://github.com/jimmyandrade/harness/issues/269)) ([7231a32](https://github.com/jimmyandrade/harness/commit/7231a32e63db60a18f207e289ff4f0f7672cd166)), closes [#206](https://github.com/jimmyandrade/harness/issues/206)
+
 ## [0.47.1](https://github.com/jimmyandrade/harness/compare/v0.47.0...v0.47.1) (2026-10-19)
 
 
