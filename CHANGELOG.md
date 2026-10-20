@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.52.0](https://github.com/jimmyandrade/harness/compare/v0.51.0...v0.52.0) (2026-10-20)
+
+
+### Features
+
+* **comunicar-novidade-do-produto:** deliver the announcement in a single message ([#282](https://github.com/jimmyandrade/harness/issues/282)) ([52ad037](https://github.com/jimmyandrade/harness/commit/52ad037c885ec3b96edaac7c32e5510a4ab61b47))
+
 ## [0.51.0](https://github.com/jimmyandrade/harness/compare/v0.50.0...v0.51.0) (2026-10-20)
 
 
