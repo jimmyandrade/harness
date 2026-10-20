@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.2](https://github.com/jimmyandrade/vocabulary/compare/v0.6.1...v0.6.2) (2026-10-20)
+
+
+### Bug Fixes
+
+* stop the plugin from starting a server that cannot run ([#31](https://github.com/jimmyandrade/vocabulary/issues/31)) ([9b71226](https://github.com/jimmyandrade/vocabulary/commit/9b712261fdde5f90ba3649e9a4e232da5a6fff88))
+
 ## [0.6.1](https://github.com/jimmyandrade/vocabulary/compare/v0.6.0...v0.6.1) (2026-10-18)
 
 
