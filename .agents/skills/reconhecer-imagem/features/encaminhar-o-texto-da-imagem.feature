@@ -6,10 +6,10 @@ Funcionalidade: Encaminhar o texto da imagem
 
     Exemplo: A habilidade seguinte não veio na lista da conversa
       Dado que a pessoa enviou o print de um post com nome da oficina e data
-      E procurar-oportunidade não veio na lista de habilidades da conversa
-      Quando a skill entrega o texto da imagem
-      Então a resposta chama procurar-oportunidade ou pergunta se a pessoa quer chamá-la
-      Mas não diz que a habilidade não está disponível
+      E procurar-oportunidade existe no catálogo conectado, mas não na lista inicial
+      Quando a skill entrega o texto da imagem e o ambiente permite consultar o catálogo
+      Então procurar-oportunidade é localizada e sua página é carregada para continuar
+      Mas não pergunta se a pessoa quer chamar a habilidade
 
   Regra: Sem a edição na lista, o cadastro segue a busca
 
@@ -33,3 +33,10 @@ Funcionalidade: Encaminhar o texto da imagem
       Quando a skill lê as imagens sem um pedido escrito
       Então o texto segue para lancar-despesa-da-empresa procurar o lançamento
       Mas a resposta não para só na transcrição
+
+    Exemplo: A despesa de jantar precisa de uma habilidade fora da lista inicial
+      Dado que a pessoa pediu para cadastrar uma despesa de jantar e enviou a imagem do pedido
+      E lancar-despesa-da-empresa existe no catálogo conectado, mas não na lista inicial
+      Quando o ambiente permite buscar a habilidade pelo nome
+      Então a página de lancar-despesa-da-empresa é encontrada e carregada para continuar
+      E a pessoa não precisa confirmar a chamada nem enviar o link da habilidade

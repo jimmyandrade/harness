@@ -4,7 +4,7 @@ description: Use essa habilidade sempre que for ler texto de imagem, mesmo sem d
 compatibility: Precisa de Python.
 metadata:
   author: jimmyandrade
-  version: "0.11.1"
+  version: "0.11.2"
   related:
     - criar-oportunidade
     - definir-grafia
@@ -62,7 +62,22 @@ flowchart LR
   H -->|não| G[Entregue o texto e pare]
 ```
 
-Se a habilidade seguinte não veio na lista desta conversa, ela continua sendo a seguinte. Não diga que ela não existe nem que não está disponível. Entregue o texto e pergunte se a pessoa quer chamá-la pelo nome.
+Resolva a referência da destinatária antes de encaminhar o texto. A lista inicial da conversa não é prova de ausência no catálogo do projeto. No Notion, carregue a página pela menção ou URL fornecida; para descoberta permitida, consulte o catálogo informado ou a busca de páginas do workspace conectado pelo nome e pelos aliases. Não procure em outro workspace.
+
+```mermaid
+flowchart LR
+  R{Referência da destinatária disponível?} -->|sim| P[Carregue a página da habilidade]
+  R -->|não| S{O ambiente permite descobrir habilidades?}
+  S -->|sim| B[Busque a destinatária no catálogo conectado]
+  B --> C{Resultado da busca}
+  C -->|uma correspondência| P
+  C -->|ambíguo| A[Pergunte qual candidata usar]
+  C -->|nenhum| N[Informe a busca sem resultado e peça a referência]
+  S -->|não| L[Informe a restrição de descoberta e peça a referência uma vez]
+  P --> T[Siga a habilidade com o texto já lido]
+```
+
+Não peça autorização para uma leitura permitida nem prometa uma chamada que ainda depende de referência. Uma confirmação como "sim" não substitui a menção ou URL exigida pelo ambiente. Não conclua que a habilidade não existe quando a busca estiver bloqueada; respeite a restrição, sem tentar contorná-la.
 
 A destinatária financeira cuida da busca e do lançamento, sem duplicar a compra. Não faça esse trabalho aqui.
 
@@ -104,11 +119,11 @@ Se você procurar outro leitor ou vários modos porque o script não apareceu, a
 
 ### Habilidade seguinte fora da lista
 
-Se você parar no texto e disser que a habilidade seguinte não está disponível porque ela não veio na lista, a pessoa recebe um beco sem saída e precisa perguntar por quê.
+Se você pedir confirmação para chamar uma habilidade que ainda não localizou, a resposta "sim" não resolve a referência e a pessoa precisa repetir o pedido.
 
-1. Entregue o texto.
-2. Pergunte se a pessoa quer chamar a habilidade seguinte, pelo nome.
-3. Não diga que ela não existe nem que não está disponível. Não explique a lista.
+1. Resolva a referência pelo fluxo do passo 4, sem tratar a lista inicial como catálogo completo.
+2. Carregue a página encontrada antes de seguir suas instruções.
+3. Distinga busca sem resultado de descoberta bloqueada pelo ambiente; não declare inexistência nem prometa que uma confirmação remove a restrição.
 
 ### Pedido para nomear
 
@@ -136,7 +151,7 @@ o texto saiu do script de reconhecimento: 29 e 30 de setembro de 2026, 09h às 1
 
 ### eu enviei a imagem anexa, com o post de uma oficina num museu, e procurar-oportunidade não veio na lista.
 
-li a imagem. Saíram a hora da tela, as curtidas e "Há 3 horas". O texto trouxe a oficina com o coletivo que a conduz, 24 de outubro, sábado, das 14h às 18h, maiores de 16 anos e inscrição gratuita por formulário. Perguntei se a pessoa quer procurar essa oportunidade com `procurar-oportunidade`. Não disse que a habilidade não está disponível. Nada foi cadastrado.
+Li a imagem. Saíram a hora da tela, as curtidas e "Há 3 horas". O texto trouxe a oficina com o coletivo que a conduz, 24 de outubro, sábado, das 14h às 18h, maiores de 16 anos e inscrição gratuita por formulário. Como o ambiente permitia a descoberta, busquei `procurar-oportunidade` no catálogo conectado, carreguei a página encontrada e segui suas instruções com o texto já lido. Não pedi confirmação só para localizar a habilidade.
 
 ### a imagem do post de uma feira do setor, sem texto, e o script de reconhecimento não roda.
 
@@ -157,7 +172,7 @@ Li os dados e entreguei o texto a `lancar-despesa-da-empresa`, que busca o gasto
 - A leitura é um pedido de evento realizado ou confirmado: depois da edição, siga `definir-inscricao`. Não confunda com compra em nota ou transação.
 - A leitura é uma pessoa ou um perfil social: siga `definir-grafia`. Não pare no texto.
 - Não há destinatária no fluxo e a pessoa não nomeou a seguinte: entregue o texto e pare.
-- A habilidade seguinte não veio na lista desta conversa: entregue o texto e pergunte se a pessoa quer chamá-la pelo nome. Não diga que não está disponível.
+- A habilidade seguinte não veio na lista inicial: resolva a referência pelo fluxo do passo 4. Não transforme uma restrição de descoberta em afirmação de inexistência.
 - A pessoa nomeou a habilidade seguinte: o texto é a entrada dela. O trabalho dela não é feito aqui.
 
 ## Pegadinhas
@@ -175,7 +190,7 @@ Li os dados e entreguei o texto a `lancar-despesa-da-empresa`, que busca o gasto
 - Perguntar antes da busca parece cuidado. A busca só lê. Chame sem perguntar.
 - Parar na oportunidade parece o fim de um pedido de evento confirmado. A inscrição segue `definir-inscricao`.
 - Parar no texto parece o fim de um print de perfil. Pessoa ou perfil segue `definir-grafia`.
-- Uma habilidade fora da lista desta conversa parece indisponível. Ela continua sendo a seguinte. Pergunte se a pessoa quer chamá-la.
+- Uma habilidade fora da lista inicial parece ausente do catálogo. A lista não prova isso; resolva a referência sem pedir uma confirmação que não a fornece.
 - Vários modos de leitura parecem cuidado. Um uso basta.
 - Fechar com "mencione a habilidade na próxima vez" parece cuidar dos créditos. A resposta não pede isso.
 
