@@ -81,6 +81,7 @@ flowchart LR
   avaliar_atualizacoes_de_dependencia --> evoluir_habilidade
   avaliar_atualizacoes_de_dependencia --> resolver_comentarios_de_revisao
   comunicar_novidade_do_produto --> evoluir_habilidade
+  conversar_no_whatsapp --> definir_agenda
   conversar_no_whatsapp --> definir_pessoa
   conversar_no_whatsapp --> definir_tarefa
   conversar_no_whatsapp --> evoluir_habilidade
