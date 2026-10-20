@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.49.0](https://github.com/jimmyandrade/harness/compare/v0.48.0...v0.49.0) (2026-10-20)
+
+
+### Features
+
+* **conversar-no-whatsapp:** show every draft in the chat, editable in a widget when the client draws one ([#268](https://github.com/jimmyandrade/harness/issues/268)) ([05e5a37](https://github.com/jimmyandrade/harness/commit/05e5a37548bf4fef4694ff877d295439ec96ef4d))
+
+
+### Bug Fixes
+
+* **deps:** update dependency @notionhq/client to v5.27.1 ([#255](https://github.com/jimmyandrade/harness/issues/255)) ([bbcd4be](https://github.com/jimmyandrade/harness/commit/bbcd4be024368c7bef0975e6a72116c58318b15a))
+
 ## [0.48.0](https://github.com/jimmyandrade/harness/compare/v0.47.1...v0.48.0) (2026-10-19)
 
 
