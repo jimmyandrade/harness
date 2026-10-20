@@ -3,7 +3,7 @@ name: definir-vocabulario
 description: Use essa habilidade sempre que for cadastrar ou atualizar um ou mais termos do vocabulário do tom de voz, mesmo sem dizer glossário, lote ou estado. NÃO use para escrever, revisar ou aprovar o texto da marca, classificar uma frase, perguntar quais variações de gênero, número ou grafia foram cadastradas, nem inventar um termo que a pessoa não enviou.
 metadata:
   author: jimmyandrade
-  version: "0.23.0"
+  version: "0.24.0"
   related:
     - evoluir-habilidade
     - procurar-variacao-de-termo
@@ -16,13 +16,15 @@ metadata:
 
 ```yaml
 "Modo de aprendizado": "perguntar"
+"Categorias": {}
+"Validação dos campos": "warn"
 ```
 
 ## Instruções
 
 ### Passo 1
 
-A pessoa responsável pelo tom de voz quer cadastrar ou atualizar termos. Perguntar se um termo ou uma variação faltou segue `procurar-variacao-de-termo`. Monte o plano com idioma, modo e a lista. Cada item tem `state`, `term`, `category`, `description` e os campos desse estado. Sem idioma ou sem termo, pare e peça. Use só o que a pessoa enviou.
+A pessoa responsável pelo tom de voz quer cadastrar ou atualizar termos. Perguntar se um termo ou uma variação faltou segue `procurar-variacao-de-termo`. Monte o plano com idioma, modo e a lista. Cada item tem `state`, `term`, `categories` e os campos desse nível. Sem idioma ou sem termo, pare e peça. Use só o que a pessoa enviou.
 
 ```mermaid
 flowchart LR
@@ -33,13 +35,23 @@ flowchart LR
 
 ### Passo 2
 
-Antes de responder se o termo cabe na marca, e antes de gravar, leia as fontes da marca que as instruções do projeto nomeiam. A pessoa informa essas fontes. Se uma não estiver no workspace conectado, pare. Não invente persona, posicionamento nem modelo. Gosto, estética isolada e julgamento genérico não fecham permitido, proibido nem situacional. Tensão entre intenção criativa e viabilidade comercial fica em `description` ou `when`.
+Antes de responder se o termo cabe na marca, e antes de gravar, leia as fontes da marca que as instruções do projeto nomeiam. A pessoa informa essas fontes. Se uma não estiver no workspace conectado, pare. Não invente persona, posicionamento nem modelo. Gosto, estética isolada e julgamento genérico não fecham o nível. Tensão entre intenção criativa e viabilidade comercial fica em `description` ou `when`.
 
 Canal, público, coleção, vertente, intenção comercial ou situação de uso ainda ambíguos: pergunte. Não responda e não grave.
 
-O termo que só cabe num desses contextos fica `situationally_allowed`, e o `when` guarda essa situação. `allowed` e `forbidden` são regra geral da marca. Não use esses estados para um contexto específico. A escrita recusa `when` nesses dois estados.
+O `state` é um de cinco níveis, do mais rígido ao mais livre:
 
-Termo situacional de quem fala em primeira pessoa, de um evento ou de um canal também leva `tags`, como `maria-silva` ou `palco`. O `when` guarda a regra. As tags deixam a consulta filtrar. Sem o contexto, pergunte. Reaproveite a tag que já está. Não invente.
+| Nível | No texto | Campos esperados |
+| --- | --- | --- |
+| `forbidden` | nunca | `description`, `substitution`, `rejected`, `alternatives` |
+| `strongly_discouraged` | só a pedido ou na exceção do `when` | `description`, `substitution` |
+| `discouraged` | só com a cena e o contexto do `when` | `description`, `when`, `examples` |
+| `allowed_with_care` | como o `when` diz | `description`, `when`, `examples` |
+| `allowed` | sempre | `description`, `reason`, `examples` |
+
+`allowed` e `forbidden` são regra geral: a escrita recusa `when` e `tags` neles. O termo que só cabe num contexto fica num dos três do meio, com o `when`. `situationally_allowed` está obsoleto e vira `allowed_with_care`. Formato ou canal que libera ou veta o termo vai em `allowed_in` ou `forbidden_in`, com nomes no formato das tags.
+
+Termo de contexto de quem fala em primeira pessoa, de um evento ou de um canal também leva `tags`, como `maria-silva` ou `palco`. O `when` guarda a regra. As tags deixam a consulta filtrar. Sem o contexto, pergunte. Reaproveite a tag que já está. Não invente.
 
 ### Passo 3
 
@@ -49,17 +61,18 @@ Cadastrar o que ainda não está usa `insert`. Corrigir o que já está usa `upd
 
 Valide o plano antes de gravar.
 
-- `category` é uma palavra em inglês, em qualquer idioma, como `punctuation`. Termo, descrição e notas ficam no idioma do vocabulário.
-- `allowed` pede `reason` e `examples`, e não leva alternativa. `description` explica a palavra. `reason` diz por que usamos. Não copie um no outro.
-- `forbidden` pede `substitution`, `rejected` e `alternatives`. A escrita recusa `examples`.
-- `situationally_allowed` pede `when` e `examples`, e aceita `tags` em minúsculas, com hífen. A escrita recusa tag nos outros estados.
+- `categories` são palavras em inglês, em qualquer idioma, como `punctuation`. Categoria no idioma do projeto vira a palavra que `Categorias` mapeia. Sem mapa, pergunte. Categoria não vira tag: a tag esconde o termo da consulta de outro contexto. Termo, descrição e notas ficam no idioma do vocabulário.
+- `reason` só nos níveis de uso e diz por que usamos. `description` explica a palavra, e o motivo de evitar fica nela. Não copie um no outro.
+- `forbidden` e `strongly_discouraged` recusam `examples`. O exemplo ruim vai em `rejected`.
+- Campo esperado que a pessoa não tem fica de fora. A escrita grava e devolve em `incomplete`. Diga essa lista. Não invente o campo. Passe `Validação dos campos` em `validation`.
+- Quem decidiu vai em `decided_by`. O endereço da linha de origem vai em `source`.
 - Um termo não é o próprio exemplo. A mesma grafia não entra duas vezes.
 - Emoji, combinação e uso simbólico são termo. A combinação junta é um termo. Não é decoração.
 - `state` é a permissão. `description` não repete o estado.
-- Evitar, proibido, ruim, desalinhado ou restrito ficam `forbidden`. O exemplo ruim vai em `rejected`.
+- Proibido fica `forbidden`. Evitar fica `strongly_discouraged` ou `discouraged`, como a pessoa disser. Na dúvida, pergunte.
 - Exemplo de contexto e exemplo mais longo ficam em `examples`. Termo já cadastrado fica em `related`.
 - Documentação complementar só quando a pessoa pedir.
-- Clichê, genérico, automatizado ou gasto por IA, útil como intenção e não como palavra final: categoria `cliche`, estado `forbidden`. A `description` pede imagem, cena, ação, efeito ou situação. A frase literal entra em `rejected`. `substitution` repete a troca e não vira sinônimo. A escrita recusa `cliche` em permitido ou situacional. Variação recorrente entra proibida e ligada, ou só sugerida. Não invente a variação.
+- Clichê, genérico, automatizado ou gasto por IA, útil como intenção e não como palavra final: categoria `cliche`, estado `forbidden`. A `description` pede imagem, cena, ação, efeito ou situação. A frase literal entra em `rejected`. `substitution` repete a troca e não vira sinônimo. A escrita recusa `cliche` fora de `forbidden`. Variação recorrente entra proibida e ligada, ou só sugerida. Não invente a variação.
 - Frase descartada por perda consumada, cobrança agressiva, exclusão, capacitismo, ameaça real, culpa ou sensação incompatível entra `forbidden`. O motivo fica na `description`. A alternativa mantém desejo, urgência e conversa natural, sem dizer que a chance já passou. Sem alternativa, pergunte. Não invente a frase.
 - Validação falha: corrija e valide de novo. Não grave.
 
@@ -132,7 +145,7 @@ Se você gravar como permitido ou proibido um termo que só vale num canal, púb
 1. Pare.
 2. Leia as fontes da marca que as instruções do projeto nomeiam. Se faltar fonte, peça.
 3. Se o contexto continuar ambíguo, pergunte.
-4. Grave como situacional, com o quando usar. Não grave como regra geral.
+4. Grave num nível do meio, com o `when`. Não grave como regra geral.
 
 ### Emoji como enfeite
 
@@ -140,7 +153,7 @@ Se você deixar o emoji fora do vocabulário, ou gravar sem estado, descrição 
 
 1. Grave o emoji como termo, com o estado que a pessoa definiu.
 2. Não repita o estado na descrição.
-3. Ponha um exemplo. Se só cabe num contexto, o estado é situacional. Se a marca evita o emoji, o exemplo ruim vai em `rejected`.
+3. Ponha um exemplo. Se só cabe num contexto, o nível é um dos três do meio. Se a marca evita o emoji, o exemplo ruim vai em `rejected`.
 
 ### Variação gravada junto
 
@@ -223,7 +236,7 @@ A busca achou o termo. Os campos eram os mesmos. Ele voltou sem alteração. Nã
 
 ### Permita o termo só no canal que a pessoa nomeou.
 
-Li as fontes da marca que as instruções do projeto nomeiam. O estado ficou situacional, com esse quando usar. Não gravei como permitido geral.
+Li as fontes da marca que as instruções do projeto nomeiam. O nível ficou `allowed_with_care`, com esse `when`. Não gravei como permitido geral.
 
 ### Cadastre o emoji que a pessoa enviou, com o estado e a descrição que ela deu.
 
@@ -237,9 +250,9 @@ Perguntei se ela queria termos relacionados. Ela pediu um. Ele entrou em alterna
 
 As duas não estavam. Ficaram casa e moradias. A resposta foi: cadastrei 2 termos: casa, moradias. Sugeri casas e moradia, sem gravar.
 
-### Cadastre casas como proibido e moradias como situacional. Casa já está permitida.
+### Cadastre casas como proibido e moradias como evitável. Casa já está permitida.
 
-Casa ficou permitida. Casas ganhou a própria linha, proibida. Moradias ganhou a própria linha, situacional. Não juntei as três.
+Casa ficou permitida. Casas ganhou a própria linha, proibida. Moradias ganhou a própria linha, `discouraged`. Não juntei as três.
 
 ## Casos-limite
 
@@ -253,7 +266,8 @@ Casa ficou permitida. Casas ganhou a própria linha, proibida. Moradias ganhou a
 - A busca acha duas grafias da mesma palavra, por caixa ou acento: pare, nomeie, sugira a que permanece e espere. Não apague e não junte.
 - Falta uma fonte da marca que as instruções do projeto nomeiam: pare e peça. Não invente.
 - Sem terminal e sem o servidor `vocabulary`, como num agente do Notion: pare. O cadastro roda numa ferramenta de código com o projeto aberto. Não confirme nada.
-- O termo só cabe num contexto: `situationally_allowed` com `when`. Não use `allowed` nem `forbidden`.
+- O termo só cabe num contexto: nível do meio, com `when`. Não use `allowed` nem `forbidden`.
+- Lote vindo de outra ferramenta: um arquivo com `terms --file` e `upsert`. Diga o que entrou, o que foi atualizado e o que ficou em `incomplete`.
 - O termo é emoji, combinação ou uso simbólico: grave estado, descrição e exemplo. A combinação junta é um termo. Não é decoração.
 - Termo proibido por clichê, genérico, automatizado ou gasto por IA, útil como intenção e não como palavra final: categoria `cliche`, descrição com a troca por imagem, cena, ação, efeito ou situação, frase a evitar em `rejected`, variação recorrente proibida e ligada ou só sugerida.
 - Frase descartada por perda consumada, cobrança agressiva, exclusão, capacitismo, ameaça real, culpa ou sensação incompatível com o tom: o motivo fica na `description` dessa frase proibida. A alternativa mantém desejo, urgência e conversa natural, sem dizer que a chance já passou.
@@ -282,7 +296,7 @@ Casa ficou permitida. Casas ganhou a própria linha, proibida. Moradias ganhou a
 
 - `node node_modules/vocabulary/dist/cli.js lookup --language <idioma> --term <termo>` lê um termo e devolve se ele existe e a linha guardada.
 - `node node_modules/vocabulary/dist/cli.js exists --language <idioma> --text <trecho>` devolve só o registro de cada token do trecho para se ele existe.
-- `node node_modules/vocabulary/dist/cli.js terms` grava o lote. `--language` e `--mode` valem para o lote. Cada `--term` abre um termo, com `--state`, `--category`, `--description`, `--reason`, `--when` e `--substitution`. `--examples`, `--rejected`, `--alternatives`, `--related` e `--tags` repetem, um valor por vez.
+- `node node_modules/vocabulary/dist/cli.js terms` grava o lote. `--language`, `--mode` e `--validation` valem para o lote. Cada `--term` abre um termo, com `--state`, `--description`, `--reason`, `--when`, `--substitution`, `--decided-by` e `--source`. `--categories`, `--examples`, `--rejected`, `--alternatives`, `--related`, `--tags`, `--allowed-in` e `--forbidden-in` repetem, um valor por vez. `--file` lê o lote inteiro de um JSON.
 - `--glossary`, antes do comando, aponta outro vocabulário.
 - `lookup_term`, `exists_in_text` e `write_terms`, no servidor `vocabulary`, fazem a mesma consulta e a mesma escrita quando não há terminal.
 

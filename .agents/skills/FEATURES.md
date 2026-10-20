@@ -13,12 +13,13 @@ How these skills relate is in `README.md`, in this folder.
 - **Description**: Register and update one or more voice-vocabulary terms
 - **Properties**:
   - Lives at `.agents/skills/definir-vocabulario/SKILL.md`
-  - Registers and updates allowed, forbidden, and situational terms for one language
+  - Registers and updates terms for one language on five levels: forbidden, strongly_discouraged, discouraged, allowed_with_care, and allowed
+  - Writes a term without an expected field and reports it as incomplete, and imports a batch from another tool with `terms --file`
   - Sends a question about a missing term or its variations to procurar-variacao-de-termo
-  - Keeps the category an English word in every language, and keeps the term and the notes in that language
+  - Keeps categories English words in every language, translated by the Categorias parameter, and keeps the term and the notes in that language
   - Reads the brand sources named in the project instructions before answering or writing. An ambiguous channel, audience, line, commercial intent, or situation waits for a question
-  - Keeps a term that only fits one context as situationally allowed, with when. allowed and forbidden stay general rules
-  - Adds tags to a situational term of one speaker, event, or channel, reusing a tag already in the glossary, and keeps when as the rule in words
+  - Keeps a term that only fits one context on a middle level, with when. allowed and forbidden stay general rules
+  - Adds tags to a context term of one speaker, event, or channel, reusing a tag already in the glossary, and keeps when as the rule in words
   - Marks a name whose casing is part of the spelling with case_sensitive, so the write keeps its casing
   - Uses insert when the person is registering and does not name a mode, update when an existing term changes, and upsert when the batch does both
   - Reads and writes with `node node_modules/vocabulary/dist/cli.js lookup`, `exists`, and `terms` when there is a terminal, and with the MCP tools `lookup_term`, `exists_in_text`, and `write_terms` when there is not
@@ -51,6 +52,7 @@ How these skills relate is in `README.md`, in this folder.
   - Reads the glossary with the tags of the speaker, the event, and the channel of the text, so a term of another context stays out
   - Writes the stored spelling of a case-sensitive term when a read reports case_matches false
   - Waits for context, channel, audience, the brand sources named in the project instructions, the glossary, and the creative intent
+  - Uses each term as its level says: forbidden never, strongly_discouraged only on request or under the exception in when, discouraged only with the scene in when, allowed_with_care as when says
   - Keeps out a forbidden term, a generic phrase, AI-sounding text, and language the glossary marks as misaligned
   - Treats an emoji as a glossary term. Without a row, the copy waits
   - Replaces a cliché with the image, scene, action, effect, or situation in its description, and leaves rejected phrases out

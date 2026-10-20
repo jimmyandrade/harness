@@ -37,7 +37,7 @@ test("POST registers an allowed term and creates the missing example", async () 
     const body = await response.json()
     assert.equal(body.term, "!")
     assert.equal(body.state, "allowed")
-    assert.equal(body.category, "punctuation")
+    assert.deepEqual(body.categories, ["punctuation"])
     assert.equal(body.description, "Ponto de exclamação")
     assert.equal(body.reason, REASON)
     assert.deepEqual(body.examples, [EXAMPLE])
@@ -45,7 +45,7 @@ test("POST registers an allowed term and creates the missing example", async () 
     const entries = load(readFileSync(join(root, "pt-BR.json"), "utf8"))
     const mark = entries.find((entry) => entry.term === "!")
     assert.equal(mark?.state, "allowed")
-    assert.equal(mark?.category, "punctuation")
+    assert.deepEqual(mark?.categories, ["punctuation"])
     assert.equal(mark?.alternative, null)
     assert.equal(entries.find((entry) => entry.term === EXAMPLE)?.state, "allowed")
     assert.equal(classify(entries, "!", "pt-BR").to, "allowed")
@@ -76,7 +76,7 @@ test("an existing example is linked and a category stays in English", async () =
       body: JSON.stringify({ ...BODY, category: "Punctuation" }),
     })
     const body = await response.json()
-    assert.equal(body.category, "punctuation")
+    assert.deepEqual(body.categories, ["punctuation"])
     const entries = load(readFileSync(join(root, "pt-BR.json"), "utf8"))
     assert.equal(entries.filter((entry) => entry.term === EXAMPLE).length, 1)
     const translated = await fetch(`http://127.0.0.1:${port}/v1/allowed`, {
@@ -92,7 +92,7 @@ test("an existing example is linked and a category stays in English", async () =
       body: JSON.stringify({ ...BODY, term: "leve também", when: "no imperativo do e-commerce" }),
     })
     assert.equal(situated.status, 400)
-    assert.equal((await situated.json()).error, "A term that only fits one situation is situationally_allowed.")
+    assert.equal((await situated.json()).error, "forbidden and allowed are general rules and take no when. Use allowed_with_care, discouraged, or strongly_discouraged.")
   } finally {
     await new Promise<void>((resolve, reject) => server.close((error) => (error ? reject(error) : resolve())))
   }

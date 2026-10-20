@@ -1,11 +1,12 @@
 /**
  * POST /v1/situational
  *
- * Register one situationally allowed term in the glossary of the text
- * language. category is an English word, such as punctuation. description is
- * the short name. when says when to use it. examples are situationally
- * allowed terms in the same file. A missing example is created as
- * situationally allowed.
+ * Register one allowed_with_care term in the glossary of the text language.
+ * The route keeps its name from the deprecated situationally_allowed state,
+ * which ADR 0010 maps to allowed_with_care. category is an English word, such
+ * as punctuation, stored as categories. description is the short name. when
+ * says when to use it. examples are terms in the same file. A missing example
+ * is created as allowed_with_care.
  *
  * Run: node api/routes/situational/index.ts '{"language":"pt-BR","term":"…","category":"punctuation","description":"reticências","when":"...","examples":[]}'
  */

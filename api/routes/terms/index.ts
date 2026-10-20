@@ -4,9 +4,11 @@
  * Insert and update glossary rows for one language in a single write.
  * mode is insert, update, or upsert. insert writes a term that is absent and
  * leaves a term that is already in the file. update rewrites a term that is
- * present and leaves a term that is absent. upsert writes every term. Each
- * term carries state and the fields of that state. One failure leaves the
- * file unchanged.
+ * present and leaves a term that is absent. upsert writes every term. A term
+ * not found by its spelling is found by its source. Each term carries state
+ * and the fields of that level. validation is optional, warn, or enforce: warn
+ * writes a term without an expected field and lists it in incomplete, and
+ * enforce refuses it. One failure leaves the file unchanged.
  *
  * Run: node api/routes/terms/index.ts '{"language":"pt-BR","mode":"upsert","terms":[]}'
  */
@@ -25,7 +27,7 @@ export const termsRoute: Route = {
   emptyMessage: "Provide the terms.",
   handle(glossary, record) {
     const body = parseBody(termsRequest, record)
-    return writeTerms(glossary.directory, body.language, body.mode, body.terms)
+    return writeTerms(glossary.directory, body.language, body.mode, body.terms, body.validation)
   },
 }
 
@@ -37,7 +39,7 @@ function main(argv: string[]): number {
     const parsed: unknown = JSON.parse(raw)
     if (typeof parsed !== "object" || parsed === null || Array.isArray(parsed)) throw new TypeError()
     const body = parseBody(termsRequest, parsed)
-    const written = writeTerms(glossary, body.language, body.mode, body.terms)
+    const written = writeTerms(glossary, body.language, body.mode, body.terms, body.validation)
     console.log(JSON.stringify(written))
     return 0
   } catch (error) {

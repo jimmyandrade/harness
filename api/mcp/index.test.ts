@@ -30,8 +30,8 @@ test("write_terms inserts a term and a bad category writes nothing", () => {
   const written = callTool(root, { name: "write_terms", arguments: BODY })
   assert.equal(written.isError, undefined)
   const entries = load(readFileSync(file, "utf8"))
-  assert.equal(entries.find((entry) => entry.term === "\u2026")?.state, "situationally_allowed")
-  assert.equal(entries.find((entry) => entry.term === "Leve também\u2026")?.state, "situationally_allowed")
+  assert.equal(entries.find((entry) => entry.term === "\u2026")?.state, "allowed_with_care")
+  assert.equal(entries.find((entry) => entry.term === "Leve também\u2026")?.state, "allowed_with_care")
   const before = readFileSync(file, "utf8")
   const refused = callTool(root, {
     name: "write_terms",
@@ -122,7 +122,7 @@ test("write_terms refuses a general rule that carries a situation", () => {
     },
   })
   assert.equal(refused.isError, true)
-  assert.equal(refused.content[0]?.text, "A term that only fits one situation is situationally_allowed.")
+  assert.equal(refused.content[0]?.text, "forbidden and allowed are general rules and take no when. Use allowed_with_care, discouraged, or strongly_discouraged.")
   assert.equal(readFileSync(file, "utf8"), "{}\n")
 })
 
@@ -199,7 +199,7 @@ test("the server answers initialize and write_terms on stdio", async () => {
     assert.equal(frames[0]?.result?.protocolVersion, "2024-11-05")
     assert.deepEqual(
       frames[1]?.result?.tools?.map((tool) => tool.name),
-      ["lookup_term", "exists_in_text", "write_terms"],
+      ["lookup_term", "exists_in_text", "write_terms", "migrate_glossary"],
     )
     const payload = JSON.parse(frames[2]?.result?.content?.[0]?.text ?? "{}")
     assert.equal(payload.inserted.length, 1)
@@ -272,7 +272,7 @@ test("write_terms keeps the casing of a case-sensitive term and the reads report
     exists: true,
     term: "macOS",
     state: "allowed",
-    category: "brand",
+    categories: ["brand"],
     description: "peça da marca",
     reason: "nome",
     examples: [],
@@ -285,4 +285,26 @@ test("write_terms keeps the casing of a case-sensitive term and the reads report
     macOS: true,
     cueca: true,
   })
+})
+
+test("write_terms reports incomplete terms and migrate_glossary rewrites a deprecated state", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  const file = join(root, "pt-BR.json")
+  writeFileSync(file, `${JSON.stringify({ "em mãos": { state: "situationally_allowed" } }, null, 2)}\n`)
+  const written = callTool(root, {
+    name: "write_terms",
+    arguments: { language: "pt-BR", mode: "insert", terms: [{ state: "forbidden", term: "baratinho" }] },
+  })
+  assert.equal(written.isError, undefined)
+  const body = JSON.parse(written.content[0]?.text ?? "")
+  assert.deepEqual(body.incomplete, [{ term: "baratinho", missing: ["description", "substitution"] }])
+  assert.deepEqual(body.warnings, ["1 row still uses a deprecated state or category. Run migrate."])
+  const refused = callTool(root, {
+    name: "write_terms",
+    arguments: { language: "pt-BR", mode: "insert", validation: "enforce", terms: [{ state: "allowed", term: "casa", description: "lugar" }] },
+  })
+  assert.equal(refused.content[0]?.text, 'Provide the reason of "casa".')
+  const migrated = callTool(root, { name: "migrate_glossary", arguments: { language: "pt-BR", write: true } })
+  assert.equal(JSON.parse(migrated.content[0]?.text ?? "").written, true)
+  assert.equal(JSON.parse(readFileSync(file, "utf8"))["em mãos"].state, "allowed_with_care")
 })

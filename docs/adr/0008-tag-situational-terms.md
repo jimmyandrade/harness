@@ -6,7 +6,7 @@ locale: en
 
 ## Status
 
-Accepted.
+Accepted. Amended by `docs/adr/0010-rate-terms-on-five-levels.md`: what this record says of `situationally_allowed` holds for `allowed_with_care`, `discouraged`, and `strongly_discouraged`, and `allowed_in` and `forbidden_in` change the level of a row for a read that carries their tags.
 
 ## Context
 

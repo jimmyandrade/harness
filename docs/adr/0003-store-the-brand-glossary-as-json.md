@@ -6,7 +6,7 @@ locale: en
 
 ## Status
 
-Accepted. Moved here from jimmyandrade/harness with the vocabulary API. The glossary files of a project live in `.agents/glossary/`, or in the directory named by `HARNESS_GLOSSARY_DIR`.
+Accepted. Moved here from jimmyandrade/harness with the vocabulary API. The glossary files of a project live in `.agents/glossary/`, or in the directory named by `HARNESS_GLOSSARY_DIR`. Amended by `docs/adr/0010-rate-terms-on-five-levels.md`: the three states become five levels, `situationally_allowed` reads as `allowed_with_care`, `category` becomes `categories`, and the fields this record requires are optional while a glossary migrates.
 
 ## Context
 

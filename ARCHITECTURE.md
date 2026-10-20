@@ -21,7 +21,7 @@ vocabulary/
 ├── .cursor-plugin/plugin.json # The same plugin for Cursor
 ├── docs/
 │   ├── adr/                   # Architecture decisions
-│   └── runbooks/              # Setup steps for MCP hosts
+│   └── runbooks/              # Setup steps for MCP hosts and glossary migration
 ├── examples/mcp.json          # Server list a project copies
 ├── tsconfig.build.json        # Compiles api/ to dist/
 ├── AGENTS.md                  # Instructions for work in this repository
@@ -50,7 +50,7 @@ None. An agent calls the MCP tools, the CLI, or the local HTTP server.
 #### 3.2.1. Vocabulary API, CLI, and MCP
 
 - Name: `vocabulary`
-- Description: Looks up a term, reports which tokens of a text exist, classifies a term or a text, and inserts or updates glossary rows.
+- Description: Looks up a term, reports which tokens of a text exist, classifies a term or a text, inserts or updates glossary rows one by one or in a migrated batch, and migrates rows that use a deprecated state.
 - Technologies: TypeScript on Node.js 24, Zod. The type check is TypeScript 7, as `docs/adr/0005-typecheck-with-typescript-7.md` decides.
 - Deployment: `node api/mcp/index.ts` from this repository, or `node node_modules/vocabulary/dist/mcp/index.js` from a project that installed it. Node.js does not strip types under `node_modules`, so the `prepare` script compiles `dist/` when a project installs the package, as `docs/adr/0007-build-on-install.md` decides. The HTTP server listens on 127.0.0.1.
 
@@ -68,7 +68,7 @@ None. An agent calls the MCP tools, the CLI, or the local HTTP server.
 - Name: Brand glossary
 - Type: One UTF-8 JSON file per language
 - Purpose: The project owns the terms. This repository ships no glossary.
-- Key Schemas/Collections: `.agents/glossary/<language>.json`, or the directory in `HARNESS_GLOSSARY_DIR`
+- Key Schemas/Collections: `.agents/glossary/<language>.json`, or the directory in `HARNESS_GLOSSARY_DIR`. Each row has one of five levels, as `docs/adr/0010-rate-terms-on-five-levels.md` decides
 
 ## 5. External Integrations / APIs
 
@@ -100,10 +100,10 @@ None. Crowdin and Transifex are an export, not this file format.
 - Project Name: vocabulary
 - Repository URL: https://github.com/jimmyandrade/vocabulary
 - Primary Contact/Team: Jimmy Andrade
-- Date of Last Update: 2026-10-13
+- Date of Last Update: 2026-10-20
 
 ## 11. Glossary / Acronyms
 
-- Glossary: the per-language list of allowed, forbidden, and situational terms of a project.
-- MCP: Model Context Protocol, how an agent calls `lookup_term`, `exists_in_text`, and `write_terms`.
+- Glossary: the per-language list of a project's terms, each rated on five levels from forbidden to allowed.
+- MCP: Model Context Protocol, how an agent calls `lookup_term`, `exists_in_text`, `write_terms`, and `migrate_glossary`.
 - ADR: Architecture Decision Record, in `docs/adr/`.

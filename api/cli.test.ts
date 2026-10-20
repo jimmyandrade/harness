@@ -202,7 +202,7 @@ test("terms refuses a general rule that carries a situation", () => {
   console.error = (line: string) => errors.push(line)
   try {
     assert.equal(run(["--glossary", root, "terms", ...ALLOWED, "--when", "no imperativo do e-commerce"]), 2)
-    assert.equal(errors.at(-1), "A term that only fits one situation is situationally_allowed.")
+    assert.equal(errors.at(-1), "forbidden and allowed are general rules and take no when. Use allowed_with_care, discouraged, or strongly_discouraged.")
     assert.equal(readFileSync(file, "utf8"), "{}\n")
   } finally {
     console.error = write
@@ -361,4 +361,114 @@ test("terms takes --case-sensitive and lookup and exists report the casing", () 
     console.log = write
     console.error = warn
   }
+})
+
+function capture(argv: string[]): { code: number; body: Record<string, unknown> } {
+  const lines: string[] = []
+  const write = console.log
+  console.log = (line: string) => lines.push(line)
+  try {
+    const code = run(argv)
+    return { code, body: JSON.parse(lines.at(-1) ?? "{}") as Record<string, unknown> }
+  } finally {
+    console.log = write
+  }
+}
+
+test("terms writes a term without --description and lists it as incomplete", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  writeFileSync(join(root, "pt-BR.json"), "{}\n")
+  const { code, body } = capture(["--glossary", root, "terms", "--language", "pt-BR", "--mode", "insert", "--state", "discouraged", "--term", "imperdível", "--when", "com a cena"])
+  assert.equal(code, 0)
+  assert.deepEqual(body.incomplete, [{ term: "imperdível", missing: ["description"] }])
+})
+
+test("terms writes an allowed term without --reason and a forbidden term without --substitution", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  const file = join(root, "pt-BR.json")
+  writeFileSync(file, "{}\n")
+  const { code, body } = capture([
+    "--glossary", root, "terms", "--language", "pt-BR", "--mode", "insert",
+    "--state", "allowed", "--term", "casa", "--description", "lugar",
+    "--state", "forbidden", "--term", "baratinho", "--description", "barato demais",
+  ])
+  assert.equal(code, 0)
+  assert.deepEqual(body.incomplete, [
+    { term: "casa", missing: ["reason"] },
+    { term: "baratinho", missing: ["substitution"] },
+  ])
+  const states = load(readFileSync(file, "utf8")).map((entry) => [entry.term, entry.state])
+  assert.deepEqual(states, [["baratinho", "forbidden"], ["casa", "allowed"]])
+})
+
+test("terms --validation enforce refuses the missing field and writes nothing", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  const file = join(root, "pt-BR.json")
+  writeFileSync(file, "{}\n")
+  const errors: string[] = []
+  const write = console.error
+  console.error = (line: string) => errors.push(line)
+  try {
+    const code = run(["--glossary", root, "terms", "--language", "pt-BR", "--mode", "insert", "--validation", "enforce", "--state", "forbidden", "--term", "baratinho", "--description", "barato demais"])
+    assert.equal(code, 2)
+  } finally {
+    console.error = write
+  }
+  assert.equal(errors.at(-1), 'Provide the substitution of "baratinho".')
+  assert.equal(readFileSync(file, "utf8"), "{}\n")
+})
+
+test("terms takes the new fields as flags", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  const file = join(root, "pt-BR.json")
+  writeFileSync(file, "{}\n")
+  const { code } = capture([
+    "--glossary", root, "terms", "--language", "pt-BR", "--mode", "insert",
+    "--state", "allowed_with_care", "--term", "leve também", "--categories", "commerce", "--categories", "cta",
+    "--description", "convite", "--when", "depois da escolha", "--allowed-in", "whatsapp", "--forbidden-in", "feed",
+    "--decided-by", "Maria Silva", "--source", "https://example.com/terms/7",
+  ])
+  assert.equal(code, 0)
+  assert.deepEqual(JSON.parse(readFileSync(file, "utf8"))["leve também"], {
+    state: "allowed_with_care",
+    categories: ["commerce", "cta"],
+    description: "convite",
+    when: "depois da escolha",
+    examples: [],
+    allowed_in: ["whatsapp"],
+    forbidden_in: ["feed"],
+    decided_by: "Maria Silva",
+    source: "https://example.com/terms/7",
+  })
+})
+
+test("terms --file imports a batch and reports inserted, updated, and incomplete", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  writeFileSync(join(root, "pt-BR.json"), `${JSON.stringify({ casa: { state: "allowed", description: "lugar" } }, null, 2)}\n`)
+  const batch = join(root, "batch.json")
+  writeFileSync(batch, JSON.stringify({
+    language: "pt-BR",
+    terms: [
+      { state: "allowed", term: "casa", description: "lugar", reason: "acolhe" },
+      { state: "strongly_discouraged", term: "promo", description: "soa a liquidação" },
+    ],
+  }))
+  const { code, body } = capture(["--glossary", root, "terms", "--file", batch, "--mode", "upsert"])
+  assert.equal(code, 0)
+  assert.deepEqual((body.inserted as { term: string }[]).map((item) => item.term), ["promo"])
+  assert.deepEqual((body.updated as { term: string }[]).map((item) => item.term), ["casa"])
+  assert.deepEqual(body.incomplete, [{ term: "promo", missing: ["substitution"] }])
+})
+
+test("migrate reports the deprecated rows and rewrites them with --write", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  const file = join(root, "pt-BR.json")
+  writeFileSync(file, `${JSON.stringify({ "em mãos": { state: "situationally_allowed" } }, null, 2)}\n`)
+  const dry = capture(["--glossary", root, "migrate", "--language", "pt-BR"])
+  assert.equal(dry.code, 0)
+  assert.equal(dry.body.written, false)
+  assert.equal(JSON.parse(readFileSync(file, "utf8"))["em mãos"].state, "situationally_allowed")
+  const wet = capture(["--glossary", root, "migrate", "--language", "pt-BR", "--write"])
+  assert.equal(wet.body.written, true)
+  assert.equal(JSON.parse(readFileSync(file, "utf8"))["em mãos"].state, "allowed_with_care")
 })

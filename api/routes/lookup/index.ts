@@ -4,7 +4,9 @@
  * Read one term or expression. exists is false when that concept is absent.
  * Case and an accent that does not change the letter return the stored row.
  * A plural, a gender, and another word are their own rows. Given tags, a row
- * tagged only for another speaker, event, or channel reads as absent. A row
+ * tagged only for another speaker, event, or channel reads as absent, and a
+ * tag in allowed_in or forbidden_in changes state. base_state then keeps the
+ * level of the row. A row stored with a deprecated state returns legacy_state. A row
  * with case_sensitive also returns case_matches, false when the submitted
  * casing differs from the stored term.
  *
@@ -13,7 +15,7 @@
 
 import { fileURLToPath } from "node:url"
 
-import { Glossary, InvalidGlossary, applicable, caseMatches, collapse, duplicateSignal, findConcept, lookup, type Entry } from "../../shared/glossary.ts"
+import { Glossary, InvalidGlossary, applicable, caseMatches, collapse, duplicateSignal, effectiveState, findConcept, lookup, type Entry } from "../../shared/glossary.ts"
 import { parseBody, type Route } from "../../shared/http.ts"
 import { readOptions, report } from "../../shared/options.ts"
 import { lookupRequest } from "../../shared/schema.ts"
@@ -24,8 +26,10 @@ export type TermLookup = {
   exists: boolean
   term?: string
   state?: Entry["state"]
+  base_state?: Entry["state"]
+  legacy_state?: Entry["legacyState"]
   alternative?: string
-  category?: string
+  categories?: readonly string[]
   description?: string
   substitution?: string
   rejected?: readonly string[]
@@ -35,6 +39,10 @@ export type TermLookup = {
   examples?: readonly string[]
   related?: readonly string[]
   tags?: readonly string[]
+  allowed_in?: readonly string[]
+  forbidden_in?: readonly string[]
+  decided_by?: string
+  source?: string
   case_sensitive?: true
   case_matches?: boolean
   duplicates?: readonly string[]
@@ -51,11 +59,11 @@ export function lookupTerm(glossary: Glossary, language: string, submitted: stri
     const exact = lookup(entries, query).entry
     const reported = { language: tag, submitted: query, exists: true, ...signal }
     if (exact === undefined) return reported
-    return { ...reported, ...rowOf(exact), ...casingOf(exact, query) }
+    return { ...reported, ...rowOf(exact, tags), ...casingOf(exact, query) }
   }
   const found = findConcept(entries, query)
   if (found === undefined) return { language: tag, submitted: query, exists: false }
-  return { language: tag, submitted: query, exists: true, ...rowOf(found), ...casingOf(found, query) }
+  return { language: tag, submitted: query, exists: true, ...rowOf(found, tags), ...casingOf(found, query) }
 }
 
 export const lookupRoute: Route = {
@@ -69,10 +77,13 @@ export const lookupRoute: Route = {
   },
 }
 
-function rowOf(entry: Entry): Omit<TermLookup, "language" | "submitted" | "exists"> {
-  const row: Omit<TermLookup, "language" | "submitted" | "exists"> = { term: entry.term, state: entry.state }
+function rowOf(entry: Entry, tags: readonly string[]): Omit<TermLookup, "language" | "submitted" | "exists"> {
+  const state = effectiveState(entry, tags)
+  const row: Omit<TermLookup, "language" | "submitted" | "exists"> = { term: entry.term, state }
+  if (state !== entry.state) row.base_state = entry.state
+  if (entry.legacyState !== undefined) row.legacy_state = entry.legacyState
   if (entry.alternative !== null) row.alternative = entry.alternative
-  if (entry.category !== undefined) row.category = entry.category
+  if (entry.categories !== undefined && entry.categories.length > 0) row.categories = entry.categories
   if (entry.description !== undefined) row.description = entry.description
   if (entry.substitution !== undefined) row.substitution = entry.substitution
   if (entry.rejected !== undefined) row.rejected = entry.rejected
@@ -82,6 +93,10 @@ function rowOf(entry: Entry): Omit<TermLookup, "language" | "submitted" | "exist
   if (entry.examples !== undefined) row.examples = entry.examples
   if (entry.related !== undefined && entry.related.length > 0) row.related = entry.related
   if (entry.tags !== undefined && entry.tags.length > 0) row.tags = entry.tags
+  if (entry.allowedIn !== undefined && entry.allowedIn.length > 0) row.allowed_in = entry.allowedIn
+  if (entry.forbiddenIn !== undefined && entry.forbiddenIn.length > 0) row.forbidden_in = entry.forbiddenIn
+  if (entry.decidedBy !== undefined) row.decided_by = entry.decidedBy
+  if (entry.source !== undefined) row.source = entry.source
   return row
 }
 

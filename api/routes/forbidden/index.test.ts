@@ -38,7 +38,7 @@ test("POST registers a forbidden term and creates the missing examples", async (
     const body = await response.json()
     assert.equal(body.term, "—")
     assert.equal(body.state, "forbidden")
-    assert.equal(body.category, "punctuation")
+    assert.deepEqual(body.categories, ["punctuation"])
     assert.equal(body.description, "Travessão")
     assert.equal(body.substitution, SUBSTITUTION)
     assert.deepEqual(body.rejected, ["Que alegria — sério."])
@@ -47,7 +47,7 @@ test("POST registers a forbidden term and creates the missing examples", async (
     const entries = load(readFileSync(join(root, "pt-BR.json"), "utf8"))
     const dash = entries.find((entry) => entry.term === "—")
     assert.equal(dash?.state, "forbidden")
-    assert.equal(dash?.category, "punctuation")
+    assert.deepEqual(dash?.categories, ["punctuation"])
     assert.equal(entries.find((entry) => entry.term === "Que alegria — sério.")?.state, "forbidden")
     assert.equal(entries.find((entry) => entry.term === "Que alegria, sério.")?.state, "allowed")
     assert.equal(entries.find((entry) => entry.term === "Que alegria! Sério.")?.state, "allowed")
@@ -81,7 +81,7 @@ test("an existing example is linked and a category stays in English", async () =
       body: JSON.stringify({ ...BODY, category: "Punctuation" }),
     })
     const body = await response.json()
-    assert.equal(body.category, "punctuation")
+    assert.deepEqual(body.categories, ["punctuation"])
     const entries = load(readFileSync(join(root, "pt-BR.json"), "utf8"))
     assert.equal(entries.filter((entry) => entry.term === "Que alegria, sério.").length, 1)
     const translated = await fetch(`http://127.0.0.1:${port}/v1/forbidden`, {

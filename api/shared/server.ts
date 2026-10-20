@@ -13,12 +13,13 @@ import { classifyTextRoute } from "../routes/classify-text/index.ts"
 import { existsRoute } from "../routes/exists/index.ts"
 import { forbiddenRoute } from "../routes/forbidden/index.ts"
 import { lookupRoute } from "../routes/lookup/index.ts"
+import { migrateRoute } from "../routes/migrate/index.ts"
 import { situationalRoute } from "../routes/situational/index.ts"
 import { termsRoute } from "../routes/terms/index.ts"
 import { createServer, listen } from "./http.ts"
 import { readOptions, report } from "./options.ts"
 
-const routes = [allowedRoute, classifyRoute, classifyTextRoute, existsRoute, forbiddenRoute, lookupRoute, situationalRoute, termsRoute]
+const routes = [allowedRoute, classifyRoute, classifyTextRoute, existsRoute, forbiddenRoute, lookupRoute, migrateRoute, situationalRoute, termsRoute]
 
 export function createGlossaryServer(directory: string): Server {
   return createServer(directory, routes)

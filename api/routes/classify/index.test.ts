@@ -49,13 +49,14 @@ test("forbidden term can omit the recommended term", () => {
   assert.equal(response.recommended, undefined)
 })
 
-test("situational term includes the always-allowed term", () => {
+test("a deprecated situational term reads as allowed_with_care and keeps the always-allowed term", () => {
   assert.deepEqual(classify(load(GLOSSARY), "EM   MÃOS", "pt-BR"), {
     from: "query",
     language: "pt-BR",
     submitted: "EM MÃOS",
-    to: "situationally_allowed",
+    to: "allowed_with_care",
     term: "em mãos",
+    legacy_state: "situationally_allowed",
     always_allowed: "entrega",
   })
 })
@@ -82,7 +83,7 @@ test("the same term can differ by language", () => {
   writeFileSync(join(root, "en.json"), '{ "drop": { "state": "allowed" } }\n')
   const portuguese = classify(load(readFileSync(join(root, "pt-BR.json"), "utf8")), "drop", "pt-BR")
   const english = classify(load(readFileSync(join(root, "en.json"), "utf8")), "drop", "en")
-  assert.equal(portuguese.to, "situationally_allowed")
+  assert.equal(portuguese.to, "allowed_with_care")
   assert.equal(portuguese.always_allowed, "coleção")
   assert.equal(english.to, "allowed")
   assert.equal(english.always_allowed, undefined)

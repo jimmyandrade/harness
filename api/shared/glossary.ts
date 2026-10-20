@@ -7,26 +7,23 @@
  * language of the text. The directory is HARNESS_GLOSSARY_DIR, or
  * .agents/glossary/ under HARNESS_ROOT, or under the working directory.
  *
- * The file is an object. Each key is the term. Each value has state and, when
- * the row has one, alternative. The key is not repeated inside the value. The
- * keys stay in alphabetical order. state is allowed,
- * forbidden, or situationally_allowed. alternative is the recommended term
- * when the state is forbidden, and the always-allowed term when the state is
- * situationally_allowed. An allowed row omits alternative. A forbidden row
- * registered with a category also keeps category, description, substitution,
- * rejected, and alternatives. rejected and alternatives name other terms in
- * the same file. An allowed row registered with a category also keeps
- * category, description, reason, and examples. examples names other allowed
- * terms in the same file. A situationally allowed row registered with a
- * category also keeps category, description, when, and examples. when says
- * when to use the term. examples names other situationally allowed terms in
- * the same file. The row omits alternative when it has none. A situationally
- * allowed row may also keep tags: short kebab-case names of the speaker, the
- * event, or the channel the term belongs to. A missing example is created with
- * those tags. A row without tags applies everywhere. A read given tags keeps
- * the rows without tags and the rows that share at least one tag. Any row may
- * keep case_sensitive: true, for a brand spelling such as "iPhone". Its key
- * keeps that casing. A read still finds it in another case and says the
+ * The file is an object. Each key is the term. Each value has state and the
+ * fields of that row. The key is not repeated inside the value. The keys stay
+ * in alphabetical order. state is one of five levels, from the strictest:
+ * forbidden, strongly_discouraged, discouraged, allowed_with_care, and
+ * allowed, as ADR 0010 decides. The deprecated situationally_allowed reads as
+ * allowed_with_care and stays in the file until migrate rewrites it.
+ * alternative is the recommended term of an avoided row, and the
+ * always-allowed term of an allowed_with_care row. An allowed row omits it.
+ *
+ * categories are English words. A row with the deprecated category reads it
+ * as a list of one. description, reason, substitution, and when are optional
+ * while a glossary migrates. examples, rejected, alternatives, and related name
+ * other terms in the same file. tags say where the row exists. allowed_in and
+ * forbidden_in change the level when a read carries one of those tags.
+ * decided_by names who decided, and source where the row came from. Any row
+ * may keep case_sensitive: true, for a brand spelling such as "iPhone". Its
+ * key keeps that casing. A read still finds it in another case and says the
  * casing does not match.
  *
  * writeTerms searches before it writes. Case and an accent that does not change
@@ -45,22 +42,28 @@ import { existsSync, readFileSync, statSync, writeFileSync } from "node:fs"
 import { dirname, resolve } from "node:path"
 
 import {
+  EXPECTED,
+  MISSING_FIELD,
   collapse,
   glossaryFileSchema,
+  isLegacyState,
+  levelOf,
   stateSchema,
-  type AllowedRegistration,
   type AllowedRequest,
-  type ForbiddenRegistration,
-  type ForbiddenRequest,
   type BulkTerm,
-  type SituationalRegistration,
+  type ForbiddenRequest,
+  type LegacyState,
+  type Migration,
   type SituationalRequest,
   type State,
+  type TermRegistration,
   type TermsWrite,
+  type ExpectedField,
+  type Validation,
   type WriteMode,
 } from "./schema.ts"
 
-export type { AllowedRegistration, ForbiddenRegistration, SituationalRegistration, State, TermsWrite }
+export type { Migration, State, TermRegistration, TermsWrite }
 export { collapse }
 export const STATES = new Set(stateSchema.options)
 const LANGUAGE = /^[A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$/
@@ -76,9 +79,11 @@ export class InvalidGlossary extends Error {}
 export type Entry = {
   term: string
   state: State
+  legacyState?: LegacyState
   alternative: string | null
   order: readonly [string, string]
-  category?: string
+  categories?: readonly string[]
+  legacyCategory?: true
   description?: string
   substitution?: string
   rejected?: readonly string[]
@@ -88,6 +93,10 @@ export type Entry = {
   examples?: readonly string[]
   related?: readonly string[]
   tags?: readonly string[]
+  allowedIn?: readonly string[]
+  forbiddenIn?: readonly string[]
+  decidedBy?: string
+  source?: string
   caseSensitive?: boolean
 }
 
@@ -128,13 +137,17 @@ export function load(text: string): Entry[] {
   const seen = new Set<string>()
   let previous: readonly [string, string] | null = null
   for (const [rawTerm, row] of Object.entries(result.data)) {
-    const entry = entryFrom(rawTerm, row.state, row.alternative)
+    const entry = entryFrom(rawTerm, row.state, row.alternative, true)
     const key = matchKey(entry.term)
     if (seen.has(key)) throw new InvalidGlossary(`${JSON.stringify(entry.term)} is duplicated.`)
     if (previous !== null && compareOrder(entry.order, previous) < 0) {
       throw new InvalidGlossary(`${JSON.stringify(entry.term)} is out of alphabetical order.`)
     }
-    if (row.category !== undefined) entry.category = row.category
+    if (row.categories !== undefined) entry.categories = row.categories
+    if (row.category !== undefined) {
+      if (!entry.categories?.includes(row.category)) entry.categories = [row.category, ...(entry.categories ?? [])]
+      entry.legacyCategory = true
+    }
     if (row.description !== undefined) entry.description = row.description
     if (row.substitution !== undefined) entry.substitution = row.substitution
     if (row.rejected !== undefined) entry.rejected = row.rejected
@@ -144,6 +157,10 @@ export function load(text: string): Entry[] {
     if (row.examples !== undefined) entry.examples = row.examples
     if (row.related !== undefined) entry.related = row.related
     if (row.tags !== undefined) entry.tags = row.tags
+    if (row.allowed_in !== undefined) entry.allowedIn = row.allowed_in
+    if (row.forbidden_in !== undefined) entry.forbiddenIn = row.forbidden_in
+    if (row.decided_by !== undefined) entry.decidedBy = row.decided_by
+    if (row.source !== undefined) entry.source = row.source
     if (row.case_sensitive === true) entry.caseSensitive = true
     seen.add(key)
     previous = entry.order
@@ -166,6 +183,21 @@ export function lookup(entries: readonly Entry[], submitted: string): { query: s
   const found = entries[start]
   if (found === undefined || compareOrder(found.order, order) !== 0) return { query, entry: undefined }
   return { query, entry: found }
+}
+
+/**
+ * The level of a row for a read that carries tags. A tag in forbidden_in makes
+ * it forbidden, and wins over a tag in allowed_in, which makes it allowed.
+ */
+export function effectiveState(entry: Entry, tags: readonly string[]): State {
+  if (tags.some((tag) => entry.forbiddenIn?.includes(tag))) return "forbidden"
+  if (tags.some((tag) => entry.allowedIn?.includes(tag))) return "allowed"
+  return entry.state
+}
+
+/** Rows that still use a deprecated state or the deprecated category. */
+export function legacyRows(entries: readonly Entry[]): Entry[] {
+  return entries.filter((entry) => entry.legacyState !== undefined || entry.legacyCategory === true)
 }
 
 export function applicable(entries: readonly Entry[], tags: readonly string[]): readonly Entry[] {
@@ -195,7 +227,7 @@ export function registerForbidden(
   directory: string,
   language: string,
   input: Omit<ForbiddenRequest, "language">,
-): ForbiddenRegistration {
+): TermRegistration {
   const tag = canonicalLanguage(language)
   const path = glossaryFile(directory, tag)
   const entries = load(readFileSync(path, "utf8"))
@@ -207,7 +239,7 @@ export function registerForbidden(
   assertExamples(created.term, input.rejected, input.alternatives)
   const rejected = linkedTerms(entries, input.rejected, "forbidden", created.term)
   const alternatives = linkedTerms(entries, input.alternatives, "allowed", created.term)
-  created.category = input.category
+  created.categories = [input.category]
   created.description = input.description
   created.substitution = input.substitution
   created.rejected = rejected
@@ -218,7 +250,7 @@ export function registerForbidden(
     language: tag,
     term: created.term,
     state: "forbidden",
-    category: input.category,
+    categories: [input.category],
     description: input.description,
     substitution: input.substitution,
     rejected,
@@ -231,7 +263,7 @@ export function registerAllowed(
   directory: string,
   language: string,
   input: Omit<AllowedRequest, "language">,
-): AllowedRegistration {
+): TermRegistration {
   const tag = canonicalLanguage(language)
   const path = glossaryFile(directory, tag)
   const entries = load(readFileSync(path, "utf8"))
@@ -242,7 +274,7 @@ export function registerAllowed(
   }
   assertExamples(created.term, input.examples, [])
   const examples = linkedTerms(entries, input.examples, "allowed", created.term)
-  created.category = input.category
+  created.categories = [input.category]
   created.description = input.description
   created.reason = input.reason
   created.examples = examples
@@ -252,7 +284,7 @@ export function registerAllowed(
     language: tag,
     term: created.term,
     state: "allowed",
-    category: input.category,
+    categories: [input.category],
     description: input.description,
     reason: input.reason,
     examples,
@@ -264,18 +296,18 @@ export function registerSituational(
   directory: string,
   language: string,
   input: Omit<SituationalRequest, "language">,
-): SituationalRegistration {
+): TermRegistration {
   const tag = canonicalLanguage(language)
   const path = glossaryFile(directory, tag)
   const entries = load(readFileSync(path, "utf8"))
-  const created = entryFrom(input.case_sensitive ? input.term : lowercaseTerm(input.term), "situationally_allowed", undefined)
+  const created = entryFrom(input.case_sensitive ? input.term : lowercaseTerm(input.term), "allowed_with_care", undefined)
   if (input.case_sensitive) created.caseSensitive = true
   if (entries.some((item) => matchKey(item.term) === matchKey(created.term))) {
     throw new InvalidGlossary(`${JSON.stringify(created.term)} is already in the glossary.`)
   }
   assertExamples(created.term, input.examples, [])
-  const examples = linkedTerms(entries, input.examples, "situationally_allowed", created.term)
-  created.category = input.category
+  const examples = linkedTerms(entries, input.examples, "allowed_with_care", created.term)
+  created.categories = [input.category]
   created.description = input.description
   created.when = input.when
   created.examples = examples
@@ -284,8 +316,8 @@ export function registerSituational(
   return {
     language: tag,
     term: created.term,
-    state: "situationally_allowed",
-    category: input.category,
+    state: "allowed_with_care",
+    categories: [input.category],
     description: input.description,
     when: input.when,
     examples,
@@ -293,21 +325,39 @@ export function registerSituational(
   }
 }
 
-export function writeTerms(directory: string, language: string, mode: WriteMode, terms: readonly BulkTerm[]): TermsWrite {
+type Writing = BulkTerm & { previous?: string }
+
+export function writeTerms(
+  directory: string,
+  language: string,
+  mode: WriteMode,
+  terms: readonly BulkTerm[],
+  validation: Validation = "warn",
+): TermsWrite {
   const tag = canonicalLanguage(language)
   const path = glossaryFile(directory, tag)
   const loaded = load(readFileSync(path, "utf8"))
   const existed = new Set(loaded.map((entry) => matchKey(entry.term)))
   const batch: BulkTerm[] = []
+  const missing = new Map<string, ExpectedField[]>()
   for (const item of terms) {
     if (batch.some((previous) => sameConcept(previous.term, item.term))) {
       throw new InvalidGlossary(`${JSON.stringify(item.term)} is duplicated.`)
     }
+    if (item.source !== undefined && batch.some((previous) => previous.source === item.source)) {
+      throw new InvalidGlossary(`The source of ${JSON.stringify(item.term)} is duplicated.`)
+    }
     batch.push(item)
-    if (item.state === "forbidden") assertExamples(item.term, item.rejected, item.alternatives)
-    else assertExamples(item.term, item.examples, [])
+    assertExamples(item.term, [...item.examples, ...item.rejected], item.alternatives)
+    const absent = EXPECTED[item.state].filter((field) => item[field] === undefined)
+    const first = absent[0]
+    if (first === undefined || validation === "optional") continue
+    if (validation === "enforce") {
+      throw new InvalidGlossary(`${MISSING_FIELD[first].slice(0, -1)} of ${JSON.stringify(item.term)}.`)
+    }
+    missing.set(item.term, absent)
   }
-  const writing = new Map<string, BulkTerm>()
+  const writing = new Map<string, Writing>()
   const unchanged: TermsWrite["unchanged"] = []
   const skipped: TermsWrite["skipped"] = []
   for (const item of terms) {
@@ -326,11 +376,21 @@ export function writeTerms(directory: string, language: string, mode: WriteMode,
       writing.set(matchKey(found.term), { ...item, term: spelling })
       continue
     }
+    const spelling = item.case_sensitive ? item.term : lowercaseTerm(item.term)
+    const origin = item.source === undefined ? undefined : loaded.find((entry) => entry.source === item.source)
+    if (origin !== undefined) {
+      if (mode === "insert") {
+        unchanged.push({ term: item.term, reason: `Already in the glossary as ${JSON.stringify(origin.term)}.` })
+        continue
+      }
+      writing.set(matchKey(spelling), { ...item, term: spelling, previous: origin.term })
+      continue
+    }
     if (mode === "update") {
       skipped.push({ term: item.term, reason: "Not in the glossary." })
       continue
     }
-    writing.set(matchKey(item.term), { ...item, term: item.case_sensitive ? item.term : lowercaseTerm(item.term) })
+    writing.set(matchKey(spelling), { ...item, term: spelling })
   }
   const working = [...loaded]
   for (const item of writing.values()) {
@@ -347,11 +407,11 @@ export function writeTerms(directory: string, language: string, mode: WriteMode,
   for (const item of writing.values()) {
     const key = matchKey(item.term)
     const shell = entryFrom(item.term, item.state, undefined)
-    const index = working.findIndex((entry) => matchKey(entry.term) === key)
+    const index = working.findIndex((entry) => matchKey(entry.term) === matchKey(item.previous ?? item.term))
     if (index === -1) working.push(shell)
     else {
       const previous = working[index]
-      if (previous !== undefined && previous.alternative !== null) shell.alternative = previous.alternative
+      if (previous !== undefined && previous.alternative !== null && item.state !== "allowed") shell.alternative = previous.alternative
       renameLinks(working, previous?.term ?? item.term, item.term)
       working[index] = shell
     }
@@ -362,13 +422,55 @@ export function writeTerms(directory: string, language: string, mode: WriteMode,
   for (const item of writing.values()) {
     const shell = shells.get(matchKey(item.term))
     if (shell === undefined) continue
-    const links = fillTerm(shell, item, working, writing)
-    const registration = registrationFrom(tag, item, links)
-    if (existed.has(matchKey(item.term))) updated.push(registration)
+    fillTerm(shell, item, working, writing)
+    const registration = registrationOf(tag, shell)
+    if (existed.has(matchKey(item.previous ?? item.term))) updated.push(registration)
     else inserted.push(registration)
   }
   if (shells.size > 0) writeFileSync(path, serialize(working), "utf8")
-  return { language: tag, mode, inserted, updated, unchanged, skipped }
+  const skippedTerms = new Set(skipped.map((item) => item.term))
+  const incomplete = [...missing]
+    .filter(([term]) => !skippedTerms.has(term))
+    .map(([term, fields]) => ({ term: writtenSpelling(writing, term), missing: [...fields] }))
+  return { language: tag, mode, inserted, updated, unchanged, skipped, incomplete, warnings: warningsFor(terms, working) }
+}
+
+/**
+ * Rewrite the rows that still use a deprecated state or the deprecated
+ * category. Without write, only report what would change.
+ */
+export function migrate(directory: string, language: string, write = false): Migration {
+  const tag = canonicalLanguage(language)
+  const path = glossaryFile(directory, tag)
+  const entries = load(readFileSync(path, "utf8"))
+  const states: Migration["states"] = []
+  const categories: Migration["categories"] = []
+  for (const entry of legacyRows(entries)) {
+    if (entry.legacyState !== undefined) states.push({ term: entry.term, from: entry.legacyState, to: entry.state })
+    if (entry.legacyCategory === true) categories.push({ term: entry.term, from: entry.categories?.[0] ?? "" })
+    if (!write) continue
+    delete entry.legacyState
+    delete entry.legacyCategory
+  }
+  const written = write && states.length + categories.length > 0
+  if (written) writeFileSync(path, serialize(entries), "utf8")
+  return { language: tag, written, states, categories }
+}
+
+function writtenSpelling(writing: ReadonlyMap<string, Writing>, term: string): string {
+  return [...writing.values()].find((item) => sameConcept(item.term, term))?.term ?? term
+}
+
+function warningsFor(terms: readonly BulkTerm[], entries: readonly Entry[]): string[] {
+  const warnings: string[] = []
+  const legacy = terms.filter((item) => item.legacy_state !== undefined).map((item) => JSON.stringify(item.term))
+  if (legacy.length > 0) {
+    warnings.push(`situationally_allowed is deprecated and was written as allowed_with_care: ${legacy.join(", ")}.`)
+  }
+  if (terms.some((item) => item.legacy_category)) warnings.push("category is deprecated. Send categories.")
+  const rows = legacyRows(entries).length
+  if (rows > 0) warnings.push(`${rows} ${rows === 1 ? "row still uses" : "rows still use"} a deprecated state or category. Run migrate.`)
+  return warnings
 }
 
 export class Glossary {
@@ -393,10 +495,11 @@ export class Glossary {
   }
 }
 
-function entryFrom(term: string, state: string, alternative: string | undefined): Entry {
+function entryFrom(term: string, raw: string, alternative: string | undefined, keepLegacy = false): Entry {
   const text = collapse(term)
   if (text === "") throw new InvalidGlossary("The term is empty.")
-  if (!isState(state)) throw new InvalidGlossary(`Unknown state for ${JSON.stringify(text)}: ${JSON.stringify(state)}.`)
+  const state = levelOf(raw)
+  if (state === undefined) throw new InvalidGlossary(`Unknown state for ${JSON.stringify(text)}: ${JSON.stringify(raw)}.`)
   let replacement = alternative === undefined ? null : collapse(alternative)
   if (replacement === "") replacement = null
   if (state === "allowed" && replacement !== null) {
@@ -405,29 +508,20 @@ function entryFrom(term: string, state: string, alternative: string | undefined)
   if (replacement !== null && matchKey(replacement) === matchKey(text)) {
     throw new InvalidGlossary(`${JSON.stringify(text)} cannot be its own alternative.`)
   }
-  return { term: text, state, alternative: replacement, order: sortKey(text) }
+  const entry: Entry = { term: text, state, alternative: replacement, order: sortKey(text) }
+  if (keepLegacy && isLegacyState(raw)) entry.legacyState = raw
+  return entry
 }
 
 function serialize(entries: readonly Entry[]): string {
   const file: Record<string, object> = {}
   for (const entry of [...entries].sort((left, right) => compareOrder(left.order, right.order))) {
-    const row: {
-      state: State
-      alternative?: string
-      category?: string
-      description?: string
-      substitution?: string
-      rejected?: readonly string[]
-      alternatives?: readonly string[]
-      reason?: string
-      when?: string
-      examples?: readonly string[]
-      related?: readonly string[]
-      tags?: readonly string[]
-      case_sensitive?: true
-    } = { state: entry.state }
+    const row: Record<string, unknown> = { state: entry.legacyState ?? entry.state }
     if (entry.alternative !== null) row.alternative = entry.alternative
-    if (entry.category !== undefined) row.category = entry.category
+    if (entry.categories !== undefined && entry.categories.length > 0) {
+      if (entry.legacyCategory === true && entry.categories.length === 1) row.category = entry.categories[0]
+      else row.categories = entry.categories
+    }
     if (entry.description !== undefined) row.description = entry.description
     if (entry.substitution !== undefined) row.substitution = entry.substitution
     if (entry.rejected !== undefined) row.rejected = entry.rejected
@@ -437,6 +531,10 @@ function serialize(entries: readonly Entry[]): string {
     if (entry.examples !== undefined) row.examples = entry.examples
     if (entry.related !== undefined && entry.related.length > 0) row.related = entry.related
     if (entry.tags !== undefined && entry.tags.length > 0) row.tags = entry.tags
+    if (entry.allowedIn !== undefined && entry.allowedIn.length > 0) row.allowed_in = entry.allowedIn
+    if (entry.forbiddenIn !== undefined && entry.forbiddenIn.length > 0) row.forbidden_in = entry.forbiddenIn
+    if (entry.decidedBy !== undefined) row.decided_by = entry.decidedBy
+    if (entry.source !== undefined) row.source = entry.source
     if (entry.caseSensitive === true) row.case_sensitive = true
     file[entry.term] = row
   }
@@ -444,88 +542,56 @@ function serialize(entries: readonly Entry[]): string {
 }
 
 function referencedTerms(item: BulkTerm): readonly string[] {
-  if (item.state === "forbidden") return [...item.rejected, ...item.alternatives]
-  return item.examples
+  return [...item.examples, ...item.rejected, ...item.alternatives]
 }
 
-function fillTerm(
-  shell: Entry,
-  item: BulkTerm,
-  entries: Entry[],
-  writing: ReadonlyMap<string, BulkTerm>,
-): { rejected?: string[]; alternatives?: string[]; examples?: string[]; related?: string[] } {
-  shell.category = item.category
-  shell.description = item.description
+const AVOIDED_LISTS: ReadonlySet<State> = new Set(["forbidden", "strongly_discouraged"])
+
+function fillTerm(shell: Entry, item: BulkTerm, entries: Entry[], writing: ReadonlyMap<string, BulkTerm>): void {
+  if (item.categories.length > 0) shell.categories = item.categories
+  if (item.description !== undefined) shell.description = item.description
+  if (item.reason !== undefined) shell.reason = item.reason
+  if (item.substitution !== undefined) shell.substitution = item.substitution
+  if (item.when !== undefined) shell.when = item.when
+  if (item.decided_by !== undefined) shell.decidedBy = item.decided_by
+  if (item.source !== undefined) shell.source = item.source
   if (item.case_sensitive) shell.caseSensitive = true
   const related = resolveRegistered(entries, item.related, item.term, writing)
   if (related.length > 0) shell.related = related
-  if (item.state === "forbidden") {
-    const rejected = resolveLinks(entries, item.rejected, "forbidden", writing)
-    const alternatives = resolveLinks(entries, item.alternatives, "allowed", writing)
-    shell.substitution = item.substitution
+  const examples = resolveLinks(entries, item.examples, item.state, writing, item.tags)
+  const rejected = resolveLinks(entries, item.rejected, "forbidden", writing)
+  const alternatives = resolveLinks(entries, item.alternatives, "allowed", writing)
+  if (AVOIDED_LISTS.has(item.state)) {
     shell.rejected = rejected
     shell.alternatives = alternatives
-    return { rejected, alternatives, related }
-  }
-  if (item.state === "allowed") {
-    const examples = resolveLinks(entries, item.examples, item.state, writing)
-    shell.reason = item.reason
+  } else {
     shell.examples = examples
-    return { examples, related }
+    if (rejected.length > 0) shell.rejected = rejected
+    if (alternatives.length > 0) shell.alternatives = alternatives
   }
-  const examples = resolveLinks(entries, item.examples, item.state, writing, item.tags)
-  shell.when = item.when
-  shell.examples = examples
   if (item.tags.length > 0) shell.tags = item.tags
-  return { examples, related }
+  if (item.allowed_in.length > 0) shell.allowedIn = item.allowed_in
+  if (item.forbidden_in.length > 0) shell.forbiddenIn = item.forbidden_in
 }
 
-function registrationFrom(
-  language: string,
-  item: BulkTerm,
-  links: { rejected?: string[]; alternatives?: string[]; examples?: string[]; related?: string[] },
-): TermsWrite["inserted"][number] {
-  const related = links.related !== undefined && links.related.length > 0 ? links.related : undefined
-  const case_sensitive = item.case_sensitive ? (true as const) : undefined
-  if (item.state === "forbidden") {
-    return {
-      language,
-      term: item.term,
-      state: "forbidden",
-      category: item.category,
-      description: item.description,
-      substitution: item.substitution,
-      rejected: links.rejected ?? [],
-      alternatives: links.alternatives ?? [],
-      related,
-      case_sensitive,
-    }
-  }
-  if (item.state === "allowed") {
-    return {
-      language,
-      term: item.term,
-      state: "allowed",
-      category: item.category,
-      description: item.description,
-      reason: item.reason,
-      examples: links.examples ?? [],
-      related,
-      case_sensitive,
-    }
-  }
-  return {
-    language,
-    term: item.term,
-    state: "situationally_allowed",
-    category: item.category,
-    description: item.description,
-    when: item.when,
-    examples: links.examples ?? [],
-    related,
-    tags: item.tags.length > 0 ? item.tags : undefined,
-    case_sensitive,
-  }
+export function registrationOf(language: string, entry: Entry): TermRegistration {
+  const registration: TermRegistration = { language, term: entry.term, state: entry.state }
+  if (entry.categories !== undefined && entry.categories.length > 0) registration.categories = [...entry.categories]
+  if (entry.description !== undefined) registration.description = entry.description
+  if (entry.reason !== undefined) registration.reason = entry.reason
+  if (entry.substitution !== undefined) registration.substitution = entry.substitution
+  if (entry.when !== undefined) registration.when = entry.when
+  if (entry.examples !== undefined) registration.examples = [...entry.examples]
+  if (entry.rejected !== undefined) registration.rejected = [...entry.rejected]
+  if (entry.alternatives !== undefined) registration.alternatives = [...entry.alternatives]
+  if (entry.related !== undefined && entry.related.length > 0) registration.related = [...entry.related]
+  if (entry.tags !== undefined && entry.tags.length > 0) registration.tags = [...entry.tags]
+  if (entry.allowedIn !== undefined && entry.allowedIn.length > 0) registration.allowed_in = [...entry.allowedIn]
+  if (entry.forbiddenIn !== undefined && entry.forbiddenIn.length > 0) registration.forbidden_in = [...entry.forbiddenIn]
+  if (entry.decidedBy !== undefined) registration.decided_by = entry.decidedBy
+  if (entry.source !== undefined) registration.source = entry.source
+  if (entry.caseSensitive === true) registration.case_sensitive = true
+  return registration
 }
 
 function resolveRegistered(
@@ -715,18 +781,20 @@ function sameFields(entry: Entry, item: BulkTerm): boolean {
   if (entry.state !== item.state) return false
   if ((entry.caseSensitive === true) !== item.case_sensitive) return false
   if (item.case_sensitive && matchKey(entry.term) === matchKey(item.term) && entry.term !== item.term) return false
-  if ((entry.category ?? "") !== item.category) return false
-  if ((entry.description ?? "") !== item.description) return false
-  if (!sameList(entry.related, item.related)) return false
-  if (item.state === "forbidden") {
-    return (entry.substitution ?? "") === item.substitution
-      && sameList(entry.rejected, item.rejected)
-      && sameList(entry.alternatives, item.alternatives)
-  }
-  if (item.state === "allowed") {
-    return (entry.reason ?? "") === item.reason && sameList(entry.examples, item.examples)
-  }
-  return (entry.when ?? "") === item.when && sameList(entry.examples, item.examples) && sameList(entry.tags, item.tags)
+  return sameList(entry.categories, item.categories)
+    && entry.description === item.description
+    && entry.reason === item.reason
+    && entry.substitution === item.substitution
+    && entry.when === item.when
+    && entry.decidedBy === item.decided_by
+    && entry.source === item.source
+    && sameList(entry.examples, item.examples)
+    && sameList(entry.rejected, item.rejected)
+    && sameList(entry.alternatives, item.alternatives)
+    && sameList(entry.related, item.related)
+    && sameList(entry.tags, item.tags)
+    && sameList(entry.allowedIn, item.allowed_in)
+    && sameList(entry.forbiddenIn, item.forbidden_in)
 }
 
 function sameList(stored: readonly string[] | undefined, incoming: readonly string[]): boolean {
@@ -755,8 +823,4 @@ function isCombining(character: string): boolean {
 
 function isLetters(value: string): boolean {
   return /^[A-Za-z]+$/.test(value)
-}
-
-function isState(value: string): value is State {
-  return stateSchema.safeParse(value).success
 }

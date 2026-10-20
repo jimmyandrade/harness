@@ -198,9 +198,9 @@ test("a passive cart notice is a bad example and a look line can be a good one",
     assert.equal(bad?.state, "forbidden")
     assert.equal(bad?.description, CART_BAD)
     const good = entries.find((entry) => entry.term === "você deixou um look pra trás")
-    assert.equal(good?.state, "situationally_allowed")
+    assert.equal(good?.state, "allowed_with_care")
     assert.equal(good?.description, CART_GOOD)
-    assert.equal(entries.find((entry) => entry.term === "Seu look ficou no caminho")?.state, "situationally_allowed")
+    assert.equal(entries.find((entry) => entry.term === "Seu look ficou no caminho")?.state, "allowed_with_care")
   })
 })
 
@@ -234,7 +234,7 @@ test("a cliché stays forbidden and keeps the phrase to avoid", async () => {
     const entries = load(readFileSync(file, "utf8"))
     const row = entries.find((entry) => entry.term === "exclusivo")
     assert.equal(row?.state, "forbidden")
-    assert.equal(row?.category, "cliche")
+    assert.deepEqual(row?.categories, ["cliche"])
     assert.match(row?.description ?? "", /imagem, cena, ação, efeito ou situação/)
     assert.deepEqual(row?.rejected, ["peça exclusiva"])
   })
@@ -337,7 +337,7 @@ test("an allowed term with a situation is refused", async () => {
       terms: [{ ...allowed("leve também", "convite"), when: "no imperativo do e-commerce" }],
     })
     assert.equal(response.status, 400)
-    assert.equal((await response.json()).error, "A term that only fits one situation is situationally_allowed.")
+    assert.equal((await response.json()).error, "forbidden and allowed are general rules and take no when. Use allowed_with_care, discouraged, or strongly_discouraged.")
     assert.equal(readFileSync(file, "utf8"), initial)
   })
 })
@@ -477,7 +477,7 @@ test("a tag that is not kebab-case, repeats, or sits on a general rule is refuse
       terms: [{ ...allowed("!", "exclamação"), tags: ["palco"] }],
     })
     assert.equal(general.status, 400)
-    assert.equal((await general.json()).error, "A term tagged for one context is situationally_allowed.")
+    assert.equal((await general.json()).error, "A term tagged for one context is allowed_with_care, discouraged, or strongly_discouraged.")
     assert.equal(readFileSync(file, "utf8"), initial)
   })
 })

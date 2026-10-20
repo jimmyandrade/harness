@@ -3,9 +3,13 @@
  *
  * lookup reads one term. exists maps each token of a text to whether it exists.
  * terms writes one language in one pass. Flags are key and value.
- * --language and --mode apply to the whole batch. Each --term starts a term.
- * --examples, --rejected, --alternatives, --related, and --tags repeat once
- * per value. lookup and exists take --tags too, to read only the rows that
+ * --language, --mode, and --validation apply to the whole batch. Each --term
+ * starts a term. --categories, --examples, --rejected, --alternatives,
+ * --related, --tags, --allowed-in, and --forbidden-in repeat once per value.
+ * --file reads the whole batch from a JSON file with the body of
+ * POST /v1/terms, for a migration; --language, --mode, and --validation
+ * still override it. migrate rewrites the rows that use a deprecated state or
+ * the deprecated category, and only reports them without --write. lookup and exists take --tags too, to read only the rows that
  * apply to that speaker, event, or channel. --case-sensitive marks the term
  * it follows, keeping its casing as the key; it takes true or false, and alone
  * it means true.
@@ -14,20 +18,23 @@
  * Run: node api/cli.ts lookup --language pt-BR --term "verão! (chegou!)" --tags festival-de-verao
  * Run: node api/cli.ts exists --language pt-BR --text "Oi, tudo bem?"
  * Run: node api/cli.ts terms --language pt-BR --mode insert --state allowed --term "!" --category punctuation --description "Ponto de exclamação" --reason "..." 
- * Run: node api/cli.ts terms --language pt-BR --mode upsert --state allowed --term iPhone --case-sensitive --category brand --description "..." --reason "..."
+ * Run: node api/cli.ts terms --language pt-BR --mode upsert --state allowed --term iPhone --case-sensitive --categories brand --description "..." --reason "..."
+ * Run: node api/cli.ts terms --file lote.json --mode upsert
+ * Run: node api/cli.ts migrate --language pt-BR --write
  */
 
+import { readFileSync } from "node:fs"
 import { fileURLToPath } from "node:url"
 
 import { existsPhrase } from "./routes/exists/index.ts"
 import { lookupTerm } from "./routes/lookup/index.ts"
-import { Glossary, InvalidGlossary, writeTerms } from "./shared/glossary.ts"
+import { Glossary, InvalidGlossary, migrate, writeTerms } from "./shared/glossary.ts"
 import { parseBody } from "./shared/http.ts"
 import { readOptions, report } from "./shared/options.ts"
 import { existsRequest, lookupRequest, termsRequest } from "./shared/schema.ts"
 
-const GLOBAL = new Set(["language", "mode"])
-const LISTS = new Set(["examples", "rejected", "alternatives", "related", "tags"])
+const GLOBAL = new Set(["language", "mode", "validation", "file"])
+const LISTS = new Set(["categories", "examples", "rejected", "alternatives", "related", "tags", "allowed_in", "forbidden_in"])
 const SWITCHES: Record<string, string> = { "case-sensitive": "case_sensitive" }
 const FIELDS = new Set([
   "state",
@@ -37,6 +44,8 @@ const FIELDS = new Set([
   "reason",
   "substitution",
   "when",
+  "decided_by",
+  "source",
   ...LISTS,
 ])
 const MISSING: Record<string, string> = {
@@ -53,6 +62,13 @@ const MISSING: Record<string, string> = {
   alternatives: "Provide the alternatives.",
   related: "Provide the related terms.",
   tags: "Provide the tags.",
+  categories: "Provide the categories.",
+  allowed_in: "Provide the tags.",
+  forbidden_in: "Provide the tags.",
+  decided_by: "Provide who decided.",
+  source: "Provide the source.",
+  validation: "validation is optional, warn, or enforce.",
+  file: "Provide the file.",
   when: "Provide when to use it.",
   text: "Provide the text.",
 }
@@ -71,7 +87,12 @@ export function run(argv: string[]): number {
       console.log(JSON.stringify(existsPhrase(new Glossary(glossary), body.language, body.text, body.tags)))
     } else if (command === "terms") {
       const body = parseBody(termsRequest, termsFrom(rest))
-      console.log(JSON.stringify(writeTerms(glossary, body.language, body.mode, body.terms)))
+      console.log(JSON.stringify(writeTerms(glossary, body.language, body.mode, body.terms, body.validation)))
+    } else if (command === "migrate") {
+      const write = rest.includes("--write")
+      const flags = flagsFrom(rest.filter((arg) => arg !== "--write"), ["language"])
+      if (flags.language === undefined) throw new InvalidGlossary("Unknown language.")
+      console.log(JSON.stringify(migrate(glossary, String(flags.language), write)))
     } else {
       throw new InvalidGlossary("Provide the command.")
     }
@@ -107,17 +128,21 @@ export function flagsFrom(
 export function termsFrom(args: readonly string[]): {
   language?: string
   mode?: string
-  terms: Draft[]
+  validation?: string
+  terms: unknown[]
 } {
   let language: string | undefined
   let mode: string | undefined
+  let validation: string | undefined
+  let file: string | undefined
   const terms: Draft[] = []
   let current: Draft | null = null
   for (let index = 0; index < args.length; index += 1) {
     const token = args[index] ?? ""
     if (!token.startsWith("--") || token === "--") throw new InvalidGlossary(`Unknown argument ${JSON.stringify(token)}.`)
     const split = token.indexOf("=")
-    const name = (split === -1 ? token : token.slice(0, split)).slice(2)
+    const flag = (split === -1 ? token : token.slice(0, split)).slice(2)
+    const name = SWITCHES[flag] === undefined ? flag.replaceAll("-", "_") : flag
     const inline = split === -1 ? undefined : token.slice(split + 1)
     const field = SWITCHES[name]
     if (field !== undefined) {
@@ -137,18 +162,42 @@ export function termsFrom(args: readonly string[]): {
     if (inline === undefined) index += 1
     if (name === "language") language = value
     else if (name === "mode") mode = value
+    else if (name === "validation") validation = value
+    else if (name === "file") file = value
     else {
       if (current !== null && (name === "term" || name === "state") && typeof current[name] === "string") current = null
       if (current === null) {
-        current = { examples: [], rejected: [], alternatives: [], related: [], tags: [] }
+        current = { categories: [], examples: [], rejected: [], alternatives: [], related: [], tags: [], allowed_in: [], forbidden_in: [] }
         terms.push(current)
       }
       if (LISTS.has(name)) (current[name] as string[]).push(value)
       else current[name] = value
     }
   }
+  if (file !== undefined) {
+    if (terms.length > 0) throw new InvalidGlossary("--file takes the whole batch. Do not add --term.")
+    const batch = readBatch(file)
+    return { ...batch, language: language ?? batch.language, mode: mode ?? batch.mode, validation: validation ?? batch.validation }
+  }
   if (terms.length === 0) throw new InvalidGlossary("Provide the terms.")
-  return { language, mode, terms }
+  return { language, mode, validation, terms }
+}
+
+function readBatch(file: string): { language?: string; mode?: string; validation?: string; terms: unknown[] } {
+  let parsed: unknown
+  try {
+    parsed = JSON.parse(readFileSync(file, "utf8"))
+  } catch {
+    throw new InvalidGlossary(`${JSON.stringify(file)} is not a JSON batch.`)
+  }
+  if (typeof parsed !== "object" || parsed === null || Array.isArray(parsed)) {
+    throw new InvalidGlossary(`${JSON.stringify(file)} is not a JSON batch.`)
+  }
+  const record = parsed as Record<string, unknown>
+  const text = (value: unknown) => (typeof value === "string" ? value : undefined)
+  const terms = Array.isArray(record.terms) ? record.terms : []
+  if (terms.length === 0) throw new InvalidGlossary("Provide the terms.")
+  return { language: text(record.language), mode: text(record.mode), validation: text(record.validation), terms }
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {

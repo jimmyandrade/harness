@@ -3,7 +3,7 @@ name: redigir-com-tom-de-voz
 description: Use essa habilidade sempre que for criar, adaptar, lapidar ou validar texto da marca no tom de voz, mesmo sem dizer copy, como slogan, legenda, e-mail, WhatsApp, campanha, CTA, microcopy ou título de evento externo. NÃO use para responder quem conversa com a IA, descrever uma skill, titular tarefa ou oportunidade, cravar a grafia, alterar formato de conteúdo, nem assumir cliente, peça, oportunidade ou histórico.
 metadata:
   author: jimmyandrade
-  version: "0.15.0"
+  version: "0.16.0"
   aliases:
     - escreva-usando-o-tom-de-voz
   related:
@@ -37,7 +37,7 @@ flowchart LR
 
 Antes de escrever ou aprovar, o texto tem contexto, canal, público, as fontes da marca que as instruções do projeto nomeiam, o vocabulário e a intenção criativa. Falta algum: pare e peça. Não aprove. Não invente persona, posicionamento, vocabulário nem termo proibido. A pessoa informa a fonte. Se ela não estiver no workspace conectado, pare.
 
-Consulte o vocabulário com Scripts disponíveis, com `tags` de quem fala, do evento e do canal do texto, como `maria-silva`, `festival-de-verao` ou `palco`. Use a tag que o vocabulário já tem para esse contexto. A consulta com tags deixa de fora o termo de outra pessoa, de outro evento ou de outro canal. Sem saber quem fala no texto, pergunte. Com terminal e a CLI instalada, rode o comando. Sem terminal, ou sem a CLI, chame a ferramenta do servidor `vocabulary`. Sem os dois, como num agente do Notion, o vocabulário vem de uma fonte do workspace conectado que as instruções do projeto nomeiam. Sem essa fonte, pare e diga que a consulta roda numa ferramenta de código com o projeto aberto. Não leia o vocabulário de memória.
+Consulte o vocabulário com Scripts disponíveis, com `tags` de quem fala, do evento, do canal e do formato do texto, como `maria-silva`, `festival-de-verao`, `palco` ou `whatsapp`. Use a tag que o vocabulário já tem para esse contexto. A consulta com tags deixa de fora o termo de outra pessoa, de outro evento ou de outro canal. Sem saber quem fala no texto, pergunte. Com terminal e a CLI instalada, rode o comando. Sem terminal, ou sem a CLI, chame a ferramenta do servidor `vocabulary`. Sem os dois, como num agente do Notion, o vocabulário vem de uma fonte do workspace conectado que as instruções do projeto nomeiam. Sem essa fonte, pare e diga que a consulta roda numa ferramenta de código com o projeto aberto. Não leia o vocabulário de memória.
 
 Intenção clara, recorte específico e conexão humana. O que a pessoa precisa entender para agir. Como o texto se conecta com ela. Se faz ela sentir algo. Não fale para todo mundo. Não escreva fórmula genérica, ritmo previsível nem chamada vazia.
 
@@ -45,9 +45,19 @@ Intenção clara, recorte específico e conexão humana. O que a pessoa precisa 
 
 A copy respeita o tom de voz e o vocabulário, como a fonte diz. Termo proibido, frase genérica, texto com cara de IA e linguagem desalinhada ficam de fora, inclusive a pontuação e o diminutivo que o vocabulário proíbe. Escolha que enfraquece desejo, clareza, personalidade ou potência comercial fica de fora. Revisar e reescrever passam pelo mesmo portão.
 
-Termo situacional com tags entra só no texto desse contexto. A fala em primeira pessoa de uma pessoa não vai para o texto de outra. O grito de um evento não vai para outro evento. O `when` da linha continua valendo.
+Cada termo tem um de cinco níveis:
 
-Emoji, combinação de emojis e uso simbólico fazem parte do vocabulário e da identidade verbal. Não são decoração livre. Permitido entra. Proibido sai. Situacional só no contexto da linha. A combinação junta é um termo. Sem essa linha, pare. Não invente a regra de usar ou evitar. O cadastro segue `definir-vocabulario`.
+- `forbidden` nunca entra.
+- `strongly_discouraged` sai. Entra só se a pessoa pedir o termo ou se valer a exceção do `when`. No lugar, use a `substitution` ou um termo de `alternatives`.
+- `discouraged` entra só com a cena e o contexto que o `when` descreve. Sem essa cena no texto, troque.
+- `allowed_with_care` entra como o `when` diz.
+- `allowed` entra.
+
+Com as tags do canal e do formato, a consulta já devolve o nível que `allowed_in` e `forbidden_in` mudam. Linha antiga com `situationally_allowed` vale como `allowed_with_care`. Linha sem `description`, `when` ou `substitution` vale pelo nível: infira o uso pelo nível e pelos exemplos, sem criar regra nova. Na dúvida, pergunte.
+
+Termo com tags entra só no texto desse contexto. A fala em primeira pessoa de uma pessoa não vai para o texto de outra. O grito de um evento não vai para outro evento. O `when` da linha continua valendo.
+
+Emoji, combinação de emojis e uso simbólico fazem parte do vocabulário e da identidade verbal. Não são decoração livre. O nível da linha vale como para a palavra. A combinação junta é um termo. Sem essa linha, pare. Não invente a regra de usar ou evitar. O cadastro segue `definir-vocabulario`.
 
 Emoji marcado como evitar, proibido, ruim, desalinhado ou restrito não entra na versão final. Se ele aparecer, diga que é exemplo ruim, restrição ou referência negativa. Dúvida: consulte o vocabulário e pergunte antes de aprovar. Não troque a regra por gosto, tendência de rede ou estética genérica.
 
@@ -120,7 +130,7 @@ Se você consultar o vocabulário sem as tags do texto, a fala em primeira pesso
 Se você espalhar emoji sem a linha do vocabulário, o texto ganha um símbolo que a marca não definiu.
 
 1. Consulte o vocabulário.
-2. Permitido entra. Proibido sai. Situacional só no contexto da linha.
+2. Siga o nível da linha, como para a palavra.
 3. Sem linha, pare. Não invente se o emoji pode.
 
 ### Emoji a evitar
@@ -217,8 +227,9 @@ O título ficou específico, com o nome canônico que a fonte já tinha. Não vi
 
 - Texto fluido parece aprovado. Sem contexto, canal, público, fonte da marca, vocabulário e intenção, a copy espera.
 - Pontuação e diminutivo parecem neutros. Os que o vocabulário proíbe saem quando enfraquecem desejo, clareza, personalidade ou potência comercial.
+- Evitável parece permitido com moderação. Sem a cena do `when`, ele sai.
 - Uma frase cadastrada parece valer para qualquer texto. A fala em primeira pessoa de uma pessoa só entra no texto dela.
-- Emoji parece enfeite de legenda. Ele é vocabulário. Permitido, proibido e situacional vêm da linha. Sem linha, a copy espera.
+- Emoji parece enfeite de legenda. Ele é vocabulário. O nível vem da linha. Sem linha, a copy espera.
 - Um emoji na moda parece melhor que a regra. Evitar, proibido, ruim, desalinhado e restrito saem da versão final.
 - Um sinônimo parece resolver o clichê. A troca é imagem, cena, ação, efeito ou situação. A palavra literal, a frase rejeitada e o termo ligado ficam de fora.
 - Avisar que a chance já passou parece urgência. A alternativa mantém desejo, urgência e conversa natural sem essa perda consumada.
