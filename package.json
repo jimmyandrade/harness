@@ -1,6 +1,6 @@
 {
   "name": "vocabulary",
-  "version": "0.6.2",
+  "version": "0.7.0",
   "private": true,
   "type": "module",
   "description": "Vocabulary API, CLI, MCP, and voice skills for a project's brand glossary.",

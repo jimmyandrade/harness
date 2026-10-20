@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/jimmyandrade/vocabulary/compare/v0.6.2...v0.7.0) (2026-10-20)
+
+
+### Features
+
+* **redigir-com-tom-de-voz:** keep internal context out of messages and close with the next step ([#30](https://github.com/jimmyandrade/vocabulary/issues/30)) ([cc86054](https://github.com/jimmyandrade/vocabulary/commit/cc860544cadcfb7ccb6b137a4aff38c615c43ce9))
+
 ## [0.6.2](https://github.com/jimmyandrade/vocabulary/compare/v0.6.1...v0.6.2) (2026-10-20)
 
 
