@@ -5,13 +5,15 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.6.1"
+  version: "0.7.0"
   aliases:
     - definir-despesa
     - lancar-despesa
   related:
     - definir-ativo-imobilizado
+    - definir-empresa
     - definir-lancamento
+    - identificar-duplicata
     - lancar-despesa-pessoal
 ---
 
@@ -65,6 +67,21 @@ A inferência precisa de evidência no contexto da empresa, no produto ou na fin
 
 ### Passo 3
 
+Resolva a empresa recebedora com o nome e o CNPJ da evidência, inclusive ao complementar uma despesa já salva. Use `identificar-duplicata` antes de criar. A instituição de pagamento não é a empresa recebedora. Não deduza a razão social completa de um nome comercial.
+
+```mermaid
+flowchart LR
+  A[Busca a empresa pelo nome, variações e CNPJ] --> B{Resultado}
+  B -->|equivalente confirmado| C[Vincula a empresa existente à despesa]
+  B -->|identidade ambígua| D[Pergunta qual empresa antes de criar ou vincular]
+  B -->|nenhum equivalente| E{Identificação suficiente e cadastro permitido?}
+  E -->|sim| F[Segue definir-empresa com os dados comprovados]
+  F --> G[Vincula a página devolvida à mesma despesa]
+  E -->|não| H[Propõe o cadastro e pede só o dado ou a autorização necessária]
+```
+
+Não encerre com apenas "empresa não cadastrada" ou "vínculo pendente": entregue a ação realizada ou a proposta concreta e o bloqueio. Reaproveite a leitura e os comprovantes; cadastrar a recebedora não cria outra despesa.
+
 Grave os dados nas propriedades mapeadas, não no corpo. Separe a data do documento da data de pagamento. Não invente valor, data, conta, finalidade, categoria nem parcelas. Campo opcional ausente fica pendente, sem impedir o lançamento com os dados suficientes. Preserve o modelo da página.
 
 Anexe os originais na propriedade mapeada de comprovantes, sem novo reconhecimento. Mantenha as evidências anteriores ao complementar um lançamento. Preserve os dados confirmados e pergunte sobre conflito antes de sobrescrever. Uma transação ainda em processamento não equivale a conciliação concluída; uma cobrança sem confirmação não equivale a pagamento.
@@ -73,7 +90,7 @@ Pagamento numa moeda de `Moedas estrangeiras`: grave o valor original, o câmbio
 
 ### Passo 4
 
-Confira o registro salvo e os anexos. Entregue a página do lançamento e as pendências. Diga o que foi encontrado, criado ou complementado; não apresente transcrição como lançamento. O lançamento é a origem financeira da compra. A página do bem, a separação entre ativo e estoque e a compra de item controlável ficam com `definir-ativo-imobilizado`.
+Confira o registro salvo, os anexos e o vínculo da empresa recebedora. Entregue a página do lançamento e as pendências, distinguindo o dado que falta de um cadastro ainda não encaminhado. Diga o que foi encontrado, criado ou complementado; não apresente transcrição como lançamento. O lançamento é a origem financeira da compra. A página do bem, a separação entre ativo e estoque e a compra de item controlável ficam com `definir-ativo-imobilizado`.
 
 ## Problemas comuns
 
