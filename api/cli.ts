@@ -6,6 +6,8 @@
  * --language, --mode, and --validation apply to the whole batch. Each --term
  * starts a term. --categories, --examples, --rejected, --alternatives,
  * --related, --tags, --allowed-in, and --forbidden-in repeat once per value.
+ * --decided-by is the name of who decided; --decided-by-email and
+ * --decided-by-url add the rest of the people object of package.json.
  * --file reads the whole batch from a JSON file with the body of
  * POST /v1/terms, for a migration; --language, --mode, and --validation
  * still override it. migrate rewrites the rows that use a deprecated state or
@@ -45,6 +47,8 @@ const FIELDS = new Set([
   "substitution",
   "when",
   "decided_by",
+  "decided_by_email",
+  "decided_by_url",
   "source",
   ...LISTS,
 ])
@@ -66,6 +70,8 @@ const MISSING: Record<string, string> = {
   allowed_in: "Provide the tags.",
   forbidden_in: "Provide the tags.",
   decided_by: "Provide who decided.",
+  decided_by_email: "Provide the e-mail of who decided.",
+  decided_by_url: "Provide the URL of who decided.",
   source: "Provide the source.",
   validation: "validation is optional, warn, or enforce.",
   file: "Provide the file.",
@@ -73,7 +79,24 @@ const MISSING: Record<string, string> = {
   text: "Provide the text.",
 }
 
-type Draft = Record<string, string | string[] | boolean>
+type Draft = Record<string, string | string[] | boolean | Record<string, string>>
+
+const PERSON_PARTS: Record<string, string> = { decided_by_email: "email", decided_by_url: "url" }
+
+/**
+ * --decided-by is the name. --decided-by-email and --decided-by-url turn it
+ * into the people object of package.json.
+ */
+function withPerson(draft: Draft): Draft {
+  const parts = Object.keys(PERSON_PARTS).filter((key) => typeof draft[key] === "string")
+  if (parts.length === 0) return draft
+  const { decided_by_email, decided_by_url, ...rest } = draft
+  if (typeof rest.decided_by !== "string") throw new InvalidGlossary("Provide the name of who decided with --decided-by.")
+  const person: Record<string, string> = { name: rest.decided_by }
+  if (typeof decided_by_email === "string") person.email = decided_by_email
+  if (typeof decided_by_url === "string") person.url = decided_by_url
+  return { ...rest, decided_by: person }
+}
 
 export function run(argv: string[]): number {
   try {
@@ -180,7 +203,7 @@ export function termsFrom(args: readonly string[]): {
     return { ...batch, language: language ?? batch.language, mode: mode ?? batch.mode, validation: validation ?? batch.validation }
   }
   if (terms.length === 0) throw new InvalidGlossary("Provide the terms.")
-  return { language, mode, validation, terms }
+  return { language, mode, validation, terms: terms.map(withPerson) }
 }
 
 function readBatch(file: string): { language?: string; mode?: string; validation?: string; terms: unknown[] } {

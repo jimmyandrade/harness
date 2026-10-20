@@ -179,12 +179,39 @@ test("decided_by and source are stored, and an upsert finds a renamed term by it
   const stored = JSON.parse(readFileSync(file, "utf8"))
   assert.equal(stored.baratinho, undefined)
   assert.equal(stored.barateza.source, source)
-  assert.equal(stored.barateza.decided_by, "Maria Silva")
+  assert.deepEqual(stored.barateza.decided_by, { name: "Maria Silva" })
   assert.deepEqual(stored["acessível"].related, ["barateza"])
   const same = writeTerms(root, "pt-BR", "upsert", terms([
     { state: "forbidden", term: "barateza", description: "barato demais", decided_by: "Maria Silva", source },
   ]))
   assert.equal(same.unchanged.length, 1)
+})
+
+test("decided_by keeps the people object, and a plain name from an older row reads as its name", () => {
+  const { root, file } = glossary()
+  writeFileSync(file, `${JSON.stringify({ casa: { state: "allowed", description: "lugar", reason: "simples", decided_by: "Maria Silva" } }, null, 2)}\n`)
+  const person = { name: "Maria Silva", email: "maria.silva@example.com" }
+  const same = writeTerms(root, "pt-BR", "upsert", terms([
+    { state: "allowed", term: "casa", description: "lugar", reason: "simples", decided_by: "Maria Silva" },
+  ]))
+  assert.equal(same.unchanged.length, 1)
+  const changed = writeTerms(root, "pt-BR", "upsert", terms([
+    { state: "allowed", term: "casa", description: "lugar", reason: "simples", decided_by: person },
+  ]))
+  assert.equal(changed.updated.length, 1)
+  assert.deepEqual(changed.updated[0]?.decided_by, person)
+  assert.deepEqual(JSON.parse(readFileSync(file, "utf8")).casa.decided_by, person)
+})
+
+test("decided_by with an invalid e-mail or an unknown key is refused", () => {
+  const { root, file } = glossary()
+  assert.throws(() => writeTerms(root, "pt-BR", "insert", terms([
+    { state: "allowed", term: "casa", description: "lugar", reason: "simples", decided_by: { name: "Maria Silva", email: "maria" } },
+  ])))
+  assert.throws(() => writeTerms(root, "pt-BR", "insert", terms([
+    { state: "allowed", term: "casa", description: "lugar", reason: "simples", decided_by: { name: "Maria Silva", role: "tom de voz" } },
+  ])))
+  assert.equal(readFileSync(file, "utf8"), "{}\n")
 })
 
 test("two terms with the same source in one batch are refused", () => {

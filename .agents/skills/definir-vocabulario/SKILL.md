@@ -3,7 +3,7 @@ name: definir-vocabulario
 description: Use essa habilidade sempre que for cadastrar ou atualizar um ou mais termos do vocabulário do tom de voz, mesmo sem dizer glossário, lote ou estado. NÃO use para escrever, revisar ou aprovar o texto da marca, classificar uma frase, perguntar quais variações de gênero, número ou grafia foram cadastradas, nem inventar um termo que a pessoa não enviou.
 metadata:
   author: jimmyandrade
-  version: "0.25.0"
+  version: "0.26.0"
   related:
     - evoluir-habilidade
     - procurar-variacao-de-termo
@@ -18,6 +18,7 @@ metadata:
 "Modo de aprendizado": "perguntar"
 "Categorias": {}
 "Validação dos campos": "warn"
+"Domínio do e-mail de quem decide": ""
 ```
 
 ## Instruções
@@ -65,7 +66,7 @@ Valide o plano antes de gravar.
 - `reason` só nos níveis de uso e diz por que usamos. `description` explica a palavra, e o motivo de evitar fica nela. Não copie um no outro.
 - `forbidden` e `strongly_discouraged` recusam `examples`. O exemplo ruim vai em `rejected`.
 - Campo esperado que a pessoa não tem fica de fora. A escrita grava e devolve em `incomplete`. Diga essa lista. Não invente o campo. Passe `Validação dos campos` em `validation`.
-- Quem decidiu vai em `decided_by`. O endereço da linha de origem vai em `source`.
+- Quem decidiu vai em `decided_by`, como os campos de pessoa do `package.json`: `name`, `email` e, se houver, `url`. O e-mail é o individual da pessoa no workspace, nunca o de uma conta de função compartilhada. Com `Domínio do e-mail de quem decide` preenchido, o e-mail termina nesse domínio. Sem o e-mail, pergunte. O endereço da linha de origem vai em `source`.
 - Um termo não é o próprio exemplo. A mesma grafia não entra duas vezes.
 - Emoji, combinação e uso simbólico são termo. A combinação junta é um termo. Não é decoração.
 - `state` é a permissão. `description` não repete o estado.
@@ -274,6 +275,8 @@ Casa ficou permitida. Casas ganhou a própria linha, proibida. Moradias ganhou a
 
 ## Pegadinhas
 
+- O e-mail de uma conta de função, como o de uma área, parece identificar quem decidiu. A conta fica quando a pessoa sai: grave o e-mail individual.
+- Um `decided_by` em texto, de uma linha antiga, é só o nome. A próxima escrita dessa linha guarda o objeto.
 - A categoria parece seguir o idioma do vocabulário. Ela é uma palavra em inglês em qualquer idioma.
 - Cadastrar parece reescrever o que já está. Com `insert`, a linha que já existe fica.
 - A maiúscula do pedido parece a grafia a guardar. Termo novo fica em minúsculas. A linha que já existe conserva a grafia guardada.
@@ -294,7 +297,7 @@ Casa ficou permitida. Casas ganhou a própria linha, proibida. Moradias ganhou a
 
 - `node node_modules/vocabulary/dist/cli.js lookup --language <idioma> --term <termo>` lê um termo e devolve se ele existe e a linha guardada.
 - `node node_modules/vocabulary/dist/cli.js exists --language <idioma> --text <trecho>` devolve só o registro de cada token do trecho para se ele existe.
-- `node node_modules/vocabulary/dist/cli.js terms` grava o lote. `--language`, `--mode` e `--validation` valem para o lote. Cada `--term` abre um termo, com `--state`, `--description`, `--reason`, `--when`, `--substitution`, `--decided-by` e `--source`. `--categories`, `--examples`, `--rejected`, `--alternatives`, `--related`, `--tags`, `--allowed-in` e `--forbidden-in` repetem, um valor por vez. `--file` lê o lote inteiro de um JSON.
+- `node node_modules/vocabulary/dist/cli.js terms` grava o lote. `--language`, `--mode` e `--validation` valem para o lote. Cada `--term` abre um termo, com `--state`, `--description`, `--reason`, `--when`, `--substitution`, `--decided-by`, `--decided-by-email`, `--decided-by-url` e `--source`. `--decided-by` é o nome. Os dois seguintes completam o objeto. `--categories`, `--examples`, `--rejected`, `--alternatives`, `--related`, `--tags`, `--allowed-in` e `--forbidden-in` repetem, um valor por vez. `--file` lê o lote inteiro de um JSON.
 - `--glossary`, antes do comando, aponta outro vocabulário.
 - `lookup_term`, `exists_in_text` e `write_terms`, no servidor `vocabulary`, fazem a mesma consulta e a mesma escrita quando não há terminal.
 

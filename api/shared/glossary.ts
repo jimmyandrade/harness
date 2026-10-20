@@ -21,7 +21,10 @@
  * while a glossary migrates. examples, rejected, alternatives, and related name
  * other terms in the same file. tags say where the row exists. allowed_in and
  * forbidden_in change the level when a read carries one of those tags.
- * decided_by names who decided, and source where the row came from. Any row
+ * decided_by is who decided, as the people fields of package.json: an object
+ * with name and optionally email and url. A plain string still reads as the
+ * name, and the next write stores it as an object. source is where the row
+ * came from. Any row
  * may keep case_sensitive: true, for a brand spelling such as "iPhone". Its
  * key keeps that casing. A read still finds it in another case and says the
  * casing does not match.
@@ -49,12 +52,14 @@ import {
   glossaryFileSchema,
   isLegacyState,
   levelOf,
+  samePerson,
   stateSchema,
   type AllowedRequest,
   type BulkTerm,
   type ForbiddenRequest,
   type LegacyState,
   type Migration,
+  type Person,
   type SituationalRequest,
   type State,
   type TermRegistration,
@@ -96,7 +101,7 @@ export type Entry = {
   tags?: readonly string[]
   allowedIn?: readonly string[]
   forbiddenIn?: readonly string[]
-  decidedBy?: string
+  decidedBy?: Person
   source?: string
   caseSensitive?: boolean
 }
@@ -748,7 +753,7 @@ function sameFields(entry: Entry, item: BulkTerm): boolean {
     && entry.reason === item.reason
     && entry.substitution === item.substitution
     && entry.when === item.when
-    && entry.decidedBy === item.decided_by
+    && samePerson(entry.decidedBy, item.decided_by)
     && entry.source === item.source
     && sameList(entry.examples, item.examples)
     && sameList(entry.rejected, item.rejected)

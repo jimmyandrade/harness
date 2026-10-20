@@ -437,9 +437,38 @@ test("terms takes the new fields as flags", () => {
     examples: [],
     allowed_in: ["whatsapp"],
     forbidden_in: ["feed"],
-    decided_by: "Maria Silva",
+    decided_by: { name: "Maria Silva" },
     source: "https://example.com/terms/7",
   })
+})
+
+test("terms builds the people object from --decided-by, --decided-by-email, and --decided-by-url", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  const file = join(root, "pt-BR.json")
+  writeFileSync(file, "{}\n")
+  const { code } = capture([
+    "--glossary", root, "terms", "--language", "pt-BR", "--mode", "insert",
+    "--state", "allowed", "--term", "artista", "--description", "sem artigo", "--reason", "não marca gênero",
+    "--decided-by", "Maria Silva", "--decided-by-email", "maria.silva@example.com", "--decided-by-url", "https://example.com/maria",
+  ])
+  assert.equal(code, 0)
+  assert.deepEqual(JSON.parse(readFileSync(file, "utf8")).artista.decided_by, {
+    name: "Maria Silva",
+    email: "maria.silva@example.com",
+    url: "https://example.com/maria",
+  })
+})
+
+test("terms refuses --decided-by-email without --decided-by", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  const file = join(root, "pt-BR.json")
+  writeFileSync(file, "{}\n")
+  const { code } = capture([
+    "--glossary", root, "terms", "--language", "pt-BR", "--mode", "insert",
+    "--state", "allowed", "--term", "artista", "--decided-by-email", "maria.silva@example.com",
+  ])
+  assert.notEqual(code, 0)
+  assert.equal(readFileSync(file, "utf8"), "{}\n")
 })
 
 test("terms --file imports a batch and reports inserted, updated, and incomplete", () => {

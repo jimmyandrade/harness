@@ -108,7 +108,16 @@ const tools = [
                 items: { type: "string" },
                 description: "Kebab-case formats or channels where the term is forbidden, such as feed. A read with that tag returns forbidden, even if allowed_in has it too.",
               },
-              decided_by: { type: "string", description: "Who decided the level." },
+              decided_by: {
+                type: "object",
+                description: "Who decided the level, as the people fields of package.json. Use the individual e-mail of the person, never a shared role account.",
+                properties: {
+                  name: { type: "string", description: "The name of who decided." },
+                  email: { type: "string", description: "The individual e-mail of who decided." },
+                  url: { type: "string", description: "A URL of who decided, such as a profile page." },
+                },
+                required: ["name"],
+              },
               source: { type: "string", description: "Where the row came from, such as the URL of a page. An upsert finds a renamed term by it." },
               case_sensitive: {
                 type: "boolean",

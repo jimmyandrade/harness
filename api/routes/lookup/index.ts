@@ -18,7 +18,7 @@ import { fileURLToPath } from "node:url"
 import { Glossary, InvalidGlossary, applicable, caseMatches, collapse, effectiveState, findConcept, type Entry } from "../../shared/glossary.ts"
 import { parseBody, type Route } from "../../shared/http.ts"
 import { readOptions, report } from "../../shared/options.ts"
-import { lookupRequest } from "../../shared/schema.ts"
+import { lookupRequest, type Person } from "../../shared/schema.ts"
 
 export type TermLookup = {
   language: string
@@ -41,7 +41,7 @@ export type TermLookup = {
   tags?: readonly string[]
   allowed_in?: readonly string[]
   forbidden_in?: readonly string[]
-  decided_by?: string
+  decided_by?: Person
   source?: string
   case_sensitive?: true
   case_matches?: boolean

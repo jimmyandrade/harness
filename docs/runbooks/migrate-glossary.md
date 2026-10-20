@@ -52,7 +52,7 @@ Run the commands from the project that holds the glossary. With the MCP server i
          "description": "Why the term is avoided.",
          "alternatives": ["another term"],
          "forbidden_in": ["feed"],
-         "decided_by": "Person name",
+         "decided_by": { "name": "Person name", "email": "person@example.com" },
          "source": "https://example.com/row/1"
        }
      ]
@@ -63,6 +63,7 @@ Run the commands from the project that holds the glossary. With the MCP server i
    - Replacement terms go in `alternatives`. A missing one is created `allowed`.
    - Formats and channels are lowercase kebab-case, as in `tags`.
    - Leave out a field the row does not have. Do not write an empty string.
+   - `decided_by` is the people object of `package.json`: `name`, and optionally `email` and `url`. Use the individual e-mail of the person, never a shared role account.
 
 5. Import it:
 

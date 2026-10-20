@@ -166,6 +166,34 @@ const optionalProse = (message: string) =>
     .transform((text) => (text === "" ? undefined : text))
     .optional()
 
+/**
+ * Who decided a level, in the shape of the people fields of package.json:
+ * a name, and optionally an e-mail and a URL. A plain string is the name of
+ * a row written before the object, and reads as { name }.
+ */
+export const personSchema = z.strictObject(
+  {
+    name: prose("Provide the name of who decided."),
+    email: z.email({ error: "Provide a valid e-mail of who decided." }).optional(),
+    url: z.url({ error: "Provide a valid URL of who decided." }).optional(),
+  },
+  { error: "Provide who decided as a name or an object with name, email, and url." },
+)
+export type Person = z.infer<typeof personSchema>
+
+const decidedBySchema = z.union(
+  [
+    z.string().transform(collapse).transform((name): Person | undefined => (name === "" ? undefined : { name })),
+    personSchema,
+  ],
+  { error: "Provide who decided as a name or an object with name, email, and url." },
+)
+
+export function samePerson(a: Person | undefined, b: Person | undefined): boolean {
+  if (a === undefined || b === undefined) return a === b
+  return a.name === b.name && a.email === b.email && a.url === b.url
+}
+
 export const categoryListSchema = z
   .array(categorySchema, { error: "Provide the categories as a list." })
   .superRefine((categories, ctx) => {
@@ -200,7 +228,7 @@ const bulkTermObject = z.object(
     tags: tagListSchema.default([]),
     allowed_in: tagListSchema.default([]),
     forbidden_in: tagListSchema.default([]),
-    decided_by: optionalProse("Provide who decided."),
+    decided_by: decidedBySchema.optional(),
     source: optionalProse("Provide the source."),
     case_sensitive: caseSensitiveSchema,
   },
@@ -325,7 +353,7 @@ export const termRegistrationSchema = z.object({
   tags: z.array(z.string()).optional(),
   allowed_in: z.array(z.string()).optional(),
   forbidden_in: z.array(z.string()).optional(),
-  decided_by: z.string().optional(),
+  decided_by: personSchema.optional(),
   source: z.string().optional(),
   case_sensitive: z.literal(true).optional(),
 })
@@ -403,7 +431,7 @@ export const glossaryRowSchema = z
         .optional(),
       allowed_in: fileTags("allowed_in"),
       forbidden_in: fileTags("forbidden_in"),
-      decided_by: fileProse("decided_by"),
+      decided_by: decidedBySchema.optional(),
       source: fileProse("source"),
       case_sensitive: z.boolean({ error: "A glossary case_sensitive is not true or false." }).optional(),
     },
