@@ -3,10 +3,11 @@ name: criar-habilidade
 description: Cria, adiciona e escreve skills a partir de uma tarefa real. Usada quando a pessoa quer uma skill nova, mesmo sem dizer skill. Não serve para editar código, escrever página que não seja skill, otimizar só a descrição nem gravar a skill no Notion.
 metadata:
   author: jimmyandrade
-  version: "3.11.0"
+  version: "3.12.0"
   related:
     - criar-commit
     - criar-pull-request
+    - definir-arquivos-da-habilidade
     - descrever-habilidade-ou-schema
     - evoluir-habilidade
 ---
@@ -39,6 +40,7 @@ Leia relatórios reais da equipe. Incorpore o esquema, o modo de falha e o proce
 
 Escreva nome, descrição, metadados e corpo.
 O primeiro heading de nível 2 é `Parâmetros de configuração`, com um bloco `yaml`. O passo cita a chave. Depois vêm `Instruções`, `Problemas comuns`, `Exemplos de entrada e saída`, `Casos-limite`, `Pegadinhas` e `Scripts disponíveis`. A primeira frase é `Estes exemplos ilustram fatos. Eles podem não estar no data source.` A entrada é um heading de nível 3 e a saída é o parágrafo seguinte, com uma linha em branco entre pares. Não escreva `Entrada:` nem `Saída:`. Cada heading de nível 3 em `Instruções` é `Passo 1`, `Passo 2`. Roteamento para outra habilidade, ou mais de um desfecho, fica num flowchart Mermaid no sentido configurado. Em `Problemas comuns`, cada problema é um heading de nível 3, um parágrafo que começa com `Se você` e, em seguida, uma lista ordenada. O bloco de parâmetros inclui `"Modo de aprendizado": "perguntar"`, e o último passo de `Instruções` é `Ao terminar, siga evoluir-habilidade conforme Modo de aprendizado.`
+Pastas, scripts, referências, modelos e `Scripts disponíveis` seguem `definir-arquivos-da-habilidade`.
 
 ### Passo 4
 
@@ -108,36 +110,15 @@ Para cada trecho, pergunte se o agente erraria sem essa instrução. Se a respos
 
 O escopo é uma unidade de trabalho coerente, que se junta a outras skills. Escopo estreito demais obriga a carregar várias skills na mesma tarefa e mistura instruções. Escopo amplo demais dificulta disparar a skill. Consultar uma fonte e formatar o resultado cabe junto. Administrar o armazenamento além disso já é outra skill.
 Mantenha o detalhe moderado: passos curtos e um exemplo prático. Se estiver cobrindo todo caso de borda possível, deixe a maioria para o julgamento do agente.
-
-### Passo 13
-
-A pasta da skill tem `SKILL.md`. `scripts/`, `references/`, `assets/` e `features/` são opcionais. `features/` é o teste Gherkin, em português. `scripts/` é código executável. `references/` é documentação lida sob demanda.
-Script de uma skill fica em `scripts/` dela. No Notion, é arquivo dessa página. Script usado por várias skills fica em `.agents/scripts/<nome>/`. No Notion, não entra na página de uma skill só.
-Tabela que estoura o limite vai para `references/`, com a condição de leitura. "Leia o material se a API não retornar 200" serve.
 Onde houver várias abordagens válidas, explique o porquê, escolha um padrão e mencione as alternativas por pouco. Onde a operação for sensível, a consistência importar ou a sequência for obrigatória, prescreva os passos. Calibre cada parte. A skill ensina a abordar uma categoria de problemas, não a saída de um caso só.
 
-### Passo 14
-
-Modelo de entrada ou saída não entra no corpo, nem quando é curto.
-Modelo de saída fica em `.agents/assets/templates/`, fora da skill. No corpo, uma frase e nada antes dela: `Leia .agents/assets/templates/<modelo> quando for gerar a saída.`
-Modelo de entrada de uma skill fica em `assets/` dela. Modelo de entrada de várias skills fica em `.agents/assets/`. No corpo: `Leia assets/<modelo> quando for pedir a entrada.` ou `Leia .agents/assets/<modelo> quando for pedir a entrada.`
-No Notion, o modelo de saída não entra na página de uma skill. O modelo de entrada da skill, anexe à página. `assets/<modelo>` viaja com a skill. Nos dois casos, o arquivo entra só quando a frase manda ler.
-
-### Passo 15
+### Passo 13
 
 Num fluxo de vários passos, principalmente quando um passo depende de outro ou há um portão de validação, dê um checklist explícito para o agente marcar o que já fez e não pular etapa.
 Antes de seguir, o agente valida o próprio trabalho: faz, roda um validador, corrige e repete até passar. O validador é um script, um checklist ou uma revisão.
 Em operação em lote ou destrutiva, o agente primeiro grava um plano estruturado, valida esse plano contra a fonte de verdade e só então executa.
 
-### Passo 16
-
-Feche com `Scripts disponíveis`: uma lista dos scripts e, em seguida, a lista ordenada de execução. Sem script, a lista é `Nenhum.` e a execução diz que não há script.
-Os passos não citam comando nem nome de arquivo. O passo diz o que será feito. O comando fica só em `Scripts disponíveis`.
-Comando curto fica nessa seção, com versão fixa quando o ecossistema permite. Comando longo vira script testado em `scripts/`.
-Se um pacote já resolve, cite o comando nessa seção e não crie `scripts/`. O pré-requisito também vai em `compatibility`.
-No Notion o script pode faltar. A lista ordenada separa os dois caminhos. O passo escolhe no início, sem repetir o comando.
-
-### Passo 17
+### Passo 14
 
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
@@ -211,14 +192,6 @@ Se você explicar o que uma ferramenta é ou listar todo caso de borda possível
 2. Se a dúvida permanecer, teste com `evoluir-habilidade`.
 3. Se a tarefa inteira já sai certa sem a skill, não crie a skill.
 
-### Modelo no corpo
-
-Se você descrever o formato em texto corrido ou colar o modelo na skill, o agente deixa de casar a estrutura e o modelo entra em toda execução.
-
-1. Mova o modelo de saída para `.agents/assets/templates/`. O de entrada, para `assets/` da skill ou, se várias usam, para `.agents/assets/`.
-2. Deixe no corpo só a frase que manda ler o arquivo quando for pedir a entrada ou gerar a saída.
-3. Não leia o modelo em nenhum outro passo.
-
 ### Execução sem validação
 
 Se você mandar executar uma operação destrutiva ou em lote sem plano e sem validador, o agente erra sem volta.
@@ -235,14 +208,6 @@ Se você renomear o `name` e tratar a versão como correção ou funcionalidade,
 2. Ponha `!` depois do tipo no assunto.
 3. Comece o rodapé com `BREAKING CHANGE:` e cite o nome antigo e o novo.
 4. Grave cada nome anterior em `metadata.aliases` e mantenha os que já existiam.
-
-### Script compartilhado na skill
-
-Se você deixar em uma skill um script que outras também usam, ele fica preso na página dessa skill.
-
-1. Mova para `.agents/scripts/<nome>/`.
-2. Aponte as skills para esse caminho.
-3. Não anexe o arquivo à página de uma skill só.
 
 ### Verbo errado no nome
 
@@ -299,10 +264,8 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 - O material chega colado de outro lugar: sintetize a skill a partir dele do mesmo jeito.
 - A operação é sensível ou a sequência é obrigatória: prescreva os passos.
 - A operação é destrutiva ou em lote: plano, validação contra a fonte de verdade, e só então a execução.
-- A skill passaria de `Linhas` ou de `Tokens do corpo`: proponha `references/` e a condição de leitura.
 - O `name` muda: a versão e o commit são breaking change.
 - O escopo muda e o nome ainda descreve o escopo antigo: renomeie.
-- O script vale para uma skill: `scripts/` dentro dela. Vale para várias: `.agents/scripts/<nome>/`.
 - A skill não vai para o Notion: `metadata.notion` é `"false"`. Vai para o Notion: o campo não existe.
 - O data source muda ou o workspace conectado é outro: a pessoa informa o data source na execução. Se não estiver nessa conexão, pare.
 - O fato não óbvio está só em `references/`: traga para `Pegadinhas`.
@@ -312,7 +275,6 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 - Não invente quantidade. Se o número não estiver no material, peça.
 - Um nome, uma data ou um alias só entra em `Exemplos de entrada e saída`, depois da frase `Estes exemplos ilustram fatos. Eles podem não estar no data source.` Fora dali, o fato fica no data source. O teste em `features/` e em `evals.json` pode usá-lo.
 - Não invente caso de eval. `evals/evals.json` começa vazio.
-- Modelo de saída não entra no corpo. Fica em `.agents/assets/templates/`.
 - O fato que o agente erraria fica em `Pegadinhas`, antes de `Scripts disponíveis`. `references/` só entra se a frase disser quando abrir. Problema não óbvio o agente não reconhece sozinho.
 - A primeira versão fica em `0.x`. `1.0.0` pede 3 casos validados com a pessoa.
 - Skill sobre escrever skills também sincroniza. A página no Notion é só leitura. A escrita segue `criar-commit`.
