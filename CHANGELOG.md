@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.49.2](https://github.com/jimmyandrade/harness/compare/v0.49.1...v0.49.2) (2026-10-20)
+
+
+### Bug Fixes
+
+* **check-skill:** accept parameters of skills from installed plugins ([#273](https://github.com/jimmyandrade/harness/issues/273)) ([d1139d3](https://github.com/jimmyandrade/harness/commit/d1139d3903444e4f6895ca4fd43c8ef7287f2191))
+
 ## [0.49.1](https://github.com/jimmyandrade/harness/compare/v0.49.0...v0.49.1) (2026-10-20)
 
 
