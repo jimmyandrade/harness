@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.8.0](https://github.com/jimmyandrade/vocabulary/compare/v0.7.0...v0.8.0) (2026-10-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* classify and lookup return one of five levels, so a stored situationally_allowed row reads as allowed_with_care with legacy_state. Registrations and new rows carry categories instead of category. The refusal messages for when and tags on a general rule changed. Run migrate to rewrite an existing glossary.
+
+### Features
+
+* rate glossary terms on five levels ([#34](https://github.com/jimmyandrade/vocabulary/issues/34)) ([8484226](https://github.com/jimmyandrade/vocabulary/commit/84842263d14ca924cb8409e92e23f45e019647bd))
+
 ## [0.7.0](https://github.com/jimmyandrade/vocabulary/compare/v0.6.2...v0.7.0) (2026-10-20)
 
 

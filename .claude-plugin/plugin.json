@@ -1,7 +1,7 @@
 {
   "name": "vocabulary",
   "description": "Skills that register brand glossary terms and write in the voice of the project that is open.",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "author": {
     "name": "Jimmy Andrade",
     "url": "https://github.com/jimmyandrade"
