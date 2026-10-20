@@ -336,6 +336,15 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses creating the company, changing the record name, and answering the email, the registration, or the task
 
+### definir-historia-de-usuario
+- **Stability**: draft
+- **Description**: Write, review, or refine the user story of a demand
+- **Properties**:
+  - Lives at `.agents/skills/definir-historia-de-usuario/SKILL.md`
+  - Holds only the title until its procedure is written from a real task
+- **Test Criteria**:
+  - [x] The skill is present at that path
+
 ### definir-instrucoes-do-projeto
 - **Stability**: experimental
 - **Description**: Write and review a project's instructions file so that it holds only what every session needs, as ADR 0008 decides
@@ -387,6 +396,19 @@ How these skills relate is in `README.md`, in this folder.
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses only celebrating without saving, only looking up who registered, and deciding whether a task exists
+
+### definir-issue
+- **Stability**: experimental
+- **Description**: Open, review, edit, or translate a GitHub issue for a technical demand
+- **Properties**:
+  - Lives at `.agents/skills/definir-issue/SKILL.md`, with the output template at `.agents/assets/templates/issue-do-github.md`
+  - Reads `Repositório` from the project instructions or the `origin` remote, and `Idioma da issue`, declared in `Global` and overridden per project
+  - Searches open and closed issues before opening one, and stops when one already covers the demand
+  - Writes a Conventional Commits title whose type comes from the effect of the delivery, with the description and the body in `Idioma da issue`
+  - Writes the problem with the real case, the proposal, and a verifiable done criterion
+  - Translates an issue in another language without losing links or references
+- **Test Criteria**:
+  - [x] The skill is present at that path
 
 ### definir-jornada-de-producao
 - **Stability**: experimental
