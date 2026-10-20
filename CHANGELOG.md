@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.9.0](https://github.com/jimmyandrade/vocabulary/compare/v0.8.0...v0.9.0) (2026-10-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* a write of a form that differs from a stored row only by an accent inserts a new row instead of updating the stored one, and lookup no longer returns duplicates or canonical.
+
+### Features
+
+* tell glossary terms apart by accents ([#37](https://github.com/jimmyandrade/vocabulary/issues/37)) ([3575ed7](https://github.com/jimmyandrade/vocabulary/commit/3575ed754fa7e9328d966cfc803154a8c02b28f4))
+
 ## [0.8.0](https://github.com/jimmyandrade/vocabulary/compare/v0.7.0...v0.8.0) (2026-10-20)
 
 
