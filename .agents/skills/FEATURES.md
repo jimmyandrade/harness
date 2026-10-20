@@ -238,6 +238,19 @@ How these skills relate is in `README.md`, in this folder.
 - **Test Criteria**:
   - [x] The skill is present at that path
 
+### definir-artista
+- **Stability**: experimental
+- **Description**: Register or review an artist or band in the artists database from loose material
+- **Properties**:
+  - Lives at `.agents/skills/definir-artista/SKILL.md`, moved from a business harness
+  - Reads the artists data source name, the field names, the entry curation status, the page and Spotify profile templates, and the sensitive and automatic fields from the project instructions
+  - Runs procurar-artista first, and stops when it finds several pages
+  - Shows a plan with the current value, the proposed value, and the source of each field, and writes only after confirmation
+  - Keeps dated facts in chronological comments on the artist page, never in the internal notes
+  - Writes sensitive fields only with the artist's consent, and keeps member documents on each person's page
+- **Test Criteria**:
+  - [x] The skill is present at that path
+
 ### definir-ativo-imobilizado
 - **Stability**: experimental
 - **Description**: Register, review, and govern a durable fixed asset
@@ -854,6 +867,18 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description opens on a nickname of the calendar from the project, and on a question about how the day is, what the person has today, or what is already on the day or the week
   - [x] The description refuses reverse planning, auditing time use, reserving, creating or changing the agenda, registering a significant date, and managing travel
+
+### procurar-artista
+- **Stability**: experimental
+- **Description**: Find whether an artist or band is already in the artists database from loose material
+- **Properties**:
+  - Lives at `.agents/skills/procurar-artista/SKILL.md`, with `scripts/read-profile.py`, moved from a business harness
+  - Reads the artists and events data source names, the related data sources, and the field names from the project instructions
+  - Searches one identifier at a time by exact query, and treats a matching name alone as a hypothesis
+  - Reads Spotify and YouTube links through their embed and oEmbed pages, which answer without login
+  - Writes nothing and routes to definir-artista or mesclar-registro
+- **Test Criteria**:
+  - [x] The skill is present at that path
 
 ### procurar-data-significativa
 - **Stability**: experimental

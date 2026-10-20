@@ -23,6 +23,7 @@ flowchart LR
     definir_agenda["definir-agenda"]
     definir_agenda_de_popstar["definir-agenda-de-popstar"]
     definir_arquivos_da_habilidade["definir-arquivos-da-habilidade"]
+    definir_artista["definir-artista"]
     definir_ativo_imobilizado["definir-ativo-imobilizado"]
     definir_conta_bancaria["definir-conta-bancaria"]
     definir_convidado["definir-convidado"]
@@ -57,6 +58,7 @@ flowchart LR
     organizar_emails["organizar-emails"]
     organizar_ponto_de_contato["organizar-ponto-de-contato"]
     procurar_agenda["procurar-agenda"]
+    procurar_artista["procurar-artista"]
     procurar_data_significativa["procurar-data-significativa"]
     procurar_email["procurar-email"]
     procurar_inscricao["procurar-inscricao"]
@@ -119,6 +121,11 @@ flowchart LR
   definir_agenda_de_popstar --> revisar_uso_do_tempo
   definir_arquivos_da_habilidade --> criar_habilidade
   definir_arquivos_da_habilidade --> evoluir_habilidade
+  definir_artista --> definir_empresa
+  definir_artista --> definir_perfil_social
+  definir_artista --> definir_pessoa
+  definir_artista --> evoluir_habilidade
+  definir_artista --> procurar_artista
   definir_ativo_imobilizado --> definir_empresa
   definir_ativo_imobilizado --> gerenciar_estoque
   definir_ativo_imobilizado --> identificar_duplicata
@@ -259,6 +266,9 @@ flowchart LR
   procurar_agenda --> organizar_ponto_de_contato
   procurar_agenda --> procurar_oportunidade
   procurar_agenda --> revisar_uso_do_tempo
+  procurar_artista --> definir_artista
+  procurar_artista --> evoluir_habilidade
+  procurar_artista --> mesclar_registro
   procurar_data_significativa --> definir_data_significativa
   procurar_email --> definir_grafia
   procurar_email --> procurar_inscricao
