@@ -3,7 +3,7 @@ name: definir-arquivos-da-habilidade
 description: Define onde ficam os scripts, referências, modelos e testes de uma skill e escreve Scripts disponíveis. Usada quando a skill ganha, move ou renomeia um arquivo além do SKILL.md. Não serve para escrever o texto da skill, a descrição nem gravar no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   related:
     - criar-habilidade
     - evoluir-habilidade
@@ -13,7 +13,10 @@ metadata:
 
 ## Parâmetros de configuração
 
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo.
+
 ```yaml
+"Idioma do nome dos scripts": "inglês"
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -23,6 +26,7 @@ metadata:
 
 A pasta da skill tem `SKILL.md`. `scripts/`, `references/`, `assets/` e `features/` são opcionais. `features/` é o teste Gherkin, em português. `scripts/` é código executável. `references/` é documentação lida sob demanda.
 Script de uma skill fica em `scripts/` dela. No Notion, é arquivo dessa página. Script usado por várias skills fica em `.agents/scripts/<nome>/`. No Notion, não entra na página de uma skill só.
+O nome do script, e o da pasta dele em `.agents/scripts/`, fica no `Idioma do nome dos scripts`, sem acento e na convenção de nome da linguagem.
 Tabela que estoura o limite vai para `references/`, com a condição de leitura. "Leia o material se a API não retornar 200" serve.
 
 ### Passo 2
@@ -74,6 +78,7 @@ O script sai de `scripts/` da primeira skill e vai para `.agents/scripts/check-s
 
 - O script vale para uma skill: `scripts/` dentro dela. Vale para várias: `.agents/scripts/<nome>/`.
 - A skill passaria do limite de linhas ou de tokens do corpo: proponha `references/` e a condição de leitura.
+- O script já existe com o nome em outro idioma: renomeie para o `Idioma do nome dos scripts` e atualize `Scripts disponíveis`.
 - Um pacote já resolve: o comando fica em `Scripts disponíveis`, sem `scripts/`.
 - A skill não tem script: a lista é `Nenhum.` e a execução diz que não há script.
 

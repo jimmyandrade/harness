@@ -232,6 +232,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Properties**:
   - Lives at `.agents/skills/definir-arquivos-da-habilidade/SKILL.md`, split from criar-habilidade, which points to it
   - Keeps a script used by one skill in its `scripts/`, and a script used by several in `.agents/scripts/<nome>/`
+  - Names scripts and shared script folders in `Idioma do nome dos scripts`, English by default and overridable in the project instructions
   - Keeps input and output templates out of the body, with one sentence that says when to read them
   - Keeps commands out of the steps and lists them only in Scripts disponíveis, with a path for Notion, where the script may be missing
 - **Test Criteria**:
