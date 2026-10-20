@@ -1,11 +1,12 @@
 ---
 name: definir-vocabulario
-description: Use essa habilidade sempre que for cadastrar ou atualizar um ou mais termos do vocabulário do tom de voz, ou perguntar quais variações de gênero, número ou grafia foram cadastradas, mesmo sem dizer glossário, lote ou estado. NÃO use para escrever, revisar ou aprovar o texto da marca, classificar uma frase, nem inventar um termo que a pessoa não enviou.
+description: Use essa habilidade sempre que for cadastrar ou atualizar um ou mais termos do vocabulário do tom de voz, mesmo sem dizer glossário, lote ou estado. NÃO use para escrever, revisar ou aprovar o texto da marca, classificar uma frase, perguntar quais variações de gênero, número ou grafia foram cadastradas, nem inventar um termo que a pessoa não enviou.
 metadata:
   author: jimmyandrade
-  version: "0.22.0"
+  version: "0.23.0"
   related:
     - evoluir-habilidade
+    - procurar-variacao-de-termo
     - redigir-com-tom-de-voz
 ---
 
@@ -21,11 +22,12 @@ metadata:
 
 ### Passo 1
 
-A pessoa responsável pelo tom de voz quer cadastrar ou atualizar termos. Monte o plano com idioma, modo e a lista. Cada item tem `state`, `term`, `category`, `description` e os campos desse estado. Sem idioma ou sem termo, pare e peça. Use só o que a pessoa enviou.
+A pessoa responsável pelo tom de voz quer cadastrar ou atualizar termos. Perguntar se um termo ou uma variação faltou segue `procurar-variacao-de-termo`. Monte o plano com idioma, modo e a lista. Cada item tem `state`, `term`, `category`, `description` e os campos desse estado. Sem idioma ou sem termo, pare e peça. Use só o que a pessoa enviou.
 
 ```mermaid
 flowchart LR
-  A{Pedido?} -->|cadastrar, atualizar ou perguntar a variação| B[Esta habilidade]
+  A{Pedido?} -->|cadastrar ou atualizar| B[Esta habilidade]
+  A -->|perguntar a variação| D[procurar-variacao-de-termo]
   A -->|escrever o texto| C[redigir-com-tom-de-voz]
 ```
 
@@ -71,9 +73,7 @@ Se a consulta trouxer duas grafias da mesma palavra, só por caixa ou acento, pa
 
 Termo que não existe e vai entrar como proibido, sem termos relacionados: pare e pergunte se a pessoa quer cadastrar um ou mais. Eles entram em `alternatives`. Se ela não quiser, a lista fica vazia. Não invente. Termo que já existe não pede essa pergunta.
 
-Se a pessoa perguntar se um termo faltou, pesquise. Se não existe, diga que não existe e sugira o cadastro, com o estado que ela escolher. Se for variação de gênero, número ou grafia de um termo que já está, diga isso também. Não grave nessa resposta. Quando as duas linhas existirem, `related` aponta de uma para a outra. `related` vale nos três estados e não cria termo ausente. A escrita recusa o ponteiro solto.
-
-Se a pessoa perguntar as variações de gênero, número ou grafia de um termo que acabou de entrar, pesquise cada forma. Diga quais estão cadastradas e quais não estão. Sugira o cadastro das ausentes e pergunte quais são proibidas, situacionais e permitidas. Não grave nessa resposta. Não copie o estado do termo que acabou de entrar. Pontuação e emoji não têm essa variação.
+Quando as duas linhas existirem, `related` aponta de uma para a outra. `related` vale nos três estados e não cria termo ausente. A escrita recusa o ponteiro solto.
 
 ### Passo 6
 
@@ -149,22 +149,6 @@ Se você cadastrar o plural, o gênero ou outra grafia junto com a palavra nova,
 1. Grave só o que ela enviou, em minúsculas.
 2. Diga a quantidade e a lista.
 3. Sugira as outras formas e espere o estado.
-
-### Variação sem dizer quais faltam
-
-Se você disser que todas as formas entraram, ou gravar as ausentes com o estado do termo novo, a pessoa não escolhe proibido, situacional ou permitido.
-
-1. Pesquise cada forma de gênero, número e grafia.
-2. Diga quais estão cadastradas e quais não estão.
-3. Sugira o cadastro das ausentes e pergunte o estado de cada uma. Não grave nessa resposta.
-
-### Variação que faltou
-
-Se você disser que a variação já está, ou gravar o ponteiro para um termo ausente, a pessoa não escolhe o estado dessa forma.
-
-1. Diga que o termo não existe.
-2. Sugira o cadastro, com o estado que ela escolher.
-3. Só então aponte `related` de uma linha para a outra.
 
 ### Proibido sem termo relacionado
 
@@ -245,14 +229,6 @@ Li as fontes da marca que as instruções do projeto nomeiam. O estado ficou sit
 
 O emoji ficou um termo. A combinação junta ficou um termo só. O estado, a descrição e o exemplo ficaram nos campos desse estado. Não tratei como decoração. Não inventei se ele é permitido.
 
-### Quais variações de casa e moradias?
-
-Casa e moradias acabaram de entrar. Pesquisei casas e moradia. Nenhuma das duas estava. Disse isso e perguntei quais são proibidas, situacionais e permitidas. Não gravei.
-
-### Faltou casas?
-
-A busca não achou casas. Casa já estava. Disse que casas não existe e sugeri o cadastro. Não gravei.
-
 ### Cadastre o termo novo como proibido. Ainda não está.
 
 Perguntei se ela queria termos relacionados. Ela pediu um. Ele entrou em alternatives, permitido. Não inventei outro.
@@ -272,8 +248,7 @@ Casa ficou permitida. Casas ganhou a própria linha, proibida. Moradias ganhou a
 - O termo já está, só muda a caixa ou o acento que não muda a letra: a linha que já está é atualizada, ou fica sem alteração se os campos forem os mesmos.
 - Plural, singular, feminino, masculino ou outra palavra do mesmo assunto: cada forma tem a própria linha e o próprio estado.
 - Termo novo e proibido, sem termos relacionados: pergunte antes de gravar. Eles entram em `alternatives`. Se a pessoa não quiser, a lista fica vazia.
-- A pessoa pergunta se um termo faltou e ele não existe: diga isso e sugira o cadastro. `related` só aponta para termo que já está.
-- A pessoa pergunta as variações de um termo que acabou de entrar: diga quais estão e quais não estão. Sugira o cadastro das ausentes e pergunte o estado. Não grave nessa resposta.
+- A pessoa pergunta se um termo ou uma variação faltou: `procurar-variacao-de-termo`. `related` só aponta para termo que já está.
 - O termo já existe e a pessoa manda descrição, exemplos, estado, termos relacionados ou outra orientação: isso entra na linha dessa grafia.
 - A busca acha duas grafias da mesma palavra, por caixa ou acento: pare, nomeie, sugira a que permanece e espere. Não apague e não junte.
 - Falta uma fonte da marca que as instruções do projeto nomeiam: pare e peça. Não invente.
@@ -292,7 +267,6 @@ Casa ficou permitida. Casas ganhou a própria linha, proibida. Moradias ganhou a
 - A maiúscula do pedido parece a grafia a guardar. Termo novo fica em minúsculas. A linha que já existe conserva a grafia guardada.
 - Termo proibido parece exigir um substituto inventado. Sem a resposta da pessoa, `alternatives` fica vazio.
 - Uma variação ausente parece já ligada pela palavra vizinha. Ela não existe até ser cadastrada. `related` não a cria.
-- O termo que acabou de entrar parece levar as variações junto. Cada forma só está se a consulta achar a linha dela. A ausente espera o estado.
 - Casa e caça parecem a mesma palavra sem acento. O cedilha muda a letra. As duas linhas ficam. Caixa e acento que não muda a letra não criam outra linha. Plural, gênero e outra palavra do mesmo assunto criam.
 - Duas linhas do mesmo termo parecem um convite a apagar a mais curta. A escrita não apaga. Sinalize e espere a escolha.
 - Um exemplo citado parece herdar a descrição do termo. Se ele não vem como item do lote, nasce só com o estado daquele vínculo.

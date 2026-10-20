@@ -14,6 +14,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Properties**:
   - Lives at `.agents/skills/definir-vocabulario/SKILL.md`
   - Registers and updates allowed, forbidden, and situational terms for one language
+  - Sends a question about a missing term or its variations to procurar-variacao-de-termo
   - Keeps the category an English word in every language, and keeps the term and the notes in that language
   - Reads the brand sources named in the project instructions before answering or writing. An ambiguous channel, audience, line, commercial intent, or situation waits for a question
   - Keeps a term that only fits one context as situationally allowed, with when. allowed and forbidden stay general rules
@@ -26,6 +27,19 @@ How these skills relate is in `README.md`, in this folder.
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses writing or approving brand text, classifying a phrase, and inventing a term
+
+### procurar-variacao-de-termo
+- **Stability**: experimental
+- **Description**: Say whether a term or its gender, number, or spelling variations are in the glossary
+- **Properties**:
+  - Lives at `.agents/skills/procurar-variacao-de-termo/SKILL.md`
+  - Reads each form with `node node_modules/vocabulary/dist/cli.js lookup`, or the MCP tool `lookup_term` without a terminal, and stops without both
+  - Says which forms are registered, with their state, and which are not
+  - Suggests registering the missing forms and asks the state of each one, without writing
+  - Sends the registration to definir-vocabulario
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses registering or updating a term, writing brand text, and inventing a form
 
 ### redigir-com-tom-de-voz
 - **Stability**: experimental
