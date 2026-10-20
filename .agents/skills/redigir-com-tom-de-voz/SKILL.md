@@ -3,7 +3,7 @@ name: redigir-com-tom-de-voz
 description: Use essa habilidade sempre que for criar, adaptar, lapidar ou validar texto da marca no tom de voz, mesmo sem dizer copy, como slogan, legenda, e-mail, WhatsApp, campanha, CTA, microcopy ou título de evento externo. NÃO use para responder quem conversa com a IA, descrever uma skill, titular tarefa ou oportunidade, cravar a grafia, alterar formato de conteúdo, nem assumir cliente, peça, oportunidade ou histórico.
 metadata:
   author: jimmyandrade
-  version: "0.13.1"
+  version: "0.15.0"
   aliases:
     - escreva-usando-o-tom-de-voz
   related:
@@ -54,6 +54,10 @@ Emoji marcado como evitar, proibido, ruim, desalinhado ou restrito não entra na
 Termo da categoria `cliche` não entra como palavra final. A descrição pede imagem, cena, ação, efeito ou situação com a mesma sensação. Use isso. Não troque o clichê por sinônimo. A frase em `rejected` e o termo ligado em `related` também ficam de fora.
 
 Frase que sugere perda consumada, cobrança agressiva, exclusão, capacitismo, ameaça real, culpa ou sensação incompatível com o tom sai do texto. A alternativa mantém desejo, urgência e conversa natural, sem dizer que a pessoa já perdeu a chance. O motivo dessa rejeição fica na descrição do termo no vocabulário. Sem essa linha, não invente o termo.
+
+Mensagem para uma pessoa não revela contexto interno que ela não precisa saber e que pode deixá-la desconfortável, como a troca frequente de pessoas no papel que ela assume. O motivo neutro entra no lugar, como uma mudança na padronização. A mensagem abre pelo que muda para ela.
+
+O fechamento diz o próximo passo concreto, como a reunião já marcada, ou o canal de dúvidas que as instruções do projeto ou a pessoa indicam. Fechamento genérico que oferece quem escreve, como "qualquer dúvida, me chama", é clichê de IA e não entra. Sem canal indicado, pergunte.
 
 Assunto, prévia, cabeçalho ou chamada inicial de e-mail, quando a pessoa provavelmente vê o texto como banner no celular, fica curto, pessoal, específico e chamativo. Verbo no imperativo pode faltar. O texto gera gatilho de ação ou de curiosidade. Essa curiosidade não diz que a chance já passou. Clickbait vazio fica de fora.
 
@@ -218,6 +222,7 @@ O título ficou específico, com o nome canônico que a fonte já tinha. Não vi
 - Um emoji na moda parece melhor que a regra. Evitar, proibido, ruim, desalinhado e restrito saem da versão final.
 - Um sinônimo parece resolver o clichê. A troca é imagem, cena, ação, efeito ou situação. A palavra literal, a frase rejeitada e o termo ligado ficam de fora.
 - Avisar que a chance já passou parece urgência. A alternativa mantém desejo, urgência e conversa natural sem essa perda consumada.
+- O motivo verdadeiro de uma mudança parece transparência. Contado a quem chega, como a troca frequente de pessoas no papel, ele é contexto interno e gera desconforto. O motivo neutro entra no lugar.
 - Assunto de e-mail parece legenda. No celular ele é notificação: curto, pessoal e com curiosidade, sem clickbait vazio e sem dizer que a chance já passou.
 - O dado que a conversa já citou parece confirmado. Cliente, peça, oportunidade e histórico comercial vêm da fonte que a pessoa indicou.
 - Título publicitário parece o tom de voz. O texto pede intenção, recorte e conexão, e recusa a fórmula genérica. A busca precisa continuar achando o nome canônico.
