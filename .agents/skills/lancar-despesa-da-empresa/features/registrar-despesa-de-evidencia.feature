@@ -14,13 +14,13 @@ Funcionalidade: Registrar a despesa reconhecida em uma evidência
   Regra: Registrar o gasto da empresa que ainda não existe
 
     Exemplo: O usuário confirma a despesa
-      Dado que o gasto da evidência tem valor e data e ainda não tem lançamento
+      Dado que o gasto da evidência tem produto, finalidade, dados de classificação, valor e data e ainda não tem lançamento
       E o usuário confirmou que é despesa da empresa
       Quando a habilidade processa a evidência
       Então a despesa é registrada nesta execução
 
     Exemplo: A despesa é inferível pelo contexto
-      Dado que o gasto da evidência tem valor e data e ainda não tem lançamento
+      Dado que o gasto da evidência tem produto, finalidade, dados de classificação, valor e data e ainda não tem lançamento
       E o contexto permite inferir que é despesa da empresa
       Quando a habilidade processa a evidência
       Então a despesa é registrada sem exigir um pedido escrito de lançamento

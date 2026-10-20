@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.7.0"
+  version: "0.7.1"
   aliases:
     - definir-despesa
     - lancar-despesa
@@ -53,7 +53,7 @@ flowchart LR
   B -->|sim| C[Reutiliza e complementa evidências]
   B -->|duvidoso| D[Pergunta sem criar outro]
   B -->|não encontrado| E{Gasto da empresa?}
-  E -->|confirmado ou inferível do contexto| F{Valor e data disponíveis?}
+  E -->|confirmado ou inferível do contexto| F{Identificação, classificação e dados financeiros suficientes?}
   E -->|incerto| G[Pergunta se é gasto da empresa]
   E -->|pessoal| H[lancar-despesa-pessoal]
   F -->|sim| I[Registra nesta execução]
@@ -66,6 +66,18 @@ flowchart LR
 A inferência precisa de evidência no contexto da empresa, no produto ou na finalidade informada. Ter um comprovante ou um CPF não basta. Não exija a palavra "lançar". A leitura não prova que a busca ou a gravação já aconteceu.
 
 ### Passo 3
+
+Antes de qualquer gravação, confira e marque este checklist com o que a evidência e o contexto já sustentam:
+
+- [ ] Produto ou serviço exato e finalidade do gasto, confirmados pela pessoa ou discriminados na evidência.
+- [ ] Natureza pessoal ou da empresa, sem confundir quem pagou com quem deve.
+- [ ] Dados necessários à categoria e aos vínculos aplicáveis no mapeamento: por exemplo, o veículo ou a obrigação a que o gasto pertence.
+- [ ] Valor, datas e situação do pagamento sustentados pela evidência, conforme o tipo de cobrança.
+- [ ] Busca de duplicata concluída antes de criar.
+
+O recebedor e a modalidade Pix não identificam o produto nem sua finalidade. Dizer apenas “despesa pessoal” ou “despesa da empresa” só confirma a natureza. Consulte o contexto e os registros relacionados; reúna as perguntas que faltam, espere as respostas e só depois grave. Não repita perguntas já respondidas nem exija campos sem relação com o gasto. Não use nome genérico de recebedor como substituto da identificação.
+
+Use apenas categorias e relações existentes, sustentadas pelos dados confirmados. Sem propriedade de categoria no mapeamento, informe a limitação; não crie estrutura nem grave uma categoria inventada no corpo. Isso não impede registrar um gasto já identificado com os vínculos disponíveis. Uma informação opcional ausente não substitui a identificação obrigatória do produto e da finalidade.
 
 Resolva a empresa recebedora com o nome e o CNPJ da evidência, inclusive ao complementar uma despesa já salva. Use `identificar-duplicata` antes de criar. A instituição de pagamento não é a empresa recebedora. Não deduza a razão social completa de um nome comercial.
 
@@ -82,7 +94,7 @@ flowchart LR
 
 Não encerre com apenas "empresa não cadastrada" ou "vínculo pendente": entregue a ação realizada ou a proposta concreta e o bloqueio. Reaproveite a leitura e os comprovantes; cadastrar a recebedora não cria outra despesa.
 
-Grave os dados nas propriedades mapeadas, não no corpo. Separe a data do documento da data de pagamento. Não invente valor, data, conta, finalidade, categoria nem parcelas. Campo opcional ausente fica pendente, sem impedir o lançamento com os dados suficientes. Preserve o modelo da página.
+Grave os dados nas propriedades mapeadas, não no corpo. Separe a data do documento da data de pagamento. Não invente valor, data, conta, finalidade, categoria nem parcelas. Campo opcional ausente fica pendente; produto, finalidade e informação necessária à classificação não são opcionais. Depois do checklist completo, a pendência opcional não impede o lançamento. Preserve o modelo da página.
 
 Anexe os originais na propriedade mapeada de comprovantes, sem novo reconhecimento. Mantenha as evidências anteriores ao complementar um lançamento. Preserve os dados confirmados e pergunte sobre conflito antes de sobrescrever. Uma transação ainda em processamento não equivale a conciliação concluída; uma cobrança sem confirmação não equivale a pagamento.
 
@@ -93,6 +105,14 @@ Pagamento numa moeda de `Moedas estrangeiras`: grave o valor original, o câmbio
 Confira o registro salvo, os anexos e o vínculo da empresa recebedora. Entregue a página do lançamento e as pendências, distinguindo o dado que falta de um cadastro ainda não encaminhado. Diga o que foi encontrado, criado ou complementado; não apresente transcrição como lançamento. O lançamento é a origem financeira da compra. A página do bem, a separação entre ativo e estoque e a compra de item controlável ficam com `definir-ativo-imobilizado`.
 
 ## Problemas comuns
+
+### Comprovante sem identificação do gasto
+
+Se você gravar só com recebedor, valor e data, a despesa entra sem saber o que foi comprado nem como categorizá-la.
+
+1. Confira o checklist antes de gravar, inclusive ao complementar um registro.
+2. Pergunte o produto ou serviço, a finalidade e os dados de classificação ainda ausentes.
+3. Espere a resposta e atualize o mesmo lançamento, preservando o comprovante e sem duplicar.
 
 ### Ativo criado na despesa
 
@@ -135,7 +155,8 @@ Busquei pelo recebedor, documento, valor e data. Registrei um lançamento com as
 - A lista de despesas e investimentos não está no workspace conectado: pare. Não use a lista de outro workspace.
 - O pedido é a página do bem durável: `definir-ativo-imobilizado`. Não crie o ativo aqui.
 - Compra de item controlável ou separação entre ativo e estoque: `definir-ativo-imobilizado`. Não reescreva essas regras aqui.
-- Falta categoria ou conta de origem, mas valor, data e gasto da empresa estão sustentados: registre e entregue a pendência, sem adivinhar.
+- Falta conta de origem opcional, mas a identificação, a classificação e os dados financeiros estão sustentados: registre e entregue a pendência, sem adivinhar.
+- Valor, data e natureza da empresa estão confirmados, mas falta o que foi pago ou sua finalidade: pergunte e aguarde antes de gravar.
 - Venda ou frase mista: `definir-lancamento`. Não grave a venda aqui.
 
 ## Pegadinhas
@@ -143,6 +164,7 @@ Busquei pelo recebedor, documento, valor e data. Registrei um lançamento com as
 - Rastrear o lançamento parece criar o ativo. O lançamento fica aqui. A página do bem fica em `definir-ativo-imobilizado`.
 - Item controlável parece esta habilidade decidir o destino. A separação entre ativo e estoque fica em `definir-ativo-imobilizado`.
 - Venda recebida na hora parece este gasto. A frase mista começa em `definir-lancamento`.
+- O comprovante identifica a transferência, não necessariamente a compra. Recebedor e Pix não são produto nem finalidade.
 - Nota fiscal e print de cartão podem ser o mesmo gasto. Dois arquivos não são duas despesas.
 - Uma tela pode dizer "Crédito" como modalidade do cartão, não como entrada de receita.
 
