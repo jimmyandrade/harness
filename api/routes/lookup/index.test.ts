@@ -57,27 +57,31 @@ test("POST returns the stored row for another case, and a plural is its own term
   }
 })
 
-test("POST names both rows and suggests the canonical one", async () => {
+test("POST reads a form that differs only by an accent as another term", async () => {
   const root = mkdtempSync(join(tmpdir(), "glossary-"))
   writeFileSync(
     join(root, "pt-BR.json"),
-    `${JSON.stringify({ Sao: { state: "allowed" }, "São": { state: "allowed", description: "santo", examples: ["o São"] } }, null, 2)}\n`,
+    `${JSON.stringify({ roles: { state: "forbidden", description: "inglês" }, "rolês": { state: "allowed", reason: "gíria" } }, null, 2)}\n`,
   )
   const server = createGlossaryServer(root)
   await new Promise<void>((resolve) => server.listen(0, "127.0.0.1", resolve))
   const port = (server.address() as AddressInfo).port
-  try {
-    const response = await fetch(`http://127.0.0.1:${port}/v1/lookup`, {
+  const read = async (term: string) =>
+    (await fetch(`http://127.0.0.1:${port}/v1/lookup`, {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ language: "pt-BR", term: "Sao" }),
-    })
-    assert.equal(response.status, 200)
-    const body = await response.json()
-    assert.equal(body.exists, true)
-    assert.equal(body.term, "Sao")
-    assert.deepEqual(body.duplicates, ["Sao", "São"])
-    assert.equal(body.canonical, "São")
+      body: JSON.stringify({ language: "pt-BR", term }),
+    })).json()
+  try {
+    const english = await read("Roles")
+    assert.equal(english.term, "roles")
+    assert.equal(english.state, "forbidden")
+    assert.equal(english.duplicates, undefined)
+    const slang = await read("rolês")
+    assert.equal(slang.term, "rolês")
+    assert.equal(slang.state, "allowed")
+    const absent = await read("rôles")
+    assert.equal(absent.exists, false)
   } finally {
     await new Promise<void>((resolve, reject) => server.close((error) => (error ? reject(error) : resolve())))
   }

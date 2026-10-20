@@ -387,7 +387,7 @@ test("update refuses a new full example that another row needs", async () => {
   })
 })
 
-test("a plural is its own row, and case or an unaccented form stays on the existing term", async () => {
+test("a plural and an accent are their own rows, and case stays on the existing term", async () => {
   const initial = JSON.stringify(
     {
       caça: { state: "allowed", category: "word", description: "busca", reason: "buscar", examples: [] },
@@ -404,25 +404,46 @@ test("a plural is its own row, and case or an unaccented form stays on the exist
       mode: "upsert",
       terms: [
         { state: "allowed", term: "casas", category: "word", description: "morada", reason: "morar", examples: [] },
-        { state: "allowed", term: "caça", category: "word", description: "busca", reason: "buscar", examples: [] },
-        { state: "allowed", term: "Sao", category: "word", description: "santo", reason: "nome", examples: [] },
+        { state: "allowed", term: "Caça", category: "word", description: "busca", reason: "buscar", examples: [] },
+        { state: "forbidden", term: "Sao", category: "word", description: "sem acento", examples: [] },
       ],
     })
     assert.equal(response.status, 200)
     const body = await response.json()
-    assert.equal(body.inserted.length, 1)
-    assert.equal(body.inserted[0].term, "casas")
+    assert.deepEqual(
+      body.inserted.map((item: { term: string }) => item.term),
+      ["casas", "sao"],
+    )
     assert.equal(body.updated.length, 0)
     assert.deepEqual(
       body.unchanged.map((item: { term: string }) => item.term),
-      ["caça", "Sao"],
+      ["Caça"],
     )
     const entries = load(readFileSync(file, "utf8"))
     assert.equal(entries.find((entry) => entry.term === "casas")?.description, "morada")
     assert.equal(entries.find((entry) => entry.term === "casa")?.description, "lugar")
     assert.equal(entries.find((entry) => entry.term === "caça")?.description, "busca")
-    assert.equal(entries.find((entry) => entry.term === "São")?.description, "santo")
-    assert.equal(entries.find((entry) => entry.term === "Sao"), undefined)
+    assert.equal(entries.find((entry) => entry.term === "São")?.state, "allowed")
+    assert.equal(entries.find((entry) => entry.term === "sao")?.state, "forbidden")
+  })
+})
+
+test("one batch takes two terms that differ only by an accent", async () => {
+  await withGlossary("{}\n", async (port, root) => {
+    const response = await post(port, {
+      language: "pt-BR",
+      mode: "upsert",
+      terms: [
+        { state: "forbidden", term: "roles", description: "inglês" },
+        { state: "allowed", term: "rolês", reason: "gíria" },
+      ],
+    })
+    assert.equal(response.status, 200)
+    const body = await response.json()
+    assert.equal(body.inserted.length, 2)
+    const entries = load(readFileSync(join(root, "pt-BR.json"), "utf8"))
+    assert.equal(entries.find((entry) => entry.term === "roles")?.state, "forbidden")
+    assert.equal(entries.find((entry) => entry.term === "rolês")?.state, "allowed")
   })
 })
 

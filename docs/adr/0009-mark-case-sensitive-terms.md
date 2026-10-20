@@ -6,7 +6,7 @@ locale: en
 
 ## Status
 
-Accepted.
+Accepted. Amended by `docs/adr/0011-tell-terms-apart-by-accents.md`: `case_matches` compares the casing of the same spelling, and an accent makes another term.
 
 ## Context
 
@@ -23,7 +23,7 @@ Two designs were weighed.
 
 Any row may keep `case_sensitive: true`. The file omits it when it is false, and a row without it behaves as before.
 
-A read still folds case to find the row. When the row is case-sensitive, `POST /v1/lookup` and `lookup_term` also return `case_sensitive: true` and `case_matches`, false when the submitted casing differs from the stored term. `term` already holds the stored spelling. An accent that does not change the letter is not a casing difference.
+A read still folds case to find the row. When the row is case-sensitive, `POST /v1/lookup` and `lookup_term` also return `case_sensitive: true` and `case_matches`, false when the submitted casing differs from the stored term. `term` already holds the stored spelling. An accent is not a casing difference: it makes another term, as ADR 0011 decides.
 
 `POST /v1/exists` and `exists_in_text` keep `true` and `false` for every token. A token that only matches a case-sensitive row in another casing maps to `{ "exists": true, "term": "iPhone", "case_matches": false }` instead. The object is truthy, so a reader that only checks existence reads it as before.
 

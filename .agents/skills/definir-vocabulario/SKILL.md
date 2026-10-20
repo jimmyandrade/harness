@@ -3,7 +3,7 @@ name: definir-vocabulario
 description: Use essa habilidade sempre que for cadastrar ou atualizar um ou mais termos do vocabulário do tom de voz, mesmo sem dizer glossário, lote ou estado. NÃO use para escrever, revisar ou aprovar o texto da marca, classificar uma frase, perguntar quais variações de gênero, número ou grafia foram cadastradas, nem inventar um termo que a pessoa não enviou.
 metadata:
   author: jimmyandrade
-  version: "0.24.0"
+  version: "0.25.0"
   related:
     - evoluir-habilidade
     - procurar-variacao-de-termo
@@ -78,11 +78,9 @@ Valide o plano antes de gravar.
 
 ### Passo 5
 
-Pesquise a grafia no vocabulário antes de gravar, com a consulta de Scripts disponíveis. Com terminal, rode o comando. Sem terminal, chame a ferramenta do servidor `vocabulary`. Sem os dois, como num agente do Notion, pare antes de pesquisar. Diga que o cadastro roda numa ferramenta de código com o projeto aberto. Não leia o vocabulário de memória. Outra caixa e acento que não muda a letra são o mesmo termo: a linha que já está recebe a orientação. Não cadastre uma segunda linha dessa grafia. Uma forma igual, com os mesmos campos, volta sem alteração.
+Pesquise a grafia no vocabulário antes de gravar, com a consulta de Scripts disponíveis. Com terminal, rode o comando. Sem terminal, chame a ferramenta do servidor `vocabulary`. Sem os dois, como num agente do Notion, pare antes de pesquisar. Diga que o cadastro roda numa ferramenta de código com o projeto aberto. Não leia o vocabulário de memória. Outra caixa é o mesmo termo: a linha que já está recebe a orientação. Não cadastre uma segunda linha dessa grafia. Acento muda a palavra: roles e rolês, pais e país são termos diferentes, cada um com a própria linha. Uma forma igual, com os mesmos campos, volta sem alteração.
 
 Plural, singular, feminino, masculino e outra palavra do mesmo assunto são linhas próprias. Cada uma tem o próprio estado. Casas e moradias convivem. Casa e casas convivem. Gato e gata convivem. Não junte essas linhas.
-
-Se a consulta trouxer duas grafias da mesma palavra, só por caixa ou acento, pare. Ela nomeia as linhas e diz qual permanecer: a que já tem descrição e exemplos; no empate, a que vem antes. A escrita recusa o lote com essa mesma sugestão e deixa o vocabulário como estava. Repita a sugestão e pergunte. Não grave de novo, não apague e não junte enquanto a pessoa não escolher.
 
 Termo que não existe e vai entrar como proibido, sem termos relacionados: pare e pergunte se a pessoa quer cadastrar um ou mais. Eles entram em `alternatives`. Se ela não quiser, a lista fica vazia. Não invente. Termo que já existe não pede essa pergunta.
 
@@ -116,7 +114,7 @@ Se você gravar um termo e seguir para o próximo depois de uma falha, o vocabul
 
 ### Variação cadastrada de novo
 
-Se você criar outra linha para a mesma palavra em outra caixa ou sem o acento que não muda a letra, o vocabulário repete a grafia.
+Se você criar outra linha para a mesma palavra em outra caixa, o vocabulário repete a grafia.
 
 1. Busque a grafia antes de gravar.
 2. Atualize a linha que já está.
@@ -258,12 +256,12 @@ Casa ficou permitida. Casas ganhou a própria linha, proibida. Moradias ganhou a
 
 - Permitidos, proibidos e situacionais juntos: um lote e um modo.
 - Sem modo: `insert`. Corrigir: `update`. Os dois: `upsert`.
-- O termo já está, só muda a caixa ou o acento que não muda a letra: a linha que já está é atualizada, ou fica sem alteração se os campos forem os mesmos.
+- O termo já está, só muda a caixa: a linha que já está é atualizada, ou fica sem alteração se os campos forem os mesmos.
+- A forma só muda o acento: é outro termo, com a própria linha e o próprio estado.
 - Plural, singular, feminino, masculino ou outra palavra do mesmo assunto: cada forma tem a própria linha e o próprio estado.
 - Termo novo e proibido, sem termos relacionados: pergunte antes de gravar. Eles entram em `alternatives`. Se a pessoa não quiser, a lista fica vazia.
 - A pessoa pergunta se um termo ou uma variação faltou: `procurar-variacao-de-termo`. `related` só aponta para termo que já está.
 - O termo já existe e a pessoa manda descrição, exemplos, estado, termos relacionados ou outra orientação: isso entra na linha dessa grafia.
-- A busca acha duas grafias da mesma palavra, por caixa ou acento: pare, nomeie, sugira a que permanece e espere. Não apague e não junte.
 - Falta uma fonte da marca que as instruções do projeto nomeiam: pare e peça. Não invente.
 - Sem terminal e sem o servidor `vocabulary`, como num agente do Notion: pare. O cadastro roda numa ferramenta de código com o projeto aberto. Não confirme nada.
 - O termo só cabe num contexto: nível do meio, com `when`. Não use `allowed` nem `forbidden`.
@@ -281,7 +279,7 @@ Casa ficou permitida. Casas ganhou a própria linha, proibida. Moradias ganhou a
 - A maiúscula do pedido parece a grafia a guardar. Termo novo fica em minúsculas. A linha que já existe conserva a grafia guardada.
 - Termo proibido parece exigir um substituto inventado. Sem a resposta da pessoa, `alternatives` fica vazio.
 - Uma variação ausente parece já ligada pela palavra vizinha. Ela não existe até ser cadastrada. `related` não a cria.
-- Casa e caça parecem a mesma palavra sem acento. O cedilha muda a letra. As duas linhas ficam. Caixa e acento que não muda a letra não criam outra linha. Plural, gênero e outra palavra do mesmo assunto criam.
+- Roles e rolês parecem a mesma palavra com e sem acento. O acento muda a palavra, como o cedilha muda casa e caça. As duas linhas ficam. Só a caixa não cria outra linha. Acento, plural, gênero e outra palavra do mesmo assunto criam.
 - Duas linhas do mesmo termo parecem um convite a apagar a mais curta. A escrita não apaga. Sinalize e espere a escolha.
 - Um exemplo citado parece herdar a descrição do termo. Se ele não vem como item do lote, nasce só com o estado daquele vínculo.
 - O `when` parece bastar. Sem `tags`, o texto de outro contexto lê o termo. `maria` e `maria-silva` são dois contextos.

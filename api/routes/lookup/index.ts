@@ -2,8 +2,8 @@
  * POST /v1/lookup
  *
  * Read one term or expression. exists is false when that concept is absent.
- * Case and an accent that does not change the letter return the stored row.
- * A plural, a gender, and another word are their own rows. Given tags, a row
+ * Another case returns the stored row. An accent, a plural, a gender, and
+ * another word are their own rows. Given tags, a row
  * tagged only for another speaker, event, or channel reads as absent, and a
  * tag in allowed_in or forbidden_in changes state. base_state then keeps the
  * level of the row. A row stored with a deprecated state returns legacy_state. A row
@@ -15,7 +15,7 @@
 
 import { fileURLToPath } from "node:url"
 
-import { Glossary, InvalidGlossary, applicable, caseMatches, collapse, duplicateSignal, effectiveState, findConcept, lookup, type Entry } from "../../shared/glossary.ts"
+import { Glossary, InvalidGlossary, applicable, caseMatches, collapse, effectiveState, findConcept, type Entry } from "../../shared/glossary.ts"
 import { parseBody, type Route } from "../../shared/http.ts"
 import { readOptions, report } from "../../shared/options.ts"
 import { lookupRequest } from "../../shared/schema.ts"
@@ -45,8 +45,6 @@ export type TermLookup = {
   source?: string
   case_sensitive?: true
   case_matches?: boolean
-  duplicates?: readonly string[]
-  canonical?: string
 }
 
 export function lookupTerm(glossary: Glossary, language: string, submitted: string, tags: readonly string[] = []): TermLookup {
@@ -54,13 +52,6 @@ export function lookupTerm(glossary: Glossary, language: string, submitted: stri
   if (query === "") throw new InvalidGlossary("Provide the term.")
   const { tag, entries: stored } = glossary.entries(language)
   const entries = applicable(stored, tags)
-  const signal = duplicateSignal(entries, query)
-  if (signal !== undefined) {
-    const exact = lookup(entries, query).entry
-    const reported = { language: tag, submitted: query, exists: true, ...signal }
-    if (exact === undefined) return reported
-    return { ...reported, ...rowOf(exact, tags), ...casingOf(exact, query) }
-  }
   const found = findConcept(entries, query)
   if (found === undefined) return { language: tag, submitted: query, exists: false }
   return { language: tag, submitted: query, exists: true, ...rowOf(found, tags), ...casingOf(found, query) }

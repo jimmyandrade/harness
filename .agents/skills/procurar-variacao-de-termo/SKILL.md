@@ -3,7 +3,7 @@ name: procurar-variacao-de-termo
 description: Use essa habilidade sempre que alguém perguntar se um termo do vocabulário do tom de voz faltou, ou quais variações de gênero, número ou grafia de um termo foram cadastradas, mesmo sem dizer variação, plural ou feminino. NÃO use para cadastrar ou atualizar o termo, escrever o texto da marca, nem inventar uma forma que a pessoa não pediu.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   related:
     - definir-vocabulario
     - evoluir-habilidade
@@ -37,7 +37,7 @@ Liste as formas a pesquisar. Para a pergunta se um termo faltou, a forma é esse
 
 Pesquise cada forma com a consulta de Scripts disponíveis. Com terminal, rode o comando. Sem terminal, chame a ferramenta do servidor `vocabulary`. Sem os dois, como num agente do Notion, pare. Diga que a consulta roda numa ferramenta de código com o projeto aberto. Não leia o vocabulário de memória.
 
-Outra caixa e acento que não muda a letra são o mesmo termo. Plural, gênero e outra palavra do mesmo assunto são linhas próprias, cada uma com o próprio estado.
+Outra caixa é o mesmo termo. Acento, plural, gênero e outra palavra do mesmo assunto são linhas próprias, cada uma com o próprio estado.
 
 ### Passo 4
 
@@ -83,7 +83,8 @@ A busca não achou casas. Casa já estava. Disse que casas não existe, que é o
 
 - A pessoa pergunta se um termo faltou e ele não existe: diga isso e sugira o cadastro.
 - A pessoa pergunta as variações de um termo que acabou de entrar: diga quais estão e quais não estão. Sugira o cadastro das ausentes e pergunte o estado.
-- A forma só muda a caixa ou o acento que não muda a letra: é o mesmo termo. Diga que ele já está.
+- A forma só muda a caixa: é o mesmo termo. Diga que ele já está.
+- A forma só muda o acento: é outro termo. Pesquise e diga se ele está.
 - A pessoa responde o estado das formas ausentes: siga `definir-vocabulario`.
 - Sem terminal e sem o servidor `vocabulary`: pare. Não responda de memória.
 
@@ -91,7 +92,7 @@ A busca não achou casas. Casa já estava. Disse que casas não existe, que é o
 
 - Uma variação ausente parece já ligada pela palavra vizinha. Ela não existe até ser cadastrada. `related` não a cria.
 - O termo que acabou de entrar parece levar as variações junto. Cada forma só está se a consulta achar a linha dela. A ausente espera o estado.
-- Casa e caça parecem a mesma palavra sem acento. O cedilha muda a letra. São duas linhas.
+- Roles e rolês parecem a mesma palavra sem acento. O acento muda a palavra, como o cedilha muda casa e caça. São duas linhas.
 
 ## Scripts disponíveis
 

@@ -26,9 +26,10 @@
  * key keeps that casing. A read still finds it in another case and says the
  * casing does not match.
  *
- * writeTerms searches before it writes. Case and an accent that does not change
- * the letter are the same term. A plural, a gender, and another word for the
- * same idea each keep their own row and their own state. A new term is stored
+ * writeTerms searches before it writes. Only case folds: an accent is part of
+ * the spelling, as ADR 0011 decides, so roles and rolês are two terms. A
+ * plural, a gender, and another word for the same idea each keep their own row
+ * and their own state. A new term is stored
  * in lowercase, unless it is written with case_sensitive, which keeps its
  * casing as given. insert leaves a term that is already in the file.
  * update leaves a term that is absent. A row whose fields already match is
@@ -361,7 +362,6 @@ export function writeTerms(
   const unchanged: TermsWrite["unchanged"] = []
   const skipped: TermsWrite["skipped"] = []
   for (const item of terms) {
-    refuseDuplicates(loaded, item.term)
     const found = findConcept(loaded, item.term)
     if (found !== undefined) {
       const reason =
@@ -718,12 +718,8 @@ function matchKey(term: string): string {
   return caseFold(collapse(term)).normalize("NFC")
 }
 
-function conceptKey(term: string): string {
-  return [...matchKey(term).normalize("NFD")].filter((character) => !isCombining(character)).join("")
-}
-
 function sameConcept(left: string, right: string): boolean {
-  return conceptKey(left) === conceptKey(right)
+  return matchKey(left) === matchKey(right)
 }
 
 export function conceptMatches(entries: readonly Entry[], term: string): Entry[] {
@@ -731,50 +727,16 @@ export function conceptMatches(entries: readonly Entry[], term: string): Entry[]
 }
 
 /**
- * Whether the submitted form keeps the casing of a case-sensitive row. Only
- * case counts: an accent that does not change the letter is ignored, as in
- * every lookup. A row without case_sensitive always matches.
+ * Whether the submitted form keeps the casing of a case-sensitive row. A row
+ * without case_sensitive always matches.
  */
 export function caseMatches(entry: Entry, submitted: string): boolean {
   if (entry.caseSensitive !== true) return true
-  return withoutMarks(collapse(submitted)) === withoutMarks(entry.term)
-}
-
-function withoutMarks(term: string): string {
-  return [...term.normalize("NFD")].filter((character) => !isCombining(character)).join("").normalize("NFC")
-}
-
-export function duplicateSignal(entries: readonly Entry[], term: string): { duplicates: string[]; canonical: string } | undefined {
-  const matches = entries.filter((entry) => sameConcept(entry.term, term))
-  if (matches.length < 2) return undefined
-  const canonical = [...matches].sort(byCanonical)[0]
-  if (canonical === undefined) return undefined
-  return { duplicates: matches.map((entry) => entry.term), canonical: canonical.term }
+  return collapse(submitted).normalize("NFC") === entry.term.normalize("NFC")
 }
 
 export function findConcept(entries: readonly Entry[], term: string): Entry | undefined {
-  const exact = entries.find((entry) => matchKey(entry.term) === matchKey(term))
-  if (exact !== undefined) return exact
-  const matches = entries.filter((entry) => sameConcept(entry.term, term))
-  if (matches.length > 1) refuseDuplicates(entries, term)
-  return matches[0]
-}
-
-function refuseDuplicates(entries: readonly Entry[], term: string): void {
-  const signal = duplicateSignal(entries, term)
-  if (signal === undefined) return
-  const names = signal.duplicates.map((item) => JSON.stringify(item)).join(", ")
-  throw new InvalidGlossary(`${JSON.stringify(term)} matches ${names}. Keep ${JSON.stringify(signal.canonical)}.`)
-}
-
-function byCanonical(left: Entry, right: Entry): number {
-  const guidance = guidanceOf(right) - guidanceOf(left)
-  if (guidance !== 0) return guidance
-  return left.term < right.term ? -1 : left.term > right.term ? 1 : 0
-}
-
-function guidanceOf(entry: Entry): number {
-  return Number(Boolean(entry.description)) + Number(entry.examples !== undefined && entry.examples.length > 0)
+  return entries.find((entry) => sameConcept(entry.term, term))
 }
 
 function sameFields(entry: Entry, item: BulkTerm): boolean {
