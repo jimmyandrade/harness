@@ -3,7 +3,7 @@ name: organizar-emails
 description: Organiza e-mails por BASB e separa pessoal, trabalho e misto. Usada quando a pessoa quer triar a caixa, etiquetar ou configurar filtros. Não serve para responder mensagens, lançar despesas nem acompanhar veículos.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.5.1"
   internal: true
   notion: "false"
   related:
@@ -136,7 +136,7 @@ Reutilize etiquetas existentes pelo nome e pelo identificador retornado. Crie so
 
 ### Passo 8
 
-Leia o filtro criado e a conversa alterada. Confira etiquetas, conta e permanência na entrada; preserve o estado de leitura anterior. Não deduza o nome de uma etiqueta a partir de identificadores diferentes. Registre separadamente o filtro armazenado, as etiquetas verificadas na conversa atual e a aplicação automática futura. Sem correspondência fornecida pela integração entre o identificador interno e o nativo, declare a validação do nome no filtro limitada. Uma conversa antiga sem etiqueta não testa um filtro criado depois. Uma ação em lote pode ser aplicada só em parte: compare a leitura de volta com o plano, refaça apenas o que faltou e leia de novo. Relate o que foi aplicado, cada chamada que falhou e como foi resolvida, o que continua proposto e quais decisões faltam. Sem fonte oficial atual, não declare pendência financeira, de veículo ou de habilitação regularizada.
+Leia o filtro criado e a conversa alterada. Confira etiquetas, conta e permanência na entrada; preserve o estado de leitura anterior. Não deduza o nome de uma etiqueta a partir de identificadores diferentes. Registre separadamente o filtro armazenado, as etiquetas verificadas na conversa atual e a aplicação automática futura. Sem correspondência fornecida pela integração entre o identificador interno e o nativo, declare a validação do nome no filtro limitada. Uma conversa antiga sem etiqueta não testa um filtro criado depois. Uma ação em lote pode ser aplicada só em parte: compare a leitura de volta com o plano, refaça apenas o que faltou e leia de novo. Conversa que saiu da entrada entre a alteração e a leitura de volta pode ter sido arquivada pela pessoa, que usa a caixa ao mesmo tempo: pergunte antes de devolvê-la. Relate o que foi aplicado, cada chamada que falhou e como foi resolvida, o que continua proposto e quais decisões faltam. Sem fonte oficial atual, não declare pendência financeira, de veículo ou de habilitação regularizada.
 
 Checklist de conclusão:
 - [ ] Conta, permissões, etiquetas e filtros conferidos.
