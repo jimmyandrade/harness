@@ -54,6 +54,16 @@ def core_root() -> Path:
     return Path(__file__).resolve().parents[3]
 
 
+def plugin_roots(root: Path) -> list[Path]:
+    """The other plugins a project installs with skills: its packages with .agents/skills, besides the core."""
+    modules = root / "node_modules"
+    if not modules.is_dir():
+        return []
+    folders = [*modules.glob("*/.agents/skills"), *modules.glob("@*/*/.agents/skills")]
+    core = core_root()
+    return sorted({folder.parents[1] for folder in folders if folder.is_dir() and folder.parents[1].resolve() != core})
+
+
 def project_root(start: Path) -> Path:
     """The root of the git repository that contains start, or start itself."""
     for path in (start, *start.parents):
@@ -278,7 +288,7 @@ def validate(text: str, skills: dict[str, set[str]], required: bool) -> list[tup
                 check_global(str(inner), inner_value)
         elif isinstance(value, dict):
             if key not in skills:
-                errors.append((f'"{key}" is not a skill here or in the core', key_line(text, key)))
+                errors.append((f'"{key}" is not a skill here, in the core, or in a plugin', key_line(text, key)))
                 continue
             for inner, inner_value in value.items():
                 if str(inner) not in skills[key]:

@@ -75,7 +75,7 @@ class RelatedSkillsTest(unittest.TestCase):
     def test_a_name_that_is_not_a_skill_fails(self) -> None:
         self.assertEqual(
             self.errors(["cancelar-pedido"], ""),
-            ["metadata.related names cancelar-pedido, which is not a skill here or in the core"],
+            ["metadata.related names cancelar-pedido, which is not a skill here, in the core, or in a plugin"],
         )
 
     def test_a_cited_skill_missing_from_the_list_fails(self) -> None:
@@ -104,6 +104,47 @@ class RelatedSkillsTest(unittest.TestCase):
 
     def test_a_longer_name_is_not_a_citation_of_a_shorter_one(self) -> None:
         self.assertEqual(self.errors([], "Use `fechar-pedido-antigo`."), [])
+
+
+class PluginSkillsTest(unittest.TestCase):
+    def setUp(self) -> None:
+        self.tmp = tempfile.TemporaryDirectory()
+        self.project = Path(self.tmp.name)
+        write_skill(self.project, "abrir-pedido")
+        plugin = self.project / "node_modules" / "glossario"
+        write_skill(plugin, "definir-termo", body='## Parâmetros de configuração\n\n```yaml\n"Categorias": {}\n```\n')
+        (self.project / "node_modules" / "sem-skills").mkdir()
+        self.checker = load_checker(self.project)
+
+    def tearDown(self) -> None:
+        self.tmp.cleanup()
+        os.environ.pop("HARNESS_ROOT", None)
+
+    def check_instructions(self, entry: str) -> subprocess.CompletedProcess:
+        text = PARAMETERS.replace(
+            "---\nmetadata:\n", '---\ndescription: Use essa habilidade sempre que for executar qualquer tarefa.\nmetadata:\n  version: "0.1.0"\n', 1
+        ).replace("---\n\n", f"{entry}---\n\n", 1)
+        (self.project / INSTRUCTIONS).write_text(text, encoding="utf-8")
+        env = {**os.environ, "HARNESS_ROOT": str(self.project)}
+        env.pop("GITHUB_STEP_SUMMARY", None)
+        return subprocess.run(
+            [sys.executable, str(HERE / "check-skill.py"), INSTRUCTIONS], env=env, capture_output=True, text=True
+        )
+
+    def test_the_plugins_are_the_packages_with_skills(self) -> None:
+        self.assertEqual(self.checker.PLUGINS, [self.checker.ROOT / "node_modules" / "glossario"])
+
+    def test_known_names_include_the_plugin_skills(self) -> None:
+        self.assertIn("definir-termo", self.checker.known_skill_names())
+
+    def test_the_instructions_accept_a_parameter_of_a_plugin_skill(self) -> None:
+        result = self.check_instructions('    "definir-termo":\n      "Categorias": "x"\n')
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    def test_the_instructions_reject_a_key_the_plugin_skill_does_not_have(self) -> None:
+        result = self.check_instructions('    "definir-termo":\n      "Cores": "x"\n')
+        self.assertEqual(result.returncode, 1)
+        self.assertIn('"Cores" is not a parameter of definir-termo', result.stdout + result.stderr)
 
 
 class MetadataFlagTest(unittest.TestCase):

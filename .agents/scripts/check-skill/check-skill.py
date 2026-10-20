@@ -64,6 +64,9 @@ def load_parameters():
 parameters = load_parameters()
 ROOT = parameters.project_root(Path(os.environ.get("HARNESS_ROOT") or Path.cwd()).resolve())
 CORE = parameters.core_root()
+# Skills of other installed plugins, such as a package under node_modules, can be
+# named in metadata.related and get parameters in the instructions.
+PLUGINS = parameters.plugin_roots(ROOT)
 # A project that links its skills to the core only uses the core skills, so only
 # its instructions are checked.
 IS_HARNESS = parameters.is_harness(ROOT)
@@ -567,7 +570,7 @@ def metadata_list(block: str, wanted: str) -> tuple[list[str], int] | None:
 
 def known_skill_names() -> set[str]:
     names: set[str] = set()
-    for root in dict.fromkeys([ROOT, CORE]):
+    for root in dict.fromkeys([ROOT, CORE, *PLUGINS]):
         names.update(path.parent.name for path in skill_files(root))
     return names
 
@@ -607,7 +610,7 @@ def related_errors(block: str, body: str, name: str, known: set[str]) -> list[Fi
             errors.append(Finding("metadata.related must not name the skill itself", line))
         elif item not in known:
             errors.append(
-                Finding(f"metadata.related names {item}, which is not a skill here or in the core", line)
+                Finding(f"metadata.related names {item}, which is not a skill here, in the core, or in a plugin", line)
             )
     for other in sorted(mentioned_skills(body, name, known) - seen):
         errors.append(Finding(f"the body cites {other}; add it to metadata.related", line))
@@ -1330,7 +1333,7 @@ def main() -> int:
         text = instructions.read_text(encoding="utf-8")
         measures[INSTRUCTIONS] = body_measure(text, encoding)
         block_errors = parameters.validate(
-            text, parameters.skill_parameter_keys(roots), required=IS_HARNESS or ROOT == CORE
+            text, parameters.skill_parameter_keys(roots + PLUGINS), required=IS_HARNESS or ROOT == CORE
         )
         group_errors = opportunity_group_errors(text, roots) if not block_errors else []
         for message, line in block_errors + group_errors + instructions_version_errors(text):
