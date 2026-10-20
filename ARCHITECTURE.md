@@ -23,7 +23,6 @@ vocabulary/
 │   ├── adr/                   # Architecture decisions
 │   └── runbooks/              # Setup steps for MCP hosts
 ├── examples/mcp.json          # Server list a project copies
-├── .mcp.json                  # Starts the server from this source tree
 ├── tsconfig.build.json        # Compiles api/ to dist/
 ├── AGENTS.md                  # Instructions for work in this repository
 ├── CONTRIBUTING.md            # Commits, CI, releases

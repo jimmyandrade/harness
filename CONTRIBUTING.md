@@ -47,6 +47,16 @@ The MCP server reads its version from `package.json`, so the release pull reques
 
 The release pull request is opened with `GITHUB_TOKEN`, so CI does not run on it. Every commit it describes already passed CI on its own pull request.
 
+## Local MCP server
+
+The plugin root is the repository root, and Claude Code starts the servers of a `.mcp.json` at a plugin root for every project that installs the plugin. So this repository keeps no `.mcp.json`: the plugin ships only the skills, and a project starts the server from its own `.agents/mcp.json`, as `docs/runbooks/mcp-hosts.md` describes. To use the server from this source tree, add it once to your local scope:
+
+```bash
+claude mcp add --scope local vocabulary -- node api/mcp/index.ts
+```
+
+`api/mcp/plugin.test.ts` fails when a `.mcp.json` comes back to the root or a plugin manifest declares `mcpServers`.
+
 ## Renovate
 
 `renovate.json` extends the shared preset of the core harness, `github>jimmyandrade/harness`. A business harness extends the same preset. Renovate moves a pin of this repository in a business harness when the pin is a release tag and a newer tag exists. A pin to a commit does not move.
