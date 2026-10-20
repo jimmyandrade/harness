@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.53.0](https://github.com/jimmyandrade/harness/compare/v0.52.0...v0.53.0) (2026-10-20)
+
+
+### Features
+
+* **comunicar-novidade-do-produto:** always run announcements through the tone of voice skill ([#286](https://github.com/jimmyandrade/harness/issues/286)) ([3984c9e](https://github.com/jimmyandrade/harness/commit/3984c9e032ce3b77192e8ca425a1f0f64299ce88))
+
 ## [0.52.0](https://github.com/jimmyandrade/harness/compare/v0.51.0...v0.52.0) (2026-10-20)
 
 
