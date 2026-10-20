@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.50.0](https://github.com/jimmyandrade/harness/compare/v0.49.2...v0.50.0) (2026-10-20)
+
+
+### Features
+
+* **definir-arquivos-da-habilidade:** name scripts in a configurable language ([#277](https://github.com/jimmyandrade/harness/issues/277)) ([5a223a8](https://github.com/jimmyandrade/harness/commit/5a223a84920e344d9b75585635541a952e2262f4))
+* split file placement out of criar-habilidade into definir-arquivos-da-habilidade ([#275](https://github.com/jimmyandrade/harness/issues/275)) ([2521741](https://github.com/jimmyandrade/harness/commit/2521741087f541b65a6be52f68c29624c68cabd3))
+
 ## [0.49.2](https://github.com/jimmyandrade/harness/compare/v0.49.1...v0.49.2) (2026-10-20)
 
 
