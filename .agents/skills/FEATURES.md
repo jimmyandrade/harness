@@ -811,6 +811,7 @@ How these skills relate is in `README.md`, in this folder.
   - Reads the contexts and the context of each organization from project parameters, so a past or paused professional activity is not classified as current work
   - Files automatic confirmations with no pending action, such as unsubscribes, under an archive subfolder by type without asking whether to keep them
   - Finds the obligation of a billing message by sender, keeps open bills visible with their due date and amount, moves negotiation offers of a postponed debt out of the inbox, and never hides a formal notice or a debt still to verify
+  - Swaps the bills-to-pay label for the paid-bills label once the payment is recorded with a receipt, including a second slip reissued for the same installment, and says which one was paid
   - Gives a collection agency its own label and adds the creditor's label only when the body names it; an alarming subject is not a formal notice unless the body describes the measure taken
   - Compares batch changes with the plan, redoes only what a partial failure left, and reports every failed call
 - **Test Criteria**:

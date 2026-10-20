@@ -3,7 +3,7 @@ name: organizar-emails
 description: Organiza e-mails por BASB e separa pessoal, trabalho e misto. Usada quando a pessoa quer triar a caixa, etiquetar ou configurar filtros. Não serve para responder mensagens, lançar despesas nem acompanhar veículos.
 metadata:
   author: jimmyandrade
-  version: "0.4.1"
+  version: "0.5.0"
   internal: true
   notion: "false"
   related:
@@ -31,6 +31,7 @@ Leia os valores nas instruções do projeto, na entrada desta habilidade. Na aus
 "Etiqueta de segurança": "Áreas/Segurança digital"
 "Destino de confirmações automáticas": "Arquivos/{tipo}"
 "Etiqueta de contas a pagar": "Áreas/Finanças/A pagar"
+"Etiqueta de contas pagas": "Áreas/Finanças/Pago"
 "Termos de aviso formal":
   - "protesto"
   - "negativação"
@@ -108,7 +109,7 @@ flowchart LR
   T -->|comprovante| C[Etiqueta do credor e pagamento lançado]
 ```
 
-Fatura em aberto recebe `Etiqueta de contas a pagar` e fica na entrada. A resposta diz o vencimento e o valor. Sem o valor, como num PDF protegido por senha, diga que falta e onde a pessoa o encontra. Ofereça lançar a fatura por `lancar-despesa-pessoal` ou `lancar-despesa-da-empresa`, conforme o contexto da obrigação. Filtro que tira oferta de negociação da entrada usa só remetentes que, na amostra, enviaram apenas ofertas, e exclui os `Termos de aviso formal`. Não esconda cobrança de obrigação `A verificar`. Empresa de cobrança não confirma a dívida: não use os links nem os boletos dela.
+Fatura em aberto recebe `Etiqueta de contas a pagar` e fica na entrada. A resposta diz o vencimento e o valor. Sem o valor, como num PDF protegido por senha, diga que falta e onde a pessoa o encontra. Ofereça lançar a fatura por `lancar-despesa-pessoal` ou `lancar-despesa-da-empresa`, conforme o contexto da obrigação. Quando o pagamento estiver lançado com comprovante, a conversa da fatura perde `Etiqueta de contas a pagar` e recebe `Etiqueta de contas pagas`, mantendo a etiqueta do credor. Segundo boleto da mesma parcela, reemitido com outro valor ou vencimento, recebe a mesma troca quando a parcela é quitada por um deles; diga qual foi pago, para não pagar em dobro. Filtro que tira oferta de negociação da entrada usa só remetentes que, na amostra, enviaram apenas ofertas, e exclui os `Termos de aviso formal`. Não esconda cobrança de obrigação `A verificar`. Empresa de cobrança não confirma a dívida: não use os links nem os boletos dela.
 
 Empresa de cobrança recebe a própria etiqueta, porque pode cobrar por vários credores. A etiqueta do credor só entra quando o corpo o identifica. Essa é a regra da classificação: o filtro combina o remetente com o nome do credor em qualquer parte da mensagem, porque não busca só no corpo. Mensagem sem credor identificado fica com a etiqueta da empresa e na entrada. Assunto alarmante, como interdição, bloqueio, CPF sob impedimento ou valor retido, só vira aviso formal se o corpo descrever a medida já tomada; a pessoa confere a medida real no banco, no cadastro de proteção ao crédito, no relatório oficial de dívidas e na consulta processual. "Pagamento aprovado" ou "parcela vence hoje" de uma plataforma de negociação não é pagamento nem parcela de acordo.
 
