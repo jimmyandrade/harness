@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.10.0](https://github.com/jimmyandrade/vocabulary/compare/v0.9.0...v0.10.0) (2026-10-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* lookup, write results and stored rows return decided_by as an object { name, email?, url? } instead of a string.
+
+### Features
+
+* store decided_by as the people object of package.json ([#39](https://github.com/jimmyandrade/vocabulary/issues/39)) ([6147efc](https://github.com/jimmyandrade/vocabulary/commit/6147efca62064196c7af6eb3db496cd66e3d24af))
+
 ## [0.9.0](https://github.com/jimmyandrade/vocabulary/compare/v0.8.0...v0.9.0) (2026-10-20)
 
 
