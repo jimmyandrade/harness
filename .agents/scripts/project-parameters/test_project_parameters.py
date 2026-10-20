@@ -50,7 +50,7 @@ class ValidateTest(unittest.TestCase):
         )
 
     def test_should_reject_an_entry_that_is_not_a_skill(self) -> None:
-        self.assertEqual(self.errors(block('"abrir-pedido":\n  "Comando de testes": "x"\n')), ['"abrir-pedido" is not a skill here or in the core'])
+        self.assertEqual(self.errors(block('"abrir-pedido":\n  "Comando de testes": "x"\n')), ['"abrir-pedido" is not a skill here, in the core, or in a plugin'])
 
     def test_should_reject_a_key_of_another_skill_under_a_skill(self) -> None:
         self.assertEqual(

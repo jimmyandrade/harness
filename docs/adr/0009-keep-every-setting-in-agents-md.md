@@ -29,7 +29,7 @@ Every setting lives in `metadata.parameters` of the frontmatter of `AGENTS.md`. 
 The checker validates the parameters on every commit and pull request:
 
 - the frontmatter is present, and `metadata.parameters` parses to a mapping;
-- every key under `Global` or at the top level is a parameter of a skill in the project or the core, or a script setting;
+- every key under `Global` or at the top level is a parameter of a skill in the project, the core, or another plugin installed under `node_modules`, or a script setting;
 - every other entry is the name of such a skill, and its keys are parameters of that skill;
 - a script setting has the expected type, also under a skill entry;
 - the frontmatter is written in block style, without `{ }` or `[ ]`, because the Notion sync reads it line by line.
