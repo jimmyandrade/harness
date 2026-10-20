@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.51.0](https://github.com/jimmyandrade/harness/compare/v0.50.0...v0.51.0) (2026-10-20)
+
+
+### Features
+
+* move procurar-artista and definir-artista to the core ([#278](https://github.com/jimmyandrade/harness/issues/278)) ([e152f58](https://github.com/jimmyandrade/harness/commit/e152f5894b3ca4c7ae7a31245745dfcb0fd011fc))
+* **organizar-emails:** mark bills as paid ([#280](https://github.com/jimmyandrade/harness/issues/280)) ([07fc71a](https://github.com/jimmyandrade/harness/commit/07fc71abe1ad028c04b1172bfe7a57e4dfd6c6f2))
+
 ## [0.50.0](https://github.com/jimmyandrade/harness/compare/v0.49.2...v0.50.0) (2026-10-20)
 
 
