@@ -3,7 +3,7 @@ name: comunicar-novidade-do-produto
 description: Use essa habilidade sempre que um PR for mesclado ou alguém perguntar o que há de novo no produto para quem o usa, mesmo sem dizer novidade, para decidir se há o que contar e escrever o comunicado sem termos técnicos. NÃO use para a descrição do PR, o changelog nem release notes técnicas.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.5.0"
   related:
     - evoluir-habilidade
 ---
@@ -50,7 +50,7 @@ Escreva o comunicado no `Idioma do comunicado`, para quem não é técnico: o qu
 
 ### Passo 4
 
-Entregue no `Canal do comunicado`, com a formatação dele. Se houver uma ferramenta para esse canal, mostre o texto e peça o ok antes de publicar. Se não houver, ou se o canal estiver vazio, entregue o texto pronto para copiar.
+Entregue no `Canal do comunicado`, com a formatação dele. O comunicado vai numa mensagem só, com parágrafos curtos, mesmo no WhatsApp, onde a conversa costuma ir em mensagens quebradas. Se houver uma ferramenta para esse canal, mostre o texto e peça o ok antes de publicar. Se não houver, ou se o canal estiver vazio, entregue o texto pronto para copiar.
 
 ### Passo 5
 
