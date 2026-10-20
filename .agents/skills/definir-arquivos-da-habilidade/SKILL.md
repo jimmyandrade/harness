@@ -1,0 +1,89 @@
+---
+name: definir-arquivos-da-habilidade
+description: Define onde ficam os scripts, referências, modelos e testes de uma skill e escreve Scripts disponíveis. Usada quando a skill ganha, move ou renomeia um arquivo além do SKILL.md. Não serve para escrever o texto da skill, a descrição nem gravar no Notion.
+metadata:
+  author: jimmyandrade
+  version: "0.1.0"
+  related:
+    - criar-habilidade
+    - evoluir-habilidade
+---
+
+# Definir arquivos da habilidade
+
+## Parâmetros de configuração
+
+```yaml
+"Modo de aprendizado": "perguntar"
+```
+
+## Instruções
+
+### Passo 1
+
+A pasta da skill tem `SKILL.md`. `scripts/`, `references/`, `assets/` e `features/` são opcionais. `features/` é o teste Gherkin, em português. `scripts/` é código executável. `references/` é documentação lida sob demanda.
+Script de uma skill fica em `scripts/` dela. No Notion, é arquivo dessa página. Script usado por várias skills fica em `.agents/scripts/<nome>/`. No Notion, não entra na página de uma skill só.
+Tabela que estoura o limite vai para `references/`, com a condição de leitura. "Leia o material se a API não retornar 200" serve.
+
+### Passo 2
+
+Modelo de entrada ou saída não entra no corpo, nem quando é curto.
+Modelo de saída fica em `.agents/assets/templates/`, fora da skill. No corpo, uma frase e nada antes dela: `Leia .agents/assets/templates/<modelo> quando for gerar a saída.`
+Modelo de entrada de uma skill fica em `assets/` dela. Modelo de entrada de várias skills fica em `.agents/assets/`. No corpo: `Leia assets/<modelo> quando for pedir a entrada.` ou `Leia .agents/assets/<modelo> quando for pedir a entrada.`
+No Notion, o modelo de saída não entra na página de uma skill. O modelo de entrada da skill, anexe à página. `assets/<modelo>` viaja com a skill. Nos dois casos, o arquivo entra só quando a frase manda ler.
+
+### Passo 3
+
+Feche com `Scripts disponíveis`: uma lista dos scripts e, em seguida, a lista ordenada de execução. Sem script, a lista é `Nenhum.` e a execução diz que não há script.
+Os passos não citam comando nem nome de arquivo. O passo diz o que será feito. O comando fica só em `Scripts disponíveis`.
+Comando curto fica nessa seção, com versão fixa quando o ecossistema permite. Comando longo vira script testado em `scripts/`.
+Se um pacote já resolve, cite o comando nessa seção e não crie `scripts/`. O pré-requisito também vai em `compatibility`.
+No Notion o script pode faltar. A lista ordenada separa os dois caminhos. O passo escolhe no início, sem repetir o comando.
+
+### Passo 4
+
+Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
+
+## Problemas comuns
+
+### Modelo no corpo
+
+Se você descrever o formato em texto corrido ou colar o modelo na skill, o agente deixa de casar a estrutura e o modelo entra em toda execução.
+
+1. Mova o modelo de saída para `.agents/assets/templates/`. O de entrada, para `assets/` da skill ou, se várias usam, para `.agents/assets/`.
+2. Deixe no corpo só a frase que manda ler o arquivo quando for pedir a entrada ou gerar a saída.
+3. Não leia o modelo em nenhum outro passo.
+
+### Script compartilhado na skill
+
+Se você deixar em uma skill um script que outras também usam, ele fica preso na página dessa skill.
+
+1. Mova para `.agents/scripts/<nome>/`.
+2. Aponte as skills para esse caminho.
+3. Não anexe o arquivo à página de uma skill só.
+
+## Exemplos de entrada e saída
+
+Estes exemplos ilustram fatos. Eles podem não estar no data source.
+
+### Duas skills passam a rodar o mesmo script de checagem
+
+O script sai de `scripts/` da primeira skill e vai para `.agents/scripts/check-skill/`. As duas citam o comando em `Scripts disponíveis`, e nenhum passo repete o comando.
+
+## Casos-limite
+
+- O script vale para uma skill: `scripts/` dentro dela. Vale para várias: `.agents/scripts/<nome>/`.
+- A skill passaria do limite de linhas ou de tokens do corpo: proponha `references/` e a condição de leitura.
+- Um pacote já resolve: o comando fica em `Scripts disponíveis`, sem `scripts/`.
+- A skill não tem script: a lista é `Nenhum.` e a execução diz que não há script.
+
+## Pegadinhas
+
+- Modelo de saída não entra no corpo. Fica em `.agents/assets/templates/`.
+- No Notion, o script pode faltar na página. A execução precisa de um caminho sem ele.
+
+## Scripts disponíveis
+
+- Nenhum.
+
+1. Não há script para executar.

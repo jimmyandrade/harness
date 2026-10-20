@@ -226,6 +226,17 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses writing, reviewing, or altering the Google Calendar event, auditing time use, the day or week lookup, a significant date, travel, and replacing health guidance
 
+### definir-arquivos-da-habilidade
+- **Stability**: experimental
+- **Description**: Place the scripts, references, templates, and tests of a skill, and write Scripts disponíveis
+- **Properties**:
+  - Lives at `.agents/skills/definir-arquivos-da-habilidade/SKILL.md`, split from criar-habilidade, which points to it
+  - Keeps a script used by one skill in its `scripts/`, and a script used by several in `.agents/scripts/<nome>/`
+  - Keeps input and output templates out of the body, with one sentence that says when to read them
+  - Keeps commands out of the steps and lists them only in Scripts disponíveis, with a path for Notion, where the script may be missing
+- **Test Criteria**:
+  - [x] The skill is present at that path
+
 ### definir-ativo-imobilizado
 - **Stability**: experimental
 - **Description**: Register, review, and govern a durable fixed asset

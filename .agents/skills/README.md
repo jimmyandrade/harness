@@ -22,6 +22,7 @@ flowchart LR
     criar_pull_request["criar-pull-request"]
     definir_agenda["definir-agenda"]
     definir_agenda_de_popstar["definir-agenda-de-popstar"]
+    definir_arquivos_da_habilidade["definir-arquivos-da-habilidade"]
     definir_ativo_imobilizado["definir-ativo-imobilizado"]
     definir_conta_bancaria["definir-conta-bancaria"]
     definir_convidado["definir-convidado"]
@@ -90,6 +91,7 @@ flowchart LR
   criar_commit -.-> evoluir_habilidade
   criar_habilidade --> criar_commit
   criar_habilidade --> criar_pull_request
+  criar_habilidade --> definir_arquivos_da_habilidade
   criar_habilidade --> descrever_habilidade_ou_schema
   criar_habilidade --> evoluir_habilidade
   criar_oportunidade --> definir_grupo_de_oportunidades
@@ -115,6 +117,8 @@ flowchart LR
   definir_agenda_de_popstar --> definir_viagem
   definir_agenda_de_popstar --> procurar_agenda
   definir_agenda_de_popstar --> revisar_uso_do_tempo
+  definir_arquivos_da_habilidade --> criar_habilidade
+  definir_arquivos_da_habilidade --> evoluir_habilidade
   definir_ativo_imobilizado --> definir_empresa
   definir_ativo_imobilizado --> gerenciar_estoque
   definir_ativo_imobilizado --> identificar_duplicata
