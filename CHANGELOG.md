@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.49.1](https://github.com/jimmyandrade/harness/compare/v0.49.0...v0.49.1) (2026-10-20)
+
+
+### Bug Fixes
+
+* **reconhecer-imagem:** resolve recipient skills before offering handoff ([#270](https://github.com/jimmyandrade/harness/issues/270)) ([007010f](https://github.com/jimmyandrade/harness/commit/007010fa7ace2605d3b8d9a03f5eb7fc274bc3c3))
+
 ## [0.49.0](https://github.com/jimmyandrade/harness/compare/v0.48.0...v0.49.0) (2026-10-20)
 
 
