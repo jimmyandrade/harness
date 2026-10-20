@@ -3,7 +3,7 @@ name: comunicar-novidade-do-produto
 description: Use essa habilidade sempre que um PR for mesclado ou alguém perguntar o que há de novo no produto para quem o usa, mesmo sem dizer novidade, para decidir se há o que contar e escrever o comunicado sem termos técnicos. NÃO use para a descrição do PR, o changelog nem release notes técnicas.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.6.0"
   related:
     - evoluir-habilidade
 ---
@@ -12,7 +12,7 @@ metadata:
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Repositório` vem do remoto `origin` quando as instruções não dizem.
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Repositório` vem do remoto `origin` quando as instruções não dizem. `Habilidade de tom de voz` vazia quer dizer que o comunicado não passa por uma habilidade de tom de voz.
 
 ```yaml
 "Repositório": ""
@@ -23,6 +23,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Público do comunicado": ""
 "Canal do comunicado": ""
 "Idioma do comunicado": "português"
+"Habilidade de tom de voz": ""
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -47,6 +48,8 @@ Sem novidade: dependência, refatoração, CI, teste, documentação interna, re
 ### Passo 3
 
 Escreva o comunicado no `Idioma do comunicado`, para quem não é técnico: o que muda na prática, onde a pessoa percebe, quem é afetado, se precisa fazer algo e a partir de quando. Nunca cite PR, commit, biblioteca, arquivo nem ferramenta interna. Conte a correção pelo problema que a pessoa sentia: "corrigimos um problema que fazia a página demorar", não o novo comportamento isolado. Um período vira um comunicado só, agrupado por área e com o intervalo corrido no título, como "últimos 15 dias", sem uma seção por semana ou sprint.
+
+Com a `Habilidade de tom de voz` preenchida, o rascunho passa por ela antes de ir para a pessoa, com o público e o canal do comunicado. Quem fala é quem publica o comunicado. Sem saber quem publica, pergunte.
 
 ### Passo 4
 
