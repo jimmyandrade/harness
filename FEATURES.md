@@ -115,6 +115,7 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
   - The mapping lives in the calling repository: data source id, property names, and status option names
   - `mapping` points at another mapping file. A change to that file republishes every skill
   - The page icon comes from the `Ícone das páginas no Notion` and `Cor do ícone das páginas no Notion` settings, with the core fallback
+  - A model page gets the icon of `Ícone dos modelos no Notion` and `Cor do ícone dos modelos no Notion`, `script` in gray by default, when it is created and on every update
   - The project instructions file becomes one more page of the skills database, titled with the file name. Its description and version properties come from `description` and `metadata.version` in the frontmatter, and the description tells the Notion agent to load the page for any task. The page body ends with its parameters in a YAML code block. It publishes when the file changes, when the mapping or the publisher changes, or when the project moves the core version
   - `include-core` also publishes the skills of the core harness into the caller's Notion
   - The `sync-skills` example workflow runs it on each release, with the previous release as `base`, after `check-skill`. A Release Please workflow calls it, and a person can run it by hand with another `base`

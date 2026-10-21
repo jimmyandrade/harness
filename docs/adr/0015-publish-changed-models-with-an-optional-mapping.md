@@ -23,7 +23,7 @@ The skills that cite a model cite it with a sentence the sync must rewrite into 
 - The sync publishes each model whose file changed between `base` and `head`, and every model when the model mapping or the publisher changes. With `include-core`, it publishes the models of the core when the project moves the core version or its model mapping. A model name in both repositories stops the sync.
 - A file without frontmatter, or whose frontmatter has no `name`, is not yet a model and is logged as skipped. A file with a `name` needs `description` and `metadata.version`, and `name` equals the file name. The checker validates that frontmatter and the three sections of ADR 0012 for every model, with the same rule for what is a model, and the version must rise when the file changes.
 - The sync finds the page by the model name, or else by one of its `metadata.aliases`, so a model can take over a page that a person created with another title. It replaces the page body with the file body and never deletes a page, also when the file is removed.
-- A new page gets the icon of skill pages. An update leaves the icon as it is.
+- A new page gets the icon of skill pages. An update leaves the icon as it is. Amended in October 2026: a model page gets its own icon, `Ícone dos modelos no Notion` and `Cor do ícone dos modelos no Notion`, `script` in gray by default, on create and on every update, so all the pages of the models database look alike.
 - A skill page keeps the sentence that cites the model. ADR 0016 replaces the mention that ADR 0012 planned with a citation by name.
 
 ## Consequences

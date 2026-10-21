@@ -27,6 +27,8 @@ TEXT_SETTINGS = {
     "Direção dos fluxogramas",
     "Ícone das páginas no Notion",
     "Cor do ícone das páginas no Notion",
+    "Ícone dos modelos no Notion",
+    "Cor do ícone dos modelos no Notion",
     "Símbolo da pasta no macOS",
     "Idioma das respostas",
 }

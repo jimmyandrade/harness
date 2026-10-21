@@ -4,7 +4,7 @@ import { join } from "node:path"
 import test from "node:test"
 
 import { blockSetting } from "./frontmatter.ts"
-import { pageIcon, statusOptions, versionStatus } from "./notion.ts"
+import { MODEL_ICON_SETTINGS, pageIcon, statusOptions, versionStatus } from "./notion.ts"
 import { coreRoot, INSTRUCTIONS_FILE } from "./project.ts"
 import { block, icon, parameters } from "./fixtures.ts"
 
@@ -43,4 +43,17 @@ test("page icon name and color come from the instructions parameters", () => {
   assert.throws(() => pageIcon(parameters('  "Ícone das páginas no Notion": "magic-wand"\n  "Cor do ícone das páginas no Notion": "silver"\n')))
   assert.equal(blockSetting(block('"Cor do ícone das páginas no Notion": "red"\n'), "Cor do ícone das páginas no Notion"), "red")
   assert.equal(blockSetting(block('"criar-commit":\n  "Organização": "x"\n'), "Organização"), null)
+})
+
+test("model pages read their own icon settings, with script in gray as the core default", () => {
+  const core = readFileSync(join(coreRoot(), INSTRUCTIONS_FILE), "utf8")
+  assert.deepEqual(pageIcon("", core, MODEL_ICON_SETTINGS), { type: "icon", icon: { name: "script", color: "gray" } })
+  assert.deepEqual(
+    pageIcon(parameters('  "Ícone dos modelos no Notion": "document"\n'), core, MODEL_ICON_SETTINGS),
+    { type: "icon", icon: { name: "document", color: "gray" } },
+  )
+  assert.throws(
+    () => pageIcon(parameters('  "Cor do ícone dos modelos no Notion": "silver"\n'), core, MODEL_ICON_SETTINGS),
+    /"Cor do ícone dos modelos no Notion" is not a Notion icon color/,
+  )
 })
