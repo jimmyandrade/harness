@@ -3,7 +3,7 @@ name: definir-registro-de-reuniao
 description: Cadastra e corrige o registro de uma reunião, com título, data, participantes, resumo e índice, onde o projeto guarda os registros. Usada quando a pessoa cola uma transcrição ou pergunta se uma reunião já está registrada. Não serve para achar o contexto de uma reunião nem escrever a ata.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   related:
     - evoluir-habilidade
 ---
@@ -17,8 +17,9 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 ```yaml
 "Tipo de armazenamento dos registros": ""
 "Endereço dos registros": ""
-"Padrão do nome do registro": "AAAA-MM-DD-HH-MM-título-curto"
+"Padrão do nome do arquivo": "AAAA-MM-DD-HH-MM-titulo-curto"
 "Extensão dos registros em arquivo": "md"
+"Padrão do título da página": "DD/MM/AAAA HHhMM: Título da reunião"
 "Nome do índice": "índice"
 "Fonte de identidade das pessoas": ""
 "Fonte de correções de transcrição": ""
@@ -36,14 +37,15 @@ Registre uma reunião a partir de uma transcrição ou anotação, ou corrija um
 flowchart LR
   T{Tipo de armazenamento?} -->|arquivos locais| A[Um arquivo por reunião e um arquivo de índice]
   T -->|Notion| N[Uma página por reunião num banco, que é o índice]
+  T -->|Confluence| C[Uma página por reunião sob uma página ou pasta, que é o índice]
   T -->|Google Drive| D[Um documento por reunião e um documento de índice]
 ```
 
-Nos arquivos locais, `Endereço dos registros` é a pasta. No Notion, o banco e o nome de cada propriedade vêm do mapeamento de dados do projeto, no workspace conectado. Se o banco não estiver nessa conexão, pare. No Google Drive, é a pasta que guarda os documentos. O registro de reunião é sensível: ele fica só nesse lugar. Nada dele vai para repositório, pull request, mensagem nem página fora dele, e um trecho só sai com o pedido explícito da pessoa, para aquele trecho.
+Nos arquivos locais, `Endereço dos registros` é a pasta. No Notion, o banco e o nome de cada propriedade vêm do mapeamento de dados do projeto, no workspace conectado. Se o banco não estiver nessa conexão, pare. No Confluence, é a página ou a pasta sob a qual ficam as páginas das reuniões. No Google Drive, é a pasta que guarda os documentos. O registro de reunião é sensível: ele fica só nesse lugar. Nada dele vai para repositório, pull request, mensagem nem página fora dele, e um trecho só sai com o pedido explícito da pessoa, para aquele trecho.
 
 ### Passo 2
 
-Veja se a reunião já está registrada, pela data, pelo título e pelos participantes. Em arquivos locais e no Google Drive, leia o índice, que tem o `Nome do índice`. No Notion, o próprio banco é o índice. Se já está, corrija o registro que existe. Não crie outro.
+Veja se a reunião já está registrada, pela data, pelo título e pelos participantes. Em arquivos locais e no Google Drive, leia o índice, que tem o `Nome do índice`. No Notion, o próprio banco é o índice. No Confluence, são as páginas sob o endereço dos registros. Se já está, corrija o registro que existe. Não crie outro.
 
 Quando a transcrição já mora num documento do armazenamento, como as anotações que a ferramenta de reunião gera, use esse documento como registro. Não copie o texto: acrescente o resumo e a linha do índice, e deixe a transcrição como está.
 
@@ -60,7 +62,7 @@ flowchart LR
 
 ### Passo 4
 
-Dê ao registro um nome com a data da reunião, o horário de início e um título curto, no `Padrão do nome do registro`: ano, mês, dia, hora e minuto separados por hífen, depois o título em minúsculas, sem acento e com hífens. Em arquivo, o nome termina na `Extensão dos registros em arquivo`. No Notion, o nome é o título da página, e a data, o horário e os participantes vão para as propriedades do mapeamento. A data é a da reunião, não a da criação do registro. O horário nunca falta, porque a mesma pessoa tem mais de uma reunião no mesmo dia.
+O nome do registro depende do tipo de armazenamento. Arquivo local tem nome de arquivo, que é a data da reunião, o horário de início e um título curto, no `Padrão do nome do arquivo`: ano, mês, dia, hora e minuto separados por hífen, depois o título em minúsculas, sem acento e com hífens, e a `Extensão dos registros em arquivo` no fim. Página do Notion ou do Confluence e documento do Google Drive têm título, e título é texto como uma pessoa o escreve: com acento, maiúscula de início de frase e nome próprio, seguindo o `Padrão do título da página`. Não use o nome de arquivo como título. No Notion, a data, o horário e os participantes também vão para as propriedades do mapeamento. A data é a da reunião, não a da criação do registro. O horário nunca falta, porque a mesma pessoa tem mais de uma reunião no mesmo dia.
 
 O registro começa com o título em heading de nível 1. Logo abaixo, um bloco curto com a data e o horário, os participantes e a fonte do texto. Em `Fonte de identidade das pessoas`, ache o nome canônico e o papel de cada participante. Quem não está lá entra com o nome como veio.
 
@@ -89,11 +91,11 @@ O que a pessoa confirmar entra na fonte: nome de pessoa no registro dela, termo 
 
 ### Passo 8
 
-Toda reunião registrada ou corrigida ganha uma linha no índice, com data, horário, título, participantes e o nome ou o link do registro, em ordem de data. No Notion, as propriedades da página fazem esse papel, e não há linha a escrever. Nunca deixe um registro fora do índice.
+Toda reunião registrada ou corrigida ganha uma linha no índice, com data, horário, título, participantes e o nome ou o link do registro, em ordem de data. No Notion, as propriedades da página fazem esse papel, e no Confluence a árvore de páginas sob o endereço dos registros faz, então não há linha a escrever. Nunca deixe um registro fora do índice.
 
 ### Passo 9
 
-Registro sem título em heading de nível 1, sem a extensão certa ou com nome fora do `Padrão do nome do registro`: corrija o título, a extensão, o nome e a linha do índice antes de dizer que está registrado. O registro já existir antes da skill não é motivo para deixá-lo fora do padrão.
+Registro sem título em heading de nível 1, sem a extensão certa ou com nome ou título fora do padrão do seu tipo de armazenamento: corrija o título, a extensão, o nome e a linha do índice antes de dizer que está registrado. O registro já existir antes da skill não é motivo para deixá-lo fora do padrão.
 
 ### Passo 10
 
@@ -149,10 +151,12 @@ Escrevi no resumo que a correção sobe no dia seguinte, com o responsável como
 - A mesma reunião aparece com dois horários de criação: é um registro só. Corrija o que existe.
 - O assunto de `Assuntos fora do resumo` aparece na transcrição: fica na transcrição bruta e fora do resumo.
 - O armazenamento é um banco e uma propriedade opcional falta no mapeamento: liste no fim, sugira criar a propriedade e não escreva esse valor no corpo da página.
+- O mesmo projeto guarda uma cópia em arquivo local e uma página: o nome do arquivo é o slug, e o título da página é o texto convencional. Os dois descrevem a mesma reunião, cada um no seu padrão.
 
 ## Pegadinhas
 
 - Texto colado de outra interface pode trazer lixo no começo, como o nome de um botão ou de um arquivo de áudio. Não é fala.
+- Slug de arquivo e título de página são coisas diferentes. Um título escrito como slug, sem acento e com hífens, fica estranho no Notion, no Confluence e no Google Drive.
 - O reconhecimento de voz erra nome de pessoa e sigla de um jeito que parece outra palavra. O apelido de quem fala também vira outro nome quando alguém o chama.
 - O horário de criação do registro é aproximado: a reunião pode ter começado antes dele.
 - Transcrição com falas identificadas pode ter a pessoa errada atribuída a um trecho.

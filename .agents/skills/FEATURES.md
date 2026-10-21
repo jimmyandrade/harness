@@ -592,12 +592,13 @@ How these skills relate is in `README.md`, in this folder.
 - **Description**: Register or fix the record of a meeting from a pasted transcript, wherever the project keeps its records
 - **Properties**:
   - Lives at `.agents/skills/definir-registro-de-reuniao/SKILL.md`
-  - Reads from the project instructions where the records live: local files, a Notion database, or documents in Google Drive, and asks once when the type or the address is empty
-  - Keeps an index as a file or a document for local files and Google Drive, and treats the Notion database as the index
+  - Reads from the project instructions where the records live: local files, a Notion database, Confluence pages, or documents in Google Drive, and asks once when the type or the address is empty
+  - Keeps an index as a file or a document for local files and Google Drive, and treats the Notion database or the Confluence page tree as the index
+  - Names a local file with an ASCII slug and titles a Notion page, a Confluence page, or a Google Drive document with natural text, each by its own pattern from the project instructions
   - Uses a document that already holds the transcript, such as the notes a meeting tool generates, as the record, without copying its text
   - Looks the meeting up in the index before creating it, and fixes the existing record instead of creating another
   - Finds the title, date, start time, and participants in the connected calendar before asking, and asks once when no single event fits
-  - Names the record with the meeting date, the start time, and a short title, and starts it with a level 1 heading and a block with date, participants, and source
+  - Starts every record with a level 1 heading and a block with date, participants, and source
   - Keeps the raw transcript unchanged after the summary, and applies spelling corrections only to the summary
   - Records as a decision only what was said as a decision, and marks illegible passages as uncertain
   - Does not assign an action to a person from the pronoun or the position of a line when the transcript does not say who speaks, and asks for each assignment with the hypothesis ready
