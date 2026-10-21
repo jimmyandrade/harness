@@ -153,7 +153,7 @@ test("only changed model files are published, and every model when the rules cha
   assert.deepEqual(allTemplateNames(mkdtempSync(join(tmpdir(), "template-pages-"))), [])
 })
 
-test("a model is created with the icon, then updated in place without touching the icon", async () => {
+test("a model is created with the icon, then updated in place with the same icon", async () => {
   const root = templateRoot({ "resumo-de-reuniao.md": summaryTemplate })
   const fresh = templateNotion({})
   assert.deepEqual(await publishTemplates(root, ["resumo-de-reuniao"], fresh.notion, templateMapping), [
@@ -169,7 +169,7 @@ test("a model is created with the icon, then updated in place without touching t
     "update template resumo-de-reuniao: template-1",
   ])
   assert.deepEqual(existing.calls.map(([name]) => name), ["update", "updateMarkdown"])
-  assert.equal(existing.calls[0]?.[1].icon, undefined)
+  assert.deepEqual(existing.calls[0]?.[1].icon, icon)
   assert.equal(existing.calls[1]?.[1].replace_content?.new_str.startsWith("## Contexto"), true)
 })
 

@@ -46,7 +46,7 @@ export type TemplateWriter = {
   updatePage: (pageId: string, page: TemplatePage, mapping: TemplateMapping) => Promise<{ id: string }>
 }
 
-/** Model pages get the icon on create only, so an update keeps the icon a person chose. */
+/** Model pages get the icon of the model settings, on create and on update. */
 export function bindTemplates(notion: NotionApi, icon: PageIcon): TemplateWriter {
   return {
     findPage: (mapping, name) => findByTitle(notion, mapping, name),
@@ -59,7 +59,7 @@ export function bindTemplates(notion: NotionApi, icon: PageIcon): TemplateWriter
       })
     },
     async updatePage(pageId, page, mapping) {
-      await notion.pages.update({ page_id: pageId, properties: templateProperties(page, mapping) })
+      await notion.pages.update({ page_id: pageId, properties: templateProperties(page, mapping), icon })
       return notion.pages.updateMarkdown(replaceArgs(pageId, page))
     },
   }

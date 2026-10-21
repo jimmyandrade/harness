@@ -18,7 +18,7 @@
 import { existsSync, readFileSync } from "node:fs"
 import { join } from "node:path"
 import { pathToFileURL } from "node:url"
-import { notionApi, pageIcon } from "./notion.ts"
+import { MODEL_ICON_SETTINGS, notionApi, pageIcon } from "./notion.ts"
 import {
   CORE_VERSION_PATHS,
   coreNamesToPublish,
@@ -144,7 +144,7 @@ export async function main(argv: string[]): Promise<number> {
     console.log(`core ${line}`)
   }
   if (templateMapping) {
-    const templates = bindTemplates(api, icon)
+    const templates = bindTemplates(api, pageIcon(instructionsText(root), instructionsText(core), MODEL_ICON_SETTINGS))
     for (const line of await publishTemplates(root, templateNames, templates, templateMapping)) {
       console.log(line)
     }

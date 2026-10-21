@@ -1,6 +1,6 @@
 ---
 metadata:
-  version: "1.10.0"
+  version: "1.11.0"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -13,6 +13,8 @@ metadata:
       "Direção dos fluxogramas": "LR"
       "Ícone das páginas no Notion": "magic-wand"
       "Cor do ícone das páginas no Notion": "gray"
+      "Ícone dos modelos no Notion": "script"
+      "Cor do ícone dos modelos no Notion": "gray"
       "Símbolo da pasta no macOS": "wand.and.sparkles"
       "Considerar grupos de oportunidades": "sim"
       "Idioma da issue": "português do Brasil"

@@ -58,13 +58,26 @@ export function settingValue(texts: string[], key: string): string {
   throw new Error(`"${key}" is missing from metadata.parameters of ${INSTRUCTIONS_FILE}`)
 }
 
-export function pageIcon(text: string, fallback = ""): PageIcon {
+export type IconSettings = { name: string; color: string }
+
+export const SKILL_ICON_SETTINGS: IconSettings = {
+  name: "Ícone das páginas no Notion",
+  color: "Cor do ícone das páginas no Notion",
+}
+
+export const MODEL_ICON_SETTINGS: IconSettings = {
+  name: "Ícone dos modelos no Notion",
+  color: "Cor do ícone dos modelos no Notion",
+}
+
+/** The icon of a kind of page, from the instructions parameters, with the core fallback. */
+export function pageIcon(text: string, fallback = "", settings: IconSettings = SKILL_ICON_SETTINGS): PageIcon {
   const texts = [text, fallback]
-  const name = settingValue(texts, "Ícone das páginas no Notion")
-  const color = settingValue(texts, "Cor do ícone das páginas no Notion")
-  if (!name) throw new Error('"Ícone das páginas no Notion" is empty')
+  const name = settingValue(texts, settings.name)
+  const color = settingValue(texts, settings.color)
+  if (!name) throw new Error(`"${settings.name}" is empty`)
   if (!ICON_COLORS.includes(color as IconColor)) {
-    throw new Error('"Cor do ícone das páginas no Notion" is not a Notion icon color')
+    throw new Error(`"${settings.color}" is not a Notion icon color`)
   }
   return { type: "icon", icon: { name, color: color as IconColor } }
 }
