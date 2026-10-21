@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.72.0](https://github.com/jimmyandrade/harness/compare/v0.71.0...v0.72.0) (2026-10-21)
+
+
+### Features
+
+* **skills:** add escrever-teste and escrever-codigo, and the session attribution and slicing parameters to criar-commit and criar-pull-request ([#342](https://github.com/jimmyandrade/harness/issues/342)) ([59a9ce8](https://github.com/jimmyandrade/harness/commit/59a9ce8a5dc35954770d0c3903935296f12f3d44))
+
 ## [0.71.0](https://github.com/jimmyandrade/harness/compare/v0.70.0...v0.71.0) (2026-10-21)
 
 
