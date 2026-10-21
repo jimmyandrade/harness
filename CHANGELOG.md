@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.74.0](https://github.com/jimmyandrade/harness/compare/v0.73.0...v0.74.0) (2026-10-21)
+
+
+### Features
+
+* **skills:** add the topics that do not resolve in chat to the Slack message skill and widen the meeting summary exclusions to derived texts ([#346](https://github.com/jimmyandrade/harness/issues/346)) ([a79913c](https://github.com/jimmyandrade/harness/commit/a79913cc523d29622cf91e0c1b97e65da8d255a7))
+
 ## [0.73.0](https://github.com/jimmyandrade/harness/compare/v0.72.0...v0.73.0) (2026-10-21)
 
 
