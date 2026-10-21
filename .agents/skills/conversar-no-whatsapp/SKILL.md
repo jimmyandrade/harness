@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.6.0"
   internal: true
   notion: "false"
   related:
@@ -24,17 +24,18 @@ Leia os valores nas instruções do projeto, na entrada desta habilidade. Na aus
 ```yaml
 "Formato da data com dia da semana": "terça-feira, 01/09/2026"
 "Modo de aprendizado": "perguntar"
+"Etiqueta das conversas": ""
 ```
 
 ## Instruções
 
 ### Passo 1
 
-Peça o assunto: quem pediu, sobre quem ou o quê, e se a pessoa quer só ler ou também responder ou enviar. Use o WhatsApp Web no navegador da pessoa. Procure primeiro uma aba do WhatsApp Web que já esteja aberta e use essa. Sem aba, abra uma. Se aparecer o QR code, pare e peça para a pessoa conectar o celular. Não tente ler o banco do aplicativo de desktop.
+Peça o assunto: quem pediu, sobre quem ou o quê, e se a pessoa quer só ler ou também responder ou enviar. Use o WhatsApp Web no navegador da pessoa. Procure primeiro uma aba do WhatsApp Web que já esteja aberta entre as abas que você controla e use essa. Sem aba, abra o WhatsApp Web numa aba sua. Se aparecer o aviso de que o WhatsApp está aberto em outra janela, clique em "Usar aqui". Não peça para a pessoa mover a aba dela. Se aparecer o QR code, pare e peça para a pessoa conectar o celular. Não tente ler o banco do aplicativo de desktop.
 
 ### Passo 2
 
-Espere a lista de conversas carregar antes de ler. Ache a conversa pelo nome na lista ou pela busca. Um pedido costuma estar em mais de uma conversa: na de quem pediu, na da pessoa envolvida e num grupo. Abra cada conversa ligada ao assunto e leia o texto da conversa aberta, não só a prévia da lista.
+Espere a lista de conversas carregar antes de ler. Com `Etiqueta das conversas` preenchida, filtre a lista por essa etiqueta antes de procurar. Ache a conversa pelo nome na lista ou pela busca. Um pedido costuma estar em mais de uma conversa: na de quem pediu, na da pessoa envolvida e num grupo. Abra cada conversa ligada ao assunto e leia o texto da conversa aberta, não só a prévia da lista.
 
 Antes de abrir uma conversa com mensagens não lidas, diga que abrir marca essas mensagens como lidas, também no celular de quem enviou. Pergunte se pode abrir. Não diga que nada foi marcado como lido depois de abrir uma conversa assim.
 
@@ -107,6 +108,14 @@ Se você fechar a aba do WhatsApp Web no fim da tarefa, a sessão cai e a pessoa
 1. Deixe a aba aberta.
 2. Na próxima vez, use essa aba.
 
+### Aba da pessoa fora do alcance
+
+Se você pedir para a pessoa mover a aba do WhatsApp Web para o seu grupo de abas, ela move e você continua sem ver. No Claude in Chrome, o grupo de abas pertence a uma sessão, e o ID muda. Não dá para guardar o ID nem reaproveitar o grupo.
+
+1. Abra o WhatsApp Web numa aba sua.
+2. Clique em "Usar aqui".
+3. Aplique o filtro de `Etiqueta das conversas`.
+
 ### Dia da semana errado
 
 Se você converter "sexta-feira" contando a partir de outro dia que não hoje, a data da demanda sai um dia errada.
@@ -168,6 +177,7 @@ Mostrei a conversa do Caio e o texto "Podemos falar 15h00?". Enviei depois do si
 
 ## Pegadinhas
 
+- A aba que a pessoa já deixou aberta pode estar fora das abas que você controla. "Usar aqui" passa a conexão para a sua aba, e a aba dela fica desconectada sem perder o login.
 - Fechar a aba do WhatsApp Web desconecta a sessão. A pessoa precisa ler o QR code de novo.
 - O WhatsApp Web leva alguns segundos para carregar. A primeira leitura pode mostrar só a tela de carregamento.
 - O texto da página traz a lista de conversas inteira antes da conversa aberta. A conversa aberta começa depois do nome do contato no cabeçalho.
