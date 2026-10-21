@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.63.0](https://github.com/jimmyandrade/harness/compare/v0.62.0...v0.63.0) (2026-10-21)
+
+
+### Features
+
+* **acompanhar-fila-de-revisao:** add the skill that runs the cycle of the review queue ([#321](https://github.com/jimmyandrade/harness/issues/321)) ([c2d072f](https://github.com/jimmyandrade/harness/commit/c2d072f90518b61c1a1d853540bb1e7804818528))
+* **definir-link-utm:** add the UTM link skill without internal ids ([#319](https://github.com/jimmyandrade/harness/issues/319)) ([43fa382](https://github.com/jimmyandrade/harness/commit/43fa38276a370b5f02fa0955850408870cfd103a))
+* **procurar-pedido-de-revisao:** add the skill that finds the pull requests someone asked to be reviewed ([#320](https://github.com/jimmyandrade/harness/issues/320)) ([453f20a](https://github.com/jimmyandrade/harness/commit/453f20a1441ba00c9460d7db4390cbea1db0c30c))
+* **publicar-revisao-de-codigo:** add the isolated copy, the lock, the CI wait and the start signal ([#318](https://github.com/jimmyandrade/harness/issues/318)) ([30d11f0](https://github.com/jimmyandrade/harness/commit/30d11f04aed305726b9d458679a2f15136d3acf9))
+
+
+### Bug Fixes
+
+* keep pending items out of the product announcement ([#311](https://github.com/jimmyandrade/harness/issues/311)) ([d57c90a](https://github.com/jimmyandrade/harness/commit/d57c90a9813fff7a9ca0f347aed02d42da0ce3d1))
+
 ## [0.62.0](https://github.com/jimmyandrade/harness/compare/v0.61.0...v0.62.0) (2026-10-21)
 
 
