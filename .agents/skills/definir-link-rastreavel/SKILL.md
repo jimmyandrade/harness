@@ -3,7 +3,7 @@ name: definir-link-rastreavel
 description: Monta, revisa ou corrige os parâmetros UTM de um link, do jeito que o padrão define, sem dado interno nem pessoal. Usada quando alguém vai divulgar um link e quer medir de onde vêm os acessos, ou quando um link, um gerador ou um código monta UTM fora do padrão. Não serve para encurtar o link, criar o post nem ler o relatório do Analytics.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.5.1"
   aliases:
     - definir-link-utm
     - definir-parametros-utm
@@ -42,7 +42,7 @@ Monte cada parâmetro com o significado do padrão:
 - `utm_campaign`: a campanha ou a ação, com um nome público.
 - `utm_content`: a peça, a variação ou a posição do link na peça.
 - `utm_term`: só a palavra-chave de mídia paga ou a palavra que a pessoa digitou numa automação. Fora disso, fica vazio.
-- `utm_id`: o id público da campanha. Pode ser o id da campanha numa plataforma externa, como a de anúncio, ou um id que o projeto gera para a campanha e que pode combinar o evento com quem divulga: a marca, um artista ou um influencer. Sem esse id, fica vazio.
+- `utm_id`: o id público da campanha, quando ele existe. Vem da plataforma de anúncio, como o Google Ads ou o Meta Ads, ou de um id que o projeto gera para a campanha e que pode combinar o evento com quem divulga: a marca, um artista ou um influencer. Sem esse id, fica vazio.
 
 Origem ou meio fora das listas: pergunte. Não invente um valor novo.
 
@@ -101,6 +101,7 @@ O id interno do evento sai de `utm_term`. `utm_id` leva o id público da campanh
 - A campanha não tem nome público: pergunte o nome. Não use o id.
 - O link já chega com UTM de outra campanha: preserve, e não sobrescreva sem pedido.
 - Gerador ou código que preenche um parâmetro com id interno por padrão: o padrão sai, e o campo fica vazio ou recebe o nome público.
+- Gerador de links, na tela, na API, no MCP ou na linha de comando: `utm_id` é opcional e recebe só o id da campanha. Não o preencha com o id do evento.
 
 ## Pegadinhas
 
