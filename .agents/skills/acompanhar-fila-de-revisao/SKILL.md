@@ -3,14 +3,14 @@ name: acompanhar-fila-de-revisao
 description: Roda o ciclo da fila de revisão de pull requests. Confere o horário, cuida primeiro dos seus PRs, acha os pedidos, fecha o laço dos já revisados, escolhe o próximo, revisa um por execução e prepara o aviso a quem pediu. Só deixa rascunho e link, nunca envia. Não serve para revisar sozinha nem achar pedidos por conta própria.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
   notion: "false"
   related:
     - enviar-mensagem-no-slack
     - evoluir-habilidade
     - procurar-pedido-de-revisao
     - publicar-revisao-de-codigo
-    - resolver-comentarios-de-revisao
+    - atender-revisao-de-pull-request
 ---
 
 # Acompanhar fila de revisão
@@ -49,7 +49,7 @@ Com `Respeitar a agenda` em `sim`, veja se a pessoa está agora em ausência ou 
 
 ### Passo 2
 
-Cuide primeiro dos PRs da própria pessoa que precisam de ação, antes de qualquer outro item: mudanças pedidas, comentários abertos, checks falhando. Avise com o link, no chat ou no resumo, e trate os comentários com `resolver-comentarios-de-revisao`. Esses PRs não entram na fila.
+Cuide primeiro dos PRs da própria pessoa que precisam de ação, antes de qualquer outro item: mudanças pedidas, comentários abertos, checks falhando. Avise com o link, no chat ou no resumo, e trate os comentários com `atender-revisao-de-pull-request`. Esses PRs não entram na fila.
 
 ### Passo 3
 
