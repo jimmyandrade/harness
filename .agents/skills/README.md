@@ -51,6 +51,7 @@ flowchart LR
     definir_tipo_do_evento["definir-tipo-do-evento"]
     definir_viagem["definir-viagem"]
     descrever_habilidade_ou_schema["descrever-habilidade-ou-schema"]
+    enviar_mensagem_no_slack["enviar-mensagem-no-slack"]
     evoluir_habilidade["evoluir-habilidade"]
     gerenciar_estoque["gerenciar-estoque"]
     identificar_duplicata["identificar-duplicata"]
@@ -238,6 +239,8 @@ flowchart LR
   descrever_habilidade_ou_schema --> criar_pull_request
   descrever_habilidade_ou_schema --> evoluir_habilidade
   descrever_habilidade_ou_schema --> revisar_habilidade
+  enviar_mensagem_no_slack --> definir_pessoa
+  enviar_mensagem_no_slack --> evoluir_habilidade
   evoluir_habilidade --> criar_commit
   evoluir_habilidade --> criar_pull_request
   evoluir_habilidade --> definir_instrucoes_do_projeto
