@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.68.0](https://github.com/jimmyandrade/harness/compare/v0.67.0...v0.68.0) (2026-10-21)
+
+
+### Features
+
+* **skills:** cover relevance, groups, not-ready labels, merged on arrival and required checks in the review queue ([#331](https://github.com/jimmyandrade/harness/issues/331)) ([8391bd1](https://github.com/jimmyandrade/harness/commit/8391bd1c40d398bb19b833236cea1df166413de1))
+
 ## [0.67.0](https://github.com/jimmyandrade/harness/compare/v0.66.0...v0.67.0) (2026-10-21)
 
 
