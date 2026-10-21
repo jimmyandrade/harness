@@ -3,7 +3,7 @@ name: acompanhar-fila-de-revisao
 description: Roda o ciclo da fila de revisão de pull requests. Confere o horário, cuida primeiro dos seus PRs, acha os pedidos, fecha o laço dos já revisados, escolhe o próximo, revisa um por execução e prepara o aviso a quem pediu. Os avisos ficam só como rascunho, com o link. Não serve para revisar sozinha nem achar pedidos por conta própria.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   notion: "false"
   related:
     - enviar-mensagem-no-slack
@@ -29,6 +29,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Prioridade por pessoa": ""
 "Teto de nível por pessoa": ""
 "Revisões por execução": "1"
+"Checks exigidos": ""
+"Sinais de status": ""
 "Publicar em execução agendada": "não"
 "Avisar quem pediu": "sim"
 "Canais sem aviso": ""
@@ -38,7 +40,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Modo de aprendizado": "perguntar"
 ```
 
-`Modo de execução` é `interativo`, numa sessão aberta com a pessoa, ou `agendado`, sem ninguém na frente. `Horário de funcionamento` traz os dias e as horas em que o ciclo roda. `Ordem da fila` lista os critérios de desempate, do mais forte ao mais fraco. `Regras de aviso a terceiros` é uma lista de regras, cada uma com a condição (autor, repositório, texto do PR ou resultado da revisão) e o texto do aviso.
+`Checks exigidos` lista os checks que precisam ter terminado antes da revisão, e vazio exige todos. `Sinais de status` diz que marca colocar na mensagem do pedido em cada estado (na fila, em revisão, com resultado, mesclado). `Modo de execução` é `interativo`, numa sessão aberta com a pessoa, ou `agendado`, sem ninguém na frente. `Horário de funcionamento` traz os dias e as horas em que o ciclo roda. `Ordem da fila` lista os critérios de desempate, do mais forte ao mais fraco. `Regras de aviso a terceiros` é uma lista de regras, cada uma com a condição (autor, repositório, texto do PR ou resultado da revisão) e o texto do aviso.
 
 ## Instruções
 
@@ -50,7 +52,7 @@ Com `Respeitar a agenda` em `sim`, veja se a pessoa está agora em ausência ou 
 
 ### Passo 2
 
-Cuide primeiro dos PRs da própria pessoa que precisam de ação, antes de qualquer outro item: mudanças pedidas, comentários abertos, checks falhando. Avise com o link, no chat ou no resumo, e trate os comentários com `atender-revisao-de-pull-request`. Esses PRs não entram na fila.
+Cuide primeiro dos PRs da própria pessoa que precisam de ação, antes de qualquer outro item. Precisam de ação: mudanças pedidas, comentários abertos, check exigido falhando. Só avise, sem agir, o PR aprovado e pronto para mesclar e o PR bloqueado por etiqueta ou por dependência. Avise com o link, no chat ou no resumo, e trate os comentários com `atender-revisao-de-pull-request`. Esses PRs não entram na fila.
 
 ### Passo 3
 
@@ -67,7 +69,7 @@ Feche o laço antes de qualquer PR novo. O laço são os PRs abertos de outras p
 
 ### Passo 5
 
-Ordene o resto da fila pela `Ordem da fila`, com a `Prioridade por repositório` e a `Prioridade por pessoa`. O `Teto de nível por pessoa` limita o nível da fonte de PRs de certas pessoas. O laço do Passo 4 vem sempre primeiro, e os PRs que saíram de andamento ficam na frente dos outros do mesmo nível.
+Passe para a frente da fila o PR que ainda espera um dos `Checks exigidos` terminar: ele não é revisado agora, fica como esperando checks e o ciclo segue para o próximo. Ordene o resto da fila pela `Ordem da fila`, com a `Prioridade por repositório` e a `Prioridade por pessoa`. O `Teto de nível por pessoa` limita o nível da fonte de PRs de certas pessoas. O laço do Passo 4 vem sempre primeiro, e os PRs que saíram de andamento ficam na frente dos outros do mesmo nível.
 
 ### Passo 6
 
@@ -78,6 +80,8 @@ Em modo agendado, repasse `Publicar em execução agendada` a `publicar-revisao-
 ### Passo 7
 
 Com `Avisar quem pediu` em `sim`, depois de uma revisão publicada, prepare o aviso de status na mesma thread em que o pedido foi feito, com `enviar-mensagem-no-slack`. Reagir à mensagem não substitui o aviso.
+
+Com `Sinais de status` preenchido, marque a mensagem do pedido com o sinal do estado: ao entrar na fila, ao começar a revisão, ao publicar com o resultado, e ao achar o PR já mesclado na chegada. Um canal que recusa reação não recebe insistência, e a recusa não vira aviso à pessoa.
 
 - O aviso diz só o status e o link do PR. Nunca discute código e nunca soa como reprovação.
 - Pedido que veio por mensagem direta é revisado do mesmo jeito, mas não gera aviso por mensagem direta: diga no resumo que ele veio por lá, com o link, para a pessoa decidir.
@@ -93,7 +97,7 @@ Guarde o estado da fila e as datas das varreduras em `Onde guardar o estado da f
 
 ### Passo 9
 
-Termine com um resumo: o que foi achado, o que foi revisado, os rascunhos com o link da thread de cada um, as falhas e as pendências. Em modo agendado, uma pergunta de calibração, de grupo, de canal ou de login nunca vai por mensagem direta: fica no resumo, uma de cada vez, e se repete a cada execução até a pessoa responder no chat. Em modo interativo, a mesma pergunta é feita no chat.
+Termine com um resumo: o que foi achado, o que foi revisado, os pedidos cujo PR já estava mesclado ou fechado, os PRs que esperam checks, os rascunhos com o link da thread de cada um, as falhas e as pendências. Em modo agendado, uma pergunta de calibração, de grupo, de canal ou de login nunca vai por mensagem direta: fica no resumo, uma de cada vez, e se repete a cada execução até a pessoa responder no chat. Em modo interativo, a mesma pergunta é feita no chat.
 
 Só conclua quando nenhum subagente estiver em execução.
 
@@ -109,6 +113,13 @@ Se você revisar um PR novo antes de fechar o laço dos já revisados, os PRs qu
 
 1. Feche o laço no Passo 4 antes de escolher o primeiro item.
 2. Mantenha o laço fora das outras listas.
+
+### Check pendente travando a fila
+
+Se você parar o ciclo porque o primeiro item espera um check, os outros PRs ficam parados por um deles.
+
+1. Marque o PR como esperando checks.
+2. Siga para o próximo da fila.
 
 ### Aviso por mensagem direta
 

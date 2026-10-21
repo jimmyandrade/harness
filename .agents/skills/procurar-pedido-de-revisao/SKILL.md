@@ -3,7 +3,7 @@ name: procurar-pedido-de-revisao
 description: Acha os pull requests que alguém pediu para a pessoa revisar, na conversa do time e no GitHub, sem repetir um já visto. Marca os que não estão prontos, abre nova rodada num PR já revisado e propõe a pergunta de acompanhamento de um PR em andamento. Não serve para revisar nem para enviar mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   notion: "false"
   related:
     - definir-pessoa
@@ -26,16 +26,19 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Autores acompanhados": ""
 "Repositórios acompanhados": ""
 "Autores ignorados": ""
+"Regras de relevância por repositório": ""
 "Equipes que valem como a pessoa": ""
+"Grupos da pessoa": ""
 "Etiqueta de pronto para revisão": ""
 "Repositórios que exigem a etiqueta": ""
 "Marcadores de trabalho em andamento": "WIP, [WIP], wip, do not merge"
+"Etiquetas de não pronto": ""
 "Intervalos de pergunta sobre PR em andamento": "1, 1, 2, 3, 5, 8, 13"
 "Registro de PRs conhecidos": ""
 "Modo de aprendizado": "perguntar"
 ```
 
-`Fontes de pedido de revisão` lista, em ordem, o que varrer: `conversa`, `pedidos no GitHub`, `autores acompanhados`, `repositórios acompanhados` e `anúncios de bot`. `Intervalos de pergunta sobre PR em andamento` são dias úteis entre as perguntas, e depois do último valor cada intervalo é a soma dos dois anteriores. `Registro de PRs conhecidos` diz onde guardar o que já foi visto, com a data da última varredura de cada fonte. Sem registro, a habilidade só enxerga esta execução e não reconhece um PR já visto.
+`Fontes de pedido de revisão` lista, em ordem, o que varrer: `conversa`, `pedidos no GitHub`, `autores acompanhados`, `repositórios acompanhados` e `anúncios de bot`. `Intervalos de pergunta sobre PR em andamento` são dias úteis entre as perguntas, e depois do último valor cada intervalo é a soma dos dois anteriores. `Registro de PRs conhecidos` diz onde guardar o que já foi visto, com a data da última varredura de cada fonte. Sem registro, a habilidade só enxerga esta execução e não reconhece um PR já visto. `Grupos da pessoa` lista os grupos de conversa cuja menção vale como menção a ela, por identificador. `Etiquetas de não pronto` lista etiquetas do PR que o marcam como não pronto, além dos marcadores no título. `Regras de relevância por repositório` diz, por repositório ou padrão de nome, se vale revisar: sempre, nunca, ou só com condição (por exemplo, só com pedido na conversa que marque a pessoa ou um dos `Grupos da pessoa`).
 
 ## Instruções
 
@@ -56,7 +59,7 @@ Dê a cada candidato um nível de fonte, do mais ao menos prioritário:
 5. menção a um grupo dela, em canal público;
 6. sem menção, com o canal do time antes de um canal qualquer.
 
-Uma busca ampla por link de PR perde mensagens diretas. Busque-as à parte.
+Uma busca ampla por link de PR perde mensagens diretas. Busque-as à parte, e descarte as mensagens da própria pessoa e os links que não são de PR. A menção a um dos `Grupos da pessoa` conta como menção a um grupo dela.
 
 ### Passo 3
 
@@ -68,9 +71,11 @@ Varra o GitHub pelas fontes pedidas:
 
 Ignore os PRs dos `Autores ignorados`, em qualquer fonte, e não diga o motivo em lugar nenhum.
 
+Aplique as `Regras de relevância por repositório` a todo candidato, de qualquer fonte. Um PR de repositório que a regra manda ignorar sai da lista. Uma regra condicional, como "só com pedido que marque a pessoa", só deixa passar o PR cujo pedido cumpre a condição: um PR achado só no GitHub, ou pedido sem a marcação, sai. Diga na lista quantos PRs saíram e por qual regra, sem citar o motivo de uma regra pessoal.
+
 ### Passo 4
 
-Leia os `Canais de anúncio de bot`, se `anúncios de bot` está nas fontes. O anúncio de um bot não é um pedido: não coloca o PR na fila nem gera resposta. Guarde o endereço da mensagem e o estado do PR, reconfira o estado a cada execução e use a conversa do anúncio como lugar para falar do PR quando precisar.
+Leia os `Canais de anúncio de bot`, se `anúncios de bot` está nas fontes. O anúncio de um bot não é um pedido: não coloca o PR na fila nem gera resposta. Leia o canal no formato detalhado: o texto do anúncio vem em anexo, e a leitura resumida devolve a mensagem vazia. A data do anúncio não é a do PR. Guarde o endereço da mensagem e o estado do PR, reconfira o estado a cada execução e use a conversa do anúncio como lugar para falar do PR quando precisar.
 
 ### Passo 5
 
@@ -78,9 +83,11 @@ Junte as fontes. O mesmo PR vindo de duas fontes é um só, identificado pelo en
 
 Um PR já revisado e ainda aberto, com um pedido novo depois da última revisão, volta como nova rodada. O pedido novo pode ser uma mensagem mais recente ou um pedido individual de revisão no GitHub feito depois da última review. A nova rodada recalcula o nível pelo pedido novo, não pelo original.
 
+Confira o estado de cada candidato agora. Um PR já mesclado ou fechado não entra na lista de candidatos: devolva-o à parte, como mesclado ou fechado na chegada, com o endereço da mensagem do pedido, para quem chamou sinalizar e avisar se quiser.
+
 ### Passo 6
 
-Aplique o gate de pronto para revisão. Um PR não está pronto quando é rascunho, tem um dos `Marcadores de trabalho em andamento`, ou está sem a `Etiqueta de pronto para revisão` num dos `Repositórios que exigem a etiqueta`.
+Aplique o gate de pronto para revisão. Um PR não está pronto quando é rascunho, tem um dos `Marcadores de trabalho em andamento`, tem uma das `Etiquetas de não pronto`, ou está sem a `Etiqueta de pronto para revisão` num dos `Repositórios que exigem a etiqueta`.
 
 - Um PR que não está pronto não é revisado nem enfileirado como pronto. Se veio só do GitHub, fica em acompanhamento e entra quando a condição deixar de valer.
 - Se veio com um pedido explícito na conversa, marque-o como esperando confirmação e proponha uma pergunta única na thread do pedido, marcando quem abriu: o PR está pronto para revisão? Não discuta código.
