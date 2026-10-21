@@ -103,6 +103,7 @@ export type Entry = {
   forbiddenIn?: readonly string[]
   decidedBy?: Person
   source?: string
+  notes?: string
   caseSensitive?: boolean
 }
 
@@ -167,6 +168,7 @@ export function load(text: string): Entry[] {
     if (row.forbidden_in !== undefined) entry.forbiddenIn = row.forbidden_in
     if (row.decided_by !== undefined) entry.decidedBy = row.decided_by
     if (row.source !== undefined) entry.source = row.source
+    if (row.notes !== undefined) entry.notes = row.notes
     if (row.case_sensitive === true) entry.caseSensitive = true
     seen.add(key)
     previous = entry.order
@@ -540,6 +542,7 @@ function serialize(entries: readonly Entry[]): string {
     if (entry.forbiddenIn !== undefined && entry.forbiddenIn.length > 0) row.forbidden_in = entry.forbiddenIn
     if (entry.decidedBy !== undefined) row.decided_by = entry.decidedBy
     if (entry.source !== undefined) row.source = entry.source
+    if (entry.notes !== undefined) row.notes = entry.notes
     if (entry.caseSensitive === true) row.case_sensitive = true
     file[entry.term] = row
   }
@@ -560,6 +563,7 @@ function fillTerm(shell: Entry, item: BulkTerm, entries: Entry[], writing: Reado
   if (item.when !== undefined) shell.when = item.when
   if (item.decided_by !== undefined) shell.decidedBy = item.decided_by
   if (item.source !== undefined) shell.source = item.source
+  if (item.notes !== undefined) shell.notes = item.notes
   if (item.case_sensitive) shell.caseSensitive = true
   const related = resolveRegistered(entries, item.related, item.term, writing)
   if (related.length > 0) shell.related = related
@@ -595,6 +599,7 @@ export function registrationOf(language: string, entry: Entry): TermRegistration
   if (entry.forbiddenIn !== undefined && entry.forbiddenIn.length > 0) registration.forbidden_in = [...entry.forbiddenIn]
   if (entry.decidedBy !== undefined) registration.decided_by = entry.decidedBy
   if (entry.source !== undefined) registration.source = entry.source
+  if (entry.notes !== undefined) registration.notes = entry.notes
   if (entry.caseSensitive === true) registration.case_sensitive = true
   return registration
 }
@@ -755,6 +760,7 @@ function sameFields(entry: Entry, item: BulkTerm): boolean {
     && entry.when === item.when
     && samePerson(entry.decidedBy, item.decided_by)
     && entry.source === item.source
+    && entry.notes === item.notes
     && sameList(entry.examples, item.examples)
     && sameList(entry.rejected, item.rejected)
     && sameList(entry.alternatives, item.alternatives)

@@ -561,3 +561,51 @@ test("case_sensitive is refused when it is not true or false", async () => {
     assert.equal((await response.json()).error, "case_sensitive is true or false.")
   })
 })
+
+test("notes are stored and a lookup returns them", async () => {
+  await withGlossary("{}\n", async (port, root) => {
+    const response = await post(port, {
+      language: "pt-BR",
+      mode: "insert",
+      terms: [
+        {
+          state: "forbidden",
+          term: ":prayge:",
+          description: "Emoji custom do canal",
+          substitution: ":pepelove:",
+          allowed_in: ["camila"],
+          notes: "O rascunho de 14/10 fechava com esse emoji e o post saiu com outro. Para camila: só em Slack animado.",
+        },
+      ],
+    })
+    assert.equal(response.status, 200)
+    const stored = JSON.parse(readFileSync(join(root, "pt-BR.json"), "utf8"))
+    assert.equal(stored[":prayge:"].notes, "O rascunho de 14/10 fechava com esse emoji e o post saiu com outro. Para camila: só em Slack animado.")
+    const lookup = await fetch(`http://127.0.0.1:${port}/v1/lookup`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ language: "pt-BR", term: ":prayge:", tags: ["camila"] }),
+    })
+    const found = await lookup.json()
+    assert.equal(found.state, "allowed")
+    assert.match(found.notes, /só em Slack animado/)
+  })
+})
+
+test("changed notes update the row and the same notes leave it unchanged", async () => {
+  await withGlossary("{}\n", async (port) => {
+    const term = (notes: string) => ({ state: "forbidden", term: "migo", description: "Tratamento no masculino", substitution: "migs", notes })
+    await post(port, { language: "pt-BR", mode: "upsert", terms: [term("Decidido em 2026-10-08.")] })
+    const same = await (await post(port, { language: "pt-BR", mode: "upsert", terms: [term("Decidido em 2026-10-08.")] })).json()
+    assert.equal(same.unchanged.length, 1)
+    const changed = await (await post(port, { language: "pt-BR", mode: "upsert", terms: [term("Decidido em 2026-10-09.")] })).json()
+    assert.equal(changed.updated.length, 1)
+  })
+})
+
+test("a row without notes stays without the field", async () => {
+  await withGlossary("{}\n", async (port, root) => {
+    await post(port, { language: "pt-BR", mode: "insert", terms: [allowed("oi", "saudação")] })
+    assert.equal(JSON.parse(readFileSync(join(root, "pt-BR.json"), "utf8")).oi.notes, undefined)
+  })
+})

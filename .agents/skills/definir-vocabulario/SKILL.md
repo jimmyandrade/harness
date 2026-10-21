@@ -3,7 +3,7 @@ name: definir-vocabulario
 description: Use essa habilidade sempre que for cadastrar ou atualizar um ou mais termos do vocabulário do tom de voz, mesmo sem dizer glossário, lote ou estado. NÃO use para escrever, revisar ou aprovar o texto da marca, classificar uma frase, perguntar quais variações de gênero, número ou grafia foram cadastradas, nem inventar um termo que a pessoa não enviou.
 metadata:
   author: jimmyandrade
-  version: "0.26.0"
+  version: "0.27.0"
   related:
     - evoluir-habilidade
     - procurar-variacao-de-termo
@@ -67,6 +67,7 @@ Valide o plano antes de gravar.
 - `forbidden` e `strongly_discouraged` recusam `examples`. O exemplo ruim vai em `rejected`.
 - Campo esperado que a pessoa não tem fica de fora. A escrita grava e devolve em `incomplete`. Diga essa lista. Não invente o campo. Passe `Validação dos campos` em `validation`.
 - Quem decidiu vai em `decided_by`, como os campos de pessoa do `package.json`: `name`, `email` e, se houver, `url`. O e-mail é o individual da pessoa no workspace, nunca o de uma conta de função compartilhada. Com `Domínio do e-mail de quem decide` preenchido, o e-mail termina nesse domínio. Sem o e-mail, pergunte. O endereço da linha de origem vai em `source`.
+- `notes` guarda o histórico do termo: data, link, quem decidiu, o limite que `description` e `when` não dizem. `description` só diz o que o termo é. O registro formal ou informal vai em `categories`, não em campo. Não muda o estado.
 - Um termo não é o próprio exemplo. A mesma grafia não entra duas vezes.
 - Emoji, combinação e uso simbólico são termo. A combinação junta é um termo. Não é decoração.
 - `state` é a permissão. `description` não repete o estado.
@@ -288,16 +289,13 @@ Casa ficou permitida. Casas ganhou a própria linha, proibida. Moradias ganhou a
 - O `when` parece bastar. Sem `tags`, o texto de outro contexto lê o termo. `maria` e `maria-silva` são dois contextos.
 - Uma palavra em inglês dentro do texto em português parece termo do vocabulário em inglês. Ela mora no vocabulário desse texto.
 - Gosto, estética isolada ou julgamento genérico parecem fechar o estado. Sem as fontes da marca que as instruções do projeto nomeiam, ele espera. A tensão entre intenção e viabilidade fica em `description` ou `when`.
-- Emoji parece enfeite. No vocabulário ele é termo, com estado, descrição e exemplo.
-- `description` e `reason` parecem a mesma frase. A primeira explica a palavra. A segunda diz por que usamos.
 - Clichê parece pedir um sinônimo permitido. A troca é imagem, cena, ação, efeito ou situação. A frase literal fica em `rejected`.
-- Uma frase descartada parece sumir sem registro. O motivo fica na descrição dela. A alternativa não diz que a pessoa já perdeu a chance.
 
 ## Scripts disponíveis
 
 - `node node_modules/vocabulary/dist/cli.js lookup --language <idioma> --term <termo>` lê um termo e devolve se ele existe e a linha guardada.
 - `node node_modules/vocabulary/dist/cli.js exists --language <idioma> --text <trecho>` devolve só o registro de cada token do trecho para se ele existe.
-- `node node_modules/vocabulary/dist/cli.js terms` grava o lote. `--language`, `--mode` e `--validation` valem para o lote. Cada `--term` abre um termo, com `--state`, `--description`, `--reason`, `--when`, `--substitution`, `--decided-by`, `--decided-by-email`, `--decided-by-url` e `--source`. `--decided-by` é o nome. Os dois seguintes completam o objeto. `--categories`, `--examples`, `--rejected`, `--alternatives`, `--related`, `--tags`, `--allowed-in` e `--forbidden-in` repetem, um valor por vez. `--file` lê o lote inteiro de um JSON.
+- `node node_modules/vocabulary/dist/cli.js terms` grava o lote. `--language`, `--mode` e `--validation` valem para o lote. Cada `--term` abre um termo, com `--state`, `--description`, `--reason`, `--when`, `--substitution`, `--decided-by`, `--decided-by-email`, `--decided-by-url`, `--source` e `--notes`. `--decided-by` é o nome. Os dois seguintes completam o objeto. `--categories`, `--examples`, `--rejected`, `--alternatives`, `--related`, `--tags`, `--allowed-in` e `--forbidden-in` repetem, um valor por vez. `--file` lê o lote inteiro de um JSON.
 - `--glossary`, antes do comando, aponta outro vocabulário.
 - `lookup_term`, `exists_in_text` e `write_terms`, no servidor `vocabulary`, fazem a mesma consulta e a mesma escrita quando não há terminal.
 

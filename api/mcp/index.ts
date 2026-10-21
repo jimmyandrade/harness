@@ -119,6 +119,10 @@ const tools = [
                 required: ["name"],
               },
               source: { type: "string", description: "Where the row came from, such as the URL of a page. An upsert finds a renamed term by it." },
+              notes: {
+                type: "string",
+                description: "Free text kept with the row: the history of the term, who or what decided it, a date, a link, or a limit that description and when do not say. description still says what the term is.",
+              },
               case_sensitive: {
                 type: "boolean",
                 description: "True for a spelling whose casing is part of the term, such as a brand name like iPhone. The term keeps its casing as given, and a read in another casing reports case_matches false. Omit or false for an ordinary word.",

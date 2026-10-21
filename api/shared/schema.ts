@@ -230,6 +230,7 @@ const bulkTermObject = z.object(
     forbidden_in: tagListSchema.default([]),
     decided_by: decidedBySchema.optional(),
     source: optionalProse("Provide the source."),
+    notes: optionalProse("Provide the notes."),
     case_sensitive: caseSensitiveSchema,
   },
   { error: "Provide the terms." },
@@ -355,6 +356,7 @@ export const termRegistrationSchema = z.object({
   forbidden_in: z.array(z.string()).optional(),
   decided_by: personSchema.optional(),
   source: z.string().optional(),
+  notes: z.string().optional(),
   case_sensitive: z.literal(true).optional(),
 })
 export type TermRegistration = z.infer<typeof termRegistrationSchema>
@@ -433,6 +435,7 @@ export const glossaryRowSchema = z
       forbidden_in: fileTags("forbidden_in"),
       decided_by: decidedBySchema.optional(),
       source: fileProse("source"),
+      notes: fileProse("notes"),
       case_sensitive: z.boolean({ error: "A glossary case_sensitive is not true or false." }).optional(),
     },
     { error: "A glossary row is not an object." },

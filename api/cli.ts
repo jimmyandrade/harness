@@ -50,6 +50,7 @@ const FIELDS = new Set([
   "decided_by_email",
   "decided_by_url",
   "source",
+  "notes",
   ...LISTS,
 ])
 const MISSING: Record<string, string> = {
@@ -73,6 +74,7 @@ const MISSING: Record<string, string> = {
   decided_by_email: "Provide the e-mail of who decided.",
   decided_by_url: "Provide the URL of who decided.",
   source: "Provide the source.",
+  notes: "Provide the notes.",
   validation: "validation is optional, warn, or enforce.",
   file: "Provide the file.",
   when: "Provide when to use it.",
