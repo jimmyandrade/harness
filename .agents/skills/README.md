@@ -73,6 +73,7 @@ flowchart LR
     procurar_inscricao["procurar-inscricao"]
     procurar_oportunidade["procurar-oportunidade"]
     procurar_tarefa["procurar-tarefa"]
+    publicar_revisao_de_codigo["publicar-revisao-de-codigo"]
     reconhecer_imagem["reconhecer-imagem"]
     registrar_ciclo_do_ativo["registrar-ciclo-do-ativo"]
     resolver_comentarios_de_revisao["resolver-comentarios-de-revisao"]
@@ -314,6 +315,11 @@ flowchart LR
   procurar_oportunidade --> criar_oportunidade
   procurar_oportunidade --> definir_inscricao
   procurar_tarefa --> procurar_inscricao
+  publicar_revisao_de_codigo --> definir_pessoa
+  publicar_revisao_de_codigo --> enviar_mensagem_no_slack
+  publicar_revisao_de_codigo --> evoluir_habilidade
+  publicar_revisao_de_codigo --> levantar_contexto_do_pull_request
+  publicar_revisao_de_codigo --> priorizar_itens
   reconhecer_imagem --> criar_oportunidade
   reconhecer_imagem --> definir_grafia
   reconhecer_imagem --> definir_inscricao
