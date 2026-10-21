@@ -1,7 +1,7 @@
 ---
 locale: en
 metadata:
-  version: "1.7.0"
+  version: "1.8.0"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -39,6 +39,7 @@ metadata:
 ## Answers
 
 - Open every answer with what must be done and who does it. End it with a suggested next step and, when there is one, the decision that is the person's to make.
+- Link every pull request, issue, and commit you mention, with its full URL, also in a question about who merges it.
 
 ## Git
 
