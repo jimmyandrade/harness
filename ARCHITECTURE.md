@@ -24,7 +24,7 @@ harness/
 │   │   ├── project-parameters/     # Reads and validates the parameters in the AGENTS.md frontmatter, for every script
 │   │   ├── skill-graph/            # Writes .agents/skills/README.md, the Mermaid graph of skills
 │   │   ├── skill-folder-icon/      # macOS folder icon for each skill, run by Lefthook in the checker's virtual environment
-│   │   └── sync-skill-pages/       # Notion sync (TypeScript), run by the sync-skill-pages action
+│   │   └── sync-notion-pages/      # Notion sync (TypeScript), run by the sync-skill-pages action: one module per page kind, on shared modules
 │   └── skills/                     # Shared skills, one <name>/SKILL.md each
 │       ├── FEATURES.md             # One entry per skill, written by hand
 │       └── README.md               # Generated skill graph; do not edit
@@ -96,6 +96,7 @@ None. People reach the core through their agent (Claude Code, Cursor), GitHub, a
 - Description: Creates or updates one Notion page per changed skill, through the caller's mapping, and one page per changed model, through the caller's model mapping when it has one.
 - Technologies: TypeScript on Node.js 24, `@notionhq/client`
 - Deployment: Composite action on each release of a business harness
+- Modules: `sync-notion-pages.ts` is the entry point that decides what to publish. `skill-pages.ts` writes the skill pages and the project instructions page, and `template-pages.ts` writes the model pages. They share `notion.ts` (API shape, properties, icon, status, title lookup), `frontmatter.ts`, and `project.ts` (project and core roots, git changes). A new kind of page is one more module next to them, called from the entry point.
 
 #### 3.2.3. Plugin
 

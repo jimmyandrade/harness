@@ -2,82 +2,40 @@ import assert from "node:assert/strict"
 import { spawnSync } from "node:child_process"
 import { mkdirSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs"
 import { tmpdir } from "node:os"
-import { dirname, join } from "node:path"
+import { join } from "node:path"
 import test from "node:test"
-import { fileURLToPath } from "node:url"
 
 import {
-  bindNotion,
-  blankBase,
-  createArgs,
-  blockSetting,
+  replaceArgs,
+  statusOptions,
+  versionStatus,
+  type NotionApi,
+} from "./notion.ts"
+import {
+  coreRoot,
   INSTRUCTIONS_FILE,
+  publisherChanged,
+} from "./project.ts"
+import {
+  bindNotion,
+  createArgs,
+  DEFAULT_MAPPING_PATH,
+  gitChangedFiles,
+  gitSkillStatus,
   instructionsPage,
   instructionsToPublish,
-  publishInstructions,
   PARAMETERS_HEADING,
-  coreRoot,
-  pageIcon,
-  gate,
-  gitChangedFiles,
-  namesToPublish,
   parseSkill,
-  skipReason,
   previousNames,
   properties,
   publish,
-  publisherChanged,
-  gitSkillStatus,
-  replaceArgs,
-  skillStatus,
-  DEFAULT_MAPPING_PATH,
-  coreNamesToPublish,
-  projectRoot,
-  statusOptions,
+  publishInstructions,
   skillNamesFromPaths,
-  allTemplateNames,
-  bindTemplates,
-  DEFAULT_TEMPLATE_MAPPING_PATH,
-  parseTemplate,
-  publishTemplates,
-  templateNamesFromPaths,
-  templateProperties,
-  type NotionApi,
+  skipReason,
   type SkillMapping,
   type SkillPage,
-  type TemplateMapping,
-  type TemplatePage,
-} from "./sync-skill-pages.ts"
-
-function block(yaml: string): string {
-  const indented = yaml
-    .split("\n")
-    .map((line) => (line ? `    ${line}` : line))
-    .join("\n")
-  return `---\nmetadata:\n  parameters:\n${indented}---\n\n# Instruções do projeto\n`
-}
-
-function instructions(version: string, rule: string): string {
-  return `---\ndescription: Use essa habilidade sempre que for executar qualquer tarefa.\nmetadata:\n  version: "${version}"\n  parameters:\n    "Global":\n      "Organização": "example"\n---\n\n# Instruções do projeto\n\n${rule}\n`
-}
-
-function parameters(lines: string): string {
-  return block(`"Global":\n${lines}`)
-}
-
-const icon = pageIcon(parameters('  "Ícone das páginas no Notion": "magic-wand"\n  "Cor do ícone das páginas no Notion": "gray"\n'))
-
-const mapping: SkillMapping = {
-  data_source_id: "00000000-0000-4000-8000-000000000000",
-  properties: {
-    name: "Nome da habilidade",
-    description: "Descrição",
-    version: "Versão da skill",
-    aliases: "Aliases",
-    tags: "Tags",
-    status: "Status",
-  },
-}
+} from "./skill-pages.ts"
+import { instructions, icon, mapping } from "./fixtures.ts"
 
 const skill = `---
 name: definir-tarefa
@@ -160,17 +118,6 @@ test("paths collapse to the skill directory", () => {
   )
 })
 
-test("blank base publishes nothing", () => {
-  assert.equal(blankBase("0".repeat(40)), true)
-  assert.deepEqual(gitChangedFiles(".", "0".repeat(40), "abc"), [])
-})
-
-test("token is required only when a skill changed", () => {
-  assert.equal(gate([], ""), 0)
-  assert.equal(gate(["definir-tarefa"], ""), 2)
-  assert.equal(gate(["definir-tarefa"], "token"), null)
-})
-
 test("git diff names the changed directory", () => {
   const root = mkdtempSync(join(tmpdir(), "skill-pages-"))
   const env = {
@@ -198,8 +145,8 @@ test("git diff names the changed directory", () => {
   const head = git(["rev-parse", "HEAD"])
   assert.deepEqual(skillNamesFromPaths(gitChangedFiles(root, base, head)), ["definir-tarefa"])
   assert.equal(publisherChanged(root, base, head, DEFAULT_MAPPING_PATH), false)
-  mkdirSync(join(root, ".agents", "scripts", "sync-skill-pages"), { recursive: true })
-  writeFileSync(join(root, ".agents", "scripts", "sync-skill-pages", "note.ts"), "status")
+  mkdirSync(join(root, ".agents", "scripts", "sync-notion-pages"), { recursive: true })
+  writeFileSync(join(root, ".agents", "scripts", "sync-notion-pages", "note.ts"), "status")
   git(["add", "."])
   git(["commit", "-m", "publisher"])
   const published = git(["rev-parse", "HEAD"])
@@ -238,30 +185,6 @@ test("update replaces the body and sets the status from the version", () => {
   assert.equal(replacement.replace_content.new_str, page.body)
 })
 
-test("version 0 is in validation and version 1 or later is in production", () => {
-  assert.equal(skillStatus("0.0.0"), "Rascunho")
-  assert.equal(skillStatus("0.0.1"), "Rascunho")
-  assert.equal(skillStatus("0.1.0"), "Em validação")
-  assert.equal(skillStatus("0.10.2"), "Em validação")
-  assert.equal(skillStatus("1.0.0"), "Em produção")
-  assert.equal(skillStatus("3.1.1"), "Em produção")
-  const released = properties({ ...pageOf(skill), version: "3.1.1" }, mapping).Status
-  assert.ok(released && "status" in released)
-  assert.equal(released.status.name, "Em produção")
-  assert.throws(() => skillStatus("nope"))
-})
-
-test("a mapping can rename every status option", () => {
-  const options = statusOptions({ status_options: { draft: "Draft", production: "Live" } })
-  assert.deepEqual(options, { draft: "Draft", validation: "Em validação", production: "Live" })
-  assert.equal(skillStatus("0.0.1", options), "Draft")
-  assert.equal(skillStatus("0.2.0", options), "Em validação")
-  assert.equal(skillStatus("2.0.0", options), "Live")
-  const live = properties({ ...pageOf(skill), version: "2.0.0" }, { ...mapping, status_options: { production: "Live" } }).Status
-  assert.ok(live && "status" in live)
-  assert.equal(live.status.name, "Live")
-})
-
 test("a rename keeps the previous directory when that alias is listed", () => {
   const detected = [
     "R100\t.agents/skills/definir-grupo/SKILL.md\t.agents/skills/definir-grupo-de-oportunidades/SKILL.md",
@@ -297,11 +220,6 @@ test("a rename keeps the previous directory when that alias is listed", () => {
       () => ["definir-grupo"],
     ),
   )
-})
-
-test("a publisher change republishes every skill", () => {
-  assert.deepEqual(namesToPublish(["definir-tarefa"], false, ["a", "b"]), ["definir-tarefa"])
-  assert.deepEqual(namesToPublish([], true, ["a", "b"]), ["a", "b"])
 })
 
 test("aliases are one name per line and a tag names its option", () => {
@@ -540,34 +458,6 @@ test("two pages with the same name stop", async () => {
   await assert.rejects(() => notion.findPage(mapping, "definir-tarefa"))
 })
 
-test("page icon name and color come from the instructions parameters", () => {
-  assert.deepEqual(icon, { type: "icon", icon: { name: "magic-wand", color: "gray" } })
-  const stored = pageIcon(readFileSync(join(coreRoot(), INSTRUCTIONS_FILE), "utf8"))
-  assert.equal(stored.type, "icon")
-  assert.equal(stored.icon.name.length > 0, true)
-  assert.equal(stored.icon.color.length > 0, true)
-  assert.throws(() => pageIcon(parameters('  "Ícone das páginas no Notion": "magic-wand"\n')))
-  assert.deepEqual(
-    pageIcon(
-      parameters('  "Ícone das páginas no Notion": "rocket"\n'),
-      parameters('  "Ícone das páginas no Notion": "magic-wand"\n  "Cor do ícone das páginas no Notion": "blue"\n'),
-    ),
-    { type: "icon", icon: { name: "rocket", color: "blue" } },
-  )
-  assert.throws(() => pageIcon(parameters('  "Ícone das páginas no Notion": "magic-wand"\n  "Cor do ícone das páginas no Notion": "silver"\n')))
-  assert.equal(blockSetting(block('"Cor do ícone das páginas no Notion": "red"\n'), "Cor do ícone das páginas no Notion"), "red")
-  assert.equal(blockSetting(block('"criar-commit":\n  "Organização": "x"\n'), "Organização"), null)
-})
-
-test("the project root is HARNESS_ROOT, or the working directory", () => {
-  const project = mkdtempSync(join(tmpdir(), "harness-project-"))
-  mkdirSync(join(project, ".agents", "skills", "uma"), { recursive: true })
-  mkdirSync(join(project, ".git"), { recursive: true })
-  const core = coreRoot()
-  assert.equal(projectRoot({ HARNESS_ROOT: project }, core), project)
-  assert.equal(projectRoot({}, join(project, ".agents", "skills", "uma")), project)
-})
-
 test("mapping file matches the schema fields", () => {
   const root = coreRoot()
   const schema = JSON.parse(readFileSync(join(root, ".agents", "schemas", "skill-page.schema.json"), "utf8")) as {
@@ -587,13 +477,6 @@ test("mapping file matches the schema fields", () => {
   assert.ok(stored.data_source_id)
 })
 
-test("core skills publish when the project moves the core version or its mapping", () => {
-  assert.deepEqual(coreNamesToPublish(["lancar-venda"], ["criar-commit"], false, false), [])
-  assert.deepEqual(coreNamesToPublish(["lancar-venda"], ["criar-commit"], false, true), ["criar-commit"])
-  assert.deepEqual(coreNamesToPublish(["lancar-venda"], ["criar-commit"], true, false), ["criar-commit"])
-  assert.throws(() => coreNamesToPublish(["criar-commit"], ["criar-commit"], true, true), /criar-commit exists/)
-})
-
 test("the instructions file becomes a page with its frontmatter version and description", () => {
   const page = instructionsPage(instructions("0.5.0", "Uma regra."))
   assert.equal(page.name, INSTRUCTIONS_FILE)
@@ -602,7 +485,7 @@ test("the instructions file becomes a page with its frontmatter version and desc
   assert.ok(page.body.startsWith("# Instruções do projeto\n\nUma regra."))
   assert.ok(page.body.includes(`${PARAMETERS_HEADING}\n\n\`\`\`yaml\n"Global":\n  "Organização": "example"\n\`\`\``))
   assert.equal(page.body.includes("description:"), false)
-  assert.deepEqual(properties(page, mapping)[mapping.properties.status], { status: { name: skillStatus("0.5.0", statusOptions(mapping)) } })
+  assert.deepEqual(properties(page, mapping)[mapping.properties.status], { status: { name: versionStatus("0.5.0", statusOptions(mapping)) } })
   assert.throws(() => instructionsPage("# Instruções do projeto\n"))
   assert.throws(() => instructionsPage(instructions("cinco", "x")))
 })
@@ -641,217 +524,11 @@ test("the instructions page publishes on its own change, on rule or mapping chan
   )
 })
 
-const templateMapping: TemplateMapping = {
-  data_source_id: "11111111-1111-4111-8111-111111111111",
-  properties: { name: "Nome do modelo", version: "Versão" },
-}
-
-const reelTemplate = `---
-name: reel-do-instagram
-description: Use este modelo de saída quando for montar um Reel.
-metadata:
-  version: "1.0.0"
-  aliases:
-    - reel
----
-
-## Contexto
-
-Para montar um Reel.
-`
-
-const summaryTemplate = `---
-name: resumo-de-reuniao
-description: Use este modelo de resumo quando for resumir uma reunião.
-metadata:
-  version: "0.2.0"
----
-
-## Contexto
-
-Para resumir.
-`
-
-function templateOf(text: string, name: string): TemplatePage {
-  const page = parseTemplate(text, name)
-  assert.ok(!("skip" in page))
-  return page
-}
-
-type TemplateCall = [string, { page_id?: string; properties?: Record<string, unknown>; markdown?: string; icon?: object; replace_content?: { new_str: string } }]
-
-function templateNotion(pages: Record<string, string>): { notion: ReturnType<typeof bindTemplates>; calls: TemplateCall[] } {
-  const calls: TemplateCall[] = []
-  const notion = bindTemplates({
-    dataSources: {
-      async query(args) {
-        const id = pages[args.filter.title.equals]
-        return { results: id ? [{ id }] : [], has_more: false }
-      },
-    },
-    pages: {
-      async create(args) {
-        calls.push(["create", args])
-        return { id: "template-new", url: "https://example.test/template-new" }
-      },
-      async update(args) {
-        calls.push(["update", args])
-        return { id: args.page_id }
-      },
-      async updateMarkdown(args) {
-        calls.push(["updateMarkdown", args])
-        return { id: args.page_id }
-      },
-    },
-  } satisfies NotionApi, icon)
-  return { notion, calls }
-}
-
-function templateRoot(files: Record<string, string>): string {
-  const root = mkdtempSync(join(tmpdir(), "template-pages-"))
-  mkdirSync(join(root, ".agents", "assets", "templates"), { recursive: true })
-  for (const [name, text] of Object.entries(files)) {
-    writeFileSync(join(root, ".agents", "assets", "templates", name), text)
-  }
-  return root
-}
-
-test("a model page uses the body after frontmatter and only the mapped properties", () => {
-  const page = templateOf(reelTemplate, "reel-do-instagram")
-  assert.ok(page.body.startsWith("## Contexto"))
-  assert.deepEqual(page.aliases, ["reel"])
-  assert.deepEqual(templateProperties(page, templateMapping), {
-    "Nome do modelo": { title: [{ text: { content: "reel-do-instagram" } }] },
-    Versão: { rich_text: [{ text: { content: "1.0.0" } }] },
-  })
-  const full = templateProperties(page, {
-    ...templateMapping,
-    properties: { ...templateMapping.properties, description: "Descrição", aliases: "Aliases", status: "Status" },
-  })
-  assert.deepEqual(full.Aliases, { rich_text: [{ text: { content: "reel" } }] })
-  assert.deepEqual(full.Status, { status: { name: "Em produção" } })
-  assert.ok("Descrição" in full)
-})
-
-test("a file that is not yet a model is left out, and a model without a version fails", () => {
-  assert.deepEqual(parseTemplate("Meses nas colunas.\n", "dre-simplificada"), { skip: "no frontmatter" })
-  assert.deepEqual(parseTemplate('---\ndescription: x\nmetadata:\n  version: "0.1.0"\n---\n\n# x\n', "agents-md"), {
-    skip: "no name in frontmatter",
-  })
-  assert.deepEqual(parseTemplate(reelTemplate.replace('version: "1.0.0"\n', 'version: "1.0.0"\n  notion: "false"\n'), "reel-do-instagram"), {
-    skip: "stays in git",
-  })
-  assert.throws(() => parseTemplate(reelTemplate.replace('  version: "1.0.0"\n', ""), "reel-do-instagram"), /missing version/)
-  assert.throws(() => parseTemplate(reelTemplate, "reel"), /frontmatter name is reel-do-instagram/)
-})
-
-test("only changed model files are published, and every model when the rules change", () => {
-  const paths = [
-    ".agents/assets/templates/reel-do-instagram.md",
-    ".agents/assets/templates/nested/outro.md",
-    ".agents/skills/definir-tarefa/SKILL.md",
-    ".agents/assets/templates/reel-do-instagram.md",
-  ]
-  assert.deepEqual(templateNamesFromPaths(paths), ["reel-do-instagram"])
-  const root = templateRoot({ "reel-do-instagram.md": reelTemplate, "resumo-de-reuniao.md": summaryTemplate, "notas.txt": "x" })
-  assert.deepEqual(allTemplateNames(root), ["reel-do-instagram", "resumo-de-reuniao"])
-  assert.deepEqual(namesToPublish(templateNamesFromPaths(paths), false, allTemplateNames(root)), ["reel-do-instagram"])
-  assert.deepEqual(namesToPublish([], false, allTemplateNames(root)), [])
-  assert.deepEqual(namesToPublish([], true, allTemplateNames(root)), ["reel-do-instagram", "resumo-de-reuniao"])
-  assert.deepEqual(allTemplateNames(mkdtempSync(join(tmpdir(), "template-pages-"))), [])
-})
-
-test("a model is created with the icon, then updated in place without touching the icon", async () => {
-  const root = templateRoot({ "resumo-de-reuniao.md": summaryTemplate })
-  const fresh = templateNotion({})
-  assert.deepEqual(await publishTemplates(root, ["resumo-de-reuniao"], fresh.notion, templateMapping), [
-    "create template resumo-de-reuniao: https://example.test/template-new",
-  ])
-  const [kind, created] = fresh.calls[0] ?? []
-  assert.equal(kind, "create")
-  assert.deepEqual(created?.icon, icon)
-  assert.ok(created?.markdown?.startsWith("## Contexto"))
-
-  const existing = templateNotion({ "resumo-de-reuniao": "template-1" })
-  assert.deepEqual(await publishTemplates(root, ["resumo-de-reuniao"], existing.notion, templateMapping), [
-    "update template resumo-de-reuniao: template-1",
-  ])
-  assert.deepEqual(existing.calls.map(([name]) => name), ["update", "updateMarkdown"])
-  assert.equal(existing.calls[0]?.[1].icon, undefined)
-  assert.equal(existing.calls[1]?.[1].replace_content?.new_str.startsWith("## Contexto"), true)
-})
-
-test("a model replaces the page titled with one of its aliases, and a removed model keeps its page", async () => {
-  const root = templateRoot({ "reel-do-instagram.md": reelTemplate, "dre-simplificada.md": "Meses nas colunas.\n" })
-  const { notion, calls } = templateNotion({ reel: "briefing-1" })
-  assert.deepEqual(
-    await publishTemplates(root, ["reel-do-instagram", "dre-simplificada", "sumiu"], notion, templateMapping),
-    [
-      "rename template reel to reel-do-instagram: briefing-1",
-      "skip template dre-simplificada: no frontmatter",
-      "skip template sumiu: removed",
-    ],
-  )
-  assert.deepEqual(calls.map(([name]) => name), ["update", "updateMarkdown"])
-  const both = templateNotion({ reel: "briefing-1", "reel-do-instagram": "template-2" })
-  assert.deepEqual(await publishTemplates(root, ["reel-do-instagram"], both.notion, templateMapping), [
-    "update template reel-do-instagram: template-2",
-  ])
-})
-
-test("without a model mapping, the sync publishes no model", () => {
-  const root = mkdtempSync(join(tmpdir(), "template-pages-"))
-  const env = {
-    ...process.env,
-    GIT_AUTHOR_NAME: "test",
-    GIT_AUTHOR_EMAIL: "test@example.com",
-    GIT_COMMITTER_NAME: "test",
-    GIT_COMMITTER_EMAIL: "test@example.com",
-  }
-  const git = (args: string[]) => {
-    const result = spawnSync("git", args, { cwd: root, env, encoding: "utf8" })
-    assert.equal(result.status, 0, result.stderr)
-    return result.stdout.trim()
-  }
-  git(["init"])
-  writeFileSync(join(root, "AGENTS.md"), parameters('  "Ícone das páginas no Notion": "magic-wand"\n  "Cor do ícone das páginas no Notion": "gray"\n'))
-  mkdirSync(join(root, ".agents", "mappings"), { recursive: true })
-  writeFileSync(join(root, DEFAULT_MAPPING_PATH), JSON.stringify(mapping))
-  mkdirSync(join(root, ".agents", "skills"), { recursive: true })
-  git(["add", "."])
-  git(["commit", "-m", "one"])
-  const base = git(["rev-parse", "HEAD"])
-  mkdirSync(join(root, ".agents", "assets", "templates"), { recursive: true })
-  writeFileSync(join(root, ".agents", "assets", "templates", "reel-do-instagram.md"), reelTemplate)
-  git(["add", "."])
-  git(["commit", "-m", "two"])
-  const head = git(["rev-parse", "HEAD"])
-  const script = join(dirname(fileURLToPath(import.meta.url)), "sync-skill-pages.ts")
-  const result = spawnSync(process.execPath, [script, "--base", base, "--head", head], {
-    cwd: root,
-    env: { ...env, HARNESS_ROOT: root, NOTION_TOKEN: "" },
-    encoding: "utf8",
-  })
-  assert.equal(result.status, 0, result.stderr)
-  assert.equal(result.stdout, `skip templates: ${DEFAULT_TEMPLATE_MAPPING_PATH} is missing\nno changed skill\n`)
-})
-
-test("model mapping file matches the schema fields", () => {
-  const root = coreRoot()
-  const schema = JSON.parse(readFileSync(join(root, ".agents", "schemas", "template-page.schema.json"), "utf8")) as {
-    properties: Record<string, unknown>
-  }
-  const stored = JSON.parse(readFileSync(join(root, ".agents", "mappings", "template-page.notion.example.json"), "utf8")) as {
-    properties: Record<string, unknown>
-    data_source_id: string
-  }
-  for (const field of Object.keys(schema.properties)) {
-    if (field === "body") {
-      assert.equal(stored.properties[field], undefined)
-      continue
-    }
-    assert.ok(stored.properties[field])
-  }
-  assert.ok(stored.properties.status)
-  assert.ok(stored.data_source_id)
+test("the status property follows the version and the mapping options", () => {
+  const released = properties({ ...pageOf(skill), version: "3.1.1" }, mapping).Status
+  assert.ok(released && "status" in released)
+  assert.equal(released.status.name, "Em produção")
+  const live = properties({ ...pageOf(skill), version: "2.0.0" }, { ...mapping, status_options: { production: "Live" } }).Status
+  assert.ok(live && "status" in live)
+  assert.equal(live.status.name, "Live")
 })

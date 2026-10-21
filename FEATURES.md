@@ -111,7 +111,7 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
 - **Stability**: experimental
 - **Description**: Publish each changed skill of a repository as a page in its Notion skills database
 - **Properties**:
-  - Composite action at `.github/actions/sync-skill-pages/` and script `.agents/scripts/sync-skill-pages/sync-skill-pages.ts`
+  - Composite action at `.github/actions/sync-skill-pages/` and script `.agents/scripts/sync-notion-pages/sync-notion-pages.ts`, with one module per kind of page
   - The mapping lives in the calling repository: data source id, property names, and status option names
   - `mapping` points at another mapping file. A change to that file republishes every skill
   - The page icon comes from the `Ícone das páginas no Notion` and `Cor do ícone das páginas no Notion` settings, with the core fallback
