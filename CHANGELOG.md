@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.71.0](https://github.com/jimmyandrade/harness/compare/v0.70.0...v0.71.0) (2026-10-21)
+
+
+### Features
+
+* **atender-revisao-de-pull-request:** read the rules section, add the scheduled apply parameter and handle resolved threads with the reviewer last ([#338](https://github.com/jimmyandrade/harness/issues/338)) ([bd49c94](https://github.com/jimmyandrade/harness/commit/bd49c94c33ad92bfad38d78fa2c5cb1d4dade8dc))
+* **definir-link-rastreavel:** read sources and mediums from data sources ([#341](https://github.com/jimmyandrade/harness/issues/341)) ([56ce240](https://github.com/jimmyandrade/harness/commit/56ce2400310111d9b5256603783a98b5dc1dc432))
+* **preparar-tarefa-do-pull-request:** add permission map, description templates, block rules, visibility evidence, link register and review lenses ([#339](https://github.com/jimmyandrade/harness/issues/339)) ([1b985a0](https://github.com/jimmyandrade/harness/commit/1b985a087c4689a82e550ba6cff07768a746a2c9))
+
 ## [0.70.0](https://github.com/jimmyandrade/harness/compare/v0.69.0...v0.70.0) (2026-10-21)
 
 
