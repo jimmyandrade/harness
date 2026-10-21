@@ -3,7 +3,7 @@ name: criar-pull-request
 description: Use essa habilidade sempre que for abrir PR, subir uma correção, mandar para a branch principal ou mesclar mudança no repositório, mesmo sem dizer PR. NÃO use para responder comentário de revisão nem para só commitar (use criar-commit).
 metadata:
   author: jimmyandrade
-  version: "0.13.0"
+  version: "0.14.0"
   related:
     - evoluir-habilidade
     - criar-commit
@@ -100,7 +100,7 @@ Com `Comunicar novidade após o merge` igual a `sim`, siga `comunicar-novidade-d
 
 ### Passo 9
 
-Na resposta final, diga o estado de cada etapa: commit, push, PR, CI e merge. Se perguntarem "já mesclou?", responda primeiro sim ou não e depois o que falta.
+Na resposta final, diga o estado de cada etapa: commit, push, PR, CI e merge. Cada PR citado, inclusive na pergunta sobre quem mescla, vai com o link completo. Se perguntarem "já mesclou?", responda primeiro sim ou não e depois o que falta.
 
 ### Passo 10
 
@@ -164,6 +164,7 @@ O pedido autoriza push e merge. Push sem o hook, porque o commit já passou em t
 
 ## Pegadinhas
 
+- O número do PR sozinho, como `#294`, obriga a pessoa a procurar o PR no navegador. Cite sempre o link.
 - `git pull --rebase` numa branch já publicada rebaseia sobre a própria branch remota, não sobre a `Branch base`. Use o fetch e rebase do Passo 4.
 - `git switch -c <branch> origin/<base>` faz a branch rastrear a base. Use `--no-track` e publique com `push -u origin <branch>`.
 - O prefixo que a ferramenta deu parece o nome da branch. Quem manda é o tipo do commit.
