@@ -4,7 +4,7 @@ metadata:
   version: "0.1.0"
   parameters:
     "Global":
-      "Idioma das instruções do projeto": "português"
+      "Banco de modelos no Notion": "<link do banco de modelos de saída no Notion>"
       "<chave exata usada por mais de uma habilidade>": "<valor>"
     "<nome-da-habilidade>":
       "<chave exata desta habilidade>": "<valor>"
@@ -16,6 +16,10 @@ Este documento contém instruções que, dependendo da ferramenta utilizada, pod
 
 ## Em qualquer lugar
 
+- Responda sempre no `Idioma das respostas` das instruções do projeto.
+- Um modelo de saída citado pelo nome é o arquivo com esse nome e a extensão `.md` em `.agents/assets/templates/`, no repositório do projeto ou do harness. Fora do repositório, é a página com esse título no banco que `Banco de modelos no Notion` indica. Sem esse parâmetro, procure a página com esse título exato no espaço de trabalho. Se não achar, diga que o modelo falta e não invente o formato.
+- Comece a resposta pelo que precisa ser feito e por quem faz. Termine toda resposta com a sugestão do próximo passo e, se houver, com a decisão que cabe à pessoa.
+- Todo pull request, issue ou commit citado na resposta leva o link completo, inclusive na pergunta sobre quem mescla.
 - <Regra que vale no Notion e nas ferramentas de código, em toda sessão.>
 
 ## No Notion

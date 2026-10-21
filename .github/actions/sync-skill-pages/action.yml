@@ -1,5 +1,5 @@
 name: Sync skill pages
-description: Create or update one Notion page per changed skill of the calling repository, with that repository's mapping.
+description: Create or update one Notion page per changed skill of the calling repository, with that repository's mapping, and one page per changed model when the repository has a model mapping.
 inputs:
   notion-token:
     description: Notion integration token with access to the skills data source.
@@ -15,8 +15,12 @@ inputs:
     description: Mapping file in the calling repository.
     required: false
     default: .agents/mappings/skill-page.notion.json
+  template-mapping:
+    description: Model mapping file in the calling repository. Without that file, models are not published.
+    required: false
+    default: .agents/mappings/template-page.notion.json
   include-core:
-    description: Also publish the skills of this harness when the caller moves its version or its mapping.
+    description: Also publish the skills and models of this harness when the caller moves its version or its mapping.
     required: false
     default: "true"
 runs:
@@ -38,14 +42,15 @@ runs:
     - name: Install the sync dependencies
       shell: bash
       run: npm ci --omit=dev --no-audit --no-fund --prefix "$GITHUB_ACTION_PATH/../../.."
-    - name: Publish changed skills to Notion
+    - name: Publish changed skills and models to Notion
       shell: bash
       env:
         HARNESS_ROOT: ${{ github.workspace }}
         NOTION_TOKEN: ${{ inputs.notion-token }}
       run: >-
-        node "$GITHUB_ACTION_PATH/../../../.agents/scripts/sync-skill-pages/sync-skill-pages.ts"
+        node "$GITHUB_ACTION_PATH/../../../.agents/scripts/sync-notion-pages/sync-notion-pages.ts"
         --base "${{ inputs.base }}"
         --head "${{ inputs.head }}"
         --mapping "${{ inputs.mapping }}"
+        --template-mapping "${{ inputs.template-mapping }}"
         ${{ inputs.include-core == 'true' && '--include-core' || '' }}

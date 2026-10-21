@@ -278,6 +278,21 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses stock, recording the payment, the asset life cycle, what is on today, an existence-only check, merging the same asset, creating the company, and creating the cost category
 
+### definir-campanha-de-conteudo
+- **Stability**: experimental
+- **Description**: Create, review, follow, or close a content campaign, including promoting a topic to a campaign
+- **Properties**:
+  - Lives at `.agents/skills/definir-campanha-de-conteudo/SKILL.md`
+  - Reads the list of content campaigns and its property names from the data mapping of the project, with the list of posts and the list of significant dates when the mapping has them
+  - Anchors the window on a significant date, moves a past reference date to its next occurrence, and avoids overlapping another campaign or another dated narrative
+  - Writes the strategy in the page body, with weekly stages that each carry an editorial role, suggested content, and metrics, and sends the promise and the call to action to `Habilidade de tom de voz`
+  - Keeps the status in line with the window, and records the origin when a post topic becomes a campaign without deleting that post
+  - Starts the editorial goal from `Referências da estratégia de conteúdo`, and any reference the person gives
+  - Leaves the posts of the campaign to planejar-calendario-de-conteudo
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses creating the campaign posts, checking the calendar mix, writing the script or the caption, and registering the significant date
+
 ### definir-conta-bancaria
 - **Stability**: experimental
 - **Description**: Register, review, or update a bank or payment account, personal or business, and record what happened to it
@@ -374,10 +389,10 @@ How these skills relate is in `README.md`, in this folder.
 - **Stability**: experimental
 - **Description**: Write and review a project's instructions file so that it holds only what every session needs, as ADR 0008 decides
 - **Properties**:
-  - Lives at `.agents/skills/definir-instrucoes-do-projeto/SKILL.md`, with the output template at `.agents/assets/templates/agents-md.md`
+  - Lives at `.agents/skills/definir-instrucoes-do-projeto/SKILL.md`, with the output model `agents-md` at `.agents/assets/templates/agents-md.md`, cited by name
   - Measures the instructions with the skill checker before and after, against the skill body limits
   - Classifies each passage by destination: stays, contributing guide, architecture map, design document, a new skill, product documentation, the data, or the parameters in the frontmatter
-  - Writes in the language set by "Idioma das instruções do projeto", one rule per line, with separate parts for anywhere, Notion only, and coding tools only
+  - Writes in the language set by "Idioma das instruções do projeto", Brazilian Portuguese by default, which a project changes in its own `AGENTS.md`, one rule per line, with separate parts for anywhere, Notion only, and coding tools only
   - Builds `metadata.parameters` in the frontmatter as a tree, a `Global` entry and one entry per skill, copying each key from the skill and listing only values that differ from the defaults
   - Creates each destination before removing the passage, then updates the references to the old location
 - **Test Criteria**:
@@ -465,6 +480,20 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses the DRE, the cash-flow statement, the price, the monthly plan, the durable good, and the fair cash projection
 
+### definir-link-utm
+- **Stability**: experimental
+- **Description**: Build, review, or fix the UTM parameters of a link by the standard meaning of each parameter, with no internal id or personal data
+- **Properties**:
+  - Lives at `.agents/skills/definir-link-utm/SKILL.md`
+  - Reads the allowed sources, mediums, and own domains from parameters, and asks instead of inventing a value
+  - Keeps `utm_term` empty except for a paid keyword or an automation keyword
+  - Never puts an internal id (page, database, record, user, or CRM) or personal data in any parameter, and uses the public name, such as the event slug, in `utm_campaign`
+  - Leaves internal links on the same site without UTM, measured by an Analytics event instead
+  - Reviews a link, a generator, or code and names each failed check, where it is, and the right value
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [ ] Three cases validated with the person
+
 ### definir-obrigacao-financeira
 - **Stability**: experimental
 - **Description**: Register or review a contract or debt that generates charges, such as a plan, a consortium, a card, or a loan
@@ -545,6 +574,59 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses the day or week lookup, creating or changing the Google Calendar event, registering the opportunity, organizing the contact point, and creating the task
 
+### definir-reel-do-instagram
+- **Stability**: experimental
+- **Description**: Create, review, complete, or register an Instagram Reel in the list of posts
+- **Properties**:
+  - Lives at `.agents/skills/definir-reel-do-instagram/SKILL.md`
+  - Reads the list of posts, the list of content formats, and their property names from the data mapping of the project
+  - Finds the Reel format record by `Formato do Reel`, or, when it is empty, searches the list of formats for the Instagram Reel and asks when it finds more than one
+  - Gets the script from definir-roteiro-de-video and sends the caption wording to `Habilidade de tom de voz`
+  - Links the Reel to one or more narrative axes from the list of narrative axes, and takes the name, date, time, and address of an event from the event page
+  - In an event Reel, makes the lines and the caption each say on their own what happens, the date, the time, the address, why it is worth going, and the action, without relying on comments or outside context
+  - Writes a caption that complements the video, fits the caption limit of the format, and ends with one main call to action tied to the goal, naming the action and where to do it, on the same path as the call to action of the video and with a destination that exists when the post goes out
+  - Puts hashtags in their own property, at the ideal count of the format without passing its maximum, or up to 5 when the format has none, each tying the topic to the niche of the profile
+  - Counts the Reels in the 7-day window that starts on the posting date against the minimum and maximum goals of the format, shows the other formats in that window, and suggests another date without blocking
+  - Compares the Reel with the posts of the 7 days before and after, so the same topic, axis, or narrative does not repeat in a row, and states the goal it serves from `Referências da estratégia de conteúdo`, a Notion page or other references with the original content strategy, or from the person, asking before writing when there is none
+  - Writes the caption only to the AI caption, keeps the human caption, keeps the notice that opens the page body, and writes the script below it
+  - Answers in the output template `.agents/assets/templates/reel-do-instagram.md`, one heading per page property plus the body, with the human caption left empty
+  - Links exactly one author profile, the one that publishes, and records a collab in the editorial notes instead
+  - Keeps one page per Reel, links the format and the author profile as relations, keeps counts and checks out of the page body, lists a value without a mapped property at the end instead of writing it in the body, and reads the page again after writing
+  - Reviews an existing Reel by reading the whole page first, shows the before, the after, and the gain for each changed item, treats body text without clear authorship as human, and replaces human text only with a yes for that passage
+  - Follows `Arquétipos da marca` or records the persona as inferred in the editorial notes, and does not invent the profile, the speaker, the date, or the format limits
+  - Reads the whole project instructions before writing, not only the parameters, and starts from the default definitions of the business and its founder when the request does not name the author profile, the speaker, or the persona
+  - Takes the default author profile from the Instagram profile linked to `Empresa do negócio` in the list of companies, or, with `Perfis por praça` set to `sim`, from the list of social profiles by the place of the Reel, and asks when either is missing
+  - Defines the voice before writing or changing the script: the speaker owns the lines, the author profile owns the caption, the delivery notes name the speaker, the call to action points to the author profile, and only the profiles the person named are tagged
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses choosing words in the tone of voice, registering only the idea, publishing the post, and creating a carousel
+
+### definir-registro-de-reuniao
+- **Stability**: experimental
+- **Description**: Register or fix the record of a meeting from a pasted transcript, wherever the project keeps its records
+- **Properties**:
+  - Lives at `.agents/skills/definir-registro-de-reuniao/SKILL.md`
+  - Reads from the project instructions where the records live: local files, a Notion database, Confluence pages, or documents in Google Drive, and asks once when the type or the address is empty
+  - Keeps an index file for local files, and treats the Notion database, the Confluence page tree, or the Google Drive folder as the index
+  - Keeps an index document in Google Drive only for meeting documents outside the folder, such as those another account created, and lists them by link
+  - Names a local file with an ASCII slug and titles a Notion page, a Confluence page, or a Google Drive document with natural text, each by its own pattern from the project instructions
+  - Uses a document that already holds the transcript, such as the notes a meeting tool generates, as the record, without copying its text
+  - Looks the meeting up in the index before creating it, and fixes the existing record instead of creating another
+  - Finds the title, date, start time, and participants through procurar-agenda before asking, and asks once when no single event fits
+  - Registers a missing participant through definir-pessoa, and keeps the right spelling and the wrong forms speech recognition produced through definir-grafia
+  - Checks a Notion database for a duplicate through identificar-duplicata, and leaves two records of the same meeting to mesclar-registro
+  - Starts every record with a level 1 heading and a block with date, participants, and source
+  - Keeps the raw transcript unchanged after the summary, and applies spelling corrections only to the summary
+  - Records as a decision only what was said as a decision, and marks illegible passages as uncertain
+  - Does not assign an action to a person from the pronoun or the position of a line when the transcript does not say who speaks, and asks for each assignment with the hypothesis ready
+  - Lists each unknown name or term with the lines around it and asks, and records only what the person confirms, in the spelling variations for a name and in a source of corrections for any other term
+  - Keeps the topics the project lists out of the summary, while the raw transcript keeps them
+  - Never sends a record outside the place the project names
+  - Does not find the context of a past meeting or write the minutes
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [ ] Three cases validated with the person
+
 ### definir-reserva
 - **Stability**: experimental
 - **Description**: Keep a reservation, a provisional block, a pending event, or a reminder provisional until participation is explicitly confirmed
@@ -556,6 +638,22 @@ How these skills relate is in `README.md`, in this folder.
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses recording the event time, reserving career time, syncing an untimed item, and auditing time use
+
+### definir-roteiro-de-video
+- **Stability**: experimental
+- **Description**: Write, review, or adapt a ready-to-record script for a short video
+- **Properties**:
+  - Lives at `.agents/skills/definir-roteiro-de-video/SKILL.md`
+  - Writes the full lines scene by scene, with a hook in the first 3 seconds, time ranges, on-screen text, and each line in a blockquote after a specific bracketed delivery note that names the speaker, tone, pace, volume, stressed word, and pause
+  - Puts the recording part first and short, and keeps delivery notes, scene actions, and recording direction out of the lines, the on-screen text, and the caption
+  - Adapts a reference script by keeping its structure and narrative triggers and changing the literal theme, with real and verifiable people and a source link for every fact
+  - Gives a workable way around each likely obstacle to recording, such as unlicensed audio or someone who does not want to appear
+  - Ends with why the script will work, and follows `Arquétipos da marca` or marks the persona as inferred
+  - Reads `Referências da estratégia de conteúdo`, and any reference the person gives, before writing, so the script serves the brand's content strategy
+  - Sends the wording to `Habilidade de tom de voz`, and leaves the caption and the post to the skill that called it
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses choosing words in the tone of voice, writing the caption, registering the post, and generating the video with AI
 
 ### definir-tarefa
 - **Stability**: experimental
@@ -740,6 +838,21 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [ ] Three cases validated with the person
 
+### limpar-copias-de-trabalho
+- **Stability**: experimental
+- **Description**: Remove the git worktrees a coding session left behind, after checking that nothing is lost
+- **Properties**:
+  - Lives at `.agents/skills/limpar-copias-de-trabalho/SKILL.md`
+  - Does not sync to Notion, because it needs a shell
+  - Runs at the end of every session whose work landed, and removes without asking: the checks are the safety
+  - Leaves the worktrees the Claude app made, in `.claude/worktrees`, to the app's own cleanup, and the session's own worktree to its exit tool
+  - Removes a worktree only when it is not the main checkout or a folder of an open session, has no change outside git other than installed dependencies, and its work is on a remote branch or in a merged pull request
+  - Treats a missing remote branch after a squash merge as landed when the pull request is merged
+  - Removes the local branch too, prunes worktrees whose folder is gone, and reports the space freed and why each kept worktree stayed
+- **Test Criteria**:
+  - [ ] A session with merged pull requests ends with their worktrees and branches removed and the space freed reported
+  - [ ] A worktree with an untracked file other than dependencies stays, with the reason
+
 ### liberar-espaco-em-disco
 - **Stability**: experimental
 - **Description**: Free disk space on a Mac without losing a file, only from caches that rebuild themselves
@@ -846,6 +959,24 @@ How these skills relate is in `README.md`, in this folder.
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses registering the opportunity, checking whether the opportunity already exists, organizing a trip, writing the task title, the deadline, and the definition of done, checking whether the task exists, and registering someone
+
+### planejar-calendario-de-conteudo
+- **Stability**: experimental
+- **Description**: Suggest what to post, plan a week or a campaign, announce an event across posts, or check the calendar mix
+- **Properties**:
+  - Lives at `.agents/skills/planejar-calendario-de-conteudo/SKILL.md`
+  - Reads the list of posts, the list of content formats, the list of narrative axes, and the optional supporting lists from the data mapping of the project
+  - Checks what already exists, what is planned, and what can be reused before it suggests a new topic, and cites the page behind each suggestion
+  - Counts only a published status or a post URL as published
+  - Uses `Referências da estratégia de conteúdo`, and any reference the person gives, as a source behind each suggestion
+  - Shows the mix by format against the 7-day goals, by narrative axis, and by narrative, and does not put two narratives in the same week
+  - Treats a content campaign as occupying its window from start to end, even before it has posts, and assigns a post to a campaign by its relation when the mapping has one, or by its date inside the window
+  - Builds an event sequence before the event from the event page, with pieces ready for sale only, and each post says on its own what happens, the date, the time, the address, why it is worth going, and the action
+  - Proposes the author profile of each post from the profiles linked to `Empresa do negócio`, by the channel of the format, or by the place of the post or event when `Perfis por praça` is `sim`
+  - Creates nothing before the person approves, and sends each approved Reel to definir-reel-do-instagram
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses writing the script, the caption, or the Reel post, registering only the idea, and publishing
 
 ### procurar-agenda
 - **Stability**: experimental

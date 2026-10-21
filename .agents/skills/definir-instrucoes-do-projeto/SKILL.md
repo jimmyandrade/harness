@@ -3,10 +3,12 @@ name: definir-instrucoes-do-projeto
 description: Use essa habilidade sempre que for criar, revisar, enxugar ou reorganizar as instruções do projeto, inclusive os parâmetros das habilidades, mesmo sem dizer AGENTS. NÃO use para escrever uma skill, o guia de contribuição, o mapa da arquitetura nem a documentação do produto.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.12.0"
   related:
     - criar-habilidade
     - evoluir-habilidade
+  models:
+    - agents-md
 ---
 
 # Definir instruções do projeto
@@ -16,7 +18,7 @@ metadata:
 Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo.
 
 ```yaml
-"Idioma das instruções do projeto": "português"
+"Idioma das instruções do projeto": "português do Brasil"
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -46,9 +48,9 @@ Na dúvida entre ficar e sair, saia: o destino continua a um link de distância.
 
 ### Passo 3
 
-Escreva no `Idioma das instruções do projeto`, uma regra por linha, no imperativo, sem justificar. Separe o que vale em qualquer lugar, o que vale só no Notion e o que vale só em ferramentas de código. A regra de código, inclusive a de segurança, como comando, branch, build e segredo, vai para o guia de contribuição e nunca entra na parte do Notion. A parte do Notion copia do modelo, palavra por palavra, a abertura, o aviso e as duas subseções. Só as regras sob a identidade do agente e a interação de chat mudam de um projeto para outro. A parte de ferramentas de código é só a ordem de ler o guia, copiada do modelo. A abertura descreve o documento, não o repositório: para quais ferramentas e quais tarefas ele serve.
+Escreva no `Idioma das instruções do projeto`, uma regra por linha, no imperativo, sem justificar. Separe o que vale em qualquer lugar, o que vale só no Notion e o que vale só em ferramentas de código. A regra de código, inclusive a de segurança, como comando, branch, build e segredo, vai para o guia de contribuição e nunca entra na parte do Notion. A regra que manda usar uma habilidade que fica fora do Notion também vai para o guia de contribuição, porque as instruções do projeto vão inteiras para o Notion. A parte de qualquer lugar copia do modelo, palavra por palavra, as regras fixas: a do idioma das respostas, a dos modelos de saída, a do próximo passo e a dos links. A parte do Notion copia do modelo, palavra por palavra, a abertura, o aviso e as duas subseções. Só as regras sob a identidade do agente e a interação de chat mudam de um projeto para outro. A parte de ferramentas de código é só a ordem de ler o guia, copiada do modelo. A abertura descreve o documento, não o repositório: para quais ferramentas e quais tarefas ele serve.
 
-Leia .agents/assets/templates/agents-md.md quando for gerar a saída.
+Leia o modelo de saída `agents-md` quando for gerar a saída.
 
 ### Passo 4
 

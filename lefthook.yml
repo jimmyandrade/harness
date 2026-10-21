@@ -9,6 +9,7 @@ pre-commit:
       glob:
         - ".agents/skills/**/SKILL.md"
         - "AGENTS.md"
+        - ".agents/assets/templates/*.md"
         - ".agents/scripts/**"
         - ".claude-plugin/*.json"
         - ".cursor-plugin/*.json"

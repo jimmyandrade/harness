@@ -3,7 +3,7 @@ name: definir-arquivos-da-habilidade
 description: Define onde ficam os scripts, referências, modelos e testes de uma skill e escreve Scripts disponíveis. Usada quando a skill ganha, move ou renomeia um arquivo além do SKILL.md. Não serve para escrever o texto da skill, a descrição nem gravar no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   related:
     - criar-habilidade
     - evoluir-habilidade
@@ -32,9 +32,9 @@ Tabela que estoura o limite vai para `references/`, com a condição de leitura.
 ### Passo 2
 
 Modelo de entrada ou saída não entra no corpo, nem quando é curto.
-Modelo de saída fica em `.agents/assets/templates/`, fora da skill. No corpo, uma frase e nada antes dela: `Leia .agents/assets/templates/<modelo> quando for gerar a saída.`
+Modelo de saída fica em `.agents/assets/templates/`, fora da skill. No corpo, cite pelo nome, numa frase e nada antes dela: ``Leia o modelo de saída `<nome>` quando for gerar a saída.`` Não escreva o caminho. Liste o nome em `metadata.models`, um por linha.
 Modelo de entrada de uma skill fica em `assets/` dela. Modelo de entrada de várias skills fica em `.agents/assets/`. No corpo: `Leia assets/<modelo> quando for pedir a entrada.` ou `Leia .agents/assets/<modelo> quando for pedir a entrada.`
-No Notion, o modelo de saída não entra na página de uma skill. O modelo de entrada da skill, anexe à página. `assets/<modelo>` viaja com a skill. Nos dois casos, o arquivo entra só quando a frase manda ler.
+No Notion, o modelo de saída é a página com o mesmo nome no banco de modelos, e a frase da skill fica igual. O modelo de entrada da skill, anexe à página. `assets/<modelo>` viaja com a skill. Nos dois casos, o arquivo entra só quando a frase manda ler.
 
 ### Passo 3
 
@@ -55,7 +55,7 @@ Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 Se você descrever o formato em texto corrido ou colar o modelo na skill, o agente deixa de casar a estrutura e o modelo entra em toda execução.
 
 1. Mova o modelo de saída para `.agents/assets/templates/`. O de entrada, para `assets/` da skill ou, se várias usam, para `.agents/assets/`.
-2. Deixe no corpo só a frase que manda ler o arquivo quando for pedir a entrada ou gerar a saída.
+2. Deixe no corpo só a frase que manda ler o modelo: o de saída pelo nome, o de entrada pelo caminho.
 3. Não leia o modelo em nenhum outro passo.
 
 ### Script compartilhado na skill
@@ -84,7 +84,7 @@ O script sai de `scripts/` da primeira skill e vai para `.agents/scripts/check-s
 
 ## Pegadinhas
 
-- Modelo de saída não entra no corpo. Fica em `.agents/assets/templates/`.
+- Modelo de saída não entra no corpo. Fica em `.agents/assets/templates/`, e a frase cita o nome, não o caminho.
 - No Notion, o script pode faltar na página. A execução precisa de um caminho sem ele.
 
 ## Scripts disponíveis

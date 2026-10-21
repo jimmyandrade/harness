@@ -1,5 +1,116 @@
 # Changelog
 
+## [0.63.0](https://github.com/jimmyandrade/harness/compare/v0.62.0...v0.63.0) (2026-10-21)
+
+
+### Features
+
+* **acompanhar-fila-de-revisao:** add the skill that runs the cycle of the review queue ([#321](https://github.com/jimmyandrade/harness/issues/321)) ([c2d072f](https://github.com/jimmyandrade/harness/commit/c2d072f90518b61c1a1d853540bb1e7804818528))
+* **definir-link-utm:** add the UTM link skill without internal ids ([#319](https://github.com/jimmyandrade/harness/issues/319)) ([43fa382](https://github.com/jimmyandrade/harness/commit/43fa38276a370b5f02fa0955850408870cfd103a))
+* **procurar-pedido-de-revisao:** add the skill that finds the pull requests someone asked to be reviewed ([#320](https://github.com/jimmyandrade/harness/issues/320)) ([453f20a](https://github.com/jimmyandrade/harness/commit/453f20a1441ba00c9460d7db4390cbea1db0c30c))
+* **publicar-revisao-de-codigo:** add the isolated copy, the lock, the CI wait and the start signal ([#318](https://github.com/jimmyandrade/harness/issues/318)) ([30d11f0](https://github.com/jimmyandrade/harness/commit/30d11f04aed305726b9d458679a2f15136d3acf9))
+
+
+### Bug Fixes
+
+* keep pending items out of the product announcement ([#311](https://github.com/jimmyandrade/harness/issues/311)) ([d57c90a](https://github.com/jimmyandrade/harness/commit/d57c90a9813fff7a9ca0f347aed02d42da0ce3d1))
+
+## [0.62.0](https://github.com/jimmyandrade/harness/compare/v0.61.0...v0.62.0) (2026-10-21)
+
+
+### Features
+
+* **levantar-contexto-do-pull-request:** add the skill that gathers the context of a pull request ([#315](https://github.com/jimmyandrade/harness/issues/315)) ([64a7ca3](https://github.com/jimmyandrade/harness/commit/64a7ca33d288faa6d2a16b8c1dcf51658b657380))
+* **priorizar-itens:** add the skill that sorts items into Must, Should, Could and Won't ([#313](https://github.com/jimmyandrade/harness/issues/313)) ([662d8b3](https://github.com/jimmyandrade/harness/commit/662d8b39b05b970f2bddf6de2967f82db7da8df3))
+* **publicar-revisao-de-codigo:** add the skill that reviews a pull request and publishes the review ([#316](https://github.com/jimmyandrade/harness/issues/316)) ([7b9a0aa](https://github.com/jimmyandrade/harness/commit/7b9a0aae863d2ededa7cefc2388cafd0099c6047))
+
+## [0.61.0](https://github.com/jimmyandrade/harness/compare/v0.60.0...v0.61.0) (2026-10-21)
+
+
+### Features
+
+* add the person record schema ([#310](https://github.com/jimmyandrade/harness/issues/310)) ([b8b031e](https://github.com/jimmyandrade/harness/commit/b8b031efdbe89cbf84cfabd2811a1516190477b5))
+* **conversar-no-whatsapp:** open WhatsApp Web in the session tab and filter by label ([#306](https://github.com/jimmyandrade/harness/issues/306)) ([9242f0f](https://github.com/jimmyandrade/harness/commit/9242f0f2a55077c189d59cb337e0ac61fb9da0c7))
+* **definir-registro-de-reuniao:** add the skill that registers a meeting from a pasted transcript ([#308](https://github.com/jimmyandrade/harness/issues/308)) ([ac6b410](https://github.com/jimmyandrade/harness/commit/ac6b4107da7108e8fa6fbb3b1d1c04d79a6f399e))
+* **enviar-mensagem-no-slack:** add the skill that drafts Slack messages and sends only with authorization ([#312](https://github.com/jimmyandrade/harness/issues/312)) ([6068f4b](https://github.com/jimmyandrade/harness/commit/6068f4b1eadc40583ed7f4e74abc41c40462ae2d))
+
+## [0.60.0](https://github.com/jimmyandrade/harness/compare/v0.59.0...v0.60.0) (2026-10-21)
+
+
+### Features
+
+* stop a Notion page from citing a skill that stays out of Notion ([#304](https://github.com/jimmyandrade/harness/issues/304)) ([098374a](https://github.com/jimmyandrade/harness/commit/098374a367ad2acc387d4e791cf455d5177f23ed))
+
+## [0.59.0](https://github.com/jimmyandrade/harness/compare/v0.58.0...v0.59.0) (2026-10-21)
+
+
+### Features
+
+* **limpar-copias-de-trabalho:** add the worktree cleanup skill ([#302](https://github.com/jimmyandrade/harness/issues/302)) ([6e9c50e](https://github.com/jimmyandrade/harness/commit/6e9c50ec92a548a9a81321bd4654dbfae45cdc2c))
+
+## [0.58.0](https://github.com/jimmyandrade/harness/compare/v0.57.0...v0.58.0) (2026-10-21)
+
+
+### Features
+
+* give model pages their own icon, script in gray by default ([#300](https://github.com/jimmyandrade/harness/issues/300)) ([6551da0](https://github.com/jimmyandrade/harness/commit/6551da00505e0bca1306a410f467ec8c56d1a5b5))
+
+## [0.57.0](https://github.com/jimmyandrade/harness/compare/v0.56.0...v0.57.0) (2026-10-21)
+
+
+### Features
+
+* answer in the language of Idioma das respostas ([#298](https://github.com/jimmyandrade/harness/issues/298)) ([d601e48](https://github.com/jimmyandrade/harness/commit/d601e480c70dc8d0963575bf9598a7691225a5ff))
+
+## [0.56.0](https://github.com/jimmyandrade/harness/compare/v0.55.0...v0.56.0) (2026-10-21)
+
+
+### Features
+
+* end answers with the next step and link every pull request ([#294](https://github.com/jimmyandrade/harness/issues/294)) ([3942a37](https://github.com/jimmyandrade/harness/commit/3942a37ff4b035c29ce83ccf3005d5d4a03b07c5))
+* write the core AGENTS.md in Brazilian Portuguese ([#296](https://github.com/jimmyandrade/harness/issues/296)) ([a126c9a](https://github.com/jimmyandrade/harness/commit/a126c9a5fad9675aaf254ca4c7793f2f6ee228e2))
+
+
+### Bug Fixes
+
+* compare only models when the project and the core share a model name ([#295](https://github.com/jimmyandrade/harness/issues/295)) ([4a89df8](https://github.com/jimmyandrade/harness/commit/4a89df84f84baa0e54d93770ab77745753f2e83e))
+
+## [0.55.0](https://github.com/jimmyandrade/harness/compare/v0.54.0...v0.55.0) (2026-10-21)
+
+
+### Features
+
+* add the Instagram Reel, video script, content campaign, and content calendar skills ([#291](https://github.com/jimmyandrade/harness/issues/291)) ([084385e](https://github.com/jimmyandrade/harness/commit/084385e63b2bd611e095cf58cf76c5b47d5208f5))
+
+## [0.54.0](https://github.com/jimmyandrade/harness/compare/v0.53.0...v0.54.0) (2026-10-21)
+
+
+### Features
+
+* publish output models to Notion and cite them by name ([#290](https://github.com/jimmyandrade/harness/issues/290)) ([e2ef213](https://github.com/jimmyandrade/harness/commit/e2ef213a0db9b470ef9317d14b6df18ff77d77cd))
+
+## [0.53.0](https://github.com/jimmyandrade/harness/compare/v0.52.0...v0.53.0) (2026-10-20)
+
+
+### Features
+
+* **comunicar-novidade-do-produto:** always run announcements through the tone of voice skill ([#286](https://github.com/jimmyandrade/harness/issues/286)) ([3984c9e](https://github.com/jimmyandrade/harness/commit/3984c9e032ce3b77192e8ca425a1f0f64299ce88))
+
+## [0.52.0](https://github.com/jimmyandrade/harness/compare/v0.51.0...v0.52.0) (2026-10-20)
+
+
+### Features
+
+* **comunicar-novidade-do-produto:** deliver the announcement in a single message ([#282](https://github.com/jimmyandrade/harness/issues/282)) ([52ad037](https://github.com/jimmyandrade/harness/commit/52ad037c885ec3b96edaac7c32e5510a4ab61b47))
+
+## [0.51.0](https://github.com/jimmyandrade/harness/compare/v0.50.0...v0.51.0) (2026-10-20)
+
+
+### Features
+
+* move procurar-artista and definir-artista to the core ([#278](https://github.com/jimmyandrade/harness/issues/278)) ([e152f58](https://github.com/jimmyandrade/harness/commit/e152f5894b3ca4c7ae7a31245745dfcb0fd011fc))
+* **organizar-emails:** mark bills as paid ([#280](https://github.com/jimmyandrade/harness/issues/280)) ([07fc71a](https://github.com/jimmyandrade/harness/commit/07fc71abe1ad028c04b1172bfe7a57e4dfd6c6f2))
+
 ## [0.50.0](https://github.com/jimmyandrade/harness/compare/v0.49.2...v0.50.0) (2026-10-20)
 
 

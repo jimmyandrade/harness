@@ -147,6 +147,106 @@ class PluginSkillsTest(unittest.TestCase):
         self.assertIn('"Cores" is not a parameter of definir-termo', result.stdout + result.stderr)
 
 
+def write_model(root: Path, name: str) -> None:
+    folder = root / ".agents" / "assets" / "templates"
+    folder.mkdir(parents=True, exist_ok=True)
+    (folder / f"{name}.md").write_text("Meses nas colunas.\n", encoding="utf-8")
+
+
+class ModelCitationTest(unittest.TestCase):
+    def setUp(self) -> None:
+        self.tmp = tempfile.TemporaryDirectory()
+        self.project = Path(self.tmp.name)
+        (self.project / ".agents").mkdir()
+        (self.project / INSTRUCTIONS).write_text(PARAMETERS, encoding="utf-8")
+        write_model(self.project, "resumo-de-reuniao")
+        self.checker = load_checker(self.project)
+        self.known = self.checker.known_model_names()
+
+    def tearDown(self) -> None:
+        self.tmp.cleanup()
+        os.environ.pop("HARNESS_ROOT", None)
+
+    def errors(self, models: list[str] | None, body: str) -> list[str]:
+        lines = ["name: abrir-pedido", "description: x", "metadata:", '  version: "0.1.0"']
+        if models is not None:
+            lines.append("  models:")
+            lines.extend(f"    - {item}" for item in models)
+        block = "\n".join(lines)
+        return [finding.message for finding in self.checker.models_errors(block, body, self.known)]
+
+    def test_known_models_include_the_project_and_the_core(self) -> None:
+        self.assertIn("resumo-de-reuniao", self.known)
+        self.assertIn("dre-simplificada", self.known)
+
+    def test_a_skill_without_models_is_not_checked(self) -> None:
+        self.assertEqual(self.errors(None, "Leia .agents/assets/templates/resumo-de-reuniao.md quando for gerar a saída."), [])
+
+    def test_a_listed_model_cited_by_name_passes(self) -> None:
+        body = "Leia o modelo de saída `resumo-de-reuniao` quando for gerar a saída."
+        self.assertEqual(self.errors(["resumo-de-reuniao"], body), [])
+
+    def test_a_name_that_is_not_a_model_fails(self) -> None:
+        self.assertEqual(
+            self.errors(["ata"], ""),
+            ["metadata.models names ata, which is not a model here or in the core"],
+        )
+
+    def test_a_cited_model_missing_from_the_list_fails(self) -> None:
+        self.assertEqual(
+            self.errors([], "Leia o modelo de saída `dre-simplificada` quando for gerar a saída."),
+            ["the body cites the model dre-simplificada; add it to metadata.models"],
+        )
+
+    def test_a_path_fails_once_the_skill_lists_its_models(self) -> None:
+        self.assertEqual(
+            self.errors(["resumo-de-reuniao"], "Leia .agents/assets/templates/resumo-de-reuniao.md quando for gerar a saída."),
+            ["cite the model by name: Leia o modelo de saída `resumo-de-reuniao` quando for gerar a saída."],
+        )
+
+    def test_a_list_written_as_text_fails(self) -> None:
+        block = 'name: abrir-pedido\nmetadata:\n  version: "0.1.0"\n  models: resumo-de-reuniao'
+        self.assertEqual(
+            [finding.message for finding in self.checker.metadata_list_errors(block)],
+            ["metadata.models must be a list"],
+        )
+
+
+class NotionCitationTest(unittest.TestCase):
+    def setUp(self) -> None:
+        self.tmp = tempfile.TemporaryDirectory()
+        self.project = Path(self.tmp.name)
+        (self.project / ".agents").mkdir()
+        (self.project / INSTRUCTIONS).write_text(PARAMETERS, encoding="utf-8")
+        folder = self.project / ".agents" / "skills" / "limpar-pasta"
+        folder.mkdir(parents=True)
+        (folder / "SKILL.md").write_text(
+            '---\nname: limpar-pasta\ndescription: x\nmetadata:\n  author: example\n  version: "0.1.0"\n  notion: "false"\n---\n\n# Limpar pasta\n',
+            encoding="utf-8",
+        )
+        write_skill(self.project, "abrir-pedido")
+        self.checker = load_checker(self.project)
+        self.offline = self.checker.offline_skill_names()
+
+    def tearDown(self) -> None:
+        self.tmp.cleanup()
+        os.environ.pop("HARNESS_ROOT", None)
+
+    def test_only_skills_with_notion_false_stay_out(self) -> None:
+        self.assertIn("limpar-pasta", self.offline)
+        self.assertIn("liberar-espaco-em-disco", self.offline)
+        self.assertNotIn("abrir-pedido", self.offline)
+
+    def test_a_page_that_goes_to_notion_cannot_cite_a_skill_that_stays_out(self) -> None:
+        text = "---\nname: abrir-pedido\n---\n\nAo terminar, siga `limpar-pasta`.\n"
+        found = self.checker.notion_citation_errors(text, "Ao terminar, siga `limpar-pasta`.\n", self.offline, "this skill")
+        self.assertEqual([finding.line for finding in found], [5])
+        self.assertIn("cites limpar-pasta, which stays out of Notion", found[0].message)
+
+    def test_a_citation_of_a_skill_that_goes_to_notion_passes(self) -> None:
+        self.assertEqual(self.checker.notion_citation_errors("", "Siga `abrir-pedido`.", self.offline, "this skill"), [])
+
+
 class MetadataFlagTest(unittest.TestCase):
     def setUp(self) -> None:
         self.checker = load_checker(Path(tempfile.mkdtemp()))

@@ -3,7 +3,7 @@ name: comunicar-novidade-do-produto
 description: Use essa habilidade sempre que um PR for mesclado ou alguém perguntar o que há de novo no produto para quem o usa, mesmo sem dizer novidade, para decidir se há o que contar e escrever o comunicado sem termos técnicos. NÃO use para a descrição do PR, o changelog nem release notes técnicas.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.8.1"
   related:
     - evoluir-habilidade
 ---
@@ -12,7 +12,7 @@ metadata:
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Repositório` vem do remoto `origin` quando as instruções não dizem.
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Repositório` vem do remoto `origin` quando as instruções não dizem. De preferência, `Habilidade de tom de voz` vem preenchida nas instruções do projeto. Vazia, ela só não foi informada: não quer dizer que o projeto não tem uma.
 
 ```yaml
 "Repositório": ""
@@ -23,6 +23,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Público do comunicado": ""
 "Canal do comunicado": ""
 "Idioma do comunicado": "português"
+"Habilidade de tom de voz": ""
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -48,9 +49,19 @@ Sem novidade: dependência, refatoração, CI, teste, documentação interna, re
 
 Escreva o comunicado no `Idioma do comunicado`, para quem não é técnico: o que muda na prática, onde a pessoa percebe, quem é afetado, se precisa fazer algo e a partir de quando. Nunca cite PR, commit, biblioteca, arquivo nem ferramenta interna. Conte a correção pelo problema que a pessoa sentia: "corrigimos um problema que fazia a página demorar", não o novo comportamento isolado. Um período vira um comunicado só, agrupado por área e com o intervalo corrido no título, como "últimos 15 dias", sem uma seção por semana ou sprint.
 
+O rascunho passa obrigatoriamente pela habilidade de tom de voz antes de ir para a pessoa, com o público e o canal do comunicado. Quem fala é quem publica o comunicado. Sem saber quem publica, pergunte.
+
+Ache essa habilidade pela `Habilidade de tom de voz`. Vazia, ou se a habilidade indicada não aparecer, procure nesta ordem:
+
+1. Uma habilidade da sessão chamada `redigir-com-tom-de-voz`.
+2. Uma habilidade da sessão cuja descrição fale de tom de voz, copy ou vocabulário da marca.
+3. No Notion, a base de habilidades do workspace, buscando por "tom de voz".
+
+Achou: use e sugira preencher `Habilidade de tom de voz`. Não achou: pergunte se a pessoa quer usar uma. Se ela disser que não, escreva com o vocabulário que conseguir consultar e diga isso na entrega.
+
 ### Passo 4
 
-Entregue no `Canal do comunicado`, com a formatação dele. Se houver uma ferramenta para esse canal, mostre o texto e peça o ok antes de publicar. Se não houver, ou se o canal estiver vazio, entregue o texto pronto para copiar.
+Entregue no `Canal do comunicado`, com a formatação dele. O comunicado vai numa mensagem só, com parágrafos curtos, mesmo no WhatsApp, onde a conversa costuma ir em mensagens quebradas. Só a novidade entra nessa mensagem. Um pedido, uma cobrança ou uma lista de pendências é outro assunto: vai numa mensagem à parte, depois do comunicado. Se houver uma ferramenta para esse canal, mostre o texto e peça o ok antes de publicar. Se não houver, ou se o canal estiver vazio, entregue o texto pronto para copiar.
 
 ### Passo 5
 
@@ -86,6 +97,13 @@ Se você escrever "a página parou de pedir a localização", a pessoa não reco
 1. Comece com "corrigimos um problema que".
 2. Descreva o incômodo como a pessoa o percebia.
 
+### Pendência dentro do comunicado
+
+Se você colocar no comunicado a lista do que ainda falta fazer, como os registros sem um campo novo, o anúncio vira cobrança e a pessoa perde a novidade no meio.
+
+1. Deixe no comunicado só o que mudou e o que fazer daqui em diante.
+2. Mande a lista de pendências numa mensagem à parte, depois do comunicado.
+
 ### Ação escondida
 
 Se você deixar de dizer que a pessoa precisa fazer algo, a mudança vira problema para ela.
@@ -108,6 +126,7 @@ Três PRs entraram: duas atualizações de dependência e uma correção no form
 
 ## Pegadinhas
 
+- A habilidade de tom de voz pode existir e não ser carregada sozinha, como no Notion, quando a página não está marcada como habilidade ou a busca automática não a encontra. Procure antes de concluir que ela não existe.
 - WhatsApp não é Markdown: o negrito é `*texto*`, com um asterisco, o itálico é `_texto_`, e não há título, separador nem link `[texto](url)`. Entregue o texto num bloco de código, para a formatação não se perder ao copiar.
 - A mensagem do commit não diz se ele veio de um PR: um merge escreve `Merge pull request #`, um rebase pode não citar o número e um commit direto pode citar `(#<número>)`. Pergunte ao GitHub quais PRs estão ligados ao commit.
 - O tipo no título do PR engana: um `fix` pode mudar o que a pessoa vê, e um `chore` pode mudar um texto da tela. Classifique pelo diff, não pelo tipo.

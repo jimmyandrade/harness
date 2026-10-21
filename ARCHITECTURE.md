@@ -13,17 +13,18 @@ This repository is the core harness. A business harness is a separate, private r
 ```text
 harness/
 ├── .agents/
-│   ├── assets/templates/           # Output templates that skills read when they write a file
-│   ├── mappings/                   # Template of the Notion mapping a business harness copies
-│   ├── schemas/                    # JSON Schema of a skill page
+│   ├── assets/templates/           # Models that skills cite by name when they write a file, published to Notion when the project maps them
+│   ├── mappings/                   # Templates of the Notion mappings a business harness copies, for skills and for models
+│   ├── schemas/                    # JSON Schema of a skill page, of a model page, and of a person record
 │   ├── scripts/
 │   │   ├── check-skill/            # Skill checker (Python), run by Lefthook and the check-skill action
+│   │   ├── check-models/           # Checks the frontmatter and the sections of each model in assets/templates, run by check-skill
 │   │   ├── core-pins/              # Checks that every pin of the core in a project names the same tag, run by check-skill
 │   │   ├── plugin-manifests/       # Checks that the Cursor manifest and the Codex-readable marketplace agree with .claude-plugin/, run by check-skill
 │   │   ├── project-parameters/     # Reads and validates the parameters in the AGENTS.md frontmatter, for every script
 │   │   ├── skill-graph/            # Writes .agents/skills/README.md, the Mermaid graph of skills
 │   │   ├── skill-folder-icon/      # macOS folder icon for each skill, run by Lefthook in the checker's virtual environment
-│   │   └── sync-skill-pages/       # Notion sync (TypeScript), run by the sync-skill-pages action
+│   │   └── sync-notion-pages/      # Notion sync (TypeScript), run by the sync-skill-pages action: one module per page kind, on shared modules
 │   └── skills/                     # Shared skills, one <name>/SKILL.md each
 │       ├── FEATURES.md             # One entry per skill, written by hand
 │       └── README.md               # Generated skill graph; do not edit
@@ -69,6 +70,7 @@ flowchart LR
   checker -- "checks" --> bskills
   sync -- "reads" --> mapping
   sync -- "writes pages" --> notion[("Notion skills database")]
+  sync -- "writes model pages, when mapped" --> models[("Notion models database")]
   skills -- "core plugin" --> claude["Claude Code, Codex, Cursor"]
   bskills -- "links in .claude/skills, .cursor/skills" --> agents["Claude Code, Cursor"]
 ```
@@ -91,9 +93,10 @@ None. People reach the core through their agent (Claude Code, Cursor), GitHub, a
 #### 3.2.2. Notion sync
 
 - Name: `sync-skill-pages`
-- Description: Creates or updates one Notion page per changed skill, through the caller's mapping.
+- Description: Creates or updates one Notion page per changed skill, through the caller's mapping, and one page per changed model, through the caller's model mapping when it has one.
 - Technologies: TypeScript on Node.js 24, `@notionhq/client`
-- Deployment: Composite action on push to the default branch of a business harness
+- Deployment: Composite action on each release of a business harness
+- Modules: `sync-notion-pages.ts` is the entry point that decides what to publish. `skill-pages.ts` writes the skill pages and the project instructions page, and `template-pages.ts` writes the model pages. They share `notion.ts` (API shape, properties, icon, status, title lookup), `frontmatter.ts`, and `project.ts` (project and core roots, git changes). A new kind of page is one more module next to them, called from the entry point.
 
 #### 3.2.3. Plugin
 
@@ -106,10 +109,10 @@ None. People reach the core through their agent (Claude Code, Cursor), GitHub, a
 
 ### 4.1. Files in git
 
-- Name: Skills, configuration, mappings
+- Name: Skills, models, configuration, mappings
 - Type: Markdown, YAML, and JSON files
 - Purpose: Git is the write source of every skill and setting
-- Key Schemas/Collections: `.agents/skills/<name>/SKILL.md`, `AGENTS.md` and the parameters in its frontmatter, `.agents/mappings/skill-page.notion.json`
+- Key Schemas/Collections: `.agents/skills/<name>/SKILL.md`, `.agents/assets/templates/<name>.md`, `AGENTS.md` and the parameters in its frontmatter, `.agents/mappings/skill-page.notion.json`, `.agents/mappings/template-page.notion.json`
 
 ### 4.2. Notion
 
@@ -117,9 +120,13 @@ None. People reach the core through their agent (Claude Code, Cursor), GitHub, a
 - Type: Notion data source
 - Purpose: Readable copy of the skills for the people of that workspace; only the sync writes it
 
+- Name: Models database of each business, optional
+- Type: Notion data source
+- Purpose: Readable copy of the models, as ADR 0012 and ADR 0015 decide; the sync writes the mapped properties and the body, and people keep the other properties
+
 ## 5. External Integrations / APIs
 
-- Notion API: Purpose: publish skill pages. Integration Method: `@notionhq/client` with the business token.
+- Notion API: Purpose: publish skill and model pages. Integration Method: `@notionhq/client` with the business token.
 - GitHub: Purpose: pull requests, CI, releases, and composite actions. Integration Method: GitHub Actions and the `gh` CLI.
 - Renovate: Purpose: move the pins of the core and of jimmyandrade/vocabulary in business harnesses. Integration Method: the preset in `default.json`.
 

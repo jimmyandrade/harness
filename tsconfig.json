@@ -11,6 +11,6 @@
     "types": ["node"]
   },
   "include": [
-    ".agents/scripts/sync-skill-pages/**/*.ts"
+    ".agents/scripts/sync-notion-pages/**/*.ts"
   ]
 }

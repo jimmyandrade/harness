@@ -3,6 +3,8 @@
 
 A skill that lists metadata.related names only skills that exist in the project
 or in this harness, and lists every skill its body cites.
+A skill that lists metadata.models names only models in .agents/assets/templates of the
+project or of this harness, lists every model its body cites, and cites none by path (ADR 0016).
 When the opportunity skills consider groups, the opportunity mapping binds the group.
 
 The project is HARNESS_ROOT, or the working directory when it is unset.
@@ -532,7 +534,7 @@ def metadata_list_errors(block: str) -> list[Finding]:
         key, value = stripped.split(":", 1)
         key = key.strip()
         value = value.strip()
-        if key in {"aliases", "tags", "related"}:
+        if key in {"aliases", "tags", "related", "models"}:
             if value:
                 errors.append(Finding(f"metadata.{key} must be a list", lineno))
                 list_key = None
@@ -575,6 +577,40 @@ def known_skill_names() -> set[str]:
     return names
 
 
+def offline_skill_names() -> set[str]:
+    """Skills that never go to Notion: metadata.notion is "false". An internal skill goes there once it is ready."""
+    names: set[str] = set()
+    for root in dict.fromkeys([ROOT, CORE, *PLUGINS]):
+        for path in skill_files(root):
+            try:
+                block = frontmatter(path.read_text(encoding="utf-8"), path)
+            except SystemExit:
+                continue
+            if metadata_value(block, "notion") == '"false"':
+                names.add(path.parent.name)
+    return names
+
+
+def citation_line(text: str, name: str) -> int | None:
+    """The first line of a text that cites a skill name between backticks."""
+    for index, line in enumerate(text.splitlines(), start=1):
+        if f"`{name}`" in line:
+            return index
+    return None
+
+
+def notion_citation_errors(text: str, body: str, offline: set[str], what: str) -> list[Finding]:
+    """A page that goes to Notion must not cite a skill that stays out of it: the Notion agent cannot load it."""
+    return [
+        Finding(
+            f"{what} goes to Notion and cites {other}, which stays out of Notion, so the Notion agent cannot load it. "
+            "Move the rule to the contributing guide, or keep this page out of Notion too",
+            citation_line(text, other),
+        )
+        for other in sorted(cited_names(body, offline))
+    ]
+
+
 MERMAID_BLOCK = re.compile(r"^```mermaid[^\n]*\n(.*?)^```", re.M | re.S)
 BACKTICKED = re.compile(r"`([a-z0-9][a-z0-9-]*)`")
 
@@ -614,6 +650,46 @@ def related_errors(block: str, body: str, name: str, known: set[str]) -> list[Fi
             )
     for other in sorted(mentioned_skills(body, name, known) - seen):
         errors.append(Finding(f"the body cites {other}; add it to metadata.related", line))
+    return errors
+
+
+MODELS = Path(".agents") / "assets" / "templates"
+MODEL_PATH = re.compile(r"\.agents/assets/templates/([A-Za-z0-9_.-]+?)(?:\.md)?(?![A-Za-z0-9_.-])")
+
+
+def known_model_names() -> set[str]:
+    """The models of the project and of this harness: each Markdown file in .agents/assets/templates."""
+    names: set[str] = set()
+    for root in dict.fromkeys([ROOT, CORE]):
+        folder = root / MODELS
+        if folder.is_dir():
+            names.update(path.stem for path in folder.glob("*.md") if path.is_file())
+    return names
+
+
+def models_errors(block: str, body: str, known: set[str]) -> list[Finding]:
+    """metadata.models names real models and every model the body cites, and the body cites none by path."""
+    declared = metadata_list(block, "models")
+    if declared is None:
+        return []
+    models, line = declared
+    errors: list[Finding] = []
+    seen: set[str] = set()
+    for item in models:
+        if item in seen:
+            errors.append(Finding(f"metadata.models repeats {item}", line))
+        seen.add(item)
+        if item not in known:
+            errors.append(Finding(f"metadata.models names {item}, which is not a model here or in the core", line))
+    for other in sorted(cited_names(body, known) - seen):
+        errors.append(Finding(f"the body cites the model {other}; add it to metadata.models", line))
+    for match in MODEL_PATH.finditer(body):
+        errors.append(
+            Finding(
+                f"cite the model by name: Leia o modelo de saída `{match.group(1)}` quando for gerar a saída.",
+                line,
+            )
+        )
     return errors
 
 
@@ -1325,6 +1401,8 @@ def main() -> int:
     results: dict[str, list[tuple[Path, Finding]]] = {}
     measures: dict[str, tuple[str | None, int | None]] = {}
     known = known_skill_names()
+    known_models = known_model_names()
+    offline = offline_skill_names()
     args = sys.argv[1:]
     skill_args = [arg for arg in args if Path(arg).name != INSTRUCTIONS]
     instructions = ROOT / INSTRUCTIONS
@@ -1345,6 +1423,13 @@ def main() -> int:
             failed = True
             results[INSTRUCTIONS].append((Path(INSTRUCTIONS), finding))
             report(Path(INSTRUCTIONS), finding)
+        if IS_HARNESS and ROOT != CORE:
+            parts = text.split("\n---", 2)
+            body = parts[2] if text.startswith("---") and len(parts) == 3 else text
+            for finding in notion_citation_errors(text, body, offline, INSTRUCTIONS):
+                failed = True
+                results[INSTRUCTIONS].append((Path(INSTRUCTIONS), finding))
+                report(Path(INSTRUCTIONS), finding)
     if (args and not skill_args) or not IS_HARNESS:
         write_summary(results, measures, body_limit, encoding)
         return 1 if failed else 0
@@ -1399,6 +1484,11 @@ def main() -> int:
                 add(finding)
             for finding in related_errors(block, body_text, name, known):
                 add(finding)
+            for finding in models_errors(block, body_text, known_models):
+                add(finding)
+            if metadata_value(block, "notion") != '"false"' and metadata_value(block, "internal") != "true":
+                for finding in notion_citation_errors(text, body_text, offline - {name}, "this skill"):
+                    add(finding)
             if skill_author != author:
                 author_line = next(
                     (lineno for lineno, raw in front if raw.strip().startswith("author:")),

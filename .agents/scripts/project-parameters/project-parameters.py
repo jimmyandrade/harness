@@ -27,16 +27,22 @@ TEXT_SETTINGS = {
     "Direção dos fluxogramas",
     "Ícone das páginas no Notion",
     "Cor do ícone das páginas no Notion",
+    "Ícone dos modelos no Notion",
+    "Cor do ícone dos modelos no Notion",
     "Símbolo da pasta no macOS",
+    "Idioma das respostas",
 }
 CHOICE_SETTINGS = {
     "Licença obrigatória": {"sim", "não"},
     "Considerar grupos de oportunidades": {"sim", "não"},
 }
+# A link setting names a Notion database, by its URL or its collection:// data source. Agents read it, not scripts.
+LINK_SETTINGS = {"Banco de modelos no Notion"}
+NOTION_LINK = re.compile(r"^(?:https://(?:www\.)?notion\.so/\S+|https://app\.notion\.com/\S+|collection://[0-9a-f-]{32,36})$")
 # A date setting is empty, for none, or a calendar date written YYYY-MM-DD.
 DATE_SETTINGS = {"Data de fundação do negócio", "Data mínima da edição"}
 VERSION = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$")
-SCRIPT_SETTINGS = INTEGER_SETTINGS | TEXT_SETTINGS | set(CHOICE_SETTINGS) | DATE_SETTINGS
+SCRIPT_SETTINGS = INTEGER_SETTINGS | TEXT_SETTINGS | set(CHOICE_SETTINGS) | DATE_SETTINGS | LINK_SETTINGS
 # A script setting that is also a parameter of a skill reads that skill's entry first.
 SETTING_SKILL = {
     "Palavras": "criar-habilidade",
@@ -244,6 +250,8 @@ def setting_type_error(key: str, value) -> str | None:
         return f'"{key}" must be a non-empty text'
     if key in CHOICE_SETTINGS and value not in CHOICE_SETTINGS[key]:
         return f'"{key}" must be one of: ' + ", ".join(sorted(CHOICE_SETTINGS[key]))
+    if key in LINK_SETTINGS and (not isinstance(value, str) or NOTION_LINK.fullmatch(value) is None):
+        return f'"{key}" must be the link of a Notion database or its collection:// data source'
     if key in DATE_SETTINGS and not is_date(value):
         return f'"{key}" must be empty or a date written YYYY-MM-DD'
     return None
