@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.60.0](https://github.com/jimmyandrade/harness/compare/v0.59.0...v0.60.0) (2026-10-21)
+
+
+### Features
+
+* stop a Notion page from citing a skill that stays out of Notion ([#304](https://github.com/jimmyandrade/harness/issues/304)) ([098374a](https://github.com/jimmyandrade/harness/commit/098374a367ad2acc387d4e791cf455d5177f23ed))
+
 ## [0.59.0](https://github.com/jimmyandrade/harness/compare/v0.58.0...v0.59.0) (2026-10-21)
 
 
