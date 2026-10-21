@@ -48,7 +48,7 @@ runs:
         HARNESS_ROOT: ${{ github.workspace }}
         NOTION_TOKEN: ${{ inputs.notion-token }}
       run: >-
-        node "$GITHUB_ACTION_PATH/../../../.agents/scripts/sync-skill-pages/sync-skill-pages.ts"
+        node "$GITHUB_ACTION_PATH/../../../.agents/scripts/sync-notion-pages/sync-notion-pages.ts"
         --base "${{ inputs.base }}"
         --head "${{ inputs.head }}"
         --mapping "${{ inputs.mapping }}"
