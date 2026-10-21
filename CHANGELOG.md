@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.61.0](https://github.com/jimmyandrade/harness/compare/v0.60.0...v0.61.0) (2026-10-21)
+
+
+### Features
+
+* add the person record schema ([#310](https://github.com/jimmyandrade/harness/issues/310)) ([b8b031e](https://github.com/jimmyandrade/harness/commit/b8b031efdbe89cbf84cfabd2811a1516190477b5))
+* **conversar-no-whatsapp:** open WhatsApp Web in the session tab and filter by label ([#306](https://github.com/jimmyandrade/harness/issues/306)) ([9242f0f](https://github.com/jimmyandrade/harness/commit/9242f0f2a55077c189d59cb337e0ac61fb9da0c7))
+* **definir-registro-de-reuniao:** add the skill that registers a meeting from a pasted transcript ([#308](https://github.com/jimmyandrade/harness/issues/308)) ([ac6b410](https://github.com/jimmyandrade/harness/commit/ac6b4107da7108e8fa6fbb3b1d1c04d79a6f399e))
+* **enviar-mensagem-no-slack:** add the skill that drafts Slack messages and sends only with authorization ([#312](https://github.com/jimmyandrade/harness/issues/312)) ([6068f4b](https://github.com/jimmyandrade/harness/commit/6068f4b1eadc40583ed7f4e74abc41c40462ae2d))
+
 ## [0.60.0](https://github.com/jimmyandrade/harness/compare/v0.59.0...v0.60.0) (2026-10-21)
 
 
