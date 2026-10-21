@@ -392,7 +392,7 @@ How these skills relate is in `README.md`, in this folder.
   - Lives at `.agents/skills/definir-instrucoes-do-projeto/SKILL.md`, with the output model `agents-md` at `.agents/assets/templates/agents-md.md`, cited by name
   - Measures the instructions with the skill checker before and after, against the skill body limits
   - Classifies each passage by destination: stays, contributing guide, architecture map, design document, a new skill, product documentation, the data, or the parameters in the frontmatter
-  - Writes in the language set by "Idioma das instruções do projeto", one rule per line, with separate parts for anywhere, Notion only, and coding tools only
+  - Writes in the language set by "Idioma das instruções do projeto", Brazilian Portuguese by default, which a project changes in its own `AGENTS.md`, one rule per line, with separate parts for anywhere, Notion only, and coding tools only
   - Builds `metadata.parameters` in the frontmatter as a tree, a `Global` entry and one entry per skill, copying each key from the skill and listing only values that differ from the defaults
   - Creates each destination before removing the passage, then updates the references to the old location
 - **Test Criteria**:
