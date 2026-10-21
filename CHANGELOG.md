@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.57.0](https://github.com/jimmyandrade/harness/compare/v0.56.0...v0.57.0) (2026-10-21)
+
+
+### Features
+
+* answer in the language of Idioma das respostas ([#298](https://github.com/jimmyandrade/harness/issues/298)) ([d601e48](https://github.com/jimmyandrade/harness/commit/d601e480c70dc8d0963575bf9598a7691225a5ff))
+
 ## [0.56.0](https://github.com/jimmyandrade/harness/compare/v0.55.0...v0.56.0) (2026-10-21)
 
 
