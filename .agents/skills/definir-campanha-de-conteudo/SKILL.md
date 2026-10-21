@@ -3,11 +3,13 @@ name: definir-campanha-de-conteudo
 description: Use essa habilidade sempre que for criar, revisar, acompanhar ou encerrar uma campanha de conteúdo, inclusive a janela, as etapas por semana, as métricas e promover uma pauta a campanha, mesmo sem dizer campanha. NÃO use para criar os posts da campanha, conferir o mix do calendário, escrever roteiro ou legenda, nem cadastrar a data significativa.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.2.1"
   internal: true
   related:
     - evoluir-habilidade
     - planejar-calendario-de-conteudo
+  models:
+    - campanha-de-conteudo
 ---
 
 # Definir campanha de conteúdo
@@ -56,7 +58,7 @@ Uma pauta da lista de posts que ganhou janela própria e vários desdobramentos 
 
 ### Passo 3
 
-Leia .agents/assets/templates/campanha-de-conteudo.md quando for gerar a saída.
+Leia o modelo de saída `campanha-de-conteudo` quando for gerar a saída.
 
 O objetivo editorial parte das `Referências da estratégia de conteúdo`. A estratégia da campanha fica no corpo da página: conceito, promessa, público, objetivo editorial, etapas por semana, desdobramentos por formato e canal, CTA principal, cadência e decisão editorial. Cada etapa tem a função editorial, os conteúdos sugeridos e as métricas. A promessa e o CTA passam pela `Habilidade de tom de voz`.
 
