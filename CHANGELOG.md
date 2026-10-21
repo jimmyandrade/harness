@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.69.0](https://github.com/jimmyandrade/harness/compare/v0.68.0...v0.69.0) (2026-10-21)
+
+
+### Features
+
+* **acompanhar-fila-de-revisao:** add the check policy parameter and the missing status signal states ([#333](https://github.com/jimmyandrade/harness/issues/333)) ([a9dd563](https://github.com/jimmyandrade/harness/commit/a9dd56398b341ed08ef1c7c4c74f3dc601d219c1))
+
 ## [0.68.0](https://github.com/jimmyandrade/harness/compare/v0.67.0...v0.68.0) (2026-10-21)
 
 
