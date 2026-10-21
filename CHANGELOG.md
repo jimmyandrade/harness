@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.64.0](https://github.com/jimmyandrade/harness/compare/v0.63.0...v0.64.0) (2026-10-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* **atender-revisao-de-pull-request:** resolver-comentarios-de-revisao is now atender-revisao-de-pull-request. The old name stays in metadata.aliases.
+
+### Features
+
+* **atender-revisao-de-pull-request:** rename resolver-comentarios-de-revisao and absorb the work of applying a review ([#323](https://github.com/jimmyandrade/harness/issues/323)) ([2da03f9](https://github.com/jimmyandrade/harness/commit/2da03f9e9cfe92fa2b412c1c22657fde393fc1df))
+
+
+### Bug Fixes
+
+* **organizar-emails:** ask before undoing a person's archive ([#281](https://github.com/jimmyandrade/harness/issues/281)) ([b148f9d](https://github.com/jimmyandrade/harness/commit/b148f9d92c8c8cb9ddd0f9a21ca167a23150d67d))
+
 ## [0.63.0](https://github.com/jimmyandrade/harness/compare/v0.62.0...v0.63.0) (2026-10-21)
 
 
