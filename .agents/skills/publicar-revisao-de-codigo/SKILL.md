@@ -3,7 +3,7 @@ name: publicar-revisao-de-codigo
 description: Revisa um pull request e publica a revisão numa única review, com os comentários inline, no idioma de quem recebe e no tom do projeto. Usada quando a pessoa pede uma revisão ou outra habilidade precisa publicar uma. Não serve para tratar os comentários que você recebeu no seu PR.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   notion: "false"
   aliases:
     - post-code-review
@@ -37,6 +37,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Abertura da revisão": ""
 "Lentes de revisão": ""
 "Ler o texto antes de publicar": "sim"
+"Publicar em execução agendada": "não"
 "Pasta das cópias separadas": ""
 "Idade máxima da trava": "2 horas"
 "Comentário de início da revisão": ""
@@ -44,7 +45,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Modo de aprendizado": "perguntar"
 ```
 
-`Postura dos comentários` é `pergunta` ou `veredito`: com `pergunta`, nenhum achado vira "isto é um erro", e sim o que você viu e uma pergunta. `Nível de detalhe` é `enxuta`, só Deve ter e Deveria ter, ou `completa`, com tudo. `Lentes de revisão` lista critérios que você aplica antes de publicar sem citá-los no texto. `Abertura da revisão` descreve o que abre cada texto, como um resumo curto. `Pasta das cópias separadas` diz onde criar a cópia de trabalho de cada repositório, e vazio usa a pasta temporária do sistema, com uma subpasta por repositório. `Comentário de início da revisão` e `Etiqueta de revisão em andamento` avisam quem acompanha o PR de que a revisão começou: vazios, a habilidade não posta nem etiqueta nada.
+`Postura dos comentários` é `pergunta` ou `veredito`: com `pergunta`, nenhum achado vira "isto é um erro", e sim o que você viu e uma pergunta. `Nível de detalhe` é `enxuta`, só Deve ter e Deveria ter, ou `completa`, com tudo. `Lentes de revisão` lista critérios que você aplica antes de publicar sem citá-los no texto. `Abertura da revisão` descreve o que abre cada texto, como um resumo curto. `Publicar em execução agendada` é `sim` ou `não` e só vale quando ninguém está na frente: com `não`, a habilidade prepara a revisão e não publica. `Pasta das cópias separadas` diz onde criar a cópia de trabalho de cada repositório, e vazio usa a pasta temporária do sistema, com uma subpasta por repositório. `Comentário de início da revisão` e `Etiqueta de revisão em andamento` avisam quem acompanha o PR de que a revisão começou: vazios, a habilidade não posta nem etiqueta nada.
 
 ## Instruções
 
@@ -117,7 +118,7 @@ Escreva os textos com `redigir-com-tom-de-voz`, para o tom de quem publica. Cada
 
 ### Passo 10
 
-Antes de publicar, com `Ler o texto antes de publicar` em `sim`, mostre o texto completo e espere o sim da pessoa que chamou. Em execução agendada, não publique: deixe o texto e o link do PR no resumo.
+Antes de publicar, com `Ler o texto antes de publicar` em `sim`, mostre o texto completo e espere o sim da pessoa que chamou. Em execução agendada, com `Publicar em execução agendada` em `não`, não publique: deixe o texto e o link do PR no resumo. Com `Publicar em execução agendada` em `sim`, publique do mesmo jeito, sem esperar a leitura, e diga no resumo o que foi publicado.
 
 Publique numa única review, com todos os comentários inline numa chamada só, e as respostas nas threads existentes. A ação final vem dos parâmetros:
 
@@ -218,7 +219,7 @@ Não achei Deve ter nem Deveria ter. Os dois nomes ficam como oportunidade. Apro
 - A pessoa já respondeu a um achado: não repita.
 - O PR muda interface e já traz o antes e o depois: use e siga.
 - Não achou o registro da pessoa: use o histórico dela, e depois o idioma padrão.
-- Execução agendada: deixe o texto e o link no resumo, sem publicar.
+- Execução agendada: com `Publicar em execução agendada` em `não`, deixe o texto e o link no resumo, sem publicar. Em `sim`, publique e diga no resumo.
 - O contexto veio de conversa privada: use só para calibrar o que você pergunta, sem citar.
 - Um check está pendente: não revise, diga qual e espere.
 - A revisão só lê o diff: pule a cópia separada.

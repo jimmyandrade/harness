@@ -1,9 +1,9 @@
 ---
 name: acompanhar-fila-de-revisao
-description: Roda o ciclo da fila de revisão de pull requests. Confere o horário, cuida primeiro dos seus PRs, acha os pedidos, fecha o laço dos já revisados, escolhe o próximo, revisa um por execução e prepara o aviso a quem pediu. Só deixa rascunho e link, nunca envia. Não serve para revisar sozinha nem achar pedidos por conta própria.
+description: Roda o ciclo da fila de revisão de pull requests. Confere o horário, cuida primeiro dos seus PRs, acha os pedidos, fecha o laço dos já revisados, escolhe o próximo, revisa um por execução e prepara o aviso a quem pediu. Os avisos ficam só como rascunho, com o link. Não serve para revisar sozinha nem achar pedidos por conta própria.
 metadata:
   author: jimmyandrade
-  version: "0.1.1"
+  version: "0.2.0"
   notion: "false"
   related:
     - enviar-mensagem-no-slack
@@ -29,6 +29,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Prioridade por pessoa": ""
 "Teto de nível por pessoa": ""
 "Revisões por execução": "1"
+"Publicar em execução agendada": "não"
 "Avisar quem pediu": "sim"
 "Canais sem aviso": ""
 "Regras de aviso a terceiros": ""
@@ -72,7 +73,7 @@ Ordene o resto da fila pela `Ordem da fila`, com a `Prioridade por repositório`
 
 Revise o primeiro item da fila, até o número de `Revisões por execução`, chamando `publicar-revisao-de-codigo`. Não revise um PR que a skill de achar pedidos marcou como não pronto. Quem revisa trata do estado do PR, da cópia separada e da limpeza.
 
-Em modo agendado, a revisão é preparada, não publicada: o texto e o link do PR vão para o resumo.
+Em modo agendado, repasse `Publicar em execução agendada` a `publicar-revisao-de-codigo`: com `não`, a revisão é preparada e o texto e o link do PR vão para o resumo. Com `sim`, ela é publicada, e o resumo diz o que saiu.
 
 ### Passo 7
 
@@ -158,7 +159,7 @@ Eram dez da noite, fora do horário de funcionamento. Encerrei sem varrer nada.
 - A fila está vazia: diga isso no resumo.
 - Uma fonte não abriu: diga qual e siga com as outras.
 - Um pedido direto sem resposta depois do prazo: proponha a mensagem de demora, sem enviar.
-- Execução agendada: prepare a revisão e os avisos, sem publicar nem enviar nada.
+- Execução agendada: os avisos são sempre só rascunho. A revisão é publicada ou só preparada conforme `Publicar em execução agendada`.
 
 ## Pegadinhas
 
