@@ -4,13 +4,15 @@ description: Use essa habilidade sempre que for criar, revisar, completar ou cad
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.14.0"
+  version: "0.14.1"
   internal: true
   related:
     - criar-ideia-de-conteudo
     - definir-roteiro-de-video
     - planejar-calendario-de-conteudo
     - evoluir-habilidade
+  models:
+    - reel-do-instagram
 ---
 
 # Definir Reel do Instagram
@@ -131,7 +133,7 @@ Valide antes de mostrar. Corrija e repita até passar.
 - [ ] Num Reel de evento, a fala e a legenda têm, cada uma, data, horário e endereço.
 - [ ] Na revisão, nenhum texto humano foi apagado sem o sim para aquele trecho.
 
-Leia .agents/assets/templates/reel-do-instagram.md quando for gerar a saída.
+Leia o modelo de saída `reel-do-instagram` quando for gerar a saída.
 
 Mostre também o link da página, o status, as contagens e o que ficou pendente.
 
