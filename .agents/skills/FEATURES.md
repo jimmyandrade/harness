@@ -23,6 +23,28 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [ ] Three cases validated with the person
 
+### atender-revisao-de-pull-request
+- **Stability**: experimental
+- **Description**: Handle the review a pull request received: classify each suggestion, apply the safe ones, reply on each thread, and resolve the ones that were met
+- **Properties**:
+  - Lives at `.agents/skills/atender-revisao-de-pull-request/SKILL.md`
+  - Takes the pull request from the caller. Without one, lists the pull requests of the person that have requested changes, open comments, or failing checks, and asks which to handle
+  - Reads the context sheet from levantar-contexto-do-pull-request: review threads, review bodies such as a bot's summary, and conversation comments
+  - Checks each comment against the current head of the pull request, and marks it valid, already fixed, outdated, or duplicate
+  - Classifies each suggestion, from a person or a bot, as structural, a behavior change, a disagreement, or out of scope. A behavior change waits for the approval of the person, and a disagreement becomes a question
+  - Works in a separate copy of the repository, validates before committing, and never pushes a change that breaks the validation or rewrites commits already in the pull request
+  - Records a lesson that outlives the pull request in the project instructions
+  - Pushes the branch after each fix and before replying, so a reply never cites a commit missing from the pull request
+  - Replies on each thread before resolving it, closes the loop with a last message from the person acting, and leaves open a thread that waits for a decision
+  - Asks the reviewer who requested changes for a new review once everything is applied or answered
+  - In a scheduled run, applies only the structural changes and leaves the rest in the summary
+  - Ends with a tally of accepted, declined, outdated, and open comments by author, and hands back to the caller. The merge, and whether failing checks block it, stay with criar-pull-request
+- **Test Criteria**:
+  - [ ] A comment that still applies is fixed, answered, and resolved
+  - [ ] A comment that no longer applies is answered with why, and resolved
+  - [ ] A suggestion that changes behavior is shown to the person and not applied without approval
+  - [ ] A thread without an answer stays open and shows in the tally
+
 ### avaliar-atualizacoes-de-dependencia
 - **Stability**: experimental
 - **Description**: Work through the open dependency update pull requests from Dependabot and Renovate, oldest first, one at a time
@@ -39,7 +61,7 @@ How these skills relate is in `README.md`, in this folder.
   - Reads every release in the range from the package repository, or compares the public types when there are no notes, and finds direct imports of transitive packages
   - Measures the degraded path when notes change retries or timeouts, checks project content a package parses, and compares linter diagnostics per rule on tracked files
   - Commits files a package regenerates on install, and says when a merge needs a new deploy or new binaries on every machine
-  - Hands comments to resolver-comentarios-de-revisao and the merge to criar-pull-request, and starts the next pull request only after the checks of the merge commit on the base branch, from any service, are green
+  - Hands comments to atender-revisao-de-pull-request and the merge to criar-pull-request, and starts the next pull request only after the checks of the merge commit on the base branch, from any service, are green
 - **Test Criteria**:
   - [ ] Three open bot pull requests are handled oldest first, each merged only after the previous one turned the base branch green
   - [ ] An update to a transitive package finds the call sites of the direct package
@@ -141,7 +163,7 @@ How these skills relate is in `README.md`, in this folder.
   - Reads the repository, base branch, merge method, PR language, test and build commands, and push timing from the project instructions
   - Opens a pull request only from a `type/short-description` branch, and renames a branch a tool created with another prefix before the push. A rename after the pull request opens closes it, so a new pull request replaces it
   - Follows the pull request template of the repository when there is one
-  - Before a merge, hands pending review comments from people or bots to resolver-comentarios-de-revisao, and holds the merge while a thread waits for the person
+  - Before a merge, hands pending review comments from people or bots to whoever handles the review, in a terminal, and holds the merge while a thread waits for the person
   - `Exigir CI verde`, on by default, holds the merge while a check fails or is pending; off, it merges and reports the checks that did not pass
   - Without a terminal, opens the pull request through the GitHub integration, gives the link, and stops; the CI checks of the pull request do the testing
   - `Exigir aprovação de outra pessoa` is `nunca`, `só sem terminal`, the default, or `sempre`. It holds the merge until another person approves; a green check or owning the repository does not replace that approval. Without a terminal, a merge never happens in the request that opened the pull request
@@ -149,7 +171,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Test Criteria**:
   - [ ] A request to push to the base branch opens a pull request instead
   - [ ] A `claude/…` branch is renamed to `type/…` before its pull request opens
-  - [ ] A merge request on a pull request with an unresolved thread runs resolver-comentarios-de-revisao first
+  - [ ] A merge request on a pull request with an unresolved thread handles the review comments first
   - [ ] A merge request with a failing check stops and names the check while `Exigir CI verde` is on
 
 ### definir-agenda
@@ -1136,24 +1158,6 @@ How these skills relate is in `README.md`, in this folder.
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses registering the asset, choosing stock, recording the payment, and creating the company
-
-### resolver-comentarios-de-revisao
-- **Stability**: experimental
-- **Description**: When a pull request has comments from people or bots, handle each one: fix, decline, or ask, then reply and resolve
-- **Properties**:
-  - Lives at `.agents/skills/resolver-comentarios-de-revisao/SKILL.md`
-  - Runs only when the pull request has comments to handle. A pull request without comments does not load it
-  - Reads review threads, review bodies such as a bot's summary, and pull request conversation comments
-  - Checks each comment against the current head of the pull request, and marks it valid, already fixed, outdated, or duplicate
-  - Fixes bugs, missing error handling, security issues, and project convention violations; declines style and low-impact details with a reason; takes intent, product, and architecture questions to the person
-  - Records a lesson that outlives the pull request in the project instructions
-  - Pushes the branch after each fix and before replying, so a reply never cites a commit missing from the pull request
-  - Replies on each thread before resolving it, and leaves open a thread that waits for the person's decision
-  - Ends with a tally of accepted, declined, outdated, and open comments by author, and hands back to the caller. The merge, and whether failing checks block it, stay with criar-pull-request
-- **Test Criteria**:
-  - [ ] A comment that still applies is fixed, answered, and resolved
-  - [ ] A comment that no longer applies is answered with why, and resolved
-  - [ ] A thread without an answer stays open and shows in the tally
 
 ### revisar-financas
 - **Stability**: experimental

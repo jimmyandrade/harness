@@ -3,11 +3,10 @@ name: criar-pull-request
 description: Use essa habilidade sempre que for abrir PR, subir uma correção, mandar para a branch principal ou mesclar mudança no repositório, mesmo sem dizer PR. NÃO use para responder comentário de revisão nem para só commitar (use criar-commit).
 metadata:
   author: jimmyandrade
-  version: "0.14.0"
+  version: "0.14.1"
   related:
     - evoluir-habilidade
     - criar-commit
-    - resolver-comentarios-de-revisao
     - comunicar-novidade-do-produto
 ---
 
@@ -79,7 +78,7 @@ flowchart LR
   M -->|não| N{Aprovação de outra pessoa exigida e ausente?}
   N -->|sim| P[Diga que falta a aprovação e pare]
   N -->|não| C{Comentário pendente?}
-  C -->|sim| D[Siga resolver-comentarios-de-revisao]
+  C -->|sim| D[Trate os comentários pendentes antes]
   D --> C
   C -->|não| E{Checks}
   E -->|falhando ou pendentes, com Exigir CI verde| F[Diga quais e pare]

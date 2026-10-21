@@ -13,6 +13,7 @@ flowchart LR
   subgraph core["Core"]
     acompanhar_fila_de_revisao["acompanhar-fila-de-revisao"]
     acompanhar_veiculo["acompanhar-veiculo"]
+    atender_revisao_de_pull_request["atender-revisao-de-pull-request"]
     avaliar_atualizacoes_de_dependencia["avaliar-atualizacoes-de-dependencia"]
     comunicar_novidade_do_produto["comunicar-novidade-do-produto"]
     conversar_no_whatsapp["conversar-no-whatsapp"]
@@ -79,17 +80,16 @@ flowchart LR
     publicar_revisao_de_codigo["publicar-revisao-de-codigo"]
     reconhecer_imagem["reconhecer-imagem"]
     registrar_ciclo_do_ativo["registrar-ciclo-do-ativo"]
-    resolver_comentarios_de_revisao["resolver-comentarios-de-revisao"]
     revisar_financas["revisar-financas"]
     revisar_habilidade["revisar-habilidade"]
     revisar_uso_do_tempo["revisar-uso-do-tempo"]
     sincronizar_cronograma["sincronizar-cronograma"]
   end
+  acompanhar_fila_de_revisao --> atender_revisao_de_pull_request
   acompanhar_fila_de_revisao --> enviar_mensagem_no_slack
   acompanhar_fila_de_revisao --> evoluir_habilidade
   acompanhar_fila_de_revisao --> procurar_pedido_de_revisao
   acompanhar_fila_de_revisao --> publicar_revisao_de_codigo
-  acompanhar_fila_de_revisao --> resolver_comentarios_de_revisao
   acompanhar_veiculo --> definir_obrigacao_financeira
   acompanhar_veiculo --> definir_viagem
   acompanhar_veiculo --> evoluir_habilidade
@@ -97,10 +97,16 @@ flowchart LR
   acompanhar_veiculo --> lancar_despesa_pessoal
   acompanhar_veiculo --> organizar_emails
   acompanhar_veiculo --> sincronizar_cronograma
+  atender_revisao_de_pull_request --> criar_commit
+  atender_revisao_de_pull_request --> criar_pull_request
+  atender_revisao_de_pull_request --> evoluir_habilidade
+  atender_revisao_de_pull_request --> levantar_contexto_do_pull_request
+  atender_revisao_de_pull_request --> priorizar_itens
+  atender_revisao_de_pull_request --> publicar_revisao_de_codigo
+  avaliar_atualizacoes_de_dependencia --> atender_revisao_de_pull_request
   avaliar_atualizacoes_de_dependencia --> criar_commit
   avaliar_atualizacoes_de_dependencia --> criar_pull_request
   avaliar_atualizacoes_de_dependencia --> evoluir_habilidade
-  avaliar_atualizacoes_de_dependencia --> resolver_comentarios_de_revisao
   comunicar_novidade_do_produto --> evoluir_habilidade
   conversar_no_whatsapp --> comunicar_novidade_do_produto
   conversar_no_whatsapp --> definir_agenda
@@ -120,7 +126,6 @@ flowchart LR
   criar_pull_request --> comunicar_novidade_do_produto
   criar_pull_request --> criar_commit
   criar_pull_request --> evoluir_habilidade
-  criar_pull_request --> resolver_comentarios_de_revisao
   definir_agenda --> definir_agenda_de_popstar
   definir_agenda --> definir_convidado
   definir_agenda --> definir_data_significativa
@@ -341,9 +346,6 @@ flowchart LR
   registrar_ciclo_do_ativo --> identificar_duplicata
   registrar_ciclo_do_ativo --> lancar_despesa_da_empresa
   registrar_ciclo_do_ativo --> mesclar_registro
-  resolver_comentarios_de_revisao --> criar_commit
-  resolver_comentarios_de_revisao --> criar_pull_request
-  resolver_comentarios_de_revisao --> evoluir_habilidade
   revisar_financas --> definir_lancamento
   revisar_financas --> definir_planejamento_financeiro
   revisar_financas --> gerenciar_estoque
