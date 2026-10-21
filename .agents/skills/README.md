@@ -55,6 +55,8 @@ flowchart LR
     definir_viagem["definir-viagem"]
     descrever_habilidade_ou_schema["descrever-habilidade-ou-schema"]
     enviar_mensagem_no_slack["enviar-mensagem-no-slack"]
+    escrever_codigo["escrever-codigo"]
+    escrever_teste["escrever-teste"]
     evoluir_habilidade["evoluir-habilidade"]
     gerenciar_estoque["gerenciar-estoque"]
     identificar_duplicata["identificar-duplicata"]
@@ -259,6 +261,12 @@ flowchart LR
   descrever_habilidade_ou_schema --> revisar_habilidade
   enviar_mensagem_no_slack --> definir_pessoa
   enviar_mensagem_no_slack --> evoluir_habilidade
+  escrever_codigo --> criar_commit
+  escrever_codigo --> escrever_teste
+  escrever_codigo --> evoluir_habilidade
+  escrever_teste --> criar_commit
+  escrever_teste --> escrever_codigo
+  escrever_teste --> evoluir_habilidade
   evoluir_habilidade --> criar_commit
   evoluir_habilidade --> criar_pull_request
   evoluir_habilidade --> definir_instrucoes_do_projeto
