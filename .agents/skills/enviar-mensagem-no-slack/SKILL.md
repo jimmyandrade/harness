@@ -3,7 +3,7 @@ name: enviar-mensagem-no-slack
 description: Redige uma mensagem de Slack, num canal, thread ou DM, e entrega o rascunho com o link do destino. Só envia com a autorização explícita da pessoa e, depois do envio, compara o proposto com o aplicado para alimentar o vocabulário. Usada quando a pessoa pede uma mensagem ou resposta no Slack. Não serve para achar conversa antiga nem cadastrar pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   internal: true
   notion: "false"
   related:
@@ -31,6 +31,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Resposta em DM": ""
 "Correção de mensagem publicada": ""
 "Contexto compartilhado": ""
+"Assuntos que não se resolvem no Slack": ""
 ```
 
 ## Instruções
@@ -38,6 +39,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 ### Passo 1
 
 Peça o destino e o assunto: canal, thread ou DM, para quem e o que dizer. Leia a thread inteira antes de responder nela, e as threads e os links que ela cita.
+
+Se o assunto é um dos `Assuntos que não se resolvem no Slack`, como uma decisão ou dúvida de código que pertence ao pull request, não redija resposta de mérito: diga a quem usa a habilidade para onde o assunto vai e, se couber, redija só uma frase de status.
 
 Mensagem nova num canal, que não é resposta, tem o assunto conferido com o propósito do canal. Use o que o Slack informa do canal, ou o registro de canais do projeto. Se o assunto não bate com o propósito, diga isso e pergunte uma vez em qual canal postar. Não escolha o canal só porque a conversa anterior foi lá.
 

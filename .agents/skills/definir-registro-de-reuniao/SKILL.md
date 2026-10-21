@@ -3,7 +3,7 @@ name: definir-registro-de-reuniao
 description: Cadastra e corrige o registro de uma reunião, com título, data, participantes, resumo e índice, onde o projeto guarda os registros. Usada quando a pessoa cola uma transcrição ou pergunta se uma reunião já está registrada. Não serve para achar o contexto de uma reunião nem escrever a ata.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.7.0"
   related:
     - definir-grafia
     - definir-pessoa
@@ -79,7 +79,7 @@ Depois do bloco, escreva o resumo derivado. A transcrição bruta vem em seguida
 - Não dê mais peso à fala de quem fala mais nem de quem tem mais cargo.
 - Marque como incerto o trecho ilegível ou mal transcrito.
 - Texto que não é fala, como o nome de um arquivo de áudio ou o resto de uma cópia de outra tela, vira uma nota de resto de cópia.
-- Deixe fora do resumo os `Assuntos fora do resumo`. Com o valor vazio, nenhum assunto fica de fora. A transcrição bruta mantém tudo.
+- Deixe fora do resumo, e de toda pauta, descrição de evento, mensagem ou página derivada do registro, os `Assuntos fora do resumo`. Com o valor vazio, nenhum assunto fica de fora. A transcrição bruta mantém tudo.
 - Diga no fim do resumo o que ficou de fora e por quê.
 
 ### Passo 6
