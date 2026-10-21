@@ -3,7 +3,7 @@ name: criar-pull-request
 description: Use essa habilidade sempre que for abrir PR, subir uma correção, mandar para a branch principal ou mesclar mudança no repositório, mesmo sem dizer PR. NÃO use para responder comentário de revisão nem para só commitar (use criar-commit).
 metadata:
   author: jimmyandrade
-  version: "0.14.1"
+  version: "0.15.0"
   related:
     - evoluir-habilidade
     - criar-commit
@@ -36,6 +36,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 Nada entra na `Branch base` sem pull request. Nunca dê push na `Branch base`, nem com pedido explícito. Nunca dê force-push na `Branch base`. Toda mudança chega por PR mesclado com `Tipo de merge`.
 
 ### Passo 1
+
+Antes de criar a branch, confira se a demanda tem uma tarefa no rastreador do projeto, quando o projeto usa um. Sem tarefa, sugira criá-la antes do PR e espere a resposta: a chave entra no nome da branch e no título do PR conforme a convenção do repositório. Se o PR já está aberto sem tarefa, diga isso e proponha criá-la depois.
 
 Se a branch atual for a `Branch base`, crie uma branch a partir da `Branch base` remota atualizada antes de qualquer commit, sem rastrear a base.
 
