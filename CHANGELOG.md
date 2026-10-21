@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.70.0](https://github.com/jimmyandrade/harness/compare/v0.69.0...v0.70.0) (2026-10-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* **definir-link-rastreavel:** values now use underscore instead of hyphen between words unless the project sets "Separador".
+
+### Features
+
+* **definir-link-rastreavel:** one separator for every UTM value ([#334](https://github.com/jimmyandrade/harness/issues/334)) ([8970d84](https://github.com/jimmyandrade/harness/commit/8970d8487a00e392472eccfcfdfb41849c2e6b43))
+
 ## [0.69.0](https://github.com/jimmyandrade/harness/compare/v0.68.0...v0.69.0) (2026-10-21)
 
 
