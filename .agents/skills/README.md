@@ -57,6 +57,7 @@ flowchart LR
     identificar_duplicata["identificar-duplicata"]
     lancar_despesa_da_empresa["lancar-despesa-da-empresa"]
     lancar_despesa_pessoal["lancar-despesa-pessoal"]
+    levantar_contexto_do_pull_request["levantar-contexto-do-pull-request"]
     liberar_espaco_em_disco["liberar-espaco-em-disco"]
     limpar_copias_de_trabalho["limpar-copias-de-trabalho"]
     medir_habilidade["medir-habilidade"]
@@ -262,6 +263,8 @@ flowchart LR
   lancar_despesa_pessoal --> definir_obrigacao_financeira
   lancar_despesa_pessoal --> evoluir_habilidade
   lancar_despesa_pessoal --> lancar_despesa_da_empresa
+  levantar_contexto_do_pull_request --> definir_registro_de_reuniao
+  levantar_contexto_do_pull_request --> evoluir_habilidade
   liberar_espaco_em_disco --> evoluir_habilidade
   liberar_espaco_em_disco --> limpar_copias_de_trabalho
   limpar_copias_de_trabalho --> criar_pull_request
