@@ -15,7 +15,7 @@ harness/
 ├── .agents/
 │   ├── assets/templates/           # Models that skills cite by name when they write a file, published to Notion when the project maps them
 │   ├── mappings/                   # Templates of the Notion mappings a business harness copies, for skills and for models
-│   ├── schemas/                    # JSON Schema of a skill page and of a model page
+│   ├── schemas/                    # JSON Schema of a skill page, of a model page, and of a person record
 │   ├── scripts/
 │   │   ├── check-skill/            # Skill checker (Python), run by Lefthook and the check-skill action
 │   │   ├── check-models/           # Checks the frontmatter and the sections of each model in assets/templates, run by check-skill

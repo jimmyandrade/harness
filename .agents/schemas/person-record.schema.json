@@ -1,0 +1,172 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "person-record",
+  "title": "Person record",
+  "description": "What a project knows about one person: who the person is, how to address them, and how speech recognition writes their name. One record per person, keyed by email. The data lives in a local cache or in a source of record that the project names, never in this repository.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "canonical_name",
+    "email"
+  ],
+  "properties": {
+    "canonical_name": {
+      "description": "The full name the person is written with.",
+      "type": "string",
+      "minLength": 1
+    },
+    "known_as": {
+      "description": "Nicknames and short forms that people use for the person, each one a correct form.",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "pronouns": {
+      "description": "The pronouns the person declared. Null when the person declared none. A pronoun is never inferred from a name.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "pronouns_source": {
+      "description": "Where the person declared the pronouns, such as a profile field or a conversation, and when. Null when pronouns is null.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "email": {
+      "description": "The work email, which is the key of the record.",
+      "type": "string",
+      "format": "email"
+    },
+    "slack_id": {
+      "description": "The identifier of the person in the chat tool, used to mention them.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "github_login": {
+      "description": "The login of the person in the code hosting service.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "role": {
+      "description": "The role of the person, as the person or the directory states it.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "team": {
+      "description": "The team or area of the person.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "transcription_aliases": {
+      "description": "Wrong forms of the name that speech recognition produced and that the person who owns the record confirmed.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "heard_as"
+        ],
+        "properties": {
+          "heard_as": {
+            "description": "The wrong form, as the transcript wrote it.",
+            "type": "string",
+            "minLength": 1
+          },
+          "confirmed_at": {
+            "description": "The date someone confirmed that this form stands for the person. Absent when the form came from a record that did not date it.",
+            "type": "string",
+            "format": "date"
+          },
+          "notes": {
+            "description": "Where the form was seen and who confirmed it.",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "slack_channels": {
+      "description": "Chat channels the person belongs to that matter to the project.",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "slack_groups": {
+      "description": "Chat user groups the person belongs to that matter to the project.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "description": "The identifier of the group in the chat tool.",
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "description": "The name of the group.",
+            "type": "string"
+          },
+          "handle": {
+            "description": "The handle that mentions the group.",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "notes": {
+      "description": "Free text the project keeps about the person. Facts only, no guesses.",
+      "type": "string"
+    },
+    "sources": {
+      "description": "Where the values of the record came from, one item per source and date.",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "confirmed_at": {
+      "description": "The date the record was last confirmed with a person or with the source of record. Null when it was never dated.",
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "jira_account_id": {
+      "description": "The identifier of the person in the issue tracker, used to assign and mention them.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "extensions": {
+      "description": "Blocks that a skill or a module owns, keyed by its name. A block never changes the fields above, and a reader ignores a block it does not know.",
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9-]*$"
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    }
+  }
+}
