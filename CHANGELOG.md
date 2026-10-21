@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.55.0](https://github.com/jimmyandrade/harness/compare/v0.54.0...v0.55.0) (2026-10-21)
+
+
+### Features
+
+* add the Instagram Reel, video script, content campaign, and content calendar skills ([#291](https://github.com/jimmyandrade/harness/issues/291)) ([084385e](https://github.com/jimmyandrade/harness/commit/084385e63b2bd611e095cf58cf76c5b47d5208f5))
+
 ## [0.54.0](https://github.com/jimmyandrade/harness/compare/v0.53.0...v0.54.0) (2026-10-21)
 
 
