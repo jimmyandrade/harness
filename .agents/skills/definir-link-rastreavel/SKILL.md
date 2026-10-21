@@ -3,7 +3,7 @@ name: definir-link-rastreavel
 description: Monta, revisa ou corrige os parâmetros UTM de um link, do jeito que o padrão define, sem dado interno nem pessoal. Usada quando alguém vai divulgar um link e quer medir de onde vêm os acessos, ou quando um link, um gerador ou um código monta UTM fora do padrão. Não serve para encurtar o link, criar o post nem ler o relatório do Analytics.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.7.0"
   aliases:
     - definir-link-utm
     - definir-parametros-utm
@@ -20,7 +20,11 @@ metadata:
 Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo.
 
 ```yaml
+"Nome do data source de origens": ""
+"Campo de origem": ""
 "Origens": []
+"Nome do data source de meios": ""
+"Campo de meio": ""
 "Meios": []
 "Domínios próprios": []
 "UTM em link no mesmo site": "não"
@@ -34,18 +38,20 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 Receba o link de destino, onde ele vai ser divulgado e o que a pessoa quer medir. Sem destino ou sem canal, pergunte. Link no mesmo site é o que sai de uma página dos `Domínios próprios` para outra página deles. Link para outro site leva a um domínio fora dessa lista. Com `UTM em link no mesmo site` igual a `não`, o link no mesmo site fica sem UTM. Com `sim`, ele leva UTM, porque a página seguinte repassa as UTMs ao outro site.
 
+Com `Nome do data source de origens` preenchido, as origens são os valores do `Campo de origem` nesse data source. Com `Nome do data source de meios` preenchido, os meios são os valores do `Campo de meio` nesse outro. Procure os data sources no workspace conectado e use-os sem perguntar. Sem o data source na conexão, pare e peça. Não use um banco de outro workspace. Com o nome vazio, use a lista `Origens` ou `Meios`.
+
 ### Passo 2
 
 Monte cada parâmetro com o significado do padrão:
 
-- `utm_source`: de onde vem o acesso, de `Origens`.
-- `utm_medium`: o tipo de canal, de `Meios`.
+- `utm_source`: de onde vem o acesso, entre as origens do Passo 1.
+- `utm_medium`: o tipo de canal, entre os meios do Passo 1.
 - `utm_campaign`: a campanha ou a ação, com um nome público.
 - `utm_content`: a peça, a variação ou a posição do link na peça.
 - `utm_term`: só a palavra-chave de mídia paga ou a palavra que a pessoa digitou numa automação. Fora disso, fica vazio.
 - `utm_id`: o id público da campanha, quando ele existe. Vem da plataforma de anúncio, como o Google Ads ou o Meta Ads, ou de um id que o projeto gera para a campanha e que pode combinar o evento com quem divulga: a marca, um artista ou um influencer. Sem esse id, fica vazio.
 
-Origem ou meio fora das listas: pergunte. Não invente um valor novo.
+Origem ou meio que não está no data source nem na lista: pergunte. Não invente um valor novo nem grave a linha no data source.
 
 Em todo valor, as palavras se separam com `Separador`. O projeto usa um separador só, em todo lugar que monta link: o site, o gerador na tela, a API, o MCP e a linha de comando. O slug que chega com outro separador troca para o `Separador`.
 
@@ -108,6 +114,7 @@ O id interno do evento sai de `utm_term`. `utm_id` leva o id público da campanh
 ## Casos-limite
 
 - O destino é do mesmo site da página: siga `UTM em link no mesmo site`.
+- A linha do data source de origens ou de meios está com o campo vazio: não use o nome da linha no lugar. Diga qual linha está vazia e pergunte o valor.
 - A campanha é de um evento divulgado por um artista ou um influencer, e o projeto ainda não gera id para essa combinação: `utm_id` fica vazio. Não monte o id com o UUID.
 - A campanha não tem nome público: pergunte o nome. Não use o id.
 - O link já chega com UTM de outra campanha: preserve, e não sobrescreva sem pedido.
