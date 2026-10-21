@@ -1,6 +1,6 @@
 ---
 metadata:
-  version: "1.11.0"
+  version: "1.12.0"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -49,6 +49,7 @@ metadata:
 ## Git
 
 - Toda mudança entra por pull request. Não dê push no `main`.
+- Ao terminar o trabalho de uma sessão, siga `limpar-copias-de-trabalho` para remover as cópias de trabalho que ela deixou.
 - Escreva o assunto de todo commit no idioma de `Idioma da mensagem de commit`, um parâmetro da `criar-commit`, que tem inglês como padrão.
 - Use um assunto em Conventional Commits: `tipo: descrição`. Quando a mudança afeta uma skill, o assunto é `tipo(nome-da-skill): descrição`. Os tipos são `feat`, `fix`, `perf`, `docs`, `refactor`, `test`, `chore` e `ci`.
 - Uma mudança no CI ou numa action usa `ci`, mesmo quando acrescenta comportamento.

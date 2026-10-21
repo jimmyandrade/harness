@@ -3,10 +3,11 @@ name: liberar-espaco-em-disco
 description: Use essa habilidade sempre que o disco do computador estiver cheio, um comando falhar por falta de espaço, ou for liberar espaço sem perder arquivo, mesmo sem dizer disco. NÃO use para apagar arquivo da pessoa, limpar worktree antigo de sessão, nem organizar pastas.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.2.1"
   notion: "false"
   related:
     - evoluir-habilidade
+    - limpar-copias-de-trabalho
 ---
 
 # Liberar espaço em disco
@@ -65,7 +66,7 @@ Se você limpar os worktrees das sessões para liberar espaço, a conta rarament
 
 1. Meça o que os worktrees ocupam.
 2. Compare com o espaço usado no disco.
-3. Siga o Passo 2.
+3. Siga o Passo 2. Para remover as cópias de trabalho de uma sessão que terminou, siga `limpar-copias-de-trabalho`.
 
 ### Comando que não limpa
 
