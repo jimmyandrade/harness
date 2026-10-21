@@ -3,7 +3,7 @@ name: definir-registro-de-reuniao
 description: Cadastra e corrige o registro de uma reunião, com título, data, participantes, resumo e índice, onde o projeto guarda os registros. Usada quando a pessoa cola uma transcrição ou pergunta se uma reunião já está registrada. Não serve para achar o contexto de uma reunião nem escrever a ata.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.5.0"
   related:
     - evoluir-habilidade
 ---
@@ -23,7 +23,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Nome do índice": "índice"
 "Fonte de identidade das pessoas": ""
 "Fonte de correções de transcrição": ""
-"Assuntos fora do resumo": "férias, saída de pessoas do time"
+"Assuntos fora do resumo": ""
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -74,7 +74,7 @@ Depois do bloco, escreva o resumo derivado. A transcrição bruta vem em seguida
 - Não dê mais peso à fala de quem fala mais nem de quem tem mais cargo.
 - Marque como incerto o trecho ilegível ou mal transcrito.
 - Texto que não é fala, como o nome de um arquivo de áudio ou o resto de uma cópia de outra tela, vira uma nota de resto de cópia.
-- Deixe fora do resumo os `Assuntos fora do resumo`. A transcrição bruta mantém tudo.
+- Deixe fora do resumo os `Assuntos fora do resumo`. Com o valor vazio, nenhum assunto fica de fora. A transcrição bruta mantém tudo.
 - Diga no fim do resumo o que ficou de fora e por quê.
 
 ### Passo 6
@@ -137,7 +137,7 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### a pessoa cola uma transcrição sem título, dizendo que o arquivo foi criado por volta das 15h30 de uma sexta-feira.
 
-Cruzei o horário com a agenda e achei um evento só, a Daily do time, das 15h às 16h. Salvei o registro com o título da Daily, a data e o horário do evento e os participantes do convite. Listei dois termos que não casam com nenhuma correção e pedi a confirmação deles.
+Cruzei o horário com a agenda e achei um evento só, a reunião semanal do time, das 15h às 16h. Salvei o registro com o título dessa reunião, a data e o horário do evento e os participantes do convite. Listei dois termos que não casam com nenhuma correção e pedi a confirmação deles.
 
 ### a pessoa cola uma transcrição em que alguém diz `eu subo a correção amanhã`.
 
