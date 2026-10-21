@@ -51,11 +51,13 @@ flowchart LR
     definir_tipo_do_evento["definir-tipo-do-evento"]
     definir_viagem["definir-viagem"]
     descrever_habilidade_ou_schema["descrever-habilidade-ou-schema"]
+    enviar_mensagem_no_slack["enviar-mensagem-no-slack"]
     evoluir_habilidade["evoluir-habilidade"]
     gerenciar_estoque["gerenciar-estoque"]
     identificar_duplicata["identificar-duplicata"]
     lancar_despesa_da_empresa["lancar-despesa-da-empresa"]
     lancar_despesa_pessoal["lancar-despesa-pessoal"]
+    levantar_contexto_do_pull_request["levantar-contexto-do-pull-request"]
     liberar_espaco_em_disco["liberar-espaco-em-disco"]
     limpar_copias_de_trabalho["limpar-copias-de-trabalho"]
     medir_habilidade["medir-habilidade"]
@@ -63,6 +65,7 @@ flowchart LR
     organizar_emails["organizar-emails"]
     organizar_ponto_de_contato["organizar-ponto-de-contato"]
     planejar_calendario_de_conteudo["planejar-calendario-de-conteudo"]
+    priorizar_itens["priorizar-itens"]
     procurar_agenda["procurar-agenda"]
     procurar_artista["procurar-artista"]
     procurar_data_significativa["procurar-data-significativa"]
@@ -70,6 +73,7 @@ flowchart LR
     procurar_inscricao["procurar-inscricao"]
     procurar_oportunidade["procurar-oportunidade"]
     procurar_tarefa["procurar-tarefa"]
+    publicar_revisao_de_codigo["publicar-revisao-de-codigo"]
     reconhecer_imagem["reconhecer-imagem"]
     registrar_ciclo_do_ativo["registrar-ciclo-do-ativo"]
     resolver_comentarios_de_revisao["resolver-comentarios-de-revisao"]
@@ -238,6 +242,8 @@ flowchart LR
   descrever_habilidade_ou_schema --> criar_pull_request
   descrever_habilidade_ou_schema --> evoluir_habilidade
   descrever_habilidade_ou_schema --> revisar_habilidade
+  enviar_mensagem_no_slack --> definir_pessoa
+  enviar_mensagem_no_slack --> evoluir_habilidade
   evoluir_habilidade --> criar_commit
   evoluir_habilidade --> criar_pull_request
   evoluir_habilidade --> definir_instrucoes_do_projeto
@@ -258,6 +264,8 @@ flowchart LR
   lancar_despesa_pessoal --> definir_obrigacao_financeira
   lancar_despesa_pessoal --> evoluir_habilidade
   lancar_despesa_pessoal --> lancar_despesa_da_empresa
+  levantar_contexto_do_pull_request --> definir_registro_de_reuniao
+  levantar_contexto_do_pull_request --> evoluir_habilidade
   liberar_espaco_em_disco --> evoluir_habilidade
   liberar_espaco_em_disco --> limpar_copias_de_trabalho
   limpar_copias_de_trabalho --> criar_pull_request
@@ -284,6 +292,7 @@ flowchart LR
   planejar_calendario_de_conteudo --> definir_campanha_de_conteudo
   planejar_calendario_de_conteudo --> definir_reel_do_instagram
   planejar_calendario_de_conteudo --> evoluir_habilidade
+  priorizar_itens --> evoluir_habilidade
   procurar_agenda --> criar_oportunidade
   procurar_agenda --> definir_agenda
   procurar_agenda --> definir_agenda_de_popstar
@@ -306,6 +315,11 @@ flowchart LR
   procurar_oportunidade --> criar_oportunidade
   procurar_oportunidade --> definir_inscricao
   procurar_tarefa --> procurar_inscricao
+  publicar_revisao_de_codigo --> definir_pessoa
+  publicar_revisao_de_codigo --> enviar_mensagem_no_slack
+  publicar_revisao_de_codigo --> evoluir_habilidade
+  publicar_revisao_de_codigo --> levantar_contexto_do_pull_request
+  publicar_revisao_de_codigo --> priorizar_itens
   reconhecer_imagem --> criar_oportunidade
   reconhecer_imagem --> definir_grafia
   reconhecer_imagem --> definir_inscricao
