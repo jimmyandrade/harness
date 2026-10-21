@@ -3,9 +3,14 @@ name: definir-registro-de-reuniao
 description: Cadastra e corrige o registro de uma reunião, com título, data, participantes, resumo e índice, onde o projeto guarda os registros. Usada quando a pessoa cola uma transcrição ou pergunta se uma reunião já está registrada. Não serve para achar o contexto de uma reunião nem escrever a ata.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.6.0"
   related:
+    - definir-grafia
+    - definir-pessoa
     - evoluir-habilidade
+    - identificar-duplicata
+    - mesclar-registro
+    - procurar-agenda
 ---
 
 # Definir registro de reunião
@@ -22,7 +27,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Padrão do título da página": "DD/MM/AAAA HHhMM: Título da reunião"
 "Nome do índice": "índice"
 "Fonte de identidade das pessoas": ""
-"Fonte de correções de transcrição": ""
+"Fonte de correções de termos": ""
 "Assuntos fora do resumo": ""
 "Modo de aprendizado": "perguntar"
 ```
@@ -45,13 +50,13 @@ Nos arquivos locais, `Endereço dos registros` é a pasta. No Notion, o banco e 
 
 ### Passo 2
 
-Veja se a reunião já está registrada, pela data, pelo título e pelos participantes. Em arquivos locais, leia o índice, que tem o `Nome do índice`. No Notion, o próprio banco é o índice. No Confluence, são as páginas sob o endereço dos registros. No Google Drive, a pasta é o índice. Só quando há documentos de reunião fora da pasta, como os criados por outra conta, existe um documento de índice com o `Nome do índice`, que lista esses documentos por link. Se já está, corrija o registro que existe. Não crie outro.
+Veja se a reunião já está registrada, pela data, pelo título e pelos participantes. Em arquivos locais, leia o índice, que tem o `Nome do índice`. No Notion, o próprio banco é o índice. No Confluence, são as páginas sob o endereço dos registros. No Google Drive, a pasta é o índice. Só quando há documentos de reunião fora da pasta, como os criados por outra conta, existe um documento de índice com o `Nome do índice`, que lista esses documentos por link. Se já está, corrija o registro que existe. Não crie outro. Num banco do Notion, a checagem segue `identificar-duplicata`, e dois registros da mesma reunião seguem `mesclar-registro`.
 
 Quando a transcrição já mora num documento do armazenamento, como as anotações que a ferramenta de reunião gera, use esse documento como registro. Não copie o texto: acrescente o resumo e a linha do índice, e deixe a transcrição como está.
 
 ### Passo 3
 
-Descubra título, data, horário de início e participantes pela agenda conectada da pessoa, a partir do horário aproximado que ela deu ou do horário de criação do registro, antes de perguntar. Não invente título genérico nem participante.
+Descubra título, data, horário de início e participantes na agenda da pessoa, antes de perguntar. Siga `procurar-agenda` com o horário aproximado que ela deu ou com o horário de criação do registro. Não invente título genérico nem participante.
 
 ```mermaid
 flowchart LR
@@ -64,7 +69,7 @@ flowchart LR
 
 O nome do registro depende do tipo de armazenamento. Arquivo local tem nome de arquivo, que é a data da reunião, o horário de início e um título curto, no `Padrão do nome do arquivo`: ano, mês, dia, hora e minuto separados por hífen, depois o título em minúsculas, sem acento e com hífens, e a `Extensão dos registros em arquivo` no fim. Página do Notion ou do Confluence e documento do Google Drive têm título, e título é texto como uma pessoa o escreve: com acento, maiúscula de início de frase e nome próprio, seguindo o `Padrão do título da página`. Não use o nome de arquivo como título. No Notion, a data, o horário e os participantes também vão para as propriedades do mapeamento. A data é a da reunião, não a da criação do registro. O horário nunca falta, porque a mesma pessoa tem mais de uma reunião no mesmo dia.
 
-O registro começa com o título em heading de nível 1. Logo abaixo, um bloco curto com a data e o horário, os participantes e a fonte do texto. Em `Fonte de identidade das pessoas`, ache o nome canônico e o papel de cada participante. Quem não está lá entra com o nome como veio.
+O registro começa com o título em heading de nível 1. Logo abaixo, um bloco curto com a data e o horário, os participantes e a fonte do texto. Em `Fonte de identidade das pessoas`, ache o nome canônico e o papel de cada participante. Quem falta na lista de pessoas do projeto segue `definir-pessoa`. Com outra fonte, quem não está lá entra com o nome como veio, e a pessoa decide se o cadastra.
 
 ### Passo 5
 
@@ -85,9 +90,9 @@ Quando as falas vêm identificadas, siga a identificação, mas confira os nomes
 
 ### Passo 7
 
-Aplique no resumo as correções já confirmadas em `Fonte de correções de transcrição`, e use o nome canônico no lugar do apelido e da grafia errada. Nome ou termo estranho que não casa com nenhuma correção confirmada: não adivinhe. Liste cada um com duas linhas antes e duas depois e pergunte à pessoa.
+Aplique no resumo as correções já confirmadas, e use o nome canônico no lugar do apelido e da grafia errada. Para nome de pessoa ou de empresa, a forma correta e as formas erradas que o reconhecimento de voz gerou ficam nas variações de grafia do registro, como diz `definir-grafia`: leia dali. Com uma `Fonte de identidade das pessoas` que não é a lista do projeto, a grafia fica nessa fonte, no registro da pessoa. Termo que não é nome, como sigla ou jargão, vem de `Fonte de correções de termos`.
 
-O que a pessoa confirmar entra na fonte: nome de pessoa no registro dela, termo geral na lista de termos. O que ela não souber fica como pendente, com o trecho. Pessoa que não está em `Fonte de identidade das pessoas`: pergunte antes de criar.
+Nome ou termo estranho que não casa com nenhuma correção confirmada: não adivinhe. Liste cada um com duas linhas antes e duas depois e pergunte à pessoa. O que ela confirmar sobre um nome segue `definir-grafia`, e sobre um termo entra em `Fonte de correções de termos`. O que ela não souber fica como pendente, com o trecho.
 
 ### Passo 8
 
@@ -137,7 +142,7 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### a pessoa cola uma transcrição sem título, dizendo que o arquivo foi criado por volta das 15h30 de uma sexta-feira.
 
-Cruzei o horário com a agenda e achei um evento só, a reunião semanal do time, das 15h às 16h. Salvei o registro com o título dessa reunião, a data e o horário do evento e os participantes do convite. Listei dois termos que não casam com nenhuma correção e pedi a confirmação deles.
+Cruzei o horário com a agenda e achei um evento só, a reunião do time, das 15h às 16h. Salvei o registro com o título dessa reunião, a data e o horário do evento e os participantes do convite. Listei dois termos que não casam com nenhuma correção e pedi a confirmação deles.
 
 ### a pessoa cola uma transcrição em que alguém diz `eu subo a correção amanhã`.
 

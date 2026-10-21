@@ -598,12 +598,14 @@ How these skills relate is in `README.md`, in this folder.
   - Names a local file with an ASCII slug and titles a Notion page, a Confluence page, or a Google Drive document with natural text, each by its own pattern from the project instructions
   - Uses a document that already holds the transcript, such as the notes a meeting tool generates, as the record, without copying its text
   - Looks the meeting up in the index before creating it, and fixes the existing record instead of creating another
-  - Finds the title, date, start time, and participants in the connected calendar before asking, and asks once when no single event fits
+  - Finds the title, date, start time, and participants through procurar-agenda before asking, and asks once when no single event fits
+  - Registers a missing participant through definir-pessoa, and keeps the right spelling and the wrong forms speech recognition produced through definir-grafia
+  - Checks a Notion database for a duplicate through identificar-duplicata, and leaves two records of the same meeting to mesclar-registro
   - Starts every record with a level 1 heading and a block with date, participants, and source
   - Keeps the raw transcript unchanged after the summary, and applies spelling corrections only to the summary
   - Records as a decision only what was said as a decision, and marks illegible passages as uncertain
   - Does not assign an action to a person from the pronoun or the position of a line when the transcript does not say who speaks, and asks for each assignment with the hypothesis ready
-  - Lists each unknown name or term with the lines around it and asks, and records only what the person confirms
+  - Lists each unknown name or term with the lines around it and asks, and records only what the person confirms, in the spelling variations for a name and in a source of corrections for any other term
   - Keeps the topics the project lists out of the summary, while the raw transcript keeps them
   - Never sends a record outside the place the project names
   - Does not find the context of a past meeting or write the minutes
