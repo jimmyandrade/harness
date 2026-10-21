@@ -511,7 +511,7 @@ How these skills relate is in `README.md`, in this folder.
   - Keeps `utm_term` empty except for a paid keyword or an automation keyword
   - Never puts an internal id (page, database, record, user, or CRM) or personal data in any parameter, and uses the public name, such as the event slug, in `utm_campaign`
   - Allows `utm_id` only for the campaign id on an external platform, such as the event id on the ticketing platform
-  - Leaves internal links on the same site without UTM, measured by an Analytics event instead
+  - Puts UTM on internal links only when the `UTM em link interno` parameter says so, for sites whose next page forwards the UTMs to an external destination
   - Reviews a link, a generator, or code and names each failed check, where it is, and the right value
 - **Test Criteria**:
   - [x] The skill is present at that path

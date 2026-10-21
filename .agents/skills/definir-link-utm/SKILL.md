@@ -3,7 +3,7 @@ name: definir-link-utm
 description: Monta, revisa ou corrige os parâmetros UTM de um link, do jeito que o padrão define, sem dado interno nem pessoal. Usada quando alguém vai divulgar um link e quer medir de onde vêm os acessos, ou quando um link, um gerador ou um código monta UTM fora do padrão. Não serve para encurtar o link, criar o post nem ler o relatório do Analytics.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   related:
     - evoluir-habilidade
 ---
@@ -18,6 +18,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Origens": []
 "Meios": []
 "Domínios próprios": []
+"UTM em link interno": "não"
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -25,7 +26,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ### Passo 1
 
-Receba o link de destino, onde ele vai ser divulgado e o que a pessoa quer medir. Sem destino ou sem canal, pergunte. Se o destino estiver num dos `Domínios próprios` e o link sair de uma página desses mesmos domínios, não monte UTM: diga que o link interno fica sem UTM.
+Receba o link de destino, onde ele vai ser divulgado e o que a pessoa quer medir. Sem destino ou sem canal, pergunte. Link interno é o que sai de uma página dos `Domínios próprios` para outra página deles. Com `UTM em link interno` igual a `não`, ele fica sem UTM. Com `sim`, ele leva UTM, porque a página seguinte repassa as UTMs ao destino externo.
 
 ### Passo 2
 
@@ -75,10 +76,10 @@ Se você usar `utm_term` para guardar o que não coube nos outros, o relatório 
 
 ### UTM em link interno
 
-Se você puser UTM num link de uma página para outra do mesmo site, o Analytics abre uma visita nova e troca a origem real pela UTM interna.
+Se você decidir sozinho se o link interno leva UTM, quebra a regra do negócio: sem UTM, a página seguinte não tem o que repassar ao destino externo; com UTM, o Analytics abre uma visita nova e troca a origem real.
 
-1. Tire a UTM do link interno.
-2. Meça o clique com um evento do Analytics.
+1. Siga `UTM em link interno`.
+2. Com `não`, meça o clique com um evento do Analytics.
 
 ## Exemplos de entrada e saída
 
@@ -90,7 +91,7 @@ O id interno do evento sai de `utm_term`. O id do evento na tiqueteira, quando e
 
 ## Casos-limite
 
-- O destino é do mesmo site da página: sem UTM.
+- O destino é do mesmo site da página: siga `UTM em link interno`.
 - A campanha não tem nome público: pergunte o nome. Não use o id.
 - O link já chega com UTM de outra campanha: preserve, e não sobrescreva sem pedido.
 - Gerador ou código que preenche um parâmetro com id interno por padrão: o padrão sai, e o campo fica vazio ou recebe o nome público.
