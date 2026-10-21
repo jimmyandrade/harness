@@ -3,7 +3,7 @@ name: comunicar-novidade-do-produto
 description: Use essa habilidade sempre que um PR for mesclado ou alguém perguntar o que há de novo no produto para quem o usa, mesmo sem dizer novidade, para decidir se há o que contar e escrever o comunicado sem termos técnicos. NÃO use para a descrição do PR, o changelog nem release notes técnicas.
 metadata:
   author: jimmyandrade
-  version: "0.8.0"
+  version: "0.8.1"
   related:
     - evoluir-habilidade
 ---
@@ -61,7 +61,7 @@ Achou: use e sugira preencher `Habilidade de tom de voz`. Não achou: pergunte s
 
 ### Passo 4
 
-Entregue no `Canal do comunicado`, com a formatação dele. O comunicado vai numa mensagem só, com parágrafos curtos, mesmo no WhatsApp, onde a conversa costuma ir em mensagens quebradas. Se houver uma ferramenta para esse canal, mostre o texto e peça o ok antes de publicar. Se não houver, ou se o canal estiver vazio, entregue o texto pronto para copiar.
+Entregue no `Canal do comunicado`, com a formatação dele. O comunicado vai numa mensagem só, com parágrafos curtos, mesmo no WhatsApp, onde a conversa costuma ir em mensagens quebradas. Só a novidade entra nessa mensagem. Um pedido, uma cobrança ou uma lista de pendências é outro assunto: vai numa mensagem à parte, depois do comunicado. Se houver uma ferramenta para esse canal, mostre o texto e peça o ok antes de publicar. Se não houver, ou se o canal estiver vazio, entregue o texto pronto para copiar.
 
 ### Passo 5
 
@@ -96,6 +96,13 @@ Se você escrever "a página parou de pedir a localização", a pessoa não reco
 
 1. Comece com "corrigimos um problema que".
 2. Descreva o incômodo como a pessoa o percebia.
+
+### Pendência dentro do comunicado
+
+Se você colocar no comunicado a lista do que ainda falta fazer, como os registros sem um campo novo, o anúncio vira cobrança e a pessoa perde a novidade no meio.
+
+1. Deixe no comunicado só o que mudou e o que fazer daqui em diante.
+2. Mande a lista de pendências numa mensagem à parte, depois do comunicado.
 
 ### Ação escondida
 
