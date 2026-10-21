@@ -1,14 +1,19 @@
 ---
-name: definir-link-utm
+name: definir-link-rastreavel
 description: Monta, revisa ou corrige os parâmetros UTM de um link, do jeito que o padrão define, sem dado interno nem pessoal. Usada quando alguém vai divulgar um link e quer medir de onde vêm os acessos, ou quando um link, um gerador ou um código monta UTM fora do padrão. Não serve para encurtar o link, criar o post nem ler o relatório do Analytics.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.4.0"
+  aliases:
+    - definir-link-utm
+    - definir-parametros-utm
+    - definir-rastreio-de-link
+    - gerar-link-com-parametros-utm
   related:
     - evoluir-habilidade
 ---
 
-# Definir link UTM
+# Definir link rastreável
 
 ## Parâmetros de configuração
 
