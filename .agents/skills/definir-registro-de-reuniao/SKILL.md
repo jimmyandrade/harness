@@ -1,10 +1,9 @@
 ---
 name: definir-registro-de-reuniao
-description: Cadastra e corrige o registro local de uma reunião a partir de uma transcrição colada, com título, data, participantes, resumo e índice. Usada quando a pessoa cola uma transcrição ou pergunta se uma reunião já está registrada. Não serve para achar o contexto de uma reunião, escrever a ata nem publicar fora do acervo local.
+description: Cadastra e corrige o registro de uma reunião, com título, data, participantes, resumo e índice, onde o projeto guarda os registros. Usada quando a pessoa cola uma transcrição ou pergunta se uma reunião já está registrada. Não serve para achar o contexto de uma reunião nem escrever a ata.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
-  notion: "false"
+  version: "0.2.0"
   related:
     - evoluir-habilidade
 ---
@@ -16,8 +15,11 @@ metadata:
 Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo.
 
 ```yaml
-"Pasta do acervo de reuniões": ""
-"Arquivo do índice do acervo": "INDEX.md"
+"Tipo de armazenamento dos registros": ""
+"Endereço dos registros": ""
+"Padrão do nome do registro": "AAAA-MM-DD-HH-MM-título-curto"
+"Extensão dos registros em arquivo": "md"
+"Nome do índice": "índice"
 "Fonte de identidade das pessoas": ""
 "Fonte de correções de transcrição": ""
 "Assuntos fora do resumo": "férias, saída de pessoas do time"
@@ -28,15 +30,26 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ### Passo 1
 
-Registre uma reunião a partir de uma transcrição ou anotação colada, ou corrija um registro que está fora do padrão. Os registros ficam em `Pasta do acervo de reuniões`. Com esse valor vazio, pergunte uma vez onde guardar e pare.
+Registre uma reunião a partir de uma transcrição ou anotação, ou corrija um registro fora do padrão. Cada projeto guarda os registros num lugar. `Tipo de armazenamento dos registros` diz qual, e `Endereço dos registros` diz onde. Com um dos dois vazio, pergunte uma vez e pare.
 
-O acervo é local e sensível. Nada dele vai para repositório, nuvem, pull request, mensagem nem página compartilhada. Um trecho só sai com o pedido explícito da pessoa, para aquele trecho.
+```mermaid
+flowchart LR
+  T{Tipo de armazenamento?} -->|arquivos locais| A[Um arquivo por reunião e um arquivo de índice]
+  T -->|Notion| N[Uma página por reunião num banco, que é o índice]
+  T -->|Google Drive| D[Um documento por reunião e um documento de índice]
+```
 
-Antes de criar, leia o `Arquivo do índice do acervo` e veja se a reunião já está lá, pela data, pelo título e pelos participantes. Se já está, corrija o registro que existe. Não crie outro.
+Nos arquivos locais, `Endereço dos registros` é a pasta. No Notion, o banco e o nome de cada propriedade vêm do mapeamento de dados do projeto, no workspace conectado. Se o banco não estiver nessa conexão, pare. No Google Drive, é a pasta que guarda os documentos. O registro de reunião é sensível: ele fica só nesse lugar. Nada dele vai para repositório, pull request, mensagem nem página fora dele, e um trecho só sai com o pedido explícito da pessoa, para aquele trecho.
 
 ### Passo 2
 
-Descubra título, data, horário de início e participantes pela agenda conectada da pessoa, a partir do horário aproximado que ela deu ou do horário de criação do arquivo, antes de perguntar. Não invente título genérico nem participante.
+Veja se a reunião já está registrada, pela data, pelo título e pelos participantes. Em arquivos locais e no Google Drive, leia o índice, que tem o `Nome do índice`. No Notion, o próprio banco é o índice. Se já está, corrija o registro que existe. Não crie outro.
+
+Quando a transcrição já mora num documento do armazenamento, como as anotações que a ferramenta de reunião gera, use esse documento como registro. Não copie o texto: acrescente o resumo e a linha do índice, e deixe a transcrição como está.
+
+### Passo 3
+
+Descubra título, data, horário de início e participantes pela agenda conectada da pessoa, a partir do horário aproximado que ela deu ou do horário de criação do registro, antes de perguntar. Não invente título genérico nem participante.
 
 ```mermaid
 flowchart LR
@@ -45,13 +58,13 @@ flowchart LR
   Q -->|nenhum ou sem agenda| P[Pergunte uma vez]
 ```
 
-### Passo 3
-
-Escreva o registro num arquivo `.md` cujo nome é a data da reunião, o horário de início e um título curto, nesta ordem: ano, mês, dia, hora e minuto separados por hífen, depois o título em minúsculas, sem acento e com hífens. A data é a da reunião, não a da criação do arquivo. O horário nunca falta, porque a mesma pessoa tem mais de uma reunião no mesmo dia.
-
-A primeira linha do arquivo é o título em heading de nível 1. Logo abaixo, um bloco curto com a data e o horário, os participantes e a fonte do texto. Em `Fonte de identidade das pessoas`, ache o nome canônico e o papel de cada participante. Quem não está lá entra com o nome como veio.
-
 ### Passo 4
+
+Dê ao registro um nome com a data da reunião, o horário de início e um título curto, no `Padrão do nome do registro`: ano, mês, dia, hora e minuto separados por hífen, depois o título em minúsculas, sem acento e com hífens. Em arquivo, o nome termina na `Extensão dos registros em arquivo`. No Notion, o nome é o título da página, e a data, o horário e os participantes vão para as propriedades do mapeamento. A data é a da reunião, não a da criação do registro. O horário nunca falta, porque a mesma pessoa tem mais de uma reunião no mesmo dia.
+
+O registro começa com o título em heading de nível 1. Logo abaixo, um bloco curto com a data e o horário, os participantes e a fonte do texto. Em `Fonte de identidade das pessoas`, ache o nome canônico e o papel de cada participante. Quem não está lá entra com o nome como veio.
+
+### Passo 5
 
 Depois do bloco, escreva o resumo derivado. A transcrição bruta vem em seguida, sem mudança. Correção de grafia entra só no resumo.
 
@@ -62,27 +75,27 @@ Depois do bloco, escreva o resumo derivado. A transcrição bruta vem em seguida
 - Deixe fora do resumo os `Assuntos fora do resumo`. A transcrição bruta mantém tudo.
 - Diga no fim do resumo o que ficou de fora e por quê.
 
-### Passo 5
+### Passo 6
 
 Quando a transcrição não diz quem fala, não atribua uma ação a uma pessoa só pelo pronome ou pela posição da fala. Cruze os participantes com o teor, monte a melhor hipótese, escreva `a confirmar` e peça a confirmação de cada atribuição, uma por uma, com a hipótese pronta.
 
 Quando as falas vêm identificadas, siga a identificação, mas confira os nomes com os participantes, porque a identificação automática também erra.
 
-### Passo 6
+### Passo 7
 
 Aplique no resumo as correções já confirmadas em `Fonte de correções de transcrição`, e use o nome canônico no lugar do apelido e da grafia errada. Nome ou termo estranho que não casa com nenhuma correção confirmada: não adivinhe. Liste cada um com duas linhas antes e duas depois e pergunte à pessoa.
 
 O que a pessoa confirmar entra na fonte: nome de pessoa no registro dela, termo geral na lista de termos. O que ela não souber fica como pendente, com o trecho. Pessoa que não está em `Fonte de identidade das pessoas`: pergunte antes de criar.
 
-### Passo 7
-
-Toda reunião registrada ou corrigida ganha uma linha no índice, com data, horário, título, participantes e arquivo, em ordem de data. Nunca deixe um arquivo sem linha.
-
 ### Passo 8
 
-Arquivo do acervo sem título em heading de nível 1, sem extensão `.md` ou com nome fora do padrão: corrija o título, a extensão, o nome e a linha do índice antes de dizer que está registrado. O arquivo já existir antes da skill não é motivo para deixá-lo fora do padrão.
+Toda reunião registrada ou corrigida ganha uma linha no índice, com data, horário, título, participantes e o nome ou o link do registro, em ordem de data. No Notion, as propriedades da página fazem esse papel, e não há linha a escrever. Nunca deixe um registro fora do índice.
 
 ### Passo 9
+
+Registro sem título em heading de nível 1, sem a extensão certa ou com nome fora do `Padrão do nome do registro`: corrija o título, a extensão, o nome e a linha do índice antes de dizer que está registrado. O registro já existir antes da skill não é motivo para deixá-lo fora do padrão.
+
+### Passo 10
 
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
@@ -109,6 +122,13 @@ Se você trocar a grafia dentro da transcrição bruta, o registro deixa de ser 
 1. Deixe a transcrição bruta sem mudança.
 2. Aplique a correção só no resumo.
 
+### Transcrição copiada para outro lugar
+
+Se você copiar o texto de um documento de reunião que já está no armazenamento para um registro novo, o mesmo texto passa a existir em dois lugares e os dois divergem.
+
+1. Use o documento existente como registro.
+2. Acrescente só o resumo e a linha do índice.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
@@ -126,14 +146,15 @@ Escrevi no resumo que a correção sobe no dia seguinte, com o responsável como
 - Há dois eventos plausíveis no horário: liste e pergunte. Não escolha.
 - A transcrição começa no meio da reunião: registre assim no bloco do cabeçalho e não preencha o que não veio.
 - O texto traz o resumo gerado pela ferramenta de reunião junto da transcrição: guarde os dois, e trate o resumo gerado como não literal.
-- A mesma reunião aparece com dois horários de criação de arquivo: é um registro só. Corrija o que existe.
+- A mesma reunião aparece com dois horários de criação: é um registro só. Corrija o que existe.
 - O assunto de `Assuntos fora do resumo` aparece na transcrição: fica na transcrição bruta e fora do resumo.
+- O armazenamento é um banco e uma propriedade opcional falta no mapeamento: liste no fim, sugira criar a propriedade e não escreva esse valor no corpo da página.
 
 ## Pegadinhas
 
 - Texto colado de outra interface pode trazer lixo no começo, como o nome de um botão ou de um arquivo de áudio. Não é fala.
 - O reconhecimento de voz erra nome de pessoa e sigla de um jeito que parece outra palavra. O apelido de quem fala também vira outro nome quando alguém o chama.
-- O horário de criação do arquivo é aproximado: a reunião pode ter começado antes dele.
+- O horário de criação do registro é aproximado: a reunião pode ter começado antes dele.
 - Transcrição com falas identificadas pode ter a pessoa errada atribuída a um trecho.
 
 ## Scripts disponíveis
