@@ -159,6 +159,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Stability**: experimental
 - **Description**: Open, update, and merge a pull request without pushing to the base branch
 - **Properties**:
+  - Before creating the branch, checks that the demand has a task in the tracker of the project, and suggests creating it first when it has none. The task key goes in the branch name and the pull request title as the repository convention says
   - Skill at `.agents/skills/criar-pull-request/`
   - Reads the repository, base branch, merge method, PR language, test and build commands, and push timing from the project instructions
   - Opens a pull request only from a `type/short-description` branch, and renames a branch a tool created with another prefix before the push. A rename after the pull request opens closes it, so a new pull request replaces it
@@ -459,11 +460,11 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses only celebrating without saving, only looking up who registered, and deciding whether a task exists
 
-### definir-issue
+### definir-issue-do-github
 - **Stability**: experimental
 - **Description**: Open, review, edit, or translate a GitHub issue for a technical demand
 - **Properties**:
-  - Lives at `.agents/skills/definir-issue/SKILL.md`, with the output template at `.agents/assets/templates/issue-do-github.md`
+  - Lives at `.agents/skills/definir-issue-do-github/SKILL.md`, with the output template at `.agents/assets/templates/issue-do-github.md`
   - Reads `Repositório` from the project instructions or the `origin` remote, and `Idioma da issue`, declared in `Global` and overridden per project
   - Searches open and closed issues before opening one, and stops when one already covers the demand
   - Writes a Conventional Commits title whose type comes from the effect of the delivery, with the description and the body in `Idioma da issue`

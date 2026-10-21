@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.66.0](https://github.com/jimmyandrade/harness/compare/v0.65.0...v0.66.0) (2026-10-21)
+
+
+### Features
+
+* **publicar-revisao-de-codigo:** add the parameter that publishes the review in a scheduled run ([#328](https://github.com/jimmyandrade/harness/issues/328)) ([ae9a526](https://github.com/jimmyandrade/harness/commit/ae9a52610796604dd2726ec74cb1c0c375d11551))
+
+## [0.65.0](https://github.com/jimmyandrade/harness/compare/v0.64.0...v0.65.0) (2026-10-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* **definir-issue-do-github:** definir-issue is now definir-issue-do-github.
+
+### Features
+
+* **definir-issue-do-github:** rename definir-issue to name the tool it works with ([#324](https://github.com/jimmyandrade/harness/issues/324)) ([4be928e](https://github.com/jimmyandrade/harness/commit/4be928ef77703787ae23f1382b99fb0cf8c0708d))
+* **preparar-tarefa-do-pull-request:** add the skill that ensures a demand has a task before the pull request ([#326](https://github.com/jimmyandrade/harness/issues/326)) ([177ed17](https://github.com/jimmyandrade/harness/commit/177ed17d80270cbbf72f730fb2637cb05d47729b))
+
 ## [0.64.0](https://github.com/jimmyandrade/harness/compare/v0.63.0...v0.64.0) (2026-10-21)
 
 

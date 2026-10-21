@@ -37,7 +37,7 @@ flowchart LR
     definir_historia_de_usuario["definir-historia-de-usuario"]
     definir_inscricao["definir-inscricao"]
     definir_instrucoes_do_projeto["definir-instrucoes-do-projeto"]
-    definir_issue["definir-issue"]
+    definir_issue_do_github["definir-issue-do-github"]
     definir_jornada_de_producao["definir-jornada-de-producao"]
     definir_lancamento["definir-lancamento"]
     definir_link_rastreavel["definir-link-rastreavel"]
@@ -68,6 +68,7 @@ flowchart LR
     organizar_emails["organizar-emails"]
     organizar_ponto_de_contato["organizar-ponto-de-contato"]
     planejar_calendario_de_conteudo["planejar-calendario-de-conteudo"]
+    preparar_tarefa_do_pull_request["preparar-tarefa-do-pull-request"]
     priorizar_itens["priorizar-itens"]
     procurar_agenda["procurar-agenda"]
     procurar_artista["procurar-artista"]
@@ -185,8 +186,8 @@ flowchart LR
   definir_inscricao --> procurar_oportunidade
   definir_instrucoes_do_projeto --> criar_habilidade
   definir_instrucoes_do_projeto --> evoluir_habilidade
-  definir_issue --> criar_pull_request
-  definir_issue --> evoluir_habilidade
+  definir_issue_do_github --> criar_pull_request
+  definir_issue_do_github --> evoluir_habilidade
   definir_jornada_de_producao --> definir_agenda
   definir_jornada_de_producao --> definir_agenda_de_popstar
   definir_jornada_de_producao --> organizar_ponto_de_contato
@@ -306,6 +307,11 @@ flowchart LR
   planejar_calendario_de_conteudo --> definir_campanha_de_conteudo
   planejar_calendario_de_conteudo --> definir_reel_do_instagram
   planejar_calendario_de_conteudo --> evoluir_habilidade
+  preparar_tarefa_do_pull_request --> definir_tarefa
+  preparar_tarefa_do_pull_request --> evoluir_habilidade
+  preparar_tarefa_do_pull_request --> levantar_contexto_do_pull_request
+  preparar_tarefa_do_pull_request --> priorizar_itens
+  preparar_tarefa_do_pull_request --> procurar_tarefa
   priorizar_itens --> evoluir_habilidade
   procurar_agenda --> criar_oportunidade
   procurar_agenda --> definir_agenda
