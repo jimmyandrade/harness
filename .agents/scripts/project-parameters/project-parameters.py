@@ -28,6 +28,7 @@ TEXT_SETTINGS = {
     "Ícone das páginas no Notion",
     "Cor do ícone das páginas no Notion",
     "Símbolo da pasta no macOS",
+    "Idioma das respostas",
 }
 CHOICE_SETTINGS = {
     "Licença obrigatória": {"sim", "não"},
