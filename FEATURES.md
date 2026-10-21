@@ -125,6 +125,7 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
   - [x] A mapping can rename every status option
   - [x] A skill with `metadata.internal: true` is skipped as `internal`, and `internal: false` publishes
   - [x] Core skills publish when the project moves the core version or its mapping, and a name in both stops the sync
+  - [x] A model name in both the project and the core stops the sync, and a file without `name` in frontmatter, which is not a model, does not
   - [x] The project root is `HARNESS_ROOT`, or the working directory
   - [x] The instructions page is created once and then updated, with the version of its block
   - [x] Every checked `AGENTS.md` needs `metadata.version`, which must rise when the instructions change, and a business harness also needs `description`
