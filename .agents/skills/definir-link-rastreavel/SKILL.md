@@ -3,7 +3,7 @@ name: definir-link-rastreavel
 description: Monta, revisa ou corrige os parâmetros UTM de um link, do jeito que o padrão define, sem dado interno nem pessoal. Usada quando alguém vai divulgar um link e quer medir de onde vêm os acessos, ou quando um link, um gerador ou um código monta UTM fora do padrão. Não serve para encurtar o link, criar o post nem ler o relatório do Analytics.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.5.0"
   aliases:
     - definir-link-utm
     - definir-parametros-utm
@@ -23,7 +23,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Origens": []
 "Meios": []
 "Domínios próprios": []
-"UTM em link interno": "não"
+"UTM em link no mesmo site": "não"
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -31,7 +31,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ### Passo 1
 
-Receba o link de destino, onde ele vai ser divulgado e o que a pessoa quer medir. Sem destino ou sem canal, pergunte. Link interno é o que sai de uma página dos `Domínios próprios` para outra página deles. Com `UTM em link interno` igual a `não`, ele fica sem UTM. Com `sim`, ele leva UTM, porque a página seguinte repassa as UTMs ao destino externo.
+Receba o link de destino, onde ele vai ser divulgado e o que a pessoa quer medir. Sem destino ou sem canal, pergunte. Link no mesmo site é o que sai de uma página dos `Domínios próprios` para outra página deles. Link para outro site leva a um domínio fora dessa lista. Com `UTM em link no mesmo site` igual a `não`, o link no mesmo site fica sem UTM. Com `sim`, ele leva UTM, porque a página seguinte repassa as UTMs ao outro site.
 
 ### Passo 2
 
@@ -42,7 +42,7 @@ Monte cada parâmetro com o significado do padrão:
 - `utm_campaign`: a campanha ou a ação, com um nome público.
 - `utm_content`: a peça, a variação ou a posição do link na peça.
 - `utm_term`: só a palavra-chave de mídia paga ou a palavra que a pessoa digitou numa automação. Fora disso, fica vazio.
-- `utm_id`: o id da campanha numa plataforma externa, como o id do evento na tiqueteira ou o id da campanha de anúncio. Sem id externo, fica vazio.
+- `utm_id`: o id público da campanha. Pode ser o id da campanha numa plataforma externa, como a de anúncio, ou um id que o projeto gera para a campanha e que pode combinar o evento com quem divulga: a marca, um artista ou um influencer. Sem esse id, fica vazio.
 
 Origem ou meio fora das listas: pergunte. Não invente um valor novo.
 
@@ -50,7 +50,7 @@ Origem ou meio fora das listas: pergunte. Não invente um valor novo.
 
 Confira o link antes de entregar:
 
-- [ ] Nenhum parâmetro leva identificador interno: id de página, de banco, de registro, de usuário ou de CRM. No lugar, use o nome público, como o slug do evento, ou o id externo em `utm_id`.
+- [ ] Nenhum parâmetro leva identificador interno: UUID, id de página, de banco, de registro, de usuário ou de CRM, nem o id que a API do próprio site devolve. No lugar, use o nome público, como o slug do evento, ou o id público da campanha em `utm_id`.
 - [ ] Nenhum parâmetro leva dado pessoal: nome, e-mail ou telefone.
 - [ ] Valores em minúsculas, sem acento, com hífen no lugar de espaço.
 - [ ] `utm_term` vazio, salvo palavra-chave paga ou de automação.
@@ -79,11 +79,11 @@ Se você usar `utm_term` para guardar o que não coube nos outros, o relatório 
 1. Deixe `utm_term` vazio.
 2. A peça ou a posição vai em `utm_content`.
 
-### UTM em link interno
+### UTM em link no mesmo site
 
-Se você decidir sozinho se o link interno leva UTM, quebra a regra do negócio: sem UTM, a página seguinte não tem o que repassar ao destino externo; com UTM, o Analytics abre uma visita nova e troca a origem real.
+Se você decidir sozinho se o link no mesmo site leva UTM, quebra a regra do negócio: sem UTM, a página seguinte não tem o que repassar ao outro site; com UTM, o Analytics abre uma visita nova e troca a origem real.
 
-1. Siga `UTM em link interno`.
+1. Siga `UTM em link no mesmo site`.
 2. Com `não`, meça o clique com um evento do Analytics.
 
 ## Exemplos de entrada e saída
@@ -92,18 +92,20 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### o botão de ingressos da página do artista manda o id do evento em utm_term
 
-O id interno do evento sai de `utm_term`. O id do evento na tiqueteira, quando existe, vai em `utm_id`, e a posição do botão continua em `utm_content`. O id interno fica só no evento de clique do Analytics.
+O id interno do evento sai de `utm_term`. `utm_id` leva o id público da campanha quando o projeto gera um, e fica vazio sem ele. A posição do botão continua em `utm_content`. O id interno fica só no evento de clique do Analytics.
 
 ## Casos-limite
 
-- O destino é do mesmo site da página: siga `UTM em link interno`.
+- O destino é do mesmo site da página: siga `UTM em link no mesmo site`.
+- A campanha é de um evento divulgado por um artista ou um influencer, e o projeto ainda não gera id para essa combinação: `utm_id` fica vazio. Não monte o id com o UUID.
 - A campanha não tem nome público: pergunte o nome. Não use o id.
 - O link já chega com UTM de outra campanha: preserve, e não sobrescreva sem pedido.
 - Gerador ou código que preenche um parâmetro com id interno por padrão: o padrão sai, e o campo fica vazio ou recebe o nome público.
 
 ## Pegadinhas
 
-- `utm_id` parece liberar qualquer id. Ele só aceita o id de uma plataforma externa, nunca o id de um registro interno.
+- `utm_id` parece liberar qualquer id. Ele só aceita o id público da campanha, nunca o UUID nem o id que a API devolve: com ele, alguém mal-intencionado tenta consultar a API ou o site para coletar dados.
+- "Link interno" parece o link no mesmo site, mas o time também chama assim a área interna do site. Diga link no mesmo site e link para outro site.
 - Um id parece inofensivo porque não diz nada. Ele identifica o registro e abre caminho para quem tenta acessar a estrutura interna.
 - `utm_term` parece sobra. No padrão, é só palavra-chave.
 - O Analytics não precisa da UTM para saber o evento quando o próprio site mede o clique.
