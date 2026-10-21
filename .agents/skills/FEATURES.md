@@ -480,6 +480,20 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses the DRE, the cash-flow statement, the price, the monthly plan, the durable good, and the fair cash projection
 
+### definir-link-utm
+- **Stability**: experimental
+- **Description**: Build, review, or fix the UTM parameters of a link by the standard meaning of each parameter, with no internal id or personal data
+- **Properties**:
+  - Lives at `.agents/skills/definir-link-utm/SKILL.md`
+  - Reads the allowed sources, mediums, and own domains from parameters, and asks instead of inventing a value
+  - Keeps `utm_term` empty except for a paid keyword or an automation keyword
+  - Never puts an internal id (page, database, record, user, or CRM) or personal data in any parameter, and uses the public name, such as the event slug, in `utm_campaign`
+  - Leaves internal links on the same site without UTM, measured by an Analytics event instead
+  - Reviews a link, a generator, or code and names each failed check, where it is, and the right value
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [ ] Three cases validated with the person
+
 ### definir-obrigacao-financeira
 - **Stability**: experimental
 - **Description**: Register or review a contract or debt that generates charges, such as a plan, a consortium, a card, or a loan
