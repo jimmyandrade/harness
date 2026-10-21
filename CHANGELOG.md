@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.54.0](https://github.com/jimmyandrade/harness/compare/v0.53.0...v0.54.0) (2026-10-21)
+
+
+### Features
+
+* publish output models to Notion and cite them by name ([#290](https://github.com/jimmyandrade/harness/issues/290)) ([e2ef213](https://github.com/jimmyandrade/harness/commit/e2ef213a0db9b470ef9317d14b6df18ff77d77cd))
+
 ## [0.53.0](https://github.com/jimmyandrade/harness/compare/v0.52.0...v0.53.0) (2026-10-20)
 
 
