@@ -64,6 +64,7 @@ flowchart LR
     organizar_emails["organizar-emails"]
     organizar_ponto_de_contato["organizar-ponto-de-contato"]
     planejar_calendario_de_conteudo["planejar-calendario-de-conteudo"]
+    priorizar_itens["priorizar-itens"]
     procurar_agenda["procurar-agenda"]
     procurar_artista["procurar-artista"]
     procurar_data_significativa["procurar-data-significativa"]
@@ -287,6 +288,7 @@ flowchart LR
   planejar_calendario_de_conteudo --> definir_campanha_de_conteudo
   planejar_calendario_de_conteudo --> definir_reel_do_instagram
   planejar_calendario_de_conteudo --> evoluir_habilidade
+  priorizar_itens --> evoluir_habilidade
   procurar_agenda --> criar_oportunidade
   procurar_agenda --> definir_agenda
   procurar_agenda --> definir_agenda_de_popstar
