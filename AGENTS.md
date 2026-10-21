@@ -1,6 +1,6 @@
 ---
 metadata:
-  version: "1.12.0"
+  version: "1.13.0"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -67,6 +67,7 @@ metadata:
 - Salve toda skill como `.agents/skills/<nome>/SKILL.md`. O `name` é igual ao nome da pasta. O nome da pasta e o `name` do frontmatter são em ASCII e kebab-case. O título de nível 1 e o corpo são linguagem natural para pessoas e modelos, então mantêm ortografia e gramática corretas, com todos os acentos: `# Resolver comentários de revisão`. Uma skill que não deve ir para o Notion define `metadata.notion` como `"false"`. Uma skill ainda em construção define `metadata.internal` como `true`, sem aspas: a CLI `skills` esconde a skill do `npx skills add`, e a sincronização a deixa fora do Notion.
 - O texto da skill não cita arquivo nem caminho, a não ser ao propor mover detalhes para `references/` quando a skill passaria do limite de linhas ou de tokens, ao apontar um modelo de entrada, e na seção final `Scripts disponíveis`, que diz o nome de cada script e como rodá-lo.
 - Uma skill cita um modelo de saída pelo nome, como decide a ADR 0016: ``Leia o modelo de saída `<nome>` quando for gerar a saída.`` Num repositório, o agente lê `.agents/assets/templates/<nome>.md` do projeto ou, se não houver, deste harness. Fora dele, abre a página com esse título no banco que `Banco de modelos no Notion` indica. A skill lista o modelo em `metadata.models`, um nome por linha, e o verificador confere essa lista como confere `metadata.related`.
+- Uma skill que vai para o Notion não cita uma skill com `metadata.notion` igual a `"false"`, porque o agente do Notion não consegue carregá-la. O `AGENTS.md` de um negócio também não cita, porque ele vai inteiro para o Notion: a regra que manda usar uma skill dessas fica no guia de contribuição do negócio. O verificador reprova os dois casos.
 - Uma skill que cita outra skill a lista em `metadata.related`, um nome por linha. O verificador falha quando um nome da lista não é skill do projeto nem deste harness, ou quando o corpo cita uma skill que falta na lista. Uma skill sem `metadata.related` não é conferida, para um harness de negócio adotar a regra uma skill de cada vez. Toda skill que vem para cá declara a lista assim que uma skill citada por ela estiver neste repositório. Cada nova mudança de repositório acrescenta o nome nas skills daqui que citam a skill trazida.
 - Quando uma skill muda, suba o `metadata.version`: patch para correção, minor para funcionalidade, major para mudança que quebra. Uma skill abaixo de 1.0.0 sem 3 evals validados sobe o minor numa mudança que quebra, porque o verificador exige 3 evals a partir da 1.0.0.
 - Renomear uma skill é uma mudança que quebra. Ponha `!` depois do tipo, comece o rodapé com `BREAKING CHANGE:` e ponha cada nome anterior em `metadata.aliases`.

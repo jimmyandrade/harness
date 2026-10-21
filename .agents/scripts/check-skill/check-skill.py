@@ -577,6 +577,40 @@ def known_skill_names() -> set[str]:
     return names
 
 
+def offline_skill_names() -> set[str]:
+    """Skills that never go to Notion: metadata.notion is "false". An internal skill goes there once it is ready."""
+    names: set[str] = set()
+    for root in dict.fromkeys([ROOT, CORE, *PLUGINS]):
+        for path in skill_files(root):
+            try:
+                block = frontmatter(path.read_text(encoding="utf-8"), path)
+            except SystemExit:
+                continue
+            if metadata_value(block, "notion") == '"false"':
+                names.add(path.parent.name)
+    return names
+
+
+def citation_line(text: str, name: str) -> int | None:
+    """The first line of a text that cites a skill name between backticks."""
+    for index, line in enumerate(text.splitlines(), start=1):
+        if f"`{name}`" in line:
+            return index
+    return None
+
+
+def notion_citation_errors(text: str, body: str, offline: set[str], what: str) -> list[Finding]:
+    """A page that goes to Notion must not cite a skill that stays out of it: the Notion agent cannot load it."""
+    return [
+        Finding(
+            f"{what} goes to Notion and cites {other}, which stays out of Notion, so the Notion agent cannot load it. "
+            "Move the rule to the contributing guide, or keep this page out of Notion too",
+            citation_line(text, other),
+        )
+        for other in sorted(cited_names(body, offline))
+    ]
+
+
 MERMAID_BLOCK = re.compile(r"^```mermaid[^\n]*\n(.*?)^```", re.M | re.S)
 BACKTICKED = re.compile(r"`([a-z0-9][a-z0-9-]*)`")
 
@@ -1368,6 +1402,7 @@ def main() -> int:
     measures: dict[str, tuple[str | None, int | None]] = {}
     known = known_skill_names()
     known_models = known_model_names()
+    offline = offline_skill_names()
     args = sys.argv[1:]
     skill_args = [arg for arg in args if Path(arg).name != INSTRUCTIONS]
     instructions = ROOT / INSTRUCTIONS
@@ -1388,6 +1423,13 @@ def main() -> int:
             failed = True
             results[INSTRUCTIONS].append((Path(INSTRUCTIONS), finding))
             report(Path(INSTRUCTIONS), finding)
+        if IS_HARNESS and ROOT != CORE:
+            parts = text.split("\n---", 2)
+            body = parts[2] if text.startswith("---") and len(parts) == 3 else text
+            for finding in notion_citation_errors(text, body, offline, INSTRUCTIONS):
+                failed = True
+                results[INSTRUCTIONS].append((Path(INSTRUCTIONS), finding))
+                report(Path(INSTRUCTIONS), finding)
     if (args and not skill_args) or not IS_HARNESS:
         write_summary(results, measures, body_limit, encoding)
         return 1 if failed else 0
@@ -1444,6 +1486,9 @@ def main() -> int:
                 add(finding)
             for finding in models_errors(block, body_text, known_models):
                 add(finding)
+            if metadata_value(block, "notion") != '"false"' and metadata_value(block, "internal") != "true":
+                for finding in notion_citation_errors(text, body_text, offline - {name}, "this skill"):
+                    add(finding)
             if skill_author != author:
                 author_line = next(
                     (lineno for lineno, raw in front if raw.strip().startswith("author:")),
