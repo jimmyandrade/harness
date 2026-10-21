@@ -503,15 +503,19 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses the DRE, the cash-flow statement, the price, the monthly plan, the durable good, and the fair cash projection
 
-### definir-link-utm
+### definir-link-rastreavel
 - **Stability**: experimental
 - **Description**: Build, review, or fix the UTM parameters of a link by the standard meaning of each parameter, with no internal id or personal data
 - **Properties**:
-  - Lives at `.agents/skills/definir-link-utm/SKILL.md`
+  - Lives at `.agents/skills/definir-link-rastreavel/SKILL.md`
+  - Answers to the earlier names `definir-link-utm`, `definir-parametros-utm`, `definir-rastreio-de-link`, and `gerar-link-com-parametros-utm` through `metadata.aliases`
   - Reads the allowed sources, mediums, and own domains from parameters, and asks instead of inventing a value
   - Keeps `utm_term` empty except for a paid keyword or an automation keyword
   - Never puts an internal id (page, database, record, user, or CRM) or personal data in any parameter, and uses the public name, such as the event slug, in `utm_campaign`
-  - Leaves internal links on the same site without UTM, measured by an Analytics event instead
+  - Allows `utm_id` only for a public campaign id: one from an external platform, or one the project generates, which may combine the event with who promotes it (the brand, an artist, or an influencer); never a UUID or an id the site API returns
+  - Keeps `utm_id` optional in a link generator, whether a screen, an API, an MCP, or a command line, and never fills it with the event id
+  - Puts UTM on a link to the same site only when the `UTM em link no mesmo site` parameter says so, for sites whose next page forwards the UTMs to another site
+  - Says "link to the same site" and "link to another site" instead of "internal link", which also names the internal area of a site
   - Reviews a link, a generator, or code and names each failed check, where it is, and the right value
 - **Test Criteria**:
   - [x] The skill is present at that path
