@@ -1,6 +1,6 @@
 ---
 metadata:
-  version: "1.9.0"
+  version: "1.10.0"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -17,6 +17,7 @@ metadata:
       "Considerar grupos de oportunidades": "sim"
       "Idioma da issue": "português do Brasil"
       "Idioma das instruções do projeto": "português do Brasil"
+      "Idioma das respostas": "português do Brasil"
 ---
 
 # Instruções do projeto
@@ -39,6 +40,7 @@ metadata:
 
 ## Respostas
 
+- Responda sempre no `Idioma das respostas`, que tem como padrão português do Brasil. Um projeto que quer as respostas em outro idioma define esse parâmetro no próprio `AGENTS.md`.
 - Comece toda resposta pelo que precisa ser feito e por quem faz. Termine com a sugestão do próximo passo e, se houver, com a decisão que cabe à pessoa.
 - Todo pull request, issue ou commit citado leva o link completo, inclusive na pergunta sobre quem mescla.
 

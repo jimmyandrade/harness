@@ -83,6 +83,13 @@ class ValidateTest(unittest.TestCase):
                 ['"Banco de modelos no Notion" must be the link of a Notion database or its collection:// data source'],
             )
 
+    def test_should_accept_the_answer_language_and_reject_an_empty_one(self) -> None:
+        self.assertEqual(self.errors(block('"Global":\n  "Idioma das respostas": "inglês"\n')), [])
+        self.assertEqual(
+            self.errors(block('"Global":\n  "Idioma das respostas": ""\n')),
+            ['"Idioma das respostas" must be a non-empty text'],
+        )
+
     def test_should_reject_flow_style(self) -> None:
         self.assertEqual(
             self.errors(block('"Global": {"Organização": "x"}\n')),
