@@ -927,6 +927,7 @@ How these skills relate is in `README.md`, in this folder.
   - Swaps the bills-to-pay label for the paid-bills label once the payment is recorded with a receipt, including a second slip reissued for the same installment, and says which one was paid
   - Gives a collection agency its own label and adds the creditor's label only when the body names it; an alarming subject is not a formal notice unless the body describes the measure taken
   - Compares batch changes with the plan, redoes only what a partial failure left, and reports every failed call
+  - Asks before restoring a conversation that left the inbox during a change, because the person may have archived it
 - **Test Criteria**:
   - [x] The skill is present and one user-requested read-only exploratory case is recorded
   - [x] User-provided acceptance examples are recorded in Portuguese Gherkin
