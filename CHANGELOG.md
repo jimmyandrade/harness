@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.73.0](https://github.com/jimmyandrade/harness/compare/v0.72.0...v0.73.0) (2026-10-21)
+
+
+### Features
+
+* **skills:** add language-by-history, private repository context, confidence on closing and plural voice for bot pull requests to the review skills ([#344](https://github.com/jimmyandrade/harness/issues/344)) ([e212ed3](https://github.com/jimmyandrade/harness/commit/e212ed3bdaf6cfd12cc418adcace8e9c0cc9b975))
+
 ## [0.72.0](https://github.com/jimmyandrade/harness/compare/v0.71.0...v0.72.0) (2026-10-21)
 
 
