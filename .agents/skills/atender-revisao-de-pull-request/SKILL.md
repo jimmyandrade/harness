@@ -3,7 +3,7 @@ name: atender-revisao-de-pull-request
 description: Atende a revisão recebida num pull request, de pessoa ou de bot. Lê os comentários abertos, classifica cada sugestão, aplica o que é seguro, responde cada thread e resolve as atendidas. Sem PR informado, lista os seus que precisam de atenção. Não serve para revisar o PR de outra pessoa nem para abrir o PR.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.5.0"
   notion: "false"
   aliases:
     - resolver-comentarios-de-revisao
@@ -21,12 +21,13 @@ metadata:
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco, depois nas instruções de usuário. Quando um valor não estiver lá, use o padrão abaixo. `Repositório` vem do remoto `origin` quando as instruções não dizem.
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco, depois nas instruções de usuário. Quando um valor não estiver lá, use o padrão abaixo. `Repositório` vem do remoto `origin` quando as instruções não dizem. Se as instruções do projeto ou de usuário têm uma seção com o nome desta habilidade, leia-a e aplique cada regra no passo que ela cita.
 
 ```yaml
 "Repositório": ""
 "Idioma da resposta à revisão": "inglês"
 "Modo de execução": "interativo"
+"Aplicar em execução agendada": "estrutural"
 "Aprovação para mudar comportamento": "pedir"
 "Régua de mudança de comportamento": ""
 "Convenção de testes": ""
@@ -37,7 +38,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Modo de aprendizado": "perguntar"
 ```
 
-`Modo de execução` é `interativo`, com a pessoa na frente, ou `agendado`, sem ninguém. `Aprovação para mudar comportamento` é `pedir` ou `não pedir`. `Régua de mudança de comportamento` lista o que o projeto conta como mudança de comportamento, como condicional, validação, cache, rastreamento ou pagamento. `Lentes de revisão` lista critérios que você aplica ao decidir, sem citá-los na resposta.
+`Modo de execução` é `interativo`, com a pessoa na frente, ou `agendado`, sem ninguém. `Aplicar em execução agendada` é `estrutural`, que aplica só o estrutural, ou `não`, que não aplica nada e deixa tudo no resumo. `Aprovação para mudar comportamento` é `pedir` ou `não pedir`. `Régua de mudança de comportamento` lista o que o projeto conta como mudança de comportamento, como condicional, validação, cache, rastreamento ou pagamento. `Lentes de revisão` lista critérios que você aplica ao decidir, sem citá-los na resposta.
 
 ## Instruções
 
@@ -51,7 +52,7 @@ Chame `levantar-contexto-do-pull-request` e use a ficha: o estado, as convençõ
 
 ### Passo 2
 
-Confira cada comentário contra o código atual do PR, não contra o commit em que ele foi escrito. Marque cada um como válido, já corrigido, desatualizado ou duplicado. Comentário que repete outro, inclusive de outro bot, vira uma correção só. Entra na lista só o que ainda está aberto: não reabra uma thread que a pessoa já respondeu encerrando o ponto.
+Confira cada comentário contra o código atual do PR, não contra o commit em que ele foi escrito. Marque cada um como válido, já corrigido, desatualizado ou duplicado. Comentário que repete outro, inclusive de outro bot, vira uma correção só. Entra na lista só o que ainda está aberto: não reabra uma thread que a pessoa já respondeu encerrando o ponto. Uma thread já resolvida cuja última fala é de quem revisou, ou que não tem resposta sua, também entra como pendência de resposta: responda antes de seguir, sem reabri-la.
 
 ### Passo 3
 
@@ -62,7 +63,7 @@ Decida cada comentário válido pelo que ele aponta. O bot vê só o diff. Use a
 - **Discordância:** a sugestão parece errada, contradiz a convenção do repositório ou quebra o escopo do PR. Não aplique. Responda em forma de pergunta, com o motivo.
 - **Fora de escopo:** boa ideia que não é deste PR. Não aplique e proponha registrá-la à parte.
 
-Na dúvida entre estrutural e mudança de comportamento, é mudança de comportamento. Ordene o que for aplicar com `priorizar-itens`, do mais importante ao menos. Mostre a classificação numa lista só, com todas as decisões pendentes juntas. Em modo agendado, aplique só o estrutural e deixe o resto no resumo.
+Na dúvida entre estrutural e mudança de comportamento, é mudança de comportamento. Ordene o que for aplicar com `priorizar-itens`, do mais importante ao menos. Mostre a classificação numa lista só, com todas as decisões pendentes juntas. Em modo agendado, siga `Aplicar em execução agendada`: com `estrutural`, aplique só o estrutural e deixe o resto no resumo; com `não`, deixe tudo no resumo.
 
 ### Passo 4
 
@@ -192,7 +193,7 @@ Achei cinco comentários abertos. Dois eram estruturais, um nome e um texto, e a
 - Um push novo faz o bot revisar de novo: leia as threads novas antes do merge.
 - Um bot comenta por causa de um check que falhou: trate como os outros. A decisão de mesclar com check falhando fica com `criar-pull-request`.
 - Sem PR informado e sem nenhum PR da pessoa precisando de ação: diga isso e pare.
-- Execução agendada: aplique só o estrutural e deixe o resto no resumo, sem responder.
+- Execução agendada: siga `Aplicar em execução agendada` e deixe o resto no resumo, sem responder.
 
 ## Pegadinhas
 
