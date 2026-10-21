@@ -72,6 +72,7 @@ flowchart LR
     procurar_email["procurar-email"]
     procurar_inscricao["procurar-inscricao"]
     procurar_oportunidade["procurar-oportunidade"]
+    procurar_pedido_de_revisao["procurar-pedido-de-revisao"]
     procurar_tarefa["procurar-tarefa"]
     publicar_revisao_de_codigo["publicar-revisao-de-codigo"]
     reconhecer_imagem["reconhecer-imagem"]
@@ -314,6 +315,9 @@ flowchart LR
   procurar_inscricao --> procurar_email
   procurar_oportunidade --> criar_oportunidade
   procurar_oportunidade --> definir_inscricao
+  procurar_pedido_de_revisao --> definir_pessoa
+  procurar_pedido_de_revisao --> enviar_mensagem_no_slack
+  procurar_pedido_de_revisao --> evoluir_habilidade
   procurar_tarefa --> procurar_inscricao
   publicar_revisao_de_codigo --> definir_pessoa
   publicar_revisao_de_codigo --> enviar_mensagem_no_slack
