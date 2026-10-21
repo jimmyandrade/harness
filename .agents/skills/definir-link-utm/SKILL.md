@@ -3,7 +3,7 @@ name: definir-link-utm
 description: Monta, revisa ou corrige os parâmetros UTM de um link, do jeito que o padrão define, sem dado interno nem pessoal. Usada quando alguém vai divulgar um link e quer medir de onde vêm os acessos, ou quando um link, um gerador ou um código monta UTM fora do padrão. Não serve para encurtar o link, criar o post nem ler o relatório do Analytics.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   related:
     - evoluir-habilidade
 ---
@@ -36,6 +36,7 @@ Monte cada parâmetro com o significado do padrão:
 - `utm_campaign`: a campanha ou a ação, com um nome público.
 - `utm_content`: a peça, a variação ou a posição do link na peça.
 - `utm_term`: só a palavra-chave de mídia paga ou a palavra que a pessoa digitou numa automação. Fora disso, fica vazio.
+- `utm_id`: o id da campanha numa plataforma externa, como o id do evento na tiqueteira ou o id da campanha de anúncio. Sem id externo, fica vazio.
 
 Origem ou meio fora das listas: pergunte. Não invente um valor novo.
 
@@ -43,7 +44,7 @@ Origem ou meio fora das listas: pergunte. Não invente um valor novo.
 
 Confira o link antes de entregar:
 
-- [ ] Nenhum parâmetro leva identificador interno: id de página, de banco, de registro, de usuário ou de CRM. No lugar, use o nome público, como o slug do evento.
+- [ ] Nenhum parâmetro leva identificador interno: id de página, de banco, de registro, de usuário ou de CRM. No lugar, use o nome público, como o slug do evento, ou o id externo em `utm_id`.
 - [ ] Nenhum parâmetro leva dado pessoal: nome, e-mail ou telefone.
 - [ ] Valores em minúsculas, sem acento, com hífen no lugar de espaço.
 - [ ] `utm_term` vazio, salvo palavra-chave paga ou de automação.
@@ -85,7 +86,7 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### o botão de ingressos da página do artista manda o id do evento em utm_term
 
-O id do evento sai de `utm_term`. O slug do evento, como `show-sao-paulo-2026-11-08`, vai em `utm_campaign`, e a posição do botão continua em `utm_content`. O id fica só no evento de clique do Analytics.
+O id interno do evento sai de `utm_term`. O id do evento na tiqueteira, quando existe, vai em `utm_id`, e a posição do botão continua em `utm_content`. O id interno fica só no evento de clique do Analytics.
 
 ## Casos-limite
 
@@ -96,6 +97,7 @@ O id do evento sai de `utm_term`. O slug do evento, como `show-sao-paulo-2026-11
 
 ## Pegadinhas
 
+- `utm_id` parece liberar qualquer id. Ele só aceita o id de uma plataforma externa, nunca o id de um registro interno.
 - Um id parece inofensivo porque não diz nada. Ele identifica o registro e abre caminho para quem tenta acessar a estrutura interna.
 - `utm_term` parece sobra. No padrão, é só palavra-chave.
 - O Analytics não precisa da UTM para saber o evento quando o próprio site mede o clique.
