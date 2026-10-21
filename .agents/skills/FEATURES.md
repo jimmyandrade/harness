@@ -511,6 +511,7 @@ How these skills relate is in `README.md`, in this folder.
   - Answers to the earlier names `definir-link-utm`, `definir-parametros-utm`, `definir-rastreio-de-link`, and `gerar-link-com-parametros-utm` through `metadata.aliases`
   - Reads the allowed sources, mediums, and own domains from parameters, and asks instead of inventing a value
   - Keeps `utm_term` empty except for a paid keyword or an automation keyword
+  - Separates words in every value with one `Separador`, underscore by default, in every place that builds links (site, on-screen generator, API, MCP, command line), and converts slugs to it
   - Never puts an internal id (page, database, record, user, or CRM) or personal data in any parameter, and uses the public name, such as the event slug, in `utm_campaign`
   - Allows `utm_id` only for a public campaign id: one from an external platform, or one the project generates, which may combine the event with who promotes it (the brand, an artist, or an influencer); never a UUID or an id the site API returns
   - Keeps `utm_id` optional in a link generator, whether a screen, an API, an MCP, or a command line, and never fills it with the event id

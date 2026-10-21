@@ -3,7 +3,7 @@ name: definir-link-rastreavel
 description: Monta, revisa ou corrige os parâmetros UTM de um link, do jeito que o padrão define, sem dado interno nem pessoal. Usada quando alguém vai divulgar um link e quer medir de onde vêm os acessos, ou quando um link, um gerador ou um código monta UTM fora do padrão. Não serve para encurtar o link, criar o post nem ler o relatório do Analytics.
 metadata:
   author: jimmyandrade
-  version: "0.5.1"
+  version: "0.6.0"
   aliases:
     - definir-link-utm
     - definir-parametros-utm
@@ -24,6 +24,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Meios": []
 "Domínios próprios": []
 "UTM em link no mesmo site": "não"
+"Separador": "_"
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -46,13 +47,15 @@ Monte cada parâmetro com o significado do padrão:
 
 Origem ou meio fora das listas: pergunte. Não invente um valor novo.
 
+Em todo valor, as palavras se separam com `Separador`. O projeto usa um separador só, em todo lugar que monta link: o site, o gerador na tela, a API, o MCP e a linha de comando. O slug que chega com outro separador troca para o `Separador`.
+
 ### Passo 3
 
 Confira o link antes de entregar:
 
 - [ ] Nenhum parâmetro leva identificador interno: UUID, id de página, de banco, de registro, de usuário ou de CRM, nem o id que a API do próprio site devolve. No lugar, use o nome público, como o slug do evento, ou o id público da campanha em `utm_id`.
 - [ ] Nenhum parâmetro leva dado pessoal: nome, e-mail ou telefone.
-- [ ] Valores em minúsculas, sem acento, com hífen no lugar de espaço.
+- [ ] Valores em minúsculas, sem acento, com `Separador` entre as palavras, inclusive no slug.
 - [ ] `utm_term` vazio, salvo palavra-chave paga ou de automação.
 - [ ] Os parâmetros que o destino já tinha ficaram no link.
 
@@ -86,6 +89,14 @@ Se você decidir sozinho se o link no mesmo site leva UTM, quebra a regra do neg
 1. Siga `UTM em link no mesmo site`.
 2. Com `não`, meça o clique com um evento do Analytics.
 
+### Separador misturado
+
+Se você misturar hífen e sublinhado, o Analytics divide a mesma origem, o mesmo meio ou a mesma campanha em duas linhas.
+
+1. Use só o `Separador`.
+2. Troque o separador do slug e do valor que já existe.
+3. Ao trocar um valor que já está no ar, diga que o relatório mostra o valor antigo e o novo separados a partir da data da troca.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
@@ -110,6 +121,7 @@ O id interno do evento sai de `utm_term`. `utm_id` leva o id público da campanh
 - Um id parece inofensivo porque não diz nada. Ele identifica o registro e abre caminho para quem tenta acessar a estrutura interna.
 - `utm_term` parece sobra. No padrão, é só palavra-chave.
 - O Analytics não precisa da UTM para saber o evento quando o próprio site mede o clique.
+- O exemplo da ajuda do Google usa hífen, e o gerador de URL do Google sugere sublinhado. O Analytics aceita os dois. O que quebra o relatório é misturar.
 
 ## Scripts disponíveis
 
