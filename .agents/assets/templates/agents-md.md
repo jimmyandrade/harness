@@ -5,6 +5,7 @@ metadata:
   parameters:
     "Global":
       "Idioma das instruções do projeto": "português"
+      "Banco de modelos no Notion": "<link do banco de modelos de saída no Notion>"
       "<chave exata usada por mais de uma habilidade>": "<valor>"
     "<nome-da-habilidade>":
       "<chave exata desta habilidade>": "<valor>"
@@ -16,6 +17,7 @@ Este documento contém instruções que, dependendo da ferramenta utilizada, pod
 
 ## Em qualquer lugar
 
+- Um modelo de saída citado pelo nome é o arquivo com esse nome e a extensão `.md` em `.agents/assets/templates/`, no repositório do projeto ou do harness. Fora do repositório, é a página com esse título no banco que `Banco de modelos no Notion` indica. Sem esse parâmetro, procure a página com esse título exato no espaço de trabalho. Se não achar, diga que o modelo falta e não invente o formato.
 - <Regra que vale no Notion e nas ferramentas de código, em toda sessão.>
 
 ## No Notion

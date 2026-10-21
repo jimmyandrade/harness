@@ -3,6 +3,8 @@
 
 A skill that lists metadata.related names only skills that exist in the project
 or in this harness, and lists every skill its body cites.
+A skill that lists metadata.models names only models in .agents/assets/templates of the
+project or of this harness, lists every model its body cites, and cites none by path (ADR 0016).
 When the opportunity skills consider groups, the opportunity mapping binds the group.
 
 The project is HARNESS_ROOT, or the working directory when it is unset.
@@ -532,7 +534,7 @@ def metadata_list_errors(block: str) -> list[Finding]:
         key, value = stripped.split(":", 1)
         key = key.strip()
         value = value.strip()
-        if key in {"aliases", "tags", "related"}:
+        if key in {"aliases", "tags", "related", "models"}:
             if value:
                 errors.append(Finding(f"metadata.{key} must be a list", lineno))
                 list_key = None
@@ -614,6 +616,46 @@ def related_errors(block: str, body: str, name: str, known: set[str]) -> list[Fi
             )
     for other in sorted(mentioned_skills(body, name, known) - seen):
         errors.append(Finding(f"the body cites {other}; add it to metadata.related", line))
+    return errors
+
+
+MODELS = Path(".agents") / "assets" / "templates"
+MODEL_PATH = re.compile(r"\.agents/assets/templates/([A-Za-z0-9_.-]+?)(?:\.md)?(?![A-Za-z0-9_.-])")
+
+
+def known_model_names() -> set[str]:
+    """The models of the project and of this harness: each Markdown file in .agents/assets/templates."""
+    names: set[str] = set()
+    for root in dict.fromkeys([ROOT, CORE]):
+        folder = root / MODELS
+        if folder.is_dir():
+            names.update(path.stem for path in folder.glob("*.md") if path.is_file())
+    return names
+
+
+def models_errors(block: str, body: str, known: set[str]) -> list[Finding]:
+    """metadata.models names real models and every model the body cites, and the body cites none by path."""
+    declared = metadata_list(block, "models")
+    if declared is None:
+        return []
+    models, line = declared
+    errors: list[Finding] = []
+    seen: set[str] = set()
+    for item in models:
+        if item in seen:
+            errors.append(Finding(f"metadata.models repeats {item}", line))
+        seen.add(item)
+        if item not in known:
+            errors.append(Finding(f"metadata.models names {item}, which is not a model here or in the core", line))
+    for other in sorted(cited_names(body, known) - seen):
+        errors.append(Finding(f"the body cites the model {other}; add it to metadata.models", line))
+    for match in MODEL_PATH.finditer(body):
+        errors.append(
+            Finding(
+                f"cite the model by name: Leia o modelo de saída `{match.group(1)}` quando for gerar a saída.",
+                line,
+            )
+        )
     return errors
 
 
@@ -1325,6 +1367,7 @@ def main() -> int:
     results: dict[str, list[tuple[Path, Finding]]] = {}
     measures: dict[str, tuple[str | None, int | None]] = {}
     known = known_skill_names()
+    known_models = known_model_names()
     args = sys.argv[1:]
     skill_args = [arg for arg in args if Path(arg).name != INSTRUCTIONS]
     instructions = ROOT / INSTRUCTIONS
@@ -1398,6 +1441,8 @@ def main() -> int:
             for finding in metadata_list_errors(block):
                 add(finding)
             for finding in related_errors(block, body_text, name, known):
+                add(finding)
+            for finding in models_errors(block, body_text, known_models):
                 add(finding)
             if skill_author != author:
                 author_line = next(

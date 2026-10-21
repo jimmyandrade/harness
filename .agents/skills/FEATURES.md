@@ -374,7 +374,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Stability**: experimental
 - **Description**: Write and review a project's instructions file so that it holds only what every session needs, as ADR 0008 decides
 - **Properties**:
-  - Lives at `.agents/skills/definir-instrucoes-do-projeto/SKILL.md`, with the output template at `.agents/assets/templates/agents-md.md`
+  - Lives at `.agents/skills/definir-instrucoes-do-projeto/SKILL.md`, with the output model `agents-md` at `.agents/assets/templates/agents-md.md`, cited by name
   - Measures the instructions with the skill checker before and after, against the skill body limits
   - Classifies each passage by destination: stays, contributing guide, architecture map, design document, a new skill, product documentation, the data, or the parameters in the frontmatter
   - Writes in the language set by "Idioma das instruções do projeto", one rule per line, with separate parts for anywhere, Notion only, and coding tools only

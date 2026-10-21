@@ -5,11 +5,14 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.1"
+  version: "0.2.2"
   related:
     - definir-lancamento
     - definir-planejamento-financeiro
     - gerenciar-estoque
+  models:
+    - dre-simplificada
+    - fluxo-de-caixa
 ---
 
 # Revisar finanças
@@ -45,11 +48,11 @@ A leitura usa o que a fonte já tem. Não refaça os controles do zero e não in
 
 ### Passo 3
 
-Leia .agents/assets/templates/dre-simplificada.md quando for gerar a saída.
+Leia o modelo de saída `dre-simplificada` quando for gerar a saída.
 
 ### Passo 4
 
-Leia .agents/assets/templates/fluxo-de-caixa.md quando for gerar a saída.
+Leia o modelo de saída `fluxo-de-caixa` quando for gerar a saída.
 
 ### Passo 5
 

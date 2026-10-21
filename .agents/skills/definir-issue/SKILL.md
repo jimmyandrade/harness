@@ -4,10 +4,12 @@ description: Abre, revisa, edita e traduz issues do GitHub no idioma do projeto.
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
   related:
     - criar-pull-request
     - evoluir-habilidade
+  models:
+    - issue-do-github
 ---
 
 # Definir issue
@@ -38,7 +40,7 @@ Escreva o título em Conventional Commits, `tipo: descrição`, e a descrição 
 
 ### Passo 4
 
-Leia .agents/assets/templates/issue-do-github.md quando for gerar a saída.
+Leia o modelo de saída `issue-do-github` quando for gerar a saída.
 
 ### Passo 5
 

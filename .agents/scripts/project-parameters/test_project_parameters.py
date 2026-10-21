@@ -74,6 +74,15 @@ class ValidateTest(unittest.TestCase):
             )
 
 
+    def test_should_check_the_link_of_the_models_database(self) -> None:
+        for value in ('"https://www.notion.so/00000000000040008000000000000000"', '"collection://00000000-0000-4000-8000-000000000000"'):
+            self.assertEqual(self.errors(block(f'"Global":\n  "Banco de modelos no Notion": {value}\n')), [])
+        for value in ('"Modelos"', '""', '"https://example.com/x"'):
+            self.assertEqual(
+                self.errors(block(f'"Global":\n  "Banco de modelos no Notion": {value}\n')),
+                ['"Banco de modelos no Notion" must be the link of a Notion database or its collection:// data source'],
+            )
+
     def test_should_reject_flow_style(self) -> None:
         self.assertEqual(
             self.errors(block('"Global": {"Organização": "x"}\n')),
