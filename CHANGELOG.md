@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.62.0](https://github.com/jimmyandrade/harness/compare/v0.61.0...v0.62.0) (2026-10-21)
+
+
+### Features
+
+* **levantar-contexto-do-pull-request:** add the skill that gathers the context of a pull request ([#315](https://github.com/jimmyandrade/harness/issues/315)) ([64a7ca3](https://github.com/jimmyandrade/harness/commit/64a7ca33d288faa6d2a16b8c1dcf51658b657380))
+* **priorizar-itens:** add the skill that sorts items into Must, Should, Could and Won't ([#313](https://github.com/jimmyandrade/harness/issues/313)) ([662d8b3](https://github.com/jimmyandrade/harness/commit/662d8b39b05b970f2bddf6de2967f82db7da8df3))
+* **publicar-revisao-de-codigo:** add the skill that reviews a pull request and publishes the review ([#316](https://github.com/jimmyandrade/harness/issues/316)) ([7b9a0aa](https://github.com/jimmyandrade/harness/commit/7b9a0aae863d2ededa7cefc2388cafd0099c6047))
+
 ## [0.61.0](https://github.com/jimmyandrade/harness/compare/v0.60.0...v0.61.0) (2026-10-21)
 
 
