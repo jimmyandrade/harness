@@ -48,6 +48,7 @@ import {
 import {
   allTemplateNames,
   bindTemplates,
+  coreTemplatesToPublish,
   DEFAULT_TEMPLATE_MAPPING_PATH,
   publishTemplates,
   TEMPLATES_DIR,
@@ -109,7 +110,7 @@ export async function main(argv: string[]): Promise<number> {
     templateNames = namesToPublish(changedTemplates, templateRulesChanged, allTemplateNames(root))
     coreTemplateNames =
       argv.includes("--include-core") && core !== root
-        ? coreNamesToPublish(allTemplateNames(root), allTemplateNames(core), templateRulesChanged, coreVersionChanged)
+        ? coreTemplatesToPublish(root, core, templateRulesChanged, coreVersionChanged)
         : []
   } else if (changedTemplates.length) {
     console.log(`skip templates: ${templateMappingPath} is missing`)

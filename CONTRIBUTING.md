@@ -37,7 +37,7 @@ Business harnesses call two composite actions from this repository. Each one run
 
 When the caller has the model mapping that `template-mapping` names, `.agents/mappings/template-page.notion.json` by default, the action also creates or updates a page for each changed model in `.agents/assets/templates/`, as ADR 0015 decides, and every model when that mapping changes. It writes only the properties the mapping binds, and the file body as the page body. It finds the page by the model name or one of its aliases, and never removes one. Without that file, it publishes no model.
 
-With `include-core`, which is on by default, the action also publishes the skills of this repository into the caller's Notion, with the caller's mapping, and the models of this repository when the caller has a model mapping. It does that when the change between `base` and `head` touches the caller's mapping, a file under `.github/workflows/`, `package.json`, or `package-lock.json`, which is where a business harness moves the version of this repository it uses. A skill name that exists in both repositories stops the sync.
+With `include-core`, which is on by default, the action also publishes the skills of this repository into the caller's Notion, with the caller's mapping, and the models of this repository when the caller has a model mapping. It does that when the change between `base` and `head` touches the caller's mapping, a file under `.github/workflows/`, `package.json`, or `package-lock.json`, which is where a business harness moves the version of this repository it uses. A skill name that exists in both repositories stops the sync. So does a model name, counting only files whose frontmatter has `name`.
 
 ## Releases
 

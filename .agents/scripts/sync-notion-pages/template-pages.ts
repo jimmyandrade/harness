@@ -14,6 +14,7 @@ import {
   type PageProperties,
   type StatusOptions,
 } from "./notion.ts"
+import { coreNamesToPublish } from "./project.ts"
 
 /** A model in .agents/assets/templates, published like a skill (ADR 0012). */
 export type TemplatePage = {
@@ -86,6 +87,27 @@ export function allTemplateNames(root: string): string[] {
     .filter((entry) => entry.isFile() && entry.name.endsWith(".md"))
     .map((entry) => entry.name.slice(0, -3))
     .sort()
+}
+
+/**
+ * The files of a root that are models: their frontmatter has a name. The other
+ * files are output shapes that the sync leaves out, so they cannot clash.
+ */
+export function modelNames(root: string): string[] {
+  return allTemplateNames(root).filter((name) => {
+    const parts = frontmatterParts(readFileSync(join(root, TEMPLATES_DIR, `${name}.md`), "utf8"))
+    return parts !== null && typeof frontmatterFields(parts.front.join("\n")).name === "string"
+  })
+}
+
+/** The models of this harness to publish, stopping when a project model has the same name. */
+export function coreTemplatesToPublish(
+  root: string,
+  core: string,
+  rulesChanged: boolean,
+  coreVersionChanged: boolean,
+): string[] {
+  return coreNamesToPublish(modelNames(root), modelNames(core), rulesChanged, coreVersionChanged)
 }
 
 /**

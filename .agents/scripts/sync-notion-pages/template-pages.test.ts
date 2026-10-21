@@ -10,6 +10,7 @@ import {
   type NotionApi,
 } from "./notion.ts"
 import {
+  coreNamesToPublish,
   coreRoot,
   namesToPublish,
 } from "./project.ts"
@@ -19,6 +20,8 @@ import {
 } from "./skill-pages.ts"
 import {
   allTemplateNames,
+  coreTemplatesToPublish,
+  modelNames,
   bindTemplates,
   DEFAULT_TEMPLATE_MAPPING_PATH,
   parseTemplate,
@@ -243,4 +246,16 @@ test("model mapping file matches the schema fields", () => {
   }
   assert.ok(stored.properties.status)
   assert.ok(stored.data_source_id)
+})
+
+test("only models clash between the project and the core, not files without a name", () => {
+  const project = templateRoot({ "dre-simplificada.md": "Meses nas colunas.\n", "resumo-de-reuniao.md": summaryTemplate })
+  const core = templateRoot({ "dre-simplificada.md": "Meses nas colunas.\n", "reel-do-instagram.md": reelTemplate })
+  assert.deepEqual(modelNames(project), ["resumo-de-reuniao"])
+  assert.deepEqual(modelNames(core), ["reel-do-instagram"])
+  assert.throws(() => coreNamesToPublish(allTemplateNames(project), allTemplateNames(core), true, true), /dre-simplificada exists/)
+  assert.deepEqual(coreTemplatesToPublish(project, core, true, true), ["reel-do-instagram"])
+  assert.deepEqual(coreTemplatesToPublish(project, core, false, false), [])
+  const clash = templateRoot({ "reel-do-instagram.md": reelTemplate })
+  assert.throws(() => coreTemplatesToPublish(clash, core, true, true), /reel-do-instagram exists/)
 })
