@@ -593,7 +593,8 @@ How these skills relate is in `README.md`, in this folder.
 - **Properties**:
   - Lives at `.agents/skills/definir-registro-de-reuniao/SKILL.md`
   - Reads from the project instructions where the records live: local files, a Notion database, Confluence pages, or documents in Google Drive, and asks once when the type or the address is empty
-  - Keeps an index as a file or a document for local files and Google Drive, and treats the Notion database or the Confluence page tree as the index
+  - Keeps an index file for local files, and treats the Notion database, the Confluence page tree, or the Google Drive folder as the index
+  - Keeps an index document in Google Drive only for meeting documents outside the folder, such as those another account created, and lists them by link
   - Names a local file with an ASCII slug and titles a Notion page, a Confluence page, or a Google Drive document with natural text, each by its own pattern from the project instructions
   - Uses a document that already holds the transcript, such as the notes a meeting tool generates, as the record, without copying its text
   - Looks the meeting up in the index before creating it, and fixes the existing record instead of creating another

@@ -3,7 +3,7 @@ name: definir-registro-de-reuniao
 description: Cadastra e corrige o registro de uma reunião, com título, data, participantes, resumo e índice, onde o projeto guarda os registros. Usada quando a pessoa cola uma transcrição ou pergunta se uma reunião já está registrada. Não serve para achar o contexto de uma reunião nem escrever a ata.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.4.0"
   related:
     - evoluir-habilidade
 ---
@@ -38,14 +38,14 @@ flowchart LR
   T{Tipo de armazenamento?} -->|arquivos locais| A[Um arquivo por reunião e um arquivo de índice]
   T -->|Notion| N[Uma página por reunião num banco, que é o índice]
   T -->|Confluence| C[Uma página por reunião sob uma página ou pasta, que é o índice]
-  T -->|Google Drive| D[Um documento por reunião e um documento de índice]
+  T -->|Google Drive| D[Um documento por reunião numa pasta, que é o índice]
 ```
 
 Nos arquivos locais, `Endereço dos registros` é a pasta. No Notion, o banco e o nome de cada propriedade vêm do mapeamento de dados do projeto, no workspace conectado. Se o banco não estiver nessa conexão, pare. No Confluence, é a página ou a pasta sob a qual ficam as páginas das reuniões. No Google Drive, é a pasta que guarda os documentos. O registro de reunião é sensível: ele fica só nesse lugar. Nada dele vai para repositório, pull request, mensagem nem página fora dele, e um trecho só sai com o pedido explícito da pessoa, para aquele trecho.
 
 ### Passo 2
 
-Veja se a reunião já está registrada, pela data, pelo título e pelos participantes. Em arquivos locais e no Google Drive, leia o índice, que tem o `Nome do índice`. No Notion, o próprio banco é o índice. No Confluence, são as páginas sob o endereço dos registros. Se já está, corrija o registro que existe. Não crie outro.
+Veja se a reunião já está registrada, pela data, pelo título e pelos participantes. Em arquivos locais, leia o índice, que tem o `Nome do índice`. No Notion, o próprio banco é o índice. No Confluence, são as páginas sob o endereço dos registros. No Google Drive, a pasta é o índice. Só quando há documentos de reunião fora da pasta, como os criados por outra conta, existe um documento de índice com o `Nome do índice`, que lista esses documentos por link. Se já está, corrija o registro que existe. Não crie outro.
 
 Quando a transcrição já mora num documento do armazenamento, como as anotações que a ferramenta de reunião gera, use esse documento como registro. Não copie o texto: acrescente o resumo e a linha do índice, e deixe a transcrição como está.
 
@@ -91,7 +91,7 @@ O que a pessoa confirmar entra na fonte: nome de pessoa no registro dela, termo 
 
 ### Passo 8
 
-Toda reunião registrada ou corrigida ganha uma linha no índice, com data, horário, título, participantes e o nome ou o link do registro, em ordem de data. No Notion, as propriedades da página fazem esse papel, e no Confluence a árvore de páginas sob o endereço dos registros faz, então não há linha a escrever. Nunca deixe um registro fora do índice.
+Toda reunião registrada ou corrigida em arquivo local ganha uma linha no índice, com data, horário, título, participantes e o nome do registro, em ordem de data. No Notion, as propriedades da página fazem esse papel. No Confluence, a árvore de páginas sob o endereço dos registros faz. No Google Drive, a pasta faz, e só um documento fora da pasta ganha uma linha com o link no documento de índice. Nesses casos não há linha a escrever. Nunca deixe um registro fora do índice.
 
 ### Passo 9
 
