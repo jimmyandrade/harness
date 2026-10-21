@@ -25,6 +25,7 @@ flowchart LR
     definir_arquivos_da_habilidade["definir-arquivos-da-habilidade"]
     definir_artista["definir-artista"]
     definir_ativo_imobilizado["definir-ativo-imobilizado"]
+    definir_campanha_de_conteudo["definir-campanha-de-conteudo"]
     definir_conta_bancaria["definir-conta-bancaria"]
     definir_convidado["definir-convidado"]
     definir_data_significativa["definir-data-significativa"]
@@ -42,7 +43,9 @@ flowchart LR
     definir_pessoa["definir-pessoa"]
     definir_planejamento_financeiro["definir-planejamento-financeiro"]
     definir_recurso_de_aprendizado["definir-recurso-de-aprendizado"]
+    definir_reel_do_instagram["definir-reel-do-instagram"]
     definir_reserva["definir-reserva"]
+    definir_roteiro_de_video["definir-roteiro-de-video"]
     definir_tarefa["definir-tarefa"]
     definir_tipo_do_evento["definir-tipo-do-evento"]
     definir_viagem["definir-viagem"]
@@ -57,6 +60,7 @@ flowchart LR
     mesclar_registro["mesclar-registro"]
     organizar_emails["organizar-emails"]
     organizar_ponto_de_contato["organizar-ponto-de-contato"]
+    planejar_calendario_de_conteudo["planejar-calendario-de-conteudo"]
     procurar_agenda["procurar-agenda"]
     procurar_artista["procurar-artista"]
     procurar_data_significativa["procurar-data-significativa"]
@@ -134,6 +138,8 @@ flowchart LR
   definir_ativo_imobilizado --> mesclar_registro
   definir_ativo_imobilizado --> reconhecer_imagem
   definir_ativo_imobilizado --> registrar_ciclo_do_ativo
+  definir_campanha_de_conteudo --> evoluir_habilidade
+  definir_campanha_de_conteudo --> planejar_calendario_de_conteudo
   definir_conta_bancaria --> definir_empresa
   definir_conta_bancaria --> definir_pessoa
   definir_conta_bancaria --> evoluir_habilidade
@@ -189,10 +195,15 @@ flowchart LR
   definir_planejamento_financeiro --> revisar_financas
   definir_recurso_de_aprendizado --> definir_agenda
   definir_recurso_de_aprendizado --> procurar_agenda
+  definir_reel_do_instagram --> criar_ideia_de_conteudo
+  definir_reel_do_instagram --> definir_roteiro_de_video
+  definir_reel_do_instagram --> evoluir_habilidade
+  definir_reel_do_instagram --> planejar_calendario_de_conteudo
   definir_reserva --> definir_agenda
   definir_reserva --> definir_agenda_de_popstar
   definir_reserva --> revisar_uso_do_tempo
   definir_reserva --> sincronizar_cronograma
+  definir_roteiro_de_video --> evoluir_habilidade
   definir_tarefa --> definir_grafia
   definir_tarefa --> procurar_tarefa
   definir_tipo_do_evento --> criar_oportunidade
@@ -257,6 +268,10 @@ flowchart LR
   organizar_ponto_de_contato --> definir_viagem
   organizar_ponto_de_contato --> procurar_oportunidade
   organizar_ponto_de_contato --> sincronizar_cronograma
+  planejar_calendario_de_conteudo --> criar_ideia_de_conteudo
+  planejar_calendario_de_conteudo --> definir_campanha_de_conteudo
+  planejar_calendario_de_conteudo --> definir_reel_do_instagram
+  planejar_calendario_de_conteudo --> evoluir_habilidade
   procurar_agenda --> criar_oportunidade
   procurar_agenda --> definir_agenda
   procurar_agenda --> definir_agenda_de_popstar
