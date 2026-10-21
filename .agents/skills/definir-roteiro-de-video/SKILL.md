@@ -4,10 +4,12 @@ description: Use essa habilidade sempre que for criar, revisar ou adaptar o rote
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.3.1"
   internal: true
   related:
     - evoluir-habilidade
+  models:
+    - roteiro-de-video
 ---
 
 # Definir roteiro de vídeo
@@ -54,7 +56,7 @@ A originalidade está na estrutura e nos gatilhos reaproveitados, não em ficç�
 
 ### Passo 3
 
-Leia .agents/assets/templates/roteiro-de-video.md quando for gerar a saída.
+Leia o modelo de saída `roteiro-de-video` quando for gerar a saída.
 
 - O gancho ocupa de 0 a 3 segundos. Começa no conflito, na provocação ou na pergunta, sem saudação.
 - Cada fala vai em blockquote, com a marcação entre colchetes antes do texto falado. A marcação serve à gravação, à direção e à voz gerada por IA.
