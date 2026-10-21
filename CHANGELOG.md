@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.66.0](https://github.com/jimmyandrade/harness/compare/v0.65.0...v0.66.0) (2026-10-21)
+
+
+### Features
+
+* **publicar-revisao-de-codigo:** add the parameter that publishes the review in a scheduled run ([#328](https://github.com/jimmyandrade/harness/issues/328)) ([ae9a526](https://github.com/jimmyandrade/harness/commit/ae9a52610796604dd2726ec74cb1c0c375d11551))
+
 ## [0.65.0](https://github.com/jimmyandrade/harness/compare/v0.64.0...v0.65.0) (2026-10-21)
 
 
