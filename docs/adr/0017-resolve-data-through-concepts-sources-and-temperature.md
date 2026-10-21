@@ -41,7 +41,17 @@ The skill reads the list from its own entry in the project instructions, then fr
 
 ADR 0002 keeps task storage behind a port that speaks the logical schema. The same decision applies to every concept: an operation to find, to get, and to write a record, shaped by the concept, and an adapter for each store. An adapter loads its own mapping, as the Notion adapter loads the Notion property mapping. The skill sees one port.
 
-### Temperature decides the read
+### A source is usable only where the agent can reach it
+
+The agent runs in different places. In Claude Code, Codex, or Cursor it reads the local file system, so it reaches a local cache and the user-level instructions. The Notion agent does not: it can only query Notion, with a structured query or a semantic search. A source the runtime cannot reach is skipped, and the skill uses the next reachable source in the list. A cache is one source among the others, never a requirement.
+
+- A Notion business that uses Notion as its database lists Notion alone. The skill reads and writes Notion directly, whether the agent runs in Notion or elsewhere, and no cache is involved.
+- A business that lists a local cache and Notion gets the cache first from an agent that can read files, and Notion directly from the Notion agent. It is the same skill and the same instructions.
+- The skill asks the port for an operation: find, get, or write. The adapter chooses the mechanism, a structured query or a semantic search for Notion, and the skill does not.
+
+### Temperature decides the read, when there is a cache
+
+Temperature only matters when a reachable cache is in the list. Without one, the skill reads the source of record every time, as above.
 
 - **Cold data** is read from the cache first. The source of record is read only when the cache has no such record, when the record is older than the freshness limit, or when the person asks for a refresh. A refresh updates the cache.
 - **Hot data** is read from the source of record on every run. A cache may hold it only for the length of one run.
@@ -49,7 +59,7 @@ ADR 0002 keeps task storage behind a port that speaks the logical schema. The sa
 
 ### Writes go through to the cache and the source
 
-A confirmed write updates the cache and then the source of record that the project names. A record that a person confirmed does not lose that value when a refresh reads something different: the refresh reports the difference and keeps the confirmed value until the person decides. The rule for a partial failure lives in the adapter, as ADR 0002 decides, and not in the skill.
+A confirmed write updates the reachable sources of the list: the cache, when there is one, and then the source of record that the project names. A write from an agent that cannot reach the cache, such as the Notion agent, lands only in the source of record. The cache then lags, and its freshness limit or a refresh brings it back. A record that a person confirmed does not lose that value when a refresh reads something different: the refresh reports the difference and keeps the confirmed value until the person decides. The rule for a partial failure lives in the adapter, as ADR 0002 decides, and not in the skill.
 
 ### The cache
 
@@ -74,9 +84,9 @@ While a skill is below 1.0.0, it may be renamed to describe its real scope. The 
 
 ## Consequences
 
-A business that stores minutes in Confluence, Notion, Drive, or local files uses the same skill with a different list of sources, as ADR 0007 prefers when a difference is only a value.
+A business that stores minutes in Confluence, Notion, Drive, or local files uses the same skill with a different list of sources, as ADR 0007 prefers when a difference is only a value. A business whose database is Notion keeps working exactly as today, with no cache, and the Notion agent keeps reading and writing Notion directly.
 
-Cold data costs one local read in most runs. The source of record is read in a refresh, not in each conversation.
+With a cache, cold data costs one local read in most runs, and the source of record is read in a refresh, not in each conversation. Without one, every read goes to the source, and the skill must still work.
 
 The core gains an adapter contract and a cache tool to maintain. A new store is a new adapter, not a change to a skill.
 
@@ -90,4 +100,5 @@ Several core skills need an audit against this decision: the ones for people, sp
 
 - Which language and runtime the cache tool uses. The scripts of this repository are TypeScript on Node.js 24 and Python, and this decision does not choose.
 - How a Notion business, whose agent cannot read the user-level file, shares values between projects.
+- How a skill tells which source the runtime reaches: by a declared capability of the runtime, or by trying the source and falling back.
 - Whether a collection that is neither cold nor hot, such as the review priority of a person, needs a third temperature or only a shorter freshness limit.
