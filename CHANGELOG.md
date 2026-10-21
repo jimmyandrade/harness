@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.67.0](https://github.com/jimmyandrade/harness/compare/v0.66.0...v0.67.0) (2026-10-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* **definir-link-rastreavel:** the skill definir-link-utm is now definir-link-rastreavel.
+
+### Features
+
+* **definir-link-rastreavel:** rename definir-link-utm, allow utm_id for external ids and internal-link UTMs by parameter ([#325](https://github.com/jimmyandrade/harness/issues/325)) ([5193cde](https://github.com/jimmyandrade/harness/commit/5193cdef98254364b80100a8b0cde5349c298ff6))
+
 ## [0.66.0](https://github.com/jimmyandrade/harness/compare/v0.65.0...v0.66.0) (2026-10-21)
 
 
