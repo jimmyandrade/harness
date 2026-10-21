@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.58.0](https://github.com/jimmyandrade/harness/compare/v0.57.0...v0.58.0) (2026-10-21)
+
+
+### Features
+
+* give model pages their own icon, script in gray by default ([#300](https://github.com/jimmyandrade/harness/issues/300)) ([6551da0](https://github.com/jimmyandrade/harness/commit/6551da00505e0bca1306a410f467ec8c56d1a5b5))
+
 ## [0.57.0](https://github.com/jimmyandrade/harness/compare/v0.56.0...v0.57.0) (2026-10-21)
 
 
