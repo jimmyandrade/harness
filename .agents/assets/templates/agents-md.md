@@ -4,7 +4,6 @@ metadata:
   version: "0.1.0"
   parameters:
     "Global":
-      "Idioma das instruções do projeto": "português"
       "Banco de modelos no Notion": "<link do banco de modelos de saída no Notion>"
       "<chave exata usada por mais de uma habilidade>": "<valor>"
     "<nome-da-habilidade>":
