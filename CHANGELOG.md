@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.56.0](https://github.com/jimmyandrade/harness/compare/v0.55.0...v0.56.0) (2026-10-21)
+
+
+### Features
+
+* end answers with the next step and link every pull request ([#294](https://github.com/jimmyandrade/harness/issues/294)) ([3942a37](https://github.com/jimmyandrade/harness/commit/3942a37ff4b035c29ce83ccf3005d5d4a03b07c5))
+* write the core AGENTS.md in Brazilian Portuguese ([#296](https://github.com/jimmyandrade/harness/issues/296)) ([a126c9a](https://github.com/jimmyandrade/harness/commit/a126c9a5fad9675aaf254ca4c7793f2f6ee228e2))
+
+
+### Bug Fixes
+
+* compare only models when the project and the core share a model name ([#295](https://github.com/jimmyandrade/harness/issues/295)) ([4a89df8](https://github.com/jimmyandrade/harness/commit/4a89df84f84baa0e54d93770ab77745753f2e83e))
+
 ## [0.55.0](https://github.com/jimmyandrade/harness/compare/v0.54.0...v0.55.0) (2026-10-21)
 
 
