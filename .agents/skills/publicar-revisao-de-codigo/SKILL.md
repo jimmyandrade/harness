@@ -3,7 +3,7 @@ name: publicar-revisao-de-codigo
 description: Revisa um pull request e publica a revisão numa única review, com os comentários inline, no idioma de quem recebe e no tom do projeto. Usada quando a pessoa pede uma revisão ou outra habilidade precisa publicar uma. Não serve para tratar os comentários que você recebeu no seu PR.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.4.0"
   notion: "false"
   aliases:
     - post-code-review
@@ -26,6 +26,9 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Revelar que a revisão foi automática": "sim"
 "Idioma da revisão sem preferência conhecida": "o idioma do projeto"
 "Tradução recolhível": "não"
+"Idioma pelo histórico": "o idioma que predomina"
+"Gravar o idioma levantado": "não"
+"Voz em PR aberto por bot": ""
 "Frase sobre o idioma": "sim"
 "Ação com Deve ter": "solicitar mudanças"
 "Ação com Deveria ter": "comentar sem aprovar"
@@ -97,6 +100,8 @@ Este passo só depende do PR e do registro da pessoa, e pode virar uma habilidad
 
 Com tradução recolhível, o texto principal vem no primeiro idioma e a tradução logo abaixo, dentro de um bloco recolhido, com a mesma voz. Código, nomes de arquivo e identificadores ficam iguais.
 
+`Idioma pelo histórico` diz como decidir pelo que a pessoa já escreveu, e uma regra de limiar, como "se o português é metade ou mais, o idioma é inglês com tradução recolhida em português; abaixo disso, só inglês, de forma provisória até ela se posicionar", vale no lugar do idioma que predomina. O histórico sozinho nunca decide que a revisão sai no idioma da própria pessoa com tradução no outro: isso só vem de uma preferência dita por ela. Nunca sobrescreva uma preferência que a pessoa disse ou que já se estabeleceu. Com `Gravar o idioma levantado` em `sim`, grave no registro da pessoa o idioma, que veio do histórico, a proporção e uma amostra, e nunca diga a proporção em texto publicado.
+
 Com `Frase sobre o idioma` em `sim`, diga numa frase, uma vez por rodada, que você escreveu naquele idioma pensando na pessoa. Nunca diga de onde veio a preferência nem que foi combinada em privado.
 
 ### Passo 8
@@ -114,6 +119,7 @@ Escreva os textos com `redigir-com-tom-de-voz`, para o tom de quem publica. Cada
 - Escreva em palavras, não pelo rótulo: com `Rótulo de prioridade no texto` em `não`, o nome da categoria nunca aparece.
 - Com `Revelar que a revisão foi automática` em `não`, não mencione automação, ferramenta, nome de habilidade nem quantos comentários há, e não deixe rodapé de ferramenta.
 - Aplique `Abertura da revisão`.
+- Com `Voz em PR aberto por bot` em `nós`, num PR aberto por um bot, nunca escreva "você", "seu" nem @menção ao autor: use a primeira pessoa do plural, "nós", como se o ponto fosse para a discussão do time. Vale no corpo, nos comentários, nas respostas em thread e na tradução.
 - Seja curto. Não escreva frase que uma pessoa não escreveria.
 
 ### Passo 10

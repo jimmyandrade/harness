@@ -3,7 +3,7 @@ name: levantar-contexto-do-pull-request
 description: Levanta o contexto de um pull request antes de revisar, responder ou ajustar. Cobre o estado, as convenções do repositório, os comentários já feitos, o card e as conversas ligados, o propósito e o trabalho parecido. Usada em PR de outra pessoa e no seu. Não serve para revisar o diff nem publicar texto.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   notion: "false"
   related:
     - definir-registro-de-reuniao
@@ -21,10 +21,11 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Fontes de conversa": ""
 "Fontes de registro de reunião": ""
 "Repositórios vizinhos": ""
+"Contexto privado por repositório": ""
 "Modo de aprendizado": "perguntar"
 ```
 
-`Fontes do card` diz onde estão os cards, como o rastreador de tarefas do projeto. `Fontes de conversa` diz onde ler as conversas citadas. `Fontes de registro de reunião` diz onde estão os registros de reunião. `Repositórios vizinhos` lista, separados por vírgula, os repositórios onde procurar trabalho parecido. Um valor vazio usa só o que o PR cita.
+`Fontes do card` diz onde estão os cards, como o rastreador de tarefas do projeto. `Fontes de conversa` diz onde ler as conversas citadas. `Fontes de registro de reunião` diz onde estão os registros de reunião. `Contexto privado por repositório` diz onde ficam as notas pessoais de cada repositório, com a parte técnica, a sensível e o status combinado de PRs específicos. `Repositórios vizinhos` lista, separados por vírgula, os repositórios onde procurar trabalho parecido. Um valor vazio usa só o que o PR cita.
 
 ## Instruções
 
@@ -40,7 +41,8 @@ Leia as convenções do repositório do PR:
 
 - as instruções do repositório e as seções que elas citam para PR, branch e revisão;
 - as habilidades do próprio repositório, em qualquer pasta de agentes, e o template de PR;
-- o arquivo de contexto do projeto para esse repositório, se as instruções do projeto o citarem.
+- o arquivo de contexto do projeto para esse repositório, se as instruções do projeto o citarem;
+- o `Contexto privado por repositório`, se existir: a parte técnica calibra o que vira achado, a sensível calibra a postura com a pessoa, e o status combinado evita revisar o que ficou combinado não revisar. É conteúdo privado, como no Passo 4: nada da parte sensível aparece em texto publicado, e o texto nunca diz que o documento existe.
 
 Liste a pasta `.github` antes de concluir que o repositório não tem convenções.
 
