@@ -798,6 +798,21 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [ ] Three cases validated with the person
 
+### limpar-copias-de-trabalho
+- **Stability**: experimental
+- **Description**: Remove the git worktrees a coding session left behind, after checking that nothing is lost
+- **Properties**:
+  - Lives at `.agents/skills/limpar-copias-de-trabalho/SKILL.md`
+  - Does not sync to Notion, because it needs a shell
+  - Runs at the end of every session whose work landed, and removes without asking: the checks are the safety
+  - Leaves the worktrees the Claude app made, in `.claude/worktrees`, to the app's own cleanup, and the session's own worktree to its exit tool
+  - Removes a worktree only when it is not the main checkout or a folder of an open session, has no change outside git other than installed dependencies, and its work is on a remote branch or in a merged pull request
+  - Treats a missing remote branch after a squash merge as landed when the pull request is merged
+  - Removes the local branch too, prunes worktrees whose folder is gone, and reports the space freed and why each kept worktree stayed
+- **Test Criteria**:
+  - [ ] A session with merged pull requests ends with their worktrees and branches removed and the space freed reported
+  - [ ] A worktree with an untracked file other than dependencies stays, with the reason
+
 ### liberar-espaco-em-disco
 - **Stability**: experimental
 - **Description**: Free disk space on a Mac without losing a file, only from caches that rebuild themselves

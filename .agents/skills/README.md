@@ -56,6 +56,7 @@ flowchart LR
     lancar_despesa_da_empresa["lancar-despesa-da-empresa"]
     lancar_despesa_pessoal["lancar-despesa-pessoal"]
     liberar_espaco_em_disco["liberar-espaco-em-disco"]
+    limpar_copias_de_trabalho["limpar-copias-de-trabalho"]
     medir_habilidade["medir-habilidade"]
     mesclar_registro["mesclar-registro"]
     organizar_emails["organizar-emails"]
@@ -251,6 +252,10 @@ flowchart LR
   lancar_despesa_pessoal --> evoluir_habilidade
   lancar_despesa_pessoal --> lancar_despesa_da_empresa
   liberar_espaco_em_disco --> evoluir_habilidade
+  liberar_espaco_em_disco --> limpar_copias_de_trabalho
+  limpar_copias_de_trabalho --> criar_pull_request
+  limpar_copias_de_trabalho --> evoluir_habilidade
+  limpar_copias_de_trabalho --> liberar_espaco_em_disco
   medir_habilidade --> evoluir_habilidade
   mesclar_registro --> definir_empresa
   mesclar_registro --> definir_grafia
