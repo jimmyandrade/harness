@@ -1,7 +1,7 @@
 ---
 locale: en
 metadata:
-  version: "1.6.0"
+  version: "1.7.0"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -35,6 +35,10 @@ metadata:
 - Parameter values form a tree under `metadata.parameters`, as ADR 0008 decides: an entry named after the skill, then an entry named `Global`. A skill reads its own entry first, then `Global`. A value at the top level of the parameters counts as `Global`.
 - A parameter that the project instructions do not set uses the default written in the skill. When the skill has no default, ask once and stop.
 - The sync writes the project instructions page in Notion from `AGENTS.md`, as ADR 0008 decides, with the description and `metadata.version` of its frontmatter, and its parameters in a YAML code block at the end of the page. Never edit that page by hand: change `AGENTS.md` in the business harness.
+
+## Answers
+
+- Open every answer with what must be done and who does it. End it with a suggested next step and, when there is one, the decision that is the person's to make.
 
 ## Git
 
