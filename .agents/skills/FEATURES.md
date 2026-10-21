@@ -587,6 +587,26 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses choosing words in the tone of voice, registering only the idea, publishing the post, and creating a carousel
 
+### definir-registro-de-reuniao
+- **Stability**: experimental
+- **Description**: Register or fix the local record of a meeting from a pasted transcript
+- **Properties**:
+  - Lives at `.agents/skills/definir-registro-de-reuniao/SKILL.md` and stays outside Notion, because the records are local files
+  - Keeps every record in a local collection that the project names, and never sends it to a repository, a cloud, a pull request, or a shared page
+  - Looks the meeting up in the index before creating it, and fixes the existing record instead of creating another
+  - Finds the title, date, start time, and participants in the connected calendar before asking, and asks once when no single event fits
+  - Names the file with the meeting date, the start time, and a short title, and starts it with a level 1 heading and a block with date, participants, and source
+  - Keeps the raw transcript unchanged after the summary, and applies spelling corrections only to the summary
+  - Records as a decision only what was said as a decision, and marks illegible passages as uncertain
+  - Does not assign an action to a person from the pronoun or the position of a line when the transcript does not say who speaks, and asks for each assignment with the hypothesis ready
+  - Lists each unknown name or term with the lines around it and asks, and records only what the person confirms
+  - Keeps the topics the project lists out of the summary, while the raw transcript keeps them
+  - Adds one index line for every record it creates or fixes, and brings a file with the wrong heading, extension, or name to the pattern
+  - Does not find the context of a past meeting, write the minutes, or publish outside the local collection
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [ ] Three cases validated with the person
+
 ### definir-reserva
 - **Stability**: experimental
 - **Description**: Keep a reservation, a provisional block, a pending event, or a reminder provisional until participation is explicitly confirmed
