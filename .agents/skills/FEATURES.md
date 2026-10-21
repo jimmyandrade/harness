@@ -159,6 +159,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Stability**: experimental
 - **Description**: Open, update, and merge a pull request without pushing to the base branch
 - **Properties**:
+  - Before creating the branch, checks that the demand has a task in the tracker of the project, and suggests creating it first when it has none. The task key goes in the branch name and the pull request title as the repository convention says
   - Skill at `.agents/skills/criar-pull-request/`
   - Reads the repository, base branch, merge method, PR language, test and build commands, and push timing from the project instructions
   - Opens a pull request only from a `type/short-description` branch, and renames a branch a tool created with another prefix before the push. A rename after the pull request opens closes it, so a new pull request replaces it
