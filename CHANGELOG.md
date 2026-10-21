@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.59.0](https://github.com/jimmyandrade/harness/compare/v0.58.0...v0.59.0) (2026-10-21)
+
+
+### Features
+
+* **limpar-copias-de-trabalho:** add the worktree cleanup skill ([#302](https://github.com/jimmyandrade/harness/issues/302)) ([6e9c50e](https://github.com/jimmyandrade/harness/commit/6e9c50ec92a548a9a81321bd4654dbfae45cdc2c))
+
 ## [0.58.0](https://github.com/jimmyandrade/harness/compare/v0.57.0...v0.58.0) (2026-10-21)
 
 
