@@ -1,10 +1,12 @@
 ---
-name: definir-issue
+name: definir-issue-do-github
 description: Abre, revisa, edita e traduz issues do GitHub no idioma do projeto. Usada quando a demanda técnica vira issue, mesmo sem dizer issue. Não serve para tarefa fora do GitHub, para o pull request nem para triar a demanda.
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.1"
+  version: "0.2.0"
+  aliases:
+    - definir-issue
   related:
     - criar-pull-request
     - evoluir-habilidade
@@ -12,7 +14,7 @@ metadata:
     - issue-do-github
 ---
 
-# Definir issue
+# Definir issue do GitHub
 
 ## Parâmetros de configuração
 

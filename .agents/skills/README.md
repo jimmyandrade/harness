@@ -37,7 +37,7 @@ flowchart LR
     definir_historia_de_usuario["definir-historia-de-usuario"]
     definir_inscricao["definir-inscricao"]
     definir_instrucoes_do_projeto["definir-instrucoes-do-projeto"]
-    definir_issue["definir-issue"]
+    definir_issue_do_github["definir-issue-do-github"]
     definir_jornada_de_producao["definir-jornada-de-producao"]
     definir_lancamento["definir-lancamento"]
     definir_link_utm["definir-link-utm"]
@@ -185,8 +185,8 @@ flowchart LR
   definir_inscricao --> procurar_oportunidade
   definir_instrucoes_do_projeto --> criar_habilidade
   definir_instrucoes_do_projeto --> evoluir_habilidade
-  definir_issue --> criar_pull_request
-  definir_issue --> evoluir_habilidade
+  definir_issue_do_github --> criar_pull_request
+  definir_issue_do_github --> evoluir_habilidade
   definir_jornada_de_producao --> definir_agenda
   definir_jornada_de_producao --> definir_agenda_de_popstar
   definir_jornada_de_producao --> organizar_ponto_de_contato
