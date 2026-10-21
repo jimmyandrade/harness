@@ -509,7 +509,8 @@ How these skills relate is in `README.md`, in this folder.
 - **Properties**:
   - Lives at `.agents/skills/definir-link-rastreavel/SKILL.md`
   - Answers to the earlier names `definir-link-utm`, `definir-parametros-utm`, `definir-rastreio-de-link`, and `gerar-link-com-parametros-utm` through `metadata.aliases`
-  - Reads the allowed sources, mediums, and own domains from parameters, and asks instead of inventing a value
+  - Reads the allowed sources and mediums from a field of a data source in the connected workspace when the project names one, or else from the parameter lists, and asks instead of inventing a value
+  - Reads the own domains from parameters
   - Keeps `utm_term` empty except for a paid keyword or an automation keyword
   - Separates words in every value with one `Separador`, underscore by default, in every place that builds links (site, on-screen generator, API, MCP, command line), and converts slugs to it
   - Never puts an internal id (page, database, record, user, or CRM) or personal data in any parameter, and uses the public name, such as the event slug, in `utm_campaign`
