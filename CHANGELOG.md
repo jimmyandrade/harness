@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.78.0](https://github.com/jimmyandrade/harness/compare/v0.77.0...v0.78.0) (2026-10-22)
+
+
+### Features
+
+* **definir-link-rastreavel:** build the campaign name from a template ([#354](https://github.com/jimmyandrade/harness/issues/354)) ([1893ec1](https://github.com/jimmyandrade/harness/commit/1893ec1672c2a588fb061529e79619034f33e5ca))
+
 ## [0.77.0](https://github.com/jimmyandrade/harness/compare/v0.76.0...v0.77.0) (2026-10-22)
 
 
