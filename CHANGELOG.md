@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.77.0](https://github.com/jimmyandrade/harness/compare/v0.76.0...v0.77.0) (2026-10-22)
+
+
+### Features
+
+* **definir-pessoa:** add local file storage, identity resolution sources and the rules of precise updates and the name a person is called by ([#352](https://github.com/jimmyandrade/harness/issues/352)) ([706913f](https://github.com/jimmyandrade/harness/commit/706913f118394f0339c348c3e388e29dc516f4fa))
+
 ## [0.76.0](https://github.com/jimmyandrade/harness/compare/v0.75.0...v0.76.0) (2026-10-22)
 
 
