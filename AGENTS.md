@@ -1,6 +1,6 @@
 ---
 metadata:
-  version: "1.13.0"
+  version: "1.14.0"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -20,6 +20,7 @@ metadata:
       "Idioma da issue": "português do Brasil"
       "Idioma das instruções do projeto": "português do Brasil"
       "Idioma das respostas": "português do Brasil"
+      "Idioma das decisões de arquitetura": "inglês"
 ---
 
 # Instruções do projeto
@@ -94,4 +95,5 @@ metadata:
 - O `FEATURES.md` lista as ferramentas que uma pessoa ou um repositório usa diretamente. Cada skill tem a entrada dela em `.agents/skills/FEATURES.md`, escrita à mão. Quando uma skill vem para cá, a entrada dela vai para `.agents/skills/FEATURES.md`. Não copie um documento para outro.
 - O `INSTALL.md` é o índice dos runbooks de instalação em `docs/runbooks/`, um por ferramenta, cada um uma lista de passos com um comando e uma verificação. Os harnesses de negócio apontam para eles e guardam no próprio `INSTALL.md` só os valores do negócio. Um runbook copia um arquivo de configuração de `examples/` em vez de mostrá-lo no texto; a versão fixada num exemplo é `vX.Y.Z`, que o runbook troca.
 - Nenhum documento Markdown cita uma release, como `v1.2.3`, a não ser o `CHANGELOG.md`. Cite o arquivo que fixa a versão, como o `package.json`. Um harness de negócio segue a mesma regra nos próprios documentos. O Renovate move as versões fixadas, não o texto, então uma versão no texto fica desatualizada na release seguinte. A versão de exemplo é `vX.Y.Z`.
-- As decisões de arquitetura ficam em `docs/adr/`, em inglês.
+- As decisões de arquitetura ficam em `docs/adr/`, no `Idioma das decisões de arquitetura`, que tem inglês como padrão. Um projeto que quer as decisões em outro idioma, por exemplo para quem vai cuidar dele depois, define esse parâmetro no próprio `AGENTS.md`.
+- Fica em `docs/adr/` só a decisão que vale. Quando uma decisão substitui outra inteira, apague a antiga; quando substitui só uma parte, tire essa parte da antiga. A nova decisão conta o que mudou e por quê, e o histórico do git guarda o texto antigo.
