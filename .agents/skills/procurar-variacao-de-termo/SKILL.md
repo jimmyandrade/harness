@@ -96,7 +96,7 @@ A busca não achou casas. Casa já estava. Disse que casas não existe, que é o
 
 ## Scripts disponíveis
 
-- `node node_modules/vocabulary/dist/cli.js lookup --language <idioma> --term <termo>` lê um termo e devolve se ele existe e a linha guardada.
+- `node node_modules/harness/vocabulary/dist/cli.js lookup --language <idioma> --term <termo>` lê um termo e devolve se ele existe e a linha guardada.
 - `--glossary`, antes do comando, aponta outro vocabulário.
 - `lookup_term`, no servidor `vocabulary`, faz a mesma consulta quando não há terminal.
 

@@ -769,7 +769,7 @@ How these skills relate is in `README.md`, in this folder.
   - Keeps the history and limits of a term in notes, apart from the description, without changing the level
   - Uses insert when the person is registering and does not name a mode, update when an existing term changes, and upsert when the batch does both
   - Corrects a stored term by sending only the fields that change, reading the row before and after, and clearing a field only when the person asks
-  - Reads and writes with `node node_modules/vocabulary/dist/cli.js lookup`, `exists`, and `terms` when there is a terminal, and with the MCP tools `lookup_term`, `exists_in_text`, and `write_terms` when there is not
+  - Reads and writes with `node node_modules/harness/vocabulary/dist/cli.js lookup`, `exists`, and `terms` when there is a terminal, and with the MCP tools `lookup_term`, `exists_in_text`, and `write_terms` when there is not
   - Stops without a terminal and without the MCP server, as in a Notion agent
   - Leaves writing brand text to redigir-com-tom-de-voz, and does not invent a term
 - **Test Criteria**:
@@ -1172,7 +1172,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Description**: Say whether a term or its gender, number, or spelling variations are in the glossary
 - **Properties**:
   - Lives at `.agents/skills/procurar-variacao-de-termo/SKILL.md`
-  - Reads each form with `node node_modules/vocabulary/dist/cli.js lookup`, or the MCP tool `lookup_term` without a terminal, and stops without both
+  - Reads each form with `node node_modules/harness/vocabulary/dist/cli.js lookup`, or the MCP tool `lookup_term` without a terminal, and stops without both
   - Says which forms are registered, with their state, and which are not
   - Suggests registering the missing forms and asks the state of each one, without writing
   - Sends the registration to definir-vocabulario
@@ -1209,7 +1209,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Description**: Write, suggest, review, and rewrite brand text in the project's voice
 - **Properties**:
   - Lives at `.agents/skills/redigir-com-tom-de-voz/SKILL.md`
-  - Writes in the voice of the project that is open and reads that project's glossary, with `node node_modules/vocabulary/dist/cli.js lookup` and `exists` when there is a terminal and the CLI is installed, and with the MCP tools when there is no terminal or the CLI is not available
+  - Writes in the voice of the project that is open and reads that project's glossary, with `node node_modules/harness/vocabulary/dist/cli.js lookup` and `exists` when there is a terminal and the CLI is installed, and with the MCP tools when there is no terminal or the CLI is not available
   - Without a terminal and without the MCP server, as in a Notion agent, reads the glossary only from a source the project instructions name, or stops
   - Reads the glossary with the tags of the speaker, the event, and the channel of the text, so a term of another context stays out
   - Writes the stored spelling of a case-sensitive term when a read reports case_matches false

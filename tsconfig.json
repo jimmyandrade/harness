@@ -8,9 +8,12 @@
     "strict": true,
     "skipLibCheck": true,
     "verbatimModuleSyntax": true,
-    "types": ["node"]
+    "types": [
+      "node"
+    ]
   },
   "include": [
-    ".agents/scripts/sync-notion-pages/**/*.ts"
+    ".agents/scripts/sync-notion-pages/**/*.ts",
+    "vocabulary/api/**/*.ts"
   ]
 }
