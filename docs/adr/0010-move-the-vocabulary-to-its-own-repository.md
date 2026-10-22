@@ -6,7 +6,7 @@ locale: en
 
 ## Status
 
-Accepted
+Superseded by ADR 0015
 
 ## Context
 
