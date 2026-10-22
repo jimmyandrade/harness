@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.79.0](https://github.com/jimmyandrade/harness/compare/v0.78.0...v0.79.0) (2026-10-22)
+
+
+### Features
+
+* **definir-registro-de-reuniao:** add the step that appends the summary to the event description with confirmation ([#357](https://github.com/jimmyandrade/harness/issues/357)) ([52235d4](https://github.com/jimmyandrade/harness/commit/52235d43bf6bcfafeb5571d3c7b7540793af0456))
+
 ## [0.78.0](https://github.com/jimmyandrade/harness/compare/v0.77.0...v0.78.0) (2026-10-22)
 
 
