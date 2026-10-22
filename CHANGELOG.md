@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.75.0](https://github.com/jimmyandrade/harness/compare/v0.74.0...v0.75.0) (2026-10-22)
+
+
+### Features
+
+* **publicar-revisao-de-codigo:** add the complete review criterion, the Could-have limit and the priority by theme parameters ([#348](https://github.com/jimmyandrade/harness/issues/348)) ([21880df](https://github.com/jimmyandrade/harness/commit/21880df21645d111467a9190e3328f883826026b))
+
 ## [0.74.0](https://github.com/jimmyandrade/harness/compare/v0.73.0...v0.74.0) (2026-10-21)
 
 
