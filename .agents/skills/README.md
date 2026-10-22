@@ -225,6 +225,7 @@ flowchart LR
   definir_reel_do_instagram --> definir_roteiro_de_video
   definir_reel_do_instagram --> evoluir_habilidade
   definir_reel_do_instagram --> planejar_calendario_de_conteudo
+  definir_registro_de_reuniao --> definir_agenda
   definir_registro_de_reuniao --> definir_grafia
   definir_registro_de_reuniao --> definir_pessoa
   definir_registro_de_reuniao --> evoluir_habilidade
