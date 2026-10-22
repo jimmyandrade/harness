@@ -3,8 +3,9 @@ name: definir-registro-de-reuniao
 description: Cadastra e corrige o registro de uma reunião, com título, data, participantes, resumo e índice, onde o projeto guarda os registros. Usada quando a pessoa cola uma transcrição ou pergunta se uma reunião já está registrada. Não serve para achar o contexto de uma reunião nem escrever a ata.
 metadata:
   author: jimmyandrade
-  version: "0.7.0"
+  version: "0.8.0"
   related:
+    - definir-agenda
     - definir-grafia
     - definir-pessoa
     - evoluir-habilidade
@@ -29,6 +30,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Fonte de identidade das pessoas": ""
 "Fonte de correções de termos": ""
 "Assuntos fora do resumo": ""
+"Confirmar antes de escrever na descrição": "sim"
+"Título da seção de resumo": "Resumo da reunião"
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -103,6 +106,10 @@ Toda reunião registrada ou corrigida em arquivo local ganha uma linha no índic
 Registro sem título em heading de nível 1, sem a extensão certa ou com nome ou título fora do padrão do seu tipo de armazenamento: corrija o título, a extensão, o nome e a linha do índice antes de dizer que está registrado. O registro já existir antes da skill não é motivo para deixá-lo fora do padrão.
 
 ### Passo 10
+
+Se a pessoa quer o resumo na descrição do evento da agenda, use o evento que o Passo 3 achou, e só ele. A descrição de um evento com convidados fica visível a outras pessoas. Com `Confirmar antes de escrever na descrição` em `sim`, mostre o texto exato e o evento de destino, e só grave depois que a pessoa confirmar aquela atualização, para aquele evento. Anexe o texto ao que já existe, numa seção separada com o `Título da seção de resumo`, com `definir-agenda`, e releia o evento para conferir que o texto antigo continua lá. Não sobrescreva, não resuma e não apague o que estava escrito. Use só o necessário para identificar o evento e não busque nem exponha dado de outros participantes além disso.
+
+### Passo 11
 
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
