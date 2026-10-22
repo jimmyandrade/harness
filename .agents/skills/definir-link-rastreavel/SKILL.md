@@ -3,7 +3,7 @@ name: definir-link-rastreavel
 description: Monta, revisa ou corrige os parâmetros UTM de um link, do jeito que o padrão define, sem dado interno nem pessoal. Usada quando alguém vai divulgar um link e quer medir de onde vêm os acessos, ou quando um link, um gerador ou um código monta UTM fora do padrão. Não serve para encurtar o link, criar o post nem ler o relatório do Analytics.
 metadata:
   author: jimmyandrade
-  version: "0.8.0"
+  version: "0.9.0"
   aliases:
     - definir-link-utm
     - definir-parametros-utm
@@ -30,6 +30,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "UTM em link no mesmo site": "não"
 "Separador": "_"
 "Modelo do nome da campanha": ""
+"Táticas": []
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -51,6 +52,7 @@ Monte cada parâmetro com o significado do padrão:
 - `utm_content`: a peça, a variação ou a posição do link na peça.
 - `utm_term`: só a palavra-chave de mídia paga ou a palavra que a pessoa digitou numa automação. Fora disso, fica vazio.
 - `utm_id`: o id público da campanha, quando ele existe. Vem da plataforma de anúncio, como o Google Ads ou o Meta Ads, ou de um id que o projeto gera para a campanha e que pode combinar o evento com quem divulga: a marca, um artista ou um influencer. Sem esse id, fica vazio.
+- `utm_marketing_tactic`: o papel interno de quem divulga, de `Táticas`, quando uma pessoa do time divulga com o próprio perfil. Fora disso, fica vazio.
 
 Origem ou meio que não está no data source nem na lista: pergunte. Não invente um valor novo nem grave a linha no data source.
 
@@ -117,6 +119,7 @@ O id interno do evento sai de `utm_term`. `utm_id` leva o id público da campanh
 - O destino é do mesmo site da página: siga `UTM em link no mesmo site`.
 - Gerador, API, MCP ou linha de comando que monta `utm_campaign`: o nome segue o mesmo `Modelo do nome da campanha`. Um nome montado de outro jeito é item que falhou na revisão.
 - A linha do data source de origens ou de meios está com o campo vazio: não use o nome da linha no lugar. Diga qual linha está vazia e pergunte o valor.
+- Uma pessoa do time divulga com o próprio perfil: o @ público dela é o promotor no nome da campanha, e o papel dela vai em `utm_marketing_tactic`. O nome dela não entra no link. Papel fora de `Táticas`: pergunte.
 - A campanha é de um evento divulgado por um artista ou um influencer, e o projeto ainda não gera id para essa combinação: `utm_id` fica vazio. Não monte o id com o UUID.
 - A campanha não tem nome público: pergunte o nome. Não use o id.
 - O link já chega com UTM de outra campanha: preserve, e não sobrescreva sem pedido.
@@ -130,6 +133,7 @@ O id interno do evento sai de `utm_term`. `utm_id` leva o id público da campanh
 - Um id parece inofensivo porque não diz nada. Ele identifica o registro e abre caminho para quem tenta acessar a estrutura interna.
 - `utm_term` parece sobra. No padrão, é só palavra-chave.
 - O Analytics não precisa da UTM para saber o evento quando o próprio site mede o clique.
+- O papel no nome da campanha parece identificar quem divulgou. Mais de uma pessoa pode ocupar o mesmo papel, e a pessoa muda: o @ vai no nome, e o papel em `utm_marketing_tactic`, que o GA4 lê junto com as outras UTMs.
 - O exemplo da ajuda do Google usa hífen, e o gerador de URL do Google sugere sublinhado. O Analytics aceita os dois. O que quebra o relatório é misturar.
 
 ## Scripts disponíveis

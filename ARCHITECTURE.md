@@ -51,7 +51,7 @@ harness/
 └── TROUBLESHOOTING.md              # Failure diagnosis
 ```
 
-A business harness has the same `.agents/` layout with its own skills, mappings, and glossary, and `node_modules/harness` holding a pinned release of this repository. The vocabulary engine is in `vocabulary/` in this repository, as ADR 0015 decides, and a business harness reads it from `node_modules/harness/vocabulary`.
+A business harness has the same `.agents/` layout with its own skills, mappings, and glossary, and `node_modules/harness` holding a pinned release of this repository. The vocabulary engine is in `vocabulary/` in this repository, as ADR 0018 decides, and a business harness reads it from `node_modules/harness/vocabulary`.
 
 ## 2. High-Level System Diagram
 

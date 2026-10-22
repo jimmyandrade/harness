@@ -1,6 +1,6 @@
 ---
 metadata:
-  version: "1.13.0"
+  version: "1.15.0"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -20,6 +20,7 @@ metadata:
       "Idioma da issue": "português do Brasil"
       "Idioma das instruções do projeto": "português do Brasil"
       "Idioma das respostas": "português do Brasil"
+      "Idioma das decisões de arquitetura": "inglês"
 ---
 
 # Instruções do projeto
@@ -27,7 +28,7 @@ metadata:
 ## Camadas
 
 - Este repositório é o harness core. Ele é público. Nunca adicione a ele nome de empresa, regra de negócio, espaço de trabalho, banco, página, pessoa ou segredo.
-- Um harness de negócio é um repositório próprio. Ele guarda as skills do negócio, os schemas e os mapeamentos das fontes de dados, o glossário e os estilos de saída. Ele usa este repositório para o verificador, a sincronização com o Notion e as skills compartilhadas. A API, a linha de comando e o MCP do vocabulário ficam neste repositório, em `vocabulary/`, como decide a ADR 0015.
+- Um harness de negócio é um repositório próprio. Ele guarda as skills do negócio, os schemas e os mapeamentos das fontes de dados, o glossário e os estilos de saída. Ele usa este repositório para o verificador, a sincronização com o Notion e as skills compartilhadas. A API, a linha de comando e o MCP do vocabulário ficam neste repositório, em `vocabulary/`, como decide a ADR 0018.
 - Uma skill passa de um harness de negócio para este repositório uma de cada vez, depois de uma auditoria. A auditoria remove todo nome de empresa, regra de negócio e nome de espaço de trabalho ou de banco, e leva para as instruções do projeto o que ainda muda de um negócio para outro. Mantenha o nome, a versão e `metadata.aliases` quando a skill mudar de repositório, para a página no Notion de cada negócio manter o histórico.
 - Não traga uma skill para cá porque dois negócios têm skills parecidas. Traga quando um texto só servir para os dois.
 
@@ -86,7 +87,7 @@ metadata:
 - Descreva uma fonte de dados com JSON Schema e um mapeamento do Notion separado, como em `docs/adr/0001-describe-data-sources-with-json-schema.md`. Esses arquivos ficam no harness de negócio, não aqui.
 - Uma skill do core que lê uma fonte de dados do negócio fala de conceitos, como o título da edição ou o grupo de uma edição. O mapeamento de cada negócio liga esses conceitos aos nomes da lista e das propriedades. Uma propriedade sem a qual a edição não existe e que falta no mapeamento para a skill antes de ela escrever. Um valor de propriedade opcional que falta no mapeamento é listado no fim, com a sugestão de criar a propriedade: a skill nunca cria schema e nunca escreve esse valor no corpo da página.
 - `Considerar grupos de oportunidades` diz se as skills de oportunidade usam grupos. Com `sim`, toda edição pertence a exatamente um grupo, e o verificador falha quando o mapeamento de oportunidades do negócio, `.agents/mappings/oportunidades.notion.json`, não liga `group`. Com `não`, a edição não tem grupo.
-- O glossário de um projeto fica nesse projeto. O motor que o lê e escreve fica neste repositório, em `vocabulary/`, como decide a ADR 0015.
+- O glossário de um projeto fica nesse projeto. O motor que o lê e escreve fica neste repositório, em `vocabulary/`, como decide a ADR 0018.
 
 ## Documentos
 
@@ -94,4 +95,5 @@ metadata:
 - O `FEATURES.md` lista as ferramentas que uma pessoa ou um repositório usa diretamente. Cada skill tem a entrada dela em `.agents/skills/FEATURES.md`, escrita à mão. Quando uma skill vem para cá, a entrada dela vai para `.agents/skills/FEATURES.md`. Não copie um documento para outro.
 - O `INSTALL.md` é o índice dos runbooks de instalação em `docs/runbooks/`, um por ferramenta, cada um uma lista de passos com um comando e uma verificação. Os harnesses de negócio apontam para eles e guardam no próprio `INSTALL.md` só os valores do negócio. Um runbook copia um arquivo de configuração de `examples/` em vez de mostrá-lo no texto; a versão fixada num exemplo é `vX.Y.Z`, que o runbook troca.
 - Nenhum documento Markdown cita uma release, como `v1.2.3`, a não ser o `CHANGELOG.md`. Cite o arquivo que fixa a versão, como o `package.json`. Um harness de negócio segue a mesma regra nos próprios documentos. O Renovate move as versões fixadas, não o texto, então uma versão no texto fica desatualizada na release seguinte. A versão de exemplo é `vX.Y.Z`.
-- As decisões de arquitetura ficam em `docs/adr/`, em inglês.
+- As decisões de arquitetura ficam em `docs/adr/`, no `Idioma das decisões de arquitetura`, que tem inglês como padrão. Um projeto que quer as decisões em outro idioma, por exemplo para quem vai cuidar dele depois, define esse parâmetro no próprio `AGENTS.md`.
+- Fica em `docs/adr/` só a decisão que vale. Quando uma decisão substitui outra inteira, apague a antiga; quando substitui só uma parte, tire essa parte da antiga. A nova decisão conta o que mudou e por quê, e o histórico do git guarda o texto antigo.
