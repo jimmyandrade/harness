@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.80.0](https://github.com/jimmyandrade/harness/compare/v0.79.0...v0.80.0) (2026-10-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* **vocabulary:** classify and lookup return one of five levels, so a stored situationally_allowed row reads as allowed_with_care with legacy_state. Registrations and new rows carry categories instead of category. The refusal messages for when and tags on a general rule changed. Run migrate to rewrite an existing glossary.
+
+### Features
+
+* **definir-link-rastreavel:** carry the promoter role in utm_marketing_tactic ([#367](https://github.com/jimmyandrade/harness/issues/367)) ([5b825cf](https://github.com/jimmyandrade/harness/commit/5b825cfe5eb961509bd52c8ecf5ca386ccc2abb8))
+* **vocabulary:** import jimmyandrade/vocabulary with its history ([#360](https://github.com/jimmyandrade/harness/issues/360)) ([1f53c29](https://github.com/jimmyandrade/harness/commit/1f53c297486202d1ec4602496d437b774086fefd))
+
+
+### Bug Fixes
+
+* **avaliar-atualizacoes-de-dependencia:** handle npm EALLOWSCRIPTS on git dependencies ([#364](https://github.com/jimmyandrade/harness/issues/364)) ([69757d2](https://github.com/jimmyandrade/harness/commit/69757d28573ddedb162e5bf7a7f2627cc8316497))
+
 ## [0.79.0](https://github.com/jimmyandrade/harness/compare/v0.78.0...v0.79.0) (2026-10-22)
 
 

@@ -1,0 +1,250 @@
+/**
+ * MCP server for the vocabulary.
+ *
+ * lookup_term reads one term. exists_in_text maps each token to whether it
+ * exists. write_terms inserts, updates, or upserts terms for one language.
+ * migrate_glossary rewrites the rows that use a deprecated state or category.
+ *
+ * Run: node api/mcp/index.ts
+ */
+
+import { readFileSync } from "node:fs"
+import { fileURLToPath } from "node:url"
+import type { Readable } from "node:stream"
+
+import { existsPhrase } from "../routes/exists/index.ts"
+import { lookupTerm } from "../routes/lookup/index.ts"
+import { Glossary, migrate, writeTerms } from "../shared/glossary.ts"
+import { parseBody } from "../shared/http.ts"
+import { readOptions } from "../shared/options.ts"
+import { LEVELS, existsRequest, lookupRequest, migrateRequest, termsRequest } from "../shared/schema.ts"
+
+const PROTOCOL = "2024-11-05"
+
+// Release Please bumps package.json. api/ and dist/ both sit two levels below it.
+const VERSION = (JSON.parse(readFileSync(new URL("../../package.json", import.meta.url), "utf8")) as { version: string }).version
+
+const languageProperty = { type: "string", description: "BCP 47 tag of the text, such as pt-BR." }
+
+const tagsFilter = {
+  type: "array",
+  items: { type: "string" },
+  description: "Speaker, event, or channel of the text, such as maria-silva or festival-de-verao. A row tagged only for other contexts reads as absent. A row without tags always applies. Omit to read every row.",
+}
+
+const tools = [
+  {
+    name: "lookup_term",
+    description: "Read one vocabulary term or expression, including an emoji. Returns whether it exists and the stored row. state is one of five levels, from forbidden through strongly_discouraged, discouraged, and allowed_with_care to allowed. With tags, a tag in forbidden_in or allowed_in changes state, and base_state keeps the level of the row. legacy_state names a deprecated state still stored. Case matches the stored term. An accent, a plural, a gender, and another word are their own rows. A row with case_sensitive also returns case_matches: when it is false, write the stored term, not the submitted casing. When the person asks which variations were registered, read each form, name the ones that exist and the ones that do not, and ask the state before writing a missing form.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        language: languageProperty,
+        term: { type: "string" },
+        tags: tagsFilter,
+      },
+      required: ["language", "term"],
+    },
+  },
+  {
+    name: "exists_in_text",
+    description: "Return a record of each word, emoji, and punctuation mark in a text to whether that token exists in the vocabulary. A token that only matches a case_sensitive row in another casing maps to { exists, term, case_matches: false } instead of true: write term, the stored spelling.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        language: languageProperty,
+        text: { type: "string" },
+        tags: tagsFilter,
+      },
+      required: ["language", "text"],
+    },
+  },
+  {
+    name: "write_terms",
+    description: "Insert, update, or upsert vocabulary terms for one language, including an emoji, one term or a whole migrated batch. Searches first, by spelling and then by source: case keeps the stored row, and a new term is stored in lowercase unless case_sensitive is true. An accent, a plural, a gender, and another word each keep their own row. Write only what the person gave: ask before the alternatives of a new forbidden term, and an empty list is valid. A cliché is category cliche and forbidden, and its description names the image, scene, action, effect, or situation that replaces it. forbidden and allowed are general rules: no when, no tags. A term that belongs to one speaker, event, or channel keeps tags, and when still says the rule in words. allowed_in and forbidden_in name the formats or channels where the level changes. description, reason, substitution, and when are optional while a glossary migrates: validation warn lists a missing one in incomplete, and enforce refuses it. An update or an upsert of a term that is stored keeps every field the call does not send, so send only what changes, with state and term. Send a field empty, as \"\" or [], to clear it. The merged row must be valid: moving a row to a level that refuses a stored field, such as when on allowed, is refused until the call clears that field. The response lists inserted, updated, unchanged, skipped, incomplete, and warnings, and each updated row is the whole stored row. A refusal says why and leaves the file unchanged.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        language: languageProperty,
+        mode: { type: "string", enum: ["insert", "update", "upsert"] },
+        validation: {
+          type: "string",
+          enum: ["optional", "warn", "enforce"],
+          description: "What a term without an expected field does. warn, the default, writes it and lists it in incomplete. enforce refuses it.",
+        },
+        terms: {
+          type: "array",
+          items: {
+            type: "object",
+            properties: {
+              state: {
+                type: "string",
+                enum: [...LEVELS, "situationally_allowed"],
+                description: "Level of the term. situationally_allowed is deprecated and is written as allowed_with_care.",
+              },
+              term: { type: "string" },
+              categories: { type: "array", items: { type: "string" }, description: "English words, such as punctuation or slang." },
+              category: { type: "string", description: "Deprecated. Send categories." },
+              description: { type: "string" },
+              reason: { type: "string" },
+              examples: { type: "array", items: { type: "string" } },
+              substitution: { type: "string" },
+              rejected: { type: "array", items: { type: "string" } },
+              alternatives: { type: "array", items: { type: "string" } },
+              related: { type: "array", items: { type: "string" } },
+              when: { type: "string" },
+              tags: {
+                type: "array",
+                items: { type: "string" },
+                description: "Not on forbidden or allowed. Lowercase kebab-case names of the speaker, event, or channel the term belongs to, such as maria-silva, festival-de-verao, or palco. A missing example is created with the same tags.",
+              },
+              allowed_in: {
+                type: "array",
+                items: { type: "string" },
+                description: "Kebab-case formats or channels where the term is allowed, such as whatsapp. A read with that tag returns allowed.",
+              },
+              forbidden_in: {
+                type: "array",
+                items: { type: "string" },
+                description: "Kebab-case formats or channels where the term is forbidden, such as feed. A read with that tag returns forbidden, even if allowed_in has it too.",
+              },
+              decided_by: {
+                type: "object",
+                description: "Who decided the level, as the people fields of package.json. Use the individual e-mail of the person, never a shared role account.",
+                properties: {
+                  name: { type: "string", description: "The name of who decided." },
+                  email: { type: "string", description: "The individual e-mail of who decided." },
+                  url: { type: "string", description: "A URL of who decided, such as a profile page." },
+                },
+                required: ["name"],
+              },
+              source: { type: "string", description: "Where the row came from, such as the URL of a page. An upsert finds a renamed term by it." },
+              notes: {
+                type: "string",
+                description: "Free text kept with the row: the history of the term, who or what decided it, a date, a link, or a limit that description and when do not say. description still says what the term is.",
+              },
+              case_sensitive: {
+                type: "boolean",
+                description: "True for a spelling whose casing is part of the term, such as a brand name like iPhone. The term keeps its casing as given, and a read in another casing reports case_matches false. Omit or false for an ordinary word.",
+              },
+            },
+            required: ["state", "term"],
+          },
+        },
+      },
+      required: ["language", "mode", "terms"],
+    },
+  },
+  {
+    name: "migrate_glossary",
+    description: "List the rows of one language that still use a deprecated state, such as situationally_allowed, or the deprecated category. With write true, rewrite them as their level and categories. Without it, the file stays as it is.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        language: languageProperty,
+        write: { type: "boolean" },
+      },
+      required: ["language"],
+    },
+  },
+]
+
+type ToolResult = { content: { type: "text"; text: string }[]; isError?: boolean }
+
+export function encodeMessage(payload: unknown): Buffer {
+  return Buffer.from(`${JSON.stringify(payload)}\n`, "utf8")
+}
+
+export function respond(directory: string, message: unknown): unknown | undefined {
+  if (typeof message !== "object" || message === null) return rpcError(null, -32600, "Invalid request.")
+  const record = message as { id?: unknown; method?: unknown; params?: unknown }
+  const id = "id" in record ? record.id : null
+  if (record.method === "notifications/initialized" || record.method === "notifications/cancelled") return undefined
+  if (typeof record.method !== "string") return rpcError(id, -32600, "Invalid request.")
+  if (record.method === "initialize") {
+    const params = record.params as { protocolVersion?: unknown } | undefined
+    const protocolVersion = typeof params?.protocolVersion === "string" ? params.protocolVersion : PROTOCOL
+    return {
+      jsonrpc: "2.0",
+      id,
+      result: {
+        protocolVersion,
+        capabilities: { tools: {} },
+        serverInfo: { name: "vocabulary", version: VERSION },
+      },
+    }
+  }
+  if (record.method === "ping") return { jsonrpc: "2.0", id, result: {} }
+  if (record.method === "tools/list") return { jsonrpc: "2.0", id, result: { tools } }
+  if (record.method === "tools/call") return { jsonrpc: "2.0", id, result: callTool(directory, record.params) }
+  return rpcError(id, -32601, "Unknown method.")
+}
+
+export function callTool(directory: string, params: unknown): ToolResult {
+  const record = params as { name?: unknown; arguments?: unknown } | undefined
+  try {
+    const glossary = new Glossary(directory)
+    if (record?.name === "lookup_term") {
+      const body = parseBody(lookupRequest, record.arguments)
+      return reply(lookupTerm(glossary, body.language, body.term, body.tags))
+    }
+    if (record?.name === "exists_in_text") {
+      const body = parseBody(existsRequest, record.arguments)
+      return reply(existsPhrase(glossary, body.language, body.text, body.tags))
+    }
+    if (record?.name === "write_terms") {
+      const body = parseBody(termsRequest, record.arguments)
+      return reply(writeTerms(directory, body.language, body.mode, body.terms, body.validation))
+    }
+    if (record?.name === "migrate_glossary") {
+      const body = parseBody(migrateRequest, record.arguments)
+      return reply(migrate(directory, body.language, body.write))
+    }
+    return failure("Unknown tool.")
+  } catch (error) {
+    return failure(error instanceof Error ? error.message : "Invalid value.")
+  }
+}
+
+function reply(value: unknown): ToolResult {
+  return { content: [{ type: "text", text: JSON.stringify(value) }] }
+}
+
+export function readMessages(stream: Readable, onMessage: (message: unknown) => void): void {
+  let buffer: Buffer<ArrayBufferLike> = Buffer.alloc(0)
+  stream.on("data", (chunk: Buffer | string) => {
+    buffer = Buffer.concat([buffer, Buffer.from(chunk)])
+    buffer = takeMessages(buffer, onMessage)
+  })
+}
+
+function takeMessages(buffer: Buffer<ArrayBufferLike>, onMessage: (message: unknown) => void): Buffer<ArrayBufferLike> {
+  let rest = buffer
+  while (rest.length > 0) {
+    const newline = rest.indexOf("\n")
+    if (newline === -1) return rest
+    const line = rest.subarray(0, newline).toString("utf8").replace(/\r$/, "").trim()
+    rest = Buffer.from(rest.subarray(newline + 1))
+    if (line === "") continue
+    onMessage(JSON.parse(line))
+  }
+  return rest
+}
+
+function failure(text: string): ToolResult {
+  return { content: [{ type: "text", text }], isError: true }
+}
+
+function rpcError(id: unknown, code: number, message: string): unknown {
+  return { jsonrpc: "2.0", id, error: { code, message } }
+}
+
+function main(): void {
+  const { glossary } = readOptions(process.argv.slice(2))
+  readMessages(process.stdin, (message) => {
+    const response = respond(glossary, message)
+    if (response !== undefined) process.stdout.write(encodeMessage(response))
+  })
+}
+
+if (process.argv[1] === fileURLToPath(import.meta.url)) main()
