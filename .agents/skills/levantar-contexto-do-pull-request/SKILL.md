@@ -3,11 +3,12 @@ name: levantar-contexto-do-pull-request
 description: Levanta o contexto de um pull request antes de revisar, responder ou ajustar. Cobre o estado, as convenções do repositório, os comentários já feitos, o card e as conversas ligados, o propósito e o trabalho parecido. Usada em PR de outra pessoa e no seu. Não serve para revisar o diff nem publicar texto.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   notion: "false"
   related:
     - definir-registro-de-reuniao
     - evoluir-habilidade
+    - levantar-ambiente-do-repositorio
 ---
 
 # Levantar contexto do pull request
@@ -40,7 +41,7 @@ Liste os checks pelo nome, com o resultado de cada um: passou, falhou ou pendent
 Leia as convenções do repositório do PR:
 
 - as instruções do repositório e as seções que elas citam para PR, branch e revisão;
-- as habilidades do próprio repositório, em qualquer pasta de agentes, e o template de PR;
+- as habilidades do próprio repositório, em qualquer pasta de agentes, e o template de PR; quando a revisão ou o ajuste vai rodar código, chame `levantar-ambiente-do-repositorio`;
 - o arquivo de contexto do projeto para esse repositório, se as instruções do projeto o citarem;
 - o `Contexto privado por repositório`, se existir: a parte técnica calibra o que vira achado, a sensível calibra a postura com a pessoa, e o status combinado evita revisar o que ficou combinado não revisar. É conteúdo privado, como no Passo 4: nada da parte sensível aparece em texto publicado, e o texto nunca diz que o documento existe.
 

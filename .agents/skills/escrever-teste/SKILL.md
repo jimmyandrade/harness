@@ -3,12 +3,13 @@ name: escrever-teste
 description: Escreve ou altera testes de unidade seguindo a convenção de testes do projeto, com o Better Specs como padrão. Usada quando uma mudança precisa de teste novo, quando um teste existente muda ou quando uma revisão pede um teste. Não serve para decidir o que testar, rodar a suíte inteira nem refatorar testes antigos.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   notion: "false"
   related:
     - criar-commit
     - escrever-codigo
     - evoluir-habilidade
+    - levantar-ambiente-do-repositorio
 ---
 
 # Escrever teste
@@ -31,7 +32,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ### Passo 1
 
-Leia a convenção do repositório para testes, nas instruções do projeto e nas habilidades do próprio repositório. Ela vale mais que a `Convenção de testes`. Leia um teste vizinho do mesmo tipo para copiar o jeito de montar, de limpar e de nomear.
+Chame `levantar-ambiente-do-repositorio` para achar a convenção de testes, os comandos e o runtime, nas instruções do projeto e nas habilidades do próprio repositório. Ela vale mais que a `Convenção de testes`. Leia um teste vizinho do mesmo tipo para copiar o jeito de montar, de limpar e de nomear.
 
 ### Passo 2
 
@@ -52,7 +53,7 @@ Respeite o `Alcance da mudança`. Com `só as linhas tocadas`, o padrão vale pa
 
 ### Passo 4
 
-Rode o `Comando de testes` nos arquivos afetados. Se o teste cobre uma correção, confirme que ele falha sem a correção e passa com ela. Se a convenção do repositório tem lint de testes, rode-o.
+Rode o `Comando de testes`, ou o que `levantar-ambiente-do-repositorio` achou, nos arquivos afetados. Se o teste cobre uma correção, confirme que ele falha sem a correção e passa com ela. Se a convenção do repositório tem lint de testes, rode-o. O commit segue `criar-commit`.
 
 ### Passo 5
 
