@@ -53,6 +53,7 @@ flowchart LR
     definir_tarefa["definir-tarefa"]
     definir_tipo_do_evento["definir-tipo-do-evento"]
     definir_viagem["definir-viagem"]
+    definir_vocabulario["definir-vocabulario"]
     descrever_habilidade_ou_schema["descrever-habilidade-ou-schema"]
     enviar_mensagem_no_slack["enviar-mensagem-no-slack"]
     escrever_codigo["escrever-codigo"]
@@ -70,6 +71,7 @@ flowchart LR
     mesclar_registro["mesclar-registro"]
     organizar_emails["organizar-emails"]
     organizar_ponto_de_contato["organizar-ponto-de-contato"]
+    perfilar_tom_de_voz["perfilar-tom-de-voz"]
     planejar_calendario_de_conteudo["planejar-calendario-de-conteudo"]
     preparar_tarefa_do_pull_request["preparar-tarefa-do-pull-request"]
     priorizar_itens["priorizar-itens"]
@@ -81,8 +83,10 @@ flowchart LR
     procurar_oportunidade["procurar-oportunidade"]
     procurar_pedido_de_revisao["procurar-pedido-de-revisao"]
     procurar_tarefa["procurar-tarefa"]
+    procurar_variacao_de_termo["procurar-variacao-de-termo"]
     publicar_revisao_de_codigo["publicar-revisao-de-codigo"]
     reconhecer_imagem["reconhecer-imagem"]
+    redigir_com_tom_de_voz["redigir-com-tom-de-voz"]
     registrar_ciclo_do_ativo["registrar-ciclo-do-ativo"]
     revisar_financas["revisar-financas"]
     revisar_habilidade["revisar-habilidade"]
@@ -259,6 +263,9 @@ flowchart LR
   definir_viagem --> organizar_ponto_de_contato
   definir_viagem --> procurar_oportunidade
   definir_viagem --> sincronizar_cronograma
+  definir_vocabulario --> evoluir_habilidade
+  definir_vocabulario --> procurar_variacao_de_termo
+  definir_vocabulario --> redigir_com_tom_de_voz
   descrever_habilidade_ou_schema --> criar_commit
   descrever_habilidade_ou_schema --> criar_pull_request
   descrever_habilidade_ou_schema --> evoluir_habilidade
@@ -325,6 +332,9 @@ flowchart LR
   organizar_ponto_de_contato --> definir_viagem
   organizar_ponto_de_contato --> procurar_oportunidade
   organizar_ponto_de_contato --> sincronizar_cronograma
+  perfilar_tom_de_voz --> definir_vocabulario
+  perfilar_tom_de_voz --> evoluir_habilidade
+  perfilar_tom_de_voz --> redigir_com_tom_de_voz
   planejar_calendario_de_conteudo --> criar_ideia_de_conteudo
   planejar_calendario_de_conteudo --> definir_campanha_de_conteudo
   planejar_calendario_de_conteudo --> definir_reel_do_instagram
@@ -360,6 +370,8 @@ flowchart LR
   procurar_pedido_de_revisao --> enviar_mensagem_no_slack
   procurar_pedido_de_revisao --> evoluir_habilidade
   procurar_tarefa --> procurar_inscricao
+  procurar_variacao_de_termo --> definir_vocabulario
+  procurar_variacao_de_termo --> evoluir_habilidade
   publicar_revisao_de_codigo --> definir_pessoa
   publicar_revisao_de_codigo --> enviar_mensagem_no_slack
   publicar_revisao_de_codigo --> evoluir_habilidade
@@ -370,6 +382,8 @@ flowchart LR
   reconhecer_imagem --> definir_inscricao
   reconhecer_imagem --> lancar_despesa_da_empresa
   reconhecer_imagem --> procurar_oportunidade
+  redigir_com_tom_de_voz --> definir_vocabulario
+  redigir_com_tom_de_voz --> evoluir_habilidade
   registrar_ciclo_do_ativo --> definir_ativo_imobilizado
   registrar_ciclo_do_ativo --> identificar_duplicata
   registrar_ciclo_do_ativo --> lancar_despesa_da_empresa

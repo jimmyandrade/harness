@@ -753,6 +753,29 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses recording an event that already has a time, syncing a date-only milestone, posting the amount, registering the opportunity, and registering someone
 
+### definir-vocabulario
+- **Stability**: experimental
+- **Description**: Register and update one or more voice-vocabulary terms
+- **Properties**:
+  - Lives at `.agents/skills/definir-vocabulario/SKILL.md`
+  - Registers and updates terms for one language on five levels: forbidden, strongly_discouraged, discouraged, allowed_with_care, and allowed
+  - Writes a term without an expected field and reports it as incomplete, and imports a batch from another tool with `terms --file`
+  - Sends a question about a missing term or its variations to procurar-variacao-de-termo
+  - Keeps categories English words in every language, translated by the Categorias parameter, and keeps the term and the notes in that language
+  - Reads the brand sources named in the project instructions before answering or writing. An ambiguous channel, audience, line, commercial intent, or situation waits for a question
+  - Keeps a term that only fits one context on a middle level, with when. allowed and forbidden stay general rules
+  - Adds tags to a context term of one speaker, event, or channel, reusing a tag already in the glossary, and keeps when as the rule in words
+  - Marks a name whose casing is part of the spelling with case_sensitive, so the write keeps its casing
+  - Keeps the history and limits of a term in notes, apart from the description, without changing the level
+  - Uses insert when the person is registering and does not name a mode, update when an existing term changes, and upsert when the batch does both
+  - Corrects a stored term by sending only the fields that change, reading the row before and after, and clearing a field only when the person asks
+  - Reads and writes with `node node_modules/vocabulary/dist/cli.js lookup`, `exists`, and `terms` when there is a terminal, and with the MCP tools `lookup_term`, `exists_in_text`, and `write_terms` when there is not
+  - Stops without a terminal and without the MCP server, as in a Notion agent
+  - Leaves writing brand text to redigir-com-tom-de-voz, and does not invent a term
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses writing or approving brand text, classifying a phrase, and inventing a term
+
 ### descrever-habilidade-ou-schema
 - **Stability**: experimental
 - **Description**: Write or correct a skill or schema description, and test whether a skill description triggers, even when the person does not say description
@@ -990,6 +1013,21 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses registering the opportunity, checking whether the opportunity already exists, organizing a trip, writing the task title, the deadline, and the definition of done, checking whether the task exists, and registering someone
 
+### perfilar-tom-de-voz
+- **Stability**: experimental
+- **Description**: Profile how a person or a channel writes from a real sample and register the patterns in the glossary
+- **Properties**:
+  - Lives at `.agents/skills/perfilar-tom-de-voz/SKILL.md`
+  - Profiles only on an explicit request, for the person or channel the requester names
+  - Reads the sample from the source named in the project instructions and leaves out the messages of the requester and of bots
+  - Extracts only patterns that repeat, and writes a short summary of the tone where the project instructions say
+  - Registers the concrete patterns with `definir-vocabulario` under the tag of the person or channel, preferring small reusable terms to whole phrases
+  - Records where the sample came from, and shows the requester what it derived
+  - Never quotes a message from a private conversation in another context
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses writing text, registering a loose term, and profiling without a request
+
 ### planejar-calendario-de-conteudo
 - **Stability**: experimental
 - **Description**: Suggest what to post, plan a week or a campaign, announce an event across posts, or check the calendar mix
@@ -1129,6 +1167,19 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses creating, editing, or completing the task, and searching outside the task list
 
+### procurar-variacao-de-termo
+- **Stability**: experimental
+- **Description**: Say whether a term or its gender, number, or spelling variations are in the glossary
+- **Properties**:
+  - Lives at `.agents/skills/procurar-variacao-de-termo/SKILL.md`
+  - Reads each form with `node node_modules/vocabulary/dist/cli.js lookup`, or the MCP tool `lookup_term` without a terminal, and stops without both
+  - Says which forms are registered, with their state, and which are not
+  - Suggests registering the missing forms and asks the state of each one, without writing
+  - Sends the registration to definir-vocabulario
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses registering or updating a term, writing brand text, and inventing a form
+
 ### reconhecer-imagem
 - **Stability**: experimental
 - **Description**: Read what an image says and pass that text to another skill
@@ -1152,6 +1203,26 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses registering an entity, creating a task, and reading text that is already written
   - [ ] A receipt and the matching transaction reach the expense workflow without a written request to record them
+
+### redigir-com-tom-de-voz
+- **Stability**: experimental
+- **Description**: Write, suggest, review, and rewrite brand text in the project's voice
+- **Properties**:
+  - Lives at `.agents/skills/redigir-com-tom-de-voz/SKILL.md`
+  - Writes in the voice of the project that is open and reads that project's glossary, with `node node_modules/vocabulary/dist/cli.js lookup` and `exists` when there is a terminal and the CLI is installed, and with the MCP tools when there is no terminal or the CLI is not available
+  - Without a terminal and without the MCP server, as in a Notion agent, reads the glossary only from a source the project instructions name, or stops
+  - Reads the glossary with the tags of the speaker, the event, and the channel of the text, so a term of another context stays out
+  - Writes the stored spelling of a case-sensitive term when a read reports case_matches false
+  - Waits for context, channel, audience, the brand sources named in the project instructions, the glossary, and the creative intent
+  - Uses each term as its level says: forbidden never, strongly_discouraged only on request or under the exception in when, discouraged only with the scene in when, allowed_with_care as when says
+  - Keeps out a forbidden term, a generic phrase, AI-sounding text, and language the glossary marks as misaligned
+  - Treats an emoji as a glossary term. Without a row, the copy waits
+  - Replaces a cliché with the image, scene, action, effect, or situation in its description, and leaves rejected phrases out
+  - Sends term registration to definir-vocabulario
+  - Writes an external event title when the person asks, keeps the canonical name they already gave, and does not write the calendar event or lock the spelling
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses answering the person chatting with the AI, locking spelling, changing a content format, and assuming a customer, a piece, an opportunity, or commercial history
 
 ### registrar-ciclo-do-ativo
 - **Stability**: experimental
