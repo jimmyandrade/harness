@@ -3,7 +3,7 @@ name: avaliar-atualizacoes-de-dependencia
 description: Use essa habilidade sempre que houver PR de atualização de dependência do Dependabot ou do Renovate para avaliar, testar ou mesclar, mesmo sem dizer o nome do bot. NÃO use para atualizar uma dependência à mão nem para PR que não seja de bot.
 metadata:
   author: jimmyandrade
-  version: "0.5.1"
+  version: "0.5.2"
   notion: "false"
   related:
     - evoluir-habilidade
@@ -128,6 +128,7 @@ A biblioteca era transitiva. A árvore levou ao pacote direto que a puxa, e os p
 - Uma atualização só de tipos pode quebrar a checagem de tipos e o build sem falhar nenhum teste. Rode o build mesmo com os testes verdes.
 - A instalação limpa apaga o que foi instalado dentro da pasta de dependências, como o navegador de testes. As suítes fora do `Comando de testes` podem pedir esse passo de novo, e também as variáveis de ambiente do projeto.
 - A árvore de dependências só mostra o pacote depois da instalação na branch do PR. Antes dela, ela mostra a versão antiga ou nada.
+- Uma dependência git, com npm 11.17 ou mais novo e `allow-scripts` no `~/.npmrc`, faz o `Comando de instalação` parar com `EALLOWSCRIPTS` e deixar a pasta de dependências vazia. O PR não tem defeito: o npm repassa a configuração ao npm que prepara a dependência. Rode a instalação com `npm_config_userconfig=/dev/null` na frente, só nesse comando, como diz o `TROUBLESHOOTING.md` do core.
 
 ## Scripts disponíveis
 
