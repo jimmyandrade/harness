@@ -1,0 +1,39 @@
+{
+  "name": "vocabulary",
+  "version": "0.11.0",
+  "private": true,
+  "type": "module",
+  "description": "Vocabulary API, CLI, MCP, and voice skills for a project's brand glossary.",
+  "engines": {
+    "node": ">=24"
+  },
+  "license": "PolyForm-Noncommercial-1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jimmyandrade/vocabulary.git"
+  },
+  "files": [
+    "dist",
+    "docs",
+    "examples",
+    ".agents",
+    "COMMERCIAL.md"
+  ],
+  "dependencies": {
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "24.19.2",
+    "harness": "github:jimmyandrade/harness#v0.79.0",
+    "lefthook": "2.1.16",
+    "typescript": "7.0.2"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "prepare": "npm run build",
+    "test": "node --test \"api/**/*.test.ts\""
+  },
+  "allowScripts": {
+    "lefthook": true
+  }
+}
