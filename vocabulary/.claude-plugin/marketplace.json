@@ -1,0 +1,8 @@
+{
+  "name": "vocabulary",
+  "owner": { "name": "Jimmy Andrade", "url": "https://github.com/jimmyandrade" },
+  "description": "Voice skills for a project's brand glossary. Business harnesses list this plugin in their own marketplace.",
+  "plugins": [
+    { "name": "vocabulary", "source": "." }
+  ]
+}
