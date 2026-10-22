@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.42.0"
+  version: "0.43.0"
   related:
     - definir-agenda-de-popstar
     - definir-convidado
@@ -42,7 +42,11 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
   - "amizades"
   - "descanso"
 "Habilidade de tom de voz": ""
+"Confirmar antes de escrever na descrição": "sim"
+"Título da seção de resumo": "Resumo da reunião"
 ```
+
+`Confirmar antes de escrever na descrição` vale quando um resumo ou trecho do que foi discutido vai para a descrição de um evento que já existe. `Título da seção de resumo` é o cabeçalho da seção separada em que o trecho é anexado.
 
 ## Instruções
 
@@ -152,6 +156,8 @@ flowchart LR
 ```
 
 O título serve à busca humana e por IA. Leva o nome canônico mais buscável do evento, da oportunidade, da organização ou da reunião. Quando couber, leva edição, data, cidade e contexto curto. «Reservado», «o evento», «Reunião» e «Feira» sem qualificador não entram. Provisório pode começar com «Reservado para» ou «A confirmar» e leva o nome canônico do contexto. Convidada, convidado ou organização de fora: o título segue a `Habilidade de tom de voz`, quando as instruções do projeto a indicarem. A descrição leva o link da página canônica, uma frase do que o evento é, e só a variação que ajuda a achar: acento, sigla, apelido, grupo, edição, venue, cidade, tipo, organização, status e papel da empresa. Desambiguação curta se for um negócio e não um ponto de contato. Não alongue o que a propriedade já guarda. Criatividade não troca o campo estruturado. Reunião sem modalidade: pergunte. Remota: crie o Google Meet. Presencial: não crie.
+
+Quando um resumo ou trecho do que foi discutido vai para a descrição de um evento que já existe, a descrição de um evento com convidados fica visível a outras pessoas. Com `Confirmar antes de escrever na descrição` em `sim`, mostre o texto exato e o evento de destino, e só atualize depois que a pessoa confirmar aquela atualização, para aquele evento. Anexe o trecho ao que já existia, numa seção separada com o `Título da seção de resumo`, e não sobrescreva, não resuma nem apague o que estava escrito. Para achar o evento, use só o necessário para identificá-lo e não busque nem exponha dado de outros participantes além disso.
 
 ### Passo 11
 
