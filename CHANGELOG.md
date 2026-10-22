@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.11.0](https://github.com/jimmyandrade/vocabulary/compare/v0.10.0...v0.11.0) (2026-10-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* an update or an upsert that omits a field no longer clears it. Send the field empty to clear it.
+
+### Features
+
+* keep notes on a term ([#41](https://github.com/jimmyandrade/vocabulary/issues/41)) ([a9a7495](https://github.com/jimmyandrade/vocabulary/commit/a9a7495020c2a3fc6a6dba251382fdbcb737399f))
+
+
+### Bug Fixes
+
+* keep the stored fields on an update or an upsert ([#43](https://github.com/jimmyandrade/vocabulary/issues/43)) ([ad4c418](https://github.com/jimmyandrade/vocabulary/commit/ad4c418c52f755fbe8c0c1dbd2533e84832e84fc))
+
 ## [0.10.0](https://github.com/jimmyandrade/vocabulary/compare/v0.9.0...v0.10.0) (2026-10-20)
 
 
