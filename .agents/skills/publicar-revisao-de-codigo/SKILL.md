@@ -3,7 +3,7 @@ name: publicar-revisao-de-codigo
 description: Revisa um pull request e publica a revisão numa única review, com os comentários inline, no idioma de quem recebe e no tom do projeto. Usada quando a pessoa pede uma revisão ou outra habilidade precisa publicar uma. Não serve para tratar os comentários que você recebeu no seu PR.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.5.0"
   notion: "false"
   aliases:
     - post-code-review
@@ -35,6 +35,9 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Ação só com Poderia ter": "aprovar com os comentários"
 "Ação sem achados": "aprovar"
 "Nível de detalhe": "enxuta"
+"Critério de revisão completa": ""
+"Limite de Poderia ter publicado": ""
+"Prioridade por tema": "acessibilidade: Deve ter, com sugestão de código"
 "Prova visual em PR de interface": "sim"
 "Rótulo de prioridade no texto": "não"
 "Abertura da revisão": ""
@@ -48,7 +51,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Modo de aprendizado": "perguntar"
 ```
 
-`Postura dos comentários` é `pergunta` ou `veredito`: com `pergunta`, nenhum achado vira "isto é um erro", e sim o que você viu e uma pergunta. `Nível de detalhe` é `enxuta`, só Deve ter e Deveria ter, ou `completa`, com tudo. `Lentes de revisão` lista critérios que você aplica antes de publicar sem citá-los no texto. `Abertura da revisão` descreve o que abre cada texto, como um resumo curto. `Publicar em execução agendada` é `sim` ou `não` e só vale quando ninguém está na frente: com `não`, a habilidade prepara a revisão e não publica. `Pasta das cópias separadas` diz onde criar a cópia de trabalho de cada repositório, e vazio usa a pasta temporária do sistema, com uma subpasta por repositório. `Comentário de início da revisão` e `Etiqueta de revisão em andamento` avisam quem acompanha o PR de que a revisão começou: vazios, a habilidade não posta nem etiqueta nada.
+`Critério de revisão completa` diz quando a revisão sai completa mesmo com `Nível de detalhe` em `enxuta`, como uma pessoa que pediu assim ou um PR de criticidade alta, e lista o que conta como criticidade alta; na dúvida, fica enxuta. `Limite de Poderia ter publicado` diz até quantos achados de Poderia ter entram numa revisão enxuta, por exemplo só quando Deve ter mais Deveria ter publicados somam no máximo 2 e o total fica em até 5, e o que passa do limite vai só para o resumo. `Prioridade por tema` liga um tema do achado a uma categoria, como acessibilidade a Deve ter ou desvio da convenção de testes a Deveria ter. `Postura dos comentários` é `pergunta` ou `veredito`: com `pergunta`, nenhum achado vira "isto é um erro", e sim o que você viu e uma pergunta. `Nível de detalhe` é `enxuta`, só Deve ter e Deveria ter, ou `completa`, com tudo. `Lentes de revisão` lista critérios que você aplica antes de publicar sem citá-los no texto. `Abertura da revisão` descreve o que abre cada texto, como um resumo curto. `Publicar em execução agendada` é `sim` ou `não` e só vale quando ninguém está na frente: com `não`, a habilidade prepara a revisão e não publica. `Pasta das cópias separadas` diz onde criar a cópia de trabalho de cada repositório, e vazio usa a pasta temporária do sistema, com uma subpasta por repositório. `Comentário de início da revisão` e `Etiqueta de revisão em andamento` avisam quem acompanha o PR de que a revisão começou: vazios, a habilidade não posta nem etiqueta nada.
 
 ## Instruções
 
@@ -86,8 +89,8 @@ Chame `priorizar-itens` com os achados e junte o resultado com a ficha:
 
 - Um achado que coincide com um comentário já existente e ainda aberto vira resposta na thread dele, com o complemento ou um reforço curto. Não abre comentário novo, e não descarta o achado em silêncio. Em thread que o autor encerrou, ou já resolvida, não responda.
 - Um achado fraco, sem cenário concreto de falha, vira pergunta que espera resposta, tratada como importante. Nunca como "não bloqueia".
-- Aplique as `Lentes de revisão`. Com `Nível de detalhe` em `enxuta`, publique só Deve ter e Deveria ter.
-- Achado de acessibilidade é Deve ter, com sugestão de código.
+- Aplique as `Lentes de revisão`. Com `Nível de detalhe` em `enxuta`, publique só Deve ter e Deveria ter, mais o Poderia ter que o `Limite de Poderia ter publicado` permitir. Quando o `Critério de revisão completa` se cumpre, publique tudo.
+- Aplique a `Prioridade por tema`: o achado de um tema listado ganha a categoria dada. Um achado de acessibilidade, com o valor padrão, é Deve ter e leva sugestão de código.
 - Teste novo ou alterado confere a convenção de testes que o repositório define, só nas linhas tocadas.
 
 ### Passo 7
@@ -141,7 +144,7 @@ Limpe sempre, mesmo se algo falhou antes. Apague o comentário de início e reti
 
 ### Passo 12
 
-Devolva a quem chamou o endereço direto da review e de cada comentário publicado, e um resumo dos achados por prioridade. Avisar a pessoa que pediu a revisão é de quem chamou, com `enviar-mensagem-no-slack`.
+Devolva a quem chamou o endereço direto da review e de cada comentário publicado, e um resumo dos achados por prioridade, com o nível de detalhe usado e quantos Poderia ter ficaram de fora. Avisar a pessoa que pediu a revisão é de quem chamou, com `enviar-mensagem-no-slack`.
 
 ### Passo 13
 
