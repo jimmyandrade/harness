@@ -6,7 +6,7 @@ locale: en
 
 ## Status
 
-Accepted. ADR 0010 moves the vocabulary API and MCP to their own repository.
+Accepted.
 
 ## Context
 
