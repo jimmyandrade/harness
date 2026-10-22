@@ -20,6 +20,19 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
   - [ ] Adding a business marketplace installs that plugin and `core`, in Claude Code and in Codex
   - [ ] Importing a business repository and this repository as Cursor team marketplaces installs both plugins
 
+### vocabulary
+- **Stability**: experimental
+- **Description**: Engine that reads and writes the glossary of a project, with a command line and an MCP server
+- **Properties**:
+  - Code in `vocabulary/api/`, built by `npm run build` into `vocabulary/dist/`, which the `prepare` script runs on install
+  - A project installs the core with `npm install --save-dev github:jimmyandrade/harness` and runs `node node_modules/harness/vocabulary/dist/cli.js` and `node node_modules/harness/vocabulary/dist/mcp/index.js`
+  - Reads and writes one UTF-8 JSON file per language in the project. This repository ships no glossary and no brand name
+  - The skills `definir-vocabulario`, `procurar-variacao-de-termo`, `redigir-com-tom-de-voz` and `perfilar-tom-de-voz` use it. Their entries are in `.agents/skills/FEATURES.md`
+  - Decisions about the engine are in `vocabulary/docs/adr/`, and the host runbooks are in `vocabulary/docs/runbooks/`
+- **Test Criteria**:
+  - [x] `npm test` runs the vocabulary tests with the script tests
+  - [x] `npm run build` compiles the engine into `vocabulary/dist/`
+
 ### core-pins
 - **Stability**: experimental
 - **Description**: Keep every pin of the core harness in a repository on the same tag, so a manual bump cannot leave one behind

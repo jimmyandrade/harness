@@ -51,7 +51,7 @@ harness/
 └── TROUBLESHOOTING.md              # Failure diagnosis
 ```
 
-A business harness has the same `.agents/` layout with its own skills, mappings, and glossary, and `node_modules/harness` holding a pinned release of this repository. The vocabulary engine is [jimmyandrade/vocabulary](https://github.com/jimmyandrade/vocabulary).
+A business harness has the same `.agents/` layout with its own skills, mappings, and glossary, and `node_modules/harness` holding a pinned release of this repository. The vocabulary engine is in `vocabulary/` in this repository, as ADR 0015 decides, and a business harness reads it from `node_modules/harness/vocabulary`.
 
 ## 2. High-Level System Diagram
 
@@ -168,6 +168,6 @@ None. People reach the core through their agent (Claude Code, Cursor), GitHub, a
 - Business harness: a private repository with the skills and data of one business.
 - Skill: a `SKILL.md` with instructions an agent loads for one kind of task.
 - Mapping: the JSON file that names the Notion data source, properties, and status options of one business.
-- Glossary: the per-language list of allowed, forbidden, and situational terms of a business. The engine that reads it is jimmyandrade/vocabulary.
+- Glossary: the per-language list of allowed, forbidden, and situational terms of a business. The engine that reads it is in `vocabulary/` in this repository.
 - Marketplace: the catalog that lists plugins to install. Claude Code and Codex read `.claude-plugin/marketplace.json`.
 - ADR: Architecture Decision Record, in `docs/adr/`.

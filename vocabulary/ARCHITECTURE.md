@@ -17,17 +17,12 @@ vocabulary/
 │   └── shared/                # Glossary access, Zod schemas, HTTP server
 ├── dist/                      # JavaScript compiled from api/ on install, not committed
 ├── .agents/skills/            # definir-vocabulario and redigir-com-tom-de-voz
-├── .claude-plugin/            # Plugin and marketplace for Claude Code and Codex
-├── .cursor-plugin/plugin.json # The same plugin for Cursor
 ├── docs/
 │   ├── adr/                   # Architecture decisions
 │   └── runbooks/              # Setup steps for MCP hosts and glossary migration
 ├── examples/mcp.json          # Server list a project copies
 ├── tsconfig.build.json        # Compiles api/ to dist/
-├── AGENTS.md                  # Instructions for work in this repository
-├── CONTRIBUTING.md            # Commits, CI, releases
-├── release-please-config.json # Release Please for this package
-└── package.json
+└── CHANGELOG.md               # Releases of the engine before it joined the core
 ```
 
 ## 2. High-Level System Diagram
@@ -52,14 +47,14 @@ None. An agent calls the MCP tools, the CLI, or the local HTTP server.
 - Name: `vocabulary`
 - Description: Looks up a term, reports which tokens of a text exist, classifies a term or a text, inserts or updates glossary rows one by one or in a migrated batch, and migrates rows that use a deprecated state.
 - Technologies: TypeScript on Node.js 24, Zod. The type check is TypeScript 7, as `docs/adr/0005-typecheck-with-typescript-7.md` decides.
-- Deployment: `node api/mcp/index.ts` from this repository, or `node node_modules/vocabulary/dist/mcp/index.js` from a project that installed it. Node.js does not strip types under `node_modules`, so the `prepare` script compiles `dist/` when a project installs the package, as `docs/adr/0007-build-on-install.md` decides. The HTTP server listens on 127.0.0.1.
+- Deployment: `node vocabulary/api/mcp/index.ts` from this repository, or `node node_modules/harness/vocabulary/dist/mcp/index.js` from a project that installed it. Node.js does not strip types under `node_modules`, so the `prepare` script compiles `dist/` when a project installs the package, as `docs/adr/0007-build-on-install.md` decides. The HTTP server listens on 127.0.0.1.
 
 #### 3.2.2. Voice skills
 
 - Name: `definir-vocabulario` and `redigir-com-tom-de-voz`
 - Description: Register glossary terms, and write in the voice of the project that is open. The catalog is `.agents/skills/FEATURES.md`.
 - Technologies: Markdown skills, checked by the harness
-- Deployment: the `vocabulary` plugin, listed in the marketplace of a business harness at a release tag, or `npx skills add jimmyandrade/vocabulary` from the project that holds the glossary
+- Deployment: the `core` plugin, listed in the marketplace of a business harness at a release tag, or `npx skills add jimmyandrade/harness` from the project that holds the glossary
 
 ## 4. Data Stores
 
@@ -77,7 +72,7 @@ None. Crowdin and Transifex are an export, not this file format.
 ## 6. Deployment & Infrastructure
 
 - Cloud Provider: GitHub
-- CI/CD Pipeline: `.github/workflows/ci.yml` typechecks and runs `npm test`, which installs the commit from git and starts the server from that copy. `.github/workflows/release-please.yml` opens the release pull request, and merging it tags `vMAJOR.MINOR.PATCH`. Details are in `CONTRIBUTING.md`. `.github/workflows/skill-check.yml` checks the skills with the harness action.
+- CI/CD Pipeline: `.github/workflows/ci.yml` at the root of the repository typechecks and runs `npm test`, which installs the commit from git and starts the server from that copy. The release is the one of the core, by `.github/workflows/release-please.yml`.
 
 ## 7. Security Considerations
 
@@ -98,7 +93,7 @@ None. Crowdin and Transifex are an export, not this file format.
 ## 10. Project Identification
 
 - Project Name: vocabulary
-- Repository URL: https://github.com/jimmyandrade/vocabulary
+- Repository URL: https://github.com/jimmyandrade/harness
 - Primary Contact/Team: Jimmy Andrade
 - Date of Last Update: 2026-10-20
 

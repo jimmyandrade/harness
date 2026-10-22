@@ -27,7 +27,7 @@ metadata:
 ## Camadas
 
 - Este repositório é o harness core. Ele é público. Nunca adicione a ele nome de empresa, regra de negócio, espaço de trabalho, banco, página, pessoa ou segredo.
-- Um harness de negócio é um repositório próprio. Ele guarda as skills do negócio, os schemas e os mapeamentos das fontes de dados, o glossário e os estilos de saída. Ele usa este repositório para o verificador, a sincronização com o Notion e as skills compartilhadas. A API e o MCP do vocabulário ficam no próprio repositório, jimmyandrade/vocabulary.
+- Um harness de negócio é um repositório próprio. Ele guarda as skills do negócio, os schemas e os mapeamentos das fontes de dados, o glossário e os estilos de saída. Ele usa este repositório para o verificador, a sincronização com o Notion e as skills compartilhadas. A API, a linha de comando e o MCP do vocabulário ficam neste repositório, em `vocabulary/`, como decide a ADR 0015.
 - Uma skill passa de um harness de negócio para este repositório uma de cada vez, depois de uma auditoria. A auditoria remove todo nome de empresa, regra de negócio e nome de espaço de trabalho ou de banco, e leva para as instruções do projeto o que ainda muda de um negócio para outro. Mantenha o nome, a versão e `metadata.aliases` quando a skill mudar de repositório, para a página no Notion de cada negócio manter o histórico.
 - Não traga uma skill para cá porque dois negócios têm skills parecidas. Traga quando um texto só servir para os dois.
 
@@ -86,7 +86,7 @@ metadata:
 - Descreva uma fonte de dados com JSON Schema e um mapeamento do Notion separado, como em `docs/adr/0001-describe-data-sources-with-json-schema.md`. Esses arquivos ficam no harness de negócio, não aqui.
 - Uma skill do core que lê uma fonte de dados do negócio fala de conceitos, como o título da edição ou o grupo de uma edição. O mapeamento de cada negócio liga esses conceitos aos nomes da lista e das propriedades. Uma propriedade sem a qual a edição não existe e que falta no mapeamento para a skill antes de ela escrever. Um valor de propriedade opcional que falta no mapeamento é listado no fim, com a sugestão de criar a propriedade: a skill nunca cria schema e nunca escreve esse valor no corpo da página.
 - `Considerar grupos de oportunidades` diz se as skills de oportunidade usam grupos. Com `sim`, toda edição pertence a exatamente um grupo, e o verificador falha quando o mapeamento de oportunidades do negócio, `.agents/mappings/oportunidades.notion.json`, não liga `group`. Com `não`, a edição não tem grupo.
-- O glossário de um projeto fica nesse projeto. O motor que o lê e escreve é o jimmyandrade/vocabulary, como decide a ADR 0010.
+- O glossário de um projeto fica nesse projeto. O motor que o lê e escreve fica neste repositório, em `vocabulary/`, como decide a ADR 0015.
 
 ## Documentos
 
