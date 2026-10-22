@@ -511,6 +511,7 @@ How these skills relate is in `README.md`, in this folder.
   - Answers to the earlier names `definir-link-utm`, `definir-parametros-utm`, `definir-rastreio-de-link`, and `gerar-link-com-parametros-utm` through `metadata.aliases`
   - Reads the allowed sources and mediums from a field of a data source in the connected workspace when the project names one, or else from the parameter lists, and asks instead of inventing a value
   - Reads the own domains from parameters
+  - Puts the internal role of a team member who promotes with their own profile in `utm_marketing_tactic`, from the `Táticas` list, with their public handle in the campaign name and never their name
   - Builds `utm_campaign` from the `Modelo do nome da campanha` template when the project sets one, dropping a bracketed part with its separator when its value is empty, and treats a generator, API, MCP or command line that builds the name another way as a failed check
   - Keeps `utm_term` empty except for a paid keyword or an automation keyword
   - Separates words in every value with one `Separador`, underscore by default, in every place that builds links (site, on-screen generator, API, MCP, command line), and converts slugs to it
