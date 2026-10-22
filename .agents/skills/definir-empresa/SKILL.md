@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.2"
+  version: "0.2.3"
   related:
     - definir-grafia
     - definir-perfil-social
@@ -39,11 +39,22 @@ flowchart LR
 
 ### Passo 2
 
-Fornecedora ativa, potencial ou relevante para cotação, compra, parceria ou relacionamento comercial precisa de uma pessoa nas pessoas responsáveis. A pessoa é, de preferência, gerente, representante comercial, vendedora, dona ou o contato do atendimento. Busque a pessoa na lista de pessoas antes de criar. Mais de um registro da mesma pessoa segue o flowchart do Passo 1. Sem nome da pessoa, pergunte. Não invente o nome.
+```mermaid
+flowchart LR
+  A{Contexto da fornecedora?} -->|compra pontual sem relacionamento continuado| B[Cadastra sem exigir contato nominal]
+  A -->|cotação, parceria ou relacionamento comercial continuado| C{Pessoa responsável nomeada?}
+  A -->|não é fornecedora relevante| B
+  C -->|sim| D[Busca a pessoa antes de criar]
+  C -->|não| E[Pergunta pelo contato operacional]
+```
+
+Uma compra pontual, como uma refeição em restaurante, não exige conhecer o dono nem uma pessoa do atendimento. Não invente pessoa, não crie contato genérico e não bloqueie o cadastro nem o vínculo da despesa por essa ausência. A falta de contato nesse contexto não é pendência obrigatória.
+
+A pessoa responsável é, de preferência, gerente, representante comercial, vendedora, dona ou contato do atendimento. Mais de um registro da mesma pessoa segue o flowchart do Passo 1.
 
 ### Passo 3
 
-Relacione a pessoa nas pessoas responsáveis. Os donos são outra relação e não substituem essa. Quem verifica é usuário do workspace e não substitui essa. No tipo de público, acrescente a opção de fornecedor quando fizer sentido. Não apague os valores que já estão. Abra a pessoa e confira as empresas relacionadas. Se a empresa já apareceu, pare. Se não apareceu, relacione. Não relacione de novo. As notas qualificam o papel, o contexto, a pendência ou a certeza. A nota não substitui a relação. Telefone, WhatsApp e endereço não entram na nota.
+Quando houver pessoa identificada, relacione-a nas pessoas responsáveis. Os donos são outra relação e não substituem essa. Quem verifica é usuário do workspace e não substitui essa. No tipo de público, acrescente a opção de fornecedor quando fizer sentido. Não apague os valores que já estão. Com pessoa vinculada, abra o registro dela e confira as empresas relacionadas. Se a empresa já apareceu, pare. Se não apareceu, relacione. Não relacione de novo. As notas qualificam o papel, o contexto, a pendência ou a certeza. A nota não substitui a relação. Telefone, WhatsApp e endereço não entram na nota.
 
 ## Problemas comuns
 
@@ -73,15 +84,16 @@ Associei a pessoa nas pessoas responsáveis. A nota ficou com o papel. O tipo de
 
 ## Casos-limite
 
-- A empresa não é fornecedora ativa, potencial ou relevante para cotação, compra, parceria ou relacionamento comercial: não exija a pessoa responsável.
-- A pessoa não foi nomeada: pergunte. Não invente o nome.
+- A exigência de contato segue o flowchart do Passo 2. Não invente o nome nem confunda contato operacional com dono.
 - A pessoa já existe: aponte o registro. Não crie outra.
 - O tipo de público já tem outros valores: acrescente a opção de fornecedor quando fizer sentido. Não apague os outros.
 - As empresas relacionadas já mostram a empresa: não relacione de novo.
 - A empresa não apareceu nas empresas relacionadas: relacione.
-- Donos preenchidos e pessoas responsáveis vazias: ligue as pessoas responsáveis.
+- Donos preenchidos não autorizam presumir quem é o contato operacional. Preserve as relações existentes.
 
 ## Pegadinhas
+
+- Ter recebido uma compra não torna o estabelecimento um relacionamento comercial continuado. O contato nominal não é requisito universal do cadastro.
 
 - Os donos parecem a pessoa responsável. É outra relação. A pessoa responsável fica nas pessoas responsáveis.
 - Quem verifica parece o contato da fornecedora. É um usuário do workspace, não uma página da lista de pessoas.
