@@ -13,6 +13,7 @@ flowchart LR
   subgraph core["Core"]
     acompanhar_fila_de_revisao["acompanhar-fila-de-revisao"]
     acompanhar_veiculo["acompanhar-veiculo"]
+    anexar_resumo_ao_evento["anexar-resumo-ao-evento"]
     atender_revisao_de_pull_request["atender-revisao-de-pull-request"]
     avaliar_atualizacoes_de_dependencia["avaliar-atualizacoes-de-dependencia"]
     comunicar_novidade_do_produto["comunicar-novidade-do-produto"]
@@ -101,6 +102,9 @@ flowchart LR
   acompanhar_veiculo --> lancar_despesa_pessoal
   acompanhar_veiculo --> organizar_emails
   acompanhar_veiculo --> sincronizar_cronograma
+  anexar_resumo_ao_evento --> definir_agenda
+  anexar_resumo_ao_evento --> evoluir_habilidade
+  anexar_resumo_ao_evento --> procurar_agenda
   atender_revisao_de_pull_request --> criar_commit
   atender_revisao_de_pull_request --> criar_pull_request
   atender_revisao_de_pull_request --> escrever_teste
