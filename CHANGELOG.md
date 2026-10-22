@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.81.0](https://github.com/jimmyandrade/harness/compare/v0.80.0...v0.81.0) (2026-10-22)
+
+
+### Features
+
+* make the architecture decision language a parameter ([#370](https://github.com/jimmyandrade/harness/issues/370)) ([66f0f59](https://github.com/jimmyandrade/harness/commit/66f0f59d43f42aa6e60ba25dd62f134d005c5422))
+* **skills:** move the vocabulary skills to the core and add perfilar-tom-de-voz ([#363](https://github.com/jimmyandrade/harness/issues/363)) ([63d1191](https://github.com/jimmyandrade/harness/commit/63d1191d89e8ff2c95ed1e49b2c9c8954a08252d))
+
+
+### Bug Fixes
+
+* keep --allow-git=all when moving a pin without ~/.npmrc ([#368](https://github.com/jimmyandrade/harness/issues/368)) ([58e2b53](https://github.com/jimmyandrade/harness/commit/58e2b538b4da80f3494598e9874c2f2ec91ee047))
+
 ## [0.80.0](https://github.com/jimmyandrade/harness/compare/v0.79.0...v0.80.0) (2026-10-22)
 
 
