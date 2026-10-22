@@ -3,12 +3,14 @@ name: escrever-codigo
 description: Aplica as preferências de código da pessoa antes de escrever ou alterar código, como comentários, estilo inline e o que fazer antes de criar um componente. Usada quando uma mudança vai escrever ou alterar código do projeto. Não serve para testes, para commit nem para decidir a arquitetura.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   notion: "false"
   related:
     - criar-commit
+    - criar-pull-request
     - escrever-teste
     - evoluir-habilidade
+    - levantar-ambiente-do-repositorio
 ---
 
 # Escrever código
@@ -31,7 +33,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ### Passo 1
 
-Leia a convenção do repositório para código, nas instruções do projeto e nas habilidades do próprio repositório. Ela vale mais que qualquer preferência desta habilidade. Diga à pessoa quando uma preferência dela contraria o repositório e siga o repositório.
+Chame `levantar-ambiente-do-repositorio` para achar a convenção de código e as habilidades do repositório, nas instruções do projeto e nas habilidades do próprio repositório. Ela vale mais que qualquer preferência desta habilidade. Diga à pessoa quando uma preferência dela contraria o repositório e siga o repositório.
 
 ### Passo 2
 
@@ -47,7 +49,7 @@ Antes de criar um componente, siga `Antes de criar um componente`: leia o desenh
 
 ### Passo 5
 
-Para o teste da mudança, chame `escrever-teste`.
+Para o teste da mudança, chame `escrever-teste`. Para o commit e o pull request, siga `criar-commit` e `criar-pull-request`.
 
 ### Passo 6
 

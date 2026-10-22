@@ -62,6 +62,7 @@ flowchart LR
     identificar_duplicata["identificar-duplicata"]
     lancar_despesa_da_empresa["lancar-despesa-da-empresa"]
     lancar_despesa_pessoal["lancar-despesa-pessoal"]
+    levantar_ambiente_do_repositorio["levantar-ambiente-do-repositorio"]
     levantar_contexto_do_pull_request["levantar-contexto-do-pull-request"]
     liberar_espaco_em_disco["liberar-espaco-em-disco"]
     limpar_copias_de_trabalho["limpar-copias-de-trabalho"]
@@ -102,7 +103,9 @@ flowchart LR
   acompanhar_veiculo --> sincronizar_cronograma
   atender_revisao_de_pull_request --> criar_commit
   atender_revisao_de_pull_request --> criar_pull_request
+  atender_revisao_de_pull_request --> escrever_teste
   atender_revisao_de_pull_request --> evoluir_habilidade
+  atender_revisao_de_pull_request --> levantar_ambiente_do_repositorio
   atender_revisao_de_pull_request --> levantar_contexto_do_pull_request
   atender_revisao_de_pull_request --> priorizar_itens
   atender_revisao_de_pull_request --> publicar_revisao_de_codigo
@@ -262,11 +265,14 @@ flowchart LR
   enviar_mensagem_no_slack --> definir_pessoa
   enviar_mensagem_no_slack --> evoluir_habilidade
   escrever_codigo --> criar_commit
+  escrever_codigo --> criar_pull_request
   escrever_codigo --> escrever_teste
   escrever_codigo --> evoluir_habilidade
+  escrever_codigo --> levantar_ambiente_do_repositorio
   escrever_teste --> criar_commit
   escrever_teste --> escrever_codigo
   escrever_teste --> evoluir_habilidade
+  escrever_teste --> levantar_ambiente_do_repositorio
   evoluir_habilidade --> criar_commit
   evoluir_habilidade --> criar_pull_request
   evoluir_habilidade --> definir_instrucoes_do_projeto
@@ -287,8 +293,15 @@ flowchart LR
   lancar_despesa_pessoal --> definir_obrigacao_financeira
   lancar_despesa_pessoal --> evoluir_habilidade
   lancar_despesa_pessoal --> lancar_despesa_da_empresa
+  levantar_ambiente_do_repositorio --> criar_commit
+  levantar_ambiente_do_repositorio --> criar_pull_request
+  levantar_ambiente_do_repositorio --> escrever_codigo
+  levantar_ambiente_do_repositorio --> escrever_teste
+  levantar_ambiente_do_repositorio --> evoluir_habilidade
+  levantar_ambiente_do_repositorio --> levantar_contexto_do_pull_request
   levantar_contexto_do_pull_request --> definir_registro_de_reuniao
   levantar_contexto_do_pull_request --> evoluir_habilidade
+  levantar_contexto_do_pull_request --> levantar_ambiente_do_repositorio
   liberar_espaco_em_disco --> evoluir_habilidade
   liberar_espaco_em_disco --> limpar_copias_de_trabalho
   limpar_copias_de_trabalho --> criar_pull_request

@@ -3,7 +3,7 @@ name: atender-revisao-de-pull-request
 description: Atende a revisão recebida num pull request, de pessoa ou de bot. Lê os comentários abertos, classifica cada sugestão, aplica o que é seguro, responde cada thread e resolve as atendidas. Sem PR informado, lista os seus que precisam de atenção. Não serve para revisar o PR de outra pessoa nem para abrir o PR.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.7.0"
   notion: "false"
   aliases:
     - resolver-comentarios-de-revisao
@@ -11,7 +11,9 @@ metadata:
   related:
     - criar-commit
     - criar-pull-request
+    - escrever-teste
     - evoluir-habilidade
+    - levantar-ambiente-do-repositorio
     - levantar-contexto-do-pull-request
     - priorizar-itens
     - publicar-revisao-de-codigo
@@ -35,11 +37,14 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Ler o texto antes de publicar": "sim"
 "Pedir nova revisão ao final": "sim"
 "Fechar conversa com a confiança": "não"
+"Rótulo de prioridade no texto": "não"
+"Idioma do relatório": "o idioma da conversa"
+"Agrupar o relatório por prioridade": "não"
 "Recriar PR aberto por agente de código": "não"
 "Modo de aprendizado": "perguntar"
 ```
 
-`Fechar conversa com a confiança` em `sim` faz a mensagem que fecha uma conversa dizer o quanto você tem de confiança de que o ponto foi resolvido. `Modo de execução` é `interativo`, com a pessoa na frente, ou `agendado`, sem ninguém. `Aplicar em execução agendada` é `estrutural`, que aplica só o estrutural, ou `não`, que não aplica nada e deixa tudo no resumo. `Aprovação para mudar comportamento` é `pedir` ou `não pedir`. `Régua de mudança de comportamento` lista o que o projeto conta como mudança de comportamento, como condicional, validação, cache, rastreamento ou pagamento. `Lentes de revisão` lista critérios que você aplica ao decidir, sem citá-los na resposta.
+`Fechar conversa com a confiança` em `sim` faz a mensagem que fecha uma conversa dizer o quanto você tem de confiança de que o ponto foi resolvido. `Rótulo de prioridade no texto` em `não` mantém o nome da categoria fora das respostas. `Idioma do relatório` e `Agrupar o relatório por prioridade` mandam no relatório final. `Modo de execução` é `interativo`, com a pessoa na frente, ou `agendado`, sem ninguém. `Aplicar em execução agendada` é `estrutural`, que aplica só o estrutural, ou `não`, que não aplica nada e deixa tudo no resumo. `Aprovação para mudar comportamento` é `pedir` ou `não pedir`. `Régua de mudança de comportamento` lista o que o projeto conta como mudança de comportamento, como condicional, validação, cache, rastreamento ou pagamento. `Lentes de revisão` lista critérios que você aplica ao decidir, sem citá-los na resposta.
 
 ## Instruções
 
@@ -47,7 +52,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 Peça o número ou o link do pull request. Sem PR informado, liste os PRs abertos da pessoa que têm mudanças pedidas, comentários abertos ou checks falhando, e peça qual tratar. Em modo agendado, trate um por vez, na ordem.
 
-Confira que o PR está aberto e é da pessoa. Não faça push no PR de outra pessoa, nem no de um fork, sem pedido explícito dela, naquele PR. Com `Recriar PR aberto por agente de código` em `sim`, um PR aberto por um agente de código a pedido da pessoa é recriado com ela como autora, com link para o antigo, e o antigo é fechado com um comentário curto. Peça a confirmação antes.
+Confira que o PR está aberto e é da pessoa. Não faça push no PR de outra pessoa, nem no de um fork, sem pedido explícito dela, naquele PR. Com `Recriar PR aberto por agente de código` em `sim`, um PR aberto por um agente de código a pedido da pessoa é recriado com ela como autora, com link para o antigo, e o antigo é fechado com um comentário curto. As threads abertas do PR antigo entram na lista, são aplicadas no PR novo, e a resposta de cada uma é publicada no antigo, apontando o commit do novo. Peça a confirmação antes.
 
 Chame `levantar-contexto-do-pull-request` e use a ficha: o estado, as convenções do repositório, o card e todos os comentários, com o estado de cada thread, o corpo de cada revisão, inclusive o resumo que um bot publica, e os comentários da conversa do PR. Aviso de bot que só informa, como link de preview ou nota de release, fica lido e sem ação.
 
@@ -70,7 +75,7 @@ Na dúvida entre estrutural e mudança de comportamento, é mudança de comporta
 
 Aplique numa cópia separada do repositório, com a trava de revisão em andamento, como `publicar-revisao-de-codigo` faz. Não troque a branch do clone da pessoa, não guarde as alterações dela e não escreva nele. No fim, remova a cópia e libere a trava, mesmo se algo falhou.
 
-Valide antes de commitar, com o que o repositório define para os arquivos afetados: lint, tipos e testes. Se uma sugestão pede teste novo, escreva o teste pela `Convenção de testes`. Se a validação falhar por causa de uma mudança aplicada, desfaça só essa, marque o item como não aplicado e diga o erro. Não faça push de nada que quebre a validação.
+Valide antes de commitar, com o que `levantar-ambiente-do-repositorio` achar para os arquivos afetados: lint, tipos e testes, com o runtime ativado como o repositório manda. Se uma sugestão pede teste novo, escreva o teste pela `Convenção de testes`, com `escrever-teste`. Se a validação falhar por causa de uma mudança aplicada, desfaça só essa, marque o item como não aplicado e diga o erro. Não faça push de nada que quebre a validação.
 
 ### Passo 5
 
@@ -80,7 +85,7 @@ Se a decisão vale além deste PR, grave a lição nas instruções do projeto e
 
 ### Passo 6
 
-Responda cada thread em `Idioma da resposta à revisão`: o que mudou, com o commit, ou por que não muda. Toda thread tratada fica com uma resposta registrada, inclusive a de bot e a decidida fora do PR. Comentário desatualizado ganha a explicação do que mudou desde então. Discordância e fora de escopo viram pergunta, nunca veredito.
+Responda cada thread em `Idioma da resposta à revisão`: o que mudou, com o commit, ou por que não muda. Toda thread tratada fica com uma resposta registrada, inclusive a de bot e a decidida fora do PR. Comentário desatualizado ganha a explicação do que mudou desde então. Discordância e fora de escopo viram pergunta, nunca veredito. A resposta a uma pessoa trata do ponto que ela escreveu: retoma a ideia dela e diz o que mudou, e nunca é uma fórmula colada. Com `Rótulo de prioridade no texto` em `não`, o nome da categoria nunca aparece.
 
 Com `Ler o texto antes de publicar` em `sim`, mostre as respostas a pessoas e espere o sim da pessoa. A resposta a um bot não precisa de leitura.
 
@@ -92,7 +97,7 @@ Com `Pedir nova revisão ao final` em `sim`, peça nova revisão a quem solicito
 
 ### Passo 8
 
-Entregue um placar curto: aceitos, recusados, desatualizados e abertos, por autor, e o que ficou esperando decisão. Diga se ainda há thread aberta, se pediu nova revisão e o que a validação não conseguiu. Devolva para quem chamou, com o endereço do PR. O merge segue `criar-pull-request`, que decide também pelos checks.
+Entregue um placar curto: aceitos, recusados, desatualizados e abertos, por autor, e o que ficou esperando decisão. O relatório sai no `Idioma do relatório`, com o endereço do PR por extenso, e com `Agrupar o relatório por prioridade` em `sim` agrupa por Deve ter, Deveria ter, Poderia ter e Não terá agora. Diga se ainda há thread aberta, se pediu nova revisão e o que a validação não conseguiu. Devolva para quem chamou, com o endereço do PR. O merge segue `criar-pull-request`, que decide também pelos checks.
 
 ### Passo 9
 
