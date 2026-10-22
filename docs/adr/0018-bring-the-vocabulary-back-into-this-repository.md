@@ -6,11 +6,11 @@ locale: en
 
 ## Status
 
-Accepted. It supersedes ADR 0010.
+Accepted. It replaces the former ADR 0010, which moved the vocabulary out and is deleted; its text stays in the git history.
 
 ## Context
 
-ADR 0010 moved the vocabulary API, CLI, MCP server, and skills to jimmyandrade/vocabulary so this repository could stay focused on skills, and so a vocabulary fix and a skill fix would not share one pin and one plugin.
+The former ADR 0010 moved the vocabulary API, CLI, MCP server, and skills to jimmyandrade/vocabulary so this repository could stay focused on skills, and so a vocabulary fix and a skill fix would not share one pin and one plugin.
 
 Since then the two repositories became tied in both directions:
 
@@ -18,7 +18,7 @@ Since then the two repositories became tied in both directions:
 - The vocabulary repository depends on this one. Its `package.json`, its lockfile, and the pinned `check-skill` action must all name the same core version, and the skill check fails when they differ. Each core release needs a second pull request there, and a rule change here, such as the description style of ADR 0013, blocks new skills there until that pull request lands.
 - A person who installs the core and the vocabulary installs and updates two plugins that need to stay compatible.
 
-The reason of ADR 0010 no longer outweighs that cost.
+The reason for that move no longer outweighs that cost.
 
 ## Decision
 
