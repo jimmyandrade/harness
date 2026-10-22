@@ -118,12 +118,14 @@ flowchart LR
   avaliar_atualizacoes_de_dependencia --> criar_pull_request
   avaliar_atualizacoes_de_dependencia --> evoluir_habilidade
   comunicar_novidade_do_produto --> evoluir_habilidade
+  comunicar_novidade_do_produto --> redigir_com_tom_de_voz
   conversar_no_whatsapp --> comunicar_novidade_do_produto
   conversar_no_whatsapp --> definir_agenda
   conversar_no_whatsapp --> definir_pessoa
   conversar_no_whatsapp --> definir_tarefa
   conversar_no_whatsapp --> evoluir_habilidade
   conversar_no_whatsapp --> procurar_tarefa
+  conversar_no_whatsapp --> redigir_com_tom_de_voz
   criar_commit -.-> criar_pull_request
   criar_commit -.-> evoluir_habilidade
   criar_habilidade --> criar_commit
@@ -271,7 +273,9 @@ flowchart LR
   descrever_habilidade_ou_schema --> evoluir_habilidade
   descrever_habilidade_ou_schema --> revisar_habilidade
   enviar_mensagem_no_slack --> definir_pessoa
+  enviar_mensagem_no_slack --> definir_vocabulario
   enviar_mensagem_no_slack --> evoluir_habilidade
+  enviar_mensagem_no_slack --> redigir_com_tom_de_voz
   escrever_codigo --> criar_commit
   escrever_codigo --> criar_pull_request
   escrever_codigo --> escrever_teste
@@ -344,6 +348,7 @@ flowchart LR
   preparar_tarefa_do_pull_request --> levantar_contexto_do_pull_request
   preparar_tarefa_do_pull_request --> priorizar_itens
   preparar_tarefa_do_pull_request --> procurar_tarefa
+  preparar_tarefa_do_pull_request --> redigir_com_tom_de_voz
   priorizar_itens --> evoluir_habilidade
   procurar_agenda --> criar_oportunidade
   procurar_agenda --> definir_agenda
@@ -377,6 +382,7 @@ flowchart LR
   publicar_revisao_de_codigo --> evoluir_habilidade
   publicar_revisao_de_codigo --> levantar_contexto_do_pull_request
   publicar_revisao_de_codigo --> priorizar_itens
+  publicar_revisao_de_codigo --> redigir_com_tom_de_voz
   reconhecer_imagem --> criar_oportunidade
   reconhecer_imagem --> definir_grafia
   reconhecer_imagem --> definir_inscricao
