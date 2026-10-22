@@ -3,7 +3,7 @@ name: preparar-tarefa-do-pull-request
 description: Garante que uma demanda tenha uma tarefa no rastreador do projeto antes de virar pull request, ou depois, quando o PR já existe. Procura a tarefa existente, sugere a criação e pede o contexto, monta a tarefa e liga a chave ao PR. Não cria sozinha e não cria tarefa vazia. Não serve para escrever bem uma tarefa nem para abrir o PR.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.2.1"
   notion: "false"
   related:
     - definir-tarefa
@@ -11,6 +11,7 @@ metadata:
     - levantar-contexto-do-pull-request
     - priorizar-itens
     - procurar-tarefa
+    - redigir-com-tom-de-voz
 ---
 
 # Preparar tarefa do pull request

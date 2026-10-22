@@ -3,9 +3,10 @@ name: comunicar-novidade-do-produto
 description: Use essa habilidade sempre que um PR for mesclado ou alguém perguntar o que há de novo no produto para quem o usa, mesmo sem dizer novidade, para decidir se há o que contar e escrever o comunicado sem termos técnicos. NÃO use para a descrição do PR, o changelog nem release notes técnicas.
 metadata:
   author: jimmyandrade
-  version: "0.8.1"
+  version: "0.8.2"
   related:
     - evoluir-habilidade
+    - redigir-com-tom-de-voz
 ---
 
 # Comunicar novidade do produto
