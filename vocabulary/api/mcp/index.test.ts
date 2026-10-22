@@ -3,6 +3,7 @@ import { mkdtempSync, readFileSync, writeFileSync } from "node:fs"
 import { tmpdir } from "node:os"
 import { join } from "node:path"
 import { spawn } from "node:child_process"
+import { fileURLToPath } from "node:url"
 import test from "node:test"
 
 import { callTool, encodeMessage, respond } from "./index.ts"
@@ -150,7 +151,7 @@ test("write_terms keeps a plural on its own row", () => {
 test("the server answers initialize and write_terms on stdio", async () => {
   const root = mkdtempSync(join(tmpdir(), "glossary-"))
   writeFileSync(join(root, "pt-BR.json"), "{}\n")
-  const child = spawn(process.execPath, ["api/mcp/index.ts", "--glossary", root], {
+  const child = spawn(process.execPath, [fileURLToPath(new URL("./index.ts", import.meta.url)), "--glossary", root], {
     stdio: ["pipe", "pipe", "pipe"],
   })
   const frames: { id?: unknown; result?: { protocolVersion?: string; tools?: { name: string }[]; content?: { text: string }[] } }[] = []
@@ -210,7 +211,7 @@ test("the server answers initialize and write_terms on stdio", async () => {
 })
 
 test("initialize reports the version in package.json", () => {
-  const { version } = JSON.parse(readFileSync(new URL("../../package.json", import.meta.url), "utf8")) as { version: string }
+  const { version } = JSON.parse(readFileSync(new URL("../../../package.json", import.meta.url), "utf8")) as { version: string }
   const response = respond(tmpdir(), { jsonrpc: "2.0", id: 1, method: "initialize", params: {} }) as {
     result?: { serverInfo?: { name: string; version: string } }
   }

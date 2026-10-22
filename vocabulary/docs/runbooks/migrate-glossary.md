@@ -13,7 +13,7 @@ Run the commands from the project that holds the glossary. With the MCP server i
 1. See which rows still use `situationally_allowed` or `category`:
 
    ```bash
-   node node_modules/vocabulary/dist/cli.js migrate --language pt-BR
+   node node_modules/harness/vocabulary/dist/cli.js migrate --language pt-BR
    ```
 
    Check: `written` is `false`. `states` lists each row and its new level, and `categories` lists each row with `category`.
@@ -21,7 +21,7 @@ Run the commands from the project that holds the glossary. With the MCP server i
 2. Rewrite them:
 
    ```bash
-   node node_modules/vocabulary/dist/cli.js migrate --language pt-BR --write
+   node node_modules/harness/vocabulary/dist/cli.js migrate --language pt-BR --write
    ```
 
    Check: `written` is `true`, and running the first command again lists nothing.
@@ -68,7 +68,7 @@ Run the commands from the project that holds the glossary. With the MCP server i
 5. Import it:
 
    ```bash
-   node node_modules/vocabulary/dist/cli.js terms --file batch.json
+   node node_modules/harness/vocabulary/dist/cli.js terms --file batch.json
    ```
 
    Check: the response lists `inserted`, `updated`, `unchanged`, `skipped`, and `incomplete`. A refusal names the term and leaves the file unchanged. Fix the batch and run it again.

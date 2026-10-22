@@ -3,7 +3,7 @@ name: procurar-variacao-de-termo
 description: Use essa habilidade sempre que alguém perguntar se um termo do vocabulário do tom de voz faltou, ou quais variações de gênero, número ou grafia de um termo foram cadastradas, mesmo sem dizer variação, plural ou feminino. NÃO use para cadastrar ou atualizar o termo, escrever o texto da marca, nem inventar uma forma que a pessoa não pediu.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.2.1"
   related:
     - definir-vocabulario
     - evoluir-habilidade
@@ -96,7 +96,7 @@ A busca não achou casas. Casa já estava. Disse que casas não existe, que é o
 
 ## Scripts disponíveis
 
-- `node node_modules/vocabulary/dist/cli.js lookup --language <idioma> --term <termo>` lê um termo e devolve se ele existe e a linha guardada.
+- `node node_modules/harness/vocabulary/dist/cli.js lookup --language <idioma> --term <termo>` lê um termo e devolve se ele existe e a linha guardada.
 - `--glossary`, antes do comando, aponta outro vocabulário.
 - `lookup_term`, no servidor `vocabulary`, faz a mesma consulta quando não há terminal.
 

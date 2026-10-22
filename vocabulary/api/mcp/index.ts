@@ -21,8 +21,8 @@ import { LEVELS, existsRequest, lookupRequest, migrateRequest, termsRequest } fr
 
 const PROTOCOL = "2024-11-05"
 
-// Release Please bumps package.json. api/ and dist/ both sit two levels below it.
-const VERSION = (JSON.parse(readFileSync(new URL("../../package.json", import.meta.url), "utf8")) as { version: string }).version
+// Release Please bumps the package.json of the repository root. api/ and dist/ both sit three levels below it.
+const VERSION = (JSON.parse(readFileSync(new URL("../../../package.json", import.meta.url), "utf8")) as { version: string }).version
 
 const languageProperty = { type: "string", description: "BCP 47 tag of the text, such as pt-BR." }
 
