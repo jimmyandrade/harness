@@ -68,7 +68,7 @@ The release exists, but the Dependency Dashboard of a business harness still lis
 
 Moving a pin by hand, `npm install -D "harness@github:jimmyandrade/harness#vX.Y.Z"`, or the same for jimmyandrade/vocabulary, stops with `npm error code EALLOWGIT` and `Refusing to fetch`.
 
-1. The npm configuration sets `allow-git` to `root`, often in `~/.npmrc`. `npm config get allow-git` prints it. With that value, npm refuses to resolve a new git dependency, even one listed in `package.json`.
+1. `allow-git` is `root`: npm 11.17 uses that value by default, and `~/.npmrc` can set it too. `npm config get allow-git` prints it. With that value, npm refuses to resolve a new git dependency, even one listed in `package.json`.
 2. Allow it for that one command: `npm install -D "harness@github:jimmyandrade/harness#vX.Y.Z" --allow-git=all`. The setting in `~/.npmrc` stays as it is.
 3. `npm ci` installs from `package-lock.json` and does not need the flag. With npm 11.17 or later and `allow-scripts` set in `~/.npmrc`, it can stop with `EALLOWSCRIPTS` instead: see the next section. Renovate does not read `~/.npmrc` and needs neither.
 4. `package.json` and `package-lock.json` naming the new tag, and `run-check.sh` exiting 0, close the case.
@@ -78,6 +78,6 @@ Moving a pin by hand, `npm install -D "harness@github:jimmyandrade/harness#vX.Y.
 `npm ci` or `npm install` in a business harness stops with `npm error code EALLOWSCRIPTS` and `--allow-scripts is not allowed in project-scoped installs`, printed twice, once by a second npm process. `node_modules` is left empty.
 
 1. The core and jimmyandrade/vocabulary are git dependencies. To prepare one, npm runs a second `npm install` in the cloned folder and passes its own settings down as environment variables. From npm 11.17, a project install refuses `allow-scripts` given on the command line, and the second npm reads the setting it inherited from `~/.npmrc` as if it came from the command line. `npm -v` prints the version, and `npm config get allow-scripts` prints the setting.
-2. Run the install ignoring the user configuration for that one command, in the project folder: `npm_config_userconfig=/dev/null npm ci`. The same prefix works for `npm install -D "harness@github:jimmyandrade/harness#vX.Y.Z"`, and then `--allow-git=all` is not needed, because `allow-git=root` also lives in `~/.npmrc`. The file stays as it is.
+2. Run the install ignoring the user configuration for that one command, in the project folder: `npm_config_userconfig=/dev/null npm ci`. To move a pin, add both: `npm_config_userconfig=/dev/null npm install -D "harness@github:jimmyandrade/harness#vX.Y.Z" --allow-git=all`. Ignoring `~/.npmrc` does not lift `allow-git`, because `root` is also the npm default. The file stays as it is.
 3. Without `~/.npmrc`, the command also loses the tokens it holds. Git dependencies over SSH and public packages do not need them; a package from a private registry does.
 4. `node_modules/harness` and `node_modules/vocabulary` present, and `run-check.sh` exiting 0, close the case.
