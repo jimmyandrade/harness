@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.76.0](https://github.com/jimmyandrade/harness/compare/v0.75.0...v0.76.0) (2026-10-22)
+
+
+### Features
+
+* **skills:** add levantar-ambiente-do-repositorio and link it to the code and test skills, and add the report and reply parameters to atender-revisao-de-pull-request ([#350](https://github.com/jimmyandrade/harness/issues/350)) ([fac9d13](https://github.com/jimmyandrade/harness/commit/fac9d13a88464fc229440e06b946ff959625c63a))
+
 ## [0.75.0](https://github.com/jimmyandrade/harness/compare/v0.74.0...v0.75.0) (2026-10-22)
 
 
