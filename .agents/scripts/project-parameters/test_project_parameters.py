@@ -90,6 +90,16 @@ class ValidateTest(unittest.TestCase):
             ['"Idioma das respostas" must be a non-empty text'],
         )
 
+    def test_should_accept_the_architecture_decision_language_and_reject_an_empty_one(self) -> None:
+        self.assertEqual(
+            self.errors(block('"Global":\n  "Idioma das decisões de arquitetura": "português do Brasil"\n')),
+            [],
+        )
+        self.assertEqual(
+            self.errors(block('"Global":\n  "Idioma das decisões de arquitetura": ""\n')),
+            ['"Idioma das decisões de arquitetura" must be a non-empty text'],
+        )
+
     def test_should_reject_flow_style(self) -> None:
         self.assertEqual(
             self.errors(block('"Global": {"Organização": "x"}\n')),
