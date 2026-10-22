@@ -3,7 +3,7 @@ name: definir-vocabulario
 description: Use essa habilidade sempre que for cadastrar ou atualizar um ou mais termos do vocabulário do tom de voz, mesmo sem dizer glossário, lote ou estado. NÃO use para escrever, revisar ou aprovar o texto da marca, classificar uma frase, perguntar quais variações de gênero, número ou grafia foram cadastradas, nem inventar um termo que a pessoa não enviou.
 metadata:
   author: jimmyandrade
-  version: "0.27.0"
+  version: "0.28.0"
   related:
     - evoluir-habilidade
     - procurar-variacao-de-termo
@@ -57,6 +57,8 @@ Termo de contexto de quem fala em primeira pessoa, de um evento ou de um canal t
 ### Passo 3
 
 Cadastrar o que ainda não está usa `insert`. Corrigir o que já está usa `update`. Gravar novos e corrigir os que já estão usa `upsert`. Se a pessoa pedir para cadastrar e não disser o modo, use `insert`.
+
+Para corrigir um termo que já está, leia a linha com `lookup` e guarde-a. Mande `state`, `term` e só o que muda: a escrita mantém o resto, e `""` ou `[]` limpa o campo, só a pedido. Leia a linha de novo depois. Se sumiu algo que você não mandou, o servidor é antigo: grave a linha guardada de volta e avise.
 
 ### Passo 4
 
@@ -257,18 +259,16 @@ Casa ficou permitida. Casas ganhou a própria linha, proibida. Moradias ganhou a
 ## Casos-limite
 
 - Permitidos, proibidos e situacionais juntos: um lote e um modo.
-- Sem modo: `insert`. Corrigir: `update`. Os dois: `upsert`.
 - O termo já está, só muda a caixa: a linha que já está é atualizada, ou fica sem alteração se os campos forem os mesmos.
 - A forma só muda o acento: é outro termo, com a própria linha e o próprio estado.
 - Plural, singular, feminino, masculino ou outra palavra do mesmo assunto: cada forma tem a própria linha e o próprio estado.
 - Termo novo e proibido, sem termos relacionados: pergunte antes de gravar. Eles entram em `alternatives`. Se a pessoa não quiser, a lista fica vazia.
 - A pessoa pergunta se um termo ou uma variação faltou: `procurar-variacao-de-termo`. `related` só aponta para termo que já está.
-- O termo já existe e a pessoa manda descrição, exemplos, estado, termos relacionados ou outra orientação: isso entra na linha dessa grafia.
+- O termo já existe e a pessoa manda outro campo: é uma correção, como no Passo 3.
 - Falta uma fonte da marca que as instruções do projeto nomeiam: pare e peça. Não invente.
 - Sem terminal e sem o servidor `vocabulary`, como num agente do Notion: pare. O cadastro roda numa ferramenta de código com o projeto aberto. Não confirme nada.
 - O termo só cabe num contexto: nível do meio, com `when`. Não use `allowed` nem `forbidden`.
 - Lote vindo de outra ferramenta: um arquivo com `terms --file` e `upsert`. Diga o que entrou, o que foi atualizado e o que ficou em `incomplete`.
-- O termo é emoji, combinação ou uso simbólico: grave estado, descrição e exemplo. A combinação junta é um termo. Não é decoração.
 - Termo proibido por clichê, genérico, automatizado ou gasto por IA, útil como intenção e não como palavra final: categoria `cliche`, descrição com a troca por imagem, cena, ação, efeito ou situação, frase a evitar em `rejected`, variação recorrente proibida e ligada ou só sugerida.
 - Frase descartada por perda consumada, cobrança agressiva, exclusão, capacitismo, ameaça real, culpa ou sensação incompatível com o tom: o motivo fica na `description` dessa frase proibida. A alternativa mantém desejo, urgência e conversa natural, sem dizer que a chance já passou.
 - O pedido é escrever a frase: `redigir-com-tom-de-voz`.

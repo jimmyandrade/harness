@@ -35,7 +35,10 @@
  * and their own state. A new term is stored
  * in lowercase, unless it is written with case_sensitive, which keeps its
  * casing as given. insert leaves a term that is already in the file.
- * update leaves a term that is absent. A row whose fields already match is
+ * update leaves a term that is absent. An update or an upsert of a term that is
+ * in the file keeps every field the call does not send, so a call that sends
+ * only a reason does not erase the description or the notes. A field sent
+ * empty, as "" or [], is cleared. A row whose fields already match is
  * unchanged. A failure leaves the file unchanged.
  *
  * An English word used in Portuguese is a row in pt-BR.json. Its state there
@@ -54,6 +57,7 @@ import {
   levelOf,
   samePerson,
   stateSchema,
+  termIssues,
   type AllowedRequest,
   type BulkTerm,
   type ForbiddenRequest,
@@ -65,6 +69,7 @@ import {
   type TermRegistration,
   type TermsWrite,
   type ExpectedField,
+  type PatchableField,
   type Validation,
   type WriteMode,
 } from "./schema.ts"
@@ -346,9 +351,10 @@ export function writeTerms(
   const path = glossaryFile(directory, tag)
   const loaded = load(readFileSync(path, "utf8"))
   const existed = new Set(loaded.map((entry) => matchKey(entry.term)))
+  const items = terms.map((item) => withStored(loaded, item, mode))
   const batch: BulkTerm[] = []
   const missing = new Map<string, ExpectedField[]>()
-  for (const item of terms) {
+  for (const item of items) {
     if (batch.some((previous) => sameConcept(previous.term, item.term))) {
       throw new InvalidGlossary(`${JSON.stringify(item.term)} is duplicated.`)
     }
@@ -368,7 +374,7 @@ export function writeTerms(
   const writing = new Map<string, Writing>()
   const unchanged: TermsWrite["unchanged"] = []
   const skipped: TermsWrite["skipped"] = []
-  for (const item of terms) {
+  for (const item of items) {
     const found = findConcept(loaded, item.term)
     if (found !== undefined) {
       const reason =
@@ -439,7 +445,7 @@ export function writeTerms(
   const incomplete = [...missing]
     .filter(([term]) => !skippedTerms.has(term))
     .map(([term, fields]) => ({ term: writtenSpelling(writing, term), missing: [...fields] }))
-  return { language: tag, mode, inserted, updated, unchanged, skipped, incomplete, warnings: warningsFor(terms, working) }
+  return { language: tag, mode, inserted, updated, unchanged, skipped, incomplete, warnings: warningsFor(items, working) }
 }
 
 /**
@@ -462,6 +468,41 @@ export function migrate(directory: string, language: string, write = false): Mig
   const written = write && states.length + categories.length > 0
   if (written) writeFileSync(path, serialize(entries), "utf8")
   return { language: tag, written, states, categories }
+}
+
+/**
+ * The term as an update or an upsert writes it: the fields the call sent, and
+ * for every other field the value already stored. The merged row is checked as
+ * a whole, so a call that moves a row to a level that refuses a stored field is
+ * refused until it clears that field.
+ */
+function withStored(entries: readonly Entry[], item: BulkTerm, mode: WriteMode): BulkTerm {
+  if (mode === "insert") return item
+  const stored = findConcept(entries, item.term) ?? (item.source === undefined ? undefined : entries.find((entry) => entry.source === item.source))
+  if (stored === undefined) return item
+  const keeps = (field: PatchableField): boolean => !item.given.includes(field)
+  const merged: BulkTerm = {
+    ...item,
+    categories: keeps("categories") ? [...(stored.categories ?? [])] : item.categories,
+    description: keeps("description") ? stored.description : item.description,
+    reason: keeps("reason") ? stored.reason : item.reason,
+    substitution: keeps("substitution") ? stored.substitution : item.substitution,
+    when: keeps("when") ? stored.when : item.when,
+    examples: keeps("examples") ? [...(stored.examples ?? [])] : item.examples,
+    rejected: keeps("rejected") ? [...(stored.rejected ?? [])] : item.rejected,
+    alternatives: keeps("alternatives") ? [...(stored.alternatives ?? [])] : item.alternatives,
+    related: keeps("related") ? [...(stored.related ?? [])] : item.related,
+    tags: keeps("tags") ? [...(stored.tags ?? [])] : item.tags,
+    allowed_in: keeps("allowed_in") ? [...(stored.allowedIn ?? [])] : item.allowed_in,
+    forbidden_in: keeps("forbidden_in") ? [...(stored.forbiddenIn ?? [])] : item.forbidden_in,
+    decided_by: keeps("decided_by") ? stored.decidedBy : item.decided_by,
+    source: keeps("source") ? stored.source : item.source,
+    notes: keeps("notes") ? stored.notes : item.notes,
+    case_sensitive: keeps("case_sensitive") ? stored.caseSensitive === true : item.case_sensitive,
+  }
+  const [issue] = termIssues(merged)
+  if (issue !== undefined) throw new InvalidGlossary(`${JSON.stringify(item.term)}: ${issue}`)
+  return merged
 }
 
 function writtenSpelling(writing: ReadonlyMap<string, Writing>, term: string): string {

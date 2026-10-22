@@ -236,26 +236,90 @@ const bulkTermObject = z.object(
   { error: "Provide the terms." },
 )
 
-export const bulkTermSchema = bulkTermObject
-  .transform(({ state, category, categories, ...rest }) => {
+/**
+ * The fields of a row that an update or an upsert keeps when the call does not
+ * send them. A field sent empty, as "" or [], is cleared. state and term are
+ * always sent.
+ */
+export const PATCHABLE_FIELDS = [
+  "categories",
+  "description",
+  "reason",
+  "substitution",
+  "when",
+  "examples",
+  "rejected",
+  "alternatives",
+  "related",
+  "tags",
+  "allowed_in",
+  "forbidden_in",
+  "decided_by",
+  "source",
+  "notes",
+  "case_sensitive",
+] as const
+export type PatchableField = (typeof PATCHABLE_FIELDS)[number]
+
+function markGiven(raw: unknown): unknown {
+  if (typeof raw !== "object" || raw === null || Array.isArray(raw)) return raw
+  const record = raw as Record<string, unknown>
+  const given = PATCHABLE_FIELDS.filter((field) =>
+    field === "categories" ? record.categories !== undefined || record.category !== undefined : record[field] !== undefined,
+  )
+  return { ...record, given }
+}
+
+type TermShape = {
+  state: State
+  categories: readonly string[]
+  description?: string
+  reason?: string
+  substitution?: string
+  when?: string
+  examples: readonly string[]
+  rejected: readonly string[]
+  alternatives: readonly string[]
+  tags: readonly string[]
+  allowed_in: readonly string[]
+  forbidden_in: readonly string[]
+}
+
+/** The reasons a row cannot be stored, as messages. An empty list means the row is valid. */
+export function termIssues(item: TermShape): string[] {
+  const issues: string[] = []
+  if (item.categories.includes("cliche") && item.state !== "forbidden") issues.push(CLICHE)
+  if (AVOIDED_LEVELS.has(item.state) && item.examples.length > 0) issues.push(REJECTED)
+  if (GENERAL_LEVELS.has(item.state) && item.when !== undefined) issues.push(SITUATION)
+  if (GENERAL_LEVELS.has(item.state) && item.tags.length > 0) issues.push(TAGGED)
+  if (item.state === "allowed" && (item.rejected.length > 0 || item.alternatives.length > 0)) issues.push(ALLOWED_LINKS)
+  if (USED_LEVELS.has(item.state) && item.substitution !== undefined) issues.push(SUBSTITUTION)
+  if (!USED_LEVELS.has(item.state) && item.reason !== undefined) issues.push(REASON)
+  if (item.description !== undefined && item.reason !== undefined && item.description.toLowerCase() === item.reason.toLowerCase()) {
+    issues.push(COPIED)
+  }
+  for (const tag of item.allowed_in) {
+    if (item.forbidden_in.includes(tag)) issues.push(`${JSON.stringify(tag)} is in both allowed_in and forbidden_in.`)
+  }
+  return issues
+}
+
+export const bulkTermSchema = z
+  .preprocess(markGiven, bulkTermObject.extend({ given: z.array(z.string()).default([]) }))
+  .transform(({ state, category, categories, given, ...rest }) => {
     const merged = category === undefined || categories.includes(category) ? categories : [category, ...categories]
     const legacy_state = isLegacyState(state) ? state : undefined
-    return { ...rest, state: levelOf(state) as State, categories: merged, legacy_state, legacy_category: category !== undefined }
+    return {
+      ...rest,
+      state: levelOf(state) as State,
+      categories: merged,
+      legacy_state,
+      legacy_category: category !== undefined,
+      given: given as readonly PatchableField[],
+    }
   })
   .superRefine((item, ctx) => {
-    if (item.categories.includes("cliche") && item.state !== "forbidden") ctx.addIssue(CLICHE)
-    if (AVOIDED_LEVELS.has(item.state) && item.examples.length > 0) ctx.addIssue(REJECTED)
-    if (GENERAL_LEVELS.has(item.state) && item.when !== undefined) ctx.addIssue(SITUATION)
-    if (GENERAL_LEVELS.has(item.state) && item.tags.length > 0) ctx.addIssue(TAGGED)
-    if (item.state === "allowed" && (item.rejected.length > 0 || item.alternatives.length > 0)) ctx.addIssue(ALLOWED_LINKS)
-    if (USED_LEVELS.has(item.state) && item.substitution !== undefined) ctx.addIssue(SUBSTITUTION)
-    if (!USED_LEVELS.has(item.state) && item.reason !== undefined) ctx.addIssue(REASON)
-    if (item.description !== undefined && item.reason !== undefined && item.description.toLowerCase() === item.reason.toLowerCase()) {
-      ctx.addIssue(COPIED)
-    }
-    for (const tag of item.allowed_in) {
-      if (item.forbidden_in.includes(tag)) ctx.addIssue(`${JSON.stringify(tag)} is in both allowed_in and forbidden_in.`)
-    }
+    for (const issue of termIssues(item)) ctx.addIssue(issue)
   })
 
 const SITUATION = "forbidden and allowed are general rules and take no when. Use allowed_with_care, discouraged, or strongly_discouraged."

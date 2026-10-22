@@ -501,3 +501,38 @@ test("migrate reports the deprecated rows and rewrites them with --write", () =>
   assert.equal(wet.body.written, true)
   assert.equal(JSON.parse(readFileSync(file, "utf8"))["em mãos"].state, "allowed_with_care")
 })
+
+function silently(action: () => number): { code: number; lines: string[] } {
+  const lines: string[] = []
+  const write = console.log
+  console.log = (line: string) => lines.push(line)
+  try {
+    return { code: action(), lines }
+  } finally {
+    console.log = write
+  }
+}
+
+const KEPT = {
+  casa: { state: "allowed_with_care", categories: ["voice"], description: "lugar", when: "em convite", tags: ["loja"], notes: "visto" },
+}
+
+test("terms keeps the stored description, the tags, and the notes when an update names only the reason", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  const file = join(root, "pt-BR.json")
+  writeFileSync(file, `${JSON.stringify(KEPT, null, 2)}\n`)
+  const flags = ["--glossary", root, "terms", "--language", "pt-BR", "--mode", "update", "--state", "allowed_with_care", "--term", "casa", "--reason", "acolhe"]
+  assert.equal(silently(() => run(flags)).code, 0)
+  const row = JSON.parse(readFileSync(file, "utf8")).casa
+  assert.deepEqual([row.description, row.when, row.tags, row.notes, row.reason], ["lugar", "em convite", ["loja"], "visto", "acolhe"])
+})
+
+test("terms clears the field that a flag names with an empty value", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  const file = join(root, "pt-BR.json")
+  writeFileSync(file, `${JSON.stringify(KEPT, null, 2)}\n`)
+  const flags = ["--glossary", root, "terms", "--language", "pt-BR", "--mode", "update", "--state", "allowed_with_care", "--term", "casa", "--tags", "", "--notes", ""]
+  assert.equal(silently(() => run(flags)).code, 0)
+  const row = JSON.parse(readFileSync(file, "utf8")).casa
+  assert.deepEqual([row.description, "tags" in row, "notes" in row], ["lugar", false, false])
+})

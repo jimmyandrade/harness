@@ -308,3 +308,19 @@ test("write_terms reports incomplete terms and migrate_glossary rewrites a depre
   assert.equal(JSON.parse(migrated.content[0]?.text ?? "").written, true)
   assert.equal(JSON.parse(readFileSync(file, "utf8"))["em mãos"].state, "allowed_with_care")
 })
+
+test("write_terms keeps the stored fields that an update does not send", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  const file = join(root, "pt-BR.json")
+  const stored = { casa: { state: "allowed_with_care", description: "lugar", when: "em convite", notes: "visto" } }
+  writeFileSync(file, `${JSON.stringify(stored, null, 2)}\n`)
+  const written = callTool(root, {
+    name: "write_terms",
+    arguments: { language: "pt-BR", mode: "update", terms: [{ state: "allowed_with_care", term: "casa", reason: "acolhe" }] },
+  })
+  assert.equal(written.isError, undefined)
+  const row = JSON.parse(readFileSync(file, "utf8")).casa
+  assert.deepEqual([row.description, row.when, row.notes, row.reason], ["lugar", "em convite", "visto", "acolhe"])
+  const response = JSON.parse(written.content[0]?.text ?? "") as { updated: { description?: string; notes?: string }[] }
+  assert.deepEqual([response.updated[0]?.description, response.updated[0]?.notes], ["lugar", "visto"])
+})

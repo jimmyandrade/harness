@@ -14,7 +14,9 @@
  * the deprecated category, and only reports them without --write. lookup and exists take --tags too, to read only the rows that
  * apply to that speaker, event, or channel. --case-sensitive marks the term
  * it follows, keeping its casing as the key; it takes true or false, and alone
- * it means true.
+ * it means true. An update or an upsert keeps every stored field that its
+ * flags do not name. A flag with an empty value, such as --notes "" or
+ * --tags "", clears that field.
  *
  * Run: node api/cli.ts lookup --language pt-BR --term casa
  * Run: node api/cli.ts lookup --language pt-BR --term "verão! (chegou!)" --tags festival-de-verao
@@ -192,11 +194,14 @@ export function termsFrom(args: readonly string[]): {
     else {
       if (current !== null && (name === "term" || name === "state") && typeof current[name] === "string") current = null
       if (current === null) {
-        current = { categories: [], examples: [], rejected: [], alternatives: [], related: [], tags: [], allowed_in: [], forbidden_in: [] }
+        current = {}
         terms.push(current)
       }
-      if (LISTS.has(name)) (current[name] as string[]).push(value)
-      else current[name] = value
+      if (LISTS.has(name)) {
+        const list = (current[name] as string[] | undefined) ?? []
+        current[name] = list
+        if (value !== "") list.push(value)
+      } else current[name] = value
     }
   }
   if (file !== undefined) {

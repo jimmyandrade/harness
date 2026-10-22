@@ -225,3 +225,82 @@ test("two terms with the same source in one batch are refused", () => {
     InvalidGlossary,
   )
 })
+
+const STORED = {
+  casa: {
+    state: "allowed_with_care",
+    categories: ["voice"],
+    description: "lugar",
+    when: "depois da escolha principal",
+    tags: ["loja"],
+    decided_by: { name: "Maria Silva" },
+    notes: "visto em 2026-10-22",
+  },
+}
+
+function stored(): { root: string; file: string; text: string } {
+  const text = `${JSON.stringify(STORED, null, 2)}\n`
+  return { ...glossary(text), text }
+}
+
+function row(file: string): Record<string, unknown> {
+  return JSON.parse(readFileSync(file, "utf8")).casa
+}
+
+for (const mode of ["update", "upsert"] as const) {
+  test(`${mode} keeps every stored field that the call does not send`, () => {
+    const { root, file } = stored()
+    const written = writeTerms(root, "pt-BR", mode, terms([{ state: "allowed_with_care", term: "casa", reason: "acolhe" }]))
+    assert.equal(written.updated.length, 1)
+    assert.deepEqual(
+      { ...row(file), examples: undefined },
+      { ...STORED.casa, reason: "acolhe", examples: undefined },
+    )
+  })
+}
+
+test("a field sent empty is cleared and the others are kept", () => {
+  const { root, file } = stored()
+  writeTerms(root, "pt-BR", "update", terms([{ state: "allowed_with_care", term: "casa", notes: "", tags: [] }]))
+  const cleared = row(file)
+  assert.equal("notes" in cleared, false)
+  assert.equal("tags" in cleared, false)
+  assert.equal(cleared.description, "lugar")
+  assert.equal(cleared.when, "depois da escolha principal")
+})
+
+test("an update that changes nothing is unchanged and leaves the file as it was", () => {
+  const { root, file, text } = stored()
+  const written = writeTerms(root, "pt-BR", "update", terms([{ state: "allowed_with_care", term: "casa", description: "lugar" }]))
+  assert.equal(written.unchanged.length, 1)
+  assert.equal(written.updated.length, 0)
+  assert.equal(readFileSync(file, "utf8"), text)
+})
+
+test("an update that sends only the reason does not report a stored field as missing", () => {
+  const { root } = stored()
+  const written = writeTerms(root, "pt-BR", "update", terms([{ state: "allowed_with_care", term: "casa", reason: "acolhe" }]))
+  assert.deepEqual(written.incomplete, [])
+})
+
+test("an update to a level that refuses a stored field is refused and writes nothing", () => {
+  const { root, file, text } = stored()
+  assert.throws(() => writeTerms(root, "pt-BR", "update", terms([{ state: "allowed", term: "casa" }])), /take no when/)
+  assert.equal(readFileSync(file, "utf8"), text)
+})
+
+test("an update to that level is written once the call clears the refused fields", () => {
+  const { root, file } = stored()
+  writeTerms(root, "pt-BR", "update", terms([{ state: "allowed", term: "casa", when: "", tags: [] }]))
+  const moved = row(file)
+  assert.equal(moved.state, "allowed")
+  assert.equal(moved.description, "lugar")
+  assert.equal(moved.notes, "visto em 2026-10-22")
+})
+
+test("an insert of a term that is in the file leaves the stored row alone", () => {
+  const { root, file, text } = stored()
+  const written = writeTerms(root, "pt-BR", "insert", terms([{ state: "allowed_with_care", term: "casa", description: "outro" }]))
+  assert.equal(written.unchanged.length, 1)
+  assert.equal(readFileSync(file, "utf8"), text)
+})

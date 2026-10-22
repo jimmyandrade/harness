@@ -527,7 +527,7 @@ test("a case-sensitive term keeps its casing as the key, and the flag is compare
       terms: [{ ...allowed("iPhone", "celular"), case_sensitive: true }],
     })
     assert.equal((await same.json()).unchanged.length, 1)
-    const cleared = await post(port, { language: "pt-BR", mode: "upsert", terms: [allowed("iPhone", "celular")] })
+    const cleared = await post(port, { language: "pt-BR", mode: "upsert", terms: [{ ...allowed("iPhone", "celular"), case_sensitive: false }] })
     assert.equal((await cleared.json()).updated.length, 1)
     assert.equal("case_sensitive" in JSON.parse(readFileSync(file, "utf8")).iPhone, false)
   })

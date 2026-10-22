@@ -3,9 +3,11 @@
  *
  * Insert and update glossary rows for one language in a single write.
  * mode is insert, update, or upsert. insert writes a term that is absent and
- * leaves a term that is already in the file. update rewrites a term that is
- * present and leaves a term that is absent. upsert writes every term. A term
- * not found by its spelling is found by its source. Each term carries state
+ * leaves a term that is already in the file. update changes a term that is
+ * present and leaves a term that is absent. upsert writes every term. An update
+ * or an upsert of a stored term keeps every field the call does not send, and a
+ * field sent empty, as "" or [], is cleared. A term not found by its spelling
+ * is found by its source. Each term carries state
  * and the fields of that level. validation is optional, warn, or enforce: warn
  * writes a term without an expected field and lists it in incomplete, and
  * enforce refuses it. One failure leaves the file unchanged.

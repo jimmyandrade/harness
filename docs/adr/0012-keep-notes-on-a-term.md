@@ -6,7 +6,7 @@ locale: en
 
 ## Status
 
-Accepted.
+Accepted. The sentence that an `upsert` without `notes` clears them is superseded by ADR 0013.
 
 ## Context
 
