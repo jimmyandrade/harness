@@ -3,7 +3,7 @@ name: definir-link-rastreavel
 description: Monta, revisa ou corrige os parâmetros UTM de um link, do jeito que o padrão define, sem dado interno nem pessoal. Usada quando alguém vai divulgar um link e quer medir de onde vêm os acessos, ou quando um link, um gerador ou um código monta UTM fora do padrão. Não serve para encurtar o link, criar o post nem ler o relatório do Analytics.
 metadata:
   author: jimmyandrade
-  version: "0.7.0"
+  version: "0.8.0"
   aliases:
     - definir-link-utm
     - definir-parametros-utm
@@ -29,6 +29,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Domínios próprios": []
 "UTM em link no mesmo site": "não"
 "Separador": "_"
+"Modelo do nome da campanha": ""
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -46,7 +47,7 @@ Monte cada parâmetro com o significado do padrão:
 
 - `utm_source`: de onde vem o acesso, entre as origens do Passo 1.
 - `utm_medium`: o tipo de canal, entre os meios do Passo 1.
-- `utm_campaign`: a campanha ou a ação, com um nome público.
+- `utm_campaign`: a campanha ou a ação, com um nome público. Com `Modelo do nome da campanha` preenchido, monte por ele: cada parte entre chaves recebe o valor, e o trecho entre colchetes sai inteiro, com o separador, quando a parte dele está vazia. Data com mês e dia em dois dígitos. Falta o valor de uma parte fora dos colchetes: pergunte.
 - `utm_content`: a peça, a variação ou a posição do link na peça.
 - `utm_term`: só a palavra-chave de mídia paga ou a palavra que a pessoa digitou numa automação. Fora disso, fica vazio.
 - `utm_id`: o id público da campanha, quando ele existe. Vem da plataforma de anúncio, como o Google Ads ou o Meta Ads, ou de um id que o projeto gera para a campanha e que pode combinar o evento com quem divulga: a marca, um artista ou um influencer. Sem esse id, fica vazio.
@@ -114,6 +115,7 @@ O id interno do evento sai de `utm_term`. `utm_id` leva o id público da campanh
 ## Casos-limite
 
 - O destino é do mesmo site da página: siga `UTM em link no mesmo site`.
+- Gerador, API, MCP ou linha de comando que monta `utm_campaign`: o nome segue o mesmo `Modelo do nome da campanha`. Um nome montado de outro jeito é item que falhou na revisão.
 - A linha do data source de origens ou de meios está com o campo vazio: não use o nome da linha no lugar. Diga qual linha está vazia e pergunte o valor.
 - A campanha é de um evento divulgado por um artista ou um influencer, e o projeto ainda não gera id para essa combinação: `utm_id` fica vazio. Não monte o id com o UUID.
 - A campanha não tem nome público: pergunte o nome. Não use o id.
