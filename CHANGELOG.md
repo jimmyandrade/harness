@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.88.0](https://github.com/jimmyandrade/harness/compare/v0.87.0...v0.88.0) (2026-10-23)
+
+
+### Features
+
+* **lancar-despesa-da-empresa:** search and propose a cost category ([#393](https://github.com/jimmyandrade/harness/issues/393)) ([b9d66a9](https://github.com/jimmyandrade/harness/commit/b9d66a991de15fb84c9c014e1422eb20bf419d62))
+
 ## [0.87.0](https://github.com/jimmyandrade/harness/compare/v0.86.0...v0.87.0) (2026-10-23)
 
 
