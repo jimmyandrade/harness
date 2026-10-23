@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.9.0"
+  version: "0.9.1"
   aliases:
     - definir-despesa
     - lancar-despesa
@@ -128,13 +128,13 @@ Não encerre com apenas "empresa não cadastrada" ou "vínculo pendente": entreg
 
 Grave os dados nas propriedades mapeadas, não no corpo. Separe a data do documento da data de pagamento. Não invente valor, data, conta, finalidade, categoria nem parcelas. Campo opcional ausente fica pendente; produto, finalidade e informação necessária à classificação não são opcionais. Depois do checklist completo, a pendência opcional não impede o lançamento. Preserve o modelo da página.
 
-Anexe os originais na propriedade mapeada de comprovantes, sem novo reconhecimento. Mantenha as evidências anteriores ao complementar um lançamento. Preserve os dados confirmados e pergunte sobre conflito antes de sobrescrever. Uma transação ainda em processamento não equivale a conciliação concluída; uma cobrança sem confirmação não equivale a pagamento.
+Anexe os originais na propriedade mapeada de comprovantes na mesma execução do lançamento, sem novo reconhecimento e sem pedir confirmação adicional. Recupere os anexos já enviados do histórico antes de declarar que estão inacessíveis. Use a referência de arquivo aceita pela ferramenta; um ID de anexo da conversa não é necessariamente um ID de arquivo do Notion. Erro de arquivo não encontrado exige conferir a referência original e usar o formato suportado, não pedir novo envio nem tratar a falha de referência como falta do comprovante. Mantenha as evidências anteriores ao complementar um lançamento. Preserve os dados confirmados e pergunte sobre conflito antes de sobrescrever. Uma transação ainda em processamento não equivale a conciliação concluída; uma cobrança sem confirmação não equivale a pagamento.
 
 Pagamento numa moeda de `Moedas estrangeiras`: grave o valor original, o câmbio, a data e a fonte do câmbio, e o valor convertido na `Moeda`. Sem o câmbio na evidência, pergunte. Não invente o câmbio.
 
 ### Passo 4
 
-Confira o registro salvo, os anexos e o vínculo da empresa recebedora. Entregue a página do lançamento e as pendências, distinguindo o dado que falta de um cadastro ainda não encaminhado. Diga o que foi encontrado, criado ou complementado; não apresente transcrição como lançamento. O lançamento é a origem financeira da compra. A página do bem, a separação entre ativo e estoque e a compra de item controlável ficam com `definir-ativo-imobilizado`.
+Confira o registro salvo, os anexos na propriedade de comprovantes e o vínculo da empresa recebedora. Só remova a pendência de anexo e atualize a conciliação depois de confirmar a gravação das evidências. Entregue a página do lançamento e as pendências, distinguindo o dado que falta de um cadastro ainda não encaminhado. Diga o que foi encontrado, criado ou complementado; não apresente transcrição como lançamento. O lançamento é a origem financeira da compra. A página do bem, a separação entre ativo e estoque e a compra de item controlável ficam com `definir-ativo-imobilizado`.
 
 ## Problemas comuns
 
