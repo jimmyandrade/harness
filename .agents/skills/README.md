@@ -59,6 +59,7 @@ flowchart LR
     escrever_codigo["escrever-codigo"]
     escrever_teste["escrever-teste"]
     evoluir_habilidade["evoluir-habilidade"]
+    extrair_tarefas_da_reuniao["extrair-tarefas-da-reuniao"]
     gerenciar_estoque["gerenciar-estoque"]
     identificar_duplicata["identificar-duplicata"]
     lancar_despesa_da_empresa["lancar-despesa-da-empresa"]
@@ -291,6 +292,11 @@ flowchart LR
   evoluir_habilidade --> descrever_habilidade_ou_schema
   evoluir_habilidade --> medir_habilidade
   evoluir_habilidade --> revisar_habilidade
+  extrair_tarefas_da_reuniao --> definir_registro_de_reuniao
+  extrair_tarefas_da_reuniao --> definir_tarefa
+  extrair_tarefas_da_reuniao --> evoluir_habilidade
+  extrair_tarefas_da_reuniao --> identificar_duplicata
+  extrair_tarefas_da_reuniao --> procurar_tarefa
   gerenciar_estoque --> definir_ativo_imobilizado
   gerenciar_estoque --> definir_lancamento
   gerenciar_estoque --> identificar_duplicata
