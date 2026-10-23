@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.9.1"
+  version: "0.10.0"
   aliases:
     - definir-despesa
     - lancar-despesa
@@ -109,7 +109,20 @@ Antes de qualquer gravação, confira e marque este checklist com o que a evidê
 
 O recebedor e a modalidade Pix não identificam o produto nem sua finalidade. Dizer apenas “despesa pessoal” ou “despesa da empresa” só confirma a natureza. Consulte o contexto e os registros relacionados; reúna as perguntas que faltam, espere as respostas e só depois grave. Não repita perguntas já respondidas nem exija campos sem relação com o gasto. Não use nome genérico de recebedor como substituto da identificação.
 
-Use apenas categorias e relações existentes, sustentadas pelos dados confirmados. Sem propriedade de categoria no mapeamento, informe a limitação; não crie estrutura nem grave uma categoria inventada no corpo. Isso não impede registrar um gasto já identificado com os vínculos disponíveis. Uma informação opcional ausente não substitui a identificação obrigatória do produto e da finalidade.
+Antes de deixar a categoria de custo vazia, busque na lista que a propriedade de categoria aponta, pelo produto e pela finalidade confirmados, e pelas variações e grafias da categoria. Sem propriedade de categoria no mapeamento, informe a limitação; não crie estrutura nem grave uma categoria inventada no corpo. Isso não impede registrar um gasto já identificado com os vínculos disponíveis. Uma informação opcional ausente não substitui a identificação obrigatória do produto e da finalidade.
+
+```mermaid
+flowchart LR
+  A[Busca a categoria pelo produto e pela finalidade] --> B{Quantas servem?}
+  B -->|uma| C[Vincula a categoria existente]
+  B -->|mais de uma| D[Propõe a mais específica e pergunta]
+  B -->|nenhuma| E[Propõe criar uma categoria com nome e grupo]
+  E --> F{A pessoa autorizou?}
+  F -->|sim| G[Cria na lista de categorias e vincula]
+  F -->|não| H[Grava sem categoria e entrega a proposta como pendência]
+```
+
+A categoria nova segue o padrão de nome e de grupo das categorias que já existem na lista. Não force uma categoria vizinha só porque o grupo combina.
 
 Resolva a empresa recebedora com o nome e o CNPJ da evidência, inclusive ao complementar uma despesa já salva. Use `identificar-duplicata` antes de criar. A instituição de pagamento não é a empresa recebedora. Não deduza a razão social completa de um nome comercial.
 
@@ -153,6 +166,14 @@ Se você gravar só com recebedor, valor e data, a despesa entra sem saber o que
 1. Confira o checklist antes de gravar, inclusive ao complementar um registro.
 2. Pergunte o produto ou serviço, a finalidade e os dados de classificação ainda ausentes.
 3. Espere a resposta e atualize o mesmo lançamento, preservando o comprovante e sem duplicar.
+
+### Categoria deixada vazia
+
+Se você deixar a categoria de custo vazia sem buscar nem propor, a despesa fica fora dos totais por categoria e a pessoa tem de descobrir sozinha o que falta.
+
+1. Busque a categoria pelo produto e pela finalidade.
+2. Proponha a existente que serve ou, sem nenhuma, uma categoria nova com nome e grupo.
+3. Vincule depois do aceite. Sem aceite, entregue a proposta como pendência.
 
 ### Ativo criado na despesa
 
@@ -207,6 +228,7 @@ Busquei pelo recebedor, documento, valor e data. Registrei um lançamento com as
 - O comprovante identifica a transferência, não necessariamente a compra. Recebedor e Pix não são produto nem finalidade.
 - Nota fiscal e print de cartão podem ser o mesmo gasto. Dois arquivos não são duas despesas.
 - Uma tela pode dizer "Crédito" como modalidade do cartão, não como entrada de receita.
+- "Não invente categoria" parece proibir propor uma. Proibido é gravar sem aceite. Buscar, propor a existente e sugerir criar a que falta fazem parte do lançamento.
 
 ## Scripts disponíveis
 
