@@ -3,7 +3,7 @@ name: publicar-revisao-de-codigo
 description: Revisa um pull request e publica a revisão numa única review, com os comentários inline, no idioma de quem recebe e no tom do projeto. Usada quando a pessoa pede uma revisão ou outra habilidade precisa publicar uma. Não serve para tratar os comentários que você recebeu no seu PR.
 metadata:
   author: jimmyandrade
-  version: "0.5.1"
+  version: "0.6.0"
   notion: "false"
   aliases:
     - post-code-review
@@ -62,7 +62,7 @@ Peça o número ou o link do pull request. Confira o estado dele agora, mesmo qu
 
 ### Passo 2
 
-Chame `levantar-contexto-do-pull-request` e use a ficha dele: convenções, comentários existentes, card e conversas, propósito e trabalho parecido. Não refaça a leitura.
+Chame `levantar-contexto-do-pull-request` e use a ficha dele: convenções, comentários existentes, card e conversas, propósito e trabalho parecido. Não refaça a leitura. Quando a ficha traz o refinamento técnico, confronte o PR com o que ficou decidido e em aberto: uma decisão que o PR contraria, ou uma dúvida em aberto que ele resolve sem discutir, vira ponto da revisão, em forma de pergunta.
 
 Não revise com um check pendente: diga qual e espere terminar. Um check que falhou não impede a revisão, mas leia o registro dele antes de perguntar sobre ele.
 

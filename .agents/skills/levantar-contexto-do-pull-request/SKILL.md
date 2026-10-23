@@ -3,7 +3,7 @@ name: levantar-contexto-do-pull-request
 description: Levanta o contexto de um pull request antes de revisar, responder ou ajustar. Cobre o estado, as convenções do repositório, os comentários já feitos, o card e as conversas ligados, o propósito e o trabalho parecido. Usada em PR de outra pessoa e no seu. Não serve para revisar o diff nem publicar texto.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.4.0"
   notion: "false"
   related:
     - definir-registro-de-reuniao
@@ -23,10 +23,12 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Fontes de registro de reunião": ""
 "Repositórios vizinhos": ""
 "Contexto privado por repositório": ""
+"Buscar o refinamento técnico": "não"
+"Criar o registro de refinamento que falta": "não"
 "Modo de aprendizado": "perguntar"
 ```
 
-`Fontes do card` diz onde estão os cards, como o rastreador de tarefas do projeto. `Fontes de conversa` diz onde ler as conversas citadas. `Fontes de registro de reunião` diz onde estão os registros de reunião. `Contexto privado por repositório` diz onde ficam as notas pessoais de cada repositório, com a parte técnica, a sensível e o status combinado de PRs específicos. `Repositórios vizinhos` lista, separados por vírgula, os repositórios onde procurar trabalho parecido. Um valor vazio usa só o que o PR cita.
+`Fontes do card` diz onde estão os cards, como o rastreador de tarefas do projeto. `Fontes de conversa` diz onde ler as conversas citadas. `Fontes de registro de reunião` diz onde estão os registros de reunião. `Contexto privado por repositório` diz onde ficam as notas pessoais de cada repositório, com a parte técnica, a sensível e o status combinado de PRs específicos. `Repositórios vizinhos` lista, separados por vírgula, os repositórios onde procurar trabalho parecido. `Buscar o refinamento técnico` é `sim` ou `não`: com `sim`, o Passo 4 procura a ata ou o registro do refinamento técnico do trabalho e a ficha o trata como base da revisão. `Criar o registro de refinamento que falta` é `sim`, `perguntar` ou `não`, e só vale quando a busca não achou nada. Um valor vazio usa só o que o PR cita.
 
 ## Instruções
 
@@ -59,6 +61,16 @@ Procure a chave do card no título, no corpo e no nome da branch, e os links de 
 
 Marque cada fonte como pública ou privada. Conteúdo de conversa privada, de mensagem direta e de registro de reunião só calibra o que quem chamou pergunta. Nunca vai citado nem parafraseado em texto publicado.
 
+Com `Buscar o refinamento técnico` em `sim`, procure o refinamento técnico do trabalho nesta ordem, parando no primeiro lugar que tiver o que serve:
+
+1. O próprio card: descrição, comentários e links. Uma ata, um registro de reunião de refinamento ou uma seção de referência técnica entra aqui. Abra e leia cada link inteiro.
+2. Os cards ligados, pelas `Fontes do card`: o card pai ou o épico, os cards irmãos do mesmo pai e os cards do mesmo tema, achados pelo nome do componente, do repositório ou da área. Leia os comentários e os links deles do mesmo jeito.
+3. Os registros de reunião, pelas `Fontes de registro de reunião`, por reunião de refinamento que citou o repositório, o componente ou a chave do card, inclusive a de um card irmão.
+
+Registre na ficha uma seção "Refinamento técnico": onde achou, o que ficou decidido, o que ficou em aberto e a restrição que vale para o PR. Marque cada fonte como pública ou privada. O que veio do card e de uma página compartilhada é público e pode ser citado pelo link. Um registro de reunião é privado, como acima.
+
+Se nenhum dos três tiver refinamento, diga isso na ficha e siga o `Criar o registro de refinamento que falta`: com `não`, só diga. Com `perguntar`, pergunte a quem chamou se houve um refinamento a registrar. Com `sim`, ou com a resposta sim, chame `definir-registro-de-reuniao` com o que a pessoa trouxer. Não invente decisão nem conteúdo: sem material, o registro não é criado.
+
 Se uma fonte citada não abrir, diga qual e continue. Não invente o contexto que não achou.
 
 ### Passo 5
@@ -83,7 +95,7 @@ Cite cada achado pelo endereço do PR ou do arquivo. Quando dois PRs criam o mes
 
 ### Passo 7
 
-Entregue a ficha, com uma seção por passo: estado e checks, convenções, comentários existentes, card e conversas com a visibilidade de cada fonte, a frase de propósito com as três perguntas, e o que existe além do diff. Em cada seção que não achou nada, escreva "Não achei".
+Entregue a ficha, com uma seção por passo: estado e checks, convenções, comentários existentes, card e conversas com a visibilidade de cada fonte, a frase de propósito com as três perguntas, o refinamento técnico quando a busca está ligada, e o que existe além do diff. Em cada seção que não achou nada, escreva "Não achei".
 
 Comece pelo que muda o que quem chamou vai fazer. A ficha não opina sobre o diff nem escreve texto para publicar.
 
