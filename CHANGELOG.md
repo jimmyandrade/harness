@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.82.0](https://github.com/jimmyandrade/harness/compare/v0.81.0...v0.82.0) (2026-10-23)
+
+
+### Features
+
+* publish the Reel, video script, content campaign, and calendar skills ([#374](https://github.com/jimmyandrade/harness/issues/374)) ([5797e57](https://github.com/jimmyandrade/harness/commit/5797e57f6d18da1871cdbd100f7964a151ef87f8))
+* **vocabulary:** build the engine with the core package and point the skills at the new path ([#365](https://github.com/jimmyandrade/harness/issues/365)) ([9f51a25](https://github.com/jimmyandrade/harness/commit/9f51a25a527b9ac34170c8b46e3b8c91171749a3))
+
 ## [0.81.0](https://github.com/jimmyandrade/harness/compare/v0.80.0...v0.81.0) (2026-10-22)
 
 
