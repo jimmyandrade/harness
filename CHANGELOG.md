@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.86.0](https://github.com/jimmyandrade/harness/compare/v0.85.0...v0.86.0) (2026-10-23)
+
+
+### Features
+
+* **definir-pessoa:** keep the extensions field of a person record when updating it ([#388](https://github.com/jimmyandrade/harness/issues/388)) ([79ad4fa](https://github.com/jimmyandrade/harness/commit/79ad4fa7e8f116eba296f9d9b0e6b9670d7e60ff))
+* **vocabulary:** start the vocabulary server from the core plugin ([#384](https://github.com/jimmyandrade/harness/issues/384)) ([840ba20](https://github.com/jimmyandrade/harness/commit/840ba20bf688c5e57a9b624c9e5f617532844b81))
+
 ## [0.85.0](https://github.com/jimmyandrade/harness/compare/v0.84.0...v0.85.0) (2026-10-23)
 
 
