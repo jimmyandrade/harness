@@ -890,6 +890,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Properties**:
   - Lives at `.agents/skills/lancar-despesa-da-empresa/SKILL.md`
   - Reads the expense list and its property names from the data mapping of the project, when the person does not name another list
+  - Checks each mapped property name against the source schema, uses the equivalent property the schema shows when a mapped name is missing, such as a renamed title, reports the divergence so the mapping gets fixed, and asks before writing when no safe equivalent exists
   - Records a payment in a currency of `Moedas estrangeiras` with the original amount, the exchange rate, its date and source, and the amount in `Moeda`, and asks when the rate is missing
   - Searches by recipient variations, document, amount, date, and payment method before creating an expense, without asking permission to search
   - Reuses an existing entry and preserves its evidence instead of recording the same purchase twice
