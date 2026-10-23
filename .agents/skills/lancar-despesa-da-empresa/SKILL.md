@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.10.2"
+  version: "0.10.3"
   aliases:
     - definir-despesa
     - lancar-despesa
@@ -124,6 +124,17 @@ flowchart LR
 
 A categoria nova segue o padrão de nome e de grupo das categorias que já existem na lista. Não force uma categoria vizinha só porque o grupo combina.
 
+A placa serve para localizar o veículo existente, não para preencher o título, a descrição ou as observações da despesa. O cadastro do veículo é a fonte da placa. Associe a mesma despesa ao veículo pela relação mapeada, conferindo também o lado do veículo; a relação pode existir só nesse lado. A viagem é outro vínculo: preserve a associação confirmada para a prestação de contas, sem substituir a relação com o veículo.
+
+```mermaid
+flowchart LR
+  V[Localiza o veículo pela placa] --> R{Relação mapeada disponível em algum lado?}
+  R -->|sim| S[Associa a mesma despesa ao veículo e confere o vínculo salvo]
+  R -->|não| P[Informa a limitação e propõe o vínculo sem alterar a estrutura]
+```
+
+A falta da relação não autoriza copiar a placa para texto livre nem declarar a associação concluída. Ao corrigir um lançamento, preserve valor, pagamento, comprovantes e viagem; retire a placa redundante do texto sem criar outra despesa.
+
 Resolva a empresa recebedora com o nome e o CNPJ da evidência, inclusive ao complementar uma despesa já salva. Use `identificar-duplicata` antes de criar. A instituição de pagamento não é a empresa recebedora. Não deduza a razão social completa de um nome comercial.
 
 ```mermaid
@@ -159,7 +170,7 @@ Pagamento numa moeda de `Moedas estrangeiras`: grave o valor original, o câmbio
 
 ### Passo 4
 
-Confira o registro salvo, os anexos na propriedade de comprovantes e o vínculo da empresa recebedora. Só remova a pendência de anexo e atualize a conciliação depois de confirmar a gravação das evidências. Entregue a página do lançamento e as pendências, distinguindo o dado que falta de um cadastro ainda não encaminhado. Diga o que foi encontrado, criado ou complementado; não apresente transcrição como lançamento. O lançamento é a origem financeira da compra. A página do bem, a separação entre ativo e estoque e a compra de item controlável ficam com `definir-ativo-imobilizado`.
+Confira o registro salvo, os anexos na propriedade de comprovantes e os vínculos da empresa recebedora, do veículo e da viagem aplicáveis ao gasto. Só remova a pendência de anexo e atualize a conciliação depois de confirmar a gravação das evidências. Entregue a página do lançamento e as pendências, distinguindo o dado que falta de um cadastro ainda não encaminhado. Diga o que foi encontrado, criado ou complementado; não apresente transcrição como lançamento. O lançamento é a origem financeira da compra. A página do bem, a separação entre ativo e estoque e a compra de item controlável ficam com `definir-ativo-imobilizado`.
 
 ## Problemas comuns
 
@@ -193,7 +204,7 @@ Se você criar a página do bem nesta habilidade, o lançamento e o ativo se mis
 
 1. Rastreie o lançamento que originou a compra.
 2. A página do bem fica em `definir-ativo-imobilizado`.
-3. Não crie a página do ativo aqui.
+3. Não crie o ativo aqui.
 
 ### Lançamento inventado
 
