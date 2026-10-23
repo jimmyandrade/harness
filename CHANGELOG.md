@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.85.0](https://github.com/jimmyandrade/harness/compare/v0.84.0...v0.85.0) (2026-10-23)
+
+
+### Features
+
+* **procurar-pedido-de-revisao:** apply the ready label when the author agrees to a review ([#385](https://github.com/jimmyandrade/harness/issues/385)) ([1fc02fa](https://github.com/jimmyandrade/harness/commit/1fc02fae655c9cef5e7bccf4f40e18400ec87d2c))
+
 ## [0.84.0](https://github.com/jimmyandrade/harness/compare/v0.83.0...v0.84.0) (2026-10-23)
 
 
