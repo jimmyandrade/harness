@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.84.0](https://github.com/jimmyandrade/harness/compare/v0.83.0...v0.84.0) (2026-10-23)
+
+
+### Features
+
+* **enviar-mensagem-no-slack:** check authorship in the published message before attributing a difference ([#381](https://github.com/jimmyandrade/harness/issues/381)) ([0b1c57b](https://github.com/jimmyandrade/harness/commit/0b1c57b805b5f0eda9bf131381f3e07b58044250))
+* **vocabulary:** list every problem of a refused batch and add a dry run ([#383](https://github.com/jimmyandrade/harness/issues/383)) ([54c3d78](https://github.com/jimmyandrade/harness/commit/54c3d788be5d206e73ed718159a92890ddaec84d))
+
 ## [0.83.0](https://github.com/jimmyandrade/harness/compare/v0.82.0...v0.83.0) (2026-10-23)
 
 
