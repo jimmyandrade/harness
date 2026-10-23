@@ -823,6 +823,26 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description says the test edits the validated skill, and refuses creating the first version, only checking whether the description triggers, only reviewing without running, and writing the skill page in Notion
 
+### extrair-tarefas-da-reuniao
+- **Stability**: experimental
+- **Description**: Turn the action items of a registered meeting into tasks, one per item, without duplicates, in the sprint of the meeting date
+- **Properties**:
+  - Lives at `.agents/skills/extrair-tarefas-da-reuniao/SKILL.md`
+  - Reads the meeting, the task list, and the sprint list from the project data mapping, and stops when one of them is not in the connected workspace
+  - Acts only when the meeting status is ready to process, moves it to in progress before writing, and to processed at the end, with the three status names in the project instructions
+  - Writes nothing and says it waits when the status is anything else, and asks when the meeting is already in progress
+  - Keeps only short items with an infinitive verb and an observable result, and leaves out context, opinions, hypotheses, and history
+  - Fills the owner only when the text names who does it, never from a pronoun
+  - Picks the sprint whose period contains the meeting date, and leaves the sprint empty with a warning when none or more than one fits
+  - Checks each item through procurar-tarefa and the order of identificar-duplicata, and merges items of the same meeting that ask for the same delivery
+  - Validates a plan of every item before writing, and creates each new task through definir-tarefa with the status the project instructions name
+  - Uses an existing equivalent task as canonical, and fills only its empty sprint, after the person confirms which sprint fits, with the sprint of the meeting date as the suggestion
+  - Explains the factual difference of a similar task, and asks when unsure
+  - Does not register the meeting or change anything else in an existing task
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [ ] Three cases validated with the person
+
 ### gerenciar-estoque
 - **Stability**: experimental
 - **Description**: Update the balance of an exhaustible item and leave payment outside
