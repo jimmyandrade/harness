@@ -895,6 +895,7 @@ How these skills relate is in `README.md`, in this folder.
   - Reuses an existing entry and preserves its evidence instead of recording the same purchase twice
   - Records an absent expense in the same execution when its business purpose is confirmed or inferable from context, and asks when that purpose is uncertain
   - Keeps original evidence in the mapped attachment property and reports missing optional fields without inventing them
+  - Searches the cost category by product and purpose before leaving it empty, links the one that fits, proposes the most specific when several fit, and suggests creating a category with a name and group when none fits, creating it only after the person agrees
   - Resolves the recipient company through identificar-duplicata and definir-empresa, reuses or registers it and links it to the same expense, or explicitly proposes registration and asks only what blocks it
   - Verifies the saved entry before reporting that it was recorded
   - Traces the financial entry that originated the purchase or acquisition of a durable asset
