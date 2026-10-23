@@ -3,8 +3,7 @@ name: definir-campanha-de-conteudo
 description: Use essa habilidade sempre que for criar, revisar, acompanhar ou encerrar uma campanha de conteúdo, inclusive a janela, as etapas por semana, as métricas e promover uma pauta a campanha, mesmo sem dizer campanha. NÃO use para criar os posts da campanha, conferir o mix do calendário, escrever roteiro ou legenda, nem cadastrar a data significativa.
 metadata:
   author: jimmyandrade
-  version: "0.2.1"
-  internal: true
+  version: "0.3.0"
   related:
     - evoluir-habilidade
     - planejar-calendario-de-conteudo

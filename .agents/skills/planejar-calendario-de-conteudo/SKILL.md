@@ -4,8 +4,7 @@ description: Use essa habilidade sempre que for sugerir o que postar, planejar u
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
-  internal: true
+  version: "0.7.0"
   related:
     - criar-ideia-de-conteudo
     - definir-campanha-de-conteudo

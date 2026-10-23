@@ -4,8 +4,7 @@ description: Use essa habilidade sempre que for criar, revisar ou adaptar o rote
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.1"
-  internal: true
+  version: "0.4.0"
   related:
     - evoluir-habilidade
   models:
