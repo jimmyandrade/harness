@@ -369,10 +369,46 @@ export const termsRequest = z.object({
   language: prose("Unknown language."),
   mode: writeModeSchema,
   validation: validationSchema.default("warn"),
+  dry_run: z.boolean({ error: "dry_run is true or false." }).default(false),
   terms: z.array(bulkTermSchema, { error: "Provide the terms." }).min(1, { error: "Provide the terms." }),
 })
 export type TermsRequest = z.infer<typeof termsRequest>
 export type BulkTerm = TermsRequest["terms"][number]
+
+/** One reason a batch is refused, with the term it belongs to when it belongs to one. */
+export type Problem = { term?: string; message: string }
+
+const termsHeader = termsRequest.extend({
+  terms: z.array(z.unknown(), { error: "Provide the terms." }).min(1, { error: "Provide the terms." }),
+})
+
+/**
+ * Read a batch without stopping at the first bad term. The call itself, as the
+ * language, the mode, and the list, must be valid or the first message is
+ * thrown. Each term that is not valid is skipped and every one of its problems
+ * is listed with it, so the caller can fix the whole batch in one pass.
+ */
+export function readTermsRequest(value: unknown): Omit<TermsRequest, "terms"> & {
+  terms: BulkTerm[]
+  problems: Problem[]
+} {
+  const header = termsHeader.safeParse(value)
+  if (!header.success) throw new Error(header.error.issues[0]?.message ?? "Invalid value.")
+  const { terms: raw, ...call } = header.data
+  const terms: BulkTerm[] = []
+  const problems: Problem[] = []
+  for (const item of raw) {
+    const result = bulkTermSchema.safeParse(item)
+    if (result.success) {
+      terms.push(result.data)
+      continue
+    }
+    const named = typeof item === "object" && item !== null ? (item as { term?: unknown }).term : undefined
+    const term = typeof named === "string" && collapse(named) !== "" ? collapse(named) : undefined
+    for (const issue of result.error.issues) problems.push({ term, message: issue.message })
+  }
+  return { ...call, terms, problems }
+}
 
 export const migrateRequest = z.object({
   language: prose("Unknown language."),
@@ -437,6 +473,8 @@ export const termsWriteSchema = z.object({
   skipped: z.array(z.object({ term: z.string(), reason: z.string() })),
   incomplete: z.array(z.object({ term: z.string(), missing: z.array(z.string()) })),
   warnings: z.array(z.string()),
+  dry_run: z.literal(true).optional(),
+  refused: z.array(z.object({ term: z.string().optional(), reason: z.string() })).optional(),
 })
 export type TermsWrite = z.infer<typeof termsWriteSchema>
 

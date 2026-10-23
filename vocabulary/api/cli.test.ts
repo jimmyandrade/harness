@@ -536,3 +536,38 @@ test("terms clears the field that a flag names with an empty value", () => {
   const row = JSON.parse(readFileSync(file, "utf8")).casa
   assert.deepEqual([row.description, "tags" in row, "notes" in row], ["lugar", false, false])
 })
+
+test("terms --dry-run reports the write, lists what would be refused, and writes nothing", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  const file = join(root, "pt-BR.json")
+  writeFileSync(file, "{}\n")
+  const { code, body } = capture([
+    "--glossary", root, "terms", "--language", "pt-BR", "--mode", "insert", "--dry-run",
+    "--state", "allowed", "--term", "porta", "--description", "entrada", "--reason", "acolhe",
+    "--state", "allowed", "--term", "casa", "--description", "lugar", "--reason", "acolhe", "--examples", "casa",
+  ])
+  assert.equal(code, 0)
+  assert.equal(body.dry_run, true)
+  assert.deepEqual(body.refused, [{ term: "casa", reason: '"casa" cannot be its own example.' }])
+  assert.equal(readFileSync(file, "utf8"), "{}\n")
+})
+
+test("terms --dry-run false writes, and --dry-run takes true or false only", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  const file = join(root, "pt-BR.json")
+  writeFileSync(file, "{}\n")
+  const base = ["--glossary", root, "terms", "--language", "pt-BR", "--mode", "insert", "--state", "allowed", "--term", "porta", "--description", "entrada", "--reason", "acolhe"]
+  const { code, body } = capture([...base, "--dry-run", "false"])
+  assert.equal(code, 0)
+  assert.equal(body.dry_run, undefined)
+  assert.equal(load(readFileSync(file, "utf8")).length, 1)
+  const errors: string[] = []
+  const write = console.error
+  console.error = (line: string) => errors.push(line)
+  try {
+    assert.equal(run([...base, "--dry-run=maybe"]), 2)
+  } finally {
+    console.error = write
+  }
+  assert.equal(errors.at(-1), "dry_run is true or false.")
+})

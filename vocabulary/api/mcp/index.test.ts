@@ -325,3 +325,54 @@ test("write_terms keeps the stored fields that an update does not send", () => {
   const response = JSON.parse(written.content[0]?.text ?? "") as { updated: { description?: string; notes?: string }[] }
   assert.deepEqual([response.updated[0]?.description, response.updated[0]?.notes], ["lugar", "visto"])
 })
+
+test("write_terms lists every problem of a refused batch and writes nothing", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  const file = join(root, "pt-BR.json")
+  writeFileSync(file, "{}\n")
+  const refused = callTool(root, {
+    name: "write_terms",
+    arguments: {
+      language: "pt-BR",
+      mode: "upsert",
+      terms: [
+        { state: "allowed", term: "casa", description: "lugar", reason: "acolhe", examples: ["casa"] },
+        { state: "allowed", term: "lar", description: "lugar", reason: "acolhe", tags: ["palco"] },
+      ],
+    },
+  })
+  assert.equal(refused.isError, true)
+  const text = refused.content[0]?.text ?? ""
+  assert.match(text, /^2 problems\. The batch was not written\./)
+  assert.match(text, /"casa" cannot be its own example\./)
+  assert.match(text, /"lar": A term tagged for one context/)
+  assert.equal(readFileSync(file, "utf8"), "{}\n")
+})
+
+test("write_terms with dry_run reports the write and leaves the glossary unchanged", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  const file = join(root, "pt-BR.json")
+  writeFileSync(file, "{}\n")
+  const checked = callTool(root, {
+    name: "write_terms",
+    arguments: {
+      language: "pt-BR",
+      mode: "insert",
+      dry_run: true,
+      terms: [
+        { state: "allowed", term: "porta", description: "entrada", reason: "acolhe" },
+        { state: "forbidden", term: "baratinho", description: "barato demais" },
+        { state: "allowed", term: "casa", description: "lugar", reason: "acolhe", examples: ["casa"] },
+      ],
+    },
+  })
+  assert.equal(checked.isError, undefined)
+  const body = JSON.parse(checked.content[0]?.text ?? "")
+  assert.equal(body.dry_run, true)
+  assert.deepEqual(body.refused, [{ term: "casa", reason: '"casa" cannot be its own example.' }])
+  assert.deepEqual(body.incomplete, [{ term: "baratinho", missing: ["substitution"] }])
+  assert.equal(readFileSync(file, "utf8"), "{}\n")
+  const tool = (respond(root, { jsonrpc: "2.0", id: 1, method: "tools/list" }) as { result: { tools: { name: string; description: string }[] } }).result.tools.find((item) => item.name === "write_terms")
+  assert.match(tool?.description ?? "", /cannot be its own example/)
+  assert.match(tool?.description ?? "", /no when and no tags/)
+})

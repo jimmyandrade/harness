@@ -65,14 +65,22 @@ Run the commands from the project that holds the glossary. With the MCP server i
    - Leave out a field the row does not have. Do not write an empty string.
    - `decided_by` is the people object of `package.json`: `name`, and optionally `email` and `url`. Use the individual e-mail of the person, never a shared role account.
 
-5. Import it:
+5. Test it first. A dry run validates the batch and writes nothing:
+
+   ```bash
+   node node_modules/vocabulary/dist/cli.js terms --file batch.json --dry-run
+   ```
+
+   Check: the response has `dry_run` true and lists what would be `inserted`, `updated`, `unchanged`, `skipped`, and `incomplete`. `refused` lists every problem of the batch with its term. Fix them all, and run the dry run again until `refused` is empty. `write_terms` takes `dry_run` the same way.
+
+6. Import it:
 
    ```bash
    node node_modules/harness/vocabulary/dist/cli.js terms --file batch.json
    ```
 
-   Check: the response lists `inserted`, `updated`, `unchanged`, `skipped`, and `incomplete`. A refusal names the term and leaves the file unchanged. Fix the batch and run it again.
+   Check: the response lists `inserted`, `updated`, `unchanged`, `skipped`, and `incomplete`. A refusal lists every problem with its term and leaves the file unchanged. Fix the batch and run it again.
 
-6. Run the same import again. Check: every term is `unchanged`. A term renamed in the other tool keeps its row, found by `source`.
+7. Run the same import again. Check: every term is `unchanged`. A term renamed in the other tool keeps its row, found by `source`.
 
-7. Fill what `incomplete` lists. When it is empty, run the write with `--validation enforce` so a new term without an expected field is refused.
+8. Fill what `incomplete` lists. When it is empty, run the write with `--validation enforce` so a new term without an expected field is refused.

@@ -3,7 +3,10 @@
  *
  * lookup reads one term. exists maps each token of a text to whether it exists.
  * terms writes one language in one pass. Flags are key and value.
- * --language, --mode, and --validation apply to the whole batch. Each --term
+ * --language, --mode, and --validation apply to the whole batch. --dry-run
+ * validates and reports what the write would do, with every problem that would
+ * refuse it, and leaves the glossary unchanged; it takes true or false, and
+ * alone it means true. Each --term
  * starts a term. --categories, --examples, --rejected, --alternatives,
  * --related, --tags, --allowed-in, and --forbidden-in repeat once per value.
  * --decided-by is the name of who decided; --decided-by-email and
@@ -24,6 +27,7 @@
  * Run: node api/cli.ts terms --language pt-BR --mode insert --state allowed --term "!" --category punctuation --description "Ponto de exclamação" --reason "..." 
  * Run: node api/cli.ts terms --language pt-BR --mode upsert --state allowed --term iPhone --case-sensitive --categories brand --description "..." --reason "..."
  * Run: node api/cli.ts terms --file lote.json --mode upsert
+ * Run: node api/cli.ts terms --file lote.json --mode upsert --dry-run
  * Run: node api/cli.ts migrate --language pt-BR --write
  */
 
@@ -32,10 +36,10 @@ import { fileURLToPath } from "node:url"
 
 import { existsPhrase } from "./routes/exists/index.ts"
 import { lookupTerm } from "./routes/lookup/index.ts"
-import { Glossary, InvalidGlossary, migrate, writeTerms } from "./shared/glossary.ts"
+import { Glossary, InvalidGlossary, migrate, writeBatch } from "./shared/glossary.ts"
 import { parseBody } from "./shared/http.ts"
 import { readOptions, report } from "./shared/options.ts"
-import { existsRequest, lookupRequest, termsRequest } from "./shared/schema.ts"
+import { existsRequest, lookupRequest } from "./shared/schema.ts"
 
 const GLOBAL = new Set(["language", "mode", "validation", "file"])
 const LISTS = new Set(["categories", "examples", "rejected", "alternatives", "related", "tags", "allowed_in", "forbidden_in"])
@@ -78,6 +82,7 @@ const MISSING: Record<string, string> = {
   source: "Provide the source.",
   notes: "Provide the notes.",
   validation: "validation is optional, warn, or enforce.",
+  dry_run: "dry_run is true or false.",
   file: "Provide the file.",
   when: "Provide when to use it.",
   text: "Provide the text.",
@@ -113,8 +118,7 @@ export function run(argv: string[]): number {
       const body = parseBody(existsRequest, flagsFrom(rest, ["language", "text"], ["tags"]))
       console.log(JSON.stringify(existsPhrase(new Glossary(glossary), body.language, body.text, body.tags)))
     } else if (command === "terms") {
-      const body = parseBody(termsRequest, termsFrom(rest))
-      console.log(JSON.stringify(writeTerms(glossary, body.language, body.mode, body.terms, body.validation)))
+      console.log(JSON.stringify(writeBatch(glossary, termsFrom(rest))))
     } else if (command === "migrate") {
       const write = rest.includes("--write")
       const flags = flagsFrom(rest.filter((arg) => arg !== "--write"), ["language"])
@@ -156,11 +160,13 @@ export function termsFrom(args: readonly string[]): {
   language?: string
   mode?: string
   validation?: string
+  dry_run?: boolean
   terms: unknown[]
 } {
   let language: string | undefined
   let mode: string | undefined
   let validation: string | undefined
+  let dryRun: boolean | undefined
   let file: string | undefined
   const terms: Draft[] = []
   let current: Draft | null = null
@@ -171,6 +177,14 @@ export function termsFrom(args: readonly string[]): {
     const flag = (split === -1 ? token : token.slice(0, split)).slice(2)
     const name = SWITCHES[flag] === undefined ? flag.replaceAll("-", "_") : flag
     const inline = split === -1 ? undefined : token.slice(split + 1)
+    if (name === "dry_run") {
+      const next = args[index + 1]
+      const value = inline ?? (next === "true" || next === "false" ? next : "true")
+      if (value !== "true" && value !== "false") throw new InvalidGlossary("dry_run is true or false.")
+      if (inline === undefined && (next === "true" || next === "false")) index += 1
+      dryRun = value === "true"
+      continue
+    }
     const field = SWITCHES[name]
     if (field !== undefined) {
       if (current === null) throw new InvalidGlossary(`${JSON.stringify(token)} follows a term.`)
@@ -207,13 +221,19 @@ export function termsFrom(args: readonly string[]): {
   if (file !== undefined) {
     if (terms.length > 0) throw new InvalidGlossary("--file takes the whole batch. Do not add --term.")
     const batch = readBatch(file)
-    return { ...batch, language: language ?? batch.language, mode: mode ?? batch.mode, validation: validation ?? batch.validation }
+    return {
+      ...batch,
+      language: language ?? batch.language,
+      mode: mode ?? batch.mode,
+      validation: validation ?? batch.validation,
+      dry_run: dryRun ?? batch.dry_run,
+    }
   }
   if (terms.length === 0) throw new InvalidGlossary("Provide the terms.")
-  return { language, mode, validation, terms: terms.map(withPerson) }
+  return { language, mode, validation, dry_run: dryRun, terms: terms.map(withPerson) }
 }
 
-function readBatch(file: string): { language?: string; mode?: string; validation?: string; terms: unknown[] } {
+function readBatch(file: string): { language?: string; mode?: string; validation?: string; dry_run?: boolean; terms: unknown[] } {
   let parsed: unknown
   try {
     parsed = JSON.parse(readFileSync(file, "utf8"))
@@ -227,7 +247,8 @@ function readBatch(file: string): { language?: string; mode?: string; validation
   const text = (value: unknown) => (typeof value === "string" ? value : undefined)
   const terms = Array.isArray(record.terms) ? record.terms : []
   if (terms.length === 0) throw new InvalidGlossary("Provide the terms.")
-  return { language: text(record.language), mode: text(record.mode), validation: text(record.validation), terms }
+  const dryRun = typeof record.dry_run === "boolean" ? record.dry_run : undefined
+  return { language: text(record.language), mode: text(record.mode), validation: text(record.validation), dry_run: dryRun, terms }
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {

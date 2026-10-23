@@ -14,10 +14,10 @@ import type { Readable } from "node:stream"
 
 import { existsPhrase } from "../routes/exists/index.ts"
 import { lookupTerm } from "../routes/lookup/index.ts"
-import { Glossary, migrate, writeTerms } from "../shared/glossary.ts"
+import { Glossary, migrate, writeBatch } from "../shared/glossary.ts"
 import { parseBody } from "../shared/http.ts"
 import { readOptions } from "../shared/options.ts"
-import { LEVELS, existsRequest, lookupRequest, migrateRequest, termsRequest } from "../shared/schema.ts"
+import { LEVELS, existsRequest, lookupRequest, migrateRequest } from "../shared/schema.ts"
 
 const PROTOCOL = "2024-11-05"
 
@@ -61,12 +61,16 @@ const tools = [
   },
   {
     name: "write_terms",
-    description: "Insert, update, or upsert vocabulary terms for one language, including an emoji, one term or a whole migrated batch. Searches first, by spelling and then by source: case keeps the stored row, and a new term is stored in lowercase unless case_sensitive is true. An accent, a plural, a gender, and another word each keep their own row. Write only what the person gave: ask before the alternatives of a new forbidden term, and an empty list is valid. A cliché is category cliche and forbidden, and its description names the image, scene, action, effect, or situation that replaces it. forbidden and allowed are general rules: no when, no tags. A term that belongs to one speaker, event, or channel keeps tags, and when still says the rule in words. allowed_in and forbidden_in name the formats or channels where the level changes. description, reason, substitution, and when are optional while a glossary migrates: validation warn lists a missing one in incomplete, and enforce refuses it. An update or an upsert of a term that is stored keeps every field the call does not send, so send only what changes, with state and term. Send a field empty, as \"\" or [], to clear it. The merged row must be valid: moving a row to a level that refuses a stored field, such as when on allowed, is refused until the call clears that field. The response lists inserted, updated, unchanged, skipped, incomplete, and warnings, and each updated row is the whole stored row. A refusal says why and leaves the file unchanged.",
+    description: "Insert, update, or upsert vocabulary terms for one language, including an emoji, one term or a whole migrated batch. Searches first, by spelling and then by source: case keeps the stored row, and a new term is stored in lowercase unless case_sensitive is true. An accent, a plural, a gender, and another word each keep their own row. Write only what the person gave: ask before the alternatives of a new forbidden term, and an empty list is valid. A cliché is category cliche and forbidden, and its description names the image, scene, action, effect, or situation that replaces it. forbidden and allowed are general rules: they take no when and no tags. A term cannot be its own example.  A term that belongs to one speaker, event, or channel keeps tags, and when still says the rule in words. allowed_in and forbidden_in name the formats or channels where the level changes. description, reason, substitution, and when are optional while a glossary migrates: validation warn lists a missing one in incomplete, and enforce refuses it. An update or an upsert of a term that is stored keeps every field the call does not send, so send only what changes, with state and term. Send a field empty, as \"\" or [], to clear it. The merged row must be valid: moving a row to a level that refuses a stored field, such as when on allowed, is refused until the call clears that field. The response lists inserted, updated, unchanged, skipped, incomplete, and warnings, and each updated row is the whole stored row. A batch with a problem writes nothing, and the refusal lists every problem with its term, so fix them all and send the batch again. With dry_run true nothing is written: the response lists what would be inserted, updated, left unchanged, skipped, or incomplete, and refused, the way a write would. Run a dry run before a large batch.",
     inputSchema: {
       type: "object",
       properties: {
         language: languageProperty,
         mode: { type: "string", enum: ["insert", "update", "upsert"] },
+        dry_run: {
+          type: "boolean",
+          description: "True to validate and report what the write would do, with the problems it would refuse, and leave the glossary unchanged. The response has dry_run true and refused.",
+        },
         validation: {
           type: "string",
           enum: ["optional", "warn", "enforce"],
@@ -193,8 +197,7 @@ export function callTool(directory: string, params: unknown): ToolResult {
       return reply(existsPhrase(glossary, body.language, body.text, body.tags))
     }
     if (record?.name === "write_terms") {
-      const body = parseBody(termsRequest, record.arguments)
-      return reply(writeTerms(directory, body.language, body.mode, body.terms, body.validation))
+      return reply(writeBatch(directory, record.arguments))
     }
     if (record?.name === "migrate_glossary") {
       const body = parseBody(migrateRequest, record.arguments)

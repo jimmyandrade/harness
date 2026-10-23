@@ -5,7 +5,7 @@ import { join } from "node:path"
 import test from "node:test"
 
 import { lookupTerm } from "../routes/lookup/index.ts"
-import { Glossary, InvalidGlossary, load, migrate, writeTerms } from "./glossary.ts"
+import { Glossary, InvalidGlossary, InvalidTerms, load, migrate, writeBatch, writeTerms } from "./glossary.ts"
 import { LEVELS, bulkTermSchema, rating, readSchema, termsRequest } from "./schema.ts"
 
 function glossary(initial = "{}\n"): { root: string; file: string } {
@@ -74,7 +74,7 @@ test("enforce refuses a missing field and optional does not report it", () => {
   const item = terms([{ state: "forbidden", term: "baratinho" }])
   assert.throws(() => writeTerms(root, "pt-BR", "upsert", item, "enforce"), {
     name: "Error",
-    message: 'Provide the description of "baratinho".',
+    message: '2 problems. The batch was not written.\n- Provide the description of "baratinho".\n- Provide the substitution of "baratinho".',
   })
   assert.equal(readFileSync(file, "utf8"), "{}\n")
   assert.deepEqual(writeTerms(root, "pt-BR", "upsert", item, "optional").incomplete, [])
@@ -303,4 +303,90 @@ test("an insert of a term that is in the file leaves the stored row alone", () =
   const written = writeTerms(root, "pt-BR", "insert", terms([{ state: "allowed_with_care", term: "casa", description: "outro" }]))
   assert.equal(written.unchanged.length, 1)
   assert.equal(readFileSync(file, "utf8"), text)
+})
+
+const MIXED = {
+  language: "pt-BR",
+  mode: "upsert",
+  validation: "enforce",
+  terms: [
+    { state: "allowed", term: "casa", description: "lugar", reason: "acolhe", examples: ["casa"] },
+    { state: "allowed", term: "lar", description: "lugar", reason: "acolhe", when: "em convite" },
+    { state: "forbidden", term: "baratinho", description: "barato demais" },
+    { state: "allowed", term: "porta", description: "entrada", reason: "acolhe" },
+  ],
+}
+
+test("a refused batch lists every problem with its term and writes nothing", () => {
+  const { root, file } = glossary()
+  assert.throws(
+    () => writeBatch(root, MIXED),
+    (error: unknown) => {
+      assert.ok(error instanceof InvalidTerms)
+      assert.deepEqual(error.problems, [
+        { term: "lar", message: "forbidden and allowed are general rules and take no when. Use allowed_with_care, discouraged, or strongly_discouraged." },
+        { term: "casa", message: '"casa" cannot be its own example.' },
+        { term: "baratinho", message: 'Provide the substitution of "baratinho".' },
+      ])
+      assert.match(error.message, /^3 problems\. The batch was not written\.\n- "lar": forbidden and allowed/)
+      return true
+    },
+  )
+  assert.equal(readFileSync(file, "utf8"), "{}\n")
+})
+
+test("a batch with one problem keeps the message of that problem", () => {
+  const { root } = glossary()
+  const batch = { ...MIXED, terms: [MIXED.terms[0]] }
+  assert.throws(() => writeBatch(root, batch), { message: '"casa" cannot be its own example.' })
+})
+
+test("a dry run reports what a write would do and leaves the file as it was", () => {
+  const { root, file } = glossary(`${JSON.stringify({ casa: { state: "allowed", description: "lugar", reason: "acolhe" } }, null, 2)}\n`)
+  const before = readFileSync(file, "utf8")
+  const written = writeBatch(root, {
+    language: "pt-BR",
+    mode: "upsert",
+    dry_run: true,
+    terms: [
+      { state: "allowed", term: "casa", description: "lugar", reason: "acolhe" },
+      { state: "allowed", term: "porta", description: "entrada" },
+      { state: "allowed", term: "janela", description: "vista", reason: "abre" },
+    ],
+  })
+  assert.equal(written.dry_run, true)
+  assert.deepEqual(written.inserted.map((row) => row.term), ["porta", "janela"])
+  assert.deepEqual(written.unchanged.map((row) => row.term), ["casa"])
+  assert.deepEqual(written.incomplete, [{ term: "porta", missing: ["reason"] }])
+  assert.deepEqual(written.refused, [])
+  assert.equal(readFileSync(file, "utf8"), before)
+})
+
+test("a dry run of a batch with problems lists them as refused and inserts nothing", () => {
+  const { root, file } = glossary()
+  const written = writeBatch(root, { ...MIXED, dry_run: true })
+  assert.deepEqual(written.inserted, [])
+  assert.deepEqual(written.updated, [])
+  assert.deepEqual(written.refused?.map((row) => row.term), ["lar", "casa", "baratinho"])
+  assert.equal(readFileSync(file, "utf8"), "{}\n")
+})
+
+test("a term the schema refuses is listed with the problems of the write", () => {
+  const { root } = glossary()
+  const batch = {
+    language: "pt-BR",
+    mode: "upsert",
+    dry_run: true,
+    terms: [
+      { state: "allowed", term: "lar", description: "lugar", reason: "acolhe", when: "em convite" },
+      { state: "allowed", term: "casa", description: "lugar", reason: "acolhe", examples: ["casa"] },
+    ],
+  }
+  const written = writeBatch(root, batch)
+  assert.deepEqual(written.refused?.map((row) => row.term), ["lar", "casa"])
+})
+
+test("dry_run is true or false", () => {
+  const { root } = glossary()
+  assert.throws(() => writeBatch(root, { ...MIXED, dry_run: "yes" }), { message: "dry_run is true or false." })
 })
