@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.8.0"
+  version: "0.9.0"
   aliases:
     - definir-despesa
     - lancar-despesa
@@ -15,6 +15,8 @@ metadata:
     - definir-lancamento
     - identificar-duplicata
     - lancar-despesa-pessoal
+    - definir-grafia
+    - reconhecer-imagem
 ---
 
 # Lançar despesa da empresa
@@ -57,6 +59,20 @@ Preserve as URLs retornadas. Não transforme o UUID de uma fonte em URL de banco
 
 Erro genérico de acesso descreve a chamada que falhou, não prova a causa nem a falta de acesso ao banco inteiro. Confira os argumentos e o tipo da entidade. Corrija a chamada somente com evidência de incompatibilidade; não repita a mesma chamada, não alterne carregadores por tentativa e não contorne uma negativa real. Uma leitura bem-sucedida da fonte ou do modelo é evidência de leitura desse recurso, não garantia de acesso a todos os registros nem de escrita. Com a fonte corretamente carregada, continue a busca de duplicata e o fluxo do gasto, sem pedir que a pessoa libere um acesso cuja ausência não foi demonstrada. Se a chamada correta continuar bloqueada, informe a operação e o erro retornado, diga que a causa específica não foi informada e não afirme que houve lançamento.
 
+Conclua a preparação antes de buscar ou gravar o lançamento. Quando a entrada já vem de `reconhecer-imagem`, reutilize a leitura entregue; não chame a mesma leitura de novo. Confira os nomes tanto na evidência quanto no comando original, inclusive os de pessoa sócia em uma exclusão de item pessoal.
+
+```mermaid
+flowchart LR
+  A{Imagem ainda sem leitura?} -->|sim| B[reconhecer-imagem]
+  A -->|não| C{Nome de pessoa ou empresa ainda sem conferência?}
+  B --> C
+  C -->|sim| D[definir-grafia]
+  C -->|não| E[Busque o lançamento e grave só o confirmado]
+  D --> F{Identidade resolvida?}
+  F -->|sim| E
+  F -->|não| G[Pergunte qual registro antes de gravar]
+```
+
 ### Passo 2
 
 Busque antes de criar, sem pedir autorização para a leitura. Compare recebedor e suas variações de nome, documento ou cobrança, valor, data e meio de pagamento. Um valor igual sozinho não confirma duplicata. Uma nota e um print da mesma transação são evidências de um lançamento, não duas despesas.
@@ -87,6 +103,8 @@ Antes de qualquer gravação, confira e marque este checklist com o que a evidê
 - [ ] Natureza pessoal ou da empresa, sem confundir quem pagou com quem deve.
 - [ ] Dados necessários à categoria e aos vínculos aplicáveis no mapeamento: por exemplo, o veículo ou a obrigação a que o gasto pertence.
 - [ ] Valor, datas e situação do pagamento sustentados pela evidência, conforme o tipo de cobrança.
+- [ ] Evidência lida e separada do comando, sem nova leitura.
+- [ ] Nomes de pessoa ou empresa usados no lançamento conferidos no cadastro.
 - [ ] Busca de duplicata concluída antes de criar.
 
 O recebedor e a modalidade Pix não identificam o produto nem sua finalidade. Dizer apenas “despesa pessoal” ou “despesa da empresa” só confirma a natureza. Consulte o contexto e os registros relacionados; reúna as perguntas que faltam, espere as respostas e só depois grave. Não repita perguntas já respondidas nem exija campos sem relação com o gasto. Não use nome genérico de recebedor como substituto da identificação.
@@ -119,6 +137,14 @@ Pagamento numa moeda de `Moedas estrangeiras`: grave o valor original, o câmbio
 Confira o registro salvo, os anexos e o vínculo da empresa recebedora. Entregue a página do lançamento e as pendências, distinguindo o dado que falta de um cadastro ainda não encaminhado. Diga o que foi encontrado, criado ou complementado; não apresente transcrição como lançamento. O lançamento é a origem financeira da compra. A página do bem, a separação entre ativo e estoque e a compra de item controlável ficam com `definir-ativo-imobilizado`.
 
 ## Problemas comuns
+
+### Nome ditado gravado como pessoa
+
+Se você registrar o nome do comando de voz sem conferir o cadastro, a despesa pode atribuir a parcela pessoal à pessoa errada.
+
+1. Preserve a leitura do comprovante separada do comando.
+2. Resolva a grafia com `definir-grafia` antes da escrita.
+3. Retome o lançamento com o nome e o registro confirmados.
 
 ### Comprovante sem identificação do gasto
 
