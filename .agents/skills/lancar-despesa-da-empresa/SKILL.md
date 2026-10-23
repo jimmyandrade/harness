@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.9.1"
+  version: "0.10.3"
   aliases:
     - definir-despesa
     - lancar-despesa
@@ -109,7 +109,31 @@ Antes de qualquer gravação, confira e marque este checklist com o que a evidê
 
 O recebedor e a modalidade Pix não identificam o produto nem sua finalidade. Dizer apenas “despesa pessoal” ou “despesa da empresa” só confirma a natureza. Consulte o contexto e os registros relacionados; reúna as perguntas que faltam, espere as respostas e só depois grave. Não repita perguntas já respondidas nem exija campos sem relação com o gasto. Não use nome genérico de recebedor como substituto da identificação.
 
-Use apenas categorias e relações existentes, sustentadas pelos dados confirmados. Sem propriedade de categoria no mapeamento, informe a limitação; não crie estrutura nem grave uma categoria inventada no corpo. Isso não impede registrar um gasto já identificado com os vínculos disponíveis. Uma informação opcional ausente não substitui a identificação obrigatória do produto e da finalidade.
+Antes de deixar a categoria de custo vazia, busque na lista que a propriedade de categoria aponta, pelo produto e pela finalidade confirmados, e pelas variações e grafias da categoria. Sem propriedade de categoria no mapeamento, informe a limitação; não crie estrutura nem grave uma categoria inventada no corpo. Isso não impede registrar um gasto já identificado com os vínculos disponíveis. Uma informação opcional ausente não substitui a identificação obrigatória do produto e da finalidade.
+
+```mermaid
+flowchart LR
+  A[Busca a categoria pelo produto e pela finalidade] --> B{Quantas servem?}
+  B -->|uma| C[Vincula a categoria existente]
+  B -->|mais de uma| D[Propõe a mais específica e pergunta]
+  B -->|nenhuma| E[Propõe criar uma categoria com nome e grupo]
+  E --> F{A pessoa autorizou?}
+  F -->|sim| G[Cria na lista de categorias e vincula]
+  F -->|não| H[Grava sem categoria e entrega a proposta como pendência]
+```
+
+A categoria nova segue o padrão de nome e de grupo das categorias que já existem na lista. Não force uma categoria vizinha só porque o grupo combina.
+
+A placa serve para localizar o veículo existente, não para preencher o título, a descrição ou as observações da despesa. O cadastro do veículo é a fonte da placa. Associe a mesma despesa ao veículo pela relação mapeada, conferindo também o lado do veículo; a relação pode existir só nesse lado. A viagem é outro vínculo: preserve a associação confirmada para a prestação de contas, sem substituir a relação com o veículo.
+
+```mermaid
+flowchart LR
+  V[Localiza o veículo pela placa] --> R{Relação mapeada disponível em algum lado?}
+  R -->|sim| S[Associa a mesma despesa ao veículo e confere o vínculo salvo]
+  R -->|não| P[Informa a limitação e propõe o vínculo sem alterar a estrutura]
+```
+
+A falta da relação não autoriza copiar a placa para texto livre nem declarar a associação concluída. Ao corrigir um lançamento, preserve valor, pagamento, comprovantes e viagem; retire a placa redundante do texto sem criar outra despesa.
 
 Resolva a empresa recebedora com o nome e o CNPJ da evidência, inclusive ao complementar uma despesa já salva. Use `identificar-duplicata` antes de criar. A instituição de pagamento não é a empresa recebedora. Não deduza a razão social completa de um nome comercial.
 
@@ -126,6 +150,18 @@ flowchart LR
 
 Não encerre com apenas "empresa não cadastrada" ou "vínculo pendente": entregue a ação realizada ou a proposta concreta e o bloqueio. Reaproveite a leitura e os comprovantes; cadastrar a recebedora não cria outra despesa. Nome no título, no assunto do comprovante ou nas observações não substitui a relação com a empresa. Confira o vínculo salvo e preserve a conta, a pessoa pagadora e os anexos já confirmados. Não infira que o nome exibido no Pix seja dono, contato ou responsável pela empresa.
 
+Vincule a conta de origem somente quando os dados da conta no comprovante identificarem inequivocamente um cadastro ou quando a pessoa já tiver confirmado a conta deste pagamento. Nome do titular e instituição, sozinhos, indicam uma candidata, não a conta usada: podem existir contas pessoais e empresariais no mesmo banco. Ter apenas uma candidata cadastrada não supre a identificação. Cruze também o tipo e os dígitos visíveis do CPF ou CNPJ do titular da conta de origem com os documentos dos cadastros, respeitando as posições da máscara e sem completar dígitos ocultos. Use o documento do pagador, não o do recebedor nem o da instituição. Esse cruzamento pode distinguir titularidades de pessoa física e jurídica; não confunda identificar o titular com identificar uma conta específica. Combine-o com a instituição e os demais dados da conta presentes na evidência. Se o conjunto identificar inequivocamente a conta, vincule sem perguntar; se houver colisão de trechos, mais de uma conta compatível ou identificação insuficiente, confirme com a pessoa. Reutilize a leitura da evidência e não repita uma confirmação já dada para este pagamento.
+
+```mermaid
+flowchart LR
+  A{Conta identificada no comprovante ou confirmada para este pagamento?} -->|sim| B[Vincula a conta sem perguntar de novo]
+  A -->|não| C[Pergunta qual conta foi usada]
+  C --> D[Registra o gasto identificado com a conta pendente]
+  D --> E[Com a resposta, vincula a conta à mesma despesa]
+```
+
+A falta de identificação da conta não bloqueia o lançamento quando os demais dados obrigatórios estão sustentados. Até a resposta, mantenha o vínculo vazio e informe a pendência. Uma confirmação vale para o pagamento confirmado, não vira regra para outros pagamentos do mesmo banco. Ao receber a resposta, complemente a mesma despesa sem duplicá-la nem alterar os comprovantes.
+
 Grave os dados nas propriedades mapeadas, não no corpo. Separe a data do documento da data de pagamento. Não invente valor, data, conta, finalidade, categoria nem parcelas. Campo opcional ausente fica pendente; produto, finalidade e informação necessária à classificação não são opcionais. Depois do checklist completo, a pendência opcional não impede o lançamento. Preserve o modelo da página.
 
 Anexe os originais na propriedade mapeada de comprovantes na mesma execução do lançamento, sem novo reconhecimento e sem pedir confirmação adicional. Recupere os anexos já enviados do histórico antes de declarar que estão inacessíveis. Use a referência de arquivo aceita pela ferramenta; um ID de anexo da conversa não é necessariamente um ID de arquivo do Notion. Erro de arquivo não encontrado exige conferir a referência original e usar o formato suportado, não pedir novo envio nem tratar a falha de referência como falta do comprovante. Mantenha as evidências anteriores ao complementar um lançamento. Preserve os dados confirmados e pergunte sobre conflito antes de sobrescrever. Uma transação ainda em processamento não equivale a conciliação concluída; uma cobrança sem confirmação não equivale a pagamento.
@@ -134,7 +170,7 @@ Pagamento numa moeda de `Moedas estrangeiras`: grave o valor original, o câmbio
 
 ### Passo 4
 
-Confira o registro salvo, os anexos na propriedade de comprovantes e o vínculo da empresa recebedora. Só remova a pendência de anexo e atualize a conciliação depois de confirmar a gravação das evidências. Entregue a página do lançamento e as pendências, distinguindo o dado que falta de um cadastro ainda não encaminhado. Diga o que foi encontrado, criado ou complementado; não apresente transcrição como lançamento. O lançamento é a origem financeira da compra. A página do bem, a separação entre ativo e estoque e a compra de item controlável ficam com `definir-ativo-imobilizado`.
+Confira o registro salvo, os anexos na propriedade de comprovantes e os vínculos da empresa recebedora, do veículo e da viagem aplicáveis ao gasto. Só remova a pendência de anexo e atualize a conciliação depois de confirmar a gravação das evidências. Entregue a página do lançamento e as pendências, distinguindo o dado que falta de um cadastro ainda não encaminhado. Diga o que foi encontrado, criado ou complementado; não apresente transcrição como lançamento. O lançamento é a origem financeira da compra. A página do bem, a separação entre ativo e estoque e a compra de item controlável ficam com `definir-ativo-imobilizado`.
 
 ## Problemas comuns
 
@@ -154,13 +190,21 @@ Se você gravar só com recebedor, valor e data, a despesa entra sem saber o que
 2. Pergunte o produto ou serviço, a finalidade e os dados de classificação ainda ausentes.
 3. Espere a resposta e atualize o mesmo lançamento, preservando o comprovante e sem duplicar.
 
+### Categoria deixada vazia
+
+Se você deixar a categoria de custo vazia sem buscar nem propor, a despesa fica fora dos totais por categoria e a pessoa tem de descobrir sozinha o que falta.
+
+1. Busque a categoria pelo produto e pela finalidade.
+2. Proponha a existente que serve ou, sem nenhuma, uma categoria nova com nome e grupo.
+3. Vincule depois do aceite. Sem aceite, entregue a proposta como pendência.
+
 ### Ativo criado na despesa
 
 Se você criar a página do bem nesta habilidade, o lançamento e o ativo se misturam.
 
 1. Rastreie o lançamento que originou a compra.
 2. A página do bem fica em `definir-ativo-imobilizado`.
-3. Não crie a página do ativo aqui.
+3. Não crie o ativo aqui.
 
 ### Lançamento inventado
 
@@ -207,6 +251,7 @@ Busquei pelo recebedor, documento, valor e data. Registrei um lançamento com as
 - O comprovante identifica a transferência, não necessariamente a compra. Recebedor e Pix não são produto nem finalidade.
 - Nota fiscal e print de cartão podem ser o mesmo gasto. Dois arquivos não são duas despesas.
 - Uma tela pode dizer "Crédito" como modalidade do cartão, não como entrada de receita.
+- "Não invente categoria" parece proibir propor uma. Proibido é gravar sem aceite. Buscar, propor a existente e sugerir criar a que falta fazem parte do lançamento.
 
 ## Scripts disponíveis
 
