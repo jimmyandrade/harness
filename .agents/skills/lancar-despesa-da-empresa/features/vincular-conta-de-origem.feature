@@ -28,3 +28,17 @@ Funcionalidade: Vincular a conta que pagou uma despesa
     Quando a pessoa pede para registrar o novo pagamento com os demais dados obrigatórios sustentados
     Então o novo gasto é registrado com a conta pendente sem reutilizar automaticamente a confirmação anterior
     E é perguntado qual conta foi usada no novo pagamento
+
+  Exemplo: Documento parcial distingue a titularidade e o conjunto identifica a conta
+    Dado que o tipo e os dígitos visíveis do documento do titular da conta de origem correspondem ao cadastro
+    E esse cruzamento com a instituição e os demais dados do comprovante identifica inequivocamente a conta usada
+    Quando a pessoa pede para registrar a despesa identificada
+    Então o lançamento fica vinculado à conta identificada sem confirmação adicional
+    E nenhum dígito oculto do documento é completado
+
+  Exemplo: Documento parcial identifica o titular mas não a conta específica
+    Dado que o documento parcial do titular da conta de origem corresponde a um cadastro
+    E os dados do comprovante não distinguem entre contas compatíveis desse titular na instituição
+    Quando a pessoa pede para registrar a despesa com os demais dados obrigatórios sustentados
+    Então o gasto é registrado com a conta pendente sem escolher uma conta pela titularidade
+    E é perguntado qual conta foi usada
