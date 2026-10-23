@@ -93,6 +93,7 @@ flowchart LR
     revisar_habilidade["revisar-habilidade"]
     revisar_uso_do_tempo["revisar-uso-do-tempo"]
     sincronizar_cronograma["sincronizar-cronograma"]
+    sincronizar_status_da_tarefa["sincronizar-status-da-tarefa"]
   end
   acompanhar_fila_de_revisao --> atender_revisao_de_pull_request
   acompanhar_fila_de_revisao --> enviar_mensagem_no_slack
@@ -420,4 +421,6 @@ flowchart LR
   sincronizar_cronograma --> definir_jornada_de_producao
   sincronizar_cronograma --> definir_viagem
   sincronizar_cronograma --> procurar_agenda
+  sincronizar_status_da_tarefa --> evoluir_habilidade
+  sincronizar_status_da_tarefa --> levantar_contexto_do_pull_request
 ```
