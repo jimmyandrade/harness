@@ -3,7 +3,7 @@ name: procurar-pedido-de-revisao
 description: Acha os pull requests que alguém pediu para a pessoa revisar, na conversa do time e no GitHub, sem repetir um já visto. Marca os que não estão prontos, abre nova rodada num PR já revisado e propõe a pergunta de acompanhamento de um PR em andamento. Não serve para revisar nem para enviar mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   notion: "false"
   related:
     - definir-pessoa
@@ -31,6 +31,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Grupos da pessoa": ""
 "Etiqueta de pronto para revisão": ""
 "Repositórios que exigem a etiqueta": ""
+"Aplicar a etiqueta quando o autor autoriza a revisão": "não"
 "Marcadores de trabalho em andamento": "WIP, [WIP], wip, do not merge"
 "Etiquetas de não pronto": ""
 "Intervalos de pergunta sobre PR em andamento": "1, 1, 2, 3, 5, 8, 13"
@@ -38,7 +39,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Modo de aprendizado": "perguntar"
 ```
 
-`Fontes de pedido de revisão` lista, em ordem, o que varrer: `conversa`, `pedidos no GitHub`, `autores acompanhados`, `repositórios acompanhados` e `anúncios de bot`. `Intervalos de pergunta sobre PR em andamento` são dias úteis entre as perguntas, e depois do último valor cada intervalo é a soma dos dois anteriores. `Registro de PRs conhecidos` diz onde guardar o que já foi visto, com a data da última varredura de cada fonte. Sem registro, a habilidade só enxerga esta execução e não reconhece um PR já visto. `Grupos da pessoa` lista os grupos de conversa cuja menção vale como menção a ela, por identificador. `Etiquetas de não pronto` lista etiquetas do PR que o marcam como não pronto, além dos marcadores no título. `Regras de relevância por repositório` diz, por repositório ou padrão de nome, se vale revisar: sempre, nunca, ou só com condição (por exemplo, só com pedido na conversa que marque a pessoa ou um dos `Grupos da pessoa`).
+`Fontes de pedido de revisão` lista, em ordem, o que varrer: `conversa`, `pedidos no GitHub`, `autores acompanhados`, `repositórios acompanhados` e `anúncios de bot`. `Intervalos de pergunta sobre PR em andamento` são dias úteis entre as perguntas, e depois do último valor cada intervalo é a soma dos dois anteriores. `Registro de PRs conhecidos` diz onde guardar o que já foi visto, com a data da última varredura de cada fonte. Sem registro, a habilidade só enxerga esta execução e não reconhece um PR já visto. `Grupos da pessoa` lista os grupos de conversa cuja menção vale como menção a ela, por identificador. `Aplicar a etiqueta quando o autor autoriza a revisão` é `sim` ou `não`: com `sim`, a resposta de quem abriu o PR dizendo que ele pode ser revisado mesmo sem a `Etiqueta de pronto para revisão` leva a habilidade a aplicar essa etiqueta no PR. `Etiquetas de não pronto` lista etiquetas do PR que o marcam como não pronto, além dos marcadores no título. `Regras de relevância por repositório` diz, por repositório ou padrão de nome, se vale revisar: sempre, nunca, ou só com condição (por exemplo, só com pedido na conversa que marque a pessoa ou um dos `Grupos da pessoa`).
 
 ## Instruções
 
@@ -91,6 +92,7 @@ Aplique o gate de pronto para revisão. Um PR não está pronto quando é rascun
 
 - Um PR que não está pronto não é revisado nem enfileirado como pronto. Se veio só do GitHub, fica em acompanhamento e entra quando a condição deixar de valer.
 - Se veio com um pedido explícito na conversa, marque-o como esperando confirmação e proponha uma pergunta única na thread do pedido, marcando quem abriu: o PR está pronto para revisão? Não discuta código.
+- Quando quem abriu o PR responde que ele pode ser revisado, mesmo sem a `Etiqueta de pronto para revisão`, o PR passa a pronto. Com `Aplicar a etiqueta quando o autor autoriza a revisão` em `sim`, aplique a etiqueta no PR antes de entregá-lo na lista, e diga que foi você quem a aplicou. Com `não`, só marque o PR como autorizado, sem mexer nele. Uma resposta que não diz com clareza que pode revisar não conta.
 - Um PR que sai de trabalho em andamento sobe para o nível dos pedidos do GitHub, na frente dos outros desse nível, mas atrás de um pedido explícito na conversa.
 
 ### Passo 7
