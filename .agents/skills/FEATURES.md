@@ -374,7 +374,8 @@ How these skills relate is in `README.md`, in this folder.
   - Lives at `.agents/skills/definir-empresa/SKILL.md`
   - Reads the company list, its property names, and its options from the data mapping of the project, when the person does not name another list
   - Leaves the existence check to identificar-duplicata, spelling to definir-grafia, the social profile to definir-perfil-social, and merging the same item to mesclar-registro
-  - Requires a responsible person when the company is an active, potential, or relevant supplier for a quote, purchase, partnership, or commercial relationship
+  - Requires a responsible person when validating an active, potential, or relevant supplier for a quote, purchase, partnership, or commercial relationship
+  - Supports a minimal payment-recipient record from evidenced identity after deduplication, returns its page to the caller, and keeps a missing site and legal name pending, and a missing contact only for a continuing relationship, without declaring commercial validation complete
   - Prefers a manager, commercial representative, seller, owner, or the contact who handles service
   - Adds the supplier option to the audience type when that fits, without removing the values already there
   - Checks the related companies on the person and relates the company when that inverse link is missing
@@ -382,6 +383,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses an existence-only check, spelling, social-profile normalization, merging the same item, and deleting without an order
+  - [ ] A payment recipient identified by name and company identifier is registered without inventing a responsible contact and returned for linking to the payment
 
 ### definir-grafia
 - **Stability**: experimental
@@ -869,6 +871,7 @@ How these skills relate is in `README.md`, in this folder.
   - Reuses an existing entry and preserves its evidence instead of recording the same purchase twice
   - Records an absent expense in the same execution when its business purpose is confirmed or inferable from context, and asks when that purpose is uncertain
   - Keeps original evidence in the mapped attachment property and reports missing optional fields without inventing them
+  - Resolves the recipient company through identificar-duplicata and definir-empresa, reuses or registers it and links it to the same expense, or explicitly proposes registration and asks only what blocks it
   - Verifies the saved entry before reporting that it was recorded
   - Traces the financial entry that originated the purchase or acquisition of a durable asset
   - Leaves the asset page, the split between fixed assets and stock, and a controllable-item purchase to definir-ativo-imobilizado
@@ -878,6 +881,7 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses the opportunity, the signup update, the task, the agenda, and registering the asset
   - [ ] A confirmed or inferable business expense is recorded after an existence search; an existing expense is reused
+  - [ ] A missing recipient is registered and linked when identified and permitted; otherwise the response proposes registration rather than leaving an unexplained pending link
 
 ### lancar-despesa-pessoal
 - **Stability**: experimental

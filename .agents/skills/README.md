@@ -300,7 +300,9 @@ flowchart LR
   identificar_duplicata --> definir_perfil_social
   identificar_duplicata --> mesclar_registro
   lancar_despesa_da_empresa --> definir_ativo_imobilizado
+  lancar_despesa_da_empresa --> definir_empresa
   lancar_despesa_da_empresa --> definir_lancamento
+  lancar_despesa_da_empresa --> identificar_duplicata
   lancar_despesa_da_empresa --> lancar_despesa_pessoal
   lancar_despesa_pessoal --> definir_obrigacao_financeira
   lancar_despesa_pessoal --> evoluir_habilidade
