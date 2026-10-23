@@ -897,6 +897,7 @@ How these skills relate is in `README.md`, in this folder.
   - Keeps original evidence in the mapped attachment property and reports missing optional fields without inventing them
   - Searches the cost category by product and purpose before leaving it empty, links the one that fits, proposes the most specific when several fit, and suggests creating a category with a name and group when none fits, creating it only after the person agrees
   - Resolves the recipient company through identificar-duplicata and definir-empresa, reuses or registers it and links it to the same expense, or explicitly proposes registration and asks only what blocks it
+  - Uses a vehicle plate only to find the existing vehicle, links the expense to it through the mapped relation, checking the vehicle side too, keeps the trip relation apart, keeps the plate out of the expense title, description, and notes, and reports the limitation instead of writing the plate as free text when no relation is mapped
   - Verifies the saved entry before reporting that it was recorded
   - Traces the financial entry that originated the purchase or acquisition of a durable asset
   - Leaves the asset page, the split between fixed assets and stock, and a controllable-item purchase to definir-ativo-imobilizado
