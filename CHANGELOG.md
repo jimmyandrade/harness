@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.87.0](https://github.com/jimmyandrade/harness/compare/v0.86.0...v0.87.0) (2026-10-23)
+
+
+### Features
+
+* **levantar-contexto-do-pull-request:** find the technical refinement of the work and base the review on it ([#389](https://github.com/jimmyandrade/harness/issues/389)) ([173a61b](https://github.com/jimmyandrade/harness/commit/173a61b5571dfdd51470f7f32a0e126c6caea1a0))
+
 ## [0.86.0](https://github.com/jimmyandrade/harness/compare/v0.85.0...v0.86.0) (2026-10-23)
 
 
