@@ -3,7 +3,7 @@ name: procurar-variacao-de-termo
 description: Use essa habilidade sempre que alguém perguntar se um termo do vocabulário do tom de voz faltou, ou quais variações de gênero, número ou grafia de um termo foram cadastradas, mesmo sem dizer variação, plural ou feminino. NÃO use para cadastrar ou atualizar o termo, escrever o texto da marca, nem inventar uma forma que a pessoa não pediu.
 metadata:
   author: jimmyandrade
-  version: "0.2.1"
+  version: "0.2.2"
   related:
     - definir-vocabulario
     - evoluir-habilidade
@@ -21,7 +21,7 @@ metadata:
 
 ### Passo 1
 
-A pessoa quer saber se um termo faltou, ou quais formas de um termo já estão no vocabulário. Sem idioma ou sem termo, pare e peça. Esta habilidade só lê. O cadastro segue `definir-vocabulario`.
+A pessoa quer saber se um termo faltou, ou quais formas de um termo já estão no vocabulário. O idioma é o do texto inteiro da comunicação, não o do arquivo à mão. Sem idioma ou sem termo, pare e peça. Esta habilidade só lê. O cadastro segue `definir-vocabulario`.
 
 ```mermaid
 flowchart LR

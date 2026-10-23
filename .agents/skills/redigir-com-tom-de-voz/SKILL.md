@@ -3,7 +3,7 @@ name: redigir-com-tom-de-voz
 description: Use essa habilidade sempre que for criar, adaptar, lapidar ou validar texto da marca no tom de voz, mesmo sem dizer copy, como slogan, legenda, e-mail, WhatsApp, campanha, CTA, microcopy ou título de evento externo. NÃO use para responder quem conversa com a IA, descrever uma skill, titular tarefa ou oportunidade, cravar a grafia, alterar formato de conteúdo, nem assumir cliente, peça, oportunidade ou histórico.
 metadata:
   author: jimmyandrade
-  version: "0.16.1"
+  version: "0.16.2"
   aliases:
     - escreva-usando-o-tom-de-voz
   related:
@@ -37,7 +37,7 @@ flowchart LR
 
 Antes de escrever ou aprovar, o texto tem contexto, canal, público, as fontes da marca que as instruções do projeto nomeiam, o vocabulário e a intenção criativa. Falta algum: pare e peça. Não aprove. Não invente persona, posicionamento, vocabulário nem termo proibido. A pessoa informa a fonte. Se ela não estiver no workspace conectado, pare.
 
-Consulte o vocabulário com Scripts disponíveis, com `tags` de quem fala, do evento, do canal e do formato do texto, como `maria-silva`, `festival-de-verao`, `palco` ou `whatsapp`. Use a tag que o vocabulário já tem para esse contexto. A consulta com tags deixa de fora o termo de outra pessoa, de outro evento ou de outro canal. Sem saber quem fala no texto, pergunte. Com terminal e a CLI instalada, rode o comando. Sem terminal, ou sem a CLI, chame a ferramenta do servidor `vocabulary`. Sem os dois, como num agente do Notion, o vocabulário vem de uma fonte do workspace conectado que as instruções do projeto nomeiam. Sem essa fonte, pare e diga que a consulta roda numa ferramenta de código com o projeto aberto. Não leia o vocabulário de memória.
+Consulte o vocabulário com Scripts disponíveis, com `tags` de quem fala, do evento, do canal e do formato do texto, como `maria-silva`, `festival-de-verao`, `palco` ou `whatsapp`. Use a tag que o vocabulário já tem para esse contexto. Consulte no idioma do texto que vai escrever: texto em inglês consulta `en`, texto em português consulta `pt-BR`. A consulta com tags deixa de fora o termo de outra pessoa, de outro evento ou de outro canal. Sem saber quem fala no texto, pergunte. Com terminal e a CLI instalada, rode o comando. Sem terminal, ou sem a CLI, chame a ferramenta do servidor `vocabulary`. Sem os dois, como num agente do Notion, o vocabulário vem de uma fonte do workspace conectado que as instruções do projeto nomeiam. Sem essa fonte, pare e diga que a consulta roda numa ferramenta de código com o projeto aberto. Não leia o vocabulário de memória.
 
 Intenção clara, recorte específico e conexão humana. O que a pessoa precisa entender para agir. Como o texto se conecta com ela. Se faz ela sentir algo. Não fale para todo mundo. Não escreva fórmula genérica, ritmo previsível nem chamada vazia.
 
