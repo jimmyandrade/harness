@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.7.1"
+  version: "0.8.0"
   aliases:
     - definir-despesa
     - lancar-despesa
@@ -42,6 +42,20 @@ flowchart LR
 ```
 
 Venda ou frase que mistura venda, gasto e estoque segue `definir-lancamento`. Esta habilidade grava o gasto da empresa.
+
+Antes da primeira chamada no Notion, identifique o tipo da entidade pelo mapeamento ou pelo contexto estruturado. Não deduza o tipo só pelo título ou por um UUID.
+
+```mermaid
+flowchart LR
+  A{Entidade identificada} -->|fonte de dados ou relação dataSourceUrl| S[notion_load_data_source com a URL da fonte]
+  A -->|banco identificado como banco| B[notion_load_database com a URL do banco]
+  A -->|página ou modelo| P[notion_load_page com a URL da página]
+  A -->|tipo incerto| C[Confirme no mapeamento ou no contexto antes de chamar]
+```
+
+Preserve as URLs retornadas. Não transforme o UUID de uma fonte em URL de banco ou página. Um modelo é uma página: seu `parent.url` identifica a fonte, não a URL do banco. Leia o esquema da fonte antes de consultar ou gravar suas propriedades.
+
+Erro genérico de acesso descreve a chamada que falhou, não prova a causa nem a falta de acesso ao banco inteiro. Confira os argumentos e o tipo da entidade. Corrija a chamada somente com evidência de incompatibilidade; não repita a mesma chamada, não alterne carregadores por tentativa e não contorne uma negativa real. Uma leitura bem-sucedida da fonte ou do modelo é evidência de leitura desse recurso, não garantia de acesso a todos os registros nem de escrita. Com a fonte corretamente carregada, continue a busca de duplicata e o fluxo do gasto, sem pedir que a pessoa libere um acesso cuja ausência não foi demonstrada. Se a chamada correta continuar bloqueada, informe a operação e o erro retornado, diga que a causa específica não foi informada e não afirme que houve lançamento.
 
 ### Passo 2
 
@@ -92,7 +106,7 @@ flowchart LR
   E -->|não| H[Propõe o cadastro e pede só o dado ou a autorização necessária]
 ```
 
-Não encerre com apenas "empresa não cadastrada" ou "vínculo pendente": entregue a ação realizada ou a proposta concreta e o bloqueio. Reaproveite a leitura e os comprovantes; cadastrar a recebedora não cria outra despesa.
+Não encerre com apenas "empresa não cadastrada" ou "vínculo pendente": entregue a ação realizada ou a proposta concreta e o bloqueio. Reaproveite a leitura e os comprovantes; cadastrar a recebedora não cria outra despesa. Nome no título, no assunto do comprovante ou nas observações não substitui a relação com a empresa. Confira o vínculo salvo e preserve a conta, a pessoa pagadora e os anexos já confirmados. Não infira que o nome exibido no Pix seja dono, contato ou responsável pela empresa.
 
 Grave os dados nas propriedades mapeadas, não no corpo. Separe a data do documento da data de pagamento. Não invente valor, data, conta, finalidade, categoria nem parcelas. Campo opcional ausente fica pendente; produto, finalidade e informação necessária à classificação não são opcionais. Depois do checklist completo, a pendência opcional não impede o lançamento. Preserve o modelo da página.
 
