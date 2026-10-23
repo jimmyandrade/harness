@@ -3,7 +3,7 @@ name: enviar-mensagem-no-slack
 description: Redige uma mensagem de Slack, num canal, thread ou DM, e entrega o rascunho com o link do destino. Só envia com a autorização explícita da pessoa e, depois do envio, compara o proposto com o aplicado para alimentar o vocabulário. Usada quando a pessoa pede uma mensagem ou resposta no Slack. Não serve para achar conversa antiga nem cadastrar pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   internal: true
   notion: "false"
   related:
@@ -85,6 +85,8 @@ Depois de enviar, leia a mensagem publicada, confira que aparece no destino cert
 
 Quando a pessoa disser que enviou, ou que mandou do jeito que ela editou, leia a mensagem publicada, pelo link ou pela thread. Compare com o rascunho que você propôs, trecho por trecho. O conector do Slack pode acrescentar um rodapé de ferramenta depois do envio: não conte isso como mudança da pessoa.
 
+Antes de atribuir autoria a qualquer trecho, em nota ou em registro, leia a mensagem publicada e confira, trecho por trecho, o que veio do rascunho e o que a pessoa escreveu. Um trecho que está na mensagem publicada e não está no rascunho é da pessoa: nunca escreva que o rascunho trazia esse trecho. Se não conseguiu ler a mensagem publicada, não atribua: diga que não conferiu.
+
 Sem diferença, diga que o rascunho foi aceito como estava e pare. Com diferença, e com `Retroalimentar o vocabulário` em `sim`, passe o que mudou para `definir-vocabulario`, que registra os termos trocados com as tags da pessoa ou do canal, e para `redigir-com-tom-de-voz`, que aprende os padrões de estilo. Diga o que foi registrado.
 
 Conteúdo de DM serve só para derivar um padrão. Não copie um trecho literal dele para outro contexto.
@@ -131,6 +133,16 @@ Se você entregar o texto sem o link da thread, a pessoa procura onde responder.
 
 1. Devolva sempre o endereço absoluto da thread ou da mensagem, junto do texto.
 
+### Autoria atribuída sem conferir a mensagem publicada
+
+Se você escreve na nota que o rascunho dizia certa frase sem ler a mensagem publicada, pode atribuir ao rascunho uma frase que a pessoa escreveu, e o vocabulário aprende o contrário do que aconteceu.
+
+1. Leia a mensagem publicada antes de escrever a nota.
+2. Procure cada frase da nota no rascunho que você propôs. Se ela não está lá, é da pessoa.
+3. Escreva "a pessoa acrescentou X", nunca "o rascunho dizia X". Sem a leitura, diga que não conferiu.
+
+Exemplo: o rascunho dizia "Segue o relatório." e a mensagem publicada diz "Segue o relatório. Qualquer dúvida, me chama.". A segunda frase é da pessoa. A nota registra que ela acrescentou o convite a perguntar.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
@@ -163,6 +175,7 @@ Li a mensagem publicada na thread e comparei com o rascunho. Você trocou duas e
 - Menção só vira menção quando o texto vai pela ferramenta de rascunho ou de envio. Colada à mão, vira texto puro.
 - O conector do Slack pode acrescentar um rodapé de ferramenta depois do envio, fora do texto que você mandou.
 - Uma mensagem com um link só pode ir como texto pronto. Com dois ou mais, o rascunho evita o formato do rótulo cru.
+- Uma frase que está na mensagem publicada e não está no rascunho é da pessoa, não do rascunho. A autoria só se atribui depois de ler a mensagem publicada.
 - A busca de pessoa por e-mail completo pode não achar ninguém. Procure pelo nome.
 
 ## Scripts disponíveis
