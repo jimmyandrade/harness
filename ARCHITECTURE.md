@@ -101,7 +101,7 @@ None. People reach the core through their agent (Claude Code, Cursor), GitHub, a
 #### 3.2.3. Plugin
 
 - Name: `core`
-- Description: Ships the shared skills to Claude Code, Codex, and Cursor, as `docs/adr/0011-publish-the-plugin-to-codex-and-cursor-from-the-claude-code-manifests.md` decides.
+- Description: Ships the shared skills to Claude Code, Codex, and Cursor, as `docs/adr/0011-publish-the-plugin-to-codex-and-cursor-from-the-claude-code-manifests.md` decides. In Claude Code it also starts the vocabulary server through `vocabulary/api/mcp/launch.sh`, as `docs/adr/0019-start-the-vocabulary-server-from-the-core-plugin.md` decides.
 - Technologies: `.claude-plugin/plugin.json`, read by Claude Code and Codex; `.cursor-plugin/plugin.json`, read by Cursor
 - Deployment: Marketplace `harness` in this repository, or a business marketplace that lists it with a `url` source pinned to a tag; in Cursor, a team marketplace imported from this repository
 
