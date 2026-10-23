@@ -32,6 +32,7 @@ Funcionalidade: Registrar a despesa reconhecida em uma evidência
       E a busca não encontrou empresa equivalente e o cadastro é permitido
       Quando a habilidade complementa a despesa
       Então a empresa é cadastrada com os dados comprovados e vinculada à mesma despesa
+      E a conta, a pessoa pagadora e o comprovante da despesa são preservados
       Mas não é criado outro lançamento para o mesmo pagamento
 
     Exemplo: O cadastro da recebedora precisa de esclarecimento
