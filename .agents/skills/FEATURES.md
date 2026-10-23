@@ -396,10 +396,13 @@ How these skills relate is in `README.md`, in this folder.
   - Appends a previous or wrong form in the same bullet style, without replacing the record name or the existing items, and leaves a rename or a canonical-name consolidation to mesclar-registro
   - Does not write when more than one record matches, and does not create the company
   - When a screenshot shows a missing person or profile, follows definir-pessoa and definir-perfil-social for what is missing, and uses the record that already exists
-  - Returns the canonical spelling when a name arrives in an event title, and does not write the event
+  - Resolves names in dictated commands accompanying images, including expense requests, before the caller writes them
+  - Returns the canonical name, record link, and search variants to the caller without altering the original evidence or executing the operation
+  - Treats phonetic similarity as a candidate, not identity confirmation; an explicit correction pointing at a record confirms the match
 - **Test Criteria**:
   - [x] The skill is present at that path
-  - [x] The description refuses creating the company, changing the record name, and answering the email, the registration, or the task
+  - [x] The description refuses creating the company, renaming the record, and executing the destination operation
+  - [ ] The dictated-command correction returns the confirmed record and preserves existing variants
 
 ### definir-historia-de-usuario
 - **Stability**: draft
@@ -877,11 +880,14 @@ How these skills relate is in `README.md`, in this folder.
   - Leaves the asset page, the split between fixed assets and stock, and a controllable-item purchase to definir-ativo-imobilizado
   - Sends a sale or a mixed sale-and-expense sentence to definir-lancamento
   - Does not invent the amount or the date
+  - Reads image evidence through reconhecer-imagem and checks names from both the evidence and the accompanying command through definir-grafia before writing
+  - Reuses completed recognition and spelling checks, preserving the original operation without recursive handoffs
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses the opportunity, the signup update, the task, the agenda, and registering the asset
   - [ ] A confirmed or inferable business expense is recorded after an existence search; an existing expense is reused
   - [ ] A missing recipient is registered and linked when identified and permitted; otherwise the response proposes registration rather than leaving an unexplained pending link
+  - [ ] A mixed purchase from image evidence excludes the personal item and identifies the person with the confirmed canonical name
 
 ### lancar-despesa-pessoal
 - **Stability**: experimental
@@ -1204,10 +1210,12 @@ How these skills relate is in `README.md`, in this folder.
   - When the next skill is not in the conversation's skill list, delivers the text and asks whether to call that skill by name, without saying it is unavailable
   - Stops at the text only when the routing flow has no recipient and the person did not name the next skill
   - Does not register the opportunity itself, organize a fair, or create a task
+  - Keeps the written or dictated command that accompanies the image as the operation's intent, separate from the reading, and hands both to the next skill
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses registering an entity, creating a task, and reading text that is already written
   - [ ] A receipt and the matching transaction reach the expense workflow without a written request to record them
+  - [ ] A receipt with a dictated expense command reaches lancar-despesa-da-empresa with the requested operation intact
 
 ### redigir-com-tom-de-voz
 - **Stability**: experimental

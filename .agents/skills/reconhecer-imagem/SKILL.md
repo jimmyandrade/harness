@@ -4,7 +4,7 @@ description: Use essa habilidade sempre que for ler texto de imagem, mesmo sem d
 compatibility: Precisa de Python.
 metadata:
   author: jimmyandrade
-  version: "0.11.2"
+  version: "0.12.0"
   related:
     - criar-oportunidade
     - definir-grafia
@@ -30,6 +30,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 ### Passo 1
 
 Peça a imagem. Se o texto já estiver escrito, pare. Esta habilidade não entra.
+O comando escrito ou ditado que acompanha a imagem não é a transcrição dela. Preserve esse comando como a intenção da operação.
 
 ### Passo 2
 
@@ -43,7 +44,7 @@ Tire o que é do aparelho ou do anúncio em volta: a hora da tela, a bateria, as
 
 ### Passo 4
 
-Entregue esse texto para a habilidade seguinte. Não faça o trabalho dela aqui.
+Entregue a leitura e o comando original à habilidade seguinte, indicando que o reconhecimento terminou. Ela retoma a operação sem repetir a leitura. Não faça o trabalho dela aqui.
 
 ```mermaid
 flowchart LR
