@@ -26,7 +26,7 @@ To pin a release, add its tag: `github:jimmyandrade/harness#vMAJOR.MINOR.PATCH`.
 
 Check: `node node_modules/harness/vocabulary/dist/mcp/index.js < /dev/null && echo ok` prints `ok`.
 
-The skills ship in the `core` plugin, which a business harness lists in its own marketplace at a release tag, as the root `README.md` explains. The plugin ships only the skills. The MCP server comes from the npm dependency, as `docs/runbooks/mcp-hosts.md` explains.
+The skills ship in the `core` plugin, which a business harness lists in its own marketplace at a release tag, as the root `README.md` explains. The plugin also starts the MCP server in Claude Code, as `docs/adr/0019-start-the-vocabulary-server-from-the-core-plugin.md` decides. It needs Node.js 22.18 or newer, and `docs/runbooks/mcp-hosts.md` covers the glossary directory, a server configured by hand, and the npm dependency that every other host uses.
 
 Add the skills for GitHub Copilot, or to a project without the plugin:
 

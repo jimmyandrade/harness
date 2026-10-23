@@ -8,5 +8,17 @@
   },
   "repository": "https://github.com/jimmyandrade/harness",
   "license": "PolyForm-Noncommercial-1.0.0",
-  "skills": "./.agents/skills/"
+  "skills": "./.agents/skills/",
+  "mcpServers": {
+    "vocabulary": {
+      "command": "sh",
+      "args": [
+        "${CLAUDE_PLUGIN_ROOT}/vocabulary/api/mcp/launch.sh"
+      ],
+      "env": {
+        "HARNESS_ROOT": "${CLAUDE_PROJECT_DIR}",
+        "HARNESS_GLOSSARY_DIR": "${HARNESS_GLOSSARY_DIR:-}"
+      }
+    }
+  }
 }
