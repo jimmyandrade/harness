@@ -31,6 +31,7 @@ TEXT_SETTINGS = {
     "Cor do ícone dos modelos no Notion",
     "Símbolo da pasta no macOS",
     "Idioma das respostas",
+    "Idioma das decisões de arquitetura",
 }
 CHOICE_SETTINGS = {
     "Licença obrigatória": {"sim", "não"},

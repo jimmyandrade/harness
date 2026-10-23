@@ -1,11 +1,11 @@
 ---
 name: definir-grafia
-description: Use essa habilidade sempre que for cravar a grafia de uma pessoa ou de uma empresa, ou guardar uma forma errada que apareceu, mesmo sem dizer grafia, apelido ou transcrição. Um print de pessoa ou de perfil segue o cadastro do que falta. NÃO use para criar a empresa, mudar o nome do registro, nem responder o e-mail, a inscrição ou a tarefa.
+description: Use essa habilidade sempre que for verificar nome de pessoa ou empresa, inclusive transcrito de comando por voz ou usado numa despesa, ou guardar uma forma errada. Um print de pessoa ou perfil segue o cadastro do que falta. NÃO use para criar empresa, renomear registro nem executar a operação de destino.
 allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-update-page
 compatibility: Precisa de internet. A busca semântica nas listas usa notion-ai-search no servidor notion.
 metadata:
   author: jimmyandrade
-  version: "0.7.0"
+  version: "0.8.0"
   aliases:
     - procurar-grafia
   related:
@@ -27,11 +27,11 @@ metadata:
 
 ### Passo 1
 
-A pergunta é qual grafia usar, ou uma forma errada que apareceu. Pessoa fica na lista de pessoas. Empresa fica na lista de empresas. As duas listas e o nome de cada propriedade vêm do mapeamento de dados do projeto, no workspace conectado. Este texto usa os conceitos: o nome do registro, que é o nome completo da pessoa ou o nome da empresa, o nome civil da pessoa, as variações de grafia de cada lista e Não confundir com. Se a lista não estiver nessa conexão, pare. Não use a lista de outro workspace. Não responda o e-mail, a inscrição nem a tarefa.
+Resolva também o nome transcrito no comando que acompanha uma imagem, não só os nomes lidos nela. Faça a conferência antes de a habilidade de origem escrever esse nome na operação. A transcrição de voz é termo de busca, não grafia confirmada. Pessoa fica na lista de pessoas. Empresa fica na lista de empresas. As duas listas e o nome de cada propriedade vêm do mapeamento de dados do projeto, no workspace conectado. Este texto usa os conceitos: o nome do registro, que é o nome completo da pessoa ou o nome da empresa, o nome civil da pessoa, as variações de grafia de cada lista e Não confundir com. Se a lista não estiver nessa conexão, pare. Não use a lista de outro workspace. Não responda o e-mail, a inscrição nem a tarefa.
 
 ### Passo 2
 
-Busque o pedaço no nome e nas variações, por consulta direta e por busca semântica, só nessa lista. Na lista de pessoas, leia o nome completo, o nome civil e as variações de grafia. Na lista de empresas, leia o nome da empresa e as variações de grafia. Uma forma entre aspas na variação também acha o registro. Não exija o nome inteiro. Não busque no workspace inteiro.
+Busque o pedaço no nome e nas variações, por consulta direta e por busca semântica, só nessa lista. Na lista de pessoas, leia o nome completo, o nome civil e as variações de grafia. Na lista de empresas, leia o nome da empresa e as variações de grafia. Uma forma entre aspas na variação também acha o registro. Não exija o nome inteiro. Não busque no workspace inteiro. Semelhança sonora levanta candidato, não confirma identidade. A correção explícita da pessoa que aponta o cadastro confirma a correspondência.
 
 ### Passo 3
 
@@ -43,7 +43,7 @@ Se a forma citada já está na lista, não duplique. Se ainda não está e só u
 
 ### Passo 5
 
-Não reescreva outras páginas para trocar a grafia. Diga o pedaço buscado e que usou as duas buscas. Não crie a empresa.
+Devolva à habilidade de origem o nome canônico, o vínculo do registro e as formas de busca. Ela retoma a operação pedida, sem repetir a checagem concluída. Não altere a evidência original nem reescreva outras páginas para trocar a grafia. Não execute o lançamento nesta habilidade. Diga o pedaço buscado e que usou as duas buscas. Não crie a empresa.
 
 ```mermaid
 flowchart LR
@@ -129,7 +129,7 @@ na lista de pessoas, o nome completo é Bia Moreira. Bia é o apelido correto, B
 - Nada nessa lista e não há print de pessoa ou de perfil: diga que não está. Não crie.
 - O print mostra pessoa ou perfil ausente: siga `definir-pessoa` e `definir-perfil-social` para o que falta. Não crie outro se já existe.
 - A pergunta é o e-mail, a inscrição ou a tarefa: devolva as formas de busca e a forma da frase. A busca não fica só na forma da frase.
-- O nome chegou no título de um evento: devolva a forma canônica. Não grave o evento.
+- O nome chegou no título de um evento ou no comando de uma despesa: devolva a forma canônica e o registro à habilidade de origem. Não grave a operação.
 
 ## Pegadinhas
 
@@ -138,7 +138,7 @@ na lista de pessoas, o nome completo é Bia Moreira. Bia é o apelido correto, B
 - Uma forma errada não muda o nome completo. Ela entra na variação.
 - Nome civil vazio não se completa com o e-mail.
 - Grafia de empresa não mora na lista de pessoas. Mora na lista de empresas, nas variações de grafia dela.
-- A forma escrita no pedido da reunião parece a grafia final. A forma canônica sai da lista. O evento não é gravado aqui.
+- A forma escrita no pedido, inclusive por ditado, pode ser erro de transcrição. A forma canônica sai do cadastro confirmado, não da semelhança sonora.
 - A pessoa ausente parece motivo para só corrigir a frase. O print cadastra a pessoa e o perfil que ele mostra.
 
 ## Scripts disponíveis

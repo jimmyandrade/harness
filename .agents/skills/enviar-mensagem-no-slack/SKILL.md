@@ -8,7 +8,9 @@ metadata:
   notion: "false"
   related:
     - definir-pessoa
+    - definir-vocabulario
     - evoluir-habilidade
+    - redigir-com-tom-de-voz
 ---
 
 # Enviar mensagem no Slack

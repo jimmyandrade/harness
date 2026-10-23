@@ -3,16 +3,17 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.6.1"
+  version: "0.6.2"
   internal: true
   notion: "false"
   related:
     - comunicar-novidade-do-produto
     - definir-agenda
-    - definir-tarefa
-    - procurar-tarefa
     - definir-pessoa
+    - definir-tarefa
     - evoluir-habilidade
+    - procurar-tarefa
+    - redigir-com-tom-de-voz
 ---
 
 # Conversar no WhatsApp

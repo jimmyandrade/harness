@@ -4,8 +4,7 @@ description: Use essa habilidade sempre que for criar, revisar, completar ou cad
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.14.1"
-  internal: true
+  version: "0.15.0"
   related:
     - criar-ideia-de-conteudo
     - definir-roteiro-de-video

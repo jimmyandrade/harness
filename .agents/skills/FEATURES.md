@@ -374,7 +374,8 @@ How these skills relate is in `README.md`, in this folder.
   - Lives at `.agents/skills/definir-empresa/SKILL.md`
   - Reads the company list, its property names, and its options from the data mapping of the project, when the person does not name another list
   - Leaves the existence check to identificar-duplicata, spelling to definir-grafia, the social profile to definir-perfil-social, and merging the same item to mesclar-registro
-  - Requires a responsible person when the company is an active, potential, or relevant supplier for a quote, purchase, partnership, or commercial relationship
+  - Requires a responsible person when validating an active, potential, or relevant supplier for a quote, purchase, partnership, or commercial relationship
+  - Supports a minimal payment-recipient record from evidenced identity after deduplication, returns its page to the caller, and keeps a missing site and legal name pending, and a missing contact only for a continuing relationship, without declaring commercial validation complete
   - Prefers a manager, commercial representative, seller, owner, or the contact who handles service
   - Adds the supplier option to the audience type when that fits, without removing the values already there
   - Checks the related companies on the person and relates the company when that inverse link is missing
@@ -382,6 +383,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses an existence-only check, spelling, social-profile normalization, merging the same item, and deleting without an order
+  - [ ] A payment recipient identified by name and company identifier is registered without inventing a responsible contact and returned for linking to the payment
 
 ### definir-grafia
 - **Stability**: experimental
@@ -394,10 +396,13 @@ How these skills relate is in `README.md`, in this folder.
   - Appends a previous or wrong form in the same bullet style, without replacing the record name or the existing items, and leaves a rename or a canonical-name consolidation to mesclar-registro
   - Does not write when more than one record matches, and does not create the company
   - When a screenshot shows a missing person or profile, follows definir-pessoa and definir-perfil-social for what is missing, and uses the record that already exists
-  - Returns the canonical spelling when a name arrives in an event title, and does not write the event
+  - Resolves names in dictated commands accompanying images, including expense requests, before the caller writes them
+  - Returns the canonical name, record link, and search variants to the caller without altering the original evidence or executing the operation
+  - Treats phonetic similarity as a candidate, not identity confirmation; an explicit correction pointing at a record confirms the match
 - **Test Criteria**:
   - [x] The skill is present at that path
-  - [x] The description refuses creating the company, changing the record name, and answering the email, the registration, or the task
+  - [x] The description refuses creating the company, renaming the record, and executing the destination operation
+  - [ ] The dictated-command correction returns the confirmed record and preserves existing variants
 
 ### definir-historia-de-usuario
 - **Stability**: draft
@@ -511,6 +516,7 @@ How these skills relate is in `README.md`, in this folder.
   - Answers to the earlier names `definir-link-utm`, `definir-parametros-utm`, `definir-rastreio-de-link`, and `gerar-link-com-parametros-utm` through `metadata.aliases`
   - Reads the allowed sources and mediums from a field of a data source in the connected workspace when the project names one, or else from the parameter lists, and asks instead of inventing a value
   - Reads the own domains from parameters
+  - Puts the internal role of a team member who promotes with their own profile in `utm_marketing_tactic`, from the `Táticas` list, with their public handle in the campaign name and never their name
   - Builds `utm_campaign` from the `Modelo do nome da campanha` template when the project sets one, dropping a bracketed part with its separator when its value is empty, and treats a generator, API, MCP or command line that builds the name another way as a failed check
   - Keeps `utm_term` empty except for a paid keyword or an automation keyword
   - Separates words in every value with one `Separador`, underscore by default, in every place that builds links (site, on-screen generator, API, MCP, command line), and converts slugs to it
@@ -753,6 +759,29 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses recording an event that already has a time, syncing a date-only milestone, posting the amount, registering the opportunity, and registering someone
 
+### definir-vocabulario
+- **Stability**: experimental
+- **Description**: Register and update one or more voice-vocabulary terms
+- **Properties**:
+  - Lives at `.agents/skills/definir-vocabulario/SKILL.md`
+  - Registers and updates terms for one language on five levels: forbidden, strongly_discouraged, discouraged, allowed_with_care, and allowed
+  - Writes a term without an expected field and reports it as incomplete, and imports a batch from another tool with `terms --file`
+  - Sends a question about a missing term or its variations to procurar-variacao-de-termo
+  - Keeps categories English words in every language, translated by the Categorias parameter, and keeps the term and the notes in that language
+  - Reads the brand sources named in the project instructions before answering or writing. An ambiguous channel, audience, line, commercial intent, or situation waits for a question
+  - Keeps a term that only fits one context on a middle level, with when. allowed and forbidden stay general rules
+  - Adds tags to a context term of one speaker, event, or channel, reusing a tag already in the glossary, and keeps when as the rule in words
+  - Marks a name whose casing is part of the spelling with case_sensitive, so the write keeps its casing
+  - Keeps the history and limits of a term in notes, apart from the description, without changing the level
+  - Uses insert when the person is registering and does not name a mode, update when an existing term changes, and upsert when the batch does both
+  - Corrects a stored term by sending only the fields that change, reading the row before and after, and clearing a field only when the person asks
+  - Reads and writes with `node node_modules/harness/vocabulary/dist/cli.js lookup`, `exists`, and `terms` when there is a terminal, and with the MCP tools `lookup_term`, `exists_in_text`, and `write_terms` when there is not
+  - Stops without a terminal and without the MCP server, as in a Notion agent
+  - Leaves writing brand text to redigir-com-tom-de-voz, and does not invent a term
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses writing or approving brand text, classifying a phrase, and inventing a term
+
 ### descrever-habilidade-ou-schema
 - **Stability**: experimental
 - **Description**: Write or correct a skill or schema description, and test whether a skill description triggers, even when the person does not say description
@@ -793,6 +822,26 @@ How these skills relate is in `README.md`, in this folder.
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description says the test edits the validated skill, and refuses creating the first version, only checking whether the description triggers, only reviewing without running, and writing the skill page in Notion
+
+### extrair-tarefas-da-reuniao
+- **Stability**: experimental
+- **Description**: Turn the action items of a registered meeting into tasks, one per item, without duplicates, in the sprint of the meeting date
+- **Properties**:
+  - Lives at `.agents/skills/extrair-tarefas-da-reuniao/SKILL.md`
+  - Reads the meeting, the task list, and the sprint list from the project data mapping, and stops when one of them is not in the connected workspace
+  - Acts only when the meeting status is ready to process, moves it to in progress before writing, and to processed at the end, with the three status names in the project instructions
+  - Writes nothing and says it waits when the status is anything else, and asks when the meeting is already in progress
+  - Keeps only short items with an infinitive verb and an observable result, and leaves out context, opinions, hypotheses, and history
+  - Fills the owner only when the text names who does it, never from a pronoun
+  - Picks the sprint whose period contains the meeting date, and leaves the sprint empty with a warning when none or more than one fits
+  - Checks each item through procurar-tarefa and the order of identificar-duplicata, and merges items of the same meeting that ask for the same delivery
+  - Validates a plan of every item before writing, and creates each new task through definir-tarefa with the status the project instructions name
+  - Uses an existing equivalent task as canonical, and fills only its empty sprint, after the person confirms which sprint fits, with the sprint of the meeting date as the suggestion
+  - Explains the factual difference of a similar task, and asks when unsure
+  - Does not register the meeting or change anything else in an existing task
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [ ] Three cases validated with the person
 
 ### gerenciar-estoque
 - **Stability**: experimental
@@ -845,15 +894,20 @@ How these skills relate is in `README.md`, in this folder.
   - Reuses an existing entry and preserves its evidence instead of recording the same purchase twice
   - Records an absent expense in the same execution when its business purpose is confirmed or inferable from context, and asks when that purpose is uncertain
   - Keeps original evidence in the mapped attachment property and reports missing optional fields without inventing them
+  - Resolves the recipient company through identificar-duplicata and definir-empresa, reuses or registers it and links it to the same expense, or explicitly proposes registration and asks only what blocks it
   - Verifies the saved entry before reporting that it was recorded
   - Traces the financial entry that originated the purchase or acquisition of a durable asset
   - Leaves the asset page, the split between fixed assets and stock, and a controllable-item purchase to definir-ativo-imobilizado
   - Sends a sale or a mixed sale-and-expense sentence to definir-lancamento
   - Does not invent the amount or the date
+  - Reads image evidence through reconhecer-imagem and checks names from both the evidence and the accompanying command through definir-grafia before writing
+  - Reuses completed recognition and spelling checks, preserving the original operation without recursive handoffs
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses the opportunity, the signup update, the task, the agenda, and registering the asset
   - [ ] A confirmed or inferable business expense is recorded after an existence search; an existing expense is reused
+  - [ ] A missing recipient is registered and linked when identified and permitted; otherwise the response proposes registration rather than leaving an unexplained pending link
+  - [ ] A mixed purchase from image evidence excludes the personal item and identifies the person with the confirmed canonical name
 
 ### lancar-despesa-pessoal
 - **Stability**: experimental
@@ -989,6 +1043,21 @@ How these skills relate is in `README.md`, in this folder.
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses registering the opportunity, checking whether the opportunity already exists, organizing a trip, writing the task title, the deadline, and the definition of done, checking whether the task exists, and registering someone
+
+### perfilar-tom-de-voz
+- **Stability**: experimental
+- **Description**: Profile how a person or a channel writes from a real sample and register the patterns in the glossary
+- **Properties**:
+  - Lives at `.agents/skills/perfilar-tom-de-voz/SKILL.md`
+  - Profiles only on an explicit request, for the person or channel the requester names
+  - Reads the sample from the source named in the project instructions and leaves out the messages of the requester and of bots
+  - Extracts only patterns that repeat, and writes a short summary of the tone where the project instructions say
+  - Registers the concrete patterns with `definir-vocabulario` under the tag of the person or channel, preferring small reusable terms to whole phrases
+  - Records where the sample came from, and shows the requester what it derived
+  - Never quotes a message from a private conversation in another context
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses writing text, registering a loose term, and profiling without a request
 
 ### planejar-calendario-de-conteudo
 - **Stability**: experimental
@@ -1129,6 +1198,19 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses creating, editing, or completing the task, and searching outside the task list
 
+### procurar-variacao-de-termo
+- **Stability**: experimental
+- **Description**: Say whether a term or its gender, number, or spelling variations are in the glossary
+- **Properties**:
+  - Lives at `.agents/skills/procurar-variacao-de-termo/SKILL.md`
+  - Reads each form with `node node_modules/harness/vocabulary/dist/cli.js lookup`, or the MCP tool `lookup_term` without a terminal, and stops without both
+  - Says which forms are registered, with their state, and which are not
+  - Suggests registering the missing forms and asks the state of each one, without writing
+  - Sends the registration to definir-vocabulario
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses registering or updating a term, writing brand text, and inventing a form
+
 ### reconhecer-imagem
 - **Stability**: experimental
 - **Description**: Read what an image says and pass that text to another skill
@@ -1148,10 +1230,32 @@ How these skills relate is in `README.md`, in this folder.
   - When the next skill is not in the conversation's skill list, delivers the text and asks whether to call that skill by name, without saying it is unavailable
   - Stops at the text only when the routing flow has no recipient and the person did not name the next skill
   - Does not register the opportunity itself, organize a fair, or create a task
+  - Keeps the written or dictated command that accompanies the image as the operation's intent, separate from the reading, and hands both to the next skill
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses registering an entity, creating a task, and reading text that is already written
   - [ ] A receipt and the matching transaction reach the expense workflow without a written request to record them
+  - [ ] A receipt with a dictated expense command reaches lancar-despesa-da-empresa with the requested operation intact
+
+### redigir-com-tom-de-voz
+- **Stability**: experimental
+- **Description**: Write, suggest, review, and rewrite brand text in the project's voice
+- **Properties**:
+  - Lives at `.agents/skills/redigir-com-tom-de-voz/SKILL.md`
+  - Writes in the voice of the project that is open and reads that project's glossary, with `node node_modules/harness/vocabulary/dist/cli.js lookup` and `exists` when there is a terminal and the CLI is installed, and with the MCP tools when there is no terminal or the CLI is not available
+  - Without a terminal and without the MCP server, as in a Notion agent, reads the glossary only from a source the project instructions name, or stops
+  - Reads the glossary with the tags of the speaker, the event, and the channel of the text, so a term of another context stays out
+  - Writes the stored spelling of a case-sensitive term when a read reports case_matches false
+  - Waits for context, channel, audience, the brand sources named in the project instructions, the glossary, and the creative intent
+  - Uses each term as its level says: forbidden never, strongly_discouraged only on request or under the exception in when, discouraged only with the scene in when, allowed_with_care as when says
+  - Keeps out a forbidden term, a generic phrase, AI-sounding text, and language the glossary marks as misaligned
+  - Treats an emoji as a glossary term. Without a row, the copy waits
+  - Replaces a cliché with the image, scene, action, effect, or situation in its description, and leaves rejected phrases out
+  - Sends term registration to definir-vocabulario
+  - Writes an external event title when the person asks, keeps the canonical name they already gave, and does not write the calendar event or lock the spelling
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses answering the person chatting with the AI, locking spelling, changing a content format, and assuming a customer, a piece, an opportunity, or commercial history
 
 ### registrar-ciclo-do-ativo
 - **Stability**: experimental

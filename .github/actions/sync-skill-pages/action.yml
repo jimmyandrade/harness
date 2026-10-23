@@ -41,7 +41,7 @@ runs:
         node-version: 24
     - name: Install the sync dependencies
       shell: bash
-      run: npm ci --omit=dev --no-audit --no-fund --prefix "$GITHUB_ACTION_PATH/../../.."
+      run: npm ci --omit=dev --ignore-scripts --no-audit --no-fund --prefix "$GITHUB_ACTION_PATH/../../.."
     - name: Publish changed skills and models to Notion
       shell: bash
       env:

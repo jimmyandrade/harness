@@ -40,3 +40,11 @@ Funcionalidade: Encaminhar o texto da imagem
       Quando o ambiente permite buscar a habilidade pelo nome
       Então a página de lancar-despesa-da-empresa é encontrada e carregada para continuar
       E a pessoa não precisa confirmar a chamada nem enviar o link da habilidade
+
+  Regra: O comando financeiro acompanha a leitura do comprovante
+
+    Exemplo: Registrar despesa a partir de uma imagem com comando ditado
+      Dado que a pessoa anexou a imagem de um comprovante com um comando ditado para registrar a despesa
+      Quando a habilidade entrega a leitura
+      Então lancar-despesa-da-empresa recebe os dados lidos e a operação pedida
+      Mas a resposta não exige um novo pedido pelo nome da habilidade

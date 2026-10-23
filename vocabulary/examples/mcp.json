@@ -2,7 +2,7 @@
   "mcpServers": {
     "vocabulary": {
       "command": "node",
-      "args": ["node_modules/vocabulary/dist/mcp/index.js"]
+      "args": ["node_modules/harness/vocabulary/dist/mcp/index.js"]
     }
   }
 }

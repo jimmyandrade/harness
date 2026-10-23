@@ -7,14 +7,14 @@ import { fileURLToPath } from "node:url"
 import test from "node:test"
 
 const NPM = process.platform === "win32" ? "npm.cmd" : "npm"
-const ROOT = fileURLToPath(new URL("../..", import.meta.url))
+const ROOT = fileURLToPath(new URL("../../..", import.meta.url))
 
 type Frame = { id?: unknown; result?: { tools?: { name: string }[] } }
 
 // Installs the committed HEAD from git, as a project does, so the prepare script builds dist/.
 // Uncommitted changes are not part of that install.
 test("the command in examples/mcp.json lists the tools from an installed copy", { timeout: 300_000 }, async () => {
-  const project = mkdtempSync(join(tmpdir(), "vocabulary-install-"))
+  const project = mkdtempSync(join(tmpdir(), "harness-install-"))
   writeFileSync(join(project, ".npmrc"), "save-exact=true\nallow-git=root\n")
   writeFileSync(join(project, "package.json"), `${JSON.stringify({ name: "scratch", private: true })}\n`)
   const head = execFileSync("git", ["rev-parse", "HEAD"], { cwd: ROOT, encoding: "utf8" }).trim()
@@ -23,7 +23,7 @@ test("the command in examples/mcp.json lists the tools from an installed copy", 
     stdio: ["ignore", "ignore", "inherit"],
   })
 
-  const config = JSON.parse(readFileSync(join(project, "node_modules/vocabulary/examples/mcp.json"), "utf8")) as {
+  const config = JSON.parse(readFileSync(join(project, "node_modules/harness/vocabulary/examples/mcp.json"), "utf8")) as {
     mcpServers: Record<string, { command: string; args: string[] }>
   }
   const server = config.mcpServers.vocabulary

@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.2"
+  version: "0.3.0"
   related:
     - definir-grafia
     - definir-perfil-social
@@ -39,11 +39,31 @@ flowchart LR
 
 ### Passo 2
 
-Fornecedora ativa, potencial ou relevante para cotação, compra, parceria ou relacionamento comercial precisa de uma pessoa nas pessoas responsáveis. A pessoa é, de preferência, gerente, representante comercial, vendedora, dona ou o contato do atendimento. Busque a pessoa na lista de pessoas antes de criar. Mais de um registro da mesma pessoa segue o flowchart do Passo 1. Sem nome da pessoa, pergunte. Não invente o nome.
+Antes de criar, use `identificar-duplicata` com nome, variações e CNPJ disponíveis. Não trate um novo nome no comprovante como empresa nova sem essa comparação.
+
+```mermaid
+flowchart LR
+  A{Resultado da busca} -->|equivalente confirmado| R[Reutilize a empresa e devolva a página]
+  A -->|ambíguo| D[Pergunte antes de criar ou vincular]
+  A -->|nenhum equivalente| F{Finalidade do cadastro}
+  F -->|rastrear a recebedora de um pagamento| B{Identidade sustentada?}
+  B -->|sim| C[Cadastre os dados comprovados e devolva a página ao fluxo de origem]
+  B -->|não| P[Proponha o cadastro e pergunte só o dado necessário]
+  F -->|compra pontual ou fornecedora não relevante| S[Cadastre sem exigir contato nominal]
+  F -->|cotação, parceria ou relacionamento comercial continuado| E{Pessoa responsável nomeada?}
+  E -->|sim| G[Busque a pessoa antes de criar]
+  E -->|não| H[Pergunte pelo contato operacional]
+```
+
+Uma compra pontual, como uma refeição em restaurante, não exige conhecer o dono nem uma pessoa do atendimento. Não invente pessoa, não crie contato genérico e não bloqueie o cadastro nem o vínculo da despesa por essa ausência. A falta de contato nesse contexto não é pendência obrigatória.
+
+O cadastro mínimo de recebedora financeira não valida a fornecedora para relacionamento comercial. Nele, site e razão social completa ausentes ficam como pendências, sem impedir o vínculo com o pagamento. O contato responsável ausente só vira pendência quando há relacionamento continuado. Não invente esses dados nem trate a instituição de pagamento como recebedora.
+
+A pessoa responsável é, de preferência, gerente, representante comercial, vendedora, dona ou contato do atendimento. Mais de um registro da mesma pessoa segue o flowchart do Passo 1.
 
 ### Passo 3
 
-Relacione a pessoa nas pessoas responsáveis. Os donos são outra relação e não substituem essa. Quem verifica é usuário do workspace e não substitui essa. No tipo de público, acrescente a opção de fornecedor quando fizer sentido. Não apague os valores que já estão. Abra a pessoa e confira as empresas relacionadas. Se a empresa já apareceu, pare. Se não apareceu, relacione. Não relacione de novo. As notas qualificam o papel, o contexto, a pendência ou a certeza. A nota não substitui a relação. Telefone, WhatsApp e endereço não entram na nota.
+Quando houver pessoa identificada, relacione-a nas pessoas responsáveis. Os donos são outra relação e não substituem essa. Quem verifica é usuário do workspace e não substitui essa. No tipo de público, acrescente a opção de fornecedor quando fizer sentido. Não apague os valores que já estão. Com pessoa vinculada, abra o registro dela e confira as empresas relacionadas. Se a empresa já apareceu, pare. Se não apareceu, relacione. Não relacione de novo. As notas qualificam o papel, o contexto, a pendência ou a certeza. A nota não substitui a relação. Telefone, WhatsApp e endereço não entram na nota.
 
 ## Problemas comuns
 
@@ -73,15 +93,17 @@ Associei a pessoa nas pessoas responsáveis. A nota ficou com o papel. O tipo de
 
 ## Casos-limite
 
-- A empresa não é fornecedora ativa, potencial ou relevante para cotação, compra, parceria ou relacionamento comercial: não exija a pessoa responsável.
-- A pessoa não foi nomeada: pergunte. Não invente o nome.
+- A exigência de contato segue o flowchart do Passo 2. Não invente o nome nem confunda contato operacional com dono.
+- Cadastro mínimo de recebedora: registre como pendência o que faltar, salvo o contato numa compra pontual, e devolva a página para vincular o pagamento. Não dê a validação comercial por concluída.
 - A pessoa já existe: aponte o registro. Não crie outra.
 - O tipo de público já tem outros valores: acrescente a opção de fornecedor quando fizer sentido. Não apague os outros.
 - As empresas relacionadas já mostram a empresa: não relacione de novo.
 - A empresa não apareceu nas empresas relacionadas: relacione.
-- Donos preenchidos e pessoas responsáveis vazias: ligue as pessoas responsáveis.
+- Donos preenchidos não autorizam presumir quem é o contato operacional. Preserve as relações existentes.
 
 ## Pegadinhas
+
+- Ter recebido uma compra não torna o estabelecimento um relacionamento comercial continuado. O contato nominal não é requisito universal do cadastro.
 
 - Os donos parecem a pessoa responsável. É outra relação. A pessoa responsável fica nas pessoas responsáveis.
 - Quem verifica parece o contato da fornecedora. É um usuário do workspace, não uma página da lista de pessoas.

@@ -8,22 +8,22 @@ An MCP host is the application a person talks to. It reads a list of MCP servers
 
 Cursor reads `.cursor/mcp.json`. Claude Code reads `.mcp.json` at the project root. Claude Desktop, Windsurf, and Cline keep their list outside the repository, so each one gets a link to `.agents/mcp.json`. VS Code expects `servers` as the first key, so it does not use this list.
 
-`.mcp.json` is a link to `.agents/mcp.json`, not a second copy. The harness `core` plugin and the `vocabulary` plugin do not start this server.
+`.mcp.json` is a link to `.agents/mcp.json`, not a second copy. The `core` plugin does not start this server.
 
 Run this runbook from the root of the project, after the project has a `package.json`. Each step ends with a check. A link replaces the whole file it points from: copy anything you still need into `.agents/mcp.json` first. If you move the clone, create the links again.
 
 ## 1. Install the package and write the project list
 
 ```bash
-npm install --save-dev github:jimmyandrade/vocabulary
+npm install --save-dev github:jimmyandrade/harness
 mkdir -p .agents
-cp -n node_modules/vocabulary/examples/mcp.json .agents/mcp.json
+cp -n node_modules/harness/vocabulary/examples/mcp.json .agents/mcp.json
 ln -sfn .agents/mcp.json .mcp.json
 ```
 
-The list starts `node node_modules/vocabulary/dist/mcp/index.js`. Node.js does not strip TypeScript types under `node_modules`, so a list that starts `node_modules/vocabulary/api/mcp/index.ts` fails with `ERR_UNSUPPORTED_NODE_MODULES_TYPE_STRIPPING`. Change that path to `node_modules/vocabulary/dist/mcp/index.js`. The `prepare` script of the package writes `dist/` during the install, so do not install with `--ignore-scripts`. npm may list that script as not covered by `allowScripts`. It still runs.
+The list starts `node node_modules/harness/vocabulary/dist/mcp/index.js`. Node.js does not strip TypeScript types under `node_modules`, so a list that starts `node_modules/harness/vocabulary/api/mcp/index.ts` fails with `ERR_UNSUPPORTED_NODE_MODULES_TYPE_STRIPPING`. Change that path to `node_modules/harness/vocabulary/dist/mcp/index.js`. The `prepare` script of the package writes `dist/` during the install, so do not install with `--ignore-scripts`. npm may list that script as not covered by `allowScripts`. It still runs.
 
-Check: `jq -r '.mcpServers | keys[]' .agents/mcp.json` prints `vocabulary`, `readlink .mcp.json` prints `.agents/mcp.json`, and `node node_modules/vocabulary/dist/mcp/index.js < /dev/null && echo ok` prints `ok`.
+Check: `jq -r '.mcpServers | keys[]' .agents/mcp.json` prints `vocabulary`, `readlink .mcp.json` prints `.agents/mcp.json`, and `node node_modules/harness/vocabulary/dist/mcp/index.js < /dev/null && echo ok` prints `ok`.
 
 ## 2. Link Cursor
 

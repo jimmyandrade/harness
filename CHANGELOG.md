@@ -1,5 +1,60 @@
 # Changelog
 
+## [0.83.0](https://github.com/jimmyandrade/harness/compare/v0.82.0...v0.83.0) (2026-10-23)
+
+
+### Features
+
+* chain receipt recognition and canonical name checks ([#201](https://github.com/jimmyandrade/harness/issues/201)) ([1464075](https://github.com/jimmyandrade/harness/commit/14640759fed57a82dfb581f16e40e9a87f7202f0))
+* **extrair-tarefas-da-reuniao:** turn meeting action items into tasks ([#378](https://github.com/jimmyandrade/harness/issues/378)) ([db5c0a4](https://github.com/jimmyandrade/harness/commit/db5c0a411505ce7e286076c0acf0c44d063b1c3c))
+* **lancar-despesa-da-empresa:** load data sources by type and keep the recipient link ([#289](https://github.com/jimmyandrade/harness/issues/289)) ([1352f6b](https://github.com/jimmyandrade/harness/commit/1352f6b50831cec5e717a2301612767478b72459))
+* resolve missing expense recipients through company registration ([#285](https://github.com/jimmyandrade/harness/issues/285)) ([0aed40b](https://github.com/jimmyandrade/harness/commit/0aed40ba3d40ac16882ce898957198079838826f))
+
+
+### Bug Fixes
+
+* confirm expense purpose before recording payments ([#288](https://github.com/jimmyandrade/harness/issues/288)) ([b5e5640](https://github.com/jimmyandrade/harness/commit/b5e56404c56ef6a1d852e684694964f606a28b13))
+* **definir-empresa:** allow one-off suppliers without a named contact ([#371](https://github.com/jimmyandrade/harness/issues/371)) ([9758891](https://github.com/jimmyandrade/harness/commit/97588915f2616602a9935df8926666fb9fa58e17))
+* **lancar-despesa-da-empresa:** attach originals without another confirmation ([#377](https://github.com/jimmyandrade/harness/issues/377)) ([e8a9b98](https://github.com/jimmyandrade/harness/commit/e8a9b98a41fa62bea6f5566a55ea337161b4cb6d))
+
+## [0.82.0](https://github.com/jimmyandrade/harness/compare/v0.81.0...v0.82.0) (2026-10-23)
+
+
+### Features
+
+* publish the Reel, video script, content campaign, and calendar skills ([#374](https://github.com/jimmyandrade/harness/issues/374)) ([5797e57](https://github.com/jimmyandrade/harness/commit/5797e57f6d18da1871cdbd100f7964a151ef87f8))
+* **vocabulary:** build the engine with the core package and point the skills at the new path ([#365](https://github.com/jimmyandrade/harness/issues/365)) ([9f51a25](https://github.com/jimmyandrade/harness/commit/9f51a25a527b9ac34170c8b46e3b8c91171749a3))
+
+## [0.81.0](https://github.com/jimmyandrade/harness/compare/v0.80.0...v0.81.0) (2026-10-22)
+
+
+### Features
+
+* make the architecture decision language a parameter ([#370](https://github.com/jimmyandrade/harness/issues/370)) ([66f0f59](https://github.com/jimmyandrade/harness/commit/66f0f59d43f42aa6e60ba25dd62f134d005c5422))
+* **skills:** move the vocabulary skills to the core and add perfilar-tom-de-voz ([#363](https://github.com/jimmyandrade/harness/issues/363)) ([63d1191](https://github.com/jimmyandrade/harness/commit/63d1191d89e8ff2c95ed1e49b2c9c8954a08252d))
+
+
+### Bug Fixes
+
+* keep --allow-git=all when moving a pin without ~/.npmrc ([#368](https://github.com/jimmyandrade/harness/issues/368)) ([58e2b53](https://github.com/jimmyandrade/harness/commit/58e2b538b4da80f3494598e9874c2f2ec91ee047))
+
+## [0.80.0](https://github.com/jimmyandrade/harness/compare/v0.79.0...v0.80.0) (2026-10-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* **vocabulary:** classify and lookup return one of five levels, so a stored situationally_allowed row reads as allowed_with_care with legacy_state. Registrations and new rows carry categories instead of category. The refusal messages for when and tags on a general rule changed. Run migrate to rewrite an existing glossary.
+
+### Features
+
+* **definir-link-rastreavel:** carry the promoter role in utm_marketing_tactic ([#367](https://github.com/jimmyandrade/harness/issues/367)) ([5b825cf](https://github.com/jimmyandrade/harness/commit/5b825cfe5eb961509bd52c8ecf5ca386ccc2abb8))
+* **vocabulary:** import jimmyandrade/vocabulary with its history ([#360](https://github.com/jimmyandrade/harness/issues/360)) ([1f53c29](https://github.com/jimmyandrade/harness/commit/1f53c297486202d1ec4602496d437b774086fefd))
+
+
+### Bug Fixes
+
+* **avaliar-atualizacoes-de-dependencia:** handle npm EALLOWSCRIPTS on git dependencies ([#364](https://github.com/jimmyandrade/harness/issues/364)) ([69757d2](https://github.com/jimmyandrade/harness/commit/69757d28573ddedb162e5bf7a7f2627cc8316497))
+
 ## [0.79.0](https://github.com/jimmyandrade/harness/compare/v0.78.0...v0.79.0) (2026-10-22)
 
 

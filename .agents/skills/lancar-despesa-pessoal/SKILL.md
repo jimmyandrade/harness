@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.2.1"
   internal: true
   related:
     - definir-obrigacao-financeira
@@ -46,6 +46,26 @@ A pessoa informa o data source na execução, que é a lista de despesas dela. S
 
 ### Passo 3
 
+Antes de qualquer gravação, confira e marque este checklist com o que a evidência e o contexto já sustentam:
+
+- [ ] Produto ou serviço exato e finalidade do gasto, confirmados pela pessoa ou discriminados na evidência.
+- [ ] Natureza pessoal ou da empresa, sem confundir quem pagou com quem deve.
+- [ ] Dados necessários à categoria e aos vínculos aplicáveis no mapeamento: por exemplo, o veículo ou a obrigação a que o gasto pertence.
+- [ ] Valor, datas e situação do pagamento sustentados pela evidência, conforme o tipo de cobrança.
+- [ ] Busca de duplicata concluída antes de criar.
+
+O recebedor e a modalidade Pix não identificam o produto nem sua finalidade. Dizer apenas “despesa pessoal” ou “despesa da empresa” só confirma a natureza. Consulte o contexto e os registros relacionados; reúna as perguntas que faltam, espere as respostas e só depois grave. Não repita perguntas já respondidas nem exija campos sem relação com o gasto. Não use nome genérico de recebedor como substituto da identificação.
+
+Use apenas categorias e relações existentes, sustentadas pelos dados confirmados. Sem propriedade de categoria no mapeamento, informe a limitação; não crie estrutura nem grave uma categoria inventada no corpo. Isso não impede registrar um gasto já identificado com os vínculos disponíveis. Uma informação opcional ausente não substitui a identificação obrigatória do produto e da finalidade.
+
+```mermaid
+flowchart LR
+  A[Confere a identificação e a classificação] --> B{Falta informação necessária?}
+  B -->|sim| C[Pergunta e aguarda sem gravar]
+  C --> A
+  B -->|não| D[Grava ou complementa o lançamento existente]
+```
+
 Grave o nome curto, o valor original, o vencimento e, quando houver, a parcela no formato número/total e a obrigação de origem. Fatura em aberto não tem data de pagamento. Pagamento só entra com comprovante: data, valor pago, e juros ou multa como a diferença entre o pago e o original. Recibo do pagador num boleto não é comprovante. Quando outra pessoa paga, registre quem pagou, separado de quem deve. Não invente valor, data nem parcela. O histórico fica nos comentários, não no corpo.
 
 ### Passo 4
@@ -57,6 +77,14 @@ Ao citar uma fatura vencida ou a vencer, diga o vencimento e o valor. Sem o valo
 Confira a página salva e entregue a despesa, a obrigação ligada e as pendências. Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
+
+### Comprovante sem identificação do gasto
+
+Se você gravar só com recebedor, valor e data, a despesa entra sem saber o que foi comprado nem como categorizá-la.
+
+1. Confira o checklist antes de gravar, inclusive ao complementar um registro.
+2. Pergunte o produto ou serviço, a finalidade e os dados de classificação ainda ausentes.
+3. Espere a resposta e atualize o mesmo lançamento, preservando o comprovante e sem duplicar.
 
 ### Pessoal na lista da empresa
 
@@ -92,6 +120,7 @@ Lancei como despesa avulsa, sem obrigação, com o valor e a data de pagamento d
 
 ## Pegadinhas
 
+- O comprovante identifica a transferência, não necessariamente a compra. Recebedor e Pix não são produto nem finalidade.
 - Ser sócia da empresa parece tornar o gasto da empresa. A finalidade decide.
 - Fatura com vencimento parece despesa paga. Sem comprovante, ela segue em aberto.
 
