@@ -22,14 +22,15 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Fluxo de status": ""
 "Status do PR mesclado": "concluído"
 "Status do PR aberto e pronto": "em revisão"
-"Status do PR em rascunho ou bloqueado": "em andamento"
+"Status do PR em rascunho": "em andamento"
+"Status do PR bloqueado": "não muda"
 "Etiquetas de PR bloqueado": ""
 "Ligação entre tarefa e PR": "chave da tarefa no título, na branch ou no corpo do PR"
 "Pedir confirmação do plano": "sim"
 "Modo de aprendizado": "perguntar"
 ```
 
-`Consulta das tarefas` é a busca que lista as tarefas da pessoa ainda abertas, na linguagem do rastreador do projeto. `Fluxo de status` é a lista ordenada dos status, do primeiro ao último, com o nome de cada transição entre eles. `Etiquetas de PR bloqueado` lista as etiquetas que mantêm a tarefa em andamento mesmo com o PR aberto e pronto.
+`Consulta das tarefas` é a busca que lista as tarefas da pessoa ainda abertas, na linguagem do rastreador do projeto. `Fluxo de status` é a lista ordenada dos status, do primeiro ao último, com o nome de cada transição entre eles. `Etiquetas de PR bloqueado` lista as etiquetas que marcam o PR como bloqueado, esteja ele em rascunho ou pronto. Rascunho é o estado do PR. Bloqueio é um sinal à parte, dado pelas etiquetas, e tem precedência sobre o rascunho. Com `Status do PR bloqueado` em `não muda`, a tarefa fica onde está e entra na lista para decidir.
 
 ## Instruções
 
@@ -47,7 +48,8 @@ Veja o estado de cada PR como no primeiro passo de `levantar-contexto-do-pull-re
 flowchart LR
   A{Estado do PR} -->|mesclado| B[Status do PR mesclado]
   A -->|aberto e pronto| C[Status do PR aberto e pronto]
-  A -->|rascunho ou etiqueta de bloqueio| D[Status do PR em rascunho ou bloqueado]
+  A -->|etiqueta de bloqueio| G[Status do PR bloqueado]
+  A -->|rascunho| D[Status do PR em rascunho]
   A -->|fechado sem mesclar| E[Não muda e vai para decidir]
   A -->|sem PR| F[Não muda]
 ```
@@ -130,7 +132,8 @@ A habilidade leva "Exportar relatório em CSV" de "a fazer" a "concluído". A se
 
 ## Casos-limite
 
-- O PR está aberto e pronto, mas tem uma etiqueta de `Etiquetas de PR bloqueado`: o destino é o `Status do PR em rascunho ou bloqueado`.
+- O PR está aberto e pronto, mas tem uma etiqueta de `Etiquetas de PR bloqueado`: o destino é o `Status do PR bloqueado`, não o de aberto e pronto.
+- O PR está em rascunho e tem etiqueta de bloqueio: vale o `Status do PR bloqueado`.
 - O PR foi fechado sem mesclar: a tarefa não muda e vai para a lista de decisão.
 - A tarefa já está no status de destino: não muda e aparece nas "não mexi".
 - A tarefa tem mais de um PR: use o mais recente e diga qual usou. Se um está aberto e o outro mesclado, a tarefa vai para decidir.
