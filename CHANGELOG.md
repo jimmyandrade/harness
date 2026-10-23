@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.83.0](https://github.com/jimmyandrade/harness/compare/v0.82.0...v0.83.0) (2026-10-23)
+
+
+### Features
+
+* chain receipt recognition and canonical name checks ([#201](https://github.com/jimmyandrade/harness/issues/201)) ([1464075](https://github.com/jimmyandrade/harness/commit/14640759fed57a82dfb581f16e40e9a87f7202f0))
+* **extrair-tarefas-da-reuniao:** turn meeting action items into tasks ([#378](https://github.com/jimmyandrade/harness/issues/378)) ([db5c0a4](https://github.com/jimmyandrade/harness/commit/db5c0a411505ce7e286076c0acf0c44d063b1c3c))
+* **lancar-despesa-da-empresa:** load data sources by type and keep the recipient link ([#289](https://github.com/jimmyandrade/harness/issues/289)) ([1352f6b](https://github.com/jimmyandrade/harness/commit/1352f6b50831cec5e717a2301612767478b72459))
+* resolve missing expense recipients through company registration ([#285](https://github.com/jimmyandrade/harness/issues/285)) ([0aed40b](https://github.com/jimmyandrade/harness/commit/0aed40ba3d40ac16882ce898957198079838826f))
+
+
+### Bug Fixes
+
+* confirm expense purpose before recording payments ([#288](https://github.com/jimmyandrade/harness/issues/288)) ([b5e5640](https://github.com/jimmyandrade/harness/commit/b5e56404c56ef6a1d852e684694964f606a28b13))
+* **definir-empresa:** allow one-off suppliers without a named contact ([#371](https://github.com/jimmyandrade/harness/issues/371)) ([9758891](https://github.com/jimmyandrade/harness/commit/97588915f2616602a9935df8926666fb9fa58e17))
+* **lancar-despesa-da-empresa:** attach originals without another confirmation ([#377](https://github.com/jimmyandrade/harness/issues/377)) ([e8a9b98](https://github.com/jimmyandrade/harness/commit/e8a9b98a41fa62bea6f5566a55ea337161b4cb6d))
+
 ## [0.82.0](https://github.com/jimmyandrade/harness/compare/v0.81.0...v0.82.0) (2026-10-23)
 
 
