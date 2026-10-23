@@ -1342,3 +1342,19 @@ How these skills relate is in `README.md`, in this folder.
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses recording an event that already has a time, creating an all-day stand-in, deciding the guest, the production day, and the day lookup
+
+### sincronizar-status-da-tarefa
+- **Stability**: experimental
+- **Description**: Move tasks, cards, or issues through their status flow from the state of the pull request linked to each one
+- **Properties**:
+  - Lives at `.agents/skills/sincronizar-status-da-tarefa/SKILL.md`
+  - Works with any task tracker, reading from the project instructions the task query, the status flow, the status for a merged, ready, draft, or blocked pull request, the labels that mean blocked, how a task links to a pull request, and whether to confirm the plan
+  - Links a task to a pull request only after reading its title and body, and marks a link made only by subject
+  - Leaves unchanged, with the reason, a task whose pull request was closed without merging, cites another key, or needs judgment
+  - Writes a plan, rereads the task and the pull request before running it, and asks for confirmation when the project says so
+  - Moves one task at a time, one status step at a time, and reads the returned status before the next step
+  - Records a denied or failed call as not done, with the status the task really has, without retrying or working around it
+  - Reports by final status from what the tool returned, and counts the totals from the final list
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [ ] Three cases validated with the person
