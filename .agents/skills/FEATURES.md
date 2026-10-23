@@ -836,8 +836,9 @@ How these skills relate is in `README.md`, in this folder.
   - Picks the sprint whose period contains the meeting date, and leaves the sprint empty with a warning when none or more than one fits
   - Checks each item through procurar-tarefa and the order of identificar-duplicata, and merges items of the same meeting that ask for the same delivery
   - Validates a plan of every item before writing, and creates each new task through definir-tarefa with the status the project instructions name
-  - Uses an existing equivalent task as canonical without changing it, explains the factual difference of a similar task, and asks when unsure
-  - Does not register the meeting or edit an existing task
+  - Uses an existing equivalent task as canonical, and fills only its empty sprint, after the person confirms which sprint fits, with the sprint of the meeting date as the suggestion
+  - Explains the factual difference of a similar task, and asks when unsure
+  - Does not register the meeting or change anything else in an existing task
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [ ] Three cases validated with the person

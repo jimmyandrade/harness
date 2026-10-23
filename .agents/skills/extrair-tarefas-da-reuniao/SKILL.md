@@ -3,7 +3,7 @@ name: extrair-tarefas-da-reuniao
 description: Extrai os action items de uma reunião registrada e cria uma tarefa por item, sem duplicar, na sprint da data da reunião. Usada quando o status da reunião fica pronto para processar ou a pessoa pede as tarefas de uma reunião. Não serve para registrar a reunião, editar uma tarefa existente nem só saber se ela existe.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   related:
     - definir-registro-de-reuniao
     - definir-tarefa
@@ -82,11 +82,11 @@ Corrija e valide de novo até passar.
 
 ### Passo 6
 
-Crie cada tarefa nova com `definir-tarefa`: o título canônico, o `Status da tarefa nova`, a sprint do Passo 3 e o responsável, só quando nomeado. Não altere tarefa existente nesta habilidade.
+Crie cada tarefa nova com `definir-tarefa`: o título canônico, o `Status da tarefa nova`, a sprint do Passo 3 e o responsável, só quando nomeado. Tarefa existente sem sprint: pergunte em qual sprint ela encaixa, com a sprint do Passo 3 como sugestão, e grave só a sprint que a pessoa confirmar. Não altere mais nada na tarefa existente.
 
 ### Passo 7
 
-Mude o status da reunião para `Status da reunião processada`. Responda com uma linha por item: o título, criada ou já existente com o link, a sprint e o responsável. Diga a diferença de cada item parecido, a pergunta de cada item incerto e o aviso de sprint.
+Mude o status da reunião para `Status da reunião processada`. Responda com uma linha por item: o título, criada ou já existente com o link, a sprint e o responsável. Diga a diferença de cada item parecido, a pergunta de cada item incerto, a pergunta de sprint de cada tarefa existente sem sprint e o aviso de sprint.
 
 ### Passo 8
 
@@ -141,7 +141,7 @@ Não criei. A tarefa existente é a canônica, e passei o link dela.
 ## Pegadinhas
 
 - O status pronto para processar é o gatilho, mas a criação acontece com a reunião já em processamento. Não exija o status pronto ao criar.
-- A tarefa existente pode estar sem sprint ou numa sprint antiga. Isso não autoriza a mudar a sprint dela aqui.
+- A tarefa existente numa sprint antiga não muda de sprint aqui. Sem sprint, a sprint da data da reunião parece óbvia, mas só entra depois que a pessoa confirmar.
 - O nome de uma pessoa citada no item não a torna responsável. Responsável é quem o texto diz que faz.
 
 ## Scripts disponíveis
