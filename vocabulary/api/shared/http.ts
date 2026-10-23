@@ -6,7 +6,7 @@ import { createServer as createHttpServer, type IncomingMessage, type Server, ty
 
 import type * as z from "zod"
 
-import { Glossary, InvalidGlossary } from "./glossary.ts"
+import { Glossary, InvalidGlossary, InvalidTerms } from "./glossary.ts"
 import { readSchema } from "./schema.ts"
 
 export type Route = {
@@ -68,6 +68,7 @@ function accept(
       return send(response, 200, build(parsed as Record<string, unknown>))
     })
     .catch((error: unknown) => {
+      if (error instanceof InvalidTerms) return send(response, 400, { error: error.message, problems: error.problems })
       if (error instanceof InvalidGlossary) return send(response, 400, { error: error.message })
       if (error instanceof SyntaxError || error instanceof TypeError) {
         return send(response, 400, { error: emptyMessage })

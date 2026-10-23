@@ -776,6 +776,7 @@ How these skills relate is in `README.md`, in this folder.
   - Uses insert when the person is registering and does not name a mode, update when an existing term changes, and upsert when the batch does both
   - Corrects a stored term by sending only the fields that change, reading the row before and after, and clearing a field only when the person asks
   - Reads and writes with `node node_modules/harness/vocabulary/dist/cli.js lookup`, `exists`, and `terms` when there is a terminal, and with the MCP tools `lookup_term`, `exists_in_text`, and `write_terms` when there is not
+  - Tests a large or imported batch with a dry run before it writes, and fixes every problem the refusal lists in one pass
   - Stops without a terminal and without the MCP server, as in a Notion agent
   - Leaves writing brand text to redigir-com-tom-de-voz, and does not invent a term
 - **Test Criteria**:

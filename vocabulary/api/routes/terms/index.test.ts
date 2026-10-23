@@ -609,3 +609,25 @@ test("a row without notes stays without the field", async () => {
     assert.equal(JSON.parse(readFileSync(join(root, "pt-BR.json"), "utf8")).oi.notes, undefined)
   })
 })
+
+test("a refused batch answers with every problem, and a dry run answers 200 and writes nothing", async () => {
+  const initial = "{}\n"
+  const terms = [
+    allowed("casa", "lugar", ["casa"]),
+    { ...allowed("lar", "lugar"), when: "em convite" },
+  ]
+  await withGlossary(initial, async (port, root) => {
+    const file = join(root, "pt-BR.json")
+    const refused = await post(port, { language: "pt-BR", mode: "upsert", terms })
+    assert.equal(refused.status, 400)
+    const body = await refused.json()
+    assert.deepEqual(body.problems.map((problem: { term: string }) => problem.term), ["lar", "casa"])
+    assert.match(body.error, /^2 problems\./)
+    const dry = await post(port, { language: "pt-BR", mode: "upsert", dry_run: true, terms })
+    assert.equal(dry.status, 200)
+    const report = await dry.json()
+    assert.equal(report.dry_run, true)
+    assert.deepEqual(report.refused.map((row: { term: string }) => row.term), ["lar", "casa"])
+    assert.equal(readFileSync(file, "utf8"), initial)
+  })
+})

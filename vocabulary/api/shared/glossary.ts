@@ -57,6 +57,7 @@ import {
   levelOf,
   samePerson,
   stateSchema,
+  readTermsRequest,
   termIssues,
   type AllowedRequest,
   type BulkTerm,
@@ -64,6 +65,7 @@ import {
   type LegacyState,
   type Migration,
   type Person,
+  type Problem,
   type SituationalRequest,
   type State,
   type TermRegistration,
@@ -86,6 +88,29 @@ export function glossaryDirectory(env: Record<string, string | undefined>, cwd: 
 export const defaultDirectory = glossaryDirectory(process.env, process.cwd())
 
 export class InvalidGlossary extends Error {}
+
+/**
+ * A batch refused for one or more reasons. message is the reason alone when
+ * there is one, and a list of every reason, each with its term, when there are
+ * several. problems keeps them apart for a caller that reads them.
+ */
+export class InvalidTerms extends InvalidGlossary {
+  readonly problems: readonly Problem[]
+
+  constructor(problems: readonly Problem[]) {
+    super(describeProblems(problems))
+    this.problems = problems
+  }
+}
+
+function describeProblems(problems: readonly Problem[]): string {
+  const [only] = problems
+  if (problems.length === 1 && only !== undefined) return only.message
+  const lines = problems.map(({ term, message }) =>
+    term === undefined || message.includes(JSON.stringify(term)) ? `- ${message}` : `- ${JSON.stringify(term)}: ${message}`,
+  )
+  return [`${problems.length} problems. The batch was not written.`, ...lines].join("\n")
+}
 
 export type Entry = {
   term: string
@@ -340,34 +365,56 @@ export function registerSituational(
 
 type Writing = BulkTerm & { previous?: string }
 
+export type WriteOptions = {
+  /** Validate and report what would happen, and leave the file as it is. */
+  dryRun?: boolean
+  /** Problems found before the call, such as a term the schema refused. */
+  problems?: readonly Problem[]
+}
+
+/**
+ * Write one batch to the glossary of a language. Every problem of the batch is
+ * collected before anything is decided: a batch with a problem writes nothing
+ * and is refused with all of them. A dry run reports instead of refusing.
+ */
 export function writeTerms(
   directory: string,
   language: string,
   mode: WriteMode,
   terms: readonly BulkTerm[],
   validation: Validation = "warn",
+  options: WriteOptions = {},
 ): TermsWrite {
   const tag = canonicalLanguage(language)
   const path = glossaryFile(directory, tag)
   const loaded = load(readFileSync(path, "utf8"))
   const existed = new Set(loaded.map((entry) => matchKey(entry.term)))
-  const items = terms.map((item) => withStored(loaded, item, mode))
+  const problems: Problem[] = [...(options.problems ?? [])]
+  const items = terms.map((term) => {
+    const { item, issues } = withStored(loaded, term, mode)
+    for (const message of issues) problems.push({ term: term.term, message })
+    return item
+  })
   const batch: BulkTerm[] = []
   const missing = new Map<string, ExpectedField[]>()
   for (const item of items) {
     if (batch.some((previous) => sameConcept(previous.term, item.term))) {
-      throw new InvalidGlossary(`${JSON.stringify(item.term)} is duplicated.`)
+      problems.push({ term: item.term, message: `${JSON.stringify(item.term)} is duplicated.` })
     }
     if (item.source !== undefined && batch.some((previous) => previous.source === item.source)) {
-      throw new InvalidGlossary(`The source of ${JSON.stringify(item.term)} is duplicated.`)
+      problems.push({ term: item.term, message: `The source of ${JSON.stringify(item.term)} is duplicated.` })
     }
     batch.push(item)
-    assertExamples(item.term, [...item.examples, ...item.rejected], item.alternatives)
+    for (const message of exampleIssues(item.term, [...item.examples, ...item.rejected], item.alternatives)) {
+      problems.push({ term: item.term, message })
+    }
     const absent = EXPECTED[item.state].filter((field) => item[field] === undefined)
-    const first = absent[0]
-    if (first === undefined || validation === "optional") continue
+    if (absent.length === 0 || validation === "optional") continue
     if (validation === "enforce") {
-      throw new InvalidGlossary(`${MISSING_FIELD[first].slice(0, -1)} of ${JSON.stringify(item.term)}.`)
+      for (const field of absent) {
+        problems.push({ term: item.term, message: `${MISSING_FIELD[field].slice(0, -1)} of ${JSON.stringify(item.term)}.` })
+      }
+      continue
     }
     missing.set(item.term, absent)
   }
@@ -412,7 +459,7 @@ export function writeTerms(
       if ([...writing.values()].some((entry) => sameConcept(entry.term, text))) continue
       if (working.some((entry) => sameConcept(entry.term, text))) continue
       if (batch.some((entry) => sameConcept(entry.term, text))) {
-        throw new InvalidGlossary(`${JSON.stringify(text)} is not in the glossary.`)
+        problems.push({ term: item.term, message: `${JSON.stringify(text)} is not in the glossary.` })
       }
     }
   }
@@ -435,17 +482,51 @@ export function writeTerms(
   for (const item of writing.values()) {
     const shell = shells.get(matchKey(item.term))
     if (shell === undefined) continue
-    fillTerm(shell, item, working, writing)
+    try {
+      fillTerm(shell, item, working, writing)
+    } catch (error) {
+      if (!(error instanceof InvalidGlossary)) throw error
+      problems.push({ term: item.term, message: error.message })
+      continue
+    }
     const registration = registrationOf(tag, shell)
     if (existed.has(matchKey(item.previous ?? item.term))) updated.push(registration)
     else inserted.push(registration)
   }
-  if (shells.size > 0) writeFileSync(path, serialize(working), "utf8")
+  const unique = problems.filter((problem, index) => problems.findIndex((other) => other.term === problem.term && other.message === problem.message) === index)
+  if (unique.length > 0 && options.dryRun !== true) throw new InvalidTerms(unique)
+  if (shells.size > 0 && unique.length === 0 && options.dryRun !== true) writeFileSync(path, serialize(working), "utf8")
   const skippedTerms = new Set(skipped.map((item) => item.term))
   const incomplete = [...missing]
     .filter(([term]) => !skippedTerms.has(term))
     .map(([term, fields]) => ({ term: writtenSpelling(writing, term), missing: [...fields] }))
-  return { language: tag, mode, inserted, updated, unchanged, skipped, incomplete, warnings: warningsFor(items, working) }
+  const written: TermsWrite = { language: tag, mode, inserted, updated, unchanged, skipped, incomplete, warnings: warningsFor(items, working) }
+  if (options.dryRun !== true) return written
+  const refused = unique.map(({ term, message }) => (term === undefined ? { reason: message } : { term, reason: message }))
+  return {
+    ...written,
+    inserted: unique.length === 0 ? inserted : [],
+    updated: unique.length === 0 ? updated : [],
+    dry_run: true,
+    refused,
+  }
+}
+
+/**
+ * Read a batch from a request body and write it. The terms the schema refuses
+ * join the problems of the write, so one call lists every reason at once.
+ */
+export function writeBatch(directory: string, body: unknown): TermsWrite {
+  let request: ReturnType<typeof readTermsRequest>
+  try {
+    request = readTermsRequest(body)
+  } catch (error) {
+    throw new InvalidGlossary(error instanceof Error ? error.message : "Invalid value.")
+  }
+  return writeTerms(directory, request.language, request.mode, request.terms, request.validation, {
+    dryRun: request.dry_run,
+    problems: request.problems,
+  })
 }
 
 /**
@@ -476,10 +557,10 @@ export function migrate(directory: string, language: string, write = false): Mig
  * a whole, so a call that moves a row to a level that refuses a stored field is
  * refused until it clears that field.
  */
-function withStored(entries: readonly Entry[], item: BulkTerm, mode: WriteMode): BulkTerm {
-  if (mode === "insert") return item
+function withStored(entries: readonly Entry[], item: BulkTerm, mode: WriteMode): { item: BulkTerm; issues: string[] } {
+  if (mode === "insert") return { item, issues: [] }
   const stored = findConcept(entries, item.term) ?? (item.source === undefined ? undefined : entries.find((entry) => entry.source === item.source))
-  if (stored === undefined) return item
+  if (stored === undefined) return { item, issues: [] }
   const keeps = (field: PatchableField): boolean => !item.given.includes(field)
   const merged: BulkTerm = {
     ...item,
@@ -500,9 +581,7 @@ function withStored(entries: readonly Entry[], item: BulkTerm, mode: WriteMode):
     notes: keeps("notes") ? stored.notes : item.notes,
     case_sensitive: keeps("case_sensitive") ? stored.caseSensitive === true : item.case_sensitive,
   }
-  const [issue] = termIssues(merged)
-  if (issue !== undefined) throw new InvalidGlossary(`${JSON.stringify(item.term)}: ${issue}`)
-  return merged
+  return { item: merged, issues: termIssues(merged).map((issue) => `${JSON.stringify(item.term)}: ${issue}`) }
 }
 
 function writtenSpelling(writing: ReadonlyMap<string, Writing>, term: string): string {
@@ -722,16 +801,21 @@ function renameList(list: readonly string[] | undefined, key: string, next: stri
 }
 
 function assertExamples(owner: string, rejected: readonly string[], alternatives: readonly string[]): void {
+  const [issue] = exampleIssues(owner, rejected, alternatives)
+  if (issue !== undefined) throw new InvalidGlossary(issue)
+}
+
+function exampleIssues(owner: string, rejected: readonly string[], alternatives: readonly string[]): string[] {
+  const issues: string[] = []
   const seen = [owner]
   for (const item of [...rejected, ...alternatives]) {
     const text = collapse(item)
-    if (text === "") throw new InvalidGlossary("The term is empty.")
-    if (sameConcept(owner, text)) throw new InvalidGlossary(`${JSON.stringify(owner)} cannot be its own example.`)
-    if (seen.some((previous) => sameConcept(previous, text))) {
-      throw new InvalidGlossary(`${JSON.stringify(text)} is duplicated.`)
-    }
+    if (text === "") issues.push("The term is empty.")
+    else if (sameConcept(owner, text)) issues.push(`${JSON.stringify(owner)} cannot be its own example.`)
+    else if (seen.some((previous) => sameConcept(previous, text))) issues.push(`${JSON.stringify(text)} is duplicated.`)
     seen.push(text)
   }
+  return issues
 }
 
 function linkedTerms(entries: Entry[], submitted: readonly string[], state: State, owner: string): string[] {

@@ -45,7 +45,7 @@ None. An agent calls the MCP tools, the CLI, or the local HTTP server.
 #### 3.2.1. Vocabulary API, CLI, and MCP
 
 - Name: `vocabulary`
-- Description: Looks up a term, reports which tokens of a text exist, classifies a term or a text, inserts or updates glossary rows one by one or in a migrated batch, and migrates rows that use a deprecated state.
+- Description: Looks up a term, reports which tokens of a text exist, classifies a term or a text, inserts or updates glossary rows one by one or in a migrated batch, lists every problem of a refused batch at once, tests a batch with a dry run that writes nothing, and migrates rows that use a deprecated state.
 - Technologies: TypeScript on Node.js 24, Zod. The type check is TypeScript 7, as `docs/adr/0005-typecheck-with-typescript-7.md` decides.
 - Deployment: `node vocabulary/api/mcp/index.ts` from this repository, or `node node_modules/harness/vocabulary/dist/mcp/index.js` from a project that installed it. Node.js does not strip types under `node_modules`, so the `prepare` script compiles `dist/` when a project installs the package, as `docs/adr/0007-build-on-install.md` decides. The HTTP server listens on 127.0.0.1.
 

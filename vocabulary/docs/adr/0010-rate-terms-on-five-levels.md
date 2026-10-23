@@ -81,7 +81,7 @@ A legacy glossary names its categories in its own language. The engine keeps Eng
 
 ### Batch import
 
-`terms --file` reads a whole batch from a JSON file with the body of `POST /v1/terms`. `write_terms` already takes the whole list. With `upsert`, the response lists `inserted`, `updated`, `unchanged`, `skipped`, `incomplete`, and `warnings`. One failure still rejects the batch and leaves the file unchanged. Running the same import again leaves every row `unchanged`.
+`terms --file` reads a whole batch from a JSON file with the body of `POST /v1/terms`. `write_terms` already takes the whole list. With `upsert`, the response lists `inserted`, `updated`, `unchanged`, `skipped`, `incomplete`, and `warnings`. One failure still rejects the batch and leaves the file unchanged, and the refusal lists every problem of the batch, each with its term, instead of the first. With `dry_run` true, or `--dry-run` on the command, nothing is written: the response lists what would be inserted, updated, left unchanged, skipped, or incomplete, and what would be refused as `refused`. Running the same import again leaves every row `unchanged`.
 
 ## Consequences
 
