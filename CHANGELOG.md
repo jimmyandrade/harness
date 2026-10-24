@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.89.2](https://github.com/jimmyandrade/harness/compare/v0.89.1...v0.89.2) (2026-10-24)
+
+
+### Bug Fixes
+
+* **definir-vocabulario:** move the language-file command to the scripts ([#400](https://github.com/jimmyandrade/harness/issues/400)) ([c2ea855](https://github.com/jimmyandrade/harness/commit/c2ea855a69192d6c40a96c1cc426618b58caaf6d))
+* **definir-vocabulario:** move the language-file command to the scripts ([#402](https://github.com/jimmyandrade/harness/issues/402)) ([36b57c2](https://github.com/jimmyandrade/harness/commit/36b57c26d0bea015ce314efb9eaf2f5ce4ba1b80))
+
 ## [0.89.1](https://github.com/jimmyandrade/harness/compare/v0.89.0...v0.89.1) (2026-10-24)
 
 
