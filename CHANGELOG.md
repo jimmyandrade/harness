@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.91.0](https://github.com/jimmyandrade/harness/compare/v0.90.0...v0.91.0) (2026-10-24)
+
+
+### Features
+
+* **definir-vocabulario:** split the skill into classify, validate and write steps ([#408](https://github.com/jimmyandrade/harness/issues/408)) ([60f6d0e](https://github.com/jimmyandrade/harness/commit/60f6d0ea6a3ab18cdb93c4ac3ae4b19d32445be8))
+
 ## [0.90.0](https://github.com/jimmyandrade/harness/compare/v0.89.3...v0.90.0) (2026-10-24)
 
 
