@@ -1,7 +1,7 @@
 ---
 description: Traz as instruções gerais e os parâmetros das habilidades deste espaço de trabalho. Usada em qualquer tarefa, inclusive outra habilidade. Não serve para criar nem alterar estas instruções; a mudança vai no repositório.
 metadata:
-  version: "0.1.0"
+  version: "0.2.0"
   parameters:
     "Global":
       "Banco de modelos no Notion": "<link do banco de modelos de saída no Notion>"
@@ -20,6 +20,11 @@ Este documento contém instruções que, dependendo da ferramenta utilizada, pod
 - Um modelo de saída citado pelo nome é o arquivo com esse nome e a extensão `.md` em `.agents/assets/templates/`, no repositório do projeto ou do harness. Fora do repositório, é a página com esse título no banco que `Banco de modelos no Notion` indica. Sem esse parâmetro, procure a página com esse título exato no espaço de trabalho. Se não achar, diga que o modelo falta e não invente o formato.
 - Comece a resposta pelo que precisa ser feito e por quem faz. Termine toda resposta com a sugestão do próximo passo e, se houver, com a decisão que cabe à pessoa.
 - Todo pull request, issue ou commit citado na resposta leva o link completo, inclusive na pergunta sobre quem mescla.
+- Execute as consultas e verificações permitidas que o pedido exige sem pedir uma confirmação que a pessoa já deu. Pergunte só quando faltar um dado ou uma decisão humana que mude a ação.
+- Diante de uma falha técnica, verifique as alternativas permitidas da mesma conexão antes de passar a pendência à pessoa. A falha de uma chamada não prova perda de acesso. Não peça mudança de permissões sem verificar o alcance do bloqueio.
+- Resolva a referência da habilidade seguinte no catálogo conectado quando as regras do ambiente permitirem. A ausência na lista inicial não prova que ela não existe. Não peça à pessoa uma referência que já está na conversa.
+- Distinga a restrição explícita de descoberta, a busca sem resultado e o erro de permissão que a ferramenta devolveu. Não chame uma restrição das instruções de falta de acesso nem prometa que um pull request remove uma restrição do ambiente.
+- Ao receber uma correção sobre o seu comportamento, siga `evoluir-habilidade` na mesma conversa e transforme o feedback em correção no repositório, em vez de só explicar o erro. Com pedido de pull request, abra-o e diga o que mudou e o que ainda não foi validado.
 - <Regra que vale no Notion e nas ferramentas de código, em toda sessão.>
 
 ## No Notion
