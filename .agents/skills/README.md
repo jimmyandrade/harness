@@ -15,6 +15,7 @@ flowchart LR
     acompanhar_veiculo["acompanhar-veiculo"]
     atender_revisao_de_pull_request["atender-revisao-de-pull-request"]
     avaliar_atualizacoes_de_dependencia["avaliar-atualizacoes-de-dependencia"]
+    classificar_estado_do_termo["classificar-estado-do-termo"]
     comunicar_novidade_do_produto["comunicar-novidade-do-produto"]
     conversar_no_whatsapp["conversar-no-whatsapp"]
     criar_commit["criar-commit"]
@@ -61,6 +62,7 @@ flowchart LR
     evoluir_habilidade["evoluir-habilidade"]
     extrair_tarefas_da_reuniao["extrair-tarefas-da-reuniao"]
     gerenciar_estoque["gerenciar-estoque"]
+    gravar_termos_no_vocabulario["gravar-termos-no-vocabulario"]
     identificar_duplicata["identificar-duplicata"]
     lancar_despesa_da_empresa["lancar-despesa-da-empresa"]
     lancar_despesa_pessoal["lancar-despesa-pessoal"]
@@ -94,6 +96,7 @@ flowchart LR
     revisar_uso_do_tempo["revisar-uso-do-tempo"]
     sincronizar_cronograma["sincronizar-cronograma"]
     sincronizar_status_da_tarefa["sincronizar-status-da-tarefa"]
+    validar_plano_de_vocabulario["validar-plano-de-vocabulario"]
   end
   acompanhar_fila_de_revisao --> atender_revisao_de_pull_request
   acompanhar_fila_de_revisao --> enviar_mensagem_no_slack
@@ -119,6 +122,9 @@ flowchart LR
   avaliar_atualizacoes_de_dependencia --> criar_commit
   avaliar_atualizacoes_de_dependencia --> criar_pull_request
   avaliar_atualizacoes_de_dependencia --> evoluir_habilidade
+  classificar_estado_do_termo --> definir_vocabulario
+  classificar_estado_do_termo --> gravar_termos_no_vocabulario
+  classificar_estado_do_termo --> validar_plano_de_vocabulario
   comunicar_novidade_do_produto --> evoluir_habilidade
   comunicar_novidade_do_produto --> redigir_com_tom_de_voz
   conversar_no_whatsapp --> comunicar_novidade_do_produto
@@ -267,9 +273,12 @@ flowchart LR
   definir_viagem --> organizar_ponto_de_contato
   definir_viagem --> procurar_oportunidade
   definir_viagem --> sincronizar_cronograma
+  definir_vocabulario --> classificar_estado_do_termo
   definir_vocabulario --> evoluir_habilidade
+  definir_vocabulario --> gravar_termos_no_vocabulario
   definir_vocabulario --> procurar_variacao_de_termo
   definir_vocabulario --> redigir_com_tom_de_voz
+  definir_vocabulario --> validar_plano_de_vocabulario
   descrever_habilidade_ou_schema --> criar_commit
   descrever_habilidade_ou_schema --> criar_pull_request
   descrever_habilidade_ou_schema --> evoluir_habilidade
@@ -302,6 +311,9 @@ flowchart LR
   gerenciar_estoque --> definir_lancamento
   gerenciar_estoque --> identificar_duplicata
   gerenciar_estoque --> mesclar_registro
+  gravar_termos_no_vocabulario --> definir_vocabulario
+  gravar_termos_no_vocabulario --> procurar_variacao_de_termo
+  gravar_termos_no_vocabulario --> validar_plano_de_vocabulario
   identificar_duplicata --> definir_data_significativa
   identificar_duplicata --> definir_grafia
   identificar_duplicata --> definir_perfil_social
@@ -423,4 +435,7 @@ flowchart LR
   sincronizar_cronograma --> procurar_agenda
   sincronizar_status_da_tarefa --> evoluir_habilidade
   sincronizar_status_da_tarefa --> levantar_contexto_do_pull_request
+  validar_plano_de_vocabulario --> classificar_estado_do_termo
+  validar_plano_de_vocabulario --> definir_vocabulario
+  validar_plano_de_vocabulario --> gravar_termos_no_vocabulario
 ```

@@ -759,29 +759,51 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses recording an event that already has a time, syncing a date-only milestone, posting the amount, registering the opportunity, and registering someone
 
+### classificar-estado-do-termo
+- **Stability**: experimental
+- **Description**: Decide the level, the context, and the tags of a voice-vocabulary term before it is registered
+- **Properties**:
+  - Lives at `.agents/skills/classificar-estado-do-termo/SKILL.md`
+  - Rates a term on five levels: forbidden, strongly_discouraged, discouraged, allowed_with_care, and allowed
+  - Reads the brand sources named in the project instructions before answering or writing. An ambiguous channel, audience, line, commercial intent, or situation waits for a question
+  - Keeps a term that only fits one context on a middle level, with when. allowed and forbidden stay general rules
+  - Adds tags to a context term of one speaker, event, or channel, reusing a tag already in the glossary, and keeps when as the rule in words
+  - Treats an emoji and a combination as a term, and sends a cliche to forbidden with a scene to use instead of a synonym
+  - Leaves the field check to validar-plano-de-vocabulario and the write to gravar-termos-no-vocabulario, and does not invent a term
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses registering the term, checking the fields, writing brand text, and rating a term without the brand sources
+
 ### definir-vocabulario
 - **Stability**: experimental
 - **Description**: Register and update one or more voice-vocabulary terms
 - **Properties**:
   - Lives at `.agents/skills/definir-vocabulario/SKILL.md`
-  - Registers and updates terms for one language on five levels: forbidden, strongly_discouraged, discouraged, allowed_with_care, and allowed
-  - Writes a term without an expected field and reports it as incomplete, and imports a batch from another tool with `terms --file`
-  - Sends a question about a missing term or its variations to procurar-variacao-de-termo
-  - Keeps categories English words in every language, translated by the Categorias parameter, and keeps the term and the notes in that language
-  - Reads the brand sources named in the project instructions before answering or writing. An ambiguous channel, audience, line, commercial intent, or situation waits for a question
-  - Keeps a term that only fits one context on a middle level, with when. allowed and forbidden stay general rules
-  - Adds tags to a context term of one speaker, event, or channel, reusing a tag already in the glossary, and keeps when as the rule in words
-  - Marks a name whose casing is part of the spelling with case_sensitive, so the write keeps its casing
-  - Keeps the history and limits of a term in notes, apart from the description, without changing the level
+  - Builds the plan for one language and hands each stage to classificar-estado-do-termo, validar-plano-de-vocabulario, and gravar-termos-no-vocabulario
+  - Takes the language from the whole communication, not from the file at hand: an English e-mail goes to en, and an English word inside Portuguese text goes to pt-BR
   - Uses insert when the person is registering and does not name a mode, update when an existing term changes, and upsert when the batch does both
-  - Corrects a stored term by sending only the fields that change, reading the row before and after, and clearing a field only when the person asks
-  - Reads and writes with `node node_modules/harness/vocabulary/dist/cli.js lookup`, `exists`, and `terms` when there is a terminal, and with the MCP tools `lookup_term`, `exists_in_text`, and `write_terms` when there is not
-  - Tests a large or imported batch with a dry run before it writes, and fixes every problem the refusal lists in one pass
-  - Stops without a terminal and without the MCP server, as in a Notion agent
+  - Sends a question about a missing term or its variations to procurar-variacao-de-termo
   - Leaves writing brand text to redigir-com-tom-de-voz, and does not invent a term
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses writing or approving brand text, classifying a phrase, and inventing a term
+
+### gravar-termos-no-vocabulario
+- **Stability**: experimental
+- **Description**: Search, test, and write voice-vocabulary terms
+- **Properties**:
+  - Lives at `.agents/skills/gravar-termos-no-vocabulario/SKILL.md`
+  - Corrects a stored term by sending only the fields that change, reading the row before and after, and clearing a field only when the person asks
+  - Searches the spelling before it writes, keeps a plural, a gender, and an accent as their own rows, and suggests the other forms without writing them
+  - Asks for related terms before a new forbidden term is written, and never invents one
+  - Tests a large or imported batch with a dry run before it writes, and fixes every problem the refusal lists in one pass
+  - Reads and writes with `node node_modules/harness/vocabulary/dist/cli.js lookup`, `exists`, and `terms` when there is a terminal, and with the MCP tools `lookup_term`, `exists_in_text`, and `write_terms` when there is not
+  - Imports a batch from another tool with `terms --file`
+  - Stops without a terminal and without the MCP server, as in a Notion agent
+  - Sends a question about a missing term or its variations to procurar-variacao-de-termo
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses rating the term, checking the fields, asking which variations exist, writing brand text, and inventing a term
 
 ### descrever-habilidade-ou-schema
 - **Stability**: experimental
@@ -1359,3 +1381,17 @@ How these skills relate is in `README.md`, in this folder.
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [ ] Three cases validated with the person
+
+### validar-plano-de-vocabulario
+- **Stability**: experimental
+- **Description**: Check the fields of a voice-vocabulary plan before it is written
+- **Properties**:
+  - Lives at `.agents/skills/validar-plano-de-vocabulario/SKILL.md`
+  - Keeps categories English words in every language, translated by the Categorias parameter, and keeps the term and the notes in that language
+  - Keeps the explanation of the word in description and the reason to use it in reason, without copying one into the other
+  - Reports an expected field the person did not give as incomplete, and passes the Validação dos campos parameter as validation
+  - Records who decided with an individual e-mail, never a shared role account, and keeps the history of a term in notes
+  - Refuses to write when the validation fails, and does not invent a field
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses registering the term, rating it, writing it, and inventing a field
