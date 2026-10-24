@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.93.1](https://github.com/jimmyandrade/harness/compare/v0.93.0...v0.93.1) (2026-10-24)
+
+
+### Bug Fixes
+
+* stop pointing to the deleted vocabulary repository ([#416](https://github.com/jimmyandrade/harness/issues/416)) ([b9d6227](https://github.com/jimmyandrade/harness/commit/b9d62271c8ba3640400f66e3f4deb2dda7dbe093))
+
 ## [0.93.0](https://github.com/jimmyandrade/harness/compare/v0.92.0...v0.93.0) (2026-10-24)
 
 
