@@ -6,7 +6,7 @@ locale: en
 
 ## Status
 
-Accepted. Supersedes the part of ADR 0008 that kept a separate settings file for what scripts read.
+Accepted. Supersedes the part of ADR 0008 that kept a separate settings file for what scripts read. ADR 0020 lets a project keep the parameters of a skill in a file, in place of the sentence below that says no repository keeps a separate settings file.
 
 ## Context
 
@@ -18,7 +18,7 @@ The risk is that people and agents edit `AGENTS.md` often, so the frontmatter ca
 
 ## Decision
 
-Every setting lives in `metadata.parameters` of the frontmatter of `AGENTS.md`. No repository keeps a separate settings file.
+Every setting lives in `metadata.parameters` of the frontmatter of `AGENTS.md`. No repository keeps a separate settings file for script settings.
 
 - A script reads a setting from the project parameters: first the entry of the skill that shares the setting, if any, then `Global`, then the top level. When the project does not set it, the script reads the parameters of the core, which hold the defaults. A value of the wrong type is skipped, and the checker reports it.
 - A setting that a skill also reads keeps the skill's key, so one value serves both. The checker reads `Tokens do corpo`, `Linhas`, and `Tokens do catálogo`, the keys of the skill creation skill.

@@ -1413,6 +1413,7 @@ def main() -> int:
         block_errors = parameters.validate(
             text, parameters.skill_parameter_keys(roots + PLUGINS), required=IS_HARNESS or ROOT == CORE
         )
+        block_errors = block_errors + parameters.config_errors(ROOT, parameters.skill_parameter_keys(roots + PLUGINS))
         group_errors = opportunity_group_errors(text, roots) if not block_errors else []
         for message, line in block_errors + group_errors + instructions_version_errors(text):
             failed = True

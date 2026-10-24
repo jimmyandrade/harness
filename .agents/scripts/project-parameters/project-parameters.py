@@ -19,6 +19,10 @@ import yaml
 SKILL_HEADING = "## Parâmetros de configuração"
 INSTRUCTIONS = "AGENTS.md"
 GLOBAL = "Global"
+# A project that works in a tool with a file system can keep the parameters of a skill in a file (ADR 0020).
+CONFIG_FOLDER = "Pasta dos arquivos de configuração"
+CONFIG_FILE = "config.yaml"
+CONFIG_KEY = "parametros"
 YAML_FENCE = re.compile(r"^```ya?ml\s*$")
 INTEGER_SETTINGS = {"Palavras", "Linhas", "Tokens do catálogo", "Tokens do corpo"}
 TEXT_SETTINGS = {
@@ -32,6 +36,7 @@ TEXT_SETTINGS = {
     "Símbolo da pasta no macOS",
     "Idioma das respostas",
     "Idioma das decisões de arquitetura",
+    CONFIG_FOLDER,
 }
 CHOICE_SETTINGS = {
     "Licença obrigatória": {"sim", "não"},
@@ -155,6 +160,35 @@ def instructions_block(root: Path) -> dict:
     return data if error is None and data is not None else {}
 
 
+def config_folder(root: Path) -> str | None:
+    """The folder of the skill settings files, relative to the project root, or None when the project keeps none."""
+    value = global_value(instructions_block(root), CONFIG_FOLDER)
+    if not isinstance(value, str) or not value.strip():
+        return None
+    folder = Path(value.strip())
+    return None if folder.is_absolute() or ".." in folder.parts else value.strip()
+
+
+def config_path(root: Path, skill: str) -> Path | None:
+    """The settings file of a skill, if the project keeps a folder of them and the file exists."""
+    folder = config_folder(root)
+    path = root / folder / skill / CONFIG_FILE if folder else None
+    return path if path is not None and path.is_file() else None
+
+
+def config_parameters(path: Path) -> tuple[dict | None, str | None]:
+    """(parameters, error) of a settings file. A file without the parameters key is a data file: no parameters, no error."""
+    try:
+        data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    except yaml.YAMLError as error:
+        return None, f"the file does not parse: {getattr(error, 'problem', error)}"
+    if not isinstance(data, dict) or CONFIG_KEY not in data:
+        return None, None
+    if not isinstance(data[CONFIG_KEY], dict):
+        return None, f'"{CONFIG_KEY}" must be a mapping'
+    return data[CONFIG_KEY], None
+
+
 def global_value(data: dict, key: str):
     entry = data.get(GLOBAL)
     if isinstance(entry, dict) and key in entry:
@@ -197,6 +231,10 @@ def skill_parameter(roots: list[Path], skill: str, key: str, skill_file: Path | 
     """
     for root in dict.fromkeys(roots):
         data = instructions_block(root)
+        file = config_path(root, skill)
+        from_file, _ = config_parameters(file) if file is not None else (None, None)
+        if from_file is not None and key in from_file:
+            return from_file[key]
         entry = data.get(skill)
         if isinstance(entry, dict) and key in entry:
             return entry[key]
@@ -308,4 +346,39 @@ def validate(text: str, skills: dict[str, set[str]], required: bool) -> list[tup
                         errors.append((problem, key_line(text, str(inner))))
         else:
             check_global(key, value)
+    return errors
+
+
+def config_errors(root: Path, skills: dict[str, set[str]]) -> list[tuple[str, int | None]]:
+    """Problems of the settings files of a project, each message starting with the file.
+
+    A skill has one source: its settings file or its entry in metadata.parameters, not both (ADR 0020).
+    """
+    folder = config_folder(root)
+    if folder is None or not (root / folder).is_dir():
+        return []
+    instructions = instructions_block(root)
+    errors: list[tuple[str, int | None]] = []
+    for path in sorted((root / folder).glob(f"*/{CONFIG_FILE}")):
+        skill = path.parent.name
+        label = f"{folder}/{skill}/{CONFIG_FILE}"
+        values, problem = config_parameters(path)
+        if problem is not None:
+            errors.append((f"{label}: {problem}", None))
+            continue
+        if values is None:
+            continue
+        if skill not in skills:
+            errors.append((f'{label}: "{skill}" is not a skill here, in the core, or in a plugin', None))
+            continue
+        entry = instructions.get(skill)
+        if isinstance(entry, dict) and entry:
+            errors.append((f'{label}: "{skill}" has parameters here and in {INSTRUCTIONS}; keep one source', None))
+        for key, value in values.items():
+            if str(key) not in skills[skill]:
+                errors.append((f'{label}: "{key}" is not a parameter of {skill}', None))
+            elif str(key) in SCRIPT_SETTINGS:
+                message = setting_type_error(str(key), value)
+                if message:
+                    errors.append((f"{label}: {message}", None))
     return errors
