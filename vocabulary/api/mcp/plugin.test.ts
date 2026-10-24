@@ -1,6 +1,6 @@
 import assert from "node:assert/strict"
-import { execFileSync, spawn } from "node:child_process"
-import { cpSync, existsSync, mkdtempSync, readFileSync, statSync } from "node:fs"
+import { execFileSync, spawn, spawnSync } from "node:child_process"
+import { chmodSync, cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, statSync, writeFileSync } from "node:fs"
 import { tmpdir } from "node:os"
 import { join } from "node:path"
 import test from "node:test"
@@ -65,3 +65,48 @@ test("the launcher starts the server from a clean copy of the plugin", { timeout
     child.kill()
   }
 })
+
+// Runs the launcher with a stand-in `node` that reports the given version, so no other Node.js needs to be installed.
+// The copy already has node_modules/zod, so a version that passes the check reaches the final `exec node`, which prints "started".
+function launchWithNodeVersion(version: string) {
+  const dir = mkdtempSync(join(tmpdir(), "harness-launcher-"))
+  mkdirSync(join(dir, "vocabulary/api/mcp"), { recursive: true })
+  mkdirSync(join(dir, "node_modules/zod"), { recursive: true })
+  writeFileSync(join(dir, "node_modules/zod/package.json"), "{}\n")
+  cpSync(join(ROOT, "vocabulary/api/mcp/launch.sh"), join(dir, "vocabulary/api/mcp/launch.sh"))
+  mkdirSync(join(dir, "bin"))
+  const stub = [
+    "#!/bin/sh",
+    'case "$1 $2" in',
+    `  "-p process.versions.node") echo ${version} ;;`,
+    '  "-p Boolean(process.features.typescript)") echo true ;;',
+    "  *) echo started ;;",
+    "esac",
+    "",
+  ].join("\n")
+  writeFileSync(join(dir, "bin/node"), stub)
+  chmodSync(join(dir, "bin/node"), 0o755)
+  return spawnSync("sh", [join(dir, "vocabulary/api/mcp/launch.sh")], {
+    encoding: "utf8",
+    env: { ...process.env, PATH: `${join(dir, "bin")}:/usr/bin:/bin` },
+  })
+}
+
+for (const version of ["24.22.0", "24.9.9", "23.0.0", "22.18.0"]) {
+  test(`the launcher refuses Node.js ${version}, below 24.22.1, and names both versions`, () => {
+    const result = launchWithNodeVersion(version)
+    assert.notEqual(result.status, 0)
+    assert.equal(result.stdout, "", "stdout belongs to the MCP protocol")
+    assert.match(result.stderr, new RegExp(`Node\\.js ${version.replaceAll(".", "\\.")} is on PATH`))
+    assert.match(result.stderr, /24\.22\.1 or newer is required/)
+    assert.match(result.stderr, /vocabulary\/docs\/runbooks\/mcp-hosts\.md/)
+  })
+}
+
+for (const version of ["24.22.1", "24.22.2", "24.23.0", "25.0.0", "100.0.0"]) {
+  test(`the launcher accepts Node.js ${version}, from 24.22.1 on, and starts the server`, () => {
+    const result = launchWithNodeVersion(version)
+    assert.equal(result.status, 0, result.stderr)
+    assert.equal(result.stdout.trim(), "started")
+  })
+}
