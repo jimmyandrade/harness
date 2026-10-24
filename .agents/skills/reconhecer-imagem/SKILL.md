@@ -4,7 +4,7 @@ description: Use essa habilidade sempre que for ler texto de imagem, ou receber 
 compatibility: Precisa de Python.
 metadata:
   author: jimmyandrade
-  version: "0.13.0"
+  version: "0.13.1"
   related:
     - criar-oportunidade
     - definir-grafia
@@ -56,7 +56,7 @@ flowchart LR
   C -->|não| E{Nome da edição e data do evento?}
   E -->|sim| F[procurar-oportunidade]
   F --> J{A edição existe?}
-  J -->|sim| K[Mostre a página, ofereça anexar o original e pare]
+  J -->|sim| K[Mostre a página e entregue o original a criar-oportunidade]
   J -->|não| L[criar-oportunidade]
   E -->|não| H{Pessoa ou perfil social?}
   H -->|sim| I[definir-grafia]
@@ -88,7 +88,7 @@ Chame a busca sem perguntar. Se ela não achar a edição, siga `criar-oportunid
 
 ### Imagem enviada adiante
 
-Se você mandar a imagem ao workspace conectado, a leitura gasta o crédito de lá.
+Se você mandar a imagem ao workspace conectado para ler, a leitura gasta o crédito de lá.
 
 1. Não procure o script no disco. Com o repositório, rode o script. Não leia o arquivo.
 2. Sem o script, leia a imagem.
@@ -114,7 +114,7 @@ Se você parar porque o texto da imagem já veio escrito, ou perguntar o que faz
 
 Se você cadastrar a oportunidade sem a busca, ou parar no texto quando ele já tem nome da edição e data, a pessoa ou ganha uma duplicata ou fica sem a busca e sem o cadastro.
 
-1. Esse texto entra em `procurar-oportunidade`, sem perguntar. Se a edição não existe, siga `criar-oportunidade`. Se existe, mostre a página, ofereça anexar o original e pare.
+1. Esse texto entra em `procurar-oportunidade`, sem perguntar. Se a edição não existe, siga `criar-oportunidade`. Se existe, mostre a página e entregue o original a `criar-oportunidade`, que decide o anexo.
 2. Pedido de evento realizado ou confirmado segue `definir-inscricao` depois da edição. Não grave a inscrição aqui.
 3. Não trate uma nota ou transação de compra como inscrição em evento. O fluxo tem uma destinatária financeira.
 
@@ -156,7 +156,7 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### a imagem do post de uma feira do setor, com participação gratuita para lojistas.
 
-o texto saiu do script de reconhecimento: 29 e 30 de setembro de 2026, 09h às 19h, o local e o endereço do evento, o CNPJ e o CNAE exigidos, e o credenciamento no link da bio ou no local. Saíram a hora da tela, "Há 18 horas" e "Patrocinado". A imagem não seguiu. O texto entrou em `procurar-oportunidade`. Nenhuma oportunidade foi cadastrada. Não pedi para nomear a habilidade.
+o texto saiu do script de reconhecimento: 29 e 30 de setembro de 2026, 09h às 19h, o local e o endereço do evento, o CNPJ e o CNAE exigidos, e o credenciamento no link da bio ou no local. Saíram a hora da tela, "Há 18 horas" e "Patrocinado". A imagem não foi para outra leitura. O texto entrou em `procurar-oportunidade`. Nenhuma oportunidade foi cadastrada. Não pedi para nomear a habilidade.
 
 ### eu enviei a imagem anexa, com o post de uma oficina num museu, e procurar-oportunidade não veio na lista.
 
@@ -182,7 +182,7 @@ Li os dados e entreguei o texto a `lancar-despesa-da-empresa`, que busca o gasto
 - O script não está neste ambiente: leia a imagem. Não rode o leitor do sistema para conferir. Não instale.
 - O script está neste ambiente: rode o script. Não leia o arquivo.
 - O script falhou: leia a imagem. Não rode de novo, não instale e não conserte o script.
-- A pessoa não nomeou a habilidade seguinte e o texto tem nome da edição e data: o texto entra em `procurar-oportunidade`. Se a edição não existe, siga `criar-oportunidade`. Se existe, mostre a página e não crie outra.
+- A pessoa não nomeou a habilidade seguinte e o texto tem nome da edição e data: o texto entra em `procurar-oportunidade`. Se a edição não existe, siga `criar-oportunidade`. Se existe, mostre a página, não crie outra e entregue o original a `criar-oportunidade`.
 - A leitura é um pedido de evento realizado ou confirmado: depois da edição, siga `definir-inscricao`. Não confunda com compra em nota ou transação.
 - A leitura é uma pessoa ou um perfil social: siga `definir-grafia`. Não pare no texto.
 - Não há destinatária no fluxo e a pessoa não nomeou a seguinte: entregue o texto e pare.
