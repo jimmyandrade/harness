@@ -19,7 +19,7 @@ Cursor reads `.cursor/mcp.json`. Claude Code reads `.mcp.json` at the project ro
 
 The plugin declares a server named `vocabulary`. Claude Code shows it as `plugin:core:vocabulary` and starts it when the plugin is enabled, in every project. It runs `vocabulary/api/mcp/launch.sh`, which:
 
-1. Stops with a message on stderr when `node` is missing or does not strip TypeScript types by default, which Node.js 22.18 or newer does. The plugin ships `api/` as TypeScript, with no `dist/`, and Node.js strips types outside `node_modules`, where the plugin does not live.
+1. Stops with a message on stderr when `node` is missing, when its version is older than 24.22.1, or when it does not strip TypeScript types by default. The message names the version found and the version required. The plugin ships `api/` as TypeScript, with no `dist/`, and Node.js strips types outside `node_modules`, where the plugin does not live. The launcher cannot choose a Node.js: it runs the first `node` on the `PATH` of the app that started it, as `docs/adr/0020-require-node-24-22-1-for-the-vocabulary-server.md` decides.
 2. Runs `npm ci --omit=dev --ignore-scripts` inside the plugin folder when `node_modules/zod` is missing. That happens once per plugin version, on the first start, and needs npm and the registry. `prepare` is skipped because it compiles with the development dependencies.
 3. Runs `node vocabulary/api/mcp/index.ts`.
 
@@ -29,7 +29,16 @@ The glossary is `.agents/glossary/` of the project that is open: the plugin pass
 { "env": { "HARNESS_GLOSSARY_DIR": "/path/to/glossary" } }
 ```
 
-When the server cannot start, the `core` skills still load. The cause can be a Node.js older than 22.18, no npm, or no network on the first start. Claude Code lists `plugin:core:vocabulary` as failed in `/mcp`, and the launcher says why on stderr. Use steps 2 to 7, which do not depend on the plugin.
+When the server cannot start, the `core` skills still load. The cause can be a Node.js older than 24.22.1 on the `PATH`, no npm, or no network on the first start. Claude Code lists `plugin:core:vocabulary` as failed in `/mcp`, and the launcher says why on stderr. Use steps 2 to 7, which do not depend on the plugin.
+
+To make a Node.js 24.22.1 or newer the one the plugin finds, make it the default of your version manager and start the app again, because an app keeps the `PATH` it was opened with. With `nvm`:
+
+```sh
+nvm install 24.22.1
+nvm alias default 24.22.1
+```
+
+Quit and reopen the app, then check that `/mcp` lists `plugin:core:vocabulary` as connected. A shell that already ran `nvm use` for another version does not change the `PATH` of an app that is already open.
 
 Do not run two servers named `vocabulary`. A server you configured by hand, in `.mcp.json`, in `~/.claude.json`, or with `claude mcp add`, is a second server next to `plugin:core:vocabulary`, with its own tool names, so the agent sees every tool twice. Pick one:
 
