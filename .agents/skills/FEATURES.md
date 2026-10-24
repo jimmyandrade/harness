@@ -38,6 +38,7 @@ How these skills relate is in `README.md`, in this folder.
   - Replies on each thread before resolving it, closes the loop with a last message from the person acting, and leaves open a thread that waits for a decision
   - Asks the reviewer who requested changes for a new review once everything is applied or answered
   - In a scheduled run, applies only the structural changes and leaves the rest in the summary
+  - Cites the commit in each reply that says what changed, by its short SHA as a link to the commit
   - Ends with a tally of accepted, declined, outdated, and open comments by author, and hands back to the caller. The merge, and whether failing checks block it, stay with criar-pull-request
 - **Test Criteria**:
   - [ ] A comment that still applies is fixed, answered, and resolved
@@ -86,6 +87,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Properties**:
   - Skill at `.agents/skills/criar-commit/`
   - Reads the base branch, whether to commit without asking, the message language and pattern, and the test, build, and lint commands from the project instructions
+  - Follows the message and branch convention in the `CONTRIBUTING.md` and `AGENTS.md` of the repository, which beats the personal preference
   - Names a new branch `type/short-description` after the Conventional Commits type, and renames a branch a tool created with another prefix, such as `claude/`
   - Picks the channel by what the environment has: a terminal uses git, the GitHub integration alone creates the branch and the commit through it, and neither stops and says so. Without a terminal, the CI checks of the pull request do the verifying
   - `Commit direto na base` is `nunca`, the default, `só no terminal`, or `sempre`. Only `sempre` commits on the base without a terminal
@@ -162,6 +164,8 @@ How these skills relate is in `README.md`, in this folder.
   - Before creating the branch, checks that the demand has a task in the tracker of the project, and suggests creating it first when it has none. The task key goes in the branch name and the pull request title as the repository convention says
   - Skill at `.agents/skills/criar-pull-request/`
   - Reads the repository, base branch, merge method, PR language, test and build commands, and push timing from the project instructions
+  - Follows the `CONTRIBUTING.md` and `AGENTS.md` of the repository for branch, title, description, and checks, ahead of the personal preference
+  - Searches the new and changed files and the pull request text for each term of `Termos que não podem aparecer` before opening, and sends a hit back for a fix
   - Opens a pull request only from a `type/short-description` branch, and renames a branch a tool created with another prefix before the push. A rename after the pull request opens closes it, so a new pull request replaces it
   - Follows the pull request template of the repository when there is one
   - Before a merge, hands pending review comments from people or bots to whoever handles the review, in a terminal, and holds the merge while a thread waits for the person

@@ -3,7 +3,7 @@ name: criar-commit
 description: Use essa habilidade sempre que terminar um trabalho que mudou o repositório ou for commitar, separar commits ou escrever a mensagem, mesmo sem dizer commit. NÃO use para push, abrir PR, rebase nem merge (use criar-pull-request).
 metadata:
   author: jimmyandrade
-  version: "0.10.0"
+  version: "0.11.0"
 ---
 
 # Criar commit
@@ -62,7 +62,7 @@ Adicione ao índice cada arquivo pelo caminho. Confira o que entrou antes de com
 
 ### Passo 6
 
-Mensagem em `Idioma da mensagem de commit`, no `Padrão da mensagem de commit`. O assunto diz por que a mudança existe. Corpo só quando precisa de contexto. Renomear ou quebrar compatibilidade leva `!` no tipo e rodapé `BREAKING CHANGE:`. Com `Atribuição da sessão` em `sim`, termine com o trailer de coautoria da sessão. Com `não`, nunca ponha trailer de ferramenta ou de modelo, mesmo que o ambiente peça.
+Leia o `CONTRIBUTING.md` e o `AGENTS.md` do repositório: a convenção documentada de mensagem e de branch vale mais que o `Padrão da mensagem de commit` e que a preferência pessoal. Mensagem em `Idioma da mensagem de commit`, no `Padrão da mensagem de commit`. O assunto diz por que a mudança existe. Corpo só quando precisa de contexto. Renomear ou quebrar compatibilidade leva `!` no tipo e rodapé `BREAKING CHANGE:`. Com `Atribuição da sessão` em `sim`, termine com o trailer de coautoria da sessão. Com `não`, nunca ponha trailer de ferramenta ou de modelo, mesmo que o ambiente peça.
 
 ### Passo 7
 

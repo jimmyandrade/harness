@@ -3,7 +3,7 @@ name: atender-revisao-de-pull-request
 description: Atende a revisão recebida num pull request, de pessoa ou de bot. Lê os comentários abertos, classifica cada sugestão, aplica o que é seguro, responde cada thread e resolve as atendidas. Sem PR informado, lista os seus que precisam de atenção. Não serve para revisar o PR de outra pessoa nem para abrir o PR.
 metadata:
   author: jimmyandrade
-  version: "0.7.0"
+  version: "0.8.0"
   notion: "false"
   aliases:
     - resolver-comentarios-de-revisao
@@ -85,7 +85,7 @@ Se a decisão vale além deste PR, grave a lição nas instruções do projeto e
 
 ### Passo 6
 
-Responda cada thread em `Idioma da resposta à revisão`: o que mudou, com o commit, ou por que não muda. Toda thread tratada fica com uma resposta registrada, inclusive a de bot e a decidida fora do PR. Comentário desatualizado ganha a explicação do que mudou desde então. Discordância e fora de escopo viram pergunta, nunca veredito. A resposta a uma pessoa trata do ponto que ela escreveu: retoma a ideia dela e diz o que mudou, e nunca é uma fórmula colada. Com `Rótulo de prioridade no texto` em `não`, o nome da categoria nunca aparece.
+Responda cada thread em `Idioma da resposta à revisão`: o que mudou, com o commit citado pelo SHA curto e linkado para o commit (por exemplo, `[`abc1234`](URL do commit)`), ou por que não muda. Toda thread tratada fica com uma resposta registrada, inclusive a de bot e a decidida fora do PR. Comentário desatualizado ganha a explicação do que mudou desde então. Discordância e fora de escopo viram pergunta, nunca veredito. A resposta a uma pessoa trata do ponto que ela escreveu: retoma a ideia dela e diz o que mudou, e nunca é uma fórmula colada. Com `Rótulo de prioridade no texto` em `não`, o nome da categoria nunca aparece.
 
 Com `Ler o texto antes de publicar` em `sim`, mostre as respostas a pessoas e espere o sim da pessoa. A resposta a um bot não precisa de leitura.
 
