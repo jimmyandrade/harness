@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.90.0](https://github.com/jimmyandrade/harness/compare/v0.89.3...v0.90.0) (2026-10-24)
+
+
+### Features
+
+* **criar-oportunidade:** store linked program sessions without choosing attendance ([#405](https://github.com/jimmyandrade/harness/issues/405)) ([332ad3b](https://github.com/jimmyandrade/harness/commit/332ad3b6f7908ad674b632bfd3d7c88a366b2334))
+
+
+### Bug Fixes
+
+* **procurar-oportunidade:** recover known data source reads before reporting a blocker ([#404](https://github.com/jimmyandrade/harness/issues/404)) ([b983217](https://github.com/jimmyandrade/harness/commit/b98321702628baf86e8ca53abfbde4871a5194d4))
+
 ## [0.89.3](https://github.com/jimmyandrade/harness/compare/v0.89.2...v0.89.3) (2026-10-24)
 
 
