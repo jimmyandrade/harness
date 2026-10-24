@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.95.0](https://github.com/jimmyandrade/harness/compare/v0.94.0...v0.95.0) (2026-10-24)
+
+
+### Features
+
+* **evoluir-habilidade:** accept a direct change and run tests on request ([#420](https://github.com/jimmyandrade/harness/issues/420)) ([8d3c584](https://github.com/jimmyandrade/harness/commit/8d3c584a490f591a8909dd046b0a65e02d7d18b8))
+
 ## [0.94.0](https://github.com/jimmyandrade/harness/compare/v0.93.1...v0.94.0) (2026-10-24)
 
 
