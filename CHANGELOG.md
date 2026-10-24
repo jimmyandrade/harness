@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.93.0](https://github.com/jimmyandrade/harness/compare/v0.92.0...v0.93.0) (2026-10-24)
+
+
+### ⚠ BREAKING CHANGES
+
+* the composite action moves from .github/actions/sync-skill-pages to .github/actions/sync-notion-pages. A business harness changes `uses:` in its workflow when it moves to this release.
+
+### Continuous Integration
+
+* rename the sync-skill-pages action to sync-notion-pages ([#414](https://github.com/jimmyandrade/harness/issues/414)) ([1015e4c](https://github.com/jimmyandrade/harness/commit/1015e4c82f6650ba95c2070e1e5eb063a09bf02e))
+
 ## [0.92.0](https://github.com/jimmyandrade/harness/compare/v0.91.0...v0.92.0) (2026-10-24)
 
 
