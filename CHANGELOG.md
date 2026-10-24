@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.96.0](https://github.com/jimmyandrade/harness/compare/v0.95.0...v0.96.0) (2026-10-24)
+
+
+### Features
+
+* **classificar-melhoria-tecnica:** decide if an item belongs in the technical improvements document ([#423](https://github.com/jimmyandrade/harness/issues/423)) ([0be1d70](https://github.com/jimmyandrade/harness/commit/0be1d7099ba5e3a26335ad0dd1eaf13595e4082c))
+* let a project keep skill parameters in a file ([#422](https://github.com/jimmyandrade/harness/issues/422)) ([dad1718](https://github.com/jimmyandrade/harness/commit/dad1718e194bd4b8c2899216f3de53a74b15d6b8))
+
 ## [0.95.0](https://github.com/jimmyandrade/harness/compare/v0.94.0...v0.95.0) (2026-10-24)
 
 
