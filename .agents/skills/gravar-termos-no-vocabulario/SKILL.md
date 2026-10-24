@@ -3,7 +3,7 @@ name: gravar-termos-no-vocabulario
 description: Use essa habilidade sempre que, ao cadastrar ou corrigir termos do vocabulário do tom de voz, for hora de pesquisar a grafia, testar com dry run e gravar o lote, mesmo sem dizer gravar. NÃO use para decidir o nível, validar os campos, perguntar quais variações foram cadastradas, escrever o texto da marca, nem inventar um termo.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
   related:
     - definir-vocabulario
     - procurar-variacao-de-termo
@@ -39,7 +39,7 @@ Para corrigir um termo que já está, leia a linha com `lookup` e guarde-a. Mand
 
 ### Passo 3
 
-Pesquise a grafia no vocabulário antes de gravar, com a consulta de Scripts disponíveis. Com terminal, rode o comando. Sem terminal, chame a ferramenta do servidor `vocabulary`. Sem os dois, como num agente do Notion, pare antes de pesquisar. Diga que o cadastro roda numa ferramenta de código com o projeto aberto. Não leia o vocabulário de memória. Outra caixa é o mesmo termo: a linha que já está recebe a orientação. Não cadastre uma segunda linha dessa grafia. Acento muda a palavra: roles e rolês, pais e país são termos diferentes, cada um com a própria linha. Uma forma igual, com os mesmos campos, volta sem alteração.
+Pesquise a grafia no vocabulário antes de gravar, com a consulta de Scripts disponíveis. Com mais de um termo, não consulte um por vez: rode o `dry_run` do lote em `insert`, que devolve em `unchanged` o que já está e em `inserted` o que é novo, e use `lookup` só para ler a linha de um termo que já está. `exists` confere palavra por palavra e não serve para uma expressão com mais de uma palavra. Com terminal, rode o comando. Sem terminal, chame a ferramenta do servidor `vocabulary`. Sem os dois, como num agente do Notion, pare antes de pesquisar. Diga que o cadastro roda numa ferramenta de código com o projeto aberto. Não leia o vocabulário de memória. Outra caixa é o mesmo termo: a linha que já está recebe a orientação. Não cadastre uma segunda linha dessa grafia. Acento muda a palavra: roles e rolês, pais e país são termos diferentes, cada um com a própria linha. Uma forma igual, com os mesmos campos, volta sem alteração.
 
 Plural, singular, feminino, masculino e outra palavra do mesmo assunto são linhas próprias. Cada uma tem o próprio estado. Casas e moradias convivem. Casa e casas convivem. Gato e gata convivem. Não junte essas linhas.
 
