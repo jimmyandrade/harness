@@ -2,7 +2,7 @@
   "private": true,
   "type": "module",
   "engines": {
-    "node": ">=24"
+    "node": ">=24.22.1"
   },
   "dependencies": {
     "@notionhq/client": "5.27.1",
@@ -13,7 +13,7 @@
     "typescript": "7.0.2"
   },
   "name": "harness",
-  "version": "0.89.2",
+  "version": "0.89.3",
   "scripts": {
     "build": "tsc -p vocabulary/tsconfig.build.json",
     "prepare": "npm run build",

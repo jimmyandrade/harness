@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.89.3](https://github.com/jimmyandrade/harness/compare/v0.89.2...v0.89.3) (2026-10-24)
+
+
+### Bug Fixes
+
+* **vocabulary:** require Node.js 24.22.1 to start the plugin server ([#403](https://github.com/jimmyandrade/harness/issues/403)) ([5cae12a](https://github.com/jimmyandrade/harness/commit/5cae12a8dfd1c65c6d8899f94d811a06341c57e5))
+
 ## [0.89.2](https://github.com/jimmyandrade/harness/compare/v0.89.1...v0.89.2) (2026-10-24)
 
 
