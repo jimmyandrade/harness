@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.10.3"
+  version: "0.10.4"
   aliases:
     - definir-despesa
     - lancar-despesa
@@ -55,7 +55,7 @@ flowchart LR
   A -->|tipo incerto| C[Confirme no mapeamento ou no contexto antes de chamar]
 ```
 
-Preserve as URLs retornadas. Não transforme o UUID de uma fonte em URL de banco ou página. Um modelo é uma página: seu `parent.url` identifica a fonte, não a URL do banco. Leia o esquema da fonte antes de consultar ou gravar suas propriedades.
+Preserve as URLs retornadas. Não transforme o UUID de uma fonte em URL de banco ou página. Um modelo é uma página: seu `parent.url` identifica a fonte, não a URL do banco. Leia o esquema da fonte antes de consultar ou gravar suas propriedades. Confira nele cada nome do mapeamento. Um nome que o esquema não mostra, como um título renomeado, não entra na consulta nem na gravação: ache a propriedade equivalente pelo tipo e pela descrição, como a única de tipo título, use o nome do esquema e avise a divergência para corrigir o mapeamento. Sem equivalente seguro, pergunte antes de gravar.
 
 Erro genérico de acesso descreve a chamada que falhou, não prova a causa nem a falta de acesso ao banco inteiro. Confira os argumentos e o tipo da entidade. Corrija a chamada somente com evidência de incompatibilidade; não repita a mesma chamada, não alterne carregadores por tentativa e não contorne uma negativa real. Uma leitura bem-sucedida da fonte ou do modelo é evidência de leitura desse recurso, não garantia de acesso a todos os registros nem de escrita. Com a fonte corretamente carregada, continue a busca de duplicata e o fluxo do gasto, sem pedir que a pessoa libere um acesso cuja ausência não foi demonstrada. Se a chamada correta continuar bloqueada, informe a operação e o erro retornado, diga que a causa específica não foi informada e não afirme que houve lançamento.
 
@@ -252,6 +252,7 @@ Busquei pelo recebedor, documento, valor e data. Registrei um lançamento com as
 - Nota fiscal e print de cartão podem ser o mesmo gasto. Dois arquivos não são duas despesas.
 - Uma tela pode dizer "Crédito" como modalidade do cartão, não como entrada de receita.
 - "Não invente categoria" parece proibir propor uma. Proibido é gravar sem aceite. Buscar, propor a existente e sugerir criar a que falta fazem parte do lançamento.
+- O mapeamento pode estar atrás da base. Um nome de propriedade que o esquema não mostra é divergência do mapeamento, não falta de acesso nem campo vazio.
 
 ## Scripts disponíveis
 
