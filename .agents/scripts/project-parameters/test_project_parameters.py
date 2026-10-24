@@ -182,5 +182,62 @@ class SettingTest(unittest.TestCase):
             self.assertFalse(parameters.is_harness(root))
 
 
+class ConfigFileTest(unittest.TestCase):
+    def project(self, instructions: str, files: dict[str, str]) -> Path:
+        root = Path(tempfile.mkdtemp())
+        (root / "AGENTS.md").write_text(instructions, encoding="utf-8")
+        for name, content in files.items():
+            path = root / name
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(content, encoding="utf-8")
+        return root
+
+    def instructions(self, extra: str = "") -> str:
+        return block('"Global":\n  "Pasta dos arquivos de configuração": "skills-data"\n' + extra)
+
+    def test_should_read_a_parameter_from_the_settings_file_of_the_skill(self) -> None:
+        root = self.project(self.instructions(), {"skills-data/criar-commit/config.yaml": 'parametros:\n  "Comando de testes": "make test"\n'})
+        self.assertEqual(parameters.skill_parameter([root], "criar-commit", "Comando de testes"), "make test")
+
+    def test_should_ignore_a_file_without_the_parameters_key(self) -> None:
+        root = self.project(self.instructions(), {"skills-data/criar-commit/config.yaml": "github_org: example\n"})
+        self.assertEqual(parameters.config_errors(root, SKILLS), [])
+        self.assertIsNone(parameters.skill_parameter([root], "criar-commit", "Comando de testes"))
+
+    def test_should_do_nothing_without_the_folder_setting(self) -> None:
+        root = self.project(block('"Global":\n  "Organização": "example"\n'), {"skills-data/criar-commit/config.yaml": 'parametros:\n  "Nada": 1\n'})
+        self.assertEqual(parameters.config_errors(root, SKILLS), [])
+
+    def test_should_reject_a_key_that_is_not_a_parameter_of_the_skill(self) -> None:
+        root = self.project(self.instructions(), {"skills-data/criar-commit/config.yaml": 'parametros:\n  "Tokens de corpo": 1\n'})
+        found = [message for message, _ in parameters.config_errors(root, SKILLS)]
+        self.assertEqual(found, ['skills-data/criar-commit/config.yaml: "Tokens de corpo" is not a parameter of criar-commit'])
+
+    def test_should_reject_a_settings_file_of_a_skill_that_does_not_exist(self) -> None:
+        root = self.project(self.instructions(), {"skills-data/inexistente/config.yaml": 'parametros:\n  "A": 1\n'})
+        found = [message for message, _ in parameters.config_errors(root, SKILLS)]
+        self.assertEqual(len(found), 1)
+        self.assertIn("is not a skill", found[0])
+
+    def test_should_reject_two_sources_for_the_same_skill(self) -> None:
+        root = self.project(
+            self.instructions('"criar-commit":\n  "Comando de testes": "npm test"\n'),
+            {"skills-data/criar-commit/config.yaml": 'parametros:\n  "Comando de testes": "make test"\n'},
+        )
+        found = [message for message, _ in parameters.config_errors(root, SKILLS)]
+        self.assertEqual(len(found), 1)
+        self.assertIn("keep one source", found[0])
+
+    def test_should_report_a_file_that_does_not_parse(self) -> None:
+        root = self.project(self.instructions(), {"skills-data/criar-commit/config.yaml": "parametros: [\n"})
+        found = [message for message, _ in parameters.config_errors(root, SKILLS)]
+        self.assertEqual(len(found), 1)
+        self.assertIn("does not parse", found[0])
+
+    def test_should_ignore_a_folder_setting_outside_the_project(self) -> None:
+        root = self.project(block('"Global":\n  "Pasta dos arquivos de configuração": "../fora"\n'), {})
+        self.assertIsNone(parameters.config_folder(root))
+
+
 if __name__ == "__main__":
     unittest.main()

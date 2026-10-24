@@ -1,6 +1,6 @@
 ---
 metadata:
-  version: "1.16.0"
+  version: "1.17.0"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -68,12 +68,14 @@ metadata:
 
 - Quando o `AGENTS.md` muda, suba o `metadata.version` dele como o de uma skill: patch para correção, minor para regra nova, major para mudança que quebra.
 - Toda configuração fica em `metadata.parameters` no frontmatter do `AGENTS.md`, como decide a ADR 0009. O frontmatter deste arquivo guarda os padrões. Um harness de negócio guarda só os valores que mudam, e um valor que falta usa o daqui. O verificador valida os parâmetros de todo projeto.
+- Um projeto que roda só numa ferramenta com sistema de arquivos e linha de comando, como o Claude Code ou o Cursor, pode guardar os parâmetros de uma skill em `<pasta>/<skill>/config.yaml`, na chave `parametros`, e dizer a pasta em `Pasta dos arquivos de configuração`, como decide a ADR 0020. O arquivo conta como instruções do projeto, e a skill não muda. Cada skill tem uma fonte só: com o arquivo, ela não tem entrada em `metadata.parameters`, e o verificador falha quando tem as duas. O agente do Notion não lê arquivo local: um projeto que usa o Notion guarda os parâmetros no `AGENTS.md`.
 - Um script acha o projeto pelo `HARNESS_ROOT` ou pela pasta de trabalho. Ele acha este repositório pela própria localização. Não faça um script ler um arquivo deste repositório quando o projeto tem o seu.
 - Todo documento Markdown declara o `locale` no frontmatter, menos: o `CHANGELOG.md`, que o Release Please escreve e reescreve a cada release; o `LICENSE.md`, que mantém o texto da licença sem mudança; o `CLAUDE.md`, que só importa o `AGENTS.md`; o `AGENTS.md`, deste repositório ou de um projeto, cujo idioma é o parâmetro `Idioma das instruções do projeto`; e cada `SKILL.md`, cujo frontmatter segue o formato de skill e cujo texto é em português.
 
 ## Skills
 
 - Salve toda skill como `.agents/skills/<nome>/SKILL.md`. O `name` é igual ao nome da pasta. O nome da pasta e o `name` do frontmatter são em ASCII e kebab-case. O título de nível 1 e o corpo são linguagem natural para pessoas e modelos, então mantêm ortografia e gramática corretas, com todos os acentos: `# Resolver comentários de revisão`. Uma skill que não deve ir para o Notion define `metadata.notion` como `"false"`. Uma skill ainda em construção define `metadata.internal` como `true`, sem aspas: a CLI `skills` esconde a skill do `npx skills add`, e a sincronização a deixa fora do Notion.
+- Quando a ferramenta tem acesso direto a um sistema de arquivos e a uma linha de comando, como o Claude Code ou o Cursor, crie a skill antes de mover os dados dela para o projeto. Os dados de uma skill ficam numa pasta com o nome da skill. Dado numa pasta que nenhuma skill lê não tem dono, e a regra dele se perde. Se a skill ainda não existe, crie primeiro e só então mova os dados.
 - O texto da skill não cita arquivo nem caminho, a não ser ao propor mover detalhes para `references/` quando a skill passaria do limite de linhas ou de tokens, ao apontar um modelo de entrada, e na seção final `Scripts disponíveis`, que diz o nome de cada script e como rodá-lo.
 - Uma skill cita um modelo de saída pelo nome, como decide a ADR 0016: ``Leia o modelo de saída `<nome>` quando for gerar a saída.`` Num repositório, o agente lê `.agents/assets/templates/<nome>.md` do projeto ou, se não houver, deste harness. Fora dele, abre a página com esse título no banco que `Banco de modelos no Notion` indica. A skill lista o modelo em `metadata.models`, um nome por linha, e o verificador confere essa lista como confere `metadata.related`.
 - Uma skill que vai para o Notion não cita uma skill com `metadata.notion` igual a `"false"`, porque o agente do Notion não consegue carregá-la. O `AGENTS.md` de um negócio também não cita, porque ele vai inteiro para o Notion: a regra que manda usar uma skill dessas fica no guia de contribuição do negócio. O verificador reprova os dois casos.
