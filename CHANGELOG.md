@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.94.0](https://github.com/jimmyandrade/harness/compare/v0.93.1...v0.94.0) (2026-10-24)
+
+
+### Features
+
+* keep the poster as an attachment and check rules before editing a skill ([#418](https://github.com/jimmyandrade/harness/issues/418)) ([58ae42c](https://github.com/jimmyandrade/harness/commit/58ae42c16354aa52a220d5d67263cc96d621ef54))
+
 ## [0.93.1](https://github.com/jimmyandrade/harness/compare/v0.93.0...v0.93.1) (2026-10-24)
 
 
