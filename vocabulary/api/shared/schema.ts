@@ -114,6 +114,18 @@ export type ClassifyTextRequest = z.infer<typeof classifyTextRequest>
 export const lookupRequest = classifyRequest.extend({ tags: tagListSchema.default([]) })
 export type LookupRequest = z.infer<typeof lookupRequest>
 
+export const LOOKUP_LIMIT = 100
+
+export const lookupTermsRequest = z.object({
+  language: prose("Unknown language."),
+  terms: z
+    .array(prose("Provide the term."), { error: "Provide the terms as a list." })
+    .min(1, { error: "Provide the terms." })
+    .max(LOOKUP_LIMIT, { error: `Provide at most ${LOOKUP_LIMIT} terms.` }),
+  tags: tagListSchema.default([]),
+})
+export type LookupTermsRequest = z.infer<typeof lookupTermsRequest>
+
 export const existsRequest = classifyTextRequest.extend({ tags: tagListSchema.default([]) })
 export type ExistsRequest = z.infer<typeof existsRequest>
 

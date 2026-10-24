@@ -200,7 +200,7 @@ test("the server answers initialize and write_terms on stdio", async () => {
     assert.equal(frames[0]?.result?.protocolVersion, "2024-11-05")
     assert.deepEqual(
       frames[1]?.result?.tools?.map((tool) => tool.name),
-      ["lookup_term", "exists_in_text", "write_terms", "migrate_glossary"],
+      ["lookup_term", "lookup_terms", "exists_in_text", "write_terms", "migrate_glossary"],
     )
     const payload = JSON.parse(frames[2]?.result?.content?.[0]?.text ?? "{}")
     assert.equal(payload.inserted.length, 1)
@@ -375,4 +375,24 @@ test("write_terms with dry_run reports the write and leaves the glossary unchang
   const tool = (respond(root, { jsonrpc: "2.0", id: 1, method: "tools/list" }) as { result: { tools: { name: string; description: string }[] } }).result.tools.find((item) => item.name === "write_terms")
   assert.match(tool?.description ?? "", /cannot be its own example/)
   assert.match(tool?.description ?? "", /no when and no tags/)
+})
+
+test("lookup_terms reads several terms in order and a term of several words as a whole", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  writeFileSync(
+    join(root, "pt-BR.json"),
+    `${JSON.stringify({ casa: { state: "allowed" }, "quem mais puder, ajuda bastante": { state: "allowed" } }, null, 2)}\n`,
+  )
+  const looked = callTool(root, {
+    name: "lookup_terms",
+    arguments: { language: "pt-BR", terms: ["Casa", "quem mais puder, ajuda bastante", "casas"] },
+  })
+  assert.equal(looked.isError, undefined)
+  const body = JSON.parse(looked.content[0]?.text ?? "") as { language: string; results: { exists: boolean; term?: string }[] }
+  assert.equal(body.language, "pt-BR")
+  assert.deepEqual(body.results.map((result) => result.exists), [true, true, false])
+  assert.equal(body.results[0]?.term, "casa")
+  const refused = callTool(root, { name: "lookup_terms", arguments: { language: "pt-BR", terms: [] } })
+  assert.equal(refused.isError, true)
+  assert.equal(refused.content[0]?.text, "Provide the terms.")
 })

@@ -49,10 +49,29 @@ export type TermLookup = {
 }
 
 export function lookupTerm(glossary: Glossary, language: string, submitted: string, tags: readonly string[] = []): TermLookup {
-  const query = collapse(submitted)
-  if (query === "") throw new InvalidGlossary("Provide the term.")
+  const { tag, entries: stored } = glossary.entries(language)
+  return lookupIn(tag, applicable(stored, tags), submitted, tags)
+}
+
+/**
+ * Read several terms or expressions in one pass, in the order submitted. Each
+ * result is what lookupTerm returns for that term, and a repeated term gets
+ * its own result. The glossary is read once.
+ */
+export function lookupTerms(
+  glossary: Glossary,
+  language: string,
+  submitted: readonly string[],
+  tags: readonly string[] = [],
+): { language: string; results: TermLookup[] } {
   const { tag, entries: stored } = glossary.entries(language)
   const entries = applicable(stored, tags)
+  return { language: tag, results: submitted.map((term) => lookupIn(tag, entries, term, tags)) }
+}
+
+function lookupIn(tag: string, entries: readonly Entry[], submitted: string, tags: readonly string[]): TermLookup {
+  const query = collapse(submitted)
+  if (query === "") throw new InvalidGlossary("Provide the term.")
   const found = findConcept(entries, query)
   if (found === undefined) return { language: tag, submitted: query, exists: false }
   return { language: tag, submitted: query, exists: true, ...rowOf(found, tags), ...casingOf(found, query) }

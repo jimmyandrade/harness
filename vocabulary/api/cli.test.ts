@@ -571,3 +571,27 @@ test("terms --dry-run false writes, and --dry-run takes true or false only", () 
   }
   assert.equal(errors.at(-1), "dry_run is true or false.")
 })
+
+test("lookup-terms repeats --term and reads each one, and --tags filters them all", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  writeFileSync(
+    join(root, "pt-BR.json"),
+    `${JSON.stringify({ casa: { state: "allowed" }, "meu povo": { state: "situationally_allowed", tags: ["maria-silva"] } }, null, 2)}\n`,
+  )
+  const lines: string[] = []
+  const log = console.log
+  console.log = (line: string) => {
+    lines.push(line)
+  }
+  try {
+    assert.equal(run(["--glossary", root, "lookup-terms", "--language", "pt-BR", "--term", "Casa", "--term", "meu povo", "--term", "casas"]), 0)
+    assert.equal(run(["--glossary", root, "lookup-terms", "--language", "pt-BR", "--term", "meu povo", "--tags", "palco"]), 0)
+    assert.equal(run(["--glossary", root, "lookup-terms", "--language", "pt-BR"]), 2)
+  } finally {
+    console.log = log
+  }
+  const all = JSON.parse(lines[0] ?? "") as { results: { submitted: string; exists: boolean }[] }
+  assert.deepEqual(all.results.map((result) => [result.submitted, result.exists]), [["Casa", true], ["meu povo", true], ["casas", false]])
+  const filtered = JSON.parse(lines[1] ?? "") as { results: { exists: boolean }[] }
+  assert.equal(filtered.results[0]?.exists, false)
+})

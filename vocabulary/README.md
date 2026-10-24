@@ -12,6 +12,8 @@ The language of a row is the language of the whole communication, not of the fil
 
 Each term has one of five levels, from `forbidden` through `strongly_discouraged`, `discouraged`, and `allowed_with_care` to `allowed`, as `docs/adr/0010-rate-terms-on-five-levels.md` decides. The older `situationally_allowed` still reads as `allowed_with_care` until the project migrates its glossary with `docs/runbooks/migrate-glossary.md`, which also covers importing a glossary from another tool in one batch.
 
+`lookup` reads one term, and `lookup-terms` reads up to 100 in one call, as `docs/adr/0014-read-several-terms-in-one-call.md` decides: each result is what `lookup` returns for that term, and a term of more than one word is read as a whole. `exists` checks word by word.
+
 A term is read in any casing. A name whose casing is part of the spelling, such as `iPhone`, keeps `case_sensitive: true` on its row: the write keeps that casing as the key, and `lookup` and `exists` say when the submitted casing does not match, as `docs/adr/0009-mark-case-sensitive-terms.md` decides.
 
 The engine lived in its own repository, jimmyandrade/vocabulary, from the former ADR 0010 until ADR 0018 brought it back here. That repository is archived, and its history is in the history of this one. The decisions are `docs/adr/0003-store-the-brand-glossary-as-json.md` and `docs/adr/0004-validate-the-api-with-zod.md`. The map of files is `ARCHITECTURE.md`. Setup for an agent host is `docs/runbooks/mcp-hosts.md`. The skill check uses the harness action pinned in `.github/workflows/skill-check.yml`.

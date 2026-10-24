@@ -1,7 +1,7 @@
 /**
  * MCP server for the vocabulary.
  *
- * lookup_term reads one term. exists_in_text maps each token to whether it
+ * lookup_term reads one term, and lookup_terms reads several in one call. exists_in_text maps each token to whether it
  * exists. write_terms inserts, updates, or upserts terms for one language.
  * migrate_glossary rewrites the rows that use a deprecated state or category.
  *
@@ -13,11 +13,11 @@ import { fileURLToPath } from "node:url"
 import type { Readable } from "node:stream"
 
 import { existsPhrase } from "../routes/exists/index.ts"
-import { lookupTerm } from "../routes/lookup/index.ts"
+import { lookupTerm, lookupTerms } from "../routes/lookup/index.ts"
 import { Glossary, migrate, writeBatch } from "../shared/glossary.ts"
 import { parseBody } from "../shared/http.ts"
 import { readOptions } from "../shared/options.ts"
-import { LEVELS, existsRequest, lookupRequest, migrateRequest } from "../shared/schema.ts"
+import { LEVELS, LOOKUP_LIMIT, existsRequest, lookupRequest, lookupTermsRequest, migrateRequest } from "../shared/schema.ts"
 
 const PROTOCOL = "2024-11-05"
 
@@ -44,6 +44,19 @@ const tools = [
         tags: tagsFilter,
       },
       required: ["language", "term"],
+    },
+  },
+  {
+    name: "lookup_terms",
+    description: `Read several vocabulary terms or expressions in one call, up to ${LOOKUP_LIMIT}, instead of one lookup_term call per term. A term of more than one word is read as a whole, unlike exists_in_text, which checks word by word. Returns language and results, one per submitted term and in that order, each exactly what lookup_term returns for it: whether it exists and the stored row. Use it to find out which terms of a plan are already stored, and read a row with its notes from the result instead of asking again.`,
+    inputSchema: {
+      type: "object",
+      properties: {
+        language: languageProperty,
+        terms: { type: "array", items: { type: "string" }, minItems: 1, maxItems: LOOKUP_LIMIT },
+        tags: tagsFilter,
+      },
+      required: ["language", "terms"],
     },
   },
   {
@@ -191,6 +204,10 @@ export function callTool(directory: string, params: unknown): ToolResult {
     if (record?.name === "lookup_term") {
       const body = parseBody(lookupRequest, record.arguments)
       return reply(lookupTerm(glossary, body.language, body.term, body.tags))
+    }
+    if (record?.name === "lookup_terms") {
+      const body = parseBody(lookupTermsRequest, record.arguments)
+      return reply(lookupTerms(glossary, body.language, body.terms, body.tags))
     }
     if (record?.name === "exists_in_text") {
       const body = parseBody(existsRequest, record.arguments)
