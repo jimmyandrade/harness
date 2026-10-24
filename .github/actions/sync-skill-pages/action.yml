@@ -38,7 +38,7 @@ runs:
     - name: Set up Node.js
       uses: actions/setup-node@v7
       with:
-        node-version: 24
+        node-version: 24.22.1
     - name: Install the sync dependencies
       shell: bash
       run: npm ci --omit=dev --ignore-scripts --no-audit --no-fund --prefix "$GITHUB_ACTION_PATH/../../.."
