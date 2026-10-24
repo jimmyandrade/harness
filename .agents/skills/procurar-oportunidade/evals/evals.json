@@ -1,4 +1,11 @@
 {
   "skill_name": "procurar-oportunidade",
-  "evals": []
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Mas você já deveria verificar se consegue consultar a lista ou o data source sem precisar confirmar comigo",
+      "expected_output": "Depois da falha ao carregar a base, usar a referência conhecida da fonte na mesma conexão, carregar seu esquema e fazer a consulta direta e a busca semântica sem nova confirmação. Explicar o alcance da falha sem pedir liberação de acesso indevidamente. A execução observada recuperou a leitura; a instrução revisada ainda precisa de reexecução isolada.",
+      "files": []
+    }
+  ]
 }

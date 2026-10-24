@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch
 compatibility: Precisa de internet. A busca semântica na lista de oportunidades usa notion-ai-search no servidor notion.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.6.1"
   related:
     - criar-oportunidade
     - definir-inscricao
@@ -28,6 +28,20 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 Peça o nome, ou use o texto que a pessoa já passou. O nome da edição e a data são o que se busca. A frase da legenda não é o nome. A lista de oportunidades e o nome de cada propriedade vêm do mapeamento de dados do projeto. Este texto usa os conceitos: o título da edição, as variações de nome e a data da edição. Se a pessoa não indicar outra lista, use a do mapeamento, no workspace conectado. Não peça a lista nesse caso. Se essa lista não estiver nessa conexão, pare. Não use a lista de outro workspace.
 
 ### Passo 2
+
+Carregue o esquema da fonte de dados antes da consulta direta e use os identificadores e as propriedades retornados. Não construa o endereço de uma base a partir do identificador de uma fonte de dados: eles não são intercambiáveis. Use a referência da fonte que o mapeamento ou uma resposta estruturada trouxe.
+
+```mermaid
+flowchart LR
+  A{Carregar a base falhou?} -->|não| B[Use a fonte retornada]
+  A -->|sim e fonte conhecida| C[Carregue a fonte diretamente]
+  C --> D{Leitura permitida?}
+  D -->|sim| E[Consulte e continue sem confirmação]
+  D -->|não| F[Informe a falha e o alcance do bloqueio]
+  A -->|sim e sem referência da fonte| F
+```
+
+Uma chamada negada não prova perda de acesso à lista inteira. Não peça mudança de permissões nem diga que a lista está inacessível antes de verificar a leitura permitida da fonte conhecida, na mesma conexão. Não troque de workspace, não eleve privilégios e não repita uma chamada negada sem informação nova. Busca parcial ou só semântica não prova ausência da edição.
 
 Nessa lista, busque o pedaço do nome no título da edição e nas variações de nome, por consulta direta e por busca semântica. Não exija o título inteiro. Não busque no workspace inteiro. Uma palavra igual não é a edição. Uma palavra comum no texto de outra página não é o nome.
 
