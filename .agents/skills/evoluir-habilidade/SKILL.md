@@ -1,9 +1,9 @@
 ---
 name: evoluir-habilidade
-description: Use essa habilidade sempre que for testar uma skill ou evoluir as instruções do projeto, mesmo sem dizer evoluir, inclusive o Gherkin e a comparação com e sem skill, resultado inconsistente, falha de chamada ou correção da pessoa. NÃO use para criar a primeira versão, só ver se a descrição dispara, só revisar sem executar, nem gravar a página no Notion.
+description: Use essa habilidade sempre que for testar uma skill, alterá-la a pedido ou evoluir as instruções do projeto, mesmo sem dizer evoluir, inclusive o Gherkin e a comparação com e sem skill, resultado inconsistente, falha de chamada ou correção da pessoa. NÃO use para criar a primeira versão, só ver se a descrição dispara, só revisar sem executar, nem gravar a página no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.20.0"
+  version: "0.21.0"
   related:
     - criar-commit
     - criar-pull-request
@@ -17,17 +17,28 @@ metadata:
 
 ## Parâmetros de configuração
 
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Executar testes` é `sob pedido` ou `sempre`.
+
 ```yaml
 "Tokens do corpo": 5000
 "Modo de aprendizado": "perguntar"
 "Pasta das habilidades": ".agents/skills"
+"Executar testes": "sob pedido"
 ```
 
 ## Instruções
 
 ### Passo 1
 
-Exija a skill, pelo nome ou pelo caminho, a tarefa, os arquivos ou links de entrada e as saídas. Se faltar algum, peça antes de avaliar. O repositório não é uma entrada: a skill fica em `Pasta das habilidades`, no repositório de origem. Um pedido para testar uma skill entra aqui, mesmo sem dizer evoluir. Um feedback sobre o comportamento do agente também entra aqui: o alvo são as instruções do projeto, tratadas como uma skill. Edite seguindo o formato de `definir-instrucoes-do-projeto` e suba `metadata.version`. Elas não têm `evals/` nem `features/`.
+```mermaid
+flowchart LR
+  Q{O pedido é?} -->|testar| T[Exija a tarefa, as entradas e as saídas]
+  Q -->|mudar uma regra| M[Edite já e proponha um caso real]
+  T --> P[Passo 2]
+```
+
+Exija a skill, pelo nome ou pelo caminho. O repositório não é uma entrada: a skill fica em `Pasta das habilidades`, no repositório de origem. Para testar, exija também a tarefa, os arquivos ou links de entrada e as saídas, e peça o que faltar antes de avaliar. Um pedido para testar uma skill entra aqui, mesmo sem dizer evoluir.
+Um pedido para acrescentar, tirar ou trocar uma regra também entra aqui e só exige a skill e a mudança. Edite já, suba `metadata.version` e atualize o que a mudança deixa desatualizado. Depois, proponha um caso real. Sem execução, a mudança não conta como validada. Um feedback sobre o comportamento do agente também entra aqui: o alvo são as instruções do projeto, tratadas como uma skill. Edite seguindo o formato de `definir-instrucoes-do-projeto` e suba `metadata.version`. Elas não têm `evals/` nem `features/`.
 
 ### Passo 2
 
@@ -49,6 +60,7 @@ Uma `Regra` agrupa os exemplos da mesma regra. O `Contexto` só repete um `Dado`
 
 ### Passo 3
 
+Com `Executar testes` em `sob pedido`, os Passos 3 e 4 só rodam quando a pessoa pede a execução. Sem o pedido, edite, grave o Gherkin e diga numa linha que o caso pode rodar depois. Com `sempre`, eles rodam a cada teste.
 Cada execução começa limpa, sem resto de execução anterior nem do desenvolvimento da skill. O agente segue só as instruções da skill.
 Com subagente, cada caso é uma tarefa filha. Sem subagente, use uma sessão separada.
 Para cada execução, entregue o caminho da skill, o prompt, os arquivos de entrada e o diretório de saída. Na execução sem skill, não entregue o caminho da skill.
@@ -202,15 +214,15 @@ Dado que há o nome "Planejamento do trimestre" e 5 descrições de tarefa. Quan
 
 - Não existe versão anterior: rode a versão atual e a execução sem skill.
 - Não há subagente: uma sessão separada para cada execução.
-- O pedido não traz nome nem caminho da skill: pare e peça nome ou caminho, tarefa, entradas e saídas.
+- O pedido não traz nome nem caminho da skill: pare e peça. Para testar, peça também tarefa, entradas e saídas.
 - A mesma lógica aparece numa execução só: não proponha script.
 - A pessoa recusa o script: a lógica fica na instrução.
 - O script já existe: chame o script em vez de reescrever a lógica.
 - O pedido é testar a skill: entra aqui. O teste edita a skill validada na mesma conversa.
 - O pedido é saber se um prompt dispara a skill: use `descrever-habilidade-ou-schema`.
 - O pedido é só revisar, sem executar: use `revisar-habilidade`.
-- O critério já foi enviado e ainda não rodou: grave em BDD e deixe sem validar até a execução.
-- O pedido muda um passo, o formato do texto ou o diff: edite a skill. Não grave Gherkin disso.
+- O critério já foi enviado e ainda não rodou: grave em BDD e deixe sem validar até a execução. Com `Executar testes` em `sob pedido`, a execução espera o pedido da pessoa.
+- O pedido muda uma regra, um passo, o formato do texto ou o diff: edite já, suba a versão e proponha um caso real. Não grave Gherkin de passo, formato ou diff.
 - A comparação não tem o número no registro: diga que falta.
 - O pedido chega por uma cópia sincronizada, como a página no Notion: não edite a cópia. A escrita segue `criar-commit` e `criar-pull-request`.
 - A cópia sincronizada não tem o repositório nem conexão que escreva nele: não peça o repositório. Entregue a mudança pronta, por skill e passo, para a sessão com o repositório.
@@ -220,6 +232,8 @@ Dado que há o nome "Planejamento do trimestre" e 5 descrições de tarefa. Quan
 
 - A skill parece pronta na primeira versão. Ela é um documento vivo. A iteração parte do feedback.
 - "Testar" parece só conferir a saída. O teste edita a skill validada nessa conversa.
+- Uma mudança pedida parece exigir execução antes. Ela entra direto. A validação vem depois, com um caso real.
+- Um critério novo parece pedir a rodada de execuções. Com `Executar testes` em `sob pedido`, ela espera o pedido da pessoa, porque cada rodada gasta muitos tokens.
 - Não invente caso. Critério de aceite que a pessoa enviou entra em BDD. Ele só conta como validado depois da execução com você.
 - Um passo, o formato do texto ou o diff parecem funcionalidade. O Gherkin testa o que a pessoa usa. Não crie um arquivo por passo.
 - `# language: pt-br` parece o código do português. O Gherkin usa `pt` para essas palavras.
