@@ -3,7 +3,7 @@ name: definir-vocabulario
 description: Use essa habilidade sempre que for cadastrar ou atualizar um ou mais termos do vocabulário do tom de voz, mesmo sem dizer glossário, lote ou estado. NÃO use para escrever, revisar ou aprovar o texto da marca, classificar uma frase, perguntar quais variações de gênero, número ou grafia foram cadastradas, nem inventar um termo que a pessoa não enviou.
 metadata:
   author: jimmyandrade
-  version: "0.29.0"
+  version: "0.30.0"
   related:
     - evoluir-habilidade
     - procurar-variacao-de-termo
@@ -25,7 +25,9 @@ metadata:
 
 ### Passo 1
 
-A pessoa responsável pelo tom de voz quer cadastrar ou atualizar termos. Perguntar se um termo ou uma variação faltou segue `procurar-variacao-de-termo`. Monte o plano com idioma, modo e a lista. Cada item tem `state`, `term`, `categories` e os campos desse nível. Sem idioma ou sem termo, pare e peça. Use só o que a pessoa enviou.
+A pessoa responsável pelo tom de voz quer cadastrar ou atualizar termos. Perguntar se um termo ou uma variação faltou segue `procurar-variacao-de-termo`. Monte o plano com idioma, modo e a lista. Cada item tem `state`, `term`, `categories` e os campos desse nível. Use só o que a pessoa enviou.
+
+O idioma de cada linha é o da comunicação inteira, não o do arquivo que já existe. Comunicação inteira em inglês, como um e-mail, uma review ou uma mensagem, grava o termo e a frase em `en`. Comunicação principalmente em português que só leva um termo em inglês no meio, como `header`, grava em `pt-BR`. Idioma ambíguo: pergunte. Sem idioma ou sem termo, pare e peça. Idioma sem arquivo responde `Unknown language`: antes da primeira consulta ou escrita, crie o arquivo com `d="${HARNESS_GLOSSARY_DIR:-${HARNESS_ROOT:-.}/.agents/glossary}"; mkdir -p "$d"; [ -e "$d/<idioma>.json" ] || echo '{}' > "$d/<idioma>.json"`, com o idioma em BCP 47, como `en`.
 
 ```mermaid
 flowchart LR
@@ -107,6 +109,14 @@ Se você gravar a categoria no idioma do vocabulário, a palavra do texto entra 
 1. Reescreva a categoria em inglês, em minúsculas.
 2. Mantenha o termo e a descrição no idioma do vocabulário.
 3. Valide de novo antes de gravar.
+
+### Idioma pelo arquivo à mão
+
+Se você gravar no arquivo que já existe sem olhar o idioma da comunicação inteira, a frase em inglês entra no vocabulário errado.
+
+1. Leia o texto inteiro: em inglês, `en`; em português com um termo em inglês, `pt-BR`.
+2. Texto ambíguo: pergunte.
+3. Sem o arquivo do idioma, crie-o com `{}` e grave.
 
 ### Lote pela metade
 
@@ -208,6 +218,14 @@ Se você completar descrição ou exemplo que a pessoa não deu, o vocabulário 
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
+### Cadastre `i'll refund the order` e `kind regards`, de um e-mail inteiro em inglês que pede um reembolso.
+
+A comunicação inteira era em inglês: as duas frases foram para `en`, não para `pt-BR`. O `en.json` não existia: criei `{}` e gravei.
+
+### Cadastre `header`, de uma mensagem em português.
+
+A mensagem era em português e só levava uma palavra em inglês. A linha ficou em `pt-BR`.
+
 ### Descarte "você perdeu".
 
 A frase entrou proibida. A descrição registrou a perda consumada. A alternativa manteve o desejo sem dizer que a chance acabou.
@@ -220,10 +238,6 @@ A categoria ficou cliche. A descrição pediu imagem, cena, ação, efeito ou si
 
 A descrição explicou a palavra. O reason disse por que a marca usa o termo. Não copiei um no outro.
 
-### A pessoa pediu um exemplo mais longo.
-
-O exemplo expandido ficou em examples.
-
 ### Cadastre o travessão como proibido no vocabulário de pt-BR, com a frase rejeitada e as alternativas.
 
 O plano ficou em insert. A categoria ficou punctuation. O termo, a descrição Travessão e as frases ficaram em português. A frase rejeitada nasceu proibida e as alternativas nasceram permitidas. Não inventei termo.
@@ -231,10 +245,6 @@ O plano ficou em insert. A categoria ficou punctuation. O termo, a descrição T
 ### Atualize a reticências que já está e ignore a que não está.
 
 O plano ficou em update. A reticências que já estava foi reescrita, com o quando usar. A que não estava voltou em skipped e não foi criada.
-
-### Cadastre de novo o ponto de exclamação com os mesmos campos.
-
-A busca achou o termo. Os campos eram os mesmos. Ele voltou sem alteração. Não criei outra linha.
 
 ### Permita o termo só no canal que a pessoa nomeou.
 
@@ -260,17 +270,10 @@ Casa ficou permitida. Casas ganhou a própria linha, proibida. Moradias ganhou a
 
 - Permitidos, proibidos e situacionais juntos: um lote e um modo.
 - O termo já está, só muda a caixa: a linha que já está é atualizada, ou fica sem alteração se os campos forem os mesmos.
-- A forma só muda o acento: é outro termo, com a própria linha e o próprio estado.
-- Plural, singular, feminino, masculino ou outra palavra do mesmo assunto: cada forma tem a própria linha e o próprio estado.
-- Termo novo e proibido, sem termos relacionados: pergunte antes de gravar. Eles entram em `alternatives`. Se a pessoa não quiser, a lista fica vazia.
 - A pessoa pergunta se um termo ou uma variação faltou: `procurar-variacao-de-termo`. `related` só aponta para termo que já está.
-- O termo já existe e a pessoa manda outro campo: é uma correção, como no Passo 3.
 - Falta uma fonte da marca que as instruções do projeto nomeiam: pare e peça. Não invente.
 - Sem terminal e sem o servidor `vocabulary`, como num agente do Notion: pare. O cadastro roda numa ferramenta de código com o projeto aberto. Não confirme nada.
-- O termo só cabe num contexto: nível do meio, com `when`. Não use `allowed` nem `forbidden`.
 - Lote vindo de outra ferramenta: um arquivo com `terms --file` e `upsert`. Diga o que entrou, o que foi atualizado e o que ficou em `incomplete`.
-- Termo proibido por clichê, genérico, automatizado ou gasto por IA, útil como intenção e não como palavra final: categoria `cliche`, descrição com a troca por imagem, cena, ação, efeito ou situação, frase a evitar em `rejected`, variação recorrente proibida e ligada ou só sugerida.
-- Frase descartada por perda consumada, cobrança agressiva, exclusão, capacitismo, ameaça real, culpa ou sensação incompatível com o tom: o motivo fica na `description` dessa frase proibida. A alternativa mantém desejo, urgência e conversa natural, sem dizer que a chance já passou.
 - O pedido é escrever a frase: `redigir-com-tom-de-voz`.
 - O pedido é saber se a frase pode: não é esta habilidade.
 
@@ -283,13 +286,12 @@ Casa ficou permitida. Casas ganhou a própria linha, proibida. Moradias ganhou a
 - A maiúscula do pedido parece a grafia a guardar. Termo novo fica em minúsculas. A linha que já existe conserva a grafia guardada.
 - Termo proibido parece exigir um substituto inventado. Sem a resposta da pessoa, `alternatives` fica vazio.
 - Uma variação ausente parece já ligada pela palavra vizinha. Ela não existe até ser cadastrada. `related` não a cria.
-- Roles e rolês parecem a mesma palavra com e sem acento. O acento muda a palavra, como o cedilha muda casa e caça. As duas linhas ficam. Só a caixa não cria outra linha. Acento, plural, gênero e outra palavra do mesmo assunto criam.
 - Duas linhas do mesmo termo parecem um convite a apagar a mais curta. A escrita não apaga. Sinalize e espere a escolha.
 - Um exemplo citado parece herdar a descrição do termo. Se ele não vem como item do lote, nasce só com o estado daquele vínculo.
 - O `when` parece bastar. Sem `tags`, o texto de outro contexto lê o termo. `maria` e `maria-silva` são dois contextos.
 - Uma palavra em inglês dentro do texto em português parece termo do vocabulário em inglês. Ela mora no vocabulário desse texto.
+- Um `pt-BR.json` à mão parece o lugar de tudo. O e-mail inteiro em inglês mora em `en`, com a frase inteira.
 - Gosto, estética isolada ou julgamento genérico parecem fechar o estado. Sem as fontes da marca que as instruções do projeto nomeiam, ele espera. A tensão entre intenção e viabilidade fica em `description` ou `when`.
-- Clichê parece pedir um sinônimo permitido. A troca é imagem, cena, ação, efeito ou situação. A frase literal fica em `rejected`.
 
 ## Scripts disponíveis
 
