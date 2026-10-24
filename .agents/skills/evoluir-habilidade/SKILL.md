@@ -3,7 +3,7 @@ name: evoluir-habilidade
 description: Use essa habilidade sempre que for testar uma skill ou evoluir as instruções do projeto, mesmo sem dizer evoluir, inclusive o Gherkin e a comparação com e sem skill, resultado inconsistente, falha de chamada ou correção da pessoa. NÃO use para criar a primeira versão, só ver se a descrição dispara, só revisar sem executar, nem gravar a página no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.18.0"
+  version: "0.20.0"
   related:
     - criar-commit
     - criar-pull-request
@@ -20,13 +20,14 @@ metadata:
 ```yaml
 "Tokens do corpo": 5000
 "Modo de aprendizado": "perguntar"
+"Pasta das habilidades": ".agents/skills"
 ```
 
 ## Instruções
 
 ### Passo 1
 
-Exija o nome ou o caminho da skill, a tarefa, os arquivos ou links de entrada e as saídas. Se faltar algum, peça antes de avaliar. Um pedido para testar uma skill entra aqui, mesmo sem dizer evoluir. Um feedback sobre o comportamento do agente também entra aqui: o alvo são as instruções do projeto, tratadas como uma skill. Edite seguindo o formato de `definir-instrucoes-do-projeto` e suba `metadata.version`. Elas não têm `evals/` nem `features/`.
+Exija a skill, pelo nome ou pelo caminho, a tarefa, os arquivos ou links de entrada e as saídas. Se faltar algum, peça antes de avaliar. O repositório não é uma entrada: a skill fica em `Pasta das habilidades`, no repositório de origem. Um pedido para testar uma skill entra aqui, mesmo sem dizer evoluir. Um feedback sobre o comportamento do agente também entra aqui: o alvo são as instruções do projeto, tratadas como uma skill. Edite seguindo o formato de `definir-instrucoes-do-projeto` e suba `metadata.version`. Elas não têm `evals/` nem `features/`.
 
 ### Passo 2
 
@@ -63,6 +64,7 @@ Dentro de cada uma: `outputs/`, `timing.json` e `grading.json`. O `benchmark.jso
 
 A skill é um documento vivo. A iteração parte do feedback.
 Resultado inconsistente, falha de chamada e correção da pessoa: melhore a instrução e acrescente o tratamento do erro.
+Antes de editar, leia a skill inteira, as `related` e os parâmetros. A frase nova não contradiz nenhuma: quando a regra muda, reescreva a frase que já existe e cada repetição dela em `Problemas comuns`, `Exemplos de entrada e saída`, `Casos-limite` e `Pegadinhas`. Não acrescente exceção noutro lugar. Valor que muda de um projeto para outro, como pasta, caminho ou nome de banco, vira parâmetro; o passo cita a chave.
 Subdisparo e sobredisparo vão para `descrever-habilidade-ou-schema`.
 O teste sempre edita a skill validada, nesta mesma conversa. Sem essa edição, o teste não vale.
 Incorpore todos os resultados, não só as falhas. A edição vem do que a execução mostrou.
@@ -87,6 +89,22 @@ Se você vir resultado inconsistente, falha de chamada ou correção da pessoa, 
 1. Melhore a instrução.
 2. Acrescente o tratamento do erro.
 3. Subdisparo e sobredisparo vão para `descrever-habilidade-ou-schema`.
+
+### Repositório pedido à pessoa
+
+Se você pedir o repositório numa cópia sincronizada, como o Notion, a pessoa responde o que a skill já diz e a mudança não sai.
+
+1. Confira as conexões e a pasta de trabalho antes de dizer que falta acesso. Uma chamada que falhou não prova falta de acesso.
+2. Sem o repositório nem uma conexão que escreva nele, entregue a mudança pronta: a skill, o passo e o texto novo.
+3. Diga que a gravação acontece numa sessão com o repositório, no Claude, no Cursor ou em outro harness, e que essa sessão segue `criar-commit` e `criar-pull-request`.
+
+### Regra contraditória
+
+Se você acrescentar uma frase sem ler o resto da skill, ela pode mandar o oposto de outra, e o agente escolhe uma das duas.
+
+1. Leia a skill inteira, as `related` e os parâmetros antes de editar.
+2. Reescreva a frase que já existe e cada repetição dela. Não acrescente exceção noutro lugar.
+3. Valor que muda de um projeto para outro vira parâmetro. O passo cita a chave.
 
 ### Feedback sem edição
 
@@ -195,6 +213,7 @@ Dado que há o nome "Planejamento do trimestre" e 5 descrições de tarefa. Quan
 - O pedido muda um passo, o formato do texto ou o diff: edite a skill. Não grave Gherkin disso.
 - A comparação não tem o número no registro: diga que falta.
 - O pedido chega por uma cópia sincronizada, como a página no Notion: não edite a cópia. A escrita segue `criar-commit` e `criar-pull-request`.
+- A cópia sincronizada não tem o repositório nem conexão que escreva nele: não peça o repositório. Entregue a mudança pronta, por skill e passo, para a sessão com o repositório.
 - O pedido é só o tamanho ou o tempo: use `medir-habilidade`. Não edite a skill.
 
 ## Pegadinhas
@@ -208,6 +227,7 @@ Dado que há o nome "Planejamento do trimestre" e 5 descrições de tarefa. Quan
 - Consulta de disparo não mede a qualidade da saída. Disparo fica em `descrever-habilidade-ou-schema`.
 - A mesma lógica reescrita em cada caso vira script, com o aceite da pessoa. Script de várias skills fica em `.agents/scripts/<nome>/`.
 - Pedido feito na cópia sincronizada parece permissão para gravá-la. A cópia é só leitura. Siga `criar-commit`.
+- Pedir o repositório parece o passo que falta. A skill fica em `Pasta das habilidades`, no repositório de origem. Sem acesso, a mudança pronta é a entrega.
 
 ## Scripts disponíveis
 

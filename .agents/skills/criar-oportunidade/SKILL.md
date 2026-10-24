@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.17.0"
+  version: "0.18.1"
   related:
     - procurar-oportunidade
     - definir-grupo-de-oportunidades
@@ -28,9 +28,9 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ### Passo 1
 
-A lista de oportunidades e o nome de cada propriedade vêm do mapeamento de dados do projeto, no workspace conectado. Se a lista não estiver nessa conexão, pare. Não use a lista de outro workspace. Este texto usa os conceitos: o título da edição, a data da edição, o grupo da edição, as variações de nome, os perfis da edição, o ingresso do visitante, a taxa do expositor, o link de inscrição, o e-mail da organização, os links não oficiais, a empresa ou local, a localidade, as notas de curadoria e a decisão humana.
+A lista de oportunidades e o nome de cada propriedade vêm do mapeamento de dados do projeto, no workspace conectado. Se a lista não estiver nessa conexão, pare. Não use a lista de outro workspace. Este texto usa os conceitos: o título da edição, a data da edição, o grupo da edição, as variações de nome, os perfis da edição, o ingresso do visitante, a taxa do expositor, o link de inscrição, o e-mail da organização, os links não oficiais, a empresa ou local, a localidade, os anexos da edição, as notas de curadoria e a decisão humana.
 
-Saber se já existe fica com `procurar-oportunidade`. Se a edição existe e o pedido é cadastrar, mostre essa página e pare. Não crie outra. Se o pedido é revisar, limpar, enriquecer, consolidar, reorganizar ou atualizar a edição, o conteúdo, o corpo ou as anotações, siga nessa página. O grupo fica com `definir-grupo-de-oportunidades`.
+Saber se já existe fica com `procurar-oportunidade`. Se a edição existe e o pedido é cadastrar, mostre essa página, anexe o cartaz que ainda não está nos anexos da edição, e pare. Não crie outra. Se o pedido é revisar, limpar, enriquecer, consolidar, reorganizar ou atualizar a edição, o conteúdo, o corpo ou as anotações, siga nessa página. O grupo fica com `definir-grupo-de-oportunidades`.
 
 ### Passo 2
 
@@ -58,7 +58,9 @@ Cada data é uma página na lista de oportunidades, com a data. Não crie outra 
 
 ### Passo 5
 
-O que é desta data fica na edição: endereço, horário, valor, formulário e número de vagas. Um lugar visto numa data só não vira lugar padrão do grupo. Os perfis da edição só recebem a conta própria desta edição. O perfil oficial fica com `definir-grupo-de-oportunidades`, com `sim`. Não grave o cartaz nem a operação no corpo.
+O que é desta data fica na edição: endereço, horário, valor, formulário e número de vagas. Um lugar visto numa data só não vira lugar padrão do grupo. Os perfis da edição só recebem a conta própria desta edição. O perfil oficial fica com `definir-grupo-de-oportunidades`, com `sim`. Não grave o texto do cartaz nem a operação no corpo.
+
+O arquivo do cartaz, do print da divulgação ou do comunicado desta data vai nos anexos da edição, na mesma gravação, sem pedir confirmação. Preserve os arquivos que já estão lá e não anexe o mesmo arquivo de novo. Use a referência de arquivo aceita pela ferramenta: o ID do anexo da conversa pode não ser um ID de arquivo do Notion. Se o pedido só consulta a edição, ofereça anexar e não grave. Sem os anexos da edição no mapeamento, liste o arquivo no fim, como valor sem propriedade.
 
 Consultar uma programação é leitura; não é inscrição nem escolha de participação. Retome a fonte oficial já identificada sem pedir nova autorização para a consulta solicitada. Carregue o conteúdo completo antes de apresentar a programação como completa. Timeout na leitura rápida não é prova de indisponibilidade: use uma leitura mais completa oferecida pela mesma ferramenta. Não invente horários, palestrantes ou salas a partir de trechos de busca.
 
@@ -83,7 +85,7 @@ Na edição, bloco de anotações, reunião, transcrição, resumo ou outro bloc
 
 ### Passo 8
 
-Mostre o título, a data, o grupo, quando há, e o link. Liste os valores que ficaram sem propriedade. Não organize a participação. Não inscreva. Não crie tarefa. A resposta não pede para nomear a habilidade.
+Mostre o título, a data, o grupo, quando há, os arquivos anexados e o link. Liste os valores que ficaram sem propriedade. Não organize a participação. Não inscreva. Não crie tarefa. A resposta não pede para nomear a habilidade.
 
 ### Passo 9
 
@@ -120,7 +122,7 @@ Se você criar na lista de oportunidades uma página só de seleção, inscriç�
 Se você cadastrar sem passar por `procurar-oportunidade`, a lista ganha a edição duas vezes.
 
 1. Confirme que não existe.
-2. Se existe, mostre essa página e pare.
+2. Se existe, mostre essa página, anexe o cartaz que ainda não está nos anexos da edição, e pare.
 3. Não crie outra com o mesmo nome e a mesma data.
 
 ### Data só no título
@@ -138,6 +140,14 @@ Se você colar o texto da imagem no corpo da página, a operação fica fora das
 1. O título, a data e o grupo vão nas propriedades.
 2. O corpo não recebe o cartaz.
 3. Sem URL, o link fica vazio.
+
+### Cartaz fora dos anexos
+
+Se você usar o cartaz só para ler o texto e deixar o arquivo de fora, a edição perde a prova de que existe e a pessoa precisa pedir o anexo.
+
+1. Anexe o arquivo nos anexos da edição, na mesma gravação.
+2. Preserve os arquivos que já estão lá. Não anexe o mesmo de novo.
+3. Se o pedido só consulta, ofereça anexar e não grave.
 
 ### Bloco de anotações removido
 
@@ -189,7 +199,7 @@ localidade só entra se a página já existe. Data e taxa ficaram vazias. A pend
 
 ## Casos-limite
 
-- A edição já existe e o pedido é cadastrar: mostre a página e pare. Não crie outra.
+- A edição já existe e o pedido é cadastrar: mostre a página, anexe o cartaz que ainda não está nos anexos da edição, e pare. Não crie outra.
 - `Considerar grupos de oportunidades` é `sim` e não há grupo: pare e passe para `definir-grupo-de-oportunidades`. Não crie o grupo aqui.
 - `Considerar grupos de oportunidades` é `não`: grave sem grupo e não chame `definir-grupo-de-oportunidades`.
 - O mapeamento não tem o título, a data ou, com `sim`, o grupo: pare antes de criar e diga qual.
@@ -200,12 +210,14 @@ localidade só entra se a página já existe. Data e taxa ficaram vazias. A pend
 - Seleção, inscrição, edital ou chamada: não vira página na lista de oportunidades.
 - A página já tem bloco de anotações, reunião, transcrição ou resumo: ele fica inteiro. Um fato dele pode ir para a propriedade.
 - O bloco não afirma o valor: a propriedade fica vazia. A pendência vai nas notas de curadoria.
+- A pessoa enviou cartaz, print ou comunicado da edição: o arquivo vai nos anexos da edição, sem duplicar. Na consulta, só ofereça.
 - Conta própria desta edição: perfis da edição. Perfil oficial fica com `definir-grupo-de-oportunidades`.
 
 ## Pegadinhas
 
 - Entrada gratuita para um público restrito parece o ingresso do visitante ou a taxa do expositor. Não é nenhuma das duas.
-- O corpo da página parece o lugar do cartaz, ou do valor sem propriedade. As propriedades recebem o fato novo. O valor sem propriedade vai para a lista do fim. O bloco de anotações que já está lá fica.
+- O corpo da página parece o lugar do texto do cartaz, ou do valor sem propriedade. As propriedades recebem o fato novo. O valor sem propriedade vai para a lista do fim. O bloco de anotações que já está lá fica.
+- Não gravar o cartaz no corpo parece dispensar o arquivo. O texto não vai ao corpo. O arquivo vai nos anexos da edição.
 - O bloco de anotações parece rascunho que a limpeza apaga. Ele é evidência da pessoa. A propriedade recebe a cópia, e o bloco permanece.
 - Começar o título pelo grupo deixa as linhas iguais. O nome da edição vem primeiro.
 - A data numérica parece bastar. O título e a resposta levam o dia da semana, calculado com a data, o horário e o fuso. A data da edição continua um intervalo válido.

@@ -1,10 +1,10 @@
 ---
 name: reconhecer-imagem
-description: Use essa habilidade sempre que for ler texto de imagem, mesmo sem dizer imagem. Nota, recibo ou transação segue a despesa; pedido de evento confirmado segue a inscrição; pessoa ou perfil segue a grafia. NÃO use para cadastrar a entidade, criar tarefa nem quando o texto já está escrito.
+description: Use essa habilidade sempre que for ler texto de imagem, ou receber imagem cujo texto já veio escrito, mesmo sem dizer imagem. Nota, recibo ou transação segue a despesa; pedido de evento confirmado segue a inscrição; pessoa ou perfil segue a grafia. NÃO use para cadastrar a entidade, criar tarefa nem reler o texto já escrito.
 compatibility: Precisa de Python.
 metadata:
   author: jimmyandrade
-  version: "0.12.0"
+  version: "0.13.1"
   related:
     - criar-oportunidade
     - definir-grafia
@@ -29,14 +29,14 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ### Passo 1
 
-Peça a imagem. Se o texto já estiver escrito, pare. Esta habilidade não entra.
+Peça a imagem. Se o texto dela já estiver escrito na mensagem, como um comunicado colado junto do cartaz, não leia a imagem: o texto escrito é a leitura. Pule para o passo 4 com esse texto e a imagem como original. Não pergunte o que fazer com ele.
 O comando escrito ou ditado que acompanha a imagem não é a transcrição dela. Preserve esse comando como a intenção da operação.
 
 ### Passo 2
 
 Escolha o leitor no primeiro passo. Não procure o script no disco. Ele só está com o repositório. Se estiver, rode só ele. Não leia o arquivo. A primeira vez prepara o leitor. As seguintes reaproveitam o que já foi preparado. Não usa a rede.
 Se o script não estiver, ou se falhar, leia a imagem. Não rode de novo. Não rode o leitor do sistema para conferir. No Notion ele não está. Não instale. Não peça para a pessoa digitar o cartaz.
-Use só o que a leitura trouxe. Encaminhe o texto para a próxima habilidade, sem novo reconhecimento. Preserve o original como evidência para anexar ao lançamento financeiro; não o envie para outra leitura.
+Use só o que a leitura trouxe. Encaminhe o texto para a próxima habilidade, sem novo reconhecimento. Preserve o original como evidência para anexar ao lançamento financeiro ou à edição da oportunidade; não o envie para outra leitura.
 
 ### Passo 3
 
@@ -44,7 +44,7 @@ Tire o que é do aparelho ou do anúncio em volta: a hora da tela, a bateria, as
 
 ### Passo 4
 
-Entregue a leitura e o comando original à habilidade seguinte, indicando que o reconhecimento terminou. Ela retoma a operação sem repetir a leitura. Não faça o trabalho dela aqui.
+Entregue a leitura, o comando original e a imagem original à habilidade seguinte, indicando que o reconhecimento terminou. Ela retoma a operação sem repetir a leitura. Não faça o trabalho dela aqui.
 
 ```mermaid
 flowchart LR
@@ -56,7 +56,7 @@ flowchart LR
   C -->|não| E{Nome da edição e data do evento?}
   E -->|sim| F[procurar-oportunidade]
   F --> J{A edição existe?}
-  J -->|sim| K[Mostre a página e pare]
+  J -->|sim| K[Mostre a página e entregue o original a criar-oportunidade]
   J -->|não| L[criar-oportunidade]
   E -->|não| H{Pessoa ou perfil social?}
   H -->|sim| I[definir-grafia]
@@ -88,7 +88,7 @@ Chame a busca sem perguntar. Se ela não achar a edição, siga `criar-oportunid
 
 ### Imagem enviada adiante
 
-Se você mandar a imagem ao workspace conectado, a leitura gasta o crédito de lá.
+Se você mandar a imagem ao workspace conectado para ler, a leitura gasta o crédito de lá.
 
 1. Não procure o script no disco. Com o repositório, rode o script. Não leia o arquivo.
 2. Sem o script, leia a imagem.
@@ -102,11 +102,19 @@ Se você tratar a hora da tela, "Patrocinado" ou "Há N horas" como dado do even
 2. Mantenha o cartaz e a legenda.
 3. Uma sílaba solta não vira nome.
 
+### Texto já escrito parado
+
+Se você parar porque o texto da imagem já veio escrito, ou perguntar o que fazer com ele, a pessoa repete o pedido e o cartaz fica fora da edição.
+
+1. Use o texto escrito como a leitura. Não leia a imagem.
+2. Siga o encaminhamento do passo 4, sem perguntar.
+3. Entregue a imagem como original à habilidade seguinte.
+
 ### Habilidade seguinte no lugar
 
 Se você cadastrar a oportunidade sem a busca, ou parar no texto quando ele já tem nome da edição e data, a pessoa ou ganha uma duplicata ou fica sem a busca e sem o cadastro.
 
-1. Esse texto entra em `procurar-oportunidade`, sem perguntar. Se a edição não existe, siga `criar-oportunidade`. Se existe, mostre a página e pare.
+1. Esse texto entra em `procurar-oportunidade`, sem perguntar. Se a edição não existe, siga `criar-oportunidade`. Se existe, mostre a página e entregue o original a `criar-oportunidade`, que decide o anexo.
 2. Pedido de evento realizado ou confirmado segue `definir-inscricao` depois da edição. Não grave a inscrição aqui.
 3. Não trate uma nota ou transação de compra como inscrição em evento. O fluxo tem uma destinatária financeira.
 
@@ -148,7 +156,7 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### a imagem do post de uma feira do setor, com participação gratuita para lojistas.
 
-o texto saiu do script de reconhecimento: 29 e 30 de setembro de 2026, 09h às 19h, o local e o endereço do evento, o CNPJ e o CNAE exigidos, e o credenciamento no link da bio ou no local. Saíram a hora da tela, "Há 18 horas" e "Patrocinado". A imagem não seguiu. O texto entrou em `procurar-oportunidade`. Nenhuma oportunidade foi cadastrada. Não pedi para nomear a habilidade.
+o texto saiu do script de reconhecimento: 29 e 30 de setembro de 2026, 09h às 19h, o local e o endereço do evento, o CNPJ e o CNAE exigidos, e o credenciamento no link da bio ou no local. Saíram a hora da tela, "Há 18 horas" e "Patrocinado". A imagem não foi para outra leitura. O texto entrou em `procurar-oportunidade`. Nenhuma oportunidade foi cadastrada. Não pedi para nomear a habilidade.
 
 ### eu enviei a imagem anexa, com o post de uma oficina num museu, e procurar-oportunidade não veio na lista.
 
@@ -158,6 +166,10 @@ Li a imagem. Saíram a hora da tela, as curtidas e "Há 3 horas". O texto trouxe
 
 o script não estava neste ambiente. Não rodei o leitor do sistema. Li a imagem. Saíram a hora da tela, "Há 18 horas" e "Patrocinado". O texto entrou em `procurar-oportunidade`. Não pedi para nomear a habilidade.
 
+### o comunicado de uma feira colado na mensagem, com horários, montagem e estacionamento, e o cartaz da mesma edição.
+
+Não li a imagem: o comunicado já era o texto. Com nome da edição e data, o texto entrou em `procurar-oportunidade` sem perguntar o que fazer. A edição não existia, e `criar-oportunidade` recebeu o texto e o cartaz como original para os anexos da edição.
+
 ### a foto de uma nota de tecido e o print da mesma compra no cartão, sem pedido escrito.
 
 Li os dados e entreguei o texto a `lancar-despesa-da-empresa`, que busca o gasto antes de criar. Os originais ficaram como evidências da mesma compra, sem novo reconhecimento. Não parei na transcrição nem tratei a compra como inscrição.
@@ -165,11 +177,12 @@ Li os dados e entreguei o texto a `lancar-despesa-da-empresa`, que busca o gasto
 ## Casos-limite
 
 - Não há imagem: peça. Não invente o texto.
-- O texto já está escrito: pare. Esta habilidade não entra.
+- O texto já está escrito e veio com a imagem: não leia a imagem. Encaminhe o texto e entregue a imagem como original.
+- O texto já está escrito e não há imagem: esta habilidade não entra.
 - O script não está neste ambiente: leia a imagem. Não rode o leitor do sistema para conferir. Não instale.
 - O script está neste ambiente: rode o script. Não leia o arquivo.
 - O script falhou: leia a imagem. Não rode de novo, não instale e não conserte o script.
-- A pessoa não nomeou a habilidade seguinte e o texto tem nome da edição e data: o texto entra em `procurar-oportunidade`. Se a edição não existe, siga `criar-oportunidade`. Se existe, mostre a página e não crie outra.
+- A pessoa não nomeou a habilidade seguinte e o texto tem nome da edição e data: o texto entra em `procurar-oportunidade`. Se a edição não existe, siga `criar-oportunidade`. Se existe, mostre a página, não crie outra e entregue o original a `criar-oportunidade`.
 - A leitura é um pedido de evento realizado ou confirmado: depois da edição, siga `definir-inscricao`. Não confunda com compra em nota ou transação.
 - A leitura é uma pessoa ou um perfil social: siga `definir-grafia`. Não pare no texto.
 - Não há destinatária no fluxo e a pessoa não nomeou a seguinte: entregue o texto e pare.
@@ -180,7 +193,8 @@ Li os dados e entreguei o texto a `lancar-despesa-da-empresa`, que busca o gasto
 
 - "Há 18 horas" parece a data do evento. É a idade do post.
 - "Patrocinado" e o relógio do celular parecem parte do cartaz. Não são.
-- Anexar o original a um lançamento não é pedir novo reconhecimento. Para leitura, segue só o texto.
+- Anexar o original a um lançamento ou a uma edição não é pedir novo reconhecimento. Para leitura, segue só o texto.
+- O texto já escrito parece dispensar a habilidade. Dispensa só a leitura. O encaminhamento e o original seguem.
 - Instalar o leitor parece cuidado. Neste ambiente o instalador não existe. A imagem é a leitura que resta.
 - Procurar o script no disco parece conferir. Ele só está com o repositório.
 - O leitor do sistema parece estar no Notion. O comando não existe. Leia a imagem. Não rode para conferir.

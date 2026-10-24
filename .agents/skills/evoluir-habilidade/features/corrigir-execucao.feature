@@ -22,3 +22,12 @@ Funcionalidade: Corrigir a execução pelo feedback
       Quando a skill é evoluída
       Então a correção entra na instrução
       E a abordagem anterior sai
+
+  Regra: A cópia sincronizada não pede o repositório
+
+    Exemplo: Correção recebida no Notion sem acesso ao repositório
+      Dado que a pessoa pediu a evolução de uma skill nomeada pela cópia no Notion
+      E o ambiente não tem o repositório nem uma conexão que escreva nele
+      Quando a skill é evoluída
+      Então a resposta entrega a mudança pronta, com a skill, o passo e o texto novo
+      Mas não pede o repositório

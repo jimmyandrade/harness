@@ -48,3 +48,12 @@ Funcionalidade: Encaminhar o texto da imagem
       Quando a habilidade entrega a leitura
       Então lancar-despesa-da-empresa recebe os dados lidos e a operação pedida
       Mas a resposta não exige um novo pedido pelo nome da habilidade
+
+  Regra: O texto já escrito dispensa só a leitura
+
+    Exemplo: Comunicado colado junto do cartaz da edição
+      Dado que a pessoa colou o comunicado de uma feira e enviou o cartaz da mesma edição
+      Quando a skill recebe a mensagem sem um pedido escrito
+      Então o texto colado entra em procurar-oportunidade sem nova leitura da imagem
+      E o cartaz segue como original para a habilidade seguinte
+      Mas a resposta não pergunta o que fazer com o comunicado

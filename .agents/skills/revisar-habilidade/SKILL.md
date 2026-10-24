@@ -3,7 +3,7 @@ name: revisar-habilidade
 description: Use essa habilidade sempre que for revisar uma skill já escrita, sinalizar descrição vaga, gatilho faltando ou problema de estrutura, ver risco de disparar demais ou de menos, ou sugerir casos a partir do propósito. NÃO use para criar a primeira versão, executar o teste e editar a skill, só medir tamanho, nem gravar a página no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.5.0"
   related:
     - criar-commit
     - criar-habilidade
@@ -28,7 +28,8 @@ Exija a skill, pelo nome ou pelo texto. Se faltar, peça. Leia a descrição e o
 
 ### Passo 2
 
-Sinalize descrição vaga, gatilho faltando e problema de estrutura.
+Sinalize descrição vaga, gatilho faltando, problema de estrutura e regra contraditória.
+Regra contraditória são duas frases, da skill ou de uma `related`, que mandam coisas opostas, ou um valor de projeto, como pasta ou caminho, escrito no passo em vez de parâmetro.
 Descrição vaga não começa com `Use essa habilidade sempre que`, não fala da intenção de quem pede, ou não fecha com `NÃO use para`. Gatilho faltando não diz quando carregar. Estrutura fora do lugar foge de `Parâmetros de configuração` com um bloco `yaml`, `Instruções` com `Passo 1`, `Passo 2`, e depois `Problemas comuns`, `Exemplos de entrada e saída`, `Casos-limite`, `Pegadinhas` e `Scripts disponíveis`. `Exemplos de entrada e saída` abre com `Estes exemplos ilustram fatos. Eles podem não estar no data source.` Passo com mais de um desfecho traz um flowchart Mermaid no sentido configurado. Um só fica na frase.
 
 ### Passo 3
