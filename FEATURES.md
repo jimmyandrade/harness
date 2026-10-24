@@ -27,7 +27,7 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
   - Code in `vocabulary/api/`, built by `npm run build` into `vocabulary/dist/`, which the `prepare` script runs on install
   - A project installs the core with `npm install --save-dev github:jimmyandrade/harness` and runs `node node_modules/harness/vocabulary/dist/cli.js` and `node node_modules/harness/vocabulary/dist/mcp/index.js`
   - Reads and writes one UTF-8 JSON file per language in the project. This repository ships no glossary and no brand name
-  - The skills `definir-vocabulario`, `procurar-variacao-de-termo`, `redigir-com-tom-de-voz` and `perfilar-tom-de-voz` use it. Their entries are in `.agents/skills/FEATURES.md`
+  - The skills `definir-vocabulario`, `classificar-estado-do-termo`, `validar-plano-de-vocabulario`, `gravar-termos-no-vocabulario`, `procurar-variacao-de-termo`, `redigir-com-tom-de-voz` and `perfilar-tom-de-voz` use it. Their entries are in `.agents/skills/FEATURES.md`
   - Decisions about the engine are in `vocabulary/docs/adr/`, and the host runbooks are in `vocabulary/docs/runbooks/`
 - **Test Criteria**:
   - [x] `npm test` runs the vocabulary tests with the script tests

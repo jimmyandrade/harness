@@ -1,0 +1,104 @@
+---
+name: validar-plano-de-vocabulario
+description: Use essa habilidade sempre que, ao cadastrar termos do vocabulário do tom de voz, for preciso validar os campos do plano antes de gravar, como categorias, motivo, descrição, exemplos e quem decidiu, mesmo sem dizer validar. NÃO use para cadastrar o termo, decidir o nível dele, gravar no vocabulário, nem inventar um campo que a pessoa não enviou.
+metadata:
+  author: jimmyandrade
+  version: "0.1.0"
+  related:
+    - classificar-estado-do-termo
+    - definir-vocabulario
+    - gravar-termos-no-vocabulario
+---
+
+# Validar plano de vocabulário
+
+## Parâmetros de configuração
+
+Quando `definir-vocabulario` chama esta habilidade, vale o que ela passa.
+
+```yaml
+"Categorias": {}
+"Validação dos campos": "warn"
+"Domínio do e-mail de quem decide": ""
+```
+
+## Instruções
+
+### Passo 1
+
+`definir-vocabulario` monta o plano, `classificar-estado-do-termo` decide o nível de cada termo, e esta habilidade confere os campos antes da escrita. Esta habilidade só valida. Ela não grava, e a escrita segue `gravar-termos-no-vocabulario`.
+
+```mermaid
+flowchart LR
+  A{Pedido?} -->|conferir os campos do plano| B[Esta habilidade]
+  A -->|cadastrar ou atualizar| C[definir-vocabulario]
+```
+
+### Passo 2
+
+Valide o plano antes de gravar.
+
+- `categories` são palavras em inglês, em qualquer idioma, como `punctuation`. Categoria no idioma do projeto vira a palavra que `Categorias` mapeia. Sem mapa, pergunte. Categoria não vira tag: a tag esconde o termo da consulta de outro contexto. Termo, descrição e notas ficam no idioma do vocabulário.
+- `reason` só nos níveis de uso e diz por que usamos. `description` explica a palavra, e o motivo de evitar fica nela. Não copie um no outro.
+- `forbidden` e `strongly_discouraged` recusam `examples`. O exemplo ruim vai em `rejected`.
+- Campo esperado que a pessoa não tem fica de fora. A escrita grava e devolve em `incomplete`. Diga essa lista. Não invente o campo. Passe `Validação dos campos` em `validation`.
+- Quem decidiu vai em `decided_by`, como os campos de pessoa do `package.json`: `name`, `email` e, se houver, `url`. O e-mail é o individual da pessoa no workspace, nunca o de uma conta de função compartilhada. Com `Domínio do e-mail de quem decide` preenchido, o e-mail termina nesse domínio. Sem o e-mail, pergunte. O endereço da linha de origem vai em `source`.
+- `notes` guarda o histórico do termo: data, link, quem decidiu, o limite que `description` e `when` não dizem. `description` só diz o que o termo é. O registro formal ou informal vai em `categories`, não em campo. Não muda o estado.
+- Um termo não é o próprio exemplo. A mesma grafia não entra duas vezes.
+- `state` é a permissão. `description` não repete o estado.
+- Exemplo de contexto e exemplo mais longo ficam em `examples`. Termo já cadastrado fica em `related`.
+- Documentação complementar só quando a pessoa pedir.
+- Validação falha: corrija e valide de novo. Não grave.
+
+## Problemas comuns
+
+### Categoria no idioma do texto
+
+Se você gravar a categoria no idioma do vocabulário, a palavra do texto entra no lugar da categoria em inglês.
+
+1. Reescreva a categoria em inglês, em minúsculas.
+2. Mantenha o termo e a descrição no idioma do vocabulário.
+3. Valide de novo antes de gravar.
+
+### Descrição no lugar do motivo
+
+Se você repetir em `description` por que usamos, a explicação da palavra some.
+
+1. `description` explica a palavra.
+2. Em `allowed`, `reason` diz por que usamos.
+3. Não copie um no outro.
+
+### Termo inventado
+
+Se você completar descrição ou exemplo que a pessoa não deu, o vocabulário ganha uma frase que ela não escolheu.
+
+1. Use só o que ela enviou.
+2. Se faltar campo, peça.
+3. Não grave até o plano fechar.
+
+## Exemplos de entrada e saída
+
+Estes exemplos ilustram fatos. Eles podem não estar no data source.
+
+### Cadastre o termo que a pessoa enviou como permitido.
+
+A descrição explicou a palavra. O reason disse por que a marca usa o termo. Não copiei um no outro.
+
+### Cadastre o travessão como proibido no vocabulário de pt-BR, com a frase rejeitada e as alternativas.
+
+O plano ficou em insert. A categoria ficou punctuation. O termo, a descrição Travessão e as frases ficaram em português. A frase rejeitada nasceu proibida e as alternativas nasceram permitidas. Não inventei termo.
+
+## Casos-limite
+
+- Plano sem o e-mail de quem decidiu: pergunte. Não use o e-mail de uma conta de função.
+- Campo esperado que falta: com `Validação dos campos` em `warn`, a escrita grava e devolve em `incomplete`. Em `enforce`, ela recusa.
+
+## Pegadinhas
+
+- O e-mail de uma conta de função, como o de uma área, parece identificar quem decidiu. A conta fica quando a pessoa sai: grave o e-mail individual.
+- Um `decided_by` em texto, de uma linha antiga, é só o nome. A próxima escrita dessa linha guarda o objeto.
+- A categoria parece seguir o idioma do vocabulário. Ela é uma palavra em inglês em qualquer idioma.
+
+## Scripts disponíveis
+
+- Nenhum.
