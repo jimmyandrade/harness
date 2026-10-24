@@ -10,7 +10,7 @@ Accepted
 
 ## Context
 
-The TypeScript tests of this repository run with `node --test`, through `npm test`. When this decision was accepted there were 12 test files with 83 tests, for the vocabulary API, its CLI and MCP server, the glossary, and the Notion sync. The vocabulary tests later moved to jimmyandrade/vocabulary. Each test imports `test` from `node:test` and asserts with `node:assert`. None of them mocks a module: the tests build a temporary repository and call the code, or run the script, against it.
+The TypeScript tests of this repository run with `node --test`, through `npm test`. When this decision was accepted there were 12 test files with 83 tests, for the vocabulary API, its CLI and MCP server, the glossary, and the Notion sync. The vocabulary tests moved out of this repository for a while and came back with ADR 0018. Each test imports `test` from `node:test` and asserts with `node:assert`. None of them mocks a module: the tests build a temporary repository and call the code, or run the script, against it.
 
 Node.js 24, the runtime of the scripts and the actions, runs the TypeScript files by stripping their types, so the tests need no build step and no transpiler. Its test runner has suites, hooks, function and timer mocks, watch mode, and coverage behind `--experimental-test-coverage`. Mocking a whole module is behind `--experimental-test-module-mocks`.
 

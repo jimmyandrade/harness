@@ -12,23 +12,23 @@
       "dependencyDashboardApproval": true
     },
     {
-      "description": "Move every pin of the core harness and of the vocabulary package in one pull request, as soon as a release exists.",
-      "matchPackageNames": ["jimmyandrade/harness", "jimmyandrade/vocabulary"],
-      "groupName": "core harness and vocabulary",
+      "description": "Move every pin of the core harness in one pull request, as soon as a release exists.",
+      "matchPackageNames": ["jimmyandrade/harness"],
+      "groupName": "core harness",
       "schedule": ["at any time"],
       "dependencyDashboardApproval": false
     },
     {
-      "description": "The npm dependencies on the core harness and on the vocabulary package are named harness and vocabulary in package.json.",
-      "matchDepNames": ["harness", "vocabulary"],
+      "description": "The npm dependency on the core harness is named harness in package.json.",
+      "matchDepNames": ["harness"],
       "matchDatasources": ["github-tags"],
-      "groupName": "core harness and vocabulary",
+      "groupName": "core harness",
       "schedule": ["at any time"],
       "dependencyDashboardApproval": false
     },
     {
-      "description": "A minor or patch release of the core harness or the vocabulary package merges by itself once the checks of the pull request pass.",
-      "matchPackageNames": ["jimmyandrade/harness", "jimmyandrade/vocabulary", "harness", "vocabulary"],
+      "description": "A minor or patch release of the core harness merges by itself once the checks of the pull request pass.",
+      "matchPackageNames": ["jimmyandrade/harness", "harness"],
       "matchUpdateTypes": ["minor", "patch"],
       "automerge": true
     }
