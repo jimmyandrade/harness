@@ -3,7 +3,7 @@ name: evoluir-habilidade
 description: Use essa habilidade sempre que for testar uma skill ou evoluir as instruções do projeto, mesmo sem dizer evoluir, inclusive o Gherkin e a comparação com e sem skill, resultado inconsistente, falha de chamada ou correção da pessoa. NÃO use para criar a primeira versão, só ver se a descrição dispara, só revisar sem executar, nem gravar a página no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.18.0"
+  version: "0.19.0"
   related:
     - criar-commit
     - criar-pull-request
@@ -26,7 +26,7 @@ metadata:
 
 ### Passo 1
 
-Exija o nome ou o caminho da skill, a tarefa, os arquivos ou links de entrada e as saídas. Se faltar algum, peça antes de avaliar. Um pedido para testar uma skill entra aqui, mesmo sem dizer evoluir. Um feedback sobre o comportamento do agente também entra aqui: o alvo são as instruções do projeto, tratadas como uma skill. Edite seguindo o formato de `definir-instrucoes-do-projeto` e suba `metadata.version`. Elas não têm `evals/` nem `features/`.
+Exija o nome ou o caminho da skill, a tarefa, os arquivos ou links de entrada e as saídas. Se faltar algum, peça antes de avaliar. O nome que a conversa já citou basta: o caminho é `.agents/skills/<nome>/SKILL.md` no repositório de origem. Não peça o repositório nem o caminho. Um pedido para testar uma skill entra aqui, mesmo sem dizer evoluir. Um feedback sobre o comportamento do agente também entra aqui: o alvo são as instruções do projeto, tratadas como uma skill. Edite seguindo o formato de `definir-instrucoes-do-projeto` e suba `metadata.version`. Elas não têm `evals/` nem `features/`.
 
 ### Passo 2
 
@@ -87,6 +87,14 @@ Se você vir resultado inconsistente, falha de chamada ou correção da pessoa, 
 1. Melhore a instrução.
 2. Acrescente o tratamento do erro.
 3. Subdisparo e sobredisparo vão para `descrever-habilidade-ou-schema`.
+
+### Repositório pedido à pessoa
+
+Se você pedir o repositório ou o caminho da skill numa cópia sincronizada, como o Notion, a pessoa responde o que a skill já diz e a mudança não sai.
+
+1. Confira as conexões e a pasta de trabalho antes de dizer que falta acesso. Uma chamada que falhou não prova falta de acesso.
+2. Sem o repositório nem uma conexão que escreva nele, entregue a mudança pronta: a skill, o passo e o texto novo.
+3. Diga que a gravação acontece numa sessão com o repositório, como o Claude Code ou o Cursor, e que essa sessão segue `criar-commit` e `criar-pull-request`.
 
 ### Feedback sem edição
 
@@ -195,6 +203,7 @@ Dado que há o nome "Planejamento do trimestre" e 5 descrições de tarefa. Quan
 - O pedido muda um passo, o formato do texto ou o diff: edite a skill. Não grave Gherkin disso.
 - A comparação não tem o número no registro: diga que falta.
 - O pedido chega por uma cópia sincronizada, como a página no Notion: não edite a cópia. A escrita segue `criar-commit` e `criar-pull-request`.
+- A cópia sincronizada não tem o repositório nem conexão que escreva nele: não peça o caminho. Entregue a mudança pronta, por skill e passo, para a sessão com o repositório.
 - O pedido é só o tamanho ou o tempo: use `medir-habilidade`. Não edite a skill.
 
 ## Pegadinhas
@@ -208,6 +217,7 @@ Dado que há o nome "Planejamento do trimestre" e 5 descrições de tarefa. Quan
 - Consulta de disparo não mede a qualidade da saída. Disparo fica em `descrever-habilidade-ou-schema`.
 - A mesma lógica reescrita em cada caso vira script, com o aceite da pessoa. Script de várias skills fica em `.agents/scripts/<nome>/`.
 - Pedido feito na cópia sincronizada parece permissão para gravá-la. A cópia é só leitura. Siga `criar-commit`.
+- Pedir o repositório parece o passo que falta. O nome da skill já dá o caminho. Sem acesso, a mudança pronta é a entrega.
 
 ## Scripts disponíveis
 
