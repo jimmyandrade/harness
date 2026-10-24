@@ -1,4 +1,17 @@
 {
   "skill_name": "criar-oportunidade",
-  "evals": []
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Consulte a programação na Sympla. Você pode fazer isso sem precisar confirmar comigo",
+      "expected_output": "Consultar a página oficial já identificada sem nova confirmação; depois do timeout da leitura rápida, obter a programação completa pela leitura mais completa. Não inscrever nem gravar eventos na agenda.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Armazene toda a programação no cronograma ligado à oportunidade. E depois escolheremos a programação",
+      "expected_output": "Guardar todas as sessões publicadas no cronograma vinculado à edição, incluindo simultâneas e fechadas, com início e fim e palestrantes quando informados, sem escolher participação nem criar eventos no calendário. Na execução observada foram gravados 73 itens; a rejeição do campo de local deve ser tratada num único item antes do lote, e a lacuna informada. A instrução revisada ainda precisa de reexecução isolada.",
+      "files": []
+    }
+  ]
 }
