@@ -45,9 +45,9 @@ The checker prints a line that starts with `.cursor-plugin/plugin.json` or `.cla
 2. A line that names a plugin `source` Codex skips is usually the `core` entry of a marketplace copied before Codex support. Replace it with the `core` entry of `examples/business-harness/.claude-plugin/marketplace.json`, with `vX.Y.Z` replaced by the tag the other pins use.
 3. Run `run-check.sh` again. Exit code 0 closes the case.
 
-## The Renovate `core harness and vocabulary` pull request fails the check
+## The Renovate `core harness` pull request fails the check
 
-In a business harness, the `check` job of a `core harness and vocabulary` pull request opened by Renovate fails, while `main` passed with the previous release. Renovate does not merge it by itself while the check fails.
+In a business harness, the `check` job of a `core harness` pull request opened by Renovate fails, while `main` passed with the previous release. Renovate does not merge it by itself while the check fails.
 
 1. Renovate only moves the pins: the workflows, `package.json`, `package-lock.json`, and `.claude-plugin/marketplace.json`. The workflow runs the checker of the new release, so a release that adds a rule fails on a file the rule now refuses, until that file changes too. The message names the file and the rule.
 2. Read `CHANGELOG.md` of this repository from the pinned release up to the new one. A breaking change or a feature that changes a file the runbooks copy names what the business harness needs. Compare its files with `examples/business-harness/` at the new tag.
@@ -62,11 +62,11 @@ The release exists, but the Dependency Dashboard of a business harness still lis
 1. Renovate caches the list of tags for a while. A run in the first minutes after a release can miss the new tag.
 2. Check the box at the end of the Dependency Dashboard issue to ask for another run, later. The `renovate.md` runbook, step 4, covers a run from the Mend portal.
 3. To move the pins now, open the pull request by hand, as in the previous section, step 3.
-4. The dashboard listing the new tag, or a `core harness and vocabulary` pull request, closes the case.
+4. The dashboard listing the new tag, or a `core harness` pull request, closes the case.
 
 ## npm refuses a pin of the core with EALLOWGIT
 
-Moving a pin by hand, `npm install -D "harness@github:jimmyandrade/harness#vX.Y.Z"`, or the same for jimmyandrade/vocabulary, stops with `npm error code EALLOWGIT` and `Refusing to fetch`.
+Moving a pin by hand, `npm install -D "harness@github:jimmyandrade/harness#vX.Y.Z"` stops with `npm error code EALLOWGIT` and `Refusing to fetch`.
 
 1. `allow-git` is `root`: npm 11.17 uses that value by default, and `~/.npmrc` can set it too. `npm config get allow-git` prints it. With that value, npm refuses to resolve a new git dependency, even one listed in `package.json`.
 2. Allow it for that one command: `npm install -D "harness@github:jimmyandrade/harness#vX.Y.Z" --allow-git=all`. The setting in `~/.npmrc` stays as it is.
@@ -77,7 +77,7 @@ Moving a pin by hand, `npm install -D "harness@github:jimmyandrade/harness#vX.Y.
 
 `npm ci` or `npm install` in a business harness stops with `npm error code EALLOWSCRIPTS` and `--allow-scripts is not allowed in project-scoped installs`, printed twice, once by a second npm process. `node_modules` is left empty.
 
-1. The core and jimmyandrade/vocabulary are git dependencies. To prepare one, npm runs a second `npm install` in the cloned folder and passes its own settings down as environment variables. From npm 11.17, a project install refuses `allow-scripts` given on the command line, and the second npm reads the setting it inherited from `~/.npmrc` as if it came from the command line. `npm -v` prints the version, and `npm config get allow-scripts` prints the setting.
+1. The core is a git dependency. To prepare one, npm runs a second `npm install` in the cloned folder and passes its own settings down as environment variables. From npm 11.17, a project install refuses `allow-scripts` given on the command line, and the second npm reads the setting it inherited from `~/.npmrc` as if it came from the command line. `npm -v` prints the version, and `npm config get allow-scripts` prints the setting.
 2. Run the install ignoring the user configuration for that one command, in the project folder: `npm_config_userconfig=/dev/null npm ci`. To move a pin, add both: `npm_config_userconfig=/dev/null npm install -D "harness@github:jimmyandrade/harness#vX.Y.Z" --allow-git=all`. Ignoring `~/.npmrc` does not lift `allow-git`, because `root` is also the npm default. The file stays as it is.
 3. Without `~/.npmrc`, the command also loses the tokens it holds. Git dependencies over SSH and public packages do not need them; a package from a private registry does.
 4. `node_modules/harness` and `node_modules/vocabulary` present, and `run-check.sh` exiting 0, close the case.

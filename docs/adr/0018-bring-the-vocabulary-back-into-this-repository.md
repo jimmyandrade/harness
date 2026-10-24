@@ -28,7 +28,7 @@ The `core` plugin ships the vocabulary skills and starts the vocabulary server. 
 
 The glossary of a project stays in that project, one UTF-8 JSON file per language. This repository ships no glossary and no brand name.
 
-The repository jimmyandrade/vocabulary is archived with a notice that points here. Its plugin is retired.
+The repository jimmyandrade/vocabulary was archived with a notice that points here, and deleted later. Its plugin is retired.
 
 ## Consequences
 

@@ -128,7 +128,7 @@ None. People reach the core through their agent (Claude Code, Cursor), GitHub, a
 
 - Notion API: Purpose: publish skill and model pages. Integration Method: `@notionhq/client` with the business token.
 - GitHub: Purpose: pull requests, CI, releases, and composite actions. Integration Method: GitHub Actions and the `gh` CLI.
-- Renovate: Purpose: move the pins of the core and of jimmyandrade/vocabulary in business harnesses. Integration Method: the preset in `default.json`.
+- Renovate: Purpose: move the pins of the core in business harnesses. Integration Method: the preset in `default.json`.
 
 ## 6. Deployment & Infrastructure
 

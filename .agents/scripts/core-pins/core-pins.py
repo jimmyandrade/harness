@@ -96,7 +96,7 @@ def check(root: Path) -> list[Finding]:
             pin.file,
             pin.line,
             f"pins the core to {pin.tag}, but {reference.file}:{reference.line} pins {reference.tag}. "
-            "Move every pin of the core together, as the core harness and vocabulary pull request of Renovate does.",
+            "Move every pin of the core together, as the core harness pull request of Renovate does.",
         )
         for pin in found
         if pin.tag != reference.tag

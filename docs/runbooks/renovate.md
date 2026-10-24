@@ -4,7 +4,7 @@ locale: en
 
 # Keep the core current with Renovate
 
-Renovate is optional. With it, each release of this repository opens one pull request in the business repository that moves every pin of the core at once: the workflows, `package.json`, `.claude-plugin/marketplace.json`, and `.claude/settings.json`. A pin of jimmyandrade/vocabulary to a tag in `package.json` moves in the same pull request. For a minor or patch release, Renovate merges that pull request by itself once its checks pass. Without it, someone moves those pins by hand, and the `core-pins` check of `run-check.sh` fails, on commit and in the pull request, at the line of each pin left on another tag. Run this runbook once per repository, after `business-repository.md`.
+Renovate is optional. With it, each release of this repository opens one pull request in the business repository that moves every pin of the core at once: the workflows, `package.json`, `.claude-plugin/marketplace.json`, and `.claude/settings.json`. For a minor or patch release, Renovate merges that pull request by itself once its checks pass. Without it, someone moves those pins by hand, and the `core-pins` check of `run-check.sh` fails, on commit and in the pull request, at the line of each pin left on another tag. Run this runbook once per repository, after `business-repository.md`.
 
 Each step ends with a check.
 
@@ -36,4 +36,4 @@ Check: the portal shows Dependency Updates as Interactive.
 
 In the portal, use Actions, then Run Renovate scan. Saving a setting also starts a job. The hosted app works through a queue, so a scheduled run can take hours; the Dependency Dashboard issue has a checkbox that asks for a new run too.
 
-Check: the repository has a Dependency Dashboard issue, and its detected dependencies list `jimmyandrade/harness` in each file that pins it. When a newer release exists, a `core harness and vocabulary` pull request is open, or already merged after its checks passed.
+Check: the repository has a Dependency Dashboard issue, and its detected dependencies list `jimmyandrade/harness` in each file that pins it. When a newer release exists, a `core harness` pull request is open, or already merged after its checks passed.

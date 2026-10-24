@@ -10,7 +10,7 @@ Superseded by `docs/adr/0007-build-on-install.md`. `dist/` is no longer committe
 
 ## Context
 
-A project installs this repository with `npm install --save-dev github:jimmyandrade/vocabulary` and starts the MCP server from `node_modules/vocabulary`. Node.js 24 and 26 strip TypeScript types, but not for a file under `node_modules`. `node node_modules/vocabulary/api/mcp/index.ts` stops with `ERR_UNSUPPORTED_NODE_MODULES_TYPE_STRIPPING`, and so does the command line in `api/cli.ts`.
+A project installs this repository with `npm install --save-dev github:jimmyandrade/harness` and starts the MCP server from `node_modules/harness/vocabulary`. Node.js 24 and 26 strip TypeScript types, but not for a file under `node_modules`. `node node_modules/harness/vocabulary/api/mcp/index.ts` stops with `ERR_UNSUPPORTED_NODE_MODULES_TYPE_STRIPPING`, and so does the command line in `api/cli.ts`.
 
 A `prepare` script could compile on install. npm 11 does not run the lifecycle scripts of a dependency until the project approves them with `npm approve-scripts`, so the install would end without the compiled files. A launcher that copies the source out of `node_modules`, or a loader hook that strips types itself, would depend on an experimental Node.js API.
 
