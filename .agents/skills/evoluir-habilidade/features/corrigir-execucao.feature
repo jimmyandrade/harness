@@ -30,4 +30,4 @@ Funcionalidade: Corrigir a execução pelo feedback
       E o ambiente não tem o repositório nem uma conexão que escreva nele
       Quando a skill é evoluída
       Então a resposta entrega a mudança pronta, com a skill, o passo e o texto novo
-      Mas não pede o repositório nem o caminho da skill
+      Mas não pede o repositório
