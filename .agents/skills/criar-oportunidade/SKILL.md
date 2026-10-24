@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.16.0"
+  version: "0.17.0"
   related:
     - procurar-oportunidade
     - definir-grupo-de-oportunidades
@@ -59,6 +59,19 @@ Cada data é uma página na lista de oportunidades, com a data. Não crie outra 
 ### Passo 5
 
 O que é desta data fica na edição: endereço, horário, valor, formulário e número de vagas. Um lugar visto numa data só não vira lugar padrão do grupo. Os perfis da edição só recebem a conta própria desta edição. O perfil oficial fica com `definir-grupo-de-oportunidades`, com `sim`. Não grave o cartaz nem a operação no corpo.
+
+Consultar uma programação é leitura; não é inscrição nem escolha de participação. Retome a fonte oficial já identificada sem pedir nova autorização para a consulta solicitada. Carregue o conteúdo completo antes de apresentar a programação como completa. Timeout na leitura rápida não é prova de indisponibilidade: use uma leitura mais completa oferecida pela mesma ferramenta. Não invente horários, palestrantes ou salas a partir de trechos de busca.
+
+```mermaid
+flowchart LR
+  P{O pedido sobre a programação é?} -->|consultar| L[Leia a fonte e responda sem gravar]
+  P -->|armazenar no cronograma ligado| C[Registre as sessões na relação existente]
+  P -->|escolher participação| H[Deixe a decisão com a pessoa]
+```
+
+No armazenamento solicitado, carregue o esquema do cronograma e consulte os itens já ligados à edição antes de criar. Registre uma sessão por item, com o vínculo para a oportunidade, início e fim planejados no fuso do evento e ordem de leitura. Preserve sessões simultâneas, repetições em horários diferentes e atividades fechadas, com a restrição explícita. Guarde eixo, palestrante informado e URL da fonte no contexto complementar; datas, horários e local ficam nas propriedades próprias. Ausência de palestrante ou de sala permanece ausência. Não confunda programação publicada com presença escolhida, inscrição, tarefa ou compromisso no calendário. O pedido de guardar para escolher depois não autoriza bloquear a agenda nem selecionar sessões.
+
+Teste uma sessão real do pedido com todas as propriedades pretendidas antes de enviar o lote. Reaproveite o registro de teste e não o crie de novo. Examine o resultado por item, não apenas o sucesso da chamada. Campo opcional rejeitado interrompe a repetição do mesmo lote: confira o formato documentado e teste uma correção num único item. Persistindo a rejeição, grave os outros campos e informe a lacuna, sem alterar a estrutura, inventar coordenadas ou mover o local para texto livre. Retome só os itens que não foram gravados; preserve os sucessos parciais. Compare as sessões da fonte com os itens vinculados, seus nomes, início e fim antes de afirmar completude. Não use a quantidade de atividades do anúncio como quantidade da programação publicada.
 
 ### Passo 6
 
