@@ -42,8 +42,8 @@ jobs:
           base: ${{ steps.range.outputs.base }}
           head: ${{ steps.range.outputs.head }}
           comment: "false"
-      - name: Sync skill pages
-        uses: jimmyandrade/harness/.github/actions/sync-skill-pages@vX.Y.Z
+      - name: Sync Notion pages
+        uses: jimmyandrade/harness/.github/actions/sync-notion-pages@vX.Y.Z
         with:
           notion-token: ${{ secrets.NOTION_TOKEN }}
           base: ${{ steps.range.outputs.base }}

@@ -1,5 +1,5 @@
-name: Sync skill pages
-description: Create or update one Notion page per changed skill of the calling repository, with that repository's mapping, and one page per changed model when the repository has a model mapping.
+name: Sync Notion pages
+description: Create or update one Notion page per changed skill of the calling repository, with that repository's mapping, the page of its project instructions when they change, and one page per changed model when the repository has a model mapping.
 inputs:
   notion-token:
     description: Notion integration token with access to the skills data source.

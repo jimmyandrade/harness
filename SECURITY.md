@@ -18,7 +18,7 @@ The scripts and the actions run on Node.js 24 and Python 3.14. Continuous integr
 
 ## Secrets
 
-This repository never stores a token, a workspace id, or a database id. A business harness passes its Notion token to `sync-skill-pages` as a secret and keeps its data source id in its own mapping.
+This repository never stores a token, a workspace id, or a database id. A business harness passes its Notion token to `sync-notion-pages` as a secret and keeps its data source id in its own mapping.
 
 ## Reporting a Vulnerability
 
