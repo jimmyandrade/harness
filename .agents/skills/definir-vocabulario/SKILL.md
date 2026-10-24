@@ -3,7 +3,7 @@ name: definir-vocabulario
 description: Use essa habilidade sempre que for cadastrar ou atualizar um ou mais termos do vocabulário do tom de voz, mesmo sem dizer glossário, lote ou estado. NÃO use para escrever, revisar ou aprovar o texto da marca, classificar uma frase, perguntar quais variações de gênero, número ou grafia foram cadastradas, nem inventar um termo que a pessoa não enviou.
 metadata:
   author: jimmyandrade
-  version: "0.30.0"
+  version: "0.30.1"
   related:
     - evoluir-habilidade
     - procurar-variacao-de-termo
@@ -27,7 +27,7 @@ metadata:
 
 A pessoa responsável pelo tom de voz quer cadastrar ou atualizar termos. Perguntar se um termo ou uma variação faltou segue `procurar-variacao-de-termo`. Monte o plano com idioma, modo e a lista. Cada item tem `state`, `term`, `categories` e os campos desse nível. Use só o que a pessoa enviou.
 
-O idioma de cada linha é o da comunicação inteira, não o do arquivo que já existe. Comunicação inteira em inglês, como um e-mail, uma review ou uma mensagem, grava o termo e a frase em `en`. Comunicação principalmente em português que só leva um termo em inglês no meio, como `header`, grava em `pt-BR`. Idioma ambíguo: pergunte. Sem idioma ou sem termo, pare e peça. Idioma sem arquivo responde `Unknown language`: antes da primeira consulta ou escrita, crie o arquivo com `d="${HARNESS_GLOSSARY_DIR:-${HARNESS_ROOT:-.}/.agents/glossary}"; mkdir -p "$d"; [ -e "$d/<idioma>.json" ] || echo '{}' > "$d/<idioma>.json"`, com o idioma em BCP 47, como `en`.
+O idioma de cada linha é o da comunicação inteira, não o do arquivo que já existe. Comunicação inteira em inglês, como um e-mail, uma review ou uma mensagem, grava o termo e a frase em `en`. Comunicação principalmente em português que só leva um termo em inglês no meio, como `header`, grava em `pt-BR`. Idioma ambíguo: pergunte. Sem idioma ou sem termo, pare e peça.
 
 ```mermaid
 flowchart LR
@@ -299,9 +299,10 @@ Casa ficou permitida. Casas ganhou a própria linha, proibida. Moradias ganhou a
 - `node node_modules/harness/vocabulary/dist/cli.js exists --language <idioma> --text <trecho>` devolve só o registro de cada token do trecho para se ele existe.
 - `node node_modules/harness/vocabulary/dist/cli.js terms` grava o lote. `--language`, `--mode` e `--validation` valem para o lote. Cada `--term` abre um termo, com `--state`, `--description`, `--reason`, `--when`, `--substitution`, `--decided-by`, `--decided-by-email`, `--decided-by-url`, `--source` e `--notes`. `--decided-by` é o nome. Os dois seguintes completam o objeto. `--categories`, `--examples`, `--rejected`, `--alternatives`, `--related`, `--tags`, `--allowed-in` e `--forbidden-in` repetem, um valor por vez. `--file` lê o lote inteiro de um JSON.
 - `--glossary`, antes do comando, aponta outro vocabulário.
+- `d="${HARNESS_GLOSSARY_DIR:-${HARNESS_ROOT:-.}/.agents/glossary}"; mkdir -p "$d"; [ -e "$d/<idioma>.json" ] || echo '{}' > "$d/<idioma>.json"` cria o vocabulário vazio do idioma.
 - `lookup_term`, `exists_in_text` e `write_terms`, no servidor `vocabulary`, fazem a mesma consulta e a mesma escrita quando não há terminal.
 
-1. Com terminal, rode `lookup` para um termo e `exists` para um trecho.
+1. Com terminal, rode `lookup` para um termo e `exists` para um trecho. Com `Unknown language`, crie o vocabulário do idioma, em BCP 47, como `en`, e repita.
 2. Com terminal, rode `terms` com `--language`, `--mode` e um `--term` para cada termo.
-3. Sem terminal, chame `lookup_term`, `exists_in_text` e `write_terms` com os mesmos campos.
+3. Sem terminal, chame `lookup_term`, `exists_in_text` e `write_terms` com os mesmos campos. Com `Unknown language`, pare: o vocabulário nasce com terminal.
 4. Sem terminal e sem o servidor `vocabulary`, pare.
