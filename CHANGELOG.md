@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.89.0](https://github.com/jimmyandrade/harness/compare/v0.88.0...v0.89.0) (2026-10-24)
+
+
+### Features
+
+* **sincronizar-status-da-tarefa:** add skill to sync task status with the linked pull request ([#391](https://github.com/jimmyandrade/harness/issues/391)) ([3b7f5df](https://github.com/jimmyandrade/harness/commit/3b7f5df208125d9b77f13865dd6501673006017c))
+
+
+### Bug Fixes
+
+* **lancar-despesa-da-empresa:** handle a mapped name the schema lacks ([#398](https://github.com/jimmyandrade/harness/issues/398)) ([cf17869](https://github.com/jimmyandrade/harness/commit/cf178692a04b351e59d09b2e12e360776bf51fff))
+* **lancar-despesa-da-empresa:** link vehicle expenses without repeating plates ([#380](https://github.com/jimmyandrade/harness/issues/380)) ([65295da](https://github.com/jimmyandrade/harness/commit/65295dab06d30907582cbf03bab31bb532c7936c))
+* **lancar-despesa-da-empresa:** require evidence for the paying account ([#379](https://github.com/jimmyandrade/harness/issues/379)) ([299de57](https://github.com/jimmyandrade/harness/commit/299de57d137bc99ff46b27c00c4b443d5b64069a))
+
 ## [0.88.0](https://github.com/jimmyandrade/harness/compare/v0.87.0...v0.88.0) (2026-10-23)
 
 
