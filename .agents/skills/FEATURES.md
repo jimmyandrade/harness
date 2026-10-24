@@ -774,6 +774,20 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses registering the term, checking the fields, writing brand text, and rating a term without the brand sources
 
+
+### classificar-melhoria-tecnica
+- **Stability**: experimental
+- **Description**: Decide whether an item belongs in the team's technical improvements document and in which section, with the reason
+- **Properties**:
+  - Lives at `.agents/skills/classificar-melhoria-tecnica/SKILL.md` and stays internal while it is validated
+  - Walks the project's decision tree from top to bottom, and the first question that matches decides. Without a project tree it uses a short default one
+  - Knows no section by name: the sections, the document, and the rules come from parameters, with three default sections that a project can rename, remove, or extend
+  - Returns the section key, the status, and the reason in one sentence, and asks before it writes a new rule when no question matches
+  - Does not edit the document and does not order items by priority
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [ ] Three cases validated with the person
+
 ### definir-vocabulario
 - **Stability**: experimental
 - **Description**: Register and update one or more voice-vocabulary terms

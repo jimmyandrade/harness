@@ -16,6 +16,7 @@ flowchart LR
     atender_revisao_de_pull_request["atender-revisao-de-pull-request"]
     avaliar_atualizacoes_de_dependencia["avaliar-atualizacoes-de-dependencia"]
     classificar_estado_do_termo["classificar-estado-do-termo"]
+    classificar_melhoria_tecnica["classificar-melhoria-tecnica"]
     comunicar_novidade_do_produto["comunicar-novidade-do-produto"]
     conversar_no_whatsapp["conversar-no-whatsapp"]
     criar_commit["criar-commit"]
@@ -125,6 +126,8 @@ flowchart LR
   classificar_estado_do_termo --> definir_vocabulario
   classificar_estado_do_termo --> gravar_termos_no_vocabulario
   classificar_estado_do_termo --> validar_plano_de_vocabulario
+  classificar_melhoria_tecnica --> evoluir_habilidade
+  classificar_melhoria_tecnica --> priorizar_itens
   comunicar_novidade_do_produto --> evoluir_habilidade
   comunicar_novidade_do_produto --> redigir_com_tom_de_voz
   conversar_no_whatsapp --> comunicar_novidade_do_produto
