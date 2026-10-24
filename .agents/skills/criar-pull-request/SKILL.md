@@ -3,7 +3,7 @@ name: criar-pull-request
 description: Use essa habilidade sempre que for abrir PR, subir uma correção, mandar para a branch principal ou mesclar mudança no repositório, mesmo sem dizer PR. NÃO use para responder comentário de revisão nem para só commitar (use criar-commit).
 metadata:
   author: jimmyandrade
-  version: "0.16.0"
+  version: "0.17.0"
   related:
     - evoluir-habilidade
     - criar-commit
@@ -29,13 +29,14 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Exigir aprovação de outra pessoa": "só sem terminal"
 "Comunicar novidade após o merge": "sim"
 "Atribuição da sessão": "sim"
+"Termos que não podem aparecer": []
 "Fatiar por subtarefa": "não"
 "PR que depende de outro": ""
 "Refatiar PR já aberto": ""
 "Modo de aprendizado": "perguntar"
 ```
 
-`Atribuição da sessão` é `sim`, que termina a descrição do PR com a linha de atribuição da sessão, ou `não`, que nunca põe linha de ferramenta ou de modelo, mesmo que o ambiente peça, e remove a que já existir ao editar um PR. `Fatiar por subtarefa` é `sim` quando cada subtarefa da tarefa vira um PR próprio, em fatias pequenas e incrementais. `PR que depende de outro` é `empilhar`, que abre o PR contra a branch do anterior, ou vazio. `Refatiar PR já aberto` diz como mudar o corte de um PR que já está aberto, como `adicionar commits ou abrir PR empilhado`, sem renomear a branch nem fechar e reabrir o PR.
+`Atribuição da sessão` é `sim`, que termina a descrição do PR com a linha de atribuição da sessão, ou `não`, que nunca põe linha de ferramenta ou de modelo, mesmo que o ambiente peça, e remove a que já existir ao editar um PR. `Termos que não podem aparecer` lista as palavras que não podem estar no PR nem nos arquivos dele, como o nome de uma empresa ou de um produto num repositório público. Vazio, não há busca. `Fatiar por subtarefa` é `sim` quando cada subtarefa da tarefa vira um PR próprio, em fatias pequenas e incrementais. `PR que depende de outro` é `empilhar`, que abre o PR contra a branch do anterior, ou vazio. `Refatiar PR já aberto` diz como mudar o corte de um PR que já está aberto, como `adicionar commits ou abrir PR empilhado`, sem renomear a branch nem fechar e reabrir o PR.
 
 ## Instruções
 
@@ -43,7 +44,7 @@ Nada entra na `Branch base` sem pull request. Nunca dê push na `Branch base`, n
 
 ### Passo 1
 
-Com `Fatiar por subtarefa` em `sim`, abra um PR para cada subtarefa, e um PR que depende de outro segue `PR que depende de outro`. Antes de criar a branch, confira se a demanda tem uma tarefa no rastreador do projeto, quando o projeto usa um. Sem tarefa, sugira criá-la antes do PR e espere a resposta: a chave entra no nome da branch e no título do PR conforme a convenção do repositório. Se o PR já está aberto sem tarefa, diga isso e proponha criá-la depois.
+Leia o `CONTRIBUTING.md` e o `AGENTS.md` do repositório e siga o que eles dizem de branch, título, descrição e checks: a convenção documentada vale mais que a preferência pessoal. Com `Fatiar por subtarefa` em `sim`, abra um PR para cada subtarefa, e um PR que depende de outro segue `PR que depende de outro`. Antes de criar a branch, confira se a demanda tem uma tarefa no rastreador do projeto, quando o projeto usa um. Sem tarefa, sugira criá-la antes do PR e espere a resposta: a chave entra no nome da branch e no título do PR conforme a convenção do repositório. Se o PR já está aberto sem tarefa, diga isso e proponha criá-la depois.
 
 Se a branch atual for a `Branch base`, crie uma branch a partir da `Branch base` remota atualizada antes de qualquer commit, sem rastrear a base.
 
@@ -70,7 +71,7 @@ Teste antes o acesso ao remoto com a credencial do `gh`. Faça o push com essa c
 
 ### Passo 6
 
-Abra o PR contra a `Branch base` no `Repositório`. Título igual ao assunto do commit. Corpo em `Idioma do PR`. Se o repositório tiver um template de pull request, siga as seções dele e marque as caixas conforme o que foi feito. Com `Atribuição da sessão` em `sim`, termine com a linha de atribuição da sessão. Com `não`, não ponha linha de ferramenta ou de modelo, e remova a que o PR já tiver na mesma edição. Mande o link na resposta.
+Antes de abrir, procure cada termo de `Termos que não podem aparecer` nos arquivos novos e alterados e no texto do PR, sem diferenciar maiúsculas (`git grep -i -E "termo1|termo2"`). Um achado volta para correção e nunca segue para o PR. Abra o PR contra a `Branch base` no `Repositório`. Título igual ao assunto do commit. Corpo em `Idioma do PR`. Se o repositório tiver um template de pull request, siga as seções dele e marque as caixas conforme o que foi feito. Com `Atribuição da sessão` em `sim`, termine com a linha de atribuição da sessão. Com `não`, não ponha linha de ferramenta ou de modelo, e remova a que o PR já tiver na mesma edição. Mande o link na resposta.
 
 ### Passo 7
 
