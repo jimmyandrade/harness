@@ -18,7 +18,7 @@ The launcher also cannot choose a Node.js. It runs the first `node` on the `PATH
 
 The launcher requires Node.js 24.22.1 or newer. It compares major, minor, and patch with plain `sh`, with no tool outside POSIX, and keeps the check that types are stripped as a second barrier. On failure it writes to stderr the version it found, the version it requires, and a pointer to `vocabulary/docs/runbooks/mcp-hosts.md`, and exits with a non-zero code. The plugin and its skills keep working, as ADR 0019 decides.
 
-`engines.node` in `package.json` is `>=24.22.1`, so the package, the CI, and the plugin ask for the same minimum. The CI keeps `node-version: 24` and sets `check-latest: true` on `actions/setup-node`, in the workflow and in the `sync-skill-pages` action. Without it, the `24` resolved to the 24.x already on the runner image, 24.21.0, which the launcher test rejected. With it, the runner downloads the newest 24.x, so nothing needs an update when a newer Node.js 24 comes out.
+`engines.node` in `package.json` is `>=24.22.1`, so the package, the CI, and the plugin ask for the same minimum. The CI keeps `node-version: 24` and sets `check-latest: true` on `actions/setup-node`, in the workflow and in the `sync-notion-pages` action. Without it, the `24` resolved to the 24.x already on the runner image, 24.21.0, which the launcher test rejected. With it, the runner downloads the newest 24.x, so nothing needs an update when a newer Node.js 24 comes out.
 
 The runbook says how to leave a suitable Node.js as the default, for example `nvm alias default 24.22.1`, and that the app must be started again to inherit the `PATH`.
 

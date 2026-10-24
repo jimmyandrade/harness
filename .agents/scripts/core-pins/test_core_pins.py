@@ -31,7 +31,7 @@ LOCK = (
 WORKFLOW = (
     "jobs:\n  check:\n    steps:\n"
     "      - uses: jimmyandrade/harness/.github/actions/check-skill@%s\n"
-    "      - uses: jimmyandrade/harness/.github/actions/sync-skill-pages@%s\n"
+    "      - uses: jimmyandrade/harness/.github/actions/sync-notion-pages@%s\n"
 )
 MARKETPLACE = (
     '{\n  "plugins": [\n'
