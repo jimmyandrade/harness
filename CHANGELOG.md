@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.89.1](https://github.com/jimmyandrade/harness/compare/v0.89.0...v0.89.1) (2026-10-24)
+
+
+### Bug Fixes
+
+* **definir-vocabulario:** choose the language of a row by the whole communication ([#392](https://github.com/jimmyandrade/harness/issues/392)) ([f4597be](https://github.com/jimmyandrade/harness/commit/f4597be469eccda5db2d621a9baae5ae46034d46))
+
 ## [0.89.0](https://github.com/jimmyandrade/harness/compare/v0.88.0...v0.89.0) (2026-10-24)
 
 
