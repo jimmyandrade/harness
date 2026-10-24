@@ -15,8 +15,32 @@ fail() {
 }
 
 command -v node >/dev/null 2>&1 || fail "Node.js is not on PATH."
+
+# The launcher cannot pick a Node.js: it runs the first `node` on the PATH of the app that started it.
+REQUIRED="24.22.1"
+FOUND="$(node -p 'process.versions.node' 2>/dev/null || true)"
+version_at_least() {
+  # Compares major, minor, and patch as integers; a pre-release suffix is ignored.
+  [ -n "$1" ] || return 1
+  old_ifs="$IFS"
+  IFS=.
+  # shellcheck disable=SC2086
+  set -- $1 $2
+  IFS="$old_ifs"
+  [ "$#" -eq 6 ] || return 1
+  for part in "$1" "$2" "$3" "$4" "$5" "$6"; do
+    case "$part" in '' | *[!0-9]*) return 1 ;; esac
+  done
+  [ "$1" -gt "$4" ] && return 0
+  [ "$1" -lt "$4" ] && return 1
+  [ "$2" -gt "$5" ] && return 0
+  [ "$2" -lt "$5" ] && return 1
+  [ "$3" -ge "$6" ]
+}
+version_at_least "${FOUND%%[-+]*}" "$REQUIRED" ||
+  fail "Node.js ${FOUND:-of unknown version} is on PATH, and Node.js $REQUIRED or newer is required."
 [ "$(node -p 'Boolean(process.features.typescript)' 2>/dev/null)" = "true" ] ||
-  fail "Node.js $(node -v) does not strip TypeScript types by default. Use Node.js 22.18 or newer."
+  fail "Node.js $FOUND does not strip TypeScript types by default. Use Node.js $REQUIRED or newer."
 
 if [ ! -f "$ROOT/node_modules/zod/package.json" ]; then
   command -v npm >/dev/null 2>&1 || fail "npm is not on PATH, and the dependencies are not installed."
