@@ -831,10 +831,11 @@ How these skills relate is in `README.md`, in this folder.
 - **Properties**:
   - Lives at `.agents/skills/evoluir-habilidade/SKILL.md`
   - A request to test a skill uses this skill
+  - A direct request to change a skill also uses this skill: it edits right away, bumps the version, and then proposes a real case, without counting the change as validated before that run
   - Treats the skill as a living document and iterates from feedback
   - On inconsistent results, a failed call, or a correction from the person, improves the instructions and adds error handling
   - Sends undertriggering and overtriggering to descrever-habilidade-ou-schema
-  - Compares the current skill, the previous version when it exists, and a run without the skill
+  - Compares the current skill, the previous version when it exists, and a run without the skill, only when the person asks while `Executar testes` is `sob pedido`, the default, or on every test when it is `sempre`
   - Records each acceptance criterion the person sent as a Portuguese Gherkin feature in features/, one feature per functionality the person uses, starting with # language: pt, and counts it as validated only after that run. A step, the text format, and a diff are not a feature
   - Compares the run without the skill and with the skill on back-and-forth, failed calls, and tokens, from the run record
   - Edits the skill that was validated in that same conversation
