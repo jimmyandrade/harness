@@ -793,6 +793,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Description**: Search, test, and write voice-vocabulary terms
 - **Properties**:
   - Lives at `.agents/skills/gravar-termos-no-vocabulario/SKILL.md`
+  - Finds which terms of a plan are already stored in one call, with `lookup-terms` or the MCP tool `lookup_terms`, reading an expression of more than one word as a whole
   - Corrects a stored term by sending only the fields that change, reading the row before and after, and clearing a field only when the person asks
   - Searches the spelling before it writes, keeps a plural, a gender, and an accent as their own rows, and suggests the other forms without writing them
   - Asks for related terms before a new forbidden term is written, and never invents one
@@ -1229,7 +1230,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Description**: Say whether a term or its gender, number, or spelling variations are in the glossary
 - **Properties**:
   - Lives at `.agents/skills/procurar-variacao-de-termo/SKILL.md`
-  - Reads each form with `node node_modules/harness/vocabulary/dist/cli.js lookup`, or the MCP tool `lookup_term` without a terminal, and stops without both
+  - Reads every form in one call with `node node_modules/harness/vocabulary/dist/cli.js lookup-terms`, or the MCP tool `lookup_terms` without a terminal, and stops without both
   - Says which forms are registered, with their state, and which are not
   - Suggests registering the missing forms and asks the state of each one, without writing
   - Sends the registration to definir-vocabulario

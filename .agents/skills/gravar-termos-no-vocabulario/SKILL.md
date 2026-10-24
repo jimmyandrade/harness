@@ -3,7 +3,7 @@ name: gravar-termos-no-vocabulario
 description: Use essa habilidade sempre que, ao cadastrar ou corrigir termos do vocabulário do tom de voz, for hora de pesquisar a grafia, testar com dry run e gravar o lote, mesmo sem dizer gravar. NÃO use para decidir o nível, validar os campos, perguntar quais variações foram cadastradas, escrever o texto da marca, nem inventar um termo.
 metadata:
   author: jimmyandrade
-  version: "0.1.1"
+  version: "0.2.0"
   related:
     - definir-vocabulario
     - procurar-variacao-de-termo
@@ -39,7 +39,7 @@ Para corrigir um termo que já está, leia a linha com `lookup` e guarde-a. Mand
 
 ### Passo 3
 
-Pesquise a grafia no vocabulário antes de gravar, com a consulta de Scripts disponíveis. Com mais de um termo, não consulte um por vez: rode o `dry_run` do lote em `insert`, que devolve em `unchanged` o que já está e em `inserted` o que é novo, e use `lookup` só para ler a linha de um termo que já está. `exists` confere palavra por palavra e não serve para uma expressão com mais de uma palavra. Com terminal, rode o comando. Sem terminal, chame a ferramenta do servidor `vocabulary`. Sem os dois, como num agente do Notion, pare antes de pesquisar. Diga que o cadastro roda numa ferramenta de código com o projeto aberto. Não leia o vocabulário de memória. Outra caixa é o mesmo termo: a linha que já está recebe a orientação. Não cadastre uma segunda linha dessa grafia. Acento muda a palavra: roles e rolês, pais e país são termos diferentes, cada um com a própria linha. Uma forma igual, com os mesmos campos, volta sem alteração.
+Pesquise a grafia no vocabulário antes de gravar, com a consulta de Scripts disponíveis. Com mais de um termo, não consulte um por vez: `lookup-terms` lê todos de uma vez, na ordem enviada, e devolve a linha guardada de cada um que já está. Ele lê uma expressão com mais de uma palavra inteira. `exists` confere palavra por palavra e não serve para isso. O `dry_run` do lote em `insert` também diz o que já está, em `unchanged`, e o que é novo, em `inserted`, e valida o lote. Com terminal, rode o comando. Sem terminal, chame a ferramenta do servidor `vocabulary`. Sem os dois, como num agente do Notion, pare antes de pesquisar. Diga que o cadastro roda numa ferramenta de código com o projeto aberto. Não leia o vocabulário de memória. Outra caixa é o mesmo termo: a linha que já está recebe a orientação. Não cadastre uma segunda linha dessa grafia. Acento muda a palavra: roles e rolês, pais e país são termos diferentes, cada um com a própria linha. Uma forma igual, com os mesmos campos, volta sem alteração.
 
 Plural, singular, feminino, masculino e outra palavra do mesmo assunto são linhas próprias. Cada uma tem o próprio estado. Casas e moradias convivem. Casa e casas convivem. Gato e gata convivem. Não junte essas linhas.
 
@@ -140,13 +140,14 @@ O plano ficou em update. A reticências que já estava foi reescrita, com o quan
 ## Scripts disponíveis
 
 - `node node_modules/harness/vocabulary/dist/cli.js lookup --language <idioma> --term <termo>` lê um termo e devolve se ele existe e a linha guardada.
+- `node node_modules/harness/vocabulary/dist/cli.js lookup-terms --language <idioma> --term <termo> --term <termo>` lê até 100 termos de uma vez, na ordem enviada, e devolve `results` com o que `lookup` devolve para cada um.
 - `node node_modules/harness/vocabulary/dist/cli.js exists --language <idioma> --text <trecho>` devolve só o registro de cada token do trecho para se ele existe.
 - `node node_modules/harness/vocabulary/dist/cli.js terms` grava o lote. `--language`, `--mode` e `--validation` valem para o lote. Cada `--term` abre um termo, com `--state`, `--description`, `--reason`, `--when`, `--substitution`, `--decided-by`, `--decided-by-email`, `--decided-by-url`, `--source` e `--notes`. `--decided-by` é o nome. Os dois seguintes completam o objeto. `--categories`, `--examples`, `--rejected`, `--alternatives`, `--related`, `--tags`, `--allowed-in` e `--forbidden-in` repetem, um valor por vez. `--file` lê o lote inteiro de um JSON.
 - `--glossary`, antes do comando, aponta outro vocabulário.
 - `d="${HARNESS_GLOSSARY_DIR:-${HARNESS_ROOT:-.}/.agents/glossary}"; mkdir -p "$d"; [ -e "$d/<idioma>.json" ] || echo '{}' > "$d/<idioma>.json"` cria o vocabulário vazio do idioma.
-- `lookup_term`, `exists_in_text` e `write_terms`, no servidor `vocabulary`, fazem a mesma consulta e a mesma escrita quando não há terminal.
+- `lookup_term`, `lookup_terms`, `exists_in_text` e `write_terms`, no servidor `vocabulary`, fazem a mesma consulta e a mesma escrita quando não há terminal.
 
-1. Com terminal, rode `lookup` para um termo e `exists` para um trecho. Com `Unknown language`, crie o vocabulário do idioma, em BCP 47, como `en`, e repita.
+1. Com terminal, rode `lookup-terms` para os termos do plano, `lookup` para um termo e `exists` para um trecho. Com `Unknown language`, crie o vocabulário do idioma, em BCP 47, como `en`, e repita.
 2. Com terminal, rode `terms` com `--language`, `--mode` e um `--term` para cada termo.
-3. Sem terminal, chame `lookup_term`, `exists_in_text` e `write_terms` com os mesmos campos. Com `Unknown language`, pare: o vocabulário nasce com terminal.
+3. Sem terminal, chame `lookup_terms`, `lookup_term`, `exists_in_text` e `write_terms` com os mesmos campos. Com `Unknown language`, pare: o vocabulário nasce com terminal.
 4. Sem terminal e sem o servidor `vocabulary`, pare.

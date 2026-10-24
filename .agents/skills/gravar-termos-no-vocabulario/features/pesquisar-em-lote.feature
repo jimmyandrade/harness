@@ -12,6 +12,12 @@ Funcionalidade: Pesquisar vários termos de uma vez
       E lista os 11 em inserted
       E a skill não faz uma consulta por termo
 
+    Exemplo: Consultar o plano sem gravar
+      Dado que o plano tem termos de uma palavra e expressões de várias palavras
+      Quando a skill consulta os termos em lote
+      Então recebe uma resposta por termo, na ordem enviada
+      E cada expressão de várias palavras é lida inteira
+
     Exemplo: Ler a linha de um termo que já está
       Dado que a resposta do teste listou "que tal?" em unchanged
       Quando a skill precisa ver o estado e as notas dele

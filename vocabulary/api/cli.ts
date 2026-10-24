@@ -1,7 +1,7 @@
 /**
  * Vocabulary commands.
  *
- * lookup reads one term. exists maps each token of a text to whether it exists.
+ * lookup reads one term. lookup-terms reads several in one call: repeat --term, and a term of more than one word is read as a whole. exists maps each token of a text to whether it exists.
  * terms writes one language in one pass. Flags are key and value.
  * --language, --mode, and --validation apply to the whole batch. --dry-run
  * validates and reports what the write would do, with every problem that would
@@ -23,6 +23,7 @@
  *
  * Run: node api/cli.ts lookup --language pt-BR --term casa
  * Run: node api/cli.ts lookup --language pt-BR --term "verão! (chegou!)" --tags festival-de-verao
+ * Run: node api/cli.ts lookup-terms --language pt-BR --term casa --term "quando puderem, dão uma olhada, por favor?"
  * Run: node api/cli.ts exists --language pt-BR --text "Oi, tudo bem?"
  * Run: node api/cli.ts terms --language pt-BR --mode insert --state allowed --term "!" --category punctuation --description "Ponto de exclamação" --reason "..." 
  * Run: node api/cli.ts terms --language pt-BR --mode upsert --state allowed --term iPhone --case-sensitive --categories brand --description "..." --reason "..."
@@ -35,11 +36,11 @@ import { readFileSync } from "node:fs"
 import { fileURLToPath } from "node:url"
 
 import { existsPhrase } from "./routes/exists/index.ts"
-import { lookupTerm } from "./routes/lookup/index.ts"
+import { lookupTerm, lookupTerms } from "./routes/lookup/index.ts"
 import { Glossary, InvalidGlossary, migrate, writeBatch } from "./shared/glossary.ts"
 import { parseBody } from "./shared/http.ts"
 import { readOptions, report } from "./shared/options.ts"
-import { existsRequest, lookupRequest } from "./shared/schema.ts"
+import { existsRequest, lookupRequest, lookupTermsRequest } from "./shared/schema.ts"
 
 const GLOBAL = new Set(["language", "mode", "validation", "file"])
 const LISTS = new Set(["categories", "examples", "rejected", "alternatives", "related", "tags", "allowed_in", "forbidden_in"])
@@ -114,6 +115,10 @@ export function run(argv: string[]): number {
     if (command === "lookup") {
       const body = parseBody(lookupRequest, flagsFrom(rest, ["language", "term"], ["tags"]))
       console.log(JSON.stringify(lookupTerm(new Glossary(glossary), body.language, body.term, body.tags)))
+    } else if (command === "lookup-terms") {
+      const flags = flagsFrom(rest, ["language"], ["term", "tags"])
+      const body = parseBody(lookupTermsRequest, { ...flags, terms: flags.term })
+      console.log(JSON.stringify(lookupTerms(new Glossary(glossary), body.language, body.terms, body.tags)))
     } else if (command === "exists") {
       const body = parseBody(existsRequest, flagsFrom(rest, ["language", "text"], ["tags"]))
       console.log(JSON.stringify(existsPhrase(new Glossary(glossary), body.language, body.text, body.tags)))
