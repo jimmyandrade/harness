@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.92.0](https://github.com/jimmyandrade/harness/compare/v0.91.0...v0.92.0) (2026-10-24)
+
+
+### Features
+
+* add general execution rules to the project instructions ([#410](https://github.com/jimmyandrade/harness/issues/410)) ([572fb77](https://github.com/jimmyandrade/harness/commit/572fb77f1af15293ceee2ba6f6464714c6a51103))
+* **vocabulary:** read several terms in one call with lookup-terms ([#413](https://github.com/jimmyandrade/harness/issues/413)) ([2a79eee](https://github.com/jimmyandrade/harness/commit/2a79eee5359187201dccca7f272ba9046cbb461f))
+
 ## [0.91.0](https://github.com/jimmyandrade/harness/compare/v0.90.0...v0.91.0) (2026-10-24)
 
 
