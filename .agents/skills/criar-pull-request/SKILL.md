@@ -3,7 +3,7 @@ name: criar-pull-request
 description: Use essa habilidade sempre que for abrir PR, subir uma correção, mandar para a branch principal ou mesclar mudança no repositório, mesmo sem dizer PR. NÃO use para responder comentário de revisão nem para só commitar (use criar-commit).
 metadata:
   author: jimmyandrade
-  version: "0.19.1"
+  version: "0.20.0"
   related:
     - evoluir-habilidade
     - criar-commit
@@ -37,11 +37,11 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Fatiar por subtarefa": "não"
 "PR que depende de outro": ""
 "Refatiar PR já aberto": ""
-"Criar pull request ao terminar": "não"
+"Criar pull request ao terminar": "rascunho"
 "Modo de aprendizado": "perguntar"
 ```
 
-`Criar pull request ao terminar` é `sim` quando a mudança de código autoriza o push da branch e a abertura do pull request, para o código não ficar só na máquina. É `não`, o padrão, quando isso espera um pedido explícito. O merge não entra nesse parâmetro.
+`Criar pull request ao terminar` é `rascunho`, o padrão: a mudança de código sobe a branch e abre o pull request em rascunho, para o trabalho não ficar só na máquina. Um rascunho não pede revisão. É `sim` quando o pull request abre pronto. É `não` quando a publicação espera um pedido explícito. A resposta diz o nome da branch, se ela está no GitHub e, quando o pull request existe, o link. O merge não entra nesse parâmetro.
 
 `Habilidade que pede a revisão` é o nome da habilidade que a organização usa para pedir a revisão de um PR pronto, como a que escreve o pedido no canal de revisão do time, ou vazio quando ninguém pede por habilidade. `Atribuir o PR a quem abre` é `sim` quando o PR sai com uma pessoa atribuída, a que o abre. `Rotular o PR` é `sim` quando o PR sai com o rótulo que melhor descreve a mudança. `Criar rótulo se nenhum servir` é `sim` quando a habilidade pode criar um rótulo novo se nenhum dos existentes descreve a mudança, ou `não`. `Atribuição da sessão` é `sim`, que termina a descrição do PR com a linha de atribuição da sessão, ou `não`, que nunca põe linha de ferramenta ou de modelo, mesmo que o ambiente peça, e remove a que já existir ao editar um PR. `Termos que não podem aparecer` lista as palavras que não podem estar no PR nem nos arquivos dele, como o nome de uma empresa ou de um produto num repositório público. Vazio, não há busca. `Fatiar por subtarefa` é `sim` quando cada subtarefa da tarefa vira um PR próprio, em fatias pequenas e incrementais. `PR que depende de outro` é `empilhar`, que abre o PR contra a branch do anterior, ou vazio. `Refatiar PR já aberto` diz como mudar o corte de um PR que já está aberto, como `adicionar commits ou abrir PR empilhado`, sem renomear a branch nem fechar e reabrir o PR.
 
@@ -72,7 +72,7 @@ Atualize a branch com rebase sobre a `Branch base` remota. Nunca faça merge da 
 
 ### Passo 5
 
-Com `Criar pull request ao terminar` em `sim`, a mudança de código já autoriza o push da branch e a abertura do pull request. Com `não`, só publique com pedido explícito. Pedir "faça o PR", "sobe isso" ou "coloca na main" autoriza o push da branch, nunca da `Branch base`. "coloca na main" continua sendo o pedido de merge. O parâmetro não mescla. Se `Duração do hook de pre-push (min)` for maior que zero, avise antes quanto o hook leva, para a pessoa não achar que travou.
+Com `Criar pull request ao terminar` em `rascunho`, o padrão, a mudança de código já autoriza o push da branch e a abertura do pull request em rascunho. Com `sim`, o push e o pull request pronto. Com `não`, só publique com pedido explícito. Pedir "faça o PR", "sobe isso" ou "coloca na main" autoriza o push da branch, nunca da `Branch base`. "coloca na main" continua sendo o pedido de merge. O parâmetro não mescla. Se `Duração do hook de pre-push (min)` for maior que zero, avise antes quanto o hook leva, para a pessoa não achar que travou.
 Se o commit a publicar é o mesmo que passou no Passo 2, publique sem o hook e diga isso na resposta. Se houve outro commit depois, deixe o hook rodar, em segundo plano, com `Timeout do push (ms)`.
 Teste antes o acesso ao remoto com a credencial do `gh`. Faça o push com essa credencial.
 
@@ -117,7 +117,7 @@ Com `Comunicar novidade após o merge` igual a `sim`, siga `comunicar-novidade-d
 
 ### Passo 9
 
-Na resposta final, informe o hash de cada commit e diga o estado de cada etapa: commit, push, PR, quem foi atribuído, o rótulo, CI e merge. Cada PR citado, inclusive na pergunta sobre quem mescla, vai com o link completo. Se perguntarem "já mesclou?", responda primeiro sim ou não e depois o que falta. Com `Criar pull request ao terminar` em `não` e sem pedido de publicação, o estado do pull request é que ele não está aberto. Com `sim`, o pull request está aberto e a resposta leva o link. Diga se esta habilidade foi chamada. Não escreva que ela ficou para este pedido, nem para depois.
+Na resposta final, informe o nome da branch, se ela está no GitHub e o hash de cada commit, e diga o estado de cada etapa: commit, push, PR, quem foi atribuído, o rótulo, CI e merge. Cada PR citado, inclusive na pergunta sobre quem mescla, vai com o link completo. Se perguntarem "já mesclou?", responda primeiro sim ou não e depois o que falta. Com `Criar pull request ao terminar` em `rascunho`, o padrão, a branch está no GitHub, o pull request está aberto em rascunho e a resposta leva o link. Com `sim`, o pull request está aberto pronto e a resposta leva o link. Com `não` e sem pedido de publicação, o estado do pull request é que ele não está aberto. Diga se esta habilidade foi chamada. Não escreva que ela ficou para este pedido, nem para depois.
 
 ### Passo 10
 
@@ -138,7 +138,7 @@ Se você abrir o pull request e só depois escolher o rótulo, o PR fica sem ró
 Se você escrever que a habilidade ficou para este pedido, ou para depois, a pessoa não sabe se ela foi chamada.
 
 1. Diga se esta habilidade foi chamada.
-2. Com `Criar pull request ao terminar` em `sim`, abra o pull request. Com `não` e sem pedido de publicação, diga que ele não está aberto.
+2. Com `Criar pull request ao terminar` em `rascunho`, suba a branch e abra o pull request em rascunho. Com `sim`, abra o pull request pronto. Com `não` e sem pedido de publicação, diga o nome da branch e que ele não está aberto.
 3. Não use a expressão "ficou para este pedido".
 
 ### Push parado sem saída

@@ -93,6 +93,7 @@ How these skills relate is in `README.md`, in this folder.
   - `Commit direto na base` is `nunca`, the default, `só no terminal`, or `sempre`. Only `sempre` commits on the base without a terminal
   - Treats the repository as the only write source: a synced copy, such as the Notion page of a skill, and a copy installed by dependency or plugin are read-only, including when the person calls the edit an emergency. The next install erases an edit of the installed copy
   - A request to create or activate a skill in a synced or installed copy does not create it there, including when that copy explains how to fill the description
+  - The reply names the branch, says whether it is on GitHub, and reports each commit hash. `Criar pull request ao terminar` is `rascunho` by default, which pushes the branch and opens a draft pull request; `sim` opens a ready pull request; `não` waits for an explicit publish request
 - **Test Criteria**:
   - [ ] A project without test or build commands commits and says nothing was verified
 
@@ -173,6 +174,7 @@ How these skills relate is in `README.md`, in this folder.
   - Without a terminal, opens the pull request through the GitHub integration, gives the link, and stops; the CI checks of the pull request do the testing
   - `Exigir aprovação de outra pessoa` is `nunca`, `só sem terminal`, the default, or `sempre`. It holds the merge until another person approves; a green check or owning the repository does not replace that approval. Without a terminal, a merge never happens in the request that opened the pull request
   - After a merge, checks the sync when the project syncs the repository with another tool, such as the skill pages in Notion
+  - `Criar pull request ao terminar` is `rascunho` by default: the code change pushes the branch and opens a draft pull request, and the reply names the branch, says whether it is on GitHub, and includes the link. `sim` opens a ready pull request. `não` waits for an explicit publish request. A draft does not request review. Merging still needs an explicit request
 - **Test Criteria**:
   - [ ] A request to push to the base branch opens a pull request instead
   - [ ] A `claude/…` branch is renamed to `type/…` before its pull request opens
