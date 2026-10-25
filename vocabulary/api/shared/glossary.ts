@@ -135,6 +135,9 @@ export type Entry = {
   decidedBy?: Person
   decidedAt?: string
   source?: string
+  stopWord?: true
+  /** A stop word stored without a level. It reads as allowed inside the engine. */
+  stateless?: true
   notes?: string
   caseSensitive?: boolean
 }
@@ -176,7 +179,9 @@ export function load(text: string): Entry[] {
   const seen = new Set<string>()
   let previous: readonly [string, string] | null = null
   for (const [rawTerm, row] of Object.entries(result.data)) {
-    const entry = entryFrom(rawTerm, row.state, row.alternative, true)
+    const entry = entryFrom(rawTerm, row.state ?? "allowed", row.alternative, true)
+    if (row.stop_word === true) entry.stopWord = true
+    if (row.state === undefined) entry.stateless = true
     const key = matchKey(entry.term)
     if (seen.has(key)) throw new InvalidGlossary(`${JSON.stringify(entry.term)} is duplicated.`)
     if (previous !== null && compareOrder(entry.order, previous) < 0) {
@@ -411,7 +416,7 @@ export function writeTerms(
     for (const message of exampleIssues(item.term, [...item.examples, ...item.rejected], item.alternatives)) {
       problems.push({ term: item.term, message })
     }
-    const absent = EXPECTED[item.state].filter((field) => item[field] === undefined)
+    const absent = item.stateless ? [] : EXPECTED[item.state].filter((field) => item[field] === undefined)
     if (absent.length === 0 || validation === "optional") continue
     if (validation === "enforce") {
       for (const field of absent) {
@@ -584,6 +589,10 @@ function withStored(entries: readonly Entry[], item: BulkTerm, mode: WriteMode):
     source: keeps("source") ? stored.source : item.source,
     notes: keeps("notes") ? stored.notes : item.notes,
     case_sensitive: keeps("case_sensitive") ? stored.caseSensitive === true : item.case_sensitive,
+    stop_word: keeps("stop_word") ? stored.stopWord === true : item.stop_word,
+    // A call without a state keeps the stored level, or the stored absence of one.
+    state: item.stateless ? stored.state : item.state,
+    stateless: item.stateless ? stored.stateless === true : false,
   }
   return { item: merged, issues: termIssues(merged).map((issue) => `${JSON.stringify(item.term)}: ${issue}`) }
 }
@@ -647,7 +656,8 @@ function entryFrom(term: string, raw: string, alternative: string | undefined, k
 function serialize(entries: readonly Entry[]): string {
   const file: Record<string, object> = {}
   for (const entry of [...entries].sort((left, right) => compareOrder(left.order, right.order))) {
-    const row: Record<string, unknown> = { state: entry.legacyState ?? entry.state }
+    const row: Record<string, unknown> = entry.stateless ? {} : { state: entry.legacyState ?? entry.state }
+    if (entry.stopWord === true) row.stop_word = true
     if (entry.alternative !== null) row.alternative = entry.alternative
     if (entry.categories !== undefined && entry.categories.length > 0) {
       if (entry.legacyCategory === true && entry.categories.length === 1) row.category = entry.categories[0]
@@ -688,6 +698,8 @@ function fillTerm(shell: Entry, item: BulkTerm, entries: Entry[], writing: Reado
   if (item.when !== undefined) shell.when = item.when
   if (item.decided_by !== undefined) shell.decidedBy = item.decided_by
   if (item.decided_at !== undefined) shell.decidedAt = item.decided_at
+  if (item.stop_word === true) shell.stopWord = true
+  if (item.stateless) shell.stateless = true
   if (item.source !== undefined) shell.source = item.source
   if (item.notes !== undefined) shell.notes = item.notes
   if (item.case_sensitive) shell.caseSensitive = true
@@ -700,7 +712,7 @@ function fillTerm(shell: Entry, item: BulkTerm, entries: Entry[], writing: Reado
     shell.rejected = rejected
     shell.alternatives = alternatives
   } else {
-    shell.examples = examples
+    if (!item.stateless || examples.length > 0) shell.examples = examples
     if (rejected.length > 0) shell.rejected = rejected
     if (alternatives.length > 0) shell.alternatives = alternatives
   }
@@ -710,7 +722,8 @@ function fillTerm(shell: Entry, item: BulkTerm, entries: Entry[], writing: Reado
 }
 
 export function registrationOf(language: string, entry: Entry): TermRegistration {
-  const registration: TermRegistration = { language, term: entry.term, state: entry.state }
+  const registration: TermRegistration = entry.stateless ? { language, term: entry.term } : { language, term: entry.term, state: entry.state }
+  if (entry.stopWord === true) registration.stop_word = true
   if (entry.categories !== undefined && entry.categories.length > 0) registration.categories = [...entry.categories]
   if (entry.description !== undefined) registration.description = entry.description
   if (entry.reason !== undefined) registration.reason = entry.reason
@@ -883,6 +896,8 @@ export function findConcept(entries: readonly Entry[], term: string): Entry | un
 
 function sameFields(entry: Entry, item: BulkTerm): boolean {
   if (entry.state !== item.state) return false
+  if ((entry.stateless === true) !== item.stateless) return false
+  if ((entry.stopWord === true) !== (item.stop_word === true)) return false
   if ((entry.caseSensitive === true) !== item.case_sensitive) return false
   if (item.case_sensitive && matchKey(entry.term) === matchKey(item.term) && entry.term !== item.term) return false
   return sameList(entry.categories, item.categories)

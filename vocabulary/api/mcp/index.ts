@@ -35,7 +35,7 @@ const tagsFilter = {
 const tools = [
   {
     name: "lookup_term",
-    description: "Read one vocabulary term or expression, including an emoji. Returns whether it exists and the stored row. state is one of five levels, from forbidden through strongly_discouraged, discouraged, and allowed_with_care to allowed. With tags, a tag in forbidden_in or allowed_in changes state, and base_state keeps the level of the row. legacy_state names a deprecated state still stored. Case matches the stored term. An accent, a plural, a gender, and another word are their own rows. A row with case_sensitive also returns case_matches: when it is false, write the stored term, not the submitted casing. When the person asks which variations were registered, read each form, name the ones that exist and the ones that do not, and ask the state before writing a missing form.",
+    description: "Read one vocabulary term or expression, including an emoji. Returns whether it exists and the stored row. state is one of five levels, from forbidden through strongly_discouraged, discouraged, and allowed_with_care to allowed. A stop word returns stop_word true, and has no state when it was stored without one. With tags, a tag in forbidden_in or allowed_in changes state, and base_state keeps the level of the row. legacy_state names a deprecated state still stored. Case matches the stored term. An accent, a plural, a gender, and another word are their own rows. A row with case_sensitive also returns case_matches: when it is false, write the stored term, not the submitted casing. When the person asks which variations were registered, read each form, name the ones that exist and the ones that do not, and ask the state before writing a missing form.",
     inputSchema: {
       type: "object",
       properties: {
@@ -97,7 +97,7 @@ const tools = [
               state: {
                 type: "string",
                 enum: [...LEVELS, "situationally_allowed"],
-                description: "Level of the term. situationally_allowed is deprecated and is written as allowed_with_care.",
+                description: "Level of the term. Required, except for a stop word, which may have none. situationally_allowed is deprecated and is written as allowed_with_care.",
               },
               term: { type: "string" },
               categories: { type: "array", items: { type: "string" }, description: "English words, such as punctuation or slang." },
@@ -145,8 +145,12 @@ const tools = [
                 type: "boolean",
                 description: "True for a spelling whose casing is part of the term, such as a brand name like iPhone. The term keeps its casing as given, and a read in another casing reports case_matches false. Omit or false for an ordinary word.",
               },
+              stop_word: {
+                type: "boolean",
+                description: "True for a stop word, a function word such as an article or a preposition. A stop word may omit state: whether it is allowed depends on the expression around it, which is its own row, such as a forbidden phrase that contains it.",
+              },
             },
-            required: ["state", "term"],
+            required: ["term"],
           },
         },
       },

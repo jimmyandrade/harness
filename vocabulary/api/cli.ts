@@ -18,7 +18,8 @@
  * the deprecated category, and only reports them without --write. lookup and exists take --tags too, to read only the rows that
  * apply to that speaker, event, or channel. --case-sensitive marks the term
  * it follows, keeping its casing as the key; it takes true or false, and alone
- * it means true. An update or an upsert keeps every stored field that its
+ * it means true. --stop-word marks a stop word the same way, and a stop word
+ * may come without --state. An update or an upsert keeps every stored field that its
  * flags do not name. A flag with an empty value, such as --notes "" or
  * --tags "", clears that field.
  *
@@ -45,7 +46,7 @@ import { existsRequest, lookupRequest, lookupTermsRequest } from "./shared/schem
 
 const GLOBAL = new Set(["language", "mode", "validation", "file"])
 const LISTS = new Set(["categories", "examples", "rejected", "alternatives", "related", "tags", "allowed_in", "forbidden_in"])
-const SWITCHES: Record<string, string> = { "case-sensitive": "case_sensitive" }
+const SWITCHES: Record<string, string> = { "case-sensitive": "case_sensitive", "stop-word": "stop_word" }
 const FIELDS = new Set([
   "state",
   "term",
@@ -198,7 +199,7 @@ export function termsFrom(args: readonly string[]): {
       if (current === null) throw new InvalidGlossary(`${JSON.stringify(token)} follows a term.`)
       const next = args[index + 1]
       const value = inline ?? (next === "true" || next === "false" ? next : "true")
-      if (value !== "true" && value !== "false") throw new InvalidGlossary("case_sensitive is true or false.")
+      if (value !== "true" && value !== "false") throw new InvalidGlossary(`${field} is true or false.`)
       if (inline === undefined && (next === "true" || next === "false")) index += 1
       current[field] = value === "true"
       continue

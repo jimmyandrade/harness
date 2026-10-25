@@ -46,6 +46,7 @@ export type TermLookup = {
   source?: string
   notes?: string
   case_sensitive?: true
+  stop_word?: true
   case_matches?: boolean
 }
 
@@ -90,9 +91,13 @@ export const lookupRoute: Route = {
 }
 
 function rowOf(entry: Entry, tags: readonly string[]): Omit<TermLookup, "language" | "submitted" | "exists"> {
-  const state = effectiveState(entry, tags)
-  const row: Omit<TermLookup, "language" | "submitted" | "exists"> = { term: entry.term, state }
-  if (state !== entry.state) row.base_state = entry.state
+  const row: Omit<TermLookup, "language" | "submitted" | "exists"> = { term: entry.term }
+  if (entry.stateless !== true) {
+    const state = effectiveState(entry, tags)
+    row.state = state
+    if (state !== entry.state) row.base_state = entry.state
+  }
+  if (entry.stopWord === true) row.stop_word = true
   if (entry.legacyState !== undefined) row.legacy_state = entry.legacyState
   if (entry.alternative !== null) row.alternative = entry.alternative
   if (entry.categories !== undefined && entry.categories.length > 0) row.categories = entry.categories

@@ -239,7 +239,8 @@ const stateInput = z
 
 const bulkTermObject = z.object(
   {
-    state: stateInput,
+    state: stateInput.optional(),
+    stop_word: z.boolean({ error: "stop_word is true or false." }).optional(),
     term: prose("Provide the term."),
     category: categorySchema.optional(),
     categories: categoryListSchema.default([]),
@@ -286,6 +287,7 @@ export const PATCHABLE_FIELDS = [
   "source",
   "notes",
   "case_sensitive",
+  "stop_word",
 ] as const
 export type PatchableField = (typeof PATCHABLE_FIELDS)[number]
 
@@ -336,10 +338,13 @@ export const bulkTermSchema = z
   .preprocess(markGiven, bulkTermObject.extend({ given: z.array(z.string()).default([]) }))
   .transform(({ state, category, categories, given, ...rest }) => {
     const merged = category === undefined || categories.includes(category) ? categories : [category, ...categories]
-    const legacy_state = isLegacyState(state) ? state : undefined
+    const legacy_state = state !== undefined && isLegacyState(state) ? state : undefined
+    // A stop word may have no level: it reads as allowed inside the engine and
+    // is stored and returned without a state.
     return {
       ...rest,
-      state: levelOf(state) as State,
+      stateless: state === undefined,
+      state: (state === undefined ? "allowed" : levelOf(state)) as State,
       categories: merged,
       legacy_state,
       legacy_category: category !== undefined,
@@ -347,6 +352,7 @@ export const bulkTermSchema = z
     }
   })
   .superRefine((item, ctx) => {
+    if (item.stateless && item.stop_word !== true) ctx.addIssue("Provide the state.")
     for (const issue of termIssues(item)) ctx.addIssue(issue)
   })
 
@@ -448,7 +454,8 @@ export const classificationSchema = z.object({
   from: z.literal("query"),
   language: z.string(),
   submitted: z.string(),
-  to: z.union([stateSchema, z.literal("not_registered")]),
+  to: z.union([stateSchema, z.literal("stop_word"), z.literal("not_registered")]),
+  stop_word: z.literal(true).optional(),
   term: z.string().optional(),
   legacy_state: z.literal("situationally_allowed").optional(),
   recommended: z.string().optional(),
@@ -469,7 +476,8 @@ export type TextClassification = z.infer<typeof textClassificationSchema>
 export const termRegistrationSchema = z.object({
   language: z.string(),
   term: z.string(),
-  state: stateSchema,
+  state: stateSchema.optional(),
+  stop_word: z.literal(true).optional(),
   categories: z.array(z.string()).optional(),
   description: z.string().optional(),
   reason: z.string().optional(),
@@ -536,7 +544,8 @@ const fileTags = (label: string) =>
 export const glossaryRowSchema = z
   .object(
     {
-      state: z.string({ error: "A glossary row has no state." }),
+      state: z.string({ error: "A glossary row has no state." }).optional(),
+      stop_word: z.boolean({ error: "A glossary stop_word is not true or false." }).optional(),
       alternative: z
         .string({ error: "A glossary alternative is not text." })
         .transform(collapse)
@@ -572,6 +581,7 @@ export const glossaryRowSchema = z
     },
     { error: "A glossary row is not an object." },
   )
+  .refine((row) => row.state !== undefined || row.stop_word === true, { error: "A glossary row has no state." })
 
 export type GlossaryRow = z.infer<typeof glossaryRowSchema>
 
