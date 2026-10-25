@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/jimmyandrade/harness/compare/v1.0.0...v1.0.1) (2026-10-25)
+
+
+### Bug Fixes
+
+* check the repository skills first and follow the code skills in order ([#454](https://github.com/jimmyandrade/harness/issues/454)) ([30a231e](https://github.com/jimmyandrade/harness/commit/30a231e6871580f5ccd54a15333d6358965ea6d6))
+
 ## [1.0.0](https://github.com/jimmyandrade/harness/compare/v0.99.1...v1.0.0) (2026-10-25)
 
 
