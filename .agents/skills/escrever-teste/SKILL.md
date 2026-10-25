@@ -3,7 +3,7 @@ name: escrever-teste
 description: Escreve ou altera testes de unidade antes do código, em TDD, seguindo a convenção de testes do projeto, com o Better Specs como padrão. Usada quando uma mudança precisa de teste novo, quando um teste existente muda ou quando uma revisão pede um teste. Não serve para decidir o que testar, rodar a suíte inteira nem refatorar testes antigos.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.4.1"
   notion: "false"
   related:
     - criar-commit
@@ -34,7 +34,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ### Passo 1
 
-Chame `levantar-ambiente-do-repositorio` para achar a convenção de testes, os comandos e o runtime, nas instruções do projeto e nas habilidades do próprio repositório. Ela vale mais que a `Convenção de testes`. Leia um teste vizinho do mesmo tipo para copiar o jeito de montar, de limpar e de nomear.
+Numa tarefa de código, esta habilidade é chamada antes do código. Ler este arquivo começa a chamada e não a encerra. Chame `levantar-ambiente-do-repositorio` para achar a convenção de testes, os comandos e o runtime, nas instruções do projeto e nas habilidades do próprio repositório. Ela vale mais que a `Convenção de testes`. Leia um teste vizinho do mesmo tipo para copiar o jeito de montar, de limpar e de nomear. Sem `Comando de testes`, o resultado da chamada é dizer isso, depois de ler o manifesto do projeto. Não invente um runner. A habilidade seguinte só começa depois desse resultado.
 
 ### Passo 2
 
@@ -64,6 +64,14 @@ Rode o `Comando de testes`, ou o que `levantar-ambiente-do-repositorio` achou, n
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
+
+### Habilidade lida e não chamada
+
+Se você ler esta habilidade e seguir para o código porque não há comando de teste, a tarefa fica sem a chamada.
+
+1. Chame esta habilidade antes do código.
+2. Sem comando de teste, diga isso como o resultado. Não invente um runner.
+3. A habilidade seguinte só começa depois desse resultado.
 
 ### Teste antigo reescrito
 
@@ -118,7 +126,7 @@ O arquivo antigo usa "should" nos títulos. Escrevi só o caso novo no padrão, 
 - O repositório define outra convenção: ela vale mais que o Better Specs.
 - O arquivo é novo: o arquivo inteiro segue o padrão.
 - O teste é de integração ou de tela, com várias verificações por natureza: siga a convenção do repositório para esse tipo, e aplique o Better Specs aos títulos.
-- Não existe `Comando de testes`: diga isso e leia o `package` ou o arquivo de tarefas do projeto antes de perguntar.
+- Não existe `Comando de testes`: a habilidade ainda é chamada antes do código. Diga que o comando não existe, depois de ler o manifesto do projeto. Não invente um runner e não pule a chamada.
 - A revisão aponta um teste antigo fora do padrão: não o reescreva, a menos que a mudança o tenha tocado.
 
 ## Pegadinhas

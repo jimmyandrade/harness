@@ -1,4 +1,11 @@
 {
   "skill_name": "escrever-teste",
-  "evals": []
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "criar-pull-request foi usado? Não entendi \"ficou para este pedido\", nunca use essa expressão. Você deveria ter chamado escrever-teste. Aprenda com a execução, atualize as habilidades e melhore as instruções deste projeto e do core pra garantir a execução das habilidades.",
+      "expected_output": "escrever-teste passa a ser chamada numa tarefa de código antes do código. Sem comando de teste, o resultado é dizer isso, sem inventar um runner. As instruções do projeto e do core passam a exigir essa chamada.",
+      "files": []
+    }
+  ]
 }
