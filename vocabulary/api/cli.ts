@@ -20,8 +20,11 @@
  * it follows, keeping its casing as the key; it takes true or false, and alone
  * it means true. --stop-word marks a stop word the same way, and a stop word
  * may come without --state. An update or an upsert keeps every stored field that its
- * flags do not name. A flag with an empty value, such as --notes "" or
- * --tags "", clears that field.
+ * flags do not name. A flag with an empty value, such as --notes "", clears that
+ * field. A row is its spelling and its set of tags, as ADR 0017 decides: --tags
+ * names the row a write targets, and --tags "" is the row without tags. Without
+ * --tags, insert writes the row without tags, and an update or an upsert writes
+ * the only row of the spelling, or the row without tags when it has more.
  *
  * Run: node api/cli.ts lookup --language pt-BR --term casa
  * Run: node api/cli.ts lookup --language pt-BR --term "verão! (chegou!)" --tags festival-de-verao

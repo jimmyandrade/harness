@@ -6,7 +6,7 @@ locale: en
 
 ## Status
 
-Accepted. Amended by `docs/adr/0010-rate-terms-on-five-levels.md`: what this record says of `situationally_allowed` holds for `allowed_with_care`, `discouraged`, and `strongly_discouraged`, and `allowed_in` and `forbidden_in` change the level of a row for a read that carries their tags.
+Accepted. Amended by `docs/adr/0010-rate-terms-on-five-levels.md`: what this record says of `situationally_allowed` holds for `allowed_with_care`, `discouraged`, and `strongly_discouraged`, and `allowed_in` and `forbidden_in` change the level of a row for a read that carries their tags. Amended by `docs/adr/0017-keep-one-row-per-set-of-tags.md`: a spelling may keep one row per set of tags, and a read resolves them by precedence.
 
 ## Context
 
@@ -16,7 +16,7 @@ Some terms of a project only fit one context. A glossary may hold expressions th
 
 Two designs were weighed.
 
-- One glossary per speaker or event, such as `pt-BR.maria-silva.json`. Every shared term would be repeated in each file, or a read would merge several files. The same spelling could hold one state in the main file and another in the speaker's file, and nothing would say which one wins. The glossary is one file per language because one spelling keeps one state in that language, as ADR 0003 decides.
+- One glossary per speaker or event, such as `pt-BR.maria-silva.json`. Every shared term would be repeated in each file, or a read would merge several files. The same spelling could hold one state in the main file and another in the speaker's file, and nothing would say which one wins. The glossary is one file per language, as ADR 0003 decides, and the rows of one spelling for different contexts live in that file, as ADR 0017 decides.
 - Tags on the row. One file per language stays the source of truth. A row says which contexts it belongs to, and a read filters by them. A tag is reused by every row of that speaker, event, or channel.
 
 ## Decision

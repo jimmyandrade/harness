@@ -6,11 +6,11 @@ locale: en
 
 ## Status
 
-Accepted. Moved here from jimmyandrade/harness with the vocabulary API. The glossary files of a project live in `.agents/glossary/`, or in the directory named by `HARNESS_GLOSSARY_DIR`. Amended by `docs/adr/0010-rate-terms-on-five-levels.md`: the three states become five levels, `situationally_allowed` reads as `allowed_with_care`, `category` becomes `categories`, and the fields this record requires are optional while a glossary migrates. Amended by `docs/adr/0011-tell-terms-apart-by-accents.md`: an accent is part of the spelling, so a form that differs only by an accent is another term.
+Accepted. Moved here from jimmyandrade/harness with the vocabulary API. The glossary files of a project live in `.agents/glossary/`, or in the directory named by `HARNESS_GLOSSARY_DIR`. Amended by `docs/adr/0010-rate-terms-on-five-levels.md`: the three states become five levels, `situationally_allowed` reads as `allowed_with_care`, `category` becomes `categories`, and the fields this record requires are optional while a glossary migrates. Amended by `docs/adr/0011-tell-terms-apart-by-accents.md`: an accent is part of the spelling, so a form that differs only by an accent is another term. Amended by `docs/adr/0017-keep-one-row-per-set-of-tags.md`: a spelling may keep one row per set of tags, and its value is then a list of rows.
 
 ## Context
 
-The vocabulary endpoint classifies a word or an expression for the language of the text. Each language has its own file. A term keeps one state in that file: allowed, forbidden, or situationally allowed. The same spelling can have a different state in another language.
+The vocabulary endpoint classifies a word or an expression for the language of the text. Each language has its own file. A row of that file keeps one state: allowed, forbidden, or situationally allowed. The same spelling can have a different state in another language, and, as ADR 0017 decides, in another set of tags.
 
 The endpoint is TypeScript, so a person can read it and the same module can run in Node and in the browser. The first file format was TSV. Reading it meant splitting lines, accepting either newline, checking a header, and splitting columns. JSON.parse and JSON.stringify are part of the language. They remove that parser.
 

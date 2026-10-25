@@ -6,7 +6,11 @@
  * another word are their own rows. Given tags, a row
  * tagged only for another speaker, event, or channel reads as absent, and a
  * tag in allowed_in or forbidden_in changes state. base_state then keeps the
- * level of the row. A row stored with a deprecated state returns legacy_state. A row
+ * level of the row. A spelling may keep one row per set of tags: the rows whose
+ * tags meet the read win over the row without tags, and a read without tags
+ * returns the row without tags. When more than one row wins, the fields are the
+ * first one, and rows lists every one in the order of the file. A row stored
+ * with a deprecated state returns legacy_state. A row
  * with case_sensitive also returns case_matches, false when the submitted
  * casing differs from the stored term.
  *
@@ -15,7 +19,7 @@
 
 import { fileURLToPath } from "node:url"
 
-import { Glossary, InvalidGlossary, applicable, caseMatches, collapse, effectiveState, findConcept, type Entry } from "../../shared/glossary.ts"
+import { Glossary, InvalidGlossary, applicable, caseMatches, collapse, effectiveState, rowsFor, type Entry } from "../../shared/glossary.ts"
 import { parseBody, type Route } from "../../shared/http.ts"
 import { readOptions, report } from "../../shared/options.ts"
 import { lookupRequest, type Person } from "../../shared/schema.ts"
@@ -48,7 +52,11 @@ export type TermLookup = {
   case_sensitive?: true
   stop_word?: true
   case_matches?: boolean
+  rows?: readonly TermRow[]
 }
+
+/** One stored row of a spelling, as a lookup returns it. */
+export type TermRow = Omit<TermLookup, "language" | "submitted" | "exists" | "rows">
 
 export function lookupTerm(glossary: Glossary, language: string, submitted: string, tags: readonly string[] = []): TermLookup {
   const { tag, entries: stored } = glossary.entries(language)
@@ -74,9 +82,12 @@ export function lookupTerms(
 function lookupIn(tag: string, entries: readonly Entry[], submitted: string, tags: readonly string[]): TermLookup {
   const query = collapse(submitted)
   if (query === "") throw new InvalidGlossary("Provide the term.")
-  const found = findConcept(entries, query)
-  if (found === undefined) return { language: tag, submitted: query, exists: false }
-  return { language: tag, submitted: query, exists: true, ...rowOf(found, tags), ...casingOf(found, query) }
+  const rows = rowsFor(entries, query, tags).map((entry) => ({ ...rowOf(entry, tags), ...casingOf(entry, query) }))
+  const [first] = rows
+  if (first === undefined) return { language: tag, submitted: query, exists: false }
+  const found: TermLookup = { language: tag, submitted: query, exists: true, ...first }
+  if (rows.length > 1) found.rows = rows
+  return found
 }
 
 export const lookupRoute: Route = {
@@ -90,8 +101,8 @@ export const lookupRoute: Route = {
   },
 }
 
-function rowOf(entry: Entry, tags: readonly string[]): Omit<TermLookup, "language" | "submitted" | "exists"> {
-  const row: Omit<TermLookup, "language" | "submitted" | "exists"> = { term: entry.term }
+function rowOf(entry: Entry, tags: readonly string[]): TermRow {
+  const row: TermRow = { term: entry.term }
   if (entry.stateless !== true) {
     const state = effectiveState(entry, tags)
     row.state = state
