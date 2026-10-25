@@ -75,6 +75,7 @@ flowchart LR
     mesclar_registro["mesclar-registro"]
     organizar_emails["organizar-emails"]
     organizar_ponto_de_contato["organizar-ponto-de-contato"]
+    pedir_revisao_de_pr_no_slack["pedir-revisao-de-pr-no-slack"]
     perfilar_tom_de_voz["perfilar-tom-de-voz"]
     planejar_calendario_de_conteudo["planejar-calendario-de-conteudo"]
     preparar_tarefa_do_pull_request["preparar-tarefa-do-pull-request"]
@@ -362,6 +363,10 @@ flowchart LR
   organizar_ponto_de_contato --> definir_viagem
   organizar_ponto_de_contato --> procurar_oportunidade
   organizar_ponto_de_contato --> sincronizar_cronograma
+  pedir_revisao_de_pr_no_slack --> criar_pull_request
+  pedir_revisao_de_pr_no_slack --> enviar_mensagem_no_slack
+  pedir_revisao_de_pr_no_slack --> evoluir_habilidade
+  pedir_revisao_de_pr_no_slack --> preparar_tarefa_do_pull_request
   perfilar_tom_de_voz --> definir_vocabulario
   perfilar_tom_de_voz --> evoluir_habilidade
   perfilar_tom_de_voz --> redigir_com_tom_de_voz
