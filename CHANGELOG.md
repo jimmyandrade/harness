@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://github.com/jimmyandrade/harness/compare/v1.5.0...v1.6.0) (2026-10-25)
+
+
+### Features
+
+* link a finished pull request to its open task ([#482](https://github.com/jimmyandrade/harness/issues/482)) ([0ac45e0](https://github.com/jimmyandrade/harness/commit/0ac45e0d87662fead9d096112b707d4ce73b002f))
+
 ## [1.5.0](https://github.com/jimmyandrade/harness/compare/v1.4.0...v1.5.0) (2026-10-25)
 
 
