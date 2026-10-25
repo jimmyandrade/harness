@@ -4,7 +4,6 @@ description: Atende a revisão recebida num pull request, de pessoa ou de bot. L
 metadata:
   author: jimmyandrade
   version: "0.13.0"
-  notion: "false"
   aliases:
     - resolver-comentarios-de-revisao
     - apply-pr-review

@@ -3,8 +3,7 @@ name: escrever-teste
 description: Escreve ou altera testes de unidade antes do código, em TDD, seguindo a convenção de testes do projeto, com o Better Specs como padrão. Usada quando uma mudança precisa de teste novo, quando um teste existente muda ou quando uma revisão pede um teste. Não serve para decidir o que testar, rodar a suíte inteira nem refatorar testes antigos.
 metadata:
   author: jimmyandrade
-  version: "0.4.1"
-  notion: "false"
+  version: "0.5.0"
   related:
     - criar-commit
     - escrever-codigo

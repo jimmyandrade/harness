@@ -31,7 +31,6 @@ import {
   publish,
   publishInstructions,
   skillNamesFromPaths,
-  skipReason,
   type SkillMapping,
   type SkillPage,
 } from "./skill-pages.ts"
@@ -55,7 +54,7 @@ name: criar-habilidade
 description: Escreve a menor skill que ainda dispara.
 metadata:
   author: example
-  version: "1.0.1"
+  version: "0.4.0"
   notion: "false"
 ---
 
@@ -87,17 +86,12 @@ test("page uses the body after frontmatter", () => {
   assert.equal(page.body.includes("metadata:"), false)
 })
 
-test("notion false stays in git", () => {
-  assert.equal(parseSkill(privateSkill), null)
-})
-
-test("internal true stays out of Notion, and other values publish", () => {
+test("a notion or internal field still publishes", () => {
+  assert.equal(pageOf(privateSkill).name, "criar-habilidade")
   const internal = createdSkill.replace('version: "0.4.0"\n', 'version: "0.4.0"\n  internal: true\n')
-  assert.equal(parseSkill(internal), null)
-  assert.equal(skipReason(internal), "internal")
-  assert.equal(skipReason(privateSkill), "stays in git")
-  assert.equal(skipReason(createdSkill), null)
-  assert.ok(parseSkill(createdSkill.replace('version: "0.4.0"\n', 'version: "0.4.0"\n  internal: false\n')))
+  assert.equal(pageOf(internal).name, "procurar-tarefa")
+  const optedIn = createdSkill.replace('version: "0.4.0"\n', 'version: "0.4.0"\n  notion: "true"\n')
+  assert.equal(pageOf(optedIn).name, "procurar-tarefa")
 })
 
 test("missing version fails", () => {
@@ -257,7 +251,7 @@ test("long description is split", () => {
   assert.equal(field.rich_text[0]?.text.content.length, 2000)
 })
 
-test("update existing, create missing, and skip private and internal through the SDK methods", async () => {
+test("update existing and create missing through the SDK methods", async () => {
   const calls: [string, { properties?: object; type?: string; icon?: object }][] = []
   const notion = bindNotion({
     dataSources: {
@@ -304,10 +298,10 @@ test("update existing, create missing, and skip private and internal through the
   )
   assert.deepEqual(lines, [
     "update definir-tarefa: page-1",
-    "skip criar-habilidade: stays in git",
+    "create criar-habilidade: https://example.test/page-new",
     "skip sumiu: removed",
     "create procurar-tarefa: https://example.test/page-new",
-    "skip rascunho-interno: internal",
+    "create rascunho-interno: https://example.test/page-new",
   ])
   const kinds = calls.map(([kind]) => kind)
   assert.ok(kinds.includes("query"))

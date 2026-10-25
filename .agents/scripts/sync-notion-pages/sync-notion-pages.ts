@@ -95,7 +95,6 @@ export async function main(argv: string[]): Promise<number> {
       throw error
     }
     const page = parseSkill(text)
-    if (page === null) return null
     return page.aliases ?? []
   })
   const templateMappingPath = argValue(argv, "--template-mapping") || DEFAULT_TEMPLATE_MAPPING_PATH

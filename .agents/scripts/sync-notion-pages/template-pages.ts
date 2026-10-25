@@ -118,8 +118,6 @@ export function parseTemplate(text: string, fileName: string): TemplatePage | { 
   const parts = frontmatterParts(text)
   if (!parts) return { skip: "no frontmatter" }
   const fields = frontmatterFields(parts.front.join("\n"))
-  if (fields["metadata.notion"] === "false") return { skip: "stays in git" }
-  if (fields["metadata.internal"] === "true") return { skip: "internal" }
   if (typeof fields.name !== "string" || !fields.name) return { skip: "no name in frontmatter" }
   if (fields.name !== fileName) throw new Error(`${fileName} frontmatter name is ${fields.name}`)
   const page: TemplatePage = {

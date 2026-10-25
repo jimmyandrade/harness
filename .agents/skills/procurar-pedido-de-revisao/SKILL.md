@@ -3,8 +3,7 @@ name: procurar-pedido-de-revisao
 description: Acha os pull requests que alguém pediu para a pessoa revisar, na conversa do time e no GitHub, sem repetir um já visto. Marca os que não estão prontos, abre nova rodada num PR já revisado e propõe a pergunta de acompanhamento de um PR em andamento. Não serve para revisar nem para enviar mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
-  notion: "false"
+  version: "0.4.0"
   related:
     - definir-pessoa
     - enviar-mensagem-no-slack

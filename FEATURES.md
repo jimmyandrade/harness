@@ -99,11 +99,10 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
   - `base` and `head` limit the check to the skills that changed
   - The project's root `AGENTS.md` gets the size limits of a skill body (words, lines, body tokens), because it loads in every session, as ADR 0008 decides. The structure rules of a skill do not apply to it. It shows in the summary table and in the pull request comment when it changes
   - On a pull request, the action keeps one comment with the table of the skills the pull request adds, changes, or fails: version, body tokens, and share of the limit, before and after. Each push edits that comment. `comment: false` turns it off. The calling workflow needs `permissions: pull-requests: write`; without it the step warns and the check result stands
-  - `metadata.notion` is only `"false"`, and `metadata.internal` is only an unquoted `true`, the boolean the `skills` CLI reads
+  - `metadata` has no `notion` field and no `internal` field. Every skill syncs to Notion
   - A changed skill must raise `metadata.version` above its copy at `base` when `base` and `head` are given, and above its copy at `HEAD` otherwise
   - When a skill declares `metadata.related`, each name must be a skill in the project or in the core, and every skill the body cites must be listed. A citation is a skill name between backticks in prose, or a name in a Mermaid diagram; a plain name in prose is not one
   - `Considerar grupos de oportunidades` is `sim` or `não`. When it is `sim` for `criar-oportunidade` or `definir-grupo-de-oportunidades`, and the project has the opportunity mapping `.agents/mappings/oportunidades.notion.json`, that mapping must bind the logical field `group`
-  - A skill that goes to Notion fails when its body cites a skill whose `metadata.notion` is `"false"`, and so does the `AGENTS.md` of a business harness, which goes to Notion whole. An internal skill does not count, since it goes to Notion once it is ready
   - When a skill declares `metadata.models`, each name must be a file in `.agents/assets/templates/` of the project or of the core, every model the body cites between backticks must be listed, and the body cites no model by path, as ADR 0016 decides
   - `Banco de modelos no Notion` is the link of a Notion database or its `collection://` data source
   - Each model in `.agents/assets/templates/`, a file whose frontmatter has `name`, needs `name` equal to the file name in ASCII kebab-case, `description`, and `metadata.version` as a double-quoted semver that rises when the file changes. `metadata.aliases` and `metadata.tags` are lists, and the body has `## Contexto`, `## Formato`, and `## Estilo`, in this order. A model name the core also uses fails. Files without frontmatter or without `name` are not models and are not checked
@@ -115,7 +114,6 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
   - [x] A feature without the configured language line fails, and in Portuguese a Given such as `Dada uma` or `Dado um` fails
   - [x] A committed change is compared with the base, and without a base with `HEAD`
   - [x] An `AGENTS.md` over the body token or line limit fails, and a change to it shows as a row with its tokens before and after
-  - [x] A skill that goes to Notion and cites a skill with `metadata.notion: "false"` fails at the line of the citation
   - [x] A model in `metadata.models` that does not exist fails, a cited model missing from the list fails, and a path to a model fails once the skill lists its models
   - [x] A model without `description` or a quoted version, with a name other than its file, without the three sections, or changed without a higher version fails
   - [x] The comment is created when none has the marker, edited when one has it, and says no skill changes when a later push reverts them
@@ -134,12 +132,12 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
   - The project instructions file becomes one more page of the skills database, titled with the file name. Its description and version properties come from `description` and `metadata.version` in the frontmatter, and the description tells the Notion agent to load the page for any task. The page body ends with its parameters in a YAML code block. It publishes when the file changes, when the mapping or the publisher changes, or when the project moves the core version
   - `include-core` also publishes the skills of the core harness into the caller's Notion
   - The `sync-skills` example workflow runs it on each release, with the previous release as `base`, after `check-skill`. A Release Please workflow calls it, and a person can run it by hand with another `base`
-  - Leaves out a skill with `metadata.notion: "false"`, logged as `stays in git`, and one with `metadata.internal: true`, logged as `internal`
+  - Publishes every changed skill. A `notion` or `internal` field in the file does not leave it out
   - With a model mapping, `.agents/mappings/template-page.notion.json` or `template-mapping`, publishes each changed model of `.agents/assets/templates/` as a page of the models database, with the file body as the page body. The mapping binds `name` and `version`, and the other properties only when it names them. A change to that mapping republishes every model. Without it, no model is published
   - A model page is found by its name, or else by one of its `metadata.aliases`, so it replaces a page a person created with another title. A removed model keeps its page. A file without `name` in frontmatter is logged as skipped
 - **Test Criteria**:
   - [x] A mapping can rename every status option
-  - [x] A skill with `metadata.internal: true` is skipped as `internal`, and `internal: false` publishes
+  - [x] A skill with a `notion` or `internal` field is still published
   - [x] Core skills publish when the project moves the core version or its mapping, and a name in both stops the sync
   - [x] A model name in both the project and the core stops the sync, and a file without `name` in frontmatter, which is not a model, does not
   - [x] The project root is `HARNESS_ROOT`, or the working directory

@@ -3,8 +3,7 @@ name: limpar-copias-de-trabalho
 description: Remove as cópias de trabalho do git que uma sessão de código deixou, depois de conferir que nada se perde. Usada ao terminar o trabalho de uma sessão ou quando sobram cópias de trabalho de código. Não serve para liberar espaço em disco em geral nem para apagar arquivo da pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
-  notion: "false"
+  version: "0.2.0"
   related:
     - criar-pull-request
     - liberar-espaco-em-disco
