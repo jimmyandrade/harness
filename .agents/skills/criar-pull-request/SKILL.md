@@ -3,7 +3,7 @@ name: criar-pull-request
 description: Use essa habilidade sempre que for abrir PR, subir uma correção, mandar para a branch principal ou mesclar mudança no repositório, mesmo sem dizer PR. NÃO use para responder comentário de revisão nem para só commitar (use criar-commit).
 metadata:
   author: jimmyandrade
-  version: "0.18.0"
+  version: "0.18.1"
   related:
     - evoluir-habilidade
     - criar-commit
@@ -114,13 +114,21 @@ Com `Comunicar novidade após o merge` igual a `sim`, siga `comunicar-novidade-d
 
 ### Passo 9
 
-Na resposta final, diga o estado de cada etapa: commit, push, PR, quem foi atribuído, o rótulo, CI e merge. Cada PR citado, inclusive na pergunta sobre quem mescla, vai com o link completo. Se perguntarem "já mesclou?", responda primeiro sim ou não e depois o que falta.
+Na resposta final, diga o estado de cada etapa: commit, push, PR, quem foi atribuído, o rótulo, CI e merge. Cada PR citado, inclusive na pergunta sobre quem mescla, vai com o link completo. Se perguntarem "já mesclou?", responda primeiro sim ou não e depois o que falta. Sem pedido de publicação, o estado do pull request é que ele não está aberto. Diga se esta habilidade foi chamada. Não escreva que ela ficou para este pedido, nem para depois.
 
 ### Passo 10
 
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
+
+### Frase que adia a habilidade
+
+Se você escrever que a habilidade ficou para este pedido, ou para depois, a pessoa não sabe se ela foi chamada.
+
+1. Diga se esta habilidade foi chamada.
+2. Sem pedido de publicação, diga que o pull request não está aberto.
+3. Não use a expressão "ficou para este pedido".
 
 ### Push parado sem saída
 

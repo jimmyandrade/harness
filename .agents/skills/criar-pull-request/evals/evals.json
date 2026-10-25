@@ -1,4 +1,11 @@
 {
   "skill_name": "criar-pull-request",
-  "evals": []
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "criar-pull-request foi usado? Não entendi \"ficou para este pedido\", nunca use essa expressão. Você deveria ter chamado escrever-teste. Aprenda com a execução, atualize as habilidades e melhore as instruções deste projeto e do core pra garantir a execução das habilidades.",
+      "expected_output": "A resposta diz que criar-pull-request foi usada para abrir o pull request. Sem pedido de publicação, a resposta diz que o pull request não está aberto. A resposta não diz que a habilidade ficou para este pedido.",
+      "files": []
+    }
+  ]
 }
