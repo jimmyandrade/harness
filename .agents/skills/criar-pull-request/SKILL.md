@@ -3,7 +3,7 @@ name: criar-pull-request
 description: Use essa habilidade sempre que for abrir PR, subir uma correção, mandar para a branch principal ou mesclar mudança no repositório, mesmo sem dizer PR. NÃO use para responder comentário de revisão nem para só commitar (use criar-commit).
 metadata:
   author: jimmyandrade
-  version: "0.22.0"
+  version: "0.23.0"
   related:
     - evoluir-habilidade
     - criar-commit
@@ -78,7 +78,7 @@ Teste antes o acesso ao remoto com a credencial do `gh`. Faça o push com essa c
 
 ### Passo 6
 
-Antes de abrir, procure cada termo de `Termos que não podem aparecer` nos arquivos novos e alterados e no texto do PR, sem diferenciar maiúsculas (`git grep -i -E "termo1|termo2"`). Um achado volta para correção e nunca segue para o PR. Abra o PR contra a `Branch base` no `Repositório`. Título igual ao assunto do commit. Corpo em `Idioma do PR`. Se o repositório tiver um template de pull request, siga as seções dele e marque as caixas conforme o que foi feito. Com `Atribuição da sessão` em `sim`, termine com a linha de atribuição da sessão. Com `não`, não ponha linha de ferramenta ou de modelo, e remova a que o PR já tiver na mesma edição. Com `Atribuir o PR a quem abre` em `sim`, o comando que abre o PR já leva `--assignee` com a conta do `gh` que o abre. Com `Rotular o PR` em `sim`, leia os rótulos do repositório (`gh label list`) antes de abrir, e o mesmo comando já leva `--label` com o rótulo que melhor descreve a mudança, pelo tipo do commit e pelo que o diff faz. Não abra o PR para rotular depois. Se nenhum rótulo serve, só crie um novo com `Criar rótulo se nenhum servir` em `sim`; com `não`, diga na resposta que nenhum serviu e não abra o PR sem rótulo. Um PR que já estava aberto sem pessoa atribuída ou sem rótulo recebe os dois antes de qualquer outra edição. Mande o link na resposta.
+Antes de abrir, procure cada termo de `Termos que não podem aparecer` nos arquivos novos e alterados e no texto do PR, sem diferenciar maiúsculas (`git grep -i -E "termo1|termo2"`). Um achado volta para correção e nunca segue para o PR. Abra o PR contra a `Branch base` no `Repositório`. Título igual ao assunto do commit. Corpo em `Idioma do PR`. Se o repositório tiver um template de pull request, siga as seções dele e marque as caixas conforme o que foi feito. Com `Atribuição da sessão` em `sim`, termine com a linha de atribuição da sessão. Com `não`, não ponha linha de ferramenta ou de modelo, e remova a que o PR já tiver na mesma edição. Com `Atribuir o PR a quem abre` em `sim`, o comando que abre o PR já leva `--assignee` com a conta do `gh` que o abre. Com `Rotular o PR` em `sim`, leia os rótulos do repositório (`gh label list`) antes de abrir, e o mesmo comando já leva `--label` com o rótulo do tipo do commit. `fix` usa o rótulo de bug. `docs` usa o de documentação. A extensão do arquivo não escolhe o rótulo: um Markdown que corrige um erro leva o de bug. Documentação leva o de documentação, e o título seria `docs:`. Não abra o PR para rotular depois. Se nenhum rótulo serve, só crie um novo com `Criar rótulo se nenhum servir` em `sim`; com `não`, diga na resposta que nenhum serviu e não abra o PR sem rótulo. Um PR que já estava aberto sem pessoa atribuída ou sem rótulo recebe os dois antes de qualquer outra edição. Mande o link na resposta.
 
 ### Passo 7
 
@@ -205,6 +205,7 @@ O pedido autoriza push e merge. Push sem o hook, porque o commit já passou em t
 - Não existe `timeout` no macOS. Use o timeout da ferramenta ou rode em segundo plano.
 - Um hook de pre-push pode rodar também no push que só apaga uma branch remota.
 - Leia nas instruções do projeto os checks que o PR recebe e as limitações de cada integração.
+- Um Markdown parece documentação. O rótulo segue o tipo do commit. Correção de erro é `fix` e o rótulo de bug. `docs` e o rótulo de documentação ficam para a documentação.
 
 ## Scripts disponíveis
 
