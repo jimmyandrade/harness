@@ -1,9 +1,9 @@
 ---
 name: escrever-teste
-description: Escreve ou altera testes de unidade seguindo a convenção de testes do projeto, com o Better Specs como padrão. Usada quando uma mudança precisa de teste novo, quando um teste existente muda ou quando uma revisão pede um teste. Não serve para decidir o que testar, rodar a suíte inteira nem refatorar testes antigos.
+description: Escreve ou altera testes de unidade antes do código, em TDD, seguindo a convenção de testes do projeto, com o Better Specs como padrão. Usada quando uma mudança precisa de teste novo, quando um teste existente muda ou quando uma revisão pede um teste. Não serve para decidir o que testar, rodar a suíte inteira nem refatorar testes antigos.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.4.0"
   notion: "false"
   related:
     - criar-commit
@@ -19,6 +19,7 @@ metadata:
 Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco, depois nas instruções de usuário. Quando um valor não estiver lá, use o padrão abaixo. Um valor vazio não impõe regra. Se as instruções do projeto ou de usuário têm uma seção com o nome desta habilidade, leia-a e aplique cada regra no passo que ela cita.
 
 ```yaml
+"Abordagem de testes": "TDD"
 "Convenção de testes": "Better Specs"
 "Endereço da convenção de testes": "https://www.betterspecs.org/"
 "Idioma dos títulos dos testes": "inglês"
@@ -27,7 +28,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Modo de aprendizado": "perguntar"
 ```
 
-`Convenção de testes` é o nome do guia que os títulos e a estrutura seguem, e `Endereço da convenção de testes` é onde lê-lo. `Alcance da mudança` é `só as linhas tocadas` ou `arquivo inteiro`. `Comando de testes` roda os testes do arquivo afetado.
+`Abordagem de testes` é `TDD` ou `teste depois do código`. `Convenção de testes` é o nome do guia que os títulos e a estrutura seguem, e `Endereço da convenção de testes` é onde lê-lo. `Alcance da mudança` é `só as linhas tocadas` ou `arquivo inteiro`. `Comando de testes` roda os testes do arquivo afetado.
 
 ## Instruções
 
@@ -56,7 +57,7 @@ Respeite o `Alcance da mudança`. Com `só as linhas tocadas`, o padrão vale pa
 
 ### Passo 4
 
-Rode o `Comando de testes`, ou o que `levantar-ambiente-do-repositorio` achou, nos arquivos afetados. Se o teste cobre uma correção, confirme que ele falha sem a correção e passa com ela. Se a convenção do repositório tem lint de testes, rode-o. O commit segue `criar-commit`.
+Rode o `Comando de testes`, ou o que `levantar-ambiente-do-repositorio` achou, nos arquivos afetados. Com `TDD`, escreva o teste antes do código, rode-o e confirme que ele falha pelo motivo esperado, não por erro de chamada. Só então siga `escrever-codigo`, e rode de novo até passar. Com `teste depois do código`, se o teste cobre uma correção, confirme que ele falha sem a correção e passa com ela. Se a convenção do repositório tem lint de testes, rode-o. O commit segue `criar-commit`.
 
 ### Passo 5
 

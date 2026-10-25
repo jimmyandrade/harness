@@ -3,7 +3,7 @@ name: escrever-codigo
 description: Aplica as preferências de código da pessoa antes de escrever ou alterar código, como comentários, estilo inline e o que fazer antes de criar um componente. Usada quando uma mudança vai escrever ou alterar código do projeto. Não serve para testes, para commit nem para decidir a arquitetura.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   notion: "false"
   related:
     - criar-commit
@@ -33,7 +33,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ### Passo 1
 
-Chame `levantar-ambiente-do-repositorio` para achar a convenção de código e as habilidades do repositório, nas instruções do projeto e nas habilidades do próprio repositório. Ela vale mais que qualquer preferência desta habilidade. Diga à pessoa quando uma preferência dela contraria o repositório e siga o repositório.
+Chame `levantar-ambiente-do-repositorio` para achar a convenção de código e as habilidades do repositório, nas instruções do projeto e nas habilidades do próprio repositório. Ela vale mais que qualquer preferência desta habilidade. Diga à pessoa quando uma preferência dela contraria o repositório e siga o repositório. Antes de escrever o código, siga `escrever-teste`: com TDD, o padrão dela, o teste que falha vem primeiro, e o código é o que o faz passar.
 
 ### Passo 2
 
@@ -49,7 +49,7 @@ Antes de criar um componente, siga `Antes de criar um componente`: leia o desenh
 
 ### Passo 5
 
-Para o teste da mudança, chame `escrever-teste`. Para o commit e o pull request, siga `criar-commit` e `criar-pull-request`.
+Rode o teste da mudança e confirme que ele passa. Para o commit e o pull request, siga `criar-commit` e `criar-pull-request`.
 
 ### Passo 6
 
