@@ -3,7 +3,7 @@ name: escrever-teste
 description: Escreve ou altera testes de unidade seguindo a convenção de testes do projeto, com o Better Specs como padrão. Usada quando uma mudança precisa de teste novo, quando um teste existente muda ou quando uma revisão pede um teste. Não serve para decidir o que testar, rodar a suíte inteira nem refatorar testes antigos.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.2.1"
   notion: "false"
   related:
     - criar-commit
@@ -47,6 +47,8 @@ Escreva os títulos e a estrutura pela `Convenção de testes`. Com o Better Spe
 
 Os títulos ficam no `Idioma dos títulos dos testes`.
 
+Antes de chamar uma função no teste, leia a assinatura dela e copie a chamada de um teste vizinho: o tipo de cada argumento, como um caminho ou um objeto já carregado.
+
 ### Passo 3
 
 Respeite o `Alcance da mudança`. Com `só as linhas tocadas`, o padrão vale para o teste que você escreve ou altera e para o caso novo dentro de um arquivo antigo. Não renomeie, não reagrupe e não reescreva teste que a mudança não tocou, mesmo que ele use "should" ou várias expectativas.
@@ -88,6 +90,14 @@ Se você copiar o mesmo teste mudando só o valor, a manutenção multiplica.
 
 1. Use `it.each` com a tabela de casos.
 2. Deixe o título dizer o que varia.
+
+### Argumento do tipo errado
+
+Se você passar um caminho onde a função espera um objeto já montado, o teste falha pela chamada, não pelo comportamento.
+
+1. Leia a assinatura da função.
+2. Copie a chamada de um teste vizinho.
+3. Rode o teste novo sozinho antes da suíte inteira.
 
 ## Exemplos de entrada e saída
 
