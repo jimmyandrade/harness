@@ -3,7 +3,7 @@ name: revisar-habilidade
 description: Revisa uma skill já escrita e sinaliza descrição vaga, gatilho faltando ou problema de estrutura. Usada quando a pessoa quer ver o risco de disparar demais ou de menos, ou sugerir casos a partir do propósito, mesmo sem dizer revisar. NÃO serve para criar a primeira versão, executar o teste e editar a skill, só medir tamanho, nem gravar a página no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.7.2"
+  version: "0.7.3"
   related:
     - criar-commit
     - criar-habilidade
@@ -30,7 +30,7 @@ Exija a skill, pelo nome ou pelo texto. Se faltar, peça. Leia a descrição e o
 
 Sinalize descrição vaga, gatilho faltando, problema de estrutura e regra contraditória.
 Regra contraditória são duas frases, da skill ou de uma `related`, que mandam coisas opostas, ou um valor de projeto, como pasta ou caminho, escrito no passo em vez de parâmetro.
-Descrição vaga não diz quando a skill entra, ou deixa de fora o `NÃO serve para` quando há o que ficar de fora. Ela não precisa começar com `Use essa habilidade sempre que`. Gatilho faltando não diz quando carregar. Estrutura fora do lugar foge de `Parâmetros de configuração` com um bloco `yaml`, `Instruções` com `Passo 1`, `Passo 2`, e depois `Problemas comuns`, `Exemplos de entrada e saída`, `Casos-limite`, `Pegadinhas` e `Scripts disponíveis`. `Exemplos de entrada e saída` abre com `Estes exemplos ilustram fatos. Eles podem não estar no data source.` Passo com mais de um desfecho traz um flowchart Mermaid no sentido configurado. Um só fica na frase.
+A descrição fica sempre em terceira pessoa. Descrição vaga sai disso, como `Use essa habilidade sempre que` ou `NÃO use para`, não diz em `Usada quando` a intenção de quem pede, ou deixa de fora o `NÃO serve para` quando há o que ficar de fora. Gatilho faltando não diz quando carregar. Estrutura fora do lugar foge de `Parâmetros de configuração` com um bloco `yaml`, `Instruções` com `Passo 1`, `Passo 2`, e depois `Problemas comuns`, `Exemplos de entrada e saída`, `Casos-limite`, `Pegadinhas` e `Scripts disponíveis`. `Exemplos de entrada e saída` abre com `Estes exemplos ilustram fatos. Eles podem não estar no data source.` Passo com mais de um desfecho traz um flowchart Mermaid no sentido configurado. Um só fica na frase.
 
 ### Passo 3
 
@@ -95,7 +95,7 @@ Deve disparar: montar um workspace novo, criar um projeto, iniciar um projeto pa
 
 - Sugerir caso parece gravar o eval. A sugestão fica na resposta.
 - Descrição longa parece sem risco. O risco de disparar demais está no que o `NÃO serve para` não cobre.
-- `Use essa habilidade sempre que` parece obrigatório no começo. A descrição não precisa começar assim. `Use` é imperativo. O fechamento fica `NÃO serve para` quando há o que deixar de fora.
+- `Use essa habilidade sempre que` parece um gatilho. É imperativo. A descrição fica sempre em terceira pessoa: o verbo do que a skill faz, `Usada quando` e, quando há o que deixar de fora, `NÃO serve para`.
 - Pedido feito numa cópia, sincronizada ou instalada por dependência ou plugin, parece permissão para gravá-la. A cópia é só leitura. A edição vai no repositório de origem. Siga `criar-commit`.
 
 ## Scripts disponíveis

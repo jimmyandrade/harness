@@ -3,7 +3,7 @@ name: descrever-habilidade-ou-schema
 description: Redige, corrige e testa se a descrição de uma skill, das instruções do projeto ou de um schema dispara, em subdisparo, sobredisparo, paráfrase ou tópico sem relação. Usada quando a descrição é o assunto, mesmo sem dizer descrição. NÃO serve para escrever o corpo da skill, avaliar a qualidade da saída, descrever produto nem gravar a página no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.21.1"
+  version: "0.21.2"
   related:
     - criar-commit
     - criar-pull-request
@@ -42,7 +42,7 @@ Nas instruções do projeto, a descrição fica no frontmatter e segue as regras
 
 ### Passo 2
 
-Escreva em terceira pessoa. A descrição entra no prompt do sistema, então ela diz o que a skill faz. Ela não precisa começar com `Use essa habilidade sempre que`. Comece com o verbo do que a skill faz, como `Abre` ou `Define`. Em seguida, `Usada quando` e a intenção de quem pede.
+Escreva sempre em terceira pessoa. A descrição entra no prompt do sistema, e um ponto de vista misturado atrapalha a escolha da skill. `Use essa habilidade sempre que` e `NÃO use para` são imperativo e não entram. Comece com o verbo do que a skill faz, como `Abre` ou `Define`. Em seguida, `Usada quando` e a intenção de quem pede.
 Fale da intenção de quem pede, não da mecânica interna. Liste os contextos em que a skill vale, inclusive quando a pessoa não nomeia o domínio. Quando há o que ficar de fora, feche com `NÃO serve para`.
 Não repita o nome da skill. No Notion, Usar automaticamente carrega os gatilhos da propriedade Descrição. O roteador decide por esse texto se carrega a skill. O procedimento fica no corpo, para não repetir instrução em cada conversa. Exemplo de prompt fica em `Exemplos de entrada e saída`.
 
@@ -86,7 +86,7 @@ Grave a descrição escolhida na skill. Confira os limites do Passo 3. Teste à 
 A qualidade da saída fica em `evoluir-habilidade`. A revisão que só sinaliza fica em `revisar-habilidade`.
 Antes de aceitar, confira:
 
-1. A descrição está em terceira pessoa, diz em `Usada quando` a intenção de quem pede e não precisa começar com `Use essa habilidade sempre que`. Não repete o nome da skill nem traz exemplo de prompt.
+1. A descrição está sempre em terceira pessoa, começa com o verbo do que a skill faz e diz em `Usada quando` a intenção de quem pede. `Use essa habilidade sempre que` não entra. Não repete o nome da skill nem traz exemplo de prompt.
 2. Cobre o caso em que a pessoa não nomeia o domínio.
 3. Quando há o que ficar de fora, fecha com `NÃO serve para`.
 4. Cabe em `Caracteres da descrição`, e nome mais descrição cabem em `Tokens do catálogo`.
@@ -110,7 +110,7 @@ Se você trocar a descrição do schema por uma frase nova, o fato que já estav
 
 Se você exigir `Use essa habilidade sempre que` no começo, ou fechar com `NÃO use para`, a descrição fala no imperativo.
 
-1. A descrição não precisa começar com `Use essa habilidade sempre que`.
+1. A descrição fica sempre em terceira pessoa. `Use essa habilidade sempre que` é imperativo e não entra.
 2. Diga em `Usada quando` a intenção de quem pede.
 3. Mantenha o `NÃO serve para` quando há o que deixar de fora. Não repita o nome da skill. O exemplo de prompt fica no corpo.
 
@@ -188,7 +188,7 @@ Explora, resume, limpa e gera gráfico de CSV, TSV ou planilha. Usada quando a p
 
 ## Casos-limite
 
-- A descrição começa com o nome da skill ou com um exemplo de prompt: recomece com o verbo do que a skill faz, em terceira pessoa. O exemplo vai para o corpo. Ela não precisa começar com `Use essa habilidade sempre que`.
+- A descrição começa com o nome da skill, com um exemplo de prompt ou no imperativo, como `Use essa habilidade sempre que`: recomece com o verbo do que a skill faz, em terceira pessoa. O exemplo vai para o corpo.
 - O pedido é de um passo e o agente já resolve sozinho: não estique a descrição para forçar o disparo.
 - Nome e descrição passam de `Tokens do catálogo`, ou a descrição passa de `Caracteres da descrição`: corte a mecânica e mantenha o gatilho e o `NÃO serve para`.
 - Há menos de 20 consultas, ou falta tarefa óbvia, paráfrase, tópico sem relação ou quase-acerto: peça o que falta. Não invente.
@@ -206,7 +206,7 @@ Explora, resume, limpa e gera gráfico de CSV, TSV ou planilha. Usada quando a p
 ## Pegadinhas
 
 - O nome da skill parece obrigatório na descrição. O roteador já tem o nome. A descrição começa com o verbo do que a skill faz.
-- `Use essa habilidade sempre que` parece obrigatório no começo. A descrição não precisa começar assim. `Use` é imperativo, no começo e no `NÃO use para`. O gatilho fica em `Usada quando`. O fechamento fica `NÃO serve para` quando há o que deixar de fora.
+- `Use essa habilidade sempre que` parece um gatilho forte. É imperativo. A descrição fica sempre em terceira pessoa. O gatilho fica em `Usada quando`. O fechamento fica `NÃO serve para` quando há o que deixar de fora.
 - Não invente consulta de disparo. Peça o prompt da pessoa.
 - Tópico sem relação parece consulta inútil. Ele mostra que a skill fica de fora. O quase-acerto mostra a fronteira.
 - Não copie para a descrição uma palavra casual da consulta que falhou. O termo técnico que a pessoa usa entra.
