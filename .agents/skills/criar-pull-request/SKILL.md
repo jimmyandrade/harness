@@ -3,7 +3,7 @@ name: criar-pull-request
 description: Use essa habilidade sempre que for abrir PR, subir uma correção, mandar para a branch principal ou mesclar mudança no repositório, mesmo sem dizer PR. NÃO use para responder comentário de revisão nem para só commitar (use criar-commit).
 metadata:
   author: jimmyandrade
-  version: "0.22.0"
+  version: "0.24.0"
   related:
     - evoluir-habilidade
     - criar-commit
@@ -51,11 +51,21 @@ Nada entra na `Branch base` sem pull request. Nunca dê push na `Branch base`, n
 
 ### Passo 1
 
-Leia o `CONTRIBUTING.md` e o `AGENTS.md` do repositório e siga o que eles dizem de branch, título, descrição e checks: a convenção documentada vale mais que a preferência pessoal. Com `Fatiar por subtarefa` em `não`, o padrão, commits do mesmo tema entram na branch e no pull request que já tratam desse tema. Com `sim`, abra um PR para cada subtarefa, e um PR que depende de outro segue `PR que depende de outro`. Antes de criar a branch, confira se a demanda tem uma tarefa no rastreador do projeto, quando o projeto usa um. Sem tarefa, sugira criá-la antes do PR e espere a resposta: a chave entra no nome da branch e no título do PR conforme a convenção do repositório. Se o PR já está aberto sem tarefa, diga isso e proponha criá-la depois.
+Leia o `CONTRIBUTING.md` e o `AGENTS.md` do repositório e siga o que eles dizem de branch, título, descrição e checks: a convenção documentada vale mais que a preferência pessoal.
+Com `Fatiar por subtarefa` em `não`, o padrão, commits do mesmo tema entram na branch e no pull request que já tratam desse tema.
+Com `sim`, abra um PR para cada subtarefa, e um PR que depende de outro segue `PR que depende de outro`.
+Antes de criar a branch, confira se a demanda tem uma tarefa no rastreador do projeto, quando o projeto usa um.
+Sem tarefa, sugira criá-la antes do PR e espere a resposta: a chave entra no nome da branch e no título do PR conforme a convenção do repositório.
+Se o PR já está aberto sem tarefa, diga isso e proponha criá-la depois.
 
 Se a branch atual for a `Branch base`, crie uma branch a partir da `Branch base` remota atualizada antes de qualquer commit, sem rastrear a base.
 
-O nome da branch é `<tipo>/<descrição>`. O tipo é o do Conventional Commits do commit principal: `feat`, `fix`, `docs`, `refactor`, `perf`, `test`, `chore` ou `ci`. A descrição é ASCII em kebab-case. Branch com outro prefixo, como `claude/` ou `cursor/`, que a ferramenta criou, é renomeada antes do push. Não abra PR de branch fora desse padrão. Se ela já tem PR aberto, renomear no GitHub fecha esse PR: abra um PR novo da branch renomeada, com o mesmo título e corpo, e comente no antigo o link do novo.
+O nome da branch é `<tipo>/<descrição>`.
+O tipo é o do Conventional Commits do commit principal: `feat`, `fix`, `docs`, `refactor`, `perf`, `test`, `chore` ou `ci`.
+A descrição é ASCII em kebab-case.
+Branch com outro prefixo, como `claude/` ou `cursor/`, que a ferramenta criou, é renomeada antes do push.
+Não abra PR de branch fora desse padrão.
+Se ela já tem PR aberto, renomear no GitHub fecha esse PR: abra um PR novo da branch renomeada, com o mesmo título e corpo, e comente no antigo o link do novo.
 
 ### Passo 2
 
@@ -68,17 +78,53 @@ Commite seguindo `criar-commit`.
 ### Passo 4
 
 Se a branch já tem PR, confira o estado dele antes de atualizar. Se já foi mesclado, a branch remota foi apagada: comece uma branch nova a partir da `Branch base` remota e leve só os commits que ficaram fora do merge.
-Atualize a branch com rebase sobre a `Branch base` remota. Nunca faça merge da base na branch nem crie commit com assunto `merge:`. O squash do PR não é motivo para mesclar a base antes. Resolva conflitos nos commits rebaseados. Se a branch já foi publicada, o push comum é recusado, porque a história local e a do GitHub divergiram. Substitua a branch no GitHub pela história reescrita só depois que a pessoa autorizar, e só nessa branch. Na resposta, diga o que muda: a branch publicada passa a ter os commits novos, a `Branch base` não muda, e a substituição só segue se ninguém tiver enviado commit novo nessa branch desde a última leitura. Não use o nome do comando no lugar dessa explicação.
+Atualize a branch com rebase sobre a `Branch base` remota.
+Nunca faça merge da base na branch nem crie commit com assunto `merge:`.
+O squash do PR não é motivo para mesclar a base antes.
+Resolva conflitos nos commits rebaseados.
+Se a branch já foi publicada, o push comum é recusado, porque a história local e a do GitHub divergiram.
+Substitua a branch no GitHub pela história reescrita só depois que a pessoa autorizar, e só nessa branch.
+Na resposta, diga o que muda: a branch publicada passa a ter os commits novos, a `Branch base` não muda, e a substituição só segue se ninguém tiver enviado commit novo nessa branch desde a última leitura.
+Não use o nome do comando no lugar dessa explicação.
 
 ### Passo 5
 
-Com `Criar pull request ao terminar` em `rascunho`, o padrão, a mudança de código já autoriza o push da branch e a abertura do pull request em rascunho. Com `sim`, o push e o pull request pronto. Com `não`, só publique com pedido explícito. Pedir "faça o PR", "sobe isso" ou "coloca na main" autoriza o push da branch, nunca da `Branch base`. "coloca na main" continua sendo o pedido de merge. O parâmetro não mescla. Se `Duração do hook de pre-push (min)` for maior que zero, avise antes quanto o hook leva, para a pessoa não achar que travou.
+Com `Criar pull request ao terminar` em `rascunho`, o padrão, a mudança de código já autoriza o push da branch e a abertura do pull request em rascunho.
+Com `sim`, o push e o pull request pronto.
+Com `não`, só publique com pedido explícito.
+Pedir "faça o PR", "sobe isso" ou "coloca na main" autoriza o push da branch, nunca da `Branch base`.
+"coloca na main" continua sendo o pedido de merge.
+O parâmetro não mescla.
+Se `Duração do hook de pre-push (min)` for maior que zero, avise antes quanto o hook leva, para a pessoa não achar que travou.
 Se o commit a publicar é o mesmo que passou no Passo 2, publique sem o hook e diga isso na resposta. Se houve outro commit depois, deixe o hook rodar, em segundo plano, com `Timeout do push (ms)`.
 Teste antes o acesso ao remoto com a credencial do `gh`. Faça o push com essa credencial.
 
 ### Passo 6
 
-Antes de abrir, procure cada termo de `Termos que não podem aparecer` nos arquivos novos e alterados e no texto do PR, sem diferenciar maiúsculas (`git grep -i -E "termo1|termo2"`). Um achado volta para correção e nunca segue para o PR. Abra o PR contra a `Branch base` no `Repositório`. Título igual ao assunto do commit. Corpo em `Idioma do PR`. Se o repositório tiver um template de pull request, siga as seções dele e marque as caixas conforme o que foi feito. Com `Atribuição da sessão` em `sim`, termine com a linha de atribuição da sessão. Com `não`, não ponha linha de ferramenta ou de modelo, e remova a que o PR já tiver na mesma edição. Com `Atribuir o PR a quem abre` em `sim`, o comando que abre o PR já leva `--assignee` com a conta do `gh` que o abre. Com `Rotular o PR` em `sim`, leia os rótulos do repositório (`gh label list`) antes de abrir, e o mesmo comando já leva `--label` com o rótulo que melhor descreve a mudança, pelo tipo do commit e pelo que o diff faz. Não abra o PR para rotular depois. Se nenhum rótulo serve, só crie um novo com `Criar rótulo se nenhum servir` em `sim`; com `não`, diga na resposta que nenhum serviu e não abra o PR sem rótulo. Um PR que já estava aberto sem pessoa atribuída ou sem rótulo recebe os dois antes de qualquer outra edição. Mande o link na resposta.
+Antes de abrir, procure cada termo de `Termos que não podem aparecer` nos arquivos novos e alterados e no texto do PR, sem diferenciar maiúsculas.
+A busca e a lista de rótulos estão em `Scripts disponíveis`.
+Um achado volta para correção e nunca segue para o PR.
+
+Abra o PR contra a `Branch base` no `Repositório`.
+Título igual ao assunto do commit.
+Corpo em `Idioma do PR`.
+Se o repositório tiver um template de pull request, siga as seções dele e marque as caixas conforme o que foi feito.
+
+Com `Atribuição da sessão` em `sim`, termine com a linha de atribuição da sessão.
+Com `não`, não ponha linha de ferramenta ou de modelo, e remova a que o PR já tiver na mesma edição.
+
+Com `Atribuir o PR a quem abre` em `sim` e `Rotular o PR` em `sim`, o comando que abre o PR, em `Scripts disponíveis`, já leva a pessoa atribuída e o rótulo.
+O rótulo é o do tipo do commit.
+`fix` usa o rótulo de bug.
+`docs` usa o de documentação.
+A extensão do arquivo não escolhe o rótulo: um Markdown que corrige um erro leva o de bug.
+Documentação leva o de documentação, e o título seria `docs:`.
+
+Não abra o PR para rotular depois.
+Se nenhum rótulo serve, só crie um novo com `Criar rótulo se nenhum servir` em `sim`.
+Com `não`, diga na resposta que nenhum serviu e não abra o PR sem rótulo.
+Um PR que já estava aberto sem pessoa atribuída ou sem rótulo recebe os dois antes de qualquer outra edição.
+Mande o link na resposta.
 
 ### Passo 7
 
@@ -117,7 +163,14 @@ Com `Comunicar novidade após o merge` igual a `sim`, siga `comunicar-novidade-d
 
 ### Passo 9
 
-Na resposta final, informe o nome da branch, se ela está no GitHub e o hash de cada commit, e diga o estado de cada etapa: commit, push, PR, quem foi atribuído, o rótulo, CI e merge. Cada PR citado, inclusive na pergunta sobre quem mescla, vai com o link completo. Se perguntarem "já mesclou?", responda primeiro sim ou não e depois o que falta. Com `Criar pull request ao terminar` em `rascunho`, o padrão, a branch está no GitHub, o pull request está aberto em rascunho e a resposta leva o link. Com `sim`, o pull request está aberto pronto e a resposta leva o link. Com `não` e sem pedido de publicação, o estado do pull request é que ele não está aberto. Diga se esta habilidade foi chamada. Não escreva que ela ficou para este pedido, nem para depois.
+Na resposta final, informe o nome da branch, se ela está no GitHub e o hash de cada commit, e diga o estado de cada etapa: commit, push, PR, quem foi atribuído, o rótulo, CI e merge.
+Cada PR citado, inclusive na pergunta sobre quem mescla, vai com o link completo.
+Se perguntarem "já mesclou?", responda primeiro sim ou não e depois o que falta.
+Com `Criar pull request ao terminar` em `rascunho`, o padrão, a branch está no GitHub, o pull request está aberto em rascunho e a resposta leva o link.
+Com `sim`, o pull request está aberto pronto e a resposta leva o link.
+Com `não` e sem pedido de publicação, o estado do pull request é que ele não está aberto.
+Diga se esta habilidade foi chamada.
+Não escreva que ela ficou para este pedido, nem para depois.
 
 ### Passo 10
 
@@ -205,6 +258,7 @@ O pedido autoriza push e merge. Push sem o hook, porque o commit já passou em t
 - Não existe `timeout` no macOS. Use o timeout da ferramenta ou rode em segundo plano.
 - Um hook de pre-push pode rodar também no push que só apaga uma branch remota.
 - Leia nas instruções do projeto os checks que o PR recebe e as limitações de cada integração.
+- Um Markdown parece documentação. O rótulo segue o tipo do commit. Correção de erro é `fix` e o rótulo de bug. `docs` e o rótulo de documentação ficam para a documentação.
 
 ## Scripts disponíveis
 
@@ -217,7 +271,9 @@ O pedido autoriza push e merge. Push sem o hook, porque o commit já passou em t
 - `git push --force-with-lease origin <branch>`: substitui a branch já publicada pela história reescrita no Passo 5, só depois da autorização. Não substitui a `Branch base`.
 - `GIT_TERMINAL_PROMPT=0 git -c credential.helper= -c 'credential.helper=!gh auth git-credential' ls-remote origin HEAD`: teste de acesso do Passo 5.
 - `LEFTHOOK=0 GIT_TERMINAL_PROMPT=0 git -c credential.helper= -c 'credential.helper=!gh auth git-credential' push -u origin <branch>`: push sem o hook. Tire o `LEFTHOOK=0` para rodar o hook.
-- `gh pr create --repo <Repositório> --base <Branch base> --head <branch> --title "<assunto>" --body "<corpo>" --assignee <pessoa> --label <rótulo>`: Passo 6. Com `Atribuir o PR a quem abre` ou `Rotular o PR` em `não`, tire a flag correspondente. Com `Rotular o PR` em `sim`, `--label` fica no comando.
+- `git grep -i -E "termo1|termo2"`: busca dos termos no Passo 6, sem diferenciar maiúsculas.
+- `gh label list --repo <Repositório>`: rótulos do Passo 6.
+- `gh pr create --repo <Repositório> --base <Branch base> --head <branch> --title "<assunto>" --body "<corpo>" --assignee <pessoa> --label <rótulo>`: Passo 6. Com `Atribuir o PR a quem abre` ou `Rotular o PR` em `não`, tire a flag correspondente. Com `Rotular o PR` em `sim`, `--label` fica no comando. O rótulo de `fix` é o de bug. O de `docs` é o de documentação.
 - `gh api graphql -f query='query{repository(owner:"<dono>",name:"<nome>"){pullRequest(number:<número>){reviewDecision reviewThreads(first:100){nodes{isResolved}}}}}'`: threads sem resolver e pedido de mudança do Passo 8.
 - `gh pr checks <número> --repo <Repositório>`: checks do Passo 8.
 - `gh pr merge <número> --repo <Repositório> --<Tipo de merge> --delete-branch`: Passo 8.

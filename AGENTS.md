@@ -1,6 +1,6 @@
 ---
 metadata:
-  version: "1.25.0"
+  version: "1.25.1"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -49,7 +49,7 @@ metadata:
 ## Respostas
 
 - Responda sempre no `Idioma das respostas`, que tem como padrão português do Brasil. Um projeto que quer as respostas em outro idioma define esse parâmetro no próprio `AGENTS.md`.
-- Comece toda resposta pelo que precisa ser feito e por quem faz. Termine com a sugestão do próximo passo e, se houver, com a decisão que cabe à pessoa.
+- Fale com a pessoa na resposta, sem usar o nome dela no lugar dela. Comece pelo que precisa ser feito. Termine com a sugestão do próximo passo e, se houver, com a decisão que cabe a ela. Terceira pessoa fica na descrição da habilidade.
 - Todo pull request, issue ou commit citado leva o link completo, inclusive na pergunta sobre quem mescla.
 
 ## Execução
