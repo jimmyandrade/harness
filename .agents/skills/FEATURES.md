@@ -40,6 +40,7 @@ How these skills relate is in `README.md`, in this folder.
   - In a scheduled run, applies only the structural changes and leaves the rest in the summary
   - Cites the commit in each reply that says what changed, by its short SHA as a link to the commit
   - Answers a self-review comment from the person who asked on the thread right away, with the commit. A reply to someone else waits when reading the text before publishing is on
+  - Judges an edited reply by the text saved on the thread, and tells the person its first sentence
   - Ends with a tally of accepted, declined, outdated, and open comments by author, and hands back to the caller. The merge, and whether failing checks block it, stay with criar-pull-request
 - **Test Criteria**:
   - [ ] A comment that still applies is fixed, answered, and resolved
