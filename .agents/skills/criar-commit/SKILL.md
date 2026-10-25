@@ -3,7 +3,7 @@ name: criar-commit
 description: Use essa habilidade sempre que terminar um trabalho que mudou o repositório ou for commitar, separar commits ou escrever a mensagem, mesmo sem dizer commit. NÃO use para push, abrir PR, rebase nem merge (use criar-pull-request).
 metadata:
   author: jimmyandrade
-  version: "0.16.0"
+  version: "0.15.0"
 ---
 
 # Criar commit
@@ -83,7 +83,7 @@ Informe o nome da branch, se ela está no GitHub e o hash de cada commit nesta r
 
 ### Passo 8
 
-Se o fluxo parou sem seguir `criar-pull-request`, siga `sincronizar-status-da-tarefa`. Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
+Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
 

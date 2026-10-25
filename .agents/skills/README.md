@@ -140,7 +140,6 @@ flowchart LR
   conversar_no_whatsapp --> redigir_com_tom_de_voz
   criar_commit -.-> criar_pull_request
   criar_commit -.-> evoluir_habilidade
-  criar_commit -.-> sincronizar_status_da_tarefa
   criar_habilidade --> criar_commit
   criar_habilidade --> criar_pull_request
   criar_habilidade --> definir_arquivos_da_habilidade
@@ -151,7 +150,6 @@ flowchart LR
   criar_pull_request --> comunicar_novidade_do_produto
   criar_pull_request --> criar_commit
   criar_pull_request --> evoluir_habilidade
-  criar_pull_request --> sincronizar_status_da_tarefa
   definir_agenda --> definir_agenda_de_popstar
   definir_agenda --> definir_convidado
   definir_agenda --> definir_data_significativa
@@ -447,6 +445,7 @@ flowchart LR
   sincronizar_status_da_tarefa --> criar_commit
   sincronizar_status_da_tarefa --> criar_pull_request
   sincronizar_status_da_tarefa --> evoluir_habilidade
+  sincronizar_status_da_tarefa --> levantar_contexto_do_pull_request
   validar_plano_de_vocabulario --> classificar_estado_do_termo
   validar_plano_de_vocabulario --> definir_vocabulario
   validar_plano_de_vocabulario --> gravar_termos_no_vocabulario
