@@ -1,14 +1,16 @@
 ---
 name: sincronizar-status-da-tarefa
-description: Use essa habilidade sempre que um commit for criado ou o estado de um pull request mudar, para alinhar o status da tarefa, mesmo sem dizer sincronizar. NÃO use para escrever a tarefa, abrir o PR nem revisar o diff.
+description: Sincroniza o status de tarefas, cards ou issues com o estado do pull request ligado a cada uma. Usada quando um commit é criado ou o estado de um pull request muda, mesmo sem dizer sincronizar. Não serve para escrever a tarefa, abrir o PR nem revisar o diff.
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.2.1"
+  notion: "false"
   related:
     - criar-commit
     - criar-pull-request
     - evoluir-habilidade
+    - levantar-contexto-do-pull-request
 ---
 
 # Sincronizar status da tarefa
@@ -42,7 +44,7 @@ Obtenha as tarefas pela `Consulta das tarefas`, ou pela lista ou pelos links que
 
 Ligue cada tarefa a um PR pela `Ligação entre tarefa e PR`. Busca pela chave traz PR que só cita a chave: abra o título e o corpo antes de ligar. Ligação feita só pelo assunto entra no plano marcada como "ligada pelo assunto".
 
-Veja o estado de cada PR: aberto, mesclado ou fechado, rascunho ou pronto, e as etiquetas.
+Veja o estado de cada PR como no primeiro passo de `levantar-contexto-do-pull-request`: aberto, mesclado ou fechado, rascunho ou pronto, e as etiquetas.
 
 ```mermaid
 flowchart LR
@@ -147,6 +149,7 @@ A habilidade leva "Exportar relatório em CSV" de "a fazer" a "concluído". A se
 - Uma transição devolve a tarefa inteira. O status novo está no campo de status desse retorno.
 - A tarefa fica em "em andamento" quando o PR está em rascunho, mesmo que ele esteja aberto.
 - A habilidade parece só para quando a pessoa pede a varredura. Depois de um commit ou de uma mudança no pull request, ela roda.
+- `levantar-contexto-do-pull-request` parece citação a tirar porque fica fora do Notion. A relação continua em `related` e no passo que lê o estado do pull request. Esta habilidade também fica fora do Notion, para o nome dela poder continuar no texto.
 
 ## Scripts disponíveis
 
