@@ -1,6 +1,6 @@
 ---
 metadata:
-  version: "1.28.0"
+  version: "1.29.0"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -26,6 +26,7 @@ metadata:
       "Projeto da tarefa por repositório": "issues do próprio repositório"
     "sincronizar-status-da-tarefa":
       "Consulta das tarefas": "gh issue list --state open --assignee @me --json number,title,url"
+      "Registro da ligação": "No pull request aberto, acrescente `Closes #<número>` ao corpo. No pull request já mesclado, comente na tarefa com o link do pull request."
     "atender-revisao-de-pull-request":
       "Idioma da resposta à revisão": "o idioma do comentário"
 ---

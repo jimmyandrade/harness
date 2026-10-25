@@ -1,10 +1,10 @@
 ---
 name: sincronizar-status-da-tarefa
-description: Sincroniza o status de tarefas, cards ou issues com o estado do pull request ligado a cada uma. Usada quando um commit é criado ou o estado de um pull request muda, mesmo sem dizer sincronizar. Não serve para escrever a tarefa, abrir o PR nem revisar o diff.
+description: Sincroniza o status de tarefas, cards ou issues com o estado do pull request ligado a cada uma e grava a ligação quando o pull request ainda não cita a tarefa. Usada quando um commit é criado ou o estado de um pull request muda, mesmo sem dizer sincronizar. Não serve para escrever a tarefa, abrir o PR nem revisar o diff.
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.4.0"
   related:
     - criar-commit
     - criar-pull-request
@@ -27,21 +27,27 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Status do PR bloqueado": "não muda"
 "Etiquetas de PR bloqueado": ""
 "Ligação entre tarefa e PR": "chave da tarefa no título, na branch ou no corpo do PR"
+"Registro da ligação": ""
 "Pedir confirmação do plano": "sim"
 "Modo de aprendizado": "perguntar"
 ```
 
-`Consulta das tarefas` é a busca que lista as tarefas da pessoa ainda abertas, na linguagem do rastreador do projeto. `Fluxo de status` é a lista ordenada dos status, do primeiro ao último, com o nome de cada transição entre eles. `Etiquetas de PR bloqueado` lista as etiquetas que marcam o PR como bloqueado, esteja ele em rascunho ou pronto. Rascunho é o estado do PR. Bloqueio é um sinal à parte, dado pelas etiquetas, e tem precedência sobre o rascunho. Com `Status do PR bloqueado` em `não muda`, a tarefa fica onde está e entra na lista para decidir.
+`Consulta das tarefas` é a busca que lista as tarefas da pessoa ainda abertas, na linguagem do rastreador do projeto. `Fluxo de status` é a lista ordenada dos status, do primeiro ao último, com o nome de cada transição entre eles. `Fluxo de status` vazio não muda o status e não interrompe a gravação da ligação. `Registro da ligação` diz como gravar a ligação entre a tarefa e o pull request, no pull request ainda aberto e no pull request já mesclado. `Registro da ligação` vazio pergunta uma vez e para, sem gravar. `Etiquetas de PR bloqueado` lista as etiquetas que marcam o PR como bloqueado, esteja ele em rascunho ou pronto. Rascunho é o estado do PR. Bloqueio é um sinal à parte, dado pelas etiquetas, e tem precedência sobre o rascunho. Com `Status do PR bloqueado` em `não muda`, a tarefa fica onde está e entra na lista para decidir.
 
 ## Instruções
 
 ### Passo 1
 
-Obtenha as tarefas pela `Consulta das tarefas`, ou pela lista ou pelos links que a pessoa passou. Sem consulta e sem lista, pergunte e pare. Resultado grande que vem em arquivo é lido pelos campos chave, status e título, depois de conferir o formato do arquivo. Anote o status de cada tarefa como o rastreador devolveu.
+Obtenha as tarefas pela `Consulta das tarefas`, ou pela lista ou pelos links que a pessoa passou.
+Quando a habilidade roda por um commit ou por uma mudança de pull request, parta desse pull request e busque as tarefas abertas.
+Sem consulta e sem lista, pergunte e pare. Resultado grande que vem em arquivo é lido pelos campos chave, status e título, depois de conferir o formato do arquivo. Anote o status de cada tarefa como o rastreador devolveu.
 
 ### Passo 2
 
-Ligue cada tarefa a um PR pela `Ligação entre tarefa e PR`. Busca pela chave traz PR que só cita a chave: abra o título e o corpo antes de ligar. Ligação feita só pelo assunto entra no plano marcada como "ligada pelo assunto".
+Ligue cada tarefa a um PR pela `Ligação entre tarefa e PR`.
+Busca pela chave traz PR que só cita a chave: abra o título e o corpo antes de ligar.
+Partindo do pull request, compare o assunto dele com o título de cada tarefa aberta.
+Ligação feita só pelo assunto entra no plano marcada como "ligada pelo assunto".
 
 Veja o estado de cada PR como no primeiro passo de `levantar-contexto-do-pull-request`: aberto, mesclado ou fechado, rascunho ou pronto, e as etiquetas.
 
@@ -55,15 +61,30 @@ flowchart LR
   A -->|sem PR| F[Não muda]
 ```
 
-Não mude a tarefa quando o PR cita outra chave, quando o PR foi fechado sem mesclar ou quando o destino depende de julgamento, como tarefa-mãe com filhas, atualização de versão ou PR ligado só pelo assunto sem confirmação. Liste essas tarefas com o motivo, para a pessoa decidir.
+Não mude o status da tarefa quando o PR cita outra chave, quando o PR foi fechado sem mesclar ou quando o destino depende de julgamento, como tarefa-mãe com filhas, atualização de versão ou PR ligado só pelo assunto sem confirmação.
+Liste essas tarefas com o motivo, para a pessoa decidir.
+A ligação pelo assunto espera a confirmação do plano.
+Com o sim, grave a ligação como `Registro da ligação` manda, no momento que combina com o estado do pull request.
+No pull request ainda aberto, a gravação entra nele.
+No pull request já mesclado, a gravação entra na tarefa, com o link do pull request.
+Uma citação acrescentada depois do merge não fecha a tarefa.
+
+```mermaid
+flowchart LR
+  Q{Pull request} -->|aberto| A[Grava no pull request]
+  Q -->|já mesclado| B[Grava na tarefa]
+```
 
 ### Passo 3
 
-Grave o plano: para cada tarefa, o status atual lido, o PR, o estado do PR, o status de destino e os passos do `Fluxo de status` entre os dois. Antes de executar, releia o estado do PR e da tarefa. Se algo mudou, corrija o plano. Com `Pedir confirmação do plano` em `sim`, mostre o plano e espere a resposta. Com `não`, siga.
+Grave o plano: para cada tarefa, o status atual lido, o PR, o estado do PR, se a ligação será gravada, o status de destino e os passos do `Fluxo de status` entre os dois.
+Sem `Fluxo de status`, o status de destino fica como está. Antes de executar, releia o estado do PR e da tarefa. Se algo mudou, corrija o plano. Com `Pedir confirmação do plano` em `sim`, mostre o plano e espere a resposta. Com `não`, siga.
 
 ### Passo 4
 
-Execute uma tarefa por vez, um passo do fluxo por vez. Não existe atalho: se o destino não é o próximo status, passe por cada um no meio. Depois de cada transição, leia o status que o retorno trouxe, e só então dê o próximo passo na mesma tarefa. Se o nome da transição não existir, a mensagem de erro lista as que existem: use essa lista para saber onde a tarefa está.
+Com `Fluxo de status`, execute uma tarefa por vez, um passo do fluxo por vez.
+Sem `Fluxo de status`, não mude o status.
+Depois do sim do plano, grave a ligação da tarefa marcada para gravar. Não existe atalho: se o destino não é o próximo status, passe por cada um no meio. Depois de cada transição, leia o status que o retorno trouxe, e só então dê o próximo passo na mesma tarefa. Se o nome da transição não existir, a mensagem de erro lista as que existem: use essa lista para saber onde a tarefa está.
 
 Chamada negada ou com erro para a execução daquela tarefa. Anote "não feito" e o status em que ela ficou, lido do último retorno que deu certo. Não repita a chamada, não contorne por outra ferramenta e siga com as outras tarefas. Só repita com o ok da pessoa, depois de reler o status.
 
@@ -117,7 +138,7 @@ Se você ligar a tarefa ao PR só porque a busca achou a chave, o status muda po
 
 1. Abra o título e o corpo do PR.
 2. Ligue só quando o PR é da tarefa.
-3. Quando só o assunto bate, marque "ligada pelo assunto".
+3. Quando só o assunto bate, marque "ligada pelo assunto" e espere a confirmação do plano antes de gravar a ligação.
 
 ## Exemplos de entrada e saída
 
@@ -131,6 +152,14 @@ A habilidade lista três tarefas abertas. "Exportar relatório em CSV" tem o PR 
 
 A habilidade leva "Exportar relatório em CSV" de "a fazer" a "concluído". A segunda transição é negada. O relato diz que a tarefa ficou em "em andamento", que o destino era "concluído" e que ela está na lista das não feitas, com o motivo.
 
+### o pull request da entrega não cita a tarefa
+
+A entrega "Publicar o relatório" está num pull request aberto, sem a chave da tarefa. A busca das tarefas abertas acha "Publicar o relatório em CSV". O plano marca "ligada pelo assunto" e espera o sim. Com o sim, a habilidade grava `Closes #<número>` no corpo do pull request.
+
+### o pull request já foi mesclado e o projeto não tem fluxo de status
+
+A mesma entrega está num pull request já mesclado. O plano marca "ligada pelo assunto" e espera o sim. Com o sim, a habilidade comenta na tarefa com o link do pull request. O status fica como está.
+
 ## Casos-limite
 
 - O PR está aberto e pronto, mas tem uma etiqueta de `Etiquetas de PR bloqueado`: o destino é o `Status do PR bloqueado`, não o de aberto e pronto.
@@ -139,7 +168,7 @@ A habilidade leva "Exportar relatório em CSV" de "a fazer" a "concluído". A se
 - A tarefa já está no status de destino: não muda e aparece nas "não mexi".
 - A tarefa tem mais de um PR: use o mais recente e diga qual usou. Se um está aberto e o outro mesclado, a tarefa vai para decidir.
 - O rastreador não aceita o nome da transição: leia a lista da mensagem de erro e use o nome que ela mostra.
-- Nenhum `Fluxo de status` nas instruções: pergunte uma vez e pare.
+- Nenhum `Fluxo de status` nas instruções: grave a ligação confirmada e não mude o status. Sem `Registro da ligação`, pergunte uma vez e pare.
 
 ## Pegadinhas
 
@@ -149,6 +178,8 @@ A habilidade leva "Exportar relatório em CSV" de "a fazer" a "concluído". A se
 - A tarefa fica em "em andamento" quando o PR está em rascunho, mesmo que ele esteja aberto.
 - A habilidade parece servir só quando a pessoa pede a varredura. Ela também roda depois de um commit ou de uma mudança no estado do pull request.
 - O lugar das tarefas parece fixo. Ele muda de um negócio para outro e fica em `Consulta das tarefas`.
+- A busca pela chave parece achar o pull request feito sem citar a tarefa. Parta desse pull request e compare o assunto com as tarefas abertas.
+- Uma citação no pull request já mesclado parece fechar a tarefa. A gravação entra na tarefa, com o link do pull request.
 - Uma frase comprimida parece um recado interno. A skill fica fácil de ler por uma pessoa.
 
 ## Scripts disponíveis
