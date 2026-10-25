@@ -14,7 +14,7 @@ Funcionalidade: Sugerir testes sem gravar
       Mas o arquivo Gherkin não é gravado por esta revisão
 
     Exemplo: Risco de disparar demais
-      Dado que a descrição não tem "Não serve para"
+      Dado que a descrição não tem "NÃO use para"
       Quando a skill é revisada
       Então a resposta aponta o risco de disparar demais
       E a resposta sugere um tópico sem relação e um quase-acerto
