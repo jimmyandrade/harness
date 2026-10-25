@@ -3,7 +3,7 @@ name: atender-revisao-de-pull-request
 description: Atende a revisão recebida num pull request, de pessoa ou de bot. Lê os comentários abertos, classifica cada sugestão, aplica o que é seguro, responde cada thread e resolve as atendidas. Sem PR informado, lista os seus que precisam de atenção. Não serve para revisar o PR de outra pessoa nem para abrir o PR.
 metadata:
   author: jimmyandrade
-  version: "0.12.0"
+  version: "0.13.0"
   notion: "false"
   aliases:
     - resolver-comentarios-de-revisao
@@ -36,6 +36,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Ler o texto antes de publicar": "sim"
 "Pedir nova revisão ao final": "sim"
 "Fechar conversa com a confiança": "não"
+"Número da confiança": ""
 "Rótulo de prioridade no texto": "não"
 "Idioma do relatório": "o idioma da conversa"
 "Agrupar o relatório por prioridade": "não"
@@ -46,6 +47,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 `Fechar conversa com a confiança` em `sim` faz a mensagem que fecha uma conversa dizer o quanto você tem de confiança de que o ponto foi resolvido. `Rótulo de prioridade no texto` em `não` mantém o nome da categoria fora das respostas. `Idioma do relatório` e `Agrupar o relatório por prioridade` mandam no relatório final. `Modo de execução` é `interativo`, com a pessoa na frente, ou `agendado`, sem ninguém. `Aplicar em execução agendada` é `estrutural`, que aplica só o estrutural, ou `não`, que não aplica nada e deixa tudo no resumo. `Aprovação para mudar comportamento` é `pedir` ou `não pedir`. `Régua de mudança de comportamento` lista o que o projeto conta como mudança de comportamento, como condicional, validação, cache, rastreamento ou pagamento. `Lentes de revisão` lista critérios que você aplica ao decidir, sem citá-los na resposta.
 `Idioma da resposta à revisão` nomeia o idioma da resposta.
 O valor `o idioma do comentário` faz cada resposta sair no idioma daquele comentário.
+`Número da confiança` é o número que entra na frase de `Fechar conversa com a confiança`.
+Sem valor, a frase não traz número.
 `Ler o texto antes de publicar` em `sim` mostra a resposta a outra pessoa e espera o sim.
 Comentário de self review, da mesma pessoa que pediu o atendimento, recebe a resposta na hora, com o que mudou, as linhas alteradas e o commit.
 A mensagem do bot é lida, respondida e considerada.
@@ -108,8 +111,9 @@ Ela diz se o ponto será resolvido, como será resolvido e onde: neste commit, n
 Ela também diz que você resolve porque acolheu o ponto.
 Quando quem revisou é outra pessoa, a mensagem também diz que vai pedir outra revisão.
 Com `Fechar conversa com a confiança` em `sim`, a mensagem diz a confiança em linguagem natural e convida a reabrir se faltar algo.
-Um número, como "uns 90%", é só um exemplo de frase. Não é uma meta fixa.
-Quem liga isso é o parâmetro `Fechar conversa com a confiança`.
+Quando `Número da confiança` tem valor, a frase inclui esse número.
+Sem valor, a frase não traz número.
+Quem liga a frase é o parâmetro `Fechar conversa com a confiança`.
 O padrão é `não`.
 Nunca diga que reanalisou, que usou ferramenta nem quantas vezes: o método fica fora do texto.
 Só feche com confiança alta, relendo o trecho no commit atual, mais de uma vez quando for ambíguo.
