@@ -3,7 +3,7 @@ name: publicar-revisao-de-codigo
 description: Revisa um pull request e publica a revisão numa única review, com os comentários inline, no idioma de quem recebe e no tom do projeto. Usada quando a pessoa pede uma revisão ou outra habilidade precisa publicar uma. Não serve para tratar os comentários que você recebeu no seu PR.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.7.0"
   notion: "false"
   aliases:
     - post-code-review
@@ -125,6 +125,7 @@ Escreva os textos com `redigir-com-tom-de-voz`, para o tom de quem publica. Cada
 - Aplique `Abertura da revisão`.
 - Com `Voz em PR aberto por bot` em `nós`, num PR aberto por um bot, nunca escreva "você", "seu" nem @menção ao autor: use a primeira pessoa do plural, "nós", como se o ponto fosse para a discussão do time. Vale no corpo, nos comentários, nas respostas em thread e na tradução.
 - Seja curto. Não escreva frase que uma pessoa não escreveria.
+- Um comentário de revisão é curto e trata do próprio PR. Uma proposta que vai além dele, como mudar o processo ou a integração contínua, ou reunir várias ideias com blocos de código, vira uma proposta escrita à parte, numa issue ou numa página, no formato que o repositório usa, e o comentário só traz o link.
 
 ### Passo 10
 
