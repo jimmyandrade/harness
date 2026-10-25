@@ -4,7 +4,7 @@ description: Abre, revisa, edita e traduz issues do GitHub no idioma do projeto.
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   aliases:
     - definir-issue
   related:
@@ -55,6 +55,7 @@ Ao revisar ou editar, mostre a mudança antes de gravar. Uma issue em outro idio
 ### Passo 7
 
 Mostre o número e o link. O pull request que resolve cita a issue com `Closes #<número>`, seguindo `criar-pull-request`.
+Quando uma issue espera outra, marque em Relationships como bloqueada por ela. Quando esta issue segura a outra, marque como bloqueando. Quando só se relacionam, use relates to. Pai e filha usam parent. Não grave a dependência num comentário.
 
 ### Passo 8
 
@@ -74,7 +75,7 @@ Se você escolher o tipo pela palavra "erro" ou "melhoria", a issue nasce com o 
 Se você juntar duas entregas numa issue, o pull request não consegue fechá-la sozinho.
 
 1. Separe em duas issues.
-2. Cite uma na outra quando houver dependência.
+2. Marque a dependência em Relationships. Não comente "Depende de".
 
 ## Exemplos de entrada e saída
 
@@ -95,6 +96,7 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 - Commit e pull request seguem os próprios idiomas. O `Idioma da issue` vale só para a issue.
 - O título em inglês parece obrigatório por causa do Conventional Commits. Só o tipo é fixo. A descrição segue o `Idioma da issue`.
 - A busca só nas abertas parece bastar. A issue fechada também conta, e reabrir é melhor que duplicar.
+- Um comentário "Depende de #2" parece registrar a dependência. O GitHub usa Relationships. O comentário só repete o fato.
 
 ## Scripts disponíveis
 
@@ -103,4 +105,5 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 1. Busca: `gh issue list --repo <Repositório> --state all --search "<assunto>"`.
 2. Abrir: `gh issue create --repo <Repositório> --title "<título>" --body-file <arquivo>`.
 3. Editar: `gh issue edit <número> --repo <Repositório> --title "<título>" --body-file <arquivo>`.
-4. No Notion, sem o `gh`: entregue o título e o corpo prontos para a pessoa abrir a issue.
+4. Bloqueada por: `gh api --method POST repos/<Repositório>/issues/<número>/dependencies/blocked_by -F issue_id=<id da outra>`. O `issue_id` é o id numérico da issue, não o número. Bloqueando troca `blocked_by` por `blocking`.
+5. No Notion, sem o `gh`: entregue o título e o corpo prontos para a pessoa abrir a issue.
