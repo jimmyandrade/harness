@@ -12,6 +12,12 @@
       "prompt": "pode seguir com o #9",
       "expected_output": "A fila de nove PRs do Renovate é processada do mais antigo ao mais novo, um por vez, parando antes de cada merge. Cada PR tem a árvore de dependência, as notas de todas as versões do intervalo, os pontos de uso, a verificação no merge local quando a branch está atrás sem conflito, testes e build, e uma análise comentada no PR. A regressão de tempo da Vercel Flags é medida e levada à pessoa; o script do msw e um teste de integração vão na branch do bot; e a base fica verde depois de cada merge.",
       "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Atualize o 16. E evolua a habilidade de atualizar dependências pra sempre garantir que o PR tenha um assignee e um label",
+      "expected_output": "O Next.js sobe para 16.4.3 na branch do pull request aberto, com o build passando. O next lint, removido nessa versão, deixa de ser o comando de lint. O pull request fica com um assignee e um label. A habilidade passa a exigir os dois antes da análise e do merge, e o critério fica no Gherkin.",
+      "files": []
     }
   ]
 }
