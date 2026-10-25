@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.1.0](https://github.com/jimmyandrade/harness/compare/v1.0.1...v1.1.0) (2026-10-25)
+
+
+### Features
+
+* follow TDD by default in every code task ([#456](https://github.com/jimmyandrade/harness/issues/456)) ([e259635](https://github.com/jimmyandrade/harness/commit/e2596355ed97d6f5d738fb5195980e776dbd902a))
+* keep one vocabulary row per set of tags for the same spelling ([#457](https://github.com/jimmyandrade/harness/issues/457)) ([825a817](https://github.com/jimmyandrade/harness/commit/825a817ded019a359340820c999ce5a0db63a2e5))
+
+
+### Bug Fixes
+
+* follow the pinned skill when the session loaded another version ([#459](https://github.com/jimmyandrade/harness/issues/459)) ([324faeb](https://github.com/jimmyandrade/harness/commit/324faebc898335dbb8aff54f2147411af04dd540))
+
 ## [1.0.1](https://github.com/jimmyandrade/harness/compare/v1.0.0...v1.0.1) (2026-10-25)
 
 
