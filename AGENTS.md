@@ -1,6 +1,6 @@
 ---
 metadata:
-  version: "1.20.0"
+  version: "1.20.1"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -54,7 +54,7 @@ metadata:
 - Resolva a referência da habilidade seguinte no catálogo conectado quando as regras do ambiente permitirem. A ausência na lista inicial não prova que ela não existe. Não peça à pessoa uma referência que já está na conversa.
 - Distinga a restrição explícita de descoberta, a busca sem resultado e o erro de permissão que a ferramenta devolveu. Não chame uma restrição das instruções de falta de acesso nem prometa que um pull request remove uma restrição do ambiente.
 - Ao receber uma correção sobre o seu comportamento, siga `evoluir-habilidade` na mesma conversa e transforme o feedback em correção no repositório, em vez de só explicar o erro. Com pedido de pull request, abra-o e diga o que mudou e o que ainda não foi validado.
-- Ao começar a trabalhar num repositório, antes do primeiro passo, siga `levantar-ambiente-do-repositorio`: liste as habilidades do próprio repositório e as que chegam por dependência ou plugin, como as deste repositório, e abra as que a tarefa vai usar. Uma habilidade que a sessão não carregou é lida do `SKILL.md` dela. A ausência na lista da sessão não prova que ela não existe.
+- Ao começar a trabalhar num repositório, antes do primeiro passo, siga `levantar-ambiente-do-repositorio`: liste as habilidades do próprio repositório e as que chegam por dependência ou plugin, como as deste repositório, e abra as que a tarefa vai usar. Uma habilidade que a sessão não carregou é lida do `SKILL.md` dela. Quando a habilidade carregada na sessão tem `metadata.version` diferente da que o repositório fixa, no próprio repositório ou na dependência, siga o `SKILL.md` do repositório e diga que o plugin instalado está desatualizado. A ausência na lista da sessão não prova que ela não existe.
 - Numa tarefa de código, siga nesta ordem: `procurar-tarefa` para os detalhes da issue ou da tarefa, `levantar-ambiente-do-repositorio`, `escrever-teste`, `escrever-codigo`, `criar-commit` e `criar-pull-request`. Use TDD por padrão: o teste vem primeiro, roda e falha, e só então vem o código que o faz passar. Quando o estado do pull request muda, siga `sincronizar-status-da-tarefa`. Depois do merge, siga `limpar-copias-de-trabalho`. Evoluir uma habilidade segue a mesma cadeia.
 - Uma regra de comportamento que vale para todos os projetos fica nestas instruções e, quando é de ferramenta de código, também no guia de contribuição de cada harness de negócio. Não fica na memória de um projeto.
 
