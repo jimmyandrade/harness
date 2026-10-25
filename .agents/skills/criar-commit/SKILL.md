@@ -3,7 +3,7 @@ name: criar-commit
 description: Use essa habilidade sempre que terminar um trabalho que mudou o repositório ou for commitar, separar commits ou escrever a mensagem, mesmo sem dizer commit. NÃO use para push, abrir PR, rebase nem merge (use criar-pull-request).
 metadata:
   author: jimmyandrade
-  version: "0.11.0"
+  version: "0.11.1"
 ---
 
 # Criar commit
@@ -69,14 +69,24 @@ Leia o `CONTRIBUTING.md` e o `AGENTS.md` do repositório: a convenção document
 ```mermaid
 flowchart LR
   A{Pediu push ou PR?} -->|sim| B[criar-pull-request]
-  A -->|não| C[Informe os hashes e pare]
+  A -->|não| C[criar-pull-request e pare antes de publicar]
 ```
+
+Sem pedido de publicação, siga `criar-pull-request` até o passo que exige o pedido. Informe os hashes e diga que o pull request não está aberto. Não escreva que a habilidade ficou para este pedido, nem para depois.
 
 ### Passo 8
 
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
+
+### Frase que adia o pull request
+
+Se você escrever que a habilidade ficou para este pedido, ou para depois, a pessoa não sabe se ela foi chamada.
+
+1. Siga `criar-pull-request` mesmo sem pedido de publicação.
+2. Diga que o pull request não está aberto.
+3. Não use a expressão "ficou para este pedido".
 
 ### Formatador reescreve arquivos alheios
 
