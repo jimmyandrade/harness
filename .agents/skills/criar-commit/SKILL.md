@@ -3,7 +3,7 @@ name: criar-commit
 description: Use essa habilidade sempre que terminar um trabalho que mudou o repositório ou for commitar, separar commits ou escrever a mensagem, mesmo sem dizer commit. NÃO use para push, abrir PR, rebase nem merge (use criar-pull-request).
 metadata:
   author: jimmyandrade
-  version: "0.14.0"
+  version: "0.15.0"
 ---
 
 # Criar commit
@@ -53,7 +53,7 @@ Na branch própria, se a branch atual for a `Branch base`, crie uma branch a par
 
 ### Passo 3
 
-Separe o trabalho por assunto: um commit para cada funcionalidade, correção, refatoração, documentação, teste ou tarefa. Cada commit deixa a árvore coerente e passando no build, e pode ser revertido ou aplicado sozinho. Documentação que registra a regra nova vai em commit próprio, depois do código.
+Separe o trabalho por assunto: um commit para cada funcionalidade, correção, refatoração, documentação, teste ou tarefa. Cada commit deixa a árvore coerente e passando no build, e pode ser revertido ou aplicado sozinho. Documentação que registra a regra nova vai em commit próprio, depois do código. Commits do mesmo tema ficam na mesma branch e no mesmo pull request. Tema diferente abre outro pull request. O assunto do commit não abre pull request novo.
 
 ### Passo 4
 
@@ -115,7 +115,7 @@ Se você vir o type check ou o lint acusar erro em arquivo que não mudou, o err
 Se você juntar o helper, a correção e a documentação num commit só, ninguém consegue reverter uma parte sem as outras.
 
 1. Desfaça o commit mantendo as mudanças.
-2. Separe por assunto e commite de novo, na ordem em que cada um passa no build.
+2. Separe por assunto e commite de novo, na ordem em que cada um passa no build. Os commits do mesmo tema continuam no mesmo pull request.
 
 ## Exemplos de entrada e saída
 

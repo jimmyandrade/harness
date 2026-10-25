@@ -94,6 +94,7 @@ How these skills relate is in `README.md`, in this folder.
   - Treats the repository as the only write source: a synced copy, such as the Notion page of a skill, and a copy installed by dependency or plugin are read-only, including when the person calls the edit an emergency. The next install erases an edit of the installed copy
   - A request to create or activate a skill in a synced or installed copy does not create it there, including when that copy explains how to fill the description
   - The reply names the branch, says whether it is on GitHub, and reports each commit hash. `Criar pull request ao terminar` is `rascunho` by default, which pushes the branch and opens a draft pull request; `sim` opens a ready pull request; `não` waits for an explicit publish request
+  - Splits work into one commit per subject, and keeps commits of the same theme on the same branch and the same pull request. A different theme opens another pull request. The commit subject does not open a new pull request
 - **Test Criteria**:
   - [ ] A project without test or build commands commits and says nothing was verified
 
@@ -175,6 +176,7 @@ How these skills relate is in `README.md`, in this folder.
   - `Exigir aprovação de outra pessoa` is `nunca`, `só sem terminal`, the default, or `sempre`. It holds the merge until another person approves; a green check or owning the repository does not replace that approval. Without a terminal, a merge never happens in the request that opened the pull request
   - After a merge, checks the sync when the project syncs the repository with another tool, such as the skill pages in Notion
   - `Criar pull request ao terminar` is `rascunho` by default: the code change pushes the branch and opens a draft pull request, and the reply names the branch, says whether it is on GitHub, and includes the link. `sim` opens a ready pull request. `não` waits for an explicit publish request. A draft does not request review. Merging still needs an explicit request
+  - `Fatiar por subtarefa` is `não` by default: commits of the same theme stay on the open pull request for that theme. `sim` opens one pull request per subtask. Stacking is for a theme that depends on a pull request still outside the base
 - **Test Criteria**:
   - [ ] A request to push to the base branch opens a pull request instead
   - [ ] A `claude/…` branch is renamed to `type/…` before its pull request opens

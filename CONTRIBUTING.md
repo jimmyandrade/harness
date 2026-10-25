@@ -19,6 +19,8 @@ Subjects follow [Conventional Commits](https://www.conventionalcommits.org/): `t
 | `chore` | Upkeep that is none of the above |
 | `ci` | CI and the actions under `.github/actions/` |
 
+Commits of the same theme stay on the same branch and the same pull request. A different theme opens another pull request. The commit subject does not open a new pull request.
+
 A finished code change pushes its branch and opens at least a draft pull request. The reply names the branch, says whether that branch is on GitHub, and includes the pull request link. Merging still needs an explicit request.
 
 Branches are named `type/short-description`, with one of these types and an ASCII kebab-case description, such as `feat/build-on-install`. A branch a tool created with another prefix, such as `claude/` or `cursor/`, is renamed before the first push. `criar-commit` and `criar-pull-request` follow the same rule in every project, and a `Check the branch name` step in CI fails a pull request that does not. The step is three lines of shell, copied into each repository's workflow as in `examples/business-harness/.github/workflows/skills.yml`, with no action to pin. It skips `renovate/`, `dependabot/`, and `release-please--` branches, and a push.
