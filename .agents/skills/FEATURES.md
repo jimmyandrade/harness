@@ -91,8 +91,8 @@ How these skills relate is in `README.md`, in this folder.
   - Names a new branch `type/short-description` after the Conventional Commits type, and renames a branch a tool created with another prefix, such as `claude/`
   - Picks the channel by what the environment has: a terminal uses git, the GitHub integration alone creates the branch and the commit through it, and neither stops and says so. Without a terminal, the CI checks of the pull request do the verifying
   - `Commit direto na base` is `nunca`, the default, `só no terminal`, or `sempre`. Only `sempre` commits on the base without a terminal
-  - Treats the repository as the only write source: a copy synced from it, such as the Notion page of a skill, is read-only, including when the person calls the edit an emergency
-  - A request to create or activate a skill in a synced copy does not create it there, including when that copy explains how to fill the description
+  - Treats the repository as the only write source: a synced copy, such as the Notion page of a skill, and a copy installed by dependency or plugin are read-only, including when the person calls the edit an emergency. The next install erases an edit of the installed copy
+  - A request to create or activate a skill in a synced or installed copy does not create it there, including when that copy explains how to fill the description
 - **Test Criteria**:
   - [ ] A project without test or build commands commits and says nothing was verified
 
@@ -115,7 +115,7 @@ How these skills relate is in `README.md`, in this folder.
   - Writes each input example as a level-3 heading and its output as the next paragraph, with a blank line between pairs. The checker rejects `dl`, `dt`, and `dd`, which Notion does not show
   - Ends every skill with Scripts disponíveis, naming each script and the command that runs it
   - Does not edit code, write a non-skill page, only tune a description, or write the skill page in Notion
-  - A request that arrives through a synced copy, such as the Notion page, writes through criar-commit and criar-pull-request
+  - A request that arrives through a copy, synced or installed by dependency or plugin, writes through criar-commit and criar-pull-request in the source repository
   - Cites another skill by its name between backticks, or in a Mermaid diagram node, so the checker and the skill graph recognize the citation
   - Gives every new skill the `Modo de aprendizado` parameter and a last step that hands over to evoluir-habilidade
 - **Test Criteria**:
@@ -836,7 +836,7 @@ How these skills relate is in `README.md`, in this folder.
   - On undertriggering, when the skill does not load, the person enables it by hand, or asks when to use it, adds detail and the technical term
   - On overtriggering, when the skill loads for an irrelevant query, the person disables it, or the purpose is confusing, tightens the negative triggers
   - Leaves the skill name and the prompt examples out of the description; the examples stay in the body
-  - A request that arrives through a synced copy, such as the Notion page, writes through criar-commit and criar-pull-request
+  - A request that arrives through a copy, synced or installed by dependency or plugin, writes through criar-commit and criar-pull-request in the source repository
   - Rewrites a schema description and each property description that already has text, and keeps every fact already there
   - Writes the description of the project instructions too, in their frontmatter: it fires on any task of the workspace, and `NÃO use para` covers changing the instructions themselves
 - **Test Criteria**:
@@ -849,7 +849,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Properties**:
   - Lives at `.agents/skills/evoluir-habilidade/SKILL.md`
   - A request to test a skill uses this skill
-  - A direct request to change a skill also uses this skill: it edits right away, bumps the version, and then proposes a real case, without counting the change as validated before that run
+  - A direct request to change a skill also uses this skill: it checks where the skill comes from, edits the source repository right away, bumps the version, and then proposes a real case, without counting the change as validated before that run. A copy installed by dependency or plugin is not edited, because the next install erases it
   - Treats the skill as a living document and iterates from feedback
   - On inconsistent results, a failed call, or a correction from the person, improves the instructions and adds error handling
   - Sends undertriggering and overtriggering to descrever-habilidade-ou-schema
@@ -858,7 +858,7 @@ How these skills relate is in `README.md`, in this folder.
   - Compares the run without the skill and with the skill on back-and-forth, failed calls, and tokens, from the run record
   - Edits the skill that was validated in that same conversation
   - Does not create the first version of a skill, only check whether the description triggers, only review without running, or write the skill page in Notion
-  - A request that arrives through a synced copy, such as the Notion page, writes through criar-commit and criar-pull-request
+  - A request that arrives through a copy, synced or installed by dependency or plugin, writes through criar-commit and criar-pull-request in the source repository
   - Size and run profile follow medir-habilidade
   - Runs at the end of every core skill, following the `Modo de aprendizado` parameter (`sim`, `não`, `perguntar`, default `perguntar`): with yes, one commit per lesson on an English-named branch, pushed, with a draft pull request from the first commit, marked ready when the person ends the sequence
   - Takes the project instructions as a target too: feedback on the agent's behavior edits them in the format of `definir-instrucoes-do-projeto` and raises `metadata.version`, without evals or features of their own
@@ -1342,7 +1342,7 @@ How these skills relate is in `README.md`, in this folder.
   - Suggests an obvious task and a paraphrased request that should trigger, and an unrelated topic plus a near miss that should not
   - Suggests each acceptance criterion already written as a Portuguese Gherkin example, and a with-skill against without-skill comparison
   - Does not write the feature file, create the first version, run the test, or write the skill page in Notion
-  - A request that arrives through a synced copy, such as the Notion page, writes through criar-commit and criar-pull-request
+  - A request that arrives through a copy, synced or installed by dependency or plugin, writes through criar-commit and criar-pull-request in the source repository
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses creating the first version, running the test and editing the skill, only measuring size, and writing the skill page in Notion
