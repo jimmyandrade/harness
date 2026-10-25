@@ -3,7 +3,7 @@ name: criar-habilidade
 description: Cria, adiciona e escreve skills a partir de uma tarefa real. Usada quando a pessoa quer uma skill nova, mesmo sem dizer skill. NÃO serve para editar código, escrever página que não seja skill, otimizar só a descrição nem gravar a skill no Notion.
 metadata:
   author: jimmyandrade
-  version: "3.15.0"
+  version: "3.16.0"
   related:
     - criar-commit
     - criar-pull-request
@@ -90,7 +90,7 @@ Renomear leva `!` e rodapé `BREAKING CHANGE:` com o nome antigo e o novo. Cada 
 - Não inclua `license` enquanto o projeto não exigir licença.
 - Inclua `compatibility` só quando a skill precisar de internet ou de Python. Não cite produto, git, docker nem jq.
 - `allowed-tools`, se existir, é uma lista separada por espaço. `aliases` e `tags` em `metadata`, se existirem, são um item por linha, começando com `-`.
-- `metadata.notion: "false"` deixa a skill fora do Notion. É o único valor aceito; sem ele, ela vai. Skill em construção leva `internal: true`, sem aspas: fica fora do Notion e do `npx skills add`.
+- Toda skill sincroniza com o Notion. O frontmatter não tem `metadata.notion` nem `metadata.internal`.
 - Banco, página e workspace do Notion não entram na skill. A pessoa informa o data source na execução. Se ele não estiver no workspace conectado, pare e peça. Não troque por um banco de outro workspace.
 
 ### Passo 9
@@ -269,7 +269,6 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 - A operação é destrutiva ou em lote: plano, validação contra a fonte de verdade, e só então a execução.
 - O `name` muda: a versão e o commit são breaking change.
 - O escopo muda e o nome ainda descreve o escopo antigo: renomeie.
-- A skill não vai para o Notion: `metadata.notion` é `"false"`. Vai para o Notion: o campo não existe.
 - O data source muda ou o workspace conectado é outro: a pessoa informa o data source na execução. Se não estiver nessa conexão, pare.
 - O fato não óbvio está só em `references/`: traga para `Pegadinhas`.
 

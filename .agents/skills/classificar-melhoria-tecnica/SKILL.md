@@ -3,8 +3,7 @@ name: classificar-melhoria-tecnica
 description: Decide se um item (card, PR, issue ou ideia) entra no documento de melhorias técnicas do time e em qual seção, com o motivo. Usada quando alguém pergunta se algo conta como melhoria técnica ou precisa registrar um item no documento. Não serve para priorizar itens nem para publicar a página.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
-  internal: true
+  version: "0.2.0"
   related:
     - evoluir-habilidade
     - priorizar-itens

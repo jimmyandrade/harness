@@ -3,8 +3,7 @@ name: escrever-codigo
 description: Aplica as preferências de código da pessoa antes de escrever ou alterar código, como comentários, estilo inline e o que fazer antes de criar um componente. Usada quando uma mudança vai escrever ou alterar código do projeto. Não serve para testes, para commit nem para decidir a arquitetura.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
-  notion: "false"
+  version: "0.4.0"
   related:
     - criar-commit
     - criar-pull-request

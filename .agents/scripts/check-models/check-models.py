@@ -147,10 +147,10 @@ def model_errors(relative: Path, text: str, previous: str | None = None) -> list
                 continue
             if not isinstance(value, list) or not all(isinstance(item, str) and item.strip() for item in value):
                 add(line_of(front, key, 2), f"metadata.{key} must be a list of names, one per line")
-        if "notion" in metadata and metadata["notion"] != "false":
-            add(line_of(front, "notion", 2), 'metadata.notion must be "false"')
-        if "internal" in metadata and metadata["internal"] is not True:
-            add(line_of(front, "internal", 2), "metadata.internal must be true")
+        if "notion" in metadata:
+            add(line_of(front, "notion", 2), "metadata.notion is not a field: every model syncs to Notion")
+        if "internal" in metadata:
+            add(line_of(front, "internal", 2), "metadata.internal is not a field: every model syncs to Notion")
     lines = text.split("\n")
     headings = [
         (number, match.group(1))

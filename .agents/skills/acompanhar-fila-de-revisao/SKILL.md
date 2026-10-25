@@ -3,8 +3,7 @@ name: acompanhar-fila-de-revisao
 description: Roda o ciclo da fila de revisão de pull requests. Confere o horário, cuida primeiro dos seus PRs, acha os pedidos, fecha o laço dos já revisados, escolhe o próximo, revisa um por execução e prepara o aviso a quem pediu. Os avisos ficam só como rascunho, com o link. Não serve para revisar sozinha nem achar pedidos por conta própria.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
-  notion: "false"
+  version: "0.5.0"
   related:
     - enviar-mensagem-no-slack
     - evoluir-habilidade

@@ -79,7 +79,8 @@ class ModelTest(unittest.TestCase):
 
     def test_lists_flags_and_fields(self) -> None:
         self.assertIn("metadata.aliases must be a list of names, one per line", messages(MODEL.replace("  aliases:\n    - reel\n", "  aliases: reel\n")))
-        self.assertIn('metadata.notion must be "false"', messages(MODEL.replace('  version: "1.0.0"\n', '  version: "1.0.0"\n  notion: false\n')))
+        self.assertIn("metadata.notion is not a field: every model syncs to Notion", messages(MODEL.replace('  version: "1.0.0"\n', '  version: "1.0.0"\n  notion: false\n')))
+        self.assertIn("metadata.internal is not a field: every model syncs to Notion", messages(MODEL.replace('  version: "1.0.0"\n', "  version: \"1.0.0\"\n  internal: true\n")))
         self.assertIn("unexpected frontmatter fields: license", messages(MODEL.replace("metadata:\n", "license: MIT\nmetadata:\n")))
 
     def test_the_body_has_the_three_sections_in_order(self) -> None:

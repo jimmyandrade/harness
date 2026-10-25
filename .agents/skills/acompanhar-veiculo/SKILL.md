@@ -5,8 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
-  internal: true
+  version: "0.6.0"
   related:
     - definir-obrigacao-financeira
     - lancar-despesa-pessoal

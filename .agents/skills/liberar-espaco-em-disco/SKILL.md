@@ -3,8 +3,7 @@ name: liberar-espaco-em-disco
 description: Use essa habilidade sempre que o disco do computador estiver cheio, um comando falhar por falta de espaço, ou for liberar espaço sem perder arquivo, mesmo sem dizer disco. NÃO use para apagar arquivo da pessoa, limpar worktree antigo de sessão, nem organizar pastas.
 metadata:
   author: jimmyandrade
-  version: "0.2.1"
-  notion: "false"
+  version: "0.3.0"
   related:
     - evoluir-habilidade
     - limpar-copias-de-trabalho

@@ -3,9 +3,7 @@ name: pedir-revisao-de-pr-no-slack
 description: Redige o pedido de revisão de um pull request para o canal do time no Slack e entrega o rascunho com o link da thread, usando enviar-mensagem-no-slack. Usada quando o PR está pronto e a organização pede revisão pelo Slack, ou quando a pessoa pede apoio para revisar. Não serve para revisar o PR nem para outra mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
-  internal: true
-  notion: "false"
+  version: "0.2.0"
   related:
     - criar-pull-request
     - enviar-mensagem-no-slack

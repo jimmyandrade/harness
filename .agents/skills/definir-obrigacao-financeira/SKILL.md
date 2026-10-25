@@ -5,8 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
-  internal: true
+  version: "0.4.0"
   related:
     - lancar-despesa-pessoal
     - procurar-data-significativa
