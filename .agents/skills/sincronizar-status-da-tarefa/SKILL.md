@@ -1,12 +1,13 @@
 ---
 name: sincronizar-status-da-tarefa
-description: Sincroniza o status de tarefas, cards ou issues com o estado do pull request ligado a cada uma. Usada quando a pessoa pede para atualizar, alinhar ou varrer o status das suas tarefas conforme os PRs, mesmo sem dizer sincronizar. Não serve para escrever a tarefa, abrir o PR nem revisar o diff.
+description: Sincroniza o status de tarefas, cards ou issues com o estado do pull request ligado a cada uma. Usada quando um commit é criado ou o estado de um pull request muda, mesmo sem dizer sincronizar. Não serve para escrever a tarefa, abrir o PR nem revisar o diff.
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
-  notion: "false"
+  version: "0.3.0"
   related:
+    - criar-commit
+    - criar-pull-request
     - evoluir-habilidade
     - levantar-contexto-do-pull-request
 ---
@@ -42,7 +43,7 @@ Obtenha as tarefas pela `Consulta das tarefas`, ou pela lista ou pelos links que
 
 Ligue cada tarefa a um PR pela `Ligação entre tarefa e PR`. Busca pela chave traz PR que só cita a chave: abra o título e o corpo antes de ligar. Ligação feita só pelo assunto entra no plano marcada como "ligada pelo assunto".
 
-Veja o estado de cada PR como no primeiro passo de `levantar-contexto-do-pull-request`: aberto, mesclado ou fechado, rascunho ou pronto, etiquetas.
+Veja o estado de cada PR como no primeiro passo de `levantar-contexto-do-pull-request`: aberto, mesclado ou fechado, rascunho ou pronto, e as etiquetas.
 
 ```mermaid
 flowchart LR
@@ -146,6 +147,9 @@ A habilidade leva "Exportar relatório em CSV" de "a fazer" a "concluído". A se
 - O resultado de uma busca grande pode vir em arquivo, às vezes como lista direta sem objeto em volta. Confira o formato antes de filtrar.
 - Uma transição devolve a tarefa inteira. O status novo está no campo de status desse retorno.
 - A tarefa fica em "em andamento" quando o PR está em rascunho, mesmo que ele esteja aberto.
+- A habilidade parece servir só quando a pessoa pede a varredura. Ela também roda depois de um commit ou de uma mudança no estado do pull request.
+- O lugar das tarefas parece fixo. Ele muda de um negócio para outro e fica em `Consulta das tarefas`.
+- Uma frase comprimida parece um recado interno. A skill fica fácil de ler por uma pessoa.
 
 ## Scripts disponíveis
 

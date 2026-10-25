@@ -97,6 +97,7 @@ How these skills relate is in `README.md`, in this folder.
   - Splits work into one commit per subject, and keeps commits of the same theme on the same branch and the same pull request. A different theme opens another pull request. The commit subject does not open a new pull request
   - The commit type follows what the change does, not the file extension. A correction of an error is `fix:`, even in Markdown. `docs:` is for documentation
   - Writes each step sentence on its own line, and keeps a command in Scripts disponíveis
+  - When the flow stops without `criar-pull-request`, follows `sincronizar-status-da-tarefa`
 - **Test Criteria**:
   - [ ] A project without test or build commands commits and says nothing was verified
 
@@ -183,6 +184,7 @@ How these skills relate is in `README.md`, in this folder.
   - When a published branch was rewritten, the reply says the GitHub branch would be replaced by the new commits, the base branch stays as it is, and the replacement proceeds only if nobody pushed a new commit to that branch since the last fetch. It asks before replacing, and it does not name the git command in place of that explanation
   - The label follows the commit type, not the file extension. `fix` uses the bug label. `docs` uses the documentation label. A Markdown file that corrects an error gets the bug label
   - Writes each step sentence on its own line, and keeps a command in Scripts disponíveis
+  - At the end, follows `sincronizar-status-da-tarefa`
 - **Test Criteria**:
   - [ ] A request to push to the base branch opens a pull request instead
   - [ ] A `claude/…` branch is renamed to `type/…` before its pull request opens
@@ -1404,6 +1406,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Description**: Move tasks, cards, or issues through their status flow from the state of the pull request linked to each one
 - **Properties**:
   - Lives at `.agents/skills/sincronizar-status-da-tarefa/SKILL.md`
+  - Runs after a commit is created and after a pull request changes state, without waiting for the person to ask for a status sweep
   - Works with any task tracker, reading from the project instructions the task query, the status flow, the status for a merged, ready, draft, or blocked pull request, the labels that mean blocked, how a task links to a pull request, and whether to confirm the plan
   - Links a task to a pull request only after reading its title and body, and marks a link made only by subject
   - Leaves unchanged, with the reason, a task whose pull request was closed without merging, cites another key, or needs judgment
@@ -1413,6 +1416,7 @@ How these skills relate is in `README.md`, in this folder.
   - Reports by final status from what the tool returned, and counts the totals from the final list
 - **Test Criteria**:
   - [x] The skill is present at that path
+  - [ ] After a commit or a pull request state change, the skill runs without a separate sweep request
   - [ ] Three cases validated with the person
 
 ### validar-plano-de-vocabulario
