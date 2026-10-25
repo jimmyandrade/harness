@@ -20,7 +20,7 @@ Funcionalidade: Organizar e-mails a partir de decisões confirmadas
       Dado que a pessoa pediu etiqueta BASB no alerta de segurança
       E que pediu para não arquivar nem marcar como lido antes de vê-lo
       Quando a etiqueta é aplicada
-      Então a mensagem permanece na entrada com a etiqueta de segurança
+      Então a mensagem permanece na entrada com a etiqueta de segurança da ferramenta
       E o estado de leitura anterior é preservado
 
   Regra: Trabalho é só o trabalho atual
@@ -37,3 +37,10 @@ Funcionalidade: Organizar e-mails a partir de decisões confirmadas
       Quando a confirmação de descadastro é classificada
       Então o destino é Arquivos/Descadastros
       E o agente não pergunta se vale conservar a mensagem
+
+  Regra: A decisão confirmada vai para a árvore de decisão
+    Exemplo: Caso novo sem pergunta que bata
+      Dado que a árvore de decisão está definida e nenhuma pergunta dela bate com a mensagem
+      Quando a pessoa confirma a etiqueta, o destino e o motivo
+      Então o agente acrescenta a regra nova à árvore
+      E aplica a classificação confirmada à mensagem
