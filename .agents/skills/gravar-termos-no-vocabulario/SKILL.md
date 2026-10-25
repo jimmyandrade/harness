@@ -3,7 +3,7 @@ name: gravar-termos-no-vocabulario
 description: Use essa habilidade sempre que, ao cadastrar ou corrigir termos do vocabulário do tom de voz, for hora de pesquisar a grafia, testar com dry run e gravar o lote, mesmo sem dizer gravar. NÃO use para decidir o nível, validar os campos, perguntar quais variações foram cadastradas, escrever o texto da marca, nem inventar um termo.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.2.1"
   related:
     - definir-vocabulario
     - procurar-variacao-de-termo
@@ -136,6 +136,7 @@ O plano ficou em update. A reticências que já estava foi reescrita, com o quan
 - Uma variação ausente parece já ligada pela palavra vizinha. Ela não existe até ser cadastrada. `related` não a cria.
 - Duas linhas do mesmo termo parecem um convite a apagar a mais curta. A escrita não apaga. Sinalize e espere a escolha.
 - Um exemplo citado parece herdar a descrição do termo. Se ele não vem como item do lote, nasce só com o estado daquele vínculo.
+- O comando de escrita, com `--term` ou `--file`, parece dispensar a validação. Sem o plano que `validar-plano-de-vocabulario` aprovou, não grave. Quem decidiu fica em `decided_by` e a data em `notes`, nunca na descrição.
 
 ## Scripts disponíveis
 
