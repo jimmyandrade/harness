@@ -23,9 +23,12 @@ Check: the output is a tag such as `v1.2.3`.
 
 ```bash
 npm install --save-dev "github:jimmyandrade/harness#$TAG"
+npm approve-scripts --no-allow-scripts-pin harness
 ```
 
-Check: `test -d node_modules/harness && echo ok` prints `ok`.
+The second command lets the `prepare` script of the core build the vocabulary on every tag, so a later npm that blocks unreviewed install scripts still builds it. `TROUBLESHOOTING.md` explains the warning without it.
+
+Check: `test -d node_modules/harness && echo ok` prints `ok`, and `npm approve-scripts --allow-scripts-pending` prints `No packages with unreviewed install scripts.`
 
 ## 3. Copy the example files and the instructions template
 

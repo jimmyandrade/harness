@@ -73,6 +73,15 @@ Moving a pin by hand, `npm install -D "harness@github:jimmyandrade/harness#vX.Y.
 3. `npm ci` installs from `package-lock.json` and does not need the flag. With npm 11.17 or later and `allow-scripts` set in `~/.npmrc`, it can stop with `EALLOWSCRIPTS` instead: see the next section. Renovate does not read `~/.npmrc` and needs neither.
 4. `package.json` and `package-lock.json` naming the new tag, and `run-check.sh` exiting 0, close the case.
 
+## npm lists the core install script as not reviewed
+
+`npm install` or `npm ci` in a business harness ends with `npm warn allow-scripts   harness@X.Y.Z (prepare: npm run build)` and `Run npm approve-scripts --allow-scripts-pending to review`.
+
+1. The core is a git dependency, and its `prepare` script builds the vocabulary in `node_modules/harness/vocabulary/dist`. From npm 11.17, `allowScripts` in the project `package.json` records which dependencies may run install scripts. In that release a script missing from it still runs, and npm only warns. A later release will block it, and the vocabulary will be left without `dist`.
+2. Approve it once, by name and without a version, in the project folder: `npm approve-scripts --no-allow-scripts-pin harness`. npm writes `"allowScripts": { "github:jimmyandrade/harness": true }` in `package.json`. The entry names the source and holds for every tag, so the next `core harness` pull request of Renovate needs no new approval. A pinned entry, the default of `npm approve-scripts`, would have to be approved again on every pin move.
+3. Commit `package.json`.
+4. `npm approve-scripts --allow-scripts-pending` printing `No packages with unreviewed install scripts.`, and `npm ci` with no `allow-scripts` warning, close the case.
+
 ## npm stops a git dependency with EALLOWSCRIPTS
 
 `npm ci` or `npm install` in a business harness stops with `npm error code EALLOWSCRIPTS` and `--allow-scripts is not allowed in project-scoped installs`, printed twice, once by a second npm process. `node_modules` is left empty.
