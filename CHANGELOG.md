@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.98.0](https://github.com/jimmyandrade/harness/compare/v0.97.0...v0.98.0) (2026-10-25)
+
+
+### Features
+
+* **enviar-mensagem-no-slack:** decide the closing PS channel by channel ([#436](https://github.com/jimmyandrade/harness/issues/436)) ([5fe0360](https://github.com/jimmyandrade/harness/commit/5fe0360b6d660245f1ca03030a748a1b96a7782e))
+* **evoluir-habilidade:** send decisions about words to the vocabulary ([#437](https://github.com/jimmyandrade/harness/issues/437)) ([d8160df](https://github.com/jimmyandrade/harness/commit/d8160dfc10d5422648ae9384ba6d06bc48151007))
+
 ## [0.97.0](https://github.com/jimmyandrade/harness/compare/v0.96.0...v0.97.0) (2026-10-25)
 
 
