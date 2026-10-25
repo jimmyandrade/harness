@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.3.0](https://github.com/jimmyandrade/harness/compare/v1.2.1...v1.3.0) (2026-10-25)
+
+
+### Features
+
+* open a draft pull request when a code change ends ([#470](https://github.com/jimmyandrade/harness/issues/470)) ([84ad01c](https://github.com/jimmyandrade/harness/commit/84ad01c5229eb2a181e48fe85f9cbc6ce1ab10bd))
+
+
+### Bug Fixes
+
+* **evoluir-habilidade:** edit a skill only in its source repository ([#468](https://github.com/jimmyandrade/harness/issues/468)) ([60fd6a0](https://github.com/jimmyandrade/harness/commit/60fd6a0ecbabd45967a1ccff4c49c4bf4eded0fe))
+* **redigir-com-tom-de-voz:** keep voice rules in the skill and the vocabulary ([#469](https://github.com/jimmyandrade/harness/issues/469)) ([5d6c51a](https://github.com/jimmyandrade/harness/commit/5d6c51a0a1ca22089170e89679a994833393b586))
+
 ## [1.2.1](https://github.com/jimmyandrade/harness/compare/v1.2.0...v1.2.1) (2026-10-25)
 
 
