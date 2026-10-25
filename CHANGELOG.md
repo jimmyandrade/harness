@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.98.1](https://github.com/jimmyandrade/harness/compare/v0.98.0...v0.98.1) (2026-10-25)
+
+
+### Bug Fixes
+
+* **enviar-mensagem-no-slack:** stop naming greeting words in the skill ([#439](https://github.com/jimmyandrade/harness/issues/439)) ([6b9d153](https://github.com/jimmyandrade/harness/commit/6b9d153213ede8be9b216f9e767a752b22929d02))
+
 ## [0.98.0](https://github.com/jimmyandrade/harness/compare/v0.97.0...v0.98.0) (2026-10-25)
 
 
