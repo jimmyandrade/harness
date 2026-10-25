@@ -24,7 +24,7 @@ jobs:
         run: |
           case "$BRANCH" in renovate/*|dependabot/*|release-please--*) exit 0 ;; esac
           [[ "$BRANCH" =~ ^(feat|fix|docs|refactor|perf|test|chore|ci)/[a-z0-9]+([.-][a-z0-9]+)*$ ]] || { echo "::error title=Branch name::$BRANCH is not type/short-description. Rename it before the first push."; exit 1; }
-      - name: Decide whether the change is only documentation
+      - name: Decide how much of the change needs checking
         id: scope
         run: .github/scripts/change-scope.sh "$BASE" "$HEAD" | tee -a "$GITHUB_OUTPUT"
         env:
@@ -40,18 +40,18 @@ jobs:
         if: steps.scope.outputs.code == 'true'
         run: for test in .agents/scripts/*/test_*.py .agents/skills/*/scripts/test_*.py; do .venv/bin/python "$test" || exit 1; done
       - name: Set up Node.js
-        if: steps.scope.outputs.code == 'true'
+        if: steps.scope.outputs.node == 'true'
         uses: actions/setup-node@v7
         with:
           node-version: 24
           check-latest: true
           cache: npm
       - name: Install dependencies
-        if: steps.scope.outputs.code == 'true'
+        if: steps.scope.outputs.node == 'true'
         run: npm ci
       - name: Check types
-        if: steps.scope.outputs.code == 'true'
+        if: steps.scope.outputs.node == 'true'
         run: npx tsc --noEmit
       - name: Run unit tests
-        if: steps.scope.outputs.code == 'true'
+        if: steps.scope.outputs.node == 'true'
         run: npm test

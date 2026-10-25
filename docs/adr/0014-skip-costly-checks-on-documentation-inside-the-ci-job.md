@@ -25,13 +25,15 @@ Four ways to skip the work were considered before the one below:
 
 The `test` job always runs, so the required check is always reported. Its first steps check out the repository, check the branch name, and run `.github/scripts/change-scope.sh` with the base and head commits. The script prints `code=false` when every changed file is under `docs/` or is Markdown at the root other than `AGENTS.md` and `CLAUDE.md`, which the skill check reads, and `code=true` otherwise. Without a base to compare, as on the first push of a branch, it prints `code=true`.
 
-The costly steps run only when the output is `code=true`.
+The script also prints `node=false` when every changed file is documentation or the text of a skill: `SKILL.md`, `evals/` and `features/` of a skill, and the generated `README.md` and `FEATURES.md` under `.agents/skills/`. Neither the Node.js tests nor the typecheck read those files, which was checked by running them with `.agents/skills/` removed. Any other path, including a skill script and `AGENTS.md`, prints `node=true`.
+
+The skill check and the Python script tests run when the output is `code=true`. Setting up Node.js, `npm ci`, the typecheck and `npm test` run only when the output is `node=true`.
 
 The decision lives in a script, not inline in the workflow, so that a person reading `ci.yml` sees what each step does at a glance (issue 217).
 
 ## Consequences
 
-A documentation-only pull request finishes the required check after the checkout, the branch name check, and the script, with no dependency outside `git` and `bash`.
+A pull request that only changes the text of skills skips the Node.js steps, which are most of the job time, and still runs the skill check. A documentation-only pull request finishes the required check after the checkout, the branch name check, and the script, with no dependency outside `git` and `bash`.
 
 A new kind of file that the skill check or the tests read, outside `docs/` and outside root Markdown, is checked by default, because the script treats every unknown path as code. Moving a file into `docs/` or making a root Markdown file matter to a check needs a change to the script.
 
