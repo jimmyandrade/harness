@@ -3,7 +3,7 @@ name: avaliar-atualizacoes-de-dependencia
 description: Use essa habilidade sempre que houver PR de atualização de dependência do Dependabot ou do Renovate para avaliar, testar ou mesclar, mesmo sem dizer o nome do bot. NÃO use para atualizar uma dependência à mão nem para PR que não seja de bot.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.6.1"
   notion: "false"
   related:
     - evoluir-habilidade
@@ -154,4 +154,4 @@ A biblioteca era transitiva. A árvore levou ao pacote direto que a puxa, e os p
 - `gh pr edit <número> --repo <Repositório> --add-reviewer <pessoa>`: revisão do Passo 6.
 - `gh run watch <id da execução> --repo <Repositório> --exit-status`: CI da base do Passo 7.
 
-1. Monte a fila, depois, para cada PR: branch, árvore, notas de versão, pontos de uso e testes, verificações, assignee e label, revisão, comentários, merge e CI da base.
+- Monte a fila, depois, para cada PR: branch, árvore, notas de versão, pontos de uso e testes, verificações, assignee e label, revisão, comentários, merge e CI da base.
