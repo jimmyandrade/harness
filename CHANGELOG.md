@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.1](https://github.com/jimmyandrade/harness/compare/v1.6.0...v1.6.1) (2026-10-25)
+
+
+### Bug Fixes
+
+* record the lessons of this execution ([#484](https://github.com/jimmyandrade/harness/issues/484)) ([be8402b](https://github.com/jimmyandrade/harness/commit/be8402b60ea6a8f3e4ad01e23bb112d81aa4afc8))
+
 ## [1.6.0](https://github.com/jimmyandrade/harness/compare/v1.5.0...v1.6.0) (2026-10-25)
 
 
