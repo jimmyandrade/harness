@@ -3,7 +3,7 @@ name: atender-revisao-de-pull-request
 description: Atende a revisão recebida num pull request, de pessoa ou de bot. Lê os comentários abertos, classifica cada sugestão, aplica o que é seguro, responde cada thread e resolve as atendidas. Sem PR informado, lista os seus que precisam de atenção. Não serve para revisar o PR de outra pessoa nem para abrir o PR.
 metadata:
   author: jimmyandrade
-  version: "0.9.0"
+  version: "0.9.1"
   notion: "false"
   aliases:
     - resolver-comentarios-de-revisao
@@ -74,7 +74,7 @@ Na dúvida entre estrutural e mudança de comportamento, é mudança de comporta
 
 Aplique numa cópia separada do repositório, com a trava de revisão em andamento, como `publicar-revisao-de-codigo` faz. Não troque a branch do clone da pessoa, não guarde as alterações dela e não escreva nele. No fim, remova a cópia e libere a trava, mesmo se algo falhou.
 
-Valide antes de commitar, com o que `levantar-ambiente-do-repositorio` achar para os arquivos afetados: lint, tipos e testes, com o runtime ativado como o repositório manda. Se uma sugestão pede teste novo, escreva o teste com `escrever-teste`, que acha a convenção de testes do repositório e usa o Better Specs quando não há. Se a validação falhar por causa de uma mudança aplicada, desfaça só essa, marque o item como não aplicado e diga o erro. Não faça push de nada que quebre a validação.
+Valide antes de commitar, com o que `levantar-ambiente-do-repositorio` achar para os arquivos afetados: lint, tipos e testes, com o runtime ativado como o repositório manda. Se uma sugestão pede teste novo, escreva o teste com `escrever-teste`. Se a validação falhar por causa de uma mudança aplicada, desfaça só essa, marque o item como não aplicado e diga o erro. Não faça push de nada que quebre a validação.
 
 ### Passo 5
 
