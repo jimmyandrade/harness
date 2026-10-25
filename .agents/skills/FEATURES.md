@@ -96,6 +96,7 @@ How these skills relate is in `README.md`, in this folder.
   - The reply names the branch, says whether it is on GitHub, and reports each commit hash. `Criar pull request ao terminar` is `rascunho` by default, which pushes the branch and opens a draft pull request; `sim` opens a ready pull request; `não` waits for an explicit publish request
   - Splits work into one commit per subject, and keeps commits of the same theme on the same branch and the same pull request. A different theme opens another pull request. The commit subject does not open a new pull request
   - The commit type follows what the change does, not the file extension. A correction of an error is `fix:`, even in Markdown. `docs:` is for documentation
+  - Writes each step sentence on its own line, and keeps a command in Scripts disponíveis
 - **Test Criteria**:
   - [ ] A project without test or build commands commits and says nothing was verified
 
@@ -121,6 +122,7 @@ How these skills relate is in `README.md`, in this folder.
   - A request that arrives through a copy, synced or installed by dependency or plugin, writes through criar-commit and criar-pull-request in the source repository
   - Cites another skill by its name between backticks, or in a Mermaid diagram node, so the checker and the skill graph recognize the citation
   - Gives every new skill the `Modo de aprendizado` parameter and a last step that hands over to evoluir-habilidade
+  - Writes each step sentence on its own line, so a change shows in the diff, and keeps a command out of the step
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses code edits, a non-skill page, description-only work, and writing the skill in Notion
@@ -180,6 +182,7 @@ How these skills relate is in `README.md`, in this folder.
   - `Fatiar por subtarefa` is `não` by default: commits of the same theme stay on the open pull request for that theme. `sim` opens one pull request per subtask. Stacking is for a theme that depends on a pull request still outside the base
   - When a published branch was rewritten, the reply says the GitHub branch would be replaced by the new commits, the base branch stays as it is, and the replacement proceeds only if nobody pushed a new commit to that branch since the last fetch. It asks before replacing, and it does not name the git command in place of that explanation
   - The label follows the commit type, not the file extension. `fix` uses the bug label. `docs` uses the documentation label. A Markdown file that corrects an error gets the bug label
+  - Writes each step sentence on its own line, and keeps a command in Scripts disponíveis
 - **Test Criteria**:
   - [ ] A request to push to the base branch opens a pull request instead
   - [ ] A `claude/…` branch is renamed to `type/…` before its pull request opens
@@ -269,6 +272,7 @@ How these skills relate is in `README.md`, in this folder.
   - Names scripts and shared script folders in `Idioma do nome dos scripts`, English by default and overridable in the project instructions
   - Keeps input and output templates out of the body, with one sentence that says when to read them
   - Keeps commands out of the steps and lists them only in Scripts disponíveis, with a path for Notion, where the script may be missing
+  - Writes each step sentence on its own line, so a change shows in the diff
 - **Test Criteria**:
   - [x] The skill is present at that path
 
@@ -1345,6 +1349,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Properties**:
   - Lives at `.agents/skills/revisar-habilidade/SKILL.md`
   - Flags a vague description, a missing trigger, and a structural problem. A description is always in the third person and opens with what the skill does. "Usada quando" follows and does not open it. "Use essa habilidade sempre que" is an imperative and does not belong. "NÃO serve para" closes it when there is something the skill must not do
+  - Flags a step written as one line, and a step that cites a command instead of leaving it in Scripts disponíveis
   - Identifies the risk of triggering too often or too rarely
   - Suggests an obvious task and a paraphrased request that should trigger, and an unrelated topic plus a near miss that should not
   - Suggests each acceptance criterion already written as a Portuguese Gherkin example, and a with-skill against without-skill comparison

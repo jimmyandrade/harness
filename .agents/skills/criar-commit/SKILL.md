@@ -3,7 +3,7 @@ name: criar-commit
 description: Use essa habilidade sempre que terminar um trabalho que mudou o repositório ou for commitar, separar commits ou escrever a mensagem, mesmo sem dizer commit. NÃO use para push, abrir PR, rebase nem merge (use criar-pull-request).
 metadata:
   author: jimmyandrade
-  version: "0.16.0"
+  version: "0.17.0"
 ---
 
 # Criar commit
@@ -48,12 +48,23 @@ flowchart LR
   S -->|nunca ou só no terminal| D[Branch própria e commit pela integração]
 ```
 
-O repositório é a única fonte de escrita. Uma cópia a partir dele, sincronizada, como a página de uma habilidade no Notion, ou instalada por dependência ou plugin, é só leitura: não grave nela, nem quando a pessoa chamar de emergência, nem como saída quando o repositório não está ao alcance. A próxima instalação apaga o que foi gravado na cópia instalada. `Commit direto na base` vale `nunca`, `só no terminal` ou `sempre`. Sem terminal, testes, build e lint não rodam: quem verifica são os checks do CI no PR, aberto por `criar-pull-request`.
-Na branch própria, se a branch atual for a `Branch base`, crie uma branch a partir da `Branch base` remota atualizada, sem rastrear a base. O nome é `<tipo>/<descrição>`, com o tipo do Conventional Commits do commit e a descrição em ASCII kebab-case. Branch que a ferramenta criou com outro prefixo, como `claude/`, é renomeada para esse padrão antes do commit.
+O repositório é a única fonte de escrita.
+Uma cópia a partir dele, sincronizada, como a página de uma habilidade no Notion, ou instalada por dependência ou plugin, é só leitura: não grave nela, nem quando a pessoa chamar de emergência, nem como saída quando o repositório não está ao alcance.
+A próxima instalação apaga o que foi gravado na cópia instalada.
+`Commit direto na base` vale `nunca`, `só no terminal` ou `sempre`.
+Sem terminal, testes, build e lint não rodam: quem verifica são os checks do CI no PR, aberto por `criar-pull-request`.
+Na branch própria, se a branch atual for a `Branch base`, crie uma branch a partir da `Branch base` remota atualizada, sem rastrear a base.
+O nome é `<tipo>/<descrição>`, com o tipo do Conventional Commits do commit e a descrição em ASCII kebab-case.
+Branch que a ferramenta criou com outro prefixo, como `claude/`, é renomeada para esse padrão antes do commit.
 
 ### Passo 3
 
-Separe o trabalho por assunto: um commit para cada funcionalidade, correção, refatoração, documentação, teste ou tarefa. Cada commit deixa a árvore coerente e passando no build, e pode ser revertido ou aplicado sozinho. Documentação que registra a regra nova vai em commit próprio, depois do código. Commits do mesmo tema ficam na mesma branch e no mesmo pull request. Tema diferente abre outro pull request. O assunto do commit não abre pull request novo.
+Separe o trabalho por assunto: um commit para cada funcionalidade, correção, refatoração, documentação, teste ou tarefa.
+Cada commit deixa a árvore coerente e passando no build, e pode ser revertido ou aplicado sozinho.
+Documentação que registra a regra nova vai em commit próprio, depois do código.
+Commits do mesmo tema ficam na mesma branch e no mesmo pull request.
+Tema diferente abre outro pull request.
+O assunto do commit não abre pull request novo.
 
 ### Passo 4
 
@@ -65,7 +76,16 @@ Adicione ao índice cada arquivo pelo caminho. Confira o que entrou antes de com
 
 ### Passo 6
 
-Leia o `CONTRIBUTING.md` e o `AGENTS.md` do repositório: a convenção documentada de mensagem e de branch vale mais que o `Padrão da mensagem de commit` e que a preferência pessoal. Mensagem em `Idioma da mensagem de commit`, no `Padrão da mensagem de commit`. O tipo segue o que a mudança faz, não a extensão do arquivo. Correção de erro é `fix:`, mesmo em Markdown. `docs:` fica para a documentação. O assunto diz por que a mudança existe. Corpo só quando precisa de contexto. Renomear ou quebrar compatibilidade leva `!` no tipo e rodapé `BREAKING CHANGE:`. Com `Atribuição da sessão` em `sim`, termine com o trailer de coautoria da sessão. Com `não`, nunca ponha trailer de ferramenta ou de modelo, mesmo que o ambiente peça.
+Leia o `CONTRIBUTING.md` e o `AGENTS.md` do repositório: a convenção documentada de mensagem e de branch vale mais que o `Padrão da mensagem de commit` e que a preferência pessoal.
+Mensagem em `Idioma da mensagem de commit`, no `Padrão da mensagem de commit`.
+O tipo segue o que a mudança faz, não a extensão do arquivo.
+Correção de erro é `fix:`, mesmo em Markdown.
+`docs:` fica para a documentação.
+O assunto diz por que a mudança existe.
+Corpo só quando precisa de contexto.
+Renomear ou quebrar compatibilidade leva `!` no tipo e rodapé `BREAKING CHANGE:`.
+Com `Atribuição da sessão` em `sim`, termine com o trailer de coautoria da sessão.
+Com `não`, nunca ponha trailer de ferramenta ou de modelo, mesmo que o ambiente peça.
 
 ### Passo 7
 
@@ -79,7 +99,12 @@ flowchart LR
   A -->|não| D[Diga a branch e que não publicou]
 ```
 
-Informe o nome da branch, se ela está no GitHub e o hash de cada commit nesta resposta. Com `Criar pull request ao terminar` em `rascunho`, o padrão, a mudança de código autoriza o push da branch e a abertura do pull request em rascunho. Com `sim`, o pull request abre pronto. Com `não`, sem pedido de publicação, siga `criar-pull-request` até o passo que exige o pedido e diga que o pull request não está aberto. O merge continua pedindo um pedido explícito. Não escreva que a habilidade ficou para este pedido, nem para depois.
+Informe o nome da branch, se ela está no GitHub e o hash de cada commit nesta resposta.
+Com `Criar pull request ao terminar` em `rascunho`, o padrão, a mudança de código autoriza o push da branch e a abertura do pull request em rascunho.
+Com `sim`, o pull request abre pronto.
+Com `não`, sem pedido de publicação, siga `criar-pull-request` até o passo que exige o pedido e diga que o pull request não está aberto.
+O merge continua pedindo um pedido explícito.
+Não escreva que a habilidade ficou para este pedido, nem para depois.
 
 ### Passo 8
 
