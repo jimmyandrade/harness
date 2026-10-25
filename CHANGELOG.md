@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.4.0](https://github.com/jimmyandrade/harness/compare/v1.3.0...v1.4.0) (2026-10-25)
+
+
+### Features
+
+* check task status after a commit or a pull request change ([#474](https://github.com/jimmyandrade/harness/issues/474)) ([078e959](https://github.com/jimmyandrade/harness/commit/078e959739f347fecd9b57e22a51a600fa2e3345))
+
+
+### Bug Fixes
+
+* **definir-issue-do-github:** mark a dependency in Relationships ([#473](https://github.com/jimmyandrade/harness/issues/473)) ([350216a](https://github.com/jimmyandrade/harness/commit/350216a9b943718803133f6a9b97bae3bc7fa22c))
+* label a correction as a bug ([#478](https://github.com/jimmyandrade/harness/issues/478)) ([7499e76](https://github.com/jimmyandrade/harness/commit/7499e7640db4a046c183378257ac014c6f1176f7))
+* speak to the person in the reply ([#477](https://github.com/jimmyandrade/harness/issues/477)) ([9803cad](https://github.com/jimmyandrade/harness/commit/9803cadebb46d137351d9432cabfe87ef4bd04ca))
+* stop requiring the old skill description opening ([#475](https://github.com/jimmyandrade/harness/issues/475)) ([cfbd8b5](https://github.com/jimmyandrade/harness/commit/cfbd8b50381128ce71539b577a1ff3373bed75ac))
+
 ## [1.3.0](https://github.com/jimmyandrade/harness/compare/v1.2.1...v1.3.0) (2026-10-25)
 
 
