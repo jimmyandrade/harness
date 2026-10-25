@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.97.0](https://github.com/jimmyandrade/harness/compare/v0.96.0...v0.97.0) (2026-10-25)
+
+
+### Features
+
+* cite the commit SHA, follow the repository convention and search for forbidden terms ([#425](https://github.com/jimmyandrade/harness/issues/425)) ([e51e3dc](https://github.com/jimmyandrade/harness/commit/e51e3dc3f70ace328621a82e5fa67ecaa157130f))
+* **criar-pull-request:** let a project name the skill that asks for the review ([#429](https://github.com/jimmyandrade/harness/issues/429)) ([0723cf1](https://github.com/jimmyandrade/harness/commit/0723cf13e7749c8562a93fe6361e88b0e7e1cb39))
+* **definir-pessoa:** record the GitHub login, the Jira account ID and the pronouns ([#430](https://github.com/jimmyandrade/harness/issues/430)) ([293b888](https://github.com/jimmyandrade/harness/commit/293b888c57c1bf0f5fe7aa84782e82889f0dc1aa))
+* **enviar-mensagem-no-slack:** add message structure, writing, mention and link rules ([#427](https://github.com/jimmyandrade/harness/issues/427)) ([e695a2b](https://github.com/jimmyandrade/harness/commit/e695a2b4d58cc63bbcc454978246565aaf9e0e06))
+* **pedir-revisao-de-pr-no-slack:** ask the team to review a pull request in Slack ([#428](https://github.com/jimmyandrade/harness/issues/428)) ([a2dac3a](https://github.com/jimmyandrade/harness/commit/a2dac3a481b54a86851a3c6ca6c51ac05097dfde))
+* **publicar-revisao-de-codigo:** move proposals that go beyond the pull request out of the comment ([#431](https://github.com/jimmyandrade/harness/issues/431)) ([a829a37](https://github.com/jimmyandrade/harness/commit/a829a374ecef89e6a8c51a1e2e4f39710ff4ebb1))
+* record who decided a vocabulary term and when in their own fields ([#432](https://github.com/jimmyandrade/harness/issues/432)) ([85c40b7](https://github.com/jimmyandrade/harness/commit/85c40b7d1ee8e21a503d96e38e6b00184ef574be))
+* **vocabulary:** record the day a level was decided in decided_at ([#433](https://github.com/jimmyandrade/harness/issues/433)) ([77b43f0](https://github.com/jimmyandrade/harness/commit/77b43f0943100de3438a83a7472468711aaeef01))
+
+
+### Bug Fixes
+
+* **escrever-teste:** read the function signature before calling it in a test ([#434](https://github.com/jimmyandrade/harness/issues/434)) ([3fef8e6](https://github.com/jimmyandrade/harness/commit/3fef8e6cdd96e6385559178107455ba311751cac))
+
 ## [0.96.0](https://github.com/jimmyandrade/harness/compare/v0.95.0...v0.96.0) (2026-10-24)
 
 
