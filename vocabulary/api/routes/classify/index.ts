@@ -2,7 +2,8 @@
  * POST /v1/classify
  *
  * Classify one word or expression. The lookup starts at query and moves once,
- * to one of the five levels or to not_registered. A row stored with the
+ * to one of the five levels, to stop_word for a stop word stored without a
+ * level, or to not_registered. Any stop word also returns stop_word: true. A row stored with the
  * deprecated situationally_allowed reads as allowed_with_care and also returns
  * legacy_state. A row with
  * case_sensitive also returns case_matches, false when the submitted casing
@@ -26,6 +27,12 @@ export function classify(entries: readonly Entry[], submitted: string, language:
   const found = lookup(entries, submitted)
   const response: Classification = { from: "query", language, submitted: found.query, to: "not_registered" }
   if (found.entry === undefined) return response
+  if (found.entry.stopWord === true) response.stop_word = true
+  if (found.entry.stateless === true) {
+    response.to = "stop_word"
+    response.term = found.entry.term
+    return response
+  }
   response.to = found.entry.state
   response.term = found.entry.term
   if (found.entry.legacyState !== undefined) response.legacy_state = found.entry.legacyState

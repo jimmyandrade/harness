@@ -20,6 +20,18 @@ const GLOSSARY = `{
 }
 `
 
+test("a stop word without a level reads as stop_word", () => {
+  const glossary = load(`{
+  "casa": { "state": "allowed" },
+  "na": { "stop_word": true },
+  "no": { "stop_word": true }
+}
+`)
+  const words = classifyText(glossary, "Trabalho na casa", "pt-BR").words
+  assert.deepEqual(words.map((word) => word.to), ["not_registered", "stop_word", "allowed"])
+  assert.equal(words[1]?.stop_word, true)
+})
+
 test("each word keeps its own state", () => {
   const response = classifyText(load(GLOSSARY), "A casa baratinho em mãos", "pt-BR")
   assert.equal(response.submitted, "A casa baratinho em mãos")

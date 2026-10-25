@@ -3,7 +3,7 @@ name: classificar-estado-do-termo
 description: Use essa habilidade sempre que, ao cadastrar um termo do vocabulário do tom de voz, for preciso decidir o nível dele, de proibido a permitido, o contexto ou as tags, mesmo sem dizer estado. NÃO use para cadastrar o termo, validar os campos, escrever o texto da marca, nem decidir o nível sem as fontes da marca.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   related:
     - definir-vocabulario
     - gravar-termos-no-vocabulario
@@ -57,6 +57,7 @@ Termo de contexto de quem fala em primeira pessoa, de um evento ou de um canal t
 ### Passo 4
 
 - Proibido fica `forbidden`. Evitar fica `strongly_discouraged` ou `discouraged`, como a pessoa disser. Na dúvida, pergunte.
+- Artigo, preposição e outra palavra de ligação são stop words: `stop_word: true`, sem `state`. Se usar ou evitar depende das palavras em volta, o nível fica na expressão, como `no oRnii` proibido. A stop word só leva nível quando a marca tem regra para a palavra sozinha.
 - Emoji, combinação e uso simbólico são termo. A combinação junta é um termo. Não é decoração.
 - Clichê, genérico, automatizado ou gasto por IA, útil como intenção e não como palavra final: categoria `cliche`, estado `forbidden`. A `description` pede imagem, cena, ação, efeito ou situação. A frase literal entra em `rejected`. `substitution` repete a troca e não vira sinônimo. A escrita recusa `cliche` fora de `forbidden`. Variação recorrente entra proibida e ligada, ou só sugerida. Não invente a variação.
 - Frase descartada por perda consumada, cobrança agressiva, exclusão, capacitismo, ameaça real, culpa ou sensação incompatível entra `forbidden`. O motivo fica na `description`. A alternativa mantém desejo, urgência e conversa natural, sem dizer que a chance já passou. Sem alternativa, pergunte. Não invente a frase.
@@ -123,6 +124,7 @@ O emoji ficou um termo. A combinação junta ficou um termo só. O estado, a des
 
 ## Pegadinhas
 
+- O artigo de uma expressão proibida parece proibido sozinho. Ele é stop word sem nível, e a regra fica na expressão.
 - Gosto, estética isolada ou julgamento genérico parecem fechar o estado. Sem as fontes da marca que as instruções do projeto nomeiam, ele espera. A tensão entre intenção e viabilidade fica em `description` ou `when`.
 - O `when` parece bastar. Sem `tags`, o texto de outro contexto lê o termo. `maria` e `maria-silva` são dois contextos.
 - `allowed` com `when` parece um termo de contexto. A escrita recusa: o termo de contexto fica num dos três níveis do meio.

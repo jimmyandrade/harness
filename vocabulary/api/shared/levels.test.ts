@@ -228,6 +228,46 @@ test("decided_at that is not a real YYYY-MM-DD date is refused", () => {
   assert.equal(readFileSync(file, "utf8"), "{}\n")
 })
 
+test("a stop word is stored without a state, and its phrase keeps the level", () => {
+  const { root, file } = glossary()
+  const written = writeTerms(root, "pt-BR", "insert", terms([
+    { term: "no", stop_word: true },
+    { state: "forbidden", term: "no oRnii", description: "artigo masculino", substitution: "na oRnii", case_sensitive: true },
+  ]))
+  assert.deepEqual(written.inserted.map((item) => item.term), ["no", "no oRnii"])
+  const stored = JSON.parse(readFileSync(file, "utf8"))
+  assert.deepEqual(stored.no, { stop_word: true })
+  const reader = new Glossary(root)
+  const row = lookupTerm(reader, "pt-BR", "no")
+  assert.equal(row.stop_word, true)
+  assert.equal(row.state, undefined)
+  assert.equal(lookupTerm(reader, "pt-BR", "no oRnii").state, "forbidden")
+})
+
+test("a stop word may also have a level", () => {
+  const { root, file } = glossary()
+  writeTerms(root, "pt-BR", "insert", terms([{ state: "allowed", term: "de", description: "preposição", reason: "liga", stop_word: true }]))
+  const stored = JSON.parse(readFileSync(file, "utf8"))
+  assert.equal(stored.de.state, "allowed")
+  assert.equal(stored.de.stop_word, true)
+  assert.equal(lookupTerm(new Glossary(root), "pt-BR", "de").state, "allowed")
+})
+
+test("a term without a state is refused unless it is a stop word", () => {
+  const { root, file } = glossary()
+  assert.throws(() => writeTerms(root, "pt-BR", "insert", terms([{ term: "casa" }])))
+  assert.equal(readFileSync(file, "utf8"), "{}\n")
+})
+
+test("an update of a stop word without a state keeps the stored level", () => {
+  const { root, file } = glossary()
+  writeTerms(root, "pt-BR", "insert", terms([{ state: "allowed", term: "de", description: "preposição", reason: "liga" }]))
+  writeTerms(root, "pt-BR", "update", terms([{ term: "de", stop_word: true }]))
+  const stored = JSON.parse(readFileSync(file, "utf8"))
+  assert.equal(stored.de.state, "allowed")
+  assert.equal(stored.de.stop_word, true)
+})
+
 test("decided_by with an invalid e-mail or an unknown key is refused", () => {
   const { root, file } = glossary()
   assert.throws(() => writeTerms(root, "pt-BR", "insert", terms([

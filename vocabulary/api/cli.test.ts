@@ -443,6 +443,15 @@ test("terms takes the new fields as flags", () => {
   })
 })
 
+test("terms takes --stop-word without --state", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  const file = join(root, "pt-BR.json")
+  writeFileSync(file, "{}\n")
+  const { code } = capture(["--glossary", root, "terms", "--language", "pt-BR", "--mode", "insert", "--term", "no", "--stop-word"])
+  assert.equal(code, 0)
+  assert.deepEqual(JSON.parse(readFileSync(file, "utf8")).no, { stop_word: true })
+})
+
 test("terms builds the people object from --decided-by, --decided-by-email, and --decided-by-url", () => {
   const root = mkdtempSync(join(tmpdir(), "glossary-"))
   const file = join(root, "pt-BR.json")
