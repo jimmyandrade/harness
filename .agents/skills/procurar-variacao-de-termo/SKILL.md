@@ -3,7 +3,7 @@ name: procurar-variacao-de-termo
 description: Use essa habilidade sempre que alguém perguntar se um termo do vocabulário do tom de voz faltou, ou quais variações de gênero, número ou grafia de um termo foram cadastradas, mesmo sem dizer variação, plural ou feminino. NÃO use para cadastrar ou atualizar o termo, escrever o texto da marca, nem inventar uma forma que a pessoa não pediu.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.4.0"
   related:
     - definir-vocabulario
     - evoluir-habilidade
@@ -37,11 +37,11 @@ Liste as formas a pesquisar. Para a pergunta se um termo faltou, a forma é esse
 
 Pesquise cada forma com a consulta de Scripts disponíveis. Com terminal, rode o comando. Sem terminal, chame a ferramenta do servidor `vocabulary`. Sem os dois, como num agente do Notion, pare. Diga que a consulta roda numa ferramenta de código com o projeto aberto. Não leia o vocabulário de memória.
 
-Outra caixa é o mesmo termo. Acento, plural, gênero e outra palavra do mesmo assunto são linhas próprias, cada uma com o próprio estado.
+Outra caixa é o mesmo termo. Acento, plural, gênero e outra palavra do mesmo assunto são linhas próprias, cada uma com o próprio estado. A mesma grafia pode ter uma linha por conjunto de tags. Quando o pedido tem contexto, como a pessoa, o canal ou o evento, passe as tags dele na consulta. Sem tags, a consulta devolve a linha sem tags, e a linha de outro contexto só aparece com a tag dele.
 
 ### Passo 4
 
-Responda forma por forma. Diga quais estão cadastradas, com o estado, e quais não estão. Se a ausente é variação de um termo que já está, diga isso também.
+Responda forma por forma. Diga quais estão cadastradas, com o estado, e quais não estão. Uma forma com mais de uma linha em `rows` responde cada linha, com as tags e o estado dela. Se a ausente é variação de um termo que já está, diga isso também.
 
 Sugira o cadastro das ausentes e pergunte o estado de cada uma. Não grave nessa resposta. Não copie o estado do termo vizinho. Quando a pessoa escolher, o cadastro e o `related` entre as linhas seguem `definir-vocabulario`.
 
