@@ -3,7 +3,7 @@ name: organizar-emails
 description: Organiza e-mails por BASB e separa pessoal, trabalho e misto. Usada quando a pessoa quer triar a caixa, etiquetar ou configurar filtros. Não serve para responder mensagens, lançar despesas nem acompanhar veículos.
 metadata:
   author: jimmyandrade
-  version: "0.5.1"
+  version: "0.6.0"
   internal: true
   notion: "false"
   related:
@@ -28,7 +28,7 @@ Leia os valores nas instruções do projeto, na entrada desta habilidade. Na aus
   - "Misto"
 "Organizações": []
 "Comunicações indesejadas": []
-"Etiqueta de segurança": "Áreas/Segurança digital"
+"Pasta de segurança por ferramenta": "Recursos/{ferramenta}/Segurança"
 "Destino de confirmações automáticas": "Arquivos/{tipo}"
 "Etiqueta de contas a pagar": "Áreas/Finanças/A pagar"
 "Etiqueta de contas pagas": "Áreas/Finanças/Pago"
@@ -39,6 +39,20 @@ Leia os valores nas instruções do projeto, na entrada desta habilidade. Na aus
   - "ação judicial"
   - "citação"
   - "execução"
+"Aplicar filtro ao histórico": "sim"
+"Ler o assunto de todas as conversas antes de arquivar um lote": "sim"
+"Etiquetar também mensagem enviada do mesmo tema": "sim"
+"Caminhos para criar filtro":
+  - "conector"
+  - "navegador"
+  - "devolver a consulta"
+"Navegador para criar filtro": "navegador conectado, na conta da caixa"
+"Navegador do aplicativo para criar filtro": "só se a pessoa pedir"
+"Árvore de decisão": ""
+"Ordem de avaliação da árvore": "de cima para baixo"
+"Critério de parada da árvore": "a primeira pergunta que bater decide"
+"Quando nenhuma pergunta da árvore bate": "perguntar à pessoa"
+"Registrar a regra nova na árvore": "sim"
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -77,11 +91,15 @@ flowchart LR
   B -->|organização fora da lista| Q
 ```
 
+Com `Árvore de decisão` definida, percorra-a antes de perguntar, na `Ordem de avaliação da árvore`: o `Critério de parada da árvore` diz qual pergunta decide. Quando nenhuma pergunta bate, siga `Quando nenhuma pergunta da árvore bate`. Com `Registrar a regra nova na árvore` em `sim`, acrescente na árvore a regra que a pessoa confirmou, no mesmo arquivo, para o próximo caso igual não voltar a perguntar. Sem `Árvore de decisão`, a confirmação vale só para aquele caso.
+
 ### Passo 4
 
 Mantenha contexto e destino PARA como eixos independentes de BASB. Preserve etiquetas válidas; não transforme toda newsletter em referência. Consulte `Comunicações indesejadas` para reconhecer assinaturas que a pessoa já rejeitou, sem repetir cancelamento ou criar bloqueio por esse relato sozinho.
 
 Confirmação automática sem ação pendente, como descadastro ou inscrição em lista, vai para `Destino de confirmações automáticas`, com o tipo no lugar de `{tipo}`, no plural: `Arquivos/Descadastros`. Não pergunte se vale conservá-la. Pergunte o contexto só quando a resposta mudar o que a pessoa faz depois.
+
+Com `Etiquetar também mensagem enviada do mesmo tema` em `sim`, a mensagem que a própria pessoa enviou sobre o tema recebe a mesma etiqueta do tema, sem mudar entrada nem leitura.
 
 ```mermaid
 flowchart LR
@@ -94,7 +112,7 @@ flowchart LR
   B -->|não identificado| Q
 ```
 
-Use `Etiqueta de segurança` para alertas de conta. Etiquetar não valida a autenticidade do remetente nem reconhece um acesso. Para mensagens que chegam à entrada, não retire o alerta antes de a pessoa vê-lo, e preserve a leitura. Não devolva mensagens antigas já arquivadas à entrada nem redefina leitura por suposição. A leitura pelo agente ou a marca de lido não prova leitura humana. O arquivamento posterior pela pessoa conserva a mensagem para investigação; não crie promessa de arquivamento automático após leitura. Arquivar no Gmail retira da entrada e não muda, por si só, a classificação PARA para Arquivos.
+Alerta de segurança de uma ferramenta vai para a pasta dela, dada por `Pasta de segurança por ferramenta`, com o nome da ferramenta no lugar de `{ferramenta}`: `Recursos/Editor de planilhas/Segurança`. Cada ferramenta tem a própria pasta, em vez de uma etiqueta única de segurança. Etiquetar não valida a autenticidade do remetente nem reconhece um acesso. Para mensagens que chegam à entrada, não retire o alerta antes de a pessoa vê-lo, e preserve a leitura. Não devolva mensagens antigas já arquivadas à entrada nem redefina leitura por suposição. A leitura pelo agente ou a marca de lido não prova leitura humana. O arquivamento posterior pela pessoa conserva a mensagem para investigação; não crie promessa de arquivamento automático após leitura. Arquivar no Gmail retira da entrada e não muda, por si só, a classificação PARA para Arquivos.
 
 ### Passo 5
 
@@ -126,17 +144,29 @@ flowchart LR
   C --> E[Etiquetar somente categoria neutra validada ou perguntar]
 ```
 
-Para segurança, mantenha a etiqueta temática independente do contexto da conta protegida. Não encaminhe e-mails entre contas para resolver a classificação. Não use a categoria automática de promoções como autorização para esconder avisos financeiros. Confirme a capacidade real da integração; uma proposta não é filtro instalado, e filtro de entrada não observa uma leitura futura.
+Para segurança, mantenha a etiqueta temática independente do contexto da conta protegida. Não encaminhe e-mails entre contas para resolver a classificação. Não use a categoria automática de promoções como autorização para esconder avisos financeiros. Filtro de entrada não observa uma leitura futura.
+
+Para criar o filtro, tente os `Caminhos para criar filtro` na ordem e registre qual funcionou. Confirme a capacidade real de cada caminho antes de prometer o filtro: uma proposta não é filtro instalado.
+
+```mermaid
+flowchart LR
+  A{O conector cria e lê filtro?} -->|sim| C[Criar pelo conector e ler o filtro de volta]
+  A -->|não| B{Navegador na conta certa e site aprovado?}
+  B -->|sim| D[Criar nas configurações da caixa e ler a lista de volta]
+  B -->|não| F[Devolver a consulta pronta e dizer por que cada caminho falhou]
+```
+
+Use o `Navegador para criar filtro`; o `Navegador do aplicativo para criar filtro` diz quando o navegador do próprio aplicativo entra. No navegador, confirme que a conta é a de `Contas` antes de salvar e peça a aprovação do site quando ela ainda não existir. A consulta devolvida traz o critério, a etiqueta e as ações do plano: pular a entrada e marcar como lido, quando o plano manda.
 
 ### Passo 7
 
 Antes de alterações em lote ou de filtros, grave um plano estruturado com conta, evidência, classificação, critérios, etiquetas, mensagens atingidas, efeito futuro e preservação de leitura e entrada. Valide contra a mensagem, a resposta da pessoa e os filtros existentes. Execute apenas ações autorizadas; mantenha os casos não resolvidos fora do lote.
 
-Reutilize etiquetas existentes pelo nome e pelo identificador retornado. Crie somente as necessárias. Use os identificadores opacos completos das conversas na conta correspondente. Não aplique um filtro novo ao histórico inteiro sem escopo autorizado. Um piloto em uma conversa não autoriza outras da mesma instituição.
+Reutilize etiquetas existentes pelo nome e pelo identificador retornado. Crie somente as necessárias. Use os identificadores opacos completos das conversas na conta correspondente. Com `Aplicar filtro ao histórico` em `sim`, o filtro novo vale também para as conversas antigas que ele atinge; com `não`, vale só para as próximas mensagens. Antes de arquivar ou marcar como lido um lote, e antes de aplicar ao histórico, leia o assunto de todas as conversas atingidas quando `Ler o assunto de todas as conversas antes de arquivar um lote` for `sim`: remetente igual não prova assunto igual, e o que não for do tipo confirmado fica fora do lote. Um piloto em uma conversa não autoriza outras da mesma instituição.
 
 ### Passo 8
 
-Leia o filtro criado e a conversa alterada. Confira etiquetas, conta e permanência na entrada; preserve o estado de leitura anterior. Não deduza o nome de uma etiqueta a partir de identificadores diferentes. Registre separadamente o filtro armazenado, as etiquetas verificadas na conversa atual e a aplicação automática futura. Sem correspondência fornecida pela integração entre o identificador interno e o nativo, declare a validação do nome no filtro limitada. Uma conversa antiga sem etiqueta não testa um filtro criado depois. Uma ação em lote pode ser aplicada só em parte: compare a leitura de volta com o plano, refaça apenas o que faltou e leia de novo. Conversa que saiu da entrada entre a alteração e a leitura de volta pode ter sido arquivada pela pessoa, que usa a caixa ao mesmo tempo: pergunte antes de devolvê-la. Relate o que foi aplicado, cada chamada que falhou e como foi resolvida, o que continua proposto e quais decisões faltam. Sem fonte oficial atual, não declare pendência financeira, de veículo ou de habilitação regularizada.
+Leia o filtro criado e a conversa alterada. Confira etiquetas, conta e permanência na entrada; preserve o estado de leitura anterior. Não deduza o nome de uma etiqueta a partir de identificadores diferentes. Registre separadamente o caminho que criou o filtro, ou que nenhum criou, o filtro armazenado, as etiquetas verificadas na conversa atual e a aplicação automática futura. Sem correspondência fornecida pela integração entre o identificador interno e o nativo, declare a validação do nome no filtro limitada. Uma conversa antiga sem etiqueta não testa um filtro criado depois. Uma ação em lote pode ser aplicada só em parte: compare a leitura de volta com o plano, refaça apenas o que faltou e leia de novo. Conversa que saiu da entrada entre a alteração e a leitura de volta pode ter sido arquivada pela pessoa, que usa a caixa ao mesmo tempo: pergunte antes de devolvê-la. Relate o que foi aplicado, cada chamada que falhou e como foi resolvida, o que continua proposto e quais decisões faltam. Sem fonte oficial atual, não declare pendência financeira, de veículo ou de habilitação regularizada.
 
 Checklist de conclusão:
 - [ ] Conta, permissões, etiquetas e filtros conferidos.
@@ -189,7 +219,7 @@ A obrigação continua mista. A intenção de contratar pela PJ no futuro não m
 
 ### Alerta de segurança cuja pessoa pede etiqueta e revisão antes de arquivar
 
-A conversa recebe a etiqueta de segurança e permanece na entrada, sem mudança de leitura. A pessoa pode arquivar após ler; o agente não promete observar esse momento automaticamente.
+A conversa recebe a etiqueta de segurança da ferramenta e permanece na entrada, sem mudança de leitura. A pessoa pode arquivar após ler; o agente não promete observar esse momento automaticamente.
 
 ### Confirmação de descadastro de um software que a pessoa buscava para um escritório que já fechou
 
