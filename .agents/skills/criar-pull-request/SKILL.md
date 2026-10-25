@@ -3,7 +3,7 @@ name: criar-pull-request
 description: Use essa habilidade sempre que for abrir PR, subir uma correção, mandar para a branch principal ou mesclar mudança no repositório, mesmo sem dizer PR. NÃO use para responder comentário de revisão nem para só commitar (use criar-commit).
 metadata:
   author: jimmyandrade
-  version: "0.21.0"
+  version: "0.22.0"
   related:
     - evoluir-habilidade
     - criar-commit
@@ -47,7 +47,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ## Instruções
 
-Nada entra na `Branch base` sem pull request. Nunca dê push na `Branch base`, nem com pedido explícito. Nunca dê force-push na `Branch base`. Toda mudança chega por PR mesclado com `Tipo de merge`.
+Nada entra na `Branch base` sem pull request. Nunca dê push na `Branch base`, nem com pedido explícito. Nunca substitua a história da `Branch base`. Toda mudança chega por PR mesclado com `Tipo de merge`.
 
 ### Passo 1
 
@@ -68,7 +68,7 @@ Commite seguindo `criar-commit`.
 ### Passo 4
 
 Se a branch já tem PR, confira o estado dele antes de atualizar. Se já foi mesclado, a branch remota foi apagada: comece uma branch nova a partir da `Branch base` remota e leve só os commits que ficaram fora do merge.
-Atualize a branch com rebase sobre a `Branch base` remota. Nunca faça merge da base na branch nem crie commit com assunto `merge:`. O squash do PR não é motivo para mesclar a base antes. Resolva conflitos nos commits rebaseados. Se a branch já foi publicada, no Passo 5 publique o rebase com force-with-lease só nessa branch e somente após pedido explícito.
+Atualize a branch com rebase sobre a `Branch base` remota. Nunca faça merge da base na branch nem crie commit com assunto `merge:`. O squash do PR não é motivo para mesclar a base antes. Resolva conflitos nos commits rebaseados. Se a branch já foi publicada, o push comum é recusado, porque a história local e a do GitHub divergiram. Substitua a branch no GitHub pela história reescrita só depois que a pessoa autorizar, e só nessa branch. Na resposta, diga o que muda: a branch publicada passa a ter os commits novos, a `Branch base` não muda, e a substituição só segue se ninguém tiver enviado commit novo nessa branch desde a última leitura. Não use o nome do comando no lugar dessa explicação.
 
 ### Passo 5
 
@@ -214,6 +214,7 @@ O pedido autoriza push e merge. Push sem o hook, porque o commit já passou em t
 - `gh api -X POST repos/<Repositório>/branches/<branch>/rename -f new_name=<tipo>/<descrição>`: renomeia a branch publicada no Passo 1 e fecha o PR dela. Depois, `git fetch origin --prune`, `git branch -m <tipo>/<descrição>`, `git branch -u origin/<tipo>/<descrição>` e um PR novo.
 - `gh pr list --repo <Repositório> --head <branch> --state all --json number,state`: estado do PR no Passo 4.
 - `git fetch origin && git rebase origin/<Branch base>`: Passo 4.
+- `git push --force-with-lease origin <branch>`: substitui a branch já publicada pela história reescrita no Passo 5, só depois da autorização. Não substitui a `Branch base`.
 - `GIT_TERMINAL_PROMPT=0 git -c credential.helper= -c 'credential.helper=!gh auth git-credential' ls-remote origin HEAD`: teste de acesso do Passo 5.
 - `LEFTHOOK=0 GIT_TERMINAL_PROMPT=0 git -c credential.helper= -c 'credential.helper=!gh auth git-credential' push -u origin <branch>`: push sem o hook. Tire o `LEFTHOOK=0` para rodar o hook.
 - `gh pr create --repo <Repositório> --base <Branch base> --head <branch> --title "<assunto>" --body "<corpo>" --assignee <pessoa> --label <rótulo>`: Passo 6. Com `Atribuir o PR a quem abre` ou `Rotular o PR` em `não`, tire a flag correspondente. Com `Rotular o PR` em `sim`, `--label` fica no comando.

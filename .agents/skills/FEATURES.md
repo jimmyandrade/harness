@@ -177,6 +177,7 @@ How these skills relate is in `README.md`, in this folder.
   - After a merge, checks the sync when the project syncs the repository with another tool, such as the skill pages in Notion
   - `Criar pull request ao terminar` is `rascunho` by default: the code change pushes the branch and opens a draft pull request, and the reply names the branch, says whether it is on GitHub, and includes the link. `sim` opens a ready pull request. `não` waits for an explicit publish request. A draft does not request review. Merging still needs an explicit request
   - `Fatiar por subtarefa` is `não` by default: commits of the same theme stay on the open pull request for that theme. `sim` opens one pull request per subtask. Stacking is for a theme that depends on a pull request still outside the base
+  - When a published branch was rewritten, the reply says the GitHub branch would be replaced by the new commits, the base branch stays as it is, and the replacement proceeds only if nobody pushed a new commit to that branch since the last fetch. It asks before replacing, and it does not name the git command in place of that explanation
 - **Test Criteria**:
   - [ ] A request to push to the base branch opens a pull request instead
   - [ ] A `claude/…` branch is renamed to `type/…` before its pull request opens
