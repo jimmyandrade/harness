@@ -447,7 +447,7 @@ test("one batch takes two terms that differ only by an accent", async () => {
   })
 })
 
-test("tags are stored in lowercase, compared on upsert, and dropped when sent empty", async () => {
+test("tags are stored in lowercase, compared on upsert, and name the row an upsert writes", async () => {
   await withGlossary("{}\n", async (port, root) => {
     const file = join(root, "pt-BR.json")
     const chant = {
@@ -463,11 +463,23 @@ test("tags are stored in lowercase, compared on upsert, and dropped when sent em
     assert.deepEqual(stored["Agora, faz barulho! VERÃO! (CHEGOU!)"].tags, ["festival-de-verao", "palco"])
     const same = await post(port, { language: "pt-BR", mode: "upsert", terms: [chant] })
     assert.deepEqual((await same.json()).unchanged, [{ term: "verão! (chegou!)", reason: "Already in the glossary." }])
-    const retagged = await post(port, { language: "pt-BR", mode: "upsert", terms: [{ ...chant, tags: ["festival-de-verao"] }] })
-    assert.deepEqual((await retagged.json()).updated[0].tags, ["festival-de-verao"])
-    const untagged = await post(port, { language: "pt-BR", mode: "upsert", terms: [{ ...chant, tags: [] }] })
+    const other = await post(port, { language: "pt-BR", mode: "upsert", terms: [{ ...chant, tags: ["festival-de-verao"] }] })
+    assert.deepEqual((await other.json()).inserted[0].tags, ["festival-de-verao"])
+    const rows = JSON.parse(readFileSync(file, "utf8"))["verão! (chegou!)"]
+    assert.deepEqual(rows.map((row: { tags: string[] }) => row.tags), [["festival-de-verao"], ["festival-de-verao", "palco"]])
+  })
+})
+
+test("an update with other tags changes the tags of the only row, and tags sent empty drop them", async () => {
+  const initial = `${JSON.stringify({ "bom dia": { state: "allowed_with_care", when: "na abertura", tags: ["canal-a"] } }, null, 2)}\n`
+  await withGlossary(initial, async (port, root) => {
+    const file = join(root, "pt-BR.json")
+    const term = { state: "allowed_with_care", term: "bom dia", when: "na abertura" }
+    const retagged = await post(port, { language: "pt-BR", mode: "update", terms: [{ ...term, tags: ["canal-b"] }] })
+    assert.deepEqual((await retagged.json()).updated[0].tags, ["canal-b"])
+    const untagged = await post(port, { language: "pt-BR", mode: "update", terms: [{ ...term, tags: [] }] })
     assert.equal((await untagged.json()).updated[0].tags, undefined)
-    assert.equal(JSON.parse(readFileSync(file, "utf8"))["verão! (chegou!)"].tags, undefined)
+    assert.equal(JSON.parse(readFileSync(file, "utf8"))["bom dia"].tags, undefined)
   })
 })
 

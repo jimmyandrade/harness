@@ -3,7 +3,7 @@ name: definir-vocabulario
 description: Use essa habilidade sempre que for cadastrar ou atualizar um ou mais termos do vocabulário do tom de voz, mesmo sem dizer glossário, lote ou estado. NÃO use para escrever, revisar ou aprovar o texto da marca, classificar uma frase, perguntar quais variações de gênero, número ou grafia foram cadastradas, nem inventar um termo que a pessoa não enviou.
 metadata:
   author: jimmyandrade
-  version: "0.31.0"
+  version: "0.32.0"
   related:
     - classificar-estado-do-termo
     - evoluir-habilidade
@@ -48,7 +48,7 @@ Classifique cada termo com `classificar-estado-do-termo`: ele lê as fontes da m
 
 ### Passo 3
 
-Cadastrar o que ainda não está usa `insert`. Corrigir o que já está usa `update`. Gravar novos e corrigir os que já estão usa `upsert`. Se a pessoa pedir para cadastrar e não disser o modo, use `insert`.
+Cadastrar o que ainda não está usa `insert`. Corrigir o que já está usa `update`. Gravar novos e corrigir os que já estão usa `upsert`. Se a pessoa pedir para cadastrar e não disser o modo, use `insert`. Uma grafia guarda uma linha por conjunto de tags: a regra de um contexto para uma grafia que já tem linha de outro contexto, ou sem tags, entra como outra linha, com as tags dela. Corrigir uma linha com tags manda as tags dela.
 
 ### Passo 4
 
@@ -87,6 +87,7 @@ A mensagem era em português e só levava uma palavra em inglês. A linha ficou 
 ## Casos-limite
 
 - Permitidos, proibidos e situacionais juntos: um lote e um modo.
+- A mesma palavra vale de um jeito num contexto e de outro no resto: uma linha sem tags e uma com as tags do contexto, no mesmo lote.
 - A pessoa pergunta se um termo ou uma variação faltou: `procurar-variacao-de-termo`.
 - O pedido é escrever a frase: `redigir-com-tom-de-voz`.
 - O pedido é saber se a frase pode: não é esta habilidade.

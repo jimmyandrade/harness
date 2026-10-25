@@ -585,7 +585,18 @@ export const glossaryRowSchema = z
 
 export type GlossaryRow = z.infer<typeof glossaryRowSchema>
 
-export const glossaryFileSchema = z.record(z.string(), glossaryRowSchema, { error: "The glossary is not an object." })
+/**
+ * A spelling keeps one row as an object, or one row per set of tags as a list.
+ * Both read as a list of rows.
+ */
+export const glossaryFileSchema = z.record(
+  z.string(),
+  z.preprocess(
+    (value) => (Array.isArray(value) ? value : [value]),
+    z.array(glossaryRowSchema).min(1, { error: "A glossary term has an empty list of rows." }),
+  ),
+  { error: "The glossary is not an object." },
+)
 
 export function readSchema<S extends z.ZodType>(schema: S, value: unknown): z.infer<S> {
   const result = schema.safeParse(value)
