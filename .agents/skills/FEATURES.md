@@ -1404,6 +1404,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Description**: Move tasks, cards, or issues through their status flow from the state of the pull request linked to each one
 - **Properties**:
   - Lives at `.agents/skills/sincronizar-status-da-tarefa/SKILL.md`
+  - Runs after a commit is created and after a pull request changes state, without waiting for the person to ask for a status sweep
   - Works with any task tracker, reading from the project instructions the task query, the status flow, the status for a merged, ready, draft, or blocked pull request, the labels that mean blocked, how a task links to a pull request, and whether to confirm the plan
   - Links a task to a pull request only after reading its title and body, and marks a link made only by subject
   - Leaves unchanged, with the reason, a task whose pull request was closed without merging, cites another key, or needs judgment
@@ -1413,6 +1414,7 @@ How these skills relate is in `README.md`, in this folder.
   - Reports by final status from what the tool returned, and counts the totals from the final list
 - **Test Criteria**:
   - [x] The skill is present at that path
+  - [ ] After a commit or a pull request state change, the skill runs without a separate sweep request
   - [ ] Three cases validated with the person
 
 ### validar-plano-de-vocabulario
