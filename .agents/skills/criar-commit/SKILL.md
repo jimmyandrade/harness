@@ -3,7 +3,7 @@ name: criar-commit
 description: Use essa habilidade sempre que terminar um trabalho que mudou o repositório ou for commitar, separar commits ou escrever a mensagem, mesmo sem dizer commit. NÃO use para push, abrir PR, rebase nem merge (use criar-pull-request).
 metadata:
   author: jimmyandrade
-  version: "0.13.0"
+  version: "0.15.0"
 ---
 
 # Criar commit
@@ -22,11 +22,11 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Atribuição da sessão": "sim"
 "Comando de build": ""
 "Comando de lint dos arquivos tocados": ""
-"Criar pull request ao terminar": "não"
+"Criar pull request ao terminar": "rascunho"
 "Modo de aprendizado": "perguntar"
 ```
 
-`Criar pull request ao terminar` é `sim` quando a mudança de código autoriza o push da branch e a abertura do pull request, para o código não ficar só na máquina. É `não`, o padrão, quando isso espera um pedido explícito. O merge não entra nesse parâmetro.
+`Criar pull request ao terminar` é `rascunho`, o padrão: a mudança de código sobe a branch e abre o pull request em rascunho, para o trabalho não ficar só na máquina. Um rascunho não pede revisão. É `sim` quando o pull request abre pronto. É `não` quando a publicação espera um pedido explícito. A resposta diz o nome da branch, se ela está no GitHub e, quando o pull request existe, o link. O merge não entra nesse parâmetro.
 
 ## Instruções
 
@@ -53,7 +53,7 @@ Na branch própria, se a branch atual for a `Branch base`, crie uma branch a par
 
 ### Passo 3
 
-Separe o trabalho por assunto: um commit para cada funcionalidade, correção, refatoração, documentação, teste ou tarefa. Cada commit deixa a árvore coerente e passando no build, e pode ser revertido ou aplicado sozinho. Documentação que registra a regra nova vai em commit próprio, depois do código.
+Separe o trabalho por assunto: um commit para cada funcionalidade, correção, refatoração, documentação, teste ou tarefa. Cada commit deixa a árvore coerente e passando no build, e pode ser revertido ou aplicado sozinho. Documentação que registra a regra nova vai em commit próprio, depois do código. Commits do mesmo tema ficam na mesma branch e no mesmo pull request. Tema diferente abre outro pull request. O assunto do commit não abre pull request novo.
 
 ### Passo 4
 
@@ -71,14 +71,15 @@ Leia o `CONTRIBUTING.md` e o `AGENTS.md` do repositório: a convenção document
 
 ```mermaid
 flowchart LR
-  H[Informe os hashes] --> P{Criar pull request ao terminar?}
-  P -->|sim| B[criar-pull-request]
+  H[Informe branch, push e hashes] --> P{Criar pull request ao terminar?}
+  P -->|rascunho| B[criar-pull-request em rascunho]
+  P -->|sim| C[criar-pull-request pronto]
   P -->|não| A{Pediu push ou PR?}
-  A -->|sim| B
-  A -->|não| C[criar-pull-request e pare antes de publicar]
+  A -->|sim| C
+  A -->|não| D[Diga a branch e que não publicou]
 ```
 
-Informe o hash de cada commit nesta resposta. Com `Criar pull request ao terminar` em `sim`, a mudança de código autoriza o push da branch e a abertura do pull request. Com `não`, sem pedido de publicação, siga `criar-pull-request` até o passo que exige o pedido e diga que o pull request não está aberto. O merge continua pedindo um pedido explícito. Não escreva que a habilidade ficou para este pedido, nem para depois.
+Informe o nome da branch, se ela está no GitHub e o hash de cada commit nesta resposta. Com `Criar pull request ao terminar` em `rascunho`, o padrão, a mudança de código autoriza o push da branch e a abertura do pull request em rascunho. Com `sim`, o pull request abre pronto. Com `não`, sem pedido de publicação, siga `criar-pull-request` até o passo que exige o pedido e diga que o pull request não está aberto. O merge continua pedindo um pedido explícito. Não escreva que a habilidade ficou para este pedido, nem para depois.
 
 ### Passo 8
 
@@ -91,8 +92,8 @@ Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 Se você escrever que a habilidade ficou para este pedido, ou para depois, a pessoa não sabe se ela foi chamada.
 
 1. Informe o hash de cada commit.
-2. Com `Criar pull request ao terminar` em `sim`, abra o pull request.
-3. Com `não` e sem pedido de publicação, diga que o pull request não está aberto.
+2. Com `Criar pull request ao terminar` em `rascunho`, suba a branch e abra o pull request em rascunho. Com `sim`, abra o pull request pronto.
+3. Com `não` e sem pedido de publicação, diga o nome da branch e que o pull request não está aberto.
 4. Não use a expressão "ficou para este pedido".
 
 ### Formatador reescreve arquivos alheios
@@ -114,7 +115,7 @@ Se você vir o type check ou o lint acusar erro em arquivo que não mudou, o err
 Se você juntar o helper, a correção e a documentação num commit só, ninguém consegue reverter uma parte sem as outras.
 
 1. Desfaça o commit mantendo as mudanças.
-2. Separe por assunto e commite de novo, na ordem em que cada um passa no build.
+2. Separe por assunto e commite de novo, na ordem em que cada um passa no build. Os commits do mesmo tema continuam no mesmo pull request.
 
 ## Exemplos de entrada e saída
 
