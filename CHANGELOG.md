@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.99.0](https://github.com/jimmyandrade/harness/compare/v0.98.1...v0.99.0) (2026-10-25)
+
+
+### Features
+
+* **organizar-emails:** add filter creation paths, decision tree parameters and per-tool security folders ([#441](https://github.com/jimmyandrade/harness/issues/441)) ([ed213c5](https://github.com/jimmyandrade/harness/commit/ed213c57debcdac34e160ff21f67f8708ac6c0e6))
+
 ## [0.98.1](https://github.com/jimmyandrade/harness/compare/v0.98.0...v0.98.1) (2026-10-25)
 
 
