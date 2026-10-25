@@ -843,7 +843,7 @@ How these skills relate is in `README.md`, in this folder.
   - Leaves the skill name and the prompt examples out of the description; the examples stay in the body
   - A request that arrives through a copy, synced or installed by dependency or plugin, writes through criar-commit and criar-pull-request in the source repository
   - Rewrites a schema description and each property description that already has text, and keeps every fact already there
-  - Writes the description of the project instructions too, in their frontmatter: it fires on any task of the workspace, and `NÃO use para` covers changing the instructions themselves
+  - Writes the description of the project instructions too, in their frontmatter: it fires on any task of the workspace, and `Não serve para` covers changing the instructions themselves
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses writing the body, grading output, describing a product, and writing the skill page in Notion
@@ -1342,7 +1342,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Description**: Review a written skill, flag description and structure issues, and suggest tests from its purpose
 - **Properties**:
   - Lives at `.agents/skills/revisar-habilidade/SKILL.md`
-  - Flags a vague description, a missing trigger, and a structural problem
+  - Flags a vague description, a missing trigger, and a structural problem. A description is vague when it addresses the agent, skips the third person, or omits when it is used and what it is not for
   - Identifies the risk of triggering too often or too rarely
   - Suggests an obvious task and a paraphrased request that should trigger, and an unrelated topic plus a near miss that should not
   - Suggests each acceptance criterion already written as a Portuguese Gherkin example, and a with-skill against without-skill comparison
