@@ -6,6 +6,12 @@
       "prompt": "criar-pull-request foi usado? Não entendi \"ficou para este pedido\", nunca use essa expressão. Você deveria ter chamado escrever-teste. Aprenda com a execução, atualize as habilidades e melhore as instruções deste projeto e do core pra garantir a execução das habilidades.",
       "expected_output": "A resposta diz que criar-pull-request foi usada para abrir o pull request. Sem pedido de publicação, a resposta diz que o pull request não está aberto. A resposta não diz que a habilidade ficou para este pedido.",
       "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Outro ponto: você não deveria esperar eu pedir pra publicar o PR. Sempre que uma mudança em código for feita, o ideal é já criar o PR pra não perder o código. Isso pode ser parametrizado, obviamente. Mas neste projeto, sempre crie o PR.",
+      "expected_output": "A habilidade ganha o parâmetro Criar pull request ao terminar. Com sim, a mudança de código abre o pull request sem um pedido separado de publicação. O merge continua esperando pedido. Neste projeto o parâmetro fica sim.",
+      "files": []
     }
   ]
 }
