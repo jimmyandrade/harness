@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.99.1](https://github.com/jimmyandrade/harness/compare/v0.99.0...v0.99.1) (2026-10-25)
+
+
+### Bug Fixes
+
+* **validar-plano-de-vocabulario:** record only the name when the e-mail is shared ([#444](https://github.com/jimmyandrade/harness/issues/444)) ([179d863](https://github.com/jimmyandrade/harness/commit/179d86311f30cf5f42335e3b9132a6cc276f2dac))
+
 ## [0.99.0](https://github.com/jimmyandrade/harness/compare/v0.98.1...v0.99.0) (2026-10-25)
 
 
