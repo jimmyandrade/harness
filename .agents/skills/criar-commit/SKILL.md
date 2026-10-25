@@ -3,7 +3,7 @@ name: criar-commit
 description: Use essa habilidade sempre que terminar um trabalho que mudou o repositório ou for commitar, separar commits ou escrever a mensagem, mesmo sem dizer commit. NÃO use para push, abrir PR, rebase nem merge (use criar-pull-request).
 metadata:
   author: jimmyandrade
-  version: "0.11.1"
+  version: "0.11.2"
 ---
 
 # Criar commit
@@ -68,11 +68,12 @@ Leia o `CONTRIBUTING.md` e o `AGENTS.md` do repositório: a convenção document
 
 ```mermaid
 flowchart LR
-  A{Pediu push ou PR?} -->|sim| B[criar-pull-request]
+  H[Informe os hashes] --> A{Pediu push ou PR?}
+  A -->|sim| B[criar-pull-request]
   A -->|não| C[criar-pull-request e pare antes de publicar]
 ```
 
-Sem pedido de publicação, siga `criar-pull-request` até o passo que exige o pedido. Informe os hashes e diga que o pull request não está aberto. Não escreva que a habilidade ficou para este pedido, nem para depois.
+Informe o hash de cada commit nesta resposta, tenha a pessoa pedido publicação ou não. Sem pedido de publicação, siga `criar-pull-request` até o passo que exige o pedido e diga que o pull request não está aberto. Não escreva que a habilidade ficou para este pedido, nem para depois.
 
 ### Passo 8
 
@@ -84,9 +85,10 @@ Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 Se você escrever que a habilidade ficou para este pedido, ou para depois, a pessoa não sabe se ela foi chamada.
 
-1. Siga `criar-pull-request` mesmo sem pedido de publicação.
-2. Diga que o pull request não está aberto.
-3. Não use a expressão "ficou para este pedido".
+1. Informe o hash de cada commit.
+2. Siga `criar-pull-request` mesmo sem pedido de publicação.
+3. Diga que o pull request não está aberto.
+4. Não use a expressão "ficou para este pedido".
 
 ### Formatador reescreve arquivos alheios
 
@@ -115,7 +117,7 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### Implemente a correção e documente a regra
 
-Três commits na branch `fix/…`: `feat:` com o helper reutilizável e o teste, `fix:` com a correção, `docs:` com a regra nas instruções do projeto. Testes e build rodados antes. Sem push, porque a pessoa não pediu.
+Três commits na branch `fix/…`: `feat:` com o helper reutilizável e o teste, `fix:` com a correção, `docs:` com a regra nas instruções do projeto. Testes e build rodados antes. A resposta informa o hash de cada commit. Sem push, porque a pessoa não pediu.
 
 ### Ajusta só o texto desse botão
 
