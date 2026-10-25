@@ -3,11 +3,12 @@ name: evoluir-habilidade
 description: Use essa habilidade sempre que for testar uma skill, alterá-la a pedido ou evoluir as instruções do projeto, mesmo sem dizer evoluir, inclusive o Gherkin e a comparação com e sem skill, resultado inconsistente, falha de chamada ou correção da pessoa. NÃO use para criar a primeira versão, só ver se a descrição dispara, só revisar sem executar, nem gravar a página no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.21.0"
+  version: "0.22.0"
   related:
     - criar-commit
     - criar-pull-request
     - definir-instrucoes-do-projeto
+    - definir-vocabulario
     - descrever-habilidade-ou-schema
     - medir-habilidade
     - revisar-habilidade
@@ -76,7 +77,7 @@ Dentro de cada uma: `outputs/`, `timing.json` e `grading.json`. O `benchmark.jso
 
 A skill é um documento vivo. A iteração parte do feedback.
 Resultado inconsistente, falha de chamada e correção da pessoa: melhore a instrução e acrescente o tratamento do erro.
-Antes de editar, leia a skill inteira, as `related` e os parâmetros. A frase nova não contradiz nenhuma: quando a regra muda, reescreva a frase que já existe e cada repetição dela em `Problemas comuns`, `Exemplos de entrada e saída`, `Casos-limite` e `Pegadinhas`. Não acrescente exceção noutro lugar. Valor que muda de um projeto para outro, como pasta, caminho ou nome de banco, vira parâmetro; o passo cita a chave.
+Antes de editar, leia a skill inteira, as `related` e os parâmetros. A frase nova não contradiz nenhuma: quando a regra muda, reescreva a frase que já existe e cada repetição dela em `Problemas comuns`, `Exemplos de entrada e saída`, `Casos-limite` e `Pegadinhas`. Não acrescente exceção noutro lugar. Valor que muda de um projeto para outro, como pasta, caminho ou nome de banco, vira parâmetro; o passo cita a chave. Decisão sobre palavra, como usar um termo ou outro, ou como escrever uma frase, não entra na skill nem num parâmetro: vai para o vocabulário, por `definir-vocabulario`.
 Subdisparo e sobredisparo vão para `descrever-habilidade-ou-schema`.
 O teste sempre edita a skill validada, nesta mesma conversa. Sem essa edição, o teste não vale.
 Incorpore todos os resultados, não só as falhas. A edição vem do que a execução mostrou.
