@@ -3,7 +3,7 @@ name: enviar-mensagem-no-slack
 description: Redige uma mensagem de Slack, num canal, thread ou DM, e entrega o rascunho com o link do destino. Só envia com a autorização explícita da pessoa e, depois do envio, compara o proposto com o aplicado para alimentar o vocabulário. Usada quando a pessoa pede uma mensagem ou resposta no Slack. Não serve para achar conversa antiga nem cadastrar pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.4.0"
   internal: true
   notion: "false"
   related:
@@ -23,18 +23,21 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Limite de rascunhos por canal": "1"
 "Retroalimentar o vocabulário": "sim"
 "Modo de aprendizado": "perguntar"
-"Estrutura do post em canal": ""
-"Estrutura da mensagem": ""
+"Emoji do título do post": ""
+"PS no post novo": "não"
+"Itálico em estrangeirismo": "sim"
+"Termos sem itálico": []
+"Artigo antes de nome": "livre"
+"Linha de link em post novo": ""
+"Saudação em resposta de thread": "livre"
+"Transmitir resposta de DM": "não"
 "Estilo de escrita": ""
-"Formato de menção e de nome": ""
 "Formato de link": ""
-"Destaque no texto": ""
-"Saudação": ""
-"Resposta em DM": ""
-"Correção de mensagem publicada": ""
 "Contexto compartilhado": ""
 "Assuntos que não se resolvem no Slack": ""
 ```
+
+`Emoji do título do post` é o shortcode que abre o título de um post novo, ou vazio para não ter emoji. `PS no post novo` é `sim` quando o post termina com um PS pedindo para responder na thread. `Termos sem itálico` lista as palavras estrangeiras que ficam sem itálico, como siglas que já são de uso comum. `Artigo antes de nome` é `livre`, que segue o tom de voz, ou `nunca`. `Linha de link em post novo` descreve uma linha de link isolada ao fim de um post novo, ou fica vazio. `Saudação em resposta de thread` é `livre` ou `menção`. `Transmitir resposta de DM` é `sim` quando a resposta numa DM também vai para o canal da conversa. `Estilo de escrita`, `Formato de link` e `Contexto compartilhado` guardam regras extras do projeto, como um tratamento que a organização evita, um endereço que se encurta ou a lista de canais privados.
 
 ## Instruções
 
@@ -52,20 +55,79 @@ Resolva cada pessoa citada pelo ID dela no Slack, buscando no Slack. Uma pessoa 
 
 ### Passo 3
 
-Escreva o texto com `redigir-com-tom-de-voz`, e passe o contexto: canal ou DM, e a pessoa ou o canal, para a consulta do vocabulário usar as tags certas. Aplique os parâmetros de escrita que estiverem preenchidos: `Estrutura do post em canal`, `Estrutura da mensagem`, `Estilo de escrita`, `Saudação`, `Destaque no texto`, `Contexto compartilhado` e, em DM, `Resposta em DM`.
+Escreva o texto com `redigir-com-tom-de-voz`, e passe o contexto: canal ou DM, e a pessoa ou o canal, para a consulta do vocabulário usar as tags certas. Siga as regras de redação abaixo e os parâmetros de escrita que estiverem preenchidos.
 
 Termos proibidos e alternativas vêm do vocabulário, não desta habilidade.
+
+**Estrutura da mensagem**
+
+- Uma mensagem, uma finalidade. Agradecer a alguém e posicionar o grupo são duas mensagens: a primeira menciona a pessoa, a de posicionamento geral não menciona ninguém.
+- Uma mensagem com mais de um parágrafo de conteúdo abre com um resumo curto, rotulado como o vocabulário define, e depois a versão completa. Ficam sem resumo a reação, a resposta de uma frase e o pedido que cabe em uma frase mais as linhas de link.
+- Cada pedido aparece uma vez, na mensagem de quem ele se dirige. A mensagem de contexto não repete o pedido da seguinte. O pedido que fecha a mensagem fica em parágrafo próprio.
+- Em thread com várias pessoas, quando cada uma perguntou ou pediu algo, escreva uma mensagem por destinatário, com a menção real. Um aviso de status a quem acompanha a thread é uma mensagem só: o fato, a consequência provável e o próximo passo, sem resumir o conteúdo e sem pedir permissão.
+- Nunca assuma compromisso nem ofereça ajuda que a pessoa não pediu. Concordar e agradecer basta. Na dúvida, use o plural ou deixe de fora.
+- Status de revisão ou aprovação: a menção e o status numa frase. Elogio ou comentário pessoal vai em parágrafo separado; sem elogio, sem o parágrafo.
+- Aviso de status numa thread que já tem a decisão: abra pelo que foi feito e quando, sem repetir o que a thread já mostra, e diga depois quem está com a bola e o que a pessoa fará.
+- Acompanhamento no essencial: o que existe (o card), o bloqueio concreto e a consequência para quem lê. O detalhe técnico fica no card ou no pull request. Uma proposta paralela vai no fim: pergunte se já existe algo, ofereça-a como opção e devolva a decisão.
+- Resposta numa thread em que alguém reportou um bug: diga só o que foi feito, como a issue aberta e linkada, e uma estimativa em hedge. Não explique a causa nem prometa a correção, a menos que perguntem. Uma decisão que não é de quem escreve vai a quem decide, com uma pergunta só.
+- Uma decisão de escopo anunciada leva o porquê em uma frase, em primeira pessoa.
+- Pedir o trabalho de alguém: a menção, o pedido direto, o que você estava fazendo e o valor do trabalho da pessoa. Enquadre como ajuda, nunca como comparação com o que você fez.
+- Pergunta ao time sobre prazo: um parágrafo curto que termina na pergunta, e um segundo com o que se quer fazer, a data que pressiona e o que você faz se der certo.
+- Pedido simples de acesso ou favor: um parágrafo, com o que você está fazendo, o que precisa e quem pode ajudar, sem justificativa. Numa thread que já existe, só o contexto e o pedido.
+- Em DM, um recado com partes (contexto, pedido, combinado) vai em mensagens curtas e sequenciais, uma ideia por mensagem. Corte o detalhe técnico que não ajuda a identificar o assunto: o link leva ao detalhe.
+- Follow-up atrasado em DM: abra retomando o assunto, dê o status e o pedido, mande um link por mensagem e deixe o motivo do atraso por último, em uma frase no nível do assunto. Uma atualização a quem acompanha o assunto traz o que foi feito e o que está sem resposta numa mensagem curta, e a pergunta numa segunda.
+
+**Post novo em canal**
+
+- A primeira linha é o título em negrito, numa frase, com o `Emoji do título do post`, seguida de uma linha em branco e do corpo. O conector recebe markdown: o negrito é `**título**`, e com `*título*` ele vira itálico. Cada mensagem de um lote leva o próprio título.
+- Com `PS no post novo` em `sim`, o post termina, depois de uma linha em branco, com um PS pedindo para responder na thread, na frase do vocabulário. Num lote de mensagens seguidas no mesmo canal, a saudação vai só na primeira e o PS só na última.
+- Uma resposta dentro de uma thread existente nunca leva título nem PS. Antes de abrir um post novo, confira se o canal já tem uma thread sobre o assunto e responda nela.
+- Uma mensagem por pull request, nunca vários numa só. Se eles se relacionam, cada mensagem cita o outro com link no corpo.
+- Um pedido de revisão de pull request leva no título o contexto, o link do PR, o link do card e, ao fim, a menção de quem acompanha.
+- Uma nova rodada de revisão, depois de ajustar os comentários, vai em resposta na thread, nesta ordem: o link do PR, o que ele corrige, o contexto e o alcance, a menção de quem tinha comentado dizendo que já ajustou, e o pedido ao grupo. Sem título e sem PS.
+
+**Escrita**
+
+- Com `Itálico em estrangeirismo` em `sim`, toda palavra de outro idioma solta numa frase fica em itálico, como `_deploy_` e `_bug_`, também dentro de um título em negrito (`**Revisão do _deploy_**`) e num produto com nome estrangeiro. As palavras de `Termos sem itálico` ficam como estão. Varra o texto antes de entregar. Um texto em outro idioma não leva termo em português solto, só nome próprio entre aspas.
+- Funda as frases que fluem juntas num parágrafo e separe os pontos distintos. Uma atualização com várias partes abre com uma linha terminada em dois-pontos, e cada parte vai em parágrafo próprio. Um relato de problema tem sintoma, evidência e abrangência, cada um num parágrafo.
+- Uma frase longa com oração relativa encadeada vira duas curtas. Um pronome ambíguo vira o substantivo. Não repita a mesma palavra na mesma frase.
+- Negrito fica para o título do post e para cabeçalhos, não para o rótulo de cada item de lista.
+- Correção de erro de digitação numa mensagem já publicada: um asterisco depois da palavra corrigida, como "documentação*", só na edição. Pelo conector, um asterisco solto pode abrir negrito, então confira.
+- Não use tratamento de gênero marcado nem ele ou ela com quem não declarou pronomes. Cite a pessoa sem pronome e sem adjetivo ou particípio de gênero.
+- Com `Artigo antes de nome` em `nunca`, não ponha artigo antes de nome nem de menção ("com Ana", "pra Caio"). Desfaça a contração com a preposição e, se a frase ficar estranha, ponha o nome como sujeito. A menção não dispensa a varredura.
+
+**Menção e link**
+
+- Quem é citado vira menção real: no Slack `<@ID>`, no GitHub `@login` e no Jira o chip com o `accountId`. O destinatário de uma DM 1:1 não precisa de menção, os terceiros citados nela e todos em canal levam. A mesma pessoa citada duas vezes leva a menção real na primeira, e a segunda pode ser só o nome.
+- Sem o ID, mantenha o nome em texto e avise. Nunca invente. O login do GitHub vem do registro da pessoa ou do autor de pull requests recentes.
+- Em um post sobre um card, o texto do link pode ser o título do card. Uma chave solta ou uma URL crua em outra linha não conta como link.
+- Com `Linha de link em post novo` preenchida, o post novo termina com essa linha, com linha em branco antes e depois, e o link também continua no identificador do texto. Fora do Slack, nenhum shortcode de emoji aparece certo, então a linha não vai.
+- Com um link só, o texto pode ir para colar. Em canal compartilhado com outra organização, se o rascunho falhar, entregue as URLs soltas, uma por linha, e avise que o Slack só pré-visualiza os 5 primeiros links.
+
+**Saudação e resposta**
+
+- Em DM, cumprimente só na primeira mensagem do dia. Leia o histórico desde o início do dia, no fuso da pessoa: se já houve mensagem de qualquer um dos dois, não use saudação. Para retomar o fio com um assunto novo, abra direto ou com a abertura do vocabulário.
+- Com `Saudação em resposta de thread` em `menção`, uma resposta numa thread de canal dirigida a uma pessoa abre com a menção dela, sem "Oi" nem "Bom dia", mesmo longa. A saudação continua em post novo de canal e na primeira DM do dia.
+- Responda na thread em que a pessoa mandou o assunto, com o `thread_ts` da mensagem original. Em DM, com `Transmitir resposta de DM` em `sim`, passe também `reply_broadcast: true`.
+
+**Contexto compartilhado**
+
+- Quando o motivo da mensagem é uma mensagem de outra thread ou canal, além do link, encaminhe a original ao canal. A ferramenta não encaminha: avise a pessoa de que ela faz isso à mão. Se o link é só referência secundária, fica só o link.
+- Uma mensagem a alguém nunca cita reunião ou conversa com gente de fora do assunto, nem o tema dela.
+- Texto público nunca revela que algo foi alinhado em DM ou em conversa privada. Justifique pelo lado da pessoa. Ao citar um alinhamento, diga quando aconteceu e apresente a regra como recomendação de quem a defende, não como aprovação de terceiro. Se o momento não importa a quem lê, omita.
+- Um canal privado nunca é nomeado em texto público: descreva-o ("um canal de Vendas") ou omita. Confira a visibilidade do canal no registro de canais do projeto.
+- Em canal de um time, não use a convenção de outro time como contraponto, a menos que a comparação seja o assunto.
 
 ### Passo 4
 
 Ajuste o formato do Slack, valendo para qualquer texto:
 
-- Troque o nome de quem é citado pela menção real, com o ID do Passo 2. Aplique `Formato de menção e de nome`.
+- Troque o nome de quem é citado pela menção real, com o ID do Passo 2, como em `Menção e link`.
 - Todo PR, issue ou recurso citado por número ou chave leva link de verdade em cima do identificador, em markdown padrão. Aplique `Formato de link`.
 - Um texto com link nunca segue a sintaxe `<url|rótulo>`: o editor do Slack não a interpreta e mostra tudo cru.
 - Emoji padrão do Slack vai no formato `:nome:`, nunca o caractere unicode.
 - Identificador técnico, como nome de projeto, de branch ou de label, vai entre crases.
-- Resposta a uma mensagem vai na thread dela. Aplique `Resposta em DM` quando for DM.
+- Resposta a uma mensagem vai na thread dela, como em `Saudação e resposta`.
 
 ### Passo 5
 
