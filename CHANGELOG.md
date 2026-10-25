@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.5.0](https://github.com/jimmyandrade/harness/compare/v1.4.0...v1.5.0) (2026-10-25)
+
+
+### Features
+
+* publish every skill to Notion ([#480](https://github.com/jimmyandrade/harness/issues/480)) ([e997d8b](https://github.com/jimmyandrade/harness/commit/e997d8babd024ffa379d9d9880f028ac885f1612))
+
+
+### Bug Fixes
+
+* answer a self-review on the thread ([#479](https://github.com/jimmyandrade/harness/issues/479)) ([a12ac48](https://github.com/jimmyandrade/harness/commit/a12ac486dfde0e8197dc3e49e2df58accf4d19c0))
+
 ## [1.4.0](https://github.com/jimmyandrade/harness/compare/v1.3.0...v1.4.0) (2026-10-25)
 
 
