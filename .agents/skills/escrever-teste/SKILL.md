@@ -3,7 +3,7 @@ name: escrever-teste
 description: Escreve ou altera testes de unidade seguindo a convenção de testes do projeto, com o Better Specs como padrão. Usada quando uma mudança precisa de teste novo, quando um teste existente muda ou quando uma revisão pede um teste. Não serve para decidir o que testar, rodar a suíte inteira nem refatorar testes antigos.
 metadata:
   author: jimmyandrade
-  version: "0.2.1"
+  version: "0.3.0"
   notion: "false"
   related:
     - criar-commit
@@ -20,13 +20,14 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ```yaml
 "Convenção de testes": "Better Specs"
+"Endereço da convenção de testes": "https://www.betterspecs.org/"
 "Idioma dos títulos dos testes": "inglês"
 "Alcance da mudança": "só as linhas tocadas"
 "Comando de testes": ""
 "Modo de aprendizado": "perguntar"
 ```
 
-`Convenção de testes` é o nome do guia que os títulos e a estrutura seguem. `Alcance da mudança` é `só as linhas tocadas` ou `arquivo inteiro`. `Comando de testes` roda os testes do arquivo afetado.
+`Convenção de testes` é o nome do guia que os títulos e a estrutura seguem, e `Endereço da convenção de testes` é onde lê-lo. `Alcance da mudança` é `só as linhas tocadas` ou `arquivo inteiro`. `Comando de testes` roda os testes do arquivo afetado.
 
 ## Instruções
 
