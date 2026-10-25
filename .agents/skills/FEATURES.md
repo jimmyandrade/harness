@@ -835,7 +835,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Properties**:
   - Lives at `.agents/skills/descrever-habilidade-ou-schema/SKILL.md`
   - Does not write the skill body, grade output quality, describe a product, or write the skill page in Notion
-  - Writes every description in the third person, always: what the skill does and "Usada quando" with the intent of whoever asks. "Use essa habilidade sempre que" is an imperative and does not belong. "NÃO serve para" closes the description when there is something the skill must not do
+  - Writes every description in the third person, always. The first sentence says what the skill does. "Usada quando" follows with the intent of whoever asks and does not open the description. "Use essa habilidade sempre que" is an imperative and does not belong. "NÃO serve para" closes the description when there is something the skill must not do
   - Keeps the triggers in the description, because Notion automatic use loads that property and decides from it whether to load the skill
   - Requires a trigger suite with an obvious task and a paraphrased request that should load the skill, and an unrelated topic plus a near miss the skill does not cover that should not
   - On undertriggering, when the skill does not load, the person enables it by hand, or asks when to use it, adds detail and the technical term
@@ -1342,7 +1342,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Description**: Review a written skill, flag description and structure issues, and suggest tests from its purpose
 - **Properties**:
   - Lives at `.agents/skills/revisar-habilidade/SKILL.md`
-  - Flags a vague description, a missing trigger, and a structural problem. A description is always in the third person. "Use essa habilidade sempre que" is an imperative and does not belong. "NÃO serve para" closes it when there is something the skill must not do
+  - Flags a vague description, a missing trigger, and a structural problem. A description is always in the third person and opens with what the skill does. "Usada quando" follows and does not open it. "Use essa habilidade sempre que" is an imperative and does not belong. "NÃO serve para" closes it when there is something the skill must not do
   - Identifies the risk of triggering too often or too rarely
   - Suggests an obvious task and a paraphrased request that should trigger, and an unrelated topic plus a near miss that should not
   - Suggests each acceptance criterion already written as a Portuguese Gherkin example, and a with-skill against without-skill comparison
