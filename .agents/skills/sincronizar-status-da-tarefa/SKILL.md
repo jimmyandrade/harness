@@ -4,7 +4,7 @@ description: Sincroniza o status de tarefas, cards ou issues com o estado do pul
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.1"
+  version: "0.2.2"
   notion: "false"
   related:
     - criar-commit
@@ -148,8 +148,10 @@ A habilidade leva "Exportar relatório em CSV" de "a fazer" a "concluído". A se
 - O resultado de uma busca grande pode vir em arquivo, às vezes como lista direta sem objeto em volta. Confira o formato antes de filtrar.
 - Uma transição devolve a tarefa inteira. O status novo está no campo de status desse retorno.
 - A tarefa fica em "em andamento" quando o PR está em rascunho, mesmo que ele esteja aberto.
-- A habilidade parece só para quando a pessoa pede a varredura. Depois de um commit ou de uma mudança no pull request, ela roda.
-- `levantar-contexto-do-pull-request` parece citação a tirar porque fica fora do Notion. A relação continua em `related` e no passo que lê o estado do pull request. Esta habilidade também fica fora do Notion, para o nome dela poder continuar no texto.
+- A habilidade parece servir só quando a pessoa pede a varredura. Ela também roda depois de um commit ou de uma mudança no estado do pull request.
+- `levantar-contexto-do-pull-request` fica de fora do Notion. A relação com ela continua em `related` e no passo que lê o estado do pull request.
+- Esta habilidade também fica de fora do Notion. Por isso o nome dela pode continuar no texto.
+- Uma frase comprimida parece um recado interno. A skill fica fácil de ler por uma pessoa.
 
 ## Scripts disponíveis
 
