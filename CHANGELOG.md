@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.2.0](https://github.com/jimmyandrade/harness/compare/v1.1.0...v1.2.0) (2026-10-25)
+
+
+### Features
+
+* require an assignee and a label on dependency updates ([#462](https://github.com/jimmyandrade/harness/issues/462)) ([af8939d](https://github.com/jimmyandrade/harness/commit/af8939d331ec90ee34e13283723a059be8f4c48c))
+
+
+### Bug Fixes
+
+* finish every skill in a code task ([#463](https://github.com/jimmyandrade/harness/issues/463)) ([54f9d12](https://github.com/jimmyandrade/harness/commit/54f9d12d7c86cc02695f96508984c0d4f451447d))
+
 ## [1.1.0](https://github.com/jimmyandrade/harness/compare/v1.0.1...v1.1.0) (2026-10-25)
 
 
