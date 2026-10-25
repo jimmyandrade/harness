@@ -426,7 +426,7 @@ test("terms takes the new fields as flags", () => {
     "--glossary", root, "terms", "--language", "pt-BR", "--mode", "insert",
     "--state", "allowed_with_care", "--term", "leve também", "--categories", "commerce", "--categories", "cta",
     "--description", "convite", "--when", "depois da escolha", "--allowed-in", "whatsapp", "--forbidden-in", "feed",
-    "--decided-by", "Maria Silva", "--source", "https://example.com/terms/7",
+    "--decided-by", "Maria Silva", "--decided-at", "2026-10-23", "--source", "https://example.com/terms/7",
   ])
   assert.equal(code, 0)
   assert.deepEqual(JSON.parse(readFileSync(file, "utf8"))["leve também"], {
@@ -438,6 +438,7 @@ test("terms takes the new fields as flags", () => {
     allowed_in: ["whatsapp"],
     forbidden_in: ["feed"],
     decided_by: { name: "Maria Silva" },
+    decided_at: "2026-10-23",
     source: "https://example.com/terms/7",
   })
 })

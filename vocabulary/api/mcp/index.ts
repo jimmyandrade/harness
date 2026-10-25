@@ -135,10 +135,11 @@ const tools = [
                 },
                 required: ["name"],
               },
+              decided_at: { type: "string", description: "The day the level was decided, as an ISO 8601 date, YYYY-MM-DD. Do not repeat it in notes." },
               source: { type: "string", description: "Where the row came from, such as the URL of a page. An upsert finds a renamed term by it." },
               notes: {
                 type: "string",
-                description: "Free text kept with the row: the history of the term, who or what decided it, a date, a link, or a limit that description and when do not say. description still says what the term is.",
+                description: "Free text kept with the row: the history of the term, a link, or a limit that description and when do not say. Who decided goes in decided_by and the day in decided_at; do not repeat them here. description still says what the term is.",
               },
               case_sensitive: {
                 type: "boolean",
