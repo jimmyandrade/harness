@@ -3,7 +3,7 @@ name: levantar-ambiente-do-repositorio
 description: Levanta o ambiente de trabalho de um repositório antes de escrever código, testes, commit ou pull request. Acha o runtime e como ativá-lo, os comandos de instalar, lint, tipos, testes e build, as habilidades do repositório que se aplicam e as pegadinhas que ele documenta. Não serve para rodar os comandos, instalar dependências nem decidir a convenção de código.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.2.1"
   notion: "false"
   related:
     - criar-commit
@@ -35,7 +35,7 @@ Peça o repositório, ou a cópia de trabalho em que a mudança será feita. O a
 
 ### Passo 2
 
-Leia os `Arquivos de instruções` e liste as `Pastas de habilidades do repositório`, inclusive a pasta `.github`, antes de concluir que ele não tem convenções. Liste também as habilidades que chegam por dependência ou plugin: uma dependência dos `Manifestos de comandos` que traz habilidades, como o core harness, e os plugins habilitados nas configurações da ferramenta. Uma habilidade que a sessão não carregou é lida do `SKILL.md` dela. Leia o nome e a descrição de cada habilidade do repositório, e abra a que trata de ambiente, de git, de pull request, de testes, de lint ou de criar o tipo de coisa que a mudança cria.
+Leia os `Arquivos de instruções` e liste as `Pastas de habilidades do repositório`, inclusive a pasta `.github`, antes de concluir que ele não tem convenções. Liste também as habilidades que chegam por dependência ou plugin: uma dependência dos `Manifestos de comandos` que traz habilidades, como o core harness, e os plugins habilitados nas configurações da ferramenta. Uma habilidade que a sessão não carregou é lida do `SKILL.md` dela. Quando a habilidade carregada na sessão tem `metadata.version` diferente da que o repositório fixa, no próprio repositório ou na dependência, siga o `SKILL.md` do repositório e diga que o plugin instalado está desatualizado. Leia o nome e a descrição de cada habilidade do repositório, e abra a que trata de ambiente, de git, de pull request, de testes, de lint ou de criar o tipo de coisa que a mudança cria.
 
 ### Passo 3
 
