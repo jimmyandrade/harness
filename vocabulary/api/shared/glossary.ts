@@ -23,7 +23,8 @@
  * forbidden_in change the level when a read carries one of those tags.
  * decided_by is who decided, as the people fields of package.json: an object
  * with name and optionally email and url. A plain string still reads as the
- * name, and the next write stores it as an object. source is where the row
+ * name, and the next write stores it as an object. decided_at is the day of
+ * that decision, as an ISO 8601 date, YYYY-MM-DD. source is where the row
  * came from. Any row
  * may keep case_sensitive: true, for a brand spelling such as "iPhone". Its
  * key keeps that casing. A read still finds it in another case and says the
@@ -132,6 +133,7 @@ export type Entry = {
   allowedIn?: readonly string[]
   forbiddenIn?: readonly string[]
   decidedBy?: Person
+  decidedAt?: string
   source?: string
   notes?: string
   caseSensitive?: boolean
@@ -197,6 +199,7 @@ export function load(text: string): Entry[] {
     if (row.allowed_in !== undefined) entry.allowedIn = row.allowed_in
     if (row.forbidden_in !== undefined) entry.forbiddenIn = row.forbidden_in
     if (row.decided_by !== undefined) entry.decidedBy = row.decided_by
+    if (row.decided_at !== undefined) entry.decidedAt = row.decided_at
     if (row.source !== undefined) entry.source = row.source
     if (row.notes !== undefined) entry.notes = row.notes
     if (row.case_sensitive === true) entry.caseSensitive = true
@@ -577,6 +580,7 @@ function withStored(entries: readonly Entry[], item: BulkTerm, mode: WriteMode):
     allowed_in: keeps("allowed_in") ? [...(stored.allowedIn ?? [])] : item.allowed_in,
     forbidden_in: keeps("forbidden_in") ? [...(stored.forbiddenIn ?? [])] : item.forbidden_in,
     decided_by: keeps("decided_by") ? stored.decidedBy : item.decided_by,
+    decided_at: keeps("decided_at") ? stored.decidedAt : item.decided_at,
     source: keeps("source") ? stored.source : item.source,
     notes: keeps("notes") ? stored.notes : item.notes,
     case_sensitive: keeps("case_sensitive") ? stored.caseSensitive === true : item.case_sensitive,
@@ -661,6 +665,7 @@ function serialize(entries: readonly Entry[]): string {
     if (entry.allowedIn !== undefined && entry.allowedIn.length > 0) row.allowed_in = entry.allowedIn
     if (entry.forbiddenIn !== undefined && entry.forbiddenIn.length > 0) row.forbidden_in = entry.forbiddenIn
     if (entry.decidedBy !== undefined) row.decided_by = entry.decidedBy
+    if (entry.decidedAt !== undefined) row.decided_at = entry.decidedAt
     if (entry.source !== undefined) row.source = entry.source
     if (entry.notes !== undefined) row.notes = entry.notes
     if (entry.caseSensitive === true) row.case_sensitive = true
@@ -682,6 +687,7 @@ function fillTerm(shell: Entry, item: BulkTerm, entries: Entry[], writing: Reado
   if (item.substitution !== undefined) shell.substitution = item.substitution
   if (item.when !== undefined) shell.when = item.when
   if (item.decided_by !== undefined) shell.decidedBy = item.decided_by
+  if (item.decided_at !== undefined) shell.decidedAt = item.decided_at
   if (item.source !== undefined) shell.source = item.source
   if (item.notes !== undefined) shell.notes = item.notes
   if (item.case_sensitive) shell.caseSensitive = true
@@ -718,6 +724,7 @@ export function registrationOf(language: string, entry: Entry): TermRegistration
   if (entry.allowedIn !== undefined && entry.allowedIn.length > 0) registration.allowed_in = [...entry.allowedIn]
   if (entry.forbiddenIn !== undefined && entry.forbiddenIn.length > 0) registration.forbidden_in = [...entry.forbiddenIn]
   if (entry.decidedBy !== undefined) registration.decided_by = entry.decidedBy
+  if (entry.decidedAt !== undefined) registration.decided_at = entry.decidedAt
   if (entry.source !== undefined) registration.source = entry.source
   if (entry.notes !== undefined) registration.notes = entry.notes
   if (entry.caseSensitive === true) registration.case_sensitive = true
@@ -884,6 +891,7 @@ function sameFields(entry: Entry, item: BulkTerm): boolean {
     && entry.substitution === item.substitution
     && entry.when === item.when
     && samePerson(entry.decidedBy, item.decided_by)
+    && entry.decidedAt === item.decided_at
     && entry.source === item.source
     && entry.notes === item.notes
     && sameList(entry.examples, item.examples)

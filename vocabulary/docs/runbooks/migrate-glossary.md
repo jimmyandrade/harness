@@ -53,6 +53,7 @@ Run the commands from the project that holds the glossary. With the MCP server i
          "alternatives": ["another term"],
          "forbidden_in": ["feed"],
          "decided_by": { "name": "Person name", "email": "person@example.com" },
+         "decided_at": "2026-01-31",
          "source": "https://example.com/row/1"
        }
      ]
@@ -64,6 +65,7 @@ Run the commands from the project that holds the glossary. With the MCP server i
    - Formats and channels are lowercase kebab-case, as in `tags`.
    - Leave out a field the row does not have. Do not write an empty string.
    - `decided_by` is the people object of `package.json`: `name`, and optionally `email` and `url`. Use the individual e-mail of the person, never a shared role account.
+   - `decided_at` is the day of that decision, as `YYYY-MM-DD`. Do not repeat the name or the date in `notes`.
 
 5. Test it first. A dry run validates the batch and writes nothing:
 

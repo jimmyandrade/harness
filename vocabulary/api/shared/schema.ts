@@ -193,6 +193,20 @@ export const personSchema = z.strictObject(
 )
 export type Person = z.infer<typeof personSchema>
 
+/** True for an ISO 8601 calendar date, YYYY-MM-DD, that exists. */
+function isIsoDate(text: string): boolean {
+  return z.iso.date().safeParse(text).success
+}
+
+/** The day a level was decided, as an ISO 8601 calendar date: YYYY-MM-DD. */
+const decidedAtSchema = (message: string) =>
+  z
+    .string({ error: message })
+    .transform(collapse)
+    .refine((text) => text === "" || isIsoDate(text), { error: message })
+    .transform((text) => (text === "" ? undefined : text))
+    .optional()
+
 const decidedBySchema = z.union(
   [
     z.string().transform(collapse).transform((name): Person | undefined => (name === "" ? undefined : { name })),
@@ -241,6 +255,7 @@ const bulkTermObject = z.object(
     allowed_in: tagListSchema.default([]),
     forbidden_in: tagListSchema.default([]),
     decided_by: decidedBySchema.optional(),
+    decided_at: decidedAtSchema("Provide the decision date as YYYY-MM-DD."),
     source: optionalProse("Provide the source."),
     notes: optionalProse("Provide the notes."),
     case_sensitive: caseSensitiveSchema,
@@ -267,6 +282,7 @@ export const PATCHABLE_FIELDS = [
   "allowed_in",
   "forbidden_in",
   "decided_by",
+  "decided_at",
   "source",
   "notes",
   "case_sensitive",
@@ -467,6 +483,7 @@ export const termRegistrationSchema = z.object({
   allowed_in: z.array(z.string()).optional(),
   forbidden_in: z.array(z.string()).optional(),
   decided_by: personSchema.optional(),
+  decided_at: z.string().optional(),
   source: z.string().optional(),
   notes: z.string().optional(),
   case_sensitive: z.literal(true).optional(),
@@ -548,6 +565,7 @@ export const glossaryRowSchema = z
       allowed_in: fileTags("allowed_in"),
       forbidden_in: fileTags("forbidden_in"),
       decided_by: decidedBySchema.optional(),
+      decided_at: decidedAtSchema("A glossary decided_at is not a date as YYYY-MM-DD."),
       source: fileProse("source"),
       notes: fileProse("notes"),
       case_sensitive: z.boolean({ error: "A glossary case_sensitive is not true or false." }).optional(),

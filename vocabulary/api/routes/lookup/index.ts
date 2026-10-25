@@ -42,6 +42,7 @@ export type TermLookup = {
   allowed_in?: readonly string[]
   forbidden_in?: readonly string[]
   decided_by?: Person
+  decided_at?: string
   source?: string
   notes?: string
   case_sensitive?: true
@@ -107,6 +108,7 @@ function rowOf(entry: Entry, tags: readonly string[]): Omit<TermLookup, "languag
   if (entry.allowedIn !== undefined && entry.allowedIn.length > 0) row.allowed_in = entry.allowedIn
   if (entry.forbiddenIn !== undefined && entry.forbiddenIn.length > 0) row.forbidden_in = entry.forbiddenIn
   if (entry.decidedBy !== undefined) row.decided_by = entry.decidedBy
+  if (entry.decidedAt !== undefined) row.decided_at = entry.decidedAt
   if (entry.source !== undefined) row.source = entry.source
   if (entry.notes !== undefined) row.notes = entry.notes
   return row
