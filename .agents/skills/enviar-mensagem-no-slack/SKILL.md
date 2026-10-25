@@ -3,7 +3,7 @@ name: enviar-mensagem-no-slack
 description: Redige uma mensagem de Slack, num canal, thread ou DM, e entrega o rascunho com o link do destino. Só envia com a autorização explícita da pessoa e, depois do envio, compara o proposto com o aplicado para alimentar o vocabulário. Usada quando a pessoa pede uma mensagem ou resposta no Slack. Não serve para achar conversa antiga nem cadastrar pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.5.1"
   internal: true
   notion: "false"
   related:
@@ -94,7 +94,7 @@ Termos proibidos e alternativas vêm do vocabulário, não desta habilidade.
 - Negrito fica para o título do post e para cabeçalhos, não para o rótulo de cada item de lista.
 - Correção de erro de digitação numa mensagem já publicada: um asterisco depois da palavra corrigida, como "documentação*", só na edição. Pelo conector, um asterisco solto pode abrir negrito, então confira.
 - Não use tratamento de gênero marcado nem ele ou ela com quem não declarou pronomes. Cite a pessoa sem pronome e sem adjetivo ou particípio de gênero.
-- Com `Artigo antes de nome` em `nunca`, não ponha artigo antes de nome nem de menção ("com Ana", "pra Caio"). Desfaça a contração com a preposição e, se a frase ficar estranha, ponha o nome como sujeito. A menção não dispensa a varredura.
+- Com `Artigo antes de nome` em `nunca`, não ponha artigo antes de nome nem de menção ("com Ana", "para Caio"). Desfaça a contração com a preposição e, se a frase ficar estranha, ponha o nome como sujeito. A menção não dispensa a varredura.
 
 **Menção e link**
 
@@ -107,7 +107,7 @@ Termos proibidos e alternativas vêm do vocabulário, não desta habilidade.
 **Saudação e resposta**
 
 - Em DM, cumprimente só na primeira mensagem do dia. Leia o histórico desde o início do dia, no fuso da pessoa: se já houve mensagem de qualquer um dos dois, não use saudação. Para retomar o fio com um assunto novo, abra direto ou com a abertura do vocabulário.
-- Com `Saudação em resposta de thread` em `menção`, uma resposta numa thread de canal dirigida a uma pessoa abre com a menção dela, sem "Oi" nem "Bom dia", mesmo longa. A saudação continua em post novo de canal e na primeira DM do dia.
+- Com `Saudação em resposta de thread` em `menção`, uma resposta numa thread de canal dirigida a uma pessoa abre com a menção dela, sem saudação, mesmo longa. A saudação continua em post novo de canal e na primeira DM do dia.
 - Responda na thread em que a pessoa mandou o assunto, com o `thread_ts` da mensagem original. Em DM, com `Transmitir resposta de DM` em `sim`, passe também `reply_broadcast: true`.
 
 **Contexto compartilhado**
