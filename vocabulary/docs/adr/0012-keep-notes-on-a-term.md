@@ -6,7 +6,7 @@ locale: en
 
 ## Status
 
-Accepted. The sentence that an `upsert` without `notes` clears them is superseded by ADR 0013.
+Accepted. The sentence that an `upsert` without `notes` clears them is superseded by ADR 0013. Who decided and the date moved to `decided_by` and `decided_at`, as ADR 0015 decides.
 
 ## Context
 
@@ -16,7 +16,7 @@ A voice profile written before the glossary kept, for each term, an explanation 
 
 ## Decision
 
-Any row may keep `notes`: free text for the history of the term, who or what decided it, a date, a link, or a limit that `description` and `when` do not say. The file omits it when empty. `description` still says what the term is.
+Any row may keep `notes`: free text for the history of the term, a link, or a limit that `description` and `when` do not say. Who decided goes in `decided_by` and the day in `decided_at`, not in `notes`. The file omits it when empty. `description` still says what the term is.
 
 `notes` does not change the level and a read never uses it to decide a state. `POST /v1/lookup` and `lookup_term` return it. `POST /v1/terms`, `write_terms`, and the `terms` command take it, and the `terms` command takes `--notes`. It belongs to the row, so an `upsert` without it clears it, and two equal rows are unchanged only when `notes` match.
 

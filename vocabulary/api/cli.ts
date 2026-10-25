@@ -11,6 +11,7 @@
  * --related, --tags, --allowed-in, and --forbidden-in repeat once per value.
  * --decided-by is the name of who decided; --decided-by-email and
  * --decided-by-url add the rest of the people object of package.json.
+ * --decided-at is the day of that decision, as YYYY-MM-DD.
  * --file reads the whole batch from a JSON file with the body of
  * POST /v1/terms, for a migration; --language, --mode, and --validation
  * still override it. migrate rewrites the rows that use a deprecated state or
@@ -56,6 +57,7 @@ const FIELDS = new Set([
   "decided_by",
   "decided_by_email",
   "decided_by_url",
+  "decided_at",
   "source",
   "notes",
   ...LISTS,
@@ -80,6 +82,7 @@ const MISSING: Record<string, string> = {
   decided_by: "Provide who decided.",
   decided_by_email: "Provide the e-mail of who decided.",
   decided_by_url: "Provide the URL of who decided.",
+  decided_at: "Provide the decision date as YYYY-MM-DD.",
   source: "Provide the source.",
   notes: "Provide the notes.",
   validation: "validation is optional, warn, or enforce.",
