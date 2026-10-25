@@ -4,7 +4,7 @@ description: Abre, revisa, edita e traduz issues do GitHub no idioma do projeto.
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.4.0"
   aliases:
     - definir-issue
   related:
@@ -54,8 +54,24 @@ Ao revisar ou editar, mostre a mudança antes de gravar. Uma issue em outro idio
 
 ### Passo 7
 
-Mostre o número e o link. O pull request que resolve cita a issue com `Closes #<número>`, seguindo `criar-pull-request`.
-Quando uma issue espera outra, marque em Relationships como bloqueada por ela. Quando esta issue segura a outra, marque como bloqueando. Quando só se relacionam, use relates to. Pai e filha usam parent. Não grave a dependência num comentário.
+Abra a issue no GitHub.
+
+```mermaid
+flowchart LR
+  A{Dá para abrir a issue?} -->|pelo gh| B[Abra com o gh]
+  A -->|pelo Notion, via MCP ou conector| C[Abra por essa conexão]
+  A -->|não| D[Entregue o título e o corpo prontos]
+```
+
+O título e o corpo prontos só saem quando a pessoa não consegue abrir a issue.
+O Notion alcança o GitHub pelo MCP e pelos conectores.
+Mostre o número e o link.
+O pull request que resolve cita a issue com `Closes #<número>`, seguindo `criar-pull-request`.
+Quando uma issue espera outra, marque em Relationships como bloqueada por ela.
+Quando esta issue segura a outra, marque como bloqueando.
+Quando só se relacionam, use relates to.
+Pai e filha usam parent.
+Não grave a dependência num comentário.
 
 ### Passo 8
 
@@ -106,4 +122,4 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 2. Abrir: `gh issue create --repo <Repositório> --title "<título>" --body-file <arquivo>`.
 3. Editar: `gh issue edit <número> --repo <Repositório> --title "<título>" --body-file <arquivo>`.
 4. Bloqueada por: `gh api --method POST repos/<Repositório>/issues/<número>/dependencies/blocked_by -F issue_id=<id da outra>`. O `issue_id` é o id numérico da issue, não o número. Bloqueando troca `blocked_by` por `blocking`.
-5. No Notion, sem o `gh`: entregue o título e o corpo prontos para a pessoa abrir a issue.
+5. Quando a pessoa não consegue abrir a issue: entregue o título e o corpo prontos.
