@@ -88,7 +88,7 @@ Termos proibidos e alternativas vêm do vocabulário, não desta habilidade.
 
 **Escrita**
 
-- Com `Itálico em estrangeirismo` em `sim`, toda palavra de outro idioma solta numa frase fica em itálico, como `_deploy_`, `_bug_` e as `_stories_` do Storybook, também dentro de um título em negrito (`**Revisão do _deploy_**`) e num produto com nome estrangeiro. As palavras de `Termos sem itálico` ficam como estão. Quando o termo tem equivalente em português, prefira-o: escreva "história de usuário", não *story*. Varra o texto antes de entregar. Um texto em outro idioma não leva termo em português solto, só nome próprio entre aspas.
+- Com `Itálico em estrangeirismo` em `sim`, toda palavra de outro idioma solta numa frase fica em itálico, como `_deploy_` e `_bug_`, também dentro de um título em negrito (`**Revisão do _deploy_**`) e num produto com nome estrangeiro. As palavras de `Termos sem itálico` ficam como estão. Varra o texto antes de entregar. Um texto em outro idioma não leva termo em português solto, só nome próprio entre aspas.
 - Funda as frases que fluem juntas num parágrafo e separe os pontos distintos. Uma atualização com várias partes abre com uma linha terminada em dois-pontos, e cada parte vai em parágrafo próprio. Um relato de problema tem sintoma, evidência e abrangência, cada um num parágrafo.
 - Uma frase longa com oração relativa encadeada vira duas curtas. Um pronome ambíguo vira o substantivo. Não repita a mesma palavra na mesma frase.
 - Negrito fica para o título do post e para cabeçalhos, não para o rótulo de cada item de lista.
