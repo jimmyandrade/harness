@@ -237,7 +237,6 @@ Li a mensagem publicada na thread e comparei com o rascunho. Você trocou duas e
 - Um rascunho de resposta numa thread conta como rascunho do canal inteiro, não só da thread.
 - O endereço de uma mensagem usa o horário dela sem o ponto, depois de um `p`. Numa resposta, a thread-pai vai junto no endereço.
 - Menção só vira menção quando o texto vai pela ferramenta de rascunho ou de envio. Colada à mão, vira texto puro.
-- O conector do Slack pode acrescentar um rodapé de ferramenta depois do envio, fora do texto que você mandou.
 - Uma mensagem com um link só pode ir como texto pronto. Com dois ou mais, o rascunho evita o formato do rótulo cru.
 - Uma frase que está na mensagem publicada e não está no rascunho é da pessoa, não do rascunho. A autoria só se atribui depois de ler a mensagem publicada.
 - A busca de pessoa por e-mail completo pode não achar ninguém. Procure pelo nome.
