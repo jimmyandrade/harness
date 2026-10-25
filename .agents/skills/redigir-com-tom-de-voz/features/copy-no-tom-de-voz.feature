@@ -15,12 +15,12 @@ Funcionalidade: Copy no tom de voz do projeto
       Dado que existe um slogan, uma headline, uma legenda, uma descrição de produto, uma bio, um e-mail, uma mensagem, uma campanha, uma apresentação, uma inscrição, uma abordagem, um CTA, um nome, uma microcopy ou uma comunicação institucional
       Quando a pessoa pede a copy
       Então a skill redige no tom de voz
-      E considera o guia de tom de voz, o contexto, o canal, o público, as fontes da marca, o vocabulário e a intenção criativa
+      E considera o contexto, o canal, o público, as fontes da marca, o vocabulário e a intenção criativa
 
   Regra: A copy espera a fonte
 
     Exemplo: Contexto ausente
-      Dado que existe um texto sem o guia de tom de voz, contexto, canal, público, fonte da marca, vocabulário ou intenção criativa
+      Dado que existe um texto sem contexto, canal, público, fonte da marca, vocabulário ou intenção criativa
       Quando a skill vai escrever ou aprovar
       Então ela pede o que falta
       Mas não aprova a copy

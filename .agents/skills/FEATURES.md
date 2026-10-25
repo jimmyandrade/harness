@@ -1292,7 +1292,7 @@ How these skills relate is in `README.md`, in this folder.
   - Without a terminal and without the MCP server, as in a Notion agent, reads the glossary only from a source the project instructions name, or stops
   - Reads the glossary with the tags of the speaker, the event, and the channel of the text, so a term of another context stays out
   - Writes the stored spelling of a case-sensitive term when a read reports case_matches false
-  - Consults the voice guide named by `Guia de tom de voz` before creating, writing, editing, reviewing, or replying, and waits when that guide, the context, the channel, the audience, the brand sources, the glossary, or the creative intent is missing
+  - Consults the vocabulary and this skill's voice rules before creating, writing, editing, reviewing, or replying, and waits when the context, the channel, the audience, the brand sources, the glossary, or the creative intent is missing
   - Uses each term as its level says: forbidden never, strongly_discouraged only on request or under the exception in when, discouraged only with the scene in when, allowed_with_care as when says
   - Keeps out a forbidden term, a generic phrase, AI-sounding text, and language the glossary marks as misaligned
   - Treats an emoji as a glossary term. Without a row, the copy waits
