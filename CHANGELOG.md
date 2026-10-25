@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/jimmyandrade/harness/compare/v1.2.0...v1.2.1) (2026-10-25)
+
+
+### Bug Fixes
+
+* open the pull request with its label ([#465](https://github.com/jimmyandrade/harness/issues/465)) ([77c1c4c](https://github.com/jimmyandrade/harness/commit/77c1c4c7b28415e9efcdbec0419e92e6b119bdea))
+
 ## [1.2.0](https://github.com/jimmyandrade/harness/compare/v1.1.0...v1.2.0) (2026-10-25)
 
 
