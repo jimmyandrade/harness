@@ -3,7 +3,7 @@ name: atender-revisao-de-pull-request
 description: Atende a revisão recebida num pull request, de pessoa ou de bot. Lê os comentários abertos, classifica cada sugestão, aplica o que é seguro, responde cada thread e resolve as atendidas. Sem PR informado, lista os seus que precisam de atenção. Não serve para revisar o PR de outra pessoa nem para abrir o PR.
 metadata:
   author: jimmyandrade
-  version: "0.11.0"
+  version: "0.12.0"
   notion: "false"
   aliases:
     - resolver-comentarios-de-revisao
@@ -44,8 +44,10 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 ```
 
 `Fechar conversa com a confiança` em `sim` faz a mensagem que fecha uma conversa dizer o quanto você tem de confiança de que o ponto foi resolvido. `Rótulo de prioridade no texto` em `não` mantém o nome da categoria fora das respostas. `Idioma do relatório` e `Agrupar o relatório por prioridade` mandam no relatório final. `Modo de execução` é `interativo`, com a pessoa na frente, ou `agendado`, sem ninguém. `Aplicar em execução agendada` é `estrutural`, que aplica só o estrutural, ou `não`, que não aplica nada e deixa tudo no resumo. `Aprovação para mudar comportamento` é `pedir` ou `não pedir`. `Régua de mudança de comportamento` lista o que o projeto conta como mudança de comportamento, como condicional, validação, cache, rastreamento ou pagamento. `Lentes de revisão` lista critérios que você aplica ao decidir, sem citá-los na resposta.
+`Idioma da resposta à revisão` nomeia o idioma da resposta.
+O valor `o idioma do comentário` faz cada resposta sair no idioma daquele comentário.
 `Ler o texto antes de publicar` em `sim` mostra a resposta a outra pessoa e espera o sim.
-Comentário de self review, da mesma pessoa que pediu o atendimento, recebe a resposta na hora, com o que mudou e o commit.
+Comentário de self review, da mesma pessoa que pediu o atendimento, recebe a resposta na hora, com o que mudou, as linhas alteradas e o commit.
 A mensagem do bot é lida, respondida e considerada.
 A resposta a ele é publicada sem esperar que a pessoa leia esse texto antes.
 
@@ -88,11 +90,15 @@ Se a decisão vale além deste PR, grave a lição nas instruções do projeto e
 
 ### Passo 6
 
-Responda cada thread em `Idioma da resposta à revisão`: o que mudou, com o commit citado pelo SHA curto e linkado para o commit (por exemplo, `[`abc1234`](URL do commit)`), ou por que não muda. Toda thread tratada fica com uma resposta registrada, inclusive a de bot e a decidida fora do PR. Comentário desatualizado ganha a explicação do que mudou desde então. Discordância e fora de escopo viram pergunta, nunca veredito. A resposta a uma pessoa trata do ponto que ela escreveu: retoma a ideia dela e diz o que mudou, e nunca é uma fórmula colada. Com `Rótulo de prioridade no texto` em `não`, o nome da categoria nunca aparece.
+Responda cada thread no idioma de `Idioma da resposta à revisão`.
+Com esse parâmetro em `o idioma do comentário`, a resposta sai no idioma do comentário.
+A resposta diz o que mudou.
+Quando o texto mudou, ela mostra as linhas alteradas num bloco, com o que saiu e o que entrou.
+Ela cita o commit pelo SHA curto linkado, como `[`abc1234`](URL do commit)`, ou diz por que não muda. Toda thread tratada fica com uma resposta registrada, inclusive a de bot e a decidida fora do PR. Comentário desatualizado ganha a explicação do que mudou desde então. Discordância e fora de escopo viram pergunta, nunca veredito. A resposta a uma pessoa trata do ponto que ela escreveu: retoma a ideia dela e diz o que mudou, e nunca é uma fórmula colada. Com `Rótulo de prioridade no texto` em `não`, o nome da categoria nunca aparece.
 
 Com `Ler o texto antes de publicar` em `sim`, mostre a resposta a outra pessoa e espere o sim.
 Comentário de self review, da mesma pessoa que pediu o atendimento, recebe a resposta na hora.
-A resposta diz o que mudou e cita o commit.
+A resposta diz o que mudou, mostra as linhas alteradas e cita o commit.
 A mensagem do bot é lida, respondida e considerada.
 A resposta a ele é publicada sem esperar que a pessoa leia esse texto antes.
 
@@ -140,7 +146,7 @@ Se você corrigir o que um comentário apontou sem conferir o código de agora, 
 Se você mostrar a resposta do self review e esperar um sim, o comentário da própria pessoa fica sem resposta.
 
 1. Publique a resposta na hora.
-2. Diga o que mudou e cite o commit.
+2. Diga o que mudou, mostre as linhas alteradas e cite o commit.
 3. A espera de `Ler o texto antes de publicar` vale para a resposta a outra pessoa.
 
 ### Thread resolvida sem resposta
@@ -148,7 +154,7 @@ Se você mostrar a resposta do self review e esperar um sim, o comentário da pr
 Se você resolver a thread sem responder, quem comentou não sabe o que foi feito.
 
 1. Responda antes de resolver.
-2. Diga o commit ou o motivo.
+2. Diga o que mudou, mostre as linhas alteradas e cite o commit, ou diga o motivo.
 
 ### Tudo que o bot pede vira mudança
 
@@ -220,7 +226,7 @@ Recusei: o gerador reescreve o arquivo a cada release. Gravei a exceção nas in
 
 ### o comentário de self review já está no commit
 
-A pessoa comentou no próprio pull request. A sugestão já estava no commit. A resposta foi publicada na thread, com o SHA curto linkado, e a thread foi resolvida. No relatório, esse comentário entra como aceito: a sugestão já estava no commit.
+A pessoa comentou no próprio pull request, em português, e o projeto pede a resposta no idioma do comentário. A sugestão já estava no commit. A resposta foi publicada na thread, em português, com as linhas alteradas e o SHA curto linkado, e a thread foi resolvida. No relatório, esse comentário entra como aceito: a sugestão já estava no commit.
 
 ### Aplique a revisão do meu PR
 
@@ -235,7 +241,7 @@ Achei cinco comentários abertos. Dois eram estruturais, um nome e um texto, e a
 - Um bot comenta por causa de um check que falhou: trate como os outros. A decisão de mesclar com check falhando fica com `criar-pull-request`.
 - Sem PR informado e sem nenhum PR da pessoa precisando de ação: diga isso e pare.
 - Execução agendada: siga `Aplicar em execução agendada` e deixe o resto no resumo, sem responder.
-- O comentário é self review da pessoa que pediu o atendimento: responda na hora, com o commit. Não espere o sim de `Ler o texto antes de publicar`.
+- O comentário é self review da pessoa que pediu o atendimento: responda na hora, com as linhas alteradas e o commit, no idioma de `Idioma da resposta à revisão`. Não espere o sim de `Ler o texto antes de publicar`.
 
 ## Pegadinhas
 
@@ -248,7 +254,7 @@ Achei cinco comentários abertos. Dois eram estruturais, um nome e um texto, e a
 - Resposta com apóstrofo quebra `-f body='...'` no shell. Grave a resposta num arquivo e envie com `-F body=@<arquivo>`.
 - Uma sugestão de bot e uma de pessoa se classificam pela mesma régua.
 - Aprovar o PR de outra pessoa não é papel desta habilidade.
-- `Ler o texto antes de publicar` parece segurar também o self review. O comentário da própria pessoa recebe a resposta na hora, com o commit.
+- `Ler o texto antes de publicar` parece segurar também o self review. O comentário da própria pessoa recebe a resposta na hora, com as linhas alteradas e o commit, no idioma de `Idioma da resposta à revisão`.
 
 ## Scripts disponíveis
 
