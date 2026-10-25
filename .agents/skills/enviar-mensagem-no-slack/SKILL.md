@@ -3,7 +3,7 @@ name: enviar-mensagem-no-slack
 description: Redige uma mensagem de Slack, num canal, thread ou DM, e entrega o rascunho com o link do destino. Só envia com a autorização explícita da pessoa e, depois do envio, compara o proposto com o aplicado para alimentar o vocabulário. Usada quando a pessoa pede uma mensagem ou resposta no Slack. Não serve para achar conversa antiga nem cadastrar pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.5.0"
   internal: true
   notion: "false"
   related:
@@ -37,7 +37,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Assuntos que não se resolvem no Slack": ""
 ```
 
-`Emoji do título do post` é o shortcode que abre o título de um post novo, ou vazio para não ter emoji. `PS no post novo` é `sim` quando o post termina com um PS pedindo para responder na thread. `Termos sem itálico` lista as palavras estrangeiras que ficam sem itálico, como siglas que já são de uso comum. `Artigo antes de nome` é `livre`, que segue o tom de voz, ou `nunca`. `Linha de link em post novo` descreve uma linha de link isolada ao fim de um post novo, ou fica vazio. `Saudação em resposta de thread` é `livre` ou `menção`. `Transmitir resposta de DM` é `sim` quando a resposta numa DM também vai para o canal da conversa. `Estilo de escrita`, `Formato de link` e `Contexto compartilhado` guardam regras extras do projeto, como um tratamento que a organização evita, um endereço que se encurta ou a lista de canais privados.
+`Emoji do título do post` é o shortcode que abre o título de um post novo, ou vazio para não ter emoji. `PS no post novo` é `sim`, `não` ou `por canal`, e diz se o post termina com um PS pedindo para responder na thread. `Termos sem itálico` lista as palavras estrangeiras que ficam sem itálico, como siglas que já são de uso comum. `Artigo antes de nome` é `livre`, que segue o tom de voz, ou `nunca`. `Linha de link em post novo` descreve uma linha de link isolada ao fim de um post novo, ou fica vazio. `Saudação em resposta de thread` é `livre` ou `menção`. `Transmitir resposta de DM` é `sim` quando a resposta numa DM também vai para o canal da conversa. `Estilo de escrita`, `Formato de link` e `Contexto compartilhado` guardam regras extras do projeto, como um tratamento que a organização evita, um endereço que se encurta ou a lista de canais privados.
 
 ## Instruções
 
@@ -80,7 +80,7 @@ Termos proibidos e alternativas vêm do vocabulário, não desta habilidade.
 **Post novo em canal**
 
 - A primeira linha é o título em negrito, numa frase, com o `Emoji do título do post`, seguida de uma linha em branco e do corpo. O conector recebe markdown: o negrito é `**título**`, e com `*título*` ele vira itálico. Cada mensagem de um lote leva o próprio título.
-- Com `PS no post novo` em `sim`, o post termina, depois de uma linha em branco, com um PS pedindo para responder na thread, na frase do vocabulário. Num lote de mensagens seguidas no mesmo canal, a saudação vai só na primeira e o PS só na última.
+- Com `PS no post novo` em `sim`, o post termina, depois de uma linha em branco, com um PS pedindo para responder na thread, na frase do vocabulário. Com `por canal`, leia no registro de canais do projeto se aquele canal incentiva a resposta na thread. Sem essa informação, pergunte antes de redigir e grave a resposta no registro do canal, para não perguntar de novo. Em DM nunca há PS. Num lote de mensagens seguidas no mesmo canal, a saudação vai só na primeira e o PS só na última.
 - Uma resposta dentro de uma thread existente nunca leva título nem PS. Antes de abrir um post novo, confira se o canal já tem uma thread sobre o assunto e responda nela.
 - Uma mensagem por pull request, nunca vários numa só. Se eles se relacionam, cada mensagem cita o outro com link no corpo.
 - Um pedido de revisão de pull request leva no título o contexto, o link do PR, o link do card e, ao fim, a menção de quem acompanha.
@@ -88,7 +88,7 @@ Termos proibidos e alternativas vêm do vocabulário, não desta habilidade.
 
 **Escrita**
 
-- Com `Itálico em estrangeirismo` em `sim`, toda palavra de outro idioma solta numa frase fica em itálico, como `_deploy_` e `_bug_`, também dentro de um título em negrito (`**Revisão do _deploy_**`) e num produto com nome estrangeiro. As palavras de `Termos sem itálico` ficam como estão. Varra o texto antes de entregar. Um texto em outro idioma não leva termo em português solto, só nome próprio entre aspas.
+- Com `Itálico em estrangeirismo` em `sim`, toda palavra de outro idioma solta numa frase fica em itálico, como `_deploy_`, `_bug_` e as `_stories_` do Storybook, também dentro de um título em negrito (`**Revisão do _deploy_**`) e num produto com nome estrangeiro. As palavras de `Termos sem itálico` ficam como estão. Quando o termo tem equivalente em português, prefira-o: escreva "história de usuário", não *story*. Varra o texto antes de entregar. Um texto em outro idioma não leva termo em português solto, só nome próprio entre aspas.
 - Funda as frases que fluem juntas num parágrafo e separe os pontos distintos. Uma atualização com várias partes abre com uma linha terminada em dois-pontos, e cada parte vai em parágrafo próprio. Um relato de problema tem sintoma, evidência e abrangência, cada um num parágrafo.
 - Uma frase longa com oração relativa encadeada vira duas curtas. Um pronome ambíguo vira o substantivo. Não repita a mesma palavra na mesma frase.
 - Negrito fica para o título do post e para cabeçalhos, não para o rótulo de cada item de lista.
