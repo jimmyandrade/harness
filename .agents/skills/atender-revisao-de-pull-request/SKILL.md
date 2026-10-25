@@ -3,7 +3,7 @@ name: atender-revisao-de-pull-request
 description: Atende a revisão recebida num pull request, de pessoa ou de bot. Lê os comentários abertos, classifica cada sugestão, aplica o que é seguro, responde cada thread e resolve as atendidas. Sem PR informado, lista os seus que precisam de atenção. Não serve para revisar o PR de outra pessoa nem para abrir o PR.
 metadata:
   author: jimmyandrade
-  version: "0.10.0"
+  version: "0.11.0"
   notion: "false"
   aliases:
     - resolver-comentarios-de-revisao
@@ -46,7 +46,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 `Fechar conversa com a confiança` em `sim` faz a mensagem que fecha uma conversa dizer o quanto você tem de confiança de que o ponto foi resolvido. `Rótulo de prioridade no texto` em `não` mantém o nome da categoria fora das respostas. `Idioma do relatório` e `Agrupar o relatório por prioridade` mandam no relatório final. `Modo de execução` é `interativo`, com a pessoa na frente, ou `agendado`, sem ninguém. `Aplicar em execução agendada` é `estrutural`, que aplica só o estrutural, ou `não`, que não aplica nada e deixa tudo no resumo. `Aprovação para mudar comportamento` é `pedir` ou `não pedir`. `Régua de mudança de comportamento` lista o que o projeto conta como mudança de comportamento, como condicional, validação, cache, rastreamento ou pagamento. `Lentes de revisão` lista critérios que você aplica ao decidir, sem citá-los na resposta.
 `Ler o texto antes de publicar` em `sim` mostra a resposta a outra pessoa e espera o sim.
 Comentário de self review, da mesma pessoa que pediu o atendimento, recebe a resposta na hora, com o que mudou e o commit.
-A resposta a um bot não espera leitura.
+A mensagem do bot é lida, respondida e considerada.
+A resposta a ele é publicada sem esperar que a pessoa leia esse texto antes.
 
 ## Instruções
 
@@ -92,11 +93,23 @@ Responda cada thread em `Idioma da resposta à revisão`: o que mudou, com o com
 Com `Ler o texto antes de publicar` em `sim`, mostre a resposta a outra pessoa e espere o sim.
 Comentário de self review, da mesma pessoa que pediu o atendimento, recebe a resposta na hora.
 A resposta diz o que mudou e cita o commit.
-A resposta a um bot não precisa de leitura.
+A mensagem do bot é lida, respondida e considerada.
+A resposta a ele é publicada sem esperar que a pessoa leia esse texto antes.
 
 Resolva a thread só quando a resposta encerra o ponto e a sugestão foi aplicada como pedida.
-Antes de resolver, a última mensagem da thread tem que ser sua e dizer o que foi feito e que você resolve porque acolheu o ponto.
-Quando quem revisou é outra pessoa, a mensagem também diz que vai pedir outra revisão. Com `Fechar conversa com a confiança` em `sim`, a mensagem diz a confiança em linguagem natural, com um valor aproximado quando ajudar, como "estou fechando porque tenho uns 90% de certeza de que isso já está coberto", e convida a reabrir se faltar algo. Nunca diga que reanalisou, que usou ferramenta nem quantas vezes: o método fica fora do texto. Só feche com confiança alta, relendo o trecho no commit atual, mais de uma vez quando for ambíguo. Com confiança menor, deixe aberta e pergunte. Num PR aberto por bot, siga a `Voz em PR aberto por bot` de `publicar-revisao-de-codigo`. Uma thread que espera decisão da pessoa, ou que foi aplicada de outro jeito, fica aberta.
+Antes de resolver, a última mensagem da thread tem que ser sua.
+Ela diz se o ponto será resolvido, como será resolvido e onde: neste commit, num commit ainda por fazer, ou num pull request à parte.
+Ela também diz que você resolve porque acolheu o ponto.
+Quando quem revisou é outra pessoa, a mensagem também diz que vai pedir outra revisão.
+Com `Fechar conversa com a confiança` em `sim`, a mensagem diz a confiança em linguagem natural e convida a reabrir se faltar algo.
+Um número, como "uns 90%", é só um exemplo de frase. Não é uma meta fixa.
+Quem liga isso é o parâmetro `Fechar conversa com a confiança`.
+O padrão é `não`.
+Nunca diga que reanalisou, que usou ferramenta nem quantas vezes: o método fica fora do texto.
+Só feche com confiança alta, relendo o trecho no commit atual, mais de uma vez quando for ambíguo.
+Com confiança menor, deixe aberta e pergunte.
+Num PR aberto por bot, siga a `Voz em PR aberto por bot` de `publicar-revisao-de-codigo`.
+Uma thread que espera decisão da pessoa, ou que foi aplicada de outro jeito, fica aberta.
 
 ### Passo 7
 
@@ -179,7 +192,7 @@ Se você aplicar uma sugestão que muda o resultado, a borda ou a validação s�
 Se você resolver uma thread de pessoa sem uma mensagem sua por último, ela não sabe que o ponto foi acolhido nem que a revisão vai ser pedida de novo.
 
 1. Responda dizendo o que foi feito.
-2. Diga que vai resolver. Quando quem revisou é outra pessoa, diga que vai pedir outra revisão.
+2. Diga se o ponto será resolvido, como e onde: neste commit, num commit ainda por fazer, ou num pull request à parte. Quando quem revisou é outra pessoa, diga que vai pedir outra revisão.
 3. Resolva depois.
 
 ### Clone da pessoa alterado
@@ -195,19 +208,19 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### confira a análise do bot no PR de release, ainda faz sentido?
 
-O bot pedia para segurar a release porque uma skill apontava para outras que ainda não existiam. No commit atual, todas existiam e a checagem passava. Respondi o que mudou desde a revisão e resolvi a thread. Placar: um desatualizado.
+O bot pedia para segurar a release porque uma skill apontava para outras que ainda não existiam. No commit atual, todas existiam e a checagem passava. Respondi o que mudou desde a revisão e resolvi a thread. No relatório, esse comentário entra como desatualizado.
 
 ### o bot comentou no catálogo que a entrada de uma skill contradiz a própria skill.
 
-A entrada dizia que os exemplos usam `dt` e `dd`, e a skill e a checagem pedem heading e parágrafo. Corrigi num PR de documentação, respondi com o link e resolvi. Placar: um aceito.
+A entrada dizia que os exemplos usam `dt` e `dd`, e a skill e a checagem pedem heading e parágrafo. Corrigi num PR de documentação, respondi com o link e resolvi. No relatório, esse comentário entra como aceito.
 
 ### o bot pede frontmatter num arquivo que o gerador de release reescreve.
 
-Recusei: o gerador reescreve o arquivo a cada release. Gravei a exceção nas instruções do projeto, respondi e resolvi. Placar: um recusado, com a lição registrada.
+Recusei: o gerador reescreve o arquivo a cada release. Gravei a exceção nas instruções do projeto, respondi e resolvi. No relatório, esse comentário entra como recusado, e a lição ficou nas instruções do projeto.
 
 ### o comentário de self review já está no commit
 
-A pessoa comentou no próprio pull request. A sugestão já estava no commit. A resposta foi publicada na thread, com o SHA curto linkado, e a thread foi resolvida. Placar: um aceito.
+A pessoa comentou no próprio pull request. A sugestão já estava no commit. A resposta foi publicada na thread, com o SHA curto linkado, e a thread foi resolvida. No relatório, esse comentário entra como aceito: a sugestão já estava no commit.
 
 ### Aplique a revisão do meu PR
 
