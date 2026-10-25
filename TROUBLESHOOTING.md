@@ -82,6 +82,15 @@ Moving a pin by hand, `npm install -D "harness@github:jimmyandrade/harness#vX.Y.
 3. Commit `package.json`.
 4. `npm approve-scripts --allow-scripts-pending` printing `No packages with unreviewed install scripts.`, and `npm ci` with no `allow-scripts` warning, close the case.
 
+## npm warns EBADENGINE for the core
+
+An install of a project that depends on the core, often a build on a host such as Vercel, prints `npm warn EBADENGINE Unsupported engine`, with `package: 'harness@X.Y.Z'`, `required: { node: '>=24.22.1' }`, and an older `current` version, such as Node.js 22.
+
+1. `engines.node` of the core asks for Node.js 24.22.1 or newer, because the vocabulary MCP server needs it. npm only warns: the install and the build go on, unless `engine-strict` is set.
+2. In a project where the core is only a development dependency, such as a website that its agents work on, the warning does not break the build, and the vocabulary server does not run there. It still means the host builds on a Node.js version that the core does not support.
+3. Set the Node.js version of the project to 24: `"engines": { "node": "24.x" }` in `package.json`, and the same field in the root package of `package-lock.json`. Vercel and most hosts read it, and it also sets the Node.js version that the functions run on, so check the preview build before merging.
+4. A build with no `EBADENGINE` line closes the case.
+
 ## npm stops a git dependency with EALLOWSCRIPTS
 
 `npm ci` or `npm install` in a business harness stops with `npm error code EALLOWSCRIPTS` and `--allow-scripts is not allowed in project-scoped installs`, printed twice, once by a second npm process. `node_modules` is left empty.
