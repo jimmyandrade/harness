@@ -4,7 +4,7 @@ description: Abre, revisa, edita e traduz issues do GitHub no idioma do projeto.
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.5.0"
   aliases:
     - definir-issue
   related:
@@ -67,6 +67,9 @@ O título e o corpo prontos só saem quando a pessoa não consegue abrir a issue
 O Notion alcança o GitHub pelo MCP e pelos conectores.
 Mostre o número e o link.
 O pull request que resolve cita a issue com `Closes #<número>`, seguindo `criar-pull-request`.
+A issue não fecha por uma varredura das abertas.
+Ela fecha quando esse pull request, ainda aberto, é mesclado, e o `Pronto quando` está cumprido.
+Um pull request já mesclado recebe o link num comentário da issue, e a issue continua aberta até a pessoa fechar.
 Quando uma issue espera outra, marque em Relationships como bloqueada por ela.
 Quando esta issue segura a outra, marque como bloqueando.
 Quando só se relacionam, use relates to.
@@ -112,6 +115,7 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 - Commit e pull request seguem os próprios idiomas. O `Idioma da issue` vale só para a issue.
 - O título em inglês parece obrigatório por causa do Conventional Commits. Só o tipo é fixo. A descrição segue o `Idioma da issue`.
 - A busca só nas abertas parece bastar. A issue fechada também conta, e reabrir é melhor que duplicar.
+- Uma varredura das issues abertas parece dizer quais fechar. A issue fecha quando o pull request que a cita, ainda aberto, é mesclado, e o `Pronto quando` está cumprido.
 - Um comentário "Depende de #2" parece registrar a dependência. O GitHub usa Relationships. O comentário só repete o fato.
 
 ## Scripts disponíveis

@@ -495,6 +495,7 @@ How these skills relate is in `README.md`, in this folder.
   - Writes the problem with the real case, the proposal, and a verifiable done criterion
   - Translates an issue in another language without losing links or references
   - Marks a dependency in GitHub Relationships: blocked by, blocking, relates to, or parent. A comment that only says the dependency does not count
+  - Does not close an issue by scanning the open list. The issue closes when the citing pull request merges and its done criterion is met
 - **Test Criteria**:
   - [x] The skill is present at that path
 
