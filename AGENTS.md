@@ -1,6 +1,6 @@
 ---
 metadata:
-  version: "1.27.0"
+  version: "1.28.0"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -26,6 +26,8 @@ metadata:
       "Projeto da tarefa por repositório": "issues do próprio repositório"
     "sincronizar-status-da-tarefa":
       "Consulta das tarefas": "gh issue list --state open --assignee @me --json number,title,url"
+    "atender-revisao-de-pull-request":
+      "Idioma da resposta à revisão": "o idioma do comentário"
 ---
 
 # Instruções do projeto
