@@ -3,7 +3,7 @@ name: evoluir-habilidade
 description: Use essa habilidade sempre que for testar uma skill, alterá-la a pedido ou evoluir as instruções do projeto, mesmo sem dizer evoluir, inclusive o Gherkin e a comparação com e sem skill, resultado inconsistente, falha de chamada ou correção da pessoa. NÃO use para criar a primeira versão, só ver se a descrição dispara, só revisar sem executar, nem gravar a página no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.22.0"
+  version: "0.23.0"
   related:
     - criar-commit
     - criar-pull-request
@@ -38,8 +38,8 @@ flowchart LR
   T --> P[Passo 2]
 ```
 
-Exija a skill, pelo nome ou pelo caminho. O repositório não é uma entrada: a skill fica em `Pasta das habilidades`, no repositório de origem. Para testar, exija também a tarefa, os arquivos ou links de entrada e as saídas, e peça o que faltar antes de avaliar. Um pedido para testar uma skill entra aqui, mesmo sem dizer evoluir.
-Um pedido para acrescentar, tirar ou trocar uma regra também entra aqui e só exige a skill e a mudança. Edite já, suba `metadata.version` e atualize o que a mudança deixa desatualizado. Depois, proponha um caso real. Sem execução, a mudança não conta como validada. Um feedback sobre o comportamento do agente também entra aqui: o alvo são as instruções do projeto, tratadas como uma skill. Edite seguindo o formato de `definir-instrucoes-do-projeto` e suba `metadata.version`. Elas não têm `evals/` nem `features/`.
+Exija a skill, pelo nome ou pelo caminho. Antes de editar, confira de onde ela vem. O repositório não é uma entrada: a skill fica em `Pasta das habilidades`, no repositório de origem. A cópia que um projeto recebe pronta, por dependência ou plugin, não se edita: a próxima instalação apaga a alteração. Para testar, exija também a tarefa, os arquivos ou links de entrada e as saídas, e peça o que faltar antes de avaliar. Um pedido para testar uma skill entra aqui, mesmo sem dizer evoluir.
+Um pedido para acrescentar, tirar ou trocar uma regra também entra aqui e só exige a skill e a mudança. Edite já no repositório de origem, suba `metadata.version` e atualize o que a mudança deixa desatualizado. Depois, proponha um caso real. Sem execução, a mudança não conta como validada. Um feedback sobre o comportamento do agente também entra aqui: o alvo são as instruções do projeto, tratadas como uma skill. Edite seguindo o formato de `definir-instrucoes-do-projeto` e suba `metadata.version`. Elas não têm `evals/` nem `features/`.
 
 ### Passo 2
 
@@ -77,9 +77,9 @@ Dentro de cada uma: `outputs/`, `timing.json` e `grading.json`. O `benchmark.jso
 
 A skill é um documento vivo. A iteração parte do feedback.
 Resultado inconsistente, falha de chamada e correção da pessoa: melhore a instrução e acrescente o tratamento do erro.
-Antes de editar, leia a skill inteira, as `related` e os parâmetros. A frase nova não contradiz nenhuma: quando a regra muda, reescreva a frase que já existe e cada repetição dela em `Problemas comuns`, `Exemplos de entrada e saída`, `Casos-limite` e `Pegadinhas`. Não acrescente exceção noutro lugar. Valor que muda de um projeto para outro, como pasta, caminho ou nome de banco, vira parâmetro; o passo cita a chave. Decisão sobre palavra, como usar um termo ou outro, ou como escrever uma frase, não entra na skill nem num parâmetro: vai para o vocabulário, por `definir-vocabulario`.
+Antes de editar, confira de onde a skill vem e leia a skill inteira, as `related` e os parâmetros. A cópia instalada por dependência ou plugin não se edita. A frase nova não contradiz nenhuma: quando a regra muda, reescreva a frase que já existe e cada repetição dela em `Problemas comuns`, `Exemplos de entrada e saída`, `Casos-limite` e `Pegadinhas`. Não acrescente exceção noutro lugar. Valor que muda de um projeto para outro, como pasta, caminho ou nome de banco, vira parâmetro; o passo cita a chave. Decisão sobre palavra, como usar um termo ou outro, ou como escrever uma frase, não entra na skill nem num parâmetro: vai para o vocabulário, por `definir-vocabulario`.
 Subdisparo e sobredisparo vão para `descrever-habilidade-ou-schema`.
-O teste sempre edita a skill validada, nesta mesma conversa. Sem essa edição, o teste não vale.
+O teste sempre edita a skill validada no repositório de origem, nesta mesma conversa. Sem essa edição, o teste não vale.
 Incorpore todos os resultados, não só as falhas. A edição vem do que a execução mostrou.
 Pergunte o que gerou falso positivo, o que passou despercebido e o que pode sair. Se a execução já mostrou a resposta, edite com ela. Quando a pessoa responder o que ainda faltava, edite de novo na mesma conversa.
 Leia o registro da execução, não só o resultado final. Se o agente gasta tempo em etapa improdutiva, a instrução está vaga, não se aplica à tarefa, ou oferece opções sem escolha padrão. Se o próximo trecho deixar o corpo sem folga abaixo de `Tokens do corpo`, proponha separar a responsabilidade em outra habilidade antes de escrever. O tamanho e o profiling seguem `medir-habilidade`. O teste e a edição continuam aqui.
@@ -105,17 +105,17 @@ Se você vir resultado inconsistente, falha de chamada ou correção da pessoa, 
 
 ### Repositório pedido à pessoa
 
-Se você pedir o repositório numa cópia sincronizada, como o Notion, a pessoa responde o que a skill já diz e a mudança não sai.
+Se você pedir o repositório numa cópia, sincronizada ou instalada por dependência ou plugin, a pessoa responde o que a skill já diz e a mudança não sai.
 
 1. Confira as conexões e a pasta de trabalho antes de dizer que falta acesso. Uma chamada que falhou não prova falta de acesso.
-2. Sem o repositório nem uma conexão que escreva nele, entregue a mudança pronta: a skill, o passo e o texto novo.
-3. Diga que a gravação acontece numa sessão com o repositório, no Claude, no Cursor ou em outro harness, e que essa sessão segue `criar-commit` e `criar-pull-request`.
+2. Sem o repositório de origem nem uma conexão que escreva nele, entregue a mudança pronta: a skill, o passo e o texto novo. A cópia instalada não é esse repositório.
+3. Diga que a gravação acontece numa sessão com o repositório de origem, no Claude, no Cursor ou em outro harness, e que essa sessão segue `criar-commit` e `criar-pull-request`.
 
 ### Regra contraditória
 
 Se você acrescentar uma frase sem ler o resto da skill, ela pode mandar o oposto de outra, e o agente escolhe uma das duas.
 
-1. Leia a skill inteira, as `related` e os parâmetros antes de editar.
+1. Confira de onde a skill vem e leia a skill inteira, as `related` e os parâmetros antes de editar. A cópia instalada por dependência ou plugin não se edita.
 2. Reescreva a frase que já existe e cada repetição dela. Não acrescente exceção noutro lugar.
 3. Valor que muda de um projeto para outro vira parâmetro. O passo cita a chave.
 
@@ -123,7 +123,7 @@ Se você acrescentar uma frase sem ler o resto da skill, ela pode mandar o opost
 
 Se você só anotar o teste, ou só anotar o que a pessoa respondeu, e não editar a skill validada, a próxima execução repete o mesmo resultado.
 
-1. Edite a skill validada na mesma conversa do teste.
+1. Edite a skill validada no repositório de origem, na mesma conversa do teste.
 2. Se a pessoa responder o que ainda faltava, edite de novo.
 3. Suba a versão.
 
@@ -219,20 +219,20 @@ Dado que há o nome "Planejamento do trimestre" e 5 descrições de tarefa. Quan
 - A mesma lógica aparece numa execução só: não proponha script.
 - A pessoa recusa o script: a lógica fica na instrução.
 - O script já existe: chame o script em vez de reescrever a lógica.
-- O pedido é testar a skill: entra aqui. O teste edita a skill validada na mesma conversa.
+- O pedido é testar a skill: entra aqui. O teste edita a skill validada no repositório de origem, na mesma conversa.
 - O pedido é saber se um prompt dispara a skill: use `descrever-habilidade-ou-schema`.
 - O pedido é só revisar, sem executar: use `revisar-habilidade`.
 - O critério já foi enviado e ainda não rodou: grave em BDD e deixe sem validar até a execução. Com `Executar testes` em `sob pedido`, a execução espera o pedido da pessoa.
 - O pedido muda uma regra, um passo, o formato do texto ou o diff: edite já, suba a versão e proponha um caso real. Não grave Gherkin de passo, formato ou diff.
 - A comparação não tem o número no registro: diga que falta.
-- O pedido chega por uma cópia sincronizada, como a página no Notion: não edite a cópia. A escrita segue `criar-commit` e `criar-pull-request`.
-- A cópia sincronizada não tem o repositório nem conexão que escreva nele: não peça o repositório. Entregue a mudança pronta, por skill e passo, para a sessão com o repositório.
+- O pedido chega por uma cópia, sincronizada ou instalada por dependência ou plugin: não edite a cópia. A escrita segue `criar-commit` e `criar-pull-request` no repositório de origem.
+- A cópia não tem o repositório de origem nem conexão que escreva nele: não peça o repositório. Entregue a mudança pronta, por skill e passo, para a sessão com o repositório de origem.
 - O pedido é só o tamanho ou o tempo: use `medir-habilidade`. Não edite a skill.
 
 ## Pegadinhas
 
 - A skill parece pronta na primeira versão. Ela é um documento vivo. A iteração parte do feedback.
-- "Testar" parece só conferir a saída. O teste edita a skill validada nessa conversa.
+- "Testar" parece só conferir a saída. O teste edita a skill validada no repositório de origem, nessa conversa.
 - Uma mudança pedida parece exigir execução antes. Ela entra direto. A validação vem depois, com um caso real.
 - Um critério novo parece pedir a rodada de execuções. Com `Executar testes` em `sob pedido`, ela espera o pedido da pessoa, porque cada rodada gasta muitos tokens.
 - Não invente caso. Critério de aceite que a pessoa enviou entra em BDD. Ele só conta como validado depois da execução com você.
@@ -241,8 +241,8 @@ Dado que há o nome "Planejamento do trimestre" e 5 descrições de tarefa. Quan
 - Cada execução começa limpa, sem a sessão em que a skill foi escrita.
 - Consulta de disparo não mede a qualidade da saída. Disparo fica em `descrever-habilidade-ou-schema`.
 - A mesma lógica reescrita em cada caso vira script, com o aceite da pessoa. Script de várias skills fica em `.agents/scripts/<nome>/`.
-- Pedido feito na cópia sincronizada parece permissão para gravá-la. A cópia é só leitura. Siga `criar-commit`.
-- Pedir o repositório parece o passo que falta. A skill fica em `Pasta das habilidades`, no repositório de origem. Sem acesso, a mudança pronta é a entrega.
+- Pedido feito numa cópia, sincronizada ou instalada por dependência ou plugin, parece permissão para gravá-la. A cópia é só leitura. A edição vai no repositório de origem. Siga `criar-commit`.
+- Pedir o repositório parece o passo que falta. A skill fica em `Pasta das habilidades`, no repositório de origem. A cópia instalada não é esse repositório. Sem acesso, a mudança pronta é a entrega.
 
 ## Scripts disponíveis
 

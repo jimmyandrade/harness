@@ -3,7 +3,7 @@ name: criar-habilidade
 description: Cria, adiciona e escreve skills a partir de uma tarefa real. Usada quando a pessoa quer uma skill nova, mesmo sem dizer skill. Não serve para editar código, escrever página que não seja skill, otimizar só a descrição nem gravar a skill no Notion.
 metadata:
   author: jimmyandrade
-  version: "3.13.0"
+  version: "3.14.0"
   related:
     - criar-commit
     - criar-pull-request
@@ -233,12 +233,12 @@ Se você gravar o endereço de um banco ou usar o banco que a conexão mostrou, 
 2. Peça o data source na execução.
 3. Se ele não estiver no workspace conectado, pare.
 
-### Skill gravada no Notion
+### Skill gravada fora do repositório de origem
 
-Se você criar ou alterar a habilidade na página do Notion, a próxima sincronização apaga essa escrita.
+Se você criar ou alterar a habilidade numa cópia, como a página do Notion ou a cópia que outro projeto recebe por dependência ou plugin, a próxima sincronização ou a próxima instalação apaga essa escrita.
 
-1. Escreva no repositório, seguindo `criar-commit` e `criar-pull-request`.
-2. Não edite a página nem o banco Habilidades.
+1. Antes de gravar, confira de onde a skill vem. Escreva no repositório de origem, seguindo `criar-commit` e `criar-pull-request`.
+2. Não edite a cópia.
 
 ### Pegadinha genérica
 
@@ -278,7 +278,7 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 - Não invente caso de eval. `evals/evals.json` começa vazio.
 - O fato que o agente erraria fica em `Pegadinhas`, antes de `Scripts disponíveis`. `references/` só entra se a frase disser quando abrir. Problema não óbvio o agente não reconhece sozinho.
 - A primeira versão fica em `0.x`. `1.0.0` pede 3 casos validados com a pessoa.
-- Skill sobre escrever skills também sincroniza. A página no Notion é só leitura. A escrita segue `criar-commit`.
+- Skill sobre escrever skills também sincroniza, e a cópia instalada por dependência ou plugin também é só leitura. A escrita segue `criar-commit` no repositório de origem.
 - O workspace conectado pode ser de outra empresa. A skill não carrega banco, página nem workspace. O data source vem na execução. Se não estiver na conexão, pare. Não use o banco que a conexão mostrou no lugar.
 - Cadastrar e revisar a mesma entidade usam `definir` numa skill só. Venda e despesa usam `lancar`. O cedilha sai do nome.
 
