@@ -1,7 +1,7 @@
 ---
 description: Traz as instruções gerais e os parâmetros das habilidades deste espaço de trabalho. Usada em qualquer tarefa, inclusive outra habilidade. Não serve para criar nem alterar estas instruções; a mudança vai no repositório.
 metadata:
-  version: "0.2.0"
+  version: "0.3.0"
   parameters:
     "Global":
       "Banco de modelos no Notion": "<link do banco de modelos de saída no Notion>"
@@ -50,3 +50,6 @@ Esta seção descreve o estilo de comunicação que você usa nas interações d
 ## Em ferramentas de código
 
 Antes de qualquer mudança no código, leia o `CONTRIBUTING.md` inteiro. As regras dele valem como se estivessem aqui.
+
+- Ao começar a trabalhar num repositório, antes do primeiro passo, liste as habilidades do próprio repositório e as que chegam por dependência ou plugin, como as do core harness. Leia o nome e a descrição de cada uma e abra as que a tarefa vai usar. Uma habilidade que a sessão não carregou é lida do `SKILL.md` dela.
+- Numa tarefa de código, siga as habilidades de código do core harness na ordem que o `CONTRIBUTING.md` dá, do levantamento da tarefa à limpeza das cópias de trabalho depois do merge.
