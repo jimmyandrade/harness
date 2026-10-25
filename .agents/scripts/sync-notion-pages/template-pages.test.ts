@@ -130,9 +130,8 @@ test("a file that is not yet a model is left out, and a model without a version 
   assert.deepEqual(parseTemplate('---\ndescription: x\nmetadata:\n  version: "0.1.0"\n---\n\n# x\n', "agents-md"), {
     skip: "no name in frontmatter",
   })
-  assert.deepEqual(parseTemplate(reelTemplate.replace('version: "1.0.0"\n', 'version: "1.0.0"\n  notion: "false"\n'), "reel-do-instagram"), {
-    skip: "stays in git",
-  })
+  const withNotion = parseTemplate(reelTemplate.replace('version: "1.0.0"\n', 'version: "1.0.0"\n  notion: "false"\n'), "reel-do-instagram")
+  assert.equal("skip" in withNotion, false)
   assert.throws(() => parseTemplate(reelTemplate.replace('  version: "1.0.0"\n', ""), "reel-do-instagram"), /missing version/)
   assert.throws(() => parseTemplate(reelTemplate, "reel"), /frontmatter name is reel-do-instagram/)
 })

@@ -12,8 +12,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Stability**: experimental
 - **Description**: See or organize what a car or motorcycle owes or costs, such as tax, insurance, fines, points, tolls, toll tag, installments, or repairs
 - **Properties**:
-  - Lives at `.agents/skills/acompanhar-veiculo/SKILL.md` and stays internal while it is validated
-  - Records contracts and debts through definir-obrigacao-financeira and each bill or payment through lancar-despesa-pessoal or lancar-despesa-da-empresa, linked to the vehicle
+  - Lives at `.agents/skills/acompanhar-veiculo/SKILL.md`  - Records contracts and debts through definir-obrigacao-financeira and each bill or payment through lancar-despesa-pessoal or lancar-despesa-da-empresa, linked to the vehicle
   - Turns a regularization plan into one obligation per line and one expense per due date, and checks that installments add up to each total
   - Tells a received notice from a status checked at the traffic authority of the state of registration
   - Reads from a parameter where each kind of pending item arrives or is checked (email, app, or website), schedules a check for items that never arrive by email, and never takes a missing email as a clean status
@@ -552,8 +551,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Stability**: experimental
 - **Description**: Register or review a contract or debt that generates charges, such as a plan, a consortium, a card, or a loan
 - **Properties**:
-  - Lives at `.agents/skills/definir-obrigacao-financeira/SKILL.md` and stays internal while it is validated
-  - Keeps the obligation apart from each bill or payment, which goes to lancar-despesa-pessoal or lancar-despesa-da-empresa
+  - Lives at `.agents/skills/definir-obrigacao-financeira/SKILL.md`  - Keeps the obligation apart from each bill or payment, which goes to lancar-despesa-pessoal or lancar-despesa-da-empresa
   - Sets the context from the original purpose and the status from evidence, with a review date or a review condition for a postponed debt
   - Treats a collection agency, a negotiation offer, or a "CPF notified" subject as unconfirmed, and points to the creditor's official channel
   - Always states the due date with the amount, or says the amount is missing and where to find it
@@ -797,8 +795,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Stability**: experimental
 - **Description**: Decide whether an item belongs in the team's technical improvements document and in which section, with the reason
 - **Properties**:
-  - Lives at `.agents/skills/classificar-melhoria-tecnica/SKILL.md` and stays internal while it is validated
-  - Walks the project's decision tree from top to bottom, and the first question that matches decides. Without a project tree it uses a short default one
+  - Lives at `.agents/skills/classificar-melhoria-tecnica/SKILL.md`  - Walks the project's decision tree from top to bottom, and the first question that matches decides. Without a project tree it uses a short default one
   - Knows no section by name: the sections, the document, and the rules come from parameters, with three default sections that a project can rename, remove, or extend
   - Returns the section key, the status, and the reason in one sentence, and asks before it writes a new rule when no question matches
   - Does not edit the document and does not order items by priority
@@ -973,8 +970,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Stability**: experimental
 - **Description**: Find or record a personal expense, such as a purchase, a bill, an installment, or a payment slip
 - **Properties**:
-  - Lives at `.agents/skills/lancar-despesa-pessoal/SKILL.md` and stays internal while it is validated
-  - Never records a personal expense in the company list, even for a partner
+  - Lives at `.agents/skills/lancar-despesa-pessoal/SKILL.md`  - Never records a personal expense in the company list, even for a partner
   - Links a bill to the obligation that generated it, with the installment as number/total
   - Leaves the payment date empty until there is a receipt, and keeps original and paid amounts apart
   - Records who paid when someone other than the debtor pays
@@ -1059,8 +1055,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Stability**: experimental
 - **Description**: Triage email with BASB/PARA and learn personal, work, or mixed context from reviewed messages
 - **Properties**:
-  - Lives at `.agents/skills/organizar-emails/SKILL.md` and stays internal while the first decision tree is under construction
-  - Learns each decision and its reason from real messages instead of classifying an entire sender or mailbox from one example
+  - Lives at `.agents/skills/organizar-emails/SKILL.md`  - Learns each decision and its reason from real messages instead of classifying an entire sender or mailbox from one example
   - Separates the purpose of a historical obligation from a later intention to separate personal and business finances
   - Reads the protected account in recovery copies, and keeps the security filter thematic rather than automatically personal
   - Preserves inbox and read state on security alerts, verifies applied labels and filters, and does not promise automatic archiving after human reading

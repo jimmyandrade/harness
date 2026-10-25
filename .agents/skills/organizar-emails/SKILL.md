@@ -3,9 +3,7 @@ name: organizar-emails
 description: Organiza e-mails por BASB e separa pessoal, trabalho e misto. Usada quando a pessoa quer triar a caixa, etiquetar ou configurar filtros. Não serve para responder mensagens, lançar despesas nem acompanhar veículos.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
-  internal: true
-  notion: "false"
+  version: "0.7.0"
   related:
     - procurar-email
     - evoluir-habilidade

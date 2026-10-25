@@ -212,41 +212,6 @@ class ModelCitationTest(unittest.TestCase):
         )
 
 
-class NotionCitationTest(unittest.TestCase):
-    def setUp(self) -> None:
-        self.tmp = tempfile.TemporaryDirectory()
-        self.project = Path(self.tmp.name)
-        (self.project / ".agents").mkdir()
-        (self.project / INSTRUCTIONS).write_text(PARAMETERS, encoding="utf-8")
-        folder = self.project / ".agents" / "skills" / "limpar-pasta"
-        folder.mkdir(parents=True)
-        (folder / "SKILL.md").write_text(
-            '---\nname: limpar-pasta\ndescription: x\nmetadata:\n  author: example\n  version: "0.1.0"\n  notion: "false"\n---\n\n# Limpar pasta\n',
-            encoding="utf-8",
-        )
-        write_skill(self.project, "abrir-pedido")
-        self.checker = load_checker(self.project)
-        self.offline = self.checker.offline_skill_names()
-
-    def tearDown(self) -> None:
-        self.tmp.cleanup()
-        os.environ.pop("HARNESS_ROOT", None)
-
-    def test_only_skills_with_notion_false_stay_out(self) -> None:
-        self.assertIn("limpar-pasta", self.offline)
-        self.assertIn("liberar-espaco-em-disco", self.offline)
-        self.assertNotIn("abrir-pedido", self.offline)
-
-    def test_a_page_that_goes_to_notion_cannot_cite_a_skill_that_stays_out(self) -> None:
-        text = "---\nname: abrir-pedido\n---\n\nAo terminar, siga `limpar-pasta`.\n"
-        found = self.checker.notion_citation_errors(text, "Ao terminar, siga `limpar-pasta`.\n", self.offline, "this skill")
-        self.assertEqual([finding.line for finding in found], [5])
-        self.assertIn("cites limpar-pasta, which stays out of Notion", found[0].message)
-
-    def test_a_citation_of_a_skill_that_goes_to_notion_passes(self) -> None:
-        self.assertEqual(self.checker.notion_citation_errors("", "Siga `abrir-pedido`.", self.offline, "this skill"), [])
-
-
 class MetadataFlagTest(unittest.TestCase):
     def setUp(self) -> None:
         self.checker = load_checker(Path(tempfile.mkdtemp()))
@@ -256,19 +221,28 @@ class MetadataFlagTest(unittest.TestCase):
         front = list(enumerate(block.splitlines(), start=2))
         return [finding.message for finding in self.checker.metadata_flag_errors(block, front)]
 
-    def test_notion_false_and_internal_true_pass(self) -> None:
-        self.assertEqual(self.errors('  notion: "false"', "  internal: true"), [])
+    def test_notion_and_internal_fail(self) -> None:
+        self.assertEqual(
+            self.errors('  notion: "false"', "  internal: true"),
+            [
+                "metadata.notion is not a field: every skill syncs to Notion",
+                "metadata.internal is not a field: every skill syncs to Notion",
+            ],
+        )
 
     def test_a_skill_without_flags_passes(self) -> None:
         self.assertEqual(self.errors(), [])
 
     def test_a_quoted_internal_fails(self) -> None:
-        self.assertEqual(self.errors('  internal: "true"'), ["metadata.internal must be true"])
-
-    def test_internal_false_and_notion_true_fail(self) -> None:
         self.assertEqual(
-            self.errors("  internal: false", '  notion: "true"'),
-            ['metadata.notion must be "false"', "metadata.internal must be true"],
+            self.errors('  internal: "true"'),
+            ["metadata.internal is not a field: every skill syncs to Notion"],
+        )
+
+    def test_notion_true_fails(self) -> None:
+        self.assertEqual(
+            self.errors('  notion: "true"'),
+            ["metadata.notion is not a field: every skill syncs to Notion"],
         )
 
 
