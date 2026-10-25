@@ -3,7 +3,7 @@ name: gravar-termos-no-vocabulario
 description: Use essa habilidade sempre que, ao cadastrar ou corrigir termos do vocabulário do tom de voz, for hora de pesquisar a grafia, testar com dry run e gravar o lote, mesmo sem dizer gravar. NÃO use para decidir o nível, validar os campos, perguntar quais variações foram cadastradas, escrever o texto da marca, nem inventar um termo.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.5.0"
   related:
     - definir-vocabulario
     - procurar-variacao-de-termo
@@ -35,11 +35,11 @@ flowchart LR
 
 ### Passo 2
 
-Para corrigir um termo que já está, leia a linha com `lookup` e guarde-a. Mande `state`, `term` e só o que muda: a escrita mantém o resto, e `""` ou `[]` limpa o campo, só a pedido. Leia a linha de novo depois. Se sumiu algo que você não mandou, o servidor é antigo: grave a linha guardada de volta e avise.
+Para corrigir um termo que já está, leia a linha com `lookup` e guarde-a. Uma grafia pode ter uma linha por conjunto de tags: leia com as tags da linha que vai corrigir. Mande `state`, `term`, as `tags` dessa linha, ou `[]` para a linha sem tags, e só o que muda: a escrita mantém o resto, e `""` ou `[]` limpa o campo, só a pedido. Leia a linha de novo depois. Se sumiu algo que você não mandou, o servidor é antigo: grave a linha guardada de volta e avise.
 
 ### Passo 3
 
-Pesquise a grafia no vocabulário antes de gravar, com a consulta de Scripts disponíveis. Com mais de um termo, não consulte um por vez: `lookup-terms` lê todos de uma vez, na ordem enviada, e devolve a linha guardada de cada um que já está. Ele lê uma expressão com mais de uma palavra inteira. `exists` confere palavra por palavra e não serve para isso. O `dry_run` do lote em `insert` também diz o que já está, em `unchanged`, e o que é novo, em `inserted`, e valida o lote. Com terminal, rode o comando. Sem terminal, chame a ferramenta do servidor `vocabulary`. Sem os dois, como num agente do Notion, pare antes de pesquisar. Diga que o cadastro roda numa ferramenta de código com o projeto aberto. Não leia o vocabulário de memória. Outra caixa é o mesmo termo: a linha que já está recebe a orientação. Não cadastre uma segunda linha dessa grafia. Acento muda a palavra: roles e rolês, pais e país são termos diferentes, cada um com a própria linha. Uma forma igual, com os mesmos campos, volta sem alteração.
+Pesquise a grafia no vocabulário antes de gravar, com a consulta de Scripts disponíveis. Com mais de um termo, não consulte um por vez: `lookup-terms` lê todos de uma vez, na ordem enviada, e devolve a linha guardada de cada um que já está. Ele lê uma expressão com mais de uma palavra inteira. `exists` confere palavra por palavra e não serve para isso. O `dry_run` do lote em `insert` também diz o que já está, em `unchanged`, e o que é novo, em `inserted`, e valida o lote. Com terminal, rode o comando. Sem terminal, chame a ferramenta do servidor `vocabulary`. Sem os dois, como num agente do Notion, pare antes de pesquisar. Diga que o cadastro roda numa ferramenta de código com o projeto aberto. Não leia o vocabulário de memória. Outra caixa é o mesmo termo: a linha que já está recebe a orientação. Não cadastre outra linha dessa grafia com as mesmas tags. A mesma grafia com outro conjunto de tags, ou sem tags, é outra linha e convive com a que já está. A consulta com tags devolve a linha dessas tags, e sem tags a linha sem tags. Quando mais de uma vale, `rows` lista todas. Acento muda a palavra: roles e rolês, pais e país são termos diferentes, cada um com a própria linha. Uma forma igual, com os mesmos campos, volta sem alteração.
 
 Plural, singular, feminino, masculino e outra palavra do mesmo assunto são linhas próprias. Cada uma tem o próprio estado. Casas e moradias convivem. Casa e casas convivem. Gato e gata convivem. Não junte essas linhas.
 
@@ -71,7 +71,7 @@ Se você criar outra linha para a mesma palavra em outra caixa, o vocabulário r
 
 ### Duplicidade já no vocabulário
 
-Se você gravar uma das linhas enquanto outra do mesmo termo continua lá, a orientação nova fica numa e some da outra.
+Se você gravar uma das linhas enquanto outra do mesmo termo, em outra caixa e com as mesmas tags, continua lá, a orientação nova fica numa e some da outra.
 
 1. Pare.
 2. Repita as linhas e a sugestão que a consulta ou a escrita devolveu.
@@ -124,6 +124,7 @@ O plano ficou em update. A reticências que já estava foi reescrita, com o quan
 ## Casos-limite
 
 - O termo já está, só muda a caixa: a linha que já está é atualizada, ou fica sem alteração se os campos forem os mesmos.
+- A grafia já está com a tag de outro contexto e a regra nova é geral ou de outro contexto: grave outra linha, sem tags ou com as tags dela. A linha que já está fica como está.
 - Lote vindo de outra ferramenta: um arquivo com `terms --file` e `upsert`. Diga o que entrou, o que foi atualizado e o que ficou em `incomplete`.
 - Sem terminal e sem o servidor `vocabulary`, como num agente do Notion: pare. O cadastro roda numa ferramenta de código com o projeto aberto. Não confirme nada.
 - A pessoa pergunta se um termo ou uma variação faltou: `procurar-variacao-de-termo`. `related` só aponta para termo que já está.
@@ -131,10 +132,11 @@ O plano ficou em update. A reticências que já estava foi reescrita, com o quan
 ## Pegadinhas
 
 - Cadastrar parece reescrever o que já está. Com `insert`, a linha que já existe fica.
+- `Already in the glossary` parece dizer que a regra já está. Ele só vale para a mesma grafia com o mesmo conjunto de tags.
 - A maiúscula do pedido parece a grafia a guardar. Termo novo fica em minúsculas. A linha que já existe conserva a grafia guardada.
 - Termo proibido parece exigir um substituto inventado. Sem a resposta da pessoa, `alternatives` fica vazio.
 - Uma variação ausente parece já ligada pela palavra vizinha. Ela não existe até ser cadastrada. `related` não a cria.
-- Duas linhas do mesmo termo parecem um convite a apagar a mais curta. A escrita não apaga. Sinalize e espere a escolha.
+- Duas linhas do mesmo termo parecem um convite a apagar a mais curta. Com tags diferentes, as duas valem, cada uma no próprio contexto. Com as mesmas tags, a escrita não apaga. Sinalize e espere a escolha.
 - Um exemplo citado parece herdar a descrição do termo. Se ele não vem como item do lote, nasce só com o estado daquele vínculo.
 - O comando de escrita, com `--term` ou `--file`, parece dispensar a validação. Sem o plano que `validar-plano-de-vocabulario` aprovou, não grave. Quem decidiu fica em `decided_by` e o dia em `decided_at`, nunca na descrição nem em `notes`.
 
