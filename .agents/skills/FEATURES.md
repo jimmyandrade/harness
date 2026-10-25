@@ -32,6 +32,7 @@ How these skills relate is in `README.md`, in this folder.
   - Checks each comment against the current head of the pull request, and marks it valid, already fixed, outdated, or duplicate
   - Classifies each suggestion, from a person or a bot, as structural, a behavior change, a disagreement, or out of scope. A behavior change waits for the approval of the person, and a disagreement becomes a question
   - Works in a separate copy of the repository, validates before committing, and never pushes a change that breaks the validation or rewrites commits already in the pull request
+  - When the person asks to resolve a conflict with the base, brings the base in and replaces the published branch, as criar-pull-request decides
   - Records a lesson that outlives the pull request in the project instructions
   - Pushes the branch after each fix and before replying, so a reply never cites a commit missing from the pull request
   - Replies on each thread before resolving it, closes the loop with a last message from the person acting, and leaves open a thread that waits for a decision
