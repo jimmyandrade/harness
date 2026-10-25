@@ -3,7 +3,7 @@ name: criar-pull-request
 description: Use essa habilidade sempre que for abrir PR, subir uma correção, mandar para a branch principal ou mesclar mudança no repositório, mesmo sem dizer PR. NÃO use para responder comentário de revisão nem para só commitar (use criar-commit).
 metadata:
   author: jimmyandrade
-  version: "0.19.0"
+  version: "0.19.1"
   related:
     - evoluir-habilidade
     - criar-commit
@@ -78,7 +78,7 @@ Teste antes o acesso ao remoto com a credencial do `gh`. Faça o push com essa c
 
 ### Passo 6
 
-Antes de abrir, procure cada termo de `Termos que não podem aparecer` nos arquivos novos e alterados e no texto do PR, sem diferenciar maiúsculas (`git grep -i -E "termo1|termo2"`). Um achado volta para correção e nunca segue para o PR. Abra o PR contra a `Branch base` no `Repositório`. Título igual ao assunto do commit. Corpo em `Idioma do PR`. Se o repositório tiver um template de pull request, siga as seções dele e marque as caixas conforme o que foi feito. Com `Atribuição da sessão` em `sim`, termine com a linha de atribuição da sessão. Com `não`, não ponha linha de ferramenta ou de modelo, e remova a que o PR já tiver na mesma edição. Com `Atribuir o PR a quem abre` em `sim`, atribua o PR à conta do `gh` que o abriu. Com `Rotular o PR` em `sim`, leia os rótulos do repositório (`gh label list`) e aplique o que melhor descreve a mudança, pelo tipo do commit e pelo que o diff faz. Se nenhum serve, só crie um novo com `Criar rótulo se nenhum servir` em `sim`; com `não`, diga na resposta que nenhum serviu. Um PR que já está aberto sem pessoa atribuída ou sem rótulo recebe os dois na mesma edição. Mande o link na resposta.
+Antes de abrir, procure cada termo de `Termos que não podem aparecer` nos arquivos novos e alterados e no texto do PR, sem diferenciar maiúsculas (`git grep -i -E "termo1|termo2"`). Um achado volta para correção e nunca segue para o PR. Abra o PR contra a `Branch base` no `Repositório`. Título igual ao assunto do commit. Corpo em `Idioma do PR`. Se o repositório tiver um template de pull request, siga as seções dele e marque as caixas conforme o que foi feito. Com `Atribuição da sessão` em `sim`, termine com a linha de atribuição da sessão. Com `não`, não ponha linha de ferramenta ou de modelo, e remova a que o PR já tiver na mesma edição. Com `Atribuir o PR a quem abre` em `sim`, o comando que abre o PR já leva `--assignee` com a conta do `gh` que o abre. Com `Rotular o PR` em `sim`, leia os rótulos do repositório (`gh label list`) antes de abrir, e o mesmo comando já leva `--label` com o rótulo que melhor descreve a mudança, pelo tipo do commit e pelo que o diff faz. Não abra o PR para rotular depois. Se nenhum rótulo serve, só crie um novo com `Criar rótulo se nenhum servir` em `sim`; com `não`, diga na resposta que nenhum serviu e não abra o PR sem rótulo. Um PR que já estava aberto sem pessoa atribuída ou sem rótulo recebe os dois antes de qualquer outra edição. Mande o link na resposta.
 
 ### Passo 7
 
@@ -124,6 +124,14 @@ Na resposta final, informe o hash de cada commit e diga o estado de cada etapa: 
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
+
+### PR aberto sem rótulo
+
+Se você abrir o pull request e só depois escolher o rótulo, o PR fica sem rótulo.
+
+1. Leia os rótulos do repositório antes de abrir.
+2. Com `Atribuir o PR a quem abre` e `Rotular o PR` em `sim`, o comando que abre já leva `--assignee` e `--label`.
+3. Não trate o PR como aberto enquanto o rótulo estiver faltando.
 
 ### Frase que adia a habilidade
 
@@ -208,7 +216,7 @@ O pedido autoriza push e merge. Push sem o hook, porque o commit já passou em t
 - `git fetch origin && git rebase origin/<Branch base>`: Passo 4.
 - `GIT_TERMINAL_PROMPT=0 git -c credential.helper= -c 'credential.helper=!gh auth git-credential' ls-remote origin HEAD`: teste de acesso do Passo 5.
 - `LEFTHOOK=0 GIT_TERMINAL_PROMPT=0 git -c credential.helper= -c 'credential.helper=!gh auth git-credential' push -u origin <branch>`: push sem o hook. Tire o `LEFTHOOK=0` para rodar o hook.
-- `gh pr create --repo <Repositório> --base <Branch base> --head <branch> --title "<assunto>" --body "<corpo>"`: Passo 6.
+- `gh pr create --repo <Repositório> --base <Branch base> --head <branch> --title "<assunto>" --body "<corpo>" --assignee <pessoa> --label <rótulo>`: Passo 6. Com `Atribuir o PR a quem abre` ou `Rotular o PR` em `não`, tire a flag correspondente. Com `Rotular o PR` em `sim`, `--label` fica no comando.
 - `gh api graphql -f query='query{repository(owner:"<dono>",name:"<nome>"){pullRequest(number:<número>){reviewDecision reviewThreads(first:100){nodes{isResolved}}}}}'`: threads sem resolver e pedido de mudança do Passo 8.
 - `gh pr checks <número> --repo <Repositório>`: checks do Passo 8.
 - `gh pr merge <número> --repo <Repositório> --<Tipo de merge> --delete-branch`: Passo 8.
