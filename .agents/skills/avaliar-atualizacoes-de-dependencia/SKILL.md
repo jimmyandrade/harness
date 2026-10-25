@@ -3,7 +3,7 @@ name: avaliar-atualizacoes-de-dependencia
 description: Use essa habilidade sempre que houver PR de atualização de dependência do Dependabot ou do Renovate para avaliar, testar ou mesclar, mesmo sem dizer o nome do bot. NÃO use para atualizar uma dependência à mão nem para PR que não seja de bot.
 metadata:
   author: jimmyandrade
-  version: "0.5.2"
+  version: "0.6.0"
   notion: "false"
   related:
     - evoluir-habilidade
@@ -27,6 +27,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Comando de testes": ""
 "Comando de build": ""
 "Revisores": ""
+"Assignee": ""
+"Label": "dependencies"
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -53,6 +55,8 @@ Ache cada ponto de uso do pacote direto, no código e nos testes. Numa action, o
 Rode o `Comando de testes` e o `Comando de build`. Rode também as suítes e os builds que usam o pacote e ficam fora desses comandos, quando as instruções do projeto os listam. Se a atualização quebrar o código do projeto, corrija na própria branch do PR, seguindo `criar-commit`, e envie a branch. Falha que pede decisão de produto, e não só código, para a fila: pergunte à pessoa.
 
 ### Passo 6
+
+Antes de pedir revisão ou comentar a análise, garanta que o PR tenha um assignee e um label. `Assignee` vazio significa a pessoa autenticada no GitHub, e não a ausência da regra. Sem assignee, atribua esse valor. Sem label, aplique `Label`. Se o PR já tiver assignee e pelo menos um label, não troque e não acrescente outro. Se a atribuição ou a etiqueta falhar, pare e mostre o erro. Não mescle enquanto faltar um dos dois. Cite os dois na análise.
 
 Peça revisão aos `Revisores`. Sem revisores, comente no PR a análise: a cadeia de dependência, os riscos das notas de versão e os testes acrescentados.
 
@@ -89,6 +93,15 @@ Se você procurar os pontos de uso do pacote transitivo, não acha nada, porque 
 
 1. Suba pela árvore até o pacote direto.
 2. Procure os pontos de uso dele.
+
+### PR sem assignee ou sem label
+
+Se você mesclar o PR sem responsável ou sem etiqueta, a fila perde quem acompanha e o filtro do repositório.
+
+1. Confira assignee e labels antes do comentário.
+2. Sem assignee, atribua `Assignee`, ou a pessoa autenticada quando esse valor estiver vazio.
+3. Sem label, aplique `Label`. Não substitua um label que já existe.
+4. Se o comando falhar, pare e mostre o erro.
 
 ### Teste num PR separado
 
@@ -137,7 +150,8 @@ A biblioteca era transitiva. A árvore levou ao pacote direto que a puxa, e os p
 - `npm ls <pacote> --all`: árvore do Passo 2.
 - `npm view <pacote> version`: versão mais recente do Passo 3.
 - `gh release view <tag> --repo <repositório do pacote>`: notas de versão do Passo 3.
+- `gh pr edit <número> --repo <Repositório> --add-assignee <pessoa> --add-label <label>`: assignee e label do Passo 6. Não use quando os dois já existirem.
 - `gh pr edit <número> --repo <Repositório> --add-reviewer <pessoa>`: revisão do Passo 6.
 - `gh run watch <id da execução> --repo <Repositório> --exit-status`: CI da base do Passo 7.
 
-1. Monte a fila, depois, para cada PR: branch, árvore, notas de versão, pontos de uso e testes, verificações, revisão, comentários, merge e CI da base.
+1. Monte a fila, depois, para cada PR: branch, árvore, notas de versão, pontos de uso e testes, verificações, assignee e label, revisão, comentários, merge e CI da base.
