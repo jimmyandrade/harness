@@ -3,7 +3,7 @@ name: criar-commit
 description: Use essa habilidade sempre que terminar um trabalho que mudou o repositório ou for commitar, separar commits ou escrever a mensagem, mesmo sem dizer commit. NÃO use para push, abrir PR, rebase nem merge (use criar-pull-request).
 metadata:
   author: jimmyandrade
-  version: "0.12.0"
+  version: "0.13.0"
 ---
 
 # Criar commit
@@ -48,7 +48,7 @@ flowchart LR
   S -->|nunca ou só no terminal| D[Branch própria e commit pela integração]
 ```
 
-O repositório é a única fonte de escrita. Uma cópia sincronizada a partir dele, como a página de uma habilidade no Notion, é só leitura: não grave nela, nem quando a pessoa chamar de emergência, nem como saída quando o repositório não está ao alcance. `Commit direto na base` vale `nunca`, `só no terminal` ou `sempre`. Sem terminal, testes, build e lint não rodam: quem verifica são os checks do CI no PR, aberto por `criar-pull-request`.
+O repositório é a única fonte de escrita. Uma cópia a partir dele, sincronizada, como a página de uma habilidade no Notion, ou instalada por dependência ou plugin, é só leitura: não grave nela, nem quando a pessoa chamar de emergência, nem como saída quando o repositório não está ao alcance. A próxima instalação apaga o que foi gravado na cópia instalada. `Commit direto na base` vale `nunca`, `só no terminal` ou `sempre`. Sem terminal, testes, build e lint não rodam: quem verifica são os checks do CI no PR, aberto por `criar-pull-request`.
 Na branch própria, se a branch atual for a `Branch base`, crie uma branch a partir da `Branch base` remota atualizada, sem rastrear a base. O nome é `<tipo>/<descrição>`, com o tipo do Conventional Commits do commit e a descrição em ASCII kebab-case. Branch que a ferramenta criou com outro prefixo, como `claude/`, é renomeada para esse padrão antes do commit.
 
 ### Passo 3
@@ -135,14 +135,14 @@ Um commit `fix:` com o assunto dizendo o porquê da troca do texto. Sem teste no
 - A mudança está na `Branch base` sem commit e vai para uma branch própria: leve as mudanças para a branch nova antes de commitar.
 - Commit cujo assunto começa com `merge:`: não crie. A base entra por rebase, em `criar-pull-request`.
 - O projeto não tem `Comando de testes` nem `Comando de build`: diga na resposta que nada foi verificado antes do commit.
-- A pessoa pede para mudar a cópia sincronizada, como a página de uma habilidade: não grave nela. A mudança vai no repositório, e o sync atualiza a cópia depois do merge.
+- A pessoa pede para mudar uma cópia, sincronizada ou instalada por dependência ou plugin, como a página de uma habilidade: não grave nela. A mudança vai no repositório de origem. A cópia sincronizada muda depois do merge. A cópia instalada muda quando o projeto passa a usar a versão nova.
 
 ## Pegadinhas
 
 - `git switch -c <branch> origin/<base>` faz a branch rastrear a base. Use `--no-track`.
 - O type check do repositório inteiro pode falhar em arquivos que não são seus. Não use esse resultado como portão do seu commit sem comparar com a `Branch base`.
 - Um hook de pre-push pode rodar testes e build de novo. Rodar antes do commit permite publicar sem o hook depois.
-- O texto da cópia sincronizada que explica como preencher uma habilidade parece permissão para criá-la ali. Criar ou ativar a habilidade fora do repositório deixa uma cópia que o sync não remove.
+- O texto de uma cópia, sincronizada ou instalada, que explica como preencher uma habilidade parece permissão para criá-la ali. Criar ou ativar a habilidade fora do repositório de origem deixa uma cópia que o sync não remove e que a instalação seguinte apaga.
 
 ## Scripts disponíveis
 
