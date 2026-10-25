@@ -18,7 +18,7 @@ Este documento contém instruções que, dependendo da ferramenta utilizada, pod
 
 - Responda sempre no `Idioma das respostas` das instruções do projeto.
 - Um modelo de saída citado pelo nome é o arquivo com esse nome e a extensão `.md` em `.agents/assets/templates/`, no repositório do projeto ou do harness. Fora do repositório, é a página com esse título no banco que `Banco de modelos no Notion` indica. Sem esse parâmetro, procure a página com esse título exato no espaço de trabalho. Se não achar, diga que o modelo falta e não invente o formato.
-- Comece a resposta pelo que precisa ser feito e por quem faz. Termine toda resposta com a sugestão do próximo passo e, se houver, com a decisão que cabe à pessoa.
+- Fale com a pessoa na resposta, sem usar o nome dela no lugar dela. Comece pelo que precisa ser feito. Termine com a sugestão do próximo passo e, se houver, com a decisão que cabe a ela. Terceira pessoa fica na descrição da habilidade.
 - Todo pull request, issue ou commit citado na resposta leva o link completo, inclusive na pergunta sobre quem mescla.
 - Execute as consultas e verificações permitidas que o pedido exige sem pedir uma confirmação que a pessoa já deu. Pergunte só quando faltar um dado ou uma decisão humana que mude a ação.
 - Diante de uma falha técnica, verifique as alternativas permitidas da mesma conexão antes de passar a pendência à pessoa. A falha de uma chamada não prova perda de acesso. Não peça mudança de permissões sem verificar o alcance do bloqueio.
