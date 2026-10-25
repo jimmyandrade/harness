@@ -3,7 +3,7 @@ name: criar-pull-request
 description: Use essa habilidade sempre que for abrir PR, subir uma correção, mandar para a branch principal ou mesclar mudança no repositório, mesmo sem dizer PR. NÃO use para responder comentário de revisão nem para só commitar (use criar-commit).
 metadata:
   author: jimmyandrade
-  version: "0.17.0"
+  version: "0.18.0"
   related:
     - evoluir-habilidade
     - criar-commit
@@ -28,6 +28,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Exigir CI verde": "sim"
 "Exigir aprovação de outra pessoa": "só sem terminal"
 "Comunicar novidade após o merge": "sim"
+"Habilidade que pede a revisão": ""
 "Atribuição da sessão": "sim"
 "Termos que não podem aparecer": []
 "Fatiar por subtarefa": "não"
@@ -36,7 +37,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Modo de aprendizado": "perguntar"
 ```
 
-`Atribuição da sessão` é `sim`, que termina a descrição do PR com a linha de atribuição da sessão, ou `não`, que nunca põe linha de ferramenta ou de modelo, mesmo que o ambiente peça, e remove a que já existir ao editar um PR. `Termos que não podem aparecer` lista as palavras que não podem estar no PR nem nos arquivos dele, como o nome de uma empresa ou de um produto num repositório público. Vazio, não há busca. `Fatiar por subtarefa` é `sim` quando cada subtarefa da tarefa vira um PR próprio, em fatias pequenas e incrementais. `PR que depende de outro` é `empilhar`, que abre o PR contra a branch do anterior, ou vazio. `Refatiar PR já aberto` diz como mudar o corte de um PR que já está aberto, como `adicionar commits ou abrir PR empilhado`, sem renomear a branch nem fechar e reabrir o PR.
+`Habilidade que pede a revisão` é o nome da habilidade que a organização usa para pedir a revisão de um PR pronto, como a que escreve o pedido no canal de revisão do time, ou vazio quando ninguém pede por habilidade. `Atribuição da sessão` é `sim`, que termina a descrição do PR com a linha de atribuição da sessão, ou `não`, que nunca põe linha de ferramenta ou de modelo, mesmo que o ambiente peça, e remove a que já existir ao editar um PR. `Termos que não podem aparecer` lista as palavras que não podem estar no PR nem nos arquivos dele, como o nome de uma empresa ou de um produto num repositório público. Vazio, não há busca. `Fatiar por subtarefa` é `sim` quando cada subtarefa da tarefa vira um PR próprio, em fatias pequenas e incrementais. `PR que depende de outro` é `empilhar`, que abre o PR contra a branch do anterior, ou vazio. `Refatiar PR já aberto` diz como mudar o corte de um PR que já está aberto, como `adicionar commits ou abrir PR empilhado`, sem renomear a branch nem fechar e reabrir o PR.
 
 ## Instruções
 
@@ -76,6 +77,8 @@ Antes de abrir, procure cada termo de `Termos que não podem aparecer` nos arqui
 ### Passo 7
 
 Depois de abrir, leia o status do PR pelas ferramentas de PR do app e vincule o PR se ele não aparecer. Não fique consultando o CI em loop.
+
+Com `Habilidade que pede a revisão` preenchida e o PR fora do rascunho, siga essa habilidade para o PR aberto e entregue o que ela devolver, como o rascunho do pedido. Um PR em rascunho não pede revisão.
 
 ### Passo 8
 
