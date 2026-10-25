@@ -1,9 +1,9 @@
 ---
 name: redigir-com-tom-de-voz
-description: Use essa habilidade sempre que for criar, adaptar, lapidar ou validar texto da marca no tom de voz, mesmo sem dizer copy, como slogan, legenda, e-mail, WhatsApp, campanha, CTA, microcopy ou título de evento externo. NÃO use para responder quem conversa com a IA, descrever uma skill, titular tarefa ou oportunidade, cravar a grafia, alterar formato de conteúdo, nem assumir cliente, peça, oportunidade ou histórico.
+description: Use essa habilidade sempre que for criar, redigir, editar, revisar ou responder texto da marca no tom de voz, mesmo sem dizer copy. NÃO use para responder quem conversa com a IA, descrever uma skill, titular tarefa ou oportunidade, cravar a grafia, alterar formato de conteúdo, nem assumir cliente, peça, oportunidade ou histórico.
 metadata:
   author: jimmyandrade
-  version: "0.16.2"
+  version: "0.17.0"
   aliases:
     - escreva-usando-o-tom-de-voz
   related:
@@ -16,14 +16,18 @@ metadata:
 ## Parâmetros de configuração
 
 ```yaml
+"Guia de tom de voz": ""
+"Público": ""
 "Modo de aprendizado": "perguntar"
 ```
+
+`Guia de tom de voz` é a fonte que as instruções do projeto nomeiam. Vazio, pare e peça: não redija de memória. `Público` é o público padrão. Vazio, o pedido informa. Se o pedido nomeia outro público, vale o do pedido.
 
 ## Instruções
 
 ### Passo 1
 
-Escrever, sugerir, revisar e reescrever palavra, termo, expressão, frase e texto longo no tom de voz do projeto é esta habilidade. Entra slogan, headline, legenda, descrição de produto, bio, assunto e prévia de e-mail, WhatsApp, resposta a cliente, campanha, apresentação, inscrição, abordagem comercial, CTA, nome, microcopy e comunicação institucional. A copy segue a linguagem de marca, a identidade verbal, a intenção criativa e a consistência que as instruções do projeto e o vocabulário registram. O título de evento externo entra quando a pessoa pede o tom de voz para esse título. Esta habilidade não grava o evento, não cria a página e não crava a grafia. A grafia que a pessoa ou as instruções do projeto já fecharam entra pronta. O formato de conteúdo que a pessoa apontou permanece. O cadastro de um termo segue `definir-vocabulario`.
+Criar, redigir, editar, revisar ou responder palavra, termo, expressão, frase e texto longo no tom de voz do projeto é esta habilidade. Entra slogan, headline, legenda, descrição de produto, bio, assunto e prévia de e-mail, WhatsApp, resposta a cliente, campanha, apresentação, inscrição, abordagem comercial, CTA, nome, microcopy e comunicação institucional. A copy segue a linguagem de marca, a identidade verbal, a intenção criativa e a consistência que as instruções do projeto e o vocabulário registram. O título de evento externo entra quando a pessoa pede o tom de voz para esse título. Esta habilidade não grava o evento, não cria a página e não crava a grafia. A grafia que a pessoa ou as instruções do projeto já fecharam entra pronta. O formato de conteúdo que a pessoa apontou permanece. O cadastro de um termo segue `definir-vocabulario`.
 
 ```mermaid
 flowchart LR
@@ -35,7 +39,7 @@ flowchart LR
 
 ### Passo 2
 
-Antes de escrever ou aprovar, o texto tem contexto, canal, público, as fontes da marca que as instruções do projeto nomeiam, o vocabulário e a intenção criativa. Falta algum: pare e peça. Não aprove. Não invente persona, posicionamento, vocabulário nem termo proibido. A pessoa informa a fonte. Se ela não estiver no workspace conectado, pare.
+Antes de criar, redigir, editar, revisar ou responder, consulte o `Guia de tom de voz`. O público é o `Público`, salvo quando o pedido nomeia outro. O texto tem contexto, canal, público, as fontes da marca que as instruções do projeto nomeiam, o vocabulário e a intenção criativa. Falta o guia ou algum desses: pare e peça. Não aprove. Não escreva o guia de memória. Não invente persona, posicionamento, vocabulário nem termo proibido. A pessoa informa a fonte. Se ela não estiver no workspace conectado, pare.
 
 Consulte o vocabulário com Scripts disponíveis, com `tags` de quem fala, do evento, do canal e do formato do texto, como `maria-silva`, `festival-de-verao`, `palco` ou `whatsapp`. Use a tag que o vocabulário já tem para esse contexto. Consulte no idioma do texto que vai escrever: texto em inglês consulta `en`, texto em português consulta `pt-BR`. A consulta com tags deixa de fora o termo de outra pessoa, de outro evento ou de outro canal. Sem saber quem fala no texto, pergunte. Com terminal e a CLI instalada, rode o comando. Sem terminal, ou sem a CLI, chame a ferramenta do servidor `vocabulary`. Sem os dois, como num agente do Notion, o vocabulário vem de uma fonte do workspace conectado que as instruções do projeto nomeiam. Sem essa fonte, pare e diga que a consulta roda numa ferramenta de código com o projeto aberto. Não leia o vocabulário de memória.
 
@@ -95,11 +99,11 @@ Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ### Copy sem fonte
 
-Se você escrever ou aprovar sem contexto, canal, público, fonte da marca, vocabulário ou intenção criativa, a copy sai genérica.
+Se você criar, redigir, editar, revisar ou responder sem o `Guia de tom de voz`, ou sem contexto, canal, público, fonte da marca, vocabulário ou intenção criativa, a copy sai genérica.
 
-1. Pare e peça o que falta.
+1. Pare e peça o guia e o que mais faltar.
 2. Não invente persona, posicionamento, vocabulário nem termo proibido.
-3. Não aprove antes da fonte.
+3. Não aprove antes do guia e da fonte.
 
 ### Texto que enfraquece
 
@@ -187,7 +191,7 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### Lapide esta legenda. O público e o canal ainda não estão no pedido.
 
-Pedi contexto, canal, público, as fontes da marca, o vocabulário e a intenção. Não aprovei. Não assumi cliente, peça, oportunidade nem histórico. O formato de conteúdo ficou como está.
+Consultei o `Guia de tom de voz`. Pedi contexto, canal, público, as fontes da marca, o vocabulário e a intenção. Não aprovei. Não assumi cliente, peça, oportunidade nem histórico. O formato de conteúdo ficou como está.
 
 ### Escreva a abertura de outra pessoa no palco do Festival de Verão.
 
@@ -207,7 +211,7 @@ O título ficou específico, com o nome canônico que a fonte já tinha. Não vi
 
 ## Casos-limite
 
-- Falta contexto, canal, público, fonte da marca, vocabulário ou intenção criativa: pare e peça. Não aprove.
+- Falta o `Guia de tom de voz`, contexto, canal, público, fonte da marca, vocabulário ou intenção criativa: pare e peça. Não aprove. Não escreva o guia de memória.
 - A fonte da persona, do posicionamento, do vocabulário ou do termo proibido não está no workspace conectado: pare. Não invente.
 - Sem a CLI e sem o servidor `vocabulary`, como num agente do Notion, e sem fonte do vocabulário no workspace: pare. Não aprove.
 - A copy depende de cliente, peça, oportunidade ou histórico comercial: consulte a fonte que a pessoa indicou. Não assuma.
@@ -225,7 +229,7 @@ O título ficou específico, com o nome canônico que a fonte já tinha. Não vi
 
 ## Pegadinhas
 
-- Texto fluido parece aprovado. Sem contexto, canal, público, fonte da marca, vocabulário e intenção, a copy espera.
+- Texto fluido parece aprovado. Sem o `Guia de tom de voz`, contexto, canal, público, fonte da marca, vocabulário e intenção, a copy espera.
 - Pontuação e diminutivo parecem neutros. Os que o vocabulário proíbe saem quando enfraquecem desejo, clareza, personalidade ou potência comercial.
 - Evitável parece permitido com moderação. Sem a cena do `when`, ele sai.
 - Uma frase cadastrada parece valer para qualquer texto. A fala em primeira pessoa de uma pessoa só entra no texto dela.
