@@ -3,7 +3,7 @@ name: validar-plano-de-vocabulario
 description: Use essa habilidade sempre que, ao cadastrar termos do vocabulário do tom de voz, for preciso validar os campos do plano antes de gravar, como categorias, motivo, descrição, exemplos e quem decidiu, mesmo sem dizer validar. NÃO use para cadastrar o termo, decidir o nível dele, gravar no vocabulário, nem inventar um campo que a pessoa não enviou.
 metadata:
   author: jimmyandrade
-  version: "0.1.1"
+  version: "0.2.0"
   related:
     - classificar-estado-do-termo
     - definir-vocabulario
@@ -43,9 +43,9 @@ Valide o plano antes de gravar.
 - `forbidden` e `strongly_discouraged` recusam `examples`. O exemplo ruim vai em `rejected`.
 - Campo esperado que a pessoa não tem fica de fora. A escrita grava e devolve em `incomplete`. Diga essa lista. Não invente o campo. Passe `Validação dos campos` em `validation`.
 - Quem decidiu vai em `decided_by`, como os campos de pessoa do `package.json`: `name`, `email` e, se houver, `url`. O e-mail é o individual da pessoa no workspace, nunca o de uma conta de função compartilhada. Com `Domínio do e-mail de quem decide` preenchido, o e-mail termina nesse domínio. Sem o e-mail, pergunte. O endereço da linha de origem vai em `source`.
-- Todo termo do lote leva `decided_by`, em qualquer nível, permitido ou proibido.
+- Todo termo do lote leva `decided_by` e `decided_at`, em qualquer nível, permitido ou proibido. `decided_at` é o dia da decisão em ISO 8601, `AAAA-MM-DD`.
 - `source` é o trecho ou a página de onde aquele termo saiu, um por termo. A conversa em que a decisão foi tomada vai em `notes`.
-- `notes` guarda o histórico do termo: data, link, quem decidiu, o limite que `description` e `when` não dizem. `description` só diz o que o termo é. O registro formal ou informal vai em `categories`, não em campo. Não muda o estado.
+- `notes` guarda o histórico que nenhum campo guarda: um link ou o limite que `description` e `when` não dizem. Não repita nele quem decidiu nem a data. `description` só diz o que o termo é. O registro formal ou informal vai em `categories`, não em campo. Não muda o estado.
 - Um termo não é o próprio exemplo. A mesma grafia não entra duas vezes.
 - `state` é a permissão. `description` não repete o estado.
 - Exemplo de contexto e exemplo mais longo ficam em `examples`. Termo já cadastrado fica em `related`.
@@ -74,8 +74,8 @@ Se você repetir em `description` por que usamos, a explicação da palavra some
 
 Se você escrever quem decidiu ou a data em `description`, `reason` ou `source`, a consulta perde o campo e o texto do termo envelhece.
 
-1. Quem decidiu vai em `decided_by`, em todo termo do lote.
-2. Data, link e conversa vão em `notes`.
+1. Quem decidiu vai em `decided_by` e o dia em `decided_at`, em todo termo do lote.
+2. Link e conversa vão em `notes`, sem repetir o nome nem a data.
 3. `description` diz o que o termo é, e `reason` diz por que usamos.
 
 ### Termo inventado
