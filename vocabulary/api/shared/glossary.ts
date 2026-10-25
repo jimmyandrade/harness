@@ -9,7 +9,10 @@
  *
  * The file is an object. Each key is the term. Each value has state and the
  * fields of that row. The key is not repeated inside the value. The keys stay
- * in alphabetical order. state is one of five levels, from the strictest:
+ * in alphabetical order. A spelling may keep more than one row, one per set of
+ * tags, as ADR 0017 decides: its value is then a list of rows, the row without
+ * tags first. A spelling with one row stays an object, so an older file reads
+ * and writes back unchanged. state is one of five levels, from the strictest:
  * forbidden, strongly_discouraged, discouraged, allowed_with_care, and
  * allowed, as ADR 0010 decides. The deprecated situationally_allowed reads as
  * allowed_with_care and stays in the file until migrate rewrites it.
@@ -33,9 +36,14 @@
  * writeTerms searches before it writes. Only case folds: an accent is part of
  * the spelling, as ADR 0011 decides, so roles and rolês are two terms. A
  * plural, a gender, and another word for the same idea each keep their own row
- * and their own state. A new term is stored
+ * and their own state. A row is its spelling and its set of tags: a call that
+ * sends tags writes the row with that same set, and tags: [] or an insert
+ * without tags writes the row without tags. An update or an upsert that omits
+ * tags writes the only row of the spelling, and keeps its tags. update never
+ * adds a row, so with tags that no row has, it changes the tags of the only
+ * row. A new term is stored
  * in lowercase, unless it is written with case_sensitive, which keeps its
- * casing as given. insert leaves a term that is already in the file.
+ * casing as given. insert leaves a row that is already in the file.
  * update leaves a term that is absent. An update or an upsert of a term that is
  * in the file keeps every field the call does not send, so a call that sends
  * only a reason does not erase the description or the notes. A field sent
@@ -178,11 +186,12 @@ export function load(text: string): Entry[] {
   const entries: Entry[] = []
   const seen = new Set<string>()
   let previous: readonly [string, string] | null = null
-  for (const [rawTerm, row] of Object.entries(result.data)) {
+  const rows = Object.entries(result.data).flatMap(([rawTerm, list]) => list.map((row) => [rawTerm, row] as const))
+  for (const [rawTerm, row] of rows) {
     const entry = entryFrom(rawTerm, row.state ?? "allowed", row.alternative, true)
     if (row.stop_word === true) entry.stopWord = true
     if (row.state === undefined) entry.stateless = true
-    const key = matchKey(entry.term)
+    const key = rowKey(entry.term, row.tags)
     if (seen.has(key)) throw new InvalidGlossary(`${JSON.stringify(entry.term)} is duplicated.`)
     if (previous !== null && compareOrder(entry.order, previous) < 0) {
       throw new InvalidGlossary(`${JSON.stringify(entry.term)} is out of alphabetical order.`)
@@ -228,7 +237,28 @@ export function lookup(entries: readonly Entry[], submitted: string): { query: s
   }
   const found = entries[start]
   if (found === undefined || compareOrder(found.order, order) !== 0) return { query, entry: undefined }
+  // A read without tags prefers the row without tags of that spelling.
+  for (let index = start; index < entries.length && compareOrder(entries[index].order, order) === 0; index++) {
+    if (!hasTags(entries[index])) return { query, entry: entries[index] }
+  }
   return { query, entry: found }
+}
+
+/**
+ * The rows of one spelling that a read with these tags returns. The rows whose
+ * tags meet the read win over the row without tags, and more than one of them
+ * come back together, in the order of the file. Without such a row, the row
+ * without tags is returned. A read without tags of a spelling that only has
+ * tagged rows returns every one of them, as a read that sees every row.
+ */
+export function rowsFor(entries: readonly Entry[], term: string, tags: readonly string[]): Entry[] {
+  const rows = conceptMatches(entries, term)
+  if (tags.length > 0) {
+    const tagged = rows.filter((entry) => entry.tags?.some((tag) => tags.includes(tag)) === true)
+    if (tagged.length > 0) return tagged
+  }
+  const general = rows.filter((entry) => !hasTags(entry))
+  return general.length > 0 ? general : rows
 }
 
 /**
@@ -261,7 +291,7 @@ export function register(
   const path = glossaryFile(directory, language)
   const entries = load(readFileSync(path, "utf8"))
   const created = entryFrom(lowercaseTerm(term), state, alternative)
-  if (entries.some((item) => matchKey(item.term) === matchKey(created.term))) {
+  if (findConcept(entries, created.term, []) !== undefined) {
     throw new InvalidGlossary(`${JSON.stringify(created.term)} is already in the glossary.`)
   }
   entries.push(created)
@@ -279,7 +309,7 @@ export function registerForbidden(
   const entries = load(readFileSync(path, "utf8"))
   const created = entryFrom(input.case_sensitive ? input.term : lowercaseTerm(input.term), "forbidden", undefined)
   if (input.case_sensitive) created.caseSensitive = true
-  if (entries.some((item) => matchKey(item.term) === matchKey(created.term))) {
+  if (findConcept(entries, created.term, []) !== undefined) {
     throw new InvalidGlossary(`${JSON.stringify(created.term)} is already in the glossary.`)
   }
   assertExamples(created.term, input.rejected, input.alternatives)
@@ -315,7 +345,7 @@ export function registerAllowed(
   const entries = load(readFileSync(path, "utf8"))
   const created = entryFrom(input.case_sensitive ? input.term : lowercaseTerm(input.term), "allowed", undefined)
   if (input.case_sensitive) created.caseSensitive = true
-  if (entries.some((item) => matchKey(item.term) === matchKey(created.term))) {
+  if (findConcept(entries, created.term, []) !== undefined) {
     throw new InvalidGlossary(`${JSON.stringify(created.term)} is already in the glossary.`)
   }
   assertExamples(created.term, input.examples, [])
@@ -348,7 +378,7 @@ export function registerSituational(
   const entries = load(readFileSync(path, "utf8"))
   const created = entryFrom(input.case_sensitive ? input.term : lowercaseTerm(input.term), "allowed_with_care", undefined)
   if (input.case_sensitive) created.caseSensitive = true
-  if (entries.some((item) => matchKey(item.term) === matchKey(created.term))) {
+  if (findConcept(entries, created.term, []) !== undefined) {
     throw new InvalidGlossary(`${JSON.stringify(created.term)} is already in the glossary.`)
   }
   assertExamples(created.term, input.examples, [])
@@ -371,7 +401,8 @@ export function registerSituational(
   }
 }
 
-type Writing = BulkTerm & { previous?: string }
+/** A term of the batch, and the stored row it replaces, if any. */
+type Writing = BulkTerm & { previous?: Entry }
 
 export type WriteOptions = {
   /** Validate and report what would happen, and leave the file as it is. */
@@ -396,7 +427,6 @@ export function writeTerms(
   const tag = canonicalLanguage(language)
   const path = glossaryFile(directory, tag)
   const loaded = load(readFileSync(path, "utf8"))
-  const existed = new Set(loaded.map((entry) => matchKey(entry.term)))
   const problems: Problem[] = [...(options.problems ?? [])]
   const items = terms.map((term) => {
     const { item, issues } = withStored(loaded, term, mode)
@@ -406,7 +436,7 @@ export function writeTerms(
   const batch: BulkTerm[] = []
   const missing = new Map<string, ExpectedField[]>()
   for (const item of items) {
-    if (batch.some((previous) => sameConcept(previous.term, item.term))) {
+    if (batch.some((previous) => rowKey(previous.term, previous.tags) === rowKey(item.term, item.tags))) {
       problems.push({ term: item.term, message: `${JSON.stringify(item.term)} is duplicated.` })
     }
     if (item.source !== undefined && batch.some((previous) => previous.source === item.source)) {
@@ -430,7 +460,7 @@ export function writeTerms(
   const unchanged: TermsWrite["unchanged"] = []
   const skipped: TermsWrite["skipped"] = []
   for (const item of items) {
-    const found = findConcept(loaded, item.term)
+    const found = targetRow(loaded, item, mode)
     if (found !== undefined) {
       const reason =
         matchKey(found.term) === matchKey(item.term)
@@ -441,24 +471,25 @@ export function writeTerms(
         continue
       }
       const spelling = item.case_sensitive && matchKey(found.term) === matchKey(item.term) ? item.term : found.term
-      writing.set(matchKey(found.term), { ...item, term: spelling })
+      writing.set(rowKey(spelling, item.tags), { ...item, term: spelling, previous: found })
       continue
     }
     const spelling = item.case_sensitive ? item.term : lowercaseTerm(item.term)
-    const origin = item.source === undefined ? undefined : loaded.find((entry) => entry.source === item.source)
+    const spelled = conceptMatches(loaded, item.term).length > 0
+    const origin = item.source === undefined || spelled ? undefined : loaded.find((entry) => entry.source === item.source)
     if (origin !== undefined) {
       if (mode === "insert") {
         unchanged.push({ term: item.term, reason: `Already in the glossary as ${JSON.stringify(origin.term)}.` })
         continue
       }
-      writing.set(matchKey(spelling), { ...item, term: spelling, previous: origin.term })
+      writing.set(rowKey(spelling, item.tags), { ...item, term: spelling, previous: origin })
       continue
     }
     if (mode === "update") {
-      skipped.push({ term: item.term, reason: "Not in the glossary." })
+      skipped.push({ term: item.term, reason: spelled ? "Not in the glossary with these tags." : "Not in the glossary." })
       continue
     }
-    writing.set(matchKey(spelling), { ...item, term: spelling })
+    writing.set(rowKey(spelling, item.tags), { ...item, term: spelling })
   }
   const working = [...loaded]
   for (const item of writing.values()) {
@@ -472,23 +503,23 @@ export function writeTerms(
     }
   }
   const shells = new Map<string, Entry>()
-  for (const item of writing.values()) {
-    const key = matchKey(item.term)
+  for (const [key, item] of writing) {
     const shell = entryFrom(item.term, item.state, undefined)
-    const index = working.findIndex((entry) => matchKey(entry.term) === matchKey(item.previous ?? item.term))
-    if (index === -1) working.push(shell)
+    const previous = item.previous
+    const index = previous === undefined ? -1 : working.indexOf(previous)
+    if (previous === undefined || index === -1) working.push(shell)
     else {
-      const previous = working[index]
-      if (previous !== undefined && previous.alternative !== null && item.state !== "allowed") shell.alternative = previous.alternative
-      renameLinks(working, previous?.term ?? item.term, item.term)
+      if (previous.alternative !== null && item.state !== "allowed") shell.alternative = previous.alternative
+      // A link names a spelling, so it follows a rename only when no other row keeps the old one.
+      if (!working.some((entry) => entry !== previous && sameConcept(entry.term, previous.term))) renameLinks(working, previous.term, item.term)
       working[index] = shell
     }
     shells.set(key, shell)
   }
   const inserted: TermsWrite["inserted"] = []
   const updated: TermsWrite["updated"] = []
-  for (const item of writing.values()) {
-    const shell = shells.get(matchKey(item.term))
+  for (const [key, item] of writing) {
+    const shell = shells.get(key)
     if (shell === undefined) continue
     try {
       fillTerm(shell, item, working, writing)
@@ -498,7 +529,7 @@ export function writeTerms(
       continue
     }
     const registration = registrationOf(tag, shell)
-    if (existed.has(matchKey(item.previous ?? item.term))) updated.push(registration)
+    if (item.previous !== undefined) updated.push(registration)
     else inserted.push(registration)
   }
   const unique = problems.filter((problem, index) => problems.findIndex((other) => other.term === problem.term && other.message === problem.message) === index)
@@ -567,7 +598,9 @@ export function migrate(directory: string, language: string, write = false): Mig
  */
 function withStored(entries: readonly Entry[], item: BulkTerm, mode: WriteMode): { item: BulkTerm; issues: string[] } {
   if (mode === "insert") return { item, issues: [] }
-  const stored = findConcept(entries, item.term) ?? (item.source === undefined ? undefined : entries.find((entry) => entry.source === item.source))
+  const spelled = conceptMatches(entries, item.term).length > 0
+  const stored =
+    targetRow(entries, item, mode) ?? (item.source === undefined || spelled ? undefined : entries.find((entry) => entry.source === item.source))
   if (stored === undefined) return { item, issues: [] }
   const keeps = (field: PatchableField): boolean => !item.given.includes(field)
   const merged: BulkTerm = {
@@ -595,6 +628,23 @@ function withStored(entries: readonly Entry[], item: BulkTerm, mode: WriteMode):
     stateless: item.stateless ? stored.stateless === true : false,
   }
   return { item: merged, issues: termIssues(merged).map((issue) => `${JSON.stringify(item.term)}: ${issue}`) }
+}
+
+/**
+ * The stored row a write of this term replaces: the row with the same set of
+ * tags, where tags: [] is the row without tags. An insert without tags is the
+ * row without tags. An update or an upsert that omits tags keeps the stored
+ * fields, so it takes the only row of the spelling when there is one. update
+ * never adds a row: when no row has the tags of the call and the spelling has
+ * one row, it takes that row and changes its tags.
+ */
+function targetRow(entries: readonly Entry[], item: BulkTerm, mode: WriteMode): Entry | undefined {
+  const rows = conceptMatches(entries, item.term)
+  const sent = mode === "insert" || item.given.includes("tags")
+  if (!sent && rows.length === 1) return rows[0]
+  const exact = rows.find((entry) => rowKey(entry.term, entry.tags) === rowKey(item.term, item.tags))
+  if (exact !== undefined || mode !== "update") return exact
+  return rows.length === 1 ? rows[0] : undefined
 }
 
 function writtenSpelling(writing: ReadonlyMap<string, Writing>, term: string): string {
@@ -654,8 +704,9 @@ function entryFrom(term: string, raw: string, alternative: string | undefined, k
 }
 
 function serialize(entries: readonly Entry[]): string {
-  const file: Record<string, object> = {}
-  for (const entry of [...entries].sort((left, right) => compareOrder(left.order, right.order))) {
+  const file: Record<string, object[]> = {}
+  const sorted = [...entries].sort((left, right) => compareOrder(left.order, right.order) || compareText(tagKey(left.tags), tagKey(right.tags)))
+  for (const entry of sorted) {
     const row: Record<string, unknown> = entry.stateless ? {} : { state: entry.legacyState ?? entry.state }
     if (entry.stopWord === true) row.stop_word = true
     if (entry.alternative !== null) row.alternative = entry.alternative
@@ -679,9 +730,11 @@ function serialize(entries: readonly Entry[]): string {
     if (entry.source !== undefined) row.source = entry.source
     if (entry.notes !== undefined) row.notes = entry.notes
     if (entry.caseSensitive === true) row.case_sensitive = true
-    file[entry.term] = row
+    file[entry.term] = [...(file[entry.term] ?? []), row]
   }
-  return `${JSON.stringify(file, null, 2)}\n`
+  // One row stays an object, as every file kept before a spelling could have more than one.
+  const written = Object.fromEntries(Object.entries(file).map(([term, rows]) => [term, rows.length === 1 ? rows[0] : rows]))
+  return `${JSON.stringify(written, null, 2)}\n`
 }
 
 function referencedTerms(item: BulkTerm): readonly string[] {
@@ -890,8 +943,34 @@ export function caseMatches(entry: Entry, submitted: string): boolean {
   return collapse(submitted).normalize("NFC") === entry.term.normalize("NFC")
 }
 
-export function findConcept(entries: readonly Entry[], term: string): Entry | undefined {
-  return entries.find((entry) => sameConcept(entry.term, term))
+/**
+ * A row of that spelling. With tags, only the row with that same set of tags,
+ * and an empty list is the row without tags. Without tags, any row of the
+ * spelling, the row without tags first: a link names a spelling, not a row.
+ */
+export function findConcept(entries: readonly Entry[], term: string, tags?: readonly string[]): Entry | undefined {
+  const rows = conceptMatches(entries, term)
+  if (tags !== undefined) return rows.find((entry) => tagKey(entry.tags) === tagKey(tags))
+  return rows.find((entry) => !hasTags(entry)) ?? rows[0]
+}
+
+/** What makes a row one row: its spelling and its set of tags. */
+function rowKey(term: string, tags: readonly string[] | undefined): string {
+  return `${matchKey(term)}\u0000${tagKey(tags)}`
+}
+
+function tagKey(tags: readonly string[] | undefined): string {
+  return [...new Set(tags ?? [])].sort().join(",")
+}
+
+function hasTags(entry: Entry): boolean {
+  return entry.tags !== undefined && entry.tags.length > 0
+}
+
+function compareText(left: string, right: string): number {
+  if (left < right) return -1
+  if (left > right) return 1
+  return 0
 }
 
 function sameFields(entry: Entry, item: BulkTerm): boolean {

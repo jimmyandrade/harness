@@ -363,9 +363,9 @@ test("an update to that level is written once the call clears the refused fields
   assert.equal(moved.notes, "visto em 2026-10-22")
 })
 
-test("an insert of a term that is in the file leaves the stored row alone", () => {
+test("an insert of a row that is in the file leaves the stored row alone", () => {
   const { root, file, text } = stored()
-  const written = writeTerms(root, "pt-BR", "insert", terms([{ state: "allowed_with_care", term: "casa", description: "outro" }]))
+  const written = writeTerms(root, "pt-BR", "insert", terms([{ state: "allowed_with_care", term: "casa", description: "outro", tags: ["loja"] }]))
   assert.equal(written.unchanged.length, 1)
   assert.equal(readFileSync(file, "utf8"), text)
 })
