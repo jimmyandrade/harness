@@ -490,6 +490,7 @@ How these skills relate is in `README.md`, in this folder.
   - Writes a Conventional Commits title whose type comes from the effect of the delivery, with the description and the body in `Idioma da issue`
   - Writes the problem with the real case, the proposal, and a verifiable done criterion
   - Translates an issue in another language without losing links or references
+  - Marks a dependency in GitHub Relationships: blocked by, blocking, relates to, or parent. A comment that only says the dependency does not count
 - **Test Criteria**:
   - [x] The skill is present at that path
 
