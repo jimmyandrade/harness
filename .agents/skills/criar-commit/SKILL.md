@@ -3,7 +3,7 @@ name: criar-commit
 description: Use essa habilidade sempre que terminar um trabalho que mudou o repositório ou for commitar, separar commits ou escrever a mensagem, mesmo sem dizer commit. NÃO use para push, abrir PR, rebase nem merge (use criar-pull-request).
 metadata:
   author: jimmyandrade
-  version: "0.17.0"
+  version: "0.18.0"
 ---
 
 # Criar commit
@@ -108,6 +108,7 @@ Não escreva que a habilidade ficou para este pedido, nem para depois.
 
 ### Passo 8
 
+Se o fluxo parou sem seguir `criar-pull-request`, siga `sincronizar-status-da-tarefa`.
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns

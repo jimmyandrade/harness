@@ -3,11 +3,12 @@ name: criar-pull-request
 description: Use essa habilidade sempre que for abrir PR, subir uma correção, mandar para a branch principal ou mesclar mudança no repositório, mesmo sem dizer PR. NÃO use para responder comentário de revisão nem para só commitar (use criar-commit).
 metadata:
   author: jimmyandrade
-  version: "0.24.0"
+  version: "0.25.0"
   related:
     - evoluir-habilidade
     - criar-commit
     - comunicar-novidade-do-produto
+    - sincronizar-status-da-tarefa
 ---
 
 # Criar pull request
@@ -174,7 +175,7 @@ Não escreva que ela ficou para este pedido, nem para depois.
 
 ### Passo 10
 
-Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
+Ao terminar, siga `sincronizar-status-da-tarefa` e depois `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
 

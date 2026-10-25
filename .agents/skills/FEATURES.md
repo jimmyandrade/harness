@@ -97,6 +97,7 @@ How these skills relate is in `README.md`, in this folder.
   - Splits work into one commit per subject, and keeps commits of the same theme on the same branch and the same pull request. A different theme opens another pull request. The commit subject does not open a new pull request
   - The commit type follows what the change does, not the file extension. A correction of an error is `fix:`, even in Markdown. `docs:` is for documentation
   - Writes each step sentence on its own line, and keeps a command in Scripts disponíveis
+  - When the flow stops without `criar-pull-request`, follows `sincronizar-status-da-tarefa`
 - **Test Criteria**:
   - [ ] A project without test or build commands commits and says nothing was verified
 
@@ -183,6 +184,7 @@ How these skills relate is in `README.md`, in this folder.
   - When a published branch was rewritten, the reply says the GitHub branch would be replaced by the new commits, the base branch stays as it is, and the replacement proceeds only if nobody pushed a new commit to that branch since the last fetch. It asks before replacing, and it does not name the git command in place of that explanation
   - The label follows the commit type, not the file extension. `fix` uses the bug label. `docs` uses the documentation label. A Markdown file that corrects an error gets the bug label
   - Writes each step sentence on its own line, and keeps a command in Scripts disponíveis
+  - At the end, follows `sincronizar-status-da-tarefa`
 - **Test Criteria**:
   - [ ] A request to push to the base branch opens a pull request instead
   - [ ] A `claude/…` branch is renamed to `type/…` before its pull request opens
