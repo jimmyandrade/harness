@@ -203,6 +203,31 @@ test("decided_by keeps the people object, and a plain name from an older row rea
   assert.deepEqual(JSON.parse(readFileSync(file, "utf8")).casa.decided_by, person)
 })
 
+test("decided_at stores the day of the decision, and an update keeps it when not sent", () => {
+  const { root, file } = glossary()
+  writeTerms(root, "pt-BR", "insert", terms([
+    { state: "allowed", term: "casa", description: "lugar", reason: "simples", decided_by: "Maria Silva", decided_at: "2026-10-23" },
+  ]))
+  assert.equal(JSON.parse(readFileSync(file, "utf8")).casa.decided_at, "2026-10-23")
+  const same = writeTerms(root, "pt-BR", "upsert", terms([
+    { state: "allowed", term: "casa", description: "lugar", reason: "simples", decided_by: "Maria Silva", decided_at: "2026-10-23" },
+  ]))
+  assert.equal(same.unchanged.length, 1)
+  writeTerms(root, "pt-BR", "update", terms([{ state: "allowed", term: "casa", reason: "curto" }]))
+  assert.equal(JSON.parse(readFileSync(file, "utf8")).casa.decided_at, "2026-10-23")
+  assert.equal(lookupTerm(new Glossary(root), "pt-BR", "casa").decided_at, "2026-10-23")
+})
+
+test("decided_at that is not a real YYYY-MM-DD date is refused", () => {
+  const { root, file } = glossary()
+  for (const decided_at of ["23/10/2026", "2026-02-30", "2026-10-23T10:00:00Z"]) {
+    assert.throws(() => writeTerms(root, "pt-BR", "insert", terms([
+      { state: "allowed", term: "casa", description: "lugar", reason: "simples", decided_at },
+    ])))
+  }
+  assert.equal(readFileSync(file, "utf8"), "{}\n")
+})
+
 test("decided_by with an invalid e-mail or an unknown key is refused", () => {
   const { root, file } = glossary()
   assert.throws(() => writeTerms(root, "pt-BR", "insert", terms([
