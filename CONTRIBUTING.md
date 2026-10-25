@@ -21,6 +21,10 @@ Subjects follow [Conventional Commits](https://www.conventionalcommits.org/): `t
 
 Branches are named `type/short-description`, with one of these types and an ASCII kebab-case description, such as `feat/build-on-install`. A branch a tool created with another prefix, such as `claude/` or `cursor/`, is renamed before the first push. `criar-commit` and `criar-pull-request` follow the same rule in every project, and a `Check the branch name` step in CI fails a pull request that does not. The step is three lines of shell, copied into each repository's workflow as in `examples/business-harness/.github/workflows/skills.yml`, with no action to pin. It skips `renovate/`, `dependabot/`, and `release-please--` branches, and a push.
 
+## Tasks
+
+The tasks of this repository are its GitHub issues. A business harness records the same choice for its own repository. There is no separate task database.
+
 ## CI
 
 The workflow is `.github/workflows/ci.yml`. It runs on every pull request, including the release pull request, and on every push to `main`, on `ubuntu-26.04`. A push to another branch does not run it, so a pull request runs the checks once. It checks out the full history, checks the branch name of a pull request, runs the `check-skill` action of this repository against itself, runs every `.agents/scripts/*/test_*.py` and `.agents/skills/*/scripts/test_*.py` with the checker's own Python, typechecks, and runs `npm test`. When `.github/scripts/change-scope.sh` finds that every changed file is under `docs/` or is Markdown at the root other than `AGENTS.md` and `CLAUDE.md`, it skips the skill check, the tests, the dependency install, and the typecheck, and still reports the required `test` check. When every changed file is documentation or the text of a skill (`SKILL.md`, `evals/`, `features/`, and the generated `README.md` and `FEATURES.md` of the skills), it skips only the Node.js setup, the dependency install, the typecheck, and `npm test`. Without a base to compare, it runs everything.
