@@ -1,9 +1,9 @@
 ---
 name: criar-habilidade
-description: Cria, adiciona e escreve skills a partir de uma tarefa real. Usada quando a pessoa quer uma skill nova, mesmo sem dizer skill. NÃO use para editar código, escrever página que não seja skill, otimizar só a descrição nem gravar a skill no Notion.
+description: Cria, adiciona e escreve skills a partir de uma tarefa real. Usada quando a pessoa quer uma skill nova, mesmo sem dizer skill. NÃO serve para editar código, escrever página que não seja skill, otimizar só a descrição nem gravar a skill no Notion.
 metadata:
   author: jimmyandrade
-  version: "3.14.1"
+  version: "3.14.2"
   related:
     - criar-commit
     - criar-pull-request
@@ -63,7 +63,7 @@ Se o escopo da skill, de um script ou de um workflow mudar, o nome muda junto. O
 ### Passo 7
 
 - Título: nível 1. O nome com espaço no lugar do hífen e a grafia correta, com acento e hífen da palavra. Maiúscula só no começo e em nome próprio.
-- Descrição: segue `descrever-habilidade-ou-schema`, em terceira pessoa. Ela não precisa começar com `Use essa habilidade sempre que`. O `NÃO use para` fica quando há o que deixar de fora. O nome fica no infinitivo, não no gerúndio, pela ADR 0013.
+- Descrição: segue `descrever-habilidade-ou-schema`, em terceira pessoa. Ela não precisa começar com `Use essa habilidade sempre que`. O `NÃO serve para` fica quando há o que deixar de fora. O nome fica no infinitivo, não no gerúndio, pela ADR 0013.
 - Cite outra habilidade pelo nome entre crases, ou no nó de um fluxograma Mermaid. Só assim a checagem e o grafo a reconhecem.
 - Nome e descrição, juntos, não passam de `Tokens do catálogo`. O corpo não passa de `Linhas` nem de `Tokens do corpo`. Se alongar, separe antes.
 - Texto exato do usuário entra sem mudança quando já está no idioma deste texto. Caso contrário, traduza nome, descrição e corpo.
@@ -127,10 +127,10 @@ Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ### Descrição sem gatilho
 
-Se você escrever a descrição sem dizer quando usar, ou sem `NÃO use para` quando há o que ficar de fora, a skill não dispara no momento certo.
+Se você escrever a descrição sem dizer quando usar, ou sem `NÃO serve para` quando há o que ficar de fora, a skill não dispara no momento certo.
 
 1. Siga `descrever-habilidade-ou-schema`: terceira pessoa, com `Usada quando` e a intenção de quem pede. A descrição não precisa começar com `Use essa habilidade sempre que`.
-2. Feche com `NÃO use para` e o que fica de fora.
+2. Feche com `NÃO serve para` e o que fica de fora.
 
 ### Corpo com prefácio
 
