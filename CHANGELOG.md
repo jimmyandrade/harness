@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.0.0](https://github.com/jimmyandrade/harness/compare/v0.99.1...v1.0.0) (2026-10-25)
+
+
+### Features
+
+* **vocabulary:** mark stop words ([#445](https://github.com/jimmyandrade/harness/issues/445)) ([739b486](https://github.com/jimmyandrade/harness/commit/739b48670abe4b156330ad344344805bc3e52a45))
+
+
+### Documentation
+
+* release the core as 1.0.0 ([#453](https://github.com/jimmyandrade/harness/issues/453)) ([d188349](https://github.com/jimmyandrade/harness/commit/d1883492da414d9ca9fb36be6a1a83d44e38396b))
+
 ## [0.99.1](https://github.com/jimmyandrade/harness/compare/v0.99.0...v0.99.1) (2026-10-25)
 
 
