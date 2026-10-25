@@ -1405,6 +1405,9 @@ How these skills relate is in `README.md`, in this folder.
   - Runs after a commit is created and after a pull request changes state, without waiting for the person to ask for a status sweep
   - Works with any task tracker, reading from the project instructions the task query, the status flow, the status for a merged, ready, draft, or blocked pull request, the labels that mean blocked, how a task links to a pull request, and whether to confirm the plan
   - Links a task to a pull request only after reading its title and body, and marks a link made only by subject
+  - Starts from the pull request that just changed, compares its subject with open tasks, and records the link after the plan is confirmed
+  - Records the link on the open pull request, or on the task when the pull request is already merged
+  - With no status flow, records the confirmed link and leaves the status unchanged
   - Leaves unchanged, with the reason, a task whose pull request was closed without merging, cites another key, or needs judgment
   - Writes a plan, rereads the task and the pull request before running it, and asks for confirmation when the project says so
   - Moves one task at a time, one status step at a time, and reads the returned status before the next step
