@@ -3,7 +3,7 @@ name: atender-revisao-de-pull-request
 description: Atende a revisão recebida num pull request, de pessoa ou de bot. Lê os comentários abertos, classifica cada sugestão, aplica o que é seguro, responde cada thread e resolve as atendidas. Sem PR informado, lista os seus que precisam de atenção. Não serve para revisar o PR de outra pessoa nem para abrir o PR.
 metadata:
   author: jimmyandrade
-  version: "0.13.0"
+  version: "0.15.0"
   aliases:
     - resolver-comentarios-de-revisao
     - apply-pr-review
@@ -86,7 +86,9 @@ Valide antes de commitar, com o que `levantar-ambiente-do-repositorio` achar par
 
 ### Passo 5
 
-Corrija na branch do PR, seguindo `criar-commit`, com a mensagem dizendo o que mudou e nunca "ajustes da revisão". Um commit por assunto quando as mudanças forem independentes. Nunca force o push nem reescreva commits que já estão no PR. Se a branch estiver atrás da base e isso atrapalhar, avise em vez de atualizar por conta própria. Envie a branch, seguindo `criar-pull-request`, antes de responder, para o commit citado já estar no PR.
+Corrija na branch do PR, seguindo `criar-commit`, com a mensagem dizendo o que mudou e nunca "ajustes da revisão". Um commit por assunto quando as mudanças forem independentes. Não reescreva commits que já estão no PR por conta própria.
+Se a branch estiver atrás da base e isso atrapalhar, avise em vez de atualizar por conta própria.
+Quando a pessoa pedir para resolver o conflito, esse pedido autoriza trazer a base e substituir a branch publicada, como `criar-pull-request` manda. Envie a branch, seguindo `criar-pull-request`, antes de responder, para o commit citado já estar no PR.
 
 Se a decisão vale além deste PR, grave a lição nas instruções do projeto e commite antes de responder. Uma recusa que vai se repetir também entra. Correção pontual fica só na resposta.
 
@@ -245,6 +247,7 @@ Achei cinco comentários abertos. Dois eram estruturais, um nome e um texto, e a
 - Sem PR informado e sem nenhum PR da pessoa precisando de ação: diga isso e pare.
 - Execução agendada: siga `Aplicar em execução agendada` e deixe o resto no resumo, sem responder.
 - O comentário é self review da pessoa que pediu o atendimento: responda na hora, com as linhas alteradas e o commit, no idioma de `Idioma da resposta à revisão`. Não espere o sim de `Ler o texto antes de publicar`.
+- A pessoa pede para resolver o conflito com a base: traga a base e substitua a branch publicada, como `criar-pull-request` manda.
 
 ## Pegadinhas
 
@@ -258,6 +261,7 @@ Achei cinco comentários abertos. Dois eram estruturais, um nome e um texto, e a
 - Uma sugestão de bot e uma de pessoa se classificam pela mesma régua.
 - Aprovar o PR de outra pessoa não é papel desta habilidade.
 - `Ler o texto antes de publicar` parece segurar também o self review. O comentário da própria pessoa recebe a resposta na hora, com as linhas alteradas e o commit, no idioma de `Idioma da resposta à revisão`.
+- A página aberta parece mostrar que a resposta continua no idioma antigo. O texto que vale é o gravado na thread. Diga a primeira frase dele.
 
 ## Scripts disponíveis
 

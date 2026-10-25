@@ -32,6 +32,7 @@ How these skills relate is in `README.md`, in this folder.
   - Checks each comment against the current head of the pull request, and marks it valid, already fixed, outdated, or duplicate
   - Classifies each suggestion, from a person or a bot, as structural, a behavior change, a disagreement, or out of scope. A behavior change waits for the approval of the person, and a disagreement becomes a question
   - Works in a separate copy of the repository, validates before committing, and never pushes a change that breaks the validation or rewrites commits already in the pull request
+  - When the person asks to resolve a conflict with the base, brings the base in and replaces the published branch, as criar-pull-request decides
   - Records a lesson that outlives the pull request in the project instructions
   - Pushes the branch after each fix and before replying, so a reply never cites a commit missing from the pull request
   - Replies on each thread before resolving it, closes the loop with a last message from the person acting, and leaves open a thread that waits for a decision
@@ -39,6 +40,7 @@ How these skills relate is in `README.md`, in this folder.
   - In a scheduled run, applies only the structural changes and leaves the rest in the summary
   - Cites the commit in each reply that says what changed, by its short SHA as a link to the commit
   - Answers a self-review comment from the person who asked on the thread right away, with the commit. A reply to someone else waits when reading the text before publishing is on
+  - Judges an edited reply by the text saved on the thread, and tells the person its first sentence
   - Ends with a tally of accepted, declined, outdated, and open comments by author, and hands back to the caller. The merge, and whether failing checks block it, stay with criar-pull-request
 - **Test Criteria**:
   - [ ] A comment that still applies is fixed, answered, and resolved
@@ -493,6 +495,7 @@ How these skills relate is in `README.md`, in this folder.
   - Writes the problem with the real case, the proposal, and a verifiable done criterion
   - Translates an issue in another language without losing links or references
   - Marks a dependency in GitHub Relationships: blocked by, blocking, relates to, or parent. A comment that only says the dependency does not count
+  - Does not close an issue by scanning the open list. The issue closes when the citing pull request merges and its done criterion is met
 - **Test Criteria**:
   - [x] The skill is present at that path
 
@@ -1408,6 +1411,7 @@ How these skills relate is in `README.md`, in this folder.
   - Starts from the pull request that just changed, compares its subject with open tasks, and records the link after the plan is confirmed
   - Records the link on the open pull request, or on the task when the pull request is already merged
   - With no status flow, records the confirmed link and leaves the status unchanged
+  - Does not close a task by scanning the open list. The task closes when the citing pull request is still open, then merges, and the task's done criterion is met
   - Leaves unchanged, with the reason, a task whose pull request was closed without merging, cites another key, or needs judgment
   - Writes a plan, rereads the task and the pull request before running it, and asks for confirmation when the project says so
   - Moves one task at a time, one status step at a time, and reads the returned status before the next step

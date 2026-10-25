@@ -4,7 +4,7 @@ description: Sincroniza o status de tarefas, cards ou issues com o estado do pul
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.5.0"
   related:
     - criar-commit
     - criar-pull-request
@@ -68,6 +68,8 @@ Com o sim, grave a ligação como `Registro da ligação` manda, no momento que 
 No pull request ainda aberto, a gravação entra nele.
 No pull request já mesclado, a gravação entra na tarefa, com o link do pull request.
 Uma citação acrescentada depois do merge não fecha a tarefa.
+Percorrer as tarefas abertas e fechá-las não é desta habilidade.
+A tarefa fecha quando o pull request que a cita, ainda aberto, é mesclado, e o critério de pronto dela está cumprido.
 
 ```mermaid
 flowchart LR
@@ -179,7 +181,7 @@ A mesma entrega está num pull request já mesclado. O plano marca "ligada pelo 
 - A habilidade parece servir só quando a pessoa pede a varredura. Ela também roda depois de um commit ou de uma mudança no estado do pull request.
 - O lugar das tarefas parece fixo. Ele muda de um negócio para outro e fica em `Consulta das tarefas`.
 - A busca pela chave parece achar o pull request feito sem citar a tarefa. Parta desse pull request e compare o assunto com as tarefas abertas.
-- Uma citação no pull request já mesclado parece fechar a tarefa. A gravação entra na tarefa, com o link do pull request.
+- Uma citação no pull request já mesclado, ou uma varredura das tarefas abertas, parece fechar a tarefa. A gravação entra na tarefa, com o link do pull request. A tarefa fecha quando o pull request que a cita, ainda aberto, é mesclado, e o critério de pronto dela está cumprido.
 - Uma frase comprimida parece um recado interno. A skill fica fácil de ler por uma pessoa.
 
 ## Scripts disponíveis
