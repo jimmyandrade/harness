@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.11.1](https://github.com/jimmyandrade/harness/compare/v1.11.0...v1.11.1) (2026-10-26)
+
+
+### Bug Fixes
+
+* **atender-revisao-de-pull-request:** update a behind branch before applying ([#508](https://github.com/jimmyandrade/harness/issues/508)) ([dc73e37](https://github.com/jimmyandrade/harness/commit/dc73e37d4802f1fd366d6cfbfa3e930c3b452358))
+
 ## [1.11.0](https://github.com/jimmyandrade/harness/compare/v1.10.0...v1.11.0) (2026-10-26)
 
 
