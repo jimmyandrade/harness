@@ -881,7 +881,7 @@ How these skills relate is in `README.md`, in this folder.
   - Does not create the first version of a skill, only check whether the description triggers, only review without running, or write the skill page in Notion
   - A request that arrives through a copy, synced or installed by dependency or plugin, writes through criar-commit and criar-pull-request in the source repository
   - Size and run profile follow medir-habilidade
-  - Runs at the end of every core skill, following the `Modo de aprendizado` parameter (`sim`, `não`, `perguntar`, default `perguntar`): with yes, one commit per lesson on an English-named branch, pushed, with a draft pull request from the first commit, marked ready when the person ends the sequence
+  - Runs at the end of every core skill, following the `Modo de aprendizado` parameter (`sim`, `não`, `perguntar`, default `perguntar`): with yes, one commit per lesson on an English-named branch, pushed, with a draft pull request from the first commit, opened through criar-pull-request with its assignee and label, marked ready when the person ends the sequence
   - Takes the project instructions as a target too: feedback on the agent's behavior edits them in the format of `definir-instrucoes-do-projeto` and raises `metadata.version`, without evals or features of their own
 - **Test Criteria**:
   - [x] The skill is present at that path
