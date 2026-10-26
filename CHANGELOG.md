@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.13.2](https://github.com/jimmyandrade/harness/compare/v1.13.1...v1.13.2) (2026-10-26)
+
+
+### Bug Fixes
+
+* **atender-revisao-de-pull-request:** reply on the line the decision changes ([#515](https://github.com/jimmyandrade/harness/issues/515)) ([7ee7637](https://github.com/jimmyandrade/harness/commit/7ee7637a9a40eb30912b6f21949c61f86114c8e5))
+
 ## [1.13.1](https://github.com/jimmyandrade/harness/compare/v1.13.0...v1.13.1) (2026-10-26)
 
 
