@@ -1,6 +1,6 @@
 ---
 metadata:
-  version: "1.29.0"
+  version: "1.30.0"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -64,6 +64,7 @@ metadata:
 - Ao receber uma correção sobre o seu comportamento, siga `evoluir-habilidade` na mesma conversa e transforme o feedback em correção no repositório de origem, não na cópia instalada, em vez de só explicar o erro. Com pedido de pull request, abra-o e diga o que mudou e o que ainda não foi validado.
 - Ao começar a trabalhar num repositório, antes do primeiro passo, siga `levantar-ambiente-do-repositorio`: liste as habilidades do próprio repositório e as que chegam por dependência ou plugin, como as deste repositório, e abra as que a tarefa vai usar. Uma habilidade que a sessão não carregou é lida do `SKILL.md` dela. Quando a habilidade carregada na sessão tem `metadata.version` diferente da que o repositório fixa, no próprio repositório ou na dependência, siga o `SKILL.md` do repositório e diga que o plugin instalado está desatualizado. A ausência na lista da sessão não prova que ela não existe.
 - As tarefas deste repositório são as issues do GitHub dele. Um harness de negócio faz o mesmo com as issues do próprio repositório. Não há banco de tarefas à parte.
+- Depois que a release de um plugin que a pessoa usa sair, com a PR de release mesclada e a tag publicada, atualize o plugin instalado sem esperar um pedido: atualize o marketplace, atualize o plugin e diga que a sessão precisa reiniciar para valer. Vale para o plugin deste repositório e para o de um harness de negócio. A habilidade nova só chega à sessão depois disso.
 - Numa tarefa de código, siga nesta ordem: `procurar-tarefa` para os detalhes da issue ou da tarefa, `levantar-ambiente-do-repositorio`, `escrever-teste`, `escrever-codigo`, `criar-commit` e `criar-pull-request`. Use TDD por padrão: o teste vem primeiro, roda e falha, e só então vem o código que o faz passar. Depois de criar um commit ou de mudar o estado do pull request, siga `sincronizar-status-da-tarefa`. Depois do merge, siga `limpar-copias-de-trabalho`. Evoluir uma habilidade segue a mesma cadeia.
 - Execute cada habilidade dessa ordem até o fim. Ler o arquivo começa a habilidade e não a encerra. Sem `Comando de testes`, `escrever-teste` ainda é chamada: o resultado é dizer que o comando não existe, sem inventar um runner. O modo de abertura é `Criar pull request ao terminar`. Os valores ficam na skill. Um projeto que quer outro modo define o parâmetro no próprio `AGENTS.md`. A resposta diz o nome da branch, se ela está no GitHub e, quando o pull request existe, o link. O merge continua pedindo um pedido explícito. Não escreva que uma habilidade ficou para este pedido, nem para depois.
 - Uma regra de comportamento que vale para todos os projetos fica nestas instruções. O valor de um parâmetro fica nas instruções do projeto. O guia de contribuição cita o nome do parâmetro e não copia o valor, para a mudança acontecer num lugar só. Uma convenção de código que não é parâmetro fica no guia de contribuição. Não fica na memória de um projeto.
