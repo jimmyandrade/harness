@@ -91,6 +91,7 @@ flowchart LR
     procurar_pedido_de_revisao["procurar-pedido-de-revisao"]
     procurar_tarefa["procurar-tarefa"]
     procurar_variacao_de_termo["procurar-variacao-de-termo"]
+    publicar_resposta_de_revisao["publicar-resposta-de-revisao"]
     publicar_revisao_de_codigo["publicar-revisao-de-codigo"]
     reconhecer_imagem["reconhecer-imagem"]
     redigir_com_tom_de_voz["redigir-com-tom-de-voz"]
@@ -121,6 +122,7 @@ flowchart LR
   atender_revisao_de_pull_request --> levantar_ambiente_do_repositorio
   atender_revisao_de_pull_request --> levantar_contexto_do_pull_request
   atender_revisao_de_pull_request --> priorizar_itens
+  atender_revisao_de_pull_request --> publicar_resposta_de_revisao
   atender_revisao_de_pull_request --> publicar_revisao_de_codigo
   avaliar_atualizacoes_de_dependencia --> atender_revisao_de_pull_request
   avaliar_atualizacoes_de_dependencia --> criar_commit
@@ -422,6 +424,8 @@ flowchart LR
   procurar_tarefa --> procurar_inscricao
   procurar_variacao_de_termo --> definir_vocabulario
   procurar_variacao_de_termo --> evoluir_habilidade
+  publicar_resposta_de_revisao --> atender_revisao_de_pull_request
+  publicar_resposta_de_revisao --> publicar_revisao_de_codigo
   publicar_revisao_de_codigo --> definir_pessoa
   publicar_revisao_de_codigo --> enviar_mensagem_no_slack
   publicar_revisao_de_codigo --> evoluir_habilidade
