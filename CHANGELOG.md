@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.7.0](https://github.com/jimmyandrade/harness/compare/v1.6.1...v1.7.0) (2026-10-26)
+
+
+### Features
+
+* link the sources of an explanation in a review reply ([#487](https://github.com/jimmyandrade/harness/issues/487)) ([a07b725](https://github.com/jimmyandrade/harness/commit/a07b72579a90b789b95f2f876cf05cfa007c4e60))
+
+
+### Bug Fixes
+
+* **deps:** update dependency @notionhq/client to v5.28.0 ([#486](https://github.com/jimmyandrade/harness/issues/486)) ([9ca82fa](https://github.com/jimmyandrade/harness/commit/9ca82fa81bef0237440b2084bb61384c507d2191))
+
 ## [1.6.1](https://github.com/jimmyandrade/harness/compare/v1.6.0...v1.6.1) (2026-10-25)
 
 
