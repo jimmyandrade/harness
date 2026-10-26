@@ -30,3 +30,50 @@ Funcionalidade: Ler caixa, DRE, fluxo, auditoria e preço
       Quando a skill analisa o preço
       Então pergunta a margem
       Mas não inventa o custo
+
+  Regra: O intervalo vem do pedido
+
+    Exemplo: Pedido sem intervalo
+      Dado que "Apelidos de intervalo" tem "semana" e "mês"
+      Quando a pessoa pede o resultado sem dizer o intervalo nem o ponto de contato
+      Então a skill pergunta qual intervalo, oferecendo os apelidos
+      Mas não lê nada antes da resposta
+
+    Exemplo: Apelido de intervalo
+      Dado que "Apelidos de intervalo" tem "semana"
+      Quando a pessoa pede o resultado da semana passada
+      Então a skill converte o apelido nas datas da semana
+      E a saída começa pelo intervalo, com o dia da semana de cada data
+
+    Exemplo: Intervalo qualquer
+      Dado que a pessoa pede o resultado de 05/10/2026 a 18/10/2026
+      Quando a skill gera a saída
+      Então a DRE e o fluxo de caixa trazem só esse intervalo
+      Mas não pergunta o intervalo
+
+    Exemplo: Rótulo do resultado fora do mês
+      Dado que a pessoa pede o fluxo de caixa de 05/10/2026 a 18/10/2026
+      Quando a skill gera a saída
+      Então a linha do resultado se chama "Resultado do intervalo"
+      Mas não se chama "Resultado do mês"
+
+    Exemplo: Mês dividido por semana
+      Dado que "Apelidos de intervalo" tem "semana" e "mês"
+      Quando a pessoa pede o fluxo de caixa do mês por semana
+      Então o fluxo traz uma coluna por semana e o total do mês
+      E o saldo final de cada semana é o saldo inicial da seguinte
+
+  Regra: O recorte pode ser um ponto de contato
+
+    Exemplo: Resultado de um ponto de contato
+      Dado que "Nome do ponto de contato" é "evento"
+      E que os lançamentos estão ligados ao evento na fonte
+      Quando a pessoa pede o resultado de um evento
+      Então a saída traz só os lançamentos desse evento
+      E o intervalo é o do próprio evento, sem pergunta
+
+    Exemplo: Lançamentos sem ligação ao ponto de contato
+      Dado que os lançamentos não estão ligados ao ponto de contato na fonte
+      Quando a pessoa pede o resultado desse ponto de contato
+      Então a skill diz que não consegue recortar
+      Mas não estima o resultado
