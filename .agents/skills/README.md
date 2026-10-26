@@ -237,6 +237,7 @@ flowchart LR
   definir_obrigacao_financeira --> lancar_despesa_pessoal
   definir_obrigacao_financeira --> organizar_emails
   definir_obrigacao_financeira --> procurar_data_significativa
+  definir_okr --> definir_medicao_de_metrica
   definir_okr --> definir_tarefa
   definir_okr --> evoluir_habilidade
   definir_perfil_social --> definir_grafia
