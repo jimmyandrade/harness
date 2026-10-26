@@ -22,3 +22,11 @@ Funcionalidade: Cadastrar o termo em etapas
       Quando a validação falha
       Então a skill corrige o plano e valida de novo
       E não chama a gravação
+
+  Regra: Um par antes e depois vira dois termos
+
+    Exemplo: Frase que sai e frase que entra
+      Dado que a comunicação em português traz o antes "Se faltar algo, reabre." e o depois "Vc pode reabrir essa conversa se eu tiver deixado alguma coisa pra trás"
+      Quando a skill monta o plano
+      Então o antes fica proibido e a substituição é o depois
+      E o depois fica permitido no mesmo lote

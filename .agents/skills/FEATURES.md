@@ -819,6 +819,7 @@ How these skills relate is in `README.md`, in this folder.
   - Uses insert when the person is registering and does not name a mode, update when an existing term changes, and upsert when the batch does both
   - Sends a question about a missing term or its variations to procurar-variacao-de-termo
   - Leaves writing brand text to redigir-com-tom-de-voz, and does not invent a term
+  - Stores a labeled before-and-after pair as two terms in one batch: the before phrase is forbidden and points at the after phrase, which is allowed
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses writing or approving brand text, classifying a phrase, and inventing a term
