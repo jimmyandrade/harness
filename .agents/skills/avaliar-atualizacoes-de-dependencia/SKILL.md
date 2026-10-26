@@ -3,7 +3,7 @@ name: avaliar-atualizacoes-de-dependencia
 description: Use essa habilidade sempre que houver PR de atualização de dependência do Dependabot ou do Renovate para avaliar, testar ou mesclar, mesmo sem dizer o nome do bot. NÃO use para atualizar uma dependência à mão nem para PR que não seja de bot.
 metadata:
   author: jimmyandrade
-  version: "0.9.0"
+  version: "0.9.1"
   related:
     - evoluir-habilidade
     - criar-commit
@@ -76,7 +76,7 @@ flowchart LR
   D -->|vermelho| F[Pare e mostre a falha]
 ```
 
-Os checks da base são os do commit de merge, de qualquer serviço: workflow, deploy ou outro. A fila termina quando não sobra PR de nenhum dos `Autores dos bots`.
+Os checks da base são os do commit de merge, de qualquer serviço: workflow, deploy ou outro. Um PR que o bot mescla sozinho, pelo automerge da configuração dele, pode entrar antes da vez dele e sem a sua avaliação. Ele sai da fila como mesclado pelo bot: confira os checks do commit de merge na base, como num merge seu, e diga na fila que ele entrou sem avaliação. Não reverta nem reabra. Se os checks ficarem vermelhos, pare e mostre a falha. A fila termina quando não sobra PR de nenhum dos `Autores dos bots`.
 
 ### Passo 8
 
@@ -137,6 +137,7 @@ A biblioteca era transitiva. A árvore levou ao pacote direto que a puxa, e os p
 ## Casos-limite
 
 - O bot já substituiu o PR por um mais novo do mesmo pacote: siga o mais novo.
+- O bot mesclou um PR sozinho, por automerge: ele sai da fila sem avaliação, e você confere os checks do commit de merge na base, como diz o Passo 7.
 - O PR agrupa vários pacotes: faça os passos 2 a 4 para cada um. Um pacote 0.x do grupo pode quebrar ao subir o minor: leia as notas dele à parte.
 - A atualização de major espera aprovação no painel de dependências e ainda não virou PR: fica fora da fila.
 - Dois PRs conflitam depois de um merge e a ordem fica ambígua: pergunte à pessoa.

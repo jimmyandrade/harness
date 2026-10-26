@@ -18,6 +18,12 @@
       "prompt": "Atualize o 16. E evolua a habilidade de atualizar dependências pra sempre garantir que o PR tenha um assignee e um label",
       "expected_output": "O Next.js sobe para 16.4.3 na branch do pull request aberto, com o build passando. O next lint, removido nessa versão, deixa de ser o comando de lint. O pull request fica com um assignee e um label. A habilidade passa a exigir os dois antes da análise e do merge, e o critério fica no Gherkin.",
       "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "Siga a habilidade avaliar-atualizacoes-de-dependencia para os PRs de dependência abertos no site, de autoria do Renovate ou do Dependabot. Trate um PR por vez, do mais antigo ao mais novo, mostre a fila como checklist e peça o meu sim antes de mesclar cada um. Trabalhe numa worktree.",
+      "expected_output": "A fila de cinco PRs do Renovate aparece como checklist, do mais antigo ao mais novo, e cada merge espera o sim da pessoa. O worker com manifesto próprio é instalado, testado e construído no próprio subprojeto, ganha um teste de integração na branch do bot, e a análise diz que ele precisa ser publicado de novo. O PR do adaptador de flags para porque a peer dependency do mesmo repositório espera à parte; o agrupamento entra na configuração do Renovate do próprio repositório, e o PR agrupado substitui o antigo, com um teste novo da rota de discovery que falha na versão anterior. Os PRs que o bot mescla sozinho saem da fila como mesclados pelo bot, com os checks da base conferidos. A base fica verde depois de cada merge.",
+      "files": []
     }
   ]
 }
