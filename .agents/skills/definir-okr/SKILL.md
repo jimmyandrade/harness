@@ -1,9 +1,10 @@
 ---
 name: definir-okr
 description: Cria, revisa e atualiza os objetivos e os key results de uma área num ciclo, com título, métrica, valor-alvo, prazo e as ações que empurram cada key result. Usada quando uma área define, revisa ou fecha os OKRs, prioriza quando tudo parece importante, ou começa e revisa a Sprint a partir deles. Não serve para cadastrar a tarefa nem priorizar itens sem OKR.
+compatibility: Precisa de Python quando a execução é local.
 metadata:
   author: jimmyandrade
-  version: "0.1.2"
+  version: "0.2.0"
   related:
     - definir-medicao-de-metrica
     - definir-tarefa
@@ -91,6 +92,8 @@ Sem esse registro, siga `definir-medicao-de-metrica` para registrar a medição 
 O progresso dele é (base − valor atual) ÷ (base − valor-alvo), e um valor igual ou abaixo do alvo conta como atingido.
 Se a lista calcula o progresso só como valor atual ÷ valor-alvo, não grave o key result de redução assim.
 Proponha reescrevê-lo como uma quantidade que cresce, como a economia sobre a base, com valor-alvo igual à base menos o alvo, ou ajustar o cálculo da lista com a base e o sentido, e pergunte qual seguir.
+Confira o progresso que a lista mostra contra o cálculo de referência, com o mesmo sentido, valor atual, valor-alvo e base.
+Leia references/progress-formula.md quando a lista calcular o progresso por fórmula e for preciso propor o ajuste.
 O key result é desafiador, mas possível com a capacidade, o tempo e as alavancas reais do ciclo.
 
 ### Passo 5
@@ -229,6 +232,7 @@ a área tinha 5 objetivos no ciclo. Sugeri manter os 3 que conversam com a estra
 
 ## Scripts disponíveis
 
-- Nenhum.
+- `python3 scripts/key_result_progress.py --direction <increase|decrease|stay-above|stay-below> --current <valor atual> --target <valor-alvo> [--base <valor da base>]`: cálculo de referência do progresso do Passo 4, em JSON, com o progresso e se o alvo foi atingido.
 
-1. Não há script para executar.
+1. Com terminal, rode o cálculo de referência para cada key result que você confere.
+2. Sem terminal, como no Notion, faça a mesma conta do Passo 4: (valor atual − base) ÷ (valor-alvo − base) ao aumentar, com base zero quando não houver, e (base − valor atual) ÷ (base − valor-alvo) ao diminuir.

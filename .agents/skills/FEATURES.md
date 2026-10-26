@@ -597,6 +597,7 @@ How these skills relate is in `README.md`, in this folder.
   - Keeps objectives qualitative and few, each with an owning area and a champion
   - Writes each key result as verb, description, target value and target date, with an absolute target whenever there is one and the percentage as a derived reading
   - Records the direction of every key result and links a reduction key result to the measurement record of its base, never a typed number, so a value at or below the target counts as reached; reads the current value from the measurement history of the metric, and sends a missing base measurement to definir-medicao-de-metrica
+  - Checks the progress a list shows against a tested local script for the four directions, and reads a formula model when the list computes progress by formula
   - Moves a task-like key result to definir-tarefa, avoids a target of 1 or 100%, and renames an untitled key result before anything else
   - Links each key result to actions with a stated mechanism, and refuses an action without one
   - Gates closing the OKRs on what the area must deliver and how it measures it, with a checklist
