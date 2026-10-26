@@ -3,7 +3,7 @@ name: evoluir-habilidade
 description: Use essa habilidade sempre que for testar uma skill, alterá-la a pedido ou evoluir as instruções do projeto, mesmo sem dizer evoluir, inclusive o Gherkin e a comparação com e sem skill, resultado inconsistente, falha de chamada ou correção da pessoa. NÃO use para criar a primeira versão, só ver se a descrição dispara, só revisar sem executar, nem gravar a página no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.23.1"
+  version: "0.24.0"
   related:
     - criar-commit
     - criar-pull-request
@@ -81,7 +81,7 @@ Subdisparo e sobredisparo vão para `descrever-habilidade-ou-schema`.
 O teste sempre edita a skill validada no repositório de origem, nesta mesma conversa. Sem essa edição, o teste não vale.
 Incorpore todos os resultados, não só as falhas. A edição vem do que a execução mostrou.
 Pergunte o que gerou falso positivo, o que passou despercebido e o que pode sair. Se a execução já mostrou a resposta, edite com ela. Quando a pessoa responder o que ainda faltava, edite de novo na mesma conversa.
-Leia o registro da execução, não só o resultado final. Se o agente gasta tempo em etapa improdutiva, a instrução está vaga, não se aplica à tarefa, ou oferece opções sem escolha padrão. Se o próximo trecho deixar o corpo sem folga abaixo de `Tokens do corpo`, proponha separar a responsabilidade em outra habilidade antes de escrever. O tamanho e o profiling seguem `medir-habilidade`. O teste e a edição continuam aqui.
+Leia o registro da execução, não só o resultado final. Se o agente gasta tempo em etapa improdutiva, a instrução está vaga, não se aplica à tarefa, ou oferece opções sem escolha padrão. Se o próximo trecho deixar o corpo sem folga abaixo de `Tokens do corpo`, separe a responsabilidade em outra habilidade antes de escrever. Antes de commitar, rode a checagem que o lefthook roda no pre-commit. Sem `.git/hooks/pre-commit`, rode `.agents/scripts/check-skill/run-check.sh`. Falha, ou corpo no limite, barra o commit e o push. Não diga que está pronto. O tamanho e o profiling seguem `medir-habilidade`. O teste e a edição continuam aqui.
 
 ### Passo 6
 
@@ -93,6 +93,14 @@ Proponha um script testado uma vez. Com o aceite, grave em `scripts/` quando só
 Quando outra habilidade chega aqui ao terminar, siga `Modo de aprendizado`. Com `não`, encerre. Com `perguntar`, pergunte uma vez se a pessoa quer registrar as lições da execução. Com `sim`, ou com a resposta sim, grave cada lição como um commit numa branch com nome em inglês e envie a branch. No primeiro commit, abra um PR em rascunho e, a cada lição, atualize a descrição dele. Tire do rascunho quando a pessoa encerrar a sequência.
 
 ## Problemas comuns
+
+### Skill publicada acima do limite
+
+Se você disser que a edição está pronta sem a checagem, o pull request sobe com o corpo acima de `Tokens do corpo`.
+
+1. Rode a checagem antes do commit.
+2. Acima do limite, separe a responsabilidade. Não enxugue regra que a pessoa pediu para ficar.
+3. Não faça push e não diga que está pronto.
 
 ### Falha de execução anotada
 

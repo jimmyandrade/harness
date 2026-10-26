@@ -3,7 +3,7 @@ name: criar-commit
 description: Use essa habilidade sempre que terminar um trabalho que mudou o repositório ou for commitar, separar commits ou escrever a mensagem, mesmo sem dizer commit. NÃO use para push, abrir PR, rebase nem merge (use criar-pull-request).
 metadata:
   author: jimmyandrade
-  version: "0.20.1"
+  version: "0.22.0"
 ---
 
 # Criar commit
@@ -68,6 +68,7 @@ O assunto do commit não abre pull request novo.
 ### Passo 4
 
 Antes de commitar, rode o `Comando de testes` e o `Comando de build` quando existirem. Rode o `Comando de lint dos arquivos tocados` só nos arquivos que você mudou. Erro que já existia na `Branch base` não entra no seu commit. Leia nas instruções do projeto as falhas que já são conhecidas.
+Se o repositório tem `lefthook.yml` com a checagem de skill no pre-commit, essa checagem faz parte do commit. Sem `.git/hooks/pre-commit`, o hook não rodou: rode `.agents/scripts/check-skill/run-check.sh` nos arquivos de skill do commit. Falha barra o commit. Não faça push e não diga que está pronto.
 
 ### Passo 5
 
@@ -131,6 +132,14 @@ Se você rodar o formatador ou o lint com correção no repositório inteiro, o 
 1. Desfaça a mudança nos arquivos que não eram seus.
 2. Rode o formatador só nos arquivos do seu trabalho.
 
+### Checagem de skill que não rodou
+
+Se você commitar uma skill e o commit terminar na hora, o lefthook não rodou e o corpo pode passar do limite.
+
+1. Rode `.agents/scripts/check-skill/run-check.sh` no arquivo.
+2. Falha barra o commit. Não faça push.
+3. Não diga que a mudança está pronta.
+
 ### Erro que já existia
 
 Se você vir o type check ou o lint acusar erro em arquivo que não mudou, o erro não é seu.
@@ -176,7 +185,8 @@ Um commit `fix:` com o assunto dizendo o porquê da troca do texto. Sem teste no
 
 - `git switch -c <branch> origin/<base>` faz a branch rastrear a base. Use `--no-track`.
 - O type check do repositório inteiro pode falhar em arquivos que não são seus. Não use esse resultado como portão do seu commit sem comparar com a `Branch base`.
-- Um hook de pre-push pode rodar testes e build de novo. Rodar antes do commit permite publicar sem o hook depois.
+- Um hook de pre-push pode rodar testes e build de novo. O padrão é esperar esse hook no push. Pular fica no parâmetro da habilidade de pull request, e o padrão dele é não pular.
+- O commit rápido parece que o lefthook rodou. Sem `.git/hooks/pre-commit`, a checagem de skill não rodou. Rode o script e não publique se falhar.
 - O texto de uma cópia, sincronizada ou instalada, que explica como preencher uma habilidade parece permissão para criá-la ali. Criar ou ativar a habilidade fora do repositório de origem deixa uma cópia que o sync não remove e que a instalação seguinte apaga.
 - Um arquivo Markdown parece documentação. O tipo segue o que a mudança faz. Correção de erro é `fix:`. `docs:` fica para a documentação.
 
