@@ -16,6 +16,7 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
   - Cursor reads `.cursor-plugin/plugin.json`, which repeats the shared fields of `.claude-plugin/plugin.json`. Release Please bumps `version` in both
   - Skills come from `.agents/skills/`. Each one arrives after its audit
   - A business marketplace lists it with a `url` source, `https://github.com/jimmyandrade/harness.git` pinned to a tag, because Codex skips a `github` source. Cursor cannot list it from another repository, so a team imports this repository as its own Cursor marketplace, which follows the default branch. A personal entry under Your Marketplaces does not follow later commits. Grok Bot does not load the plugin. The steps are in `docs/runbooks/cursor.md`, and the stale install is in `TROUBLESHOOTING.md`
+  - `Instalação do harness` chooses `repositório` or `global` for the open repository. `global` uses this plugin as the single install and adds no dependency, skills link, or plugin files to that repository. `Harness no repositório atual` set to `não` only blocks a per-repository install. `INSTALL.md` explains how that differs from the glossary and the skills folder
 - **Test Criteria**:
   - [ ] Adding a business marketplace installs that plugin and `core`, in Claude Code and in Codex
   - [ ] Importing a business repository and this repository as Cursor team marketplaces installs both plugins

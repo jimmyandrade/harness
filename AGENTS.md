@@ -1,6 +1,6 @@
 ---
 metadata:
-  version: "1.34.2"
+  version: "1.35.0"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -115,7 +115,8 @@ metadata:
 - `Considerar grupos de oportunidades` diz se as skills de oportunidade usam grupos. Com `sim`, toda edição pertence a exatamente um grupo, e o verificador falha quando o mapeamento de oportunidades do negócio, `.agents/mappings/oportunidades.notion.json`, não liga `group`. Com `não`, a edição não tem grupo.
 - `Glossário no repositório atual` diz se os arquivos de idioma ficam no repositório aberto nesta sessão e sobem no Git. O repositório atual é esse. Cada projeto define o próprio valor. Com `não`, eles ficam só no computador, na `Pasta do glossário`.
 - A pasta do glossário não é o harness. O glossário pode ficar dentro de um harness.
-- `Harness no repositório atual` diz se o repositório aberto nesta sessão recebe a instalação do harness. Com `não`, não acrescente essa instalação nele. A instalação reúne o servidor, as skills, a linha de comando e a API.
+- `Harness no repositório atual` diz se o repositório aberto nesta sessão recebe a instalação do harness. Com `não`, não acrescente essa instalação nele. Isso não escolhe uma instalação global. A instalação reúne o servidor, as skills, a linha de comando e a API.
+- `Instalação do harness` é `repositório` ou `global`. O repositório atual é o que está aberto nesta sessão, e cada projeto define o próprio valor. Com `global`, o negócio usa a instalação única da ferramenta e o repositório atual não recebe outra. Com `repositório`, vale `Harness no repositório atual`. `global` não decide a pasta do glossário nem a pasta de skills.
 - As skills que um repositório guarda ficam na pasta de skills dele. As skills do core podem chegar por um link da dependência instalada. Nenhuma das duas decide a pasta do glossário.
 - O motor que lê e escreve o glossário fica neste repositório, em `vocabulary/`, como decide a ADR 0018.
 

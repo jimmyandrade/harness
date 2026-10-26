@@ -3,7 +3,7 @@ name: levantar-ambiente-do-repositorio
 description: Levanta o ambiente de trabalho de um repositório antes de escrever código, testes, commit ou pull request. Acha o runtime e como ativá-lo, os comandos de instalar, lint, tipos, testes e build, as habilidades do repositório que se aplicam e as pegadinhas que ele documenta. Não serve para rodar os comandos, instalar dependências nem decidir a convenção de código.
 metadata:
   author: jimmyandrade
-  version: "0.4.1"
+  version: "0.5.0"
   related:
     - criar-commit
     - criar-pull-request
@@ -24,8 +24,10 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Pastas de habilidades do repositório": ".claude/skills, .agents/skills, .cursor, .github"
 "Manifestos de comandos": "package.json, Makefile, pyproject.toml, justfile"
 "Modo de aprendizado": "perguntar"
-# `Harness no repositório atual` é `sim` ou `não`. O repositório atual é o que está aberto nesta sessão. Cada projeto define o próprio valor. Com `não`, não acrescente nele a instalação do harness. Isso não decide a pasta do glossário nem a pasta de skills.
+# `Harness no repositório atual` é `sim` ou `não`. O repositório atual é o que está aberto nesta sessão. Cada projeto define o próprio valor. Com `não`, não acrescente nele a instalação do harness. Isso não escolhe a instalação global, nem a pasta do glossário, nem a pasta de skills.
 "Harness no repositório atual": "sim"
+# `Instalação do harness` é `repositório` ou `global`. `repositório` permite a instalação no repositório atual. `global` usa a instalação única da ferramenta, para o negócio, e o repositório atual não recebe dependência, link de skills, plugin nem servidor. Não decide a pasta do glossário nem a pasta de skills.
+"Instalação do harness": "repositório"
 ```
 
 ## Instruções
@@ -52,7 +54,7 @@ Registre as pegadinhas do ambiente que o repositório documenta: falhas conhecid
 
 ### Passo 6
 
-Leia `Harness no repositório atual`. O repositório atual é o que está aberto nesta sessão. Com `não`, a ficha diz para não acrescentar a instalação do harness nele. Liste à parte as skills do repositório atual e as que chegam por dependência ou plugin. A pasta do glossário não faz parte dessa instalação.
+Leia `Instalação do harness` e `Harness no repositório atual`. O repositório atual é o que está aberto nesta sessão. Com `global`, a ficha diz que o harness é a instalação única da ferramenta e que o repositório atual não recebe dependência, link de skills, plugin nem servidor. Com `repositório` e `Harness no repositório atual` em `não`, a ficha diz para não acrescentar a instalação e que isso não escolhe a instalação global. Liste à parte as skills do repositório atual e as que chegam pela instalação da ferramenta. A pasta do glossário não faz parte dessa instalação.
 Entregue a ficha, com uma seção por passo: instruções e habilidades do repositório, runtime e como ativar, comandos com a origem de cada um, habilidades do repositório que se aplicam a cada tarefa e pegadinhas. Em cada seção que não achou nada, escreva "Não achei". Não rode nenhum comando além de ler arquivos, e não instale nada.
 
 ### Passo 7
@@ -84,11 +86,12 @@ Se você só leu o arquivo de instruções, perde a habilidade do repositório q
 
 ### Instalação do harness no repositório atual
 
-Se você acrescentar a instalação do harness no repositório atual com `Harness no repositório atual` em `não`, ou tratar a pasta do glossário como essa instalação, esse repositório recebe arquivos que o negócio não pediu.
+Se você acrescentar a instalação do harness no repositório atual com `Instalação do harness` em `global`, ou com `Harness no repositório atual` em `não`, ou tratar esse `não` como instalação global, o repositório recebe arquivos que o negócio não pediu ou a ficha aponta um harness que não foi escolhido.
 
-1. Leia `Harness no repositório atual`.
-2. Com `não`, não acrescente a instalação aqui.
-3. A pasta do glossário, a pasta de skills e a instalação do harness são decisões separadas.
+1. Leia `Instalação do harness` e `Harness no repositório atual`.
+2. Com `global`, use a instalação da ferramenta e não acrescente outra no repositório atual.
+3. Com `repositório` e `Harness no repositório atual` em `não`, não acrescente a instalação e não trate isso como global. Pergunte uma vez onde está o harness desse trabalho e pare.
+4. A pasta do glossário, a pasta de skills e a instalação do harness são decisões separadas.
 
 ## Exemplos de entrada e saída
 
@@ -108,7 +111,8 @@ Não achei arquivo de instruções nem habilidade do repositório. O `pyproject.
 - Duas fontes dão comandos diferentes: use a habilidade do repositório e diga qual conflita.
 - O repositório é um monorepo: levante os comandos do projeto afetado, e diga como escolher o projeto.
 - A cópia de trabalho não existe ainda: peça o repositório e pare.
-- `Harness no repositório atual` em `não`: a ficha diz para não acrescentar a instalação do harness no repositório atual, o que está aberto nesta sessão. As skills que já chegam por plugin ou por dependência continuam listadas. A pasta do glossário não entra nessa decisão.
+- `Harness no repositório atual` em `não`, com `Instalação do harness` em `repositório`: a ficha diz para não acrescentar a instalação no repositório atual e que isso não escolhe a instalação global. A pasta do glossário não entra nessa decisão.
+- `Instalação do harness` em `global`: a ficha aponta a instalação única da ferramenta e diz para não criar outra no repositório atual. `Harness no repositório atual` em `sim` não cria essa segunda cópia.
 
 ## Pegadinhas
 
@@ -117,6 +121,7 @@ Não achei arquivo de instruções nem habilidade do repositório. O `pyproject.
 - O hook de pre-push pode levar minutos e parece travado.
 - Esta habilidade só lê. Instalar dependência ou rodar um comando é de quem chamou.
 - A pasta do glossário parece ser o lugar do harness. O harness reúne o servidor, as skills, a linha de comando e a API. O glossário pode ficar dentro de um harness, e também pode ficar só no computador.
+- `Harness no repositório atual` em `não` parece escolher a instalação global. Só `Instalação do harness` em `global` faz isso.
 
 ## Scripts disponíveis
 

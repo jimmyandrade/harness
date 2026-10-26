@@ -6,6 +6,8 @@ locale: en
 
 Claude Code reads project skills only from `.claude/skills`, and follows symbolic links. The core skills come from the `core` plugin, named `core:<skill>`. The repository can enable the plugin, but each machine installs it once. Run this runbook from the root of the project.
 
+Read `Instalação do harness` in the project instructions. `INSTALL.md` explains the choice. When the value is `global`, stop. The harness is the plugin already installed in the tool, and this repository does not receive a project install. When `Harness no repositório atual` is `não`, stop as well. That value does not mean the install is global. When the key is absent, the install is `repositório` and the steps below apply.
+
 Each step ends with a check.
 
 ## 1. Link the project skills
