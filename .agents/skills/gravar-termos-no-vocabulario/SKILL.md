@@ -3,7 +3,7 @@ name: gravar-termos-no-vocabulario
 description: Use essa habilidade sempre que, ao cadastrar ou corrigir termos do vocabulário do tom de voz, for hora de pesquisar a grafia, testar com dry run e gravar o lote, mesmo sem dizer gravar. NÃO use para decidir o nível, validar os campos, perguntar quais variações foram cadastradas, escrever o texto da marca, nem inventar um termo.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.6.0"
   related:
     - definir-vocabulario
     - procurar-variacao-de-termo
@@ -147,10 +147,10 @@ O plano ficou em update. A reticências que já estava foi reescrita, com o quan
 - `node node_modules/harness/vocabulary/dist/cli.js exists --language <idioma> --text <trecho>` devolve só o registro de cada token do trecho para se ele existe.
 - `node node_modules/harness/vocabulary/dist/cli.js terms` grava o lote. `--language`, `--mode` e `--validation` valem para o lote. Cada `--term` abre um termo, com `--state`, `--description`, `--reason`, `--when`, `--substitution`, `--decided-by`, `--decided-by-email`, `--decided-by-url`, `--decided-at`, `--source` e `--notes`. `--decided-by` é o nome. Os dois seguintes completam o objeto. `--categories`, `--examples`, `--rejected`, `--alternatives`, `--related`, `--tags`, `--allowed-in` e `--forbidden-in` repetem, um valor por vez. `--stop-word` marca a stop word, que pode vir sem `--state`. `--file` lê o lote inteiro de um JSON.
 - `--glossary`, antes do comando, aponta outro vocabulário.
-- `d="${HARNESS_GLOSSARY_DIR:-${HARNESS_ROOT:-.}/.agents/glossary}"; mkdir -p "$d"; [ -e "$d/<idioma>.json" ] || echo '{}' > "$d/<idioma>.json"` cria o vocabulário vazio do idioma.
+- `d="${HARNESS_GLOSSARY_DIR:-${HARNESS_ROOT:-.}/.agents/glossary}"; mkdir -p "$d"; [ -e "$d/<idioma>.json" ] || echo '{}' > "$d/<idioma>.json"` cria o arquivo vazio do idioma só dentro da pasta do vocabulário da pessoa. Não rode no repositório aberto.
 - `lookup_term`, `lookup_terms`, `exists_in_text` e `write_terms`, no servidor `vocabulary`, fazem a mesma consulta e a mesma escrita quando não há terminal.
 
-1. Com terminal, rode `lookup-terms` para os termos do plano, `lookup` para um termo e `exists` para um trecho. Com `Unknown language`, crie o vocabulário do idioma, em BCP 47, como `en`, e repita.
+1. Com terminal, rode `lookup-terms` para os termos do plano, `lookup` para um termo e `exists` para um trecho. Com `Unknown language`, a pasta aberta não tem o arquivo do idioma. Não crie `.agents/glossary` no repositório aberto. Rode de novo com `--glossary` na pasta do vocabulário das instruções de usuário.
 2. Com terminal, rode `terms` com `--language`, `--mode` e um `--term` para cada termo.
-3. Sem terminal, chame `lookup_terms`, `lookup_term`, `exists_in_text` e `write_terms` com os mesmos campos. Com `Unknown language`, pare: o vocabulário nasce com terminal.
+3. Sem terminal, chame `lookup_terms`, `lookup_term`, `exists_in_text` e `write_terms` com os mesmos campos. Com `Unknown language`, pare e use o terminal com `--glossary`. Não crie o arquivo no repositório aberto.
 4. Sem terminal e sem o servidor `vocabulary`, pare.
