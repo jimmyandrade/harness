@@ -3,7 +3,7 @@ name: definir-okr
 description: Cria, revisa e atualiza os objetivos e os key results de uma área num ciclo, com título, métrica, valor-alvo, prazo e as ações que empurram cada key result. Usada quando uma área define, revisa ou fecha os OKRs, prioriza quando tudo parece importante, ou começa e revisa a Sprint a partir deles. Não serve para cadastrar a tarefa nem priorizar itens sem OKR.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
   related:
     - definir-tarefa
     - evoluir-habilidade
@@ -77,11 +77,17 @@ Para cada objetivo, pergunte como saberemos, em números, que estamos chegando l
 O key result mede o objetivo: explique numa frase como o progresso dele mostra se o objetivo está sendo alcançado.
 Ele é numérico, com valor-alvo, métrica ou fonte de medição e data-alvo.
 A unidade é número, quantidade, frequência, porcentagem ou valor em moeda.
+Todo key result tem um sentido: aumentar, diminuir, manter acima ou manter abaixo.
+O valor atual vem do histórico de medições da métrica do key result, um registro por período de referência, e não é digitado à mão no key result.
 O título segue: um dos `Verbos do key result` + descrição + "para" + valor-alvo + "até" + data-alvo.
 O valor-alvo fica no título e na propriedade, e a data-alvo também fica na propriedade.
 Quando o resultado tem um "quanto" absoluto, como receita, membros ou eventos, o valor-alvo é absoluto.
 Uma porcentagem é leitura derivada do absoluto, com a base de cálculo escrita.
 Use porcentagem como alvo só quando não houver absoluto melhor.
+No key result de redução, em que quanto menor, melhor, registre a base e o período da base.
+O progresso dele é (base − valor atual) ÷ (base − valor-alvo), e um valor igual ou abaixo do alvo conta como atingido.
+Se a lista calcula o progresso só como valor atual ÷ valor-alvo, não grave o key result de redução assim.
+Proponha reescrevê-lo como uma quantidade que cresce, como a economia sobre a base, com valor-alvo igual à base menos o alvo, ou ajustar o cálculo da lista com a base e o sentido, e pergunte qual seguir.
 O key result é desafiador, mas possível com a capacidade, o tempo e as alavancas reais do ciclo.
 
 ### Passo 5
@@ -165,6 +171,14 @@ Se você aceitar "Configurar X" ou "Realizar 12 revisões" como key result, a á
 1. Mova a execução para uma tarefa, por `definir-tarefa`.
 2. Reescreva o key result com resultado, evidência, critério de qualidade e prazo.
 
+### Key result de redução com progresso invertido
+
+Se você gravar "Diminuir os custos para R$ 3.130" numa lista que calcula valor atual ÷ valor-alvo, custo zero aparece como 0% e o custo da base como mais de 100%.
+
+1. Registre o sentido, a base e o período da base.
+2. Confira como a lista calcula o progresso.
+3. Sem base e sentido no cálculo, proponha a economia sobre a base como valor que cresce, ou o ajuste do cálculo, e pergunte qual seguir.
+
 ### Valor-alvo só na propriedade
 
 Se você deixar o valor-alvo só na propriedade, o título não se explica na lista.
@@ -185,7 +199,7 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### crie um KR para reduzir em 20% os custos de ferramentas de tecnologia até o fim do ano
 
-o custo tem base em moeda, R$ 3.912,28 por mês. O título fica "Diminuir os custos mensais de ferramentas de tecnologia para R$ 3.130 até 31/12/2026", com valor-alvo 3130 e data-alvo 31/12/2026. Os 20% ficam na descrição, com a base. Perguntei o objetivo e a pessoa responsável antes de gravar.
+o custo tem base em moeda, R$ 3.912,28 em setembro, e quanto menor, melhor. A lista calcula o progresso como valor atual ÷ valor-alvo, então propus "Atingir economia mensal de R$ 782 em ferramentas de tecnologia até 31/12/2026", com valor-alvo 782, e o custo de cada mês registrado no histórico da métrica. Os 20% e a base ficam na descrição. Perguntei se a pessoa prefere essa reescrita ou o ajuste do cálculo, e o objetivo e a pessoa responsável, antes de gravar.
 
 ### revise os OKRs da área de marketing
 
@@ -203,6 +217,7 @@ a área tinha 5 objetivos no ciclo. Sugeri manter os 3 que conversam com a estra
 ## Pegadinhas
 
 - A porcentagem de conclusão, o valor atual e o atingimento são calculados pela lista. Editar à mão quebra a conta.
+- Num key result de redução, gastar zero parece não bater a meta quando a lista divide o valor atual pelo valor-alvo. O sentido e a base mudam a conta.
 - Um key result recém-criado sem título aparece como "Nova página" e some na busca pelo assunto.
 - A descrição da propriedade de título na lista traz o padrão de nome. Leia antes de gravar.
 - Um alvo de 100% parece ambicioso, mas vira perfeccionismo e esconde o quanto já foi feito.

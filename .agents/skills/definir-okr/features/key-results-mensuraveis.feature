@@ -52,6 +52,20 @@ Funcionalidade: Key results mensuráveis
       Quando a habilidade valida o key result
       Então o alvo exige foco e cabe na capacidade real do ciclo
 
+  Regra: Key result de redução conta como atingido abaixo do alvo
+
+    Exemplo: O custo cai para zero
+      Dado que um key result de redução tem base de R$ 3.912 e alvo de R$ 3.130
+      E que o custo medido no mês é R$ 0
+      Quando a habilidade calcula o progresso
+      Então o key result aparece como atingido
+
+    Exemplo: A lista só divide o valor atual pelo valor-alvo
+      Dado que a lista calcula o progresso como valor atual ÷ valor-alvo
+      Quando a habilidade vai gravar um key result de redução
+      Então ela não grava o key result de redução nesse cálculo
+      E propõe a economia sobre a base ou o ajuste do cálculo, e pergunta qual seguir
+
   Regra: Key result não é tarefa
 
     Exemplo: O key result descreve uma execução
