@@ -3,7 +3,7 @@ name: publicar-revisao-de-codigo
 description: Revisa um pull request e publica a revisão numa única review, com os comentários inline, no idioma de quem recebe e no tom do projeto. Usada quando a pessoa pede uma revisão ou outra habilidade precisa publicar uma. Não serve para tratar os comentários que você recebeu no seu PR.
 metadata:
   author: jimmyandrade
-  version: "0.9.0"
+  version: "0.9.1"
   aliases:
     - post-code-review
   related:
@@ -20,8 +20,8 @@ metadata:
 ## Parâmetros de configuração
 
 Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco, depois nas instruções de usuário. Quando um valor não estiver lá, use o padrão abaixo. Um valor vazio não impõe regra.
-
 ```yaml
+# `Postura dos comentários` é `pergunta` ou `veredito`: com `pergunta`, nenhum achado vira "isto é um erro", e sim o que você viu e uma pergunta.
 "Postura dos comentários": "pergunta"
 "Revelar que a revisão foi automática": "sim"
 "Idioma da revisão sem preferência conhecida": "o idioma do projeto"
@@ -34,28 +34,35 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Ação com Deveria ter": "comentar sem aprovar"
 "Ação só com Poderia ter": "aprovar com os comentários"
 "Ação sem achados": "aprovar"
+# `Nível de detalhe` é `enxuta`, só Deve ter e Deveria ter, ou `completa`, com tudo.
 "Nível de detalhe": "enxuta"
+# `Critério de revisão completa` diz quando a revisão sai completa mesmo com `Nível de detalhe` em `enxuta`, como uma pessoa que pediu assim ou um PR de criticidade alta, e lista o que conta como criticidade alta; na dúvida, fica enxuta.
 "Critério de revisão completa": ""
+# `Limite de Poderia ter publicado` diz até quantos achados de Poderia ter entram numa revisão enxuta, por exemplo só quando Deve ter mais Deveria ter publicados somam no máximo 2 e o total fica em até 5, e o que passa do limite vai só para o resumo.
 "Limite de Poderia ter publicado": ""
+# `Prioridade por tema` liga um tema do achado a uma categoria, como acessibilidade a Deve ter ou desvio da convenção de testes a Deveria ter.
 "Prioridade por tema": "acessibilidade: Deve ter, com sugestão de código"
 "Prova visual em PR de interface": "sim"
 "Validar rodando o comportamento": "não"
 "Cobertura integrada em comportamento crítico": "não"
 "Tamanho de PR que pede divisão": ""
 "Rótulo de prioridade no texto": "não"
+# `Abertura da revisão` descreve o que abre cada texto, como um resumo curto.
 "Abertura da revisão": ""
+# `Lentes de revisão` lista critérios que você aplica antes de publicar sem citá-los no texto.
 "Lentes de revisão": ""
 "Ler o texto antes de publicar": "sim"
+# `Publicar em execução agendada` é `sim` ou `não` e só vale quando ninguém está na frente: com `não`, a habilidade prepara a revisão e não publica.
 "Publicar em execução agendada": "não"
+# `Pasta das cópias separadas` diz onde criar a cópia de trabalho de cada repositório, e vazio usa a pasta temporária do sistema, com uma subpasta por repositório.
 "Pasta das cópias separadas": ""
 "Idade máxima da trava": "2 horas"
+# `Comentário de início da revisão` e `Etiqueta de revisão em andamento` avisam quem acompanha o PR de que a revisão começou: vazios, a habilidade não posta nem etiqueta nada.
 "Comentário de início da revisão": ""
+# `Comentário de início da revisão` e `Etiqueta de revisão em andamento` avisam quem acompanha o PR de que a revisão começou: vazios, a habilidade não posta nem etiqueta nada.
 "Etiqueta de revisão em andamento": ""
 "Modo de aprendizado": "perguntar"
 ```
-
-`Critério de revisão completa` diz quando a revisão sai completa mesmo com `Nível de detalhe` em `enxuta`, como uma pessoa que pediu assim ou um PR de criticidade alta, e lista o que conta como criticidade alta; na dúvida, fica enxuta. `Limite de Poderia ter publicado` diz até quantos achados de Poderia ter entram numa revisão enxuta, por exemplo só quando Deve ter mais Deveria ter publicados somam no máximo 2 e o total fica em até 5, e o que passa do limite vai só para o resumo. `Prioridade por tema` liga um tema do achado a uma categoria, como acessibilidade a Deve ter ou desvio da convenção de testes a Deveria ter. `Postura dos comentários` é `pergunta` ou `veredito`: com `pergunta`, nenhum achado vira "isto é um erro", e sim o que você viu e uma pergunta. `Nível de detalhe` é `enxuta`, só Deve ter e Deveria ter, ou `completa`, com tudo. `Lentes de revisão` lista critérios que você aplica antes de publicar sem citá-los no texto. `Abertura da revisão` descreve o que abre cada texto, como um resumo curto. `Publicar em execução agendada` é `sim` ou `não` e só vale quando ninguém está na frente: com `não`, a habilidade prepara a revisão e não publica. `Pasta das cópias separadas` diz onde criar a cópia de trabalho de cada repositório, e vazio usa a pasta temporária do sistema, com uma subpasta por repositório. `Comentário de início da revisão` e `Etiqueta de revisão em andamento` avisam quem acompanha o PR de que a revisão começou: vazios, a habilidade não posta nem etiqueta nada.
-
 ## Instruções
 
 ### Passo 1

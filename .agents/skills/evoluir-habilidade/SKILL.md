@@ -3,7 +3,7 @@ name: evoluir-habilidade
 description: Use essa habilidade sempre que for testar uma skill, alterá-la a pedido ou evoluir as instruções do projeto, mesmo sem dizer evoluir, inclusive o Gherkin e a comparação com e sem skill, resultado inconsistente, falha de chamada ou correção da pessoa. NÃO use para criar a primeira versão, só ver se a descrição dispara, só revisar sem executar, nem gravar a página no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.23.0"
+  version: "0.23.1"
   related:
     - criar-commit
     - criar-pull-request
@@ -18,15 +18,14 @@ metadata:
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Executar testes` é `sob pedido` ou `sempre`.
-
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo.
 ```yaml
 "Tokens do corpo": 5000
 "Modo de aprendizado": "perguntar"
 "Pasta das habilidades": ".agents/skills"
+# `Executar testes` é `sob pedido` ou `sempre`.
 "Executar testes": "sob pedido"
 ```
-
 ## Instruções
 
 ### Passo 1

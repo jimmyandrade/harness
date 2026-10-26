@@ -3,7 +3,7 @@ name: atender-revisao-de-pull-request
 description: Atende a revisão recebida num pull request, de pessoa ou de bot. Lê os comentários abertos, classifica cada sugestão, aplica o que é seguro, responde cada thread e resolve as atendidas. Sem PR informado, lista os seus que precisam de atenção. Não serve para revisar o PR de outra pessoa nem para abrir o PR.
 metadata:
   author: jimmyandrade
-  version: "0.16.0"
+  version: "0.16.1"
   aliases:
     - resolver-comentarios-de-revisao
     - apply-pr-review
@@ -22,38 +22,42 @@ metadata:
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco, depois nas instruções de usuário. Quando um valor não estiver lá, use o padrão abaixo. `Repositório` vem do remoto `origin` quando as instruções não dizem. Se as instruções do projeto ou de usuário têm uma seção com o nome desta habilidade, leia-a e aplique cada regra no passo que ela cita.
-
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco, depois nas instruções de usuário. Quando um valor não estiver lá, use o padrão abaixo. Se as instruções do projeto ou de usuário têm uma seção com o nome desta habilidade, leia-a e aplique cada regra no passo que ela cita.
 ```yaml
+# `Repositório` vem do remoto `origin` quando as instruções não dizem.
 "Repositório": ""
+# `Idioma da resposta à revisão` nomeia o idioma da resposta. O valor `o idioma do comentário` faz cada resposta sair no idioma daquele comentário.
 "Idioma da resposta à revisão": "inglês"
+# `Modo de execução` é `interativo`, com a pessoa na frente, ou `agendado`, sem ninguém.
 "Modo de execução": "interativo"
+# `Aplicar em execução agendada` é `estrutural`, que aplica só o estrutural, ou `não`, que não aplica nada e deixa tudo no resumo.
 "Aplicar em execução agendada": "estrutural"
+# `Aprovação para mudar comportamento` é `pedir` ou `não pedir`.
 "Aprovação para mudar comportamento": "pedir"
+# `Régua de mudança de comportamento` lista o que o projeto conta como mudança de comportamento, como condicional, validação, cache, rastreamento ou pagamento.
 "Régua de mudança de comportamento": ""
+# `Lentes de revisão` lista critérios que você aplica ao decidir, sem citá-los na resposta.
 "Lentes de revisão": ""
+# `Ler o texto antes de publicar` em `sim` mostra a resposta a outra pessoa e espera o sim.
 "Ler o texto antes de publicar": "sim"
 "Pedir nova revisão ao final": "sim"
+# `Fechar conversa com a confiança` em `sim` faz a mensagem que fecha uma conversa dizer o quanto você tem de confiança de que o ponto foi resolvido.
 "Fechar conversa com a confiança": "não"
+# `Número da confiança` é o número que entra na frase de `Fechar conversa com a confiança`. Sem valor, a frase não traz número.
 "Número da confiança": ""
 "Linkar as fontes da explicação": "sim"
+# `Rótulo de prioridade no texto` em `não` mantém o nome da categoria fora das respostas.
 "Rótulo de prioridade no texto": "não"
+# `Idioma do relatório` e `Agrupar o relatório por prioridade` mandam no relatório final.
 "Idioma do relatório": "o idioma da conversa"
+# `Idioma do relatório` e `Agrupar o relatório por prioridade` mandam no relatório final.
 "Agrupar o relatório por prioridade": "não"
 "Recriar PR aberto por agente de código": "não"
 "Modo de aprendizado": "perguntar"
 ```
-
-`Fechar conversa com a confiança` em `sim` faz a mensagem que fecha uma conversa dizer o quanto você tem de confiança de que o ponto foi resolvido. `Rótulo de prioridade no texto` em `não` mantém o nome da categoria fora das respostas. `Idioma do relatório` e `Agrupar o relatório por prioridade` mandam no relatório final. `Modo de execução` é `interativo`, com a pessoa na frente, ou `agendado`, sem ninguém. `Aplicar em execução agendada` é `estrutural`, que aplica só o estrutural, ou `não`, que não aplica nada e deixa tudo no resumo. `Aprovação para mudar comportamento` é `pedir` ou `não pedir`. `Régua de mudança de comportamento` lista o que o projeto conta como mudança de comportamento, como condicional, validação, cache, rastreamento ou pagamento. `Lentes de revisão` lista critérios que você aplica ao decidir, sem citá-los na resposta.
-`Idioma da resposta à revisão` nomeia o idioma da resposta.
-O valor `o idioma do comentário` faz cada resposta sair no idioma daquele comentário.
-`Número da confiança` é o número que entra na frase de `Fechar conversa com a confiança`.
-Sem valor, a frase não traz número.
-`Ler o texto antes de publicar` em `sim` mostra a resposta a outra pessoa e espera o sim.
 Comentário de self review, da mesma pessoa que pediu o atendimento, recebe a resposta na hora, com o que mudou, as linhas alteradas e o commit.
 A mensagem do bot é lida, respondida e considerada.
 A resposta a ele é publicada sem esperar que a pessoa leia esse texto antes.
-
 ## Instruções
 
 ### Passo 1

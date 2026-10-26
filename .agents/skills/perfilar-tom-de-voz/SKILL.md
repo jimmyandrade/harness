@@ -3,7 +3,7 @@ name: perfilar-tom-de-voz
 description: Perfila o tom de voz de uma pessoa ou de um canal a partir de uma amostra real de mensagens e registra os padrões no vocabulário, com a etiqueta da pessoa ou do canal. Usada quando a pessoa pede para perfilar como alguém conversa ou o tom de um canal. Não serve para escrever texto, cadastrar um termo solto nem perfilar sem pedido.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
   related:
     - definir-vocabulario
     - evoluir-habilidade
@@ -15,17 +15,16 @@ metadata:
 ## Parâmetros de configuração
 
 Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco, depois nas instruções de usuário. Quando um valor não estiver lá, use o padrão abaixo. Um valor vazio não impõe regra.
-
 ```yaml
+# `Fonte da amostra` diz onde ler as mensagens, como o histórico da conversa privada ou o de um canal.
 "Fonte da amostra": ""
 "Mensagens excluídas": "as de quem pede o perfil e as de bot"
+# `Tamanho da amostra` diz quantas mensagens ou que período ler.
 "Tamanho da amostra": ""
+# `Onde guardar o resumo do tom` diz onde fica o resumo curto de cada pessoa ou canal.
 "Onde guardar o resumo do tom": ""
 "Modo de aprendizado": "perguntar"
 ```
-
-`Fonte da amostra` diz onde ler as mensagens, como o histórico da conversa privada ou o de um canal. `Tamanho da amostra` diz quantas mensagens ou que período ler. `Onde guardar o resumo do tom` diz onde fica o resumo curto de cada pessoa ou canal.
-
 ## Instruções
 
 ### Passo 1

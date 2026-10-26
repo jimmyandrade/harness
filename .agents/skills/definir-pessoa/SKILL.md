@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.5.1"
   related:
     - definir-empresa
     - definir-grafia
@@ -18,16 +18,15 @@ metadata:
 ## Parâmetros de configuração
 
 Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco, depois nas instruções de usuário. Quando um valor não estiver lá, use o padrão abaixo. Um valor vazio não impõe regra.
-
 ```yaml
+# `Tipo de armazenamento das pessoas` é `lista do projeto`, a lista do mapeamento de dados, ou `arquivos locais`.
 "Tipo de armazenamento das pessoas": "lista do projeto"
+# `Endereço das pessoas` é a pasta, nos arquivos locais.
 "Endereço das pessoas": ""
 "Nome do arquivo da pessoa": "e-mail.json"
+# `Fontes para resolver identidade` lista onde achar um dado de identidade antes de perguntar, como a agenda e o perfil público no Slack.
 "Fontes para resolver identidade": ""
 ```
-
-`Tipo de armazenamento das pessoas` é `lista do projeto`, a lista do mapeamento de dados, ou `arquivos locais`. `Endereço das pessoas` é a pasta, nos arquivos locais. `Fontes para resolver identidade` lista onde achar um dado de identidade antes de perguntar, como a agenda e o perfil público no Slack.
-
 ## Instruções
 
 ### Passo 1

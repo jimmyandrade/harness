@@ -3,7 +3,7 @@ name: enviar-mensagem-no-slack
 description: Redige uma mensagem de Slack, num canal, thread ou DM, e entrega o rascunho com o link do destino. Só envia com a autorização explícita da pessoa e, depois do envio, compara o proposto com o aplicado para alimentar o vocabulário. Usada quando a pessoa pede uma mensagem ou resposta no Slack. Não serve para achar conversa antiga nem cadastrar pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.6.1"
   related:
     - definir-pessoa
     - definir-vocabulario
@@ -16,27 +16,33 @@ metadata:
 ## Parâmetros de configuração
 
 Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco, depois nas instruções de usuário. Quando um valor não estiver lá, use o padrão abaixo. Um parâmetro vazio não impõe regra.
-
 ```yaml
 "Limite de rascunhos por canal": "1"
 "Retroalimentar o vocabulário": "sim"
 "Modo de aprendizado": "perguntar"
+# `Emoji do título do post` é o shortcode que abre o título de um post novo, ou vazio para não ter emoji.
 "Emoji do título do post": ""
+# `PS no post novo` é `sim`, `não` ou `por canal`, e diz se o post termina com um PS pedindo para responder na thread.
 "PS no post novo": "não"
 "Itálico em estrangeirismo": "sim"
+# `Termos sem itálico` lista as palavras estrangeiras que ficam sem itálico, como siglas que já são de uso comum.
 "Termos sem itálico": []
+# `Artigo antes de nome` é `livre`, que segue o tom de voz, ou `nunca`.
 "Artigo antes de nome": "livre"
+# `Linha de link em post novo` descreve uma linha de link isolada ao fim de um post novo, ou fica vazio.
 "Linha de link em post novo": ""
+# `Saudação em resposta de thread` é `livre` ou `menção`.
 "Saudação em resposta de thread": "livre"
+# `Transmitir resposta de DM` é `sim` quando a resposta numa DM também vai para o canal da conversa.
 "Transmitir resposta de DM": "não"
+# `Estilo de escrita`: regra extra do projeto, como um tratamento que a organização evita.
 "Estilo de escrita": ""
+# `Formato de link`: regra extra do projeto, como um endereço que se encurta.
 "Formato de link": ""
+# `Contexto compartilhado`: regra extra do projeto, como a lista de canais privados.
 "Contexto compartilhado": ""
 "Assuntos que não se resolvem no Slack": ""
 ```
-
-`Emoji do título do post` é o shortcode que abre o título de um post novo, ou vazio para não ter emoji. `PS no post novo` é `sim`, `não` ou `por canal`, e diz se o post termina com um PS pedindo para responder na thread. `Termos sem itálico` lista as palavras estrangeiras que ficam sem itálico, como siglas que já são de uso comum. `Artigo antes de nome` é `livre`, que segue o tom de voz, ou `nunca`. `Linha de link em post novo` descreve uma linha de link isolada ao fim de um post novo, ou fica vazio. `Saudação em resposta de thread` é `livre` ou `menção`. `Transmitir resposta de DM` é `sim` quando a resposta numa DM também vai para o canal da conversa. `Estilo de escrita`, `Formato de link` e `Contexto compartilhado` guardam regras extras do projeto, como um tratamento que a organização evita, um endereço que se encurta ou a lista de canais privados.
-
 ## Instruções
 
 ### Passo 1

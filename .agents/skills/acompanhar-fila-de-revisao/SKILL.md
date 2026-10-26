@@ -3,7 +3,7 @@ name: acompanhar-fila-de-revisao
 description: Roda o ciclo da fila de revisão de pull requests. Confere o horário, cuida primeiro dos seus PRs, acha os pedidos, fecha o laço dos já revisados, escolhe o próximo, revisa um por execução e prepara o aviso a quem pediu. Os avisos ficam só como rascunho, com o link. Não serve para revisar sozinha nem achar pedidos por conta própria.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.5.1"
   related:
     - enviar-mensagem-no-slack
     - evoluir-habilidade
@@ -17,31 +17,34 @@ metadata:
 ## Parâmetros de configuração
 
 Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco, depois nas instruções de usuário. Quando um valor não estiver lá, use o padrão abaixo. Um valor vazio não impõe regra.
-
 ```yaml
+# `Modo de execução` é `interativo`, numa sessão aberta com a pessoa, ou `agendado`, sem ninguém na frente.
 "Modo de execução": "interativo"
+# `Horário de funcionamento` traz os dias e as horas em que o ciclo roda.
 "Horário de funcionamento": ""
 "Fuso horário": ""
 "Respeitar a agenda": "não"
+# `Ordem da fila` lista os critérios de desempate, do mais forte ao mais fraco.
 "Ordem da fila": "laço de revisões, repositório, nível da fonte, saída de andamento, pessoa, chegada"
 "Prioridade por repositório": ""
 "Prioridade por pessoa": ""
 "Teto de nível por pessoa": ""
 "Revisões por execução": "1"
+# `Checks exigidos` lista os checks que precisam ter terminado antes da revisão, e vazio exige todos.
 "Checks exigidos": ""
+# `Política de checks` diz, por check, se ele precisa passar, se uma falha é aceita e se a revisão pode seguir com a confirmação da pessoa; um check sem regra segue `Checks exigidos`.
 "Política de checks": ""
+# `Sinais de status` diz que marca colocar na mensagem do pedido em cada estado: na fila, em revisão, pausado, esperando checks, com resultado, mesclado depois da revisão e mesclado na chegada.
 "Sinais de status": ""
 "Publicar em execução agendada": "não"
 "Avisar quem pediu": "sim"
 "Canais sem aviso": ""
+# `Regras de aviso a terceiros` é uma lista de regras, cada uma com a condição (autor, repositório, texto do PR ou resultado da revisão) e o texto do aviso.
 "Regras de aviso a terceiros": ""
 "Prazo para avisar demora": ""
 "Onde guardar o estado da fila": ""
 "Modo de aprendizado": "perguntar"
 ```
-
-`Checks exigidos` lista os checks que precisam ter terminado antes da revisão, e vazio exige todos. `Política de checks` diz, por check, se ele precisa passar, se uma falha é aceita e se a revisão pode seguir com a confirmação da pessoa; um check sem regra segue `Checks exigidos`. `Sinais de status` diz que marca colocar na mensagem do pedido em cada estado: na fila, em revisão, pausado, esperando checks, com resultado, mesclado depois da revisão e mesclado na chegada. `Modo de execução` é `interativo`, numa sessão aberta com a pessoa, ou `agendado`, sem ninguém na frente. `Horário de funcionamento` traz os dias e as horas em que o ciclo roda. `Ordem da fila` lista os critérios de desempate, do mais forte ao mais fraco. `Regras de aviso a terceiros` é uma lista de regras, cada uma com a condição (autor, repositório, texto do PR ou resultado da revisão) e o texto do aviso.
-
 ## Instruções
 
 ### Passo 1
