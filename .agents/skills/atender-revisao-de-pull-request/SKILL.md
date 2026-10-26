@@ -1,9 +1,9 @@
 ---
 name: atender-revisao-de-pull-request
-description: Atende a revisão recebida num pull request, de pessoa ou de bot. Lê os comentários abertos, classifica cada sugestão, aplica o que é seguro, responde cada thread e resolve as atendidas. Sem PR informado, lista os seus que precisam de atenção. Não serve para revisar o PR de outra pessoa nem para abrir o PR.
+description: Atende a revisão recebida num pull request, de pessoa ou de bot. Lê os comentários abertos, classifica cada sugestão, aplica o que é seguro, responde de preferência num comentário inline e resolve as threads atendidas. Sem PR informado, lista os seus que precisam de atenção. Não serve para revisar o PR de outra pessoa nem para abrir o PR.
 metadata:
   author: jimmyandrade
-  version: "0.17.0"
+  version: "0.18.0"
   aliases:
     - resolver-comentarios-de-revisao
     - apply-pr-review
@@ -98,7 +98,10 @@ Se a decisão vale além deste PR, grave a lição nas instruções do projeto e
 
 ### Passo 6
 
-Responda cada thread no idioma de `Idioma da resposta à revisão`.
+Responda no idioma de `Idioma da resposta à revisão`.
+A resposta preferida é um comentário inline no trecho do diff que a decisão muda, mesmo quando quem revisou só escreveu no corpo da revisão.
+Sem thread, abra uma revisão sua com esse comentário na linha.
+A conversa do PR fica para o que não tem linha no diff.
 Com esse parâmetro em `o idioma do comentário`, a resposta sai no idioma do comentário.
 A resposta diz o que mudou.
 Quando o texto mudou, ela mostra as linhas alteradas num bloco, com o que saiu e o que entrou.
@@ -166,6 +169,14 @@ Se você resolver a thread sem responder, quem comentou não sabe o que foi feit
 
 1. Responda antes de resolver.
 2. Diga o que mudou, mostre as linhas alteradas e cite o commit, ou diga o motivo.
+
+### Resposta só na conversa
+
+Se você responder na conversa do PR uma revisão que tem linha no diff, quem revisou não vê a resposta no código.
+
+1. Abra uma revisão sua com o comentário inline no trecho que a decisão muda.
+2. O comentário da conversa, se já existir, aponta essa revisão e não deixa o texto antigo.
+3. Sem linha no diff, a resposta fica na conversa.
 
 ### Tudo que o bot pede vira mudança
 
@@ -259,7 +270,7 @@ Achei cinco comentários abertos. Dois eram estruturais, um nome e um texto, e a
 
 - Uma pessoa pergunta algo que só ela pode decidir: pergunte e não resolva.
 - Dois bots apontam o mesmo problema: uma correção, uma resposta em cada thread.
-- O comentário fica na conversa do PR, fora de uma thread: responda na conversa. Ele não tem como ser resolvido.
+- Quem revisou só no corpo da revisão, ou o comentário está na conversa e não tem thread: a resposta preferida é um comentário inline no trecho que a decisão muda, numa revisão sua. A conversa fica para o que não tem linha no diff, e esse comentário não se resolve.
 - Um push novo faz o bot revisar de novo: leia as threads novas antes do merge.
 - Um bot comenta por causa de um check que falhou: trate como os outros. A decisão de mesclar com check falhando fica com `criar-pull-request`.
 - Sem PR informado e sem nenhum PR da pessoa precisando de ação: diga isso e pare.
@@ -272,7 +283,7 @@ Achei cinco comentários abertos. Dois eram estruturais, um nome e um texto, e a
 - O GitHub marca como `outdated` a thread cujo trecho mudou. Ela continua aberta até alguém resolver.
 - O resumo do bot é o corpo da revisão, não uma thread. Ele não tem botão de resolver.
 - Resolver pede o id da thread, que vem da API GraphQL. O id do comentário, da API REST, não serve.
-- A resposta vai como réplica do primeiro comentário da thread. Comentário novo no PR não fica na thread.
+- A resposta de uma thread vai como réplica do primeiro comentário. Sem thread, a resposta preferida é um comentário inline numa revisão sua, no trecho que a decisão muda. Um comentário novo na conversa não fica na thread.
 - Aprovar o PR não resolve as threads dele.
 - A consulta de threads traz uma página. Se `pageInfo.hasNextPage` for verdadeiro, peça a próxima com `after`, antes de dizer que não há mais thread.
 - Resposta com apóstrofo quebra `-f body='...'` no shell. Grave a resposta num arquivo e envie com `-F body=@<arquivo>`.
@@ -291,5 +302,5 @@ Achei cinco comentários abertos. Dois eram estruturais, um nome e um texto, e a
 
 1. Leia as revisões, a conversa e as threads.
 2. Se a branch estiver atrás da base, atualize com rebase e substitua a branch publicada, sem pedir. Corrija e commite, inclusive a lição nas instruções do projeto, se for o caso, e envie a branch.
-3. Para cada thread, confira as respostas, responda e resolva.
+3. Para cada thread, confira as respostas, responda no comentário inline e resolva. Sem thread, abra uma revisão sua com o comentário na linha.
 4. Entregue o placar do Passo 7.
