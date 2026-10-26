@@ -54,11 +54,28 @@ jq -r '.name, .skills' .cursor-plugin/plugin.json
 
 Check: the output is the business name and `./.agents/skills/`.
 
-An admin of the Cursor team opens Dashboard → Plugins & MCPs, chooses Add Marketplace → Import from Repo, and imports the business repository, then `https://github.com/jimmyandrade/harness`. Then remove the links of step 2 from the project, so each skill shows once.
+The dashboard is [cursor.com/dashboard](https://cursor.com/dashboard). The account menu in the editor does not open it. An admin on a Teams or Enterprise plan opens Plugins & MCPs. Under Team Marketplaces, choose Add Marketplace, then Import from Repo, and import the business repository, then `https://github.com/jimmyandrade/harness`. A personal account shows Your Marketplaces and no Team Marketplaces section. When the account belongs to a team and the page still shows only Your Marketplaces, switch to that team in the dashboard header.
+
+Check: Team Marketplaces lists both repositories.
+
+Open the imported marketplace, then Marketplace Settings, then Plugin Repository, and turn on Enable Auto Refresh. The Cursor GitHub App must be installed on the repository and allowed to read it. A push to the default branch re-indexes the marketplace, at most once every 10 minutes, and the index keeps the latest commit. Refresh in that same section re-indexes once, without the app. Restart Cursor, or focus the window, so the client reads the new index. A Cloud Agent that is already running keeps the version it started with.
+
+Check: after a push to the default branch and a re-index, Customize lists the skills of that commit. The manifest name is `core`. Cursor may show the marketplace name in front of it, such as `harness-core`.
+
+Then remove the links of step 2 from the project, so each skill shows once.
 
 Check: in Cursor, Customize lists the business plugin and `core`, and installing them shows the same skills as step 3.
+
+## 5. Grok Bot does not load these skills
+
+Grok Bot does not read `.agents/skills`, `.cursor/skills`, or the `core` plugin. Connect apps lists apps from the Cursor Marketplace. A skill a Bot saves belongs to that Bot. Get Grok Bot in the account menu opens the mobile app. It is not the dashboard, and Enable Auto Refresh is not there.
+
+A team admin chooses which connected apps Grok Bot may use on the same Plugins & MCPs page. That choice does not install this repository.
+
+Check: Connect apps does not list `core` from this repository. The skills in Cursor still come from steps 1 to 4.
 
 ## Do not
 
 - Do not create a skill under a link. It would land in `node_modules` and disappear on the next install.
 - Do not keep the links and the `core` plugin in the same project. Each core skill would show twice.
+- Do not add this repository under Your Marketplaces to follow new commits. That list is personal, each row only offers Remove, and the install stays on the commit from when the repository was added. Adding it again installs that same commit.
