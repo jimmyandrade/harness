@@ -4,7 +4,7 @@ description: Sincroniza o status de tarefas, cards ou issues com o estado do pul
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.5.1"
   related:
     - criar-commit
     - criar-pull-request
@@ -17,23 +17,24 @@ metadata:
 ## Parâmetros de configuração
 
 Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco, depois nas instruções de usuário. Quando um valor não estiver lá, use o padrão abaixo. Sem padrão e sem valor, pergunte uma vez e pare.
-
 ```yaml
+# `Consulta das tarefas` é a busca que lista as tarefas da pessoa ainda abertas, na linguagem do rastreador do projeto.
 "Consulta das tarefas": ""
+# `Fluxo de status` é a lista ordenada dos status, do primeiro ao último, com o nome de cada transição entre eles. `Fluxo de status` vazio não muda o status e não interrompe a gravação da ligação.
 "Fluxo de status": ""
 "Status do PR mesclado": "concluído"
 "Status do PR aberto e pronto": "em revisão"
 "Status do PR em rascunho": "em andamento"
+# Com `Status do PR bloqueado` em `não muda`, a tarefa fica onde está e entra na lista para decidir.
 "Status do PR bloqueado": "não muda"
+# `Etiquetas de PR bloqueado` lista as etiquetas que marcam o PR como bloqueado, esteja ele em rascunho ou pronto. Rascunho é o estado do PR. Bloqueio é um sinal à parte, dado pelas etiquetas, e tem precedência sobre o rascunho.
 "Etiquetas de PR bloqueado": ""
 "Ligação entre tarefa e PR": "chave da tarefa no título, na branch ou no corpo do PR"
+# `Registro da ligação` diz como gravar a ligação entre a tarefa e o pull request, no pull request ainda aberto e no pull request já mesclado. `Registro da ligação` vazio pergunta uma vez e para, sem gravar.
 "Registro da ligação": ""
 "Pedir confirmação do plano": "sim"
 "Modo de aprendizado": "perguntar"
 ```
-
-`Consulta das tarefas` é a busca que lista as tarefas da pessoa ainda abertas, na linguagem do rastreador do projeto. `Fluxo de status` é a lista ordenada dos status, do primeiro ao último, com o nome de cada transição entre eles. `Fluxo de status` vazio não muda o status e não interrompe a gravação da ligação. `Registro da ligação` diz como gravar a ligação entre a tarefa e o pull request, no pull request ainda aberto e no pull request já mesclado. `Registro da ligação` vazio pergunta uma vez e para, sem gravar. `Etiquetas de PR bloqueado` lista as etiquetas que marcam o PR como bloqueado, esteja ele em rascunho ou pronto. Rascunho é o estado do PR. Bloqueio é um sinal à parte, dado pelas etiquetas, e tem precedência sobre o rascunho. Com `Status do PR bloqueado` em `não muda`, a tarefa fica onde está e entra na lista para decidir.
-
 ## Instruções
 
 ### Passo 1

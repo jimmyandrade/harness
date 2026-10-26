@@ -62,6 +62,7 @@ flowchart LR
     escrever_teste["escrever-teste"]
     evoluir_habilidade["evoluir-habilidade"]
     extrair_tarefas_da_reuniao["extrair-tarefas-da-reuniao"]
+    fazer_fechamento["fazer-fechamento"]
     gerenciar_estoque["gerenciar-estoque"]
     gravar_termos_no_vocabulario["gravar-termos-no-vocabulario"]
     identificar_duplicata["identificar-duplicata"]
@@ -314,6 +315,12 @@ flowchart LR
   extrair_tarefas_da_reuniao --> evoluir_habilidade
   extrair_tarefas_da_reuniao --> identificar_duplicata
   extrair_tarefas_da_reuniao --> procurar_tarefa
+  fazer_fechamento --> definir_conta_bancaria
+  fazer_fechamento --> definir_obrigacao_financeira
+  fazer_fechamento --> evoluir_habilidade
+  fazer_fechamento --> lancar_despesa_da_empresa
+  fazer_fechamento --> organizar_ponto_de_contato
+  fazer_fechamento --> revisar_financas
   gerenciar_estoque --> definir_ativo_imobilizado
   gerenciar_estoque --> definir_lancamento
   gerenciar_estoque --> identificar_duplicata
@@ -364,6 +371,7 @@ flowchart LR
   organizar_ponto_de_contato --> definir_grupo_de_oportunidades
   organizar_ponto_de_contato --> definir_tarefa
   organizar_ponto_de_contato --> definir_viagem
+  organizar_ponto_de_contato --> fazer_fechamento
   organizar_ponto_de_contato --> procurar_oportunidade
   organizar_ponto_de_contato --> sincronizar_cronograma
   pedir_revisao_de_pr_no_slack --> criar_pull_request

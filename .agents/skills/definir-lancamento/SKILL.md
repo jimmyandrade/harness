@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.5"
+  version: "0.3.6"
   related:
     - definir-ativo-imobilizado
     - definir-planejamento-financeiro
@@ -18,12 +18,15 @@ metadata:
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Moeda` é a moeda das contas e das respostas. `Moedas estrangeiras` lista as outras moedas em que a empresa paga, como o serviço de tecnologia cobrado em dólar. `Habilidade de venda` e `Habilidade de projeção de caixa` vazias quer dizer que a venda e a projeção do caixa ficam fora desta habilidade.
-
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo.
 ```yaml
+# `Moeda` é a moeda das contas e das respostas.
 "Moeda": "BRL"
+# `Moedas estrangeiras` lista as outras moedas em que a empresa paga, como o serviço de tecnologia cobrado em dólar.
 "Moedas estrangeiras": []
+# `Habilidade de venda` e `Habilidade de projeção de caixa` vazias quer dizer que a venda e a projeção do caixa ficam fora desta habilidade.
 "Habilidade de venda": ""
+# `Habilidade de venda` e `Habilidade de projeção de caixa` vazias quer dizer que a venda e a projeção do caixa ficam fora desta habilidade.
 "Habilidade de projeção de caixa": ""
 "Classes do gasto":
   Custos:
@@ -54,7 +57,6 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
     - empréstimos
     - financiamentos
 ```
-
 ## Instruções
 
 ### Passo 1

@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.4.1"
   related:
     - definir-lancamento
     - definir-planejamento-financeiro
@@ -19,18 +19,21 @@ metadata:
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Moeda` é a moeda das tabelas. `Habilidade de projeção de caixa` vazia quer dizer que a projeção do caixa fica fora desta habilidade. `Apelidos de intervalo` dá nome a intervalos que se repetem, e o negócio pode acrescentar os próprios, como quinzena ou temporada. `Início da semana` é o dia em que a semana começa. `Nome do ponto de contato` é como o negócio chama o ponto de contato que se pode recortar, como evento, show ou pop-up.
-
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo.
 ```yaml
+# `Moeda` é a moeda das tabelas.
 "Moeda": "BRL"
+# `Habilidade de projeção de caixa` vazia quer dizer que a projeção do caixa fica fora desta habilidade.
 "Habilidade de projeção de caixa": ""
+# `Apelidos de intervalo` dá nome a intervalos que se repetem, e o negócio pode acrescentar os próprios, como quinzena ou temporada.
 "Apelidos de intervalo":
   "semana": "do Início da semana ao dia anterior da semana seguinte"
   "mês": "do dia 1 ao último dia do mês"
+# `Início da semana` é o dia em que a semana começa.
 "Início da semana": "segunda-feira"
+# `Nome do ponto de contato` é como o negócio chama o ponto de contato que se pode recortar, como evento, show ou pop-up.
 "Nome do ponto de contato": "ponto de contato"
 ```
-
 ## Instruções
 
 ### Passo 1

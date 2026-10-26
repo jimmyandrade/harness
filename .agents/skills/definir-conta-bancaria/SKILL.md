@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.2"
+  version: "0.1.3"
   related:
     - definir-empresa
     - definir-pessoa
@@ -18,15 +18,16 @@ metadata:
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Títulos dos modelos` lista o começo do título das páginas que são modelos da lista de contas. `Habilidade de venda` vazia quer dizer que a venda recebida fica fora desta habilidade. `Chave Pix nos dados para pagamento` com `obrigatória` faz os dados para pagamento, enviados a quem vai pagar, levarem a chave Pix principal da conta. Com `opcional`, a chave entra só se já estiver cadastrada.
-
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo.
 ```yaml
+# `Títulos dos modelos` lista o começo do título das páginas que são modelos da lista de contas.
 "Títulos dos modelos": []
+# `Habilidade de venda` vazia quer dizer que a venda recebida fica fora desta habilidade.
 "Habilidade de venda": ""
+# `Chave Pix nos dados para pagamento` com `obrigatória` faz os dados para pagamento, enviados a quem vai pagar, levarem a chave Pix principal da conta. Com `opcional`, a chave entra só se já estiver cadastrada.
 "Chave Pix nos dados para pagamento": "opcional"
 "Modo de aprendizado": "perguntar"
 ```
-
 ## Instruções
 
 ### Passo 1

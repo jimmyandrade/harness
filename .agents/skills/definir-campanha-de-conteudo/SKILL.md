@@ -3,7 +3,7 @@ name: definir-campanha-de-conteudo
 description: Use essa habilidade sempre que for criar, revisar, acompanhar ou encerrar uma campanha de conteúdo, inclusive a janela, as etapas por semana, as métricas e promover uma pauta a campanha, mesmo sem dizer campanha. NÃO use para criar os posts da campanha, conferir o mix do calendário, escrever roteiro ou legenda, nem cadastrar a data significativa.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.3.1"
   related:
     - evoluir-habilidade
     - planejar-calendario-de-conteudo
@@ -15,15 +15,15 @@ metadata:
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Habilidade de tom de voz` vazia quer dizer que a promessa e o CTA seguem só esta habilidade. `Referências da estratégia de conteúdo` lista a página do Notion e outras referências com a estratégia de conteúdo original da marca. Uma referência que a pessoa der no pedido vale junto. Sem nenhuma, o objetivo vem só da pessoa.
-
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo.
 ```yaml
 "Formato da data com dia da semana": "terça-feira, 01/09/2026"
+# `Habilidade de tom de voz` vazia quer dizer que a promessa e o CTA seguem só esta habilidade.
 "Habilidade de tom de voz": ""
+# `Referências da estratégia de conteúdo` lista a página do Notion e outras referências com a estratégia de conteúdo original da marca. Uma referência que a pessoa der no pedido vale junto. Sem nenhuma, o objetivo vem só da pessoa.
 "Referências da estratégia de conteúdo": []
 "Modo de aprendizado": "perguntar"
 ```
-
 ## Instruções
 
 ### Passo 1

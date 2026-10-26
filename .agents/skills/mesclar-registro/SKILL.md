@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.11.3"
+  version: "0.11.4"
   related:
     - definir-empresa
     - definir-grafia
@@ -17,12 +17,11 @@ metadata:
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Listas que excluem a duplicata reconciliada` nomeia as listas em que a duplicata, depois de reconciliada no canônico, é excluída sem ordem da pessoa. Vazia quer dizer que nenhuma lista exclui sem ordem.
-
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo.
 ```yaml
+# `Listas que excluem a duplicata reconciliada` nomeia as listas em que a duplicata, depois de reconciliada no canônico, é excluída sem ordem da pessoa. Vazia quer dizer que nenhuma lista exclui sem ordem.
 "Listas que excluem a duplicata reconciliada": []
 ```
-
 ## Instruções
 
 ### Passo 1

@@ -3,7 +3,7 @@ name: redigir-com-tom-de-voz
 description: Use essa habilidade sempre que for criar, redigir, editar, revisar ou responder texto da marca no tom de voz, mesmo sem dizer copy. NÃO use para responder quem conversa com a IA, descrever uma skill, titular tarefa ou oportunidade, cravar a grafia, alterar formato de conteúdo, nem assumir cliente, peça, oportunidade ou histórico.
 metadata:
   author: jimmyandrade
-  version: "0.17.1"
+  version: "0.17.2"
   aliases:
     - escreva-usando-o-tom-de-voz
   related:
@@ -16,12 +16,10 @@ metadata:
 ## Parâmetros de configuração
 
 ```yaml
+# `Público` é o público padrão. Vazio, o pedido informa. Se o pedido nomeia outro público, vale o do pedido. As regras de voz ficam nesta habilidade e no vocabulário. Um playbook antigo não é uma segunda fonte: a regra dele entra aqui ou no vocabulário.
 "Público": ""
 "Modo de aprendizado": "perguntar"
 ```
-
-`Público` é o público padrão. Vazio, o pedido informa. Se o pedido nomeia outro público, vale o do pedido. As regras de voz ficam nesta habilidade e no vocabulário. Um playbook antigo não é uma segunda fonte: a regra dele entra aqui ou no vocabulário.
-
 ## Instruções
 
 ### Passo 1

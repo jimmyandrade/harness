@@ -3,7 +3,7 @@ name: procurar-pedido-de-revisao
 description: Acha os pull requests que alguém pediu para a pessoa revisar, na conversa do time e no GitHub, sem repetir um já visto. Marca os que não estão prontos, abre nova rodada num PR já revisado e propõe a pergunta de acompanhamento de um PR em andamento. Não serve para revisar nem para enviar mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.4.1"
   related:
     - definir-pessoa
     - enviar-mensagem-no-slack
@@ -15,9 +15,9 @@ metadata:
 ## Parâmetros de configuração
 
 Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco, depois nas instruções de usuário. Quando um valor não estiver lá, use o padrão abaixo. Um valor vazio não impõe regra.
-
 ```yaml
 "Organização do GitHub": ""
+# `Fontes de pedido de revisão` lista, em ordem, o que varrer: `conversa`, `pedidos no GitHub`, `autores acompanhados`, `repositórios acompanhados` e `anúncios de bot`.
 "Fontes de pedido de revisão": "conversa, pedidos no GitHub"
 "Canais lidos direto": ""
 "Canais ignorados": ""
@@ -25,21 +25,24 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Autores acompanhados": ""
 "Repositórios acompanhados": ""
 "Autores ignorados": ""
+# `Regras de relevância por repositório` diz, por repositório ou padrão de nome, se vale revisar: sempre, nunca, ou só com condição (por exemplo, só com pedido na conversa que marque a pessoa ou um dos `Grupos da pessoa`).
 "Regras de relevância por repositório": ""
 "Equipes que valem como a pessoa": ""
+# `Grupos da pessoa` lista os grupos de conversa cuja menção vale como menção a ela, por identificador.
 "Grupos da pessoa": ""
 "Etiqueta de pronto para revisão": ""
 "Repositórios que exigem a etiqueta": ""
+# `Aplicar a etiqueta quando o autor autoriza a revisão` é `sim` ou `não`: com `sim`, a resposta de quem abriu o PR dizendo que ele pode ser revisado mesmo sem a `Etiqueta de pronto para revisão` leva a habilidade a aplicar essa etiqueta no PR.
 "Aplicar a etiqueta quando o autor autoriza a revisão": "não"
 "Marcadores de trabalho em andamento": "WIP, [WIP], wip, do not merge"
+# `Etiquetas de não pronto` lista etiquetas do PR que o marcam como não pronto, além dos marcadores no título.
 "Etiquetas de não pronto": ""
+# `Intervalos de pergunta sobre PR em andamento` são dias úteis entre as perguntas, e depois do último valor cada intervalo é a soma dos dois anteriores.
 "Intervalos de pergunta sobre PR em andamento": "1, 1, 2, 3, 5, 8, 13"
+# `Registro de PRs conhecidos` diz onde guardar o que já foi visto, com a data da última varredura de cada fonte. Sem registro, a habilidade só enxerga esta execução e não reconhece um PR já visto.
 "Registro de PRs conhecidos": ""
 "Modo de aprendizado": "perguntar"
 ```
-
-`Fontes de pedido de revisão` lista, em ordem, o que varrer: `conversa`, `pedidos no GitHub`, `autores acompanhados`, `repositórios acompanhados` e `anúncios de bot`. `Intervalos de pergunta sobre PR em andamento` são dias úteis entre as perguntas, e depois do último valor cada intervalo é a soma dos dois anteriores. `Registro de PRs conhecidos` diz onde guardar o que já foi visto, com a data da última varredura de cada fonte. Sem registro, a habilidade só enxerga esta execução e não reconhece um PR já visto. `Grupos da pessoa` lista os grupos de conversa cuja menção vale como menção a ela, por identificador. `Aplicar a etiqueta quando o autor autoriza a revisão` é `sim` ou `não`: com `sim`, a resposta de quem abriu o PR dizendo que ele pode ser revisado mesmo sem a `Etiqueta de pronto para revisão` leva a habilidade a aplicar essa etiqueta no PR. `Etiquetas de não pronto` lista etiquetas do PR que o marcam como não pronto, além dos marcadores no título. `Regras de relevância por repositório` diz, por repositório ou padrão de nome, se vale revisar: sempre, nunca, ou só com condição (por exemplo, só com pedido na conversa que marque a pessoa ou um dos `Grupos da pessoa`).
-
 ## Instruções
 
 ### Passo 1

@@ -4,7 +4,7 @@ description: Use essa habilidade sempre que for sugerir o que postar, planejar u
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.7.0"
+  version: "0.7.1"
   related:
     - criar-ideia-de-conteudo
     - definir-campanha-de-conteudo
@@ -16,16 +16,17 @@ metadata:
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Empresa do negócio` é o nome do registro do próprio negócio na lista de empresas. Os perfis padrão, um por canal, saem dos perfis sociais dessa empresa. `Perfis por praça` com `sim` quer dizer que a marca tem um perfil por praça: o perfil sai da lista de perfis sociais, pela praça, conforme o mapeamento de dados do projeto. `Referências da estratégia de conteúdo` lista a página do Notion e outras referências com a estratégia de conteúdo original da marca. Uma referência que a pessoa der no pedido vale junto. Sem nenhuma, o objetivo vem só da pessoa.
-
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo.
 ```yaml
 "Formato da data com dia da semana": "terça-feira, 01/09/2026"
+# `Empresa do negócio` é o nome do registro do próprio negócio na lista de empresas. Os perfis padrão, um por canal, saem dos perfis sociais dessa empresa.
 "Empresa do negócio": ""
+# `Perfis por praça` com `sim` quer dizer que a marca tem um perfil por praça: o perfil sai da lista de perfis sociais, pela praça, conforme o mapeamento de dados do projeto.
 "Perfis por praça": "não"
+# `Referências da estratégia de conteúdo` lista a página do Notion e outras referências com a estratégia de conteúdo original da marca. Uma referência que a pessoa der no pedido vale junto. Sem nenhuma, o objetivo vem só da pessoa.
 "Referências da estratégia de conteúdo": []
 "Modo de aprendizado": "perguntar"
 ```
-
 ## Instruções
 
 ### Passo 1

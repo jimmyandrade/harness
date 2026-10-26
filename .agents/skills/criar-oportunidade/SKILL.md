@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.18.1"
+  version: "0.18.2"
   related:
     - procurar-oportunidade
     - definir-grupo-de-oportunidades
@@ -15,15 +15,15 @@ metadata:
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Considerar grupos de oportunidades` é `sim` ou `não`. As datas são AAAA-MM-DD. `Data mínima da edição` vazia vale a `Data de fundação do negócio`. As duas vazias: sem limite.
-
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. As datas são AAAA-MM-DD.
 ```yaml
 "Formato da data com dia da semana": "terça-feira, 01/09/2026"
+# `Considerar grupos de oportunidades` é `sim` ou `não`.
 "Considerar grupos de oportunidades": "sim"
 "Data de fundação do negócio": ""
+# `Data mínima da edição` vazia vale a `Data de fundação do negócio`. As duas vazias: sem limite.
 "Data mínima da edição": ""
 ```
-
 ## Instruções
 
 ### Passo 1

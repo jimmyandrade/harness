@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.4.1"
   related:
     - lancar-despesa-pessoal
     - procurar-data-significativa
@@ -18,8 +18,7 @@ metadata:
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global`. Quando um valor não estiver lá, use o padrão abaixo. `Agendas por contexto` liga cada contexto à agenda que recebe os lembretes dele.
-
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global`. Quando um valor não estiver lá, use o padrão abaixo.
 ```yaml
 "Moeda": "BRL"
 "Situações":
@@ -29,11 +28,11 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
   - "Adiada"
   - "A verificar"
   - "Quitada"
+# `Agendas por contexto` liga cada contexto à agenda que recebe os lembretes dele.
 "Agendas por contexto": []
 "Antecedência do lembrete": "1 dia"
 "Modo de aprendizado": "perguntar"
 ```
-
 ## Instruções
 
 ### Passo 1

@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.43.0"
+  version: "0.43.1"
   related:
     - definir-agenda-de-popstar
     - definir-convidado
@@ -25,11 +25,12 @@ metadata:
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Agendas` lista cada agenda pelo `"Nome"` e pelo `"ID"` opcional, com o `"Uso"`: `padrão`, `em uso`, `só leitura`, `aposentada` ou `ignorada`, e a `"Finalidade"` opcional. O evento novo vai para a `padrão`, ou para a principal da conta. Nunca grave em `só leitura`, `aposentada` ou `ignorada`. `Habilidade de tom de voz` vazia quer dizer que o título de evento externo segue o nome canônico, sem tom próprio. `Compromissos de vida` lista o que um bloco de carreira não apaga.
-
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo.
 ```yaml
 "Formato da data com dia da semana": "terça-feira, 01/09/2026"
+# `Agendas` lista cada agenda pelo `"Nome"` e pelo `"ID"` opcional, com o `"Uso"`: `padrão`, `em uso`, `só leitura`, `aposentada` ou `ignorada`, e a `"Finalidade"` opcional. O evento novo vai para a `padrão`, ou para a principal da conta. Nunca grave em `só leitura`, `aposentada` ou `ignorada`.
 "Agendas": []
+# `Compromissos de vida` lista o que um bloco de carreira não apaga.
 "Compromissos de vida":
   - "alimentação"
   - "exercícios"
@@ -41,12 +42,11 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
   - "relacionamento amoroso"
   - "amizades"
   - "descanso"
+# `Habilidade de tom de voz` vazia quer dizer que o título de evento externo segue o nome canônico, sem tom próprio.
 "Habilidade de tom de voz": ""
+# `Pauta obrigatória em evento com convidados` em `sim` exige a pauta na descrição.
 "Pauta obrigatória em evento com convidados": "não"
 ```
-
-`Pauta obrigatória em evento com convidados` em `sim` exige a pauta na descrição.
-
 ## Instruções
 
 ### Passo 1
