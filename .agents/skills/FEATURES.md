@@ -54,12 +54,13 @@ How these skills relate is in `README.md`, in this folder.
 - **Properties**:
   - Lives at `.agents/skills/avaliar-atualizacoes-de-dependencia/SKILL.md`
   - Reads the bot authors, the install, test, and build commands, and the reviewers from the project instructions
+  - Reads which dependency update tools the repository uses from a global parameter, or finds them from the Renovate and Dependabot configuration files when it is automatic, the default
   - Walks a transitive package up to the direct one before looking for call sites and tests
   - Reads the release notes of the range and stops for the person on a breaking change without a clear migration
   - Checks how far the bot's branch is behind the base and asks the bot to rebase when needed
   - Adds missing integration tests, which exercise the project's code using the package, never the package itself, on the bot's branch instead of a separate pull request
   - Fixes project code that the update breaks on the same branch, and runs the build even when the tests pass
-  - Stops and proposes a Renovate or Dependabot group when a package arrives without the types, peer dependency, or monorepo packages that move with it
+  - Stops when a package arrives without the types, peer dependency, or packages from the same source repository that move with it, and groups them in the Renovate or Dependabot configuration of the repository, asking first or opening the pull request by itself, as the project instructions say
   - Evaluates a stale branch without conflict on a local merge with the base, and a subproject with its own commands
   - Reads every release in the range from the package repository, or compares the public types when there are no notes, and finds direct imports of transitive packages
   - Measures the degraded path when notes change retries or timeouts, checks project content a package parses, and compares linter diagnostics per rule on tracked files
@@ -68,6 +69,8 @@ How these skills relate is in `README.md`, in this folder.
 - **Test Criteria**:
   - [ ] Three open bot pull requests are handled oldest first, each merged only after the previous one turned the base branch green
   - [ ] An update to a transitive package finds the call sites of the direct package
+  - [ ] A package whose peer dependency waits in another update is grouped with it in the bot configuration before the merge
+  - [ ] A repository with only a Dependabot configuration gets the group only in the Dependabot configuration
 
 ### comunicar-novidade-do-produto
 - **Stability**: experimental
