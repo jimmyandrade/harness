@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.0](https://github.com/jimmyandrade/harness/compare/v1.7.0...v1.8.0) (2026-10-26)
+
+
+### Features
+
+* **limpar-copias-de-trabalho:** clean up local branches without a worktree ([#490](https://github.com/jimmyandrade/harness/issues/490)) ([386ea1b](https://github.com/jimmyandrade/harness/commit/386ea1b3f7787f8045e7212bf4d7bae1e4e0d87d))
+
 ## [1.7.0](https://github.com/jimmyandrade/harness/compare/v1.6.1...v1.7.0) (2026-10-26)
 
 
