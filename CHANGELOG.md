@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.9.0](https://github.com/jimmyandrade/harness/compare/v1.8.0...v1.9.0) (2026-10-26)
+
+
+### Features
+
+* **comunicar-novidade-do-produto:** read who publishes and offer only known channels ([#493](https://github.com/jimmyandrade/harness/issues/493)) ([8e3b3a0](https://github.com/jimmyandrade/harness/commit/8e3b3a0cb3d5211ff0692e45195607c5dcdaadf9))
+* **skills:** add the missing review and calendar rules as parameters ([#495](https://github.com/jimmyandrade/harness/issues/495)) ([e9c021f](https://github.com/jimmyandrade/harness/commit/e9c021f90cdc0daecf2e1b1660b21f5d93ff1d8c))
+
 ## [1.8.0](https://github.com/jimmyandrade/harness/compare/v1.7.0...v1.8.0) (2026-10-26)
 
 
