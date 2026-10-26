@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.0](https://github.com/jimmyandrade/harness/compare/v1.9.0...v1.10.0) (2026-10-26)
+
+
+### Features
+
+* **conversar-no-whatsapp:** send listed message types as a single message ([#496](https://github.com/jimmyandrade/harness/issues/496)) ([7f29798](https://github.com/jimmyandrade/harness/commit/7f2979836670d7f0dec4f7fb88b7cb49dd66d564))
+
 ## [1.9.0](https://github.com/jimmyandrade/harness/compare/v1.8.0...v1.9.0) (2026-10-26)
 
 
