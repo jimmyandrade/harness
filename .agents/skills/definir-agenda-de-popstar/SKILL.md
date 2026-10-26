@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.7.0"
+  version: "0.7.1"
   aliases:
     - agenda de popstar
   related:
@@ -20,13 +20,16 @@ metadata:
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Segmento` é o segmento da carreira, como moda ou música. Vazio quer dizer que o segmento é o que a pessoa nomeia. `Atividades do segmento` lista o que a agenda desse segmento inclui. `Critério de sentido` é a frase que pesa cada compromisso. `Compromissos de vida` lista o que um bloco de carreira não apaga.
-
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo.
 ```yaml
 "Revisão do bloqueio": mais de 6 meses
+# `Segmento` é o segmento da carreira, como moda ou música. Vazio quer dizer que o segmento é o que a pessoa nomeia.
 "Segmento": ""
+# `Atividades do segmento` lista o que a agenda desse segmento inclui.
 "Atividades do segmento": []
+# `Critério de sentido` é a frase que pesa cada compromisso.
 "Critério de sentido": "Não faça um sucesso, faça história"
+# `Compromissos de vida` lista o que um bloco de carreira não apaga.
 "Compromissos de vida":
   - "alimentação"
   - "exercícios"
@@ -39,7 +42,6 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
   - "amizades"
   - "descanso"
 ```
-
 ## Instruções
 
 ### Passo 1

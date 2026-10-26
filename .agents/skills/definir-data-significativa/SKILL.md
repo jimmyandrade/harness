@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.6.1"
   related:
     - procurar-data-significativa
 ---
@@ -14,17 +14,16 @@ metadata:
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Fontes de calendário` é uma lista. Cada fonte traz a URL e o código do país que aquele site usa, porque cada site tem o seu código. Código vazio numa URL com `{country}` quer dizer que você pergunta o código antes de seguir essa fonte.
-
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo.
 ```yaml
 "Formato da data com dia da semana": "terça-feira, 01/09/2026"
 "Título do evento anual": "nome do evento ano"
+# `Fontes de calendário` é uma lista. Cada fonte traz a URL e o código do país que aquele site usa, porque cada site tem o seu código. Código vazio numa URL com `{country}` quer dizer que você pergunta o código antes de seguir essa fonte.
 "Fontes de calendário":
   - "URL": "https://www.timeanddate.com/calendar/?year={year}&country={country}"
     "Código do país": ""
 "Uso das fontes de calendário": "as que o Notion costuma utilizar, na ordem da lista, sem se restringir a elas"
 ```
-
 ## Instruções
 
 ### Passo 1

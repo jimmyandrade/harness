@@ -3,7 +3,7 @@ name: escrever-codigo
 description: Aplica as preferências de código da pessoa antes de escrever ou alterar código, como comentários, estilo inline e o que fazer antes de criar um componente. Usada quando uma mudança vai escrever ou alterar código do projeto. Não serve para testes, para commit nem para decidir a arquitetura.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.4.1"
   related:
     - criar-commit
     - criar-pull-request
@@ -17,17 +17,16 @@ metadata:
 ## Parâmetros de configuração
 
 Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco, depois nas instruções de usuário. Quando um valor não estiver lá, use o padrão abaixo. Um valor vazio não impõe regra. Se as instruções do projeto ou de usuário têm uma seção com o nome desta habilidade, leia-a e aplique cada regra no passo que ela cita.
-
 ```yaml
+# `Comentários no código` diz quando comentar, como `evitar; só se for estritamente necessário, em bloco de documentação`.
 "Comentários no código": ""
 "Idioma dos comentários": "inglês"
+# `Estilo inline` diz quando o estilo escrito na própria marcação é aceito, e qual é o sistema de estilos do projeto.
 "Estilo inline": ""
+# `Antes de criar um componente` lista o que ler e quais habilidades do repositório chamar, em ordem.
 "Antes de criar um componente": ""
 "Modo de aprendizado": "perguntar"
 ```
-
-`Comentários no código` diz quando comentar, como `evitar; só se for estritamente necessário, em bloco de documentação`. `Estilo inline` diz quando o estilo escrito na própria marcação é aceito, e qual é o sistema de estilos do projeto. `Antes de criar um componente` lista o que ler e quais habilidades do repositório chamar, em ordem.
-
 ## Instruções
 
 ### Passo 1

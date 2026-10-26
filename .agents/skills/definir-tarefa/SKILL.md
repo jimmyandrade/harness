@@ -3,7 +3,7 @@ name: definir-tarefa
 description: Use essa habilidade sempre que for cadastrar, revisar, validar, auditar, editar ou mesclar tarefas, ou quando o gatilho for em um cronograma, página adicionada à base de dados ou propriedade atualizada, mesmo sem dizer definir. NÃO use para só saber se ela já existe, marcar tarefa como concluída, nem transformar uma regra sem entrega em tarefa.
 metadata:
   author: jimmyandrade
-  version: "0.16.0"
+  version: "0.16.1"
   aliases:
     - criar-tarefa
     - revisar-tarefa
@@ -16,15 +16,16 @@ metadata:
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Habilidade do ponto de contato` vazia quer dizer que o ponto de contato só não entra no corpo da tarefa. `Considerar pessoas consultadas` e `Considerar pessoas informadas` são `sim` ou `não`.
-
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo.
 ```yaml
 "Formato da data com dia da semana": "terça-feira, 01/09/2026"
+# `Habilidade do ponto de contato` vazia quer dizer que o ponto de contato só não entra no corpo da tarefa.
 "Habilidade do ponto de contato": ""
+# `Considerar pessoas consultadas` e `Considerar pessoas informadas` são `sim` ou `não`.
 "Considerar pessoas consultadas": "não"
+# `Considerar pessoas consultadas` e `Considerar pessoas informadas` são `sim` ou `não`.
 "Considerar pessoas informadas": "não"
 ```
-
 ## Instruções
 
 ### Passo 1

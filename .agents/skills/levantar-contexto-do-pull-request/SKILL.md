@@ -3,7 +3,7 @@ name: levantar-contexto-do-pull-request
 description: Levanta o contexto de um pull request antes de revisar, responder ou ajustar. Cobre o estado, as convenções do repositório, os comentários já feitos, o card e as conversas ligados, o propósito e o trabalho parecido. Usada em PR de outra pessoa e no seu. Não serve para revisar o diff nem publicar texto.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.5.1"
   related:
     - definir-registro-de-reuniao
     - evoluir-habilidade
@@ -15,20 +15,23 @@ metadata:
 ## Parâmetros de configuração
 
 Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco, depois nas instruções de usuário. Quando um valor não estiver lá, use o padrão abaixo.
-
 ```yaml
+# `Fontes do card` diz onde estão os cards, como o rastreador de tarefas do projeto.
 "Fontes do card": ""
+# `Fontes de conversa` diz onde ler as conversas citadas.
 "Fontes de conversa": ""
+# `Fontes de registro de reunião` diz onde estão os registros de reunião.
 "Fontes de registro de reunião": ""
+# `Repositórios vizinhos` lista, separados por vírgula, os repositórios onde procurar trabalho parecido.
 "Repositórios vizinhos": ""
+# `Contexto privado por repositório` diz onde ficam as notas pessoais de cada repositório, com a parte técnica, a sensível e o status combinado de PRs específicos.
 "Contexto privado por repositório": ""
+# `Buscar o refinamento técnico` é `sim` ou `não`: com `sim`, o Passo 4 procura a ata ou o registro do refinamento técnico do trabalho e a ficha o trata como base da revisão.
 "Buscar o refinamento técnico": "não"
+# `Criar o registro de refinamento que falta` é `sim`, `perguntar` ou `não`, e só vale quando a busca não achou nada. Um valor vazio usa só o que o PR cita.
 "Criar o registro de refinamento que falta": "não"
 "Modo de aprendizado": "perguntar"
 ```
-
-`Fontes do card` diz onde estão os cards, como o rastreador de tarefas do projeto. `Fontes de conversa` diz onde ler as conversas citadas. `Fontes de registro de reunião` diz onde estão os registros de reunião. `Contexto privado por repositório` diz onde ficam as notas pessoais de cada repositório, com a parte técnica, a sensível e o status combinado de PRs específicos. `Repositórios vizinhos` lista, separados por vírgula, os repositórios onde procurar trabalho parecido. `Buscar o refinamento técnico` é `sim` ou `não`: com `sim`, o Passo 4 procura a ata ou o registro do refinamento técnico do trabalho e a ficha o trata como base da revisão. `Criar o registro de refinamento que falta` é `sim`, `perguntar` ou `não`, e só vale quando a busca não achou nada. Um valor vazio usa só o que o PR cita.
-
 ## Instruções
 
 ### Passo 1

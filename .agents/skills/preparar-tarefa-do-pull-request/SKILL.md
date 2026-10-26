@@ -3,7 +3,7 @@ name: preparar-tarefa-do-pull-request
 description: Garante que uma demanda tenha uma tarefa no rastreador do projeto antes de virar pull request, ou depois, quando o PR já existe. Procura a tarefa existente, sugere a criação e pede o contexto, monta a tarefa e liga a chave ao PR. Não cria sozinha e não cria tarefa vazia. Não serve para escrever bem uma tarefa nem para abrir o PR.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.3.1"
   related:
     - definir-tarefa
     - evoluir-habilidade
@@ -18,28 +18,37 @@ metadata:
 ## Parâmetros de configuração
 
 Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco, depois nas instruções de usuário. Quando um valor não estiver lá, use o padrão abaixo. Um valor vazio não impõe regra. Se as instruções do projeto ou de usuário têm uma seção com o nome desta habilidade, leia-a e aplique cada regra no passo que ela cita.
-
 ```yaml
+# `Onde ficam as tarefas` diz qual rastreador o projeto usa, como o Jira ou o Notion. Vazio, o projeto não usa um e a habilidade não faz nada.
 "Onde ficam as tarefas": ""
+# `Projeto da tarefa por repositório` liga cada repositório ao projeto ou à lista das tarefas dele.
 "Projeto da tarefa por repositório": ""
+# `Tipos de tarefa e regra de escolha` descreve como escolher o tipo.
 "Tipos de tarefa e regra de escolha": ""
 "Projeto de reserva sem permissão": ""
+# `Chave da tarefa no nome da branch` e `Chave da tarefa no título do PR` são `obrigatória`, `recomendada` ou `proibida`, e a convenção do repositório vale mais que o parâmetro.
 "Chave da tarefa no nome da branch": "recomendada"
+# `Chave da tarefa no nome da branch` e `Chave da tarefa no título do PR` são `obrigatória`, `recomendada` ou `proibida`, e a convenção do repositório vale mais que o parâmetro.
 "Chave da tarefa no título do PR": "recomendada"
 "Formato dos critérios de aceitação": ""
+# `Critério de validação da mudança` é o último critério de uma tarefa que muda código de um app com ambiente de teste por PR.
 "Critério de validação da mudança": ""
+# `Mapa de permissões` diz onde ler e gravar o que a pessoa pode fazer em cada projeto (criar, editar, comentar, atribuir, transicionar), com `sim`, `não` ou `desconhecido`.
 "Mapa de permissões": ""
+# `Modelos de descrição` diz onde ficam os modelos por tipo de tarefa e, se houver, os reforços por projeto.
 "Modelos de descrição": ""
+# `Formato da descrição` diz como o rastreador grava link e caixa de seleção.
 "Formato da descrição": ""
+# `Regras de bloqueio` diz como registrar que uma tarefa bloqueia outra.
 "Regras de bloqueio": ""
+# `Evidência de visibilidade da tarefa de reserva` diz o que a tarefa criada no projeto de reserva precisa ter para o time do projeto verdadeiro enxergá-la, como uma mensagem num canal.
 "Evidência de visibilidade da tarefa de reserva": ""
+# `Registro dos vínculos` diz onde guardar os endereços do PR, da tarefa e da evidência.
 "Registro dos vínculos": ""
+# `Lentes de revisão` lista critérios que você aplica ao redigir, sem citá-los no texto.
 "Lentes de revisão": ""
 "Modo de aprendizado": "perguntar"
 ```
-
-`Onde ficam as tarefas` diz qual rastreador o projeto usa, como o Jira ou o Notion. Vazio, o projeto não usa um e a habilidade não faz nada. `Projeto da tarefa por repositório` liga cada repositório ao projeto ou à lista das tarefas dele. `Tipos de tarefa e regra de escolha` descreve como escolher o tipo. `Chave da tarefa no nome da branch` e `Chave da tarefa no título do PR` são `obrigatória`, `recomendada` ou `proibida`, e a convenção do repositório vale mais que o parâmetro. `Critério de validação da mudança` é o último critério de uma tarefa que muda código de um app com ambiente de teste por PR. `Mapa de permissões` diz onde ler e gravar o que a pessoa pode fazer em cada projeto (criar, editar, comentar, atribuir, transicionar), com `sim`, `não` ou `desconhecido`. `Modelos de descrição` diz onde ficam os modelos por tipo de tarefa e, se houver, os reforços por projeto. `Formato da descrição` diz como o rastreador grava link e caixa de seleção. `Regras de bloqueio` diz como registrar que uma tarefa bloqueia outra. `Evidência de visibilidade da tarefa de reserva` diz o que a tarefa criada no projeto de reserva precisa ter para o time do projeto verdadeiro enxergá-la, como uma mensagem num canal. `Registro dos vínculos` diz onde guardar os endereços do PR, da tarefa e da evidência. `Lentes de revisão` lista critérios que você aplica ao redigir, sem citá-los no texto.
-
 ## Instruções
 
 ### Passo 1

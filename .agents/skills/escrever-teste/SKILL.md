@@ -3,7 +3,7 @@ name: escrever-teste
 description: Escreve ou altera testes de unidade antes do código, em TDD, seguindo a convenção de testes do projeto, com o Better Specs como padrão. Usada quando uma mudança precisa de teste novo, quando um teste existente muda ou quando uma revisão pede um teste. Não serve para decidir o que testar, rodar a suíte inteira nem refatorar testes antigos.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.5.1"
   related:
     - criar-commit
     - escrever-codigo
@@ -16,19 +16,19 @@ metadata:
 ## Parâmetros de configuração
 
 Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco, depois nas instruções de usuário. Quando um valor não estiver lá, use o padrão abaixo. Um valor vazio não impõe regra. Se as instruções do projeto ou de usuário têm uma seção com o nome desta habilidade, leia-a e aplique cada regra no passo que ela cita.
-
 ```yaml
+# `Abordagem de testes` é `TDD` ou `teste depois do código`.
 "Abordagem de testes": "TDD"
+# `Convenção de testes` é o nome do guia que os títulos e a estrutura seguem, e `Endereço da convenção de testes` é onde lê-lo.
 "Convenção de testes": "Better Specs"
 "Endereço da convenção de testes": "https://www.betterspecs.org/"
 "Idioma dos títulos dos testes": "inglês"
+# `Alcance da mudança` é `só as linhas tocadas` ou `arquivo inteiro`.
 "Alcance da mudança": "só as linhas tocadas"
+# `Comando de testes` roda os testes do arquivo afetado.
 "Comando de testes": ""
 "Modo de aprendizado": "perguntar"
 ```
-
-`Abordagem de testes` é `TDD` ou `teste depois do código`. `Convenção de testes` é o nome do guia que os títulos e a estrutura seguem, e `Endereço da convenção de testes` é onde lê-lo. `Alcance da mudança` é `só as linhas tocadas` ou `arquivo inteiro`. `Comando de testes` roda os testes do arquivo afetado.
-
 ## Instruções
 
 ### Passo 1

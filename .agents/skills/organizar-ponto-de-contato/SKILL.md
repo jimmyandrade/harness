@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-update-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.12.0"
+  version: "0.12.1"
   aliases:
     - organizar-feira
   related:
@@ -22,13 +22,12 @@ metadata:
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Agendas` lista cada agenda pelo `"Nome"` e, quando houver, pelo `"ID"`, com o `"Uso"`: `padrão` recebe o evento novo; `em uso` é lida e gravada quando o pedido a nomeia; `só leitura` é lida e nunca gravada; `aposentada` é um produto que não se usa mais, lido só para achar o evento que ficou lá; `ignorada` não é lida nem gravada, mesmo que exista ou que o histórico a cite. `"Finalidade"`, quando houver, diz o tipo de evento que vai para aquela agenda. Case a agenda pelo ID; sem ID, pelo nome do calendário, que contém o nome da lista. Sem agenda `padrão` na lista, a agenda padrão é a principal da conta. A agenda do ponto de contato é a de `Agendas` com a finalidade pontos de contato. Sem ela, é a agenda padrão.
-
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo.
 ```yaml
 "Formato da data com dia da semana": "terça-feira, 01/09/2026"
+# `Agendas` lista cada agenda pelo `"Nome"` e, quando houver, pelo `"ID"`, com o `"Uso"`: `padrão` recebe o evento novo; `em uso` é lida e gravada quando o pedido a nomeia; `só leitura` é lida e nunca gravada; `aposentada` é um produto que não se usa mais, lido só para achar o evento que ficou lá; `ignorada` não é lida nem gravada, mesmo que exista ou que o histórico a cite. `"Finalidade"`, quando houver, diz o tipo de evento que vai para aquela agenda. Case a agenda pelo ID; sem ID, pelo nome do calendário, que contém o nome da lista. Sem agenda `padrão` na lista, a agenda padrão é a principal da conta. A agenda do ponto de contato é a de `Agendas` com a finalidade pontos de contato. Sem ela, é a agenda padrão.
 "Agendas": []
 ```
-
 ## Instruções
 
 ### Passo 1

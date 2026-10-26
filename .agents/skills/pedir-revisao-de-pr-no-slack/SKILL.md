@@ -3,7 +3,7 @@ name: pedir-revisao-de-pr-no-slack
 description: Redige o pedido de revisão de um pull request para o canal do time no Slack e entrega o rascunho com o link da thread, usando enviar-mensagem-no-slack. Usada quando o PR está pronto e a organização pede revisão pelo Slack, ou quando a pessoa pede apoio para revisar. Não serve para revisar o PR nem para outra mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.3.1"
   related:
     - criar-pull-request
     - enviar-mensagem-no-slack
@@ -16,20 +16,22 @@ metadata:
 ## Parâmetros de configuração
 
 Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco, depois nas instruções de usuário. Quando um valor não estiver lá, use o padrão abaixo. Um parâmetro vazio não impõe regra.
-
 ```yaml
+# `Canal dos pedidos de revisão` é o canal em que o time pede revisão, de preferência um canal que outros times leem.
 "Canal dos pedidos de revisão": ""
+# `Rótulo de pronto para revisão` é o rótulo que o projeto usa para dizer que o PR pode ser revisado, ou vazio quando o projeto usa o estado de rascunho.
 "Rótulo de pronto para revisão": ""
+# `Linha do PR` e `Linha do card` descrevem como cada link aparece no pedido, como o emoji que abre a linha.
 "Linha do PR": ""
+# `Linha do PR` e `Linha do card` descrevem como cada link aparece no pedido, como o emoji que abre a linha.
 "Linha do card": ""
+# `Quem acompanha` lista as pessoas que entram em `cc.` no pedido.
 "Quem acompanha": []
+# `Exigir card` é `sim` quando o pedido só sai com o link do card do rastreador.
 "Exigir card": "sim"
 "Autorrevisar o diff antes de pedir": "não"
 "Modo de aprendizado": "perguntar"
 ```
-
-`Canal dos pedidos de revisão` é o canal em que o time pede revisão, de preferência um canal que outros times leem. `Rótulo de pronto para revisão` é o rótulo que o projeto usa para dizer que o PR pode ser revisado, ou vazio quando o projeto usa o estado de rascunho. `Linha do PR` e `Linha do card` descrevem como cada link aparece no pedido, como o emoji que abre a linha. `Quem acompanha` lista as pessoas que entram em `cc.` no pedido. `Exigir card` é `sim` quando o pedido só sai com o link do card do rastreador.
-
 ## Instruções
 
 ### Passo 1

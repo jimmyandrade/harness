@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.8.0"
+  version: "0.8.1"
   related:
     - comunicar-novidade-do-produto
     - definir-agenda
@@ -18,15 +18,14 @@ metadata:
 
 ## Parâmetros de configuração
 
-Leia os valores nas instruções do projeto, na entrada desta habilidade. Na ausência, use os padrões abaixo. `Mensagem única para` lista os tipos de mensagem que vão numa mensagem só, como um status de demanda para alguém do time.
-
+Leia os valores nas instruções do projeto, na entrada desta habilidade. Na ausência, use os padrões abaixo.
 ```yaml
 "Formato da data com dia da semana": "terça-feira, 01/09/2026"
 "Modo de aprendizado": "perguntar"
 "Etiqueta das conversas": ""
+# `Mensagem única para` lista os tipos de mensagem que vão numa mensagem só, como um status de demanda para alguém do time.
 "Mensagem única para": []
 ```
-
 ## Instruções
 
 ### Passo 1

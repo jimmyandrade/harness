@@ -3,7 +3,7 @@ name: comunicar-novidade-do-produto
 description: Use essa habilidade sempre que um PR for mesclado ou alguém perguntar o que há de novo no produto para quem o usa, mesmo sem dizer novidade, para decidir se há o que contar e escrever o comunicado sem termos técnicos. NÃO use para a descrição do PR, o changelog nem release notes técnicas.
 metadata:
   author: jimmyandrade
-  version: "0.9.0"
+  version: "0.9.1"
   related:
     - evoluir-habilidade
     - redigir-com-tom-de-voz
@@ -13,9 +13,9 @@ metadata:
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Repositório` vem do remoto `origin` quando as instruções não dizem. De preferência, `Habilidade de tom de voz` vem preenchida nas instruções do projeto. Vazia, ela só não foi informada: não quer dizer que o projeto não tem uma.
-
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo.
 ```yaml
+# `Repositório` vem do remoto `origin` quando as instruções não dizem.
 "Repositório": ""
 "Branch base": "main"
 "Fontes do comunicado":
@@ -25,10 +25,10 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Quem publica o comunicado": ""
 "Canal do comunicado": ""
 "Idioma do comunicado": "português"
+# De preferência, `Habilidade de tom de voz` vem preenchida nas instruções do projeto. Vazia, ela só não foi informada: não quer dizer que o projeto não tem uma.
 "Habilidade de tom de voz": ""
 "Modo de aprendizado": "perguntar"
 ```
-
 ## Instruções
 
 ### Passo 1
