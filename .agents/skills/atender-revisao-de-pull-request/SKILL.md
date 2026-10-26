@@ -3,7 +3,7 @@ name: atender-revisao-de-pull-request
 description: Atende a revisão recebida num pull request, de pessoa ou de bot. Lê os comentários abertos, classifica cada sugestão, aplica o que é seguro, responde de preferência num comentário inline e resolve as threads atendidas. Sem PR informado, lista os seus que precisam de atenção. Não serve para revisar o PR de outra pessoa nem para abrir o PR.
 metadata:
   author: jimmyandrade
-  version: "0.19.0"
+  version: "0.20.0"
   aliases:
     - resolver-comentarios-de-revisao
     - apply-pr-review
@@ -38,7 +38,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Régua de mudança de comportamento": ""
 # `Lentes de revisão` lista critérios que você aplica ao decidir, sem citá-los na resposta.
 "Lentes de revisão": ""
-# `Ler o texto antes de publicar` em `sim` mostra a resposta a outra pessoa e espera o sim.
+# `Ler o texto antes de publicar`: `sim` mostra a resposta a outra pessoa e espera o sim. `não` publica na hora, inclusive um ajuste pedido depois.
 "Ler o texto antes de publicar": "sim"
 "Pedir nova revisão ao final": "sim"
 # `Fechar conversa com a confiança` em `sim` faz a mensagem que fecha uma conversa dizer o quanto você tem de confiança de que o ponto foi resolvido.
@@ -109,7 +109,7 @@ Ela cita o commit pelo SHA curto linkado, como `[`abc1234`](URL do commit)`, ou 
 
 Com `Linkar as fontes da explicação` em `sim`, a resposta que explica ou defende uma escolha, como uma exceção, uma recusa ou um motivo, linka a fonte de cada afirmação. A fonte do código é o link do trecho no commit atual do PR, com o SHA e as linhas, e a de uma regra é o documento, a decisão de arquitetura ou a conversa onde ela está. Uma afirmação sem fonte que você leu vira inferência, e a resposta diz isso. Não explique de memória.
 
-Com `Ler o texto antes de publicar` em `sim`, mostre a resposta a outra pessoa e espere o sim.
+Com `Ler o texto antes de publicar` em `sim`, mostre a resposta a outra pessoa e espere o sim. Com `não`, publique na hora, inclusive o ajuste que a pessoa pediu num comentário já publicado, e devolva o link. Ela lê depois e pede outro ajuste se quiser.
 Comentário de self review, da mesma pessoa que pediu o atendimento, recebe a resposta na hora.
 A resposta diz o que mudou, mostra as linhas alteradas e cita o commit.
 A mensagem do bot é lida, respondida e considerada.
@@ -161,7 +161,7 @@ Se você mostrar a resposta do self review e esperar um sim, o comentário da pr
 
 1. Publique a resposta na hora.
 2. Diga o que mudou, mostre as linhas alteradas e cite o commit.
-3. A espera de `Ler o texto antes de publicar` vale para a resposta a outra pessoa.
+3. Com `Ler o texto antes de publicar` em `não`, a resposta a outra pessoa também sai na hora. Com `sim`, a espera vale só para essa resposta.
 
 ### Thread resolvida sem resposta
 
@@ -298,7 +298,7 @@ Achei cinco comentários abertos. Dois eram estruturais, um nome e um texto, e a
 - Resposta com apóstrofo quebra `-f body='...'` no shell. Grave a resposta num arquivo e envie com `-F body=@<arquivo>`.
 - Uma sugestão de bot e uma de pessoa se classificam pela mesma régua.
 - Aprovar o PR de outra pessoa não é papel desta habilidade.
-- `Ler o texto antes de publicar` parece segurar também o self review. O comentário da própria pessoa recebe a resposta na hora, com as linhas alteradas e o commit, no idioma de `Idioma da resposta à revisão`.
+- `Ler o texto antes de publicar` parece segurar também o self review, e `não` parece ainda pedir o sim. O comentário da própria pessoa sai na hora. Com `não`, a resposta a outra pessoa e o ajuste pedido depois também saem na hora. O idioma é o de `Idioma da resposta à revisão`.
 - A página aberta parece mostrar que a resposta continua no idioma antigo. O texto que vale é o gravado na thread. Diga a primeira frase dele.
 - A branch atrás da base parece pedir autorização antes do rebase. O atendimento já autoriza atualizar e substituir a branch publicada. A aprovação que ainda se pede é a de mudança de comportamento.
 
