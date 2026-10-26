@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-update-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.12.1"
+  version: "0.13.0"
   aliases:
     - organizar-feira
   related:
@@ -14,6 +14,7 @@ metadata:
     - definir-grupo-de-oportunidades
     - definir-tarefa
     - definir-viagem
+    - fazer-fechamento
     - procurar-oportunidade
     - sincronizar-cronograma
 ---
@@ -281,6 +282,7 @@ Removi o evento da sexta. A agenda manteve o domingo.
 - A pergunta é o que falta: relate o que as páginas já registram. Não crie tarefa. Não peça para nomear a habilidade.
 - O dia da semana da fonte não bate com a data: sinalize. Não grave esse dia no campo do ponto de contato nem da oportunidade.
 - O pedido é organizar a viagem: siga `definir-viagem`.
+- O ponto terminou e o pedido é o fechamento, o acerto com o parceiro ou o fechamento de caixa: siga `fazer-fechamento`.
 - O pedido é reunião ou resenha com uma organização: pare e siga `definir-agenda`. Não crie o ponto de contato.
 - A oportunidade aprovada sem os dias de participação da empresa: pergunte. Não grave o ponto na agenda. Não invente os dias.
 - A oportunidade de vários dias e participação em parte deles: a agenda fica só com os dias confirmados ou desejados. Dia já errado: remova ou cancele quando a pessoa corrigir.
