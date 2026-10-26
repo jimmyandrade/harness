@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.11.0](https://github.com/jimmyandrade/harness/compare/v1.10.0...v1.11.0) (2026-10-26)
+
+
+### Features
+
+* **criar-commit,criar-pull-request:** cite the issue and refresh the description ([#504](https://github.com/jimmyandrade/harness/issues/504)) ([061996c](https://github.com/jimmyandrade/harness/commit/061996c2cfc281f6810182307ba02f7fbf17868e))
+* **fazer-fechamento:** close a touchpoint or an interval in Notion or in a spreadsheet ([#506](https://github.com/jimmyandrade/harness/issues/506)) ([ecd5ca7](https://github.com/jimmyandrade/harness/commit/ecd5ca71e97db704b5710be96d1a40c3df3af4b1))
+* **revisar-financas:** read any interval or one touchpoint, with aliases such as the week and the month ([#503](https://github.com/jimmyandrade/harness/issues/503)) ([a34364c](https://github.com/jimmyandrade/harness/commit/a34364ca218526c066afa6c949ca6a302e295467))
+
 ## [1.10.0](https://github.com/jimmyandrade/harness/compare/v1.9.0...v1.10.0) (2026-10-26)
 
 
