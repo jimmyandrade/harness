@@ -1,0 +1,33 @@
+name: pr-label
+
+on:
+  pull_request:
+    types: [opened, reopened, edited, synchronize, labeled, unlabeled]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  label:
+    runs-on: ubuntu-26.04
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v7
+      - name: Label the pull request from its title when it has no label
+        env:
+          GH_TOKEN: ${{ github.token }}
+          LABELS: ${{ join(github.event.pull_request.labels.*.name, ',') }}
+          NUMBER: ${{ github.event.pull_request.number }}
+          TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          if [ -n "$LABELS" ]; then
+            echo "The pull request already has a label: $LABELS."
+            exit 0
+          fi
+          if ! label=$(.github/scripts/pr-label.sh "$TITLE"); then
+            echo "::error title=Pull request label::The pull request has no label, and its title does not choose one. Add the label that describes the change."
+            exit 1
+          fi
+          gh pr edit "$NUMBER" --repo "$GITHUB_REPOSITORY" --add-label "$label"
+          echo "Added the label $label."
