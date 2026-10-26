@@ -1343,7 +1343,8 @@ How these skills relate is in `README.md`, in this folder.
   - Reads `Moeda` and `Habilidade de projeção de caixa` from the project instructions, and leaves the cash projection to the skill it names, when there is one
   - Reads what is already recorded and does not create an entry
   - Presents financial figures in `Moeda`, tables first, then a short summary, alerts, and practical guidance
-  - Uses the income-statement and cash-flow templates, with months across the columns
+  - Uses the income-statement and cash-flow templates, with months across the columns, or weeks when the result is weekly
+  - Reads `Períodos do resultado` and `Início da semana`, and asks whether the result is weekly or monthly when the request does not say and the list has more than one period
   - Writes an audit in three parts only when the data is enough, and asks for the desired margin before suggesting a price
 - **Test Criteria**:
   - [x] The skill is present at that path
