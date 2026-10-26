@@ -3,7 +3,7 @@ name: publicar-revisao-de-codigo
 description: Revisa um pull request e publica a revisão numa única review, com os comentários inline, no idioma de quem recebe e no tom do projeto. Usada quando a pessoa pede uma revisão ou outra habilidade precisa publicar uma. Não serve para tratar os comentários que você recebeu no seu PR.
 metadata:
   author: jimmyandrade
-  version: "0.8.0"
+  version: "0.9.0"
   aliases:
     - post-code-review
   related:
@@ -39,6 +39,9 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Limite de Poderia ter publicado": ""
 "Prioridade por tema": "acessibilidade: Deve ter, com sugestão de código"
 "Prova visual em PR de interface": "sim"
+"Validar rodando o comportamento": "não"
+"Cobertura integrada em comportamento crítico": "não"
+"Tamanho de PR que pede divisão": ""
 "Rótulo de prioridade no texto": "não"
 "Abertura da revisão": ""
 "Lentes de revisão": ""
@@ -92,6 +95,9 @@ Chame `priorizar-itens` com os achados e junte o resultado com a ficha:
 - Aplique as `Lentes de revisão`. Com `Nível de detalhe` em `enxuta`, publique só Deve ter e Deveria ter, mais o Poderia ter que o `Limite de Poderia ter publicado` permitir. Quando o `Critério de revisão completa` se cumpre, publique tudo.
 - Aplique a `Prioridade por tema`: o achado de um tema listado ganha a categoria dada. Um achado de acessibilidade, com o valor padrão, é Deve ter e leva sugestão de código.
 - Teste novo ou alterado confere a convenção de testes que o repositório define, só nas linhas tocadas.
+- Com `Validar rodando o comportamento` em `sim`, num PR que muda fluxo de interface ou comportamento observável, indique ou faça o teste local do branch quando for viável, e não conclua só pela leitura do código.
+- Com `Cobertura integrada em comportamento crítico` em `sim`, num PR que muda comportamento crítico, confira se há cobertura integrada ou de ponta a ponta dos cenários afetados e sinalize quando faltar, mesmo com os testes unitários passando.
+- Com `Tamanho de PR que pede divisão` preenchido, um PR acima desse tamanho é sinalizado ao autor, com a sugestão de dividir em partes menores quando fizer sentido, antes da revisão ponto a ponto.
 
 ### Passo 7
 
