@@ -60,6 +60,13 @@ Funcionalidade: Key results mensuráveis
       Quando a habilidade calcula o progresso
       Então o key result aparece como atingido
 
+    Exemplo: A base ainda não está no histórico de medições
+      Dado que um key result de redução parte do custo de setembro
+      E que o histórico de medições não tem o custo de setembro
+      Quando a habilidade vai ligar a base ao key result
+      Então ela registra antes a medição de setembro por definir-medicao-de-metrica
+      E liga esse registro como base, sem digitar o número no key result
+
     Exemplo: A lista só divide o valor atual pelo valor-alvo
       Dado que a lista calcula o progresso como valor atual ÷ valor-alvo
       Quando a habilidade vai gravar um key result de redução
