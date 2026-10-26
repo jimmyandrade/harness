@@ -1,4 +1,23 @@
 {
   "skill_name": "revisar-financas",
-  "evals": []
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "faz o resultado financeiro pra mim",
+      "expected_output": "O pedido não diz o intervalo nem o ponto de contato. A resposta pergunta qual intervalo, oferecendo os apelidos de Apelidos de intervalo, como a semana e o mês, e não lê a fonte nem monta tabela antes da resposta.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "qual foi o resultado de 05/10/2026 a 18/10/2026?",
+      "expected_output": "A saída começa pelo intervalo, de segunda-feira, 05/10/2026, a domingo, 18/10/2026. A DRE e o fluxo de caixa trazem só esse intervalo. Não pergunta o intervalo, porque o pedido já disse. Célula sem fonte fica vazia.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "qual foi o resultado do evento de sábado?",
+      "expected_output": "Com Nome do ponto de contato igual a evento, a saída traz só os lançamentos ligados a esse evento, no intervalo do próprio evento, sem perguntar o intervalo. Se os lançamentos não estiverem ligados ao evento na fonte, a resposta diz que não consegue recortar e não estima.",
+      "files": []
+    }
+  ]
 }

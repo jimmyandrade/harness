@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.2"
+  version: "0.4.0"
   related:
     - definir-lancamento
     - definir-planejamento-financeiro
@@ -19,11 +19,16 @@ metadata:
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Moeda` é a moeda das tabelas. `Habilidade de projeção de caixa` vazia quer dizer que a projeção do caixa fica fora desta habilidade.
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Moeda` é a moeda das tabelas. `Habilidade de projeção de caixa` vazia quer dizer que a projeção do caixa fica fora desta habilidade. `Apelidos de intervalo` dá nome a intervalos que se repetem, e o negócio pode acrescentar os próprios, como quinzena ou temporada. `Início da semana` é o dia em que a semana começa. `Nome do ponto de contato` é como o negócio chama o ponto de contato que se pode recortar, como evento, show ou pop-up.
 
 ```yaml
 "Moeda": "BRL"
 "Habilidade de projeção de caixa": ""
+"Apelidos de intervalo":
+  "semana": "do Início da semana ao dia anterior da semana seguinte"
+  "mês": "do dia 1 ao último dia do mês"
+"Início da semana": "segunda-feira"
+"Nome do ponto de contato": "ponto de contato"
 ```
 
 ## Instruções
@@ -43,6 +48,19 @@ flowchart LR
 ```
 
 ### Passo 2
+
+O intervalo e o recorte são escolha de cada pedido, não do negócio. O intervalo é qualquer par de datas, ou um apelido de `Apelidos de intervalo`, que vira datas. O recorte é o negócio inteiro ou um `Nome do ponto de contato`.
+
+```mermaid
+flowchart LR
+  P{O pedido diz?} -->|datas ou apelido| U[Use esse intervalo]
+  P -->|ponto de contato| C[Use o intervalo do ponto]
+  P -->|nada| Q[Pergunte o intervalo e ofereça os apelidos]
+```
+
+Pergunte antes de ler a fonte. A saída começa pelo intervalo em datas, com o dia da semana de cada uma. O mês dividido por semana traz uma coluna por semana, a partir do `Início da semana`, e o total do mês.
+
+O recorte por ponto de contato lê só os lançamentos que a fonte liga a ele. Sem essa ligação, diga que não consegue recortar. Não estime o resultado do ponto.
 
 A leitura usa o que a fonte já tem. Não refaça os controles do zero e não invente venda, gasto, saldo ou margem. Dado que falta para a conta: pare e peça. A resposta começa por tabelas de entradas, saídas, saldos, resultados ou estoque, na `Moeda`. Depois vêm resumo curto, alertas e orientações práticas.
 
@@ -92,6 +110,18 @@ Li o que já estava lançado. A tabela trouxe entradas, saídas e saldo, na `Moe
 
 A DRE saiu no modelo, com meses e total anual. O fluxo saiu no modelo, com saldo inicial, recebimentos, pagamentos, resultado do mês e saldo final acumulado. Célula sem fonte ficou vazia.
 
+### faz o resultado financeiro pra mim
+
+O pedido não disse o intervalo nem o ponto de contato. Perguntei qual intervalo, oferecendo a semana e o mês, antes de ler a fonte.
+
+### qual foi o resultado da semana passada?
+
+A semana virou as datas de segunda-feira, 19/10/2026, a domingo, 25/10/2026, e a saída começou por elas. Não perguntei o intervalo, porque o pedido já disse.
+
+### qual foi o resultado do evento de sábado?
+
+O ponto de contato do projeto se chama evento. Li só os lançamentos ligados a esse evento, no intervalo dele, sem perguntar o intervalo.
+
 ### sugira o preço desta peça
 
 Não havia margem desejada. Perguntei. Não inventei o custo.
@@ -102,12 +132,18 @@ Não havia margem desejada. Perguntei. Não inventei o custo.
 - Registrar venda ou gasto: `definir-lancamento`. A lista de estoque: `gerenciar-estoque`. Mês à frente: `definir-planejamento-financeiro`. Projeção do caixa: a `Habilidade de projeção de caixa`, quando as instruções do projeto a indicarem.
 - Sem dado para a margem: não calcule. Sem margem desejada: pergunte antes de sugerir o preço.
 - Auditoria sem dado suficiente: diga o que falta. Não estime as três partes.
+- Pedido sem intervalo e sem ponto de contato: pergunte o intervalo e ofereça os apelidos.
+- Apelido que não está em `Apelidos de intervalo`: pergunte as datas. Não invente o intervalo.
+- Semana que atravessa a virada do mês, no mês dividido por semana: ela entra inteira no mês em que começa, e a coluna diz as duas datas.
+- Ponto de contato sem lançamentos ligados na fonte: diga que não consegue recortar. Não estime.
 
 ## Pegadinhas
 
 - DRE simplificada parece outra conta. O modelo é a estrutura com meses e total anual. A explicação é que fica simples.
 - A projeção do caixa parece este fluxo. Ela segue a `Habilidade de projeção de caixa`, quando as instruções do projeto a indicarem.
 - Preço parece sair do custo sozinho. Sem a margem desejada, pergunte. Não invente.
+- O mês parece o intervalo de sempre. Sem intervalo e sem ponto de contato no pedido, pergunte.
+- A data do ponto de contato parece pedir pergunta. O intervalo é o do próprio ponto, a não ser que a pessoa peça outro.
 
 ## Scripts disponíveis
 
