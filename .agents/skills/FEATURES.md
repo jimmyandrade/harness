@@ -1343,8 +1343,9 @@ How these skills relate is in `README.md`, in this folder.
   - Reads `Moeda` and `Habilidade de projeção de caixa` from the project instructions, and leaves the cash projection to the skill it names, when there is one
   - Reads what is already recorded and does not create an entry
   - Presents financial figures in `Moeda`, tables first, then a short summary, alerts, and practical guidance
-  - Uses the income-statement and cash-flow templates, with months across the columns, or weeks when the result is weekly
-  - Reads `Períodos do resultado` and `Início da semana`, and asks whether the result is weekly or monthly when the request does not say and the list has more than one period
+  - Uses the income-statement and cash-flow templates, with months across the columns, or one column for any other interval or touchpoint
+  - Reads any interval or an alias from `Apelidos de intervalo`, such as the week or the month, and asks for the interval when the request names neither an interval nor a touchpoint
+  - Narrows the result to one touchpoint, named by `Nome do ponto de contato`, from the entries the source links to it
   - Writes an audit in three parts only when the data is enough, and asks for the desired margin before suggesting a price
 - **Test Criteria**:
   - [x] The skill is present at that path
