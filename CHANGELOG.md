@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.15.0](https://github.com/jimmyandrade/harness/compare/v1.14.0...v1.15.0) (2026-10-26)
+
+
+### Features
+
+* **definir-medicao-de-metrica:** record metric values in the measurement history without duplicating the metric ([#528](https://github.com/jimmyandrade/harness/issues/528)) ([8e9ebf5](https://github.com/jimmyandrade/harness/commit/8e9ebf50173019cb0d78e8dbb8c5423475335470)), closes [#527](https://github.com/jimmyandrade/harness/issues/527)
+
+
+### Bug Fixes
+
+* **definir-okr:** treat a reduction key result with a base, a direction and a measurement history ([#525](https://github.com/jimmyandrade/harness/issues/525)) ([99b4f73](https://github.com/jimmyandrade/harness/commit/99b4f731bd2665a9893c05cd1ba72a5e846c433a))
+
 ## [1.14.0](https://github.com/jimmyandrade/harness/compare/v1.13.2...v1.14.0) (2026-10-26)
 
 
