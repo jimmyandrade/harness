@@ -3,7 +3,7 @@ name: criar-commit
 description: Use essa habilidade sempre que terminar um trabalho que mudou o repositório ou for commitar, separar commits ou escrever a mensagem, mesmo sem dizer commit. NÃO use para push, abrir PR, rebase nem merge (use criar-pull-request).
 metadata:
   author: jimmyandrade
-  version: "0.18.0"
+  version: "0.19.0"
 ---
 
 # Criar commit
@@ -82,6 +82,9 @@ O tipo segue o que a mudança faz, não a extensão do arquivo.
 Correção de erro é `fix:`, mesmo em Markdown.
 `docs:` fica para a documentação.
 O assunto diz por que a mudança existe.
+Quando o trabalho tem uma issue, a mensagem cita `#<número>`.
+Sem issue, não invente número.
+A forma que o repositório já documenta, como `Closes #<número>`, vale.
 Corpo só quando precisa de contexto.
 Renomear ou quebrar compatibilidade leva `!` no tipo e rodapé `BREAKING CHANGE:`.
 Com `Atribuição da sessão` em `sim`, termine com o trailer de coautoria da sessão.
@@ -168,6 +171,7 @@ Um commit `fix:` com o assunto dizendo o porquê da troca do texto. Sem teste no
 - O projeto não tem `Comando de testes` nem `Comando de build`: diga na resposta que nada foi verificado antes do commit.
 - A pessoa pede para mudar uma cópia, sincronizada ou instalada por dependência ou plugin, como a página de uma habilidade: não grave nela. A mudança vai no repositório de origem. A cópia sincronizada muda depois do merge. A cópia instalada muda quando o projeto passa a usar a versão nova.
 - A correção está num Markdown: o tipo é `fix:`. `docs:` fica para a documentação.
+- O trabalho não tem issue: a mensagem não ganha `#<número>`.
 
 ## Pegadinhas
 
