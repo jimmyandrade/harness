@@ -99,3 +99,14 @@ An install of a project that depends on the core, often a build on a host such a
 2. Run the install ignoring the user configuration for that one command, in the project folder: `npm_config_userconfig=/dev/null npm ci`. To move a pin, add both: `npm_config_userconfig=/dev/null npm install -D "harness@github:jimmyandrade/harness#vX.Y.Z" --allow-git=all`. Ignoring `~/.npmrc` does not lift `allow-git`, because `root` is also the npm default. The file stays as it is.
 3. Without `~/.npmrc`, the command also loses the tokens it holds. Git dependencies over SSH and public packages do not need them; a package from a private registry does.
 4. `node_modules/harness` and `node_modules/vocabulary` present, and `run-check.sh` exiting 0, close the case.
+
+## Cursor shows an old core
+
+Customize, or a plugin page named `core` or `harness-core`, lists skills from a commit older than the default branch. Enable Auto Refresh is not on the page. The dashboard lists the repository under Your Marketplaces, with only Remove, and has no Team Marketplaces section.
+
+1. Your Marketplaces is a personal install. It has no Enable Auto Refresh. Cursor keeps the commit from when the repository was added. Removing the repository and adding it again installs that same commit. The steps that do move are in `docs/runbooks/cursor.md`.
+2. The account menu in Cursor, and Get Grok Bot in that menu, do not open the dashboard. The dashboard is [cursor.com/dashboard](https://cursor.com/dashboard). Enable Auto Refresh is under Plugins & MCPs, Team Marketplaces, the imported marketplace, Marketplace Settings, Plugin Repository. Team Marketplaces exists on a Teams or Enterprise plan, for an admin. When the account belongs to a team and the page still shows only Your Marketplaces, switch to that team in the dashboard header.
+3. On that team marketplace, turn Enable Auto Refresh on. The Cursor GitHub App must be installed on the repository and allowed to read it. Cursor re-indexes at most once every 10 minutes and keeps the latest commit of the default branch. Refresh in Plugin Repository re-indexes once, without the app. Restart Cursor, or focus the window. A Cloud Agent that is already running keeps the version it started with. The import follows the default branch, not the tag in `package.json`.
+4. A project that needs the tag in `package.json` keeps the links in `docs/runbooks/cursor.md`, steps 1 to 3. Renovate moves that pin, as `docs/runbooks/renovate.md` describes. Remove the personal marketplace so the same skill is not listed twice.
+5. Grok Bot does not read those links or this plugin. Connect apps lists apps from the Cursor Marketplace. A skill a Bot saves belongs to that Bot. There is no install of this repository in Grok Bot.
+6. Customize listing the skills of the indexed commit, or `ls` of the project link after `npm ci` listing the skills under `node_modules/harness/.agents/skills`, closes the case.
