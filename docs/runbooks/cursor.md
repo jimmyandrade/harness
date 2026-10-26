@@ -6,6 +6,8 @@ locale: en
 
 Cursor reads skills from `.agents/skills` and `.cursor/skills` of the open project, and follows symbolic links. It does not look inside `node_modules`, so the core skills need a link. Run this runbook from the root of the project, after `npm ci`.
 
+Read `Forma do harness`, `Papel do repositório atual`, and `Instalação do harness`. `INSTALL.md` has the table. Stop when the install is `global` or `Harness no repositório atual` is `não`: this repository does not receive the links below, and `não` does not mean the install is global. When the form is `repositório próprio` and the role is `projeto`, the install is `global`. When the form is `repositório existente`, continue and install the core in this repository. When the form is `próprio e repositórios` and the role is `projeto`, continue and install the business harness as well as the core. When the form, the role, or the install is absent, ask once and stop. Do not create the files below.
+
 Each step ends with a check.
 
 ## 1. Choose the layout
