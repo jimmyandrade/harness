@@ -3,7 +3,7 @@ name: avaliar-atualizacoes-de-dependencia
 description: Use essa habilidade sempre que houver PR de atualização de dependência do Dependabot ou do Renovate para avaliar, testar ou mesclar, mesmo sem dizer o nome do bot. NÃO use para atualizar uma dependência à mão nem para PR que não seja de bot.
 metadata:
   author: jimmyandrade
-  version: "0.7.1"
+  version: "0.8.0"
   related:
     - evoluir-habilidade
     - criar-commit
@@ -28,6 +28,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Revisores": ""
 "Assignee": ""
 "Label": "dependencies"
+# `Agrupar pacotes relacionados` é `perguntar`, que propõe o agrupamento e espera a resposta, ou `automático`, que abre o PR da configuração sem perguntar.
+"Agrupar pacotes relacionados": "perguntar"
 "Modo de aprendizado": "perguntar"
 ```
 ## Instruções
@@ -43,6 +45,8 @@ Mude para a branch do PR e veja quantos commits ela está atrás da base. Se est
 ### Passo 3
 
 Compare a versão que o PR traz com a mais recente do pacote direto. Leia as notas de cada versão do intervalo do PR, no repositório do pacote. Num salto grande, a descrição do PR do bot corta as versões mais antigas. Sem notas nem repositório público, compare a API pública das duas versões, como os arquivos de tipos. Aponte breaking change, correção de segurança e exigência de peer dependency. Breaking change sem migração clara no projeto para a fila: pergunte à pessoa. Se as notas mudam retry, timeout ou prazo, meça o caminho degradado do projeto antes e depois e leve o número para a análise.
+
+Confira se o pacote anda junto com outros, como os tipos, a peer dependency ou outro pacote do mesmo repositório de origem, e se algum deles espera atualização noutro PR ou no painel de dependências do bot. Se esperar, o PR para na fila e o agrupamento segue `Agrupar pacotes relacionados`. Com `perguntar`, proponha o agrupamento e espere a resposta. Com `automático`, abra sem perguntar um PR à parte com a regra, seguindo `criar-commit` e `criar-pull-request`. No Renovate, a regra é uma entrada em `packageRules` com `matchSourceUrls` ou `matchPackageNames` e `groupName`. No Dependabot, é um grupo em `groups` com `patterns`. Com os dois bots, grave nos dois. A regra fica na configuração do bot no próprio repositório, nunca num preset compartilhado. O merge desse PR espera o sim da pessoa. Depois dele, peça ao bot uma nova execução, como a caixa no painel de dependências, e siga o PR agrupado.
 
 ### Passo 4
 
@@ -101,6 +105,14 @@ Se você mesclar o PR sem responsável ou sem etiqueta, a fila perde quem acompa
 3. Sem label, aplique `Label`. Não substitua um label que já existe.
 4. Se o comando falhar, pare e mostre o erro.
 
+### Pacote relacionado esperando à parte
+
+Se você mesclar o PR de um pacote enquanto a peer dependency ou outro pacote do mesmo repositório de origem espera noutro PR, o projeto fica com versões que não foram testadas juntas.
+
+1. Confira os PRs abertos e o painel de dependências do bot.
+2. Pare a fila e siga `Agrupar pacotes relacionados`.
+3. Grave a regra na configuração do bot do próprio repositório, no Renovate e no Dependabot quando o projeto usa os dois.
+
 ### Teste num PR separado
 
 Se você abrir outro PR só com o teste, a atualização entra sem a cobertura que justificaria o merge.
@@ -129,7 +141,8 @@ A biblioteca era transitiva. A árvore levou ao pacote direto que a puxa, e os p
 - O pacote baixa binários presos à versão, como os navegadores de teste: diga na análise que cada máquina precisa baixá-los de novo depois do merge.
 - O pacote vai num artefato publicado à parte, como um worker ou uma função: o merge não atualiza o que está rodando. Diga na análise que falta publicar de novo.
 - Uma revisão obrigatória que você não consegue cumprir bloqueia o merge: pare e diga quem precisa aprovar.
-- O PR atualiza um pacote sem os que andam junto com ele, como os tipos, a peer dependency ou outro pacote do mesmo monorepo: pare e proponha agrupá-los, em `packageRules` com `groupName` no Renovate ou em `groups` no Dependabot.
+- O PR atualiza um pacote sem os que andam junto com ele, como os tipos, a peer dependency ou outro pacote do mesmo monorepo: pare a fila e agrupe-os conforme `Agrupar pacotes relacionados`, como diz o Passo 3.
+- O PR agrupado substitui o PR antigo do pacote: siga o agrupado, como num PR substituído pelo bot.
 
 ## Pegadinhas
 
