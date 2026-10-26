@@ -3,7 +3,7 @@ name: gravar-termos-no-vocabulario
 description: Use essa habilidade sempre que, ao cadastrar ou corrigir termos do vocabulário do tom de voz, for hora de pesquisar a grafia, testar com dry run e gravar o lote, mesmo sem dizer gravar. NÃO use para decidir o nível, validar os campos, perguntar quais variações foram cadastradas, escrever o texto da marca, nem inventar um termo.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.6.1"
   related:
     - definir-vocabulario
     - procurar-variacao-de-termo
@@ -14,10 +14,14 @@ metadata:
 
 ## Parâmetros de configuração
 
-Quando `definir-vocabulario` chama esta habilidade, vale o que ela passa.
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco, depois nas instruções de usuário. Quando um valor não estiver lá, use o padrão abaixo. Quando `definir-vocabulario` chama esta habilidade, vale o que ela passa para a validação.
 
 ```yaml
 "Validação dos campos": "warn"
+# `Harness no repositório` é `sim` ou `não`. Com `não`, o repositório aberto não recebe glossário nem instalação do harness.
+"Harness no repositório": "sim"
+# `Pasta do glossário` é o caminho usado quando o harness não fica no repositório. Vazio pede o caminho uma vez.
+"Pasta do glossário": ""
 ```
 
 ## Instruções
@@ -101,6 +105,14 @@ Se você gravar o proibido novo sem perguntar pelos termos relacionados, a pesso
 2. Pergunte se ela quer um ou mais termos relacionados.
 3. Se sim, grave em `alternatives`. Se não, siga com a lista vazia.
 
+### Glossário no repositório errado
+
+Se você criar o arquivo do idioma no repositório aberto com `Harness no repositório` em `não`, ou deixar de criá-lo aqui com `sim`, o glossário fica no negócio errado.
+
+1. Leia `Harness no repositório` e `Pasta do glossário`.
+2. Com `sim`, crie o arquivo no glossário deste repositório.
+3. Com `não`, crie só na `Pasta do glossário` e não instale o harness aqui. Se a pasta estiver vazia, pergunte uma vez e pare.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
@@ -127,6 +139,8 @@ O plano ficou em update. A reticências que já estava foi reescrita, com o quan
 - A grafia já está com a tag de outro contexto e a regra nova é geral ou de outro contexto: grave outra linha, sem tags ou com as tags dela. A linha que já está fica como está.
 - Lote vindo de outra ferramenta: um arquivo com `terms --file` e `upsert`. Diga o que entrou, o que foi atualizado e o que ficou em `incomplete`.
 - Sem terminal e sem o servidor `vocabulary`, como num agente do Notion: pare. O cadastro roda numa ferramenta de código com o projeto aberto. Não confirme nada.
+- `Harness no repositório` em `não`: não crie glossário nem instale o harness neste repositório. O arquivo do idioma nasce só na `Pasta do glossário`. Vazia, pergunte o caminho uma vez e pare.
+- `Harness no repositório` em `sim`: o arquivo do idioma nasce no glossário deste repositório, e a instalação do harness pode ficar nele.
 - A pessoa pergunta se um termo ou uma variação faltou: `procurar-variacao-de-termo`. `related` só aponta para termo que já está.
 
 ## Pegadinhas
@@ -138,6 +152,7 @@ O plano ficou em update. A reticências que já estava foi reescrita, com o quan
 - Uma variação ausente parece já ligada pela palavra vizinha. Ela não existe até ser cadastrada. `related` não a cria.
 - Duas linhas do mesmo termo parecem um convite a apagar a mais curta. Com tags diferentes, as duas valem, cada uma no próprio contexto. Com as mesmas tags, a escrita não apaga. Sinalize e espere a escolha.
 - Um exemplo citado parece herdar a descrição do termo. Se ele não vem como item do lote, nasce só com o estado daquele vínculo.
+- O repositório aberto parece o lugar do glossário. Isso só vale com `Harness no repositório` em `sim`. Com `não`, o arquivo nasce na `Pasta do glossário` e o harness não se instala aqui.
 - O comando de escrita, com `--term` ou `--file`, parece dispensar a validação. Sem o plano que `validar-plano-de-vocabulario` aprovou, não grave. Quem decidiu fica em `decided_by` e o dia em `decided_at`, nunca na descrição nem em `notes`.
 
 ## Scripts disponíveis
@@ -147,10 +162,11 @@ O plano ficou em update. A reticências que já estava foi reescrita, com o quan
 - `node node_modules/harness/vocabulary/dist/cli.js exists --language <idioma> --text <trecho>` devolve só o registro de cada token do trecho para se ele existe.
 - `node node_modules/harness/vocabulary/dist/cli.js terms` grava o lote. `--language`, `--mode` e `--validation` valem para o lote. Cada `--term` abre um termo, com `--state`, `--description`, `--reason`, `--when`, `--substitution`, `--decided-by`, `--decided-by-email`, `--decided-by-url`, `--decided-at`, `--source` e `--notes`. `--decided-by` é o nome. Os dois seguintes completam o objeto. `--categories`, `--examples`, `--rejected`, `--alternatives`, `--related`, `--tags`, `--allowed-in` e `--forbidden-in` repetem, um valor por vez. `--stop-word` marca a stop word, que pode vir sem `--state`. `--file` lê o lote inteiro de um JSON.
 - `--glossary`, antes do comando, aponta outro vocabulário.
-- `d="${HARNESS_GLOSSARY_DIR:-${HARNESS_ROOT:-.}/.agents/glossary}"; mkdir -p "$d"; [ -e "$d/<idioma>.json" ] || echo '{}' > "$d/<idioma>.json"` cria o arquivo vazio do idioma só dentro da pasta do vocabulário da pessoa. Não rode no repositório aberto.
+- Com `Harness no repositório` em `sim`, `d="${HARNESS_GLOSSARY_DIR:-${HARNESS_ROOT:-.}/.agents/glossary}"; mkdir -p "$d"; [ -e "$d/<idioma>.json" ] || echo '{}' > "$d/<idioma>.json"` cria o arquivo vazio do idioma no glossário deste repositório.
+- Com `não`, `d="<Pasta do glossário>"; mkdir -p "$d"; [ -e "$d/<idioma>.json" ] || echo '{}' > "$d/<idioma>.json"` cria o arquivo só nessa pasta. Os comandos levam `--glossary` com o mesmo caminho. Não rode isso no repositório aberto.
 - `lookup_term`, `lookup_terms`, `exists_in_text` e `write_terms`, no servidor `vocabulary`, fazem a mesma consulta e a mesma escrita quando não há terminal.
 
-1. Com terminal, rode `lookup-terms` para os termos do plano, `lookup` para um termo e `exists` para um trecho. Com `Unknown language`, a pasta aberta não tem o arquivo do idioma. Não crie `.agents/glossary` no repositório aberto. Rode de novo com `--glossary` na pasta do vocabulário das instruções de usuário.
-2. Com terminal, rode `terms` com `--language`, `--mode` e um `--term` para cada termo.
-3. Sem terminal, chame `lookup_terms`, `lookup_term`, `exists_in_text` e `write_terms` com os mesmos campos. Com `Unknown language`, pare e use o terminal com `--glossary`. Não crie o arquivo no repositório aberto.
+1. Com terminal, rode `lookup-terms` para os termos do plano, `lookup` para um termo e `exists` para um trecho. Com `Unknown language` e `Harness no repositório` em `sim`, crie o arquivo do idioma no glossário deste repositório e repita. Com `não`, crie o arquivo só na `Pasta do glossário` e repita com `--glossary`. Se essa pasta estiver vazia, pergunte o caminho uma vez e pare.
+2. Com terminal, rode `terms` com `--language`, `--mode` e um `--term` para cada termo. Com `Harness no repositório` em `não`, o comando leva `--glossary` na `Pasta do glossário`.
+3. Sem terminal, chame `lookup_terms`, `lookup_term`, `exists_in_text` e `write_terms` com os mesmos campos. Com `Unknown language`, pare: o arquivo do idioma nasce com terminal, no lugar que `Harness no repositório` indica.
 4. Sem terminal e sem o servidor `vocabulary`, pare.

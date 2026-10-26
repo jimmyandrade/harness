@@ -1,6 +1,6 @@
 ---
 metadata:
-  version: "1.33.0"
+  version: "1.34.0"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -113,7 +113,7 @@ metadata:
 - Descreva uma fonte de dados com JSON Schema e um mapeamento do Notion separado, como em `docs/adr/0001-describe-data-sources-with-json-schema.md`. Esses arquivos ficam no harness de negócio, não aqui.
 - Uma skill do core que lê uma fonte de dados do negócio fala de conceitos, como o título da edição ou o grupo de uma edição. O mapeamento de cada negócio liga esses conceitos aos nomes da lista e das propriedades. Uma propriedade sem a qual a edição não existe e que falta no mapeamento para a skill antes de ela escrever. Um valor de propriedade opcional que falta no mapeamento é listado no fim, com a sugestão de criar a propriedade: a skill nunca cria schema e nunca escreve esse valor no corpo da página.
 - `Considerar grupos de oportunidades` diz se as skills de oportunidade usam grupos. Com `sim`, toda edição pertence a exatamente um grupo, e o verificador falha quando o mapeamento de oportunidades do negócio, `.agents/mappings/oportunidades.notion.json`, não liga `group`. Com `não`, a edição não tem grupo.
-- O glossário de um projeto fica nesse projeto. O motor que o lê e escreve fica neste repositório, em `vocabulary/`, como decide a ADR 0018.
+- `Harness no repositório` diz se o repositório aberto guarda o glossário e a instalação do harness. Com `sim`, o glossário fica nesse projeto. Com `não`, ele fica na `Pasta do glossário` e o repositório aberto não recebe esses arquivos. O motor que o lê e escreve fica neste repositório, em `vocabulary/`, como decide a ADR 0018.
 
 ## Documentos
 
