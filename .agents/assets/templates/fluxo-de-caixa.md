@@ -1,6 +1,6 @@
 Meses nas colunas, de jan a dez. Valores na `Moeda` das instruções do projeto. Célula sem fonte fica vazia.
 
-No resultado da semana, a tabela tem uma coluna só, e o título diz o primeiro e o último dia, com o dia da semana. No mês dividido por semana, as colunas são as semanas do mês e a última é o total do mês. O saldo final de uma semana é o saldo inicial da seguinte, e as linhas de resultado valem para a semana.
+Num intervalo que não é o ano, ou num ponto de contato, a tabela tem uma coluna só, e o título diz o intervalo em datas, com o dia da semana de cada uma. No mês dividido por semana, as colunas são as semanas do mês e a última é o total do mês. O saldo final de uma semana é o saldo inicial da seguinte, e as linhas de resultado valem para a coluna.
 
 | Linha | jan | fev | mar | abr | mai | jun | jul | ago | set | out | nov | dez |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
