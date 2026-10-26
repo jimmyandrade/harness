@@ -74,7 +74,8 @@ How these skills relate is in `README.md`, in this folder.
 - **Description**: Decide whether merged work brings anything new for the people who use the product and, when it does, write the announcement without technical terms
 - **Properties**:
   - Lives at `.agents/skills/comunicar-novidade-do-produto/SKILL.md`
-  - Reads the audience, the channel, and the language of the announcement from the project instructions
+  - Reads the audience, who publishes, the channel, and the language of the announcement from the project instructions
+  - When it has to ask who publishes or the channel, offers only the channels the project instructions name, and puts the option of not announcing last
   - Reads each pull request of a merge or a period, and decides by the diff, not by the commit type
   - Without anything new for the audience, says so and writes no announcement, even when asked for one
   - Writes what changes in practice, where people notice it, who is affected, what to do, and from when
@@ -82,6 +83,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Test Criteria**:
   - [x] A day of 21 maintenance pull requests yields no announcement
   - [ ] A period with a visible change yields an announcement without technical terms
+  - [ ] Without a publisher or a channel in the project instructions, the question suggests no channel and puts not announcing last
 
 ### criar-commit
 - **Stability**: experimental

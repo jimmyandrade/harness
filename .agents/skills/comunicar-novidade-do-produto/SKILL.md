@@ -3,7 +3,7 @@ name: comunicar-novidade-do-produto
 description: Use essa habilidade sempre que um PR for mesclado ou alguém perguntar o que há de novo no produto para quem o usa, mesmo sem dizer novidade, para decidir se há o que contar e escrever o comunicado sem termos técnicos. NÃO use para a descrição do PR, o changelog nem release notes técnicas.
 metadata:
   author: jimmyandrade
-  version: "0.8.2"
+  version: "0.9.0"
   related:
     - evoluir-habilidade
     - redigir-com-tom-de-voz
@@ -22,6 +22,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
   - "pull requests mesclados na base"
   - "commits na base fora de pull request"
 "Público do comunicado": ""
+"Quem publica o comunicado": ""
 "Canal do comunicado": ""
 "Idioma do comunicado": "português"
 "Habilidade de tom de voz": ""
@@ -50,7 +51,7 @@ Sem novidade: dependência, refatoração, CI, teste, documentação interna, re
 
 Escreva o comunicado no `Idioma do comunicado`, para quem não é técnico: o que muda na prática, onde a pessoa percebe, quem é afetado, se precisa fazer algo e a partir de quando. Nunca cite PR, commit, biblioteca, arquivo nem ferramenta interna. Conte a correção pelo problema que a pessoa sentia: "corrigimos um problema que fazia a página demorar", não o novo comportamento isolado. Um período vira um comunicado só, agrupado por área e com o intervalo corrido no título, como "últimos 15 dias", sem uma seção por semana ou sprint.
 
-O rascunho passa obrigatoriamente pela habilidade de tom de voz antes de ir para a pessoa, com o público e o canal do comunicado. Quem fala é quem publica o comunicado. Sem saber quem publica, pergunte.
+O rascunho passa obrigatoriamente pela habilidade de tom de voz antes de ir para a pessoa, com o público e o canal do comunicado. Quem fala é `Quem publica o comunicado`. Vazio, pergunte quem publica, uma vez, junto com o canal quando `Canal do comunicado` também estiver vazio.
 
 Ache essa habilidade pela `Habilidade de tom de voz`. Vazia, ou se a habilidade indicada não aparecer, procure nesta ordem:
 
@@ -62,7 +63,7 @@ Achou: use e sugira preencher `Habilidade de tom de voz`. Não achou: pergunte s
 
 ### Passo 4
 
-Entregue no `Canal do comunicado`, com a formatação dele. O comunicado vai numa mensagem só, com parágrafos curtos, mesmo no WhatsApp, onde a conversa costuma ir em mensagens quebradas. Só a novidade entra nessa mensagem. Um pedido, uma cobrança ou uma lista de pendências é outro assunto: vai numa mensagem à parte, depois do comunicado. Se houver uma ferramenta para esse canal, mostre o texto e peça o ok antes de publicar. Se não houver, ou se o canal estiver vazio, entregue o texto pronto para copiar.
+Entregue no `Canal do comunicado`, com a formatação dele. Ao perguntar quem publica ou o canal, as opções saem só das instruções do projeto: nunca sugira um canal que elas não citam. A opção de publicar vem primeiro, e a de não comunicar vem por último. O comunicado vai numa mensagem só, com parágrafos curtos, mesmo no WhatsApp, onde a conversa costuma ir em mensagens quebradas. Só a novidade entra nessa mensagem. Um pedido, uma cobrança ou uma lista de pendências é outro assunto: vai numa mensagem à parte, depois do comunicado. Se houver uma ferramenta para esse canal, mostre o texto e peça o ok antes de publicar. Se não houver, ou se o canal estiver vazio, entregue o texto pronto para copiar.
 
 ### Passo 5
 
@@ -105,6 +106,14 @@ Se você colocar no comunicado a lista do que ainda falta fazer, como os registr
 1. Deixe no comunicado só o que mudou e o que fazer daqui em diante.
 2. Mande a lista de pendências numa mensagem à parte, depois do comunicado.
 
+### Canal suposto
+
+Se você oferecer um canal que as instruções do projeto não citam, como o Slack, a pessoa precisa corrigir a opção antes de responder.
+
+1. Leia `Quem publica o comunicado` e `Canal do comunicado`.
+2. Vazios, pergunte sem sugerir canal e ofereça o texto pronto para copiar.
+3. Deixe a opção de não comunicar por último.
+
 ### Ação escondida
 
 Se você deixar de dizer que a pessoa precisa fazer algo, a mudança vira problema para ela.
@@ -122,6 +131,7 @@ Três PRs entraram: duas atualizações de dependência e uma correção no form
 ## Casos-limite
 
 - Vários PRs da mesma frente: um comunicado só, agrupado.
+- `Quem publica o comunicado` e `Canal do comunicado` estão vazios: pergunte quem publica. Sem canal, o texto vai pronto para copiar.
 - O merge não coloca no ar, como um worker, uma release ou um deploy agendado: diga quando a pessoa vai ver a mudança, não quando o PR entrou.
 - A mudança tira algo que as pessoas usavam: diga o que usar no lugar.
 
