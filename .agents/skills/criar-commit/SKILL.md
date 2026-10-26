@@ -3,7 +3,7 @@ name: criar-commit
 description: Use essa habilidade sempre que terminar um trabalho que mudou o repositório ou for commitar, separar commits ou escrever a mensagem, mesmo sem dizer commit. NÃO use para push, abrir PR, rebase nem merge (use criar-pull-request).
 metadata:
   author: jimmyandrade
-  version: "0.18.0"
+  version: "0.20.1"
 ---
 
 # Criar commit
@@ -22,11 +22,10 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Atribuição da sessão": "sim"
 "Comando de build": ""
 "Comando de lint dos arquivos tocados": ""
+# `Criar pull request ao terminar`: `rascunho` abre em rascunho e não pede revisão. `sim` abre pronto. `não` espera pedido. O merge não entra aqui.
 "Criar pull request ao terminar": "rascunho"
 "Modo de aprendizado": "perguntar"
 ```
-
-`Criar pull request ao terminar` é `rascunho`, o padrão: a mudança de código sobe a branch e abre o pull request em rascunho, para o trabalho não ficar só na máquina. Um rascunho não pede revisão. É `sim` quando o pull request abre pronto. É `não` quando a publicação espera um pedido explícito. A resposta diz o nome da branch, se ela está no GitHub e, quando o pull request existe, o link. O merge não entra nesse parâmetro.
 
 ## Instruções
 
@@ -82,6 +81,9 @@ O tipo segue o que a mudança faz, não a extensão do arquivo.
 Correção de erro é `fix:`, mesmo em Markdown.
 `docs:` fica para a documentação.
 O assunto diz por que a mudança existe.
+Quando o trabalho tem uma issue, a mensagem cita `#<número>`.
+Sem issue, não invente número.
+A forma que o repositório já documenta, como `Closes #<número>`, vale.
 Corpo só quando precisa de contexto.
 Renomear ou quebrar compatibilidade leva `!` no tipo e rodapé `BREAKING CHANGE:`.
 Com `Atribuição da sessão` em `sim`, termine com o trailer de coautoria da sessão.
@@ -168,6 +170,7 @@ Um commit `fix:` com o assunto dizendo o porquê da troca do texto. Sem teste no
 - O projeto não tem `Comando de testes` nem `Comando de build`: diga na resposta que nada foi verificado antes do commit.
 - A pessoa pede para mudar uma cópia, sincronizada ou instalada por dependência ou plugin, como a página de uma habilidade: não grave nela. A mudança vai no repositório de origem. A cópia sincronizada muda depois do merge. A cópia instalada muda quando o projeto passa a usar a versão nova.
 - A correção está num Markdown: o tipo é `fix:`. `docs:` fica para a documentação.
+- O trabalho não tem issue: a mensagem não ganha `#<número>`.
 
 ## Pegadinhas
 
