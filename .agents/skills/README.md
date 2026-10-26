@@ -43,6 +43,7 @@ flowchart LR
     definir_jornada_de_producao["definir-jornada-de-producao"]
     definir_lancamento["definir-lancamento"]
     definir_link_rastreavel["definir-link-rastreavel"]
+    definir_medicao_de_metrica["definir-medicao-de-metrica"]
     definir_obrigacao_financeira["definir-obrigacao-financeira"]
     definir_okr["definir-okr"]
     definir_perfil_social["definir-perfil-social"]
@@ -227,6 +228,10 @@ flowchart LR
   definir_lancamento --> lancar_despesa_da_empresa
   definir_lancamento --> revisar_financas
   definir_link_rastreavel --> evoluir_habilidade
+  definir_medicao_de_metrica --> definir_okr
+  definir_medicao_de_metrica --> evoluir_habilidade
+  definir_medicao_de_metrica --> identificar_duplicata
+  definir_medicao_de_metrica --> reconhecer_imagem
   definir_obrigacao_financeira --> evoluir_habilidade
   definir_obrigacao_financeira --> lancar_despesa_da_empresa
   definir_obrigacao_financeira --> lancar_despesa_pessoal
