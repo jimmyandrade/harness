@@ -3,7 +3,7 @@ name: definir-vocabulario
 description: Use essa habilidade sempre que for cadastrar ou atualizar um ou mais termos do vocabulário do tom de voz, mesmo sem dizer glossário, lote ou estado. NÃO use para escrever, revisar ou aprovar o texto da marca, classificar uma frase, perguntar quais variações de gênero, número ou grafia foram cadastradas, nem inventar um termo que a pessoa não enviou.
 metadata:
   author: jimmyandrade
-  version: "0.32.0"
+  version: "0.33.0"
   related:
     - classificar-estado-do-termo
     - evoluir-habilidade
@@ -30,6 +30,8 @@ metadata:
 
 A pessoa responsável pelo tom de voz quer cadastrar ou atualizar termos. Perguntar se um termo ou uma variação faltou segue `procurar-variacao-de-termo`. Monte o plano com idioma, modo e a lista. Cada item tem `state`, `term`, `categories` e os campos desse nível. Use só o que a pessoa enviou.
 
+Quando a pessoa manda um par rotulado de antes e depois, cada lado é um termo no mesmo lote. O antes fica `forbidden`, e `substitution` e `alternatives` são o depois, com o texto que ela escreveu. O depois fica `allowed`. `related` liga os dois. Não invente outra alternativa. "Nunca use uma palavra, use outra" tem o mesmo formato, sem `when` e sem `tags`. A frase inteira, com a pontuação e com um símbolo no fim, é um termo. Termo novo entra em minúsculas.
+
 O idioma de cada linha é o da comunicação inteira, não o do arquivo que já existe. Comunicação inteira em inglês, como um e-mail, uma review ou uma mensagem, grava o termo e a frase em `en`. Comunicação principalmente em português que só leva um termo em inglês no meio, como `header`, grava em `pt-BR`. Idioma ambíguo: pergunte. Sem idioma ou sem termo, pare e peça.
 
 ```mermaid
@@ -44,7 +46,7 @@ flowchart LR
 
 ### Passo 2
 
-Classifique cada termo com `classificar-estado-do-termo`: ele lê as fontes da marca e decide o `state`, as `tags`, o `allowed_in` e o `forbidden_in`. Contexto ainda ambíguo: ele pergunta. Não responda e não grave.
+Classifique cada termo com `classificar-estado-do-termo`: ele lê as fontes da marca e decide o `state`, as `tags`, o `allowed_in` e o `forbidden_in`. Contexto ainda ambíguo: ele pergunta. Não responda e não grave. Um par rotulado de antes e depois não é contexto ambíguo: o antes é `forbidden` e o depois é `allowed`.
 
 ### Passo 3
 
@@ -72,6 +74,14 @@ Se você gravar no arquivo que já existe sem olhar o idioma da comunicação in
 2. Texto ambíguo: pergunte.
 3. Sem o arquivo do idioma, crie-o com `{}` e grave.
 
+### Par antes e depois numa frase só
+
+Se você gravar o par como um termo só, ou só o depois, o antes continua valendo e a pessoa repete a correção.
+
+1. O antes entra como `forbidden`, com `substitution` e `alternatives` iguais ao depois.
+2. O depois entra como `allowed` no mesmo lote, e os dois ficam em `related`.
+3. Não invente outra alternativa.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
@@ -84,9 +94,14 @@ A comunicação inteira era em inglês: as duas frases foram para `en`, não par
 
 A mensagem era em português e só levava uma palavra em inglês. A linha ficou em `pt-BR`.
 
+### A pessoa manda o antes `se faltar algo, reabre.` e o depois `vc pode reabrir essa conversa se eu tiver deixado alguma coisa pra trás`, numa mensagem em português.
+
+A comunicação era em português. O antes ficou proibido e a substituição foi o depois. O depois ficou permitido. Os dois ficaram ligados no mesmo lote.
+
 ## Casos-limite
 
 - Permitidos, proibidos e situacionais juntos: um lote e um modo.
+- A pessoa manda pares antes e depois: os dois entram no mesmo lote, o antes proibido e o depois permitido, ligados entre si.
 - A mesma palavra vale de um jeito num contexto e de outro no resto: uma linha sem tags e uma com as tags do contexto, no mesmo lote.
 - A pessoa pergunta se um termo ou uma variação faltou: `procurar-variacao-de-termo`.
 - O pedido é escrever a frase: `redigir-com-tom-de-voz`.
@@ -96,6 +111,7 @@ A mensagem era em português e só levava uma palavra em inglês. A linha ficou 
 ## Pegadinhas
 
 - Uma palavra em inglês dentro do texto em português parece termo do vocabulário em inglês. Ela mora no vocabulário desse texto.
+- O par antes e depois parece uma frase só, ou só o depois. Cada lado é um termo, e o antes aponta para o depois que a pessoa escreveu.
 - Um `pt-BR.json` à mão parece o lugar de tudo. O e-mail inteiro em inglês mora em `en`, com a frase inteira.
 
 ## Scripts disponíveis

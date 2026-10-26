@@ -1,4 +1,11 @@
 {
   "skill_name": "definir-vocabulario",
-  "evals": []
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "vamos melhorar algumas coisas e lembrar disso: Antes: Se faltar algo, reabre. Depois: Vc pode reabrir essa conversa se eu tiver deixado alguma coisa pra trás. Antes: Se envelhecer de outro jeito. Depois: Vc pode reabrir essa conversa se tiver alguma coisa nova que eu não peguei nessa parte. Antes: Fico tranquilo com o texto. Depois: Tô de acordo com o texto novo. Nunca use esta, use essa porque fica mais informal. Antes: Essa gravação pode sair? Depois: Vc acha que essa parte de gravar no disco pode sair? Antes: A frase ficou a que você sugeriu. Depois: Eu usei a frase que vc sugeriu <3. Antes: Vou resolver esta conversa porque acolhi o ponto, neste commit. Depois: Tô resolvendo essa conversa pq já acolhi o ponto (coloquei no commit {SHA do commit}).",
+      "expected_output": "A comunicação é em português, então o lote vai para pt-BR. Cada antes fica proibido, com a substituição e a alternativa iguais ao depois que a pessoa escreveu. Cada depois fica permitido no mesmo lote. Os dois lados ficam ligados. esta fica proibida e essa fica permitida, sem when e sem tags. A frase com <3 é um termo só. Não há alternativa inventada. O modo é insert. A resposta só confirma o cadastro depois da gravação.",
+      "files": []
+    }
+  ]
 }
