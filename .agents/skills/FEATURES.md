@@ -594,7 +594,7 @@ How these skills relate is in `README.md`, in this folder.
   - Starts the objectives from the area page and the vision of the area in the cycle, and checks each objective against the strategy sources
   - Keeps objectives qualitative and few, each with an owning area and a champion
   - Writes each key result as verb, description, target value and target date, with an absolute target whenever there is one and the percentage as a derived reading
-  - Records the direction of every key result, and the base and base period of a reduction key result, so a value at or below the target counts as reached; reads the current value from the measurement history of the metric
+  - Records the direction of every key result and links a reduction key result to the measurement record of its base, never a typed number, so a value at or below the target counts as reached; reads the current value from the measurement history of the metric, and sends a missing base measurement to definir-medicao-de-metrica
   - Moves a task-like key result to definir-tarefa, avoids a target of 1 or 100%, and renames an untitled key result before anything else
   - Links each key result to actions with a stated mechanism, and refuses an action without one
   - Gates closing the OKRs on what the area must deliver and how it measures it, with a checklist
