@@ -903,6 +903,23 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [ ] Three cases validated with the person
 
+### fazer-fechamento
+- **Stability**: experimental
+- **Description**: Close the finances of one touchpoint, such as an event, a show or a pop-up, or of an interval, in Notion or in a spreadsheet
+- **Properties**:
+  - Lives at `.agents/skills/fazer-fechamento/SKILL.md`
+  - Reads `Onde fica o fechamento`, `Nome do ponto de contato`, `Apelidos de intervalo`, `Início da semana`, `Regras de divisão`, `Fontes` and `Moeda` from the project instructions
+  - Asks what to close when the request names neither a touchpoint nor an interval, and asks whether the closing lives in Notion or the spreadsheet when `Onde fica o fechamento` is empty
+  - Edits the existing spreadsheet and never creates a new file, and stops when the connector cannot edit it
+  - Gives the same totals, payments and charges in Notion and in the spreadsheet
+  - Shows the plan before writing, writes only the fields the mapping allows, and keeps the payment status, date and receipt
+  - Does not estimate a missing figure or a missing split rule, and says what is missing and from whom
+  - Compares the counted cash with the recorded sales of a touchpoint with a till
+  - Leaves an unrecorded cost to lancar-despesa-da-empresa, a missing Pix to definir-conta-bancaria, an overdue settlement to definir-obrigacao-financeira, and the result of the interval to revisar-financas
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [ ] The scenarios in `features/fazer-fechamento.feature` pass in Notion and in the spreadsheet
+
 ### gerenciar-estoque
 - **Stability**: experimental
 - **Description**: Update the balance of an exhaustible item and leave payment outside
@@ -1096,6 +1113,7 @@ How these skills relate is in `README.md`, in this folder.
   - Treats Pontos de contato as the canonical order and number, does not split an event only because the calendar title number differs, updates that title after the other identifiers match, and asks before renaming when the match stays ambiguous
   - Reads the editable calendar and the removed calendar from the YAML mapping under Parâmetros de configuração
   - Leaves organizing a trip to definir-viagem
+  - Leaves the closing, the settlement with the partner and the cash closing to fazer-fechamento
   - Treats contact points as one list and opportunities as another
   - When a reminder names that point, asks which contact point and which opportunity, and does not leave those relations empty
   - Does not invent the page or create a second one with the same name
