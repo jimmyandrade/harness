@@ -3,7 +3,7 @@ name: atender-revisao-de-pull-request
 description: Atende a revisão recebida num pull request, de pessoa ou de bot. Lê os comentários abertos, classifica cada sugestão, aplica o que é seguro, responde cada thread e resolve as atendidas. Sem PR informado, lista os seus que precisam de atenção. Não serve para revisar o PR de outra pessoa nem para abrir o PR.
 metadata:
   author: jimmyandrade
-  version: "0.15.0"
+  version: "0.16.0"
   aliases:
     - resolver-comentarios-de-revisao
     - apply-pr-review
@@ -36,6 +36,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Pedir nova revisão ao final": "sim"
 "Fechar conversa com a confiança": "não"
 "Número da confiança": ""
+"Linkar as fontes da explicação": "sim"
 "Rótulo de prioridade no texto": "não"
 "Idioma do relatório": "o idioma da conversa"
 "Agrupar o relatório por prioridade": "não"
@@ -99,6 +100,8 @@ Com esse parâmetro em `o idioma do comentário`, a resposta sai no idioma do co
 A resposta diz o que mudou.
 Quando o texto mudou, ela mostra as linhas alteradas num bloco, com o que saiu e o que entrou.
 Ela cita o commit pelo SHA curto linkado, como `[`abc1234`](URL do commit)`, ou diz por que não muda. Toda thread tratada fica com uma resposta registrada, inclusive a de bot e a decidida fora do PR. Comentário desatualizado ganha a explicação do que mudou desde então. Discordância e fora de escopo viram pergunta, nunca veredito. A resposta a uma pessoa trata do ponto que ela escreveu: retoma a ideia dela e diz o que mudou, e nunca é uma fórmula colada. Com `Rótulo de prioridade no texto` em `não`, o nome da categoria nunca aparece.
+
+Com `Linkar as fontes da explicação` em `sim`, a resposta que explica ou defende uma escolha, como uma exceção, uma recusa ou um motivo, linka a fonte de cada afirmação. A fonte do código é o link do trecho no commit atual do PR, com o SHA e as linhas, e a de uma regra é o documento, a decisão de arquitetura ou a conversa onde ela está. Uma afirmação sem fonte que você leu vira inferência, e a resposta diz isso. Não explique de memória.
 
 Com `Ler o texto antes de publicar` em `sim`, mostre a resposta a outra pessoa e espere o sim.
 Comentário de self review, da mesma pessoa que pediu o atendimento, recebe a resposta na hora.
