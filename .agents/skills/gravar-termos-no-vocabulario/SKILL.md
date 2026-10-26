@@ -3,7 +3,7 @@ name: gravar-termos-no-vocabulario
 description: Use essa habilidade sempre que, ao cadastrar ou corrigir termos do vocabulário do tom de voz, for hora de pesquisar a grafia, testar com dry run e gravar o lote, mesmo sem dizer gravar. NÃO use para decidir o nível, validar os campos, perguntar quais variações foram cadastradas, escrever o texto da marca, nem inventar um termo.
 metadata:
   author: jimmyandrade
-  version: "0.6.1"
+  version: "0.6.2"
   related:
     - definir-vocabulario
     - procurar-variacao-de-termo
@@ -20,7 +20,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Validação dos campos": "warn"
 # `Harness no repositório` é `sim` ou `não`. Com `não`, o repositório aberto não recebe glossário nem instalação do harness.
 "Harness no repositório": "sim"
-# `Pasta do glossário` é o caminho usado quando o harness não fica no repositório. Vazio pede o caminho uma vez.
+# `Pasta do glossário` é o caminho absoluto da pasta com os arquivos de idioma. Exemplo: `/caminho/do/glossario`. Vazio pede o caminho uma vez.
 "Pasta do glossário": ""
 ```
 
