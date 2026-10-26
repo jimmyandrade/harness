@@ -556,6 +556,21 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [ ] Three cases validated with the person
 
+### definir-medicao-de-metrica
+- **Stability**: experimental
+- **Description**: Record the values of a metric in the measurement history, one record per reference period, and review or create the metric without duplicating the concept
+- **Properties**:
+  - Lives at `.agents/skills/definir-medicao-de-metrica/SKILL.md`
+  - Reads `Propriedades de desambiguação` from the project instructions, and the lists and property names from the project's data mapping
+  - Looks for the same metric by name, singular and plural, spelling, abbreviation and synonyms, and compares the disambiguation properties before creating one; stores the new name as a synonym when the list has room for it
+  - Records each value with the quantity, the reference period, the record date, the metric and the measured entity, and updates the record of the same metric, entity, area and period instead of adding another
+  - Never writes metric numbers on the page of the measured entity
+  - Fills the geographic area only when the data breaks the value down explicitly, one record per area, and never infers it from a profile name or context
+  - Leaves the current value of a linked key result to the measurement history, as definir-okr requires
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [ ] The scenarios in `features/` pass in a real measurement
+
 ### definir-obrigacao-financeira
 - **Stability**: experimental
 - **Description**: Register or review a contract or debt that generates charges, such as a plan, a consortium, a card, or a loan
