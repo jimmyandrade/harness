@@ -3,7 +3,7 @@ name: atender-revisao-de-pull-request
 description: Atende a revisão recebida num pull request, de pessoa ou de bot. Lê os comentários abertos, classifica cada sugestão, aplica o que é seguro, responde de preferência num comentário inline e resolve as threads atendidas. Sem PR informado, lista os seus que precisam de atenção. Não serve para revisar o PR de outra pessoa nem para abrir o PR.
 metadata:
   author: jimmyandrade
-  version: "0.18.0"
+  version: "0.19.0"
   aliases:
     - resolver-comentarios-de-revisao
     - apply-pr-review
@@ -105,7 +105,7 @@ A conversa do PR fica para o que não tem linha no diff.
 Com esse parâmetro em `o idioma do comentário`, a resposta sai no idioma do comentário.
 A resposta diz o que mudou.
 Quando o texto mudou, ela mostra as linhas alteradas num bloco, com o que saiu e o que entrou.
-Ela cita o commit pelo SHA curto linkado, como `[`abc1234`](URL do commit)`, ou diz por que não muda. Toda thread tratada fica com uma resposta registrada, inclusive a de bot e a decidida fora do PR. Comentário desatualizado ganha a explicação do que mudou desde então. Discordância e fora de escopo viram pergunta, nunca veredito. A resposta a uma pessoa trata do ponto que ela escreveu: retoma a ideia dela e diz o que mudou, e nunca é uma fórmula colada. Com `Rótulo de prioridade no texto` em `não`, o nome da categoria nunca aparece.
+Ela cita o commit pelo SHA curto linkado, como `[`abc1234`](URL do commit)`, ou diz por que não muda. Toda thread tratada fica com uma resposta registrada, inclusive a de bot e a decidida fora do PR. Comentário desatualizado ganha a explicação do que mudou desde então. Discordância e fora de escopo viram pergunta, nunca veredito. A resposta a outra pessoa abre com o login do GitHub dela em `@login`, trata do ponto que ela escreveu, retoma a ideia dela e diz o que mudou, e nunca é uma fórmula colada. Quem mais entra no ponto também leva `@login`. O primeiro nome sozinho não marca a pessoa. Bot não leva `@`. Self review não marca quem está respondendo. Com `Rótulo de prioridade no texto` em `não`, o nome da categoria nunca aparece.
 
 Com `Linkar as fontes da explicação` em `sim`, a resposta que explica ou defende uma escolha, como uma exceção, uma recusa ou um motivo, linka a fonte de cada afirmação. A fonte do código é o link do trecho no commit atual do PR, com o SHA e as linhas, e a de uma regra é o documento, a decisão de arquitetura ou a conversa onde ela está. Uma afirmação sem fonte que você leu vira inferência, e a resposta diz isso. Não explique de memória.
 
@@ -169,6 +169,14 @@ Se você resolver a thread sem responder, quem comentou não sabe o que foi feit
 
 1. Responda antes de resolver.
 2. Diga o que mudou, mostre as linhas alteradas e cite o commit, ou diga o motivo.
+
+### Resposta sem marcar a pessoa
+
+Se você escrever o primeiro nome e não o `@login` do GitHub, a pessoa não é avisada.
+
+1. Use o login que está na revisão, com `@` na frente.
+2. Corrija o comentário já publicado.
+3. Bot não leva `@`. Self review não marca quem está respondendo.
 
 ### Resposta só na conversa
 
@@ -286,6 +294,7 @@ Achei cinco comentários abertos. Dois eram estruturais, um nome e um texto, e a
 - A resposta de uma thread vai como réplica do primeiro comentário. Sem thread, a resposta preferida é um comentário inline numa revisão sua, no trecho que a decisão muda. Um comentário novo na conversa não fica na thread.
 - Aprovar o PR não resolve as threads dele.
 - A consulta de threads traz uma página. Se `pageInfo.hasNextPage` for verdadeiro, peça a próxima com `after`, antes de dizer que não há mais thread.
+- O primeiro nome parece marcar a pessoa. Só `@` mais o login do GitHub que está na revisão avisa.
 - Resposta com apóstrofo quebra `-f body='...'` no shell. Grave a resposta num arquivo e envie com `-F body=@<arquivo>`.
 - Uma sugestão de bot e uma de pessoa se classificam pela mesma régua.
 - Aprovar o PR de outra pessoa não é papel desta habilidade.

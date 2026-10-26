@@ -3,7 +3,7 @@ name: publicar-revisao-de-codigo
 description: Revisa um pull request e publica a revisão numa única review, com os comentários inline, no idioma de quem recebe e no tom do projeto. Usada quando a pessoa pede uma revisão ou outra habilidade precisa publicar uma. Não serve para tratar os comentários que você recebeu no seu PR.
 metadata:
   author: jimmyandrade
-  version: "0.9.1"
+  version: "0.10.0"
   aliases:
     - post-code-review
   related:
@@ -135,7 +135,8 @@ Escreva os textos com `redigir-com-tom-de-voz`, para o tom de quem publica. Cada
 - Escreva em palavras, não pelo rótulo: com `Rótulo de prioridade no texto` em `não`, o nome da categoria nunca aparece.
 - Com `Revelar que a revisão foi automática` em `não`, não mencione automação, ferramenta, nome de habilidade nem quantos comentários há, e não deixe rodapé de ferramenta.
 - Aplique `Abertura da revisão`.
-- Com `Voz em PR aberto por bot` em `nós`, num PR aberto por um bot, nunca escreva "você", "seu" nem @menção ao autor: use a primeira pessoa do plural, "nós", como se o ponto fosse para a discussão do time. Vale no corpo, nos comentários, nas respostas em thread e na tradução.
+- Cada comentário que fala com uma pessoa abre com o `@login` do GitHub dela. Quem mais entra no ponto também leva `@login`. O primeiro nome sozinho não marca a pessoa.
+- Com `Voz em PR aberto por bot` em `nós`, num PR aberto por um bot, nunca escreva "você", "seu" nem @menção ao autor: use a primeira pessoa do plural, "nós", como se o ponto fosse para a discussão do time. Vale no corpo, nos comentários, nas respostas em thread e na tradução. Essa voz não leva `@`.
 - Seja curto. Não escreva frase que uma pessoa não escreveria.
 - Um comentário de revisão é curto e trata do próprio PR. Uma proposta que vai além dele, como mudar o processo ou a integração contínua, ou reunir várias ideias com blocos de código, vira uma proposta escrita à parte, numa issue ou numa página, no formato que o repositório usa, e o comentário só traz o link.
 
@@ -173,6 +174,14 @@ Se você revisar um PR sem conferir o estado agora, a revisão chega depois do m
 1. Confira o estado no Passo 1, mesmo que a fila já o tenha conferido.
 2. Se mesclou ou fechou, pare e diga.
 3. Faça o mesmo com um PR com conflito de merge.
+
+### Comentário sem marcar a pessoa
+
+Se você escrever o primeiro nome e não o `@login` do GitHub, a pessoa não é avisada.
+
+1. Abra o comentário com o login que está no PR, com `@` na frente.
+2. Corrija o comentário já publicado.
+3. PR aberto por bot segue `Voz em PR aberto por bot` e não leva `@`.
 
 ### Ponto já dito repetido
 
@@ -253,6 +262,7 @@ Não achei Deve ter nem Deveria ter. Os dois nomes ficam como oportunidade. Apro
 - A `code-review` devolve categoria e confiança. Ambas são dado de trabalho, nunca texto.
 - Aprovação sem texto não conta como o que a pessoa escreveu revisando, ao levantar o idioma.
 - Um comentário que toca o mesmo trecho mas aponta outro problema não é um achado repetido.
+- O primeiro nome parece marcar a pessoa. Só `@` mais o login do GitHub avisa. PR aberto por bot segue `Voz em PR aberto por bot` e não leva `@`.
 - Uma review sem comentários inline não cobre um ponto de código: ele precisa de uma linha.
 - O corpo da review não repete o que está inline: diz só que deixou pontos, sem contar quantos.
 - A cópia separada é a trava: removê-la libera o repositório.
