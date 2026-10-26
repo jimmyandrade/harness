@@ -3,7 +3,7 @@ name: avaliar-atualizacoes-de-dependencia
 description: Use essa habilidade sempre que houver PR de atualização de dependência do Dependabot ou do Renovate para avaliar, testar ou mesclar, mesmo sem dizer o nome do bot. NÃO use para atualizar uma dependência à mão nem para PR que não seja de bot.
 metadata:
   author: jimmyandrade
-  version: "0.9.1"
+  version: "0.9.2"
   related:
     - evoluir-habilidade
     - criar-commit
@@ -152,7 +152,7 @@ A biblioteca era transitiva. A árvore levou ao pacote direto que a puxa, e os p
 - O autor de um PR parece dizer qual ferramenta o repositório usa. Um Renovate hospedado pelo projeto abre PRs com outro autor, e um bot pode ter PR aberto depois que a configuração dele saiu do repositório. Siga `Ferramentas de atualização de dependências` e, com `automático`, a configuração do repositório antes dos autores.
 
 - Depois que outra pessoa envia commit para a branch, o Dependabot para de fazer rebase dela e o Renovate para de atualizá-la. Daí em diante, quem mantém a branch em dia é você.
-- Uma mudança que depende do ambiente de execução, como bloquear algo no navegador, vale também para o ambiente dos testes, como jsdom. Confira o ambiente configurado para os testes.
+- Uma mudança que depende do ambiente de execução, como bloquear algo no navegador, vale também para o ambiente dos testes, como jsdom. Confira o ambiente configurado para os testes. O teste novo de um código que roda no servidor, como uma rota, usa o ambiente do servidor: num projeto com jsdom por padrão, declare o ambiente node no próprio arquivo de teste, porque bibliotecas de criptografia recusam os tipos do jsdom.
 - Alguns pacotes regravam arquivos versionados na instalação, como o script de service worker do msw. Depois de instalar, confira se a árvore de trabalho mudou e commite esses arquivos na branch do PR: o bot só muda o manifesto e o lockfile.
 - Uma atualização só de tipos pode quebrar a checagem de tipos e o build sem falhar nenhum teste. Rode o build mesmo com os testes verdes.
 - A instalação limpa apaga o que foi instalado dentro da pasta de dependências, como o navegador de testes. As suítes fora do `Comando de testes` podem pedir esse passo de novo, e também as variáveis de ambiente do projeto.
