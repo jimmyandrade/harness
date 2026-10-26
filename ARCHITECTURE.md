@@ -51,7 +51,7 @@ harness/
 └── TROUBLESHOOTING.md              # Failure diagnosis
 ```
 
-A business harness has the same `.agents/` layout with its own skills, mappings, and glossary, and `node_modules/harness` holding a pinned release of this repository. The vocabulary engine is in `vocabulary/` in this repository, as ADR 0018 decides, and a business harness reads it from `node_modules/harness/vocabulary`. A product repository of that business can instead set `Instalação do harness` to `global` and use the plugin already installed in the tool, without a dependency, a skills link, or plugin files of its own. That choice does not decide where the glossary lives. `INSTALL.md` explains the three choices.
+A business harness has the same `.agents/` layout with its own skills, mappings, and glossary, and `node_modules/harness` holding a pinned release of this repository. The vocabulary engine is in `vocabulary/` in this repository, as ADR 0018 decides, and a business harness reads it from `node_modules/harness/vocabulary`. `Forma do harness` chooses a business harness repository, an install inside a repository that already exists, or both, with the other repositories installing that business harness and the core. A repository whose install is `global` uses the plugin already installed in the tool and receives no dependency, skills link, or plugin files of its own. None of these choices decides where the glossary lives. `INSTALL.md` has the table.
 
 ## 2. High-Level System Diagram
 

@@ -16,18 +16,21 @@ Three choices stay separate. Mixing them puts files in the wrong place.
 |---|---|---|---|
 | Glossary | The language files, such as `pt-BR.json` | `Glossário no repositório atual` and `Pasta do glossário`, on `gravar-termos-no-vocabulario` | `sim`, so the files live in the open repository and can be pushed. `não` keeps them only on the computer, in `Pasta do glossário` |
 | Skills folder | The skills a repository chooses to store | None. A repository that stores skills keeps them in its skills folder. Core skills can also arrive through a link to the installed dependency, or through the tool's plugin | The repository's own folder, or the core install it already uses |
-| Harness install | The plugin, the dependency, the command line, and the MCP server | `Instalação do harness` and `Harness no repositório atual`, on `levantar-ambiente-do-repositorio` | `repositório` and `sim` |
+| Harness install | The plugin, the dependency, the command line, and the MCP server | `Forma do harness`, `Papel do repositório atual`, `Instalação do harness`, and `Harness no repositório atual`, on `levantar-ambiente-do-repositorio` | The form is empty. The role is `projeto`. The install is `repositório` and `Harness no repositório atual` is `sim` |
 
 The current repository is the one open in the session. Each project sets its own value in its project instructions. A business that wants the same choice in several repositories writes that same value in each of them. This repository does not copy the value from another repository.
 
-`Instalação do harness` is `repositório` or `global`.
+`Forma do harness` is the business choice. An empty value does not choose one, and the current repository then follows only `Instalação do harness`.
 
-- `repositório` allows the install in the current repository. Follow the runbook of the tool. `Harness no repositório atual` set to `não` blocks that install here and does not select a global one. Ask once where the harness for this work is, and stop.
-- `global` means the business uses the single install already present in the tool. Do not add the dependency, a skills link, plugin files, or the MCP server to the current repository. `Harness no repositório atual` set to `sim` does not add a second copy.
+| Form | What the business has | Role `harness` | Role `projeto` |
+|---|---|---|---|
+| `repositório próprio` | One business harness repository | This repository is that harness. `Instalação do harness` is `repositório`. Run `docs/runbooks/business-repository.md` | `Instalação do harness` is `global`. This repository does not receive a dependency, a skills link, plugin files, or the MCP server. It uses the plugin already installed in the tool |
+| `repositório existente` | No separate harness repository. The harness is installed in a repository that already exists, such as a site | Does not apply | `Instalação do harness` is `repositório`. The core skills serve the code workflow. The glossary may live in this repository, with `Glossário no repositório atual` at `sim`, when the copy should be pushed with the site |
+| `próprio e repositórios` | A business harness repository, and the other repositories install that harness together with the core | This repository is the business harness. `Instalação do harness` is `repositório` | `Instalação do harness` is `repositório`. Install the business harness and the core. `global` is the wrong value for this role |
 
-The business harness repository keeps the default. That repository is the harness, so `docs/runbooks/business-repository.md` still applies to it. A product repository of the same business sets `global` when it must not receive its own copy.
+`Instalação do harness` is still `repositório` or `global` for the current repository. `global` uses the install already present in the tool and adds no second copy here. `Harness no repositório atual` set to `não` only blocks this repository. It does not choose a form, and it does not mean `global`. A combination that the table does not list asks once and stops.
 
-A glossary may live inside a harness repository. The glossary directory is not the harness, and the harness is not the skills folder.
+A glossary may live inside a harness repository, inside the existing repository, or only on the computer. The glossary directory is not the harness, and the harness is not the skills folder.
 
 ## Runbooks
 

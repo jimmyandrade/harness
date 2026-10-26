@@ -6,7 +6,7 @@ locale: en
 
 Cursor reads skills from `.agents/skills` and `.cursor/skills` of the open project, and follows symbolic links. It does not look inside `node_modules`, so the core skills need a link. Run this runbook from the root of the project, after `npm ci`.
 
-Read `Instalação do harness` in the project instructions. `INSTALL.md` explains the choice. When the value is `global`, stop. The harness is the plugin already installed in the tool, and this repository does not receive the links below. When `Harness no repositório atual` is `não`, stop as well. That value does not mean the install is global. When the key is absent, the install is `repositório` and the steps below apply.
+Read `Forma do harness`, `Papel do repositório atual`, and `Instalação do harness`. `INSTALL.md` has the table. Stop when the install is `global` or `Harness no repositório atual` is `não`: this repository does not receive the links below, and `não` does not mean the install is global. When the form is `repositório próprio` and the role is `projeto`, the install is `global`. When the form is `repositório existente`, continue and install the core in this repository. When the form is `próprio e repositórios` and the role is `projeto`, continue and install the business harness as well as the core. When the form is absent, the install is `repositório` and the steps below apply.
 
 Each step ends with a check.
 

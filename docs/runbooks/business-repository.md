@@ -6,7 +6,7 @@ locale: en
 
 A business harness is its own repository. It keeps its skills, glossary, and mappings, and takes the checker, the skill graph, and the shared skills from this repository. Its layout is in `ARCHITECTURE.md`. Run this runbook once per business repository, from its root. The other runbooks start where this one ends.
 
-This repository keeps `Instalação do harness` at `repositório`, the default. It is the harness. A product repository of the same business sets `global` when it must use the tool's install and not receive its own copy. `INSTALL.md` explains the glossary, the skills folder, and the harness install as three separate choices.
+Run this runbook when `Papel do repositório atual` is `harness`, for `Forma do harness` of `repositório próprio` or `próprio e repositórios`. `Instalação do harness` is `repositório`. Do not run it for `repositório existente`: that install lives in the repository that is already open. For `repositório próprio`, the other repositories set `global`. For `próprio e repositórios`, the other repositories install this business harness and the core. `INSTALL.md` has the table, including the glossary and the skills folder.
 
 Each step ends with a check. Stop at the first check that fails and read `TROUBLESHOOTING.md`.
 

@@ -6,7 +6,7 @@ locale: en
 
 Codex reads the same `.claude-plugin/marketplace.json` and `.claude-plugin/plugin.json` as Claude Code, as `docs/adr/0011-publish-the-plugin-to-codex-and-cursor-from-the-claude-code-manifests.md` decides. A business marketplace lists the business plugin and `core`, pinned to the same tag. A project that only uses the core adds the marketplace of this repository. Each machine adds the marketplace and installs the plugins once. Run this runbook from the root of the project.
 
-Read `Instalação do harness` in the project instructions. `INSTALL.md` explains the choice. When the value is `global`, stop. The harness is the plugin already installed in the tool, and this repository does not receive another install. When `Harness no repositório atual` is `não`, stop as well. That value does not mean the install is global. When the key is absent, the install is `repositório` and the steps below apply.
+Read `Forma do harness`, `Papel do repositório atual`, and `Instalação do harness`. `INSTALL.md` has the table. Stop when the install is `global` or `Harness no repositório atual` is `não`: this repository does not receive another install, and `não` does not mean the install is global. When the form is `repositório próprio` and the role is `projeto`, the install is `global`. When the form is `repositório existente`, continue and install the core in this repository. When the form is `próprio e repositórios` and the role is `projeto`, continue and install the business harness as well as the core. When the form is absent, the install is `repositório` and the steps below apply.
 
 Each step ends with a check.
 
