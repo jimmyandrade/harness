@@ -51,6 +51,12 @@ Funcionalidade: Ler caixa, DRE, fluxo, auditoria e preço
       Então a DRE e o fluxo de caixa trazem só esse intervalo
       Mas não pergunta o intervalo
 
+    Exemplo: Rótulo do resultado fora do mês
+      Dado que a pessoa pede o fluxo de caixa de 05/10/2026 a 18/10/2026
+      Quando a skill gera a saída
+      Então a linha do resultado se chama "Resultado do intervalo"
+      Mas não se chama "Resultado do mês"
+
     Exemplo: Mês dividido por semana
       Dado que "Apelidos de intervalo" tem "semana" e "mês"
       Quando a pessoa pede o fluxo de caixa do mês por semana
