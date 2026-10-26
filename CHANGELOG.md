@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.13.0](https://github.com/jimmyandrade/harness/compare/v1.12.0...v1.13.0) (2026-10-26)
+
+
+### Features
+
+* **avaliar-atualizacoes-de-dependencia:** group related packages in the bot configuration ([#513](https://github.com/jimmyandrade/harness/issues/513)) ([5d16d74](https://github.com/jimmyandrade/harness/commit/5d16d74e35e8f77276c4cd0afc48cd28fd1fa777))
+
 ## [1.12.0](https://github.com/jimmyandrade/harness/compare/v1.11.1...v1.12.0) (2026-10-26)
 
 
