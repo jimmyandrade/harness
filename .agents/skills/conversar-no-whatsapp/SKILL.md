@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.7.0"
+  version: "0.8.0"
   related:
     - comunicar-novidade-do-produto
     - definir-agenda
@@ -18,12 +18,13 @@ metadata:
 
 ## Parâmetros de configuração
 
-Leia os valores nas instruções do projeto, na entrada desta habilidade. Na ausência, use os padrões abaixo.
+Leia os valores nas instruções do projeto, na entrada desta habilidade. Na ausência, use os padrões abaixo. `Mensagem única para` lista os tipos de mensagem que vão numa mensagem só, como um status de demanda para alguém do time.
 
 ```yaml
 "Formato da data com dia da semana": "terça-feira, 01/09/2026"
 "Modo de aprendizado": "perguntar"
 "Etiqueta das conversas": ""
+"Mensagem única para": []
 ```
 
 ## Instruções
@@ -66,7 +67,7 @@ Para registrar a demanda, leve a data e o horário da primeira mensagem do pedid
 
 Todo rascunho de mensagem aparece no chat, com o texto inteiro, para a pessoa conferir. Não diga só que o rascunho está pronto. Quando o cliente desenha widget, mostre o rascunho num widget com o destinatário, o texto editável, um botão para copiar e um botão que manda o texto aprovado de volta ao chat. Sem widget, mostre o texto num bloco de código, que preserva a formatação do WhatsApp ao copiar. Se a pessoa editar, o texto dela substitui o rascunho.
 
-No WhatsApp, as pessoas mandam o texto em várias mensagens curtas, não num bloco só. Divida o rascunho em mensagens, uma por ideia, e mostre cada uma separada, com o próprio campo editável no widget ou o próprio bloco de código. Envie na mesma ordem, uma de cada vez. Comunicado ou anúncio de produto é a exceção: vai numa mensagem só, como `comunicar-novidade-do-produto` manda. Escreva o comunicado com essa habilidade, não aqui. Um pedido ou uma lista de pendências que acompanha o anúncio é outro assunto e vai em outra mensagem, depois do comunicado.
+No WhatsApp, as pessoas mandam o texto em várias mensagens curtas, não num bloco só. Divida o rascunho em mensagens, uma por ideia, e mostre cada uma separada, com o próprio campo editável no widget ou o próprio bloco de código. Envie na mesma ordem, uma de cada vez. Um rascunho de um tipo listado em `Mensagem única para` vai numa mensagem só, com uma linha em branco entre as ideias. Comunicado ou anúncio de produto também é exceção: vai numa mensagem só, como `comunicar-novidade-do-produto` manda. Escreva o comunicado com essa habilidade, não aqui. Um pedido ou uma lista de pendências que acompanha o anúncio é outro assunto e vai em outra mensagem, depois do comunicado.
 
 Para responder ou enviar, mostre a conversa de destino, o texto exato e, se for resposta, a mensagem citada. Envie só depois do sim da pessoa a esse texto e a essa conversa. O sim vale para uma mensagem. Outra mensagem pede outro sim.
 
