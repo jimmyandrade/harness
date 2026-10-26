@@ -3,7 +3,7 @@ name: avaliar-atualizacoes-de-dependencia
 description: Use essa habilidade sempre que houver PR de atualização de dependência do Dependabot ou do Renovate para avaliar, testar ou mesclar, mesmo sem dizer o nome do bot. NÃO use para atualizar uma dependência à mão nem para PR que não seja de bot.
 metadata:
   author: jimmyandrade
-  version: "0.9.0"
+  version: "0.9.2"
   related:
     - evoluir-habilidade
     - criar-commit
@@ -76,7 +76,7 @@ flowchart LR
   D -->|vermelho| F[Pare e mostre a falha]
 ```
 
-Os checks da base são os do commit de merge, de qualquer serviço: workflow, deploy ou outro. A fila termina quando não sobra PR de nenhum dos `Autores dos bots`.
+Os checks da base são os do commit de merge, de qualquer serviço: workflow, deploy ou outro. Um PR que o bot mescla sozinho, pelo automerge da configuração dele, pode entrar antes da vez dele e sem a sua avaliação. Ele sai da fila como mesclado pelo bot: confira os checks do commit de merge na base, como num merge seu, e diga na fila que ele entrou sem avaliação. Não reverta nem reabra. Se os checks ficarem vermelhos, pare e mostre a falha. A fila termina quando não sobra PR de nenhum dos `Autores dos bots`.
 
 ### Passo 8
 
@@ -137,6 +137,7 @@ A biblioteca era transitiva. A árvore levou ao pacote direto que a puxa, e os p
 ## Casos-limite
 
 - O bot já substituiu o PR por um mais novo do mesmo pacote: siga o mais novo.
+- O bot mesclou um PR sozinho, por automerge: ele sai da fila sem avaliação, e você confere os checks do commit de merge na base, como diz o Passo 7.
 - O PR agrupa vários pacotes: faça os passos 2 a 4 para cada um. Um pacote 0.x do grupo pode quebrar ao subir o minor: leia as notas dele à parte.
 - A atualização de major espera aprovação no painel de dependências e ainda não virou PR: fica fora da fila.
 - Dois PRs conflitam depois de um merge e a ordem fica ambígua: pergunte à pessoa.
@@ -151,7 +152,7 @@ A biblioteca era transitiva. A árvore levou ao pacote direto que a puxa, e os p
 - O autor de um PR parece dizer qual ferramenta o repositório usa. Um Renovate hospedado pelo projeto abre PRs com outro autor, e um bot pode ter PR aberto depois que a configuração dele saiu do repositório. Siga `Ferramentas de atualização de dependências` e, com `automático`, a configuração do repositório antes dos autores.
 
 - Depois que outra pessoa envia commit para a branch, o Dependabot para de fazer rebase dela e o Renovate para de atualizá-la. Daí em diante, quem mantém a branch em dia é você.
-- Uma mudança que depende do ambiente de execução, como bloquear algo no navegador, vale também para o ambiente dos testes, como jsdom. Confira o ambiente configurado para os testes.
+- Uma mudança que depende do ambiente de execução, como bloquear algo no navegador, vale também para o ambiente dos testes, como jsdom. Confira o ambiente configurado para os testes. O teste novo de um código que roda no servidor, como uma rota, usa o ambiente do servidor: num projeto com jsdom por padrão, declare o ambiente node no próprio arquivo de teste, porque bibliotecas de criptografia recusam os tipos do jsdom.
 - Alguns pacotes regravam arquivos versionados na instalação, como o script de service worker do msw. Depois de instalar, confira se a árvore de trabalho mudou e commite esses arquivos na branch do PR: o bot só muda o manifesto e o lockfile.
 - Uma atualização só de tipos pode quebrar a checagem de tipos e o build sem falhar nenhum teste. Rode o build mesmo com os testes verdes.
 - A instalação limpa apaga o que foi instalado dentro da pasta de dependências, como o navegador de testes. As suítes fora do `Comando de testes` podem pedir esse passo de novo, e também as variáveis de ambiente do projeto.
