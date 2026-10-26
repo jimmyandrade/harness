@@ -3,7 +3,7 @@ name: pedir-revisao-de-pr-no-slack
 description: Redige o pedido de revisão de um pull request para o canal do time no Slack e entrega o rascunho com o link da thread, usando enviar-mensagem-no-slack. Usada quando o PR está pronto e a organização pede revisão pelo Slack, ou quando a pessoa pede apoio para revisar. Não serve para revisar o PR nem para outra mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   related:
     - criar-pull-request
     - enviar-mensagem-no-slack
@@ -24,6 +24,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Linha do card": ""
 "Quem acompanha": []
 "Exigir card": "sim"
+"Autorrevisar o diff antes de pedir": "não"
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -33,7 +34,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ### Passo 1
 
-Leia o PR: estado, rascunho, rótulos, título, descrição, checks e comentários. Se o PR está fechado ou mesclado, pare e diga isso. Se está em rascunho, ou falta o `Rótulo de pronto para revisão` quando o projeto o usa, não peça revisão: diga o que falta e pare. Um PR que a própria descrição marca como não pronto também não vai a pedido.
+Leia o PR: estado, rascunho, rótulos, título, descrição, checks e comentários. Se o PR está fechado ou mesclado, pare e diga isso. Se está em rascunho, ou falta o `Rótulo de pronto para revisão` quando o projeto o usa, não peça revisão: diga o que falta e pare. Um PR que a própria descrição marca como não pronto também não vai a pedido. Com `Autorrevisar o diff antes de pedir` em `sim`, leia o diff na interface do GitHub como se fosse de outra pessoa e procure `console.log` esquecido, comentário residual, código morto e teste redundante. Diga o que achou e peça para a pessoa corrigir antes do pedido.
 
 ### Passo 2
 

@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.42.0"
+  version: "0.43.0"
   related:
     - definir-agenda-de-popstar
     - definir-convidado
@@ -42,7 +42,10 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
   - "amizades"
   - "descanso"
 "Habilidade de tom de voz": ""
+"Pauta obrigatória em evento com convidados": "não"
 ```
+
+`Pauta obrigatória em evento com convidados` em `sim` exige a pauta na descrição.
 
 ## Instruções
 
@@ -152,6 +155,8 @@ flowchart LR
 ```
 
 O título serve à busca humana e por IA. Leva o nome canônico mais buscável do evento, da oportunidade, da organização ou da reunião. Quando couber, leva edição, data, cidade e contexto curto. «Reservado», «o evento», «Reunião» e «Feira» sem qualificador não entram. Provisório pode começar com «Reservado para» ou «A confirmar» e leva o nome canônico do contexto. Convidada, convidado ou organização de fora: o título segue a `Habilidade de tom de voz`, quando as instruções do projeto a indicarem. A descrição leva o link da página canônica, uma frase do que o evento é, e só a variação que ajuda a achar: acento, sigla, apelido, grupo, edição, venue, cidade, tipo, organização, status e papel da empresa. Desambiguação curta se for um negócio e não um ponto de contato. Não alongue o que a propriedade já guarda. Criatividade não troca o campo estruturado. Reunião sem modalidade: pergunte. Remota: crie o Google Meet. Presencial: não crie.
+
+Com `Pauta obrigatória em evento com convidados` em `sim`, a descrição de um evento com convidados leva uma pauta clara. Sem pauta na conversa, pergunte antes de criar. Num evento de que a pessoa só participa e que não tem pauta, sugira acrescentá-la e só edite com confirmação. Confira horário e detalhes do evento na ferramenta de agenda, não pela fala da pessoa.
 
 ### Passo 11
 
@@ -275,7 +280,6 @@ Conferi a grafia. O título usou o nome canônico e o papel do encontro. A descr
 - O tipo segue `definir-tipo-do-evento`. Sem clareza, pare. Não crie nem altere. Grave só negócio, compromisso interno, prazo e entrega.
 - Sem nome, data, organização, oportunidade relacionada ou outro identificador mínimo: peça. Não crie.
 - O evento provável já na agenda: atualize. Não duplique.
-- Dúvida razoável: mostre o que encontrou e confirme antes de criar outro.
 - O pedido é saber o que já está no dia ou na semana: pare e siga `procurar-agenda`.
 - O pedido é agenda de popstar, agenda reversa ou proteção de vida: pare e siga `definir-agenda-de-popstar`.
 - O pedido é auditar o uso do tempo ou avaliar o conjunto da obra: pare e siga `revisar-uso-do-tempo`.
@@ -295,7 +299,6 @@ Conferi a grafia. O título usou o nome canônico e o papel do encontro. A descr
 
 ## Pegadinhas
 
-- Feriado, sábado e domingo parecem dia útil desta habilidade. A jornada segue `definir-jornada-de-producao`.
 - O número no meio do passo parece o lugar da edição. O valor mora no bloco `yaml` de `Parâmetros de configuração`.
 - A data numérica parece bastar. O texto leva o dia da semana, calculado com a data, o horário e o fuso. O campo estruturado continua válido.
 - O ponto de contato parece caber na agenda removida. O destino é a agenda editável de `organizar-ponto-de-contato`.
@@ -306,10 +309,8 @@ Conferi a grafia. O título usou o nome canônico e o papel do encontro. A descr
 - Sincronizar uma oportunidade parece permissão para cadastrá-la. A agenda recebe a cópia. Criar a oportunidade segue `definir-tipo-do-evento`.
 - «Feira» ou «Reunião» sozinhos parecem título. A busca precisa do nome canônico. O evento externo segue o Passo 10. Não peça para nomear a habilidade.
 - Pedir permissão parece cuidado. O dia nomeado já se grava. Saída confirmada sem hora parece detalhe, mas causa atraso.
-- Agenda de popstar, agenda reversa, proteção de vida e uso do tempo parecem parte do evento. Cada um segue o flowchart do Passo 1.
-- Classificar o tipo parece parte de gravar. A fonte do tipo é `definir-tipo-do-evento`. Esta habilidade grava negócio, compromisso interno, prazo e entrega.
 - Título diferente parece evento novo. A busca usa variação de nome, não só o título exato. Na dúvida, mostre e confirme.
-- O título que cita o nome de uma agenda aposentada parece essa agenda. O aviso usa o calendário. A sugestão de mover usa a agenda padrão. O evento novo não entra nesse calendário.
+- O título que cita o nome de uma agenda aposentada parece essa agenda. O aviso usa o calendário.
 
 ## Scripts disponíveis
 
