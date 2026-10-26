@@ -16,3 +16,12 @@ Funcionalidade: Pacotes relacionados atualizados juntos
         | Renovate   | automático | um PR à parte grava o grupo em `packageRules`, com `groupName`            |
         | Dependabot | perguntar  | a pessoa recebe a proposta de grupo em `groups`                           |
         | Dependabot | automático | um PR à parte grava o grupo em `groups`                                   |
+
+  Regra: o grupo vai só para as ferramentas que o repositório usa
+
+    Exemplo: o repositório só tem a configuração do Dependabot
+      Dado que `Ferramentas de atualização de dependências` é automático
+      E que o repositório tem só o arquivo `.github/dependabot.yml`
+      Quando a habilidade agrupa um pacote com a peer dependency dele
+      Então o grupo fica em `groups` no `.github/dependabot.yml`
+      E nenhuma configuração do Renovate é criada

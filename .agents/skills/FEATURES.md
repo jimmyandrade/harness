@@ -54,6 +54,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Properties**:
   - Lives at `.agents/skills/avaliar-atualizacoes-de-dependencia/SKILL.md`
   - Reads the bot authors, the install, test, and build commands, and the reviewers from the project instructions
+  - Reads which dependency update tools the repository uses from a global parameter, or finds them from the Renovate and Dependabot configuration files when it is automatic, the default
   - Walks a transitive package up to the direct one before looking for call sites and tests
   - Reads the release notes of the range and stops for the person on a breaking change without a clear migration
   - Checks how far the bot's branch is behind the base and asks the bot to rebase when needed
@@ -69,6 +70,7 @@ How these skills relate is in `README.md`, in this folder.
   - [ ] Three open bot pull requests are handled oldest first, each merged only after the previous one turned the base branch green
   - [ ] An update to a transitive package finds the call sites of the direct package
   - [ ] A package whose peer dependency waits in another update is grouped with it in the bot configuration before the merge
+  - [ ] A repository with only a Dependabot configuration gets the group only in the Dependabot configuration
 
 ### comunicar-novidade-do-produto
 - **Stability**: experimental

@@ -3,7 +3,7 @@ name: avaliar-atualizacoes-de-dependencia
 description: Use essa habilidade sempre que houver PR de atualização de dependência do Dependabot ou do Renovate para avaliar, testar ou mesclar, mesmo sem dizer o nome do bot. NÃO use para atualizar uma dependência à mão nem para PR que não seja de bot.
 metadata:
   author: jimmyandrade
-  version: "0.8.0"
+  version: "0.9.0"
   related:
     - evoluir-habilidade
     - criar-commit
@@ -19,6 +19,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 ```yaml
 # `Repositório` vem do remoto `origin` quando as instruções não dizem.
 "Repositório": ""
+# `Ferramentas de atualização de dependências` é `automático`, que descobre as ferramentas pelo repositório, ou uma lista com `Renovate`, `Dependabot` ou os dois. Uma lista vazia diz que o repositório não usa nenhuma.
+"Ferramentas de atualização de dependências": "automático"
 "Autores dos bots":
   - "app/dependabot"
   - "app/renovate"
@@ -36,7 +38,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ### Passo 1
 
-Liste os PRs abertos de cada um dos `Autores dos bots`, do mais antigo ao mais novo. Mostre a fila como checklist na conversa e atualize a cada PR. Trate um PR por vez, sempre o mais antigo.
+Veja quais são as `Ferramentas de atualização de dependências`. Com `automático`, procure a configuração no repositório: `renovate.json`, `.renovaterc`, `.github/renovate.json` ou a chave `renovate` no `package.json` indicam o Renovate, e `.github/dependabot.yml` indica o Dependabot. Sem configuração, use os autores dos PRs abertos. Diga na fila quais ferramentas valem e de onde veio a resposta. Com a lista vazia e nenhum PR de bot, a fila está vazia: diga isso e encerre. Liste os PRs abertos de cada um dos `Autores dos bots`, do mais antigo ao mais novo. Mostre a fila como checklist na conversa e atualize a cada PR. Trate um PR por vez, sempre o mais antigo.
 
 ### Passo 2
 
@@ -46,7 +48,7 @@ Mude para a branch do PR e veja quantos commits ela está atrás da base. Se est
 
 Compare a versão que o PR traz com a mais recente do pacote direto. Leia as notas de cada versão do intervalo do PR, no repositório do pacote. Num salto grande, a descrição do PR do bot corta as versões mais antigas. Sem notas nem repositório público, compare a API pública das duas versões, como os arquivos de tipos. Aponte breaking change, correção de segurança e exigência de peer dependency. Breaking change sem migração clara no projeto para a fila: pergunte à pessoa. Se as notas mudam retry, timeout ou prazo, meça o caminho degradado do projeto antes e depois e leve o número para a análise.
 
-Confira se o pacote anda junto com outros, como os tipos, a peer dependency ou outro pacote do mesmo repositório de origem, e se algum deles espera atualização noutro PR ou no painel de dependências do bot. Se esperar, o PR para na fila e o agrupamento segue `Agrupar pacotes relacionados`. Com `perguntar`, proponha o agrupamento e espere a resposta. Com `automático`, abra sem perguntar um PR à parte com a regra, seguindo `criar-commit` e `criar-pull-request`. No Renovate, a regra é uma entrada em `packageRules` com `matchSourceUrls` ou `matchPackageNames` e `groupName`. No Dependabot, é um grupo em `groups` com `patterns`. Com os dois bots, grave nos dois. A regra fica na configuração do bot no próprio repositório, nunca num preset compartilhado. O merge desse PR espera o sim da pessoa. Depois dele, peça ao bot uma nova execução, como a caixa no painel de dependências, e siga o PR agrupado.
+Confira se o pacote anda junto com outros, como os tipos, a peer dependency ou outro pacote do mesmo repositório de origem, e se algum deles espera atualização noutro PR ou no painel de dependências do bot. Se esperar, o PR para na fila e o agrupamento segue `Agrupar pacotes relacionados`. Com `perguntar`, proponha o agrupamento e espere a resposta. Com `automático`, abra sem perguntar um PR à parte com a regra, seguindo `criar-commit` e `criar-pull-request`. No Renovate, a regra é uma entrada em `packageRules` com `matchSourceUrls` ou `matchPackageNames` e `groupName`. No Dependabot, é um grupo em `groups` com `patterns`. Grave a regra na configuração de cada uma das `Ferramentas de atualização de dependências`, e só nelas. A regra fica na configuração do bot no próprio repositório, nunca num preset compartilhado. O merge desse PR espera o sim da pessoa. Depois dele, peça ao bot uma nova execução, como a caixa no painel de dependências, e siga o PR agrupado.
 
 ### Passo 4
 
@@ -111,7 +113,7 @@ Se você mesclar o PR de um pacote enquanto a peer dependency ou outro pacote do
 
 1. Confira os PRs abertos e o painel de dependências do bot.
 2. Pare a fila e siga `Agrupar pacotes relacionados`.
-3. Grave a regra na configuração do bot do próprio repositório, no Renovate e no Dependabot quando o projeto usa os dois.
+3. Grave a regra na configuração de cada uma das `Ferramentas de atualização de dependências`, no próprio repositório.
 
 ### Teste num PR separado
 
@@ -145,6 +147,8 @@ A biblioteca era transitiva. A árvore levou ao pacote direto que a puxa, e os p
 - O PR agrupado substitui o PR antigo do pacote: siga o agrupado, como num PR substituído pelo bot.
 
 ## Pegadinhas
+
+- O autor de um PR parece dizer qual ferramenta o repositório usa. Um Renovate hospedado pelo projeto abre PRs com outro autor, e um bot pode ter PR aberto depois que a configuração dele saiu do repositório. Siga `Ferramentas de atualização de dependências` e, com `automático`, a configuração do repositório antes dos autores.
 
 - Depois que outra pessoa envia commit para a branch, o Dependabot para de fazer rebase dela e o Renovate para de atualizá-la. Daí em diante, quem mantém a branch em dia é você.
 - Uma mudança que depende do ambiente de execução, como bloquear algo no navegador, vale também para o ambiente dos testes, como jsdom. Confira o ambiente configurado para os testes.
