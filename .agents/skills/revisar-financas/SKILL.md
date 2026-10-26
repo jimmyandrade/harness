@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.2"
+  version: "0.3.0"
   related:
     - definir-lancamento
     - definir-planejamento-financeiro
@@ -19,11 +19,13 @@ metadata:
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Moeda` é a moeda das tabelas. `Habilidade de projeção de caixa` vazia quer dizer que a projeção do caixa fica fora desta habilidade.
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Moeda` é a moeda das tabelas. `Habilidade de projeção de caixa` vazia quer dizer que a projeção do caixa fica fora desta habilidade. `Períodos do resultado` lista os períodos que o negócio usa, `mês` e `semana`. `Início da semana` é o dia em que a semana começa.
 
 ```yaml
 "Moeda": "BRL"
 "Habilidade de projeção de caixa": ""
+"Períodos do resultado": ["mês", "semana"]
+"Início da semana": "segunda-feira"
 ```
 
 ## Instruções
@@ -43,6 +45,18 @@ flowchart LR
 ```
 
 ### Passo 2
+
+O período é escolha de cada pedido, não do negócio: a mesma pessoa pode pedir o resultado da semana e, no fim do mês, o do mês.
+
+```mermaid
+flowchart LR
+  P{O pedido diz o período?} -->|sim| U[Use esse período]
+  P -->|não| L{Quantos em Períodos do resultado?}
+  L -->|mais de um| Q[Pergunte se é o semanal ou o mensal]
+  L -->|um| D[Use esse e diga qual usou]
+```
+
+Pergunte antes de ler a fonte. A semana começa no `Início da semana`, e o título da saída diz o primeiro e o último dia, com o dia da semana. O mês dividido por semana traz uma coluna por semana e o total do mês.
 
 A leitura usa o que a fonte já tem. Não refaça os controles do zero e não invente venda, gasto, saldo ou margem. Dado que falta para a conta: pare e peça. A resposta começa por tabelas de entradas, saídas, saldos, resultados ou estoque, na `Moeda`. Depois vêm resumo curto, alertas e orientações práticas.
 
@@ -92,6 +106,14 @@ Li o que já estava lançado. A tabela trouxe entradas, saídas e saldo, na `Moe
 
 A DRE saiu no modelo, com meses e total anual. O fluxo saiu no modelo, com saldo inicial, recebimentos, pagamentos, resultado do mês e saldo final acumulado. Célula sem fonte ficou vazia.
 
+### faz o resultado financeiro pra mim
+
+O pedido não disse o período, e o projeto usa o mês e a semana. Perguntei se era o semanal ou o mensal antes de ler a fonte.
+
+### qual foi o resultado da semana passada?
+
+A DRE e o fluxo saíram só dessa semana, com o título de segunda-feira, 19/10/2026, a domingo, 25/10/2026. Não perguntei o período, porque o pedido já disse.
+
 ### sugira o preço desta peça
 
 Não havia margem desejada. Perguntei. Não inventei o custo.
@@ -102,12 +124,15 @@ Não havia margem desejada. Perguntei. Não inventei o custo.
 - Registrar venda ou gasto: `definir-lancamento`. A lista de estoque: `gerenciar-estoque`. Mês à frente: `definir-planejamento-financeiro`. Projeção do caixa: a `Habilidade de projeção de caixa`, quando as instruções do projeto a indicarem.
 - Sem dado para a margem: não calcule. Sem margem desejada: pergunte antes de sugerir o preço.
 - Auditoria sem dado suficiente: diga o que falta. Não estime as três partes.
+- Pedido sem período e mais de um em `Períodos do resultado`: pergunte. Um período só na lista: use esse e diga qual usou.
+- Semana que atravessa a virada do mês: ela entra inteira no mês em que começa, e o título diz as duas datas.
 
 ## Pegadinhas
 
 - DRE simplificada parece outra conta. O modelo é a estrutura com meses e total anual. A explicação é que fica simples.
 - A projeção do caixa parece este fluxo. Ela segue a `Habilidade de projeção de caixa`, quando as instruções do projeto a indicarem.
 - Preço parece sair do custo sozinho. Sem a margem desejada, pergunte. Não invente.
+- O mês parece o período de sempre. Sem período no pedido e com mais de um na lista, pergunte.
 
 ## Scripts disponíveis
 
