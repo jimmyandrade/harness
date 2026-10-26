@@ -3,7 +3,7 @@ name: evoluir-habilidade
 description: Use essa habilidade sempre que for testar uma skill, alterá-la a pedido ou evoluir as instruções do projeto, mesmo sem dizer evoluir, inclusive o Gherkin e a comparação com e sem skill, resultado inconsistente, falha de chamada ou correção da pessoa. NÃO use para criar a primeira versão, só ver se a descrição dispara, só revisar sem executar, nem gravar a página no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.24.0"
+  version: "0.24.1"
   related:
     - criar-commit
     - criar-pull-request
@@ -90,7 +90,7 @@ Proponha um script testado uma vez. Com o aceite, grave em `scripts/` quando só
 
 ### Passo 7
 
-Quando outra habilidade chega aqui ao terminar, siga `Modo de aprendizado`. Com `não`, encerre. Com `perguntar`, pergunte uma vez se a pessoa quer registrar as lições da execução. Com `sim`, ou com a resposta sim, grave cada lição como um commit numa branch com nome em inglês e envie a branch. No primeiro commit, abra um PR em rascunho e, a cada lição, atualize a descrição dele. Tire do rascunho quando a pessoa encerrar a sequência.
+Quando outra habilidade chega aqui ao terminar, siga `Modo de aprendizado`. Com `não`, encerre. Com `perguntar`, pergunte uma vez se a pessoa quer registrar as lições da execução. Com `sim`, ou com a resposta sim, grave cada lição como um commit numa branch com nome em inglês e envie a branch. No primeiro commit, abra um PR em rascunho seguindo `criar-pull-request`, que já leva a pessoa atribuída e o rótulo no comando, e, a cada lição, atualize a descrição dele. Tire do rascunho quando a pessoa encerrar a sequência.
 
 ## Problemas comuns
 
