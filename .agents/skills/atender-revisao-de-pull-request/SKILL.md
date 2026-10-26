@@ -1,9 +1,9 @@
 ---
 name: atender-revisao-de-pull-request
-description: Atende a revisão recebida num pull request, de pessoa ou de bot. Lê os comentários abertos, classifica cada sugestão, aplica o que é seguro, responde de preferência num comentário inline e resolve as threads atendidas. Sem PR informado, lista os seus que precisam de atenção. Não serve para revisar o PR de outra pessoa nem para abrir o PR.
+description: Atende a revisão recebida num pull request, de pessoa ou de bot. Lê os comentários abertos, classifica cada sugestão, aplica o que é seguro e pede a resposta a `publicar-resposta-de-revisao`. Sem PR informado, lista os seus que precisam de atenção. Não serve para revisar o PR de outra pessoa nem para abrir o PR.
 metadata:
   author: jimmyandrade
-  version: "0.20.0"
+  version: "0.21.0"
   aliases:
     - resolver-comentarios-de-revisao
     - apply-pr-review
@@ -15,6 +15,7 @@ metadata:
     - levantar-ambiente-do-repositorio
     - levantar-contexto-do-pull-request
     - priorizar-itens
+    - publicar-resposta-de-revisao
     - publicar-revisao-de-codigo
 ---
 
@@ -26,8 +27,6 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 ```yaml
 # `Repositório` vem do remoto `origin` quando as instruções não dizem.
 "Repositório": ""
-# `Idioma da resposta à revisão` nomeia o idioma da resposta. O valor `o idioma do comentário` faz cada resposta sair no idioma daquele comentário.
-"Idioma da resposta à revisão": "inglês"
 # `Modo de execução` é `interativo`, com a pessoa na frente, ou `agendado`, sem ninguém.
 "Modo de execução": "interativo"
 # `Aplicar em execução agendada` é `estrutural`, que aplica só o estrutural, ou `não`, que não aplica nada e deixa tudo no resumo.
@@ -38,16 +37,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Régua de mudança de comportamento": ""
 # `Lentes de revisão` lista critérios que você aplica ao decidir, sem citá-los na resposta.
 "Lentes de revisão": ""
-# `Ler o texto antes de publicar`: `sim` mostra a resposta a outra pessoa e espera o sim. `não` publica na hora, inclusive um ajuste pedido depois.
-"Ler o texto antes de publicar": "sim"
 "Pedir nova revisão ao final": "sim"
-# `Fechar conversa com a confiança` em `sim` faz a mensagem que fecha uma conversa dizer o quanto você tem de confiança de que o ponto foi resolvido.
-"Fechar conversa com a confiança": "não"
-# `Número da confiança` é o número que entra na frase de `Fechar conversa com a confiança`. Sem valor, a frase não traz número.
-"Número da confiança": ""
-"Linkar as fontes da explicação": "sim"
-# `Rótulo de prioridade no texto` em `não` mantém o nome da categoria fora das respostas.
-"Rótulo de prioridade no texto": "não"
 # `Idioma do relatório` e `Agrupar o relatório por prioridade` mandam no relatório final.
 "Idioma do relatório": "o idioma da conversa"
 # `Idioma do relatório` e `Agrupar o relatório por prioridade` mandam no relatório final.
@@ -55,9 +45,6 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Recriar PR aberto por agente de código": "não"
 "Modo de aprendizado": "perguntar"
 ```
-Comentário de self review, da mesma pessoa que pediu o atendimento, recebe a resposta na hora, com o que mudou, as linhas alteradas e o commit.
-A mensagem do bot é lida, respondida e considerada.
-A resposta a ele é publicada sem esperar que a pessoa leia esse texto antes.
 ## Instruções
 
 ### Passo 1
@@ -98,38 +85,7 @@ Se a decisão vale além deste PR, grave a lição nas instruções do projeto e
 
 ### Passo 6
 
-Responda no idioma de `Idioma da resposta à revisão`.
-A resposta preferida é um comentário inline no trecho do diff que a decisão muda, mesmo quando quem revisou só escreveu no corpo da revisão.
-Sem thread, abra uma revisão sua com esse comentário na linha.
-A conversa do PR fica para o que não tem linha no diff.
-Com esse parâmetro em `o idioma do comentário`, a resposta sai no idioma do comentário.
-A resposta diz o que mudou.
-Quando o texto mudou, ela mostra as linhas alteradas num bloco, com o que saiu e o que entrou.
-Ela cita o commit pelo SHA curto linkado, como `[`abc1234`](URL do commit)`, ou diz por que não muda. Toda thread tratada fica com uma resposta registrada, inclusive a de bot e a decidida fora do PR. Comentário desatualizado ganha a explicação do que mudou desde então. Discordância e fora de escopo viram pergunta, nunca veredito. A resposta a outra pessoa abre com o login do GitHub dela em `@login`, trata do ponto que ela escreveu, retoma a ideia dela e diz o que mudou, e nunca é uma fórmula colada. Quem mais entra no ponto também leva `@login`. O primeiro nome sozinho não marca a pessoa. Bot não leva `@`. Self review não marca quem está respondendo. Com `Rótulo de prioridade no texto` em `não`, o nome da categoria nunca aparece.
-
-Com `Linkar as fontes da explicação` em `sim`, a resposta que explica ou defende uma escolha, como uma exceção, uma recusa ou um motivo, linka a fonte de cada afirmação. A fonte do código é o link do trecho no commit atual do PR, com o SHA e as linhas, e a de uma regra é o documento, a decisão de arquitetura ou a conversa onde ela está. Uma afirmação sem fonte que você leu vira inferência, e a resposta diz isso. Não explique de memória.
-
-Com `Ler o texto antes de publicar` em `sim`, mostre a resposta a outra pessoa e espere o sim. Com `não`, publique na hora, inclusive o ajuste que a pessoa pediu num comentário já publicado, e devolva o link. Ela lê depois e pede outro ajuste se quiser.
-Comentário de self review, da mesma pessoa que pediu o atendimento, recebe a resposta na hora.
-A resposta diz o que mudou, mostra as linhas alteradas e cita o commit.
-A mensagem do bot é lida, respondida e considerada.
-A resposta a ele é publicada sem esperar que a pessoa leia esse texto antes.
-
-Resolva a thread só quando a resposta encerra o ponto e a sugestão foi aplicada como pedida.
-Antes de resolver, a última mensagem da thread tem que ser sua.
-Ela diz se o ponto será resolvido, como será resolvido e onde: neste commit, num commit ainda por fazer, ou num pull request à parte.
-Ela também diz que você resolve porque acolheu o ponto.
-Quando quem revisou é outra pessoa, a mensagem também diz que vai pedir outra revisão.
-Com `Fechar conversa com a confiança` em `sim`, a mensagem diz a confiança em linguagem natural e convida a reabrir se faltar algo.
-Quando `Número da confiança` tem valor, a frase inclui esse número.
-Sem valor, a frase não traz número.
-Quem liga a frase é o parâmetro `Fechar conversa com a confiança`.
-O padrão é `não`.
-Nunca diga que reanalisou, que usou ferramenta nem quantas vezes: o método fica fora do texto.
-Só feche com confiança alta, relendo o trecho no commit atual, mais de uma vez quando for ambíguo.
-Com confiança menor, deixe aberta e pergunte.
-Num PR aberto por bot, siga a `Voz em PR aberto por bot` de `publicar-revisao-de-codigo`.
-Uma thread que espera decisão da pessoa, ou que foi aplicada de outro jeito, fica aberta.
+A resposta segue `publicar-resposta-de-revisao`. Não reescreva aqui o texto, a marcação, a publicação nem a resolução da thread.
 
 ### Passo 7
 
@@ -153,38 +109,15 @@ Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 Se você corrigir o que um comentário apontou sem conferir o código de agora, a correção desfaz uma mudança que já resolveu o caso.
 
 1. Leia o arquivo no último commit do PR.
-2. Se o problema não está mais lá, responda o que mudou e resolva.
+2. Se o problema não está mais lá, responda o que mudou e resolva, seguindo `publicar-resposta-de-revisao`.
 
-### Self review sem resposta
+### Resposta escrita nesta habilidade
 
-Se você mostrar a resposta do self review e esperar um sim, o comentário da própria pessoa fica sem resposta.
+Se você reescrever aqui o texto, a marcação ou a publicação, a regra fica em dois lugares e os dois divergem.
 
-1. Publique a resposta na hora.
-2. Diga o que mudou, mostre as linhas alteradas e cite o commit.
-3. Com `Ler o texto antes de publicar` em `não`, a resposta a outra pessoa também sai na hora. Com `sim`, a espera vale só para essa resposta.
-
-### Thread resolvida sem resposta
-
-Se você resolver a thread sem responder, quem comentou não sabe o que foi feito.
-
-1. Responda antes de resolver.
-2. Diga o que mudou, mostre as linhas alteradas e cite o commit, ou diga o motivo.
-
-### Resposta sem marcar a pessoa
-
-Se você escrever o primeiro nome e não o `@login` do GitHub, a pessoa não é avisada.
-
-1. Use o login que está na revisão, com `@` na frente.
-2. Corrija o comentário já publicado.
-3. Bot não leva `@`. Self review não marca quem está respondendo.
-
-### Resposta só na conversa
-
-Se você responder na conversa do PR uma revisão que tem linha no diff, quem revisou não vê a resposta no código.
-
-1. Abra uma revisão sua com o comentário inline no trecho que a decisão muda.
-2. O comentário da conversa, se já existir, aponta essa revisão e não deixa o texto antigo.
-3. Sem linha no diff, a resposta fica na conversa.
+1. Siga `publicar-resposta-de-revisao`.
+2. Não copie o texto dela para cá.
+3. Se a resposta crescer, a folga fica naquela habilidade.
 
 ### Tudo que o bot pede vira mudança
 
@@ -200,13 +133,6 @@ Se você resolver um comentário sobre intenção, produto ou arquitetura sem pe
 
 1. Leve a pergunta à pessoa, com as opções.
 2. Deixe a thread aberta até ela decidir.
-
-### Resposta em dobro
-
-Se você repetir o envio de uma resposta depois de uma falha de rede, a thread pode ganhar duas respostas iguais.
-
-1. Antes de responder de novo, liste as respostas que a thread já tem.
-2. Responda só se a sua não estiver lá.
 
 ### Resumo do bot esquecido
 
@@ -230,14 +156,6 @@ Se você aplicar uma sugestão que muda o resultado, a borda ou a validação s�
 1. Classifique no Passo 3.
 2. Mostre o que muda e o risco, e espere a aprovação.
 3. Na dúvida, trate como mudança de comportamento.
-
-### Thread resolvida sem fechar o laço
-
-Se você resolver uma thread de pessoa sem uma mensagem sua por último, ela não sabe que o ponto foi acolhido nem que a revisão vai ser pedida de novo.
-
-1. Responda dizendo o que foi feito.
-2. Diga se o ponto será resolvido, como e onde: neste commit, num commit ainda por fazer, ou num pull request à parte. Quando quem revisou é outra pessoa, diga que vai pedir outra revisão.
-3. Resolva depois.
 
 ### Clone da pessoa alterado
 
@@ -278,38 +196,27 @@ Achei cinco comentários abertos. Dois eram estruturais, um nome e um texto, e a
 
 - Uma pessoa pergunta algo que só ela pode decidir: pergunte e não resolva.
 - Dois bots apontam o mesmo problema: uma correção, uma resposta em cada thread.
-- Quem revisou só no corpo da revisão, ou o comentário está na conversa e não tem thread: a resposta preferida é um comentário inline no trecho que a decisão muda, numa revisão sua. A conversa fica para o que não tem linha no diff, e esse comentário não se resolve.
+- A resposta, a marcação e a resolução seguem `publicar-resposta-de-revisao`.
 - Um push novo faz o bot revisar de novo: leia as threads novas antes do merge.
 - Um bot comenta por causa de um check que falhou: trate como os outros. A decisão de mesclar com check falhando fica com `criar-pull-request`.
 - Sem PR informado e sem nenhum PR da pessoa precisando de ação: diga isso e pare.
 - Execução agendada: siga `Aplicar em execução agendada` e deixe o resto no resumo, sem responder.
-- O comentário é self review da pessoa que pediu o atendimento: responda na hora, com as linhas alteradas e o commit, no idioma de `Idioma da resposta à revisão`. Não espere o sim de `Ler o texto antes de publicar`.
 - A branch está atrás da base, com ou sem conflito: atualize com rebase, resolva o conflito e substitua a branch publicada, como `criar-pull-request` manda, sem avisar e sem pedir.
 
 ## Pegadinhas
 
-- O GitHub marca como `outdated` a thread cujo trecho mudou. Ela continua aberta até alguém resolver.
-- O resumo do bot é o corpo da revisão, não uma thread. Ele não tem botão de resolver.
-- Resolver pede o id da thread, que vem da API GraphQL. O id do comentário, da API REST, não serve.
-- A resposta de uma thread vai como réplica do primeiro comentário. Sem thread, a resposta preferida é um comentário inline numa revisão sua, no trecho que a decisão muda. Um comentário novo na conversa não fica na thread.
-- Aprovar o PR não resolve as threads dele.
 - A consulta de threads traz uma página. Se `pageInfo.hasNextPage` for verdadeiro, peça a próxima com `after`, antes de dizer que não há mais thread.
-- O primeiro nome parece marcar a pessoa. Só `@` mais o login do GitHub que está na revisão avisa.
-- Resposta com apóstrofo quebra `-f body='...'` no shell. Grave a resposta num arquivo e envie com `-F body=@<arquivo>`.
 - Uma sugestão de bot e uma de pessoa se classificam pela mesma régua.
 - Aprovar o PR de outra pessoa não é papel desta habilidade.
-- `Ler o texto antes de publicar` parece segurar também o self review, e `não` parece ainda pedir o sim. O comentário da própria pessoa sai na hora. Com `não`, a resposta a outra pessoa e o ajuste pedido depois também saem na hora. O idioma é o de `Idioma da resposta à revisão`.
-- A página aberta parece mostrar que a resposta continua no idioma antigo. O texto que vale é o gravado na thread. Diga a primeira frase dele.
+- A resposta parece caber neste texto. Ela segue `publicar-resposta-de-revisao`.
 - A branch atrás da base parece pedir autorização antes do rebase. O atendimento já autoriza atualizar e substituir a branch publicada. A aprovação que ainda se pede é a de mudança de comportamento.
 
 ## Scripts disponíveis
 
 - `gh pr view <número> --repo <Repositório> --json reviews,comments`: revisões e conversa do Passo 1.
-- `gh api graphql -f query='query{repository(owner:"<dono>",name:"<nome>"){pullRequest(number:<número>){reviewThreads(first:100){pageInfo{hasNextPage endCursor} nodes{id isResolved isOutdated comments(first:100){nodes{databaseId author{login} path body}}}}}}}'`: threads e respostas.
-- `gh api repos/<Repositório>/pulls/<número>/comments/<id do comentário>/replies -F body=@<arquivo da resposta>`: resposta na thread.
-- `gh api graphql -f query='mutation{resolveReviewThread(input:{threadId:"<id da thread>"}){thread{isResolved}}}'`: resolução.
+- `gh api graphql -f query='query{repository(owner:"<dono>",name:"<nome>"){pullRequest(number:<número>){reviewThreads(first:100){pageInfo{hasNextPage endCursor} nodes{id isResolved isOutdated comments(first:100){nodes{databaseId author{login} path body}}}}}}}'`: threads e respostas. A resposta e a resolução estão em `publicar-resposta-de-revisao`.
 
 1. Leia as revisões, a conversa e as threads.
 2. Se a branch estiver atrás da base, atualize com rebase e substitua a branch publicada, sem pedir. Corrija e commite, inclusive a lição nas instruções do projeto, se for o caso, e envie a branch.
-3. Para cada thread, confira as respostas, responda no comentário inline e resolva. Sem thread, abra uma revisão sua com o comentário na linha.
+3. Para cada thread, a resposta segue `publicar-resposta-de-revisao`.
 4. Entregue o placar do Passo 7.
