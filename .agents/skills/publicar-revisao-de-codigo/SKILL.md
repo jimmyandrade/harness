@@ -3,7 +3,7 @@ name: publicar-revisao-de-codigo
 description: Revisa um pull request e publica a revisão numa única review, com os comentários inline, no idioma de quem recebe e no tom do projeto. Usada quando a pessoa pede uma revisão ou outra habilidade precisa publicar uma. Não serve para tratar os comentários que você recebeu no seu PR.
 metadata:
   author: jimmyandrade
-  version: "0.12.0"
+  version: "0.13.0"
   aliases:
     - post-code-review
   related:
@@ -129,7 +129,7 @@ Procure a prova em todo lugar antes de pedir: o corpo do PR, os comentários do 
 
 ### Passo 9
 
-Escreva os textos com `redigir-com-tom-de-voz`, para o tom de quem publica. Um comentário de achado diz o que você viu, por que importa e o que muda para quem usa ou mantém o código, e termina convidando a pessoa a responder. Uma aprovação sem achado não é a descrição do PR: abre com o `@login` de quem abriu, agradece a ajuda concreta deste PR, diz que a revisão não achou nada bloqueante e só então lista, em tópicos, o que o PR faz. As frases vêm do vocabulário. A frase de idioma, quando entra, fica num PS no fim. PR aberto por bot não leva `@`.
+Escreva os textos com `redigir-com-tom-de-voz`, para o tom de quem publica. Um comentário de achado diz o que você viu, por que importa e o que muda para quem usa ou mantém o código, e termina convidando a pessoa a responder. Um pedido para aprovar não pula a revisão: rode os critérios atuais antes e aprove só sem bloqueio. Uma aprovação sem achado não é a descrição do PR: abre com o `@login` de quem abriu, agradece a ajuda concreta deste PR, diz que a revisão não achou nada bloqueante e só então lista, em tópicos, o que o PR faz. As frases vêm do vocabulário. A frase de idioma, quando entra, fica num PS no fim. PR aberto por bot não leva `@`.
 
 - Com `Postura dos comentários` em `pergunta`, não declare erro confirmado e não dê ordem: separe o fato da decisão e termine em pergunta.
 - Todo ponto sobre uma linha de código vai inline, ancorado na linha do diff mais próxima. O corpo geral não cita arquivo, função nem chamada. Só fica no corpo o que não é sobre linha.
@@ -150,7 +150,7 @@ Publique numa única review, com todos os comentários inline numa chamada só, 
 - algum Deve ter: `Ação com Deve ter`;
 - Deveria ter em aberto: `Ação com Deveria ter`;
 - só Poderia ter: `Ação só com Poderia ter`, e o corpo diz que esses pontos são oportunidades, que podem ir para outro PR;
-- nenhum achado: `Ação sem achados`. O corpo segue a aprovação sem achado do Passo 9. Não publique só o resumo do que o PR faz.
+- nenhum achado: `Ação sem achados`, só depois da revisão deste pedido. O corpo segue a aprovação sem achado do Passo 9. Não publique só o resumo do que o PR faz.
 
 Se uma passada anterior aprovou e esta achou um problema real, publique a correção. Não proteja o veredito anterior.
 
@@ -183,6 +183,13 @@ Se você mostrar o texto e esperar um sim com `Ler o texto antes de publicar` em
 1. Publique na hora.
 2. Devolva o link.
 3. O próximo ajuste espera ela ler e pedir.
+
+### Aprovação pedida antes da revisão
+
+Se você aprovar porque pediram para aprovar, sem a revisão com os critérios atuais, um achado crítico passa.
+
+1. Rode a revisão mesmo com o pedido de aprovar.
+2. Aprove só sem bloqueio. Com bloqueio, publique a ação do achado.
 
 ### Aprovação que só descreve o PR
 
@@ -258,7 +265,7 @@ Não achei Deve ter nem Deveria ter. Os dois nomes ficam como oportunidade. Apro
 
 ### Aprove o PR que só sobe o Node, sem achado
 
-O corpo abriu com o login de quem abriu, agradeceu a atualização, disse que não havia bloqueio e listou o que o bump faz. A frase de idioma ficou no PS. O texto não era só a descrição do diff.
+Rodei a revisão antes e não achei bloqueio. O corpo abriu com o login de quem abriu, agradeceu a atualização e listou o que o bump faz. A frase de idioma ficou no PS.
 
 ## Casos-limite
 
@@ -277,7 +284,8 @@ O corpo abriu com o login de quem abriu, agradeceu a atualização, disse que n�
 - A `code-review` devolve categoria e confiança. Ambas são dado de trabalho, nunca texto.
 - Aprovação sem texto não conta como o que a pessoa escreveu revisando, ao levantar o idioma.
 - Um comentário que toca o mesmo trecho mas aponta outro problema não é um achado repetido.
-- O primeiro nome parece marcar a pessoa. Só `@` mais o login do GitHub avisa. Um corpo que só descreve o PR também não diz a aprovação: a aprovação sem achado agradece, diz que não há bloqueio e só então lista. PR aberto por bot segue `Voz em PR aberto por bot` e não leva `@`.
+- O primeiro nome parece marcar a pessoa. Só `@` mais o login do GitHub avisa. Um corpo que só descreve o PR não é a aprovação sem achado. PR aberto por bot segue `Voz em PR aberto por bot` e não leva `@`.
+- Pedir para aprovar parece dispensar a revisão. Sem a revisão, não há aprovação.
 - `Ler o texto antes de publicar` em `não` parece ainda pedir o sim. Publique e devolva o link. Um ajuste pedido depois também sai na hora.
 - Uma review sem comentários inline não cobre um ponto de código: ele precisa de uma linha.
 - O corpo da review não repete o que está inline: diz só que deixou pontos, sem contar quantos.
