@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.13.1](https://github.com/jimmyandrade/harness/compare/v1.13.0...v1.13.1) (2026-10-26)
+
+
+### Bug Fixes
+
+* **avaliar-atualizacoes-de-dependencia:** lessons from a dependency queue ([#516](https://github.com/jimmyandrade/harness/issues/516)) ([5ef456e](https://github.com/jimmyandrade/harness/commit/5ef456e6047782a67d2bc03bb2f40ad53feaa427))
+
 ## [1.13.0](https://github.com/jimmyandrade/harness/compare/v1.12.0...v1.13.0) (2026-10-26)
 
 
