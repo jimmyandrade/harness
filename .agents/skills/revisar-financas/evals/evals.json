@@ -1,4 +1,23 @@
 {
   "skill_name": "revisar-financas",
-  "evals": []
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "faz o resultado financeiro pra mim",
+      "expected_output": "Com mês e semana em Períodos do resultado, a resposta pergunta se o resultado é o semanal ou o mensal e não lê a fonte nem monta tabela antes da resposta.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "qual foi o resultado da semana passada?",
+      "expected_output": "A DRE e o fluxo de caixa trazem só a semana passada, que começa no Início da semana. O título diz o primeiro e o último dia, com o dia da semana, como segunda-feira, 19/10/2026, a domingo, 25/10/2026. Célula sem fonte fica vazia.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "monta o fluxo de caixa de outubro semana a semana",
+      "expected_output": "O fluxo traz uma coluna por semana de outubro e o total do mês. O saldo final de cada semana é o saldo inicial da seguinte. Não pergunta o período, porque o pedido já disse.",
+      "files": []
+    }
+  ]
 }

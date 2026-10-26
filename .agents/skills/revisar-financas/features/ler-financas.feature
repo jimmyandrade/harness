@@ -30,3 +30,28 @@ Funcionalidade: Ler caixa, DRE, fluxo, auditoria e preço
       Quando a skill analisa o preço
       Então pergunta a margem
       Mas não inventa o custo
+
+  Regra: O período vem do pedido
+
+    Exemplo: Pedido sem período
+      Dado que "Períodos do resultado" tem "mês" e "semana"
+      Quando a pessoa pede o resultado sem dizer o período
+      Então a skill pergunta se é o semanal ou o mensal
+      Mas não lê nada antes da resposta
+
+    Exemplo: Resultado da semana
+      Dado que "Períodos do resultado" tem "mês" e "semana"
+      Quando a pessoa pede o resultado da semana
+      Então a DRE e o fluxo de caixa trazem só essa semana
+      E o título diz o primeiro e o último dia da semana, com o dia da semana
+
+    Exemplo: Semanas do mês
+      Dado que "Períodos do resultado" tem "mês" e "semana"
+      Quando a pessoa pede o fluxo de caixa do mês por semana
+      Então o fluxo traz uma coluna por semana e o total do mês
+      E o saldo final de cada semana é o saldo inicial da seguinte
+
+    Exemplo: Um período só
+      Dado que "Períodos do resultado" tem só "mês"
+      Quando a pessoa pede o resultado sem dizer o período
+      Então a skill usa o mês e diz isso na resposta
