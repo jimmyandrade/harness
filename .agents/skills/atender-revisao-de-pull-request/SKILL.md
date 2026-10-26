@@ -3,7 +3,7 @@ name: atender-revisao-de-pull-request
 description: Atende a revisão recebida num pull request, de pessoa ou de bot. Lê os comentários abertos, classifica cada sugestão, aplica o que é seguro, responde cada thread e resolve as atendidas. Sem PR informado, lista os seus que precisam de atenção. Não serve para revisar o PR de outra pessoa nem para abrir o PR.
 metadata:
   author: jimmyandrade
-  version: "0.16.1"
+  version: "0.17.0"
   aliases:
     - resolver-comentarios-de-revisao
     - apply-pr-review
@@ -91,9 +91,8 @@ Valide antes de commitar, com o que `levantar-ambiente-do-repositorio` achar par
 
 ### Passo 5
 
-Corrija na branch do PR, seguindo `criar-commit`, com a mensagem dizendo o que mudou e nunca "ajustes da revisão". Um commit por assunto quando as mudanças forem independentes. Não reescreva commits que já estão no PR por conta própria.
-Se a branch estiver atrás da base e isso atrapalhar, avise em vez de atualizar por conta própria.
-Quando a pessoa pedir para resolver o conflito, esse pedido autoriza trazer a base e substituir a branch publicada, como `criar-pull-request` manda. Envie a branch, seguindo `criar-pull-request`, antes de responder, para o commit citado já estar no PR.
+Corrija na branch do PR, seguindo `criar-commit`, com a mensagem dizendo o que mudou e nunca "ajustes da revisão". Um commit por assunto quando as mudanças forem independentes. Não reescreva o conteúdo dos commits que já estão no PR por conta própria.
+Se a branch estiver atrás da base, atualize antes de aplicar, na cópia separada. Siga `criar-pull-request`: rebase sobre a base remota, resolva o conflito nos commits rebaseados e substitua a branch publicada. O atendimento já autoriza essa substituição. Não avise e não peça. Envie a branch, seguindo `criar-pull-request`, antes de responder, para o commit citado já estar no PR.
 
 Se a decisão vale além deste PR, grave a lição nas instruções do projeto e commite antes de responder. Uma recusa que vai se repetir também entra. Correção pontual fica só na resposta.
 
@@ -197,6 +196,14 @@ Se você ler só as threads, o resumo que o bot publica no corpo da revisão fic
 1. Leia o corpo de cada revisão.
 2. Trate o achado do resumo como os outros.
 
+### Branch atrás e o atendimento parou
+
+Se você avisar ou pedir antes de atualizar uma branch que está atrás da base, o atendimento trava e a base segue mudando.
+
+1. Atualize antes de aplicar, na cópia separada, com rebase sobre a base remota, como `criar-pull-request` manda.
+2. Resolva o conflito nos commits rebaseados e substitua a branch publicada. O atendimento já autoriza. Não peça.
+3. Uma sugestão que muda comportamento continua esperando a aprovação. Atualizar a branch não é essa aprovação.
+
 ### Mudança de comportamento aplicada sem aprovação
 
 Se você aplicar uma sugestão que muda o resultado, a borda ou a validação só porque um bot a pediu, o PR muda de comportamento sem a pessoa decidir.
@@ -240,6 +247,10 @@ Recusei: o gerador reescreve o arquivo a cada release. Gravei a exceção nas in
 
 A pessoa comentou no próprio pull request, em português, e o projeto pede a resposta no idioma do comentário. A sugestão já estava no commit. A resposta foi publicada na thread, em português, com as linhas alteradas e o SHA curto linkado, e a thread foi resolvida. No relatório, esse comentário entra como aceito: a sugestão já estava no commit.
 
+### A branch está atrás da base e um arquivo comentado conflita
+
+A base avançou e o arquivo de documentação conflita. Atualizei com rebase na cópia separada, resolvi o conflito e substituí a branch publicada, sem perguntar. A sugestão que mudava o resultado da validação continuou esperando aprovação. No relatório, a atualização da branch não entra como decisão pendente.
+
 ### Aplique a revisão do meu PR
 
 Achei cinco comentários abertos. Dois eram estruturais, um nome e um texto, e apliquei. Um pedia uma validação nova e muda o comportamento: mostrei o risco e esperei a sua aprovação. Um discordava da convenção do repositório e respondi com uma pergunta. Um era boa ideia, mas de outro PR, e propus registrar à parte. Validei, commitei por assunto, enviei a branch, respondi e resolvi as atendidas. Pedi nova revisão a quem solicitou mudanças.
@@ -254,7 +265,7 @@ Achei cinco comentários abertos. Dois eram estruturais, um nome e um texto, e a
 - Sem PR informado e sem nenhum PR da pessoa precisando de ação: diga isso e pare.
 - Execução agendada: siga `Aplicar em execução agendada` e deixe o resto no resumo, sem responder.
 - O comentário é self review da pessoa que pediu o atendimento: responda na hora, com as linhas alteradas e o commit, no idioma de `Idioma da resposta à revisão`. Não espere o sim de `Ler o texto antes de publicar`.
-- A pessoa pede para resolver o conflito com a base: traga a base e substitua a branch publicada, como `criar-pull-request` manda.
+- A branch está atrás da base, com ou sem conflito: atualize com rebase, resolva o conflito e substitua a branch publicada, como `criar-pull-request` manda, sem avisar e sem pedir.
 
 ## Pegadinhas
 
@@ -269,6 +280,7 @@ Achei cinco comentários abertos. Dois eram estruturais, um nome e um texto, e a
 - Aprovar o PR de outra pessoa não é papel desta habilidade.
 - `Ler o texto antes de publicar` parece segurar também o self review. O comentário da própria pessoa recebe a resposta na hora, com as linhas alteradas e o commit, no idioma de `Idioma da resposta à revisão`.
 - A página aberta parece mostrar que a resposta continua no idioma antigo. O texto que vale é o gravado na thread. Diga a primeira frase dele.
+- A branch atrás da base parece pedir autorização antes do rebase. O atendimento já autoriza atualizar e substituir a branch publicada. A aprovação que ainda se pede é a de mudança de comportamento.
 
 ## Scripts disponíveis
 
@@ -278,6 +290,6 @@ Achei cinco comentários abertos. Dois eram estruturais, um nome e um texto, e a
 - `gh api graphql -f query='mutation{resolveReviewThread(input:{threadId:"<id da thread>"}){thread{isResolved}}}'`: resolução.
 
 1. Leia as revisões, a conversa e as threads.
-2. Corrija e commite, inclusive a lição nas instruções do projeto, se for o caso, e envie a branch.
+2. Se a branch estiver atrás da base, atualize com rebase e substitua a branch publicada, sem pedir. Corrija e commite, inclusive a lição nas instruções do projeto, se for o caso, e envie a branch.
 3. Para cada thread, confira as respostas, responda e resolva.
 4. Entregue o placar do Passo 7.
