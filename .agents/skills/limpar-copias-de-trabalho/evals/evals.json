@@ -1,4 +1,11 @@
 {
   "skill_name": "limpar-copias-de-trabalho",
-  "evals": []
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Sim, limpe as cópias de trabalho",
+      "expected_output": "A fila do Renovate de um harness de negócio terminou. Só a cópia principal existe, com mudanças de outra tarefa, e sobraram quatro branches locais renovate/*. Três PRs foram mesclados e um foi fechado, todos com o mesmo commit da branch local. As quatro branches saem com branch -D, a cópia principal fica, e a resposta traz o espaço livre e uma tabela com a decisão, o motivo e o link completo de cada PR.",
+      "files": []
+    }
+  ]
 }
