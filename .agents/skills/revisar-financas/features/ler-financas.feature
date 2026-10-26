@@ -31,27 +31,43 @@ Funcionalidade: Ler caixa, DRE, fluxo, auditoria e preço
       Então pergunta a margem
       Mas não inventa o custo
 
-  Regra: O período vem do pedido
+  Regra: O intervalo vem do pedido
 
-    Exemplo: Pedido sem período
-      Dado que "Períodos do resultado" tem "mês" e "semana"
-      Quando a pessoa pede o resultado sem dizer o período
-      Então a skill pergunta se é o semanal ou o mensal
+    Exemplo: Pedido sem intervalo
+      Dado que "Apelidos de intervalo" tem "semana" e "mês"
+      Quando a pessoa pede o resultado sem dizer o intervalo nem o ponto de contato
+      Então a skill pergunta qual intervalo, oferecendo os apelidos
       Mas não lê nada antes da resposta
 
-    Exemplo: Resultado da semana
-      Dado que "Períodos do resultado" tem "mês" e "semana"
-      Quando a pessoa pede o resultado da semana
-      Então a DRE e o fluxo de caixa trazem só essa semana
-      E o título diz o primeiro e o último dia da semana, com o dia da semana
+    Exemplo: Apelido de intervalo
+      Dado que "Apelidos de intervalo" tem "semana"
+      Quando a pessoa pede o resultado da semana passada
+      Então a skill converte o apelido nas datas da semana
+      E a saída começa pelo intervalo, com o dia da semana de cada data
 
-    Exemplo: Semanas do mês
-      Dado que "Períodos do resultado" tem "mês" e "semana"
+    Exemplo: Intervalo qualquer
+      Dado que a pessoa pede o resultado de 05/10/2026 a 18/10/2026
+      Quando a skill gera a saída
+      Então a DRE e o fluxo de caixa trazem só esse intervalo
+      Mas não pergunta o intervalo
+
+    Exemplo: Mês dividido por semana
+      Dado que "Apelidos de intervalo" tem "semana" e "mês"
       Quando a pessoa pede o fluxo de caixa do mês por semana
       Então o fluxo traz uma coluna por semana e o total do mês
       E o saldo final de cada semana é o saldo inicial da seguinte
 
-    Exemplo: Um período só
-      Dado que "Períodos do resultado" tem só "mês"
-      Quando a pessoa pede o resultado sem dizer o período
-      Então a skill usa o mês e diz isso na resposta
+  Regra: O recorte pode ser um ponto de contato
+
+    Exemplo: Resultado de um ponto de contato
+      Dado que "Nome do ponto de contato" é "evento"
+      E que os lançamentos estão ligados ao evento na fonte
+      Quando a pessoa pede o resultado de um evento
+      Então a saída traz só os lançamentos desse evento
+      E o intervalo é o do próprio evento, sem pergunta
+
+    Exemplo: Lançamentos sem ligação ao ponto de contato
+      Dado que os lançamentos não estão ligados ao ponto de contato na fonte
+      Quando a pessoa pede o resultado desse ponto de contato
+      Então a skill diz que não consegue recortar
+      Mas não estima o resultado

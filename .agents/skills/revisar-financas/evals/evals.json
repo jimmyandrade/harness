@@ -4,19 +4,19 @@
     {
       "id": 1,
       "prompt": "faz o resultado financeiro pra mim",
-      "expected_output": "Com mês e semana em Períodos do resultado, a resposta pergunta se o resultado é o semanal ou o mensal e não lê a fonte nem monta tabela antes da resposta.",
+      "expected_output": "O pedido não diz o intervalo nem o ponto de contato. A resposta pergunta qual intervalo, oferecendo os apelidos de Apelidos de intervalo, como a semana e o mês, e não lê a fonte nem monta tabela antes da resposta.",
       "files": []
     },
     {
       "id": 2,
-      "prompt": "qual foi o resultado da semana passada?",
-      "expected_output": "A DRE e o fluxo de caixa trazem só a semana passada, que começa no Início da semana. O título diz o primeiro e o último dia, com o dia da semana, como segunda-feira, 19/10/2026, a domingo, 25/10/2026. Célula sem fonte fica vazia.",
+      "prompt": "qual foi o resultado de 05/10/2026 a 18/10/2026?",
+      "expected_output": "A saída começa pelo intervalo, de segunda-feira, 05/10/2026, a domingo, 18/10/2026. A DRE e o fluxo de caixa trazem só esse intervalo. Não pergunta o intervalo, porque o pedido já disse. Célula sem fonte fica vazia.",
       "files": []
     },
     {
       "id": 3,
-      "prompt": "monta o fluxo de caixa de outubro semana a semana",
-      "expected_output": "O fluxo traz uma coluna por semana de outubro e o total do mês. O saldo final de cada semana é o saldo inicial da seguinte. Não pergunta o período, porque o pedido já disse.",
+      "prompt": "qual foi o resultado do evento de sábado?",
+      "expected_output": "Com Nome do ponto de contato igual a evento, a saída traz só os lançamentos ligados a esse evento, no intervalo do próprio evento, sem perguntar o intervalo. Se os lançamentos não estiverem ligados ao evento na fonte, a resposta diz que não consegue recortar e não estima.",
       "files": []
     }
   ]
