@@ -44,6 +44,7 @@ flowchart LR
     definir_lancamento["definir-lancamento"]
     definir_link_rastreavel["definir-link-rastreavel"]
     definir_obrigacao_financeira["definir-obrigacao-financeira"]
+    definir_okr["definir-okr"]
     definir_perfil_social["definir-perfil-social"]
     definir_pessoa["definir-pessoa"]
     definir_planejamento_financeiro["definir-planejamento-financeiro"]
@@ -229,6 +230,8 @@ flowchart LR
   definir_obrigacao_financeira --> lancar_despesa_pessoal
   definir_obrigacao_financeira --> organizar_emails
   definir_obrigacao_financeira --> procurar_data_significativa
+  definir_okr --> definir_tarefa
+  definir_okr --> evoluir_habilidade
   definir_perfil_social --> definir_grafia
   definir_perfil_social --> definir_pessoa
   definir_perfil_social --> identificar_duplicata
