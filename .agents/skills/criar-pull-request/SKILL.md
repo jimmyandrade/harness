@@ -3,7 +3,7 @@ name: criar-pull-request
 description: Use essa habilidade sempre que for abrir PR, subir uma correção, mandar para a branch principal ou mesclar mudança no repositório, mesmo sem dizer PR. NÃO use para responder comentário de revisão nem para só commitar (use criar-commit).
 metadata:
   author: jimmyandrade
-  version: "0.28.0"
+  version: "0.29.0"
   related:
     - evoluir-habilidade
     - criar-commit
@@ -26,6 +26,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Comando de build": ""
 "Timeout do push (ms)": 600000
 "Duração do hook de pre-push (min)": 0
+# `Pular o hook de pre-push`: `não` espera o hook. `sim` publica sem ele quando o commit já passou no Passo 2.
+"Pular o hook de pre-push": "não"
 "Exigir CI verde": "sim"
 "Exigir aprovação de outra pessoa": "só sem terminal"
 "Comunicar novidade após o merge": "sim"
@@ -103,7 +105,7 @@ Pedir "faça o PR", "sobe isso" ou "coloca na main" autoriza o push da branch, n
 "coloca na main" continua sendo o pedido de merge.
 O parâmetro não mescla.
 Se `Duração do hook de pre-push (min)` for maior que zero, avise antes quanto o hook leva, para a pessoa não achar que travou.
-Se o commit a publicar é o mesmo que passou no Passo 2, publique sem o hook de pre-push e diga isso na resposta. A checagem de skill é a do pre-commit em `criar-commit`. Publicar sem o hook de pre-push não dispensa essa checagem. Se houve outro commit depois, deixe o hook rodar, em segundo plano, com `Timeout do push (ms)`.
+Com `Pular o hook de pre-push` em `não`, o padrão, o push espera o hook de pre-push. Com `sim`, e o commit a publicar é o mesmo que passou no Passo 2, publique sem o hook e diga isso na resposta. A checagem de skill é a do pre-commit em `criar-commit`. Pular o hook de pre-push não dispensa essa checagem. Deixe o hook rodar, em segundo plano, com `Timeout do push (ms)`.
 Teste antes o acesso ao remoto com a credencial do `gh`. Faça o push com essa credencial.
 
 ### Passo 6
@@ -245,7 +247,7 @@ Branch `fix/…` a partir da base, testes e build no commit, commit no idioma do
 
 ### Só coloca isso na main
 
-O pedido autoriza push e merge. Push sem o hook de pre-push, porque o commit já passou em testes e build, PR aberto, merge com `Tipo de merge`. Se o modo automático negar, o comando de merge vai pronto na resposta.
+O pedido autoriza push e merge. O push espera o hook de pre-push. PR aberto, merge com `Tipo de merge`. Se o modo automático negar, o comando de merge vai pronto na resposta.
 
 ## Casos-limite
 
@@ -280,7 +282,8 @@ O pedido autoriza push e merge. Push sem o hook de pre-push, porque o commit já
 - `git fetch origin && git rebase origin/<Branch base>`: Passo 4.
 - `git push --force-with-lease origin <branch>`: substitui a branch já publicada pela história reescrita no Passo 5, só depois da autorização. Não substitui a `Branch base`.
 - `GIT_TERMINAL_PROMPT=0 git -c credential.helper= -c 'credential.helper=!gh auth git-credential' ls-remote origin HEAD`: teste de acesso do Passo 5.
-- `LEFTHOOK=0 GIT_TERMINAL_PROMPT=0 git -c credential.helper= -c 'credential.helper=!gh auth git-credential' push -u origin <branch>`: push sem o hook de pre-push. A checagem de skill já teve que passar no pre-commit. Tire o `LEFTHOOK=0` para rodar o hook de pre-push.
+- `GIT_TERMINAL_PROMPT=0 git -c credential.helper= -c 'credential.helper=!gh auth git-credential' push -u origin <branch>`: push do Passo 5. O hook de pre-push roda.
+- `LEFTHOOK=0 GIT_TERMINAL_PROMPT=0 git -c credential.helper= -c 'credential.helper=!gh auth git-credential' push -u origin <branch>`: só com `Pular o hook de pre-push` em `sim`.
 - `git grep -i -E "termo1|termo2"`: busca dos termos no Passo 6, sem diferenciar maiúsculas.
 - `gh label list --repo <Repositório>`: rótulos do Passo 6.
 - `gh pr create --repo <Repositório> --base <Branch base> --head <branch> --title "<assunto>" --body "<corpo>" --assignee <pessoa> --label <rótulo>`: Passo 6. Com `Atribuir o PR a quem abre` ou `Rotular o PR` em `não`, tire a flag correspondente. Com `Rotular o PR` em `sim`, `--label` fica no comando. O rótulo de `fix` é o de bug. O de `docs` é o de documentação.

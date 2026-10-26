@@ -3,7 +3,7 @@ name: criar-commit
 description: Use essa habilidade sempre que terminar um trabalho que mudou o repositório ou for commitar, separar commits ou escrever a mensagem, mesmo sem dizer commit. NÃO use para push, abrir PR, rebase nem merge (use criar-pull-request).
 metadata:
   author: jimmyandrade
-  version: "0.21.0"
+  version: "0.22.0"
 ---
 
 # Criar commit
@@ -185,7 +185,7 @@ Um commit `fix:` com o assunto dizendo o porquê da troca do texto. Sem teste no
 
 - `git switch -c <branch> origin/<base>` faz a branch rastrear a base. Use `--no-track`.
 - O type check do repositório inteiro pode falhar em arquivos que não são seus. Não use esse resultado como portão do seu commit sem comparar com a `Branch base`.
-- Um hook de pre-push pode rodar testes e build de novo. Rodar antes do commit permite publicar sem o hook depois.
+- Um hook de pre-push pode rodar testes e build de novo. O padrão é esperar esse hook no push. Pular fica no parâmetro da habilidade de pull request, e o padrão dele é não pular.
 - O commit rápido parece que o lefthook rodou. Sem `.git/hooks/pre-commit`, a checagem de skill não rodou. Rode o script e não publique se falhar.
 - O texto de uma cópia, sincronizada ou instalada, que explica como preencher uma habilidade parece permissão para criá-la ali. Criar ou ativar a habilidade fora do repositório de origem deixa uma cópia que o sync não remove e que a instalação seguinte apaga.
 - Um arquivo Markdown parece documentação. O tipo segue o que a mudança faz. Correção de erro é `fix:`. `docs:` fica para a documentação.
