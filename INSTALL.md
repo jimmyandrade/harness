@@ -15,7 +15,7 @@ Each runbook is a list of steps with a command and a check, written for an agent
 | Runbook | Run it | It sets up |
 |---|---|---|
 | [`docs/runbooks/business-repository.md`](docs/runbooks/business-repository.md) | Once per business repository | Layout, core pin, checker, CI check, marketplace |
-| [`docs/runbooks/cursor.md`](docs/runbooks/cursor.md) | Once per project | The links Cursor follows to the project and core skills, or the Cursor plugins |
+| [`docs/runbooks/cursor.md`](docs/runbooks/cursor.md) | Once per project | The links Cursor follows to the project and core skills, or the Cursor team plugins. Grok Bot does not load them |
 | [`docs/runbooks/claude-code.md`](docs/runbooks/claude-code.md) | Once per project, and the install step once per machine | The project skills link and the `core` plugin |
 | [`docs/runbooks/codex.md`](docs/runbooks/codex.md) | Once per machine and project | The marketplace and the plugins in Codex |
 | [`docs/runbooks/notion.md`](docs/runbooks/notion.md) | Once per business repository | The mapping, a connection used only by the sync, the token, and the sync job |
