@@ -3,7 +3,7 @@ name: levantar-ambiente-do-repositorio
 description: Levanta o ambiente de trabalho de um repositório antes de escrever código, testes, commit ou pull request. Acha o runtime e como ativá-lo, os comandos de instalar, lint, tipos, testes e build, as habilidades do repositório que se aplicam e as pegadinhas que ele documenta. Não serve para rodar os comandos, instalar dependências nem decidir a convenção de código.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.6.1"
   related:
     - criar-commit
     - criar-pull-request
@@ -24,14 +24,14 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Pastas de habilidades do repositório": ".claude/skills, .agents/skills, .cursor, .github"
 "Manifestos de comandos": "package.json, Makefile, pyproject.toml, justfile"
 "Modo de aprendizado": "perguntar"
-# `Harness no repositório atual` é `sim` ou `não`. O repositório atual é o que está aberto nesta sessão. Cada projeto define o próprio valor. Com `não`, não acrescente nele a instalação do harness. Isso não escolhe a instalação global, nem a pasta do glossário, nem a pasta de skills.
-"Harness no repositório atual": "sim"
-# `Instalação do harness` é `repositório` ou `global`. `repositório` permite a instalação no repositório atual. `global` usa a instalação única da ferramenta e o repositório atual não recebe dependência, link de skills, plugin nem servidor. Não decide a pasta do glossário nem a pasta de skills.
-"Instalação do harness": "repositório"
-# `Forma do harness` é `repositório próprio`, `repositório existente` ou `próprio e repositórios`. Vazio não escolhe a forma. `repositório próprio` é um repositório de harness do negócio. `repositório existente` instala o harness no repositório que já está aberto. `próprio e repositórios` tem os dois, e os outros repositórios instalam o harness do negócio. Não decide a pasta do glossário nem a pasta de skills.
+# `Harness no repositório atual` é `sim` ou `não`. O repositório atual é o que está aberto nesta sessão. Cada projeto define o próprio valor. Vazio pergunta uma vez e não acrescenta a instalação. Com `não`, não acrescente nele a instalação do harness. Isso não escolhe a instalação global, nem a pasta do glossário, nem a pasta de skills.
+"Harness no repositório atual": ""
+# `Instalação do harness` é `repositório` ou `global`. Vazio pergunta uma vez e não escolhe. `repositório` permite a instalação no repositório atual. `global` usa a instalação única da ferramenta e o repositório atual não recebe dependência, link de skills, plugin nem servidor. Não decide a pasta do glossário nem a pasta de skills.
+"Instalação do harness": ""
+# `Forma do harness` é `repositório próprio`, `repositório existente` ou `próprio e repositórios`. Vazio pergunta uma vez e não escolhe a forma. `repositório próprio` é um repositório de harness do negócio. `repositório existente` instala o harness no repositório que já está aberto. `próprio e repositórios` tem os dois, e os outros repositórios instalam o harness do negócio. Não decide a pasta do glossário nem a pasta de skills.
 "Forma do harness": ""
-# `Papel do repositório atual` é `harness` ou `projeto`. O repositório atual é o que está aberto nesta sessão. `harness` é o repositório de harness do negócio. `projeto` usa ou recebe a instalação.
-"Papel do repositório atual": "projeto"
+# `Papel do repositório atual` é `harness` ou `projeto`. O repositório atual é o que está aberto nesta sessão. Vazio pergunta uma vez e não escolhe. `harness` é o repositório de harness do negócio. `projeto` usa ou recebe a instalação.
+"Papel do repositório atual": ""
 ```
 
 ## Instruções
@@ -58,7 +58,7 @@ Registre as pegadinhas do ambiente que o repositório documenta: falhas conhecid
 
 ### Passo 6
 
-Leia `Forma do harness`, `Papel do repositório atual`, `Instalação do harness` e `Harness no repositório atual`. O repositório atual é o que está aberto nesta sessão. Com a forma vazia, vale só a instalação: `global` usa a instalação da ferramenta e não acrescenta arquivos aqui. `repositório` com `Harness no repositório atual` em `não` não acrescenta a instalação e não escolhe a forma global. Com `repositório próprio` e papel `harness`, este repositório é o harness do negócio. Com `repositório próprio` e papel `projeto`, a instalação é `global`. Com `repositório existente`, a instalação fica neste repositório e não há outro repositório de harness. Com `próprio e repositórios` e papel `harness`, este repositório é o harness do negócio. Com `próprio e repositórios` e papel `projeto`, este repositório instala o harness do negócio e o core. Combinação diferente: pergunte uma vez e pare. Liste à parte as skills do repositório atual e as que chegam pela instalação. A pasta do glossário não faz parte dessa instalação.
+Leia `Forma do harness`, `Papel do repositório atual`, `Instalação do harness` e `Harness no repositório atual`. O repositório atual é o que está aberto nesta sessão. Qualquer um vazio: pergunte uma vez e pare. Não escolha o repositório atual, a instalação da ferramenta nem uma forma. Com os quatro preenchidos, `global` usa a instalação da ferramenta e não acrescenta arquivos aqui. `repositório` com `Harness no repositório atual` em `não` não acrescenta a instalação e não escolhe `global`. Com `repositório próprio` e papel `harness`, este repositório é o harness do negócio. Com `repositório próprio` e papel `projeto`, a instalação é `global`. Com `repositório existente`, a instalação fica neste repositório e não há outro repositório de harness. Com `próprio e repositórios` e papel `harness`, este repositório é o harness do negócio. Com `próprio e repositórios` e papel `projeto`, este repositório instala o harness do negócio e o core. Combinação diferente: pergunte uma vez e pare. Liste à parte as skills do repositório atual e as que chegam pela instalação. A pasta do glossário não faz parte dessa instalação.
 Entregue a ficha, com uma seção por passo: instruções e habilidades do repositório, runtime e como ativar, comandos com a origem de cada um, habilidades do repositório que se aplicam a cada tarefa e pegadinhas. Em cada seção que não achou nada, escreva "Não achei". Não rode nenhum comando além de ler arquivos, e não instale nada.
 
 ### Passo 7
@@ -116,6 +116,7 @@ Não achei arquivo de instruções nem habilidade do repositório. O `pyproject.
 - Duas fontes dão comandos diferentes: use a habilidade do repositório e diga qual conflita.
 - O repositório é um monorepo: levante os comandos do projeto afetado, e diga como escolher o projeto.
 - A cópia de trabalho não existe ainda: peça o repositório e pare.
+- `Forma do harness`, `Papel do repositório atual`, `Instalação do harness` ou `Harness no repositório atual` vazio: pergunte uma vez e pare. Não trate vazio como `projeto`, `repositório` nem `sim`.
 - `Harness no repositório atual` em `não`, com `Instalação do harness` em `repositório`: a ficha diz para não acrescentar a instalação no repositório atual e que isso não escolhe a instalação global. A pasta do glossário não entra nessa decisão.
 - `Instalação do harness` em `global`: a ficha aponta a instalação única da ferramenta e diz para não criar outra no repositório atual. `Harness no repositório atual` em `sim` não cria essa segunda cópia.
 - `Forma do harness` em `repositório próprio` e papel `harness`: este repositório é o harness do negócio e recebe a instalação.
@@ -130,6 +131,7 @@ Não achei arquivo de instruções nem habilidade do repositório. O `pyproject.
 - O hook de pre-push pode levar minutos e parece travado.
 - Esta habilidade só lê. Instalar dependência ou rodar um comando é de quem chamou.
 - A pasta do glossário parece ser o lugar do harness. O harness reúne o servidor, as skills, a linha de comando e a API. O glossário pode ficar dentro de um harness, e também pode ficar só no computador.
+- Um valor vazio parece `sim`, `projeto` ou `repositório`. Vazio pergunta uma vez e não escolhe.
 - `Harness no repositório atual` em `não` parece escolher a instalação global. Só `Instalação do harness` em `global` faz isso.
 - `global` parece a única forma de poupar um repositório. Com `repositório próprio`, os outros repositórios usam `global`. Com `próprio e repositórios`, eles instalam o harness do negócio. Com `repositório existente`, o harness fica no repositório que já está aberto.
 

@@ -14,13 +14,13 @@ Three choices stay separate. Mixing them puts files in the wrong place.
 
 | Choice | What it is | Parameter | Default |
 |---|---|---|---|
-| Glossary | The language files, such as `pt-BR.json` | `Glossário no repositório atual` and `Pasta do glossário`, on `gravar-termos-no-vocabulario` | `sim`, so the files live in the open repository and can be pushed. `não` keeps them only on the computer, in `Pasta do glossário` |
-| Skills folder | The skills a repository chooses to store | None. A repository that stores skills keeps them in its skills folder. Core skills can also arrive through a link to the installed dependency, or through the tool's plugin | The repository's own folder, or the core install it already uses |
-| Harness install | The plugin, the dependency, the command line, and the MCP server | `Forma do harness`, `Papel do repositório atual`, `Instalação do harness`, and `Harness no repositório atual`, on `levantar-ambiente-do-repositorio` | The form is empty. The role is `projeto`. The install is `repositório` and `Harness no repositório atual` is `sim` |
+| Glossary | The language files, such as `pt-BR.json` | `Glossário no repositório atual` and `Pasta do glossário`, on `gravar-termos-no-vocabulario` | Empty. Ask once and create no file. `sim` keeps the files in the open repository. `não` keeps them only on the computer, in `Pasta do glossário` |
+| Skills folder | The skills a repository chooses to store | None. A repository that stores skills keeps them in its skills folder. Core skills can also arrive through a link to the installed dependency, or through the tool's plugin | No assumed folder. The project says where its skills live |
+| Harness install | The plugin, the dependency, the command line, and the MCP server | `Forma do harness`, `Papel do repositório atual`, `Instalação do harness`, and `Harness no repositório atual`, on `levantar-ambiente-do-repositorio` | Empty. Ask once. Do not assume the open repository, the tool install, or a business harness |
 
-The current repository is the one open in the session. Each project sets its own value in its project instructions. A business that wants the same choice in several repositories writes that same value in each of them. This repository does not copy the value from another repository.
+The current repository is the one open in the session. Each project sets its own value in its project instructions. A business that wants the same choice in several repositories writes that same value in each of them. This repository does not copy the value from another repository. An empty value asks once and does not choose for that project.
 
-`Forma do harness` is the business choice. An empty value does not choose one, and the current repository then follows only `Instalação do harness`.
+`Forma do harness` is the business choice. The table applies after the project sets the form, the role, and the install.
 
 | Form | What the business has | Role `harness` | Role `projeto` |
 |---|---|---|---|

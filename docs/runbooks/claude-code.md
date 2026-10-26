@@ -6,7 +6,7 @@ locale: en
 
 Claude Code reads project skills only from `.claude/skills`, and follows symbolic links. The core skills come from the `core` plugin, named `core:<skill>`. The repository can enable the plugin, but each machine installs it once. Run this runbook from the root of the project.
 
-Read `Forma do harness`, `Papel do repositório atual`, and `Instalação do harness`. `INSTALL.md` has the table. Stop when the install is `global` or `Harness no repositório atual` is `não`: this repository does not receive a project install, and `não` does not mean the install is global. When the form is `repositório próprio` and the role is `projeto`, the install is `global`. When the form is `repositório existente`, continue and install the core in this repository. When the form is `próprio e repositórios` and the role is `projeto`, continue and install the business harness as well as the core. When the form is absent, the install is `repositório` and the steps below apply.
+Read `Forma do harness`, `Papel do repositório atual`, and `Instalação do harness`. `INSTALL.md` has the table. Stop when the install is `global` or `Harness no repositório atual` is `não`: this repository does not receive a project install, and `não` does not mean the install is global. When the form is `repositório próprio` and the role is `projeto`, the install is `global`. When the form is `repositório existente`, continue and install the core in this repository. When the form is `próprio e repositórios` and the role is `projeto`, continue and install the business harness as well as the core. When the form, the role, or the install is absent, ask once and stop. Do not create the files below.
 
 Each step ends with a check.
 

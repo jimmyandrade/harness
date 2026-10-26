@@ -1,6 +1,6 @@
 ---
 metadata:
-  version: "1.36.0"
+  version: "1.36.1"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -116,9 +116,10 @@ metadata:
 - `Glossário no repositório atual` diz se os arquivos de idioma ficam no repositório aberto nesta sessão e sobem no Git. O repositório atual é esse. Cada projeto define o próprio valor. Com `não`, eles ficam só no computador, na `Pasta do glossário`.
 - A pasta do glossário não é o harness. O glossário pode ficar dentro de um harness.
 - `Harness no repositório atual` diz se o repositório aberto nesta sessão recebe a instalação do harness. Com `não`, não acrescente essa instalação nele. Isso não escolhe uma instalação global. A instalação reúne o servidor, as skills, a linha de comando e a API.
-- `Forma do harness` é `repositório próprio`, `repositório existente` ou `próprio e repositórios`. Vazio não escolhe a forma. A tabela está em `INSTALL.md`. A forma não decide a pasta do glossário nem a pasta de skills.
+- `Forma do harness` é `repositório próprio`, `repositório existente` ou `próprio e repositórios`. A tabela está em `INSTALL.md`. A forma não decide a pasta do glossário nem a pasta de skills.
 - `Papel do repositório atual` é `harness` ou `projeto`. `harness` é o repositório de harness do negócio. `projeto` usa ou recebe a instalação.
 - `Instalação do harness` é `repositório` ou `global`. Com `global`, o repositório atual não recebe outra instalação. Com `repositório`, vale `Harness no repositório atual`.
+- Um valor vazio desses parâmetros pergunta uma vez e não escolhe o lugar.
 - As skills que um repositório guarda ficam na pasta de skills dele. As skills do core podem chegar por um link da dependência instalada. Nenhuma das duas decide a pasta do glossário.
 - O motor que lê e escreve o glossário fica neste repositório, em `vocabulary/`, como decide a ADR 0018.
 

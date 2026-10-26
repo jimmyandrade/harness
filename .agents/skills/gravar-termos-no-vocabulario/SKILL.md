@@ -3,7 +3,7 @@ name: gravar-termos-no-vocabulario
 description: Use essa habilidade sempre que, ao cadastrar ou corrigir termos do vocabulário do tom de voz, for hora de pesquisar a grafia, testar com dry run e gravar o lote, mesmo sem dizer gravar. NÃO use para decidir o nível, validar os campos, perguntar quais variações foram cadastradas, escrever o texto da marca, nem inventar um termo.
 metadata:
   author: jimmyandrade
-  version: "0.6.4"
+  version: "0.6.5"
   related:
     - definir-vocabulario
     - procurar-variacao-de-termo
@@ -18,8 +18,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ```yaml
 "Validação dos campos": "warn"
-# `Glossário no repositório atual` é `sim` ou `não`. O repositório atual é o que está aberto nesta sessão. Cada projeto define o próprio valor. Com `sim`, os arquivos de idioma ficam nele e sobem no Git. Com `não`, ficam só no computador.
-"Glossário no repositório atual": "sim"
+# `Glossário no repositório atual` é `sim` ou `não`. O repositório atual é o que está aberto nesta sessão. Cada projeto define o próprio valor. Vazio pergunta uma vez e não cria arquivo. Com `sim`, os arquivos de idioma ficam nele e sobem no Git. Com `não`, ficam só no computador.
+"Glossário no repositório atual": ""
 # `Pasta do glossário` é o caminho absoluto da pasta local dos arquivos de idioma, quando eles não ficam no repositório atual. Exemplo: `/caminho/do/glossario`. Vazio pede o caminho uma vez. Esta pasta não é o harness nem a pasta de skills.
 "Pasta do glossário": ""
 ```
@@ -107,11 +107,12 @@ Se você gravar o proibido novo sem perguntar pelos termos relacionados, a pesso
 
 ### Glossário no repositório atual errado
 
-Se você criar o arquivo do idioma no repositório atual com `Glossário no repositório atual` em `não`, ou deixar de criá-lo aqui com `sim`, o glossário fica no lugar errado.
+Se você criar o arquivo do idioma no repositório atual com `Glossário no repositório atual` vazio ou em `não`, ou deixar de criá-lo aqui com `sim`, o glossário fica no lugar errado.
 
 1. Leia `Glossário no repositório atual` e `Pasta do glossário`.
-2. Com `sim`, crie o arquivo no glossário do repositório atual.
-3. Com `não`, crie só na `Pasta do glossário`. Se a pasta estiver vazia, pergunte uma vez e pare. Essa pasta é só o glossário.
+2. Vazio, pergunte uma vez e pare. Não crie o arquivo.
+3. Com `sim`, crie o arquivo no glossário do repositório atual.
+4. Com `não`, crie só na `Pasta do glossário`. Se a pasta estiver vazia, pergunte uma vez e pare. Essa pasta é só o glossário.
 
 ## Exemplos de entrada e saída
 
@@ -139,6 +140,7 @@ O plano ficou em update. A reticências que já estava foi reescrita, com o quan
 - A grafia já está com a tag de outro contexto e a regra nova é geral ou de outro contexto: grave outra linha, sem tags ou com as tags dela. A linha que já está fica como está.
 - Lote vindo de outra ferramenta: um arquivo com `terms --file` e `upsert`. Diga o que entrou, o que foi atualizado e o que ficou em `incomplete`.
 - Sem terminal e sem o servidor `vocabulary`, como num agente do Notion: pare. O cadastro roda numa ferramenta de código com o projeto aberto. Não confirme nada.
+- `Glossário no repositório atual` vazio: pergunte uma vez e pare. Não crie o arquivo no repositório atual nem na pasta do glossário.
 - `Glossário no repositório atual` em `não`: o arquivo do idioma nasce só na `Pasta do glossário`, no computador, e não sobe no Git. Vazia, pergunte o caminho uma vez e pare.
 - `Glossário no repositório atual` em `sim`: o arquivo do idioma nasce no glossário do repositório atual e sobe no Git.
 - A pessoa pergunta se um termo ou uma variação faltou: `procurar-variacao-de-termo`. `related` só aponta para termo que já está.
@@ -152,7 +154,7 @@ O plano ficou em update. A reticências que já estava foi reescrita, com o quan
 - Uma variação ausente parece já ligada pela palavra vizinha. Ela não existe até ser cadastrada. `related` não a cria.
 - Duas linhas do mesmo termo parecem um convite a apagar a mais curta. Com tags diferentes, as duas valem, cada uma no próprio contexto. Com as mesmas tags, a escrita não apaga. Sinalize e espere a escolha.
 - Um exemplo citado parece herdar a descrição do termo. Se ele não vem como item do lote, nasce só com o estado daquele vínculo.
-- O repositório atual parece o lugar do glossário. Isso só vale com `Glossário no repositório atual` em `sim`. Com `não`, o arquivo nasce na `Pasta do glossário`.
+- O repositório atual parece o lugar do glossário. Isso só vale com `Glossário no repositório atual` em `sim`. Vazio pergunta e não cria arquivo. Com `não`, o arquivo nasce na `Pasta do glossário`.
 - A pasta do glossário parece ser o harness. Ela guarda só os arquivos de idioma. O glossário pode ficar dentro de um harness, e o harness é mais amplo que essa pasta.
 - O comando de escrita, com `--term` ou `--file`, parece dispensar a validação. Sem o plano que `validar-plano-de-vocabulario` aprovou, não grave. Quem decidiu fica em `decided_by` e o dia em `decided_at`, nunca na descrição nem em `notes`.
 
@@ -164,10 +166,11 @@ O plano ficou em update. A reticências que já estava foi reescrita, com o quan
 - `node node_modules/harness/vocabulary/dist/cli.js terms` grava o lote. `--language`, `--mode` e `--validation` valem para o lote. Cada `--term` abre um termo, com `--state`, `--description`, `--reason`, `--when`, `--substitution`, `--decided-by`, `--decided-by-email`, `--decided-by-url`, `--decided-at`, `--source` e `--notes`. `--decided-by` é o nome. Os dois seguintes completam o objeto. `--categories`, `--examples`, `--rejected`, `--alternatives`, `--related`, `--tags`, `--allowed-in` e `--forbidden-in` repetem, um valor por vez. `--stop-word` marca a stop word, que pode vir sem `--state`. `--file` lê o lote inteiro de um JSON.
 - `--glossary`, antes do comando, aponta outro vocabulário.
 - Com `Glossário no repositório atual` em `sim`, `d="${HARNESS_GLOSSARY_DIR:-${HARNESS_ROOT:-.}/.agents/glossary}"; mkdir -p "$d"; [ -e "$d/<idioma>.json" ] || echo '{}' > "$d/<idioma>.json"` cria o arquivo vazio do idioma no glossário do repositório atual.
+- Com `Glossário no repositório atual` vazio, não crie o arquivo. Pergunte uma vez e pare.
 - Com `não`, `d="<Pasta do glossário>"; mkdir -p "$d"; [ -e "$d/<idioma>.json" ] || echo '{}' > "$d/<idioma>.json"` cria o arquivo só na pasta do glossário. Os comandos levam `--glossary` com o mesmo caminho. Não rode isso no repositório atual.
 - `lookup_term`, `lookup_terms`, `exists_in_text` e `write_terms`, no servidor `vocabulary`, fazem a mesma consulta e a mesma escrita quando não há terminal.
 
-1. Com terminal, rode `lookup-terms` para os termos do plano, `lookup` para um termo e `exists` para um trecho. Com `Unknown language` e `Glossário no repositório atual` em `sim`, crie o arquivo do idioma no glossário do repositório atual e repita. Com `não`, crie o arquivo só na `Pasta do glossário` e repita com `--glossary`. Se essa pasta estiver vazia, pergunte o caminho uma vez e pare.
+1. Com terminal, rode `lookup-terms` para os termos do plano, `lookup` para um termo e `exists` para um trecho. Com `Unknown language` e `Glossário no repositório atual` vazio, pergunte uma vez e pare. Com `sim`, crie o arquivo do idioma no glossário do repositório atual e repita. Com `não`, crie o arquivo só na `Pasta do glossário` e repita com `--glossary`. Se essa pasta estiver vazia, pergunte o caminho uma vez e pare.
 2. Com terminal, rode `terms` com `--language`, `--mode` e um `--term` para cada termo. Com `Glossário no repositório atual` em `não`, o comando leva `--glossary` na `Pasta do glossário`.
 3. Sem terminal, chame `lookup_terms`, `lookup_term`, `exists_in_text` e `write_terms` com os mesmos campos. Com `Unknown language`, pare: o arquivo do idioma nasce com terminal, no lugar que `Glossário no repositório atual` indica.
 4. Sem terminal e sem o servidor `vocabulary`, pare.
