@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.12.0](https://github.com/jimmyandrade/harness/compare/v1.11.1...v1.12.0) (2026-10-26)
+
+
+### Features
+
+* **definir-vocabulario:** store a before and after pair as two linked terms ([#510](https://github.com/jimmyandrade/harness/issues/510)) ([8b2d2f0](https://github.com/jimmyandrade/harness/commit/8b2d2f05d9b4a27ecd00c299fc556329db032fb9))
+
+
+### Bug Fixes
+
+* wait for a background command before ending the turn ([#512](https://github.com/jimmyandrade/harness/issues/512)) ([41bd599](https://github.com/jimmyandrade/harness/commit/41bd599a704da3b97af350c9c95db851c362c8a9))
+
 ## [1.11.1](https://github.com/jimmyandrade/harness/compare/v1.11.0...v1.11.1) (2026-10-26)
 
 
