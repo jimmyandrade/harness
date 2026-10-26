@@ -3,7 +3,7 @@ name: criar-pull-request
 description: Use essa habilidade sempre que for abrir PR, subir uma correção, mandar para a branch principal ou mesclar mudança no repositório, mesmo sem dizer PR. NÃO use para responder comentário de revisão nem para só commitar (use criar-commit).
 metadata:
   author: jimmyandrade
-  version: "0.26.0"
+  version: "0.27.0"
   related:
     - evoluir-habilidade
     - criar-commit
@@ -29,22 +29,28 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Exigir CI verde": "sim"
 "Exigir aprovação de outra pessoa": "só sem terminal"
 "Comunicar novidade após o merge": "sim"
+# Nome da habilidade que pede a revisão de um PR pronto, ou vazio quando ninguém pede.
 "Habilidade que pede a revisão": ""
+# sim termina a descrição com a linha da sessão. não nunca põe linha de ferramenta ou de modelo.
 "Atribuição da sessão": "sim"
+# sim quando o PR sai atribuído a quem o abre.
 "Atribuir o PR a quem abre": "sim"
+# sim quando o PR sai com o rótulo que melhor descreve a mudança.
 "Rotular o PR": "sim"
+# sim cria um rótulo novo se nenhum existente descreve a mudança.
 "Criar rótulo se nenhum servir": "não"
+# Palavras que não podem estar no PR nem nos arquivos. Vazio, não há busca.
 "Termos que não podem aparecer": []
+# não mantém o mesmo tema no mesmo pull request. sim abre um PR por subtarefa. O assunto de um commit não abre outro.
 "Fatiar por subtarefa": "não"
+# empilhar abre contra a branch do PR anterior. Vazio não empilha.
 "PR que depende de outro": ""
+# Como mudar o corte de um PR aberto, sem renomear a branch nem fechar e reabrir.
 "Refatiar PR já aberto": ""
+# rascunho abre em rascunho e não pede revisão. sim abre pronto. não espera pedido. O merge não entra aqui.
 "Criar pull request ao terminar": "rascunho"
 "Modo de aprendizado": "perguntar"
 ```
-
-`Criar pull request ao terminar` é `rascunho`, o padrão: a mudança de código sobe a branch e abre o pull request em rascunho, para o trabalho não ficar só na máquina. Um rascunho não pede revisão. É `sim` quando o pull request abre pronto. É `não` quando a publicação espera um pedido explícito. A resposta diz o nome da branch, se ela está no GitHub e, quando o pull request existe, o link. O merge não entra nesse parâmetro.
-
-`Habilidade que pede a revisão` é o nome da habilidade que a organização usa para pedir a revisão de um PR pronto, como a que escreve o pedido no canal de revisão do time, ou vazio quando ninguém pede por habilidade. `Atribuir o PR a quem abre` é `sim` quando o PR sai com uma pessoa atribuída, a que o abre. `Rotular o PR` é `sim` quando o PR sai com o rótulo que melhor descreve a mudança. `Criar rótulo se nenhum servir` é `sim` quando a habilidade pode criar um rótulo novo se nenhum dos existentes descreve a mudança, ou `não`. `Atribuição da sessão` é `sim`, que termina a descrição do PR com a linha de atribuição da sessão, ou `não`, que nunca põe linha de ferramenta ou de modelo. `Termos que não podem aparecer` lista as palavras que não podem estar no PR nem nos arquivos dele. Vazio, não há busca. `Fatiar por subtarefa` é `não`, o padrão: commits do mesmo tema ficam no mesmo pull request. É `sim` quando cada subtarefa da tarefa vira um PR próprio, em fatias pequenas e incrementais. O assunto de um commit não abre outro pull request. `PR que depende de outro` é `empilhar`, que abre o PR contra a branch do anterior quando o tema depende de um pull request que ainda não entrou na base, ou vazio. `Refatiar PR já aberto` diz como mudar o corte de um PR que já está aberto, como `adicionar commits ou abrir PR empilhado`, sem renomear a branch nem fechar e reabrir o PR.
 
 ## Instruções
 
