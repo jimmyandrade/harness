@@ -570,6 +570,24 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [ ] Three cases validated with the person
 
+### definir-okr
+- **Stability**: experimental
+- **Description**: Create, review and update the objectives and key results of an area in a cycle, and connect them to the Sprint
+- **Properties**:
+  - Lives at `.agents/skills/definir-okr/SKILL.md`
+  - Reads `Nome da área`, `Máximo de objetivos por área`, `Máximo de key results por objetivo`, `Verbos do key result` and `Fontes da estratégia` from the project instructions
+  - Starts the objectives from the area page and the vision of the area in the cycle, and checks each objective against the strategy sources
+  - Keeps objectives qualitative and few, each with an owning area and a champion
+  - Writes each key result as verb, description, target value and target date, with an absolute target whenever there is one and the percentage as a derived reading
+  - Moves a task-like key result to definir-tarefa, avoids a target of 1 or 100%, and renames an untitled key result before anything else
+  - Links each key result to actions with a stated mechanism, and refuses an action without one
+  - Gates closing the OKRs on what the area must deliver and how it measures it, with a checklist
+  - Starts the Sprint from the key results in force and updates them with the evidence of the Sprint review
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [ ] The scenarios in `features/` pass in a real cycle
+  - [ ] Three cases validated with the person
+
 ### definir-perfil-social
 - **Stability**: experimental
 - **Description**: Normalize a social profile when registering or consolidating it
