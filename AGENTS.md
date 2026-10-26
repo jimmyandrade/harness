@@ -1,6 +1,6 @@
 ---
 metadata:
-  version: "1.34.1"
+  version: "1.34.2"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -113,9 +113,9 @@ metadata:
 - Descreva uma fonte de dados com JSON Schema e um mapeamento do Notion separado, como em `docs/adr/0001-describe-data-sources-with-json-schema.md`. Esses arquivos ficam no harness de negócio, não aqui.
 - Uma skill do core que lê uma fonte de dados do negócio fala de conceitos, como o título da edição ou o grupo de uma edição. O mapeamento de cada negócio liga esses conceitos aos nomes da lista e das propriedades. Uma propriedade sem a qual a edição não existe e que falta no mapeamento para a skill antes de ela escrever. Um valor de propriedade opcional que falta no mapeamento é listado no fim, com a sugestão de criar a propriedade: a skill nunca cria schema e nunca escreve esse valor no corpo da página.
 - `Considerar grupos de oportunidades` diz se as skills de oportunidade usam grupos. Com `sim`, toda edição pertence a exatamente um grupo, e o verificador falha quando o mapeamento de oportunidades do negócio, `.agents/mappings/oportunidades.notion.json`, não liga `group`. Com `não`, a edição não tem grupo.
-- `Glossário no repositório` diz se os arquivos de idioma deste projeto ficam no repositório e sobem no Git. Com `não`, eles ficam só no computador, na `Pasta do glossário`.
+- `Glossário no repositório atual` diz se os arquivos de idioma ficam no repositório aberto nesta sessão e sobem no Git. O repositório atual é esse. Cada projeto define o próprio valor. Com `não`, eles ficam só no computador, na `Pasta do glossário`.
 - A pasta do glossário não é o harness. O glossário pode ficar dentro de um harness.
-- `Harness no repositório` diz se este repositório recebe a instalação do harness. Com `não`, não acrescente essa instalação aqui. A instalação reúne o servidor, as skills, a linha de comando e a API.
+- `Harness no repositório atual` diz se o repositório aberto nesta sessão recebe a instalação do harness. Com `não`, não acrescente essa instalação nele. A instalação reúne o servidor, as skills, a linha de comando e a API.
 - As skills que um repositório guarda ficam na pasta de skills dele. As skills do core podem chegar por um link da dependência instalada. Nenhuma das duas decide a pasta do glossário.
 - O motor que lê e escreve o glossário fica neste repositório, em `vocabulary/`, como decide a ADR 0018.
 

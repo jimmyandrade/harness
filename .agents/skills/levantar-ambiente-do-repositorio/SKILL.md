@@ -3,7 +3,7 @@ name: levantar-ambiente-do-repositorio
 description: Levanta o ambiente de trabalho de um repositório antes de escrever código, testes, commit ou pull request. Acha o runtime e como ativá-lo, os comandos de instalar, lint, tipos, testes e build, as habilidades do repositório que se aplicam e as pegadinhas que ele documenta. Não serve para rodar os comandos, instalar dependências nem decidir a convenção de código.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.4.1"
   related:
     - criar-commit
     - criar-pull-request
@@ -24,8 +24,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Pastas de habilidades do repositório": ".claude/skills, .agents/skills, .cursor, .github"
 "Manifestos de comandos": "package.json, Makefile, pyproject.toml, justfile"
 "Modo de aprendizado": "perguntar"
-# `Harness no repositório` é `sim` ou `não`. Com `não`, não acrescente a instalação do harness neste repositório. Isso não decide a pasta do glossário nem a pasta de skills.
-"Harness no repositório": "sim"
+# `Harness no repositório atual` é `sim` ou `não`. O repositório atual é o que está aberto nesta sessão. Cada projeto define o próprio valor. Com `não`, não acrescente nele a instalação do harness. Isso não decide a pasta do glossário nem a pasta de skills.
+"Harness no repositório atual": "sim"
 ```
 
 ## Instruções
@@ -52,7 +52,7 @@ Registre as pegadinhas do ambiente que o repositório documenta: falhas conhecid
 
 ### Passo 6
 
-Leia `Harness no repositório`. Com `não`, a ficha diz para não acrescentar a instalação do harness neste repositório. Liste à parte as skills do repositório e as que chegam por dependência ou plugin. A pasta do glossário não faz parte dessa instalação.
+Leia `Harness no repositório atual`. O repositório atual é o que está aberto nesta sessão. Com `não`, a ficha diz para não acrescentar a instalação do harness nele. Liste à parte as skills do repositório atual e as que chegam por dependência ou plugin. A pasta do glossário não faz parte dessa instalação.
 Entregue a ficha, com uma seção por passo: instruções e habilidades do repositório, runtime e como ativar, comandos com a origem de cada um, habilidades do repositório que se aplicam a cada tarefa e pegadinhas. Em cada seção que não achou nada, escreva "Não achei". Não rode nenhum comando além de ler arquivos, e não instale nada.
 
 ### Passo 7
@@ -82,11 +82,11 @@ Se você só leu o arquivo de instruções, perde a habilidade do repositório q
 1. Liste as pastas de habilidades.
 2. Leia o nome e a descrição de cada uma, e abra a que se aplica.
 
-### Instalação do harness no repositório errado
+### Instalação do harness no repositório atual
 
-Se você acrescentar a instalação do harness num repositório com `Harness no repositório` em `não`, ou tratar a pasta do glossário como essa instalação, o repositório recebe arquivos que o negócio não pediu.
+Se você acrescentar a instalação do harness no repositório atual com `Harness no repositório atual` em `não`, ou tratar a pasta do glossário como essa instalação, esse repositório recebe arquivos que o negócio não pediu.
 
-1. Leia `Harness no repositório`.
+1. Leia `Harness no repositório atual`.
 2. Com `não`, não acrescente a instalação aqui.
 3. A pasta do glossário, a pasta de skills e a instalação do harness são decisões separadas.
 
@@ -108,7 +108,7 @@ Não achei arquivo de instruções nem habilidade do repositório. O `pyproject.
 - Duas fontes dão comandos diferentes: use a habilidade do repositório e diga qual conflita.
 - O repositório é um monorepo: levante os comandos do projeto afetado, e diga como escolher o projeto.
 - A cópia de trabalho não existe ainda: peça o repositório e pare.
-- `Harness no repositório` em `não`: a ficha diz para não acrescentar a instalação do harness neste repositório. As skills que já chegam por plugin ou por dependência continuam listadas. A pasta do glossário não entra nessa decisão.
+- `Harness no repositório atual` em `não`: a ficha diz para não acrescentar a instalação do harness no repositório atual, o que está aberto nesta sessão. As skills que já chegam por plugin ou por dependência continuam listadas. A pasta do glossário não entra nessa decisão.
 
 ## Pegadinhas
 
