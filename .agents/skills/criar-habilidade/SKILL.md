@@ -3,7 +3,7 @@ name: criar-habilidade
 description: Cria, adiciona e escreve skills a partir de uma tarefa real. Usada quando a pessoa quer uma skill nova, mesmo sem dizer skill. NÃO serve para editar código, escrever página que não seja skill, otimizar só a descrição nem gravar a skill no Notion.
 metadata:
   author: jimmyandrade
-  version: "3.17.0"
+  version: "3.17.1"
   related:
     - criar-commit
     - criar-pull-request
@@ -40,7 +40,7 @@ Leia relatórios reais da equipe. Incorpore o esquema, o modo de falha e o proce
 
 Escreva nome, descrição, metadados e corpo.
 O primeiro heading de nível 2 é `Parâmetros de configuração`, com um bloco `yaml`. O passo cita a chave.
-A explicação de um parâmetro fica num comentário YAML na linha de cima da chave, não num parágrafo depois do bloco. Depois vêm `Instruções`, `Problemas comuns`, `Exemplos de entrada e saída`, `Casos-limite`, `Pegadinhas` e `Scripts disponíveis`. A primeira frase é `Estes exemplos ilustram fatos. Eles podem não estar no data source.` A entrada é um heading de nível 3 e a saída é o parágrafo seguinte, com uma linha em branco entre pares. Não escreva `Entrada:` nem `Saída:`. Cada heading de nível 3 em `Instruções` é `Passo 1`, `Passo 2`. Roteamento para outra habilidade, ou mais de um desfecho, fica num flowchart Mermaid no sentido configurado. Em `Problemas comuns`, cada problema é um heading de nível 3, um parágrafo que começa com `Se você` e, em seguida, uma lista ordenada. O bloco de parâmetros inclui `"Modo de aprendizado": "perguntar"`, e o último passo de `Instruções` é `Ao terminar, siga evoluir-habilidade conforme Modo de aprendizado.`
+A explicação de um parâmetro fica num comentário YAML na linha de cima da chave, não num parágrafo depois do bloco. No comentário, o nome do parâmetro e cada valor possível ficam entre crases. Depois vêm `Instruções`, `Problemas comuns`, `Exemplos de entrada e saída`, `Casos-limite`, `Pegadinhas` e `Scripts disponíveis`. A primeira frase é `Estes exemplos ilustram fatos. Eles podem não estar no data source.` A entrada é um heading de nível 3 e a saída é o parágrafo seguinte, com uma linha em branco entre pares. Não escreva `Entrada:` nem `Saída:`. Cada heading de nível 3 em `Instruções` é `Passo 1`, `Passo 2`. Roteamento para outra habilidade, ou mais de um desfecho, fica num flowchart Mermaid no sentido configurado. Em `Problemas comuns`, cada problema é um heading de nível 3, um parágrafo que começa com `Se você` e, em seguida, uma lista ordenada. O bloco de parâmetros inclui `"Modo de aprendizado": "perguntar"`, e o último passo de `Instruções` é `Ao terminar, siga evoluir-habilidade conforme Modo de aprendizado.`
 Pastas, scripts, referências, modelos e `Scripts disponíveis` seguem `definir-arquivos-da-habilidade`.
 Cada frase de um passo fica na própria linha, para a mudança aparecer no diff.
 O comando não entra no passo.

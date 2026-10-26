@@ -3,7 +3,7 @@ name: criar-pull-request
 description: Use essa habilidade sempre que for abrir PR, subir uma correção, mandar para a branch principal ou mesclar mudança no repositório, mesmo sem dizer PR. NÃO use para responder comentário de revisão nem para só commitar (use criar-commit).
 metadata:
   author: jimmyandrade
-  version: "0.27.0"
+  version: "0.27.1"
   related:
     - evoluir-habilidade
     - criar-commit
@@ -29,25 +29,25 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Exigir CI verde": "sim"
 "Exigir aprovação de outra pessoa": "só sem terminal"
 "Comunicar novidade após o merge": "sim"
-# Nome da habilidade que pede a revisão de um PR pronto, ou vazio quando ninguém pede.
+# `Habilidade que pede a revisão`: nome da habilidade que pede a revisão de um PR pronto, ou vazio quando ninguém pede.
 "Habilidade que pede a revisão": ""
-# sim termina a descrição com a linha da sessão. não nunca põe linha de ferramenta ou de modelo.
+# `Atribuição da sessão`: `sim` termina a descrição com a linha da sessão. `não` nunca põe linha de ferramenta ou de modelo.
 "Atribuição da sessão": "sim"
-# sim quando o PR sai atribuído a quem o abre.
+# `Atribuir o PR a quem abre`: `sim` quando o PR sai atribuído a quem o abre.
 "Atribuir o PR a quem abre": "sim"
-# sim quando o PR sai com o rótulo que melhor descreve a mudança.
+# `Rotular o PR`: `sim` quando o PR sai com o rótulo que melhor descreve a mudança.
 "Rotular o PR": "sim"
-# sim cria um rótulo novo se nenhum existente descreve a mudança.
+# `Criar rótulo se nenhum servir`: `sim` cria um rótulo novo se nenhum existente descreve a mudança.
 "Criar rótulo se nenhum servir": "não"
-# Palavras que não podem estar no PR nem nos arquivos. Vazio, não há busca.
+# `Termos que não podem aparecer`: palavras que não podem estar no PR nem nos arquivos. Vazio, não há busca.
 "Termos que não podem aparecer": []
-# não mantém o mesmo tema no mesmo pull request. sim abre um PR por subtarefa. O assunto de um commit não abre outro.
+# `Fatiar por subtarefa`: `não` mantém o mesmo tema no mesmo pull request. `sim` abre um PR por subtarefa. O assunto de um commit não abre outro.
 "Fatiar por subtarefa": "não"
-# empilhar abre contra a branch do PR anterior. Vazio não empilha.
+# `PR que depende de outro`: `empilhar` abre contra a branch do PR anterior. Vazio não empilha.
 "PR que depende de outro": ""
-# Como mudar o corte de um PR aberto, sem renomear a branch nem fechar e reabrir.
+# `Refatiar PR já aberto`: como mudar o corte de um PR aberto, sem renomear a branch nem fechar e reabrir.
 "Refatiar PR já aberto": ""
-# rascunho abre em rascunho e não pede revisão. sim abre pronto. não espera pedido. O merge não entra aqui.
+# `Criar pull request ao terminar`: `rascunho` abre em rascunho e não pede revisão. `sim` abre pronto. `não` espera pedido. O merge não entra aqui.
 "Criar pull request ao terminar": "rascunho"
 "Modo de aprendizado": "perguntar"
 ```

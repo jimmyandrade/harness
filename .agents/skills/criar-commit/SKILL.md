@@ -3,7 +3,7 @@ name: criar-commit
 description: Use essa habilidade sempre que terminar um trabalho que mudou o repositório ou for commitar, separar commits ou escrever a mensagem, mesmo sem dizer commit. NÃO use para push, abrir PR, rebase nem merge (use criar-pull-request).
 metadata:
   author: jimmyandrade
-  version: "0.20.0"
+  version: "0.20.1"
 ---
 
 # Criar commit
@@ -22,7 +22,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Atribuição da sessão": "sim"
 "Comando de build": ""
 "Comando de lint dos arquivos tocados": ""
-# rascunho abre em rascunho e não pede revisão. sim abre pronto. não espera pedido. O merge não entra aqui.
+# `Criar pull request ao terminar`: `rascunho` abre em rascunho e não pede revisão. `sim` abre pronto. `não` espera pedido. O merge não entra aqui.
 "Criar pull request ao terminar": "rascunho"
 "Modo de aprendizado": "perguntar"
 ```
