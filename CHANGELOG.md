@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.14.0](https://github.com/jimmyandrade/harness/compare/v1.13.2...v1.14.0) (2026-10-26)
+
+
+### Features
+
+* **definir-okr:** create and review objectives and key results by area and cycle ([#518](https://github.com/jimmyandrade/harness/issues/518)) ([11136b2](https://github.com/jimmyandrade/harness/commit/11136b2dacbba07e7aeae881d6b31ec3af23f947))
+
+
+### Bug Fixes
+
+* open every issue and pull request through its skill ([#520](https://github.com/jimmyandrade/harness/issues/520)) ([ce4cca1](https://github.com/jimmyandrade/harness/commit/ce4cca144173c69b9805aa4478486ecf892482b2))
+
 ## [1.13.2](https://github.com/jimmyandrade/harness/compare/v1.13.1...v1.13.2) (2026-10-26)
 
 
