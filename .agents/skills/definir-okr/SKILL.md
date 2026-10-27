@@ -4,7 +4,7 @@ description: Cria, revisa e atualiza os objetivos e os key results de uma área 
 compatibility: Precisa de Python quando a execução é local.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.3.1"
   related:
     - definir-medicao-de-metrica
     - definir-tarefa
@@ -93,7 +93,7 @@ O progresso dele é (base − valor atual) ÷ (base − valor-alvo), e um valor 
 Se a lista calcula o progresso só como valor atual ÷ valor-alvo, não grave o key result de redução assim.
 Proponha reescrevê-lo como uma quantidade que cresce, como a economia sobre a base, com valor-alvo igual à base menos o alvo, ou ajustar o cálculo da lista com a base e o sentido, e pergunte qual seguir.
 Confira o progresso que a lista mostra contra o cálculo de referência, com o mesmo sentido, valor atual, valor-alvo e base.
-As fórmulas abaixo valem com ou sem o modelo de fórmula ao lado. Quando ele abre, é o mesmo texto. Quando não abre, use estas.
+Use estas fórmulas para propor o ajuste do cálculo.
 Troque cada nome entre `<>` pelo nome da propriedade ou da opção que o mapeamento de dados do projeto dá.
 Antes de colar, compare com a fórmula atual da lista e mantenha o que ela faz além do progresso.
 Progresso. Um resultado igual a 1 é o alvo atingido. Acima de 1, o alvo foi passado. Sem valor atual, sem valor-alvo, ou num key result de redução sem base acima do alvo, o campo fica vazio.
@@ -215,13 +215,6 @@ Se você aceitar "Configurar X" ou "Realizar 12 revisões" como key result, a á
 1. Mova a execução para uma tarefa, por `definir-tarefa`.
 2. Reescreva o key result com resultado, evidência, critério de qualidade e prazo.
 
-### Fórmula só no modelo ao lado
-
-Se você mandar abrir um modelo de fórmula que a execução não alcança, o ajuste do progresso não sai.
-
-1. Use as fórmulas do Passo 4, que estão no texto.
-2. O modelo ao lado, quando abre, é o mesmo texto. A execução não depende dele.
-
 ### Key result de redução com progresso invertido
 
 Se você gravar "Diminuir os custos para R$ 3.130" numa lista que calcula valor atual ÷ valor-alvo, custo zero aparece como 0% e o custo da base como mais de 100%.
@@ -264,13 +257,11 @@ a área tinha 5 objetivos no ciclo. Sugeri manter os 3 que conversam com a estra
 - Não há absoluto possível: a porcentagem é o alvo, com a base escrita.
 - As `Fontes da estratégia` estão vazias e as instruções não dizem: peça as páginas antes de validar os objetivos.
 - A lista não está no workspace conectado: pare.
-- A execução não abre o modelo de fórmula: use as fórmulas do Passo 4.
 
 ## Pegadinhas
 
 - A porcentagem de conclusão, o valor atual e o atingimento são calculados pela lista. Editar à mão quebra a conta.
 - Num key result de redução, gastar zero parece não bater a meta quando a lista divide o valor atual pelo valor-alvo. O sentido e a base mudam a conta.
-- O modelo de fórmula ao lado parece obrigatório. As fórmulas do Passo 4 bastam quando ele não abre.
 - Digitar a base no key result parece mais rápido. O número fica sem fonte e diverge do registro do mesmo período no histórico de medições.
 - Um key result recém-criado sem título aparece como "Nova página" e some na busca pelo assunto.
 - A descrição da propriedade de título na lista traz o padrão de nome. Leia antes de gravar.
