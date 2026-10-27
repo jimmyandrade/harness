@@ -1,9 +1,9 @@
 ---
 name: preparar-tarefa-do-pull-request
-description: Garante que uma demanda tenha uma tarefa no rastreador do projeto antes de virar pull request, ou depois, quando o PR já existe. Procura a tarefa existente, sugere a criação e pede o contexto, monta a tarefa e liga a chave ao PR. Não cria sozinha, não cria tarefa vazia e não escolhe o projeto por um card parecido. Não serve para escrever bem uma tarefa nem para abrir o PR.
+description: Garante a tarefa da demanda antes do pull request e confere se a descrição da issue em que a pessoa vai trabalhar segue o modelo do tipo. Usada quando falta a tarefa, quando o PR já existe sem ela, ou quando a pessoa vai implementar uma issue. Não cria sozinha nem escolhe o projeto por um card parecido. Não serve para abrir o PR nem para revisar uma tarefa sem demanda de trabalho.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.7.0"
   related:
     - definir-tarefa
     - evoluir-habilidade
@@ -69,7 +69,9 @@ Toda demanda tem uma tarefa. Não pule por causa do estado do PR, como rascunho 
 
 ### Passo 3
 
-Siga `procurar-tarefa` antes de sugerir qualquer criação, com palavras da demanda e, quando houver PR, o nome da branch. Se achar uma tarefa que plausivelmente cobre a demanda, mostre-a com o nome, o status e o link, e pare. Não sugira uma nova.
+Siga `procurar-tarefa` antes de sugerir qualquer criação, com palavras da demanda e, quando houver PR, o nome da branch. Se achar uma tarefa que cobre a demanda, não sugira uma nova. Se a pessoa só perguntou se a tarefa existe, mostre o nome, o status e o link, e pare.
+
+Se a pessoa vai trabalhar nessa tarefa, ou pediu para implementar, leia a descrição e o modelo do tipo em `Modelos de descrição`, com o `Formato dos critérios de aceitação`. A descrição está no modelo quando tem as seções do modelo, cada critério é um título com "deve" ou "não deve" e os três itens Dado que, Quando e Então, e, quando a tarefa muda código de um app com ambiente de teste por PR, o último critério é o `Critério de validação da mudança`. Fora do modelo, reescreva a descrição para o modelo nesse turno, sem inventar escopo e sem descartar decisão que já estava escrita. Diga o que mudou. Não comece o código enquanto a descrição estiver fora do modelo. Dentro do modelo, diga isso e siga.
 
 ### Passo 4
 
@@ -143,6 +145,14 @@ Se você escrever sobre o PR com o estado de uma leitura antiga, o texto diz que
 1. Confira o estado do PR logo antes de redigir.
 2. Releia depois de uma pausa.
 
+### Issue fora do modelo
+
+Se você implementar com a descrição fora do modelo, o código segue um texto que não dá para testar.
+
+1. Compare a descrição com o modelo do tipo antes do código.
+2. Reescreva para o modelo, mantendo as decisões já escritas.
+3. Não invente escopo.
+
 ### Chave na branch contra a convenção
 
 Se você puser a chave da tarefa no nome da branch num repositório que a proíbe, o check da branch falha.
@@ -158,6 +168,10 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 Procurei no rastreador e não achei tarefa para isso. Sugeri criar e perguntei o impacto para quem usa o relatório e se exportar em PDF entra agora. Você respondeu: CSV é obrigatório, PDF fica para depois. Montei a tarefa com `definir-tarefa`, com o escopo em duas partes, cada uma num PR, e mostrei. Depois do seu sim, criei. A chave vai no nome da branch e no título do PR.
 
+### Implemente a issue PROJ-1, e a descrição só tem uma lista
+
+A descrição não tinha as seções do modelo nem critérios com Dado que, Quando e Então. Reescrevi para o modelo, mantive o que já estava decidido e disse o que mudou. O código só começou depois disso.
+
 ### O PR da Ana já está aberto e não tem tarefa
 
 O PR está aberto, em rascunho. Procurei e não achei. Sugeri criar a tarefa a partir do que o PR propõe, sem usar o comentário de revisão do Caio. Depois do sim, criei, liguei o PR à tarefa e propus o ajuste do título do PR.
@@ -165,7 +179,8 @@ O PR está aberto, em rascunho. Procurei e não achei. Sugeri criar a tarefa a p
 ## Casos-limite
 
 - O projeto não usa rastreador: diga isso e pare.
-- Uma tarefa que plausivelmente cobre a demanda já existe: mostre e pare.
+- Uma tarefa que cobre a demanda já existe e a pessoa só perguntou se ela existe: mostre e pare, sem reescrever.
+- A pessoa vai trabalhar numa tarefa cuja descrição está fora do modelo: reescreva para o modelo nesse turno e só então siga para o código.
 - O repositório não está mapeado para um projeto: pergunte uma vez e grave. Um card parecido noutro projeto não preenche o mapeamento.
 - A pessoa pediu para criar o card e não disse o projeto: se há um único prefixo, use-o. Se há vários, mostre só esses e espere a escolha. Vazio, pergunte o projeto e pare.
 - A pessoa disse uma chave fora da lista: pergunte de novo, só entre os prefixos configurados.
@@ -177,6 +192,7 @@ O PR está aberto, em rascunho. Procurei e não achei. Sugeri criar a tarefa a p
 ## Pegadinhas
 
 - A tarefa deve existir antes do PR. Criar depois é a exceção.
+- Achar a tarefa parece o fim. Se a pessoa vai trabalhar nela, a descrição ainda precisa estar no modelo do tipo.
 - O rastreador pode usar um formato próprio para caixas de seleção, e o texto simples de lista não vira caixa marcável. Confira como o rastreador do projeto grava.
 - Uma tarefa de projeto de reserva pode precisar de uma segunda tarefa no projeto certo, depois de uma migração.
 - A busca por palavras acha a tarefa de outra pessoa: confira se é a mesma demanda.
