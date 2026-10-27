@@ -14,6 +14,7 @@ flowchart LR
     acompanhar_fila_de_revisao["acompanhar-fila-de-revisao"]
     acompanhar_veiculo["acompanhar-veiculo"]
     atender_revisao_de_pull_request["atender-revisao-de-pull-request"]
+    atualizar_branch_do_pull_request["atualizar-branch-do-pull-request"]
     avaliar_atualizacoes_de_dependencia["avaliar-atualizacoes-de-dependencia"]
     classificar_estado_do_termo["classificar-estado-do-termo"]
     classificar_melhoria_tecnica["classificar-melhoria-tecnica"]
@@ -118,6 +119,7 @@ flowchart LR
   acompanhar_veiculo --> lancar_despesa_pessoal
   acompanhar_veiculo --> organizar_emails
   acompanhar_veiculo --> sincronizar_cronograma
+  atender_revisao_de_pull_request --> atualizar_branch_do_pull_request
   atender_revisao_de_pull_request --> criar_commit
   atender_revisao_de_pull_request --> criar_pull_request
   atender_revisao_de_pull_request --> escrever_teste
@@ -128,6 +130,9 @@ flowchart LR
   atender_revisao_de_pull_request --> priorizar_itens
   atender_revisao_de_pull_request --> publicar_resposta_de_revisao
   atender_revisao_de_pull_request --> publicar_revisao_de_codigo
+  atualizar_branch_do_pull_request --> atender_revisao_de_pull_request
+  atualizar_branch_do_pull_request --> criar_pull_request
+  atualizar_branch_do_pull_request --> evoluir_habilidade
   avaliar_atualizacoes_de_dependencia --> atender_revisao_de_pull_request
   avaliar_atualizacoes_de_dependencia --> criar_commit
   avaliar_atualizacoes_de_dependencia --> criar_pull_request
@@ -146,6 +151,7 @@ flowchart LR
   conversar_no_whatsapp --> evoluir_habilidade
   conversar_no_whatsapp --> procurar_tarefa
   conversar_no_whatsapp --> redigir_com_tom_de_voz
+  criar_commit -.-> atualizar_branch_do_pull_request
   criar_commit -.-> criar_pull_request
   criar_commit -.-> evoluir_habilidade
   criar_commit -.-> fatiar_pull_request
@@ -157,6 +163,7 @@ flowchart LR
   criar_habilidade --> evoluir_habilidade
   criar_oportunidade --> definir_grupo_de_oportunidades
   criar_oportunidade --> procurar_oportunidade
+  criar_pull_request --> atualizar_branch_do_pull_request
   criar_pull_request --> comunicar_novidade_do_produto
   criar_pull_request --> criar_commit
   criar_pull_request --> evoluir_habilidade

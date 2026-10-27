@@ -3,10 +3,11 @@ name: criar-pull-request
 description: Use essa habilidade sempre que for abrir PR, subir uma correção, mandar para a branch principal ou mesclar mudança no repositório, mesmo sem dizer PR. NÃO use para responder comentário de revisão nem para só commitar (use criar-commit).
 metadata:
   author: jimmyandrade
-  version: "0.32.0"
+  version: "0.33.0"
   related:
     - evoluir-habilidade
     - criar-commit
+    - atualizar-branch-do-pull-request
     - fatiar-pull-request
     - comunicar-novidade-do-produto
     - sincronizar-status-da-tarefa
@@ -87,15 +88,7 @@ Commite seguindo `criar-commit`.
 
 ### Passo 4
 
-Se a branch já tem PR, confira o estado dele antes de atualizar. Se já foi mesclado, a branch remota foi apagada: comece uma branch nova a partir da `Branch base` remota e leve só os commits que ficaram fora do merge.
-Atualize a branch com rebase sobre a `Branch base` remota.
-Nunca faça merge da base na branch nem crie commit com assunto `merge:`.
-O squash do PR não é motivo para mesclar a base antes.
-Resolva conflitos nos commits rebaseados.
-Se a branch já foi publicada, o push comum é recusado, porque a história local e a do GitHub divergiram.
-Substitua a branch no GitHub pela história reescrita só depois que a pessoa autorizar, e só nessa branch.
-Na resposta, diga que a branch publicada ganha os commits novos, a `Branch base` não muda, e a substituição só segue se ninguém enviou commit novo nessa branch desde a última leitura.
-Não use o nome do comando no lugar dessa explicação.
+Se a branch já tem PR ou está atrás da `Branch base`, siga `atualizar-branch-do-pull-request` antes do push.
 
 ### Passo 5
 
@@ -263,7 +256,7 @@ O pedido autoriza push e merge. O push espera o hook de pre-push. PR aberto, mer
 ## Casos-limite
 
 - Já existe PR aberto para a branch: não abra outro. Depois do push, confira título e descrição uma vez, atualize o que deixou de contar o que a branch faz, e dê o link.
-- O PR da branch já foi mesclado: não dê rebase nem push nessa branch. Os commits dela já estão na `Branch base` pelo squash, e o push recria a branch apagada.
+- O PR da branch já foi mesclado: siga `atualizar-branch-do-pull-request`, que não dá rebase nem push nessa branch.
 - A branch atual tem trabalho de outra tarefa: comece a nova branch da `Branch base` remota, não da branch atual.
 - A ferramenta criou a branch com outro prefixo, como `claude/…`: renomeie para `<tipo>/<descrição>` antes do push. Com PR aberto, a renomeação fecha o PR: abra outro e ligue os dois.
 - O teste novo passa também sem a correção: o teste não cobre o bug. Reescreva antes do commit.
@@ -274,7 +267,6 @@ O pedido autoriza push e merge. O push espera o hook de pre-push. PR aberto, mer
 ## Pegadinhas
 
 - Número ou hash curto, no lugar do endereço do Passo 6, obriga a pessoa a procurar. `#<número>` no commit e na descrição é a issue.
-- `git pull --rebase` numa branch já publicada rebaseia sobre a própria branch remota, não sobre a `Branch base`. Use o fetch e rebase do Passo 4.
 - `git switch -c <branch> origin/<base>` faz a branch rastrear a base. Use `--no-track` e publique com `push -u origin <branch>`.
 - O prefixo que a ferramenta deu parece o nome da branch. Quem manda é o tipo do commit.
 - O push por HTTPS pode travar para sempre no helper de credencial do macOS. A credencial do `gh` funciona.
@@ -289,9 +281,6 @@ O pedido autoriza push e merge. O push espera o hook de pre-push. PR aberto, mer
 - `git fetch origin && git switch --no-track -c <branch> origin/<Branch base>`: Passo 1.
 - `git branch -m <tipo>/<descrição>`: renomeia a branch local no Passo 1.
 - `gh api -X POST repos/<Repositório>/branches/<branch>/rename -f new_name=<tipo>/<descrição>`: Passo 1. Fecha o PR. Abra outro depois.
-- `gh pr list --repo <Repositório> --head <branch> --state all --json number,state`: estado do PR no Passo 4.
-- `git fetch origin && git rebase origin/<Branch base>`: Passo 4.
-- `git push --force-with-lease origin <branch>`: Passo 5, só com autorização. Não substitui a `Branch base`.
 - `GIT_TERMINAL_PROMPT=0 git -c credential.helper= -c 'credential.helper=!gh auth git-credential' ls-remote origin HEAD`: teste de acesso do Passo 5.
 - `GIT_TERMINAL_PROMPT=0 git -c credential.helper= -c 'credential.helper=!gh auth git-credential' push -u origin <branch>`: push do Passo 5. O hook de pre-push roda.
 - `LEFTHOOK=0 GIT_TERMINAL_PROMPT=0 git -c credential.helper= -c 'credential.helper=!gh auth git-credential' push -u origin <branch>`: só com `Pular o hook de pre-push` em `sim`.
@@ -303,4 +292,4 @@ O pedido autoriza push e merge. O push espera o hook de pre-push. PR aberto, mer
 - `gh pr checks <número> --repo <Repositório>`: checks do Passo 8.
 - `gh pr merge <número> --repo <Repositório> --<Tipo de merge> --delete-branch`: Passo 8.
 
-1. Rode as verificações, depois o rebase, o teste de acesso, o push, a conferência do título e da descrição, a criação ou a atualização do PR e, só com pedido, os comentários, os checks e o merge.
+1. Rode as verificações, depois a atualização da branch, o teste de acesso, o push, a conferência do título e da descrição, a criação ou a atualização do PR e, só com pedido, os comentários, os checks e o merge.
