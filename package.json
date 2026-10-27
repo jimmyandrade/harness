@@ -5,6 +5,7 @@
     "node": ">=24.22.1"
   },
   "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.2",
     "@notionhq/client": "5.28.0",
     "zod": "4.6.7"
   },
@@ -19,5 +20,9 @@
     "prepare": "npm run build",
     "test": "node --test \".agents/scripts/**/*.test.ts\" \"vocabulary/api/**/*.test.ts\""
   },
-  "license": "PolyForm-Noncommercial-1.0.0"
+  "license": "PolyForm-Noncommercial-1.0.0",
+  "exports": {
+    "./vocabulary/types": "./vocabulary/types.ts",
+    "./vocabulary/mcp-http": "./vocabulary/api/shared/mcp-http.ts"
+  }
 }
