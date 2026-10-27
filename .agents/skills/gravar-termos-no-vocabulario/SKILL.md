@@ -3,7 +3,7 @@ name: gravar-termos-no-vocabulario
 description: Use essa habilidade sempre que, ao cadastrar ou corrigir termos do vocabulário do tom de voz, for hora de pesquisar a grafia, testar com dry run e gravar o lote, mesmo sem dizer gravar. NÃO use para decidir o nível, validar os campos, perguntar quais variações foram cadastradas, escrever o texto da marca, nem inventar um termo.
 metadata:
   author: jimmyandrade
-  version: "0.8.0"
+  version: "0.9.0"
   related:
     - definir-vocabulario
     - procurar-variacao-de-termo
@@ -155,6 +155,7 @@ O plano ficou em update. A reticências que já estava foi reescrita, com o quan
 
 ## Pegadinhas
 
+- `$schema`, a primeira chave do arquivo, parece um termo. Ela diz o formato do arquivo. A recusa de um formato mais novo pede para atualizar o plugin ou a dependência antes de gravar. Não apague a chave nem edite o arquivo à mão.
 - Cadastrar parece reescrever o que já está. Com `insert`, a linha que já existe fica.
 - `Already in the glossary` parece dizer que a regra já está. Ele só vale para a mesma grafia com o mesmo conjunto de tags.
 - A maiúscula do pedido parece a grafia a guardar. Termo novo fica em minúsculas. A linha que já existe conserva a grafia guardada.
