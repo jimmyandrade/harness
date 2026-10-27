@@ -1,9 +1,9 @@
 ---
 name: preparar-tarefa-do-pull-request
-description: Garante que uma demanda tenha uma tarefa no rastreador do projeto antes de virar pull request, ou depois, quando o PR já existe. Procura a tarefa existente, sugere a criação e pede o contexto, monta a tarefa e liga a chave ao PR. Não cria sozinha e não cria tarefa vazia. Não serve para escrever bem uma tarefa nem para abrir o PR.
+description: Garante que uma demanda tenha uma tarefa no rastreador do projeto antes de virar pull request, ou depois, quando o PR já existe. Procura a tarefa existente, sugere a criação e pede o contexto, monta a tarefa e liga a chave ao PR. Não cria sozinha, não cria tarefa vazia e não escolhe o projeto por um card parecido. Não serve para escrever bem uma tarefa nem para abrir o PR.
 metadata:
   author: jimmyandrade
-  version: "0.3.1"
+  version: "0.4.0"
   related:
     - definir-tarefa
     - evoluir-habilidade
@@ -59,7 +59,7 @@ Com PR, confira o estado dele agora, antes de redigir qualquer texto sobre ele. 
 
 ### Passo 2
 
-Se `Onde ficam as tarefas` está vazio, diga que o projeto não usa rastreador e pare. Resolva o projeto ou a lista da tarefa pelo repositório, com `Projeto da tarefa por repositório`. Sem mapeamento, pergunte uma vez e grave a resposta.
+Se `Onde ficam as tarefas` está vazio, diga que o projeto não usa rastreador e pare. Resolva o projeto ou a lista da tarefa pelo repositório, com `Projeto da tarefa por repositório`. Sem mapeamento, pergunte uma vez e grave a resposta. Um card parecido noutro projeto não preenche o projeto.
 
 Antes de propor qualquer escrita na tarefa, em qualquer projeto, leia o `Mapa de permissões`. Uma ação `não` não é proposta nem tentada: diga à pessoa que ela não tem essa permissão lá e ofereça o contorno registrado, como mandar o texto pronto a quem é dono da tarefa. Uma ação `desconhecido` pode ser proposta, com o aviso de que é a primeira tentativa. Sem entrada para o projeto, descubra ao menos a permissão de criar e registre as outras como `desconhecido`. Depois de cada escrita, grave o resultado: `sim` se foi aceita, `não` se foi recusada com mensagem de permissão. Um erro de validação da própria ferramenta não é recusa de permissão e não vira `não`: avise que é problema da ferramenta e sugira tentar numa sessão nova.
 
@@ -71,7 +71,7 @@ Siga `procurar-tarefa` antes de sugerir qualquer criação, com palavras da dema
 
 ### Passo 4
 
-Se não achou nada, sugira a criação e peça o contexto que falta: o resumo real da demanda, o tipo e o projeto, se ficou ambíguo. No chat, se a pessoa está na frente. No resumo da execução, se foi chamada por uma automação. Nunca crie sem a resposta, e nunca crie uma tarefa vazia, genérica ou copiada de um título técnico sem revisão. Sem contexto suficiente, pergunte de novo.
+Se não achou nada, sugira a criação e peça o contexto que falta: o resumo real da demanda, o tipo e o projeto. O projeto fica ambíguo enquanto a pessoa não disser a chave. Um card parecido noutro projeto não escolhe o projeto. "Crie o card" sem a chave do projeto não é a resposta do projeto. No chat, se a pessoa está na frente. No resumo da execução, se foi chamada por uma automação. Nunca crie sem a resposta, e nunca crie uma tarefa vazia, genérica ou copiada de um título técnico sem revisão. Sem contexto suficiente, pergunte de novo.
 
 ### Passo 5
 
@@ -95,7 +95,7 @@ Os textos seguem `redigir-com-tom-de-voz`.
 
 ### Passo 7
 
-Mostre a tarefa montada e espere o sim. Só então crie. Sem permissão de criação no projeto, use o `Projeto de reserva sem permissão` e diga que usou. Garanta a `Evidência de visibilidade da tarefa de reserva`: pergunte primeiro se já existe uma, e só sem nenhuma proponha criá-la, sem postar sozinha. Sem reserva, diga que falta permissão e pare.
+Mostre a tarefa montada, com a chave do projeto, e espere o sim. Só então crie. O pedido de criar o card não substitui esse sim quando o projeto ainda não foi dito. Sem permissão de criação no projeto, use o `Projeto de reserva sem permissão` e diga que usou. Garanta a `Evidência de visibilidade da tarefa de reserva`: pergunte primeiro se já existe uma, e só sem nenhuma proponha criá-la, sem postar sozinha. Sem reserva, diga que falta permissão e pare.
 
 ### Passo 8
 
@@ -113,11 +113,11 @@ Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ### Tarefa criada sem a pessoa pedir
 
-Se você criar a tarefa assim que não achar nenhuma, ela nasce com um contexto que você inventou e a pessoa perde a chance de dizer o que falta.
+Se você criar a tarefa assim que não achar nenhuma, ou escolher o projeto porque um card parecido está noutro projeto, ela nasce no lugar errado e a pessoa perde a chance de dizer o que falta.
 
-1. Sugira a criação e peça o contexto.
-2. Espere a resposta.
-3. Mostre a tarefa montada e espere o sim.
+1. Sugira a criação e peça o contexto, inclusive a chave do projeto.
+2. Espere a resposta. "Crie o card" sem a chave do projeto não é essa resposta.
+3. Mostre a tarefa montada, com a chave do projeto, e espere o sim.
 
 ### Tarefa montada em volta de um comentário
 
@@ -164,7 +164,8 @@ O PR está aberto, em rascunho. Procurei e não achei. Sugeri criar a tarefa a p
 
 - O projeto não usa rastreador: diga isso e pare.
 - Uma tarefa que plausivelmente cobre a demanda já existe: mostre e pare.
-- O repositório não está mapeado para um projeto: pergunte uma vez e grave.
+- O repositório não está mapeado para um projeto: pergunte uma vez e grave. Um card parecido noutro projeto não preenche o mapeamento.
+- A pessoa pediu para criar o card e não disse o projeto: pergunte o projeto e pare.
 - Nenhuma regra de tipo bate: pergunte o tipo e o motivo.
 - Falta permissão de criação: use o projeto de reserva, ou diga e pare.
 - A pessoa não deu contexto suficiente: pergunte de novo, sem criar.
@@ -177,6 +178,7 @@ O PR está aberto, em rascunho. Procurei e não achei. Sugeri criar a tarefa a p
 - Uma tarefa de projeto de reserva pode precisar de uma segunda tarefa no projeto certo, depois de uma migração.
 - A busca por palavras acha a tarefa de outra pessoa: confira se é a mesma demanda.
 - A discussão de código fica no PR, e a tarefa guarda o que o PR propõe.
+- Um card parecido noutro projeto parece resolver o projeto. Não resolve. Pergunte a chave.
 
 ## Scripts disponíveis
 
