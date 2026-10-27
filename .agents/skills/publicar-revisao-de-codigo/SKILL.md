@@ -3,7 +3,7 @@ name: publicar-revisao-de-codigo
 description: Revisa um pull request e publica a revisão numa única review, com os comentários inline, no idioma de quem recebe e no tom do projeto. Usada quando a pessoa pede uma revisão ou outra habilidade precisa publicar uma. Não serve para tratar os comentários que você recebeu no seu PR.
 metadata:
   author: jimmyandrade
-  version: "0.14.0"
+  version: "0.15.0"
   aliases:
     - post-code-review
   related:
@@ -51,7 +51,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Abertura da revisão": ""
 # `Lentes de revisão` lista critérios que você aplica antes de publicar sem citá-los no texto.
 "Lentes de revisão": ""
-# `Ler o texto antes de publicar`: `sim` mostra o texto e espera o sim. `não` publica na hora, inclusive um ajuste pedido depois.
+# `Ler o texto antes de publicar`: `sim` mostra a primeira publicação e espera o sim. `não` publica na hora. Feedback que muda texto já publicado atualiza comentários e respostas sem perguntar.
 "Ler o texto antes de publicar": "sim"
 # `Publicar em execução agendada` é `sim` ou `não` e só vale quando ninguém está na frente: com `não`, a habilidade prepara a revisão e não publica.
 "Publicar em execução agendada": "não"
@@ -142,7 +142,7 @@ Escreva os textos com `redigir-com-tom-de-voz`, para o tom de quem publica. Um c
 
 ### Passo 10
 
-Antes de publicar, com `Ler o texto antes de publicar` em `sim`, mostre o texto completo e espere o sim da pessoa que chamou. Com `não`, publique na hora, inclusive o ajuste que a pessoa pediu numa review já publicada, e devolva o link. Ela lê depois e pede outro ajuste se quiser. Em execução agendada, com `Publicar em execução agendada` em `não`, não publique: deixe o texto e o link do PR no resumo. Com `Publicar em execução agendada` em `sim`, publique do mesmo jeito, sem esperar a leitura, e diga no resumo o que foi publicado.
+Na primeira publicação, com `Ler o texto antes de publicar` em `sim`, mostre o texto e espere o sim. Com `não`, publique na hora e devolva o link. Feedback que muda o texto já publicado atualiza comentários e respostas sem perguntar. Ela lê depois e pede outro ajuste se quiser. Em execução agendada, com `Publicar em execução agendada` em `não`, não publique: deixe o texto e o link do PR no resumo. Com `Publicar em execução agendada` em `sim`, publique do mesmo jeito, sem esperar a leitura, e diga no resumo o que foi publicado.
 
 Publique numa única review, com todos os comentários inline numa chamada só, e as respostas nas threads existentes. A ação final vem dos parâmetros:
 
@@ -177,11 +177,11 @@ Se você revisar um PR sem conferir o estado agora, a revisão chega depois do m
 
 ### Confirmação pedida de novo
 
-Se você mostrar o texto e esperar um sim com `Ler o texto antes de publicar` em `não`, ou depois que a pessoa já pediu o ajuste, a review fica parada.
+Se você perguntar antes de aplicar um feedback que muda o texto já publicado, a review fica parada.
 
-1. Publique na hora.
+1. Atualize comentários e respostas na hora.
 2. Devolva o link.
-3. O próximo ajuste espera ela ler e pedir.
+3. Não pergunte se pode atualizar.
 
 ### Aprovação pedida antes da revisão
 
@@ -285,7 +285,7 @@ Rodei a revisão e achei bloqueio. Não aprovei. Avisei que ainda não dá para 
 - Um comentário que toca o mesmo trecho mas aponta outro problema não é um achado repetido.
 - O primeiro nome parece marcar a pessoa. Só `@` mais o login do GitHub avisa. Um corpo que só descreve o PR não é a aprovação sem achado. PR aberto por bot segue `Voz em PR aberto por bot` e não leva `@`.
 - Pedir para aprovar parece dispensar a revisão. Sem a revisão, não há aprovação.
-- `Ler o texto antes de publicar` em `não` parece ainda pedir o sim. Publique e devolva o link. Um ajuste pedido depois também sai na hora.
+- Feedback que muda o texto já publicado atualiza comentários e respostas sem perguntar, mesmo com `Ler o texto antes de publicar` em `sim`.
 - Uma review sem comentários inline não cobre um ponto de código: ele precisa de uma linha.
 - O corpo da review não repete o que está inline: diz só que deixou pontos, sem contar quantos.
 - A cópia separada é a trava: removê-la libera o repositório.
