@@ -3,7 +3,7 @@ name: publicar-revisao-de-codigo
 description: Revisa um pull request e publica a revisão numa única review, com os comentários inline, no idioma de quem recebe e no tom do projeto. Usada quando a pessoa pede uma revisão ou outra habilidade precisa publicar uma. Não serve para tratar os comentários que você recebeu no seu PR.
 metadata:
   author: jimmyandrade
-  version: "0.13.1"
+  version: "0.14.0"
   aliases:
     - post-code-review
   related:
@@ -47,7 +47,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Cobertura integrada em comportamento crítico": "não"
 "Tamanho de PR que pede divisão": ""
 "Rótulo de prioridade no texto": "não"
-# `Abertura da revisão` descreve o que abre cada texto, como um resumo curto.
+# `Abertura da revisão`: `versão curta e versão longa` escreve o par com os rótulos do vocabulário. `versão única` ou vazio escreve uma vez, sem rótulos. O vocabulário não cobre essa escolha.
 "Abertura da revisão": ""
 # `Lentes de revisão` lista critérios que você aplica antes de publicar sem citá-los no texto.
 "Lentes de revisão": ""
@@ -60,7 +60,6 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Idade máxima da trava": "2 horas"
 # `Comentário de início da revisão` e `Etiqueta de revisão em andamento` avisam quem acompanha o PR de que a revisão começou: vazios, a habilidade não posta nem etiqueta nada.
 "Comentário de início da revisão": ""
-# `Comentário de início da revisão` e `Etiqueta de revisão em andamento` avisam quem acompanha o PR de que a revisão começou: vazios, a habilidade não posta nem etiqueta nada.
 "Etiqueta de revisão em andamento": ""
 "Modo de aprendizado": "perguntar"
 ```
@@ -135,7 +134,7 @@ Escreva os textos com `redigir-com-tom-de-voz`, para o tom de quem publica. Um c
 - Todo ponto sobre uma linha de código vai inline, ancorado na linha do diff mais próxima. O corpo geral não cita arquivo, função nem chamada. Só fica no corpo o que não é sobre linha.
 - Escreva em palavras, não pelo rótulo: com `Rótulo de prioridade no texto` em `não`, o nome da categoria nunca aparece.
 - Com `Revelar que a revisão foi automática` em `não`, não mencione automação, ferramenta, nome de habilidade nem quantos comentários há, e não deixe rodapé de ferramenta.
-- Aplique `Abertura da revisão`.
+- Siga `Abertura da revisão`. O par só entra com `versão curta e versão longa`, também na tradução.
 - Cada comentário que fala com uma pessoa abre com o `@login` do GitHub dela. Quem mais entra no ponto também leva `@login`. O primeiro nome sozinho não marca a pessoa.
 - Com `Voz em PR aberto por bot` em `nós`, num PR aberto por um bot, nunca escreva "você", "seu" nem @menção ao autor: use a primeira pessoa do plural, "nós", como se o ponto fosse para a discussão do time. Vale no corpo, nos comentários, nas respostas em thread e na tradução. Essa voz não leva `@`.
 - Seja curto. Não escreva frase que uma pessoa não escreveria.
