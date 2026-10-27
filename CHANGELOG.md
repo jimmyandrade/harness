@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.16.3](https://github.com/jimmyandrade/harness/compare/v1.16.2...v1.16.3) (2026-10-27)
+
+
+### Bug Fixes
+
+* **evoluir-habilidade:** open the pull request without asking ([#547](https://github.com/jimmyandrade/harness/issues/547)) ([48de770](https://github.com/jimmyandrade/harness/commit/48de77069d2af973111ee7d6204de7859dd35446)), closes [#545](https://github.com/jimmyandrade/harness/issues/545)
+
 ## [1.16.2](https://github.com/jimmyandrade/harness/compare/v1.16.1...v1.16.2) (2026-10-27)
 
 
