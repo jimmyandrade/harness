@@ -3,7 +3,7 @@ name: escrever-codigo
 description: Aplica as preferências de código da pessoa antes de escrever ou alterar código, como comentários, estilo inline e o que fazer antes de criar um componente. Usada quando uma mudança vai escrever ou alterar código do projeto. Não serve para testes, para commit nem para decidir a arquitetura.
 metadata:
   author: jimmyandrade
-  version: "0.5.1"
+  version: "0.6.0"
   related:
     - criar-commit
     - criar-pull-request
@@ -25,11 +25,15 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Estilo inline": ""
 # `Antes de criar um componente` lista o que ler e quais habilidades do repositório chamar, em ordem.
 "Antes de criar um componente": ""
+# `Cópia de trabalho` é `worktree` ou vazio. `worktree` abre um git worktree novo por tarefa e não usa o clone da pessoa. Vazio escreve onde a pessoa já está.
+"Cópia de trabalho": ""
 "Modo de aprendizado": "perguntar"
 ```
 ## Instruções
 
 ### Passo 1
+
+Siga `Cópia de trabalho` antes de escrever. Com `worktree`, crie um git worktree novo desta tarefa e escreva nele. Não use o clone aberto da pessoa nem um worktree que outra tarefa já ocupa. Não apague esse worktree no fim: o trabalho continua nele. Com valor vazio, escreva onde a pessoa já está.
 
 Chame `levantar-ambiente-do-repositorio` para achar a convenção de código e as habilidades do repositório, nas instruções do projeto e nas habilidades do próprio repositório. Ela vale mais que qualquer preferência desta habilidade. Diga à pessoa quando uma preferência dela contraria o repositório e siga o repositório. Antes de escrever o código, siga `escrever-teste`: com TDD, o padrão dela, o teste que falha vem primeiro, e o código é o que o faz passar.
 
@@ -102,6 +106,7 @@ Mudei a função sem comentário novo. Um `eslint-disable-next-line` com o motiv
 - O valor de estilo é fixo mas o sistema de estilos não tem variável para ele: use o sistema de estilos e diga que falta a variável.
 - O código é de um arquivo gerado: não aplique as preferências.
 - Vários commits sobem juntos: a conferência do título e da descrição é uma, depois do push.
+- `Cópia de trabalho` em `worktree`: a tarefa não entra no clone aberto nem num worktree já ocupado.
 
 ## Pegadinhas
 
@@ -109,6 +114,7 @@ Mudei a função sem comentário novo. Um `eslint-disable-next-line` com o motiv
 - O estilo inline é aceito para valor calculado, mesmo com `Estilo inline` restrito.
 - Preferência da pessoa não vai para a habilidade nem para as instruções de um repositório sem consenso do time.
 - Conferir a cada commit parece necessário. A conferência é uma vez, depois do push.
+- Reutilizar a worktree aberta parece mais rápido. Com `Cópia de trabalho` em `worktree`, a tarefa abre um git worktree novo e ele fica no fim.
 
 ## Scripts disponíveis
 
