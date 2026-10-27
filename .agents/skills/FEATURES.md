@@ -876,6 +876,7 @@ How these skills relate is in `README.md`, in this folder.
   - Tests a large or imported batch with a dry run before it writes, and fixes every problem the refusal lists in one pass
   - Reads and writes with `node node_modules/harness/vocabulary/dist/cli.js lookup`, `exists`, and `terms` when there is a terminal, and with the MCP tools `lookup_term`, `exists_in_text`, and `write_terms` when there is not
   - Imports a batch from another tool with `terms --file`
+  - Checks the engine version with `version` or the MCP tool `get_version` against the version the project pins, and updates an outdated plugin or dependency before it reads or writes
   - Stops without a terminal and without the MCP server, as in a Notion agent
   - Creates the missing language file in the repository open in the session when `Glossário no repositório atual` is `sim`, and only in `Pasta do glossário` when it is `não`. That folder is the glossary, not the harness
   - Sends a question about a missing term or its variations to procurar-variacao-de-termo

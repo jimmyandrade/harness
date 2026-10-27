@@ -16,6 +16,8 @@ Each term has one of five levels, from `forbidden` through `strongly_discouraged
 
 `lookup` reads one term, and `lookup-terms` reads up to 100 in one call, as `docs/adr/0014-read-several-terms-in-one-call.md` decides: each result is what `lookup` returns for that term, and a term of more than one word is read as a whole. `exists` checks word by word.
 
+`version` in the CLI, `GET /v1/version`, and the MCP tool `get_version` return the name and version of the engine, from `package.json`. An agent compares it with the version the project pins before it reads or writes, so an outdated plugin does not apply old rules.
+
 A term is read in any casing. A name whose casing is part of the spelling, such as `iPhone`, keeps `case_sensitive: true` on its row: the write keeps that casing as the key, and `lookup` and `exists` say when the submitted casing does not match, as `docs/adr/0009-mark-case-sensitive-terms.md` decides.
 
 The engine lived in its own repository, jimmyandrade/vocabulary, from the former ADR 0010 until ADR 0018 brought it back here. That repository was deleted, and its history is in the history of this one. The decisions are `docs/adr/0003-store-the-brand-glossary-as-json.md` and `docs/adr/0004-validate-the-api-with-zod.md`. The map of files is `ARCHITECTURE.md`. Setup for an agent host is `docs/runbooks/mcp-hosts.md`. The skill check uses the harness action pinned in `.github/workflows/skill-check.yml`.

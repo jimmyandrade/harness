@@ -64,7 +64,7 @@ test("the command in examples/mcp.json lists the tools from an installed copy", 
   }
   try {
     const frame = await listed
-    assert.deepEqual(frame.result?.tools?.map((tool) => tool.name).sort(), ["exists_in_text", "init_glossary", "lookup_term", "lookup_terms", "migrate_glossary", "write_terms"])
+    assert.deepEqual(frame.result?.tools?.map((tool) => tool.name).sort(), ["exists_in_text", "get_version", "init_glossary", "lookup_term", "lookup_terms", "migrate_glossary", "write_terms"])
   } finally {
     child.kill()
   }

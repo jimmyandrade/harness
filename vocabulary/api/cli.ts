@@ -15,7 +15,8 @@
  * --file reads the whole batch from a JSON file with the body of
  * POST /v1/terms, for a migration; --language, --mode, and --validation
  * still override it. migrate rewrites the rows that use a deprecated state or
- * the deprecated category, and only reports them without --write. lookup and exists take --tags too, to read only the rows that
+ * the deprecated category, and only reports them without --write. version prints
+ * the name and version of the engine, to compare with the version the project pins. lookup and exists take --tags too, to read only the rows that
  * apply to that speaker, event, or channel. --case-sensitive marks the term
  * it follows, keeping its casing as the key; it takes true or false, and alone
  * it means true. --stop-word marks a stop word the same way, and a stop word
@@ -36,6 +37,7 @@
  * Run: node api/cli.ts terms --file lote.json --mode upsert --dry-run
  * Run: node api/cli.ts init --language es
  * Run: node api/cli.ts migrate --language pt-BR --write
+ * Run: node api/cli.ts version
  */
 
 import { readFileSync } from "node:fs"
@@ -47,6 +49,7 @@ import { Glossary, InvalidGlossary, initGlossary, migrate, writeBatch } from "./
 import { parseBody } from "./shared/http.ts"
 import { readOptions, report } from "./shared/options.ts"
 import { existsRequest, lookupRequest, lookupTermsRequest } from "./shared/schema.ts"
+import { versionInfo } from "./shared/version.ts"
 
 const GLOBAL = new Set(["language", "mode", "validation", "file"])
 const LISTS = new Set(["categories", "examples", "rejected", "alternatives", "related", "tags", "allowed_in", "forbidden_in"])
@@ -132,6 +135,8 @@ export function run(argv: string[]): number {
       console.log(JSON.stringify(existsPhrase(new Glossary(glossary), body.language, body.text, body.tags)))
     } else if (command === "terms") {
       console.log(JSON.stringify(writeBatch(glossary, termsFrom(rest))))
+    } else if (command === "version") {
+      console.log(JSON.stringify(versionInfo()))
     } else if (command === "init") {
       const flags = flagsFrom(rest, ["language"])
       if (flags.language === undefined) throw new InvalidGlossary("Unknown language.")
