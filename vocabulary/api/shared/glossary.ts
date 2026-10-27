@@ -64,11 +64,9 @@ import {
   EXPECTED,
   FORMAT_VERSION,
   MISSING_FIELD,
-  REAL_LINK,
   collapse,
   formatAddress,
   glossaryFileSchema,
-  hasRealLink,
   isLegacyState,
   levelOf,
   samePerson,
@@ -91,6 +89,7 @@ import {
   type Validation,
   type WriteMode,
 } from "./schema.ts"
+import { REAL_LINK, hasRealLink } from "./links.ts"
 
 export type { Migration, State, TermRegistration, TermsWrite }
 export { collapse }
