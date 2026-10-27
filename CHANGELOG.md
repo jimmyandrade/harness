@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.21.0](https://github.com/jimmyandrade/harness/compare/v1.20.0...v1.21.0) (2026-10-27)
+
+
+### Features
+
+* add reusable MCP server HTTP utilities library ([#580](https://github.com/jimmyandrade/harness/issues/580)) ([1cd189a](https://github.com/jimmyandrade/harness/commit/1cd189a3d3d70670333949b923ef86b71d243b6b))
+* split a pull request by review question ([#572](https://github.com/jimmyandrade/harness/issues/572)) ([a150bd4](https://github.com/jimmyandrade/harness/commit/a150bd47c4db3825bee695cff2eacd6df036d86c))
+* **vocabulary:** report the engine version through the API, the CLI and MCP ([#573](https://github.com/jimmyandrade/harness/issues/573)) ([ed9f8b9](https://github.com/jimmyandrade/harness/commit/ed9f8b938dbc997f23afe56355ede7c20c9e5dfd))
+
 ## [1.20.0](https://github.com/jimmyandrade/harness/compare/v1.19.0...v1.20.0) (2026-10-27)
 
 
