@@ -1,9 +1,10 @@
 ---
 name: definir-okr
 description: Cria, revisa e atualiza os objetivos e os key results de uma área num ciclo, com título, métrica, valor-alvo, prazo e as ações que empurram cada key result. Usada quando uma área define, revisa ou fecha os OKRs, prioriza quando tudo parece importante, ou começa e revisa a Sprint a partir deles. Não serve para cadastrar a tarefa nem priorizar itens sem OKR.
+compatibility: Precisa de Python quando a execução é local.
 metadata:
   author: jimmyandrade
-  version: "0.1.2"
+  version: "0.3.2"
   related:
     - definir-medicao-de-metrica
     - definir-tarefa
@@ -91,6 +92,47 @@ Sem esse registro, siga `definir-medicao-de-metrica` para registrar a medição 
 O progresso dele é (base − valor atual) ÷ (base − valor-alvo), e um valor igual ou abaixo do alvo conta como atingido.
 Se a lista calcula o progresso só como valor atual ÷ valor-alvo, não grave o key result de redução assim.
 Proponha reescrevê-lo como uma quantidade que cresce, como a economia sobre a base, com valor-alvo igual à base menos o alvo, ou ajustar o cálculo da lista com a base e o sentido, e pergunte qual seguir.
+Confira o progresso que a lista mostra contra o cálculo de referência, com o mesmo sentido, valor atual, valor-alvo e base.
+As fórmulas abaixo são a referência desse cálculo, não um valor para gravar no key result.
+Na fonte de dados, o progresso e o atingido já devem ser fórmula. Compare a fórmula que está lá com esta referência.
+Se ela divergir, proponha o ajuste da fórmula e mantenha o que ela faz além do progresso. Não substitua a fórmula por um número.
+Troque cada nome entre `<>` pelo nome da propriedade ou da opção que o mapeamento de dados do projeto dá.
+Progresso. Um resultado igual a 1 é o alvo atingido. Acima de 1, o alvo foi passado. Sem valor atual, sem valor-alvo, ou num key result de redução sem base acima do alvo, o campo fica vazio.
+
+```
+lets(
+  sentido, prop("<Sentido>"),
+  atual, prop("<Valor atual>"),
+  alvo, prop("<Valor alvo>"),
+  base, prop("<Valor da baseline>"),
+  inicio, if(empty(base), 0, base),
+  ifs(
+    empty(atual) or empty(alvo), toNumber(""),
+    sentido == "<Diminuir>", if(empty(base) or base <= alvo, toNumber(""), (base - atual) / (base - alvo)),
+    sentido == "<Manter abaixo>", if(atual <= alvo, 1, alvo / atual),
+    sentido == "<Manter acima>", if(atual >= alvo or alvo == 0, 1, atual / alvo),
+    alvo == inicio, toNumber(""),
+    (atual - inicio) / (alvo - inicio)
+  )
+)
+```
+
+Atingido.
+
+```
+lets(
+  sentido, prop("<Sentido>"),
+  atual, prop("<Valor atual>"),
+  alvo, prop("<Valor alvo>"),
+  ifs(
+    empty(atual) or empty(alvo), false,
+    sentido == "<Diminuir>" or sentido == "<Manter abaixo>", atual <= alvo,
+    atual >= alvo
+  )
+)
+```
+
+O valor atual vem do histórico de medições da métrica do key result. Numa métrica medida por período, como o custo de uma fatura, o valor atual é o registro mais recente pelo período de referência, não a soma dos registros. Numa métrica acumulada, como o faturamento do ciclo, é a soma dos registros do ciclo.
 O key result é desafiador, mas possível com a capacidade, o tempo e as alavancas reais do ciclo.
 
 ### Passo 5
@@ -174,6 +216,13 @@ Se você aceitar "Configurar X" ou "Realizar 12 revisões" como key result, a á
 1. Mova a execução para uma tarefa, por `definir-tarefa`.
 2. Reescreva o key result com resultado, evidência, critério de qualidade e prazo.
 
+### Progresso gravado como número
+
+Se você gravar o progresso ou o atingido como número numa fonte de dados que calcula os dois por fórmula, o número para de acompanhar as medições.
+
+1. Deixe a fórmula que já está na fonte.
+2. Se ela divergir da referência do Passo 4, proponha o ajuste da fórmula, e não o número.
+
 ### Key result de redução com progresso invertido
 
 Se você gravar "Diminuir os custos para R$ 3.130" numa lista que calcula valor atual ÷ valor-alvo, custo zero aparece como 0% e o custo da base como mais de 100%.
@@ -220,6 +269,7 @@ a área tinha 5 objetivos no ciclo. Sugeri manter os 3 que conversam com a estra
 ## Pegadinhas
 
 - A porcentagem de conclusão, o valor atual e o atingimento são calculados pela lista. Editar à mão quebra a conta.
+- As fórmulas do Passo 4 parecem um valor para gravar. Elas são a referência. Na fonte de dados, o progresso e o atingido já devem ser fórmula.
 - Num key result de redução, gastar zero parece não bater a meta quando a lista divide o valor atual pelo valor-alvo. O sentido e a base mudam a conta.
 - Digitar a base no key result parece mais rápido. O número fica sem fonte e diverge do registro do mesmo período no histórico de medições.
 - Um key result recém-criado sem título aparece como "Nova página" e some na busca pelo assunto.
@@ -229,6 +279,7 @@ a área tinha 5 objetivos no ciclo. Sugeri manter os 3 que conversam com a estra
 
 ## Scripts disponíveis
 
-- Nenhum.
+- `python3 scripts/key_result_progress.py --direction <increase|decrease|stay-above|stay-below> --current <valor atual> --target <valor-alvo> [--base <valor da base>]`: cálculo de referência do progresso do Passo 4, em JSON, com o progresso e se o alvo foi atingido.
 
-1. Não há script para executar.
+1. Com terminal, rode o cálculo de referência para cada key result que você confere.
+2. Sem terminal, use as fórmulas do Passo 4. Elas cobrem aumentar, diminuir, manter acima e manter abaixo.
