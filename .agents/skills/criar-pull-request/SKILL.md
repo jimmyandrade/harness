@@ -3,10 +3,11 @@ name: criar-pull-request
 description: Use essa habilidade sempre que for abrir PR, subir uma correção, mandar para a branch principal ou mesclar mudança no repositório, mesmo sem dizer PR. NÃO use para responder comentário de revisão nem para só commitar (use criar-commit).
 metadata:
   author: jimmyandrade
-  version: "0.31.0"
+  version: "0.32.0"
   related:
     - evoluir-habilidade
     - criar-commit
+    - fatiar-pull-request
     - comunicar-novidade-do-produto
     - sincronizar-status-da-tarefa
 ---
@@ -43,9 +44,9 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Criar rótulo se nenhum servir": "não"
 # `Termos que não podem aparecer`: palavras que não podem estar no PR nem nos arquivos. Vazio, não há busca.
 "Termos que não podem aparecer": []
-# `Fatiar por subtarefa`: `não` mantém o tema no PR aberto. `sim` abre um PR por subtarefa.
+# `Fatiar por subtarefa`: `não` junta a mesma pergunta de revisão. `sim` abre um PR por subtarefa.
 "Fatiar por subtarefa": "não"
-# `PR que depende de outro`: `empilhar` abre contra a branch do PR anterior. Vazio não empilha.
+# `PR que depende de outro`: `empilhar` abre contra a branch do PR anterior. Vazio não empilha outra demanda.
 "PR que depende de outro": ""
 # `Refatiar PR já aberto`: como mudar o corte de um PR aberto, sem renomear a branch nem fechar e reabrir.
 "Refatiar PR já aberto": ""
@@ -61,8 +62,8 @@ Nada entra na `Branch base` sem pull request. Nunca dê push na `Branch base`, n
 ### Passo 1
 
 Leia o `CONTRIBUTING.md` e o `AGENTS.md` do repositório e siga o que eles dizem de branch, título, descrição e checks: a convenção documentada vale mais que a preferência pessoal.
-Com `Fatiar por subtarefa` em `não`, o padrão, commits do mesmo tema entram na branch e no pull request que já tratam desse tema.
-Com `sim`, abra um PR para cada subtarefa, e um PR que depende de outro segue `PR que depende de outro`.
+Com `Fatiar por subtarefa` em `não`, a mesma pergunta de revisão fica no mesmo pull request. Siga `fatiar-pull-request`.
+Com `sim`, abra um PR por subtarefa. Um PR que depende de outro segue `PR que depende de outro`.
 Antes de criar a branch, confira se a demanda tem uma tarefa no rastreador do projeto, quando o projeto usa um.
 Sem tarefa, sugira criá-la antes do PR e espere a resposta: a chave entra no nome da branch e no título do PR conforme a convenção do repositório.
 Se o PR já está aberto sem tarefa, diga isso e proponha criá-la depois.
