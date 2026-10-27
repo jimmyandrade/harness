@@ -908,7 +908,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Properties**:
   - Lives at `.agents/skills/evoluir-habilidade/SKILL.md`
   - A request to test a skill uses this skill
-  - A direct request to change a skill also uses this skill: it checks where the skill comes from, edits the source repository right away, bumps the version, and then proposes a real case, without counting the change as validated before that run. A copy installed by dependency or plugin is not edited, because the next install erases it
+  - A direct request to change a skill also uses this skill: it checks where the skill comes from, edits the source repository right away, bumps the version, and in the same turn commits and opens the pull request through criar-commit and criar-pull-request, without asking whether the person wants the lesson in a commit. `Criar pull request ao terminar` decides the opening: `rascunho` opens a draft, `sim` opens it ready, `não` does not publish and the reply names the branch. It then proposes a real case, without counting the change as validated before that run. A copy installed by dependency or plugin is not edited, because the next install erases it
   - Treats the skill as a living document and iterates from feedback
   - On inconsistent results, a failed call, or a correction from the person, improves the instructions and adds error handling
   - Sends undertriggering and overtriggering to descrever-habilidade-ou-schema
@@ -919,7 +919,7 @@ How these skills relate is in `README.md`, in this folder.
   - Does not create the first version of a skill, only check whether the description triggers, only review without running, or write the skill page in Notion
   - A request that arrives through a copy, synced or installed by dependency or plugin, writes through criar-commit and criar-pull-request in the source repository
   - Size and run profile follow medir-habilidade
-  - Runs at the end of every core skill, following the `Modo de aprendizado` parameter (`sim`, `não`, `perguntar`, default `perguntar`): with yes, one commit per lesson on an English-named branch, pushed, with a draft pull request from the first commit, opened through criar-pull-request with its assignee and label, marked ready when the person ends the sequence. After the push, once, the title and the description are checked against the code that went up, even when several lessons went up together
+  - Runs at the end of every core skill, following the `Modo de aprendizado` parameter (`sim`, `não`, `perguntar`, default `perguntar`): `não` stops. `perguntar` and `sim` record each lesson as a commit on an English-named branch and follow criar-pull-request, without asking whether the person wants the commit. `Criar pull request ao terminar` decides the opening: `rascunho` opens a draft, `sim` opens it ready, `não` does not publish. The command already sets the assignee and the label. With `rascunho`, the draft is marked ready when the person ends the sequence. After the push, once, the title and the description are checked against the code that went up, even when several lessons went up together
   - Takes the project instructions as a target too: feedback on the agent's behavior edits them in the format of `definir-instrucoes-do-projeto` and raises `metadata.version`, without evals or features of their own
 - **Test Criteria**:
   - [x] The skill is present at that path
