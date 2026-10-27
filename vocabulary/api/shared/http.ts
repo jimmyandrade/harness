@@ -10,7 +10,7 @@ import { Glossary, InvalidGlossary, InvalidTerms } from "./glossary.ts"
 import { readSchema } from "./schema.ts"
 
 export type Route = {
-  method: "POST"
+  method: "GET" | "POST"
   path: string
   limit: number
   emptyMessage: string
@@ -50,6 +50,7 @@ function dispatch(
 ): Promise<void> {
   const route = routes.find((item) => item.method === request.method && item.path === request.url)
   if (route === undefined) return send(response, 404, { error: "Unknown endpoint." })
+  if (route.method === "GET") return send(response, 200, route.handle(glossary, {}))
   return accept(request, response, route.limit, route.emptyMessage, (record) => route.handle(glossary, record))
 }
 

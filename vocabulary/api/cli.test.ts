@@ -637,3 +637,10 @@ test("terms refuses a real link in an example", () => {
   assert.match(errors.at(-1) ?? "", /A term or an example takes no real link/)
   assert.equal(readFileSync(file, "utf8"), "{}\n")
 })
+
+test("version prints the version in package.json", () => {
+  const { version } = JSON.parse(readFileSync(new URL("../../package.json", import.meta.url), "utf8")) as { version: string }
+  const { code, body } = capture(["--glossary", tmpdir(), "version"])
+  assert.equal(code, 0)
+  assert.deepEqual(body, { name: "vocabulary", version })
+})

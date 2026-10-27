@@ -3,13 +3,12 @@
  *
  * lookup_term reads one term, and lookup_terms reads several in one call. exists_in_text maps each token to whether it
  * exists. write_terms inserts, updates, or upserts terms for one language.
- * migrate_glossary rewrites the rows that use a deprecated state or category. init_glossary creates the empty
- * glossary of a new language.
+ * get_version returns the version of the engine. migrate_glossary rewrites the rows that use a deprecated state
+ * or category. init_glossary creates the empty glossary of a new language.
  *
  * Run: node api/mcp/index.ts
  */
 
-import { readFileSync } from "node:fs"
 import { fileURLToPath } from "node:url"
 import type { Readable } from "node:stream"
 
@@ -18,12 +17,11 @@ import { lookupTerm, lookupTerms } from "../routes/lookup/index.ts"
 import { Glossary, initGlossary, migrate, writeBatch } from "../shared/glossary.ts"
 import { parseBody } from "../shared/http.ts"
 import { readOptions } from "../shared/options.ts"
+import { versionInfo } from "../shared/version.ts"
 import { LEVELS, LOOKUP_LIMIT, existsRequest, lookupRequest, initRequest, lookupTermsRequest, migrateRequest } from "../shared/schema.ts"
 
 const PROTOCOL = "2024-11-05"
 
-// Release Please bumps the package.json of the repository root. api/ and dist/ both sit three levels below it.
-const VERSION = (JSON.parse(readFileSync(new URL("../../../package.json", import.meta.url), "utf8")) as { version: string }).version
 
 const languageProperty = { type: "string", description: "BCP 47 tag of the text, such as pt-BR." }
 
@@ -159,6 +157,11 @@ const tools = [
     },
   },
   {
+    name: "get_version",
+    description: "Return the name and version of the vocabulary engine. Call it before reading or writing the vocabulary and compare the version with the one the project pins. When they differ, the installed plugin is outdated: update it before going on.",
+    inputSchema: { type: "object", properties: {} },
+  },
+  {
     name: "migrate_glossary",
     description: "List the rows of one language that still use a deprecated state, such as situationally_allowed, or the deprecated category. With write true, rewrite them as their level and categories. Without it, the file stays as it is.",
     inputSchema: {
@@ -204,7 +207,7 @@ export function respond(directory: string, message: unknown): unknown | undefine
       result: {
         protocolVersion,
         capabilities: { tools: {} },
-        serverInfo: { name: "vocabulary", version: VERSION },
+        serverInfo: versionInfo(),
       },
     }
   }
@@ -233,6 +236,7 @@ export function callTool(directory: string, params: unknown): ToolResult {
     if (record?.name === "write_terms") {
       return reply(writeBatch(directory, record.arguments))
     }
+    if (record?.name === "get_version") return reply(versionInfo())
     if (record?.name === "migrate_glossary") {
       const body = parseBody(migrateRequest, record.arguments)
       return reply(migrate(directory, body.language, body.write))

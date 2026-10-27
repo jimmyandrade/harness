@@ -3,7 +3,7 @@ name: gravar-termos-no-vocabulario
 description: Use essa habilidade sempre que, ao cadastrar ou corrigir termos do vocabulário do tom de voz, for hora de pesquisar a grafia, testar com dry run e gravar o lote, mesmo sem dizer gravar. NÃO use para decidir o nível, validar os campos, perguntar quais variações foram cadastradas, escrever o texto da marca, nem inventar um termo.
 metadata:
   author: jimmyandrade
-  version: "0.9.0"
+  version: "0.10.0"
   related:
     - definir-vocabulario
     - procurar-variacao-de-termo
@@ -37,6 +37,8 @@ flowchart LR
   A -->|perguntar a variação| D[procurar-variacao-de-termo]
 ```
 
+Antes de pesquisar ou gravar, consulte a versão do vocabulário com `version` ou `get_version` e compare com a versão do core harness que o projeto fixa no manifesto. Diferente: diga que o plugin ou a dependência instalada está desatualizada, atualize e só então siga. Uma regra nova da escrita não vale num servidor antigo. Sem versão fixada no projeto, diga a versão que respondeu.
+
 ### Passo 2
 
 Para corrigir um termo que já está, leia a linha com `lookup` e guarde-a. Uma grafia pode ter uma linha por conjunto de tags: leia com as tags da linha que vai corrigir. Mande `state`, `term`, as `tags` dessa linha, ou `[]` para a linha sem tags, e só o que muda: a escrita mantém o resto, e `""` ou `[]` limpa o campo, só a pedido. Leia a linha de novo depois. Se sumiu algo que você não mandou, o servidor é antigo: grave a linha guardada de volta e avise.
@@ -56,6 +58,14 @@ Quando as duas linhas existirem, `related` aponta de uma para a outra. `related`
 Teste antes com `--dry-run` ou `dry_run`, no mesmo formato da escrita: um `--term` por termo, ou `write_terms`. `refused` lista os problemas. Grave o plano inteiro numa escrita só. Não crie um JSON do lote, nem no repositório, nem em pasta temporária, nem com a ferramenta de escrever arquivo. A pessoa só ouve a quantidade e a lista do que entrou no glossário. Com terminal, rode o comando. Sem terminal, chame a ferramenta do servidor `vocabulary`. Termo que não existia fica em minúsculas. Marca com caixa própria, como iPhone, leva `case_sensitive` e guarda a caixa. A linha que já existia conserva a grafia guardada. Se nenhum termo do plano existia, a resposta começa com a quantidade e segue com a lista do que entrou. Depois sugira plural, singular, feminino, masculino e outra grafia quando a palavra tiver. Não grave a sugestão. Pergunte o estado de cada forma. Pontuação e emoji não ganham essa sugestão. Um exemplo que também vem completo no lote permanece com essa linha. Um exemplo citado e ausente do lote nasce no estado desse vínculo, com as tags do termo. Uma falha deixa o vocabulário como estava. Não confirme o cadastro sem essa resposta.
 
 ## Problemas comuns
+
+### Servidor desatualizado
+
+Se você gravar sem conferir a versão, um servidor antigo aceita o que a regra nova recusa, ou apaga o campo que a versão nova mantém.
+
+1. Consulte a versão com `version` ou `get_version`.
+2. Compare com a versão que o projeto fixa.
+3. Diferente: atualize o plugin ou a dependência antes de gravar.
 
 ### Lote pela metade
 
@@ -174,11 +184,12 @@ O plano ficou em update. A reticências que já estava foi reescrita, com o quan
 - `node node_modules/harness/vocabulary/dist/cli.js lookup-terms --language <idioma> --term <termo> --term <termo>` lê até 100 termos de uma vez, na ordem enviada, e devolve `results` com o que `lookup` devolve para cada um.
 - `node node_modules/harness/vocabulary/dist/cli.js exists --language <idioma> --text <trecho>` devolve só o registro de cada token do trecho para se ele existe.
 - `node node_modules/harness/vocabulary/dist/cli.js terms` grava o lote. `--language`, `--mode` e `--validation` valem para o lote. Cada `--term` abre um termo, com `--state`, `--description`, `--reason`, `--when`, `--substitution`, `--decided-by`, `--decided-by-email`, `--decided-by-url`, `--decided-at`, `--source` e `--notes`. `--decided-by` é o nome. Os dois seguintes completam o objeto. `--categories`, `--examples`, `--rejected`, `--alternatives`, `--related`, `--tags`, `--allowed-in` e `--forbidden-in` repetem, um valor por vez. `--stop-word` marca a stop word, que pode vir sem `--state`. `--file` só lê um JSON que já chegou de outra ferramenta. Não crie esse arquivo.
+- `node node_modules/harness/vocabulary/dist/cli.js version` devolve o nome e a versão do motor.
 - `--glossary`, antes do comando, aponta outro vocabulário.
 - Com `Glossário no repositório atual` em `sim`, `node node_modules/harness/vocabulary/dist/cli.js init --language <idioma>` cria o glossário vazio do idioma no repositório atual. `created` diz se ele nasceu agora ou já existia. Não escreva o arquivo à mão.
 - Com `Glossário no repositório atual` vazio, não crie o arquivo. Pergunte uma vez e pare.
 - Com `não`, `node node_modules/harness/vocabulary/dist/cli.js --glossary <Pasta do glossário> init --language <idioma>` cria o glossário só na pasta do glossário. Os comandos levam `--glossary` com o mesmo caminho.
-- `lookup_term`, `lookup_terms`, `exists_in_text`, `write_terms` e `init_glossary`, no servidor `vocabulary`, fazem a mesma consulta, a mesma escrita e o mesmo `init` quando não há terminal.
+- `get_version`, `lookup_term`, `lookup_terms`, `exists_in_text`, `write_terms` e `init_glossary`, no servidor `vocabulary`, fazem a mesma consulta de versão, a mesma consulta, a mesma escrita e o mesmo `init` quando não há terminal.
 
 1. Com terminal, rode `lookup-terms` para os termos do plano, `lookup` para um termo e `exists` para um trecho. `Unknown language` é um código de idioma inválido: corrija o código. Quando a resposta disser que o idioma ainda não tem glossário, confirme o idioma com a pessoa. Com `Glossário no repositório atual` vazio, pergunte uma vez e pare. Com `sim`, rode `init` no repositório atual e repita. Com `não`, rode `init` com `--glossary` na `Pasta do glossário` e repita. Se essa pasta estiver vazia, pergunte o caminho uma vez e pare.
 2. Com terminal, rode `terms` com `--language`, `--mode` e um `--term` para cada termo. Não crie um JSON do lote. Com `Glossário no repositório atual` em `não`, o comando leva `--glossary` na `Pasta do glossário`.

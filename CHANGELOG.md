@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.20.0](https://github.com/jimmyandrade/harness/compare/v1.19.0...v1.20.0) (2026-10-27)
+
+
+### Features
+
+* check an issue description before implementation ([#570](https://github.com/jimmyandrade/harness/issues/570)) ([6850659](https://github.com/jimmyandrade/harness/commit/68506596e62c6cf49b794e58aae53dd2e8edb485))
+* **registrar-evidencia-visual:** group captures and link tall pages ([#567](https://github.com/jimmyandrade/harness/issues/567)) ([d265fd6](https://github.com/jimmyandrade/harness/commit/d265fd6fdbb3057e276127b2d9a382136e34ee24))
+
 ## [1.19.0](https://github.com/jimmyandrade/harness/compare/v1.18.0...v1.19.0) (2026-10-27)
 
 

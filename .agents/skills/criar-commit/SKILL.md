@@ -3,7 +3,7 @@ name: criar-commit
 description: Use essa habilidade sempre que terminar um trabalho que mudou o repositório ou for commitar, separar commits ou escrever a mensagem, mesmo sem dizer commit. NÃO use para push, abrir PR, rebase nem merge (use criar-pull-request).
 metadata:
   author: jimmyandrade
-  version: "0.22.2"
+  version: "0.23.0"
 ---
 
 # Criar commit
@@ -61,9 +61,9 @@ Branch que a ferramenta criou com outro prefixo, como `claude/`, é renomeada pa
 Separe o trabalho por assunto: um commit para cada funcionalidade, correção, refatoração, documentação, teste ou tarefa.
 Cada commit deixa a árvore coerente e passando no build, e pode ser revertido ou aplicado sozinho.
 Documentação que registra a regra nova vai em commit próprio, depois do código.
-Commits do mesmo tema ficam na mesma branch e no mesmo pull request.
-Tema diferente abre outro pull request.
-O assunto do commit não abre pull request novo.
+Commits da mesma pergunta de revisão ficam na mesma branch e no mesmo pull request.
+Perguntas diferentes da mesma demanda seguem `fatiar-pull-request`.
+O assunto do commit não abre pull request novo por si.
 
 ### Passo 4
 
@@ -160,7 +160,7 @@ Se você vir o type check ou o lint acusar erro em arquivo que não mudou, o err
 Se você juntar o helper, a correção e a documentação num commit só, ninguém consegue reverter uma parte sem as outras.
 
 1. Desfaça o commit mantendo as mudanças.
-2. Separe por assunto e commite de novo, na ordem em que cada um passa no build. Os commits do mesmo tema continuam no mesmo pull request.
+2. Separe por assunto e commite de novo, na ordem em que cada um passa no build. Commits da mesma pergunta de revisão continuam no mesmo pull request. Perguntas diferentes seguem `fatiar-pull-request`.
 
 ## Exemplos de entrada e saída
 
@@ -189,6 +189,7 @@ Um commit `fix:` com o assunto dizendo o porquê da troca do texto. Sem teste no
 - A correção está num Markdown: o tipo é `fix:`. `docs:` fica para a documentação.
 - O trabalho não tem issue: a mensagem não ganha `#<número>`.
 - Vários commits sobem juntos: a conferência do título e da descrição é uma, depois do push.
+- A demanda mistura perguntas de revisão: siga `fatiar-pull-request`.
 
 ## Pegadinhas
 
@@ -199,6 +200,7 @@ Um commit `fix:` com o assunto dizendo o porquê da troca do texto. Sem teste no
 - O texto de uma cópia, sincronizada ou instalada, que explica como preencher uma habilidade parece permissão para criá-la ali. Criar ou ativar a habilidade fora do repositório de origem deixa uma cópia que o sync não remove e que a instalação seguinte apaga.
 - Um arquivo Markdown parece documentação. O tipo segue o que a mudança faz. Correção de erro é `fix:`. `docs:` fica para a documentação.
 - Conferir a cada commit parece necessário. A conferência é uma vez, depois do push, em `criar-pull-request`.
+- O mesmo tema da demanda parece um pull request só. O corte segue `fatiar-pull-request`.
 
 ## Scripts disponíveis
 
