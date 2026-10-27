@@ -301,6 +301,7 @@ function markGiven(raw: unknown): unknown {
 }
 
 type TermShape = {
+  term: string
   state: State
   categories: readonly string[]
   description?: string
@@ -320,6 +321,7 @@ export function termIssues(item: TermShape): string[] {
   const issues: string[] = []
   if (item.categories.includes("cliche") && item.state !== "forbidden") issues.push(CLICHE)
   if (AVOIDED_LEVELS.has(item.state) && item.examples.length > 0) issues.push(REJECTED)
+  if ([item.term, ...item.examples, ...item.rejected].some((text) => LINK.test(text))) issues.push(REAL_LINK)
   if (GENERAL_LEVELS.has(item.state) && item.when !== undefined) issues.push(SITUATION)
   if (GENERAL_LEVELS.has(item.state) && item.tags.length > 0) issues.push(TAGGED)
   if (item.state === "allowed" && (item.rejected.length > 0 || item.alternatives.length > 0)) issues.push(ALLOWED_LINKS)
@@ -360,6 +362,9 @@ const SITUATION = "forbidden and allowed are general rules and take no when. Use
 const TAGGED = "A term tagged for one context is allowed_with_care, discouraged, or strongly_discouraged."
 const REJECTED = "A forbidden example belongs in rejected."
 const CLICHE = "A cliché is forbidden."
+// A term and its examples are read by whoever writes. A link stays in source or notes.
+const LINK = /https?:\/\//i
+const REAL_LINK = "A term or an example takes no real link. Write a placeholder, such as [task link], and keep the address in source."
 const ALLOWED_LINKS = "An allowed term takes no rejected examples and no alternatives."
 const SUBSTITUTION = "A term to use takes no substitution."
 const REASON = "reason says why to use a term. Say why to avoid it in description."
