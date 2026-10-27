@@ -3,7 +3,7 @@ name: validar-plano-de-vocabulario
 description: Use essa habilidade sempre que, ao cadastrar termos do vocabulário do tom de voz, for preciso validar os campos do plano antes de gravar, como categorias, motivo, descrição, exemplos e quem decidiu, mesmo sem dizer validar. NÃO use para cadastrar o termo, decidir o nível dele, gravar no vocabulário, nem inventar um campo que a pessoa não enviou.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.4.1"
   related:
     - classificar-estado-do-termo
     - definir-vocabulario
@@ -47,6 +47,7 @@ Valide o plano antes de gravar.
 - `source` é o trecho ou a página de onde aquele termo saiu, um por termo. A conversa em que a decisão foi tomada vai em `notes`.
 - `notes` guarda o histórico que nenhum campo guarda: um link ou o limite que `description` e `when` não dizem. Não repita nele quem decidiu nem a data. `description` só diz o que o termo é. O registro formal ou informal vai em `categories`, não em campo. Não muda o estado.
 - Um termo não é o próprio exemplo. A mesma grafia não entra duas vezes.
+- `term`, `examples`, `rejected` e `alternatives` nunca levam link real. No lugar do link, escreva um marcador entre colchetes, como `[link da tarefa]`. O endereço da página de origem fica em `source`. A escrita recusa o termo com `http://` ou `https://` nesses campos.
 - `state` é a permissão. `description` não repete o estado. Só a stop word, com `stop_word: true`, pode vir sem `state`.
 - Exemplo de contexto e exemplo mais longo ficam em `examples`. Termo já cadastrado fica em `related`.
 - Documentação complementar só quando a pessoa pedir.
@@ -86,6 +87,14 @@ Se você completar descrição ou exemplo que a pessoa não deu, o vocabulário 
 2. Se faltar campo, peça.
 3. Não grave até o plano fechar.
 
+### Link real no exemplo
+
+Se você copiar a frase com o link de uma tarefa ou de uma página para `examples`, o vocabulário expõe um endereço interno a quem só quer ver o uso da palavra, e a escrita recusa o lote.
+
+1. Troque o link por um marcador entre colchetes, como `[link da tarefa]`.
+2. Ponha o endereço da página de onde o termo saiu em `source`.
+3. Valide de novo antes de gravar.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
@@ -109,6 +118,7 @@ O plano ficou em insert. A categoria ficou punctuation. O termo, a descrição T
 - O e-mail de uma conta de função, como o de uma área, parece identificar quem decidiu. A conta fica quando a pessoa sai: grave o e-mail individual.
 - O e-mail que duas pessoas dividem parece servir enquanto não há outro. Ele não diz quem decidiu: fica só o nome.
 - Um `decided_by` em texto, de uma linha antiga, é só o nome. A próxima escrita dessa linha guarda o objeto.
+- A frase real, com o link, parece o melhor exemplo. O exemplo mostra o uso da palavra, e o link vira marcador.
 - A categoria parece seguir o idioma do vocabulário. Ela é uma palavra em inglês em qualquer idioma.
 
 ## Scripts disponíveis

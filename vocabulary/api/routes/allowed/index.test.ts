@@ -129,3 +129,24 @@ test("POST keeps the casing of a case-sensitive term and lowercases an ordinary 
     await new Promise<void>((resolve, reject) => server.close((error) => (error ? reject(error) : resolve())))
   }
 })
+
+test("a term with a real link is refused and leaves the file unchanged", async () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  const file = join(root, "pt-BR.json")
+  writeFileSync(file, "{}\n")
+  const server = createGlossaryServer(root)
+  await new Promise<void>((resolve) => server.listen(0, "127.0.0.1", resolve))
+  const port = (server.address() as AddressInfo).port
+  try {
+    const response = await fetch(`http://127.0.0.1:${port}/v1/allowed`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ ...BODY, term: "https://example.com/tarefa" }),
+    })
+    assert.equal(response.status, 400)
+    assert.match((await response.json()).error, /A term or an example takes no real link/)
+    assert.equal(readFileSync(file, "utf8"), "{}\n")
+  } finally {
+    await new Promise<void>((resolve, reject) => server.close((error) => (error ? reject(error) : resolve())))
+  }
+})

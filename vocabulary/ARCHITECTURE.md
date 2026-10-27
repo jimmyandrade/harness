@@ -21,6 +21,7 @@ vocabulary/
 │   ├── adr/                   # Architecture decisions
 │   └── runbooks/              # Setup steps for MCP hosts and glossary migration
 ├── examples/mcp.json          # Server list a project copies
+├── schemas/                   # JSON Schema of each glossary file format, one file per version
 ├── tsconfig.build.json        # Compiles api/ to dist/
 └── CHANGELOG.md               # Releases of the engine before it joined the core
 ```

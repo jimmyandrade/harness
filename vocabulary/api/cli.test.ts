@@ -621,3 +621,19 @@ test("init creates the glossary of a new language once", () => {
     console.log = write
   }
 })
+
+test("terms refuses a real link in an example", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  const file = join(root, "pt-BR.json")
+  writeFileSync(file, "{}\n")
+  const errors: string[] = []
+  const write = console.error
+  console.error = (line: string) => errors.push(line)
+  try {
+    assert.equal(run(["--glossary", root, "terms", ...ALLOWED, "--examples", "Veja https://example.com/tarefa"]), 2)
+  } finally {
+    console.error = write
+  }
+  assert.match(errors.at(-1) ?? "", /A term or an example takes no real link/)
+  assert.equal(readFileSync(file, "utf8"), "{}\n")
+})

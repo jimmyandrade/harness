@@ -3,7 +3,7 @@ name: perfilar-tom-de-voz
 description: Perfila o tom de voz de uma pessoa ou de um canal a partir de uma amostra real de mensagens e registra os padrões no vocabulário, com a etiqueta da pessoa ou do canal. Usada quando a pessoa pede para perfilar como alguém conversa ou o tom de um canal. Não serve para escrever texto, cadastrar um termo solto nem perfilar sem pedido.
 metadata:
   author: jimmyandrade
-  version: "0.1.1"
+  version: "0.1.2"
   related:
     - definir-vocabulario
     - evoluir-habilidade
@@ -49,7 +49,7 @@ Anote a origem do perfil: quantas mensagens, de que período e que as de quem pe
 
 ### Passo 6
 
-Conteúdo de conversa privada só serve para derivar o padrão. Nunca reproduza um trecho literal dele em outro contexto.
+Conteúdo de conversa privada só serve para derivar o padrão. Nunca reproduza um trecho literal dele em outro contexto. Um link da amostra nunca entra no termo nem no exemplo: no lugar dele vai um marcador, como `[link da tarefa]`.
 
 ### Passo 7
 

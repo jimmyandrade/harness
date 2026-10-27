@@ -10,6 +10,8 @@ This folder holds the engine. The skills that use it, `definir-vocabulario`, `cl
 
 The language of a row is the language of the whole communication, not of the file at hand. A text entirely in English, such as an email, a review, or a message, keeps its terms and phrases in `en.json`. A text mainly in Portuguese that carries one English word, such as `header`, keeps that row in `pt-BR.json`. A tag whose glossary does not exist yet answers that it has none, so create it with `init` before the first write: the CLI command `init --language <tag>`, `POST /v1/init`, or the MCP tool `init_glossary`. No write creates a glossary on the way, so a typo does not start one by accident. `Unknown language` is left for a tag that is not valid.
 
+A file may name its format in `$schema`, its first key, as `docs/adr/0018-version-the-glossary-file-format.md` decides. A file without it is format 1. The engine refuses a file of a newer format and says to update the plugin or the dependency, and every write keeps the `$schema` the file had. The schema of each format is in `schemas/`.
+
 Each term has one of five levels, from `forbidden` through `strongly_discouraged`, `discouraged`, and `allowed_with_care` to `allowed`, as `docs/adr/0010-rate-terms-on-five-levels.md` decides. The older `situationally_allowed` still reads as `allowed_with_care` until the project migrates its glossary with `docs/runbooks/migrate-glossary.md`, which also covers importing a glossary from another tool in one batch.
 
 `lookup` reads one term, and `lookup-terms` reads up to 100 in one call, as `docs/adr/0014-read-several-terms-in-one-call.md` decides: each result is what `lookup` returns for that term, and a term of more than one word is read as a whole. `exists` checks word by word.
