@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.16.1](https://github.com/jimmyandrade/harness/compare/v1.16.0...v1.16.1) (2026-10-27)
+
+
+### Bug Fixes
+
+* **criar-pull-request:** keep full URLs in the pull request description ([#540](https://github.com/jimmyandrade/harness/issues/540)) ([d812b6f](https://github.com/jimmyandrade/harness/commit/d812b6ff90ab5854bb8c1066b241190669e69346))
+
 ## [1.16.0](https://github.com/jimmyandrade/harness/compare/v1.15.0...v1.16.0) (2026-10-27)
 
 
