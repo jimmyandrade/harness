@@ -3,7 +3,8 @@
  *
  * lookup_term reads one term, and lookup_terms reads several in one call. exists_in_text maps each token to whether it
  * exists. write_terms inserts, updates, or upserts terms for one language.
- * migrate_glossary rewrites the rows that use a deprecated state or category.
+ * migrate_glossary rewrites the rows that use a deprecated state or category. init_glossary creates the empty
+ * glossary of a new language.
  *
  * Run: node api/mcp/index.ts
  */
@@ -14,10 +15,10 @@ import type { Readable } from "node:stream"
 
 import { existsPhrase } from "../routes/exists/index.ts"
 import { lookupTerm, lookupTerms } from "../routes/lookup/index.ts"
-import { Glossary, migrate, writeBatch } from "../shared/glossary.ts"
+import { Glossary, initGlossary, migrate, writeBatch } from "../shared/glossary.ts"
 import { parseBody } from "../shared/http.ts"
 import { readOptions } from "../shared/options.ts"
-import { LEVELS, LOOKUP_LIMIT, existsRequest, lookupRequest, lookupTermsRequest, migrateRequest } from "../shared/schema.ts"
+import { LEVELS, LOOKUP_LIMIT, existsRequest, lookupRequest, initRequest, lookupTermsRequest, migrateRequest } from "../shared/schema.ts"
 
 const PROTOCOL = "2024-11-05"
 
@@ -169,6 +170,17 @@ const tools = [
       required: ["language"],
     },
   },
+  {
+    name: "init_glossary",
+    description: "Create the empty glossary of a language that has none yet, after the person confirms the language. Every other tool answers that a language without a glossary has none yet. An existing glossary stays as it is, and created is false. An invalid tag answers Unknown language and creates nothing. Never create the glossary file by hand.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        language: languageProperty,
+      },
+      required: ["language"],
+    },
+  },
 ]
 
 type ToolResult = { content: { type: "text"; text: string }[]; isError?: boolean }
@@ -224,6 +236,10 @@ export function callTool(directory: string, params: unknown): ToolResult {
     if (record?.name === "migrate_glossary") {
       const body = parseBody(migrateRequest, record.arguments)
       return reply(migrate(directory, body.language, body.write))
+    }
+    if (record?.name === "init_glossary") {
+      const body = parseBody(initRequest, record.arguments)
+      return reply(initGlossary(directory, body.language))
     }
     return failure("Unknown tool.")
   } catch (error) {

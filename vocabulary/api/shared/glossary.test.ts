@@ -1,10 +1,10 @@
 import assert from "node:assert/strict"
-import { mkdtempSync, readFileSync, writeFileSync } from "node:fs"
+import { existsSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs"
 import { tmpdir } from "node:os"
 import { join, resolve } from "node:path"
 import test from "node:test"
 
-import { InvalidGlossary, canonicalLanguage, glossaryDirectory, load, register } from "./glossary.ts"
+import { InvalidGlossary, canonicalLanguage, glossaryDirectory, initGlossary, load, register } from "./glossary.ts"
 
 const GLOSSARY = `{
   "açúcar": { "state": "allowed" },
@@ -81,4 +81,36 @@ test("the glossary lives in the project unless HARNESS_GLOSSARY_DIR names anothe
   assert.equal(glossaryDirectory({}, "/work/site"), resolve("/work/site/.agents/glossary"))
   assert.equal(glossaryDirectory({ HARNESS_ROOT: "/work/brand" }, "/work/site"), resolve("/work/brand/.agents/glossary"))
   assert.equal(glossaryDirectory({ HARNESS_GLOSSARY_DIR: "/data/terms", HARNESS_ROOT: "/work/brand" }, "/work/site"), resolve("/data/terms"))
+})
+
+test("init creates an empty glossary for a new language, with its directory", () => {
+  const root = join(mkdtempSync(join(tmpdir(), "glossary-")), "nested", "glossary")
+  assert.deepEqual(initGlossary(root, "es"), { language: "es", created: true })
+  assert.equal(readFileSync(join(root, "es.json"), "utf8"), EMPTY)
+  register(root, "es", "casa", "allowed")
+  assert.deepEqual(load(readFileSync(join(root, "es.json"), "utf8")).map((entry) => entry.term), ["casa"])
+})
+
+test("init leaves an existing glossary as it is", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  const file = join(root, "pt-BR.json")
+  writeFileSync(file, GLOSSARY)
+  assert.deepEqual(initGlossary(root, "pt-br"), { language: "pt-BR", created: false })
+  assert.equal(readFileSync(file, "utf8"), GLOSSARY)
+})
+
+test("init refuses an invalid tag and creates nothing", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  assert.throws(() => initGlossary(root, "pt_BR!"), { message: "Unknown language." })
+  assert.throws(() => initGlossary(root, "../es"), { message: "Unknown language." })
+  assert.equal(existsSync(join(root, "pt_BR!.json")), false)
+})
+
+test("a valid language without a glossary points to init", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  assert.throws(
+    () => register(root, "es", "casa", "allowed"),
+    { message: "No glossary for es yet. Create it with init." },
+  )
+  assert.equal(existsSync(join(root, "es.json")), false)
 })

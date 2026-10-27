@@ -200,7 +200,7 @@ test("the server answers initialize and write_terms on stdio", async () => {
     assert.equal(frames[0]?.result?.protocolVersion, "2024-11-05")
     assert.deepEqual(
       frames[1]?.result?.tools?.map((tool) => tool.name),
-      ["lookup_term", "lookup_terms", "exists_in_text", "write_terms", "migrate_glossary"],
+      ["lookup_term", "lookup_terms", "exists_in_text", "write_terms", "migrate_glossary", "init_glossary"],
     )
     const payload = JSON.parse(frames[2]?.result?.content?.[0]?.text ?? "{}")
     assert.equal(payload.inserted.length, 1)
@@ -395,4 +395,15 @@ test("lookup_terms reads several terms in order and a term of several words as a
   const refused = callTool(root, { name: "lookup_terms", arguments: { language: "pt-BR", terms: [] } })
   assert.equal(refused.isError, true)
   assert.equal(refused.content[0]?.text, "Provide the terms.")
+})
+
+test("init_glossary creates the glossary of a new language and keeps an existing one", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  const missing = callTool(root, { name: "lookup_term", arguments: { language: "es", term: "casa" } })
+  assert.equal(missing.content[0]?.text, "No glossary for es yet. Create it with init.")
+  const created = callTool(root, { name: "init_glossary", arguments: { language: "es" } })
+  assert.deepEqual(JSON.parse(created.content[0]?.text ?? ""), { language: "es", created: true })
+  assert.equal(readFileSync(join(root, "es.json"), "utf8"), "{}\n")
+  const again = callTool(root, { name: "init_glossary", arguments: { language: "es" } })
+  assert.deepEqual(JSON.parse(again.content[0]?.text ?? ""), { language: "es", created: false })
 })

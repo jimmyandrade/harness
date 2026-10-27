@@ -605,3 +605,19 @@ test("lookup-terms repeats --term and reads each one, and --tags filters them al
   const filtered = JSON.parse(lines[1] ?? "") as { results: { exists: boolean }[] }
   assert.equal(filtered.results[0]?.exists, false)
 })
+
+test("init creates the glossary of a new language once", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  const lines: string[] = []
+  const write = console.log
+  console.log = (line: string) => lines.push(line)
+  try {
+    assert.equal(run(["--glossary", root, "init", "--language", "es"]), 0)
+    assert.deepEqual(JSON.parse(lines.at(-1) ?? "{}"), { language: "es", created: true })
+    assert.equal(readFileSync(join(root, "es.json"), "utf8"), "{}\n")
+    assert.equal(run(["--glossary", root, "init", "--language", "es"]), 0)
+    assert.deepEqual(JSON.parse(lines.at(-1) ?? "{}"), { language: "es", created: false })
+  } finally {
+    console.log = write
+  }
+})
