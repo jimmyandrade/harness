@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.16.2](https://github.com/jimmyandrade/harness/compare/v1.16.1...v1.16.2) (2026-10-27)
+
+
+### Bug Fixes
+
+* **gravar-termos-no-vocabulario:** stop exposing a temporary batch JSON ([#544](https://github.com/jimmyandrade/harness/issues/544)) ([2578653](https://github.com/jimmyandrade/harness/commit/2578653fe4748bacf585d2943f8d8410e0aed243)), closes [#543](https://github.com/jimmyandrade/harness/issues/543)
+
 ## [1.16.1](https://github.com/jimmyandrade/harness/compare/v1.16.0...v1.16.1) (2026-10-27)
 
 
