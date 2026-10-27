@@ -453,7 +453,6 @@ flowchart LR
   registrar_evidencia_visual --> criar_pull_request
   registrar_evidencia_visual --> definir_issue_do_github
   registrar_evidencia_visual --> enviar_mensagem_no_slack
-  registrar_evidencia_visual --> reconhecer_imagem
   revisar_financas --> definir_lancamento
   revisar_financas --> definir_planejamento_financeiro
   revisar_financas --> gerenciar_estoque
