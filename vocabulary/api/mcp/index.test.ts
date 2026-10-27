@@ -200,7 +200,7 @@ test("the server answers initialize and write_terms on stdio", async () => {
     assert.equal(frames[0]?.result?.protocolVersion, "2024-11-05")
     assert.deepEqual(
       frames[1]?.result?.tools?.map((tool) => tool.name),
-      ["lookup_term", "lookup_terms", "exists_in_text", "write_terms", "migrate_glossary", "init_glossary"],
+      ["lookup_term", "lookup_terms", "exists_in_text", "write_terms", "get_version", "migrate_glossary", "init_glossary"],
     )
     const payload = JSON.parse(frames[2]?.result?.content?.[0]?.text ?? "{}")
     assert.equal(payload.inserted.length, 1)
@@ -419,4 +419,11 @@ test("write_terms refuses a real link in an example", () => {
   assert.equal(refused.isError, true)
   assert.match(refused.content[0]?.text ?? "", /A term or an example takes no real link/)
   assert.equal(readFileSync(file, "utf8"), "{}\n")
+})
+
+test("get_version returns the version in package.json", () => {
+  const { version } = JSON.parse(readFileSync(new URL("../../../package.json", import.meta.url), "utf8")) as { version: string }
+  const result = callTool(tmpdir(), { name: "get_version", arguments: {} })
+  assert.equal(result.isError, undefined)
+  assert.deepEqual(JSON.parse(result.content[0]?.text ?? "{}"), { name: "vocabulary", version })
 })
