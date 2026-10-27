@@ -6,6 +6,12 @@
       "prompt": "Sim, limpe as cópias de trabalho",
       "expected_output": "A fila do Renovate de um harness de negócio terminou. Só a cópia principal existe, com mudanças de outra tarefa, e sobraram quatro branches locais renovate/*. Três PRs foram mesclados e um foi fechado, todos com o mesmo commit da branch local. As quatro branches saem com branch -D, a cópia principal fica, e a resposta traz o espaço livre e uma tabela com a decisão, o motivo e o link completo de cada PR.",
       "files": []
+    },
+    {
+      "id": "copias-mantidas-sessao-e-remoto",
+      "prompt": "/evoluir-habilidade de skills respectivas a limpezas... das cópias que foram mantidas, confira se outra sessão usa. E se há PRs mesclados ou abertos no remoto. Isso ajuda a decidir melhor se vale a pena limpar ou não",
+      "expected_output": "A skill de limpar cópias passa a conferir, antes de manter uma pasta, se alguma sessão aberta usa essa pasta e se o remoto tem pull request aberto ou mesclado. A resposta traz essa decisão para as cópias que tinham ficado, com o link quando houver pull request. O pull request da mudança sai em rascunho.",
+      "files": []
     }
   ]
 }

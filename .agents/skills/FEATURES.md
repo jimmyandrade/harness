@@ -1051,7 +1051,7 @@ How these skills relate is in `README.md`, in this folder.
   - Does not sync to Notion, because it needs a shell
   - Runs at the end of every session whose work landed, and removes without asking: the checks are the safety
   - Leaves the worktrees the Claude app made, in `.claude/worktrees`, to the app's own cleanup, and the session's own worktree to its exit tool
-  - Removes a worktree only when it is not the main checkout or a folder of an open session, has no change outside git other than installed dependencies, and its work is on a remote branch or in a merged pull request
+  - Removes a worktree only when it is not the main checkout or a folder of an open session, has no change outside git other than installed dependencies, and its work is on a remote branch or in an open or merged pull request. The session check reads the working directory of each open terminal and each open workspace. The remote check lists open and merged pull requests. A copy is not kept because that lookup was skipped
   - Treats a missing remote branch after a squash merge as landed when the pull request is merged
   - Removes the local branch too, prunes worktrees whose folder is gone, and reports the space freed and why each kept worktree stayed
   - Removes a local branch no worktree uses when its commit is on a remote branch or is the head of its merged or closed pull request, and keeps one whose commit exists only on this machine
