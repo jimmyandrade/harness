@@ -3,7 +3,7 @@ name: criar-commit
 description: Use essa habilidade sempre que terminar um trabalho que mudou o repositório ou for commitar, separar commits ou escrever a mensagem, mesmo sem dizer commit. NÃO use para push, abrir PR, rebase nem merge (use criar-pull-request).
 metadata:
   author: jimmyandrade
-  version: "0.23.0"
+  version: "0.23.1"
 ---
 
 # Criar commit
@@ -183,7 +183,7 @@ Um commit `fix:` com o assunto dizendo o porquê da troca do texto. Sem teste no
 - A pessoa pede para não commitar: pare antes do Passo 2.
 - Não há mudança no repositório: não crie commit vazio.
 - A mudança está na `Branch base` sem commit e vai para uma branch própria: leve as mudanças para a branch nova antes de commitar.
-- Commit cujo assunto começa com `merge:`: não crie. A base entra por rebase, em `criar-pull-request`.
+- Commit cujo assunto começa com `merge:`: não crie. A base entra por rebase, em `atualizar-branch-do-pull-request`.
 - O projeto não tem `Comando de testes` nem `Comando de build`: diga na resposta que nada foi verificado antes do commit.
 - A pessoa pede para mudar uma cópia, sincronizada ou instalada por dependência ou plugin, como a página de uma habilidade: não grave nela. A mudança vai no repositório de origem. A cópia sincronizada muda depois do merge. A cópia instalada muda quando o projeto passa a usar a versão nova.
 - A correção está num Markdown: o tipo é `fix:`. `docs:` fica para a documentação.

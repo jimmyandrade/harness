@@ -49,6 +49,18 @@ How these skills relate is in `README.md`, in this folder.
   - [ ] A suggestion that changes behavior is shown to the person and not applied without approval
   - [ ] A thread without an answer stays open and shows in the tally
 
+### atualizar-branch-do-pull-request
+- **Stability**: experimental
+- **Description**: Bring a pull request branch up to date with the base branch by rebase, and replace the published branch only with authorization
+- **Properties**:
+  - Skill at `.agents/skills/atualizar-branch-do-pull-request/`
+  - Checks the pull request state first. A merged pull request gets no rebase and no push; the commits left out of the merge go to a new branch from the remote base branch
+  - Updates with rebase on the remote base branch, never merges the base into the branch, and never creates a `merge:` commit
+  - When a published branch was rewritten, the reply says the GitHub branch would be replaced by the new commits, the base branch stays as it is, and the replacement proceeds only if nobody pushed a new commit to that branch since the last fetch. It asks before replacing, unless the calling skill already authorizes it, and it does not name the git command in place of that explanation
+- **Test Criteria**:
+  - [ ] A request to merge the base into the branch updates it with rebase instead
+  - [ ] A branch whose pull request was merged gets no rebase and no push
+
 ### avaliar-atualizacoes-de-dependencia
 - **Stability**: experimental
 - **Description**: Work through the open dependency update pull requests from Dependabot and Renovate, oldest first, one at a time
@@ -190,7 +202,7 @@ How these skills relate is in `README.md`, in this folder.
   - After a merge, checks the sync when the project syncs the repository with another tool, such as the skill pages in Notion
   - `Criar pull request ao terminar` is `rascunho` by default: the code change pushes the branch and opens a draft pull request, and the reply names the branch, says whether it is on GitHub, and includes the link. `sim` opens a ready pull request. `não` waits for an explicit publish request. A draft does not request review. Merging still needs an explicit request
   - `Fatiar por subtarefa` is `não` by default: commits of the same theme stay on the open pull request for that theme. `sim` opens one pull request per subtask. Stacking is for a theme that depends on a pull request still outside the base
-  - When a published branch was rewritten, the reply says the GitHub branch would be replaced by the new commits, the base branch stays as it is, and the replacement proceeds only if nobody pushed a new commit to that branch since the last fetch. It asks before replacing, and it does not name the git command in place of that explanation
+  - When the branch already has a pull request or is behind the base branch, follows `atualizar-branch-do-pull-request` before the push
   - The label follows the commit type, not the file extension. `fix` uses the bug label. `docs` uses the documentation label. A Markdown file that corrects an error gets the bug label
   - Writes each step sentence on its own line, and keeps a command in Scripts disponíveis
   - At the end, follows `sincronizar-status-da-tarefa`

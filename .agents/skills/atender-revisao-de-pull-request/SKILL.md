@@ -3,13 +3,14 @@ name: atender-revisao-de-pull-request
 description: Atende a revisão recebida num pull request, de pessoa ou de bot. Lê os comentários abertos, classifica cada sugestão, aplica o que é seguro e pede a resposta a `publicar-resposta-de-revisao`. Sem PR informado, lista os seus que precisam de atenção. Não serve para revisar o PR de outra pessoa nem para abrir o PR.
 metadata:
   author: jimmyandrade
-  version: "0.23.0"
+  version: "0.24.0"
   aliases:
     - resolver-comentarios-de-revisao
     - apply-pr-review
   related:
     - criar-commit
     - criar-pull-request
+    - atualizar-branch-do-pull-request
     - escrever-teste
     - fatiar-pull-request
     - evoluir-habilidade
@@ -80,7 +81,7 @@ Valide antes de commitar, com o que `levantar-ambiente-do-repositorio` achar par
 ### Passo 5
 
 Corrija na branch do PR, seguindo `criar-commit`, com a mensagem dizendo o que mudou e nunca "ajustes da revisão". Um commit por assunto quando as mudanças forem independentes. Não reescreva o conteúdo dos commits que já estão no PR por conta própria.
-Se a branch estiver atrás da base, atualize antes de aplicar, na cópia separada. Siga `criar-pull-request`: rebase sobre a base remota, resolva o conflito nos commits rebaseados e substitua a branch publicada. O atendimento já autoriza essa substituição. Não avise e não peça. Se há pull requests abertos empilhados em cima, atualize cada branch de cima na mesma cópia, na ordem, para o diff de cada um continuar só com os arquivos daquela pergunta. A branch aberta no clone da pessoa não é reescrita lá: a publicada anda, e o relatório diz que a pasta ficou no commit antigo. Envie a branch, seguindo `criar-pull-request`, antes de responder, para o commit citado já estar no PR. Depois desse push, uma vez, confira o título e a descrição. Não confira a cada commit. Se um dos dois deixou de contar o que a branch faz, atualize os dois, como `criar-pull-request` manda.
+Se a branch estiver atrás da base, atualize antes de aplicar, na cópia separada. Siga `atualizar-branch-do-pull-request`: rebase sobre a base remota, resolva o conflito nos commits rebaseados e substitua a branch publicada. O atendimento já autoriza essa substituição. Não avise e não peça. Se há pull requests abertos empilhados em cima, atualize cada branch de cima na mesma cópia, na ordem, para o diff de cada um continuar só com os arquivos daquela pergunta. A branch aberta no clone da pessoa não é reescrita lá: a publicada anda, e o relatório diz que a pasta ficou no commit antigo. Envie a branch, seguindo `criar-pull-request`, antes de responder, para o commit citado já estar no PR. Depois desse push, uma vez, confira o título e a descrição. Não confira a cada commit. Se um dos dois deixou de contar o que a branch faz, atualize os dois, como `criar-pull-request` manda.
 
 Se a decisão vale além deste PR, grave a lição nas instruções do projeto e commite antes de responder. Uma recusa que vai se repetir também entra. Correção pontual fica só na resposta.
 
@@ -154,7 +155,7 @@ Se você ler só as threads, o resumo que o bot publica no corpo da revisão fic
 
 Se você avisar ou pedir antes de atualizar uma branch que está atrás da base, o atendimento trava e a base segue mudando.
 
-1. Atualize antes de aplicar, na cópia separada, com rebase sobre a base remota, como `criar-pull-request` manda.
+1. Atualize antes de aplicar, na cópia separada, com rebase sobre a base remota, como `atualizar-branch-do-pull-request` manda.
 2. Resolva o conflito nos commits rebaseados e substitua a branch publicada. O atendimento já autoriza. Não peça.
 3. Se há pull requests empilhados em cima, atualize essas branches na mesma cópia, na ordem. O diff de cada um continua só com os arquivos daquela pergunta. A branch aberta no clone da pessoa não é reescrita lá.
 4. Uma sugestão que muda comportamento continua esperando a aprovação. Atualizar a branch não é essa aprovação.
@@ -215,7 +216,7 @@ Achei cinco comentários abertos. Dois eram estruturais, um nome e um texto, e a
 - Um bot comenta por causa de um check que falhou: trate como os outros. A decisão de mesclar com check falhando fica com `criar-pull-request`.
 - Sem PR informado e sem nenhum PR da pessoa precisando de ação: diga isso e pare.
 - Execução agendada: siga `Aplicar em execução agendada` e deixe o resto no resumo, sem responder.
-- A branch está atrás da base, com ou sem conflito: atualize com rebase, resolva o conflito e substitua a branch publicada, como `criar-pull-request` manda, sem avisar e sem pedir. Se há pull requests empilhados em cima, atualize essas branches na mesma cópia, na ordem, para cada diff continuar só com os arquivos daquela pergunta. A branch aberta no clone da pessoa não é reescrita lá.
+- A branch está atrás da base, com ou sem conflito: atualize com rebase, resolva o conflito e substitua a branch publicada, como `atualizar-branch-do-pull-request` manda, sem avisar e sem pedir. Se há pull requests empilhados em cima, atualize essas branches na mesma cópia, na ordem, para cada diff continuar só com os arquivos daquela pergunta. A branch aberta no clone da pessoa não é reescrita lá.
 - A correção mudou o que a branch faz: depois do push, o título e a descrição passam uma vez pela conferência de `criar-pull-request`.
 
 ## Pegadinhas
