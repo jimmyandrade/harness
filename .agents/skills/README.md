@@ -64,6 +64,7 @@ flowchart LR
     escrever_teste["escrever-teste"]
     evoluir_habilidade["evoluir-habilidade"]
     extrair_tarefas_da_reuniao["extrair-tarefas-da-reuniao"]
+    fatiar_pull_request["fatiar-pull-request"]
     fazer_fechamento["fazer-fechamento"]
     gerenciar_estoque["gerenciar-estoque"]
     gravar_termos_no_vocabulario["gravar-termos-no-vocabulario"]
@@ -145,6 +146,7 @@ flowchart LR
   conversar_no_whatsapp --> redigir_com_tom_de_voz
   criar_commit -.-> criar_pull_request
   criar_commit -.-> evoluir_habilidade
+  criar_commit -.-> fatiar_pull_request
   criar_commit -.-> sincronizar_status_da_tarefa
   criar_habilidade --> criar_commit
   criar_habilidade --> criar_pull_request
@@ -156,6 +158,7 @@ flowchart LR
   criar_pull_request --> comunicar_novidade_do_produto
   criar_pull_request --> criar_commit
   criar_pull_request --> evoluir_habilidade
+  criar_pull_request --> fatiar_pull_request
   criar_pull_request --> sincronizar_status_da_tarefa
   definir_agenda --> definir_agenda_de_popstar
   definir_agenda --> definir_convidado
@@ -326,6 +329,9 @@ flowchart LR
   extrair_tarefas_da_reuniao --> evoluir_habilidade
   extrair_tarefas_da_reuniao --> identificar_duplicata
   extrair_tarefas_da_reuniao --> procurar_tarefa
+  fatiar_pull_request --> criar_commit
+  fatiar_pull_request --> criar_pull_request
+  fatiar_pull_request --> evoluir_habilidade
   fazer_fechamento --> definir_conta_bancaria
   fazer_fechamento --> definir_obrigacao_financeira
   fazer_fechamento --> evoluir_habilidade
