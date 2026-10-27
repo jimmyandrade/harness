@@ -122,6 +122,7 @@ flowchart LR
   atender_revisao_de_pull_request --> criar_pull_request
   atender_revisao_de_pull_request --> escrever_teste
   atender_revisao_de_pull_request --> evoluir_habilidade
+  atender_revisao_de_pull_request --> fatiar_pull_request
   atender_revisao_de_pull_request --> levantar_ambiente_do_repositorio
   atender_revisao_de_pull_request --> levantar_contexto_do_pull_request
   atender_revisao_de_pull_request --> priorizar_itens
