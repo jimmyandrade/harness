@@ -44,3 +44,10 @@ Funcionalidade: Organizar e-mails a partir de decisões confirmadas
       Quando a pessoa confirma a etiqueta, o destino e o motivo
       Então o agente acrescenta a regra nova à árvore
       E aplica a classificação confirmada à mensagem
+
+  Regra: Nenhuma conversa processada fica sem etiqueta
+    Exemplo: Aviso arquivado recebe etiqueta
+      Dado que a habilidade arquivou avisos de falha de entrega
+      Quando o resultado é lido de volta
+      Então cada conversa arquivada tem uma etiqueta de usuário
+      E a consulta de e-mails sem etiqueta não traz nenhuma delas
