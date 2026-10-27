@@ -3,7 +3,7 @@ name: publicar-revisao-de-codigo
 description: Revisa um pull request e publica a revisão numa única review, com os comentários inline, no idioma de quem recebe e no tom do projeto. Usada quando a pessoa pede uma revisão ou outra habilidade precisa publicar uma. Não serve para tratar os comentários que você recebeu no seu PR.
 metadata:
   author: jimmyandrade
-  version: "0.15.0"
+  version: "0.16.0"
   aliases:
     - post-code-review
   related:
@@ -128,12 +128,12 @@ Procure a prova em todo lugar antes de pedir: o corpo do PR, os comentários do 
 
 ### Passo 9
 
-Escreva os textos com `redigir-com-tom-de-voz`, para o tom de quem publica. Um comentário de achado diz o que você viu, por que importa e o que muda para quem usa ou mantém o código, e termina convidando a pessoa a responder. Um pedido para aprovar não pula a revisão: rode os critérios atuais antes e aprove só sem bloqueio. Uma aprovação sem achado não é a descrição do PR: abre com o `@login` de quem abriu, agradece a ajuda concreta deste PR, diz que a revisão não achou nada bloqueante e só então lista, em tópicos, o que o PR faz. As frases vêm do vocabulário. A frase de idioma, quando entra, fica num PS no fim. PR aberto por bot não leva `@`.
+Escreva os textos com `redigir-com-tom-de-voz`, para o tom de quem publica. Um comentário de achado diz o que você viu, por que importa e o que muda para quem usa ou mantém o código, e termina convidando a pessoa a responder. Um pedido para aprovar não pula a revisão: rode os critérios atuais antes e aprove só sem bloqueio. Uma aprovação sem achado não é a descrição do PR: abre com o `@login` de quem abriu, agradece a ajuda concreta deste PR, diz que a revisão não achou nada bloqueante e só então lista, em tópicos, o que o PR faz. As frases vêm do vocabulário. Conte os comentários inline publicados, nenhum, um ou mais, e use a frase do vocabulário dessa quantidade. A de idioma fica num PS no fim. Sem frase para essa quantidade, não invente. PR aberto por bot não leva `@`.
 
 - Com `Postura dos comentários` em `pergunta`, não declare erro confirmado e não dê ordem: separe o fato da decisão e termine em pergunta.
 - Todo ponto sobre uma linha de código vai inline, ancorado na linha do diff mais próxima. O corpo geral não cita arquivo, função nem chamada. Só fica no corpo o que não é sobre linha.
 - Escreva em palavras, não pelo rótulo: com `Rótulo de prioridade no texto` em `não`, o nome da categoria nunca aparece.
-- Com `Revelar que a revisão foi automática` em `não`, não mencione automação, ferramenta, nome de habilidade nem quantos comentários há, e não deixe rodapé de ferramenta.
+- Com `Revelar que a revisão foi automática` em `não`, não mencione automação, ferramenta nem nome de habilidade, e não deixe rodapé de ferramenta.
 - Siga `Abertura da revisão`. O par só entra com `versão curta e versão longa`, também na tradução.
 - Cada comentário que fala com uma pessoa abre com o `@login` do GitHub dela. Quem mais entra no ponto também leva `@login`. O primeiro nome sozinho não marca a pessoa.
 - Com `Voz em PR aberto por bot` em `nós`, num PR aberto por um bot, nunca escreva "você", "seu" nem @menção ao autor: use a primeira pessoa do plural, "nós", como se o ponto fosse para a discussão do time. Vale no corpo, nos comentários, nas respostas em thread e na tradução. Essa voz não leva `@`.
@@ -196,7 +196,7 @@ Se você publicar uma aprovação sem achado que não marca quem abriu, não diz
 
 1. Abra com o `@login` do GitHub de quem abriu o PR.
 2. Agradeça a ajuda concreta deste PR, diga que a revisão não achou nada bloqueante e só então liste, em tópicos, o que o PR faz. As frases vêm do vocabulário.
-3. A frase de idioma, quando entra, fica num PS no fim.
+3. A frase de idioma fica num PS no fim e segue a quantidade.
 4. Corrija o comentário já publicado.
 5. PR aberto por bot segue `Voz em PR aberto por bot` e não leva `@`.
 
@@ -287,7 +287,7 @@ Rodei a revisão e achei bloqueio. Não aprovei. Avisei que ainda não dá para 
 - Pedir para aprovar parece dispensar a revisão. Sem a revisão, não há aprovação.
 - Feedback que muda o texto já publicado atualiza comentários e respostas sem perguntar, mesmo com `Ler o texto antes de publicar` em `sim`.
 - Uma review sem comentários inline não cobre um ponto de código: ele precisa de uma linha.
-- O corpo da review não repete o que está inline: diz só que deixou pontos, sem contar quantos.
+- O corpo não repete o inline. A frase segue a quantidade, sem número.
 - A cópia separada é a trava: removê-la libera o repositório.
 - O clone da pessoa pode ter alterações não salvas. Nunca as guarde nem as mova.
 - Um check pendente não é um check que falhou.
