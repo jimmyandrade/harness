@@ -69,3 +69,18 @@ Funcionalidade: Fazer o fechamento financeiro
       Quando a pessoa pede o fechamento da pop-up com a contagem do caixa
       Então a skill compara o caixa contado com as vendas registradas
       E mostra a diferença, quando houver
+
+  Regra: A planilha é procurada antes de pedir o link
+
+    Exemplo: Planilha sem link
+      Dado que "Onde fica o fechamento" é "planilha"
+      E que nem o pedido nem o mapeamento trazem o link da planilha
+      Quando a pessoa pede o fechamento
+      Então a skill procura a planilha pelo conector, pelo nome e pelo nome das abas
+      Mas não pede o link antes de procurar
+
+    Exemplo: Planilha fora do alcance do conector
+      Dado que a busca pelo conector não achou a planilha
+      Quando a skill responde
+      Então diz que buscas rodou
+      E pede que a dona da planilha a compartilhe com a conta do conector, ou mande o link
