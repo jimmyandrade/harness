@@ -3,7 +3,7 @@ name: preparar-tarefa-do-pull-request
 description: Garante que uma demanda tenha uma tarefa no rastreador do projeto antes de virar pull request, ou depois, quando o PR já existe. Procura a tarefa existente, sugere a criação e pede o contexto, monta a tarefa e liga a chave ao PR. Não cria sozinha, não cria tarefa vazia e não escolhe o projeto por um card parecido. Não serve para escrever bem uma tarefa nem para abrir o PR.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.6.0"
   related:
     - definir-tarefa
     - evoluir-habilidade
@@ -23,7 +23,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Onde ficam as tarefas": ""
 # `Projeto da tarefa por repositório` liga cada repositório ao projeto ou à lista das tarefas dele.
 "Projeto da tarefa por repositório": ""
-# `Prefixo da chave do projeto` é o começo da chave no rastreador, como `PROJ`. Vazio, a habilidade pergunta a chave. Com um valor, "crie o card" usa esse prefixo e não pergunta de novo. O exemplo do comentário não é um valor configurado.
+# `Prefixo da chave do projeto` é o começo da chave no rastreador. Vazio, a habilidade pergunta a chave. Um valor, como `PROJ`, faz "crie o card" usar esse prefixo. Vários, como `PROJ` e `OUTRO`, são as únicas opções: mostre só essas e espere a pessoa escolher. Chave fora da lista não entra. Um card parecido noutro projeto não aumenta a lista. O exemplo do comentário não é um valor configurado.
 "Prefixo da chave do projeto": ""
 # `Tipos de tarefa e regra de escolha` descreve como escolher o tipo.
 "Tipos de tarefa e regra de escolha": ""
@@ -73,7 +73,7 @@ Siga `procurar-tarefa` antes de sugerir qualquer criação, com palavras da dema
 
 ### Passo 4
 
-Se não achou nada, sugira a criação e peça o contexto que falta: o resumo real da demanda, o tipo e o projeto. O projeto fica ambíguo enquanto a pessoa não disser a chave, salvo quando `Prefixo da chave do projeto` tem um valor: esse valor é a chave. Um card parecido noutro projeto não escolhe o projeto e não preenche o prefixo. "Crie o card" sem a chave do projeto não é a resposta do projeto quando o prefixo está vazio. Com o prefixo preenchido, esse pedido usa o prefixo. No chat, se a pessoa está na frente. No resumo da execução, se foi chamada por uma automação. Nunca crie sem a resposta, e nunca crie uma tarefa vazia, genérica ou copiada de um título técnico sem revisão. Sem contexto suficiente, pergunte de novo.
+Se não achou nada, sugira a criação e peça o contexto que falta: o resumo real da demanda, o tipo e o projeto. O projeto fica ambíguo enquanto a pessoa não disser a chave, salvo quando `Prefixo da chave do projeto` tem um único valor: esse valor é a chave. Com vários, mostre só esses e espere a escolha. Chave fora da lista não entra. Um card parecido noutro projeto não escolhe o projeto, não preenche o prefixo e não aumenta a lista. "Crie o card" sem a chave do projeto não é a resposta do projeto quando o prefixo está vazio ou tem vários valores. Com um único prefixo, esse pedido usa o prefixo. No chat, se a pessoa está na frente. No resumo da execução, se foi chamada por uma automação. Nunca crie sem a resposta, e nunca crie uma tarefa vazia, genérica ou copiada de um título técnico sem revisão. Sem contexto suficiente, pergunte de novo.
 
 ### Passo 5
 
@@ -97,7 +97,7 @@ Os textos seguem `redigir-com-tom-de-voz`.
 
 ### Passo 7
 
-Mostre a tarefa montada, com a chave do projeto, e espere o sim. Só então crie. O pedido de criar o card não substitui esse sim quando o projeto ainda não foi dito e `Prefixo da chave do projeto` está vazio. Sem permissão de criação no projeto, use o `Projeto de reserva sem permissão` e diga que usou. Garanta a `Evidência de visibilidade da tarefa de reserva`: pergunte primeiro se já existe uma, e só sem nenhuma proponha criá-la, sem postar sozinha. Sem reserva, diga que falta permissão e pare.
+Mostre a tarefa montada, com a chave do projeto, e espere o sim. Só então crie. O pedido de criar o card não substitui esse sim quando o projeto ainda não foi dito e `Prefixo da chave do projeto` está vazio ou tem mais de um valor. Sem permissão de criação no projeto, use o `Projeto de reserva sem permissão` e diga que usou. Garanta a `Evidência de visibilidade da tarefa de reserva`: pergunte primeiro se já existe uma, e só sem nenhuma proponha criá-la, sem postar sozinha. Sem reserva, diga que falta permissão e pare.
 
 ### Passo 8
 
@@ -118,7 +118,7 @@ Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 Se você criar a tarefa assim que não achar nenhuma, ou escolher o projeto porque um card parecido está noutro projeto, ela nasce no lugar errado e a pessoa perde a chance de dizer o que falta.
 
 1. Sugira a criação e peça o contexto, inclusive a chave do projeto.
-2. Espere a resposta. "Crie o card" sem a chave do projeto não é essa resposta quando `Prefixo da chave do projeto` está vazio. Com o prefixo preenchido, use-o.
+2. Espere a resposta. "Crie o card" sem a chave do projeto não é essa resposta quando o prefixo está vazio ou tem vários valores. Com um único prefixo, use-o. Com vários, mostre a lista e espere a escolha.
 3. Mostre a tarefa montada, com a chave do projeto, e espere o sim.
 
 ### Tarefa montada em volta de um comentário
@@ -167,7 +167,8 @@ O PR está aberto, em rascunho. Procurei e não achei. Sugeri criar a tarefa a p
 - O projeto não usa rastreador: diga isso e pare.
 - Uma tarefa que plausivelmente cobre a demanda já existe: mostre e pare.
 - O repositório não está mapeado para um projeto: pergunte uma vez e grave. Um card parecido noutro projeto não preenche o mapeamento.
-- A pessoa pediu para criar o card e não disse o projeto: se `Prefixo da chave do projeto` tem um valor, use-o. Vazio, pergunte o projeto e pare.
+- A pessoa pediu para criar o card e não disse o projeto: se há um único prefixo, use-o. Se há vários, mostre só esses e espere a escolha. Vazio, pergunte o projeto e pare.
+- A pessoa disse uma chave fora da lista: pergunte de novo, só entre os prefixos configurados.
 - Nenhuma regra de tipo bate: pergunte o tipo e o motivo.
 - Falta permissão de criação: use o projeto de reserva, ou diga e pare.
 - A pessoa não deu contexto suficiente: pergunte de novo, sem criar.
@@ -180,8 +181,9 @@ O PR está aberto, em rascunho. Procurei e não achei. Sugeri criar a tarefa a p
 - Uma tarefa de projeto de reserva pode precisar de uma segunda tarefa no projeto certo, depois de uma migração.
 - A busca por palavras acha a tarefa de outra pessoa: confira se é a mesma demanda.
 - A discussão de código fica no PR, e a tarefa guarda o que o PR propõe.
-- Um card parecido noutro projeto parece resolver o projeto. Não resolve. Pergunte a chave, salvo quando `Prefixo da chave do projeto` tem um valor.
-- O exemplo `PROJ` no comentário do parâmetro não é um prefixo configurado. Vazio continua vazio.
+- Um card parecido noutro projeto parece resolver o projeto. Não resolve. Pergunte a chave, salvo quando `Prefixo da chave do projeto` tem um único valor.
+- Vários prefixos parecem autorização para escolher um sozinho. Não são. A pessoa escolhe.
+- O exemplo `PROJ` e `OUTRO` no comentário do parâmetro não é prefixo configurado. Vazio continua vazio.
 
 ## Scripts disponíveis
 
