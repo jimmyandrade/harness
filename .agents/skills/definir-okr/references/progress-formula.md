@@ -1,5 +1,7 @@
 # Fórmula de progresso pelo sentido
 
+O texto da habilidade repete estas fórmulas. A execução que não abre este modelo usa as do texto. Quando este modelo abre, é o mesmo texto.
+
 Modelo para a lista que calcula o progresso do key result por fórmula, no editor de fórmulas do Notion.
 Troque cada nome entre `<>` pelo nome da propriedade ou da opção que o mapeamento de dados do projeto dá.
 Antes de colar, compare com a fórmula atual da lista e mantenha o que ela faz além do progresso.
