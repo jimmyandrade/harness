@@ -3,7 +3,7 @@ name: escrever-codigo
 description: Aplica as preferências de código da pessoa antes de escrever ou alterar código, como comentários, estilo inline e o que fazer antes de criar um componente. Usada quando uma mudança vai escrever ou alterar código do projeto. Não serve para testes, para commit nem para decidir a arquitetura.
 metadata:
   author: jimmyandrade
-  version: "0.4.1"
+  version: "0.5.0"
   related:
     - criar-commit
     - criar-pull-request
@@ -47,13 +47,20 @@ Antes de criar um componente, siga `Antes de criar um componente`: leia o desenh
 
 ### Passo 5
 
-Rode o teste da mudança e confirme que ele passa. Para o commit e o pull request, siga `criar-commit` e `criar-pull-request`.
+Rode o teste da mudança e confirme que ele passa. Para o commit e o pull request, siga `criar-commit` e `criar-pull-request`. Ao abrir ou atualizar o pull request, o título e a descrição têm de continuar contando o que o código faz.
 
 ### Passo 6
 
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
+
+### Pull request com texto antigo
+
+Se você criar o código e deixar o título ou a descrição do pull request no texto de antes, o pull request conta uma mudança que o código já não faz.
+
+1. Siga a conferência de título e descrição de `criar-pull-request`.
+2. Atualize o que deixou de contar o que o código faz, antes de responder.
 
 ### Comentário que repete o código
 
@@ -94,12 +101,14 @@ Mudei a função sem comentário novo. Um `eslint-disable-next-line` com o motiv
 - Não há desenho de origem para o componente: diga isso e peça o desenho antes de criar.
 - O valor de estilo é fixo mas o sistema de estilos não tem variável para ele: use o sistema de estilos e diga que falta a variável.
 - O código é de um arquivo gerado: não aplique as preferências.
+- O pull request já existia e o código mudou o que a branch faz: título e descrição passam pela conferência de `criar-pull-request`.
 
 ## Pegadinhas
 
 - Uma diretiva de ferramenta não é um comentário de explicação: ela fica em comentário de linha, mesmo com `Comentários no código` em `evitar`.
 - O estilo inline é aceito para valor calculado, mesmo com `Estilo inline` restrito.
 - Preferência da pessoa não vai para a habilidade nem para as instruções de um repositório sem consenso do time.
+- O commit parece encerrar o trabalho. O título e a descrição também têm de continuar contando o que o código faz.
 
 ## Scripts disponíveis
 

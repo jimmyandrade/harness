@@ -35,6 +35,7 @@ How these skills relate is in `README.md`, in this folder.
   - When the branch is behind the base, rebases onto the remote base, resolves the conflict, and replaces the published branch without asking. The attendance is the authorization that criar-pull-request requires. Updating the branch is not approval to apply a behavior change
   - Records a lesson that outlives the pull request in the project instructions
   - Pushes the branch after each fix and before replying, so a reply never cites a commit missing from the pull request
+  - After a code change, and before replying, checks the pull request title and description against that code and updates whichever no longer says what the branch does, as criar-pull-request requires
   - Replies on each thread before resolving it, closes the loop with a last message from the person acting, and leaves open a thread that waits for a decision
   - Asks the reviewer who requested changes for a new review once everything is applied or answered
   - In a scheduled run, applies only the structural changes and leaves the rest in the summary
@@ -100,7 +101,7 @@ How these skills relate is in `README.md`, in this folder.
   - `Commit direto na base` is `nunca`, the default, `só no terminal`, or `sempre`. Only `sempre` commits on the base without a terminal
   - Treats the repository as the only write source: a synced copy, such as the Notion page of a skill, and a copy installed by dependency or plugin are read-only, including when the person calls the edit an emergency. The next install erases an edit of the installed copy
   - A request to create or activate a skill in a synced or installed copy does not create it there, including when that copy explains how to fill the description
-  - The reply names the branch, says whether it is on GitHub, and reports each commit hash. `Criar pull request ao terminar` is `rascunho` by default, which pushes the branch and opens a draft pull request; `sim` opens a ready pull request; `não` waits for an explicit publish request
+  - The reply names the branch, says whether it is on GitHub, and reports each commit hash. `Criar pull request ao terminar` is `rascunho` by default, which pushes the branch and opens a draft pull request; `sim` opens a ready pull request; `não` waits for an explicit publish request. When the pull request opens or already exists, the title and description check stays with criar-pull-request and happens before the reply
   - Splits work into one commit per subject, and keeps commits of the same theme on the same branch and the same pull request. A different theme opens another pull request. The commit subject does not open a new pull request
   - The commit type follows what the change does, not the file extension. A correction of an error is `fix:`, even in Markdown. `docs:` is for documentation
   - Writes each step sentence on its own line, and keeps a command in Scripts disponíveis
@@ -181,6 +182,7 @@ How these skills relate is in `README.md`, in this folder.
   - Searches the new and changed files and the pull request text for each term of `Termos que não podem aparecer` before opening, and sends a hit back for a fix
   - Opens a pull request only from a `type/short-description` branch, and renames a branch a tool created with another prefix before the push. A rename after the pull request opens closes it, so a new pull request replaces it
   - Follows the pull request template of the repository when there is one
+  - On every open and every update, compares the title and the description with the current commits and code, and updates whichever no longer says what the branch does, before answering. Another skill that pushes a commit to the pull request does the same check
   - Before a merge, hands pending review comments from people or bots to whoever handles the review, in a terminal, and holds the merge while a thread waits for the person
   - `Exigir CI verde`, on by default, holds the merge while a check fails or is pending; off, it merges and reports the checks that did not pass
   - Without a terminal, opens the pull request through the GitHub integration, gives the link, and stops; the CI checks of the pull request do the testing
@@ -916,7 +918,7 @@ How these skills relate is in `README.md`, in this folder.
   - Does not create the first version of a skill, only check whether the description triggers, only review without running, or write the skill page in Notion
   - A request that arrives through a copy, synced or installed by dependency or plugin, writes through criar-commit and criar-pull-request in the source repository
   - Size and run profile follow medir-habilidade
-  - Runs at the end of every core skill, following the `Modo de aprendizado` parameter (`sim`, `não`, `perguntar`, default `perguntar`): with yes, one commit per lesson on an English-named branch, pushed, with a draft pull request from the first commit, opened through criar-pull-request with its assignee and label, marked ready when the person ends the sequence
+  - Runs at the end of every core skill, following the `Modo de aprendizado` parameter (`sim`, `não`, `perguntar`, default `perguntar`): with yes, one commit per lesson on an English-named branch, pushed, with a draft pull request from the first commit, opened through criar-pull-request with its assignee and label, marked ready when the person ends the sequence. Each lesson checks the title and the description against the current code and updates whichever no longer says what the branch does
   - Takes the project instructions as a target too: feedback on the agent's behavior edits them in the format of `definir-instrucoes-do-projeto` and raises `metadata.version`, without evals or features of their own
 - **Test Criteria**:
   - [x] The skill is present at that path
