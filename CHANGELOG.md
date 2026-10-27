@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.18.0](https://github.com/jimmyandrade/harness/compare/v1.17.0...v1.18.0) (2026-10-27)
+
+
+### Features
+
+* **publicar-revisao-de-codigo:** let the review opening choose one version ([#561](https://github.com/jimmyandrade/harness/issues/561)) ([1043b41](https://github.com/jimmyandrade/harness/commit/1043b41834a23c9dd0f000b737ad99d9729e02e2))
+* **publicar-revisao-de-codigo:** match review wording to the comment count ([#562](https://github.com/jimmyandrade/harness/issues/562)) ([e4e3df8](https://github.com/jimmyandrade/harness/commit/e4e3df8a73db7438a5ae375366df3f73a3f0f0bc))
+* **publicar-revisao-de-codigo:** update a published review when feedback changes the wording ([#565](https://github.com/jimmyandrade/harness/issues/565)) ([a09423a](https://github.com/jimmyandrade/harness/commit/a09423ac145a5c13ad316a050e247f40d276be4c))
+
+
+### Bug Fixes
+
+* send cited links as clickable links in the answer text, not only in the closing recap ([#564](https://github.com/jimmyandrade/harness/issues/564)) ([66dd4ea](https://github.com/jimmyandrade/harness/commit/66dd4eac07ad5b6a4e19681395706f993cf49262))
+
 ## [1.17.0](https://github.com/jimmyandrade/harness/compare/v1.16.4...v1.17.0) (2026-10-27)
 
 
