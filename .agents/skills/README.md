@@ -314,6 +314,7 @@ flowchart LR
   escrever_codigo --> escrever_teste
   escrever_codigo --> evoluir_habilidade
   escrever_codigo --> levantar_ambiente_do_repositorio
+  escrever_codigo --> preparar_tarefa_do_pull_request
   escrever_teste --> criar_commit
   escrever_teste --> escrever_codigo
   escrever_teste --> evoluir_habilidade
