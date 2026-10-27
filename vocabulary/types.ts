@@ -218,33 +218,30 @@ export type InitRequest = {
   language: string
 }
 
-// Re-export MCP HTTP utilities for convenience
+// Re-export MCP HTTP utilities for convenience.
+// Protocol types and the transport come from the SDK through this module.
 export type {
   HttpStatus,
-  JsonRpcErrorCode,
-  JsonRpcRequest,
-  JsonRpcError,
-  JsonRpcResponse,
-  McpToolCallParams,
   ParsedRequest,
   ErrorResponse,
   CorsOptions,
   AuthChecker,
   WriteTool,
-} from "./shared/mcp-http.ts"
+} from "./api/shared/mcp-http.ts"
 
 export {
+  ErrorCode,
+  McpError,
+  McpServer,
+  StreamableHTTPServerTransport,
   HTTP_STATUS,
-  JSON_RPC_ERROR,
   WRITE_TOOLS,
   parseRequestFrom,
-  createJsonRpcError,
   createErrorResponse,
-  createJsonRpcErrorResponse,
   configureCorsHeaders,
   shouldBlockWriteOperations,
   isWriteTool,
   validateBearerToken,
   createAuthChecker,
   noAuth,
-} from "./shared/mcp-http.ts"
+} from "./api/shared/mcp-http.ts"

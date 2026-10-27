@@ -8,12 +8,13 @@ import { Readable } from "node:stream"
 import type { IncomingMessage } from "node:http"
 import {
   HTTP_STATUS,
-  JSON_RPC_ERROR,
+  ErrorCode,
+  McpError,
+  McpServer,
+  StreamableHTTPServerTransport,
   WRITE_TOOLS,
   parseRequestFrom,
-  createJsonRpcError,
   createErrorResponse,
-  createJsonRpcErrorResponse,
   configureCorsHeaders,
   shouldBlockWriteOperations,
   isWriteTool,
@@ -47,13 +48,26 @@ void describe("HTTP_STATUS constants", () => {
   })
 })
 
-void describe("JSON_RPC_ERROR constants", () => {
-  void test("exports correct error codes", () => {
-    strictEqual(JSON_RPC_ERROR.PARSE_ERROR, -32700)
-    strictEqual(JSON_RPC_ERROR.INVALID_REQUEST, -32600)
-    strictEqual(JSON_RPC_ERROR.METHOD_NOT_FOUND, -32601)
-    strictEqual(JSON_RPC_ERROR.INVALID_PARAMS, -32602)
-    strictEqual(JSON_RPC_ERROR.INTERNAL_ERROR, -32603)
+void describe("SDK protocol exports", () => {
+  void test("re-exports the JSON-RPC error codes", () => {
+    strictEqual(ErrorCode.ParseError, -32700)
+    strictEqual(ErrorCode.InvalidRequest, -32600)
+    strictEqual(ErrorCode.MethodNotFound, -32601)
+    strictEqual(ErrorCode.InvalidParams, -32602)
+    strictEqual(ErrorCode.InternalError, -32603)
+  })
+
+  void test("re-exports the server and the HTTP transport", () => {
+    strictEqual(typeof McpServer, "function")
+    strictEqual(typeof StreamableHTTPServerTransport, "function")
+  })
+
+  void test("builds an error with the SDK error type", () => {
+    const error = new McpError(ErrorCode.InvalidRequest, "Invalid request", { field: "id" })
+
+    strictEqual(error.code, -32600)
+    strictEqual(error.message, "MCP error -32600: Invalid request")
+    deepStrictEqual(error.data, { field: "id" })
   })
 })
 
@@ -110,31 +124,6 @@ void describe("parseRequestFrom", () => {
   })
 })
 
-void describe("createJsonRpcError", () => {
-  void test("creates error with id and code", () => {
-    const error = createJsonRpcError(1, JSON_RPC_ERROR.INVALID_REQUEST, "Invalid request")
-
-    strictEqual(error.jsonrpc, "2.0")
-    strictEqual(error.id, 1)
-    strictEqual(error.error?.code, -32600)
-    strictEqual(error.error?.message, "Invalid request")
-    strictEqual(error.error?.data, undefined)
-  })
-
-  void test("creates error with null id", () => {
-    const error = createJsonRpcError(null, JSON_RPC_ERROR.PARSE_ERROR, "Parse error")
-
-    strictEqual(error.id, null)
-    strictEqual(error.error?.code, -32700)
-  })
-
-  void test("includes optional data field", () => {
-    const error = createJsonRpcError(1, JSON_RPC_ERROR.INTERNAL_ERROR, "Internal error", { details: "stack trace" })
-
-    deepStrictEqual(error.error?.data, { details: "stack trace" })
-  })
-})
-
 void describe("createErrorResponse", () => {
   void test("creates basic error response", () => {
     const response = createErrorResponse(HTTP_STATUS.BAD_REQUEST, "Bad request")
@@ -152,34 +141,6 @@ void describe("createErrorResponse", () => {
       field: "email",
       reason: "invalid format",
     })
-  })
-})
-
-void describe("createJsonRpcErrorResponse", () => {
-  void test("creates JSON-RPC error response", () => {
-    const response = createJsonRpcErrorResponse(
-      HTTP_STATUS.BAD_REQUEST,
-      1,
-      JSON_RPC_ERROR.INVALID_PARAMS,
-      "Invalid parameters",
-    )
-
-    strictEqual(response.status, 400)
-    strictEqual((response.body as { jsonrpc: string }).jsonrpc, "2.0")
-    strictEqual((response.body as { id: number }).id, 1)
-    strictEqual((response.body as { error: { code: number } }).error.code, -32602)
-  })
-
-  void test("includes data in JSON-RPC error", () => {
-    const response = createJsonRpcErrorResponse(
-      HTTP_STATUS.INTERNAL_SERVER_ERROR,
-      "req-1",
-      JSON_RPC_ERROR.INTERNAL_ERROR,
-      "Internal error",
-      { trace: "..." },
-    )
-
-    deepStrictEqual((response.body as { error: { data: unknown } }).error.data, { trace: "..." })
   })
 })
 

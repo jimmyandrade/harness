@@ -1,22 +1,20 @@
 /**
  * Shared MCP server HTTP utilities.
  *
- * This module provides reusable utilities for building MCP servers over HTTP:
- * - JSON-RPC and MCP protocol types and constants
- * - Request parsing and validation
- * - Error response construction
- * - CORS headers configuration
- * - Write operation protection
- * - Authentication hooks (for future bearer token validation)
- *
- * Business harnesses can import these utilities to build their own MCP servers
- * following consistent patterns and best practices.
+ * Protocol types, JSON-RPC error codes, the server, and the Streamable HTTP
+ * transport come from `@modelcontextprotocol/sdk`. This module keeps only what
+ * that package does not export: a body size limit, CORS header fields, the
+ * write-tool gate, and the bearer token check.
  */
 
 import type { IncomingMessage } from "node:http"
 
+export { ErrorCode, McpError } from "@modelcontextprotocol/sdk/types.js"
+export { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js"
+export { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js"
+
 /**
- * Standard HTTP status codes used by MCP servers.
+ * Standard HTTP status codes used by the helpers below.
  */
 export const HTTP_STATUS = {
   OK: 200,
@@ -29,57 +27,6 @@ export const HTTP_STATUS = {
 } as const
 
 export type HttpStatus = (typeof HTTP_STATUS)[keyof typeof HTTP_STATUS]
-
-/**
- * JSON-RPC 2.0 error codes.
- * @see https://www.jsonrpc.org/specification#error_object
- */
-export const JSON_RPC_ERROR = {
-  PARSE_ERROR: -32700,
-  INVALID_REQUEST: -32600,
-  METHOD_NOT_FOUND: -32601,
-  INVALID_PARAMS: -32602,
-  INTERNAL_ERROR: -32603,
-} as const
-
-export type JsonRpcErrorCode = (typeof JSON_RPC_ERROR)[keyof typeof JSON_RPC_ERROR]
-
-/**
- * JSON-RPC 2.0 request structure.
- */
-export type JsonRpcRequest = {
-  jsonrpc: "2.0"
-  id: string | number | null
-  method: string
-  params?: unknown
-}
-
-/**
- * JSON-RPC 2.0 error object.
- */
-export type JsonRpcError = {
-  code: JsonRpcErrorCode
-  message: string
-  data?: unknown
-}
-
-/**
- * JSON-RPC 2.0 response structure.
- */
-export type JsonRpcResponse = {
-  jsonrpc: "2.0"
-  id: string | number | null
-  result?: unknown
-  error?: JsonRpcError
-}
-
-/**
- * MCP tool call parameters.
- */
-export type McpToolCallParams = {
-  name: string
-  arguments?: Record<string, unknown>
-}
 
 /**
  * HTTP request parsing result.
@@ -96,7 +43,7 @@ export type ParsedRequest = {
  */
 export type ErrorResponse = {
   status: HttpStatus
-  body: JsonRpcResponse | { error: string; [key: string]: unknown }
+  body: { error: string; [key: string]: unknown }
 }
 
 /**
@@ -139,6 +86,9 @@ export type WriteTool = (typeof WRITE_TOOLS)[number]
 /**
  * Parse an incoming HTTP request and extract the JSON body.
  *
+ * The SDK transport accepts an already parsed body. This limit is the piece
+ * it does not apply for us.
+ *
  * @param request - The incoming HTTP request
  * @param maxSize - Maximum allowed body size in bytes (default: 10MB)
  * @returns Promise resolving to the parsed request
@@ -170,7 +120,7 @@ export async function parseRequestFrom(request: IncomingMessage, maxSize: number
           body,
           headers: request.headers as Record<string, string | string[] | undefined>,
         })
-      } catch (error) {
+      } catch {
         reject(new Error("Invalid JSON in request body"))
       }
     })
@@ -179,26 +129,6 @@ export async function parseRequestFrom(request: IncomingMessage, maxSize: number
       reject(error)
     })
   })
-}
-
-/**
- * Create a JSON-RPC 2.0 error response.
- *
- * @param id - The request ID (null if unknown)
- * @param code - JSON-RPC error code
- * @param message - Error message
- * @param data - Optional additional error data
- * @returns JSON-RPC error response object
- */
-export function createJsonRpcError(
-  id: string | number | null,
-  code: JsonRpcErrorCode,
-  message: string,
-  data?: unknown,
-): JsonRpcResponse {
-  const error: JsonRpcError = { code, message }
-  if (data !== undefined) error.data = data
-  return { jsonrpc: "2.0", id, error }
 }
 
 /**
@@ -217,30 +147,7 @@ export function createErrorResponse(status: HttpStatus, message: string, extra?:
 }
 
 /**
- * Create a JSON-RPC error response with HTTP status.
- *
- * @param status - HTTP status code
- * @param id - The request ID
- * @param code - JSON-RPC error code
- * @param message - Error message
- * @param data - Optional additional error data
- * @returns Error response with JSON-RPC structure
- */
-export function createJsonRpcErrorResponse(
-  status: HttpStatus,
-  id: string | number | null,
-  code: JsonRpcErrorCode,
-  message: string,
-  data?: unknown,
-): ErrorResponse {
-  return {
-    status,
-    body: createJsonRpcError(id, code, message, data),
-  }
-}
-
-/**
- * Configure CORS headers for MCP server responses.
+ * Configure CORS headers for responses that are not written by the SDK transport.
  *
  * @param options - CORS configuration options
  * @returns Record of HTTP headers
@@ -300,19 +207,15 @@ export function isWriteTool(toolName: string): boolean {
 /**
  * Validate a bearer token from the Authorization header.
  *
- * This is a placeholder for future authentication implementation.
- * By default, it always returns null (authentication disabled).
- *
- * To enable authentication, set the BEARER_TOKEN environment variable
- * and this function will validate against it.
+ * The SDK auth middleware speaks OAuth. This check is the plain shared secret
+ * in BEARER_TOKEN, and it stays off when that variable is unset.
  *
  * @param request - The incoming HTTP request
  * @returns null if valid or authentication disabled, ErrorResponse if invalid
  */
 export function validateBearerToken(request: IncomingMessage): ErrorResponse | null {
   const expectedToken = process.env.BEARER_TOKEN
-  
-  // Authentication disabled when no token is configured
+
   if (expectedToken === undefined || expectedToken === "") {
     return null
   }

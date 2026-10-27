@@ -5,6 +5,7 @@
     "node": ">=24.22.1"
   },
   "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.2",
     "@notionhq/client": "5.28.0",
     "zod": "4.6.7"
   },
