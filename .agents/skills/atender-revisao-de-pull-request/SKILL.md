@@ -3,7 +3,7 @@ name: atender-revisao-de-pull-request
 description: Atende a revisão recebida num pull request, de pessoa ou de bot. Lê os comentários abertos, classifica cada sugestão, aplica o que é seguro e pede a resposta a `publicar-resposta-de-revisao`. Sem PR informado, lista os seus que precisam de atenção. Não serve para revisar o PR de outra pessoa nem para abrir o PR.
 metadata:
   author: jimmyandrade
-  version: "0.21.0"
+  version: "0.22.1"
   aliases:
     - resolver-comentarios-de-revisao
     - apply-pr-review
@@ -79,7 +79,7 @@ Valide antes de commitar, com o que `levantar-ambiente-do-repositorio` achar par
 ### Passo 5
 
 Corrija na branch do PR, seguindo `criar-commit`, com a mensagem dizendo o que mudou e nunca "ajustes da revisão". Um commit por assunto quando as mudanças forem independentes. Não reescreva o conteúdo dos commits que já estão no PR por conta própria.
-Se a branch estiver atrás da base, atualize antes de aplicar, na cópia separada. Siga `criar-pull-request`: rebase sobre a base remota, resolva o conflito nos commits rebaseados e substitua a branch publicada. O atendimento já autoriza essa substituição. Não avise e não peça. Envie a branch, seguindo `criar-pull-request`, antes de responder, para o commit citado já estar no PR.
+Se a branch estiver atrás da base, atualize antes de aplicar, na cópia separada. Siga `criar-pull-request`: rebase sobre a base remota, resolva o conflito nos commits rebaseados e substitua a branch publicada. O atendimento já autoriza essa substituição. Não avise e não peça. Envie a branch, seguindo `criar-pull-request`, antes de responder, para o commit citado já estar no PR. Depois desse push, uma vez, confira o título e a descrição. Não confira a cada commit. Se um dos dois deixou de contar o que a branch faz, atualize os dois, como `criar-pull-request` manda.
 
 Se a decisão vale além deste PR, grave a lição nas instruções do projeto e commite antes de responder. Uma recusa que vai se repetir também entra. Correção pontual fica só na resposta.
 
@@ -103,6 +103,14 @@ Entregue um placar curto: aceitos, recusados, desatualizados e abertos, por auto
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
+
+### Conferência a cada commit
+
+Se você conferir o título e a descrição a cada commit, a conferência gasta token antes do push e se repete.
+
+1. Faça os commits sem essa conferência.
+2. Depois do push, uma vez, siga a conferência de `criar-pull-request` e atualize o que deixou de contar o que o código faz.
+3. Só então responda.
 
 ### Comentário desatualizado tratado como atual
 
@@ -202,6 +210,7 @@ Achei cinco comentários abertos. Dois eram estruturais, um nome e um texto, e a
 - Sem PR informado e sem nenhum PR da pessoa precisando de ação: diga isso e pare.
 - Execução agendada: siga `Aplicar em execução agendada` e deixe o resto no resumo, sem responder.
 - A branch está atrás da base, com ou sem conflito: atualize com rebase, resolva o conflito e substitua a branch publicada, como `criar-pull-request` manda, sem avisar e sem pedir.
+- A correção mudou o que a branch faz: depois do push, o título e a descrição passam uma vez pela conferência de `criar-pull-request`.
 
 ## Pegadinhas
 
@@ -210,6 +219,7 @@ Achei cinco comentários abertos. Dois eram estruturais, um nome e um texto, e a
 - Aprovar o PR de outra pessoa não é papel desta habilidade.
 - A resposta parece caber neste texto. Ela segue `publicar-resposta-de-revisao`.
 - A branch atrás da base parece pedir autorização antes do rebase. O atendimento já autoriza atualizar e substituir a branch publicada. A aprovação que ainda se pede é a de mudança de comportamento.
+- Conferir a cada commit parece necessário. A conferência é uma vez, depois do push.
 
 ## Scripts disponíveis
 
@@ -217,6 +227,6 @@ Achei cinco comentários abertos. Dois eram estruturais, um nome e um texto, e a
 - `gh api graphql -f query='query{repository(owner:"<dono>",name:"<nome>"){pullRequest(number:<número>){reviewThreads(first:100){pageInfo{hasNextPage endCursor} nodes{id isResolved isOutdated comments(first:100){nodes{databaseId author{login} path body}}}}}}}'`: threads e respostas. A resposta e a resolução estão em `publicar-resposta-de-revisao`.
 
 1. Leia as revisões, a conversa e as threads.
-2. Se a branch estiver atrás da base, atualize com rebase e substitua a branch publicada, sem pedir. Corrija e commite, inclusive a lição nas instruções do projeto, se for o caso, e envie a branch.
+2. Se a branch estiver atrás da base, atualize com rebase e substitua a branch publicada, sem pedir. Corrija e commite, inclusive a lição nas instruções do projeto, se for o caso, e envie a branch. Depois do push, confira o título e a descrição uma vez.
 3. Para cada thread, a resposta segue `publicar-resposta-de-revisao`.
 4. Entregue o placar do Passo 7.
