@@ -1,0 +1,182 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/jimmyandrade/harness/main/vocabulary/schemas/glossary-v1.schema.json",
+  "title": "Glossary file, format 1",
+  "description": "One language of the vocabulary. Each key is a term in alphabetical order, and its value is one row or a list of rows, one per set of tags. $schema names the format, as ADR 0018 decides.",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "const": "https://raw.githubusercontent.com/jimmyandrade/harness/main/vocabulary/schemas/glossary-v1.schema.json"
+    }
+  },
+  "additionalProperties": {
+    "oneOf": [
+      {
+        "$ref": "#/$defs/row"
+      },
+      {
+        "type": "array",
+        "items": {
+          "$ref": "#/$defs/row"
+        },
+        "minItems": 1
+      }
+    ]
+  },
+  "$defs": {
+    "row": {
+      "type": "object",
+      "description": "One row of a spelling. A row without state is a stop word.",
+      "properties": {
+        "state": {
+          "enum": [
+            "forbidden",
+            "strongly_discouraged",
+            "discouraged",
+            "allowed_with_care",
+            "allowed",
+            "situationally_allowed"
+          ],
+          "description": "The level of the row. situationally_allowed is deprecated and reads as allowed_with_care."
+        },
+        "stop_word": {
+          "type": "boolean"
+        },
+        "alternative": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string",
+          "pattern": "^[a-z]+(?:-[a-z]+)*$",
+          "description": "Deprecated. Use categories."
+        },
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z]+(?:-[a-z]+)*$"
+          }
+        },
+        "description": {
+          "type": "string"
+        },
+        "substitution": {
+          "type": "string"
+        },
+        "rejected": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "alternatives": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "reason": {
+          "type": "string"
+        },
+        "when": {
+          "type": "string"
+        },
+        "examples": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "related": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          }
+        },
+        "allowed_in": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          }
+        },
+        "forbidden_in": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          }
+        },
+        "decided_by": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "email": {
+                  "type": "string",
+                  "format": "email"
+                },
+                "url": {
+                  "type": "string",
+                  "format": "uri"
+                }
+              },
+              "required": [
+                "name"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "decided_at": {
+          "type": "string",
+          "format": "date"
+        },
+        "source": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "case_sensitive": {
+          "type": "boolean"
+        }
+      },
+      "anyOf": [
+        {
+          "required": [
+            "state"
+          ]
+        },
+        {
+          "properties": {
+            "stop_word": {
+              "const": true
+            }
+          },
+          "required": [
+            "stop_word"
+          ]
+        }
+      ]
+    }
+  }
+}

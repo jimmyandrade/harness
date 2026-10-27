@@ -643,3 +643,13 @@ test("a refused batch answers with every problem, and a dry run answers 200 and 
     assert.equal(readFileSync(file, "utf8"), initial)
   })
 })
+
+test("a batch write keeps the $schema of the file", async () => {
+  const schema = "https://raw.githubusercontent.com/jimmyandrade/harness/main/vocabulary/schemas/glossary-v1.schema.json"
+  await withGlossary(`{\n  "$schema": "${schema}"\n}\n`, async (port, root) => {
+    const response = await post(port, { language: "pt-BR", mode: "insert", terms: [allowed("casa", "lugar")] })
+    assert.equal(response.status, 200)
+    const written = JSON.parse(readFileSync(join(root, "pt-BR.json"), "utf8")) as Record<string, unknown>
+    assert.deepEqual(Object.keys(written), ["$schema", "casa"])
+  })
+})

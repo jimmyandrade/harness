@@ -589,6 +589,16 @@ export const glossaryRowSchema = z
 
 export type GlossaryRow = z.infer<typeof glossaryRowSchema>
 
+/** The newest glossary file format this engine reads, as ADR 0018 decides. */
+export const FORMAT_VERSION = 1
+
+const FORMAT_BASE = "https://raw.githubusercontent.com/jimmyandrade/harness/main/vocabulary/schemas/glossary-v"
+
+/** The $schema address of a glossary file format. */
+export function formatAddress(version: number): string {
+  return `${FORMAT_BASE}${version}.schema.json`
+}
+
 /**
  * A spelling keeps one row as an object, or one row per set of tags as a list.
  * Both read as a list of rows.

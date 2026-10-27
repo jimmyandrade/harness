@@ -7,7 +7,10 @@
  * language of the text. The directory is HARNESS_GLOSSARY_DIR, or
  * .agents/glossary/ under HARNESS_ROOT, or under the working directory.
  *
- * The file is an object. Each key is the term. Each value has state and the
+ * The file is an object. Its first key may be $schema, the address of the
+ * schema of its format, as ADR 0018 decides: it is not a term, a file without
+ * it is format 1, a newer format is refused, and every write keeps it. Each
+ * other key is the term. Each value has state and the
  * fields of that row. The key is not repeated inside the value. The keys stay
  * in alphabetical order. A spelling may keep more than one row, one per set of
  * tags, as ADR 0017 decides: its value is then a list of rows, the row without
@@ -59,8 +62,10 @@ import { dirname, resolve } from "node:path"
 
 import {
   EXPECTED,
+  FORMAT_VERSION,
   MISSING_FIELD,
   collapse,
+  formatAddress,
   glossaryFileSchema,
   isLegacyState,
   levelOf,
@@ -201,7 +206,9 @@ export function load(text: string): Entry[] {
   if (parsed === null || typeof parsed !== "object" || Array.isArray(parsed)) {
     throw new InvalidGlossary("The glossary is not an object.")
   }
-  const result = glossaryFileSchema.safeParse(parsed)
+  const { $schema, ...file } = parsed as Record<string, unknown>
+  formatVersion($schema)
+  const result = glossaryFileSchema.safeParse(file)
   if (!result.success) throw new InvalidGlossary(result.error.issues[0]?.message ?? "The glossary is not an object.")
   const entries: Entry[] = []
   const seen = new Set<string>()
@@ -309,13 +316,13 @@ export function register(
   alternative?: string,
 ): Entry {
   const path = glossaryFile(directory, language)
-  const entries = load(readFileSync(path, "utf8"))
+  const { entries, format } = readGlossary(path)
   const created = entryFrom(lowercaseTerm(term), state, alternative)
   if (findConcept(entries, created.term, []) !== undefined) {
     throw new InvalidGlossary(`${JSON.stringify(created.term)} is already in the glossary.`)
   }
   entries.push(created)
-  writeFileSync(path, serialize(entries), "utf8")
+  writeFileSync(path, serialize(entries, format), "utf8")
   return created
 }
 
@@ -326,7 +333,7 @@ export function registerForbidden(
 ): TermRegistration {
   const tag = canonicalLanguage(language)
   const path = glossaryFile(directory, tag)
-  const entries = load(readFileSync(path, "utf8"))
+  const { entries, format } = readGlossary(path)
   const created = entryFrom(input.case_sensitive ? input.term : lowercaseTerm(input.term), "forbidden", undefined)
   if (input.case_sensitive) created.caseSensitive = true
   if (findConcept(entries, created.term, []) !== undefined) {
@@ -341,7 +348,7 @@ export function registerForbidden(
   created.rejected = rejected
   created.alternatives = alternatives
   entries.push(created)
-  writeFileSync(path, serialize(entries), "utf8")
+  writeFileSync(path, serialize(entries, format), "utf8")
   return {
     language: tag,
     term: created.term,
@@ -362,7 +369,7 @@ export function registerAllowed(
 ): TermRegistration {
   const tag = canonicalLanguage(language)
   const path = glossaryFile(directory, tag)
-  const entries = load(readFileSync(path, "utf8"))
+  const { entries, format } = readGlossary(path)
   const created = entryFrom(input.case_sensitive ? input.term : lowercaseTerm(input.term), "allowed", undefined)
   if (input.case_sensitive) created.caseSensitive = true
   if (findConcept(entries, created.term, []) !== undefined) {
@@ -375,7 +382,7 @@ export function registerAllowed(
   created.reason = input.reason
   created.examples = examples
   entries.push(created)
-  writeFileSync(path, serialize(entries), "utf8")
+  writeFileSync(path, serialize(entries, format), "utf8")
   return {
     language: tag,
     term: created.term,
@@ -395,7 +402,7 @@ export function registerSituational(
 ): TermRegistration {
   const tag = canonicalLanguage(language)
   const path = glossaryFile(directory, tag)
-  const entries = load(readFileSync(path, "utf8"))
+  const { entries, format } = readGlossary(path)
   const created = entryFrom(input.case_sensitive ? input.term : lowercaseTerm(input.term), "allowed_with_care", undefined)
   if (input.case_sensitive) created.caseSensitive = true
   if (findConcept(entries, created.term, []) !== undefined) {
@@ -408,7 +415,7 @@ export function registerSituational(
   created.when = input.when
   created.examples = examples
   entries.push(created)
-  writeFileSync(path, serialize(entries), "utf8")
+  writeFileSync(path, serialize(entries, format), "utf8")
   return {
     language: tag,
     term: created.term,
@@ -446,7 +453,7 @@ export function writeTerms(
 ): TermsWrite {
   const tag = canonicalLanguage(language)
   const path = glossaryFile(directory, tag)
-  const loaded = load(readFileSync(path, "utf8"))
+  const { entries: loaded, format } = readGlossary(path)
   const problems: Problem[] = [...(options.problems ?? [])]
   const items = terms.map((term) => {
     const { item, issues } = withStored(loaded, term, mode)
@@ -554,7 +561,7 @@ export function writeTerms(
   }
   const unique = problems.filter((problem, index) => problems.findIndex((other) => other.term === problem.term && other.message === problem.message) === index)
   if (unique.length > 0 && options.dryRun !== true) throw new InvalidTerms(unique)
-  if (shells.size > 0 && unique.length === 0 && options.dryRun !== true) writeFileSync(path, serialize(working), "utf8")
+  if (shells.size > 0 && unique.length === 0 && options.dryRun !== true) writeFileSync(path, serialize(working, format), "utf8")
   const skippedTerms = new Set(skipped.map((item) => item.term))
   const incomplete = [...missing]
     .filter(([term]) => !skippedTerms.has(term))
@@ -595,7 +602,7 @@ export function writeBatch(directory: string, body: unknown): TermsWrite {
 export function migrate(directory: string, language: string, write = false): Migration {
   const tag = canonicalLanguage(language)
   const path = glossaryFile(directory, tag)
-  const entries = load(readFileSync(path, "utf8"))
+  const { entries, format } = readGlossary(path)
   const states: Migration["states"] = []
   const categories: Migration["categories"] = []
   for (const entry of legacyRows(entries)) {
@@ -606,7 +613,7 @@ export function migrate(directory: string, language: string, write = false): Mig
     delete entry.legacyCategory
   }
   const written = write && states.length + categories.length > 0
-  if (written) writeFileSync(path, serialize(entries), "utf8")
+  if (written) writeFileSync(path, serialize(entries, format), "utf8")
   return { language: tag, written, states, categories }
 }
 
@@ -723,7 +730,36 @@ function entryFrom(term: string, raw: string, alternative: string | undefined, k
   return entry
 }
 
-function serialize(entries: readonly Entry[]): string {
+/**
+ * The format version of a file from its $schema, as ADR 0018 decides. A file
+ * without $schema is format 1. A newer format, or a $schema that is not a
+ * glossary format, is refused, so an outdated engine does not rewrite it.
+ */
+function formatVersion(schema: unknown): number {
+  if (schema === undefined) return 1
+  const version = typeof schema === "string" ? FORMAT_PATTERN.exec(schema)?.[1] : undefined
+  if (version === undefined || schema !== formatAddress(Number(version))) {
+    throw new InvalidGlossary("The glossary $schema is not a glossary format.")
+  }
+  if (Number(version) > FORMAT_VERSION) {
+    throw new InvalidGlossary(
+      `The glossary uses format ${version}, newer than this engine, which reads up to format ${FORMAT_VERSION}. Update the plugin or the dependency.`,
+    )
+  }
+  return Number(version)
+}
+
+const FORMAT_PATTERN = /glossary-v([1-9][0-9]*)\.schema\.json$/
+
+/** Read a glossary file with the $schema a write keeps. */
+function readGlossary(path: string): { entries: Entry[]; format: string | undefined } {
+  const text = readFileSync(path, "utf8")
+  const entries = load(text)
+  const { $schema } = JSON.parse(text) as { $schema?: string }
+  return { entries, format: $schema }
+}
+
+function serialize(entries: readonly Entry[], format?: string): string {
   const file: Record<string, object[]> = {}
   const sorted = [...entries].sort((left, right) => compareOrder(left.order, right.order) || compareText(tagKey(left.tags), tagKey(right.tags)))
   for (const entry of sorted) {
@@ -753,7 +789,9 @@ function serialize(entries: readonly Entry[]): string {
     file[entry.term] = [...(file[entry.term] ?? []), row]
   }
   // One row stays an object, as every file kept before a spelling could have more than one.
-  const written = Object.fromEntries(Object.entries(file).map(([term, rows]) => [term, rows.length === 1 ? rows[0] : rows]))
+  const rows = Object.entries(file).map(([term, list]) => [term, list.length === 1 ? list[0] : list] as const)
+  // $schema stays the first key, as ADR 0018 decides.
+  const written = Object.fromEntries(format === undefined ? rows : [["$schema", format], ...rows])
   return `${JSON.stringify(written, null, 2)}\n`
 }
 
