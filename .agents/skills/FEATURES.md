@@ -1497,6 +1497,7 @@ How these skills relate is in `README.md`, in this folder.
   - Keeps the explanation of the word in description and the reason to use it in reason, without copying one into the other
   - Reports an expected field the person did not give as incomplete, and passes the Validação dos campos parameter as validation
   - Records who decided with an individual e-mail, never a shared role account, and keeps the history of a term in notes
+  - Writes a placeholder, such as [link da tarefa], in place of a real link in the term and its examples, and keeps the address in source
   - Refuses to write when the validation fails, and does not invent a field
 - **Test Criteria**:
   - [x] The skill is present at that path
