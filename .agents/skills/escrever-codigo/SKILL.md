@@ -1,15 +1,16 @@
 ---
 name: escrever-codigo
-description: Aplica as preferências de código da pessoa antes de escrever ou alterar código, como comentários, estilo inline e o que fazer antes de criar um componente. Usada quando uma mudança vai escrever ou alterar código do projeto. Não serve para testes, para commit nem para decidir a arquitetura.
+description: Aplica as preferências de código da pessoa antes de escrever ou alterar código, como comentários, estilo inline e o que fazer antes de criar um componente. Usada quando uma mudança vai escrever ou alterar código, inclusive quando o pedido é implementar uma issue. Não serve para testes, para commit nem para decidir a arquitetura. O pedido de implementar só termina quando a resposta tem o link do pull request.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.7.0"
   related:
     - criar-commit
     - criar-pull-request
     - escrever-teste
     - evoluir-habilidade
     - levantar-ambiente-do-repositorio
+    - preparar-tarefa-do-pull-request
 ---
 
 # Escrever código
@@ -35,7 +36,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 Siga `Cópia de trabalho` antes de escrever. Com `worktree`, crie um git worktree novo desta tarefa e escreva nele. Não use o clone aberto da pessoa nem um worktree que outra tarefa já ocupa. Não apague esse worktree no fim: o trabalho continua nele. Com valor vazio, escreva onde a pessoa já está.
 
-Chame `levantar-ambiente-do-repositorio` para achar a convenção de código e as habilidades do repositório, nas instruções do projeto e nas habilidades do próprio repositório. Ela vale mais que qualquer preferência desta habilidade. Diga à pessoa quando uma preferência dela contraria o repositório e siga o repositório. Antes de escrever o código, siga `escrever-teste`: com TDD, o padrão dela, o teste que falha vem primeiro, e o código é o que o faz passar.
+Chame `levantar-ambiente-do-repositorio` para achar a convenção de código e as habilidades do repositório, nas instruções do projeto e nas habilidades do próprio repositório. Ela vale mais que qualquer preferência desta habilidade. Diga à pessoa quando uma preferência dela contraria o repositório e siga o repositório. Se a demanda é uma issue do rastreador, siga `preparar-tarefa-do-pull-request` para conferir se a descrição está no modelo do tipo antes de escrever. Não escreva código enquanto a descrição estiver fora do modelo. Antes de escrever o código, siga `escrever-teste`: com TDD, o padrão dela, o teste que falha vem primeiro, e o código é o que o faz passar.
 
 ### Passo 2
 
@@ -51,7 +52,7 @@ Antes de criar um componente, siga `Antes de criar um componente`: leia o desenh
 
 ### Passo 5
 
-Rode o teste da mudança e confirme que ele passa. Para o commit e o pull request, siga `criar-commit` e `criar-pull-request`. Depois do push, uma vez, o título e a descrição têm de continuar contando o que o código faz. Não confira a cada commit.
+Rode o teste da mudança e confirme que ele passa. Para o commit e o pull request, siga `criar-commit` e `criar-pull-request`. O pedido de implementar só está pronto quando a resposta tem o link do pull request. Com `Criar pull request ao terminar` em `rascunho`, esse pull request é um rascunho. Uma resposta que só diz que o código está pronto, sem o link, não encerra o pedido. Depois do push, uma vez, o título e a descrição têm de continuar contando o que o código faz. Não confira a cada commit.
 
 ### Passo 6
 
@@ -80,6 +81,14 @@ Se você escrever `style={{ padding: 16 }}` para um valor que já tem variável 
 1. Troque pelo sistema de estilos do projeto.
 2. Deixe o estilo inline só para o valor que depende de dado em execução.
 
+### Implementação sem pull request
+
+Se você entregar o código e não abrir o pull request, a pessoa não tem onde revisar.
+
+1. Siga `criar-commit` e `criar-pull-request`.
+2. Com `Criar pull request ao terminar` em `rascunho`, abra em rascunho.
+3. A resposta leva o link.
+
 ### Componente criado à mão
 
 Se você montar o componente sem chamar a habilidade do repositório, ele sai sem a estrutura, os arquivos e as verificações que o projeto exige.
@@ -95,6 +104,10 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 Li o desenho do cartão e chamei a habilidade do repositório que cria componentes, depois a que confere o resultado. Usei o sistema de estilos do projeto para o espaçamento e a cor. Só a largura da barra de progresso, calculada pelo valor do pedido, ficou inline. Não deixei comentário que repete o código.
 
+### Implemente a barra de anúncio da issue PROJ-1
+
+Conferi a descrição contra o modelo antes do código. No fim, o pull request estava em rascunho e a resposta levou o link.
+
 ### Ajuste o formatador de moeda
 
 Mudei a função sem comentário novo. Um `eslint-disable-next-line` com o motivo ficou como comentário de linha, porque a regra não se aplica a esse caso.
@@ -107,6 +120,7 @@ Mudei a função sem comentário novo. Um `eslint-disable-next-line` com o motiv
 - O código é de um arquivo gerado: não aplique as preferências.
 - Vários commits sobem juntos: a conferência do título e da descrição é uma, depois do push.
 - `Cópia de trabalho` em `worktree`: a tarefa não entra no clone aberto nem num worktree já ocupado.
+- O pedido é implementar e `Criar pull request ao terminar` está em `rascunho`: a resposta leva o link do rascunho. Sem o link, o pedido não terminou.
 
 ## Pegadinhas
 
@@ -115,6 +129,7 @@ Mudei a função sem comentário novo. Um `eslint-disable-next-line` com o motiv
 - Preferência da pessoa não vai para a habilidade nem para as instruções de um repositório sem consenso do time.
 - Conferir a cada commit parece necessário. A conferência é uma vez, depois do push.
 - Reutilizar a worktree aberta parece mais rápido. Com `Cópia de trabalho` em `worktree`, a tarefa abre um git worktree novo e ele fica no fim.
+- O código pronto parece o fim do pedido de implementar. O fim é o link do pull request.
 
 ## Scripts disponíveis
 
