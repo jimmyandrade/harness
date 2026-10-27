@@ -17,3 +17,10 @@ Funcionalidade: Termos que não podem aparecer no pull request
       Dado que o parâmetro não lista nenhum termo
       Quando a skill vai abrir o pull request
       Então a skill não faz a busca
+
+    Exemplo: Termo só dentro do endereço do run
+      Dado que o parâmetro lista o termo "acme"
+      E que a descrição cita o run só pelo endereço https que contém "acme"
+      Quando a skill vai abrir o pull request
+      Então o endereço permanece
+      E o pull request é aberto
