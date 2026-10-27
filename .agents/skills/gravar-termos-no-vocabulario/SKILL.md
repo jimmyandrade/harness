@@ -3,7 +3,7 @@ name: gravar-termos-no-vocabulario
 description: Use essa habilidade sempre que, ao cadastrar ou corrigir termos do vocabulário do tom de voz, for hora de pesquisar a grafia, testar com dry run e gravar o lote, mesmo sem dizer gravar. NÃO use para decidir o nível, validar os campos, perguntar quais variações foram cadastradas, escrever o texto da marca, nem inventar um termo.
 metadata:
   author: jimmyandrade
-  version: "0.6.5"
+  version: "0.7.0"
   related:
     - definir-vocabulario
     - procurar-variacao-de-termo
@@ -53,7 +53,7 @@ Quando as duas linhas existirem, `related` aponta de uma para a outra. `related`
 
 ### Passo 4
 
-Teste antes com `--dry-run` ou `dry_run`: `refused` lista os problemas. Grave o plano inteiro numa escrita só, com a escrita de Scripts disponíveis. Com terminal, rode o comando. Sem terminal, chame a ferramenta do servidor `vocabulary`. Termo que não existia fica em minúsculas. Marca com caixa própria, como iPhone, leva `case_sensitive` e guarda a caixa. A linha que já existia conserva a grafia guardada. Se nenhum termo do plano existia, a resposta começa com a quantidade e segue com a lista do que entrou. Depois sugira plural, singular, feminino, masculino e outra grafia quando a palavra tiver. Não grave a sugestão. Pergunte o estado de cada forma. Pontuação e emoji não ganham essa sugestão. Um exemplo que também vem completo no lote permanece com essa linha. Um exemplo citado e ausente do lote nasce no estado desse vínculo, com as tags do termo. Uma falha deixa o vocabulário como estava. Não confirme o cadastro sem essa resposta.
+Teste antes com `--dry-run` ou `dry_run`, no mesmo formato da escrita: um `--term` por termo, ou `write_terms`. `refused` lista os problemas. Grave o plano inteiro numa escrita só. Não crie um JSON do lote, nem no repositório, nem em pasta temporária, nem com a ferramenta de escrever arquivo. A pessoa só ouve a quantidade e a lista do que entrou no glossário. Com terminal, rode o comando. Sem terminal, chame a ferramenta do servidor `vocabulary`. Termo que não existia fica em minúsculas. Marca com caixa própria, como iPhone, leva `case_sensitive` e guarda a caixa. A linha que já existia conserva a grafia guardada. Se nenhum termo do plano existia, a resposta começa com a quantidade e segue com a lista do que entrou. Depois sugira plural, singular, feminino, masculino e outra grafia quando a palavra tiver. Não grave a sugestão. Pergunte o estado de cada forma. Pontuação e emoji não ganham essa sugestão. Um exemplo que também vem completo no lote permanece com essa linha. Um exemplo citado e ausente do lote nasce no estado desse vínculo, com as tags do termo. Uma falha deixa o vocabulário como estava. Não confirme o cadastro sem essa resposta.
 
 ## Problemas comuns
 
@@ -114,6 +114,14 @@ Se você criar o arquivo do idioma no repositório atual com `Glossário no repo
 3. Com `sim`, crie o arquivo no glossário do repositório atual.
 4. Com `não`, crie só na `Pasta do glossário`. Se a pasta estiver vazia, pergunte uma vez e pare. Essa pasta é só o glossário.
 
+### JSON do lote à vista
+
+Se você criar um JSON temporário do lote, a pessoa vê um arquivo que não é o glossário e entende que algo nasceu fora das regras.
+
+1. Grave com `terms` e um `--term` por termo, ou com `write_terms`. O teste usa o mesmo formato.
+2. Não crie o JSON, nem no repositório, nem em pasta temporária, nem com a ferramenta de escrever arquivo.
+3. Se o arquivo já veio de outra ferramenta, use `terms --file` nele e não cite o caminho. A resposta diz só o que entrou no glossário.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
@@ -138,7 +146,7 @@ O plano ficou em update. A reticências que já estava foi reescrita, com o quan
 
 - O termo já está, só muda a caixa: a linha que já está é atualizada, ou fica sem alteração se os campos forem os mesmos.
 - A grafia já está com a tag de outro contexto e a regra nova é geral ou de outro contexto: grave outra linha, sem tags ou com as tags dela. A linha que já está fica como está.
-- Lote vindo de outra ferramenta: um arquivo com `terms --file` e `upsert`. Diga o que entrou, o que foi atualizado e o que ficou em `incomplete`.
+- Lote que já chegou num arquivo, vindo de outra ferramenta: `terms --file` nesse arquivo, com `upsert`. O arquivo já existia. Não crie um JSON para isso, não mostre o arquivo como entrega e não cite o caminho. Diga o que entrou, o que foi atualizado e o que ficou em `incomplete`.
 - Sem terminal e sem o servidor `vocabulary`, como num agente do Notion: pare. O cadastro roda numa ferramenta de código com o projeto aberto. Não confirme nada.
 - `Glossário no repositório atual` vazio: pergunte uma vez e pare. Não crie o arquivo no repositório atual nem na pasta do glossário.
 - `Glossário no repositório atual` em `não`: o arquivo do idioma nasce só na `Pasta do glossário`, no computador, e não sobe no Git. Vazia, pergunte o caminho uma vez e pare.
@@ -156,14 +164,14 @@ O plano ficou em update. A reticências que já estava foi reescrita, com o quan
 - Um exemplo citado parece herdar a descrição do termo. Se ele não vem como item do lote, nasce só com o estado daquele vínculo.
 - O repositório atual parece o lugar do glossário. Isso só vale com `Glossário no repositório atual` em `sim`. Vazio pergunta e não cria arquivo. Com `não`, o arquivo nasce na `Pasta do glossário`.
 - A pasta do glossário parece ser o harness. Ela guarda só os arquivos de idioma. O glossário pode ficar dentro de um harness, e o harness é mais amplo que essa pasta.
-- O comando de escrita, com `--term` ou `--file`, parece dispensar a validação. Sem o plano que `validar-plano-de-vocabulario` aprovou, não grave. Quem decidiu fica em `decided_by` e o dia em `decided_at`, nunca na descrição nem em `notes`.
+- O comando de escrita, com `--term` ou `--file`, parece dispensar a validação. Sem o plano que `validar-plano-de-vocabulario` aprovou, não grave. Quem decidiu fica em `decided_by` e o dia em `decided_at`, nunca na descrição nem em `notes`. Um JSON do lote parece um arquivo novo, fora do glossário. Ele não é entrega. Não crie esse arquivo e não cite o caminho.
 
 ## Scripts disponíveis
 
 - `node node_modules/harness/vocabulary/dist/cli.js lookup --language <idioma> --term <termo>` lê um termo e devolve se ele existe e a linha guardada.
 - `node node_modules/harness/vocabulary/dist/cli.js lookup-terms --language <idioma> --term <termo> --term <termo>` lê até 100 termos de uma vez, na ordem enviada, e devolve `results` com o que `lookup` devolve para cada um.
 - `node node_modules/harness/vocabulary/dist/cli.js exists --language <idioma> --text <trecho>` devolve só o registro de cada token do trecho para se ele existe.
-- `node node_modules/harness/vocabulary/dist/cli.js terms` grava o lote. `--language`, `--mode` e `--validation` valem para o lote. Cada `--term` abre um termo, com `--state`, `--description`, `--reason`, `--when`, `--substitution`, `--decided-by`, `--decided-by-email`, `--decided-by-url`, `--decided-at`, `--source` e `--notes`. `--decided-by` é o nome. Os dois seguintes completam o objeto. `--categories`, `--examples`, `--rejected`, `--alternatives`, `--related`, `--tags`, `--allowed-in` e `--forbidden-in` repetem, um valor por vez. `--stop-word` marca a stop word, que pode vir sem `--state`. `--file` lê o lote inteiro de um JSON.
+- `node node_modules/harness/vocabulary/dist/cli.js terms` grava o lote. `--language`, `--mode` e `--validation` valem para o lote. Cada `--term` abre um termo, com `--state`, `--description`, `--reason`, `--when`, `--substitution`, `--decided-by`, `--decided-by-email`, `--decided-by-url`, `--decided-at`, `--source` e `--notes`. `--decided-by` é o nome. Os dois seguintes completam o objeto. `--categories`, `--examples`, `--rejected`, `--alternatives`, `--related`, `--tags`, `--allowed-in` e `--forbidden-in` repetem, um valor por vez. `--stop-word` marca a stop word, que pode vir sem `--state`. `--file` só lê um JSON que já chegou de outra ferramenta. Não crie esse arquivo.
 - `--glossary`, antes do comando, aponta outro vocabulário.
 - Com `Glossário no repositório atual` em `sim`, `d="${HARNESS_GLOSSARY_DIR:-${HARNESS_ROOT:-.}/.agents/glossary}"; mkdir -p "$d"; [ -e "$d/<idioma>.json" ] || echo '{}' > "$d/<idioma>.json"` cria o arquivo vazio do idioma no glossário do repositório atual.
 - Com `Glossário no repositório atual` vazio, não crie o arquivo. Pergunte uma vez e pare.
@@ -171,6 +179,6 @@ O plano ficou em update. A reticências que já estava foi reescrita, com o quan
 - `lookup_term`, `lookup_terms`, `exists_in_text` e `write_terms`, no servidor `vocabulary`, fazem a mesma consulta e a mesma escrita quando não há terminal.
 
 1. Com terminal, rode `lookup-terms` para os termos do plano, `lookup` para um termo e `exists` para um trecho. Com `Unknown language` e `Glossário no repositório atual` vazio, pergunte uma vez e pare. Com `sim`, crie o arquivo do idioma no glossário do repositório atual e repita. Com `não`, crie o arquivo só na `Pasta do glossário` e repita com `--glossary`. Se essa pasta estiver vazia, pergunte o caminho uma vez e pare.
-2. Com terminal, rode `terms` com `--language`, `--mode` e um `--term` para cada termo. Com `Glossário no repositório atual` em `não`, o comando leva `--glossary` na `Pasta do glossário`.
+2. Com terminal, rode `terms` com `--language`, `--mode` e um `--term` para cada termo. Não crie um JSON do lote. Com `Glossário no repositório atual` em `não`, o comando leva `--glossary` na `Pasta do glossário`.
 3. Sem terminal, chame `lookup_terms`, `lookup_term`, `exists_in_text` e `write_terms` com os mesmos campos. Com `Unknown language`, pare: o arquivo do idioma nasce com terminal, no lugar que `Glossário no repositório atual` indica.
 4. Sem terminal e sem o servidor `vocabulary`, pare.
