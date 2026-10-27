@@ -3,11 +3,9 @@ name: registrar-evidencia-visual
 description: Registra o que a pessoa passa a ver quando um trabalho termina, no pull request e no card. Usada quando a entrega muda a tela, no Storybook, no ambiente local, na pré-produção ou na produção, mesmo sem dizer print. NÃO serve para mudança sem percepção visual, para medir performance, para ler texto de imagem nem para mandar a mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.5.1"
   related:
     - criar-pull-request
-    - definir-issue-do-github
-    - enviar-mensagem-no-slack
 ---
 
 # Registrar evidência visual
@@ -18,6 +16,7 @@ metadata:
 "Confirmação antes de gravar": "sim"
 "Fuso horário da legenda": "America/Sao_Paulo"
 "Pasta das evidências": "tmp/evidencias-visuais"
+"Habilidade de mensagem": ""
 ```
 
 ## Instruções
@@ -50,7 +49,7 @@ flowchart LR
   E -->|não| B
   E -->|sim| F[Grava no card e no pull request]
   F --> G{Pediu para mandar a alguém?}
-  G -->|sim| H[enviar-mensagem-no-slack]
+  G -->|sim| H[habilidade de mensagem do negócio]
   G -->|não| B
 ```
 
@@ -90,14 +89,14 @@ Sem essa story, diga que essa superfície ficou sem evidência.
 
 ### Passo 5
 
-O card recebe a evidência, porque quem é de produto pode não ter acesso ao GitHub nem ao Figma.
+O card recebe a evidência, porque quem é de produto pode não ter acesso ao repositório nem à ferramenta de desenho.
 No texto do card, mostre só a primeira tela, ou o recorte com altura perto da largura quando a mudança fica abaixo dela.
 A página inteira entra como link para o arquivo anexado, não como imagem dentro do texto.
 Uma imagem muito alta alonga o card e atrapalha a leitura.
 O pull request segue a mesma regra, na seção de imagens que o modelo do repositório já tem.
 Não abra outra seção.
 Se o corpo do card não aceitar arquivo, o recorte vai num comentário e a página inteira continua como link.
-Comentário numa issue do GitHub só entra se a pessoa pedir.
+Comentário numa issue do rastreador só entra se a pessoa pedir.
 Esse comentário leva o link do pull request.
 A descrição do pull request é o lugar melhor para o recorte.
 Com `Confirmação antes de gravar` em `sim`, mostre a subpasta, o recorte que entra no texto, o link da página inteira e as legendas, e espere um sim para esse conjunto.
@@ -105,10 +104,11 @@ Um sim vale para o card e o pull request desse conjunto, e outro destino, como u
 
 ### Passo 6
 
-Mandar a imagem para uma pessoa segue `enviar-mensagem-no-slack`, depois do sim dela a esse texto.
+Mandar a imagem para uma pessoa segue `Habilidade de mensagem`, depois do sim dela a esse texto.
+Com o parâmetro vazio, não chame habilidade nenhuma: pergunte qual é a daquele negócio.
 O que vai na mensagem é o mesmo recorte do card, mais o link da página inteira.
 Não mande o print da data de fixture distante.
-Não abra o Slack nem o Figma no lugar da captura, e ler o texto que já está numa imagem é outra habilidade: esta não a chama e não tira o print.
+Não abra o canal de mensagem nem a ferramenta de desenho no lugar da captura, e ler o texto que já está numa imagem é outra habilidade: esta não a chama e não tira o print.
 
 ## Problemas comuns
 
@@ -162,7 +162,7 @@ Se você montar um endereço de pré-produção ou disser que a tela está em pr
 
 ### Card sem a imagem
 
-Se você escrever no card só uma frase, quem não tem GitHub continua sem ver a tela.
+Se você escrever no card só uma frase, quem não tem acesso ao repositório continua sem ver a tela.
 
 1. Mostre no texto a primeira tela ou o recorte.
 2. Coloque o link da página inteira no mesmo lugar.
@@ -183,7 +183,7 @@ A página, com o bloco novo no meio do resto da tela e o relógio travado em 1 d
 - Existe story do componente e story da tela: a evidência principal é a tela.
 - O contador mostra dezenas de milhares de dias: esse arquivo não entra na pasta nem no conjunto.
 - A página inteira é muito alta: o texto leva o recorte, e a página inteira vai como link.
-- A pessoa pede para mandar o arquivo a alguém: siga `enviar-mensagem-no-slack` depois do sim, com o recorte e o link.
+- A pessoa pede para mandar o arquivo a alguém: siga `Habilidade de mensagem` depois do sim, com o recorte e o link. Vazio, pergunte qual é a daquele negócio.
 - O repositório não tem pré-produção: não invente o endereço.
 - A story ainda mostra "No Preview": espere e leia o texto de novo.
 - A descrição do card não aceita imagem: o recorte vai num comentário e a página inteira continua como link.
@@ -200,7 +200,6 @@ A página, com o bloco novo no meio do resto da tela e o relógio travado em 1 d
 - O iframe do Storybook responde que não há preview enquanto o bundle da preview ainda compila. O id da story pode estar certo.
 - O print do painel do navegador é mais estreito que o layout. O contador fica à direita da faixa e sai cortado.
 - Uma data de fixture anos à frente faz o contador mostrar dezenas de milhares de dias. Esse arquivo não é a tela.
-- O atalho do pnpm pede `pnpm.cjs`. O arquivo no cache do Corepack é `pnpm.mjs`.
 - A seção de imagens é a que o modelo do repositório já tem. Não abra outra.
 - A porta do Storybook está no script daquele projeto. Não reaproveite a porta de outro app.
 

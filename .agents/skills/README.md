@@ -451,8 +451,6 @@ flowchart LR
   registrar_ciclo_do_ativo --> lancar_despesa_da_empresa
   registrar_ciclo_do_ativo --> mesclar_registro
   registrar_evidencia_visual --> criar_pull_request
-  registrar_evidencia_visual --> definir_issue_do_github
-  registrar_evidencia_visual --> enviar_mensagem_no_slack
   revisar_financas --> definir_lancamento
   revisar_financas --> definir_planejamento_financeiro
   revisar_financas --> gerenciar_estoque
