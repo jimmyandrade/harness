@@ -3,7 +3,7 @@ name: publicar-revisao-de-codigo
 description: Revisa um pull request e publica a revisão numa única review, com os comentários inline, no idioma de quem recebe e no tom do projeto. Usada quando a pessoa pede uma revisão ou outra habilidade precisa publicar uma. Não serve para tratar os comentários que você recebeu no seu PR.
 metadata:
   author: jimmyandrade
-  version: "0.16.0"
+  version: "0.17.0"
   aliases:
     - post-code-review
   related:
@@ -57,6 +57,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Publicar em execução agendada": "não"
 # `Pasta das cópias separadas` diz onde criar a cópia de trabalho de cada repositório, e vazio usa a pasta temporária do sistema, com uma subpasta por repositório.
 "Pasta das cópias separadas": ""
+# `Cópia de trabalho` é `worktree` ou vazio.
+"Cópia de trabalho": ""
 "Idade máxima da trava": "2 horas"
 # `Comentário de início da revisão` e `Etiqueta de revisão em andamento` avisam quem acompanha o PR de que a revisão começou: vazios, a habilidade não posta nem etiqueta nada.
 "Comentário de início da revisão": ""
@@ -77,7 +79,7 @@ Não revise com um check pendente: diga qual e espere terminar. Um check que fal
 
 ### Passo 3
 
-Este passo só depende do repositório e pode virar uma habilidade própria. Pule-o quando a revisão só lê o diff, sem baixar o código. Quando for preciso executar código, como rodar testes ou o lint:
+Siga `Cópia de trabalho`. Com `worktree`, abra um worktree novo em `Pasta das cópias separadas`, a partir do PR, antes de ler o código, sem o clone da pessoa e sem reutilizar outra tarefa. Com valor vazio, pule a cópia se a revisão só lê o diff e, para executar código:
 
 1. Procure uma trava do repositório: uma revisão em andamento em outra execução, que é a cópia separada dele em `Pasta das cópias separadas`. Se existir, não comece: diga qual PR e há quanto tempo. Uma trava mais velha que `Idade máxima da trava` não se apaga em silêncio: avise e pergunte.
 2. Crie a cópia separada a partir do PR antes de tocar em qualquer arquivo. A cópia é a trava.
@@ -155,7 +157,7 @@ Se uma passada anterior aprovou e esta achou um problema real, publique a corre�
 
 ### Passo 11
 
-Limpe sempre, mesmo se algo falhou antes. Apague o comentário de início e retire a etiqueta, se foi você que os pôs. Remova a cópia separada, o que libera a trava. Confira que o clone da pessoa está como estava, na mesma branch e sem alteração nova. Se a limpeza falhar, diga o que ficou.
+Limpe sempre, mesmo se algo falhou antes. Apague o comentário de início e retire a etiqueta, se foi você que os pôs. Remova só a cópia desta tarefa. Confira que o clone da pessoa está como estava, na mesma branch e sem alteração nova. Se a limpeza falhar, diga o que ficou.
 
 ### Passo 12
 
@@ -231,7 +233,7 @@ Se você escrever que algo não bloqueia para rebaixar um achado, a pessoa lê o
 
 ### Trava deixada para trás
 
-Se você sair da revisão sem remover a cópia separada, a próxima revisão do repositório não começa.
+Se você sair sem remover a cópia desta tarefa, com `Cópia de trabalho` vazio a próxima revisão do repositório não começa.
 
 1. Limpe no Passo 11 mesmo quando algo falhou.
 2. Diante de uma trava antiga, avise antes de apagar.
@@ -240,7 +242,7 @@ Se você sair da revisão sem remover a cópia separada, a próxima revisão do 
 
 Se você trocar a branch ou guardar as alterações no clone da pessoa, ela perde o que estava fazendo, às vezes sem perceber.
 
-1. Trabalhe só na cópia separada.
+1. Trabalhe só na cópia desta tarefa.
 2. Confira no fim que o clone está como estava.
 
 ### Comentário de início esquecido
@@ -256,7 +258,7 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### Revise o PR da Ana que adiciona a exportação de relatórios
 
-O PR estava aberto. Usei o contexto: o card pede manter as colunas atuais, e o PR também muda o formato da data. Deve ter: uma contagem que perde a última linha. Deveria ter: um teste da lógica nova. Poderia ter: dois nomes pouco claros. Escrevi em inglês com a tradução recolhida em português, porque a Ana revisa em inglês. Publiquei uma review com três comentários inline e uma resposta na thread do Caio, que já levantava o ponto da data. A ação foi pedir mudanças.
+O PR estava aberto. Deve ter na contagem, Deveria ter no teste, Poderia ter nos nomes. Pedi mudanças, em inglês com tradução em português, com inline e resposta na thread já aberta.
 
 ### Revise o PR do Caio que só renomeia variáveis
 
@@ -275,7 +277,7 @@ Rodei a revisão e achei bloqueio. Não aprovei. Avisei que ainda não dá para 
 - Execução agendada: com `Publicar em execução agendada` em `não`, deixe o texto e o link no resumo, sem publicar. Em `sim`, publique e diga no resumo.
 - O contexto veio de conversa privada: use só para calibrar o que você pergunta, sem citar.
 - Um check está pendente: não revise, diga qual e espere.
-- A revisão só lê o diff: pule a cópia separada.
+- `Cópia de trabalho` vazio e a revisão só lê o diff: pule a cópia.
 - Existe uma trava antiga do repositório: avise e pergunte antes de apagar.
 
 ## Pegadinhas
@@ -288,7 +290,7 @@ Rodei a revisão e achei bloqueio. Não aprovei. Avisei que ainda não dá para 
 - Feedback que muda o texto já publicado atualiza comentários e respostas sem perguntar, mesmo com `Ler o texto antes de publicar` em `sim`.
 - Uma review sem comentários inline não cobre um ponto de código: ele precisa de uma linha.
 - O corpo não repete o inline. A frase segue a quantidade, sem número.
-- A cópia separada é a trava: removê-la libera o repositório.
+- Com `Cópia de trabalho` vazio, a cópia separada é a trava: removê-la libera o repositório.
 - O clone da pessoa pode ter alterações não salvas. Nunca as guarde nem as mova.
 - Um check pendente não é um check que falhou.
 
