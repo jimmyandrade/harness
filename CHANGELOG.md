@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.16.0](https://github.com/jimmyandrade/harness/compare/v1.15.0...v1.16.0) (2026-10-27)
+
+
+### Features
+
+* **definir-okr:** compute key result progress by direction in the skill and a local script ([#533](https://github.com/jimmyandrade/harness/issues/533)) ([54ec184](https://github.com/jimmyandrade/harness/commit/54ec1844c8db1de004c3163822dc026708606006))
+
+
+### Bug Fixes
+
+* align the pull request title and description with the code ([#539](https://github.com/jimmyandrade/harness/issues/539)) ([c609556](https://github.com/jimmyandrade/harness/commit/c6095565eff990da0181d7cc452b17cb28dbe7f1)), closes [#538](https://github.com/jimmyandrade/harness/issues/538)
+* **definir-okr:** take the base of a key result from a record in the measurement history ([#530](https://github.com/jimmyandrade/harness/issues/530)) ([1f55c23](https://github.com/jimmyandrade/harness/commit/1f55c23d2467b013a30ece2a8fbd8139a0cedd24))
+* **gravar-termos-no-vocabulario:** let each business choose where the glossary lives ([#536](https://github.com/jimmyandrade/harness/issues/536)) ([923c5f6](https://github.com/jimmyandrade/harness/commit/923c5f6a22ef045c32597f70a13a8bb9c53d68f5))
+* **publicar-revisao-de-codigo:** thank the author when a review finds nothing ([#537](https://github.com/jimmyandrade/harness/issues/537)) ([a71585c](https://github.com/jimmyandrade/harness/commit/a71585c16e8f487001aa71632f7b38a17cc61780))
+
 ## [1.15.0](https://github.com/jimmyandrade/harness/compare/v1.14.0...v1.15.0) (2026-10-26)
 
 
