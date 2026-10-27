@@ -1,13 +1,12 @@
 import assert from "node:assert/strict"
 import { mkdtempSync, readFileSync, writeFileSync } from "node:fs"
-import type { AddressInfo } from "node:net"
 import { tmpdir } from "node:os"
 import { join } from "node:path"
 import test from "node:test"
 
 import { classify } from "../classify/index.ts"
 import { load } from "../../shared/glossary.ts"
-import { createGlossaryServer } from "../../shared/server.ts"
+import { withServer } from "../../shared/testing.ts"
 
 const TERM = "\u2026"
 const WHEN =
@@ -26,11 +25,8 @@ const BODY = {
 test("POST registers a situational term and creates the missing example", async () => {
   const root = mkdtempSync(join(tmpdir(), "glossary-"))
   writeFileSync(join(root, "pt-BR.json"), "{}\n")
-  const server = createGlossaryServer(root)
-  await new Promise<void>((resolve) => server.listen(0, "127.0.0.1", resolve))
-  const port = (server.address() as AddressInfo).port
-  try {
-    const response = await fetch(`http://127.0.0.1:${port}/v1/situational`, {
+  await withServer(root, async (base) => {
+    const response = await fetch(`${base}/v1/situational`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(BODY),
@@ -56,26 +52,21 @@ test("POST registers a situational term and creates the missing example", async 
     assert.equal(classified.always_allowed, undefined)
     assert.equal(classify(entries, EXAMPLE, "pt-BR").to, "allowed_with_care")
 
-    const again = await fetch(`http://127.0.0.1:${port}/v1/situational`, {
+    const again = await fetch(`${base}/v1/situational`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(BODY),
     })
     assert.equal(again.status, 400)
     assert.equal(load(readFileSync(join(root, "pt-BR.json"), "utf8")).length, 2)
-  } finally {
-    await new Promise<void>((resolve, reject) => server.close((error) => (error ? reject(error) : resolve())))
-  }
+  })
 })
 
 test("an existing example is linked and a category stays in English", async () => {
   const root = mkdtempSync(join(tmpdir(), "glossary-"))
   writeFileSync(join(root, "pt-BR.json"), `{ ${JSON.stringify(EXAMPLE)}: { "state": "allowed" } }\n`)
-  const server = createGlossaryServer(root)
-  await new Promise<void>((resolve) => server.listen(0, "127.0.0.1", resolve))
-  const port = (server.address() as AddressInfo).port
-  try {
-    const response = await fetch(`http://127.0.0.1:${port}/v1/situational`, {
+  await withServer(root, async (base) => {
+    const response = await fetch(`${base}/v1/situational`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ ...BODY, category: "Punctuation" }),
@@ -85,26 +76,21 @@ test("an existing example is linked and a category stays in English", async () =
     const entries = load(readFileSync(join(root, "pt-BR.json"), "utf8"))
     assert.equal(entries.filter((entry) => entry.term === EXAMPLE).length, 1)
     assert.equal(entries.find((entry) => entry.term === EXAMPLE)?.state, "allowed")
-    const translated = await fetch(`http://127.0.0.1:${port}/v1/situational`, {
+    const translated = await fetch(`${base}/v1/situational`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ ...BODY, term: "...", category: "pontuação" }),
     })
     assert.equal(translated.status, 400)
     assert.equal((await translated.json()).error, "A category is an English word.")
-  } finally {
-    await new Promise<void>((resolve, reject) => server.close((error) => (error ? reject(error) : resolve())))
-  }
+  })
 })
 
 test("POST keeps the casing of a case-sensitive term", async () => {
   const root = mkdtempSync(join(tmpdir(), "glossary-"))
   writeFileSync(join(root, "pt-BR.json"), "{}\n")
-  const server = createGlossaryServer(root)
-  await new Promise<void>((resolve) => server.listen(0, "127.0.0.1", resolve))
-  const port = (server.address() as AddressInfo).port
-  try {
-    const response = await fetch(`http://127.0.0.1:${port}/v1/situational`, {
+  await withServer(root, async (base) => {
+    const response = await fetch(`${base}/v1/situational`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ ...BODY, term: "eBay", category: "brand", examples: [], case_sensitive: true }),
@@ -115,20 +101,15 @@ test("POST keeps the casing of a case-sensitive term", async () => {
     assert.equal(body.case_sensitive, true)
     const stored = JSON.parse(readFileSync(join(root, "pt-BR.json"), "utf8"))
     assert.equal(stored["eBay"].case_sensitive, true)
-  } finally {
-    await new Promise<void>((resolve, reject) => server.close((error) => (error ? reject(error) : resolve())))
-  }
+  })
 })
 
 test("an example with a real link is refused and leaves the file unchanged", async () => {
   const root = mkdtempSync(join(tmpdir(), "glossary-"))
   const file = join(root, "pt-BR.json")
   writeFileSync(file, "{}\n")
-  const server = createGlossaryServer(root)
-  await new Promise<void>((resolve) => server.listen(0, "127.0.0.1", resolve))
-  const port = (server.address() as AddressInfo).port
-  try {
-    const response = await fetch(`http://127.0.0.1:${port}/v1/situational`, {
+  await withServer(root, async (base) => {
+    const response = await fetch(`${base}/v1/situational`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ ...BODY, examples: ["Leve também https://example.com/tarefa"] }),
@@ -136,7 +117,5 @@ test("an example with a real link is refused and leaves the file unchanged", asy
     assert.equal(response.status, 400)
     assert.match((await response.json()).error, /A term or an example takes no real link/)
     assert.equal(readFileSync(file, "utf8"), "{}\n")
-  } finally {
-    await new Promise<void>((resolve, reject) => server.close((error) => (error ? reject(error) : resolve())))
-  }
+  })
 })
