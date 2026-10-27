@@ -407,3 +407,16 @@ test("init_glossary creates the glossary of a new language and keeps an existing
   const again = callTool(root, { name: "init_glossary", arguments: { language: "es" } })
   assert.deepEqual(JSON.parse(again.content[0]?.text ?? ""), { language: "es", created: false })
 })
+
+test("write_terms refuses a real link in an example", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  const file = join(root, "pt-BR.json")
+  writeFileSync(file, "{}\n")
+  const refused = callTool(root, {
+    name: "write_terms",
+    arguments: { ...BODY, terms: [{ ...BODY.terms[0], examples: ["Leve também https://example.com/tarefa"] }] },
+  })
+  assert.equal(refused.isError, true)
+  assert.match(refused.content[0]?.text ?? "", /A term or an example takes no real link/)
+  assert.equal(readFileSync(file, "utf8"), "{}\n")
+})

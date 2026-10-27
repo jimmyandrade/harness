@@ -5,6 +5,7 @@ import { join, resolve } from "node:path"
 import test from "node:test"
 
 import { InvalidGlossary, canonicalLanguage, glossaryDirectory, initGlossary, load, register } from "./glossary.ts"
+import { FORMAT_VERSION, formatAddress, glossaryRowSchema } from "./schema.ts"
 
 const GLOSSARY = `{
   "açúcar": { "state": "allowed" },
@@ -113,4 +114,47 @@ test("a valid language without a glossary points to init", () => {
     { message: "No glossary for es yet. Create it with init." },
   )
   assert.equal(existsSync(join(root, "es.json")), false)
+})
+
+const V1 = formatAddress(1)
+
+test("a file with $schema reads its rows and $schema is not a term", () => {
+  const entries = load(`{\n  "$schema": "${V1}",\n  "casa": { "state": "allowed" }\n}\n`)
+  assert.deepEqual(entries.map((entry) => entry.term), ["casa"])
+})
+
+test("a file of a newer format is refused and names the update", () => {
+  assert.throws(
+    () => load(`{ "$schema": "${formatAddress(FORMAT_VERSION + 1)}", "casa": { "state": "allowed" } }`),
+    /newer than this engine.*Update the plugin or the dependency/,
+  )
+})
+
+test("a $schema that is not a glossary format is refused", () => {
+  assert.throws(() => load('{ "$schema": "https://example.com/other.json", "casa": { "state": "allowed" } }'), InvalidGlossary)
+})
+
+test("a write keeps the $schema of the file as its first key", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  const file = join(root, "pt-BR.json")
+  writeFileSync(file, `{\n  "$schema": "${V1}",\n  "casa": {\n    "state": "allowed"\n  }\n}\n`)
+  register(root, "pt-BR", "açúcar", "allowed")
+  assert.deepEqual(Object.keys(JSON.parse(readFileSync(file, "utf8")) as object), ["$schema", "açúcar", "casa"])
+})
+
+test("the schema of format 1 names the row fields the engine reads", () => {
+  const schema = JSON.parse(readFileSync(new URL("../../schemas/glossary-v1.schema.json", import.meta.url), "utf8")) as {
+    $id: string
+    $defs: { row: { properties: Record<string, unknown> } }
+  }
+  assert.equal(schema.$id, V1)
+  assert.deepEqual(Object.keys(schema.$defs.row.properties).sort(), Object.keys(glossaryRowSchema.shape).sort())
+})
+
+test("register refuses a real link in the term or the alternative", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  writeFileSync(join(root, "pt-BR.json"), EMPTY)
+  assert.throws(() => register(root, "pt-BR", "https://example.com/tarefa", "allowed"), /A term or an example takes no real link/)
+  assert.throws(() => register(root, "pt-BR", "promo", "forbidden", "https://example.com/promocao"), /A term or an example takes no real link/)
+  assert.equal(readFileSync(join(root, "pt-BR.json"), "utf8"), EMPTY)
 })

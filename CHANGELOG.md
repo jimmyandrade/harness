@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.19.0](https://github.com/jimmyandrade/harness/compare/v1.18.0...v1.19.0) (2026-10-27)
+
+
+### Features
+
+* **publicar-revisao-de-codigo,escrever-codigo:** open a new worktree per task ([#581](https://github.com/jimmyandrade/harness/issues/581)) ([c918994](https://github.com/jimmyandrade/harness/commit/c918994349baa208313ee79746296f20bb687ed7))
+* **vocabulary:** read the format version of a glossary file from $schema ([#575](https://github.com/jimmyandrade/harness/issues/575)) ([4b9fe07](https://github.com/jimmyandrade/harness/commit/4b9fe07477f0d89050366356116277ee77d1423b))
+
+
+### Bug Fixes
+
+* **fazer-fechamento:** search for the spreadsheet through the connector before asking for its link ([#566](https://github.com/jimmyandrade/harness/issues/566)) ([afebca8](https://github.com/jimmyandrade/harness/commit/afebca8cd8e3f56d7b19ce8fc7c83ae63dbbbb08))
+* **vocabulary:** refuse a real link in a term or an example ([#569](https://github.com/jimmyandrade/harness/issues/569)) ([efabd49](https://github.com/jimmyandrade/harness/commit/efabd49a0a21c6f848077df5337782d4475ef3cf))
+
 ## [1.18.0](https://github.com/jimmyandrade/harness/compare/v1.17.0...v1.18.0) (2026-10-27)
 
 
