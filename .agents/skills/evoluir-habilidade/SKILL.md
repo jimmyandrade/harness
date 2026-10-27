@@ -3,7 +3,7 @@ name: evoluir-habilidade
 description: Use essa habilidade sempre que for testar uma skill, alterá-la a pedido ou evoluir as instruções do projeto, mesmo sem dizer evoluir, inclusive o Gherkin e a comparação com e sem skill, resultado inconsistente, falha de chamada ou correção da pessoa. NÃO use para criar a primeira versão, só ver se a descrição dispara, só revisar sem executar, nem gravar a página no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.25.0"
+  version: "0.25.1"
   related:
     - criar-commit
     - criar-pull-request
@@ -90,16 +90,16 @@ Proponha um script testado uma vez. Com o aceite, grave em `scripts/` quando só
 
 ### Passo 7
 
-Quando outra habilidade chega aqui ao terminar, siga `Modo de aprendizado`. Com `não`, encerre. Com `perguntar`, pergunte uma vez se a pessoa quer registrar as lições da execução. Com `sim`, ou com a resposta sim, grave cada lição como um commit numa branch com nome em inglês e envie a branch. No primeiro commit, abra um PR em rascunho seguindo `criar-pull-request`, que já leva a pessoa atribuída e o rótulo no comando. A cada lição, confira o título e a descrição contra o código atual e atualize o que deixou de contar o que a branch faz. Tire do rascunho quando a pessoa encerrar a sequência.
+Quando outra habilidade chega aqui ao terminar, siga `Modo de aprendizado`. Com `não`, encerre. Com `perguntar`, pergunte uma vez se a pessoa quer registrar as lições da execução. Com `sim`, ou com a resposta sim, grave cada lição como um commit numa branch com nome em inglês e envie a branch. No primeiro commit, abra um PR em rascunho seguindo `criar-pull-request`, que já leva a pessoa atribuída e o rótulo no comando. Depois do push, uma vez, confira o título e a descrição. Várias lições no mesmo push não repetem a conferência. Tire do rascunho quando a pessoa encerrar a sequência.
 
 ## Problemas comuns
 
-### Título deixado no primeiro commit
+### Conferência a cada lição
 
-Se você atualizar só a descrição a cada lição, o título continua contando o primeiro commit.
+Se você conferir o título e a descrição a cada lição, a conferência se repete no mesmo push.
 
-1. A cada lição, confira o título e a descrição contra o código atual.
-2. Atualize o que deixou de contar o que a branch faz, como `criar-pull-request` manda.
+1. Grave as lições e envie a branch.
+2. Depois do push, uma vez, confira o título e a descrição, como `criar-pull-request` manda.
 
 ### Skill publicada acima do limite
 
@@ -242,12 +242,12 @@ Dado que há o nome "Planejamento do trimestre" e 5 descrições de tarefa. Quan
 - O pedido chega por uma cópia, sincronizada ou instalada por dependência ou plugin: não edite a cópia. A escrita segue `criar-commit` e `criar-pull-request` no repositório de origem.
 - A cópia não tem o repositório de origem nem conexão que escreva nele: não peça o repositório. Entregue a mudança pronta, por skill e passo, para a sessão com o repositório de origem.
 - O pedido é só o tamanho ou o tempo: use `medir-habilidade`. Não edite a skill.
-- Cada lição muda o que a branch faz: o título e a descrição passam pela conferência de `criar-pull-request`.
+- Várias lições sobem no mesmo push: a conferência do título e da descrição é uma, depois do push.
 
 ## Pegadinhas
 
 - A skill parece pronta na primeira versão. Ela é um documento vivo. A iteração parte do feedback.
-- Atualizar a descrição parece bastar. O título também tem de continuar contando o que o código faz.
+- Conferir a cada lição parece necessário. A conferência é uma vez, depois do push.
 - "Testar" parece só conferir a saída. O teste edita a skill validada no repositório de origem, nessa conversa.
 - Uma mudança pedida parece exigir execução antes. Ela entra direto. A validação vem depois, com um caso real.
 - Um critério novo parece pedir a rodada de execuções. Com `Executar testes` em `sob pedido`, ela espera o pedido da pessoa, porque cada rodada gasta muitos tokens.

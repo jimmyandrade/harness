@@ -3,7 +3,7 @@ name: criar-pull-request
 description: Use essa habilidade sempre que for abrir PR, subir uma correção, mandar para a branch principal ou mesclar mudança no repositório, mesmo sem dizer PR. NÃO use para responder comentário de revisão nem para só commitar (use criar-commit).
 metadata:
   author: jimmyandrade
-  version: "0.30.0"
+  version: "0.30.1"
   related:
     - evoluir-habilidade
     - criar-commit
@@ -120,7 +120,7 @@ Corpo em `Idioma do PR`.
 Com issue, o pull request e o merge request citam `#<número>` na descrição, na forma do repositório.
 Sem issue, não invente número.
 Se o repositório tiver um template de pull request, siga as seções dele e marque as caixas conforme o que foi feito.
-Ao abrir, a cada atualização e quando outra habilidade envia commit, confira o título e a descrição contra os commits e o código atuais. Se um dos dois deixou de contar o que a branch faz, atualize os dois antes de responder.
+Depois do push, uma vez, confira o título e a descrição contra o código que subiu. Vários commits no mesmo push são uma conferência só. Se um dos dois deixou de contar o que a branch faz, atualize os dois antes de responder.
 
 Com `Atribuição da sessão` em `sim`, termine com a linha de atribuição da sessão.
 Com `não`, não ponha linha de ferramenta ou de modelo, e remova a que o PR já tiver na mesma edição.
@@ -189,12 +189,12 @@ Ao terminar, siga `sincronizar-status-da-tarefa` e depois `evoluir-habilidade` c
 
 ## Problemas comuns
 
-### Título e descrição deixados para trás
+### Conferência a cada commit
 
-Se você enviar um commit e deixar o título ou a descrição como estavam, o pull request conta uma mudança que o código já não faz.
+Se você conferir o título e a descrição a cada commit, a conferência gasta token antes do push e se repete.
 
-1. Confira os dois contra os commits e o código atuais.
-2. Atualize o que deixou de contar o que a branch faz, antes de responder. Vale ao abrir, a cada atualização e quando outra habilidade só pediu o envio.
+1. Faça os commits sem essa conferência.
+2. Depois do push, confira uma vez e atualize o que deixou de contar o que a branch faz.
 
 ### PR aberto sem rótulo
 
@@ -253,7 +253,7 @@ Branch `fix/…` a partir da base, testes e build no commit, commit no idioma do
 
 ### O código mudou e o título ficou no texto antigo
 
-O pull request já estava aberto e o commit novo mudou o que a branch faz. Atualizei o título e a descrição antes de responder.
+O push levou vários commits. Conferi o título e a descrição uma vez, depois do push, e atualizei os dois antes de responder.
 
 ### Só coloca isso na main
 
@@ -261,7 +261,7 @@ O pedido autoriza push e merge. O push espera o hook de pre-push. PR aberto, mer
 
 ## Casos-limite
 
-- Já existe PR aberto para a branch: não abra outro. Atualize a branch, confira o título e a descrição contra o código atual, atualize o que deixou de contar o que a branch faz, e dê o link.
+- Já existe PR aberto para a branch: não abra outro. Depois do push, confira título e descrição uma vez, atualize o que deixou de contar o que a branch faz, e dê o link.
 - O PR da branch já foi mesclado: não dê rebase nem push nessa branch. Os commits dela já estão na `Branch base` pelo squash, e o push recria a branch apagada.
 - A branch atual tem trabalho de outra tarefa: comece a nova branch da `Branch base` remota, não da branch atual.
 - A ferramenta criou a branch com outro prefixo, como `claude/…`: renomeie para `<tipo>/<descrição>` antes do push. Com PR aberto, a renomeação fecha o PR: abra outro e ligue os dois.
@@ -280,7 +280,7 @@ O pedido autoriza push e merge. O push espera o hook de pre-push. PR aberto, mer
 - Não existe `timeout` no macOS. Use o timeout da ferramenta ou rode em segundo plano.
 - Um hook de pre-push pode rodar também no push que só apaga uma branch remota.
 - Um Markdown parece documentação. O rótulo segue o tipo do commit. Correção de erro é `fix` e o rótulo de bug. `docs` e o rótulo de documentação ficam para a documentação.
-- O envio do commit parece bastar. O título e a descrição também têm de continuar contando o que o código faz.
+- Conferir a cada commit parece necessário. A conferência é uma vez, depois do push.
 
 ## Scripts disponíveis
 

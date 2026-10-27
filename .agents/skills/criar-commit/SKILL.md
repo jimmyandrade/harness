@@ -3,7 +3,7 @@ name: criar-commit
 description: Use essa habilidade sempre que terminar um trabalho que mudou o repositório ou for commitar, separar commits ou escrever a mensagem, mesmo sem dizer commit. NÃO use para push, abrir PR, rebase nem merge (use criar-pull-request).
 metadata:
   author: jimmyandrade
-  version: "0.22.1"
+  version: "0.22.2"
 ---
 
 # Criar commit
@@ -106,7 +106,7 @@ Informe o nome da branch, se ela está no GitHub e o hash de cada commit nesta r
 Com `Criar pull request ao terminar` em `rascunho`, o padrão, a mudança de código autoriza o push da branch e a abertura do pull request em rascunho.
 Com `sim`, o pull request abre pronto.
 Com `não`, sem pedido de publicação, siga `criar-pull-request` até o passo que exige o pedido e diga que o pull request não está aberto.
-Quando o pull request abre ou já existe, a conferência do título e da descrição fica com `criar-pull-request` e acontece antes de responder.
+A conferência do título e da descrição fica com `criar-pull-request`: uma vez, depois do push, antes de responder. Não a cada commit.
 O merge continua pedindo um pedido explícito.
 Não escreva que a habilidade ficou para este pedido, nem para depois.
 
@@ -117,12 +117,12 @@ Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
 
-### Texto do pull request deixado para trás
+### Conferência a cada commit
 
-Se você commitar e responder sem a conferência do título e da descrição, o pull request continua contando o código antigo.
+Se você conferir o título e a descrição a cada commit, a conferência gasta token antes do push e se repete.
 
-1. Quando o pull request abre ou já existe, siga essa conferência em `criar-pull-request`.
-2. Ela acontece antes de responder.
+1. Faça os commits sem essa conferência.
+2. Depois do push, uma vez, siga a conferência em `criar-pull-request`.
 
 ### Frase que adia o pull request
 
@@ -188,7 +188,7 @@ Um commit `fix:` com o assunto dizendo o porquê da troca do texto. Sem teste no
 - A pessoa pede para mudar uma cópia, sincronizada ou instalada por dependência ou plugin, como a página de uma habilidade: não grave nela. A mudança vai no repositório de origem. A cópia sincronizada muda depois do merge. A cópia instalada muda quando o projeto passa a usar a versão nova.
 - A correção está num Markdown: o tipo é `fix:`. `docs:` fica para a documentação.
 - O trabalho não tem issue: a mensagem não ganha `#<número>`.
-- O pull request abre ou já existe: a conferência do título e da descrição fica com `criar-pull-request`, antes de responder.
+- Vários commits sobem juntos: a conferência do título e da descrição é uma, depois do push.
 
 ## Pegadinhas
 
@@ -198,7 +198,7 @@ Um commit `fix:` com o assunto dizendo o porquê da troca do texto. Sem teste no
 - O commit rápido parece que o lefthook rodou. Sem `.git/hooks/pre-commit`, a checagem de skill não rodou. Rode o script e não publique se falhar.
 - O texto de uma cópia, sincronizada ou instalada, que explica como preencher uma habilidade parece permissão para criá-la ali. Criar ou ativar a habilidade fora do repositório de origem deixa uma cópia que o sync não remove e que a instalação seguinte apaga.
 - Um arquivo Markdown parece documentação. O tipo segue o que a mudança faz. Correção de erro é `fix:`. `docs:` fica para a documentação.
-- O commit parece encerrar o texto do pull request. Título e descrição ficam com `criar-pull-request`.
+- Conferir a cada commit parece necessário. A conferência é uma vez, depois do push, em `criar-pull-request`.
 
 ## Scripts disponíveis
 

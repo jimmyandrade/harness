@@ -3,7 +3,7 @@ name: criar-habilidade
 description: Cria, adiciona e escreve skills a partir de uma tarefa real. Usada quando a pessoa quer uma skill nova, mesmo sem dizer skill. NÃO serve para editar código, escrever página que não seja skill, otimizar só a descrição nem gravar a skill no Notion.
 metadata:
   author: jimmyandrade
-  version: "3.17.2"
+  version: "3.17.3"
   related:
     - criar-commit
     - criar-pull-request
@@ -240,7 +240,7 @@ Se você gravar o endereço de um banco ou usar o banco que a conexão mostrou, 
 
 Se você criar ou alterar a habilidade numa cópia, como a página do Notion ou a cópia que outro projeto recebe por dependência ou plugin, a próxima sincronização ou a próxima instalação apaga essa escrita.
 
-1. Antes de gravar, confira de onde a skill vem. Escreva no repositório de origem, seguindo `criar-commit` e `criar-pull-request`, inclusive a conferência do título e da descrição.
+1. Antes de gravar, confira de onde a skill vem. Escreva no repositório de origem, seguindo `criar-commit` e `criar-pull-request`, inclusive a conferência do título e da descrição, uma vez e depois do push.
 2. Não edite a cópia.
 
 ### Pegadinha genérica
@@ -272,7 +272,7 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 - O escopo muda e o nome ainda descreve o escopo antigo: renomeie.
 - O data source muda ou o workspace conectado é outro: a pessoa informa o data source na execução. Se não estiver nessa conexão, pare.
 - O fato não óbvio está só em `references/`: traga para `Pegadinhas`.
-- A escrita abre ou atualiza o pull request: a conferência do título e da descrição entra em `criar-pull-request`.
+- A escrita abre ou atualiza o pull request: a conferência do título e da descrição é uma, depois do push.
 
 ## Pegadinhas
 
@@ -284,7 +284,7 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 - Skill sobre escrever skills também sincroniza, e a cópia instalada por dependência ou plugin também é só leitura. A escrita segue `criar-commit` no repositório de origem.
 - O workspace conectado pode ser de outra empresa. A skill não carrega banco, página nem workspace. O data source vem na execução. Se não estiver na conexão, pare. Não use o banco que a conexão mostrou no lugar.
 - Cadastrar e revisar a mesma entidade usam `definir` numa skill só. Venda e despesa usam `lancar`. O cedilha sai do nome.
-- O commit parece bastar para o texto do pull request. O título e a descrição seguem `criar-pull-request`.
+- Conferir a cada commit parece necessário. A conferência é uma vez, depois do push.
 
 ## Scripts disponíveis
 
