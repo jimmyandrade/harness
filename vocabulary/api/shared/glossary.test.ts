@@ -150,3 +150,11 @@ test("the schema of format 1 names the row fields the engine reads", () => {
   assert.equal(schema.$id, V1)
   assert.deepEqual(Object.keys(schema.$defs.row.properties).sort(), Object.keys(glossaryRowSchema.shape).sort())
 })
+
+test("register refuses a real link in the term or the alternative", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  writeFileSync(join(root, "pt-BR.json"), EMPTY)
+  assert.throws(() => register(root, "pt-BR", "https://example.com/tarefa", "allowed"), /A term or an example takes no real link/)
+  assert.throws(() => register(root, "pt-BR", "promo", "forbidden", "https://example.com/promocao"), /A term or an example takes no real link/)
+  assert.equal(readFileSync(join(root, "pt-BR.json"), "utf8"), EMPTY)
+})

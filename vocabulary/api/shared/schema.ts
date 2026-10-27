@@ -7,6 +7,8 @@
 
 import * as z from "zod"
 
+import { REAL_LINK, hasRealLink, termTexts } from "./links.ts"
+
 export function collapse(value: string): string {
   return value.trim().split(/\s+/u).join(" ")
 }
@@ -142,7 +144,7 @@ const forbiddenRequestObject = z.object({
   related: termList("Provide the related terms.").default([]),
   case_sensitive: caseSensitiveSchema,
 })
-export const forbiddenRequest = guardGeneral(rejectPositiveExamples(forbiddenRequestObject))
+export const forbiddenRequest = guarded(forbiddenRequestObject, noRealLink, generalRule, noPositiveExample)
 export type ForbiddenRequest = z.infer<typeof forbiddenRequest>
 
 const allowedRequestObject = z.object({
@@ -155,7 +157,7 @@ const allowedRequestObject = z.object({
   related: termList("Provide the related terms.").default([]),
   case_sensitive: caseSensitiveSchema,
 })
-export const allowedRequest = refuseCliche(guardGeneral(allowedRequestObject))
+export const allowedRequest = guarded(allowedRequestObject, noRealLink, noCliche, generalRule)
 export type AllowedRequest = z.infer<typeof allowedRequest>
 
 const situationalRequestObject = z.object({
@@ -168,7 +170,7 @@ const situationalRequestObject = z.object({
   related: termList("Provide the related terms.").default([]),
   case_sensitive: caseSensitiveSchema,
 })
-export const situationalRequest = refuseCliche(situationalRequestObject)
+export const situationalRequest = guarded(situationalRequestObject, noRealLink, noCliche)
 export type SituationalRequest = z.infer<typeof situationalRequest>
 
 const optionalProse = (message: string) =>
@@ -301,6 +303,7 @@ function markGiven(raw: unknown): unknown {
 }
 
 type TermShape = {
+  term: string
   state: State
   categories: readonly string[]
   description?: string
@@ -320,6 +323,7 @@ export function termIssues(item: TermShape): string[] {
   const issues: string[] = []
   if (item.categories.includes("cliche") && item.state !== "forbidden") issues.push(CLICHE)
   if (AVOIDED_LEVELS.has(item.state) && item.examples.length > 0) issues.push(REJECTED)
+  if (hasRealLink(termTexts(item))) issues.push(REAL_LINK)
   if (GENERAL_LEVELS.has(item.state) && item.when !== undefined) issues.push(SITUATION)
   if (GENERAL_LEVELS.has(item.state) && item.tags.length > 0) issues.push(TAGGED)
   if (item.state === "allowed" && (item.rejected.length > 0 || item.alternatives.length > 0)) issues.push(ALLOWED_LINKS)
@@ -365,31 +369,37 @@ const SUBSTITUTION = "A term to use takes no substitution."
 const REASON = "reason says why to use a term. Say why to avoid it in description."
 const COPIED = "description explains the term and reason says why to use it. Do not copy one into the other."
 
-function guardGeneral<S extends z.ZodType>(schema: S) {
+/** A check on a request before its schema runs. It returns every reason to refuse the request. */
+type Guard = (record: Record<string, unknown>) => readonly string[]
+
+/**
+ * Run the guards on a request, then its schema. A request a guard refuses
+ * stops there, and its first message is the one of the first guard listed.
+ */
+function guarded<S extends z.ZodType>(schema: S, ...guards: readonly Guard[]) {
   return z.any().superRefine((value, ctx) => {
     if (typeof value !== "object" || value === null) return
-    const record = value as Record<string, unknown>
-    if (typeof record.when === "string" && collapse(record.when) !== "") ctx.addIssue(SITUATION)
-    if (Array.isArray(record.tags) && record.tags.length > 0) ctx.addIssue(TAGGED)
+    for (const guard of guards) for (const issue of guard(value as Record<string, unknown>)) ctx.addIssue(issue)
   }).pipe(schema)
 }
 
-function isCliche(record: Record<string, unknown>): boolean {
-  return typeof record.category === "string" && collapse(record.category).toLowerCase() === "cliche"
+function generalRule(record: Record<string, unknown>): readonly string[] {
+  const issues: string[] = []
+  if (typeof record.when === "string" && collapse(record.when) !== "") issues.push(SITUATION)
+  if (Array.isArray(record.tags) && record.tags.length > 0) issues.push(TAGGED)
+  return issues
 }
 
-function refuseCliche<S extends z.ZodType>(schema: S) {
-  return z.any().superRefine((value, ctx) => {
-    if (typeof value !== "object" || value === null) return
-    if (isCliche(value as Record<string, unknown>)) ctx.addIssue(CLICHE)
-  }).pipe(schema)
+function noCliche(record: Record<string, unknown>): readonly string[] {
+  return typeof record.category === "string" && collapse(record.category).toLowerCase() === "cliche" ? [CLICHE] : []
 }
 
-function rejectPositiveExamples<S extends z.ZodType>(schema: S) {
-  return z.any().superRefine((value, ctx) => {
-    if (typeof value !== "object" || value === null) return
-    if (listHasText((value as Record<string, unknown>).examples)) ctx.addIssue(REJECTED)
-  }).pipe(schema)
+function noRealLink(record: Record<string, unknown>): readonly string[] {
+  return hasRealLink(termTexts(record)) ? [REAL_LINK] : []
+}
+
+function noPositiveExample(record: Record<string, unknown>): readonly string[] {
+  return listHasText(record.examples) ? [REJECTED] : []
 }
 
 function listHasText(value: unknown): boolean {

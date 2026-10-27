@@ -89,6 +89,7 @@ import {
   type Validation,
   type WriteMode,
 } from "./schema.ts"
+import { REAL_LINK, hasRealLink } from "./links.ts"
 
 export type { Migration, State, TermRegistration, TermsWrite }
 export { collapse }
@@ -315,6 +316,7 @@ export function register(
   state: string,
   alternative?: string,
 ): Entry {
+  if (hasRealLink([term, alternative])) throw new InvalidGlossary(REAL_LINK)
   const path = glossaryFile(directory, language)
   const { entries, format } = readGlossary(path)
   const created = entryFrom(lowercaseTerm(term), state, alternative)

@@ -327,6 +327,34 @@ test("a forbidden term with a positive example is refused", async () => {
   })
 })
 
+test("a term or an example with a real link is refused", async () => {
+  const initial = "{}\n"
+  await withGlossary(initial, async (port, root) => {
+    const file = join(root, "pt-BR.json")
+    const response = await post(port, {
+      language: "pt-BR",
+      mode: "insert",
+      terms: [allowed("tarefa", "pedido de trabalho", ["Veja a tarefa em https://example.com/tarefa"])],
+    })
+    assert.equal(response.status, 400)
+    assert.match((await response.json()).error, /A term or an example takes no real link/)
+    assert.equal(readFileSync(file, "utf8"), initial)
+  })
+})
+
+test("a source with a real link is stored", async () => {
+  await withGlossary("{}\n", async (port, root) => {
+    const response = await post(port, {
+      language: "pt-BR",
+      mode: "insert",
+      terms: [{ ...allowed("tarefa", "pedido de trabalho", ["Veja a tarefa em [link da tarefa]"]), source: "https://example.com/origem" }],
+    })
+    assert.equal(response.status, 200)
+    const entries = load(readFileSync(join(root, "pt-BR.json"), "utf8"))
+    assert.equal(entries.find((entry) => entry.term === "tarefa")?.source, "https://example.com/origem")
+  })
+})
+
 test("an allowed term with a situation is refused", async () => {
   const initial = "{}\n"
   await withGlossary(initial, async (port, root) => {
@@ -651,5 +679,27 @@ test("a batch write keeps the $schema of the file", async () => {
     assert.equal(response.status, 200)
     const written = JSON.parse(readFileSync(join(root, "pt-BR.json"), "utf8")) as Record<string, unknown>
     assert.deepEqual(Object.keys(written), ["$schema", "casa"])
+  })
+})
+
+test("a rejected example or an alternative with a real link is refused", async () => {
+  const initial = "{}\n"
+  await withGlossary(initial, async (port, root) => {
+    const response = await post(port, {
+      language: "pt-BR",
+      mode: "insert",
+      terms: [{
+        state: "forbidden",
+        term: "promo",
+        categories: ["slang"],
+        description: "abreviação",
+        substitution: "promoção",
+        rejected: ["Promo em http://example.com/promo"],
+        alternatives: ["https://example.com/promocao"],
+      }],
+    })
+    assert.equal(response.status, 400)
+    assert.match((await response.json()).error, /A term or an example takes no real link/)
+    assert.equal(readFileSync(join(root, "pt-BR.json"), "utf8"), initial)
   })
 })
