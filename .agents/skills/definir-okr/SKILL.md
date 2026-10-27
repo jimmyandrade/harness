@@ -4,7 +4,7 @@ description: Cria, revisa e atualiza os objetivos e os key results de uma área 
 compatibility: Precisa de Python quando a execução é local.
 metadata:
   author: jimmyandrade
-  version: "0.3.1"
+  version: "0.3.2"
   related:
     - definir-medicao-de-metrica
     - definir-tarefa
@@ -93,9 +93,10 @@ O progresso dele é (base − valor atual) ÷ (base − valor-alvo), e um valor 
 Se a lista calcula o progresso só como valor atual ÷ valor-alvo, não grave o key result de redução assim.
 Proponha reescrevê-lo como uma quantidade que cresce, como a economia sobre a base, com valor-alvo igual à base menos o alvo, ou ajustar o cálculo da lista com a base e o sentido, e pergunte qual seguir.
 Confira o progresso que a lista mostra contra o cálculo de referência, com o mesmo sentido, valor atual, valor-alvo e base.
-Use estas fórmulas para propor o ajuste do cálculo.
+As fórmulas abaixo são a referência desse cálculo, não um valor para gravar no key result.
+Na fonte de dados, o progresso e o atingido já devem ser fórmula. Compare a fórmula que está lá com esta referência.
+Se ela divergir, proponha o ajuste da fórmula e mantenha o que ela faz além do progresso. Não substitua a fórmula por um número.
 Troque cada nome entre `<>` pelo nome da propriedade ou da opção que o mapeamento de dados do projeto dá.
-Antes de colar, compare com a fórmula atual da lista e mantenha o que ela faz além do progresso.
 Progresso. Um resultado igual a 1 é o alvo atingido. Acima de 1, o alvo foi passado. Sem valor atual, sem valor-alvo, ou num key result de redução sem base acima do alvo, o campo fica vazio.
 
 ```
@@ -215,6 +216,13 @@ Se você aceitar "Configurar X" ou "Realizar 12 revisões" como key result, a á
 1. Mova a execução para uma tarefa, por `definir-tarefa`.
 2. Reescreva o key result com resultado, evidência, critério de qualidade e prazo.
 
+### Progresso gravado como número
+
+Se você gravar o progresso ou o atingido como número numa fonte de dados que calcula os dois por fórmula, o número para de acompanhar as medições.
+
+1. Deixe a fórmula que já está na fonte.
+2. Se ela divergir da referência do Passo 4, proponha o ajuste da fórmula, e não o número.
+
 ### Key result de redução com progresso invertido
 
 Se você gravar "Diminuir os custos para R$ 3.130" numa lista que calcula valor atual ÷ valor-alvo, custo zero aparece como 0% e o custo da base como mais de 100%.
@@ -261,6 +269,7 @@ a área tinha 5 objetivos no ciclo. Sugeri manter os 3 que conversam com a estra
 ## Pegadinhas
 
 - A porcentagem de conclusão, o valor atual e o atingimento são calculados pela lista. Editar à mão quebra a conta.
+- As fórmulas do Passo 4 parecem um valor para gravar. Elas são a referência. Na fonte de dados, o progresso e o atingido já devem ser fórmula.
 - Num key result de redução, gastar zero parece não bater a meta quando a lista divide o valor atual pelo valor-alvo. O sentido e a base mudam a conta.
 - Digitar a base no key result parece mais rápido. O número fica sem fonte e diverge do registro do mesmo período no histórico de medições.
 - Um key result recém-criado sem título aparece como "Nova página" e some na busca pelo assunto.
