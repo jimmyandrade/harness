@@ -3,7 +3,7 @@ name: publicar-revisao-de-codigo
 description: Revisa um pull request e publica a revisão numa única review, com os comentários inline, no idioma de quem recebe e no tom do projeto. Usada quando a pessoa pede uma revisão ou outra habilidade precisa publicar uma. Não serve para tratar os comentários que você recebeu no seu PR.
 metadata:
   author: jimmyandrade
-  version: "0.13.0"
+  version: "0.13.1"
   aliases:
     - post-code-review
   related:
@@ -263,9 +263,9 @@ O PR estava aberto. Usei o contexto: o card pede manter as colunas atuais, e o P
 
 Não achei Deve ter nem Deveria ter. Os dois nomes ficam como oportunidade. Aprovei com os comentários, e o corpo diz que esses pontos podem ir para outro PR.
 
-### Aprove o PR que só sobe o Node, sem achado
+### Pedido de aprovar o bump do Node
 
-Rodei a revisão antes e não achei bloqueio. O corpo abriu com o login de quem abriu, agradeceu a atualização e listou o que o bump faz. A frase de idioma ficou no PS.
+Rodei a revisão e achei bloqueio. Não aprovei. Avisei que ainda não dá para aprovar o PR porque há bloqueio, e publiquei a ação do achado.
 
 ## Casos-limite
 
