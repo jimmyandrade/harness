@@ -329,6 +329,7 @@ flowchart LR
   extrair_tarefas_da_reuniao --> evoluir_habilidade
   extrair_tarefas_da_reuniao --> identificar_duplicata
   extrair_tarefas_da_reuniao --> procurar_tarefa
+  fatiar_pull_request --> atender_revisao_de_pull_request
   fatiar_pull_request --> criar_commit
   fatiar_pull_request --> criar_pull_request
   fatiar_pull_request --> evoluir_habilidade

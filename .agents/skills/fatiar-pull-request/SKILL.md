@@ -3,10 +3,11 @@ name: fatiar-pull-request
 description: Corta a demanda em um rascunho por pergunta de revisão e empilha esses rascunhos. Usada quando a mesma demanda junta a chave, o componente e o lugar em que ele aparece. NÃO serve para commits da mesma pergunta nem para mesclar.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   related:
     - criar-pull-request
     - criar-commit
+    - atender-revisao-de-pull-request
     - evoluir-habilidade
 ---
 
@@ -34,9 +35,10 @@ Vários commits da mesma pergunta continuam no mesmo pull request.
 flowchart LR
   Q{Quantas perguntas de revisão?} -->|uma| U[Um pull request]
   Q -->|mais de uma| E[Um rascunho por pergunta, empilhado]
-  E --> R{O aberto já tem revisão?}
+  E --> F[Uma tarefa filha por rascunho]
+  F --> R{O antigo tem comentário?}
+  R -->|sim| A[Atenda no rascunho do arquivo]
   R -->|não| P[Aponte o antigo para os novos]
-  R -->|sim| W[Diga o corte e espere]
 ```
 
 Conte as perguntas antes de abrir.
@@ -51,10 +53,13 @@ A abertura segue `criar-pull-request`.
 
 ### Passo 2
 
-Se o pull request aberto mistura perguntas e ainda não tem revisão, abra os rascunhos e aponte o antigo para os novos.
+Se o pull request aberto mistura perguntas, abra os rascunhos e aponte o antigo para os novos.
 Não reescreva a branch já publicada.
-Se já tem revisão, não feche.
-Diga o corte e espere a pessoa.
+Cada rascunho ganha uma tarefa filha da tarefa da demanda.
+O pull request cita essa filha no título e no corpo.
+A criação da filha segue a habilidade de tarefa do projeto.
+Cada comentário do antigo segue `atender-revisao-de-pull-request` no rascunho que tem o arquivo.
+A resposta no antigo aponta o commit do novo.
 
 ### Passo 3
 
@@ -77,6 +82,22 @@ Se você mantiver os assuntos juntos porque o teto de arquivos ainda não estour
 1. Separe mesmo assim.
 2. O teto vale para cada pull request.
 3. Ele não é motivo para juntar perguntas.
+
+### Comentários ficaram no PR fechado
+
+Se você fechar o pull request antigo e deixar os comentários só lá, a revisão não chega no rascunho que tem o arquivo.
+
+1. Leve cada comentário com `atender-revisao-de-pull-request`.
+2. Atenda no rascunho que tem o arquivo.
+3. A resposta no antigo aponta o commit do novo.
+
+### Fatia sem tarefa filha
+
+Se você abrir o rascunho sem uma tarefa filha, o pull request fica só na tarefa da demanda inteira.
+
+1. Crie uma tarefa filha por rascunho.
+2. Cite a filha no título e no corpo.
+3. A criação segue a habilidade de tarefa do projeto.
 
 ### Branch publicada reescrita
 
@@ -103,8 +124,9 @@ O teto de arquivos do repositório não juntou os três.
 
 - A demanda cabe numa pergunta de revisão: um pull request só, mesmo com vários commits.
 - O teto de arquivos ainda não estourou, mas o diff mistura perguntas: separe mesmo assim.
-- O pull request aberto mistura perguntas e já tem revisão: não feche. Diga o corte e espere a pessoa.
-- O pull request aberto mistura perguntas e ainda não tem revisão: abra os rascunhos, aponte o antigo e não reescreva a branch.
+- O pull request aberto mistura perguntas e já tem comentário: abra os rascunhos, atenda cada comentário no rascunho do arquivo e aponte o commit novo na resposta.
+- O pull request aberto mistura perguntas e ainda não tem comentário: abra os rascunhos, aponte o antigo e não reescreva a branch.
+- Cada rascunho tem a própria tarefa filha, citada no título e no corpo.
 - `Fatiar por subtarefa` em `sim`: um pull request por subtarefa, e dentro dela o mesmo corte.
 
 ## Pegadinhas
@@ -112,6 +134,8 @@ O teto de arquivos do repositório não juntou os três.
 - O teto de arquivos ainda folgado parece permissão para juntar a chave, o componente e o lugar em que ele aparece. Cada um é uma pergunta de revisão. O teto não junta.
 - O mesmo tema da demanda parece um pull request só. O que junta é a pergunta de revisão.
 - Reescrever a branch publicada parece o jeito mais curto de cortar. O corte novo são rascunhos empilhados. A branch antiga fica.
+- Fechar o pull request antigo parece encerrar os comentários. Eles seguem no rascunho que tem o arquivo.
+- A tarefa da demanda parece bastar para todos os rascunhos. Cada rascunho tem a própria tarefa filha.
 
 ## Scripts disponíveis
 
