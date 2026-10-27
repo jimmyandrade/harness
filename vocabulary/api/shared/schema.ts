@@ -142,7 +142,7 @@ const forbiddenRequestObject = z.object({
   related: termList("Provide the related terms.").default([]),
   case_sensitive: caseSensitiveSchema,
 })
-export const forbiddenRequest = guardGeneral(rejectPositiveExamples(forbiddenRequestObject))
+export const forbiddenRequest = refuseLinks(guardGeneral(rejectPositiveExamples(forbiddenRequestObject)))
 export type ForbiddenRequest = z.infer<typeof forbiddenRequest>
 
 const allowedRequestObject = z.object({
@@ -155,7 +155,7 @@ const allowedRequestObject = z.object({
   related: termList("Provide the related terms.").default([]),
   case_sensitive: caseSensitiveSchema,
 })
-export const allowedRequest = refuseCliche(guardGeneral(allowedRequestObject))
+export const allowedRequest = refuseLinks(refuseCliche(guardGeneral(allowedRequestObject)))
 export type AllowedRequest = z.infer<typeof allowedRequest>
 
 const situationalRequestObject = z.object({
@@ -168,7 +168,7 @@ const situationalRequestObject = z.object({
   related: termList("Provide the related terms.").default([]),
   case_sensitive: caseSensitiveSchema,
 })
-export const situationalRequest = refuseCliche(situationalRequestObject)
+export const situationalRequest = refuseLinks(refuseCliche(situationalRequestObject))
 export type SituationalRequest = z.infer<typeof situationalRequest>
 
 const optionalProse = (message: string) =>
@@ -321,7 +321,7 @@ export function termIssues(item: TermShape): string[] {
   const issues: string[] = []
   if (item.categories.includes("cliche") && item.state !== "forbidden") issues.push(CLICHE)
   if (AVOIDED_LEVELS.has(item.state) && item.examples.length > 0) issues.push(REJECTED)
-  if ([item.term, ...item.examples, ...item.rejected].some((text) => LINK.test(text))) issues.push(REAL_LINK)
+  if (hasRealLink([item.term, ...item.examples, ...item.rejected, ...item.alternatives])) issues.push(REAL_LINK)
   if (GENERAL_LEVELS.has(item.state) && item.when !== undefined) issues.push(SITUATION)
   if (GENERAL_LEVELS.has(item.state) && item.tags.length > 0) issues.push(TAGGED)
   if (item.state === "allowed" && (item.rejected.length > 0 || item.alternatives.length > 0)) issues.push(ALLOWED_LINKS)
@@ -364,7 +364,12 @@ const REJECTED = "A forbidden example belongs in rejected."
 const CLICHE = "A cliché is forbidden."
 // A term and its examples are read by whoever writes. A link stays in source or notes.
 const LINK = /https?:\/\//i
-const REAL_LINK = "A term or an example takes no real link. Write a placeholder, such as [task link], and keep the address in source."
+export const REAL_LINK = "A term or an example takes no real link. Write a placeholder, such as [task link], and keep the address in source."
+
+/** True when one of the texts carries an http:// or https:// link. */
+export function hasRealLink(texts: readonly unknown[]): boolean {
+  return texts.some((text) => typeof text === "string" && LINK.test(text))
+}
 const ALLOWED_LINKS = "An allowed term takes no rejected examples and no alternatives."
 const SUBSTITUTION = "A term to use takes no substitution."
 const REASON = "reason says why to use a term. Say why to avoid it in description."
@@ -387,6 +392,15 @@ function refuseCliche<S extends z.ZodType>(schema: S) {
   return z.any().superRefine((value, ctx) => {
     if (typeof value !== "object" || value === null) return
     if (isCliche(value as Record<string, unknown>)) ctx.addIssue(CLICHE)
+  }).pipe(schema)
+}
+
+function refuseLinks<S extends z.ZodType>(schema: S) {
+  return z.any().superRefine((value, ctx) => {
+    if (typeof value !== "object" || value === null) return
+    const record = value as Record<string, unknown>
+    const lists = [record.examples, record.rejected, record.alternatives].flatMap((list) => (Array.isArray(list) ? list : []))
+    if (hasRealLink([record.term, ...lists])) ctx.addIssue(REAL_LINK)
   }).pipe(schema)
 }
 

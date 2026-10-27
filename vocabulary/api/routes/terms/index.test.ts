@@ -681,3 +681,25 @@ test("a batch write keeps the $schema of the file", async () => {
     assert.deepEqual(Object.keys(written), ["$schema", "casa"])
   })
 })
+
+test("a rejected example or an alternative with a real link is refused", async () => {
+  const initial = "{}\n"
+  await withGlossary(initial, async (port, root) => {
+    const response = await post(port, {
+      language: "pt-BR",
+      mode: "insert",
+      terms: [{
+        state: "forbidden",
+        term: "promo",
+        categories: ["slang"],
+        description: "abreviação",
+        substitution: "promoção",
+        rejected: ["Promo em http://example.com/promo"],
+        alternatives: ["https://example.com/promocao"],
+      }],
+    })
+    assert.equal(response.status, 400)
+    assert.match((await response.json()).error, /A term or an example takes no real link/)
+    assert.equal(readFileSync(join(root, "pt-BR.json"), "utf8"), initial)
+  })
+})

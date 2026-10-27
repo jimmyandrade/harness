@@ -64,9 +64,11 @@ import {
   EXPECTED,
   FORMAT_VERSION,
   MISSING_FIELD,
+  REAL_LINK,
   collapse,
   formatAddress,
   glossaryFileSchema,
+  hasRealLink,
   isLegacyState,
   levelOf,
   samePerson,
@@ -315,6 +317,7 @@ export function register(
   state: string,
   alternative?: string,
 ): Entry {
+  if (hasRealLink([term, alternative])) throw new InvalidGlossary(REAL_LINK)
   const path = glossaryFile(directory, language)
   const { entries, format } = readGlossary(path)
   const created = entryFrom(lowercaseTerm(term), state, alternative)
