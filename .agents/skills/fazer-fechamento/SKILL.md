@@ -4,7 +4,7 @@ description: Faz o fechamento financeiro de um ponto de contato, como evento, sh
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   related:
     - definir-conta-bancaria
     - definir-obrigacao-financeira
@@ -69,6 +69,8 @@ flowchart LR
   S -->|conector só lê ou só cria| B[Pare e diga o bloqueio]
 ```
 
+Sem o link da planilha no pedido nem no mapeamento, procure-a pelo conector antes de pedir: pelo nome, depois pelo nome das abas no conteúdo, depois entre os arquivos compartilhados com a conta conectada.
+Sem achar, diga que buscas rodou e peça que a dona da planilha a compartilhe com a conta do conector, ou mande o link.
 Na planilha, edite o arquivo que já existe.
 Não crie arquivo novo: o link muda e o que já foi marcado como pago se perde.
 No Notion, ligue cada entrada e cada custo ao ponto de contato.
@@ -158,6 +160,7 @@ O caixa contado deu 40,00 a menos que as vendas registradas em dinheiro. Mostrei
 
 - Pedido sem ponto de contato e sem intervalo: pergunte o que fechar.
 - `Onde fica o fechamento` vazio: pergunte se fica no Notion ou na planilha.
+- A planilha sem link: procure pelo conector antes de pedir. Sem achar, diga as buscas e peça o compartilhamento ou o link.
 - O conector da planilha só lê ou só cria arquivo: pare e diga o bloqueio. Não crie arquivo novo.
 - Parceiro sem regra de divisão: não calcule a divisão. Diga que está pendente.
 - Pessoa a pagar sem Pix: o pagamento fica pendente, com o pedido do Pix.
@@ -167,6 +170,7 @@ O caixa contado deu 40,00 a menos que as vendas registradas em dinheiro. Mostrei
 ## Pegadinhas
 
 - O conector que lê e cria arquivos no Drive parece editar a planilha. Ele não edita um arquivo que já existe. A edição pede um conector de planilha com edição.
+- A planilha de outra pessoa não aparece na busca do conector até ser compartilhada com a conta conectada. Achar nada não prova que ela não existe.
 - A API do Notion devolve o resultado de uma fórmula, mas não o código dela. O total de uma propriedade de fechamento não mostra a regra. Confira o total com as entradas e os custos ligados ao ponto.
 - O ponto de contato do negócio pode ter outro nome, como `evento` ou `show`. O nome vem de `Nome do ponto de contato`.
 
