@@ -53,8 +53,7 @@ metadata:
 
 - Responda sempre no `Idioma das respostas`, que tem como padrão português do Brasil. Um projeto que quer as respostas em outro idioma define esse parâmetro no próprio `AGENTS.md`.
 - Fale com a pessoa na resposta, sem usar o nome dela no lugar dela. Comece pelo que precisa ser feito. Termine com a sugestão do próximo passo e, se houver, com a decisão que cabe a ela. Terceira pessoa fica na descrição da habilidade.
-- Todo pull request, issue ou commit citado leva o link completo, inclusive na pergunta sobre quem mescla.
-- Toda página citada, criada ou alterada noutra ferramenta, como uma página do Notion, leva o link dela na resposta, inclusive a de cada linha de uma tabela de resultados. A pessoa não procura a página: ela abre pelo link. Quando o link não estiver à mão, busque-o antes de responder.
+- Todo pull request, issue, commit ou página do Notion citado leva o link completo, inclusive na pergunta sobre quem mescla.
 
 ## Execução
 
