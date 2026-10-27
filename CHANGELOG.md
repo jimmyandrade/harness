@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.17.0](https://github.com/jimmyandrade/harness/compare/v1.16.4...v1.17.0) (2026-10-27)
+
+
+### Features
+
+* **organizar-emails:** label every processed conversation ([#557](https://github.com/jimmyandrade/harness/issues/557)) ([4b2af13](https://github.com/jimmyandrade/harness/commit/4b2af13d9bf0b247853340bec813f48a7c33878b)), closes [#555](https://github.com/jimmyandrade/harness/issues/555)
+* **preparar-tarefa-do-pull-request:** let a prefix list limit the choice ([#560](https://github.com/jimmyandrade/harness/issues/560)) ([b583c09](https://github.com/jimmyandrade/harness/commit/b583c090b78de40ef501fcda89c345a498dfb241)), closes [#559](https://github.com/jimmyandrade/harness/issues/559)
+* **vocabulary:** create the glossary of a new language with init ([#550](https://github.com/jimmyandrade/harness/issues/550)) ([c71d57e](https://github.com/jimmyandrade/harness/commit/c71d57e7c0c624ba2b6cc843be79d0257746034b)), closes [#548](https://github.com/jimmyandrade/harness/issues/548)
+
+
+### Bug Fixes
+
+* **preparar-tarefa-do-pull-request:** ask the project key before creating the task ([#558](https://github.com/jimmyandrade/harness/issues/558)) ([a920436](https://github.com/jimmyandrade/harness/commit/a920436c9cd1f5dcb866b63fd8a2617f195cb0d5))
+
 ## [1.16.4](https://github.com/jimmyandrade/harness/compare/v1.16.3...v1.16.4) (2026-10-27)
 
 
