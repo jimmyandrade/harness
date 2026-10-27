@@ -1,13 +1,12 @@
 import assert from "node:assert/strict"
 import { mkdtempSync, readFileSync, writeFileSync } from "node:fs"
-import type { AddressInfo } from "node:net"
 import { tmpdir } from "node:os"
 import { join } from "node:path"
 import test from "node:test"
 
 import { classify } from "./index.ts"
 import { load } from "../../shared/glossary.ts"
-import { createGlossaryServer } from "../../shared/server.ts"
+import { withServer } from "../../shared/testing.ts"
 
 const GLOSSARY = `{
   "açúcar": { "state": "allowed" },
@@ -100,11 +99,8 @@ test("a term in English is absent from Portuguese", () => {
 test("POST classifies one language", async () => {
   const root = mkdtempSync(join(tmpdir(), "glossary-"))
   writeFileSync(join(root, "pt-BR.json"), '{ "baratinho": { "state": "forbidden", "alternative": "acessível" } }\n')
-  const server = createGlossaryServer(root)
-  await new Promise<void>((resolve) => server.listen(0, "127.0.0.1", resolve))
-  const port = (server.address() as AddressInfo).port
-  try {
-    const response = await fetch(`http://127.0.0.1:${port}/v1/classify`, {
+  await withServer(root, async (base) => {
+    const response = await fetch(`${base}/v1/classify`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ language: "pt-BR", term: "baratinho" }),
@@ -113,15 +109,13 @@ test("POST classifies one language", async () => {
     assert.equal(body.language, "pt-BR")
     assert.equal(body.to, "forbidden")
     assert.equal(body.recommended, "acessível")
-    const unknown = await fetch(`http://127.0.0.1:${port}/v1/classify`, {
+    const unknown = await fetch(`${base}/v1/classify`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ language: "it", term: "baratinho" }),
     })
     assert.equal(unknown.status, 400)
-  } finally {
-    await new Promise<void>((resolve, reject) => server.close((error) => (error ? reject(error) : resolve())))
-  }
+  })
 })
 
 test("a case-sensitive term says when the casing does not match, and an ordinary term does not", () => {

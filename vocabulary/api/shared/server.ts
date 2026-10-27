@@ -1,5 +1,5 @@
 /**
- * Serve the vocabulary endpoints on 127.0.0.1, port 8765.
+ * Serve the vocabulary endpoints on HOST, port 8765.
  *
  * Run: node api/shared/server.ts
  */

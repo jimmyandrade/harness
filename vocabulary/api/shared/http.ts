@@ -17,6 +17,9 @@ export type Route = {
   handle: (glossary: Glossary, record: Record<string, unknown>) => unknown
 }
 
+/** The servers listen only on the loopback address. */
+export const HOST = "127.0.0.1"
+
 export function createServer(directory: string, routes: readonly Route[]): Server {
   const glossary = new Glossary(directory)
   return createHttpServer((request, response) => {
@@ -27,7 +30,7 @@ export function createServer(directory: string, routes: readonly Route[]): Serve
 export function listen(directory: string, routes: readonly Route[], port: number): Promise<Server> {
   const server = createServer(directory, routes)
   return new Promise((resolve) => {
-    server.listen(port, "127.0.0.1", () => resolve(server))
+    server.listen(port, HOST, () => resolve(server))
   })
 }
 

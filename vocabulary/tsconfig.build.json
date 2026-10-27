@@ -10,6 +10,7 @@
     "api/**/*.ts"
   ],
   "exclude": [
-    "api/**/*.test.ts"
+    "api/**/*.test.ts",
+    "api/shared/testing.ts"
   ]
 }

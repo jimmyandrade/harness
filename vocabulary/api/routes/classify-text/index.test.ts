@@ -1,13 +1,12 @@
 import assert from "node:assert/strict"
 import { mkdtempSync, writeFileSync } from "node:fs"
-import type { AddressInfo } from "node:net"
 import { tmpdir } from "node:os"
 import { join } from "node:path"
 import test from "node:test"
 
 import { classifyText } from "./index.ts"
 import { load } from "../../shared/glossary.ts"
-import { createGlossaryServer } from "../../shared/server.ts"
+import { withServer } from "../../shared/testing.ts"
 
 const GLOSSARY = `{
   "açúcar": { "state": "allowed" },
@@ -89,11 +88,8 @@ test("POST classifies each word", async () => {
     join(root, "pt-BR.json"),
     '{ "baratinho": { "state": "forbidden", "alternative": "acessível" }, "casa": { "state": "allowed" } }\n',
   )
-  const server = createGlossaryServer(root)
-  await new Promise<void>((resolve) => server.listen(0, "127.0.0.1", resolve))
-  const port = (server.address() as AddressInfo).port
-  try {
-    const phrase = await fetch(`http://127.0.0.1:${port}/v1/classify-text`, {
+  await withServer(root, async (base) => {
+    const phrase = await fetch(`${base}/v1/classify-text`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ language: "pt-BR", text: "A casa, baratinho!" }),
@@ -106,15 +102,13 @@ test("POST classifies each word", async () => {
       ["baratinho", "forbidden"],
       ["!", "not_registered"],
     ])
-    const empty = await fetch(`http://127.0.0.1:${port}/v1/classify-text`, {
+    const empty = await fetch(`${base}/v1/classify-text`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ language: "pt-BR", text: "   " }),
     })
     assert.equal(empty.status, 400)
-  } finally {
-    await new Promise<void>((resolve, reject) => server.close((error) => (error ? reject(error) : resolve())))
-  }
+  })
 })
 
 test("each word of a case-sensitive term says whether its casing matches", () => {

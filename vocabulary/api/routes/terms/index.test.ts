@@ -1,12 +1,11 @@
 import assert from "node:assert/strict"
 import { mkdtempSync, readFileSync, writeFileSync } from "node:fs"
-import type { AddressInfo } from "node:net"
 import { tmpdir } from "node:os"
 import { join } from "node:path"
 import test from "node:test"
 
 import { load } from "../../shared/glossary.ts"
-import { createGlossaryServer } from "../../shared/server.ts"
+import { withServer } from "../../shared/testing.ts"
 
 const MARK = "!"
 const ELLIPSIS = "\u2026"
@@ -34,22 +33,15 @@ function situational(term: string, description: string, examples: string[] = [])
   }
 }
 
-async function withGlossary(initial: string, run: (port: number, root: string) => Promise<void>) {
+async function withGlossary(initial: string, run: (base: string, root: string) => Promise<void>) {
   const root = mkdtempSync(join(tmpdir(), "glossary-"))
   const file = join(root, "pt-BR.json")
   writeFileSync(file, initial)
-  const server = createGlossaryServer(root)
-  await new Promise<void>((resolve) => server.listen(0, "127.0.0.1", resolve))
-  const port = (server.address() as AddressInfo).port
-  try {
-    await run(port, root)
-  } finally {
-    await new Promise<void>((resolve, reject) => server.close((error) => (error ? reject(error) : resolve())))
-  }
+  await withServer(root, (base) => run(base, root))
 }
 
-function post(port: number, body: unknown) {
-  return fetch(`http://127.0.0.1:${port}/v1/terms`, {
+function post(base: string, body: unknown) {
+  return fetch(`${base}/v1/terms`, {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify(body),
@@ -57,8 +49,8 @@ function post(port: number, body: unknown) {
 }
 
 test("upsert inserts mixed terms and keeps a linked example that is sent in full", async () => {
-  await withGlossary("{}\n", async (port, root) => {
-    const response = await post(port, {
+  await withGlossary("{}\n", async (base, root) => {
+    const response = await post(base, {
       language: "pt-BR",
       mode: "upsert",
       terms: [
@@ -93,9 +85,9 @@ test("upsert inserts mixed terms and keeps a linked example that is sent in full
 
 test("insert leaves an existing term and update leaves a missing term", async () => {
   const initial = `{ ${JSON.stringify(MARK)}: { "state": "allowed", "description": "Ponto" } }\n`
-  await withGlossary(initial, async (port, root) => {
+  await withGlossary(initial, async (base, root) => {
     const file = join(root, "pt-BR.json")
-    const inserted = await post(port, {
+    const inserted = await post(base, {
       language: "pt-BR",
       mode: "insert",
       terms: [allowed(MARK, "outro"), situational(ELLIPSIS, "reticências")],
@@ -107,7 +99,7 @@ test("insert leaves an existing term and update leaves a missing term", async ()
     assert.deepEqual(insertedBody.skipped, [])
     assert.equal(load(readFileSync(file, "utf8")).find((entry) => entry.term === MARK)?.description, "Ponto")
 
-    const updated = await post(port, {
+    const updated = await post(base, {
       language: "pt-BR",
       mode: "update",
       terms: [allowed(MARK, "Ponto de exclamação"), situational(PHRASE, "convite")],
@@ -131,8 +123,8 @@ test("update keeps the stored spelling and replaces the previous state fields", 
     null,
     2,
   )
-  await withGlossary(`${initial}\n`, async (port, root) => {
-    const response = await post(port, {
+  await withGlossary(`${initial}\n`, async (base, root) => {
+    const response = await post(base, {
       language: "pt-BR",
       mode: "upsert",
       terms: [
@@ -162,9 +154,9 @@ const CART_BAD = "Não funciona como assunto de e-mail ou notificação: não cr
 const CART_GOOD = "O foco em look conecta moda, presença e construção de imagem melhor do que item, peça ou roupa isolada."
 
 test("a passive cart notice is a bad example and a look line can be a good one", async () => {
-  await withGlossary("{}\n", async (port, root) => {
+  await withGlossary("{}\n", async (base, root) => {
     const file = join(root, "pt-BR.json")
-    const stored = await post(port, {
+    const stored = await post(base, {
       language: "pt-BR",
       mode: "insert",
       terms: [
@@ -205,9 +197,9 @@ test("a passive cart notice is a bad example and a look line can be a good one",
 })
 
 test("a cliché stays forbidden and keeps the phrase to avoid", async () => {
-  await withGlossary("{}\n", async (port, root) => {
+  await withGlossary("{}\n", async (base, root) => {
     const file = join(root, "pt-BR.json")
-    const refused = await post(port, {
+    const refused = await post(base, {
       language: "pt-BR",
       mode: "insert",
       terms: [{ ...allowed("exclusivo", "intenção"), category: "cliche" }],
@@ -215,7 +207,7 @@ test("a cliché stays forbidden and keeps the phrase to avoid", async () => {
     assert.equal(refused.status, 400)
     assert.equal((await refused.json()).error, "A cliché is forbidden.")
     assert.equal(readFileSync(file, "utf8"), "{}\n")
-    const stored = await post(port, {
+    const stored = await post(base, {
       language: "pt-BR",
       mode: "insert",
       terms: [
@@ -241,9 +233,9 @@ test("a cliché stays forbidden and keeps the phrase to avoid", async () => {
 })
 
 test("related points at a registered term and a missing one is refused", async () => {
-  await withGlossary("{}\n", async (port, root) => {
+  await withGlossary("{}\n", async (base, root) => {
     const file = join(root, "pt-BR.json")
-    const linked = await post(port, {
+    const linked = await post(base, {
       language: "pt-BR",
       mode: "insert",
       terms: [
@@ -256,7 +248,7 @@ test("related points at a registered term and a missing one is refused", async (
     assert.deepEqual(entries.find((entry) => entry.term === "casa")?.related, ["casas"])
     assert.deepEqual(entries.find((entry) => entry.term === "casas")?.related, ["casa"])
     const before = readFileSync(file, "utf8")
-    const missing = await post(port, {
+    const missing = await post(base, {
       language: "pt-BR",
       mode: "upsert",
       terms: [{ ...allowed("moradia", "lar"), related: ["lares"] }],
@@ -268,8 +260,8 @@ test("related points at a registered term and a missing one is refused", async (
 })
 
 test("a new term is stored in lowercase", async () => {
-  await withGlossary("{}\n", async (port, root) => {
-    const response = await post(port, {
+  await withGlossary("{}\n", async (base, root) => {
+    const response = await post(base, {
       language: "pt-BR",
       mode: "insert",
       terms: [allowed("Casa", "lugar"), allowed("Moradias", "casas")],
@@ -289,9 +281,9 @@ test("a new term is stored in lowercase", async () => {
 
 test("a plural keeps its own row beside the singular", async () => {
   const initial = `${JSON.stringify({ casa: { state: "allowed", description: "lugar", examples: ["na casa"] }, casas: { state: "allowed" } }, null, 2)}\n`
-  await withGlossary(initial, async (port, root) => {
+  await withGlossary(initial, async (base, root) => {
     const file = join(root, "pt-BR.json")
-    const response = await post(port, {
+    const response = await post(base, {
       language: "pt-BR",
       mode: "upsert",
       terms: [allowed("casas", "moradias", ["várias"])],
@@ -305,9 +297,9 @@ test("a plural keeps its own row beside the singular", async () => {
 
 test("a forbidden term with a positive example is refused", async () => {
   const initial = "{}\n"
-  await withGlossary(initial, async (port, root) => {
+  await withGlossary(initial, async (base, root) => {
     const file = join(root, "pt-BR.json")
-    const response = await post(port, {
+    const response = await post(base, {
       language: "pt-BR",
       mode: "insert",
       terms: [{
@@ -329,9 +321,9 @@ test("a forbidden term with a positive example is refused", async () => {
 
 test("a term or an example with a real link is refused", async () => {
   const initial = "{}\n"
-  await withGlossary(initial, async (port, root) => {
+  await withGlossary(initial, async (base, root) => {
     const file = join(root, "pt-BR.json")
-    const response = await post(port, {
+    const response = await post(base, {
       language: "pt-BR",
       mode: "insert",
       terms: [allowed("tarefa", "pedido de trabalho", ["Veja a tarefa em https://example.com/tarefa"])],
@@ -343,8 +335,8 @@ test("a term or an example with a real link is refused", async () => {
 })
 
 test("a source with a real link is stored", async () => {
-  await withGlossary("{}\n", async (port, root) => {
-    const response = await post(port, {
+  await withGlossary("{}\n", async (base, root) => {
+    const response = await post(base, {
       language: "pt-BR",
       mode: "insert",
       terms: [{ ...allowed("tarefa", "pedido de trabalho", ["Veja a tarefa em [link da tarefa]"]), source: "https://example.com/origem" }],
@@ -357,9 +349,9 @@ test("a source with a real link is stored", async () => {
 
 test("an allowed term with a situation is refused", async () => {
   const initial = "{}\n"
-  await withGlossary(initial, async (port, root) => {
+  await withGlossary(initial, async (base, root) => {
     const file = join(root, "pt-BR.json")
-    const response = await post(port, {
+    const response = await post(base, {
       language: "pt-BR",
       mode: "insert",
       terms: [{ ...allowed("leve também", "convite"), when: "no imperativo do e-commerce" }],
@@ -372,16 +364,16 @@ test("an allowed term with a situation is refused", async () => {
 
 test("a failed batch leaves the file unchanged", async () => {
   const initial = "{}\n"
-  await withGlossary(initial, async (port, root) => {
+  await withGlossary(initial, async (base, root) => {
     const file = join(root, "pt-BR.json")
-    const category = await post(port, {
+    const category = await post(base, {
       language: "pt-BR",
       mode: "upsert",
       terms: [allowed(MARK, "Ponto"), { ...situational(ELLIPSIS, "reticências"), category: "pontuação" }],
     })
     assert.equal(category.status, 400)
     assert.equal(readFileSync(file, "utf8"), initial)
-    const duplicate = await post(port, {
+    const duplicate = await post(base, {
       language: "pt-BR",
       mode: "insert",
       terms: [allowed(MARK, "Ponto"), allowed(MARK, "outro")],
@@ -389,7 +381,7 @@ test("a failed batch leaves the file unchanged", async () => {
     assert.equal(duplicate.status, 400)
     assert.equal((await duplicate.json()).error, `${JSON.stringify(MARK)} is duplicated.`)
     assert.equal(readFileSync(file, "utf8"), initial)
-    const itself = await post(port, {
+    const itself = await post(base, {
       language: "pt-BR",
       mode: "upsert",
       terms: [situational(ELLIPSIS, "reticências", [ELLIPSIS])],
@@ -401,10 +393,10 @@ test("a failed batch leaves the file unchanged", async () => {
 
 test("update refuses a new full example that another row needs", async () => {
   const initial = `{ ${JSON.stringify(MARK)}: { "state": "allowed", "description": "Ponto" } }\n`
-  await withGlossary(initial, async (port, root) => {
+  await withGlossary(initial, async (base, root) => {
     const file = join(root, "pt-BR.json")
     const before = readFileSync(file, "utf8")
-    const response = await post(port, {
+    const response = await post(base, {
       language: "pt-BR",
       mode: "update",
       terms: [allowed(MARK, "Ponto de exclamação", [PHRASE]), situational(PHRASE, "convite")],
@@ -425,9 +417,9 @@ test("a plural and an accent are their own rows, and case stays on the existing 
     null,
     2,
   )
-  await withGlossary(`${initial}\n`, async (port, root) => {
+  await withGlossary(`${initial}\n`, async (base, root) => {
     const file = join(root, "pt-BR.json")
-    const response = await post(port, {
+    const response = await post(base, {
       language: "pt-BR",
       mode: "upsert",
       terms: [
@@ -457,8 +449,8 @@ test("a plural and an accent are their own rows, and case stays on the existing 
 })
 
 test("one batch takes two terms that differ only by an accent", async () => {
-  await withGlossary("{}\n", async (port, root) => {
-    const response = await post(port, {
+  await withGlossary("{}\n", async (base, root) => {
+    const response = await post(base, {
       language: "pt-BR",
       mode: "upsert",
       terms: [
@@ -476,22 +468,22 @@ test("one batch takes two terms that differ only by an accent", async () => {
 })
 
 test("tags are stored in lowercase, compared on upsert, and name the row an upsert writes", async () => {
-  await withGlossary("{}\n", async (port, root) => {
+  await withGlossary("{}\n", async (base, root) => {
     const file = join(root, "pt-BR.json")
     const chant = {
       ...situational("verão! (chegou!)", "grito do festival", ["Agora, faz barulho! VERÃO! (CHEGOU!)"]),
       when: "no palco do Festival de Verão",
       tags: ["Festival-De-Verao", " palco "],
     }
-    const inserted = await post(port, { language: "pt-BR", mode: "insert", terms: [chant] })
+    const inserted = await post(base, { language: "pt-BR", mode: "insert", terms: [chant] })
     assert.equal(inserted.status, 200)
     assert.deepEqual((await inserted.json()).inserted[0].tags, ["festival-de-verao", "palco"])
     const stored = JSON.parse(readFileSync(file, "utf8"))
     assert.deepEqual(stored["verão! (chegou!)"].tags, ["festival-de-verao", "palco"])
     assert.deepEqual(stored["Agora, faz barulho! VERÃO! (CHEGOU!)"].tags, ["festival-de-verao", "palco"])
-    const same = await post(port, { language: "pt-BR", mode: "upsert", terms: [chant] })
+    const same = await post(base, { language: "pt-BR", mode: "upsert", terms: [chant] })
     assert.deepEqual((await same.json()).unchanged, [{ term: "verão! (chegou!)", reason: "Already in the glossary." }])
-    const other = await post(port, { language: "pt-BR", mode: "upsert", terms: [{ ...chant, tags: ["festival-de-verao"] }] })
+    const other = await post(base, { language: "pt-BR", mode: "upsert", terms: [{ ...chant, tags: ["festival-de-verao"] }] })
     assert.deepEqual((await other.json()).inserted[0].tags, ["festival-de-verao"])
     const rows = JSON.parse(readFileSync(file, "utf8"))["verão! (chegou!)"]
     assert.deepEqual(rows.map((row: { tags: string[] }) => row.tags), [["festival-de-verao"], ["festival-de-verao", "palco"]])
@@ -500,12 +492,12 @@ test("tags are stored in lowercase, compared on upsert, and name the row an upse
 
 test("an update with other tags changes the tags of the only row, and tags sent empty drop them", async () => {
   const initial = `${JSON.stringify({ "bom dia": { state: "allowed_with_care", when: "na abertura", tags: ["canal-a"] } }, null, 2)}\n`
-  await withGlossary(initial, async (port, root) => {
+  await withGlossary(initial, async (base, root) => {
     const file = join(root, "pt-BR.json")
     const term = { state: "allowed_with_care", term: "bom dia", when: "na abertura" }
-    const retagged = await post(port, { language: "pt-BR", mode: "update", terms: [{ ...term, tags: ["canal-b"] }] })
+    const retagged = await post(base, { language: "pt-BR", mode: "update", terms: [{ ...term, tags: ["canal-b"] }] })
     assert.deepEqual((await retagged.json()).updated[0].tags, ["canal-b"])
-    const untagged = await post(port, { language: "pt-BR", mode: "update", terms: [{ ...term, tags: [] }] })
+    const untagged = await post(base, { language: "pt-BR", mode: "update", terms: [{ ...term, tags: [] }] })
     assert.equal((await untagged.json()).updated[0].tags, undefined)
     assert.equal(JSON.parse(readFileSync(file, "utf8"))["bom dia"].tags, undefined)
   })
@@ -513,9 +505,9 @@ test("an update with other tags changes the tags of the only row, and tags sent 
 
 test("a tag that is not kebab-case, repeats, or sits on a general rule is refused and leaves the file unchanged", async () => {
   const initial = "{}\n"
-  await withGlossary(initial, async (port, root) => {
+  await withGlossary(initial, async (base, root) => {
     const file = join(root, "pt-BR.json")
-    const spaced = await post(port, {
+    const spaced = await post(base, {
       language: "pt-BR",
       mode: "insert",
       terms: [{ ...situational("meu povo", "saudação"), tags: ["Maria Silva"] }],
@@ -525,14 +517,14 @@ test("a tag that is not kebab-case, repeats, or sits on a general rule is refuse
       (await spaced.json()).error,
       "A tag is a lowercase ASCII word or kebab-case phrase, such as festival-de-verao.",
     )
-    const repeated = await post(port, {
+    const repeated = await post(base, {
       language: "pt-BR",
       mode: "insert",
       terms: [{ ...situational("meu povo", "saudação"), tags: ["palco", "Palco"] }],
     })
     assert.equal(repeated.status, 400)
     assert.equal((await repeated.json()).error, '"palco" is duplicated.')
-    const general = await post(port, {
+    const general = await post(base, {
       language: "pt-BR",
       mode: "insert",
       terms: [{ ...allowed("!", "exclamação"), tags: ["palco"] }],
@@ -544,9 +536,9 @@ test("a tag that is not kebab-case, repeats, or sits on a general rule is refuse
 })
 
 test("a case-sensitive term keeps its casing as the key, and the flag is compared on upsert", async () => {
-  await withGlossary("{}\n", async (port, root) => {
+  await withGlossary("{}\n", async (base, root) => {
     const file = join(root, "pt-BR.json")
-    const inserted = await post(port, {
+    const inserted = await post(base, {
       language: "pt-BR",
       mode: "insert",
       terms: [{ ...allowed("iPhone", "celular"), case_sensitive: true }, allowed("Cueca", "peça")],
@@ -561,13 +553,13 @@ test("a case-sensitive term keeps its casing as the key, and the flag is compare
     assert.deepEqual(Object.keys(stored), ["cueca", "iPhone"])
     assert.equal(stored.iPhone.case_sensitive, true)
     assert.equal("case_sensitive" in stored.cueca, false)
-    const same = await post(port, {
+    const same = await post(base, {
       language: "pt-BR",
       mode: "upsert",
       terms: [{ ...allowed("iPhone", "celular"), case_sensitive: true }],
     })
     assert.equal((await same.json()).unchanged.length, 1)
-    const cleared = await post(port, { language: "pt-BR", mode: "upsert", terms: [{ ...allowed("iPhone", "celular"), case_sensitive: false }] })
+    const cleared = await post(base, { language: "pt-BR", mode: "upsert", terms: [{ ...allowed("iPhone", "celular"), case_sensitive: false }] })
     assert.equal((await cleared.json()).updated.length, 1)
     assert.equal("case_sensitive" in JSON.parse(readFileSync(file, "utf8")).iPhone, false)
   })
@@ -575,8 +567,8 @@ test("a case-sensitive term keeps its casing as the key, and the flag is compare
 
 test("marking a lowercase row case-sensitive renames its key and the links to it", async () => {
   const initial = `${JSON.stringify({ aifone: { state: "forbidden", alternative: "iphone" }, iphone: { state: "allowed" } }, null, 2)}\n`
-  await withGlossary(initial, async (port, root) => {
-    const response = await post(port, {
+  await withGlossary(initial, async (base, root) => {
+    const response = await post(base, {
       language: "pt-BR",
       mode: "update",
       terms: [{ ...allowed("iPhone", "peça da marca"), case_sensitive: true }],
@@ -591,8 +583,8 @@ test("marking a lowercase row case-sensitive renames its key and the links to it
 })
 
 test("case_sensitive is refused when it is not true or false", async () => {
-  await withGlossary("{}\n", async (port) => {
-    const response = await post(port, {
+  await withGlossary("{}\n", async (base) => {
+    const response = await post(base, {
       language: "pt-BR",
       mode: "insert",
       terms: [{ ...allowed("iPhone", "celular"), case_sensitive: "yes" }],
@@ -603,8 +595,8 @@ test("case_sensitive is refused when it is not true or false", async () => {
 })
 
 test("notes are stored and a lookup returns them", async () => {
-  await withGlossary("{}\n", async (port, root) => {
-    const response = await post(port, {
+  await withGlossary("{}\n", async (base, root) => {
+    const response = await post(base, {
       language: "pt-BR",
       mode: "insert",
       terms: [
@@ -621,7 +613,7 @@ test("notes are stored and a lookup returns them", async () => {
     assert.equal(response.status, 200)
     const stored = JSON.parse(readFileSync(join(root, "pt-BR.json"), "utf8"))
     assert.equal(stored[":prayge:"].notes, "O rascunho de 14/10 fechava com esse emoji e o post saiu com outro. Para camila: só em Slack animado.")
-    const lookup = await fetch(`http://127.0.0.1:${port}/v1/lookup`, {
+    const lookup = await fetch(`${base}/v1/lookup`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ language: "pt-BR", term: ":prayge:", tags: ["camila"] }),
@@ -633,19 +625,19 @@ test("notes are stored and a lookup returns them", async () => {
 })
 
 test("changed notes update the row and the same notes leave it unchanged", async () => {
-  await withGlossary("{}\n", async (port) => {
+  await withGlossary("{}\n", async (base) => {
     const term = (notes: string) => ({ state: "forbidden", term: "migo", description: "Tratamento no masculino", substitution: "migs", notes })
-    await post(port, { language: "pt-BR", mode: "upsert", terms: [term("Decidido em 2026-10-08.")] })
-    const same = await (await post(port, { language: "pt-BR", mode: "upsert", terms: [term("Decidido em 2026-10-08.")] })).json()
+    await post(base, { language: "pt-BR", mode: "upsert", terms: [term("Decidido em 2026-10-08.")] })
+    const same = await (await post(base, { language: "pt-BR", mode: "upsert", terms: [term("Decidido em 2026-10-08.")] })).json()
     assert.equal(same.unchanged.length, 1)
-    const changed = await (await post(port, { language: "pt-BR", mode: "upsert", terms: [term("Decidido em 2026-10-09.")] })).json()
+    const changed = await (await post(base, { language: "pt-BR", mode: "upsert", terms: [term("Decidido em 2026-10-09.")] })).json()
     assert.equal(changed.updated.length, 1)
   })
 })
 
 test("a row without notes stays without the field", async () => {
-  await withGlossary("{}\n", async (port, root) => {
-    await post(port, { language: "pt-BR", mode: "insert", terms: [allowed("oi", "saudação")] })
+  await withGlossary("{}\n", async (base, root) => {
+    await post(base, { language: "pt-BR", mode: "insert", terms: [allowed("oi", "saudação")] })
     assert.equal(JSON.parse(readFileSync(join(root, "pt-BR.json"), "utf8")).oi.notes, undefined)
   })
 })
@@ -656,14 +648,14 @@ test("a refused batch answers with every problem, and a dry run answers 200 and 
     allowed("casa", "lugar", ["casa"]),
     { ...allowed("lar", "lugar"), when: "em convite" },
   ]
-  await withGlossary(initial, async (port, root) => {
+  await withGlossary(initial, async (base, root) => {
     const file = join(root, "pt-BR.json")
-    const refused = await post(port, { language: "pt-BR", mode: "upsert", terms })
+    const refused = await post(base, { language: "pt-BR", mode: "upsert", terms })
     assert.equal(refused.status, 400)
     const body = await refused.json()
     assert.deepEqual(body.problems.map((problem: { term: string }) => problem.term), ["lar", "casa"])
     assert.match(body.error, /^2 problems\./)
-    const dry = await post(port, { language: "pt-BR", mode: "upsert", dry_run: true, terms })
+    const dry = await post(base, { language: "pt-BR", mode: "upsert", dry_run: true, terms })
     assert.equal(dry.status, 200)
     const report = await dry.json()
     assert.equal(report.dry_run, true)
@@ -674,8 +666,8 @@ test("a refused batch answers with every problem, and a dry run answers 200 and 
 
 test("a batch write keeps the $schema of the file", async () => {
   const schema = "https://raw.githubusercontent.com/jimmyandrade/harness/main/vocabulary/schemas/glossary-v1.schema.json"
-  await withGlossary(`{\n  "$schema": "${schema}"\n}\n`, async (port, root) => {
-    const response = await post(port, { language: "pt-BR", mode: "insert", terms: [allowed("casa", "lugar")] })
+  await withGlossary(`{\n  "$schema": "${schema}"\n}\n`, async (base, root) => {
+    const response = await post(base, { language: "pt-BR", mode: "insert", terms: [allowed("casa", "lugar")] })
     assert.equal(response.status, 200)
     const written = JSON.parse(readFileSync(join(root, "pt-BR.json"), "utf8")) as Record<string, unknown>
     assert.deepEqual(Object.keys(written), ["$schema", "casa"])
@@ -684,8 +676,8 @@ test("a batch write keeps the $schema of the file", async () => {
 
 test("a rejected example or an alternative with a real link is refused", async () => {
   const initial = "{}\n"
-  await withGlossary(initial, async (port, root) => {
-    const response = await post(port, {
+  await withGlossary(initial, async (base, root) => {
+    const response = await post(base, {
       language: "pt-BR",
       mode: "insert",
       terms: [{
