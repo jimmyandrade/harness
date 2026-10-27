@@ -3,7 +3,7 @@ name: registrar-evidencia-visual
 description: Registra o que a pessoa passa a ver quando um trabalho termina, no pull request e no card. Usada quando a entrega muda a tela, no Storybook, no ambiente local, na pré-produção ou na produção, mesmo sem dizer print. NÃO serve para mudança sem percepção visual, para medir performance, para ler texto de imagem nem para mandar a mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.4.0"
   related:
     - criar-pull-request
     - definir-issue-do-github
@@ -18,7 +18,7 @@ metadata:
 ```yaml
 "Confirmação antes de gravar": "sim"
 "Fuso da legenda": "America/Sao_Paulo"
-"Pasta das evidências": "evidencias-visuais"
+"Pasta das evidências": "tmp/evidencias-visuais"
 ```
 
 ## Instruções
@@ -65,11 +65,12 @@ Abra a story sem a barra do Storybook.
 Se a página disser que não há preview, espere o bundle e leia o texto de novo.
 Capture a largura do layout.
 Não fotografe só o painel visível.
-Guarde os arquivos em `Pasta das evidências`, dentro do repositório deste trabalho, numa subpasta deste trabalho.
+Use `Pasta das evidências` só quando o Git já ignora esse caminho.
+Se o Git não ignora, grave na pasta temporária do sistema, com a mesma subpasta do trabalho.
+Não crie uma pasta nova na raiz do repositório.
 O nome da subpasta é a chave do card ou o número do pull request.
 Sem os dois, use o dia e um nome curto do trabalho.
 Diga o caminho absoluto da subpasta.
-Não deixe arquivo fora desse repositório.
 Não faça commit da imagem.
 
 ### Passo 4
@@ -125,13 +126,13 @@ Se você publicar o print da story cuja data está anos à frente, o contador mo
 2. Deixe o print da data distante fora da pasta e fora do conjunto mostrado.
 3. Sem essa story, diga que a superfície ficou sem evidência.
 
-### Arquivo fora do repositório
+### Pasta que o Git pode levar
 
-Se você salvar o print na área de trabalho ou na pasta de imagens da pessoa, o conjunto se separa do trabalho.
+Se você criar uma pasta nova na raiz do repositório, o próximo commit pode levar as imagens.
 
-1. Guarde tudo em `Pasta das evidências`, dentro do repositório deste trabalho.
-2. Use uma subpasta por trabalho.
-3. Diga o caminho absoluto dessa subpasta.
+1. Use `Pasta das evidências` só quando o Git já ignora esse caminho.
+2. Se o Git não ignora, grave na pasta temporária do sistema.
+3. Não faça commit da imagem.
 
 ### Página inteira dentro do texto
 
@@ -171,7 +172,7 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### A pessoa de produto pediu o print e não tem acesso ao repositório
 
-A página, com o bloco novo no meio do resto da tela e o relógio travado em 1 dia, fica na subpasta do repositório deste trabalho. O card mostra a primeira tela e um link para a página inteira. O print só do componente, com o contador em dezenas de milhares de dias, fica fora do conjunto.
+A página, com o bloco novo no meio do resto da tela e o relógio travado em 1 dia, fica na pasta temporária que o Git já ignora, ou na pasta temporária do sistema. O card mostra a primeira tela e um link para a página inteira. O print só do componente, com o contador em dezenas de milhares de dias, fica fora do conjunto.
 
 ## Casos-limite
 
@@ -184,14 +185,14 @@ A página, com o bloco novo no meio do resto da tela e o relógio travado em 1 d
 - O repositório não tem pré-produção: não invente o endereço.
 - A story ainda mostra "No Preview": espere e leia o texto de novo.
 - A descrição do card não aceita imagem: o recorte vai num comentário e a página inteira continua como link.
-- Não há repositório aberto: não crie pasta na pasta da pessoa. Diga que a evidência não tem onde ficar.
+- O Git não ignora `Pasta das evidências`: grave na pasta temporária do sistema e não crie pasta nova na raiz.
 - Não há chave de card nem número de pull request: a subpasta leva o dia e um nome curto do trabalho.
 - A pessoa não confirma o conjunto: não grave no card nem no pull request.
 
 ## Pegadinhas
 
 - A story do componente parece a tela e esconde o que fica em volta.
-- A área de trabalho, ou a pasta de imagens da pessoa, parece um lugar à mão e separa o conjunto do repositório.
+- Uma pasta nova na raiz parece organizada e o próximo commit pode levar as imagens.
 - A página inteira dentro do texto parece completa e alonga o card.
 - Uma legenda não conserta o contador de dezenas de milhares de dias. A pessoa lê o número, não a legenda.
 - O iframe do Storybook responde que não há preview enquanto o bundle da preview ainda compila. O id da story pode estar certo.
