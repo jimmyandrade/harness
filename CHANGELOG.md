@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.16.4](https://github.com/jimmyandrade/harness/compare/v1.16.3...v1.16.4) (2026-10-27)
+
+
+### Bug Fixes
+
+* **limpar-copias-de-trabalho:** check sessions and remote pull requests before keeping a copy ([#552](https://github.com/jimmyandrade/harness/issues/552)) ([2d06dab](https://github.com/jimmyandrade/harness/commit/2d06dab83b42c9714fcbf058618e59693324fb95)), closes [#551](https://github.com/jimmyandrade/harness/issues/551)
+
 ## [1.16.3](https://github.com/jimmyandrade/harness/compare/v1.16.2...v1.16.3) (2026-10-27)
 
 
