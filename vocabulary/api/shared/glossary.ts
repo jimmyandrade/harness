@@ -54,7 +54,7 @@
  * can differ from the row in en.json.
  */
 
-import { existsSync, readFileSync, statSync, writeFileSync } from "node:fs"
+import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from "node:fs"
 import { dirname, resolve } from "node:path"
 
 import {
@@ -163,12 +163,32 @@ export function canonicalLanguage(tag: string): string {
   return canonical.join("-")
 }
 
-export function glossaryFile(directory: string, language: string): string {
-  const tag = canonicalLanguage(language)
+function glossaryPath(directory: string, tag: string): string {
   const root = resolve(directory)
   const path = resolve(root, `${tag}.json`)
-  if (dirname(path) !== root || !existsSync(path)) throw new InvalidGlossary("Unknown language.")
+  if (dirname(path) !== root) throw new InvalidGlossary("Unknown language.")
   return path
+}
+
+export function glossaryFile(directory: string, language: string): string {
+  const tag = canonicalLanguage(language)
+  const path = glossaryPath(directory, tag)
+  if (!existsSync(path)) throw new InvalidGlossary(`No glossary for ${tag} yet. Create it with init.`)
+  return path
+}
+
+/**
+ * Create the empty glossary of one language, and its directory when missing.
+ * An existing glossary stays as it is. A new language is a decision, so no
+ * write creates it on the way: a typo in the tag would start a glossary.
+ */
+export function initGlossary(directory: string, language: string): { language: string; created: boolean } {
+  const tag = canonicalLanguage(language)
+  const path = glossaryPath(directory, tag)
+  if (existsSync(path)) return { language: tag, created: false }
+  mkdirSync(dirname(path), { recursive: true })
+  writeFileSync(path, serialize([]), { encoding: "utf8", flag: "wx" })
+  return { language: tag, created: true }
 }
 
 export function load(text: string): Entry[] {

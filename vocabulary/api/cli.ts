@@ -34,6 +34,7 @@
  * Run: node api/cli.ts terms --language pt-BR --mode upsert --state allowed --term iPhone --case-sensitive --categories brand --description "..." --reason "..."
  * Run: node api/cli.ts terms --file lote.json --mode upsert
  * Run: node api/cli.ts terms --file lote.json --mode upsert --dry-run
+ * Run: node api/cli.ts init --language es
  * Run: node api/cli.ts migrate --language pt-BR --write
  */
 
@@ -42,7 +43,7 @@ import { fileURLToPath } from "node:url"
 
 import { existsPhrase } from "./routes/exists/index.ts"
 import { lookupTerm, lookupTerms } from "./routes/lookup/index.ts"
-import { Glossary, InvalidGlossary, migrate, writeBatch } from "./shared/glossary.ts"
+import { Glossary, InvalidGlossary, initGlossary, migrate, writeBatch } from "./shared/glossary.ts"
 import { parseBody } from "./shared/http.ts"
 import { readOptions, report } from "./shared/options.ts"
 import { existsRequest, lookupRequest, lookupTermsRequest } from "./shared/schema.ts"
@@ -131,6 +132,10 @@ export function run(argv: string[]): number {
       console.log(JSON.stringify(existsPhrase(new Glossary(glossary), body.language, body.text, body.tags)))
     } else if (command === "terms") {
       console.log(JSON.stringify(writeBatch(glossary, termsFrom(rest))))
+    } else if (command === "init") {
+      const flags = flagsFrom(rest, ["language"])
+      if (flags.language === undefined) throw new InvalidGlossary("Unknown language.")
+      console.log(JSON.stringify(initGlossary(glossary, String(flags.language))))
     } else if (command === "migrate") {
       const write = rest.includes("--write")
       const flags = flagsFrom(rest.filter((arg) => arg !== "--write"), ["language"])

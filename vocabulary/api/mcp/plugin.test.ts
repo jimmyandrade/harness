@@ -60,7 +60,7 @@ test("the launcher starts the server from a clean copy of the plugin", { timeout
     child.stdin.write(`${JSON.stringify(message)}\n`)
   }
   try {
-    assert.deepEqual(await listed, ["exists_in_text", "lookup_term", "lookup_terms", "migrate_glossary", "write_terms"])
+    assert.deepEqual(await listed, ["exists_in_text", "init_glossary", "lookup_term", "lookup_terms", "migrate_glossary", "write_terms"])
   } finally {
     child.kill()
   }

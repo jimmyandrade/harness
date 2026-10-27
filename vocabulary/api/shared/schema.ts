@@ -450,6 +450,10 @@ export const migrateRequest = z.object({
 })
 export type MigrateRequest = z.infer<typeof migrateRequest>
 
+export const initRequest = z.object({
+  language: prose("Unknown language."),
+})
+
 export const classificationSchema = z.object({
   from: z.literal("query"),
   language: z.string(),

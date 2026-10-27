@@ -100,5 +100,5 @@ None. Crowdin and Transifex are an export, not this file format.
 ## 11. Glossary / Acronyms
 
 - Glossary: the per-language list of a project's terms, each rated on five levels from forbidden to allowed.
-- MCP: Model Context Protocol, how an agent calls `lookup_term`, `lookup_terms`, `exists_in_text`, `write_terms`, and `migrate_glossary`.
+- MCP: Model Context Protocol, how an agent calls `lookup_term`, `lookup_terms`, `exists_in_text`, `write_terms`, `migrate_glossary`, and `init_glossary`.
 - ADR: Architecture Decision Record, in `docs/adr/`.
