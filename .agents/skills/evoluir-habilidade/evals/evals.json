@@ -1,4 +1,11 @@
 {
   "skill_name": "evoluir-habilidade",
-  "evals": []
+  "evals": [
+    {
+      "id": "abrir-pr-sem-perguntar",
+      "prompt": "/evoluir-habilidade corrija-se pra SEMPRE abrir o PR sem precisar perguntar se eu quero a lição em um commit, no mínimo já tinha que ter um PR em rascunho, quando eu chamar skills como /evoluir-habilidade . Respeitando o parâmetro se abre em rascunho ou não",
+      "expected_output": "A skill evoluir-habilidade muda no repositório de origem: um pedido de regra abre o pull request no mesmo turno, sem perguntar se a pessoa quer a lição em um commit. Com Criar pull request ao terminar em rascunho, o pull request sai em rascunho e a resposta traz o link.",
+      "files": []
+    }
+  ]
 }
