@@ -3,7 +3,7 @@ name: pedir-revisao-de-pr-no-slack
 description: Redige o pedido de revisão de um pull request para o canal do time no Slack e entrega o rascunho com o link da thread, usando enviar-mensagem-no-slack. Usada quando o PR está pronto e a organização pede revisão pelo Slack, ou quando a pessoa pede apoio para revisar. Não serve para revisar o PR nem para outra mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.3.1"
+  version: "0.3.2"
   related:
     - criar-pull-request
     - enviar-mensagem-no-slack
@@ -45,6 +45,8 @@ Ache o card do PR pela branch, pelo título e pela descrição. Com `Exigir card
 ### Passo 3
 
 Confira o canal antes de abrir um post novo. Se já existe uma thread sobre o mesmo problema ou o mesmo PR, o pedido vai nela. Se o PR já foi revisado e os comentários foram ajustados, é uma nova rodada, em resposta na thread, como em `Post novo em canal` de `enviar-mensagem-no-slack`. Pedidos de PRs que se relacionam são mensagens separadas, cada uma com o link do outro no corpo.
+
+Um follow-up de um pedido sem resposta, em post novo ou na thread, repete o que o PR faz em uma frase e só depois acrescenta o que mudou, como o prazo ou o estado dos checks. O prazo não substitui o contexto: quem lê o follow-up pode não ter visto o pedido.
 
 ### Passo 4
 
@@ -113,6 +115,7 @@ O PR 121 já tem uma thread no canal. Redigi uma nova rodada em resposta nela, c
 - Um pedido por mensagem direta parece resolvido, mas ninguém mais vê. Oriente a usar o canal.
 - Um PR sem o rótulo de pronto parece pronto pelo estado. Confira o rótulo quando o projeto o usa.
 - A thread de um PR já revisado parece pedir um post novo. É uma nova rodada na thread.
+- Um follow-up parece só um lembrete do prazo. Ele continua dizendo o que o PR faz.
 
 ## Scripts disponíveis
 
