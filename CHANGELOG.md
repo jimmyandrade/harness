@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.27.1](https://github.com/jimmyandrade/harness/compare/v1.27.0...v1.27.1) (2026-10-28)
+
+
+### Bug Fixes
+
+* **preparar-tarefa-do-pull-request:** read the card model before writing or editing any card ([#618](https://github.com/jimmyandrade/harness/issues/618)) ([65e35ec](https://github.com/jimmyandrade/harness/commit/65e35ec0c06371a60359db9c7b759ba57e6179e7))
+
 ## [1.27.0](https://github.com/jimmyandrade/harness/compare/v1.26.0...v1.27.0) (2026-10-28)
 
 
