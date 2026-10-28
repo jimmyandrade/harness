@@ -3,7 +3,7 @@ name: escrever-codigo
 description: Aplica as preferências de código da pessoa antes de escrever ou alterar código, como comentários, estilo inline e o que fazer antes de criar um componente. Usada quando uma mudança vai escrever ou alterar código, inclusive quando o pedido é implementar uma issue. Não serve para testes, para commit nem para decidir a arquitetura. O pedido de implementar só termina quando a resposta tem o link do pull request.
 metadata:
   author: jimmyandrade
-  version: "0.8.0"
+  version: "0.8.1"
   related:
     - criar-commit
     - criar-pull-request
@@ -26,7 +26,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Estilo inline": ""
 # `Antes de criar um componente` lista o que ler e quais habilidades do repositório chamar, em ordem.
 "Antes de criar um componente": ""
-# `Cópia de trabalho` é `Global` e cada skill pode sobrescrevê-lo. `workspace` cria uma cópia independente, exclusiva da tarefa, e muda a raiz para ela. `worktree` cria um git worktree novo da `main`. Vazio trabalha onde a pessoa já está.
+# `Cópia de trabalho` é `Global` e cada skill pode sobrescrevê-lo. `worktree` é o ideal: um git worktree novo da `main`. `workspace` é a exceção, uma cópia independente quando o `worktree` falha e usar o clone não é seguro. Vazio trabalha onde a pessoa já está.
 "Cópia de trabalho": "worktree"
 "Modo de aprendizado": "perguntar"
 ```
@@ -34,7 +34,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ### Passo 1
 
-Siga `Cópia de trabalho` antes de escrever. Com `workspace`, crie uma cópia independente do repositório, exclusiva desta tarefa, e mude a raiz de trabalho para ela. Com `worktree`, crie um git worktree novo desta tarefa. Não use o clone aberto da pessoa nem uma cópia que outra tarefa já ocupa. Não apague a cópia no fim: o trabalho continua nela. Com valor vazio, escreva onde a pessoa já está.
+Siga `Cópia de trabalho` antes de escrever. Com `worktree`, o ideal, crie um git worktree novo desta tarefa. Só use `workspace`, uma cópia independente do repositório, exclusiva desta tarefa e com a raiz de trabalho nela, quando o `worktree` não funcionar e escrever no clone não for seguro. Não use o clone aberto da pessoa nem uma cópia que outra tarefa já ocupa. Não apague a cópia no fim: o trabalho continua nela. Com valor vazio, escreva onde a pessoa já está.
 
 Chame `levantar-ambiente-do-repositorio` para achar a convenção de código e as habilidades do repositório, nas instruções do projeto e nas habilidades do próprio repositório. Ela vale mais que qualquer preferência desta habilidade. Diga à pessoa quando uma preferência dela contraria o repositório e siga o repositório. Se a demanda é uma issue do rastreador, siga `preparar-tarefa-do-pull-request` para conferir se a descrição está no modelo do tipo antes de escrever. Não escreva código enquanto a descrição estiver fora do modelo. Antes de escrever o código, siga `escrever-teste`: com TDD, o padrão dela, o teste que falha vem primeiro, e o código é o que o faz passar.
 

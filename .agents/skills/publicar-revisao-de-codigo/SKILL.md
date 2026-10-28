@@ -3,7 +3,7 @@ name: publicar-revisao-de-codigo
 description: Revisa um pull request e publica a revisão numa única review, com os comentários inline, no idioma de quem recebe e no tom do projeto. Usada quando a pessoa pede uma revisão ou outra habilidade precisa publicar uma. Não serve para tratar os comentários que você recebeu no seu PR.
 metadata:
   author: jimmyandrade
-  version: "0.18.0"
+  version: "0.18.1"
   aliases:
     - post-code-review
   related:
@@ -79,7 +79,7 @@ Não revise com um check pendente: diga qual e espere terminar. Um check que fal
 
 ### Passo 3
 
-Siga `Cópia de trabalho`. Com `workspace`, crie uma cópia independente em `Pasta das cópias separadas` e mude a raiz para ela. Com `worktree`, abra um worktree novo em `Pasta das cópias separadas`, a partir do PR, antes de ler o código, sem o clone da pessoa e sem reutilizar outra tarefa. Com valor vazio, pule a cópia se a revisão só lê o diff e, para executar código:
+Siga `Cópia de trabalho`. Com `worktree`, o ideal, abra um worktree novo em `Pasta das cópias separadas`, a partir do PR, antes de ler o código, sem o clone da pessoa e sem reutilizar outra tarefa. Use `workspace`, cópia independente com a raiz nela, só se o `worktree` falhar e o clone não for seguro. Com valor vazio, pule a cópia se a revisão só lê o diff e, para executar código:
 
 1. Procure uma trava do repositório: uma revisão em andamento em outra execução, que é a cópia separada dele em `Pasta das cópias separadas`. Se existir, não comece: diga qual PR e há quanto tempo. Uma trava mais velha que `Idade máxima da trava` não se apaga em silêncio: avise e pergunte.
 2. Crie a cópia separada a partir do PR antes de tocar em qualquer arquivo. A cópia é a trava.
