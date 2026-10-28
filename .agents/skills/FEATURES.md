@@ -523,6 +523,8 @@ How these skills relate is in `README.md`, in this folder.
   - Reads `Repositório` from the project instructions or the `origin` remote, and `Idioma da issue`, declared in `Global` and overridden per project
   - Searches open and closed issues before opening one, and stops when one already covers the demand
   - Writes a Conventional Commits title whose type comes from the effect of the delivery, with the description and the body in `Idioma da issue`
+  - Reads the output template before writing or editing any issue, including one that comes from a finding in the middle of other work, and follows its sections in order
+  - Uses the language the repository documents or uses in its recent issues when it differs from `Idioma da issue`, and says which language it used
   - Writes the problem with the real case, the proposal, and a verifiable done criterion
   - Translates an issue in another language without losing links or references
   - Marks a dependency in GitHub Relationships: blocked by, blocking, relates to, or parent. A comment that only says the dependency does not count
