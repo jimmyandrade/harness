@@ -78,6 +78,7 @@ flowchart LR
     liberar_espaco_em_disco["liberar-espaco-em-disco"]
     limpar_copias_de_trabalho["limpar-copias-de-trabalho"]
     medir_habilidade["medir-habilidade"]
+    mesclar_pull_request["mesclar-pull-request"]
     mesclar_registro["mesclar-registro"]
     organizar_emails["organizar-emails"]
     organizar_ponto_de_contato["organizar-ponto-de-contato"]
@@ -128,6 +129,7 @@ flowchart LR
   atender_revisao_de_pull_request --> fatiar_pull_request
   atender_revisao_de_pull_request --> levantar_ambiente_do_repositorio
   atender_revisao_de_pull_request --> levantar_contexto_do_pull_request
+  atender_revisao_de_pull_request --> mesclar_pull_request
   atender_revisao_de_pull_request --> preparar_tarefa_do_pull_request
   atender_revisao_de_pull_request --> priorizar_itens
   atender_revisao_de_pull_request --> publicar_resposta_de_revisao
@@ -140,6 +142,7 @@ flowchart LR
   avaliar_atualizacoes_de_dependencia --> criar_commit
   avaliar_atualizacoes_de_dependencia --> criar_pull_request
   avaliar_atualizacoes_de_dependencia --> evoluir_habilidade
+  avaliar_atualizacoes_de_dependencia --> mesclar_pull_request
   classificar_estado_do_termo --> definir_vocabulario
   classificar_estado_do_termo --> gravar_termos_no_vocabulario
   classificar_estado_do_termo --> validar_plano_de_vocabulario
@@ -158,6 +161,7 @@ flowchart LR
   criar_commit -.-> criar_pull_request
   criar_commit -.-> evoluir_habilidade
   criar_commit -.-> fatiar_pull_request
+  criar_commit -.-> mesclar_pull_request
   criar_commit -.-> sincronizar_status_da_tarefa
   criar_habilidade --> criar_commit
   criar_habilidade --> criar_pull_request
@@ -167,10 +171,10 @@ flowchart LR
   criar_oportunidade --> definir_grupo_de_oportunidades
   criar_oportunidade --> procurar_oportunidade
   criar_pull_request --> atualizar_branch_do_pull_request
-  criar_pull_request --> comunicar_novidade_do_produto
   criar_pull_request --> criar_commit
   criar_pull_request --> evoluir_habilidade
   criar_pull_request --> fatiar_pull_request
+  criar_pull_request --> mesclar_pull_request
   criar_pull_request --> registrar_evidencia_visual
   criar_pull_request --> sincronizar_status_da_tarefa
   definir_agenda --> definir_agenda_de_popstar
@@ -393,6 +397,13 @@ flowchart LR
   limpar_copias_de_trabalho --> evoluir_habilidade
   limpar_copias_de_trabalho --> liberar_espaco_em_disco
   medir_habilidade --> evoluir_habilidade
+  mesclar_pull_request --> atender_revisao_de_pull_request
+  mesclar_pull_request --> atualizar_branch_do_pull_request
+  mesclar_pull_request --> comunicar_novidade_do_produto
+  mesclar_pull_request --> criar_pull_request
+  mesclar_pull_request --> evoluir_habilidade
+  mesclar_pull_request --> limpar_copias_de_trabalho
+  mesclar_pull_request --> sincronizar_status_da_tarefa
   mesclar_registro --> definir_empresa
   mesclar_registro --> definir_grafia
   mesclar_registro --> definir_perfil_social

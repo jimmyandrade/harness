@@ -185,32 +185,27 @@ How these skills relate is in `README.md`, in this folder.
 
 ### criar-pull-request
 - **Stability**: experimental
-- **Description**: Open, update, and merge a pull request without pushing to the base branch
+- **Description**: Open and update a pull request without pushing to the base branch, and hand the merge to mesclar-pull-request
 - **Properties**:
   - Before creating the branch, checks that the demand has a task in the tracker of the project, and suggests creating it first when it has none. The task key goes in the branch name and the pull request title as the repository convention says
   - Skill at `.agents/skills/criar-pull-request/`
-  - Reads the repository, base branch, merge method, PR language, test and build commands, and push timing from the project instructions
+  - Reads the repository, base branch, PR language, test and build commands, and push timing from the project instructions
   - Follows the `CONTRIBUTING.md` and `AGENTS.md` of the repository for branch, title, description, and checks, ahead of the personal preference
   - Searches the new and changed files and the pull request text for each term of `Termos que não podem aparecer` before opening, and sends a hit back for a fix
   - Opens a pull request only from a `type/short-description` branch, and renames a branch a tool created with another prefix before the push. A rename after the pull request opens closes it, so a new pull request replaces it
   - Follows the pull request template of the repository when there is one
   - After the push, once, compares the title and the description with the code that went up, and updates whichever no longer says what the branch does, before answering. Several commits in the same push are one check. Another skill that pushed does the same check, still once
-  - Before a merge, hands pending review comments from people or bots to whoever handles the review, in a terminal, and holds the merge while a thread waits for the person
-  - `Exigir CI verde`, on by default, holds the merge while a check fails or is pending; off, it merges and reports the checks that did not pass
   - Without a terminal, opens the pull request through the GitHub integration, gives the link, and stops; the CI checks of the pull request do the testing
-  - `Exigir aprovação de outra pessoa` is `nunca`, `só sem terminal`, the default, or `sempre`. It holds the merge until another person approves; a green check or owning the repository does not replace that approval. Without a terminal, a merge never happens in the request that opened the pull request
-  - After a merge, checks the sync when the project syncs the repository with another tool, such as the skill pages in Notion
   - `Criar pull request ao terminar` is `rascunho` by default: the code change pushes the branch and opens a draft pull request, and the reply names the branch, says whether it is on GitHub, and includes the link. `sim` opens a ready pull request. `não` waits for an explicit publish request. A draft does not request review. Merging still needs an explicit request
   - `Fatiar por subtarefa` is `não` by default: commits of the same theme stay on the open pull request for that theme. `sim` opens one pull request per subtask. Stacking is for a theme that depends on a pull request still outside the base
   - When the branch already has a pull request or is behind the base branch, follows `atualizar-branch-do-pull-request` before the push
   - The label follows the commit type, not the file extension. `fix` uses the bug label. `docs` uses the documentation label. A Markdown file that corrects an error gets the bug label
   - Writes each step sentence on its own line, and keeps a command in Scripts disponíveis
   - At the end, follows `sincronizar-status-da-tarefa`
+  - A merge request goes to mesclar-pull-request once the pull request is open
 - **Test Criteria**:
   - [ ] A request to push to the base branch opens a pull request instead
   - [ ] A `claude/…` branch is renamed to `type/…` before its pull request opens
-  - [ ] A merge request on a pull request with an unresolved thread handles the review comments first
-  - [ ] A merge request with a failing check stops and names the check while `Exigir CI verde` is on
 
 ### definir-agenda
 - **Stability**: experimental
@@ -1120,6 +1115,23 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses Notion, opening the repository from Notion, testing whether the skill met the case, evolving the skill, and writing the eval
   - [x] A limit missing from the project comes from the harness that ships the skill, and a limit in the project wins
+
+### mesclar-pull-request
+- **Stability**: experimental
+- **Description**: Merge an open pull request and do what comes after the merge, also when the person says they merged
+- **Properties**:
+  - Lives at `.agents/skills/mesclar-pull-request/SKILL.md`
+  - Merges only on an explicit request, and never in the request that opened the pull request without a terminal
+  - `Exigir aprovação de outra pessoa` is `nunca`, `só sem terminal`, the default, or `sempre`. It holds the merge until another person approves; a green check or owning the repository does not replace that approval
+  - Hands pending review comments from people or bots to atender-revisao-de-pull-request, and holds the merge while a thread waits for the person
+  - `Exigir CI verde`, on by default, holds the merge while a check fails or is pending; off, it merges and reports the checks that did not pass
+  - Merges with `Tipo de merge` and deletes the branch. When the automatic mode denies the merge, it hands over the command and stops
+  - After the merge, or the person's notice of it, confirms MERGED and the hash and, in the same reply, syncs every linked task through sincronizar-status-da-tarefa, checks the sync with another tool, announces through comunicar-novidade-do-produto when `Comunicar novidade após o merge` is on, and cleans the working copy through limpar-copias-de-trabalho
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [ ] A merge request on a pull request with an unresolved thread handles the review comments first
+  - [ ] A merge request with a failing check stops and names the check while `Exigir CI verde` is on
+  - [ ] A notice that a pull request was merged moves the linked task to its merged status in the same reply
 
 ### mesclar-registro
 - **Stability**: experimental
