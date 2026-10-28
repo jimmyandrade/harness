@@ -3,7 +3,7 @@ name: atualizar-branch-do-pull-request
 description: Use essa habilidade sempre que uma branch com pull request estiver atrás da base, tiver conflito ou precisar de rebase, mesmo sem dizer rebase. NÃO use para abrir o PR, fazer o primeiro push nem mesclar (use criar-pull-request).
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.2.1"
   related:
     - criar-pull-request
     - atender-revisao-de-pull-request
@@ -19,7 +19,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 ```yaml
 "Repositório": ""
 "Branch base": "main"
-# `Cópia de trabalho` é `worktree` ou vazio. `worktree` trabalha num git worktree novo a partir da `main`, nunca no clone da pessoa. Vazio trabalha onde a pessoa já está.
+# `Cópia de trabalho` é `Global` e cada skill pode sobrescrevê-lo. `worktree` trabalha num git worktree novo da `main`, nunca no clone da pessoa. Vazio trabalha onde a pessoa já está.
 "Cópia de trabalho": "worktree"
 "Modo de aprendizado": "perguntar"
 ```

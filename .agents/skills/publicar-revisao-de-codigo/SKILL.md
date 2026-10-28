@@ -3,7 +3,7 @@ name: publicar-revisao-de-codigo
 description: Revisa um pull request e publica a revisão numa única review, com os comentários inline, no idioma de quem recebe e no tom do projeto. Usada quando a pessoa pede uma revisão ou outra habilidade precisa publicar uma. Não serve para tratar os comentários que você recebeu no seu PR.
 metadata:
   author: jimmyandrade
-  version: "0.17.0"
+  version: "0.17.1"
   aliases:
     - post-code-review
   related:
@@ -57,8 +57,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Publicar em execução agendada": "não"
 # `Pasta das cópias separadas` diz onde criar a cópia de trabalho de cada repositório, e vazio usa a pasta temporária do sistema, com uma subpasta por repositório.
 "Pasta das cópias separadas": ""
-# `Cópia de trabalho` é `worktree` ou vazio.
-"Cópia de trabalho": ""
+# `Cópia de trabalho` é `Global`, mas esta skill pode sobrescrevê-lo.
+"Cópia de trabalho": "worktree"
 "Idade máxima da trava": "2 horas"
 # `Comentário de início da revisão` e `Etiqueta de revisão em andamento` avisam quem acompanha o PR de que a revisão começou: vazios, a habilidade não posta nem etiqueta nada.
 "Comentário de início da revisão": ""
@@ -277,7 +277,6 @@ Rodei a revisão e achei bloqueio. Não aprovei. Avisei que ainda não dá para 
 - Execução agendada: com `Publicar em execução agendada` em `não`, deixe o texto e o link no resumo, sem publicar. Em `sim`, publique e diga no resumo.
 - O contexto veio de conversa privada: use só para calibrar o que você pergunta, sem citar.
 - Um check está pendente: não revise, diga qual e espere.
-- `Cópia de trabalho` vazio e a revisão só lê o diff: pule a cópia.
 - Existe uma trava antiga do repositório: avise e pergunte antes de apagar.
 
 ## Pegadinhas

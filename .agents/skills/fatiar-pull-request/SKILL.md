@@ -3,7 +3,7 @@ name: fatiar-pull-request
 description: Corta a demanda em um rascunho por pergunta de revisão e empilha esses rascunhos. Usada quando a mesma demanda junta a chave, o componente e o lugar em que ele aparece. NÃO serve para commits da mesma pergunta nem para mesclar.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.4.1"
   related:
     - criar-pull-request
     - criar-commit
@@ -20,7 +20,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 ```yaml
 # `Fatiar por subtarefa`: `não` junta só a mesma pergunta de revisão. `sim` abre um pull request por subtarefa, e dentro dela vale o mesmo corte.
 "Fatiar por subtarefa": "não"
-# `Cópia de trabalho` é `worktree` ou vazio. `worktree` trabalha num git worktree novo a partir da `main`, nunca no clone da pessoa. Vazio trabalha onde a pessoa já está.
+# `Cópia de trabalho` é `Global` e cada skill pode sobrescrevê-lo. `worktree` trabalha num git worktree novo da `main`, nunca no clone da pessoa. Vazio trabalha onde a pessoa já está.
 "Cópia de trabalho": "worktree"
 "Modo de aprendizado": "perguntar"
 ```

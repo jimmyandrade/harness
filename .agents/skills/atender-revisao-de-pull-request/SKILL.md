@@ -3,7 +3,7 @@ name: atender-revisao-de-pull-request
 description: Atende a revisão recebida num pull request, de pessoa ou de bot. Lê os comentários abertos, classifica cada sugestão, aplica o que é seguro e pede a resposta a `publicar-resposta-de-revisao`. Sem PR informado, lista os seus que precisam de atenção. Não serve para revisar o PR de outra pessoa nem para abrir o PR.
 metadata:
   author: jimmyandrade
-  version: "0.25.0"
+  version: "0.25.1"
   aliases:
     - resolver-comentarios-de-revisao
     - apply-pr-review
@@ -45,7 +45,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 # `Idioma do relatório` e `Agrupar o relatório por prioridade` mandam no relatório final.
 "Agrupar o relatório por prioridade": "não"
 "Recriar PR aberto por agente de código": "não"
-# `Cópia de trabalho` é `worktree` ou vazio. `worktree` trabalha num git worktree novo a partir da `main`, nunca no clone da pessoa. Vazio trabalha onde a pessoa já está.
+# `Cópia de trabalho` é `Global` e cada skill pode sobrescrevê-lo. `worktree` trabalha num git worktree novo da `main`, nunca no clone da pessoa. Vazio trabalha onde a pessoa já está.
 "Cópia de trabalho": "worktree"
 "Modo de aprendizado": "perguntar"
 ```
