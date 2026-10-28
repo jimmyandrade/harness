@@ -3,7 +3,7 @@ name: registrar-evidencia-visual
 description: Registra o que a pessoa passa a ver quando um trabalho termina, no pull request e no card. Usada quando a entrega muda a tela, no Storybook, no ambiente local, na pré-produção ou na produção, mesmo sem dizer print. NÃO serve para mudança sem percepção visual, para medir performance, para ler texto de imagem nem para mandar a mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.5.1"
+  version: "0.6.0"
   related:
     - criar-pull-request
 ---
@@ -33,7 +33,7 @@ Grave um vídeo do carregamento ou uma tabela que compare os tempos.
 
 ### Passo 2
 
-Liste só a superfície que este trabalho realmente tem.
+Liste só a superfície que este trabalho realmente tem, e cada cenário que uma pessoa pediu ou prometeu mostrar num comentário do PR: um estado como hover ou foco, uma variante como com e sem link, um tema. Cada cenário é uma captura própria, legendada com o que ele prova. Um comentário que promete a evidência, como "vou deixar uma evidência visual", chama esta habilidade, e a resposta na thread leva o link para ela.
 A ordem é o ambiente local, o Storybook, a pré-produção e a produção.
 A pré-produção só entra se o repositório ou a pessoa já tiver o endereço.
 A produção só entra se a mudança já estiver no ar e a página tiver sido aberta.

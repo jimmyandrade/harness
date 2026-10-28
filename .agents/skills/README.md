@@ -127,9 +127,11 @@ flowchart LR
   atender_revisao_de_pull_request --> fatiar_pull_request
   atender_revisao_de_pull_request --> levantar_ambiente_do_repositorio
   atender_revisao_de_pull_request --> levantar_contexto_do_pull_request
+  atender_revisao_de_pull_request --> preparar_tarefa_do_pull_request
   atender_revisao_de_pull_request --> priorizar_itens
   atender_revisao_de_pull_request --> publicar_resposta_de_revisao
   atender_revisao_de_pull_request --> publicar_revisao_de_codigo
+  atender_revisao_de_pull_request --> registrar_evidencia_visual
   atualizar_branch_do_pull_request --> atender_revisao_de_pull_request
   atualizar_branch_do_pull_request --> criar_pull_request
   atualizar_branch_do_pull_request --> evoluir_habilidade

@@ -3,7 +3,7 @@ name: publicar-revisao-de-codigo
 description: Revisa um pull request e publica a revisão numa única review, com os comentários inline, no idioma de quem recebe e no tom do projeto. Usada quando a pessoa pede uma revisão ou outra habilidade precisa publicar uma. Não serve para tratar os comentários que você recebeu no seu PR.
 metadata:
   author: jimmyandrade
-  version: "0.18.2"
+  version: "0.19.0"
   aliases:
     - post-code-review
   related:
@@ -75,7 +75,7 @@ Peça o número ou o link do pull request. Confira o estado dele agora, mesmo qu
 
 Chame `levantar-contexto-do-pull-request` e use a ficha dele: convenções, comentários existentes, card e conversas, propósito e trabalho parecido. Não refaça a leitura. Quando a ficha traz o refinamento técnico, confronte o PR com o que ficou decidido e em aberto: uma decisão que o PR contraria, ou uma dúvida em aberto que ele resolve sem discutir, vira ponto da revisão, em forma de pergunta.
 
-Não revise com um check pendente: diga qual e espere terminar. Um check que falhou não impede a revisão, mas leia o registro dele antes de perguntar sobre ele.
+Não revise com um check pendente: diga qual e espere terminar. Um check que falhou não impede a revisão, mas leia o registro dele antes de perguntar.
 
 ### Passo 3
 
@@ -91,7 +91,7 @@ Com `Comentário de início da revisão` preenchido, poste esse comentário no P
 
 ### Passo 5
 
-Rode a `code-review` do Claude, com o mesmo alvo e o mesmo nível de esforço recebidos, passando a ficha como contexto: convenções, o propósito, o que já foi comentado. Não reimplemente a análise. A categoria e a confiança que ela devolve são dados de trabalho, nunca texto publicado.
+Rode a `code-review` do Claude, com o mesmo alvo e o mesmo nível de esforço recebidos, passando a ficha como contexto: convenções, o propósito, o que já foi comentado. Não reimplemente a análise. A categoria e a confiança que ela devolve são dados de trabalho, nunca texto publicado. Leia também `references/lente-de-revisao.md`.
 
 Ajuste o esforço ao risco do PR: baixo para documentação e renomeação, alto para o que mexe em pagamento, segurança, dados ou integração. A `code-review` nunca é pulada, nem em diff pequeno.
 
@@ -284,7 +284,7 @@ Rodei a revisão e achei bloqueio. Não aprovei. Avisei que ainda não dá para 
 - A `code-review` devolve categoria e confiança. Ambas são dado de trabalho, nunca texto.
 - Aprovação sem texto não conta como o que a pessoa escreveu revisando, ao levantar o idioma.
 - Um comentário que toca o mesmo trecho mas aponta outro problema não é um achado repetido.
-- O primeiro nome parece marcar a pessoa. Só `@` mais o login do GitHub avisa. Um corpo que só descreve o PR não é a aprovação sem achado. PR aberto por bot segue `Voz em PR aberto por bot` e não leva `@`.
+- O primeiro nome parece marcar a pessoa. Só `@` mais o login do GitHub avisa. Um corpo que só descreve o PR não é a aprovação sem achado.
 - Pedir para aprovar parece dispensar a revisão. Sem a revisão, não há aprovação.
 - Feedback que muda o texto já publicado atualiza comentários e respostas sem perguntar, mesmo com `Ler o texto antes de publicar` em `sim`.
 - Uma review sem comentários inline não cobre um ponto de código: ele precisa de uma linha.

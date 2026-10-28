@@ -3,7 +3,7 @@ name: atender-revisao-de-pull-request
 description: Atende a revisão recebida num pull request, de pessoa ou de bot. Lê os comentários abertos, classifica cada sugestão, aplica o que é seguro e pede a resposta a `publicar-resposta-de-revisao`. Sem PR informado, lista os seus que precisam de atenção. Não serve para revisar o PR de outra pessoa nem para abrir o PR.
 metadata:
   author: jimmyandrade
-  version: "0.25.3"
+  version: "0.26.0"
   aliases:
     - resolver-comentarios-de-revisao
     - apply-pr-review
@@ -19,6 +19,8 @@ metadata:
     - priorizar-itens
     - publicar-resposta-de-revisao
     - publicar-revisao-de-codigo
+    - preparar-tarefa-do-pull-request
+    - registrar-evidencia-visual
 ---
 
 # Atender revisão de pull request
@@ -71,6 +73,9 @@ Decida cada comentário válido pelo que ele aponta. O bot vê só o diff. Use a
 - **Muda comportamento:** o que a `Régua de mudança de comportamento` aponta, ou, sem régua, qualquer mudança de resultado, de borda, de validação ou de efeito. Com `Aprovação para mudar comportamento` em `pedir`, não aplique sem a aprovação da pessoa: mostre o que muda, o risco e a recomendação.
 - **Discordância:** a sugestão parece errada, contradiz a convenção do repositório ou quebra o escopo do PR. Não aplique. Responda em forma de pergunta, com o motivo.
 - **Fora de escopo:** boa ideia que não é deste PR. Não aplique e proponha registrá-la à parte.
+- **Promessa do autor:** o comentário do próprio autor, num self-review ou numa resposta, diz que vai deixar uma evidência visual, testar no navegador ou atualizar a descrição. É tarefa sua, não da pessoa: gere a evidência com `registrar-evidencia-visual` para aquele cenário, inclusive hover, foco e variantes como com e sem link, peça o sim, grave na descrição do PR e responda a thread com o link. Um "atualizar na descrição" ou "isso tem que estar na descrição" vira edição da descrição.
+
+As perguntas do próprio autor num self-review são perguntas de revisão como as de qualquer pessoa. Leia cada uma com a lente de `publicar-revisao-de-codigo/references/lente-de-revisao.md`.
 
 Na dúvida entre estrutural e mudança de comportamento, é mudança de comportamento. Ordene o que for aplicar com `priorizar-itens`, do mais importante ao menos. Mostre a classificação numa lista só, com todas as decisões pendentes juntas. Em modo agendado, siga `Aplicar em execução agendada`: com `estrutural`, aplique só o estrutural e deixe o resto no resumo; com `não`, deixe tudo no resumo.
 
@@ -85,9 +90,11 @@ Valide antes de commitar, com o que `levantar-ambiente-do-repositorio` achar par
 Corrija na branch do PR, seguindo `criar-commit`, com a mensagem dizendo o que mudou e nunca "ajustes da revisão". Um commit por assunto quando as mudanças forem independentes. Não reescreva o conteúdo dos commits que já estão no PR por conta própria.
 Se a branch estiver atrás da base, atualize antes de aplicar, na cópia separada. Siga `atualizar-branch-do-pull-request`: rebase sobre a base remota, resolva o conflito nos commits rebaseados e substitua a branch publicada. O atendimento já autoriza essa substituição. Não avise e não peça. Se há pull requests abertos empilhados em cima, atualize cada branch de cima na mesma cópia, na ordem, para o diff de cada um continuar só com os arquivos daquela pergunta. A branch aberta no clone da pessoa não é reescrita lá: a publicada anda, e o relatório diz que a pasta ficou no commit antigo. Envie a branch, seguindo `criar-pull-request`, antes de responder, para o commit citado já estar no PR. Depois desse push, uma vez, confira o título e a descrição. Não confira a cada commit. Se um dos dois deixou de contar o que a branch faz, atualize os dois, como `criar-pull-request` manda.
 
-Se a decisão vale além deste PR, grave a lição nas instruções do projeto e commite antes de responder. Uma recusa que vai se repetir também entra. Correção pontual fica só na resposta.
+Se a decisão vale além deste PR, grave a lição nas instruções do projeto e commite antes de responder. Uma recusa que vai se repetir também entra. Correção pontual fica só na resposta. Regra de negócio ou de um repositório fica nas skills do projeto ou nas instruções dele, e o harness core nunca a recebe.
 
 ### Passo 6
+
+Cada pergunta tratada, de quem for, deixa três rastros antes de a thread ser resolvida: a decisão na descrição do PR, com como foi feito e por quê, um teste quando o comportamento é testável, e a resposta na thread. Se a pergunta muda o comportamento, atualize também o critério de aceite da tarefa, como manda `preparar-tarefa-do-pull-request`.
 
 A resposta segue `publicar-resposta-de-revisao`. Não reescreva aqui o texto, a marcação, a publicação nem a resolução da thread.
 
@@ -107,6 +114,22 @@ Entregue um placar curto: aceitos, recusados, desatualizados e abertos, por auto
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
+
+### Promessa do autor sem entrega
+
+Se você deixar sem tratar um comentário em que o autor diz que vai deixar uma evidência visual ou atualizar a descrição, a promessa fica aberta e quem revisa não vê o resultado.
+
+1. Reconheça a promessa no Passo 3, mesmo escrita como "vou testar no navegador".
+2. Gere a evidência de cada cenário com `registrar-evidencia-visual`, ou edite a descrição.
+3. Responda a thread com o link do que foi gravado.
+
+### Thread resolvida sem os três rastros
+
+Se você resolver a thread só com a resposta, a decisão fica perdida na conversa e o próximo revisor refaz a pergunta.
+
+1. Escreva a decisão na descrição do PR, com como e por quê.
+2. Escreva o teste, quando o comportamento for testável.
+3. Responda e só então resolva a thread.
 
 ### Conferência a cada commit
 
