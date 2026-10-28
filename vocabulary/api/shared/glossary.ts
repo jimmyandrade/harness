@@ -468,8 +468,12 @@ export function writeTerms(
     if (batch.some((previous) => rowKey(previous.term, previous.tags) === rowKey(item.term, item.tags))) {
       problems.push({ term: item.term, message: `${JSON.stringify(item.term)} is duplicated.` })
     }
-    if (item.source !== undefined && batch.some((previous) => previous.source === item.source)) {
-      problems.push({ term: item.term, message: `The source of ${JSON.stringify(item.term)} is duplicated.` })
+    const sameSource = item.source === undefined ? undefined : batch.find((previous) => previous.source === item.source)
+    if (sameSource !== undefined) {
+      problems.push({
+        term: item.term,
+        message: `The source of ${JSON.stringify(item.term)} is the same as the source of ${JSON.stringify(sameSource.term)}. A source belongs to one row, because an upsert uses it to find a renamed term. Keep the address in source on one of them and write it in notes on the other.`,
+      })
     }
     batch.push(item)
     for (const message of exampleIssues(item.term, [...item.examples, ...item.rejected], item.alternatives)) {

@@ -72,6 +72,15 @@ test("a batch with two rows of the same spelling and tags is refused", () => {
   assert.throws(() => writeTerms(root, "pt-BR", "insert", terms([greeting(["canal-a"]), greeting(["canal-a"])])), /is duplicated/)
 })
 
+test("a batch with two terms of the same source is refused, and the message names both and says what to do", () => {
+  const { root } = glossary()
+  const page = "https://example.com/page"
+  assert.throws(
+    () => writeTerms(root, "pt-BR", "insert", terms([{ ...greeting(), source: page }, { ...greeting(), term: "boa tarde", source: page }])),
+    /The source of "boa tarde" is the same as the source of "bom dia".*write it in notes/,
+  )
+})
+
 test("a batch may write the rows of one spelling with different tags together", () => {
   const { root, file } = glossary()
   const written = writeTerms(root, "pt-BR", "insert", terms([greeting(), greeting(["canal-a"]), greeting(["canal-b"])]))
