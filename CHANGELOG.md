@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.22.0](https://github.com/jimmyandrade/harness/compare/v1.21.0...v1.22.0) (2026-10-28)
+
+
+### Features
+
+* **acompanhar-fila-de-revisao:** open the summary with one item at a time ([#586](https://github.com/jimmyandrade/harness/issues/586)) ([b648b9e](https://github.com/jimmyandrade/harness/commit/b648b9ecf18f6bf0c6c023817fb4206e8796797c))
+* **skills:** read the Cópia de trabalho parameter in four more skills ([#587](https://github.com/jimmyandrade/harness/issues/587)) ([da6df32](https://github.com/jimmyandrade/harness/commit/da6df32f40b553a9549bb45c89f74cb5a71a0bef))
+
 ## [1.21.0](https://github.com/jimmyandrade/harness/compare/v1.20.0...v1.21.0) (2026-10-27)
 
 
