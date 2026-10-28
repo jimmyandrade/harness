@@ -299,6 +299,21 @@ How these skills relate is in `README.md`, in this folder.
 - **Test Criteria**:
   - [x] The skill is present at that path
 
+### definir-artigo-da-base-de-conhecimento
+- **Stability**: experimental
+- **Description**: Create, review, and update the knowledge-base article that answers a practical usage question
+- **Properties**:
+  - Lives at `.agents/skills/definir-artigo-da-base-de-conhecimento/SKILL.md`
+  - Reads the data source name, the field names, the initial status, the top notice, and the article sections from the project instructions
+  - Searches the existing articles by question, variations, and topic, and updates the one that already answers
+  - Keeps one question per article and links neighboring articles through the related field
+  - Captures a screenshot of each on-screen step, uploads it, and places it right below the step with a caption of what the screen shows
+  - Turns acceptance criteria from a skill or playbook into a checklist, a warning, or a step, never BDD inside the article
+  - Sends instructions for the AI to criar-habilidade, a person's experience to definir-historia-de-usuario, and a delivery to definir-tarefa
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses writing a skill, a playbook, a user story, and a task
+
 ### definir-artista
 - **Stability**: experimental
 - **Description**: Register or review an artist or band in the artists database from loose material
