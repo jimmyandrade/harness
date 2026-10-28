@@ -3,7 +3,7 @@ name: validar-plano-de-vocabulario
 description: Use essa habilidade sempre que, ao cadastrar termos do vocabulário do tom de voz, for preciso validar os campos do plano antes de gravar, como categorias, motivo, descrição, exemplos e quem decidiu, mesmo sem dizer validar. NÃO use para cadastrar o termo, decidir o nível dele, gravar no vocabulário, nem inventar um campo que a pessoa não enviou.
 metadata:
   author: jimmyandrade
-  version: "0.4.3"
+  version: "0.4.4"
   related:
     - classificar-estado-do-termo
     - definir-vocabulario
@@ -41,7 +41,7 @@ Valide o plano antes de gravar.
 - `categories` são palavras em inglês, em qualquer idioma, como `punctuation`. Categoria no idioma do projeto vira a palavra que `Categorias` mapeia. Sem mapa, pergunte. Categoria não vira tag: a tag esconde o termo da consulta de outro contexto. Termo, descrição e notas ficam no idioma do vocabulário.
 - `reason` só nos níveis de uso e diz por que usamos. `description` explica a palavra, e o motivo de evitar fica nela. Não copie um no outro.
 - `forbidden` e `strongly_discouraged` recusam `examples`. O exemplo ruim vai em `rejected`.
-- Campo esperado que a pessoa não tem fica de fora. A escrita grava e devolve em `incomplete`. Diga essa lista. Não invente o campo. Passe `Validação dos campos` em `validation`.
+- Campo esperado que a pessoa não deu, como `reason`: monte o texto com o que ela enviou (a mensagem, o antes e depois, a nota) e diga que a redação é sua, para ela ajustar. Só fica de fora o que não tem base nenhuma: diga quais e pergunte. Passe `Validação dos campos` em `validation`.
 - Quem decidiu vai em `decided_by`, como os campos de pessoa do `package.json`: `name`, `email` e, se houver, `url`. O e-mail é o individual da pessoa no workspace, nunca o de uma conta de função compartilhada. Com `Domínio do e-mail de quem decide` preenchido, o e-mail termina nesse domínio. Sem o e-mail, pergunte. Se a pessoa só tem um e-mail que divide com outra, grave só o `name` e complete o `email` quando ela tiver um individual. O endereço da linha de origem vai em `source`.
 - Todo termo do lote leva `decided_by` e `decided_at`, em qualquer nível, permitido ou proibido. `decided_at` é o dia da decisão em ISO 8601, `AAAA-MM-DD`.
 - `source` é o trecho ou a página de onde o termo saiu, só como registro de origem. Vários termos da mesma mensagem ou página levam a mesma `source`, no mesmo lote e em chamadas diferentes. Ela não liga uma linha à outra. A conversa em que a decisão foi tomada vai em `notes`.
@@ -111,7 +111,7 @@ O plano ficou em insert. A categoria ficou punctuation. O termo, a descrição T
 
 - Plano sem o e-mail de quem decidiu: pergunte. Não use o e-mail de uma conta de função.
 - Quem decidiu divide o e-mail com outra pessoa: grave só o `name`. Não grave o e-mail compartilhado.
-- Campo esperado que falta: com `Validação dos campos` em `warn`, a escrita grava e devolve em `incomplete`. Em `enforce`, ela recusa.
+- Campo esperado que falta: monte o texto com o que a pessoa enviou e diga que é seu. Com `Validação dos campos` em `warn`, a escrita grava mesmo sem o campo e o lista em `incomplete`, sem recusar. Em `enforce`, ela recusa.
 
 ## Pegadinhas
 
