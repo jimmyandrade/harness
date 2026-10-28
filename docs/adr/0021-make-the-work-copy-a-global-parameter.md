@@ -21,7 +21,7 @@ Two options were considered:
 
 ## Decision
 
-`Cópia de trabalho` is a `Global` parameter, with `worktree` as the project default in the `AGENTS.md` of this repository. A value is `worktree` or empty: `worktree` works in a new git worktree from `main`, empty works where the person already is.
+`Cópia de trabalho` is a `Global` parameter, with `worktree` as the project default in the `AGENTS.md` of this repository. A value is `worktree` or empty: `worktree` works in a new git worktree from `main`, empty works where the person already is. `worktree` is always the ideal and the default. `escrever-codigo` and `publicar-revisao-de-codigo` also accept `workspace`, an independent copy of the repository exclusive to the task, with the working root moved to it. It is the uncommon exception, a fallback for when a worktree does not work and working in the person's clone is not safe. The other skills do not know `workspace`, so it is set on those two skills and not in `Global`.
 
 Every skill that creates or changes files in a repository declares the key in its parameter block and cites it in the step that changes the repository. The skill keeps `worktree` as its own default, because ADR 0008 says a skill without a default asks and stops. A value set on a single skill still wins over the `Global` one. The comment above the key in each skill says so: the value is `Global` and the skill can override it. `escrever-codigo` and `publicar-revisao-de-codigo`, which used to default to empty and relied on a personal setting, now default to `worktree` too.
 
