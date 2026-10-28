@@ -3,7 +3,7 @@ name: acompanhar-fila-de-revisao
 description: Roda o ciclo da fila de revisão de pull requests. Confere o horário, cuida primeiro dos seus PRs, acha os pedidos, fecha o laço dos já revisados, escolhe o próximo, revisa um por execução e prepara o aviso a quem pediu. Os avisos ficam só como rascunho, com o link. Não serve para revisar sozinha nem achar pedidos por conta própria.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.6.1"
   related:
     - enviar-mensagem-no-slack
     - evoluir-habilidade
@@ -101,6 +101,8 @@ Guarde o estado da fila e as datas das varreduras em `Onde guardar o estado da f
 ### Passo 9
 
 Termine com um resumo de uma coisa de cada vez: abra só com o item que precisa da decisão da pessoa agora, em até cinco linhas e com uma única pergunta, e ofereça o próximo. O resto (o que foi achado, os pedidos cujo PR já estava mesclado ou fechado, os PRs que esperam checks, os rascunhos com o link da thread de cada um, as falhas e as pendências) fica guardado no estado da fila e só aparece quando a pessoa pedir. Uma fonte que falhou, como a agenda, ganha uma linha no resumo e é tentada de novo na execução seguinte, sem perguntar. Em modo agendado, uma pergunta de calibração, de grupo, de canal ou de login nunca vai por mensagem direta: fica no resumo, uma de cada vez, e se repete a cada execução até a pessoa responder no chat. Em modo interativo, a mesma pergunta é feita no chat.
+
+Todo PR citado leva o endereço lido do campo `url` do próprio PR, nunca montado de cabeça nem com o login da pessoa como dono.
 
 Só conclua quando nenhum subagente estiver em execução.
 
