@@ -4,7 +4,7 @@ description: Cria, revisa e atualiza o artigo da base de conhecimento que respon
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   related:
     - criar-habilidade
     - definir-historia-de-usuario
@@ -39,6 +39,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
   - "Como corrigir"
   - "Observações importantes"
   - "Fonte interna"
+# `Fonte de estratégia e cultura` é o nome ou o endereço da página com a estratégia, a tática e a cultura do negócio. Vazio não consulta nada.
+"Fonte de estratégia e cultura": ""
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -87,6 +89,7 @@ Quando a dúvida envolve uma ferramenta, abra a página da ferramenta e ligue-a 
 Quando uma skill ou um playbook governa o tema, use as regras dele como conteúdo.
 Não copie critérios de aceite, cenários em BDD nem a estrutura da skill para o artigo.
 O guardrail vira item de checklist, alerta ou passo.
+Quando o artigo orienta uma decisão, um comportamento ou um padrão de trabalho, e a `Fonte de estratégia e cultura` está preenchida, leia essa página antes de escrever e siga o que ela diz.
 
 ### Passo 6
 
@@ -96,6 +99,10 @@ No corpo, ponha o `Aviso no topo do artigo` e depois as `Seções do artigo`, na
 O diagnóstico é um checklist.
 Os passos de correção são uma lista numerada, um clique ou uma decisão por passo, com o nome do botão em negrito.
 A fonte interna diz de onde veio o artigo, como um teste na ferramenta numa data ou o pedido numa tarefa, e o que ainda não foi reproduzido.
+Escreva para uma pessoa do time que precisa resolver a dúvida rápido.
+Não use jargão técnico. Quando um termo for inevitável, explique-o na mesma frase.
+Não presuma que a pessoa conhece a modelagem dos dados: diga o nome do banco, da página ou da propriedade que ela vê na tela.
+Quando dois bancos parecidos causam erro, explique a diferença entre eles.
 Ao criar, use o `Status inicial`.
 
 ### Passo 7
@@ -114,6 +121,7 @@ Antes de concluir, confira o artigo com esta lista:
 
 - [ ] Responde uma pergunta só e liga os vizinhos em `relacionados`.
 - [ ] Não tem critério de aceite nem cenário em BDD.
+- [ ] Não tem jargão técnico sem explicação nem nome interno que a pessoa não vê na tela.
 - [ ] Cada passo de tela tem o print logo abaixo, com legenda.
 - [ ] A pessoa sabe o que fazer, onde fazer e o que evitar sem abrir outro documento.
 - [ ] A ferramenta está ligada quando a dúvida é sobre ela.

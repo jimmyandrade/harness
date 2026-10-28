@@ -304,6 +304,8 @@ How these skills relate is in `README.md`, in this folder.
   - Keeps one question per article and links neighboring articles through the related field
   - Captures a screenshot of each on-screen step, uploads it, and places it right below the step with a caption of what the screen shows
   - Turns acceptance criteria from a skill or playbook into a checklist, a warning, or a step, never BDD inside the article
+  - Writes without technical jargon, names the database, page, or property the person sees, and explains the difference between similar databases when it avoids a mistake
+  - Reads the page in `Fonte de estratégia e cultura`, when the project sets one, before an article that guides a decision or a behavior
   - Sends instructions for the AI to criar-habilidade, a person's experience to definir-historia-de-usuario, and a delivery to definir-tarefa
 - **Test Criteria**:
   - [x] The skill is present at that path
