@@ -3,7 +3,7 @@ name: criar-pull-request
 description: Use essa habilidade sempre que for abrir ou atualizar PR, subir uma correção ou mandar para a branch principal, mesmo sem dizer PR. NÃO use para mesclar (use mesclar-pull-request), responder comentário de revisão nem para só commitar (use criar-commit).
 metadata:
   author: jimmyandrade
-  version: "0.35.0"
+  version: "0.36.0"
   related:
     - registrar-evidencia-visual
     - evoluir-habilidade
@@ -133,6 +133,10 @@ Mande o link na resposta.
 
 Depois de abrir, leia o status do PR pelas ferramentas de PR do app e vincule o PR se ele não aparecer. Não fique consultando o CI em loop.
 
+Depois de ligar o PR, renomeie a sessão de conversa com a IA, o nome da conversa na lista do app, para `[CHAVE] título do PR`, com a chave do card e o título do PR como estão (`[ABC-123] fix(login): aceitar e-mail com maiúscula`).
+O título do PR e o da issue não mudam: só o nome da conversa muda.
+Sem card, use a chave da issue do projeto, e sem nenhuma das duas, só o título do PR. Confira a chave e o título no GitHub e na tarefa antes, e não pergunte.
+
 Com `Habilidade que pede a revisão` preenchida e o PR fora do rascunho, e com a evidência visual registrada quando a mudança altera a tela, siga essa habilidade para o PR aberto e entregue o que ela devolver, como o rascunho do pedido. Um PR em rascunho não pede revisão.
 
 ### Passo 8
@@ -227,7 +231,7 @@ O pedido autoriza push e merge. O push espera o hook de pre-push. Com o PR abert
 
 ## Casos-limite
 
-- Já existe PR aberto para a branch: não abra outro. Depois do push, confira título e descrição uma vez, atualize o que deixou de contar o que a branch faz, e dê o link.
+- Já existe PR aberto para a branch: não abra outro. Depois do push, confira título e descrição uma vez, atualize o que deixou de contar o que a branch faz, renomeie a sessão de conversa com a IA se o nome dela não seguir o Passo 7, e dê o link.
 - O PR da branch já foi mesclado: siga `atualizar-branch-do-pull-request`, que não dá rebase nem push nessa branch.
 - A branch atual tem trabalho de outra tarefa: comece a nova branch da `Branch base` remota, não da branch atual.
 - A ferramenta criou a branch com outro prefixo, como `claude/…`: renomeie para `<tipo>/<descrição>` antes do push. Com PR aberto, a renomeação fecha o PR: abra outro e ligue os dois.
@@ -246,6 +250,7 @@ O pedido autoriza push e merge. O push espera o hook de pre-push. Com o PR abert
 - Um hook de pre-push pode rodar também no push que só apaga uma branch remota.
 - Um Markdown parece documentação. O rótulo segue o tipo do commit. Correção de erro é `fix` e o rótulo de bug. `docs` e o rótulo de documentação ficam para a documentação.
 - Conferir a cada commit parece necessário. A conferência é uma vez, depois do push.
+- "Sessão" parece o PR ou a issue. É a conversa com a IA no app, e só o nome dela muda. O título do PR e o da issue ficam como estão.
 
 ## Scripts disponíveis
 
