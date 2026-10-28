@@ -3,7 +3,7 @@ name: atender-revisao-de-pull-request
 description: Atende a revisão recebida num pull request, de pessoa ou de bot. Lê os comentários abertos, classifica cada sugestão, aplica o que é seguro e pede a resposta a `publicar-resposta-de-revisao`. Sem PR informado, lista os seus que precisam de atenção. Não serve para revisar o PR de outra pessoa nem para abrir o PR.
 metadata:
   author: jimmyandrade
-  version: "0.25.1"
+  version: "0.25.2"
   aliases:
     - resolver-comentarios-de-revisao
     - apply-pr-review
@@ -230,6 +230,7 @@ Achei cinco comentários abertos. Dois eram estruturais, um nome e um texto, e a
 - A branch atrás da base parece pedir autorização antes do rebase. O atendimento já autoriza atualizar e substituir a branch publicada. A aprovação que ainda se pede é a de mudança de comportamento.
 - Atualizar só a branch de baixo parece suficiente. As de cima andam junto, senão o diff delas mistura os arquivos de baixo.
 - Conferir a cada commit parece necessário. A conferência é uma vez, depois do push.
+- Todo PR citado vai como link clicável, `[#123](url)`, nunca `#123` solto nem só a URL.
 
 ## Scripts disponíveis
 

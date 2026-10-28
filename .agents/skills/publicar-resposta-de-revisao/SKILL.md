@@ -3,7 +3,7 @@ name: publicar-resposta-de-revisao
 description: Publica a resposta a uma revisão recebida, de pessoa ou de bot, de preferência num comentário inline. Marca o login e, com a leitura antes de publicar desligada, publica sem pedir confirmação. NÃO serve para aplicar a sugestão no código nem para revisar o PR de outra pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
   related:
     - atender-revisao-de-pull-request
     - publicar-revisao-de-codigo
@@ -166,6 +166,7 @@ A revisão só tinha corpo. A resposta saiu num comentário inline na linha que 
 - Resposta com apóstrofo quebra `-f body='...'` no shell. Grave a resposta num arquivo e envie com `-F body=@<arquivo>`.
 - `Ler o texto antes de publicar` em `não` parece ainda pedir o sim. Publique e devolva o link. Um ajuste pedido depois também sai na hora.
 - A página aberta parece mostrar que a resposta continua no idioma antigo. O texto que vale é o gravado na thread. Diga a primeira frase dele.
+- Todo PR citado vai como link clicável, `[#123](url)`, nunca `#123` solto nem só a URL.
 
 ## Scripts disponíveis
 
