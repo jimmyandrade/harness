@@ -1,10 +1,10 @@
 ---
 name: definir-issue-do-github
-description: Abre, revisa, edita e traduz issues do GitHub no idioma do projeto. Usada quando a demanda técnica vira issue, mesmo sem dizer issue. Não serve para tarefa fora do GitHub, para o pull request nem para triar a demanda.
+description: Abre, revisa, edita e traduz issues do GitHub pelo modelo e no idioma do projeto. Usada quando a demanda técnica vira issue, inclusive a de um achado, mesmo sem dizer issue. Não serve para tarefa fora do GitHub, para o pull request nem para triar a demanda.
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.5.1"
+  version: "0.6.0"
   aliases:
     - definir-issue
   related:
@@ -37,19 +37,19 @@ Antes de abrir, procure issues abertas e fechadas com o mesmo assunto. Se uma co
 
 ### Passo 3
 
-Escreva o título em Conventional Commits, `tipo: descrição`, e a descrição no `Idioma da issue`. O tipo vem do efeito da entrega, não da palavra do pedido: `feat` para o que a pessoa passa a poder fazer, `fix` para o que estava errado, `perf`, `refactor`, `docs`, `test`, `ci`, `build` ou `chore`. Uma issue é uma entrega só.
+Escreva o título em Conventional Commits, `tipo: descrição`, e a descrição no `Idioma da issue`. Se o repositório documenta outro idioma para issue, ou as issues recentes dele estão todas em outro, esse vence o parâmetro, e a resposta diz qual idioma usou. O tipo vem do efeito da entrega, não da palavra do pedido: `feat` para o que a pessoa passa a poder fazer, `fix` para o que estava errado, `perf`, `refactor`, `docs`, `test`, `ci`, `build` ou `chore`. Uma issue é uma entrega só.
 
 ### Passo 4
 
-Leia o modelo de saída `issue-do-github` quando for gerar a saída.
+Leia o modelo de saída `issue-do-github` antes de escrever ou editar qualquer issue, inclusive a que nasce de um achado no meio de outro trabalho. O corpo tem as seções do modelo, na ordem, e o título segue `tipo: descrição`.
 
 ### Passo 5
 
-Escreva o corpo inteiro no `Idioma da issue`: problema com o caso real, proposta e critério de pronto verificável. Nome de arquivo, de comando e de parâmetro fica como no código.
+Escreva o corpo inteiro no `Idioma da issue`: problema com o caso real, proposta e critério de pronto verificável. Nome de arquivo, de comando e de parâmetro fica como no código. As seções ficam no idioma da issue: em inglês, Problem, Proposal e Done when.
 
 ### Passo 6
 
-Ao revisar ou editar, mostre a mudança antes de gravar. Uma issue em outro idioma ganha título e corpo no `Idioma da issue`, sem perder link nem referência.
+Ao revisar ou editar, mostre a mudança antes de gravar. Uma issue fora do modelo ganha título e corpo no modelo, e uma em outro idioma, no idioma que vale pelo Passo 3, sem perder link nem referência.
 
 ### Passo 7
 
@@ -95,6 +95,14 @@ Se você juntar duas entregas numa issue, o pull request não consegue fechá-la
 1. Separe em duas issues.
 2. Marque a dependência em Relationships. Não comente "Depende de".
 
+### Issue escrita sem o modelo
+
+Se você escrever a issue pelo hábito, com título solto e seções próprias como Context ou Acceptance criteria, ela sai fora do padrão e a pessoa tem de pedir a reescrita.
+
+1. Leia o modelo `issue-do-github` antes de escrever.
+2. Use o título `tipo: descrição` e as seções do modelo, na ordem, com bullets em Proposta e em Pronto quando.
+3. Vale também para a issue que nasce de um achado no meio de outro trabalho.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
@@ -108,9 +116,13 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 - O repositório é público: a issue não cita empresa, workspace, base, pessoa nem segredo.
 - A demanda é de negócio, sem entrega no código: não abra issue.
 - O comentário de revisão pede outra issue: ela segue os mesmos passos.
+- A issue nasce de um achado no meio de outro trabalho: o modelo vale do mesmo jeito.
+- O repositório documenta, ou usa nas issues recentes, um idioma diferente do `Idioma da issue`: esse idioma vence, e a resposta diz qual usou.
 
 ## Pegadinhas
 
+- Issue de um achado parece pequena demais para o modelo. O modelo vale por issue, não por tamanho.
+- O `Idioma da issue` parece valer sempre. A convenção do repositório vence o parâmetro.
 - Commit e pull request seguem os próprios idiomas. O `Idioma da issue` vale só para a issue.
 - O título em inglês parece obrigatório por causa do Conventional Commits. Só o tipo é fixo. A descrição segue o `Idioma da issue`.
 - A busca só nas abertas parece bastar. A issue fechada também conta, e reabrir é melhor que duplicar.
