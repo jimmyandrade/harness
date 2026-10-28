@@ -1,10 +1,10 @@
 ---
 name: sincronizar-status-da-tarefa
-description: Sincroniza o status de tarefas, cards ou issues com o estado do pull request ligado a cada uma e grava a ligação quando o pull request ainda não cita a tarefa. Usada quando um commit é criado ou o estado de um pull request muda, mesmo sem dizer sincronizar. Não serve para escrever a tarefa, abrir o PR nem revisar o diff.
+description: Sincroniza o status de tarefas, cards ou issues com o estado do pull request ligado a cada uma e grava a ligação quando o pull request ainda não cita a tarefa. Usada quando um commit é criado, quando o estado de um pull request muda ou quando a pessoa avisa que um PR foi mesclado, mesmo sem dizer sincronizar. Não serve para escrever a tarefa, abrir o PR nem revisar o diff.
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.5.1"
+  version: "0.5.2"
   related:
     - criar-commit
     - criar-pull-request
@@ -184,6 +184,7 @@ A mesma entrega está num pull request já mesclado. O plano marca "ligada pelo 
 - A busca pela chave parece achar o pull request feito sem citar a tarefa. Parta desse pull request e compare o assunto com as tarefas abertas.
 - Uma citação no pull request já mesclado, ou uma varredura das tarefas abertas, parece fechar a tarefa. A gravação entra na tarefa, com o link do pull request. A tarefa fecha quando o pull request que a cita, ainda aberto, é mesclado, e o critério de pronto dela está cumprido.
 - Uma frase comprimida parece um recado interno. A skill fica fácil de ler por uma pessoa.
+- O aviso de que um PR foi mesclado parece só uma informação. É gatilho: confirme o estado MERGED e sincronize a tarefa na mesma resposta.
 
 ## Scripts disponíveis
 
