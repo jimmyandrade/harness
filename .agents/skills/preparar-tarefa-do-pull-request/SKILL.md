@@ -3,7 +3,7 @@ name: preparar-tarefa-do-pull-request
 description: Garante a tarefa da demanda antes do pull request e confere se a descrição da issue em que a pessoa vai trabalhar segue o modelo do tipo. Usada quando falta a tarefa, quando o PR já existe sem ela, ou quando a pessoa vai implementar uma issue. Não cria sozinha nem escolhe o projeto por um card parecido. Não serve para abrir o PR nem para revisar uma tarefa sem demanda de trabalho.
 metadata:
   author: jimmyandrade
-  version: "0.7.0"
+  version: "0.8.0"
   related:
     - definir-tarefa
     - evoluir-habilidade
@@ -89,6 +89,7 @@ Monte a tarefa com `definir-tarefa`, que cuida da boa escrita: título, prazo, d
 
 - O objetivo diz o valor para o cliente ou para o negócio e como o resultado será medido. Não invente a métrica: o que a pessoa não disse vira pergunta.
 - O escopo é fatiado, e cada parte entrega valor cedo. Separe o obrigatório do que fica de fora agora, com `priorizar-itens`, para cada subtarefa caber num PR.
+- A tarefa guarda o que se espera: o escopo e os critérios de aceitação, que dizem o que fica pronto e quando. Como foi feito e por que cada decisão foi tomada ficam na descrição do PR, não na tarefa. Quando uma pergunta de revisão muda o comportamento, atualize o critério afetado, em Dado, Quando e Então, e a descrição do PR ganha a decisão.
 - Os critérios de aceitação seguem o `Formato dos critérios de aceitação`. Uma tarefa que muda código de um app com ambiente de teste por PR termina com o `Critério de validação da mudança`. O registro diz o que foi procurado e o que foi encontrado, nunca só que não há regressão.
 - Os `Modelos de descrição` valem por tipo. Um reforço do projeto soma ao modelo do tipo e nunca o substitui, e não vale numa tarefa criada no projeto de reserva.
 - O `Formato da descrição` manda na gravação: link e caixa de seleção no formato próprio do rastreador, conferidos lendo a tarefa de volta.
