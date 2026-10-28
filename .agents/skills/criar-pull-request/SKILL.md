@@ -3,7 +3,7 @@ name: criar-pull-request
 description: Use essa habilidade sempre que for abrir ou atualizar PR, subir uma correção ou mandar para a branch principal, mesmo sem dizer PR. NÃO use para mesclar (use mesclar-pull-request), responder comentário de revisão nem para só commitar (use criar-commit).
 metadata:
   author: jimmyandrade
-  version: "0.36.0"
+  version: "0.37.0"
   related:
     - registrar-evidencia-visual
     - evoluir-habilidade
