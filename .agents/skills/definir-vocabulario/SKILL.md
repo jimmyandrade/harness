@@ -3,7 +3,7 @@ name: definir-vocabulario
 description: Use essa habilidade sempre que for cadastrar ou atualizar um ou mais termos do vocabulário do tom de voz, mesmo sem dizer glossário, lote ou estado. NÃO use para escrever, revisar ou aprovar o texto da marca, classificar uma frase, perguntar quais variações de gênero, número ou grafia foram cadastradas, nem inventar um termo que a pessoa não enviou.
 metadata:
   author: jimmyandrade
-  version: "0.33.0"
+  version: "0.33.1"
   related:
     - classificar-estado-do-termo
     - evoluir-habilidade
@@ -28,7 +28,7 @@ metadata:
 
 ### Passo 1
 
-A pessoa responsável pelo tom de voz quer cadastrar ou atualizar termos. Perguntar se um termo ou uma variação faltou segue `procurar-variacao-de-termo`. Monte o plano com idioma, modo e a lista. Cada item tem `state`, `term`, `categories` e os campos desse nível. Use só o que a pessoa enviou.
+A pessoa responsável pelo tom de voz quer cadastrar ou atualizar termos. Perguntar se um termo ou uma variação faltou segue `procurar-variacao-de-termo`. Monte o plano com idioma, modo e a lista. Cada item tem `state`, `term`, `categories` e os campos desse nível. Use o que a pessoa enviou. O texto que você monta a partir disso, como o `reason`, vai marcado como seu.
 
 Quando a pessoa manda um par rotulado de antes e depois, cada lado é um termo no mesmo lote. O antes fica `forbidden`, e `substitution` e `alternatives` são o depois, com o texto que ela escreveu. O depois fica `allowed`. `related` liga os dois. Não invente outra alternativa. "Nunca use uma palavra, use outra" tem o mesmo formato, sem `when` e sem `tags`. A frase inteira, com a pontuação e com um símbolo no fim, é um termo. Termo novo entra em minúsculas.
 
@@ -58,7 +58,7 @@ Valide o plano com `validar-plano-de-vocabulario`. Passe `Categorias`, `Validaç
 
 ### Passo 5
 
-Grave com `gravar-termos-no-vocabulario`. Passe `Validação dos campos`. Ele corrige sem apagar o resto da linha, pesquisa a grafia, testa com dry run e grava o plano inteiro numa escrita só. Não confirme o cadastro sem a resposta dele.
+Grave com `gravar-termos-no-vocabulario`. Passe `Validação dos campos`. Ele corrige sem apagar o resto da linha, pesquisa a grafia, testa com dry run e grava o plano inteiro numa escrita só. Não confirme o cadastro sem a resposta dele. Se `incomplete` voltar com itens, preencha agora e grave de novo com `update`, e diga a redação que é sua. Nunca termine com `incomplete` sem dizer o que falta.
 
 ### Passo 6
 
