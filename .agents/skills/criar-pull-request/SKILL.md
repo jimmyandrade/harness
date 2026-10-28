@@ -3,8 +3,9 @@ name: criar-pull-request
 description: Use essa habilidade sempre que for abrir PR, subir uma correção, mandar para a branch principal ou mesclar mudança no repositório, mesmo sem dizer PR. NÃO use para responder comentário de revisão nem para só commitar (use criar-commit).
 metadata:
   author: jimmyandrade
-  version: "0.33.2"
+  version: "0.34.0"
   related:
+    - registrar-evidencia-visual
     - evoluir-habilidade
     - criar-commit
     - atualizar-branch-do-pull-request
@@ -114,6 +115,7 @@ Corpo em `Idioma do PR`.
 Com issue, o pull request e o merge request citam `#<número>` na descrição, na forma do repositório.
 Sem issue, não invente número.
 Se o repositório tiver um template de pull request, siga as seções dele e marque as caixas conforme o que foi feito.
+Se a mudança altera o que uma pessoa vê, como tela, componente, estilo ou texto da interface, siga `registrar-evidencia-visual` antes de abrir ou de tirar o PR do rascunho. A seção do template que mostra o resultado leva a imagem ou o vídeo, e uma tabela de antes e depois só com texto não conta. Sem imagem, o PR fica em rascunho e a resposta diz o que falta. Dependência, documentação e mudança sem diferença na tela ficam de fora.
 Depois do push, uma vez, confira o título e a descrição contra o código que subiu. Vários commits no mesmo push são uma conferência só. Se um dos dois deixou de contar o que a branch faz, atualize os dois antes de responder.
 
 Com `Atribuição da sessão` em `sim`, termine com a linha de atribuição da sessão.
@@ -135,7 +137,7 @@ Mande o link na resposta.
 
 Depois de abrir, leia o status do PR pelas ferramentas de PR do app e vincule o PR se ele não aparecer. Não fique consultando o CI em loop.
 
-Com `Habilidade que pede a revisão` preenchida e o PR fora do rascunho, siga essa habilidade para o PR aberto e entregue o que ela devolver, como o rascunho do pedido. Um PR em rascunho não pede revisão.
+Com `Habilidade que pede a revisão` preenchida e o PR fora do rascunho, e com a evidência visual registrada quando a mudança altera a tela, siga essa habilidade para o PR aberto e entregue o que ela devolver, como o rascunho do pedido. Um PR em rascunho não pede revisão.
 
 ### Passo 8
 
@@ -182,6 +184,14 @@ Não escreva que ela ficou para este pedido, nem para depois.
 Ao terminar, siga `sincronizar-status-da-tarefa` e depois `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
+
+### PR de interface sem imagem
+
+Se você abrir o PR de uma mudança que altera a tela só com texto, quem revisa não vê o resultado e a revisão atrasa. A tabela de antes e depois em texto parece suficiente e não é.
+
+1. Decida no Passo 6 se a mudança altera o que uma pessoa vê.
+2. Se altera, siga `registrar-evidencia-visual` antes de abrir ou de tirar do rascunho.
+3. Sem imagem na descrição e no card, o PR fica em rascunho, e nenhum pedido de revisão sai.
 
 ### Conferência a cada commit
 
