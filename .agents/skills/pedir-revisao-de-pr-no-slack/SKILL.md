@@ -3,7 +3,7 @@ name: pedir-revisao-de-pr-no-slack
 description: Redige o pedido de revisão de um pull request para o canal do time no Slack e entrega o rascunho com o link da thread, usando enviar-mensagem-no-slack. Usada quando o PR está pronto e a organização pede revisão pelo Slack, ou quando a pessoa pede apoio para revisar. Não serve para revisar o PR nem para outra mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.3.3"
+  version: "0.3.4"
   related:
     - criar-pull-request
     - enviar-mensagem-no-slack
@@ -60,7 +60,7 @@ O título carrega o contexto, e o corpo não repete o que o título e o PR já d
 
 ### Passo 5
 
-Entregue o rascunho e o link do canal, ou da thread, como diz `enviar-mensagem-no-slack`. Não envie sem o sim da pessoa. Quem recebe o pedido por mensagem direta é orientado a usar o canal, para o pedido ter mais visibilidade e entrar no rodízio.
+Entregue o rascunho e o link do canal, ou da thread, como diz `enviar-mensagem-no-slack`, e cite o PR no chat como `[#123](url)`. Não envie sem o sim da pessoa. Quem recebe o pedido por mensagem direta é orientado a usar o canal, para o pedido ter mais visibilidade e entrar no rodízio.
 
 ### Passo 6
 
@@ -116,7 +116,7 @@ O PR 121 já tem uma thread no canal. Redigi uma nova rodada em resposta nela, c
 - Um PR sem o rótulo de pronto parece pronto pelo estado. Confira o rótulo quando o projeto o usa.
 - A thread de um PR já revisado parece pedir um post novo. É uma nova rodada na thread.
 - Um follow-up parece só um lembrete do prazo. Ele continua dizendo o que o PR faz.
-- Todo PR citado vai como link clicável, `[#123](url)`, nunca `#123` solto nem só a URL.
+- Citar um PR só pelo número, como `#123` ou `PR 123`, é erro, mesmo numa lista, num resumo ou quando ele já foi citado antes: quem lê não consegue abrir. Escreva sempre `[#123](url)`, com a URL lida do `gh`, e releia o texto antes de entregar.
 
 ## Scripts disponíveis
 

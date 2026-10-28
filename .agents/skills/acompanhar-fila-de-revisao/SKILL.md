@@ -3,7 +3,7 @@ name: acompanhar-fila-de-revisao
 description: Roda o ciclo da fila de revisão de pull requests. Confere o horário, cuida primeiro dos seus PRs, acha os pedidos, fecha o laço dos já revisados, escolhe o próximo, revisa um por execução e prepara o aviso a quem pediu. Os avisos ficam só como rascunho, com o link. Não serve para revisar sozinha nem achar pedidos por conta própria.
 metadata:
   author: jimmyandrade
-  version: "0.6.2"
+  version: "0.6.3"
   related:
     - enviar-mensagem-no-slack
     - evoluir-habilidade
@@ -89,7 +89,7 @@ Com `Sinais de status` preenchido, marque a mensagem do pedido com o sinal do es
 - O aviso diz só o status e o link do PR. Nunca discute código e nunca soa como reprovação.
 - Pedido que veio por mensagem direta é revisado do mesmo jeito, mas não gera aviso por mensagem direta: diga no resumo que ele veio por lá, com o link, para a pessoa decidir.
 - Nos `Canais sem aviso`, o comentário no PR é o único aviso.
-- Aplique as `Regras de aviso a terceiros`. Cada regra que bate gera um texto, com o endereço completo do PR e o resultado em uma frase, e nunca com código nem com o que foi combinado em privado. Uma regra não se repete na mesma rodada.
+- Aplique as `Regras de aviso a terceiros`. Cada regra que bate gera um texto, com o link `[#123](url)` do PR e o resultado em uma frase, e nunca com código nem com o que foi combinado em privado. Uma regra não se repete na mesma rodada.
 - Com `Prazo para avisar demora`, um pedido direto sem resposta depois do prazo ganha uma proposta de mensagem de demora, com a posição na fila.
 
 Nunca envie, nunca agende e nunca mande em mensagem direta. Entregue o rascunho com o link direto da thread. O limite de rascunhos por canal é o de `enviar-mensagem-no-slack`: no limite, entregue o texto pronto para colar.
@@ -100,7 +100,7 @@ Guarde o estado da fila e as datas das varreduras em `Onde guardar o estado da f
 
 ### Passo 9
 
-Termine com um resumo de uma coisa de cada vez: abra só com o item que precisa da decisão da pessoa agora, em até cinco linhas e com uma única pergunta, e ofereça o próximo. O resto (o que foi achado, os pedidos cujo PR já estava mesclado ou fechado, os PRs que esperam checks, os rascunhos com o link da thread de cada um, as falhas e as pendências) fica guardado no estado da fila e só aparece quando a pessoa pedir. Uma fonte que falhou, como a agenda, ganha uma linha no resumo e é tentada de novo na execução seguinte, sem perguntar. Em modo agendado, uma pergunta de calibração, de grupo, de canal ou de login nunca vai por mensagem direta: fica no resumo, uma de cada vez, e se repete a cada execução até a pessoa responder no chat. Em modo interativo, a mesma pergunta é feita no chat.
+Termine com um resumo de uma coisa de cada vez, com todo PR citado como link `[#123](url)`: abra só com o item que precisa da decisão da pessoa agora, em até cinco linhas e com uma única pergunta, e ofereça o próximo. O resto (o que foi achado, os pedidos cujo PR já estava mesclado ou fechado, os PRs que esperam checks, os rascunhos com o link da thread de cada um, as falhas e as pendências) fica guardado no estado da fila e só aparece quando a pessoa pedir. Uma fonte que falhou, como a agenda, ganha uma linha no resumo e é tentada de novo na execução seguinte, sem perguntar. Em modo agendado, uma pergunta de calibração, de grupo, de canal ou de login nunca vai por mensagem direta: fica no resumo, uma de cada vez, e se repete a cada execução até a pessoa responder no chat. Em modo interativo, a mesma pergunta é feita no chat.
 
 Todo PR citado leva o endereço lido do campo `url` do próprio PR, nunca montado de cabeça nem com o login da pessoa como dono.
 
@@ -185,7 +185,7 @@ Eram dez da noite, fora do horário de funcionamento. Encerrei sem varrer nada.
 - O aviso de status nunca traz o conteúdo dos achados.
 - Dois rascunhos no mesmo canal se apagam. Entregue o segundo como texto pronto.
 - Dia de ausência inteira pode contar como dia útil nos intervalos de acompanhamento, se as instruções do projeto disserem.
-- Todo PR citado vai como link clicável, `[#123](url)`, nunca `#123` solto nem só a URL.
+- Citar um PR só pelo número, como `#123` ou `PR 123`, é erro, mesmo numa lista, num resumo ou quando ele já foi citado antes: quem lê não consegue abrir. Escreva sempre `[#123](url)`, com a URL lida do `gh`, e releia o texto antes de entregar.
 
 ## Scripts disponíveis
 

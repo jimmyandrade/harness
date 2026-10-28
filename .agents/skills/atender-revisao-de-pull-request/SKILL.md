@@ -3,7 +3,7 @@ name: atender-revisao-de-pull-request
 description: Atende a revisão recebida num pull request, de pessoa ou de bot. Lê os comentários abertos, classifica cada sugestão, aplica o que é seguro e pede a resposta a `publicar-resposta-de-revisao`. Sem PR informado, lista os seus que precisam de atenção. Não serve para revisar o PR de outra pessoa nem para abrir o PR.
 metadata:
   author: jimmyandrade
-  version: "0.25.2"
+  version: "0.25.3"
   aliases:
     - resolver-comentarios-de-revisao
     - apply-pr-review
@@ -100,7 +100,7 @@ Nunca peça a um bot.
 
 ### Passo 8
 
-Entregue um placar curto: aceitos, recusados, desatualizados e abertos, por autor, e o que ficou esperando decisão. O relatório sai no `Idioma do relatório`, com o endereço do PR por extenso, e com `Agrupar o relatório por prioridade` em `sim` agrupa por Deve ter, Deveria ter, Poderia ter e Não terá agora. Diga se ainda há thread aberta, se pediu nova revisão e o que a validação não conseguiu. Devolva para quem chamou, com o endereço do PR. O merge segue `criar-pull-request`, que decide também pelos checks.
+Entregue um placar curto: aceitos, recusados, desatualizados e abertos, por autor, e o que ficou esperando decisão. O relatório sai no `Idioma do relatório`, com cada PR como link clicável `[#123](url)`, e com `Agrupar o relatório por prioridade` em `sim` agrupa por Deve ter, Deveria ter, Poderia ter e Não terá agora. Diga se ainda há thread aberta, se pediu nova revisão e o que a validação não conseguiu. Devolva para quem chamou, com o endereço do PR. O merge segue `criar-pull-request`, que decide também pelos checks.
 
 ### Passo 9
 
@@ -230,7 +230,7 @@ Achei cinco comentários abertos. Dois eram estruturais, um nome e um texto, e a
 - A branch atrás da base parece pedir autorização antes do rebase. O atendimento já autoriza atualizar e substituir a branch publicada. A aprovação que ainda se pede é a de mudança de comportamento.
 - Atualizar só a branch de baixo parece suficiente. As de cima andam junto, senão o diff delas mistura os arquivos de baixo.
 - Conferir a cada commit parece necessário. A conferência é uma vez, depois do push.
-- Todo PR citado vai como link clicável, `[#123](url)`, nunca `#123` solto nem só a URL.
+- Citar um PR só pelo número, como `#123` ou `PR 123`, é erro, mesmo numa lista, num resumo ou quando ele já foi citado antes: quem lê não consegue abrir. Escreva sempre `[#123](url)`, com a URL lida do `gh`, e releia o texto antes de entregar.
 
 ## Scripts disponíveis
 
