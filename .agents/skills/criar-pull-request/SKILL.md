@@ -111,7 +111,7 @@ Corpo em `Idioma do PR`.
 Com issue, o pull request e o merge request citam `#<número>` na descrição, na forma do repositório.
 Sem issue, não invente número.
 Se o repositório tiver um template de pull request, siga as seções dele e marque as caixas conforme o que foi feito.
-Se a mudança altera o que uma pessoa vê, como tela, componente, estilo ou texto da interface, siga `registrar-evidencia-visual` antes de abrir ou de tirar o PR do rascunho. A seção do template que mostra o resultado leva a imagem ou o vídeo, e uma tabela de antes e depois só com texto não conta. Sem imagem, o PR fica em rascunho e a resposta diz o que falta. Dependência, documentação e mudança sem diferença na tela ficam de fora.
+Escreva a descrição como manda `references/descricao-do-pull-request.md`: a imagem do que a pessoa vê quando a mudança altera a tela, e como foi feito e por que cada decisão foi tomada. Mudança de tela sem imagem deixa o PR em rascunho.
 Depois do push, uma vez, confira o título e a descrição contra o código que subiu. Vários commits no mesmo push são uma conferência só. Se um dos dois deixou de contar o que a branch faz, atualize os dois antes de responder.
 
 Com `Atribuição da sessão` em `sim`, termine com a linha de atribuição da sessão.
@@ -159,13 +159,13 @@ Ao terminar, siga `sincronizar-status-da-tarefa` e depois `evoluir-habilidade` c
 
 ## Problemas comuns
 
-### PR de interface sem imagem
+### PR com a descrição incompleta
 
-Se você abrir o PR de uma mudança que altera a tela só com texto, quem revisa não vê o resultado e a revisão atrasa. A tabela de antes e depois em texto parece suficiente e não é.
+Se você descrever só o que mudou, sem a imagem de uma mudança de tela nem o porquê das decisões, quem revisa monta o ambiente para ver o resultado ou pergunta de novo o que o código já respondeu.
 
-1. Decida no Passo 6 se a mudança altera o que uma pessoa vê.
-2. Se altera, siga `registrar-evidencia-visual` antes de abrir ou de tirar do rascunho.
-3. Sem imagem na descrição e no card, o PR fica em rascunho, e nenhum pedido de revisão sai.
+1. Siga `references/descricao-do-pull-request.md` no Passo 6.
+2. Sem imagem numa mudança de tela, o PR fica em rascunho e nenhum pedido de revisão sai.
+3. Quando a revisão mudar uma decisão, atualize a descrição na mesma rodada.
 
 ### Conferência a cada commit
 
