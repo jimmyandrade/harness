@@ -3,7 +3,7 @@ name: acompanhar-fila-de-revisao
 description: Roda o ciclo da fila de revisão de pull requests. Confere o horário, cuida primeiro dos seus PRs, acha os pedidos, fecha o laço dos já revisados, escolhe o próximo, revisa um por execução e prepara o aviso a quem pediu. Os avisos ficam só como rascunho, com o link. Não serve para revisar sozinha nem achar pedidos por conta própria.
 metadata:
   author: jimmyandrade
-  version: "0.6.1"
+  version: "0.6.2"
   related:
     - enviar-mensagem-no-slack
     - evoluir-habilidade
@@ -185,6 +185,7 @@ Eram dez da noite, fora do horário de funcionamento. Encerrei sem varrer nada.
 - O aviso de status nunca traz o conteúdo dos achados.
 - Dois rascunhos no mesmo canal se apagam. Entregue o segundo como texto pronto.
 - Dia de ausência inteira pode contar como dia útil nos intervalos de acompanhamento, se as instruções do projeto disserem.
+- Todo PR citado vai como link clicável, `[#123](url)`, nunca `#123` solto nem só a URL.
 
 ## Scripts disponíveis
 

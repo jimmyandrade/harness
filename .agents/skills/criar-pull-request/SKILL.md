@@ -3,7 +3,7 @@ name: criar-pull-request
 description: Use essa habilidade sempre que for abrir PR, subir uma correção, mandar para a branch principal ou mesclar mudança no repositório, mesmo sem dizer PR. NÃO use para responder comentário de revisão nem para só commitar (use criar-commit).
 metadata:
   author: jimmyandrade
-  version: "0.33.0"
+  version: "0.33.1"
   related:
     - evoluir-habilidade
     - criar-commit
@@ -169,7 +169,7 @@ Com `Comunicar novidade após o merge` igual a `sim`, siga `comunicar-novidade-d
 ### Passo 9
 
 Na resposta final, informe o nome da branch, se ela está no GitHub e o hash de cada commit, e diga o estado de cada etapa: commit, push, PR, quem foi atribuído, o rótulo, CI e merge.
-Cada PR citado, inclusive na pergunta sobre quem mescla, vai com o link completo.
+Cada PR citado, inclusive na pergunta sobre quem mescla, vai como link clicável em markdown, com o número no texto, como `[#123](url)`. Nunca `#123` solto nem só a URL.
 Se perguntarem "já mesclou?", responda primeiro sim ou não e depois o que falta.
 Com `Criar pull request ao terminar` em `rascunho`, o padrão, a branch está no GitHub, o pull request está aberto em rascunho e a resposta leva o link.
 Com `sim`, o pull request está aberto pronto e a resposta leva o link.
