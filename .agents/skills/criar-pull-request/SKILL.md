@@ -111,7 +111,8 @@ Corpo em `Idioma do PR`.
 Com issue, o pull request e o merge request citam `#<número>` na descrição, na forma do repositório.
 Sem issue, não invente número.
 Se o repositório tiver um template de pull request, siga as seções dele e marque as caixas conforme o que foi feito.
-Escreva a descrição como manda `references/descricao-do-pull-request.md`: a imagem do que a pessoa vê quando a mudança altera a tela, e como foi feito e por que cada decisão foi tomada. Mudança de tela sem imagem deixa o PR em rascunho.
+Se a mudança altera o que uma pessoa vê, como tela, componente, estilo ou texto da interface, siga `registrar-evidencia-visual` antes de abrir ou de tirar o PR do rascunho. A seção do modelo que mostra o resultado leva a imagem ou o vídeo, e uma tabela de antes e depois só com texto não conta. Sem imagem, o PR fica em rascunho e a resposta diz o que falta. Dependência, documentação e mudança sem diferença na tela ficam de fora.
+A descrição guarda como a mudança foi feita e por que cada decisão foi tomada: de onde vem o dado, por que aquele nome, aquela condição ou aquela estrutura, e o que ficou de fora. A tarefa guarda o escopo e os critérios de aceitação, não o como. Quando uma pergunta de revisão muda uma decisão, a descrição muda junto.
 Depois do push, uma vez, confira o título e a descrição contra o código que subiu. Vários commits no mesmo push são uma conferência só. Se um dos dois deixou de contar o que a branch faz, atualize os dois antes de responder.
 
 Com `Atribuição da sessão` em `sim`, termine com a linha de atribuição da sessão.
@@ -163,7 +164,7 @@ Ao terminar, siga `sincronizar-status-da-tarefa` e depois `evoluir-habilidade` c
 
 Se você descrever só o que mudou, sem a imagem de uma mudança de tela nem o porquê das decisões, quem revisa monta o ambiente para ver o resultado ou pergunta de novo o que o código já respondeu.
 
-1. Siga `references/descricao-do-pull-request.md` no Passo 6.
+1. No Passo 6, ponha a imagem da mudança de tela e o como e o porquê de cada decisão.
 2. Sem imagem numa mudança de tela, o PR fica em rascunho e nenhum pedido de revisão sai.
 3. Quando a revisão mudar uma decisão, atualize a descrição na mesma rodada.
 
