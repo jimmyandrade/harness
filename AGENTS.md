@@ -1,6 +1,6 @@
 ---
 metadata:
-  version: "1.39.0"
+  version: "1.40.0"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -60,6 +60,7 @@ metadata:
 
 - Execute as consultas e verificações permitidas que o pedido exige sem pedir uma confirmação que a pessoa já deu. Pergunte só quando faltar um dado ou uma decisão humana que mude a ação.
 - Diante de uma falha técnica, verifique as alternativas permitidas da mesma conexão antes de passar a pendência à pessoa. A falha de uma chamada não prova perda de acesso. Não peça mudança de permissões sem verificar o alcance do bloqueio.
+- Antes de relatar um trabalho feito por um subagente, por outra sessão ou por outra pessoa, leia o conteúdo: o diff inteiro, arquivo por arquivo, o texto que entrou e o que foi tirado de regra que já existia. Título, número de arquivos e o resumo de quem fez não bastam. Corrija o que achar e diga o que foi cortado.
 - Resolva a referência da habilidade seguinte no catálogo conectado quando as regras do ambiente permitirem. A ausência na lista inicial não prova que ela não existe. Não peça à pessoa uma referência que já está na conversa.
 - Distinga a restrição explícita de descoberta, a busca sem resultado e o erro de permissão que a ferramenta devolveu. Não chame uma restrição das instruções de falta de acesso nem prometa que um pull request remove uma restrição do ambiente.
 - Ao receber uma correção sobre o seu comportamento, siga `evoluir-habilidade` na mesma conversa e transforme o feedback em correção no repositório de origem, não na cópia instalada, em vez de só explicar o erro. Com pedido de pull request, abra-o e diga o que mudou e o que ainda não foi validado.
