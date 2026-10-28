@@ -3,7 +3,7 @@ name: publicar-revisao-de-codigo
 description: Revisa um pull request e publica a revisão numa única review, com os comentários inline, no idioma de quem recebe e no tom do projeto. Usada quando a pessoa pede uma revisão ou outra habilidade precisa publicar uma. Não serve para tratar os comentários que você recebeu no seu PR.
 metadata:
   author: jimmyandrade
-  version: "0.17.1"
+  version: "0.18.0"
   aliases:
     - post-code-review
   related:
@@ -79,7 +79,7 @@ Não revise com um check pendente: diga qual e espere terminar. Um check que fal
 
 ### Passo 3
 
-Siga `Cópia de trabalho`. Com `worktree`, abra um worktree novo em `Pasta das cópias separadas`, a partir do PR, antes de ler o código, sem o clone da pessoa e sem reutilizar outra tarefa. Com valor vazio, pule a cópia se a revisão só lê o diff e, para executar código:
+Siga `Cópia de trabalho`. Com `workspace`, crie uma cópia independente em `Pasta das cópias separadas` e mude a raiz para ela. Com `worktree`, abra um worktree novo em `Pasta das cópias separadas`, a partir do PR, antes de ler o código, sem o clone da pessoa e sem reutilizar outra tarefa. Com valor vazio, pule a cópia se a revisão só lê o diff e, para executar código:
 
 1. Procure uma trava do repositório: uma revisão em andamento em outra execução, que é a cópia separada dele em `Pasta das cópias separadas`. Se existir, não comece: diga qual PR e há quanto tempo. Uma trava mais velha que `Idade máxima da trava` não se apaga em silêncio: avise e pergunte.
 2. Crie a cópia separada a partir do PR antes de tocar em qualquer arquivo. A cópia é a trava.
@@ -289,7 +289,6 @@ Rodei a revisão e achei bloqueio. Não aprovei. Avisei que ainda não dá para 
 - Feedback que muda o texto já publicado atualiza comentários e respostas sem perguntar, mesmo com `Ler o texto antes de publicar` em `sim`.
 - Uma review sem comentários inline não cobre um ponto de código: ele precisa de uma linha.
 - O corpo não repete o inline. A frase segue a quantidade, sem número.
-- Com `Cópia de trabalho` vazio, a cópia separada é a trava: removê-la libera o repositório.
 - O clone da pessoa pode ter alterações não salvas. Nunca as guarde nem as mova.
 - Um check pendente não é um check que falhou.
 

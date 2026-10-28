@@ -3,7 +3,7 @@ name: escrever-codigo
 description: Aplica as preferências de código da pessoa antes de escrever ou alterar código, como comentários, estilo inline e o que fazer antes de criar um componente. Usada quando uma mudança vai escrever ou alterar código, inclusive quando o pedido é implementar uma issue. Não serve para testes, para commit nem para decidir a arquitetura. O pedido de implementar só termina quando a resposta tem o link do pull request.
 metadata:
   author: jimmyandrade
-  version: "0.7.1"
+  version: "0.8.0"
   related:
     - criar-commit
     - criar-pull-request
@@ -26,7 +26,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Estilo inline": ""
 # `Antes de criar um componente` lista o que ler e quais habilidades do repositório chamar, em ordem.
 "Antes de criar um componente": ""
-# `Cópia de trabalho` é `Global` e cada skill pode sobrescrevê-lo. `worktree` trabalha num git worktree novo da `main`, nunca no clone da pessoa. Vazio trabalha onde a pessoa já está.
+# `Cópia de trabalho` é `Global` e cada skill pode sobrescrevê-lo. `workspace` cria uma cópia independente, exclusiva da tarefa, e muda a raiz para ela. `worktree` cria um git worktree novo da `main`. Vazio trabalha onde a pessoa já está.
 "Cópia de trabalho": "worktree"
 "Modo de aprendizado": "perguntar"
 ```
@@ -34,7 +34,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ### Passo 1
 
-Siga `Cópia de trabalho` antes de escrever. Com `worktree`, crie um git worktree novo desta tarefa e escreva nele. Não use o clone aberto da pessoa nem um worktree que outra tarefa já ocupa. Não apague esse worktree no fim: o trabalho continua nele. Com valor vazio, escreva onde a pessoa já está.
+Siga `Cópia de trabalho` antes de escrever. Com `workspace`, crie uma cópia independente do repositório, exclusiva desta tarefa, e mude a raiz de trabalho para ela. Com `worktree`, crie um git worktree novo desta tarefa. Não use o clone aberto da pessoa nem uma cópia que outra tarefa já ocupa. Não apague a cópia no fim: o trabalho continua nela. Com valor vazio, escreva onde a pessoa já está.
 
 Chame `levantar-ambiente-do-repositorio` para achar a convenção de código e as habilidades do repositório, nas instruções do projeto e nas habilidades do próprio repositório. Ela vale mais que qualquer preferência desta habilidade. Diga à pessoa quando uma preferência dela contraria o repositório e siga o repositório. Se a demanda é uma issue do rastreador, siga `preparar-tarefa-do-pull-request` para conferir se a descrição está no modelo do tipo antes de escrever. Não escreva código enquanto a descrição estiver fora do modelo. Antes de escrever o código, siga `escrever-teste`: com TDD, o padrão dela, o teste que falha vem primeiro, e o código é o que o faz passar.
 
@@ -119,7 +119,7 @@ Mudei a função sem comentário novo. Um `eslint-disable-next-line` com o motiv
 - O valor de estilo é fixo mas o sistema de estilos não tem variável para ele: use o sistema de estilos e diga que falta a variável.
 - O código é de um arquivo gerado: não aplique as preferências.
 - Vários commits sobem juntos: a conferência do título e da descrição é uma, depois do push.
-- `Cópia de trabalho` em `worktree`: a tarefa não entra no clone aberto nem num worktree já ocupado.
+- `Cópia de trabalho` em `workspace` ou `worktree`: a tarefa não entra no clone aberto nem numa cópia já ocupada.
 - O pedido é implementar e `Criar pull request ao terminar` está em `rascunho`: a resposta leva o link do rascunho. Sem o link, o pedido não terminou.
 
 ## Pegadinhas
@@ -128,7 +128,7 @@ Mudei a função sem comentário novo. Um `eslint-disable-next-line` com o motiv
 - O estilo inline é aceito para valor calculado, mesmo com `Estilo inline` restrito.
 - Preferência da pessoa não vai para a habilidade nem para as instruções de um repositório sem consenso do time.
 - Conferir a cada commit parece necessário. A conferência é uma vez, depois do push.
-- Reutilizar a worktree aberta parece mais rápido. Com `Cópia de trabalho` em `worktree`, a tarefa abre um git worktree novo e ele fica no fim.
+- Reutilizar a worktree aberta parece mais rápido. Com `Cópia de trabalho` em `workspace` ou `worktree`, a tarefa abre uma cópia nova e ela fica no fim.
 - O código pronto parece o fim do pedido de implementar. O fim é o link do pull request.
 
 ## Scripts disponíveis
