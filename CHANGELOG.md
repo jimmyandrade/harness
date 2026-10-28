@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.24.3](https://github.com/jimmyandrade/harness/compare/v1.24.2...v1.24.3) (2026-10-28)
+
+
+### Bug Fixes
+
+* **skills:** require a clickable link for every PR cited ([#599](https://github.com/jimmyandrade/harness/issues/599)) ([ed0ddda](https://github.com/jimmyandrade/harness/commit/ed0dddabb7635fde4a90141632104142520676dd))
+* **skills:** state the PR link rule in the final-answer step ([#601](https://github.com/jimmyandrade/harness/issues/601)) ([d6719d1](https://github.com/jimmyandrade/harness/commit/d6719d1d0a814c6dcd875b07de814f997115177f))
+* **vocabulary:** fill the expected fields that come back incomplete ([#602](https://github.com/jimmyandrade/harness/issues/602)) ([169afbe](https://github.com/jimmyandrade/harness/commit/169afbee67bfb4ea22cb152e5af20098fbe22fa2))
+
 ## [1.24.2](https://github.com/jimmyandrade/harness/compare/v1.24.1...v1.24.2) (2026-10-28)
 
 
