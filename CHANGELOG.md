@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.24.1](https://github.com/jimmyandrade/harness/compare/v1.24.0...v1.24.1) (2026-10-28)
+
+
+### Bug Fixes
+
+* **pedir-revisao-de-pr-no-slack:** follow-up keeps what the PR does ([#595](https://github.com/jimmyandrade/harness/issues/595)) ([0d561c1](https://github.com/jimmyandrade/harness/commit/0d561c1d4945f0301b5cb1953d7e02f81d7685fe))
+
 ## [1.24.0](https://github.com/jimmyandrade/harness/compare/v1.23.0...v1.24.0) (2026-10-28)
 
 
