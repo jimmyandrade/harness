@@ -3,7 +3,7 @@ name: evoluir-habilidade
 description: Use essa habilidade sempre que for testar uma skill, alterá-la a pedido ou evoluir as instruções do projeto, mesmo sem dizer evoluir, inclusive o Gherkin e a comparação com e sem skill, resultado inconsistente, falha de chamada ou correção da pessoa. NÃO use para criar a primeira versão, só ver se a descrição dispara, só revisar sem executar, nem gravar a página no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.27.0"
+  version: "0.27.1"
   related:
     - criar-commit
     - criar-pull-request
@@ -26,6 +26,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Pasta das habilidades": ".agents/skills"
 # `Executar testes` é `sob pedido` ou `sempre`.
 "Executar testes": "sob pedido"
+# `Cópia de trabalho` é `worktree` ou vazio. `worktree` edita num git worktree novo a partir da `main`, nunca no clone da pessoa.
+"Cópia de trabalho": "worktree"
 ```
 ## Instruções
 
@@ -39,7 +41,7 @@ flowchart LR
 ```
 
 Exija a skill, pelo nome ou pelo caminho. Antes de editar, confira de onde ela vem. O repositório não é uma entrada: a skill fica em `Pasta das habilidades`, no repositório de origem. A cópia que um projeto recebe pronta, por dependência ou plugin, não se edita: a próxima instalação apaga a alteração. Para testar, exija também a tarefa, os arquivos ou links de entrada e as saídas, e peça o que faltar antes de avaliar. Um pedido para testar uma skill entra aqui, mesmo sem dizer evoluir.
-Um pedido para acrescentar, tirar ou trocar uma regra também entra aqui e só exige a skill e a mudança. Edite já no repositório de origem, numa cópia de trabalho separada a partir da `main`, sem perguntar, nunca no clone da pessoa. Suba `metadata.version` e atualize o que a mudança deixa desatualizado. No mesmo turno, grave o commit e abra o pull request seguindo `criar-commit` e `criar-pull-request`. Não pergunte se a pessoa quer a lição em um commit. `Criar pull request ao terminar` decide a abertura: `rascunho` abre em rascunho, `sim` abre pronto, `não` não publica e a resposta diz o nome da branch. Depois, proponha um caso real. Sem execução, a mudança não conta como validada. Um feedback sobre o comportamento do agente também entra aqui: o alvo são as instruções do projeto, tratadas como uma skill. Edite seguindo o formato de `definir-instrucoes-do-projeto` e suba `metadata.version`. Elas não têm `evals/` nem `features/`.
+Um pedido para acrescentar, tirar ou trocar uma regra também entra aqui e só exige a skill e a mudança. Edite já no repositório de origem, seguindo `Cópia de trabalho`. Suba `metadata.version` e atualize o que a mudança deixa desatualizado. No mesmo turno, grave o commit e abra o pull request seguindo `criar-commit` e `criar-pull-request`. Não pergunte se a pessoa quer a lição em um commit. `Criar pull request ao terminar` decide a abertura: `rascunho` abre em rascunho, `sim` abre pronto, `não` não publica e a resposta diz o nome da branch. Depois, proponha um caso real. Sem execução, a mudança não conta como validada. Um feedback sobre o comportamento do agente também entra aqui: o alvo são as instruções do projeto, tratadas como uma skill. Edite seguindo o formato de `definir-instrucoes-do-projeto` e suba `metadata.version`. Elas não têm `evals/` nem `features/`.
 
 ### Passo 2
 
@@ -257,7 +259,6 @@ Dado que há o nome "Planejamento do trimestre" e 5 descrições de tarefa. Quan
 
 - A skill parece pronta na primeira versão. Ela é um documento vivo. A iteração parte do feedback.
 - Conferir a cada lição parece necessário. A conferência é uma vez, depois do push.
-- Perguntar se a pessoa quer a lição em um commit parece o passo que falta. Não pergunte. A abertura segue `Criar pull request ao terminar`.
 - "Testar" parece só conferir a saída. O teste edita a skill validada no repositório de origem, nessa conversa.
 - Uma mudança pedida parece exigir execução antes. Ela entra direto. A validação vem depois, com um caso real.
 - Um critério novo parece pedir a rodada de execuções. Com `Executar testes` em `sob pedido`, ela espera o pedido da pessoa, porque cada rodada gasta muitos tokens.
