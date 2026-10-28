@@ -3,7 +3,7 @@ name: validar-plano-de-vocabulario
 description: Use essa habilidade sempre que, ao cadastrar termos do vocabulário do tom de voz, for preciso validar os campos do plano antes de gravar, como categorias, motivo, descrição, exemplos e quem decidiu, mesmo sem dizer validar. NÃO use para cadastrar o termo, decidir o nível dele, gravar no vocabulário, nem inventar um campo que a pessoa não enviou.
 metadata:
   author: jimmyandrade
-  version: "0.4.2"
+  version: "0.4.3"
   related:
     - classificar-estado-do-termo
     - definir-vocabulario
