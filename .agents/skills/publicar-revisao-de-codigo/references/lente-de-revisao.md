@@ -32,6 +32,6 @@ Perguntas que a revisão faz ao código, no próprio PR ou no de outra pessoa. E
 
 ## Tom
 
-- Pergunta aberta, que admite estar errada: "Por que criamos X? Ou isso é um contrato que mantemos?".
-- No self-review, o comentário abre com "Self-review:" e diz o que preocupou.
+- Cada ponto é uma pergunta aberta, que admite estar errada, e nunca um veredito.
 - Cada dúvida respondida deixa a decisão na descrição do PR, com como e por quê, e um teste quando o comportamento for testável.
+- A redação de cada pergunta, como o prefixo de um self-review, é escolha de voz da pessoa e mora no vocabulário, não aqui.
