@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.24.0](https://github.com/jimmyandrade/harness/compare/v1.23.0...v1.24.0) (2026-10-28)
+
+
+### Features
+
+* **conversar-no-whatsapp:** say who waits and for how long on each pending item ([#593](https://github.com/jimmyandrade/harness/issues/593)) ([ebecdd3](https://github.com/jimmyandrade/harness/commit/ebecdd3c481620353207450d0769f5b3f9a49fbd)), closes [#592](https://github.com/jimmyandrade/harness/issues/592)
+
 ## [1.23.0](https://github.com/jimmyandrade/harness/compare/v1.22.0...v1.23.0) (2026-10-28)
 
 
