@@ -3,7 +3,7 @@ name: evoluir-habilidade
 description: Use essa habilidade sempre que for testar uma skill, alterá-la a pedido ou evoluir as instruções do projeto, mesmo sem dizer evoluir, inclusive o Gherkin e a comparação com e sem skill, resultado inconsistente, falha de chamada ou correção da pessoa. NÃO use para criar a primeira versão, só ver se a descrição dispara, só revisar sem executar, nem gravar a página no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.27.1"
+  version: "0.27.2"
   related:
     - criar-commit
     - criar-pull-request
@@ -26,7 +26,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Pasta das habilidades": ".agents/skills"
 # `Executar testes` é `sob pedido` ou `sempre`.
 "Executar testes": "sob pedido"
-# `Cópia de trabalho` é `worktree` ou vazio. `worktree` edita num git worktree novo a partir da `main`, nunca no clone da pessoa.
+# `Cópia de trabalho` é `Global` e cada skill pode sobrescrevê-lo. `worktree` edita num git worktree novo a partir da `main`, nunca no clone da pessoa.
 "Cópia de trabalho": "worktree"
 ```
 ## Instruções
