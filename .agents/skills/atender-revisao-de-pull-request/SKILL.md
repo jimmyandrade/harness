@@ -3,13 +3,14 @@ name: atender-revisao-de-pull-request
 description: Atende a revisão recebida num pull request, de pessoa ou de bot. Lê os comentários abertos, classifica cada sugestão, aplica o que é seguro e pede a resposta a `publicar-resposta-de-revisao`. Sem PR informado, lista os seus que precisam de atenção. Não serve para revisar o PR de outra pessoa nem para abrir o PR.
 metadata:
   author: jimmyandrade
-  version: "0.26.0"
+  version: "0.26.1"
   aliases:
     - resolver-comentarios-de-revisao
     - apply-pr-review
   related:
     - criar-commit
     - criar-pull-request
+    - mesclar-pull-request
     - atualizar-branch-do-pull-request
     - escrever-teste
     - fatiar-pull-request
@@ -238,7 +239,7 @@ Achei cinco comentários abertos. Dois eram estruturais, um nome e um texto, e a
 - Dois bots apontam o mesmo problema: uma correção, uma resposta em cada thread.
 - A resposta, a marcação e a resolução seguem `publicar-resposta-de-revisao`.
 - Um push novo faz o bot revisar de novo: leia as threads novas antes do merge.
-- Um bot comenta por causa de um check que falhou: trate como os outros. A decisão de mesclar com check falhando fica com `criar-pull-request`.
+- Um bot comenta por causa de um check que falhou: trate como os outros. A decisão de mesclar com check falhando fica com `mesclar-pull-request`.
 - Sem PR informado e sem nenhum PR da pessoa precisando de ação: diga isso e pare.
 - Execução agendada: siga `Aplicar em execução agendada` e deixe o resto no resumo, sem responder.
 - A branch está atrás da base, com ou sem conflito: atualize com rebase, resolva o conflito e substitua a branch publicada, como `atualizar-branch-do-pull-request` manda, sem avisar e sem pedir. Se há pull requests empilhados em cima, atualize essas branches na mesma cópia, na ordem, para cada diff continuar só com os arquivos daquela pergunta. A branch aberta no clone da pessoa não é reescrita lá.

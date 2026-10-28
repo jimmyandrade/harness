@@ -3,11 +3,12 @@ name: avaliar-atualizacoes-de-dependencia
 description: Use essa habilidade sempre que houver PR de atualização de dependência do Dependabot ou do Renovate para avaliar, testar ou mesclar, mesmo sem dizer o nome do bot. NÃO use para atualizar uma dependência à mão nem para PR que não seja de bot.
 metadata:
   author: jimmyandrade
-  version: "0.9.4"
+  version: "0.9.5"
   related:
     - evoluir-habilidade
     - criar-commit
     - criar-pull-request
+    - mesclar-pull-request
     - atender-revisao-de-pull-request
 ---
 
@@ -69,7 +70,7 @@ Peça revisão aos `Revisores`. Sem revisores, comente no PR a análise: a cadei
 ```mermaid
 flowchart LR
   A{PR tem comentário?} -->|sim| B[Siga atender-revisao-de-pull-request]
-  B --> C[Mescle seguindo criar-pull-request]
+  B --> C[mesclar-pull-request]
   A -->|não| C
   C --> D{Checks do commit de merge na base}
   D -->|verde| E[Próximo PR da fila]
@@ -143,7 +144,6 @@ A biblioteca era transitiva. A árvore levou ao pacote direto que a puxa, e os p
 - Dois PRs conflitam depois de um merge e a ordem fica ambígua: pergunte à pessoa.
 - O pacote baixa binários presos à versão, como os navegadores de teste: diga na análise que cada máquina precisa baixá-los de novo depois do merge.
 - O pacote vai num artefato publicado à parte, como um worker ou uma função: o merge não atualiza o que está rodando. Diga na análise que falta publicar de novo.
-- Uma revisão obrigatória que você não consegue cumprir bloqueia o merge: pare e diga quem precisa aprovar.
 - O PR atualiza um pacote sem os que andam junto com ele, como os tipos, a peer dependency ou outro pacote do mesmo monorepo: pare a fila e agrupe-os conforme `Agrupar pacotes relacionados`, como diz o Passo 3.
 - O PR agrupado substitui o PR antigo do pacote: siga o agrupado, como num PR substituído pelo bot.
 - O PR da regra de agrupamento abre: o título e a descrição passam uma vez pela conferência, depois do push.
