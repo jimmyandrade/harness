@@ -72,13 +72,15 @@ test("a batch with two rows of the same spelling and tags is refused", () => {
   assert.throws(() => writeTerms(root, "pt-BR", "insert", terms([greeting(["canal-a"]), greeting(["canal-a"])])), /is duplicated/)
 })
 
-test("a batch with two terms of the same source is refused, and the message names both and says what to do", () => {
-  const { root } = glossary()
+test("terms of the same source are all written, in one batch and in later calls", () => {
+  const { root, file } = glossary()
   const page = "https://example.com/page"
-  assert.throws(
-    () => writeTerms(root, "pt-BR", "insert", terms([{ ...greeting(), source: page }, { ...greeting(), term: "boa tarde", source: page }])),
-    /The source of "boa tarde" is the same as the source of "bom dia".*write it in notes/,
-  )
+  const first = writeTerms(root, "pt-BR", "insert", terms([{ ...greeting(), source: page }, { ...greeting(), term: "boa tarde", source: page }]))
+  assert.equal(first.inserted.length, 2)
+  const later = writeTerms(root, "pt-BR", "upsert", terms([{ ...greeting(), term: "boa noite", source: page }]))
+  assert.deepEqual(later.inserted.map((row) => row.term), ["boa noite"])
+  const rows = stored(file) as Record<string, { source: string }[] | { source: string }>
+  assert.equal(Object.keys(rows).length, 3)
 })
 
 test("a batch may write the rows of one spelling with different tags together", () => {

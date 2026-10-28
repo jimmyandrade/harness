@@ -12,7 +12,7 @@ Accepted. The sentence that an `upsert` without `notes` clears them is supersede
 
 A voice profile written before the glossary kept, for each term, an explanation that mixed three things: what the term is, when it applies, and where the decision came from, such as a date, a link, or what happened in a pull request. The glossary has a field for the first two, `description` and `when`. It has none for the third. Moving the profiles over put the history inside `description`, so the field stopped describing the term.
 
-`source` names where a row came from, but it must be unique per row and an upsert uses it to find a renamed term, so it cannot hold free text. `reason` and `when` exist only on some levels, and `when` is refused on `allowed` and `forbidden`, which are general rules.
+`source` names where a row came from, so it cannot hold free text. (It was unique per row when this ADR was written. ADR 0019 lets rows share it.) `reason` and `when` exist only on some levels, and `when` is refused on `allowed` and `forbidden`, which are general rules.
 
 ## Decision
 
