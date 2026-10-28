@@ -3,7 +3,7 @@ name: escrever-codigo
 description: Aplica as preferências de código da pessoa antes de escrever ou alterar código, como comentários, estilo inline e o que fazer antes de criar um componente. Usada quando uma mudança vai escrever ou alterar código, inclusive quando o pedido é implementar uma issue. Não serve para testes, para commit nem para decidir a arquitetura. O pedido de implementar só termina quando a resposta tem o link do pull request.
 metadata:
   author: jimmyandrade
-  version: "0.7.0"
+  version: "0.7.1"
   related:
     - criar-commit
     - criar-pull-request
@@ -26,8 +26,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Estilo inline": ""
 # `Antes de criar um componente` lista o que ler e quais habilidades do repositório chamar, em ordem.
 "Antes de criar um componente": ""
-# `Cópia de trabalho` é `worktree` ou vazio. `worktree` abre um git worktree novo por tarefa e não usa o clone da pessoa. Vazio escreve onde a pessoa já está.
-"Cópia de trabalho": ""
+# `Cópia de trabalho` é `Global` e cada skill pode sobrescrevê-lo. `worktree` trabalha num git worktree novo da `main`, nunca no clone da pessoa. Vazio trabalha onde a pessoa já está.
+"Cópia de trabalho": "worktree"
 "Modo de aprendizado": "perguntar"
 ```
 ## Instruções
