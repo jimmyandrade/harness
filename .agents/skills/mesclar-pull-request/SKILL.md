@@ -71,7 +71,9 @@ Se o modo automático negar o merge, não tente de outro jeito: nada de auto-mer
 Depois do merge, feito aqui ou avisado pela pessoa, faça tudo isto na mesma resposta, antes de responder:
 
 - [ ] Confirme o estado MERGED e o hash do commit na base.
-- [ ] Siga `sincronizar-status-da-tarefa` para cada tarefa, card ou issue ligada ao PR. Sem tarefa ligada, diga isso.
+- [ ] Procure as tarefas ligadas ao PR: as issues que ele fecha, a chave do card no título ou na branch, e as tarefas que citam o PR.
+- [ ] Para cada tarefa achada, siga `sincronizar-status-da-tarefa`.
+- [ ] Se não achar nenhuma, escreva na resposta que o PR não tem tarefa ligada e onde você procurou. A pessoa decide se liga uma tarefa ou se o PR não precisa de uma.
 - [ ] Se o projeto sincroniza o repositório com outra ferramenta, como as páginas de habilidade no Notion, confira a sincronização.
 - [ ] Com `Comunicar novidade após o merge` em `sim`, siga `comunicar-novidade-do-produto` para o PR.
 - [ ] Siga `limpar-copias-de-trabalho` para a cópia de trabalho e a branch local do PR.
