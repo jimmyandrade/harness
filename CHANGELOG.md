@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.27.2](https://github.com/jimmyandrade/harness/compare/v1.27.1...v1.27.2) (2026-10-28)
+
+
+### Bug Fixes
+
+* **definir-issue-do-github:** read the output model before writing or editing any issue ([#620](https://github.com/jimmyandrade/harness/issues/620)) ([d64bf1a](https://github.com/jimmyandrade/harness/commit/d64bf1a7d095788f4b57d6cb9b361b39c815abcb))
+
 ## [1.27.1](https://github.com/jimmyandrade/harness/compare/v1.27.0...v1.27.1) (2026-10-28)
 
 
