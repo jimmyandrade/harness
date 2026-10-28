@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.25.0](https://github.com/jimmyandrade/harness/compare/v1.24.3...v1.25.0) (2026-10-28)
+
+
+### Features
+
+* **definir-artigo-da-base-de-conhecimento:** add the knowledge-base article skill ([#608](https://github.com/jimmyandrade/harness/issues/608)) ([9c9192e](https://github.com/jimmyandrade/harness/commit/9c9192e9f257e900f16041ad8bdced80f3fa6871)), closes [#607](https://github.com/jimmyandrade/harness/issues/607)
+* **skills:** treat the author's visual-evidence promises and self-review questions as review work ([#609](https://github.com/jimmyandrade/harness/issues/609)) ([cbd7206](https://github.com/jimmyandrade/harness/commit/cbd7206a8e9dfdf6a76e925e327b59fc172afe1b))
+
+
+### Bug Fixes
+
+* **skills:** require visual evidence before opening or requesting review of a UI pull request ([#605](https://github.com/jimmyandrade/harness/issues/605)) ([7667eb9](https://github.com/jimmyandrade/harness/commit/7667eb947055c2f8034a3dddc36e38d3c517ea1e))
+* **skills:** sync the task status when the person says a PR was merged ([#603](https://github.com/jimmyandrade/harness/issues/603)) ([7af9852](https://github.com/jimmyandrade/harness/commit/7af98522d1ef6145de3029228aafcca4b9cbf68e))
+
 ## [1.24.3](https://github.com/jimmyandrade/harness/compare/v1.24.2...v1.24.3) (2026-10-28)
 
 
