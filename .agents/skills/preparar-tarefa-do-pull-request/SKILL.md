@@ -1,9 +1,9 @@
 ---
 name: preparar-tarefa-do-pull-request
-description: Garante a tarefa da demanda antes do pull request e confere se a descrição da issue em que a pessoa vai trabalhar segue o modelo do tipo. Usada quando falta a tarefa, quando o PR já existe sem ela, ou quando a pessoa vai implementar uma issue. Não cria sozinha nem escolhe o projeto por um card parecido. Não serve para abrir o PR nem para revisar uma tarefa sem demanda de trabalho.
+description: Garante a tarefa da demanda antes do pull request e confere se a descrição de qualquer card segue o modelo do tipo. Usada quando falta a tarefa, quando o PR já existe sem ela, ao implementar uma issue e ao escrever ou editar um card, mesmo subtarefa. Não cria sozinha nem escolhe o projeto por um card parecido. Não serve para abrir o PR.
 metadata:
   author: jimmyandrade
-  version: "0.8.0"
+  version: "0.9.0"
   related:
     - definir-tarefa
     - evoluir-habilidade
@@ -91,7 +91,7 @@ Monte a tarefa com `definir-tarefa`, que cuida da boa escrita: título, prazo, d
 - O escopo é fatiado, e cada parte entrega valor cedo. Separe o obrigatório do que fica de fora agora, com `priorizar-itens`, para cada subtarefa caber num PR.
 - A tarefa guarda o que se espera: o escopo e os critérios de aceitação, que dizem o que fica pronto e quando. Como foi feito e por que cada decisão foi tomada ficam na descrição do PR, não na tarefa. Quando uma pergunta de revisão muda o comportamento, atualize o critério afetado, em Dado, Quando e Então, e a descrição do PR ganha a decisão.
 - Os critérios de aceitação seguem o `Formato dos critérios de aceitação`. Uma tarefa que muda código de um app com ambiente de teste por PR termina com o `Critério de validação da mudança`. O registro diz o que foi procurado e o que foi encontrado, nunca só que não há regressão.
-- Os `Modelos de descrição` valem por tipo. Um reforço do projeto soma ao modelo do tipo e nunca o substitui, e não vale numa tarefa criada no projeto de reserva.
+- Antes de escrever ou editar a descrição de qualquer card, leia o modelo do tipo em `Modelos de descrição` e o `Formato dos critérios de aceitação`. Vale também para subtarefa e para card que nasce de um achado, sem PR. A descrição segue as seções do modelo, na ordem. Sem modelo para o tipo, os critérios usam o mesmo formato: um título com "deve" ou "não deve" e os itens Dado que, Quando e Então. Nunca lista solta de bullets. Um reforço do projeto soma ao modelo do tipo e nunca o substitui, e não vale numa tarefa criada no projeto de reserva.
 - O `Formato da descrição` manda na gravação: link e caixa de seleção no formato próprio do rastreador, conferidos lendo a tarefa de volta.
 - Aplique as `Lentes de revisão` ao decidir título, escopo e tipo: cada afirmação se apoia no PR, no diff ou no que a pessoa disse, o que for hipótese vai marcado como hipótese, e a habilidade diz o que não conseguiu confirmar.
 - Sem rodapé nem assinatura de ferramenta.
@@ -154,6 +154,15 @@ Se você implementar com a descrição fora do modelo, o código segue um texto 
 2. Reescreva para o modelo, mantendo as decisões já escritas.
 3. Não invente escopo.
 
+### Card escrito sem o modelo
+
+Se você escrever ou editar o card pelo hábito, com lista de bullets ou seções próprias, sem ler o modelo do tipo, ele sai fora do padrão e a pessoa tem de pedir a reescrita.
+
+1. Leia o modelo do tipo e o formato dos critérios antes de escrever.
+2. Siga as seções do modelo e os critérios em título com "deve" ou "não deve", com Dado que, Quando e Então.
+3. Sem modelo para o tipo, use o mesmo formato dos critérios.
+4. Vale para subtarefa e para card sem PR.
+
 ### Chave na branch contra a convenção
 
 Se você puser a chave da tarefa no nome da branch num repositório que a proíbe, o check da branch falha.
@@ -189,10 +198,13 @@ O PR está aberto, em rascunho. Procurei e não achei. Sugeri criar a tarefa a p
 - Falta permissão de criação: use o projeto de reserva, ou diga e pare.
 - A pessoa não deu contexto suficiente: pergunte de novo, sem criar.
 - O repositório proíbe a chave no nome da branch: a convenção vale, e a chave fica só no corpo do PR.
+- O card é uma subtarefa, ou nasce de um achado no meio de outro trabalho, sem PR: o modelo do tipo vale do mesmo jeito.
+- Não há modelo para o tipo: os critérios usam Dado que, Quando e Então, com o título em "deve" ou "não deve".
 
 ## Pegadinhas
 
 - A tarefa deve existir antes do PR. Criar depois é a exceção.
+- Subtarefa e card de um achado parecem pequenos demais para o modelo. O modelo vale por tipo, não por tamanho.
 - Achar a tarefa parece o fim. Se a pessoa vai trabalhar nela, a descrição ainda precisa estar no modelo do tipo.
 - O rastreador pode usar um formato próprio para caixas de seleção, e o texto simples de lista não vira caixa marcável. Confira como o rastreador do projeto grava.
 - Uma tarefa de projeto de reserva pode precisar de uma segunda tarefa no projeto certo, depois de uma migração.
