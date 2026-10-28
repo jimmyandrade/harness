@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.23.0](https://github.com/jimmyandrade/harness/compare/v1.22.0...v1.23.0) (2026-10-28)
+
+
+### Features
+
+* **escrever-codigo,publicar-revisao-de-codigo:** add the workspace work copy ([#589](https://github.com/jimmyandrade/harness/issues/589)) ([a85ea5f](https://github.com/jimmyandrade/harness/commit/a85ea5fccc23cc484c88926c356c083624091c12))
+
+
+### Bug Fixes
+
+* **acompanhar-fila-de-revisao:** read the PR link from the PR url ([#591](https://github.com/jimmyandrade/harness/issues/591)) ([06d320b](https://github.com/jimmyandrade/harness/commit/06d320b0539d8e26c89cd91d6273de632dc447d9))
+
 ## [1.22.0](https://github.com/jimmyandrade/harness/compare/v1.21.0...v1.22.0) (2026-10-28)
 
 
