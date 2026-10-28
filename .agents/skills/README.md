@@ -28,6 +28,7 @@ flowchart LR
     definir_agenda["definir-agenda"]
     definir_agenda_de_popstar["definir-agenda-de-popstar"]
     definir_arquivos_da_habilidade["definir-arquivos-da-habilidade"]
+    definir_artigo_da_base_de_conhecimento["definir-artigo-da-base-de-conhecimento"]
     definir_artista["definir-artista"]
     definir_ativo_imobilizado["definir-ativo-imobilizado"]
     definir_campanha_de_conteudo["definir-campanha-de-conteudo"]
@@ -189,6 +190,10 @@ flowchart LR
   definir_agenda_de_popstar --> revisar_uso_do_tempo
   definir_arquivos_da_habilidade --> criar_habilidade
   definir_arquivos_da_habilidade --> evoluir_habilidade
+  definir_artigo_da_base_de_conhecimento --> criar_habilidade
+  definir_artigo_da_base_de_conhecimento --> definir_historia_de_usuario
+  definir_artigo_da_base_de_conhecimento --> definir_tarefa
+  definir_artigo_da_base_de_conhecimento --> evoluir_habilidade
   definir_artista --> definir_empresa
   definir_artista --> definir_perfil_social
   definir_artista --> definir_pessoa
