@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.27.0](https://github.com/jimmyandrade/harness/compare/v1.26.0...v1.27.0) (2026-10-28)
+
+
+### Features
+
+* **definir-artigo-da-base-de-conhecimento:** add the writing rules and the strategy source parameter ([#616](https://github.com/jimmyandrade/harness/issues/616)) ([a5f3e0f](https://github.com/jimmyandrade/harness/commit/a5f3e0f7de9cae2b393181c9a7b5fad56a017b12)), closes [#615](https://github.com/jimmyandrade/harness/issues/615)
+
 ## [1.26.0](https://github.com/jimmyandrade/harness/compare/v1.25.0...v1.26.0) (2026-10-28)
 
 
