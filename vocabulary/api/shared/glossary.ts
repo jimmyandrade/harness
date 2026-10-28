@@ -468,9 +468,6 @@ export function writeTerms(
     if (batch.some((previous) => rowKey(previous.term, previous.tags) === rowKey(item.term, item.tags))) {
       problems.push({ term: item.term, message: `${JSON.stringify(item.term)} is duplicated.` })
     }
-    if (item.source !== undefined && batch.some((previous) => previous.source === item.source)) {
-      problems.push({ term: item.term, message: `The source of ${JSON.stringify(item.term)} is duplicated.` })
-    }
     batch.push(item)
     for (const message of exampleIssues(item.term, [...item.examples, ...item.rejected], item.alternatives)) {
       problems.push({ term: item.term, message })
@@ -505,15 +502,6 @@ export function writeTerms(
     }
     const spelling = item.case_sensitive ? item.term : lowercaseTerm(item.term)
     const spelled = conceptMatches(loaded, item.term).length > 0
-    const origin = item.source === undefined || spelled ? undefined : loaded.find((entry) => entry.source === item.source)
-    if (origin !== undefined) {
-      if (mode === "insert") {
-        unchanged.push({ term: item.term, reason: `Already in the glossary as ${JSON.stringify(origin.term)}.` })
-        continue
-      }
-      writing.set(rowKey(spelling, item.tags), { ...item, term: spelling, previous: origin })
-      continue
-    }
     if (mode === "update") {
       skipped.push({ term: item.term, reason: spelled ? "Not in the glossary with these tags." : "Not in the glossary." })
       continue
@@ -627,9 +615,7 @@ export function migrate(directory: string, language: string, write = false): Mig
  */
 function withStored(entries: readonly Entry[], item: BulkTerm, mode: WriteMode): { item: BulkTerm; issues: string[] } {
   if (mode === "insert") return { item, issues: [] }
-  const spelled = conceptMatches(entries, item.term).length > 0
-  const stored =
-    targetRow(entries, item, mode) ?? (item.source === undefined || spelled ? undefined : entries.find((entry) => entry.source === item.source))
+  const stored = targetRow(entries, item, mode)
   if (stored === undefined) return { item, issues: [] }
   const keeps = (field: PatchableField): boolean => !item.given.includes(field)
   const merged: BulkTerm = {

@@ -69,7 +69,7 @@ A project moves to `enforce` once it fills what is missing. A later release make
 - `categories` is a list of English words, such as `slang` or `spirituality`. It replaces `category`. A row with `category` reads it as a list of one, and a request with `category` adds it to `categories`.
 - `allowed_in` and `forbidden_in` are lists of formats or channels, written like tags, such as `whatsapp` or `feed`. A read that carries one of them changes the level: a tag in `forbidden_in` makes the row `forbidden`, and wins over a tag in `allowed_in`, which makes it `allowed`. `lookup` returns the changed level in `state` and the level of the row in `base_state`. They fit any level, including `forbidden` and `allowed`.
 - `decided_by` names who decided the level.
-- `source` says where the row came from, such as the URL of a page. An upsert that does not find the term by its spelling finds it by `source`, renames the row, and moves the links of other rows to the new spelling. The URL may stop working after the migration. Two terms of one batch may not share a source.
+- `source` says where the row came from, such as the URL of a page. The URL may stop working after the migration. ADR 0019 replaces the rule that an upsert finds a renamed term by `source`: a `source` only records the origin and may be shared.
 
 The relation to other terms that a substitution often is stays in `alternatives`. The text of the substitution stays in `substitution`.
 

@@ -83,6 +83,6 @@ Run the commands from the project that holds the glossary. With the MCP server i
 
    Check: the response lists `inserted`, `updated`, `unchanged`, `skipped`, and `incomplete`. A refusal lists every problem with its term and leaves the file unchanged. Fix the batch and run it again.
 
-7. Run the same import again. Check: every term is `unchanged`. A term renamed in the other tool keeps its row, found by `source`.
+7. Run the same import again. Check: every term is `unchanged`. A term renamed in the other tool is a new row: the old row stays until you remove it, because `source` does not link rows.
 
 8. Fill what `incomplete` lists. When it is empty, run the write with `--validation enforce` so a new term without an expected field is refused.

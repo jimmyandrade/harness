@@ -164,7 +164,7 @@ test("allowed_in and forbidden_in change the level of a read that carries the ta
   assert.equal(lookupTerm(reader, "pt-BR", "imperdível", ["whatsapp", "feed"]).state, "forbidden")
 })
 
-test("decided_by and source are stored, and an upsert finds a renamed term by its source", () => {
+test("decided_by and source are stored, and a source never makes one term stand for another", () => {
   const { root, file } = glossary()
   const source = "https://example.com/terms/42"
   writeTerms(root, "pt-BR", "insert", terms([
@@ -174,13 +174,13 @@ test("decided_by and source are stored, and an upsert finds a renamed term by it
   const again = writeTerms(root, "pt-BR", "upsert", terms([
     { state: "forbidden", term: "barateza", description: "barato demais", decided_by: "Maria Silva", source },
   ]))
-  assert.deepEqual(again.updated.map((item) => item.term), ["barateza"])
-  assert.deepEqual(again.inserted, [])
+  assert.deepEqual(again.inserted.map((item) => item.term), ["barateza"])
+  assert.deepEqual(again.updated, [])
   const stored = JSON.parse(readFileSync(file, "utf8"))
-  assert.equal(stored.baratinho, undefined)
+  assert.equal(stored.baratinho.source, source)
   assert.equal(stored.barateza.source, source)
   assert.deepEqual(stored.barateza.decided_by, { name: "Maria Silva" })
-  assert.deepEqual(stored["acessível"].related, ["barateza"])
+  assert.deepEqual(stored["acessível"].related, ["baratinho"])
   const same = writeTerms(root, "pt-BR", "upsert", terms([
     { state: "forbidden", term: "barateza", description: "barato demais", decided_by: "Maria Silva", source },
   ]))
@@ -277,18 +277,6 @@ test("decided_by with an invalid e-mail or an unknown key is refused", () => {
     { state: "allowed", term: "casa", description: "lugar", reason: "simples", decided_by: { name: "Maria Silva", role: "tom de voz" } },
   ])))
   assert.equal(readFileSync(file, "utf8"), "{}\n")
-})
-
-test("two terms with the same source in one batch are refused", () => {
-  const { root } = glossary()
-  const source = "https://example.com/terms/1"
-  assert.throws(
-    () => writeTerms(root, "pt-BR", "insert", terms([
-      { state: "allowed", term: "casa", source },
-      { state: "allowed", term: "lar", source },
-    ])),
-    InvalidGlossary,
-  )
 })
 
 const STORED = {
