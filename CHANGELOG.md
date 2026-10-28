@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.26.0](https://github.com/jimmyandrade/harness/compare/v1.25.0...v1.26.0) (2026-10-28)
+
+
+### Features
+
+* **skills:** ask the pull request description for how and why of each decision ([#611](https://github.com/jimmyandrade/harness/issues/611)) ([8ca2df5](https://github.com/jimmyandrade/harness/commit/8ca2df5a0dd57cf40c3da5bd27ca5e49771e6207))
+* **skills:** rename the session after the PR it opens or binds ([#604](https://github.com/jimmyandrade/harness/issues/604)) ([be2b06c](https://github.com/jimmyandrade/harness/commit/be2b06c70f2d68fda21b2e32e984d012af2c732f))
+
 ## [1.25.0](https://github.com/jimmyandrade/harness/compare/v1.24.3...v1.25.0) (2026-10-28)
 
 
