@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.24.2](https://github.com/jimmyandrade/harness/compare/v1.24.1...v1.24.2) (2026-10-28)
+
+
+### Bug Fixes
+
+* **vocabulary:** let rows share a source ([#597](https://github.com/jimmyandrade/harness/issues/597)) ([1f73682](https://github.com/jimmyandrade/harness/commit/1f736822797afb28f6488998c2b970a62447a59e))
+
 ## [1.24.1](https://github.com/jimmyandrade/harness/compare/v1.24.0...v1.24.1) (2026-10-28)
 
 
