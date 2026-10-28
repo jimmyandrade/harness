@@ -3,7 +3,7 @@ name: criar-habilidade
 description: Cria, adiciona e escreve skills a partir de uma tarefa real. Usada quando a pessoa quer uma skill nova, mesmo sem dizer skill. NÃO serve para editar código, escrever página que não seja skill, otimizar só a descrição nem gravar a skill no Notion.
 metadata:
   author: jimmyandrade
-  version: "3.17.3"
+  version: "3.18.1"
   related:
     - criar-commit
     - criar-pull-request
@@ -20,6 +20,8 @@ metadata:
 "Tokens do catálogo": 100
 "Linhas": 500
 "Tokens do corpo": 5000
+# `Cópia de trabalho` é `Global` e cada skill pode sobrescrevê-lo. `worktree` trabalha num git worktree novo da `main`, nunca no clone da pessoa. Vazio trabalha onde a pessoa já está.
+"Cópia de trabalho": "worktree"
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -29,6 +31,8 @@ metadata:
 
 Crie ou atualize a skill a partir de uma tarefa prática que a pessoa está realizando com um agente. Peça o contexto do domínio antes de escrever. Não complete com conhecimento geral do modelo.
 Extraia e insira na skill as etapas que funcionaram, na sequência que levou ao sucesso. Extraia as correções, como trocar uma biblioteca ou verificar um caso de borda. Extraia o formato da entrada e da saída. Extraia fatos, convenções e restrições do projeto que o agente ainda não sabia.
+
+Siga `Cópia de trabalho` antes de escrever a skill no repositório de origem.
 
 ### Passo 2
 

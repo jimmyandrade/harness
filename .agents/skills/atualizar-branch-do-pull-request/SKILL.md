@@ -3,7 +3,7 @@ name: atualizar-branch-do-pull-request
 description: Use essa habilidade sempre que uma branch com pull request estiver atrás da base, tiver conflito ou precisar de rebase, mesmo sem dizer rebase. NÃO use para abrir o PR, fazer o primeiro push nem mesclar (use criar-pull-request).
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.1"
   related:
     - criar-pull-request
     - atender-revisao-de-pull-request
@@ -19,6 +19,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 ```yaml
 "Repositório": ""
 "Branch base": "main"
+# `Cópia de trabalho` é `Global` e cada skill pode sobrescrevê-lo. `worktree` trabalha num git worktree novo da `main`, nunca no clone da pessoa. Vazio trabalha onde a pessoa já está.
+"Cópia de trabalho": "worktree"
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -26,6 +28,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ### Passo 1
 
+Siga `Cópia de trabalho` antes de mexer na branch.
 Se a branch já tem PR, confira o estado dele antes de atualizar.
 Se já foi mesclado, a branch remota foi apagada: comece uma branch nova a partir da `Branch base` remota e leve só os commits que ficaram fora do merge.
 

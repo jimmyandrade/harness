@@ -1,6 +1,6 @@
 ---
 metadata:
-  version: "1.38.1"
+  version: "1.39.0"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -17,6 +17,7 @@ metadata:
       "Cor do ícone dos modelos no Notion": "gray"
       "Símbolo da pasta no macOS": "wand.and.sparkles"
       "Considerar grupos de oportunidades": "sim"
+      "Cópia de trabalho": "worktree"
       "Idioma da issue": "português do Brasil"
       "Idioma das instruções do projeto": "português do Brasil"
       "Idioma das respostas": "português do Brasil"
