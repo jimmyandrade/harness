@@ -71,6 +71,7 @@ flowchart LR
     extrair_tarefas_da_reuniao["extrair-tarefas-da-reuniao"]
     fatiar_pull_request["fatiar-pull-request"]
     fazer_fechamento["fazer-fechamento"]
+    formalizar_decisao["formalizar-decisao"]
     gerenciar_estoque["gerenciar-estoque"]
     gravar_termos_no_vocabulario["gravar-termos-no-vocabulario"]
     identificar_duplicata["identificar-duplicata"]
@@ -376,6 +377,11 @@ flowchart LR
   fazer_fechamento --> lancar_despesa_da_empresa
   fazer_fechamento --> organizar_ponto_de_contato
   fazer_fechamento --> revisar_financas
+  formalizar_decisao --> conversar_no_whatsapp
+  formalizar_decisao --> criar_pull_request
+  formalizar_decisao --> definir_registro_de_reuniao
+  formalizar_decisao --> enviar_mensagem_no_slack
+  formalizar_decisao --> preparar_tarefa_do_pull_request
   gerenciar_estoque --> definir_ativo_imobilizado
   gerenciar_estoque --> definir_lancamento
   gerenciar_estoque --> identificar_duplicata
