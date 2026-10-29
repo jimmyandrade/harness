@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.27.3](https://github.com/jimmyandrade/harness/compare/v1.27.2...v1.27.3) (2026-10-29)
+
+
+### Bug Fixes
+
+* **sincronizar-status-da-tarefa:** edit the existing task comment instead of opening a second one ([#622](https://github.com/jimmyandrade/harness/issues/622)) ([20d4474](https://github.com/jimmyandrade/harness/commit/20d4474b5d468107e7a7cdd3646c46f2f2e91f64))
+
 ## [1.27.2](https://github.com/jimmyandrade/harness/compare/v1.27.1...v1.27.2) (2026-10-28)
 
 
