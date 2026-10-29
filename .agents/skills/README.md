@@ -62,7 +62,6 @@ flowchart LR
     definir_viagem["definir-viagem"]
     definir_vocabulario["definir-vocabulario"]
     descrever_habilidade_ou_schema["descrever-habilidade-ou-schema"]
-    diagnosticar_e2e_vermelho["diagnosticar-e2e-vermelho"]
     enviar_mensagem_no_slack["enviar-mensagem-no-slack"]
     escrever_codigo["escrever-codigo"]
     escrever_teste["escrever-teste"]
@@ -110,6 +109,7 @@ flowchart LR
     revisar_uso_do_tempo["revisar-uso-do-tempo"]
     sincronizar_cronograma["sincronizar-cronograma"]
     sincronizar_status_da_tarefa["sincronizar-status-da-tarefa"]
+    testar_ponta_a_ponta["testar-ponta-a-ponta"]
     validar_plano_de_vocabulario["validar-plano-de-vocabulario"]
   end
   acompanhar_fila_de_revisao --> atender_revisao_de_pull_request
@@ -336,11 +336,6 @@ flowchart LR
   descrever_habilidade_ou_schema --> criar_pull_request
   descrever_habilidade_ou_schema --> evoluir_habilidade
   descrever_habilidade_ou_schema --> revisar_habilidade
-  diagnosticar_e2e_vermelho --> definir_issue_do_github
-  diagnosticar_e2e_vermelho --> escrever_teste
-  diagnosticar_e2e_vermelho --> evoluir_habilidade
-  diagnosticar_e2e_vermelho --> preparar_tarefa_do_pull_request
-  diagnosticar_e2e_vermelho --> registrar_resultados_da_validacao_na_tarefa
   enviar_mensagem_no_slack --> definir_pessoa
   enviar_mensagem_no_slack --> definir_vocabulario
   enviar_mensagem_no_slack --> evoluir_habilidade
@@ -532,6 +527,11 @@ flowchart LR
   sincronizar_status_da_tarefa --> criar_pull_request
   sincronizar_status_da_tarefa --> evoluir_habilidade
   sincronizar_status_da_tarefa --> levantar_contexto_do_pull_request
+  testar_ponta_a_ponta --> definir_issue_do_github
+  testar_ponta_a_ponta --> escrever_teste
+  testar_ponta_a_ponta --> evoluir_habilidade
+  testar_ponta_a_ponta --> preparar_tarefa_do_pull_request
+  testar_ponta_a_ponta --> registrar_resultados_da_validacao_na_tarefa
   validar_plano_de_vocabulario --> classificar_estado_do_termo
   validar_plano_de_vocabulario --> definir_vocabulario
   validar_plano_de_vocabulario --> gravar_termos_no_vocabulario
