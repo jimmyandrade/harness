@@ -5,7 +5,6 @@ metadata:
   author: jimmyandrade
   version: "0.1.0"
   related:
-    - emitir-ccmei
     - evoluir-habilidade
 ---
 
@@ -62,7 +61,9 @@ Confirme novamente o aviso de limite diário de alterações.
 
 ### Passo 7
 
-Após a confirmação, siga `emitir-ccmei` para emitir o Certificado da Condição de Microempreendedor Individual atualizado.
+Após a confirmação, emita o Certificado da Condição de Microempreendedor Individual (CCMEI) atualizado.
+Clique em "EMITIR CCMEI" nos "Próximos Passos" após a confirmação da alteração cadastral.
+Confira o PDF gerado para garantir que os dados alterados estão corretos no certificado.
 
 ### Passo 8
 
