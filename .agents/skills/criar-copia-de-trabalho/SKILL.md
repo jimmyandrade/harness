@@ -3,7 +3,7 @@ name: criar-copia-de-trabalho
 description: Cria a cópia de trabalho do git, uma worktree ao lado do clone, a partir da branch base atualizada, com a branch nomeada e o que falta ligado ao clone. Usada antes de escrever código, uma habilidade ou uma revisão num repositório quando `Cópia de trabalho` pede worktree. Não serve para remover cópias, instalar dependência nem rodar teste.
 metadata:
   author: jimmyandrade
-  version: "0.1.1"
+  version: "0.1.2"
   related:
     - criar-commit
     - criar-habilidade
@@ -66,11 +66,12 @@ Com o `Passo 2` em "ler o PR de outra pessoa", crie a cópia a partir da cabeça
 Ligue cada um dos `Itens a ligar do clone` que existe no clone e falta na cópia.
 Ligue com link, não copie nem instale.
 Sem o hook de commit, o commit falha. Não use `--no-verify`.
+O link aparece como não rastreado no `git status`: ponha no índice só os arquivos da mudança, por caminho.
 Se o PR vai mudar as dependências, o link de `node_modules` serve a branch errada: diga isso e não instale sem pedido.
 
 ### Passo 6
 
-Ache a versão do runtime no arquivo de versão do projeto. Os comandos de instalar, lint e teste saem de `levantar-ambiente-do-repositorio`.
+Ache a versão do runtime no arquivo de versão do projeto ou no campo de versões do manifesto. Os comandos de instalar, lint e teste saem de `levantar-ambiente-do-repositorio`.
 Se a versão exata não está instalada, use a instalada da mesma série e diga qual foi.
 Não instale o runtime sem pedido.
 
@@ -126,6 +127,14 @@ Se você criar a cópia na pasta que o app gerencia, a limpeza do app pode remov
 1. Use a cópia que o app já criou para a sessão.
 2. Se precisa de outra, crie ao lado do clone.
 
+### Link de dependência no commit
+
+Se você adicionar tudo ao índice com um comando amplo, o link de `node_modules` entra no commit, porque o `.gitignore` ignora a pasta e não o link.
+
+1. Tire o link do índice.
+2. Adicione só os arquivos da mudança, por caminho.
+3. Confira o índice antes de commitar.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
@@ -147,12 +156,14 @@ Criei `harness-wt-<nome>` ao lado do clone, numa branch `fix/` a partir da `orig
 - A cópia serve para ler o PR de outra pessoa: nasce da cabeça do PR no remoto, não da `Branch base`, e não leva commit.
 - A `Branch base` não existe no remoto: pare e pergunte, não use a branch atual do clone.
 - O clone tem mudança pendente: não toque nela, a cópia existe por isso.
+- O projeto não tem arquivo de versão do runtime, só o campo de versões do manifesto: use esse campo e diga qual encontrou.
 
 ## Pegadinhas
 
 - O shell do chat volta para o clone a cada comando. O terminal da pessoa não: fica onde ela deixou.
 - `.husky/_` não é versionado: o instalador o cria. Numa cópia nova, o commit falha com `husky.sh` ausente até o link existir.
 - O link de `node_modules` faz a cópia usar as dependências do clone. Se a branch muda o `package.json` ou o lockfile, essas dependências não servem a mudança.
+- Um `.gitignore` com `node_modules/` ignora a pasta, não o link. O link aparece como `?? node_modules`, e um `add` amplo o põe no commit.
 - A criação da branch por `worktree add` com `origin/<base>` rastreia a base, como o `switch -c`. Sem `--no-track`, o `push` vai para a base.
 - Uma versão de Node da mesma série basta para lint e formatação, mas o CI usa a exata.
 - A limpeza de `.claude/worktrees` é do app. A de uma cópia criada por esta habilidade é de `limpar-copias-de-trabalho`.

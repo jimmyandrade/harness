@@ -3,8 +3,9 @@ name: limpar-copias-de-trabalho
 description: Remove as cópias de trabalho do git e as branches locais que uma sessão de código deixou, depois de conferir que nada se perde. Usada ao terminar o trabalho de uma sessão ou quando sobram cópias de trabalho ou branches locais de código. Não serve para liberar espaço em disco em geral nem para apagar arquivo da pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.4.1"
   related:
+    - criar-copia-de-trabalho
     - criar-pull-request
     - liberar-espaco-em-disco
     - evoluir-habilidade
@@ -43,7 +44,7 @@ A limpeza do app fica em Ajustes › Armazenamento, em limpar sessões inativas.
 Monte o plano como uma tabela: cópia, cada conferência e decisão. Uma cópia só sai quando passa em todas:
 
 1. Não é a cópia principal do repositório, nem a pasta de trabalho desta sessão, nem a pasta de outra sessão que ainda está aberta.
-2. Não tem mudança fora do commit. Dependência instalada, como `node_modules` e `.venv`, não conta. Qualquer outro arquivo fora do git segura a cópia.
+2. Não tem mudança fora do commit. Dependência instalada, como `node_modules` e `.venv`, não conta, seja pasta ou link para o clone. Qualquer outro arquivo fora do git segura a cópia.
 3. O trabalho já está no GitHub: o commit está numa branch remota, ou a branch tem pull request aberto ou mesclado no remoto.
 4. Nenhuma sessão aberta usa a pasta. Isso sai da lista de terminais e de workspaces, não de uma dúvida. O remoto foi consultado pelos pull requests abertos e pelos mesclados.
 
@@ -127,6 +128,7 @@ Só a cópia principal existia, e sobraram quatro branches `renovate/*`. Três P
 ## Pegadinhas
 
 - A remoção sem forçar recusa a cópia que tem `node_modules` ou `.venv` fora do git. Force só depois que o Passo 3 aprovou a cópia.
+- O link de `node_modules` que `criar-copia-de-trabalho` faz aparece como `?? node_modules`, sem a barra final de uma pasta. O filtro da conferência aceita as duas formas.
 - Depois de um merge com squash, o GitHub apaga a branch remota e a branch local não aparece como mesclada. Só o estado do PR diz que o trabalho entrou.
 - A remoção leve da branch local recusa a branch mesclada por squash. Remova forçando, só depois de conferir o PR.
 - A pasta atual da sessão não pode ser removida: o shell perde o diretório de trabalho.
@@ -136,7 +138,7 @@ Só a cópia principal existia, e sobraram quatro branches `renovate/*`. Três P
 
 - `git -C <repositório> worktree list --porcelain`: cópias, branches e commits do Passo 1.
 - `du -sh <cópia>` e `df -h ~`: tamanho de cada cópia e espaço livre, no Passo 1 e no Passo 4.
-- `git -C <cópia> status --porcelain | grep -vE '^\?\? (node_modules|\.venv)/'`: mudança fora do commit, no Passo 3. Saída vazia passa.
+- `git -C <cópia> status --porcelain | grep -vE '^\?\? (node_modules|\.venv)/?$'`: mudança fora do commit, no Passo 3. Saída vazia passa.
 - `git -C <cópia> fetch -q origin && git -C <cópia> branch -r --contains HEAD`: commit numa branch remota, no Passo 3.
 - `git -C <repositório> for-each-ref --format='%(refname:short) %(objectname:short) %(worktreepath)' refs/heads`: branches locais do Passo 1. A que tem o caminho vazio não está em nenhuma cópia.
 - `gh pr list --repo <dono>/<repositório> --head <branch> --state all --json number,state,headRefOid,url`: pull requests abertos e mesclados da branch, no Passo 3. Leia o `state` de cada um. A lista vazia só vale depois dessa consulta.
