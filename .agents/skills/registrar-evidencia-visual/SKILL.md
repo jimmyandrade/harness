@@ -3,7 +3,7 @@ name: registrar-evidencia-visual
 description: Registra o que a pessoa passa a ver quando um trabalho termina, no pull request e no card. Usada quando a entrega muda a tela, no Storybook, no ambiente local, na pré-produção ou na produção, mesmo sem dizer print. NÃO serve para mudança sem percepção visual, para medir performance, para ler texto de imagem nem para mandar a mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.10.0"
+  version: "0.10.1"
   related:
     - criar-pull-request
 ---
@@ -35,7 +35,11 @@ Grave um vídeo do carregamento ou uma tabela que compare os tempos.
 
 ### Passo 2
 
-Liste só a superfície que este trabalho realmente tem, e cada cenário que uma pessoa pediu ou prometeu mostrar num comentário do PR: um estado como hover ou foco, uma variante como com e sem link. Cada superfície aparece em cada variação de tema do projeto, o tema padrão e os sazonais ou variações ativos, como diz `Variações de tema`. Um efeito que aparece com o ponteiro, como o sublinhado ou a cor do hover, pede também a captura do foco por teclado, aberta com a tecla Tab, e o mesmo efeito tem de existir nos dois. Cada cenário é uma captura própria, legendada com o que ele prova. Um comentário que promete a evidência, como "vou deixar uma evidência visual", chama esta habilidade, e a resposta na thread leva o link para ela.
+Liste só a superfície que este trabalho realmente tem, e cada cenário que uma pessoa pediu ou prometeu mostrar num comentário do PR: um estado como hover ou foco, uma variante como com e sem link.
+Cada superfície aparece em cada variação de tema do projeto, o tema padrão e os sazonais ou variações ativos, como diz `Variações de tema`.
+Um efeito que aparece com o ponteiro, como o sublinhado ou a cor do hover, pede também a captura do foco por teclado, aberta com a tecla Tab, e o mesmo efeito tem de existir nos dois.
+Cada cenário é uma captura própria, legendada com o que ele prova.
+Um comentário que promete a evidência, como "vou deixar uma evidência visual", chama esta habilidade, e a resposta na thread leva o link para ela.
 A ordem é o ambiente local, o Storybook, a pré-produção e a produção.
 A pré-produção só entra se o repositório ou a pessoa já tiver o endereço.
 A produção só entra se a mudança já estiver no ar e a página tiver sido aberta.
@@ -58,7 +62,9 @@ flowchart LR
 ### Passo 3
 
 Capture cada superfície que foi aberta.
-Antes de capturar, confira que a story cobre cada tema da lista. Se faltar, acrescente a story do tema, porque ela também dá a base da regressão visual, e só então capture. A imagem de um tema sem story não substitui a story.
+Antes de capturar, confira que a story cobre cada tema da lista.
+Se faltar, acrescente a story do tema, porque ela também dá a base da regressão visual, e só então capture.
+A imagem de um tema sem story não substitui a story.
 Antes de capturar, leia o texto que a tela vai mostrar.
 Ele vem do negócio ou do conteúdo real, nunca inventado por você.
 Uma story com frase de exemplo sua troca pela frase que o negócio mandou.
@@ -72,7 +78,9 @@ Abra a story sem a barra do Storybook.
 Se a página disser que não há preview, espere o bundle e leia o texto de novo.
 Capture a largura do layout.
 Capture a mesma tela na largura de um computador e na largura de um telefone.
-Numa mudança de interface, abra a mesma story em mais de um navegador, no ambiente local: Chrome, Firefox e WebKit, pelo Playwright. Meça e capture o hover, o foco por teclado e a altura em cada um. Só entra como testado o navegador que abriu.
+Numa mudança de interface, abra a mesma story em mais de um navegador, no ambiente local: Chrome, Firefox e WebKit, pelo Playwright.
+Meça e capture o hover, o foco por teclado e a altura em cada um.
+Só entra como testado o navegador que abriu.
 Não fotografe só o painel visível.
 Use `Pasta das evidências` só quando o Git já ignora esse caminho.
 Se o Git não ignora, grave na pasta temporária do sistema, com a mesma subpasta do trabalho.
@@ -92,7 +100,8 @@ A produção só entra na legenda quando a página foi aberta lá.
 Em alguns negócios a produção só muda num release.
 Se a story trava o relógio ou usa produto de fixture, a legenda diz isso.
 Se o texto da tela é de teste, a legenda também diz.
-Com mais de um navegador, a legenda diz qual e a versão. WebKit é o motor do Safari, não o Safari: a legenda escreve WebKit.
+Com mais de um navegador, a legenda diz qual e a versão.
+WebKit é o motor do Safari, não o Safari: a legenda escreve WebKit.
 A legenda e a descrição dizem que o teste foi local, sem o serviço de regressão visual pago, para ninguém achar que ele gastou crédito.
 Não guarde no conjunto, nem mostre para confirmação, o print cujo contador ou dado vem de uma data de fixture distante do dia.
 Prefira a story cujo relógio fica perto de um intervalo real.
