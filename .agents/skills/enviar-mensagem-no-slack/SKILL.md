@@ -3,7 +3,7 @@ name: enviar-mensagem-no-slack
 description: Redige uma mensagem de Slack, num canal, thread ou DM, e entrega o rascunho com o link do destino. Só envia com a autorização explícita da pessoa e, depois do envio, compara o proposto com o aplicado para alimentar o vocabulário. Usada quando a pessoa pede uma mensagem ou resposta no Slack. Não serve para achar conversa antiga nem cadastrar pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.6.1"
+  version: "0.7.0"
   related:
     - definir-pessoa
     - definir-vocabulario
@@ -155,6 +155,8 @@ Quando a pessoa disser que enviou, ou que mandou do jeito que ela editou, leia a
 
 Antes de atribuir autoria a qualquer trecho, em nota ou em registro, leia a mensagem publicada e confira, trecho por trecho, o que veio do rascunho e o que a pessoa escreveu. Um trecho que está na mensagem publicada e não está no rascunho é da pessoa: nunca escreva que o rascunho trazia esse trecho. Se não conseguiu ler a mensagem publicada, não atribua: diga que não conferiu.
 
+A mensagem pode ser editada depois do envio: releia a versão atual e a nota de edição antes de registrar. O motivo de uma troca só entra no registro quando a pessoa o deu.
+
 Sem diferença, diga que o rascunho foi aceito como estava e pare. Com diferença, e com `Retroalimentar o vocabulário` em `sim`, passe o que mudou para `definir-vocabulario`, que registra os termos trocados com as tags da pessoa ou do canal, e para `redigir-com-tom-de-voz`, que aprende os padrões de estilo. Diga o que foi registrado.
 
 Conteúdo de DM serve só para derivar um padrão. Não copie um trecho literal dele para outro contexto.
@@ -242,7 +244,7 @@ Li a mensagem publicada na thread e comparei com o rascunho. Você trocou duas e
 - O endereço de uma mensagem usa o horário dela sem o ponto, depois de um `p`. Numa resposta, a thread-pai vai junto no endereço.
 - Menção só vira menção quando o texto vai pela ferramenta de rascunho ou de envio. Colada à mão, vira texto puro.
 - Uma mensagem com um link só pode ir como texto pronto. Com dois ou mais, o rascunho evita o formato do rótulo cru.
-- Uma frase que está na mensagem publicada e não está no rascunho é da pessoa, não do rascunho. A autoria só se atribui depois de ler a mensagem publicada.
+- O motivo de uma troca parece óbvio. Só vale o que a pessoa disse, na mensagem ou na nota de edição.
 - A busca de pessoa por e-mail completo pode não achar ninguém. Procure pelo nome.
 
 ## Scripts disponíveis

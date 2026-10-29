@@ -14,7 +14,7 @@
     "typescript": "7.0.2"
   },
   "name": "harness",
-  "version": "1.28.0",
+  "version": "1.30.0",
   "scripts": {
     "build": "tsc -p vocabulary/tsconfig.build.json",
     "prepare": "npm run build",
