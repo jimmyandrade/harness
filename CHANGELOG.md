@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.32.0](https://github.com/jimmyandrade/harness/compare/v1.31.0...v1.32.0) (2026-10-29)
+
+
+### Features
+
+* **formalizar-decisao:** take the decision to who decides in any channel and record it in the task and the pull request ([#657](https://github.com/jimmyandrade/harness/issues/657)) ([7f1c94b](https://github.com/jimmyandrade/harness/commit/7f1c94b98305cefe40cf75c679d15827b6e3f379))
+
+
+### Bug Fixes
+
+* **registrar-evidencia-visual:** show keyboard focus, test in more than one browser and cover every theme ([#656](https://github.com/jimmyandrade/harness/issues/656)) ([dca56d1](https://github.com/jimmyandrade/harness/commit/dca56d1822e0f3abc3eeeacb33ffffbf4afcf9f7))
+
 ## [1.31.0](https://github.com/jimmyandrade/harness/compare/v1.30.0...v1.31.0) (2026-10-29)
 
 
