@@ -220,7 +220,8 @@ How these skills relate is in `README.md`, in this folder.
   - Writes each step sentence on its own line, and keeps a command in Scripts disponíveis
   - At the end, follows `sincronizar-status-da-tarefa`
   - A merge request goes to mesclar-pull-request once the pull request is open
-  - When the change was validated outside the checks of the pull request and the task has no record of it, follows `registrar-validacao-na-tarefa` before taking the pull request out of draft, and the pull request stays a draft without it
+  - When the change was validated outside the checks of the pull request and the task has no record of it, follows `registrar-resultados-da-validacao-na-tarefa` before taking the pull request out of draft, and the pull request stays a draft without it
+  - With the preview of the pull request published, puts its address in the pull request description and on the task
 - **Test Criteria**:
   - [ ] A request to push to the base branch opens a pull request instead
   - [ ] A `claude/…` branch is renamed to `type/…` before its pull request opens
@@ -1458,21 +1459,23 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses registering the asset, choosing stock, recording the payment, and creating the company
 
-### registrar-validacao-na-tarefa
+### registrar-resultados-da-validacao-na-tarefa
 - **Stability**: experimental
-- **Description**: Record on the task, in a single comment, what a validation looked for, saw and did not check, and edit that comment with each new result
+- **Description**: Record on the task, in a single comment, the results of the validation at each stage of the work (local, pull request preview, pre-production, production), with the address of the environment, and edit that comment as the work moves on
 - **Properties**:
-  - Lives at `.agents/skills/registrar-validacao-na-tarefa/SKILL.md`
-  - Reads the task comments first and edits its own comment about the same validation instead of opening another, because the comment tool edits but never deletes
-  - Writes a context sentence and the sections of the `Seções do comentário` parameter: what was looked for and seen (cause, fix, before and after of the same test) and what is not checked yet, with an "X of Y" count
-  - States only what was seen or run, marks inference as "indício, não prova", says which folder, branch and environment each result came from, and never writes "no regression"
+  - Lives at `.agents/skills/registrar-resultados-da-validacao-na-tarefa/SKILL.md`, and keeps `registrar-validacao-na-tarefa` as an alias
+  - Finds the stage from the facts, not from the task status: no pull request pushed is local, an open pull request is the preview, merged and in pre-production is pre-production, released and live is production
+  - Repeats the validations of the `Validações por etapa` parameter (unit tests, end-to-end tests, visual evidence) in the environment of the current stage, and records each result in the section of that stage
+  - After the local stage, puts the address of the environment of the stage in every place of the `Destinos do endereço do ambiente` parameter (the task, the Slack message, the GitHub issue when there is one and the pull request description), and says so when the project publishes no preview
+  - Reads the task comments first and edits its own comment instead of opening another, because the comment tool edits but never deletes
+  - States only what was seen or run, marks inference as "indício, não prova", says the stage, folder, branch and environment of each result, and never writes "no regression"
   - Reads the workflow trigger before saying where or when a CI test runs
   - Proposes the edit of a task description sentence the comment made outdated, and returns the direct link of the comment
 - **Test Criteria**:
+  - [ ] A pull request that is open adds a "Preview do PR" section with the results against the preview address, and the address is checked in every destination
+  - [ ] A result from the local environment is never recorded in the section of another stage
   - [ ] A second result for the same validation edits the existing comment and updates the count, with no second comment
-  - [ ] A result with no folder, branch and environment is not registered until they are known
   - [ ] The comment lists what was not checked and never claims absence of regression
-
 ### revisar-financas
 - **Stability**: experimental
 - **Description**: Read cash, profit, the income statement, cash flow, diagnosis, audit, or selling price
