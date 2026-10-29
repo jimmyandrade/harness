@@ -3,7 +3,7 @@ name: registrar-evidencia-visual
 description: Registra o que a pessoa passa a ver quando um trabalho termina, no pull request e no card. Usada quando a entrega muda a tela, no Storybook, no ambiente local, na pré-produção ou na produção, mesmo sem dizer print. NÃO serve para mudança sem percepção visual, para medir performance, para ler texto de imagem nem para mandar a mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.8.0"
+  version: "0.10.1"
   related:
     - criar-pull-request
 ---
@@ -13,6 +13,8 @@ metadata:
 ## Parâmetros de configuração
 
 ```yaml
+# `Variações de tema` lista os temas do projeto que a evidência e as stories cobrem, como o tema padrão e o sazonal ativo. Vazio, descubra os temas no repositório.
+"Variações de tema": ""
 "Confirmação antes de gravar": "sim"
 "Fuso horário da legenda": "America/Sao_Paulo"
 "Pasta das evidências": "tmp/evidencias-visuais"
@@ -33,7 +35,11 @@ Grave um vídeo do carregamento ou uma tabela que compare os tempos.
 
 ### Passo 2
 
-Liste só a superfície que este trabalho realmente tem, e cada cenário que uma pessoa pediu ou prometeu mostrar num comentário do PR: um estado como hover ou foco, uma variante como com e sem link, um tema. Cada cenário é uma captura própria, legendada com o que ele prova. Um comentário que promete a evidência, como "vou deixar uma evidência visual", chama esta habilidade, e a resposta na thread leva o link para ela.
+Liste só a superfície que este trabalho realmente tem, e cada cenário que uma pessoa pediu ou prometeu mostrar num comentário do PR: um estado como hover ou foco, uma variante como com e sem link.
+Cada superfície aparece em cada variação de tema do projeto, o tema padrão e os sazonais ou variações ativos, como diz `Variações de tema`.
+Um efeito que aparece com o ponteiro, como o sublinhado ou a cor do hover, pede também a captura do foco por teclado, aberta com a tecla Tab, e o mesmo efeito tem de existir nos dois.
+Cada cenário é uma captura própria, legendada com o que ele prova.
+Um comentário que promete a evidência, como "vou deixar uma evidência visual", chama esta habilidade, e a resposta na thread leva o link para ela.
 A ordem é o ambiente local, o Storybook, a pré-produção e a produção.
 A pré-produção só entra se o repositório ou a pessoa já tiver o endereço.
 A produção só entra se a mudança já estiver no ar e a página tiver sido aberta.
@@ -56,6 +62,9 @@ flowchart LR
 ### Passo 3
 
 Capture cada superfície que foi aberta.
+Antes de capturar, confira que a story cobre cada tema da lista.
+Se faltar, acrescente a story do tema, porque ela também dá a base da regressão visual, e só então capture.
+A imagem de um tema sem story não substitui a story.
 Antes de capturar, leia o texto que a tela vai mostrar.
 Ele vem do negócio ou do conteúdo real, nunca inventado por você.
 Uma story com frase de exemplo sua troca pela frase que o negócio mandou.
@@ -69,6 +78,9 @@ Abra a story sem a barra do Storybook.
 Se a página disser que não há preview, espere o bundle e leia o texto de novo.
 Capture a largura do layout.
 Capture a mesma tela na largura de um computador e na largura de um telefone.
+Numa mudança de interface, abra a mesma story em mais de um navegador, no ambiente local: Chrome, Firefox e WebKit, pelo Playwright.
+Meça e capture o hover, o foco por teclado e a altura em cada um.
+Só entra como testado o navegador que abriu.
 Não fotografe só o painel visível.
 Use `Pasta das evidências` só quando o Git já ignora esse caminho.
 Se o Git não ignora, grave na pasta temporária do sistema, com a mesma subpasta do trabalho.
@@ -88,6 +100,9 @@ A produção só entra na legenda quando a página foi aberta lá.
 Em alguns negócios a produção só muda num release.
 Se a story trava o relógio ou usa produto de fixture, a legenda diz isso.
 Se o texto da tela é de teste, a legenda também diz.
+Com mais de um navegador, a legenda diz qual e a versão.
+WebKit é o motor do Safari, não o Safari: a legenda escreve WebKit.
+A legenda e a descrição dizem que o teste foi local, sem o serviço de regressão visual pago, para ninguém achar que ele gastou crédito.
 Não guarde no conjunto, nem mostre para confirmação, o print cujo contador ou dado vem de uma data de fixture distante do dia.
 Prefira a story cujo relógio fica perto de um intervalo real.
 Sem essa story, diga que essa superfície ficou sem evidência.
@@ -185,6 +200,30 @@ Se você capturar a story com uma frase que a IA escreveu, a evidência mostra u
 2. Troque pela frase que o negócio mandou. Sem frase do negócio, peça uma.
 3. Quando só um texto de teste serve, a legenda diz que é texto de teste.
 
+### Só o tema padrão
+
+Se você mostrar a mudança só no tema padrão, ninguém vê como ela fica no tema sazonal, e a regressão visual não cobre o tema.
+
+1. Liste os temas do projeto em `Variações de tema`, ou descubra no repositório.
+2. Garanta uma story por tema e capture cada uma.
+3. Legende cada imagem com o tema.
+
+### Hover sem foco por teclado
+
+Se você mostrar só o hover, quem navega pelo teclado pode não receber o mesmo efeito, e a evidência não mostra isso.
+
+1. Abra a story, aperte Tab até o elemento e leia o estilo de `:focus-visible`.
+2. O efeito do hover tem de existir também no foco. Se faltar, diga e proponha corrigir.
+3. Capture o foco por teclado como cenário próprio.
+
+### Um navegador só
+
+Se você testar só no Chrome, a descrição afirma mais do que foi aberto.
+
+1. Abra a story em Chrome, Firefox e WebKit, localmente.
+2. Marque na descrição só o que abriu e diga que o teste foi local.
+3. Escreva WebKit, não Safari, e deixe sem marca o que não abriu, como o Edge.
+
 ### Imagem encostada no texto
 
 Se você pôr a imagem logo abaixo do título e logo acima da legenda, sem linha em branco, a descrição fica confusa e não mostra o que cada captura prova.
@@ -228,6 +267,9 @@ A página, com o bloco novo no meio do resto da tela e o relógio travado em 1 d
 - A seção de imagens é a que o modelo do repositório já tem. Não abra outra.
 - A porta do Storybook está no script daquele projeto. Não reaproveite a porta de outro app.
 - Uma frase de exemplo parece inofensiva numa story. A evidência mostra o texto como se fosse do negócio.
+- Uma mudança que não mexe na cor parece não depender do tema. A página em volta muda com o tema, e a evidência precisa mostrar isso.
+- O sublinhado do hover parece cobrir o teclado. O foco tem a regra própria `:focus-visible`, e só o anel de foco não é o mesmo efeito.
+- WebKit parece Safari. É o mesmo motor, mas não o aplicativo.
 - `figure` e `figcaption` parecem a forma certa de legendar. O GitHub remove as duas tags da descrição do pull request.
 
 ## Scripts disponíveis

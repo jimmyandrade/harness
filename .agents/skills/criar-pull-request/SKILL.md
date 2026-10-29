@@ -3,7 +3,7 @@ name: criar-pull-request
 description: Use essa habilidade sempre que for abrir ou atualizar PR, subir uma correção ou mandar para a branch principal, mesmo sem dizer PR. NÃO use para mesclar (use mesclar-pull-request), responder comentário de revisão nem para só commitar (use criar-commit).
 metadata:
   author: jimmyandrade
-  version: "0.41.2"
+  version: "0.41.5"
   related:
     - registrar-evidencia-visual
     - registrar-resultados-da-validacao-na-tarefa
@@ -112,7 +112,12 @@ O título começa igual ao assunto do commit. Se o assunto saiu noutro idioma, c
 Com issue, o pull request e o merge request citam `#<número>` na descrição, na forma do repositório.
 Sem issue, não invente número.
 Se o repositório tiver um template de pull request, siga as seções dele e marque as caixas conforme o que foi feito.
-Se a mudança altera o que uma pessoa vê, como tela, componente, estilo ou texto da interface, siga `registrar-evidencia-visual` antes de abrir ou de tirar o PR do rascunho. A seção do modelo que mostra o resultado leva a imagem ou o vídeo, e uma tabela de antes e depois só com texto não conta. Cada captura tem o próprio título, a imagem e a legenda separados por linha em branco, e o texto que ela mostra vem do negócio, como diz `registrar-evidencia-visual`. Sem imagem, o PR fica em rascunho e a resposta diz o que falta. Dependência, documentação e mudança sem diferença na tela ficam de fora.
+Se a mudança altera o que uma pessoa vê, como tela, componente, estilo ou texto da interface, siga `registrar-evidencia-visual` antes de abrir ou de tirar o PR do rascunho.
+A seção do modelo que mostra o resultado leva a imagem ou o vídeo, e uma tabela de antes e depois só com texto não conta.
+Título, imagem e legenda de cada captura, o texto mostrado, as variações de tema do projeto e os navegadores testados seguem `registrar-evidencia-visual`.
+Na seção de testes de navegador, marque só o que foi aberto.
+Sem imagem, o PR fica em rascunho e a resposta diz o que falta.
+Dependência, documentação e mudança sem diferença na tela ficam de fora.
 Se a mudança foi validada fora dos checks do PR, como num teste local, num ambiente de teste ou num teste que só roda depois do merge, e a tarefa não tem o registro dos resultados dessa validação, siga `registrar-resultados-da-validacao-na-tarefa` antes de tirar o PR do rascunho.
 Sem o registro, o PR fica em rascunho e a resposta diz o que falta.
 Validação que os próprios checks do PR já mostram fica de fora.
