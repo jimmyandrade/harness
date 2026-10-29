@@ -15,6 +15,7 @@ flowchart LR
     acompanhar_veiculo["acompanhar-veiculo"]
     atender_revisao_de_pull_request["atender-revisao-de-pull-request"]
     atualizar_branch_do_pull_request["atualizar-branch-do-pull-request"]
+    atualizar_cadastro_do_mei["atualizar-cadastro-do-mei"]
     avaliar_atualizacoes_de_dependencia["avaliar-atualizacoes-de-dependencia"]
     classificar_estado_do_termo["classificar-estado-do-termo"]
     classificar_melhoria_tecnica["classificar-melhoria-tecnica"]
@@ -140,6 +141,7 @@ flowchart LR
   atualizar_branch_do_pull_request --> atender_revisao_de_pull_request
   atualizar_branch_do_pull_request --> criar_pull_request
   atualizar_branch_do_pull_request --> evoluir_habilidade
+  atualizar_cadastro_do_mei --> evoluir_habilidade
   avaliar_atualizacoes_de_dependencia --> atender_revisao_de_pull_request
   avaliar_atualizacoes_de_dependencia --> criar_commit
   avaliar_atualizacoes_de_dependencia --> criar_pull_request

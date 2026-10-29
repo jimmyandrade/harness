@@ -1,11 +1,12 @@
 ---
 name: atualizar-cadastro-do-mei
-description: Altera dados cadastrais de um MEI (endereço, complemento, telefone, e-mail, ocupação, uso do nome social) no Portal do Empreendedor e emite o CCMEI atualizado. Usada quando o titular de um MEI precisa atualizar informações de contato, endereço comercial ou residencial, ocupação principal ou secundárias, ou ativar o uso do nome social no nome empresarial. Requer login gov.br do titular. NÃO serve para abertura de MEI, alteração de atividade principal sem atualização de outros dados, nem mudança de natureza jurídica.
+description: Altera dados cadastrais do MEI no Portal do Empreendedor (endereço, telefone, e-mail, ocupação, nome social) e emite o CCMEI. Usada quando o titular precisa atualizar contato, endereço ou ocupação. Requer login gov.br. NÃO serve para abertura de MEI nem mudança de natureza jurídica.
 metadata:
   author: jimmyandrade
   version: "0.1.0"
   related:
     - emitir-ccmei
+    - evoluir-habilidade
 ---
 
 # Atualizar cadastro do MEI
