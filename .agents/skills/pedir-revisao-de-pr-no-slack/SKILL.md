@@ -3,7 +3,7 @@ name: pedir-revisao-de-pr-no-slack
 description: Redige o pedido de revisão de um pull request para o canal do time no Slack e entrega o rascunho com o link da thread, usando enviar-mensagem-no-slack. Usada quando o PR está pronto e a organização pede revisão pelo Slack, ou quando a pessoa pede apoio para revisar. Não serve para revisar o PR nem para outra mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.7.0"
   related:
     - criar-pull-request
     - registrar-evidencia-visual
@@ -54,7 +54,7 @@ Ache o card do PR pela branch, pelo título e pela descrição. Com `Exigir card
 
 ### Passo 3
 
-Confira o canal antes de abrir um post novo. Se já existe uma thread sobre o mesmo problema ou o mesmo PR, o pedido vai nela. Se o PR já foi revisado e os comentários foram ajustados, é uma nova rodada, em resposta na thread, como em `Post novo em canal` de `enviar-mensagem-no-slack`. Pedidos de PRs que se relacionam são mensagens separadas, cada uma com o link do outro no corpo.
+Confira o canal antes de abrir um post novo. Se já existe uma thread sobre o mesmo problema ou o mesmo PR, o pedido vai nela. Se o PR já foi revisado e os comentários foram ajustados, é uma nova rodada, em resposta na thread, como em `Post novo em canal` de `enviar-mensagem-no-slack`. Pedidos de PRs que se relacionam são mensagens separadas, cada uma com o link do outro no corpo. Quando um deles já foi pedido numa thread, o outro vai como resposta nela: uma linha dizendo que é mais um PR do mesmo assunto, as linhas do PR e do card, e a explicação fica na descrição do PR.
 
 Um follow-up de um pedido sem resposta, em post novo ou na thread, repete o que o PR faz em uma frase e só depois acrescenta o que mudou, como o prazo ou o estado dos checks. O prazo não substitui o contexto: quem lê o follow-up pode não ter visto o pedido.
 
@@ -143,7 +143,7 @@ O PR 121 já tem uma thread no canal. Redigi uma nova rodada em resposta nela, c
 
 - O PR está em rascunho: não redija o pedido. Diga o que falta.
 - O card não existe e `Exigir card` é `sim`: siga `preparar-tarefa-do-pull-request` antes.
-- Dois PRs do mesmo problema: duas mensagens, cada uma com o link da outra.
+- Dois PRs do mesmo problema: duas mensagens, cada uma com o link da outra, e a segunda como resposta na thread da primeira.
 - O canal não está configurado: pergunte uma vez em qual canal pedir e pare.
 - O canal é compartilhado com outra organização e o Slack recusa o rascunho: entregue o texto pronto, como diz `enviar-mensagem-no-slack`.
 
