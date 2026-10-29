@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.28.0](https://github.com/jimmyandrade/harness/compare/v1.27.3...v1.28.0) (2026-10-29)
+
+
+### Features
+
+* **criar-copia-de-trabalho:** add the working copy skill ([#624](https://github.com/jimmyandrade/harness/issues/624)) ([16cb564](https://github.com/jimmyandrade/harness/commit/16cb56410f4880690f603cec2de07a5a8894e3ee))
+
+
+### Bug Fixes
+
+* **criar-copia-de-trabalho:** use a generic example in the skill ([#626](https://github.com/jimmyandrade/harness/issues/626)) ([5cb22be](https://github.com/jimmyandrade/harness/commit/5cb22be9bff526c7a0f43a3bfd2015059d358a63))
+
 ## [1.27.3](https://github.com/jimmyandrade/harness/compare/v1.27.2...v1.27.3) (2026-10-29)
 
 
