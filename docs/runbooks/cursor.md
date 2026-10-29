@@ -60,7 +60,7 @@ The dashboard is [cursor.com/dashboard](https://cursor.com/dashboard). The accou
 
 Check: Team Marketplaces lists both repositories.
 
-Open the imported marketplace, then Marketplace Settings, then Plugin Repository, and turn on Enable Auto Refresh. The Cursor GitHub App must be installed on the repository and allowed to read it. A push to the default branch re-indexes the marketplace, at most once every 10 minutes, and the index keeps the latest commit. Refresh in that same section re-indexes once, without the app. Restart Cursor, or focus the window, so the client reads the new index. A Cloud Agent that is already running keeps the version it started with.
+Enable Auto Refresh exists only on a team marketplace, on a Teams or Enterprise plan. A personal account, and any plan whose dashboard lists Your Marketplaces and not Team Marketplaces, does not show that control. On a Teams or Enterprise plan, open the imported marketplace, then Marketplace Settings, then Plugin Repository, and turn on Enable Auto Refresh. The Cursor GitHub App must be installed on the repository and allowed to read it. A push to the default branch re-indexes the marketplace, at most once every 10 minutes, and the index keeps the latest commit. Refresh in that same section re-indexes once, without the app. Restart Cursor, or focus the window, so the client reads the new index. A Cloud Agent that is already running keeps the version it started with.
 
 Check: after a push to the default branch and a re-index, Customize lists the skills of that commit. The manifest name is `core`. Cursor may show the marketplace name in front of it, such as `harness-core`.
 
@@ -80,4 +80,4 @@ Check: Connect apps does not list `core` from this repository. The skills in Cur
 
 - Do not create a skill under a link. It would land in `node_modules` and disappear on the next install.
 - Do not keep the links and the `core` plugin in the same project. Each core skill would show twice.
-- Do not add this repository under Your Marketplaces to follow new commits. That list is personal, each row only offers Remove, and the install stays on the commit from when the repository was added. Adding it again installs that same commit.
+- Do not add this repository under Your Marketplaces to follow new commits. That list is what a personal account sees, and what a plan without Team Marketplaces sees. It has no Enable Auto Refresh control: each row only offers Remove, and the install stays on the commit from when the repository was added. Adding it again installs that same commit. Enable Auto Refresh exists on a Teams or Enterprise plan, on a team marketplace.

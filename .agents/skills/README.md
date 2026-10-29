@@ -104,7 +104,7 @@ flowchart LR
     redigir_com_tom_de_voz["redigir-com-tom-de-voz"]
     registrar_ciclo_do_ativo["registrar-ciclo-do-ativo"]
     registrar_evidencia_visual["registrar-evidencia-visual"]
-    registrar_validacao_na_tarefa["registrar-validacao-na-tarefa"]
+    registrar_resultados_da_validacao_na_tarefa["registrar-resultados-da-validacao-na-tarefa"]
     revisar_financas["revisar-financas"]
     revisar_habilidade["revisar-habilidade"]
     revisar_uso_do_tempo["revisar-uso-do-tempo"]
@@ -185,6 +185,7 @@ flowchart LR
   criar_pull_request --> fatiar_pull_request
   criar_pull_request --> mesclar_pull_request
   criar_pull_request --> registrar_evidencia_visual
+  criar_pull_request --> registrar_resultados_da_validacao_na_tarefa
   criar_pull_request --> sincronizar_status_da_tarefa
   definir_agenda --> definir_agenda_de_popstar
   definir_agenda --> definir_convidado
@@ -437,6 +438,7 @@ flowchart LR
   pedir_revisao_de_pr_no_slack --> evoluir_habilidade
   pedir_revisao_de_pr_no_slack --> preparar_tarefa_do_pull_request
   pedir_revisao_de_pr_no_slack --> registrar_evidencia_visual
+  pedir_revisao_de_pr_no_slack --> registrar_resultados_da_validacao_na_tarefa
   perfilar_tom_de_voz --> definir_vocabulario
   perfilar_tom_de_voz --> evoluir_habilidade
   perfilar_tom_de_voz --> redigir_com_tom_de_voz
@@ -499,11 +501,12 @@ flowchart LR
   registrar_ciclo_do_ativo --> lancar_despesa_da_empresa
   registrar_ciclo_do_ativo --> mesclar_registro
   registrar_evidencia_visual --> criar_pull_request
-  registrar_validacao_na_tarefa --> criar_pull_request
-  registrar_validacao_na_tarefa --> evoluir_habilidade
-  registrar_validacao_na_tarefa --> preparar_tarefa_do_pull_request
-  registrar_validacao_na_tarefa --> registrar_evidencia_visual
-  registrar_validacao_na_tarefa --> sincronizar_status_da_tarefa
+  registrar_resultados_da_validacao_na_tarefa --> criar_pull_request
+  registrar_resultados_da_validacao_na_tarefa --> evoluir_habilidade
+  registrar_resultados_da_validacao_na_tarefa --> pedir_revisao_de_pr_no_slack
+  registrar_resultados_da_validacao_na_tarefa --> preparar_tarefa_do_pull_request
+  registrar_resultados_da_validacao_na_tarefa --> registrar_evidencia_visual
+  registrar_resultados_da_validacao_na_tarefa --> sincronizar_status_da_tarefa
   revisar_financas --> definir_lancamento
   revisar_financas --> definir_planejamento_financeiro
   revisar_financas --> gerenciar_estoque
