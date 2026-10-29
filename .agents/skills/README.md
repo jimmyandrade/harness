@@ -401,6 +401,7 @@ flowchart LR
   levantar_contexto_do_pull_request --> levantar_ambiente_do_repositorio
   liberar_espaco_em_disco --> evoluir_habilidade
   liberar_espaco_em_disco --> limpar_copias_de_trabalho
+  limpar_copias_de_trabalho --> criar_copia_de_trabalho
   limpar_copias_de_trabalho --> criar_pull_request
   limpar_copias_de_trabalho --> evoluir_habilidade
   limpar_copias_de_trabalho --> liberar_espaco_em_disco
