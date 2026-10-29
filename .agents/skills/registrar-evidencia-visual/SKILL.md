@@ -3,7 +3,7 @@ name: registrar-evidencia-visual
 description: Registra o que a pessoa passa a ver quando um trabalho termina, no pull request e no card. Usada quando a entrega muda a tela, no Storybook, no ambiente local, na pré-produção ou na produção, mesmo sem dizer print. NÃO serve para mudança sem percepção visual, para medir performance, para ler texto de imagem nem para mandar a mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.7.0"
+  version: "0.8.0"
   related:
     - criar-pull-request
 ---
@@ -56,6 +56,10 @@ flowchart LR
 ### Passo 3
 
 Capture cada superfície que foi aberta.
+Antes de capturar, leia o texto que a tela vai mostrar.
+Ele vem do negócio ou do conteúdo real, nunca inventado por você.
+Uma story com frase de exemplo sua troca pela frase que o negócio mandou.
+Quando só um texto de teste serve, como o que chega ao limite de caracteres, a legenda diz que é texto de teste.
 A evidência guarda a página inteira e o que cabe na primeira tela, sem rolar.
 Quando a mudança não aparece nessa primeira tela, guarde também um recorte com altura perto da largura, com o bloco novo e o que está em volta.
 O componente isolado pode ir na pasta, com a legenda de que é só o bloco.
@@ -83,6 +87,7 @@ Estar no branch principal não é estar em produção.
 A produção só entra na legenda quando a página foi aberta lá.
 Em alguns negócios a produção só muda num release.
 Se a story trava o relógio ou usa produto de fixture, a legenda diz isso.
+Se o texto da tela é de teste, a legenda também diz.
 Não guarde no conjunto, nem mostre para confirmação, o print cujo contador ou dado vem de uma data de fixture distante do dia.
 Prefira a story cujo relógio fica perto de um intervalo real.
 Sem essa story, diga que essa superfície ficou sem evidência.
@@ -95,6 +100,10 @@ A página inteira entra como link para o arquivo anexado, não como imagem dentr
 Uma imagem muito alta alonga o card e atrapalha a leitura.
 O pull request segue a mesma regra, na seção de imagens que o modelo do repositório já tem.
 Não abra outra seção.
+Dentro dela, cada captura tem o próprio título, agrupado por superfície: computador, telefone, com e sem link, estados.
+Cada captura leva três partes separadas por linha em branco: o título, a imagem e a legenda em itálico.
+Sem a linha em branco, a imagem encosta no texto de baixo.
+O GitHub remove as tags `figure` e `figcaption` da descrição, então não as use ali. Use-as só onde o destino as mostra.
 Se o corpo do card não aceitar arquivo, o recorte vai num comentário e a página inteira continua como link. Se o card já tem um comentário seu com a evidência deste trabalho, edite esse comentário em vez de abrir outro.
 Comentário numa issue do rastreador só entra se a pessoa pedir.
 Esse comentário leva o link do pull request.
@@ -168,6 +177,22 @@ Se você escrever no card só uma frase, quem não tem acesso ao repositório co
 2. Coloque o link da página inteira no mesmo lugar.
 3. Não feche sem esses dois no card.
 
+### Texto inventado na captura
+
+Se você capturar a story com uma frase que a IA escreveu, a evidência mostra um texto que o negócio nunca usou, e quem revisa entende que ele é real.
+
+1. Leia o texto que a tela mostra antes de capturar.
+2. Troque pela frase que o negócio mandou. Sem frase do negócio, peça uma.
+3. Quando só um texto de teste serve, a legenda diz que é texto de teste.
+
+### Imagem encostada no texto
+
+Se você pôr a imagem logo abaixo do título e logo acima da legenda, sem linha em branco, a descrição fica confusa e não mostra o que cada captura prova.
+
+1. Dê um título a cada captura, agrupado por superfície.
+2. Separe título, imagem e legenda em itálico com uma linha em branco.
+3. Não use `figure` nem `figcaption` no GitHub: ele remove as tags e a legenda vira texto colado à imagem.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
@@ -202,6 +227,8 @@ A página, com o bloco novo no meio do resto da tela e o relógio travado em 1 d
 - Uma data de fixture anos à frente faz o contador mostrar dezenas de milhares de dias. Esse arquivo não é a tela.
 - A seção de imagens é a que o modelo do repositório já tem. Não abra outra.
 - A porta do Storybook está no script daquele projeto. Não reaproveite a porta de outro app.
+- Uma frase de exemplo parece inofensiva numa story. A evidência mostra o texto como se fosse do negócio.
+- `figure` e `figcaption` parecem a forma certa de legendar. O GitHub remove as duas tags da descrição do pull request.
 
 ## Scripts disponíveis
 

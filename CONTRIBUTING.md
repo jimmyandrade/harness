@@ -49,6 +49,16 @@ When the caller has the model mapping that `template-mapping` names, `.agents/ma
 
 With `include-core`, which is on by default, the action also publishes the skills of this repository into the caller's Notion, with the caller's mapping, and the models of this repository when the caller has a model mapping. It does that when the change between `base` and `head` touches the caller's mapping, a file under `.github/workflows/`, `package.json`, or `package-lock.json`, which is where a business harness moves the version of this repository it uses. A skill name that exists in both repositories stops the sync. So does a model name, counting only files whose frontmatter has `name`.
 
+## Notion sync
+
+GitHub is where skills are written. The sync action is the only writer of the skill pages in Notion, so nobody edits those pages or their database there.
+
+The schema of a skill page is `.agents/schemas/skill-page.schema.json`. Each business keeps its own mapping, with the data source id, the property names and the status option names. `.agents/mappings/skill-page.notion.example.json` is the model.
+
+A model in `.agents/assets/templates/` is published to a models database only when the business has `.agents/mappings/template-page.notion.json`, as ADR 0015 decides. Its schema is `.agents/schemas/template-page.schema.json`, and `.agents/mappings/template-page.notion.example.json` is the model. The sync is the only writer of the properties that mapping binds and of the page body.
+
+A version below 0.1.0 maps to the draft status option. A version from 0.1.0 with major 0 maps to the validation option. A version from 1 maps to the production option.
+
 ## Releases
 
 A release is a tag `vMAJOR.MINOR.PATCH` and a GitHub Release. Business harnesses pin the actions, the plugin, and the Node.js dependency to that full tag.

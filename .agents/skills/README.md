@@ -117,6 +117,7 @@ flowchart LR
   acompanhar_fila_de_revisao --> evoluir_habilidade
   acompanhar_fila_de_revisao --> procurar_pedido_de_revisao
   acompanhar_fila_de_revisao --> publicar_revisao_de_codigo
+  acompanhar_fila_de_revisao --> redigir_com_tom_de_voz
   acompanhar_veiculo --> definir_obrigacao_financeira
   acompanhar_veiculo --> definir_viagem
   acompanhar_veiculo --> evoluir_habilidade
