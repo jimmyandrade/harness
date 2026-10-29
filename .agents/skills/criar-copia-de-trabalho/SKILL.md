@@ -3,7 +3,7 @@ name: criar-copia-de-trabalho
 description: Cria a cópia de trabalho do git, uma worktree ao lado do clone, a partir da branch base atualizada, com a branch nomeada e o que falta ligado ao clone. Usada antes de escrever código, uma habilidade ou uma revisão num repositório quando `Cópia de trabalho` pede worktree. Não serve para remover cópias, instalar dependência nem rodar teste.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
   related:
     - criar-commit
     - criar-habilidade
@@ -130,9 +130,9 @@ Se você criar a cópia na pasta que o app gerencia, a limpeza do app pode remov
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
-### crie uma cópia de trabalho para corrigir o E2E do account no centauro-front, card AQCEN-810
+### crie uma cópia de trabalho para corrigir um teste num repositório com hook de commit e `.nvmrc`, card ABC-12
 
-Criei `centauro-front-wt-aqcen810` ao lado do clone, na branch `fix/AQCEN-810-account-e2e-login`, a partir da `origin/main` atualizada. Liguei `.husky/_` e `node_modules` do clone. O `.nvmrc` pede o Node 22.23.4, que não está instalado, e usei o 22.14.0. O clone não foi tocado. Cada comando leva `git -C` ou `cd` para a cópia, e quem rodar o teste em outro terminal entra nela e confere a branch antes.
+Criei `app-wt-corrige-teste` ao lado do clone `app`, na branch `fix/ABC-12-corrige-teste`, a partir da `origin/main` atualizada. Liguei `.husky/_` e `node_modules` do clone. O `.nvmrc` pede o Node 22.9.0, que não está instalado, e usei o 22.8.0. O clone não foi tocado. Cada comando leva `git -C` ou `cd` para a cópia, e quem rodar o teste em outro terminal entra nela e confere a branch antes.
 
 ### ajuste uma regra de uma habilidade do harness
 
