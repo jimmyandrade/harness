@@ -1,15 +1,16 @@
 ---
 name: sincronizar-status-da-tarefa
-description: Sincroniza o status de tarefas, cards ou issues com o estado do pull request ligado a cada uma e grava a ligação quando o pull request ainda não cita a tarefa. Usada quando um commit é criado, quando o estado de um pull request muda (aberto, tirado do rascunho, etiquetado, mesclado, fechado), mesmo que a mudança tenha sido feita pelo `gh` ou por outra ferramenta, ou quando a pessoa avisa que um PR foi mesclado, mesmo sem dizer sincronizar. Não serve para escrever a tarefa, abrir o PR nem revisar o diff.
+description: Sincroniza o status de tarefas, cards ou issues com o estado do pull request ligado a cada uma e grava a ligação quando o PR não cita a tarefa. Usada quando um commit é criado ou o estado de um PR muda, mesmo pelo `gh`, ou quando a pessoa avisa que mesclou, mesmo sem dizer sincronizar. Não serve para escrever a tarefa, abrir o PR nem revisar o diff.
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.7.0"
+  version: "0.7.1"
   related:
     - criar-commit
     - criar-pull-request
     - evoluir-habilidade
     - levantar-contexto-do-pull-request
+    - mesclar-pull-request
 ---
 
 # Sincronizar status da tarefa
