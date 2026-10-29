@@ -3,7 +3,7 @@ name: diagnosticar-e2e-vermelho
 description: Acha a causa de um teste E2E vermelho e diz se o conserto é do teste ou do produto, sem digitar credencial nem criar dado real, e registra o resultado na tarefa. Usada quando um E2E falha no CI ou numa execução local, mesmo sem dizer causa. Não serve para escrever teste de unidade, rodar a suíte inteira nem corrigir bug do produto.
 metadata:
   author: jimmyandrade
-  version: "0.1.1"
+  version: "0.1.2"
   related:
     - definir-issue-do-github
     - escrever-teste
@@ -15,6 +15,8 @@ metadata:
 # Diagnosticar E2E vermelho
 
 ## Parâmetros de configuração
+
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo.
 
 ```yaml
 # `Pasta dos workflows` é onde ficam os arquivos do CI que rodam o E2E.
