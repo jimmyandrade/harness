@@ -1,6 +1,6 @@
 ---
 metadata:
-  version: "1.39.1"
+  version: "1.40.0"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -22,6 +22,8 @@ metadata:
       "Idioma das instruções do projeto": "português do Brasil"
       "Idioma das respostas": "português do Brasil"
       "Idioma das decisões de arquitetura": "inglês"
+      "Idioma da mensagem de commit": "inglês"
+      "Idioma do PR": "inglês"
     "preparar-tarefa-do-pull-request":
       "Onde ficam as tarefas": "issues do GitHub"
       "Projeto da tarefa por repositório": "issues do próprio repositório"
@@ -75,7 +77,7 @@ metadata:
 
 - Toda mudança entra por pull request. Não dê push no `main`.
 - Ao terminar o trabalho de uma sessão, siga `limpar-copias-de-trabalho` para remover as cópias de trabalho que ela deixou.
-- Escreva o assunto de todo commit no idioma de `Idioma da mensagem de commit`, um parâmetro da `criar-commit`, que tem inglês como padrão.
+- Commit segue `Idioma da mensagem de commit` e PR segue `Idioma do PR`, quem quer que proponha.
 - Use um assunto em Conventional Commits: `tipo: descrição`. Quando a mudança afeta uma skill, o assunto é `tipo(nome-da-skill): descrição`. Os tipos são `feat`, `fix`, `perf`, `docs`, `refactor`, `test`, `chore` e `ci`.
 - Uma mudança no CI ou numa action usa `ci`, mesmo quando acrescenta comportamento.
 - Dê a toda branch o nome `tipo/descricao-curta`, com um desses tipos e uma descrição em ASCII e kebab-case: `feat/build-on-install`, `fix/mcp-path`. Uma branch que uma ferramenta criou com outro prefixo, como `claude/` ou `cursor/`, é renomeada antes do primeiro push. Renomear uma branch que já tem pull request fecha esse pull request: abra outro a partir da branch renomeada, com o mesmo título e a mesma descrição, e ponha o link dele no antigo. Um passo `Check the branch name` no CI reprova o pull request de uma branch fora desse padrão.
