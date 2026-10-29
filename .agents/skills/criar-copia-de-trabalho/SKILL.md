@@ -156,6 +156,7 @@ Criei `harness-wt-<nome>` ao lado do clone, numa branch `fix/` a partir da `orig
 - A cópia serve para ler o PR de outra pessoa: nasce da cabeça do PR no remoto, não da `Branch base`, e não leva commit.
 - A `Branch base` não existe no remoto: pare e pergunte, não use a branch atual do clone.
 - O clone tem mudança pendente: não toque nela, a cópia existe por isso.
+- A mudança depende de um PR que ainda está aberto: crie a cópia a partir da branch dele, no remoto, e abra o PR contra essa branch, empilhado. A `Branch base` do parâmetro não muda.
 - O projeto não tem arquivo de versão do runtime, só o campo de versões do manifesto: use esse campo e diga qual encontrou.
 
 ## Pegadinhas
