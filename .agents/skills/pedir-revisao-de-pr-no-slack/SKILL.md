@@ -38,7 +38,15 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ### Passo 1
 
-Leia o PR: estado, rascunho, rótulos, título, descrição, checks e comentários. Se o PR está fechado ou mesclado, pare e diga isso. Se está em rascunho, ou falta o `Rótulo de pronto para revisão` quando o projeto o usa, não peça revisão: diga o que falta e pare. Um PR que a própria descrição marca como não pronto também não vai a pedido. Um PR que muda o que uma pessoa vê, como tela, componente ou estilo, e não tem imagem na descrição nem no card também não vai: siga `registrar-evidencia-visual` e volte aqui. Uma tabela de antes e depois só com texto não conta como imagem. Um PR validado fora dos checks, como num teste local ou num ambiente de teste, sem o registro dessa validação no card, também não vai: siga `registrar-validacao-na-tarefa` e volte aqui. Com `Autorrevisar o diff antes de pedir` em `sim`, leia o diff na interface do GitHub como se fosse de outra pessoa e procure `console.log` esquecido, comentário residual, código morto e teste redundante. Diga o que achou e peça para a pessoa corrigir antes do pedido.
+Leia o PR: estado, rascunho, rótulos, título, descrição, checks e comentários.
+Se o PR está fechado ou mesclado, pare e diga isso.
+Se está em rascunho, ou falta o `Rótulo de pronto para revisão` quando o projeto o usa, não peça revisão: diga o que falta e pare.
+Um PR que a própria descrição marca como não pronto também não vai a pedido.
+Um PR que muda o que uma pessoa vê, como tela, componente ou estilo, e não tem imagem na descrição nem no card também não vai: siga `registrar-evidencia-visual` e volte aqui.
+Uma tabela de antes e depois só com texto não conta como imagem.
+Um PR validado fora dos checks, como num teste local ou num ambiente de teste, sem o registro dessa validação no card, também não vai: siga `registrar-validacao-na-tarefa` e volte aqui.
+Com `Autorrevisar o diff antes de pedir` em `sim`, leia o diff na interface do GitHub como se fosse de outra pessoa e procure `console.log` esquecido, comentário residual, código morto e teste redundante.
+Diga o que achou e peça para a pessoa corrigir antes do pedido.
 
 ### Passo 2
 
