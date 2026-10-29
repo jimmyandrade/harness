@@ -1,6 +1,6 @@
 ---
 metadata:
-  version: "1.41.0"
+  version: "1.42.0"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -56,6 +56,7 @@ metadata:
 
 - Responda sempre no `Idioma das respostas`, que tem como padrão português do Brasil. Um projeto que quer as respostas em outro idioma define esse parâmetro no próprio `AGENTS.md`.
 - Fale com a pessoa na resposta, sem usar o nome dela no lugar dela. Comece pelo que precisa ser feito. Termine com a sugestão do próximo passo e, se houver, com a decisão que cabe a ela. Terceira pessoa fica na descrição da habilidade.
+- Quando a pessoa disser que não entendeu, a resposta seguinte só diz quem faz, o que fazer e o próximo passo, e nomeia se o clique é no aplicativo ou na página da conta no navegador.
 - Todo pull request, issue, commit ou página do Notion citado vai como link clicável no texto, não só no resumo final.
 
 ## Execução
