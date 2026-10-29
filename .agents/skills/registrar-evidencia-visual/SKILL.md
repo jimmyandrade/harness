@@ -3,7 +3,7 @@ name: registrar-evidencia-visual
 description: Registra o que a pessoa passa a ver quando um trabalho termina, no pull request e no card. Usada quando a entrega muda a tela, no Storybook, no ambiente local, na pré-produção ou na produção, mesmo sem dizer print. NÃO serve para mudança sem percepção visual, para medir performance, para ler texto de imagem nem para mandar a mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.7.0"
   related:
     - criar-pull-request
 ---
@@ -95,7 +95,7 @@ A página inteira entra como link para o arquivo anexado, não como imagem dentr
 Uma imagem muito alta alonga o card e atrapalha a leitura.
 O pull request segue a mesma regra, na seção de imagens que o modelo do repositório já tem.
 Não abra outra seção.
-Se o corpo do card não aceitar arquivo, o recorte vai num comentário e a página inteira continua como link.
+Se o corpo do card não aceitar arquivo, o recorte vai num comentário e a página inteira continua como link. Se o card já tem um comentário seu com a evidência deste trabalho, edite esse comentário em vez de abrir outro.
 Comentário numa issue do rastreador só entra se a pessoa pedir.
 Esse comentário leva o link do pull request.
 A descrição do pull request é o lugar melhor para o recorte.
@@ -186,7 +186,7 @@ A página, com o bloco novo no meio do resto da tela e o relógio travado em 1 d
 - A pessoa pede para mandar o arquivo a alguém: siga `Habilidade de mensagem` depois do sim, com o recorte e o link. Vazio, pergunte qual é a daquele negócio.
 - O repositório não tem pré-produção: não invente o endereço.
 - A story ainda mostra "No Preview": espere e leia o texto de novo.
-- A descrição do card não aceita imagem: o recorte vai num comentário e a página inteira continua como link.
+- A descrição do card não aceita imagem: o recorte vai num comentário e a página inteira continua como link. Um comentário seu com a evidência que já está no card é editado, não duplicado.
 - O Git não ignora `Pasta das evidências`: grave na pasta temporária do sistema e não crie pasta nova na raiz.
 - Não há chave de card nem número de pull request: a subpasta leva o dia e um nome curto do trabalho.
 - A pessoa não confirma o conjunto: não grave no card nem no pull request.
