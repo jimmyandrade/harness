@@ -1456,6 +1456,21 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses registering the asset, choosing stock, recording the payment, and creating the company
 
+### registrar-validacao-na-tarefa
+- **Stability**: experimental
+- **Description**: Record on the task, in a single comment, what a validation looked for, saw and did not check, and edit that comment with each new result
+- **Properties**:
+  - Lives at `.agents/skills/registrar-validacao-na-tarefa/SKILL.md`
+  - Reads the task comments first and edits its own comment about the same validation instead of opening another, because the comment tool edits but never deletes
+  - Writes a context sentence and the sections of the `Seções do comentário` parameter: what was looked for and seen (cause, fix, before and after of the same test) and what is not checked yet, with an "X of Y" count
+  - States only what was seen or run, marks inference as "indício, não prova", says which folder, branch and environment each result came from, and never writes "no regression"
+  - Reads the workflow trigger before saying where or when a CI test runs
+  - Proposes the edit of a task description sentence the comment made outdated, and returns the direct link of the comment
+- **Test Criteria**:
+  - [ ] A second result for the same validation edits the existing comment and updates the count, with no second comment
+  - [ ] A result with no folder, branch and environment is not registered until they are known
+  - [ ] The comment lists what was not checked and never claims absence of regression
+
 ### revisar-financas
 - **Stability**: experimental
 - **Description**: Read cash, profit, the income statement, cash flow, diagnosis, audit, or selling price
