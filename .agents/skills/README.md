@@ -62,6 +62,7 @@ flowchart LR
     definir_viagem["definir-viagem"]
     definir_vocabulario["definir-vocabulario"]
     descrever_habilidade_ou_schema["descrever-habilidade-ou-schema"]
+    emitir_ccmei["emitir-ccmei"]
     enviar_mensagem_no_slack["enviar-mensagem-no-slack"]
     escrever_codigo["escrever-codigo"]
     escrever_teste["escrever-teste"]
@@ -333,6 +334,7 @@ flowchart LR
   descrever_habilidade_ou_schema --> criar_pull_request
   descrever_habilidade_ou_schema --> evoluir_habilidade
   descrever_habilidade_ou_schema --> revisar_habilidade
+  emitir_ccmei -.-> evoluir_habilidade
   enviar_mensagem_no_slack --> definir_pessoa
   enviar_mensagem_no_slack --> definir_vocabulario
   enviar_mensagem_no_slack --> evoluir_habilidade
