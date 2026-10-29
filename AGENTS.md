@@ -1,6 +1,6 @@
 ---
 metadata:
-  version: "1.39.1"
+  version: "1.40.0"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -54,6 +54,7 @@ metadata:
 
 - Responda sempre no `Idioma das respostas`, que tem como padrão português do Brasil. Um projeto que quer as respostas em outro idioma define esse parâmetro no próprio `AGENTS.md`.
 - Fale com a pessoa na resposta, sem usar o nome dela no lugar dela. Comece pelo que precisa ser feito. Termine com a sugestão do próximo passo e, se houver, com a decisão que cabe a ela. Terceira pessoa fica na descrição da habilidade.
+- Quando a pessoa disser que não entendeu, a resposta seguinte só diz quem faz, o que fazer e o próximo passo, e nomeia se o clique é no aplicativo ou na página da conta no navegador.
 - Todo pull request, issue, commit ou página do Notion citado vai como link clicável no texto, não só no resumo final.
 
 ## Execução
@@ -68,7 +69,7 @@ metadata:
 - Depois que a release de um plugin que a pessoa usa sair, com a PR de release mesclada e a tag publicada, atualize o plugin instalado sem esperar um pedido: atualize o marketplace, atualize o plugin e diga que a sessão precisa reiniciar para valer. Vale para o plugin deste repositório e para o de um harness de negócio. A habilidade nova só chega à sessão depois disso.
 - Numa tarefa de código, siga nesta ordem: `procurar-tarefa` para os detalhes da issue ou da tarefa, `levantar-ambiente-do-repositorio`, `escrever-teste`, `escrever-codigo`, `criar-commit` e `criar-pull-request`. Use TDD por padrão: o teste vem primeiro, roda e falha, e só então vem o código que o faz passar. Depois de criar um commit ou de mudar o estado do pull request, siga `sincronizar-status-da-tarefa`. O merge segue `mesclar-pull-request`. Criar ou evoluir uma habilidade segue a mesma cadeia. Toda issue sai por `definir-issue-do-github`, que procura antes as issues abertas e fechadas do mesmo assunto, e todo pull request sai por `criar-pull-request`. Isso vale também para a issue ou o PR que outra habilidade manda abrir. Nunca abra pelo comando direto: ele cria issue repetida e deixa o PR sem rótulo, sem rascunho e sem pessoa atribuída.
 - Execute cada habilidade dessa ordem até o fim. Ler o arquivo começa a habilidade e não a encerra. Sem `Comando de testes`, `escrever-teste` ainda é chamada: o resultado é dizer que o comando não existe, sem inventar um runner. O modo de abertura é `Criar pull request ao terminar`. Os valores ficam na skill. Um projeto que quer outro modo define o parâmetro no próprio `AGENTS.md`. A resposta diz o nome da branch, se ela está no GitHub e, quando o pull request existe, o link. Não escreva que uma habilidade ficou para este pedido, nem para depois.
-- Um comando em segundo plano não encerra o turno. Quando o próximo passo depende do resultado dele, como uma instalação, uma suíte de testes, um build ou um check, espere no mesmo turno com um comando que bloqueia até o resultado sair, dentro do limite de tempo da ferramenta, e siga com ele. Encerre o turno só quando o trabalho terminar ou quando faltar uma decisão da pessoa. Nunca termine a resposta dizendo que o comando ainda roda e que você volta quando ele acabar.
+- Um comando em segundo plano não encerra o turno. Quando o próximo passo depende do resultado dele, espere no mesmo turno um comando que bloqueia até o resultado sair. Encerre o turno só quando o trabalho terminar ou quando faltar uma decisão da pessoa. Nunca termine a resposta dizendo que o comando ainda roda.
 - Uma regra de comportamento que vale para todos os projetos fica nestas instruções. O valor de um parâmetro fica nas instruções do projeto. O guia de contribuição cita o nome do parâmetro e não copia o valor, para a mudança acontecer num lugar só. Uma convenção de código que não é parâmetro fica no guia de contribuição. Não fica na memória de um projeto.
 
 ## Git
