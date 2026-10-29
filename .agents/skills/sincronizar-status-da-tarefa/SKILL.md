@@ -4,7 +4,7 @@ description: Sincroniza o status de tarefas, cards ou issues com o estado do pul
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.5.2"
+  version: "0.6.0"
   related:
     - criar-commit
     - criar-pull-request
@@ -68,6 +68,7 @@ A ligação pelo assunto espera a confirmação do plano.
 Com o sim, grave a ligação como `Registro da ligação` manda, no momento que combina com o estado do pull request.
 No pull request ainda aberto, a gravação entra nele.
 No pull request já mesclado, a gravação entra na tarefa, com o link do pull request.
+Leia antes os comentários da tarefa: se já existe um seu sobre o mesmo assunto, edite esse comentário em vez de abrir outro.
 Uma citação acrescentada depois do merge não fecha a tarefa.
 Percorrer as tarefas abertas e fechá-las não é desta habilidade.
 A tarefa fecha quando o pull request que a cita, ainda aberto, é mesclado, e o critério de pronto dela está cumprido.
@@ -134,6 +135,14 @@ Se você tentar levar a tarefa direto ao destino, a transição não existe e a 
 1. Siga o `Fluxo de status` um passo por vez.
 2. Leia o status devolvido antes do próximo passo.
 3. Use a lista da mensagem de erro para saber o status atual.
+
+### Comentário a mais na tarefa
+
+Se você abrir um comentário novo para o que já está num comentário seu na tarefa, a pessoa lê duas versões do mesmo registro, e a ferramenta não apaga comentário.
+
+1. Leia os comentários da tarefa antes de gravar.
+2. Se já há um seu sobre o mesmo assunto, edite esse com o texto completo, e não acrescente outro.
+3. Se sobrar um duplicado, diga qual é e peça para a pessoa apagá-lo.
 
 ### PR que só cita a chave
 

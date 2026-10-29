@@ -3,7 +3,7 @@ name: preparar-tarefa-do-pull-request
 description: Garante a tarefa da demanda antes do pull request e confere se a descrição de qualquer card segue o modelo do tipo. Usada quando falta a tarefa, quando o PR já existe sem ela, ao implementar uma issue e ao escrever ou editar um card, mesmo subtarefa. Não cria sozinha nem escolhe o projeto por um card parecido. Não serve para abrir o PR.
 metadata:
   author: jimmyandrade
-  version: "0.9.0"
+  version: "0.9.1"
   related:
     - definir-tarefa
     - evoluir-habilidade
@@ -130,7 +130,7 @@ Se você escrever o objetivo a partir de um comentário de revisão, a tarefa de
 
 1. Leia o que o PR e o diff propõem.
 2. Deixe o comentário no PR.
-3. Registre na tarefa, no máximo, um comentário à parte.
+3. Registre na tarefa, no máximo, um comentário à parte. Se já houver um seu sobre o mesmo ponto, edite-o em vez de abrir outro.
 
 ### Demanda pulada por ser pequena
 
