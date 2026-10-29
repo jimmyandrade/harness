@@ -4,7 +4,7 @@ description: Cria, revisa e atualiza o artigo da base de conhecimento que respon
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   related:
     - criar-habilidade
     - definir-historia-de-usuario
@@ -103,6 +103,7 @@ Escreva para uma pessoa do time que precisa resolver a dúvida rápido.
 Não use jargão técnico. Quando um termo for inevitável, explique-o na mesma frase.
 Não presuma que a pessoa conhece a modelagem dos dados: diga o nome do banco, da página ou da propriedade que ela vê na tela.
 Quando dois bancos parecidos causam erro, explique a diferença entre eles.
+Quando a dúvida vem de uma conversa, um print, uma reunião ou um caso real, use esse caso como exemplo concreto no artigo, sem nome de pessoa nem dado pessoal.
 Ao criar, use o `Status inicial`.
 
 ### Passo 7
@@ -122,6 +123,7 @@ Antes de concluir, confira o artigo com esta lista:
 - [ ] Responde uma pergunta só e liga os vizinhos em `relacionados`.
 - [ ] Não tem critério de aceite nem cenário em BDD.
 - [ ] Não tem jargão técnico sem explicação nem nome interno que a pessoa não vê na tela.
+- [ ] Usa o caso real como exemplo quando a dúvida veio de um.
 - [ ] Cada passo de tela tem o print logo abaixo, com legenda.
 - [ ] A pessoa sabe o que fazer, onde fazer e o que evitar sem abrir outro documento.
 - [ ] A ferramenta está ligada quando a dúvida é sobre ela.

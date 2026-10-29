@@ -3,7 +3,7 @@ name: criar-pull-request
 description: Use essa habilidade sempre que for abrir ou atualizar PR, subir uma correção ou mandar para a branch principal, mesmo sem dizer PR. NÃO use para mesclar (use mesclar-pull-request), responder comentário de revisão nem para só commitar (use criar-commit).
 metadata:
   author: jimmyandrade
-  version: "0.40.0"
+  version: "0.41.2"
   related:
     - registrar-evidencia-visual
     - registrar-resultados-da-validacao-na-tarefa
@@ -67,7 +67,7 @@ Antes de criar a branch, confira se a demanda tem uma tarefa no rastreador do pr
 Sem tarefa, sugira criá-la antes do PR e espere a resposta: a chave entra no nome da branch e no título do PR conforme a convenção do repositório.
 Se o PR já está aberto sem tarefa, diga isso e proponha criá-la depois.
 
-Se a branch atual for a `Branch base`, crie uma branch a partir da `Branch base` remota atualizada antes de qualquer commit, sem rastrear a base.
+Antes de criar a branch, busque a `Branch base` de novo, no mesmo comando que a cria. Um fetch anterior da mesma sessão não conta. Crie a branch a partir dessa base, sem rastrear a base. Se a branch atual já for a `Branch base`, faça isso antes de qualquer commit.
 
 O nome da branch é `<tipo>/<descrição>`.
 O tipo é o do Conventional Commits do commit principal: `feat`, `fix`, `docs`, `refactor`, `perf`, `test`, `chore` ou `ci`.
@@ -107,18 +107,18 @@ A busca e a lista de rótulos estão em `Scripts disponíveis`.
 Um achado fora do endereço volta para correção e o PR não abre. Run, job, pull request e commit citados levam o endereço `https://`, mesmo com termo da lista no caminho.
 
 Abra o PR contra a `Branch base` no `Repositório`.
-O título começa igual ao assunto do commit.
-Corpo em `Idioma do PR`.
+Título e corpo em `Idioma do PR`: leia o valor nos parâmetros antes de escrever. O idioma das respostas, da issue ou das instruções não decide o do PR, nem quem propõe a mudança.
+O título começa igual ao assunto do commit. Se o assunto saiu noutro idioma, corrija o commit antes do push.
 Com issue, o pull request e o merge request citam `#<número>` na descrição, na forma do repositório.
 Sem issue, não invente número.
 Se o repositório tiver um template de pull request, siga as seções dele e marque as caixas conforme o que foi feito.
-Se a mudança altera o que uma pessoa vê, como tela, componente, estilo ou texto da interface, siga `registrar-evidencia-visual` antes de abrir ou de tirar o PR do rascunho. A seção do modelo que mostra o resultado leva a imagem ou o vídeo, e uma tabela de antes e depois só com texto não conta. Sem imagem, o PR fica em rascunho e a resposta diz o que falta. Dependência, documentação e mudança sem diferença na tela ficam de fora.
+Se a mudança altera o que uma pessoa vê, como tela, componente, estilo ou texto da interface, siga `registrar-evidencia-visual` antes de abrir ou de tirar o PR do rascunho. A seção do modelo que mostra o resultado leva a imagem ou o vídeo, e uma tabela de antes e depois só com texto não conta. Cada captura tem o próprio título, a imagem e a legenda separados por linha em branco, e o texto que ela mostra vem do negócio, como diz `registrar-evidencia-visual`. Sem imagem, o PR fica em rascunho e a resposta diz o que falta. Dependência, documentação e mudança sem diferença na tela ficam de fora.
 Se a mudança foi validada fora dos checks do PR, como num teste local, num ambiente de teste ou num teste que só roda depois do merge, e a tarefa não tem o registro dos resultados dessa validação, siga `registrar-resultados-da-validacao-na-tarefa` antes de tirar o PR do rascunho.
 Sem o registro, o PR fica em rascunho e a resposta diz o que falta.
 Validação que os próprios checks do PR já mostram fica de fora.
 Com o preview do PR publicado, o endereço dele entra na descrição do PR e na tarefa, como `registrar-resultados-da-validacao-na-tarefa` manda.
 A descrição guarda como a mudança foi feita e por que cada decisão foi tomada: de onde vem o dado, por que aquele nome, aquela condição ou aquela estrutura, e o que ficou de fora. A tarefa guarda o escopo e os critérios de aceitação, não o como. Quando uma pergunta de revisão muda uma decisão, a descrição muda junto.
-Depois do push, uma vez, confira o título e a descrição contra o código que subiu. Vários commits no mesmo push são uma conferência só. Se um dos dois deixou de contar o que a branch faz, atualize os dois antes de responder.
+Depois do push, uma vez, confira o título e a descrição contra o código que subiu e contra `Idioma do PR`. Vários commits no mesmo push são uma conferência só. Se um dos dois deixou de contar o que a branch faz, atualize os dois antes de responder.
 Com o PR já aberto, quando a evidência muda (um teste passou ou falhou depois do que a descrição diz, saiu o preview, chegou a imagem), atualize na mesma rodada a descrição e a tarefa, com a mesma informação nos dois. A tarefa segue `registrar-resultados-da-validacao-na-tarefa`: edite o comentário que já existe e não crie outro. Antes de dizer que um dos dois está atualizado, releia-o.
 
 Com `Atribuição da sessão` em `sim`, termine com a linha de atribuição da sessão.
@@ -140,7 +140,7 @@ Mande o link na resposta.
 
 Depois de abrir, leia o status do PR pelas ferramentas de PR do app e vincule o PR se ele não aparecer. Não fique consultando o CI em loop.
 
-Depois de ligar o PR, renomeie a sessão de conversa com a IA, o nome da conversa na lista do app, para `[CHAVE] título do PR`, com a chave do card e o título do PR como estão (`[ABC-123] fix(login): aceitar e-mail com maiúscula`).
+Depois de ligar o PR, renomeie a sessão de conversa com a IA, o nome da conversa na lista do app, para `[CHAVE] título do PR`, com a chave do card e o título do PR como estão (`[ABC-123] fix(login): accept an uppercase email`).
 O título do PR e o da issue não mudam: só o nome da conversa muda.
 Sem card, use a chave da issue do projeto, e sem nenhuma das duas, só o título do PR. Confira a chave e o título no GitHub e na tarefa antes, e não pergunte.
 
@@ -234,7 +234,7 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### Faça o PR pra corrigir isso
 
-Branch `fix/…` a partir da base, testes e build no commit, commit no idioma do projeto, push com a credencial do `gh`, PR aberto e o link na resposta. Sem merge, porque a pessoa não pediu.
+Branch `fix/…` a partir da base, testes e build no commit, commit em `Idioma da mensagem de commit`, push com a credencial do `gh`, PR aberto e o link na resposta. Sem merge, porque a pessoa não pediu.
 
 ### O código mudou e o título ficou no texto antigo
 
@@ -259,12 +259,14 @@ O pedido autoriza push e merge. O push espera o hook de pre-push. Com o PR abert
 
 - Número ou hash curto, no lugar do endereço do Passo 6, obriga a pessoa a procurar. `#<número>` no commit e na descrição é a issue.
 - `git switch -c <branch> origin/<base>` faz a branch rastrear a base. Use `--no-track` e publique com `push -u origin <branch>`.
+- Um fetch do começo da sessão parece a base atualizada. Busque de novo no mesmo comando que cria a branch.
 - O prefixo que a ferramenta deu parece o nome da branch. Quem manda é o tipo do commit.
 - O push por HTTPS pode travar para sempre no helper de credencial do macOS. A credencial do `gh` funciona.
 - Não existe `timeout` no macOS. Use o timeout da ferramenta ou rode em segundo plano.
 - Um hook de pre-push pode rodar também no push que só apaga uma branch remota.
 - Um Markdown parece documentação. O rótulo segue o tipo do commit. Correção de erro é `fix` e o rótulo de bug. `docs` e o rótulo de documentação ficam para a documentação.
 - Conferir a cada commit parece necessário. A conferência é uma vez, depois do push.
+- As respostas, a issue e as instruções em português parecem pedir o título do PR em português. O título segue `Idioma do PR`, lido nos parâmetros.
 - "Sessão" parece o PR ou a issue. É a conversa com a IA no app, e só o nome dela muda. O título do PR e o da issue ficam como estão.
 
 ## Scripts disponíveis
