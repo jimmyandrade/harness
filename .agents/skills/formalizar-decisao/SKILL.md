@@ -3,7 +3,7 @@ name: formalizar-decisao
 description: Leva uma decisão de comportamento a quem decide, com a dúvida, a hipótese e o que já está definido, e formaliza a resposta na tarefa e no pull request, em qualquer canal e em qualquer momento, do refinamento ao desk check. Usada quando surge uma dúvida ou uma escolha de comportamento que não é sua, mesmo sem dizer decisão. Não serve para dúvida de código, status de entrega nem para escrever o texto da mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.1.1"
+  version: "0.2.0"
   aliases:
     - abrir-thread-de-decisao
   related:
@@ -22,6 +22,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 ```yaml
 # `Ferramentas de comunicação` lista as ferramentas em que o negócio conversa, como o Slack ou o WhatsApp, e a habilidade de mensagem de cada uma. Vazio, pergunte em qual conversar.
 "Ferramentas de comunicação": ""
+# `Registro de decisão` diz onde e em que formato a decisão formalizada é registrada, como um bloco próprio da ferramenta de tarefas. Vazio, é uma seção Decisões na descrição da tarefa, da issue e do pull request.
+"Registro de decisão": ""
 # `Título da thread própria` descreve o título do post que abre a thread em ferramentas como o Slack. Vazio, o título leva a chave da tarefa, a pessoa e o assunto.
 "Título da thread própria": ""
 ```
@@ -54,17 +56,20 @@ Diga a quem participa que a conversa serve para decidir e que a decisão será f
 
 Quando a resposta chegar, em qualquer canal, formalize:
 
-1. Atualize os critérios de aceite da tarefa, como manda `preparar-tarefa-do-pull-request`.
-2. Escreva a decisão e o porquê na descrição do pull request, como manda `criar-pull-request`.
-3. Atualize o teste, a story e a evidência que a decisão muda.
-4. Linke a origem, que pode ser a ata, a thread ou a mensagem, na tarefa e no pull request.
-5. Diga a quem participou onde a decisão ficou registrada.
+1. Registre a decisão na área de decisões da tarefa, da issue e do pull request, como diz `Registro de decisão`.
+2. Cada entrada traz o que foi decidido, quem decidiu, quando decidiu, onde decidiu e o permalink da conversa, que pode ser a ata, a thread ou a mensagem.
+3. A área só lista decisão tomada e formalizada. Decisão pendente fica fora dela.
+4. Atualize os critérios de aceite da tarefa, como manda `preparar-tarefa-do-pull-request`.
+5. Escreva o porquê na descrição do pull request, como manda `criar-pull-request`.
+6. Atualize o teste, a story e a evidência que a decisão muda.
+7. Diga a quem participou onde a decisão ficou registrada.
 
 A conversa nunca é o registro.
 
 ### Passo 6
 
-Sem resposta ainda, marque a decisão como pendente na tarefa e no pull request, com quem decide e o que depende dela.
+Sem resposta ainda, marque a decisão como pendente no texto da tarefa e do pull request, com quem decide e o que depende dela.
+Ela não entra na área de decisões até ser tomada.
 
 ## Problemas comuns
 
@@ -75,6 +80,22 @@ Se você deixar a resposta só na conversa, quem abrir a tarefa ou o pull reques
 1. Atualize os critérios de aceite da tarefa e a descrição do pull request.
 2. Linke a origem nos dois.
 3. Diga a quem participou onde a decisão ficou.
+
+### Decisão sem quem, quando e onde
+
+Se você registrar só o que foi decidido, quem lê depois não sabe quem decidiu nem onde conferir.
+
+1. Escreva quem decidiu, quando e onde.
+2. Linke o permalink da conversa.
+3. Sem o permalink, diga que falta e peça.
+
+### Pendente na área de decisões
+
+Se você pôr na área de decisões o que ainda espera resposta, quem lê entende que está decidido.
+
+1. Deixe só a decisão tomada na área.
+2. Marque a pendente no texto, com quem decide.
+3. Passe para a área quando a resposta chegar.
 
 ### Pergunta sem hipótese nem evidência
 
@@ -98,7 +119,11 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### o divisor entre a barra de aviso e o cabeçalho some no tema sazonal, pergunte à Ana
 
-Abri uma thread nova na ferramenta de comunicação, com a chave da tarefa, a pessoa e o assunto no título. Escrevi que a conversa serve para decidir e que o resultado vai para a tarefa e para o pull request. Mostrei o tema padrão, com a linha entre os dois, e o tema sazonal, sem ela, cada um com a sua imagem, e terminei com uma pergunta: segue assim ou entra um divisor? Não usei a thread de status da entrega. Depois da resposta da Ana, atualizo o critério da tarefa e a descrição do pull request e linko a thread.
+Abri uma thread nova na ferramenta de comunicação, com a chave da tarefa, a pessoa e o assunto no título.
+Escrevi que a conversa serve para decidir e que o resultado vai para a tarefa e para o pull request.
+Mostrei o tema padrão, com a linha entre os dois, e o tema sazonal, sem ela, cada um com a sua imagem, e terminei com uma pergunta: segue assim ou entra um divisor?
+Não usei a thread de status da entrega.
+Depois da resposta da Ana, registro a decisão na área de decisões da tarefa e do pull request, com o que foi decidido, quem decidiu, quando, onde e o link da thread, e atualizo o critério da tarefa e a descrição do pull request.
 
 ## Casos-limite
 
@@ -107,6 +132,7 @@ Abri uma thread nova na ferramenta de comunicação, com a chave da tarefa, a pe
 - `Ferramentas de comunicação` vazio: pergunte em qual ferramenta conversar e grave a resposta.
 - A ferramenta já tem uma thread própria sobre a tarefa e a pessoa: responda nela.
 - A decisão aparece perto do fim da tarefa: formalize antes de fechar o pull request, com o critério e a evidência atualizados.
+- A ferramenta de tarefas não tem bloco de decisão: use a seção Decisões em texto, com os mesmos campos.
 - A tarefa ainda não existe: siga `preparar-tarefa-do-pull-request` antes de formalizar.
 - A dúvida é de código: ela vai para o pull request, não para esta habilidade.
 
@@ -114,7 +140,7 @@ Abri uma thread nova na ferramenta de comunicação, com a chave da tarefa, a pe
 
 - Uma thread geral de status parece o lugar mais rápido para perguntar. A decisão se perde nela.
 - O Slack parece a única ferramenta. O negócio pode conversar também em outra, com ou sem thread.
-- A resposta na conversa parece registrar a decisão. O registro é a tarefa e o pull request.
+- A resposta na conversa parece registrar a decisão. O registro é a área de decisões da tarefa e do pull request.
 - A decisão tomada no desk check parece pequena demais para formalizar. Ela muda o critério e a evidência do mesmo jeito.
 - Um post novo parece barulho no canal. Uma thread por assunto mantém cada decisão achável.
 
