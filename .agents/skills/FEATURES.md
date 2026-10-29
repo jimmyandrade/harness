@@ -121,6 +121,23 @@ How these skills relate is in `README.md`, in this folder.
 - **Test Criteria**:
   - [ ] A project without test or build commands commits and says nothing was verified
 
+### criar-copia-de-trabalho
+- **Stability**: experimental
+- **Description**: Create the git worktree for a change, next to the person's clone, from the freshly fetched base branch, with the untracked items it needs linked from the clone
+- **Properties**:
+  - Lives at `.agents/skills/criar-copia-de-trabalho/SKILL.md`
+  - Runs when a skill that writes follows `Cópia de trabalho` set to worktree, or when the person asks for a copy to review or test
+  - Never changes the person's clone, which may be on another branch with pending changes
+  - Uses the copy the Claude app already made for the session, and never creates one in `.claude/worktrees`
+  - Names the branch `<type>/<description>` with the Jira key when there is one, creates it without tracking the base, and names the folder after the `Padrão do nome da pasta` parameter
+  - Links `.husky/_` and `node_modules` from the clone when they exist there and are missing in the copy, and never skips the commit hook
+  - Uses the installed runtime of the same series when the exact version is not installed, and says which one it used
+  - Reminds that the chat shell returns to the clone after every command, so commands and tests run inside the copy, and points to `limpar-copias-de-trabalho` after the merge
+- **Test Criteria**:
+  - [ ] A change in a repository creates a sibling worktree from the updated base, leaves the clone untouched and reports the folder, branch, base commit, linked items and runtime used
+  - [ ] A copy without the hook item still commits with the hook, after the link, and never with `--no-verify`
+  - [ ] A session already inside a copy made by the app uses it and creates no other
+
 ### criar-habilidade
 - **Stability**: production
 - **Description**: Write the smallest skill that still triggers
