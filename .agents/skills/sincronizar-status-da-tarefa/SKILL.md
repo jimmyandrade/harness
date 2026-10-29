@@ -1,10 +1,10 @@
 ---
 name: sincronizar-status-da-tarefa
-description: Sincroniza o status de tarefas, cards ou issues com o estado do pull request ligado a cada uma e grava a ligação quando o pull request ainda não cita a tarefa. Usada quando um commit é criado, quando o estado de um pull request muda ou quando a pessoa avisa que um PR foi mesclado, mesmo sem dizer sincronizar. Não serve para escrever a tarefa, abrir o PR nem revisar o diff.
+description: Sincroniza o status de tarefas, cards ou issues com o estado do pull request ligado a cada uma e grava a ligação quando o pull request ainda não cita a tarefa. Usada quando um commit é criado, quando o estado de um pull request muda (aberto, tirado do rascunho, etiquetado, mesclado, fechado), mesmo que a mudança tenha sido feita pelo `gh` ou por outra ferramenta, ou quando a pessoa avisa que um PR foi mesclado, mesmo sem dizer sincronizar. Não serve para escrever a tarefa, abrir o PR nem revisar o diff.
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.7.0"
   related:
     - criar-commit
     - criar-pull-request
@@ -41,6 +41,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 Obtenha as tarefas pela `Consulta das tarefas`, ou pela lista ou pelos links que a pessoa passou.
 Quando a habilidade roda por um commit ou por uma mudança de pull request, parta desse pull request e busque as tarefas abertas.
+Toda mudança de estado de um pull request que o turno faz, ou que a pessoa ou o aplicativo avisam, roda esta habilidade na mesma resposta, antes de responder.
+Isso vale também quando o PR foi aberto, tirado do rascunho ou mesclado pelo `gh` direto, sem passar por `criar-pull-request` nem por `mesclar-pull-request`.
 Sem consulta e sem lista, pergunte e pare. Resultado grande que vem em arquivo é lido pelos campos chave, status e título, depois de conferir o formato do arquivo. Anote o status de cada tarefa como o rastreador devolveu.
 
 ### Passo 2
@@ -136,6 +138,14 @@ Se você tentar levar a tarefa direto ao destino, a transição não existe e a 
 2. Leia o status devolvido antes do próximo passo.
 3. Use a lista da mensagem de erro para saber o status atual.
 
+### Estado do PR mudou e a tarefa ficou parada
+
+Se você abrir, tirar do rascunho ou mesclar o PR pelo `gh` direto, ou ler que a pessoa mesclou, e seguir sem rodar esta habilidade, o status da tarefa fica para trás e o progresso do card sai errado.
+
+1. Rode esta habilidade na mesma resposta em que o estado do PR mudou ou foi avisado.
+2. Não espere a pessoa pedir.
+3. Releia o status de cada tarefa ligada ao stack de PRs da conversa, não só o do PR do momento.
+
 ### Comentário a mais na tarefa
 
 Se você abrir um comentário novo para o que já está num comentário seu na tarefa, a pessoa lê duas versões do mesmo registro, e a ferramenta não apaga comentário.
@@ -193,6 +203,7 @@ A mesma entrega está num pull request já mesclado. O plano marca "ligada pelo 
 - A busca pela chave parece achar o pull request feito sem citar a tarefa. Parta desse pull request e compare o assunto com as tarefas abertas.
 - Uma citação no pull request já mesclado, ou uma varredura das tarefas abertas, parece fechar a tarefa. A gravação entra na tarefa, com o link do pull request. A tarefa fecha quando o pull request que a cita, ainda aberto, é mesclado, e o critério de pronto dela está cumprido.
 - Uma frase comprimida parece um recado interno. A skill fica fácil de ler por uma pessoa.
+- Abrir, tirar do rascunho ou mesclar o PR pelo `gh` parece não ter relação com a tarefa. O estado do PR mudou, e a habilidade roda mesmo assim.
 - O aviso de que um PR foi mesclado parece só uma informação. É gatilho: confirme o estado MERGED e sincronize a tarefa na mesma resposta.
 
 ## Scripts disponíveis
