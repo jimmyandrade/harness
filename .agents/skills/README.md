@@ -109,6 +109,7 @@ flowchart LR
     revisar_uso_do_tempo["revisar-uso-do-tempo"]
     sincronizar_cronograma["sincronizar-cronograma"]
     sincronizar_status_da_tarefa["sincronizar-status-da-tarefa"]
+    testar_ponta_a_ponta["testar-ponta-a-ponta"]
     validar_plano_de_vocabulario["validar-plano-de-vocabulario"]
   end
   acompanhar_fila_de_revisao --> atender_revisao_de_pull_request
@@ -526,6 +527,11 @@ flowchart LR
   sincronizar_status_da_tarefa --> criar_pull_request
   sincronizar_status_da_tarefa --> evoluir_habilidade
   sincronizar_status_da_tarefa --> levantar_contexto_do_pull_request
+  testar_ponta_a_ponta --> definir_issue_do_github
+  testar_ponta_a_ponta --> escrever_teste
+  testar_ponta_a_ponta --> evoluir_habilidade
+  testar_ponta_a_ponta --> preparar_tarefa_do_pull_request
+  testar_ponta_a_ponta --> registrar_resultados_da_validacao_na_tarefa
   validar_plano_de_vocabulario --> classificar_estado_do_termo
   validar_plano_de_vocabulario --> definir_vocabulario
   validar_plano_de_vocabulario --> gravar_termos_no_vocabulario
