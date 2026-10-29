@@ -3,7 +3,7 @@ name: diagnosticar-e2e-vermelho
 description: Acha a causa de um teste E2E vermelho e diz se o conserto é do teste ou do produto, sem digitar credencial nem criar dado real, e registra o resultado na tarefa. Usada quando um E2E falha no CI ou numa execução local, mesmo sem dizer causa. Não serve para escrever teste de unidade, rodar a suíte inteira nem corrigir bug do produto.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
   related:
     - definir-issue-do-github
     - escrever-teste
@@ -19,7 +19,7 @@ metadata:
 ```yaml
 # `Pasta dos workflows` é onde ficam os arquivos do CI que rodam o E2E.
 "Pasta dos workflows": ".github/workflows"
-# `Variáveis de credencial` lista os nomes das variáveis de ambiente que o teste lê para entrar numa conta. Vazio, o teste não precisa de login.
+# `Variáveis de credencial` lista os nomes das variáveis de ambiente que o teste lê para fazer login. Vazio, o teste não precisa de login.
 "Variáveis de credencial": []
 "Modo de aprendizado": "perguntar"
 ```
@@ -60,14 +60,14 @@ flowchart LR
   A{A página faz o que o usuário precisa?} -->|não| B[Bug do produto: issue com definir-issue-do-github, e o teste fica vermelho de propósito]
   A -->|sim| C{O teste procura o que a página nunca teve ou já mudou?}
   C -->|sim| D[Corrija o teste]
-  C -->|não| E[Instabilidade: espera ou condição, sem aumentar o tempo cegamente]
+  C -->|não| E[Instabilidade: conserte a condição de espera, sem só aumentar o tempo]
 ```
 
 Não troque a expectativa do teste para escondê-lo quando o produto está errado.
 
 ### Passo 6
 
-Para um teste que entra numa conta, a pessoa exporta as `Variáveis de credencial` no terminal dela, e o teste as lê do ambiente.
+Para um teste que faz login (por exemplo, com e-mail e senha), a pessoa exporta as `Variáveis de credencial` no terminal dela, e o teste as lê do ambiente.
 Nunca digite, peça no chat nem grave em arquivo uma senha, um token ou um documento de identificação. Nunca crie conta nem dado real, em produção ou em outro ambiente que não é de teste da pessoa.
 Se o teste cria dado de verdade (cadastro, pedido, pagamento), diga isso antes de rodar, com o ambiente, e deixe a pessoa decidir se roda e onde.
 Sem as variáveis no ambiente, diga que o login não foi provado e rode só o que não precisa dele.
@@ -141,7 +141,7 @@ Li o workflow: ele roda só em `push` na `main`, não no PR. O histórico mostra
 
 ### Rode o teste com a minha conta
 
-Pedi que você exporte `E2E_LOGIN_EMAIL` e `E2E_LOGIN_PASSWORD` no seu terminal. Confirmei que as duas existem, sem ler o valor, e rodei só o teste de login. Não digitei a senha nem a gravei em arquivo.
+Pedi que você exporte no seu terminal as variáveis de `Variáveis de credencial`, as do e-mail e da senha. Confirmei que elas existem, sem ler o valor, e rodei só o teste de login. Não digitei a senha nem a gravei em arquivo.
 
 ## Casos-limite
 
