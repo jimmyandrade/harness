@@ -3,7 +3,7 @@ name: formalizar-decisao
 description: Leva uma decisão de comportamento a quem decide, com a dúvida, a hipótese e o que já está definido, e formaliza a resposta na tarefa e no pull request, em qualquer canal e em qualquer momento, do refinamento ao desk check. Usada quando surge uma dúvida ou uma escolha de comportamento que não é sua, mesmo sem dizer decisão. Não serve para dúvida de código, status de entrega nem para escrever o texto da mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
   aliases:
     - abrir-thread-de-decisao
   related:
@@ -20,7 +20,9 @@ metadata:
 
 Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco, depois nas instruções de usuário. Quando um valor não estiver lá, use o padrão abaixo. Um parâmetro vazio não impõe regra.
 ```yaml
-# `Título da thread própria` descreve o título do post que abre a thread no Slack. Vazio, o título leva a chave da tarefa, a pessoa e o assunto.
+# `Ferramentas de comunicação` lista as ferramentas em que o negócio conversa, como o Slack ou o WhatsApp, e a habilidade de mensagem de cada uma. Vazio, pergunte em qual conversar.
+"Ferramentas de comunicação": ""
+# `Título da thread própria` descreve o título do post que abre a thread em ferramentas como o Slack. Vazio, o título leva a chave da tarefa, a pessoa e o assunto.
 "Título da thread própria": ""
 ```
 ## Instruções
@@ -39,8 +41,10 @@ Leve o pedido a quem decide, no canal que o momento pede:
 
 - Reunião ou refinamento: pergunte ao vivo e registre o que foi decidido, como diz `definir-registro-de-reuniao`.
 - Depois do refinamento, na demonstração ou no desk check: leve a pergunta quando a dúvida aparece. Não espere o próximo refinamento.
-- Slack: abra uma thread nova só dessa decisão, com o título de `Título da thread própria`, e nunca use a thread de status de uma entrega. Responda em mensagens curtas, uma ideia por mensagem, cada caso com a sua imagem, e a pergunta na última. O texto segue `enviar-mensagem-no-slack`.
-- Chat sem thread, como WhatsApp ou mensagem direta: uma mensagem curta, com a imagem e a pergunta. O texto segue `conversar-no-whatsapp` quando o canal é esse.
+- Ferramenta com thread, como o Slack: abra uma thread nova só dessa decisão, com o título de `Título da thread própria`, e nunca use a thread de status de uma entrega. Responda em mensagens curtas, uma ideia por mensagem, cada caso com a sua imagem, e a pergunta na última.
+- Ferramenta ou conversa sem thread, como o WhatsApp ou uma mensagem direta: uma mensagem curta, com a imagem e a pergunta.
+
+Quem escreve e envia o texto é a habilidade de mensagem da ferramenta, em `Ferramentas de comunicação`.
 
 ### Passo 4
 
@@ -82,7 +86,7 @@ Se você perguntar "o que acha?" sem dizer o que já está definido e sem mostra
 
 ### Decisão numa thread geral
 
-Se você levar a consulta para a thread de status de uma entrega, a decisão se perde no meio do resto.
+Se você levar a consulta para a thread de status de uma entrega, numa ferramenta com thread, a decisão se perde no meio do resto.
 
 1. Abra uma thread nova, com a chave da tarefa, a pessoa e o assunto no título.
 2. Faça as perguntas ali.
@@ -94,13 +98,14 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### o divisor entre a barra de aviso e o cabeçalho some no tema sazonal, pergunte à Ana
 
-Abri uma thread nova no canal, com a chave da tarefa, a pessoa e o assunto no título. Escrevi que a conversa serve para decidir e que o resultado vai para a tarefa e para o pull request. Mostrei o tema padrão, com a linha entre os dois, e o tema sazonal, sem ela, cada um com a sua imagem, e terminei com uma pergunta: segue assim ou entra um divisor? Não usei a thread de status da entrega. Depois da resposta da Ana, atualizo o critério da tarefa e a descrição do pull request e linko a thread.
+Abri uma thread nova na ferramenta de comunicação, com a chave da tarefa, a pessoa e o assunto no título. Escrevi que a conversa serve para decidir e que o resultado vai para a tarefa e para o pull request. Mostrei o tema padrão, com a linha entre os dois, e o tema sazonal, sem ela, cada um com a sua imagem, e terminei com uma pergunta: segue assim ou entra um divisor? Não usei a thread de status da entrega. Depois da resposta da Ana, atualizo o critério da tarefa e a descrição do pull request e linko a thread.
 
 ## Casos-limite
 
 - A decisão sai numa reunião: formalize pela ata e pela tarefa, sem abrir thread.
-- O canal não tem thread, como o WhatsApp: uma mensagem curta, com a imagem e a pergunta, e a formalização igual.
-- O canal já tem uma thread própria sobre a tarefa e a pessoa: responda nela.
+- A ferramenta não tem thread, como o WhatsApp: uma mensagem curta, com a imagem e a pergunta, e a formalização igual.
+- `Ferramentas de comunicação` vazio: pergunte em qual ferramenta conversar e grave a resposta.
+- A ferramenta já tem uma thread própria sobre a tarefa e a pessoa: responda nela.
 - A decisão aparece perto do fim da tarefa: formalize antes de fechar o pull request, com o critério e a evidência atualizados.
 - A tarefa ainda não existe: siga `preparar-tarefa-do-pull-request` antes de formalizar.
 - A dúvida é de código: ela vai para o pull request, não para esta habilidade.
@@ -108,6 +113,7 @@ Abri uma thread nova no canal, com a chave da tarefa, a pessoa e o assunto no t�
 ## Pegadinhas
 
 - Uma thread geral de status parece o lugar mais rápido para perguntar. A decisão se perde nela.
+- O Slack parece a única ferramenta. O negócio pode conversar também em outra, com ou sem thread.
 - A resposta na conversa parece registrar a decisão. O registro é a tarefa e o pull request.
 - A decisão tomada no desk check parece pequena demais para formalizar. Ela muda o critério e a evidência do mesmo jeito.
 - Um post novo parece barulho no canal. Uma thread por assunto mantém cada decisão achável.
