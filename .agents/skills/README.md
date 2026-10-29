@@ -103,6 +103,7 @@ flowchart LR
     redigir_com_tom_de_voz["redigir-com-tom-de-voz"]
     registrar_ciclo_do_ativo["registrar-ciclo-do-ativo"]
     registrar_evidencia_visual["registrar-evidencia-visual"]
+    registrar_validacao_na_tarefa["registrar-validacao-na-tarefa"]
     revisar_financas["revisar-financas"]
     revisar_habilidade["revisar-habilidade"]
     revisar_uso_do_tempo["revisar-uso-do-tempo"]
@@ -495,6 +496,11 @@ flowchart LR
   registrar_ciclo_do_ativo --> lancar_despesa_da_empresa
   registrar_ciclo_do_ativo --> mesclar_registro
   registrar_evidencia_visual --> criar_pull_request
+  registrar_validacao_na_tarefa --> criar_pull_request
+  registrar_validacao_na_tarefa --> evoluir_habilidade
+  registrar_validacao_na_tarefa --> preparar_tarefa_do_pull_request
+  registrar_validacao_na_tarefa --> registrar_evidencia_visual
+  registrar_validacao_na_tarefa --> sincronizar_status_da_tarefa
   revisar_financas --> definir_lancamento
   revisar_financas --> definir_planejamento_financeiro
   revisar_financas --> gerenciar_estoque
