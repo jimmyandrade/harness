@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.30.0](https://github.com/jimmyandrade/harness/compare/v1.29.0...v1.30.0) (2026-10-29)
+
+
+### Features
+
+* **criar-pull-request:** atualizar a descrição e a tarefa quando a evidência muda ([#636](https://github.com/jimmyandrade/harness/issues/636)) ([97ab414](https://github.com/jimmyandrade/harness/commit/97ab414e1afc22d48b52e66fc6688caf6e9ecea2))
+
 ## [1.29.0](https://github.com/jimmyandrade/harness/compare/v1.28.0...v1.29.0) (2026-10-29)
 
 
