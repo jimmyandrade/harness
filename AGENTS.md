@@ -1,6 +1,6 @@
 ---
 metadata:
-  version: "1.40.0"
+  version: "1.41.0"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -106,10 +106,7 @@ metadata:
 
 ## Sincronização com o Notion
 
-- O GitHub é a fonte de escrita. A action de sincronização é a única que escreve as páginas de skill no Notion. Não edite essas páginas nem esse banco no Notion.
-- O schema de uma página de skill é o `.agents/schemas/skill-page.schema.json`. Cada negócio guarda o próprio mapeamento, com o id do data source, os nomes das propriedades e os nomes das opções de status. O `.agents/mappings/skill-page.notion.example.json` é o modelo.
-- Um modelo em `.agents/assets/templates/` é publicado num banco de modelos só quando o negócio tem o `.agents/mappings/template-page.notion.json`, como decide a ADR 0015. O schema dele é o `.agents/schemas/template-page.schema.json`, e o `.agents/mappings/template-page.notion.example.json` é o modelo. A sincronização é a única que escreve as propriedades que esse mapeamento liga e o corpo da página.
-- Uma versão abaixo de 0.1.0 é a opção de rascunho. Uma versão a partir de 0.1.0 com major 0 é a opção de validação. Uma versão a partir de 1 é a opção de produção.
+- Não edite as páginas de skill nem o banco delas no Notion: a sincronização é a única que escreve. Como ela funciona está no `CONTRIBUTING.md`.
 
 ## Fontes de dados
 
