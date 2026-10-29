@@ -3,7 +3,7 @@ name: criar-pull-request
 description: Use essa habilidade sempre que for abrir ou atualizar PR, subir uma correção ou mandar para a branch principal, mesmo sem dizer PR. NÃO use para mesclar (use mesclar-pull-request), responder comentário de revisão nem para só commitar (use criar-commit).
 metadata:
   author: jimmyandrade
-  version: "0.39.0"
+  version: "0.40.0"
   related:
     - registrar-evidencia-visual
     - registrar-resultados-da-validacao-na-tarefa
@@ -119,6 +119,7 @@ Validação que os próprios checks do PR já mostram fica de fora.
 Com o preview do PR publicado, o endereço dele entra na descrição do PR e na tarefa, como `registrar-resultados-da-validacao-na-tarefa` manda.
 A descrição guarda como a mudança foi feita e por que cada decisão foi tomada: de onde vem o dado, por que aquele nome, aquela condição ou aquela estrutura, e o que ficou de fora. A tarefa guarda o escopo e os critérios de aceitação, não o como. Quando uma pergunta de revisão muda uma decisão, a descrição muda junto.
 Depois do push, uma vez, confira o título e a descrição contra o código que subiu. Vários commits no mesmo push são uma conferência só. Se um dos dois deixou de contar o que a branch faz, atualize os dois antes de responder.
+Com o PR já aberto, quando a evidência muda (um teste passou ou falhou depois do que a descrição diz, saiu o preview, chegou a imagem), atualize na mesma rodada a descrição e a tarefa, com a mesma informação nos dois. A tarefa segue `registrar-resultados-da-validacao-na-tarefa`: edite o comentário que já existe e não crie outro. Antes de dizer que um dos dois está atualizado, releia-o.
 
 Com `Atribuição da sessão` em `sim`, termine com a linha de atribuição da sessão.
 Com `não`, não ponha linha de ferramenta ou de modelo, e remova a que o PR já tiver na mesma edição.
@@ -172,6 +173,14 @@ Se você descrever só o que mudou, sem a imagem de uma mudança de tela nem o p
 1. No Passo 6, ponha a imagem da mudança de tela e o como e o porquê de cada decisão.
 2. Sem imagem numa mudança de tela, o PR fica em rascunho e nenhum pedido de revisão sai.
 3. Quando a revisão mudar uma decisão, atualize a descrição na mesma rodada.
+
+### Evidência nova só num dos lados
+
+Se você atualizar só a descrição do PR depois de uma validação nova, ou só a tarefa, quem lê o outro lado confia num resultado que já não vale.
+
+1. Atualize a descrição e a tarefa na mesma rodada.
+2. Edite o comentário de validação que já existe na tarefa.
+3. Releia os dois antes de responder.
 
 ### Conferência a cada commit
 
