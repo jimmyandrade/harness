@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.33.0](https://github.com/jimmyandrade/harness/compare/v1.32.0...v1.33.0) (2026-10-29)
+
+
+### Features
+
+* **formalizar-decisao:** register each decision in a decisions area with who, when, where and the permalink ([#659](https://github.com/jimmyandrade/harness/issues/659)) ([3c8c9e8](https://github.com/jimmyandrade/harness/commit/3c8c9e8d7d586b6020d8533d67c52abcab1f7f31))
+
 ## [1.32.0](https://github.com/jimmyandrade/harness/compare/v1.31.0...v1.32.0) (2026-10-29)
 
 
