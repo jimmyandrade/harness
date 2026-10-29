@@ -3,7 +3,7 @@ name: criar-pull-request
 description: Use essa habilidade sempre que for abrir ou atualizar PR, subir uma correção ou mandar para a branch principal, mesmo sem dizer PR. NÃO use para mesclar (use mesclar-pull-request), responder comentário de revisão nem para só commitar (use criar-commit).
 metadata:
   author: jimmyandrade
-  version: "0.40.0"
+  version: "0.40.1"
   related:
     - registrar-evidencia-visual
     - registrar-resultados-da-validacao-na-tarefa
@@ -67,7 +67,7 @@ Antes de criar a branch, confira se a demanda tem uma tarefa no rastreador do pr
 Sem tarefa, sugira criá-la antes do PR e espere a resposta: a chave entra no nome da branch e no título do PR conforme a convenção do repositório.
 Se o PR já está aberto sem tarefa, diga isso e proponha criá-la depois.
 
-Se a branch atual for a `Branch base`, crie uma branch a partir da `Branch base` remota atualizada antes de qualquer commit, sem rastrear a base.
+Antes de criar a branch, busque a `Branch base` de novo, no mesmo comando que a cria. Um fetch anterior da mesma sessão não conta. Crie a branch a partir dessa base, sem rastrear a base. Se a branch atual já for a `Branch base`, faça isso antes de qualquer commit.
 
 O nome da branch é `<tipo>/<descrição>`.
 O tipo é o do Conventional Commits do commit principal: `feat`, `fix`, `docs`, `refactor`, `perf`, `test`, `chore` ou `ci`.
@@ -259,6 +259,7 @@ O pedido autoriza push e merge. O push espera o hook de pre-push. Com o PR abert
 
 - Número ou hash curto, no lugar do endereço do Passo 6, obriga a pessoa a procurar. `#<número>` no commit e na descrição é a issue.
 - `git switch -c <branch> origin/<base>` faz a branch rastrear a base. Use `--no-track` e publique com `push -u origin <branch>`.
+- Um fetch do começo da sessão parece a base atualizada. Busque de novo no mesmo comando que cria a branch.
 - O prefixo que a ferramenta deu parece o nome da branch. Quem manda é o tipo do commit.
 - O push por HTTPS pode travar para sempre no helper de credencial do macOS. A credencial do `gh` funciona.
 - Não existe `timeout` no macOS. Use o timeout da ferramenta ou rode em segundo plano.
