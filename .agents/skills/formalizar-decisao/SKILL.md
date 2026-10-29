@@ -3,7 +3,7 @@ name: formalizar-decisao
 description: Leva uma decisão de comportamento a quem decide, com a dúvida, a hipótese e o que já está definido, e formaliza a resposta na tarefa e no pull request, em qualquer canal e em qualquer momento, do refinamento ao desk check. Usada quando surge uma dúvida ou uma escolha de comportamento que não é sua, mesmo sem dizer decisão. Não serve para dúvida de código, status de entrega nem para escrever o texto da mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   aliases:
     - abrir-thread-de-decisao
   related:
@@ -46,6 +46,8 @@ Leve o pedido a quem decide, no canal que o momento pede:
 - Ferramenta com thread, como o Slack: abra uma thread nova só dessa decisão, com o título de `Título da thread própria`, e nunca use a thread de status de uma entrega. Responda em mensagens curtas, uma ideia por mensagem, cada caso com a sua imagem, e a pergunta na última.
 - Ferramenta ou conversa sem thread, como o WhatsApp ou uma mensagem direta: uma mensagem curta, com a imagem e a pergunta.
 
+Antes de abrir a conversa, confira o propósito do canal no registro de canais do projeto.
+Um canal interno do time não serve para consultar a pessoa de negócio.
 Quem escreve e envia o texto é a habilidade de mensagem da ferramenta, em `Ferramentas de comunicação`.
 
 ### Passo 4
@@ -58,18 +60,30 @@ Quando a resposta chegar, em qualquer canal, formalize:
 
 1. Registre a decisão na área de decisões da tarefa, da issue e do pull request, como diz `Registro de decisão`.
 2. Cada entrada traz o que foi decidido, quem decidiu, quando decidiu, onde decidiu e o permalink da conversa, que pode ser a ata, a thread ou a mensagem.
+Quando outra pessoa concorda, a entrada diz quem decidiu e quem concordou, e cada mensagem que sustenta a decisão entra com o seu permalink.
 3. A área só lista decisão tomada e formalizada. Decisão pendente fica fora dela.
 4. Atualize os critérios de aceite da tarefa, como manda `preparar-tarefa-do-pull-request`.
 5. Escreva o porquê na descrição do pull request, como manda `criar-pull-request`.
 6. Atualize o teste, a story e a evidência que a decisão muda.
 7. Diga a quem participou onde a decisão ficou registrada.
 
+Se a resposta não deixa claro qual das opções foi escolhida, ela não é uma decisão tomada.
+Pergunte de novo e deixe a decisão pendente.
+Quando a decisão substitui outra, registre a nova, diga qual ela substitui e marque a antiga como substituída, sem apagá-la.
 A conversa nunca é o registro.
 
 ### Passo 6
 
 Sem resposta ainda, marque a decisão como pendente no texto da tarefa e do pull request, com quem decide e o que depende dela.
 Ela não entra na área de decisões até ser tomada.
+
+### Passo 7
+
+Para decisões já tomadas numa conversa antiga, como a thread de status de uma entrega, leia a conversa inteira.
+Liste cada decisão e cada discussão.
+Leve cada uma ao card ou à issue que a implementa ou que ela afeta.
+Registre como no Passo 5, com o permalink de cada mensagem que a sustenta.
+O que ficou ambíguo entra como pendente.
 
 ## Problemas comuns
 
@@ -96,6 +110,22 @@ Se você pôr na área de decisões o que ainda espera resposta, quem lê entend
 1. Deixe só a decisão tomada na área.
 2. Marque a pendente no texto, com quem decide.
 3. Passe para a área quando a resposta chegar.
+
+### Resposta ambígua registrada como decisão
+
+Se você registrar como decidido o que a pessoa respondeu de um jeito que cabe em duas leituras, a decisão registrada pode ser a errada.
+
+1. Pergunte à pessoa qual das opções ela escolheu.
+2. Deixe a decisão pendente até a resposta.
+3. Registre só a opção confirmada.
+
+### Consulta no canal interno
+
+Se você abrir a thread num canal interno do time, a pessoa de negócio pode nem estar nele, e a consulta precisa ser refeita.
+
+1. Confira o propósito do canal no registro de canais do projeto.
+2. Abra a thread no canal em que a pessoa decide.
+3. Registre o canal no registro de canais, para não repetir.
 
 ### Pergunta sem hipótese nem evidência
 
@@ -133,6 +163,7 @@ Depois da resposta da Ana, registro a decisão na área de decisões da tarefa e
 - A ferramenta já tem uma thread própria sobre a tarefa e a pessoa: responda nela.
 - A decisão aparece perto do fim da tarefa: formalize antes de fechar o pull request, com o critério e a evidência atualizados.
 - A ferramenta de tarefas não tem bloco de decisão: use a seção Decisões em texto, com os mesmos campos.
+- A ferramenta de tarefas aceita criar o bloco de decisão por API: crie por ela, no estado de decidido, e confira na tela.
 - A tarefa ainda não existe: siga `preparar-tarefa-do-pull-request` antes de formalizar.
 - A dúvida é de código: ela vai para o pull request, não para esta habilidade.
 
