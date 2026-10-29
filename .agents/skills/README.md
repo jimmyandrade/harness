@@ -21,6 +21,7 @@ flowchart LR
     comunicar_novidade_do_produto["comunicar-novidade-do-produto"]
     conversar_no_whatsapp["conversar-no-whatsapp"]
     criar_commit["criar-commit"]
+    criar_copia_de_trabalho["criar-copia-de-trabalho"]
     criar_habilidade["criar-habilidade"]
     criar_ideia_de_conteudo["criar-ideia-de-conteudo"]
     criar_oportunidade["criar-oportunidade"]
@@ -163,6 +164,12 @@ flowchart LR
   criar_commit -.-> fatiar_pull_request
   criar_commit -.-> mesclar_pull_request
   criar_commit -.-> sincronizar_status_da_tarefa
+  criar_copia_de_trabalho --> criar_commit
+  criar_copia_de_trabalho --> criar_habilidade
+  criar_copia_de_trabalho --> criar_pull_request
+  criar_copia_de_trabalho --> evoluir_habilidade
+  criar_copia_de_trabalho --> levantar_ambiente_do_repositorio
+  criar_copia_de_trabalho --> limpar_copias_de_trabalho
   criar_habilidade --> criar_commit
   criar_habilidade --> criar_pull_request
   criar_habilidade --> definir_arquivos_da_habilidade
