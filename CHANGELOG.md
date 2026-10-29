@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.29.0](https://github.com/jimmyandrade/harness/compare/v1.28.0...v1.29.0) (2026-10-29)
+
+
+### Features
+
+* **criar-pull-request:** ask for the validation record before leaving draft ([#630](https://github.com/jimmyandrade/harness/issues/630)) ([1c05e2c](https://github.com/jimmyandrade/harness/commit/1c05e2c0eb44d95c9091044831358d231614098f))
+* **registrar-resultados-da-validacao-na-tarefa:** rename registrar-validacao-na-tarefa and record each stage ([#635](https://github.com/jimmyandrade/harness/issues/635)) ([89632da](https://github.com/jimmyandrade/harness/commit/89632da17448002dd5dcc04cb4e5c6e28f9c4f62))
+* **registrar-validacao-na-tarefa:** add the task validation record skill ([#627](https://github.com/jimmyandrade/harness/issues/627)) ([a1911f4](https://github.com/jimmyandrade/harness/commit/a1911f44617dd034c0a91fd8c5c6c07428e6bdc8))
+
+
+### Bug Fixes
+
+* **criar-copia-de-trabalho:** keep the dependency link out of the commit and read the manifest engines ([#628](https://github.com/jimmyandrade/harness/issues/628)) ([66b8688](https://github.com/jimmyandrade/harness/commit/66b8688ccf2413a85d6f50274188ce934711813f))
+
 ## [1.28.0](https://github.com/jimmyandrade/harness/compare/v1.27.3...v1.28.0) (2026-10-29)
 
 
