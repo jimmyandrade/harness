@@ -87,10 +87,11 @@ Se você emitir o certificado com um CNPJ diferente do esperado, o CNPJ não vei
 3. Emita novamente com o CNPJ correto.
 
 ## Exemplos de entrada e saída
-    90|
+
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### Preciso do CCMEI para o edital da prefeitura
+    90|
 
 O certificado é emitido e guardado na pasta indicada, com a data de emissão registrada.
 
