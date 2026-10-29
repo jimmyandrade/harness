@@ -1,6 +1,6 @@
 ---
 metadata:
-  version: "1.39.1"
+  version: "1.42.0"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -22,6 +22,8 @@ metadata:
       "Idioma das instruções do projeto": "português do Brasil"
       "Idioma das respostas": "português do Brasil"
       "Idioma das decisões de arquitetura": "inglês"
+      "Idioma da mensagem de commit": "inglês"
+      "Idioma do PR": "inglês"
     "preparar-tarefa-do-pull-request":
       "Onde ficam as tarefas": "issues do GitHub"
       "Projeto da tarefa por repositório": "issues do próprio repositório"
@@ -54,6 +56,7 @@ metadata:
 
 - Responda sempre no `Idioma das respostas`, que tem como padrão português do Brasil. Um projeto que quer as respostas em outro idioma define esse parâmetro no próprio `AGENTS.md`.
 - Fale com a pessoa na resposta, sem usar o nome dela no lugar dela. Comece pelo que precisa ser feito. Termine com a sugestão do próximo passo e, se houver, com a decisão que cabe a ela. Terceira pessoa fica na descrição da habilidade.
+- Quando a pessoa disser que não entendeu, a resposta seguinte só diz quem faz, o que fazer e o próximo passo, e nomeia se o clique é no aplicativo ou na página da conta no navegador.
 - Todo pull request, issue, commit ou página do Notion citado vai como link clicável no texto, não só no resumo final.
 
 ## Execução
@@ -75,7 +78,7 @@ metadata:
 
 - Toda mudança entra por pull request. Não dê push no `main`.
 - Ao terminar o trabalho de uma sessão, siga `limpar-copias-de-trabalho` para remover as cópias de trabalho que ela deixou.
-- Escreva o assunto de todo commit no idioma de `Idioma da mensagem de commit`, um parâmetro da `criar-commit`, que tem inglês como padrão.
+- Commit segue `Idioma da mensagem de commit` e PR segue `Idioma do PR`, quem quer que proponha.
 - Use um assunto em Conventional Commits: `tipo: descrição`. Quando a mudança afeta uma skill, o assunto é `tipo(nome-da-skill): descrição`. Os tipos são `feat`, `fix`, `perf`, `docs`, `refactor`, `test`, `chore` e `ci`.
 - Uma mudança no CI ou numa action usa `ci`, mesmo quando acrescenta comportamento.
 - Dê a toda branch o nome `tipo/descricao-curta`, com um desses tipos e uma descrição em ASCII e kebab-case: `feat/build-on-install`, `fix/mcp-path`. Uma branch que uma ferramenta criou com outro prefixo, como `claude/` ou `cursor/`, é renomeada antes do primeiro push. Renomear uma branch que já tem pull request fecha esse pull request: abra outro a partir da branch renomeada, com o mesmo título e a mesma descrição, e ponha o link dele no antigo. Um passo `Check the branch name` no CI reprova o pull request de uma branch fora desse padrão.
@@ -104,10 +107,7 @@ metadata:
 
 ## Sincronização com o Notion
 
-- O GitHub é a fonte de escrita. A action de sincronização é a única que escreve as páginas de skill no Notion. Não edite essas páginas nem esse banco no Notion.
-- O schema de uma página de skill é o `.agents/schemas/skill-page.schema.json`. Cada negócio guarda o próprio mapeamento, com o id do data source, os nomes das propriedades e os nomes das opções de status. O `.agents/mappings/skill-page.notion.example.json` é o modelo.
-- Um modelo em `.agents/assets/templates/` é publicado num banco de modelos só quando o negócio tem o `.agents/mappings/template-page.notion.json`, como decide a ADR 0015. O schema dele é o `.agents/schemas/template-page.schema.json`, e o `.agents/mappings/template-page.notion.example.json` é o modelo. A sincronização é a única que escreve as propriedades que esse mapeamento liga e o corpo da página.
-- Uma versão abaixo de 0.1.0 é a opção de rascunho. Uma versão a partir de 0.1.0 com major 0 é a opção de validação. Uma versão a partir de 1 é a opção de produção.
+- Não edite as páginas de skill nem o banco delas no Notion: a sincronização é a única que escreve. Como ela funciona está no `CONTRIBUTING.md`.
 
 ## Fontes de dados
 

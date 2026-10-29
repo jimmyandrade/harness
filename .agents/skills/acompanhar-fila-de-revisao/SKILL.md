@@ -3,13 +3,14 @@ name: acompanhar-fila-de-revisao
 description: Roda o ciclo da fila de revisão de pull requests. Confere o horário, cuida primeiro dos seus PRs, acha os pedidos, fecha o laço dos já revisados, escolhe o próximo, revisa um por execução e prepara o aviso a quem pediu. Os avisos ficam só como rascunho, com o link. Não serve para revisar sozinha nem achar pedidos por conta própria.
 metadata:
   author: jimmyandrade
-  version: "0.6.3"
+  version: "0.6.4"
   related:
     - enviar-mensagem-no-slack
     - evoluir-habilidade
     - procurar-pedido-de-revisao
     - publicar-revisao-de-codigo
     - atender-revisao-de-pull-request
+    - redigir-com-tom-de-voz
 ---
 
 # Acompanhar fila de revisão
@@ -81,6 +82,8 @@ Revise o primeiro item da fila, até o número de `Revisões por execução`, ch
 Em modo agendado, repasse `Publicar em execução agendada` a `publicar-revisao-de-codigo`: com `não`, a revisão é preparada e o texto e o link do PR vão para o resumo. Com `sim`, ela é publicada, e o resumo diz o que saiu.
 
 ### Passo 7
+
+Todo texto que esta habilidade escreve em nome da pessoa, aviso, mensagem de demora ou rascunho de revisão no resumo, só nasce depois de consultar o vocabulário com `redigir-com-tom-de-voz`. Não escreva primeiro e confira depois.
 
 Com `Avisar quem pediu` em `sim`, depois de uma revisão publicada, prepare o aviso de status na mesma thread em que o pedido foi feito, com `enviar-mensagem-no-slack`. Reagir à mensagem não substitui o aviso.
 

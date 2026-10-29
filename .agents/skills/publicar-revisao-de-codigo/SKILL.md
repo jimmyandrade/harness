@@ -3,7 +3,7 @@ name: publicar-revisao-de-codigo
 description: Revisa um pull request e publica a revisão numa única review, com os comentários inline, no idioma de quem recebe e no tom do projeto. Usada quando a pessoa pede uma revisão ou outra habilidade precisa publicar uma. Não serve para tratar os comentários que você recebeu no seu PR.
 metadata:
   author: jimmyandrade
-  version: "0.19.0"
+  version: "0.19.1"
   aliases:
     - post-code-review
   related:
@@ -130,7 +130,7 @@ Procure a prova em todo lugar antes de pedir: o corpo do PR, os comentários do 
 
 ### Passo 9
 
-Escreva os textos com `redigir-com-tom-de-voz`, para o tom de quem publica. Um comentário de achado diz o que você viu, por que importa e o que muda para quem usa ou mantém o código, e termina convidando a pessoa a responder. Um pedido para aprovar não pula a revisão: rode os critérios atuais antes e aprove só sem bloqueio. Uma aprovação sem achado não é a descrição do PR: abre com o `@login` de quem abriu, agradece a ajuda concreta deste PR, diz que a revisão não achou nada bloqueante e só então lista, em tópicos, o que o PR faz. As frases vêm do vocabulário. Conte os comentários inline publicados, nenhum, um ou mais, e use a frase do vocabulário dessa quantidade. A de idioma fica num PS no fim. Sem frase para essa quantidade, não invente. PR aberto por bot não leva `@`.
+Antes de escrever, inclusive no rascunho agendado, consulte o vocabulário com `redigir-com-tom-de-voz`: agradecimento e fecho vêm dele, nunca de memória. Um comentário de achado diz o que você viu, por que importa e o que muda para quem usa ou mantém o código, e termina convidando a pessoa a responder. Um pedido para aprovar não pula a revisão: rode os critérios atuais antes e aprove só sem bloqueio. Uma aprovação sem achado não é a descrição do PR: abre com o `@login` de quem abriu, agradece a ajuda concreta deste PR, diz que a revisão não achou nada bloqueante e só então lista, em tópicos, o que o PR faz. Conte os comentários inline publicados, nenhum, um ou mais, e use a frase do vocabulário dessa quantidade. A de idioma fica num PS no fim. Sem frase para essa quantidade, não invente. PR aberto por bot não leva `@`.
 
 - Com `Postura dos comentários` em `pergunta`, não declare erro confirmado e não dê ordem: separe o fato da decisão e termine em pergunta.
 - Todo ponto sobre uma linha de código vai inline, ancorado na linha do diff mais próxima. O corpo geral não cita arquivo, função nem chamada. Só fica no corpo o que não é sobre linha.
