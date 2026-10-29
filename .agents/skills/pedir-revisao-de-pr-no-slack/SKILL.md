@@ -3,10 +3,11 @@ name: pedir-revisao-de-pr-no-slack
 description: Redige o pedido de revisão de um pull request para o canal do time no Slack e entrega o rascunho com o link da thread, usando enviar-mensagem-no-slack. Usada quando o PR está pronto e a organização pede revisão pelo Slack, ou quando a pessoa pede apoio para revisar. Não serve para revisar o PR nem para outra mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.5.0"
   related:
     - criar-pull-request
     - registrar-evidencia-visual
+    - registrar-validacao-na-tarefa
     - enviar-mensagem-no-slack
     - evoluir-habilidade
     - preparar-tarefa-do-pull-request
@@ -37,7 +38,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ### Passo 1
 
-Leia o PR: estado, rascunho, rótulos, título, descrição, checks e comentários. Se o PR está fechado ou mesclado, pare e diga isso. Se está em rascunho, ou falta o `Rótulo de pronto para revisão` quando o projeto o usa, não peça revisão: diga o que falta e pare. Um PR que a própria descrição marca como não pronto também não vai a pedido. Um PR que muda o que uma pessoa vê, como tela, componente ou estilo, e não tem imagem na descrição nem no card também não vai: siga `registrar-evidencia-visual` e volte aqui. Uma tabela de antes e depois só com texto não conta como imagem. Com `Autorrevisar o diff antes de pedir` em `sim`, leia o diff na interface do GitHub como se fosse de outra pessoa e procure `console.log` esquecido, comentário residual, código morto e teste redundante. Diga o que achou e peça para a pessoa corrigir antes do pedido.
+Leia o PR: estado, rascunho, rótulos, título, descrição, checks e comentários. Se o PR está fechado ou mesclado, pare e diga isso. Se está em rascunho, ou falta o `Rótulo de pronto para revisão` quando o projeto o usa, não peça revisão: diga o que falta e pare. Um PR que a própria descrição marca como não pronto também não vai a pedido. Um PR que muda o que uma pessoa vê, como tela, componente ou estilo, e não tem imagem na descrição nem no card também não vai: siga `registrar-evidencia-visual` e volte aqui. Uma tabela de antes e depois só com texto não conta como imagem. Um PR validado fora dos checks, como num teste local ou num ambiente de teste, sem o registro dessa validação no card, também não vai: siga `registrar-validacao-na-tarefa` e volte aqui. Com `Autorrevisar o diff antes de pedir` em `sim`, leia o diff na interface do GitHub como se fosse de outra pessoa e procure `console.log` esquecido, comentário residual, código morto e teste redundante. Diga o que achou e peça para a pessoa corrigir antes do pedido.
 
 ### Passo 2
 
@@ -84,6 +85,14 @@ Se você redigir o pedido de um PR que muda a tela e só descreve a mudança em 
 1. Leia a descrição e o card no Passo 1 atrás de imagem ou vídeo do resultado.
 2. Sem imagem, siga `registrar-evidencia-visual` e pare.
 3. Redija o pedido só depois de a evidência estar na descrição e no card.
+
+### Pedido de PR sem o registro da validação
+
+Se você redigir o pedido de um PR validado fora dos checks, como num teste local, e o card não tem o registro, quem revisa não sabe o que foi conferido e o que ficou sem rodar.
+
+1. Leia os comentários do card no Passo 1 atrás do registro da validação.
+2. Sem registro, siga `registrar-validacao-na-tarefa` e pare.
+3. Redija o pedido só depois de o registro estar no card.
 
 ### Post novo onde já existia thread
 

@@ -184,6 +184,7 @@ flowchart LR
   criar_pull_request --> fatiar_pull_request
   criar_pull_request --> mesclar_pull_request
   criar_pull_request --> registrar_evidencia_visual
+  criar_pull_request --> registrar_validacao_na_tarefa
   criar_pull_request --> sincronizar_status_da_tarefa
   definir_agenda --> definir_agenda_de_popstar
   definir_agenda --> definir_convidado
@@ -435,6 +436,7 @@ flowchart LR
   pedir_revisao_de_pr_no_slack --> evoluir_habilidade
   pedir_revisao_de_pr_no_slack --> preparar_tarefa_do_pull_request
   pedir_revisao_de_pr_no_slack --> registrar_evidencia_visual
+  pedir_revisao_de_pr_no_slack --> registrar_validacao_na_tarefa
   perfilar_tom_de_voz --> definir_vocabulario
   perfilar_tom_de_voz --> evoluir_habilidade
   perfilar_tom_de_voz --> redigir_com_tom_de_voz

@@ -220,9 +220,11 @@ How these skills relate is in `README.md`, in this folder.
   - Writes each step sentence on its own line, and keeps a command in Scripts disponíveis
   - At the end, follows `sincronizar-status-da-tarefa`
   - A merge request goes to mesclar-pull-request once the pull request is open
+  - When the change was validated outside the checks of the pull request and the task has no record of it, follows `registrar-validacao-na-tarefa` before taking the pull request out of draft, and the pull request stays a draft without it
 - **Test Criteria**:
   - [ ] A request to push to the base branch opens a pull request instead
   - [ ] A `claude/…` branch is renamed to `type/…` before its pull request opens
+  - [ ] A pull request validated by a local test, with no record on the task, stays a draft and the reply says the record is missing
 
 ### definir-agenda
 - **Stability**: experimental
