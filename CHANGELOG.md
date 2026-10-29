@@ -1,5 +1,27 @@
 # Changelog
 
+## [1.31.0](https://github.com/jimmyandrade/harness/compare/v1.30.0...v1.31.0) (2026-10-29)
+
+
+### Features
+
+* **atualizar-cadastro-fiscal:** add the tax registration update skill ([#634](https://github.com/jimmyandrade/harness/issues/634)) ([a1560a9](https://github.com/jimmyandrade/harness/commit/a1560a9810b9da23e2dc4b1bc2492834420e2d89))
+* **criar-habilidade:** write a screen click path as a Mermaid flowchart ([#655](https://github.com/jimmyandrade/harness/issues/655)) ([ec966b3](https://github.com/jimmyandrade/harness/commit/ec966b3778c6005a03924ec61cb3786f26959d75))
+* **definir-artigo-da-base-de-conhecimento:** use the real case as a concrete example ([#647](https://github.com/jimmyandrade/harness/issues/647)) ([4a4c75f](https://github.com/jimmyandrade/harness/commit/4a4c75fca50259b9e9695aaa6fd52c630291cacb)), closes [#646](https://github.com/jimmyandrade/harness/issues/646)
+* **emitir-documento-oficial:** add the official document issuance skill ([#632](https://github.com/jimmyandrade/harness/issues/632)) ([84234cf](https://github.com/jimmyandrade/harness/commit/84234cf5e9a6b9ac982b79bf497794a34d3caf98))
+* **enviar-mensagem-no-slack:** reler a mensagem editada e não inventar o motivo da troca ([#638](https://github.com/jimmyandrade/harness/issues/638)) ([6d8a1dd](https://github.com/jimmyandrade/harness/commit/6d8a1dd43ae7a435fcfc7fc69450750703052bd7))
+* **pedir-revisao-de-pr-no-slack:** PR relacionado vai como resposta na thread do primeiro ([#640](https://github.com/jimmyandrade/harness/issues/640)) ([38e5234](https://github.com/jimmyandrade/harness/commit/38e5234e5b2a4d476a9bffc4cec30c1075de1360))
+* **testar-ponta-a-ponta:** add the end-to-end testing skill ([#643](https://github.com/jimmyandrade/harness/issues/643)) ([b1569f7](https://github.com/jimmyandrade/harness/commit/b1569f778530557b3f34ec4f475fab750bd11e6f))
+* **validar-plano-de-vocabulario:** corrigir a nota contradita em vez de somar outra ([#642](https://github.com/jimmyandrade/harness/issues/642)) ([7a1e165](https://github.com/jimmyandrade/harness/commit/7a1e1658291aa458b2a3702be2d2f697893b3fd7))
+
+
+### Bug Fixes
+
+* **criar-pull-request:** fetch the base in the same command that creates the branch ([#650](https://github.com/jimmyandrade/harness/issues/650)) ([cbc43c0](https://github.com/jimmyandrade/harness/commit/cbc43c03809c9744fa768e8ecd9de0db5771d79a))
+* **criar-pull-request:** write the pull request title in the language parameter ([#649](https://github.com/jimmyandrade/harness/issues/649)) ([c188533](https://github.com/jimmyandrade/harness/commit/c18853300d818c673601a2223dd5b1d89fa3bab6)), closes [#648](https://github.com/jimmyandrade/harness/issues/648)
+* **publicar-revisao-de-codigo:** consultar o vocabulário antes de escrever qualquer texto, inclusive o rascunho agendado ([#645](https://github.com/jimmyandrade/harness/issues/645)) ([0448bb7](https://github.com/jimmyandrade/harness/commit/0448bb7a884ab5ce8c0525291ec42cae8525258b))
+* **registrar-evidencia-visual:** title each capture and keep the shown text from the business ([#652](https://github.com/jimmyandrade/harness/issues/652)) ([9f6883e](https://github.com/jimmyandrade/harness/commit/9f6883e7a537e0cbade8def2efc2e6ee0acd7986))
+
 ## [1.30.0](https://github.com/jimmyandrade/harness/compare/v1.29.0...v1.30.0) (2026-10-29)
 
 
