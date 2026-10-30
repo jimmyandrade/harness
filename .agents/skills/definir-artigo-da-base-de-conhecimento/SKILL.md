@@ -4,7 +4,7 @@ description: Cria, revisa e atualiza o artigo da base de conhecimento que respon
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.2"
+  version: "0.3.3"
   related:
     - criar-habilidade
     - definir-historia-de-usuario
@@ -115,6 +115,8 @@ Ao criar, use o `Status inicial`.
 
 Sempre que criar ou atualizar um passo a passo de uma tela, capture um print de cada passo.
 Mostre na tela o estado do passo, como o menu aberto ou a janela com o botão, antes de capturar.
+Numa tela que muda dados, abra o passo, capture e cancele. O passo que só aparece depois de salvar fica sem print.
+Antes de subir, cubra no print o nome, o e-mail, o telefone e outro dado pessoal de quem aparece, com um rótulo neutro como "e-mail pessoal", e confira a imagem coberta.
 Suba cada imagem pelo upload de arquivo da ferramenta da base.
 Ponha a imagem logo abaixo do passo que ela mostra, num bloco próprio.
 Escreva a legenda com o que a tela mostra: o menu, a janela, o campo e o nome da pasta ou da arte quando aparece.
@@ -130,6 +132,7 @@ Antes de concluir, confira o artigo com esta lista:
 - [ ] Não tem jargão técnico sem explicação nem nome interno que a pessoa não vê na tela.
 - [ ] Usa o caso real como exemplo quando a dúvida veio de um.
 - [ ] Cada passo de tela tem o print logo abaixo, com legenda.
+- [ ] Nenhum print mostra nome, e-mail, telefone ou outro dado pessoal.
 - [ ] A pessoa sabe o que fazer, onde fazer e o que evitar sem abrir outro documento.
 - [ ] A ferramenta está ligada quando a dúvida é sobre ela.
 
