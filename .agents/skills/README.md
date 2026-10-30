@@ -66,6 +66,7 @@ flowchart LR
     emitir_documento_oficial["emitir-documento-oficial"]
     enviar_mensagem_no_slack["enviar-mensagem-no-slack"]
     escrever_codigo["escrever-codigo"]
+    escrever_link["escrever-link"]
     escrever_teste["escrever-teste"]
     evoluir_habilidade["evoluir-habilidade"]
     extrair_tarefas_da_reuniao["extrair-tarefas-da-reuniao"]
@@ -131,6 +132,7 @@ flowchart LR
   atender_revisao_de_pull_request --> atualizar_branch_do_pull_request
   atender_revisao_de_pull_request --> criar_commit
   atender_revisao_de_pull_request --> criar_pull_request
+  atender_revisao_de_pull_request --> escrever_link
   atender_revisao_de_pull_request --> escrever_teste
   atender_revisao_de_pull_request --> evoluir_habilidade
   atender_revisao_de_pull_request --> fatiar_pull_request
@@ -162,6 +164,7 @@ flowchart LR
   conversar_no_whatsapp --> definir_agenda
   conversar_no_whatsapp --> definir_pessoa
   conversar_no_whatsapp --> definir_tarefa
+  conversar_no_whatsapp --> escrever_link
   conversar_no_whatsapp --> evoluir_habilidade
   conversar_no_whatsapp --> procurar_tarefa
   conversar_no_whatsapp --> redigir_com_tom_de_voz
@@ -186,6 +189,7 @@ flowchart LR
   criar_oportunidade --> procurar_oportunidade
   criar_pull_request --> atualizar_branch_do_pull_request
   criar_pull_request --> criar_commit
+  criar_pull_request --> escrever_link
   criar_pull_request --> evoluir_habilidade
   criar_pull_request --> fatiar_pull_request
   criar_pull_request --> mesclar_pull_request
@@ -343,6 +347,7 @@ flowchart LR
   emitir_documento_oficial --> evoluir_habilidade
   enviar_mensagem_no_slack --> definir_pessoa
   enviar_mensagem_no_slack --> definir_vocabulario
+  enviar_mensagem_no_slack --> escrever_link
   enviar_mensagem_no_slack --> evoluir_habilidade
   enviar_mensagem_no_slack --> redigir_com_tom_de_voz
   escrever_codigo --> criar_commit
@@ -351,6 +356,12 @@ flowchart LR
   escrever_codigo --> evoluir_habilidade
   escrever_codigo --> levantar_ambiente_do_repositorio
   escrever_codigo --> preparar_tarefa_do_pull_request
+  escrever_link --> conversar_no_whatsapp
+  escrever_link --> criar_pull_request
+  escrever_link --> enviar_mensagem_no_slack
+  escrever_link --> evoluir_habilidade
+  escrever_link --> publicar_resposta_de_revisao
+  escrever_link --> publicar_revisao_de_codigo
   escrever_teste --> criar_commit
   escrever_teste --> escrever_codigo
   escrever_teste --> evoluir_habilidade
@@ -445,6 +456,7 @@ flowchart LR
   organizar_ponto_de_contato --> sincronizar_cronograma
   pedir_revisao_de_pr_no_slack --> criar_pull_request
   pedir_revisao_de_pr_no_slack --> enviar_mensagem_no_slack
+  pedir_revisao_de_pr_no_slack --> escrever_link
   pedir_revisao_de_pr_no_slack --> evoluir_habilidade
   pedir_revisao_de_pr_no_slack --> preparar_tarefa_do_pull_request
   pedir_revisao_de_pr_no_slack --> registrar_evidencia_visual
@@ -492,9 +504,11 @@ flowchart LR
   procurar_variacao_de_termo --> definir_vocabulario
   procurar_variacao_de_termo --> evoluir_habilidade
   publicar_resposta_de_revisao --> atender_revisao_de_pull_request
+  publicar_resposta_de_revisao --> escrever_link
   publicar_resposta_de_revisao --> publicar_revisao_de_codigo
   publicar_revisao_de_codigo --> definir_pessoa
   publicar_revisao_de_codigo --> enviar_mensagem_no_slack
+  publicar_revisao_de_codigo --> escrever_link
   publicar_revisao_de_codigo --> evoluir_habilidade
   publicar_revisao_de_codigo --> levantar_contexto_do_pull_request
   publicar_revisao_de_codigo --> priorizar_itens

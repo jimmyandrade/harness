@@ -3,14 +3,15 @@ name: pedir-revisao-de-pr-no-slack
 description: Redige o pedido de revisão de um pull request para o canal do time no Slack e entrega o rascunho com o link da thread, usando enviar-mensagem-no-slack. Usada quando o PR está pronto e a organização pede revisão pelo Slack, ou quando a pessoa pede apoio para revisar. Não serve para revisar o PR nem para outra mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.7.0"
+  version: "0.7.1"
   related:
     - criar-pull-request
-    - registrar-evidencia-visual
-    - registrar-resultados-da-validacao-na-tarefa
     - enviar-mensagem-no-slack
+    - escrever-link
     - evoluir-habilidade
     - preparar-tarefa-do-pull-request
+    - registrar-evidencia-visual
+    - registrar-resultados-da-validacao-na-tarefa
 ---
 
 # Pedir revisão de PR no Slack
@@ -73,7 +74,7 @@ Num PR já mesclado, ele leva o endereço do ambiente onde o trabalho está, com
 
 ### Passo 5
 
-Entregue o rascunho e o link do canal, ou da thread, como diz `enviar-mensagem-no-slack`, e cite o PR no chat como `[#123](url)`. Não envie sem o sim da pessoa. Quem recebe o pedido por mensagem direta é orientado a usar o canal, para o pedido ter mais visibilidade e entrar no rodízio.
+Entregue o rascunho e o link do canal, ou da thread, como diz `enviar-mensagem-no-slack`, e cite o PR no chat como manda `escrever-link`. Não envie sem o sim da pessoa. Quem recebe o pedido por mensagem direta é orientado a usar o canal, para o pedido ter mais visibilidade e entrar no rodízio.
 
 ### Passo 6
 
@@ -153,7 +154,7 @@ O PR 121 já tem uma thread no canal. Redigi uma nova rodada em resposta nela, c
 - Um PR sem o rótulo de pronto parece pronto pelo estado. Confira o rótulo quando o projeto o usa.
 - A thread de um PR já revisado parece pedir um post novo. É uma nova rodada na thread.
 - Um follow-up parece só um lembrete do prazo. Ele continua dizendo o que o PR faz.
-- Citar um PR só pelo número, como `#123` ou `PR 123`, é erro, mesmo numa lista, num resumo ou quando ele já foi citado antes: quem lê não consegue abrir. Escreva sempre `[#123](url)`, com a URL lida do `gh`, e releia o texto antes de entregar.
+- Citar um PR só pelo número é erro. Escreva o link como manda `escrever-link`.
 
 ## Scripts disponíveis
 
