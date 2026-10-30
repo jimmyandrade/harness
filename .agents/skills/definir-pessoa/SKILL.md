@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.7.1"
+  version: "0.7.2"
   related:
     - definir-empresa
     - definir-grafia
@@ -82,14 +82,14 @@ flowchart LR
 ```
 
 - No Confluence, a menção é `<span data-type="mention" data-user-id="ID">@Nome</span>`, com o ID da conta no Jira.
-O corpo da página vai em HTML ao criar e ao atualizar, porque o markdown não gera menção.
+- No Confluence, o corpo da página vai em HTML ao criar e ao atualizar, porque o markdown não gera menção.
 - O login do GitHub vem do registro da pessoa ou do autor de pull requests recentes.
 - Sem o ID no registro, procure pelo e-mail na plataforma e use só um resultado único.
-Grave o ID que achou no registro.
+- Grave o ID que achou no registro.
 - Sem e-mail e com mais de um resultado, ou com dois registros de nome parecido, pergunte.
-Confira pelo assunto da fala quem é a pessoa e nunca escolha o primeiro resultado.
+- Confira pelo assunto da fala quem é a pessoa e nunca escolha o primeiro resultado.
 - A menção notifica a pessoa.
-Acrescentar menções a um texto já publicado há tempo pede o sim de quem escreve.
+- Acrescentar menções a um texto já publicado há tempo pede o sim de quem escreve.
 
 ## Problemas comuns
 
@@ -100,7 +100,7 @@ Se você escrever o nome de quem participou ou de quem responde por uma ação s
 1. Ache o ID no registro, como o Passo 4 manda.
 2. Escreva a menção real da plataforma.
 3. Sem o ID, procure pelo e-mail.
-Sem resultado único, pergunte.
+4. Sem resultado único, pergunte.
 
 ### Pessoa ausente só na frase
 
@@ -144,8 +144,7 @@ Busquei na lista de pessoas e não havia Ana Exemplo. Criei a página com o nome
 - O pedido é só a grafia de quem já está na lista: siga `definir-grafia`. Não crie outra página.
 - O perfil colado tem poucos campos: grave os que vieram e deixe o resto vazio. Não espere o perfil completo.
 - A pessoa saiu da empresa: atualize ou crie o registro com a nota. Não apague.
-- Dois registros têm nomes parecidos, como Ana Souza e Ana Souza Lima: não marque pelo primeiro resultado.
-Confira pelo assunto da fala e, na dúvida, pergunte.
+- Dois registros têm nomes parecidos, como Ana Souza e Ana Souza Lima: não marque pelo primeiro resultado. Confira pelo assunto da fala e, na dúvida, pergunte.
 
 ## Pegadinhas
 
@@ -154,10 +153,8 @@ Confira pelo assunto da fala e, na dúvida, pergunte.
 - O nome exibido com o nicho parece o nome completo. O nome completo é o nome da pessoa. O restante fica no perfil.
 - O handle parece o título da pessoa. Ele fica no perfil.
 - O primeiro nome do nome completo nem sempre é como a pessoa é chamada: um texto que usa o primeiro nome erra o nome dela.
-- O markdown não gera menção no Confluence: o texto sai com o nome puro e ninguém é notificado.
-Use HTML.
-- Uma menção parece só um jeito de escrever o nome.
-Ela notifica a pessoa.
+- O markdown não gera menção no Confluence: o texto sai com o nome puro e ninguém é notificado. Use HTML.
+- Uma menção parece só um jeito de escrever o nome. Ela notifica a pessoa.
 
 ## Scripts disponíveis
 
