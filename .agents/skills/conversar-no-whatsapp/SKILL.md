@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.10.0"
+  version: "0.10.1"
   related:
     - comunicar-novidade-do-produto
     - definir-agenda
@@ -93,7 +93,7 @@ Checklist do evento:
 - [ ] Antes de criar, amplie o formulário e confira nome, descrição, data e hora.
 - [ ] Botão de criar cinza com o início no passado: diga isso e peça o novo horário. Não mude o horário sozinho.
 - [ ] Depois de criar, confira o cartão do evento na conversa, com o dia e a hora.
-- [ ] Depois do cartão, a mensagem com o link da chamada, o dia e a hora.
+- [ ] Depois do cartão, a mensagem com o link da chamada, o dia e a hora. Com o término vazio, ela diz até que horas vai a call.
 
 ### Passo 7
 
