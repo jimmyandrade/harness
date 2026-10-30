@@ -200,7 +200,7 @@ test("the server answers initialize and write_terms on stdio", async () => {
     assert.equal(frames[0]?.result?.protocolVersion, "2024-11-05")
     assert.deepEqual(
       frames[1]?.result?.tools?.map((tool) => tool.name),
-      ["lookup_term", "lookup_terms", "exists_in_text", "write_terms", "get_version", "migrate_glossary", "init_glossary"],
+      ["lookup_term", "lookup_terms", "exists_in_text", "write_terms", "delete_terms", "get_version", "migrate_glossary", "init_glossary"],
     )
     const payload = JSON.parse(frames[2]?.result?.content?.[0]?.text ?? "{}")
     assert.equal(payload.inserted.length, 1)
@@ -406,6 +406,24 @@ test("init_glossary creates the glossary of a new language and keeps an existing
   assert.equal(readFileSync(join(root, "es.json"), "utf8"), "{}\n")
   const again = callTool(root, { name: "init_glossary", arguments: { language: "es" } })
   assert.deepEqual(JSON.parse(again.content[0]?.text ?? ""), { language: "es", created: false })
+})
+
+test("delete_terms deletes a row by its tags, keeps the other row, and lists a refusal", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  const file = join(root, "pt-BR.json")
+  const row = { state: "allowed_with_care", description: "forma de tratar", when: "numa DM" }
+  writeFileSync(file, `${JSON.stringify({ casa: { state: "allowed" }, contigo: [row, { ...row, tags: ["canal-a"] }], moradia: { state: "forbidden", alternatives: ["casa"] } })}\n`)
+  const planned = callTool(root, { name: "delete_terms", arguments: { language: "pt-BR", dry_run: true, terms: [{ term: "contigo", tags: ["canal-a"] }] } })
+  assert.equal(JSON.parse(planned.content[0]?.text ?? "{}").dry_run, true)
+  assert.equal(JSON.parse(readFileSync(file, "utf8")).contigo.length, 2)
+  const deleted = callTool(root, { name: "delete_terms", arguments: { language: "pt-BR", terms: [{ term: "contigo", tags: ["canal-a"] }] } })
+  assert.deepEqual(JSON.parse(deleted.content[0]?.text ?? "{}").deleted.map((item: { term: string }) => item.term), ["contigo"])
+  assert.deepEqual(JSON.parse(readFileSync(file, "utf8")).contigo, row)
+  const refused = callTool(root, { name: "delete_terms", arguments: { language: "pt-BR", terms: [{ term: "casa" }] } })
+  assert.equal(refused.isError, true)
+  assert.match(refused.content[0]?.text ?? "", /"casa" is still named by "moradia" \(alternatives\)/)
+  const empty = callTool(root, { name: "delete_terms", arguments: { language: "pt-BR", terms: [] } })
+  assert.equal(empty.content[0]?.text, "Provide the terms.")
 })
 
 test("write_terms refuses a real link in an example", () => {

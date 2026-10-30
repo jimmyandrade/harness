@@ -63,6 +63,6 @@ A general rule and a rule for one context can share a spelling. The same word ca
 
 A correction of a tagged row on a spelling with more than one row sends the tags of that row. Without them, it writes the row without tags. `definir-vocabulario` and `gravar-termos-no-vocabulario` read the row first, so they have its tags.
 
-`update` can no longer change the tags of a row when its spelling has more than one row. Changing them means writing the row with the new set and leaving the old one for a person to remove by hand.
+`update` can no longer change the tags of a row when its spelling has more than one row. Changing them means writing the row with the new set and deleting the old one, as ADR 0020 decides.
 
 A caller that reads only the top-level fields of `lookup` sees one row, as before. A caller that needs every row of one context reads `rows`.

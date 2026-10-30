@@ -26,6 +26,11 @@
  * names the row a write targets, and --tags "" is the row without tags. Without
  * --tags, insert writes the row without tags, and an update or an upsert writes
  * the only row of the spelling, or the row without tags when it has more.
+ * delete removes rows: each --term starts a row, --tags names it as in terms,
+ * and --tags "" is the row without tags. Without --tags it takes the only row
+ * of the spelling, and is refused when there are more. A spelling that another
+ * row still names, as an alternative or an example, is refused until the link
+ * is cleared. --dry-run reports without writing. delete takes no other flag.
  *
  * Run: node api/cli.ts lookup --language pt-BR --term casa
  * Run: node api/cli.ts lookup --language pt-BR --term "verão! (chegou!)" --tags festival-de-verao
@@ -35,6 +40,8 @@
  * Run: node api/cli.ts terms --language pt-BR --mode upsert --state allowed --term iPhone --case-sensitive --categories brand --description "..." --reason "..."
  * Run: node api/cli.ts terms --file lote.json --mode upsert
  * Run: node api/cli.ts terms --file lote.json --mode upsert --dry-run
+ * Run: node api/cli.ts delete --language pt-BR --term contigo --tags maria-silva
+ * Run: node api/cli.ts delete --language pt-BR --term contigo --tags "" --dry-run
  * Run: node api/cli.ts init --language es
  * Run: node api/cli.ts migrate --language pt-BR --write
  * Run: node api/cli.ts version
@@ -45,7 +52,7 @@ import { fileURLToPath } from "node:url"
 
 import { existsPhrase } from "./routes/exists/index.ts"
 import { lookupTerm, lookupTerms } from "./routes/lookup/index.ts"
-import { Glossary, InvalidGlossary, initGlossary, migrate, writeBatch } from "./shared/glossary.ts"
+import { Glossary, InvalidGlossary, deleteBatch, initGlossary, migrate, writeBatch } from "./shared/glossary.ts"
 import { parseBody } from "./shared/http.ts"
 import { readOptions, report } from "./shared/options.ts"
 import { existsRequest, lookupRequest, lookupTermsRequest } from "./shared/schema.ts"
@@ -135,6 +142,8 @@ export function run(argv: string[]): number {
       console.log(JSON.stringify(existsPhrase(new Glossary(glossary), body.language, body.text, body.tags)))
     } else if (command === "terms") {
       console.log(JSON.stringify(writeBatch(glossary, termsFrom(rest))))
+    } else if (command === "delete") {
+      console.log(JSON.stringify(deleteBatch(glossary, deleteFrom(rest))))
     } else if (command === "version") {
       console.log(JSON.stringify(versionInfo()))
     } else if (command === "init") {
@@ -253,6 +262,20 @@ export function termsFrom(args: readonly string[]): {
   }
   if (terms.length === 0) throw new InvalidGlossary("Provide the terms.")
   return { language, mode, validation, dry_run: dryRun, terms: terms.map(withPerson) }
+}
+
+/**
+ * The body of a delete from the flags of terms: --term starts a term, and
+ * --tags names its row, with an empty value for the row without tags. The
+ * flags that choose what to write do not apply to a delete.
+ */
+export function deleteFrom(args: readonly string[]): { language?: string; dry_run?: boolean; terms: unknown[] } {
+  const { language, mode, validation, dry_run, terms } = termsFrom(args)
+  const only = (term: unknown) => typeof term === "object" && term !== null && Object.keys(term).every((key) => key === "term" || key === "tags")
+  if (mode !== undefined || validation !== undefined || !terms.every(only)) {
+    throw new InvalidGlossary("The delete takes only --term and --tags, with --language and --dry-run.")
+  }
+  return { language, dry_run, terms }
 }
 
 function readBatch(file: string): { language?: string; mode?: string; validation?: string; dry_run?: boolean; terms: unknown[] } {

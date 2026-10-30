@@ -454,6 +454,19 @@ export function readTermsRequest(value: unknown): Omit<TermsRequest, "terms"> & 
   return { ...call, terms, problems }
 }
 
+export const deleteTermSchema = z.object({
+  term: prose("Provide the term."),
+  tags: tagListSchema.optional(),
+})
+export type DeleteTerm = z.infer<typeof deleteTermSchema>
+
+export const deleteRequest = z.object({
+  language: prose("Unknown language."),
+  dry_run: z.boolean({ error: "dry_run is true or false." }).default(false),
+  terms: z.array(deleteTermSchema, { error: "Provide the terms." }).min(1, { error: "Provide the terms." }),
+})
+export type DeleteRequest = z.infer<typeof deleteRequest>
+
 export const migrateRequest = z.object({
   language: prose("Unknown language."),
   write: z.boolean({ error: "write is true or false." }).default(false),
@@ -528,6 +541,15 @@ export const termsWriteSchema = z.object({
   refused: z.array(z.object({ term: z.string().optional(), reason: z.string() })).optional(),
 })
 export type TermsWrite = z.infer<typeof termsWriteSchema>
+
+export const termsDeletionSchema = z.object({
+  language: z.string(),
+  deleted: z.array(termRegistrationSchema),
+  skipped: z.array(z.object({ term: z.string(), reason: z.string() })),
+  dry_run: z.literal(true).optional(),
+  refused: z.array(z.object({ term: z.string().optional(), reason: z.string() })).optional(),
+})
+export type TermsDeletion = z.infer<typeof termsDeletionSchema>
 
 export const migrationSchema = z.object({
   language: z.string(),

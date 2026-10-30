@@ -1,9 +1,9 @@
 ---
 name: gravar-termos-no-vocabulario
-description: Use essa habilidade sempre que, ao cadastrar ou corrigir termos do vocabulário do tom de voz, for hora de pesquisar a grafia, testar com dry run e gravar o lote, mesmo sem dizer gravar. NÃO use para decidir o nível, validar os campos, perguntar quais variações foram cadastradas, escrever o texto da marca, nem inventar um termo.
+description: Use essa habilidade sempre que, ao cadastrar ou corrigir termos do vocabulário do tom de voz, for hora de pesquisar a grafia, testar, gravar o lote ou apagar uma linha, mesmo sem dizer gravar. NÃO use para decidir o nível, validar os campos, perguntar quais variações foram cadastradas, escrever o texto da marca, nem inventar um termo.
 metadata:
   author: jimmyandrade
-  version: "0.10.0"
+  version: "0.11.0"
   related:
     - definir-vocabulario
     - procurar-variacao-de-termo
@@ -57,6 +57,13 @@ Quando as duas linhas existirem, `related` aponta de uma para a outra. `related`
 
 Teste antes com `--dry-run` ou `dry_run`, no mesmo formato da escrita: um `--term` por termo, ou `write_terms`. `refused` lista os problemas. Grave o plano inteiro numa escrita só. Não crie um JSON do lote, nem no repositório, nem em pasta temporária, nem com a ferramenta de escrever arquivo. A pessoa só ouve a quantidade e a lista do que entrou no glossário. Com terminal, rode o comando. Sem terminal, chame a ferramenta do servidor `vocabulary`. Termo que não existia fica em minúsculas. Marca com caixa própria, como iPhone, leva `case_sensitive` e guarda a caixa. A linha que já existia conserva a grafia guardada. Se nenhum termo do plano existia, a resposta começa com a quantidade e segue com a lista do que entrou. Depois sugira plural, singular, feminino, masculino e outra grafia quando a palavra tiver. Não grave a sugestão. Pergunte o estado de cada forma. Pontuação e emoji não ganham essa sugestão. Um exemplo que também vem completo no lote permanece com essa linha. Um exemplo citado e ausente do lote nasce no estado desse vínculo, com as tags do termo. Uma falha deixa o vocabulário como estava. Não confirme o cadastro sem essa resposta.
 
+### Passo 5
+
+Para apagar uma linha, ou para tirar a tag de uma linha que já existe, leia a linha com `lookup` e guarde-a. A linha é a grafia e o conjunto de tags: mande as tags dela, ou `[]` para a linha sem tags. Sem tags, a chamada pega a única linha da grafia e recusa uma grafia com mais de uma linha, listando as tags de cada uma.
+Diga à pessoa qual linha sai e espere o sim, porque apagar tira o que ela gravou. Teste antes com `dry_run`. A resposta devolve a linha inteira que saiu: se foi engano, `insert` a escreve de volta.
+Uma grafia que outra linha ainda cita, como alternativa, rejeitado, exemplo ou relacionado, é recusada com as linhas que a citam. Tire o vínculo com `update` e apague de novo. Não apague a linha que cita sem a pessoa pedir.
+Para tirar só a tag, use `update` com `tags` `[]` quando a linha é a única da grafia. Quando a grafia já tem uma linha sem tags, as duas seriam a mesma linha: apague a linha com tag. Depois, leia a grafia de novo e diga o que saiu.
+
 ## Problemas comuns
 
 ### Servidor desatualizado
@@ -98,6 +105,14 @@ Se você juntar o plural, o gênero ou outra palavra do mesmo assunto numa linha
 1. Deixe uma linha para cada forma.
 2. Grave o estado que a pessoa definiu para essa forma.
 3. Não copie o estado da forma vizinha.
+
+### Linha apagada sem a pessoa pedir
+
+Se você apagar uma linha para limpar a duplicata que sobrou, a pessoa perde um registro que não pediu para perder.
+
+1. Diga qual linha sai, com a grafia e as tags dela.
+2. Espere o sim e teste com `dry_run`.
+3. Guarde a linha devolvida: com ela, `insert` desfaz o engano.
 
 ### Variação gravada junto
 
@@ -161,6 +176,9 @@ O plano ficou em update. A reticências que já estava foi reescrita, com o quan
 - `Glossário no repositório atual` vazio: pergunte uma vez e pare. Não crie o arquivo no repositório atual nem na pasta do glossário.
 - `Glossário no repositório atual` em `não`: o arquivo do idioma nasce só na `Pasta do glossário`, no computador, e não sobe no Git. Vazia, pergunte o caminho uma vez e pare.
 - `Glossário no repositório atual` em `sim`: o arquivo do idioma nasce no glossário do repositório atual e sobe no Git.
+- Duas linhas da mesma grafia, uma com tag e outra sem, dizendo o mesmo: apague a que a pessoa escolher, com as tags dela, e deixe a outra.
+- A grafia tem mais de uma linha e a pessoa não disse qual apagar: leia as linhas, mostre as tags de cada uma e pergunte.
+- A pessoa quer tirar uma grafia que outra linha cita: tire o vínculo antes, com `update`, e só então apague.
 - A pessoa pergunta se um termo ou uma variação faltou: `procurar-variacao-de-termo`. `related` só aponta para termo que já está.
 
 ## Pegadinhas
@@ -184,14 +202,16 @@ O plano ficou em update. A reticências que já estava foi reescrita, com o quan
 - `node node_modules/harness/vocabulary/dist/cli.js lookup-terms --language <idioma> --term <termo> --term <termo>` lê até 100 termos de uma vez, na ordem enviada, e devolve `results` com o que `lookup` devolve para cada um.
 - `node node_modules/harness/vocabulary/dist/cli.js exists --language <idioma> --text <trecho>` devolve só o registro de cada token do trecho para se ele existe.
 - `node node_modules/harness/vocabulary/dist/cli.js terms` grava o lote. `--language`, `--mode` e `--validation` valem para o lote. Cada `--term` abre um termo, com `--state`, `--description`, `--reason`, `--when`, `--substitution`, `--decided-by`, `--decided-by-email`, `--decided-by-url`, `--decided-at`, `--source` e `--notes`. `--decided-by` é o nome. Os dois seguintes completam o objeto. `--categories`, `--examples`, `--rejected`, `--alternatives`, `--related`, `--tags`, `--allowed-in` e `--forbidden-in` repetem, um valor por vez. `--stop-word` marca a stop word, que pode vir sem `--state`. `--file` só lê um JSON que já chegou de outra ferramenta. Não crie esse arquivo.
+- `node node_modules/harness/vocabulary/dist/cli.js delete --language <idioma> --term <termo> --tags <tag>` apaga linhas. Cada `--term` abre uma linha, e `--tags` a escolhe, com `--tags ""` para a linha sem tags. `--dry-run` só relata. Não aceita outra flag.
 - `node node_modules/harness/vocabulary/dist/cli.js version` devolve o nome e a versão do motor.
 - `--glossary`, antes do comando, aponta outro vocabulário.
 - Com `Glossário no repositório atual` em `sim`, `node node_modules/harness/vocabulary/dist/cli.js init --language <idioma>` cria o glossário vazio do idioma no repositório atual. `created` diz se ele nasceu agora ou já existia. Não escreva o arquivo à mão.
 - Com `Glossário no repositório atual` vazio, não crie o arquivo. Pergunte uma vez e pare.
 - Com `não`, `node node_modules/harness/vocabulary/dist/cli.js --glossary <Pasta do glossário> init --language <idioma>` cria o glossário só na pasta do glossário. Os comandos levam `--glossary` com o mesmo caminho.
-- `get_version`, `lookup_term`, `lookup_terms`, `exists_in_text`, `write_terms` e `init_glossary`, no servidor `vocabulary`, fazem a mesma consulta de versão, a mesma consulta, a mesma escrita e o mesmo `init` quando não há terminal.
+- `get_version`, `lookup_term`, `lookup_terms`, `exists_in_text`, `write_terms`, `delete_terms` e `init_glossary`, no servidor `vocabulary`, fazem a mesma consulta de versão, a mesma consulta, a mesma escrita, o mesmo apagar e o mesmo `init` quando não há terminal.
 
 1. Com terminal, rode `lookup-terms` para os termos do plano, `lookup` para um termo e `exists` para um trecho. `Unknown language` é um código de idioma inválido: corrija o código. Quando a resposta disser que o idioma ainda não tem glossário, confirme o idioma com a pessoa. Com `Glossário no repositório atual` vazio, pergunte uma vez e pare. Com `sim`, rode `init` no repositório atual e repita. Com `não`, rode `init` com `--glossary` na `Pasta do glossário` e repita. Se essa pasta estiver vazia, pergunte o caminho uma vez e pare.
 2. Com terminal, rode `terms` com `--language`, `--mode` e um `--term` para cada termo. Não crie um JSON do lote. Com `Glossário no repositório atual` em `não`, o comando leva `--glossary` na `Pasta do glossário`.
 3. Sem terminal, chame `lookup_terms`, `lookup_term`, `exists_in_text` e `write_terms` com os mesmos campos. Quando o idioma ainda não tem glossário, confirme o idioma com a pessoa e chame `init_glossary`, que cria o glossário na pasta do servidor `vocabulary`.
-4. Sem terminal e sem o servidor `vocabulary`, pare.
+4. Para apagar, com terminal, rode `delete`, primeiro com `--dry-run`. Sem terminal, chame `delete_terms`, primeiro com `dry_run`.
+5. Sem terminal e sem o servidor `vocabulary`, pare.

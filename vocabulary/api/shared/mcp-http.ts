@@ -72,6 +72,7 @@ export type AuthChecker = (request: IncomingMessage) => ErrorResponse | null
  */
 export const WRITE_TOOLS = [
   "write_terms",
+  "delete_terms",
   "migrate_glossary",
   "init_glossary",
   "create_page",

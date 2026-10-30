@@ -53,6 +53,14 @@
  * empty, as "" or [], is cleared. A row whose fields already match is
  * unchanged. A failure leaves the file unchanged.
  *
+ * deleteTerms removes rows. A row is chosen by its spelling and its set of
+ * tags, as in a write: tags [] is the row without tags, and a call without tags
+ * takes the only row of the spelling and is refused when the spelling has more
+ * than one. A spelling or tags that no row has are skipped. The last row of a
+ * spelling that another row still names, as an alternative, a rejected example,
+ * an example, or a related term, is refused until that link is cleared, so a
+ * link never points at a term that is gone. A failure leaves the file unchanged.
+ *
  * An English word used in Portuguese is a row in pt-BR.json. Its state there
  * can differ from the row in en.json.
  */
@@ -66,15 +74,18 @@ import {
   MISSING_FIELD,
   collapse,
   formatAddress,
+  deleteRequest,
   glossaryFileSchema,
   isLegacyState,
   levelOf,
   samePerson,
   stateSchema,
+  readSchema,
   readTermsRequest,
   termIssues,
   type AllowedRequest,
   type BulkTerm,
+  type DeleteTerm,
   type ForbiddenRequest,
   type LegacyState,
   type Migration,
@@ -83,6 +94,7 @@ import {
   type SituationalRequest,
   type State,
   type TermRegistration,
+  type TermsDeletion,
   type TermsWrite,
   type ExpectedField,
   type PatchableField,
@@ -91,7 +103,7 @@ import {
 } from "./schema.ts"
 import { REAL_LINK, hasRealLink } from "./links.ts"
 
-export type { Migration, State, TermRegistration, TermsWrite }
+export type { DeleteTerm, Migration, State, TermRegistration, TermsDeletion, TermsWrite }
 export { collapse }
 export const STATES = new Set(stateSchema.options)
 const LANGUAGE = /^[A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$/
@@ -583,6 +595,99 @@ export function writeBatch(directory: string, body: unknown): TermsWrite {
     dryRun: request.dry_run,
     problems: request.problems,
   })
+}
+
+export type DeleteOptions = {
+  /** Validate and report what would be deleted, and leave the file as it is. */
+  dryRun?: boolean
+}
+
+/**
+ * Delete rows of the glossary of a language, all or none. Every problem of the
+ * batch is collected before anything is decided. A dry run reports instead of
+ * refusing.
+ */
+export function deleteTerms(
+  directory: string,
+  language: string,
+  terms: readonly DeleteTerm[],
+  options: DeleteOptions = {},
+): TermsDeletion {
+  const tag = canonicalLanguage(language)
+  const path = glossaryFile(directory, tag)
+  const { entries, format } = readGlossary(path)
+  const problems: Problem[] = []
+  const skipped: TermsDeletion["skipped"] = []
+  const doomed: Entry[] = []
+  for (const item of terms) {
+    const rows = conceptMatches(entries, item.term)
+    if (rows.length === 0) {
+      skipped.push({ term: item.term, reason: "Not in the glossary." })
+      continue
+    }
+    let row: Entry | undefined
+    if (item.tags === undefined) {
+      if (rows.length > 1) {
+        const choices = rows.map((entry) => JSON.stringify(entry.tags ?? [])).join(", ")
+        problems.push({ term: item.term, message: `${JSON.stringify(item.term)} has more than one row. Send its tags to choose one: ${choices}.` })
+        continue
+      }
+      row = rows[0]
+    } else {
+      row = rows.find((entry) => tagKey(entry.tags) === tagKey(item.tags))
+      if (row === undefined) {
+        skipped.push({ term: item.term, reason: "Not in the glossary with these tags." })
+        continue
+      }
+    }
+    if (doomed.includes(row)) {
+      problems.push({ term: item.term, message: `${JSON.stringify(item.term)} is duplicated.` })
+      continue
+    }
+    doomed.push(row)
+  }
+  const remaining = entries.filter((entry) => !doomed.includes(entry))
+  const checked = new Set<string>()
+  for (const row of doomed) {
+    const key = matchKey(row.term)
+    if (checked.has(key) || remaining.some((entry) => sameConcept(entry.term, row.term))) continue
+    checked.add(key)
+    const named = namedBy(remaining, row.term)
+    if (named.length === 0) continue
+    const by = named.map(({ entry, fields }) => `${JSON.stringify(entry.term)} (${fields.join(", ")})`).join(", ")
+    problems.push({ term: row.term, message: `${JSON.stringify(row.term)} is still named by ${by}. Clear the link first.` })
+  }
+  const deleted = doomed.map((entry) => registrationOf(tag, entry))
+  if (problems.length > 0 && options.dryRun !== true) throw new InvalidTerms(problems)
+  if (problems.length === 0 && doomed.length > 0 && options.dryRun !== true) writeFileSync(path, serialize(remaining, format), "utf8")
+  const result: TermsDeletion = { language: tag, deleted: problems.length === 0 ? deleted : [], skipped }
+  if (options.dryRun !== true) return result
+  return { ...result, dry_run: true, refused: problems.map(({ term, message }) => (term === undefined ? { reason: message } : { term, reason: message })) }
+}
+
+/** Read the body of a delete and run it. A body the schema refuses is refused with its first reason. */
+export function deleteBatch(directory: string, body: unknown): TermsDeletion {
+  let request: ReturnType<typeof deleteRequest.parse>
+  try {
+    request = readSchema(deleteRequest, body)
+  } catch (error) {
+    throw new InvalidGlossary(error instanceof Error ? error.message : "Invalid value.")
+  }
+  return deleteTerms(directory, request.language, request.terms, { dryRun: request.dry_run })
+}
+
+/** The rows that name a spelling, with the fields that name it. */
+function namedBy(entries: readonly Entry[], term: string): { entry: Entry; fields: string[] }[] {
+  const found: { entry: Entry; fields: string[] }[] = []
+  for (const entry of entries) {
+    const fields: string[] = []
+    if (entry.alternative !== null && sameConcept(entry.alternative, term)) fields.push("alternative")
+    for (const field of ["rejected", "alternatives", "examples", "related"] as const) {
+      if (entry[field]?.some((item) => sameConcept(item, term)) === true) fields.push(field)
+    }
+    if (fields.length > 0) found.push({ entry, fields })
+  }
+  return found
 }
 
 /**
