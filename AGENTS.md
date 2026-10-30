@@ -1,6 +1,6 @@
 ---
 metadata:
-  version: "1.43.0"
+  version: "1.43.1"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -97,7 +97,7 @@ metadata:
 
 - Salve toda skill como `.agents/skills/<nome>/SKILL.md` no repositório de origem dela. Antes de alterar uma skill, confira de onde ela vem. A cópia que outro projeto recebe pronta, por dependência ou plugin, inclusive em `node_modules`, não se edita: a próxima instalação apaga a alteração. O `name` é igual ao nome da pasta. O nome da pasta e o `name` do frontmatter são em ASCII e kebab-case. O título de nível 1 e o corpo são linguagem natural para pessoas e modelos, então mantêm ortografia e gramática corretas, com todos os acentos: `# Resolver comentários de revisão`. Toda skill sincroniza com o Notion. O frontmatter não tem `metadata.notion` nem `metadata.internal`.
 - Quando a ferramenta tem acesso direto a um sistema de arquivos e a uma linha de comando, como o Claude Code ou o Cursor, crie a skill antes de mover os dados dela para o projeto. Os dados de uma skill ficam numa pasta com o nome da skill. Dado numa pasta que nenhuma skill lê não tem dono, e a regra dele se perde. Se a skill ainda não existe, crie primeiro e só então mova os dados.
-- No `SKILL.md`, cada frase fica numa linha própria, salvo as que só se entendem juntas, para o diff mostrar o que mudou. Um parágrafo longo com várias frases numa linha esconde a mudança.
+- No `SKILL.md`, cada frase fica numa linha própria, salvo as que só se entendem juntas, para o diff mostrar o que mudou. Um parágrafo longo com várias frases numa linha esconde a mudança. Numa lista, a frase que fica sozinha vira item próprio, e a que só se entende com a anterior fica no mesmo item.
 - O texto da skill não cita arquivo nem caminho, a não ser ao propor mover detalhes para `references/` quando a skill passaria do limite de linhas ou de tokens, ao apontar um modelo de entrada, e na seção final `Scripts disponíveis`, que diz o nome de cada script e como rodá-lo.
 - Uma skill cita um modelo de saída pelo nome, como decide a ADR 0016: ``Leia o modelo de saída `<nome>` quando for gerar a saída.`` Num repositório, o agente lê `.agents/assets/templates/<nome>.md` do projeto ou, se não houver, deste harness. Fora dele, abre a página com esse título no banco que `Banco de modelos no Notion` indica. A skill lista o modelo em `metadata.models`, um nome por linha, e o verificador confere essa lista como confere `metadata.related`.
 - Uma skill que cita outra skill a lista em `metadata.related`, um nome por linha. O verificador falha quando um nome da lista não é skill do projeto nem deste harness, ou quando o corpo cita uma skill que falta na lista. Uma skill sem `metadata.related` não é conferida, para um harness de negócio adotar a regra uma skill de cada vez. Toda skill que vem para cá declara a lista assim que uma skill citada por ela estiver neste repositório. Cada nova mudança de repositório acrescenta o nome nas skills daqui que citam a skill trazida.
