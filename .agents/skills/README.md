@@ -17,6 +17,7 @@ flowchart LR
     atualizar_branch_do_pull_request["atualizar-branch-do-pull-request"]
     atualizar_cadastro_fiscal["atualizar-cadastro-fiscal"]
     avaliar_atualizacoes_de_dependencia["avaliar-atualizacoes-de-dependencia"]
+    boas_praticas_de_rotinas["boas-praticas-de-rotinas"]
     classificar_estado_do_termo["classificar-estado-do-termo"]
     classificar_melhoria_tecnica["classificar-melhoria-tecnica"]
     comunicar_novidade_do_produto["comunicar-novidade-do-produto"]
@@ -151,6 +152,7 @@ flowchart LR
   avaliar_atualizacoes_de_dependencia --> criar_pull_request
   avaliar_atualizacoes_de_dependencia --> evoluir_habilidade
   avaliar_atualizacoes_de_dependencia --> mesclar_pull_request
+  boas_praticas_de_rotinas -.-> evoluir_habilidade
   classificar_estado_do_termo --> definir_vocabulario
   classificar_estado_do_termo --> gravar_termos_no_vocabulario
   classificar_estado_do_termo --> validar_plano_de_vocabulario
