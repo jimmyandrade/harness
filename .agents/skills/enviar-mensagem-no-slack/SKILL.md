@@ -3,8 +3,9 @@ name: enviar-mensagem-no-slack
 description: Redige uma mensagem de Slack, num canal, thread ou DM, e entrega o rascunho com o link do destino. Só envia com a autorização explícita da pessoa e, depois do envio, compara o proposto com o aplicado para alimentar o vocabulário. Usada quando a pessoa pede uma mensagem ou resposta no Slack. Não serve para achar conversa antiga nem cadastrar pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.7.4"
+  version: "0.8.0"
   related:
+    - definir-agenda
     - definir-pessoa
     - definir-vocabulario
     - escrever-link
@@ -87,6 +88,7 @@ Termos proibidos e alternativas vêm do vocabulário, não desta habilidade.
 - A primeira linha é o título em negrito, numa frase, com o `Emoji do título do post`, seguida de uma linha em branco e do corpo. O conector recebe markdown: o negrito é `**título**`, e com `*título*` ele vira itálico. Cada mensagem de um lote leva o próprio título.
 - Com `PS no post novo` em `sim`, o post termina, depois de uma linha em branco, com um PS pedindo para responder na thread, na frase do vocabulário. Com `por canal`, leia no registro de canais do projeto se aquele canal incentiva a resposta na thread. Sem essa informação, pergunte antes de redigir e grave a resposta no registro do canal, para não perguntar de novo. Em DM nunca há PS. Num lote de mensagens seguidas no mesmo canal, a saudação vai só na primeira e o PS só na última.
 - Uma resposta dentro de uma thread existente nunca leva título nem PS. Antes de abrir um post novo, confira se o canal já tem uma thread sobre o assunto e responda nela.
+- Quando a pessoa confirma a participação numa call combinada na conversa, a resposta traz o link da chamada, o dia e a hora. O evento fica na agenda por `definir-agenda`.
 - Uma mensagem por pull request, nunca vários numa só. Se eles se relacionam, cada mensagem cita o outro com link no corpo.
 - Um pedido de revisão de pull request leva no título o contexto, o link do PR, o link do card e, ao fim, a menção de quem acompanha.
 - Uma nova rodada de revisão, depois de ajustar os comentários, vai em resposta na thread, nesta ordem: o link do PR, o que ele corrige, o contexto e o alcance, a menção de quem tinha comentado dizendo que já ajustou, e o pedido ao grupo. Sem título e sem PS.
