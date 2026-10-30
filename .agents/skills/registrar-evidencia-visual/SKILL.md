@@ -3,7 +3,7 @@ name: registrar-evidencia-visual
 description: Registra o que a pessoa passa a ver quando um trabalho termina, no pull request e no card. Usada quando a entrega muda a tela, no Storybook, no ambiente local, na pré-produção ou na produção, mesmo sem dizer print. NÃO serve para mudança sem percepção visual, para medir performance, para ler texto de imagem nem para mandar a mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.10.1"
+  version: "0.11.0"
   related:
     - criar-pull-request
 ---
@@ -62,6 +62,11 @@ flowchart LR
 ### Passo 3
 
 Capture cada superfície que foi aberta.
+A captura do depois vem do código da mudança, rodando no ambiente local, no Storybook ou no ambiente de teste do pull request.
+O efeito da mudança aplicado à mão noutro ambiente, como a produção, é uma simulação e não substitui essa captura.
+Quando a simulação é a única imagem possível, a legenda diz que é simulação e a resposta diz que a captura da mudança ainda falta.
+Numa correção de bug, a evidência refaz o caminho do relato, antes e depois.
+Quando o bug acontece numa interação, como rolar e tocar, grave um vídeo curto desse caminho.
 Antes de capturar, confira que a story cobre cada tema da lista.
 Se faltar, acrescente a story do tema, porque ela também dá a base da regressão visual, e só então capture.
 A imagem de um tema sem story não substitui a story.
@@ -124,6 +129,10 @@ Comentário numa issue do rastreador só entra se a pessoa pedir.
 Esse comentário leva o link do pull request.
 A descrição do pull request é o lugar melhor para o recorte.
 Com `Confirmação antes de gravar` em `sim`, mostre a subpasta, o recorte que entra no texto, o link da página inteira e as legendas, e espere um sim para esse conjunto.
+Peça esse sim assim que o conjunto fica pronto, antes de abrir o pull request, para ele já nascer com as imagens.
+A linha de comando do GitHub não sobe imagem para a descrição.
+Depois do sim, suba as imagens pelo navegador em que a pessoa já está logada no GitHub, com o envio de arquivo do editor da descrição.
+Sem esse navegador, o pull request fica em rascunho, e a mesma resposta diz que a imagem falta e oferece esse caminho.
 Um sim vale para o card e o pull request desse conjunto, e outro destino, como uma mensagem para alguém, pede outro sim.
 
 ### Passo 6
@@ -224,6 +233,14 @@ Se você testar só no Chrome, a descrição afirma mais do que foi aberto.
 2. Marque na descrição só o que abriu e diga que o teste foi local.
 3. Escreva WebKit, não Safari, e deixe sem marca o que não abriu, como o Edge.
 
+### Pull request sem a imagem
+
+Se você abrir o pull request com a seção de imagens vazia e deixar a confirmação ou o envio para depois, quem abre o pull request não vê a mudança e pergunta por que não há imagem.
+
+1. Mostre o conjunto e peça o sim antes de abrir o pull request.
+2. Depois do sim, suba as imagens pelo navegador em que a pessoa está logada no GitHub.
+3. Sem esse navegador, deixe em rascunho e ofereça o caminho na mesma resposta.
+
 ### Imagem encostada no texto
 
 Se você pôr a imagem logo abaixo do título e logo acima da legenda, sem linha em branco, a descrição fica confusa e não mostra o que cada captura prova.
@@ -254,6 +271,7 @@ A página, com o bloco novo no meio do resto da tela e o relógio travado em 1 d
 - O Git não ignora `Pasta das evidências`: grave na pasta temporária do sistema e não crie pasta nova na raiz.
 - Não há chave de card nem número de pull request: a subpasta leva o dia e um nome curto do trabalho.
 - A pessoa não confirma o conjunto: não grave no card nem no pull request.
+- O ambiente com o código da mudança não abre: a simulação entra com a legenda de simulação, e a resposta diz que a captura da mudança falta.
 
 ## Pegadinhas
 
@@ -271,6 +289,8 @@ A página, com o bloco novo no meio do resto da tela e o relógio travado em 1 d
 - O sublinhado do hover parece cobrir o teclado. O foco tem a regra própria `:focus-visible`, e só o anel de foco não é o mesmo efeito.
 - WebKit parece Safari. É o mesmo motor, mas não o aplicativo.
 - `figure` e `figcaption` parecem a forma certa de legendar. O GitHub remove as duas tags da descrição do pull request.
+- A linha de comando do GitHub parece publicar o pull request inteiro. Ela não sobe imagem: o envio passa pelo navegador.
+- O efeito da correção aplicado à mão na produção parece o depois. É uma simulação, e o código da mudança pode se comportar diferente.
 
 ## Scripts disponíveis
 
