@@ -3,9 +3,10 @@ name: publicar-resposta-de-revisao
 description: Publica a resposta a uma revisão recebida, de pessoa ou de bot, de preferência num comentário inline. Marca o login e, com a leitura antes de publicar desligada, publica sem pedir confirmação. NÃO serve para aplicar a sugestão no código nem para revisar o PR de outra pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.1.2"
+  version: "0.1.3"
   related:
     - atender-revisao-de-pull-request
+    - escrever-link
     - publicar-revisao-de-codigo
 ---
 
@@ -76,7 +77,7 @@ Uma thread que espera decisão da pessoa, ou que foi aplicada de outro jeito, fi
 
 ### Passo 4
 
-Devolva o link de cada comentário publicado para quem chamou, e cite o PR como `[#123](url)`. Quem aplica o código continua em `atender-revisao-de-pull-request`.
+Devolva o link de cada comentário publicado para quem chamou, como manda `escrever-link`. Quem aplica o código continua em `atender-revisao-de-pull-request`.
 
 ## Problemas comuns
 
@@ -166,7 +167,7 @@ A revisão só tinha corpo. A resposta saiu num comentário inline na linha que 
 - Resposta com apóstrofo quebra `-f body='...'` no shell. Grave a resposta num arquivo e envie com `-F body=@<arquivo>`.
 - `Ler o texto antes de publicar` em `não` parece ainda pedir o sim. Publique e devolva o link. Um ajuste pedido depois também sai na hora.
 - A página aberta parece mostrar que a resposta continua no idioma antigo. O texto que vale é o gravado na thread. Diga a primeira frase dele.
-- Citar um PR só pelo número, como `#123` ou `PR 123`, é erro, mesmo numa lista, num resumo ou quando ele já foi citado antes: quem lê não consegue abrir. Escreva sempre `[#123](url)`, com a URL lida do `gh`, e releia o texto antes de entregar.
+- Citar um PR só pelo número é erro. Escreva o link como manda `escrever-link`.
 
 ## Scripts disponíveis
 
