@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.35.0](https://github.com/jimmyandrade/harness/compare/v1.34.0...v1.35.0) (2026-10-30)
+
+
+### Features
+
+* **conversar-no-whatsapp,enviar-mensagem-no-slack:** send the call details when the person confirms ([#677](https://github.com/jimmyandrade/harness/issues/677)) ([889e7cf](https://github.com/jimmyandrade/harness/commit/889e7cf033654553124e5c7445d331df07488ebe))
+* **definir-pessoa:** add the rule to mark a person with a real mention ([#672](https://github.com/jimmyandrade/harness/issues/672)) ([f89a8de](https://github.com/jimmyandrade/harness/commit/f89a8de91fb6198d3f4fec9905b7afcb7e52d969))
+* **gravar-termos-no-vocabulario:** delete rows by spelling and tags ([#669](https://github.com/jimmyandrade/harness/issues/669)) ([874756c](https://github.com/jimmyandrade/harness/commit/874756ca2cd800d291a231d530e9a66c0aeb4020))
+* **registrar-evidencia-visual:** show the changed component next to its neighbors ([#661](https://github.com/jimmyandrade/harness/issues/661)) ([0ac8639](https://github.com/jimmyandrade/harness/commit/0ac8639a7814a2f3711d09cc80b9485e57a68186))
+* **sincronizar-status-da-tarefa:** run on every pull request state change, even through gh ([#662](https://github.com/jimmyandrade/harness/issues/662)) ([fa7c55f](https://github.com/jimmyandrade/harness/commit/fa7c55fd842844c1116c1fcf8d8fa7e5a8234c90))
+
+
+### Bug Fixes
+
+* **definir-artigo-da-base-de-conhecimento:** tell a database template from a draft by the template list ([#673](https://github.com/jimmyandrade/harness/issues/673)) ([8692df5](https://github.com/jimmyandrade/harness/commit/8692df5e208b878a2704f062b6cd43eb7fbb7192))
+* keep the nested example plugin manifest out of the org sync path ([#679](https://github.com/jimmyandrade/harness/issues/679)) ([a12dfbc](https://github.com/jimmyandrade/harness/commit/a12dfbcf5a0db04a8f8f4f98db9eaf57b1374547)), closes [#678](https://github.com/jimmyandrade/harness/issues/678)
+* **registrar-evidencia-visual:** close what covers the screen before saving a capture ([#665](https://github.com/jimmyandrade/harness/issues/665)) ([527e879](https://github.com/jimmyandrade/harness/commit/527e8790be850e87fd79126a24ad72ed25dde953))
+
 ## [1.34.0](https://github.com/jimmyandrade/harness/compare/v1.33.0...v1.34.0) (2026-10-30)
 
 
