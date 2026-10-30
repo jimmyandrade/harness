@@ -8,7 +8,9 @@ Exits 1 when:
 - .cursor-plugin/plugin.json sets a shared field to another value than .claude-plugin/plugin.json,
   or sets it where the other does not;
 - .claude-plugin/marketplace.json has a plugin source that Codex skips. Codex reads a `./` path,
-  `.`, or a `url`, `git-subdir`, or `npm` object, and skips a `github` object without an error.
+  `.`, or a `url`, `git-subdir`, or `npm` object, and skips a `github` object without an error;
+- a .claude-plugin/plugin.json sits below the root, outside node_modules and .git. The plugin sync of a
+  claude.ai organization rejects the whole plugin when it finds one.
 A project without .claude-plugin/ passes.
 """
 
@@ -29,6 +31,11 @@ CURSOR_PLUGIN = Path(".cursor-plugin") / "plugin.json"
 SHARED_FIELDS = ("name", "version", "description", "author", "homepage", "repository", "license", "keywords", "skills")
 REQUIRED_FIELDS = ("name", "skills")
 CODEX_SOURCES = ("url", "git-subdir", "npm")
+SKIPPED_DIRECTORIES = ("node_modules", ".git")
+NESTED_PLUGIN = (
+    f"the claude.ai organization sync rejects a plugin with a nested {CLAUDE_PLUGIN}; "
+    "keep an example manifest under another name, such as plugin.example.json"
+)
 
 
 def load_parameters():
@@ -82,6 +89,16 @@ def marketplace_errors(marketplace: dict) -> list[str]:
     return errors
 
 
+def nested_plugin_errors(root: Path) -> list[str]:
+    errors = []
+    for directory, subdirectories, _ in os.walk(root):
+        subdirectories[:] = sorted(name for name in subdirectories if name not in SKIPPED_DIRECTORIES)
+        relative = Path(directory).relative_to(root) / CLAUDE_PLUGIN
+        if relative != CLAUDE_PLUGIN and (root / relative).is_file():
+            errors.append(f"{relative}: {NESTED_PLUGIN}")
+    return errors
+
+
 def check(root: Path) -> list[str]:
     errors = []
     claude, error = read_json(root, CLAUDE_PLUGIN)
@@ -96,6 +113,7 @@ def check(root: Path) -> list[str]:
         errors += manifest_errors(claude, cursor)
     if marketplace is not None:
         errors += marketplace_errors(marketplace)
+    errors += nested_plugin_errors(root)
     return errors
 
 
