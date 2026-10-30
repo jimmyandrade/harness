@@ -551,6 +551,7 @@ flowchart LR
   sincronizar_status_da_tarefa --> criar_pull_request
   sincronizar_status_da_tarefa --> evoluir_habilidade
   sincronizar_status_da_tarefa --> levantar_contexto_do_pull_request
+  sincronizar_status_da_tarefa --> mesclar_pull_request
   testar_ponta_a_ponta --> definir_issue_do_github
   testar_ponta_a_ponta --> escrever_teste
   testar_ponta_a_ponta --> evoluir_habilidade
