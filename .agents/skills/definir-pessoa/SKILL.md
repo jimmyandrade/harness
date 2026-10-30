@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.7.0"
   related:
     - definir-empresa
     - definir-grafia
@@ -33,7 +33,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 Cadastrar ou atualizar uma pessoa na lista de pessoas é esta habilidade. A lista e o nome de cada propriedade vêm do mapeamento de dados do projeto, no workspace conectado. Este texto usa os conceitos: o nome completo, as variações de grafia e os perfis sociais relacionados. Se a lista não estiver nessa conexão, pare. Não use a lista de outro workspace.
 
-Com `Tipo de armazenamento das pessoas` em `arquivos locais`, `Endereço das pessoas` é a pasta, com um arquivo por pessoa, nomeado pelo e-mail exato dela, no `Nome do arquivo da pessoa`, e um arquivo de índice com uma linha por pessoa: nome completo, como é chamada, e-mail, papel, time e o arquivo. Os campos são o nome completo, como a pessoa é chamada, as variações de grafia, as transcrições erradas do nome, o papel, o time, o e-mail, o ID no Slack, o login no GitHub, o ID da conta no Jira, os pronomes e a fonte deles, e os canais e grupos em que ela aparece. Os pronomes só se gravam quando a própria pessoa os declarou ou quem usa a habilidade os informou, e a fonte diz qual dos dois foi: sem isso, o campo fica vazio e os textos citam a pessoa sem pronome. O login e o ID do Jira servem para citar a pessoa com menção real fora do Slack. O arquivo local tem ainda o campo `extensions`, que guarda dados de outras habilidades sobre a pessoa, uma entrada por habilidade ou assunto, como o idioma em que ela prefere receber uma revisão. Esta habilidade não define nem valida o conteúdo de `extensions`: ao atualizar o registro, deixa o campo e tudo o que há nele como estão.
+Com `Tipo de armazenamento das pessoas` em `arquivos locais`, `Endereço das pessoas` é a pasta, com um arquivo por pessoa, nomeado pelo e-mail exato dela, no `Nome do arquivo da pessoa`, e um arquivo de índice com uma linha por pessoa: nome completo, como é chamada, e-mail, papel, time e o arquivo. Os campos são o nome completo, como a pessoa é chamada, as variações de grafia, as transcrições erradas do nome, o papel, o time, o e-mail, o ID no Slack, o login no GitHub, o ID da conta no Jira, os pronomes e a fonte deles, e os canais e grupos em que ela aparece. Os pronomes só se gravam quando a própria pessoa os declarou ou quem usa a habilidade os informou, e a fonte diz qual dos dois foi: sem isso, o campo fica vazio e os textos citam a pessoa sem pronome. O login e o ID do Jira servem para citar a pessoa com menção real fora do Slack, como o Passo 4 manda. O arquivo local tem ainda o campo `extensions`, que guarda dados de outras habilidades sobre a pessoa, uma entrada por habilidade ou assunto, como o idioma em que ela prefere receber uma revisão. Esta habilidade não define nem valida o conteúdo de `extensions`: ao atualizar o registro, deixa o campo e tudo o que há nele como estão.
 
 ```mermaid
 flowchart LR
@@ -63,7 +63,34 @@ O nome completo é o nome da pessoa. O handle não entra nesse nome. Não invent
 
 Grave como confirmado só o que veio direto da pessoa que usa a habilidade ou de uma fonte que respondeu com certeza. Nunca invente papel, time nem apelido. Ao atualizar um registro, mude o campo pontualmente: nunca regrave o registro inteiro descartando campos já confirmados ou o conteúdo de `extensions`. Todo texto que nomeia a pessoa usa como ela é chamada, e não o primeiro nome do nome completo quando os dois divergem.
 
+### Passo 4
+
+Quem cita uma pessoa num texto publicado, em qualquer plataforma, marca a pessoa com menção real e não com o nome em texto.
+Ache o ID no registro da pessoa e escreva a menção como a plataforma pede:
+
+```mermaid
+flowchart LR
+  P{Onde o texto é publicado?} -->|Slack| S["<@ID> do Slack"]
+  P -->|GitHub| G["@login"]
+  P -->|Jira| J["chip com o ID da conta no Jira"]
+  P -->|Confluence| C["span de menção em HTML"]
+```
+
+- No Confluence, a menção é `<span data-type="mention" data-user-id="ID">@Nome</span>`, com o ID da conta no Jira. O corpo da página vai em HTML ao criar e ao atualizar, porque o markdown não gera menção.
+- O login do GitHub vem do registro da pessoa ou do autor de pull requests recentes.
+- Sem o ID no registro, procure pelo e-mail na plataforma e use só um resultado único. Grave o ID que achou no registro.
+- Sem e-mail e com mais de um resultado, ou com dois registros de nome parecido, pergunte. Confira pelo assunto da fala quem é a pessoa e nunca escolha o primeiro resultado.
+- A menção notifica a pessoa. Acrescentar menções a um texto já publicado há tempo pede o sim de quem escreve.
+
 ## Problemas comuns
+
+### Nome em texto onde cabia menção
+
+Se você escrever o nome de quem participou ou de quem responde por uma ação só como texto, a pessoa não é notificada e o texto não leva até ela.
+
+1. Ache o ID no registro, como o Passo 4 manda.
+2. Escreva a menção real da plataforma.
+3. Sem o ID, procure pelo e-mail. Sem resultado único, pergunte.
 
 ### Pessoa ausente só na frase
 
@@ -107,6 +134,7 @@ Busquei na lista de pessoas e não havia Ana Exemplo. Criei a página com o nome
 - O pedido é só a grafia de quem já está na lista: siga `definir-grafia`. Não crie outra página.
 - O perfil colado tem poucos campos: grave os que vieram e deixe o resto vazio. Não espere o perfil completo.
 - A pessoa saiu da empresa: atualize ou crie o registro com a nota. Não apague.
+- Dois registros têm nomes parecidos, como Ana Souza e Ana Souza Lima: não marque pelo primeiro resultado. Confira pelo assunto da fala e, na dúvida, pergunte.
 
 ## Pegadinhas
 
@@ -115,6 +143,8 @@ Busquei na lista de pessoas e não havia Ana Exemplo. Criei a página com o nome
 - O nome exibido com o nicho parece o nome completo. O nome completo é o nome da pessoa. O restante fica no perfil.
 - O handle parece o título da pessoa. Ele fica no perfil.
 - O primeiro nome do nome completo nem sempre é como a pessoa é chamada: um texto que usa o primeiro nome erra o nome dela.
+- O markdown não gera menção no Confluence: o texto sai com o nome puro e ninguém é notificado. Use HTML.
+- Uma menção parece só um jeito de escrever o nome. Ela notifica a pessoa.
 
 ## Scripts disponíveis
 

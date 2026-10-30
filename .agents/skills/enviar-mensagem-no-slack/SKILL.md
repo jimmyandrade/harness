@@ -3,7 +3,7 @@ name: enviar-mensagem-no-slack
 description: Redige uma mensagem de Slack, num canal, thread ou DM, e entrega o rascunho com o link do destino. Só envia com a autorização explícita da pessoa e, depois do envio, compara o proposto com o aplicado para alimentar o vocabulário. Usada quando a pessoa pede uma mensagem ou resposta no Slack. Não serve para achar conversa antiga nem cadastrar pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.7.1"
+  version: "0.7.2"
   related:
     - definir-pessoa
     - definir-vocabulario
@@ -103,8 +103,8 @@ Termos proibidos e alternativas vêm do vocabulário, não desta habilidade.
 
 **Menção e link**
 
-- Quem é citado vira menção real: no Slack `<@ID>`, no GitHub `@login` e no Jira o chip com o `accountId`. O destinatário de uma DM 1:1 não precisa de menção, os terceiros citados nela e todos em canal levam. A mesma pessoa citada duas vezes leva a menção real na primeira, e a segunda pode ser só o nome.
-- Sem o ID, mantenha o nome em texto e avise. Nunca invente. O login do GitHub vem do registro da pessoa ou do autor de pull requests recentes.
+- Quem é citado vira menção real, como manda `definir-pessoa`. O destinatário de uma DM 1:1 não precisa de menção, os terceiros citados nela e todos em canal levam. A mesma pessoa citada duas vezes leva a menção real na primeira, e a segunda pode ser só o nome.
+- Sem o ID, mantenha o nome em texto e avise. Nunca invente.
 - Cada link, inclusive o texto do link de um card e o rascunho que falha em canal compartilhado, segue `escrever-link`.
 - Com `Linha de link em post novo` preenchida, o post novo termina com essa linha, com linha em branco antes e depois, e o link também continua no identificador do texto. Fora do Slack, nenhum shortcode de emoji aparece certo, então a linha não vai.
 
