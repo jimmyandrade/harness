@@ -67,9 +67,9 @@ Para registrar a demanda, leve a data e o horário da primeira mensagem do pedid
 
 ### Passo 5
 
-Todo rascunho de mensagem aparece no chat, com o texto inteiro, para a pessoa conferir. Não diga só que o rascunho está pronto. Quando o cliente desenha widget, mostre o rascunho num widget com o destinatário, o texto editável, um botão para copiar e um botão que manda o texto aprovado de volta ao chat. Sem widget, mostre o texto num bloco de código, que preserva a formatação do WhatsApp ao copiar. Se a pessoa editar, o texto dela substitui o rascunho.
+Todo rascunho de mensagem aparece na resposta do chat, com o texto inteiro num bloco de código, que preserva a formatação do WhatsApp ao copiar. Não diga só que o rascunho está pronto. Quando o cliente desenha widget, o widget vem além do bloco, não no lugar dele: com o destinatário, o texto editável, um botão para copiar e um botão que manda o texto aprovado de volta ao chat. O widget pode não aparecer para a pessoa. A pergunta que pede o sim vem depois do texto, na mesma resposta. Sem o texto à vista, não pergunte se pode enviar. Se a pessoa editar, o texto dela substitui o rascunho, e a nova versão aparece no chat antes do sim.
 
-No WhatsApp, as pessoas mandam o texto em várias mensagens curtas, não num bloco só. Divida o rascunho em mensagens, uma por ideia, e mostre cada uma separada, com o próprio campo editável no widget ou o próprio bloco de código. Envie na mesma ordem, uma de cada vez. Um rascunho de um tipo listado em `Mensagem única para` vai numa mensagem só, com uma linha em branco entre as ideias. Comunicado ou anúncio de produto também é exceção: vai numa mensagem só, como `comunicar-novidade-do-produto` manda. Escreva o comunicado com essa habilidade, não aqui. Um pedido ou uma lista de pendências que acompanha o anúncio é outro assunto e vai em outra mensagem, depois do comunicado.
+No WhatsApp, as pessoas mandam o texto em várias mensagens curtas, não num bloco só. Divida o rascunho em mensagens, uma por ideia, e mostre cada uma separada, no próprio bloco de código e, com widget, também no próprio campo editável. Envie na mesma ordem, uma de cada vez. Um rascunho de um tipo listado em `Mensagem única para` vai numa mensagem só, com uma linha em branco entre as ideias. Comunicado ou anúncio de produto também é exceção: vai numa mensagem só, como `comunicar-novidade-do-produto` manda. Escreva o comunicado com essa habilidade, não aqui. Um pedido ou uma lista de pendências que acompanha o anúncio é outro assunto e vai em outra mensagem, depois do comunicado.
 
 Para responder ou enviar, mostre a conversa de destino, o texto exato e, se for resposta, a mensagem citada. Envie só depois do sim da pessoa a esse texto e a essa conversa. O sim vale para uma mensagem. Outra mensagem pede outro sim.
 
@@ -147,9 +147,9 @@ Se você abrir uma conversa com mensagens não lidas sem avisar, quem enviou vê
 
 Se você disser que o rascunho está pronto sem mostrar o texto, a pessoa não confere nem corrige antes do envio.
 
-1. Mostre o texto inteiro no chat.
-2. Com widget, deixe o texto editável, com copiar e aprovar.
-3. Sem widget, use um bloco de código.
+1. Mostre o texto inteiro na resposta do chat, num bloco de código.
+2. Com widget, mostre também o texto editável, com copiar e aprovar. O widget não substitui o bloco.
+3. Pergunte se pode enviar só depois do texto, na mesma resposta.
 
 ### Envio sem confirmação
 
