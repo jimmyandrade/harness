@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.34.0](https://github.com/jimmyandrade/harness/compare/v1.33.0...v1.34.0) (2026-10-30)
+
+
+### Features
+
+* **escrever-link:** add the skill that writes links for each platform ([#671](https://github.com/jimmyandrade/harness/issues/671)) ([104f916](https://github.com/jimmyandrade/harness/commit/104f91605b1ba7a850d4fed6230205f4b12f4acc))
+
+
+### Bug Fixes
+
+* **definir-pessoa:** register a pasted person profile in the same turn ([#666](https://github.com/jimmyandrade/harness/issues/666)) ([6018ab4](https://github.com/jimmyandrade/harness/commit/6018ab4101ac7ff304d4af764a53aa5212df9b9f))
+* **registrar-evidencia-visual:** put the images in the pull request before asking for review ([#663](https://github.com/jimmyandrade/harness/issues/663)) ([f7985d0](https://github.com/jimmyandrade/harness/commit/f7985d03a4abc055f4a1d093137f88cb09bd08ab))
+
 ## [1.33.0](https://github.com/jimmyandrade/harness/compare/v1.32.0...v1.33.0) (2026-10-29)
 
 

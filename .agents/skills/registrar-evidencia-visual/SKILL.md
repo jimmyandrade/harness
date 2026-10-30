@@ -41,6 +41,9 @@ Liste só a superfície que este trabalho realmente tem, e cada cenário que uma
 Cada superfície aparece em cada variação de tema do projeto, o tema padrão e os sazonais ou variações ativos, como diz `Variações de tema`.
 Um efeito que aparece com o ponteiro, como o sublinhado ou a cor do hover, pede também a captura do foco por teclado, aberta com a tecla Tab, e o mesmo efeito tem de existir nos dois.
 Cada cenário é uma captura própria, legendada com o que ele prova.
+Quando o componente que mudou vive junto de outros, como uma barra acima de um cabeçalho, mostre-o na composição, com o que está em volta, para dar para comparar.
+Uma mudança de cor, de espaço ou de tamanho só se avalia ao lado do vizinho.
+A composição entra em cada tema e em cada largura, e a story da composição confere as duas cores lado a lado.
 Um comentário que promete a evidência, como "vou deixar uma evidência visual", chama esta habilidade, e a resposta na thread leva o link para ela.
 A ordem é o ambiente local, o Storybook, a pré-produção e a produção.
 A pré-produção só entra se o repositório ou a pessoa já tiver o endereço.
@@ -159,6 +162,7 @@ Se você publicar só a story do componente, a pessoa de produto não vê como o
 1. Capture a página inteira e a primeira tela.
 2. O componente isolado pode ir na pasta, com a legenda de que é só o bloco.
 3. Não use o componente isolado como única evidência.
+4. Se a mudança é de cor, de espaço ou de tamanho, a composição com o vizinho é a evidência principal, e o componente isolado, só um apoio.
 
 ### Print com o relógio da fixture
 
@@ -292,6 +296,7 @@ A página, com o bloco novo no meio do resto da tela e o relógio travado em 1 d
 ## Pegadinhas
 
 - A story do componente parece a tela e esconde o que fica em volta.
+- A imagem só do componente parece prova de cor, mas a cor só se compara ao lado do vizinho.
 - Uma pasta nova na raiz parece organizada e o próximo commit pode levar as imagens.
 - A página inteira dentro do texto parece completa e alonga o card.
 - Uma legenda não conserta o contador de dezenas de milhares de dias. A pessoa lê o número, não a legenda.

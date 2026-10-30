@@ -3,12 +3,13 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.9.0"
+  version: "0.9.1"
   related:
     - comunicar-novidade-do-produto
     - definir-agenda
     - definir-pessoa
     - definir-tarefa
+    - escrever-link
     - evoluir-habilidade
     - procurar-tarefa
     - redigir-com-tom-de-voz
@@ -74,7 +75,7 @@ Para responder ou enviar, mostre a conversa de destino, o texto exato e, se for 
 
 Em conta comercial, veja se a conversa está com o agente de IA. Se estiver, avise antes de enviar: ele responde à próxima mensagem do contato.
 
-O WhatsApp não usa Markdown. Negrito é um asterisco de cada lado, itálico é sublinhado, e não há título nem link entre colchetes.
+O WhatsApp não usa Markdown. Negrito é um asterisco de cada lado, itálico é sublinhado, e não há título nem link entre colchetes. O link segue `escrever-link`.
 
 Depois de enviar, leia a conversa de novo, confira se a mensagem aparece e diga o horário.
 
