@@ -1,4 +1,11 @@
 {
   "skill_name": "escrever-link",
-  "evals": []
+  "evals": [
+    {
+      "id": "link-da-ata-em-comentario-do-jira",
+      "prompt": "Comenta no card ABC-12 o link da ata da reunião de 01/10 às 15h45 que acabamos de publicar no Confluence.",
+      "expected_output": "O endereço da página foi lido do retorno da criação dela, não montado de memória. O comentário foi enviado em HTML, com uma frase de abertura e o link sozinho na linha de baixo, como smart link sem texto (`data-card-appearance=\"inline\"`). A leitura do comentário publicado traz a marca `smart-link` e o endereço certo, e nenhuma URL ficou crua. Na tela do Jira, o link aparece como cartão com o ícone e o título da página. Validado com a pessoa.",
+      "files": []
+    }
+  ]
 }
