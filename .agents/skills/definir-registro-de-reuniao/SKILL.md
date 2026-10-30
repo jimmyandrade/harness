@@ -3,7 +3,7 @@ name: definir-registro-de-reuniao
 description: Cadastra e corrige o registro de uma reunião, com título, data, participantes, resumo e índice, onde o projeto guarda os registros. Usada quando a pessoa cola uma transcrição ou pergunta se uma reunião já está registrada. Não serve para achar o contexto de uma reunião nem escrever a ata.
 metadata:
   author: jimmyandrade
-  version: "0.8.0"
+  version: "0.9.1"
   related:
     - definir-agenda
     - definir-grafia
@@ -72,7 +72,12 @@ flowchart LR
 
 O nome do registro depende do tipo de armazenamento. Arquivo local tem nome de arquivo, que é a data da reunião, o horário de início e um título curto, no `Padrão do nome do arquivo`: ano, mês, dia, hora e minuto separados por hífen, depois o título em minúsculas, sem acento e com hífens, e a `Extensão dos registros em arquivo` no fim. Página do Notion ou do Confluence e documento do Google Drive têm título, e título é texto como uma pessoa o escreve: com acento, maiúscula de início de frase e nome próprio, seguindo o `Padrão do título da página`. Não use o nome de arquivo como título. No Notion, a data, o horário e os participantes também vão para as propriedades do mapeamento. A data é a da reunião, não a da criação do registro. O horário nunca falta, porque a mesma pessoa tem mais de uma reunião no mesmo dia.
 
-O registro começa com o título em heading de nível 1. Logo abaixo, um bloco curto com a data e o horário, os participantes e a fonte do texto. Em `Fonte de identidade das pessoas`, ache o nome canônico e o papel de cada participante. Quem falta na lista de pessoas do projeto segue `definir-pessoa`. Com outra fonte, quem não está lá entra com o nome como veio, e a pessoa decide se o cadastra.
+O registro começa com o título em heading de nível 1.
+Logo abaixo, um bloco curto com a data e o horário, os participantes e a fonte do texto.
+Em `Fonte de identidade das pessoas`, ache o nome canônico e o papel de cada participante.
+Quem falta na lista de pessoas do projeto segue `definir-pessoa`.
+Num registro no Confluence, os participantes, a organização e o responsável de cada ação vão com menção real, como manda `definir-pessoa`.
+Com outra fonte, quem não está lá entra com o nome como veio, e a pessoa decide se o cadastra.
 
 ### Passo 5
 

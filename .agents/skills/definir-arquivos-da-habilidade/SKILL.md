@@ -3,7 +3,7 @@ name: definir-arquivos-da-habilidade
 description: Define onde ficam os scripts, referências, modelos e testes de uma skill e escreve Scripts disponíveis. Usada quando a skill ganha, move ou renomeia um arquivo além do SKILL.md. Não serve para escrever o texto da skill, a descrição nem gravar no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.5.1"
   related:
     - criar-habilidade
     - evoluir-habilidade
@@ -43,6 +43,7 @@ Os passos não citam comando nem nome de arquivo.
 O passo diz o que será feito.
 O comando fica só em `Scripts disponíveis`.
 Cada frase do texto da skill fica na própria linha, para a mudança aparecer no diff. Frases que só se entendem juntas ficam na mesma linha.
+Numa lista, a frase que fica sozinha vira item próprio, e a que só se entende com a anterior fica no mesmo item.
 Comando curto fica nessa seção, com versão fixa quando o ecossistema permite.
 Comando longo vira script testado em `scripts/`.
 Se um pacote já resolve, cite o comando nessa seção e não crie `scripts/`. O pré-requisito também vai em `compatibility`.

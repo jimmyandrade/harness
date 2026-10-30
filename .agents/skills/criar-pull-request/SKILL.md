@@ -3,15 +3,16 @@ name: criar-pull-request
 description: Use essa habilidade sempre que for abrir ou atualizar PR, subir uma correção ou mandar para a branch principal, mesmo sem dizer PR. NÃO use para mesclar (use mesclar-pull-request), responder comentário de revisão nem para só commitar (use criar-commit).
 metadata:
   author: jimmyandrade
-  version: "0.41.5"
+  version: "0.41.6"
   related:
-    - registrar-evidencia-visual
-    - registrar-resultados-da-validacao-na-tarefa
-    - evoluir-habilidade
-    - criar-commit
     - atualizar-branch-do-pull-request
+    - criar-commit
+    - escrever-link
+    - evoluir-habilidade
     - fatiar-pull-request
     - mesclar-pull-request
+    - registrar-evidencia-visual
+    - registrar-resultados-da-validacao-na-tarefa
     - sincronizar-status-da-tarefa
 ---
 
@@ -158,7 +159,7 @@ Com pedido de merge, siga `mesclar-pull-request` para o PR aberto. Sem pedido, e
 ### Passo 9
 
 Na resposta final, abra com o link do PR, `[#123](url)`, e depois informe o nome da branch, se ela está no GitHub e o hash de cada commit, e diga o estado de cada etapa: commit, push, PR, quem foi atribuído, o rótulo e o CI.
-Cada PR citado, inclusive na pergunta sobre quem mescla, vai como link clicável em markdown, com o número no texto, como `[#123](url)`. Nunca `#123` solto nem só a URL.
+Cada PR citado, inclusive na pergunta sobre quem mescla, vai como link, como manda `escrever-link`.
 Com `Criar pull request ao terminar` em `rascunho`, o padrão, a branch está no GitHub, o pull request está aberto em rascunho e a resposta leva o link.
 Com `sim`, o pull request está aberto pronto e a resposta leva o link.
 Com `não` e sem pedido de publicação, o estado do pull request é que ele não está aberto.

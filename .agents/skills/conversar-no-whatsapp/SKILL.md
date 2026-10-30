@@ -3,12 +3,13 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.9.0"
+  version: "0.10.1"
   related:
     - comunicar-novidade-do-produto
     - definir-agenda
     - definir-pessoa
     - definir-tarefa
+    - escrever-link
     - evoluir-habilidade
     - procurar-tarefa
     - redigir-com-tom-de-voz
@@ -74,13 +75,14 @@ Para responder ou enviar, mostre a conversa de destino, o texto exato e, se for 
 
 Em conta comercial, veja se a conversa está com o agente de IA. Se estiver, avise antes de enviar: ele responde à próxima mensagem do contato.
 
-O WhatsApp não usa Markdown. Negrito é um asterisco de cada lado, itálico é sublinhado, e não há título nem link entre colchetes.
+O WhatsApp não usa Markdown. Negrito é um asterisco de cada lado, itálico é sublinhado, e não há título nem link entre colchetes. O link segue `escrever-link`.
 
 Depois de enviar, leia a conversa de novo, confira se a mensagem aparece e diga o horário.
 
 ### Passo 6
 
 Para marcar uma call ou um evento pela conversa, o evento já está na agenda por `definir-agenda`, com o link da chamada. O evento do WhatsApp copia o título, o início e o link de lá. Ele é uma mensagem e segue o sim do Passo 5.
+Quando a pessoa confirma a participação, mande nessa conversa o evento nativo do WhatsApp e, à parte, uma mensagem com o link da chamada, o dia e a hora. O cartão do evento não deixa o link à vista de quem só lê a conversa. Cada mensagem segue o sim do Passo 5.
 
 Checklist do evento:
 - [ ] Botão de anexar da conversa, depois Evento.
@@ -91,6 +93,7 @@ Checklist do evento:
 - [ ] Antes de criar, amplie o formulário e confira nome, descrição, data e hora.
 - [ ] Botão de criar cinza com o início no passado: diga isso e peça o novo horário. Não mude o horário sozinho.
 - [ ] Depois de criar, confira o cartão do evento na conversa, com o dia e a hora.
+- [ ] Depois do cartão, a mensagem com o link da chamada, o dia e a hora. Com o término vazio, ela diz até que horas vai a call.
 
 ### Passo 7
 

@@ -3,7 +3,7 @@ name: criar-habilidade
 description: Cria, adiciona e escreve skills a partir de uma tarefa real. Usada quando a pessoa quer uma skill nova, mesmo sem dizer skill. NÃO serve para editar código, escrever página que não seja skill, otimizar só a descrição nem gravar a skill no Notion.
 metadata:
   author: jimmyandrade
-  version: "3.19.0"
+  version: "3.19.2"
   related:
     - criar-commit
     - criar-pull-request
@@ -30,6 +30,9 @@ metadata:
 ### Passo 1
 
 Crie ou atualize a skill a partir de uma tarefa prática que a pessoa está realizando com um agente. Peça o contexto do domínio antes de escrever. Não complete com conhecimento geral do modelo.
+Antes de criar, procure uma skill que já trate do assunto.
+Se existir, acrescente a lição a ela com `evoluir-habilidade`.
+Crie uma skill nova só quando nenhuma atende a demanda, ou quando a que atende já está sem folga abaixo de `Tokens do corpo` e precisa ser dividida.
 Extraia e insira na skill as etapas que funcionaram, na sequência que levou ao sucesso. Extraia as correções, como trocar uma biblioteca ou verificar um caso de borda. Extraia o formato da entrada e da saída. Extraia fatos, convenções e restrições do projeto que o agente ainda não sabia.
 
 Siga `Cópia de trabalho` antes de escrever a skill no repositório de origem.
@@ -56,6 +59,7 @@ Em `Problemas comuns`, cada problema é um heading de nível 3, um parágrafo qu
 O bloco de parâmetros inclui `"Modo de aprendizado": "perguntar"`, e o último passo de `Instruções` é `Ao terminar, siga evoluir-habilidade conforme Modo de aprendizado.`
 Pastas, scripts, referências, modelos e `Scripts disponíveis` seguem `definir-arquivos-da-habilidade`.
 Cada frase do texto da skill fica na própria linha, para a mudança aparecer no diff. Frases que só se entendem juntas ficam na mesma linha.
+Numa lista, a frase que fica sozinha vira item próprio, e a que só se entende com a anterior fica no mesmo item.
 O comando não entra no passo.
 Antes de escrever, leia as skills do mesmo assunto, as instruções do projeto e, ao atualizar, a skill inteira. Uma frase nova não contradiz outra já escrita: quando a regra muda, reescreva a que existe. Valor que muda de um projeto para outro, como pasta, caminho ou nome de banco, vira parâmetro.
 
@@ -140,6 +144,14 @@ Em operação em lote ou destrutiva, o agente primeiro grava um plano estruturad
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
+
+### Skill nova para o que uma skill já cobre
+
+Se você criar uma skill para uma lição ou boa prática de um assunto que uma skill existente já trata, o assunto fica dividido em duas skills e a regra se repete.
+
+1. Procure a skill do assunto antes de criar.
+2. Acrescente a lição nela com `evoluir-habilidade`.
+3. Crie uma skill nova só quando nenhuma atende, ou quando a que atende está cheia e precisa ser dividida.
 
 ### Descrição sem gatilho
 

@@ -3,7 +3,7 @@ name: registrar-evidencia-visual
 description: Registra o que a pessoa passa a ver quando um trabalho termina, no pull request e no card. Usada quando a entrega muda a tela, no Storybook, no ambiente local, na pré-produção ou na produção, mesmo sem dizer print. NÃO serve para mudança sem percepção visual, para medir performance, para ler texto de imagem nem para mandar a mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.11.0"
+  version: "0.12.1"
   related:
     - criar-pull-request
 ---
@@ -19,6 +19,8 @@ metadata:
 "Fuso horário da legenda": "America/Sao_Paulo"
 "Pasta das evidências": "tmp/evidencias-visuais"
 "Habilidade de mensagem": ""
+# `Sobreposições a fechar` lista o que cobre a tela sem fazer parte da mudança, como o aviso de cookies, o cartão de promoção e o bate-papo. Vazio, procure na primeira captura.
+"Sobreposições a fechar": ""
 ```
 
 ## Instruções
@@ -39,6 +41,9 @@ Liste só a superfície que este trabalho realmente tem, e cada cenário que uma
 Cada superfície aparece em cada variação de tema do projeto, o tema padrão e os sazonais ou variações ativos, como diz `Variações de tema`.
 Um efeito que aparece com o ponteiro, como o sublinhado ou a cor do hover, pede também a captura do foco por teclado, aberta com a tecla Tab, e o mesmo efeito tem de existir nos dois.
 Cada cenário é uma captura própria, legendada com o que ele prova.
+Quando o componente que mudou vive junto de outros, como uma barra acima de um cabeçalho, mostre-o na composição, com o que está em volta, para dar para comparar.
+Uma mudança de cor, de espaço ou de tamanho só se avalia ao lado do vizinho.
+A composição entra em cada tema e em cada largura, e a story da composição confere as duas cores lado a lado.
 Um comentário que promete a evidência, como "vou deixar uma evidência visual", chama esta habilidade, e a resposta na thread leva o link para ela.
 A ordem é o ambiente local, o Storybook, a pré-produção e a produção.
 A pré-produção só entra se o repositório ou a pessoa já tiver o endereço.
@@ -62,6 +67,11 @@ flowchart LR
 ### Passo 3
 
 Capture cada superfície que foi aberta.
+Antes de guardar cada captura, olhe a imagem inteira e procure o que cobre a tela sem fazer parte da mudança, como `Sobreposições a fechar` lista.
+Feche cada um pelo próprio botão e confira no DOM que saiu. Recuse o aviso de cookies, não o esconda por estilo.
+Esse tipo de elemento pode nascer depois da primeira rolagem ou do primeiro toque: espere o elemento aparecer, procurando pelo seletor e não pelo texto, e feche de novo depois de rolar.
+Feche as mesmas sobreposições no antes e no depois, para os dois mostrarem a mesma tela.
+Uma captura com algo por cima não entra no conjunto, e a legenda não explica o que está por cima.
 A captura do depois vem do código da mudança, rodando no ambiente local, no Storybook ou no ambiente de teste do pull request.
 O efeito da mudança aplicado à mão noutro ambiente, como a produção, é uma simulação e não substitui essa captura.
 Quando a simulação é a única imagem possível, a legenda diz que é simulação e a resposta diz que a captura da mudança ainda falta.
@@ -152,6 +162,7 @@ Se você publicar só a story do componente, a pessoa de produto não vê como o
 1. Capture a página inteira e a primeira tela.
 2. O componente isolado pode ir na pasta, com a legenda de que é só o bloco.
 3. Não use o componente isolado como única evidência.
+4. Se a mudança é de cor, de espaço ou de tamanho, a composição com o vizinho é a evidência principal, e o componente isolado, só um apoio.
 
 ### Print com o relógio da fixture
 
@@ -241,6 +252,14 @@ Se você abrir o pull request com a seção de imagens vazia e deixar a confirma
 2. Depois do sim, suba as imagens pelo navegador em que a pessoa está logada no GitHub.
 3. Sem esse navegador, deixe em rascunho e ofereça o caminho na mesma resposta.
 
+### Captura com a tela coberta
+
+Se você guardar a captura com o aviso de cookies, um cartão de promoção ou um bate-papo por cima, e explicar isso na legenda, quem lê vê o aviso e não a mudança.
+
+1. Olhe a imagem inteira antes de guardar.
+2. Feche o elemento pelo botão, procurando pelo seletor, que pode nascer só depois da rolagem, e confira que saiu.
+3. Refaça as duas capturas. A legenda não conserta uma tela coberta.
+
 ### Imagem encostada no texto
 
 Se você pôr a imagem logo abaixo do título e logo acima da legenda, sem linha em branco, a descrição fica confusa e não mostra o que cada captura prova.
@@ -271,11 +290,13 @@ A página, com o bloco novo no meio do resto da tela e o relógio travado em 1 d
 - O Git não ignora `Pasta das evidências`: grave na pasta temporária do sistema e não crie pasta nova na raiz.
 - Não há chave de card nem número de pull request: a subpasta leva o dia e um nome curto do trabalho.
 - A pessoa não confirma o conjunto: não grave no card nem no pull request.
+- A sobreposição volta depois de fechada: espere, feche de novo e capture em seguida. Sem conseguir, diga que a captura está coberta e não a guarde no conjunto.
 - O ambiente com o código da mudança não abre: a simulação entra com a legenda de simulação, e a resposta diz que a captura da mudança falta.
 
 ## Pegadinhas
 
 - A story do componente parece a tela e esconde o que fica em volta.
+- A imagem só do componente parece prova de cor, mas a cor só se compara ao lado do vizinho.
 - Uma pasta nova na raiz parece organizada e o próximo commit pode levar as imagens.
 - A página inteira dentro do texto parece completa e alonga o card.
 - Uma legenda não conserta o contador de dezenas de milhares de dias. A pessoa lê o número, não a legenda.
@@ -289,6 +310,8 @@ A página, com o bloco novo no meio do resto da tela e o relógio travado em 1 d
 - O sublinhado do hover parece cobrir o teclado. O foco tem a regra própria `:focus-visible`, e só o anel de foco não é o mesmo efeito.
 - WebKit parece Safari. É o mesmo motor, mas não o aplicativo.
 - `figure` e `figcaption` parecem a forma certa de legendar. O GitHub remove as duas tags da descrição do pull request.
+- O clique sem erro parece o aviso fechado. Olhe a imagem: um clique que não achou o botão também não falha.
+- O aviso de cookies parece estar na tela desde a carga. Em muitos sites ele nasce depois da primeira rolagem.
 - A linha de comando do GitHub parece publicar o pull request inteiro. Ela não sobe imagem: o envio passa pelo navegador.
 - O efeito da correção aplicado à mão na produção parece o depois. É uma simulação, e o código da mudança pode se comportar diferente.
 

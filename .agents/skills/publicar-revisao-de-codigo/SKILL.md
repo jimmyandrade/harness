@@ -3,12 +3,13 @@ name: publicar-revisao-de-codigo
 description: Revisa um pull request e publica a revisão numa única review, com os comentários inline, no idioma de quem recebe e no tom do projeto. Usada quando a pessoa pede uma revisão ou outra habilidade precisa publicar uma. Não serve para tratar os comentários que você recebeu no seu PR.
 metadata:
   author: jimmyandrade
-  version: "0.19.1"
+  version: "0.19.2"
   aliases:
     - post-code-review
   related:
     - definir-pessoa
     - enviar-mensagem-no-slack
+    - escrever-link
     - evoluir-habilidade
     - levantar-contexto-do-pull-request
     - priorizar-itens
@@ -161,7 +162,7 @@ Limpe sempre, mesmo se algo falhou antes. Apague o comentário de início e reti
 
 ### Passo 12
 
-Devolva a quem chamou o link clicável da review e de cada comentário publicado, com todo PR citado como `[#123](url)`, e um resumo dos achados por prioridade, com o nível de detalhe usado e quantos Poderia ter ficaram de fora. Avisar a pessoa que pediu a revisão é de quem chamou, com `enviar-mensagem-no-slack`.
+Devolva a quem chamou o link da review e de cada comentário publicado, como manda `escrever-link`, e um resumo dos achados por prioridade, com o nível de detalhe usado e quantos Poderia ter ficaram de fora. Avisar a pessoa que pediu a revisão é de quem chamou, com `enviar-mensagem-no-slack`.
 
 ### Passo 13
 
