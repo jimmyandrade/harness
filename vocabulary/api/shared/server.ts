@@ -10,6 +10,7 @@ import { fileURLToPath } from "node:url"
 import { allowedRoute } from "../routes/allowed/index.ts"
 import { classifyRoute } from "../routes/classify/index.ts"
 import { classifyTextRoute } from "../routes/classify-text/index.ts"
+import { deleteRoute } from "../routes/delete/index.ts"
 import { existsRoute } from "../routes/exists/index.ts"
 import { forbiddenRoute } from "../routes/forbidden/index.ts"
 import { initRoute } from "../routes/init/index.ts"
@@ -22,7 +23,7 @@ import { versionRoute } from "../routes/version/index.ts"
 import { createServer, listen } from "./http.ts"
 import { readOptions, report } from "./options.ts"
 
-const routes = [allowedRoute, classifyRoute, classifyTextRoute, existsRoute, forbiddenRoute, initRoute, lookupRoute, lookupTermsRoute, migrateRoute, situationalRoute, termsRoute, versionRoute]
+const routes = [allowedRoute, classifyRoute, classifyTextRoute, deleteRoute, existsRoute, forbiddenRoute, initRoute, lookupRoute, lookupTermsRoute, migrateRoute, situationalRoute, termsRoute, versionRoute]
 
 export function createGlossaryServer(directory: string): Server {
   return createServer(directory, routes)

@@ -2,7 +2,7 @@
  * MCP server for the vocabulary.
  *
  * lookup_term reads one term, and lookup_terms reads several in one call. exists_in_text maps each token to whether it
- * exists. write_terms inserts, updates, or upserts terms for one language.
+ * exists. write_terms inserts, updates, or upserts terms for one language. delete_terms deletes rows.
  * get_version returns the version of the engine. migrate_glossary rewrites the rows that use a deprecated state
  * or category. init_glossary creates the empty glossary of a new language.
  *
@@ -14,7 +14,7 @@ import type { Readable } from "node:stream"
 
 import { existsPhrase } from "../routes/exists/index.ts"
 import { lookupTerm, lookupTerms } from "../routes/lookup/index.ts"
-import { Glossary, initGlossary, migrate, writeBatch } from "../shared/glossary.ts"
+import { Glossary, deleteBatch, initGlossary, migrate, writeBatch } from "../shared/glossary.ts"
 import { parseBody } from "../shared/http.ts"
 import { readOptions } from "../shared/options.ts"
 import { versionInfo } from "../shared/version.ts"
@@ -157,6 +157,37 @@ const tools = [
     },
   },
   {
+    name: "delete_terms",
+    description: "Delete rows of the vocabulary of one language, one row or a whole batch. A row is its spelling and its set of tags, so tags names the row to delete and tags [] is the row without tags. Without tags the call takes the only row of the spelling and is refused, with the tags of each row, when the spelling has more than one. A spelling or tags that no row has are skipped, never created. The last row of a spelling that another row still names, as an alternative, a rejected example, an example, or a related term, is refused with the rows that name it: clear that link with write_terms first, so no link points at a term that is gone. To drop only the tags of a row, send write_terms update with tags [] when it is the only row of its spelling; when the spelling already has a row without tags, delete the tagged row instead. A batch with a problem deletes nothing, and the refusal lists every problem with its term. The response returns each deleted row whole, so a wrong delete can be written back with write_terms insert. With dry_run true nothing is deleted: the response lists what would be deleted, skipped, and refused. Run a dry run first, and ask the person before a delete.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        language: languageProperty,
+        dry_run: {
+          type: "boolean",
+          description: "True to report what the delete would do, with the problems it would refuse, and leave the glossary unchanged. The response has dry_run true and refused.",
+        },
+        terms: {
+          type: "array",
+          minItems: 1,
+          items: {
+            type: "object",
+            properties: {
+              term: { type: "string" },
+              tags: {
+                type: "array",
+                items: { type: "string" },
+                description: "The set of tags of the row to delete, such as maria-silva. [] is the row without tags. Omit it to take the only row of the spelling.",
+              },
+            },
+            required: ["term"],
+          },
+        },
+      },
+      required: ["language", "terms"],
+    },
+  },
+  {
     name: "get_version",
     description: "Return the name and version of the vocabulary engine. Call it before reading or writing the vocabulary and compare the version with the one the project pins. When they differ, the installed plugin is outdated: update it before going on.",
     inputSchema: { type: "object", properties: {} },
@@ -235,6 +266,9 @@ export function callTool(directory: string, params: unknown): ToolResult {
     }
     if (record?.name === "write_terms") {
       return reply(writeBatch(directory, record.arguments))
+    }
+    if (record?.name === "delete_terms") {
+      return reply(deleteBatch(directory, record.arguments))
     }
     if (record?.name === "get_version") return reply(versionInfo())
     if (record?.name === "migrate_glossary") {

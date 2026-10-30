@@ -638,6 +638,44 @@ test("terms refuses a real link in an example", () => {
   assert.equal(readFileSync(file, "utf8"), "{}\n")
 })
 
+test("delete removes the row of --tags, --tags with an empty value is the row without tags, and --dry-run writes nothing", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  const file = join(root, "pt-BR.json")
+  const row = { state: "allowed_with_care", description: "forma de tratar", when: "numa DM" }
+  writeFileSync(file, `${JSON.stringify({ contigo: [row, { ...row, tags: ["canal-a"] }] })}\n`)
+  const lines: string[] = []
+  const write = console.log
+  console.log = (line: string) => lines.push(line)
+  try {
+    assert.equal(run(["--glossary", root, "delete", "--language", "pt-BR", "--term", "contigo", "--tags", "canal-a", "--dry-run"]), 0)
+    assert.equal(JSON.parse(lines.at(-1) ?? "{}").dry_run, true)
+    assert.equal(JSON.parse(readFileSync(file, "utf8")).contigo.length, 2)
+    assert.equal(run(["--glossary", root, "delete", "--language", "pt-BR", "--term", "contigo", "--tags", "canal-a"]), 0)
+    assert.deepEqual(JSON.parse(readFileSync(file, "utf8")).contigo, row)
+    assert.equal(run(["--glossary", root, "delete", "--language", "pt-BR", "--term", "contigo", "--tags", ""]), 0)
+    assert.equal(readFileSync(file, "utf8"), "{}\n")
+  } finally {
+    console.log = write
+  }
+})
+
+test("delete takes only --term and --tags, and a spelling with more than one row asks for its tags", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  const row = { state: "allowed_with_care", description: "forma de tratar", when: "numa DM" }
+  writeFileSync(join(root, "pt-BR.json"), `${JSON.stringify({ contigo: [row, { ...row, tags: ["canal-a"] }] })}\n`)
+  const errors: string[] = []
+  const write = console.error
+  console.error = (line: string) => errors.push(line)
+  try {
+    assert.equal(run(["--glossary", root, "delete", "--language", "pt-BR", "--term", "contigo", "--state", "allowed"]), 2)
+    assert.match(errors.at(-1) ?? "", /delete takes only --term and --tags/)
+    assert.equal(run(["--glossary", root, "delete", "--language", "pt-BR", "--term", "contigo"]), 2)
+    assert.match(errors.at(-1) ?? "", /has more than one row/)
+  } finally {
+    console.error = write
+  }
+})
+
 test("version prints the version in package.json", () => {
   const { version } = JSON.parse(readFileSync(new URL("../../package.json", import.meta.url), "utf8")) as { version: string }
   const { code, body } = capture(["--glossary", tmpdir(), "version"])

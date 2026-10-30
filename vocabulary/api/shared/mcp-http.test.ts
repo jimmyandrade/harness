@@ -76,6 +76,7 @@ void describe("WRITE_TOOLS constant", () => {
     strictEqual(WRITE_TOOLS.includes("write_terms"), true)
     strictEqual(WRITE_TOOLS.includes("migrate_glossary"), true)
     strictEqual(WRITE_TOOLS.includes("init_glossary"), true)
+    strictEqual(WRITE_TOOLS.includes("delete_terms"), true)
   })
 })
 

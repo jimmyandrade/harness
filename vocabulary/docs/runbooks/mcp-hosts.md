@@ -113,4 +113,4 @@ Check: `readlink` on that file prints the path of `.agents/mcp.json`.
 
 Restart the host and ask it to look up a term of the glossary.
 
-Check: the host lists the `vocabulary` tools `lookup_term`, `lookup_terms`, `exists_in_text`, `write_terms`, `get_version`, `migrate_glossary`, and `init_glossary`.
+Check: the host lists the `vocabulary` tools `lookup_term`, `lookup_terms`, `exists_in_text`, `write_terms`, `delete_terms`, `get_version`, `migrate_glossary`, and `init_glossary`.
