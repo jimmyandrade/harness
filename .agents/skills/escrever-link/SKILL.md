@@ -3,7 +3,7 @@ name: escrever-link
 description: Escreve o link de um texto lido numa plataforma, como Jira, Confluence, GitHub, Slack, WhatsApp ou a conversa com a IA, com o endereço lido da fonte, o texto certo e a sintaxe que funciona nela. Usada sempre que um texto vai citar PR, issue, card, página ou arquivo. Não serve para decidir o que o texto diz nem para enviá-lo.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   related:
     - conversar-no-whatsapp
     - criar-pull-request
@@ -42,6 +42,7 @@ Escolha o texto do link pelo tipo do alvo, com os parâmetros `Texto do link de 
 O texto diz o que o leitor abre. Um PR é `#123`, um card é a chave ou o título e uma página é o título dela.
 `aqui`, `clique aqui` e `link` não dizem nada e não entram.
 Um item citado só pelo número, como `#123` ou `PR 123`, não é link. Uma chave solta também não é. Uma URL crua no meio da frase só serve onde o Passo 3 manda.
+Num link do Atlassian que fica sozinho, o texto não entra: o smart link do Passo 3 mostra o título atual da página.
 Cite cada alvo como link toda vez que ele aparece, inclusive numa lista, num resumo, num título e quando já foi citado antes.
 
 ### Passo 3
@@ -53,10 +54,12 @@ flowchart LR
   A{Onde o leitor vê o texto?} -->|WhatsApp| W[Texto na linha de cima e a URL inteira sozinha na linha de baixo]
   A -->|Recap do wrap_up| R[Endereço completo em texto, sem colchetes]
   A -->|Outra plataforma sem regra aqui| P[Pergunte como o texto é exibido]
-  A -->|Conversa, GitHub, Jira, Confluence ou Slack| M["[texto](url) em markdown"]
+  A -->|Link do Atlassian sozinho no Jira ou no Confluence| S["Smart link em HTML, sem texto"]
+  A -->|Conversa, GitHub, Slack, ou o link no meio de uma frase| M["[texto](url) em markdown"]
 ```
 
-- Conversa com a IA, descrição e comentário no GitHub, comentário no Jira, página no Confluence e mensagem no Slack pelo conector aceitam `[texto](url)`. O Slack e o Jira mostram uma URL crua como texto comprido, que quebra em duas linhas.
+- Conversa com a IA, descrição e comentário no GitHub, mensagem no Slack pelo conector e um link no meio de uma frase no Jira ou no Confluence aceitam `[texto](url)`. O Slack e o Jira mostram uma URL crua como texto comprido, que quebra em duas linhas.
+- Um link do Atlassian que fica sozinho numa linha, numa lista de referências, ou no fim de uma frase que termina em dois-pontos, vira smart link: `<a href="url" data-card-appearance="inline"></a>`, com o texto vazio. O Atlassian mostra o ícone e o título atual da página, e o título nunca fica desatualizado. No Jira, o comentário vai com `contentFormat` em `html`. No Confluence, o corpo da página é HTML. `block` serve para um link que a página destaca.
 - O WhatsApp não usa Markdown e não tem link entre colchetes. O texto que descreve o alvo vai numa linha e a URL inteira, sozinha, na linha seguinte, para o WhatsApp tornar clicável e mostrar a prévia.
 - O recap de um fim de turno não renderiza markdown nem torna o endereço clicável. Ele leva o endereço completo em texto, como `https://github.com/<dono>/<repo>/pull/123`, nunca só `dono/repo#123`. O texto escrito antes desse recap abre com uma linha só de links em markdown, que é a que a pessoa consegue clicar.
 - No Slack, o texto pode ir para colar quando há um link só. Em canal compartilhado com outra organização, se o rascunho falhar, entregue as URLs soltas, uma por linha, e avise que o Slack só pré-visualiza os 5 primeiros links.
@@ -86,6 +89,13 @@ Se você escrever o endereço no meio da frase, a plataforma o mostra como texto
 1. Troque por `[texto](url)`, com o texto do Passo 2.
 2. No WhatsApp, ponha o texto numa linha e a URL inteira na linha de baixo.
 3. Releia o item publicado e confira.
+
+### Texto comprido num link do Atlassian
+
+Se você escrever o título inteiro de uma página como texto de um link que fica sozinho no Jira ou no Confluence, o link vira uma linha comprida e o título pode ficar desatualizado.
+
+1. Troque por um smart link, com o texto vazio.
+2. Deixe o texto do link só quando o link está no meio de uma frase.
 
 ### Número solto
 
@@ -130,7 +140,7 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### comente no card ABC-12 o link da página da ata que acabei de criar.
 
-Li o endereço no retorno da criação da página, com o título dela. O comentário saiu como `[Ata de 01/10: título da reunião](url)`. Reli o comentário no Jira e o link abre a página. Nenhuma URL ficou crua.
+Li o endereço no retorno da criação da página. O comentário saiu em HTML, com a frase de abertura e o link sozinho, como smart link e sem texto. Reli o comentário no Jira e o link carrega a marca `smart-link` e aponta para a página. Nenhuma URL ficou crua.
 
 ### cite no resumo os dois PRs que abri hoje.
 
@@ -151,6 +161,8 @@ Escrevi "PR 123: corrige o filtro" numa linha e a URL inteira na linha de baixo.
 
 ## Pegadinhas
 
+- A leitura do comentário pela API mostra o smart link com a URL como texto e a marca `title="smart-link"`. O cartão com o título aparece na tela do Jira. Confirme pela marca e diga que o título só aparece na tela.
+- O smart link descarta o texto do link. Num link que precisa ler como parte da frase, use `[texto](url)`.
 - O Jira e o Slack não tornam o endereço cru um link com texto. A pessoa vê a URL inteira, comprida, quebrada em duas linhas.
 - O WhatsApp mostra colchetes e parênteses como estão.
 - O recap de um fim de turno no app não renderiza markdown. O endereço dele só funciona completo.
