@@ -345,6 +345,7 @@ flowchart LR
   descrever_habilidade_ou_schema --> evoluir_habilidade
   descrever_habilidade_ou_schema --> revisar_habilidade
   emitir_documento_oficial --> evoluir_habilidade
+  enviar_mensagem_no_slack --> definir_agenda
   enviar_mensagem_no_slack --> definir_pessoa
   enviar_mensagem_no_slack --> definir_vocabulario
   enviar_mensagem_no_slack --> escrever_link

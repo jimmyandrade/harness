@@ -1,4 +1,11 @@
 {
   "skill_name": "conversar-no-whatsapp",
-  "evals": []
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Teste numa conversa real com Gui",
+      "expected_output": "Depois que a pessoa confirmou a call na conversa, e depois do sim ao texto, a conversa recebe o evento nativo do WhatsApp, com o nome, o link da chamada na descrição e o início no dia e na hora da agenda. Em seguida recebe, à parte, uma mensagem com o dia, a hora e o link da chamada. O término que desloca o início fica vazio, e a mensagem com o link diz até que horas vai a call.",
+      "files": []
+    }
+  ]
 }
