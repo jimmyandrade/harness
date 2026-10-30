@@ -1,11 +1,11 @@
 ---
 name: definir-pessoa
-description: Use essa habilidade sempre que for cadastrar ou atualizar uma pessoa, mesmo sem dizer pessoa. Um print da grafia que mostra uma pessoa ausente entra aqui. NÃO use para só checar se já existe, cravar a grafia de quem já está na lista, cadastrar o perfil, cadastrar a empresa, nem apagar sem ordem.
+description: Use essa habilidade sempre que for cadastrar ou atualizar uma pessoa, mesmo sem dizer pessoa. Um print da grafia que mostra uma pessoa ausente entra aqui, e também o perfil de uma pessoa colado em texto ou imagem, ou a notícia de que ela saiu. NÃO use para só checar se já existe, cravar a grafia de quem já está na lista, cadastrar o perfil, cadastrar a empresa, nem apagar sem ordem.
 allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-data-sources notion:notion-create-pages notion:notion-update-page notion:notion-create-comment
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.5.1"
+  version: "0.6.0"
   related:
     - definir-empresa
     - definir-grafia
@@ -44,6 +44,8 @@ flowchart LR
   Q -->|só saber se existe| I[identificar-duplicata]
 ```
 
+Um perfil colado por quem usa a habilidade, em texto ou imagem, é o pedido de cadastro, mesmo sem a palavra cadastrar. A mesma regra vale quando a pessoa só informa uma mudança sobre alguém, como a saída da empresa. Cadastre ou atualize o registro na mesma resposta, antes de responder o resto e sem perguntar. Quem saiu continua registrada: o campo de notas diz isso, para ninguém a indicar como contato. A resposta diz o que foi gravado e onde, ou que nada foi.
+
 ### Passo 2
 
 Busque o nome na lista de pessoas, no nome e nas variações, por consulta direta e por busca semântica. Antes de perguntar qualquer dado de identidade, consulte o registro da pessoa. Se faltar, resolva pelas `Fontes para resolver identidade`. Só pergunte o que nem o registro nem essas fontes respondem.
@@ -71,6 +73,15 @@ Se você corrigir o nome na frase e não cadastrar a pessoa que o print mostrou,
 2. Nenhuma casa: crie a página com o nome completo.
 3. O handle fica no perfil, não no nome.
 
+### Perfil colado e respondido sem cadastrar
+
+Se você ler o perfil colado, usar a informação na resposta e não gravar o registro, a pessoa continua fora do diretório e o próximo turno repete a pergunta.
+
+1. Chame esta habilidade no mesmo turno em que o perfil chegar, antes de seguir com o assunto.
+2. Pessoa nova: crie. Pessoa já registrada: mude só o campo que o perfil trouxe.
+3. A saída da empresa entra nas notas, e o registro fica.
+4. Não pergunte se deve gravar. Depois, diga o que gravou.
+
 ### Handle no nome
 
 Se você gravar o arroba no nome completo, o perfil vira a pessoa.
@@ -94,9 +105,12 @@ Busquei na lista de pessoas e não havia Ana Exemplo. Criei a página com o nome
 - Há mais de uma: liste. Não crie.
 - O print traz handle e nome: o nome fica aqui. O perfil segue `definir-perfil-social`.
 - O pedido é só a grafia de quem já está na lista: siga `definir-grafia`. Não crie outra página.
+- O perfil colado tem poucos campos: grave os que vieram e deixe o resto vazio. Não espere o perfil completo.
+- A pessoa saiu da empresa: atualize ou crie o registro com a nota. Não apague.
 
 ## Pegadinhas
 
+- Um perfil colado parece só contexto para a resposta. É o pedido de cadastro: grave no mesmo turno.
 - Corrigir a frase parece cadastrar. A pessoa ausente ganha página na lista de pessoas.
 - O nome exibido com o nicho parece o nome completo. O nome completo é o nome da pessoa. O restante fica no perfil.
 - O handle parece o título da pessoa. Ele fica no perfil.
