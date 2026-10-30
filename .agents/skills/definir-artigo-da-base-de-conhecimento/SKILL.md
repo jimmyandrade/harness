@@ -4,7 +4,7 @@ description: Cria, revisa e atualiza o artigo da base de conhecimento que respon
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.3.1"
   related:
     - criar-habilidade
     - definir-historia-de-usuario
@@ -82,6 +82,7 @@ Na seção de observações, aponte para o outro artigo em vez de repetir a expl
 Para cada pergunta, busque no data source pelo título, pelas variações e pelo tema.
 Se um artigo já responde a mesma pergunta, atualize-o.
 Só crie um artigo novo quando nenhum responde.
+Uma página cujo corpo ainda é o texto de exemplo das seções, com colchetes e frases como "Primeiro item do passo a passo", é um modelo do banco, que a pessoa usa no botão de criar página. Não a trate como rascunho nem como artigo repetido, e não sugira apagá-la.
 
 ### Passo 5
 
@@ -193,6 +194,7 @@ Os critérios ficaram de fora. Cada guardrail virou item do diagnóstico rápido
 - A imagem colada na mesma linha do passo parece ficar abaixo dele. Ela só vira bloco próprio com uma linha em branco antes e depois.
 - O print da tela inicial parece bastar. O passo mostra o estado em que a pessoa clica: o menu aberto, o submenu, a janela de busca.
 - Esperar os prints da pessoa parece o caminho seguro. Quem escreve o artigo captura os prints que faltam.
+- Uma página com o título genérico da ferramenta e o corpo só com o texto de exemplo parece um rascunho esquecido. É o modelo do banco para os artigos daquela ferramenta e fica onde está.
 
 ## Scripts disponíveis
 
