@@ -55,11 +55,13 @@ Skills are in `.agents/skills/FEATURES.md`. How they relate is in `.agents/skill
   - Script `.agents/scripts/plugin-manifests/plugin-manifests.py`, run by `run-check.sh` on commit and in the `check-skill` action
   - `.claude-plugin/` is the source of truth. The check fails when `.cursor-plugin/plugin.json` differs from `.claude-plugin/plugin.json` in `name`, `version`, `description`, `author`, `homepage`, `repository`, `license`, `keywords`, or `skills`, or exists without it
   - It fails when a plugin source in `.claude-plugin/marketplace.json` is one that Codex skips, such as `github`
+  - It fails when a `.claude-plugin/plugin.json` sits below the root, outside `node_modules` and `.git`, because the plugin sync of a claude.ai organization rejects the plugin. The business example keeps its plugin as `.claude-plugin/plugin.example.json`, and the runbook renames it
   - Each error points at the line of the field or plugin it is about, and in GitHub Actions the pull request shows it inline
 - **Test Criteria**:
   - [x] Matching manifests pass, and a different or missing shared field fails
   - [x] A `github` plugin source fails, and a `./` path or a `url` source passes
-  - [x] This repository and `examples/business-harness/` pass
+  - [x] A nested `.claude-plugin/plugin.json` fails, and one in `node_modules` passes
+  - [x] This repository and `examples/business-harness/`, as the runbook leaves it after the copy, pass
 
 ### renovate-preset
 - **Stability**: experimental

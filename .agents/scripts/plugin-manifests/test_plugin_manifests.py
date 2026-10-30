@@ -8,6 +8,7 @@ import io
 import json
 import os
 import re
+import shutil
 import sys
 import tempfile
 import unittest
@@ -22,6 +23,13 @@ spec.loader.exec_module(manifests)
 
 CORE = Path(__file__).resolve().parents[3]
 PLUGIN = {"name": "example", "description": "Skills of this business.", "skills": "./.agents/skills/"}
+
+
+def copy_business_example(root: Path) -> Path:
+    """The business example as the business-repository runbook leaves it after the copy."""
+    shutil.copytree(CORE / "examples" / "business-harness", root, dirs_exist_ok=True)
+    (root / ".claude-plugin" / "plugin.example.json").rename(root / manifests.CLAUDE_PLUGIN)
+    return root
 
 
 def write(root: Path, relative: Path, data: object) -> None:
@@ -84,9 +92,20 @@ class PluginManifestsTest(unittest.TestCase):
         found = [match.groupdict() for pattern in patterns for match in pattern.finditer(text)]
         self.assertEqual(found, [{"depName": "jimmyandrade/harness", "currentValue": "vX.Y.Z"}])
 
+    def test_a_nested_plugin_manifest_fails(self) -> None:
+        write(self.root, manifests.CLAUDE_PLUGIN, PLUGIN)
+        write(self.root, Path("examples") / "business" / manifests.CLAUDE_PLUGIN, PLUGIN)
+        errors = manifests.check(self.root)
+        self.assertEqual(errors, [f"{Path('examples') / 'business' / manifests.CLAUDE_PLUGIN}: {manifests.NESTED_PLUGIN}"])
+
+    def test_a_plugin_manifest_in_node_modules_passes(self) -> None:
+        write(self.root, manifests.CLAUDE_PLUGIN, PLUGIN)
+        write(self.root, Path("node_modules") / "harness" / manifests.CLAUDE_PLUGIN, PLUGIN)
+        self.assertEqual(manifests.check(self.root), [])
+
     def test_this_repository_and_the_business_example_pass(self) -> None:
         self.assertEqual(manifests.check(CORE), [])
-        self.assertEqual(manifests.check(CORE / "examples" / "business-harness"), [])
+        self.assertEqual(manifests.check(copy_business_example(self.root)), [])
 
 
     def test_an_error_points_at_the_line_of_its_field(self) -> None:
