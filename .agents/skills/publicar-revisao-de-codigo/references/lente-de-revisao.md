@@ -29,6 +29,31 @@ Perguntas que a revisão faz ao código, no próprio PR ou no de outra pessoa. E
 
 - Por que essa condição existe, como um modo especial de venda? O que ela é, e isso está na descrição do PR?
 - Qual estado visual ainda não foi mostrado: hover, foco, com e sem link, tema claro e escuro? Cada um pede evidência visual.
+- Quem revisa rodou a tela e testou, inclusive no celular, ou só leu o diff?
+- A mensagem de erro diz o que de fato falhou? Um campo errado mostra o erro desse campo, e não o de outro?
+
+## CSS antes de JavaScript
+
+- Esse JavaScript decide algo que o CSS resolve sozinho, como detectar celular ou computador, medir a janela ou alternar uma classe?
+- Uma media query, uma container query, `:has`, uma unidade de viewport dinâmica ou outra propriedade nativa faz o mesmo?
+- A propriedade nova do CSS já é validada nos navegadores que o projeto suporta? Se for, ela troca a lógica em JavaScript?
+
+## Rolagem, camadas e posição fixa
+
+- A mudança mexe em rolagem, em camada de fundo, em bloqueio da rolagem da página ou em posição fixa?
+- Qual evidência mostra isso no iPhone e no Android? Um vídeo curto da interação conta mais que um print.
+- Os outros pontos da tela que bloqueiam a rolagem continuam liberando quando fecham?
+- Há outra mudança em andamento mexendo no mesmo comportamento?
+
+## Complexidade e problema que volta
+
+- Isso é muito código para o que se resolveria de forma simples, num ponto só?
+- Esse mesmo problema já apareceu em outro lugar? Então vale registrar o débito técnico e revisitar a causa, em vez de acrescentar mais uma correção.
+
+## Teste ou código de outra área
+
+- A mudança mexe em teste de ponta a ponta ou em código que é de outro time?
+- O time dono foi marcado no PR e quem responde por aquela área aprovou, e não só quem abriu o PR?
 
 ## Tom
 
