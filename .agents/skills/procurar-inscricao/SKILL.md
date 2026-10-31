@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search
 compatibility: Precisa de internet. A busca semântica na lista de inscrições usa notion-ai-search no servidor notion.
 metadata:
   author: jimmyandrade
-  version: "0.10.0"
+  version: "0.10.1"
   aliases:
     - responder-inscricao
   related:
@@ -41,7 +41,18 @@ Leia cada inscrição encontrada. Os participantes são quem se inscreveu. Quem 
 
 Se houver mais de uma inscrição do mesmo evento, não responda sim. Diga que depende do que a pessoa chama de retirada. Para cada uma, mostre o nome, o status da inscrição, o participante, a data que estiver no registro e o link da página. A data é a data da confirmação. Se ela estiver vazia, use a data do envio. Não invente a data.
 
-Inscrição confirmada de quem apresenta não é retirada de ingresso. Pré-cadastro não é aprovação nem retirada. A aprovação não está no registro. Sugira `procurar-email` para achar a mensagem da organização sobre esse evento. Não busque e-mail nesta habilidade. Sugira também `acompanhar-edital`, que busca o resultado do edital na web, onde a organização publica. Oriente também a conferir os outros canais de contato com a organização. Um e-mail de ingresso disponível não aprova o pré-cadastro, a menos que a mensagem diga isso. Se a nota disser que a inscrição de uma pessoa foi um ingresso retirado, diga isso só dessa pessoa e oriente a conferir com a organização se a inscrição permanece válida. Não feche com sim para o evento. Não copie código, número do pedido, valor nem comprovante, a menos que a pessoa tenha pedido esse dado. Uma linha sem o evento no título nem na nota fica fora.
+Inscrição confirmada de quem apresenta não é retirada de ingresso.
+Pré-cadastro não é aprovação nem retirada.
+A aprovação não está no registro.
+Sugira `procurar-email` para achar a mensagem da organização sobre esse evento.
+Não busque e-mail nesta habilidade.
+Sugira também `acompanhar-edital`, que busca o resultado do edital na web, onde a organização publica.
+Oriente também a conferir os outros canais de contato com a organização.
+Um e-mail de ingresso disponível não aprova o pré-cadastro, a menos que a mensagem diga isso.
+Se a nota disser que a inscrição de uma pessoa foi um ingresso retirado, diga isso só dessa pessoa e oriente a conferir com a organização se a inscrição permanece válida.
+Não feche com sim para o evento.
+Não copie código, número do pedido, valor nem comprovante, a menos que a pessoa tenha pedido esse dado.
+Uma linha sem o evento no título nem na nota fica fora.
 
 ### Passo 5
 
