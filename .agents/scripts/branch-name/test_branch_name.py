@@ -1,0 +1,55 @@
+"""Tests for .github/scripts/branch-name.sh."""
+
+from __future__ import annotations
+
+import subprocess
+import unittest
+from pathlib import Path
+
+SCRIPT = Path(__file__).resolve().parents[3] / ".github" / "scripts" / "branch-name.sh"
+
+
+def check(branch: str) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(["bash", str(SCRIPT), branch], capture_output=True, text=True)
+
+
+class BranchNameTest(unittest.TestCase):
+    def assert_passes(self, branch: str) -> None:
+        out = check(branch)
+        self.assertEqual(out.returncode, 0, out.stdout + out.stderr)
+
+    def assert_agent_message(self, branch: str) -> None:
+        out = check(branch)
+        self.assertNotEqual(out.returncode, 0)
+        self.assertIn("coding agent", out.stdout)
+        self.assertIn("criar-pull-request", out.stdout)
+        self.assertIn("jimmyandrade/harness", out.stdout)
+
+    def test_type_and_description_pass(self) -> None:
+        self.assert_passes("ci/reject-duplicate-pull-requests")
+        self.assert_passes("fix/wait-for-v1.2")
+
+    def test_bot_branches_pass(self) -> None:
+        self.assert_passes("renovate/harness-1.x")
+        self.assert_passes("dependabot/npm_and_yarn/zod-4.6.7")
+        self.assert_passes("release-please--branches--main")
+
+    def test_agent_prefix_gets_the_agent_message(self) -> None:
+        for branch in (
+            "cursor/refactor-rename-lancamento-to-financeiro-ab78",
+            "claude/fix-the-check",
+            "copilot/fix-123",
+            "codex/add-a-check",
+        ):
+            with self.subTest(branch=branch):
+                self.assert_agent_message(branch)
+
+    def test_other_invalid_name_gets_the_usual_message(self) -> None:
+        out = check("my-branch")
+        self.assertNotEqual(out.returncode, 0)
+        self.assertIn("is not type/short-description", out.stdout)
+        self.assertNotIn("coding agent", out.stdout)
+
+
+if __name__ == "__main__":
+    unittest.main()
