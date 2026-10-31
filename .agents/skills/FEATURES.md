@@ -56,10 +56,12 @@ How these skills relate is in `README.md`, in this folder.
   - Skill at `.agents/skills/atualizar-branch-do-pull-request/`
   - Checks the pull request state first. A merged pull request gets no rebase and no push; the commits left out of the merge go to a new branch from the remote base branch
   - Updates with rebase on the remote base branch, never merges the base into the branch, and never creates a `merge:` commit
+  - Before replacing the published branch, follows `atender-revisao-de-pull-request` so open reviews, threads, and comments are handled, unless that skill is the caller. Code that came from the base and breaks a pattern the review asked for is fixed in the same pull request before the push
   - When a published branch was rewritten, the reply says the GitHub branch would be replaced by the new commits, the base branch stays as it is, and the replacement proceeds only if nobody pushed a new commit to that branch since the last fetch. It asks before replacing, unless the calling skill already authorizes it, and it does not name the git command in place of that explanation
 - **Test Criteria**:
   - [ ] A request to merge the base into the branch updates it with rebase instead
   - [ ] A branch whose pull request was merged gets no rebase and no push
+  - [ ] A rebase that brings base code against a pattern the review asked for fixes it in the same pull request
 
 ### avaliar-atualizacoes-de-dependencia
 - **Stability**: experimental
