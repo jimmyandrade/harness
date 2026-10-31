@@ -4,9 +4,12 @@ description: Procura na web o resultado do edital em que houve inscrição e a a
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   related:
     - procurar-inscricao
+    - procurar-oportunidade
+    - criar-oportunidade
+    - definir-grupo-de-oportunidades
     - definir-inscricao
     - procurar-email
     - definir-grafia
@@ -21,6 +24,10 @@ metadata:
 Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global`. Quando um valor não estiver lá, use o padrão abaixo.
 
 ```yaml
+# `Nome do data source de oportunidades` é o banco de oportunidades do workspace conectado. Vazio, a skill procura um.
+"Nome do data source de oportunidades": ""
+# `Ao achar o banco de oportunidades` é `propor`, que propõe gravar o nome achado, ou `registrar`, que grava e avisa.
+"Ao achar o banco de oportunidades": "propor"
 # `Domínios por organização` liga cada organização à lista de domínios onde ela publica resultados e editais.
 "Domínios por organização": {}
 # `Frequência da busca do resultado` vale enquanto o resultado não sai e o edital não dá a data dele.
@@ -40,11 +47,22 @@ Sem nome, acompanhe cada organização de `Domínios por organização` e, quand
 A situação da inscrição na lista se lê por `procurar-inscricao`.
 O nome buscado é o da pessoa ou empresa inscrita.
 Antes de buscar, siga `definir-grafia` e junte cada forma do nome: o artístico, o civil completo, com e sem acento, e a ordem com o sobrenome primeiro.
-Esta habilidade não grava no Notion.
+Esta habilidade não grava no Notion: a página da oportunidade muda pela skill dona dela.
+
+Com o Notion conectado, ache o banco de oportunidades.
+Com `Nome do data source de oportunidades` preenchido, procure o data source com esse nome no workspace conectado.
+Vazio, procure no workspace conectado um banco de oportunidades, editais ou chamadas.
+Um achado sem estar nos parâmetros: use-o e siga `Ao achar o banco de oportunidades`, no harness de negócio. Com `propor`, proponha gravar o nome nas instruções do projeto. Com `registrar`, grave e diga que gravou.
+Mais de um: pergunte uma vez qual. Nenhum, ou sem o Notion: siga só com `Domínios por organização`.
+Não use um banco de outro workspace.
 
 ### Passo 2
 
 Levante os domínios da organização antes da primeira busca.
+A oportunidade é a primeira referência: ache a edição ligada à inscrição, ou siga `procurar-oportunidade`, e leia cada propriedade de link da edição e do grupo dela, como a página original, o edital e o formulário.
+Sem o link original, busque na web a página oficial do edital.
+O link achado volta para a oportunidade pela skill dona: o desta edição, como o edital e o formulário, por `criar-oportunidade`; o que se repete em toda edição, como o site oficial, por `definir-grupo-de-oportunidades`.
+Depois complete com o que a oportunidade costuma não ter.
 A marca que a pessoa conhece costuma publicar no domínio de quem a mantém, como uma fundação, uma secretaria ou uma universidade.
 
 1. O domínio da própria organização.
@@ -54,7 +72,8 @@ A marca que a pessoa conhece costuma publicar no domínio de quem a mantém, com
 5. O domínio do remetente e dos links da confirmação da inscrição, quando a pessoa a tem; a busca na caixa segue `procurar-email`.
 
 Use o domínio registrável, sem `www` nem subdomínio, para o `site:` cobrir os subdomínios.
-Mostre cada domínio com a origem dele e grave a lista em `Domínios por organização`, na entrada da organização.
+Mostre cada domínio com a origem dele.
+O domínio que não tem propriedade na oportunidade, como o da mantenedora e o do diário oficial, vai para `Domínios por organização`, na entrada da organização.
 O nome da organização é a chave, e cada domínio é um item curto da lista.
 
 ### Passo 3
@@ -145,6 +164,7 @@ Gravei os domínios em `Domínios por organização` e segui `definir-rotina`: a
 ## Pegadinhas
 
 - A instituição que dá o curso nem sempre publica o resultado no próprio site: o documento sai no domínio da mantenedora.
+- O link da oportunidade parece cobrir tudo. Ele aponta para a organização ou para o formulário; o resultado pode sair na mantenedora ou no diário oficial.
 - O resultado pode nunca chegar por e-mail. A ausência de aviso não é resultado.
 - Listas oficiais usam o nome civil completo, em maiúsculas ou com o sobrenome primeiro. A busca só pelo nome artístico não o acha.
 - O edital seguinte abre perto do resultado do anterior e também não é avisado.
