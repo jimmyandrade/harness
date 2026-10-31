@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.38.0](https://github.com/jimmyandrade/harness/compare/v1.37.0...v1.38.0) (2026-10-31)
+
+
+### Features
+
+* **conversar-no-whatsapp:** watch for a reply after sending ([#719](https://github.com/jimmyandrade/harness/issues/719)) ([ba4e58b](https://github.com/jimmyandrade/harness/commit/ba4e58bd452470f1f6d296084e7b112d6f94cd88))
+* **fechar-pull-request:** close a pull request with a linked reason ([#722](https://github.com/jimmyandrade/harness/issues/722)) ([2d7cb60](https://github.com/jimmyandrade/harness/commit/2d7cb60b5d0c2ba0a6cf323cbb15160f15bc5ac6))
+* **mesclar-pull-request:** handle review comments left after the merge ([#707](https://github.com/jimmyandrade/harness/issues/707)) ([99319c7](https://github.com/jimmyandrade/harness/commit/99319c7a3ae238b65cbf05aa779bec5d2bc09e8d))
+
+
+### Bug Fixes
+
+* **ci:** ask a coding agent to check its instructions before adding the branch rule ([#708](https://github.com/jimmyandrade/harness/issues/708)) ([fa225c8](https://github.com/jimmyandrade/harness/commit/fa225c831c946f87c25ef1d5ef41b371a31d838e))
+* **conversar-no-whatsapp:** spell out the date in messages ([#718](https://github.com/jimmyandrade/harness/issues/718)) ([28462d7](https://github.com/jimmyandrade/harness/commit/28462d7bee3832763c55ad16353a475bfe20de3a))
+* **conversar-no-whatsapp:** write every date with the weekday ([#717](https://github.com/jimmyandrade/harness/issues/717)) ([2a05ad3](https://github.com/jimmyandrade/harness/commit/2a05ad3b44ad1c04577e5cbb75adc9547c3f9abf))
+* **criar-habilidade:** measure the existing skill before proposing a new one ([#714](https://github.com/jimmyandrade/harness/issues/714)) ([1308077](https://github.com/jimmyandrade/harness/commit/1308077f3446820ebf2e0b9f9d5b31868d190ee7))
+* **criar-pull-request,atualizar-branch-do-pull-request:** look for the same pull request before opening one ([#701](https://github.com/jimmyandrade/harness/issues/701)) ([91f2079](https://github.com/jimmyandrade/harness/commit/91f20799edca9ccf4975bec66da6a0d8bb832fe6))
+* **definir-artigo-da-base-de-conhecimento:** give the path for who lacks a tool yet ([#716](https://github.com/jimmyandrade/harness/issues/716)) ([6194450](https://github.com/jimmyandrade/harness/commit/6194450b3a8c2c78a22d2cbf61da81f80b8bb608))
+
 ## [1.37.0](https://github.com/jimmyandrade/harness/compare/v1.36.0...v1.37.0) (2026-10-31)
 
 
