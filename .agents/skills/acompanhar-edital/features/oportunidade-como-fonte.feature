@@ -24,7 +24,7 @@ Funcionalidade: A oportunidade como primeira fonte dos domínios
     Esquema do Cenário: Banco achado sem estar nos parâmetros
       Dado que `Nome do data source de oportunidades` está vazio
       E que a busca no workspace conectado acha um banco de oportunidades só
-      E que `Ao achar o banco de oportunidades` está em `<modo>`
+      E que `Ao achar um banco` está em `<modo>`
       Quando a skill termina de levantar os domínios
       Então ela <ação> o nome do banco nas instruções do projeto
 
