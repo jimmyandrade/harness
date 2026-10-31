@@ -16,3 +16,11 @@ Funcionalidade: Fechar um PR com justificativa
       Quando não há link que comprove o motivo
       Então o PR continua aberto
       E a resposta pergunta o motivo
+
+  Regra: O PR substituído aponta para o substituto num alerta
+
+    Exemplo: PR substituído por outro
+      Dado que um PR novo substitui este PR
+      Quando o PR é fechado
+      Então o comentário de fechamento abre com um alerta `> [!IMPORTANT]`
+      E o alerta leva o link do PR novo

@@ -3,7 +3,7 @@ name: publicar-resposta-de-revisao
 description: Publica a resposta a uma revisão recebida, de pessoa ou de bot, de preferência num comentário inline. Marca o login e, com a leitura antes de publicar desligada, publica sem pedir confirmação. NÃO serve para aplicar a sugestão no código nem para revisar o PR de outra pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   related:
     - atender-revisao-de-pull-request
     - escrever-link
@@ -82,6 +82,8 @@ Nunca diga que reanalisou, que usou ferramenta nem quantas vezes: o método fica
 Só feche com confiança alta, relendo o trecho no commit atual, mais de uma vez quando for ambíguo.
 Com confiança menor, deixe aberta e pergunte.
 Uma thread que espera decisão da pessoa, ou que foi aplicada de outro jeito, fica aberta.
+Quando este PR aplicou a parte dele e o resto virou issue ou PR à parte, com o link na resposta, resolva: o resto segue na issue, e não na thread.
+Antes de deixar uma thread aberta, leia se a branch base exige conversas resolvidas para mesclar; com essa regra, diga na resposta e no resumo que a thread bloqueia o merge.
 
 ### Passo 4
 
@@ -180,6 +182,7 @@ A revisão só tinha corpo. A resposta saiu num comentário inline na linha que 
 - Uma resposta parece só um comentário, e falha com 422 quando a pessoa tem revisão pendente no PR.
 - A resposta de uma thread vai como réplica do primeiro comentário. Sem thread, a resposta preferida é um comentário inline numa revisão sua, no trecho que a decisão muda. Um comentário novo na conversa não fica na thread.
 - Aprovar o PR não resolve as threads dele.
+- Deixar aberta a thread cujo resto foi para uma issue parece guardar o lembrete. A issue já guarda, e a thread aberta pode bloquear o merge.
 - O primeiro nome parece marcar a pessoa. Só `@` mais o login do GitHub que está na revisão avisa.
 - Resposta com apóstrofo quebra `-f body='...'` no shell. Grave a resposta num arquivo e envie com `-F body=@<arquivo>`.
 - `Ler o texto antes de publicar` em `não` parece ainda pedir o sim. Publique e devolva o link. Um ajuste pedido depois também sai na hora.
