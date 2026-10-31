@@ -3,7 +3,7 @@ name: criar-pull-request
 description: Use essa habilidade sempre que for abrir ou atualizar PR, subir uma correção ou mandar para a branch principal, mesmo sem dizer PR. NÃO use para mesclar (use mesclar-pull-request), responder comentário de revisão nem para só commitar (use criar-commit).
 metadata:
   author: jimmyandrade
-  version: "0.41.6"
+  version: "0.42.0"
   related:
     - atualizar-branch-do-pull-request
     - criar-commit
@@ -75,7 +75,7 @@ O tipo é o do Conventional Commits do commit principal: `feat`, `fix`, `docs`, 
 A descrição é ASCII em kebab-case.
 Branch com outro prefixo, como `claude/` ou `cursor/`, que a ferramenta criou, é renomeada antes do push.
 Não abra PR de branch fora desse padrão.
-Se ela já tem PR aberto, renomear no GitHub fecha esse PR: abra um PR novo da branch renomeada, com o mesmo título e corpo, e comente no antigo o link do novo.
+Se ela já tem PR aberto, siga `atualizar-branch-do-pull-request`.
 
 ### Passo 2
 
@@ -107,6 +107,8 @@ Antes de abrir, procure cada termo de `Termos que não podem aparecer` nos arqui
 A busca e a lista de rótulos estão em `Scripts disponíveis`.
 Um achado fora do endereço volta para correção e o PR não abre. Run, job, pull request e commit citados levam o endereço `https://`, mesmo com termo da lista no caminho.
 
+Antes de abrir, procure PR aberto com o mesmo título ou o mesmo commit, de qualquer branch, inclusive o de outro agente.
+Se existir, atualize esse PR e não abra outro.
 Abra o PR contra a `Branch base` no `Repositório`.
 Título e corpo em `Idioma do PR`: leia o valor nos parâmetros antes de escrever. O idioma das respostas, da issue ou das instruções não decide o do PR, nem quem propõe a mudança.
 O título começa igual ao assunto do commit. Se o assunto saiu noutro idioma, corrija o commit antes do push.
@@ -252,10 +254,10 @@ O pedido autoriza push e merge. O push espera o hook de pre-push. Com o PR abert
 
 ## Casos-limite
 
-- Já existe PR aberto para a branch: não abra outro. Depois do push, confira título e descrição uma vez, atualize o que deixou de contar o que a branch faz, renomeie a sessão de conversa com a IA se o nome dela não seguir o Passo 7, e dê o link.
+- Já existe PR aberto para a branch, o título ou o commit: não abra outro. Depois do push, confira título e descrição uma vez, atualize o que deixou de contar o que a branch faz, renomeie a sessão de conversa com a IA se o nome dela não seguir o Passo 7, e dê o link.
 - O PR da branch já foi mesclado: siga `atualizar-branch-do-pull-request`, que não dá rebase nem push nessa branch.
 - A branch atual tem trabalho de outra tarefa: comece a nova branch da `Branch base` remota, não da branch atual.
-- A ferramenta criou a branch com outro prefixo, como `claude/…`: renomeie para `<tipo>/<descrição>` antes do push. Com PR aberto, a renomeação fecha o PR: abra outro e ligue os dois.
+- A ferramenta criou a branch com outro prefixo, como `claude/…`: renomeie para `<tipo>/<descrição>` antes do push. Com PR aberto, siga `atualizar-branch-do-pull-request`.
 - O teste novo passa também sem a correção: o teste não cobre o bug. Reescreva antes do commit.
 - A pessoa pede para não commitar: pare antes do Passo 3.
 - A pessoa pede para subir direto na `Branch base`: não suba. Abra o PR e explique a regra.
@@ -280,7 +282,7 @@ O pedido autoriza push e merge. O push espera o hook de pre-push. Com o PR abert
 - `Comando de testes` e `Comando de build`: verificações do Passo 2.
 - `git fetch origin && git switch --no-track -c <branch> origin/<Branch base>`: Passo 1.
 - `git branch -m <tipo>/<descrição>`: renomeia a branch local no Passo 1.
-- `gh api -X POST repos/<Repositório>/branches/<branch>/rename -f new_name=<tipo>/<descrição>`: Passo 1. Fecha o PR. Abra outro depois.
+- `gh pr list --repo <Repositório> --state open --search "<título> in:title" --json number,headRefName,headRefOid`: PR que já existe, no Passo 6.
 - `GIT_TERMINAL_PROMPT=0 git -c credential.helper= -c 'credential.helper=!gh auth git-credential' ls-remote origin HEAD`: teste de acesso do Passo 5.
 - `GIT_TERMINAL_PROMPT=0 git -c credential.helper= -c 'credential.helper=!gh auth git-credential' push -u origin <branch>`: push do Passo 5. O hook de pre-push roda.
 - `LEFTHOOK=0 GIT_TERMINAL_PROMPT=0 git -c credential.helper= -c 'credential.helper=!gh auth git-credential' push -u origin <branch>`: só com `Pular o hook de pre-push` em `sim`.

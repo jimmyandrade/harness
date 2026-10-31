@@ -56,6 +56,7 @@ How these skills relate is in `README.md`, in this folder.
   - Skill at `.agents/skills/atualizar-branch-do-pull-request/`
   - Checks the pull request state first. A merged pull request gets no rebase and no push; the commits left out of the merge go to a new branch from the remote base branch
   - Updates with rebase on the remote base branch, never merges the base into the branch, and never creates a `merge:` commit
+  - Renaming the branch of an open pull request closes it, so a new pull request opens from the renamed branch with the same title and body, and the old one is closed with a comment that links the new one
   - Before replacing the published branch, follows `atender-revisao-de-pull-request` so open reviews, threads, and comments are handled, unless that skill is the caller. Code that came from the base and breaks a pattern the review asked for is fixed in the same pull request before the push
   - When a published branch was rewritten, the reply says the GitHub branch would be replaced by the new commits, the base branch stays as it is, and the replacement proceeds only if nobody pushed a new commit to that branch since the last fetch. It asks before replacing, unless the calling skill already authorizes it, and it does not name the git command in place of that explanation
 - **Test Criteria**:
@@ -214,6 +215,7 @@ How these skills relate is in `README.md`, in this folder.
   - Follows the `CONTRIBUTING.md` and `AGENTS.md` of the repository for branch, title, description, and checks, ahead of the personal preference
   - Searches the new and changed files and the pull request text for each term of `Termos que não podem aparecer` before opening, and sends a hit back for a fix
   - Opens a pull request only from a `type/short-description` branch, and renames a branch a tool created with another prefix before the push. A rename after the pull request opens closes it, so a new pull request replaces it
+  - Before opening, looks for an open pull request with the same title or the same commit, from any branch, including one another agent opened, and updates it instead of opening a duplicate
   - Follows the pull request template of the repository when there is one
   - After the push, once, compares the title and the description with the code that went up, and updates whichever no longer says what the branch does, before answering. Several commits in the same push are one check. Another skill that pushed does the same check, still once
   - Without a terminal, opens the pull request through the GitHub integration, gives the link, and stops; the CI checks of the pull request do the testing
