@@ -3,7 +3,7 @@ name: criar-commit
 description: Use essa habilidade sempre que terminar um trabalho que mudou o repositório ou for commitar, separar commits ou escrever a mensagem, mesmo sem dizer commit. NÃO use para push, abrir PR, rebase nem merge (use criar-pull-request).
 metadata:
   author: jimmyandrade
-  version: "0.23.2"
+  version: "0.23.3"
 ---
 
 # Criar commit
@@ -107,7 +107,7 @@ Com `Criar pull request ao terminar` em `rascunho`, o padrão, a mudança de có
 Com `sim`, o pull request abre pronto.
 Com `não`, sem pedido de publicação, siga `criar-pull-request` até o passo que exige o pedido e diga que o pull request não está aberto.
 A conferência do título e da descrição fica com `criar-pull-request`: uma vez, depois do push, antes de responder. Não a cada commit.
-O merge segue `mesclar-pull-request`.
+O merge segue `encerrar-pull-request`.
 Não escreva que a habilidade ficou para este pedido, nem para depois.
 
 ### Passo 8

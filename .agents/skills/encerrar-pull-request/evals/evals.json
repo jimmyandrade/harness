@@ -1,0 +1,11 @@
+{
+  "skill_name": "encerrar-pull-request",
+  "evals": [
+    {
+      "id": "pr-duplicado-fechado-com-justificativa",
+      "prompt": "Sim, feche. Mas sempre que fechar um PR garanta que ele está sendo fechado com uma justificativa e que há links/referências na justificativa que corroboram o porquê de ter sido fechado",
+      "expected_output": "O agente fecha o PR que repete outro já mesclado com um comentário que diz o motivo na primeira linha e leva o link do PR mesclado, do commit na base e da pasta na base. Ele compara cada arquivo do PR com a base e diz que 9 de 11 são iguais e que os outros dois só diferem por entradas de PRs mesclados depois, com os links. A branch é apagada e a resposta traz o link do PR fechado e do comentário.",
+      "files": []
+    }
+  ]
+}

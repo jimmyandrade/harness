@@ -3,12 +3,12 @@ name: avaliar-atualizacoes-de-dependencia
 description: Use essa habilidade sempre que houver PR de atualização de dependência do Dependabot ou do Renovate para avaliar, testar ou mesclar, mesmo sem dizer o nome do bot. NÃO use para atualizar uma dependência à mão nem para PR que não seja de bot.
 metadata:
   author: jimmyandrade
-  version: "0.9.5"
+  version: "0.9.6"
   related:
     - evoluir-habilidade
     - criar-commit
     - criar-pull-request
-    - mesclar-pull-request
+    - encerrar-pull-request
     - atender-revisao-de-pull-request
 ---
 
@@ -70,7 +70,7 @@ Peça revisão aos `Revisores`. Sem revisores, comente no PR a análise: a cadei
 ```mermaid
 flowchart LR
   A{PR tem comentário?} -->|sim| B[Siga atender-revisao-de-pull-request]
-  B --> C[mesclar-pull-request]
+  B --> C[encerrar-pull-request]
   A -->|não| C
   C --> D{Checks do commit de merge na base}
   D -->|verde| E[Próximo PR da fila]

@@ -1,16 +1,16 @@
 ---
 name: criar-pull-request
-description: Use essa habilidade sempre que for abrir ou atualizar PR, subir uma correção ou mandar para a branch principal, mesmo sem dizer PR. NÃO use para mesclar (use mesclar-pull-request), responder comentário de revisão nem para só commitar (use criar-commit).
+description: Use essa habilidade sempre que for abrir ou atualizar PR, subir uma correção ou mandar para a branch principal, mesmo sem dizer PR. NÃO use para mesclar (use encerrar-pull-request), responder comentário de revisão nem para só commitar (use criar-commit).
 metadata:
   author: jimmyandrade
-  version: "0.42.0"
+  version: "0.42.1"
   related:
     - atualizar-branch-do-pull-request
     - criar-commit
     - escrever-link
     - evoluir-habilidade
     - fatiar-pull-request
-    - mesclar-pull-request
+    - encerrar-pull-request
     - registrar-evidencia-visual
     - registrar-resultados-da-validacao-na-tarefa
     - sincronizar-status-da-tarefa
@@ -95,7 +95,7 @@ Com `Criar pull request ao terminar` em `rascunho`, o padrão, a mudança de có
 Com `sim`, o push e o pull request pronto.
 Com `não`, só publique com pedido explícito.
 Pedir "faça o PR", "sobe isso" ou "coloca na main" autoriza o push da branch, nunca da `Branch base`.
-"coloca na main" também pede o merge, que segue `mesclar-pull-request` depois do PR aberto.
+"coloca na main" também pede o merge, que segue `encerrar-pull-request` depois do PR aberto.
 O parâmetro não mescla.
 Se `Duração do hook de pre-push (min)` for maior que zero, avise antes quanto o hook leva, para a pessoa não achar que travou.
 Com `Pular o hook de pre-push` em `não`, o push espera o hook. Com `sim`, e o commit já passou no Passo 2, publique sem o hook e diga isso. A checagem de skill continua no pre-commit. Deixe o hook rodar em segundo plano, com `Timeout do push (ms)`.
@@ -156,7 +156,7 @@ Com `Habilidade que pede a revisão` preenchida e o PR fora do rascunho, e com a
 
 ### Passo 8
 
-Com pedido de merge, siga `mesclar-pull-request` para o PR aberto. Sem pedido, entregue o link e pare.
+Com pedido de merge, siga `encerrar-pull-request` para o PR aberto. Sem pedido, entregue o link e pare.
 
 ### Passo 9
 
@@ -250,7 +250,7 @@ O push levou vários commits. Conferi o título e a descrição uma vez, depois 
 
 ### Só coloca isso na main
 
-O pedido autoriza push e merge. O push espera o hook de pre-push. Com o PR aberto, o merge segue `mesclar-pull-request`.
+O pedido autoriza push e merge. O push espera o hook de pre-push. Com o PR aberto, o merge segue `encerrar-pull-request`.
 
 ## Casos-limite
 

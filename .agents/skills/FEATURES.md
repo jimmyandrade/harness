@@ -207,7 +207,7 @@ How these skills relate is in `README.md`, in this folder.
 
 ### criar-pull-request
 - **Stability**: experimental
-- **Description**: Open and update a pull request without pushing to the base branch, and hand the merge to mesclar-pull-request
+- **Description**: Open and update a pull request without pushing to the base branch, and hand the merge to encerrar-pull-request
 - **Properties**:
   - Before creating the branch, checks that the demand has a task in the tracker of the project, and suggests creating it first when it has none. The task key goes in the branch name and the pull request title as the repository convention says
   - Skill at `.agents/skills/criar-pull-request/`
@@ -225,7 +225,7 @@ How these skills relate is in `README.md`, in this folder.
   - The label follows the commit type, not the file extension. `fix` uses the bug label. `docs` uses the documentation label. A Markdown file that corrects an error gets the bug label
   - Writes each step sentence on its own line, and keeps a command in Scripts disponíveis
   - At the end, follows `sincronizar-status-da-tarefa`
-  - A merge request goes to mesclar-pull-request once the pull request is open
+  - A merge request goes to encerrar-pull-request once the pull request is open
   - When the change was validated outside the checks of the pull request and the task has no record of it, follows `registrar-resultados-da-validacao-na-tarefa` before taking the pull request out of draft, and the pull request stays a draft without it
   - With the preview of the pull request published, puts its address in the pull request description and on the task
 - **Test Criteria**:
@@ -938,6 +938,30 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses writing or approving brand text, classifying a phrase, and inventing a term
 
+### encerrar-pull-request
+- **Stability**: experimental
+- **Description**: End a pull request, by merging it or by closing it without a merge with a linked reason, and do what comes after, also when the person says they merged. Renamed from mesclar-pull-request, kept as an alias
+- **Properties**:
+  - Lives at `.agents/skills/encerrar-pull-request/SKILL.md`
+  - Merges only on an explicit request, and never in the request that opened the pull request without a terminal
+  - `Exigir aprovação de outra pessoa` is `nunca`, `só sem terminal`, the default, or `sempre`. It holds the merge until another person approves; a green check or owning the repository does not replace that approval
+  - Hands pending review comments from people or bots to atender-revisao-de-pull-request, and holds the merge while a thread waits for the person
+  - `Exigir CI verde`, on by default, holds the merge while a check fails or is pending; off, it merges and reports the checks that did not pass
+  - Merges with `Tipo de merge` and deletes the branch. When the automatic mode denies the merge, it hands over the command and stops
+  - After the merge, or the person's notice of it, confirms MERGED and the hash and, in the same reply, syncs every linked task through sincronizar-status-da-tarefa, checks the sync with another tool, announces through comunicar-novidade-do-produto when `Comunicar novidade após o merge` is on, and cleans the working copy through limpar-copias-de-trabalho
+  - After the merge, reads the review comments nobody handled, including a pending review that only its author sees. On the person's own pull request, opens a new one from the base with the fixes; on someone else's, asks the person to pick one action per comment (resolve it, reply asking what was done, open an issue, or open a pull request) through the client's question screen, or a numbered list without one
+  - Closes without a merge only on the person's request or when another skill closes a pull request, such as atualizar-branch-do-pull-request on a branch rename and atender-revisao-de-pull-request when it recreates one
+  - Before closing, finds a link for every fact of the comment, compares each file with the base when it says nothing is lost, and keeps the pull request open and asks when a fact has no proof. The comment opens with the reason, lists one linked fact per item, and ends with what happens to the branch
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [ ] A merge request on a pull request with an unresolved thread handles the review comments first
+  - [ ] A merge request with a failing check stops and names the check while `Exigir CI verde` is on
+  - [ ] A merged pull request of the person with a pending review comment gets a new pull request with the fix
+  - [ ] A merged pull request of someone else with an unhandled comment gets a question per comment before any action
+  - [ ] A notice that a pull request was merged moves the linked task to its merged status in the same reply
+  - [x] A pull request that repeats a merged one closes with a comment that links the merged pull request and its commit on the base
+  - [ ] A request to close without a reason or a link keeps the pull request open and asks for the reason
+
 ### gravar-termos-no-vocabulario
 - **Stability**: experimental
 - **Description**: Search, test, and write voice-vocabulary terms
@@ -1168,26 +1192,6 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses Notion, opening the repository from Notion, testing whether the skill met the case, evolving the skill, and writing the eval
   - [x] A limit missing from the project comes from the harness that ships the skill, and a limit in the project wins
-
-### mesclar-pull-request
-- **Stability**: experimental
-- **Description**: Merge an open pull request and do what comes after the merge, also when the person says they merged
-- **Properties**:
-  - Lives at `.agents/skills/mesclar-pull-request/SKILL.md`
-  - Merges only on an explicit request, and never in the request that opened the pull request without a terminal
-  - `Exigir aprovação de outra pessoa` is `nunca`, `só sem terminal`, the default, or `sempre`. It holds the merge until another person approves; a green check or owning the repository does not replace that approval
-  - Hands pending review comments from people or bots to atender-revisao-de-pull-request, and holds the merge while a thread waits for the person
-  - `Exigir CI verde`, on by default, holds the merge while a check fails or is pending; off, it merges and reports the checks that did not pass
-  - Merges with `Tipo de merge` and deletes the branch. When the automatic mode denies the merge, it hands over the command and stops
-  - After the merge, or the person's notice of it, confirms MERGED and the hash and, in the same reply, syncs every linked task through sincronizar-status-da-tarefa, checks the sync with another tool, announces through comunicar-novidade-do-produto when `Comunicar novidade após o merge` is on, and cleans the working copy through limpar-copias-de-trabalho
-  - After the merge, reads the review comments nobody handled, including a pending review that only its author sees. On the person's own pull request, opens a new one from the base with the fixes; on someone else's, asks the person to pick one action per comment (resolve it, reply asking what was done, open an issue, or open a pull request) through the client's question screen, or a numbered list without one
-- **Test Criteria**:
-  - [x] The skill is present at that path
-  - [ ] A merge request on a pull request with an unresolved thread handles the review comments first
-  - [ ] A merge request with a failing check stops and names the check while `Exigir CI verde` is on
-  - [ ] A merged pull request of the person with a pending review comment gets a new pull request with the fix
-  - [ ] A merged pull request of someone else with an unhandled comment gets a question per comment before any action
-  - [ ] A notice that a pull request was merged moves the linked task to its merged status in the same reply
 
 ### mesclar-registro
 - **Stability**: experimental

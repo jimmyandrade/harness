@@ -3,7 +3,7 @@ name: atender-revisao-de-pull-request
 description: Atende a revisão recebida num pull request, de pessoa ou de bot. Lê os comentários abertos, classifica cada sugestão, aplica o que é seguro e pede a resposta a `publicar-resposta-de-revisao`. Sem PR informado, lista os seus que precisam de atenção. Não serve para revisar o PR de outra pessoa nem para abrir o PR.
 metadata:
   author: jimmyandrade
-  version: "0.26.2"
+  version: "0.27.0"
   aliases:
     - resolver-comentarios-de-revisao
     - apply-pr-review
@@ -17,7 +17,7 @@ metadata:
     - fatiar-pull-request
     - levantar-ambiente-do-repositorio
     - levantar-contexto-do-pull-request
-    - mesclar-pull-request
+    - encerrar-pull-request
     - preparar-tarefa-do-pull-request
     - priorizar-itens
     - publicar-resposta-de-revisao
@@ -59,7 +59,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 Peça o número ou o link do pull request. Sem PR informado, liste os PRs abertos da pessoa que têm mudanças pedidas, comentários abertos ou checks falhando, e peça qual tratar. Em modo agendado, trate um por vez, na ordem.
 
-Confira que o PR está aberto e é da pessoa. Não faça push no PR de outra pessoa, nem no de um fork, sem pedido explícito dela, naquele PR. Com `Recriar PR aberto por agente de código` em `sim`, um PR aberto por um agente de código a pedido da pessoa é recriado com ela como autora, com link para o antigo, e o antigo é fechado com um comentário curto. As threads abertas do PR antigo entram na lista, são aplicadas no PR novo, e a resposta de cada uma é publicada no antigo, apontando o commit do novo. Peça a confirmação antes.
+Confira que o PR está aberto e é da pessoa. Não faça push no PR de outra pessoa, nem no de um fork, sem pedido explícito dela, naquele PR. Com `Recriar PR aberto por agente de código` em `sim`, um PR aberto por um agente de código a pedido da pessoa é recriado com ela como autora, com link para o antigo, e o antigo é fechado por `encerrar-pull-request`, com o link do novo como prova. As threads abertas do PR antigo entram na lista, são aplicadas no PR novo, e a resposta de cada uma é publicada no antigo, apontando o commit do novo. Peça a confirmação antes.
 
 Chame `levantar-contexto-do-pull-request` e use a ficha: o estado, as convenções do repositório, o card e todos os comentários, com o estado de cada thread, o corpo de cada revisão, inclusive o resumo que um bot publica, e os comentários da conversa do PR. Aviso de bot que só informa, como link de preview ou nota de release, fica lido e sem ação.
 
@@ -240,7 +240,7 @@ Achei cinco comentários abertos. Dois eram estruturais, um nome e um texto, e a
 - Dois bots apontam o mesmo problema: uma correção, uma resposta em cada thread.
 - A resposta, a marcação e a resolução seguem `publicar-resposta-de-revisao`.
 - Um push novo faz o bot revisar de novo: leia as threads novas antes do merge.
-- Um bot comenta por causa de um check que falhou: trate como os outros. A decisão de mesclar com check falhando fica com `mesclar-pull-request`.
+- Um bot comenta por causa de um check que falhou: trate como os outros. A decisão de mesclar com check falhando fica com `encerrar-pull-request`.
 - Sem PR informado e sem nenhum PR da pessoa precisando de ação: diga isso e pare.
 - Execução agendada: siga `Aplicar em execução agendada` e deixe o resto no resumo, sem responder.
 - A branch está atrás da base, com ou sem conflito: atualize com rebase, resolva o conflito e substitua a branch publicada, como `atualizar-branch-do-pull-request` manda, sem avisar e sem pedir. Se há pull requests empilhados em cima, atualize essas branches na mesma cópia, na ordem, para cada diff continuar só com os arquivos daquela pergunta. A branch aberta no clone da pessoa não é reescrita lá.

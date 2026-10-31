@@ -4,13 +4,13 @@ description: Sincroniza o status de tarefas, cards ou issues com o estado do pul
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.7.1"
+  version: "0.7.2"
   related:
     - criar-commit
     - criar-pull-request
     - evoluir-habilidade
     - levantar-contexto-do-pull-request
-    - mesclar-pull-request
+    - encerrar-pull-request
 ---
 
 # Sincronizar status da tarefa
@@ -43,7 +43,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 Obtenha as tarefas pela `Consulta das tarefas`, ou pela lista ou pelos links que a pessoa passou.
 Quando a habilidade roda por um commit ou por uma mudança de pull request, parta desse pull request e busque as tarefas abertas.
 Toda mudança de estado de um pull request que o turno faz, ou que a pessoa ou o aplicativo avisam, roda esta habilidade na mesma resposta, antes de responder.
-Isso vale também quando o PR foi aberto, tirado do rascunho ou mesclado pelo `gh` direto, sem passar por `criar-pull-request` nem por `mesclar-pull-request`.
+Isso vale também quando o PR foi aberto, tirado do rascunho ou mesclado pelo `gh` direto, sem passar por `criar-pull-request` nem por `encerrar-pull-request`.
 Sem consulta e sem lista, pergunte e pare. Resultado grande que vem em arquivo é lido pelos campos chave, status e título, depois de conferir o formato do arquivo. Anote o status de cada tarefa como o rastreador devolveu.
 
 ### Passo 2

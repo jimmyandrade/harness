@@ -65,6 +65,7 @@ flowchart LR
     definir_vocabulario["definir-vocabulario"]
     descrever_habilidade_ou_schema["descrever-habilidade-ou-schema"]
     emitir_documento_oficial["emitir-documento-oficial"]
+    encerrar_pull_request["encerrar-pull-request"]
     enviar_mensagem_no_slack["enviar-mensagem-no-slack"]
     escrever_codigo["escrever-codigo"]
     escrever_link["escrever-link"]
@@ -84,7 +85,6 @@ flowchart LR
     liberar_espaco_em_disco["liberar-espaco-em-disco"]
     limpar_copias_de_trabalho["limpar-copias-de-trabalho"]
     medir_habilidade["medir-habilidade"]
-    mesclar_pull_request["mesclar-pull-request"]
     mesclar_registro["mesclar-registro"]
     organizar_emails["organizar-emails"]
     organizar_ponto_de_contato["organizar-ponto-de-contato"]
@@ -133,13 +133,13 @@ flowchart LR
   atender_revisao_de_pull_request --> atualizar_branch_do_pull_request
   atender_revisao_de_pull_request --> criar_commit
   atender_revisao_de_pull_request --> criar_pull_request
+  atender_revisao_de_pull_request --> encerrar_pull_request
   atender_revisao_de_pull_request --> escrever_link
   atender_revisao_de_pull_request --> escrever_teste
   atender_revisao_de_pull_request --> evoluir_habilidade
   atender_revisao_de_pull_request --> fatiar_pull_request
   atender_revisao_de_pull_request --> levantar_ambiente_do_repositorio
   atender_revisao_de_pull_request --> levantar_contexto_do_pull_request
-  atender_revisao_de_pull_request --> mesclar_pull_request
   atender_revisao_de_pull_request --> preparar_tarefa_do_pull_request
   atender_revisao_de_pull_request --> priorizar_itens
   atender_revisao_de_pull_request --> publicar_resposta_de_revisao
@@ -147,13 +147,14 @@ flowchart LR
   atender_revisao_de_pull_request --> registrar_evidencia_visual
   atualizar_branch_do_pull_request --> atender_revisao_de_pull_request
   atualizar_branch_do_pull_request --> criar_pull_request
+  atualizar_branch_do_pull_request --> encerrar_pull_request
   atualizar_branch_do_pull_request --> evoluir_habilidade
   atualizar_cadastro_fiscal --> evoluir_habilidade
   avaliar_atualizacoes_de_dependencia --> atender_revisao_de_pull_request
   avaliar_atualizacoes_de_dependencia --> criar_commit
   avaliar_atualizacoes_de_dependencia --> criar_pull_request
+  avaliar_atualizacoes_de_dependencia --> encerrar_pull_request
   avaliar_atualizacoes_de_dependencia --> evoluir_habilidade
-  avaliar_atualizacoes_de_dependencia --> mesclar_pull_request
   classificar_estado_do_termo --> definir_vocabulario
   classificar_estado_do_termo --> gravar_termos_no_vocabulario
   classificar_estado_do_termo --> validar_plano_de_vocabulario
@@ -171,9 +172,9 @@ flowchart LR
   conversar_no_whatsapp --> redigir_com_tom_de_voz
   criar_commit -.-> atualizar_branch_do_pull_request
   criar_commit -.-> criar_pull_request
+  criar_commit -.-> encerrar_pull_request
   criar_commit -.-> evoluir_habilidade
   criar_commit -.-> fatiar_pull_request
-  criar_commit -.-> mesclar_pull_request
   criar_commit -.-> sincronizar_status_da_tarefa
   criar_copia_de_trabalho --> criar_commit
   criar_copia_de_trabalho --> criar_habilidade
@@ -190,10 +191,10 @@ flowchart LR
   criar_oportunidade --> procurar_oportunidade
   criar_pull_request --> atualizar_branch_do_pull_request
   criar_pull_request --> criar_commit
+  criar_pull_request --> encerrar_pull_request
   criar_pull_request --> escrever_link
   criar_pull_request --> evoluir_habilidade
   criar_pull_request --> fatiar_pull_request
-  criar_pull_request --> mesclar_pull_request
   criar_pull_request --> registrar_evidencia_visual
   criar_pull_request --> registrar_resultados_da_validacao_na_tarefa
   criar_pull_request --> sincronizar_status_da_tarefa
@@ -348,6 +349,15 @@ flowchart LR
   descrever_habilidade_ou_schema --> evoluir_habilidade
   descrever_habilidade_ou_schema --> revisar_habilidade
   emitir_documento_oficial --> evoluir_habilidade
+  encerrar_pull_request --> atender_revisao_de_pull_request
+  encerrar_pull_request --> atualizar_branch_do_pull_request
+  encerrar_pull_request --> comunicar_novidade_do_produto
+  encerrar_pull_request --> criar_pull_request
+  encerrar_pull_request --> definir_issue_do_github
+  encerrar_pull_request --> evoluir_habilidade
+  encerrar_pull_request --> fatiar_pull_request
+  encerrar_pull_request --> limpar_copias_de_trabalho
+  encerrar_pull_request --> sincronizar_status_da_tarefa
   enviar_mensagem_no_slack --> definir_agenda
   enviar_mensagem_no_slack --> definir_pessoa
   enviar_mensagem_no_slack --> definir_vocabulario
@@ -434,14 +444,6 @@ flowchart LR
   limpar_copias_de_trabalho --> evoluir_habilidade
   limpar_copias_de_trabalho --> liberar_espaco_em_disco
   medir_habilidade --> evoluir_habilidade
-  mesclar_pull_request --> atender_revisao_de_pull_request
-  mesclar_pull_request --> atualizar_branch_do_pull_request
-  mesclar_pull_request --> comunicar_novidade_do_produto
-  mesclar_pull_request --> criar_pull_request
-  mesclar_pull_request --> definir_issue_do_github
-  mesclar_pull_request --> evoluir_habilidade
-  mesclar_pull_request --> limpar_copias_de_trabalho
-  mesclar_pull_request --> sincronizar_status_da_tarefa
   mesclar_registro --> definir_empresa
   mesclar_registro --> definir_grafia
   mesclar_registro --> definir_perfil_social
@@ -554,9 +556,9 @@ flowchart LR
   sincronizar_cronograma --> procurar_agenda
   sincronizar_status_da_tarefa --> criar_commit
   sincronizar_status_da_tarefa --> criar_pull_request
+  sincronizar_status_da_tarefa --> encerrar_pull_request
   sincronizar_status_da_tarefa --> evoluir_habilidade
   sincronizar_status_da_tarefa --> levantar_contexto_do_pull_request
-  sincronizar_status_da_tarefa --> mesclar_pull_request
   testar_ponta_a_ponta --> definir_issue_do_github
   testar_ponta_a_ponta --> escrever_teste
   testar_ponta_a_ponta --> evoluir_habilidade
