@@ -52,7 +52,8 @@ From the root, run the checker and the tests.
 ```bash
 .agents/scripts/check-skill/run-check.sh
 npm ci
+npx tsc --noEmit
 npm test
 ```
 
-Check: both commands exit 0.
+Check: every command exits 0.
