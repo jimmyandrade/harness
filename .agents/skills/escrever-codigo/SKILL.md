@@ -3,7 +3,7 @@ name: escrever-codigo
 description: Aplica as preferências de código da pessoa antes de escrever ou alterar código, como comentários, estilo inline e o que fazer antes de criar um componente. Usada quando uma mudança vai escrever ou alterar código, inclusive quando o pedido é implementar uma issue. Não serve para testes, para commit nem para decidir a arquitetura. O pedido de implementar só termina quando a resposta tem o link do pull request.
 metadata:
   author: jimmyandrade
-  version: "0.9.0"
+  version: "0.10.0"
   related:
     - criar-commit
     - criar-pull-request
@@ -40,7 +40,7 @@ Chame `levantar-ambiente-do-repositorio` para achar a convenção de código e a
 
 ### Passo 2
 
-Siga `Comentários no código`. Com um valor vazio, não comente o que o código já diz. Escreva os comentários no `Idioma dos comentários`. Uma diretiva para uma ferramenta, como desligar uma regra de lint numa linha, continua sendo comentário de linha, com o motivo.
+Siga `Comentários no código`. Com um valor vazio, não comente o que o código já diz. Escreva os comentários no `Idioma dos comentários`. O comentário que explica uma função, um teste, uma constante ou outra declaração vai num bloco de documentação logo acima dela, como `/** */` do JSDoc em JavaScript e TypeScript, mesmo com uma frase só. O comentário de linha, como `//`, fica para uma frase curta que cabe numa linha, dentro do corpo. Várias linhas de `//` seguidas viram um bloco de documentação. Uma diretiva para uma ferramenta, como desligar uma regra de lint numa linha, continua sendo comentário de linha, com o motivo.
 
 ### Passo 3
 
@@ -132,6 +132,7 @@ Mudei a função sem comentário novo. Um `eslint-disable-next-line` com o motiv
 ## Pegadinhas
 
 - Uma diretiva de ferramenta não é um comentário de explicação: ela fica em comentário de linha, mesmo com `Comentários no código` em `evitar`.
+- Várias linhas de `//` acima de uma função parecem mais leves que um bloco. O editor mostra o bloco de documentação ao passar o mouse na função, e a sequência de `//` não.
 - O estilo inline é aceito para valor calculado, mesmo com `Estilo inline` restrito.
 - Preferência da pessoa não vai para a habilidade nem para as instruções de um repositório sem consenso do time.
 - Conferir a cada commit parece necessário. A conferência é uma vez, depois do push.
