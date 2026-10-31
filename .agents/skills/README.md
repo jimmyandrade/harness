@@ -517,6 +517,7 @@ flowchart LR
   procurar_data_significativa --> definir_data_significativa
   procurar_email --> definir_grafia
   procurar_email --> procurar_inscricao
+  procurar_inscricao --> acompanhar_inscricao
   procurar_inscricao --> definir_grafia
   procurar_inscricao --> definir_inscricao
   procurar_inscricao --> procurar_email
