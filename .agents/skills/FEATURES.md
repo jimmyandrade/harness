@@ -809,13 +809,20 @@ How these skills relate is in `README.md`, in this folder.
 - **Properties**:
   - Skill at `.agents/skills/definir-rotina/`
   - Before creating, lists the existing routines and adjusts one that reads the same source instead of creating another
-  - Prefers a trigger over periodic polling when the source offers one. Without a trigger, a result that does not need to be fresh runs only on business days
+  - Before creating a routine, and before asking a long conversation or another bot for a result, looks for the same result already made by a routine or another person, and points to it
+  - When different bots read the same source, one collector bot per source collects, organizes, and hands each item to the bot specialized in that kind of communication
+  - Measures the temperature of the data, how often the source really changes, from the dates of its last updates, and never runs more often than that
+  - Prefers a trigger, RSS included, over periodic polling when the source offers one. Without a trigger, a result that does not need to be fresh runs only on business days, and reports run on `Cadência de relatório`, weekly by default
+  - Cleanup, status updates, and heavy processing that alert no one run in `Janela de manutenção`, outside business hours
+  - A routine of a campaign or a project carries its end date, and `Ao fim do período`, `pausar` by default, pauses it when the period ends
   - A routine that alerts a person or sends a message runs only within `Horário comercial`
-  - An audit proposes triggers, fewer runs, merged routines, and pausing instead of deleting, and applies only after the person confirms
+  - A standalone audit looks for savings: triggers, fewer runs, merged routines, and pausing instead of deleting. Each proposal says how much it saves, and it applies only after the person confirms
   - Does not create a routine only to watch usage, since each check also consumes
 - **Test Criteria**:
   - [ ] A daily collection that does not need fresh data runs only on business days
   - [ ] Three routines reading the same inbox are proposed as one
+  - [ ] A source that changes once a day gets a daily routine, even when asked to poll every minute
+  - [ ] A request for a report that a routine already published points to it
 
 ### definir-tarefa
 - **Stability**: experimental
