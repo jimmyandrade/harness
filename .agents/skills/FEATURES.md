@@ -1138,7 +1138,7 @@ How these skills relate is in `README.md`, in this folder.
 
 ### limpar-copias-de-trabalho
 - **Stability**: experimental
-- **Description**: Remove the git worktrees and local branches a coding session left behind, after checking that nothing is lost
+- **Description**: Remove the git worktrees and the local branches already merged into the base, including those of other sessions, after checking that nothing is lost
 - **Properties**:
   - Lives at `.agents/skills/limpar-copias-de-trabalho/SKILL.md`
   - Does not sync to Notion, because it needs a shell
@@ -1147,11 +1147,13 @@ How these skills relate is in `README.md`, in this folder.
   - Removes a worktree only when it is not the main checkout or a folder of an open session, has no change outside git other than installed dependencies, and its work is on a remote branch or in an open or merged pull request. The session check reads the working directory of each open terminal and each open workspace. The remote check lists open and merged pull requests. A copy is not kept because that lookup was skipped
   - Treats a missing remote branch after a squash merge as landed when the pull request is merged
   - Removes the local branch too, prunes worktrees whose folder is gone, and reports the space freed and why each kept worktree stayed
-  - Removes a local branch no worktree uses when its commit is on a remote branch or is the head of its merged or closed pull request, and keeps one whose commit exists only on this machine
+  - Checks every local branch no worktree uses, including those another session or tool created, and gives each one a decision
+  - Removes such a branch when its commit is on a remote branch or in the base, is the head of its merged or closed pull request, or, without a pull request, its files reached the base through another merged pull request; keeps one whose commit exists only on this machine
 - **Test Criteria**:
   - [ ] A session with merged pull requests ends with their worktrees and branches removed and the space freed reported
   - [ ] Local branches of merged or closed pull requests, with no worktree, are removed, and a branch with a commit only on this machine stays
   - [ ] A worktree with an untracked file other than dependencies stays, with the reason
+  - [x] Old local branches of other tasks, merged by their own pull request or through another one, are removed with the link of that pull request
 
 ### liberar-espaco-em-disco
 - **Stability**: experimental

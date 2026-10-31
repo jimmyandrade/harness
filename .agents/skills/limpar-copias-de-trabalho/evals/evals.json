@@ -12,6 +12,12 @@
       "prompt": "/evoluir-habilidade de skills respectivas a limpezas... das cópias que foram mantidas, confira se outra sessão usa. E se há PRs mesclados ou abertos no remoto. Isso ajuda a decidir melhor se vale a pena limpar ou não",
       "expected_output": "A skill de limpar cópias passa a conferir, antes de manter uma pasta, se alguma sessão aberta usa essa pasta e se o remoto tem pull request aberto ou mesclado. A resposta traz essa decisão para as cópias que tinham ficado, com o link quando houver pull request. O pull request da mudança sai em rascunho.",
       "files": []
+    },
+    {
+      "id": "branches-antigas-mescladas-na-base",
+      "prompt": "Sempre confira se essas branches já foram mescladas na main. Evolua a habilidade de limpar cópias pra considerar isso",
+      "expected_output": "Depois de voltar a cópia principal para a main, sobraram sete branches locais de tarefas antigas. Cinco tinham pull request mesclado com o mesmo commit da branch. Duas não tinham pull request nem branch remota, mas o conteúdo delas tinha entrado na main por outros pull requests mesclados: os arquivos do Biome iguais aos do PR que trocou o ESLint pelo Biome, e o depoimento publicado pelo PR da home. As sete saem, e a resposta traz a tabela com o link do pull request de cada uma. A skill passa a conferir toda branch local contra a base no fim de toda sessão, mesmo a que outra sessão criou.",
+      "files": []
     }
   ]
 }
