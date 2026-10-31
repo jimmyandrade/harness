@@ -23,7 +23,8 @@ How these skills relate is in `README.md`, in this folder.
   - Reads each document found and says the selection, the standing, the date, the link, and any enrollment or confirmation deadline, and whether it has passed
   - Never takes an empty search as a rejection, and points to the results page of the open call
   - Searches the next open call of each followed organization and says when applications open and close
-  - Hands the recurring search to definir-rotina, daily near the dates of the open call and at a parameter frequency otherwise
+  - Hands the recurring search to definir-rotina with a window predicted from the announced and actual result dates of past editions, or by common sense without history, and records the actual result date as history for the next prediction
+  - Prefers a page-change monitor that diffs the results page against its last saved version, so the routine fires on a change and reads only what changed
   - Writes only to the attachment and stage data sources; the opportunity page changes through its owner skill, and a mapped inscription list through definir-inscricao
   - The name follows `docs/adr/0022-name-the-open-call-skill-after-the-edital.md`
 - **Test Criteria**:

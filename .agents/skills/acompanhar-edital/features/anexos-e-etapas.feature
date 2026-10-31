@@ -14,13 +14,6 @@ Funcionalidade: Bancos de anexos e de etapas da oportunidade
       Então ela segue sem o banco de etapas
       E lista a data no fim da resposta, sem escrever no corpo da oportunidade
 
-  Regra: As datas das etapas dão a frequência da busca
-
-    Exemplo: Etapa de resultado cadastrada
-      Dado que o banco de etapas tem a publicação do resultado ligada à edição
-      Quando a pessoa pede para não perder o resultado
-      Então a rotina fica diária na semana dessa data
-
   Regra: O que o edital traz entra nos bancos, sem duplicar
 
     Exemplo: Edital com datas novas
