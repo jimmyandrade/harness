@@ -29,6 +29,10 @@ Branches are named `type/short-description`, with one of these types and an ASCI
 
 The tasks of this repository are its GitHub issues. A business harness records the same choice for its own repository. There is no separate task database.
 
+## Code
+
+Code follows [`escrever-codigo`](.agents/skills/escrever-codigo/SKILL.md) and tests follow [`escrever-teste`](.agents/skills/escrever-teste/SKILL.md). A review asks the questions of the [review lens](.agents/skills/publicar-revisao-de-codigo/references/lente-de-revisao.md). This guide points to them and does not copy their rules.
+
 ## CI
 
 The workflow is `.github/workflows/ci.yml`. It runs on every pull request, including the release pull request, and on every push to `main`, on `ubuntu-26.04`. A push to another branch does not run it, so a pull request runs the checks once. It checks out the full history, checks the branch name of a pull request, runs the `check-skill` action of this repository against itself, runs every `.agents/scripts/*/test_*.py` and `.agents/skills/*/scripts/test_*.py` with the checker's own Python, typechecks, and runs `npm test`. When `.github/scripts/change-scope.sh` finds that every changed file is under `docs/` or is Markdown at the root other than `AGENTS.md` and `CLAUDE.md`, it skips the skill check, the tests, the dependency install, and the typecheck, and still reports the required `test` check. When every changed file is documentation or the text of a skill (`SKILL.md`, `evals/`, `features/`, and the generated `README.md` and `FEATURES.md` of the skills), it skips only the Node.js setup, the dependency install, the typecheck, and `npm test`. Without a base to compare, it runs everything.
