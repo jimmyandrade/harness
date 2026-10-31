@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.39.0](https://github.com/jimmyandrade/harness/compare/v1.38.0...v1.39.0) (2026-10-31)
+
+
+### Features
+
+* **escrever-codigo:** explain declarations in documentation blocks ([#724](https://github.com/jimmyandrade/harness/issues/724)) ([4a1aad3](https://github.com/jimmyandrade/harness/commit/4a1aad3890ec98e3028222c76383bd73a110a946))
+
+
+### Bug Fixes
+
+* **vocabulary:** install the server dependencies once, under a lock ([#723](https://github.com/jimmyandrade/harness/issues/723)) ([be0ff01](https://github.com/jimmyandrade/harness/commit/be0ff018abdf538d0922ecdf3eaa9335dbe9df97))
+
 ## [1.38.0](https://github.com/jimmyandrade/harness/compare/v1.37.0...v1.38.0) (2026-10-31)
 
 
