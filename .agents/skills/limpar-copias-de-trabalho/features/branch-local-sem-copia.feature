@@ -14,3 +14,19 @@ Funcionalidade: Branch local sem cópia de trabalho
       Quando a habilidade limpa as cópias de trabalho
       Então a branch fica
       E a resposta diz que o commit só existe nesta máquina
+
+  Regra: toda branch local é conferida contra a base, mesmo a de outra sessão
+
+    Exemplo: sobraram branches antigas de outras tarefas
+      Dado que o repositório tem branches locais que outras sessões criaram
+      E o pull request de cada uma foi mesclado com o mesmo commit da branch
+      Quando a habilidade limpa as cópias de trabalho
+      Então cada uma dessas branches é removida
+      E a resposta não lista branch local sem decisão
+
+    Exemplo: a branch sem pull request teve o conteúdo levado por outro
+      Dado que uma branch local não tem pull request nem branch remota
+      E os arquivos que ela cria ou muda já estão na base, levados por outro pull request mesclado
+      Quando a habilidade limpa as cópias de trabalho
+      Então a branch é removida
+      E a resposta traz o link do pull request que levou o conteúdo

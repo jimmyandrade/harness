@@ -3,7 +3,7 @@ name: definir-rotina
 description: Cria, revisa e audita rotinas agendadas ou por evento, para rodarem só quando o resultado tem uso. Usada ao pedir, mudar ou auditar uma rotina, ou antes de pedir de novo um resultado que uma rotina já gerou, mesmo sem dizer rotina. Não serve para executar o trabalho da rotina, criar evento na agenda nem medir uma skill.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   related:
     - acompanhar-fila-de-revisao
     - evoluir-habilidade
@@ -51,6 +51,10 @@ Sem datas, comece pela menor frequência que atende quem usa o resultado e meça
 
 Escolha o disparo.
 Quando a fonte oferece webhook, RSS, notificação ou gatilho, a rotina dispara na chegada do evento, sem consulta periódica.
+Uma página sem esses gatilhos é vigiada por diff quando há um monitor de mudança de página: ele guarda a última versão, compara com a atual e só avisa quando muda.
+A rotina dispara pelo aviso e lê só o trecho que mudou, em vez de reler a página inteira.
+A frequência do monitor segue a temperatura do Passo 2.
+Sem monitor, a página entra na consulta periódica, e a resposta diz que um monitor por diff dispensaria a releitura.
 Sem gatilho, a frequência segue a temperatura do Passo 2 e quando o resultado é usado.
 Um resultado que não precisa ser fresco, como coleta para análise posterior, roda só em dias úteis.
 Relatório, resumo e consolidação rodam na `Cadência de relatório`.
@@ -68,7 +72,7 @@ Quando o período acaba, siga `Ao fim do período`: com `pausar`, pause a rotina
 
 A auditoria é avulsa e procura oportunidades de economia.
 Liste cada rotina com o disparo, a frequência, a temperatura da fonte e quem usa o resultado.
-Proponha trocar a consulta periódica por gatilho, quando a fonte oferece.
+Proponha trocar a consulta periódica por gatilho, quando a fonte oferece, ou por monitor por diff, quando a fonte é uma página.
 Proponha baixar a frequência que passa da temperatura medida.
 Proponha tirar do fim de semana o que não precisa de resultado fresco, e levar para a `Janela de manutenção` o que é pesado e não avisa ninguém.
 Proponha juntar numa rotina só as que leem a mesma fonte, com um bot coletor que repassa ao especialista.

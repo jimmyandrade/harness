@@ -6,16 +6,16 @@ locale: en
 
 An MCP host is the application a person talks to. It reads a list of MCP servers and starts them. There are two ways to start the `vocabulary` server, and a host uses one of them, never both.
 
-- Claude Code with the `core` plugin starts it by itself. `.claude-plugin/plugin.json` declares it, so there is nothing to clone, install, or build. Step 1 explains how it runs and how to point it at a glossary.
-- Every other host, and Claude Code when the plugin cannot start the server, reads a project list that comes from the npm dependency. The list is `.agents/mcp.json`, with `mcpServers` as the first key. Steps 2 to 7 set it up.
+- Claude Code with the `core` plugin starts it by itself. `.claude-plugin/plugin.json` declares it, so there is nothing to clone, install, or build. [Start the server from the `core` plugin](#start-the-server-from-the-core-plugin) explains how it runs and how to point it at a glossary.
+- Every other host, and Claude Code when the plugin cannot start the server, reads a project list that comes from the npm dependency. The list is `.agents/mcp.json`, with `mcpServers` as the first key. The steps from [Install the package and write the project list](#install-the-package-and-write-the-project-list) on set it up.
 
 The server reads the glossary in `.agents/glossary/` of the project that is open. `HARNESS_GLOSSARY_DIR` points it at another directory.
 
 Cursor reads `.cursor/mcp.json`. Claude Code reads `.mcp.json` at the project root. Claude Desktop, Windsurf, and Cline keep their list outside the repository, so each one gets a link to `.agents/mcp.json`. VS Code expects `servers` as the first key, so it does not use this list. The Cursor and Codex manifests of the plugin do not declare the server, so those two hosts use the project list.
 
-`.mcp.json` is a link to `.agents/mcp.json`, not a second copy. Run steps 2 to 7 from the root of the project, after the project has a `package.json`. A link replaces the whole file it points from: copy anything you still need into `.agents/mcp.json` first. If you move the clone, create the links again. Each step ends with a check.
+`.mcp.json` is a link to `.agents/mcp.json`, not a second copy. Run the steps from [Install the package and write the project list](#install-the-package-and-write-the-project-list) on from the root of the project, after the project has a `package.json`. A link replaces the whole file it points from: copy anything you still need into `.agents/mcp.json` first. If you move the clone, create the links again. Each step ends with a check.
 
-## 1. Start the server from the `core` plugin
+## Start the server from the `core` plugin
 
 The plugin declares a server named `vocabulary`. Claude Code shows it as `plugin:core:vocabulary` and starts it when the plugin is enabled, in every project. It runs `vocabulary/api/mcp/launch.sh`, which:
 
@@ -29,7 +29,7 @@ The glossary is `.agents/glossary/` of the project that is open: the plugin pass
 { "env": { "HARNESS_GLOSSARY_DIR": "/path/to/glossary" } }
 ```
 
-When the server cannot start, the `core` skills still load. The cause can be a Node.js older than 24.22.1 on the `PATH`, no npm, no network on the first start, or a `node_modules` that an older launcher left half-installed, as `TROUBLESHOOTING.md` describes. Claude Code lists `plugin:core:vocabulary` as failed in `/mcp`, and the launcher says why on stderr. Use steps 2 to 7, which do not depend on the plugin.
+When the server cannot start, the `core` skills still load. The cause can be a Node.js older than 24.22.1 on the `PATH`, no npm, no network on the first start, or a `node_modules` that an older launcher left half-installed, as `TROUBLESHOOTING.md` describes. Claude Code lists `plugin:core:vocabulary` as failed in `/mcp`, and the launcher says why on stderr. Use the steps from [Install the package and write the project list](#install-the-package-and-write-the-project-list) on, which do not depend on the plugin.
 
 To make a Node.js 24.22.1 or newer the one the plugin finds, make it the default of your version manager and start the app again, because an app keeps the `PATH` it was opened with. With `nvm`:
 
@@ -43,13 +43,13 @@ Quit and reopen the app, then check that `/mcp` lists `plugin:core:vocabulary` a
 Do not run two servers named `vocabulary`. A server you configured by hand, in `.mcp.json`, in `~/.claude.json`, or with `claude mcp add`, is a second server next to `plugin:core:vocabulary`, with its own tool names, so the agent sees every tool twice. Pick one:
 
 - Keep the plugin: remove the server you configured, with `claude mcp remove vocabulary --scope user`, `--scope project`, or `--scope local`, whichever `claude mcp list` shows.
-- Keep your server, for example one from a clone or from steps 2 to 7: disable `plugin:core:vocabulary` in `/mcp`.
+- Keep your server, for example one from a clone or from [Install the package and write the project list](#install-the-package-and-write-the-project-list) on: disable `plugin:core:vocabulary` in `/mcp`.
 
 Check: `/mcp` in Claude Code lists `plugin:core:vocabulary` as connected and no other `vocabulary` server. To test the launcher without a host, run `sh vocabulary/api/mcp/launch.sh < /dev/null && echo ok` from the plugin folder: it prints `ok`.
 
-## 2. Install the package and write the project list
+## Install the package and write the project list
 
-Skip steps 2 to 7 in Claude Code while the plugin server of step 1 is connected: a second `vocabulary` server duplicates every tool.
+Skip this step and the ones after it in Claude Code while the plugin server of [Start the server from the `core` plugin](#start-the-server-from-the-core-plugin) is connected: a second `vocabulary` server duplicates every tool.
 
 ```bash
 npm install --save-dev github:jimmyandrade/harness
@@ -62,7 +62,7 @@ The list starts `node node_modules/harness/vocabulary/dist/mcp/index.js`. Node.j
 
 Check: `jq -r '.mcpServers | keys[]' .agents/mcp.json` prints `vocabulary`, `readlink .mcp.json` prints `.agents/mcp.json`, and `node node_modules/harness/vocabulary/dist/mcp/index.js < /dev/null && echo ok` prints `ok`.
 
-## 3. Link Cursor
+## Link Cursor
 
 ```bash
 mkdir -p .cursor
@@ -73,7 +73,7 @@ Commit the link.
 
 Check: `readlink .cursor/mcp.json` prints `../.agents/mcp.json`.
 
-## 4. Link Claude Desktop
+## Link Claude Desktop
 
 On macOS the file is `~/Library/Application Support/Claude/claude_desktop_config.json`. It also stores Claude Desktop preferences.
 
@@ -85,7 +85,7 @@ On Linux the file is `~/.config/Claude/claude_desktop_config.json`. On Windows i
 
 Check: `readlink` on that file prints the path of `.agents/mcp.json`.
 
-## 5. Link Windsurf
+## Link Windsurf
 
 On macOS and Linux the file is `~/.codeium/windsurf/mcp_config.json`. On Windows it is `%USERPROFILE%\.codeium\windsurf\mcp_config.json`.
 
@@ -96,7 +96,7 @@ ln -sfn "$PWD/.agents/mcp.json" "$HOME/.codeium/windsurf/mcp_config.json"
 
 Check: `readlink` on that file prints the path of `.agents/mcp.json`.
 
-## 6. Link Cline
+## Link Cline
 
 The VS Code extension on macOS uses `~/Library/Application Support/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json`. The same extension in Cursor uses `Cursor` in place of `Code`. The Cline CLI uses `~/.cline/data/settings/cline_mcp_settings.json`.
 
@@ -109,7 +109,7 @@ On Linux the extension file is under `~/.config/Code/User/globalStorage/saoudriz
 
 Check: `readlink` on that file prints the path of `.agents/mcp.json`.
 
-## 7. Confirm in a host
+## Confirm in a host
 
 Restart the host and ask it to look up a term of the glossary.
 

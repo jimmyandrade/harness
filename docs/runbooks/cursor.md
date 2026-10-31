@@ -10,7 +10,7 @@ Read `Forma do harness`, `Papel do repositório atual`, and `Instalação do har
 
 Each step ends with a check.
 
-## 1. Choose the layout
+## Choose the layout
 
 | The project has | `.agents/skills` | `.cursor/skills` |
 |---|---|---|
@@ -19,7 +19,7 @@ Each step ends with a check.
 
 Check: `test -d node_modules/harness/.agents/skills && echo ok` prints `ok`.
 
-## 2. Create the link
+## Create the link
 
 A project with skills of its own:
 
@@ -38,15 +38,15 @@ Commit the link. It resolves on every machine after `npm ci`.
 
 Check: `ls .cursor/skills/ .agents/skills/` lists the skills of both layers and no error.
 
-## 3. Confirm in Cursor
+## Confirm in Cursor
 
 Open the project in Cursor, then open Customize → Skills, or type `/` in the chat.
 
 Check: the list shows the skills of the project and the core skills, such as `criar-commit`.
 
-## 4. Optional: install the skills as Cursor plugins
+## Optional: install the skills as Cursor plugins
 
-A team can install the skills as plugins instead of links, from team marketplaces, as `docs/adr/0011-publish-the-plugin-to-codex-and-cursor-from-the-claude-code-manifests.md` decides. A business harness and this repository each have `.cursor-plugin/plugin.json`, whose `skills` points at `.agents/skills/`. A Cursor marketplace cannot list a plugin from another repository, so the team imports two marketplaces: the business repository and this one. The `core` plugin then follows the default branch of this repository, not the tag in `package.json`; keep the links of steps 1 to 3 when the project needs the pinned core.
+A team can install the skills as plugins instead of links, from team marketplaces, as `docs/adr/0011-publish-the-plugin-to-codex-and-cursor-from-the-claude-code-manifests.md` decides. A business harness and this repository each have `.cursor-plugin/plugin.json`, whose `skills` points at `.agents/skills/`. A Cursor marketplace cannot list a plugin from another repository, so the team imports two marketplaces: the business repository and this one. The `core` plugin then follows the default branch of this repository, not the tag in `package.json`; keep the links of [Choose the layout](#choose-the-layout) to [Confirm in Cursor](#confirm-in-cursor) when the project needs the pinned core.
 
 Read the manifest of the business repository.
 
@@ -64,17 +64,17 @@ Enable Auto Refresh exists only on a team marketplace, on a Teams or Enterprise 
 
 Check: after a push to the default branch and a re-index, Customize lists the skills of that commit. The manifest name is `core`. Cursor may show the marketplace name in front of it, such as `harness-core`.
 
-Then remove the links of step 2 from the project, so each skill shows once.
+Then remove the links of [Create the link](#create-the-link) from the project, so each skill shows once.
 
-Check: in Cursor, Customize lists the business plugin and `core`, and installing them shows the same skills as step 3.
+Check: in Cursor, Customize lists the business plugin and `core`, and installing them shows the same skills as [Confirm in Cursor](#confirm-in-cursor).
 
-## 5. Grok Bot does not load these skills
+## Grok Bot does not load these skills
 
 Grok Bot does not read `.agents/skills`, `.cursor/skills`, or the `core` plugin. Connect apps lists apps from the Cursor Marketplace. A skill a Bot saves belongs to that Bot. Get Grok Bot in the account menu opens the mobile app. It is not the dashboard, and Enable Auto Refresh is not there.
 
 A team admin chooses which connected apps Grok Bot may use on the same Plugins & MCPs page. That choice does not install this repository.
 
-Check: Connect apps does not list `core` from this repository. The skills in Cursor still come from steps 1 to 4.
+Check: Connect apps does not list `core` from this repository. The skills in Cursor still come from [Choose the layout](#choose-the-layout) to [Optional: install the skills as Cursor plugins](#optional-install-the-skills-as-cursor-plugins).
 
 ## Do not
 

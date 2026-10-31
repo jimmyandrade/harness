@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.40.1](https://github.com/jimmyandrade/harness/compare/v1.40.0...v1.40.1) (2026-10-31)
+
+
+### Bug Fixes
+
+* **levantar-ambiente-do-repositorio:** flag a work branch set as the default branch ([#745](https://github.com/jimmyandrade/harness/issues/745)) ([a0c81be](https://github.com/jimmyandrade/harness/commit/a0c81be3238ca8349693075e30e70c4f5f8a6211))
+
+## [1.40.0](https://github.com/jimmyandrade/harness/compare/v1.39.0...v1.40.0) (2026-10-31)
+
+
+### Features
+
+* **limpar-copias-de-trabalho:** check every local branch against the base ([#727](https://github.com/jimmyandrade/harness/issues/727)) ([991baf0](https://github.com/jimmyandrade/harness/commit/991baf04c01947ab08d4691aebb16e481020b63f))
+
 ## [1.39.0](https://github.com/jimmyandrade/harness/compare/v1.38.0...v1.39.0) (2026-10-31)
 
 
