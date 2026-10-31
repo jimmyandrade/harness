@@ -153,6 +153,7 @@ How these skills relate is in `README.md`, in this folder.
   - The entity may be more than one word, up to 64 characters
   - Does not create a skill whose job is to delete a resource
   - Does not create a skill that only gathers good practices. Each practice goes into the skill of the task where it applies, and a new skill is proposed only for a task that no skill covers, named after that task
+  - Before proposing a new skill, measures the existing skill of the subject with medir-habilidade and shows the numbers, since every new skill's catalog entry loads on every turn; with room, the lesson goes into that skill
   - When a step routes to another skill, or routes more than one outcome, that step contains a Mermaid flowchart in the direction from mermaid.flowchart_direction
   - An empty placeholder stays on 0.0.x and its body may be only the title
   - Does not store a person, a date, or an alias in SKILL.md except inside Exemplos de entrada e saída, which opens with "Estes exemplos ilustram fatos. Eles podem não estar no data source."; the checker requires that sentence in every skill; the fact stays in the data source, and a test in features/ or evals.json may use it

@@ -186,6 +186,7 @@ flowchart LR
   criar_habilidade --> definir_arquivos_da_habilidade
   criar_habilidade --> descrever_habilidade_ou_schema
   criar_habilidade --> evoluir_habilidade
+  criar_habilidade --> medir_habilidade
   criar_oportunidade --> definir_grupo_de_oportunidades
   criar_oportunidade --> procurar_oportunidade
   criar_pull_request --> atualizar_branch_do_pull_request
