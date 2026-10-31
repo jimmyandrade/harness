@@ -3,7 +3,7 @@ name: escrever-teste
 description: Escreve ou altera testes de unidade antes do código, em TDD, seguindo a convenção de testes do projeto, com o Better Specs como padrão. Usada quando uma mudança precisa de teste novo, quando um teste existente muda ou quando uma revisão pede um teste. Não serve para decidir o que testar, rodar a suíte inteira nem refatorar testes antigos.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.7.0"
   related:
     - criar-commit
     - escrever-codigo
@@ -59,7 +59,7 @@ Respeite o `Alcance da mudança`. Com `só as linhas tocadas`, o padrão vale pa
 
 ### Passo 4
 
-Rode o `Comando de testes`, ou o que `levantar-ambiente-do-repositorio` achou, nos arquivos afetados. Com `TDD`, escreva o teste antes do código, rode-o e confirme que ele falha pelo motivo esperado, não por erro de chamada. Só então siga `escrever-codigo`, e rode de novo até passar. Com `teste depois do código`, se o teste cobre uma correção, confirme que ele falha sem a correção e passa com ela. Se a convenção do repositório tem lint de testes, rode-o. O commit segue `criar-commit`.
+Rode o `Comando de testes`, ou o que `levantar-ambiente-do-repositorio` achou, nos arquivos afetados. Com `TDD`, escreva o teste antes do código, rode-o e confirme que ele falha pelo motivo esperado, não por erro de chamada. Só então siga `escrever-codigo`, e rode de novo até passar. Com `teste depois do código`, se o teste cobre uma correção, confirme que ele falha sem a correção e passa com ela. Se a convenção do repositório tem lint de testes, rode-o. O comentário no arquivo de teste segue o Passo 2 de `escrever-codigo`: o que explica um teste ou um auxiliar vai num bloco de documentação acima dele. O commit segue `criar-commit`.
 
 ### Passo 5
 
