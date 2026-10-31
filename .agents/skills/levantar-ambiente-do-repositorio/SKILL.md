@@ -3,7 +3,7 @@ name: levantar-ambiente-do-repositorio
 description: Levanta o ambiente de trabalho de um repositório antes de escrever código, testes, commit ou pull request. Acha o runtime e como ativá-lo, os comandos de instalar, lint, tipos, testes e build, as habilidades do repositório que se aplicam e as pegadinhas que ele documenta. Não serve para rodar os comandos, instalar dependências nem decidir a convenção de código.
 metadata:
   author: jimmyandrade
-  version: "0.8.1"
+  version: "0.9.0"
   related:
     - criar-commit
     - criar-pull-request
@@ -47,6 +47,12 @@ Leia os `Arquivos de instruções` e liste as `Pastas de habilidades do reposit�
 ### Passo 3
 
 Ache o runtime: a versão exigida e como ativá-la. Procure o arquivo de versão do projeto, como `.nvmrc` ou `.tool-versions`, o campo de versão do manifesto e o que as instruções dizem. Se uma instrução manda ativar o runtime na mesma chamada que roda o comando, registre isso como obrigatório, com o texto exato do comando.
+Leia também a versão das ferramentas de linha de comando que o trabalho usa, como `git`, `gh` e o runtime, e o que o gerenciador de pacotes do sistema lista como desatualizado e nos avisos do diagnóstico dele, como `brew outdated` e `brew doctor`.
+Um aviso de versão nova que um comando imprimiu na sessão entra também.
+Registre cada ferramenta desatualizada com a versão instalada, a nova e o comando de atualizar; das outras do gerenciador, diga quantas são.
+Marque o que pede cuidado: a atualização que leva o runtime a uma versão principal diferente da que o projeto exige, e a fórmula obsoleta, que outro projeto pode ainda usar.
+Não rode a atualização: ela fica com quem chamou, depois do sim da pessoa.
+Depois que a pessoa atualiza, leia a versão de novo, diga se a atualização entrou e o que o gerenciador ainda lista.
 
 ### Passo 4
 
@@ -61,7 +67,7 @@ Quando ela tem nome de branch de trabalho, como `tipo/descricao`, registre isso 
 ### Passo 6
 
 Leia `Forma do harness`, `Papel do repositório atual`, `Instalação do harness` e `Harness no repositório atual`. O repositório atual é o que está aberto nesta sessão. Qualquer um vazio: pergunte uma vez e pare. Não escolha o repositório atual, a instalação da ferramenta nem uma forma. Com os quatro preenchidos, `global` usa a instalação da ferramenta e não acrescenta arquivos aqui. `repositório` com `Harness no repositório atual` em `não` não acrescenta a instalação e não escolhe `global`. Com `repositório próprio` e papel `harness`, este repositório é o harness do negócio. Com `repositório próprio` e papel `projeto`, a instalação é `global`. Com `repositório existente`, a instalação fica neste repositório e não há outro repositório de harness. Com `próprio e repositórios` e papel `harness`, este repositório é o harness do negócio. Com `próprio e repositórios` e papel `projeto`, este repositório instala o harness do negócio e o core. Combinação diferente: pergunte uma vez e pare. Liste à parte as skills do repositório atual e as que chegam pela instalação. A pasta do glossário não faz parte dessa instalação.
-Entregue a ficha, com uma seção por passo: instruções e habilidades do repositório, runtime e como ativar, comandos com a origem de cada um, habilidades do repositório que se aplicam a cada tarefa e pegadinhas. Em cada seção que não achou nada, escreva "Não achei". Não rode nenhum comando além de ler arquivos, e não instale nada.
+Entregue a ficha, com uma seção por passo: instruções e habilidades do repositório, runtime e como ativar, ferramentas desatualizadas, comandos com a origem de cada um, habilidades do repositório que se aplicam a cada tarefa e pegadinhas. Em cada seção que não achou nada, escreva "Não achei". Não rode nenhum comando além de ler arquivos e as versões e listas do Passo 3, e não instale nada.
 
 ### Passo 7
 
@@ -108,6 +114,10 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 O repositório tem `AGENTS.md` e uma habilidade chamada `dev-environment`. O arquivo `.nvmrc` pede a versão 20, e a habilidade manda ativar a versão na mesma chamada do comando. O lint dos arquivos tocados e os testes afetados vêm do `package.json`, e o build está nas instruções. O pre-push leva uns 8 minutos. Não achei variável de ambiente obrigatória.
 
+### Atualizei o gh, deu certo? Falta mais alguma coisa no brew?
+
+O `gh --version` mostra a versão nova, então a atualização entrou. O Homebrew ainda lista 75 fórmulas desatualizadas, entre elas `git` e `node`. A do `node` pede cuidado: ela muda a versão principal, e o projeto exige outra. O diagnóstico avisa de uma fórmula e de um cask obsoletos. Dei o comando de cada um e não atualizei nada.
+
 ### Levante o ambiente de uma biblioteca sem instruções
 
 Não achei arquivo de instruções nem habilidade do repositório. O `pyproject.toml` define o comando de testes e o de lint. Não achei como ativar a versão do runtime, então perguntei qual usar.
@@ -132,7 +142,9 @@ Não achei arquivo de instruções nem habilidade do repositório. O `pyproject.
 - Um arquivo de instruções pode apontar para outro. Leia o que ele cita.
 - O comando do manifesto roda tudo. O de arquivos tocados pode estar numa habilidade ou nas instruções.
 - O hook de pre-push pode levar minutos e parece travado.
-- Esta habilidade só lê. Instalar dependência ou rodar um comando é de quem chamou.
+- O aviso de versão nova no fim de um comando parece ruído. Ele entra na ficha com o comando de atualizar.
+- Atualizar tudo parece seguro. A atualização do runtime pode passar da versão que o projeto exige.
+- Esta habilidade só lê. Instalar dependência, atualizar uma ferramenta ou rodar um comando é de quem chamou.
 - A pasta do glossário parece ser o lugar do harness. O harness reúne o servidor, as skills, a linha de comando e a API. O glossário pode ficar dentro de um harness, e também pode ficar só no computador.
 - Um valor vazio parece `sim`, `projeto` ou `repositório`. Vazio pergunta uma vez e não escolhe.
 - `Harness no repositório atual` em `não` parece escolher a instalação global. Só `Instalação do harness` em `global` faz isso.
