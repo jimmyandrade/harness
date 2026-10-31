@@ -59,6 +59,7 @@ How these skills relate is in `README.md`, in this folder.
   - Renaming the branch of an open pull request closes it, so a new pull request opens from the renamed branch with the same title and body, and the old one is closed with a comment that links the new one
   - Before replacing the published branch, follows `atender-revisao-de-pull-request` so open reviews, threads, and comments are handled, unless that skill is the caller. Code that came from the base and breaks a pattern the review asked for is fixed in the same pull request before the push
   - When a published branch was rewritten, the reply says the GitHub branch would be replaced by the new commits, the base branch stays as it is, and the replacement proceeds only if nobody pushed a new commit to that branch since the last fetch. It asks before replacing, unless the calling skill already authorizes it, and it does not name the git command in place of that explanation
+  - Opens the body of the pull request that replaces a renamed branch with a GitHub `> [!NOTE]` alert linking the old one
 - **Test Criteria**:
   - [ ] A request to merge the base into the branch updates it with rebase instead
   - [ ] A branch whose pull request was merged gets no rebase and no push
@@ -556,6 +557,7 @@ How these skills relate is in `README.md`, in this folder.
   - Translates an issue in another language without losing links or references
   - Marks a dependency in GitHub Relationships: blocked by, blocking, relates to, or parent. A comment that only says the dependency does not count
   - Does not close an issue by scanning the open list. The issue closes when the citing pull request merges and its done criterion is met
+  - When a new issue replaces another, opens its body with a GitHub `> [!NOTE]` alert linking the old one, and closes the old one with a comment that opens with a `> [!IMPORTANT]` alert linking the new one
 - **Test Criteria**:
   - [x] The skill is present at that path
 
@@ -1050,6 +1052,7 @@ How these skills relate is in `README.md`, in this folder.
   - Opens the comment with the reason, lists one linked fact per item, ends with what happens to the branch, in `Idioma do comentário de fechamento`, and comments and closes in one step with `Apagar a branch ao fechar`
   - Moves an open review thread to the pull request that replaces this one
   - After the close, confirms CLOSED, syncs every linked task through sincronizar-status-da-tarefa and cleans the working copy through limpar-copias-de-trabalho
+  - When another pull request replaces this one, opens the closing comment with a GitHub `> [!IMPORTANT]` alert linking the replacement
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [ ] A pull request that repeats a merged one closes with a comment that states the reason and links the merged pull request and the commit on the base
