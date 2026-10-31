@@ -47,13 +47,21 @@ Every step in a workflow or a composite action has a `name`: a short imperative 
 
 ## Actions
 
-Business harnesses call four composite actions from this repository. Each one runs the scripts of the tag the caller pins, against the caller's checkout in `github.workspace` or its pull request.
+Business harnesses call the composite actions of this repository, each described below. Each one runs the scripts of the tag the caller pins, against the caller's checkout in `github.workspace` or its pull request.
+
+### `check-branch-name`
 
 `check-branch-name` runs only on a pull request and needs no checkout. It fails as the branch name check of the CI above does. `types` replaces the accepted branch types, `blocked-prefixes` the coding agent prefixes that get the message for the agent, and `allowed-prefixes` the prefixes that pass without the check, such as the ones dependency and release bots create, each separated by spaces or commas. The default lists live in the action inputs: `feat fix docs refactor perf test chore ci`, `claude codex copilot cursor`, and `renovate/ dependabot/ release-please--`. The script has no defaults and fails, naming the variable, when one of the three lists is empty. The message lists the types the caller accepts.
 
+### `check-duplicate-pull-request`
+
 `check-duplicate-pull-request` runs only on a pull request. It needs no checkout and no input besides the default `github-token`, and fails as the duplicate check of the CI above does.
 
+### `check-skill`
+
 `check-skill` installs Python 3.14 and runs `.agents/scripts/check-skill/run-check.sh` with `HARNESS_ROOT` set to the caller. `base` and `head` limit the check to the skills that changed. It also checks every model in `.agents/assets/templates/` with `.agents/scripts/check-models/check-models.py`, and the `metadata.models` of each skill that declares it, as ADR 0016 decides. An error becomes an `::error` annotation with the file and the line, and the job summary is one table of skills. A skill that existed at `base` and is gone at `head` gets a removed row, with its last version and size, in that table and in the pull request comment. Every check that `run-check.sh` runs does the same: it prints `file:line: message`, and in GitHub Actions an `::error` annotation with that file and line, so the pull request shows the finding inline on the line that causes it. A new check follows that rule.
+
+### `sync-notion-pages`
 
 `sync-notion-pages` first stops with an `::error` annotation when `notion-token` is empty, before any install. Then it installs Node.js 24 and the runtime dependencies of this repository without running their scripts, since the `prepare` build of the vocabulary needs the development dependencies that the sync does not install, then runs `.agents/scripts/sync-notion-pages/sync-notion-pages.ts` with `HARNESS_ROOT` set to the caller. It reads the mapping from `mapping`, the page icon from the parameters in the frontmatter of the caller's `AGENTS.md` with the core fallback, the icon of model pages from `Ícone dos modelos no Notion` and `Cor do ícone dos modelos no Notion` the same way, and the token from `notion-token`. It creates or updates a page for each changed skill, and a page for the caller's `AGENTS.md` when that file changes. A change to the mapping republishes every skill. A skill removed from git does not remove the page. A rename keeps the page whose title is the previous name when the new skill lists it in `metadata.aliases`.
 
