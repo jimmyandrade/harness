@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.15.0"
+  version: "0.16.1"
   related:
     - comunicar-novidade-do-produto
     - definir-agenda
@@ -127,6 +127,7 @@ A rotina segue `Ao conferir a resposta`. Com `ler a lista`, ela lê só a lista 
 Ela avisa a pessoa quando a resposta chega e para na primeira resposta ou no fim do prazo.
 Ela roda onde está o `Canal da rotina de resposta`: com `navegador`, na máquina da pessoa, com o cliente aberto; com `API`, na nuvem.
 Mensagem que não espera nada, como um agradecimento ou um aviso, não ganha rotina.
+Uma mensagem que espera resposta e saiu sem rotina, porque a pergunta do [Passo 5](#passo-5) não citou o acompanhamento ou porque a rotina ficou para depois, não sai dos próximos passos da resposta até a rotina existir ou a pessoa recusar. Ao perceber a falta, confira antes a lista de conversas: a resposta pode já ter chegado.
 
 Ao terminar, deixe a aba do WhatsApp Web aberta, mesmo quando as outras abas da tarefa forem fechadas.
 
@@ -233,6 +234,7 @@ Mostrei a conversa do Caio e o texto "Podemos falar 15h00?". Enviei depois do si
 - O WhatsApp não cria evento com início no passado. O botão de criar fica cinza, sem mensagem de erro.
 - O cartão do evento mostra a hora no formato de 12 horas, como "Hoje às 4:20".
 - Abrir a conversa para ver se chegou resposta parece inofensivo. Marca as mensagens como lidas no celular de quem mandou. Com `Ao conferir a resposta` em `ler a lista`, a rotina não abre a conversa.
+- Perguntar se cria a rotina parece deixar a decisão com a pessoa. Quando a conversa segue para outro assunto, a pergunta some e a resposta do contato espera sem ninguém ver.
 
 ## Scripts disponíveis
 
