@@ -1038,6 +1038,21 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [ ] The scenarios in `features/fazer-fechamento.feature` pass in Notion and in the spreadsheet
 
+### fechar-pull-request
+- **Stability**: experimental
+- **Description**: Close a pull request without merging it, with a comment that gives the reason and links the proof
+- **Properties**:
+  - Lives at `.agents/skills/fechar-pull-request/SKILL.md`
+  - Closes only on the person's request, or when another skill closes a pull request, such as atualizar-branch-do-pull-request on a branch rename and atender-revisao-de-pull-request when it recreates one
+  - Finds a link for every fact of the comment before writing it: the duplicate or new pull request, the commit and file on the base, or the issue or decision. Without a link, it asks and keeps the pull request open
+  - When the comment says nothing is lost, compares every file of the pull request with the base and says which differ and why
+  - The comment opens with the reason, lists one linked fact per item, and ends with what happens to the branch, in `Idioma do comentário de fechamento`
+  - Comments and closes in one step, deletes the branch with `Apagar a branch ao fechar`, syncs the linked tasks, and cleans the working copy
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] A pull request that repeats a merged one closes with a comment that links the merged pull request and its commit on the base
+  - [ ] A request to close without a reason or a link keeps the pull request open and asks for the reason
+
 ### gerenciar-estoque
 - **Stability**: experimental
 - **Description**: Update the balance of an exhaustible item and leave payment outside

@@ -73,6 +73,7 @@ flowchart LR
     extrair_tarefas_da_reuniao["extrair-tarefas-da-reuniao"]
     fatiar_pull_request["fatiar-pull-request"]
     fazer_fechamento["fazer-fechamento"]
+    fechar_pull_request["fechar-pull-request"]
     formalizar_decisao["formalizar-decisao"]
     gerenciar_estoque["gerenciar-estoque"]
     gravar_termos_no_vocabulario["gravar-termos-no-vocabulario"]
@@ -137,6 +138,7 @@ flowchart LR
   atender_revisao_de_pull_request --> escrever_teste
   atender_revisao_de_pull_request --> evoluir_habilidade
   atender_revisao_de_pull_request --> fatiar_pull_request
+  atender_revisao_de_pull_request --> fechar_pull_request
   atender_revisao_de_pull_request --> levantar_ambiente_do_repositorio
   atender_revisao_de_pull_request --> levantar_contexto_do_pull_request
   atender_revisao_de_pull_request --> mesclar_pull_request
@@ -148,6 +150,7 @@ flowchart LR
   atualizar_branch_do_pull_request --> atender_revisao_de_pull_request
   atualizar_branch_do_pull_request --> criar_pull_request
   atualizar_branch_do_pull_request --> evoluir_habilidade
+  atualizar_branch_do_pull_request --> fechar_pull_request
   atualizar_cadastro_fiscal --> evoluir_habilidade
   avaliar_atualizacoes_de_dependencia --> atender_revisao_de_pull_request
   avaliar_atualizacoes_de_dependencia --> criar_commit
@@ -392,6 +395,14 @@ flowchart LR
   fazer_fechamento --> lancar_despesa_da_empresa
   fazer_fechamento --> organizar_ponto_de_contato
   fazer_fechamento --> revisar_financas
+  fechar_pull_request --> atender_revisao_de_pull_request
+  fechar_pull_request --> atualizar_branch_do_pull_request
+  fechar_pull_request --> criar_pull_request
+  fechar_pull_request --> evoluir_habilidade
+  fechar_pull_request --> fatiar_pull_request
+  fechar_pull_request --> limpar_copias_de_trabalho
+  fechar_pull_request --> mesclar_pull_request
+  fechar_pull_request --> sincronizar_status_da_tarefa
   formalizar_decisao --> conversar_no_whatsapp
   formalizar_decisao --> criar_pull_request
   formalizar_decisao --> definir_registro_de_reuniao
