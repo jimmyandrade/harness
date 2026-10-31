@@ -40,6 +40,20 @@ harness/
 │   ├── adr/                        # Architecture decisions
 │   └── runbooks/                   # Setup steps, one runbook per tool
 ├── examples/                       # Files the runbooks copy into a project, pinned as vX.Y.Z
+├── vocabulary/                     # Vocabulary engine: API, CLI, and MCP server of the glossary
+│   ├── api/
+│   │   ├── cli.ts                  # Reads and writes glossary terms from the command line
+│   │   ├── mcp/                    # MCP server and launch.sh, which the core plugin runs
+│   │   ├── routes/                 # One HTTP endpoint per directory
+│   │   └── shared/                 # Glossary access, Zod schemas, HTTP server, and test helpers
+│   ├── dist/                       # JavaScript compiled from api/ on install, not committed
+│   ├── docs/
+│   │   ├── adr/                    # Decisions of the engine, numbered apart from docs/adr
+│   │   └── runbooks/               # MCP hosts and glossary migration
+│   ├── examples/mcp.json           # Server list a project copies
+│   ├── schemas/                    # JSON Schema of each glossary file format, one file per version
+│   ├── tsconfig.build.json         # Compiles api/ to dist/
+│   └── types.ts                    # Type declarations business harnesses import
 ├── default.json                    # Renovate preset extended by business harnesses
 ├── lefthook.yml                    # Pre-commit checker for this repository
 ├── AGENTS.md                       # Rules for agents working here
@@ -105,6 +119,14 @@ None. People reach the core through their agent (Claude Code, Cursor), GitHub, a
 - Technologies: `.claude-plugin/plugin.json`, read by Claude Code and Codex; `.cursor-plugin/plugin.json`, read by Cursor
 - Deployment: Marketplace `harness` in this repository, or a business marketplace that lists it with a `url` source pinned to a tag; in Cursor, a team marketplace imported from this repository. A personal dashboard list and Grok Bot do not load it. The steps are in `docs/runbooks/cursor.md`
 
+#### 3.2.4. Vocabulary API, CLI, and MCP
+
+- Name: `vocabulary`
+- Description: Looks up a term, reports which words of a text exist, classifies a term or a text, inserts, updates, or deletes glossary rows one by one or in a batch, lists every problem of a refused batch at once, tests a batch with a dry run that writes nothing, migrates rows that use a deprecated level, and reports its own version.
+- Technologies: TypeScript on Node.js 24, Zod, as `vocabulary/docs/adr/0004-validate-the-api-with-zod.md` decides. The type check is TypeScript 7, as `vocabulary/docs/adr/0005-typecheck-with-typescript-7.md` decides.
+- Deployment: the `core` plugin in Claude Code, through `vocabulary/api/mcp/launch.sh`; `node node_modules/harness/vocabulary/dist/mcp/index.js` from a project that installed the package, as every other host does. Node.js does not strip types under `node_modules`, so `prepare` compiles `dist/` on install, as `vocabulary/docs/adr/0007-build-on-install.md` decides.
+- Shared pieces: each lives in one place, and a new route test or check uses it instead of repeating it. The host of the HTTP server is `HOST`, in `vocabulary/api/shared/http.ts`. A route test starts the server with `withServer`, from `vocabulary/api/shared/testing.ts`, which stays out of the build. The checks of a write compose in `guarded`, in `vocabulary/api/shared/schema.ts`, and the real link check lives in `vocabulary/api/shared/links.ts`.
+
 ## 4. Data Stores
 
 ### 4.1. Files in git
@@ -124,6 +146,13 @@ None. People reach the core through their agent (Claude Code, Cursor), GitHub, a
 - Type: Notion data source
 - Purpose: Readable copy of the models, as ADR 0012 and ADR 0015 decide; the sync writes the mapped properties and the body, and people keep the other properties
 
+### 4.3. Glossary files
+
+- Name: Brand glossary of each project
+- Type: One UTF-8 JSON file per language
+- Purpose: The project owns its terms. This repository ships no glossary
+- Key Schemas/Collections: `.agents/glossary/<language>.json` of the open project, or the directory in `HARNESS_GLOSSARY_DIR`. The format is in `$schema` and in `vocabulary/schemas/`, as `vocabulary/docs/adr/0003-store-the-brand-glossary-as-json.md` and `vocabulary/docs/adr/0018-version-the-glossary-file-format.md` decide
+
 ## 5. External Integrations / APIs
 
 - Notion API: Purpose: publish skill and model pages. Integration Method: `@notionhq/client` with the business token.
@@ -142,6 +171,7 @@ None. People reach the core through their agent (Claude Code, Cursor), GitHub, a
 - Authentication: The Notion token is a secret of each business harness, passed to the sync action.
 - Authorization: The Notion integration sees only the skills database shared with it.
 - Data Encryption: Delegated to GitHub secrets and the Notion API over HTTPS.
+- Vocabulary server: listens only on `127.0.0.1` and trusts the host that starts it. It takes no token. A business harness that serves it over HTTP adds the bearer token check of `vocabulary/api/shared/mcp-http.ts`.
 - Key Security Tools/Practices: This repository is public and holds no token, workspace, database, or business name. Details are in `SECURITY.md`.
 
 ## 8. Development & Testing Environment
@@ -149,6 +179,7 @@ None. People reach the core through their agent (Claude Code, Cursor), GitHub, a
 - Setup: `INSTALL.md`, section "Work in this repository"
 - Testing frameworks: `node --test` for TypeScript, as decided in `docs/adr/0006-test-with-the-node-test-runner.md`; Python test scripts for the checker and the graph
 - Code quality tools: `tsc --noEmit`, the skill checker, Lefthook
+- Build: `npm run build` writes `vocabulary/dist/`. `npm ci` and an install from git run it through `prepare`
 
 ## 9. Future Considerations / Roadmap
 
@@ -160,7 +191,7 @@ None. People reach the core through their agent (Claude Code, Cursor), GitHub, a
 - Project Name: haRness (core)
 - Repository URL: https://github.com/jimmyandrade/harness
 - Primary Contact/Team: Jimmy Andrade
-- Date of Last Update: 2026-10-26
+- Date of Last Update: 2026-10-30
 
 ## 11. Glossary / Acronyms
 
@@ -168,6 +199,7 @@ None. People reach the core through their agent (Claude Code, Cursor), GitHub, a
 - Business harness: a private repository with the skills and data of one business.
 - Skill: a `SKILL.md` with instructions an agent loads for one kind of task.
 - Mapping: the JSON file that names the Notion data source, properties, and status options of one business.
-- Glossary: the per-language list of allowed, forbidden, and situational terms of a business. It can live in the open repository or only on the computer. The engine that reads it is in `vocabulary/` in this repository. The glossary directory is not the harness.
+- Glossary: the per-language list of the terms of a business, each rated on five levels from forbidden to allowed. It can live in the open repository or only on the computer. The engine that reads it is in `vocabulary/` in this repository. The glossary directory is not the harness.
 - Marketplace: the catalog that lists plugins to install. Claude Code and Codex read `.claude-plugin/marketplace.json`. Cursor has no marketplace file in this repository: a team imports the repository, and that import follows a branch. A personal list in the dashboard is not that import.
-- ADR: Architecture Decision Record, in `docs/adr/`.
+- MCP: Model Context Protocol, how an agent calls the vocabulary tools, such as `lookup_term`, `write_terms`, and `get_version`.
+- ADR: Architecture Decision Record, in `docs/adr/` for the core and in `vocabulary/docs/adr/` for the engine.
