@@ -7,12 +7,22 @@ import subprocess
 import unittest
 from pathlib import Path
 
-SCRIPT = Path(__file__).resolve().parents[3] / ".github" / "scripts" / "branch-name.sh"
+import yaml
+
+ROOT = Path(__file__).resolve().parents[3]
+SCRIPT = ROOT / ".github" / "scripts" / "branch-name.sh"
+ACTION_INPUTS = yaml.safe_load((ROOT / ".github" / "actions" / "check-branch-name" / "action.yml").read_text())["inputs"]
+DEFAULTS = {
+    "BRANCH_TYPES": ACTION_INPUTS["types"]["default"],
+    "BLOCKED_BRANCH_PREFIXES": ACTION_INPUTS["blocked-prefixes"]["default"],
+    "ALLOWED_BRANCH_PREFIXES": ACTION_INPUTS["allowed-prefixes"]["default"],
+}
 
 
 def check(branch: str, **env: str) -> subprocess.CompletedProcess[str]:
+    """Run the script as the action does, with the action's default lists unless a test replaces one."""
     return subprocess.run(
-        ["bash", str(SCRIPT), branch], capture_output=True, text=True, env={**os.environ, **env}
+        ["bash", str(SCRIPT), branch], capture_output=True, text=True, env={**os.environ, **DEFAULTS, **env}
     )
 
 
@@ -77,11 +87,12 @@ class BranchNameTest(unittest.TestCase):
         self.assertEqual(check("snyk-upgrade-zod", ALLOWED_BRANCH_PREFIXES="snyk- renovate/").returncode, 0)
         self.assertNotEqual(check("dependabot/npm/zod", ALLOWED_BRANCH_PREFIXES="snyk-,renovate/").returncode, 0)
 
-    def test_empty_lists_keep_the_defaults(self) -> None:
-        self.assert_passes("docs/readme")
-        self.assertEqual(check("docs/readme", BRANCH_TYPES="", BLOCKED_BRANCH_PREFIXES="").returncode, 0)
-        self.assertEqual(check("release-please--branches--main", ALLOWED_BRANCH_PREFIXES="").returncode, 0)
-        self.assertIn("coding agent", check("cursor/x", BRANCH_TYPES="", BLOCKED_BRANCH_PREFIXES="").stdout)
+    def test_empty_list_fails_and_names_the_variable(self) -> None:
+        for variable in DEFAULTS:
+            with self.subTest(variable=variable):
+                out = check("docs/readme", **{variable: ""})
+                self.assertNotEqual(out.returncode, 0)
+                self.assertIn(variable, out.stdout)
 
     def test_other_invalid_name_gets_the_usual_message(self) -> None:
         out = check("my-branch")

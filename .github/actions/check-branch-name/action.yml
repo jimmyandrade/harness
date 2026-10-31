@@ -2,17 +2,17 @@ name: Check the branch name
 description: Fail a pull request whose branch is not type/short-description, with a message for a coding agent when the branch has the prefix of its tool.
 inputs:
   types:
-    description: Accepted branch types, separated by spaces or commas. Empty keeps feat fix docs refactor perf test chore ci.
+    description: Accepted branch types, separated by spaces or commas.
     required: false
-    default: ""
+    default: feat fix docs refactor perf test chore ci
   blocked-prefixes:
-    description: Coding agent prefixes that get the message for the agent, separated by spaces or commas. Empty keeps claude codex copilot cursor.
+    description: Coding agent prefixes that get the message for the agent, separated by spaces or commas.
     required: false
-    default: ""
+    default: claude codex copilot cursor
   allowed-prefixes:
-    description: Branch prefixes that pass without the check, such as the ones that dependency and release bots create, separated by spaces or commas. Empty keeps renovate/ dependabot/ release-please--.
+    description: Branch prefixes that pass without the check, such as the ones that dependency and release bots create, separated by spaces or commas.
     required: false
-    default: ""
+    default: renovate/ dependabot/ release-please--
 runs:
   using: composite
   steps:
