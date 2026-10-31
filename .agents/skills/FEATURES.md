@@ -10,24 +10,21 @@ How these skills relate is in `README.md`, in this folder.
 
 ### acompanhar-edital
 - **Stability**: experimental
-- **Description**: Track open calls on the web: the selection result of an open call the person applied to, and the next open call of the same organization
+- **Description**: Track open calls on the web: the selection result of an open call the person applied to, and the next open call of the same opportunity
 - **Properties**:
   - Lives at `.agents/skills/acompanhar-edital/SKILL.md`
-  - Finds the opportunity data source in the connected workspace by a parameter, or searches for one, and proposes or records its name in the project instructions as a parameter decides
-  - Takes the link properties of the opportunity edition and its group as the first source of domains, searches the web when the original link is missing, and hands a found link back through criar-oportunidade or definir-grupo-de-oportunidades
-  - Finds the optional data sources of attachments (documents, links, open calls) and of stages (dates) by parameters or by searching, since their names vary by business
-  - Reads the attachments and stages of the edition, and writes what an open call, a correction, or a result brings: one attachment per link without duplicates, and one stage per date with the options the schema already has, updating a corrected date with the old one, the new one, and the source
-  - Without those data sources, hands the link and the date to the edition through criar-oportunidade, or lists a date that has no property
-  - Completes the list with the maintainer, the platform used to apply, the official gazette, and the confirmation email, and keeps the domains that have no property on the opportunity in a parameter of the project instructions
-  - Searches each form of the applicant's name, through definir-grafia, in quotes with `site:` on each domain, plus one open search with the organization name to find a missing domain
-  - Reads each document found and says the selection, the standing, the date, the link, and any enrollment or confirmation deadline, and whether it has passed
-  - Never takes an empty search as a rejection, and points to the results page of the open call
-  - Searches the next open call of each followed organization and says when applications open and close
-  - Hands the recurring search to definir-rotina with a window predicted from the announced and actual result dates of past editions, or by common sense without history, and records the actual result date as history for the next prediction
-  - Moves the window when the open call or the result date is extended, and updates the stage with the old date, the new one, and the source
-  - Where the environment supports it, watches the results page with a page-change monitor that diffs it against its last saved version, and reads only what changed, also when a diff arrives as input
-  - Does not search again for an opportunity, a data source, or a schema already read in the conversation
-  - Writes only to the attachment and stage data sources; the opportunity page changes through its owner skill, and a mapped inscription list through definir-inscricao
+  - Is called by the person or by another skill, such as procurar-inscricao, and searches the web for the applicant's name in quotes, in each variation from definir-grafia
+  - Finds the opportunity, attachment, and stage data sources in any connected data source by parameters or by searching, proposes or records a found name, and asks once whether to point to, create, or skip a missing data source or property, never creating one itself
+  - Reuses what the conversation already read, including through procurar-oportunidade, and maps again only after a data source or property changed with the person's confirmation
+  - Requires the opportunity to exist, through procurar-oportunidade or criar-oportunidade, before following it
+  - Takes domains from the opportunity first (edition and group links, attachments, and the opportunity map page), completes them with the maintainer, the platform used to apply, the official gazette, and the confirmation email, and weighs the monitored-domain parameter as priority, fallback, or exclusive
+  - Decides on a new domain through a decision tree, then by asking or by deciding and explaining, and adds the rule to the tree
+  - Reads each document found and reports the standing, including honorable mention, and any deadline to act, leading with a deadline of one or two days or one already past
+  - Writes one attachment per link and one stage per date, split by day, period, or module for an execution, tells simultaneous stages apart by time and place, keeps an extended date visible as replaced next to the new canonical one, and moves only the stage that changed
+  - Searches the next open call and hands it to criar-oportunidade, in the same opportunity group when the business groups editions
+  - Hands the recurring search to definir-rotina with a window predicted from past editions of the group, or by a heuristic with a parameter, tighter than a short response deadline, and records the actual result date as history
+  - Where the environment supports it, watches the results page by diff, and reads only what changed, also when a diff arrives as input
+  - Never changes the opportunity page itself; a mapped inscription list changes through definir-inscricao
   - The name follows `docs/adr/0022-name-the-open-call-skill-after-the-edital.md`
 - **Test Criteria**:
   - [x] The skill is present at that path

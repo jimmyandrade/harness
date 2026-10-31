@@ -2,20 +2,47 @@
 
 Funcionalidade: Domínios onde sai o resultado
   O resultado de uma inscrição sai onde a organização publica, e não só no e-mail.
-  A lista de domínios fica nas instruções do projeto, sem gravar no Notion.
+  A oportunidade é a fonte principal dos domínios, e `Domínios monitorados` só completa a busca.
 
-  Regra: A lista cobre a organização, a mantenedora, a plataforma e o diário oficial
+  Regra: A oportunidade dá os domínios primeiro
+
+    Exemplo: Edição com links e mapa de oportunidades
+      Dado que a edição tem o link do edital e o do formulário
+      E que o grupo dela tem o site oficial e a página no mapa de oportunidades
+      Quando a skill levanta os domínios
+      Então a lista começa pelos domínios desses links, com a origem de cada um
+
+  Regra: A lista cobre também quem mantém a organização
 
     Exemplo: Instituição mantida por uma fundação
-      Dado que a pessoa se inscreveu num curso de uma instituição cultural pública
-      E que a instituição é mantida por uma fundação com outro domínio
-      Quando a skill levanta os domínios
-      Então a lista traz o domínio da instituição, o da fundação, o da plataforma da inscrição e o do diário oficial do governo que mantém a fundação
-      E cada domínio entra em `Domínios por organização`, com a origem dele na resposta
+      Dado que a organização que fornece a oportunidade é mantida por uma fundação com outro domínio
+      Quando a skill completa a lista
+      Então ela acrescenta o domínio da fundação, o da plataforma da inscrição e o do diário oficial do governo que mantém a fundação
 
-  Regra: Um domínio novo achado na busca aberta entra na lista
+  Regra: `Uso dos domínios monitorados` decide o peso de `Domínios monitorados`
 
-    Exemplo: Resultado num domínio que a lista não tinha
-      Dado que a busca do nome com o nome da organização, sem `site:`, acha o resultado num domínio fora da lista
+    Esquema do Cenário: Domínios monitorados e a oportunidade
+      Dado que `Domínios monitorados` tem domínios
+      E que `Uso dos domínios monitorados` está em `<uso>`
+      Quando a skill busca o resultado
+      Então <comportamento>
+
+      Exemplos:
+        | uso         | comportamento                                                          |
+        | prioridade  | ela busca neles primeiro e depois nos da oportunidade e na web aberta  |
+        | alternativa | ela só busca neles quando a oportunidade não dá domínio                |
+        | exclusivo   | ela busca só neles                                                     |
+
+  Regra: Um domínio novo segue `Ao achar um domínio novo`
+
+    Esquema do Cenário: Resultado num domínio fora da lista
+      Dado que a busca aberta acha o resultado num domínio que não está na lista
+      E que a `Árvore de decisão dos domínios` não decide esse domínio
+      E que `Ao achar um domínio novo` está em `<modo>`
       Quando a skill termina a busca
-      Então ela propõe acrescentar esse domínio em `Domínios por organização`
+      Então <comportamento>
+
+      Exemplos:
+        | modo       | comportamento                                                                 |
+        | perguntar  | ela pergunta se o domínio entra em `Domínios monitorados`                     |
+        | automático | ela decide se o domínio entra e diz por que incluiu ou não                    |
