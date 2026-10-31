@@ -42,11 +42,41 @@ version_at_least "${FOUND%%[-+]*}" "$REQUIRED" ||
 [ "$(node -p 'Boolean(process.features.typescript)' 2>/dev/null)" = "true" ] ||
   fail "Node.js $FOUND does not strip TypeScript types by default. Use Node.js $REQUIRED or newer."
 
-if [ ! -f "$ROOT/node_modules/zod/package.json" ]; then
+# The marker is written only after npm ci finishes. A file of a package proves nothing:
+# a launcher stopped in the middle of an install leaves half of node_modules behind.
+MARKER="$ROOT/node_modules/.vocabulary-installed"
+# A host can start the server twice at once, and two npm ci in the same folder break each other.
+# mkdir is atomic, so only one launcher installs; the others wait for its marker.
+LOCK="$ROOT/.vocabulary-install.lock"
+if [ ! -f "$MARKER" ]; then
   command -v npm >/dev/null 2>&1 || fail "npm is not on PATH, and the dependencies are not installed."
-  # --ignore-scripts skips prepare, which needs the development dependencies to compile.
-  (cd "$ROOT" && npm ci --omit=dev --ignore-scripts --no-audit --no-fund --loglevel=error >&2) ||
-    fail "npm ci failed."
+  held=0
+  waited=0
+  while :; do
+    if mkdir "$LOCK" 2>/dev/null; then
+      held=1
+      break
+    fi
+    [ -f "$MARKER" ] && break
+    # A lock older than five minutes belongs to a launcher that died: take it over.
+    if [ "$waited" -ge 300 ]; then
+      rmdir "$LOCK" 2>/dev/null || true
+      waited=0
+    fi
+    sleep 1
+    waited=$((waited + 1))
+  done
+  if [ "$held" -eq 1 ]; then
+    trap 'rmdir "$LOCK" 2>/dev/null || true' EXIT INT TERM
+    if [ ! -f "$MARKER" ]; then
+      # --ignore-scripts skips prepare, which needs the development dependencies to compile.
+      (cd "$ROOT" && npm ci --omit=dev --ignore-scripts --no-audit --no-fund --loglevel=error >&2) ||
+        fail "npm ci failed."
+      : >"$MARKER"
+    fi
+    rmdir "$LOCK" 2>/dev/null || true
+    trap - EXIT INT TERM
+  fi
 fi
 
 exec node "$ROOT/vocabulary/api/mcp/index.ts" "$@"

@@ -20,7 +20,7 @@ Cursor reads `.cursor/mcp.json`. Claude Code reads `.mcp.json` at the project ro
 The plugin declares a server named `vocabulary`. Claude Code shows it as `plugin:core:vocabulary` and starts it when the plugin is enabled, in every project. It runs `vocabulary/api/mcp/launch.sh`, which:
 
 1. Stops with a message on stderr when `node` is missing, when its version is older than 24.22.1, or when it does not strip TypeScript types by default. The message names the version found and the version required. The plugin ships `api/` as TypeScript, with no `dist/`, and Node.js strips types outside `node_modules`, where the plugin does not live. The launcher cannot choose a Node.js: it runs the first `node` on the `PATH` of the app that started it, as `docs/adr/0020-require-node-24-22-1-for-the-vocabulary-server.md` decides.
-2. Runs `npm ci --omit=dev --ignore-scripts` inside the plugin folder when `node_modules/zod` is missing. That happens once per plugin version, on the first start, and needs npm and the registry. `prepare` is skipped because it compiles with the development dependencies.
+2. Runs `npm ci --omit=dev --ignore-scripts` inside the plugin folder when `node_modules/.vocabulary-installed` is missing. The launcher writes that file only after npm ci finishes, so a `node_modules` left half-installed gets installed again. That happens once per plugin version, on the first start, and needs npm and the registry. When the host starts the server twice at once, only one launcher installs, under the lock `.vocabulary-install.lock` in the plugin folder, and the others wait for it. `prepare` is skipped because it compiles with the development dependencies.
 3. Runs `node vocabulary/api/mcp/index.ts`.
 
 The glossary is `.agents/glossary/` of the project that is open: the plugin passes `HARNESS_ROOT=${CLAUDE_PROJECT_DIR}`. To read another directory, such as a glossary you keep for every project, set `HARNESS_GLOSSARY_DIR` in the environment Claude Code starts with, for example in the `env` of `~/.claude/settings.json`. The plugin reads it with an empty default, so it needs no edit.
@@ -29,7 +29,7 @@ The glossary is `.agents/glossary/` of the project that is open: the plugin pass
 { "env": { "HARNESS_GLOSSARY_DIR": "/path/to/glossary" } }
 ```
 
-When the server cannot start, the `core` skills still load. The cause can be a Node.js older than 24.22.1 on the `PATH`, no npm, or no network on the first start. Claude Code lists `plugin:core:vocabulary` as failed in `/mcp`, and the launcher says why on stderr. Use steps 2 to 7, which do not depend on the plugin.
+When the server cannot start, the `core` skills still load. The cause can be a Node.js older than 24.22.1 on the `PATH`, no npm, no network on the first start, or a `node_modules` that an older launcher left half-installed, as `TROUBLESHOOTING.md` describes. Claude Code lists `plugin:core:vocabulary` as failed in `/mcp`, and the launcher says why on stderr. Use steps 2 to 7, which do not depend on the plugin.
 
 To make a Node.js 24.22.1 or newer the one the plugin finds, make it the default of your version manager and start the app again, because an app keeps the `PATH` it was opened with. With `nvm`:
 

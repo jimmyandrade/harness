@@ -110,3 +110,14 @@ Customize, or a plugin page named `core` or `harness-core`, lists skills from a 
 4. A project that needs the tag in `package.json` keeps the links in `docs/runbooks/cursor.md`, steps 1 to 3. Renovate moves that pin, as `docs/runbooks/renovate.md` describes. Remove the personal marketplace so the same skill is not listed twice.
 5. Grok Bot does not read those links or this plugin. Connect apps lists apps from the Cursor Marketplace. A skill a Bot saves belongs to that Bot. There is no install of this repository in Grok Bot.
 6. Customize listing the skills of the indexed commit, or `ls` of the project link after `npm ci` listing the skills under `node_modules/harness/.agents/skills`, closes the case.
+
+## The vocabulary server closes the connection with ERR_MODULE_NOT_FOUND
+
+`/mcp` lists `plugin:core:vocabulary` as failed, and the session says `CONNECTION_CLOSED` or "Connection closed". The other tools of the `core` plugin work. The server log names a file of a package that is missing, such as `node_modules/zod/index.js`, and an older log of the same start may show `npm error code ENOTEMPTY`.
+
+1. Read the log. Claude Code keeps it in `~/Library/Caches/claude-cli-nodejs/<project folder>/mcp-logs-plugin-core-vocabulary/`, one file per start, with the stderr of the launcher. `ERR_MODULE_NOT_FOUND` under the plugin folder, with `node_modules/zod/package.json` still there, is this case. A Node.js or npm message is the case in step 1 of `vocabulary/docs/runbooks/mcp-hosts.md`.
+2. The cause is two starts at once. The host can start the server twice, such as a restart during the first connection or two sessions opening together, and both launchers ran `npm ci` in the same plugin folder. One removed what the other was writing, and a launcher that checks only `node_modules/zod/package.json` took the leftover file as a finished install, so every later start skipped the install.
+3. Find the plugin folder in the log path of the missing file. The Claude desktop app may run a copy synced from a claude.ai organization, under `~/Library/Application Support/Claude/local-agent-mode-sessions/`, instead of the one in `~/.claude/plugins/cache/`.
+4. Remove `node_modules` from that plugin folder, and `.vocabulary-install.lock` if it is there. Both hold only installed dependencies, which the launcher installs again.
+5. Start a new session, or reconnect `plugin:core:vocabulary` in `/mcp`. The first start installs the dependencies again.
+6. The current launcher installs under a lock and checks `node_modules/.vocabulary-installed`, which it writes only after npm ci finishes, so it repairs a half-installed folder by itself. `/mcp` listing `plugin:core:vocabulary` as connected closes the case.
