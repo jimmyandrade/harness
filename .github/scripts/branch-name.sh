@@ -2,23 +2,28 @@
 # Fail when a pull request branch is not <type>/<short-description> with a Conventional Commits type.
 # A branch with the prefix of a coding agent gets a message that tells the agent how to fix its own instructions.
 # Branches that Renovate, Dependabot, and Release Please create pass.
-# BRANCH_TYPES and BLOCKED_BRANCH_PREFIXES replace the default lists, separated by spaces or commas.
+# BRANCH_TYPES, BLOCKED_BRANCH_PREFIXES, and ALLOWED_BRANCH_PREFIXES replace the default lists, separated by spaces or commas.
 # Usage: branch-name.sh "<branch>"
 set -euo pipefail
 
 default_types="feat fix docs refactor perf test chore ci"
 default_agent_prefixes="claude codex copilot cursor"
+default_allowed_prefixes="renovate/ dependabot/ release-please--"
 types_input="${BRANCH_TYPES:-$default_types}"
 read -ra types <<< "${types_input//,/ }"
 prefixes_input="${BLOCKED_BRANCH_PREFIXES:-$default_agent_prefixes}"
 read -ra agent_prefixes <<< "${prefixes_input//,/ }"
+allowed_input="${ALLOWED_BRANCH_PREFIXES:-$default_allowed_prefixes}"
+read -ra allowed_prefixes <<< "${allowed_input//,/ }"
 type_pattern=$(IFS='|'; echo "${types[*]}")
 type_list="${types[*]}"
 type_list="${type_list// /, }"
 name_pattern="^($type_pattern)/[a-z0-9]+([.-][a-z0-9]+)*$"
 
 branch="${1:-}"
-case "$branch" in renovate/*|dependabot/*|release-please--*) exit 0 ;; esac
+for prefix in "${allowed_prefixes[@]}"; do
+  [[ "$branch" == "$prefix"* ]] && exit 0
+done
 [[ "$branch" =~ $name_pattern ]] && exit 0
 
 for prefix in "${agent_prefixes[@]}"; do

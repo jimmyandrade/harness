@@ -73,9 +73,14 @@ class BranchNameTest(unittest.TestCase):
         self.assertIn("coding agent", out.stdout)
         self.assertNotIn("coding agent", check("claude/fix-it", BLOCKED_BRANCH_PREFIXES="devin").stdout)
 
+    def test_custom_allowed_prefixes_replace_the_default_list(self) -> None:
+        self.assertEqual(check("snyk-upgrade-zod", ALLOWED_BRANCH_PREFIXES="snyk- renovate/").returncode, 0)
+        self.assertNotEqual(check("dependabot/npm/zod", ALLOWED_BRANCH_PREFIXES="snyk-,renovate/").returncode, 0)
+
     def test_empty_lists_keep_the_defaults(self) -> None:
         self.assert_passes("docs/readme")
         self.assertEqual(check("docs/readme", BRANCH_TYPES="", BLOCKED_BRANCH_PREFIXES="").returncode, 0)
+        self.assertEqual(check("release-please--branches--main", ALLOWED_BRANCH_PREFIXES="").returncode, 0)
         self.assertIn("coding agent", check("cursor/x", BRANCH_TYPES="", BLOCKED_BRANCH_PREFIXES="").stdout)
 
     def test_other_invalid_name_gets_the_usual_message(self) -> None:

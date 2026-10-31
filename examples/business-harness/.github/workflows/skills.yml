@@ -19,6 +19,7 @@ jobs:
         # with:
         #   types: feat fix docs refactor perf test chore ci build
         #   blocked-prefixes: claude codex copilot cursor devin
+        #   allowed-prefixes: renovate/ dependabot/ release-please-- snyk-
       - name: Check out the repository
         uses: actions/checkout@v7
         with:
