@@ -39,6 +39,8 @@ The workflow is `.github/workflows/ci.yml`. It runs on every pull request, inclu
 
 `.github/workflows/pr-label.yml` runs when a pull request is opened, reopened, edited, updated, or has a label added or removed. A pull request that already has a label passes. One without a label gets it from the Conventional Commits type of its title, through `.github/scripts/pr-label.sh`: `feat` is `enhancement`, `fix` is `bug`, `docs` is `documentation`, `ci` is `ci`, and the `deps` scope is `dependencies`. Any other type fails the check until a person adds the label that describes the change. `criar-pull-request` already opens the pull request with its label; the check holds the rule when a pull request is opened without that skill.
 
+The branch name check runs `.github/scripts/branch-name.sh`. A pull request branch is `<type>/<short-description>`, with a Conventional Commits type; the branches of Renovate, Dependabot, and Release Please pass. A branch that a coding agent names after its tool, starting with `claude/`, `codex/`, `copilot/`, or `cursor/`, fails with a message for the agent: rename the branch with a Conventional Commits type, update its own instructions to use that type as the prefix, open pull requests with `criar-pull-request`, and, when the branch already has a pull request, rename it with `atualizar-branch-do-pull-request`, which closes the old one. The example workflow of a business harness has the same check inline, with the same messages.
+
 Every step in a workflow or a composite action has a `name`: a short imperative phrase in English, such as `Install dependencies`. The run log and the pull request checks show that name instead of the command.
 
 ## Actions
