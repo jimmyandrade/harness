@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.10.3"
+  version: "0.11.0"
   related:
     - comunicar-novidade-do-produto
     - definir-agenda
@@ -24,8 +24,12 @@ Leia os valores nas instruções do projeto, na entrada desta habilidade. Na aus
 "Formato da data com dia da semana": "terça-feira, 01/09/2026"
 "Modo de aprendizado": "perguntar"
 "Etiqueta das conversas": ""
+# `Dividir em mensagens curtas`: `sim` divide o rascunho em mensagens, uma por ideia. `não` manda cada rascunho numa mensagem só.
+"Dividir em mensagens curtas": "sim"
 # `Mensagem única para` lista os tipos de mensagem que vão numa mensagem só, como um status de demanda para alguém do time.
 "Mensagem única para": []
+# `Comunicado numa mensagem só`: `sim` manda o comunicado de produto numa mensagem só. `não` segue `Dividir em mensagens curtas`.
+"Comunicado numa mensagem só": "sim"
 ```
 ## Instruções
 
@@ -75,11 +79,11 @@ A pergunta que pede o sim vem depois do texto, na mesma resposta.
 Sem o texto à vista, não pergunte se pode enviar.
 Se a pessoa editar, o texto dela substitui o rascunho, e a nova versão aparece no chat antes do sim.
 
-No WhatsApp, as pessoas mandam o texto em várias mensagens curtas, não num bloco só.
-Divida o rascunho em mensagens, uma por ideia, e mostre cada uma separada, no próprio bloco de código e, com widget, também no próprio campo editável.
+Com `Dividir em mensagens curtas` em `sim`, como as pessoas costumam escrever no WhatsApp, divida o rascunho em mensagens, uma por ideia, e mostre cada uma separada, no próprio bloco de código e, com widget, também no próprio campo editável.
 Envie na mesma ordem, uma de cada vez.
 Um rascunho de um tipo listado em `Mensagem única para` vai numa mensagem só, com uma linha em branco entre as ideias.
-Comunicado ou anúncio de produto também é exceção: vai numa mensagem só, como `comunicar-novidade-do-produto` manda. Escreva o comunicado com essa habilidade, não aqui.
+Com `Comunicado numa mensagem só` em `sim`, o comunicado de produto também vai numa mensagem só, como `comunicar-novidade-do-produto` manda.
+Escreva o comunicado com essa habilidade, não aqui.
 Um pedido ou uma lista de pendências que acompanha o anúncio é outro assunto e vai em outra mensagem, depois do comunicado.
 
 Para responder ou enviar, mostre a conversa de destino, o texto exato e, se for resposta, a mensagem citada. Envie só depois do sim da pessoa a esse texto e a essa conversa. O sim vale para uma mensagem. Outra mensagem pede outro sim.
