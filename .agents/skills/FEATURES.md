@@ -8,6 +8,22 @@ How these skills relate is in `README.md`, in this folder.
 
 ## Features
 
+### acompanhar-inscricao
+- **Stability**: experimental
+- **Description**: Search the web for the result of an inscription and for the opening of the next edition, on the domains where the organization publishes
+- **Properties**:
+  - Lives at `.agents/skills/acompanhar-inscricao/SKILL.md`
+  - Lists the domains of the organization, its maintainer, the inscription platform, the official gazette, and the confirmation email, and keeps them in a parameter of the project instructions
+  - Searches each form of the name, through definir-grafia, in quotes with `site:` on each domain, plus one open search with the organization name to find a missing domain
+  - Reads each document found and says the selection, the standing, the date, the link, and any enrollment or confirmation deadline, and whether it has passed
+  - Never takes an empty search as a rejection, and points to the results page of the call
+  - Searches the next edition of each followed organization and says its inscription period
+  - Hands the recurring search to definir-rotina, daily near the dates of the call and at a parameter frequency otherwise
+  - Writes nothing to Notion; a change to a mapped inscription list goes through definir-inscricao
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [ ] Three cases validated with the person
+
 ### acompanhar-veiculo
 - **Stability**: experimental
 - **Description**: See or organize what a car or motorcycle owes or costs, such as tax, insurance, fines, points, tolls, toll tag, installments, or repairs

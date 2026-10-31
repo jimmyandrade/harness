@@ -12,6 +12,7 @@ Solid arrows come from `metadata.related`. Dotted arrows are skills cited in the
 flowchart LR
   subgraph core["Core"]
     acompanhar_fila_de_revisao["acompanhar-fila-de-revisao"]
+    acompanhar_inscricao["acompanhar-inscricao"]
     acompanhar_veiculo["acompanhar-veiculo"]
     atender_revisao_de_pull_request["atender-revisao-de-pull-request"]
     atualizar_branch_do_pull_request["atualizar-branch-do-pull-request"]
@@ -124,6 +125,12 @@ flowchart LR
   acompanhar_fila_de_revisao --> procurar_pedido_de_revisao
   acompanhar_fila_de_revisao --> publicar_revisao_de_codigo
   acompanhar_fila_de_revisao --> redigir_com_tom_de_voz
+  acompanhar_inscricao --> definir_grafia
+  acompanhar_inscricao --> definir_inscricao
+  acompanhar_inscricao --> definir_rotina
+  acompanhar_inscricao --> evoluir_habilidade
+  acompanhar_inscricao --> procurar_email
+  acompanhar_inscricao --> procurar_inscricao
   acompanhar_veiculo --> definir_obrigacao_financeira
   acompanhar_veiculo --> definir_viagem
   acompanhar_veiculo --> evoluir_habilidade
