@@ -23,6 +23,19 @@ Funcionalidade: Rotina que gasta só o necessário
       Quando a pessoa pede uma rotina que consulta a fonte a cada hora
       Então a rotina dispara na chegada do evento
 
+    Exemplo: Página sem gatilho vigiada por diff
+      Dado que a fonte é uma página sem webhook nem RSS
+      E que há um monitor que compara a página com a última versão guardada
+      Quando a pessoa pede uma rotina que relê a página todo dia
+      Então a rotina dispara quando o diff mostra mudança e lê só o trecho que mudou
+
+    Exemplo: Página sem monitor disponível
+      Dado que a fonte é uma página sem webhook nem RSS
+      E que não há monitor de mudança de página
+      Quando a rotina é criada
+      Então ela consulta a página pela temperatura medida
+      E a resposta diz que um monitor por diff dispensaria a releitura
+
   Regra: A auditoria propõe e não apaga
 
     Exemplo: Três rotinas leem a mesma caixa de e-mail
