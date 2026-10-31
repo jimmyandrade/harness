@@ -4,7 +4,7 @@ description: Procura na web o resultado do edital em que houve inscrição e a a
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.7.0"
   related:
     - procurar-inscricao
     - procurar-oportunidade
@@ -59,6 +59,7 @@ Edital aqui inclui chamada, convocatória, seleção de curso e qualquer oportun
 Sem nome, acompanhe cada inscrição sem resultado da lista de inscrições, lida por `procurar-inscricao`, quando o projeto mapeia uma; sem lista, pergunte qual edital acompanhar.
 O nome que vai entre aspas na busca na web do Passo 4 é o da pessoa ou empresa inscrita.
 Antes dessa busca, siga `definir-grafia` e junte as variações do nome: o artístico, o civil completo, com e sem acento, e com o sobrenome primeiro.
+O documento oficial costuma trazer o nome civil inteiro, com sobrenomes que a pessoa não usa: sem ele no contexto, pergunte uma vez.
 Manter a página da oportunidade não é papel desta habilidade: a mudança na edição vai para `criar-oportunidade`, e a do grupo para `definir-grupo-de-oportunidades`.
 Esta habilidade grava só nos bancos de anexos e de etapas.
 
@@ -82,6 +83,7 @@ Leia o esquema de cada banco antes de ler ou gravar. Não use um banco de outro 
 
 A oportunidade existir é pré-requisito do acompanhamento.
 Use a edição que já está no contexto; sem ela, ache a edição ligada à inscrição ou siga `procurar-oportunidade`; se ela não existir, siga `criar-oportunidade` e só então continue.
+Quando o edital não é do negócio cuja fonte de dados está conectada, como o curso pessoal de quem trabalha num espaço da empresa, não crie a oportunidade nesse espaço: siga com a busca na web, com a resposta só na conversa, e diga isso.
 Em alguns negócios, a edição pertence a um grupo de oportunidades, com as outras edições da mesma oportunidade.
 
 Levante os domínios antes da primeira busca. A oportunidade é a fonte principal:
@@ -100,6 +102,7 @@ A organização que a pessoa conhece costuma publicar no domínio de quem a mant
 4. O domínio do remetente e dos links da confirmação da inscrição, quando a pessoa a tem; a busca na caixa segue `procurar-email`.
 
 Use o domínio registrável, sem `www` nem subdomínio, para o `site:` cobrir os subdomínios.
+Identifique o edital pelo órgão, pelo objeto e pelo ano, não só pelo número: órgãos da mesma mantenedora repetem o número no mesmo ano.
 Mostre cada domínio com a origem dele.
 Junte `Domínios monitorados` conforme `Uso dos domínios monitorados`: `prioridade` busca neles primeiro, `alternativa` só quando a oportunidade não dá domínio, e `exclusivo` só neles.
 Prefira `prioridade`: na web, um edital muda de página e até de domínio.
@@ -109,10 +112,12 @@ Quando o ambiente guarda dados entre execuções, como uma rotina, guarde os dom
 ### Passo 4
 
 Para cada variação do nome e cada domínio, busque na web o nome entre aspas com `site:` no domínio.
+Quando a ferramenta de busca tem filtro de domínio, use o filtro: há buscador que ignora o `site:` escrito na consulta.
 Busque também, uma vez, cada variação entre aspas com o nome da organização, sem `site:`, para achar um domínio que a lista não tem.
 Um domínio novo que trouxe resultado passa primeiro pela `Árvore de decisão dos domínios`, quando ela existe.
 Quando nenhuma pergunta da árvore decide, siga `Ao achar um domínio novo`: com `perguntar`, pergunte se ele entra em `Domínios monitorados`; com `automático`, decida e diga por que incluiu ou não. Depois acrescente na árvore a regra que essa decisão mostrou.
 Mostre cada consulta feita.
+A página da notícia do edital costuma sair do ar depois da seleção, e os documentos continuam no site: procure-os pelo nome do arquivo ou pela listagem de arquivos do site por data, quando ele a oferece.
 
 ```mermaid
 flowchart LR
@@ -125,7 +130,11 @@ flowchart LR
 ### Passo 5
 
 Abra cada documento achado e leia o trecho do nome.
-Diga a seleção, a edição, a situação da pessoa, como selecionada, suplente, classificada, menção honrosa ou eliminada, a data do documento e o link.
+Quando a leitura pela web não devolve o texto de um PDF, baixe-o numa pasta temporária e extraia o texto antes de concluir.
+Diga a seleção, a edição, a situação da pessoa, como selecionada, suplente, classificada, menção honrosa, eliminada ou desclassificada com o motivo, a data do documento e o link.
+Diga também a etapa do documento: inscrição habilitada, convocação, resultado preliminar, resultado final ou chamada de excedentes.
+Inscrição habilitada, homologada ou deferida só libera a etapa seguinte: não diga que a pessoa passou, e siga buscando até o resultado final.
+A convocação para prova, entrevista ou envio de material é um prazo de agir, com data, hora e local.
 Diga o prazo que o documento der para agir, como matrícula, confirmação, aceite, contato com a organização ou recurso, e se ele já passou.
 Um prazo de 1 ou 2 dias, ou um prazo passado, abre a resposta; o prazo passado vem com a sugestão de contato com a organização.
 Outra pessoa com o mesmo nome aparece como dúvida, com o dado que diferencia, como cidade, categoria ou parte do documento.
@@ -133,7 +142,7 @@ Quando o projeto mapeia uma lista de inscrições, a mudança da inscrição seg
 
 Grave o que o edital, a retificação, a prorrogação ou o resultado trouxer, sempre ligado à edição do Passo 3.
 
-1. No banco de anexos, um registro por documento ou link, com o link e o tipo, como edital, retificação, prorrogação ou resultado. O mesmo link já ligado à edição não se grava de novo. Não baixe o arquivo.
+1. No banco de anexos, um registro por documento ou link, com o link e o tipo, como edital, retificação, prorrogação, convocação ou resultado. O mesmo link já ligado à edição não se grava de novo. Grave o link, não o arquivo.
 2. No banco de etapas, um registro por data: abertura das inscrições, prazo de inscrição, publicação do edital, publicação do resultado, prazo de resposta e execução. A execução dividida em dias, períodos ou módulos, como as aulas de um curso, ganha uma etapa por dia, período ou módulo. Use o nome e as opções que o esquema já tem. Não crie opção.
 3. Antes de criar, procure a mesma etapa ligada à edição. É a mesma quando o nome, a data, a hora e o local coincidem. Mesma data com hora ou local diferente, como palestras ou shows simultâneos, é outra etapa.
 4. Na prorrogação ou na retificação de uma data, mantenha a etapa antiga à vista, marcada como substituída pela opção ou relação que o esquema tiver, e crie a nova como a data que vale, com o link da fonte. Sem como marcar, atualize a data e diga a antiga, a nova e o link.
@@ -208,6 +217,13 @@ Se você trocar a data da etapa pela prorrogada, ninguém vê que o prazo mudou 
 1. Marque a etapa antiga como substituída.
 2. Crie a nova como a data que vale, com o link da prorrogação.
 
+### Habilitação como aprovação
+
+Se você disser que a pessoa passou porque a inscrição foi habilitada, ela perde a prova que vem depois.
+
+1. Diga a etapa do documento.
+2. Busque a convocação e o resultado final.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
@@ -224,7 +240,7 @@ As duas edições anteriores do grupo publicaram o resultado 10 e 20 dias depois
 
 - O documento traz só iniciais e parte do CPF: diga que a variação casa, mas não confirma a pessoa, e aponte o documento.
 - A pessoa não lembra onde se inscreveu: comece pela busca aberta do Passo 4 e levante os domínios a partir do que ela achar.
-- O resultado está numa imagem ou num PDF sem texto: o índice da busca não o lê; aponte a página do edital.
+- O resultado está numa imagem ou num PDF digitalizado: o índice da busca não o lê; aponte a página do edital.
 
 ## Pegadinhas
 
@@ -232,6 +248,8 @@ As duas edições anteriores do grupo publicaram o resultado 10 e 20 dias depois
 - O link da oportunidade só parece cobrir tudo. Mesmo que ele aponte para a organização ou para o formulário, muitas vezes o resultado pode sair em outro lugar, como na mantenedora ou no diário oficial.
 - A falta de e-mail só parece falta de resultado. O resultado pode nunca chegar por e-mail.
 - Inferir que listas oficiais sempre usam o nome civil completo, em maiúsculas ou com o sobrenome primeiro pode limitar a busca. A busca só pelo nome artístico também pode não achar. Buscas com variações são mais certeiras.
+- A lista de inscrições habilitadas só parece a lista de aprovados. Ela vem antes da prova.
+- O número do edital só parece identificá-lo. A mesma mantenedora repete o número no mesmo ano.
 - O próximo edital só parece distante. Ele costuma abrir perto do resultado do anterior e também não é avisado.
 - A data anunciada do resultado só parece o dia da busca. A publicação pode vir antes, depois ou prorrogada, e a janela vem do histórico.
 - O banco de etapas só parece ausente quando não se chama etapas. Ele pode ter outro nome, como cronograma ou prazos, e as opções podem ter outro texto.
