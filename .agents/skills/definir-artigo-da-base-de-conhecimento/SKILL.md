@@ -4,7 +4,7 @@ description: Cria, revisa e atualiza o artigo da base de conhecimento que respon
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.3"
+  version: "0.3.4"
   related:
     - criar-habilidade
     - definir-historia-de-usuario
@@ -94,6 +94,7 @@ Quando a dúvida envolve uma ferramenta, abra a página da ferramenta e ligue-a 
 Quando uma skill ou um playbook governa o tema, use as regras dele como conteúdo.
 Não copie critérios de aceite, cenários em BDD nem a estrutura da skill para o artigo.
 O guardrail vira item de checklist, alerta ou passo.
+Quando um passo usa uma ferramenta que a pessoa só recebe depois dele, como um autenticador cujo convite chega na conta que ela ainda está ativando, dê o caminho de quem ainda não tem a ferramenta e diga quando trocar.
 Quando o artigo orienta uma decisão, um comportamento ou um padrão de trabalho, e a `Fonte de estratégia e cultura` está preenchida, leia essa página antes de escrever e siga o que ela diz.
 
 ### Passo 6
@@ -202,6 +203,7 @@ Os critérios ficaram de fora. Cada guardrail virou item do diagnóstico rápido
 - O print da tela inicial parece bastar. O passo mostra o estado em que a pessoa clica: o menu aberto, o submenu, a janela de busca.
 - Esperar os prints da pessoa parece o caminho seguro. Quem escreve o artigo captura os prints que faltam.
 - Uma página com o título genérico da ferramenta e o corpo só com o texto de exemplo parece um rascunho esquecido, e também pode ser o modelo do banco. Só a lista de modelos do data source diz qual dos dois é.
+- Um artigo que manda usar uma ferramenta parece valer para todo mundo. Antes de dizer que uma orientação contradiz o artigo, confira a ordem dos acessos: quem ainda não recebeu a ferramenta segue outro caminho.
 
 ## Scripts disponíveis
 
