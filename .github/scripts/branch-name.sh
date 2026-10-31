@@ -2,11 +2,16 @@
 # Fail when a pull request branch is not <type>/<short-description> with a Conventional Commits type.
 # A branch with the prefix of a coding agent gets a message that tells the agent how to fix its own instructions.
 # Branches that Renovate, Dependabot, and Release Please create pass.
+# BRANCH_TYPES and BLOCKED_BRANCH_PREFIXES replace the default lists, separated by spaces or commas.
 # Usage: branch-name.sh "<branch>"
 set -euo pipefail
 
-types=(feat fix docs refactor perf test chore ci)
-agent_prefixes=(claude codex copilot cursor)
+default_types="feat fix docs refactor perf test chore ci"
+default_agent_prefixes="claude codex copilot cursor"
+types_input="${BRANCH_TYPES:-$default_types}"
+read -ra types <<< "${types_input//,/ }"
+prefixes_input="${BLOCKED_BRANCH_PREFIXES:-$default_agent_prefixes}"
+read -ra agent_prefixes <<< "${prefixes_input//,/ }"
 type_pattern=$(IFS='|'; echo "${types[*]}")
 type_list="${types[*]}"
 type_list="${type_list// /, }"
