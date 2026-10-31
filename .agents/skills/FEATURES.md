@@ -1422,10 +1422,11 @@ How these skills relate is in `README.md`, in this folder.
   - Reads the registration list, its property names, and its status options from the data mapping of the project, and searches it in the title and in the notes
   - Names each person in the note and does not answer yes for the whole event
   - When several registrations match one event, says the answer depends on which withdrawal is meant, with status, date, and page link for each
-  - Treats a pre-registration as neither approval nor withdrawal, suggests procurar-email and acompanhar-edital, and points to the other contact channels with the organizer
+  - Treats a pre-registration as neither approval nor withdrawal, follows procurar-email when an email is needed, suggests acompanhar-edital, and points to the other contact channels with the organizer
   - Treats the participant and the person who recorded the row as different people
   - Searches every form of a name through definir-grafia, and uses the correct spelling only in the reply
   - When the person states that the registration was made or confirmed, follows definir-inscricao so the celebration comes with the saved status
+  - Shows the code, the order number, the amount, and the receipt when the record has them, unless a parameter hides them
   - Does not decide whether a task exists, and does not create, edit, or complete the registration
 - **Test Criteria**:
   - [x] The skill is present at that path
