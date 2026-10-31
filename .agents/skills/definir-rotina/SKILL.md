@@ -1,9 +1,9 @@
 ---
 name: definir-rotina
-description: Cria, revisa e audita uma rotina agendada ou disparada por evento, de um assistente ou de um bot, para ela rodar só quando o resultado tem quem o use. Usada quando a pessoa pede uma rotina nova, quer mudar a frequência de uma ou revisar o consumo das rotinas, mesmo sem dizer rotina. Não serve para executar o trabalho da rotina, criar evento na agenda nem medir uma skill.
+description: Cria, revisa e audita rotinas agendadas ou por evento, para rodarem só quando o resultado tem uso. Usada ao pedir, mudar ou auditar uma rotina, ou antes de pedir de novo um resultado que uma rotina já gerou, mesmo sem dizer rotina. Não serve para executar o trabalho da rotina, criar evento na agenda nem medir uma skill.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   related:
     - acompanhar-fila-de-revisao
     - evoluir-habilidade
@@ -18,7 +18,13 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 ```yaml
 # `Horário comercial` traz os dias e as horas em que uma pessoa pode responder a um aviso.
 "Horário comercial": "dias úteis, das 9h às 18h"
+# `Janela de manutenção` traz os dias e as horas da limpeza, da atualização de status e do processamento pesado, fora do `Horário comercial`.
+"Janela de manutenção": "dias úteis, das 0h às 6h"
 "Fuso horário": ""
+# `Cadência de relatório` é `diária`, `semanal`, `mensal` ou outra que a pessoa der.
+"Cadência de relatório": "semanal"
+# `Ao fim do período` é `pausar`, que pausa a rotina de uma campanha ou de um projeto quando o período acaba, ou `perguntar`.
+"Ao fim do período": "pausar"
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -27,33 +33,50 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 ### Passo 1
 
 Leia o que a rotina faz, de que fonte ela lê e quem usa o resultado.
-Antes de criar, liste as rotinas que já existem e procure uma que leia a mesma fonte ou entregue o mesmo resultado.
+Antes de criar a rotina, e antes de pedir um resultado numa conversa longa ou a outro bot, procure se uma rotina ou outra pessoa já o gerou, como na saída da rotina ou num canal compartilhado.
+Se já existe, aponte esse resultado em vez de gerar outro.
+Liste as rotinas que já existem e procure uma que leia a mesma fonte ou entregue o mesmo resultado.
 Se existir, ajuste essa rotina em vez de criar outra.
+Quando bots diferentes leem a mesma fonte, um bot coletor por fonte coleta e organiza, e repassa cada item ao bot especialista naquele tipo de comunicação.
 
 ### Passo 2
 
-Escolha o disparo.
-Quando a fonte oferece webhook, notificação ou gatilho, a rotina dispara na chegada do evento, sem consulta periódica.
-Sem gatilho, a frequência segue quando o resultado é usado.
-Um resultado que não precisa ser fresco, como coleta para análise posterior, roda só em dias úteis.
-Relatório, resumo e consolidação rodam uma vez por semana ou menos, conforme a cadência de quem lê.
+Meça a temperatura do dado antes de escolher a frequência: com que frequência a fonte muda de fato.
+Leia as datas das últimas atualizações, como o `Last-Modified`, as datas do feed ou o histórico de versões, e calcule o intervalo entre elas.
+O dado quente muda em minutos ou horas, o morno muda por dia, e o frio muda por semana ou mais.
+A rotina não roda com mais frequência que a fonte muda, e a resposta mostra a temperatura e as datas usadas.
+Sem datas, comece pela menor frequência que atende quem usa o resultado e meça de novo depois de algumas execuções.
 
 ### Passo 3
 
-Uma rotina que avisa uma pessoa, lê caixa de entrada ou manda mensagem roda só no `Horário comercial`, no `Fuso horário`.
-Fora dele, ninguém responde ao aviso, e a execução só gasta.
-Quando várias pessoas precisam do mesmo resultado, a rotina publica num canal compartilhado, em vez de cada uma pedir o mesmo numa conversa.
+Escolha o disparo.
+Quando a fonte oferece webhook, RSS, notificação ou gatilho, a rotina dispara na chegada do evento, sem consulta periódica.
+Sem gatilho, a frequência segue a temperatura do Passo 2 e quando o resultado é usado.
+Um resultado que não precisa ser fresco, como coleta para análise posterior, roda só em dias úteis.
+Relatório, resumo e consolidação rodam na `Cadência de relatório`.
 
 ### Passo 4
 
-Ao auditar, liste cada rotina com o disparo, a frequência, a fonte e quem usa o resultado.
-Proponha trocar a consulta periódica por gatilho, quando a fonte oferece.
-Proponha tirar dos fins de semana e da madrugada o que não precisa de resultado fresco.
-Proponha juntar numa rotina só as que leem a mesma fonte.
-Proponha pausar a que ninguém usa mais ou que falha sempre, com o motivo na descrição dela.
-Mostre as propostas e só aplique com a confirmação da pessoa.
+Uma rotina que avisa uma pessoa, lê caixa de entrada ou manda mensagem roda só no `Horário comercial`, no `Fuso horário`.
+Fora dele, ninguém responde ao aviso, e a execução só gasta.
+Limpeza, atualização de status e processamento pesado que não avisam ninguém rodam na `Janela de manutenção`, para não disputar com o trabalho das pessoas.
+Quando várias pessoas precisam do mesmo resultado, a rotina publica num canal compartilhado, em vez de cada uma pedir o mesmo numa conversa.
+A rotina de uma campanha, de um projeto ou de outro período limitado leva a data de fim.
+Quando o período acaba, siga `Ao fim do período`: com `pausar`, pause a rotina com o motivo na descrição dela; com `perguntar`, pergunte à pessoa.
 
 ### Passo 5
+
+A auditoria é avulsa e procura oportunidades de economia.
+Liste cada rotina com o disparo, a frequência, a temperatura da fonte e quem usa o resultado.
+Proponha trocar a consulta periódica por gatilho, quando a fonte oferece.
+Proponha baixar a frequência que passa da temperatura medida.
+Proponha tirar do fim de semana o que não precisa de resultado fresco, e levar para a `Janela de manutenção` o que é pesado e não avisa ninguém.
+Proponha juntar numa rotina só as que leem a mesma fonte, com um bot coletor que repassa ao especialista.
+Proponha pausar a que ninguém usa mais, que falha sempre ou cujo período acabou, com o motivo na descrição dela.
+Cada proposta diz quanto economiza, como o número de execuções a menos por semana.
+Mostre as propostas e só aplique com a confirmação da pessoa.
+
+### Passo 6
 
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
@@ -71,7 +94,7 @@ Se você apagar uma rotina que parou de servir, o histórico e a configuração 
 Se você criar uma rotina que confere o consumo de uso, cada conferência também consome.
 
 1. Não crie a rotina.
-2. Explique o custo e ofereça a auditoria do Passo 4, feita uma vez.
+2. Explique o custo e ofereça a auditoria avulsa do Passo 5.
 
 ### Duas rotinas para a mesma fonte
 
@@ -105,6 +128,9 @@ Três rotinas liam a mesma caixa de e-mail, e uma rodava de madrugada para avisa
 
 ## Scripts disponíveis
 
-Esta habilidade não usa script. A rotina é criada e alterada na ferramenta de agendamento do harness em uso.
+A rotina é criada e alterada na ferramenta de agendamento do harness em uso.
 
-1. Liste as rotinas, escolha o disparo e o horário, e mostre as propostas antes de aplicar.
+- `curl -sI <endereço> | grep -i '^last-modified'`: data da última mudança de uma página, no Passo 2.
+- `curl -s <endereço do feed> | grep -o -E '<(pubDate|updated)>[^<]*'`: datas das últimas entradas de um feed, no Passo 2.
+
+1. Procure o resultado já gerado, meça a temperatura, escolha o disparo e a janela, e mostre as propostas antes de aplicar.
