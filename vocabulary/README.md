@@ -57,6 +57,12 @@ npm test
 
 Check: every command exits 0. `npm ci` already runs `npm run build` through `prepare`, which writes `dist/` from `api/`. `dist/` is not committed, as `docs/adr/0007-build-on-install.md` decides.
 
+Each shared piece of the engine lives in one place. A new route test or check uses it instead of repeating it:
+
+- The host of the server is `HOST`, in [`api/shared/http.ts`](api/shared/http.ts).
+- A route test starts the server with `withServer`, from [`api/shared/testing.ts`](api/shared/testing.ts), which stays out of the build.
+- The checks of a write compose in `guarded`, in [`api/shared/schema.ts`](api/shared/schema.ts). The real link check lives in [`api/shared/links.ts`](api/shared/links.ts).
+
 ## License
 
 PolyForm Noncommercial 1.0.0, in `LICENSE.md` at the root of the repository. Commercial use needs a written license. See `COMMERCIAL.md` at the root.
