@@ -37,6 +37,18 @@ The message is `"<key>" is missing from metadata.parameters of AGENTS.md`, or a 
 1. A missing setting is absent from the project and from the core. Update the harness dependency or the action tag, or add the key under `metadata.parameters.Global` in the frontmatter of the project `AGENTS.md`.
 2. An unknown key is usually misspelled. Copy the key from the skill's `Parâmetros de configuração` block, or from the core `AGENTS.md` for a script setting.
 
+## The default branch is not `main`
+
+`gh repo view --json defaultBranchRef` names a work branch, such as `chore/install-core-harness`, and the repository has no `main`. Pull requests target that branch, and the Notion sync publishes from it.
+
+1. GitHub made the first branch pushed to the empty repository its default branch. Step 1 of `docs/runbooks/business-repository.md` now prevents it.
+2. Create `main` at the head of that branch: `gh api --method POST repos/<owner>/<repo>/git/refs -f ref=refs/heads/main -f sha=<head of the branch>`.
+3. Make `main` the default branch in Settings, General, or with `gh api --method PATCH repos/<owner>/<repo> -f default_branch=main`.
+4. Move each open pull request to `main` with `gh pr edit <number> --base main`, before deleting the old branch: deleting the base of a pull request closes it.
+5. Delete the old branch once `gh api repos/<owner>/<repo>/compare/main...<old branch>` shows it 0 commits ahead.
+6. In each local copy, run `git fetch --prune origin`, `git remote set-head origin -a`, and `git switch main`.
+7. `gh repo view --json defaultBranchRef --jq .defaultBranchRef.name` prints `main`, and `gh pr list --json baseRefName` lists no other base. That closes the case.
+
 ## The plugin manifests disagree
 
 The checker prints a line that starts with `.cursor-plugin/plugin.json` or `.claude-plugin/marketplace.json`.

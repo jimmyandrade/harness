@@ -4,7 +4,7 @@ locale: en
 
 # Publish the skills in Notion
 
-GitHub is the write source. On each release, the sync action writes one page per skill changed since the previous release, including the core skills, into the skills database of the workspace, and one page for the project instructions, `AGENTS.md`, when that file changes. Nobody edits those pages in Notion. The database can have any name; businesses in Brazil often call it Habilidades. Run this runbook from the root of the business repository, after `business-repository.md`, with `TAG` from its step 1.
+GitHub is the write source. On each release, the sync action writes one page per skill changed since the previous release, including the core skills, into the skills database of the workspace, and one page for the project instructions, `AGENTS.md`, when that file changes. Nobody edits those pages in Notion. The database can have any name; businesses in Brazil often call it Habilidades. Run this runbook from the root of the business repository, after `business-repository.md`, with `TAG` from its step 2.
 
 Each step ends with a check.
 
