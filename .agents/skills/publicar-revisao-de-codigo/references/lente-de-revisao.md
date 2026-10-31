@@ -19,6 +19,7 @@ Perguntas que a revisão faz ao código, no próprio PR ou no de outra pessoa. E
 - Existe token do design system para esse valor? Existe um util pronto que já faz isso?
 - O valor fixo deveria ser o default de uma propriedade, para poder mudar depois?
 - O componente é flexível e reaproveitável, ou está preso a uma ocasião?
+- Um valor, uma responsabilidade ou uma preparação de teste está em mais de um lugar? A organização segue `escrever-codigo` e `escrever-teste`?
 
 ## Estrutura
 

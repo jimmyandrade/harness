@@ -3,7 +3,7 @@ name: escrever-codigo
 description: Aplica as preferências de código da pessoa antes de escrever ou alterar código, como comentários, estilo inline e o que fazer antes de criar um componente. Usada quando uma mudança vai escrever ou alterar código, inclusive quando o pedido é implementar uma issue. Não serve para testes, para commit nem para decidir a arquitetura. O pedido de implementar só termina quando a resposta tem o link do pull request.
 metadata:
   author: jimmyandrade
-  version: "0.8.1"
+  version: "0.9.0"
   related:
     - criar-commit
     - criar-pull-request
@@ -48,13 +48,20 @@ Siga `Estilo inline`. Um valor que já tem uma variável de design ou uma classe
 
 ### Passo 4
 
-Antes de criar um componente, siga `Antes de criar um componente`: leia o desenho de origem, e chame as habilidades do repositório para criar componentes, na ordem dada, em vez de refazer o passo a passo à mão. Sem habilidade do repositório, siga o componente mais parecido que já existe.
+Organize o código para que cada mudança futura aconteça num lugar só.
+Um valor usado em mais de um arquivo, como um endereço ou um limite, vira uma constante exportada de um módulo só.
+Uma responsabilidade nova, como uma checagem que não é do módulo onde ela seria chamada, vai para um módulo próprio, que o outro importa.
+Checagens que se acumulam, como recusas de uma validação, viram uma lista de funções aplicadas por uma composição, em vez de chamadas encadeadas uma a uma.
 
 ### Passo 5
 
-Rode o teste da mudança e confirme que ele passa. Para o commit e o pull request, siga `criar-commit` e `criar-pull-request`. O pedido de implementar só está pronto quando a resposta tem o link do pull request. Com `Criar pull request ao terminar` em `rascunho`, esse pull request é um rascunho. Uma resposta que só diz que o código está pronto, sem o link, não encerra o pedido. Depois do push, uma vez, o título e a descrição têm de continuar contando o que o código faz. Não confira a cada commit.
+Antes de criar um componente, siga `Antes de criar um componente`: leia o desenho de origem, e chame as habilidades do repositório para criar componentes, na ordem dada, em vez de refazer o passo a passo à mão. Sem habilidade do repositório, siga o componente mais parecido que já existe.
 
 ### Passo 6
+
+Rode o teste da mudança e confirme que ele passa. Para o commit e o pull request, siga `criar-commit` e `criar-pull-request`. O pedido de implementar só está pronto quando a resposta tem o link do pull request. Com `Criar pull request ao terminar` em `rascunho`, esse pull request é um rascunho. Uma resposta que só diz que o código está pronto, sem o link, não encerra o pedido. Depois do push, uma vez, o título e a descrição têm de continuar contando o que o código faz. Não confira a cada commit.
+
+### Passo 7
 
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
