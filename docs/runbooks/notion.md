@@ -56,13 +56,24 @@ Check: with every group expanded, the Content access tab lists the skills databa
 
 ## Store the token
 
-Copy the token with the copy button under Integration token (Token de integração), in the Configuration tab of the connection, without revealing it on screen. Store it as the repository secret `NOTION_TOKEN`. The command asks for the value, so the token never shows in the shell history.
+Copy the token with the copy button under Integration token (Token de integração), in the Configuration tab of the connection, without revealing it on screen. The copy button is the last icon of the field; the one beside it generates a new token and voids the old one. Notion says "Link copied" (Link copiado) even when it copies the token.
+
+Test the token in the clipboard before storing it. A search answers `200` when the token is valid and reaches the skills database, and `401` when the clipboard holds something else.
 
 ```bash
-gh secret set NOTION_TOKEN
+curl -s -o /dev/null -w "%{http_code}\n" -X POST https://api.notion.com/v1/search -H "Authorization: Bearer $(pbpaste)" -H "Notion-Version: 2022-06-28" -H "Content-Type: application/json" -d '{"page_size":1}'
 ```
 
-Check: `gh secret list` shows `NOTION_TOKEN`.
+Store the tested token as the repository secret `NOTION_TOKEN` straight from the clipboard, so nothing else is pasted in its place and the token never shows in the shell history. Then clear the clipboard.
+
+```bash
+pbpaste | gh secret set NOTION_TOKEN
+pbcopy < /dev/null
+```
+
+`pbpaste` and `pbcopy` are on macOS. Elsewhere, run `gh secret set NOTION_TOKEN`, which asks for the value, and check that the number of masked characters matches the length of the token.
+
+Check: the search answers `200`, and `gh secret list` shows `NOTION_TOKEN` with the time it was just set.
 
 ## Copy the sync workflow
 
