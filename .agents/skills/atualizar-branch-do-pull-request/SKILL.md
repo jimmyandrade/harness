@@ -3,7 +3,7 @@ name: atualizar-branch-do-pull-request
 description: Use essa habilidade sempre que uma branch com pull request estiver atrás da base, tiver conflito ou precisar de rebase, mesmo sem dizer rebase. NÃO use para abrir o PR, fazer o primeiro push nem mesclar (use criar-pull-request).
 metadata:
   author: jimmyandrade
-  version: "0.2.1"
+  version: "0.3.0"
   related:
     - criar-pull-request
     - atender-revisao-de-pull-request
@@ -38,6 +38,10 @@ Atualize a branch com rebase sobre a `Branch base` remota.
 Nunca faça merge da base na branch nem crie commit com assunto `merge:`.
 O squash do PR não é motivo para mesclar a base antes.
 Resolva conflitos nos commits rebaseados.
+Antes de substituir a branch publicada, siga `atender-revisao-de-pull-request`: as revisões, as threads e os comentários abertos do PR são tratados e respondidos.
+Quando o rebase acontece dentro dessa habilidade, ela já cumpre este passo.
+Depois do rebase, confira o que entrou da base contra o que a revisão do PR pediu, como um padrão que ela mandou trocar.
+O que não segue é ajustado no mesmo PR, antes do envio.
 
 ### Passo 3
 
@@ -72,6 +76,13 @@ Se você rebasear e enviar a branch de um PR já mesclado, o push recria a branc
 1. Confira o estado do PR no Passo 1.
 2. Leve só os commits que ficaram fora do merge para uma branch nova.
 
+### Revisão perdida no rebase
+
+Se você rebasear sem olhar a revisão do PR, o código que veio da base pode voltar a um padrão que a revisão mandou trocar, e uma thread aberta fica sem resposta.
+
+1. Siga `atender-revisao-de-pull-request` antes de substituir a branch, pelo Passo 2.
+2. Ajuste no mesmo PR o que veio da base fora do padrão pedido.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
@@ -95,4 +106,4 @@ A branch tinha PR aberto e a base avançou com um PR vizinho. Atualizei com reba
 - `git fetch origin && git rebase origin/<Branch base>`: Passo 2.
 - `git push --force-with-lease origin <branch>`: Passo 3, só com autorização. Não substitui a `Branch base`.
 
-1. Confira o estado do PR, atualize com rebase, resolva os conflitos e substitua a branch publicada com autorização.
+1. Confira o estado do PR, atualize com rebase, resolva os conflitos, atenda a revisão do PR e substitua a branch publicada com autorização.
