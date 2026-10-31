@@ -4,7 +4,7 @@ locale: en
 
 # Publish the skills in Notion
 
-GitHub is the write source. On each release, the sync action writes one page per skill changed since the previous release, including the core skills, into the skills database of the workspace, and one page for the project instructions, `AGENTS.md`, when that file changes. Nobody edits those pages in Notion. The database can have any name; businesses in Brazil often call it Habilidades. Run this runbook from the root of the business repository, after [`business-repository.md`](business-repository.md), with `TAG` from [Read the core release](business-repository.md#read-the-core-release).
+GitHub is the write source. On each release, the sync action writes one page per skill changed since the previous release, including the core skills, into the skills database of the workspace, and one page for the project instructions, `AGENTS.md`, when that file changes. Nobody edits those pages in Notion. The database can have any name; businesses in Brazil often call it Habilidades. Run this runbook from the root of the business repository, after [`business-repository.md`](business-repository.md), with `TAG` from [Read the core release](business-repository.md#read-the-core-release). Move the core pin to that release first: a business repository that pins an old core has an old copy of this runbook and of `examples/notion/`.
 
 Each step ends with a check.
 
@@ -44,7 +44,7 @@ The connection opens on its Configuration tab. Under Capabilities, set each one 
 
 The sync queries the data source, creates pages, and updates them. It never deletes a page and never reads people, comments, or other pages.
 
-Open the Content access tab (Acesso a conteúdo) and select Edit access. Search for the skills database by name and select it, so it shows as already added. Select only the database, not the page or the teamspace that contains it, which would grant everything under it. Then save. If another connection had access to the skills database, remove it there.
+Open the Content access tab (Acesso a conteúdo) and select Edit access. Search for the skills database by name and select it, so it shows as already added. Select only the database, not the page or the teamspace that contains it, which would grant everything under it. A custom icon can hide which result is the database: open it in Notion, and the database shows its properties as columns, while a page that holds it shows the database inside. Then save. If another connection had access to the skills database, remove it there.
 
 ![Manage page access, with the skills database found by name and already added](images/notion/search-skills-database.webp)
 
@@ -58,7 +58,9 @@ Check: with every group expanded, the Content access tab lists the skills databa
 
 Copy the token with the copy button under Integration token (Token de integração), in the Configuration tab of the connection, without revealing it on screen. The copy button is the last icon of the field; the one beside it generates a new token and voids the old one. Notion says "Link copied" (Link copiado) even when it copies the token.
 
-Test the token in the clipboard before storing it. A search answers `200` when the token is valid and reaches the skills database, and `401` when the clipboard holds something else.
+Never paste the token into a chat, an issue, or a pull request. A Notion token starts with `ntn_` and has 50 characters.
+
+Test the token in the clipboard before storing it. A search answers `200` when the token is valid, even before it reaches any page, and `401` when the clipboard holds something else or the token was generated again. The content access check above is what confirms the skills database.
 
 ```bash
 curl -s -o /dev/null -w "%{http_code}\n" -X POST https://api.notion.com/v1/search -H "Authorization: Bearer $(pbpaste)" -H "Notion-Version: 2022-06-28" -H "Content-Type: application/json" -d '{"page_size":1}'
@@ -71,9 +73,11 @@ pbpaste | gh secret set NOTION_TOKEN
 pbcopy < /dev/null
 ```
 
-`pbpaste` and `pbcopy` are on macOS. Elsewhere, run `gh secret set NOTION_TOKEN`, which asks for the value, and check that the number of masked characters matches the length of the token.
+`pbpaste` and `pbcopy` are on macOS. Elsewhere, run `gh secret set NOTION_TOKEN`, which asks for the value, and check that it shows 50 masked characters.
 
-Check: the search answers `200`, and `gh secret list` shows `NOTION_TOKEN` with the time it was just set.
+Generating a new token voids the one stored in `NOTION_TOKEN`. After that, test and store the new one the same way.
+
+Check: the search answers `200`, and `gh secret list` shows `NOTION_TOKEN` with the time it was just set, in UTC.
 
 ## Copy the sync workflow
 
