@@ -12,6 +12,13 @@ Funcionalidade: A oportunidade como pré-requisito e primeira fonte
       Quando a skill começa o acompanhamento
       Então ela segue `criar-oportunidade` e só depois continua
 
+    Exemplo: Edital pessoal fora do espaço de trabalho do negócio
+      Dado que a inscrição é da pessoa e não do negócio
+      E que a única fonte de dados conectada é a do negócio
+      Quando a skill começa o acompanhamento
+      Então ela não cria a oportunidade no banco do negócio
+      E segue com a busca na web e a resposta só na conversa, dizendo isso
+
   Regra: O link achado na web volta para a oportunidade pela skill dona dela
 
     Exemplo: Oportunidade sem o link do edital
