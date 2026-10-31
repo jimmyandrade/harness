@@ -3,7 +3,7 @@ name: levantar-ambiente-do-repositorio
 description: Levanta o ambiente de trabalho de um repositório antes de escrever código, testes, commit ou pull request. Acha o runtime e como ativá-lo, os comandos de instalar, lint, tipos, testes e build, as habilidades do repositório que se aplicam e as pegadinhas que ele documenta. Não serve para rodar os comandos, instalar dependências nem decidir a convenção de código.
 metadata:
   author: jimmyandrade
-  version: "0.10.0"
+  version: "0.10.1"
   related:
     - criar-commit
     - criar-pull-request
@@ -56,7 +56,7 @@ Para cada aviso do diagnóstico, diga o que conferir antes de resolver:
 2. Remoção: o que o gerenciador removeria junto, como em `brew autoremove --dry-run`. Um runtime que um projeto ou um ambiente virtual usa e que está instalado só como dependência sai junto; ele precisa ser instalado a pedido antes.
 3. Cask desativado: se o app ainda existe. Sem o app, a remoção só limpa o registro.
 4. Tap não confiável: se algum pacote dele está instalado. Sem pacote, remova o tap; com pacote, confiar nele é decisão da pessoa.
-5. Aviso que pede senha de administrador ou muda uma decisão de segurança, como os certificados raiz: fica com a pessoa, com o comando e o link que o diagnóstico dá.
+5. Aviso que pede senha de administrador ou muda uma decisão de segurança, como os certificados raiz: fica com a pessoa, com o comando e o link que o diagnóstico dá. Uma atualização do sistema pode trazer o aviso de volta, então o diagnóstico roda de novo depois dela.
 Não rode a atualização: ela fica com quem chamou, depois do sim da pessoa.
 Depois que a pessoa atualiza, leia a versão de novo, diga se a atualização entrou e o que o gerenciador ainda lista.
 
