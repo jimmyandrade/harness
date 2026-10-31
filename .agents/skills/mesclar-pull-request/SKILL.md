@@ -1,9 +1,9 @@
 ---
 name: mesclar-pull-request
-description: Mescla um pull request aberto na branch base e faz o que vem depois do merge, inclusive quando a pessoa avisa que mesclou. Usada quando a pessoa pede para mesclar, colocar na main ou diz que um PR foi mesclado, mesmo sem dizer merge. Não serve para abrir ou atualizar o PR nem para responder a revisão.
+description: Mescla um pull request aberto na branch base e faz o que vem depois do merge, inclusive quando a pessoa avisa que mesclou. Usada quando a pessoa pede para mesclar, colocar na main ou diz que um PR foi mesclado, mesmo sem dizer merge. Não serve para fechar sem merge, abrir ou atualizar o PR nem para responder a revisão.
 metadata:
   author: jimmyandrade
-  version: "0.2.1"
+  version: "0.2.2"
   related:
     - atender-revisao-de-pull-request
     - atualizar-branch-do-pull-request
@@ -11,6 +11,7 @@ metadata:
     - criar-pull-request
     - definir-issue-do-github
     - evoluir-habilidade
+    - fechar-pull-request
     - limpar-copias-de-trabalho
     - sincronizar-status-da-tarefa
 ---
@@ -39,6 +40,7 @@ Leia o estado do PR agora: aberto, mesclado ou fechado, rascunho ou pronto.
 Se a pessoa avisou que mesclou, confirme o estado MERGED e o hash e vá para o Passo 3.
 Se ele já foi mesclado sem aviso, diga isso e vá para o Passo 3.
 Fechado sem merge: diga isso e pare.
+Pedido para fechar sem merge: siga `fechar-pull-request`.
 
 ### Passo 2
 
