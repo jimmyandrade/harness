@@ -430,16 +430,16 @@ How these skills relate is in `README.md`, in this folder.
 - **Description**: Check each person's participation and locality before inviting them
 - **Properties**:
   - Lives at `.agents/skills/definir-convidado/SKILL.md`
-  - Verifies one by one who will actually attend, using inscriptions, opportunities, the schedule, trips, responsibility, confirmed descriptions, and localities as evidence
+  - Verifies one by one who will actually attend, using registrations, opportunities, the schedule, trips, responsibility, confirmed descriptions, and localities as evidence
   - Does not invite every partner only because the commitment belongs to the company, sits on a shared calendar, or is a formative opportunity
   - Invites each person only for the commitment that matches their physical presence, confirmed participation, or operational responsibility when they are in different cities or squares in the same period
   - Treats a simultaneous geographic conflict as an agenda split
   - Removes a wrong guest only after authorization and names that correction in the operation summary
   - Asks before sending or removing an invite when individual participation stays ambiguous
-  - Leaves the event time to definir-agenda, an untimed schedule item to sincronizar-cronograma, the inscription status to definir-inscricao, and time audit to revisar-uso-do-tempo
+  - Leaves the event time to definir-agenda, an untimed schedule item to sincronizar-cronograma, the registration status to definir-inscricao, and time audit to revisar-uso-do-tempo
 - **Test Criteria**:
   - [x] The skill is present at that path
-  - [x] The description refuses recording the event time, syncing an untimed item, updating an inscription, and auditing time use
+  - [x] The description refuses recording the event time, syncing an untimed item, updating a registration, and auditing time use
 
 ### definir-data-significativa
 - **Stability**: experimental
@@ -542,17 +542,17 @@ How these skills relate is in `README.md`, in this folder.
 
 ### definir-inscricao
 - **Stability**: experimental
-- **Description**: Define an inscription, including one that is not in the list yet
+- **Description**: Define a registration, including one that is not in the list yet
 - **Properties**:
   - Lives at `.agents/skills/definir-inscricao/SKILL.md`
-  - Reads the inscription list, its property names, and its status options from the data mapping of the project, stops before creating when the edition, the status, who made it, or the person or company is missing from it, and lists at the end each value that has no property
-  - Updates one inscription, and creates the row when the person sends an inscription that is not there and the message or photo already names who made it and for which person or company
-  - When a message or a completed-order photo confirms that participation, or the person states that the inscription was made or confirmed, sets the status to the confirmed option
+  - Reads the registration list, its property names, and its status options from the data mapping of the project, stops before creating when the edition, the status, who made it, or the person or company is missing from it, and lists at the end each value that has no property
+  - Updates one registration, and creates the row when the person sends a registration that is not there and the message or photo already names who made it and for which person or company
+  - When a message or a completed-order photo confirms that participation, or the person states that the registration was made or confirmed, sets the status to the confirmed option
   - Celebrates after the status is saved, and does not stop at the celebration
-  - When more than one inscription matches and no page was named, names each and asks which to change before celebrating that confirmation
-  - Leaves the other inscriptions of the event unchanged
+  - When more than one registration matches and no page was named, names each and asks which to change before celebrating that confirmation
+  - Leaves the other registrations of the event unchanged
   - On an existing row, changes only the named property, attaches the confirmation photo to the receipts in that same write, and does not fill the confirmation date unless the person states it
-  - When the person states the day they sent the inscription, writes that day and does not ask for the hour
+  - When the person states the day they sent the registration, writes that day and does not ask for the hour
   - Spells names through definir-grafia
   - Does not store the order number, does not put the photo in the page body, and does not decide whether a task exists
 - **Test Criteria**:
@@ -904,7 +904,7 @@ How these skills relate is in `README.md`, in this folder.
   - Distinguishes a confirmed fact, a pending item, and conflicting sources. Leaves the pending item empty and named, keeps both conflicting sources, and lets a more recent and explicitly official source prevail. Does not invent a city, an airport, a hotel, a time, a transfer, or a responsibility
   - Links each lodging to the trip only when the name or the address is reliable, because a trip can have more than one. An address without a confirmed name becomes the lodging title. The written address, the address complement, the map place, the room, the breakfast, and a covered expense without a ledger entry stay on that lodging. A financial entry follows lancar-despesa-da-empresa and relates to the trip, and an organization-covered amount stays distinct from an expense the participant owes. General weather and packing guidance, such as cold, heat, dry weather, rain, and what kind of clothes to bring, stays named on the trip. It is not a product of the business, and no property is created for it. Cronograma keeps the operational event, its stage, its times, its owners, and the note for that event
   - Puts a flight number, which has no property of its own, in the milestone context, without repeating date, time, or place
-  - Does not write the flight, the lodging, or the guidance on an opportunity or an inscription
+  - Does not write the flight, the lodging, or the guidance on an opportunity or a registration
   - Does not create a trip when the person only asks whether one exists or which day it falls on
   - Leaves a dated milestone with no confirmed start and end to sincronizar-cronograma, a confirmed calendar time and a named-day plan to definir-agenda, and a financial proof or an amount to lancar-despesa-da-empresa
   - Does not promote the trip to confirmed without evidence, and does not cancel it without explicit evidence
@@ -1411,13 +1411,13 @@ How these skills relate is in `README.md`, in this folder.
 - **Description**: Answer who registered, whether the registration is confirmed, or whether a ticket was withdrawn
 - **Properties**:
   - Lives at `.agents/skills/procurar-inscricao/SKILL.md`
-  - Reads the inscription list, its property names, and its status options from the data mapping of the project, and searches it in the title and in the notes
+  - Reads the registration list, its property names, and its status options from the data mapping of the project, and searches it in the title and in the notes
   - Names each person in the note and does not answer yes for the whole event
   - When several registrations match one event, says the answer depends on which withdrawal is meant, with status, date, and page link for each
   - Treats a pre-registration as neither approval nor withdrawal, suggests procurar-email and acompanhar-edital, and points to the other contact channels with the organizer
   - Treats the participant and the person who recorded the row as different people
   - Searches every form of a name through definir-grafia, and uses the correct spelling only in the reply
-  - When the person states that the inscription was made or confirmed, follows definir-inscricao so the celebration comes with the saved status
+  - When the person states that the registration was made or confirmed, follows definir-inscricao so the celebration comes with the saved status
   - Does not decide whether a task exists, and does not create, edit, or complete the registration
 - **Test Criteria**:
   - [x] The skill is present at that path
@@ -1480,7 +1480,7 @@ How these skills relate is in `README.md`, in this folder.
   - Passes text to the next skill without another recognition pass; preserves originals as evidence for a financial entry
   - When the text has an edition name and a date, and the person did not name the next skill, passes that text to procurar-oportunidade without asking, then to criar-oportunidade when the edition is not found
   - Routes a note, receipt, bill, or transaction to lancar-despesa-da-empresa before treating a completed order as an event signup
-  - When the reading is a completed or confirmed event order, passes it to definir-inscricao after the edition lookup, and does not write the inscription itself
+  - When the reading is a completed or confirmed event order, passes it to definir-inscricao after the edition lookup, and does not write the registration itself
   - When the reading is a person or a social profile, passes it to definir-grafia and does not stop at the text
   - When the next skill is not in the conversation's skill list, delivers the text and asks whether to call that skill by name, without saying it is unavailable
   - Stops at the text only when the routing flow has no recipient and the person did not name the next skill
