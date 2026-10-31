@@ -3,12 +3,12 @@
 Funcionalidade: Busca do resultado pelo nome em cada domínio
   O nome entre aspas, com `site:` em cada domínio, acha o documento que nenhum aviso trouxe.
 
-  Regra: Cada forma do nome é buscada em cada domínio
+  Regra: Cada variação do nome é buscada em cada domínio
 
     Exemplo: Nome artístico e nome civil
       Dado que a pessoa usa um nome artístico e um nome civil mais longo
       Quando a skill busca o resultado
-      Então ela busca cada forma do nome entre aspas, com `site:` em cada domínio
+      Então ela busca cada variação do nome entre aspas, com `site:` em cada domínio
       E a resposta mostra cada consulta feita
 
   Regra: O documento achado é lido antes de responder
@@ -18,6 +18,11 @@ Funcionalidade: Busca do resultado pelo nome em cada domínio
       Quando a skill lê o documento
       Então a resposta diz a seleção, a edição, a situação da pessoa, a data do documento e o link
       E diz o prazo de matrícula ou de confirmação, e se ele já passou
+
+    Exemplo: Menção honrosa
+      Dado que a busca acha o nome numa lista de menções honrosas
+      Quando a skill lê o documento
+      Então a resposta diz que a pessoa recebeu menção honrosa, sem dizer que foi selecionada
 
   Regra: Busca sem resultado não prova reprovação
 
