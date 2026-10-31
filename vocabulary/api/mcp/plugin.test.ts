@@ -31,8 +31,10 @@ test("the plugin lets the project and the user pick the glossary", () => {
   assert.equal(env?.HARNESS_GLOSSARY_DIR, "${HARNESS_GLOSSARY_DIR:-}")
 })
 
-// Copies the tracked files, as a plugin install does, so there is no node_modules and no dist/.
-// The launcher installs the runtime dependencies on its first run, so this needs npm and the registry.
+/**
+ * Copies the tracked files, as a plugin install does, so there is no node_modules and no dist/.
+ * The launcher installs the runtime dependencies on its first run, so this needs npm and the registry.
+ */
 test("the launcher starts the server from a clean copy of the plugin", { timeout: 300_000 }, async () => {
   const copy = mkdtempSync(join(tmpdir(), "harness-plugin-"))
   const files = execFileSync("git", ["ls-files", "-z"], { cwd: ROOT, encoding: "utf8" }).split("\0").filter(Boolean)
@@ -66,16 +68,20 @@ test("the launcher starts the server from a clean copy of the plugin", { timeout
   }
 })
 
-// Runs the launcher with a stand-in `node` that reports the given version, so no other Node.js needs to be installed.
-// The copy already has node_modules/zod, so a version that passes the check reaches the final `exec node`, which prints "started".
-function launchWithNodeVersion(version: string) {
+/**
+ * Copies the launcher into a folder with a stand-in `node` that reports the given version and a stand-in `npm` that logs each call.
+ * With `installed`, node_modules already has the marker of a finished install, so a version that passes the check reaches the final `exec node`, which prints "started".
+ * With a non-zero `npmExit`, the stand-in npm fails like an install without network.
+ */
+function launcherCopy(version: string, installed: boolean, npmExit = 0) {
   const dir = mkdtempSync(join(tmpdir(), "harness-launcher-"))
   mkdirSync(join(dir, "vocabulary/api/mcp"), { recursive: true })
   mkdirSync(join(dir, "node_modules/zod"), { recursive: true })
   writeFileSync(join(dir, "node_modules/zod/package.json"), "{}\n")
+  if (installed) writeFileSync(join(dir, "node_modules/.vocabulary-installed"), "")
   cpSync(join(ROOT, "vocabulary/api/mcp/launch.sh"), join(dir, "vocabulary/api/mcp/launch.sh"))
   mkdirSync(join(dir, "bin"))
-  const stub = [
+  const node = [
     "#!/bin/sh",
     'case "$1 $2" in',
     `  "-p process.versions.node") echo ${version} ;;`,
@@ -84,12 +90,27 @@ function launchWithNodeVersion(version: string) {
     "esac",
     "",
   ].join("\n")
-  writeFileSync(join(dir, "bin/node"), stub)
+  /** The stand-in npm takes a second, like a real install, so two launchers started together overlap. */
+  const npm = ["#!/bin/sh", `echo "$*" >> "${join(dir, "npm-calls.log")}"`, "sleep 1", `exit ${npmExit}`, ""].join("\n")
+  writeFileSync(join(dir, "bin/node"), node)
+  writeFileSync(join(dir, "bin/npm"), npm)
   chmodSync(join(dir, "bin/node"), 0o755)
-  return spawnSync("sh", [join(dir, "vocabulary/api/mcp/launch.sh")], {
-    encoding: "utf8",
-    env: { ...process.env, PATH: `${join(dir, "bin")}:/usr/bin:/bin` },
-  })
+  chmodSync(join(dir, "bin/npm"), 0o755)
+  return dir
+}
+
+function launcherEnv(dir: string) {
+  return { ...process.env, PATH: `${join(dir, "bin")}:/usr/bin:/bin` }
+}
+
+function npmCalls(dir: string) {
+  const log = join(dir, "npm-calls.log")
+  return existsSync(log) ? readFileSync(log, "utf8").trim().split("\n") : []
+}
+
+function launchWithNodeVersion(version: string) {
+  const dir = launcherCopy(version, true)
+  return spawnSync("sh", [join(dir, "vocabulary/api/mcp/launch.sh")], { encoding: "utf8", env: launcherEnv(dir) })
 }
 
 for (const version of ["24.22.0", "24.9.9", "23.0.0", "22.18.0"]) {
@@ -100,6 +121,7 @@ for (const version of ["24.22.0", "24.9.9", "23.0.0", "22.18.0"]) {
     assert.match(result.stderr, new RegExp(`Node\\.js ${version.replaceAll(".", "\\.")} is on PATH`))
     assert.match(result.stderr, /24\.22\.1 or newer is required/)
     assert.match(result.stderr, /vocabulary\/docs\/runbooks\/mcp-hosts\.md/)
+    assert.match(result.stderr, /What to do: Make Node\.js 24\.22\.1 or newer the default/)
   })
 }
 
@@ -110,3 +132,52 @@ for (const version of ["24.22.1", "24.22.2", "24.23.0", "25.0.0", "100.0.0"]) {
     assert.equal(result.stdout.trim(), "started")
   })
 }
+
+test("the launcher skips the install when a finished install left its marker", () => {
+  const dir = launcherCopy("24.22.1", true)
+  const result = spawnSync("sh", [join(dir, "vocabulary/api/mcp/launch.sh")], { encoding: "utf8", env: launcherEnv(dir) })
+  assert.equal(result.status, 0, result.stderr)
+  assert.deepEqual(npmCalls(dir), [])
+})
+
+/** A launcher stopped in the middle of an install leaves node_modules/zod/package.json without the rest of the package. */
+test("the launcher installs again over a half-installed node_modules", () => {
+  const dir = launcherCopy("24.22.1", false)
+  const result = spawnSync("sh", [join(dir, "vocabulary/api/mcp/launch.sh")], { encoding: "utf8", env: launcherEnv(dir) })
+  assert.equal(result.status, 0, result.stderr)
+  assert.equal(result.stdout.trim(), "started")
+  assert.equal(npmCalls(dir).length, 1)
+  assert.ok(existsSync(join(dir, "node_modules/.vocabulary-installed")))
+})
+
+/** A host can start the server twice at once, such as a restart during the first connection or two sessions opening together. */
+test("two launchers started together install once and both start the server", async () => {
+  const dir = launcherCopy("24.22.1", false)
+  const run = () =>
+    new Promise<{ code: number | null; stdout: string; stderr: string }>((resolve) => {
+      const child = spawn("sh", [join(dir, "vocabulary/api/mcp/launch.sh")], { env: launcherEnv(dir) })
+      let stdout = ""
+      let stderr = ""
+      child.stdout.on("data", (chunk: Buffer) => (stdout += chunk.toString("utf8")))
+      child.stderr.on("data", (chunk: Buffer) => (stderr += chunk.toString("utf8")))
+      child.on("exit", (code) => resolve({ code, stdout, stderr }))
+    })
+  const results = await Promise.all([run(), run()])
+  for (const result of results) {
+    assert.equal(result.code, 0, result.stderr)
+    assert.equal(result.stdout.trim(), "started")
+  }
+  assert.equal(npmCalls(dir).length, 1)
+})
+
+test("a failed install says what to do, frees the lock, and leaves no marker", () => {
+  const dir = launcherCopy("24.22.1", false, 1)
+  const result = spawnSync("sh", [join(dir, "vocabulary/api/mcp/launch.sh")], { encoding: "utf8", env: launcherEnv(dir) })
+  assert.notEqual(result.status, 0)
+  assert.equal(result.stdout, "", "stdout belongs to the MCP protocol")
+  assert.match(result.stderr, /npm ci failed/)
+  assert.match(result.stderr, /What to do: .*remove .*node_modules/)
+  assert.match(result.stderr, /TROUBLESHOOTING\.md/)
+  assert.equal(existsSync(join(dir, ".vocabulary-install.lock")), false)
+  assert.equal(existsSync(join(dir, "node_modules/.vocabulary-installed")), false)
+})
