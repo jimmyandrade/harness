@@ -18,6 +18,15 @@ Funcionalidade: Frequência da busca pela previsão do resultado
       Então a busca fica em `Frequência da busca do resultado` até a semana anterior à data anunciada
       E fica diária em dias úteis a partir daí, até o resultado sair
 
+  Regra: A prorrogação move a janela
+
+    Exemplo: Prorrogação da publicação do resultado
+      Dado que a rotina vigia o resultado de um edital
+      E que a organização publica uma prorrogação da data do resultado
+      Quando a busca acha a prorrogação
+      Então a janela passa a partir da data nova
+      E a etapa do resultado é atualizada com a data antiga, a nova e o link da prorrogação
+
   Regra: A data real do resultado vira histórico
 
     Exemplo: Resultado achado depois da data anunciada
@@ -25,10 +34,10 @@ Funcionalidade: Frequência da busca pela previsão do resultado
       Quando a skill acha o resultado publicado
       Então ela grava a data real da publicação junto da etapa, sem apagar a data anunciada
 
-  Regra: A página vigiada por diff dispensa a releitura
+  Regra: Onde o ambiente permite, a página vigiada por diff dispensa a releitura
 
     Exemplo: Página de resultados conhecida
       Dado que a página de resultados do edital é conhecida
-      E que há um monitor que compara a página com a última versão guardada
+      E que o ambiente tem um monitor que compara a página com a última versão guardada
       Quando a rotina é criada
       Então ela dispara pela mudança da página e lê só o trecho que mudou
