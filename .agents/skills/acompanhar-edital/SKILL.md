@@ -4,7 +4,7 @@ description: Procura na web o resultado do edital em que houve inscrição e a a
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.5.0"
   related:
     - procurar-inscricao
     - procurar-oportunidade
@@ -24,7 +24,7 @@ metadata:
 Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global`. Quando um valor não estiver lá, use o padrão abaixo.
 
 ```yaml
-# `Nome do data source de oportunidades` é o banco de oportunidades do workspace conectado. Vazio, a skill procura um.
+# `Nome do data source de oportunidades` é o banco de oportunidades da fonte de dados conectada. Vazio, a skill procura um.
 "Nome do data source de oportunidades": ""
 # `Nome do data source de anexos` é o banco de anexos, links e editais da oportunidade, quando o negócio tem um. Vazio, a skill procura um.
 "Nome do data source de anexos": ""
@@ -56,21 +56,22 @@ Esta habilidade grava só nos bancos de anexos e de etapas.
 
 ### Passo 2
 
-Com o Notion conectado, ache os bancos da oportunidade no workspace conectado: o de oportunidades, o de anexos, que guarda documentos, links e editais, e o de etapas, que guarda as datas.
+Com as fontes de dados conectadas, como o Notion, ache nelas os bancos da oportunidade: o de oportunidades, o de anexos, que guarda documentos, links e editais, e o de etapas, que guarda as datas.
 O nome de cada um varia de um negócio para outro, e os de anexos e de etapas podem não existir.
 
 1. Com o parâmetro do banco preenchido, procure o data source com esse nome.
 2. Vazio, procure um banco com esse papel, ligado à oportunidade por relação.
 3. Um achado sem estar nos parâmetros: use-o e siga `Ao achar um banco`, no harness de negócio. Com `propor`, proponha gravar o nome nas instruções do projeto. Com `registrar`, grave e diga que gravou.
 4. Mais de um: pergunte uma vez qual.
-5. Nenhum: siga sem ele e diga isso uma vez. Sem banco de oportunidades, ou sem o Notion, siga só com `Domínios por organização`.
+5. Nenhum: siga sem ele e diga isso uma vez. Sem banco de oportunidades, ou sem fonte de dados conectada, siga só com `Domínios por organização`.
 
-Leia o esquema de cada banco antes de ler ou gravar. Não use um banco de outro workspace.
+Leia o esquema de cada banco antes de ler ou gravar. Não use um banco de outro espaço de trabalho.
+O banco, o esquema e a oportunidade que já foram lidos nesta conversa não se procuram de novo: use o que está no contexto.
 
 ### Passo 3
 
 Levante os domínios da organização antes da primeira busca.
-A oportunidade é a primeira referência: ache a edição ligada à inscrição, ou siga `procurar-oportunidade`, e leia cada propriedade de link da edição e do grupo dela, como a página original, o edital e o formulário, e cada anexo ligado à edição.
+A oportunidade é a primeira referência: use a edição que já está no contexto da conversa; sem ela, ache a edição ligada à inscrição, ou siga `procurar-oportunidade`, e leia cada propriedade de link da edição e do grupo dela, como a página original, o edital e o formulário, e cada anexo ligado à edição.
 Leia também as etapas ligadas à edição: elas dão a data do resultado e a da abertura.
 Sem o link original, busque na web a página oficial do edital.
 O link achado volta para a oportunidade pela skill dona: o desta edição, como o edital e o formulário, por `criar-oportunidade`; o que se repete em toda edição, como o site oficial, por `definir-grupo-de-oportunidades`.
@@ -109,7 +110,7 @@ Abra cada documento achado e leia o trecho do nome.
 Diga a seleção, a edição, a situação da pessoa, como selecionada, suplente, classificada ou eliminada, a data do documento e o link.
 Diga o prazo de matrícula, de confirmação ou de recurso que o documento der, e se ele já passou.
 Prazo passado: diga isso primeiro e sugira contato com a organização.
-Uma homonímia aparece como dúvida, com o dado que diferencia, como cidade, categoria ou parte do documento.
+Outra pessoa com o mesmo nome aparece como dúvida, com o dado que diferencia, como cidade, categoria ou parte do documento.
 Quando o projeto mapeia uma lista de inscrições, a mudança da inscrição segue `definir-inscricao`.
 
 Grave o que o edital, a retificação ou o resultado trouxer, sempre ligado à edição.
@@ -133,16 +134,19 @@ Sem nada achado, diga as consultas feitas.
 ### Passo 7
 
 Quando a pessoa pede para não perder o resultado, ou para acompanhar a organização, siga `definir-rotina` para criar a busca recorrente dos Passos 4 a 6.
-A data anunciada não garante o dia: o resultado pode sair antes ou semanas depois.
+A data anunciada não garante o dia: o resultado pode sair um pouco antes, um dia depois ou semanas depois.
+O edital e a publicação do resultado também podem ser prorrogados.
 Preveja a janela antes de escolher a frequência.
 
 1. Procure o histórico da organização: nas etapas das edições anteriores, a data anunciada e a data real do resultado; sem etapas, a data dos documentos de resultado anteriores que a busca achar.
 2. Com histórico, a janela vai da data anunciada menos a maior antecipação vista até a data anunciada mais o maior atraso visto. Dentro dela, a busca é diária em dias úteis.
 3. Sem histórico, use `Frequência da busca do resultado` até a semana anterior à data anunciada, e diária em dias úteis a partir daí, até o resultado sair.
-4. Mostre as datas anunciadas e reais que usou na previsão.
+4. Busque também a prorrogação e a retificação nos domínios da organização. A data nova move a janela, e a etapa muda como no Passo 5.
+5. Mostre as datas anunciadas e reais que usou na previsão.
 
-A página de resultados ou do edital, quando conhecida, é vigiada por diff: um monitor guarda a última versão da página e compara com a atual.
-Com um monitor disponível, a rotina dispara pela mudança da página, como `definir-rotina` faz com um gatilho, e lê só o trecho que mudou; a busca do nome roda quando esse trecho é um resultado.
+Em ambientes com suporte, a página de resultados ou do edital, quando conhecida, pode ser vigiada por diff: um monitor guarda a última versão da página e compara com a atual.
+Com esse monitor, a rotina dispara pela mudança da página, como `definir-rotina` faz com um gatilho, e lê só o trecho que mudou; a busca do nome roda quando esse trecho é um resultado.
+Quando o diff de uma página chega como entrada, leia só o trecho que mudou.
 Sem monitor, a busca periódica segue a janela.
 Depois do resultado achado, use `Frequência da busca do próximo edital`.
 A rotina pausa quando a próxima inscrição abre e a pessoa já sabe dela.
@@ -185,7 +189,7 @@ Levantei os domínios: teatroexemplo.org.br, da organização; fundacaoexemplo.g
 
 ### Quero não perder o resultado do edital de circulação
 
-Gravei os domínios em `Domínios por organização`. As duas edições anteriores publicaram o resultado 10 e 20 dias depois da data anunciada, então segui `definir-rotina` com a busca diária em dias úteis da data anunciada até 20 dias depois. A página de resultados ficou vigiada por diff.
+Gravei os domínios em `Domínios por organização`. As duas edições anteriores publicaram o resultado 10 e 20 dias depois da data anunciada, então segui `definir-rotina` com a busca diária em dias úteis da data anunciada até 20 dias depois, atenta a prorrogações.
 
 ## Casos-limite
 

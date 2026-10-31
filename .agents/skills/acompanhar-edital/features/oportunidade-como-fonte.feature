@@ -32,3 +32,10 @@ Funcionalidade: A oportunidade como primeira fonte dos domínios
         | modo      | ação                     |
         | propor    | propõe gravar            |
         | registrar | grava                    |
+
+  Regra: O que já está no contexto da conversa não se procura de novo
+
+    Exemplo: Oportunidade lida antes na mesma conversa
+      Dado que a oportunidade e o esquema do banco já foram lidos nesta conversa
+      Quando a skill levanta os domínios
+      Então ela usa a oportunidade do contexto, sem nova busca na fonte de dados
