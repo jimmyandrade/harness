@@ -4,7 +4,7 @@ description: Procura na web o resultado do edital em que houve inscrição e a a
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.4.0"
   related:
     - procurar-inscricao
     - procurar-oportunidade
@@ -118,8 +118,9 @@ Sem a edição, não grave: siga `procurar-oportunidade` e, se ela não existir,
 1. No banco de anexos, um registro por documento ou link, com o link e o tipo, como edital, retificação ou resultado. O mesmo link já ligado à edição não se grava de novo. Não baixe o arquivo.
 2. No banco de etapas, um registro por data: abertura das inscrições, prazo de inscrição, publicação do edital, publicação do resultado, matrícula ou confirmação, início e fim da execução. Use o nome e as opções que o esquema do banco já tem. Não crie opção.
 3. Antes de criar uma etapa, procure a mesma etapa ligada à edição. Mesma data: não grave. Data diferente: atualize e diga a data antiga, a nova e o link da fonte.
-4. A data vem do documento. Sem data, não grave. Sem hora, não invente a hora.
-5. Sem banco de anexos, o link do edital vai para a edição por `criar-oportunidade`. Sem banco de etapas, a data vai para a propriedade de data da edição por `criar-oportunidade`; sem essa propriedade, liste a data no fim e não a escreva no corpo.
+4. Achado o resultado, grave a data real da publicação na etapa do resultado, numa propriedade de data real que o esquema tenha, sem apagar a data anunciada. Sem essa propriedade, liste a data real no fim. Ela vira o histórico da próxima previsão.
+5. A data vem do documento. Sem data, não grave. Sem hora, não invente a hora.
+6. Sem banco de anexos, o link do edital vai para a edição por `criar-oportunidade`. Sem banco de etapas, a data vai para a propriedade de data da edição por `criar-oportunidade`; sem essa propriedade, liste a data no fim e não a escreva no corpo.
 
 ### Passo 6
 
@@ -132,8 +133,17 @@ Sem nada achado, diga as consultas feitas.
 ### Passo 7
 
 Quando a pessoa pede para não perder o resultado, ou para acompanhar a organização, siga `definir-rotina` para criar a busca recorrente dos Passos 4 a 6.
-As etapas e o cronograma do edital dão a temperatura: a busca fica diária na semana da data do resultado e da data de abertura.
-Sem essa data, use `Frequência da busca do resultado`.
+A data anunciada não garante o dia: o resultado pode sair antes ou semanas depois.
+Preveja a janela antes de escolher a frequência.
+
+1. Procure o histórico da organização: nas etapas das edições anteriores, a data anunciada e a data real do resultado; sem etapas, a data dos documentos de resultado anteriores que a busca achar.
+2. Com histórico, a janela vai da data anunciada menos a maior antecipação vista até a data anunciada mais o maior atraso visto. Dentro dela, a busca é diária em dias úteis.
+3. Sem histórico, use `Frequência da busca do resultado` até a semana anterior à data anunciada, e diária em dias úteis a partir daí, até o resultado sair.
+4. Mostre as datas anunciadas e reais que usou na previsão.
+
+A página de resultados ou do edital, quando conhecida, é vigiada por diff: um monitor guarda a última versão da página e compara com a atual.
+Com um monitor disponível, a rotina dispara pela mudança da página, como `definir-rotina` faz com um gatilho, e lê só o trecho que mudou; a busca do nome roda quando esse trecho é um resultado.
+Sem monitor, a busca periódica segue a janela.
 Depois do resultado achado, use `Frequência da busca do próximo edital`.
 A rotina pausa quando a próxima inscrição abre e a pessoa já sabe dela.
 
@@ -175,7 +185,7 @@ Levantei os domínios: teatroexemplo.org.br, da organização; fundacaoexemplo.g
 
 ### Quero não perder o resultado do edital de circulação
 
-Gravei os domínios em `Domínios por organização` e segui `definir-rotina`: a busca roda toda semana e fica diária na semana da data do resultado que o edital dá.
+Gravei os domínios em `Domínios por organização`. As duas edições anteriores publicaram o resultado 10 e 20 dias depois da data anunciada, então segui `definir-rotina` com a busca diária em dias úteis da data anunciada até 20 dias depois. A página de resultados ficou vigiada por diff.
 
 ## Casos-limite
 
@@ -191,6 +201,7 @@ Gravei os domínios em `Domínios por organização` e segui `definir-rotina`: a
 - O resultado pode nunca chegar por e-mail. A ausência de aviso não é resultado.
 - Listas oficiais usam o nome civil completo, em maiúsculas ou com o sobrenome primeiro. A busca só pelo nome artístico não o acha.
 - O edital seguinte abre perto do resultado do anterior e também não é avisado.
+- A data anunciada do resultado parece o dia da busca. Órgãos públicos costumam publicar depois dela, e a janela vem do histórico.
 
 ## Scripts disponíveis
 
