@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.11.0"
+  version: "0.12.0"
   related:
     - comunicar-novidade-do-produto
     - definir-agenda
@@ -90,6 +90,8 @@ Para responder ou enviar, mostre a conversa de destino, o texto exato e, se for 
 
 Em conta comercial, veja se a conversa está com o agente de IA. Se estiver, avise antes de enviar: ele responde à próxima mensagem do contato.
 
+Toda data no rascunho vai no `Formato da data com dia da semana`, com o dia da semana e a data completa. Nunca escreva só o dia da semana, como "até quinta", nem só a data. Tire o dia da semana de um calendário ou de um comando, nunca de cabeça.
+
 O WhatsApp não usa Markdown. Negrito é um asterisco de cada lado, itálico é sublinhado, e não há título nem link entre colchetes. O link segue `escrever-link`.
 
 Depois de enviar, leia a conversa de novo, confira se a mensagem aparece e diga o horário.
@@ -142,6 +144,14 @@ Se você converter "sexta-feira" contando a partir de outro dia que não hoje, a
 1. Conte a partir de hoje.
 2. Pegue o último dia com esse nome antes de hoje.
 3. Confira o dia da semana da data calculada.
+
+### Prazo só com o dia da semana
+
+Se você escrever "vale até quarta" calculando de cabeça, o dia sai errado e a pessoa perde o prazo.
+
+1. Escreva a data no `Formato da data com dia da semana`.
+2. Tire o dia da semana de um calendário ou de um comando.
+3. Confira o rascunho antes de pedir o sim.
 
 ### Pedido em uma conversa só
 
