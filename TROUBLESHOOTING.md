@@ -37,6 +37,18 @@ The message is `"<key>" is missing from metadata.parameters of AGENTS.md`, or a 
 1. A missing setting is absent from the project and from the core. Update the harness dependency or the action tag, or add the key under `metadata.parameters.Global` in the frontmatter of the project `AGENTS.md`.
 2. An unknown key is usually misspelled. Copy the key from the skill's `Parâmetros de configuração` block, or from the core `AGENTS.md` for a script setting.
 
+## The default branch is not `main`
+
+`gh repo view --json defaultBranchRef` names a work branch, such as `chore/install-core-harness`, and the repository has no `main`. Pull requests target that branch, and the Notion sync publishes from it.
+
+1. GitHub made the first branch pushed to the empty repository its default branch. [Create `main` first](docs/runbooks/business-repository.md#create-main-first), in the business repository runbook, now prevents it.
+2. Create `main` at the head of that branch: `gh api --method POST repos/<owner>/<repo>/git/refs -f ref=refs/heads/main -f sha=<head of the branch>`.
+3. Make `main` the default branch in Settings, General, or with `gh api --method PATCH repos/<owner>/<repo> -f default_branch=main`.
+4. Move each open pull request to `main` with `gh pr edit <number> --base main`, before deleting the old branch: deleting the base of a pull request closes it.
+5. Delete the old branch once `gh api repos/<owner>/<repo>/compare/main...<old branch>` shows it 0 commits ahead.
+6. In each local copy, run `git fetch --prune origin`, `git remote set-head origin -a`, and `git switch main`.
+7. `gh repo view --json defaultBranchRef --jq .defaultBranchRef.name` prints `main`, and `gh pr list --json baseRefName` lists no other base. That closes the case.
+
 ## The plugin manifests disagree
 
 The checker prints a line that starts with `.cursor-plugin/plugin.json` or `.claude-plugin/marketplace.json`.
@@ -60,8 +72,8 @@ In a business harness, the `check` job of a `core harness` pull request opened b
 The release exists, but the Dependency Dashboard of a business harness still lists the previous tag under the detected dependencies, after a run.
 
 1. Renovate caches the list of tags for a while. A run in the first minutes after a release can miss the new tag.
-2. Check the box at the end of the Dependency Dashboard issue to ask for another run, later. The `renovate.md` runbook, step 4, covers a run from the Mend portal.
-3. To move the pins now, open the pull request by hand, as in the previous section, step 3.
+2. Check the box at the end of the Dependency Dashboard issue to ask for another run, later. [Run it once](docs/runbooks/renovate.md#run-it-once), in the Renovate runbook, covers a run from the Mend portal.
+3. To move the pins now, open the pull request by hand from a `chore/` branch, as [The Renovate `core harness` pull request fails the check](#the-renovate-core-harness-pull-request-fails-the-check) describes.
 4. The dashboard listing the new tag, or a `core harness` pull request, closes the case.
 
 ## npm refuses a pin of the core with EALLOWGIT
@@ -107,7 +119,7 @@ Customize, or a plugin page named `core` or `harness-core`, lists skills from a 
 1. Your Marketplaces is a personal install. It has no Enable Auto Refresh. Cursor keeps the commit from when the repository was added. Removing the repository and adding it again installs that same commit. The steps that do move are in `docs/runbooks/cursor.md`.
 2. The account menu in Cursor, and Get Grok Bot in that menu, do not open the dashboard. The dashboard is [cursor.com/dashboard](https://cursor.com/dashboard). Enable Auto Refresh is under Plugins & MCPs, Team Marketplaces, the imported marketplace, Marketplace Settings, Plugin Repository. Team Marketplaces exists on a Teams or Enterprise plan, for an admin. When the account belongs to a team and the page still shows only Your Marketplaces, switch to that team in the dashboard header.
 3. On that team marketplace, turn Enable Auto Refresh on. The Cursor GitHub App must be installed on the repository and allowed to read it. Cursor re-indexes at most once every 10 minutes and keeps the latest commit of the default branch. Refresh in Plugin Repository re-indexes once, without the app. Restart Cursor, or focus the window. A Cloud Agent that is already running keeps the version it started with. The import follows the default branch, not the tag in `package.json`.
-4. A project that needs the tag in `package.json` keeps the links in `docs/runbooks/cursor.md`, steps 1 to 3. Renovate moves that pin, as `docs/runbooks/renovate.md` describes. Remove the personal marketplace so the same skill is not listed twice.
+4. A project that needs the tag in `package.json` keeps the links of [Choose the layout](docs/runbooks/cursor.md#choose-the-layout) to [Confirm in Cursor](docs/runbooks/cursor.md#confirm-in-cursor), in the Cursor runbook. Renovate moves that pin, as `docs/runbooks/renovate.md` describes. Remove the personal marketplace so the same skill is not listed twice.
 5. Grok Bot does not read those links or this plugin. Connect apps lists apps from the Cursor Marketplace. A skill a Bot saves belongs to that Bot. There is no install of this repository in Grok Bot.
 6. Customize listing the skills of the indexed commit, or `ls` of the project link after `npm ci` listing the skills under `node_modules/harness/.agents/skills`, closes the case.
 
@@ -115,7 +127,7 @@ Customize, or a plugin page named `core` or `harness-core`, lists skills from a 
 
 `/mcp` lists `plugin:core:vocabulary` as failed, and the session says `CONNECTION_CLOSED` or "Connection closed". The other tools of the `core` plugin work. The server log names a file of a package that is missing, such as `node_modules/zod/index.js`, and an older log of the same start may show `npm error code ENOTEMPTY`.
 
-1. Read the log. Claude Code keeps it in `~/Library/Caches/claude-cli-nodejs/<project folder>/mcp-logs-plugin-core-vocabulary/`, one file per start, with the stderr of the launcher. `ERR_MODULE_NOT_FOUND` under the plugin folder, with `node_modules/zod/package.json` still there, is this case. A Node.js or npm message is the case in step 1 of `vocabulary/docs/runbooks/mcp-hosts.md`.
+1. Read the log. Claude Code keeps it in `~/Library/Caches/claude-cli-nodejs/<project folder>/mcp-logs-plugin-core-vocabulary/`, one file per start, with the stderr of the launcher. `ERR_MODULE_NOT_FOUND` under the plugin folder, with `node_modules/zod/package.json` still there, is this case. A Node.js or npm message is the case in [Start the server from the `core` plugin](vocabulary/docs/runbooks/mcp-hosts.md#start-the-server-from-the-core-plugin).
 2. The cause is two starts at once. The host can start the server twice, such as a restart during the first connection or two sessions opening together, and both launchers ran `npm ci` in the same plugin folder. One removed what the other was writing, and a launcher that checks only `node_modules/zod/package.json` took the leftover file as a finished install, so every later start skipped the install.
 3. Find the plugin folder in the log path of the missing file. The Claude desktop app may run a copy synced from a claude.ai organization, under `~/Library/Application Support/Claude/local-agent-mode-sessions/`, instead of the one in `~/.claude/plugins/cache/`.
 4. Remove `node_modules` from that plugin folder, and `.vocabulary-install.lock` if it is there. Both hold only installed dependencies, which the launcher installs again.
