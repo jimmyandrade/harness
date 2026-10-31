@@ -23,26 +23,40 @@ Check: every value under `properties` and `status_options` names a property or a
 
 Create a Notion connection used only by the sync. Do not reuse one that a website, an automation, or a person also uses: a leaked token then reaches only the skills database, the token can be rotated alone, and page history names the sync as the editor.
 
-In the Notion integrations page (notion.so/profile/integrations), create a connection in the workspace of the skills database, with the API token method (an internal integration), not OAuth. Name it after the harness, since the name shows as the editor of each page.
+In Notion, open the workspace of the skills database. In the sidebar, under Developer, open Connections, and select New connection. In Portuguese the path is Desenvolvedor, Conexões, Nova conexão. Older versions of Notion had the same page at notion.so/profile/integrations.
 
-| Capability | Value |
-|---|---|
-| Read content | on |
-| Update content | on |
-| Insert content | on |
-| Read comments, insert comments | off |
-| User information | none |
-| Agent access | off |
+Name the connection after the harness, since the name shows as the editor of each page. Choose the API token method (an internal integration, Token de API in Portuguese), not OAuth, and create the connection.
+
+![New connection in Notion, named after the harness, with the API token method selected](images/notion/new-connection.webp)
+
+The connection opens on its Configuration tab. Under Capabilities, set each one as below; each change saves by itself. Notion selects user information including email addresses by default, so change it.
+
+| Capability | In Portuguese | Value |
+|---|---|---|
+| Read content | Ler conteúdo | on |
+| Update content | Atualizar conteúdo | on |
+| Insert content | Inserir conteúdo | on |
+| Read comments, insert comments | Ler comentários, inserir comentários | off |
+| User information | Funções dos usuários | No user information (Sem informações dos usuários) |
+| Agent capabilities, beta | Funções do agente | off |
+
+![Capabilities of the connection, with read, update, and insert content on, comments off, no user information, and agent capabilities off](images/notion/connection-capabilities.webp)
 
 The sync queries the data source, creates pages, and updates them. It never deletes a page and never reads people, comments, or other pages.
 
-In the access tab of the connection, select only the skills database, not the page that contains it, which would grant everything under it. If another connection had access to the skills database, remove it there.
+Open the Content access tab (Acesso a conteúdo) and select Edit access. Search for the skills database by name and select it, so it shows as already added. Select only the database, not the page or the teamspace that contains it, which would grant everything under it. Then save. If another connection had access to the skills database, remove it there.
 
-Check: the access tab of the connection lists the skills database and nothing else.
+![Manage page access, with the skills database found by name and already added](images/notion/search-skills-database.webp)
+
+The tab groups pages by teamspace. The teamspace is only the group, not a grant: the header counts one page. Select Expand all to see the database under it.
+
+![Content access of the connection, listing only the skills database under its teamspace](images/notion/content-access.webp)
+
+Check: with every group expanded, the Content access tab lists the skills database and nothing else.
 
 ## Store the token
 
-Store the token of the connection as the repository secret `NOTION_TOKEN`. The command asks for the value.
+Copy the token with the copy button under Integration token (Token de integração), in the Configuration tab of the connection, without revealing it on screen. Store it as the repository secret `NOTION_TOKEN`. The command asks for the value, so the token never shows in the shell history.
 
 ```bash
 gh secret set NOTION_TOKEN
