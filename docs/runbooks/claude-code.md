@@ -25,7 +25,7 @@ Check: `ls .claude/skills/` lists the skills of the project.
 
 ## 2. Enable the plugin in the repository
 
-`.claude/settings.json` names the marketplace and enables `core`. A business harness already has it from `business-repository.md`, step 3, pointing at its own marketplace. A project that only uses the core copies the example that points at this repository.
+`.claude/settings.json` names the marketplace and enables `core`. A business harness already has it from `business-repository.md`, step 4, pointing at its own marketplace. A project that only uses the core copies the example that points at this repository.
 
 ```bash
 TAG="$(gh release view --repo jimmyandrade/harness --json tagName --jq .tagName)"

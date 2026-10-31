@@ -10,7 +10,7 @@ Each step ends with a check.
 
 ## 1. Extend the preset
 
-`business-repository.md`, step 3, already copied `renovate.json`, which extends the preset of this repository. Another project copies it.
+`business-repository.md`, step 4, already copied `renovate.json`, which extends the preset of this repository. Another project copies it.
 
 ```bash
 cp -n node_modules/harness/examples/business-harness/renovate.json renovate.json

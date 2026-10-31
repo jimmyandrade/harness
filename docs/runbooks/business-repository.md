@@ -10,7 +10,20 @@ Run this runbook when `Papel do repositório atual` is `harness`, for `Forma do 
 
 Each step ends with a check. Stop at the first check that fails and read `TROUBLESHOOTING.md`.
 
-## 1. Read the core release
+## 1. Create `main` first
+
+GitHub makes the first branch pushed to an empty repository its default branch. When that is a work branch, such as `chore/install-core-harness`, every pull request targets it and the repository has no `main`. When the repository is empty, push an initial commit to `main` before any other branch.
+
+```bash
+git switch -c main
+git commit --allow-empty -m "chore: start the repository"
+git push -u origin main
+git switch -c chore/install-core-harness
+```
+
+Check: `gh repo view --json defaultBranchRef --jq .defaultBranchRef.name` prints `main`.
+
+## 2. Read the core release
 
 Every pin in the business repository uses the same tag.
 
@@ -21,7 +34,7 @@ echo "$TAG"
 
 Check: the output is a tag such as `v1.2.3`.
 
-## 2. Add the development dependency
+## 3. Add the development dependency
 
 ```bash
 npm install --save-dev "github:jimmyandrade/harness#$TAG"
@@ -32,7 +45,7 @@ The second command lets the `prepare` script of the core build the vocabulary on
 
 Check: `test -d node_modules/harness && echo ok` prints `ok`, and `npm approve-scripts --allow-scripts-pending` prints `No packages with unreviewed install scripts.`
 
-## 3. Copy the example files and the instructions template
+## 4. Copy the example files and the instructions template
 
 `examples/business-harness/` holds the files this runbook needs: `lefthook.yml`, the `skills` workflow, the plugin and marketplace in `.claude-plugin/`, which Claude Code and Codex read, with the plugin saved as `plugin.example.json`, the Cursor plugin in `.cursor-plugin/`, `.claude/settings.json`, and `renovate.json`. The project instructions start from the template the `definir-instrucoes-do-projeto` skill uses. Copy them without overwriting a file that already exists, then pin them to the tag. The plugin of the example has another name because the plugin sync of a claude.ai organization rejects the core when it finds a `.claude-plugin/plugin.json` below its root; the second command gives it its name back.
 
@@ -49,7 +62,7 @@ Fill `AGENTS.md` with the `definir-instrucoes-do-projeto` skill: replace each pl
 
 Check: `grep -rn 'vX\.Y\.Z\|example' .github .claude-plugin .cursor-plugin .claude` and `grep -n '<[^a/]' AGENTS.md` print nothing, `ls .claude-plugin` prints `marketplace.json` and `plugin.json`, and `grep -n '"Organização"' AGENTS.md` prints one line.
 
-## 4. Write the skill graph and run the checker
+## 5. Write the skill graph and run the checker
 
 ```bash
 node_modules/harness/.agents/scripts/skill-graph/run-graph.sh
@@ -59,9 +72,9 @@ npx lefthook install
 
 Check: the checker exits 0, which includes the check that the plugin manifests agree, and `.agents/skills/README.md` exists.
 
-## 5. Open the first pull request
+## 6. Open the first pull request
 
-Commit the files and open a pull request.
+Commit the files and open a pull request against `main`.
 
 Check: the `check` job of the `skills` workflow passes, and the pull request gets a Skill check comment with the table of the skills it adds.
 
