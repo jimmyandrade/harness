@@ -1,9 +1,9 @@
 ---
 name: limpar-copias-de-trabalho
-description: Remove as cópias de trabalho do git e as branches locais que uma sessão de código deixou, depois de conferir que nada se perde. Usada ao terminar o trabalho de uma sessão ou quando sobram cópias de trabalho ou branches locais de código. Não serve para liberar espaço em disco em geral nem para apagar arquivo da pessoa.
+description: Remove as cópias de trabalho do git e as branches locais já mescladas na base, inclusive as de outras sessões, depois de conferir que nada se perde. Usada ao terminar o trabalho de uma sessão ou quando sobram cópias de trabalho ou branches locais de código. Não serve para liberar espaço em disco em geral nem para apagar arquivo da pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.4.1"
+  version: "0.5.0"
   related:
     - criar-copia-de-trabalho
     - criar-pull-request
@@ -23,7 +23,7 @@ metadata:
 
 ### Passo 1
 
-Rode no fim de toda sessão cujo trabalho já entrou: commit enviado, PR aberto ou mesclado. Liste as cópias de trabalho de cada repositório que a sessão usou, com a pasta, a branch, o commit e o tamanho, e meça o espaço livre do disco. Liste também as branches locais que nenhuma cópia de trabalho usa, com o commit de cada uma.
+Rode no fim de toda sessão cujo trabalho já entrou: commit enviado, PR aberto ou mesclado. Liste as cópias de trabalho de cada repositório que a sessão usou, com a pasta, a branch, o commit e o tamanho, e meça o espaço livre do disco. Liste também todas as branches locais que nenhuma cópia de trabalho usa, com o commit de cada uma, inclusive as que outra sessão ou outra ferramenta criou. Toda branch local entra no plano: nenhuma fica de fora da conferência por não ser desta sessão.
 
 ### Passo 2
 
@@ -51,7 +51,12 @@ Monte o plano como uma tabela: cópia, cada conferência e decisão. Uma cópia 
 Uma branch local que nenhuma cópia usa entra no mesmo plano e só sai quando passa em todas:
 
 1. Não é a branch de nenhuma cópia de trabalho, nem a base.
-2. O commit dela está numa branch remota, ou é o mesmo commit do PR dela, mesclado ou fechado. O PR fechado guarda esse commit no GitHub, na referência do PR.
+2. O trabalho dela já está no GitHub, por um destes caminhos:
+   - O commit está numa branch remota ou na base.
+   - O commit é o mesmo do PR dela, mesclado ou fechado. O PR fechado guarda esse commit no GitHub, na referência do PR.
+   - Sem PR, o conteúdo entrou na base por outro PR mesclado: os arquivos que a branch cria ou muda estão na base, e o PR que os levou está identificado pelo histórico desses arquivos.
+
+Sem nenhum desses caminhos, a branch fica, e a resposta diz que o commit só existe nesta máquina.
 
 Antes de manter uma cópia, confira a sessão e o remoto. A sessão: leia o diretório de trabalho de cada terminal aberto e a pasta de cada workspace aberto. Se a cópia é essa pasta, está dentro dela ou a contém, outra sessão usa e a cópia fica. Se a lista existe e a cópia não aparece, nenhuma sessão aberta usa. O remoto: liste os pull requests abertos e os mesclados da branch e leia o estado de cada um. Aberto ou mesclado, com o commit no remoto ou no pull request, o trabalho está no GitHub e a cópia pode sair se as outras conferências passarem. Sem pull request aberto, sem pull request mesclado e sem branch remota, a cópia fica. Uma busca que não rodou não é conferência: rode antes de manter. Se a lista de sessões não puder ser lida, a conferência não tem resposta e a cópia fica. Confira o plano contra o git e o GitHub antes de executar.
 
@@ -94,6 +99,14 @@ Se você mantém a cópia dizendo que não conferiu a sessão ou o pull request,
 2. Liste no remoto os pull requests abertos e os mesclados da branch.
 3. Aí decida. Sessão usando a pasta: fica. Pull request aberto ou mesclado, sem sessão: pode sair, se as outras conferências passarem. Sem pull request e sem branch remota: fica.
 
+### Branch antiga listada sem conferir
+
+Se você listar as branches locais de outras tarefas como "não toquei", a pessoa precisa pedir a conferência, e as branches se acumulam.
+
+1. Confira toda branch local contra a base no fim de toda sessão, mesmo a que outra sessão criou.
+2. Remova a que passou no Passo 3.
+3. Na resposta, cada branch tem uma decisão. Nenhuma fica sem decisão.
+
 ### Branch remota apagada
 
 Se você tratar a falta da branch remota como trabalho perdido, mantém para sempre a cópia de um PR já mesclado.
@@ -111,6 +124,10 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 Dez cópias do core e de um harness de negócio passaram nas conferências e saíram, com as branches locais. Três não tinham branch remota, mas os PRs delas tinham sido mesclados com squash. Uma cópia ficou porque tinha arquivos de teste fora do git, de outra sessão. Voltaram cerca de 460 MB.
 
+### branches antigas depois de voltar para a base
+
+A cópia principal voltou para a `main`, e sobraram sete branches locais de tarefas antigas. Cinco tinham PR mesclado com o mesmo commit. Duas não tinham PR nem branch remota, mas o conteúdo delas tinha entrado na `main` por outros PRs mesclados. As sete saíram, e a tabela deu o PR de cada uma.
+
 ### fila do Renovate terminada
 
 Só a cópia principal existia, e sobraram quatro branches `renovate/*`. Três PRs tinham sido mesclados e um fechado, todos com o mesmo commit da branch local. As quatro saíram, e a resposta deu a tabela com o link de cada PR.
@@ -118,7 +135,8 @@ Só a cópia principal existia, e sobraram quatro branches `renovate/*`. Três P
 ## Casos-limite
 
 - O repositório só tem a cópia principal e nenhuma branch local sobrando: não há o que remover. Diga isso numa linha.
-- A branch local tem commit além do commit do PR, ou nenhuma branch remota e nenhum PR a contêm: ela fica, porque o commit só existe nesta máquina.
+- A branch local tem commit além do commit do PR, ou nenhuma branch remota, nenhum PR e nenhum PR que levou o conteúdo a contêm: ela fica, porque o commit só existe nesta máquina.
+- A branch é de outra sessão ou de outra ferramenta: ela entra na conferência como qualquer outra.
 - A sessão ainda não enviou o trabalho: a cópia fica até o commit chegar ao GitHub.
 - Pull request aberto, commit no remoto e nenhuma sessão aberta usa a pasta: a cópia pode sair. O pull request continua no GitHub.
 - A lista de sessões existe e a pasta não está nela: não mantenha a cópia por dúvida.
@@ -131,6 +149,7 @@ Só a cópia principal existia, e sobraram quatro branches `renovate/*`. Três P
 - O link de `node_modules` que `criar-copia-de-trabalho` faz aparece como `?? node_modules`, sem a barra final de uma pasta. O filtro da conferência aceita as duas formas.
 - Depois de um merge com squash, o GitHub apaga a branch remota e a branch local não aparece como mesclada. Só o estado do PR diz que o trabalho entrou.
 - A remoção leve da branch local recusa a branch mesclada por squash. Remova forçando, só depois de conferir o PR.
+- `git cherry` marca com `+` o commit de uma branch cujo conteúdo entrou por squash ou por outro PR, porque o patch não é o mesmo. Confira pelos arquivos e pelo histórico deles na base.
 - A pasta atual da sessão não pode ser removida: o shell perde o diretório de trabalho.
 - "Não conferi a sessão" ou "não achei o pull request" parece motivo para manter. Não é conferência. A conferência é a lista de sessões e a lista de pull requests abertos e mesclados.
 
@@ -143,7 +162,8 @@ Só a cópia principal existia, e sobraram quatro branches `renovate/*`. Três P
 - `git -C <repositório> for-each-ref --format='%(refname:short) %(objectname:short) %(worktreepath)' refs/heads`: branches locais do Passo 1. A que tem o caminho vazio não está em nenhuma cópia.
 - `gh pr list --repo <dono>/<repositório> --head <branch> --state all --json number,state,headRefOid,url`: pull requests abertos e mesclados da branch, no Passo 3. Leia o `state` de cada um. A lista vazia só vale depois dessa consulta.
 - O diretório de trabalho de cada terminal aberto e a pasta de cada workspace aberto: sessão que usa a cópia, no Passo 3. A cópia que é essa pasta, está dentro dela ou a contém está em uso.
-- `gh pr list --repo <dono>/<repositório> --head <branch> --state all --json number,state,url`: PR da branch, no Passo 3.
+- `git -C <repositório> merge-base --is-ancestor <branch> origin/<base>`: commit da branch já na base, no Passo 3.
+- `git -C <repositório> diff --stat $(git -C <repositório> merge-base origin/<base> <branch>) <branch>` e `git -C <repositório> log --oneline origin/<base> -- <arquivo>`: arquivos da branch sem PR e o PR que os levou à base, no Passo 3.
 - `git -C <repositório> worktree remove --force <cópia> && git -C <repositório> branch -D <branch>`: remoção do Passo 4. Para a branch sem cópia, só o `branch -D`.
 - `git -C <repositório> worktree prune`: registro das cópias cuja pasta sumiu, no Passo 4.
 
