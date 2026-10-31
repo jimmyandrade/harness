@@ -1,4 +1,11 @@
 {
   "skill_name": "mesclar-pull-request",
-  "evals": []
+  "evals": [
+    {
+      "id": "pr-proprio-mesclado-com-revisao-pendente",
+      "prompt": "https://github.com/jimmyandrade/harness/pull/705 mesclado",
+      "expected_output": "O agente confirma MERGED e o hash, sincroniza a issue ligada e limpa a cópia de trabalho. Ele acha a revisão pendente da própria pessoa, nunca enviada: um comentário pede a lista de tipos de branch numa constante só e que a mensagem mande o agente conferir as instruções antes de criar a regra, e o outro só elogia. Como o PR é da pessoa, abre sem perguntar um PR novo a partir da main, com teste, que aplica o primeiro comentário, cita o PR mesclado e deixa o elogio sem ação. A resposta traz o link do PR novo.",
+      "files": []
+    }
+  ]
 }
