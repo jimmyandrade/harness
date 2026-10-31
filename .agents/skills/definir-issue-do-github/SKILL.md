@@ -4,7 +4,7 @@ description: Abre, revisa, edita e traduz issues do GitHub pelo modelo e no idio
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.7.0"
   aliases:
     - definir-issue
   related:
@@ -74,6 +74,8 @@ Quando esta issue segura a outra, marque como bloqueando.
 Quando só se relacionam, use relates to.
 Pai e filha usam parent.
 Não grave a dependência num comentário.
+Quando a issue nova substitui outra, o corpo dela abre com um alerta `> [!NOTE]` do GitHub com o link da antiga, antes da primeira seção.
+A antiga recebe um comentário que abre com um alerta `> [!IMPORTANT]` com o link da nova, e fecha.
 
 ### Passo 8
 
