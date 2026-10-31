@@ -58,6 +58,7 @@ flowchart LR
     definir_registro_de_reuniao["definir-registro-de-reuniao"]
     definir_reserva["definir-reserva"]
     definir_roteiro_de_video["definir-roteiro-de-video"]
+    definir_rotina["definir-rotina"]
     definir_tarefa["definir-tarefa"]
     definir_tipo_do_evento["definir-tipo-do-evento"]
     definir_viagem["definir-viagem"]
@@ -312,6 +313,8 @@ flowchart LR
   definir_reserva --> revisar_uso_do_tempo
   definir_reserva --> sincronizar_cronograma
   definir_roteiro_de_video --> evoluir_habilidade
+  definir_rotina --> acompanhar_fila_de_revisao
+  definir_rotina --> evoluir_habilidade
   definir_tarefa --> definir_grafia
   definir_tarefa --> procurar_tarefa
   definir_tipo_do_evento --> criar_oportunidade

@@ -56,10 +56,12 @@ How these skills relate is in `README.md`, in this folder.
   - Skill at `.agents/skills/atualizar-branch-do-pull-request/`
   - Checks the pull request state first. A merged pull request gets no rebase and no push; the commits left out of the merge go to a new branch from the remote base branch
   - Updates with rebase on the remote base branch, never merges the base into the branch, and never creates a `merge:` commit
+  - Before replacing the published branch, follows `atender-revisao-de-pull-request` so open reviews, threads, and comments are handled, unless that skill is the caller. Code that came from the base and breaks a pattern the review asked for is fixed in the same pull request before the push
   - When a published branch was rewritten, the reply says the GitHub branch would be replaced by the new commits, the base branch stays as it is, and the replacement proceeds only if nobody pushed a new commit to that branch since the last fetch. It asks before replacing, unless the calling skill already authorizes it, and it does not name the git command in place of that explanation
 - **Test Criteria**:
   - [ ] A request to merge the base into the branch updates it with rebase instead
   - [ ] A branch whose pull request was merged gets no rebase and no push
+  - [ ] A rebase that brings base code against a pattern the review asked for fixes it in the same pull request
 
 ### avaliar-atualizacoes-de-dependencia
 - **Stability**: experimental
@@ -149,6 +151,7 @@ How these skills relate is in `README.md`, in this folder.
   - When creating, reviewing, and editing an entity share the same criteria, names one skill `definir-` plus the entity
   - The entity may be more than one word, up to 64 characters
   - Does not create a skill whose job is to delete a resource
+  - Does not create a skill that only gathers good practices. Each practice goes into the skill of the task where it applies, and a new skill is proposed only for a task that no skill covers, named after that task
   - When a step routes to another skill, or routes more than one outcome, that step contains a Mermaid flowchart in the direction from mermaid.flowchart_direction
   - An empty placeholder stays on 0.0.x and its body may be only the title
   - Does not store a person, a date, or an alias in SKILL.md except inside Exemplos de entrada e saída, which opens with "Estes exemplos ilustram fatos. Eles podem não estar no data source."; the checker requires that sentence in every skill; the fact stays in the data source, and a test in features/ or evals.json may use it
@@ -164,6 +167,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses code edits, a non-skill page, description-only work, and writing the skill in Notion
+  - [ ] A request for a skill of good practices sends each practice to the skill of its task instead
 
 ### criar-ideia-de-conteudo
 - **Stability**: experimental
@@ -798,6 +802,20 @@ How these skills relate is in `README.md`, in this folder.
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses choosing words in the tone of voice, writing the caption, registering the post, and generating the video with AI
+
+### definir-rotina
+- **Stability**: experimental
+- **Description**: Create, review, and audit a scheduled or event-triggered routine so it runs only when someone uses the result
+- **Properties**:
+  - Skill at `.agents/skills/definir-rotina/`
+  - Before creating, lists the existing routines and adjusts one that reads the same source instead of creating another
+  - Prefers a trigger over periodic polling when the source offers one. Without a trigger, a result that does not need to be fresh runs only on business days
+  - A routine that alerts a person or sends a message runs only within `Horário comercial`
+  - An audit proposes triggers, fewer runs, merged routines, and pausing instead of deleting, and applies only after the person confirms
+  - Does not create a routine only to watch usage, since each check also consumes
+- **Test Criteria**:
+  - [ ] A daily collection that does not need fresh data runs only on business days
+  - [ ] Three routines reading the same inbox are proposed as one
 
 ### definir-tarefa
 - **Stability**: experimental
