@@ -1414,7 +1414,7 @@ How these skills relate is in `README.md`, in this folder.
   - Reads the inscription list, its property names, and its status options from the data mapping of the project, and searches it in the title and in the notes
   - Names each person in the note and does not answer yes for the whole event
   - When several registrations match one event, says the answer depends on which withdrawal is meant, with status, date, and page link for each
-  - Treats a pre-registration as neither approval nor withdrawal, suggests procurar-email, and points to the other contact channels with the organizer
+  - Treats a pre-registration as neither approval nor withdrawal, suggests procurar-email and acompanhar-edital, and points to the other contact channels with the organizer
   - Treats the participant and the person who recorded the row as different people
   - Searches every form of a name through definir-grafia, and uses the correct spelling only in the reply
   - When the person states that the inscription was made or confirmed, follows definir-inscricao so the celebration comes with the saved status
