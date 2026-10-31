@@ -3,7 +3,7 @@ name: levantar-ambiente-do-repositorio
 description: Levanta o ambiente de trabalho de um repositório antes de escrever código, testes, commit ou pull request. Acha o runtime e como ativá-lo, os comandos de instalar, lint, tipos, testes e build, as habilidades do repositório que se aplicam e as pegadinhas que ele documenta. Não serve para rodar os comandos, instalar dependências nem decidir a convenção de código.
 metadata:
   author: jimmyandrade
-  version: "0.10.1"
+  version: "0.11.0"
   related:
     - criar-commit
     - criar-pull-request
@@ -56,7 +56,12 @@ Para cada aviso do diagnóstico, diga o que conferir antes de resolver:
 2. Remoção: o que o gerenciador removeria junto, como em `brew autoremove --dry-run`. Um runtime que um projeto ou um ambiente virtual usa e que está instalado só como dependência sai junto; ele precisa ser instalado a pedido antes.
 3. Cask desativado: se o app ainda existe. Sem o app, a remoção só limpa o registro.
 4. Tap não confiável: se algum pacote dele está instalado. Sem pacote, remova o tap; com pacote, confiar nele é decisão da pessoa.
-5. Aviso que pede senha de administrador ou muda uma decisão de segurança, como os certificados raiz: fica com a pessoa, com o comando e o link que o diagnóstico dá. Uma atualização do sistema pode trazer o aviso de volta, então o diagnóstico roda de novo depois dela.
+5. Aviso que pede senha de administrador ou muda uma decisão de segurança, como os certificados raiz: fica com a pessoa, que digita a senha no terminal dela. Leia antes a página que o diagnóstico cita e diga o que o fabricante recomenda, inclusive os passos opcionais e onde a correção sugerida difere. Uma atualização do sistema pode trazer o aviso de volta, então o diagnóstico roda de novo depois dela.
+
+Depois de uma correção de segurança, confira o resultado, e não só o fim do aviso:
+1. Liste o que saiu e o que ficou lendo o arquivo com a ferramenta própria, como `openssl` para certificados. Uma busca pelo nome no texto codificado não acha nada. A correção pode tirar mais do que o aviso nomeia.
+2. Teste o uso, como uma conexão segura com o arquivo novo.
+3. Um backup com dados inseguros pode ter outro nome no disco, como um link físico com o mesmo conteúdo: confira a contagem de links antes de dizer que apagá-lo basta. Apagar o backup tira a restauração; diga isso antes.
 Não rode a atualização: ela fica com quem chamou, depois do sim da pessoa.
 Depois que a pessoa atualiza, leia a versão de novo, diga se a atualização entrou e o que o gerenciador ainda lista.
 
@@ -151,6 +156,7 @@ Não achei arquivo de instruções nem habilidade do repositório. O `pyproject.
 - O aviso de versão nova no fim de um comando parece ruído. Ele entra na ficha com o comando de atualizar.
 - Atualizar tudo parece seguro. A atualização do runtime pode passar da versão que o projeto exige.
 - Remover um pacote parece remover só ele. O gerenciador pode levar junto as dependências que ficaram sem uso, inclusive o runtime de um ambiente virtual.
+- O link do diagnóstico parece só uma referência para a pessoa. Ele traz a orientação do fabricante, que pode pedir mais passos do que a correção sugerida.
 - Esta habilidade só lê. Instalar dependência, atualizar uma ferramenta ou rodar um comando é de quem chamou.
 - A pasta do glossário parece ser o lugar do harness. O harness reúne o servidor, as skills, a linha de comando e a API. O glossário pode ficar dentro de um harness, e também pode ficar só no computador.
 - Um valor vazio parece `sim`, `projeto` ou `repositório`. Vazio pergunta uma vez e não escolhe.

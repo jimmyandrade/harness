@@ -60,3 +60,24 @@ Funcionalidade: Ferramentas de linha de comando desatualizadas
         | instalados | saída                                               |
         | nenhum     | remover o tap                                       |
         | algum      | a pessoa decidir se confia no tap ou troca o pacote |
+
+  Regra: O aviso de segurança é conferido contra a fonte e depois da correção
+
+    Exemplo: O diagnóstico dá um link de orientação
+      Dado que o aviso do diagnóstico traz o link da orientação do fabricante
+      Quando a skill passa o aviso à pessoa
+      Então ela lê a página antes e diz o que ela recomenda, inclusive os passos opcionais
+      E diz em que a correção sugerida pelo diagnóstico difere da orientação
+
+    Exemplo: A correção tirou mais do que o aviso nomeava
+      Dado que a pessoa rodou a correção dos certificados raiz
+      Quando a skill confere o resultado
+      Então ela lista os certificados que saíram e os que ficaram, lendo o arquivo com a ferramenta de certificados
+      E confere uma conexão segura com o arquivo novo
+
+    Exemplo: O backup tem outro nome no disco
+      Dado que a correção deixou um backup com dados inseguros
+      E que a pessoa quer apagá-lo
+      Quando a skill confere o backup
+      Então ela procura os outros nomes do mesmo arquivo no disco
+      E dá o comando que apaga todos eles, dizendo que a restauração deixa de existir
