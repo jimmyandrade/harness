@@ -846,6 +846,7 @@ How these skills relate is in `README.md`, in this folder.
   - A routine that alerts a person or sends a message runs only within `Horário comercial`
   - A standalone audit looks for savings: triggers, fewer runs, merged routines, and pausing instead of deleting. Each proposal says how much it saves, and it applies only after the person confirms
   - Does not create a routine only to watch usage, since each check also consumes
+  - Watches a page with no webhook or feed through a page-change monitor that diffs it against its last saved version, fires on a change, and reads only what changed; without a monitor, says one would spare the rereading
 - **Test Criteria**:
   - [ ] A daily collection that does not need fresh data runs only on business days
   - [ ] Three routines reading the same inbox are proposed as one
