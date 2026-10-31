@@ -16,5 +16,5 @@ Funcionalidade: Revisão sem tratamento depois do merge
     Exemplo: Thread sem resolver no PR de outra pessoa
       Dado que um PR de outra pessoa foi mesclado com uma thread sem resolver
       Quando o merge é avisado
-      Então a resposta pergunta o que fazer com o comentário: resolver, responder, abrir uma issue ou abrir um PR
+      Então a pessoa escolhe uma ação só para o comentário: resolver, responder, abrir uma issue ou abrir um PR
       E nada é feito com ele antes da resposta

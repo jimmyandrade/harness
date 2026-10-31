@@ -3,7 +3,7 @@ name: mesclar-pull-request
 description: Mescla um pull request aberto na branch base e faz o que vem depois do merge, inclusive quando a pessoa avisa que mesclou. Usada quando a pessoa pede para mesclar, colocar na main ou diz que um PR foi mesclado, mesmo sem dizer merge. Não serve para abrir ou atualizar o PR nem para responder a revisão.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.2.1"
   related:
     - atender-revisao-de-pull-request
     - atualizar-branch-do-pull-request
@@ -85,7 +85,10 @@ A tarefa do PR nunca fica no status de antes do merge.
 O comentário sem tratamento depende de quem abriu o PR.
 A pessoa é o login do `gh`.
 PR da pessoa: abra um PR novo a partir da base com os ajustes, sem perguntar. Classifique e aplique cada sugestão por `atender-revisao-de-pull-request`, abra por `criar-pull-request` e cite o PR mesclado.
-PR de outra pessoa: pergunte, comentário por comentário, se resolve a thread, responde perguntando o que foi feito, abre uma issue com o que ficou de fora por `definir-issue-do-github` ou abre um PR que cubra o que faltou. Espere a resposta antes de agir.
+PR de outra pessoa: para cada comentário, a pessoa escolhe uma ação só: resolver a thread, responder perguntando o que foi feito, abrir uma issue com o que ficou de fora por `definir-issue-do-github` ou abrir um PR que cubra o que faltou.
+Pergunte pela tela de perguntas do cliente, como a do Claude ou a do Cursor: uma pergunta por comentário, com as quatro ações como opções de escolha única.
+Sem essa tela, mande uma lista numerada dos comentários, com as quatro ações, e peça a escolha de cada um.
+Espere a resposta antes de agir.
 
 ### Passo 4
 
@@ -128,7 +131,7 @@ Se você só limpar a cópia depois do merge, o comentário que ninguém tratou 
 
 1. Leia as threads, a conversa e as revisões pendentes do PR mesclado.
 2. PR da pessoa: abra o PR dos ajustes a partir da base.
-3. PR de outra pessoa: pergunte o que fazer com cada comentário.
+3. PR de outra pessoa: peça uma ação para cada comentário, pela tela de perguntas do cliente ou numa lista numerada.
 
 ## Exemplos de entrada e saída
 
@@ -144,7 +147,7 @@ Confirmei MERGED e o hash. A issue ligada foi para concluído. Nenhum comunicado
 
 ### PR #57 mesclado com revisão pendente
 
-A revisão pendente da pessoa pedia uma constante no lugar da lista repetida. O PR era dela: abri um PR novo a partir da base com o ajuste, citando o #57, além do resto do Passo 3.
+O PR mudava a mensagem de erro do CI para uma branch com o prefixo de um agente de código. A revisão pendente da pessoa, nunca enviada, pedia que a mensagem mandasse o agente conferir se as próprias instruções já tinham a regra antes de criá-la. O PR era dela: abri um PR novo a partir da base com a mensagem corrigida, citando o #57, além do resto do Passo 3.
 
 ## Casos-limite
 
