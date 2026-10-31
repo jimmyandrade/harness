@@ -5,9 +5,9 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.1"
+  version: "0.2.2"
   related:
-    - definir-lancamento
+    - definir-lancamento-financeiro
     - gerenciar-estoque
     - revisar-financas
 ---
@@ -32,7 +32,7 @@ Montar ou rever o planejamento financeiro de um mês é esta habilidade. A pesso
 ```mermaid
 flowchart LR
   Q{O pedido é?} -->|planejar o mês| A[Planeja aqui]
-  Q -->|registrar venda ou gasto| L[definir-lancamento]
+  Q -->|registrar venda ou gasto| L[definir-lancamento-financeiro]
   Q -->|DRE ou fluxo do ocorrido| R[revisar-financas]
   Q -->|estoque| E[gerenciar-estoque]
   Q -->|projeção do caixa| C[Habilidade de projeção de caixa]
@@ -63,7 +63,7 @@ Li o que já estava lançado. Faltava a meta de lucro. Perguntei. Não inventei 
 ## Casos-limite
 
 - A fonte não está no workspace conectado: pare. Não use a fonte de outro workspace.
-- Registrar venda ou gasto: `definir-lancamento`. DRE ou fluxo do que já ocorreu: `revisar-financas`. A lista de estoque: `gerenciar-estoque`. Projeção do caixa: a `Habilidade de projeção de caixa`, quando as instruções do projeto a indicarem.
+- Registrar venda ou gasto: `definir-lancamento-financeiro`. DRE ou fluxo do que já ocorreu: `revisar-financas`. A lista de estoque: `gerenciar-estoque`. Projeção do caixa: a `Habilidade de projeção de caixa`, quando as instruções do projeto a indicarem.
 - Previsão ou meta ausente: pergunte. Não grave lançamento neste plano.
 
 ## Pegadinhas

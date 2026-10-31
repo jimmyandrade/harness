@@ -5,9 +5,9 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.1"
+  version: "0.4.2"
   related:
-    - definir-lancamento
+    - definir-lancamento-financeiro
     - definir-planejamento-financeiro
     - gerenciar-estoque
   models:
@@ -44,7 +44,7 @@ Ler o caixa, o lucro ou prejuízo, a DRE, o fluxo de caixa, o diagnóstico, a au
 flowchart LR
   Q{O pedido é?} -->|caixa, DRE, fluxo, diagnóstico ou auditoria| A[Lê aqui]
   Q -->|preço| A
-  Q -->|registrar venda ou gasto| L[definir-lancamento]
+  Q -->|registrar venda ou gasto| L[definir-lancamento-financeiro]
   Q -->|estoque| E[gerenciar-estoque]
   Q -->|mês à frente| P[definir-planejamento-financeiro]
   Q -->|projeção do caixa| C[Habilidade de projeção de caixa]
@@ -132,7 +132,7 @@ Não havia margem desejada. Perguntei. Não inventei o custo.
 ## Casos-limite
 
 - A fonte não está no workspace conectado: pare. Não use a fonte de outro workspace.
-- Registrar venda ou gasto: `definir-lancamento`. A lista de estoque: `gerenciar-estoque`. Mês à frente: `definir-planejamento-financeiro`. Projeção do caixa: a `Habilidade de projeção de caixa`, quando as instruções do projeto a indicarem.
+- Registrar venda ou gasto: `definir-lancamento-financeiro`. A lista de estoque: `gerenciar-estoque`. Mês à frente: `definir-planejamento-financeiro`. Projeção do caixa: a `Habilidade de projeção de caixa`, quando as instruções do projeto a indicarem.
 - Sem dado para a margem: não calcule. Sem margem desejada: pergunte antes de sugerir o preço.
 - Auditoria sem dado suficiente: diga o que falta. Não estime as três partes.
 - Pedido sem intervalo e sem ponto de contato: pergunte o intervalo e ofereça os apelidos.

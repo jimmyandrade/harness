@@ -570,11 +570,11 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses recording the event, the day lookup, the popstar agenda, and organizing the contact point
 
-### definir-lancamento
+### definir-lancamento-financeiro
 - **Stability**: experimental
-- **Description**: Interpret a simple sale or expense and route what is not that entry
+- **Description**: Interpret a simple sale, expense or financial money movement and route what is not that entry. Handles revenues, sales, expenses and payments. Do not confuse with musical or product launches.
 - **Properties**:
-  - Lives at `.agents/skills/definir-lancamento/SKILL.md`
+  - Lives at `.agents/skills/definir-lancamento-financeiro/SKILL.md`
   - Reads `Moeda`, `Moedas estrangeiras`, `Habilidade de venda`, and `Habilidade de projeção de caixa` from the project instructions
   - Records an expense in a foreign currency with the original amount, the exchange rate, and the amount in `Moeda`, and asks when the rate is missing
   - Asks before recording when company or personal, sale or expense, or the payment form is missing
@@ -585,6 +585,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses the DRE, the cash-flow statement, the price, the monthly plan, the durable good, and the fair cash projection
+- **Aliases**: definir-lancamento
 
 ### definir-link-rastreavel
 - **Stability**: experimental
@@ -700,7 +701,7 @@ How these skills relate is in `README.md`, in this folder.
   - Reads `Moeda` and `Habilidade de projeção de caixa` from the project instructions
   - Plans sales, expenses, a profit goal, cash, and practical actions for the month
   - Asks for a forecast or a goal the person did not state, and does not invent them
-  - Leaves recording to definir-lancamento, the statements of what already happened to revisar-financas, and the cash projection to the skill that `Habilidade de projeção de caixa` names, when there is one
+  - Leaves recording to definir-lancamento-financeiro, the statements of what already happened to revisar-financas, and the cash projection to the skill that `Habilidade de projeção de caixa` names, when there is one
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses recording a sale or expense, building the income statement, moving stock, and projecting fair cash
@@ -1043,7 +1044,7 @@ How these skills relate is in `README.md`, in this folder.
   - Reads the stock list and its property names from the data mapping of the project, when the person does not name another list
   - Updates the current balance for an entry or an exit and leaves an unknown balance empty
   - Accepts only metro, unidade, pacote, rolo, and kit as the balance unit
-  - Sends the cash effect to definir-lancamento and does not record the payment or create a cost category
+  - Sends the cash effect to definir-lancamento-financeiro and does not record the payment or create a cost category
   - Asks the quantity before suggesting a replenishment
 - **Test Criteria**:
   - [x] The skill is present at that path
@@ -1093,7 +1094,7 @@ How these skills relate is in `README.md`, in this folder.
   - Verifies the saved entry before reporting that it was recorded
   - Traces the financial entry that originated the purchase or acquisition of a durable asset
   - Leaves the asset page, the split between fixed assets and stock, and a controllable-item purchase to definir-ativo-imobilizado
-  - Sends a sale or a mixed sale-and-expense sentence to definir-lancamento
+  - Sends a sale or a mixed sale-and-expense sentence to definir-lancamento-financeiro
   - Does not invent the amount or the date
   - Reads image evidence through reconhecer-imagem and checks names from both the evidence and the accompanying command through definir-grafia before writing
   - Reuses completed recognition and spelling checks, preserving the original operation without recursive handoffs

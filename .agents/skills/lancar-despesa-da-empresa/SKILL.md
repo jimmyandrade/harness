@@ -5,14 +5,14 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.10.5"
+  version: "0.10.6"
   aliases:
     - definir-despesa
     - lancar-despesa
   related:
     - definir-ativo-imobilizado
     - definir-empresa
-    - definir-lancamento
+    - definir-lancamento-financeiro
     - identificar-duplicata
     - lancar-despesa-pessoal
     - definir-grafia
@@ -39,11 +39,11 @@ Pagamento, taxa, comprovante, custo, investimento, boleto, Pix, fatura ou inscri
 ```mermaid
 flowchart LR
   Q{O pedido é?} -->|gasto da empresa| A[Lança aqui]
-  Q -->|venda ou frase mista| L[definir-lancamento]
+  Q -->|venda ou frase mista| L[definir-lancamento-financeiro]
   Q -->|página do bem durável| I[definir-ativo-imobilizado]
 ```
 
-Venda ou frase que mistura venda, gasto e estoque segue `definir-lancamento`. Esta habilidade grava o gasto da empresa.
+Venda ou frase que mistura venda, gasto e estoque segue `definir-lancamento-financeiro`. Esta habilidade grava o gasto da empresa.
 
 Antes da primeira chamada no Notion, identifique o tipo da entidade pelo mapeamento ou pelo contexto estruturado. Não deduza o tipo só pelo título ou por um UUID.
 
@@ -241,13 +241,13 @@ Busquei pelo recebedor, documento, valor e data. Registrei um lançamento com as
 - Compra de item controlável ou separação entre ativo e estoque: `definir-ativo-imobilizado`. Não reescreva essas regras aqui.
 - Falta conta de origem opcional, mas a identificação, a classificação e os dados financeiros estão sustentados: registre e entregue a pendência, sem adivinhar.
 - Valor, data e natureza da empresa estão confirmados, mas falta o que foi pago ou sua finalidade: pergunte e aguarde antes de gravar.
-- Venda ou frase mista: `definir-lancamento`. Não grave a venda aqui.
+- Venda ou frase mista: `definir-lancamento-financeiro`. Não grave a venda aqui.
 
 ## Pegadinhas
 
 - Rastrear o lançamento parece criar o ativo. O lançamento fica aqui. A página do bem fica em `definir-ativo-imobilizado`.
 - Item controlável parece esta habilidade decidir o destino. A separação entre ativo e estoque fica em `definir-ativo-imobilizado`.
-- Venda recebida na hora parece este gasto. A frase mista começa em `definir-lancamento`.
+- Venda recebida na hora parece este gasto. A frase mista começa em `definir-lancamento-financeiro`.
 - O comprovante identifica a transferência, não necessariamente a compra. Recebedor e Pix não são produto nem finalidade.
 - Nota fiscal e print de cartão podem ser o mesmo gasto. Dois arquivos não são duas despesas.
 - Uma tela pode dizer "Crédito" como modalidade do cartão, não como entrada de receita.
