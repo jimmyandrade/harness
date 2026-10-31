@@ -45,7 +45,7 @@ flowchart LR
     definir_instrucoes_do_projeto["definir-instrucoes-do-projeto"]
     definir_issue_do_github["definir-issue-do-github"]
     definir_jornada_de_producao["definir-jornada-de-producao"]
-    definir_lancamento["definir-lancamento"]
+    definir_lancamento_financeiro["definir-lancamento-financeiro"]
     definir_link_rastreavel["definir-link-rastreavel"]
     definir_medicao_de_metrica["definir-medicao-de-metrica"]
     definir_obrigacao_financeira["definir-obrigacao-financeira"]
@@ -266,11 +266,11 @@ flowchart LR
   definir_jornada_de_producao --> definir_agenda_de_popstar
   definir_jornada_de_producao --> organizar_ponto_de_contato
   definir_jornada_de_producao --> procurar_agenda
-  definir_lancamento --> definir_ativo_imobilizado
-  definir_lancamento --> definir_planejamento_financeiro
-  definir_lancamento --> gerenciar_estoque
-  definir_lancamento --> lancar_despesa_da_empresa
-  definir_lancamento --> revisar_financas
+  definir_lancamento_financeiro --> definir_ativo_imobilizado
+  definir_lancamento_financeiro --> definir_planejamento_financeiro
+  definir_lancamento_financeiro --> gerenciar_estoque
+  definir_lancamento_financeiro --> lancar_despesa_da_empresa
+  definir_lancamento_financeiro --> revisar_financas
   definir_link_rastreavel --> evoluir_habilidade
   definir_medicao_de_metrica --> definir_okr
   definir_medicao_de_metrica --> evoluir_habilidade
@@ -292,7 +292,7 @@ flowchart LR
   definir_pessoa --> definir_grafia
   definir_pessoa --> definir_perfil_social
   definir_pessoa --> identificar_duplicata
-  definir_planejamento_financeiro --> definir_lancamento
+  definir_planejamento_financeiro --> definir_lancamento_financeiro
   definir_planejamento_financeiro --> gerenciar_estoque
   definir_planejamento_financeiro --> revisar_financas
   definir_recurso_de_aprendizado --> definir_agenda
@@ -398,7 +398,7 @@ flowchart LR
   formalizar_decisao --> enviar_mensagem_no_slack
   formalizar_decisao --> preparar_tarefa_do_pull_request
   gerenciar_estoque --> definir_ativo_imobilizado
-  gerenciar_estoque --> definir_lancamento
+  gerenciar_estoque --> definir_lancamento_financeiro
   gerenciar_estoque --> identificar_duplicata
   gerenciar_estoque --> mesclar_registro
   gravar_termos_no_vocabulario --> definir_vocabulario
@@ -411,7 +411,7 @@ flowchart LR
   lancar_despesa_da_empresa --> definir_ativo_imobilizado
   lancar_despesa_da_empresa --> definir_empresa
   lancar_despesa_da_empresa --> definir_grafia
-  lancar_despesa_da_empresa --> definir_lancamento
+  lancar_despesa_da_empresa --> definir_lancamento_financeiro
   lancar_despesa_da_empresa --> identificar_duplicata
   lancar_despesa_da_empresa --> lancar_despesa_pessoal
   lancar_despesa_da_empresa --> reconhecer_imagem
@@ -535,7 +535,7 @@ flowchart LR
   registrar_resultados_da_validacao_na_tarefa --> preparar_tarefa_do_pull_request
   registrar_resultados_da_validacao_na_tarefa --> registrar_evidencia_visual
   registrar_resultados_da_validacao_na_tarefa --> sincronizar_status_da_tarefa
-  revisar_financas --> definir_lancamento
+  revisar_financas --> definir_lancamento_financeiro
   revisar_financas --> definir_planejamento_financeiro
   revisar_financas --> gerenciar_estoque
   revisar_habilidade --> criar_commit

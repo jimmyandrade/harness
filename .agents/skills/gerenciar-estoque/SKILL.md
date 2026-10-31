@@ -8,7 +8,7 @@ metadata:
   version: "0.2.1"
   related:
     - definir-ativo-imobilizado
-    - definir-lancamento
+    - definir-lancamento-financeiro
     - identificar-duplicata
     - mesclar-registro
 ---
@@ -32,7 +32,7 @@ Entrada, saída, saldo e reposição de item esgotável é esta habilidade. A pe
 ```mermaid
 flowchart LR
   M{O movimento é?} -->|entrada ou saída| A[Atualiza o saldo]
-  M -->|pagamento| L[definir-lancamento]
+  M -->|pagamento| L[definir-lancamento-financeiro]
   M -->|bem durável| I[definir-ativo-imobilizado]
   M -->|categoria nova| P[Pergunte e não crie]
 ```
@@ -47,7 +47,7 @@ Antes de criar outro item, busque com `identificar-duplicata`. Provável: mostre
 
 ### Passo 4
 
-O efeito no caixa segue `definir-lancamento`. A despesa relacionada aponta o lançamento que já existe. Sem ele, não invente o pagamento. Não grave o pagamento aqui. Não crie a categoria de custo. Reposição sem a quantidade que a pessoa quer comprar: informe o saldo e pergunte. Não invente o quanto repor.
+O efeito no caixa segue `definir-lancamento-financeiro`. A despesa relacionada aponta o lançamento que já existe. Sem ele, não invente o pagamento. Não grave o pagamento aqui. Não crie a categoria de custo. Reposição sem a quantidade que a pessoa quer comprar: informe o saldo e pergunte. Não invente o quanto repor.
 
 ## Problemas comuns
 
@@ -64,7 +64,7 @@ Se você preencher o saldo atual que ninguém informou, ou gravar a saída acima
 Se você registrar o pagamento nesta habilidade, o caixa e o item se misturam.
 
 1. Atualize quantidade e saldo aqui.
-2. O dinheiro segue `definir-lancamento`.
+2. O dinheiro segue `definir-lancamento-financeiro`.
 3. Não crie a categoria de custo.
 
 ## Exemplos de entrada e saída
@@ -73,7 +73,7 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### entraram 3 unidades deste tecido
 
-Somei 3 ao saldo atual, na unidade. O pagamento seguiu `definir-lancamento`. Não criei categoria.
+Somei 3 ao saldo atual, na unidade. O pagamento seguiu `definir-lancamento-financeiro`. Não criei categoria.
 
 ### saíram 3 unidades e o saldo era 1
 
@@ -89,13 +89,13 @@ Informei o saldo. A quantidade a comprar não estava dita. Perguntei. Não inven
 - Bem durável: `definir-ativo-imobilizado`. Não cadastre o ativo aqui.
 - Lote ou volume: pergunte a unidade da chave `Unidades do saldo`. Não grave lote nem volume.
 - Item provável já existe: mostre e confirme. Não duplique.
-- Pagamento: `definir-lancamento`. Sem o lançamento, não invente a despesa relacionada.
+- Pagamento: `definir-lancamento-financeiro`. Sem o lançamento, não invente a despesa relacionada.
 
 ## Pegadinhas
 
 - Lote e volume parecem unidade do saldo. A chave `Unidades do saldo` aceita metro, unidade, pacote, rolo e kit.
 - A quantidade adquirida parece o saldo. Ela é a quantidade comprada. O disponível é o saldo atual.
-- Compra de estoque parece incluir o pagamento. O dinheiro segue `definir-lancamento`.
+- Compra de estoque parece incluir o pagamento. O dinheiro segue `definir-lancamento-financeiro`.
 
 ## Scripts disponíveis
 
