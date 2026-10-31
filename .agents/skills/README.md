@@ -164,6 +164,7 @@ flowchart LR
   conversar_no_whatsapp --> comunicar_novidade_do_produto
   conversar_no_whatsapp --> definir_agenda
   conversar_no_whatsapp --> definir_pessoa
+  conversar_no_whatsapp --> definir_rotina
   conversar_no_whatsapp --> definir_tarefa
   conversar_no_whatsapp --> escrever_link
   conversar_no_whatsapp --> evoluir_habilidade
