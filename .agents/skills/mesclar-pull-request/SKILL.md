@@ -3,12 +3,13 @@ name: mesclar-pull-request
 description: Mescla um pull request aberto na branch base e faz o que vem depois do merge, inclusive quando a pessoa avisa que mesclou. Usada quando a pessoa pede para mesclar, colocar na main ou diz que um PR foi mesclado, mesmo sem dizer merge. Não serve para abrir ou atualizar o PR nem para responder a revisão.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.1"
   related:
     - atender-revisao-de-pull-request
     - atualizar-branch-do-pull-request
     - comunicar-novidade-do-produto
     - criar-pull-request
+    - definir-issue-do-github
     - evoluir-habilidade
     - limpar-copias-de-trabalho
     - sincronizar-status-da-tarefa
@@ -71,6 +72,7 @@ Se o modo automático negar o merge, não tente de outro jeito: nada de auto-mer
 Depois do merge, feito aqui ou avisado pela pessoa, faça tudo isto na mesma resposta, antes de responder:
 
 - [ ] Confirme o estado MERGED e o hash do commit na base.
+- [ ] Leia os comentários de revisão que ninguém tratou: thread sem resolver, comentário da conversa sem resposta e revisão pendente, que só aparece para quem a escreveu e não segura o merge. Elogio e aviso que só informa não contam.
 - [ ] Procure as tarefas ligadas ao PR: as issues que ele fecha, a chave do card no título ou na branch, e as tarefas que citam o PR.
 - [ ] Para cada tarefa achada, siga `sincronizar-status-da-tarefa`.
 - [ ] Se não achar nenhuma, escreva na resposta que o PR não tem tarefa ligada e onde você procurou. A pessoa decide se liga uma tarefa ou se o PR não precisa de uma.
@@ -79,6 +81,14 @@ Depois do merge, feito aqui ou avisado pela pessoa, faça tudo isto na mesma res
 - [ ] Siga `limpar-copias-de-trabalho` para a cópia de trabalho e a branch local do PR.
 
 A tarefa do PR nunca fica no status de antes do merge.
+
+O comentário sem tratamento depende de quem abriu o PR.
+A pessoa é o login do `gh`.
+PR da pessoa: abra um PR novo a partir da base com os ajustes, sem perguntar. Classifique e aplique cada sugestão por `atender-revisao-de-pull-request`, abra por `criar-pull-request` e cite o PR mesclado.
+PR de outra pessoa: para cada comentário, a pessoa escolhe uma ação só: resolver a thread, responder perguntando o que foi feito, abrir uma issue com o que ficou de fora por `definir-issue-do-github` ou abrir um PR que cubra o que faltou.
+Pergunte pela tela de perguntas do cliente, como a do Claude ou a do Cursor: uma pergunta por comentário, com as quatro ações como opções de escolha única.
+Sem essa tela, mande uma lista numerada dos comentários, com as quatro ações, e peça a escolha de cada um.
+Espere a resposta antes de agir.
 
 ### Passo 4
 
@@ -115,6 +125,14 @@ Se você mesclar com thread sem resolver ou comentário sem resposta, a revisão
 2. Siga `atender-revisao-de-pull-request` e volte.
 3. Thread que espera a pessoa segura o merge.
 
+### Revisão esquecida no merge
+
+Se você só limpar a cópia depois do merge, o comentário que ninguém tratou se perde, ainda mais o de uma revisão pendente.
+
+1. Leia as threads, a conversa e as revisões pendentes do PR mesclado.
+2. PR da pessoa: abra o PR dos ajustes a partir da base.
+3. PR de outra pessoa: peça uma ação para cada comentário, pela tela de perguntas do cliente ou numa lista numerada.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
@@ -127,24 +145,31 @@ O pedido autoriza o merge. Sem PR aberto, `criar-pull-request` abre antes. Sem c
 
 Confirmei MERGED e o hash. A issue ligada foi para concluído. Nenhum comunicado: a mudança não aparece para quem usa.
 
+### PR #57 mesclado com revisão pendente
+
+O PR mudava a mensagem de erro do CI para uma branch com o prefixo de um agente de código. A revisão pendente da pessoa, nunca enviada, pedia que a mensagem mandasse o agente conferir se as próprias instruções já tinham a regra antes de criá-la. O PR era dela: abri um PR novo a partir da base com a mensagem corrigida, citando o #57, além do resto do Passo 3.
+
 ## Casos-limite
 
 - O PR está em rascunho: diga isso e pergunte se tira do rascunho antes. O merge não tira sozinho.
 - A pessoa pede para mesclar a base na branch: isso é `atualizar-branch-do-pull-request`, que usa rebase.
 - O PR é de release, como o do Release Please: depois do merge, a tag sai pelo CI. Atualize o plugin instalado quando as instruções do projeto mandarem.
 - Vários PRs: mescle na ordem de dependência e faça o Passo 3 para cada um.
+- A sugestão já está na base, por outro PR: resolva a thread com o link desse PR e não abra outro.
 
 ## Pegadinhas
 
 - Depois do squash, a branch local não aparece como mesclada. Só o estado do PR diz que o trabalho entrou.
 - `mergeStateStatus` `BLOCKED` com checks verdes costuma ser aprovação ou check exigido que ainda não rodou. Leia os dois antes de dizer por quê.
 - O aviso "mesclado" parece encerrar o assunto. É o gatilho do Passo 3.
+- Uma revisão pendente não aparece para mais ninguém e não segura o merge. Só quem a escreveu a vê, então leia as revisões com o `gh` da pessoa.
 
 ## Scripts disponíveis
 
 - Nenhum.
 
 1. Estado: `gh pr view <número> --repo <Repositório> --json state,isDraft,mergeCommit,mergeStateStatus,reviewDecision,closingIssuesReferences`.
-2. Threads: `gh api graphql -f query='query{repository(owner:"<dono>",name:"<nome>"){pullRequest(number:<número>){reviewDecision reviewThreads(first:100){nodes{isResolved}}}}}'`.
+2. Threads, com os comentários da revisão pendente: `gh api graphql -f query='query{repository(owner:"<dono>",name:"<nome>"){pullRequest(number:<número>){reviewDecision reviewThreads(first:100){nodes{isResolved path line comments(first:20){nodes{author{login} body}}}}}}}'`.
 3. Checks: `gh pr checks <número> --repo <Repositório>`.
 4. Merge: `gh pr merge <número> --repo <Repositório> --<Tipo de merge> --delete-branch`.
+5. Autor, revisões e conversa: `gh pr view <número> --repo <Repositório> --json author,reviews,comments` e `gh api user --jq .login`.
