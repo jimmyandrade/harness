@@ -44,6 +44,19 @@ class BranchNameTest(unittest.TestCase):
             with self.subTest(branch=branch):
                 self.assert_agent_message(branch)
 
+    def test_agent_message_asks_to_check_the_instructions_first(self) -> None:
+        out = check("cursor/fix-the-check")
+        self.assertIn("check whether your instructions already have this rule", out.stdout)
+
+    def test_agent_message_lists_the_accepted_types(self) -> None:
+        out = check("cursor/fix-the-check")
+        self.assertIn("feat, fix, docs, refactor, perf, test, chore, ci", out.stdout)
+
+    def test_every_listed_type_passes(self) -> None:
+        for branch_type in ("feat", "fix", "docs", "refactor", "perf", "test", "chore", "ci"):
+            with self.subTest(branch_type=branch_type):
+                self.assert_passes(f"{branch_type}/short-description")
+
     def test_other_invalid_name_gets_the_usual_message(self) -> None:
         out = check("my-branch")
         self.assertNotEqual(out.returncode, 0)
