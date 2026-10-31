@@ -803,6 +803,20 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses choosing words in the tone of voice, writing the caption, registering the post, and generating the video with AI
 
+### definir-rotina
+- **Stability**: experimental
+- **Description**: Create, review, and audit a scheduled or event-triggered routine so it runs only when someone uses the result
+- **Properties**:
+  - Skill at `.agents/skills/definir-rotina/`
+  - Before creating, lists the existing routines and adjusts one that reads the same source instead of creating another
+  - Prefers a trigger over periodic polling when the source offers one. Without a trigger, a result that does not need to be fresh runs only on business days
+  - A routine that alerts a person or sends a message runs only within `Horário comercial`
+  - An audit proposes triggers, fewer runs, merged routines, and pausing instead of deleting, and applies only after the person confirms
+  - Does not create a routine only to watch usage, since each check also consumes
+- **Test Criteria**:
+  - [ ] A daily collection that does not need fresh data runs only on business days
+  - [ ] Three routines reading the same inbox are proposed as one
+
 ### definir-tarefa
 - **Stability**: experimental
 - **Description**: Register, review, edit, or judge a merge of tasks with one set of criteria
