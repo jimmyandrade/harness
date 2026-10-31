@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.41.0](https://github.com/jimmyandrade/harness/compare/v1.40.1...v1.41.0) (2026-10-31)
+
+
+### Features
+
+* **acompanhar-edital:** track open calls on the web ([#732](https://github.com/jimmyandrade/harness/issues/732)) ([cf439b6](https://github.com/jimmyandrade/harness/commit/cf439b6568354a141012f56fa4ef946263c51883))
+* **definir-issue-do-github,atualizar-branch-do-pull-request,fechar-pull-request:** mark a replacement with GitHub alerts ([#735](https://github.com/jimmyandrade/harness/issues/735)) ([9ee1e95](https://github.com/jimmyandrade/harness/commit/9ee1e951368cd63b179c67af185e8d525af1ecf3)), closes [#734](https://github.com/jimmyandrade/harness/issues/734)
+* **definir-rotina:** watch a page by diff when it has no trigger ([#737](https://github.com/jimmyandrade/harness/issues/737)) ([5d8d911](https://github.com/jimmyandrade/harness/commit/5d8d911e9fce7c199957fa4c24e5053c1fb5af08)), closes [#736](https://github.com/jimmyandrade/harness/issues/736)
+* **levantar-ambiente-do-repositorio:** list outdated command-line tools ([#749](https://github.com/jimmyandrade/harness/issues/749)) ([8b4a232](https://github.com/jimmyandrade/harness/commit/8b4a232826c5003e26978d5f7da72cfaf8d9b57c)), closes [#748](https://github.com/jimmyandrade/harness/issues/748)
+* **levantar-ambiente-do-repositorio:** say what to check before fixing a package warning ([#752](https://github.com/jimmyandrade/harness/issues/752)) ([a550340](https://github.com/jimmyandrade/harness/commit/a5503400e59f54bd2c0f86663d3f98656f9f542e))
+
+
+### Bug Fixes
+
+* **conversar-no-whatsapp:** keep a missing reply routine in the next steps ([#726](https://github.com/jimmyandrade/harness/issues/726)) ([06ea8a8](https://github.com/jimmyandrade/harness/commit/06ea8a8a4d6e26c44ae12b1aa2742c4162b69626))
+* **publicar-resposta-de-revisao:** resolve a thread whose remainder moved to an issue ([#754](https://github.com/jimmyandrade/harness/issues/754)) ([36234d1](https://github.com/jimmyandrade/harness/commit/36234d1344be2361f0397ec7a1e5a9b24315d521)), closes [#753](https://github.com/jimmyandrade/harness/issues/753)
+
 ## [1.40.1](https://github.com/jimmyandrade/harness/compare/v1.40.0...v1.40.1) (2026-10-31)
 
 
