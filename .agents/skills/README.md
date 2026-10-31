@@ -438,6 +438,7 @@ flowchart LR
   mesclar_pull_request --> atualizar_branch_do_pull_request
   mesclar_pull_request --> comunicar_novidade_do_produto
   mesclar_pull_request --> criar_pull_request
+  mesclar_pull_request --> definir_issue_do_github
   mesclar_pull_request --> evoluir_habilidade
   mesclar_pull_request --> limpar_copias_de_trabalho
   mesclar_pull_request --> sincronizar_status_da_tarefa

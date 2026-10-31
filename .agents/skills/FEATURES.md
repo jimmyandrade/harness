@@ -1180,10 +1180,13 @@ How these skills relate is in `README.md`, in this folder.
   - `Exigir CI verde`, on by default, holds the merge while a check fails or is pending; off, it merges and reports the checks that did not pass
   - Merges with `Tipo de merge` and deletes the branch. When the automatic mode denies the merge, it hands over the command and stops
   - After the merge, or the person's notice of it, confirms MERGED and the hash and, in the same reply, syncs every linked task through sincronizar-status-da-tarefa, checks the sync with another tool, announces through comunicar-novidade-do-produto when `Comunicar novidade após o merge` is on, and cleans the working copy through limpar-copias-de-trabalho
+  - After the merge, reads the review comments nobody handled, including a pending review that only its author sees. On the person's own pull request, opens a new one from the base with the fixes; on someone else's, asks per comment whether to resolve it, reply asking what was done, open an issue, or open a pull request
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [ ] A merge request on a pull request with an unresolved thread handles the review comments first
   - [ ] A merge request with a failing check stops and names the check while `Exigir CI verde` is on
+  - [ ] A merged pull request of the person with a pending review comment gets a new pull request with the fix
+  - [ ] A merged pull request of someone else with an unhandled comment gets a question per comment before any action
   - [ ] A notice that a pull request was merged moves the linked task to its merged status in the same reply
 
 ### mesclar-registro
