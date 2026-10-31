@@ -13,7 +13,9 @@ How these skills relate is in `README.md`, in this folder.
 - **Description**: Track open calls on the web: the selection result of an open call the person applied to, and the next open call of the same organization
 - **Properties**:
   - Lives at `.agents/skills/acompanhar-edital/SKILL.md`
-  - Lists the domains of the organization, its maintainer, the platform used to apply, the official gazette, and the confirmation email, and keeps them in a parameter of the project instructions
+  - Finds the opportunity data source in the connected workspace by a parameter, or searches for one, and proposes or records its name in the project instructions as a parameter decides
+  - Takes the link properties of the opportunity edition and its group as the first source of domains, searches the web when the original link is missing, and hands a found link back through criar-oportunidade or definir-grupo-de-oportunidades
+  - Completes the list with the maintainer, the platform used to apply, the official gazette, and the confirmation email, and keeps the domains that have no property on the opportunity in a parameter of the project instructions
   - Searches each form of the applicant's name, through definir-grafia, in quotes with `site:` on each domain, plus one open search with the organization name to find a missing domain
   - Reads each document found and says the selection, the standing, the date, the link, and any enrollment or confirmation deadline, and whether it has passed
   - Never takes an empty search as a rejection, and points to the results page of the open call
