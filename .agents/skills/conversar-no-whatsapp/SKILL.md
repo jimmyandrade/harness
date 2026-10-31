@@ -21,7 +21,9 @@ metadata:
 
 Leia os valores nas instruções do projeto, na entrada desta habilidade. Na ausência, use os padrões abaixo.
 ```yaml
+# `Formato da data com dia da semana` vale para resumo e registro, como tarefa e planilha. `Formato da data na mensagem` vale para o texto que vai a uma pessoa: por extenso, sem zero no dia, não deixa dúvida entre dia e mês.
 "Formato da data com dia da semana": "terça-feira, 01/09/2026"
+"Formato da data na mensagem": "terça-feira, 1 de setembro de 2026"
 "Modo de aprendizado": "perguntar"
 "Etiqueta das conversas": ""
 # `Dividir em mensagens curtas`: `sim` divide o rascunho em mensagens, uma por ideia. `não` manda cada rascunho numa mensagem só.
@@ -90,7 +92,7 @@ Para responder ou enviar, mostre a conversa de destino, o texto exato e, se for 
 
 Em conta comercial, veja se a conversa está com o agente de IA. Se estiver, avise antes de enviar: ele responde à próxima mensagem do contato.
 
-Toda data no rascunho vai no `Formato da data com dia da semana`, com o dia da semana e a data completa. Nunca escreva só o dia da semana, como "até quinta", nem só a data. Tire o dia da semana de um calendário ou de um comando, nunca de cabeça.
+Toda data no rascunho vai no `Formato da data na mensagem`, com o dia da semana e a data completa. Nunca escreva só o dia da semana, como "até quinta", nem só a data. Tire o dia da semana de um calendário ou de um comando, nunca de cabeça.
 
 O WhatsApp não usa Markdown. Negrito é um asterisco de cada lado, itálico é sublinhado, e não há título nem link entre colchetes. O link segue `escrever-link`.
 
@@ -149,7 +151,7 @@ Se você converter "sexta-feira" contando a partir de outro dia que não hoje, a
 
 Se você escrever "vale até quarta" calculando de cabeça, o dia sai errado e a pessoa perde o prazo.
 
-1. Escreva a data no `Formato da data com dia da semana`.
+1. Escreva a data no `Formato da data na mensagem`.
 2. Tire o dia da semana de um calendário ou de um comando.
 3. Confira o rascunho antes de pedir o sim.
 
