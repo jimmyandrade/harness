@@ -20,6 +20,9 @@ jobs:
       - name: Check the branch name
         if: github.event_name == 'pull_request'
         uses: ./.github/actions/check-branch-name
+      - name: Check for a duplicate pull request
+        if: github.event_name == 'pull_request'
+        uses: ./.github/actions/check-duplicate-pull-request
       - name: Decide how much of the change needs checking
         id: scope
         run: .github/scripts/change-scope.sh "$BASE" "$HEAD" | tee -a "$GITHUB_OUTPUT"

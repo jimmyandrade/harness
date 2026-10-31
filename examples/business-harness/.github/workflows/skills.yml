@@ -24,6 +24,9 @@ jobs:
         uses: actions/checkout@v7
         with:
           fetch-depth: 0
+      - name: Check for a duplicate pull request
+        if: github.event_name == 'pull_request'
+        uses: jimmyandrade/harness/.github/actions/check-duplicate-pull-request@vX.Y.Z
       - name: Check skills
         uses: jimmyandrade/harness/.github/actions/check-skill@vX.Y.Z
         with:

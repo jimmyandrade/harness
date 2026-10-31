@@ -1,0 +1,18 @@
+name: Check for a duplicate pull request
+description: Fail a pull request when another open pull request of the calling repository, from any branch, has the same title or the same head commit.
+inputs:
+  github-token:
+    description: Token that lists the open pull requests.
+    required: false
+    default: ${{ github.token }}
+runs:
+  using: composite
+  steps:
+    - name: Look for another open pull request with the same title or head commit
+      shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.github-token }}
+        NUMBER: ${{ github.event.pull_request.number }}
+        TITLE: ${{ github.event.pull_request.title }}
+        HEAD: ${{ github.event.pull_request.head.sha }}
+      run: '"$GITHUB_ACTION_PATH/../../scripts/duplicate-pull-request.sh" "$GITHUB_REPOSITORY" "$NUMBER" "$TITLE" "$HEAD"'

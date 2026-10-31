@@ -33,6 +33,7 @@ harness/
 ├── .github/
 │   ├── actions/                    # Composite actions called by business harnesses
 │   │   ├── check-branch-name/
+│   │   ├── check-duplicate-pull-request/
 │   │   ├── check-skill/
 │   │   └── sync-notion-pages/
 │   ├── scripts/                    # Scripts the workflows of this repository call
