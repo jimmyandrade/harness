@@ -10,7 +10,7 @@ Read `Forma do harness`, `Papel do repositório atual`, and `Instalação do har
 
 Each step ends with a check.
 
-## 1. Link the project skills
+## Link the project skills
 
 Skip this step when the project has no skills of its own.
 
@@ -23,9 +23,9 @@ Commit the link.
 
 Check: `ls .claude/skills/` lists the skills of the project.
 
-## 2. Enable the plugin in the repository
+## Enable the plugin in the repository
 
-`.claude/settings.json` names the marketplace and enables `core`. A business harness already has it from `business-repository.md`, step 4, pointing at its own marketplace. A project that only uses the core copies the example that points at this repository.
+`.claude/settings.json` names the marketplace and enables `core`. A business harness already has it from [Copy the example files and the instructions template](business-repository.md#copy-the-example-files-and-the-instructions-template), pointing at its own marketplace. A project that only uses the core copies the example that points at this repository.
 
 ```bash
 TAG="$(gh release view --repo jimmyandrade/harness --json tagName --jq .tagName)"
@@ -35,7 +35,7 @@ perl -pi -e "s/vX\.Y\.Z/$TAG/g" .claude/settings.json
 
 Check: `jq '.enabledPlugins' .claude/settings.json` shows `core@<marketplace>` as `true`.
 
-## 3. Install the plugin for the project
+## Install the plugin for the project
 
 Run this once per machine, from the root of each project that enables the plugin. Install it with `--scope project`: a user install enables the plugin in every project, including one that already gets the core skills through a link, where each skill then shows twice. In the desktop app, typing `/plugin` opens the plugin screen and does not take arguments, so use the terminal.
 
@@ -56,7 +56,7 @@ REPO="$(jq -r --arg m "$MARKETPLACE" '.extraKnownMarketplaces[$m].source.repo' .
 
 Check: the last command prints `Successfully installed plugin: core@<marketplace> (scope: project)`. When `.claude/settings.json` only changes in formatting, discard that change.
 
-## 4. Confirm in a new session
+## Confirm in a new session
 
 Open a new Claude Code session in the project. Sessions opened before the install do not see the plugin.
 

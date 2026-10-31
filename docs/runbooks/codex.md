@@ -10,7 +10,7 @@ Read `Forma do harness`, `Papel do repositório atual`, and `Instalação do har
 
 Each step ends with a check.
 
-## 1. Add the marketplace
+## Add the marketplace
 
 A business harness: add its own repository. Codex accepts `owner/repo`, an HTTPS URL, or an SSH URL, so a private repository works with the git credentials of the machine.
 
@@ -27,7 +27,7 @@ codex plugin marketplace add jimmyandrade/harness --ref "$TAG"
 
 Check: `codex plugin marketplace list` shows the marketplace, named after the `name` in `.claude-plugin/marketplace.json`: the business name, or `harness`.
 
-## 2. Install the plugins
+## Install the plugins
 
 ```bash
 MARKETPLACE="$(jq -r .name .claude-plugin/marketplace.json)"
@@ -38,7 +38,7 @@ A project that only uses the core runs `codex plugin add core@harness` instead.
 
 Check: `codex plugin list --marketplace "$MARKETPLACE"` shows every plugin as `installed, enabled`, and `core` comes from the tag in `.claude-plugin/marketplace.json`.
 
-## 3. Confirm in a new session
+## Confirm in a new session
 
 Open a new Codex session in the project. Sessions opened before the install do not see the plugins.
 

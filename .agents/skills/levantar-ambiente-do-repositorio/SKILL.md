@@ -3,7 +3,7 @@ name: levantar-ambiente-do-repositorio
 description: Levanta o ambiente de trabalho de um repositório antes de escrever código, testes, commit ou pull request. Acha o runtime e como ativá-lo, os comandos de instalar, lint, tipos, testes e build, as habilidades do repositório que se aplicam e as pegadinhas que ele documenta. Não serve para rodar os comandos, instalar dependências nem decidir a convenção de código.
 metadata:
   author: jimmyandrade
-  version: "0.8.0"
+  version: "0.8.1"
   related:
     - criar-commit
     - criar-pull-request
@@ -128,7 +128,7 @@ Não achei arquivo de instruções nem habilidade do repositório. O `pyproject.
 
 ## Pegadinhas
 
-- A branch padrão só parece ser a `main`. Num repositório criado vazio, o GitHub torna padrão a primeira branch enviada, mesmo que seja uma branch de trabalho.
+- Em novos repositórios, a branch padrão pode não ser criada como `main`. Num repositório criado vazio, o GitHub torna padrão a primeira branch enviada, mesmo que seja uma branch de trabalho. Por isso, deve-se garantir a criação da branch `main`.
 - Um arquivo de instruções pode apontar para outro. Leia o que ele cita.
 - O comando do manifesto roda tudo. O de arquivos tocados pode estar numa habilidade ou nas instruções.
 - O hook de pre-push pode levar minutos e parece travado.
