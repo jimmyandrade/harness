@@ -15,13 +15,16 @@ How these skills relate is in `README.md`, in this folder.
   - Lives at `.agents/skills/acompanhar-edital/SKILL.md`
   - Finds the opportunity data source in the connected workspace by a parameter, or searches for one, and proposes or records its name in the project instructions as a parameter decides
   - Takes the link properties of the opportunity edition and its group as the first source of domains, searches the web when the original link is missing, and hands a found link back through criar-oportunidade or definir-grupo-de-oportunidades
+  - Finds the optional data sources of attachments (documents, links, open calls) and of stages (dates) by parameters or by searching, since their names vary by business
+  - Reads the attachments and stages of the edition, and writes what an open call, a correction, or a result brings: one attachment per link without duplicates, and one stage per date with the options the schema already has, updating a corrected date with the old one, the new one, and the source
+  - Without those data sources, hands the link and the date to the edition through criar-oportunidade, or lists a date that has no property
   - Completes the list with the maintainer, the platform used to apply, the official gazette, and the confirmation email, and keeps the domains that have no property on the opportunity in a parameter of the project instructions
   - Searches each form of the applicant's name, through definir-grafia, in quotes with `site:` on each domain, plus one open search with the organization name to find a missing domain
   - Reads each document found and says the selection, the standing, the date, the link, and any enrollment or confirmation deadline, and whether it has passed
   - Never takes an empty search as a rejection, and points to the results page of the open call
   - Searches the next open call of each followed organization and says when applications open and close
   - Hands the recurring search to definir-rotina, daily near the dates of the open call and at a parameter frequency otherwise
-  - Writes nothing to Notion; a change to a mapped list goes through definir-inscricao
+  - Writes only to the attachment and stage data sources; the opportunity page changes through its owner skill, and a mapped inscription list through definir-inscricao
   - The name follows `docs/adr/0022-name-the-open-call-skill-after-the-edital.md`
 - **Test Criteria**:
   - [x] The skill is present at that path

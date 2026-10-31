@@ -1,10 +1,10 @@
 ---
 name: acompanhar-edital
-description: Procura na web o resultado do edital em que houve inscrição e a abertura do próximo edital, nos domínios onde a organização publica, e mantém a lista desses domínios. Usada ao perguntar se passou numa seleção, ao se inscrever num edital, chamada, convocatória ou curso, ou ao montar a busca recorrente. NÃO serve para gravar o status da inscrição nem buscar e-mail.
+description: Procura na web o resultado do edital em que houve inscrição e a abertura do próximo edital, nos domínios onde a organização publica, e grava as datas e os documentos achados. Usada ao perguntar se passou numa seleção, ao se inscrever num edital, chamada, convocatória ou curso, ou ao montar a busca recorrente. NÃO serve para gravar o status da inscrição nem buscar e-mail.
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   related:
     - procurar-inscricao
     - procurar-oportunidade
@@ -26,8 +26,12 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 ```yaml
 # `Nome do data source de oportunidades` é o banco de oportunidades do workspace conectado. Vazio, a skill procura um.
 "Nome do data source de oportunidades": ""
-# `Ao achar o banco de oportunidades` é `propor`, que propõe gravar o nome achado, ou `registrar`, que grava e avisa.
-"Ao achar o banco de oportunidades": "propor"
+# `Nome do data source de anexos` é o banco de anexos, links e editais da oportunidade, quando o negócio tem um. Vazio, a skill procura um.
+"Nome do data source de anexos": ""
+# `Nome do data source de etapas` é o banco das datas da oportunidade, quando o negócio tem um. Vazio, a skill procura um.
+"Nome do data source de etapas": ""
+# `Ao achar um banco` é `propor`, que propõe gravar o nome achado, ou `registrar`, que grava e avisa.
+"Ao achar um banco": "propor"
 # `Domínios por organização` liga cada organização à lista de domínios onde ela publica resultados e editais.
 "Domínios por organização": {}
 # `Frequência da busca do resultado` vale enquanto o resultado não sai e o edital não dá a data dele.
@@ -47,19 +51,27 @@ Sem nome, acompanhe cada organização de `Domínios por organização` e, quand
 A situação da inscrição na lista se lê por `procurar-inscricao`.
 O nome buscado é o da pessoa ou empresa inscrita.
 Antes de buscar, siga `definir-grafia` e junte cada forma do nome: o artístico, o civil completo, com e sem acento, e a ordem com o sobrenome primeiro.
-Esta habilidade não grava no Notion: a página da oportunidade muda pela skill dona dela.
-
-Com o Notion conectado, ache o banco de oportunidades.
-Com `Nome do data source de oportunidades` preenchido, procure o data source com esse nome no workspace conectado.
-Vazio, procure no workspace conectado um banco de oportunidades, editais ou chamadas.
-Um achado sem estar nos parâmetros: use-o e siga `Ao achar o banco de oportunidades`, no harness de negócio. Com `propor`, proponha gravar o nome nas instruções do projeto. Com `registrar`, grave e diga que gravou.
-Mais de um: pergunte uma vez qual. Nenhum, ou sem o Notion: siga só com `Domínios por organização`.
-Não use um banco de outro workspace.
+A página da oportunidade muda só pela skill dona dela.
+Esta habilidade grava só nos bancos de anexos e de etapas.
 
 ### Passo 2
 
+Com o Notion conectado, ache os bancos da oportunidade no workspace conectado: o de oportunidades, o de anexos, que guarda documentos, links e editais, e o de etapas, que guarda as datas.
+O nome de cada um varia de um negócio para outro, e os de anexos e de etapas podem não existir.
+
+1. Com o parâmetro do banco preenchido, procure o data source com esse nome.
+2. Vazio, procure um banco com esse papel, ligado à oportunidade por relação.
+3. Um achado sem estar nos parâmetros: use-o e siga `Ao achar um banco`, no harness de negócio. Com `propor`, proponha gravar o nome nas instruções do projeto. Com `registrar`, grave e diga que gravou.
+4. Mais de um: pergunte uma vez qual.
+5. Nenhum: siga sem ele e diga isso uma vez. Sem banco de oportunidades, ou sem o Notion, siga só com `Domínios por organização`.
+
+Leia o esquema de cada banco antes de ler ou gravar. Não use um banco de outro workspace.
+
+### Passo 3
+
 Levante os domínios da organização antes da primeira busca.
-A oportunidade é a primeira referência: ache a edição ligada à inscrição, ou siga `procurar-oportunidade`, e leia cada propriedade de link da edição e do grupo dela, como a página original, o edital e o formulário.
+A oportunidade é a primeira referência: ache a edição ligada à inscrição, ou siga `procurar-oportunidade`, e leia cada propriedade de link da edição e do grupo dela, como a página original, o edital e o formulário, e cada anexo ligado à edição.
+Leia também as etapas ligadas à edição: elas dão a data do resultado e a da abertura.
 Sem o link original, busque na web a página oficial do edital.
 O link achado volta para a oportunidade pela skill dona: o desta edição, como o edital e o formulário, por `criar-oportunidade`; o que se repete em toda edição, como o site oficial, por `definir-grupo-de-oportunidades`.
 Depois complete com o que a oportunidade costuma não ter.
@@ -76,7 +88,7 @@ Mostre cada domínio com a origem dele.
 O domínio que não tem propriedade na oportunidade, como o da mantenedora e o do diário oficial, vai para `Domínios por organização`, na entrada da organização.
 O nome da organização é a chave, e cada domínio é um item curto da lista.
 
-### Passo 3
+### Passo 4
 
 Para cada forma do nome e cada domínio, busque na web o nome entre aspas com `site:` no domínio.
 Busque também, uma vez, cada forma do nome entre aspas com o nome da organização, sem `site:`, para achar um domínio que a lista não tem.
@@ -87,11 +99,11 @@ Mostre cada consulta feita.
 flowchart LR
   B{A busca achou o nome?} -->|sim| L[Leia o documento]
   B -->|não| N[Diga que não achou e aponte a página de resultados]
+  L --> G[Grave anexos e etapas]
   L -->|há lista de inscrições| D[definir-inscricao]
-  L -->|sem lista| R[Responda sem gravar]
 ```
 
-### Passo 4
+### Passo 5
 
 Abra cada documento achado e leia o trecho do nome.
 Diga a seleção, a edição, a situação da pessoa, como selecionada, suplente, classificada ou eliminada, a data do documento e o link.
@@ -100,22 +112,32 @@ Prazo passado: diga isso primeiro e sugira contato com a organização.
 Uma homonímia aparece como dúvida, com o dado que diferencia, como cidade, categoria ou parte do documento.
 Quando o projeto mapeia uma lista de inscrições, a mudança da inscrição segue `definir-inscricao`.
 
-### Passo 5
+Grave o que o edital, a retificação ou o resultado trouxer, sempre ligado à edição.
+Sem a edição, não grave: siga `procurar-oportunidade` e, se ela não existir, `criar-oportunidade`.
+
+1. No banco de anexos, um registro por documento ou link, com o link e o tipo, como edital, retificação ou resultado. O mesmo link já ligado à edição não se grava de novo. Não baixe o arquivo.
+2. No banco de etapas, um registro por data: abertura das inscrições, prazo de inscrição, publicação do edital, publicação do resultado, matrícula ou confirmação, início e fim da execução. Use o nome e as opções que o esquema do banco já tem. Não crie opção.
+3. Antes de criar uma etapa, procure a mesma etapa ligada à edição. Mesma data: não grave. Data diferente: atualize e diga a data antiga, a nova e o link da fonte.
+4. A data vem do documento. Sem data, não grave. Sem hora, não invente a hora.
+5. Sem banco de anexos, o link do edital vai para a edição por `criar-oportunidade`. Sem banco de etapas, a data vai para a propriedade de data da edição por `criar-oportunidade`; sem essa propriedade, liste a data no fim e não a escreva no corpo.
+
+### Passo 6
 
 Busque o próximo edital de cada organização acompanhada.
 Nos domínios dela, busque o nome do curso ou do edital com `inscrições` e o ano seguinte ao da inscrição.
 Diga o período de inscrição achado, e se ele já fechou.
+O próximo edital é outra edição: siga `procurar-oportunidade` e, se ela não existir, `criar-oportunidade`, e grave as datas dele como no Passo 5.
 Sem nada achado, diga as consultas feitas.
 
-### Passo 6
+### Passo 7
 
-Quando a pessoa pede para não perder o resultado, ou para acompanhar a organização, siga `definir-rotina` para criar a busca recorrente dos Passos 3 a 5.
-O cronograma do edital dá a temperatura: a busca fica diária na semana da data do resultado e da data de abertura.
+Quando a pessoa pede para não perder o resultado, ou para acompanhar a organização, siga `definir-rotina` para criar a busca recorrente dos Passos 4 a 6.
+As etapas e o cronograma do edital dão a temperatura: a busca fica diária na semana da data do resultado e da data de abertura.
 Sem essa data, use `Frequência da busca do resultado`.
 Depois do resultado achado, use `Frequência da busca do próximo edital`.
 A rotina pausa quando a próxima inscrição abre e a pessoa já sabe dela.
 
-### Passo 7
+### Passo 8
 
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
@@ -158,13 +180,14 @@ Gravei os domínios em `Domínios por organização` e segui `definir-rotina`: a
 ## Casos-limite
 
 - O documento traz só iniciais e parte do CPF: diga que a forma casa, mas não confirma a pessoa, e aponte o documento.
-- A pessoa não lembra onde se inscreveu: comece pela busca aberta do Passo 3 e levante os domínios a partir do que ela achar.
+- A pessoa não lembra onde se inscreveu: comece pela busca aberta do Passo 4 e levante os domínios a partir do que ela achar.
 - O resultado está numa imagem ou num PDF sem texto: o índice da busca não o lê; aponte a página do edital.
 
 ## Pegadinhas
 
 - A instituição que dá o curso nem sempre publica o resultado no próprio site: o documento sai no domínio da mantenedora.
 - O link da oportunidade parece cobrir tudo. Ele aponta para a organização ou para o formulário; o resultado pode sair na mantenedora ou no diário oficial.
+- O banco de etapas pode ter outro nome, como cronograma ou prazos, e as opções podem ter outro texto. Ache pelo papel e use as opções que o esquema tem.
 - O resultado pode nunca chegar por e-mail. A ausência de aviso não é resultado.
 - Listas oficiais usam o nome civil completo, em maiúsculas ou com o sobrenome primeiro. A busca só pelo nome artístico não o acha.
 - O edital seguinte abre perto do resultado do anterior e também não é avisado.
