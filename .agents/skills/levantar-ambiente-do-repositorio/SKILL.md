@@ -3,7 +3,7 @@ name: levantar-ambiente-do-repositorio
 description: Levanta o ambiente de trabalho de um repositório antes de escrever código, testes, commit ou pull request. Acha o runtime e como ativá-lo, os comandos de instalar, lint, tipos, testes e build, as habilidades do repositório que se aplicam e as pegadinhas que ele documenta. Não serve para rodar os comandos, instalar dependências nem decidir a convenção de código.
 metadata:
   author: jimmyandrade
-  version: "0.9.0"
+  version: "0.10.0"
   related:
     - criar-commit
     - criar-pull-request
@@ -51,6 +51,12 @@ Leia também a versão das ferramentas de linha de comando que o trabalho usa, c
 Um aviso de versão nova que um comando imprimiu na sessão entra também.
 Registre cada ferramenta desatualizada com a versão instalada, a nova e o comando de atualizar; das outras do gerenciador, diga quantas são.
 Marque o que pede cuidado: a atualização que leva o runtime a uma versão principal diferente da que o projeto exige, e a fórmula obsoleta, que outro projeto pode ainda usar.
+Para cada aviso do diagnóstico, diga o que conferir antes de resolver:
+1. Pacote obsoleto: se algum projeto o usa, pelo arquivo de versão do runtime e pela configuração do shell, e o que depende dele.
+2. Remoção: o que o gerenciador removeria junto, como em `brew autoremove --dry-run`. Um runtime que um projeto ou um ambiente virtual usa e que está instalado só como dependência sai junto; ele precisa ser instalado a pedido antes.
+3. Cask desativado: se o app ainda existe. Sem o app, a remoção só limpa o registro.
+4. Tap não confiável: se algum pacote dele está instalado. Sem pacote, remova o tap; com pacote, confiar nele é decisão da pessoa.
+5. Aviso que pede senha de administrador ou muda uma decisão de segurança, como os certificados raiz: fica com a pessoa, com o comando e o link que o diagnóstico dá.
 Não rode a atualização: ela fica com quem chamou, depois do sim da pessoa.
 Depois que a pessoa atualiza, leia a versão de novo, diga se a atualização entrou e o que o gerenciador ainda lista.
 
@@ -144,6 +150,7 @@ Não achei arquivo de instruções nem habilidade do repositório. O `pyproject.
 - O hook de pre-push pode levar minutos e parece travado.
 - O aviso de versão nova no fim de um comando parece ruído. Ele entra na ficha com o comando de atualizar.
 - Atualizar tudo parece seguro. A atualização do runtime pode passar da versão que o projeto exige.
+- Remover um pacote parece remover só ele. O gerenciador pode levar junto as dependências que ficaram sem uso, inclusive o runtime de um ambiente virtual.
 - Esta habilidade só lê. Instalar dependência, atualizar uma ferramenta ou rodar um comando é de quem chamou.
 - A pasta do glossário parece ser o lugar do harness. O harness reúne o servidor, as skills, a linha de comando e a API. O glossário pode ficar dentro de um harness, e também pode ficar só no computador.
 - Um valor vazio parece `sim`, `projeto` ou `repositório`. Vazio pergunta uma vez e não escolhe.

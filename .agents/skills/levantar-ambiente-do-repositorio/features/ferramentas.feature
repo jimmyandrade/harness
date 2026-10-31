@@ -33,3 +33,30 @@ Funcionalidade: Ferramentas de linha de comando desatualizadas
       Quando ela pergunta se deu certo
       Então a skill lê a versão do `gh` de novo e diz se ela é a nova
       E diz o que o gerenciador de pacotes ainda lista como desatualizado
+
+  Regra: Antes de resolver um aviso, a ficha diz o que conferir e o que sai junto
+
+    Exemplo: A remoção levaria junto um runtime de que um projeto depende
+      Dado que o diagnóstico aponta uma versão antiga do runtime como obsoleta
+      E que o gerenciador removeria junto um runtime instalado só como dependência
+      E que um ambiente virtual do projeto aponta para esse runtime
+      Quando a skill monta a ficha
+      Então ela marca a remoção como de cuidado e nomeia o runtime que sairia junto
+      E diz para instalar esse runtime a pedido antes de remover
+
+    Exemplo: Aviso que pede senha de administrador
+      Dado que o diagnóstico avisa que os certificados raiz confiam numa autoridade comprometida
+      E que a correção pede senha de administrador
+      Quando a skill monta a ficha
+      Então ela marca o aviso como da pessoa, com o comando e o link que o diagnóstico dá
+
+    Esquema do Cenário: Tap não confiável
+      Dado que o diagnóstico aponta um tap não confiável
+      E que <instalados> pacote dele está instalado
+      Quando a skill monta a ficha
+      Então ela sugere <saída>
+
+      Exemplos:
+        | instalados | saída                                               |
+        | nenhum     | remover o tap                                       |
+        | algum      | a pessoa decidir se confia no tap ou troca o pacote |
