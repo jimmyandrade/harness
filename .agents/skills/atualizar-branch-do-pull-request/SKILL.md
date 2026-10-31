@@ -3,7 +3,7 @@ name: atualizar-branch-do-pull-request
 description: Use essa habilidade sempre que uma branch com pull request estiver atrás da base, tiver conflito ou precisar de rebase, mesmo sem dizer rebase. NÃO use para abrir o PR, fazer o primeiro push nem mesclar (use criar-pull-request).
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.4.0"
   related:
     - criar-pull-request
     - atender-revisao-de-pull-request
@@ -31,6 +31,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 Siga `Cópia de trabalho` antes de mexer na branch.
 Se a branch já tem PR, confira o estado dele antes de atualizar.
 Se já foi mesclado, a branch remota foi apagada: comece uma branch nova a partir da `Branch base` remota e leve só os commits que ficaram fora do merge.
+Se a branch do PR aberto precisa de outro nome, como a `cursor/…` que a ferramenta criou, renomear fecha o PR.
+Abra um PR novo da branch renomeada, com o mesmo título e corpo, e feche o antigo com um comentário que leva o link do novo.
 
 ### Passo 2
 
@@ -103,6 +105,8 @@ A branch tinha PR aberto e a base avançou com um PR vizinho. Atualizei com reba
 ## Scripts disponíveis
 
 - `gh pr list --repo <Repositório> --head <branch> --state all --json number,state`: estado do PR no Passo 1.
+- `gh api -X POST repos/<Repositório>/branches/<branch>/rename -f new_name=<tipo>/<descrição>`: renomeia a branch no Passo 1 e fecha o PR.
+- `gh pr close <número> --repo <Repositório> --comment "<link do PR novo>"`: fecha o PR antigo no Passo 1.
 - `git fetch origin && git rebase origin/<Branch base>`: Passo 2.
 - `git push --force-with-lease origin <branch>`: Passo 3, só com autorização. Não substitui a `Branch base`.
 
