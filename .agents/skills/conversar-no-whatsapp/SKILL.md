@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.16.0"
+  version: "0.16.1"
   related:
     - comunicar-novidade-do-produto
     - definir-agenda
@@ -127,7 +127,7 @@ A rotina segue `Ao conferir a resposta`. Com `ler a lista`, ela lê só a lista 
 Ela avisa a pessoa quando a resposta chega e para na primeira resposta ou no fim do prazo.
 Ela roda onde está o `Canal da rotina de resposta`: com `navegador`, na máquina da pessoa, com o cliente aberto; com `API`, na nuvem.
 Mensagem que não espera nada, como um agradecimento ou um aviso, não ganha rotina.
-Uma mensagem que espera resposta e saiu sem rotina, porque a pergunta do Passo 5 não citou o acompanhamento ou porque a rotina ficou para depois, não sai dos próximos passos da resposta até a rotina existir ou a pessoa recusar. Ao perceber a falta, confira antes a lista de conversas: a resposta pode já ter chegado.
+Uma mensagem que espera resposta e saiu sem rotina, porque a pergunta do [Passo 5](#passo-5) não citou o acompanhamento ou porque a rotina ficou para depois, não sai dos próximos passos da resposta até a rotina existir ou a pessoa recusar. Ao perceber a falta, confira antes a lista de conversas: a resposta pode já ter chegado.
 
 Ao terminar, deixe a aba do WhatsApp Web aberta, mesmo quando as outras abas da tarefa forem fechadas.
 
