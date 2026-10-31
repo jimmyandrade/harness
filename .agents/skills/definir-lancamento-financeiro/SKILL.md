@@ -1,11 +1,13 @@
 ---
-name: definir-lancamento
-description: Use essa habilidade sempre que chegar uma venda, um gasto ou uma movimentação de dinheiro em frase simples, mesmo sem dizer lançamento. NÃO use para montar a DRE, o fluxo de caixa, o preço, o planejamento do mês, cadastrar o bem durável, nem projetar o caixa.
+name: definir-lancamento-financeiro
+description: Use essa habilidade sempre que chegar uma venda, um gasto ou outra movimentação financeira de dinheiro em frase simples, mesmo sem dizer lançamento financeiro. Trata de receitas, vendas, gastos e pagamentos. NÃO use para montar a DRE, o fluxo de caixa, o preço, o planejamento do mês, cadastrar o bem durável, nem projetar o caixa. NÃO confunda com lançamento musical ou de produto.
 allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-data-sources notion:notion-create-pages notion:notion-update-page
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.6"
+  version: "0.4.0"
+  aliases:
+    - definir-lancamento
   related:
     - definir-ativo-imobilizado
     - definir-planejamento-financeiro
@@ -14,7 +16,7 @@ metadata:
     - revisar-financas
 ---
 
-# Definir lançamento
+# Definir lançamento financeiro
 
 ## Parâmetros de configuração
 

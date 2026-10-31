@@ -9,7 +9,7 @@ Funcionalidade: Atualizar o saldo do item esgotável
       Dado que existe uma entrada de produto com quantidade
       Quando a skill registra o movimento
       Então soma a quantidade ao saldo atual
-      E o pagamento segue definir-lancamento
+      E o pagamento segue definir-lancamento-financeiro
 
     Exemplo: Saída acima do saldo
       Dado que existe uma saída maior que o saldo conhecido
