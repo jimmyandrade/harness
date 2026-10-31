@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.36.0](https://github.com/jimmyandrade/harness/compare/v1.35.0...v1.36.0) (2026-10-31)
+
+
+### Features
+
+* **definir-rotina:** create, review, and audit a routine that runs only when its result is used ([#688](https://github.com/jimmyandrade/harness/issues/688)) ([64c1fba](https://github.com/jimmyandrade/harness/commit/64c1fba46350d28455fcb0b88f9b977602b0ec22)), closes [#686](https://github.com/jimmyandrade/harness/issues/686)
+* **definir-rotina:** measure the data temperature and make windows and cadences parameters ([#690](https://github.com/jimmyandrade/harness/issues/690)) ([9b8a67d](https://github.com/jimmyandrade/harness/commit/9b8a67d0b3aeb5c83de9047783d35aecde59ed50)), closes [#689](https://github.com/jimmyandrade/harness/issues/689)
+* **publicar-resposta-de-revisao:** send the pending review of the person before replying ([#680](https://github.com/jimmyandrade/harness/issues/680)) ([2a82c93](https://github.com/jimmyandrade/harness/commit/2a82c93d2a2a39a17498d06e955e465efb3a1808))
+* **publicar-revisao-de-codigo:** add CSS-first, scroll and layers, complexity and other-area questions to the review lens ([#682](https://github.com/jimmyandrade/harness/issues/682)) ([5440f26](https://github.com/jimmyandrade/harness/commit/5440f26142af836a24170ad53467475d9ccef9b7))
+
+
+### Bug Fixes
+
+* **atualizar-branch-do-pull-request:** handle the pull request review on every rebase ([#683](https://github.com/jimmyandrade/harness/issues/683)) ([e847807](https://github.com/jimmyandrade/harness/commit/e8478077cad60021307351b8b222685006e6d45e)), closes [#579](https://github.com/jimmyandrade/harness/issues/579)
+* **conversar-no-whatsapp:** show every draft in the chat and make message splitting a parameter ([#670](https://github.com/jimmyandrade/harness/issues/670)) ([83389db](https://github.com/jimmyandrade/harness/commit/83389db4c07a421ff80657748808475442c9f0a8))
+* **criar-habilidade:** send a list of good practices to the skills of their tasks ([#687](https://github.com/jimmyandrade/harness/issues/687)) ([15d936e](https://github.com/jimmyandrade/harness/commit/15d936e5d76aaba3efac6c909b8369b2d6c3d1c1)), closes [#685](https://github.com/jimmyandrade/harness/issues/685)
+* **definir-artigo-da-base-de-conhecimento:** mask personal data in screenshots ([#681](https://github.com/jimmyandrade/harness/issues/681)) ([f3807df](https://github.com/jimmyandrade/harness/commit/f3807df66e56b74b24cdb394ed71a277a014b57b))
+
 ## [1.35.0](https://github.com/jimmyandrade/harness/compare/v1.34.0...v1.35.0) (2026-10-30)
 
 
