@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.37.0](https://github.com/jimmyandrade/harness/compare/v1.36.0...v1.37.0) (2026-10-31)
+
+
+### Features
+
+* **escrever-codigo,escrever-teste:** keep each value, responsibility, and test setup in one place ([#693](https://github.com/jimmyandrade/harness/issues/693)) ([a20b796](https://github.com/jimmyandrade/harness/commit/a20b7966658fc8fdbf9242e07c5fe80755551250)), closes [#691](https://github.com/jimmyandrade/harness/issues/691)
+
 ## [1.36.0](https://github.com/jimmyandrade/harness/compare/v1.35.0...v1.36.0) (2026-10-31)
 
 
