@@ -3,11 +3,12 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.13.0"
+  version: "0.15.0"
   related:
     - comunicar-novidade-do-produto
     - definir-agenda
     - definir-pessoa
+    - definir-rotina
     - definir-tarefa
     - escrever-link
     - evoluir-habilidade
@@ -32,6 +33,10 @@ Leia os valores nas instruções do projeto, na entrada desta habilidade. Na aus
 "Mensagem única para": []
 # `Comunicado numa mensagem só`: `sim` manda o comunicado de produto numa mensagem só. `não` segue `Dividir em mensagens curtas`.
 "Comunicado numa mensagem só": "sim"
+# `Canal da rotina de resposta` é onde a rotina do Passo 7 lê as conversas: `navegador`, um cliente aberto no computador da pessoa, como o WhatsApp Web, ou `API`, que roda na nuvem. Um cliente não oficial pode bloquear o número e só entra a pedido da pessoa.
+"Canal da rotina de resposta": "navegador"
+# `Ao conferir a resposta` é `ler a lista`, que lê a prévia e o contador sem marcar como lida, ou `abrir a conversa`, que abre e marca como lida.
+"Ao conferir a resposta": "ler a lista"
 ```
 ## Instruções
 
@@ -115,6 +120,13 @@ Checklist do evento:
 - [ ] Depois do cartão, a mensagem com o link da chamada, o dia e a hora. Com o término vazio, ela diz até que horas vai a call.
 
 ### Passo 7
+
+Quando a mensagem espera resposta, como uma pergunta, um pedido ou um prazo, acompanhe a conversa com uma rotina que segue `definir-rotina`.
+A pergunta que pede o sim do Passo 5 já diz que a resposta vai ser acompanhada, com a frequência e até quando, e o mesmo sim vale para a rotina.
+A rotina segue `Ao conferir a resposta`. Com `ler a lista`, ela lê só a lista de conversas, a prévia e o contador de não lidas, sem abrir a conversa. Com `abrir a conversa`, ela abre e marca as mensagens como lidas, e a pergunta do Passo 5 diz isso.
+Ela avisa a pessoa quando a resposta chega e para na primeira resposta ou no fim do prazo.
+Ela roda onde está o `Canal da rotina de resposta`: com `navegador`, na máquina da pessoa, com o cliente aberto; com `API`, na nuvem.
+Mensagem que não espera nada, como um agradecimento ou um aviso, não ganha rotina.
 
 Ao terminar, deixe a aba do WhatsApp Web aberta, mesmo quando as outras abas da tarefa forem fechadas.
 
@@ -220,6 +232,7 @@ Mostrei a conversa do Caio e o texto "Podemos falar 15h00?". Enviei depois do si
 - O formulário de evento abre com uma data e uma hora padrão que não são as do pedido.
 - O WhatsApp não cria evento com início no passado. O botão de criar fica cinza, sem mensagem de erro.
 - O cartão do evento mostra a hora no formato de 12 horas, como "Hoje às 4:20".
+- Abrir a conversa para ver se chegou resposta parece inofensivo. Marca as mensagens como lidas no celular de quem mandou. Com `Ao conferir a resposta` em `ler a lista`, a rotina não abre a conversa.
 
 ## Scripts disponíveis
 
