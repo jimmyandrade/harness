@@ -32,6 +32,7 @@ harness/
 ├── .cursor-plugin/                 # Cursor manifest of the core plugin, kept equal to .claude-plugin/plugin.json
 ├── .github/
 │   ├── actions/                    # Composite actions called by business harnesses
+│   │   ├── check-branch-name/
 │   │   ├── check-skill/
 │   │   └── sync-notion-pages/
 │   ├── scripts/                    # Scripts the workflows of this repository call

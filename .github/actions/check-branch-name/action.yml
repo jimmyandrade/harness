@@ -1,0 +1,26 @@
+name: Check the branch name
+description: Fail a pull request whose branch is not type/short-description, with a message for a coding agent when the branch has the prefix of its tool.
+inputs:
+  types:
+    description: Accepted branch types, separated by spaces or commas.
+    required: false
+    default: feat fix docs refactor perf test chore ci
+  blocked-prefixes:
+    description: Coding agent prefixes that get the message for the agent, separated by spaces or commas.
+    required: false
+    default: claude codex copilot cursor
+  allowed-prefixes:
+    description: Branch prefixes that pass without the check, such as the ones that dependency and release bots create, separated by spaces or commas.
+    required: false
+    default: renovate/ dependabot/ release-please--
+runs:
+  using: composite
+  steps:
+    - name: Check the branch against the accepted types
+      shell: bash
+      env:
+        BRANCH: ${{ github.head_ref }}
+        BRANCH_TYPES: ${{ inputs.types }}
+        BLOCKED_BRANCH_PREFIXES: ${{ inputs.blocked-prefixes }}
+        ALLOWED_BRANCH_PREFIXES: ${{ inputs.allowed-prefixes }}
+      run: '"$GITHUB_ACTION_PATH/../../scripts/branch-name.sh" "$BRANCH"'
