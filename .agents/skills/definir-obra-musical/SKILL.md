@@ -4,7 +4,7 @@ description: Cadastra ou revisa obra musical a partir de composição, letra, ca
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
   related:
     - definir-fonograma
     - evoluir-habilidade
@@ -70,7 +70,7 @@ Monte o plano com cada campo de `Campos da base de obras`: o valor atual, o prop
 - `1.ª linha da letra musical`: o primeiro verso da letra.
 - `1.ª linha do refrão`: o primeiro verso do refrão.
 - `Letra autenticada`: arquivo com letra autenticada, obrigatório para editais. Só com comprovação.
-- `Letra sem autoria`: arquivo com letra em seleção cega, obrigatório para editais. Sem identificação do autor.
+- `Letra sem autoria`: arquivo com a letra sem identificação de quem a escreveu, para editais com avaliação anônima.
 
 A letra completa fica no corpo da página, na seção `# Letra`, separada em versos e refrão. Não grave a letra em propriedades nem em comentários.
 
