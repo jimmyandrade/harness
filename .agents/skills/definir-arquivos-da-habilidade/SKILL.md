@@ -1,9 +1,9 @@
 ---
 name: definir-arquivos-da-habilidade
-description: Define onde ficam os scripts, referências, modelos e testes de uma skill e escreve Scripts disponíveis. Usada quando a skill ganha, move ou renomeia um arquivo além do SKILL.md. Não serve para escrever o texto da skill, a descrição nem gravar no Notion.
+description: Define onde ficam os scripts, referências, modelos e testes de uma skill e escreve Scripts disponíveis. Usada quando a skill ganha, move ou renomeia um arquivo além do SKILL.md, ou quando se propõe um script. Não serve para escrever o texto da skill, a descrição nem gravar no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.5.1"
+  version: "0.6.0"
   related:
     - criar-habilidade
     - evoluir-habilidade
@@ -27,6 +27,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 A pasta da skill tem `SKILL.md`. `scripts/`, `references/`, `assets/` e `features/` são opcionais. `features/` é o teste Gherkin, em português. `scripts/` é código executável. `references/` é documentação lida sob demanda.
 Script de uma skill fica em `scripts/` dela. No Notion, é arquivo dessa página. Script usado por várias skills fica em `.agents/scripts/<nome>/`. No Notion, não entra na página de uma skill só.
 O nome do script, e o da pasta dele em `.agents/scripts/`, fica no `Idioma do nome dos scripts`, sem acento e na convenção de nome da linguagem.
+O nome e o lugar seguem essa regra desde a proposta, inclusive numa lista na conversa, antes de o arquivo existir.
 Tabela que estoura o limite vai para `references/`, com a condição de leitura. "Leia o material se a API não retornar 200" serve.
 
 ### Passo 2
@@ -89,6 +90,7 @@ O script sai de `scripts/` da primeira skill e vai para `.agents/scripts/check-s
 
 ## Pegadinhas
 
+- O nome de um script proposto só parece seguir o idioma da skill. Ele segue `Idioma do nome dos scripts`, que tem inglês como padrão, mesmo numa skill em português.
 - Modelo de saída não entra no corpo. Fica em `.agents/assets/templates/`, e a frase cita o nome, não o caminho.
 - No Notion, o script pode faltar na página. A execução precisa de um caminho sem ele.
 
