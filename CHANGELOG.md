@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.43.0](https://github.com/jimmyandrade/harness/compare/v1.42.0...v1.43.0) (2026-11-01)
+
+
+### Features
+
+* keep the Notion data source id of the sync in a secret ([#765](https://github.com/jimmyandrade/harness/issues/765)) ([24b3df3](https://github.com/jimmyandrade/harness/commit/24b3df31d76b012de49b5fa480e8410b23539573))
+
 ## [1.42.0](https://github.com/jimmyandrade/harness/compare/v1.41.0...v1.42.0) (2026-11-01)
 
 
