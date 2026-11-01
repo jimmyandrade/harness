@@ -34,7 +34,7 @@ Its body has three sections, in this order:
 
 ### A model is published to a database the project elects
 
-A project elects a Notion database for its models, the same way it elects the skills database. A separate mapping, `.agents/mappings/template-page.notion.json`, holds its data source and its property names for the name, the description, the version, the aliases, the tags, and the status. The status follows the version with the rule of skill pages: below 0.1.0 is the draft option, from 0.1.0 with major 0 is the validation option, and from 1.0.0 on is the production option. A model page has no file attachment and no parent or child relation.
+A project elects a Notion database for its models, the same way it elects the skills database. A separate mapping, `.agents/mappings/template-page.notion.json`, holds its property names for the name, the description, the version, the aliases, the tags, and the status. The status follows the version with the rule of skill pages: below 0.1.0 is the draft option, from 0.1.0 with major 0 is the validation option, and from 1.0.0 on is the production option. A model page has no file attachment and no parent or child relation. The id of its data source comes from a repository variable, as ADR 0023 decides.
 
 The sync creates or updates one page per model a published skill cites, found by its name, and leaves the other pages of that database alone. The published skill page mentions the model page in place of the path. The `SKILL.md` in git keeps the path, so local agents read the file.
 

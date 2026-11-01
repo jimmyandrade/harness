@@ -15,7 +15,7 @@ mkdir -p .agents/mappings
 cp -n node_modules/harness/.agents/mappings/skill-page.notion.example.json .agents/mappings/skill-page.notion.json
 ```
 
-Set `data_source_id` to the data source of the skills database. Rename a property or a status option when the database uses another name. The status follows the version: below 0.1.0 is `draft`, from 0.1.0 with major 0 is `validation`, from 1 onward is `production`.
+Rename a property or a status option when the database uses another name. The mapping has no data source id: the repository variable of [Store the data source id](#store-the-data-source-id) carries it, as ADR 0023 decides. The status follows the version: below 0.1.0 is `draft`, from 0.1.0 with major 0 is `validation`, from 1 onward is `production`.
 
 Check: every value under `properties` and `status_options` names a property or an option of that data source.
 
@@ -79,6 +79,27 @@ Generating a new token voids the one stored in `NOTION_TOKEN`. After that, test 
 
 Check: the search answers `200`, and `gh secret list` shows `NOTION_TOKEN` with the time it was just set, in UTC.
 
+## Store the data source id
+
+The sync reads the id of the skills data source from the repository variable `NOTION_SKILLS_DATA_SOURCE_ID`. The id is not a credential, but it stays out of the repository, next to the token.
+
+With the token in the clipboard, as in [Store the token](#store-the-token), read the id from the database. Take the database id from its link: the 32 characters before `?v=`. The command prints only the data source id and its name.
+
+```bash
+curl -s https://api.notion.com/v1/databases/<database id> -H "Authorization: Bearer $(pbpaste)" -H "Notion-Version: 2025-09-03" | python3 -c 'import json,sys; [print(d["id"], d.get("name")) for d in json.load(sys.stdin).get("data_sources", [])]'
+pbcopy < /dev/null
+```
+
+Store it as a variable of the repository.
+
+```bash
+gh variable set NOTION_SKILLS_DATA_SOURCE_ID --body <data source id>
+```
+
+A repository that already keeps `data_source_id` in its mapping skips this step. The sync fails when both hold an id.
+
+Check: `gh variable list` shows `NOTION_SKILLS_DATA_SOURCE_ID`, and the mapping has no `data_source_id`.
+
 ## Copy the sync workflow
 
 The `sync-skills` workflow publishes the skills that changed since the previous release. It checks them first, so a skill that breaks a rule never reaches Notion. It runs when a release is published and by hand from the Actions tab, where `base` publishes the changes since another commit or tag, to test a skill in Notion before a release.
@@ -102,7 +123,7 @@ Skip this step when the workspace keeps no models in Notion. A model is a file i
 cp -n node_modules/harness/.agents/mappings/template-page.notion.example.json .agents/mappings/template-page.notion.json
 ```
 
-Set `data_source_id` to the data source of the models database. `name` and `version` are required. Delete `description`, `aliases`, `tags`, or `status` when the database has no such property: the sync then leaves it out, and a property it does not bind, such as a reviewer, keeps what people set. In the access tab of the connection of [Create a connection for the sync](#create-a-connection-for-the-sync), add the models database. Set `Banco de modelos no Notion` in the `Global` entry of `metadata.parameters` of `AGENTS.md` to the link of that database, so the Notion agent finds a model a skill cites by name.
+Store the id of the models data source in the repository variable `NOTION_TEMPLATES_DATA_SOURCE_ID`, as in [Store the data source id](#store-the-data-source-id). `name` and `version` are required. Delete `description`, `aliases`, `tags`, or `status` when the database has no such property: the sync then leaves it out, and a property it does not bind, such as a reviewer, keeps what people set. In the access tab of the connection of [Create a connection for the sync](#create-a-connection-for-the-sync), add the models database. Set `Banco de modelos no Notion` in the `Global` entry of `metadata.parameters` of `AGENTS.md` to the link of that database, so the Notion agent finds a model a skill cites by name.
 
 A page that a person created before the sync, under another title, is replaced when the model lists that title in `metadata.aliases`. Its body becomes the file body on the first sync, so move what it still has into the file first.
 

@@ -56,6 +56,26 @@ export function gate(names: string[], token: string): 0 | 2 | null {
   return null
 }
 
+export const SKILLS_DATA_SOURCE_VARIABLE = "NOTION_SKILLS_DATA_SOURCE_ID"
+export const TEMPLATES_DATA_SOURCE_VARIABLE = "NOTION_TEMPLATES_DATA_SOURCE_ID"
+
+/** The data source id comes from one place: the variable or the mapping (ADR 0023). */
+export function dataSourceId(
+  fromMapping: string | undefined,
+  fromVariable: string | undefined,
+  names: { variable: string; mapping: string },
+): string {
+  const mapped = fromMapping?.trim() ?? ""
+  const variable = fromVariable?.trim() ?? ""
+  if (mapped && variable) {
+    throw new Error(`${names.variable} and data_source_id in ${names.mapping} are both set; keep one`)
+  }
+  if (!mapped && !variable) {
+    throw new Error(`${names.variable} is missing, and ${names.mapping} has no data_source_id`)
+  }
+  return variable || mapped
+}
+
 export const CORE_VERSION_PATHS = [".github/workflows", "package.json", "package-lock.json"]
 
 export function coreNamesToPublish(

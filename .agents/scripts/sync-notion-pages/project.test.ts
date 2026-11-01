@@ -8,6 +8,7 @@ import {
   blankBase,
   coreNamesToPublish,
   coreRoot,
+  dataSourceId,
   gate,
   namesToPublish,
   projectRoot,
@@ -48,4 +49,15 @@ test("core skills publish when the project moves the core version or its mapping
   assert.deepEqual(coreNamesToPublish(["lancar-venda"], ["criar-commit"], false, true), ["criar-commit"])
   assert.deepEqual(coreNamesToPublish(["lancar-venda"], ["criar-commit"], true, false), ["criar-commit"])
   assert.throws(() => coreNamesToPublish(["criar-commit"], ["criar-commit"], true, true), /criar-commit exists/)
+})
+
+test("the data source id comes from the variable or the mapping, never both", () => {
+  const names = { variable: "NOTION_SKILLS_DATA_SOURCE_ID", mapping: ".agents/mappings/skill-page.notion.json" }
+  const id = "3c077062-d4c6-8094-9a27-000bf7b8710d"
+  assert.equal(dataSourceId(undefined, id, names), id)
+  assert.equal(dataSourceId(id, undefined, names), id)
+  assert.equal(dataSourceId(id, "", names), id)
+  assert.throws(() => dataSourceId(id, id, names), /NOTION_SKILLS_DATA_SOURCE_ID.*skill-page\.notion\.json/)
+  assert.throws(() => dataSourceId(undefined, undefined, names), /NOTION_SKILLS_DATA_SOURCE_ID/)
+  assert.throws(() => dataSourceId("", "  ", names), /NOTION_SKILLS_DATA_SOURCE_ID/)
 })

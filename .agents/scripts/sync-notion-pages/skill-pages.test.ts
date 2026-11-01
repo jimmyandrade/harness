@@ -459,7 +459,7 @@ test("mapping file matches the schema fields", () => {
   }
   const stored = JSON.parse(readFileSync(join(root, ".agents", "mappings", "skill-page.notion.example.json"), "utf8")) as {
     properties: Record<string, unknown>
-    data_source_id: string
+    data_source_id?: string
   }
   for (const field of Object.keys(schema.properties)) {
     if (field === "body") {
@@ -468,7 +468,7 @@ test("mapping file matches the schema fields", () => {
     }
     assert.ok(stored.properties[field])
   }
-  assert.ok(stored.data_source_id)
+  assert.equal(stored.data_source_id, undefined, "the example takes the id from a repository variable (ADR 0023)")
 })
 
 test("the instructions file becomes a page with its frontmatter version and description", () => {
