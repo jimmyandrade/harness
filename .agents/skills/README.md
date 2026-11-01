@@ -40,6 +40,7 @@ flowchart LR
     definir_convidado["definir-convidado"]
     definir_data_significativa["definir-data-significativa"]
     definir_empresa["definir-empresa"]
+    definir_fonograma["definir-fonograma"]
     definir_grafia["definir-grafia"]
     definir_grupo_de_oportunidades["definir-grupo-de-oportunidades"]
     definir_historia_de_usuario["definir-historia-de-usuario"]
@@ -50,6 +51,7 @@ flowchart LR
     definir_lancamento_financeiro["definir-lancamento-financeiro"]
     definir_link_rastreavel["definir-link-rastreavel"]
     definir_medicao_de_metrica["definir-medicao-de-metrica"]
+    definir_obra_musical["definir-obra-musical"]
     definir_obrigacao_financeira["definir-obrigacao-financeira"]
     definir_okr["definir-okr"]
     definir_perfil_social["definir-perfil-social"]
@@ -269,6 +271,8 @@ flowchart LR
   definir_empresa --> definir_perfil_social
   definir_empresa --> identificar_duplicata
   definir_empresa --> mesclar_registro
+  definir_fonograma --> definir_obra_musical
+  definir_fonograma --> evoluir_habilidade
   definir_grafia --> definir_perfil_social
   definir_grafia --> definir_pessoa
   definir_grafia --> identificar_duplicata
@@ -296,6 +300,8 @@ flowchart LR
   definir_medicao_de_metrica --> evoluir_habilidade
   definir_medicao_de_metrica --> identificar_duplicata
   definir_medicao_de_metrica --> reconhecer_imagem
+  definir_obra_musical --> definir_fonograma
+  definir_obra_musical --> evoluir_habilidade
   definir_obrigacao_financeira --> evoluir_habilidade
   definir_obrigacao_financeira --> lancar_despesa_da_empresa
   definir_obrigacao_financeira --> lancar_despesa_pessoal
