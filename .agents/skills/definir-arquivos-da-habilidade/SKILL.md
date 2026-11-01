@@ -1,9 +1,9 @@
 ---
 name: definir-arquivos-da-habilidade
-description: Define onde ficam os scripts, referências, modelos e testes de uma skill e escreve Scripts disponíveis. Usada quando a skill ganha, move ou renomeia um arquivo além do SKILL.md. Não serve para escrever o texto da skill, a descrição nem gravar no Notion.
+description: Define onde ficam os scripts, referências, modelos e testes de uma skill e escreve Scripts disponíveis. Usada quando a skill ganha, move ou renomeia um arquivo além do SKILL.md, ou quando se propõe um script. Não serve para escrever o texto da skill, a descrição nem gravar no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.5.1"
+  version: "0.7.0"
   related:
     - criar-habilidade
     - evoluir-habilidade
@@ -27,6 +27,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 A pasta da skill tem `SKILL.md`. `scripts/`, `references/`, `assets/` e `features/` são opcionais. `features/` é o teste Gherkin, em português. `scripts/` é código executável. `references/` é documentação lida sob demanda.
 Script de uma skill fica em `scripts/` dela. No Notion, é arquivo dessa página. Script usado por várias skills fica em `.agents/scripts/<nome>/`. No Notion, não entra na página de uma skill só.
 O nome do script, e o da pasta dele em `.agents/scripts/`, fica no `Idioma do nome dos scripts`, sem acento e na convenção de nome da linguagem.
+O nome e o lugar seguem essa regra desde a proposta, inclusive numa lista na conversa, antes de o arquivo existir.
+Antes de propor um script, decida pelo [Passo 3](#passo-3) se ele é preciso: comando curto ou de ferramenta que já resolve fica listado em `Scripts disponíveis`, e só comando longo vira script.
 Tabela que estoura o limite vai para `references/`, com a condição de leitura. "Leia o material se a API não retornar 200" serve.
 
 ### Passo 2
@@ -54,6 +56,13 @@ No Notion o script pode faltar. A lista ordenada separa os dois caminhos. O pass
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
+
+### Script para comando curto
+
+Se você propuser um script para cada comando da tarefa, a skill ganha arquivos que só repetem comandos de ferramentas prontas, e a pessoa pergunta por que não ficaram na skill.
+
+1. Meça cada comando: curto, ou de ferramenta que já resolve, fica listado em `Scripts disponíveis`.
+2. Proponha script só para o comando longo, ou com lógica que pede teste.
 
 ### Modelo no corpo
 
@@ -89,6 +98,8 @@ O script sai de `scripts/` da primeira skill e vai para `.agents/scripts/check-s
 
 ## Pegadinhas
 
+- Juntar comandos curtos num script só parece mais organizado. Ele esconde o que cada comando faz e pode faltar na página do Notion; listados, os comandos valem nos dois lugares.
+- O nome de um script proposto só parece seguir o idioma da skill. Ele segue `Idioma do nome dos scripts`, que tem inglês como padrão, mesmo numa skill em português.
 - Modelo de saída não entra no corpo. Fica em `.agents/assets/templates/`, e a frase cita o nome, não o caminho.
 - No Notion, o script pode faltar na página. A execução precisa de um caminho sem ele.
 
