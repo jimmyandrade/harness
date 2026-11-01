@@ -21,6 +21,7 @@ flowchart LR
     classificar_estado_do_termo["classificar-estado-do-termo"]
     classificar_melhoria_tecnica["classificar-melhoria-tecnica"]
     comunicar_novidade_do_produto["comunicar-novidade-do-produto"]
+    configurar_harness_de_negocio["configurar-harness-de-negocio"]
     conversar_no_whatsapp["conversar-no-whatsapp"]
     criar_commit["criar-commit"]
     criar_copia_de_trabalho["criar-copia-de-trabalho"]
@@ -174,6 +175,10 @@ flowchart LR
   classificar_melhoria_tecnica --> priorizar_itens
   comunicar_novidade_do_produto --> evoluir_habilidade
   comunicar_novidade_do_produto --> redigir_com_tom_de_voz
+  configurar_harness_de_negocio --> criar_pull_request
+  configurar_harness_de_negocio --> definir_issue_do_github
+  configurar_harness_de_negocio --> evoluir_habilidade
+  configurar_harness_de_negocio --> levantar_ambiente_do_repositorio
   conversar_no_whatsapp --> comunicar_novidade_do_produto
   conversar_no_whatsapp --> definir_agenda
   conversar_no_whatsapp --> definir_pessoa

@@ -127,6 +127,25 @@ How these skills relate is in `README.md`, in this folder.
   - [ ] A period with a visible change yields an announcement without technical terms
   - [ ] Without a publisher or a channel in the project instructions, the question suggests no channel and puts not announcing last
 
+### configurar-harness-de-negocio
+- **Stability**: experimental
+- **Description**: Set up a new business harness by following the core runbooks in order, including the sync of the skills with Notion, and check each screen from the person's screenshot. The core is already set up and is not a target
+- **Properties**:
+  - Lives at `.agents/skills/configurar-harness-de-negocio/SKILL.md`
+  - Stops in the core repository and changes nothing there
+  - Checks the prerequisites first: `main` as the default branch, the core pin at the current release, and the Renovate app installed
+  - Follows the runbook of each tool in the `Ferramentas a configurar` parameter and copies none of its steps into the reply
+  - Lets the agent operate each screen when it controls the browser, as Claude and other agents can, and falls back to the person's screenshots only without one
+  - Leaves to the person the login, the yes before installing an app or granting access, and the token value, which the agent may copy with the button but never shows or reads
+  - For Notion, asks to turn off user information, which Notion selects with email addresses by default, keeps content access to the skills database only, and tests the token from the clipboard before storing it, without ever seeing it
+  - Gives the UTC time of the stored secret in the person's time zone
+  - Opens an issue and a pull request on the runbook when a screen differs, with screenshots cropped of personal, business, workspace, teamspace and connection names
+- **Test Criteria**:
+  - [ ] In the core repository, the skill says it is already set up and changes nothing
+  - [ ] An agent with browser control clicks and checks each screen without asking for a screenshot, and stops at a login or before a grant
+  - [ ] A work branch as the default, an old core pin, or a missing Renovate app is handled before any tool runbook
+  - [ ] A token test that answers `401` asks to copy again without generating a new token, and one that answers `200` stores the secret from the clipboard and clears it
+
 ### criar-commit
 - **Stability**: experimental
 - **Description**: Commit finished work as atomic commits with a message in the project language and pattern
