@@ -504,6 +504,20 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The description refuses an existence-only check, spelling, social-profile normalization, merging the same item, and deleting without an order
   - [ ] A payment recipient identified by name and company identifier is registered without inventing a responsible contact and returned for linking to the payment
 
+### definir-fonograma
+- **Stability**: experimental
+- **Description**: Register or review a sound recording from its ISRC, streaming links, key, tempo, or credits, linked to its musical work
+- **Properties**:
+  - Lives at `.agents/skills/definir-fonograma/SKILL.md`
+  - Finds the recordings database by the `Nome do data source de fonogramas` parameter and maps its fields through `Campos da base de fonogramas`
+  - Searches by ISRC or track name before creating, and stops on more than one match
+  - Takes the ISRC only from the distributor, keeps it when the distributor changes, and never invents it
+  - Stores streaming links without tracking parameters
+  - Links each recording to its musical work, following `definir-obra-musical` when the work is missing
+- **Test Criteria**:
+  - [ ] A new recording gets one page with a valid ISRC and clean links, linked to its work
+  - [ ] A distributor change keeps the ISRC and leaves the takedown of the old distributor as pending until the tracks are live
+
 ### definir-grafia
 - **Stability**: experimental
 - **Description**: Settle the spelling of a person or a company and keep a newly seen wrong form
@@ -669,6 +683,20 @@ How these skills relate is in `README.md`, in this folder.
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [ ] The scenarios in `features/` pass in a real measurement
+
+### definir-obra-musical
+- **Stability**: experimental
+- **Description**: Register or review a musical work from its composition, lyrics, or its record at a collecting society, in the works database of the business
+- **Properties**:
+  - Lives at `.agents/skills/definir-obra-musical/SKILL.md`
+  - Finds the works database by the `Nome do data source de obras` parameter and maps its fields through `Campos da base de obras`
+  - Searches by title and first lines of the lyrics before creating, and stops on more than one match
+  - Shows a plan with the current value, the proposed value, and the source of each field, and writes only after the person confirms
+  - Keeps the full lyrics in the page body, under `# Letra`, and only the first line of the lyrics and of the chorus in properties
+  - Never invents an ISWC, a society number, a protocol, or a date, and records the authenticated and anonymous lyrics only with proof
+- **Test Criteria**:
+  - [ ] A new work gets one page with the lyrics in the body, and the missing ISWC listed as pending
+  - [ ] A work that already exists is revised, not duplicated
 
 ### definir-obrigacao-financeira
 - **Stability**: experimental
