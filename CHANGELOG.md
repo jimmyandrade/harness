@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.42.0](https://github.com/jimmyandrade/harness/compare/v1.41.0...v1.42.0) (2026-11-01)
+
+
+### Features
+
+* **configurar-harness-de-negocio:** set up a new business harness with the Notion sync ([#761](https://github.com/jimmyandrade/harness/issues/761)) ([ecd844c](https://github.com/jimmyandrade/harness/commit/ecd844c841cfb66d737c25fdf0517356414373f3))
+
+
+### Bug Fixes
+
+* **definir-arquivos-da-habilidade:** check name, place, and need of a script from the proposal on ([#763](https://github.com/jimmyandrade/harness/issues/763)) ([1f743d4](https://github.com/jimmyandrade/harness/commit/1f743d40e97cddd8807f42d9b8bb4cdda6a54e4e))
+* give a UTC time in the person's time zone ([#758](https://github.com/jimmyandrade/harness/issues/758)) ([3195760](https://github.com/jimmyandrade/harness/commit/31957608db365f7ec8d42255b3f725da0f9da2ba)), closes [#757](https://github.com/jimmyandrade/harness/issues/757)
+
 ## [1.41.0](https://github.com/jimmyandrade/harness/compare/v1.40.1...v1.41.0) (2026-10-31)
 
 
