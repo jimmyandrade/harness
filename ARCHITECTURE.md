@@ -41,6 +41,7 @@ harness/
 ├── docs/
 │   ├── adr/                        # Architecture decisions
 │   └── runbooks/                   # Setup steps, one runbook per tool
+│       └── images/                 # Screenshots of the runbooks, one folder per runbook, with no personal data
 ├── examples/                       # Files the runbooks copy into a project, pinned as vX.Y.Z
 ├── vocabulary/                     # Vocabulary engine: API, CLI, and MCP server of the glossary
 │   ├── api/
