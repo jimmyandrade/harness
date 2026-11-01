@@ -201,7 +201,7 @@ None. People reach the core through their agent (Claude Code, Cursor), GitHub, a
 - Core harness: this repository, shared by every business.
 - Business harness: a private repository with the skills and data of one business.
 - Skill: a `SKILL.md` with instructions an agent loads for one kind of task.
-- Mapping: the JSON file that names the Notion data source, properties, and status options of one business.
+- Mapping: the JSON file that names the Notion properties and status options of one business. For the sync, the data source id comes from a GitHub secret, as [ADR 0023](docs/adr/0023-keep-the-notion-data-source-id-in-a-secret.md) decides.
 - Glossary: the per-language list of the terms of a business, each rated on five levels from forbidden to allowed. It can live in the open repository or only on the computer. The engine that reads it is in `vocabulary/` in this repository. The glossary directory is not the harness.
 - Marketplace: the catalog that lists plugins to install. Claude Code and Codex read `.claude-plugin/marketplace.json`. Cursor has no marketplace file in this repository: a team imports the repository, and that import follows a branch. A personal list in the dashboard is not that import.
 - MCP: Model Context Protocol, how an agent calls the vocabulary tools, such as `lookup_term`, `write_terms`, and `get_version`.

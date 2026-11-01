@@ -26,7 +26,7 @@ A business harness holds its skills, its data source schemas and mappings, its g
 
 Scripts find the project from `HARNESS_ROOT` or the working directory, and find the core from their own location. A config key missing from the project falls back to the core.
 
-The sync takes the mapping from the business repository, including the data source id, the property names, and the status option names. The sync logic is the same for every business.
+The sync takes the mapping from the business repository, with the property names and the status option names. The data source id comes from a GitHub secret, as [ADR 0023](0023-keep-the-notion-data-source-id-in-a-secret.md) decides. The sync logic is the same for every business.
 
 A skill moves to the core one at a time, after an audit removes its company names and business rules. What still differs between businesses is read from the project instructions: `AGENTS.md` in a repository, or the page titled `AGENTS.md` in Notion.
 

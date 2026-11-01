@@ -4,6 +4,14 @@ inputs:
   notion-token:
     description: Notion integration token with access to the skills data source.
     required: true
+  skills-data-source-id:
+    description: Data source id of the skills database, from the NOTION_SKILLS_DATA_SOURCE_ID secret. A data_source_id still in the mapping works with a warning to migrate; both at once fail.
+    required: false
+    default: ""
+  templates-data-source-id:
+    description: Data source id of the models database, from the NOTION_TEMPLATES_DATA_SOURCE_ID secret, when the repository publishes models. Same rule as skills-data-source-id.
+    required: false
+    default: ""
   base:
     description: Commit the change starts from.
     required: true
@@ -48,6 +56,8 @@ runs:
       env:
         HARNESS_ROOT: ${{ github.workspace }}
         NOTION_TOKEN: ${{ inputs.notion-token }}
+        NOTION_SKILLS_DATA_SOURCE_ID: ${{ inputs.skills-data-source-id }}
+        NOTION_TEMPLATES_DATA_SOURCE_ID: ${{ inputs.templates-data-source-id }}
       run: >-
         node "$GITHUB_ACTION_PATH/../../../.agents/scripts/sync-notion-pages/sync-notion-pages.ts"
         --base "${{ inputs.base }}"

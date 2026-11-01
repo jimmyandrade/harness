@@ -234,7 +234,7 @@ test("model mapping file matches the schema fields", () => {
   }
   const stored = JSON.parse(readFileSync(join(root, ".agents", "mappings", "template-page.notion.example.json"), "utf8")) as {
     properties: Record<string, unknown>
-    data_source_id: string
+    data_source_id?: string
   }
   for (const field of Object.keys(schema.properties)) {
     if (field === "body") {
@@ -244,7 +244,11 @@ test("model mapping file matches the schema fields", () => {
     assert.ok(stored.properties[field])
   }
   assert.ok(stored.properties.status)
-  assert.ok(stored.data_source_id)
+  assert.equal(
+    stored.data_source_id,
+    undefined,
+    "Delete data_source_id from the example mapping: the sync takes the id from a GitHub secret, as https://github.com/jimmyandrade/harness/blob/main/docs/adr/0023-keep-the-notion-data-source-id-in-a-secret.md decides.",
+  )
 })
 
 test("only models clash between the project and the core, not files without a name", () => {

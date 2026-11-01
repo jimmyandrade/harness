@@ -46,5 +46,7 @@ jobs:
         uses: jimmyandrade/harness/.github/actions/sync-notion-pages@vX.Y.Z
         with:
           notion-token: ${{ secrets.NOTION_TOKEN }}
+          skills-data-source-id: ${{ secrets.NOTION_SKILLS_DATA_SOURCE_ID }}
+          templates-data-source-id: ${{ secrets.NOTION_TEMPLATES_DATA_SOURCE_ID }}
           base: ${{ steps.range.outputs.base }}
           head: ${{ steps.range.outputs.head }}

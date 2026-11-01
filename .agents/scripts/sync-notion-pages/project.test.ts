@@ -8,6 +8,7 @@ import {
   blankBase,
   coreNamesToPublish,
   coreRoot,
+  getDataSourceId,
   gate,
   namesToPublish,
   projectRoot,
@@ -48,4 +49,30 @@ test("core skills publish when the project moves the core version or its mapping
   assert.deepEqual(coreNamesToPublish(["lancar-venda"], ["criar-commit"], false, true), ["criar-commit"])
   assert.deepEqual(coreNamesToPublish(["lancar-venda"], ["criar-commit"], true, false), ["criar-commit"])
   assert.throws(() => coreNamesToPublish(["criar-commit"], ["criar-commit"], true, true), /criar-commit exists/)
+})
+
+test("the data source id comes from the secret, and the mapping only warns until it migrates", () => {
+  const where = {
+    environmentVariable: "NOTION_SKILLS_DATA_SOURCE_ID",
+    actionInput: "skills-data-source-id",
+    mappingPath: ".agents/mappings/skill-page.notion.json",
+  }
+  const id = "3c077062-d4c6-8094-9a27-000bf7b8710d"
+
+  const fromSecret = getDataSourceId({ ...where, dataSourceIdInEnvironment: id, dataSourceIdInMapping: undefined })
+  assert.deepEqual(fromSecret, { dataSourceId: id })
+
+  const fromMapping = getDataSourceId({ ...where, dataSourceIdInEnvironment: "", dataSourceIdInMapping: id })
+  assert.equal(fromMapping.dataSourceId, id)
+  assert.match(fromMapping.warning ?? "", /Move it to the NOTION_SKILLS_DATA_SOURCE_ID secret/)
+  assert.match(fromMapping.warning ?? "", /docs\/adr\/0023-/)
+
+  assert.throws(
+    () => getDataSourceId({ ...where, dataSourceIdInEnvironment: id, dataSourceIdInMapping: id }),
+    /Delete data_source_id from \.agents\/mappings\/skill-page\.notion\.json/,
+  )
+  assert.throws(
+    () => getDataSourceId({ ...where, dataSourceIdInEnvironment: "  ", dataSourceIdInMapping: undefined }),
+    /Store the id .* as the NOTION_SKILLS_DATA_SOURCE_ID secret .* skills-data-source-id input/,
+  )
 })
