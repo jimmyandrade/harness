@@ -3,9 +3,9 @@
  * The project is HARNESS_ROOT, or the working directory when it is unset.
  * Skills, and the project instructions file, go to the skills database that
  * .agents/mappings/skill-page.notion.json maps, or --mapping (skill-pages.ts).
- * The data source id comes from NOTION_SKILLS_DATA_SOURCE_ID, or from the mapping
- * when the variable is unset, never from both (ADR 0023); models use
- * NOTION_TEMPLATES_DATA_SOURCE_ID the same way.
+ * The data source id comes from the NOTION_SKILLS_DATA_SOURCE_ID secret; an id still
+ * kept in the mapping works with a warning to migrate, and both at once fail
+ * (ADR 0023). Models use NOTION_TEMPLATES_DATA_SOURCE_ID the same way.
  * The page icon name and color are in metadata.parameters of the project instructions file.
  * A setting missing there falls back to the instructions file of this harness (ADR 0009).
  * The project instructions file is published when it changes, when the mapping or
@@ -26,7 +26,7 @@ import {
   CORE_VERSION_PATHS,
   coreNamesToPublish,
   coreRoot,
-  dataSourceId,
+  getDataSourceId,
   gate,
   gitNames,
   INSTRUCTIONS_FILE,
@@ -139,16 +139,29 @@ export async function main(argv: string[]): Promise<number> {
     console.error("NOTION_TOKEN is missing")
     return 2
   }
-  mapping.data_source_id = dataSourceId(mapping.data_source_id, process.env[SKILLS_DATA_SOURCE_VARIABLE], {
-    variable: SKILLS_DATA_SOURCE_VARIABLE,
-    mapping: mappingPath,
+  const skillsDataSourceIdInEnvironment = process.env[SKILLS_DATA_SOURCE_VARIABLE]
+  const skillsDataSource = getDataSourceId({
+    dataSourceIdInEnvironment: skillsDataSourceIdInEnvironment,
+    dataSourceIdInMapping: mapping.data_source_id,
+    environmentVariable: SKILLS_DATA_SOURCE_VARIABLE,
+    actionInput: "skills-data-source-id",
+    mappingPath,
   })
+  if (skillsDataSource.warning) console.warn(`::warning title=data_source_id in the mapping::${skillsDataSource.warning}`)
+  mapping.data_source_id = skillsDataSource.dataSourceId
   if (templateMapping) {
-    templateMapping.data_source_id = dataSourceId(
-      templateMapping.data_source_id,
-      process.env[TEMPLATES_DATA_SOURCE_VARIABLE],
-      { variable: TEMPLATES_DATA_SOURCE_VARIABLE, mapping: templateMappingPath },
-    )
+    const templatesDataSourceIdInEnvironment = process.env[TEMPLATES_DATA_SOURCE_VARIABLE]
+    const templatesDataSource = getDataSourceId({
+      dataSourceIdInEnvironment: templatesDataSourceIdInEnvironment,
+      dataSourceIdInMapping: templateMapping.data_source_id,
+      environmentVariable: TEMPLATES_DATA_SOURCE_VARIABLE,
+      actionInput: "templates-data-source-id",
+      mappingPath: templateMappingPath,
+    })
+    if (templatesDataSource.warning) {
+      console.warn(`::warning title=data_source_id in the model mapping::${templatesDataSource.warning}`)
+    }
+    templateMapping.data_source_id = templatesDataSource.dataSourceId
   }
   const api = notionApi(token)
   const notion = bindNotion(api, icon)

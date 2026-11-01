@@ -15,7 +15,7 @@ mkdir -p .agents/mappings
 cp -n node_modules/harness/.agents/mappings/skill-page.notion.example.json .agents/mappings/skill-page.notion.json
 ```
 
-Rename a property or a status option when the database uses another name. The mapping has no data source id: the repository variable of [Store the data source id](#store-the-data-source-id) carries it, as ADR 0023 decides. The status follows the version: below 0.1.0 is `draft`, from 0.1.0 with major 0 is `validation`, from 1 onward is `production`.
+Rename a property or a status option when the database uses another name. The mapping has no data source id: the secret of [Store the data source id](#store-the-data-source-id) carries it, as [ADR 0023](../adr/0023-keep-the-notion-data-source-id-in-a-secret.md) decides. The status follows the version: below 0.1.0 is `draft`, from 0.1.0 with major 0 is `validation`, from 1 onward is `production`.
 
 Check: every value under `properties` and `status_options` names a property or an option of that data source.
 
@@ -81,7 +81,7 @@ Check: the search answers `200`, and `gh secret list` shows `NOTION_TOKEN` with 
 
 ## Store the data source id
 
-The sync reads the id of the skills data source from the repository variable `NOTION_SKILLS_DATA_SOURCE_ID`. The id is not a credential, but it stays out of the repository, next to the token.
+The sync reads the id of the skills data source from the `NOTION_SKILLS_DATA_SOURCE_ID` secret. The id alone grants nothing without the token, but it stays out of the repository and its history, next to the token, as [ADR 0023](../adr/0023-keep-the-notion-data-source-id-in-a-secret.md) decides.
 
 With the token in the clipboard, as in [Store the token](#store-the-token), read the id from the database. Take the database id from its link: the 32 characters before `?v=`. The command prints only the data source id and its name.
 
@@ -90,15 +90,15 @@ curl -s https://api.notion.com/v1/databases/<database id> -H "Authorization: Bea
 pbcopy < /dev/null
 ```
 
-Store it as a variable of the repository.
+Store it as a secret of the repository. The command asks for the value.
 
 ```bash
-gh variable set NOTION_SKILLS_DATA_SOURCE_ID --body <data source id>
+gh secret set NOTION_SKILLS_DATA_SOURCE_ID
 ```
 
-A repository that already keeps `data_source_id` in its mapping skips this step. The sync fails when both hold an id.
+A repository that keeps `data_source_id` in its mapping must migrate: store the id as the secret, delete `data_source_id` from the mapping, and pass the secret to the `skills-data-source-id` input, as the example workflow does, in one pull request. Until then, each sync prints a warning with these steps; with the id in both places, the sync fails.
 
-Check: `gh variable list` shows `NOTION_SKILLS_DATA_SOURCE_ID`, and the mapping has no `data_source_id`.
+Check: `gh secret list` shows `NOTION_SKILLS_DATA_SOURCE_ID`, the mapping has no `data_source_id`, and the sync log has no warning about it.
 
 ## Copy the sync workflow
 
@@ -123,7 +123,7 @@ Skip this step when the workspace keeps no models in Notion. A model is a file i
 cp -n node_modules/harness/.agents/mappings/template-page.notion.example.json .agents/mappings/template-page.notion.json
 ```
 
-Store the id of the models data source in the repository variable `NOTION_TEMPLATES_DATA_SOURCE_ID`, as in [Store the data source id](#store-the-data-source-id). `name` and `version` are required. Delete `description`, `aliases`, `tags`, or `status` when the database has no such property: the sync then leaves it out, and a property it does not bind, such as a reviewer, keeps what people set. In the access tab of the connection of [Create a connection for the sync](#create-a-connection-for-the-sync), add the models database. Set `Banco de modelos no Notion` in the `Global` entry of `metadata.parameters` of `AGENTS.md` to the link of that database, so the Notion agent finds a model a skill cites by name.
+Store the id of the models data source as the `NOTION_TEMPLATES_DATA_SOURCE_ID` secret, as in [Store the data source id](#store-the-data-source-id). `name` and `version` are required. The models database may lack some of the other properties: remove `description`, `aliases`, `tags`, or `status` from the mapping only when the database has no such property, because the sync writes every property the mapping names, and Notion rejects a write to a property that does not exist. A removed property is left out of the page, and a property the mapping does not bind, such as a reviewer, keeps what people set. In the access tab of the connection of [Create a connection for the sync](#create-a-connection-for-the-sync), add the models database. Set `Banco de modelos no Notion` in the `Global` entry of `metadata.parameters` of `AGENTS.md` to the link of that database, so the Notion agent finds a model a skill cites by name.
 
 A page that a person created before the sync, under another title, is replaced when the model lists that title in `metadata.aliases`. Its body becomes the file body on the first sync, so move what it still has into the file first.
 

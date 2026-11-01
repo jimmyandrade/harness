@@ -244,7 +244,11 @@ test("model mapping file matches the schema fields", () => {
     assert.ok(stored.properties[field])
   }
   assert.ok(stored.properties.status)
-  assert.equal(stored.data_source_id, undefined, "the example takes the id from a repository variable (ADR 0023)")
+  assert.equal(
+    stored.data_source_id,
+    undefined,
+    "Delete data_source_id from the example mapping: the sync takes the id from a GitHub secret, as https://github.com/jimmyandrade/harness/blob/main/docs/adr/0023-keep-the-notion-data-source-id-in-a-secret.md decides.",
+  )
 })
 
 test("only models clash between the project and the core, not files without a name", () => {

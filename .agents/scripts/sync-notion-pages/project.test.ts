@@ -8,7 +8,7 @@ import {
   blankBase,
   coreNamesToPublish,
   coreRoot,
-  dataSourceId,
+  getDataSourceId,
   gate,
   namesToPublish,
   projectRoot,
@@ -51,13 +51,28 @@ test("core skills publish when the project moves the core version or its mapping
   assert.throws(() => coreNamesToPublish(["criar-commit"], ["criar-commit"], true, true), /criar-commit exists/)
 })
 
-test("the data source id comes from the variable or the mapping, never both", () => {
-  const names = { variable: "NOTION_SKILLS_DATA_SOURCE_ID", mapping: ".agents/mappings/skill-page.notion.json" }
+test("the data source id comes from the secret, and the mapping only warns until it migrates", () => {
+  const where = {
+    environmentVariable: "NOTION_SKILLS_DATA_SOURCE_ID",
+    actionInput: "skills-data-source-id",
+    mappingPath: ".agents/mappings/skill-page.notion.json",
+  }
   const id = "3c077062-d4c6-8094-9a27-000bf7b8710d"
-  assert.equal(dataSourceId(undefined, id, names), id)
-  assert.equal(dataSourceId(id, undefined, names), id)
-  assert.equal(dataSourceId(id, "", names), id)
-  assert.throws(() => dataSourceId(id, id, names), /NOTION_SKILLS_DATA_SOURCE_ID.*skill-page\.notion\.json/)
-  assert.throws(() => dataSourceId(undefined, undefined, names), /NOTION_SKILLS_DATA_SOURCE_ID/)
-  assert.throws(() => dataSourceId("", "  ", names), /NOTION_SKILLS_DATA_SOURCE_ID/)
+
+  const fromSecret = getDataSourceId({ ...where, dataSourceIdInEnvironment: id, dataSourceIdInMapping: undefined })
+  assert.deepEqual(fromSecret, { dataSourceId: id })
+
+  const fromMapping = getDataSourceId({ ...where, dataSourceIdInEnvironment: "", dataSourceIdInMapping: id })
+  assert.equal(fromMapping.dataSourceId, id)
+  assert.match(fromMapping.warning ?? "", /Move it to the NOTION_SKILLS_DATA_SOURCE_ID secret/)
+  assert.match(fromMapping.warning ?? "", /docs\/adr\/0023-/)
+
+  assert.throws(
+    () => getDataSourceId({ ...where, dataSourceIdInEnvironment: id, dataSourceIdInMapping: id }),
+    /Delete data_source_id from \.agents\/mappings\/skill-page\.notion\.json/,
+  )
+  assert.throws(
+    () => getDataSourceId({ ...where, dataSourceIdInEnvironment: "  ", dataSourceIdInMapping: undefined }),
+    /Store the id .* as the NOTION_SKILLS_DATA_SOURCE_ID secret .* skills-data-source-id input/,
+  )
 })

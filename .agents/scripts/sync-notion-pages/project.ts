@@ -59,21 +59,50 @@ export function gate(names: string[], token: string): 0 | 2 | null {
 export const SKILLS_DATA_SOURCE_VARIABLE = "NOTION_SKILLS_DATA_SOURCE_ID"
 export const TEMPLATES_DATA_SOURCE_VARIABLE = "NOTION_TEMPLATES_DATA_SOURCE_ID"
 
-/** The data source id comes from one place: the variable or the mapping (ADR 0023). */
-export function dataSourceId(
-  fromMapping: string | undefined,
-  fromVariable: string | undefined,
-  names: { variable: string; mapping: string },
-): string {
-  const mapped = fromMapping?.trim() ?? ""
-  const variable = fromVariable?.trim() ?? ""
-  if (mapped && variable) {
-    throw new Error(`${names.variable} and data_source_id in ${names.mapping} are both set; keep one`)
+const ADR_0023_URL =
+  "https://github.com/jimmyandrade/harness/blob/main/docs/adr/0023-keep-the-notion-data-source-id-in-a-secret.md"
+const DATA_SOURCE_ID_RUNBOOK_URL =
+  "https://github.com/jimmyandrade/harness/blob/main/docs/runbooks/notion.md#store-the-data-source-id"
+
+export type DataSourceIdSources = {
+  /** The value the action passes from the GitHub secret. */
+  dataSourceIdInEnvironment: string | undefined
+  /** The data_source_id field of the mapping file, kept only until the repository migrates. */
+  dataSourceIdInMapping: string | undefined
+  environmentVariable: string
+  actionInput: string
+  mappingPath: string
+}
+
+/** The data source id comes from a GitHub secret; an id in the mapping still works, with a warning (ADR 0023). */
+export function getDataSourceId({
+  dataSourceIdInEnvironment,
+  dataSourceIdInMapping,
+  environmentVariable,
+  actionInput,
+  mappingPath,
+}: DataSourceIdSources): { dataSourceId: string; warning?: string } {
+  const idInEnvironment = dataSourceIdInEnvironment?.trim() ?? ""
+  const idInMapping = dataSourceIdInMapping?.trim() ?? ""
+  if (idInEnvironment && idInMapping) {
+    throw new Error(
+      `${environmentVariable} and data_source_id in ${mappingPath} are both set. ` +
+        `Delete data_source_id from ${mappingPath} and keep the secret, as ${DATA_SOURCE_ID_RUNBOOK_URL} explains (${ADR_0023_URL}).`,
+    )
   }
-  if (!mapped && !variable) {
-    throw new Error(`${names.variable} is missing, and ${names.mapping} has no data_source_id`)
+  if (idInEnvironment) return { dataSourceId: idInEnvironment }
+  if (idInMapping) {
+    return {
+      dataSourceId: idInMapping,
+      warning:
+        `data_source_id in ${mappingPath} is deprecated. Move it to the ${environmentVariable} secret, ` +
+        `pass the secret to the ${actionInput} input, and delete it from the mapping, as ${DATA_SOURCE_ID_RUNBOOK_URL} explains (${ADR_0023_URL}).`,
+    }
   }
-  return variable || mapped
+  throw new Error(
+    `${environmentVariable} is missing. Store the id of the Notion data source as the ${environmentVariable} secret ` +
+      `of the repository and pass it to the ${actionInput} input of the sync-notion-pages action, as ${DATA_SOURCE_ID_RUNBOOK_URL} explains (${ADR_0023_URL}).`,
+  )
 }
 
 export const CORE_VERSION_PATHS = [".github/workflows", "package.json", "package-lock.json"]
