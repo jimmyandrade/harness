@@ -1,9 +1,9 @@
 ---
 name: configurar-harness-de-negocio
-description: Configura um harness de negócio novo seguindo os runbooks do core, com a sincronização das skills com o Notion, e confere cada tela pelo print. Usada quando a pessoa monta o harness de um negócio ou liga a sincronização com o Notion. NÃO serve para o core, que já está configurado, nem para atualizar a versão do core.
+description: Configura um harness de negócio novo seguindo os runbooks do core, com a sincronização das skills com o Notion, e opera as telas pelo navegador quando pode. Usada quando a pessoa monta o harness de um negócio ou liga a sincronização com o Notion. NÃO serve para o core, que já está configurado, nem para atualizar a versão do core.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   related:
     - levantar-ambiente-do-repositorio
     - definir-issue-do-github
@@ -50,17 +50,24 @@ Não copie o runbook inteiro para a resposta: diga o passo atual, o comando e a 
 ### Passo 3
 
 Siga o runbook de cada item de `Ferramentas a configurar`, na ordem.
+Quanto mais o agente faz, melhor: os prints da pessoa são o último recurso.
 Em cada passo, separe quem faz:
 
 ```mermaid
 flowchart LR
-  P{O passo é} -->|clique numa tela| A[A pessoa clica e manda o print]
+  P{O passo é} -->|clique numa tela| N{O agente controla o navegador?}
+  N -->|sim| A[O agente clica e confere a tela]
+  N -->|não| M[A pessoa clica e manda o print]
+  M --> D[O agente confere o print e diz o próximo clique]
   P -->|comando sem segredo| B[O agente roda e confere]
-  P -->|segredo ou senha| C[A pessoa roda no terminal dela]
-  A --> D[O agente confere o print e diz o próximo clique]
+  P -->|login, senha ou valor de segredo| C[A pessoa faz]
+  P -->|instalar app ou conceder permissão| S[O agente mostra o que concede e espera o sim]
 ```
 
-Confira cada print antes do próximo passo, contra a verificação do runbook.
+Com uma ferramenta que controla o navegador, como a do Claude, de outro agente ou de uma extensão, o agente abre cada tela, clica e confere o resultado nela, sem pedir print.
+Uma tela de login, senha ou código de verificação para o agente: a pessoa entra na conta, e o agente continua.
+Antes de clicar no botão que instala um app ou concede acesso, mostre o que será concedido e espere o sim da pessoa.
+Confira cada tela antes do próximo passo, contra a verificação do runbook.
 Uma opção que a tela traz marcada por padrão e o runbook não pede é desmarcada antes de seguir.
 
 ### Passo 4
@@ -70,13 +77,13 @@ Na sincronização com o Notion, confira além do runbook:
 1. A conexão é nova, só da sincronização, criada no espaço de trabalho do banco de habilidades, pelo método de token de API.
 2. Nas funções, a informação de usuários fica em nenhuma: o Notion marca por padrão a leitura com e-mail.
 3. No acesso a conteúdo, fica só o banco de habilidades. Um ícone personalizado esconde se o resultado é o banco ou a página que o contém: o banco mostra as propriedades em colunas. A lista agrupa pelo espaço de equipe, então peça para expandir tudo.
-4. O token nunca passa pela conversa. A pessoa copia pelo botão de copiar, testa com a busca da API usando a área de transferência, guarda o segredo direto dela e depois a limpa.
+4. O token nunca passa pela conversa nem pela tela. O agente com navegador pode clicar no botão de copiar, sem mostrar nem ler o valor; a pessoa testa com a busca da API usando a área de transferência, guarda o segredo direto dela e depois a limpa, no terminal dela.
 5. A busca responde `200` com qualquer token válido; quem confirma o banco é a aba de acesso. Um `401` pede para copiar de novo, sem gerar outro token, porque gerar outro invalida o segredo já guardado.
 6. A hora que a lista de segredos mostra vem em UTC; diga no fuso da pessoa.
 
 ### Passo 5
 
-Quando uma tela difere do runbook, guarde os prints e, ao terminar, abra a issue por `definir-issue-do-github` e o pull request por `criar-pull-request` no core.
+Quando uma tela difere do runbook, guarde os prints, os do próprio agente quando ele opera o navegador, e, ao terminar, abra a issue por `definir-issue-do-github` e o pull request por `criar-pull-request` no core.
 Recorte cada print na área que importa e tire nome de pessoa, de negócio, de espaço de trabalho, de espaço de equipe e de conexão.
 Um print com segredo visível não entra: peça outro.
 
@@ -132,6 +139,7 @@ O repositório aberto é o core, que já está configurado. Não mudei nada.
 - O ícone ao lado do botão de copiar só parece outro jeito de copiar. Ele gera um token novo e invalida o guardado.
 - A busca da API respondendo `200` só parece provar o acesso ao banco. Ela responde assim com qualquer token válido.
 - O espaço de equipe na lista de acesso só parece um acesso ao espaço inteiro. É o grupo do banco, e o cabeçalho conta as páginas.
+- Pedir prints só parece o jeito seguro. Com o navegador sob controle, o agente vê a tela na hora e poupa a pessoa; ela entra só no login, no sim e no segredo.
 
 ## Scripts disponíveis
 
