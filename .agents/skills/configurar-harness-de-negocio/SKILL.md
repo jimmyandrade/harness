@@ -1,9 +1,10 @@
 ---
 name: configurar-harness-de-negocio
 description: Configura um harness de negócio novo seguindo os runbooks do core, com a sincronização das skills com o Notion, e opera as telas pelo navegador quando pode. Usada quando a pessoa monta o harness de um negócio ou liga a sincronização com o Notion. NÃO serve para o core, que já está configurado, nem para atualizar a versão do core.
+compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   related:
     - levantar-ambiente-do-repositorio
     - definir-issue-do-github
@@ -143,6 +144,16 @@ O repositório aberto é o core, que já está configurado. Não mudei nada.
 
 ## Scripts disponíveis
 
-- Nenhum.
+- `gh`, para o repositório, as releases e os segredos.
+- `curl`, para testar o token na API do Notion, pelo comando do runbook.
+- `pbpaste` e `pbcopy`, só no macOS, para usar e limpar a área de transferência.
+- `magick`, do ImageMagick, para recortar os prints.
 
-1. Não há script para executar.
+1. Branch padrão: `gh repo view <dono>/<repositório> --json defaultBranchRef --jq .defaultBranchRef.name`.
+2. Release atual do core: `gh release view --repo jimmyandrade/harness --json tagName --jq .tagName`. Compare com a versão do `harness` no manifesto do projeto.
+3. Renovate: `gh issue list --repo <dono>/<repositório> --state all --search "Dependency Dashboard in:title"`. Sem resultado, o app falta.
+4. Teste do token, que a pessoa roda: o comando `curl` da busca na seção do token do runbook do Notion, que só devolve o código HTTP.
+5. Gravação do token, que a pessoa roda: `pbpaste | gh secret set NOTION_TOKEN --repo <dono>/<repositório>`. Fora do macOS: `gh secret set NOTION_TOKEN --repo <dono>/<repositório>`, que pede o valor.
+6. Limpeza da área de transferência, que a pessoa roda: `pbcopy < /dev/null`.
+7. Conferência do segredo: `gh secret list --repo <dono>/<repositório>`. A hora vem em UTC.
+8. Recorte de um print: `magick <entrada> -crop <largura>x<altura>+<x>+<y> +repage -fill "<cor do fundo>" -draw "rectangle <x1>,<y1> <x2>,<y2>" -strip <saída>.webp`, com um `-draw` por nome a cobrir.
