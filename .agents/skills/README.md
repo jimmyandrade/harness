@@ -23,6 +23,7 @@ flowchart LR
     comunicar_novidade_do_produto["comunicar-novidade-do-produto"]
     configurar_harness_de_negocio["configurar-harness-de-negocio"]
     conversar_no_whatsapp["conversar-no-whatsapp"]
+    criar_carrossel_do_instagram["criar-carrossel-do-instagram"]
     criar_commit["criar-commit"]
     criar_copia_de_trabalho["criar-copia-de-trabalho"]
     criar_habilidade["criar-habilidade"]
@@ -190,6 +191,7 @@ flowchart LR
   conversar_no_whatsapp --> evoluir_habilidade
   conversar_no_whatsapp --> procurar_tarefa
   conversar_no_whatsapp --> redigir_com_tom_de_voz
+  criar_carrossel_do_instagram --> evoluir_habilidade
   criar_commit -.-> atualizar_branch_do_pull_request
   criar_commit -.-> criar_pull_request
   criar_commit -.-> evoluir_habilidade
