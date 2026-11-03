@@ -3,7 +3,7 @@ name: limpar-copias-de-trabalho
 description: Remove as cópias de trabalho do git e as branches locais já mescladas na base, inclusive as de outras sessões, depois de conferir que nada se perde. Usada ao terminar o trabalho de uma sessão ou quando sobram cópias de trabalho ou branches locais de código. Não serve para liberar espaço em disco em geral nem para apagar arquivo da pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.5.1"
+  version: "0.5.2"
   related:
     - criar-copia-de-trabalho
     - criar-pull-request
@@ -66,7 +66,7 @@ Remova as cópias aprovadas no plano, sem pedir confirmação. As conferências 
 
 ### Passo 5
 
-Responda com o espaço que voltou e uma tabela das cópias e das branches: removida ou mantida, e o motivo de cada uma, com o link do PR quando houver. Cada branch é uma linha, também a que ficou porque o pull request mesclou outro commit. Não junte esse conjunto numa frase e não ofereça listá-lo num turno seguinte.
+Responda com o espaço que voltou e uma tabela das cópias e das branches: removida ou mantida, e o motivo de cada uma, com o link do PR quando houver. Cada branch é uma linha. A que ficou porque o pull request mesclou outro commit cabe numa frase: pode apagar, ou por que fica. Pode apagar quando o commit mesclado já tem o que a branch local tem. Ajuste que só existe no commit mesclado não mantém a branch e não entra na frase. Fica quando a branch local tem comportamento que o commit mesclado não tem, e a frase diz qual. Não descreva arquivo, commit nem o que entrou depois na base. Não junte o conjunto numa frase e não ofereça listá-lo num turno seguinte.
 
 ### Passo 6
 
@@ -105,7 +105,15 @@ Se você listar as branches locais de outras tarefas como "não toquei", a pesso
 
 1. Confira toda branch local contra a base no fim de toda sessão, mesmo a que outra sessão criou.
 2. Remova a que passou no Passo 3.
-3. Na resposta, cada branch é uma linha da tabela, com a decisão e o link do PR quando houver. A que ficou porque o pull request mesclou outro commit entra do mesmo jeito. Não junte o conjunto numa frase e não ofereça listá-lo depois.
+3. Na resposta, cada branch é uma linha da tabela, com a decisão e o link do PR quando houver. A que ficou porque o pull request mesclou outro commit entra do mesmo jeito: uma frase, pode apagar ou o comportamento que só existe nela. Não descreva o diff. Não junte o conjunto numa frase e não ofereça listá-lo depois.
+
+### Diff no lugar da decisão
+
+Se você contar arquivo, commit e o que a base mudou depois, a pessoa não vê o que pode apagar.
+
+1. Compare os arquivos que a branch mudou com o commit mesclado.
+2. Sem comportamento só na branch: a linha diz que pode apagar.
+3. Com comportamento só na branch: a linha diz qual, numa frase.
 
 ### Branch remota apagada
 
@@ -135,7 +143,8 @@ Só a cópia principal existia, e sobraram quatro branches `renovate/*`. Três P
 ## Casos-limite
 
 - O repositório só tem a cópia principal e nenhuma branch local sobrando: não há o que remover. Diga isso numa linha.
-- A branch local tem commit além do commit do PR, o pull request mesclou outro commit, ou nenhuma branch remota, nenhum PR e nenhum PR que levou o conteúdo a contêm: ela fica, porque o commit só existe nesta máquina, e a resposta traz uma linha com o link e esse motivo.
+- O pull request mesclou outro commit: a branch fica até a pessoa apagar. A linha diz que pode apagar, porque o conteúdo já está no commit mesclado, ou por que fica, o comportamento que só existe nela.
+- Sem branch remota, sem PR e sem PR que levou o conteúdo: ela fica, porque o commit só existe nesta máquina, e a resposta traz uma linha com o link e esse motivo.
 - A branch é de outra sessão ou de outra ferramenta: ela entra na conferência como qualquer outra.
 - A sessão ainda não enviou o trabalho: a cópia fica até o commit chegar ao GitHub.
 - Pull request aberto, commit no remoto e nenhuma sessão aberta usa a pasta: a cópia pode sair. O pull request continua no GitHub.
@@ -153,6 +162,7 @@ Só a cópia principal existia, e sobraram quatro branches `renovate/*`. Três P
 - A pasta atual da sessão não pode ser removida: o shell perde o diretório de trabalho.
 - "Não conferi a sessão" ou "não achei o pull request" parece motivo para manter. Não é conferência. A conferência é a lista de sessões e a lista de pull requests abertos e mesclados.
 - Um conjunto grande de branches mantidas parece caber numa frase, com a oferta de listar depois. Cada uma continua uma linha da tabela.
+- Explicar o diff de cada branch parece completar a linha. A linha é a decisão: pode apagar, ou o comportamento que só existe na branch.
 
 ## Scripts disponíveis
 
