@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.46.1](https://github.com/jimmyandrade/harness/compare/v1.46.0...v1.46.1) (2026-11-03)
+
+
+### Bug Fixes
+
+* **limpar-copias-de-trabalho:** list every kept branch in the answer ([#787](https://github.com/jimmyandrade/harness/issues/787)) ([50af04c](https://github.com/jimmyandrade/harness/commit/50af04c3351ca359fc1931e405fef04bb14f8730))
+
 ## [1.46.0](https://github.com/jimmyandrade/harness/compare/v1.45.0...v1.46.0) (2026-11-03)
 
 
