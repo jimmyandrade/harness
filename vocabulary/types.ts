@@ -227,6 +227,8 @@ export type {
   CorsOptions,
   AuthChecker,
   WriteTool,
+  VocabularyHttpRequest,
+  VocabularyHttpResponse,
 } from "./api/shared/mcp-http.ts"
 
 export {
@@ -236,6 +238,8 @@ export {
   StreamableHTTPServerTransport,
   HTTP_STATUS,
   WRITE_TOOLS,
+  VOCABULARY_CORS,
+  handleVocabularyRequest,
   parseRequestFrom,
   createErrorResponse,
   configureCorsHeaders,

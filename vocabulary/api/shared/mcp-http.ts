@@ -4,10 +4,13 @@
  * Protocol types, JSON-RPC error codes, the server, and the Streamable HTTP
  * transport come from `@modelcontextprotocol/sdk`. This module keeps only what
  * that package does not export: a body size limit, CORS header fields, the
- * write-tool gate, and the bearer token check.
+ * write-tool gate, the bearer token check, and `handleVocabularyRequest`, which
+ * puts them together to serve the vocabulary server from any HTTP function.
  */
 
-import type { IncomingMessage } from "node:http"
+import type { IncomingHttpHeaders, IncomingMessage } from "node:http"
+
+import { respond } from "../mcp/index.ts"
 
 export { ErrorCode, McpError } from "@modelcontextprotocol/sdk/types.js"
 export { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js"
@@ -18,6 +21,7 @@ export { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/
  */
 export const HTTP_STATUS = {
   OK: 200,
+  ACCEPTED: 202,
   BAD_REQUEST: 400,
   UNAUTHORIZED: 401,
   FORBIDDEN: 403,
@@ -211,10 +215,10 @@ export function isWriteTool(toolName: string): boolean {
  * The SDK auth middleware speaks OAuth. This check is the plain shared secret
  * in BEARER_TOKEN, and it stays off when that variable is unset.
  *
- * @param request - The incoming HTTP request
+ * @param request - The incoming HTTP request, or any object with its headers
  * @returns null if valid or authentication disabled, ErrorResponse if invalid
  */
-export function validateBearerToken(request: IncomingMessage): ErrorResponse | null {
+export function validateBearerToken(request: Pick<IncomingMessage, "headers">): ErrorResponse | null {
   const expectedToken = process.env.BEARER_TOKEN
 
   if (expectedToken === undefined || expectedToken === "") {
@@ -263,3 +267,93 @@ export function createAuthChecker(validator: (request: IncomingMessage) => Error
  * Use this when authentication is not required.
  */
 export const noAuth: AuthChecker = () => null
+
+/**
+ * An HTTP request as a serverless function receives it, with the body already read.
+ */
+export type VocabularyHttpRequest = {
+  method?: string
+  headers: IncomingHttpHeaders
+  body: unknown
+}
+
+/**
+ * What the HTTP function writes back: the status, the headers, and the JSON body, if any.
+ */
+export type VocabularyHttpResponse = {
+  status: HttpStatus
+  headers: Record<string, string>
+  body?: unknown
+}
+
+/**
+ * CORS headers of a vocabulary server that takes JSON-RPC over POST from any origin.
+ */
+export const VOCABULARY_CORS: CorsOptions = {
+  origin: "*",
+  methods: ["POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+}
+
+/**
+ * Serve one JSON-RPC message to the vocabulary server over HTTP.
+ *
+ * It answers a preflight, refuses any method but POST, checks the bearer token,
+ * reads the message from a parsed or a string body, blocks write tools when
+ * BLOCK_WRITE_OPERATIONS is true, and accepts a notification with no body.
+ *
+ * @param glossaryDir - Directory with the glossary JSON files
+ * @param request - The request, with its body already read
+ * @param cors - CORS options of the response
+ * @returns The response to write
+ */
+export function handleVocabularyRequest(
+  glossaryDir: string,
+  request: VocabularyHttpRequest,
+  cors: CorsOptions = VOCABULARY_CORS,
+): VocabularyHttpResponse {
+  const headers = configureCorsHeaders(cors)
+  const reply = (status: HttpStatus, body?: unknown): VocabularyHttpResponse => ({ status, headers, body })
+  const fail = (error: ErrorResponse): VocabularyHttpResponse => reply(error.status, error.body)
+
+  if (request.method === "OPTIONS") return reply(HTTP_STATUS.OK)
+  if (request.method !== "POST") return fail(createErrorResponse(HTTP_STATUS.METHOD_NOT_ALLOWED, "Method not allowed"))
+
+  const authError = validateBearerToken(request)
+  if (authError !== null) return fail(authError)
+
+  const message = messageFrom(request.body)
+  if (message === null) return fail(createErrorResponse(HTTP_STATUS.BAD_REQUEST, "Parse error"))
+
+  if (isBlockedWriteCall(message)) {
+    return fail(
+      createErrorResponse(HTTP_STATUS.FORBIDDEN, "Write operations are disabled. Set BLOCK_WRITE_OPERATIONS=false to enable."),
+    )
+  }
+
+  try {
+    const response = respond(glossaryDir, message)
+    return response === undefined ? reply(HTTP_STATUS.ACCEPTED) : reply(HTTP_STATUS.OK, response)
+  } catch (error) {
+    const text = error instanceof Error ? error.message : "Internal error"
+    return fail(createErrorResponse(HTTP_STATUS.INTERNAL_SERVER_ERROR, text))
+  }
+}
+
+function messageFrom(body: unknown): object | null {
+  let value = body
+  if (typeof value === "string") {
+    try {
+      value = JSON.parse(value)
+    } catch {
+      return null
+    }
+  }
+  return typeof value === "object" && value !== null ? value : null
+}
+
+function isBlockedWriteCall(message: object): boolean {
+  if (!shouldBlockWriteOperations()) return false
+  const name = (message as { params?: { name?: unknown } }).params?.name
+  return typeof name === "string" && isWriteTool(name)
+}
