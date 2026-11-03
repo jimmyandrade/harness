@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.44.0](https://github.com/jimmyandrade/harness/compare/v1.43.0...v1.44.0) (2026-11-03)
+
+
+### Features
+
+* **criar-carrossel-do-instagram:** create Instagram carousel skill ([#775](https://github.com/jimmyandrade/harness/issues/775)) ([4713073](https://github.com/jimmyandrade/harness/commit/4713073aad0e94ed46288e9c7e228f3f953895cb))
+* **definir-obra-musical,definir-fonograma:** bring the work and recording skills to the core ([#766](https://github.com/jimmyandrade/harness/issues/766)) ([4726b7c](https://github.com/jimmyandrade/harness/commit/4726b7c09c44d948bb57f2a584a13f80c46eb427))
+* **levantar-contexto-do-pull-request:** label an unlabeled PR before proposing the merge ([#773](https://github.com/jimmyandrade/harness/issues/773)) ([d84bb6b](https://github.com/jimmyandrade/harness/commit/d84bb6b91a5aac8183e61e4da98276f34031f037))
+
+
+### Bug Fixes
+
+* **deps:** update dependency @notionhq/client to v5.30.0 ([#772](https://github.com/jimmyandrade/harness/issues/772)) ([0d86f93](https://github.com/jimmyandrade/harness/commit/0d86f93c0bebfb9ca4da9d822dfbd01808ab72ab))
+* **fechar-pull-request:** check the close comment before and after closing ([#769](https://github.com/jimmyandrade/harness/issues/769)) ([3b171bd](https://github.com/jimmyandrade/harness/commit/3b171bd5268a155c16b458b161812ac070e8b777)), closes [#768](https://github.com/jimmyandrade/harness/issues/768)
+
 ## [1.43.0](https://github.com/jimmyandrade/harness/compare/v1.42.0...v1.43.0) (2026-11-01)
 
 
