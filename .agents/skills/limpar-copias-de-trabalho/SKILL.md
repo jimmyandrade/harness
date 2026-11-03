@@ -3,7 +3,7 @@ name: limpar-copias-de-trabalho
 description: Remove as cópias de trabalho do git e as branches locais já mescladas na base, inclusive as de outras sessões, depois de conferir que nada se perde. Usada ao terminar o trabalho de uma sessão ou quando sobram cópias de trabalho ou branches locais de código. Não serve para liberar espaço em disco em geral nem para apagar arquivo da pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.5.6"
+  version: "0.5.7"
   related:
     - criar-copia-de-trabalho
     - criar-pull-request
@@ -55,7 +55,10 @@ Uma branch local que nenhuma cópia usa entra no mesmo plano e só sai quando pa
    - O commit está numa branch remota ou na base.
    - O commit é o mesmo do PR dela, mesclado ou fechado. O PR fechado guarda esse commit no GitHub, na referência do PR.
    - Sem PR, o conteúdo entrou na base por outro PR mesclado: os arquivos que a branch cria ou muda estão na base, e o PR que os levou está identificado pelo histórico desses arquivos.
-   - O pull request foi mesclado e o commit da ponta local ainda está no GitHub, mesmo sem ser o commit do merge. Checkout desta máquina na branch de outra pessoa não continua o trabalho dela. A frase de produto informa a ação que ficou de fora e não segura a branch, salvo se a pessoa está continuando esse trabalho.
+   - O pull request foi mesclado e o commit da ponta local ainda está no GitHub, mesmo sem ser o commit do merge.
+   - Checkout desta máquina na branch de outra pessoa não continua o trabalho dela.
+   - A frase de produto informa a ação que ficou de fora.
+   - Essa frase não segura a branch, salvo se a pessoa está continuando esse trabalho.
 
 Sem nenhum desses caminhos, a branch fica, e a resposta diz que o commit só existe nesta máquina.
 
@@ -67,7 +70,22 @@ Remova as cópias aprovadas no plano, sem pedir confirmação. As conferências 
 
 ### Passo 5
 
-Responda com o espaço que voltou e uma tabela das cópias e das branches: removida ou mantida, e o motivo de cada uma, com o link do PR quando houver. Cada branch é uma linha. A que ficou porque o pull request mesclou outro commit diz se pode apagar. Pode apagar quando o commit está no GitHub, mesmo com comportamento de produto que o resultado aprovado não tem. Processo: o pull request chegou ao fim normal. Num merge com squash, entra na base um commit só, e os commits de quem abriu a branch não entram na base. Se esse commit está no GitHub, guardar a branch aqui não continua o trabalho de outra pessoa. Produto: nomeie a tela e a ação de quem compra, diga de quem é o trabalho, e diga que é o produto. Essa frase informa. Ela não segura a branch, salvo se a pessoa está continuando esse trabalho. Fica só quando o commit não está no GitHub. "Faz menos" mistura processo e produto. Não use. Não troque o processo por "aceitou um commit", "apagou o nome" nem pelo título do commit. Não descreva arquivo, commit nem o que entrou depois na base. Não junte o conjunto numa frase e não ofereça listá-lo num turno seguinte.
+Responda com o espaço que voltou e uma tabela das cópias e das branches: removida ou mantida, e o motivo de cada uma, com o link do PR quando houver.
+Cada branch é uma linha.
+A que ficou porque o pull request mesclou outro commit diz se pode apagar.
+Pode apagar quando o commit está no GitHub, mesmo com comportamento de produto que o resultado aprovado não tem.
+Processo: o pull request chegou ao fim normal.
+Num merge com squash, entra na base um commit só, e os commits de quem abriu a branch não entram na base.
+Se esse commit está no GitHub, guardar a branch aqui não continua o trabalho de outra pessoa.
+Produto: nomeie a tela e a ação de quem compra, diga de quem é o trabalho, e diga que é o produto.
+Essa frase informa.
+Ela não segura a branch, salvo se a pessoa está continuando esse trabalho.
+Fica só quando o commit não está no GitHub.
+"Faz menos" mistura processo e produto.
+Não use.
+Não troque o processo por "aceitou um commit", "apagou o nome" nem pelo título do commit.
+Não descreva arquivo, commit nem o que entrou depois na base.
+Não junte o conjunto numa frase e não ofereça listá-lo num turno seguinte.
 
 ### Passo 6
 
@@ -124,7 +142,14 @@ Se você tratar a falta da branch remota como trabalho perdido, mantém para sem
 2. Mesclado, ou aberto com o commit no remoto: o trabalho está no GitHub, e a cópia pode sair se nenhuma sessão aberta usa a pasta.
 3. Fechado sem merge, com o mesmo commit da branch local: o commit fica na referência do PR, e a branch pode sair.
 4. Sem PR e sem branch remota: a cópia fica.
-5. Separe processo e produto. Processo: fim normal de um pull request mesclado. Em squash, um commit só na base, e os commits de quem abriu a branch não entram na base. Se o commit da ponta local está no GitHub, a branch pode sair. Produto: nomeie a tela, a ação e de quem é o trabalho, e diga que é o produto. Essa frase não segura a branch, salvo se a pessoa está continuando o trabalho. "Faz menos" mistura as duas coisas. Não use "aceitou um commit", "apagou o nome" nem o título do commit.
+5. Separe processo e produto.
+6. No processo, diga que o pull request chegou ao fim normal.
+7. Em squash, entra na base um commit só, e os commits de quem abriu a branch não entram na base.
+8. Se o commit da ponta local está no GitHub, a branch pode sair.
+9. No produto, nomeie a tela, a ação e de quem é o trabalho, e diga que é o produto.
+10. Essa frase não segura a branch, salvo se a pessoa está continuando o trabalho.
+11. "Faz menos" mistura as duas coisas.
+12. Não use "aceitou um commit", "apagou o nome" nem o título do commit.
 
 ## Exemplos de entrada e saída
 
@@ -145,7 +170,10 @@ Só a cópia principal existia, e sobraram quatro branches `renovate/*`. Três P
 ## Casos-limite
 
 - O repositório só tem a cópia principal e nenhuma branch local sobrando: não há o que remover. Diga isso numa linha.
-- O pull request mesclou outro commit e o commit da ponta local está no GitHub: pode apagar, salvo se a pessoa está continuando o trabalho. A frase de processo diz o fim normal. A frase de produto nomeia a tela, a ação e de quem é o trabalho. Ela informa e não segura a branch.
+- O pull request mesclou outro commit e o commit da ponta local está no GitHub: pode apagar, salvo se a pessoa está continuando o trabalho.
+- A frase de processo diz o fim normal.
+- A frase de produto nomeia a tela, a ação e de quem é o trabalho.
+- Ela informa e não segura a branch.
 - Sem branch remota, sem PR e sem PR que levou o conteúdo: ela fica, porque o commit só existe nesta máquina, e a resposta traz uma linha com o link e esse motivo.
 - A branch é de outra sessão ou de outra ferramenta: ela entra na conferência como qualquer outra.
 - A sessão ainda não enviou o trabalho: a cópia fica até o commit chegar ao GitHub.
@@ -158,7 +186,13 @@ Só a cópia principal existia, e sobraram quatro branches `renovate/*`. Três P
 
 - A remoção sem forçar recusa a cópia que tem `node_modules` ou `.venv` fora do git. Force só depois que o Passo 3 aprovou a cópia.
 - O link de `node_modules` que `criar-copia-de-trabalho` faz aparece como `?? node_modules`, sem a barra final de uma pasta. O filtro da conferência aceita as duas formas.
-- Depois de um merge com squash, o GitHub apaga a branch remota e a branch local não aparece como mesclada. Só o estado do PR diz que o trabalho entrou. Comportamento de produto que ficou de fora parece motivo para esta máquina guardar a branch de outra pessoa. Se o commit está no GitHub e a pessoa não está continuando o trabalho, pode apagar. "Faz menos" parece quantidade de commits ou de comportamento. A frase de processo fala dos commits. A frase de produto nomeia a tela, a ação e de quem é o trabalho.
+- Depois de um merge com squash, o GitHub apaga a branch remota e a branch local não aparece como mesclada.
+- Só o estado do PR diz que o trabalho entrou.
+- Comportamento de produto que ficou de fora parece motivo para esta máquina guardar a branch de outra pessoa.
+- Se o commit está no GitHub e a pessoa não está continuando o trabalho, pode apagar.
+- "Faz menos" parece quantidade de commits ou de comportamento.
+- A frase de processo fala dos commits.
+- A frase de produto nomeia a tela, a ação e de quem é o trabalho.
 - A remoção leve da branch local recusa a branch mesclada por squash. Remova forçando, só depois de conferir o PR.
 - `git cherry` marca com `+` o commit de uma branch cujo conteúdo entrou por squash ou por outro PR, porque o patch não é o mesmo. Confira pelos arquivos e pelo histórico deles na base.
 - A pasta atual da sessão não pode ser removida: o shell perde o diretório de trabalho.
