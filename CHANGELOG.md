@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.45.0](https://github.com/jimmyandrade/harness/compare/v1.44.0...v1.45.0) (2026-11-03)
+
+
+### Features
+
+* export the vocabulary MCP server as harness/vocabulary/mcp ([#778](https://github.com/jimmyandrade/harness/issues/778)) ([f3e5efd](https://github.com/jimmyandrade/harness/commit/f3e5efde4b35e83b9a50ffb6d864bad454ef4c47))
+
 ## [1.44.0](https://github.com/jimmyandrade/harness/compare/v1.43.0...v1.44.0) (2026-11-03)
 
 
