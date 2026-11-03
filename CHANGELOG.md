@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.46.0](https://github.com/jimmyandrade/harness/compare/v1.45.0...v1.46.0) (2026-11-03)
+
+
+### Features
+
+* serve the vocabulary over HTTP with the Streamable HTTP transport of the MCP SDK ([#784](https://github.com/jimmyandrade/harness/issues/784)) ([701acbd](https://github.com/jimmyandrade/harness/commit/701acbd6b44a3db1f81e535b893dc3ef3de300cf))
+
 ## [1.45.0](https://github.com/jimmyandrade/harness/compare/v1.44.0...v1.45.0) (2026-11-03)
 
 
