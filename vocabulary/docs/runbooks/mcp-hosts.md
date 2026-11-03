@@ -109,6 +109,29 @@ On Linux the extension file is under `~/.config/Code/User/globalStorage/saoudriz
 
 Check: `readlink` on that file prints the path of `.agents/mcp.json`.
 
+## Serve the server over HTTP
+
+A host that cannot start a local process, such as an agent in a web app, reaches the server over HTTP. `createVocabularyHttpHandler` of `harness/vocabulary/mcp-http` serves it over the Streamable HTTP transport of the MCP SDK, stateless and with JSON responses. It takes a Web Standard `Request` and returns a `Response`, so a Vercel function is the handler itself:
+
+```ts
+// api/vocabulary.ts
+import { fileURLToPath } from "node:url"
+
+import { createVocabularyHttpHandler } from "harness/vocabulary/mcp-http"
+
+const handler = createVocabularyHttpHandler(fileURLToPath(new URL("../.agents/glossary", import.meta.url)))
+
+export const POST = handler
+export const OPTIONS = handler
+```
+
+Two environment variables of the deployment set what it allows:
+
+- `BEARER_TOKEN`: when set, a request needs `Authorization: Bearer <token>`, and any other gets 401.
+- `BLOCK_WRITE_OPERATIONS`: when `true`, the server offers no write tool, such as `write_terms`, in `tools/list`, and refuses a call to one.
+
+The transport answers the protocol: the methods it takes, the body and its size limit, and the JSON-RPC errors. The handler adds the CORS headers of `VOCABULARY_CORS`, or the ones passed as `cors`, to every response.
+
 ## Confirm in a host
 
 Restart the host and ask it to look up a term of the glossary.
