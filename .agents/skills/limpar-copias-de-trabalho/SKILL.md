@@ -3,7 +3,7 @@ name: limpar-copias-de-trabalho
 description: Remove as cópias de trabalho do git e as branches locais já mescladas na base, inclusive as de outras sessões, depois de conferir que nada se perde. Usada ao terminar o trabalho de uma sessão ou quando sobram cópias de trabalho ou branches locais de código. Não serve para liberar espaço em disco em geral nem para apagar arquivo da pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.5.3"
+  version: "0.5.4"
   related:
     - criar-copia-de-trabalho
     - criar-pull-request
@@ -66,7 +66,7 @@ Remova as cópias aprovadas no plano, sem pedir confirmação. As conferências 
 
 ### Passo 5
 
-Responda com o espaço que voltou e uma tabela das cópias e das branches: removida ou mantida, e o motivo de cada uma, com o link do PR quando houver. Cada branch é uma linha. A que ficou porque o pull request mesclou outro commit cabe numa frase: pode apagar, ou por que fica. Pode apagar quando o commit mesclado já tem o que a branch local tem. Ajuste que só existe no commit mesclado não mantém a branch e não entra na frase. Fica quando a branch local tem comportamento que o commit mesclado não tem, e a frase diz qual. Branch remota ausente e pull request mesclado quer dizer isto, na mesma frase: o pull request aceitou um commit na base e o GitHub apagou o nome da branch. Apagar o nome não leva a ponta local para a base. Não descreva arquivo, commit nem o que entrou depois na base. Não junte o conjunto numa frase e não ofereça listá-lo num turno seguinte.
+Responda com o espaço que voltou e uma tabela das cópias e das branches: removida ou mantida, e o motivo de cada uma, com o link do PR quando houver. Cada branch é uma linha. A que ficou porque o pull request mesclou outro commit cabe numa frase: pode apagar, ou por que fica. Pode apagar quando o commit mesclado já tem o que a branch local tem. Ajuste que só existe no commit mesclado não mantém a branch e não entra na frase. Fica quando a branch local tem comportamento que o resultado aprovado não tem, e a frase diz o que a pessoa faz nesse caso. Branch remota ausente e pull request mesclado é o fim normal de um pull request mesclado. Num merge com squash, o resultado aprovado entra na base num commit só e os commits de quem abriu a branch ficam de fora. Não troque isso por "aceitou um commit", "apagou o nome" nem pelo título do commit. Não descreva arquivo, commit nem o que entrou depois na base. Não junte o conjunto numa frase e não ofereça listá-lo num turno seguinte.
 
 ### Passo 6
 
@@ -123,7 +123,7 @@ Se você tratar a falta da branch remota como trabalho perdido, mantém para sem
 2. Mesclado, ou aberto com o commit no remoto: o trabalho está no GitHub, e a cópia pode sair se nenhuma sessão aberta usa a pasta.
 3. Fechado sem merge, com o mesmo commit da branch local: o commit fica na referência do PR, e a branch pode sair.
 4. Sem PR e sem branch remota: a cópia fica.
-5. Na resposta, o par branch remota ausente e pull request mesclado sai por extenso: o pull request aceitou um commit na base e o GitHub apagou o nome. Apagar o nome não leva a ponta local para a base. A frase segue com pode apagar ou com o comportamento que só existe nela.
+5. Na resposta, branch remota ausente e pull request mesclado sai como o fim normal de um pull request mesclado. Se o merge foi squash, diga que o resultado aprovado entrou na base num commit só e que os commits de quem abriu a branch ficaram de fora. Diga o que a pessoa faz na ponta local que esse resultado não faz. Não use "aceitou um commit", "apagou o nome" nem o título do commit.
 
 ## Exemplos de entrada e saída
 
@@ -144,7 +144,7 @@ Só a cópia principal existia, e sobraram quatro branches `renovate/*`. Três P
 ## Casos-limite
 
 - O repositório só tem a cópia principal e nenhuma branch local sobrando: não há o que remover. Diga isso numa linha.
-- O pull request mesclou outro commit: a branch fica até a pessoa apagar. A linha diz que o pull request aceitou um commit na base e o GitHub apagou o nome da branch, e em seguida se pode apagar, porque o conteúdo já está nesse commit, ou por que fica, o comportamento que só existe nela.
+- O pull request mesclou outro commit: a branch fica até a pessoa apagar. A linha diz que o pull request chegou ao fim normal. Em squash, o resultado aprovado entrou na base num commit só e os commits de quem abriu a branch ficaram de fora. Em seguida diz se pode apagar, porque esse resultado já tem o que a branch local tem, ou o que a pessoa faz na ponta local que o resultado não faz.
 - Sem branch remota, sem PR e sem PR que levou o conteúdo: ela fica, porque o commit só existe nesta máquina, e a resposta traz uma linha com o link e esse motivo.
 - A branch é de outra sessão ou de outra ferramenta: ela entra na conferência como qualquer outra.
 - A sessão ainda não enviou o trabalho: a cópia fica até o commit chegar ao GitHub.
@@ -157,7 +157,7 @@ Só a cópia principal existia, e sobraram quatro branches `renovate/*`. Três P
 
 - A remoção sem forçar recusa a cópia que tem `node_modules` ou `.venv` fora do git. Force só depois que o Passo 3 aprovou a cópia.
 - O link de `node_modules` que `criar-copia-de-trabalho` faz aparece como `?? node_modules`, sem a barra final de uma pasta. O filtro da conferência aceita as duas formas.
-- Depois de um merge com squash, o GitHub apaga a branch remota e a branch local não aparece como mesclada. Só o estado do PR diz que o trabalho entrou. Dizer só que a branch remota sumiu deixa a pessoa sem o sentido: o nome saiu, e a ponta local pode ter ficado de fora do commit aceito.
+- Depois de um merge com squash, o GitHub apaga a branch remota e a branch local não aparece como mesclada. Só o estado do PR diz que o trabalho entrou. "Aceitou um commit", "apagou o nome da branch" e o título do commit parecem a explicação. A pessoa entende "fim normal de um pull request mesclado". A frase usa isso, diz se foi squash, e diz o que a pessoa faz na ponta local que o resultado aprovado não faz.
 - A remoção leve da branch local recusa a branch mesclada por squash. Remova forçando, só depois de conferir o PR.
 - `git cherry` marca com `+` o commit de uma branch cujo conteúdo entrou por squash ou por outro PR, porque o patch não é o mesmo. Confira pelos arquivos e pelo histórico deles na base.
 - A pasta atual da sessão não pode ser removida: o shell perde o diretório de trabalho.
