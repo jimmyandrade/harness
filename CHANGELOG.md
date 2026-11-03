@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.46.2](https://github.com/jimmyandrade/harness/compare/v1.46.1...v1.46.2) (2026-11-03)
+
+
+### Bug Fixes
+
+* **limpar-copias-de-trabalho:** say whether a diverged branch can be deleted ([#790](https://github.com/jimmyandrade/harness/issues/790)) ([3f33f22](https://github.com/jimmyandrade/harness/commit/3f33f22c7b0abdceef0de584a28b74cd26dc5950))
+
 ## [1.46.1](https://github.com/jimmyandrade/harness/compare/v1.46.0...v1.46.1) (2026-11-03)
 
 
