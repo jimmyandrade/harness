@@ -23,6 +23,7 @@
   "license": "PolyForm-Noncommercial-1.0.0",
   "exports": {
     "./vocabulary/types": "./vocabulary/types.ts",
+    "./vocabulary/mcp": "./vocabulary/api/mcp/index.ts",
     "./vocabulary/mcp-http": "./vocabulary/api/shared/mcp-http.ts"
   }
 }
