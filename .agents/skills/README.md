@@ -191,7 +191,9 @@ flowchart LR
   conversar_no_whatsapp --> evoluir_habilidade
   conversar_no_whatsapp --> procurar_tarefa
   conversar_no_whatsapp --> redigir_com_tom_de_voz
+  criar_carrossel_do_instagram --> criar_ideia_de_conteudo
   criar_carrossel_do_instagram --> evoluir_habilidade
+  criar_carrossel_do_instagram --> planejar_calendario_de_conteudo
   criar_commit -.-> atualizar_branch_do_pull_request
   criar_commit -.-> criar_pull_request
   criar_commit -.-> evoluir_habilidade
