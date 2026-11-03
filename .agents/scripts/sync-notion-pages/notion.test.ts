@@ -4,7 +4,7 @@ import { join } from "node:path"
 import test from "node:test"
 
 import { blockSetting } from "./frontmatter.ts"
-import { MODEL_ICON_SETTINGS, pageIcon, statusOptions, versionStatus } from "./notion.ts"
+import { MODEL_ICON_SETTINGS, NOTION_VERSION, notionApi, pageIcon, statusOptions, versionStatus } from "./notion.ts"
 import { coreRoot, INSTRUCTIONS_FILE } from "./project.ts"
 import { block, icon, parameters } from "./fixtures.ts"
 
@@ -56,4 +56,42 @@ test("model pages read their own icon settings, with script in gray as the core 
     () => pageIcon(parameters('  "Cor do ícone dos modelos no Notion": "silver"\n'), core, MODEL_ICON_SETTINGS),
     /"Cor do ícone dos modelos no Notion" is not a Notion icon color/,
   )
+})
+
+test("the Notion client sends each call the sync makes to the endpoint and version it expects", async (t) => {
+  const requests: { method: string; url: string; version: string | null; body: unknown }[] = []
+  t.mock.method(globalThis, "fetch", async (url: string, init: RequestInit) => {
+    const headers = new Headers(init.headers)
+    requests.push({
+      method: String(init.method).toUpperCase(),
+      url: String(url),
+      version: headers.get("Notion-Version"),
+      body: init.body ? JSON.parse(String(init.body)) : undefined,
+    })
+    return new Response(JSON.stringify({ object: "list", results: [{ id: "page" }], has_more: false, next_cursor: null, id: "page" }), {
+      status: 200,
+      headers: { "content-type": "application/json" },
+    })
+  })
+  const notion = notionApi("token")
+  const properties = { Nome: { title: [{ text: { content: "criar-commit" } }] } }
+
+  const query = await notion.dataSources.query({
+    data_source_id: "source",
+    filter: { property: "Nome", title: { equals: "criar-commit" } },
+    page_size: 2,
+  })
+  await notion.pages.create({ parent: { data_source_id: "source" }, properties, markdown: "# Body", icon })
+  await notion.pages.update({ page_id: "page", properties, icon })
+  await notion.pages.updateMarkdown({ page_id: "page", type: "replace_content", replace_content: { new_str: "# Body" } })
+
+  assert.deepEqual(query.results.map((page) => page.id), ["page"])
+  assert.deepEqual(
+    requests.map(({ method, url }) => `${method} ${new URL(url).pathname}`),
+    ["POST /v1/data_sources/source/query", "POST /v1/pages", "PATCH /v1/pages/page", "PATCH /v1/pages/page/markdown"],
+  )
+  assert.ok(requests.every((request) => request.version === NOTION_VERSION))
+  assert.deepEqual(requests[0]!.body, { filter: { property: "Nome", title: { equals: "criar-commit" } }, page_size: 2 })
+  assert.deepEqual(requests[1]!.body, { parent: { data_source_id: "source" }, properties, markdown: "# Body", icon })
+  assert.deepEqual(requests[3]!.body, { type: "replace_content", replace_content: { new_str: "# Body" } })
 })
