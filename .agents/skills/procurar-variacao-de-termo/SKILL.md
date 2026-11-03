@@ -3,7 +3,7 @@ name: procurar-variacao-de-termo
 description: Use essa habilidade sempre que alguém perguntar se um termo do vocabulário do tom de voz faltou, ou quais variações de gênero, número ou grafia de um termo foram cadastradas, mesmo sem dizer variação, plural ou feminino. NÃO use para cadastrar ou atualizar o termo, escrever o texto da marca, nem inventar uma forma que a pessoa não pediu.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.5.1"
   related:
     - definir-vocabulario
     - evoluir-habilidade
@@ -41,9 +41,15 @@ Outra caixa é o mesmo termo. Acento, plural, gênero e outra palavra do mesmo a
 
 ### Passo 4
 
-Responda forma por forma. Diga quais estão cadastradas, com o estado, e quais não estão. Uma forma com mais de uma linha em `rows` responde cada linha, com as tags e o estado dela. Se a ausente é variação de um termo que já está, diga isso também.
+Responda forma por forma.
+Diga quais estão cadastradas e se a gente usa, evita ou não usa cada uma. Evite só perguntar qual é o "estado" da palavra, pois nem sempre o usuário entende esse jargão.
+Uma forma com mais de uma linha em `rows` responde cada linha, com as tags e se a gente usa, evita ou não usa.
+Se a ausente é variação de um termo que já está, diga isso também.
 
-Sugira o cadastro das ausentes e pergunte o estado de cada uma. Não grave nessa resposta. Não copie o estado do termo vizinho. Quando a pessoa escolher, o cadastro e o `related` entre as linhas seguem `definir-vocabulario`.
+Sugira o cadastro das ausentes e pergunte se a gente usa, evita ou não usa cada uma. Evite só perguntar qual é o "estado" da palavra, pois nem sempre o usuário entende esse jargão.
+Não grave nessa resposta.
+Não copie o estado do termo vizinho.
+Quando a pessoa escolher, o cadastro e o `related` entre as linhas seguem `definir-vocabulario`.
 
 ### Passo 5
 
@@ -53,18 +59,19 @@ Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ### Variação sem dizer quais faltam
 
-Se você disser que todas as formas entraram, ou gravar as ausentes com o estado do termo novo, a pessoa não escolhe o estado.
+Se você disser que todas as formas entraram, ou gravar as ausentes com o estado do termo novo, a pessoa não diz se usa, evita ou não usa.
 
 1. Pesquise cada forma de gênero, número e grafia.
 2. Diga quais estão cadastradas e quais não estão.
-3. Sugira o cadastro das ausentes e pergunte o estado de cada uma. Não grave nessa resposta.
+3. Sugira o cadastro das ausentes e pergunte se a gente usa, evita ou não usa cada uma. Evite só perguntar qual é o "estado" da palavra, pois nem sempre o usuário entende esse jargão.
+Não grave nessa resposta.
 
 ### Variação que faltou
 
-Se você disser que a variação já está, ou gravar o ponteiro para um termo ausente, a pessoa não escolhe o estado dessa forma.
+Se você disser que a variação já está, ou gravar o ponteiro para um termo ausente, a pessoa não diz se usa, evita ou não usa essa forma.
 
 1. Diga que o termo não existe.
-2. Sugira o cadastro, com o estado que ela escolher.
+2. Sugira o cadastro e pergunte se a gente usa, evita ou não usa. Evite só perguntar qual é o "estado" da palavra, pois nem sempre o usuário entende esse jargão.
 3. Só depois do cadastro o `related` aponta de uma linha para a outra.
 
 ## Exemplos de entrada e saída
@@ -73,7 +80,7 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### Quais variações de casa e moradias?
 
-Casa e moradias acabaram de entrar. Pesquisei casas e moradia. Nenhuma das duas estava. Disse isso e perguntei o estado de cada uma. Não gravei.
+Casa e moradias acabaram de entrar. Pesquisei casas e moradia. Nenhuma das duas estava. Disse isso e perguntei se a gente usa, evita ou não usa cada uma. Não gravei.
 
 ### Faltou casas?
 
@@ -82,16 +89,17 @@ A busca não achou casas. Casa já estava. Disse que casas não existe, que é o
 ## Casos-limite
 
 - A pessoa pergunta se um termo faltou e ele não existe: diga isso e sugira o cadastro.
-- A pessoa pergunta as variações de um termo que acabou de entrar: diga quais estão e quais não estão. Sugira o cadastro das ausentes e pergunte o estado.
+- A pessoa pergunta as variações de um termo que acabou de entrar: diga quais estão e quais não estão.
+Sugira o cadastro das ausentes e pergunte se a gente usa, evita ou não usa. Evite só perguntar qual é o "estado" da palavra, pois nem sempre o usuário entende esse jargão.
 - A forma só muda a caixa: é o mesmo termo. Diga que ele já está.
 - A forma só muda o acento: é outro termo. Pesquise e diga se ele está.
-- A pessoa responde o estado das formas ausentes: siga `definir-vocabulario`.
+- A pessoa responde se usa, evita ou não usa as formas ausentes: siga `definir-vocabulario`.
 - Sem terminal e sem o servidor `vocabulary`: pare. Não responda de memória.
 
 ## Pegadinhas
 
 - Uma variação ausente parece já ligada pela palavra vizinha. Ela não existe até ser cadastrada. `related` não a cria.
-- O termo que acabou de entrar parece levar as variações junto. Cada forma só está se a consulta achar a linha dela. A ausente espera o estado.
+- O termo que acabou de entrar parece levar as variações junto. Cada forma só está se a consulta achar a linha dela. A ausente espera a pessoa dizer se a gente usa, evita ou não usa.
 - Roles e rolês parecem a mesma palavra sem acento. O acento muda a palavra, como o cedilha muda casa e caça. São duas linhas.
 
 ## Scripts disponíveis
