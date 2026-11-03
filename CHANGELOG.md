@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.46.3](https://github.com/jimmyandrade/harness/compare/v1.46.2...v1.46.3) (2026-11-03)
+
+
+### Bug Fixes
+
+* **limpar-copias-de-trabalho:** drop another person's branch when the commit is on GitHub ([#793](https://github.com/jimmyandrade/harness/issues/793)) ([e58ac7b](https://github.com/jimmyandrade/harness/commit/e58ac7bed3fb1e19cc2979273d1ed48bb5fa2107))
+
 ## [1.46.2](https://github.com/jimmyandrade/harness/compare/v1.46.1...v1.46.2) (2026-11-03)
 
 
