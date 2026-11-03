@@ -4,10 +4,18 @@ import { tmpdir } from "node:os"
 import { join } from "node:path"
 import test from "node:test"
 
-test("a business harness imports the vocabulary server from harness/vocabulary/mcp", async () => {
-  const { encodeMessage, respond } = await import("harness/vocabulary/mcp")
-  const directory = mkdtempSync(join(tmpdir(), "glossary-"))
+import { Client } from "@modelcontextprotocol/sdk/client/index.js"
+import { InMemoryTransport } from "@modelcontextprotocol/sdk/inMemory.js"
 
-  assert.deepEqual(respond(directory, { jsonrpc: "2.0", id: 1, method: "ping" }), { jsonrpc: "2.0", id: 1, result: {} })
-  assert.equal(encodeMessage({ ok: true }).toString("utf8"), '{"ok":true}\n')
+test("a business harness creates the vocabulary server from harness/vocabulary/mcp and connects a transport", async () => {
+  const { createVocabularyServer } = await import("harness/vocabulary/mcp")
+  const server = createVocabularyServer(mkdtempSync(join(tmpdir(), "glossary-")))
+  const client = new Client({ name: "test", version: "0" })
+  const [clientSide, serverSide] = InMemoryTransport.createLinkedPair()
+  await server.connect(serverSide)
+  await client.connect(clientSide)
+
+  assert.deepEqual(await client.ping(), {})
+  assert.equal((await client.listTools()).tools.length, 8)
+  await client.close()
 })

@@ -6,8 +6,21 @@ import { spawn } from "node:child_process"
 import { fileURLToPath } from "node:url"
 import test from "node:test"
 
-import { callTool, encodeMessage, respond } from "./index.ts"
+import { Client } from "@modelcontextprotocol/sdk/client/index.js"
+import { InMemoryTransport } from "@modelcontextprotocol/sdk/inMemory.js"
+
+import { callTool, createVocabularyServer, tools } from "./index.ts"
 import { load } from "../shared/glossary.ts"
+
+const frame = (message: unknown): string => `${JSON.stringify(message)}\n`
+
+async function connectedClient(directory: string): Promise<Client> {
+  const client = new Client({ name: "test", version: "0" })
+  const [clientSide, serverSide] = InMemoryTransport.createLinkedPair()
+  await createVocabularyServer(directory).connect(serverSide)
+  await client.connect(clientSide)
+  return client
+}
 
 const BODY = {
   language: "pt-BR",
@@ -178,17 +191,17 @@ test("the server answers initialize and write_terms on stdio", async () => {
     })
   })
   child.stdin.write(
-    encodeMessage({
+    frame({
       jsonrpc: "2.0",
       id: 1,
       method: "initialize",
       params: { protocolVersion: "2024-11-05", capabilities: {}, clientInfo: { name: "test", version: "0" } },
     }),
   )
-  child.stdin.write(encodeMessage({ jsonrpc: "2.0", method: "notifications/initialized" }))
-  child.stdin.write(encodeMessage({ jsonrpc: "2.0", id: 2, method: "tools/list" }))
+  child.stdin.write(frame({ jsonrpc: "2.0", method: "notifications/initialized" }))
+  child.stdin.write(frame({ jsonrpc: "2.0", id: 2, method: "tools/list" }))
   child.stdin.write(
-    encodeMessage({
+    frame({
       jsonrpc: "2.0",
       id: 3,
       method: "tools/call",
@@ -204,18 +217,34 @@ test("the server answers initialize and write_terms on stdio", async () => {
     )
     const payload = JSON.parse(frames[2]?.result?.content?.[0]?.text ?? "{}")
     assert.equal(payload.inserted.length, 1)
-    assert.equal(respond(root, { jsonrpc: "2.0", id: 3, method: "tools/list" }) !== undefined, true)
   } finally {
     child.kill()
   }
 })
 
-test("initialize reports the version in package.json", () => {
+test("initialize reports the version in package.json", async () => {
   const { version } = JSON.parse(readFileSync(new URL("../../../package.json", import.meta.url), "utf8")) as { version: string }
-  const response = respond(tmpdir(), { jsonrpc: "2.0", id: 1, method: "initialize", params: {} }) as {
-    result?: { serverInfo?: { name: string; version: string } }
-  }
-  assert.deepEqual(response.result?.serverInfo, { name: "vocabulary", version })
+  const client = await connectedClient(tmpdir())
+  assert.deepEqual(client.getServerVersion(), { name: "vocabulary", version })
+  await client.close()
+})
+
+test("tools/list serves the hand-written tool schemas unchanged, and a tool call answers through the SDK", async () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  writeFileSync(join(root, "pt-BR.json"), "{}\n")
+  const client = await connectedClient(root)
+  assert.deepEqual((await client.listTools()).tools, tools)
+  const written = await client.callTool({ name: "write_terms", arguments: BODY })
+  assert.equal(JSON.parse((written.content as { text: string }[])[0]?.text ?? "{}").inserted.length, 1)
+  const looked = await client.callTool({ name: "lookup_term", arguments: { language: "pt-BR", term: "\u2026" } })
+  assert.equal(JSON.parse((looked.content as { text: string }[])[0]?.text ?? "{}").exists, true)
+  await client.close()
+})
+
+test("an unknown method is a JSON-RPC method-not-found error from the SDK", async () => {
+  const client = await connectedClient(tmpdir())
+  await assert.rejects(client.request({ method: "nope" } as never, (await import("zod")).z.object({})), /-32601|Method not found/)
+  await client.close()
 })
 
 test("write_terms keeps tags and lookup_term and exists_in_text filter by them", () => {
@@ -372,7 +401,7 @@ test("write_terms with dry_run reports the write and leaves the glossary unchang
   assert.deepEqual(body.refused, [{ term: "casa", reason: '"casa" cannot be its own example.' }])
   assert.deepEqual(body.incomplete, [{ term: "baratinho", missing: ["substitution"] }])
   assert.equal(readFileSync(file, "utf8"), "{}\n")
-  const tool = (respond(root, { jsonrpc: "2.0", id: 1, method: "tools/list" }) as { result: { tools: { name: string; description: string }[] } }).result.tools.find((item) => item.name === "write_terms")
+  const tool = tools.find((item) => item.name === "write_terms")
   assert.match(tool?.description ?? "", /cannot be its own example/)
   assert.match(tool?.description ?? "", /no when and no tags/)
 })
