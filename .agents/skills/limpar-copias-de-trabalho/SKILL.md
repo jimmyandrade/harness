@@ -3,7 +3,7 @@ name: limpar-copias-de-trabalho
 description: Remove as cópias de trabalho do git e as branches locais já mescladas na base, inclusive as de outras sessões, depois de conferir que nada se perde. Usada ao terminar o trabalho de uma sessão ou quando sobram cópias de trabalho ou branches locais de código. Não serve para liberar espaço em disco em geral nem para apagar arquivo da pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.5.1"
   related:
     - criar-copia-de-trabalho
     - criar-pull-request
@@ -66,7 +66,7 @@ Remova as cópias aprovadas no plano, sem pedir confirmação. As conferências 
 
 ### Passo 5
 
-Responda com o espaço que voltou e uma tabela das cópias e das branches: removida ou mantida, e o motivo de cada uma, com o link do PR quando houver.
+Responda com o espaço que voltou e uma tabela das cópias e das branches: removida ou mantida, e o motivo de cada uma, com o link do PR quando houver. Cada branch é uma linha, também a que ficou porque o pull request mesclou outro commit. Não junte esse conjunto numa frase e não ofereça listá-lo num turno seguinte.
 
 ### Passo 6
 
@@ -105,7 +105,7 @@ Se você listar as branches locais de outras tarefas como "não toquei", a pesso
 
 1. Confira toda branch local contra a base no fim de toda sessão, mesmo a que outra sessão criou.
 2. Remova a que passou no Passo 3.
-3. Na resposta, cada branch tem uma decisão. Nenhuma fica sem decisão.
+3. Na resposta, cada branch é uma linha da tabela, com a decisão e o link do PR quando houver. A que ficou porque o pull request mesclou outro commit entra do mesmo jeito. Não junte o conjunto numa frase e não ofereça listá-lo depois.
 
 ### Branch remota apagada
 
@@ -135,7 +135,7 @@ Só a cópia principal existia, e sobraram quatro branches `renovate/*`. Três P
 ## Casos-limite
 
 - O repositório só tem a cópia principal e nenhuma branch local sobrando: não há o que remover. Diga isso numa linha.
-- A branch local tem commit além do commit do PR, ou nenhuma branch remota, nenhum PR e nenhum PR que levou o conteúdo a contêm: ela fica, porque o commit só existe nesta máquina.
+- A branch local tem commit além do commit do PR, o pull request mesclou outro commit, ou nenhuma branch remota, nenhum PR e nenhum PR que levou o conteúdo a contêm: ela fica, porque o commit só existe nesta máquina, e a resposta traz uma linha com o link e esse motivo.
 - A branch é de outra sessão ou de outra ferramenta: ela entra na conferência como qualquer outra.
 - A sessão ainda não enviou o trabalho: a cópia fica até o commit chegar ao GitHub.
 - Pull request aberto, commit no remoto e nenhuma sessão aberta usa a pasta: a cópia pode sair. O pull request continua no GitHub.
@@ -152,6 +152,7 @@ Só a cópia principal existia, e sobraram quatro branches `renovate/*`. Três P
 - `git cherry` marca com `+` o commit de uma branch cujo conteúdo entrou por squash ou por outro PR, porque o patch não é o mesmo. Confira pelos arquivos e pelo histórico deles na base.
 - A pasta atual da sessão não pode ser removida: o shell perde o diretório de trabalho.
 - "Não conferi a sessão" ou "não achei o pull request" parece motivo para manter. Não é conferência. A conferência é a lista de sessões e a lista de pull requests abertos e mesclados.
+- Um conjunto grande de branches mantidas parece caber numa frase, com a oferta de listar depois. Cada uma continua uma linha da tabela.
 
 ## Scripts disponíveis
 
