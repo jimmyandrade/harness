@@ -452,9 +452,11 @@ flowchart LR
   levantar_ambiente_do_repositorio --> escrever_teste
   levantar_ambiente_do_repositorio --> evoluir_habilidade
   levantar_ambiente_do_repositorio --> levantar_contexto_do_pull_request
+  levantar_contexto_do_pull_request --> criar_pull_request
   levantar_contexto_do_pull_request --> definir_registro_de_reuniao
   levantar_contexto_do_pull_request --> evoluir_habilidade
   levantar_contexto_do_pull_request --> levantar_ambiente_do_repositorio
+  levantar_contexto_do_pull_request --> mesclar_pull_request
   liberar_espaco_em_disco --> evoluir_habilidade
   liberar_espaco_em_disco --> limpar_copias_de_trabalho
   limpar_copias_de_trabalho --> criar_copia_de_trabalho

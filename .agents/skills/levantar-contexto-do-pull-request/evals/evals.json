@@ -1,4 +1,11 @@
 {
   "skill_name": "levantar-contexto-do-pull-request",
-  "evals": []
+  "evals": [
+    {
+      "id": "pr-colado-sem-rotulo-que-sirva",
+      "prompt": "https://github.com/jimmyandrade/ornii-designer/pull/1",
+      "expected_output": "A ficha abre com o estado: PR aberto, pronto, do Renovate, configurando o bot, com o check Mergeable verde e sem rótulo. Os rótulos do repositório são lidos e nenhum descreve a configuração de dependências, então a resposta sugere um rótulo novo, dependencies, e o mais próximo que existe, enhancement, e pergunta qual usar. A proposta de merge só vem depois que a pessoa escolhe, o rótulo é criado e aplicado ao PR.",
+      "files": []
+    }
+  ]
 }

@@ -3,11 +3,13 @@ name: levantar-contexto-do-pull-request
 description: Levanta o contexto de um pull request antes de revisar, responder ou ajustar. Cobre o estado, as convenções do repositório, os comentários já feitos, o card e as conversas ligados, o propósito e o trabalho parecido. Usada em PR de outra pessoa e no seu. Não serve para revisar o diff nem publicar texto.
 metadata:
   author: jimmyandrade
-  version: "0.5.1"
+  version: "0.6.1"
   related:
+    - criar-pull-request
     - definir-registro-de-reuniao
     - evoluir-habilidade
     - levantar-ambiente-do-repositorio
+    - mesclar-pull-request
 ---
 
 # Levantar contexto do pull request
@@ -30,13 +32,17 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Buscar o refinamento técnico": "não"
 # `Criar o registro de refinamento que falta` é `sim`, `perguntar` ou `não`, e só vale quando a busca não achou nada. Um valor vazio usa só o que o PR cita.
 "Criar o registro de refinamento que falta": "não"
+# `Rótulo do PR sem rótulo` é `aplicar` ou `sugerir`: com `aplicar`, o Passo 1 põe no PR o rótulo que serve quando você pode escrever no repositório. Com `sugerir`, só sugere.
+"Rótulo do PR sem rótulo": "aplicar"
 "Modo de aprendizado": "perguntar"
 ```
 ## Instruções
 
 ### Passo 1
 
-Peça o número ou o link do pull request. Veja o estado dele: aberto, mesclado ou fechado, rascunho ou pronto, autor, etiquetas e checks. Diga o estado logo na primeira linha. Um PR mesclado ou fechado muda o que vale a pena fazer: avise quem chamou antes de seguir.
+Peça o número ou o link do pull request. Veja o estado dele: aberto, mesclado ou fechado, rascunho ou pronto, autor, rótulos e checks. Diga o estado logo na primeira linha. Um PR mesclado ou fechado muda o que vale a pena fazer: avise quem chamou antes de seguir.
+
+Um PR aberto sem rótulo recebe um antes de qualquer proposta de merge. Leia os rótulos do repositório e escolha o que descreve a mudança pelo tipo do Conventional Commits, como `criar-pull-request` manda: `fix` usa o de bug, `docs` o de documentação. Sem tipo no título, o tipo segue o que a mudança faz. Com `Rótulo do PR sem rótulo` em `aplicar` e permissão de escrita, aplique o rótulo e diga qual. Com `sugerir`, sem permissão ou sem rótulo que sirva, sugira o rótulo, o mais próximo ou um novo, e pergunte. A proposta de merge espera o rótulo.
 
 Liste os checks pelo nome, com o resultado de cada um: passou, falhou ou pendente. Não conclua sobre um check pendente.
 
@@ -99,7 +105,7 @@ Cite cada achado pelo endereço do PR ou do arquivo. Quando dois PRs criam o mes
 
 Entregue a ficha, com uma seção por passo: estado e checks, convenções, comentários existentes, card e conversas com a visibilidade de cada fonte, a frase de propósito com as três perguntas, o refinamento técnico quando a busca está ligada, e o que existe além do diff. Em cada seção que não achou nada, escreva "Não achei".
 
-Comece pelo que muda o que quem chamou vai fazer. A ficha não opina sobre o diff nem escreve texto para publicar.
+Comece pelo que muda o que quem chamou vai fazer. O rótulo aplicado ou sugerido no Passo 1 vem antes de qualquer proposta de merge. A ficha não opina sobre o diff nem escreve texto para publicar.
 
 ### Passo 8
 
@@ -130,6 +136,14 @@ Se você misturar conversa privada com pública sem marcar, quem chama cita o qu
 1. Marque a visibilidade de cada fonte.
 2. Deixe o conteúdo privado só como calibragem.
 
+### Merge proposto sem rótulo
+
+Se você propuser o merge de um PR sem rótulo, ele entra na base sem a classificação que as notas da release e os filtros usam.
+
+1. Leia os rótulos do repositório.
+2. Aplique o que serve ou sugira um, conforme `Rótulo do PR sem rótulo`.
+3. Só então proponha o merge.
+
 ### Comentários que ficaram de fora
 
 Se você ler só as threads de revisão, perde o resumo que um bot publica no corpo da revisão e os comentários gerais.
@@ -156,6 +170,8 @@ O PR é seu e está aberto. Há quatro comentários: dois de pessoas, um de bot,
 - O PR é um rascunho: diga isso na primeira linha.
 - O repositório está fora dos `Repositórios vizinhos`: procure só no próprio repositório.
 - A fonte exige acesso que você não tem: diga qual fonte não abriu e siga.
+- O PR está sem rótulo e nenhum do repositório serve: sugira o mais próximo ou um novo e pergunte antes de propor o merge. Não crie o rótulo sem a resposta.
+- O PR já tem rótulo: não troque nem acrescente.
 
 ## Pegadinhas
 
@@ -165,9 +181,11 @@ O PR é seu e está aberto. Há quatro comentários: dois de pessoas, um de bot,
 - Um check pendente não é um check que falhou.
 - Dois PRs que criam o mesmo arquivo a partir da mesma base conflitam no segundo a entrar.
 - O mesmo assunto pode estar numa conversa pública e numa privada. Cite só a pública.
+- Um PR de bot, como o que configura uma ferramenta de dependências, costuma vir sem tipo no título e sem rótulo. O tipo segue o que a mudança faz.
 
 ## Scripts disponíveis
 
-- Nenhum.
+- `gh label list --repo <repositório>`: rótulos do Passo 1.
+- `gh pr edit <número> --repo <repositório> --add-label <rótulo>`: aplica o rótulo no Passo 1.
 
-1. Não há script para executar.
+1. Leia os rótulos e aplique o que serve quando o Passo 1 manda.
