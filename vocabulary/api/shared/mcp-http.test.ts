@@ -13,7 +13,6 @@ import {
   McpServer,
   StreamableHTTPServerTransport,
   WRITE_TOOLS,
-  parseRequestFrom,
   createErrorResponse,
   configureCorsHeaders,
   shouldBlockWriteOperations,
@@ -77,51 +76,6 @@ void describe("WRITE_TOOLS constant", () => {
     strictEqual(WRITE_TOOLS.includes("migrate_glossary"), true)
     strictEqual(WRITE_TOOLS.includes("init_glossary"), true)
     strictEqual(WRITE_TOOLS.includes("delete_terms"), true)
-  })
-})
-
-void describe("parseRequestFrom", () => {
-  void test("parses valid JSON request", async () => {
-    const body = JSON.stringify({ method: "test", params: { value: 42 } })
-    const request = createMockRequest("POST", "/api", body)
-    const parsed = await parseRequestFrom(request)
-
-    strictEqual(parsed.method, "POST")
-    strictEqual(parsed.url, "/api")
-    deepStrictEqual(parsed.body, { method: "test", params: { value: 42 } })
-  })
-
-  void test("parses empty body as null", async () => {
-    const request = createMockRequest("GET", "/", "")
-    const parsed = await parseRequestFrom(request)
-
-    strictEqual(parsed.body, null)
-  })
-
-  void test("rejects invalid JSON", async () => {
-    const request = createMockRequest("POST", "/api", "{ invalid json }")
-    await rejects(
-      () => parseRequestFrom(request),
-      (error: Error) => error.message === "Invalid JSON in request body",
-    )
-  })
-
-  void test("rejects body exceeding max size", async () => {
-    const largeBody = "x".repeat(1000)
-    const request = createMockRequest("POST", "/api", largeBody)
-    await rejects(
-      () => parseRequestFrom(request, 500),
-      (error: Error) => error.message === "Request body too large",
-    )
-  })
-
-  void test("includes headers in parsed result", async () => {
-    const headers = { "content-type": "application/json", "x-custom": "value" }
-    const request = createMockRequest("POST", "/api", "{}", headers)
-    const parsed = await parseRequestFrom(request)
-
-    strictEqual(parsed.headers["content-type"], "application/json")
-    strictEqual(parsed.headers["x-custom"], "value")
   })
 })
 

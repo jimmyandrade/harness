@@ -223,15 +223,27 @@ export const tools = [
 type ToolResult = { content: { type: "text"; text: string }[]; isError?: boolean }
 
 /**
+ * Options of a vocabulary server.
+ */
+export type VocabularyServerOptions = {
+  /** Whether the server offers a tool. A tool it does not offer is missing from tools/list and refused on tools/call. */
+  allowTool?: (name: string) => boolean
+}
+
+/**
  * Create the vocabulary server for one glossary directory, ready to connect to any SDK transport.
  *
  * @param directory - Directory with the glossary JSON files
+ * @param options - Which tools the server offers; every tool by default
  * @returns The SDK server, with the tool list and the tool calls of the vocabulary
  */
-export function createVocabularyServer(directory: string): Server {
+export function createVocabularyServer(directory: string, options: VocabularyServerOptions = {}): Server {
+  const allowTool = options.allowTool ?? (() => true)
   const server = new Server(versionInfo(), { capabilities: { tools: {} } })
-  server.setRequestHandler(ListToolsRequestSchema, () => ({ tools }))
-  server.setRequestHandler(CallToolRequestSchema, (request) => callTool(directory, request.params))
+  server.setRequestHandler(ListToolsRequestSchema, () => ({ tools: tools.filter((tool) => allowTool(tool.name)) }))
+  server.setRequestHandler(CallToolRequestSchema, (request) =>
+    allowTool(request.params.name) ? callTool(directory, request.params) : failure("This tool is not offered by this server."),
+  )
   return server
 }
 
