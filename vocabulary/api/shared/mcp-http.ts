@@ -3,11 +3,16 @@
  *
  * Protocol types, JSON-RPC error codes, the server, and the Streamable HTTP
  * transport come from `@modelcontextprotocol/sdk`. This module keeps only what
- * that package does not export: a body size limit, CORS header fields, the
- * write-tool gate, and the bearer token check.
+ * that package does not export: CORS header fields, the write-tool gate, and the
+ * bearer token check, and `createVocabularyHttpHandler`, which serves the
+ * vocabulary server over the SDK's Streamable HTTP transport with them.
  */
 
 import type { IncomingMessage } from "node:http"
+
+import { WebStandardStreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js"
+
+import { createVocabularyServer } from "../mcp/index.ts"
 
 export { ErrorCode, McpError } from "@modelcontextprotocol/sdk/types.js"
 export { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js"
@@ -27,16 +32,6 @@ export const HTTP_STATUS = {
 } as const
 
 export type HttpStatus = (typeof HTTP_STATUS)[keyof typeof HTTP_STATUS]
-
-/**
- * HTTP request parsing result.
- */
-export type ParsedRequest = {
-  method: string
-  url: string
-  body: unknown
-  headers: Record<string, string | string[] | undefined>
-}
 
 /**
  * Error response with HTTP status and JSON body.
@@ -83,54 +78,6 @@ export const WRITE_TOOLS = [
 ] as const
 
 export type WriteTool = (typeof WRITE_TOOLS)[number]
-
-/**
- * Parse an incoming HTTP request and extract the JSON body.
- *
- * The SDK transport accepts an already parsed body. This limit is the piece
- * it does not apply for us.
- *
- * @param request - The incoming HTTP request
- * @param maxSize - Maximum allowed body size in bytes (default: 10MB)
- * @returns Promise resolving to the parsed request
- * @throws Error if body is too large or invalid JSON
- */
-export async function parseRequestFrom(request: IncomingMessage, maxSize: number = 10 * 1024 * 1024): Promise<ParsedRequest> {
-  const chunks: Buffer[] = []
-  let received = 0
-
-  return new Promise((resolve, reject) => {
-    request.on("data", (chunk: Buffer) => {
-      received += chunk.length
-      if (received > maxSize) {
-        reject(new Error("Request body too large"))
-        request.destroy()
-        return
-      }
-      chunks.push(chunk)
-    })
-
-    request.on("end", () => {
-      try {
-        const raw = Buffer.concat(chunks).toString("utf8")
-        const body: unknown = raw.length > 0 ? JSON.parse(raw) : null
-
-        resolve({
-          method: request.method ?? "GET",
-          url: request.url ?? "/",
-          body,
-          headers: request.headers as Record<string, string | string[] | undefined>,
-        })
-      } catch {
-        reject(new Error("Invalid JSON in request body"))
-      }
-    })
-
-    request.on("error", (error) => {
-      reject(error)
-    })
-  })
-}
 
 /**
  * Create a standard HTTP error response with appropriate status code.
@@ -214,7 +161,7 @@ export function isWriteTool(toolName: string): boolean {
  * @param request - The incoming HTTP request
  * @returns null if valid or authentication disabled, ErrorResponse if invalid
  */
-export function validateBearerToken(request: IncomingMessage): ErrorResponse | null {
+export function validateBearerToken(request: Pick<IncomingMessage, "headers">): ErrorResponse | null {
   const expectedToken = process.env.BEARER_TOKEN
 
   if (expectedToken === undefined || expectedToken === "") {
@@ -263,3 +210,61 @@ export function createAuthChecker(validator: (request: IncomingMessage) => Error
  * Use this when authentication is not required.
  */
 export const noAuth: AuthChecker = () => null
+
+/**
+ * Options of the HTTP handler of the vocabulary.
+ */
+export type VocabularyHttpOptions = {
+  /** CORS headers of every response. */
+  cors?: CorsOptions
+}
+
+/**
+ * CORS headers of a vocabulary server that takes MCP requests over POST from any origin.
+ */
+export const VOCABULARY_CORS: CorsOptions = {
+  origin: "*",
+  methods: ["POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization", "Mcp-Protocol-Version"],
+}
+
+/**
+ * Create an HTTP handler that serves the vocabulary of a glossary over the SDK's Streamable HTTP transport.
+ *
+ * The handler takes a Web Standard `Request` and returns a `Response`, as a Vercel or Netlify function does.
+ * It runs stateless, with JSON responses, and builds a new server for each request. It answers a preflight,
+ * checks the token in BEARER_TOKEN, and offers no write tool while BLOCK_WRITE_OPERATIONS is true. The
+ * transport handles the methods, the body, its size limit, and the protocol errors.
+ *
+ * @param glossaryDir - Directory with the glossary JSON files
+ * @param options - CORS options of the responses
+ * @returns The handler
+ */
+export function createVocabularyHttpHandler(
+  glossaryDir: string,
+  options: VocabularyHttpOptions = {},
+): (request: Request) => Promise<Response> {
+  const cors = configureCorsHeaders(options.cors ?? VOCABULARY_CORS)
+  const withCors = (response: Response): Response => {
+    const headers = new Headers(response.headers)
+    for (const [name, value] of Object.entries(cors)) headers.set(name, value)
+    return new Response(response.body, { status: response.status, statusText: response.statusText, headers })
+  }
+
+  return async (request) => {
+    if (request.method === "OPTIONS") return withCors(new Response(null, { status: 204 }))
+
+    const authError = validateBearerToken({ headers: { authorization: request.headers.get("authorization") ?? undefined } })
+    if (authError !== null) return withCors(Response.json(authError.body, { status: authError.status }))
+
+    const writable = !shouldBlockWriteOperations()
+    const server = createVocabularyServer(glossaryDir, { allowTool: (name) => writable || !isWriteTool(name) })
+    const transport = new WebStandardStreamableHTTPServerTransport({ sessionIdGenerator: undefined, enableJsonResponse: true })
+    await server.connect(transport)
+    try {
+      return withCors(await transport.handleRequest(request))
+    } finally {
+      await server.close()
+    }
+  }
+}

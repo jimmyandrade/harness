@@ -222,11 +222,11 @@ export type InitRequest = {
 // Protocol types and the transport come from the SDK through this module.
 export type {
   HttpStatus,
-  ParsedRequest,
   ErrorResponse,
   CorsOptions,
   AuthChecker,
   WriteTool,
+  VocabularyHttpOptions,
 } from "./api/shared/mcp-http.ts"
 
 export {
@@ -236,7 +236,8 @@ export {
   StreamableHTTPServerTransport,
   HTTP_STATUS,
   WRITE_TOOLS,
-  parseRequestFrom,
+  VOCABULARY_CORS,
+  createVocabularyHttpHandler,
   createErrorResponse,
   configureCorsHeaders,
   shouldBlockWriteOperations,
