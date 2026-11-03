@@ -3,7 +3,7 @@ name: limpar-copias-de-trabalho
 description: Remove as cópias de trabalho do git e as branches locais já mescladas na base, inclusive as de outras sessões, depois de conferir que nada se perde. Usada ao terminar o trabalho de uma sessão ou quando sobram cópias de trabalho ou branches locais de código. Não serve para liberar espaço em disco em geral nem para apagar arquivo da pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.5.7"
+  version: "0.5.8"
   related:
     - criar-copia-de-trabalho
     - criar-pull-request
@@ -78,13 +78,12 @@ Processo: o pull request chegou ao fim normal.
 Num merge com squash, entra na base um commit só, e os commits de quem abriu a branch não entram na base.
 Se esse commit está no GitHub, guardar a branch aqui não continua o trabalho de outra pessoa.
 Produto: nomeie a tela e a ação de quem compra, diga de quem é o trabalho, e diga que é o produto.
-Essa frase informa.
-Ela não segura a branch, salvo se a pessoa está continuando esse trabalho.
+Essa frase informa e não segura a branch, salvo se a pessoa está continuando esse trabalho.
 Fica só quando o commit não está no GitHub.
-"Faz menos" mistura processo e produto.
-Não use.
+Não use termos como "faz menos que".
+Ao descrever o que uma branch ou um pull request faz, separe a explicação do produto da explicação sobre o processo que levou ao clone, ao commit ou ao merge.
 Não troque o processo por "aceitou um commit", "apagou o nome" nem pelo título do commit.
-Não descreva arquivo, commit nem o que entrou depois na base.
+Não liste, sem a pessoa pedir, todos os arquivos e commits envolvidos: a explicação fica longa.
 Não junte o conjunto numa frase e não ofereça listá-lo num turno seguinte.
 
 ### Passo 6
@@ -124,7 +123,9 @@ Se você listar as branches locais de outras tarefas como "não toquei", a pesso
 
 1. Confira toda branch local contra a base no fim de toda sessão, mesmo a que outra sessão criou.
 2. Remova a que passou no Passo 3.
-3. Na resposta, cada branch é uma linha da tabela, com a decisão e o link do PR quando houver. A que ficou porque o pull request mesclou outro commit entra do mesmo jeito: uma frase, pode apagar ou o comportamento que só existe nela. Não descreva o diff. Não junte o conjunto numa frase e não ofereça listá-lo depois.
+3. Na resposta, cada branch é uma linha da tabela, com a decisão e o link do PR quando houver. A que ficou porque o pull request mesclou outro commit entra do mesmo jeito: uma frase, pode apagar ou o comportamento que só existe nela.
+4. Não liste, sem a pessoa pedir, todos os arquivos e commits: a explicação fica longa.
+5. Não junte o conjunto numa frase e não ofereça listá-lo depois.
 
 ### Diff no lugar da decisão
 
@@ -148,8 +149,9 @@ Se você tratar a falta da branch remota como trabalho perdido, mantém para sem
 8. Se o commit da ponta local está no GitHub, a branch pode sair.
 9. No produto, nomeie a tela, a ação e de quem é o trabalho, e diga que é o produto.
 10. Essa frase não segura a branch, salvo se a pessoa está continuando o trabalho.
-11. "Faz menos" mistura as duas coisas.
-12. Não use "aceitou um commit", "apagou o nome" nem o título do commit.
+11. Não use termos como "faz menos que".
+12. Ao descrever o que uma branch ou um pull request faz, separe a explicação do produto da explicação sobre o processo que levou ao clone, ao commit ou ao merge.
+13. Não troque o processo por "aceitou um commit", "apagou o nome" nem pelo título do commit.
 
 ## Exemplos de entrada e saída
 
@@ -190,7 +192,7 @@ Só a cópia principal existia, e sobraram quatro branches `renovate/*`. Três P
 - Só o estado do PR diz que o trabalho entrou.
 - Comportamento de produto que ficou de fora parece motivo para esta máquina guardar a branch de outra pessoa.
 - Se o commit está no GitHub e a pessoa não está continuando o trabalho, pode apagar.
-- "Faz menos" parece quantidade de commits ou de comportamento.
+- "Faz menos" parece quantidade de commits ou de comportamento de produto. Não use termos como "faz menos que".
 - A frase de processo fala dos commits.
 - A frase de produto nomeia a tela, a ação e de quem é o trabalho.
 - A remoção leve da branch local recusa a branch mesclada por squash. Remova forçando, só depois de conferir o PR.
