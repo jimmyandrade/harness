@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.46.4](https://github.com/jimmyandrade/harness/compare/v1.46.3...v1.46.4) (2026-11-03)
+
+
+### Bug Fixes
+
+* **gravar-termos-no-vocabulario,procurar-variacao-de-termo:** ask whether we use a word form in plain words ([#795](https://github.com/jimmyandrade/harness/issues/795)) ([be68037](https://github.com/jimmyandrade/harness/commit/be680377d8cfa828474b95678b0a783fe0ecbe4e))
+
 ## [1.46.3](https://github.com/jimmyandrade/harness/compare/v1.46.2...v1.46.3) (2026-11-03)
 
 
