@@ -1,6 +1,6 @@
 ---
 metadata:
-  version: "1.46.1"
+  version: "1.47.0"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -62,7 +62,7 @@ metadata:
 
 ## Execução
 
-- Execute as consultas e verificações permitidas que o pedido exige sem pedir uma confirmação que a pessoa já deu. Pergunte só quando faltar um dado ou uma decisão humana que mude a ação.
+- Execute as consultas e verificações permitidas que o pedido exige sem pedir uma confirmação que a pessoa já deu. Pergunte só quando faltar um dado ou uma decisão humana que mude a ação. Pergunta pede análise, não execução. Em "vale avisar?", entregue o texto, sem enviar.
 - Diante de uma falha técnica, verifique as alternativas permitidas da mesma conexão antes de passar a pendência à pessoa. A falha de uma chamada não prova perda de acesso. Não peça mudança de permissões sem verificar o alcance do bloqueio.
 - Resolva a referência da habilidade seguinte no catálogo conectado quando as regras do ambiente permitirem. A ausência na lista inicial não prova que ela não existe. Não peça à pessoa uma referência que já está na conversa.
 - Distinga a restrição explícita de descoberta, a busca sem resultado e o erro de permissão que a ferramenta devolveu. Não chame uma restrição das instruções de falta de acesso nem prometa que um pull request remove uma restrição do ambiente.
@@ -71,7 +71,7 @@ metadata:
 - As tarefas deste repositório são as issues do GitHub dele. Um harness de negócio faz o mesmo com as issues do próprio repositório. Não há banco de tarefas à parte.
 - Depois que a release de um plugin que a pessoa usa sair, com a PR de release mesclada e a tag publicada, atualize o plugin instalado sem esperar um pedido: atualize o marketplace, atualize o plugin e diga que a sessão precisa reiniciar para valer. Vale para o plugin deste repositório e para o de um harness de negócio. A habilidade nova só chega à sessão depois disso.
 - Numa tarefa de código, siga nesta ordem: `procurar-tarefa` para os detalhes da issue ou da tarefa, `levantar-ambiente-do-repositorio`, `escrever-teste`, `escrever-codigo`, `criar-commit` e `criar-pull-request`. Use TDD por padrão: o teste vem primeiro, roda e falha, e só então vem o código que o faz passar. Depois de criar um commit ou de mudar o estado do pull request, siga `sincronizar-status-da-tarefa`. O merge segue `mesclar-pull-request`. Criar ou evoluir uma habilidade segue a mesma cadeia. Toda issue sai por `definir-issue-do-github`, que procura antes as issues abertas e fechadas do mesmo assunto, e todo pull request sai por `criar-pull-request`. Isso vale também para a issue ou o PR que outra habilidade manda abrir. Nunca abra pelo comando direto: ele cria issue repetida e deixa o PR sem rótulo, sem rascunho e sem pessoa atribuída.
-- Execute cada habilidade dessa ordem até o fim. Ler o arquivo começa a habilidade e não a encerra. Sem `Comando de testes`, `escrever-teste` ainda é chamada: o resultado é dizer que o comando não existe, sem inventar um runner. O modo de abertura é `Criar pull request ao terminar`. Os valores ficam na skill. Um projeto que quer outro modo define o parâmetro no próprio `AGENTS.md`. A resposta diz o nome da branch, se ela está no GitHub e, quando o pull request existe, o link. Não escreva que uma habilidade ficou para este pedido, nem para depois.
+- Execute cada habilidade dessa ordem até o fim. Ler o arquivo começa a habilidade e não a encerra. Sem `Comando de testes`, `escrever-teste` ainda é chamada: o resultado é dizer que o comando não existe, sem inventar um runner. O modo de abertura é `Criar pull request ao terminar`. Um projeto que quer outro modo define o parâmetro no próprio `AGENTS.md`. A resposta diz o nome da branch, se ela está no GitHub e, quando o pull request existe, o link.
 - Um comando em segundo plano não encerra o turno. Quando o próximo passo depende do resultado dele, como uma instalação, uma suíte de testes, um build ou um check, espere no mesmo turno com um comando que bloqueia até o resultado sair, dentro do limite de tempo da ferramenta, e siga com ele. Encerre o turno só quando o trabalho terminar ou quando faltar uma decisão da pessoa.
 - Uma regra de comportamento que vale para todos os projetos fica nestas instruções. O valor de um parâmetro fica nas instruções do projeto. O guia de contribuição cita o nome do parâmetro e não copia o valor, para a mudança acontecer num lugar só. Uma convenção de código que não é parâmetro fica no guia de contribuição. Não fica na memória de um projeto.
 
