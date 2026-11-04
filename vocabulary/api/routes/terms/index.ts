@@ -17,11 +17,10 @@
  * Run: node api/routes/terms/index.ts '{"language":"pt-BR","mode":"upsert","terms":[]}'
  */
 
-import { fileURLToPath } from "node:url"
-
 import { InvalidGlossary, writeBatch } from "../../shared/glossary.ts"
 import type { Route } from "../../shared/http.ts"
 import { readOptions, report } from "../../shared/options.ts"
+import { isMain } from "../../shared/main.ts"
 
 export const termsRoute: Route = {
   method: "POST",
@@ -47,6 +46,6 @@ function main(argv: string[]): number {
   }
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) {
+if (isMain(import.meta.url)) {
   process.exitCode = main(process.argv.slice(2))
 }

@@ -12,8 +12,6 @@
  * Run: node api/mcp/index.ts
  */
 
-import { fileURLToPath } from "node:url"
-
 import { Server } from "@modelcontextprotocol/sdk/server/index.js"
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js"
@@ -26,6 +24,7 @@ import { parseBody } from "../shared/http.ts"
 import { readOptions } from "../shared/options.ts"
 import { versionInfo } from "../shared/version.ts"
 import { LEVELS, LOOKUP_LIMIT, classifyTextRequest, lookupRequest, initRequest, lookupTermsRequest, migrateRequest } from "../shared/schema.ts"
+import { isMain } from "../shared/main.ts"
 
 const languageProperty = { type: "string", description: "BCP 47 tag of the text, such as pt-BR." }
 
@@ -315,4 +314,4 @@ async function main(): Promise<void> {
   await createVocabularyServer(glossary).connect(new StdioServerTransport())
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) await main()
+if (isMain(import.meta.url)) await main()

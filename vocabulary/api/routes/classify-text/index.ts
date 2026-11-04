@@ -12,13 +12,12 @@
  * Run: node api/routes/classify-text/index.ts <language> <text>
  */
 
-import { fileURLToPath } from "node:url"
-
 import { classify } from "../classify/index.ts"
 import { Glossary, InvalidGlossary, applicable, collapse, type Entry } from "../../shared/glossary.ts"
 import { parseBody, type Route } from "../../shared/http.ts"
 import { readOptions, report } from "../../shared/options.ts"
 import { classifyTextRequest, type TextClassification } from "../../shared/schema.ts"
+import { isMain } from "../../shared/main.ts"
 
 export type { TextClassification }
 
@@ -103,6 +102,6 @@ function main(argv: string[]): number {
   }
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) {
+if (isMain(import.meta.url)) {
   process.exitCode = main(process.argv.slice(2))
 }
