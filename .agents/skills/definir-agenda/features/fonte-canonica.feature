@@ -11,3 +11,11 @@ Funcionalidade: Checar a fonte canônica antes de alterar a agenda
       Então a skill consulta a fonte canônica no Notion antes de mudar título, horário, data, local ou contexto
       E prioriza a propriedade estruturada que a página já tem
       Mas não usa só memória, título do calendário ou inferência solta
+
+  Regra: A fonte é a página do time dono do evento
+
+    Exemplo: Duas páginas trazem a data
+      Dado que a data do evento aparece numa página do próprio time e na de outro time
+      Quando a skill escolhe a fonte
+      Então ela usa e cita a página do próprio time
+      Mas só usa a de outro time se a do próprio time não traz a data
