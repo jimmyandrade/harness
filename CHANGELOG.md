@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.58.3](https://github.com/jimmyandrade/harness/compare/v1.58.2...v1.58.3) (2026-11-04)
+
+
+### Bug Fixes
+
+* **sincronizar-status-da-tarefa:** ask the overview scope and report it as a scoreboard ([#862](https://github.com/jimmyandrade/harness/issues/862)) ([e64e631](https://github.com/jimmyandrade/harness/commit/e64e631a78773e02a398ecd5b32f673146b0ff9b))
+
 ## [1.58.2](https://github.com/jimmyandrade/harness/compare/v1.58.1...v1.58.2) (2026-11-04)
 
 
