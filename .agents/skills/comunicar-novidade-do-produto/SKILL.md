@@ -3,7 +3,7 @@ name: comunicar-novidade-do-produto
 description: Use essa habilidade sempre que um PR for mesclado ou alguém perguntar o que há de novo no produto para quem o usa, mesmo sem dizer novidade, para decidir se há o que contar e escrever o comunicado sem termos técnicos. NÃO use para a descrição do PR, o changelog nem release notes técnicas.
 metadata:
   author: jimmyandrade
-  version: "0.10.0"
+  version: "0.11.1"
   related:
     - evoluir-habilidade
     - redigir-com-tom-de-voz
@@ -33,7 +33,13 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ### Passo 1
 
-Junte o que entrou, um PR mesclado, vários ou um período, de cada uma das `Fontes do comunicado`, na ordem da lista. A base das fontes é a `Branch base`. De um PR, leia o título, a descrição, os arquivos alterados e as issues ligadas. Um commit está fora de PR quando o GitHub não liga nenhum PR a ele. Desse commit, leia a mensagem e o diff. Uma fonte de outra ferramenta, como páginas do Notion criadas ou editadas pela pessoa, entra filtrada pelo período e pela autoria que ela diz. Quando o pedido cita uma fonte fora da lista, junte essa também.
+Junte o que entrou, um PR mesclado, vários ou um período, de cada uma das `Fontes do comunicado`, na ordem da lista. A base das fontes é a `Branch base`.
+
+De um PR, leia o título, a descrição, os arquivos alterados e as issues ligadas. Um commit está fora de PR quando o GitHub não liga nenhum PR a ele; desse commit, leia a mensagem e o diff.
+
+Uma fonte de outra ferramenta, como páginas do Notion criadas ou editadas pela pessoa, entra filtrada pelo período e pela autoria que ela diz. Quando o pedido cita uma fonte fora da lista, junte essa também.
+
+Procure, nos comentários de cada PR, o registro de comunicado publicado. Com registro, diga que a novidade já foi comunicada, com o canal e a data, e não escreva outro comunicado dela.
 
 ### Passo 2
 
@@ -49,7 +55,11 @@ Sem novidade: dependência, refatoração, CI, teste, documentação interna, re
 
 ### Passo 3
 
-Escreva o comunicado no `Idioma do comunicado`, para quem não é técnico: o que muda na prática, onde a pessoa percebe, quem é afetado, se precisa fazer algo e a partir de quando. Nunca cite PR, commit, biblioteca, arquivo nem ferramenta interna. Conte a correção pelo problema que a pessoa sentia: "corrigimos um problema que fazia a página demorar", não o novo comportamento isolado. Um período vira um comunicado só, agrupado por área e com o intervalo corrido no título, como "últimos 15 dias", sem uma seção por semana ou sprint.
+Escreva o comunicado no `Idioma do comunicado`, para quem não é técnico: o que muda na prática, onde a pessoa percebe, quem é afetado, se precisa fazer algo e a partir de quando. Nunca cite PR, commit, biblioteca, arquivo nem ferramenta interna.
+
+Conte a correção pelo problema que a pessoa sentia: "corrigimos um problema que fazia a página demorar", não o novo comportamento isolado.
+
+Um período vira um comunicado só, agrupado por área e com o intervalo corrido no título, como "últimos 15 dias", sem uma seção por semana ou sprint.
 
 O rascunho passa obrigatoriamente pela habilidade de tom de voz antes de ir para a pessoa, com o público e o canal do comunicado. Quem fala é `Quem publica o comunicado`. Vazio, pergunte quem publica, uma vez, junto com o canal quando `Canal do comunicado` também estiver vazio.
 
@@ -63,9 +73,21 @@ Achou: use e sugira preencher `Habilidade de tom de voz`. Não achou: pergunte s
 
 ### Passo 4
 
-Entregue no `Canal do comunicado`, com a formatação dele. Ao perguntar quem publica ou o canal, as opções saem só das instruções do projeto: nunca sugira um canal que elas não citam. A opção de publicar vem primeiro, e a de não comunicar vem por último. O comunicado vai numa mensagem só, com parágrafos curtos, mesmo no WhatsApp, onde a conversa costuma ir em mensagens quebradas. Só a novidade entra nessa mensagem. Um pedido, uma cobrança ou uma lista de pendências é outro assunto: vai numa mensagem à parte, depois do comunicado. Mostre o rascunho antes de qualquer pergunta: num widget com o texto editável, um botão para copiar e um para aprovar, quando o cliente desenha widget, ou num bloco de código. Uma pergunta que encerra o turno pode esconder o texto escrito antes dela. Se houver uma ferramenta para esse canal, publique só depois do ok a esse texto. Se não houver, ou se o canal estiver vazio, o rascunho mostrado é o texto pronto para copiar.
+Entregue no `Canal do comunicado`, com a formatação dele. Ao perguntar quem publica ou o canal, as opções saem só das instruções do projeto: nunca sugira um canal que elas não citam. A opção de publicar vem primeiro, e a de não comunicar vem por último.
+
+O comunicado vai numa mensagem só, com parágrafos curtos, mesmo no WhatsApp, onde a conversa costuma ir em mensagens quebradas. Só a novidade entra nessa mensagem: um pedido, uma cobrança ou uma lista de pendências é outro assunto e vai numa mensagem à parte, depois do comunicado.
+
+Mostre o rascunho antes de qualquer pergunta: num widget com o texto editável, um botão para copiar e um para aprovar, quando o cliente desenha widget, ou num bloco de código. Uma pergunta que encerra o turno pode esconder o texto escrito antes dela.
+
+Se houver uma ferramenta para esse canal, leia antes as mensagens dele desde o merge e procure um comunicado da mesma novidade, inclusive o de outra pessoa ou outra sessão. Achou: não publique, mostre quando e por quem ele saiu, e pare. Não achou: publique só depois do ok a esse texto.
+
+Sem essa ferramenta, ou com o canal vazio, o rascunho mostrado é o texto pronto para copiar.
 
 ### Passo 5
+
+Depois de publicar, comente em cada PR comunicado o registro: o canal, a data e a hora da publicação. Esse comentário é o que a próxima sessão procura no Passo 1.
+
+### Passo 6
 
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
@@ -113,6 +135,14 @@ Se você oferecer um canal que as instruções do projeto não citam, como o Sla
 1. Leia `Quem publica o comunicado` e `Canal do comunicado`.
 2. Vazios, pergunte sem sugerir canal e ofereça o texto pronto para copiar.
 3. Deixe a opção de não comunicar por último.
+
+### Comunicado repetido
+
+Se você publicar sem olhar o canal e o PR, outra sessão pode já ter comunicado a mesma novidade, e o público recebe duas vezes.
+
+1. Procure o registro nos comentários do PR antes de escrever.
+2. Leia as mensagens do canal desde o merge antes de publicar.
+3. Achou: não publique e mostre o comunicado que já saiu.
 
 ### Ação escondida
 

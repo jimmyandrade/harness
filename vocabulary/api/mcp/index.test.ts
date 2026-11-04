@@ -538,3 +538,19 @@ test("the server answers initialize when the path to it goes through a symbolic 
     child.kill()
   }
 })
+
+test("classify_text reads forbidden_in and allowed_in from the tags of the read", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  writeFileSync(
+    join(root, "pt-BR.json"),
+    `${JSON.stringify({ vcs: { state: "allowed_with_care", allowed_in: ["chat"], forbidden_in: ["review"], reason: "Informal.", alternatives: ["vocês"] } }, null, 2)}\n`,
+  )
+  const read = (tags: string[]) =>
+    JSON.parse(callTool(root, { name: "classify_text", arguments: { language: "pt-BR", text: "vcs", tags } }).content[0]?.text ?? "") as {
+      words: { to: string; base_state?: string; reason?: string; alternatives?: string[] }[]
+    }
+  assert.deepEqual(read([]).words.map((word) => word.to), ["allowed_with_care"])
+  assert.deepEqual(read(["chat"]).words.map((word) => [word.to, word.base_state]), [["allowed", "allowed_with_care"]])
+  const review = read(["review"]).words[0]
+  assert.deepEqual([review?.to, review?.base_state, review?.reason, review?.alternatives], ["forbidden", "allowed_with_care", "Informal.", ["vocês"]])
+})

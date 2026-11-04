@@ -6,7 +6,8 @@
  * when it joins letters. Each emoji and each punctuation mark is classified on
  * its own. An emoji keeps its variation selector, skin tone, and ZWJ sequence
  * together. Given tags, a row tagged only for another speaker, event, or channel
- * reads as not registered. A glossary row of more than one word is not matched across words.
+ * reads as not registered, and a tag in forbidden_in or allowed_in changes the level of a word as in lookup:
+ * to is the level for that context and base_state keeps the level of the row. A glossary row of more than one word is not matched across words.
  * A word that matches a case_sensitive row says whether its casing matches.
  *
  * Run: node api/routes/classify-text/index.ts <language> <text>
@@ -21,10 +22,15 @@ import { isMain } from "../../shared/main.ts"
 
 export type { TextClassification }
 
-export function classifyText(entries: readonly Entry[], submitted: string, language: string): TextClassification {
+export function classifyText(
+  entries: readonly Entry[],
+  submitted: string,
+  language: string,
+  tags: readonly string[] = [],
+): TextClassification {
   const query = collapse(submitted)
   if (query === "") throw new InvalidGlossary("Provide the text.")
-  const words = tokensIn(query).map((token) => classify(entries, token, language))
+  const words = tokensIn(query).map((token) => classify(entries, token, language, tags))
   return { from: "query", language, submitted: query, words }
 }
 
@@ -35,7 +41,7 @@ export function classifyPhrase(
   tags: readonly string[] = [],
 ): TextClassification {
   const { tag, entries } = glossary.entries(language)
-  return classifyText(applicable(entries, tags), submitted, tag)
+  return classifyText(applicable(entries, tags), submitted, tag, tags)
 }
 
 export const classifyTextRoute: Route = {

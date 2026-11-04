@@ -725,3 +725,23 @@ test("version prints the version when the path to the CLI goes through a symboli
   const { status, stdout } = spawnSync(process.execPath, [join(link, "vocabulary", "api", "cli.ts"), "version"], { encoding: "utf8" })
   assert.deepEqual({ status, body: stdout.trim() }, { status: 0, body: JSON.stringify({ name: "vocabulary", version }) })
 })
+
+test("classify-text applies forbidden_in and allowed_in to the --tags of the read", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  writeFileSync(
+    join(root, "pt-BR.json"),
+    `${JSON.stringify({ vcs: { state: "allowed_with_care", allowed_in: ["chat"], forbidden_in: ["review"] } }, null, 2)}\n`,
+  )
+  const lines: string[] = []
+  const write = console.log
+  console.log = (line: string) => lines.push(line)
+  try {
+    for (const [tag, expected] of [["review", "forbidden"], ["chat", "allowed"], ["", "allowed_with_care"]] as const) {
+      const tags = tag === "" ? [] : ["--tags", tag]
+      assert.equal(run(["--glossary", root, "classify-text", "--language", "pt-BR", "--text", "vcs", ...tags]), 0)
+      assert.equal(JSON.parse(lines.at(-1) ?? "{}").words[0].to, expected)
+    }
+  } finally {
+    console.log = write
+  }
+})

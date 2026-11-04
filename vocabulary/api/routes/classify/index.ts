@@ -8,12 +8,16 @@
  * legacy_state. A row with
  * case_sensitive also returns case_matches, false when the submitted casing
  * differs from the stored term. An avoided row returns recommended: its alternative,
- * or, when it has none, its substitution.
+ * or, when it has none, its substitution. Given tags, a tag in forbidden_in
+ * makes the word forbidden and a tag in allowed_in makes it allowed, as in
+ * lookup: to is the level for that context and base_state keeps the level of
+ * the row. A word forbidden only by its context also returns the reason, the
+ * when, and the alternatives of the row. Without tags, nothing changes.
  *
  * Run: node api/routes/classify/index.ts <language> <term>
  */
 
-import { Glossary, InvalidGlossary, caseMatches, lookup, type Entry } from "../../shared/glossary.ts"
+import { Glossary, InvalidGlossary, caseMatches, effectiveState, lookup, type Entry } from "../../shared/glossary.ts"
 import { parseBody, type Route } from "../../shared/http.ts"
 import { readOptions, report } from "../../shared/options.ts"
 import { classifyRequest, type Classification } from "../../shared/schema.ts"
@@ -23,7 +27,12 @@ export type { Classification }
 
 const AVOIDED = new Set(["forbidden", "strongly_discouraged", "discouraged"])
 
-export function classify(entries: readonly Entry[], submitted: string, language: string): Classification {
+export function classify(
+  entries: readonly Entry[],
+  submitted: string,
+  language: string,
+  tags: readonly string[] = [],
+): Classification {
   const found = lookup(entries, submitted)
   const response: Classification = { from: "query", language, submitted: found.query, to: "not_registered" }
   if (found.entry === undefined) return response
@@ -33,12 +42,23 @@ export function classify(entries: readonly Entry[], submitted: string, language:
     response.term = found.entry.term
     return response
   }
-  response.to = found.entry.state
+  const state = effectiveState(found.entry, tags)
+  response.to = state
   response.term = found.entry.term
+  if (state !== found.entry.state) {
+    response.base_state = found.entry.state
+    if (state === "forbidden") {
+      if (found.entry.reason !== undefined) response.reason = found.entry.reason
+      if (found.entry.when !== undefined) response.when = found.entry.when
+      if (found.entry.alternatives !== undefined && found.entry.alternatives.length > 0) {
+        response.alternatives = [...found.entry.alternatives]
+      }
+    }
+  }
   if (found.entry.legacyState !== undefined) response.legacy_state = found.entry.legacyState
   const recommended = found.entry.alternative ?? found.entry.substitution
-  if (AVOIDED.has(found.entry.state) && recommended !== undefined) response.recommended = recommended
-  if (found.entry.state === "allowed_with_care" && found.entry.alternative !== null) {
+  if (AVOIDED.has(state) && recommended !== undefined) response.recommended = recommended
+  if (state === "allowed_with_care" && found.entry.alternative !== null) {
     response.always_allowed = found.entry.alternative
   }
   if (found.entry.caseSensitive === true) {
