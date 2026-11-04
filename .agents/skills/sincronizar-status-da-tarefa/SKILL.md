@@ -218,9 +218,10 @@ A pessoa pede o panorama do que criou. A consulta traz quatro tarefas. "Exportar
 - Abrir, tirar do rascunho ou mesclar o PR pelo `gh` parece não ter relação com a tarefa. O estado do PR mudou, e a habilidade roda mesmo assim.
 - O aviso de que um PR foi mesclado parece só uma informação. É gatilho: confirme o estado MERGED e sincronize a tarefa na mesma resposta.
 - A `Consulta do panorama` pode listar só o PR que fecha a tarefa. A tarefa que parece sem PR pode ter um que só cita a chave, então busque pela chave antes de dizer que não tem.
-- A busca pela chave, num rastreador em que tarefa e PR compartilham a numeração, como o GitHub, casa o número como texto em qualquer PR, inclusive nos antigos.
-  O PR de número menor que o da tarefa não pode citá-la: descarte-o.
-  Abra o corpo dos demais para ver se resolvem a tarefa ou só a mencionam, como num "fora do escopo" ou num acompanhamento.
+- A busca pela chave, num rastreador em que tarefa e PR compartilham a numeração, como o GitHub, casa o número como texto em qualquer PR, inclusive nos antigos, e o número escrito pode não ser o da tarefa.
+  Abra o corpo de cada resultado e ligue só o que cita a tarefa.
+  Um PR de número menor também pode citá-la, quando foi aberto antes da tarefa e teve o corpo editado depois.
+  Veja se o PR resolve a tarefa ou só a menciona, como num "fora do escopo" ou num acompanhamento.
 
 ## Scripts disponíveis
 
