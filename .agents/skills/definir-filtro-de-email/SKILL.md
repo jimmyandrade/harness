@@ -3,7 +3,7 @@ name: definir-filtro-de-email
 description: Cria, edita e confere filtros de e-mail. Testa o critério na conta, escolhe as ações sem esconder o que a pessoa quer ver e lê o filtro salvo de volta. Usada quando a triagem pede um filtro ou a pessoa quer mudar um. Não serve para classificar mensagens nem cancelar assinatura.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   related:
     - organizar-emails
     - evoluir-habilidade
@@ -43,7 +43,8 @@ Exclua um filtro só quando a pessoa pedir.
 ### Passo 2
 
 Escolha as ações pelo que a pessoa precisa ver.
-Pular a entrada e marcar como lida servem só para remetente que nunca traz o que ela possa querer acompanhar, como relatório automático ou agradecimento depois de um evento.
+Pular a entrada e marcar como lida servem só para remetente que nunca traz o que ela possa querer acompanhar ou responder, como relatório automático.
+Mensagem de uma organização que pode valer uma resposta, como o agradecimento depois de um evento, fica na entrada: responder estreita a relação institucional.
 Remetente que anuncia evento, workshop, curso, convite ou oportunidade fica na entrada: o filtro só etiqueta, e pode tirar a importância e categorizar.
 Na dúvida, pergunte antes de pular a entrada.
 Quando o filtro pula a entrada, inclua nunca marcar como importante, porque a caixa pode estar configurada para as mensagens importantes passarem por cima dos filtros.
@@ -89,9 +90,9 @@ Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ### Evento escondido
 
-Se você fizer pular a entrada um remetente que também anuncia workshop ou evento, a pessoa perde o convite que queria ver.
+Se você criar um filtro que pula a entrada para um remetente que também anuncia workshop ou evento, a pessoa perde o convite que queria ver.
 
-1. Leia os assuntos das conversas que o critério atinge.
+1. Rode a busca do critério na conta e leia o assunto de cada conversa que ela devolve.
 2. Com evento, curso ou oportunidade entre eles, o filtro só etiqueta.
 3. Na dúvida, pergunte antes de pular a entrada.
 
@@ -143,7 +144,8 @@ O filtro procurava o endereço antigo e os e-mails chegam de outro domínio. O c
 - A ferramenta de etiqueta e a leitura do filtro podem mostrar identificadores distintos; a lista disponível pode não expor a correspondência necessária para verificar o nome no filtro.
 - A criação de filtro pode falhar só em parte e devolver sucesso. A leitura de volta mostra o que faltou.
 - A caixa pode deixar mensagem marcada como importante passar por cima de "pular a entrada". O filtro que pula a entrada precisa também de nunca marcar como importante.
-- Editar um filtro no Gmail abre de novo a busca e as ações; a aplicação às conversas antigas precisa ser marcada outra vez.
+- Na interface atual do Gmail, editar um filtro abre primeiro a busca do critério: clique em Continuar para chegar às ações.
+- Na tela das ações, a opção "Também aplicar filtro às conversas correspondentes" aplica o filtro às conversas antigas, e ela vem desmarcada a cada edição.
 
 ## Scripts disponíveis
 
