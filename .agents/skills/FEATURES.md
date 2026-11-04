@@ -1369,7 +1369,7 @@ How these skills relate is in `README.md`, in this folder.
   - Merges with `Tipo de merge` and deletes the branch. When the automatic mode denies the merge, it hands over the command and stops
   - After the merge, or the person's notice of it, confirms MERGED and the hash and, in the same reply, syncs every linked task through sincronizar-status-da-tarefa, checks the sync with another tool, announces through comunicar-novidade-do-produto when `Comunicar novidade após o merge` is on, and cleans the working copy through limpar-copias-de-trabalho
   - After the merge, reads the review comments nobody handled, including a pending review that only its author sees. On the person's own pull request, opens a new one from the base with the fixes; on someone else's, asks the person to pick one action per comment (resolve it, reply asking what was done, open an issue, or open a pull request) through the client's question screen, or a numbered list without one
-  - When a check sits in the queue, reads the repository queue, says how many runs are ahead, notes that closing and reopening the PR does not move it, and proposes cancelling only runs of a commit the same branch already replaced
+  - When a check sits in the queue, reads the repository queue, says how many runs are ahead, checks the commit of each run of the branch, says that closing and reopening the PR only adds new runs at the end of the queue, and proposes cancelling only runs of a commit the same branch already replaced
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [ ] A merge request on a pull request with an unresolved thread handles the review comments first
