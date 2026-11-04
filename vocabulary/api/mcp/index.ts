@@ -77,7 +77,7 @@ export const tools = [
   },
   {
     name: "classify_text",
-    description: "Classify each word, emoji, and punctuation mark of a text. Returns language, submitted, and words, one per token and in order, each with its level (forbidden, strongly_discouraged, discouraged, allowed_with_care, allowed, stop_word, or not_registered), the stored term, and, for a level that is avoided, the recommended alternative. Words are matched one by one: a row of more than one word is not matched across words, so read an expression with lookup_terms. Use it to check a draft before publishing it. With tags, a row tagged only for another speaker, event, or channel reads as not registered.",
+    description: "Classify each word, emoji, and punctuation mark of a text. Returns language, submitted, and words, one per token and in order, each with its level (forbidden, strongly_discouraged, discouraged, allowed_with_care, allowed, stop_word, or not_registered), the stored term, and, for a level that is avoided, the recommended term: the row's alternative or, without one, its substitution. Words are matched one by one: a row of more than one word is not matched across words, so read an expression with lookup_terms. Use it to check a draft before publishing it. With tags, a row tagged only for another speaker, event, or channel reads as not registered.",
     inputSchema: {
       type: "object",
       properties: {

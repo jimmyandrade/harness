@@ -7,7 +7,8 @@
  * deprecated situationally_allowed reads as allowed_with_care and also returns
  * legacy_state. A row with
  * case_sensitive also returns case_matches, false when the submitted casing
- * differs from the stored term.
+ * differs from the stored term. An avoided row returns recommended: its alternative,
+ * or, when it has none, its substitution.
  *
  * Run: node api/routes/classify/index.ts <language> <term>
  */
@@ -36,7 +37,8 @@ export function classify(entries: readonly Entry[], submitted: string, language:
   response.to = found.entry.state
   response.term = found.entry.term
   if (found.entry.legacyState !== undefined) response.legacy_state = found.entry.legacyState
-  if (AVOIDED.has(found.entry.state) && found.entry.alternative !== null) response.recommended = found.entry.alternative
+  const recommended = found.entry.alternative ?? found.entry.substitution
+  if (AVOIDED.has(found.entry.state) && recommended !== undefined) response.recommended = recommended
   if (found.entry.state === "allowed_with_care" && found.entry.alternative !== null) {
     response.always_allowed = found.entry.alternative
   }

@@ -3,7 +3,7 @@ name: redigir-com-tom-de-voz
 description: Use essa habilidade sempre que for criar, redigir, editar, revisar ou responder texto da marca no tom de voz, mesmo sem dizer copy. NÃO use para responder quem conversa com a IA, descrever uma skill, titular tarefa ou oportunidade, cravar a grafia, alterar formato de conteúdo, nem assumir cliente, peça, oportunidade ou histórico.
 metadata:
   author: jimmyandrade
-  version: "0.18.0"
+  version: "0.18.1"
   aliases:
     - escreva-usando-o-tom-de-voz
   related:
@@ -247,7 +247,7 @@ O título ficou específico, com o nome canônico que a fonte já tinha. Não vi
 - `node node_modules/harness/vocabulary/dist/cli.js lookup --language <idioma> --term <termo> --tags <tag>` lê um termo e devolve se ele existe e a linha guardada.
 - `node node_modules/harness/vocabulary/dist/cli.js exists --language <idioma> --text <trecho> --tags <tag>` devolve só o registro de cada token do trecho para se ele existe.
 - Com `case_matches` falso, a caixa do texto não é a guardada. Escreva a grafia de `term`.
-- `node node_modules/harness/vocabulary/dist/cli.js classify-text --language <idioma> --text <trecho> --tags <tag>` devolve o nível de cada palavra, emoji e pontuação do trecho, com a alternativa recomendada de quem é evitado. Confere o rascunho inteiro de uma vez.
+- `node node_modules/harness/vocabulary/dist/cli.js classify-text --language <idioma> --text <trecho> --tags <tag>` devolve o nível de cada palavra, emoji e pontuação do trecho, com a troca recomendada de quem é evitado, que vem da substituição da linha. Confere o rascunho inteiro de uma vez.
 - `--tags` repete, um valor por vez. Termo sem tag vale em qualquer texto. Termo com tag só volta quando uma tag dele está na consulta.
 - `lookup_term`, `exists_in_text` e `classify_text`, no servidor `vocabulary`, fazem a mesma consulta quando não há terminal ou quando a CLI não está disponível, com o mesmo campo `tags`.
 

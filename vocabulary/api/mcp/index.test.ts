@@ -302,6 +302,14 @@ test("classify_text returns the level of each word and filters by tags", () => {
   assert.equal(refused.content[0]?.text, "Provide the tags as a list.")
 })
 
+test("classify_text recommends the substitution of a row in the current format", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  writeFileSync(join(root, "pt-BR.json"), '{ "chave": { "state": "strongly_discouraged", "substitution": "feature toggle" } }\n')
+  const read = callTool(root, { name: "classify_text", arguments: { language: "pt-BR", text: "ligue a chave" } })
+  const words = (JSON.parse(read.content[0]?.text ?? "") as { words: { recommended?: string }[] }).words
+  assert.equal(words[2]?.recommended, "feature toggle")
+})
+
 test("write_terms keeps the casing of a case-sensitive term and the reads report a mismatch", () => {
   const root = mkdtempSync(join(tmpdir(), "glossary-"))
   const file = join(root, "pt-BR.json")
