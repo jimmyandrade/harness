@@ -7,12 +7,11 @@
  * Run: node api/routes/init/index.ts <language>
  */
 
-import { fileURLToPath } from "node:url"
-
 import { InvalidGlossary, initGlossary } from "../../shared/glossary.ts"
 import { parseBody, type Route } from "../../shared/http.ts"
 import { readOptions, report } from "../../shared/options.ts"
 import { initRequest } from "../../shared/schema.ts"
+import { isMain } from "../../shared/main.ts"
 
 export const initRoute: Route = {
   method: "POST",
@@ -37,6 +36,6 @@ function main(argv: string[]): number {
   }
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) {
+if (isMain(import.meta.url)) {
   process.exitCode = main(process.argv.slice(2))
 }

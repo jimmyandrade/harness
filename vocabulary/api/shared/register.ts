@@ -4,10 +4,9 @@
  * Run: node api/shared/register.ts <language> <term> <state> [alternative]
  */
 
-import { fileURLToPath } from "node:url"
-
 import { InvalidGlossary, register } from "./glossary.ts"
 import { readOptions, report } from "./options.ts"
+import { isMain } from "./main.ts"
 
 function main(argv: string[]): number {
   try {
@@ -23,6 +22,6 @@ function main(argv: string[]): number {
   }
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) {
+if (isMain(import.meta.url)) {
   process.exitCode = main(process.argv.slice(2))
 }

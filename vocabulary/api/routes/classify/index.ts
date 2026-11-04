@@ -17,12 +17,11 @@
  * Run: node api/routes/classify/index.ts <language> <term>
  */
 
-import { fileURLToPath } from "node:url"
-
 import { Glossary, InvalidGlossary, caseMatches, effectiveState, lookup, type Entry } from "../../shared/glossary.ts"
 import { parseBody, type Route } from "../../shared/http.ts"
 import { readOptions, report } from "../../shared/options.ts"
 import { classifyRequest, type Classification } from "../../shared/schema.ts"
+import { isMain } from "../../shared/main.ts"
 
 export type { Classification }
 
@@ -97,6 +96,6 @@ function main(argv: string[]): number {
   }
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) {
+if (isMain(import.meta.url)) {
   process.exitCode = main(process.argv.slice(2))
 }

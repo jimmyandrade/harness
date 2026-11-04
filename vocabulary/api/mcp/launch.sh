@@ -6,7 +6,7 @@
 # It writes only to stderr: stdout belongs to the MCP protocol.
 set -eu
 
-# pwd -P resolves symlinks: the server starts only when argv[1] equals its own real path, and npm misreads the lockfile under a symlinked one.
+# pwd -P resolves symlinks: npm misreads the lockfile under a symlinked path.
 ROOT="$(CDPATH= cd -- "$(dirname "$0")/../../.." && pwd -P)"
 
 # Every failure says what happened and what to do next, for the person and for the agent that reads stderr.

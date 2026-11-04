@@ -13,11 +13,10 @@
  * Run: node api/routes/delete/index.ts '{"language":"pt-BR","terms":[{"term":"casa","tags":["maria-silva"]}]}'
  */
 
-import { fileURLToPath } from "node:url"
-
 import { InvalidGlossary, deleteBatch } from "../../shared/glossary.ts"
 import type { Route } from "../../shared/http.ts"
 import { readOptions, report } from "../../shared/options.ts"
+import { isMain } from "../../shared/main.ts"
 
 export const deleteRoute: Route = {
   method: "POST",
@@ -43,6 +42,6 @@ function main(argv: string[]): number {
   }
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) {
+if (isMain(import.meta.url)) {
   process.exitCode = main(process.argv.slice(2))
 }

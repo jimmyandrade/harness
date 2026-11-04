@@ -1,5 +1,5 @@
 import assert from "node:assert/strict"
-import { mkdtempSync, readFileSync, writeFileSync } from "node:fs"
+import { mkdtempSync, readFileSync, symlinkSync, writeFileSync } from "node:fs"
 import { tmpdir } from "node:os"
 import { join } from "node:path"
 import { spawn } from "node:child_process"
@@ -501,6 +501,42 @@ test("get_version returns the version in package.json", () => {
   const result = callTool(tmpdir(), { name: "get_version", arguments: {} })
   assert.equal(result.isError, undefined)
   assert.deepEqual(JSON.parse(result.content[0]?.text ?? "{}"), { name: "vocabulary", version })
+})
+
+test("the server answers initialize when the path to it goes through a symbolic link", async () => {
+  const link = join(mkdtempSync(join(tmpdir(), "link-")), "harness")
+  symlinkSync(fileURLToPath(new URL("../../..", import.meta.url)), link)
+  const child = spawn(process.execPath, [join(link, "vocabulary", "api", "mcp", "index.ts"), "--glossary", tmpdir()], {
+    stdio: ["pipe", "pipe", "pipe"],
+  })
+  const answer = new Promise<string>((resolve, reject) => {
+    const timer = setTimeout(() => reject(new Error("The server did not answer.")), 5000)
+    let output = ""
+    child.stdout.on("data", (chunk: Buffer) => {
+      output += chunk.toString("utf8")
+      const newline = output.indexOf("\n")
+      if (newline === -1) return
+      clearTimeout(timer)
+      resolve(output.slice(0, newline))
+    })
+    child.on("exit", (code) => {
+      clearTimeout(timer)
+      reject(new Error(`The server exited ${code} without answering.`))
+    })
+  })
+  child.stdin.write(
+    frame({
+      jsonrpc: "2.0",
+      id: 1,
+      method: "initialize",
+      params: { protocolVersion: "2024-11-05", capabilities: {}, clientInfo: { name: "test", version: "0" } },
+    }),
+  )
+  try {
+    assert.equal(JSON.parse(await answer).result?.protocolVersion, "2024-11-05")
+  } finally {
+    child.kill()
+  }
 })
 
 test("classify_text reads forbidden_in and allowed_in from the tags of the read", () => {
