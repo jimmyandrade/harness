@@ -86,6 +86,7 @@ flowchart LR
     gerenciar_estoque["gerenciar-estoque"]
     gravar_termos_no_vocabulario["gravar-termos-no-vocabulario"]
     identificar_duplicata["identificar-duplicata"]
+    investigar_problema["investigar-problema"]
     lancar_despesa_da_empresa["lancar-despesa-da-empresa"]
     lancar_despesa_pessoal["lancar-despesa-pessoal"]
     levantar_ambiente_do_repositorio["levantar-ambiente-do-repositorio"]
@@ -456,6 +457,11 @@ flowchart LR
   identificar_duplicata --> definir_grafia
   identificar_duplicata --> definir_perfil_social
   identificar_duplicata --> mesclar_registro
+  investigar_problema --> definir_artigo_da_base_de_conhecimento
+  investigar_problema --> definir_post_mortem
+  investigar_problema --> definir_tarefa
+  investigar_problema --> evoluir_habilidade
+  investigar_problema --> procurar_tarefa
   lancar_despesa_da_empresa --> definir_ativo_imobilizado
   lancar_despesa_da_empresa --> definir_empresa
   lancar_despesa_da_empresa --> definir_grafia

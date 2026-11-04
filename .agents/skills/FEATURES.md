@@ -1232,6 +1232,20 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses consolidating names, deleting, creating the record, locking spelling, and choosing among similar records
 
+### investigar-problema
+- **Stability**: experimental
+- **Description**: Investigate a reported problem with a task, facts, checked hypotheses, and feedback to the reporter, then offer an article and a post-mortem
+- **Properties**:
+  - Lives at `.agents/skills/investigar-problema/SKILL.md`
+  - Finds or creates the task first, and links it in every progress update
+  - Gathers facts before hypotheses, including the reporter's screenshots, and separates what was seen from what is assumed
+  - Checks each hypothesis at the source and changes nothing without the person's yes
+  - Records the cause, evidence, and next step on the task, and replies to the reporter with the link
+  - Asks at the end whether to write each item in `Registros ao fim da investigação`, through `definir-artigo-da-base-de-conhecimento` and `definir-post-mortem`
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses writing the article, the post-mortem, and fixing code
+
 ### lancar-despesa-da-empresa
 - **Stability**: experimental
 - **Description**: Record a payment and trace the financial entry that originated a durable asset
