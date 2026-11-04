@@ -3,7 +3,7 @@ name: criar-habilidade
 description: Cria, adiciona e escreve skills a partir de uma tarefa real. Usada quando a pessoa quer uma skill nova, mesmo sem dizer skill. NÃO serve para editar código, escrever página que não seja skill, otimizar só a descrição nem gravar a skill no Notion.
 metadata:
   author: jimmyandrade
-  version: "3.21.0"
+  version: "3.22.0"
   related:
     - criar-commit
     - criar-pull-request
@@ -60,7 +60,7 @@ Um caminho de cliques numa tela, como o de uma sessão gravada, também: um nó 
 Em `Problemas comuns`, cada problema é um heading de nível 3, um parágrafo que começa com `Se você` e, em seguida, uma lista ordenada.
 O bloco de parâmetros inclui `"Modo de aprendizado": "perguntar"`, e o último passo de `Instruções` é `Ao terminar, siga evoluir-habilidade conforme Modo de aprendizado.`
 Pastas, scripts, referências, modelos e `Scripts disponíveis` seguem `definir-arquivos-da-habilidade`.
-Cada frase do texto da skill fica na própria linha, para a mudança aparecer no diff. Frases que só se entendem juntas ficam na mesma linha.
+Agrupe na mesma linha as frases que tratam do mesmo tema, e separe os temas com uma linha em branco. O texto fica legível de relance, sem bloco gigante nem uma frase por linha, e o diff mostra só o tema que mudou. Isso é decisão de redação, não de script.
 Numa lista, a frase que fica sozinha vira item próprio, e a que só se entende com a anterior fica no mesmo item.
 O comando não entra no passo.
 Antes de escrever, leia as skills do mesmo assunto, as instruções do projeto e, ao atualizar, a skill inteira. Uma frase nova não contradiz outra já escrita: quando a regra muda, reescreva a que existe. Valor que muda de um projeto para outro, como pasta, caminho ou nome de banco, vira parâmetro.
