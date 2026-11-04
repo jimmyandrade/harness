@@ -3,7 +3,7 @@ name: definir-registro-de-reuniao
 description: Cadastra e corrige o registro de uma reunião, com título, data, participantes, resumo e índice, onde o projeto guarda os registros. Usada quando a pessoa cola uma transcrição ou pergunta se uma reunião já está registrada. Não serve para achar o contexto de uma reunião nem escrever a ata.
 metadata:
   author: jimmyandrade
-  version: "0.10.0"
+  version: "0.11.0"
   related:
     - definir-agenda
     - definir-grafia
@@ -98,6 +98,14 @@ Quando a transcrição não diz quem fala, não atribua uma ação a uma pessoa 
 
 Quando as falas vêm identificadas, siga a identificação, mas confira os nomes com os participantes, porque a identificação automática também erra.
 
+Um `a confirmar` pode ser resolvido depois, por uma fonte de fora da transcrição que nomeia a pessoa para aquela ação, como o responsável do card, o comentário dela no card, o autor do trabalho ou uma página dela.
+Preencha só com essa fonte, nunca por pronome nem por palpite, e escreva a fonte na mesma célula, como "conforme o card X".
+Num registro já publicado, a menção real de uma pessoa nova espera o sim de quem escreve.
+Uma ação do negócio, sem pessoa nomeada pela fonte, vai como o time, em texto e sem menção.
+Quando existe uma página de decisão para a ação em aberto, a célula continua `a confirmar` e cita a página.
+Depois de preencher, reescreva o ponto em aberto que diz que nenhuma ação tem responsável confirmado, com a data do preenchimento e o que vem de fora da reunião.
+A ação sem fonte continua `a confirmar`.
+
 ### Passo 7
 
 Aplique no resumo as correções já confirmadas, e use o nome canônico no lugar do apelido e da grafia errada. Para nome de pessoa ou de empresa, a forma correta e as formas erradas que o reconhecimento de voz gerou ficam nas variações de grafia do registro, como diz `definir-grafia`: leia dali. Com uma `Fonte de identidade das pessoas` que não é a lista do projeto, a grafia fica nessa fonte, no registro da pessoa. Termo que não é nome, como sigla ou jargão, vem de `Fonte de correções de termos`.
@@ -136,6 +144,15 @@ Se você escrever que alguém ficou de fazer algo porque a fala dizia `eu`, a tr
 1. Escreva a hipótese com `a confirmar`.
 2. Peça a confirmação de cada atribuição.
 
+### Responsável que fica a confirmar para sempre
+
+Se você deixar `a confirmar` numa ação que um card ou outra fonte já nomeia, o registro continua sem dono e a pessoa pergunta o que você já sabia.
+
+1. Procure o responsável nas fontes de fora da transcrição, como o card, o comentário e o autor do trabalho.
+2. Preencha só o que a fonte nomeia e escreva a fonte na célula.
+3. Peça o sim antes de acrescentar menção a um registro publicado.
+4. Reescreva o ponto em aberto sobre responsáveis.
+
 ### Correção na transcrição bruta
 
 Se você trocar a grafia dentro da transcrição bruta, o registro deixa de ser o que foi dito e o erro de reconhecimento some.
@@ -173,6 +190,7 @@ Escrevi no resumo que a correção sobe no dia seguinte, com o responsável como
 ## Casos-limite
 
 - Há dois eventos plausíveis no horário: liste e pergunte. Não escolha.
+- O responsável vem do card, mas a reunião não o nomeou: preencha com a fonte indicada e não diga que foi combinado na reunião.
 - A transcrição começa no meio da reunião: registre assim no bloco do cabeçalho e não preencha o que não veio.
 - O texto traz o resumo gerado pela ferramenta de reunião junto da transcrição: guarde os dois, e trate o resumo gerado como não literal.
 - A mesma reunião aparece com dois horários de criação: é um registro só. Corrija o que existe.
@@ -187,6 +205,7 @@ Escrevi no resumo que a correção sobe no dia seguinte, com o responsável como
 - O reconhecimento de voz erra nome de pessoa e sigla de um jeito que parece outra palavra. O apelido de quem fala também vira outro nome quando alguém o chama.
 - O horário de criação do registro é aproximado: a reunião pode ter começado antes dele.
 - Transcrição com falas identificadas pode ter a pessoa errada atribuída a um trecho.
+- Um `a confirmar` parece definitivo. Um card ou o autor do trabalho pode nomear a pessoa depois, com a fonte escrita na célula.
 
 ## Scripts disponíveis
 
