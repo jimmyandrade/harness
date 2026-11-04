@@ -4,7 +4,7 @@ description: Sincroniza o status de tarefas, cards ou issues com o estado do pul
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.8.0"
+  version: "0.8.1"
   related:
     - criar-commit
     - criar-pull-request
@@ -195,7 +195,7 @@ A pessoa pede o panorama do que criou. A consulta traz quatro tarefas. "Exportar
 
 ## Casos-limite
 
-- No panorama, a tarefa aberta cujo PR já foi mesclado vai no bloco próprio e continua aberta. Quem a fecha é o merge do PR que a cita, não esta habilidade.
+- No panorama, a tarefa aberta cujo PR já foi mesclado vai no bloco próprio e continua aberta, como acontece quando o PR a cita sem palavra de fechamento. Quem a fecha é o merge do PR que a cita com essa palavra, ou a pessoa, não esta habilidade.
 - O PR está aberto e pronto, mas tem uma etiqueta de `Etiquetas de PR bloqueado`: o destino é o `Status do PR bloqueado`, não o de aberto e pronto.
 - O PR está em rascunho e tem etiqueta de bloqueio: vale o `Status do PR bloqueado`.
 - O PR foi fechado sem mesclar: a tarefa não muda e vai para a lista de decisão.
@@ -217,8 +217,11 @@ A pessoa pede o panorama do que criou. A consulta traz quatro tarefas. "Exportar
 - Uma frase comprimida parece um recado interno. A skill fica fácil de ler por uma pessoa.
 - Abrir, tirar do rascunho ou mesclar o PR pelo `gh` parece não ter relação com a tarefa. O estado do PR mudou, e a habilidade roda mesmo assim.
 - O aviso de que um PR foi mesclado parece só uma informação. É gatilho: confirme o estado MERGED e sincronize a tarefa na mesma resposta.
-
 - A `Consulta do panorama` pode listar só o PR que fecha a tarefa. A tarefa que parece sem PR pode ter um que só cita a chave, então busque pela chave antes de dizer que não tem.
+- A busca pela chave, num rastreador em que tarefa e PR compartilham a numeração, como o GitHub, casa o número como texto em qualquer PR, inclusive nos antigos, e o número escrito pode não ser o da tarefa.
+  Abra o corpo de cada resultado e ligue só o que cita a tarefa.
+  Um PR de número menor também pode citá-la, quando foi aberto antes da tarefa e teve o corpo editado depois.
+  Veja se o PR resolve a tarefa ou só a menciona, como num "fora do escopo" ou num acompanhamento.
 
 ## Scripts disponíveis
 
