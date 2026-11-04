@@ -3,7 +3,7 @@ name: validar-plano-de-vocabulario
 description: Use essa habilidade sempre que, ao cadastrar termos do vocabulário do tom de voz, for preciso validar os campos do plano antes de gravar, como categorias, motivo, descrição, exemplos e quem decidiu, mesmo sem dizer validar. NÃO use para cadastrar o termo, decidir o nível dele, gravar no vocabulário, nem inventar um campo que a pessoa não enviou.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.6.0"
   related:
     - classificar-estado-do-termo
     - definir-vocabulario
@@ -45,7 +45,7 @@ Valide o plano antes de gravar.
 - Quem decidiu vai em `decided_by`, como os campos de pessoa do `package.json`: `name`, `email` e, se houver, `url`. O e-mail é o individual da pessoa no workspace, nunca o de uma conta de função compartilhada. Com `Domínio do e-mail de quem decide` preenchido, o e-mail termina nesse domínio. Sem o e-mail, pergunte. Se a pessoa só tem um e-mail que divide com outra, grave só o `name` e complete o `email` quando ela tiver um individual. O endereço da linha de origem vai em `source`.
 - Todo termo do lote leva `decided_by` e `decided_at`, em qualquer nível, permitido ou proibido. `decided_at` é o dia da decisão em ISO 8601, `AAAA-MM-DD`.
 - `source` é o trecho ou a página de onde o termo saiu, só como registro de origem. Vários termos da mesma mensagem ou página levam a mesma `source`, no mesmo lote e em chamadas diferentes. Ela não liga uma linha à outra. A conversa em que a decisão foi tomada vai em `notes`.
-- `notes` guarda o histórico que nenhum campo guarda: um link ou o limite que `description` e `when` não dizem. Não repita nele quem decidiu nem a data. Se a evidência nova contradiz uma nota que já está na linha, o plano corrige essa nota com `update`, no mesmo lote, e não acrescenta outra por cima. `description` só diz o que o termo é. O registro formal ou informal vai em `categories`, não em campo. Não muda o estado.
+- `notes` guarda o histórico que nenhum campo guarda: um link ou o limite que `description` e `when` não dizem. Não repita nele quem decidiu nem a data. Se a evidência nova contradiz uma nota, uma descrição, um `when` ou um exemplo que já está na linha do termo ou na de um termo vizinho, o plano corrige esse campo com `update`, no mesmo lote, e não acrescenta outra por cima. `description` só diz o que o termo é. O registro formal ou informal vai em `categories`, não em campo. Não muda o estado.
 - Um termo não é o próprio exemplo. A mesma grafia não entra duas vezes.
 - `term`, `examples`, `rejected` e `alternatives` nunca levam link real. No lugar do link, escreva um marcador entre colchetes, como `[link da tarefa]`. O endereço da página de origem fica em `source`. A escrita recusa o termo com `http://` ou `https://` nesses campos.
 - `state` é a permissão. `description` não repete o estado. Só a stop word, com `stop_word: true`, pode vir sem `state`.
@@ -78,6 +78,14 @@ Se você escrever quem decidiu ou a data em `description`, `reason` ou `source`,
 1. Quem decidiu vai em `decided_by` e o dia em `decided_at`, em todo termo do lote.
 2. Link e conversa vão em `notes`, sem repetir o nome nem a data.
 3. `description` diz o que o termo é, e `reason` diz por que usamos.
+
+### Regra nova que contradiz a linha vizinha
+
+Se você gravar a regra nova e deixar a linha de um termo vizinho dizendo o oposto, o vocabulário passa a se contradizer e a próxima consulta segue a linha antiga.
+
+1. Consulte os termos vizinhos antes de fechar o plano, como a forma proibida e a que a substitui.
+2. Leia o `when`, a descrição, as notas e os exemplos de cada um.
+3. Corrija com `update`, no mesmo lote, o que contradiz a regra nova.
 
 ### Termo inventado
 

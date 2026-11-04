@@ -3,7 +3,7 @@ name: classificar-estado-do-termo
 description: Use essa habilidade sempre que, ao cadastrar um termo do vocabulário do tom de voz, for preciso decidir o nível dele, de proibido a permitido, o contexto ou as tags, mesmo sem dizer estado. NÃO use para cadastrar o termo, validar os campos, escrever o texto da marca, nem decidir o nível sem as fontes da marca.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   related:
     - definir-vocabulario
     - gravar-termos-no-vocabulario
@@ -73,6 +73,14 @@ Se você gravar como permitido ou proibido um termo que só vale num canal, púb
 3. Se o contexto continuar ambíguo, pergunte.
 4. Grave num nível do meio, com o `when`. Não grave como regra geral.
 
+### Palavra comum proibida num sentido só
+
+Se você gravar como `forbidden` uma palavra comum que só se evita num sentido, a escrita recusa o `when` e a marca passa a proibir todos os usos dela.
+
+1. Grave num nível do meio, em geral `strongly_discouraged`, com a `description` dizendo o sentido a evitar.
+2. Ponha no `when` o sentido que continua livre.
+3. Ponha em `substitution` o termo que a pessoa mandou usar no lugar.
+
 ### Emoji como enfeite
 
 Se você deixar o emoji fora do vocabulário, ou gravar sem estado, descrição e exemplo, o símbolo entra na marca sem regra de usar ou evitar.
@@ -124,6 +132,7 @@ O emoji ficou um termo. A combinação junta ficou um termo só. O estado, a des
 
 ## Pegadinhas
 
+- Uma palavra comum que a pessoa manda nunca usar num sentido parece `forbidden`. Os outros sentidos dela continuam valendo, e só um nível do meio guarda o `when`.
 - O artigo de uma expressão proibida parece proibido sozinho. Ele é stop word sem nível, e a regra fica na expressão.
 - Gosto, estética isolada ou julgamento genérico parecem fechar o estado. Sem as fontes da marca que as instruções do projeto nomeiam, ele espera. A tensão entre intenção e viabilidade fica em `description` ou `when`.
 - O `when` parece bastar. Sem `tags`, o texto de outro contexto lê o termo. `maria` e `maria-silva` são dois contextos.
