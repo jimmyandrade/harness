@@ -4,8 +4,8 @@ import { tmpdir } from "node:os"
 import { join } from "node:path"
 import test from "node:test"
 
-import { classifyText } from "./index.ts"
-import { load } from "../../shared/glossary.ts"
+import { classifyPhrase, classifyText } from "./index.ts"
+import { Glossary, load } from "../../shared/glossary.ts"
 import { withServer } from "../../shared/testing.ts"
 
 const GLOSSARY = `{
@@ -118,4 +118,16 @@ test("each word of a case-sensitive term says whether its casing matches", () =>
     words.map((word) => [word.submitted, word.term, word.case_matches]),
     [["Cueca", "cueca", undefined], ["no", undefined, undefined], ["Ebay", "eBay", false], ["e", undefined, undefined], ["no", undefined, undefined], ["eBay", "eBay", true]],
   )
+})
+
+test("classifyPhrase with tags leaves out the rows of another speaker", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  writeFileSync(
+    join(root, "pt-BR.json"),
+    `${JSON.stringify({ casa: { state: "allowed" }, povo: { state: "allowed", tags: ["maria-silva", "palco"] } }, null, 2)}\n`,
+  )
+  const read = (tags: string[]) =>
+    classifyPhrase(new Glossary(root), "pt-BR", "casa povo", tags).words.map((word) => word.to)
+  assert.deepEqual(read(["festival"]), ["allowed", "not_registered"])
+  assert.deepEqual(read(["maria-silva", "palco"]), ["allowed", "allowed"])
 })

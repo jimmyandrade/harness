@@ -5,7 +5,8 @@
  * A word is a run of letters. A hyphen or an apostrophe stays inside the word
  * when it joins letters. Each emoji and each punctuation mark is classified on
  * its own. An emoji keeps its variation selector, skin tone, and ZWJ sequence
- * together. A glossary row of more than one word is not matched across words.
+ * together. Given tags, a row tagged only for another speaker, event, or channel
+ * reads as not registered. A glossary row of more than one word is not matched across words.
  * A word that matches a case_sensitive row says whether its casing matches.
  *
  * Run: node api/routes/classify-text/index.ts <language> <text>
@@ -14,7 +15,7 @@
 import { fileURLToPath } from "node:url"
 
 import { classify } from "../classify/index.ts"
-import { Glossary, InvalidGlossary, collapse, type Entry } from "../../shared/glossary.ts"
+import { Glossary, InvalidGlossary, applicable, collapse, type Entry } from "../../shared/glossary.ts"
 import { parseBody, type Route } from "../../shared/http.ts"
 import { readOptions, report } from "../../shared/options.ts"
 import { classifyTextRequest, type TextClassification } from "../../shared/schema.ts"
@@ -28,9 +29,14 @@ export function classifyText(entries: readonly Entry[], submitted: string, langu
   return { from: "query", language, submitted: query, words }
 }
 
-export function classifyPhrase(glossary: Glossary, language: string, submitted: string): TextClassification {
+export function classifyPhrase(
+  glossary: Glossary,
+  language: string,
+  submitted: string,
+  tags: readonly string[] = [],
+): TextClassification {
   const { tag, entries } = glossary.entries(language)
-  return classifyText(entries, submitted, tag)
+  return classifyText(applicable(entries, tags), submitted, tag)
 }
 
 export const classifyTextRoute: Route = {
@@ -40,7 +46,7 @@ export const classifyTextRoute: Route = {
   emptyMessage: "Provide the text.",
   handle(glossary, record) {
     const body = parseBody(classifyTextRequest, record)
-    return classifyPhrase(glossary, body.language, body.text)
+    return classifyPhrase(glossary, body.language, body.text, body.tags)
   },
 }
 
