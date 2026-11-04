@@ -3,7 +3,7 @@ name: definir-registro-de-reuniao
 description: Cadastra e corrige o registro de uma reunião, com título, data, participantes, resumo e índice, onde o projeto guarda os registros. Usada quando a pessoa cola uma transcrição ou pergunta se uma reunião já está registrada. Não serve para achar o contexto de uma reunião nem escrever a ata.
 metadata:
   author: jimmyandrade
-  version: "0.12.0"
+  version: "0.13.0"
   related:
     - definir-agenda
     - definir-grafia
@@ -118,7 +118,12 @@ A ação sem fonte continua `a confirmar`.
 
 Aplique no resumo as correções já confirmadas, e use o nome canônico no lugar do apelido e da grafia errada. Para nome de pessoa ou de empresa, a forma correta e as formas erradas que o reconhecimento de voz gerou ficam nas variações de grafia do registro, como diz `definir-grafia`: leia dali. Com uma `Fonte de identidade das pessoas` que não é a lista do projeto, a grafia fica nessa fonte, no registro da pessoa. Termo que não é nome, como sigla ou jargão, vem de `Fonte de correções de termos`.
 
-Nome ou termo estranho que não casa com nenhuma correção confirmada: não adivinhe. Liste cada um com duas linhas antes e duas depois e pergunte à pessoa. O que ela confirmar sobre um nome segue `definir-grafia`, e sobre um termo entra em `Fonte de correções de termos`. O que ela não souber fica como pendente, com o trecho.
+Nome ou termo estranho que não casa com nenhuma correção confirmada: não adivinhe e não pergunte de saída.
+Para um nome de pessoa, siga `definir-pessoa`: consulte o diretório, pesquise no Slack e use o assunto, quem fala, o cargo e o time para escolher.
+Um candidato único e plausível entra no resumo como hipótese, dita como inferência.
+Liste para a pessoa só o que sobrar, cada nome com duas linhas antes e duas depois e com os candidatos já pesquisados (nome completo, cargo e e-mail).
+Um termo que não é nome vai direto à pessoa, com o trecho.
+O que ela confirmar sobre um nome segue `definir-grafia`, e sobre um termo entra em `Fonte de correções de termos`. O que ela não souber fica como pendente, com o trecho.
 
 ### Passo 8
 
