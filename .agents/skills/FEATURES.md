@@ -528,7 +528,7 @@ How these skills relate is in `README.md`, in this folder.
   - Tests the criterion in the exact account and reads the subjects it matches before saving
   - Adds a new sender address with `OR` and keeps the old one, so the filter keeps covering the history
   - Keeps a filter that matches few or no conversations, because the sender's volume can grow, checks that its address is right, and deletes a filter only when the person asks
-  - Skips the inbox only for senders that never bring something the person may want to follow; a sender that announces events, workshops, courses, or opportunities is only labelled
+  - Skips the inbox only for senders that never bring something the person may want to follow or answer; a sender that announces events, workshops, courses, or opportunities, or a thank-you note after an event, stays in the inbox
   - Adds never mark as important to any filter that skips the inbox, because an inbox can let important mail override filters
   - Tries the connector, then the browser in the mailbox account, then returns the ready query, and asks the person to sign in instead of signing in for them
   - Reads the saved filter back and checks label, inbox, importance, and read state on the conversations it reached
@@ -1418,6 +1418,7 @@ How these skills relate is in `README.md`, in this folder.
   - Gives a collection agency its own label and adds the creditor's label only when the body names it; an alarming subject is not a formal notice unless the body describes the measure taken
   - Compares batch changes with the plan, redoes only what a partial failure left, and reports every failed call
   - Leaves creating, editing, and checking filters to `definir-filtro-de-email`
+  - Reads `Etiquetas de status` for the pending, expected, and done labels of an action, applies them during triage, and keeps them outside the BASB roots
   - Asks before restoring a conversation that left the inbox during a change, because the person may have archived it
 - **Test Criteria**:
   - [x] The skill is present and one user-requested read-only exploratory case is recorded

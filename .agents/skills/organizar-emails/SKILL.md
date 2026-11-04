@@ -3,7 +3,7 @@ name: organizar-emails
 description: Organiza e-mails por BASB e separa pessoal, trabalho e misto. Usada quando a pessoa quer triar a caixa, etiquetar ou configurar filtros. Não serve para responder mensagens, lançar despesas nem acompanhar veículos.
 metadata:
   author: jimmyandrade
-  version: "0.12.1"
+  version: "0.13.0"
   related:
     - procurar-email
     - evoluir-habilidade
@@ -50,7 +50,12 @@ Leia os valores nas instruções do projeto, na entrada desta habilidade. Na aus
   - "Áreas"
   - "Recursos"
   - "Arquivos"
-# `Etiquetas fora da estrutura`: etiquetas que a pessoa quer manter fora das raízes, como as de status. Vazio, nenhuma.
+# `Etiquetas de status`: a etiqueta de cada estado de uma ação, fora das raízes. Vazio, a triagem só lista as ações.
+"Etiquetas de status":
+  "Ação pendente": ""
+  "Ação esperada": ""
+  "Concluída": ""
+# `Etiquetas fora da estrutura`: outras etiquetas que a pessoa quer manter fora das raízes. Vazio, nenhuma.
 "Etiquetas fora da estrutura": []
 "Árvore de decisão": ""
 "Ordem de avaliação da árvore": "de cima para baixo"
@@ -127,7 +132,7 @@ Sem `Árvore de decisão`, a confirmação vale só para aquele caso.
 ### Passo 4
 
 Mantenha contexto e destino PARA como eixos independentes de BASB.
-A etiqueta de destino fica sob as `Raízes da estrutura BASB`, salvo as `Etiquetas fora da estrutura`.
+A etiqueta de destino fica sob as `Raízes da estrutura BASB`, salvo as `Etiquetas de status` e as `Etiquetas fora da estrutura`.
 Etiqueta existente fora delas, como `Fornecedor`, não se reutiliza como está: proponha `Recursos/Fornecedor` e renomeie com o sim da pessoa, o que leva as conversas junto.
 Preserve as etiquetas válidas; não transforme toda newsletter em referência.
 Consulte `Comunicações indesejadas` para reconhecer assinaturas que a pessoa já rejeitou, sem repetir cancelamento ou criar bloqueio por esse relato sozinho.
@@ -143,6 +148,7 @@ Ação pendente é o que a mensagem pede à pessoa e ela não fez, como responde
 Ação esperada é o que a pessoa aguarda de outra, como a resposta ao último e-mail dela.
 Diga o assunto, quem, o que fazer, o prazo da mensagem, sem inventar, e o link.
 Conversa com ação pendente fica na entrada.
+Com `Etiquetas de status` preenchidas, a conversa recebe a etiqueta da ação pendente ou da esperada, e quando a ação termina ela troca pela de concluída.
 Não crie tarefa nem evento: ofereça `definir-tarefa` ou `definir-agenda`.
 
 ```mermaid
