@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.57.0](https://github.com/jimmyandrade/harness/compare/v1.56.0...v1.57.0) (2026-11-04)
+
+
+### Features
+
+* **mesclar-pull-request:** read the queue when a check is stuck ([#854](https://github.com/jimmyandrade/harness/issues/854)) ([5b24d47](https://github.com/jimmyandrade/harness/commit/5b24d4756e477527e62218dfc97bd8f304b55395))
+
+
+### Bug Fixes
+
+* **definir-artigo-da-base-de-conhecimento:** try to capture the screens before leaving a step without a print ([#852](https://github.com/jimmyandrade/harness/issues/852)) ([f785a07](https://github.com/jimmyandrade/harness/commit/f785a07ab88808d9e4b0947b360bbd1d3f025b03))
+* **vocabulary:** run the CLI and the MCP server when called through a symbolic link ([#848](https://github.com/jimmyandrade/harness/issues/848)) ([322457b](https://github.com/jimmyandrade/harness/commit/322457b04583583b149cd4a168a721383dfb7be7))
+
 ## [1.56.0](https://github.com/jimmyandrade/harness/compare/v1.55.0...v1.56.0) (2026-11-04)
 
 
