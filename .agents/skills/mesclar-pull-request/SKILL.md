@@ -3,7 +3,7 @@ name: mesclar-pull-request
 description: Mescla um pull request aberto na branch base e faz o que vem depois do merge, inclusive quando a pessoa avisa que mesclou. Usada quando a pessoa pede para mesclar, colocar na main ou diz que um PR foi mesclado, mesmo sem dizer merge. Não serve para fechar sem merge, abrir ou atualizar o PR nem para responder a revisão.
 metadata:
   author: jimmyandrade
-  version: "0.2.3"
+  version: "0.3.1"
   related:
     - atender-revisao-de-pull-request
     - atualizar-branch-do-pull-request
@@ -67,6 +67,10 @@ flowchart LR
 A aprovação de `Exigir aprovação de outra pessoa` é de outra pessoa no PR: check verde não conta, e ser dona do repositório não dispensa.
 Comentário pendente é thread de revisão sem resolver, revisão que pede mudança ou comentário da conversa sem resposta, de pessoa ou de bot. Aviso de bot que só informa, como link de preview, não conta. Thread que espera decisão da pessoa segura o merge até ela decidir.
 Leia os checks uma vez. Pendentes: diga quais faltam e pare, sem esperar em loop. Com `Exigir CI verde` em `não`, mescle e diga quais não passaram.
+
+Check parado na fila espera vaga de runner, e a fila anda por ordem de chegada. Leia a fila do repositório, diga quantas execuções estão na frente e confira o commit de cada execução da branch: o mesmo commit pode já ter uma execução concluída. Execução de um commit que a mesma branch já substituiu só ocupa vaga: proponha cancelar essas, com o comando pronto, e nunca a de outra branch.
+
+Fechar e reabrir o PR não adianta: cria execuções novas no fim da fila, e os checks do PR passam a mostrar essas, mesmo com o commit já aprovado numa execução anterior.
 Se o modo automático negar o merge, não tente de outro jeito: nada de auto-merge, API ou outra ferramenta. Entregue o comando pronto e diga que a decisão é da pessoa.
 
 ### Passo 3
@@ -165,6 +169,8 @@ O PR mudava a mensagem de erro do CI para uma branch com o prefixo de um agente 
 - O merge feito pelo botão, ou avisado pela pessoa, pode deixar a branch remota. Só o `fetch --prune` diz se ela sumiu.
 - `mergeStateStatus` `BLOCKED` com checks verdes costuma ser aprovação ou check exigido que ainda não rodou. Leia os dois antes de dizer por quê.
 - O aviso "mesclado" parece encerrar o assunto. É o gatilho do Passo 3.
+- Fechar e reabrir o PR parece pôr o check na frente da fila. Ele cria execuções novas no fim dela, e a execução anterior do mesmo commit, já concluída, deixa de aparecer nos checks.
+- A hora de uma execução não diz o commit dela. Leia o `headSha` antes de chamar uma execução de antiga.
 - Uma revisão pendente não aparece para mais ninguém e não segura o merge. Só quem a escreveu a vê, então leia as revisões com o `gh` da pessoa.
 
 ## Scripts disponíveis
@@ -174,5 +180,6 @@ O PR mudava a mensagem de erro do CI para uma branch com o prefixo de um agente 
 1. Estado: `gh pr view <número> --repo <Repositório> --json state,isDraft,mergeCommit,mergeStateStatus,reviewDecision,closingIssuesReferences`.
 2. Threads, com os comentários da revisão pendente: `gh api graphql -f query='query{repository(owner:"<dono>",name:"<nome>"){pullRequest(number:<número>){reviewDecision reviewThreads(first:100){nodes{isResolved path line comments(first:20){nodes{author{login} body}}}}}}}'`.
 3. Checks: `gh pr checks <número> --repo <Repositório>`.
-4. Merge: `gh pr merge <número> --repo <Repositório> --<Tipo de merge> --delete-branch`.
-5. Autor, revisões e conversa: `gh pr view <número> --repo <Repositório> --json author,reviews,comments` e `gh api user --jq .login`.
+4. Fila: `gh api 'repos/<Repositório>/actions/runs?status=queued' --jq '.total_count'` e `gh run list --repo <Repositório> --branch <branch> --status queued --json databaseId,headSha`. Execução substituída: `gh run cancel <id> --repo <Repositório>`.
+5. Merge: `gh pr merge <número> --repo <Repositório> --<Tipo de merge> --delete-branch`.
+6. Autor, revisões e conversa: `gh pr view <número> --repo <Repositório> --json author,reviews,comments` e `gh api user --jq .login`.
