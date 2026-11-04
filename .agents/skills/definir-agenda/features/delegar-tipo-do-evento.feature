@@ -17,3 +17,9 @@ Funcionalidade: Delegar a classificação do tipo
       Quando a skill vai salvar
       Então ela para e segue definir-tipo-do-evento
       Mas não cria nem altera o evento
+
+    Exemplo: O tipo parece óbvio
+      Dado que o pedido registra marcos de calendário do time
+      Quando a skill vai gravar o primeiro evento
+      Então ela confirma o tipo com `definir-tipo-do-evento` antes de gravar
+      E não pula a confirmação porque o tipo parece óbvio
