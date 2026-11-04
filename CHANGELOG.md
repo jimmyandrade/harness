@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.50.0](https://github.com/jimmyandrade/harness/compare/v1.49.0...v1.50.0) (2026-11-04)
+
+
+### Features
+
+* **definir-vocabulario:** decide the short form and the gender of a replacement ([#818](https://github.com/jimmyandrade/harness/issues/818)) ([e7f4df9](https://github.com/jimmyandrade/harness/commit/e7f4df9205fbe686fa2ea176ddd5b19eb3d39441))
+* **levantar-contexto-do-pull-request:** read the whole check list before saying a check passed ([#823](https://github.com/jimmyandrade/harness/issues/823)) ([8e0c4e4](https://github.com/jimmyandrade/harness/commit/8e0c4e405991c4a047e1e40dbdcf1e5391adafed))
+* **vocabulary:** expose classify-text in the MCP server and the CLI ([#821](https://github.com/jimmyandrade/harness/issues/821)) ([bf384ca](https://github.com/jimmyandrade/harness/commit/bf384ca817c909a902e4be9b2aa7cf910cb92f84))
+
+
+### Bug Fixes
+
+* write cited links before the final box, even one that asks ([#822](https://github.com/jimmyandrade/harness/issues/822)) ([39f8983](https://github.com/jimmyandrade/harness/commit/39f898305cac0e9541eb636f86712c207932f1d0))
+
 ## [1.49.0](https://github.com/jimmyandrade/harness/compare/v1.48.0...v1.49.0) (2026-11-04)
 
 
