@@ -3,7 +3,7 @@ name: fechar-pull-request
 description: Fecha um pull request sem merge com o motivo e os links que o comprovam, e faz o que vem depois do fechamento. Usada quando a pessoa pede para fechar um PR, ou quando outra habilidade fecha um PR que foi substituído, mesmo sem dizer fechar. Não serve para mesclar, abrir ou atualizar o PR nem para responder a revisão.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.3.1"
   related:
     - atender-revisao-de-pull-request
     - atualizar-branch-do-pull-request
@@ -60,7 +60,7 @@ Depois do fechamento, feito aqui ou avisado pela pessoa, faça tudo isto na mesm
 - [ ] Procure as tarefas ligadas ao PR: as issues que ele citava, a chave do card no título ou na branch, e as tarefas que citam o PR.
 - [ ] Para cada tarefa achada, siga `sincronizar-status-da-tarefa`.
 - [ ] Se não achar nenhuma, escreva na resposta que o PR não tem tarefa ligada e onde você procurou.
-- [ ] Siga `limpar-copias-de-trabalho` para a cópia de trabalho e a branch local do PR.
+- [ ] Siga `limpar-copias-de-trabalho` para a cópia de trabalho e a branch local do PR, com a conferência de cada espaço de trabalho, inclusive a branch remota, na mesma resposta.
 
 Abra a resposta com o link do PR, `[#123](url)`, e o link do comentário. Cada PR, issue e commit citado vai como link clicável em markdown.
 

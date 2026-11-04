@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.8.0"
+  version: "0.9.2"
   related:
     - definir-empresa
     - definir-grafia
@@ -24,7 +24,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 # `Endereço das pessoas` é a pasta, nos arquivos locais.
 "Endereço das pessoas": ""
 "Nome do arquivo da pessoa": "e-mail.json"
-# `Fontes para resolver identidade` lista onde achar um dado de identidade antes de perguntar, como a agenda e o perfil público no Slack.
+# `Fontes para resolver identidade` lista as ferramentas em que achar dados de pessoas (o diretório) antes de perguntar, como agenda, Slack, Atlassian Confluence, Atlassian Jira, GitHub, Notion, Instagram, Google Contatos ou WhatsApp.
 "Fontes para resolver identidade": ""
 ```
 ## Instruções
@@ -53,14 +53,18 @@ Um perfil colado por quem usa a habilidade, em texto ou imagem, é o pedido de c
 
 ### Passo 2
 
-Busque o nome na lista de pessoas, no nome e nas variações, por consulta direta e por busca semântica. Antes de perguntar qualquer dado de identidade, consulte o registro da pessoa. Se faltar, resolva pelas `Fontes para resolver identidade`. Só pergunte o que nem o registro nem essas fontes respondem.
+Busque o nome na lista de pessoas, no nome e nas variações, por consulta direta e por busca semântica. Antes de perguntar qualquer dado de identidade, consulte o registro da pessoa. Se faltar, resolva pelas `Fontes para resolver identidade`: consulte cada ferramenta da lista que estiver conectada, pelo nome e, quando houver, pelo e-mail (perfil, autor, login). Um nome parcial, um apelido ou uma grafia estranha, sem e-mail, também se resolve nessas fontes. Compare o cargo, o time e os canais com o assunto da conversa.
+Não peça à pessoa que desambigue antes dessa busca.
+Só pergunte o que nem o registro nem essas fontes respondem.
+Um candidato único e plausível pelo contexto entra como hipótese `inferido`, com a frase da fonte. Só o que a fonte responde com certeza entra como confirmado.
+Com vários candidatos, liste cada um com o que ajuda a diferenciar, como cargo e e-mail, e com outros dados que as fontes tragam, junto da frase em que o nome aparece, e pergunte só qual deles. Nunca pergunte só pelo nome.
 Uma variação com o estado `inferido` ajuda a achar a pessoa, mas é hipótese: o texto diz que é inferência e, havendo chance, pede a confirmação a quem esteve na conversa.
 Confirmada, troque o estado para `confirmado` e grave a data. Contrariada, apague a entrada.
 
 ```mermaid
 flowchart LR
   B{Quantas casam?} -->|uma| U[Use essa]
-  B -->|várias| L[Liste e não crie]
+  B -->|várias| L[Liste com o que diferencia e não crie]
   B -->|nenhuma| C[Crie a página]
 ```
 
@@ -96,6 +100,23 @@ flowchart LR
 - Acrescentar menções a um texto já publicado há tempo pede o sim de quem escreve.
 
 ## Problemas comuns
+
+### Desambiguação pedida antes da busca
+
+Se você perguntar à pessoa quem é um nome ambíguo antes de pesquisar, ela responde o que o diretório e as fontes já mostravam.
+
+1. Consulte o diretório e cada ferramenta de `Fontes para resolver identidade`, pelo nome e pelo e-mail.
+2. Compare cargo, time e canais com o assunto da conversa.
+3. Um candidato plausível entra como `inferido`, com a frase.
+4. Só pergunte o que sobrar, com os candidatos já pesquisados.
+
+### Nome listado como pendente sem ter pesquisado
+
+Se você listar um nome como pendente sem ter pesquisado, a pessoa confirma o que as fontes já mostravam.
+
+1. Pesquise no mesmo turno, antes de listar, no diretório e em cada ferramenta de `Fontes para resolver identidade`, pelo nome e pelo e-mail.
+2. Um candidato plausível entra como `inferido`, com a frase.
+3. A lista de pendentes leva só o que a busca em todas as fontes não resolveu.
 
 ### Nome em texto onde cabia menção
 
@@ -157,7 +178,7 @@ Busquei na lista de pessoas e não havia Ana Exemplo. Criei a página com o nome
 - O perfil colado tem poucos campos: grave os que vieram e deixe o resto vazio. Não espere o perfil completo.
 - A pessoa saiu da empresa: atualize ou crie o registro com a nota. Não apague.
 - O apelido ambíguo cabe a mais de uma pessoa e a pessoa infere uma: grave só no registro da inferida, com as outras hipóteses nas notas. Não grave nas outras.
-- Dois registros têm nomes parecidos, como Ana Souza e Ana Souza Lima: não marque pelo primeiro resultado. Confira pelo assunto da fala e, na dúvida, pergunte.
+- Dois registros têm nomes parecidos, como Ana Souza e Ana Souza Lima: não marque pelo primeiro resultado. Confira pelo assunto da fala e pelo perfil nas fontes. Na dúvida, liste os candidatos com o que os diferencia, como cargo e e-mail, e pergunte.
 
 ## Pegadinhas
 
