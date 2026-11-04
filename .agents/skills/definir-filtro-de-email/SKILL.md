@@ -3,7 +3,7 @@ name: definir-filtro-de-email
 description: Cria, edita e confere filtros de e-mail. Testa o critério na conta, escolhe as ações sem esconder o que a pessoa quer ver e lê o filtro salvo de volta. Usada quando a triagem pede um filtro ou a pessoa quer mudar um. Não serve para classificar mensagens nem cancelar assinatura.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.3.1"
   related:
     - organizar-emails
     - evoluir-habilidade
@@ -32,28 +32,28 @@ Leia os valores nas instruções do projeto, na entrada desta habilidade. Na aus
 ### Passo 1
 
 O filtro sai do plano que a triagem de `organizar-emails` validou com a pessoa, ou do pedido dela para mudar um filtro.
+
 Leia os filtros existentes da conta antes de criar outro: um filtro com o mesmo remetente se edita, não se duplica.
-Teste o critério na busca da conta exata e leia o assunto das conversas que ele atinge.
-Examine as correspondências inesperadas: o que não for do tipo confirmado muda o critério antes do filtro.
+
+Teste o critério na busca da conta exata e leia o assunto das conversas que ele atinge. Examine as correspondências inesperadas: o que não for do tipo confirmado muda o critério antes do filtro.
+
 Quando o remetente muda de endereço, o novo entra com `OR` e o antigo fica, para o filtro continuar pegando o histórico.
-Pouca ou nenhuma conversa atingida não é motivo para excluir um filtro: o volume do remetente pode crescer depois.
-Confira se o endereço do critério é o que o remetente usa e mantenha o filtro.
-Exclua um filtro só quando a pessoa pedir.
+
+Pouca ou nenhuma conversa atingida não é motivo para excluir um filtro: o volume do remetente pode crescer depois. Confira se o endereço do critério é o que o remetente usa e mantenha o filtro. Exclua um filtro só quando a pessoa pedir.
 
 ### Passo 2
 
-Escolha as ações pelo que a pessoa precisa ver.
-Pular a entrada e marcar como lida servem só para remetente que nunca traz o que ela possa querer acompanhar ou responder, como relatório automático.
-Mensagem de uma organização que pode valer uma resposta, como o agradecimento depois de um evento, fica na entrada: responder estreita a relação institucional.
-Remetente que anuncia evento, workshop, curso, convite ou oportunidade fica na entrada: o filtro só etiqueta, e pode tirar a importância e categorizar.
-Na dúvida, pergunte antes de pular a entrada.
+Escolha as ações pelo que a pessoa precisa ver. A etiqueta é a que a triagem decidiu, dentro da estrutura dela.
+
+Pular a entrada e marcar como lida servem só para remetente que nunca traz o que ela possa querer acompanhar ou responder, como relatório automático. Na dúvida, pergunte antes de pular a entrada.
+
+Remetente que anuncia evento, workshop, curso, convite ou oportunidade fica na entrada: o filtro só etiqueta, e pode tirar a importância e categorizar. Mensagem de uma organização que pode valer uma resposta, como o agradecimento depois de um evento, também fica na entrada: responder estreita a relação institucional.
+
 Quando o filtro pula a entrada, inclua nunca marcar como importante, porque a caixa pode estar configurada para as mensagens importantes passarem por cima dos filtros.
-A etiqueta é a que a triagem decidiu, dentro da estrutura dela.
 
 ### Passo 3
 
-Tente os `Caminhos para criar filtro` na ordem e registre qual funcionou.
-Confirme a capacidade real de cada caminho antes de prometer o filtro: uma proposta não é filtro instalado.
+Tente os `Caminhos para criar filtro` na ordem e registre qual funcionou. Confirme a capacidade real de cada caminho antes de prometer o filtro: uma proposta não é filtro instalado.
 
 ```mermaid
 flowchart LR
@@ -64,22 +64,23 @@ flowchart LR
 ```
 
 Use o `Navegador para criar filtro`; o `Navegador do aplicativo para criar filtro` diz quando o navegador do próprio aplicativo entra.
-No navegador, confirme que a conta é a da caixa antes de salvar e peça a aprovação do site quando ela ainda não existir.
-Tela de login: peça à pessoa que entre na conta no navegador. Não entre por ela.
+
+No navegador, confirme que a conta é a da caixa antes de salvar e peça a aprovação do site quando ela ainda não existir. Na tela de login, peça à pessoa que entre na conta no navegador; não entre por ela.
+
 A consulta devolvida traz o critério, a etiqueta e as ações do plano, e diz em que tela cada uma fica.
 
 ### Passo 4
 
-Com `Aplicar filtro ao histórico` em `sim`, marque a aplicação às conversas que o critério atinge; com `não`, o filtro vale só para as próximas mensagens.
-Uma conversa antiga sem etiqueta não testa um filtro criado depois.
+Com `Aplicar filtro ao histórico` em `sim`, marque a aplicação às conversas que o critério atinge; com `não`, o filtro vale só para as próximas mensagens. Uma conversa antiga sem etiqueta não testa um filtro criado depois.
 
 ### Passo 5
 
 Leia o filtro salvo na lista da caixa e compare o critério e cada ação com o plano.
-Leia de volta as conversas atingidas: etiqueta, entrada, importância e leitura.
-O estado de leitura anterior fica como estava; abrir uma mensagem no navegador a marca como lida, e ela volta a não lida.
-Não deduza o nome de uma etiqueta a partir de identificadores diferentes.
-Sem correspondência fornecida pela integração entre o identificador interno e o nativo, declare a validação do nome no filtro limitada.
+
+Leia de volta as conversas atingidas: etiqueta, entrada, importância e leitura. O estado de leitura anterior fica como estava; abrir uma mensagem no navegador a marca como lida, e ela volta a não lida.
+
+Não deduza o nome de uma etiqueta a partir de identificadores diferentes. Sem correspondência fornecida pela integração entre o identificador interno e o nativo, declare a validação do nome no filtro limitada.
+
 Relate o caminho que criou o filtro, ou que nenhum criou, o filtro armazenado, as conversas conferidas e a aplicação automática futura.
 
 ### Passo 6
