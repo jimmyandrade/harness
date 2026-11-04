@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.7.2"
+  version: "0.8.0"
   related:
     - definir-empresa
     - definir-grafia
@@ -54,6 +54,8 @@ Um perfil colado por quem usa a habilidade, em texto ou imagem, é o pedido de c
 ### Passo 2
 
 Busque o nome na lista de pessoas, no nome e nas variações, por consulta direta e por busca semântica. Antes de perguntar qualquer dado de identidade, consulte o registro da pessoa. Se faltar, resolva pelas `Fontes para resolver identidade`. Só pergunte o que nem o registro nem essas fontes respondem.
+Uma variação com o estado `inferido` ajuda a achar a pessoa, mas é hipótese: o texto diz que é inferência e, havendo chance, pede a confirmação a quem esteve na conversa.
+Confirmada, troque o estado para `confirmado` e grave a data. Contrariada, apague a entrada.
 
 ```mermaid
 flowchart LR
@@ -66,7 +68,9 @@ flowchart LR
 
 O nome completo é o nome da pessoa. O handle não entra nesse nome. Não invente e-mail, telefone, pronome, tipo de público nem empresa. O perfil que o print mostrar segue `definir-perfil-social`. Quando esse perfil existir, relacione nos perfis sociais relacionados. Não grave o print no corpo.
 
-Grave como confirmado só o que veio direto da pessoa que usa a habilidade ou de uma fonte que respondeu com certeza. Nunca invente papel, time nem apelido. Ao atualizar um registro, mude o campo pontualmente: nunca regrave o registro inteiro descartando campos já confirmados ou o conteúdo de `extensions`. Todo texto que nomeia a pessoa usa como ela é chamada, e não o primeiro nome do nome completo quando os dois divergem.
+Grave como confirmado só o que veio direto da pessoa que usa a habilidade ou de uma fonte que respondeu com certeza. Nunca invente papel, time nem apelido.
+Um apelido ou uma grafia ambígua que a pessoa decide inferir, como "vamos inferir que Bia é a Beatriz", entra no registro de quem foi inferida, na lista das transcrições erradas do nome, com o estado `inferido`, a data, quem inferiu, a frase da transcrição e o que descartou as outras hipóteses.
+A entrada não vira confirmada por ter sido pedida: o estado `confirmado` só vale quando alguém que sabe confirma. Uma entrada sem estado conta como confirmada. Ao atualizar um registro, mude o campo pontualmente: nunca regrave o registro inteiro descartando campos já confirmados ou o conteúdo de `extensions`. Todo texto que nomeia a pessoa usa como ela é chamada, e não o primeiro nome do nome completo quando os dois divergem.
 
 ### Passo 4
 
@@ -119,6 +123,14 @@ Se você ler o perfil colado, usar a informação na resposta e não gravar o re
 3. A saída da empresa entra nas notas, e o registro fica.
 4. Não pergunte se deve gravar. Depois, diga o que gravou.
 
+### Inferência gravada como confirmada
+
+Se você gravar o que a pessoa só inferiu como confirmado, a próxima consulta trata o palpite como fato e a dúvida some.
+
+1. Grave a entrada com o estado `inferido`, a data, quem inferiu e a frase da transcrição.
+2. Escreva nas notas o que descartou as outras hipóteses e quais ficam abertas.
+3. Ao usá-la, diga que é inferência e peça a confirmação quando houver chance.
+
 ### Handle no nome
 
 Se você gravar o arroba no nome completo, o perfil vira a pessoa.
@@ -144,6 +156,7 @@ Busquei na lista de pessoas e não havia Ana Exemplo. Criei a página com o nome
 - O pedido é só a grafia de quem já está na lista: siga `definir-grafia`. Não crie outra página.
 - O perfil colado tem poucos campos: grave os que vieram e deixe o resto vazio. Não espere o perfil completo.
 - A pessoa saiu da empresa: atualize ou crie o registro com a nota. Não apague.
+- O apelido ambíguo cabe a mais de uma pessoa e a pessoa infere uma: grave só no registro da inferida, com as outras hipóteses nas notas. Não grave nas outras.
 - Dois registros têm nomes parecidos, como Ana Souza e Ana Souza Lima: não marque pelo primeiro resultado. Confira pelo assunto da fala e, na dúvida, pergunte.
 
 ## Pegadinhas
@@ -155,6 +168,7 @@ Busquei na lista de pessoas e não havia Ana Exemplo. Criei a página com o nome
 - O primeiro nome do nome completo nem sempre é como a pessoa é chamada: um texto que usa o primeiro nome erra o nome dela.
 - O markdown não gera menção no Confluence: o texto sai com o nome puro e ninguém é notificado. Use HTML.
 - Uma menção parece só um jeito de escrever o nome. Ela notifica a pessoa.
+- Uma inferência que a pessoa decidiu parece confirmação. Ela é hipótese até alguém que sabe confirmar.
 
 ## Scripts disponíveis
 
