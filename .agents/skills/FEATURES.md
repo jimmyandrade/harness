@@ -613,6 +613,7 @@ How these skills relate is in `README.md`, in this folder.
   - Marks a dependency in GitHub Relationships: blocked by, blocking, relates to, or parent. A comment that only says the dependency does not count
   - Does not close an issue by scanning the open list. The issue closes when the citing pull request merges and its done criterion is met
   - When a new issue replaces another, opens its body with a GitHub `> [!NOTE]` alert linking the old one, and closes the old one with a comment that opens with a `> [!IMPORTANT]` alert linking the new one
+  - Attaches supporting material as an issue artifact instead of pasting it in the body or a comment: a plan as `plan`, research as `generic`, a diagram or prototype as `embedded_html`, an outside page as `link`. Edits the same artifact to keep its version history, and, when no connection can create artifacts, warns the person and follows `Material sem artifact`: `perguntar` offers the description, a comment, or both; `descrição` or `comentário` puts it there
 - **Test Criteria**:
   - [x] The skill is present at that path
 
@@ -668,6 +669,21 @@ How these skills relate is in `README.md`, in this folder.
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [ ] Three cases validated with the person
+
+### definir-lote-de-ingresso
+- **Stability**: experimental
+- **Description**: Check, register, or fix an event's ticket batch in the batch database, with the value, the fee, the quantity, the sales window, and the receiving account
+- **Properties**:
+  - Lives at `.agents/skills/definir-lote-de-ingresso/SKILL.md`
+  - Reads the batch, event, and account data sources, the field names, the window statuses, whether the value includes the fee, and who decides the fee from the project instructions
+  - Lists the batches linked to the event, and treats a batch written only in the event page body as a launch error
+  - Fixes a batch already linked to the event instead of creating another record
+  - Proposes price and quantity from the previous edition of the same product and place only with the person's yes
+  - Asks who decides the fee before saving, and saves the value with or without the fee as the project says
+  - Saves only after the person says yes, and counts a batch as launched only with its link
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses opening sales on a ticketing platform, deciding price and quantity, and checking a sales page
 
 ### definir-medicao-de-metrica
 - **Stability**: experimental

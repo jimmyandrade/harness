@@ -3,7 +3,7 @@ name: levantar-contexto-do-pull-request
 description: Levanta o contexto de um pull request antes de revisar, responder ou ajustar. Cobre o estado, as convenções do repositório, os comentários já feitos, o card e as conversas ligados, o propósito e o trabalho parecido. Usada em PR de outra pessoa e no seu. Não serve para revisar o diff nem publicar texto.
 metadata:
   author: jimmyandrade
-  version: "0.6.1"
+  version: "0.7.0"
   related:
     - criar-pull-request
     - definir-registro-de-reuniao
@@ -44,7 +44,10 @@ Peça o número ou o link do pull request. Veja o estado dele: aberto, mesclado 
 
 Um PR aberto sem rótulo recebe um antes de qualquer proposta de merge. Leia os rótulos do repositório e escolha o que descreve a mudança pelo tipo do Conventional Commits, como `criar-pull-request` manda: `fix` usa o de bug, `docs` o de documentação. Sem tipo no título, o tipo segue o que a mudança faz. Com `Rótulo do PR sem rótulo` em `aplicar` e permissão de escrita, aplique o rótulo e diga qual. Com `sugerir`, sem permissão ou sem rótulo que sirva, sugira o rótulo, o mais próximo ou um novo, e pergunte. A proposta de merge espera o rótulo.
 
-Liste os checks pelo nome, com o resultado de cada um: passou, falhou ou pendente. Não conclua sobre um check pendente.
+Liste os checks pelo nome, com o resultado de cada um: passou, falhou ou pendente.
+Leia a lista inteira com `gh pr checks`, não a contagem de um resumo, como a do aplicativo, que pode deixar de fora um check que ainda não começou.
+Não conclua sobre um check pendente: diga qual está rodando.
+Quando a pessoa avisa que um check está rodando, leia a lista de novo antes de responder.
 
 ### Passo 2
 

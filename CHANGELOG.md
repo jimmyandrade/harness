@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.49.0](https://github.com/jimmyandrade/harness/compare/v1.48.0...v1.49.0) (2026-11-04)
+
+
+### Features
+
+* **classificar-estado-do-termo:** keep a common word banned in one sense out of forbidden ([#815](https://github.com/jimmyandrade/harness/issues/815)) ([e2ee772](https://github.com/jimmyandrade/harness/commit/e2ee772e4cedcef86e28932ac02c222344afecdf))
+* **definir-issue-do-github:** attach supporting material as issue artifacts ([#819](https://github.com/jimmyandrade/harness/issues/819)) ([41ec23c](https://github.com/jimmyandrade/harness/commit/41ec23c22e1f18d6a3212c5c70dd3522460e0311))
+* **definir-lote-de-ingresso:** check and register an event's ticket batch ([#817](https://github.com/jimmyandrade/harness/issues/817)) ([0c3933b](https://github.com/jimmyandrade/harness/commit/0c3933b9c71207edcb2f341a5c84b592b49c11f4))
+* **definir-registro-de-reuniao:** fill pending owners from sources outside the transcript ([#813](https://github.com/jimmyandrade/harness/issues/813)) ([837d853](https://github.com/jimmyandrade/harness/commit/837d8535849afe47dc1f500df03d3967ec8bab83))
+
 ## [1.48.0](https://github.com/jimmyandrade/harness/compare/v1.47.0...v1.48.0) (2026-11-04)
 
 
