@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.16.3"
+  version: "0.17.0"
   related:
     - comunicar-novidade-do-produto
     - definir-agenda
@@ -37,6 +37,8 @@ Leia os valores nas instruções do projeto, na entrada desta habilidade. Na aus
 "Canal da rotina de resposta": "navegador"
 # `Ao conferir a resposta` é `ler a lista`, que lê a prévia e o contador sem marcar como lida, ou `abrir a conversa`, que abre e marca como lida.
 "Ao conferir a resposta": "ler a lista"
+# `Não lidas antes de enviar` é `ler e mostrar`, que abre a conversa, lê as não lidas e mostra o que pede ação da pessoa antes de enviar, ou `perguntar antes de abrir`, que avisa que abrir marca como lidas e espera o sim.
+"Não lidas antes de enviar": "ler e mostrar"
 ```
 ## Instruções
 
@@ -48,7 +50,7 @@ Peça o assunto: quem pediu, sobre quem ou o quê, e se a pessoa quer só ler ou
 
 Espere a lista de conversas carregar antes de ler. Com `Etiqueta das conversas` preenchida, filtre a lista por essa etiqueta antes de procurar. Ache a conversa pelo nome na lista ou pela busca. Um pedido costuma estar em mais de uma conversa: na de quem pediu, na da pessoa envolvida e num grupo. Abra cada conversa ligada ao assunto e leia o texto da conversa aberta, não só a prévia da lista.
 
-Antes de abrir uma conversa com mensagens não lidas, diga que abrir marca essas mensagens como lidas, também no celular de quem enviou. Pergunte se pode abrir. Não diga que nada foi marcado como lido depois de abrir uma conversa assim.
+Uma conversa com mensagens não lidas segue `Não lidas antes de enviar`. Com `ler e mostrar`, abra, leia as não lidas e mostre primeiro o que pede ação da pessoa, como uma menção, uma pergunta ou um pedido para ela, e depois o resto em uma linha. Antes de enviar nessa conversa, pergunte se envia agora ou espera, e siga a resposta. Com `perguntar antes de abrir`, diga que abrir marca essas mensagens como lidas, também no celular de quem enviou, e pergunte se pode abrir. Não diga que nada foi marcado como lido depois de abrir uma conversa assim.
 
 Se a conversa mostrar o aviso para carregar mensagens antigas do celular, diga que o histórico pode estar incompleto.
 
@@ -179,10 +181,10 @@ Se você ler só a conversa da pessoa envolvida, perde quem pediu, quando pediu 
 
 ### Leitura marcada sem aviso
 
-Se você abrir uma conversa com mensagens não lidas sem avisar, quem enviou vê a mensagem como lida e a pessoa perde o marcador.
+Se você enviar numa conversa com mensagens não lidas sem mostrar o que elas pedem, a pessoa perde o que era para ela. Se abrir sem avisar com `Não lidas antes de enviar` em `perguntar antes de abrir`, quem enviou vê a mensagem como lida e a pessoa perde o marcador.
 
-1. Diga quais conversas têm mensagens não lidas.
-2. Pergunte antes de abrir.
+1. Siga `Não lidas antes de enviar`.
+2. Com `ler e mostrar`, mostre o que pede ação da pessoa antes de enviar. Com `perguntar antes de abrir`, pergunte antes de abrir.
 3. Depois de abrir, não diga que nada foi marcado como lido.
 
 ### Rascunho fora da vista
