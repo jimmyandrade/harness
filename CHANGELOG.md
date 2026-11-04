@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.58.2](https://github.com/jimmyandrade/harness/compare/v1.58.1...v1.58.2) (2026-11-04)
+
+
+### Bug Fixes
+
+* **skills:** name branches in English and warn about query limits and version bumps ([#860](https://github.com/jimmyandrade/harness/issues/860)) ([72da55b](https://github.com/jimmyandrade/harness/commit/72da55b22985d76a6fcfda0149a6c2cb595fcabf))
+
 ## [1.58.1](https://github.com/jimmyandrade/harness/compare/v1.58.0...v1.58.1) (2026-11-04)
 
 
