@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.58.1](https://github.com/jimmyandrade/harness/compare/v1.58.0...v1.58.1) (2026-11-04)
+
+
+### Bug Fixes
+
+* **sincronizar-status-da-tarefa:** warn that the key search matches older PRs and mentions ([#858](https://github.com/jimmyandrade/harness/issues/858)) ([9d12738](https://github.com/jimmyandrade/harness/commit/9d127385fd6d8382318d310d2c4f98ddfe5b21ab))
+
 ## [1.58.0](https://github.com/jimmyandrade/harness/compare/v1.57.0...v1.58.0) (2026-11-04)
 
 
