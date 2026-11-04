@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.59.0](https://github.com/jimmyandrade/harness/compare/v1.58.3...v1.59.0) (2026-11-04)
+
+
+### Features
+
+* **agents:** treat a question as a request for analysis, not execution ([#864](https://github.com/jimmyandrade/harness/issues/864)) ([6b047be](https://github.com/jimmyandrade/harness/commit/6b047be0bc948785ffca873418e62fcae0f0853a))
+
 ## [1.58.3](https://github.com/jimmyandrade/harness/compare/v1.58.2...v1.58.3) (2026-11-04)
 
 
