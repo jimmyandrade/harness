@@ -14,3 +14,10 @@ Funcionalidade: Definir filtros de e-mail sem esconder o que a pessoa quer ver
       Quando o filtro é ajustado
       Então o critério une o endereço antigo e o domínio novo com OR
       E as ações do filtro continuam as mesmas
+
+  Regra: Pouco volume não exclui o filtro
+    Exemplo: Filtro que ainda não pegou nenhuma mensagem
+      Dado que o filtro de um remetente não atinge nenhuma conversa da caixa
+      Quando a triagem revisa os filtros existentes
+      Então o filtro é mantido
+      E a resposta não propõe excluí-lo por causa do volume

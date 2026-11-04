@@ -3,7 +3,7 @@ name: definir-filtro-de-email
 description: Cria, edita e confere filtros de e-mail. Testa o critério na conta, escolhe as ações sem esconder o que a pessoa quer ver e lê o filtro salvo de volta. Usada quando a triagem pede um filtro ou a pessoa quer mudar um. Não serve para classificar mensagens nem cancelar assinatura.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   related:
     - organizar-emails
     - evoluir-habilidade
@@ -36,6 +36,9 @@ Leia os filtros existentes da conta antes de criar outro: um filtro com o mesmo 
 Teste o critério na busca da conta exata e leia o assunto das conversas que ele atinge.
 Examine as correspondências inesperadas: o que não for do tipo confirmado muda o critério antes do filtro.
 Quando o remetente muda de endereço, o novo entra com `OR` e o antigo fica, para o filtro continuar pegando o histórico.
+Pouca ou nenhuma conversa atingida não é motivo para excluir um filtro: o volume do remetente pode crescer depois.
+Confira se o endereço do critério é o que o remetente usa e mantenha o filtro.
+Exclua um filtro só quando a pessoa pedir.
 
 ### Passo 2
 
@@ -100,6 +103,14 @@ Se você trocar o endereço antigo pelo novo no critério, as próximas mensagen
 2. Acrescente o novo com `OR`.
 3. Teste o critério na busca antes de salvar.
 
+### Filtro excluído por pouco volume
+
+Se você propor excluir um filtro porque ele quase não pega mensagens, a caixa fica sem regra quando o remetente passar a mandar mais.
+
+1. Mantenha o filtro.
+2. Confira se o critério usa o endereço certo.
+3. Proponha só a mudança de critério ou de ação que o plano pede.
+
 ### Filtro prometido
 
 Se você disser que o filtro existe sem ler a lista da caixa, a pessoa confia num filtro que não foi salvo.
@@ -123,7 +134,7 @@ O filtro procurava o endereço antigo e os e-mails chegam de outro domínio. O c
 ## Casos-limite
 
 - O conector não cria filtro e o navegador pede login: a pessoa entra na conta, e o filtro sai pelo navegador.
-- O critério antigo não atinge nenhuma conversa: o filtro não estava funcionando; corrija o critério e teste de novo.
+- O critério não atinge nenhuma conversa: o filtro fica. Confira se o endereço está certo e, com o remetente usando outro, acrescente-o com `OR`.
 - O filtro precisa de duas etiquetas: crie dois filtros com o mesmo critério.
 
 ## Pegadinhas

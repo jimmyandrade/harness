@@ -527,6 +527,7 @@ How these skills relate is in `README.md`, in this folder.
   - Reads the account's existing filters first and edits a filter for the same sender instead of duplicating it
   - Tests the criterion in the exact account and reads the subjects it matches before saving
   - Adds a new sender address with `OR` and keeps the old one, so the filter keeps covering the history
+  - Keeps a filter that matches few or no conversations, because the sender's volume can grow, checks that its address is right, and deletes a filter only when the person asks
   - Skips the inbox only for senders that never bring something the person may want to follow; a sender that announces events, workshops, courses, or opportunities is only labelled
   - Adds never mark as important to any filter that skips the inbox, because an inbox can let important mail override filters
   - Tries the connector, then the browser in the mailbox account, then returns the ready query, and asks the person to sign in instead of signing in for them
