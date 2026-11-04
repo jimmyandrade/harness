@@ -3,7 +3,7 @@ name: levantar-ambiente-do-repositorio
 description: Levanta o ambiente de trabalho de um repositório antes de escrever código, testes, commit ou pull request. Acha o runtime e como ativá-lo, os comandos de instalar, lint, tipos, testes e build, as habilidades do repositório que se aplicam e as pegadinhas que ele documenta. Não serve para rodar os comandos, instalar dependências nem decidir a convenção de código.
 metadata:
   author: jimmyandrade
-  version: "0.11.0"
+  version: "0.12.0"
   related:
     - criar-commit
     - criar-pull-request
@@ -65,6 +65,8 @@ Depois de uma correção de segurança, confira o resultado, e não só o fim do
 Não rode a atualização: ela fica com quem chamou, depois do sim da pessoa.
 Depois que a pessoa atualiza, leia a versão de novo, diga se a atualização entrou e o que o gerenciador ainda lista.
 
+Compare as dependências instaladas na cópia de trabalho com o lock do projeto. Para cada dependência principal do manifesto, como o framework, a linguagem e a biblioteca de interface, leia a versão instalada, como em `node_modules/<pacote>/package.json`, e a do lock, como em `package-lock.json`. Pasta de instalação ausente, ou versão diferente da do lock, é uma instalação desatualizada: registre cada pacote com as duas versões e diga que o comando de instalar pelo lock, como `npm ci`, roda antes de tipos, testes, build e do teste no navegador. Uma verificação rodada nessa instalação não vale para a mudança. Um worktree tem a própria pasta de instalação, que pode ser de antes da última atualização de dependências da base.
+
 ### Passo 4
 
 Ache os comandos de instalar, de lint dos arquivos tocados, de tipos, de testes por arquivo ou afetados e de build. Pegue-os das instruções e das habilidades do repositório. Na falta delas, leia os `Manifestos de comandos`. Marque de onde veio cada comando. Não invente um comando que nenhuma fonte tem.
@@ -78,7 +80,7 @@ Quando ela tem nome de branch de trabalho, como `tipo/descricao`, registre isso 
 ### Passo 6
 
 Leia `Forma do harness`, `Papel do repositório atual`, `Instalação do harness` e `Harness no repositório atual`. O repositório atual é o que está aberto nesta sessão. Qualquer um vazio: pergunte uma vez e pare. Não escolha o repositório atual, a instalação da ferramenta nem uma forma. Com os quatro preenchidos, `global` usa a instalação da ferramenta e não acrescenta arquivos aqui. `repositório` com `Harness no repositório atual` em `não` não acrescenta a instalação e não escolhe `global`. Com `repositório próprio` e papel `harness`, este repositório é o harness do negócio. Com `repositório próprio` e papel `projeto`, a instalação é `global`. Com `repositório existente`, a instalação fica neste repositório e não há outro repositório de harness. Com `próprio e repositórios` e papel `harness`, este repositório é o harness do negócio. Com `próprio e repositórios` e papel `projeto`, este repositório instala o harness do negócio e o core. Combinação diferente: pergunte uma vez e pare. Liste à parte as skills do repositório atual e as que chegam pela instalação. A pasta do glossário não faz parte dessa instalação.
-Entregue a ficha, com uma seção por passo: instruções e habilidades do repositório, runtime e como ativar, ferramentas desatualizadas, comandos com a origem de cada um, habilidades do repositório que se aplicam a cada tarefa e pegadinhas. Em cada seção que não achou nada, escreva "Não achei". Não rode nenhum comando além de ler arquivos e as versões e listas do Passo 3, e não instale nada.
+Entregue a ficha, com uma seção por passo: instruções e habilidades do repositório, runtime e como ativar, ferramentas desatualizadas, dependências instaladas diferentes do lock, comandos com a origem de cada um, habilidades do repositório que se aplicam a cada tarefa e pegadinhas. Em cada seção que não achou nada, escreva "Não achei". Não rode nenhum comando além de ler arquivos e as versões e listas do Passo 3, e não instale nada.
 
 ### Passo 7
 
@@ -99,6 +101,15 @@ Se você ignorar a versão do runtime e a regra de ativá-la na mesma chamada, o
 
 1. Leia o arquivo de versão e as instruções.
 2. Entregue o comando de ativar junto com o comando de rodar.
+
+### Dependência instalada diferente do lock
+
+Se você rodar tipos, build ou o teste no navegador sem comparar o que está instalado com o lock, a verificação passa noutra versão principal do framework, e o build pode reescrever um arquivo versionado, como o `jsx` do `tsconfig.json`. Isso parece defeito do repositório e vira uma issue sem causa no código.
+
+1. Compare a versão instalada de cada dependência principal com a do lock, no Passo 3.
+2. Diferente: registre a instalação desatualizada e o comando de instalar pelo lock. Quem chamou instala antes de verificar.
+3. Um arquivo versionado que um comando reescreveu é sinal do ambiente: confira a instalação antes de atribuir a mudança ao repositório.
+4. Uma verificação que já rodou na instalação errada roda de novo depois da instalação, e a resposta diz isso.
 
 ### Habilidade do repositório ignorada
 
@@ -153,6 +164,7 @@ Não achei arquivo de instruções nem habilidade do repositório. O `pyproject.
 - Um arquivo de instruções pode apontar para outro. Leia o que ele cita.
 - O comando do manifesto roda tudo. O de arquivos tocados pode estar numa habilidade ou nas instruções.
 - O hook de pre-push pode levar minutos e parece travado.
+- A pasta de dependências existir parece instalação em dia. Num worktree, ela pode ter outra versão principal do framework que a do lock, e o typecheck e o build passam do mesmo jeito.
 - O aviso de versão nova no fim de um comando parece ruído. Ele entra na ficha com o comando de atualizar.
 - Atualizar tudo parece seguro. A atualização do runtime pode passar da versão que o projeto exige.
 - Remover um pacote parece remover só ele. O gerenciador pode levar junto as dependências que ficaram sem uso, inclusive o runtime de um ambiente virtual.
