@@ -3,7 +3,7 @@ name: avaliar-atualizacoes-de-dependencia
 description: Use essa habilidade sempre que houver PR de atualização de dependência do Dependabot ou do Renovate para avaliar, testar ou mesclar, mesmo sem dizer o nome do bot. NÃO use para atualizar uma dependência à mão nem para PR que não seja de bot.
 metadata:
   author: jimmyandrade
-  version: "0.9.5"
+  version: "0.9.7"
   related:
     - evoluir-habilidade
     - criar-commit
@@ -49,7 +49,16 @@ Mude para a branch do PR e veja quantos commits ela está atrás da base. Se est
 
 Compare a versão que o PR traz com a mais recente do pacote direto. Leia as notas de cada versão do intervalo do PR, no repositório do pacote. Num salto grande, a descrição do PR do bot corta as versões mais antigas. Sem notas nem repositório público, compare a API pública das duas versões, como os arquivos de tipos. Aponte breaking change, correção de segurança e exigência de peer dependency. Breaking change sem migração clara no projeto para a fila: pergunte à pessoa. Se as notas mudam retry, timeout ou prazo, meça o caminho degradado do projeto antes e depois e leve o número para a análise.
 
-Confira se o pacote anda junto com outros, como os tipos, a peer dependency ou outro pacote do mesmo repositório de origem, e se algum deles espera atualização noutro PR ou no painel de dependências do bot. Se esperar, o PR para na fila e o agrupamento segue `Agrupar pacotes relacionados`. Com `perguntar`, proponha o agrupamento e espere a resposta. Com `automático`, abra sem perguntar um PR à parte com a regra, seguindo `criar-commit` e `criar-pull-request`, inclusive a conferência do título e da descrição, uma vez e depois do push. No Renovate, a regra é uma entrada em `packageRules` com `matchSourceUrls` ou `matchPackageNames` e `groupName`. No Dependabot, é um grupo em `groups` com `patterns`. Grave a regra na configuração de cada uma das `Ferramentas de atualização de dependências`, e só nelas. A regra fica na configuração do bot no próprio repositório, nunca num preset compartilhado. O merge desse PR espera o sim da pessoa. Depois dele, peça ao bot uma nova execução, como a caixa no painel de dependências, e siga o PR agrupado.
+Confira se o pacote anda junto com outros, como os tipos, a peer dependency ou outro pacote do mesmo repositório de origem, e se algum deles espera atualização noutro PR ou no painel de dependências do bot.
+Se esperar, o PR para na fila e o agrupamento segue `Agrupar pacotes relacionados`.
+Com `perguntar`, proponha o agrupamento e espere a resposta.
+Com `automático`, abra sem perguntar um PR à parte com a regra, seguindo `criar-commit` e `criar-pull-request`, inclusive a conferência do título e da descrição, uma vez e depois do push.
+No Renovate, a regra é uma entrada em `packageRules` com `matchSourceUrls` ou `matchPackageNames` e `groupName`. No Dependabot, é um grupo em `groups` com `patterns`.
+Um pacote transitivo, fora do manifesto, não entra nessa regra: o bot só abre PR para o que o manifesto lista.
+Para mover os transitivos dentro das faixas permitidas, no Renovate, a regra é `lockFileMaintenance` com `enabled`.
+Grave a regra na configuração de cada uma das `Ferramentas de atualização de dependências`, e só nelas.
+A regra fica na configuração do bot no próprio repositório, nunca num preset compartilhado.
+O merge desse PR espera o sim da pessoa. Depois dele, peça ao bot uma nova execução, como a caixa no painel de dependências, e siga o PR agrupado.
 
 ### Passo 4
 
@@ -160,6 +169,8 @@ A biblioteca era transitiva. A árvore levou ao pacote direto que a puxa, e os p
 - A árvore de dependências só mostra o pacote depois da instalação na branch do PR. Antes dela, ela mostra a versão antiga ou nada.
 - Uma dependência git, com npm 11.17 ou mais novo e `allow-scripts` no `~/.npmrc`, faz o `Comando de instalação` parar com `EALLOWSCRIPTS` e deixar a pasta de dependências vazia. O PR não tem defeito: o npm repassa a configuração ao npm que prepara a dependência. Rode a instalação com `npm_config_userconfig=/dev/null` na frente, só nesse comando, como diz o `TROUBLESHOOTING.md` do core.
 
+- Um grupo com os pacotes transitivos de um alerta de segurança parece mantê-los em dia. O Renovate só aplica `packageRules` ao que o manifesto lista, e o grupo nunca abre PR. Use `lockFileMaintenance`, como diz o Passo 3.
+- Um transitivo que o pacote direto fixa numa versão exata parece subir com `lockFileMaintenance`. Ele só sobe com o pacote direto.
 - Conferir a cada commit parece necessário. A conferência é uma vez, depois do push.
 
 ## Scripts disponíveis
