@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.44.0"
+  version: "0.44.1"
   related:
     - definir-agenda-de-popstar
     - definir-convidado
@@ -120,6 +120,8 @@ O evento novo não entra nesse calendário. Sem evento, diga isso e siga a cria�
 A agenda operacional é o Google Agenda, provavelmente conectada ao Notion Calendar. Criar, revisar e alterar o evento acontecem nele.
 O nome e o horário vêm do que a pessoa indicou para esse tipo no Notion e desse Google Agenda, para uma pessoa e para uma IA acharem o mesmo compromisso.
 Compromisso, oportunidade, reunião, entrega ou evento comercial sem fonte na conexão: pare. Não crie o evento.
+Quando mais de uma página traz a data, a fonte é a página do time dono do evento, não a de outro time.
+Busque primeiro nas páginas do próprio time e só use a de outro time se a do time não traz a data.
 Antes de concluir que não consegue, confira Calendar Tools, Google Agenda, Notion Calendar ou equivalente nesta sessão. Não afirme que não há ferramenta sem essa checagem.
 
 ```mermaid
