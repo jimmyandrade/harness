@@ -2,7 +2,7 @@
  * MCP server for the vocabulary.
  *
  * lookup_term reads one term, and lookup_terms reads several in one call. exists_in_text maps each token to whether it
- * exists. write_terms inserts, updates, or upserts terms for one language. delete_terms deletes rows.
+ * exists. classify_text gives the level of each word, emoji, and punctuation mark. write_terms inserts, updates, or upserts terms for one language. delete_terms deletes rows.
  * get_version returns the version of the engine. migrate_glossary rewrites the rows that use a deprecated state
  * or category. init_glossary creates the empty glossary of a new language.
  *
@@ -18,13 +18,14 @@ import { Server } from "@modelcontextprotocol/sdk/server/index.js"
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js"
 
+import { classifyPhrase } from "../routes/classify-text/index.ts"
 import { existsPhrase } from "../routes/exists/index.ts"
 import { lookupTerm, lookupTerms } from "../routes/lookup/index.ts"
 import { Glossary, deleteBatch, initGlossary, migrate, writeBatch } from "../shared/glossary.ts"
 import { parseBody } from "../shared/http.ts"
 import { readOptions } from "../shared/options.ts"
 import { versionInfo } from "../shared/version.ts"
-import { LEVELS, LOOKUP_LIMIT, existsRequest, lookupRequest, initRequest, lookupTermsRequest, migrateRequest } from "../shared/schema.ts"
+import { LEVELS, LOOKUP_LIMIT, classifyTextRequest, lookupRequest, initRequest, lookupTermsRequest, migrateRequest } from "../shared/schema.ts"
 
 const languageProperty = { type: "string", description: "BCP 47 tag of the text, such as pt-BR." }
 
@@ -64,6 +65,19 @@ export const tools = [
   {
     name: "exists_in_text",
     description: "Return a record of each word, emoji, and punctuation mark in a text to whether that token exists in the vocabulary. A token that only matches a case_sensitive row in another casing maps to { exists, term, case_matches: false } instead of true: write term, the stored spelling.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        language: languageProperty,
+        text: { type: "string" },
+        tags: tagsFilter,
+      },
+      required: ["language", "text"],
+    },
+  },
+  {
+    name: "classify_text",
+    description: "Classify each word, emoji, and punctuation mark of a text. Returns language, submitted, and words, one per token and in order, each with its level (forbidden, strongly_discouraged, discouraged, allowed_with_care, allowed, stop_word, or not_registered), the stored term, and, for a level that is avoided, the recommended alternative. Words are matched one by one: a row of more than one word is not matched across words, so read an expression with lookup_terms. Use it to check a draft before publishing it. With tags, a row tagged only for another speaker, event, or channel reads as not registered.",
     inputSchema: {
       type: "object",
       properties: {
@@ -260,8 +274,12 @@ export function callTool(directory: string, params: unknown): ToolResult {
       return reply(lookupTerms(glossary, body.language, body.terms, body.tags))
     }
     if (record?.name === "exists_in_text") {
-      const body = parseBody(existsRequest, record.arguments)
+      const body = parseBody(classifyTextRequest, record.arguments)
       return reply(existsPhrase(glossary, body.language, body.text, body.tags))
+    }
+    if (record?.name === "classify_text") {
+      const body = parseBody(classifyTextRequest, record.arguments)
+      return reply(classifyPhrase(glossary, body.language, body.text, body.tags))
     }
     if (record?.name === "write_terms") {
       return reply(writeBatch(directory, record.arguments))

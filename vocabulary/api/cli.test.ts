@@ -682,3 +682,22 @@ test("version prints the version in package.json", () => {
   assert.equal(code, 0)
   assert.deepEqual(body, { name: "vocabulary", version })
 })
+
+test("classify-text prints the level of each word and filters by --tags", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  writeFileSync(
+    join(root, "pt-BR.json"),
+    `${JSON.stringify({ baratinho: { state: "forbidden", alternative: "acessível" }, povo: { state: "allowed", tags: ["palco"] } }, null, 2)}\n`,
+  )
+  const lines: string[] = []
+  const write = console.log
+  console.log = (line: string) => lines.push(line)
+  try {
+    assert.equal(run(["--glossary", root, "classify-text", "--language", "pt-BR", "--text", "baratinho povo", "--tags", "festival"]), 0)
+    assert.deepEqual(JSON.parse(lines.at(-1) ?? "{}").words.map((word: { to: string }) => word.to), ["forbidden", "not_registered"])
+    assert.equal(run(["--glossary", root, "classify-text", "--language=pt-BR", "--text", "baratinho povo", "--tags", "palco"]), 0)
+    assert.deepEqual(JSON.parse(lines.at(-1) ?? "{}").words.map((word: { to: string }) => word.to), ["forbidden", "allowed"])
+  } finally {
+    console.log = write
+  }
+})

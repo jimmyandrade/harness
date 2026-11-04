@@ -136,4 +136,4 @@ The transport answers the protocol: the methods it takes, the body and its size 
 
 Restart the host and ask it to look up a term of the glossary.
 
-Check: the host lists the `vocabulary` tools `lookup_term`, `lookup_terms`, `exists_in_text`, `write_terms`, `delete_terms`, `get_version`, `migrate_glossary`, and `init_glossary`.
+Check: the host lists the `vocabulary` tools `lookup_term`, `lookup_terms`, `exists_in_text`, `classify_text`, `write_terms`, `delete_terms`, `get_version`, `migrate_glossary`, and `init_glossary`.
