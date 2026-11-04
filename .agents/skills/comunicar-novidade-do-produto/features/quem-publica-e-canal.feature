@@ -14,3 +14,11 @@ Funcionalidade: Quem publica e canal do comunicado
       Quando um pull request com novidade é mesclado
       Então o comunicado sai na voz de quem publica, sem perguntar
       E a entrega segue a formatação desse canal
+
+  Regra: o rascunho aparece antes do envio
+
+    Exemplo: o cliente desenha widget
+      Dado que o comunicado vai para um canal com ferramenta de envio
+      Quando a habilidade entrega o rascunho
+      Então o texto aparece num widget editável, com copiar e aprovar
+      E nada é publicado antes do ok a esse texto
