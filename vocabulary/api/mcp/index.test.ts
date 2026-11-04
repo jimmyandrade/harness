@@ -213,7 +213,7 @@ test("the server answers initialize and write_terms on stdio", async () => {
     assert.equal(frames[0]?.result?.protocolVersion, "2024-11-05")
     assert.deepEqual(
       frames[1]?.result?.tools?.map((tool) => tool.name),
-      ["lookup_term", "lookup_terms", "exists_in_text", "write_terms", "delete_terms", "get_version", "migrate_glossary", "init_glossary"],
+      ["lookup_term", "lookup_terms", "exists_in_text", "classify_text", "write_terms", "delete_terms", "get_version", "migrate_glossary", "init_glossary"],
     )
     const payload = JSON.parse(frames[2]?.result?.content?.[0]?.text ?? "{}")
     assert.equal(payload.inserted.length, 1)
@@ -278,6 +278,26 @@ test("write_terms keeps tags and lookup_term and exists_in_text filter by them",
   const mapped = callTool(root, { name: "exists_in_text", arguments: { language: "pt-BR", text: "meu povo", tags: ["palco"] } })
   assert.equal(mapped.isError, undefined)
   const refused = callTool(root, { name: "lookup_term", arguments: { language: "pt-BR", term: "meu povo", tags: "palco" } })
+  assert.equal(refused.isError, true)
+  assert.equal(refused.content[0]?.text, "Provide the tags as a list.")
+})
+
+test("classify_text returns the level of each word and filters by tags", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  writeFileSync(
+    join(root, "pt-BR.json"),
+    `${JSON.stringify({ baratinho: { state: "forbidden", alternative: "acessível" }, povo: { state: "allowed", tags: ["palco"] } }, null, 2)}\n`,
+  )
+  const read = (args: Record<string, unknown>) =>
+    callTool(root, { name: "classify_text", arguments: { language: "pt-BR", text: "baratinho povo", ...args } })
+  const plain = JSON.parse(read({}).content[0]?.text ?? "") as { words: { to: string; recommended?: string }[] }
+  assert.deepEqual(plain.words.map((word) => word.to), ["forbidden", "allowed"])
+  assert.equal(plain.words[0]?.recommended, "acessível")
+  const other = JSON.parse(read({ tags: ["festival"] }).content[0]?.text ?? "") as { words: { to: string }[] }
+  assert.deepEqual(other.words.map((word) => word.to), ["forbidden", "not_registered"])
+  const tagged = JSON.parse(read({ tags: ["palco"] }).content[0]?.text ?? "") as { words: { to: string }[] }
+  assert.deepEqual(tagged.words.map((word) => word.to), ["forbidden", "allowed"])
+  const refused = read({ tags: "palco" })
   assert.equal(refused.isError, true)
   assert.equal(refused.content[0]?.text, "Provide the tags as a list.")
 })
