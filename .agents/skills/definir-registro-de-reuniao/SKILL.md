@@ -3,7 +3,7 @@ name: definir-registro-de-reuniao
 description: Cadastra e corrige o registro de uma reunião, com título, data, participantes, resumo e índice, onde o projeto guarda os registros. Usada quando a pessoa cola uma transcrição ou pergunta se uma reunião já está registrada. Não serve para achar o contexto de uma reunião nem escrever a ata.
 metadata:
   author: jimmyandrade
-  version: "0.11.0"
+  version: "0.12.0"
   related:
     - definir-agenda
     - definir-grafia
@@ -60,6 +60,14 @@ Quando a transcrição já mora num documento do armazenamento, como as anotaç�
 ### Passo 3
 
 Descubra título, data, horário de início e participantes na agenda da pessoa, antes de perguntar. Siga `procurar-agenda` com o horário aproximado que ela deu ou com o horário de criação do registro. Não invente título genérico nem participante.
+
+Quando o título ou o horário do documento de anotações não bate com o evento do dia, não assuma que o documento está certo nem o descarte.
+Confira na agenda o evento recorrente que tem o título do documento, o dia da semana dessa recorrência, a resposta da pessoa ao convite (recusou, ausente) e quem fala no documento.
+Quando a pessoa propõe outro título para o evento, procure esse título na agenda e confira o dia da semana da recorrência antes de aceitar ou de contrariar.
+Quem recebeu o convite por um endereço de grupo pode ter o documento sem ter ido à reunião.
+Isso não impede o registro: o bloco do cabeçalho diz que a pessoa não participou e que o horário diverge da agenda.
+Com a divergência sem resolver, pergunte uma vez, com os fatos: o evento do convite, a resposta da pessoa e quem fala.
+Registre com título pelo assunto, o horário do documento e o aviso no cabeçalho.
 
 ```mermaid
 flowchart LR
@@ -197,9 +205,11 @@ Escrevi no resumo que a correção sobe no dia seguinte, com o responsável como
 - O assunto de `Assuntos fora do resumo` aparece na transcrição: fica na transcrição bruta e fora do resumo.
 - O armazenamento é um banco e uma propriedade opcional falta no mapeamento: liste no fim, sugira criar a propriedade e não escreva esse valor no corpo da página.
 - O mesmo projeto guarda uma cópia em arquivo local e uma página: o nome do arquivo é o slug, e o título da página é o texto convencional. Os dois descrevem a mesma reunião, cada um no seu padrão.
+- O documento traz o título de uma reunião recorrente num horário diferente do evento do dia: confira a recorrência, o dia da semana e a resposta da pessoa ao convite. Sem resolver, pergunte uma vez e registre pelo assunto, com o aviso no cabeçalho.
 
 ## Pegadinhas
 
+- O título de um documento de anotações herda o nome da reunião recorrente, mesmo quando a sessão foi outra, num horário que não é o do evento. Quem estava ausente ou recusou o convite ainda pode receber o documento.
 - Texto colado de outra interface pode trazer lixo no começo, como o nome de um botão ou de um arquivo de áudio. Não é fala.
 - Slug de arquivo e título de página são coisas diferentes. Um título escrito como slug, sem acento e com hífens, fica estranho no Notion, no Confluence e no Google Drive.
 - O reconhecimento de voz erra nome de pessoa e sigla de um jeito que parece outra palavra. O apelido de quem fala também vira outro nome quando alguém o chama.
