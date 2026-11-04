@@ -51,6 +51,7 @@ flowchart LR
     definir_jornada_de_producao["definir-jornada-de-producao"]
     definir_lancamento_financeiro["definir-lancamento-financeiro"]
     definir_link_rastreavel["definir-link-rastreavel"]
+    definir_lote_de_ingresso["definir-lote-de-ingresso"]
     definir_medicao_de_metrica["definir-medicao-de-metrica"]
     definir_obra_musical["definir-obra-musical"]
     definir_obrigacao_financeira["definir-obrigacao-financeira"]
@@ -302,6 +303,8 @@ flowchart LR
   definir_lancamento_financeiro --> lancar_despesa_da_empresa
   definir_lancamento_financeiro --> revisar_financas
   definir_link_rastreavel --> evoluir_habilidade
+  definir_lote_de_ingresso --> definir_conta_bancaria
+  definir_lote_de_ingresso --> evoluir_habilidade
   definir_medicao_de_metrica --> definir_okr
   definir_medicao_de_metrica --> evoluir_habilidade
   definir_medicao_de_metrica --> identificar_duplicata
