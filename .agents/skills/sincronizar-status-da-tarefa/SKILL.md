@@ -4,7 +4,7 @@ description: Sincroniza o status de tarefas, cards ou issues com o estado do pul
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.8.2"
+  version: "0.8.4"
   related:
     - criar-commit
     - criar-pull-request
@@ -46,7 +46,9 @@ Obtenha as tarefas pela `Consulta das tarefas`, ou pela lista ou pelos links que
 Quando a habilidade roda por um commit ou por uma mudança de pull request, parta desse pull request e busque as tarefas abertas.
 Toda mudança de estado de um pull request que o turno faz, ou que a pessoa ou o aplicativo avisam, roda esta habilidade na mesma resposta, antes de responder.
 Isso vale também quando o PR foi aberto, tirado do rascunho ou mesclado pelo `gh` direto, sem passar por `criar-pull-request` nem por `mesclar-pull-request`.
-Quando a pessoa pede o panorama do que criou, obtenha as tarefas pela `Consulta do panorama`, que traz as abertas e as fechadas.
+Quando a pessoa pede o panorama, obtenha as tarefas pela `Consulta do panorama`, que traz as abertas e as fechadas do que ela criou.
+Se o pedido não diz de quem, pergunte uma vez se o panorama é só do que a pessoa criou ou de todas as abertas.
+Para todas as abertas, use a mesma consulta sem o filtro da pessoa e só com as abertas.
 O panorama só lê: ligue cada tarefa ao PR pelo Passo 2, relate pelo Passo 5 e pule o plano, a gravação da ligação e a mudança de status.
 Sem consulta e sem lista, pergunte e pare. Resultado grande que vem em arquivo é lido pelos campos chave, status e título, depois de conferir o formato do arquivo. Anote o status de cada tarefa como o rastreador devolveu.
 
@@ -104,7 +106,9 @@ Chamada negada ou com erro para a execução daquela tarefa. Anote "não feito" 
 Antes de relatar, releia o status das tarefas que tiveram negação ou erro. Conte a lista final, uma tarefa por vez. A soma das partes bate com o total.
 
 Relate em blocos: um por status final, com a chave, o link da tarefa e o link do PR, montados do status que o retorno trouxe. Depois, as "não feitas", com o motivo e o status real. Depois, as "não mexi", com o motivo. Diga as ligações feitas só pelo assunto.
-No panorama, os blocos são: aberta com PR aberto, aberta com PR mesclado, aberta sem PR e fechada, cada tarefa com a chave, o link e o link do PR.
+No panorama, os blocos são: aberta com PR aberto, aberta com PR mesclado, aberta sem PR e fechada.
+O relato abre com um placar, uma linha por bloco com a contagem, e segue com uma tabela por bloco, com o link, o título curto, o link do PR e as etiquetas de cada tarefa.
+Número sem título não se reconhece: nunca liste só os números.
 Se um relato anterior desta conversa trouxe estado ou número errado, a primeira frase corrige: o que foi dito e o que é o certo.
 
 ### Passo 6
@@ -191,7 +195,7 @@ A mesma entrega está num pull request já mesclado. O plano marca "ligada pelo 
 
 ### o panorama do que a pessoa criou
 
-A pessoa pede o panorama do que criou. A consulta traz quatro tarefas. "Exportar relatório em CSV" está aberta e tem o PR 12 em rascunho. "Validar o formulário de contato" está aberta e o PR 15 já foi mesclado. "Ordenar a lista de pedidos" está aberta e não tem PR. "Corrigir o rodapé" está fechada. O relato traz um bloco por situação, com a chave, o link da tarefa e o link do PR, e não muda nenhum status.
+A pessoa pede o panorama do que criou. A consulta traz quatro tarefas. "Exportar relatório em CSV" está aberta e tem o PR 12 em rascunho. "Validar o formulário de contato" está aberta e o PR 15 já foi mesclado. "Ordenar a lista de pedidos" está aberta e não tem PR. "Corrigir o rodapé" está fechada. O relato abre com o placar, com uma tarefa em cada bloco, e traz uma tabela por situação, com o link, o título e o link do PR de cada tarefa, sem mudar nenhum status.
 
 ## Casos-limite
 
