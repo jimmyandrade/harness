@@ -3,7 +3,7 @@ name: comunicar-novidade-do-produto
 description: Use essa habilidade sempre que um PR for mesclado ou alguém perguntar o que há de novo no produto para quem o usa, mesmo sem dizer novidade, para decidir se há o que contar e escrever o comunicado sem termos técnicos. NÃO use para a descrição do PR, o changelog nem release notes técnicas.
 metadata:
   author: jimmyandrade
-  version: "0.9.1"
+  version: "0.10.0"
   related:
     - evoluir-habilidade
     - redigir-com-tom-de-voz
@@ -63,7 +63,7 @@ Achou: use e sugira preencher `Habilidade de tom de voz`. Não achou: pergunte s
 
 ### Passo 4
 
-Entregue no `Canal do comunicado`, com a formatação dele. Ao perguntar quem publica ou o canal, as opções saem só das instruções do projeto: nunca sugira um canal que elas não citam. A opção de publicar vem primeiro, e a de não comunicar vem por último. O comunicado vai numa mensagem só, com parágrafos curtos, mesmo no WhatsApp, onde a conversa costuma ir em mensagens quebradas. Só a novidade entra nessa mensagem. Um pedido, uma cobrança ou uma lista de pendências é outro assunto: vai numa mensagem à parte, depois do comunicado. Se houver uma ferramenta para esse canal, mostre o texto e peça o ok antes de publicar. Se não houver, ou se o canal estiver vazio, entregue o texto pronto para copiar.
+Entregue no `Canal do comunicado`, com a formatação dele. Ao perguntar quem publica ou o canal, as opções saem só das instruções do projeto: nunca sugira um canal que elas não citam. A opção de publicar vem primeiro, e a de não comunicar vem por último. O comunicado vai numa mensagem só, com parágrafos curtos, mesmo no WhatsApp, onde a conversa costuma ir em mensagens quebradas. Só a novidade entra nessa mensagem. Um pedido, uma cobrança ou uma lista de pendências é outro assunto: vai numa mensagem à parte, depois do comunicado. Mostre o rascunho antes de qualquer pergunta: num widget com o texto editável, um botão para copiar e um para aprovar, quando o cliente desenha widget, ou num bloco de código. Uma pergunta que encerra o turno pode esconder o texto escrito antes dela. Se houver uma ferramenta para esse canal, publique só depois do ok a esse texto. Se não houver, ou se o canal estiver vazio, o rascunho mostrado é o texto pronto para copiar.
 
 ### Passo 5
 
@@ -87,10 +87,10 @@ Se você comunicar uma mudança que ninguém percebe, o público passa a ignorar
 
 ### Publicação sem ok
 
-Se você publicar no canal sem mostrar o texto, a pessoa perde a chance de corrigir.
+Se você publicar no canal sem mostrar o texto, ou mostrar o texto só antes de uma pergunta que encerra o turno, a pessoa perde a chance de ler e corrigir.
 
-1. Mostre o texto.
-2. Publique só depois do ok.
+1. Mostre o rascunho num widget editável, ou num bloco de código sem widget.
+2. Publique só depois do ok a esse texto.
 
 ### Correção contada pelo resultado
 

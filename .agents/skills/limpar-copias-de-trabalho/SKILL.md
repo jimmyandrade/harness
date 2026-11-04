@@ -3,7 +3,7 @@ name: limpar-copias-de-trabalho
 description: Remove as cópias de trabalho do git e as branches locais já mescladas na base, inclusive as de outras sessões, depois de conferir que nada se perde. Usada ao terminar o trabalho de uma sessão ou quando sobram cópias de trabalho ou branches locais de código. Não serve para liberar espaço em disco em geral nem para apagar arquivo da pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.5.8"
+  version: "0.6.0"
   related:
     - criar-copia-de-trabalho
     - criar-pull-request
@@ -68,10 +68,33 @@ Antes de manter uma cópia, confira a sessão e o remoto. A sessão: leia o dire
 
 Remova as cópias aprovadas no plano, sem pedir confirmação. As conferências são a segurança. Remova também a branch local de cada uma, as branches locais aprovadas no plano, e limpe o registro das cópias cuja pasta já não existe. Meça o disco de novo.
 
+Depois de remover, confira cada espaço de trabalho na mesma resposta, antes de dizer que a limpeza terminou.
+Não suponha nenhum deles: o que um passo anterior deveria ter feito também se confere.
+
+1. A cópia de trabalho do PR sumiu da lista de cópias do repositório.
+2. A branch local sumiu da lista de branches.
+3. A branch remota do PR mesclado sumiu depois de `fetch --prune`. O repositório pode apagá-la ao mesclar, e isso se confere, não se supõe.
+4. O clone da pessoa ficou como estava: na mesma branch, sem arquivo novo nem alteração.
+
+Confira também o que se acumulou no repositório, não só o PR atual, na mesma resposta.
+Cruze `gh pr list --head <branch> --state all` com `fetch --prune` e liste, numa linha por categoria:
+
+1. As branches remotas com PR mesclado ou fechado.
+2. As branches locais com PR mesclado ou fechado.
+3. As cópias de trabalho cuja branch tem PR mesclado ou fechado.
+4. As branches, remotas e locais, sem PR e sem commit à frente da base.
+
+Não suponha que a plataforma limpa: um repositório com a opção de apagar a branch ao mesclar ligada ainda pode ter branch de PR mesclado.
+Uma conferência que falha não vira "limpo": a resposta lista o que sobrou, com o comando pronto.
+Esta habilidade apaga só a cópia e a branch local que passaram no Passo 3.
+A branch remota, e o que o resto da lista mostra, pode ser de outra sessão ou de outra pessoa: fica para a pessoa, como lista com o comando pronto.
+O modo automático pode negar ação destrutiva, e a negação não se contorna.
+
 ### Passo 5
 
 Responda com o espaço que voltou e uma tabela das cópias e das branches: removida ou mantida, e o motivo de cada uma, com o link do PR quando houver.
 Cada branch é uma linha.
+Depois da tabela, uma linha por conferência e por categoria do que se acumulou, como o Passo 4 manda, com o resultado de cada uma.
 A que ficou porque o pull request mesclou outro commit diz se pode apagar.
 Pode apagar quando o commit está no GitHub, mesmo com comportamento de produto que o resultado aprovado não tem.
 Processo: o pull request chegou ao fim normal.
@@ -92,12 +115,20 @@ Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
 
+### Limpeza dada como feita sem conferir
+
+Se você disser que a limpeza terminou sem conferir cada espaço de trabalho, a branch remota e o clone ficam sujos e a pessoa descobre depois.
+
+1. Depois de remover, confira a cópia, a branch local, a branch remota, o clone e o que se acumulou no repositório, como o Passo 4 manda.
+2. A branch remota só sumiu se o `fetch --prune` confirmar.
+3. O que sobrou entra na resposta com o comando pronto, e a limpeza não é dada como terminada.
+
 ### Pedir para a pessoa rodar
 
 Se você entregar os comandos para a pessoa rodar, cada limpeza vira mais uma interação que ela precisa confirmar.
 
 1. Rode as conferências do Passo 3.
-2. Remova o que passou, sem perguntar.
+2. Remova a cópia e a branch local que passaram, sem perguntar.
 3. Conte no fim o que saiu e o que ficou.
 
 ### Cópia de outra sessão
@@ -172,6 +203,8 @@ Só a cópia principal existia, e sobraram quatro branches `renovate/*`. Três P
 ## Casos-limite
 
 - O repositório só tem a cópia principal e nenhuma branch local sobrando: não há o que remover. Diga isso numa linha.
+- A branch remota do PR mesclado continua no remoto: a conferência 3 do Passo 4 falha, e a resposta traz o comando pronto para apagá-la.
+- Há branches de PRs antigos, de outra sessão ou de outra pessoa: elas entram na lista do que se acumulou, com o comando pronto, e a habilidade não as apaga.
 - O pull request mesclou outro commit e o commit da ponta local está no GitHub: pode apagar, salvo se a pessoa está continuando o trabalho.
 - A frase de processo diz o fim normal.
 - A frase de produto nomeia a tela, a ação e de quem é o trabalho.
@@ -188,7 +221,8 @@ Só a cópia principal existia, e sobraram quatro branches `renovate/*`. Três P
 
 - A remoção sem forçar recusa a cópia que tem `node_modules` ou `.venv` fora do git. Force só depois que o Passo 3 aprovou a cópia.
 - O link de `node_modules` que `criar-copia-de-trabalho` faz aparece como `?? node_modules`, sem a barra final de uma pasta. O filtro da conferência aceita as duas formas.
-- Depois de um merge com squash, o GitHub apaga a branch remota e a branch local não aparece como mesclada.
+- Depois de um merge com squash, a branch local não aparece como mesclada.
+- Apagar a branch ao mesclar ligado no repositório não garante que ela sumiu: o merge pelo botão ou a opção desligada podem deixá-la. O `fetch --prune` diz se ela sumiu.
 - Só o estado do PR diz que o trabalho entrou.
 - Comportamento de produto que ficou de fora parece motivo para esta máquina guardar a branch de outra pessoa.
 - Se o commit está no GitHub e a pessoa não está continuando o trabalho, pode apagar.
@@ -215,5 +249,9 @@ Só a cópia principal existia, e sobraram quatro branches `renovate/*`. Três P
 - `git -C <repositório> diff --stat $(git -C <repositório> merge-base origin/<base> <branch>) <branch>` e `git -C <repositório> log --oneline origin/<base> -- <arquivo>`: arquivos da branch sem PR e o PR que os levou à base, no Passo 3.
 - `git -C <repositório> worktree remove --force <cópia> && git -C <repositório> branch -D <branch>`: remoção do Passo 4. Para a branch sem cópia, só o `branch -D`.
 - `git -C <repositório> worktree prune`: registro das cópias cuja pasta sumiu, no Passo 4.
+- `git -C <repositório> worktree list`, `git -C <repositório> branch --list <branch>` e `git -C <repositório> fetch --prune origin && git -C <repositório> branch -r --list origin/<branch>`: conferências 1, 2 e 3 do Passo 4. Saída vazia passa.
+- `git -C <repositório> rev-list --count origin/<base>..origin/<branch>`: zero é sem commit à frente da base, para a categoria 4 do que se acumulou no Passo 4.
+- `git -C <clone> status -sb`: conferência 4 do Passo 4. A branch é a de antes e não há arquivo novo.
+- `git -C <repositório> push origin --delete <branch>`: comando que a resposta entrega para a branch remota que sobrou. A pessoa o roda.
 
 1. Liste e meça, separe pelo dono, confira cada cópia e cada branch local, remova as aprovadas, limpe o registro e meça de novo.
