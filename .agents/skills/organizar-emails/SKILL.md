@@ -3,7 +3,7 @@ name: organizar-emails
 description: Organiza e-mails por BASB e separa pessoal, trabalho e misto. Usada quando a pessoa quer triar a caixa, etiquetar ou configurar filtros. Não serve para responder mensagens, lançar despesas nem acompanhar veículos.
 metadata:
   author: jimmyandrade
-  version: "0.14.0"
+  version: "0.15.0"
   related:
     - procurar-email
     - evoluir-habilidade
@@ -56,6 +56,8 @@ Leia os valores nas instruções do projeto, na entrada desta habilidade. Na aus
   "Ação esperada": ""
   "Respondida": ""
   "Concluída": ""
+# `Etiquetas de ferramenta`: a etiqueta que cada ferramenta ou integração aplica sozinha, como um cliente de e-mail que marca o que processou, por ferramenta. Vazio, nenhuma.
+"Etiquetas de ferramenta": {}
 # `Etiquetas fora da estrutura`: outras etiquetas que a pessoa quer manter fora das raízes. Vazio, nenhuma.
 "Etiquetas fora da estrutura": []
 "Árvore de decisão": ""
@@ -125,7 +127,9 @@ Com `Registrar a regra nova na árvore` em `sim`, acrescente na árvore a regra 
 
 Mantenha contexto e destino PARA como eixos independentes de BASB.
 
-A etiqueta de destino fica sob as `Raízes da estrutura BASB`, salvo as `Etiquetas de status` e as `Etiquetas fora da estrutura`. Etiqueta existente fora delas, como `Fornecedor`, não se reutiliza como está: proponha `Recursos/Fornecedor` e renomeie com o sim da pessoa, o que leva as conversas junto.
+A etiqueta de destino fica sob as `Raízes da estrutura BASB`, salvo as `Etiquetas de status`, as `Etiquetas de ferramenta` e as `Etiquetas fora da estrutura`. Etiqueta existente fora delas, como `Fornecedor`, não se reutiliza como está: proponha `Recursos/Fornecedor` e renomeie com o sim da pessoa, o que leva as conversas junto.
+
+Uma etiqueta de `Etiquetas de ferramenta` pertence à ferramenta que a aplica: não a aplique, não a tire nem a renomeie, e leia-a como sinal de que essa ferramenta já processou a mensagem.
 
 Preserve as etiquetas válidas; não transforme toda newsletter em referência.
 
