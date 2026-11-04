@@ -176,7 +176,7 @@ How these skills relate is in `README.md`, in this folder.
   - The reply names the branch, says whether it is on GitHub, and reports each commit hash. `Criar pull request ao terminar` is `rascunho` by default, which pushes the branch and opens a draft pull request; `sim` opens a ready pull request; `não` waits for an explicit publish request. The title and description check stays with criar-pull-request: once, after the push, not on each commit
   - Splits work into one commit per subject, and keeps commits of the same theme on the same branch and the same pull request. A different theme opens another pull request. The commit subject does not open a new pull request
   - The commit type follows what the change does, not the file extension. A correction of an error is `fix:`, even in Markdown. `docs:` is for documentation
-  - Writes each step sentence on its own line, and keeps a command in Scripts disponíveis
+  - Groups the sentences of one theme on a line and separates themes with a blank line, as a writing decision, and keeps a command in Scripts disponíveis
   - When the flow stops without `criar-pull-request`, follows `sincronizar-status-da-tarefa`
 - **Test Criteria**:
   - [ ] A project without test or build commands commits and says nothing was verified
@@ -222,7 +222,7 @@ How these skills relate is in `README.md`, in this folder.
   - A request that arrives through a copy, synced or installed by dependency or plugin, writes through criar-commit and criar-pull-request in the source repository
   - Cites another skill by its name between backticks, or in a Mermaid diagram node, so the checker and the skill graph recognize the citation
   - Gives every new skill the `Modo de aprendizado` parameter and a last step that hands over to evoluir-habilidade
-  - Writes each step sentence on its own line, so a change shows in the diff, and keeps a command out of the step
+  - Groups the sentences of one theme on a line and separates themes with a blank line, so the text reads easily and a change shows in the diff, and keeps a command out of the step
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses code edits, a non-skill page, description-only work, and writing the skill in Notion
