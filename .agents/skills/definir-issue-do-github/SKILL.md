@@ -4,7 +4,7 @@ description: Abre, revisa, edita e traduz issues do GitHub pelo modelo e no idio
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.9.0"
+  version: "0.10.0"
   aliases:
     - definir-issue
   related:
@@ -24,6 +24,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 # `Repositório` vem do remoto `origin` quando as instruções não dizem.
 "Repositório": ""
 "Idioma da issue": "português do Brasil"
+# `Material sem artifact` é `perguntar`, `descrição` ou `comentário`: onde vai o material de apoio quando não dá para criar artifact.
+"Material sem artifact": "perguntar"
 "Modo de aprendizado": "perguntar"
 ```
 ## Instruções
@@ -85,7 +87,7 @@ O plano de implementação entra como `plan`, a pesquisa ou a nota de design com
 O corpo continua no modelo e cita o artifact só quando ele explica a proposta.
 O artifact segue o `Idioma da issue` e, em repositório público, a mesma regra da issue.
 Para mudar um artifact, edite o mesmo, que guarda a versão. Não apague para criar outro: a exclusão leva o histórico.
-Se a linha de comando do GitHub, o `gh`, estiver abaixo da 2.103 ou não estiver disponível, e não houver outra conexão que crie artifact, avise a pessoa e proponha pôr o material na descrição, num comentário ou nos dois.
+Se a linha de comando do GitHub, o `gh`, estiver abaixo da 2.103 ou não estiver disponível, e não houver outra conexão que crie artifact, avise a pessoa e siga `Material sem artifact`. Com `perguntar`, proponha pôr o material na descrição, num comentário ou nos dois, e espere a escolha. Com `descrição` ou `comentário`, ponha o material lá.
 
 ### Passo 9
 
