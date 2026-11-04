@@ -21,6 +21,7 @@
  * allowed_with_care and stays in the file until migrate rewrites it.
  * alternative is the recommended term of an avoided row, and the
  * always-allowed term of an allowed_with_care row. An allowed row omits it.
+ * An avoided row with no alternative recommends its substitution.
  *
  * categories are English words. A row with the deprecated category reads it
  * as a list of one. description, reason, substitution, and when are optional

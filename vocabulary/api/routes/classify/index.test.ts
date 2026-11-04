@@ -138,3 +138,13 @@ test("a case-sensitive term says when the casing does not match, and an ordinary
     term: "cueca",
   })
 })
+
+test("an avoided row with only a substitution recommends it", () => {
+  const entries = load('{ "chave": { "state": "strongly_discouraged", "substitution": "feature toggle" } }')
+  assert.equal(classify(entries, "chave", "pt-BR").recommended, "feature toggle")
+})
+
+test("alternative wins over substitution in the recommended term", () => {
+  const entries = load('{ "chave": { "state": "forbidden", "alternative": "botão", "substitution": "feature toggle" } }')
+  assert.equal(classify(entries, "chave", "pt-BR").recommended, "botão")
+})

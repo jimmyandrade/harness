@@ -701,3 +701,17 @@ test("classify-text prints the level of each word and filters by --tags", () => 
     console.log = write
   }
 })
+
+test("classify-text prints the substitution of a row in the current format as recommended", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  writeFileSync(join(root, "pt-BR.json"), '{ "chave": { "state": "strongly_discouraged", "substitution": "feature toggle" } }\n')
+  const lines: string[] = []
+  const write = console.log
+  console.log = (line: string) => lines.push(line)
+  try {
+    assert.equal(run(["--glossary", root, "classify-text", "--language", "pt-BR", "--text", "ligue a chave"]), 0)
+    assert.equal(JSON.parse(lines.at(-1) ?? "{}").words[2].recommended, "feature toggle")
+  } finally {
+    console.log = write
+  }
+})
