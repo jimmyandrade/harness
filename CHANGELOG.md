@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.47.0](https://github.com/jimmyandrade/harness/compare/v1.46.4...v1.47.0) (2026-11-04)
+
+
+### Features
+
+* **definir-registro-de-reuniao:** state only the corrected fact in the summary and derived texts ([#807](https://github.com/jimmyandrade/harness/issues/807)) ([d42fa5c](https://github.com/jimmyandrade/harness/commit/d42fa5c6b571cbc082f089aea4e147c241cdd1a7))
+
+
+### Bug Fixes
+
+* **avaliar-atualizacoes-de-dependencia:** use lock file maintenance for transitive packages ([#799](https://github.com/jimmyandrade/harness/issues/799)) ([4f9bb96](https://github.com/jimmyandrade/harness/commit/4f9bb96aa418832d1adfc5342be2dcf2649d81a5))
+* **levantar-ambiente-do-repositorio:** compare the installed dependencies with the lockfile ([#805](https://github.com/jimmyandrade/harness/issues/805)) ([756fd78](https://github.com/jimmyandrade/harness/commit/756fd7805b658f98760a6ceaacd1ba2712568287))
+
 ## [1.46.4](https://github.com/jimmyandrade/harness/compare/v1.46.3...v1.46.4) (2026-11-03)
 
 
