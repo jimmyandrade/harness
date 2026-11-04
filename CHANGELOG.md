@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.56.0](https://github.com/jimmyandrade/harness/compare/v1.55.0...v1.56.0) (2026-11-04)
+
+
+### Features
+
+* **comunicar-novidade-do-produto:** skip an announcement the channel already has ([#847](https://github.com/jimmyandrade/harness/issues/847)) ([20d330e](https://github.com/jimmyandrade/harness/commit/20d330ee9d9ff9fa6c8f4c5d7299b6344ffe30c1))
+* **organizar-emails:** action items, BASB labels, and a separate filter skill ([#851](https://github.com/jimmyandrade/harness/issues/851)) ([e9590df](https://github.com/jimmyandrade/harness/commit/e9590df2de22e5ace15b5f3feab3bb24339f9c70))
+* **redigir-com-tom-de-voz:** ask for the send tool permission before drafting ([#849](https://github.com/jimmyandrade/harness/issues/849)) ([389bc42](https://github.com/jimmyandrade/harness/commit/389bc42ffa5da9d92ddbff9aedca57a8f1769161))
+* **vocabulary:** apply forbidden_in and allowed_in in classify-text ([#853](https://github.com/jimmyandrade/harness/issues/853)) ([5cd9e74](https://github.com/jimmyandrade/harness/commit/5cd9e7404bbff63e383012ea4352dd859c1d2afe))
+
 ## [1.55.0](https://github.com/jimmyandrade/harness/compare/v1.54.0...v1.55.0) (2026-11-04)
 
 
