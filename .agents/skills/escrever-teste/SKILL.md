@@ -3,7 +3,7 @@ name: escrever-teste
 description: Escreve ou altera testes de unidade antes do código, em TDD, seguindo a convenção de testes do projeto, com o Better Specs como padrão. Usada quando uma mudança precisa de teste novo, quando um teste existente muda ou quando uma revisão pede um teste. Não serve para decidir o que testar, rodar a suíte inteira nem refatorar testes antigos.
 metadata:
   author: jimmyandrade
-  version: "0.7.0"
+  version: "0.8.0"
   related:
     - criar-commit
     - escrever-codigo
@@ -102,6 +102,14 @@ Se você copiar o mesmo teste mudando só o valor, a manutenção multiplica.
 
 1. Use `it.each` com a tabela de casos.
 2. Deixe o título dizer o que varia.
+
+### Teste só com dado no formato antigo
+
+Se você montar o dado do teste à mão no formato que o código já lia, o teste passa e o comportamento falha com o registro real, que usa o campo atual.
+
+1. Leia um registro real, do formato atual, e use esse formato no teste.
+2. Quando um campo tem o nome antigo e o atual, cubra os dois.
+3. Depois de expor o comportamento, confira com um registro real antes de dizer que funciona.
 
 ### Argumento do tipo errado
 
