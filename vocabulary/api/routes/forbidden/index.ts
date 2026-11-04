@@ -10,12 +10,11 @@
  * Run: node api/routes/forbidden/index.ts '{"language":"pt-BR","term":"—","category":"punctuation","description":"Travessão","substitution":"...","rejected":[],"alternatives":[]}'
  */
 
-import { fileURLToPath } from "node:url"
-
 import { InvalidGlossary, registerForbidden } from "../../shared/glossary.ts"
 import { parseBody, type Route } from "../../shared/http.ts"
 import { readOptions, report } from "../../shared/options.ts"
 import { forbiddenRequest } from "../../shared/schema.ts"
+import { isMain } from "../../shared/main.ts"
 
 export const forbiddenRoute: Route = {
   method: "POST",
@@ -44,6 +43,6 @@ function main(argv: string[]): number {
   }
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) {
+if (isMain(import.meta.url)) {
   process.exitCode = main(process.argv.slice(2))
 }

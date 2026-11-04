@@ -4,7 +4,7 @@ description: Cria, revisa e atualiza o artigo da base de conhecimento que respon
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.4"
+  version: "0.3.5"
   related:
     - criar-habilidade
     - definir-historia-de-usuario
@@ -122,7 +122,9 @@ Suba cada imagem pelo upload de arquivo da ferramenta da base.
 Ponha a imagem logo abaixo do passo que ela mostra, num bloco próprio.
 Escreva a legenda com o que a tela mostra: o menu, a janela, o campo e o nome da pasta ou da arte quando aparece.
 A imagem que a pessoa mandou entra do mesmo jeito, no passo que ela mostra.
-Se não conseguir capturar um passo, diga qual ficou sem print e por quê.
+Antes de dizer que não consegue capturar um passo, tente: abra a tela num navegador que a sessão tenha e capture o estado do passo.
+Só deixe um passo sem print depois dessa tentativa, e diga qual ficou sem print e o que a tentativa mostrou, como um login que a sessão não tem ou uma ferramenta da base sem upload de arquivo.
+Nunca escreva que não deu para capturar sem ter aberto a tela.
 
 ### Passo 8
 
@@ -132,7 +134,7 @@ Antes de concluir, confira o artigo com esta lista:
 - [ ] Não tem critério de aceite nem cenário em BDD.
 - [ ] Não tem jargão técnico sem explicação nem nome interno que a pessoa não vê na tela.
 - [ ] Usa o caso real como exemplo quando a dúvida veio de um.
-- [ ] Cada passo de tela tem o print logo abaixo, com legenda.
+- [ ] Cada passo de tela tem o print logo abaixo, com legenda, ou o motivo de não ter, depois de uma tentativa de captura.
 - [ ] Nenhum print mostra nome, e-mail, telefone ou outro dado pessoal.
 - [ ] A pessoa sabe o que fazer, onde fazer e o que evitar sem abrir outro documento.
 - [ ] A ferramenta está ligada quando a dúvida é sobre ela.
@@ -169,6 +171,14 @@ Se você escrever o passo a passo de uma tela só com texto, a pessoa não recon
 2. Capture, suba e ponha a imagem logo abaixo do passo.
 3. Escreva a legenda com o que a tela mostra.
 
+### Print dispensado sem tentar
+
+Se você escrever que o passo ficou sem print sem ter aberto a tela, o artigo sai sem imagem por uma suposição, e a pessoa descobre que o print era possível.
+
+1. Abra a tela num navegador que a sessão tenha e capture o estado do passo.
+2. Só com a tentativa feita, diga qual ficou sem print e o que ela mostrou.
+3. Ponha o aviso no topo do artigo com esse motivo.
+
 ### Artigo repetido
 
 Se você criar o artigo sem buscar, a base fica com duas respostas para a mesma pergunta.
@@ -192,7 +202,7 @@ Os critérios ficaram de fora. Cada guardrail virou item do diagnóstico rápido
 
 - O pedido é uma instrução para a IA, uma regra operacional ou uma entrega: siga o fluxograma do Passo 2.
 - A pessoa mandou prints: use-os nos passos que eles mostram e capture os que faltam.
-- A tela não está acessível na conexão: escreva o passo e diga qual ficou sem print.
+- A tela não abre na conexão, mesmo depois da tentativa de capturá-la: escreva o passo, diga qual ficou sem print e o que a tentativa mostrou.
 - O artigo existente responde a pergunta: atualize. Não crie outro.
 - O passo não é de tela, como uma regra ou uma decisão: não precisa de print.
 
@@ -202,6 +212,7 @@ Os critérios ficaram de fora. Cada guardrail virou item do diagnóstico rápido
 - A imagem colada na mesma linha do passo parece ficar abaixo dele. Ela só vira bloco próprio com uma linha em branco antes e depois.
 - O print da tela inicial parece bastar. O passo mostra o estado em que a pessoa clica: o menu aberto, o submenu, a janela de busca.
 - Esperar os prints da pessoa parece o caminho seguro. Quem escreve o artigo captura os prints que faltam.
+- Dizer que não dá para capturar parece uma resposta honesta. Sem a tentativa de abrir a tela, é uma suposição.
 - Uma página com o título genérico da ferramenta e o corpo só com o texto de exemplo parece um rascunho esquecido, e também pode ser o modelo do banco. Só a lista de modelos do data source diz qual dos dois é.
 - Um artigo que manda usar uma ferramenta parece valer para todo mundo. Antes de dizer que uma orientação contradiz o artigo, confira a ordem dos acessos: quem ainda não recebeu a ferramenta segue outro caminho.
 

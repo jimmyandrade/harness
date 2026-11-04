@@ -49,7 +49,6 @@
  */
 
 import { readFileSync } from "node:fs"
-import { fileURLToPath } from "node:url"
 
 import { classifyPhrase } from "./routes/classify-text/index.ts"
 import { existsPhrase } from "./routes/exists/index.ts"
@@ -59,6 +58,7 @@ import { parseBody } from "./shared/http.ts"
 import { readOptions, report } from "./shared/options.ts"
 import { classifyTextRequest, lookupRequest, lookupTermsRequest } from "./shared/schema.ts"
 import { versionInfo } from "./shared/version.ts"
+import { isMain } from "./shared/main.ts"
 
 const GLOBAL = new Set(["language", "mode", "validation", "file"])
 const LISTS = new Set(["categories", "examples", "rejected", "alternatives", "related", "tags", "allowed_in", "forbidden_in"])
@@ -301,6 +301,6 @@ function readBatch(file: string): { language?: string; mode?: string; validation
   return { language: text(record.language), mode: text(record.mode), validation: text(record.validation), dry_run: dryRun, terms }
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) {
+if (isMain(import.meta.url)) {
   process.exitCode = run(process.argv.slice(2))
 }

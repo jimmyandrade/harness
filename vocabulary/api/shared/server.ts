@@ -5,7 +5,6 @@
  */
 
 import type { Server } from "node:http"
-import { fileURLToPath } from "node:url"
 
 import { allowedRoute } from "../routes/allowed/index.ts"
 import { classifyRoute } from "../routes/classify/index.ts"
@@ -22,6 +21,7 @@ import { termsRoute } from "../routes/terms/index.ts"
 import { versionRoute } from "../routes/version/index.ts"
 import { createServer, listen } from "./http.ts"
 import { readOptions, report } from "./options.ts"
+import { isMain } from "./main.ts"
 
 const routes = [allowedRoute, classifyRoute, classifyTextRoute, deleteRoute, existsRoute, forbiddenRoute, initRoute, lookupRoute, lookupTermsRoute, migrateRoute, situationalRoute, termsRoute, versionRoute]
 
@@ -39,6 +39,6 @@ function main(argv: string[]): number {
   }
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) {
+if (isMain(import.meta.url)) {
   process.exitCode = main(process.argv.slice(2))
 }

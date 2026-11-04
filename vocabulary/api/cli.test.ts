@@ -1,7 +1,9 @@
 import assert from "node:assert/strict"
-import { mkdtempSync, readFileSync, writeFileSync } from "node:fs"
+import { spawnSync } from "node:child_process"
+import { mkdtempSync, readFileSync, symlinkSync, writeFileSync } from "node:fs"
 import { tmpdir } from "node:os"
 import { join } from "node:path"
+import { fileURLToPath } from "node:url"
 import test from "node:test"
 
 import { run } from "./cli.ts"
@@ -714,6 +716,14 @@ test("classify-text prints the substitution of a row in the current format as re
   } finally {
     console.log = write
   }
+})
+
+test("version prints the version when the path to the CLI goes through a symbolic link", () => {
+  const { version } = JSON.parse(readFileSync(new URL("../../package.json", import.meta.url), "utf8")) as { version: string }
+  const link = join(mkdtempSync(join(tmpdir(), "link-")), "harness")
+  symlinkSync(fileURLToPath(new URL("../..", import.meta.url)), link)
+  const { status, stdout } = spawnSync(process.execPath, [join(link, "vocabulary", "api", "cli.ts"), "version"], { encoding: "utf8" })
+  assert.deepEqual({ status, body: stdout.trim() }, { status: 0, body: JSON.stringify({ name: "vocabulary", version }) })
 })
 
 test("classify-text applies forbidden_in and allowed_in to the --tags of the read", () => {

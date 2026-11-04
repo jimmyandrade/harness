@@ -12,13 +12,12 @@
  * Run: node api/routes/exists/index.ts <language> <text>
  */
 
-import { fileURLToPath } from "node:url"
-
 import { tokensIn } from "../classify-text/index.ts"
 import { Glossary, InvalidGlossary, applicable, caseMatches, collapse, conceptMatches, type Entry } from "../../shared/glossary.ts"
 import { parseBody, type Route } from "../../shared/http.ts"
 import { readOptions, report } from "../../shared/options.ts"
 import { classifyTextRequest } from "../../shared/schema.ts"
+import { isMain } from "../../shared/main.ts"
 
 export type CaseMismatch = { exists: true; term: string; case_matches: false }
 export type TokenExists = boolean | CaseMismatch
@@ -75,6 +74,6 @@ function main(argv: string[]): number {
   }
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) {
+if (isMain(import.meta.url)) {
   process.exitCode = main(process.argv.slice(2))
 }
