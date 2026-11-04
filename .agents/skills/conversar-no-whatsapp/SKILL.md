@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.16.2"
+  version: "0.16.3"
   related:
     - comunicar-novidade-do-produto
     - definir-agenda
@@ -102,6 +102,7 @@ Toda data no rascunho vai no `Formato da data na mensagem`, com o dia da semana 
 
 O WhatsApp não usa Markdown. Negrito é um asterisco de cada lado, itálico é sublinhado, e não há título nem link entre colchetes. O link segue `escrever-link`.
 
+Antes de apertar Enter, tire um print do campo e confira o texto, a lista e a mensagem citada. Se a formatação sair diferente do aprovado, limpe o campo e digite de novo.
 Depois de enviar, leia a conversa de novo, confira se a mensagem aparece e diga o horário.
 
 ### Passo 6
@@ -229,6 +230,10 @@ Mostrei a conversa do Caio e o texto "Podemos falar 15h00?". Enviei depois do si
 
 ## Pegadinhas
 
+- No campo de mensagem, Enter envia. A quebra de linha é shift+Enter.
+- O campo numera a lista sozinho depois de "1. ". Digitar "2." no item seguinte duplica o número: digite só o texto dos itens seguintes.
+- Depois de uma lista, o campo tira a linha em branco antes do parágrafo seguinte.
+- Responder a uma mensagem é pelo menu que aparece ao passar o mouse sobre ela, na opção Responder. A citação aparece em cima do campo.
 - A aba que a pessoa já deixou aberta pode estar fora das abas que você controla. "Usar aqui" passa a conexão para a sua aba, e a aba dela fica desconectada sem perder o login.
 - Fechar a aba do WhatsApp Web desconecta a sessão. A pessoa precisa ler o QR code de novo.
 - O WhatsApp Web leva alguns segundos para carregar. A primeira leitura pode mostrar só a tela de carregamento.
