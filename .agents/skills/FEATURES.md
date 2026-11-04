@@ -176,7 +176,7 @@ How these skills relate is in `README.md`, in this folder.
   - The reply names the branch, says whether it is on GitHub, and reports each commit hash. `Criar pull request ao terminar` is `rascunho` by default, which pushes the branch and opens a draft pull request; `sim` opens a ready pull request; `não` waits for an explicit publish request. The title and description check stays with criar-pull-request: once, after the push, not on each commit
   - Splits work into one commit per subject, and keeps commits of the same theme on the same branch and the same pull request. A different theme opens another pull request. The commit subject does not open a new pull request
   - The commit type follows what the change does, not the file extension. A correction of an error is `fix:`, even in Markdown. `docs:` is for documentation
-  - Writes each step sentence on its own line, and keeps a command in Scripts disponíveis
+  - Groups the sentences of one theme on a line and separates themes with a blank line, as a writing decision, and keeps a command in Scripts disponíveis
   - When the flow stops without `criar-pull-request`, follows `sincronizar-status-da-tarefa`
 - **Test Criteria**:
   - [ ] A project without test or build commands commits and says nothing was verified
@@ -222,7 +222,7 @@ How these skills relate is in `README.md`, in this folder.
   - A request that arrives through a copy, synced or installed by dependency or plugin, writes through criar-commit and criar-pull-request in the source repository
   - Cites another skill by its name between backticks, or in a Mermaid diagram node, so the checker and the skill graph recognize the citation
   - Gives every new skill the `Modo de aprendizado` parameter and a last step that hands over to evoluir-habilidade
-  - Writes each step sentence on its own line, so a change shows in the diff, and keeps a command out of the step
+  - Groups the sentences of one theme on a line and separates themes with a blank line, so the text reads easily and a change shows in the diff, and keeps a command out of the step
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses code edits, a non-skill page, description-only work, and writing the skill in Notion
@@ -518,6 +518,24 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses an existence-only check, spelling, social-profile normalization, merging the same item, and deleting without an order
   - [ ] A payment recipient identified by name and company identifier is registered without inventing a responsible contact and returned for linking to the payment
+
+### definir-filtro-de-email
+- **Stability**: experimental
+- **Description**: Create, edit, and check email filters without hiding mail the person wants to see
+- **Properties**:
+  - Lives at `.agents/skills/definir-filtro-de-email/SKILL.md`
+  - Reads the account's existing filters first and edits a filter for the same sender instead of duplicating it
+  - Tests the criterion in the exact account and reads the subjects it matches before saving
+  - Adds a new sender address with `OR` and keeps the old one, so the filter keeps covering the history
+  - Keeps a filter that matches few or no conversations, because the sender's volume can grow, checks that its address is right, and deletes a filter only when the person asks
+  - Skips the inbox only for senders that never bring something the person may want to follow or answer; a sender that announces events, workshops, courses, or opportunities, or a thank-you note after an event, stays in the inbox
+  - Adds never mark as important to any filter that skips the inbox, because an inbox can let important mail override filters
+  - Tries the connector, then the browser in the mailbox account, then returns the ready query, and asks the person to sign in instead of signing in for them
+  - Reads the saved filter back and checks label, inbox, importance, and read state on the conversations it reached
+- **Test Criteria**:
+  - [x] The filter rules and parameters moved from `organizar-emails` without loss
+  - [x] User-provided acceptance examples are recorded in Portuguese Gherkin
+  - [ ] Validate with a real filter change in a clean session
 
 ### definir-fonograma
 - **Stability**: experimental
@@ -1399,6 +1417,8 @@ How these skills relate is in `README.md`, in this folder.
   - Swaps the bills-to-pay label for the paid-bills label once the payment is recorded with a receipt, including a second slip reissued for the same installment, and says which one was paid
   - Gives a collection agency its own label and adds the creditor's label only when the body names it; an alarming subject is not a formal notice unless the body describes the measure taken
   - Compares batch changes with the plan, redoes only what a partial failure left, and reports every failed call
+  - Leaves creating, editing, and checking filters to `definir-filtro-de-email`
+  - Reads `Etiquetas de status` for the pending, expected, and done labels of an action, applies them during triage, and keeps them outside the BASB roots
   - Asks before restoring a conversation that left the inbox during a change, because the person may have archived it
 - **Test Criteria**:
   - [x] The skill is present and one user-requested read-only exploratory case is recorded
