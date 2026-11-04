@@ -3,7 +3,7 @@ name: criar-pull-request
 description: Use essa habilidade sempre que for abrir ou atualizar PR, subir uma correção ou mandar para a branch principal, mesmo sem dizer PR. NÃO use para mesclar (use mesclar-pull-request), responder comentário de revisão nem para só commitar (use criar-commit).
 metadata:
   author: jimmyandrade
-  version: "0.42.0"
+  version: "0.42.1"
   related:
     - atualizar-branch-do-pull-request
     - criar-commit
@@ -72,7 +72,7 @@ Antes de criar a branch, busque a `Branch base` de novo, no mesmo comando que a 
 
 O nome da branch é `<tipo>/<descrição>`.
 O tipo é o do Conventional Commits do commit principal: `feat`, `fix`, `docs`, `refactor`, `perf`, `test`, `chore` ou `ci`.
-A descrição é ASCII em kebab-case.
+A descrição é ASCII em kebab-case, no `Idioma do PR`.
 Branch com outro prefixo, como `claude/` ou `cursor/`, que a ferramenta criou, é renomeada antes do push.
 Não abra PR de branch fora desse padrão.
 Se ela já tem PR aberto, siga `atualizar-branch-do-pull-request`.
