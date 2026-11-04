@@ -3,7 +3,7 @@ name: organizar-emails
 description: Organiza e-mails por BASB e separa pessoal, trabalho e misto. Usada quando a pessoa quer triar a caixa, etiquetar ou configurar filtros. Não serve para responder mensagens, lançar despesas nem acompanhar veículos.
 metadata:
   author: jimmyandrade
-  version: "0.13.1"
+  version: "0.14.0"
   related:
     - procurar-email
     - evoluir-habilidade
@@ -54,6 +54,7 @@ Leia os valores nas instruções do projeto, na entrada desta habilidade. Na aus
 "Etiquetas de status":
   "Ação pendente": ""
   "Ação esperada": ""
+  "Respondida": ""
   "Concluída": ""
 # `Etiquetas fora da estrutura`: outras etiquetas que a pessoa quer manter fora das raízes. Vazio, nenhuma.
 "Etiquetas fora da estrutura": []
@@ -137,6 +138,8 @@ Com `Etiquetar também mensagem enviada do mesmo tema` em `sim`, a mensagem que 
 Com `Levantar itens de ação` em `sim`, liste o que ficou em aberto em cada conversa triada. Ação pendente é o que a mensagem pede à pessoa e ela não fez, como responder, confirmar ou pagar. Ação esperada é o que a pessoa aguarda de outra, como a resposta ao último e-mail dela.
 
 Para cada ação, diga o assunto, quem, o que fazer, o prazo da mensagem, sem inventar, e o link. Conversa com ação pendente fica na entrada. Com `Etiquetas de status` preenchidas, a conversa recebe a etiqueta da ação pendente ou da esperada, e quando a ação termina ela troca pela de concluída.
+
+A conversa que a pessoa respondeu recebe a etiqueta de respondida e perde a da ação pendente, se a resposta era o que faltava. Quando a resposta dela pede retorno, a conversa recebe também a etiqueta da ação esperada.
 
 Não crie tarefa nem evento: ofereça `definir-tarefa` ou `definir-agenda`.
 
