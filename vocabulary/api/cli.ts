@@ -1,7 +1,7 @@
 /**
  * Vocabulary commands.
  *
- * lookup reads one term. lookup-terms reads several in one call: repeat --term, and a term of more than one word is read as a whole. exists maps each token of a text to whether it exists.
+ * lookup reads one term. lookup-terms reads several in one call: repeat --term, and a term of more than one word is read as a whole. exists maps each token of a text to whether it exists. classify-text gives the level of each word, emoji, and punctuation mark of a text, with the recommended alternative of an avoided one.
  * terms writes one language in one pass. Flags are key and value.
  * --language, --mode, and --validation apply to the whole batch. --dry-run
  * validates and reports what the write would do, with every problem that would
@@ -16,7 +16,7 @@
  * POST /v1/terms, for a migration; --language, --mode, and --validation
  * still override it. migrate rewrites the rows that use a deprecated state or
  * the deprecated category, and only reports them without --write. version prints
- * the name and version of the engine, to compare with the version the project pins. lookup and exists take --tags too, to read only the rows that
+ * the name and version of the engine, to compare with the version the project pins. lookup, exists, and classify-text take --tags too, to read only the rows that
  * apply to that speaker, event, or channel. --case-sensitive marks the term
  * it follows, keeping its casing as the key; it takes true or false, and alone
  * it means true. --stop-word marks a stop word the same way, and a stop word
@@ -36,6 +36,7 @@
  * Run: node api/cli.ts lookup --language pt-BR --term "verão! (chegou!)" --tags festival-de-verao
  * Run: node api/cli.ts lookup-terms --language pt-BR --term casa --term "quando puderem, dão uma olhada, por favor?"
  * Run: node api/cli.ts exists --language pt-BR --text "Oi, tudo bem?"
+ * Run: node api/cli.ts classify-text --language pt-BR --text "Oi, tudo bem?" --tags festival-de-verao
  * Run: node api/cli.ts terms --language pt-BR --mode insert --state allowed --term "!" --category punctuation --description "Ponto de exclamação" --reason "..." 
  * Run: node api/cli.ts terms --language pt-BR --mode upsert --state allowed --term iPhone --case-sensitive --categories brand --description "..." --reason "..."
  * Run: node api/cli.ts terms --file lote.json --mode upsert
@@ -50,12 +51,13 @@
 import { readFileSync } from "node:fs"
 import { fileURLToPath } from "node:url"
 
+import { classifyPhrase } from "./routes/classify-text/index.ts"
 import { existsPhrase } from "./routes/exists/index.ts"
 import { lookupTerm, lookupTerms } from "./routes/lookup/index.ts"
 import { Glossary, InvalidGlossary, deleteBatch, initGlossary, migrate, writeBatch } from "./shared/glossary.ts"
 import { parseBody } from "./shared/http.ts"
 import { readOptions, report } from "./shared/options.ts"
-import { existsRequest, lookupRequest, lookupTermsRequest } from "./shared/schema.ts"
+import { classifyTextRequest, existsRequest, lookupRequest, lookupTermsRequest } from "./shared/schema.ts"
 import { versionInfo } from "./shared/version.ts"
 
 const GLOBAL = new Set(["language", "mode", "validation", "file"])
@@ -137,6 +139,9 @@ export function run(argv: string[]): number {
       const flags = flagsFrom(rest, ["language"], ["term", "tags"])
       const body = parseBody(lookupTermsRequest, { ...flags, terms: flags.term })
       console.log(JSON.stringify(lookupTerms(new Glossary(glossary), body.language, body.terms, body.tags)))
+    } else if (command === "classify-text") {
+      const body = parseBody(classifyTextRequest, flagsFrom(rest, ["language", "text"], ["tags"]))
+      console.log(JSON.stringify(classifyPhrase(new Glossary(glossary), body.language, body.text, body.tags)))
     } else if (command === "exists") {
       const body = parseBody(existsRequest, flagsFrom(rest, ["language", "text"], ["tags"]))
       console.log(JSON.stringify(existsPhrase(new Glossary(glossary), body.language, body.text, body.tags)))

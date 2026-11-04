@@ -110,6 +110,7 @@ export type ClassifyRequest = z.infer<typeof classifyRequest>
 export const classifyTextRequest = z.object({
   language: prose("Unknown language."),
   text: prose("Provide the text."),
+  tags: tagListSchema.default([]),
 })
 export type ClassifyTextRequest = z.infer<typeof classifyTextRequest>
 
@@ -128,7 +129,7 @@ export const lookupTermsRequest = z.object({
 })
 export type LookupTermsRequest = z.infer<typeof lookupTermsRequest>
 
-export const existsRequest = classifyTextRequest.extend({ tags: tagListSchema.default([]) })
+export const existsRequest = classifyTextRequest
 export type ExistsRequest = z.infer<typeof existsRequest>
 
 export const caseSensitiveSchema = z.boolean({ error: "case_sensitive is true or false." }).default(false)

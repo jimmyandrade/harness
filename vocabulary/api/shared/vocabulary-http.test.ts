@@ -68,7 +68,7 @@ void describe("createVocabularyHttpHandler", () => {
     const listed = (await (await handler(post(listTools))).json()) as { result: { tools: { name: string }[] } }
     assert.deepEqual(
       listed.result.tools.map((tool) => tool.name),
-      ["lookup_term", "lookup_terms", "exists_in_text", "get_version"],
+      ["lookup_term", "lookup_terms", "exists_in_text", "classify_text", "get_version"],
     )
     const called = (await (await handler(post(writeTerms))).json()) as { result: { isError?: boolean } }
     assert.equal(called.result.isError, true)
@@ -78,6 +78,6 @@ void describe("createVocabularyHttpHandler", () => {
     const listed = (await (await createVocabularyHttpHandler(glossary())(post(listTools))).json()) as {
       result: { tools: { name: string }[] }
     }
-    assert.equal(listed.result.tools.length, 8)
+    assert.equal(listed.result.tools.length, 9)
   })
 })
