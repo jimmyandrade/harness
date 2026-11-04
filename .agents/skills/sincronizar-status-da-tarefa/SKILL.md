@@ -4,7 +4,7 @@ description: Sincroniza o status de tarefas, cards ou issues com o estado do pul
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.8.2"
+  version: "0.8.3"
   related:
     - criar-commit
     - criar-pull-request
@@ -46,7 +46,9 @@ Obtenha as tarefas pela `Consulta das tarefas`, ou pela lista ou pelos links que
 Quando a habilidade roda por um commit ou por uma mudança de pull request, parta desse pull request e busque as tarefas abertas.
 Toda mudança de estado de um pull request que o turno faz, ou que a pessoa ou o aplicativo avisam, roda esta habilidade na mesma resposta, antes de responder.
 Isso vale também quando o PR foi aberto, tirado do rascunho ou mesclado pelo `gh` direto, sem passar por `criar-pull-request` nem por `mesclar-pull-request`.
-Quando a pessoa pede o panorama do que criou, obtenha as tarefas pela `Consulta do panorama`, que traz as abertas e as fechadas.
+Quando a pessoa pede o panorama, obtenha as tarefas pela `Consulta do panorama`, que traz as abertas e as fechadas do que ela criou.
+Se o pedido não diz de quem, pergunte uma vez se o panorama é só do que a pessoa criou ou de todas as abertas.
+Para todas as abertas, use a mesma consulta sem o filtro da pessoa e só com as abertas.
 O panorama só lê: ligue cada tarefa ao PR pelo Passo 2, relate pelo Passo 5 e pule o plano, a gravação da ligação e a mudança de status.
 Sem consulta e sem lista, pergunte e pare. Resultado grande que vem em arquivo é lido pelos campos chave, status e título, depois de conferir o formato do arquivo. Anote o status de cada tarefa como o rastreador devolveu.
 
