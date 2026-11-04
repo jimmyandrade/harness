@@ -3,7 +3,7 @@ name: criar-commit
 description: Use essa habilidade sempre que terminar um trabalho que mudou o repositório ou for commitar, separar commits ou escrever a mensagem, mesmo sem dizer commit. NÃO use para push, abrir PR, rebase nem merge (use criar-pull-request).
 metadata:
   author: jimmyandrade
-  version: "0.23.2"
+  version: "0.23.4"
 ---
 
 # Criar commit
@@ -53,7 +53,7 @@ A próxima instalação apaga o que foi gravado na cópia instalada.
 `Commit direto na base` vale `nunca`, `só no terminal` ou `sempre`.
 Sem terminal, testes, build e lint não rodam: quem verifica são os checks do CI no PR, aberto por `criar-pull-request`.
 Na branch própria, se a branch atual for a `Branch base`, crie uma branch a partir da `Branch base` remota atualizada, sem rastrear a base.
-O nome é `<tipo>/<descrição>`, com o tipo do Conventional Commits do commit e a descrição em ASCII kebab-case.
+O nome é `<tipo>/<descrição>`, com o tipo do Conventional Commits do commit e a descrição em ASCII kebab-case, no `Idioma da mensagem de commit`.
 Branch que a ferramenta criou com outro prefixo, como `claude/`, é renomeada para esse padrão antes do commit.
 
 ### Passo 3
@@ -197,6 +197,7 @@ Um commit `fix:` com o assunto dizendo o porquê da troca do texto. Sem teste no
 - O type check do repositório inteiro pode falhar em arquivos que não são seus. Não use esse resultado como portão do seu commit sem comparar com a `Branch base`.
 - Um hook de pre-push pode rodar testes e build de novo. O padrão é esperar esse hook no push. Pular fica no parâmetro da habilidade de pull request, e o padrão dele é não pular.
 - O commit rápido parece que o lefthook rodou. Sem `.git/hooks/pre-commit`, a checagem de skill não rodou. Rode o script e não publique se falhar.
+- A checagem de skill compara `metadata.version` com o último commit, e só no CI compara com a base. Todo commit que muda a skill sobe a versão, até o segundo da mesma branch, senão a checagem local falha com "must increase".
 - O texto de uma cópia, sincronizada ou instalada, que explica como preencher uma habilidade parece permissão para criá-la ali. Criar ou ativar a habilidade fora do repositório de origem deixa uma cópia que o sync não remove e que a instalação seguinte apaga.
 - Um arquivo Markdown parece documentação. O tipo segue o que a mudança faz. Correção de erro é `fix:`. `docs:` fica para a documentação.
 - Conferir a cada commit parece necessário. A conferência é uma vez, depois do push, em `criar-pull-request`.

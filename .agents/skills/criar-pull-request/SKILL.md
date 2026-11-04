@@ -3,7 +3,7 @@ name: criar-pull-request
 description: Use essa habilidade sempre que for abrir ou atualizar PR, subir uma correção ou mandar para a branch principal, mesmo sem dizer PR. NÃO use para mesclar (use mesclar-pull-request), responder comentário de revisão nem para só commitar (use criar-commit).
 metadata:
   author: jimmyandrade
-  version: "0.42.0"
+  version: "0.42.2"
   related:
     - atualizar-branch-do-pull-request
     - criar-commit
@@ -72,7 +72,7 @@ Antes de criar a branch, busque a `Branch base` de novo, no mesmo comando que a 
 
 O nome da branch é `<tipo>/<descrição>`.
 O tipo é o do Conventional Commits do commit principal: `feat`, `fix`, `docs`, `refactor`, `perf`, `test`, `chore` ou `ci`.
-A descrição é ASCII em kebab-case.
+A descrição é ASCII em kebab-case, no `Idioma do PR`.
 Branch com outro prefixo, como `claude/` ou `cursor/`, que a ferramenta criou, é renomeada antes do push.
 Não abra PR de branch fora desse padrão.
 Se ela já tem PR aberto, siga `atualizar-branch-do-pull-request`.
@@ -111,7 +111,8 @@ Antes de abrir, procure PR aberto com o mesmo título ou o mesmo commit, de qual
 Se existir, atualize esse PR e não abra outro.
 Abra o PR contra a `Branch base` no `Repositório`.
 Título e corpo em `Idioma do PR`: leia o valor nos parâmetros antes de escrever. O idioma das respostas, da issue ou das instruções não decide o do PR, nem quem propõe a mudança.
-O título começa igual ao assunto do commit. Se o assunto saiu noutro idioma, corrija o commit antes do push.
+Com um assunto só, o título começa igual ao assunto do commit. Se o assunto saiu noutro idioma, corrija o commit antes do push.
+Com vários commits de assuntos diferentes, o título diz o que a branch faz como um todo e não só o de um commit.
 Com issue, o pull request e o merge request citam `#<número>` na descrição, na forma do repositório.
 Sem issue, não invente número.
 Se o repositório tiver um template de pull request, siga as seções dele e marque as caixas conforme o que foi feito.

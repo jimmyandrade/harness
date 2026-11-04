@@ -4,7 +4,7 @@ description: Sincroniza o status de tarefas, cards ou issues com o estado do pul
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.8.1"
+  version: "0.8.2"
   related:
     - criar-commit
     - criar-pull-request
@@ -222,6 +222,8 @@ A pessoa pede o panorama do que criou. A consulta traz quatro tarefas. "Exportar
   Abra o corpo de cada resultado e ligue só o que cita a tarefa.
   Um PR de número menor também pode citá-la, quando foi aberto antes da tarefa e teve o corpo editado depois.
   Veja se o PR resolve a tarefa ou só a menciona, como num "fora do escopo" ou num acompanhamento.
+- A consulta do rastreador pode limitar o resultado por padrão, como o `gh issue list`, que traz 30.
+  Ponha o limite na consulta gravada e confira que o total bate com o do rastreador, senão o panorama sai incompleto sem aviso.
 
 ## Scripts disponíveis
 
