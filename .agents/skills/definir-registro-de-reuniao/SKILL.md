@@ -3,7 +3,7 @@ name: definir-registro-de-reuniao
 description: Cadastra e corrige o registro de uma reunião, com título, data, participantes, resumo e índice, onde o projeto guarda os registros. Usada quando a pessoa cola uma transcrição ou pergunta se uma reunião já está registrada. Não serve para achar o contexto de uma reunião nem escrever a ata.
 metadata:
   author: jimmyandrade
-  version: "0.11.0"
+  version: "0.13.2"
   related:
     - definir-agenda
     - definir-grafia
@@ -61,6 +61,14 @@ Quando a transcrição já mora num documento do armazenamento, como as anotaç�
 
 Descubra título, data, horário de início e participantes na agenda da pessoa, antes de perguntar. Siga `procurar-agenda` com o horário aproximado que ela deu ou com o horário de criação do registro. Não invente título genérico nem participante.
 
+Quando o título ou o horário do documento de anotações não bate com o evento do dia, não assuma que o documento está certo nem o descarte.
+Confira na agenda o evento recorrente que tem o título do documento, o dia da semana dessa recorrência, a resposta da pessoa ao convite (recusou, ausente) e quem fala no documento.
+Quando a pessoa propõe outro título para o evento, procure esse título na agenda e confira o dia da semana da recorrência antes de aceitar ou de contrariar.
+Quem recebeu o convite por um endereço de grupo pode ter o documento sem ter ido à reunião.
+Isso não impede o registro: o bloco do cabeçalho diz que a pessoa não participou e que o horário diverge da agenda.
+Com a divergência sem resolver, pergunte uma vez, com os fatos: o evento do convite, a resposta da pessoa e quem fala.
+Registre com título pelo assunto, o horário do documento e o aviso no cabeçalho.
+
 ```mermaid
 flowchart LR
   Q{Quantos eventos casam?} -->|um| U[Use o evento]
@@ -110,7 +118,15 @@ A ação sem fonte continua `a confirmar`.
 
 Aplique no resumo as correções já confirmadas, e use o nome canônico no lugar do apelido e da grafia errada. Para nome de pessoa ou de empresa, a forma correta e as formas erradas que o reconhecimento de voz gerou ficam nas variações de grafia do registro, como diz `definir-grafia`: leia dali. Com uma `Fonte de identidade das pessoas` que não é a lista do projeto, a grafia fica nessa fonte, no registro da pessoa. Termo que não é nome, como sigla ou jargão, vem de `Fonte de correções de termos`.
 
-Nome ou termo estranho que não casa com nenhuma correção confirmada: não adivinhe. Liste cada um com duas linhas antes e duas depois e pergunte à pessoa. O que ela confirmar sobre um nome segue `definir-grafia`, e sobre um termo entra em `Fonte de correções de termos`. O que ela não souber fica como pendente, com o trecho.
+Nome ou termo estranho que não casa com nenhuma correção confirmada: não adivinhe e não pergunte de saída.
+Antes de listar qualquer pendente, pesquise no mesmo turno no diretório de pessoas e em cada ferramenta de `Fontes para resolver identidade` da `definir-pessoa` que estiver conectada, pelo nome ou pelo termo e, para pessoa, pelo e-mail.
+Para um nome de pessoa, siga `definir-pessoa` e use o assunto, quem fala, o cargo e o time para escolher.
+Um candidato único e plausível entra no resumo como hipótese, dita como inferência.
+Para um termo que não é nome, como sigla, jargão ou palavra solta, traga as pistas que a busca achou e uma hipótese `inferido` quando houver.
+Liste para a pessoa só o que a busca não resolveu.
+Ao listar, não mostre só a frase em volta: mostre o parágrafo ou o bloco inteiro em que aparece, os itens vizinhos da lista ou da seção e as pistas da busca.
+Para um nome de pessoa, junte os candidatos já pesquisados (nome completo e o que ajuda a diferenciar, como cargo e e-mail).
+O que ela confirmar sobre um nome segue `definir-grafia`, e sobre um termo entra em `Fonte de correções de termos`. O que ela não souber fica como pendente, com o contexto maior.
 
 ### Passo 8
 
@@ -136,6 +152,14 @@ Se você nomear a reunião só como `Reunião` ou adivinhar os participantes, o 
 
 1. Cruze o horário com a agenda.
 2. Sem evento plausível, pergunte uma vez.
+
+### Nome ou termo listado como pendente sem ter pesquisado
+
+Se você listar um nome ou termo como pendente sem ter pesquisado, a pessoa responde o que as fontes já mostravam e ainda não vê o contexto para decidir.
+
+1. Pesquise no mesmo turno, antes de listar, no diretório e em cada ferramenta de `Fontes para resolver identidade` da `definir-pessoa` que estiver conectada.
+2. Um candidato plausível entra como hipótese `inferido`.
+3. Liste só o que a busca não resolveu, com o parágrafo ou o bloco inteiro, os itens vizinhos e as pistas achadas.
 
 ### Ação atribuída pelo pronome
 
@@ -197,9 +221,12 @@ Escrevi no resumo que a correção sobe no dia seguinte, com o responsável como
 - O assunto de `Assuntos fora do resumo` aparece na transcrição: fica na transcrição bruta e fora do resumo.
 - O armazenamento é um banco e uma propriedade opcional falta no mapeamento: liste no fim, sugira criar a propriedade e não escreva esse valor no corpo da página.
 - O mesmo projeto guarda uma cópia em arquivo local e uma página: o nome do arquivo é o slug, e o título da página é o texto convencional. Os dois descrevem a mesma reunião, cada um no seu padrão.
+- O documento traz o título de uma reunião recorrente num horário diferente do evento do dia: confira a recorrência, o dia da semana e a resposta da pessoa ao convite. Sem resolver, pergunte uma vez e registre pelo assunto, com o aviso no cabeçalho.
 
 ## Pegadinhas
 
+- Duas linhas em volta parecem contexto bastante. Para um termo que a pessoa não conhece, mostre o parágrafo ou o bloco inteiro, os itens vizinhos e o que a busca achou.
+- O título de um documento de anotações herda o nome da reunião recorrente, mesmo quando a sessão foi outra, num horário que não é o do evento. Quem estava ausente ou recusou o convite ainda pode receber o documento.
 - Texto colado de outra interface pode trazer lixo no começo, como o nome de um botão ou de um arquivo de áudio. Não é fala.
 - Slug de arquivo e título de página são coisas diferentes. Um título escrito como slug, sem acento e com hífens, fica estranho no Notion, no Confluence e no Google Drive.
 - O reconhecimento de voz erra nome de pessoa e sigla de um jeito que parece outra palavra. O apelido de quem fala também vira outro nome quando alguém o chama.

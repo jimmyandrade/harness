@@ -3,7 +3,7 @@ name: mesclar-pull-request
 description: Mescla um pull request aberto na branch base e faz o que vem depois do merge, inclusive quando a pessoa avisa que mesclou. Usada quando a pessoa pede para mesclar, colocar na main ou diz que um PR foi mesclado, mesmo sem dizer merge. Não serve para fechar sem merge, abrir ou atualizar o PR nem para responder a revisão.
 metadata:
   author: jimmyandrade
-  version: "0.2.2"
+  version: "0.2.3"
   related:
     - atender-revisao-de-pull-request
     - atualizar-branch-do-pull-request
@@ -80,7 +80,7 @@ Depois do merge, feito aqui ou avisado pela pessoa, faça tudo isto na mesma res
 - [ ] Se não achar nenhuma, escreva na resposta que o PR não tem tarefa ligada e onde você procurou. A pessoa decide se liga uma tarefa ou se o PR não precisa de uma.
 - [ ] Se o projeto sincroniza o repositório com outra ferramenta, como as páginas de habilidade no Notion, confira a sincronização.
 - [ ] Com `Comunicar novidade após o merge` em `sim`, siga `comunicar-novidade-do-produto` para o PR.
-- [ ] Siga `limpar-copias-de-trabalho` para a cópia de trabalho e a branch local do PR.
+- [ ] Siga `limpar-copias-de-trabalho` para a cópia de trabalho e a branch local do PR, com a conferência de cada espaço de trabalho, inclusive a branch remota, na mesma resposta.
 
 A tarefa do PR nunca fica no status de antes do merge.
 
@@ -162,6 +162,7 @@ O PR mudava a mensagem de erro do CI para uma branch com o prefixo de um agente 
 ## Pegadinhas
 
 - Depois do squash, a branch local não aparece como mesclada. Só o estado do PR diz que o trabalho entrou.
+- O merge feito pelo botão, ou avisado pela pessoa, pode deixar a branch remota. Só o `fetch --prune` diz se ela sumiu.
 - `mergeStateStatus` `BLOCKED` com checks verdes costuma ser aprovação ou check exigido que ainda não rodou. Leia os dois antes de dizer por quê.
 - O aviso "mesclado" parece encerrar o assunto. É o gatilho do Passo 3.
 - Uma revisão pendente não aparece para mais ninguém e não segura o merge. Só quem a escreveu a vê, então leia as revisões com o `gh` da pessoa.
