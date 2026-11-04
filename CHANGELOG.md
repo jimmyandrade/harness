@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.54.0](https://github.com/jimmyandrade/harness/compare/v1.53.0...v1.54.0) (2026-11-04)
+
+
+### Features
+
+* **abrir-vendas-na-tiqueteira:** open an event's presale on its ticketing platform ([#834](https://github.com/jimmyandrade/harness/issues/834)) ([0a7e0d3](https://github.com/jimmyandrade/harness/commit/0a7e0d3f5dbf783f56508148ff67e0a3e22e1447)), closes [#833](https://github.com/jimmyandrade/harness/issues/833)
+
 ## [1.53.0](https://github.com/jimmyandrade/harness/compare/v1.52.0...v1.53.0) (2026-11-04)
 
 
