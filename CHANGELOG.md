@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.48.0](https://github.com/jimmyandrade/harness/compare/v1.47.0...v1.48.0) (2026-11-04)
+
+
+### Features
+
+* **definir-pessoa:** record an inferred nickname with its evidence ([#811](https://github.com/jimmyandrade/harness/issues/811)) ([b3c991c](https://github.com/jimmyandrade/harness/commit/b3c991c631cd542204ceaa49650528d799e0f332))
+* **definir-post-mortem:** write and publish the post-mortem of an incident ([#810](https://github.com/jimmyandrade/harness/issues/810)) ([3e6cca0](https://github.com/jimmyandrade/harness/commit/3e6cca0043f1d46445d2f78ad79eb527a1bc3308)), closes [#809](https://github.com/jimmyandrade/harness/issues/809)
+
 ## [1.47.0](https://github.com/jimmyandrade/harness/compare/v1.46.4...v1.47.0) (2026-11-04)
 
 
