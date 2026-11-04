@@ -25,7 +25,7 @@ import { Glossary, deleteBatch, initGlossary, migrate, writeBatch } from "../sha
 import { parseBody } from "../shared/http.ts"
 import { readOptions } from "../shared/options.ts"
 import { versionInfo } from "../shared/version.ts"
-import { LEVELS, LOOKUP_LIMIT, classifyTextRequest, existsRequest, lookupRequest, initRequest, lookupTermsRequest, migrateRequest } from "../shared/schema.ts"
+import { LEVELS, LOOKUP_LIMIT, classifyTextRequest, lookupRequest, initRequest, lookupTermsRequest, migrateRequest } from "../shared/schema.ts"
 
 const languageProperty = { type: "string", description: "BCP 47 tag of the text, such as pt-BR." }
 
@@ -274,7 +274,7 @@ export function callTool(directory: string, params: unknown): ToolResult {
       return reply(lookupTerms(glossary, body.language, body.terms, body.tags))
     }
     if (record?.name === "exists_in_text") {
-      const body = parseBody(existsRequest, record.arguments)
+      const body = parseBody(classifyTextRequest, record.arguments)
       return reply(existsPhrase(glossary, body.language, body.text, body.tags))
     }
     if (record?.name === "classify_text") {

@@ -57,7 +57,7 @@ import { lookupTerm, lookupTerms } from "./routes/lookup/index.ts"
 import { Glossary, InvalidGlossary, deleteBatch, initGlossary, migrate, writeBatch } from "./shared/glossary.ts"
 import { parseBody } from "./shared/http.ts"
 import { readOptions, report } from "./shared/options.ts"
-import { classifyTextRequest, existsRequest, lookupRequest, lookupTermsRequest } from "./shared/schema.ts"
+import { classifyTextRequest, lookupRequest, lookupTermsRequest } from "./shared/schema.ts"
 import { versionInfo } from "./shared/version.ts"
 
 const GLOBAL = new Set(["language", "mode", "validation", "file"])
@@ -143,7 +143,7 @@ export function run(argv: string[]): number {
       const body = parseBody(classifyTextRequest, flagsFrom(rest, ["language", "text"], ["tags"]))
       console.log(JSON.stringify(classifyPhrase(new Glossary(glossary), body.language, body.text, body.tags)))
     } else if (command === "exists") {
-      const body = parseBody(existsRequest, flagsFrom(rest, ["language", "text"], ["tags"]))
+      const body = parseBody(classifyTextRequest, flagsFrom(rest, ["language", "text"], ["tags"]))
       console.log(JSON.stringify(existsPhrase(new Glossary(glossary), body.language, body.text, body.tags)))
     } else if (command === "terms") {
       console.log(JSON.stringify(writeBatch(glossary, termsFrom(rest))))

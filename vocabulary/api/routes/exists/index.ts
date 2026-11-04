@@ -18,7 +18,7 @@ import { tokensIn } from "../classify-text/index.ts"
 import { Glossary, InvalidGlossary, applicable, caseMatches, collapse, conceptMatches, type Entry } from "../../shared/glossary.ts"
 import { parseBody, type Route } from "../../shared/http.ts"
 import { readOptions, report } from "../../shared/options.ts"
-import { existsRequest } from "../../shared/schema.ts"
+import { classifyTextRequest } from "../../shared/schema.ts"
 
 export type CaseMismatch = { exists: true; term: string; case_matches: false }
 export type TokenExists = boolean | CaseMismatch
@@ -58,7 +58,7 @@ export const existsRoute: Route = {
   limit: 65536,
   emptyMessage: "Provide the text.",
   handle(glossary, record) {
-    const body = parseBody(existsRequest, record)
+    const body = parseBody(classifyTextRequest, record)
     return existsPhrase(glossary, body.language, body.text, body.tags)
   },
 }

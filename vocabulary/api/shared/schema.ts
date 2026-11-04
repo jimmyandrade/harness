@@ -129,9 +129,6 @@ export const lookupTermsRequest = z.object({
 })
 export type LookupTermsRequest = z.infer<typeof lookupTermsRequest>
 
-export const existsRequest = classifyTextRequest
-export type ExistsRequest = z.infer<typeof existsRequest>
-
 export const caseSensitiveSchema = z.boolean({ error: "case_sensitive is true or false." }).default(false)
 
 const forbiddenRequestObject = z.object({
