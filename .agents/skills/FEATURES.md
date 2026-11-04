@@ -8,6 +8,21 @@ How these skills relate is in `README.md`, in this folder.
 
 ## Features
 
+### abrir-vendas-na-tiqueteira
+- **Stability**: experimental
+- **Description**: Open an event's presale on its ticketing platform, from the missing dates to the public link saved on the event
+- **Properties**:
+  - Lives at `.agents/skills/abrir-vendas-na-tiqueteira/SKILL.md`
+  - Reads the event, product, and ticketing platform data sources, their fields, the statuses, a default platform, and the sales window end from the project instructions
+  - Reads the platform from the event field, and asks the person to fill it when empty, suggesting the default without saving it
+  - Lists dates with no event on the platform, ordered by the product's campaign lead time
+  - Duplicates the latest edition of the same product and place, keeps it private, and reads the platform's step-by-step article for screen details
+  - Opens only the first sequential batch by date, rolls each next batch from the previous one, and keeps complimentary tickets out of the rollover
+  - Registers batches in the batch database through `definir-lote-de-ingresso`, and saves the link and the open-sales status after the person says yes
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses door sales, creating the event in the database, and deciding price and quantity
+
 ### acompanhar-edital
 - **Stability**: experimental
 - **Description**: Track open calls on the web: the selection result of an open call the person applied to, and the next open call of the same opportunity
