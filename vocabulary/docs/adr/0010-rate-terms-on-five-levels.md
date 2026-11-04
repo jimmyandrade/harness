@@ -32,7 +32,7 @@ A project wants to move a glossary it keeps in another tool, such as a Notion da
 
 `forbidden` and `allowed` stay general rules, as ADR 0003 and ADR 0008 decide: they take no `when` and no `tags`. `forbidden` and `strongly_discouraged` take no positive `examples`. A bad example stays in `rejected`. `reason` says why to use a term, so only `allowed_with_care` and `allowed` take it. Why to avoid a term stays in `description`. `description` and `reason` may not say the same thing. A cliché is still `forbidden`.
 
-A missing example is created at the level of the row that names it. A missing rejected example is created `forbidden`. A missing alternative is created `allowed`. `alternative`, the single recommended term of ADR 0003, is still read. It is the recommended term of an avoided level, and the always-allowed term of `allowed_with_care`.
+A missing example is created at the level of the row that names it. A missing rejected example is created `forbidden`. A missing alternative is created `allowed`. `alternative`, the single recommended term of ADR 0003, is still read. It is the recommended term of an avoided level, and the always-allowed term of `allowed_with_care`. An avoided row without `alternative` recommends its `substitution`, so a row in the current format answers with a recommendation too.
 
 ### The three states that came before
 

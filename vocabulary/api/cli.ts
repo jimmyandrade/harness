@@ -1,7 +1,7 @@
 /**
  * Vocabulary commands.
  *
- * lookup reads one term. lookup-terms reads several in one call: repeat --term, and a term of more than one word is read as a whole. exists maps each token of a text to whether it exists. classify-text gives the level of each word, emoji, and punctuation mark of a text, with the recommended alternative of an avoided one.
+ * lookup reads one term. lookup-terms reads several in one call: repeat --term, and a term of more than one word is read as a whole. exists maps each token of a text to whether it exists. classify-text gives the level of each word, emoji, and punctuation mark of a text, with the recommended term of an avoided one: its alternative or, without one, its substitution.
  * terms writes one language in one pass. Flags are key and value.
  * --language, --mode, and --validation apply to the whole batch. --dry-run
  * validates and reports what the write would do, with every problem that would

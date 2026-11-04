@@ -131,3 +131,8 @@ test("classifyPhrase with tags leaves out the rows of another speaker", () => {
   assert.deepEqual(read(["festival"]), ["allowed", "not_registered"])
   assert.deepEqual(read(["maria-silva", "palco"]), ["allowed", "allowed"])
 })
+
+test("a word with only a substitution comes back with it as recommended", () => {
+  const entries = load('{ "chave": { "state": "strongly_discouraged", "substitution": "feature toggle" } }')
+  assert.equal(classifyText(entries, "ligue a chave", "pt-BR").words[2]?.recommended, "feature toggle")
+})
