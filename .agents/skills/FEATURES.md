@@ -669,6 +669,20 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [ ] Three cases validated with the person
 
+### definir-lote-de-ingresso
+- **Stability**: experimental
+- **Description**: Check, register, or fix an event's ticket batch and the door sales page, with the quota, the receiving account, and the Pix key
+- **Properties**:
+  - Lives at `.agents/skills/definir-lote-de-ingresso/SKILL.md`
+  - Reads the batch, event, and account data sources, the field names, the window statuses, the default receiving account, the door sales address, and who decides the fee from the project instructions
+  - Lists the batches linked to the event, and treats a batch written only in the event page body as a launch error
+  - Checks the same batch the ticketing platform sells instead of creating another record for the door
+  - Asks who decides the fee before saving, and saves the value the public pays with the fee added
+  - Saves only after the person says yes, and counts a batch as launched only after the door sales page shows it with the Pix key
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses opening sales on the ticketing platform and deciding price and quantity
+
 ### definir-medicao-de-metrica
 - **Stability**: experimental
 - **Description**: Record the values of a metric in the measurement history, one record per reference period, and review or create the metric without duplicating the concept
