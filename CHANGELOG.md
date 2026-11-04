@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.51.0](https://github.com/jimmyandrade/harness/compare/v1.50.0...v1.51.0) (2026-11-04)
+
+
+### Features
+
+* **escrever-teste:** test with a record in the current format ([#825](https://github.com/jimmyandrade/harness/issues/825)) ([84630d1](https://github.com/jimmyandrade/harness/commit/84630d14a420a7e5a02a8bc5168a0c16ebbb1f09))
+
+
+### Bug Fixes
+
+* **vocabulary:** recommend the substitution of an avoided row ([#827](https://github.com/jimmyandrade/harness/issues/827)) ([2d02005](https://github.com/jimmyandrade/harness/commit/2d02005cb4134a76fa878e424a20e8cbb5bf300d))
+
 ## [1.50.0](https://github.com/jimmyandrade/harness/compare/v1.49.0...v1.50.0) (2026-11-04)
 
 
