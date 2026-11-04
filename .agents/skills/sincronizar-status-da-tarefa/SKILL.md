@@ -1,10 +1,10 @@
 ---
 name: sincronizar-status-da-tarefa
-description: Sincroniza o status de tarefas, cards ou issues com o estado do pull request ligado a cada uma e grava a ligação quando o PR não cita a tarefa. Usada quando um commit é criado ou o estado de um PR muda, mesmo pelo `gh`, ou quando a pessoa avisa que mesclou, mesmo sem dizer sincronizar. Não serve para escrever a tarefa, abrir o PR nem revisar o diff.
+description: Sincroniza o status de tarefas, cards ou issues com o estado do pull request ligado a cada uma, grava a ligação quando o PR não cita a tarefa e mostra o panorama do que a pessoa criou. Usada quando um commit é criado ou o estado de um PR muda, mesmo pelo `gh`, ou quando a pessoa avisa que mesclou ou pede o panorama. Não serve para escrever a tarefa, abrir o PR nem revisar o diff.
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.7.1"
+  version: "0.8.0"
   related:
     - criar-commit
     - criar-pull-request
@@ -21,6 +21,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 ```yaml
 # `Consulta das tarefas` é a busca que lista as tarefas da pessoa ainda abertas, na linguagem do rastreador do projeto.
 "Consulta das tarefas": ""
+# `Consulta do panorama` é a busca que lista as tarefas que a pessoa criou, abertas e fechadas, com o PR ligado a cada uma, na linguagem do rastreador do projeto. `Consulta do panorama` vazia pergunta uma vez e para.
+"Consulta do panorama": ""
 # `Fluxo de status` é a lista ordenada dos status, do primeiro ao último, com o nome de cada transição entre eles. `Fluxo de status` vazio não muda o status e não interrompe a gravação da ligação.
 "Fluxo de status": ""
 "Status do PR mesclado": "concluído"
@@ -44,6 +46,8 @@ Obtenha as tarefas pela `Consulta das tarefas`, ou pela lista ou pelos links que
 Quando a habilidade roda por um commit ou por uma mudança de pull request, parta desse pull request e busque as tarefas abertas.
 Toda mudança de estado de um pull request que o turno faz, ou que a pessoa ou o aplicativo avisam, roda esta habilidade na mesma resposta, antes de responder.
 Isso vale também quando o PR foi aberto, tirado do rascunho ou mesclado pelo `gh` direto, sem passar por `criar-pull-request` nem por `mesclar-pull-request`.
+Quando a pessoa pede o panorama do que criou, obtenha as tarefas pela `Consulta do panorama`, que traz as abertas e as fechadas.
+O panorama só lê: ligue cada tarefa ao PR pelo Passo 2, relate pelo Passo 5 e pule o plano, a gravação da ligação e a mudança de status.
 Sem consulta e sem lista, pergunte e pare. Resultado grande que vem em arquivo é lido pelos campos chave, status e título, depois de conferir o formato do arquivo. Anote o status de cada tarefa como o rastreador devolveu.
 
 ### Passo 2
@@ -99,7 +103,9 @@ Chamada negada ou com erro para a execução daquela tarefa. Anote "não feito" 
 
 Antes de relatar, releia o status das tarefas que tiveram negação ou erro. Conte a lista final, uma tarefa por vez. A soma das partes bate com o total.
 
-Relate em blocos: um por status final, com a chave, o link da tarefa e o link do PR, montados do status que o retorno trouxe. Depois, as "não feitas", com o motivo e o status real. Depois, as "não mexi", com o motivo. Diga as ligações feitas só pelo assunto. Se um relato anterior desta conversa trouxe estado ou número errado, a primeira frase corrige: o que foi dito e o que é o certo.
+Relate em blocos: um por status final, com a chave, o link da tarefa e o link do PR, montados do status que o retorno trouxe. Depois, as "não feitas", com o motivo e o status real. Depois, as "não mexi", com o motivo. Diga as ligações feitas só pelo assunto.
+No panorama, os blocos são: aberta com PR aberto, aberta com PR mesclado, aberta sem PR e fechada, cada tarefa com a chave, o link e o link do PR.
+Se um relato anterior desta conversa trouxe estado ou número errado, a primeira frase corrige: o que foi dito e o que é o certo.
 
 ### Passo 6
 
@@ -183,8 +189,13 @@ A entrega "Publicar o relatório" está num pull request aberto, sem a chave da 
 
 A mesma entrega está num pull request já mesclado. O plano marca "ligada pelo assunto" e espera o sim. Com o sim, a habilidade comenta na tarefa com o link do pull request. O status fica como está.
 
+### o panorama do que a pessoa criou
+
+A pessoa pede o panorama do que criou. A consulta traz quatro tarefas. "Exportar relatório em CSV" está aberta e tem o PR 12 em rascunho. "Validar o formulário de contato" está aberta e o PR 15 já foi mesclado. "Ordenar a lista de pedidos" está aberta e não tem PR. "Corrigir o rodapé" está fechada. O relato traz um bloco por situação, com a chave, o link da tarefa e o link do PR, e não muda nenhum status.
+
 ## Casos-limite
 
+- No panorama, a tarefa aberta cujo PR já foi mesclado vai no bloco próprio e continua aberta. Quem a fecha é o merge do PR que a cita, não esta habilidade.
 - O PR está aberto e pronto, mas tem uma etiqueta de `Etiquetas de PR bloqueado`: o destino é o `Status do PR bloqueado`, não o de aberto e pronto.
 - O PR está em rascunho e tem etiqueta de bloqueio: vale o `Status do PR bloqueado`.
 - O PR foi fechado sem mesclar: a tarefa não muda e vai para a lista de decisão.
@@ -206,6 +217,8 @@ A mesma entrega está num pull request já mesclado. O plano marca "ligada pelo 
 - Uma frase comprimida parece um recado interno. A skill fica fácil de ler por uma pessoa.
 - Abrir, tirar do rascunho ou mesclar o PR pelo `gh` parece não ter relação com a tarefa. O estado do PR mudou, e a habilidade roda mesmo assim.
 - O aviso de que um PR foi mesclado parece só uma informação. É gatilho: confirme o estado MERGED e sincronize a tarefa na mesma resposta.
+
+- A `Consulta do panorama` pode listar só o PR que fecha a tarefa. A tarefa que parece sem PR pode ter um que só cita a chave, então busque pela chave antes de dizer que não tem.
 
 ## Scripts disponíveis
 
