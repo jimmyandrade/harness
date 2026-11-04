@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.9.0"
+  version: "0.9.1"
   related:
     - definir-empresa
     - definir-grafia
@@ -54,6 +54,7 @@ Um perfil colado por quem usa a habilidade, em texto ou imagem, é o pedido de c
 ### Passo 2
 
 Busque o nome na lista de pessoas, no nome e nas variações, por consulta direta e por busca semântica. Antes de perguntar qualquer dado de identidade, consulte o registro da pessoa. Se faltar, resolva pelas `Fontes para resolver identidade`. Um nome parcial, um apelido ou uma grafia estranha, sem e-mail, também se resolve nessas fontes: pesquise no Slack pelo nome e, quando houver, pelo e-mail, e compare o cargo, o time e os canais com o assunto da conversa.
+Quando estiverem conectados, consulte também a wiki, o rastreador de tarefas e a hospedagem de código (perfil, autor, login), pelo nome e pelo e-mail.
 Não peça à pessoa que desambigue antes dessa busca.
 Só pergunte o que nem o registro nem essas fontes respondem.
 Um candidato único e plausível pelo contexto entra como hipótese `inferido`, com a frase da fonte. Só o que a fonte responde com certeza entra como confirmado.
@@ -109,6 +110,14 @@ Se você perguntar à pessoa quem é um nome ambíguo antes de pesquisar, ela re
 2. Compare cargo, time e canais com o assunto da conversa.
 3. Um candidato plausível entra como `inferido`, com a frase.
 4. Só pergunte o que sobrar, com os candidatos já pesquisados.
+
+### Nome listado como pendente sem ter pesquisado
+
+Se você listar um nome como pendente sem ter pesquisado, a pessoa confirma o que as fontes já mostravam.
+
+1. Pesquise no mesmo turno, antes de listar: o diretório, o chat do time, a wiki, o rastreador de tarefas e a hospedagem de código, pelo nome e pelo e-mail.
+2. Um candidato plausível entra como `inferido`, com a frase.
+3. A lista de pendentes leva só o que a busca em todas as fontes não resolveu.
 
 ### Nome em texto onde cabia menção
 

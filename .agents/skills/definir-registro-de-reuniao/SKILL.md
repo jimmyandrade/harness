@@ -3,7 +3,7 @@ name: definir-registro-de-reuniao
 description: Cadastra e corrige o registro de uma reunião, com título, data, participantes, resumo e índice, onde o projeto guarda os registros. Usada quando a pessoa cola uma transcrição ou pergunta se uma reunião já está registrada. Não serve para achar o contexto de uma reunião nem escrever a ata.
 metadata:
   author: jimmyandrade
-  version: "0.13.0"
+  version: "0.13.1"
   related:
     - definir-agenda
     - definir-grafia
@@ -119,11 +119,14 @@ A ação sem fonte continua `a confirmar`.
 Aplique no resumo as correções já confirmadas, e use o nome canônico no lugar do apelido e da grafia errada. Para nome de pessoa ou de empresa, a forma correta e as formas erradas que o reconhecimento de voz gerou ficam nas variações de grafia do registro, como diz `definir-grafia`: leia dali. Com uma `Fonte de identidade das pessoas` que não é a lista do projeto, a grafia fica nessa fonte, no registro da pessoa. Termo que não é nome, como sigla ou jargão, vem de `Fonte de correções de termos`.
 
 Nome ou termo estranho que não casa com nenhuma correção confirmada: não adivinhe e não pergunte de saída.
-Para um nome de pessoa, siga `definir-pessoa`: consulte o diretório, pesquise no Slack e use o assunto, quem fala, o cargo e o time para escolher.
+Antes de listar qualquer pendente, pesquise no mesmo turno em todas as fontes conectadas: o diretório de pessoas, o chat do time, a wiki, o rastreador de tarefas e a hospedagem de código, pelo nome ou pelo termo e, para pessoa, pelo e-mail.
+Para um nome de pessoa, siga `definir-pessoa` e use o assunto, quem fala, o cargo e o time para escolher.
 Um candidato único e plausível entra no resumo como hipótese, dita como inferência.
-Liste para a pessoa só o que sobrar, cada nome com duas linhas antes e duas depois e com os candidatos já pesquisados (nome completo, cargo e e-mail).
-Um termo que não é nome vai direto à pessoa, com o trecho.
-O que ela confirmar sobre um nome segue `definir-grafia`, e sobre um termo entra em `Fonte de correções de termos`. O que ela não souber fica como pendente, com o trecho.
+Para um termo que não é nome, como sigla, jargão ou palavra solta, traga as pistas que a busca achou e uma hipótese `inferido` quando houver.
+Liste para a pessoa só o que a busca não resolveu.
+Ao listar, não mostre só a frase em volta: mostre o parágrafo ou o bloco inteiro em que aparece, os itens vizinhos da lista ou da seção e as pistas da busca.
+Para um nome de pessoa, junte os candidatos já pesquisados (nome completo, cargo e e-mail).
+O que ela confirmar sobre um nome segue `definir-grafia`, e sobre um termo entra em `Fonte de correções de termos`. O que ela não souber fica como pendente, com o contexto maior.
 
 ### Passo 8
 
@@ -149,6 +152,14 @@ Se você nomear a reunião só como `Reunião` ou adivinhar os participantes, o 
 
 1. Cruze o horário com a agenda.
 2. Sem evento plausível, pergunte uma vez.
+
+### Nome ou termo listado como pendente sem ter pesquisado
+
+Se você listar um nome ou termo como pendente sem ter pesquisado, a pessoa responde o que as fontes já mostravam e ainda não vê o contexto para decidir.
+
+1. Pesquise no mesmo turno, antes de listar, em todas as fontes conectadas: o diretório, o chat do time, a wiki, o rastreador de tarefas e a hospedagem de código.
+2. Um candidato plausível entra como hipótese `inferido`.
+3. Liste só o que a busca não resolveu, com o parágrafo ou o bloco inteiro, os itens vizinhos e as pistas achadas.
 
 ### Ação atribuída pelo pronome
 
@@ -214,6 +225,7 @@ Escrevi no resumo que a correção sobe no dia seguinte, com o responsável como
 
 ## Pegadinhas
 
+- Duas linhas em volta parecem contexto bastante. Para um termo que a pessoa não conhece, mostre o parágrafo ou o bloco inteiro, os itens vizinhos e o que a busca achou.
 - O título de um documento de anotações herda o nome da reunião recorrente, mesmo quando a sessão foi outra, num horário que não é o do evento. Quem estava ausente ou recusou o convite ainda pode receber o documento.
 - Texto colado de outra interface pode trazer lixo no começo, como o nome de um botão ou de um arquivo de áudio. Não é fala.
 - Slug de arquivo e título de página são coisas diferentes. Um título escrito como slug, sem acento e com hífens, fica estranho no Notion, no Confluence e no Google Drive.
