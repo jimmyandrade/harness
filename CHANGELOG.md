@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.58.0](https://github.com/jimmyandrade/harness/compare/v1.57.0...v1.58.0) (2026-11-04)
+
+
+### Features
+
+* **sincronizar-status-da-tarefa:** add a read-only overview of the tasks the person created ([#856](https://github.com/jimmyandrade/harness/issues/856)) ([75b3a57](https://github.com/jimmyandrade/harness/commit/75b3a57afaaca3d01f77b4ef45149d15ad8cded2))
+
 ## [1.57.0](https://github.com/jimmyandrade/harness/compare/v1.56.0...v1.57.0) (2026-11-04)
 
 
