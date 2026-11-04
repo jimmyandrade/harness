@@ -1,4 +1,11 @@
 {
   "skill_name": "definir-agenda",
-  "evals": []
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Aproveite e registre na agenda do time os marcos do lançamento da versão 2, em 2027: congelamento de código em 10/03, ensaio em 12/03, pré-aquecimento do ambiente em 14/03, o lançamento em 20/03 e o fim do congelamento em 30/03. Hoje é 12/03, então os dois primeiros já passaram. A janela de plantão de 18/03 a 21/03 já está na agenda.",
+      "expected_output": "Cinco eventos de dia inteiro criados, incluindo os de data já passada, e a janela de plantão existente atualizada com descrição e fonte, sem duplicata. O tipo foi confirmado antes de gravar. A resposta traz o dia da semana de cada data, o fuso e o estado de cada evento, criado ou alterado.",
+      "files": []
+    }
+  ]
 }

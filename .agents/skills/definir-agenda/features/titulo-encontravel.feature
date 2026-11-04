@@ -27,3 +27,9 @@ Funcionalidade: Título encontrável na agenda
       Quando a skill define o título
       Então o título pode começar com Reservado para ou A confirmar
       E inclui o nome canônico do contexto
+
+    Exemplo: A variação de busca
+      Dado que o evento tem nomes alternativos que ajudam a achar
+      Quando a skill escreve a descrição
+      Então ela traz a variação numa frase "Também chamado de…"
+      E mantém o link da página canônica
