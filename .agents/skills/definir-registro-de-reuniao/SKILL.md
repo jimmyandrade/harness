@@ -3,7 +3,7 @@ name: definir-registro-de-reuniao
 description: Cadastra e corrige o registro de uma reunião, com título, data, participantes, resumo e índice, onde o projeto guarda os registros. Usada quando a pessoa cola uma transcrição ou pergunta se uma reunião já está registrada. Não serve para achar o contexto de uma reunião nem escrever a ata.
 metadata:
   author: jimmyandrade
-  version: "0.9.1"
+  version: "0.10.0"
   related:
     - definir-agenda
     - definir-grafia
@@ -86,6 +86,8 @@ Depois do bloco, escreva o resumo derivado. A transcrição bruta vem em seguida
 - Registre como decisão só o que foi dito como decisão. Separe combinado de opinião e de hipótese.
 - Não dê mais peso à fala de quem fala mais nem de quem tem mais cargo.
 - Marque como incerto o trecho ilegível ou mal transcrito.
+- Quando a pessoa corrige o que a transcrição registrou errado, o resumo e todo texto derivado dizem só o fato correto, como se a fala tivesse saído certa.
+Não conte a diferença entre a fala e o que foi feito.
 - Texto que não é fala, como o nome de um arquivo de áudio ou o resto de uma cópia de outra tela, vira uma nota de resto de cópia.
 - Deixe fora do resumo, e de toda pauta, descrição de evento, mensagem ou página derivada do registro, os `Assuntos fora do resumo`. Com o valor vazio, nenhum assunto fica de fora. A transcrição bruta mantém tudo.
 - Diga no fim do resumo o que ficou de fora e por quê.
@@ -147,6 +149,14 @@ Se você copiar o texto de um documento de reunião que já está no armazenamen
 
 1. Use o documento existente como registro.
 2. Acrescente só o resumo e a linha do índice.
+
+### Erro de transcrição narrado
+
+Se você escrever no resumo, na ata ou no comentário da tarefa que a fala saiu como 10 e que a pessoa confirmou 100, o texto publicado carrega um detalhe que ninguém pediu.
+
+1. Escreva só o fato correto: a estratégia ficou em 100%.
+2. Deixe o erro de reconhecimento na transcrição bruta.
+3. Enquanto a pessoa não confirmar, escreva o fato com `a confirmar`.
 
 ## Exemplos de entrada e saída
 

@@ -4,12 +4,13 @@ description: Abre, revisa, edita e traduz issues do GitHub pelo modelo e no idio
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.7.0"
+  version: "0.8.0"
   aliases:
     - definir-issue
   related:
     - criar-pull-request
     - evoluir-habilidade
+    - levantar-ambiente-do-repositorio
   models:
     - issue-do-github
 ---
@@ -119,6 +120,7 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 - A demanda é de negócio, sem entrega no código: não abra issue.
 - O comentário de revisão pede outra issue: ela segue os mesmos passos.
 - A issue nasce de um achado no meio de outro trabalho: o modelo vale do mesmo jeito.
+- O achado é um comando que reescreveu um arquivo versionado ou falhou só nesta máquina: reproduza com o ambiente do lock, como manda `levantar-ambiente-do-repositorio`, antes de abrir. Se some, a causa é a instalação local: não abra a issue e diga isso.
 - O repositório documenta, ou usa nas issues recentes, um idioma diferente do `Idioma da issue`: esse idioma vence, e a resposta diz qual usou.
 
 ## Pegadinhas

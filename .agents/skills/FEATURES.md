@@ -1051,6 +1051,24 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses writing the body, grading output, describing a product, and writing the skill page in Notion
 
+### emitir-documento-oficial
+- **Stability**: experimental
+- **Description**: Issue official certificates and clearances as PDFs from government portals, starting with the CCMEI
+- **Properties**:
+  - Lives at `.agents/skills/emitir-documento-oficial/SKILL.md`
+  - Lists the documents the request needs and follows only a click path already recorded for that document
+  - Reads the holder's CNPJ, CPF, and name from `Fonte dos dados do titular`, never from memory, and asks the person to type the number when the tool cannot
+  - Stops at the gov.br login and asks before authorizing data sharing or accepting a term
+  - Holds one section per known document, with a Mermaid click path and its traps; the CCMEI is the first
+  - Does not issue a document that has no section: it asks for a recorded session or the service address and adds the section through evoluir-habilidade
+  - Stores each PDF in `Onde guardar os documentos` with the issue date
+  - Does not open a company, change a registration, or pay a tax slip
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [ ] A CCMEI request reads the holder from `Fonte dos dados do titular`, stops at login, asks before authorizing, and stores the PDF with the issue date
+  - [ ] A request for a document without a section does not invent a click path
+  - [ ] Three cases validated with the person
+
 ### evoluir-habilidade
 - **Stability**: experimental
 - **Description**: Test a skill and edit that skill from the run

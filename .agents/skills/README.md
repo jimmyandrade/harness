@@ -290,6 +290,7 @@ flowchart LR
   definir_instrucoes_do_projeto --> evoluir_habilidade
   definir_issue_do_github --> criar_pull_request
   definir_issue_do_github --> evoluir_habilidade
+  definir_issue_do_github --> levantar_ambiente_do_repositorio
   definir_jornada_de_producao --> definir_agenda
   definir_jornada_de_producao --> definir_agenda_de_popstar
   definir_jornada_de_producao --> organizar_ponto_de_contato
