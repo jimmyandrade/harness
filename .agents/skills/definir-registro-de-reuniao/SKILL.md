@@ -3,7 +3,7 @@ name: definir-registro-de-reuniao
 description: Cadastra e corrige o registro de uma reunião, com título, data, participantes, resumo e índice, onde o projeto guarda os registros. Usada quando a pessoa cola uma transcrição ou pergunta se uma reunião já está registrada. Não serve para achar o contexto de uma reunião nem escrever a ata.
 metadata:
   author: jimmyandrade
-  version: "0.13.1"
+  version: "0.13.2"
   related:
     - definir-agenda
     - definir-grafia
@@ -119,13 +119,13 @@ A ação sem fonte continua `a confirmar`.
 Aplique no resumo as correções já confirmadas, e use o nome canônico no lugar do apelido e da grafia errada. Para nome de pessoa ou de empresa, a forma correta e as formas erradas que o reconhecimento de voz gerou ficam nas variações de grafia do registro, como diz `definir-grafia`: leia dali. Com uma `Fonte de identidade das pessoas` que não é a lista do projeto, a grafia fica nessa fonte, no registro da pessoa. Termo que não é nome, como sigla ou jargão, vem de `Fonte de correções de termos`.
 
 Nome ou termo estranho que não casa com nenhuma correção confirmada: não adivinhe e não pergunte de saída.
-Antes de listar qualquer pendente, pesquise no mesmo turno em todas as fontes conectadas: o diretório de pessoas, o chat do time, a wiki, o rastreador de tarefas e a hospedagem de código, pelo nome ou pelo termo e, para pessoa, pelo e-mail.
+Antes de listar qualquer pendente, pesquise no mesmo turno no diretório de pessoas e em cada ferramenta de `Fontes para resolver identidade` da `definir-pessoa` que estiver conectada, pelo nome ou pelo termo e, para pessoa, pelo e-mail.
 Para um nome de pessoa, siga `definir-pessoa` e use o assunto, quem fala, o cargo e o time para escolher.
 Um candidato único e plausível entra no resumo como hipótese, dita como inferência.
 Para um termo que não é nome, como sigla, jargão ou palavra solta, traga as pistas que a busca achou e uma hipótese `inferido` quando houver.
 Liste para a pessoa só o que a busca não resolveu.
 Ao listar, não mostre só a frase em volta: mostre o parágrafo ou o bloco inteiro em que aparece, os itens vizinhos da lista ou da seção e as pistas da busca.
-Para um nome de pessoa, junte os candidatos já pesquisados (nome completo, cargo e e-mail).
+Para um nome de pessoa, junte os candidatos já pesquisados (nome completo e o que ajuda a diferenciar, como cargo e e-mail).
 O que ela confirmar sobre um nome segue `definir-grafia`, e sobre um termo entra em `Fonte de correções de termos`. O que ela não souber fica como pendente, com o contexto maior.
 
 ### Passo 8
@@ -157,7 +157,7 @@ Se você nomear a reunião só como `Reunião` ou adivinhar os participantes, o 
 
 Se você listar um nome ou termo como pendente sem ter pesquisado, a pessoa responde o que as fontes já mostravam e ainda não vê o contexto para decidir.
 
-1. Pesquise no mesmo turno, antes de listar, em todas as fontes conectadas: o diretório, o chat do time, a wiki, o rastreador de tarefas e a hospedagem de código.
+1. Pesquise no mesmo turno, antes de listar, no diretório e em cada ferramenta de `Fontes para resolver identidade` da `definir-pessoa` que estiver conectada.
 2. Um candidato plausível entra como hipótese `inferido`.
 3. Liste só o que a busca não resolveu, com o parágrafo ou o bloco inteiro, os itens vizinhos e as pistas achadas.
 
