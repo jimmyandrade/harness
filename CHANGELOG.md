@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.53.0](https://github.com/jimmyandrade/harness/compare/v1.52.0...v1.53.0) (2026-11-04)
+
+
+### Features
+
+* **definir-agenda:** use the owning team's page as the source of an event date ([#831](https://github.com/jimmyandrade/harness/issues/831)) ([c6edf08](https://github.com/jimmyandrade/harness/commit/c6edf08fd9087d7fe5eca1c66856b536c03d49bf))
+
 ## [1.52.0](https://github.com/jimmyandrade/harness/compare/v1.51.0...v1.52.0) (2026-11-04)
 
 
