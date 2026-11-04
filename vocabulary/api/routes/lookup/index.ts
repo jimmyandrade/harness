@@ -17,12 +17,11 @@
  * Run: node api/routes/lookup/index.ts <language> <term>
  */
 
-import { fileURLToPath } from "node:url"
-
 import { Glossary, InvalidGlossary, applicable, caseMatches, collapse, effectiveState, rowsFor, type Entry } from "../../shared/glossary.ts"
 import { parseBody, type Route } from "../../shared/http.ts"
 import { readOptions, report } from "../../shared/options.ts"
 import { lookupRequest, type Person } from "../../shared/schema.ts"
+import { isMain } from "../../shared/main.ts"
 
 export type TermLookup = {
   language: string
@@ -147,6 +146,6 @@ function main(argv: string[]): number {
   }
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) {
+if (isMain(import.meta.url)) {
   process.exitCode = main(process.argv.slice(2))
 }

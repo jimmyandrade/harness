@@ -6,10 +6,9 @@
  * Run: node api/routes/version/index.ts
  */
 
-import { fileURLToPath } from "node:url"
-
 import type { Route } from "../../shared/http.ts"
 import { versionInfo } from "../../shared/version.ts"
+import { isMain } from "../../shared/main.ts"
 
 export const versionRoute: Route = {
   method: "GET",
@@ -21,6 +20,6 @@ export const versionRoute: Route = {
   },
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) {
+if (isMain(import.meta.url)) {
   console.log(JSON.stringify(versionInfo()))
 }
