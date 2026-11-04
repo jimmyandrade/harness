@@ -3,13 +3,15 @@ name: organizar-emails
 description: Organiza e-mails por BASB e separa pessoal, trabalho e misto. Usada quando a pessoa quer triar a caixa, etiquetar ou configurar filtros. Não serve para responder mensagens, lançar despesas nem acompanhar veículos.
 metadata:
   author: jimmyandrade
-  version: "0.8.0"
+  version: "0.9.0"
   related:
     - procurar-email
     - evoluir-habilidade
     - definir-obrigacao-financeira
     - lancar-despesa-pessoal
     - lancar-despesa-da-empresa
+    - definir-tarefa
+    - definir-agenda
 ---
 
 # Organizar e-mails
@@ -41,6 +43,8 @@ Leia os valores nas instruções do projeto, na entrada desta habilidade. Na aus
 "Aplicar filtro ao histórico": "sim"
 "Ler o assunto de todas as conversas antes de arquivar um lote": "sim"
 "Etiquetar também mensagem enviada do mesmo tema": "sim"
+# `Levantar itens de ação`: `sim` diz, em cada conversa triada, a ação pendente da pessoa e a ação que ela espera de outra. `não` só organiza.
+"Levantar itens de ação": "sim"
 "Caminhos para criar filtro":
   - "conector"
   - "navegador"
@@ -99,6 +103,8 @@ Mantenha contexto e destino PARA como eixos independentes de BASB. Preserve etiq
 Confirmação automática sem ação pendente, como descadastro ou inscrição em lista, vai para `Destino de confirmações automáticas`, com o tipo no lugar de `{tipo}`, no plural: `Arquivos/Descadastros`. Não pergunte se vale conservá-la. Pergunte o contexto só quando a resposta mudar o que a pessoa faz depois.
 
 Com `Etiquetar também mensagem enviada do mesmo tema` em `sim`, a mensagem que a própria pessoa enviou sobre o tema recebe a mesma etiqueta do tema, sem mudar entrada nem leitura.
+
+Com `Levantar itens de ação` em `sim`, leia em cada conversa triada o que ficou em aberto. Ação pendente é o que a mensagem pede à pessoa e ela ainda não fez, como responder, confirmar, enviar um dado ou pagar. Ação esperada é o que a pessoa aguarda de outra: a última mensagem é dela e pede retorno, ou alguém prometeu uma entrega. Para cada uma, diga o assunto, quem, o que fazer, o prazo que a mensagem dá e o link. Sem prazo na mensagem, não invente. Conversa com ação pendente fica na entrada. A lista não cria tarefa, não responde e não agenda: ofereça `definir-tarefa` ou `definir-agenda` e espere o sim.
 
 ```mermaid
 flowchart LR
@@ -176,6 +182,7 @@ Checklist de conclusão:
 - [ ] Plano validado antes das alterações autorizadas.
 - [ ] Resultado lido de volta, sem arquivamento ou leitura indevidos.
 - [ ] Nenhuma conversa processada sem etiqueta de usuário, conferido na `Consulta de e-mails sem etiqueta`.
+- [ ] Com `Levantar itens de ação` em `sim`, ações pendentes e esperadas listadas, com prazo só quando a mensagem dá.
 
 ### Passo 9
 
