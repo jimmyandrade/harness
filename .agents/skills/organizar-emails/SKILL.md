@@ -3,7 +3,7 @@ name: organizar-emails
 description: Organiza e-mails por BASB e separa pessoal, trabalho e misto. Usada quando a pessoa quer triar a caixa, etiquetar ou configurar filtros. Não serve para responder mensagens, lançar despesas nem acompanhar veículos.
 metadata:
   author: jimmyandrade
-  version: "0.9.0"
+  version: "0.10.0"
   related:
     - procurar-email
     - evoluir-habilidade
@@ -45,6 +45,13 @@ Leia os valores nas instruções do projeto, na entrada desta habilidade. Na aus
 "Etiquetar também mensagem enviada do mesmo tema": "sim"
 # `Levantar itens de ação`: `sim` diz, em cada conversa triada, a ação pendente da pessoa e a ação que ela espera de outra. `não` só organiza.
 "Levantar itens de ação": "sim"
+"Raízes da estrutura BASB":
+  - "Projetos"
+  - "Áreas"
+  - "Recursos"
+  - "Arquivos"
+# `Etiquetas fora da estrutura`: etiquetas que a pessoa quer manter fora das raízes, como as de status. Vazio, nenhuma.
+"Etiquetas fora da estrutura": []
 "Caminhos para criar filtro":
   - "conector"
   - "navegador"
@@ -98,13 +105,13 @@ Com `Árvore de decisão` definida, percorra-a antes de perguntar, na `Ordem de 
 
 ### Passo 4
 
-Mantenha contexto e destino PARA como eixos independentes de BASB. Preserve etiquetas válidas; não transforme toda newsletter em referência. Consulte `Comunicações indesejadas` para reconhecer assinaturas que a pessoa já rejeitou, sem repetir cancelamento ou criar bloqueio por esse relato sozinho.
+Mantenha contexto e destino PARA como eixos independentes de BASB. A etiqueta de destino fica sob as `Raízes da estrutura BASB`, salvo as `Etiquetas fora da estrutura`. Etiqueta existente fora delas, como `Fornecedor`, não se reutiliza como está: proponha `Recursos/Fornecedor` e renomeie com o sim da pessoa, o que leva as conversas junto. Preserve as etiquetas válidas; não transforme toda newsletter em referência. Consulte `Comunicações indesejadas` para reconhecer assinaturas que a pessoa já rejeitou, sem repetir cancelamento ou criar bloqueio por esse relato sozinho.
 
 Confirmação automática sem ação pendente, como descadastro ou inscrição em lista, vai para `Destino de confirmações automáticas`, com o tipo no lugar de `{tipo}`, no plural: `Arquivos/Descadastros`. Não pergunte se vale conservá-la. Pergunte o contexto só quando a resposta mudar o que a pessoa faz depois.
 
 Com `Etiquetar também mensagem enviada do mesmo tema` em `sim`, a mensagem que a própria pessoa enviou sobre o tema recebe a mesma etiqueta do tema, sem mudar entrada nem leitura.
 
-Com `Levantar itens de ação` em `sim`, leia em cada conversa triada o que ficou em aberto. Ação pendente é o que a mensagem pede à pessoa e ela ainda não fez, como responder, confirmar, enviar um dado ou pagar. Ação esperada é o que a pessoa aguarda de outra: a última mensagem é dela e pede retorno, ou alguém prometeu uma entrega. Para cada uma, diga o assunto, quem, o que fazer, o prazo que a mensagem dá e o link. Sem prazo na mensagem, não invente. Conversa com ação pendente fica na entrada. A lista não cria tarefa, não responde e não agenda: ofereça `definir-tarefa` ou `definir-agenda` e espere o sim.
+Com `Levantar itens de ação` em `sim`, liste o que ficou em aberto em cada conversa triada. Ação pendente é o que a mensagem pede à pessoa e ela não fez, como responder, confirmar ou pagar. Ação esperada é o que a pessoa aguarda de outra, como a resposta ao último e-mail dela. Diga o assunto, quem, o que fazer, o prazo que a mensagem dá, sem inventar, e o link. Conversa com ação pendente fica na entrada. Não crie tarefa nem evento: ofereça `definir-tarefa` ou `definir-agenda`.
 
 ```mermaid
 flowchart LR
@@ -167,7 +174,7 @@ Use o `Navegador para criar filtro`; o `Navegador do aplicativo para criar filtr
 
 Antes de alterações em lote ou de filtros, grave um plano estruturado com conta, evidência, classificação, critérios, etiquetas, mensagens atingidas, efeito futuro e preservação de leitura e entrada. Valide contra a mensagem, a resposta da pessoa e os filtros existentes. Execute apenas ações autorizadas; mantenha os casos não resolvidos fora do lote de ações, sem arquivar nem marcar como lido, e apresente cada um à pessoa com a pergunta. Toda conversa que a habilidade processa recebe ao menos uma etiqueta de usuário, mesmo a arquivada ou a de confirmação automática: nenhuma sai sem etiqueta.
 
-Reutilize etiquetas existentes pelo nome e pelo identificador retornado. Crie somente as necessárias. Use os identificadores opacos completos das conversas na conta correspondente. Com `Aplicar filtro ao histórico` em `sim`, o filtro novo vale também para as conversas antigas que ele atinge; com `não`, vale só para as próximas mensagens. Antes de arquivar ou marcar como lido um lote, e antes de aplicar ao histórico, leia o assunto de todas as conversas atingidas quando `Ler o assunto de todas as conversas antes de arquivar um lote` for `sim`: remetente igual não prova assunto igual, e o que não for do tipo confirmado fica fora do lote. Um piloto em uma conversa não autoriza outras da mesma instituição.
+Reutilize as etiquetas existentes dentro da estrutura pelo nome e pelo identificador retornado. Crie somente as necessárias. Use os identificadores opacos completos das conversas na conta correspondente. Com `Aplicar filtro ao histórico` em `sim`, o filtro novo vale também para as conversas antigas que ele atinge; com `não`, vale só para as próximas mensagens. Antes de arquivar ou marcar como lido um lote, e antes de aplicar ao histórico, leia o assunto de todas as conversas atingidas quando `Ler o assunto de todas as conversas antes de arquivar um lote` for `sim`: remetente igual não prova assunto igual, e o que não for do tipo confirmado fica fora do lote. Um piloto em uma conversa não autoriza outras da mesma instituição.
 
 ### Passo 8
 
@@ -182,7 +189,7 @@ Checklist de conclusão:
 - [ ] Plano validado antes das alterações autorizadas.
 - [ ] Resultado lido de volta, sem arquivamento ou leitura indevidos.
 - [ ] Nenhuma conversa processada sem etiqueta de usuário, conferido na `Consulta de e-mails sem etiqueta`.
-- [ ] Com `Levantar itens de ação` em `sim`, ações pendentes e esperadas listadas, com prazo só quando a mensagem dá.
+- [ ] Ações pendentes e esperadas listadas, quando `Levantar itens de ação` pede.
 
 ### Passo 9
 
