@@ -136,3 +136,65 @@ test("a word with only a substitution comes back with it as recommended", () => 
   const entries = load('{ "chave": { "state": "strongly_discouraged", "substitution": "feature toggle" } }')
   assert.equal(classifyText(entries, "ligue a chave", "pt-BR").words[2]?.recommended, "feature toggle")
 })
+
+const CONTEXT_GLOSSARY = `{
+  "casa": { "state": "allowed" },
+  "vcs": {
+    "state": "allowed_with_care",
+    "allowed_in": ["chat"],
+    "forbidden_in": ["review", "technical-doc"],
+    "reason": "Informal in written reviews.",
+    "when": "Write the full word in a review.",
+    "alternatives": ["vocês"]
+  }
+}`
+
+test("a tag in forbidden_in reads the word as forbidden, with the base level, the reason, and the alternatives", () => {
+  const words = classifyPhrase(new Glossary(writeRoot(CONTEXT_GLOSSARY)), "pt-BR", "casa vcs", ["review"]).words
+  assert.deepEqual(words.map((word) => word.to), ["allowed", "forbidden"])
+  assert.equal(words[1]?.base_state, "allowed_with_care")
+  assert.equal(words[1]?.reason, "Informal in written reviews.")
+  assert.equal(words[1]?.when, "Write the full word in a review.")
+  assert.deepEqual(words[1]?.alternatives, ["vocês"])
+  assert.equal(words[1]?.always_allowed, undefined)
+})
+
+test("a tag in allowed_in reads the word as allowed and keeps the base level", () => {
+  const word = classifyPhrase(new Glossary(writeRoot(CONTEXT_GLOSSARY)), "pt-BR", "vcs", ["chat"]).words[0]
+  assert.equal(word?.to, "allowed")
+  assert.equal(word?.base_state, "allowed_with_care")
+  assert.equal(word?.reason, undefined)
+})
+
+test("without tags, or with tags the row does not name, the level stays the stored one", () => {
+  const glossary = new Glossary(writeRoot(CONTEXT_GLOSSARY))
+  for (const tags of [[], ["festival"]]) {
+    const word = classifyPhrase(glossary, "pt-BR", "vcs", tags).words[0]
+    assert.equal(word?.to, "allowed_with_care")
+    assert.equal(word?.base_state, undefined)
+    assert.equal(word?.reason, undefined)
+    assert.equal(word?.alternatives, undefined)
+  }
+})
+
+test("forbidden_in wins over allowed_in when the read carries both tags", () => {
+  const word = classifyPhrase(new Glossary(writeRoot(CONTEXT_GLOSSARY)), "pt-BR", "vcs", ["chat", "review"]).words[0]
+  assert.equal(word?.to, "forbidden")
+})
+
+test("POST with tags in forbidden_in returns forbidden", async () => {
+  await withServer(writeRoot(CONTEXT_GLOSSARY), async (base) => {
+    const response = await fetch(`${base}/v1/classify-text`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ language: "pt-BR", text: "vcs", tags: ["technical-doc"] }),
+    })
+    assert.equal((await response.json()).words[0].to, "forbidden")
+  })
+})
+
+function writeRoot(contents: string): string {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  writeFileSync(join(root, "pt-BR.json"), contents)
+  return root
+}

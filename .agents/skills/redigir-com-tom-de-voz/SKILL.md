@@ -3,7 +3,7 @@ name: redigir-com-tom-de-voz
 description: Use essa habilidade sempre que for criar, redigir, editar, revisar ou responder texto da marca no tom de voz, mesmo sem dizer copy. NÃO use para responder quem conversa com a IA, descrever uma skill, titular tarefa ou oportunidade, cravar a grafia, alterar formato de conteúdo, nem assumir cliente, peça, oportunidade ou histórico.
 metadata:
   author: jimmyandrade
-  version: "0.19.0"
+  version: "0.19.1"
   aliases:
     - escreva-usando-o-tom-de-voz
   related:
@@ -251,6 +251,7 @@ O título ficou específico, com o nome canônico que a fonte já tinha. Não vi
 - Com `case_matches` falso, a caixa do texto não é a guardada. Escreva a grafia de `term`.
 - `node node_modules/harness/vocabulary/dist/cli.js classify-text --language <idioma> --text <trecho> --tags <tag>` devolve o nível de cada palavra, emoji e pontuação do trecho, com a troca recomendada de quem é evitado, que vem da substituição da linha. Confere o rascunho inteiro de uma vez.
 - `--tags` repete, um valor por vez. Termo sem tag vale em qualquer texto. Termo com tag só volta quando uma tag dele está na consulta.
+- Passe o formato ou o canal do texto como tag, como `review` ou `chat`. Quando a tag está em `forbidden_in` ou `allowed_in` do termo, `classify-text` devolve o nível para esse contexto, com `base_state` no nível guardado e, se ficou proibido só pelo contexto, o motivo e as alternativas.
 - `lookup_term`, `exists_in_text` e `classify_text`, no servidor `vocabulary`, fazem a mesma consulta quando não há terminal ou quando a CLI não está disponível, com o mesmo campo `tags`.
 
 1. Com terminal e a CLI instalada, rode `exists` com o texto e `lookup` para cada termo que precisar da linha inteira, com as tags de quem fala, do evento e do canal. Escreva o comando inteiro em cada chamada.
