@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.55.0](https://github.com/jimmyandrade/harness/compare/v1.54.0...v1.55.0) (2026-11-04)
+
+
+### Features
+
+* **conversar-no-whatsapp:** read unread messages and show what needs the person before sending ([#838](https://github.com/jimmyandrade/harness/issues/838)) ([dd8861b](https://github.com/jimmyandrade/harness/commit/dd8861b4eaa82c392f6a7110075e92a9755a5e4c))
+* **definir-pessoa:** search every source before asking to disambiguate a name or term ([#840](https://github.com/jimmyandrade/harness/issues/840)) ([b0981fc](https://github.com/jimmyandrade/harness/commit/b0981fcbd4785a38fdd768364fc348b31ae443b8))
+* **definir-registro-de-reuniao:** reconcile meeting notes with the calendar when title or time diverge ([#837](https://github.com/jimmyandrade/harness/issues/837)) ([dc97201](https://github.com/jimmyandrade/harness/commit/dc9720139f59fd2afec68951003e8c6d6adf3ded))
+* **investigar-problema:** investigate a reported problem and offer an article and a post-mortem at the end ([#844](https://github.com/jimmyandrade/harness/issues/844)) ([60741cc](https://github.com/jimmyandrade/harness/commit/60741cc9357956e2b92a8791607482fe93dfe5cd)), closes [#843](https://github.com/jimmyandrade/harness/issues/843)
+
+
+### Bug Fixes
+
+* **comunicar-novidade-do-produto:** show the draft before any question that ends the turn ([#836](https://github.com/jimmyandrade/harness/issues/836)) ([46b7ee8](https://github.com/jimmyandrade/harness/commit/46b7ee81fdcf5917a5820113dea975e981ec6259))
+* **conversar-no-whatsapp:** check the composer before sending and note how it formats lists ([#842](https://github.com/jimmyandrade/harness/issues/842)) ([56934ec](https://github.com/jimmyandrade/harness/commit/56934ec1f41e4539f070795e2857ca739372eece))
+* **conversar-no-whatsapp:** link the task in a message that says work is under way ([#841](https://github.com/jimmyandrade/harness/issues/841)) ([d1fc003](https://github.com/jimmyandrade/harness/commit/d1fc003b8f671f5e4e1da88afc031773981692ee))
+* **limpar-copias-de-trabalho:** check every workspace before calling the cleanup done ([#845](https://github.com/jimmyandrade/harness/issues/845)) ([d4d2acf](https://github.com/jimmyandrade/harness/commit/d4d2acf7fd26f229dbde028bc1281e51f3a413bf))
+
 ## [1.54.0](https://github.com/jimmyandrade/harness/compare/v1.53.0...v1.54.0) (2026-11-04)
 
 
