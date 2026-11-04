@@ -1419,7 +1419,8 @@ How these skills relate is in `README.md`, in this folder.
   - Gives a collection agency its own label and adds the creditor's label only when the body names it; an alarming subject is not a formal notice unless the body describes the measure taken
   - Compares batch changes with the plan, redoes only what a partial failure left, and reports every failed call
   - Leaves creating, editing, and checking filters to `definir-filtro-de-email`
-  - Reads `Etiquetas de status` for the pending, expected, and done labels of an action, applies them during triage, and keeps them outside the BASB roots
+  - Reads `Etiquetas de ferramenta`, a map from each tool or integration to the label it applies on its own, keeps those labels outside the BASB roots, and never applies, removes, or renames them
+  - Reads `Etiquetas de status` for the pending, expected, replied, and done labels of an action, applies them during triage, and keeps them outside the BASB roots; a conversation the person answered gets the replied label, and also the expected one when the answer asks for a reply
   - Asks before restoring a conversation that left the inbox during a change, because the person may have archived it
 - **Test Criteria**:
   - [x] The skill is present and one user-requested read-only exploratory case is recorded
