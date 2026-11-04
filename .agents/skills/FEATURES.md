@@ -613,6 +613,7 @@ How these skills relate is in `README.md`, in this folder.
   - Marks a dependency in GitHub Relationships: blocked by, blocking, relates to, or parent. A comment that only says the dependency does not count
   - Does not close an issue by scanning the open list. The issue closes when the citing pull request merges and its done criterion is met
   - When a new issue replaces another, opens its body with a GitHub `> [!NOTE]` alert linking the old one, and closes the old one with a comment that opens with a `> [!IMPORTANT]` alert linking the new one
+  - Attaches supporting material as an issue artifact instead of pasting it in the body or a comment: a plan as `plan`, research as `generic`, a diagram or prototype as `embedded_html`, an outside page as `link`. Edits the same artifact to keep its version history, and falls back to a comment only when no connection can create artifacts
 - **Test Criteria**:
   - [x] The skill is present at that path
 

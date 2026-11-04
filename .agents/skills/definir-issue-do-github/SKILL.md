@@ -1,10 +1,10 @@
 ---
 name: definir-issue-do-github
-description: Abre, revisa, edita e traduz issues do GitHub pelo modelo e no idioma do projeto. Usada quando a demanda técnica vira issue, inclusive a de um achado, mesmo sem dizer issue. Não serve para tarefa fora do GitHub, para o pull request nem para triar a demanda.
+description: Abre, revisa, edita e traduz issues do GitHub pelo modelo e no idioma do projeto, com os artifacts de apoio. Usada quando a demanda técnica vira issue, inclusive a de um achado, mesmo sem dizer issue. Não serve para tarefa fora do GitHub, para o pull request nem para triar a demanda.
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.8.0"
+  version: "0.9.0"
   aliases:
     - definir-issue
   related:
@@ -80,6 +80,15 @@ A antiga recebe um comentário que abre com um alerta `> [!IMPORTANT]` com o lin
 
 ### Passo 8
 
+O material de apoio que não cabe no corpo vai como artifact da issue, não colado no corpo nem num comentário.
+O plano de implementação entra como `plan`, a pesquisa ou a nota de design como `generic`, o diagrama ou o protótipo como `embedded_html`, e a conversa ou a página de fora como `link`.
+O corpo continua no modelo e cita o artifact só quando ele explica a proposta.
+O artifact segue o `Idioma da issue` e, em repositório público, a mesma regra da issue.
+Para mudar um artifact, edite o mesmo, que guarda a versão. Não apague para criar outro: a exclusão leva o histórico.
+Sem `gh` 2.103 ou mais novo, nem outra conexão que crie artifact, diga isso e deixe o material num comentário.
+
+### Passo 9
+
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
@@ -129,6 +138,8 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 - O `Idioma da issue` parece valer sempre. A convenção do repositório vence o parâmetro.
 - Commit e pull request seguem os próprios idiomas. O `Idioma da issue` vale só para a issue.
 - O título em inglês parece obrigatório por causa do Conventional Commits. Só o tipo é fixo. A descrição segue o `Idioma da issue`.
+- Um plano ou uma pesquisa longa parece caber num comentário. O comentário não tem nome nem versão. O artifact tem os dois.
+- O artifact parece de repositório privado. Em repositório público, ele é público como a issue.
 - A busca só nas abertas parece bastar. A issue fechada também conta, e reabrir é melhor que duplicar.
 - Uma varredura das issues abertas parece dizer quais fechar. A issue fecha quando o pull request que a cita, ainda aberto, é mesclado, e o `Pronto quando` está cumprido.
 - Um comentário "Depende de #2" parece registrar a dependência. O GitHub usa Relationships. O comentário só repete o fato.
@@ -141,4 +152,6 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 2. Abrir: `gh issue create --repo <Repositório> --title "<título>" --body-file <arquivo>`.
 3. Editar: `gh issue edit <número> --repo <Repositório> --title "<título>" --body-file <arquivo>`.
 4. Bloqueada por: `gh api --method POST repos/<Repositório>/issues/<número>/dependencies/blocked_by -F issue_id=<id da outra>`. O `issue_id` é o id numérico da issue, não o número. Bloqueando troca `blocked_by` por `blocking`.
-5. Quando a pessoa não consegue abrir a issue: entregue o título e o corpo prontos.
+5. Artifact: `gh issue artifact create <número> --repo <Repositório> '<arquivo>#<nome>'`, com `--type plan` para o plano. Um link: troque o arquivo pela URL. O `.html` vira `embedded_html` sozinho.
+6. Editar artifact: `gh issue artifact edit <número> <número do artifact> --repo <Repositório> --body-file <arquivo>`. `gh issue artifact list <número>` mostra o número.
+7. Quando a pessoa não consegue abrir a issue: entregue o título e o corpo prontos.
