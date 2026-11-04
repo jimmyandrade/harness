@@ -85,7 +85,7 @@ O plano de implementação entra como `plan`, a pesquisa ou a nota de design com
 O corpo continua no modelo e cita o artifact só quando ele explica a proposta.
 O artifact segue o `Idioma da issue` e, em repositório público, a mesma regra da issue.
 Para mudar um artifact, edite o mesmo, que guarda a versão. Não apague para criar outro: a exclusão leva o histórico.
-Sem `gh` 2.103 ou mais novo, nem outra conexão que crie artifact, diga isso e deixe o material num comentário.
+Se a linha de comando do GitHub, o `gh`, estiver abaixo da 2.103 ou não estiver disponível, e não houver outra conexão que crie artifact, avise a pessoa e proponha pôr o material na descrição, num comentário ou nos dois.
 
 ### Passo 9
 
@@ -129,7 +129,7 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 - A demanda é de negócio, sem entrega no código: não abra issue.
 - O comentário de revisão pede outra issue: ela segue os mesmos passos.
 - A issue nasce de um achado no meio de outro trabalho: o modelo vale do mesmo jeito.
-- O achado é um comando que reescreveu um arquivo versionado ou falhou só nesta máquina: reproduza com o ambiente do lock, como manda `levantar-ambiente-do-repositorio`, antes de abrir. Se some, a causa é a instalação local: não abra a issue e diga isso.
+- O achado é um comando que reescreveu um arquivo versionado ou falhou só nesta máquina: reproduza com o ambiente do lock, como manda `levantar-ambiente-do-repositorio`, antes de abrir. Se some, a causa é a instalação local: não abra a issue e explique à pessoa que a causa é a instalação local.
 - O repositório documenta, ou usa nas issues recentes, um idioma diferente do `Idioma da issue`: esse idioma vence, e a resposta diz qual usou.
 
 ## Pegadinhas
@@ -139,7 +139,7 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 - Commit e pull request seguem os próprios idiomas. O `Idioma da issue` vale só para a issue.
 - O título em inglês parece obrigatório por causa do Conventional Commits. Só o tipo é fixo. A descrição segue o `Idioma da issue`.
 - Um plano ou uma pesquisa longa parece caber num comentário. O comentário não tem nome nem versão. O artifact tem os dois.
-- O artifact parece de repositório privado. Em repositório público, ele é público como a issue.
+- O artifact parece visível só para quem tem acesso ao repositório. Em repositório público, qualquer pessoa vê o artifact, como vê a issue.
 - A busca só nas abertas parece bastar. A issue fechada também conta, e reabrir é melhor que duplicar.
 - Uma varredura das issues abertas parece dizer quais fechar. A issue fecha quando o pull request que a cita, ainda aberto, é mesclado, e o `Pronto quando` está cumprido.
 - Um comentário "Depende de #2" parece registrar a dependência. O GitHub usa Relationships. O comentário só repete o fato.
