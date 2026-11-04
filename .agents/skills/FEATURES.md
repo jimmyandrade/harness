@@ -780,6 +780,21 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses recording a sale or expense, building the income statement, moving stock, and projecting fair cash
 
+### definir-post-mortem
+- **Stability**: experimental
+- **Description**: Write, review, and publish the post-mortem of an incident, blameless, in the project's destination and template
+- **Properties**:
+  - Lives at `.agents/skills/definir-post-mortem/SKILL.md`
+  - Reads `Destino do post-mortem`, `Modelo do post-mortem`, `Padrão do título`, and `Seções do post-mortem` from the project instructions
+  - Without a destination, searches the connected tool for the database or space that already holds post-mortems, and asks only when it finds none or more than one
+  - Without a template, searches the connected tool for one, and otherwise follows the published post-mortems and the default sections
+  - Writes the summary, impact, timeline, root cause, contributing factors, what worked, actions, and what changes in the standard, with the cause in the process and never in a person
+  - Opens an action to undo each temporary measure by the date it expires, and keeps secrets and access codes out of the text
+  - Updates the existing post-mortem of the same incident instead of opening another, and publishes only after the person says yes
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses meeting minutes, test reports, and registering the task
+
 ### definir-recurso-de-aprendizado
 - **Stability**: experimental
 - **Description**: Keep a class in the list of learning resources and on Google Calendar, linked to the opportunity
