@@ -42,6 +42,7 @@ flowchart LR
     definir_convidado["definir-convidado"]
     definir_data_significativa["definir-data-significativa"]
     definir_empresa["definir-empresa"]
+    definir_filtro_de_email["definir-filtro-de-email"]
     definir_fonograma["definir-fonograma"]
     definir_grafia["definir-grafia"]
     definir_grupo_de_oportunidades["definir-grupo-de-oportunidades"]
@@ -281,6 +282,8 @@ flowchart LR
   definir_empresa --> definir_perfil_social
   definir_empresa --> identificar_duplicata
   definir_empresa --> mesclar_registro
+  definir_filtro_de_email --> evoluir_habilidade
+  definir_filtro_de_email --> organizar_emails
   definir_fonograma --> definir_obra_musical
   definir_fonograma --> evoluir_habilidade
   definir_grafia --> definir_perfil_social
@@ -504,6 +507,7 @@ flowchart LR
   mesclar_registro --> definir_perfil_social
   mesclar_registro --> identificar_duplicata
   organizar_emails --> definir_agenda
+  organizar_emails --> definir_filtro_de_email
   organizar_emails --> definir_obrigacao_financeira
   organizar_emails --> definir_tarefa
   organizar_emails --> evoluir_habilidade

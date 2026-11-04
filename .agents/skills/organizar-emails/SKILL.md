@@ -3,13 +3,14 @@ name: organizar-emails
 description: Organiza e-mails por BASB e separa pessoal, trabalho e misto. Usada quando a pessoa quer triar a caixa, etiquetar ou configurar filtros. Não serve para responder mensagens, lançar despesas nem acompanhar veículos.
 metadata:
   author: jimmyandrade
-  version: "0.11.0"
+  version: "0.12.0"
   related:
     - procurar-email
     - evoluir-habilidade
     - definir-obrigacao-financeira
     - lancar-despesa-pessoal
     - lancar-despesa-da-empresa
+    - definir-filtro-de-email
     - definir-tarefa
     - definir-agenda
 ---
@@ -40,7 +41,6 @@ Leia os valores nas instruções do projeto, na entrada desta habilidade. Na aus
   - "citação"
   - "execução"
 "Consulta de e-mails sem etiqueta": "has:nouserlabels"
-"Aplicar filtro ao histórico": "sim"
 "Ler o assunto de todas as conversas antes de arquivar um lote": "sim"
 "Etiquetar também mensagem enviada do mesmo tema": "sim"
 # `Levantar itens de ação`: `sim` diz, em cada conversa triada, a ação pendente da pessoa e a ação que ela espera de outra. `não` só organiza.
@@ -52,12 +52,6 @@ Leia os valores nas instruções do projeto, na entrada desta habilidade. Na aus
   - "Arquivos"
 # `Etiquetas fora da estrutura`: etiquetas que a pessoa quer manter fora das raízes, como as de status. Vazio, nenhuma.
 "Etiquetas fora da estrutura": []
-"Caminhos para criar filtro":
-  - "conector"
-  - "navegador"
-  - "devolver a consulta"
-"Navegador para criar filtro": "navegador conectado, na conta da caixa"
-"Navegador do aplicativo para criar filtro": "só se a pessoa pedir"
 "Árvore de decisão": ""
 "Ordem de avaliação da árvore": "de cima para baixo"
 "Critério de parada da árvore": "a primeira pergunta que bater decide"
@@ -145,7 +139,7 @@ Empresa de cobrança recebe a própria etiqueta, porque pode cobrar por vários 
 
 ### Passo 6
 
-Teste cada critério de filtro na conta exata e examine as correspondências inesperadas. O remetente novo entra com `OR`, sem tirar o antigo. Separe o que é regra estática do que depende de contexto.
+Separe o que é regra estática do que depende de contexto.
 
 ```mermaid
 flowchart LR
@@ -158,27 +152,17 @@ flowchart LR
 
 Para segurança, mantenha a etiqueta temática independente do contexto da conta protegida. Não encaminhe e-mails entre contas para resolver a classificação. Não use a categoria automática de promoções como autorização para esconder avisos financeiros. Filtro de entrada não observa uma leitura futura.
 
-Para criar o filtro, tente os `Caminhos para criar filtro` na ordem e registre qual funcionou. Confirme a capacidade real de cada caminho antes de prometer o filtro: uma proposta não é filtro instalado.
-
-```mermaid
-flowchart LR
-  A{O conector cria e lê filtro?} -->|sim| C[Criar pelo conector e ler o filtro de volta]
-  A -->|não| B{Navegador na conta certa e site aprovado?}
-  B -->|sim| D[Criar nas configurações da caixa e ler a lista de volta]
-  B -->|não| F[Devolver a consulta pronta e dizer por que cada caminho falhou]
-```
-
-Use o `Navegador para criar filtro`; o `Navegador do aplicativo para criar filtro` diz quando o navegador do próprio aplicativo entra. No navegador, confirme que a conta é a de `Contas` antes de salvar e peça a aprovação do site quando ela ainda não existir. A consulta devolvida traz o critério, a etiqueta e as ações do plano: pular a entrada e marcar como lido, quando o plano manda.
+Para criar, editar ou conferir um filtro, siga `definir-filtro-de-email` com o critério, a etiqueta e as ações do plano, e retome aqui.
 
 ### Passo 7
 
 Antes de alterações em lote ou de filtros, grave um plano estruturado com conta, evidência, classificação, critérios, etiquetas, mensagens atingidas, efeito futuro e preservação de leitura e entrada. Valide contra a mensagem, a resposta da pessoa e os filtros existentes. Execute apenas ações autorizadas; mantenha os casos não resolvidos fora do lote de ações, sem arquivar nem marcar como lido, e apresente cada um à pessoa com a pergunta. Toda conversa que a habilidade processa recebe ao menos uma etiqueta de usuário, mesmo a arquivada ou a de confirmação automática: nenhuma sai sem etiqueta.
 
-Reutilize as etiquetas existentes dentro da estrutura pelo nome e pelo identificador retornado. Crie somente as necessárias. Use os identificadores opacos completos das conversas na conta correspondente. Com `Aplicar filtro ao histórico` em `sim`, o filtro novo vale também para as conversas antigas que ele atinge; com `não`, vale só para as próximas mensagens. Antes de arquivar ou marcar como lido um lote, e antes de aplicar ao histórico, leia o assunto de todas as conversas atingidas quando `Ler o assunto de todas as conversas antes de arquivar um lote` for `sim`: remetente igual não prova assunto igual, e o que não for do tipo confirmado fica fora do lote. Um piloto em uma conversa não autoriza outras da mesma instituição.
+Reutilize as etiquetas existentes dentro da estrutura pelo nome e pelo identificador retornado. Crie somente as necessárias. Use os identificadores opacos completos das conversas na conta correspondente. Antes de arquivar ou marcar como lido um lote, leia o assunto de todas as conversas atingidas quando `Ler o assunto de todas as conversas antes de arquivar um lote` for `sim`: remetente igual não prova assunto igual, e o que não for do tipo confirmado fica fora do lote. Um piloto em uma conversa não autoriza outras da mesma instituição.
 
 ### Passo 8
 
-Leia o filtro criado e a conversa alterada. Confira etiquetas, conta e permanência na entrada; preserve o estado de leitura anterior. Não deduza o nome de uma etiqueta a partir de identificadores diferentes. Registre separadamente o caminho que criou o filtro, ou que nenhum criou, o filtro armazenado, as etiquetas verificadas na conversa atual e a aplicação automática futura. Sem correspondência fornecida pela integração entre o identificador interno e o nativo, declare a validação do nome no filtro limitada. Uma conversa antiga sem etiqueta não testa um filtro criado depois. Uma ação em lote pode ser aplicada só em parte: compare a leitura de volta com o plano, refaça apenas o que faltou e leia de novo. Conversa que saiu da entrada entre a alteração e a leitura de volta pode ter sido arquivada pela pessoa, que usa a caixa ao mesmo tempo: pergunte antes de devolvê-la. Relate o que foi aplicado, cada chamada que falhou e como foi resolvida, o que continua proposto e quais decisões faltam. Sem fonte oficial atual, não declare pendência financeira, de veículo ou de habilitação regularizada.
+Leia a conversa alterada. Confira etiquetas, conta e permanência na entrada; preserve o estado de leitura anterior. Não deduza o nome de uma etiqueta a partir de identificadores diferentes. Uma ação em lote pode ser aplicada só em parte: compare a leitura de volta com o plano, refaça apenas o que faltou e leia de novo. Conversa que saiu da entrada entre a alteração e a leitura de volta pode ter sido arquivada pela pessoa, que usa a caixa ao mesmo tempo: pergunte antes de devolvê-la. Relate o que foi aplicado, cada chamada que falhou e como foi resolvida, o que continua proposto e quais decisões faltam. Sem fonte oficial atual, não declare pendência financeira, de veículo ou de habilitação regularizada.
 
 Antes de relatar, rode a `Consulta de e-mails sem etiqueta` na conta. Ela só pode trazer conversas que a pessoa ainda não decidiu, e cada uma aparece na resposta com a pergunta. Conversa que a habilidade processou e aparece nessa consulta volta ao plano para receber etiqueta.
 
@@ -268,13 +252,10 @@ As ofertas recebem a etiqueta do credor e saem da entrada por filtro dos remeten
 - A caixa pessoal pode ser recuperação de conta de trabalho; um alerta recebido nela pode proteger outra identidade.
 - A data do comprovante pode ser posterior à viagem, inclusive em outro ano.
 - A consulta pode devolver a mensagem já lida antes de qualquer ação do agente; não atribua essa leitura à pessoa nem a desfaça por suposição.
-- A ferramenta de etiqueta e a leitura do filtro podem mostrar identificadores distintos; a lista disponível pode não expor a correspondência necessária para verificar o nome no filtro.
-- Trocar o remetente do filtro deixa de etiquetar o endereço antigo.
 - Uma caixa de uma atividade antiga pode ter finalidade de trabalho em `Contas` e, mesmo assim, não ser o trabalho atual. `Organizações` decide o contexto.
 - Empresa de cobrança escreve em nome do credor com assunto alarmante, como "seu CPF foi notificado", e o corpo traz só uma proposta de acordo.
 - Uma fatura de cartão no rotativo pode ter pagamento mínimo igual ao total.
-- A ação em lote e a criação de filtro podem falhar só em parte e devolver sucesso no conjunto. A leitura de volta mostra o que faltou.
-- O filtro do Gmail busca no texto todo, não só no corpo, e aplica uma etiqueta de usuário por filtro: uma regra com duas etiquetas vira dois filtros com o mesmo critério.
+- A ação em lote pode falhar só em parte e devolver sucesso no conjunto. A leitura de volta mostra o que faltou.
 - A `Consulta de e-mails sem etiqueta` pode voltar vazia no conector do Gmail e mostrar conversas no navegador. Zero no conector não prova que não há conversa sem etiqueta: repita a busca no navegador, na conta de `Contas`.
 - A contagem do navegador pode ser de mensagens e não de conversas, e o contador da barra lateral pode não ser esse número. Conte as linhas listadas.
 
