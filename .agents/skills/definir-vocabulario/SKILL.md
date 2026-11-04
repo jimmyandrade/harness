@@ -3,7 +3,7 @@ name: definir-vocabulario
 description: Use essa habilidade sempre que for cadastrar ou atualizar um ou mais termos do vocabulário do tom de voz, mesmo sem dizer glossário, lote ou estado. NÃO use para escrever, revisar ou aprovar o texto da marca, classificar uma frase, perguntar quais variações de gênero, número ou grafia foram cadastradas, nem inventar um termo que a pessoa não enviou.
 metadata:
   author: jimmyandrade
-  version: "0.34.0"
+  version: "0.35.0"
   related:
     - classificar-estado-do-termo
     - evoluir-habilidade
@@ -74,6 +74,15 @@ Se você gravar no arquivo que já existe sem olhar o idioma da comunicação in
 2. Texto ambíguo: pergunte.
 3. Sem o arquivo do idioma, crie-o com `{}` e grave.
 
+### Forma curta do substituto sem decidir
+
+Se você gravar o par de uma palavra proibida e deixar a forma curta do substituto sem regra, o texto continua com a forma curta onde a pessoa queria a completa, e ela descobre ao reler.
+
+1. Antes de gravar, procure no texto a forma curta do substituto, como o termo sozinho sem a palavra que o completa.
+2. Pergunte se a forma curta vale ou se vira a completa, e em que contexto cada uma vale.
+3. Grave a resposta na linha da forma curta, com o `when`.
+4. Anote nas `notes` do substituto o gênero e a concordância, como o artigo e o pronome que acompanham a troca.
+
 ### Par antes e depois numa frase só
 
 Se você gravar o par como um termo só, ou só o depois, o antes continua valendo e a pessoa repete a correção.
@@ -103,6 +112,7 @@ A comunicação era em português. O antes ficou proibido e a substituição foi
 - Permitidos, proibidos e situacionais juntos: um lote e um modo.
 - A pessoa manda pares antes e depois: os dois entram no mesmo lote, o antes proibido e o depois permitido, ligados entre si.
 - A mesma palavra vale de um jeito num contexto e de outro no resto: uma linha sem tags e uma com as tags do contexto, no mesmo lote.
+- A pessoa proíbe uma palavra que tem outro sentido legítimo: o nível é um dos do meio, com o sentido livre no `when`. O substituto entra permitido, e a forma curta dele pede a pergunta do problema acima.
 - A pessoa pergunta se um termo ou uma variação faltou: `procurar-variacao-de-termo`.
 - O pedido é escrever a frase: `redigir-com-tom-de-voz`.
 - O pedido é saber se a frase pode: não é esta habilidade.
@@ -112,6 +122,7 @@ A comunicação era em português. O antes ficou proibido e a substituição foi
 
 - Uma palavra em inglês dentro do texto em português parece termo do vocabulário em inglês. Ela mora no vocabulário desse texto.
 - O par antes e depois parece uma frase só, ou só o depois. Cada lado é um termo, e o antes aponta para o depois que a pessoa escreveu.
+- Trocar a palavra proibida parece só trocar o substantivo. O artigo, o pronome e o adjetivo concordam com o gênero do substituto: "o toggle ligado" vira "a feature toggle ligada".
 - Um `pt-BR.json` à mão parece o lugar de tudo. O e-mail inteiro em inglês mora em `en`, com a frase inteira.
 
 ## Scripts disponíveis
