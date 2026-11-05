@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.61.0](https://github.com/jimmyandrade/harness/compare/v1.60.0...v1.61.0) (2026-11-05)
+
+
+### Features
+
+* **enviar-mensagem-no-slack:** declare the team notice parameters ([#866](https://github.com/jimmyandrade/harness/issues/866)) ([b8229cc](https://github.com/jimmyandrade/harness/commit/b8229cc3048be8a2d8b89a7a139e9dba4604daef))
+* label items through rotular-item and mark a blocked pull request ([#869](https://github.com/jimmyandrade/harness/issues/869)) ([9cb3af7](https://github.com/jimmyandrade/harness/commit/9cb3af7df6450845d6ba81150a1c33012ae6a270))
+* **organizar-emails:** label email and pull requests through rotular-item ([#870](https://github.com/jimmyandrade/harness/issues/870)) ([fc9b5fd](https://github.com/jimmyandrade/harness/commit/fc9b5fd40e0990a53ec0ab5845779e8d8d188f69))
+
+
+### Bug Fixes
+
+* **definir-registro-de-reuniao:** show the spoken lines with every pending name ([#872](https://github.com/jimmyandrade/harness/issues/872)) ([3a157b7](https://github.com/jimmyandrade/harness/commit/3a157b7b00401c1fed2b0d11b14afe655127e8af))
+
 ## [1.60.0](https://github.com/jimmyandrade/harness/compare/v1.59.0...v1.60.0) (2026-11-04)
 
 
