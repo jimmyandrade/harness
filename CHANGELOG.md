@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.62.0](https://github.com/jimmyandrade/harness/compare/v1.61.2...v1.62.0) (2026-11-05)
+
+
+### Features
+
+* **sincronizar-status-da-tarefa:** status overview grouped by who acts next ([#891](https://github.com/jimmyandrade/harness/issues/891)) ([a9b1c8c](https://github.com/jimmyandrade/harness/commit/a9b1c8cc50d75973c0f1b4f64075a84fc9abedad))
+
+
+### Bug Fixes
+
+* **atender-revisao-de-pull-request:** run in the conversation, not in a subagent ([#881](https://github.com/jimmyandrade/harness/issues/881)) ([fc22a34](https://github.com/jimmyandrade/harness/commit/fc22a34e5bce2c7da6e7770bde7b8b533ca9baa5))
+
 ## [1.61.2](https://github.com/jimmyandrade/harness/compare/v1.61.1...v1.61.2) (2026-11-05)
 
 
