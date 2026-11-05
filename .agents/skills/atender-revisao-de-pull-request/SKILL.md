@@ -3,7 +3,7 @@ name: atender-revisao-de-pull-request
 description: Atende a revisão recebida num pull request, de pessoa ou de bot. Lê os comentários abertos, classifica cada sugestão, aplica o que é seguro e pede a resposta a `publicar-resposta-de-revisao`. Sem PR informado, lista os seus que precisam de atenção. Não serve para revisar o PR de outra pessoa nem para abrir o PR.
 metadata:
   author: jimmyandrade
-  version: "0.27.1"
+  version: "0.28.0"
   aliases:
     - resolver-comentarios-de-revisao
     - apply-pr-review
@@ -57,6 +57,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 ## Instruções
 
 ### Passo 1
+
+Rode na conversa, não num subagente: os Passos 3 e 6 esperam o sim da pessoa, e o subagente começa sem o que a conversa já leu e não fala com ela.
 
 Peça o número ou o link do pull request. Sem PR informado, liste os PRs abertos da pessoa que têm mudanças pedidas, comentários abertos ou checks falhando, e peça qual tratar. Em modo agendado, trate um por vez, na ordem.
 
