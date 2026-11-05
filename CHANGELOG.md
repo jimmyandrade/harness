@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.61.2](https://github.com/jimmyandrade/harness/compare/v1.61.1...v1.61.2) (2026-11-05)
+
+
+### Bug Fixes
+
+* **definir-registro-de-reuniao:** ground a name hypothesis on a sign of presence ([#877](https://github.com/jimmyandrade/harness/issues/877)) ([14820fe](https://github.com/jimmyandrade/harness/commit/14820fe804c8f2432ed0f4e7a119ff9e6055e6c8))
+
 ## [1.61.1](https://github.com/jimmyandrade/harness/compare/v1.61.0...v1.61.1) (2026-11-05)
 
 
