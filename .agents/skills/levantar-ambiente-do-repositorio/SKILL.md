@@ -3,7 +3,7 @@ name: levantar-ambiente-do-repositorio
 description: Levanta o ambiente de trabalho de um repositório antes de escrever código, testes, commit ou pull request. Acha o runtime e como ativá-lo, os comandos de instalar, lint, tipos, testes e build, as habilidades do repositório que se aplicam e as pegadinhas que ele documenta. Não serve para rodar os comandos, instalar dependências nem decidir a convenção de código.
 metadata:
   author: jimmyandrade
-  version: "0.12.0"
+  version: "0.13.0"
   related:
     - criar-commit
     - criar-pull-request
@@ -47,6 +47,10 @@ Leia os `Arquivos de instruções` e liste as `Pastas de habilidades do reposit�
 ### Passo 3
 
 Ache o runtime: a versão exigida e como ativá-la. Procure o arquivo de versão do projeto, como `.nvmrc` ou `.tool-versions`, o campo de versão do manifesto e o que as instruções dizem. Se uma instrução manda ativar o runtime na mesma chamada que roda o comando, registre isso como obrigatório, com o texto exato do comando.
+Compare o runtime instalado com o exigido, pelo gerenciador de versões, como em `nvm ls`.
+Versão exigida que não está instalada entra na ficha com o comando de instalar pelo gerenciador.
+Quem chamou instala essa versão e avisa a pessoa, e nunca roda lint, tipos ou testes numa versão menor sem dizer.
+Se não pode instalar, a resposta diz que a pessoa precisa atualizar o runtime.
 Leia também a versão das ferramentas de linha de comando que o trabalho usa, como `git`, `gh` e o runtime, e o que o gerenciador de pacotes do sistema lista como desatualizado e nos avisos do diagnóstico dele, como `brew outdated` e `brew doctor`.
 Um aviso de versão nova que um comando imprimiu na sessão entra também.
 Registre cada ferramenta desatualizada com a versão instalada, a nova e o comando de atualizar; das outras do gerenciador, diga quantas são.
@@ -80,7 +84,7 @@ Quando ela tem nome de branch de trabalho, como `tipo/descricao`, registre isso 
 ### Passo 6
 
 Leia `Forma do harness`, `Papel do repositório atual`, `Instalação do harness` e `Harness no repositório atual`. O repositório atual é o que está aberto nesta sessão. Qualquer um vazio: pergunte uma vez e pare. Não escolha o repositório atual, a instalação da ferramenta nem uma forma. Com os quatro preenchidos, `global` usa a instalação da ferramenta e não acrescenta arquivos aqui. `repositório` com `Harness no repositório atual` em `não` não acrescenta a instalação e não escolhe `global`. Com `repositório próprio` e papel `harness`, este repositório é o harness do negócio. Com `repositório próprio` e papel `projeto`, a instalação é `global`. Com `repositório existente`, a instalação fica neste repositório e não há outro repositório de harness. Com `próprio e repositórios` e papel `harness`, este repositório é o harness do negócio. Com `próprio e repositórios` e papel `projeto`, este repositório instala o harness do negócio e o core. Combinação diferente: pergunte uma vez e pare. Liste à parte as skills do repositório atual e as que chegam pela instalação. A pasta do glossário não faz parte dessa instalação.
-Entregue a ficha, com uma seção por passo: instruções e habilidades do repositório, runtime e como ativar, ferramentas desatualizadas, dependências instaladas diferentes do lock, comandos com a origem de cada um, habilidades do repositório que se aplicam a cada tarefa e pegadinhas. Em cada seção que não achou nada, escreva "Não achei". Não rode nenhum comando além de ler arquivos e as versões e listas do Passo 3, e não instale nada.
+Entregue a ficha, com uma seção por passo: instruções e habilidades do repositório, runtime, como ativar e se a versão exigida está instalada, ferramentas desatualizadas, dependências instaladas diferentes do lock, comandos com a origem de cada um, habilidades do repositório que se aplicam a cada tarefa e pegadinhas. Em cada seção que não achou nada, escreva "Não achei". Não rode nenhum comando além de ler arquivos e as versões e listas do Passo 3, e não instale nada.
 
 ### Passo 7
 
@@ -101,6 +105,8 @@ Se você ignorar a versão do runtime e a regra de ativá-la na mesma chamada, o
 
 1. Leia o arquivo de versão e as instruções.
 2. Entregue o comando de ativar junto com o comando de rodar.
+3. Confira se a versão exigida está instalada. Se não está, registre o comando de instalar.
+4. Quem chamou instala e avisa, ou diz que a pessoa precisa atualizar. A verificação que rodou numa versão menor roda de novo na certa, e a resposta diz isso.
 
 ### Dependência instalada diferente do lock
 
