@@ -400,6 +400,7 @@ flowchart LR
   enviar_mensagem_no_slack --> definir_vocabulario
   enviar_mensagem_no_slack --> escrever_link
   enviar_mensagem_no_slack --> evoluir_habilidade
+  enviar_mensagem_no_slack --> pedir_revisao_de_pr_no_slack
   enviar_mensagem_no_slack --> redigir_com_tom_de_voz
   escrever_codigo --> criar_commit
   escrever_codigo --> criar_pull_request

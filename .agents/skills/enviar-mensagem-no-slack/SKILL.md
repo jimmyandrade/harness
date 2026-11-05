@@ -3,13 +3,14 @@ name: enviar-mensagem-no-slack
 description: Redige uma mensagem de Slack, num canal, thread ou DM, e entrega o rascunho com o link do destino. Só envia com a autorização explícita da pessoa e, depois do envio, compara o proposto com o aplicado para alimentar o vocabulário. Usada quando a pessoa pede uma mensagem ou resposta no Slack. Não serve para achar conversa antiga nem cadastrar pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.8.0"
+  version: "0.9.0"
   related:
     - definir-agenda
     - definir-pessoa
     - definir-vocabulario
     - escrever-link
     - evoluir-habilidade
+    - pedir-revisao-de-pr-no-slack
     - redigir-com-tom-de-voz
 ---
 
@@ -44,6 +45,22 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 # `Contexto compartilhado`: regra extra do projeto, como a lista de canais privados.
 "Contexto compartilhado": ""
 "Assuntos que não se resolvem no Slack": ""
+# `Aviso ao canal inteiro` é `post único` ou `título curto em post novo, detalhe em respostas na thread`.
+"Aviso ao canal inteiro": "post único"
+# `Emoji do título de aviso ao time` é um shortcode, ou vazio para usar o do post.
+"Emoji do título de aviso ao time": ""
+# `Título do aviso ao time` é a regra do título, ou vazio.
+"Título do aviso ao time": ""
+# `Menção ao canal em aviso ao time` é `livre` ou `nunca`.
+"Menção ao canal em aviso ao time": "livre"
+# `Pedido de ciência por reação em aviso ao time` é `sim` ou `não`.
+"Pedido de ciência por reação em aviso ao time": "não"
+# `Pessoa do caso em aviso ao time` é como citar quem o aviso envolve, ou vazio.
+"Pessoa do caso em aviso ao time": ""
+# `Material de apoio em aviso ao time` é onde vai o link de apoio, ou vazio.
+"Material de apoio em aviso ao time": ""
+# `Rascunho de aviso ao time` é o que vira rascunho, ou vazio.
+"Rascunho de aviso ao time": ""
 ```
 ## Instruções
 
@@ -89,9 +106,8 @@ Termos proibidos e alternativas vêm do vocabulário, não desta habilidade.
 - Com `PS no post novo` em `sim`, o post termina, depois de uma linha em branco, com um PS pedindo para responder na thread, na frase do vocabulário. Com `por canal`, leia no registro de canais do projeto se aquele canal incentiva a resposta na thread. Sem essa informação, pergunte antes de redigir e grave a resposta no registro do canal, para não perguntar de novo. Em DM nunca há PS. Num lote de mensagens seguidas no mesmo canal, a saudação vai só na primeira e o PS só na última.
 - Uma resposta dentro de uma thread existente nunca leva título nem PS. Antes de abrir um post novo, confira se o canal já tem uma thread sobre o assunto e responda nela.
 - Quando a pessoa confirma a participação numa call combinada na conversa, a resposta traz o link da chamada, o dia e a hora. O evento fica na agenda por `definir-agenda`.
-- Uma mensagem por pull request, nunca vários numa só. Se eles se relacionam, cada mensagem cita o outro com link no corpo.
-- Um pedido de revisão de pull request leva no título o contexto, o link do PR, o link do card e, ao fim, a menção de quem acompanha.
-- Uma nova rodada de revisão, depois de ajustar os comentários, vai em resposta na thread, nesta ordem: o link do PR, o que ele corrige, o contexto e o alcance, a menção de quem tinha comentado dizendo que já ajustou, e o pedido ao grupo. Sem título e sem PS.
+- Um aviso ao time inteiro segue `Aviso ao canal inteiro`: com a thread, o post novo leva só o título, com o `Emoji do título de aviso ao time` (vazio usa o do post) e o `Título do aviso ao time`, e cada assunto do detalhe vai numa resposta. Siga `Pessoa do caso em aviso ao time` e `Material de apoio em aviso ao time`. Com `Menção ao canal em aviso ao time` em `nunca`, não use `@channel`, `@here` nem grupo. Com `Pedido de ciência por reação em aviso ao time` em `não`, não peça reação. `Rascunho de aviso ao time` diz o que vira rascunho, dentro do `Limite de rascunhos por canal`.
+- O pedido de revisão de pull request segue `pedir-revisao-de-pr-no-slack`.
 
 **Escrita**
 
@@ -158,7 +174,7 @@ Depois de enviar, leia a mensagem publicada, confira que aparece no destino cert
 
 Quando a pessoa disser que enviou, ou que mandou do jeito que ela editou, leia a mensagem publicada, pelo link ou pela thread. Compare com o rascunho que você propôs, trecho por trecho. O conector do Slack pode acrescentar um rodapé de ferramenta depois do envio: não conte isso como mudança da pessoa.
 
-Antes de atribuir autoria a qualquer trecho, em nota ou em registro, leia a mensagem publicada e confira, trecho por trecho, o que veio do rascunho e o que a pessoa escreveu. Um trecho que está na mensagem publicada e não está no rascunho é da pessoa: nunca escreva que o rascunho trazia esse trecho. Se não conseguiu ler a mensagem publicada, não atribua: diga que não conferiu.
+Antes de atribuir autoria a qualquer trecho, em nota ou em registro, leia a mensagem publicada e confira, trecho por trecho, o que veio do rascunho e o que a pessoa escreveu. Um trecho que está na mensagem publicada e não está no rascunho é da pessoa: escreva "a pessoa acrescentou X", nunca "o rascunho dizia X". Se não conseguiu ler a mensagem publicada, não atribua: diga que não conferiu.
 
 A mensagem pode ser editada depois do envio: releia a versão atual e a nota de edição antes de registrar. O motivo de uma troca só entra no registro quando a pessoa o deu.
 
@@ -208,16 +224,6 @@ Se você entregar o texto sem o link da thread, a pessoa procura onde responder.
 
 1. Devolva sempre o endereço absoluto da thread ou da mensagem, junto do texto.
 
-### Autoria atribuída sem conferir a mensagem publicada
-
-Se você escreve na nota que o rascunho dizia certa frase sem ler a mensagem publicada, pode atribuir ao rascunho uma frase que a pessoa escreveu, e o vocabulário aprende o contrário do que aconteceu.
-
-1. Leia a mensagem publicada antes de escrever a nota.
-2. Procure cada frase da nota no rascunho que você propôs. Se ela não está lá, é da pessoa.
-3. Escreva "a pessoa acrescentou X", nunca "o rascunho dizia X". Sem a leitura, diga que não conferiu.
-
-Exemplo: o rascunho dizia "Segue o relatório." e a mensagem publicada diz "Segue o relatório. Qualquer dúvida, me chama.". A segunda frase é da pessoa. A nota registra que ela acrescentou o convite a perguntar.
-
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
@@ -239,17 +245,12 @@ Li a mensagem publicada na thread e comparei com o rascunho. Você trocou duas e
 - Canal compartilhado com outra organização, onde o Slack recusa o rascunho: entregue o texto pronto para colar, com o link da thread.
 - A pessoa pede para agendar o envio: não agende. Entregue o rascunho e espere o sim no horário em que ela quiser enviar.
 - A pessoa citada não aparece na busca do Slack: pergunte uma vez, ou use `definir-pessoa` se ela é nova no projeto.
-- Mensagem enviada sem nenhuma diferença do rascunho: diga que foi aceita como estava e não registre nada.
-- Execução agendada: deixe o rascunho e o texto no resumo, com o link da thread. Não envie.
 - O destino é uma DM: use só as regras de DM, e não o tom ambiente de um canal.
 
 ## Pegadinhas
 
 - Um rascunho de resposta numa thread conta como rascunho do canal inteiro, não só da thread.
 - O endereço de uma mensagem usa o horário dela sem o ponto, depois de um `p`. Numa resposta, a thread-pai vai junto no endereço.
-- Menção só vira menção quando o texto vai pela ferramenta de rascunho ou de envio. Colada à mão, vira texto puro.
-- Uma mensagem com um link só pode ir como texto pronto. Com dois ou mais, o rascunho evita o formato do rótulo cru.
-- O motivo de uma troca parece óbvio. Só vale o que a pessoa disse, na mensagem ou na nota de edição.
 - A busca de pessoa por e-mail completo pode não achar ninguém. Procure pelo nome.
 
 ## Scripts disponíveis

@@ -3,7 +3,7 @@ name: pedir-revisao-de-pr-no-slack
 description: Redige o pedido de revisão de um pull request para o canal do time no Slack e entrega o rascunho com o link da thread, usando enviar-mensagem-no-slack. Usada quando o PR está pronto e a organização pede revisão pelo Slack, ou quando a pessoa pede apoio para revisar. Não serve para revisar o PR nem para outra mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.7.1"
+  version: "0.7.2"
   related:
     - criar-pull-request
     - enviar-mensagem-no-slack
@@ -55,7 +55,7 @@ Ache o card do PR pela branch, pelo título e pela descrição. Com `Exigir card
 
 ### Passo 3
 
-Confira o canal antes de abrir um post novo. Se já existe uma thread sobre o mesmo problema ou o mesmo PR, o pedido vai nela. Se o PR já foi revisado e os comentários foram ajustados, é uma nova rodada, em resposta na thread, como em `Post novo em canal` de `enviar-mensagem-no-slack`. Pedidos de PRs que se relacionam são mensagens separadas, cada uma com o link do outro no corpo. Quando um deles já foi pedido numa thread, o outro vai como resposta nela: uma linha dizendo que é mais um PR do mesmo assunto, as linhas do PR e do card, e a explicação fica na descrição do PR.
+Confira o canal antes de abrir um post novo. Se já existe uma thread sobre o mesmo problema ou o mesmo PR, o pedido vai nela. Se o PR já foi revisado e os comentários foram ajustados, é uma nova rodada, em resposta na thread, como no Passo 4. Cada PR tem a sua mensagem, nunca vários numa só, e os PRs que se relacionam citam o outro com link no corpo. Quando um deles já foi pedido numa thread, o outro vai como resposta nela: uma linha dizendo que é mais um PR do mesmo assunto, as linhas do PR e do card, e a explicação fica na descrição do PR.
 
 Um follow-up de um pedido sem resposta, em post novo ou na thread, repete o que o PR faz em uma frase e só depois acrescenta o que mudou, como o prazo ou o estado dos checks. O prazo não substitui o contexto: quem lê o follow-up pode não ter visto o pedido.
 
@@ -65,9 +65,9 @@ Redija o pedido com `enviar-mensagem-no-slack`, em um dos três formatos:
 
 - Pedido completo, num post novo: título com o contexto, a abertura de pedido de apoio do vocabulário, a linha do PR, a linha do card e `cc.` com as menções de `Quem acompanha`.
 - Pedido curto, num post novo: título curto, uma frase de pedido, a linha do PR e a linha do card, sem PS. O contexto vai numa resposta na própria thread, logo depois, num parágrafo: o que é, a causa e o que já foi validado, sem repetir o link.
-- Nova rodada, em resposta na thread: sem título e sem PS, na ordem de `enviar-mensagem-no-slack`.
+- Nova rodada, depois de ajustar os comentários, em resposta na thread, sem título e sem PS, nesta ordem: o link do PR, o que ele corrige, o contexto e o alcance, a menção de quem tinha comentado dizendo que já ajustou, e o pedido ao grupo.
 
-O título carrega o contexto, e o corpo não repete o que o título e o PR já dizem. As frases do pedido vêm do vocabulário. Cada link vai no identificador, e o PR e o card seguem `Linha do PR` e `Linha do card`.
+O título carrega o contexto, o link do PR, o link do card e, ao fim, a menção de quem acompanha, e o corpo não repete o que o título e o PR já dizem. As frases do pedido vêm do vocabulário. Cada link vai no identificador, e o PR e o card seguem `Linha do PR` e `Linha do card`.
 O pedido leva o endereço do preview do PR, que o projeto publica enquanto o PR está aberto, numa linha própria.
 Sem preview publicado, o pedido diz isso.
 Num PR já mesclado, ele leva o endereço do ambiente onde o trabalho está, como `registrar-resultados-da-validacao-na-tarefa` manda.
