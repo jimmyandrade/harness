@@ -123,6 +123,7 @@ flowchart LR
     revisar_financas["revisar-financas"]
     revisar_habilidade["revisar-habilidade"]
     revisar_uso_do_tempo["revisar-uso-do-tempo"]
+    rotular_item["rotular-item"]
     sincronizar_cronograma["sincronizar-cronograma"]
     sincronizar_status_da_tarefa["sincronizar-status-da-tarefa"]
     testar_ponta_a_ponta["testar-ponta-a-ponta"]
@@ -229,6 +230,7 @@ flowchart LR
   criar_pull_request --> mesclar_pull_request
   criar_pull_request --> registrar_evidencia_visual
   criar_pull_request --> registrar_resultados_da_validacao_na_tarefa
+  criar_pull_request --> rotular_item
   criar_pull_request --> sincronizar_status_da_tarefa
   definir_agenda --> definir_agenda_de_popstar
   definir_agenda --> definir_convidado
@@ -284,6 +286,7 @@ flowchart LR
   definir_empresa --> mesclar_registro
   definir_filtro_de_email --> evoluir_habilidade
   definir_filtro_de_email --> organizar_emails
+  definir_filtro_de_email --> rotular_item
   definir_fonograma --> definir_obra_musical
   definir_fonograma --> evoluir_habilidade
   definir_grafia --> definir_perfil_social
@@ -487,6 +490,7 @@ flowchart LR
   levantar_contexto_do_pull_request --> evoluir_habilidade
   levantar_contexto_do_pull_request --> levantar_ambiente_do_repositorio
   levantar_contexto_do_pull_request --> mesclar_pull_request
+  levantar_contexto_do_pull_request --> rotular_item
   liberar_espaco_em_disco --> evoluir_habilidade
   liberar_espaco_em_disco --> limpar_copias_de_trabalho
   limpar_copias_de_trabalho --> criar_copia_de_trabalho
@@ -515,6 +519,7 @@ flowchart LR
   organizar_emails --> lancar_despesa_da_empresa
   organizar_emails --> lancar_despesa_pessoal
   organizar_emails --> procurar_email
+  organizar_emails --> rotular_item
   organizar_ponto_de_contato --> criar_oportunidade
   organizar_ponto_de_contato --> definir_agenda
   organizar_ponto_de_contato --> definir_grupo_de_oportunidades
@@ -612,6 +617,11 @@ flowchart LR
   revisar_uso_do_tempo --> definir_agenda
   revisar_uso_do_tempo --> definir_agenda_de_popstar
   revisar_uso_do_tempo --> procurar_agenda
+  rotular_item --> criar_pull_request
+  rotular_item --> definir_filtro_de_email
+  rotular_item --> evoluir_habilidade
+  rotular_item --> levantar_contexto_do_pull_request
+  rotular_item --> organizar_emails
   sincronizar_cronograma --> definir_agenda
   sincronizar_cronograma --> definir_convidado
   sincronizar_cronograma --> definir_jornada_de_producao

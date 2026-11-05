@@ -281,6 +281,7 @@ How these skills relate is in `README.md`, in this folder.
   - `Fatiar por subtarefa` is `não` by default: commits of the same theme stay on the open pull request for that theme. `sim` opens one pull request per subtask. Stacking is for a theme that depends on a pull request still outside the base
   - When the branch already has a pull request or is behind the base branch, follows `atualizar-branch-do-pull-request` before the push
   - The label follows the commit type, not the file extension. `fix` uses the bug label. `docs` uses the documentation label. A Markdown file that corrects an error gets the bug label
+  - Hands the labels to `rotular-item`: the type label, plus `Rótulo de PR bloqueado` (`blocked` by default) when the merge waits on something outside the pull request, such as a secret, another pull request, or a step by a person. The description says what is missing, and the label comes off once the block clears
   - Writes each step sentence on its own line, and keeps a command in Scripts disponíveis
   - At the end, follows `sincronizar-status-da-tarefa`
   - A merge request goes to mesclar-pull-request once the pull request is open
@@ -290,6 +291,7 @@ How these skills relate is in `README.md`, in this folder.
   - [ ] A request to push to the base branch opens a pull request instead
   - [ ] A `claude/…` branch is renamed to `type/…` before its pull request opens
   - [ ] A pull request validated by a local test, with no record on the task, stays a draft and the reply says the record is missing
+  - [ ] A pull request whose workflow reads a secret the repository does not have yet opens with the blocked label
 
 ### definir-agenda
 - **Stability**: experimental
@@ -531,6 +533,7 @@ How these skills relate is in `README.md`, in this folder.
   - Skips the inbox only for senders that never bring something the person may want to follow or answer; a sender that announces events, workshops, courses, or opportunities, or a thank-you note after an event, stays in the inbox
   - Adds never mark as important to any filter that skips the inbox, because an inbox can let important mail override filters
   - Tries the connector, then the browser in the mailbox account, then returns the ready query, and asks the person to sign in instead of signing in for them
+  - Follows `rotular-item` to reuse or create the filter's label before saving, keeps a tool label out of a filter, and lets the filter apply the label to the conversations
   - Reads the saved filter back and checks label, inbox, importance, and read state on the conversations it reached
 - **Test Criteria**:
   - [x] The filter rules and parameters moved from `organizar-emails` without loss
@@ -1419,7 +1422,9 @@ How these skills relate is in `README.md`, in this folder.
   - Gives a collection agency its own label and adds the creditor's label only when the body names it; an alarming subject is not a formal notice unless the body describes the measure taken
   - Compares batch changes with the plan, redoes only what a partial failure left, and reports every failed call
   - Leaves creating, editing, and checking filters to `definir-filtro-de-email`
-  - Reads `Etiquetas de status` for the pending, expected, and done labels of an action, applies them during triage, and keeps them outside the BASB roots
+  - Reads `Etiquetas de ferramenta`, a map from each tool or integration to the label it applies on its own, keeps those labels outside the BASB roots, and hands them to `rotular-item` as tool labels, so they are never applied, removed, or renamed
+  - Chooses each label and hands the application, swap, or removal to `rotular-item`, with the BASB roots and `Etiquetas fora da estrutura` as the list, and `Etiquetas de status` and the bills-to-pay and paid-bills labels as state labels; a new label of the validated plan goes with `Criar rótulo que falta` set to `sim`
+  - Reads `Etiquetas de status` for the pending, expected, replied, and done labels of an action, applies them during triage, and keeps them outside the BASB roots; a conversation the person answered gets the replied label, and also the expected one when the answer asks for a reply
   - Asks before restoring a conversation that left the inbox during a change, because the person may have archived it
 - **Test Criteria**:
   - [x] The skill is present and one user-requested read-only exploratory case is recorded
@@ -1750,6 +1755,24 @@ How these skills relate is in `README.md`, in this folder.
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses creating, reviewing, altering, or reserving the event, the popstar agenda, reverse planning, life protection, the day or week lookup, and choosing the priority objective
+
+### rotular-item
+- **Stability**: experimental
+- **Description**: Apply, swap, and remove organizing labels on an item of a system, such as a pull request, an issue, an email, or a page, from the list and the choice of the calling skill
+- **Properties**:
+  - Skill at `.agents/skills/rotular-item/`
+  - The calling skill chooses the label and says why; this skill does not decide what the item is about
+  - Reads the labels the system already has and reuses one with the same meaning instead of creating a look-alike
+  - Never applies, removes, or renames a label that belongs to a tool
+  - Creates a state label the calling skill requires when it is missing; another missing label is created only with `Criar rótulo que falta` set to `sim`
+  - Labels the item in the same operation that creates it, when the system allows
+  - Swaps a state label in the same round when the state changes, and reads the item back
+  - Leaves hashtags and content categories to the content skills and the voice
+  - Called by `criar-pull-request`, `levantar-contexto-do-pull-request`, `organizar-emails`, and `definir-filtro-de-email`, which keep their own choice and parameters
+- **Test Criteria**:
+  - [ ] A missing `blocked` state label is created and applied
+  - [ ] An item whose block cleared loses the `blocked` label
+  - [ ] An existing label with another spelling and the same meaning is reused
 
 ### sincronizar-cronograma
 - **Stability**: experimental

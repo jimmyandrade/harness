@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.60.0](https://github.com/jimmyandrade/harness/compare/v1.59.0...v1.60.0) (2026-11-04)
+
+
+### Features
+
+* **organizar-emails:** add a replied status and map the labels each tool applies ([#867](https://github.com/jimmyandrade/harness/issues/867)) ([34e0900](https://github.com/jimmyandrade/harness/commit/34e090033b8c65b10cf0474a432b81d78e7878f8))
+
 ## [1.59.0](https://github.com/jimmyandrade/harness/compare/v1.58.3...v1.59.0) (2026-11-04)
 
 
