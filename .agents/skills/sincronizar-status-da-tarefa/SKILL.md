@@ -4,7 +4,7 @@ description: Sincroniza o status de tarefas, cards ou issues com o estado do pul
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.9.0"
+  version: "0.9.1"
   related:
     - criar-commit
     - criar-pull-request
@@ -110,17 +110,20 @@ Chamada negada ou com erro para a execução daquela tarefa. Anote "não feito" 
 Antes de relatar, releia o status das tarefas que tiveram negação ou erro. Conte a lista final, uma tarefa por vez. A soma das partes bate com o total.
 
 Relate em blocos: um por status final, com a chave, o link da tarefa e o link do PR, montados do status que o retorno trouxe. Depois, as "não feitas", com o motivo e o status real. Depois, as "não mexi", com o motivo. Diga as ligações feitas só pelo assunto.
-No panorama, os blocos são: aberta com PR aberto, aberta com PR mesclado, aberta sem PR e fechada.
+Panorama sem status pedido usa os blocos: aberta com PR aberto, aberta com PR mesclado, aberta sem PR e fechada.
+Panorama por status usa só os três blocos abaixo.
 No panorama por status, leia de cada PR o estado, o rascunho, a decisão de revisão, as revisões pedidas, os checks e os conflitos, e some uma linha por tarefa a um destes três blocos, pela primeira pergunta que bater.
 
 ```mermaid
 flowchart LR
   A{Status não bate com o PR?} -->|sim| Z[Eu faço: correção sugerida]
-  A -->|não| B{PR mesclado, aprovado, em rascunho, com mudanças pedidas, check falho ou conflito?}
+  A -->|não| B{PR aprovado, em rascunho, com mudanças pedidas, check falho ou conflito?}
   B -->|sim| X[Você faz agora]
   B -->|não| C{PR pronto com revisão pedida ou sem decisão?}
   C -->|sim| Y[Esperando revisão de outras pessoas]
-  C -->|não| W[Sem PR: Eu faço, ligar a tarefa]
+  C -->|não| W{Sem PR?}
+  W -->|sim| V[Busque o PR pela chave da tarefa]
+  V -->|não achou| U[Não mexi, com o motivo]
 ```
 
 `Você faz agora` leva o que só a pessoa destrava: mesclar o aprovado, responder mudanças pedidas, consertar check ou conflito, terminar o rascunho.
@@ -128,8 +131,8 @@ flowchart LR
 `Eu faço` leva o que a habilidade faz depois do sim: gravar a ligação e corrigir o status.
 O status que não bate vira correção sugerida, com o status lido, o status que o PR indica e o motivo. Por exemplo, tarefa concluída com PR ainda aberto, ou em revisão com PR mesclado.
 Nenhuma correção se aplica sem a confirmação da pessoa. Com o sim, siga os Passos 3 e 4.
-Cada bloco é uma tabela com o link da tarefa, o título curto, o link do PR e uma frase com o motivo.
-O relato abre com um placar, uma linha por bloco com a contagem, e segue com uma tabela por bloco, com o link, o título curto, o link do PR e as etiquetas de cada tarefa.
+O relato, nos dois panoramas, abre com um placar, uma linha por bloco com a contagem, e segue com uma tabela por bloco.
+A tabela tem o link da tarefa, o título curto, o link do PR e uma última coluna: as etiquetas nos blocos do panorama sem status, uma frase com o motivo nos três do panorama por status.
 Número sem título não se reconhece: nunca liste só os números.
 Se um relato anterior desta conversa trouxe estado ou número errado, a primeira frase corrige: o que foi dito e o que é o certo.
 
@@ -227,7 +230,6 @@ A pessoa pede o que está em revisão. Quatro tarefas: ABC-1 tem o PR aprovado e
 
 - No panorama por status, a tarefa com mais de um PR segue o caso do PR mais recente, e a pessoa vê qual foi usado.
 - No panorama por status, o PR cujo checks ainda rodam fica em `Esperando revisão de outras pessoas` com a nota de que o resultado não saiu.
-
 - No panorama, a tarefa aberta cujo PR já foi mesclado vai no bloco próprio e continua aberta, como acontece quando o PR a cita sem palavra de fechamento. Quem a fecha é o merge do PR que a cita com essa palavra, ou a pessoa, não esta habilidade.
 - O PR está aberto e pronto, mas tem uma etiqueta de `Etiquetas de PR bloqueado`: o destino é o `Status do PR bloqueado`, não o de aberto e pronto.
 - O PR está em rascunho e tem etiqueta de bloqueio: vale o `Status do PR bloqueado`.
