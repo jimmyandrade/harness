@@ -3,9 +3,10 @@ name: definir-rotina
 description: Cria, revisa e audita rotinas agendadas ou por evento, para rodarem só quando o resultado tem uso. Usada ao pedir, mudar ou auditar uma rotina, ou antes de pedir de novo um resultado que uma rotina já gerou, mesmo sem dizer rotina. Não serve para executar o trabalho da rotina, criar evento na agenda nem medir uma skill.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.4.0"
   related:
     - acompanhar-fila-de-revisao
+    - conversar-no-whatsapp
     - evoluir-habilidade
 ---
 
@@ -67,6 +68,10 @@ Limpeza, atualização de status e processamento pesado que não avisam ninguém
 Quando várias pessoas precisam do mesmo resultado, a rotina publica num canal compartilhado, em vez de cada uma pedir o mesmo numa conversa.
 A rotina de uma campanha, de um projeto ou de outro período limitado leva a data de fim.
 Quando o período acaba, siga `Ao fim do período`: com `pausar`, pause a rotina com o motivo na descrição dela; com `perguntar`, pergunte à pessoa.
+A execução agendada roda sem ninguém e não pausa a si mesma: a ferramenta de agendamento pede a aprovação de uma pessoa, e a chamada falha.
+O prompt da rotina com condição de parada, como a primeira resposta ou a data de fim, não manda a execução se pausar. Ele manda avisar numa linha que a condição chegou e que a pessoa pausa a rotina pelo nome dela.
+A resposta que cria a rotina diz isso. Na próxima conversa com a pessoa, pause as rotinas cuja condição já chegou.
+Rotinas que usam a mesma sessão de navegador, como o WhatsApp Web, viram uma rotina só, que lê todos os itens na mesma execução. Duas execuções no mesmo horário abrem cada uma a própria aba e tomam a conexão uma da outra.
 
 ### Passo 5
 
@@ -102,10 +107,18 @@ Se você criar uma rotina que confere o consumo de uso, cada conferência també
 
 ### Duas rotinas para a mesma fonte
 
-Se você criar uma rotina sem procurar as que existem, duas rotinas leem a mesma fonte e o uso dobra.
+Se você criar uma rotina sem procurar as que existem, duas rotinas leem a mesma fonte e o uso dobra. Quando a fonte é uma sessão de navegador, as duas disparam juntas e uma derruba a conexão da outra.
 
 1. Liste as rotinas no Passo 1.
 2. Ajuste a que já lê a fonte.
+
+### Rotina que manda se pausar
+
+Se você escrever no prompt que a execução agendada pause a si mesma, a chamada falha por falta de aprovação e a rotina segue rodando e repetindo o aviso.
+
+1. No prompt, troque a pausa por um aviso numa linha de que a condição chegou.
+2. Diga à pessoa que ela pausa a rotina pelo nome.
+3. Na próxima conversa, pause as rotinas cuja condição já chegou.
 
 ## Exemplos de entrada e saída
 
