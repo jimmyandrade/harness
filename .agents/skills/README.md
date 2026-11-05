@@ -123,6 +123,7 @@ flowchart LR
     revisar_financas["revisar-financas"]
     revisar_habilidade["revisar-habilidade"]
     revisar_uso_do_tempo["revisar-uso-do-tempo"]
+    rotular_item["rotular-item"]
     sincronizar_cronograma["sincronizar-cronograma"]
     sincronizar_status_da_tarefa["sincronizar-status-da-tarefa"]
     testar_ponta_a_ponta["testar-ponta-a-ponta"]
@@ -229,6 +230,7 @@ flowchart LR
   criar_pull_request --> mesclar_pull_request
   criar_pull_request --> registrar_evidencia_visual
   criar_pull_request --> registrar_resultados_da_validacao_na_tarefa
+  criar_pull_request --> rotular_item
   criar_pull_request --> sincronizar_status_da_tarefa
   definir_agenda --> definir_agenda_de_popstar
   definir_agenda --> definir_convidado
@@ -611,6 +613,10 @@ flowchart LR
   revisar_uso_do_tempo --> definir_agenda
   revisar_uso_do_tempo --> definir_agenda_de_popstar
   revisar_uso_do_tempo --> procurar_agenda
+  rotular_item --> criar_pull_request
+  rotular_item --> definir_filtro_de_email
+  rotular_item --> evoluir_habilidade
+  rotular_item --> organizar_emails
   sincronizar_cronograma --> definir_agenda
   sincronizar_cronograma --> definir_convidado
   sincronizar_cronograma --> definir_jornada_de_producao
