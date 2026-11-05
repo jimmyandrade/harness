@@ -1,9 +1,9 @@
 ---
 name: investigar-problema
-description: Conduz a investigação de um problema relatado, como um acesso bloqueado, um erro ou um dado errado, com tarefa, fatos, hipóteses conferidas e retorno a quem relatou, e ao fim oferece artigo e post-mortem. Usada quando alguém pede para investigar, descobrir a causa ou ver o que houve. Não serve para escrever o artigo, o post-mortem nem corrigir código.
+description: Conduz a investigação de um problema relatado, como um acesso bloqueado, um erro ou um dado errado, com tarefa, fatos, hipóteses e retorno a quem relatou, e oferece artigo e post-mortem. Use essa habilidade sempre que alguém relatar um problema, como um preço errado, antes de oferecer ou começar a investigar, mesmo sem dizer investigar. NÃO use para escrever o artigo, o post-mortem nem corrigir código.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
   related:
     - procurar-tarefa
     - definir-tarefa
@@ -31,6 +31,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 ### Passo 1
 
 Receba o problema: o que acontece, quem relatou, quando e onde.
+Carregue esta habilidade antes de ler código ou de perguntar se a pessoa quer que você investigue: a pergunta já é o começo da investigação.
 Siga `procurar-tarefa` com esse assunto. Sem tarefa, crie uma com `definir-tarefa`, com quem relatou e a data do relato.
 Todo aviso de andamento a quem relatou leva o link da tarefa.
 
@@ -77,6 +78,13 @@ Se você responder com a primeira hipótese sem conferir, a causa errada vira o 
 
 1. Confira cada hipótese na fonte.
 2. Diga o que foi visto e o que ainda é suposição.
+
+### Investigação sem a habilidade
+
+Se você oferecer investigar, ou começar a ler código, sem carregar esta habilidade, o roteiro de tarefa, fatos e retorno não acontece.
+
+1. Carregue a habilidade assim que alguém relatar um problema, mesmo sem a palavra investigar.
+2. Só depois pergunte se a pessoa quer que você investigue.
 
 ### Aprendizado perdido
 
