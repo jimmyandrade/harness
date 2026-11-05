@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.61.1](https://github.com/jimmyandrade/harness/compare/v1.61.0...v1.61.1) (2026-11-05)
+
+
+### Bug Fixes
+
+* keep values a skill reads from a record out of the parameters ([#875](https://github.com/jimmyandrade/harness/issues/875)) ([4bcd46d](https://github.com/jimmyandrade/harness/commit/4bcd46d6debb5f99b4508ceef2bf6038c0543a93))
+* ship the Release Please config and manifest for business harnesses ([#874](https://github.com/jimmyandrade/harness/issues/874)) ([075027c](https://github.com/jimmyandrade/harness/commit/075027c7e6b39fd08c99e2d949cf9af1bc1a32b4))
+
 ## [1.61.0](https://github.com/jimmyandrade/harness/compare/v1.60.0...v1.61.0) (2026-11-05)
 
 
