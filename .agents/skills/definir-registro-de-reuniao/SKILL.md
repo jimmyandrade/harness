@@ -3,7 +3,7 @@ name: definir-registro-de-reuniao
 description: Cadastra e corrige o registro de uma reunião, com título, data, participantes, resumo e índice, onde o projeto guarda os registros. Usada quando a pessoa cola uma transcrição ou pergunta se uma reunião já está registrada. Não serve para achar o contexto de uma reunião nem escrever a ata.
 metadata:
   author: jimmyandrade
-  version: "0.13.2"
+  version: "0.13.3"
   related:
     - definir-agenda
     - definir-grafia
@@ -125,6 +125,10 @@ Um candidato único e plausível entra no resumo como hipótese, dita como infer
 Para um termo que não é nome, como sigla, jargão ou palavra solta, traga as pistas que a busca achou e uma hipótese `inferido` quando houver.
 Liste para a pessoa só o que a busca não resolveu.
 Ao listar, não mostre só a frase em volta: mostre o parágrafo ou o bloco inteiro em que aparece, os itens vizinhos da lista ou da seção e as pistas da busca.
+Cada nome ou termo listado vem com as falas em que aparece, ditas como saíram, entre aspas e sem mudar o texto: a fala que o traz, a anterior e a seguinte.
+Sem identificação de quem fala, a conversa em volta é o único contexto que a pessoa tem.
+A mensagem que lista os pendentes carrega essas falas. Não mande a pessoa abrir o registro para achá-las.
+Com muitos pendentes, liste todos com as falas, ou pergunte um por vez, com as falas do nome da vez. Nunca nomes soltos, com só a hipótese.
 Para um nome de pessoa, junte os candidatos já pesquisados (nome completo e o que ajuda a diferenciar, como cargo e e-mail).
 O que ela confirmar sobre um nome segue `definir-grafia`, e sobre um termo entra em `Fonte de correções de termos`. O que ela não souber fica como pendente, com o contexto maior.
 
@@ -159,7 +163,15 @@ Se você listar um nome ou termo como pendente sem ter pesquisado, a pessoa resp
 
 1. Pesquise no mesmo turno, antes de listar, no diretório e em cada ferramenta de `Fontes para resolver identidade` da `definir-pessoa` que estiver conectada.
 2. Um candidato plausível entra como hipótese `inferido`.
-3. Liste só o que a busca não resolveu, com o parágrafo ou o bloco inteiro, os itens vizinhos e as pistas achadas.
+3. Liste só o que a busca não resolveu, com as falas ditas, o parágrafo ou o bloco inteiro, os itens vizinhos e as pistas achadas.
+
+### Nome ou termo pendente sem as falas
+
+Se você listar um nome ou termo só com o nome e a hipótese, ou mandar a pessoa abrir o registro, ela não tem o contexto e pergunta de volta o que foi dito.
+
+1. Ponha na mesma mensagem as falas em que o nome aparece, entre aspas e sem mudar o texto: a que o traz, a anterior e a seguinte.
+2. Com muitos pendentes, liste todos com as falas, ou pergunte um por vez.
+3. Sem fala a citar, diga que não achou o trecho.
 
 ### Ação atribuída pelo pronome
 
@@ -205,7 +217,7 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### a pessoa cola uma transcrição sem título, dizendo que o arquivo foi criado por volta das 15h30 de uma sexta-feira.
 
-Cruzei o horário com a agenda e achei um evento só, a reunião do time, das 15h às 16h. Salvei o registro com o título dessa reunião, a data e o horário do evento e os participantes do convite. Listei dois termos que não casam com nenhuma correção e pedi a confirmação deles.
+Cruzei o horário com a agenda e achei um evento só, a reunião do time, das 15h às 16h. Salvei o registro com o título dessa reunião, a data e o horário do evento e os participantes do convite. Listei dois termos que não casam com nenhuma correção e pedi a confirmação de cada um, com as falas em que aparece.
 
 ### a pessoa cola uma transcrição em que alguém diz `eu subo a correção amanhã`.
 
@@ -226,6 +238,7 @@ Escrevi no resumo que a correção sobe no dia seguinte, com o responsável como
 ## Pegadinhas
 
 - Duas linhas em volta parecem contexto bastante. Para um termo que a pessoa não conhece, mostre o parágrafo ou o bloco inteiro, os itens vizinhos e o que a busca achou.
+- Um nome e uma hipótese parecem resumir o pendente. Sem as falas ditas, a pessoa não decide, porque quem decide é o contexto da conversa.
 - O título de um documento de anotações herda o nome da reunião recorrente, mesmo quando a sessão foi outra, num horário que não é o do evento. Quem estava ausente ou recusou o convite ainda pode receber o documento.
 - Texto colado de outra interface pode trazer lixo no começo, como o nome de um botão ou de um arquivo de áudio. Não é fala.
 - Slug de arquivo e título de página são coisas diferentes. Um título escrito como slug, sem acento e com hífens, fica estranho no Notion, no Confluence e no Google Drive.
