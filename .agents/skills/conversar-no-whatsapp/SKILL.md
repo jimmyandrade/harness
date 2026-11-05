@@ -44,7 +44,7 @@ Leia os valores nas instruções do projeto, na entrada desta habilidade. Na aus
 
 ### Passo 1
 
-Peça o assunto: quem pediu, sobre quem ou o quê, e se a pessoa quer só ler ou também responder ou enviar. Use o WhatsApp Web no navegador da pessoa. Procure primeiro uma aba do WhatsApp Web que já esteja aberta entre as abas que você controla e use essa. Sem aba, abra o WhatsApp Web numa aba sua. Se aparecer o aviso de que o WhatsApp está aberto em outra janela, clique em "Usar aqui". Não peça para a pessoa mover a aba dela. Se aparecer o QR code, pare e peça para a pessoa conectar o celular. Não tente ler o banco do aplicativo de desktop.
+Peça o assunto: quem pediu, sobre quem ou o quê, e se a pessoa quer só ler ou também responder ou enviar. Use o WhatsApp Web no navegador da pessoa. Procure primeiro uma aba do WhatsApp Web que já esteja aberta entre as abas que você controla e use essa. Sem aba, abra o WhatsApp Web numa aba sua. Se aparecer o aviso de que o WhatsApp está aberto em outra janela, clique em "Usar nesta janela" e, na mesma sequência de ações, espere a lista carregar, busque e leia. Se o aviso voltar, outra aba tomou a conexão: clique de novo uma vez só, com a leitura na mesma sequência, e não alterne mais. Ao terminar, diga que a outra janela ficou desconectada e volta com "Usar nesta janela". Não peça para a pessoa mover a aba dela. Se aparecer o QR code, pare e peça para a pessoa conectar o celular. Não tente ler o banco do aplicativo de desktop.
 
 ### Passo 2
 
@@ -128,9 +128,11 @@ Checklist do evento:
 ### Passo 7
 
 Quando a mensagem espera resposta, como uma pergunta, um pedido ou um prazo, acompanhe a conversa com uma rotina que segue `definir-rotina`.
+Há uma rotina só por canal: se uma rotina já lê o WhatsApp Web, acrescente o contato a ela em vez de criar outra.
+A resposta chegou quando a prévia da linha do contato não tem os vistos de enviada e chegou depois da mensagem, ou quando há contador de não lidas.
 A pergunta que pede o sim do Passo 5 já diz que a resposta vai ser acompanhada, com a frequência e até quando, e o mesmo sim vale para a rotina.
 A rotina segue `Ao conferir a resposta`. Com `ler a lista`, ela lê só a lista de conversas, a prévia e o contador de não lidas, sem abrir a conversa. Com `abrir a conversa`, ela abre e marca as mensagens como lidas, e a pergunta do Passo 5 diz isso.
-Ela avisa a pessoa quando a resposta chega e para na primeira resposta ou no fim do prazo.
+Ela avisa a pessoa quando a resposta chega e para na primeira resposta ou no fim do prazo, do jeito que `definir-rotina` manda parar.
 Ela roda onde está o `Canal da rotina de resposta`: com `navegador`, na máquina da pessoa, com o cliente aberto; com `API`, na nuvem.
 Mensagem que não espera nada, como um agradecimento ou um aviso, não ganha rotina.
 Uma mensagem que espera resposta e saiu sem rotina, porque a pergunta do [Passo 5](#passo-5) não citou o acompanhamento ou porque a rotina ficou para depois, não sai dos próximos passos da resposta até a rotina existir ou a pessoa recusar. Ao perceber a falta, confira antes a lista de conversas: a resposta pode já ter chegado.
@@ -155,8 +157,16 @@ Se você fechar a aba do WhatsApp Web no fim da tarefa, a sessão cai e a pessoa
 Se você pedir para a pessoa mover a aba do WhatsApp Web para o seu grupo de abas, ela move e você continua sem ver. No Claude in Chrome, o grupo de abas pertence a uma sessão, e o ID muda. Não dá para guardar o ID nem reaproveitar o grupo.
 
 1. Abra o WhatsApp Web numa aba sua.
-2. Clique em "Usar aqui".
+2. Clique em "Usar nesta janela" e leia na mesma sequência.
 3. Aplique o filtro de `Etiqueta das conversas`.
+
+### Duas rotinas no mesmo WhatsApp Web
+
+Se você criar uma rotina de resposta ao lado de outra que já lê o WhatsApp Web, as duas disparam no mesmo horário: cada execução abre a própria aba e clica em "Usar nesta janela", e uma toma a conexão da outra. As duas alternam sem ler nada.
+
+1. Antes de criar a rotina do Passo 7, liste as rotinas e procure uma que já leia o WhatsApp Web.
+2. Se existir, acrescente o contato, a mensagem e o prazo a essa rotina.
+3. Tire o contato dela quando ele responder ou o prazo acabar.
 
 ### Dia da semana errado
 
@@ -239,7 +249,10 @@ Mostrei a conversa do Caio e o texto "Podemos falar 15h00?". Enviei depois do si
 - O campo numera a lista sozinho depois de "1. ". Digitar "2." no item seguinte duplica o número: digite só o texto dos itens seguintes.
 - Depois de uma lista, o campo tira a linha em branco antes do parágrafo seguinte.
 - Responder a uma mensagem é pelo menu que aparece ao passar o mouse sobre ela, na opção Responder. A citação aparece em cima do campo.
-- A aba que a pessoa já deixou aberta pode estar fora das abas que você controla. "Usar aqui" passa a conexão para a sua aba, e a aba dela fica desconectada sem perder o login.
+- A aba que a pessoa já deixou aberta pode estar fora das abas que você controla. "Usar nesta janela" passa a conexão para a sua aba, e a aba dela fica desconectada sem perder o login. A rotina agendada roda numa sessão nova, sem as abas da sessão anterior, e sempre abre a própria aba.
+- Na lista, "Você:" antes da prévia só aparece em grupo. Na conversa individual, a mensagem que você enviou tem os vistos antes da prévia, e a do contato não tem.
+- A lista mostra o horário só nas mensagens de hoje. De ontem em diante, mostra "Ontem", o dia da semana ou a data, sem a hora.
+- Enter na busca da lista abre a primeira conversa e marca as mensagens como lidas. Digite o nome e leia o resultado sem apertar Enter.
 - Fechar a aba do WhatsApp Web desconecta a sessão. A pessoa precisa ler o QR code de novo.
 - O WhatsApp Web leva alguns segundos para carregar. A primeira leitura pode mostrar só a tela de carregamento.
 - O texto da página traz a lista de conversas inteira antes da conversa aberta. A conversa aberta começa depois do nome do contato no cabeçalho.
