@@ -3,7 +3,7 @@ name: registrar-evidencia-visual
 description: Registra o que a pessoa passa a ver quando um trabalho termina, no pull request e no card. Usada quando a entrega muda a tela, no Storybook, no ambiente local, na pré-produção ou na produção, mesmo sem dizer print. NÃO serve para mudança sem percepção visual, para medir performance, para ler texto de imagem nem para mandar a mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.13.0"
+  version: "0.13.1"
   related:
     - criar-pull-request
 ---
@@ -144,10 +144,13 @@ A descrição do pull request é o lugar melhor para o recorte.
 Com `Confirmação antes de gravar` em `sim`, mostre a subpasta, o recorte que entra no texto, o link da página inteira e as legendas, e espere um sim para esse conjunto.
 Envie os arquivos do recorte à pessoa pela ferramenta de envio de arquivos antes de pedir o sim, porque sem ver as imagens ela não confirma o conjunto.
 Peça esse sim assim que o conjunto fica pronto, antes de abrir o pull request, para ele já nascer com as imagens.
-A linha de comando do GitHub não sobe imagem para a descrição, e isso não é pendência nem pergunta: subir pelo navegador é parte do trabalho.
-Depois do sim, abra o GitHub no navegador logado e suba as imagens com o envio de arquivo do editor da descrição.
-Veja qual navegador está logado, o do aplicativo ou o da pessoa, antes de dizer que falta um.
-Só sem nenhum navegador logado o pull request fica em rascunho, e a mesma resposta diz que a imagem falta e pede o login.
+Depois do sim, suba as imagens pelo caminho que gasta menos, e só desça um degrau quando o de cima falhou de verdade:
+1. A linha de comando ou a API do destino, tentando o envio em vez de presumir que não existe.
+2. O conector do destino.
+3. O navegador logado, com o envio de arquivo do editor da descrição. Ele gasta mais tokens, então é o último recurso.
+Subir a imagem é trabalho seu em qualquer degrau, nunca pendência nem pergunta para a pessoa, e a resposta diz qual caminho funcionou.
+No navegador, veja qual está logado, o do aplicativo ou o da pessoa, antes de dizer que falta um.
+Só quando nenhum degrau funcionou o pull request fica em rascunho, e a mesma resposta diz que a imagem falta e o que impediu.
 Um sim vale para o card e o pull request desse conjunto, e outro destino, como uma mensagem para alguém, pede outro sim.
 
 ### Passo 6
@@ -254,8 +257,8 @@ Se você testar só no Chrome, a descrição afirma mais do que foi aberto.
 Se você abrir o pull request com a seção de imagens vazia e deixar a confirmação ou o envio para depois, quem abre o pull request não vê a mudança e pergunta por que não há imagem.
 
 1. Mostre o conjunto e peça o sim antes de abrir o pull request.
-2. Depois do sim, suba as imagens pelo navegador logado no GitHub, sem anunciar isso como pendência.
-3. Sem navegador logado, deixe em rascunho e peça o login na mesma resposta.
+2. Depois do sim, suba as imagens pelo caminho que gasta menos: API, depois conector, depois o navegador logado. Não anuncie isso como pendência.
+3. Se nenhum caminho funcionou, deixe em rascunho e diga na mesma resposta o que impediu, como o login que falta no navegador.
 
 ### Captura com a tela coberta
 
@@ -317,7 +320,7 @@ A página, com o bloco novo no meio do resto da tela e o relógio travado em 1 d
 - `figure` e `figcaption` parecem a forma certa de legendar. O GitHub remove as duas tags da descrição do pull request.
 - O clique sem erro parece o aviso fechado. Olhe a imagem: um clique que não achou o botão também não falha.
 - O aviso de cookies parece estar na tela desde a carga. Em muitos sites ele nasce depois da primeira rolagem.
-- A linha de comando do GitHub parece publicar o pull request inteiro. Ela não sobe imagem: o envio passa pelo navegador, e esse passo é seu, não um aviso à pessoa.
+- O navegador parece o jeito de subir imagem para a descrição. É o último recurso, porque gasta mais tokens: tente antes a API e o conector, verificando em vez de presumir que não funcionam.
 - O efeito da correção aplicado à mão na produção parece o depois. É uma simulação, e o código da mudança pode se comportar diferente.
 
 ## Scripts disponíveis
