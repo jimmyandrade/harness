@@ -3,13 +3,14 @@ name: levantar-contexto-do-pull-request
 description: Levanta o contexto de um pull request antes de revisar, responder ou ajustar. Cobre o estado, as convenções do repositório, os comentários já feitos, o card e as conversas ligados, o propósito e o trabalho parecido. Usada em PR de outra pessoa e no seu. Não serve para revisar o diff nem publicar texto.
 metadata:
   author: jimmyandrade
-  version: "0.7.0"
+  version: "0.8.0"
   related:
     - criar-pull-request
     - definir-registro-de-reuniao
     - evoluir-habilidade
     - levantar-ambiente-do-repositorio
     - mesclar-pull-request
+    - rotular-item
 ---
 
 # Levantar contexto do pull request
@@ -42,7 +43,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 Peça o número ou o link do pull request. Veja o estado dele: aberto, mesclado ou fechado, rascunho ou pronto, autor, rótulos e checks. Diga o estado logo na primeira linha. Um PR mesclado ou fechado muda o que vale a pena fazer: avise quem chamou antes de seguir.
 
-Um PR aberto sem rótulo recebe um antes de qualquer proposta de merge. Leia os rótulos do repositório e escolha o que descreve a mudança pelo tipo do Conventional Commits, como `criar-pull-request` manda: `fix` usa o de bug, `docs` o de documentação. Sem tipo no título, o tipo segue o que a mudança faz. Com `Rótulo do PR sem rótulo` em `aplicar` e permissão de escrita, aplique o rótulo e diga qual. Com `sugerir`, sem permissão ou sem rótulo que sirva, sugira o rótulo, o mais próximo ou um novo, e pergunte. A proposta de merge espera o rótulo.
+Um PR aberto sem rótulo recebe um antes de qualquer proposta de merge. Escolha o rótulo que descreve a mudança pelo tipo do Conventional Commits, como `criar-pull-request` manda: `fix` usa o de bug, `docs` o de documentação. Sem tipo no título, o tipo segue o que a mudança faz. Com `Rótulo do PR sem rótulo` em `aplicar` e permissão de escrita, siga `rotular-item` para o PR, com essa escolha e `Criar rótulo que falta` em `não`, e diga qual rótulo ficou. Com `sugerir`, sem permissão ou sem rótulo que sirva, sugira o rótulo, o mais próximo ou um novo, e pergunte. A proposta de merge espera o rótulo.
 
 Liste os checks pelo nome, com o resultado de cada um: passou, falhou ou pendente.
 Leia a lista inteira com `gh pr checks`, não a contagem de um resumo, como a do aplicativo, que pode deixar de fora um check que ainda não começou.
@@ -143,8 +144,8 @@ Se você misturar conversa privada com pública sem marcar, quem chama cita o qu
 
 Se você propuser o merge de um PR sem rótulo, ele entra na base sem a classificação que as notas da release e os filtros usam.
 
-1. Leia os rótulos do repositório.
-2. Aplique o que serve ou sugira um, conforme `Rótulo do PR sem rótulo`.
+1. Escolha o rótulo pelo tipo da mudança.
+2. Aplique por `rotular-item` ou sugira um, conforme `Rótulo do PR sem rótulo`.
 3. Só então proponha o merge.
 
 ### Comentários que ficaram de fora
@@ -189,6 +190,6 @@ O PR é seu e está aberto. Há quatro comentários: dois de pessoas, um de bot,
 ## Scripts disponíveis
 
 - `gh label list --repo <repositório>`: rótulos do Passo 1.
-- `gh pr edit <número> --repo <repositório> --add-label <rótulo>`: aplica o rótulo no Passo 1.
+- A aplicação do rótulo usa os comandos de `rotular-item`.
 
-1. Leia os rótulos e aplique o que serve quando o Passo 1 manda.
+1. Leia os rótulos para escolher ou sugerir, e aplique por `rotular-item` quando o Passo 1 manda.

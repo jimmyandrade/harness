@@ -533,6 +533,7 @@ How these skills relate is in `README.md`, in this folder.
   - Skips the inbox only for senders that never bring something the person may want to follow or answer; a sender that announces events, workshops, courses, or opportunities, or a thank-you note after an event, stays in the inbox
   - Adds never mark as important to any filter that skips the inbox, because an inbox can let important mail override filters
   - Tries the connector, then the browser in the mailbox account, then returns the ready query, and asks the person to sign in instead of signing in for them
+  - Follows `rotular-item` to reuse or create the filter's label before saving, keeps a tool label out of a filter, and lets the filter apply the label to the conversations
   - Reads the saved filter back and checks label, inbox, importance, and read state on the conversations it reached
 - **Test Criteria**:
   - [x] The filter rules and parameters moved from `organizar-emails` without loss
@@ -1421,7 +1422,8 @@ How these skills relate is in `README.md`, in this folder.
   - Gives a collection agency its own label and adds the creditor's label only when the body names it; an alarming subject is not a formal notice unless the body describes the measure taken
   - Compares batch changes with the plan, redoes only what a partial failure left, and reports every failed call
   - Leaves creating, editing, and checking filters to `definir-filtro-de-email`
-  - Reads `Etiquetas de ferramenta`, a map from each tool or integration to the label it applies on its own, keeps those labels outside the BASB roots, and never applies, removes, or renames them
+  - Reads `Etiquetas de ferramenta`, a map from each tool or integration to the label it applies on its own, keeps those labels outside the BASB roots, and hands them to `rotular-item` as tool labels, so they are never applied, removed, or renamed
+  - Chooses each label and hands the application, swap, or removal to `rotular-item`, with the BASB roots and `Etiquetas fora da estrutura` as the list, and `Etiquetas de status` and the bills-to-pay and paid-bills labels as state labels; a new label of the validated plan goes with `Criar rótulo que falta` set to `sim`
   - Reads `Etiquetas de status` for the pending, expected, replied, and done labels of an action, applies them during triage, and keeps them outside the BASB roots; a conversation the person answered gets the replied label, and also the expected one when the answer asks for a reply
   - Asks before restoring a conversation that left the inbox during a change, because the person may have archived it
 - **Test Criteria**:
@@ -1766,6 +1768,7 @@ How these skills relate is in `README.md`, in this folder.
   - Labels the item in the same operation that creates it, when the system allows
   - Swaps a state label in the same round when the state changes, and reads the item back
   - Leaves hashtags and content categories to the content skills and the voice
+  - Called by `criar-pull-request`, `levantar-contexto-do-pull-request`, `organizar-emails`, and `definir-filtro-de-email`, which keep their own choice and parameters
 - **Test Criteria**:
   - [ ] A missing `blocked` state label is created and applied
   - [ ] An item whose block cleared loses the `blocked` label

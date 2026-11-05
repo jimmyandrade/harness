@@ -3,7 +3,7 @@ name: organizar-emails
 description: Organiza e-mails por BASB e separa pessoal, trabalho e misto. Usada quando a pessoa quer triar a caixa, etiquetar ou configurar filtros. Não serve para responder mensagens, lançar despesas nem acompanhar veículos.
 metadata:
   author: jimmyandrade
-  version: "0.15.0"
+  version: "0.16.0"
   related:
     - procurar-email
     - evoluir-habilidade
@@ -13,6 +13,7 @@ metadata:
     - definir-filtro-de-email
     - definir-tarefa
     - definir-agenda
+    - rotular-item
 ---
 
 # Organizar e-mails
@@ -74,7 +75,7 @@ Leia os valores nas instruções do projeto, na entrada desta habilidade. Na aus
 
 Confirme a conta solicitada e suas permissões. Não troque por outra conta conectada.
 
-Leia as etiquetas e os filtros existentes antes de propor uma estrutura ou escrever.
+Leia as etiquetas e os filtros existentes antes de propor uma estrutura.
 
 Consulte a finalidade desejada em `Contas`, sem tratar essa intenção como classificação do histórico.
 
@@ -129,7 +130,7 @@ Mantenha contexto e destino PARA como eixos independentes de BASB.
 
 A etiqueta de destino fica sob as `Raízes da estrutura BASB`, salvo as `Etiquetas de status`, as `Etiquetas de ferramenta` e as `Etiquetas fora da estrutura`. Etiqueta existente fora delas, como `Fornecedor`, não se reutiliza como está: proponha `Recursos/Fornecedor` e renomeie com o sim da pessoa, o que leva as conversas junto.
 
-Uma etiqueta de `Etiquetas de ferramenta` pertence à ferramenta que a aplica: não a aplique, não a tire nem a renomeie, e leia-a como sinal de que essa ferramenta já processou a mensagem.
+A escolha da etiqueta é desta habilidade. Para aplicar, trocar ou tirar uma etiqueta, siga `rotular-item` com a conversa, a conta, a etiqueta escolhida e o motivo. Passe as etiquetas sob as `Raízes da estrutura BASB` e as `Etiquetas fora da estrutura` como a lista, as `Etiquetas de status`, a `Etiqueta de contas a pagar` e a `Etiqueta de contas pagas` como etiquetas de estado, e as `Etiquetas de ferramenta` como etiquetas de ferramenta. A etiqueta nova do plano validado no Passo 7 vai com `Criar rótulo que falta` em `sim`.
 
 Preserve as etiquetas válidas; não transforme toda newsletter em referência.
 
@@ -141,7 +142,7 @@ Com `Etiquetar também mensagem enviada do mesmo tema` em `sim`, a mensagem que 
 
 Com `Levantar itens de ação` em `sim`, liste o que ficou em aberto em cada conversa triada. Ação pendente é o que a mensagem pede à pessoa e ela não fez, como responder, confirmar ou pagar. Ação esperada é o que a pessoa aguarda de outra, como a resposta ao último e-mail dela.
 
-Para cada ação, diga o assunto, quem, o que fazer, o prazo da mensagem, sem inventar, e o link. Conversa com ação pendente fica na entrada. Com `Etiquetas de status` preenchidas, a conversa recebe a etiqueta da ação pendente ou da esperada, e quando a ação termina ela troca pela de concluída.
+Para cada ação, diga o assunto, quem, o que fazer, o prazo da mensagem, sem inventar, e o link. Conversa com ação pendente fica na entrada. Com `Etiquetas de status` preenchidas, a escolha é a etiqueta da ação pendente ou da esperada, e passa à de concluída quando a ação termina.
 
 A conversa que a pessoa respondeu recebe a etiqueta de respondida e perde a da ação pendente, se a resposta era o que faltava. Quando a resposta dela pede retorno, a conversa recebe também a etiqueta da ação esperada.
 
@@ -181,7 +182,7 @@ flowchart LR
 
 Fatura em aberto recebe `Etiqueta de contas a pagar` e fica na entrada. A resposta diz o vencimento e o valor. Sem o valor, como num PDF protegido por senha, diga que falta e onde a pessoa o encontra. Ofereça lançar a fatura por `lancar-despesa-pessoal` ou `lancar-despesa-da-empresa`, conforme o contexto da obrigação.
 
-Quando o pagamento estiver lançado com comprovante, a conversa da fatura perde `Etiqueta de contas a pagar` e recebe `Etiqueta de contas pagas`, mantendo a etiqueta do credor. Segundo boleto da mesma parcela, reemitido com outro valor ou vencimento, recebe a mesma troca quando a parcela é quitada por um deles; diga qual foi pago, para não pagar em dobro.
+Quando o pagamento estiver lançado com comprovante, a escolha da conversa da fatura passa de `Etiqueta de contas a pagar` a `Etiqueta de contas pagas`, e a etiqueta do credor fica. Segundo boleto da mesma parcela, reemitido com outro valor ou vencimento, recebe a mesma troca quando a parcela é quitada por um deles; diga qual foi pago, para não pagar em dobro.
 
 Filtro que tira oferta de negociação da entrada usa só remetentes que, na amostra, enviaram apenas ofertas, e exclui os `Termos de aviso formal`. Não esconda cobrança de obrigação `A verificar`.
 
@@ -216,13 +217,13 @@ Execute apenas ações autorizadas; mantenha os casos não resolvidos fora do lo
 
 Toda conversa que a habilidade processa recebe ao menos uma etiqueta de usuário, mesmo a arquivada ou a de confirmação automática: nenhuma sai sem etiqueta.
 
-Reutilize as etiquetas existentes dentro da estrutura pelo nome e pelo identificador retornado, e crie somente as necessárias. Use os identificadores opacos completos das conversas na conta correspondente.
+Aplique as etiquetas do plano por `rotular-item`, conforme o Passo 4, passando cada etiqueta pelo nome e pelo identificador que a conta retornou. Use os identificadores opacos completos das conversas na conta correspondente.
 
 Antes de arquivar ou marcar como lido um lote, leia o assunto de todas as conversas atingidas quando `Ler o assunto de todas as conversas antes de arquivar um lote` for `sim`: remetente igual não prova assunto igual, e o que não for do tipo confirmado fica fora do lote. Um piloto em uma conversa não autoriza outras da mesma instituição.
 
 ### Passo 8
 
-Leia a conversa alterada. Confira etiquetas, conta e permanência na entrada; preserve o estado de leitura anterior. Não deduza o nome de uma etiqueta a partir de identificadores diferentes.
+A leitura de volta das etiquetas segue `rotular-item`. Na mesma leitura, confira a conta e a permanência na entrada, e preserve o estado de leitura anterior. Não deduza o nome de uma etiqueta a partir de identificadores diferentes.
 
 Uma ação em lote pode ser aplicada só em parte: compare a leitura de volta com o plano, refaça apenas o que faltou e leia de novo. Conversa que saiu da entrada entre a alteração e a leitura de volta pode ter sido arquivada pela pessoa, que usa a caixa ao mesmo tempo: pergunte antes de devolvê-la.
 

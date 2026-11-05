@@ -3,10 +3,11 @@ name: definir-filtro-de-email
 description: Cria, edita e confere filtros de e-mail. Testa o critério na conta, escolhe as ações sem esconder o que a pessoa quer ver e lê o filtro salvo de volta. Usada quando a triagem pede um filtro ou a pessoa quer mudar um. Não serve para classificar mensagens nem cancelar assinatura.
 metadata:
   author: jimmyandrade
-  version: "0.3.1"
+  version: "0.4.0"
   related:
     - organizar-emails
     - evoluir-habilidade
+    - rotular-item
 ---
 
 # Definir filtro de e-mail
@@ -45,6 +46,8 @@ Pouca ou nenhuma conversa atingida não é motivo para excluir um filtro: o volu
 
 Escolha as ações pelo que a pessoa precisa ver. A etiqueta é a que a triagem decidiu, dentro da estrutura dela.
 
+Antes de pôr a etiqueta no filtro, siga `rotular-item` com ela e com as listas de etiquetas que `organizar-emails` passa, para ler as etiquetas da conta e reusar ou criar a do filtro. Uma etiqueta de ferramenta não entra no filtro. Quem aplica a etiqueta nas conversas é o filtro, no Passo 4.
+
 Pular a entrada e marcar como lida servem só para remetente que nunca traz o que ela possa querer acompanhar ou responder, como relatório automático. Na dúvida, pergunte antes de pular a entrada.
 
 Remetente que anuncia evento, workshop, curso, convite ou oportunidade fica na entrada: o filtro só etiqueta, e pode tirar a importância e categorizar. Mensagem de uma organização que pode valer uma resposta, como o agradecimento depois de um evento, também fica na entrada: responder estreita a relação institucional.
@@ -77,7 +80,7 @@ Com `Aplicar filtro ao histórico` em `sim`, marque a aplicação às conversas 
 
 Leia o filtro salvo na lista da caixa e compare o critério e cada ação com o plano.
 
-Leia de volta as conversas atingidas: etiqueta, entrada, importância e leitura. O estado de leitura anterior fica como estava; abrir uma mensagem no navegador a marca como lida, e ela volta a não lida.
+Leia de volta as conversas atingidas. A etiqueta se confere como `rotular-item` manda, e na mesma leitura confira entrada, importância e leitura. O estado de leitura anterior fica como estava; abrir uma mensagem no navegador a marca como lida, e ela volta a não lida.
 
 Não deduza o nome de uma etiqueta a partir de identificadores diferentes. Sem correspondência fornecida pela integração entre o identificador interno e o nativo, declare a validação do nome no filtro limitada.
 
