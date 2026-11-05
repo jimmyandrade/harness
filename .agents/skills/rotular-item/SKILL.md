@@ -3,11 +3,12 @@ name: rotular-item
 description: Aplica, troca e tira rótulos, etiquetas e tags de organização num item, como pull request, issue, e-mail ou página, pela escolha da habilidade de origem, sem duplicar rótulo nem mexer no de uma ferramenta. Usada quando outra habilidade rotula um item ou o estado dele muda, mesmo sem dizer rótulo. Não serve para decidir o assunto do item, hashtags nem categorias de conteúdo.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
   related:
     - criar-pull-request
     - definir-filtro-de-email
     - evoluir-habilidade
+    - levantar-contexto-do-pull-request
     - organizar-emails
 ---
 
