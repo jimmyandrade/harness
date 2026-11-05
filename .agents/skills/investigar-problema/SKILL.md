@@ -3,7 +3,7 @@ name: investigar-problema
 description: Conduz a investigação de um problema relatado, como um acesso bloqueado, um erro ou um dado errado, com tarefa, fatos, hipóteses e retorno a quem relatou, e oferece artigo e post-mortem. Use essa habilidade sempre que alguém relatar um problema, como um preço errado, antes de oferecer ou começar a investigar, mesmo sem dizer investigar. NÃO use para escrever o artigo, o post-mortem nem corrigir código.
 metadata:
   author: jimmyandrade
-  version: "0.1.1"
+  version: "0.1.2"
   related:
     - procurar-tarefa
     - definir-tarefa
@@ -46,7 +46,8 @@ Separe o que foi visto do que se supõe.
 Liste as hipóteses, da que a evidência mais apoia para a que menos apoia.
 Confira cada uma na fonte: a tela da ferramenta, o registro, a configuração ou quem administra.
 Só leia nesse passo. Uma correção que muda algo, como uma permissão, um pagamento ou uma configuração, espera o sim da pessoa, com o que muda e o risco.
-Sem acesso a uma fonte, diga qual falta e quem tem.
+Cada hipótese e cada ponto que você ainda não conferiu e que dá para conferir, você confere antes de responder. O objetivo é achar a causa.
+Só fica como "não verificado" o que depende de um acesso que você não tem: diga qual fonte falta e quem tem.
 
 ### Passo 4
 
@@ -86,6 +87,14 @@ Se você oferecer investigar, ou começar a ler código, sem carregar esta habil
 1. Carregue a habilidade assim que alguém relatar um problema, mesmo sem a palavra investigar.
 2. Só depois pergunte se a pessoa quer que você investigue.
 
+### Parar no que não foi verificado
+
+Se você entregar uma lista do que não conferiu, como a resposta de um serviço ou uma relação que alguém levantou, a pessoa fica sem causa e tem de pedir de novo.
+
+1. Confira cada um desses pontos que esteja ao seu alcance antes de responder.
+2. Só deixe como "não verificado" o que exige acesso que você não tem, e diga qual e quem tem.
+3. Responda com a causa ou com o que foi descartado em todas as fontes que você alcançou.
+
 ### Aprendizado perdido
 
 Se você encerrar sem perguntar pelos registros, a próxima pessoa com o mesmo problema começa do zero.
@@ -103,7 +112,7 @@ Não havia tarefa: criei e respondi a quem relatou com o link. O print mostrava 
 
 ## Casos-limite
 
-- A causa não aparece: grave o que foi descartado e o próximo passo, e pergunte pelos registros do mesmo jeito.
+- A causa não aparece depois de conferir todas as fontes ao seu alcance: grave o que foi descartado e o próximo passo, e pergunte pelos registros do mesmo jeito.
 - A correção depende de outra pessoa, como quem administra a conta: diga quem e o que pedir.
 - Já existe artigo sobre o problema: proponha atualizá-lo em vez de criar outro.
 
