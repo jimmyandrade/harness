@@ -24,3 +24,11 @@ Funcionalidade: Rótulo na abertura do pull request
       E o título começa com docs
       Quando a habilidade escolhe o rótulo
       Então o rótulo é o de documentação
+
+  Regra: o pull request bloqueado nasce com o rótulo de bloqueio
+
+    Exemplo: O merge depende de uma credencial que ainda não existe
+      Dado que o workflow do PR lê um segredo que o repositório ainda não tem
+      Quando a habilidade abre o pull request
+      Então o comando de criação leva o rótulo do tipo e o Rótulo de PR bloqueado
+      E a descrição diz o que falta para mesclar

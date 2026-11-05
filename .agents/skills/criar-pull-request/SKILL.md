@@ -3,7 +3,7 @@ name: criar-pull-request
 description: Use essa habilidade sempre que for abrir ou atualizar PR, subir uma correção ou mandar para a branch principal, mesmo sem dizer PR. NÃO use para mesclar (use mesclar-pull-request), responder comentário de revisão nem para só commitar (use criar-commit).
 metadata:
   author: jimmyandrade
-  version: "0.42.2"
+  version: "0.43.0"
   related:
     - atualizar-branch-do-pull-request
     - criar-commit
@@ -13,6 +13,7 @@ metadata:
     - mesclar-pull-request
     - registrar-evidencia-visual
     - registrar-resultados-da-validacao-na-tarefa
+    - rotular-item
     - sincronizar-status-da-tarefa
 ---
 
@@ -42,6 +43,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Rotular o PR": "sim"
 # `Criar rótulo se nenhum servir`: `sim` cria um rótulo novo se nenhum existente descreve a mudança.
 "Criar rótulo se nenhum servir": "não"
+# `Rótulo de PR bloqueado`: rótulo de estado do PR que espera algo fora dele para o merge. Vazio, nenhum.
+"Rótulo de PR bloqueado": "blocked"
 # `Termos que não podem aparecer`: palavras que não podem estar no PR nem nos arquivos. Vazio, não há busca.
 "Termos que não podem aparecer": []
 # `Fatiar por subtarefa`: `não` junta a mesma pergunta de revisão. `sim` abre um PR por subtarefa.
@@ -133,16 +136,12 @@ Com o PR já aberto, quando a evidência muda (um teste passou ou falhou depois 
 Com `Atribuição da sessão` em `sim`, termine com a linha de atribuição da sessão.
 Com `não`, não ponha linha de ferramenta ou de modelo, e remova a que o PR já tiver na mesma edição.
 
-Com `Atribuir o PR a quem abre` em `sim` e `Rotular o PR` em `sim`, o comando que abre o PR, em `Scripts disponíveis`, já leva a pessoa atribuída e o rótulo.
-O rótulo é o do tipo do commit.
-`fix` usa o rótulo de bug.
-`docs` usa o de documentação.
-A extensão do arquivo não escolhe o rótulo.
+Com `Atribuir o PR a quem abre` em `sim`, o comando que abre o PR, em `Scripts disponíveis`, já leva a pessoa atribuída. Um PR que já estava aberto sem pessoa atribuída a recebe antes de qualquer outra edição.
 
-Não abra o PR para rotular depois.
-Se nenhum rótulo serve, só crie um novo com `Criar rótulo se nenhum servir` em `sim`.
-Com `não`, diga na resposta que nenhum serviu e não abra o PR sem rótulo.
-Um PR que já estava aberto sem pessoa atribuída ou sem rótulo recebe os dois antes de qualquer outra edição.
+Com `Rotular o PR` em `sim`, siga `rotular-item` para o PR, com a escolha abaixo e `Criar rótulo se nenhum servir` no lugar de `Criar rótulo que falta`.
+O rótulo é o do tipo do commit: `fix` usa o de bug e `docs` o de documentação. A extensão do arquivo não escolhe o rótulo.
+Sem o rótulo do tipo, não abra o PR.
+Quando o merge depende de algo fora do PR, como uma credencial, outro PR ou um passo de uma pessoa, escolha também o `Rótulo de PR bloqueado`, e a descrição diz o que falta. Quando o bloqueio sai, siga `rotular-item` para tirá-lo e atualize a descrição.
 Mande o link na resposta.
 
 ### Passo 7
@@ -198,13 +197,12 @@ Se você conferir o título e a descrição a cada commit, a conferência gasta 
 1. Faça os commits sem essa conferência.
 2. Depois do push, confira uma vez e atualize o que deixou de contar o que a branch faz.
 
-### PR aberto sem rótulo
+### PR bloqueado sem rótulo
 
-Se você abrir o pull request e só depois escolher o rótulo, o PR fica sem rótulo.
+Se você só avisar o bloqueio na descrição, quem olha a lista de PRs pode mesclar antes da hora.
 
-1. Leia os rótulos do repositório antes de abrir.
-2. Com `Atribuir o PR a quem abre` e `Rotular o PR` em `sim`, o comando que abre já leva `--assignee` e `--label`.
-3. Não trate o PR como aberto enquanto o rótulo estiver faltando.
+1. Antes de abrir, confira se o merge depende de algo fora do PR.
+2. Com dependência, escolha também o `Rótulo de PR bloqueado`.
 
 ### Frase que adia a habilidade
 
@@ -273,7 +271,7 @@ O pedido autoriza push e merge. O push espera o hook de pre-push. Com o PR abert
 - O push por HTTPS pode travar para sempre no helper de credencial do macOS. A credencial do `gh` funciona.
 - Não existe `timeout` no macOS. Use o timeout da ferramenta ou rode em segundo plano.
 - Um hook de pre-push pode rodar também no push que só apaga uma branch remota.
-- Um Markdown parece documentação. O rótulo segue o tipo do commit. Correção de erro é `fix` e o rótulo de bug. `docs` e o rótulo de documentação ficam para a documentação.
+- Um Markdown parece documentação. Correção de erro em Markdown é `fix`, com o rótulo de bug.
 - Conferir a cada commit parece necessário. A conferência é uma vez, depois do push.
 - As respostas, a issue e as instruções em português parecem pedir o título do PR em português. O título segue `Idioma do PR`, lido nos parâmetros.
 - "Sessão" parece o PR ou a issue. É a conversa com a IA no app, e só o nome dela muda. O título do PR e o da issue ficam como estão.
@@ -288,7 +286,6 @@ O pedido autoriza push e merge. O push espera o hook de pre-push. Com o PR abert
 - `GIT_TERMINAL_PROMPT=0 git -c credential.helper= -c 'credential.helper=!gh auth git-credential' push -u origin <branch>`: push do Passo 5. O hook de pre-push roda.
 - `LEFTHOOK=0 GIT_TERMINAL_PROMPT=0 git -c credential.helper= -c 'credential.helper=!gh auth git-credential' push -u origin <branch>`: só com `Pular o hook de pre-push` em `sim`.
 - `git grep -i -E "termo1|termo2"`: Passo 6.
-- `gh label list --repo <Repositório>`: rótulos do Passo 6.
 - `gh pr create --repo <Repositório> --base <Branch base> --head <branch> --title "<assunto>" --body "<corpo>" --assignee <pessoa> --label <rótulo>`: Passo 6. Sem assignee ou rótulo, tire a flag.
 - `gh pr edit <número> --repo <Repositório> --title "<título>" --body "<corpo>"`: atualiza o título e a descrição no Passo 6.
 
