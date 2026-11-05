@@ -3,7 +3,7 @@ name: evoluir-habilidade
 description: Muda uma skill ou as instruções do projeto a pedido ou pelo feedback de uma execução, como falha ou correção da pessoa, e abre o pull request no repositório de origem. Usada ao pedir uma regra nova, mesmo sem dizer evoluir, e ao fim de cada skill. Não serve para testar a skill, criar a primeira versão, ver se a descrição dispara, só revisar nem gravar no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.28.0"
+  version: "0.29.0"
   related:
     - criar-commit
     - criar-pull-request
@@ -51,7 +51,7 @@ Subdisparo e sobredisparo vão para `descrever-habilidade-ou-schema`.
 O resultado de `testar-habilidade` edita a skill validada no repositório de origem, na mesma conversa do teste. Sem essa edição, o teste não vale.
 Incorpore todos os resultados, não só as falhas. A edição vem do que a execução mostrou.
 Pergunte o que gerou falso positivo, o que passou despercebido e o que pode sair. Se a execução já mostrou a resposta, edite com ela. Quando a pessoa responder o que ainda faltava, edite de novo na mesma conversa.
-Leia o registro da execução, não só o resultado final. Se o agente gasta tempo em etapa improdutiva, a instrução está vaga, não se aplica à tarefa, ou oferece opções sem escolha padrão. Se o próximo trecho deixar o corpo sem folga abaixo de `Tokens do corpo`, separe a responsabilidade em outra habilidade antes de escrever. Antes de commitar, rode a checagem que o lefthook roda no pre-commit. Sem `.git/hooks/pre-commit`, rode `.agents/scripts/check-skill/run-check.sh`. Falha, ou corpo no limite, barra o commit e o push. Não diga que está pronto. O tamanho e o profiling seguem `medir-habilidade`.
+Leia o registro da execução, não só o resultado final. Se o agente gasta tempo em etapa improdutiva, a instrução está vaga, não se aplica à tarefa, ou oferece opções sem escolha padrão. Se o próximo trecho deixar o corpo sem folga abaixo de `Tokens do corpo`, veja antes se ele é a forma de uma saída, como a estrutura de um arquivo: a forma vira um modelo de saída citado pelo nome, sem skill nova. O que não é forma vira outra habilidade, com a responsabilidade separada antes de escrever. Antes de mover para um modelo ou separar, mostre por que, para onde vai cada trecho e o nome de cada modelo ou habilidade, e espere a escolha da pessoa. Antes de commitar, rode a checagem que o lefthook roda no pre-commit. Sem `.git/hooks/pre-commit`, rode `.agents/scripts/check-skill/run-check.sh`. Falha, ou corpo no limite, barra o commit e o push. Não diga que está pronto. O tamanho e o profiling seguem `medir-habilidade`.
 
 ### Passo 3
 
@@ -84,7 +84,7 @@ Se você conferir o título e a descrição a cada lição, a conferência se re
 Se você disser que a edição está pronta sem a checagem, o pull request sobe com o corpo acima de `Tokens do corpo`.
 
 1. Rode a checagem antes do commit.
-2. Acima do limite, separe a responsabilidade. Não enxugue regra que a pessoa pediu para ficar.
+2. Acima do limite, mova a forma para um modelo de saída ou separe a responsabilidade, como o Passo 2 manda. Não enxugue regra que a pessoa pediu para ficar.
 3. Não faça push e não diga que está pronto.
 
 ### Falha de execução anotada
@@ -154,6 +154,7 @@ A skill mudou no repositório de origem e o pull request saiu no mesmo turno, em
 
 - A skill parece pronta na primeira versão. Ela é um documento vivo. A iteração parte do feedback.
 - Conferir a cada lição parece necessário. A conferência é uma vez, depois do push.
+- O corpo cheio parece pedir uma skill nova. Quando o trecho é forma, como a estrutura de um arquivo, um modelo de saída resolve sem pesar no catálogo.
 - Uma mudança pedida parece exigir execução antes. Ela entra direto. A validação vem depois, com um caso real.
 - A mesma lógica reescrita em cada caso vira script, com o aceite da pessoa. Script de várias skills fica em `.agents/scripts/<nome>/`.
 - Pedido feito numa cópia, sincronizada ou instalada por dependência ou plugin, parece permissão para gravá-la. A cópia é só leitura. A edição vai no repositório de origem. Siga `criar-commit`.
