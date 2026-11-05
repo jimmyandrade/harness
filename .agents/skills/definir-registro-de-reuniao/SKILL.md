@@ -3,7 +3,7 @@ name: definir-registro-de-reuniao
 description: Cadastra e corrige o registro de uma reunião, com título, data, participantes, resumo e índice, onde o projeto guarda os registros. Usada quando a pessoa cola uma transcrição ou pergunta se uma reunião já está registrada. Não serve para achar o contexto de uma reunião nem escrever a ata.
 metadata:
   author: jimmyandrade
-  version: "0.13.3"
+  version: "0.13.4"
   related:
     - definir-agenda
     - definir-grafia
@@ -121,7 +121,10 @@ Aplique no resumo as correções já confirmadas, e use o nome canônico no luga
 Nome ou termo estranho que não casa com nenhuma correção confirmada: não adivinhe e não pergunte de saída.
 Antes de listar qualquer pendente, pesquise no mesmo turno no diretório de pessoas e em cada ferramenta de `Fontes para resolver identidade` da `definir-pessoa` que estiver conectada, pelo nome ou pelo termo e, para pessoa, pelo e-mail.
 Para um nome de pessoa, siga `definir-pessoa` e use o assunto, quem fala, o cargo e o time para escolher.
-Um candidato único e plausível entra no resumo como hipótese, dita como inferência.
+Um candidato só vira hipótese quando há um sinal de que estava na reunião: o convite da agenda, uma mensagem dele sobre o mesmo assunto ou a presença na conversa do mesmo evento.
+Nome parecido e canal em comum não bastam. Isso é hipótese fraca, dita como fraca, com a base e o que a busca não achou.
+Sem sinal nenhum, o nome fica sem hipótese.
+O diretório só tem quem foi cadastrado, então ser o único com aquele nome nele não prova que é o único da empresa.
 Para um termo que não é nome, como sigla, jargão ou palavra solta, traga as pistas que a busca achou e uma hipótese `inferido` quando houver.
 Liste para a pessoa só o que a busca não resolveu.
 Ao listar, não mostre só a frase em volta: mostre o parágrafo ou o bloco inteiro em que aparece, os itens vizinhos da lista ou da seção e as pistas da busca.
@@ -162,8 +165,16 @@ Se você nomear a reunião só como `Reunião` ou adivinhar os participantes, o 
 Se você listar um nome ou termo como pendente sem ter pesquisado, a pessoa responde o que as fontes já mostravam e ainda não vê o contexto para decidir.
 
 1. Pesquise no mesmo turno, antes de listar, no diretório e em cada ferramenta de `Fontes para resolver identidade` da `definir-pessoa` que estiver conectada.
-2. Um candidato plausível entra como hipótese `inferido`.
+2. Um candidato com sinal de que estava na reunião entra como hipótese `inferido`, com a base. Só o nome é hipótese fraca.
 3. Liste só o que a busca não resolveu, com as falas ditas, o parágrafo ou o bloco inteiro, os itens vizinhos e as pistas achadas.
+
+### Hipótese de nome só pelo nome
+
+Se você disser que um nome é de uma pessoa porque o nome combina e ela é a única com ele no diretório, a pessoa confirma ou rejeita sem saber que a base é fraca.
+
+1. Procure um sinal de que ela estava na reunião: o convite, uma mensagem dela sobre o mesmo assunto ou a presença na conversa do evento.
+2. Diga a base e o que a busca não achou. Só o nome é hipótese fraca, dita como fraca.
+3. Sem sinal nenhum, liste o nome sem hipótese.
 
 ### Nome ou termo pendente sem as falas
 
@@ -239,6 +250,7 @@ Escrevi no resumo que a correção sobe no dia seguinte, com o responsável como
 
 - Duas linhas em volta parecem contexto bastante. Para um termo que a pessoa não conhece, mostre o parágrafo ou o bloco inteiro, os itens vizinhos e o que a busca achou.
 - Um nome e uma hipótese parecem resumir o pendente. Sem as falas ditas, a pessoa não decide, porque quem decide é o contexto da conversa.
+- O único nome no diretório parece o único da empresa. O diretório só tem quem foi cadastrado, e um nome parecido com um canal em comum não prova que a pessoa estava na reunião.
 - O título de um documento de anotações herda o nome da reunião recorrente, mesmo quando a sessão foi outra, num horário que não é o do evento. Quem estava ausente ou recusou o convite ainda pode receber o documento.
 - Texto colado de outra interface pode trazer lixo no começo, como o nome de um botão ou de um arquivo de áudio. Não é fala.
 - Slug de arquivo e título de página são coisas diferentes. Um título escrito como slug, sem acento e com hífens, fica estranho no Notion, no Confluence e no Google Drive.
