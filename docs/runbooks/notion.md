@@ -113,6 +113,16 @@ A repository whose `skill-pages` workflow syncs on each push to `main` deletes `
 
 With Release Please, create the release with the token of a GitHub App, as `examples/release-please/.github/workflows/release-please.yml` does. A release that `GITHUB_TOKEN` creates fires no `release` workflow, so the sync would not run, and GitHub holds the `pull_request` checks of the release pull request it opens until someone approves them. Install the app only on the business repository, with Contents, Pull requests, and Issues read and write, store its client ID as the variable `RELEASE_APP_CLIENT_ID` and a private key as the secret `RELEASE_APP_PRIVATE_KEY`, and pass the token to the Release Please step. A Release Please workflow that still calls `sync-skills.yml` in a job of its own drops that job when it moves to the app token, or the release syncs twice. Without Release Please, publishing a release by hand fires the workflow.
 
+Copy the Release Please workflow with its configuration, `release-please-config.json`, and its manifest, `.release-please-manifest.json`. `-n` keeps a file the repository already has; compare an existing configuration with the example instead.
+
+```bash
+cp -Rn node_modules/harness/examples/release-please/. .
+```
+
+The configuration shows the `docs` and `chore` sections in the changelog, which the Release Please default hides. Release Please opens a release pull request only when the notes have a visible section, and a section matches the commit type, not its scope. Moving the core pin is a `chore(deps)` commit, and a change to `AGENTS.md` is usually `docs`. With those sections hidden, neither change creates a release, and `sync-skills` never publishes them. The manifest starts empty, `{}`, and the first release is `initial-version`, 0.1.0.
+
+Check: after the merge of a pull request that only moves the core pin, Release Please opens a release pull request with that commit under Miscellaneous Chores.
+
 Check: after a release that changes one skill, the sync step log has one line, `create` or `update`, and the page shows the new version. After a release that changes `AGENTS.md`, the log has a line for `AGENTS.md`, and the skills database has a page with that title. If the workspace already had a page titled `AGENTS.md` outside the skills database, archive it by hand, so the Notion agent reads only the synced one. An `object_not_found` error that asks to share the data source with the integration means the connection of [Create a connection for the sync](#create-a-connection-for-the-sync) has no access to the skills database.
 
 ## Publish the models, optional

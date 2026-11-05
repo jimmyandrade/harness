@@ -4,7 +4,7 @@ description: Configura um harness de negócio novo seguindo os runbooks do core,
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.4.0"
   related:
     - levantar-ambiente-do-repositorio
     - definir-issue-do-github
@@ -84,11 +84,22 @@ Na sincronização com o Notion, confira além do runbook:
 
 ### Passo 5
 
+No GitHub App da release, confira além do runbook:
+
+1. Abra o formulário já preenchido pela URL `https://github.com/organizations/<org>/settings/apps/new?name=<nome>&url=<link do repositório>&public=false&webhook_active=false&contents=write&pull_requests=write&issues=write`. Numa conta pessoal, troque `organizations/<org>` por `settings/apps/new`. Confira na tela cada valor preenchido.
+2. "Expire user authorization tokens" vem marcada por padrão, e o runbook não a pede: desmarque.
+3. A chave privada é segredo: a pessoa clica em "Generate a private key" (ou "New key"), que baixa um `.pem`, guarda com `gh secret set RELEASE_APP_PRIVATE_KEY --repo <dono>/<repositório> < <arquivo>` e apaga o arquivo depois.
+4. O client ID não é segredo: o agente o lê na página do app e grava como variável, `RELEASE_APP_CLIENT_ID`.
+5. Na instalação, escolha "Only select repositories" com só o repositório do harness.
+6. Copie a configuração e o manifesto do Release Please com o workflow, pelo runbook. Sem eles, `chore` e `docs` não geram release, e o pin do core nunca chega ao Notion.
+
+### Passo 6
+
 Quando uma tela difere do runbook, guarde os prints, os do próprio agente quando ele opera o navegador, e, ao terminar, abra a issue por `definir-issue-do-github` e o pull request por `criar-pull-request` no core.
 Recorte cada print na área que importa e tire nome de pessoa, de negócio, de espaço de trabalho, de espaço de equipe e de conexão.
 Um print com segredo visível não entra: peça outro.
 
-### Passo 6
+### Passo 7
 
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
@@ -107,6 +118,13 @@ Se você mandar colar o token à mão, outro valor pode ir para o segredo, e a s
 
 1. Teste o token na área de transferência antes de guardar.
 2. Guarde direto da área de transferência e limpe-a depois.
+
+### Release que não sai
+
+Se você copiar só o workflow do Release Please, o merge que move o pin do core não abre pull request de release, e o Notion fica na versão antiga.
+
+1. Confira que `release-please-config.json` e `.release-please-manifest.json` vieram do exemplo do core.
+2. Depois do merge de um pull request que só move o pin, confira que abriu o pull request de release.
 
 ### Opção padrão aceita
 
@@ -138,6 +156,7 @@ O repositório aberto é o core, que já está configurado. Não mudei nada.
 - O core só parece precisar de configuração. Ele já está configurado; esta habilidade serve ao harness de negócio novo.
 - O botão de copiar do token só parece copiar um link. O Notion diz "Link copiado" mesmo quando copia o token.
 - O ícone ao lado do botão de copiar só parece outro jeito de copiar. Ele gera um token novo e invalida o guardado.
+- O client ID do app só parece um segredo, por estar ao lado da chave. Ele vai como variável; só a chave privada vai como segredo.
 - A busca da API respondendo `200` só parece provar o acesso ao banco. Ela responde assim com qualquer token válido.
 - O espaço de equipe na lista de acesso só parece um acesso ao espaço inteiro. É o grupo do banco, e o cabeçalho conta as páginas.
 - Pedir prints só parece o jeito seguro. Com o navegador sob controle, o agente vê a tela na hora e poupa a pessoa; ela entra só no login, no sim e no segredo.
@@ -155,5 +174,6 @@ O repositório aberto é o core, que já está configurado. Não mudei nada.
 4. Teste do token, que a pessoa roda: o comando `curl` da busca na seção do token do runbook do Notion, que só devolve o código HTTP.
 5. Gravação do token, que a pessoa roda: `pbpaste | gh secret set NOTION_TOKEN --repo <dono>/<repositório>`. Fora do macOS: `gh secret set NOTION_TOKEN --repo <dono>/<repositório>`, que pede o valor.
 6. Limpeza da área de transferência, que a pessoa roda: `pbcopy < /dev/null`.
-7. Conferência do segredo: `gh secret list --repo <dono>/<repositório>`. A hora vem em UTC.
-8. Recorte de um print: `magick <entrada> -crop <largura>x<altura>+<x>+<y> +repage -fill "<cor do fundo>" -draw "rectangle <x1>,<y1> <x2>,<y2>" -strip <saída>.webp`, com um `-draw` por nome a cobrir.
+7. Chave do app da release, que a pessoa roda: `gh secret set RELEASE_APP_PRIVATE_KEY --repo <dono>/<repositório> < <arquivo .pem>`, e depois apaga o arquivo. Client ID: `gh variable set RELEASE_APP_CLIENT_ID --repo <dono>/<repositório> --body <client ID>`.
+8. Conferência do segredo: `gh secret list --repo <dono>/<repositório>`. A hora vem em UTC.
+9. Recorte de um print: `magick <entrada> -crop <largura>x<altura>+<x>+<y> +repage -fill "<cor do fundo>" -draw "rectangle <x1>,<y1> <x2>,<y2>" -strip <saída>.webp`, com um `-draw` por nome a cobrir.

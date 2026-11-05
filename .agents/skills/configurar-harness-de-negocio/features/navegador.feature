@@ -40,3 +40,17 @@ Funcionalidade: Quem opera as telas
       Dado que o agente com navegador vê uma tela diferente da que o runbook descreve
       Quando a configuração termina
       Então ele usa os próprios prints, recortados e sem nomes, no pull request do runbook
+
+  Regra: O app da release só ganha o que o runbook pede
+
+    Exemplo: Formulário do GitHub App preenchido pela URL
+      Dado que o passo cria o GitHub App da release
+      Quando o agente abre o formulário pela URL com os parâmetros
+      Então ele desmarca "Expire user authorization tokens", que vem marcada
+      E a instalação fica só no repositório do harness
+
+    Exemplo: Chave privada do app
+      Dado que o app da release precisa de uma chave privada
+      Quando o agente chega ao botão que gera a chave
+      Então a pessoa gera a chave, guarda como segredo direto do arquivo e o apaga
+      E o client ID vai como variável, sem passar por segredo
