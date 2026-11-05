@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.63.0](https://github.com/jimmyandrade/harness/compare/v1.62.0...v1.63.0) (2026-11-05)
+
+
+### Features
+
+* **escrever-teste:** test only logic the project owns ([#901](https://github.com/jimmyandrade/harness/issues/901)) ([3f929ae](https://github.com/jimmyandrade/harness/commit/3f929ae99d6630e39c3db836222edf5f130c2398))
+
 ## [1.62.0](https://github.com/jimmyandrade/harness/compare/v1.61.2...v1.62.0) (2026-11-05)
 
 
