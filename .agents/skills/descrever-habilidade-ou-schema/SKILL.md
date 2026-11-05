@@ -3,12 +3,13 @@ name: descrever-habilidade-ou-schema
 description: Redige, corrige e testa se a descrição de uma skill, das instruções do projeto ou de um schema dispara, em subdisparo, sobredisparo, paráfrase ou tópico sem relação. Usada quando a descrição é o assunto, mesmo sem dizer descrição. NÃO serve para escrever o corpo da skill, avaliar a qualidade da saída, descrever produto nem gravar a página no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.21.3"
+  version: "0.21.4"
   related:
     - criar-commit
     - criar-pull-request
     - evoluir-habilidade
     - revisar-habilidade
+    - testar-habilidade
   aliases:
     - otimizar-descricao
     - descrever-habilidade
@@ -83,7 +84,7 @@ Escolha a rodada com a maior taxa de acerto na validação. Pode ser uma rodada 
 ### Passo 8
 
 Grave a descrição escolhida na skill. Confira os limites do Passo 3. Teste à mão alguns prompts. Para um teste mais firme, peça 5 a 10 consultas novas, dos dois lados, fora desta otimização, e rode o script.
-A qualidade da saída fica em `evoluir-habilidade`. A revisão que só sinaliza fica em `revisar-habilidade`.
+A qualidade da saída fica em `testar-habilidade`. A revisão que só sinaliza fica em `revisar-habilidade`.
 Antes de aceitar, confira:
 
 1. A descrição está sempre em terceira pessoa e abre com o que a skill faz. `Usada quando` vem depois e não abre a descrição. `Use essa habilidade sempre que` não entra. Não repete o nome da skill nem traz exemplo de prompt.
@@ -195,7 +196,7 @@ Explora, resume, limpa e gera gráfico de CSV, TSV ou planilha. Usada quando a p
 - Os dois lados não estão nos dois grupos: refaça o recorte, com mistura proporcional, e mantenha esse recorte.
 - A melhor taxa está numa rodada anterior: use essa descrição.
 - O cliente não mostra se a skill foi carregada: peça o registro antes de calcular a taxa.
-- A descrição já passa no treino e na validação: pare. A qualidade da saída fica em `evoluir-habilidade`.
+- A descrição já passa no treino e na validação: pare. A qualidade da saída fica em `testar-habilidade`.
 - A pessoa não nomeia o domínio: a descrição cobre essa formulação.
 - A consulta está em outro arquivo: mova para `evals/evals.json` e apague o arquivo.
 - O pedido chega por uma cópia, sincronizada ou instalada por dependência ou plugin: não edite a cópia. A escrita segue `criar-commit` e `criar-pull-request` no repositório de origem.
