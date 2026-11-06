@@ -5,10 +5,12 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.18.2"
+  version: "0.19.0"
   related:
     - procurar-oportunidade
     - definir-grupo-de-oportunidades
+    - definir-inscricao
+    - organizar-emails
 ---
 
 # Criar oportunidade
@@ -28,17 +30,17 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ### Passo 1
 
-A lista de oportunidades e o nome de cada propriedade vêm do mapeamento de dados do projeto, no workspace conectado. Se a lista não estiver nessa conexão, pare. Não use a lista de outro workspace. Este texto usa os conceitos: o título da edição, a data da edição, o grupo da edição, as variações de nome, os perfis da edição, o ingresso do visitante, a taxa do expositor, o link de inscrição, o e-mail da organização, os links não oficiais, a empresa ou local, a localidade, os anexos da edição, as notas de curadoria e a decisão humana.
+A lista de oportunidades e o nome de cada propriedade vêm do mapeamento de dados do projeto, no workspace conectado. Se a lista não estiver nessa conexão, pare. Não use a lista de outro workspace. Este texto usa os conceitos: o título da edição, a data da edição, o grupo da edição, as variações de nome, os perfis da edição, o ingresso do visitante, a taxa do expositor, o link de inscrição, o e-mail da organização, os links não oficiais, a empresa ou local, a localidade, a etiqueta de e-mail da edição, os anexos da edição, as notas de curadoria e a decisão humana.
 
 Saber se já existe fica com `procurar-oportunidade`. Se a edição existe e o pedido é cadastrar, mostre essa página, anexe o cartaz que ainda não está nos anexos da edição, e pare. Não crie outra. Se o pedido é revisar, limpar, enriquecer, consolidar, reorganizar ou atualizar a edição, o conteúdo, o corpo ou as anotações, siga nessa página. O grupo fica com `definir-grupo-de-oportunidades`.
 
 ### Passo 2
 
-Confira o mapeamento antes de gravar. O título da edição e a data da edição são obrigatórios. O grupo da edição também, quando `Considerar grupos de oportunidades` é `sim`. Se um obrigatório faltar no mapeamento, pare antes de criar e diga qual. Uma propriedade opcional que falta e para a qual o texto traz um valor: grave o resto e, no fim, liste esse valor e sugira criar a propriedade. Não crie a propriedade. Não grave o valor no corpo. Opcional sem valor no texto: nada a fazer.
+Confira o mapeamento antes de gravar. O título da edição e a data da edição são obrigatórios. O grupo da edição também, quando `Considerar grupos de oportunidades` é `sim`. Se um obrigatório faltar no mapeamento, pare antes de criar e diga qual. Uma propriedade opcional que falta e para a qual o texto traz um valor: grave o resto e, no fim, liste esse valor e proponha criar a propriedade, com o nome, o tipo e a descrição que explica a pessoas e a IAs por que ela existe, dentro do limite de tamanho da ferramenta. Crie só com o sim da pessoa. Não grave o valor no corpo. Opcional sem valor no texto: nada a fazer.
 
 ### Passo 3
 
-O título da edição começa pelo nome da edição, depois a data no formato da data com dia da semana, a cidade e, por fim, o grupo, quando há grupo. Não comece pelo grupo. Ano, número de edição e data entram nesse título quando separam uma data da outra. Dois dias entram os dois. A data da edição recebe o intervalo, com as horas. A data só no título não basta. Data anterior à `Data mínima da edição` não entra.
+O título da edição começa pelo nome da edição, depois a data no formato da data com dia da semana, a cidade e, por fim, o grupo, quando há grupo. Não comece pelo grupo. Ano, número de edição e data entram nesse título quando separam uma data da outra. Dois dias entram os dois. A data da edição recebe o intervalo, com as horas. A data só no título não basta. Data anterior à `Data mínima da edição` não entra. Data já passada, depois dela, entra: a edição fica no radar do grupo, e a presença segue `definir-inscricao`.
 
 ### Passo 4
 
@@ -77,7 +79,7 @@ Teste uma sessão real do pedido com todas as propriedades pretendidas antes de 
 
 ### Passo 6
 
-Não preencha fórmula, rollup nem botão. Não invente categoria nem prioridade. O ingresso do visitante é o que paga quem visita. A taxa do expositor é o que paga quem expõe. Gratuidade para um público restrito, como compradores credenciados, não preenche nenhuma das duas. Sem URL no texto, o link de inscrição fica vazio. O e-mail da organização vai na propriedade dele. Links não oficiais recebem só URL. A empresa ou local e a localidade só recebem página que já existe. Não crie empresa nem localidade.
+Não preencha fórmula, rollup nem botão. Não invente categoria nem prioridade. O ingresso do visitante é o que paga quem visita. A taxa do expositor é o que paga quem expõe. Gratuidade para um público restrito, como compradores credenciados, não preenche nenhuma das duas. Sem URL no texto, o link de inscrição fica vazio. O e-mail da organização vai na propriedade dele. Links não oficiais recebem só URL. A empresa ou local e a localidade só recebem página que já existe. Não crie empresa nem localidade. A etiqueta de e-mail da edição guarda o nome inteiro da etiqueta que a caixa aplica às conversas desta data, não o identificador: a busca da caixa usa o nome, e o identificador muda de uma conta para outra. Quando a etiqueta é renomeada, o campo muda junto.
 
 ### Passo 7
 
@@ -106,8 +108,8 @@ Se você salvar a edição com o grupo vazio enquanto `Considerar grupos de opor
 Se você criar a propriedade, ou jogar o valor no corpo, porque o mapeamento não tem onde gravar, a lista muda sem a pessoa decidir.
 
 1. Obrigatório ausente: pare antes de criar e diga qual.
-2. Opcional ausente com valor: grave o resto e liste o valor no fim, com a sugestão.
-3. Não crie a propriedade. Não grave no corpo.
+2. Opcional ausente com valor: grave o resto e liste o valor no fim, com a proposta da propriedade: nome, tipo e descrição.
+3. Crie só com o sim da pessoa. Não grave no corpo.
 
 ### Página de processo
 
@@ -187,7 +189,7 @@ a edição entrou sem grupo, com a data no título e na data da edição. Não p
 
 ### o mapeamento não tem as notas de curadoria. O texto traz um comentário sobre o público do evento.
 
-gravei a edição com o resto. No fim, listei o comentário sem propriedade e sugeri criar as notas de curadoria. O corpo não recebeu o comentário.
+gravei a edição com o resto. No fim, listei o comentário sem propriedade e propus as notas de curadoria, como texto, com a descrição de por que elas existem. O corpo não recebeu o comentário.
 
 ### revise as anotações da edição. O bloco diz que o evento foi em Cidade Exemplo, sem dia e sem valor.
 
@@ -223,7 +225,7 @@ localidade só entra se a página já existe. Data e taxa ficaram vazias. A pend
 - A data numérica parece bastar. O título e a resposta levam o dia da semana, calculado com a data, o horário e o fuso. A data da edição continua um intervalo válido.
 - Data anterior à `Data mínima da edição`, ou à fundação do negócio, parece válida. A propriedade não aceita.
 - "Link na bio" parece um endereço. Sem URL, o campo fica vazio.
-- Uma propriedade ausente parece pedir para ser criada. Esta habilidade não cria schema. Ela sugere.
+- Uma propriedade ausente parece pedir para ser criada já. Esta habilidade propõe o nome, o tipo e a descrição, e cria só com o sim da pessoa.
 - Seleção, inscrição, edital e chamada parecem outra oportunidade. São conteúdo do grupo ou da edição.
 - Criar o grupo junto da edição parece um passo só. O grupo fica com `definir-grupo-de-oportunidades`.
 

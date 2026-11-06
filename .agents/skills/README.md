@@ -229,6 +229,8 @@ flowchart LR
   criar_habilidade --> medir_habilidade
   criar_habilidade --> testar_habilidade
   criar_oportunidade --> definir_grupo_de_oportunidades
+  criar_oportunidade --> definir_inscricao
+  criar_oportunidade --> organizar_emails
   criar_oportunidade --> procurar_oportunidade
   criar_ponto_de_contato --> criar_oportunidade
   criar_ponto_de_contato --> definir_agenda
@@ -530,14 +532,17 @@ flowchart LR
   mesclar_registro --> definir_grafia
   mesclar_registro --> definir_perfil_social
   mesclar_registro --> identificar_duplicata
+  organizar_emails --> criar_oportunidade
   organizar_emails --> definir_agenda
   organizar_emails --> definir_filtro_de_email
+  organizar_emails --> definir_inscricao
   organizar_emails --> definir_obrigacao_financeira
   organizar_emails --> definir_tarefa
   organizar_emails --> evoluir_habilidade
   organizar_emails --> lancar_despesa_da_empresa
   organizar_emails --> lancar_despesa_pessoal
   organizar_emails --> procurar_email
+  organizar_emails --> procurar_oportunidade
   organizar_emails --> rotular_item
   organizar_ponto_de_contato --> criar_oportunidade
   organizar_ponto_de_contato --> criar_ponto_de_contato

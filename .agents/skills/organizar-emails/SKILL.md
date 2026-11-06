@@ -3,7 +3,7 @@ name: organizar-emails
 description: Organiza e-mails por BASB e separa pessoal, trabalho e misto. Usada quando a pessoa quer triar a caixa, etiquetar ou configurar filtros. Não serve para responder mensagens, lançar despesas nem acompanhar veículos.
 metadata:
   author: jimmyandrade
-  version: "0.16.0"
+  version: "0.17.0"
   related:
     - procurar-email
     - evoluir-habilidade
@@ -13,6 +13,9 @@ metadata:
     - definir-filtro-de-email
     - definir-tarefa
     - definir-agenda
+    - procurar-oportunidade
+    - criar-oportunidade
+    - definir-inscricao
     - rotular-item
 ---
 
@@ -147,6 +150,8 @@ Para cada ação, diga o assunto, quem, o que fazer, o prazo da mensagem, sem in
 A conversa que a pessoa respondeu recebe a etiqueta de respondida e perde a da ação pendente, se a resposta era o que faltava. Quando a resposta dela pede retorno, a conversa recebe também a etiqueta da ação esperada.
 
 Não crie tarefa nem evento: ofereça `definir-tarefa` ou `definir-agenda`.
+
+Conversa que anuncia evento, oficina, edital, programa ou benefício com prazo é uma oportunidade, mesmo com a data passada: a pessoa pode ter ido, e a próxima edição volta. Siga `procurar-oportunidade` com o nome, a edição e a data. Achada, a conversa recebe a etiqueta de e-mail que a edição ou o grupo dela registra, e a resposta traz o link e o status. Sem cadastro, cadastre por `criar-oportunidade`, sem perguntar. A inscrição e a presença seguem `definir-inscricao`, com o sim da pessoa.
 
 ```mermaid
 flowchart LR
