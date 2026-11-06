@@ -1,11 +1,11 @@
 ---
 name: organizar-ponto-de-contato
-description: Use essa habilidade sempre que for planejar ou organizar um ponto de contato físico, inclusive pop-up, mesmo quando for uma feira, ou quando um lembrete citar o ponto sem a ligação, mesmo sem dizer organizar. NÃO use para criar a página do ponto, cadastrar a oportunidade, saber se a oportunidade já existe, organizar a viagem, redigir o título, o prazo ou a definição de concluído da tarefa, saber se a tarefa já existe, nem inscrever alguém.
+description: Use essa habilidade sempre que for planejar ou organizar um ponto de contato físico, como pop-up ou feira, ou quando um lembrete citar o ponto sem a ligação, mesmo sem dizer organizar. NÃO use para criar a página do ponto, cadastrar a oportunidade ou saber se ela já existe, organizar a viagem, redigir o título, o prazo ou a definição de concluído da tarefa, saber se a tarefa já existe, nem inscrever alguém.
 allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-update-page
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.17.0"
+  version: "0.17.1"
   aliases:
     - organizar-feira
   related:
