@@ -94,6 +94,7 @@ How these skills relate is in `README.md`, in this folder.
   - Treats the repository as the only write source: a synced copy, such as the Notion page of a skill, and a copy installed by dependency or plugin are read-only, including when the person calls the edit an emergency. The next install erases an edit of the installed copy
   - A request to create or activate a skill in a synced or installed copy does not create it there, including when that copy explains how to fill the description
   - The reply names the branch, says whether it is on GitHub, and reports each commit hash. `Criar pull request ao terminar` is `rascunho` by default, which pushes the branch and opens a draft pull request; `sim` opens a ready pull request; `não` waits for an explicit publish request
+  - When the flow stops without `criar-pull-request`, follows `sincronizar-status-da-tarefa`
   - Splits work into one commit per subject, and keeps commits of the same theme on the same branch and the same pull request. A different theme opens another pull request. The commit subject does not open a new pull request
 - **Test Criteria**:
   - [ ] A project without test or build commands commits and says nothing was verified
@@ -178,6 +179,7 @@ How these skills relate is in `README.md`, in this folder.
   - `Criar pull request ao terminar` is `rascunho` by default: the code change pushes the branch and opens a draft pull request, and the reply names the branch, says whether it is on GitHub, and includes the link. `sim` opens a ready pull request. `não` waits for an explicit publish request. A draft does not request review. Merging still needs an explicit request
   - `Fatiar por subtarefa` is `não` by default: commits of the same theme stay on the open pull request for that theme. `sim` opens one pull request per subtask. Stacking is for a theme that depends on a pull request still outside the base
   - When a published branch was rewritten, the reply says the GitHub branch would be replaced by the new commits, the base branch stays as it is, and the replacement proceeds only if nobody pushed a new commit to that branch since the last fetch. It asks before replacing, and it does not name the git command in place of that explanation
+  - At the end, follows `sincronizar-status-da-tarefa`
 - **Test Criteria**:
   - [ ] A request to push to the base branch opens a pull request instead
   - [ ] A `claude/…` branch is renamed to `type/…` before its pull request opens
@@ -1397,7 +1399,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Properties**:
   - Lives at `.agents/skills/sincronizar-status-da-tarefa/SKILL.md`
   - Runs after a commit is created and after a pull request changes state, without waiting for the person to ask for a status sweep
-  - Works with any task tracker, reading from the project instructions the task query, the status flow, the status for a merged, ready, draft, or blocked pull request, the labels that mean blocked, how a task links to a pull request, and whether to confirm the plan
+  - Works with any task tracker. The place of the tasks changes per business and stays in the task query of the project instructions, along with the status flow, the status for a merged, ready, draft, or blocked pull request, the labels that mean blocked, how a task links to a pull request, and whether to confirm the plan
   - Links a task to a pull request only after reading its title and body, and marks a link made only by subject
   - Leaves unchanged, with the reason, a task whose pull request was closed without merging, cites another key, or needs judgment
   - Writes a plan, rereads the task and the pull request before running it, and asks for confirmation when the project says so

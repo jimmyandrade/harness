@@ -4,8 +4,7 @@ description: Sincroniza o status de tarefas, cards ou issues com o estado do pul
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.1"
-  notion: "false"
+  version: "0.3.0"
   related:
     - criar-commit
     - criar-pull-request
@@ -32,7 +31,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Modo de aprendizado": "perguntar"
 ```
 
-`Consulta das tarefas` é a busca que lista as tarefas da pessoa ainda abertas, na linguagem do rastreador do projeto. `Fluxo de status` é a lista ordenada dos status, do primeiro ao último, com o nome de cada transição entre eles. `Etiquetas de PR bloqueado` lista as etiquetas que marcam o PR como bloqueado, esteja ele em rascunho ou pronto. Rascunho é o estado do PR. Bloqueio é um sinal à parte, dado pelas etiquetas, e tem precedência sobre o rascunho. Com `Status do PR bloqueado` em `não muda`, a tarefa fica onde está e entra na lista para decidir.
+`Consulta das tarefas` é a busca que lista as tarefas ainda abertas, na linguagem do rastreador daquele negócio. O lugar das tarefas muda de um negócio para outro. A busca fica nas instruções do projeto. `Fluxo de status` é a lista ordenada dos status, do primeiro ao último, com o nome de cada transição entre eles. `Etiquetas de PR bloqueado` lista as etiquetas que marcam o PR como bloqueado, esteja ele em rascunho ou pronto. Rascunho é o estado do PR. Bloqueio é um sinal à parte, dado pelas etiquetas, e tem precedência sobre o rascunho. Com `Status do PR bloqueado` em `não muda`, a tarefa fica onde está e entra na lista para decidir.
 
 ## Instruções
 
@@ -149,7 +148,7 @@ A habilidade leva "Exportar relatório em CSV" de "a fazer" a "concluído". A se
 - Uma transição devolve a tarefa inteira. O status novo está no campo de status desse retorno.
 - A tarefa fica em "em andamento" quando o PR está em rascunho, mesmo que ele esteja aberto.
 - A habilidade parece só para quando a pessoa pede a varredura. Depois de um commit ou de uma mudança no pull request, ela roda.
-- `levantar-contexto-do-pull-request` parece citação a tirar porque fica fora do Notion. A relação continua em `related` e no passo que lê o estado do pull request. Esta habilidade também fica fora do Notion, para o nome dela poder continuar no texto.
+- O lugar das tarefas parece fixo. Ele muda de um negócio para outro e fica em `Consulta das tarefas`.
 
 ## Scripts disponíveis
 
