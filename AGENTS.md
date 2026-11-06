@@ -1,6 +1,6 @@
 ---
 metadata:
-  version: "1.47.0"
+  version: "1.48.0"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -67,7 +67,7 @@ metadata:
 - Resolva a referência da habilidade seguinte no catálogo conectado quando as regras do ambiente permitirem. A ausência na lista inicial não prova que ela não existe. Não peça à pessoa uma referência que já está na conversa.
 - Distinga a restrição explícita de descoberta, a busca sem resultado e o erro de permissão que a ferramenta devolveu. Não chame uma restrição das instruções de falta de acesso nem prometa que um pull request remove uma restrição do ambiente.
 - Ao receber uma correção sobre o seu comportamento, siga `evoluir-habilidade` na mesma conversa e transforme o feedback em correção no repositório de origem, não na cópia instalada, em vez de só explicar o erro. Com pedido de pull request, abra-o e diga o que mudou e o que ainda não foi validado.
-- Ao começar a trabalhar num repositório, antes do primeiro passo, siga `levantar-ambiente-do-repositorio`: liste as habilidades do próprio repositório e as que chegam por dependência ou plugin, como as deste repositório, e abra as que a tarefa vai usar. Uma habilidade que a sessão não carregou é lida do `SKILL.md` dela. Quando a habilidade carregada na sessão tem `metadata.version` diferente da que o repositório fixa, no próprio repositório ou na dependência, siga o `SKILL.md` do repositório e diga que o plugin instalado está desatualizado. A ausência na lista da sessão não prova que ela não existe.
+- Ao começar a trabalhar num repositório, antes do primeiro passo, siga `levantar-ambiente-do-repositorio`: liste as habilidades do próprio repositório e as que chegam por dependência ou plugin, como as deste repositório, e abra as que a tarefa vai usar. A ausência na lista da sessão não prova que ela não existe.
 - As tarefas deste repositório são as issues do GitHub dele. Um harness de negócio faz o mesmo com as issues do próprio repositório. Não há banco de tarefas à parte.
 - Depois que a release de um plugin que a pessoa usa sair, com a PR de release mesclada e a tag publicada, atualize o plugin instalado sem esperar um pedido: atualize o marketplace, atualize o plugin e diga que a sessão precisa reiniciar para valer. Vale para o plugin deste repositório e para o de um harness de negócio. A habilidade nova só chega à sessão depois disso.
 - Numa tarefa de código, siga nesta ordem: `procurar-tarefa` para os detalhes da issue ou da tarefa, `levantar-ambiente-do-repositorio`, `escrever-teste`, `escrever-codigo`, `criar-commit` e `criar-pull-request`. Use TDD por padrão: o teste vem primeiro, roda e falha, e só então vem o código que o faz passar. Depois de criar um commit ou de mudar o estado do pull request, siga `sincronizar-status-da-tarefa`. O merge segue `mesclar-pull-request`. Criar ou evoluir uma habilidade segue a mesma cadeia. Toda issue sai por `definir-issue-do-github`, que procura antes as issues abertas e fechadas do mesmo assunto, e todo pull request sai por `criar-pull-request`. Isso vale também para a issue ou o PR que outra habilidade manda abrir. Nunca abra pelo comando direto: ele cria issue repetida e deixa o PR sem rótulo, sem rascunho e sem pessoa atribuída.
@@ -116,6 +116,7 @@ metadata:
 
 - Descreva uma fonte de dados com JSON Schema e um mapeamento do Notion separado, como em `docs/adr/0001-describe-data-sources-with-json-schema.md`. Esses arquivos ficam no harness de negócio, não aqui.
 - Uma skill do core que lê uma fonte de dados do negócio fala de conceitos, como o título da edição ou o grupo de uma edição. O mapeamento de cada negócio liga esses conceitos aos nomes da lista e das propriedades. Uma propriedade sem a qual a edição não existe e que falta no mapeamento para a skill antes de ela escrever. Um valor de propriedade opcional que falta no mapeamento é listado no fim, com a sugestão de criar a propriedade: a skill nunca cria schema e nunca escreve esse valor no corpo da página.
+- Banco novo no Notion fica direto no espaço de equipe, sem página que o agrupe. Se a ferramenta só cria banco dentro de página, crie-o privado no workspace e peça à pessoa que o mova.
 - `Considerar grupos de oportunidades` diz se as skills de oportunidade usam grupos. Com `sim`, toda edição pertence a exatamente um grupo, e o verificador falha quando o mapeamento de oportunidades do negócio, `.agents/mappings/oportunidades.notion.json`, não liga `group`. Com `não`, a edição não tem grupo.
 - `Glossário no repositório atual` diz se os arquivos de idioma ficam no repositório aberto nesta sessão e sobem no Git. O repositório atual é esse. Cada projeto define o próprio valor. Com `não`, eles ficam só no computador, na `Pasta do glossário`.
 - A pasta do glossário não é o harness. O glossário pode ficar dentro de um harness.
