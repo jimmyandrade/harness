@@ -4,7 +4,7 @@ description: Cria, revisa e atualiza o artigo da base de conhecimento que respon
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.5"
+  version: "0.4.0"
   related:
     - criar-habilidade
     - definir-historia-de-usuario
@@ -19,6 +19,8 @@ metadata:
 Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo.
 
 ```yaml
+# `Onde ficam os artigos` é `data source` ou `espaço do Confluence`. Com `espaço do Confluence`, `Nome do data source de artigos` guarda o nome ou a chave do espaço.
+"Onde ficam os artigos": "data source"
 "Nome do data source de artigos": ""
 # `pergunta` é o título. `relacionados` liga os artigos de assuntos vizinhos.
 "Campos da base de artigos":
@@ -52,7 +54,12 @@ Procure no workspace conectado o data source com o nome `Nome do data source de 
 Abra o data source e leia o esquema.
 Só peça o link se a busca não achar nenhum ou achar mais de um.
 Não use um banco de outro workspace.
-Se `Nome do data source de artigos`, `Campos da base de artigos` ou `Status inicial` estiver vazio, pergunte uma vez e pare.
+No data source, se `Nome do data source de artigos`, `Campos da base de artigos` ou `Status inicial` estiver vazio, pergunte uma vez e pare.
+Com `Onde ficam os artigos` em `espaço do Confluence`, o artigo é uma página desse espaço e não há data source nem esquema.
+Procure o espaço pelo nome ou pela chave de `Nome do data source de artigos` e busque as páginas pela busca do Confluence, antes de perguntar qualquer coisa.
+Os `Campos da base de artigos` e o `Status inicial` não se aplicam.
+A pergunta é o título da página e as variações entram na seção `Quando usar esse artigo`.
+Só peça o nome ou o link do espaço se a busca não achar nenhum ou achar mais de um.
 
 ### Passo 2
 
@@ -79,9 +86,10 @@ Na seção de observações, aponte para o outro artigo em vez de repetir a expl
 
 ### Passo 4
 
-Para cada pergunta, busque no data source pelo título, pelas variações e pelo tema.
+Para cada pergunta, busque no data source, ou no espaço do Confluence, pelo título, pelas variações e pelo tema.
 Se um artigo já responde a mesma pergunta, atualize-o.
 Só crie um artigo novo quando nenhum responde.
+No Confluence, ignore a conferência de modelo abaixo: o espaço não tem lista de modelos.
 Confira se uma página é modelo do banco pela lista de modelos do data source, que a API do Notion devolve.
 O texto de exemplo das seções no corpo não prova que é modelo, porque alguém pode criar uma página a partir de um modelo e não mudar nada.
 Uma página que está na lista é o modelo que a pessoa usa no botão de criar página: não a trate como rascunho nem como artigo repetido, e não sugira apagá-la.
