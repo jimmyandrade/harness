@@ -234,6 +234,7 @@ flowchart LR
   criar_pull_request --> registrar_resultados_da_validacao_na_tarefa
   criar_pull_request --> rotular_item
   criar_pull_request --> sincronizar_status_da_tarefa
+  definir_agenda --> conversar_no_whatsapp
   definir_agenda --> definir_agenda_de_popstar
   definir_agenda --> definir_convidado
   definir_agenda --> definir_data_significativa

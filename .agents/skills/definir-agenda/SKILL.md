@@ -5,8 +5,9 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.44.1"
+  version: "0.44.2"
   related:
+    - conversar-no-whatsapp
     - definir-agenda-de-popstar
     - definir-convidado
     - definir-data-significativa
@@ -175,6 +176,7 @@ A descrição leva o link da página canônica, uma frase do que o evento é, e 
 Desambiguação curta se for um negócio e não um ponto de contato. Não alongue o que a propriedade já guarda. Criatividade não troca o campo estruturado.
 Quando `definir-jornada-de-producao` disser que o dia segue a jornada reduzida, a descrição registra a jornada reduzida e o motivo.
 Reunião sem modalidade: pergunte. Remota: crie o Google Meet. Presencial: não crie.
+Reunião combinada numa conversa do WhatsApp: depois de criar o evento, siga o Passo 6 de `conversar-no-whatsapp`, que manda na conversa o evento nativo e a mensagem com o link da chamada.
 
 Com `Pauta obrigatória em evento com convidados` em `sim`, a descrição de um evento com convidados leva uma pauta clara.
 Sem pauta na conversa, pergunte antes de criar.
@@ -271,6 +273,7 @@ Conferi a grafia. O título usou o nome canônico e o papel do encontro. A descr
 - O ponto de contato parece caber na agenda removida. O destino é a agenda editável de `organizar-ponto-de-contato`.
 - O título que cita o nome de uma agenda aposentada parece essa agenda. O aviso usa o calendário.
 - Título diferente parece evento novo. A busca usa variação de nome, não só o título exato. Na dúvida, mostre e confirme.
+- O link da chamada numa mensagem parece marcar a reunião na conversa do WhatsApp. A conversa recebe o evento nativo e a mensagem com o link, pelo Passo 6 de `conversar-no-whatsapp`.
 - «Feira» ou «Reunião» sozinhos parecem título. A busca precisa do nome canônico. O evento externo segue o Passo 5.
 
 ## Scripts disponíveis
