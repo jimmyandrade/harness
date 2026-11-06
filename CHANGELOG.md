@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.68.0](https://github.com/jimmyandrade/harness/compare/v1.67.0...v1.68.0) (2026-11-06)
+
+
+### Features
+
+* **organizar-emails:** register open events and sync their email label ([#924](https://github.com/jimmyandrade/harness/issues/924)) ([03390e0](https://github.com/jimmyandrade/harness/commit/03390e0a407bada33780eb507a761b70c308f3df))
+
 ## [1.67.0](https://github.com/jimmyandrade/harness/compare/v1.66.0...v1.67.0) (2026-11-06)
 
 
