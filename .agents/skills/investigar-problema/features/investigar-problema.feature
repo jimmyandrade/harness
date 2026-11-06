@@ -25,3 +25,13 @@ Funcionalidade: Investigar um problema relatado
       Quando a habilidade encerra a investigação
       Então ela pergunta se a pessoa quer um artigo da base de conhecimento, um post-mortem ou os dois
       E só escreve o que a pessoa escolher
+
+  Regra: a investigação cruza com a de outro agente
+
+    Exemplo: alerta com investigação paralela concluída
+      Dado que o problema veio de uma thread de alerta no Slack
+      E que um agente do monitoramento postou a causa e os próximos passos nela
+      Quando a habilidade conclui a investigação
+      Então ela reagiu à thread com o emoji de olhos ao começar
+      E a resposta diz onde a conclusão concorda e onde diverge da do agente
+      E ela corrige a própria conclusão quando o agente viu algo que ela perdeu
