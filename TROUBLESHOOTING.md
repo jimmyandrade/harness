@@ -123,6 +123,17 @@ Customize, or a plugin page named `core` or `harness-core`, lists skills from a 
 5. Grok Bot does not read those links or this plugin. Connect apps lists apps from the Cursor Marketplace. A skill a Bot saves belongs to that Bot. There is no install of this repository in Grok Bot.
 6. Customize listing the skills of the indexed commit, or `ls` of the project link after `npm ci` listing the skills under `node_modules/harness/.agents/skills`, closes the case.
 
+## The Claude app shows an old core
+
+A session in the Claude desktop app lists skills or subagents of a core older than the tag in `package.json`. The Agent tool lists no `core:<name>` subagent, although `claude plugin list`, run in the project, shows `core@<marketplace>` at the new tag and enabled.
+
+1. The app loads the `core` plugin enabled on the claude.ai account, from a copy it syncs under `~/Library/Application Support/Claude/`, in a `rpm/plugin_<id>` folder. That copy takes the place of the `core@<marketplace>` installed in the project, because both are named `core`. Moving the pin and updating the project plugin do not change it.
+2. To see which copy a session loaded, load a core skill and read the `Base directory for this skill` line. The `.claude-plugin/plugin.json` of that plugin folder has the version, and `agents/` sits next to it from the release that brought the subagents.
+3. Quit the app and open it again. It syncs the account plugin and gets the new release when the account plugin already has it. When the copy still has the old version, the account plugin has not reached it yet: the new version is published on claude.ai.
+4. A session that started before the reopen keeps the subagent list it started with, even after its skill list changes. Open a new session.
+5. The subagents in `agents/` load without an `agents` field in `.claude-plugin/plugin.json`. That field takes only `.md` files: `claude plugin validate` refuses a folder with `Invalid string: must end with ".md"`.
+6. A new session listing the `core:<name>` subagents, and a `Base directory for this skill` whose `plugin.json` has the expected version, close the case.
+
 ## The vocabulary server closes the connection with ERR_MODULE_NOT_FOUND
 
 `/mcp` lists `plugin:core:vocabulary` as failed, and the session says `CONNECTION_CLOSED` or "Connection closed". The other tools of the `core` plugin work. The server log names a file of a package that is missing, such as `node_modules/zod/index.js`, and an older log of the same start may show `npm error code ENOTEMPTY`.
