@@ -1138,26 +1138,23 @@ How these skills relate is in `README.md`, in this folder.
 
 ### evoluir-habilidade
 - **Stability**: experimental
-- **Description**: Test a skill and edit that skill from the run
+- **Description**: Change a skill or the project instructions on request or from a run's feedback, and open the pull request
 - **Properties**:
   - Lives at `.agents/skills/evoluir-habilidade/SKILL.md`
-  - A request to test a skill uses this skill
+  - A request to test a skill goes to testar-habilidade, which comes back here with the run's result
   - A direct request to change a skill also uses this skill: it checks where the skill comes from, edits the source repository right away, bumps the version, and in the same turn commits and opens the pull request through criar-commit and criar-pull-request, without asking whether the person wants the lesson in a commit. `Criar pull request ao terminar` decides the opening: `rascunho` opens a draft, `sim` opens it ready, `não` does not publish and the reply names the branch. It then proposes a real case, without counting the change as validated before that run. A copy installed by dependency or plugin is not edited, because the next install erases it
   - Treats the skill as a living document and iterates from feedback
   - On inconsistent results, a failed call, or a correction from the person, improves the instructions and adds error handling
   - Sends undertriggering and overtriggering to descrever-habilidade-ou-schema
-  - Compares the current skill, the previous version when it exists, and a run without the skill, only when the person asks while `Executar testes` is `sob pedido`, the default, or on every test when it is `sempre`
-  - Records each acceptance criterion the person sent as a Portuguese Gherkin feature in features/, one feature per functionality the person uses, starting with # language: pt, and counts it as validated only after that run. A step, the text format, and a diff are not a feature
-  - Compares the run without the skill and with the skill on back-and-forth, failed calls, and tokens, from the run record
   - Edits the skill that was validated in that same conversation
-  - Does not create the first version of a skill, only check whether the description triggers, only review without running, or write the skill page in Notion
+  - Does not test the skill, create the first version of a skill, only check whether the description triggers, only review without running, or write the skill page in Notion
   - A request that arrives through a copy, synced or installed by dependency or plugin, writes through criar-commit and criar-pull-request in the source repository
   - Size and run profile follow medir-habilidade
   - Runs at the end of every core skill, following the `Modo de aprendizado` parameter (`sim`, `não`, `perguntar`, default `perguntar`): `não` stops. `perguntar` and `sim` record each lesson as a commit on an English-named branch and follow criar-pull-request, without asking whether the person wants the commit. `Criar pull request ao terminar` decides the opening: `rascunho` opens a draft, `sim` opens it ready, `não` does not publish. The command already sets the assignee and the label. With `rascunho`, the draft is marked ready when the person ends the sequence. After the push, once, the title and the description are checked against the code that went up, even when several lessons went up together
   - Takes the project instructions as a target too: feedback on the agent's behavior edits them in the format of `definir-instrucoes-do-projeto` and raises `metadata.version`, without evals or features of their own
 - **Test Criteria**:
   - [x] The skill is present at that path
-  - [x] The description says the test edits the validated skill, and refuses creating the first version, only checking whether the description triggers, only reviewing without running, and writing the skill page in Notion
+  - [x] The description says it changes a skill on request or from feedback, and refuses testing, creating the first version, only checking whether the description triggers, only reviewing, and writing the skill page in Notion
 
 ### extrair-tarefas-da-reuniao
 - **Stability**: experimental
@@ -1814,6 +1811,22 @@ How these skills relate is in `README.md`, in this folder.
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [ ] After a commit or a pull request state change, the skill runs without a separate sweep request
+  - [ ] Three cases validated with the person
+
+### testar-habilidade
+- **Stability**: experimental
+- **Description**: Test a skill with a real run and compare it with the previous version and without the skill
+- **Properties**:
+  - Lives at `.agents/skills/testar-habilidade/SKILL.md`
+  - Asks for the skill, the task, the inputs, and the outputs before judging
+  - Records a case in evals/evals.json only after the person ran the prompt, and never invents one
+  - Records each acceptance criterion the person sent as a Portuguese Gherkin feature in features/, one feature per functionality the person uses, starting with # language: pt, and counts it as validated only after that run. A step, the text format, and a diff are not a feature
+  - Compares the current skill, the previous version when it exists, and a run without the skill, only when the person asks while `Executar testes` is `sob pedido`, the default, or on every test when it is `sempre`
+  - Compares the run without the skill and with the skill on back-and-forth, failed calls, and tokens, from the run record
+  - Starts every run clean, in a child task or a separate session
+  - Edits the validated skill in the same conversation through evoluir-habilidade
+- **Test Criteria**:
+  - [x] The skill is present at that path
   - [ ] Three cases validated with the person
 
 ### validar-plano-de-vocabulario
