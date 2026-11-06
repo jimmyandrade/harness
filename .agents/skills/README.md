@@ -14,6 +14,7 @@ flowchart LR
     abrir_vendas_na_tiqueteira["abrir-vendas-na-tiqueteira"]
     acompanhar_edital["acompanhar-edital"]
     acompanhar_fila_de_revisao["acompanhar-fila-de-revisao"]
+    acompanhar_resposta_no_whatsapp["acompanhar-resposta-no-whatsapp"]
     acompanhar_veiculo["acompanhar-veiculo"]
     atender_revisao_de_pull_request["atender-revisao-de-pull-request"]
     atualizar_branch_do_pull_request["atualizar-branch-do-pull-request"]
@@ -148,6 +149,9 @@ flowchart LR
   acompanhar_fila_de_revisao --> procurar_pedido_de_revisao
   acompanhar_fila_de_revisao --> publicar_revisao_de_codigo
   acompanhar_fila_de_revisao --> redigir_com_tom_de_voz
+  acompanhar_resposta_no_whatsapp --> conversar_no_whatsapp
+  acompanhar_resposta_no_whatsapp --> definir_rotina
+  acompanhar_resposta_no_whatsapp --> evoluir_habilidade
   acompanhar_veiculo --> definir_obrigacao_financeira
   acompanhar_veiculo --> definir_viagem
   acompanhar_veiculo --> evoluir_habilidade
@@ -192,6 +196,7 @@ flowchart LR
   configurar_harness_de_negocio --> definir_issue_do_github
   configurar_harness_de_negocio --> evoluir_habilidade
   configurar_harness_de_negocio --> levantar_ambiente_do_repositorio
+  conversar_no_whatsapp --> acompanhar_resposta_no_whatsapp
   conversar_no_whatsapp --> comunicar_novidade_do_produto
   conversar_no_whatsapp --> definir_agenda
   conversar_no_whatsapp --> definir_pessoa
@@ -370,6 +375,7 @@ flowchart LR
   definir_reserva --> sincronizar_cronograma
   definir_roteiro_de_video --> evoluir_habilidade
   definir_rotina --> acompanhar_fila_de_revisao
+  definir_rotina --> acompanhar_resposta_no_whatsapp
   definir_rotina --> conversar_no_whatsapp
   definir_rotina --> evoluir_habilidade
   definir_tarefa --> definir_grafia
