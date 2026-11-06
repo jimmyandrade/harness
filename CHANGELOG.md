@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.67.0](https://github.com/jimmyandrade/harness/compare/v1.66.0...v1.67.0) (2026-11-06)
+
+
+### Features
+
+* **definir-artigo-da-base-de-conhecimento:** accept a Confluence space as the article store ([#922](https://github.com/jimmyandrade/harness/issues/922)) ([b86ed19](https://github.com/jimmyandrade/harness/commit/b86ed198de6ebb0bbd505e8a30af2adcd7210f13))
+
 ## [1.66.0](https://github.com/jimmyandrade/harness/compare/v1.65.0...v1.66.0) (2026-11-06)
 
 
