@@ -38,10 +38,22 @@ class PrLabelTest(unittest.TestCase):
         self.assert_label("chore(deps): update dependency harness to v1.13.1", "dependencies")
         self.assert_label("fix(deps): update dependency flags to v4.4.0", "dependencies")
 
+    def test_chore_is_chore(self) -> None:
+        self.assert_label("chore: release 1.66.0", "chore")
+
+    def test_refactor_is_refactor(self) -> None:
+        self.assert_label("refactor: split the checker", "refactor")
+
+    def test_test_is_test(self) -> None:
+        self.assert_label("test(check-skill): cover the catalog limit", "test")
+
+    def test_performance_is_an_enhancement(self) -> None:
+        self.assert_label("perf: cache the token counter", "enhancement")
+
     def test_type_without_label_fails(self) -> None:
-        out = label("refactor: split the checker")
+        out = label("build: bump the runner")
         self.assertNotEqual(out.returncode, 0)
-        self.assertIn("refactor", out.stderr)
+        self.assertIn("build", out.stderr)
 
     def test_title_without_type_fails(self) -> None:
         out = label("Update README")
