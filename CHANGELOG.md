@@ -1,5 +1,27 @@
 # Changelog
 
+## [1.66.0](https://github.com/jimmyandrade/harness/compare/v1.65.0...v1.66.0) (2026-11-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* **criar-ponto-de-contato:** organizar-ponto-de-contato no longer creates the page; criar-ponto-de-contato does.
+
+### Features
+
+* **acompanhar-resposta-no-whatsapp:** split reply tracking out of conversar-no-whatsapp ([#915](https://github.com/jimmyandrade/harness/issues/915)) ([86dbc07](https://github.com/jimmyandrade/harness/commit/86dbc07da1166cfd0df1a374f837c3fc8a14f0bd))
+* **criar-ponto-de-contato:** split page creation out of organizar-ponto-de-contato ([#912](https://github.com/jimmyandrade/harness/issues/912)) ([325a831](https://github.com/jimmyandrade/harness/commit/325a8319a865b826f52b8499677171bc5458b5d6))
+
+
+### Bug Fixes
+
+* **rotular-item:** do not create the item without its required label ([#919](https://github.com/jimmyandrade/harness/issues/919)) ([b46e309](https://github.com/jimmyandrade/harness/commit/b46e309812019cf6cde5395a8a3b1464ccd79638))
+
+
+### Miscellaneous Chores
+
+* release 1.66.0 ([#918](https://github.com/jimmyandrade/harness/issues/918)) ([ed744af](https://github.com/jimmyandrade/harness/commit/ed744af431e179db30e21450ed088789fd9744d4))
+
 ## [1.65.0](https://github.com/jimmyandrade/harness/compare/v1.64.0...v1.65.0) (2026-11-06)
 
 
