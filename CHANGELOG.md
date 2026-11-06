@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.64.0](https://github.com/jimmyandrade/harness/compare/v1.63.0...v1.64.0) (2026-11-06)
+
+
+### Features
+
+* add custom subagents ([#909](https://github.com/jimmyandrade/harness/issues/909)) ([92bb1bf](https://github.com/jimmyandrade/harness/commit/92bb1bf1581a80c36d5ea88cbc3378df2d0542a9))
+* **agents:** add `apresentacao-de-evento` ([#896](https://github.com/jimmyandrade/harness/issues/896)) ([7116d3e](https://github.com/jimmyandrade/harness/commit/7116d3e844d7e49b2e5815ff8f788419415029bb))
+* **agents:** create Notion databases directly in the teamspace ([#898](https://github.com/jimmyandrade/harness/issues/898)) ([c80bb5c](https://github.com/jimmyandrade/harness/commit/c80bb5c16f92995f7a8148068a6e333566d3f2d2)), closes [#897](https://github.com/jimmyandrade/harness/issues/897)
+* **conversar-no-whatsapp:** pick the channel, keep one routine per channel and read right after taking the connection ([#879](https://github.com/jimmyandrade/harness/issues/879)) ([07adc43](https://github.com/jimmyandrade/harness/commit/07adc43528240ac4152ae0f88d55102c3365e3d5))
+* **definir-rotina:** try the self-pause before asking and keep one routine per browser session ([#880](https://github.com/jimmyandrade/harness/issues/880)) ([75399ec](https://github.com/jimmyandrade/harness/commit/75399ec20fc4e40039994d79337aea0e8f39f3b7))
+* **investigar-problema:** react to the alert thread and cross-check the parallel investigation ([#906](https://github.com/jimmyandrade/harness/issues/906)) ([dd537ea](https://github.com/jimmyandrade/harness/commit/dd537eafa4bf6b918544543f74e5563f84d53df7))
+* **skills:** upload evidence images by the cheapest path and check the required runtime ([#900](https://github.com/jimmyandrade/harness/issues/900)) ([a2e1bbb](https://github.com/jimmyandrade/harness/commit/a2e1bbb5c426f99f0ef81a8e8a73c8a17cdc0c27))
+* split skill testing out of evoluir-habilidade and prefer an output model before a new skill ([#883](https://github.com/jimmyandrade/harness/issues/883)) ([03fd599](https://github.com/jimmyandrade/harness/commit/03fd599307c1fa4570b15d39902781560b7ac1dc))
+
+
+### Bug Fixes
+
+* **conversar-no-whatsapp:** read the destination chat before drafting ([#899](https://github.com/jimmyandrade/harness/issues/899)) ([16798ef](https://github.com/jimmyandrade/harness/commit/16798eff98e6184e2263e344d95809c2c888a07f))
+* **investigar-problema:** trigger on a reported problem before offering to investigate ([#903](https://github.com/jimmyandrade/harness/issues/903)) ([b0551bd](https://github.com/jimmyandrade/harness/commit/b0551bd747944250a76b41a6a6763e92b23ef791))
+
 ## [1.63.0](https://github.com/jimmyandrade/harness/compare/v1.62.0...v1.63.0) (2026-11-05)
 
 
