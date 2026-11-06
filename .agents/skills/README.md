@@ -30,6 +30,7 @@ flowchart LR
     criar_habilidade["criar-habilidade"]
     criar_ideia_de_conteudo["criar-ideia-de-conteudo"]
     criar_oportunidade["criar-oportunidade"]
+    criar_ponto_de_contato["criar-ponto-de-contato"]
     criar_pull_request["criar-pull-request"]
     definir_agenda["definir-agenda"]
     definir_agenda_de_popstar["definir-agenda-de-popstar"]
@@ -224,6 +225,11 @@ flowchart LR
   criar_habilidade --> testar_habilidade
   criar_oportunidade --> definir_grupo_de_oportunidades
   criar_oportunidade --> procurar_oportunidade
+  criar_ponto_de_contato --> criar_oportunidade
+  criar_ponto_de_contato --> definir_agenda
+  criar_ponto_de_contato --> definir_grupo_de_oportunidades
+  criar_ponto_de_contato --> organizar_ponto_de_contato
+  criar_ponto_de_contato --> procurar_oportunidade
   criar_pull_request --> atualizar_branch_do_pull_request
   criar_pull_request --> criar_commit
   criar_pull_request --> escrever_link
@@ -528,6 +534,7 @@ flowchart LR
   organizar_emails --> procurar_email
   organizar_emails --> rotular_item
   organizar_ponto_de_contato --> criar_oportunidade
+  organizar_ponto_de_contato --> criar_ponto_de_contato
   organizar_ponto_de_contato --> definir_agenda
   organizar_ponto_de_contato --> definir_grupo_de_oportunidades
   organizar_ponto_de_contato --> definir_tarefa

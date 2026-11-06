@@ -1,15 +1,16 @@
 ---
 name: organizar-ponto-de-contato
-description: Use essa habilidade sempre que for planejar ou organizar um ponto de contato físico, inclusive pop-up, mesmo quando for uma feira, ou quando um lembrete citar o ponto sem a ligação, mesmo sem dizer organizar. NÃO use para cadastrar a oportunidade, saber se a oportunidade já existe, organizar a viagem, redigir o título, o prazo ou a definição de concluído da tarefa, saber se a tarefa já existe, nem inscrever alguém.
+description: Use essa habilidade sempre que for planejar ou organizar um ponto de contato físico, como pop-up ou feira, ou quando um lembrete citar o ponto sem a ligação, mesmo sem dizer organizar. NÃO use para criar a página do ponto, cadastrar a oportunidade ou saber se ela já existe, organizar a viagem, redigir o título, o prazo ou a definição de concluído da tarefa, saber se a tarefa já existe, nem inscrever alguém.
 allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-update-page
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.13.0"
+  version: "0.17.1"
   aliases:
     - organizar-feira
   related:
     - criar-oportunidade
+    - criar-ponto-de-contato
     - definir-agenda
     - definir-grupo-de-oportunidades
     - definir-tarefa
@@ -59,11 +60,8 @@ Não preencha fórmula, rollup nem botão. Não copie o dia do lembrete para o i
 
 ### Passo 4
 
-Cadastrar a oportunidade fica com `criar-oportunidade`. Não crie a página aqui.
-
-Ao criar um ponto de contato, o título vai em Nome. O status começa em Não iniciada, salvo se a pessoa disser outro que a lista já tem.
-
-Mostre o nome, o status e o link do que ligou. Não marque a tarefa como concluída.
+Cadastrar a oportunidade fica com `criar-oportunidade`.
+Criar a página do ponto de contato, e corrigir o número, o ciclo, a ordem visual, o status ou o início de um ponto, fica com `criar-ponto-de-contato`. Não crie a página aqui.
 
 ### Passo 5
 
@@ -277,6 +275,7 @@ Removi o evento da sexta. A agenda manteve o domingo.
 - O pedido só nomeia o ponto e não diz a página: pergunte. Não crie com as relações vazias.
 - Várias páginas com o mesmo pedaço: pergunte. Não escolha sozinho.
 - Nenhuma página: não crie aqui. Cadastrar fica com `criar-oportunidade`.
+- O pedido é criar a página do ponto de uma oportunidade que existe, ou corrigir número, ciclo, ordem visual, status ou início de um ponto: siga `criar-ponto-de-contato`.
 - A pessoa não deu a data do ponto de contato nem da oportunidade: pergunte. O dia do lembrete não preenche esses campos.
 - Grupo de oportunidade não veio: fica com `definir-grupo-de-oportunidades`. Não invente.
 - A pergunta é o que falta: relate o que as páginas já registram. Não crie tarefa. Não peça para nomear a habilidade.
