@@ -3,7 +3,7 @@ name: criar-habilidade
 description: Cria, adiciona e escreve skills a partir de uma tarefa real. Usada quando a pessoa quer uma skill nova, mesmo sem dizer skill. NÃO serve para editar código, escrever página que não seja skill, otimizar só a descrição nem gravar a skill no Notion.
 metadata:
   author: jimmyandrade
-  version: "3.22.0"
+  version: "3.22.1"
   related:
     - criar-commit
     - criar-pull-request
@@ -11,6 +11,7 @@ metadata:
     - descrever-habilidade-ou-schema
     - evoluir-habilidade
     - medir-habilidade
+    - testar-habilidade
 ---
 
 # Criar habilidade
@@ -127,7 +128,7 @@ Leia o registro, não só o resultado. Se o agente gasta tempo em etapa improdut
 ### Passo 11
 
 Deixe só o que o agente erraria sem a skill: convenção do projeto, procedimento do domínio, caso de borda não óbvio, ferramenta ou API específica. Não explique o que as coisas são nem o que fazem.
-Para cada trecho, pergunte se o agente erraria sem essa instrução. Se a resposta for não, apague. Se estiver em dúvida, teste com `evoluir-habilidade`. Se o agente já faz a tarefa inteira sem a skill, ela não agrega valor.
+Para cada trecho, pergunte se o agente erraria sem essa instrução. Se a resposta for não, apague. Se estiver em dúvida, teste com `testar-habilidade`. Se o agente já faz a tarefa inteira sem a skill, ela não agrega valor.
 
 ### Passo 12
 
@@ -220,7 +221,7 @@ Se você vir no registro que o agente tenta várias abordagens, segue instruçã
 Se você explicar o que uma ferramenta é ou listar todo caso de borda possível, o corpo não muda o que o agente já faria.
 
 1. Apague o trecho que o agente acertaria sem a skill.
-2. Se a dúvida permanecer, teste com `evoluir-habilidade`.
+2. Se a dúvida permanecer, teste com `testar-habilidade`.
 3. Se a tarefa inteira já sai certa sem a skill, não crie a skill.
 
 ### Execução sem validação

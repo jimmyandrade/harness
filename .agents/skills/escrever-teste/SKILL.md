@@ -1,9 +1,9 @@
 ---
 name: escrever-teste
-description: Escreve ou altera testes de unidade antes do código, em TDD, seguindo a convenção de testes do projeto, com o Better Specs como padrão. Usada quando uma mudança precisa de teste novo, quando um teste existente muda ou quando uma revisão pede um teste. Não serve para decidir o que testar, rodar a suíte inteira nem refatorar testes antigos.
+description: Escreve ou altera testes de unidade antes do código, em TDD, só para a lógica do próprio projeto, seguindo a convenção de testes do projeto, com o Better Specs como padrão. Usada quando uma mudança precisa de teste novo, quando um teste existente muda ou quando uma revisão pede um teste. Não serve para rodar a suíte inteira nem refatorar testes antigos.
 metadata:
   author: jimmyandrade
-  version: "0.8.0"
+  version: "0.9.0"
   related:
     - criar-commit
     - escrever-codigo
@@ -36,6 +36,11 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 Numa tarefa de código, esta habilidade é chamada antes do código. Ler este arquivo começa a chamada e não a encerra. Chame `levantar-ambiente-do-repositorio` para achar a convenção de testes, os comandos e o runtime, nas instruções do projeto e nas habilidades do próprio repositório. Ela vale mais que a `Convenção de testes`. Leia um teste vizinho do mesmo tipo para copiar o jeito de montar, de limpar e de nomear. Sem `Comando de testes`, o resultado da chamada é dizer isso, depois de ler o manifesto do projeto. Não invente um runner. A habilidade seguinte só começa depois desse resultado.
 
 ### Passo 2
+
+Teste só a lógica que o projeto escreveu, como um parser, uma regra de elegibilidade, uma regra de mesclagem ou um montador de endereço.
+Não teste texto fixo, como uma mensagem de interface ou um arquivo de tradução, nem a saída de uma biblioteca de terceiros, como o plural que o `intl-messageformat` formata.
+Esse teste repete a biblioteca e quebra quando alguém só troca o texto.
+Quando o código chama a biblioteca, troque-a por um mock e teste o que o projeto faz com o resultado.
 
 Escreva os títulos e a estrutura pela `Convenção de testes`. Com o Better Specs:
 
@@ -88,6 +93,14 @@ Se você juntar três verificações num `it`, uma falha esconde as outras e o t
 
 1. Separe em um teste por expectativa.
 2. Se o Arrange for caro, divida num contexto com a preparação comum.
+
+### Teste de texto fixo ou de biblioteca
+
+Se você testar o texto de uma tradução ou o resultado que uma biblioteca de terceiros formata, o teste falha numa troca de texto e não protege nada que o projeto escreveu.
+
+1. Apague o teste que só confere o texto.
+2. Troque a biblioteca por um mock e teste o que o código do projeto faz com o resultado.
+3. Se não sobrar lógica do projeto, não escreva o teste.
 
 ### Título com "should"
 

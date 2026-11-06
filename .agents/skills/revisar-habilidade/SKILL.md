@@ -3,13 +3,14 @@ name: revisar-habilidade
 description: Revisa uma skill já escrita e sinaliza descrição vaga, gatilho faltando ou problema de estrutura. Usada quando a pessoa quer ver o risco de disparar demais ou de menos, ou sugerir casos a partir do propósito, mesmo sem dizer revisar. NÃO serve para criar a primeira versão, executar o teste e editar a skill, só medir tamanho, nem gravar a página no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.9.0"
+  version: "0.9.1"
   related:
     - criar-commit
     - criar-habilidade
     - criar-pull-request
     - descrever-habilidade-ou-schema
     - evoluir-habilidade
+    - testar-habilidade
 ---
 
 # Revisar habilidade
@@ -51,7 +52,7 @@ Deve disparar: uma tarefa óbvia e um pedido parafraseado, a mesma intenção em
 Não deve disparar: um tópico sem relação e um quase-acerto que o propósito não cobre. Se o propósito inclui essa tarefa, a sugestão muda para o lado que deve disparar.
 Funcional: cada critério de aceite já escrito, como `Exemplo` Gherkin em português. Cubra saída válida, chamada que sucede, erro tratado e limite, quando o propósito falar disso. Quem grava o arquivo é `evoluir-habilidade`.
 Comparação: o mesmo caso sem skill e com skill. Sem skill, idas e vindas, chamadas que falharam e tokens. Com skill, as perguntas que ainda faltaram.
-Quem grava e roda o disparo é `descrever-habilidade-ou-schema`. Quem grava o funcional, compara e edita a skill é `evoluir-habilidade`. Quem cria a primeira versão é `criar-habilidade`.
+Quem grava e roda o disparo é `descrever-habilidade-ou-schema`. Quem grava o funcional e compara é `testar-habilidade`, e quem edita a skill é `evoluir-habilidade`. Quem cria a primeira versão é `criar-habilidade`.
 
 ### Passo 5
 
@@ -65,7 +66,7 @@ Se você gravar a sugestão no eval, a revisão finge uma validação.
 
 1. Deixe a sugestão na resposta.
 2. O disparo segue `descrever-habilidade-ou-schema`.
-3. O funcional e a comparação seguem `evoluir-habilidade`.
+3. O funcional e a comparação seguem `testar-habilidade`.
 
 ### Descrição reescrita
 
@@ -94,7 +95,7 @@ Deve disparar: montar um workspace novo, criar um projeto, iniciar um projeto pa
 ## Casos-limite
 
 - A skill ainda não existe: use `criar-habilidade`.
-- O pedido é executar o teste: use `evoluir-habilidade`.
+- O pedido é executar o teste: use `testar-habilidade`.
 - O pedido é só o disparo: use `descrever-habilidade-ou-schema`.
 - O propósito não fala de planilha, chamada ou limite: não sugira esse caso.
 - O pedido chega por uma cópia, sincronizada ou instalada por dependência ou plugin: não edite a cópia. A escrita segue `criar-commit` e `criar-pull-request` no repositório de origem.
