@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.15.0"
+  version: "0.15.1"
   aliases:
     - organizar-feira
   related:
@@ -68,7 +68,11 @@ O número do título é o maior número que aparece no nome dos pontos da lista 
 A ordem visual pode estar vazia num ponto antigo, e uma ordenação a põe por último. Leia também os nomes antes de numerar e não repita o número de outro ponto.
 Preencha a ordem visual com o mesmo número do título.
 Preencha o ciclo com o período que contém a data de início da execução, ou da oportunidade quando o ponto não tem data. O ciclo do trimestre anterior esconde o ponto no trimestre certo.
-Ponto sem ciclo ou sem ordem visual some das visões da lista, que filtram e ordenam por esses campos. Ao achar um ponto assim, diga e proponha preencher, sem corrigir sozinha.
+Ponto sem ciclo ou sem ordem visual some das visões da lista, que filtram e ordenam por esses campos.
+Ao achar um ponto sem ciclo, preencha o ciclo sem perguntar, pela data de início do ponto ou da oportunidade, e diga o que preencheu.
+Sem data para escolher o ciclo, pergunte.
+Preencha também a ordem visual vazia com o número do nome, quando nenhum outro ponto o usa.
+Número repetido no nome: diga e proponha renumerar, sem renumerar sozinha.
 O status começa em Não iniciada, salvo se a pessoa disser outro que a lista já tem.
 Participação confirmada, reserva ou pré-produção citadas nas páginas não mudam o status.
 O início e o fim da execução só entram quando a pessoa disse a data ou quando a oportunidade a traz confirmada.
@@ -197,7 +201,7 @@ Se você numerar só pela ordem visual ou deixar o ciclo e a ordem visual vazios
 
 1. Numere pelo maior número nos nomes dos pontos, mais um.
 2. Preencha a ordem visual com esse número e o ciclo do período da data de início.
-3. Ao achar ponto existente sem ciclo ou ordem visual, diga e proponha preencher.
+3. Ao achar ponto existente sem ciclo, preencha sem perguntar e diga o que preencheu. Número repetido no nome: proponha renumerar.
 
 ### Data do lembrete
 
@@ -312,7 +316,8 @@ Removi o evento da sexta. A agenda manteve o domingo.
 - O pedido só nomeia o ponto e não diz a página: pergunte. Não crie com as relações vazias.
 - Várias páginas com o mesmo pedaço: pergunte. Não escolha sozinho.
 - Nenhuma página: não crie aqui. Cadastrar fica com `criar-oportunidade`.
-- Ponto existente sem ciclo ou ordem visual, ou com número repetido: diga que ele some das visões e proponha o ajuste. Não altere sem a confirmação.
+- Ponto existente sem ciclo: preencha o ciclo sem perguntar e diga. Sem data para escolher o ciclo, pergunte.
+- Ponto com número repetido no nome: diga e proponha renumerar. Não renumere sem a confirmação.
 - O pedido é criar a página do ponto de uma oportunidade que existe: siga o Passo 4. A data só reservada deixa o início e o fim vazios.
 - A pessoa não deu a data do ponto de contato nem da oportunidade: pergunte. O dia do lembrete não preenche esses campos.
 - Grupo de oportunidade não veio: fica com `definir-grupo-de-oportunidades`. Não invente.
