@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.2"
+  version: "0.5.0"
   aliases:
     - definir-grupo
   related:
@@ -36,7 +36,7 @@ flowchart LR
 
 ### Passo 2
 
-A lista de grupos, a lista de oportunidades e o nome de cada propriedade vêm do mapeamento de dados do projeto, no workspace conectado. Este texto usa os conceitos: no grupo, o título do grupo, o nome canônico, os aliases, o organizador, a empresa ou local padrão, o local fixo, os perfis oficiais, a categoria e as notas do grupo; na edição, a data da edição, o grupo da edição e os perfis da edição. Se a lista não estiver nessa conexão, pare. Não use a lista de outro workspace. A edição, com data, fica com `criar-oportunidade`. Saber se a edição já existe fica com `procurar-oportunidade`.
+A lista de grupos, a lista de oportunidades e o nome de cada propriedade vêm do mapeamento de dados do projeto, no workspace conectado. Este texto usa os conceitos: no grupo, o título do grupo, o nome canônico, os aliases, o organizador, a empresa ou local padrão, o local fixo, os perfis oficiais, a etiqueta de e-mail do grupo, a categoria e as notas do grupo; na edição, a data da edição, o grupo da edição e os perfis da edição. Se a lista não estiver nessa conexão, pare. Não use a lista de outro workspace. A edição, com data, fica com `criar-oportunidade`. Saber se a edição já existe fica com `procurar-oportunidade`.
 
 Se o mapeamento não tiver o título do grupo, ou a lista de oportunidades não tiver o grupo da edição, pare antes de criar e diga qual falta. Um valor que caberia numa propriedade opcional ausente do mapeamento não vai para o corpo. Grave o resto e, no fim, liste esse valor e sugira criar a propriedade. Não crie a propriedade.
 
@@ -54,7 +54,7 @@ Oficina ou curso recorrente do mesmo organizador usa um grupo só, nomeado pelo 
 
 ### Passo 6
 
-O que é estável fica no grupo. Regra geral, canal oficial que se repete e princípio de curadoria vão nas notas do grupo. Organizador e empresa ou local padrão só quando não mudam entre edições. Local fixo só quando o evento é daquele lugar. Perfil social oficial, como o do evento ou da organização, vai nos perfis oficiais. Só relacione página de perfil que já existe. Não crie o perfil. Conta própria de uma edição fica nos perfis da edição, com `criar-oportunidade`. Link oficial recorrente vai nas notas do grupo, quando o grupo não tem link oficial. Endereço, horário, valor, formulário e vaga de uma data ficam na edição. Não grave isso no corpo.
+O que é estável fica no grupo. Regra geral, canal oficial que se repete e princípio de curadoria vão nas notas do grupo. Organizador e empresa ou local padrão só quando não mudam entre edições. Local fixo só quando o evento é daquele lugar. Perfil social oficial, como o do evento ou da organização, vai nos perfis oficiais. Só relacione página de perfil que já existe. Não crie o perfil. Conta própria de uma edição fica nos perfis da edição, com `criar-oportunidade`. Link oficial recorrente vai nas notas do grupo, quando o grupo não tem link oficial. Endereço, horário, valor, formulário e vaga de uma data ficam na edição. Não grave isso no corpo. A etiqueta de e-mail do grupo guarda o nome inteiro da etiqueta das conversas do grupo, sem ano e sem data, e a etiqueta de cada data fica na edição, com `criar-oportunidade`.
 
 ### Passo 7
 

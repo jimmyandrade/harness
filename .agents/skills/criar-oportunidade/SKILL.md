@@ -5,10 +5,12 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.18.2"
+  version: "0.19.0"
   related:
     - procurar-oportunidade
     - definir-grupo-de-oportunidades
+    - definir-inscricao
+    - organizar-emails
 ---
 
 # Criar oportunidade
@@ -28,7 +30,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ### Passo 1
 
-A lista de oportunidades e o nome de cada propriedade vêm do mapeamento de dados do projeto, no workspace conectado. Se a lista não estiver nessa conexão, pare. Não use a lista de outro workspace. Este texto usa os conceitos: o título da edição, a data da edição, o grupo da edição, as variações de nome, os perfis da edição, o ingresso do visitante, a taxa do expositor, o link de inscrição, o e-mail da organização, os links não oficiais, a empresa ou local, a localidade, os anexos da edição, as notas de curadoria e a decisão humana.
+A lista de oportunidades e o nome de cada propriedade vêm do mapeamento de dados do projeto, no workspace conectado. Se a lista não estiver nessa conexão, pare. Não use a lista de outro workspace. Este texto usa os conceitos: o título da edição, a data da edição, o grupo da edição, as variações de nome, os perfis da edição, o ingresso do visitante, a taxa do expositor, o link de inscrição, o e-mail da organização, os links não oficiais, a empresa ou local, a localidade, a etiqueta de e-mail da edição, os anexos da edição, as notas de curadoria e a decisão humana.
 
 Saber se já existe fica com `procurar-oportunidade`. Se a edição existe e o pedido é cadastrar, mostre essa página, anexe o cartaz que ainda não está nos anexos da edição, e pare. Não crie outra. Se o pedido é revisar, limpar, enriquecer, consolidar, reorganizar ou atualizar a edição, o conteúdo, o corpo ou as anotações, siga nessa página. O grupo fica com `definir-grupo-de-oportunidades`.
 
@@ -38,7 +40,7 @@ Confira o mapeamento antes de gravar. O título da edição e a data da edição
 
 ### Passo 3
 
-O título da edição começa pelo nome da edição, depois a data no formato da data com dia da semana, a cidade e, por fim, o grupo, quando há grupo. Não comece pelo grupo. Ano, número de edição e data entram nesse título quando separam uma data da outra. Dois dias entram os dois. A data da edição recebe o intervalo, com as horas. A data só no título não basta. Data anterior à `Data mínima da edição` não entra.
+O título da edição começa pelo nome da edição, depois a data no formato da data com dia da semana, a cidade e, por fim, o grupo, quando há grupo. Não comece pelo grupo. Ano, número de edição e data entram nesse título quando separam uma data da outra. Dois dias entram os dois. A data da edição recebe o intervalo, com as horas. A data só no título não basta. Data anterior à `Data mínima da edição` não entra. Data já passada, depois dela, entra: a edição fica no radar do grupo, e a presença segue `definir-inscricao`.
 
 ### Passo 4
 
@@ -77,7 +79,7 @@ Teste uma sessão real do pedido com todas as propriedades pretendidas antes de 
 
 ### Passo 6
 
-Não preencha fórmula, rollup nem botão. Não invente categoria nem prioridade. O ingresso do visitante é o que paga quem visita. A taxa do expositor é o que paga quem expõe. Gratuidade para um público restrito, como compradores credenciados, não preenche nenhuma das duas. Sem URL no texto, o link de inscrição fica vazio. O e-mail da organização vai na propriedade dele. Links não oficiais recebem só URL. A empresa ou local e a localidade só recebem página que já existe. Não crie empresa nem localidade.
+Não preencha fórmula, rollup nem botão. Não invente categoria nem prioridade. O ingresso do visitante é o que paga quem visita. A taxa do expositor é o que paga quem expõe. Gratuidade para um público restrito, como compradores credenciados, não preenche nenhuma das duas. Sem URL no texto, o link de inscrição fica vazio. O e-mail da organização vai na propriedade dele. Links não oficiais recebem só URL. A empresa ou local e a localidade só recebem página que já existe. Não crie empresa nem localidade. A etiqueta de e-mail da edição guarda o nome inteiro da etiqueta que a caixa aplica às conversas desta data, não o identificador: a busca da caixa usa o nome, e o identificador muda de uma conta para outra. Quando a etiqueta é renomeada, o campo muda junto.
 
 ### Passo 7
 

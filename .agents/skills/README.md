@@ -229,6 +229,8 @@ flowchart LR
   criar_habilidade --> medir_habilidade
   criar_habilidade --> testar_habilidade
   criar_oportunidade --> definir_grupo_de_oportunidades
+  criar_oportunidade --> definir_inscricao
+  criar_oportunidade --> organizar_emails
   criar_oportunidade --> procurar_oportunidade
   criar_ponto_de_contato --> criar_oportunidade
   criar_ponto_de_contato --> definir_agenda
