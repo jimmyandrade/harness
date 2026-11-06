@@ -3,7 +3,7 @@ name: registrar-evidencia-visual
 description: Registra o que a pessoa passa a ver quando um trabalho termina, no pull request e no card. Usada quando a entrega muda a tela, no Storybook, no ambiente local, na pré-produção ou na produção, mesmo sem dizer print. NÃO serve para mudança sem percepção visual, para medir performance, para ler texto de imagem nem para mandar a mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.12.1"
+  version: "0.13.1"
   related:
     - criar-pull-request
 ---
@@ -73,6 +73,9 @@ Esse tipo de elemento pode nascer depois da primeira rolagem ou do primeiro toqu
 Feche as mesmas sobreposições no antes e no depois, para os dois mostrarem a mesma tela.
 Uma captura com algo por cima não entra no conjunto, e a legenda não explica o que está por cima.
 A captura do depois vem do código da mudança, rodando no ambiente local, no Storybook ou no ambiente de teste do pull request.
+O ambiente de teste do pull request demora a subir depois do push.
+Acompanhe o deploy pelo estado dos checks do pull request e retome a captura quando ele terminar, sem pedir que a pessoa avise.
+Enquanto ele não termina, siga com o que não depende dele e diga que essa captura espera o deploy.
 O efeito da mudança aplicado à mão noutro ambiente, como a produção, é uma simulação e não substitui essa captura.
 Quando a simulação é a única imagem possível, a legenda diz que é simulação e a resposta diz que a captura da mudança ainda falta.
 Numa correção de bug, a evidência refaz o caminho do relato, antes e depois.
@@ -139,10 +142,15 @@ Comentário numa issue do rastreador só entra se a pessoa pedir.
 Esse comentário leva o link do pull request.
 A descrição do pull request é o lugar melhor para o recorte.
 Com `Confirmação antes de gravar` em `sim`, mostre a subpasta, o recorte que entra no texto, o link da página inteira e as legendas, e espere um sim para esse conjunto.
+Envie os arquivos do recorte à pessoa pela ferramenta de envio de arquivos antes de pedir o sim, porque sem ver as imagens ela não confirma o conjunto.
 Peça esse sim assim que o conjunto fica pronto, antes de abrir o pull request, para ele já nascer com as imagens.
-A linha de comando do GitHub não sobe imagem para a descrição.
-Depois do sim, suba as imagens pelo navegador em que a pessoa já está logada no GitHub, com o envio de arquivo do editor da descrição.
-Sem esse navegador, o pull request fica em rascunho, e a mesma resposta diz que a imagem falta e oferece esse caminho.
+Depois do sim, suba as imagens pelo caminho que gasta menos, e só desça um degrau quando o de cima falhou de verdade:
+1. A linha de comando ou a API do destino, tentando o envio em vez de presumir que não existe.
+2. O conector do destino.
+3. O navegador logado, com o envio de arquivo do editor da descrição. Ele gasta mais tokens, então é o último recurso.
+Subir a imagem é trabalho seu em qualquer degrau, nunca pendência nem pergunta para a pessoa, e a resposta diz qual caminho funcionou.
+No navegador, veja qual está logado, o do aplicativo ou o da pessoa, antes de dizer que falta um.
+Só quando nenhum degrau funcionou o pull request fica em rascunho, e a mesma resposta diz que a imagem falta e o que impediu.
 Um sim vale para o card e o pull request desse conjunto, e outro destino, como uma mensagem para alguém, pede outro sim.
 
 ### Passo 6
@@ -249,8 +257,8 @@ Se você testar só no Chrome, a descrição afirma mais do que foi aberto.
 Se você abrir o pull request com a seção de imagens vazia e deixar a confirmação ou o envio para depois, quem abre o pull request não vê a mudança e pergunta por que não há imagem.
 
 1. Mostre o conjunto e peça o sim antes de abrir o pull request.
-2. Depois do sim, suba as imagens pelo navegador em que a pessoa está logada no GitHub.
-3. Sem esse navegador, deixe em rascunho e ofereça o caminho na mesma resposta.
+2. Depois do sim, suba as imagens pelo caminho que gasta menos: API, depois conector, depois o navegador logado. Não anuncie isso como pendência.
+3. Se nenhum caminho funcionou, deixe em rascunho e diga na mesma resposta o que impediu, como o login que falta no navegador.
 
 ### Captura com a tela coberta
 
@@ -312,7 +320,7 @@ A página, com o bloco novo no meio do resto da tela e o relógio travado em 1 d
 - `figure` e `figcaption` parecem a forma certa de legendar. O GitHub remove as duas tags da descrição do pull request.
 - O clique sem erro parece o aviso fechado. Olhe a imagem: um clique que não achou o botão também não falha.
 - O aviso de cookies parece estar na tela desde a carga. Em muitos sites ele nasce depois da primeira rolagem.
-- A linha de comando do GitHub parece publicar o pull request inteiro. Ela não sobe imagem: o envio passa pelo navegador.
+- O navegador parece o jeito de subir imagem para a descrição. É o último recurso, porque gasta mais tokens: tente antes a API e o conector, verificando em vez de presumir que não funcionam.
 - O efeito da correção aplicado à mão na produção parece o depois. É uma simulação, e o código da mudança pode se comportar diferente.
 
 ## Scripts disponíveis
