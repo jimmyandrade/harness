@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.65.0](https://github.com/jimmyandrade/harness/compare/v1.64.0...v1.65.0) (2026-11-06)
+
+
+### Features
+
+* **comunicar-novidade-do-produto:** announce data operations before and after ([#916](https://github.com/jimmyandrade/harness/issues/916)) ([f3690e4](https://github.com/jimmyandrade/harness/commit/f3690e4b0ac230125a1caaf4e9690932273b2f89))
+
+
+### Bug Fixes
+
+* **definir-agenda:** hand off a call set up in WhatsApp to the native event step ([#913](https://github.com/jimmyandrade/harness/issues/913)) ([f5d2a1f](https://github.com/jimmyandrade/harness/commit/f5d2a1f31763a62b1702761db4174501b205329f))
+
 ## [1.64.0](https://github.com/jimmyandrade/harness/compare/v1.63.0...v1.64.0) (2026-11-06)
 
 
