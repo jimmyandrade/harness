@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.15.1"
+  version: "0.16.0"
   aliases:
     - organizar-feira
   related:
@@ -72,11 +72,15 @@ Ponto sem ciclo ou sem ordem visual some das visões da lista, que filtram e ord
 Ao achar um ponto sem ciclo, preencha o ciclo sem perguntar, pela data de início do ponto ou da oportunidade, e diga o que preencheu.
 Sem data para escolher o ciclo, pergunte.
 Preencha também a ordem visual vazia com o número do nome, quando nenhum outro ponto o usa.
-Número repetido no nome: diga e proponha renumerar, sem renumerar sozinha.
+Número repetido no nome: renumere sem perguntar. Fica com o número o ponto mais antigo, e o mais novo recebe o maior número mais um, no nome e na ordem visual. Diga o que renumerou.
 O status começa em Não iniciada, salvo se a pessoa disser outro que a lista já tem.
 Participação confirmada, reserva ou pré-produção citadas nas páginas não mudam o status.
 O início e o fim da execução só entram quando a pessoa disse a data ou quando a oportunidade a traz confirmada.
 Uma reserva provisória não é data confirmada: pergunte, ou deixe vazio e diga que ficou vazio.
+Início da execução vazio no fim da criação: diga isso na resposta, com o que falta para preencher. Não deixe o campo vazio em silêncio.
+A pessoa que disse o dia, ou a reunião que traz o horário de abertura, já bastam: grave o início com data e hora.
+Sem horário, grave só a data, como data única. Não grave intervalo do dia com ele mesmo.
+Ponto cuja data já passou e cujo status é de fase anterior à execução: não deixe o status como está. Pergunte qual status vale e não escolha sozinha.
 
 Mostre o nome, o status e o link do que ligou. Não marque a tarefa como concluída.
 A data do evento na resposta segue o Passo 6.
@@ -194,6 +198,8 @@ Se você criar o ponto com o status da fase que a oportunidade sugere, ou com a 
 1. O status começa em Não iniciada, salvo o que a pessoa disser.
 2. O início e o fim da execução só entram quando a pessoa disse a data ou a oportunidade a traz confirmada.
 3. Reserva provisória não é data: pergunte, ou deixe vazio e diga que ficou vazio.
+4. Início vazio: diga na resposta. Sem horário, grave só a data, como data única.
+5. Data já passada com status de fase anterior: pergunte qual status vale.
 
 ### Ponto criado fora das visões
 
@@ -201,7 +207,7 @@ Se você numerar só pela ordem visual ou deixar o ciclo e a ordem visual vazios
 
 1. Numere pelo maior número nos nomes dos pontos, mais um.
 2. Preencha a ordem visual com esse número e o ciclo do período da data de início.
-3. Ao achar ponto existente sem ciclo, preencha sem perguntar e diga o que preencheu. Número repetido no nome: proponha renumerar.
+3. Ao achar ponto existente sem ciclo, preencha sem perguntar e diga o que preencheu. Número repetido no nome: renumere sem perguntar e diga.
 
 ### Data do lembrete
 
@@ -317,7 +323,8 @@ Removi o evento da sexta. A agenda manteve o domingo.
 - Várias páginas com o mesmo pedaço: pergunte. Não escolha sozinho.
 - Nenhuma página: não crie aqui. Cadastrar fica com `criar-oportunidade`.
 - Ponto existente sem ciclo: preencha o ciclo sem perguntar e diga. Sem data para escolher o ciclo, pergunte.
-- Ponto com número repetido no nome: diga e proponha renumerar. Não renumere sem a confirmação.
+- Ponto com número repetido no nome: renumere sem perguntar e diga o que mudou.
+- Ponto com data passada e status de fase anterior, ou com início vazio ou em intervalo sem horário: diga ao achar. Data e horário sabidos, grave. Status, pergunte.
 - O pedido é criar a página do ponto de uma oportunidade que existe: siga o Passo 4. A data só reservada deixa o início e o fim vazios.
 - A pessoa não deu a data do ponto de contato nem da oportunidade: pergunte. O dia do lembrete não preenche esses campos.
 - Grupo de oportunidade não veio: fica com `definir-grupo-de-oportunidades`. Não invente.
