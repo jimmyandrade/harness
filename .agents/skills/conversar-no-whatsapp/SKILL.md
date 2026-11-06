@@ -1,9 +1,9 @@
 ---
 name: conversar-no-whatsapp
-description: Encontra a conversa no WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
+description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.18.1"
+  version: "0.19.0"
   related:
     - comunicar-novidade-do-produto
     - definir-agenda
@@ -27,6 +27,8 @@ Leia os valores nas instruções do projeto, na entrada desta habilidade. Na aus
 "Formato da data na mensagem": "terça-feira, 1 de setembro de 2026"
 "Modo de aprendizado": "perguntar"
 "Etiqueta das conversas": ""
+# `Canais em ordem de preferência` lista por onde ler e enviar, do preferido ao último recurso. `conector` é um conector ou MCP do WhatsApp na sessão. `WhatsApp Web` é a aba no navegador da pessoa.
+"Canais em ordem de preferência": ["conector", "WhatsApp Web"]
 # `Dividir em mensagens curtas`: `sim` divide o rascunho em mensagens, uma por ideia. `não` manda cada rascunho numa mensagem só.
 "Dividir em mensagens curtas": "sim"
 # `Mensagem única para` lista os tipos de mensagem que vão numa mensagem só, como um status de demanda para alguém do time.
@@ -46,7 +48,9 @@ Leia os valores nas instruções do projeto, na entrada desta habilidade. Na aus
 
 Peça o assunto: quem pediu, sobre quem ou o quê, e se a pessoa quer só ler ou também responder ou enviar.
 
-Use o WhatsApp Web no navegador da pessoa. Procure primeiro uma aba do WhatsApp Web que já esteja aberta entre as abas que você controla e use essa. Sem aba, abra o WhatsApp Web numa aba sua. Não peça para a pessoa mover a aba dela.
+Use o primeiro canal de `Canais em ordem de preferência` que a sessão tem. Diga qual usou e, quando pulou um, por que ele não estava disponível. Sem nenhum canal da lista, pare e diga isso.
+
+No WhatsApp Web, use o navegador da pessoa. Procure primeiro uma aba do WhatsApp Web que já esteja aberta entre as abas que você controla e use essa. Sem aba, abra o WhatsApp Web numa aba sua. Não peça para a pessoa mover a aba dela.
 
 Se aparecer o aviso de que o WhatsApp está aberto em outra janela, clique no botão do aviso que passa a conexão para a sua aba. O texto dele muda com a versão do WhatsApp, como "Usar nesta janela" ou "Usar aqui", e pode ser outro. Na mesma sequência de ações, espere a lista carregar, busque e leia.
 Se o aviso voltar, outra aba tomou a conexão: clique de novo uma vez só, com a leitura na mesma sequência, e não alterne mais. Ao terminar, diga que a outra janela ficou desconectada e volta pelo mesmo botão.
