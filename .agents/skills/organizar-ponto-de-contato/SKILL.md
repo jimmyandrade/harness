@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.14.0"
+  version: "0.15.0"
   aliases:
     - organizar-feira
   related:
@@ -64,8 +64,11 @@ Cadastrar a oportunidade fica com `criar-oportunidade`. Não crie a página aqui
 Ao criar um ponto de contato, o título vai em Nome.
 O ponto nasce da oportunidade que a pessoa nomeou ou colou.
 Ligue essa oportunidade, uma só, e as demais relações que o mapeamento do ponto de contato exige, copiando-as da página da oportunidade.
-O número do título é o maior número da ordem visual da lista mais um, no padrão de título dos pontos vizinhos.
-Leia os últimos pontos da lista antes de numerar.
+O número do título é o maior número que aparece no nome dos pontos da lista mais um, no padrão de título dos pontos vizinhos.
+A ordem visual pode estar vazia num ponto antigo, e uma ordenação a põe por último. Leia também os nomes antes de numerar e não repita o número de outro ponto.
+Preencha a ordem visual com o mesmo número do título.
+Preencha o ciclo com o período que contém a data de início da execução, ou da oportunidade quando o ponto não tem data. O ciclo do trimestre anterior esconde o ponto no trimestre certo.
+Ponto sem ciclo ou sem ordem visual some das visões da lista, que filtram e ordenam por esses campos. Ao achar um ponto assim, diga e proponha preencher, sem corrigir sozinha.
 O status começa em Não iniciada, salvo se a pessoa disser outro que a lista já tem.
 Participação confirmada, reserva ou pré-produção citadas nas páginas não mudam o status.
 O início e o fim da execução só entram quando a pessoa disse a data ou quando a oportunidade a traz confirmada.
@@ -188,6 +191,14 @@ Se você criar o ponto com o status da fase que a oportunidade sugere, ou com a 
 2. O início e o fim da execução só entram quando a pessoa disse a data ou a oportunidade a traz confirmada.
 3. Reserva provisória não é data: pergunte, ou deixe vazio e diga que ficou vazio.
 
+### Ponto criado fora das visões
+
+Se você numerar só pela ordem visual ou deixar o ciclo e a ordem visual vazios, o número se repete e o ponto não aparece na visão por trimestre.
+
+1. Numere pelo maior número nos nomes dos pontos, mais um.
+2. Preencha a ordem visual com esse número e o ciclo do período da data de início.
+3. Ao achar ponto existente sem ciclo ou ordem visual, diga e proponha preencher.
+
 ### Data do lembrete
 
 Se você copiar o dia do lembrete para o ponto de contato ou a oportunidade, a execução ganha a data da mala.
@@ -301,6 +312,7 @@ Removi o evento da sexta. A agenda manteve o domingo.
 - O pedido só nomeia o ponto e não diz a página: pergunte. Não crie com as relações vazias.
 - Várias páginas com o mesmo pedaço: pergunte. Não escolha sozinho.
 - Nenhuma página: não crie aqui. Cadastrar fica com `criar-oportunidade`.
+- Ponto existente sem ciclo ou ordem visual, ou com número repetido: diga que ele some das visões e proponha o ajuste. Não altere sem a confirmação.
 - O pedido é criar a página do ponto de uma oportunidade que existe: siga o Passo 4. A data só reservada deixa o início e o fim vazios.
 - A pessoa não deu a data do ponto de contato nem da oportunidade: pergunte. O dia do lembrete não preenche esses campos.
 - Grupo de oportunidade não veio: fica com `definir-grupo-de-oportunidades`. Não invente.
