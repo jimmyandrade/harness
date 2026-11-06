@@ -3,9 +3,10 @@ name: definir-rotina
 description: Cria, revisa e audita rotinas agendadas ou por evento, para rodarem só quando o resultado tem uso. Usada ao pedir, mudar ou auditar uma rotina, ou antes de pedir de novo um resultado que uma rotina já gerou, mesmo sem dizer rotina. Não serve para executar o trabalho da rotina, criar evento na agenda nem medir uma skill.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.5.0"
   related:
     - acompanhar-fila-de-revisao
+    - conversar-no-whatsapp
     - evoluir-habilidade
 ---
 
@@ -25,6 +26,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Cadência de relatório": "semanal"
 # `Ao fim do período` é `pausar`, que pausa a rotina de uma campanha ou de um projeto quando o período acaba, ou `perguntar`.
 "Ao fim do período": "pausar"
+# `Pausar a própria rotina` é `tentar e perguntar`, em que a execução agendada tenta pausar a si mesma e, se a ferramenta recusar, avisa a pessoa, ou `perguntar`, em que ela só avisa.
+"Pausar a própria rotina": "tentar e perguntar"
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -67,6 +70,12 @@ Limpeza, atualização de status e processamento pesado que não avisam ninguém
 Quando várias pessoas precisam do mesmo resultado, a rotina publica num canal compartilhado, em vez de cada uma pedir o mesmo numa conversa.
 A rotina de uma campanha, de um projeto ou de outro período limitado leva a data de fim.
 Quando o período acaba, siga `Ao fim do período`: com `pausar`, pause a rotina com o motivo na descrição dela; com `perguntar`, pergunte à pessoa.
+Não assuma se a execução agendada consegue pausar a si mesma: umas ferramentas de agendamento deixam, outras pedem a aprovação de uma pessoa que não está na execução.
+O prompt da rotina com condição de parada, como a primeira resposta ou a data de fim, segue `Pausar a própria rotina`.
+Com `tentar e perguntar`, ele manda a execução tentar a pausa uma vez, com o motivo na descrição, e, se a chamada falhar, avisar numa linha que a condição chegou e que a pessoa pausa a rotina pelo nome dela.
+Com `perguntar`, ele manda só o aviso, sem chamar a ferramenta.
+A resposta que cria a rotina diz isso. Na próxima conversa com a pessoa, pause as rotinas cuja condição já chegou.
+Rotinas que usam a mesma sessão de navegador, como o WhatsApp Web, viram uma rotina só, que lê todos os itens na mesma execução. Duas execuções no mesmo horário abrem cada uma a própria aba e tomam a conexão uma da outra.
 
 ### Passo 5
 
@@ -102,10 +111,18 @@ Se você criar uma rotina que confere o consumo de uso, cada conferência també
 
 ### Duas rotinas para a mesma fonte
 
-Se você criar uma rotina sem procurar as que existem, duas rotinas leem a mesma fonte e o uso dobra.
+Se você criar uma rotina sem procurar as que existem, duas rotinas leem a mesma fonte e o uso dobra. Quando a fonte é uma sessão de navegador, as duas disparam juntas e uma derruba a conexão da outra.
 
 1. Liste as rotinas no Passo 1.
 2. Ajuste a que já lê a fonte.
+
+### Rotina que manda se pausar
+
+Se você escrever no prompt que a execução agendada pause a si mesma sem dizer o que fazer quando a ferramenta recusa, a chamada falha por falta de aprovação e a rotina segue rodando, tentando de novo a cada execução.
+
+1. No prompt, siga `Pausar a própria rotina`, com o aviso numa linha quando a pausa falhar ou não for tentada.
+2. Diga à pessoa que ela pausa a rotina pelo nome.
+3. Na próxima conversa, pause as rotinas cuja condição já chegou.
 
 ## Exemplos de entrada e saída
 
