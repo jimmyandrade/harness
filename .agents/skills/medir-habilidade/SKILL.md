@@ -3,9 +3,10 @@ name: medir-habilidade
 description: Use essa habilidade sempre que for medir o tamanho de uma skill ou o profiling de uma execução no Claude, no Cursor ou em outro harness, mesmo sem dizer token, linha ou tempo. NÃO use no Notion, nem abra o repositório a partir dele, nem para testar se a skill atendeu o caso, evoluir a skill, nem gravar o eval.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.5.1"
   related:
     - evoluir-habilidade
+    - testar-habilidade
 compatibility: Precisa de Python.
 ---
 
@@ -37,7 +38,7 @@ Se o próximo trecho deixar o corpo sem folga abaixo do limite de tokens, diga i
 ### Passo 4
 
 O profiling lê uma execução que já aconteceu. Diga a duração e o passo que gastou o tempo. Se a duração não estiver no registro, diga que falta. Não invente o número.
-Não diga se a skill atendeu o caso. Isso fica em `evoluir-habilidade`. Não grave `timing.json`, `grading.json` nem `benchmark.json`.
+Não diga se a skill atendeu o caso. Isso fica em `testar-habilidade`. Não grave `timing.json`, `grading.json` nem `benchmark.json`.
 
 ### Passo 5
 
@@ -83,7 +84,7 @@ Se você gravar `timing.json`, `grading.json` ou `benchmark.json`, ou disser que
 
 1. Entregue tamanho ou profiling.
 2. Não grave esses JSON.
-3. Saber se atendeu o caso fica em `evoluir-habilidade`.
+3. Saber se atendeu o caso fica em `testar-habilidade`.
 
 ## Exemplos de entrada e saída
 
@@ -107,7 +108,7 @@ li o registro. Disse a duração e o passo que gastou o tempo. Sem duração no 
 - A skill mudou: meça o tamanho e entregue os números, mesmo sem pedido explícito.
 - Não houve execução: não há profiling. Meça só o tamanho.
 - O script não está no harness: não invente os números. Diga que a medição não rodou.
-- A pessoa pergunta se a skill atendeu o caso: use `evoluir-habilidade`.
+- A pessoa pergunta se a skill atendeu o caso: use `testar-habilidade`.
 
 ## Pegadinhas
 

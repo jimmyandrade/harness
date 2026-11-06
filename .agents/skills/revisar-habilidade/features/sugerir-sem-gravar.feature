@@ -2,7 +2,7 @@
 
 Funcionalidade: Sugerir testes sem gravar
   A revisão sinaliza e sugere.
-  Quem grava o Gherkin é evoluir-habilidade.
+  Quem grava o Gherkin é testar-habilidade.
 
   Regra: A sugestão fica na resposta
 
