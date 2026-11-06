@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.19.0"
+  version: "0.20.0"
   related:
     - procurar-oportunidade
     - definir-grupo-de-oportunidades
