@@ -263,6 +263,24 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses the group, checking whether the opportunity exists, organizing the participation, registering someone, creating a task, and reading an image
 
+### criar-ponto-de-contato
+- **Stability**: experimental
+- **Description**: Create the page of a physical contact point from an existing opportunity, and fix the number, cycle, visual order, status, or start of a point that already exists
+- **Properties**:
+  - Lives at `.agents/skills/criar-ponto-de-contato/SKILL.md`
+  - Searches both lists for the name, uses an existing point instead of creating a second one, asks when several match, and sends a missing opportunity to criar-oportunidade
+  - Links one opportunity and the relations the data mapping requires, and leaves a missing group to definir-grupo-de-oportunidades
+  - Numbers the title by the highest number found in the point names plus one, not by the visual order alone, and writes the same number in the visual order
+  - Fills the cycle with the period that contains the start date, because a point without a cycle disappears from the quarterly view
+  - Starts the status at "Não iniciada" unless the person says another, and does not move it for a confirmed participation, a reservation, or a pre-production mention
+  - Writes the start only from a date the person said or the opportunity confirms, treats a provisional reservation as no date, saves the date and time when the opening time is known, saves a single date when there is no time, and says when the start stayed empty
+  - Fills a missing cycle and an empty visual order without asking, renumbers a repeated number without asking, and asks which status applies when the date has passed and the status is from an earlier phase
+  - Writes the event date in replies with the weekday, formatted from the YAML mapping under Parâmetros de configuração
+  - Leaves the planning, the calendar event, and the trip to organizar-ponto-de-contato and definir-viagem
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses registering the opportunity, planning what is left to organize, writing the calendar event, organizing a trip, and creating a task
+
 ### criar-pull-request
 - **Stability**: experimental
 - **Description**: Open and update a pull request without pushing to the base branch, and hand the merge to mesclar-pull-request
@@ -1445,6 +1463,7 @@ How these skills relate is in `README.md`, in this folder.
   - Writes a contact-point event on the calendar of `Agendas` whose purpose is contact points, or the default calendar, ignores a calendar whose use is `ignorada` even when history still names it, records the contact point scope and the canonical page in the description, migrates an event from another editable calendar and cancels the old one, and when the old calendar cannot be edited creates the equivalent event and says the duplicate must be removed manually
   - Treats Pontos de contato as the canonical order and number, does not split an event only because the calendar title number differs, updates that title after the other identifiers match, and asks before renaming when the match stays ambiguous
   - Reads the editable calendar and the removed calendar from the YAML mapping under Parâmetros de configuração
+  - Leaves creating the page of the point and fixing its number, cycle, visual order, status, or start to criar-ponto-de-contato
   - Leaves organizing a trip to definir-viagem
   - Leaves the closing, the settlement with the partner and the cash closing to fazer-fechamento
   - Treats contact points as one list and opportunities as another

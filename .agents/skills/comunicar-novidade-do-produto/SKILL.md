@@ -1,9 +1,9 @@
 ---
 name: comunicar-novidade-do-produto
-description: Use essa habilidade sempre que um PR for mesclado ou alguém perguntar o que há de novo no produto para quem o usa, mesmo sem dizer novidade, para decidir se há o que contar e escrever o comunicado sem termos técnicos. NÃO use para a descrição do PR, o changelog nem release notes técnicas.
+description: Use essa habilidade sempre que um PR for mesclado, alguém perguntar o que há de novo no produto para quem o usa ou for rodar um reparo ou migração de dados que o público usa, mesmo sem dizer novidade, para decidir se há o que contar e escrever o comunicado sem termos técnicos. NÃO use para a descrição do PR, o changelog nem release notes técnicas.
 metadata:
   author: jimmyandrade
-  version: "0.11.1"
+  version: "0.12.0"
   related:
     - evoluir-habilidade
     - redigir-com-tom-de-voz
@@ -52,10 +52,15 @@ flowchart LR
 ```
 
 Sem novidade: dependência, refatoração, CI, teste, documentação interna, reunião. Com novidade: tela, texto, fluxo, comportamento, desempenho que se nota, correção de algo que alguém sentia, dado novo ou que sumiu, e organização dos dados que o público usa, como cadastros consolidados, bancos reorganizados e páginas antigas retiradas.
+Uma operação rodada à mão que muda dado que o público usa, como um reparo, uma migração ou uma carga de dados, também é novidade, mesmo quando o PR que a traz não muda nada sozinho.
 
 ### Passo 3
 
 Escreva o comunicado no `Idioma do comunicado`, para quem não é técnico: o que muda na prática, onde a pessoa percebe, quem é afetado, se precisa fazer algo e a partir de quando. Nunca cite PR, commit, biblioteca, arquivo nem ferramenta interna.
+
+Uma operação rodada à mão leva dois comunicados.
+O primeiro sai antes de ela começar: o que vai mudar, quando começa, quanto tempo leva e como fica o uso enquanto ela roda, como números que mudam aos poucos, uma consulta mais lenta ou um dado que vale esperar para usar.
+O segundo sai quando ela termina: que terminou e o que a pessoa já pode conferir.
 
 Conte a correção pelo problema que a pessoa sentia: "corrigimos um problema que fazia a página demorar", não o novo comportamento isolado.
 
@@ -144,6 +149,14 @@ Se você publicar sem olhar o canal e o PR, outra sessão pode já ter comunicad
 2. Leia as mensagens do canal desde o merge antes de publicar.
 3. Achou: não publique e mostre o comunicado que já saiu.
 
+### Operação sem aviso
+
+Se você rodar um reparo ou uma migração e só comunicar no fim, o time vê os dados mudando no meio e não sabe se pode confiar neles.
+
+1. Antes de começar, avise o que vai mudar, quanto tempo leva e como fica o uso enquanto roda.
+2. Comece só depois do aviso publicado, ou do texto pronto entregue para copiar.
+3. Quando terminar, avise que terminou e o que já dá para conferir.
+
 ### Ação escondida
 
 Se você deixar de dizer que a pessoa precisa fazer algo, a mudança vira problema para ela.
@@ -162,7 +175,7 @@ Três PRs entraram: duas atualizações de dependência e uma correção no form
 
 - Vários PRs da mesma frente: um comunicado só, agrupado.
 - `Quem publica o comunicado` e `Canal do comunicado` estão vazios: pergunte quem publica. Sem canal, o texto vai pronto para copiar.
-- O merge não coloca no ar, como um worker, uma release ou um deploy agendado: diga quando a pessoa vai ver a mudança, não quando o PR entrou.
+- O merge não coloca no ar, como um worker, uma release ou um deploy agendado: diga quando a pessoa vai ver a mudança, não quando o PR entrou. Quando o que coloca no ar é uma operação rodada à mão, como um reparo de dados, são os dois comunicados do Passo 3.
 - A mudança tira algo que as pessoas usavam: diga o que usar no lugar.
 
 ## Pegadinhas
