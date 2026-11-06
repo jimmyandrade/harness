@@ -19,10 +19,13 @@ if [ "$scope" = "deps" ]; then
   exit 0
 fi
 case "$type" in
-  feat) echo "enhancement" ;;
+  feat | perf) echo "enhancement" ;;
   fix) echo "bug" ;;
   docs) echo "documentation" ;;
   ci) echo "ci" ;;
+  refactor) echo "refactor" ;;
+  test) echo "test" ;;
+  chore) echo "chore" ;;
   *)
     echo "No label fits the type $type. Add the label that describes the change." >&2
     exit 1
