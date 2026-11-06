@@ -36,7 +36,7 @@ Saber se já existe fica com `procurar-oportunidade`. Se a edição existe e o p
 
 ### Passo 2
 
-Confira o mapeamento antes de gravar. O título da edição e a data da edição são obrigatórios. O grupo da edição também, quando `Considerar grupos de oportunidades` é `sim`. Se um obrigatório faltar no mapeamento, pare antes de criar e diga qual. Uma propriedade opcional que falta e para a qual o texto traz um valor: grave o resto e, no fim, liste esse valor e sugira criar a propriedade. Não crie a propriedade. Não grave o valor no corpo. Opcional sem valor no texto: nada a fazer.
+Confira o mapeamento antes de gravar. O título da edição e a data da edição são obrigatórios. O grupo da edição também, quando `Considerar grupos de oportunidades` é `sim`. Se um obrigatório faltar no mapeamento, pare antes de criar e diga qual. Uma propriedade opcional que falta e para a qual o texto traz um valor: grave o resto e, no fim, liste esse valor e proponha criar a propriedade, com o nome, o tipo e a descrição que explica a pessoas e a IAs por que ela existe, dentro do limite de tamanho da ferramenta. Crie só com o sim da pessoa. Não grave o valor no corpo. Opcional sem valor no texto: nada a fazer.
 
 ### Passo 3
 
@@ -108,8 +108,8 @@ Se você salvar a edição com o grupo vazio enquanto `Considerar grupos de opor
 Se você criar a propriedade, ou jogar o valor no corpo, porque o mapeamento não tem onde gravar, a lista muda sem a pessoa decidir.
 
 1. Obrigatório ausente: pare antes de criar e diga qual.
-2. Opcional ausente com valor: grave o resto e liste o valor no fim, com a sugestão.
-3. Não crie a propriedade. Não grave no corpo.
+2. Opcional ausente com valor: grave o resto e liste o valor no fim, com a proposta da propriedade: nome, tipo e descrição.
+3. Crie só com o sim da pessoa. Não grave no corpo.
 
 ### Página de processo
 
@@ -189,7 +189,7 @@ a edição entrou sem grupo, com a data no título e na data da edição. Não p
 
 ### o mapeamento não tem as notas de curadoria. O texto traz um comentário sobre o público do evento.
 
-gravei a edição com o resto. No fim, listei o comentário sem propriedade e sugeri criar as notas de curadoria. O corpo não recebeu o comentário.
+gravei a edição com o resto. No fim, listei o comentário sem propriedade e propus as notas de curadoria, como texto, com a descrição de por que elas existem. O corpo não recebeu o comentário.
 
 ### revise as anotações da edição. O bloco diz que o evento foi em Cidade Exemplo, sem dia e sem valor.
 
@@ -225,7 +225,7 @@ localidade só entra se a página já existe. Data e taxa ficaram vazias. A pend
 - A data numérica parece bastar. O título e a resposta levam o dia da semana, calculado com a data, o horário e o fuso. A data da edição continua um intervalo válido.
 - Data anterior à `Data mínima da edição`, ou à fundação do negócio, parece válida. A propriedade não aceita.
 - "Link na bio" parece um endereço. Sem URL, o campo fica vazio.
-- Uma propriedade ausente parece pedir para ser criada. Esta habilidade não cria schema. Ela sugere.
+- Uma propriedade ausente parece pedir para ser criada já. Esta habilidade propõe o nome, o tipo e a descrição, e cria só com o sim da pessoa.
 - Seleção, inscrição, edital e chamada parecem outra oportunidade. São conteúdo do grupo ou da edição.
 - Criar o grupo junto da edição parece um passo só. O grupo fica com `definir-grupo-de-oportunidades`.
 

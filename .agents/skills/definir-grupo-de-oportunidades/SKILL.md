@@ -38,7 +38,7 @@ flowchart LR
 
 A lista de grupos, a lista de oportunidades e o nome de cada propriedade vêm do mapeamento de dados do projeto, no workspace conectado. Este texto usa os conceitos: no grupo, o título do grupo, o nome canônico, os aliases, o organizador, a empresa ou local padrão, o local fixo, os perfis oficiais, a etiqueta de e-mail do grupo, a categoria e as notas do grupo; na edição, a data da edição, o grupo da edição e os perfis da edição. Se a lista não estiver nessa conexão, pare. Não use a lista de outro workspace. A edição, com data, fica com `criar-oportunidade`. Saber se a edição já existe fica com `procurar-oportunidade`.
 
-Se o mapeamento não tiver o título do grupo, ou a lista de oportunidades não tiver o grupo da edição, pare antes de criar e diga qual falta. Um valor que caberia numa propriedade opcional ausente do mapeamento não vai para o corpo. Grave o resto e, no fim, liste esse valor e sugira criar a propriedade. Não crie a propriedade.
+Se o mapeamento não tiver o título do grupo, ou a lista de oportunidades não tiver o grupo da edição, pare antes de criar e diga qual falta. Um valor que caberia numa propriedade opcional ausente do mapeamento não vai para o corpo. Grave o resto e, no fim, liste esse valor e proponha criar a propriedade, com o nome, o tipo e a descrição que explica a pessoas e a IAs por que ela existe, dentro do limite de tamanho da ferramenta. Crie só com o sim da pessoa.
 
 ### Passo 3
 
@@ -140,7 +140,7 @@ Se você criar a propriedade, ou jogar o valor no corpo, porque o mapeamento nã
 
 1. Sem o título do grupo ou sem o grupo da edição no mapeamento: pare antes de criar e diga qual falta.
 2. Propriedade opcional ausente com valor: grave o resto e liste o valor no fim.
-3. Sugira criar a propriedade. Não crie.
+3. Proponha a propriedade, com nome, tipo e descrição. Crie só com o sim da pessoa.
 
 ## Exemplos de entrada e saída
 
@@ -202,7 +202,7 @@ este negócio não usa grupos de oportunidades. Parei sem criar.
 - A página sem data na lista de oportunidades parece o grupo certo. O grupo fica na lista de grupos.
 - Arquivar antes da cópia parece limpeza. A cópia e o vínculo das edições vêm primeiro.
 - Encerrar depois de criar parece o fim. A checagem da duplicata vem antes. Duplicata em aberto não é tarefa concluída.
-- O valor sem propriedade parece caber no corpo. Ele vai para a lista do fim, com a sugestão de criar a propriedade.
+- O valor sem propriedade parece caber no corpo. Ele vai para a lista do fim, com a proposta da propriedade.
 
 ## Scripts disponíveis
 
