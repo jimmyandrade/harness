@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.17.0"
+  version: "0.18.0"
   related:
     - comunicar-novidade-do-produto
     - definir-agenda
@@ -79,6 +79,8 @@ flowchart LR
 Para registrar a demanda, leve a data e o horário da primeira mensagem do pedido como data da demanda.
 
 ### Passo 5
+
+Antes de rascunhar, leia a conversa de destino desde a última mensagem que você leu nela, seguindo o Passo 2. A pessoa pode ter escrito ali por conta própria. Tire do rascunho o que já foi dito na conversa e diga, antes do texto, o que ele acrescenta. Se tudo já foi dito, diga isso e não rascunhe.
 
 Todo rascunho de mensagem aparece na resposta do chat, com o texto inteiro num bloco de código, que preserva a formatação do WhatsApp ao copiar.
 Não diga só que o rascunho está pronto.
@@ -232,6 +234,7 @@ Mostrei a conversa do Caio e o texto "Podemos falar 15h00?". Enviei depois do si
 
 ## Pegadinhas
 
+- O rascunho pedido ontem parece continuar valendo. A pessoa pode ter escrito na conversa por conta própria no meio-tempo: leia antes e rascunhe só o que falta.
 - No campo de mensagem, Enter envia. A quebra de linha é shift+Enter.
 - O campo numera a lista sozinho depois de "1. ". Digitar "2." no item seguinte duplica o número: digite só o texto dos itens seguintes.
 - Depois de uma lista, o campo tira a linha em branco antes do parágrafo seguinte.
