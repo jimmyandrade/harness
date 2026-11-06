@@ -958,6 +958,7 @@ How these skills relate is in `README.md`, in this folder.
   - Cleanup, status updates, and heavy processing that alert no one run in `Janela de manutenção`, outside business hours
   - A routine of a campaign or a project carries its end date, and `Ao fim do período`, `pausar` by default, pauses it when the period ends
   - A routine that alerts a person or sends a message runs only within `Horário comercial`
+  - Does not assume a scheduled run can or cannot pause itself. `Pausar a própria rotina`, `tentar e perguntar` by default, tries the pause once and, when the tool refuses, reports in one line that the person pauses the routine by name; `perguntar` only reports
   - A standalone audit looks for savings: triggers, fewer runs, merged routines, and pausing instead of deleting. Each proposal says how much it saves, and it applies only after the person confirms
   - Does not create a routine only to watch usage, since each check also consumes
   - Watches a page with no webhook or feed through a page-change monitor that diffs it against its last saved version, fires on a change, and reads only what changed; without a monitor, says one would spare the rereading
@@ -966,6 +967,7 @@ How these skills relate is in `README.md`, in this folder.
   - [ ] Three routines reading the same inbox are proposed as one
   - [ ] A source that changes once a day gets a daily routine, even when asked to poll every minute
   - [ ] A request for a report that a routine already published points to it
+  - [ ] A run whose scheduling tool refuses the self-pause reports in one line and does not retry
 
 ### definir-tarefa
 - **Stability**: experimental

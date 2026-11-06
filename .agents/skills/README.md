@@ -363,6 +363,7 @@ flowchart LR
   definir_reserva --> sincronizar_cronograma
   definir_roteiro_de_video --> evoluir_habilidade
   definir_rotina --> acompanhar_fila_de_revisao
+  definir_rotina --> conversar_no_whatsapp
   definir_rotina --> evoluir_habilidade
   definir_tarefa --> definir_grafia
   definir_tarefa --> procurar_tarefa
