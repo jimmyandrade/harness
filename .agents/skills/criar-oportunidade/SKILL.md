@@ -87,7 +87,7 @@ Na edição, bloco de anotações, reunião, transcrição, resumo ou outro bloc
 
 ### Passo 8
 
-Mostre o título, a data, o grupo, quando há, os arquivos anexados e o link. Liste os valores que ficaram sem propriedade. Não organize a participação. Não inscreva. Não crie tarefa. A resposta não pede para nomear a habilidade.
+Mostre o título, a data, o grupo, quando há, os arquivos anexados e o link. Liste os valores que ficaram sem propriedade. A decisão humana fica vazia e não vira pergunta nem pendência na resposta: ela é da revisão das oportunidades, quando a pessoa quiser. Não organize a participação. Não inscreva. Não crie tarefa. A resposta não pede para nomear a habilidade.
 
 ### Passo 9
 

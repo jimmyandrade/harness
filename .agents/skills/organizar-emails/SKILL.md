@@ -151,7 +151,7 @@ A conversa que a pessoa respondeu recebe a etiqueta de respondida e perde a da a
 
 Não crie tarefa nem evento: ofereça `definir-tarefa` ou `definir-agenda`.
 
-Conversa que anuncia evento, oficina, edital, programa ou benefício com prazo é uma oportunidade, mesmo com a data passada: a pessoa pode ter ido, e a próxima edição volta. Siga `procurar-oportunidade` com o nome, a edição e a data. Achada, a conversa recebe a etiqueta de e-mail que a edição ou o grupo dela registra, e a resposta traz o link e o status. Sem cadastro, cadastre por `criar-oportunidade`, sem perguntar. A inscrição e a presença seguem `definir-inscricao`, com o sim da pessoa.
+Conversa que anuncia evento, oficina, edital, programa ou benefício com prazo é uma oportunidade, mesmo com a data passada: a pessoa pode ter ido, e a próxima edição volta. Siga `procurar-oportunidade` com o nome, a edição e a data. Achada, a conversa recebe a etiqueta de e-mail que a edição ou o grupo dela registra, e a resposta traz o link e o status. Sem cadastro, cadastre por `criar-oportunidade`, sem perguntar. A decisão de participar fica para a revisão das oportunidades: não a cobre na triagem. A inscrição e a presença seguem `definir-inscricao`, com o sim da pessoa.
 
 ```mermaid
 flowchart LR
