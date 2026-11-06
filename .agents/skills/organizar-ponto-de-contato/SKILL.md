@@ -1,15 +1,16 @@
 ---
 name: organizar-ponto-de-contato
-description: Use essa habilidade sempre que for planejar, organizar ou criar a página de um ponto de contato físico, inclusive pop-up, mesmo quando for uma feira, ou quando um lembrete citar o ponto sem a ligação, mesmo sem dizer organizar. NÃO use para cadastrar a oportunidade, saber se a oportunidade já existe, organizar a viagem, redigir o título, o prazo ou a definição de concluído da tarefa, saber se a tarefa já existe, nem inscrever alguém.
-allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-pages notion:notion-update-page
+description: Use essa habilidade sempre que for planejar ou organizar um ponto de contato físico, inclusive pop-up, mesmo quando for uma feira, ou quando um lembrete citar o ponto sem a ligação, mesmo sem dizer organizar. NÃO use para criar a página do ponto, cadastrar a oportunidade, saber se a oportunidade já existe, organizar a viagem, redigir o título, o prazo ou a definição de concluído da tarefa, saber se a tarefa já existe, nem inscrever alguém.
+allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-update-page
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.16.0"
+  version: "0.17.0"
   aliases:
     - organizar-feira
   related:
     - criar-oportunidade
+    - criar-ponto-de-contato
     - definir-agenda
     - definir-grupo-de-oportunidades
     - definir-tarefa
@@ -59,31 +60,8 @@ Não preencha fórmula, rollup nem botão. Não copie o dia do lembrete para o i
 
 ### Passo 4
 
-Cadastrar a oportunidade fica com `criar-oportunidade`. Não crie a página aqui.
-
-Ao criar um ponto de contato, o título vai em Nome.
-O ponto nasce da oportunidade que a pessoa nomeou ou colou.
-Ligue essa oportunidade, uma só, e as demais relações que o mapeamento do ponto de contato exige, copiando-as da página da oportunidade.
-O número do título é o maior número que aparece no nome dos pontos da lista mais um, no padrão de título dos pontos vizinhos.
-A ordem visual pode estar vazia num ponto antigo, e uma ordenação a põe por último. Leia também os nomes antes de numerar e não repita o número de outro ponto.
-Preencha a ordem visual com o mesmo número do título.
-Preencha o ciclo com o período que contém a data de início da execução, ou da oportunidade quando o ponto não tem data. O ciclo do trimestre anterior esconde o ponto no trimestre certo.
-Ponto sem ciclo ou sem ordem visual some das visões da lista, que filtram e ordenam por esses campos.
-Ao achar um ponto sem ciclo, preencha o ciclo sem perguntar, pela data de início do ponto ou da oportunidade, e diga o que preencheu.
-Sem data para escolher o ciclo, pergunte.
-Preencha também a ordem visual vazia com o número do nome, quando nenhum outro ponto o usa.
-Número repetido no nome: renumere sem perguntar. Fica com o número o ponto mais antigo, e o mais novo recebe o maior número mais um, no nome e na ordem visual. Diga o que renumerou.
-O status começa em Não iniciada, salvo se a pessoa disser outro que a lista já tem.
-Participação confirmada, reserva ou pré-produção citadas nas páginas não mudam o status.
-O início e o fim da execução só entram quando a pessoa disse a data ou quando a oportunidade a traz confirmada.
-Uma reserva provisória não é data confirmada: pergunte, ou deixe vazio e diga que ficou vazio.
-Início da execução vazio no fim da criação: diga isso na resposta, com o que falta para preencher. Não deixe o campo vazio em silêncio.
-A pessoa que disse o dia, ou a reunião que traz o horário de abertura, já bastam: grave o início com data e hora.
-Sem horário, grave só a data, como data única. Não grave intervalo do dia com ele mesmo.
-Ponto cuja data já passou e cujo status é de fase anterior à execução: não deixe o status como está. Pergunte qual status vale e não escolha sozinha.
-
-Mostre o nome, o status e o link do que ligou. Não marque a tarefa como concluída.
-A data do evento na resposta segue o Passo 6.
+Cadastrar a oportunidade fica com `criar-oportunidade`.
+Criar a página do ponto de contato, e corrigir o número, o ciclo, a ordem visual, o status ou o início de um ponto, fica com `criar-ponto-de-contato`. Não crie a página aqui.
 
 ### Passo 5
 
@@ -191,24 +169,6 @@ Se você criar outro ponto de contato ou outra oportunidade com o mesmo nome, a 
 2. Se já existe, use essa página.
 3. Se houver várias, pergunte. Não invente.
 
-### Status ou data inventados na criação
-
-Se você criar o ponto com o status da fase que a oportunidade sugere, ou com a data de uma reserva provisória, a página nasce com um fato que a pessoa não disse.
-
-1. O status começa em Não iniciada, salvo o que a pessoa disser.
-2. O início e o fim da execução só entram quando a pessoa disse a data ou a oportunidade a traz confirmada.
-3. Reserva provisória não é data: pergunte, ou deixe vazio e diga que ficou vazio.
-4. Início vazio: diga na resposta. Sem horário, grave só a data, como data única.
-5. Data já passada com status de fase anterior: pergunte qual status vale.
-
-### Ponto criado fora das visões
-
-Se você numerar só pela ordem visual ou deixar o ciclo e a ordem visual vazios, o número se repete e o ponto não aparece na visão por trimestre.
-
-1. Numere pelo maior número nos nomes dos pontos, mais um.
-2. Preencha a ordem visual com esse número e o ciclo do período da data de início.
-3. Ao achar ponto existente sem ciclo, preencha sem perguntar e diga o que preencheu. Número repetido no nome: renumere sem perguntar e diga.
-
 ### Data do lembrete
 
 Se você copiar o dia do lembrete para o ponto de contato ou a oportunidade, a execução ganha a data da mala.
@@ -265,13 +225,6 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 perguntei qual página da lista de pontos de contato e qual da lista de oportunidades. Não deixei as duas relações vazias. Não inventei a página. O texto e o prazo da tarefa ficam com `definir-tarefa`.
 
-### crie a página nos pontos de contato dessa oportunidade
-
-Busquei o pedaço do nome nas duas listas e achei uma oportunidade.
-Numerei o ponto pelo maior número da ordem visual mais um e liguei a oportunidade.
-Deixei o status em Não iniciada e as datas vazias, porque a data era só uma reserva provisória.
-Mostrei o nome, o status e o link, e perguntei a data.
-
 ### organizar a pop-up e já existem duas páginas com o nome Minas Moda.
 
 mostrei o nome e o link de cada uma e perguntei qual entra. Tratei as duas como ponto de contato. Não criei uma terceira.
@@ -322,10 +275,7 @@ Removi o evento da sexta. A agenda manteve o domingo.
 - O pedido só nomeia o ponto e não diz a página: pergunte. Não crie com as relações vazias.
 - Várias páginas com o mesmo pedaço: pergunte. Não escolha sozinho.
 - Nenhuma página: não crie aqui. Cadastrar fica com `criar-oportunidade`.
-- Ponto existente sem ciclo: preencha o ciclo sem perguntar e diga. Sem data para escolher o ciclo, pergunte.
-- Ponto com número repetido no nome: renumere sem perguntar e diga o que mudou.
-- Ponto com data passada e status de fase anterior, ou com início vazio ou em intervalo sem horário: diga ao achar. Data e horário sabidos, grave. Status, pergunte.
-- O pedido é criar a página do ponto de uma oportunidade que existe: siga o Passo 4. A data só reservada deixa o início e o fim vazios.
+- O pedido é criar a página do ponto de uma oportunidade que existe, ou corrigir número, ciclo, ordem visual, status ou início de um ponto: siga `criar-ponto-de-contato`.
 - A pessoa não deu a data do ponto de contato nem da oportunidade: pergunte. O dia do lembrete não preenche esses campos.
 - Grupo de oportunidade não veio: fica com `definir-grupo-de-oportunidades`. Não invente.
 - A pergunta é o que falta: relate o que as páginas já registram. Não crie tarefa. Não peça para nomear a habilidade.
@@ -351,7 +301,6 @@ Removi o evento da sexta. A agenda manteve o domingo.
 - A oportunidade no ponto de contato cabe uma página. Várias parecem caber. Não cabem.
 - O "hoje" do lembrete parece a data do ponto de contato. É o prazo da tarefa.
 - A data numérica parece bastar. A resposta leva o dia da semana, calculado com a data, o horário e o fuso.
-- A participação confirmada na oportunidade parece pedir um status adiantado. O status de um ponto novo é Não iniciada, salvo o que a pessoa disser.
 - Uma página com o nome parecido parece outro ponto. Busque o pedaço e as Variações de nome antes de criar.
 - Fechar com "mencione a habilidade na próxima vez" parece cuidar dos créditos. A resposta não pede isso.
 - A agenda ignorada parece destino porque o histórico ainda a cita. Ela não é referência operacional. O evento fica na agenda do ponto de contato.
