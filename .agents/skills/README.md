@@ -126,6 +126,7 @@ flowchart LR
     rotular_item["rotular-item"]
     sincronizar_cronograma["sincronizar-cronograma"]
     sincronizar_status_da_tarefa["sincronizar-status-da-tarefa"]
+    testar_habilidade["testar-habilidade"]
     testar_ponta_a_ponta["testar-ponta-a-ponta"]
     validar_plano_de_vocabulario["validar-plano-de-vocabulario"]
   end
@@ -220,6 +221,7 @@ flowchart LR
   criar_habilidade --> descrever_habilidade_ou_schema
   criar_habilidade --> evoluir_habilidade
   criar_habilidade --> medir_habilidade
+  criar_habilidade --> testar_habilidade
   criar_oportunidade --> definir_grupo_de_oportunidades
   criar_oportunidade --> procurar_oportunidade
   criar_pull_request --> atualizar_branch_do_pull_request
@@ -361,6 +363,7 @@ flowchart LR
   definir_reserva --> sincronizar_cronograma
   definir_roteiro_de_video --> evoluir_habilidade
   definir_rotina --> acompanhar_fila_de_revisao
+  definir_rotina --> conversar_no_whatsapp
   definir_rotina --> evoluir_habilidade
   definir_tarefa --> definir_grafia
   definir_tarefa --> procurar_tarefa
@@ -394,6 +397,7 @@ flowchart LR
   descrever_habilidade_ou_schema --> criar_pull_request
   descrever_habilidade_ou_schema --> evoluir_habilidade
   descrever_habilidade_ou_schema --> revisar_habilidade
+  descrever_habilidade_ou_schema --> testar_habilidade
   emitir_documento_oficial --> evoluir_habilidade
   enviar_mensagem_no_slack --> definir_agenda
   enviar_mensagem_no_slack --> definir_pessoa
@@ -425,6 +429,7 @@ flowchart LR
   evoluir_habilidade --> descrever_habilidade_ou_schema
   evoluir_habilidade --> medir_habilidade
   evoluir_habilidade --> revisar_habilidade
+  evoluir_habilidade --> testar_habilidade
   extrair_tarefas_da_reuniao --> definir_registro_de_reuniao
   extrair_tarefas_da_reuniao --> definir_tarefa
   extrair_tarefas_da_reuniao --> evoluir_habilidade
@@ -498,6 +503,7 @@ flowchart LR
   limpar_copias_de_trabalho --> evoluir_habilidade
   limpar_copias_de_trabalho --> liberar_espaco_em_disco
   medir_habilidade --> evoluir_habilidade
+  medir_habilidade --> testar_habilidade
   mesclar_pull_request --> atender_revisao_de_pull_request
   mesclar_pull_request --> atualizar_branch_do_pull_request
   mesclar_pull_request --> comunicar_novidade_do_produto
@@ -614,6 +620,7 @@ flowchart LR
   revisar_habilidade --> criar_pull_request
   revisar_habilidade --> descrever_habilidade_ou_schema
   revisar_habilidade --> evoluir_habilidade
+  revisar_habilidade --> testar_habilidade
   revisar_uso_do_tempo --> definir_agenda
   revisar_uso_do_tempo --> definir_agenda_de_popstar
   revisar_uso_do_tempo --> procurar_agenda
@@ -632,6 +639,10 @@ flowchart LR
   sincronizar_status_da_tarefa --> evoluir_habilidade
   sincronizar_status_da_tarefa --> levantar_contexto_do_pull_request
   sincronizar_status_da_tarefa --> mesclar_pull_request
+  testar_habilidade --> descrever_habilidade_ou_schema
+  testar_habilidade --> evoluir_habilidade
+  testar_habilidade --> medir_habilidade
+  testar_habilidade --> revisar_habilidade
   testar_ponta_a_ponta --> definir_issue_do_github
   testar_ponta_a_ponta --> escrever_teste
   testar_ponta_a_ponta --> evoluir_habilidade
