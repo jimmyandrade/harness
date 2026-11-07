@@ -85,9 +85,9 @@ flowchart LR
     extrair_tarefas_da_reuniao["extrair-tarefas-da-reuniao"]
     fatiar_pull_request["fatiar-pull-request"]
     fazer_fechamento["fazer-fechamento"]
-    fazer_inscricao["fazer-inscricao"]
     fechar_pull_request["fechar-pull-request"]
     formalizar_decisao["formalizar-decisao"]
+    garantir_ingresso["garantir-ingresso"]
     gerenciar_estoque["gerenciar-estoque"]
     gravar_termos_no_vocabulario["gravar-termos-no-vocabulario"]
     identificar_duplicata["identificar-duplicata"]
@@ -316,7 +316,7 @@ flowchart LR
   definir_grupo_de_oportunidades --> criar_oportunidade
   definir_grupo_de_oportunidades --> procurar_oportunidade
   definir_inscricao --> definir_grafia
-  definir_inscricao --> fazer_inscricao
+  definir_inscricao --> garantir_ingresso
   definir_inscricao --> procurar_inscricao
   definir_inscricao --> procurar_oportunidade
   definir_instrucoes_do_projeto --> criar_habilidade
@@ -466,11 +466,6 @@ flowchart LR
   fazer_fechamento --> lancar_despesa_da_empresa
   fazer_fechamento --> organizar_ponto_de_contato
   fazer_fechamento --> revisar_financas
-  fazer_inscricao --> abrir_vendas_na_tiqueteira
-  fazer_inscricao --> definir_inscricao
-  fazer_inscricao --> definir_pessoa
-  fazer_inscricao --> evoluir_habilidade
-  fazer_inscricao --> procurar_oportunidade
   fechar_pull_request --> atender_revisao_de_pull_request
   fechar_pull_request --> atualizar_branch_do_pull_request
   fechar_pull_request --> criar_pull_request
@@ -484,6 +479,13 @@ flowchart LR
   formalizar_decisao --> definir_registro_de_reuniao
   formalizar_decisao --> enviar_mensagem_no_slack
   formalizar_decisao --> preparar_tarefa_do_pull_request
+  garantir_ingresso --> abrir_vendas_na_tiqueteira
+  garantir_ingresso --> definir_empresa
+  garantir_ingresso --> definir_inscricao
+  garantir_ingresso --> definir_pessoa
+  garantir_ingresso --> evoluir_habilidade
+  garantir_ingresso --> procurar_oportunidade
+  garantir_ingresso --> redigir_com_tom_de_voz
   gerenciar_estoque --> definir_ativo_imobilizado
   gerenciar_estoque --> definir_lancamento_financeiro
   gerenciar_estoque --> identificar_duplicata
