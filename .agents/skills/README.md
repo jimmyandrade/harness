@@ -103,6 +103,7 @@ flowchart LR
     organizar_ponto_de_contato["organizar-ponto-de-contato"]
     pedir_revisao_de_pr_no_slack["pedir-revisao-de-pr-no-slack"]
     perfilar_tom_de_voz["perfilar-tom-de-voz"]
+    pesquisar_compra["pesquisar-compra"]
     planejar_calendario_de_conteudo["planejar-calendario-de-conteudo"]
     preparar_tarefa_do_pull_request["preparar-tarefa-do-pull-request"]
     priorizar_itens["priorizar-itens"]
@@ -563,6 +564,11 @@ flowchart LR
   perfilar_tom_de_voz --> definir_vocabulario
   perfilar_tom_de_voz --> evoluir_habilidade
   perfilar_tom_de_voz --> redigir_com_tom_de_voz
+  pesquisar_compra --> definir_ativo_imobilizado
+  pesquisar_compra --> evoluir_habilidade
+  pesquisar_compra --> gerenciar_estoque
+  pesquisar_compra --> identificar_duplicata
+  pesquisar_compra --> lancar_despesa_da_empresa
   planejar_calendario_de_conteudo --> criar_ideia_de_conteudo
   planejar_calendario_de_conteudo --> definir_campanha_de_conteudo
   planejar_calendario_de_conteudo --> definir_reel_do_instagram
