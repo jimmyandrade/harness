@@ -5,14 +5,14 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet. A busca na lista de inscrições usa notion-ai-search no servidor notion.
 metadata:
   author: jimmyandrade
-  version: "0.9.0"
+  version: "0.9.1"
   aliases:
     - atualizar-inscricao
   related:
     - procurar-oportunidade
     - procurar-inscricao
     - definir-grafia
-    - fazer-inscricao
+    - garantir-ingresso
 ---
 
 # Definir inscrição
@@ -47,7 +47,15 @@ Sem quem fez a inscrição e sem a pessoa ou empresa, exija essas marcações. N
 
 ### Passo 3
 
-Na linha que já existe, mude só a propriedade que a pessoa nomeou. A foto do pedido que ela enviou entra nos comprovantes na mesma gravação, mesmo sem ela nomear essa propriedade. Não grave a foto no corpo. O arquivo sobe por upload e entra numa atualização da página depois de criá-la: a criação não aceita o arquivo enviado. Quando a mensagem ou a foto confirma a participação, o status da inscrição passa ao de inscrição confirmada. O valor é um status que a lista já tem. Não invente status. Na linha nova, grave a edição, o status, quem fez a inscrição, a pessoa ou empresa e a foto nos comprovantes. Sem esses dois, não cadastre. A data da confirmação é a que a pessoa disse ou, quando `fazer-inscricao` viu o pedido confirmado na tela, o dia dessa tela. Sem nenhuma das duas, deixe a data vazia. Se ela disser o dia em que enviou a inscrição, grave esse dia na data do envio. Quando `fazer-inscricao` enviou, grave o dia e a hora do pedido. Sem o horário, grave o dia e não pergunte a hora. Não invente o horário. Não escreva o status nas observações nem no corpo. Não grave código, número do pedido nem valor. Não preencha fórmula, rollup nem propriedade que copia um dado da pessoa ou da edição.
+Na linha que já existe, mude só a propriedade que a pessoa nomeou. Na linha nova, grave a edição, o status, quem fez a inscrição, a pessoa ou empresa e a foto nos comprovantes. Sem esses dois, não cadastre.
+
+Quando a mensagem ou a foto confirma a participação, o status da inscrição passa ao de inscrição confirmada. O valor é um status que a lista já tem. Não invente status. Não escreva o status nas observações nem no corpo.
+
+A foto do pedido que ela enviou entra nos comprovantes na mesma gravação, mesmo sem ela nomear essa propriedade. Não grave a foto no corpo. O arquivo sobe por upload e entra numa atualização da página depois de criá-la: a criação não aceita o arquivo enviado.
+
+A data da confirmação é a que a pessoa disse ou, quando `garantir-ingresso` viu o pedido confirmado na tela, o dia dessa tela. Sem nenhuma das duas, deixe a data vazia. Se ela disser o dia em que enviou a inscrição, grave esse dia na data do envio. Quando `garantir-ingresso` enviou, grave o dia e a hora do pedido. Sem o horário, grave o dia e não pergunte a hora. Não invente o horário.
+
+Não grave código, número do pedido nem valor. Não preencha fórmula, rollup nem propriedade que copia um dado da pessoa ou da edição.
 
 Se o mapeamento não tiver a edição, o status, quem fez a inscrição ou a pessoa ou empresa, pare antes de criar e diga qual falta. Um valor que caberia numa propriedade opcional ausente do mapeamento não vai para o corpo. Grave o resto e, no fim, liste esse valor e sugira criar a propriedade. Não crie a propriedade.
 
@@ -75,11 +83,11 @@ Se você escrever o status novo nas observações ou no corpo, a propriedade con
 
 ### Data inventada
 
-Se você preencher a data da confirmação sem a pessoa dizer a data e sem a tela confirmada de `fazer-inscricao`, a confirmação ganha um dia que ninguém informou.
+Se você preencher a data da confirmação sem a pessoa dizer a data e sem a tela confirmada de `garantir-ingresso`, a confirmação ganha um dia que ninguém informou.
 
 1. Mude só o status.
 2. Deixe a data vazia.
-3. Preencha a data só quando a pessoa disser qual é ou quando `fazer-inscricao` viu o pedido confirmado.
+3. Preencha a data só quando a pessoa disser qual é ou quando `garantir-ingresso` viu o pedido confirmado.
 
 ### Hora exigida
 
@@ -87,7 +95,7 @@ Se você pedir o horário quando a pessoa só disse o dia do envio, a data fica 
 
 1. Grave esse dia na data do envio.
 2. Sem horário, não invente a hora e não pergunte.
-3. A data da confirmação continua vazia se ela não disse essa data e `fazer-inscricao` não viu o pedido confirmado.
+3. A data da confirmação continua vazia se ela não disse essa data e `garantir-ingresso` não viu o pedido confirmado.
 
 ### Comprovante fora da propriedade
 
@@ -138,7 +146,7 @@ busquei a inscrição da Loja Exemplo como expositora no Festival Rota Sul 2026.
 - O status já é o pedido: diga e não grave de novo.
 - Há mais de uma inscrição e a pessoa não indicou a página: nomeie cada uma e pergunte qual alterar. Não atualize. A comemoração espera a gravação.
 - A mensagem confirma uma participação: mude só a inscrição dessa participação.
-- A pessoa não disse a data: deixe a data da confirmação vazia, salvo quando `fazer-inscricao` viu o pedido confirmado na tela.
+- A pessoa não disse a data: deixe a data da confirmação vazia, salvo quando `garantir-ingresso` viu o pedido confirmado na tela.
 - A pessoa disse o dia do envio e não disse a hora: grave o dia na data do envio. Não pergunte o horário.
 - A lista de inscrições não está no workspace conectado: pare. Não use outra lista.
 - O mapeamento não tem a edição, o status, quem fez a inscrição ou a pessoa ou empresa: pare antes de criar e diga qual falta.
@@ -154,7 +162,7 @@ busquei a inscrição da Loja Exemplo como expositora no Festival Rota Sul 2026.
 - O corpo pode dizer que a inscrição não confirma a participação. Esse texto é o espelho do formulário. A confirmação fica no status. Não reescreva o corpo.
 - Uma propriedade que copia o e-mail da pessoa, a data da edição ou um link do formulário parece pedir valor. Ela não se grava.
 - Uma confirmação de expositor não confirma as outras inscrições do mesmo evento.
-- A data da confirmação só entra se a pessoa disser a data ou se `fazer-inscricao` viu o pedido confirmado na tela.
+- A data da confirmação só entra se a pessoa disser a data ou se `garantir-ingresso` viu o pedido confirmado na tela.
 - A criação da página parece aceitar o arquivo enviado nos comprovantes. Ela recusa: o arquivo entra na atualização seguinte.
 
 ## Scripts disponíveis
