@@ -3,7 +3,7 @@ name: atualizar-branch-do-pull-request
 description: Use essa habilidade sempre que uma branch com pull request estiver atrás da base, tiver conflito ou precisar de rebase, mesmo sem dizer rebase. NÃO use para abrir o PR, fazer o primeiro push nem mesclar (use criar-pull-request).
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.7.0"
   related:
     - criar-pull-request
     - atender-revisao-de-pull-request
@@ -30,8 +30,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 ### Passo 1
 
 Siga `Cópia de trabalho` antes de mexer na branch.
-Se a branch já tem PR, confira o estado dele antes de atualizar.
-Se já foi mesclado, a branch remota foi apagada: comece uma branch nova a partir da `Branch base` remota e leve só os commits que ficaram fora do merge.
+Se a branch já tem PR, confira o estado dele antes de atualizar e antes de cada push, mesmo sem rebase: ele pode ter sido mesclado depois do último push, e a branch remota pode continuar lá.
+Se já foi mesclado, o commit novo não entra nele: comece uma branch nova a partir da `Branch base` remota e leve só os commits que ficaram fora do merge.
 Se a branch do PR aberto precisa de outro nome, como a `cursor/…` que a ferramenta criou, renomear fecha o PR.
 Abra um PR novo da branch renomeada, com o mesmo título e corpo, e feche o antigo por `fechar-pull-request`, com o link do novo como prova.
 O corpo do novo abre com um alerta `> [!NOTE]` do GitHub com o link do antigo, antes do resto do corpo.
@@ -77,7 +77,7 @@ Se você mesclar a base na branch, o PR ganha um commit `merge:` e a história d
 
 Se você rebasear e enviar a branch de um PR já mesclado, o push recria a branch apagada com commits que já estão na base.
 
-1. Confira o estado do PR no Passo 1.
+1. Confira o estado do PR no Passo 1, antes de cada push.
 2. Leve só os commits que ficaram fora do merge para uma branch nova.
 
 ### Revisão perdida no rebase

@@ -3,7 +3,7 @@ name: mesclar-pull-request
 description: Mescla um pull request aberto na branch base e faz o que vem depois do merge, inclusive quando a pessoa avisa que mesclou. Usada quando a pessoa pede para mesclar, colocar na main ou diz que um PR foi mesclado, mesmo sem dizer merge. Não serve para fechar sem merge, abrir ou atualizar o PR nem para responder a revisão.
 metadata:
   author: jimmyandrade
-  version: "0.3.1"
+  version: "0.4.0"
   related:
     - atender-revisao-de-pull-request
     - atualizar-branch-do-pull-request
@@ -78,6 +78,7 @@ Se o modo automático negar o merge, não tente de outro jeito: nada de auto-mer
 Depois do merge, feito aqui ou avisado pela pessoa, faça tudo isto na mesma resposta, antes de responder:
 
 - [ ] Confirme o estado MERGED e o hash do commit na base.
+- [ ] Compare o último commit mesclado, o `headRefOid`, com a ponta da branch local e da remota. Commit que chegou depois do merge ficou de fora: leve-o num PR novo, a partir da base, e diga isso na resposta.
 - [ ] Leia os comentários de revisão que ninguém tratou: thread sem resolver, comentário da conversa sem resposta e revisão pendente, que só aparece para quem a escreveu e não segura o merge. Elogio e aviso que só informa não contam.
 - [ ] Procure as tarefas ligadas ao PR: as issues que ele fecha, a chave do card no título ou na branch, e as tarefas que citam o PR.
 - [ ] Para cada tarefa achada, siga `sincronizar-status-da-tarefa`.
@@ -177,7 +178,7 @@ O PR mudava a mensagem de erro do CI para uma branch com o prefixo de um agente 
 
 - Nenhum.
 
-1. Estado: `gh pr view <número> --repo <Repositório> --json state,isDraft,mergeCommit,mergeStateStatus,reviewDecision,closingIssuesReferences`.
+1. Estado: `gh pr view <número> --repo <Repositório> --json state,isDraft,mergeCommit,headRefOid,mergeStateStatus,reviewDecision,closingIssuesReferences`.
 2. Threads, com os comentários da revisão pendente: `gh api graphql -f query='query{repository(owner:"<dono>",name:"<nome>"){pullRequest(number:<número>){reviewDecision reviewThreads(first:100){nodes{isResolved path line comments(first:20){nodes{author{login} body}}}}}}}'`.
 3. Checks: `gh pr checks <número> --repo <Repositório>`.
 4. Fila: `gh api 'repos/<Repositório>/actions/runs?status=queued' --jq '.total_count'` e `gh run list --repo <Repositório> --branch <branch> --status queued --json databaseId,headSha`. Execução substituída: `gh run cancel <id> --repo <Repositório>`.
