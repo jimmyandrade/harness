@@ -1,13 +1,14 @@
 ---
 name: definir-tarefa
-description: Use essa habilidade sempre que for cadastrar, revisar, validar, auditar, editar ou mesclar tarefas, ou quando o gatilho for em um cronograma, página adicionada à base de dados ou propriedade atualizada, mesmo sem dizer definir. NÃO use para só saber se ela já existe, marcar tarefa como concluída, nem transformar uma regra sem entrega em tarefa.
+description: Use essa habilidade sempre que for cadastrar, revisar, validar, editar ou mesclar tarefas a pedido, mesmo sem dizer definir. NÃO use para só saber se ela já existe, revisar tarefas por gatilho em um cronograma ou na base de dados, varrer a lista, marcar tarefa como concluída, nem transformar uma regra sem entrega em tarefa.
 metadata:
   author: jimmyandrade
-  version: "0.16.1"
+  version: "0.17.0"
   aliases:
     - criar-tarefa
     - revisar-tarefa
   related:
+    - auditar-tarefas
     - definir-grafia
     - procurar-tarefa
 ---
@@ -54,15 +55,15 @@ Não ponha no título comentário de bloqueio, como "sem travar produção". Se 
 
 Orientação do tipo "faça sempre", "não faça" ou "siga esta regra", sem entrega clara, não é tarefa. "Enviar mensagem apenas em texto" não é tarefa. Crie só a entrega concreta, como "Enviar comprovante" ou "Confirmar data". A regra, se importar, fica nas observações de uma tarefa que tem entrega, ou como nota.
 
-A definição de concluído é um checklist objetivo e curto. Cada item é evidência verificável: o que existe, foi enviado ou foi registrado. Não é intenção. Cada item está feito ou não está. "Comprovante enviado", "data informada" e "vaga confirmada" são itens. Se o texto vier embolado, separe entrega e boa prática. A entrega vira item da definição de concluído. A boa prática vai para as observações.
+A definição de concluído é um checklist objetivo e curto. Cada item é evidência verificável: o que existe, foi enviado ou foi registrado. Não é intenção. Cada item está feito ou não está. "Comprovante enviado", "data informada" e "vaga confirmada" são itens. Se o texto vier embolado, separe entrega e boa prática. A entrega vira item da definição de concluído. A boa prática vai para as observações. Numa troca, a definição de concluído tem o novo no lugar e o destino do antigo; sem esse destino dito, pergunte.
 
 Não grave no corpo da página a oportunidade, o link nem a observação. O ponto de contato segue a `Habilidade do ponto de contato`, quando as instruções do projeto a indicarem. O link vai no link de referência. A observação vai nas observações.
 
-A tarefa, no conjunto do título, da definição de concluído, dos responsáveis e do prazo, responde a cinco pontos. Específica: o que será realizado, quem é responsável e quais passos. Mensurável: quanto, com um indicador que dá para acompanhar e saber quando chegou. Atingível: a equipe consegue de forma razoável; se a tarefa veio de outra pessoa, as restrições ficam ditas. Relevante: por que ela existe e qual benefício traz. Temporal: até quando está feita, quando começa e quando termina. O prazo é o término. Se o começo não estiver dito, falta o começo. "Ir às gráficas" não responde o que será realizado nem quanto. Se algum ponto faltar, diga o que falta. Não invente o que será realizado, a quantidade, o benefício nem data que a pessoa não disse. Não preencha os responsáveis com alguém que a pessoa não nomeou.
+A tarefa, no conjunto do título, da definição de concluído, dos responsáveis e do prazo, responde a cinco pontos. Específica: o que será realizado, quem é responsável e quais passos. Mensurável: quanto, com um indicador que dá para acompanhar e saber quando chegou. Atingível: a equipe consegue de forma razoável; se a tarefa veio de outra pessoa, as restrições ficam ditas. Relevante: por que ela existe e qual benefício traz. Temporal: até quando está feita, quando começa e quando termina. O prazo é o término. Se o começo não estiver dito, falta o começo, salvo prazo no dia do pedido: o começo é esse dia. "Ir às gráficas" não responde o que será realizado nem quanto. Se algum ponto faltar, diga o que falta. Não invente o que será realizado, a quantidade, o benefício nem data que a pessoa não disse. Não preencha os responsáveis com alguém que a pessoa não nomeou.
 
 ### Passo 4
 
-Se for tarefa nova e faltar um ponto, pergunte antes de criar. Não invente. Quando criar, mostre o nome, o status e o link. Não marque como concluída. Se o prazo já passou, a tarefa não está concluída e há alguém nos responsáveis, avise essa pessoa pelo nome que a tarefa está atrasada. Não marque como concluída por causa do atraso.
+Se for tarefa nova e faltar um ponto, pergunte antes de criar. Não invente. Junto, peça quem responde pela tarefa e os papéis com parâmetro em `sim`, quando a lista os tiver. Papel sem nome fica vazio. Quando criar, mostre o nome, o status e o link. Não marque como concluída, nem por atraso. Se o prazo já passou, a tarefa não está concluída e há alguém nos responsáveis, avise essa pessoa pelo nome que a tarefa está atrasada.
 
 Se for tarefa que já existe, dê o veredicto e o que falta em específica, mensurável, atingível, relevante e temporal. Não pule um ponto. Título que não diz o que será realizado não é correção: "Ir às gráficas" não passa. Prazo vazio e título sem data: diga que está vazio. Não invente a data. Prazo anterior à revisão e status diferente de concluído: diga que venceu, há quantos dias, e avise quem está nos responsáveis. Não marque concluído. Palavra de tempo nas observações sai. A data que já está no prazo permanece. Boa prática sem entrega não permanece como item. Duas tarefas do mesmo trabalho: sugira mesclar e não mescle. "Ir às gráficas e avaliar opções" não permanece. Não copie a data de criação. Se só uma tiver prazo, essa data permanece. Não cite tarefa que a pessoa não pediu. Feche com a lista do que fazer. Não altere título, status, prazo, definição de concluído nem os responsáveis nesta passada. Se a pessoa disser o benefício, grave nas observações nessa resposta, mantendo o que já está, inclusive o fato que ela separou desta tarefa. O verbo fica no presente, como viabiliza e amplia. O status concluído não põe o fato no passado. Vai não entra. Grafia em dúvida: siga `definir-grafia` e grave a forma correta. Não invente a grafia. Ao criar, siga o flowchart de Data fora do alcance.
 
@@ -72,11 +73,7 @@ Se a pessoa pedir para aplicar ou editar, grave só a correção que ela aceitou
 
 ### Passo 6
 
-Se o gatilho for recorrente, em um cronograma, varra a lista. Não leia o workspace inteiro. Sinalize e não grave. Sinalize título com prazo, prazo no lugar errado, campo crítico faltando, tarefa que é só boa prática, e definição de concluído ausente, vaga ou que não dá para verificar.
-
-Se o gatilho for página adicionada à base de dados ou propriedade atualizada na base de dados, revise só essa página. Grave a correção que a regra já determina, como tirar o prazo do nome. Garanta o nome sem prazo, a data no prazo quando houver data, a definição de concluído como checklist, e que boa prática não seja tarefa. Não varra a lista. A correção insegura fica no comentário.
-
-Se faltar contexto, houver conflito de prioridade, o responsável estiver indefinido ou a intenção estiver em dúvida, não corrija. Comente na tarefa e marque quem responde pela tarefa, ou, sem esse papel, os responsáveis. Com `Considerar pessoas consultadas` em `sim`, marque também as consultadas e peça o parecer delas. O comentário diz o que foi encontrado, por que não corrigiu e qual decisão falta. Não invente a pessoa. Não marque como concluída. Parâmetro de papel em `sim` e a lista sem esse papel: diga isso e siga. Não crie a propriedade.
+Gatilho em um cronograma, de página adicionada à base de dados ou de propriedade atualizada segue `auditar-tarefas`.
 
 ### Passo 7
 
@@ -209,30 +206,6 @@ flowchart LR
   D -->|conversa que você não lê| P[Peça data, captura ou trechos e deixe vazio]
 ```
 
-### Correção insegura
-
-Se você corrigir sem contexto, com conflito de prioridade, sem responsável ou com a intenção em dúvida, a tarefa muda no escuro.
-
-1. Não corrija.
-2. Comente o que foi encontrado, por que não corrigiu e qual decisão falta.
-3. Marque quem responde pela tarefa, ou, sem esse papel, os responsáveis. Não invente a pessoa.
-
-### Cronograma que grava
-
-Se você gravar a lista num gatilho em um cronograma, a varredura deixa de ser só um sinal.
-
-1. Varra a lista e sinalize.
-2. Não grave.
-3. Inclua prazo no título, prazo no lugar errado, campo crítico faltando, boa prática sem entrega e definição de concluído ausente, vaga ou que não dá para verificar.
-
-### Página que vira varredura
-
-Se você varrer a lista porque o gatilho foi página adicionada à base de dados ou propriedade atualizada na base de dados, a revisão traz tarefa que o gatilho não pediu.
-
-1. Revise só essa página.
-2. Garanta nome sem prazo, data no prazo, checklist e entrega concreta.
-3. Não varra a lista.
-
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
@@ -273,17 +246,13 @@ as duas são o mesmo trabalho. Sugiro mesclar. "Ir às gráficas e avaliar opç�
 
 "hoje" sai das observações. A data permanece no prazo. A lista não muda.
 
-### o gatilho em um cronograma encontra uma tarefa com "amanhã" no título e a definição de concluído vazia.
-
-sinalizo os dois problemas. Não gravo. Se faltar contexto para corrigir, comento e marco quem está nos responsáveis.
-
-### o gatilho propriedade atualizada na base de dados dispara e o título é "Relatório de vendas".
-
-reviso só essa página. O título fica "Escrever relatório de vendas". Não varro a lista.
-
 ### revisar a inscrição de apresentador num festival e a pessoa dizer o benefício: quem apresenta participa sem pagar e ganha autoridade ao apresentar; a empresa expõe, sem esta inscrição depender disso. A data do pedido está numa conversa de mensagens.
 
 gravei o benefício no presente, como viabiliza e amplia, junto do que já estava. A grafia da empresa seguiu `definir-grafia`. Pedi a data, uma captura ou a cópia dos trechos. Não preenchi a data da demanda nem o prazo.
+
+### cadastrar "trocar o cartão de cobrança, prazo hoje", com `Considerar pessoas informadas` em `sim`.
+
+não criei. Perguntei em quais serviços, por que trocar, quem responde, quem é informado e se o cartão antigo sai. O começo é hoje, sem pergunta. Com as respostas, a definição de concluído tem o cartão novo cadastrado e o antigo removido.
 
 ## Casos-limite
 
@@ -294,8 +263,6 @@ gravei o benefício no presente, como viabiliza e amplia, junto do que já estav
 - Prazo vazio e título sem data: diga que está vazio. Não traga data de outra conversa.
 - Duas tarefas do mesmo trabalho: sugira mesclar. Não mescle. "Ir às gráficas" não permanece.
 - O prazo passou, a tarefa não está concluída e há responsável: avise pelo nome. Não marque concluído.
-- Gatilho em um cronograma: sinalize e não grave. Página adicionada ou propriedade atualizada: revise só essa página.
-- Falta contexto ou a intenção está em dúvida: comente e marque quem responde pela tarefa, ou os responsáveis. Não corrija.
 
 ## Pegadinhas
 
@@ -307,10 +274,7 @@ gravei o benefício no presente, como viabiliza e amplia, junto do que já estav
 - O status concluído parece licença para viabilizou. O benefício fica no presente, como viabiliza e amplia. Vai não entra.
 - Uma grafia torta parece o nome. Grave a forma correta, por `definir-grafia`.
 - O pedido desta conversa parece data inventada. Siga o flowchart de Data fora do alcance.
-- Gatilho de comentário, página removida, Slack, calendário ou mail: não revise a lista.
 - O workspace conectado pode ser de outra empresa. A lista vem na execução. Se não estiver nessa conexão, pare. Não use a lista que a conexão mostrou no lugar.
-- Um cronograma parece licença para corrigir tudo. Ele só sinaliza.
-- Quem executa parece quem decide. A correção insegura vai para quem responde pela tarefa.
 
 ## Scripts disponíveis
 

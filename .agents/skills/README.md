@@ -19,6 +19,7 @@ flowchart LR
     atender_revisao_de_pull_request["atender-revisao-de-pull-request"]
     atualizar_branch_do_pull_request["atualizar-branch-do-pull-request"]
     atualizar_cadastro_fiscal["atualizar-cadastro-fiscal"]
+    auditar_tarefas["auditar-tarefas"]
     avaliar_atualizacoes_de_dependencia["avaliar-atualizacoes-de-dependencia"]
     classificar_estado_do_termo["classificar-estado-do-termo"]
     classificar_melhoria_tecnica["classificar-melhoria-tecnica"]
@@ -181,6 +182,7 @@ flowchart LR
   atualizar_branch_do_pull_request --> evoluir_habilidade
   atualizar_branch_do_pull_request --> fechar_pull_request
   atualizar_cadastro_fiscal --> evoluir_habilidade
+  auditar_tarefas --> definir_tarefa
   avaliar_atualizacoes_de_dependencia --> atender_revisao_de_pull_request
   avaliar_atualizacoes_de_dependencia --> criar_commit
   avaliar_atualizacoes_de_dependencia --> criar_pull_request
@@ -381,6 +383,7 @@ flowchart LR
   definir_rotina --> acompanhar_resposta_no_whatsapp
   definir_rotina --> conversar_no_whatsapp
   definir_rotina --> evoluir_habilidade
+  definir_tarefa --> auditar_tarefas
   definir_tarefa --> definir_grafia
   definir_tarefa --> procurar_tarefa
   definir_tipo_do_evento --> criar_oportunidade
