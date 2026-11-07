@@ -1492,6 +1492,28 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses writing text, registering a loose term, and profiling without a request
 
+### pesquisar-compra
+- **Stability**: experimental
+- **Description**: Research what to buy, check what the business already has, and recommend options with price, source, and date, without buying
+- **Properties**:
+  - Skill at `.agents/skills/pesquisar-compra/`
+  - Reads the expense, stock, and fixed asset lists before searching the web, and shows an item or a balance that already serves instead of recommending a purchase
+  - Also reads the purchase requirement and production cost lists when the project has them, and uses today's cost to show when the purchase pays for itself
+  - Takes the seller from the payment record of a past purchase and searches the seller's own store when the marketplace blocks reading
+  - Writes the requirements first and marks each one with its source, and marks as not confirmed what nobody confirmed
+  - Prefers the maker over the shop over a buying guide, and treats a guide or an affiliate page as a hint, not as proof of compatibility
+  - Gives each price with the shop and the date of the lookup, and says when the price came only from a search result or the page is sold out
+  - Does not work around a shop that blocks automated reading: it uses what the search showed and asks for the description or a question to the seller
+  - Never buys, adds to a cart, or fills in payment details
+  - Writes nothing: after the person says they bought, it hands the record to `lancar-despesa-da-empresa`, `gerenciar-estoque`, or `definir-ativo-imobilizado`
+- **Test Criteria**:
+  - [ ] An item with a balance in stock is shown before any web search
+  - [ ] A model that only a guide recommends is marked as not confirmed, with the question for the maker or the seller
+  - [ ] A price comes with the shop and the date
+  - [ ] A blocked shop page is not retried by another route
+  - [ ] The skill ends at the links and does not place an order
+  - [ ] A supply in the expenses but missing from stock is reported with a suggestion of `gerenciar-estoque`, without writing
+
 ### planejar-calendario-de-conteudo
 - **Stability**: experimental
 - **Description**: Suggest what to post, plan a week or a campaign, announce an event across posts, or check the calendar mix
