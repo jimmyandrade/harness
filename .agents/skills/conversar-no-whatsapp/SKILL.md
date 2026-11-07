@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.20.0"
+  version: "0.21.0"
   related:
     - acompanhar-resposta-no-whatsapp
     - comunicar-novidade-do-produto
@@ -60,7 +60,7 @@ Espere a lista de conversas carregar antes de ler. Com `Etiqueta das conversas` 
 
 Uma conversa com mensagens não lidas segue `Não lidas antes de enviar`. Com `ler e mostrar`, abra, leia as não lidas e mostre primeiro o que pede ação da pessoa, como uma menção, uma pergunta ou um pedido para ela, e depois o resto em uma linha. Antes de enviar nessa conversa, pergunte se envia agora ou espera, e siga a resposta. Com `perguntar antes de abrir`, diga que abrir marca essas mensagens como lidas, também no celular de quem enviou, e pergunte se pode abrir. Não diga que nada foi marcado como lido depois de abrir uma conversa assim.
 
-Se a conversa mostrar o aviso para carregar mensagens antigas do celular, diga que o histórico pode estar incompleto.
+Se a conversa mostrar o aviso para carregar mensagens antigas do celular, clique nele e diga que o histórico pode estar incompleto. Para achar um arquivo, abra os dados do contato, em Mídia, links e docs, na aba Documentos. O rodapé dessa aba diz a data antes da qual as mensagens só aparecem no celular. Sem o arquivo ali e com o pedido anterior a essa data, diga isso logo e peça que a pessoa encaminhe o arquivo, pelo celular, para uma conversa que o WhatsApp Web mostre, como a dela consigo mesma. Procure no e-mail, no Drive ou noutro lugar só se a pessoa pedir.
 
 ### Passo 3
 
@@ -176,6 +176,14 @@ Se você escrever "vale até quarta" calculando de cabeça, o dia sai errado e a
 2. Tire o dia da semana de um calendário ou de um comando.
 3. Confira o rascunho antes de pedir o sim.
 
+### Arquivo antigo fora do WhatsApp Web
+
+Se você procurar no e-mail, no Drive e no Notion um arquivo que não aparece na conversa, a busca gasta tempo e não acha: o WhatsApp Web não sincroniza as mensagens antigas.
+
+1. Abra a aba Documentos nos dados do contato e leia a data do rodapé.
+2. Diga que o arquivo é anterior a essa data.
+3. Peça que a pessoa encaminhe o arquivo, pelo celular, para uma conversa que o WhatsApp Web mostre.
+
 ### Pedido em uma conversa só
 
 Se você ler só a conversa da pessoa envolvida, perde quem pediu, quando pediu e a pergunta que ficou sem resposta.
@@ -231,7 +239,8 @@ Mostrei a conversa do Caio e o texto "Podemos falar 15h00?". Enviei depois do si
 - Nenhuma aba do WhatsApp Web e o QR code na tela: pare e peça para a pessoa conectar o celular.
 - Duas conversas com o mesmo nome: mostre as duas e pergunte qual é.
 - O pedido está num grupo: leia só as mensagens do assunto, com quem escreveu cada uma.
-- O histórico pede para carregar mensagens antigas do celular: diga que pode estar incompleto.
+- O histórico pede para carregar mensagens antigas do celular: clique no aviso e diga que pode estar incompleto.
+- O arquivo pedido é anterior à data do rodapé da aba Documentos: peça que a pessoa o encaminhe pelo celular.
 - A pessoa quer o texto no tom de voz: siga `redigir-com-tom-de-voz` e volte aqui para enviar.
 
 ## Pegadinhas
@@ -247,6 +256,7 @@ Mostrei a conversa do Caio e o texto "Podemos falar 15h00?". Enviei depois do si
 - O WhatsApp Web leva alguns segundos para carregar. A primeira leitura pode mostrar só a tela de carregamento.
 - O texto da página traz a lista de conversas inteira antes da conversa aberta. A conversa aberta começa depois do nome do contato no cabeçalho.
 - Abrir uma conversa marca as mensagens não lidas como lidas, também para quem enviou.
+- "Mostrar documentos de todas as conversas" lista só os documentos recentes. Um arquivo antigo não aparece ali nem na conversa.
 - O banco do aplicativo de desktop fica num contêiner protegido do sistema. A leitura direta é bloqueada, e contornar o bloqueio não é o caminho.
 - Em conta comercial, a conversa pode estar com o agente de IA, que responde à próxima mensagem do contato.
 - "Sexta-feira" no separador é a última sexta antes de hoje, não a sexta mais próxima de outra data da conversa.
