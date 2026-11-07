@@ -1,0 +1,11 @@
+{
+  "skill_name": "pesquisar-compra",
+  "evals": [
+    {
+      "id": "impressora-para-folhas-de-etiqueta-ja-compradas",
+      "prompt": "Preciso achar uma impressora laser monocromática que imprima as folhas A4 de etiqueta de composição em não tecido que já compramos.",
+      "expected_output": "O agente lê as despesas antes da web e acha a compra das folhas, com o modelo, a quantidade, o valor e o vendedor pelo comprovante. Ele lê os ativos e o estoque, diz que não há impressora e que as folhas faltam no estoque, sugerindo gerenciar-estoque sem gravar, e lê os requisitos de compra e os custos de produção quando existem, usando o custo atual por página na conta de quando a impressora se paga. Os requisitos dizem a fonte de cada um, e a gramatura de outro vendedor fica como não confirmada. Quando o marketplace bloqueia, ele busca a loja própria do vendedor e não contorna o bloqueio. As opções vêm com a entrada que aceita etiqueta pela ficha do fabricante da impressora, o preço com loja e data, o aviso quando o preço veio só da busca ou a página está esgotada, a opção descartada com o motivo e a pergunta ao vendedor das folhas. Ele não compra nem grava.",
+      "files": []
+    }
+  ]
+}
