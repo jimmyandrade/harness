@@ -85,6 +85,7 @@ flowchart LR
     extrair_tarefas_da_reuniao["extrair-tarefas-da-reuniao"]
     fatiar_pull_request["fatiar-pull-request"]
     fazer_fechamento["fazer-fechamento"]
+    fazer_inscricao["fazer-inscricao"]
     fechar_pull_request["fechar-pull-request"]
     formalizar_decisao["formalizar-decisao"]
     gerenciar_estoque["gerenciar-estoque"]
@@ -315,6 +316,7 @@ flowchart LR
   definir_grupo_de_oportunidades --> criar_oportunidade
   definir_grupo_de_oportunidades --> procurar_oportunidade
   definir_inscricao --> definir_grafia
+  definir_inscricao --> fazer_inscricao
   definir_inscricao --> procurar_inscricao
   definir_inscricao --> procurar_oportunidade
   definir_instrucoes_do_projeto --> criar_habilidade
@@ -464,6 +466,11 @@ flowchart LR
   fazer_fechamento --> lancar_despesa_da_empresa
   fazer_fechamento --> organizar_ponto_de_contato
   fazer_fechamento --> revisar_financas
+  fazer_inscricao --> abrir_vendas_na_tiqueteira
+  fazer_inscricao --> definir_inscricao
+  fazer_inscricao --> definir_pessoa
+  fazer_inscricao --> evoluir_habilidade
+  fazer_inscricao --> procurar_oportunidade
   fechar_pull_request --> atender_revisao_de_pull_request
   fechar_pull_request --> atualizar_branch_do_pull_request
   fechar_pull_request --> criar_pull_request
