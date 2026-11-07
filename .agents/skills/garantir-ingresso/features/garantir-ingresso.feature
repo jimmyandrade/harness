@@ -51,16 +51,25 @@ Funcionalidade: Garantir o ingresso de um evento na tiqueteira
       E não digita senha nem código
 
     Exemplo: Termo obrigatório com cessão de imagem
-      Dado que `Aceite de termos` está em `automático`
+      Dado que `Aceite de termos obrigatórios` está em `automático`
       E que o checkout pede um termo obrigatório com cessão de imagem e voz
       Quando os outros campos estão preenchidos
       Então a skill resume o termo e pede o sim da pessoa
       E só marca o aceite depois do sim
 
-    Exemplo: Termo opcional
-      Dado que o checkout traz um termo opcional
-      Quando a pessoa não pediu para aceitá-lo
-      Então a skill deixa o termo desmarcado e finaliza
+    Exemplo: Termo opcional com o padrão
+      Dado que `Aceite de termos opcionais` está em `perguntar`
+      E que o checkout traz um termo opcional de envio de novidades
+      Quando os outros campos estão preenchidos
+      Então a skill resume o termo e pergunta se ele deve ser marcado
+
+    Exemplo: Termo opcional em automático
+      Dado que `Aceite de termos opcionais` está em `automático`
+      E que o checkout traz um termo opcional de marketing e outro de certificado
+      Quando a skill decide os termos
+      Então o termo de marketing fica desmarcado
+      E o termo de certificado se marca
+      E as duas decisões entram no relatório
 
     Exemplo: Ingresso pago
       Dado que o ingresso escolhido é pago

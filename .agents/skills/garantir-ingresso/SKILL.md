@@ -4,7 +4,7 @@ description: Garante o ingresso de um evento na tiqueteira, grátis ou pago, pel
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.1"
+  version: "0.4.0"
   aliases:
     - fazer-inscricao
   related:
@@ -24,8 +24,9 @@ metadata:
 ```yaml
 # `Sem integração` é o que fazer quando a plataforma não tem conector, MCP, CLI nem API para quem compra: `perguntar` oferece o navegador ou a inscrição feita pela pessoa, com o comprovante; `navegador` segue direto pelo navegador.
 "Sem integração": "perguntar"
-# `Aceite de termos` é `automático`, que só pergunta o termo sensível; `perguntar`, que pergunta todo termo; ou `aceitar`, que aceita sem perguntar e não é recomendado.
-"Aceite de termos": "automático"
+# `Aceite de termos obrigatórios` e `Aceite de termos opcionais` são `automático`, que deixa a IA decidir pelo Passo 5; `perguntar`, que pergunta cada termo; ou `aceitar`, que aceita sem perguntar e não é recomendado.
+"Aceite de termos obrigatórios": "automático"
+"Aceite de termos opcionais": "perguntar"
 # `CNPJ na inscrição da empresa` é `perguntar`, `preencher`, com o CNPJ do cadastro da empresa, ou `não preencher`.
 "CNPJ na inscrição da empresa": "perguntar"
 "Modo de aprendizado": "perguntar"
@@ -90,9 +91,9 @@ Confira se o checkout mostra um prazo de reserva. Com prazo, junte numa mensagem
 
 ### Passo 5
 
-Leia cada termo e veja se ele é obrigatório. O termo opcional fica desmarcado, salvo pedido da pessoa.
+Leia cada termo e veja se ele é obrigatório. O obrigatório segue `Aceite de termos obrigatórios`, e o opcional segue `Aceite de termos opcionais`. Em `perguntar`, resuma o termo e espere a resposta.
 
-O termo obrigatório segue `Aceite de termos`. Em `automático`, é sensível o termo que cede imagem ou voz, usa os dados além do evento ou gera cobrança: resuma o que ele pede e espere o sim. O resto se aceita e entra no relatório.
+Em `automático`, é sensível o termo que cede imagem ou voz, usa os dados além do evento, como marketing ou compartilhamento, ou gera cobrança. O obrigatório sensível espera o sim, e o resto se aceita. O opcional sensível fica desmarcado, e o que só serve à pessoa, como certificado ou lembrete do evento, se marca. Cada decisão entra no relatório.
 
 No ingresso pago, mostre o item, o valor total e o meio de pagamento e espere o sim. Os dados do cartão ficam com a pessoa.
 
