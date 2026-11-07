@@ -4,7 +4,7 @@ description: Garante o ingresso de um evento na tiqueteira, grátis ou pago, pel
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   aliases:
     - fazer-inscricao
   related:
@@ -73,9 +73,18 @@ A pessoa titular da conta é a participante: confirme o nome que o checkout most
 
 ### Passo 4
 
-Preencha o checkout com o cadastro da pessoa titular, lido por `definir-pessoa`. Endereço e telefone vêm dele, e o campo que falta vira pergunta.
+Preencha todo campo do checkout, obrigatório ou opcional, que o cadastro responde: o da pessoa titular, lido por `definir-pessoa`, e o da empresa, lido por `definir-empresa`. A tabela liga cada campo já visto à fonte dele.
 
-Na inscrição em nome de uma empresa, o CNPJ segue `CNPJ na inscrição da empresa`, com o valor do cadastro de `definir-empresa`. Um documento opcional da pessoa fica vazio.
+| Campo do checkout | Fonte |
+| --- | --- |
+| Nome, e-mail, CPF e telefone | Conta da tiqueteira, conferida com o cadastro da pessoa |
+| CEP, rua, número, complemento, bairro, cidade e estado | Endereço do cadastro da pessoa |
+| CNPJ | Cadastro da empresa, conforme `CNPJ na inscrição da empresa` |
+| Nome da empresa | Cadastro da empresa |
+| Segmento | Atividade da empresa no cadastro |
+| Necessidade de acessibilidade | Cadastro da pessoa; sem registro, fica vazio |
+
+Um campo que nenhum cadastro responde vira pergunta, e um campo fora da tabela entra nela ao final. Quando o agente não pode digitar um documento, ele pede que a pessoa preencha esse campo.
 
 Confira se o checkout mostra um prazo de reserva. Com prazo, junte numa mensagem só os campos que o cadastro não respondeu e os termos que pedem o sim.
 
@@ -97,7 +106,7 @@ Passe o pedido a `definir-inscricao`, com o print, a hora do envio e o status qu
 
 ### Passo 7
 
-Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
+Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`. Cada campo do checkout que não estava na tabela do Passo 4 entra nela, com a fonte que respondeu.
 
 ## Problemas comuns
 

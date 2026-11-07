@@ -27,6 +27,21 @@ Funcionalidade: Garantir o ingresso de um evento na tiqueteira
       Então a skill redige a pergunta à organização
       E só envia com o sim da pessoa
 
+  Regra: O checkout sai preenchido pelo cadastro
+
+    Exemplo: Campo opcional que o cadastro responde
+      Dado que o checkout traz o campo opcional de complemento do endereço
+      E que o cadastro da pessoa titular tem o complemento
+      Quando a skill preenche o checkout
+      Então o complemento entra no campo
+
+    Exemplo: Campo novo
+      Dado que o checkout pede um campo fora da tabela de campos da skill
+      E que nenhum cadastro responde esse campo
+      Quando a skill preenche o checkout
+      Então a skill pergunta o valor à pessoa
+      E o campo entra na tabela ao final, com a fonte que respondeu
+
   Regra: Login, termos e pagamento ficam com a pessoa
 
     Exemplo: Tiqueteira sem login
