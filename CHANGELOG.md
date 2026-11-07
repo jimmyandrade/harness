@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.69.0](https://github.com/jimmyandrade/harness/compare/v1.68.0...v1.69.0) (2026-11-07)
+
+
+### Features
+
+* **atualizar-branch-do-pull-request:** check the pull request state before each push ([#927](https://github.com/jimmyandrade/harness/issues/927)) ([4d3e8f6](https://github.com/jimmyandrade/harness/commit/4d3e8f65ba03a315a66d480f809d0dbdff87b697))
+* **organizar-emails:** leave the participation decision to the opportunity review ([#926](https://github.com/jimmyandrade/harness/issues/926)) ([9c82b15](https://github.com/jimmyandrade/harness/commit/9c82b15af00b87eef16351ab724178b52e718eaa))
+* **pesquisar-compra:** research what to buy and check what the business already has ([#930](https://github.com/jimmyandrade/harness/issues/930)) ([6055566](https://github.com/jimmyandrade/harness/commit/60555666179817b9207a7bc297fee24c113f94d5))
+
+
+### Bug Fixes
+
+* **conversar-no-whatsapp:** ask to forward files older than the Web history ([#928](https://github.com/jimmyandrade/harness/issues/928)) ([f47321d](https://github.com/jimmyandrade/harness/commit/f47321d46be88256bae28a78e32f6ce8e344db8a))
+
 ## [1.68.0](https://github.com/jimmyandrade/harness/compare/v1.67.0...v1.68.0) (2026-11-06)
 
 
