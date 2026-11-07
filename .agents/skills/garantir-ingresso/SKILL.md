@@ -4,7 +4,7 @@ description: Garante o ingresso de um evento na tiqueteira, grátis ou pago, pel
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.3.1"
   aliases:
     - fazer-inscricao
   related:
@@ -100,7 +100,7 @@ No ingresso pago, mostre o item, o valor total e o meio de pagamento e espere o 
 
 Finalize. Feche o pop-up de prêmio, cashback ou publicidade sem clicar na oferta e confira que ele sumiu.
 
-Guarde o print da tela do pedido confirmado sem o pop-up, com o número e o status. Se o pop-up não fechar, guarde os dois prints.
+Guarde o print da tela do pedido confirmado com o pop-up e, depois de fechá-lo, o print sem ele, com o número e o status. Se o pop-up não fechar, fica só o print com ele, e o relatório diz isso.
 
 Passe o pedido a `definir-inscricao`, com o print, a hora do envio e o status que a tela mostrou. Atualize a linha da atividade no cronograma.
 
@@ -137,7 +137,7 @@ Se você clicar por coordenada depois de a página rolar, o texto vai para outro
 Se você guardar o print com o pop-up de prêmio aberto, o comprovante esconde o número e o status do pedido.
 
 1. Feche o pop-up e confira que ele sumiu.
-2. Guarde o print limpo, ou os dois quando ele não fecha.
+2. Guarde os dois prints, com e sem o pop-up. Quando ele não fecha, fica só o print com ele.
 
 ## Exemplos de entrada e saída
 
