@@ -102,6 +102,22 @@ How these skills relate is in `README.md`, in this folder.
   - [ ] A branch whose pull request was merged gets no rebase and no push
   - [ ] A rebase that brings base code against a pattern the review asked for fixes it in the same pull request
 
+### auditar-tarefas
+- **Stability**: experimental
+- **Description**: Review tasks on a schedule, page-added, or property-updated trigger with the criteria of definir-tarefa
+- **Properties**:
+  - Lives at `.agents/skills/auditar-tarefas/SKILL.md`
+  - Reads the list and its property names from the data mapping of the project, and stops when the list is not in the connected workspace
+  - On a recurring schedule trigger, scans the list and signals problems without writing
+  - On a page-added or property-updated trigger, reviews that page only and writes the correction the rule already decides
+  - Comments when the correction is not safe and mentions the accountable person of the RACI matrix, or the owners when the list has no such role
+  - With `Considerar pessoas consultadas` set to `sim`, also mentions the consulted people and asks their view; the default is `não`, and a role the list lacks is reported, not created
+  - Does not review the list on a comment, removed-page, Slack, calendar, or mail trigger
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [ ] A schedule trigger signals a deadline in a title without writing
+  - [ ] A property-updated trigger fixes that page only
+
 ### avaliar-atualizacoes-de-dependencia
 - **Stability**: experimental
 - **Description**: Work through the open dependency update pull requests from Dependabot and Renovate, oldest first, one at a time
@@ -1008,15 +1024,18 @@ How these skills relate is in `README.md`, in this folder.
   - When the person states the benefit, writes it into the notes in that reply, in the present, and keeps the note already there
   - When a spelling is uncertain, follows definir-grafia and writes the correct form
   - Writes the request date as the day the request arose in this conversation, leaves it empty when that day is only in a chat the agent cannot read, and does not copy the start or the deadline into that field
-  - On a recurring schedule trigger, scans the list and signals problems without writing
-  - On a page-added or property-updated trigger, reviews that page only
-  - Comments when the correction is not safe and mentions the accountable person of the RACI matrix, or the owners when the list has no such role
-  - With `Considerar pessoas consultadas` set to `sim`, also mentions the consulted people and asks their view; with `Considerar pessoas informadas` set to `sim`, comments what changed and mentions the informed people after applying a correction. Both default to `não`, and a role the list lacks is reported, not created
+  - Sends a schedule, page-added, or property-updated trigger to auditar-tarefas
+  - With `Considerar pessoas informadas` set to `sim`, comments what changed and mentions the informed people after applying a correction. Both role parameters default to `não`
+  - When creating a task with a missing point, asks in the same question who is accountable and the roles whose parameter is `sim`, and leaves an unnamed role empty
+  - For a swap, such as a card or a supplier, writes one definition-of-done item for the new one in place and one for what happens to the old one, and asks that when it was not said
+  - Takes the request day as the start when the deadline is that same day, without asking
   - Does not change the title, status, deadline, definition of done, or owner until the person asks to apply that correction
   - Does not only check existence, mark a task complete, or turn a rule without a deliverable into a task
 - **Test Criteria**:
   - [x] The skill is present at that path
-  - [x] The description refuses only checking existence, marking a task complete, and turning a rule without a deliverable into a task
+  - [x] The description refuses checking existence, reviewing tasks on a trigger, scanning the list, marking a task complete, and turning a rule without a deliverable into a task
+  - [ ] A new task with `Considerar pessoas informadas` set to `sim` asks who is informed before creating it
+  - [ ] A card swap without what happens to the old card asks that before creating the task
 
 ### definir-tipo-do-evento
 - **Stability**: experimental
