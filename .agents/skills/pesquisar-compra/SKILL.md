@@ -4,7 +4,7 @@ description: Pesquisa o que comprar, cruza com despesas, estoque e bens que já 
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   related:
     - definir-ativo-imobilizado
     - evoluir-habilidade
@@ -42,15 +42,23 @@ flowchart LR
   P[O que comprar] --> D[Despesas: já compramos isso?]
   P --> E[Estoque: ainda tem saldo?]
   P --> A[Ativos: já temos um bem que serve?]
+  P --> Q[Requisitos de compra: já foi especificado?]
+  P --> C[Custos: quanto custa hoje sem comprar?]
   D --> R[Requisitos e o que já foi comprado]
   E --> R
   A --> R
+  Q --> R
+  C --> R
 ```
 
-A lista de despesas, a de estoque e a de ativos imobilizados vêm do mapeamento de dados do projeto. Siga `lancar-despesa-da-empresa`, `gerenciar-estoque` e `definir-ativo-imobilizado` para ler cada uma, e `identificar-duplicata` para o item que parece o mesmo com outro nome.
+A lista de despesas, a de estoque e a de ativos imobilizados vêm do mapeamento de dados do projeto.
+Quando o projeto tem uma lista de requisitos de compra ou de custos de produção, leia as duas também.
+O requisito já escrito evita perguntar de novo, e o custo de hoje, como um serviço de terceiro que a compra substitui, mostra em quanto tempo ela se paga. Siga `lancar-despesa-da-empresa`, `gerenciar-estoque` e `definir-ativo-imobilizado` para ler cada uma, e `identificar-duplicata` para o item que parece o mesmo com outro nome.
 Se a lista não estiver no workspace conectado, diga qual faltou e siga com as outras. Não use a lista de outro workspace.
 Um bem ou um saldo que já serve responde a pergunta: mostre o que achou e pergunte se a pessoa ainda quer comprar.
 Uma compra anterior vale como fonte do requisito. O insumo que já foi comprado diz o que o equipamento precisa aguentar.
+O comprovante da compra anterior diz o vendedor, como o recebedor do pagamento. Guarde o nome para o Passo 4.
+Um insumo que está nas despesas e falta no estoque fica no fim da resposta, com a sugestão de `gerenciar-estoque`. Não grave.
 
 ### Passo 3
 
@@ -60,13 +68,17 @@ O requisito que ninguém confirmou fica marcado como não confirmado. Não compl
 ### Passo 4
 
 Pesquise na web, uma busca por opção, e prefira nesta ordem: o fabricante, a loja que vende, o guia ou a avaliação.
+Para o insumo já comprado, busque também a loja própria do vendedor pelo nome do Passo 2. Ela costuma abrir quando o marketplace bloqueia e traz a ficha.
 Guia de melhores e página de afiliado indicam o que olhar, não provam compatibilidade.
 Anote o preço com a loja e a data da consulta. O preço de uma busca ou de um cache pode ser antigo.
+Diga quando o preço veio só do resultado da busca, sem a página aberta. Página esgotada não tem preço atual: diga que está esgotada.
 A loja que bloqueia leitura automática não se contorna. Use o que a busca mostrou, diga que a página não abriu e peça que a pessoa cole a descrição ou o link, ou pergunte ao vendedor.
 
 ### Passo 5
 
 Responda com `Quantidade de opções` opções, a recomendada primeiro. Para cada uma: o que atende, o que não está confirmado, o preço com fonte e data, e o link.
+Diga também a opção descartada e o motivo, para a pessoa não pesquisar de novo.
+Com o custo de hoje do Passo 2, mostre a conta de quando a compra se paga e marque o que é estimativa.
 Termine com a pergunta que ainda falta ao fabricante ou ao vendedor, quando houver, e com a decisão que cabe à pessoa.
 Não compre, não ponha no carrinho e não preencha dado de pagamento.
 
@@ -94,7 +106,7 @@ Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 Se você for direto à web, a resposta recomenda comprar algo que já está no estoque ou nos bens.
 
-1. Leia despesas, estoque e ativos pelo Passo 2.
+1. Leia despesas, estoque, ativos, requisitos de compra e custos pelo Passo 2.
 2. Mostre o que já serve antes de qualquer opção.
 3. Pergunte se a pessoa ainda quer comprar.
 
@@ -136,7 +148,7 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### preciso de uma impressora laser que imprima as folhas A4 de etiqueta de composição que já compramos
 
-Li as despesas e achei a compra das folhas, com o modelo, a quantidade e o valor. Não há impressora nos ativos. O fabricante das folhas não aparece no registro, então a compatibilidade com cada impressora ficou como não confirmada. Recomendo três laser monocromáticas, com preço, loja e data de cada uma. Falta saber, com o vendedor das folhas, qual impressora ele indica e se a folha pode passar pela frente e verso automático.
+Li as despesas e achei a compra das folhas, com o modelo, a quantidade, o valor e o vendedor pelo comprovante. Não há impressora nos ativos, e as folhas não estão no estoque. Os custos de produção dizem quanto custa hoje imprimir a página fora. O marketplace bloqueou, e a loja própria do vendedor deu o material e as medidas, sem citar impressora. A entrada que aceita etiqueta veio da ficha de cada fabricante de impressora. Recomendo três laser monocromáticas, com preço, loja e data de cada uma. Falta saber, com o vendedor das folhas, qual impressora ele indica e se a folha pode passar pela frente e verso automático.
 
 ### quero um tecido de algodão cru
 
@@ -160,6 +172,8 @@ Li o estoque e achei um rolo do mesmo tecido com saldo. Mostrei o saldo e pergun
 - O mesmo modelo existe em voltagens e códigos diferentes, e o preço muda entre eles. Confirme o código completo e a voltagem antes de recomendar.
 - Uma oferta de loja pode ser antiga. A data da página ou a da oferta fica na resposta.
 - A lista de despesas guarda o que foi pago, não a ficha do que foi comprado. A compatibilidade vem do fabricante.
+- O vendedor do insumo raramente cita modelo de equipamento. Ele diz a tecnologia, como "só laser". O fabricante do equipamento diz se aceita aquele tipo de mídia e por qual entrada.
+- A ficha de outro vendedor do mesmo insumo, como a gramatura, não vale para o insumo comprado. Marque como não confirmado.
 
 ## Scripts disponíveis
 
