@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.70.0](https://github.com/jimmyandrade/harness/compare/v1.69.0...v1.70.0) (2026-11-07)
+
+
+### Features
+
+* **definir-tarefa:** ask task roles and split trigger audits into auditar-tarefas ([#932](https://github.com/jimmyandrade/harness/issues/932)) ([22cdc8e](https://github.com/jimmyandrade/harness/commit/22cdc8eb0cf053a1ac8a279fc77b80998ce0d39c))
+* **garantir-ingresso:** get event tickets through the ticketing site ([#933](https://github.com/jimmyandrade/harness/issues/933)) ([e0057f2](https://github.com/jimmyandrade/harness/commit/e0057f284c4e32a3dea4a3c68332b1c00d81b650))
+
 ## [1.69.0](https://github.com/jimmyandrade/harness/compare/v1.68.0...v1.69.0) (2026-11-07)
 
 
