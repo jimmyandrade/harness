@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.9.2"
+  version: "0.10.0"
   related:
     - definir-empresa
     - definir-grafia
@@ -26,6 +26,10 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Nome do arquivo da pessoa": "e-mail.json"
 # `Fontes para resolver identidade` lista as ferramentas em que achar dados de pessoas (o diretório) antes de perguntar, como agenda, Slack, Atlassian Confluence, Atlassian Jira, GitHub, Notion, Instagram, Google Contatos ou WhatsApp.
 "Fontes para resolver identidade": ""
+# `Cadastro na loja` é `sim`, que também cria ou atualiza a pessoa como cliente na loja on-line do projeto, mesmo sem compra, ou `não`.
+"Cadastro na loja": "não"
+# `Campo do cliente na loja` é o nome da propriedade da lista de pessoas que guarda o link do cliente na loja. Vazio, o link fica nas notas.
+"Campo do cliente na loja": ""
 ```
 ## Instruções
 
@@ -70,7 +74,11 @@ flowchart LR
 
 ### Passo 3
 
-O nome completo é o nome da pessoa. O handle não entra nesse nome. Não invente e-mail, telefone, pronome, tipo de público nem empresa. O perfil que o print mostrar segue `definir-perfil-social`. Quando esse perfil existir, relacione nos perfis sociais relacionados. Não grave o print no corpo.
+O nome completo é o nome da pessoa. O handle não entra nesse nome. Não invente e-mail, telefone, pronome, tipo de público nem empresa.
+
+Telefone vai no formato internacional. Celular do Brasil tem 9 dígitos depois do DDD: o WhatsApp às vezes mostra o número sem o 9. Número de 8 dígitos começado por 6, 7, 8 ou 9 é celular sem o 9: pergunte o número completo antes de gravar.
+
+Com `Cadastro na loja` em `sim`, crie ou atualize o cliente na loja com o nome, o telefone, o e-mail e o idioma, sem consentimento de marketing. Grave o link do cliente em `Campo do cliente na loja`, ou nas notas quando o campo está vazio. O histórico das conversas fica nos comentários da página da pessoa, não na nota do cliente. O perfil que o print mostrar segue `definir-perfil-social`. Quando esse perfil existir, relacione nos perfis sociais relacionados. Não grave o print no corpo.
 
 Grave como confirmado só o que veio direto da pessoa que usa a habilidade ou de uma fonte que respondeu com certeza. Nunca invente papel, time nem apelido.
 Um apelido ou uma grafia ambígua que a pessoa decide inferir, como "vamos inferir que Bia é a Beatriz", entra no registro de quem foi inferida, na lista das transcrições erradas do nome, com o estado `inferido`, a data, quem inferiu, a frase da transcrição e o que descartou as outras hipóteses.
@@ -181,6 +189,9 @@ Busquei na lista de pessoas e não havia Ana Exemplo. Criei a página com o nome
 - Dois registros têm nomes parecidos, como Ana Souza e Ana Souza Lima: não marque pelo primeiro resultado. Confira pelo assunto da fala e pelo perfil nas fontes. Na dúvida, liste os candidatos com o que os diferencia, como cargo e e-mail, e pergunte.
 
 ## Pegadinhas
+
+- O número do WhatsApp parece o telefone completo. Num celular do Brasil, ele pode vir sem o 9 depois do DDD, e a loja recusa o número de 8 dígitos.
+- A linha do tempo do cliente na loja parece o lugar da conversa. A API da loja pode não gravar comentário nela: a conversa fica na página da pessoa.
 
 - Um perfil colado parece só contexto para a resposta. É o pedido de cadastro: grave no mesmo turno.
 - Corrigir a frase parece cadastrar. A pessoa ausente ganha página na lista de pessoas.
