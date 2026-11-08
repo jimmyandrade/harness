@@ -76,3 +76,13 @@ Funcionalidade: Garantir o ingresso de um evento na tiqueteira
       Quando a skill chega ao pagamento
       Então a skill mostra o item, o valor total e o meio de pagamento
       E só finaliza depois do sim da pessoa
+
+  Regra: Quem se apresenta fica sabendo que a pessoa vai
+
+    Exemplo: Palestrante no cadastro de pessoas
+      Dado que `Avisar quem se apresenta` está em `perguntar`
+      E que a palestrante da atividade está no cadastro de pessoas, com telefone
+      E que nenhuma conversa nem e-mail mostram um aviso
+      Quando o pedido sai confirmado
+      Então a skill oferece avisar a palestrante que a pessoa vai
+      E só envia a mensagem com o sim da pessoa ao texto e ao canal
