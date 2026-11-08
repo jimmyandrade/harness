@@ -133,6 +133,7 @@ flowchart LR
     sincronizar_status_da_tarefa["sincronizar-status-da-tarefa"]
     testar_habilidade["testar-habilidade"]
     testar_ponta_a_ponta["testar-ponta-a-ponta"]
+    triar_conversas["triar-conversas"]
     validar_plano_de_vocabulario["validar-plano-de-vocabulario"]
   end
   abrir_vendas_na_tiqueteira --> definir_lote_de_ingresso
@@ -236,6 +237,7 @@ flowchart LR
   criar_oportunidade --> definir_inscricao
   criar_oportunidade --> organizar_emails
   criar_oportunidade --> procurar_oportunidade
+  criar_oportunidade --> triar_conversas
   criar_ponto_de_contato --> criar_oportunidade
   criar_ponto_de_contato --> definir_agenda
   criar_ponto_de_contato --> definir_grupo_de_oportunidades
@@ -315,6 +317,7 @@ flowchart LR
   definir_grafia --> mesclar_registro
   definir_grupo_de_oportunidades --> criar_oportunidade
   definir_grupo_de_oportunidades --> procurar_oportunidade
+  definir_grupo_de_oportunidades --> triar_conversas
   definir_inscricao --> definir_grafia
   definir_inscricao --> garantir_ingresso
   definir_inscricao --> procurar_inscricao
@@ -566,6 +569,7 @@ flowchart LR
   organizar_ponto_de_contato --> fazer_fechamento
   organizar_ponto_de_contato --> procurar_oportunidade
   organizar_ponto_de_contato --> sincronizar_cronograma
+  organizar_ponto_de_contato --> triar_conversas
   pedir_revisao_de_pr_no_slack --> criar_pull_request
   pedir_revisao_de_pr_no_slack --> enviar_mensagem_no_slack
   pedir_revisao_de_pr_no_slack --> escrever_link
@@ -666,6 +670,7 @@ flowchart LR
   rotular_item --> evoluir_habilidade
   rotular_item --> levantar_contexto_do_pull_request
   rotular_item --> organizar_emails
+  rotular_item --> triar_conversas
   sincronizar_cronograma --> definir_agenda
   sincronizar_cronograma --> definir_convidado
   sincronizar_cronograma --> definir_jornada_de_producao
@@ -685,6 +690,19 @@ flowchart LR
   testar_ponta_a_ponta --> evoluir_habilidade
   testar_ponta_a_ponta --> preparar_tarefa_do_pull_request
   testar_ponta_a_ponta --> registrar_resultados_da_validacao_na_tarefa
+  triar_conversas --> conversar_no_whatsapp
+  triar_conversas --> criar_oportunidade
+  triar_conversas --> definir_grupo_de_oportunidades
+  triar_conversas --> definir_rotina
+  triar_conversas --> definir_tarefa
+  triar_conversas --> enviar_mensagem_no_slack
+  triar_conversas --> evoluir_habilidade
+  triar_conversas --> organizar_emails
+  triar_conversas --> organizar_ponto_de_contato
+  triar_conversas --> procurar_oportunidade
+  triar_conversas --> procurar_pedido_de_revisao
+  triar_conversas --> procurar_tarefa
+  triar_conversas --> rotular_item
   validar_plano_de_vocabulario --> classificar_estado_do_termo
   validar_plano_de_vocabulario --> definir_vocabulario
   validar_plano_de_vocabulario --> gravar_termos_no_vocabulario

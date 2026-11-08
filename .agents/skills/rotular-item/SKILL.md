@@ -3,13 +3,14 @@ name: rotular-item
 description: Aplica, troca e tira rótulos, etiquetas e tags de organização num item, como pull request, issue, e-mail ou página, pela escolha da habilidade de origem, sem duplicar rótulo nem mexer no de uma ferramenta. Usada quando outra habilidade rotula um item ou o estado dele muda, mesmo sem dizer rótulo. Não serve para decidir o assunto do item, hashtags nem categorias de conteúdo.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   related:
     - criar-pull-request
     - definir-filtro-de-email
     - evoluir-habilidade
     - levantar-contexto-do-pull-request
     - organizar-emails
+    - triar-conversas
 ---
 
 # Rotular item
@@ -37,6 +38,8 @@ A lista de origem diz quais rótulos são de estado, como `blocked` ou `A pagar`
 Leia os rótulos que o sistema já tem antes de aplicar.
 Um rótulo existente com o mesmo sentido do escolhido serve, mesmo com outra grafia: não crie um parecido.
 Um rótulo de ferramenta não se aplica, não se tira nem se renomeia. Leia-o como sinal de que a ferramenta já processou o item.
+
+No WhatsApp Business, o rótulo é uma lista, aplicada à conversa e, quando o WhatsApp deixa, à mensagem. A lista não tem hierarquia: use o último nível do caminho que a habilidade de origem passou, com o mesmo nome. O número de listas é limitado: antes de criar, conte as que existem e, quando a lista nova não couber, diga isso e não apague outra no lugar. Crie só a lista que a habilidade de origem passou, nunca uma de conta própria.
 
 ### Passo 3
 
@@ -130,6 +133,7 @@ Tirei `blocked` do PR e mantive `enhancement`. A leitura de volta mostrou só `e
 - Uma seção da descrição que avisa o estado parece bastar. Quem filtra a lista só vê o rótulo.
 - Um check de rótulo que não é obrigatório para o merge parece dispensável. Ele aparece como falha no item mesmo assim.
 - Hashtag parece rótulo. Ela serve ao alcance do conteúdo, não à organização do trabalho.
+- A lista do WhatsApp aparece em maiúsculas embaixo da conversa. O nome cadastrado é o do filtro da lista de conversas.
 
 ## Scripts disponíveis
 
@@ -138,5 +142,6 @@ Tirei `blocked` do PR e mantive `enhancement`. A leitura de volta mostrou só `e
 - `gh pr edit <número> --repo <repositório> --add-label <rótulo> --remove-label <rótulo>`: aplica e troca o rótulo de um PR nos Passos 4 e 5. Numa issue, `gh issue edit` com as mesmas flags.
 - `gh pr view <número> --repo <repositório> --json labels --jq '[.labels[].name]'`: leitura de volta do Passo 6.
 - No e-mail, as ferramentas de etiqueta do conector de e-mail, que listam, criam, aplicam e tiram etiquetas.
+- No WhatsApp Web, o filtro da lista de conversas mostra as listas, e Adicionar à lista, no cabeçalho da conversa, cria e aplica.
 
 1. Leia os rótulos, crie o que falta conforme o Passo 3, aplique, troque o de estado e leia de volta.
