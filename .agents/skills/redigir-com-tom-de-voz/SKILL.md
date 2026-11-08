@@ -69,6 +69,8 @@ Termo da categoria `cliche` não entra como palavra final. A descrição pede im
 
 Frase que sugere perda consumada, cobrança agressiva, exclusão, capacitismo, ameaça real, culpa ou sensação incompatível com o tom sai do texto. A alternativa mantém desejo, urgência e conversa natural, sem dizer que a pessoa já perdeu a chance. O motivo dessa rejeição fica na descrição do termo no vocabulário. Sem essa linha, não invente o termo.
 
+Texto redigido e ainda não enviado volta inteiro, num bloco, em toda resposta que o cita, com o pedido de aprovação. Dizer só que ele continua sem envio deixa a pessoa sem o texto para aprovar.
+
 Mensagem para uma pessoa não revela contexto interno que ela não precisa saber e que pode deixá-la desconfortável, como a troca frequente de pessoas no papel que ela assume. O motivo neutro entra no lugar, como uma mudança na padronização. A mensagem abre pelo que muda para ela.
 
 A mensagem chama a pessoa como o cadastro de `definir-pessoa` diz que ela é chamada. Um apelido que o cadastro não confirma, mesmo vindo de quem pede o texto, fica de fora: diga isso e use o nome do cadastro. Sem cadastro, use o nome que a pessoa usa para se apresentar.
