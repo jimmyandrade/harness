@@ -4,7 +4,7 @@ description: Garante o ingresso de um evento na tiqueteira, grátis ou pago, pel
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.6.1"
   aliases:
     - fazer-inscricao
   related:
@@ -109,7 +109,7 @@ Guarde o print da tela do pedido confirmado com o pop-up e, depois de fechá-lo,
 
 Passe o pedido a `definir-inscricao`, com o print, a hora do envio e o status que a tela mostrou. Atualize a linha da atividade no cronograma.
 
-Confira com `procurar-agenda` se a atividade já está na agenda no dia e no horário dela. Data, horário e local vêm do e-mail de confirmação da tiqueteira e da oportunidade e do cronograma no Notion. Se faltar, crie com `definir-agenda`, com os links da oportunidade e da inscrição. Avise o compromisso que bate com o horário.
+Confira com `procurar-agenda` se a atividade já está na agenda no dia e no horário dela. Data, horário e local vêm do e-mail de confirmação da tiqueteira e da oportunidade e do cronograma no Notion. Se faltar, crie com `definir-agenda`, com os links da oportunidade e da inscrição. Avise o compromisso que bate com o horário, com quem é, o canal para remarcar e onde ele foi registrado, lido no evento, na negociação, nas reuniões e nas conversas. Sem canal registrado, diga isso.
 
 ### Passo 7
 
