@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.44.2"
+  version: "0.45.0"
   related:
     - conversar-no-whatsapp
     - definir-agenda-de-popstar
@@ -176,6 +176,8 @@ A descrição leva o link da página canônica, uma frase do que o evento é, e 
 Desambiguação curta se for um negócio e não um ponto de contato. Não alongue o que a propriedade já guarda. Criatividade não troca o campo estruturado.
 Quando `definir-jornada-de-producao` disser que o dia segue a jornada reduzida, a descrição registra a jornada reduzida e o motivo.
 Reunião sem modalidade: pergunte. Remota: crie o Google Meet. Presencial: não crie.
+
+Ligação telefônica leva na descrição o nome e o telefone de quem vai ligar ou atender do outro lado, para remarcar sem depender de memória. Sem o número, peça a quem atendeu a ligação que combinou o horário: o histórico de chamadas do celular tem o número, e a gravação, se houver, tem o combinado. Grave o número também no cadastro da pessoa.
 Reunião combinada numa conversa do WhatsApp: depois de criar o evento, siga o Passo 6 de `conversar-no-whatsapp`, que manda na conversa o evento nativo e a mensagem com o link da chamada.
 
 Com `Pauta obrigatória em evento com convidados` em `sim`, a descrição de um evento com convidados leva uma pauta clara.
@@ -268,6 +270,8 @@ Conferi a grafia. O título usou o nome canônico e o papel do encontro. A descr
 - A resposta não traz resumo, estado do evento ou fuso: escreva os três.
 
 ## Pegadinhas
+
+- O evento de ligação parece completo com o título e o horário. Sem o telefone de quem está do outro lado, ninguém consegue remarcar: o número fica só no celular de quem atendeu.
 
 - O número no meio do passo parece o lugar da edição. O valor mora no bloco `yaml` de `Parâmetros de configuração`.
 - O ponto de contato parece caber na agenda removida. O destino é a agenda editável de `organizar-ponto-de-contato`.
