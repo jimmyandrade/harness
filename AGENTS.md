@@ -1,6 +1,6 @@
 ---
 metadata:
-  version: "1.48.0"
+  version: "1.49.0"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -59,6 +59,7 @@ metadata:
 - Quando a pessoa disser que não entendeu, a resposta seguinte só diz quem faz, o que fazer e o próximo passo, e nomeia se o clique é no aplicativo ou na página da conta no navegador.
 - Todo pull request, issue, commit ou página do Notion citado vai como link clicável no texto, antes de qualquer quadro final, mesmo o que pergunta.
 - Uma hora em UTC, como a do `gh`, entra na resposta no fuso da pessoa.
+- Mensagem redigida e não enviada volta inteira, num bloco, em toda resposta que a cita, com o pedido de aprovação.
 
 ## Execução
 
