@@ -4,7 +4,7 @@ description: Garante o ingresso de um evento na tiqueteira, grátis ou pago, pel
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.5.0"
   aliases:
     - fazer-inscricao
   related:
@@ -29,6 +29,8 @@ metadata:
 "Aceite de termos opcionais": "perguntar"
 # `CNPJ na inscrição da empresa` é `perguntar`, `preencher`, com o CNPJ do cadastro da empresa, ou `não preencher`.
 "CNPJ na inscrição da empresa": "perguntar"
+# `Avisar quem se apresenta` é `perguntar`, que oferece avisar a palestrante, a facilitadora ou a atração que a pessoa vai, ou `não`.
+"Avisar quem se apresenta": "perguntar"
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -107,6 +109,12 @@ Passe o pedido a `definir-inscricao`, com o print, a hora do envio e o status qu
 
 ### Passo 7
 
+Quando quem se apresenta na atividade está no cadastro de `definir-pessoa`, siga `Avisar quem se apresenta`. Em `perguntar`, procure antes nas conversas e no e-mail se o aviso já saiu.
+
+Sem aviso, ofereça avisar que a pessoa vai prestigiar, pelo canal do cadastro, como WhatsApp, perfil social ou e-mail. A mensagem passa por `redigir-com-tom-de-voz` e sai só com o sim da pessoa ao texto e ao canal.
+
+### Passo 8
+
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`. Cada campo do checkout que não estava na tabela do Passo 4 entra nela, com a fonte que respondeu.
 
 ## Problemas comuns
@@ -166,6 +174,7 @@ Mostrei o item, o valor total e o cartão salvo na conta e esperei o sim antes d
 - O checkout pede dados da pessoa titular da conta, e não da empresa, salvo o CNPJ.
 - A tela de sucesso de algumas tiqueteiras abre com uma oferta de prêmio ou cashback. Ela é publicidade e não faz parte do pedido.
 - Login, senha, código e dados de cartão são da pessoa. A IA nunca os digita.
+- O pedido confirmado parece encerrar o trabalho. Quando a palestrante é conhecida, ela ainda não sabe que a pessoa vai: o aviso é o passo que falta.
 
 ## Scripts disponíveis
 
