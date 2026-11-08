@@ -3,7 +3,7 @@ name: evoluir-habilidade
 description: Muda uma skill ou as instruções do projeto a pedido ou pelo feedback de uma execução, como falha ou correção da pessoa, e abre o pull request no repositório de origem. Usada ao pedir uma regra nova, mesmo sem dizer evoluir, e ao fim de cada skill. Não serve para testar a skill, criar a primeira versão, ver se a descrição dispara, só revisar nem gravar no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.29.0"
+  version: "0.30.0"
   related:
     - criar-commit
     - criar-pull-request
@@ -40,7 +40,7 @@ flowchart LR
 ```
 
 Exija a skill, pelo nome ou pelo caminho. Antes de editar, confira de onde ela vem. O repositório não é uma entrada: a skill fica em `Pasta das habilidades`, no repositório de origem. A cópia que um projeto recebe pronta, por dependência ou plugin, não se edita: a próxima instalação apaga a alteração. Um pedido para testar uma skill segue `testar-habilidade`, que volta aqui com o resultado da execução.
-Um pedido para acrescentar, tirar ou trocar uma regra também entra aqui e só exige a skill e a mudança. Edite já no repositório de origem, seguindo `Cópia de trabalho`. Suba `metadata.version` e atualize o que a mudança deixa desatualizado. No mesmo turno, grave o commit e abra o pull request seguindo `criar-commit` e `criar-pull-request`. Não pergunte se a pessoa quer a lição em um commit. `Criar pull request ao terminar` decide a abertura: `rascunho` abre em rascunho, `sim` abre pronto, `não` não publica e a resposta diz o nome da branch. Depois, proponha um caso real. Sem execução, a mudança não conta como validada. Um feedback sobre o comportamento do agente também entra aqui: o alvo são as instruções do projeto, tratadas como uma skill. Edite seguindo o formato de `definir-instrucoes-do-projeto` e suba `metadata.version`. Elas não têm `evals/` nem `features/`.
+Um pedido para acrescentar, tirar ou trocar uma regra também entra aqui e só exige a skill e a mudança. Edite já no repositório de origem, seguindo `Cópia de trabalho`. Suba `metadata.version` e atualize o que a mudança deixa desatualizado. No mesmo turno, grave o commit e abra o pull request seguindo `criar-commit` e `criar-pull-request`. Não pergunte se a pessoa quer a lição em um commit. `Criar pull request ao terminar` decide a abertura: `rascunho` abre em rascunho, `sim` abre pronto, `não` não publica e a resposta diz o nome da branch. Depois, proponha um caso real. Sem execução, a mudança não conta como validada. Um feedback sobre o comportamento do agente também entra aqui. O alvo é a skill da tarefa em que o comportamento aconteceu, como a que redige a mensagem ou a que publica a resposta. As instruções do projeto só recebem a regra que vale para toda tarefa e não cabe em nenhuma skill: edite seguindo o formato de `definir-instrucoes-do-projeto` e suba `metadata.version`. Elas não têm `evals/` nem `features/`.
 
 ### Passo 2
 

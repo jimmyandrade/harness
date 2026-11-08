@@ -3,7 +3,7 @@ name: definir-instrucoes-do-projeto
 description: Use essa habilidade sempre que for criar, revisar, enxugar ou reorganizar as instruções do projeto, inclusive os parâmetros das habilidades, mesmo sem dizer AGENTS. NÃO use para escrever uma skill, o guia de contribuição, o mapa da arquitetura nem a documentação do produto.
 metadata:
   author: jimmyandrade
-  version: "0.12.2"
+  version: "0.13.0"
   related:
     - criar-habilidade
     - evoluir-habilidade
@@ -34,7 +34,8 @@ Classifique cada trecho pelo destino, antes de escrever. Grave o plano como uma 
 
 ```mermaid
 flowchart LR
-  A{O trecho é} -->|regra do Notion ou de qualquer lugar| F[Fica nas instruções]
+  A{O trecho é} -->|regra do Notion ou de toda tarefa| F[Fica nas instruções]
+  A -->|regra de uma tarefa que uma skill cobre| K[evoluir-habilidade na skill da tarefa]
   A -->|regra de código, inclusive de segurança| C[Guia de contribuição]
   A -->|mapa de arquivos, pastas e dados| R[Mapa da arquitetura]
   A -->|interface, tipografia e tom| D[Documento de design]
