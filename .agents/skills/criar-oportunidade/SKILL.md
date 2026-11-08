@@ -5,12 +5,13 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.20.0"
+  version: "0.21.0"
   related:
     - procurar-oportunidade
     - definir-grupo-de-oportunidades
     - definir-inscricao
     - organizar-emails
+    - triar-conversas
 ---
 
 # Criar oportunidade
@@ -85,9 +86,11 @@ Não preencha fórmula, rollup nem botão. Não invente categoria nem prioridade
 
 Na edição, bloco de anotações, reunião, transcrição, resumo ou outro bloco de notas da pessoa fica inteiro. Não sugira apagar, arquivar, substituir, ocultar nem remover. O bloco é evidência, mesmo quando um fato dele também cabe numa propriedade. Na revisão do conteúdo, do corpo ou das anotações, leia o bloco para preencher a propriedade que a lista já tem. Data, localidade, empresa ou local, canal, links, taxa, variações de nome e decisão humana entram só quando o bloco afirma um valor que a propriedade já aceita. O comentário analítico vai nas notas de curadoria. O bloco não vira checklist, resumo nem texto operacional, e não se copia de novo no corpo. Se o bloco não basta para afirmar, a propriedade fica vazia e a pendência fica nas notas de curadoria. Não invente o dado nem a propriedade. O bloco do grupo fica com `definir-grupo-de-oportunidades`.
 
+A intercorrência da edição, como um problema com o local do estande, vai num comentário da edição, não no corpo nem nas notas de curadoria. O comentário começa pela data e hora do fato, e cada fato novo é um comentário novo, para os comentários formarem a linha do tempo.
+
 ### Passo 8
 
-Mostre o título, a data, o grupo, quando há, os arquivos anexados e o link. Liste os valores que ficaram sem propriedade. A decisão humana fica vazia e não vira pergunta nem pendência na resposta: ela é da revisão das oportunidades, quando a pessoa quiser. Não organize a participação. Não inscreva. Não crie tarefa. A resposta não pede para nomear a habilidade.
+Mostre o título, a data, o grupo, quando há, os arquivos anexados e o link. Liste os valores que ficaram sem propriedade. Na edição nova de um grupo, mostre as lições das notas do grupo, cada uma com a data, como pontos de atenção da próxima participação. A decisão humana fica vazia e não vira pergunta nem pendência na resposta: ela é da revisão das oportunidades, quando a pessoa quiser. Não organize a participação. Não inscreva. Não crie tarefa. A resposta não pede para nomear a habilidade.
 
 ### Passo 9
 
@@ -214,6 +217,7 @@ localidade só entra se a página já existe. Data e taxa ficaram vazias. A pend
 - O bloco não afirma o valor: a propriedade fica vazia. A pendência vai nas notas de curadoria.
 - A pessoa enviou cartaz, print ou comunicado da edição: o arquivo vai nos anexos da edição, sem duplicar. Na consulta, só ofereça.
 - Conta própria desta edição: perfis da edição. Perfil oficial fica com `definir-grupo-de-oportunidades`.
+- Intercorrência na edição: comentário datado na página. Não vai no corpo nem nas notas de curadoria.
 
 ## Pegadinhas
 

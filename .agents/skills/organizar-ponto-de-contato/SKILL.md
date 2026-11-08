@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-update-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.17.1"
+  version: "0.18.0"
   aliases:
     - organizar-feira
   related:
@@ -18,6 +18,7 @@ metadata:
     - fazer-fechamento
     - procurar-oportunidade
     - sincronizar-cronograma
+    - triar-conversas
 ---
 
 # Organizar ponto de contato
@@ -29,6 +30,10 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Formato da data com dia da semana": "terça-feira, 01/09/2026"
 # `Agendas` lista cada agenda pelo `"Nome"` e, quando houver, pelo `"ID"`, com o `"Uso"`: `padrão` recebe o evento novo; `em uso` é lida e gravada quando o pedido a nomeia; `só leitura` é lida e nunca gravada; `aposentada` é um produto que não se usa mais, lido só para achar o evento que ficou lá; `ignorada` não é lida nem gravada, mesmo que exista ou que o histórico a cite. `"Finalidade"`, quando houver, diz o tipo de evento que vai para aquela agenda. Case a agenda pelo ID; sem ID, pelo nome do calendário, que contém o nome da lista. Sem agenda `padrão` na lista, a agenda padrão é a principal da conta. A agenda do ponto de contato é a de `Agendas` com a finalidade pontos de contato. Sem ela, é a agenda padrão.
 "Agendas": []
+# `Contrato com o organizador` é `obrigatório` ou `não exigido`. `obrigatório` confere o contrato da participação no Passo 11.
+"Contrato com o organizador": "não exigido"
+# `Cláusulas do contrato` lista o que o contrato com o organizador precisa tratar, como o local do estande no mapa aprovado.
+"Cláusulas do contrato": []
 ```
 ## Instruções
 
@@ -119,6 +124,10 @@ flowchart LR
   F{Vários dias confirmados?} -->|leitura ou logística| S[Um evento por dia]
   F -->|viagem ou ocupação contínua| C[Dia inteiro ou intervalo]
 ```
+
+### Passo 11
+
+Ao organizar, leia as lições nas notas do grupo de oportunidades e liste as que valem para esta participação. Com `Contrato com o organizador` em `obrigatório`, confira se o contrato trata cada item de `Cláusulas do contrato` e cada lição, com a consequência se o organizador descumprir. Liste o que falta como pendência, para pedir ao organizador. Não redija o contrato.
 
 ## Problemas comuns
 

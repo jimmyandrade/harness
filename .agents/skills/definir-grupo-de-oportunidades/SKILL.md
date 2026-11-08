@@ -5,12 +5,13 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.6.0"
   aliases:
     - definir-grupo
   related:
     - procurar-oportunidade
     - criar-oportunidade
+    - triar-conversas
 ---
 
 # Definir grupo de oportunidades
@@ -55,6 +56,8 @@ Oficina ou curso recorrente do mesmo organizador usa um grupo só, nomeado pelo 
 ### Passo 6
 
 O que é estável fica no grupo. Regra geral, canal oficial que se repete e princípio de curadoria vão nas notas do grupo. Organizador e empresa ou local padrão só quando não mudam entre edições. Local fixo só quando o evento é daquele lugar. Perfil social oficial, como o do evento ou da organização, vai nos perfis oficiais. Só relacione página de perfil que já existe. Não crie o perfil. Conta própria de uma edição fica nos perfis da edição, com `criar-oportunidade`. Link oficial recorrente vai nas notas do grupo, quando o grupo não tem link oficial. Endereço, horário, valor, formulário e vaga de uma data ficam na edição. Não grave isso no corpo. A etiqueta de e-mail do grupo guarda o nome inteiro da etiqueta das conversas do grupo, sem ano e sem data, e a etiqueta de cada data fica na edição, com `criar-oportunidade`.
+
+A lição que uma edição ensina para as próximas, como confirmar antes o local do estande no mapa da feira, vai nas notas do grupo, numa linha nova que começa pela data da edição de origem. Grave só com o sim da pessoa. Não apague a linha de uma lição anterior. A intercorrência que gerou a lição fica num comentário da edição, como `triar-conversas` grava.
 
 ### Passo 7
 
@@ -203,6 +206,7 @@ este negócio não usa grupos de oportunidades. Parei sem criar.
 - Arquivar antes da cópia parece limpeza. A cópia e o vínculo das edições vêm primeiro.
 - Encerrar depois de criar parece o fim. A checagem da duplicata vem antes. Duplicata em aberto não é tarefa concluída.
 - O valor sem propriedade parece caber no corpo. Ele vai para a lista do fim, com a proposta da propriedade.
+- A intercorrência de uma edição parece caber nas notas do grupo. O fato fica num comentário da edição. O grupo guarda só a lição que vale para as próximas.
 
 ## Scripts disponíveis
 
