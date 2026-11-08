@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.72.0](https://github.com/jimmyandrade/harness/compare/v1.71.0...v1.72.0) (2026-11-08)
+
+
+### Features
+
+* **definir-pessoa:** add the person to the online store and fix Brazilian mobile numbers ([#943](https://github.com/jimmyandrade/harness/issues/943)) ([7904df1](https://github.com/jimmyandrade/harness/commit/7904df1aa90ab6805af7b57bbfd6268cbb2f6ab9))
+* keep task rules in the skill of the task, not in the project instructions ([#942](https://github.com/jimmyandrade/harness/issues/942)) ([b6a6b33](https://github.com/jimmyandrade/harness/commit/b6a6b338fd78a4607d505e7aa92419cb4123abc5))
+* **redigir-com-tom-de-voz:** call people by their registered name, not an unconfirmed nickname ([#940](https://github.com/jimmyandrade/harness/issues/940)) ([95922c1](https://github.com/jimmyandrade/harness/commit/95922c142d352ae7e07dba4ee6d94503cd2c914a))
+* show a pending draft again for approval whenever it is mentioned ([#939](https://github.com/jimmyandrade/harness/issues/939)) ([dc56e93](https://github.com/jimmyandrade/harness/commit/dc56e9325ff3af9f17d3f58565cc2aac2e5cab98))
+
 ## [1.71.0](https://github.com/jimmyandrade/harness/compare/v1.70.0...v1.71.0) (2026-11-08)
 
 
