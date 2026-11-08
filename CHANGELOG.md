@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.71.0](https://github.com/jimmyandrade/harness/compare/v1.70.0...v1.71.0) (2026-11-08)
+
+
+### Features
+
+* **garantir-ingresso:** offer to tell a known speaker that the person is coming ([#935](https://github.com/jimmyandrade/harness/issues/935)) ([1e603c4](https://github.com/jimmyandrade/harness/commit/1e603c4b794ff2e6c51e5b7ad1045f99dbcb5d36))
+* triage conversations and keep lessons for the next edition ([#938](https://github.com/jimmyandrade/harness/issues/938)) ([c02dc06](https://github.com/jimmyandrade/harness/commit/c02dc06819f2f210d97b4c2d3a4f8d79ab574b36))
+
 ## [1.70.0](https://github.com/jimmyandrade/harness/compare/v1.69.0...v1.70.0) (2026-11-07)
 
 
