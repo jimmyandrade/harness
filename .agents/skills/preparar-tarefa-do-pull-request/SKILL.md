@@ -3,10 +3,11 @@ name: preparar-tarefa-do-pull-request
 description: Garante a tarefa da demanda antes do pull request e confere se a descrição de qualquer card segue o modelo do tipo. Usada quando falta a tarefa, quando o PR já existe sem ela, ao implementar uma issue e ao escrever ou editar um card, mesmo subtarefa. Não cria sozinha nem escolhe o projeto por um card parecido. Não serve para abrir o PR.
 metadata:
   author: jimmyandrade
-  version: "0.9.1"
+  version: "0.10.0"
   related:
     - definir-tarefa
     - evoluir-habilidade
+    - formalizar-decisao
     - levantar-contexto-do-pull-request
     - priorizar-itens
     - procurar-tarefa
@@ -92,6 +93,7 @@ Monte a tarefa com `definir-tarefa`, que cuida da boa escrita: título, prazo, d
 - A tarefa guarda o que se espera: o escopo e os critérios de aceitação, que dizem o que fica pronto e quando. Como foi feito e por que cada decisão foi tomada ficam na descrição do PR, não na tarefa. Quando uma pergunta de revisão muda o comportamento, atualize o critério afetado, em Dado, Quando e Então, e a descrição do PR ganha a decisão.
 - Os critérios de aceitação seguem o `Formato dos critérios de aceitação`. Uma tarefa que muda código de um app com ambiente de teste por PR termina com o `Critério de validação da mudança`. O registro diz o que foi procurado e o que foi encontrado, nunca só que não há regressão.
 - Antes de escrever ou editar a descrição de qualquer card, leia o modelo do tipo em `Modelos de descrição` e o `Formato dos critérios de aceitação`. Vale também para subtarefa e para card que nasce de um achado, sem PR. A descrição segue as seções do modelo, na ordem. Sem modelo para o tipo, os critérios usam o mesmo formato: um título com "deve" ou "não deve" e os itens Dado que, Quando e Então. Nunca lista solta de bullets. Um reforço do projeto soma ao modelo do tipo e nunca o substitui, e não vale numa tarefa criada no projeto de reserva.
+- Ao atualizar um card que já existe depois de uma reunião, padronize primeiro o título, com as etiquetas entre colchetes separadas por espaço e na mesma grafia dos cards irmãos. Adapte a descrição ao modelo do tipo sem perder nenhuma informação: o que não cabe numa seção do modelo vai para `Contexto` ou `Pontos em aberto`, nunca é apagado. Ponha as decisões da reunião numa seção `Decisões`, com quem decidiu, quando e o link da ata, como manda `formalizar-decisao`.
 - O `Formato da descrição` manda na gravação: link e caixa de seleção no formato próprio do rastreador, conferidos lendo a tarefa de volta.
 - Aplique as `Lentes de revisão` ao decidir título, escopo e tipo: cada afirmação se apoia no PR, no diff ou no que a pessoa disse, o que for hipótese vai marcado como hipótese, e a habilidade diz o que não conseguiu confirmar.
 - Sem rodapé nem assinatura de ferramenta.
