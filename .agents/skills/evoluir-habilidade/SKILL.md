@@ -3,7 +3,7 @@ name: evoluir-habilidade
 description: Muda uma skill ou as instruções do projeto a pedido ou pelo feedback de uma execução, como falha ou correção da pessoa, e abre o pull request no repositório de origem. Usada ao pedir uma regra nova, mesmo sem dizer evoluir, e ao fim de cada skill. Não serve para testar a skill, criar a primeira versão, ver se a descrição dispara, só revisar nem gravar no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.30.2"
+  version: "0.31.0"
   related:
     - criar-commit
     - criar-pull-request
@@ -13,6 +13,8 @@ metadata:
     - medir-habilidade
     - revisar-habilidade
     - testar-habilidade
+  models:
+    - skill-md
 ---
 
 # Evoluir habilidade
@@ -43,6 +45,18 @@ Exija a skill, pelo nome ou pelo caminho. Antes de editar, confira de onde ela v
 
 Um pedido para acrescentar, tirar ou trocar uma regra também entra aqui e só exige a skill e a mudança. Edite já no repositório de origem, seguindo `Cópia de trabalho`. Suba `metadata.version` e atualize o que a mudança deixa desatualizado.
 
+```mermaid
+flowchart LR
+  A{Mudança?} -->|vazia| V["0.0.x só título"]
+  A -->|correção| P[patch]
+  A -->|nova| M[minor]
+  A -->|breaking ou renomear| B{3 evals validados?}
+  B -->|sim| C["major zera minor e patch"]
+  B -->|não| D["0.x sobe o 2º"]
+```
+
+Renomear uma skill é mudança que quebra: o assunto do commit leva `!` depois do tipo, o rodapé começa com `BREAKING CHANGE:` com o nome antigo e o novo, e cada nome anterior entra em `metadata.aliases`, sem tirar os que já existiam.
+
 No mesmo turno, grave o commit e abra o pull request seguindo `criar-commit` e `criar-pull-request`. Não pergunte se a pessoa quer a lição em um commit. `Criar pull request ao terminar` decide a abertura: `rascunho` abre em rascunho, `sim` abre pronto, `não` não publica e a resposta diz o nome da branch.
 
 Depois, proponha um caso real. Sem execução, a mudança não conta como validada.
@@ -53,7 +67,7 @@ Um feedback sobre o comportamento do agente também entra aqui. O alvo é a skil
 
 A skill é um documento vivo. A iteração parte do feedback.
 Resultado inconsistente, falha de chamada e correção da pessoa: melhore a instrução e acrescente o tratamento do erro.
-Antes de editar, confira de onde a skill vem e leia a skill inteira, as `related` e os parâmetros. A cópia instalada por dependência ou plugin não se edita. A frase nova não contradiz nenhuma: quando a regra muda, reescreva a frase que já existe e cada repetição dela em `Problemas comuns`, `Exemplos de entrada e saída`, `Casos-limite` e `Pegadinhas`. Não acrescente exceção noutro lugar. Valor que muda de um projeto para outro, como pasta, caminho ou nome de banco, vira parâmetro; o passo cita a chave. A explicação do parâmetro fica nos comentários YAML acima da chave, nunca no texto do passo. Decisão sobre palavra, como usar um termo ou outro, ou como escrever uma frase, não entra na skill nem num parâmetro: vai para o vocabulário, por `definir-vocabulario`.
+Antes de editar, confira de onde a skill vem e leia a skill inteira, as `related` e os parâmetros. Leia o modelo de saída `skill-md` quando for gerar a saída. A cópia instalada por dependência ou plugin não se edita. A frase nova não contradiz nenhuma: quando a regra muda, reescreva a frase que já existe e cada repetição dela em `Problemas comuns`, `Exemplos de entrada e saída`, `Casos-limite` e `Pegadinhas`. Não acrescente exceção noutro lugar. Valor que muda de um projeto para outro, como pasta, caminho ou nome de banco, vira parâmetro; o passo cita a chave. A explicação do parâmetro fica nos comentários YAML acima da chave, nunca no texto do passo. Decisão sobre palavra, como usar um termo ou outro, ou como escrever uma frase, não entra na skill nem num parâmetro: vai para o vocabulário, por `definir-vocabulario`.
 Subdisparo e sobredisparo vão para `descrever-habilidade-ou-schema`.
 O resultado de `testar-habilidade` edita a skill validada no repositório de origem, na mesma conversa do teste. Sem essa edição, o teste não vale.
 Incorpore todos os resultados, não só as falhas. A edição vem do que a execução mostrou.
@@ -117,6 +131,15 @@ Se você acrescentar uma frase sem ler o resto da skill, ela pode mandar o opost
 1. Confira de onde a skill vem e leia a skill inteira, as `related` e os parâmetros antes de editar. A cópia instalada por dependência ou plugin não se edita.
 2. Reescreva a frase que já existe e cada repetição dela. Não acrescente exceção noutro lugar.
 3. Valor que muda de um projeto para outro vira parâmetro. O passo cita a chave.
+
+### Rename fora do breaking change
+
+Se você renomear o `name` e tratar a versão como correção ou funcionalidade, ou commitar sem breaking change, o nome antigo quebra sem aviso.
+
+1. Suba o major e zere minor e patch. Sem 3 evals validados, suba o segundo número, zere o patch, e mantenha `0.x`.
+2. Ponha `!` depois do tipo no assunto.
+3. Comece o rodapé com `BREAKING CHANGE:` e cite o nome antigo e o novo.
+4. Grave cada nome anterior em `metadata.aliases` e mantenha os que já existiam.
 
 ### Feedback sem edição
 

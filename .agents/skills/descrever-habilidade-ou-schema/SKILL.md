@@ -1,9 +1,9 @@
 ---
 name: descrever-habilidade-ou-schema
-description: Redige, corrige e testa se a descrição de uma skill, das instruções do projeto ou de um schema dispara, em subdisparo, sobredisparo, paráfrase ou tópico sem relação. Usada quando a descrição é o assunto, mesmo sem dizer descrição. NÃO serve para escrever o corpo da skill, avaliar a qualidade da saída, descrever produto nem gravar a página no Notion.
+description: Escolhe o nome e redige, corrige e testa se a descrição de uma skill, das instruções do projeto ou de um schema dispara, em subdisparo, sobredisparo, paráfrase ou tópico sem relação. Usada quando o nome ou a descrição é o assunto, mesmo sem dizer descrição. NÃO serve para escrever o corpo da skill, avaliar a qualidade da saída, descrever produto nem gravar a página no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.21.4"
+  version: "0.22.0"
   related:
     - criar-commit
     - criar-pull-request
@@ -46,6 +46,10 @@ Nas instruções do projeto, a descrição fica no frontmatter e segue as regras
 Escreva sempre em terceira pessoa. A descrição entra no prompt do sistema, e um ponto de vista misturado atrapalha a escolha da skill. `Use essa habilidade sempre que` e `NÃO use para` são imperativo e não entram. A primeira frase diz o que a skill faz, com o verbo, como `Abre` ou `Define`. `Usada quando` vem depois e não abre a descrição.
 Fale da intenção de quem pede, não da mecânica interna. Liste os contextos em que a skill vale, inclusive quando a pessoa não nomeia o domínio. Quando há o que ficar de fora, feche com `NÃO serve para`.
 Não repita o nome da skill. No Notion, Usar automaticamente carrega os gatilhos da propriedade Descrição. O roteador decide por esse texto se carrega a skill. O procedimento fica no corpo, para não repetir instrução em cada conversa. Exemplo de prompt fica em `Exemplos de entrada e saída`.
+
+O nome da skill também é catálogo. Escreva-o no idioma da skill e depois em kebab-case ASCII: sem acento, de 1 a 64 caracteres, só letras minúsculas, dígitos e hífen, sem hífen no começo, no fim nem repetido. O nome é igual à pasta da skill.
+A primeira palavra é o verbo e as seguintes formam a entidade, com quantas palavras ela precisar. Para saber se algo já existe, o verbo é `procurar`. Cadastrar, revisar e editar a mesma entidade usam `definir`, numa skill só. Só cadastrar usa `criar` e só revisar usa `revisar`. Venda ou despesa usa `lancar`, e `lançar` vira `lancar`. Outro trabalho usa outro verbo. Apagar, excluir e deletar não ganham skill.
+Quando o escopo da skill, de um script ou de um workflow muda, o nome muda junto e descreve o escopo atual. Renomear a skill é a mudança que quebra de `evoluir-habilidade`.
 
 ### Passo 3
 
@@ -175,6 +179,21 @@ Se você gravar as consultas de disparo em outro arquivo, o caso sai do padrão.
 2. Use `id`, `prompt`, `expected_output`, `files`, `should_trigger` e `split`.
 3. Apague o outro arquivo.
 
+### Verbo errado no nome
+
+Se você for saber se algo já existe e o nome não começar com `procurar-`, separar `criar-` e `revisar-` quando cadastrar, revisar e editar usam os mesmos critérios, lançar venda ou despesa sem `lancar-`, for só cadastrar e o nome não começar com `criar-`, ou for só revisar e o nome não começar com `revisar-`, a skill foge dos verbos.
+
+1. Para saber se já existe, comece com `procurar-` e termine com a entidade.
+2. Quando cadastrar, revisar e editar usam os mesmos critérios, comece com `definir-` e termine com a entidade. Uma skill só.
+3. Para só cadastrar, comece com `criar-`. Para só revisar, comece com `revisar-`. Venda ou despesa começa com `lancar-`.
+
+### Nome do escopo antigo
+
+Se você mudar o escopo e manter o nome antigo, a skill, o script ou o workflow aparece pelo que já não faz.
+
+1. Renomeie para o escopo atual.
+2. Se for o `name` da skill, trate como mudança que quebra, seguindo `evoluir-habilidade`.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
@@ -206,6 +225,7 @@ Explora, resume, limpa e gera gráfico de CSV, TSV ou planilha. Usada quando a p
 
 ## Pegadinhas
 
+- O cedilha e o acento parecem caber no nome. Só o título e o corpo mantêm a grafia: o nome é ASCII, e `lançar` vira `lancar`.
 - O nome da skill parece obrigatório na descrição. O roteador já tem o nome. A descrição começa com o verbo do que a skill faz.
 - `Use essa habilidade sempre que` parece um gatilho forte. É imperativo. A descrição fica sempre em terceira pessoa. O gatilho fica em `Usada quando`, depois da frase que diz o que a skill faz. O fechamento fica `NÃO serve para` quando há o que deixar de fora.
 - `Usada quando` parece o começo da descrição. A primeira frase diz o que a skill faz.

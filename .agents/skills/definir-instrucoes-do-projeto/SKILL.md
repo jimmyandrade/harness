@@ -3,7 +3,7 @@ name: definir-instrucoes-do-projeto
 description: Use essa habilidade sempre que for criar, revisar, enxugar ou reorganizar as instruções do projeto, inclusive os parâmetros das habilidades, mesmo sem dizer AGENTS. NÃO use para escrever uma skill, o guia de contribuição, o mapa da arquitetura nem a documentação do produto.
 metadata:
   author: jimmyandrade
-  version: "0.13.0"
+  version: "0.14.0"
   related:
     - criar-habilidade
     - evoluir-habilidade
@@ -59,7 +59,9 @@ Monte os parâmetros no frontmatter, em `metadata.parameters`, como árvore: a e
 
 Entra só o valor que difere do padrão da habilidade e que ela não acha sozinha. O valor que ela calcula, como o repositório a partir do remoto, e o que ela lê de um registro da fonte de dados, como as medidas do formato de um post no Notion, ficam fora do bloco. Antes de propor uma chave, leia no passo da habilidade de onde vem o valor: se vem de um registro, ele fica no registro, porque o parâmetro passaria por cima dele em toda execução e prenderia um valor que varia de registro para registro.
 
-Num harness de negócio, o frontmatter também tem `description` e `metadata.version`. Suba a versão a cada mudança: patch para correção, minor para regra nova, major para mudança que quebra. Ela vira a versão da página no Notion, e os parâmetros aparecem no fim da página, num bloco de código.
+Todo YAML que a skill ou o projeto grava, como o frontmatter, o bloco de parâmetros e o `config.yaml`, é YAML válido. Um parâmetro tem chave e valor curtos, numa linha, sem `: ` no meio. Texto com `: ` ou com mais de uma linha não é parâmetro: vai para o texto da skill, para uma árvore de decisão ou para uma referência, e o parâmetro guarda só o nome ou um valor curto que aponta para isso. Sem aspas, esse texto quebra o parser com "Implicit keys need to be on a single line". Quando o repositório tem convenção própria, a skill a descobre nele e o parâmetro só dá o padrão. Depois de gravar, leia o YAML com um parser antes de dizer que está pronto.
+
+O frontmatter tem `metadata.version` e, num harness de negócio, também `description`. Suba a versão a cada mudança, inclusive no core: patch para correção, minor para regra nova, major para mudança que quebra. Ela vira a versão da página no Notion, e os parâmetros aparecem no fim da página, num bloco de código.
 
 ### Passo 5
 

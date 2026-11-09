@@ -3,7 +3,7 @@ name: criar-commit
 description: Use essa habilidade sempre que terminar um trabalho que mudou o repositório ou for commitar, separar commits ou escrever a mensagem, mesmo sem dizer commit. NÃO use para push, abrir PR, rebase nem merge (use criar-pull-request).
 metadata:
   author: jimmyandrade
-  version: "0.23.4"
+  version: "0.24.0"
 ---
 
 # Criar commit
@@ -82,6 +82,7 @@ O tipo segue o que a mudança faz, não a extensão do arquivo.
 Correção de erro é `fix:`, mesmo em Markdown.
 `docs:` fica para a documentação.
 O assunto diz por que a mudança existe.
+Quando a mudança afeta uma skill, o assunto é `tipo(nome-da-skill): descrição`.
 Quando o trabalho tem uma issue, a mensagem cita `#<número>`.
 Sem issue, não invente número.
 A forma que o repositório já documenta, como `Closes #<número>`, vale.

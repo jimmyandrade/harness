@@ -3,7 +3,7 @@ name: definir-arquivos-da-habilidade
 description: Define onde ficam os scripts, referências, modelos e testes de uma skill e escreve Scripts disponíveis. Usada quando a skill ganha, move ou renomeia um arquivo além do SKILL.md, ou quando se propõe um script. Não serve para escrever o texto da skill, a descrição nem gravar no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.8.0"
+  version: "0.9.0"
   related:
     - criar-habilidade
     - evoluir-habilidade
@@ -31,6 +31,10 @@ O nome e o lugar seguem essa regra desde a proposta, inclusive numa lista na con
 Antes de propor um script, decida pelo [Passo 3](#passo-3) se ele é preciso: comando curto ou de ferramenta que já resolve fica listado em `Scripts disponíveis`, e só comando longo vira script.
 Tabela que estoura o limite vai para `references/`, com a condição de leitura. "Leia o material se a API não retornar 200" serve.
 
+Uma decisão de caso que a skill aprende com a pessoa, como classificar um item ou escolher um destino, fica numa árvore de decisão Mermaid, `flowchart TD`, num arquivo `.mmd` ao lado do `config.yaml`, e um parâmetro cita o arquivo. A árvore é lida de cima para baixo e a primeira pergunta que bater decide. Quando nenhuma bate, a skill pergunta e acrescenta a regra na árvore. O texto da skill guarda só o comportamento geral, nunca a decisão de um caso.
+
+O `README.md` da pasta de skills é o grafo Mermaid de como as skills se relacionam, gerado por script. Num harness de negócio, ele também mostra as skills do core, num grupo próprio. Não edite à mão: gere de novo depois de mudar `metadata.related`. O Lefthook roda a checagem das skills no commit, e ela falha quando esse README está desatualizado. Não commite se ela falhar.
+
 ### Passo 2
 
 Modelo de entrada ou saída não entra no corpo, nem quando é curto.
@@ -44,8 +48,6 @@ Feche com `Scripts disponíveis`: uma lista dos scripts e, em seguida, a lista o
 Os passos não citam comando nem nome de arquivo.
 O passo diz o que será feito.
 O comando fica só em `Scripts disponíveis`.
-Agrupe na mesma linha as frases que tratam do mesmo tema, e separe os temas com uma linha em branco. O texto fica legível de relance, sem bloco gigante nem uma frase por linha, e o diff mostra só o tema que mudou. Isso é decisão de redação, não de script.
-Numa lista, a frase que fica sozinha vira item próprio, e a que só se entende com a anterior fica no mesmo item.
 Comando curto fica nessa seção, com versão fixa quando o ecossistema permite.
 Comando longo vira script testado em `scripts/`.
 Se um pacote já resolve, cite o comando nessa seção e não crie `scripts/`. O pré-requisito também vai em `compatibility`.
@@ -105,6 +107,8 @@ O script sai de `scripts/` da primeira skill e vai para `.agents/scripts/check-s
 
 ## Scripts disponíveis
 
-- Nenhum.
+- `.agents/scripts/skill-graph/run-graph.sh`: gera o `README.md` da pasta de skills.
+- `.agents/scripts/check-skill/run-check.sh`: roda a checagem que o Lefthook roda no commit.
 
-1. Não há script para executar.
+1. Depois de mudar `metadata.related`, rode `.agents/scripts/skill-graph/run-graph.sh`.
+2. Antes de commitar, rode `.agents/scripts/check-skill/run-check.sh` quando não houver hook de pre-commit.

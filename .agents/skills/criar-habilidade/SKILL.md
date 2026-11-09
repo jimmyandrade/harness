@@ -3,7 +3,7 @@ name: criar-habilidade
 description: Cria, adiciona e escreve skills a partir de uma tarefa real. Usada quando a pessoa quer uma skill nova, mesmo sem dizer skill. NÃO serve para editar código, escrever página que não seja skill, otimizar só a descrição nem gravar a skill no Notion.
 metadata:
   author: jimmyandrade
-  version: "3.22.1"
+  version: "3.23.0"
   related:
     - criar-commit
     - criar-pull-request
@@ -12,6 +12,8 @@ metadata:
     - evoluir-habilidade
     - medir-habilidade
     - testar-habilidade
+  models:
+    - skill-md
 ---
 
 # Criar habilidade
@@ -49,22 +51,12 @@ Leia relatórios reais da equipe. Incorpore o esquema, o modo de falha e o proce
 ### Passo 3
 
 Escreva nome, descrição, metadados e corpo.
-O primeiro heading de nível 2 é `Parâmetros de configuração`, com um bloco `yaml`. O passo cita a chave.
-A explicação de um parâmetro fica num comentário YAML na linha de cima da chave, não num parágrafo depois do bloco.
-No comentário, o nome do parâmetro e cada valor possível ficam entre crases.
-Depois vêm `Instruções`, `Problemas comuns`, `Exemplos de entrada e saída`, `Casos-limite`, `Pegadinhas` e `Scripts disponíveis`.
-A primeira frase é `Estes exemplos ilustram fatos. Eles podem não estar no data source.`
-A entrada é um heading de nível 3 e a saída é o parágrafo seguinte, com uma linha em branco entre pares. Não escreva `Entrada:` nem `Saída:`.
-Cada heading de nível 3 em `Instruções` é `Passo 1`, `Passo 2`.
-Roteamento para outra habilidade, ou mais de um desfecho, fica num flowchart Mermaid no sentido configurado.
-Um caminho de cliques numa tela, como o de uma sessão gravada, também: um nó por tela, campo ou botão, com o nome que aparece na tela, e as armadilhas numa lista curta depois.
-Em `Problemas comuns`, cada problema é um heading de nível 3, um parágrafo que começa com `Se você` e, em seguida, uma lista ordenada.
-O bloco de parâmetros inclui `"Modo de aprendizado": "perguntar"`, e o último passo de `Instruções` é `Ao terminar, siga evoluir-habilidade conforme Modo de aprendizado.`
+Leia o modelo de saída `skill-md` quando for gerar a saída.
+O nome e a descrição seguem `descrever-habilidade-ou-schema`, e a versão segue `evoluir-habilidade`.
 Pastas, scripts, referências, modelos e `Scripts disponíveis` seguem `definir-arquivos-da-habilidade`.
-Agrupe na mesma linha as frases que tratam do mesmo tema, e separe os temas com uma linha em branco. O texto fica legível de relance, sem bloco gigante nem uma frase por linha, e o diff mostra só o tema que mudou. Isso é decisão de redação, não de script.
-Numa lista, a frase que fica sozinha vira item próprio, e a que só se entende com a anterior fica no mesmo item.
 O comando não entra no passo.
-Antes de escrever, leia as skills do mesmo assunto, as instruções do projeto e, ao atualizar, a skill inteira. Uma frase nova não contradiz outra já escrita: quando a regra muda, reescreva a que existe. Valor que muda de um projeto para outro, como pasta, caminho ou nome de banco, vira parâmetro.
+
+Antes de escrever, leia as skills do mesmo assunto, as instruções do projeto e, ao atualizar, a skill inteira. Uma frase nova não contradiz outra já escrita: quando a regra muda, reescreva a que existe.
 
 ### Passo 4
 
@@ -79,70 +71,42 @@ O fato fica no `SKILL.md`. Um arquivo separado só serve se a frase disser quand
 
 ### Passo 6
 
-Escreva a descrição e o corpo no idioma deste texto.
-Escreva o nome nesse idioma e depois em kebab-case ASCII: tire acentos. De 1 a 64 caracteres. A primeira palavra é o verbo. As seguintes formam a entidade. Para saber se algo já existe, o verbo é `procurar`. Cadastrar, revisar e editar a mesma entidade usam `definir`, numa skill só. Só cadastrar usa `criar`. Só revisar usa `revisar`. Venda ou despesa usa `lancar`, e `lançar` vira `lancar`. Outro trabalho usa outro verbo. Apagar, excluir e deletar não ganham skill. Só letras minúsculas, dígitos e hífen. Não comece nem termine com hífen. Sem hífens consecutivos. O nome é igual à pasta da skill.
-Se o escopo da skill, de um script ou de um workflow mudar, o nome muda junto. O nome descreve o escopo atual. Renomear a skill continua breaking change.
+Escreva o nome, a descrição e o corpo no idioma deste texto. O texto exato do usuário entra sem mudança quando já está nesse idioma. Caso contrário, traduza.
+Nome e descrição, juntos, não passam de `Tokens do catálogo`. O corpo não passa de `Linhas` nem de `Tokens do corpo`. Se alongar, separe antes.
 
 ### Passo 7
 
-- Título: nível 1. O nome com espaço no lugar do hífen e a grafia correta, com acento e hífen da palavra. Maiúscula só no começo e em nome próprio.
-- Descrição: segue `descrever-habilidade-ou-schema` e fica sempre em terceira pessoa. A primeira frase diz o que a skill faz. `Usada quando` vem depois e não abre a descrição. `Use essa habilidade sempre que` é imperativo e não entra. O `NÃO serve para` fica quando há o que deixar de fora. O nome fica no infinitivo, não no gerúndio, pela ADR 0013.
-- Cite outra habilidade pelo nome entre crases, ou no nó de um fluxograma Mermaid. Só assim a checagem e o grafo a reconhecem.
-- Nome e descrição, juntos, não passam de `Tokens do catálogo`. O corpo não passa de `Linhas` nem de `Tokens do corpo`. Se alongar, separe antes.
-- Texto exato do usuário entra sem mudança quando já está no idioma deste texto. Caso contrário, traduza nome, descrição e corpo.
+Banco, página e workspace do Notion não entram na skill. A pessoa informa o data source na execução. Se ele não estiver no workspace conectado, pare e peça. Não troque por um banco de outro workspace.
 
 ### Passo 8
 
-- `metadata.author` é o nome da organização.
-- `metadata.version` entre aspas, semver.
-
-```mermaid
-flowchart LR
-  A{Mudança?} -->|vazia| V["0.0.x só título"]
-  A -->|correção| P[patch]
-  A -->|nova| M[minor]
-  A -->|breaking ou renomear| B{3 casos?}
-  B -->|sim| C["major zera minor e patch"]
-  B -->|não| D["0.x sobe o 2º"]
-```
-
-Renomear leva `!` e rodapé `BREAKING CHANGE:` com o nome antigo e o novo. Cada nome anterior entra em `metadata.aliases`, e os que já existiam ficam.
-- Ao criar a skill, grave `evals/evals.json` com `skill_name` e `evals` vazio. Não invente casos.
-- Não inclua `license` enquanto o projeto não exigir licença.
-- Inclua `compatibility` só quando a skill precisar de internet ou de Python. Não cite produto, git, docker nem jq.
-- `allowed-tools`, se existir, é uma lista separada por espaço. `aliases` e `tags` em `metadata`, se existirem, são um item por linha, começando com `-`.
-- Toda skill sincroniza com o Notion. O frontmatter não tem `metadata.notion` nem `metadata.internal`.
-- Banco, página e workspace do Notion não entram na skill. A pessoa informa o data source na execução. Se ele não estiver no workspace conectado, pare e peça. Não troque por um banco de outro workspace.
-
-### Passo 9
-
 Pare quando a descrição dispara a skill e o corpo não tem mais o que cortar. Separe uma tabela literal do corpo só se ela fizer a skill passar de `Linhas` ou de `Tokens do corpo`, e aponte uma vez.
 
-### Passo 10
+### Passo 9
 
 A primeira versão não vai para produção. A skill é um documento vivo. Execute em tarefas reais e incorpore todos os resultados, não só as falhas.
 Pergunte o que gerou falso positivo, o que passou despercebido e o que pode sair, e repita enquanto o feedback pedir.
 Subdisparo e sobredisparo vão para `descrever-habilidade-ou-schema`. Resultado inconsistente, falha de chamada e correção da pessoa ficam em `evoluir-habilidade`.
 Leia o registro, não só o resultado. Se o agente gasta tempo em etapa improdutiva, a instrução está vaga, não se aplica, ou oferece opções sem padrão.
 
-### Passo 11
+### Passo 10
 
 Deixe só o que o agente erraria sem a skill: convenção do projeto, procedimento do domínio, caso de borda não óbvio, ferramenta ou API específica. Não explique o que as coisas são nem o que fazem.
 Para cada trecho, pergunte se o agente erraria sem essa instrução. Se a resposta for não, apague. Se estiver em dúvida, teste com `testar-habilidade`. Se o agente já faz a tarefa inteira sem a skill, ela não agrega valor.
 
-### Passo 12
+### Passo 11
 
 O escopo é uma unidade de trabalho coerente, que se junta a outras skills. Escopo estreito demais obriga a carregar várias skills na mesma tarefa e mistura instruções. Escopo amplo demais dificulta disparar a skill. Consultar uma fonte e formatar o resultado cabe junto. Administrar o armazenamento além disso já é outra skill.
 Mantenha o detalhe moderado: passos curtos e um exemplo prático. Se estiver cobrindo todo caso de borda possível, deixe a maioria para o julgamento do agente.
 Onde houver várias abordagens válidas, explique o porquê, escolha um padrão e mencione as alternativas por pouco. Onde a operação for sensível, a consistência importar ou a sequência for obrigatória, prescreva os passos. Calibre cada parte. A skill ensina a abordar uma categoria de problemas, não a saída de um caso só.
 
-### Passo 13
+### Passo 12
 
 Num fluxo de vários passos, principalmente quando um passo depende de outro ou há um portão de validação, dê um checklist explícito para o agente marcar o que já fez e não pular etapa.
 Antes de seguir, o agente valida o próprio trabalho: faz, roda um validador, corrige e repete até passar. O validador é um script, um checklist ou uma revisão.
 Em operação em lote ou destrutiva, o agente primeiro grava um plano estruturado, valida esse plano contra a fonte de verdade e só então executa.
 
-### Passo 14
+### Passo 13
 
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
@@ -169,20 +133,6 @@ Se você repetir a descrição no corpo ou abrir com um prefácio, o corpo gasta
 
 1. Apague o prefácio.
 2. Deixe no corpo só o que o agente ainda não sabe.
-
-### Exemplo invisível no Notion
-
-Se você escrever o exemplo em `<dl>`, o Notion não mostra a entrada nem a saída.
-
-1. Ponha a entrada num heading de nível 3.
-2. Ponha a saída no parágrafo seguinte.
-
-### Passo fora da ordem
-
-Se você nomear um heading de nível 3 em `Instruções` com sufixo de letra ou furar a ordem, a skill deixa de seguir `Passo 1`, `Passo 2`.
-
-1. Renomeie para `Passo 1`, `Passo 2`, na ordem.
-2. Não use sufixo de letra.
 
 ### Procedimento genérico
 
@@ -232,30 +182,6 @@ Se você mandar executar uma operação destrutiva ou em lote sem plano e sem va
 2. Valide o plano contra a fonte de verdade.
 3. Execute só depois que a validação passar. Se falhar, corrija e valide de novo.
 
-### Rename fora do breaking change
-
-Se você renomear o `name` e tratar a versão como correção ou funcionalidade, ou commitar sem breaking change, o nome antigo quebra sem aviso.
-
-1. Suba o major e zere minor e patch. Sem 3 casos validados, suba o segundo número, zere o patch, e mantenha `0.x`.
-2. Ponha `!` depois do tipo no assunto.
-3. Comece o rodapé com `BREAKING CHANGE:` e cite o nome antigo e o novo.
-4. Grave cada nome anterior em `metadata.aliases` e mantenha os que já existiam.
-
-### Verbo errado no nome
-
-Se você for saber se algo já existe e o nome não começar com `procurar-`, separar `criar-` e `revisar-` quando cadastrar, revisar e editar usam os mesmos critérios, lançar venda ou despesa sem `lancar-`, for só cadastrar e o nome não começar com `criar-`, ou for só revisar e o nome não começar com `revisar-`, a skill foge dos verbos.
-
-1. Para saber se já existe, comece com `procurar-` e termine com a entidade.
-2. Quando cadastrar, revisar e editar usam os mesmos critérios, comece com `definir-` e termine com a entidade. Uma skill só.
-3. Para só cadastrar, comece com `criar-`. Para só revisar, comece com `revisar-`. Venda ou despesa começa com `lancar-`.
-
-### Nome do escopo antigo
-
-Se você mudar o escopo e manter o nome antigo, a skill, o script ou o workflow aparece pelo que já não faz.
-
-1. Renomeie para o escopo atual.
-2. Se for o `name` da skill, trate como breaking change.
-
 ### Banco de outro workspace
 
 Se você gravar o endereço de um banco ou usar o banco que a conexão mostrou, a skill cria a página na empresa errada.
@@ -285,10 +211,7 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ## Casos-limite
 
-- O exemplo de entrada e saída: heading de nível 3 é a entrada e o parágrafo seguinte é a saída.
 - O texto do usuário já está no idioma deste texto: entra sem mudança. Em outro idioma, traduza nome, descrição e corpo.
-- O nome tem acento: só o kebab-case tira. O título e o corpo mantêm a grafia correta.
-- A entidade precisa de mais de uma palavra: mantenha as palavras, até 64 caracteres.
 - Uma tabela literal faria a skill passar de `Linhas` ou de `Tokens do corpo`: separe a tabela e aponte uma vez.
 - A skill ainda é experimental: `metadata.version` fica em `0.x`.
 - A tarefa ocorreu em outra ferramenta: extraia o mesmo padrão.
@@ -296,8 +219,6 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 - O material chega colado de outro lugar: sintetize a skill a partir dele do mesmo jeito.
 - A operação é sensível ou a sequência é obrigatória: prescreva os passos.
 - A operação é destrutiva ou em lote: plano, validação contra a fonte de verdade, e só então a execução.
-- O `name` muda: a versão e o commit são breaking change.
-- O escopo muda e o nome ainda descreve o escopo antigo: renomeie.
 - O data source muda ou o workspace conectado é outro: a pessoa informa o data source na execução. Se não estiver nessa conexão, pare.
 - O fato não óbvio está só em `references/`: traga para `Pegadinhas`.
 - A escrita abre ou atualiza o pull request: a conferência do título e da descrição é uma, depois do push.
@@ -306,12 +227,10 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 - Não invente quantidade. Se o número não estiver no material, peça.
 - Um nome, uma data ou um alias só entra em `Exemplos de entrada e saída`, depois da frase `Estes exemplos ilustram fatos. Eles podem não estar no data source.` Fora dali, o fato fica no data source. O teste em `features/` e em `evals.json` pode usá-lo.
-- Não invente caso de eval. `evals/evals.json` começa vazio.
 - O fato que o agente erraria fica em `Pegadinhas`, antes de `Scripts disponíveis`. `references/` só entra se a frase disser quando abrir. Problema não óbvio o agente não reconhece sozinho.
 - A primeira versão fica em `0.x`. `1.0.0` pede 3 casos validados com a pessoa.
 - Skill sobre escrever skills também sincroniza, e a cópia instalada por dependência ou plugin também é só leitura. A escrita segue `criar-commit` no repositório de origem.
 - O workspace conectado pode ser de outra empresa. A skill não carrega banco, página nem workspace. O data source vem na execução. Se não estiver na conexão, pare. Não use o banco que a conexão mostrou no lugar.
-- Cadastrar e revisar a mesma entidade usam `definir` numa skill só. Venda e despesa usam `lancar`. O cedilha sai do nome.
 - Conferir a cada commit parece necessário. A conferência é uma vez, depois do push.
 
 ## Scripts disponíveis
