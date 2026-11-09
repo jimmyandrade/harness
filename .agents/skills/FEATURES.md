@@ -1792,6 +1792,7 @@ How these skills relate is in `README.md`, in this folder.
   - Lives at `.agents/skills/revisar-habilidade/SKILL.md`
   - Flags a vague description, a missing trigger, and a structural problem. A description is always in the third person and opens with what the skill does. "Usada quando" follows and does not open it. "Use essa habilidade sempre que" is an imperative and does not belong. "NÃO serve para" closes it when there is something the skill must not do
   - Flags a step written as one line, and a step that cites a command instead of leaving it in Scripts disponíveis
+  - Flags a step that calls another skill with "por" instead of "siga" or "usando a habilidade"
   - Identifies the risk of triggering too often or too rarely
   - Suggests an obvious task and a paraphrased request that should trigger, and an unrelated topic plus a near miss that should not
   - Suggests each acceptance criterion already written as a Portuguese Gherkin example, and a with-skill against without-skill comparison
