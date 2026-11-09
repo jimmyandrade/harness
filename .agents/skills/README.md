@@ -593,6 +593,7 @@ flowchart LR
   planejar_calendario_de_conteudo --> evoluir_habilidade
   preparar_tarefa_do_pull_request --> definir_tarefa
   preparar_tarefa_do_pull_request --> evoluir_habilidade
+  preparar_tarefa_do_pull_request --> formalizar_decisao
   preparar_tarefa_do_pull_request --> levantar_contexto_do_pull_request
   preparar_tarefa_do_pull_request --> priorizar_itens
   preparar_tarefa_do_pull_request --> procurar_tarefa
