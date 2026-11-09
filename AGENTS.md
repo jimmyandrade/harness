@@ -1,6 +1,6 @@
 ---
 metadata:
-  version: "1.51.1"
+  version: "1.52.0"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -73,6 +73,7 @@ metadata:
 - Numa tarefa de código, siga nesta ordem: `procurar-tarefa` para os detalhes da issue ou da tarefa, `levantar-ambiente-do-repositorio`, `escrever-teste`, `escrever-codigo`, `criar-commit` e `criar-pull-request`. Use TDD por padrão: o teste vem primeiro, roda e falha, e só então vem o código que o faz passar. Depois de criar um commit ou de mudar o estado do pull request, siga `sincronizar-status-da-tarefa`. O merge segue `mesclar-pull-request`. Criar ou evoluir uma habilidade segue a mesma cadeia. Toda issue sai por `definir-issue-do-github`, que procura antes as issues abertas e fechadas do mesmo assunto, e todo pull request sai por `criar-pull-request`. Isso vale também para a issue ou o PR que outra habilidade manda abrir. Nunca abra pelo comando direto: ele cria issue repetida e deixa o PR sem rótulo, sem rascunho e sem pessoa atribuída.
 - Execute cada habilidade dessa ordem até o fim. Ler o arquivo começa a habilidade e não a encerra. Sem `Comando de testes`, `escrever-teste` ainda é chamada: o resultado é dizer que o comando não existe, sem inventar um runner. O modo de abertura é `Criar pull request ao terminar`. Um projeto que quer outro modo define o parâmetro no próprio `AGENTS.md`. A resposta diz o nome da branch, se ela está no GitHub e, quando o pull request existe, o link.
 - Um comando em segundo plano não encerra o turno. Quando o próximo passo depende do resultado dele, como uma instalação, uma suíte de testes, um build ou um check, espere no mesmo turno com um comando que bloqueia até o resultado sair, dentro do limite de tempo da ferramenta, e siga com ele. Encerre o turno só quando o trabalho terminar ou quando faltar uma decisão da pessoa.
+- Toda habilidade que lê ou responde uma conversa, por e-mail ou WhatsApp, deixa a conversa rotulada seguindo `rotular-item`, mesmo quando o pedido era só ler.
 - Uma regra de comportamento que vale para todos os projetos fica nestas instruções. O valor de um parâmetro fica nas instruções do projeto. O guia de contribuição cita o nome do parâmetro e não copia o valor, para a mudança acontecer num lugar só. Uma convenção de código que não é parâmetro fica no guia de contribuição. Não fica na memória de um projeto.
 
 ## Git
