@@ -3,7 +3,7 @@ name: revisar-habilidade
 description: Revisa uma skill já escrita e sinaliza descrição vaga, gatilho faltando ou problema de estrutura. Usada quando a pessoa quer ver o risco de disparar demais ou de menos, ou sugerir casos a partir do propósito, mesmo sem dizer revisar. NÃO serve para criar a primeira versão, executar o teste e editar a skill, só medir tamanho, nem gravar a página no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.9.2"
+  version: "0.10.0"
   related:
     - criar-commit
     - criar-habilidade
@@ -11,6 +11,8 @@ metadata:
     - descrever-habilidade-ou-schema
     - evoluir-habilidade
     - testar-habilidade
+  models:
+    - skill-md
 ---
 
 # Revisar habilidade
@@ -35,11 +37,8 @@ Problema de estrutura inclui a explicação de um parâmetro escrita no texto do
 A descrição fica sempre em terceira pessoa e abre com o que a skill faz.
 Descrição vaga sai disso, abre com `Usada quando`, usa imperativo como `Use essa habilidade sempre que` ou `NÃO use para`, não diz em `Usada quando` a intenção de quem pede, ou deixa de fora o `NÃO serve para` quando há o que ficar de fora.
 Gatilho faltando não diz quando carregar.
-Estrutura fora do lugar foge de `Parâmetros de configuração` com um bloco `yaml`, `Instruções` com `Passo 1`, `Passo 2`, e depois `Problemas comuns`, `Exemplos de entrada e saída`, `Casos-limite`, `Pegadinhas` e `Scripts disponíveis`.
-`Exemplos de entrada e saída` abre com `Estes exemplos ilustram fatos. Eles podem não estar no data source.`
-Passo com mais de um desfecho traz um flowchart Mermaid no sentido configurado. Um só fica na frase.
-Caminho de cliques numa tela escrito em passos de texto, e não num flowchart, também é estrutura fora do lugar.
-Várias frases na mesma linha escondem a mudança no diff, menos as que só se entendem juntas.
+Estrutura fora do lugar foge do modelo de saída `skill-md`: as seções, o bloco de parâmetros, os passos, os flowcharts, os exemplos e a forma das linhas.
+Leia o modelo de saída `skill-md` quando for gerar a saída.
 Passo que cita comando tira o comando de `Scripts disponíveis`.
 
 ### Passo 3
