@@ -483,10 +483,12 @@ flowchart LR
   formalizar_decisao --> enviar_mensagem_no_slack
   formalizar_decisao --> preparar_tarefa_do_pull_request
   garantir_ingresso --> abrir_vendas_na_tiqueteira
+  garantir_ingresso --> definir_agenda
   garantir_ingresso --> definir_empresa
   garantir_ingresso --> definir_inscricao
   garantir_ingresso --> definir_pessoa
   garantir_ingresso --> evoluir_habilidade
+  garantir_ingresso --> procurar_agenda
   garantir_ingresso --> procurar_oportunidade
   garantir_ingresso --> redigir_com_tom_de_voz
   gerenciar_estoque --> definir_ativo_imobilizado
