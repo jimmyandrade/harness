@@ -1,10 +1,10 @@
 ---
 name: reconhecer-imagem
-description: Use essa habilidade sempre que for ler texto de imagem, ou receber imagem cujo texto já veio escrito, mesmo sem dizer imagem. Nota, recibo ou transação segue a despesa; pedido de evento confirmado segue a inscrição; pessoa ou perfil segue a grafia. NÃO use para cadastrar a entidade, criar tarefa nem reler o texto já escrito.
+description: Use essa habilidade sempre que for ler texto de imagem, ou receber imagem cujo texto já veio escrito, mesmo sem dizer imagem. Nota, recibo, transação ou confirmação de compra segue a despesa; pedido de evento confirmado segue a inscrição; pessoa ou perfil segue a grafia. NÃO use para cadastrar a entidade, criar tarefa nem reler o texto já escrito.
 compatibility: Precisa de Python.
 metadata:
   author: jimmyandrade
-  version: "0.13.1"
+  version: "0.14.0"
   related:
     - criar-oportunidade
     - definir-grafia
@@ -49,7 +49,7 @@ Entregue a leitura, o comando original e a imagem original à habilidade seguint
 ```mermaid
 flowchart LR
   A{A pessoa nomeou a seguinte?} -->|sim| B[O texto é a entrada dela]
-  A -->|não| M{Nota, recibo, cobrança ou transação?}
+  A -->|não| M{Nota, recibo, cobrança, transação ou confirmação de compra?}
   M -->|sim| N[lancar-despesa-da-empresa]
   M -->|não| C{Pedido de evento realizado ou confirmado?}
   C -->|sim| D[procurar-oportunidade e depois definir-inscricao]
@@ -63,7 +63,7 @@ flowchart LR
   H -->|não| G[Entregue o texto e pare]
 ```
 
-Resolva a referência da destinatária antes de encaminhar o texto. A lista inicial da conversa não é prova de ausência no catálogo do projeto. No Notion, carregue a página pela menção ou URL fornecida; para descoberta permitida, consulte o catálogo informado ou a busca de páginas do workspace conectado pelo nome e pelos aliases. Não procure em outro workspace.
+Resolva a referência da destinatária antes de encaminhar o texto. A destinatária é a que o fluxo nomeia, como `lancar-despesa-da-empresa`: busque por esse nome e pelos aliases dela, como `lancar-despesa`, nunca por uma descrição como "habilidade financeira". A lista inicial da conversa não é prova de ausência no catálogo do projeto. No Notion, carregue a página pela menção ou URL fornecida; para descoberta permitida, consulte o catálogo informado ou a busca de páginas do workspace conectado pelo nome e pelos aliases. Não procure em outro workspace.
 
 ```mermaid
 flowchart LR
@@ -73,14 +73,14 @@ flowchart LR
   B --> C{Resultado da busca}
   C -->|uma correspondência| P
   C -->|ambíguo| A[Pergunte qual candidata usar]
-  C -->|nenhum| N[Informe a busca sem resultado e peça a referência]
+  C -->|nenhum| N[Diga o nome buscado e peça a página dele]
   S -->|não| L[Informe a restrição de descoberta e peça a referência uma vez]
   P --> T[Siga a habilidade com o texto já lido]
 ```
 
 Não peça autorização para uma leitura permitida nem prometa uma chamada que ainda depende de referência. Uma confirmação como "sim" não substitui a menção ou URL exigida pelo ambiente. Não conclua que a habilidade não existe quando a busca estiver bloqueada; respeite a restrição, sem tentar contorná-la.
 
-A destinatária financeira cuida da busca e do lançamento, sem duplicar a compra. Não faça esse trabalho aqui.
+A destinatária financeira cuida da busca e do lançamento, sem duplicar a compra, e decide se o gasto é da empresa ou pessoal. Uma leitura sem produto ou valor, como a tela "Você comprou!" de uma loja, também segue para ela: não pare por falta de dado. Não faça esse trabalho aqui.
 
 Chame a busca sem perguntar. Se ela não achar a edição, siga `criar-oportunidade` na mesma resposta. O cadastro é dela, não desta habilidade. Não grave a inscrição nesta habilidade. Não escolha organizar o ponto de contato nem criar a tarefa. A resposta não pede para nomear a habilidade nem fala de créditos.
 
@@ -133,6 +133,7 @@ Se você pedir confirmação para chamar uma habilidade que ainda não localizou
 1. Resolva a referência pelo fluxo do passo 4, sem tratar a lista inicial como catálogo completo.
 2. Carregue a página encontrada antes de seguir suas instruções.
 3. Distinga busca sem resultado de descoberta bloqueada pelo ambiente; não declare inexistência nem prometa que uma confirmação remove a restrição.
+4. Sem resultado, diga o nome que buscou. "Não identifiquei a habilidade" deixa a pessoa sem saber o que enviar.
 
 ### Pedido para nomear
 
@@ -146,7 +147,7 @@ Se você fechar pedindo para mencionar a habilidade na próxima vez, a pessoa re
 
 Se você só transcrever uma nota ou transação, a pessoa pode achar que a despesa já foi lançada.
 
-1. Entregue o texto à destinatária financeira do fluxo.
+1. Entregue o texto a `lancar-despesa-da-empresa`, mesmo sem produto ou valor na leitura.
 2. Não diga que lançou antes da gravação confirmada.
 3. Não mande o original para outra leitura; preserve-o como evidência.
 
@@ -174,6 +175,10 @@ Não li a imagem: o comunicado já era o texto. Com nome da edição e data, o t
 
 Li os dados e entreguei o texto a `lancar-despesa-da-empresa`, que busca o gasto antes de criar. Os originais ficaram como evidências da mesma compra, sem novo reconhecimento. Não parei na transcrição nem tratei a compra como inscrição.
 
+### o print da tela "Você comprou!" de uma loja online, só com a entrega e o endereço, sem pedido escrito.
+
+Li a tela. Ela não trazia produto nem valor. Busquei `lancar-despesa-da-empresa` pelo nome e pelos aliases no catálogo conectado, carreguei a página e segui com a leitura e o print como original. Não parei por falta do valor nem pedi a página de uma "habilidade de despesas".
+
 ## Casos-limite
 
 - Não há imagem: peça. Não invente o texto.
@@ -184,6 +189,7 @@ Li os dados e entreguei o texto a `lancar-despesa-da-empresa`, que busca o gasto
 - O script falhou: leia a imagem. Não rode de novo, não instale e não conserte o script.
 - A pessoa não nomeou a habilidade seguinte e o texto tem nome da edição e data: o texto entra em `procurar-oportunidade`. Se a edição não existe, siga `criar-oportunidade`. Se existe, mostre a página, não crie outra e entregue o original a `criar-oportunidade`.
 - A leitura é um pedido de evento realizado ou confirmado: depois da edição, siga `definir-inscricao`. Não confunda com compra em nota ou transação.
+- A leitura é uma confirmação de compra sem produto ou valor: siga `lancar-despesa-da-empresa`. A falta de dado não encerra aqui.
 - A leitura é uma pessoa ou um perfil social: siga `definir-grafia`. Não pare no texto.
 - Não há destinatária no fluxo e a pessoa não nomeou a seguinte: entregue o texto e pare.
 - A habilidade seguinte não veio na lista inicial: resolva a referência pelo fluxo do passo 4. Não transforme uma restrição de descoberta em afirmação de inexistência.
@@ -206,6 +212,8 @@ Li os dados e entreguei o texto a `lancar-despesa-da-empresa`, que busca o gasto
 - Parar na oportunidade parece o fim de um pedido de evento confirmado. A inscrição segue `definir-inscricao`.
 - Parar no texto parece o fim de um print de perfil. Pessoa ou perfil segue `definir-grafia`.
 - Uma habilidade fora da lista inicial parece ausente do catálogo. A lista não prova isso; resolva a referência sem pedir uma confirmação que não a fornece.
+- Uma tela de compra sem valor parece pouco para a despesa. A destinatária busca o resto; o encaminhamento não espera o valor.
+- Buscar "a habilidade de despesas" parece bastar. A busca usa o nome que o fluxo dá e os aliases.
 - Vários modos de leitura parecem cuidado. Um uso basta.
 - Fechar com "mencione a habilidade na próxima vez" parece cuidar dos créditos. A resposta não pede isso.
 
