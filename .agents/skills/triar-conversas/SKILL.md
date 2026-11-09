@@ -4,7 +4,7 @@ description: Varre as conversas com mensagem nova no WhatsApp e no Slack, classi
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.2.1"
   models:
     - relatorio-de-conversas
   related:
@@ -81,7 +81,7 @@ Quando a intercorrência ensina algo para as próximas edições, como confirmar
 
 ### Passo 6
 
-Rotule cada conversa varrida por `rotular-item`, com quem age agora e o contexto entre `Etiquetas de contexto`, como o das feiras nos grupos de feira. Os nomes e o estado de cada caso ficam lá. Rotule só depois de gravar a tarefa ou o comentário.
+Aplique rótulos em cada conversa varrida usando a habilidade `rotular-item`, com quem age agora e o contexto entre `Etiquetas de contexto`, como o das feiras nos grupos de feira. Os nomes e o estado de cada caso ficam lá. Rotule só depois de gravar a tarefa ou o comentário.
 
 ### Passo 7
 

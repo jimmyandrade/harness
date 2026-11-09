@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.22.0"
+  version: "0.22.1"
   related:
     - acompanhar-resposta-no-whatsapp
     - comunicar-novidade-do-produto
@@ -138,7 +138,7 @@ Checklist do evento:
 
 Quando a mensagem espera resposta, como uma pergunta, um pedido ou um prazo, siga `acompanhar-resposta-no-whatsapp`. A pergunta que pede o sim do Passo 5 já diz que a resposta vai ser acompanhada, com a frequência e até quando.
 
-Antes de terminar, rotule por `rotular-item` cada conversa que você leu ou em que enviou, mesmo quando o pedido era só ler. Passe quem age agora, depois da leitura ou do envio, e o contexto entre `Etiquetas de contexto`. Uma conversa sobre uma oportunidade leva a etiqueta de e-mail que a edição ou o grupo dela registra. Diga na resposta os rótulos que ficaram.
+Antes de terminar, aplique rótulos usando a habilidade `rotular-item` em cada conversa que você leu ou em que enviou, mesmo quando o pedido era só ler. Passe quem age agora, depois da leitura ou do envio, e o contexto entre `Etiquetas de contexto`. Diga na resposta os rótulos que ficaram.
 
 Ao terminar, deixe a aba do WhatsApp Web aberta, mesmo quando as outras abas da tarefa forem fechadas.
 
@@ -244,6 +244,10 @@ Usei a aba do WhatsApp Web que já estava aberta. O pedido está na conversa da 
 ### Responda ao Caio que podemos falar às 15h
 
 Mostrei a conversa do Caio e o texto "Podemos falar 15h00?". Enviei depois do sim. A conversa estava com o agente de IA da conta comercial, e avisei antes. Li a conversa de novo e a mensagem aparece às 14h05.
+
+### Pergunte à organizadora da feira quais datas estão livres
+
+Mostrei a conversa e o texto, e enviei depois do sim. A conversa recebeu, usando a habilidade `rotular-item`, a lista de ação esperada e a lista com o último nível da etiqueta de e-mail que a edição da feira registra.
 
 ## Casos-limite
 

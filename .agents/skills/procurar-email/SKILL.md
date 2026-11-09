@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search
 compatibility: Precisa de internet. A busca no e-mail conectado usa notion-ai-search no servidor notion.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.6.1"
   related:
     - procurar-inscricao
     - definir-grafia
@@ -38,7 +38,7 @@ Leia cada resultado cujo tipo é e-mail. Uma página do Notion não é a mensage
 
 Não copie o corpo inteiro, código, número do pedido nem link com token, a menos que a pessoa peça. Não altere a lista de inscrições. Não crie tarefa. Não responda, encaminhe nem apague a mensagem.
 
-Rotule por `rotular-item` cada conversa de e-mail que você leu, com quem age agora e o contexto entre `Etiquetas de contexto`. Uma conversa sobre uma oportunidade leva a etiqueta de e-mail que a edição ou o grupo dela registra. Sem uma ferramenta que rotule e-mail na sessão, diga quais conversas ficaram sem rótulo.
+Aplique rótulos sempre usando a habilidade `rotular-item` em cada conversa de e-mail que você leu, com quem age agora e o contexto entre `Etiquetas de contexto`. Sem uma ferramenta que rotule e-mail na sessão, diga quais conversas ficaram sem rótulo.
 
 ### Passo 5
 
@@ -153,6 +153,10 @@ no e-mail conectado, a mensagem sobre ingressos do Festival Rota Sul 2026 veio d
 ### Bia falou alguma coisa no e-mail sobre ter que fazer inscrição de novo?
 
 Bia Lima e Beatriz Lima são a mesma pessoa. Busquei Beatriz e beatriz.lima, como texto, e o assunto. Há e-mail dela sobre o evento. Não diz para fazer inscrição de novo. Não disse que não havia e-mail direto de Bia Lima. Não pedi para nomear a habilidade.
+
+### a organizadora da feira respondeu por e-mail sobre a montagem?
+
+A mensagem da organizadora diz o horário da montagem e não pede resposta. Apliquei, usando a habilidade `rotular-item`, a etiqueta de respondida e a etiqueta de e-mail que a edição da feira registra.
 
 ## Casos-limite
 

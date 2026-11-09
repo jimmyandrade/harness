@@ -3,7 +3,7 @@ name: rotular-item
 description: Aplica, troca e tira rótulos, etiquetas e tags de organização num item, como pull request, issue, e-mail, conversa ou página, pela escolha da habilidade de origem, sem duplicar rótulo nem mexer no de uma ferramenta. Usada quando outra habilidade rotula um item, lê ou responde uma conversa, ou o estado do item muda. Não serve para decidir o assunto do item, hashtags nem categorias de conteúdo.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.4.1"
   related:
     - criar-pull-request
     - definir-filtro-de-email
@@ -53,7 +53,7 @@ flowchart LR
   E -->|o assunto acabou| C[Concluída]
 ```
 
-O contexto é a escolha da habilidade de origem entre `Etiquetas de contexto`. Sem um que sirva, aplique só o estado e diga o contexto que falta, como proposta para o parâmetro. Use só rótulos desses dois parâmetros e não invente outro. Uma conversa que já tem os rótulos certos fica como está. Sem `Etiquetas de status` nas instruções do projeto, ou sem uma ferramenta que rotule o canal na sessão, diga quais conversas ficaram sem rótulo e por quê.
+O contexto é a escolha da habilidade de origem entre `Etiquetas de contexto`. Sem um que sirva, aplique só o estado e diga o contexto que falta, como proposta para o parâmetro. Use só rótulos desses dois parâmetros e não invente outro. Uma conversa que já tem os rótulos certos fica como está. Trocar o estado tira só o rótulo de estado anterior: os rótulos de contexto e os de outra estrutura, como a BASB do e-mail, ficam. Sem `Etiquetas de status` nas instruções do projeto, ou sem uma ferramenta que rotule o canal na sessão, diga quais conversas ficaram sem rótulo e por quê.
 
 ### Passo 2
 

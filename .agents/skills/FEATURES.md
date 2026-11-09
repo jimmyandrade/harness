@@ -1837,6 +1837,7 @@ How these skills relate is in `README.md`, in this folder.
   - Owns `Etiquetas de status` and `Etiquetas de contexto`, which a project sets once in the `Global` entry for every skill that labels a conversation
   - Labels every email or WhatsApp conversation another skill read or replied to: the state label from who acts now, and the context the calling skill chose; a conversation with the right labels stays as it is
   - Says which conversations stayed unlabeled when the status labels or a labeling tool are missing
+  - Swapping the state removes only the previous state label; context labels and labels of another structure, such as the email BASB tree, stay
 - **Test Criteria**:
   - [ ] A missing `blocked` state label is created and applied
   - [ ] An item whose block cleared loses the `blocked` label
