@@ -3,7 +3,7 @@ name: atualizar-branch-do-pull-request
 description: Use essa habilidade sempre que uma branch com pull request estiver atrás da base, tiver conflito ou precisar de rebase, mesmo sem dizer rebase. NÃO use para abrir o PR, fazer o primeiro push nem mesclar (use criar-pull-request).
 metadata:
   author: jimmyandrade
-  version: "0.7.0"
+  version: "0.8.1"
   related:
     - criar-pull-request
     - atender-revisao-de-pull-request
@@ -22,6 +22,12 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Branch base": "main"
 # `Cópia de trabalho` é `Global` e cada skill pode sobrescrevê-lo. `worktree` trabalha num git worktree novo da `main`, nunca no clone da pessoa. Vazio trabalha onde a pessoa já está.
 "Cópia de trabalho": "worktree"
+# `Conflito no rebase` é `resolver`, `perguntar` ou `automático`.
+# `resolver` resolve à mão sem perguntar.
+# `perguntar` mostra cada arquivo em conflito e as duas versões e espera a resposta antes de resolver.
+# `automático` resolve sozinho quando os dois lados se somam sem perda, como linhas acrescentadas dos dois lados, formatação ou import, e pergunta quando a resolução descarta linha de um dos lados ou muda comportamento, dizendo o que se perderia.
+# Sem ninguém para responder, como numa execução agendada, o conflito que `perguntar` ou `automático` mandaria perguntar não é resolvido: o rebase é abortado, a branch fica como estava e os arquivos em conflito são listados.
+"Conflito no rebase": "automático"
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -41,7 +47,7 @@ O corpo do novo abre com um alerta `> [!NOTE]` do GitHub com o link do antigo, a
 Atualize a branch com rebase sobre a `Branch base` remota.
 Nunca faça merge da base na branch nem crie commit com assunto `merge:`.
 O squash do PR não é motivo para mesclar a base antes.
-Resolva conflitos nos commits rebaseados.
+Resolva conflitos nos commits rebaseados, conforme `Conflito no rebase`.
 Antes de substituir a branch publicada, siga `atender-revisao-de-pull-request`: as revisões, as threads e os comentários abertos do PR são tratados e respondidos.
 Quando o rebase acontece dentro dessa habilidade, ela já cumpre este passo.
 Depois do rebase, confira o que entrou da base contra o que a revisão do PR pediu, como um padrão que ela mandou trocar.
