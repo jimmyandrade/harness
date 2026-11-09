@@ -4,10 +4,12 @@ description: Garante o ingresso de um evento na tiqueteira, grátis ou pago, pel
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.6.3"
   aliases:
     - fazer-inscricao
   related:
+    - procurar-agenda
+    - definir-agenda
     - procurar-oportunidade
     - definir-inscricao
     - definir-pessoa
@@ -107,11 +109,13 @@ Guarde o print da tela do pedido confirmado com o pop-up e, depois de fechá-lo,
 
 Passe o pedido a `definir-inscricao`, com o print, a hora do envio e o status que a tela mostrou. Atualize a linha da atividade no cronograma.
 
+Confira com `procurar-agenda` se a atividade já está na agenda no dia e no horário dela, inclusive o evento que a tiqueteira ou o Gmail criam sozinhos a partir do e-mail de confirmação, que pode ter outro título. Data, horário e local vêm do e-mail de confirmação da tiqueteira e da oportunidade e do cronograma no Notion. Só se faltar, crie com `definir-agenda`, com os links da oportunidade e da inscrição. Avise o compromisso que bate com o horário, com quem é, o canal para remarcar e onde ele foi registrado, lido no evento, na negociação, nas reuniões e nas conversas. Sem canal registrado, diga isso e, se o compromisso veio de uma ligação, peça o número a quem atendeu, como manda `definir-agenda`.
+
 ### Passo 7
 
 Quando quem se apresenta na atividade está no cadastro de `definir-pessoa`, siga `Avisar quem se apresenta`. Em `perguntar`, procure antes nas conversas e no e-mail se o aviso já saiu.
 
-Sem aviso, ofereça avisar que a pessoa vai prestigiar, pelo canal do cadastro, como WhatsApp, perfil social ou e-mail. A mensagem passa por `redigir-com-tom-de-voz` e sai só com o sim da pessoa ao texto e ao canal.
+Sem aviso, ofereça avisar que a pessoa vai prestigiar. Quando o convite veio de quem se apresenta, a mensagem agradece o convite e confirma a presença, e o registro da conversa diz quem convidou. O aviso vai pelo canal do cadastro, como WhatsApp, perfil social ou e-mail. A mensagem passa por `redigir-com-tom-de-voz` e sai só com o sim da pessoa ao texto e ao canal.
 
 ### Passo 8
 
@@ -174,6 +178,7 @@ Mostrei o item, o valor total e o cartão salvo na conta e esperei o sim antes d
 - O checkout pede dados da pessoa titular da conta, e não da empresa, salvo o CNPJ.
 - A tela de sucesso de algumas tiqueteiras abre com uma oferta de prêmio ou cashback. Ela é publicidade e não faz parte do pedido.
 - Login, senha, código e dados de cartão são da pessoa. A IA nunca os digita.
+- O e-mail de confirmação da tiqueteira parece pôr a atividade na agenda, ou parece nunca pôr. Às vezes a tiqueteira ou o Gmail criam o evento, às vezes não: confira antes de criar, para não duplicar.
 - O pedido confirmado parece encerrar o trabalho. Quando a palestrante é conhecida, ela ainda não sabe que a pessoa vai: o aviso é o passo que falta.
 
 ## Scripts disponíveis

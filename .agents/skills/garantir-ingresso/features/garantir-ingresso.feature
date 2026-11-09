@@ -86,3 +86,12 @@ Funcionalidade: Garantir o ingresso de um evento na tiqueteira
       Quando o pedido sai confirmado
       Então a skill oferece avisar a palestrante que a pessoa vai
       E só envia a mensagem com o sim da pessoa ao texto e ao canal
+
+  Regra: A atividade entra na agenda
+
+    Exemplo: Atividade ausente da agenda
+      Dado que o pedido saiu confirmado
+      E que a agenda não tem a atividade no dia e no horário dela
+      Quando a skill termina a inscrição
+      Então a skill cria o evento na agenda com os dados do e-mail da tiqueteira e do Notion
+      E avisa o compromisso que bate com o horário
