@@ -3,7 +3,7 @@ name: revisar-habilidade
 description: Revisa uma skill já escrita e sinaliza descrição vaga, gatilho faltando ou problema de estrutura. Usada quando a pessoa quer ver o risco de disparar demais ou de menos, ou sugerir casos a partir do propósito, mesmo sem dizer revisar. NÃO serve para criar a primeira versão, executar o teste e editar a skill, só medir tamanho, nem gravar a página no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.9.1"
+  version: "0.9.2"
   related:
     - criar-commit
     - criar-habilidade
@@ -31,6 +31,7 @@ Exija a skill, pelo nome ou pelo texto. Se faltar, peça. Leia a descrição e o
 
 Sinalize descrição vaga, gatilho faltando, problema de estrutura e regra contraditória.
 Regra contraditória são duas frases, da skill ou de uma `related`, que mandam coisas opostas, ou um valor de projeto, como pasta ou caminho, escrito no passo em vez de parâmetro.
+Problema de estrutura inclui a explicação de um parâmetro escrita no texto do passo, em vez de no comentário YAML na linha de cima da chave.
 A descrição fica sempre em terceira pessoa e abre com o que a skill faz.
 Descrição vaga sai disso, abre com `Usada quando`, usa imperativo como `Use essa habilidade sempre que` ou `NÃO use para`, não diz em `Usada quando` a intenção de quem pede, ou deixa de fora o `NÃO serve para` quando há o que ficar de fora.
 Gatilho faltando não diz quando carregar.

@@ -3,7 +3,7 @@ name: evoluir-habilidade
 description: Muda uma skill ou as instruções do projeto a pedido ou pelo feedback de uma execução, como falha ou correção da pessoa, e abre o pull request no repositório de origem. Usada ao pedir uma regra nova, mesmo sem dizer evoluir, e ao fim de cada skill. Não serve para testar a skill, criar a primeira versão, ver se a descrição dispara, só revisar nem gravar no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.30.1"
+  version: "0.30.2"
   related:
     - criar-commit
     - criar-pull-request
@@ -53,7 +53,7 @@ Um feedback sobre o comportamento do agente também entra aqui. O alvo é a skil
 
 A skill é um documento vivo. A iteração parte do feedback.
 Resultado inconsistente, falha de chamada e correção da pessoa: melhore a instrução e acrescente o tratamento do erro.
-Antes de editar, confira de onde a skill vem e leia a skill inteira, as `related` e os parâmetros. A cópia instalada por dependência ou plugin não se edita. A frase nova não contradiz nenhuma: quando a regra muda, reescreva a frase que já existe e cada repetição dela em `Problemas comuns`, `Exemplos de entrada e saída`, `Casos-limite` e `Pegadinhas`. Não acrescente exceção noutro lugar. Valor que muda de um projeto para outro, como pasta, caminho ou nome de banco, vira parâmetro; o passo cita a chave. Decisão sobre palavra, como usar um termo ou outro, ou como escrever uma frase, não entra na skill nem num parâmetro: vai para o vocabulário, por `definir-vocabulario`.
+Antes de editar, confira de onde a skill vem e leia a skill inteira, as `related` e os parâmetros. A cópia instalada por dependência ou plugin não se edita. A frase nova não contradiz nenhuma: quando a regra muda, reescreva a frase que já existe e cada repetição dela em `Problemas comuns`, `Exemplos de entrada e saída`, `Casos-limite` e `Pegadinhas`. Não acrescente exceção noutro lugar. Valor que muda de um projeto para outro, como pasta, caminho ou nome de banco, vira parâmetro; o passo cita a chave. A explicação do parâmetro fica nos comentários YAML acima da chave, nunca no texto do passo. Decisão sobre palavra, como usar um termo ou outro, ou como escrever uma frase, não entra na skill nem num parâmetro: vai para o vocabulário, por `definir-vocabulario`.
 Subdisparo e sobredisparo vão para `descrever-habilidade-ou-schema`.
 O resultado de `testar-habilidade` edita a skill validada no repositório de origem, na mesma conversa do teste. Sem essa edição, o teste não vale.
 Incorpore todos os resultados, não só as falhas. A edição vem do que a execução mostrou.
