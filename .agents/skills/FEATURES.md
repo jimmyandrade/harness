@@ -194,6 +194,7 @@ How these skills relate is in `README.md`, in this folder.
   - The commit type follows what the change does, not the file extension. A correction of an error is `fix:`, even in Markdown. `docs:` is for documentation
   - Groups the sentences of one theme on a line and separates themes with a blank line, as a writing decision, and keeps a command in Scripts disponíveis
   - When the flow stops without `criar-pull-request`, follows `sincronizar-status-da-tarefa`
+  - When the change touches a skill, the subject is `type(skill-name): description`
 - **Test Criteria**:
   - [ ] A project without test or build commands commits and says nothing was verified
 
@@ -222,15 +223,12 @@ How these skills relate is in `README.md`, in this folder.
   - Treats the skill as a living document and repeats while feedback asks for it
   - Sends undertriggering and overtriggering to descrever-habilidade-ou-schema, and inconsistent results, failed calls, and corrections to evoluir-habilidade
   - Keeps the skill test as Portuguese Gherkin in features/
-  - When creating, reviewing, and editing an entity share the same criteria, names one skill `definir-` plus the entity
-  - The entity may be more than one word, up to 64 characters
-  - Does not create a skill whose job is to delete a resource
+  - Reads the skill-md output model for the shape of SKILL.md, and follows descrever-habilidade-ou-schema for the name and evoluir-habilidade for the version
   - Does not create a skill that only gathers good practices. Each practice goes into the skill of the task where it applies, and a new skill is proposed only for a task that no skill covers, named after that task
   - Before proposing a new skill, measures the existing skill of the subject with medir-habilidade and shows the numbers, since every new skill's catalog entry loads on every turn; with room, the lesson goes into that skill
   - When a step routes to another skill, or routes more than one outcome, that step contains a Mermaid flowchart in the direction from mermaid.flowchart_direction
   - An empty placeholder stays on 0.0.x and its body may be only the title
   - Does not store a person, a date, or an alias in SKILL.md except inside Exemplos de entrada e saída, which opens with "Estes exemplos ilustram fatos. Eles podem não estar no data source."; the checker requires that sentence in every skill; the fact stays in the data source, and a test in features/ or evals.json may use it
-  - When a skill is renamed, keeps every previous name in metadata.aliases
   - Keeps the folder and the frontmatter name in ASCII kebab-case, and writes the level-1 title and the body in natural language with correct spelling and every diacritic. The title is in sentence case: a capital letter only at the start and in proper nouns, as in "Procurar e-mail" or "Publicar no Notion"
   - Writes each input example as a level-3 heading and its output as the next paragraph, with a blank line between pairs. The checker rejects `dl`, `dt`, and `dd`, which Notion does not show
   - Ends every skill with Scripts disponíveis, naming each script and the command that runs it
@@ -410,7 +408,8 @@ How these skills relate is in `README.md`, in this folder.
   - Names scripts and shared script folders in `Idioma do nome dos scripts`, English by default and overridable in the project instructions
   - Keeps input and output templates out of the body, with one sentence that says when to read them
   - Keeps commands out of the steps and lists them only in Scripts disponíveis, with a path for Notion, where the script may be missing
-  - Writes each step sentence on its own line, so a change shows in the diff
+  - Keeps a case decision the skill learns from the person in a Mermaid decision tree in a `.mmd` file next to `config.yaml`, read top to bottom
+  - Regenerates the skill graph in the skills `README.md` after `metadata.related` changes, and does not commit while the Lefthook check fails
 - **Test Criteria**:
   - [x] The skill is present at that path
 
@@ -626,6 +625,7 @@ How these skills relate is in `README.md`, in this folder.
   - Writes in the language set by "Idioma das instruções do projeto", Brazilian Portuguese by default, which a project changes in its own `AGENTS.md`, one rule per line, with separate parts for anywhere, Notion only, and coding tools only
   - Builds `metadata.parameters` in the frontmatter as a tree, a `Global` entry and one entry per skill, copying each key from the skill and listing only values that differ from the defaults
   - Creates each destination before removing the passage, then updates the references to the old location
+  - Keeps every YAML a skill or a project writes valid, with short one-line parameters, and reads it with a parser before saying it is done
 - **Test Criteria**:
   - [ ] Instructions over the body token limit end under it, with every moved passage reachable from its destination
   - [ ] A parameter added for two skills lands in `Global` under the exact key the skills read
@@ -1153,6 +1153,8 @@ How these skills relate is in `README.md`, in this folder.
   - A request that arrives through a copy, synced or installed by dependency or plugin, writes through criar-commit and criar-pull-request in the source repository
   - Rewrites a schema description and each property description that already has text, and keeps every fact already there
   - Writes the description of the project instructions too, in their frontmatter: it fires on any task of the workspace, and `NÃO serve para` covers changing the instructions themselves
+  - Names the skill in ASCII kebab-case with the verb first: `procurar` to know whether something exists, `definir` when creating, reviewing, and editing share the same criteria, `criar` only to create, `revisar` only to review, and `lancar` for a sale or an expense; the entity may be more than one word, up to 64 characters, and deleting a resource gets no skill
+  - Renames the skill, a script, or a workflow when its scope changes
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses writing the body, grading output, describing a product, and writing the skill page in Notion
@@ -1191,6 +1193,8 @@ How these skills relate is in `README.md`, in this folder.
   - Size and run profile follow medir-habilidade
   - Runs at the end of every core skill, following the `Modo de aprendizado` parameter (`sim`, `não`, `perguntar`, default `perguntar`): `não` stops. `perguntar` and `sim` record each lesson as a commit on an English-named branch and follow criar-pull-request, without asking whether the person wants the commit. `Criar pull request ao terminar` decides the opening: `rascunho` opens a draft, `sim` opens it ready, `não` does not publish. The command already sets the assignee and the label. With `rascunho`, the draft is marked ready when the person ends the sequence. After the push, once, the title and the description are checked against the code that went up, even when several lessons went up together
   - Takes the project instructions as a target too: feedback on the agent's behavior edits them in the format of `definir-instrucoes-do-projeto` and raises `metadata.version`, without evals or features of their own
+  - Raises the version by the kind of change, and treats a rename as a breaking change, with `!`, a `BREAKING CHANGE:` footer, and every previous name in metadata.aliases
+  - Reads the skill-md output model before editing a SKILL.md
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description says it changes a skill on request or from feedback, and refuses testing, creating the first version, only checking whether the description triggers, only reviewing, and writing the skill page in Notion
@@ -1792,6 +1796,7 @@ How these skills relate is in `README.md`, in this folder.
   - Suggests each acceptance criterion already written as a Portuguese Gherkin example, and a with-skill against without-skill comparison
   - Does not write the feature file, create the first version, run the test, or write the skill page in Notion
   - A request that arrives through a copy, synced or installed by dependency or plugin, writes through criar-commit and criar-pull-request in the source repository
+  - Checks the structure of a skill against the skill-md output model
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses creating the first version, running the test and editing the skill, only measuring size, and writing the skill page in Notion
