@@ -156,6 +156,7 @@ flowchart LR
   acompanhar_resposta_no_whatsapp --> conversar_no_whatsapp
   acompanhar_resposta_no_whatsapp --> definir_rotina
   acompanhar_resposta_no_whatsapp --> evoluir_habilidade
+  acompanhar_resposta_no_whatsapp --> rotular_item
   acompanhar_veiculo --> definir_obrigacao_financeira
   acompanhar_veiculo --> definir_viagem
   acompanhar_veiculo --> evoluir_habilidade
@@ -211,6 +212,7 @@ flowchart LR
   conversar_no_whatsapp --> evoluir_habilidade
   conversar_no_whatsapp --> procurar_tarefa
   conversar_no_whatsapp --> redigir_com_tom_de_voz
+  conversar_no_whatsapp --> rotular_item
   criar_carrossel_do_instagram --> criar_ideia_de_conteudo
   criar_carrossel_do_instagram --> evoluir_habilidade
   criar_carrossel_do_instagram --> planejar_calendario_de_conteudo
@@ -614,6 +616,7 @@ flowchart LR
   procurar_data_significativa --> definir_data_significativa
   procurar_email --> definir_grafia
   procurar_email --> procurar_inscricao
+  procurar_email --> rotular_item
   procurar_inscricao --> acompanhar_edital
   procurar_inscricao --> definir_grafia
   procurar_inscricao --> definir_inscricao
@@ -668,6 +671,7 @@ flowchart LR
   revisar_uso_do_tempo --> definir_agenda
   revisar_uso_do_tempo --> definir_agenda_de_popstar
   revisar_uso_do_tempo --> procurar_agenda
+  rotular_item --> conversar_no_whatsapp
   rotular_item --> criar_pull_request
   rotular_item --> definir_filtro_de_email
   rotular_item --> evoluir_habilidade

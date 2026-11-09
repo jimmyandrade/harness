@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.21.0"
+  version: "0.22.0"
   related:
     - acompanhar-resposta-no-whatsapp
     - comunicar-novidade-do-produto
@@ -15,6 +15,7 @@ metadata:
     - evoluir-habilidade
     - procurar-tarefa
     - redigir-com-tom-de-voz
+    - rotular-item
 ---
 
 # Conversar no WhatsApp
@@ -137,6 +138,8 @@ Checklist do evento:
 
 Quando a mensagem espera resposta, como uma pergunta, um pedido ou um prazo, siga `acompanhar-resposta-no-whatsapp`. A pergunta que pede o sim do Passo 5 já diz que a resposta vai ser acompanhada, com a frequência e até quando.
 
+Antes de terminar, rotule por `rotular-item` cada conversa que você leu ou em que enviou, mesmo quando o pedido era só ler. Passe quem age agora, depois da leitura ou do envio, e o contexto entre `Etiquetas de contexto`. Uma conversa sobre uma oportunidade leva a etiqueta de e-mail que a edição ou o grupo dela registra. Diga na resposta os rótulos que ficaram.
+
 Ao terminar, deixe a aba do WhatsApp Web aberta, mesmo quando as outras abas da tarefa forem fechadas.
 
 ### Passo 8
@@ -213,6 +216,14 @@ Se você escrever que a investigação já começou sem o link da tarefa, quem p
 
 1. Ponha na mensagem o link do registro do trabalho.
 2. Sem registro, crie a tarefa antes de redigir.
+
+### Conversa sem rótulo
+
+Se você enviar ou ler e terminar sem rotular, a conversa some do filtro de estado, e ninguém vê que o contato espera a resposta.
+
+1. Siga `rotular-item` com quem age agora e o contexto.
+2. No WhatsApp Business, a etiqueta é a lista, em Adicionar à lista.
+3. Diga na resposta os rótulos que ficaram.
 
 ### Envio sem confirmação
 

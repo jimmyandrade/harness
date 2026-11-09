@@ -3,11 +3,12 @@ name: acompanhar-resposta-no-whatsapp
 description: Acompanha, por uma rotina, se o contato respondeu a uma mensagem enviada no WhatsApp, avisa quando a resposta chega e para na primeira resposta ou no prazo. Usada quando a mensagem espera resposta, como uma pergunta, um pedido ou um prazo, ou quando a pessoa pergunta se alguém já respondeu. Não serve para ler, redigir nem enviar a mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   related:
     - conversar-no-whatsapp
     - definir-rotina
     - evoluir-habilidade
+    - rotular-item
 ---
 
 # Acompanhar resposta no WhatsApp
@@ -40,7 +41,7 @@ Ache a conversa e trate a aba como `conversar-no-whatsapp` manda: a mesma aba, o
 
 ### Passo 3
 
-Ela avisa a pessoa quando a resposta chega e para na primeira resposta ou no fim do prazo, do jeito que `definir-rotina` manda parar.
+Ela avisa a pessoa quando a resposta chega e para na primeira resposta ou no fim do prazo, do jeito que `definir-rotina` manda parar. Com a resposta, quem age agora é o negócio: troque o rótulo de estado da conversa por `rotular-item`.
 Uma mensagem que espera resposta e saiu sem rotina, porque a pergunta do sim não citou o acompanhamento ou porque a rotina ficou para depois, não sai dos próximos passos da resposta até a rotina existir ou a pessoa recusar. Ao perceber a falta, confira antes a lista de conversas: a resposta pode já ter chegado.
 
 Ao terminar, deixe a aba do WhatsApp Web aberta.

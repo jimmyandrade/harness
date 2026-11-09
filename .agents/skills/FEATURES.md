@@ -1464,7 +1464,7 @@ How these skills relate is in `README.md`, in this folder.
   - Leaves creating, editing, and checking filters to `definir-filtro-de-email`
   - Reads `Etiquetas de ferramenta`, a map from each tool or integration to the label it applies on its own, keeps those labels outside the BASB roots, and hands them to `rotular-item` as tool labels, so they are never applied, removed, or renamed
   - Chooses each label and hands the application, swap, or removal to `rotular-item`, with the BASB roots and `Etiquetas fora da estrutura` as the list, and `Etiquetas de status` and the bills-to-pay and paid-bills labels as state labels; a new label of the validated plan goes with `Criar rótulo que falta` set to `sim`
-  - Reads `Etiquetas de status` for the pending, expected, replied, and done labels of an action, applies them during triage, and keeps them outside the BASB roots; a conversation the person answered gets the replied label, and also the expected one when the answer asks for a reply
+  - Reads `Etiquetas de status`, from the `Global` entry, for the pending, expected, replied, and done labels of an action, applies them during triage, and keeps them outside the BASB roots; a conversation the person answered gets the replied label, and also the expected one when the answer asks for a reply
   - Asks before restoring a conversation that left the inbox during a change, because the person may have archived it
 - **Test Criteria**:
   - [x] The skill is present and one user-requested read-only exploratory case is recorded
@@ -1625,6 +1625,7 @@ How these skills relate is in `README.md`, in this folder.
   - Does not ask the person to name the skill
   - After the name search, lists subject messages that are not from her, and does not say the mailbox is empty when the connected search returns no email from her
   - Does not treat another person who shares the first name as her
+  - Labels every email conversation it read through `rotular-item`, with who acts now and the context, and says which stayed unlabeled when no tool in the session labels email
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses replying, forwarding, or deleting, and deciding a registration or a task
@@ -1833,10 +1834,14 @@ How these skills relate is in `README.md`, in this folder.
   - Swaps a state label in the same round when the state changes, and reads the item back
   - Leaves hashtags and content categories to the content skills and the voice
   - Called by `criar-pull-request`, `levantar-contexto-do-pull-request`, `organizar-emails`, and `definir-filtro-de-email`, which keep their own choice and parameters
+  - Owns `Etiquetas de status` and `Etiquetas de contexto`, which a project sets once in the `Global` entry for every skill that labels a conversation
+  - Labels every email or WhatsApp conversation another skill read or replied to: the state label from who acts now, and the context the calling skill chose; a conversation with the right labels stays as it is
+  - Says which conversations stayed unlabeled when the status labels or a labeling tool are missing
 - **Test Criteria**:
   - [ ] A missing `blocked` state label is created and applied
   - [ ] An item whose block cleared loses the `blocked` label
   - [ ] An existing label with another spelling and the same meaning is reused
+  - [ ] A WhatsApp conversation where a message was sent ends with the expected-action list and the context list
 
 ### sincronizar-cronograma
 - **Stability**: experimental
