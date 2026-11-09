@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.22.1"
+  version: "0.23.0"
   related:
     - acompanhar-resposta-no-whatsapp
     - comunicar-novidade-do-produto
@@ -11,11 +11,14 @@ metadata:
     - definir-pessoa
     - definir-rotina
     - definir-tarefa
+    - definir-vocabulario
     - escrever-link
     - evoluir-habilidade
     - procurar-tarefa
     - redigir-com-tom-de-voz
     - rotular-item
+  models:
+    - mensagens-do-whatsapp
 ---
 
 # Conversar no WhatsApp
@@ -39,6 +42,10 @@ Leia os valores nas instruções do projeto, na entrada desta habilidade. Na aus
 "Comunicado numa mensagem só": "sim"
 # `Não lidas antes de enviar` é `ler e mostrar`, que abre a conversa, lê as não lidas e mostra o que pede ação da pessoa antes de enviar, ou `perguntar antes de abrir`, que avisa que abrir marca como lidas e espera o sim.
 "Não lidas antes de enviar": "ler e mostrar"
+# `Fechamento em mensagem separada`: `sim` manda a despedida numa mensagem própria, depois das outras. `não` deixa a despedida no fim da última mensagem.
+"Fechamento em mensagem separada": "não"
+# `Página de instruções do WhatsApp` é o endereço da página com as regras da conta, como a ferramenta comercial por onde a mensagem sai. Vazio pula a leitura.
+"Página de instruções do WhatsApp": ""
 ```
 ## Instruções
 
@@ -91,16 +98,17 @@ Para registrar a demanda, leve a data e o horário da primeira mensagem do pedid
 
 Antes de rascunhar, leia a conversa de destino desde a última mensagem que você leu nela, seguindo o Passo 2. A pessoa pode ter escrito ali por conta própria. Tire do rascunho o que já foi dito na conversa e diga, antes do texto, o que ele acrescenta. Se tudo já foi dito, diga isso e não rascunhe.
 
-Todo rascunho de mensagem aparece na resposta do chat, com o texto inteiro num bloco de código, que preserva a formatação do WhatsApp ao copiar.
+Com `Página de instruções do WhatsApp` preenchida, leia a página antes de rascunhar e siga a conta e as regras dela. Se ela não abrir na conexão, pare e peça.
+
+Todo rascunho de mensagem aparece na resposta do chat. Leia o modelo de saída `mensagens-do-whatsapp` quando for gerar a saída.
 Não diga só que o rascunho está pronto.
 Uma mensagem que diz que um trabalho está em andamento, foi registrado ou foi feito leva o link da tarefa, da página ou do pull request que mostra esse registro. Sem esse registro, crie-o antes, como `definir-tarefa` manda, ou pergunte onde ele está.
-Quando o cliente desenha widget, o widget vem além do bloco, não no lugar dele: com o destinatário, o texto editável, um botão para copiar e um botão que manda o texto aprovado de volta ao chat.
 O widget pode não aparecer para a pessoa.
-A pergunta que pede o sim vem depois do texto, na mesma resposta.
 Sem o texto à vista, não pergunte se pode enviar.
-Se a pessoa editar, o texto dela substitui o rascunho, e a nova versão aparece no chat antes do sim.
 
-Com `Dividir em mensagens curtas` em `sim`, como as pessoas costumam escrever no WhatsApp, divida o rascunho em mensagens, uma por ideia, e mostre cada uma separada, no próprio bloco de código e, com widget, também no próprio campo editável.
+Com `Dividir em mensagens curtas` em `sim`, como as pessoas costumam escrever no WhatsApp, divida o rascunho em mensagens, uma por ideia.
+Cada mensagem que responde a algo cita a mensagem da outra pessoa que ela responde, mesmo de semanas atrás: ache-a lendo a conversa inteira.
+Com `Fechamento em mensagem separada` em `sim`, a despedida vai numa mensagem própria, a última.
 Envie na mesma ordem, uma de cada vez.
 Um rascunho de um tipo listado em `Mensagem única para` vai numa mensagem só, com uma linha em branco entre as ideias.
 Com `Comunicado numa mensagem só` em `sim`, o comunicado de produto também vai numa mensagem só, como `comunicar-novidade-do-produto` manda.
@@ -111,12 +119,13 @@ Para responder ou enviar, mostre a conversa de destino, o texto exato e, se for 
 
 Em conta comercial, veja se a conversa está com o agente de IA. Se estiver, avise antes de enviar: ele responde à próxima mensagem do contato.
 
-Toda data no rascunho vai no `Formato da data na mensagem`, com o dia da semana e a data completa. Nunca escreva só o dia da semana, como "até quinta", nem só a data. Tire o dia da semana de um calendário ou de um comando, nunca de cabeça.
-
-O WhatsApp não usa Markdown. Negrito é um asterisco de cada lado, itálico é sublinhado, e não há título nem link entre colchetes. O link segue `escrever-link`.
+Toda data no rascunho vai no `Formato da data na mensagem`. Tire o dia da semana de um calendário ou de um comando, nunca de cabeça. O link segue `escrever-link`.
 
 Antes de apertar Enter, tire um print do campo e confira o texto, a lista e a mensagem citada. Se a formatação sair diferente do aprovado, limpe o campo e digite de novo.
 Depois de enviar, leia a conversa de novo, confira se a mensagem aparece e diga o horário.
+Compare o que saiu com o que você mostrou. Cada diferença que a pessoa fez antes de enviar vira termo por `definir-vocabulario`. Se não souber se a diferença é regra ou escolha do momento, pergunte.
+
+Para corrigir uma mensagem já enviada, edite-a e marque a palavra corrigida com um asterisco no fim, como `Chegaremos*`. Não mande outra mensagem só para corrigir. A edição também pede o sim.
 
 ### Passo 6
 
@@ -225,6 +234,14 @@ Se você enviar ou ler e terminar sem rotular, a conversa some do filtro de esta
 2. No WhatsApp Business, a etiqueta é a lista, em Adicionar à lista.
 3. Diga na resposta os rótulos que ficaram.
 
+### Correção numa mensagem nova
+
+Se você mandar outra mensagem só para corrigir uma palavra, a conversa fica com as duas versões, e o contato lê o erro antes da correção.
+
+1. Edite a mensagem enviada.
+2. Marque a palavra corrigida com um asterisco no fim.
+3. Mostre a edição e espere o sim.
+
 ### Envio sem confirmação
 
 Se você enviar porque a pessoa pediu para responder, sem mostrar o texto, a mensagem sai em nome dela sem o sim.
@@ -249,6 +266,10 @@ Mostrei a conversa do Caio e o texto "Podemos falar 15h00?". Enviei depois do si
 
 Mostrei a conversa e o texto, e enviei depois do sim. A conversa recebeu, usando a habilidade `rotular-item`, a lista de ação esperada e a lista com o último nível da etiqueta de e-mail que a edição da feira registra.
 
+### escrevi chegamos, mas a gente ainda não chegou
+
+Mostrei a edição "Chegaremos*" na mesma mensagem e editei depois do sim. Não mandei outra mensagem.
+
 ## Casos-limite
 
 - Nenhuma aba do WhatsApp Web e o QR code na tela: pare e peça para a pessoa conectar o celular.
@@ -271,6 +292,7 @@ Mostrei a conversa e o texto, e enviei depois do sim. A conversa recebeu, usando
 - O WhatsApp Web leva alguns segundos para carregar. A primeira leitura pode mostrar só a tela de carregamento.
 - O texto da página traz a lista de conversas inteira antes da conversa aberta. A conversa aberta começa depois do nome do contato no cabeçalho.
 - Abrir uma conversa marca as mensagens não lidas como lidas, também para quem enviou.
+- A mensagem editada mostra "Editada", e o texto antigo some para os dois lados.
 - "Mostrar documentos de todas as conversas" lista só os documentos recentes. Um arquivo antigo não aparece ali nem na conversa.
 - O banco do aplicativo de desktop fica num contêiner protegido do sistema. A leitura direta é bloqueada, e contornar o bloqueio não é o caminho.
 - Em conta comercial, a conversa pode estar com o agente de IA, que responde à próxima mensagem do contato.
