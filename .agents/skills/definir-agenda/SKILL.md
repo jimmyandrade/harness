@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.45.0"
+  version: "0.46.0"
   related:
     - conversar-no-whatsapp
     - definir-agenda-de-popstar
@@ -43,7 +43,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
   - "relacionamento amoroso"
   - "amizades"
   - "descanso"
-# `Habilidade de tom de voz` vazia quer dizer que o título de evento externo segue o nome canônico, sem tom próprio.
+# `Habilidade de tom de voz` vazia quer dizer que o título e a descrição de evento com convidados seguem o nome canônico, sem tom próprio.
 "Habilidade de tom de voz": ""
 # `Pauta obrigatória em evento com convidados` em `sim` exige a pauta na descrição.
 "Pauta obrigatória em evento com convidados": "não"
@@ -171,7 +171,7 @@ O título serve à busca humana e por IA.
 Leva o nome canônico mais buscável do evento, da oportunidade, da organização ou da reunião. Quando couber, leva edição, data, cidade e contexto curto.
 «Reservado», «o evento», «Reunião» e «Feira» sem qualificador não entram.
 Provisório pode começar com «Reservado para» ou «A confirmar» e leva o nome canônico do contexto.
-Convidada, convidado ou organização de fora: o título segue a `Habilidade de tom de voz`, quando as instruções do projeto a indicarem.
+Evento com convidados, de dentro ou de fora, ou com organização de fora: o título e a descrição, inclusive a pauta, seguem a `Habilidade de tom de voz`, quando as instruções do projeto a indicarem. Consulte o vocabulário antes de gravar, não depois.
 A descrição leva o link da página canônica, uma frase do que o evento é, e só a variação que ajuda a achar, numa frase "Também chamado de…": acento, sigla, apelido, grupo, edição, venue, cidade, tipo, organização, status e papel da empresa.
 Desambiguação curta se for um negócio e não um ponto de contato. Não alongue o que a propriedade já guarda. Criatividade não troca o campo estruturado.
 Quando `definir-jornada-de-producao` disser que o dia segue a jornada reduzida, a descrição registra a jornada reduzida e o motivo.
