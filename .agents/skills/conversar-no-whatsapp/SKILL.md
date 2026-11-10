@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.28.0"
+  version: "0.28.1"
   aliases:
     - redigir-mensagem-de-whatsapp
   related:
@@ -60,7 +60,7 @@ Peça o assunto: quem pediu, sobre quem ou o quê, e se a pessoa quer só ler ou
 
 Use o primeiro canal de `Canais em ordem de preferência` que a sessão tem. Diga qual usou e, quando pulou um, por que ele não estava disponível. Sem nenhum canal da lista, pare e diga isso.
 
-No WhatsApp Web, use o Chrome da pessoa pela extensão Claude in Chrome, que já tem o login dela, e abra-o sem perguntar antes: ler não pede confirmação. O navegador embutido do app não serve, porque o WhatsApp Web o recusa como incompatível: troque para o Chrome na mesma sequência. Se a extensão não responder, o WhatsApp Web não está conectado: siga o parágrafo do QR code. Use a aba do WhatsApp Web que já esteja aberta entre as suas; sem aba, abra uma. Não peça para a pessoa mover a aba dela.
+No WhatsApp Web, use o Chrome da pessoa pela extensão Claude in Chrome, que já tem o login dela, e abra-o sem perguntar antes: ler não pede confirmação. O navegador embutido do app não serve, porque o WhatsApp Web o recusa como incompatível: troque para o Chrome na mesma sequência. Se a extensão não responder, o WhatsApp Web não está conectado: siga o parágrafo do QR code. Use, durante toda a tarefa, a aba que a sessão já abriu: não abra outra nem a recarregue. Antes de ler ou enviar, confira no cabeçalho o nome da conversa. Não peça para a pessoa mover a aba dela.
 
 Se aparecer o aviso de que o WhatsApp está aberto em outra janela, clique no botão do aviso que passa a conexão para a sua aba. O texto dele muda com a versão do WhatsApp, como "Usar nesta janela" ou "Usar aqui", e pode ser outro. Na mesma sequência de ações, espere a lista carregar, busque e leia.
 Se o aviso voltar, outra aba tomou a conexão: clique de novo uma vez só, com a leitura na mesma sequência, e não alterne mais. Ao terminar, diga que a outra janela ficou desconectada e volta pelo mesmo botão.
@@ -164,7 +164,7 @@ Se você fechar a aba do WhatsApp Web no fim da tarefa, a sessão cai e a pessoa
 
 Se você pedir para a pessoa mover a aba do WhatsApp Web para o seu grupo de abas, ela move e você continua sem ver. No Claude in Chrome, o grupo de abas pertence a uma sessão, e o ID muda. Não dá para guardar o ID nem reaproveitar o grupo.
 
-1. Abra o WhatsApp Web numa aba sua.
+1. Abra o WhatsApp Web numa aba sua, uma só por sessão.
 2. Clique no botão do aviso, como "Usar nesta janela" ou "Usar aqui", e leia na mesma sequência.
 3. Aplique o filtro de `Etiqueta das conversas`.
 

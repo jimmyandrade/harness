@@ -3,7 +3,7 @@ name: enviar-imagem-no-whatsapp
 description: Envia uma imagem ou um documento já aprovado pelo WhatsApp Web, como foto ou documento e nunca como figurinha, numa conversa, num grupo ou num canal, e confere o envio. Usada quando a pessoa aprova mandar um comprovante, um convite com imagem ou uma postagem. Não serve para redigir o texto, escolher o destino nem enviar só texto.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
   related:
     - conversar-no-whatsapp
     - evoluir-habilidade
@@ -31,7 +31,7 @@ flowchart LR
 
 Quem chama já tem o destino, o arquivo e o sim da pessoa a essa imagem e a esse destino. Sem o sim, não envie.
 Use o WhatsApp Web no Chrome da pessoa, pela extensão Claude in Chrome, como `conversar-no-whatsapp` manda: a aba que já estiver aberta, o botão do aviso "Usar nesta janela" e o QR code. O navegador embutido do app não serve.
-Use PNG ou JPEG. Converta o WebP antes, por exemplo com `sips -s format png <arquivo> --out <pasta da sessão>/<nome>.png`.
+Antes de anexar, confira no cabeçalho o nome do destino: a aba pode estar noutra conversa. Use PNG ou JPEG. Converta o WebP antes, por exemplo com `sips -s format png <arquivo> --out <pasta da sessão>/<nome>.png`.
 
 ### Passo 2
 
