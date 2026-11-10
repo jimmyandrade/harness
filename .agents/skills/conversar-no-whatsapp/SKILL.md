@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.26.2"
+  version: "0.27.2"
   aliases:
     - redigir-mensagem-de-whatsapp
   related:
@@ -44,7 +44,7 @@ Leia os valores nas instruções do projeto, na entrada desta habilidade. Na aus
 "Comunicado numa mensagem só": "sim"
 # `Não lidas antes de enviar` é `ler e mostrar`, que abre a conversa, lê as não lidas e mostra o que pede ação da pessoa antes de enviar, ou `perguntar antes de abrir`, que avisa que abrir marca como lidas e espera o sim.
 "Não lidas antes de enviar": "ler e mostrar"
-# `Canal do comprovante` é `e-mail na mesma conversa`, que manda o comprovante de pagamento por e-mail, como resposta na conversa do e-mail da organização, com o arquivo anexado, e deixa o WhatsApp só para avisar, ou `WhatsApp`, que manda o arquivo na conversa.
+# `Canal do comprovante` é `e-mail na mesma conversa` (e-mail em resposta à organização, com o arquivo anexado; o WhatsApp só avisa), `WhatsApp` (arquivo na conversa) ou `e-mail e WhatsApp` (nos dois).
 "Canal do comprovante": "WhatsApp"
 # `Fechamento em mensagem separada`: `sim` manda a despedida numa mensagem própria, depois das outras. `não` deixa a despedida no fim da última mensagem.
 "Fechamento em mensagem separada": "sim"
@@ -68,7 +68,7 @@ Se aparecer o QR code, o WhatsApp Web não está conectado: pare, peça para a p
 
 ### Passo 2
 
-Espere a lista de conversas carregar antes de ler. Com `Etiqueta das conversas` preenchida, filtre a lista por essa etiqueta antes de procurar. Ache a conversa pelo nome na lista ou pela busca. Um pedido costuma estar em mais de uma conversa: na de quem pediu, na da pessoa envolvida e num grupo. Abra cada conversa ligada ao assunto e leia o texto da conversa aberta, não só a prévia da lista. Logo depois de ler cada uma, rotule-a por `rotular-item`, antes do resumo ou de qualquer pergunta. O contexto é o do assunto que a pessoa trata, pelo papel dela no cadastro: quem só é informada não recebe o de quem cuida dele.
+Espere a lista de conversas carregar antes de ler. Com `Etiqueta das conversas` preenchida, filtre a lista por essa etiqueta antes de procurar. Ache a conversa pelo nome na lista ou pela busca. Um pedido costuma estar em mais de uma conversa: na de quem pediu, na da pessoa envolvida e num grupo. Abra cada conversa ligada ao assunto e leia o texto da conversa aberta, não só a prévia da lista. Logo depois de ler cada uma, rotule-a por `rotular-item`, antes do resumo ou de qualquer pergunta. O contexto é o do assunto que a pessoa trata: quem só fica a par não recebe o de quem cuida dele.
 
 Uma conversa com mensagens não lidas segue `Não lidas antes de enviar`. Com `ler e mostrar`, abra, leia as não lidas e mostre primeiro o que pede ação da pessoa, como uma menção, uma pergunta ou um pedido para ela, e depois o resto em uma linha. Antes de enviar nessa conversa, pergunte se envia agora ou espera, e siga a resposta. Com `perguntar antes de abrir`, diga que abrir marca essas mensagens como lidas, também no celular de quem enviou, e pergunte se pode abrir. Não diga que nada foi marcado como lido depois de abrir uma conversa assim.
 
@@ -118,8 +118,8 @@ Um rascunho de um tipo listado em `Mensagem única para` vai numa mensagem só, 
 Com `Comunicado numa mensagem só` em `sim`, o comunicado de produto também vai numa mensagem só, como `comunicar-novidade-do-produto` manda.
 Escreva o comunicado com essa habilidade, não aqui.
 Um pedido ou uma lista de pendências que acompanha o anúncio é outro assunto e vai em outra mensagem, depois do comunicado.
-A saudação e o texto se dirigem só a quem está na conversa aberta: quem ela não alcança, como a outra pessoa que assina a organização, entra na terceira pessoa ou fica fora.
-O comprovante de pagamento segue `Canal do comprovante`. Com `e-mail na mesma conversa`, o e-mail segue `redigir-com-tom-de-voz`, e com o sim da pessoa sai pelo conector de e-mail, com o arquivo anexado, sem pedir que a pessoa copie ou anexe, e o WhatsApp só avisa que foi por e-mail e pede a confirmação. Sem conversa de e-mail com a organização, mande o arquivo no WhatsApp e diga isso.
+A saudação e o texto se dirigem só a quem está na conversa aberta: quem ela não alcança, como a outra pessoa que assina a organização, entra na terceira pessoa. Quem só fica a par recebe, na conversa dele, um aviso curto, sem as perguntas de quem decide.
+O comprovante de pagamento segue `Canal do comprovante`. Com `e-mail na mesma conversa`, o e-mail segue `redigir-com-tom-de-voz`, e com o sim da pessoa sai pelo conector de e-mail, com o arquivo anexado, sem pedir que a pessoa copie ou anexe, e o WhatsApp só avisa que foi por e-mail e pede a confirmação. Com `e-mail e WhatsApp`, o arquivo vai também na conversa, antes do aviso. Sem conversa de e-mail com a organização, mande o arquivo no WhatsApp e diga isso.
 
 Para responder ou enviar, mostre a conversa de destino, o texto exato e, se for resposta, a mensagem citada. Envie só depois do sim da pessoa a esse texto e a essa conversa. O sim vale para uma mensagem. Outra mensagem pede outro sim.
 
@@ -280,15 +280,12 @@ Mostrei a edição "Chegaremos*" na mesma mensagem e editei depois do sim. Não 
 - No conector de e-mail, o arquivo anexado por referência só vai no envio com `replyToMessageId` e o endereço em `to`, sem `replyThreadId`. O rascunho de resposta não o aceita.
 - No campo de mensagem, Enter envia. A quebra de linha é shift+Enter.
 - O campo numera a lista sozinho depois de "1. ". Digitar "2." no item seguinte duplica o número: digite só o texto dos itens seguintes.
-- Depois de uma lista, o campo tira a linha em branco antes do parágrafo seguinte.
 - Responder a uma mensagem é pelo menu que aparece ao passar o mouse sobre ela, na opção Responder. A citação aparece em cima do campo.
 - A aba que a pessoa já deixou aberta pode estar fora das abas que você controla. O botão do aviso, como "Usar nesta janela" ou "Usar aqui" conforme a versão, passa a conexão para a sua aba, e a aba dela fica desconectada sem perder o login.
 - Enter na busca da lista abre a primeira conversa e marca as mensagens como lidas. Digite o nome e leia o resultado sem apertar Enter.
 - Fechar a aba do WhatsApp Web desconecta a sessão. A pessoa precisa ler o QR code de novo.
-- O texto da página traz a lista de conversas inteira antes da conversa aberta. A conversa aberta começa depois do nome do contato no cabeçalho.
-- "Mostrar documentos de todas as conversas" lista só os documentos recentes. Um arquivo antigo não aparece ali nem na conversa.
-- O banco do aplicativo de desktop fica num contêiner protegido do sistema. A leitura direta é bloqueada, e contornar o bloqueio não é o caminho.
 - Em conta comercial, a conversa pode estar com o agente de IA, que responde à próxima mensagem do contato.
+- O campo de arquivo do Anexar é o de figurinha: a imagem enviada por ele vira figurinha. Para foto, rode `HTMLInputElement.prototype.click=function(){this.type=='file'&&document.body.appendChild(this)}`, clique em Fotos e vídeos e envie pelo campo novo, que aceita vídeo. Confira que a lista mostra "Foto", não "Figurinha".
 - "Sexta-feira" no separador é a última sexta antes de hoje, não a sexta mais próxima de outra data da conversa.
 
 ## Scripts disponíveis
