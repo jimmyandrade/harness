@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.10.0"
+  version: "0.11.0"
   related:
     - definir-empresa
     - definir-grafia
@@ -80,7 +80,7 @@ Telefone vai no formato internacional. Celular do Brasil tem 9 dígitos depois d
 
 Com `Cadastro na loja` em `sim`, crie ou atualize o cliente na loja com o nome, o telefone, o e-mail e o idioma, sem consentimento de marketing. Grave o link do cliente em `Campo do cliente na loja`, ou nas notas quando o campo está vazio. O histórico das conversas fica nos comentários da página da pessoa, não na nota do cliente. O perfil que o print mostrar segue `definir-perfil-social`. Quando esse perfil existir, relacione nos perfis sociais relacionados. Não grave o print no corpo.
 
-Grave como confirmado só o que veio direto da pessoa que usa a habilidade ou de uma fonte que respondeu com certeza. Nunca invente papel, time nem apelido.
+Grave como confirmado só o que veio direto da pessoa que usa a habilidade ou de uma fonte que respondeu com certeza. Nunca invente papel, time nem apelido. Uma transcrição errada do nome, como a de uma reunião transcrita por voz, que a pessoa confirma ser errada diante do nome canônico, entra nas variações de grafia, com a data e a fonte. O nome completo fica com o canônico, e a transcrição não se descarta nem vira o nome.
 Um apelido ou uma grafia ambígua que a pessoa decide inferir, como "vamos inferir que Bia é a Beatriz", entra no registro de quem foi inferida, na lista das transcrições erradas do nome, com o estado `inferido`, a data, quem inferiu, a frase da transcrição e o que descartou as outras hipóteses.
 A entrada não vira confirmada por ter sido pedida: o estado `confirmado` só vale quando alguém que sabe confirma. Uma entrada sem estado conta como confirmada. Ao atualizar um registro, mude o campo pontualmente: nunca regrave o registro inteiro descartando campos já confirmados ou o conteúdo de `extensions`. Todo texto que nomeia a pessoa usa como ela é chamada, e não o primeiro nome do nome completo quando os dois divergem.
 
@@ -175,6 +175,10 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 ### o print do Instagram anaexemplo.oficial, com o nome Ana Exemplo, e ela ainda não está na lista de pessoas.
 
 Busquei na lista de pessoas e não havia Ana Exemplo. Criei a página com o nome completo Ana Exemplo. O handle anaexemplo.oficial não entrou no nome. O perfil seguiu definir-perfil-social.
+
+### a reunião transcrita escreveu Ana Souza, e o nome canônico é Ana Sousa
+
+Cadastrei a página com o nome completo Ana Sousa. Gravei Ana Souza nas variações de grafia, como transcrição errada de uma reunião, com a data. Não usei a transcrição como nome.
 
 ## Casos-limite
 
