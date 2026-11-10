@@ -3,7 +3,7 @@ name: definir-vocabulario
 description: Use essa habilidade sempre que for cadastrar ou atualizar um ou mais termos do vocabulário do tom de voz, mesmo sem dizer glossário, lote ou estado. NÃO use para escrever, revisar ou aprovar o texto da marca, classificar uma frase, perguntar quais variações de gênero, número ou grafia foram cadastradas, nem inventar um termo que a pessoa não enviou.
 metadata:
   author: jimmyandrade
-  version: "0.35.1"
+  version: "0.36.0"
   related:
     - classificar-estado-do-termo
     - evoluir-habilidade
@@ -30,7 +30,7 @@ metadata:
 
 A pessoa responsável pelo tom de voz quer cadastrar ou atualizar termos. Perguntar se um termo ou uma variação faltou segue `procurar-variacao-de-termo`. Monte o plano com idioma, modo e a lista. Cada item tem `state`, `term`, `categories` e os campos desse nível. Use o que a pessoa enviou. O texto que você monta a partir disso, como o `reason`, vai marcado como seu.
 
-Quando a pessoa manda um par rotulado de antes e depois, cada lado é um termo no mesmo lote. O antes fica `forbidden`, e `substitution` e `alternatives` são o depois, com o texto que ela escreveu. O depois fica `allowed`. `related` liga os dois. Não invente outra alternativa. "Nunca use uma palavra, use outra" tem o mesmo formato, sem `when` e sem `tags`. A frase inteira, com a pontuação e com um símbolo no fim, é um termo. Termo novo entra em minúsculas.
+Quando a pessoa manda um par rotulado de antes e depois, cada lado é um termo no mesmo lote. O antes fica `forbidden`, e `substitution` e `alternatives` são o depois, com o texto que ela escreveu. O depois fica `allowed`. `related` liga os dois. Não invente outra alternativa. "Nunca use uma palavra, use outra" tem o mesmo formato, sem `when` e sem `tags`. A frase inteira, com a pontuação e com um símbolo no fim, é um termo. Termo novo entra em minúsculas. Quando a pessoa cita só um trecho de uma frase que você escreveu, como "não gosto do `se der…`", pergunte se recusa o trecho, a frase inteira ou os dois, e grave o que ela disser, sem ampliar a recusa por suposição. Se ela der depois um substituto para um termo recusado que ficou sem alternativa, atualize esse termo com `update`.
 
 O idioma de cada linha é o da comunicação inteira, não o do arquivo que já existe. Comunicação inteira em inglês, como um e-mail, uma review ou uma mensagem, grava o termo e a frase em `en`. Comunicação principalmente em português que só leva um termo em inglês no meio, como `header`, grava em `pt-BR`. Idioma ambíguo: pergunte. Sem idioma ou sem termo, pare e peça.
 
