@@ -134,6 +134,7 @@ flowchart LR
     sincronizar_status_da_tarefa["sincronizar-status-da-tarefa"]
     testar_habilidade["testar-habilidade"]
     testar_ponta_a_ponta["testar-ponta-a-ponta"]
+    transcrever_audio_e_video["transcrever-audio-e-video"]
     triar_conversas["triar-conversas"]
     validar_plano_de_vocabulario["validar-plano-de-vocabulario"]
   end
@@ -709,6 +710,8 @@ flowchart LR
   testar_ponta_a_ponta --> evoluir_habilidade
   testar_ponta_a_ponta --> preparar_tarefa_do_pull_request
   testar_ponta_a_ponta --> registrar_resultados_da_validacao_na_tarefa
+  transcrever_audio_e_video --> definir_registro_de_reuniao
+  transcrever_audio_e_video --> evoluir_habilidade
   triar_conversas --> conversar_no_whatsapp
   triar_conversas --> criar_oportunidade
   triar_conversas --> definir_grupo_de_oportunidades
