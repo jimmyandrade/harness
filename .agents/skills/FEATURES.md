@@ -946,6 +946,7 @@ How these skills relate is in `README.md`, in this folder.
   - Lists each unknown name or term with the lines around it and asks, and records only what the person confirms, in the spelling variations for a name and in a source of corrections for any other term
   - Keeps the topics the project lists out of the summary, while the raw transcript keeps them
   - Never sends a record outside the place the project names
+  - When the person asks for comments on the tasks a meeting cites, follows preparar-tarefa-do-pull-request with only what the summary says and no transcript excerpt
   - Does not find the context of a past meeting or write the minutes
 - **Test Criteria**:
   - [x] The skill is present at that path

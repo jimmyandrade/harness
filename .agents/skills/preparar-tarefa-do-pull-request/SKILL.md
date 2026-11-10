@@ -3,7 +3,7 @@ name: preparar-tarefa-do-pull-request
 description: Garante a tarefa da demanda antes do pull request e confere se a descrição de qualquer card segue o modelo do tipo. Usada quando falta a tarefa, quando o PR já existe sem ela, ao implementar uma issue e ao escrever ou editar um card, mesmo subtarefa. Não cria sozinha nem escolhe o projeto por um card parecido. Não serve para abrir o PR.
 metadata:
   author: jimmyandrade
-  version: "0.10.2"
+  version: "0.11.1"
   related:
     - definir-tarefa
     - evoluir-habilidade
@@ -95,7 +95,10 @@ Monte a tarefa com `definir-tarefa`, que cuida da boa escrita: título, prazo, d
 - A tarefa guarda o que se espera: o escopo e os critérios de aceitação, que dizem o que fica pronto e quando. Como foi feito e por que cada decisão foi tomada ficam na descrição do PR, não na tarefa. Quando uma pergunta de revisão muda o comportamento, atualize o critério afetado, em Dado, Quando e Então, e a descrição do PR ganha a decisão.
 - Os critérios de aceitação seguem o `Formato dos critérios de aceitação`. Uma tarefa que muda código de um app com ambiente de teste por PR termina com o `Critério de validação da mudança`. O registro diz o que foi procurado e o que foi encontrado, nunca só que não há regressão.
 - Antes de escrever ou editar a descrição de qualquer card, leia o modelo do tipo em `Modelos de descrição` e o `Formato dos critérios de aceitação`. Vale também para subtarefa e para card que nasce de um achado, sem PR. A descrição segue as seções do modelo, na ordem. Sem modelo para o tipo, os critérios usam o mesmo formato: um título com "deve" ou "não deve" e os itens Dado que, Quando e Então. Nunca lista solta de bullets. Um reforço do projeto soma ao modelo do tipo e nunca o substitui, e não vale numa tarefa criada no projeto de reserva.
-- Ao atualizar um card que já existe depois de uma reunião, padronize primeiro o título pelo `Padrão do título do card`, na mesma grafia dos cards irmãos. Com o parâmetro vazio, siga só a grafia dos cards irmãos e não imponha um formato. Adapte a descrição ao modelo do tipo sem perder nenhuma informação: o que não cabe numa seção do modelo vai para `Contexto` ou `Pontos em aberto`, nunca é apagado. Ponha as decisões da reunião numa seção `Decisões`, com quem decidiu, quando e o link da ata, no formato de `Registro de decisão` de `formalizar-decisao`. Se o formato é um bloco próprio da ferramenta de tarefas, escreva a descrição no formato que cria o bloco. Texto em lista não substitui o bloco, nem para poupar chamada.
+- Ao atualizar um card que já existe depois de uma reunião, padronize primeiro o título pelo `Padrão do título do card`, na mesma grafia dos cards irmãos. Com o parâmetro vazio, siga só a grafia dos cards irmãos e não imponha um formato.
+- Nesse card, adapte a descrição ao modelo do tipo sem perder nenhuma informação: o que não cabe numa seção do modelo vai para `Contexto` ou `Pontos em aberto`, nunca é apagado.
+- As decisões da reunião vão numa seção `Decisões`, com quem decidiu, quando e o link da ata, no formato de `Registro de decisão` de `formalizar-decisao`. Se o formato é um bloco próprio da ferramenta de tarefas, escreva a descrição no formato que cria o bloco. Texto em lista não substitui o bloco, nem para poupar chamada. Decisão sem quem decidiu conhecido entra como contexto, dita como a confirmar.
+- Ao comentar o link do registro da reunião numa tarefa, leia antes o título e a descrição dela. O que a reunião trouxe e a tarefa não diz, como um filho ou uma subtarefa que faltava, um ponto em aberto que virou resposta ou um escopo que saiu, entra na descrição, e no título quando ele deixou de descrever a tarefa, no mesmo turno e sem esperar pedido. Sem novidade, o comentário basta e a resposta diz que conferiu.
 - O `Formato da descrição` manda na gravação: link e caixa de seleção no formato próprio do rastreador, conferidos lendo a tarefa de volta.
 - Aplique as `Lentes de revisão` ao decidir título, escopo e tipo: cada afirmação se apoia no PR, no diff ou no que a pessoa disse, o que for hipótese vai marcado como hipótese, e a habilidade diz o que não conseguiu confirmar.
 - Sem rodapé nem assinatura de ferramenta.
@@ -166,6 +169,14 @@ Se você escrever ou editar o card pelo hábito, com lista de bullets ou seçõe
 2. Siga as seções do modelo e os critérios em título com "deve" ou "não deve", com Dado que, Quando e Então.
 3. Sem modelo para o tipo, use o mesmo formato dos critérios.
 4. Vale para subtarefa e para card sem PR.
+
+### Comentário sem conferir a tarefa
+
+Se você só comentar o link do registro da reunião, a tarefa continua dizendo o que valia antes dela, com filho faltando e ponto em aberto já resolvido.
+
+1. Leia o título e a descrição antes de comentar.
+2. Ponha na descrição o que a reunião trouxe e ela não diz, e no título o que o descreve de novo.
+3. Sem novidade, comente só e diga que conferiu.
 
 ### Chave na branch contra a convenção
 
