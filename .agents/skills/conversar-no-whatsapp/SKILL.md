@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.26.1"
+  version: "0.26.2"
   aliases:
     - redigir-mensagem-de-whatsapp
   related:
@@ -68,7 +68,7 @@ Se aparecer o QR code, o WhatsApp Web não está conectado: pare, peça para a p
 
 ### Passo 2
 
-Espere a lista de conversas carregar antes de ler. Com `Etiqueta das conversas` preenchida, filtre a lista por essa etiqueta antes de procurar. Ache a conversa pelo nome na lista ou pela busca. Um pedido costuma estar em mais de uma conversa: na de quem pediu, na da pessoa envolvida e num grupo. Abra cada conversa ligada ao assunto e leia o texto da conversa aberta, não só a prévia da lista. Logo depois de ler cada uma, rotule-a por `rotular-item`, antes do resumo ou de qualquer pergunta.
+Espere a lista de conversas carregar antes de ler. Com `Etiqueta das conversas` preenchida, filtre a lista por essa etiqueta antes de procurar. Ache a conversa pelo nome na lista ou pela busca. Um pedido costuma estar em mais de uma conversa: na de quem pediu, na da pessoa envolvida e num grupo. Abra cada conversa ligada ao assunto e leia o texto da conversa aberta, não só a prévia da lista. Logo depois de ler cada uma, rotule-a por `rotular-item`, antes do resumo ou de qualquer pergunta. O contexto é o do assunto que a pessoa trata, pelo papel dela no cadastro: quem só é informada não recebe o de quem cuida dele.
 
 Uma conversa com mensagens não lidas segue `Não lidas antes de enviar`. Com `ler e mostrar`, abra, leia as não lidas e mostre primeiro o que pede ação da pessoa, como uma menção, uma pergunta ou um pedido para ela, e depois o resto em uma linha. Antes de enviar nessa conversa, pergunte se envia agora ou espera, e siga a resposta. Com `perguntar antes de abrir`, diga que abrir marca essas mensagens como lidas, também no celular de quem enviou, e pergunte se pode abrir. Não diga que nada foi marcado como lido depois de abrir uma conversa assim.
 
@@ -286,7 +286,6 @@ Mostrei a edição "Chegaremos*" na mesma mensagem e editei depois do sim. Não 
 - Enter na busca da lista abre a primeira conversa e marca as mensagens como lidas. Digite o nome e leia o resultado sem apertar Enter.
 - Fechar a aba do WhatsApp Web desconecta a sessão. A pessoa precisa ler o QR code de novo.
 - O texto da página traz a lista de conversas inteira antes da conversa aberta. A conversa aberta começa depois do nome do contato no cabeçalho.
-- Abrir uma conversa marca as mensagens não lidas como lidas, também para quem enviou.
 - "Mostrar documentos de todas as conversas" lista só os documentos recentes. Um arquivo antigo não aparece ali nem na conversa.
 - O banco do aplicativo de desktop fica num contêiner protegido do sistema. A leitura direta é bloqueada, e contornar o bloqueio não é o caminho.
 - Em conta comercial, a conversa pode estar com o agente de IA, que responde à próxima mensagem do contato.
