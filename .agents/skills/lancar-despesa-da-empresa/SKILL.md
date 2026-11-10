@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.10.6"
+  version: "0.10.9"
   aliases:
     - definir-despesa
     - lancar-despesa
@@ -109,6 +109,8 @@ Antes de qualquer gravação, confira e marque este checklist com o que a evidê
 
 O recebedor e a modalidade Pix não identificam o produto nem sua finalidade. Dizer apenas “despesa pessoal” ou “despesa da empresa” só confirma a natureza. Consulte o contexto e os registros relacionados; reúna as perguntas que faltam, espere as respostas e só depois grave. Não repita perguntas já respondidas nem exija campos sem relação com o gasto. Não use nome genérico de recebedor como substituto da identificação.
 
+Quem pagou é quem arcou com o dinheiro, não o titular da conta. Um débito da empresa pode sair do dinheiro de outra pessoa que só passou pela conta, como a venda dela numa maquininha da empresa. Quando essa pessoa aceitou arcar com o débito, grave-a como pessoa pagadora e conte nas observações de onde veio o dinheiro. Sem esse aceite, pergunte: o valor é uma dívida com ela.
+
 Antes de deixar a categoria de custo vazia, busque na lista que a propriedade de categoria aponta, pelo produto e pela finalidade confirmados, e pelas variações e grafias da categoria. Sem propriedade de categoria no mapeamento, informe a limitação; não crie estrutura nem grave uma categoria inventada no corpo. Isso não impede registrar um gasto já identificado com os vínculos disponíveis. Uma informação opcional ausente não substitui a identificação obrigatória do produto e da finalidade.
 
 ```mermaid
@@ -162,11 +164,11 @@ flowchart LR
 
 A falta de identificação da conta não bloqueia o lançamento quando os demais dados obrigatórios estão sustentados. Até a resposta, mantenha o vínculo vazio e informe a pendência. Uma confirmação vale para o pagamento confirmado, não vira regra para outros pagamentos do mesmo banco. Ao receber a resposta, complemente a mesma despesa sem duplicá-la nem alterar os comprovantes.
 
-Grave os dados nas propriedades mapeadas, não no corpo. Separe a data do documento da data de pagamento. Não invente valor, data, conta, finalidade, categoria nem parcelas. Campo opcional ausente fica pendente; produto, finalidade e informação necessária à classificação não são opcionais. Depois do checklist completo, a pendência opcional não impede o lançamento. Preserve o modelo da página.
+Grave os dados nas propriedades mapeadas, não no corpo. Separe a data do documento da data de pagamento. Não invente valor, data, conta, finalidade, categoria nem parcelas. Um valor ou uma data que a pessoa informa de memória e que diverge da evidência, como o extrato ou o comprovante, não substitui o da evidência: grave o da evidência e aponte a diferença na resposta. Desconto por antecipação, juros e multa mudam o valor pago, não o original: grave o valor cheio da cobrança no valor original e o efetivamente pago no valor final. Juros e multa vão nos campos deles quando a evidência os separa. Campo opcional ausente fica pendente; produto, finalidade e informação necessária à classificação não são opcionais. Depois do checklist completo, a pendência opcional não impede o lançamento. Preserve o modelo da página.
 
-Anexe os originais na propriedade mapeada de comprovantes na mesma execução do lançamento, sem novo reconhecimento e sem pedir confirmação adicional. Recupere os anexos já enviados do histórico antes de declarar que estão inacessíveis. Use a referência de arquivo aceita pela ferramenta; um ID de anexo da conversa não é necessariamente um ID de arquivo do Notion. Erro de arquivo não encontrado exige conferir a referência original e usar o formato suportado, não pedir novo envio nem tratar a falha de referência como falta do comprovante. Mantenha as evidências anteriores ao complementar um lançamento. Preserve os dados confirmados e pergunte sobre conflito antes de sobrescrever. Uma transação ainda em processamento não equivale a conciliação concluída; uma cobrança sem confirmação não equivale a pagamento.
+Anexe os originais na propriedade mapeada de comprovantes na mesma execução do lançamento, sem novo reconhecimento e sem pedir confirmação adicional. Recupere os anexos já enviados do histórico antes de declarar que estão inacessíveis. Use a referência de arquivo aceita pela ferramenta; um ID de anexo da conversa não é necessariamente um ID de arquivo do Notion. Erro de arquivo não encontrado exige conferir a referência original e usar o formato suportado, não pedir novo envio nem tratar a falha de referência como falta do comprovante. Mantenha as evidências anteriores ao complementar um lançamento. Preserve os dados confirmados já gravados e pergunte sobre conflito antes de sobrescrevê-los. Uma transação ainda em processamento não equivale a conciliação concluída; uma cobrança sem confirmação não equivale a pagamento.
 
-Pagamento numa moeda de `Moedas estrangeiras`: grave o valor original, o câmbio, a data e a fonte do câmbio, e o valor convertido na `Moeda`. Sem o câmbio na evidência, pergunte. Não invente o câmbio.
+Pagamento numa moeda de `Moedas estrangeiras`: grave o valor na moeda estrangeira, o câmbio, a data e a fonte do câmbio, e o valor convertido na `Moeda`. Sem o câmbio na evidência, pergunte. Não invente o câmbio.
 
 ### Passo 4
 
@@ -242,6 +244,7 @@ Busquei pelo recebedor, documento, valor e data. Registrei um lançamento com as
 - Falta conta de origem opcional, mas a identificação, a classificação e os dados financeiros estão sustentados: registre e entregue a pendência, sem adivinhar.
 - Valor, data e natureza da empresa estão confirmados, mas falta o que foi pago ou sua finalidade: pergunte e aguarde antes de gravar.
 - Venda ou frase mista: `definir-lancamento-financeiro`. Não grave a venda aqui.
+- A pessoa informa um valor diferente do que a evidência mostra: grave o da evidência e aponte a diferença. Não troque pelo valor informado.
 
 ## Pegadinhas
 

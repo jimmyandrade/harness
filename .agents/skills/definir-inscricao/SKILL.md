@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet. A busca na lista de inscrições usa notion-ai-search no servidor notion.
 metadata:
   author: jimmyandrade
-  version: "0.9.1"
+  version: "0.9.2"
   aliases:
     - atualizar-inscricao
   related:
@@ -61,9 +61,19 @@ Se o mapeamento não tiver a edição, o status, quem fez a inscrição ou a pes
 
 ### Passo 4
 
+Depois de gravar, leia a página de volta e confira cada propriedade gravada contra o que você quis gravar: o status, as datas, as observações e os comprovantes. Diga o que a leitura mostrou, inclusive o que ficou fora do esperado, como o título que não acompanha o status. Não diga que gravou sem essa leitura.
+
 Diga a página, o status que ela tinha e o status que ela tem agora. Na linha nova, diga que a edição já está cadastrada, com as datas e o dia da semana, que a busca na lista de inscrições não achou essa edição, e que a inscrição entrou no registro. Dê o link da inscrição. Se a foto entrou, diga que ela está nos comprovantes. Diga que, se foi engano, a pessoa desfaz. Se a foto não trouxer quem fez a inscrição nem para quem ela foi feita, diga a edição e não cadastre. Exija essas duas marcações. Não diga que o evento inteiro foi confirmado. Se o status já era esse, diga, comemore e não grave de novo. Liste os valores que ficaram sem propriedade. Quando a pessoa escreveu o pedido sem nomear a habilidade, termine indicando `/definir-inscricao` para a próxima vez. Na foto sem esses nomes, feche nas duas marcações.
 
 ## Problemas comuns
+
+### Gravação sem releitura
+
+Se você disser que gravou sem ler a página de volta, a pessoa pede a releitura e o que ficou diferente do esperado, como o título antigo ou uma observação que repete o status, passa despercebido.
+
+1. Leia a página depois da gravação.
+2. Confira o status, as datas, as observações e os comprovantes.
+3. Diga o que a leitura mostrou, inclusive o que ficou diferente.
 
 ### Status em outra inscrição
 

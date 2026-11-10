@@ -5,9 +5,9 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.45.0"
+  version: "0.47.1"
   related:
-    - conversar-no-whatsapp
+    - convidar-para-evento
     - definir-agenda-de-popstar
     - definir-convidado
     - definir-data-significativa
@@ -43,7 +43,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
   - "relacionamento amoroso"
   - "amizades"
   - "descanso"
-# `Habilidade de tom de voz` vazia quer dizer que o título de evento externo segue o nome canônico, sem tom próprio.
+# `Habilidade de tom de voz` vazia quer dizer que o título e a descrição de evento com convidados seguem o nome canônico, sem tom próprio.
 "Habilidade de tom de voz": ""
 # `Pauta obrigatória em evento com convidados` em `sim` exige a pauta na descrição.
 "Pauta obrigatória em evento com convidados": "não"
@@ -171,14 +171,14 @@ O título serve à busca humana e por IA.
 Leva o nome canônico mais buscável do evento, da oportunidade, da organização ou da reunião. Quando couber, leva edição, data, cidade e contexto curto.
 «Reservado», «o evento», «Reunião» e «Feira» sem qualificador não entram.
 Provisório pode começar com «Reservado para» ou «A confirmar» e leva o nome canônico do contexto.
-Convidada, convidado ou organização de fora: o título segue a `Habilidade de tom de voz`, quando as instruções do projeto a indicarem.
+Evento com convidados, de dentro ou de fora, ou com organização de fora: o título e a descrição, inclusive a pauta, seguem a `Habilidade de tom de voz`, quando as instruções do projeto a indicarem. Consulte o vocabulário antes de gravar, não depois.
 A descrição leva o link da página canônica, uma frase do que o evento é, e só a variação que ajuda a achar, numa frase "Também chamado de…": acento, sigla, apelido, grupo, edição, venue, cidade, tipo, organização, status e papel da empresa.
 Desambiguação curta se for um negócio e não um ponto de contato. Não alongue o que a propriedade já guarda. Criatividade não troca o campo estruturado.
 Quando `definir-jornada-de-producao` disser que o dia segue a jornada reduzida, a descrição registra a jornada reduzida e o motivo.
 Reunião sem modalidade: pergunte. Remota: crie o Google Meet. Presencial: não crie.
 
 Ligação telefônica leva na descrição o nome e o telefone de quem vai ligar ou atender do outro lado, para remarcar sem depender de memória. Sem o número, peça a quem atendeu a ligação que combinou o horário: o histórico de chamadas do celular tem o número, e a gravação, se houver, tem o combinado. Grave o número também no cadastro da pessoa.
-Reunião combinada numa conversa do WhatsApp: depois de criar o evento, siga o Passo 6 de `conversar-no-whatsapp`, que manda na conversa o evento nativo e a mensagem com o link da chamada.
+Compromisso a que uma pessoa ou um grupo deve ser convidado, como uma reunião combinada numa conversa do WhatsApp: depois de criar o evento, siga `convidar-para-evento`, que manda o convite pelos canais que alcançam a pessoa.
 
 Com `Pauta obrigatória em evento com convidados` em `sim`, a descrição de um evento com convidados leva uma pauta clara.
 Sem pauta na conversa, pergunte antes de criar.
@@ -277,7 +277,7 @@ Conferi a grafia. O título usou o nome canônico e o papel do encontro. A descr
 - O ponto de contato parece caber na agenda removida. O destino é a agenda editável de `organizar-ponto-de-contato`.
 - O título que cita o nome de uma agenda aposentada parece essa agenda. O aviso usa o calendário.
 - Título diferente parece evento novo. A busca usa variação de nome, não só o título exato. Na dúvida, mostre e confirme.
-- O link da chamada numa mensagem parece marcar a reunião na conversa do WhatsApp. A conversa recebe o evento nativo e a mensagem com o link, pelo Passo 6 de `conversar-no-whatsapp`.
+- O link da chamada numa mensagem parece marcar a reunião na conversa do WhatsApp. O convite sai por `convidar-para-evento`, com o evento nativo e a mensagem com o link.
 - «Feira» ou «Reunião» sozinhos parecem título. A busca precisa do nome canônico. O evento externo segue o Passo 5.
 
 ## Scripts disponíveis

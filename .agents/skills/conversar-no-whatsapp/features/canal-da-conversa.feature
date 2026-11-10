@@ -19,6 +19,13 @@ Funcionalidade: Escolher o canal da conversa
       Então a conversa é lida no WhatsApp Web
       E a resposta diz que não havia conector
 
+    Exemplo: O WhatsApp Web abre no Chrome, não no navegador embutido
+      Dado que a sessão não tem conector do WhatsApp
+      E que o navegador embutido do app mostra o aviso de navegador incompatível
+      Quando a pessoa pede para ler uma conversa
+      Então a conversa é lida no Chrome, pela extensão Claude in Chrome
+      E a habilidade não pergunta antes de trocar de navegador
+
     Exemplo: Nenhum canal da lista disponível
       Dado que `Canais em ordem de preferência` está em `conector`
       E que a sessão não tem conector do WhatsApp

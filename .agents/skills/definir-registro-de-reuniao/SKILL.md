@@ -3,7 +3,7 @@ name: definir-registro-de-reuniao
 description: Cadastra e corrige o registro de uma reunião, com título, data, participantes, resumo e índice, onde o projeto guarda os registros. Usada quando a pessoa cola uma transcrição ou pergunta se uma reunião já está registrada. Não serve para achar o contexto de uma reunião nem escrever a ata.
 metadata:
   author: jimmyandrade
-  version: "0.13.4"
+  version: "0.14.0"
   related:
     - definir-agenda
     - definir-grafia
@@ -110,6 +110,7 @@ Um `a confirmar` pode ser resolvido depois, por uma fonte de fora da transcriç�
 Preencha só com essa fonte, nunca por pronome nem por palpite, e escreva a fonte na mesma célula, como "conforme o card X".
 Num registro já publicado, a menção real de uma pessoa nova espera o sim de quem escreve.
 Uma ação do negócio, sem pessoa nomeada pela fonte, vai como o time, em texto e sem menção.
+Um número ou uma chave de card dita na reunião, como `ABC-600` ou `586`, se busca pelo ID antes de o registro dizer que não há card. Busque a chave inteira, no projeto que a fala cita, e o número solto no projeto do time. Só diga que o card não foi identificado depois de a busca pelo ID não achar.
 Quando existe uma página de decisão para a ação em aberto, a célula continua `a confirmar` e cita a página.
 Depois de preencher, reescreva o ponto em aberto que diz que nenhuma ação tem responsável confirmado, com a data do preenchimento e o que vem de fora da reunião.
 A ação sem fonte continua `a confirmar`.
@@ -200,6 +201,14 @@ Se você deixar `a confirmar` numa ação que um card ou outra fonte já nomeia,
 3. Peça o sim antes de acrescentar menção a um registro publicado.
 4. Reescreva o ponto em aberto sobre responsáveis.
 
+### Card citado pelo número que fica sem busca
+
+Se você escrever que o card não foi identificado sem buscar o número ou a chave que a fala citou, o registro perde um card que existia e a pessoa corrige o que você podia ter achado.
+
+1. Busque o ID que a fala citou, a chave inteira no projeto citado e o número solto no projeto do time.
+2. Preencha o item com o card achado e a fonte da busca.
+3. Escreva que o card não foi identificado só quando a busca pelo ID não achar.
+
 ### Correção na transcrição bruta
 
 Se você trocar a grafia dentro da transcrição bruta, o registro deixa de ser o que foi dito e o erro de reconhecimento some.
@@ -237,6 +246,7 @@ Escrevi no resumo que a correção sobe no dia seguinte, com o responsável como
 ## Casos-limite
 
 - Há dois eventos plausíveis no horário: liste e pergunte. Não escolha.
+- A fala cita só um número, como `586`: busque no projeto do time. Com mais de um card no resultado, liste e pergunte, sem escolher.
 - O responsável vem do card, mas a reunião não o nomeou: preencha com a fonte indicada e não diga que foi combinado na reunião.
 - A transcrição começa no meio da reunião: registre assim no bloco do cabeçalho e não preencha o que não veio.
 - O texto traz o resumo gerado pela ferramenta de reunião junto da transcrição: guarde os dois, e trate o resumo gerado como não literal.

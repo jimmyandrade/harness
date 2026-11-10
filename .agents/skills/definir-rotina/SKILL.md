@@ -3,7 +3,7 @@ name: definir-rotina
 description: Cria, revisa e audita rotinas agendadas ou por evento, para rodarem só quando o resultado tem uso. Usada ao pedir, mudar ou auditar uma rotina, ou antes de pedir de novo um resultado que uma rotina já gerou, mesmo sem dizer rotina. Não serve para executar o trabalho da rotina, criar evento na agenda nem medir uma skill.
 metadata:
   author: jimmyandrade
-  version: "0.5.1"
+  version: "0.5.2"
   related:
     - acompanhar-fila-de-revisao
     - acompanhar-resposta-no-whatsapp
@@ -147,6 +147,7 @@ Três rotinas liam a mesma caixa de e-mail, e uma rodava de madrugada para avisa
 
 - A maior parte do consumo costuma vir das conversas, não das rotinas. Pedir o mesmo resultado a vários bots em paralelo gasta mais que uma rotina diária.
 - Uma rotina sem execução vazia parece barata. Cada disparo que não acha nada também consome.
+- Um cron com dia e mês, como `0,30 17-19 9 11 *`, parece valer só para aquela data. Ele roda de novo no mesmo dia do ano seguinte: a rotina de um dia só pausa a si mesma na última execução, e uma checagem única usa disparo único, não cron.
 
 ## Scripts disponíveis
 

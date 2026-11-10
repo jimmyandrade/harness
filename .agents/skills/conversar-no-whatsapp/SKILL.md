@@ -3,11 +3,13 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.23.0"
+  version: "0.25.0"
+  aliases:
+    - redigir-mensagem-de-whatsapp
   related:
     - acompanhar-resposta-no-whatsapp
     - comunicar-novidade-do-produto
-    - definir-agenda
+    - convidar-para-evento
     - definir-pessoa
     - definir-rotina
     - definir-tarefa
@@ -32,7 +34,7 @@ Leia os valores nas instruções do projeto, na entrada desta habilidade. Na aus
 "Formato da data na mensagem": "terça-feira, 1 de setembro de 2026"
 "Modo de aprendizado": "perguntar"
 "Etiqueta das conversas": ""
-# `Canais em ordem de preferência` lista por onde ler e enviar, do preferido ao último recurso. `conector` é um conector ou MCP do WhatsApp na sessão. `WhatsApp Web` é a aba no navegador da pessoa.
+# `Canais em ordem de preferência` lista por onde ler e enviar, do preferido ao último recurso. `conector` é um conector ou MCP do WhatsApp na sessão. `WhatsApp Web` é a aba no Chrome da pessoa, pela extensão Claude in Chrome.
 "Canais em ordem de preferência": ["conector", "WhatsApp Web"]
 # `Dividir em mensagens curtas`: `sim` divide o rascunho em mensagens, uma por ideia. `não` manda cada rascunho numa mensagem só.
 "Dividir em mensagens curtas": "sim"
@@ -42,8 +44,10 @@ Leia os valores nas instruções do projeto, na entrada desta habilidade. Na aus
 "Comunicado numa mensagem só": "sim"
 # `Não lidas antes de enviar` é `ler e mostrar`, que abre a conversa, lê as não lidas e mostra o que pede ação da pessoa antes de enviar, ou `perguntar antes de abrir`, que avisa que abrir marca como lidas e espera o sim.
 "Não lidas antes de enviar": "ler e mostrar"
+# `Canal do comprovante` é `e-mail na mesma conversa`, que manda o comprovante de pagamento por e-mail, como resposta na conversa do e-mail da organização, com o arquivo anexado, e deixa o WhatsApp só para avisar, ou `WhatsApp`, que manda o arquivo na conversa.
+"Canal do comprovante": "WhatsApp"
 # `Fechamento em mensagem separada`: `sim` manda a despedida numa mensagem própria, depois das outras. `não` deixa a despedida no fim da última mensagem.
-"Fechamento em mensagem separada": "não"
+"Fechamento em mensagem separada": "sim"
 # `Página de instruções do WhatsApp` é o endereço da página com as regras da conta, como a ferramenta comercial por onde a mensagem sai. Vazio pula a leitura.
 "Página de instruções do WhatsApp": ""
 ```
@@ -55,7 +59,7 @@ Peça o assunto: quem pediu, sobre quem ou o quê, e se a pessoa quer só ler ou
 
 Use o primeiro canal de `Canais em ordem de preferência` que a sessão tem. Diga qual usou e, quando pulou um, por que ele não estava disponível. Sem nenhum canal da lista, pare e diga isso.
 
-No WhatsApp Web, use o navegador da pessoa. Procure primeiro uma aba do WhatsApp Web que já esteja aberta entre as abas que você controla e use essa. Sem aba, abra o WhatsApp Web numa aba sua. Não peça para a pessoa mover a aba dela.
+No WhatsApp Web, use o Chrome da pessoa pela extensão Claude in Chrome, que já tem o login dela, e abra-o sem perguntar antes: ler não pede confirmação. O navegador embutido do app não serve, porque o WhatsApp Web o recusa com o aviso de navegador incompatível: troque para o Chrome na mesma sequência. Se a extensão não responder, diga isso e peça para a pessoa abrir o Chrome. Procure primeiro uma aba do WhatsApp Web que já esteja aberta entre as abas que você controla e use essa. Sem aba, abra o WhatsApp Web numa aba sua. Não peça para a pessoa mover a aba dela.
 
 Se aparecer o aviso de que o WhatsApp está aberto em outra janela, clique no botão do aviso que passa a conexão para a sua aba. O texto dele muda com a versão do WhatsApp, como "Usar nesta janela" ou "Usar aqui", e pode ser outro. Na mesma sequência de ações, espere a lista carregar, busque e leia.
 Se o aviso voltar, outra aba tomou a conexão: clique de novo uma vez só, com a leitura na mesma sequência, e não alterne mais. Ao terminar, diga que a outra janela ficou desconectada e volta pelo mesmo botão.
@@ -89,7 +93,7 @@ flowchart LR
   Q -->|cadastrar quem pediu| P[definir-pessoa]
   Q -->|texto no tom de voz| V[redigir-com-tom-de-voz]
   Q -->|responder ou enviar| E[Passo 5]
-  Q -->|marcar call ou evento| A[definir-agenda e depois Passo 6]
+  Q -->|convidar para call ou evento| A[convidar-para-evento]
 ```
 
 Para registrar a demanda, leve a data e o horário da primeira mensagem do pedido como data da demanda.
@@ -103,7 +107,7 @@ Com `Página de instruções do WhatsApp` preenchida, leia a página antes de ra
 Todo rascunho de mensagem aparece na resposta do chat. Leia o modelo de saída `mensagens-do-whatsapp` quando for gerar a saída.
 Não diga só que o rascunho está pronto.
 Uma mensagem que diz que um trabalho está em andamento, foi registrado ou foi feito leva o link da tarefa, da página ou do pull request que mostra esse registro. Sem esse registro, crie-o antes, como `definir-tarefa` manda, ou pergunte onde ele está.
-O widget pode não aparecer para a pessoa.
+Com a ferramenta de widget na sessão, o widget vem sempre, além dos blocos, como o modelo de saída diz. Não espere o cliente desenhá-lo nem o trate como opcional.
 Sem o texto à vista, não pergunte se pode enviar.
 
 Com `Dividir em mensagens curtas` em `sim`, como as pessoas costumam escrever no WhatsApp, divida o rascunho em mensagens, uma por ideia.
@@ -114,6 +118,8 @@ Um rascunho de um tipo listado em `Mensagem única para` vai numa mensagem só, 
 Com `Comunicado numa mensagem só` em `sim`, o comunicado de produto também vai numa mensagem só, como `comunicar-novidade-do-produto` manda.
 Escreva o comunicado com essa habilidade, não aqui.
 Um pedido ou uma lista de pendências que acompanha o anúncio é outro assunto e vai em outra mensagem, depois do comunicado.
+A saudação e o texto se dirigem só a quem está na conversa aberta: quem ela não alcança, como a outra pessoa que assina a organização, entra na terceira pessoa ou fica fora.
+O comprovante de pagamento segue `Canal do comprovante`. Com `e-mail na mesma conversa`, o e-mail segue `redigir-com-tom-de-voz`, e com o sim da pessoa sai pelo conector de e-mail, com o arquivo anexado, sem pedir que a pessoa copie ou anexe, e o WhatsApp só avisa que foi por e-mail e pede a confirmação. Sem conversa de e-mail com a organização, mande o arquivo no WhatsApp e diga isso.
 
 Para responder ou enviar, mostre a conversa de destino, o texto exato e, se for resposta, a mensagem citada. Envie só depois do sim da pessoa a esse texto e a essa conversa. O sim vale para uma mensagem. Outra mensagem pede outro sim.
 
@@ -129,25 +135,13 @@ Para corrigir uma mensagem já enviada, edite-a e marque a palavra corrigida com
 
 ### Passo 6
 
-Para marcar uma call ou um evento pela conversa, o evento já está na agenda por `definir-agenda`, com o link da chamada. O evento do WhatsApp copia o título, o início e o link de lá. Ele é uma mensagem e segue o sim do Passo 5.
-Quando a pessoa confirma a participação, mande nessa conversa o evento nativo do WhatsApp e, à parte, uma mensagem com o link da chamada, o dia e a hora. O cartão do evento não deixa o link à vista de quem só lê a conversa. Cada mensagem segue o sim do Passo 5.
-
-Checklist do evento:
-- [ ] Botão de anexar da conversa, depois Evento.
-- [ ] Nome do evento e descrição com o link da chamada.
-- [ ] Data de início: clique no campo e digite dia, mês e ano sem separador, como 19102026.
-- [ ] Hora de início: clique na hora e digite hora e minuto, como 1615.
-- [ ] Término, se houver, depois do início. Mudar um desloca o outro: confira os dois a cada mudança. Se não firmar, deixe o término vazio e diga isso.
-- [ ] Antes de criar, amplie o formulário e confira nome, descrição, data e hora.
-- [ ] Botão de criar cinza com o início no passado: diga isso e peça o novo horário. Não mude o horário sozinho.
-- [ ] Depois de criar, confira o cartão do evento na conversa, com o dia e a hora.
-- [ ] Depois do cartão, a mensagem com o link da chamada, o dia e a hora. Com o término vazio, ela diz até que horas vai a call.
+Para convidar uma pessoa ou um grupo para uma call ou um evento pela conversa, siga `convidar-para-evento`. Ele lê o evento da agenda e manda o convite aqui, e cada mensagem segue o sim do Passo 5.
 
 ### Passo 7
 
 Quando a mensagem espera resposta, como uma pergunta, um pedido ou um prazo, siga `acompanhar-resposta-no-whatsapp`. A pergunta que pede o sim do Passo 5 já diz que a resposta vai ser acompanhada, com a frequência e até quando.
 
-Antes de terminar, aplique rótulos usando a habilidade `rotular-item` em cada conversa que você leu ou em que enviou, mesmo quando o pedido era só ler. Passe quem age agora, depois da leitura ou do envio, e o contexto entre `Etiquetas de contexto`. Diga na resposta os rótulos que ficaram.
+Antes de terminar, aplique rótulos usando a habilidade `rotular-item` em cada conversa que você leu ou em que enviou, e na do e-mail do comprovante, mesmo quando o pedido era só ler. Passe quem age agora, depois da leitura ou do envio, e o contexto entre `Etiquetas de contexto`. Diga na resposta os rótulos que ficaram.
 
 Ao terminar, deixe a aba do WhatsApp Web aberta, mesmo quando as outras abas da tarefa forem fechadas.
 
@@ -216,7 +210,7 @@ Se você enviar numa conversa com mensagens não lidas sem mostrar o que elas pe
 Se você disser que o rascunho está pronto sem mostrar o texto, a pessoa não confere nem corrige antes do envio.
 
 1. Mostre o texto inteiro na resposta do chat, num bloco de código.
-2. Com widget, mostre também o texto editável, com copiar e aprovar. O widget não substitui o bloco.
+2. Com a ferramenta de widget na sessão, mostre sempre também o texto editável, com copiar e aprovar. O widget não substitui o bloco.
 3. Pergunte se pode enviar só depois do texto, na mesma resposta.
 
 ### Andamento sem o link
@@ -273,6 +267,7 @@ Mostrei a edição "Chegaremos*" na mesma mensagem e editei depois do sim. Não 
 ## Casos-limite
 
 - Nenhuma aba do WhatsApp Web e o QR code na tela: pare e peça para a pessoa conectar o celular.
+- O WhatsApp Web mostra o aviso de navegador incompatível: era o navegador embutido do app. Abra o Chrome pela extensão, sem perguntar.
 - Duas conversas com o mesmo nome: mostre as duas e pergunte qual é.
 - O pedido está num grupo: leia só as mensagens do assunto, com quem escreveu cada uma.
 - O histórico pede para carregar mensagens antigas do celular: clique no aviso e diga que pode estar incompleto.
@@ -282,6 +277,7 @@ Mostrei a edição "Chegaremos*" na mesma mensagem e editei depois do sim. Não 
 ## Pegadinhas
 
 - O rascunho pedido ontem parece continuar valendo. A pessoa pode ter escrito na conversa por conta própria no meio-tempo: leia antes e rascunhe só o que falta.
+- No conector de e-mail, o arquivo anexado por referência só vai no envio com `replyToMessageId` e o endereço em `to`, sem `replyThreadId`. O rascunho de resposta não o aceita.
 - No campo de mensagem, Enter envia. A quebra de linha é shift+Enter.
 - O campo numera a lista sozinho depois de "1. ". Digitar "2." no item seguinte duplica o número: digite só o texto dos itens seguintes.
 - Depois de uma lista, o campo tira a linha em branco antes do parágrafo seguinte.
@@ -297,10 +293,6 @@ Mostrei a edição "Chegaremos*" na mesma mensagem e editei depois do sim. Não 
 - O banco do aplicativo de desktop fica num contêiner protegido do sistema. A leitura direta é bloqueada, e contornar o bloqueio não é o caminho.
 - Em conta comercial, a conversa pode estar com o agente de IA, que responde à próxima mensagem do contato.
 - "Sexta-feira" no separador é a última sexta antes de hoje, não a sexta mais próxima de outra data da conversa.
-- No formulário de evento, o início e o término se empurram: mudar um muda o dia e a hora do outro.
-- O formulário de evento abre com uma data e uma hora padrão que não são as do pedido.
-- O WhatsApp não cria evento com início no passado. O botão de criar fica cinza, sem mensagem de erro.
-- O cartão do evento mostra a hora no formato de 12 horas, como "Hoje às 4:20".
 
 ## Scripts disponíveis
 

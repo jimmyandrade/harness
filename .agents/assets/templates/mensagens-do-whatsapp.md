@@ -2,7 +2,7 @@
 name: mensagens-do-whatsapp
 description: Formato do rascunho de mensagens de WhatsApp mostrado no chat antes do envio, com a conversa de destino, um bloco por mensagem, a mensagem citada, o fechamento e a pergunta que pede o sim.
 metadata:
-  version: "0.1.0"
+  version: "0.1.1"
 ---
 
 ## Contexto
@@ -41,4 +41,4 @@ Um bloco de código por mensagem, na ordem do envio, para o texto inteiro ficar 
 
 O texto não usa Markdown: negrito é um asterisco de cada lado, itálico é sublinhado, e não há título nem link entre colchetes. Toda data vai por extenso, com o dia da semana e a data completa, nunca só "até quinta" nem só a data.
 
-Quando o cliente desenha widget, ele vem além dos blocos, não no lugar deles, com o destinatário, um campo editável por mensagem, um botão para copiar e um botão que manda o texto aprovado de volta ao chat. A pergunta que pede o sim vem depois do texto, na mesma resposta. Se a pessoa editar, a versão dela substitui o rascunho e aparece de novo neste formato antes do sim.
+Com a ferramenta de widget na sessão, o widget vem sempre, além dos blocos, não no lugar deles, com o destinatário, um campo editável por mensagem, com a altura do texto inteiro, sem rolagem nem linhas escondidas, um botão para copiar e um botão que manda o texto aprovado de volta ao chat. A pergunta que pede o sim vem depois do texto, na mesma resposta. Se a pessoa editar, a versão dela substitui o rascunho e aparece de novo neste formato antes do sim.
