@@ -3,7 +3,7 @@ name: revisar-habilidade
 description: Revisa uma skill já escrita e sinaliza descrição vaga, gatilho faltando ou problema de estrutura. Usada quando a pessoa quer ver o risco de disparar demais ou de menos, ou sugerir casos a partir do propósito, mesmo sem dizer revisar. NÃO serve para criar a primeira versão, executar o teste e editar a skill, só medir tamanho, nem gravar a página no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.10.0"
+  version: "0.11.1"
   related:
     - criar-commit
     - criar-habilidade
@@ -40,6 +40,7 @@ Gatilho faltando não diz quando carregar.
 Estrutura fora do lugar foge do modelo de saída `skill-md`: as seções, o bloco de parâmetros, os passos, os flowcharts, os exemplos e a forma das linhas.
 Leia o modelo de saída `skill-md` quando for gerar a saída.
 Passo que cita comando tira o comando de `Scripts disponíveis`.
+Chamada de outra habilidade com "por", como "aplique por" e o nome dela, é problema de redação: o passo diz o que fazer "usando a habilidade" e o nome dela.
 
 ### Passo 3
 
