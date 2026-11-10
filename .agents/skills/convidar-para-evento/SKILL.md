@@ -3,12 +3,13 @@ name: convidar-para-evento
 description: Convida uma pessoa ou um grupo para uma reunião, um show, uma feira ou um lançamento, lendo o evento da agenda e mandando o convite pelos canais que alcançam a pessoa, só com o sim da pessoa. Usada quando alguém deve ser convidado ou confirmou uma call. Não serve para criar o evento, cadastrar o convidado nem ler a conversa.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   related:
     - acompanhar-resposta-no-whatsapp
     - conversar-no-whatsapp
     - definir-agenda
     - definir-convidado
+    - enviar-imagem-no-whatsapp
     - evoluir-habilidade
     - redigir-com-tom-de-voz
 ---
@@ -51,7 +52,7 @@ Com `Convite multicanal` em `não`, o convite sai por um canal só, o da convers
 
 ### Passo 3
 
-Convite pelo WhatsApp, numa conversa ou num grupo: o evento da agenda já traz o título, o início e o link da chamada, e o evento do WhatsApp copia esses dados de lá. As palavras seguem `redigir-com-tom-de-voz`, a data vai no formato de mensagem de `conversar-no-whatsapp`, e cada mensagem segue o sim e o envio do Passo 5 dela.
+Convite pelo WhatsApp, numa conversa ou num grupo: o evento da agenda já traz o título, o início e o link da chamada, e o evento do WhatsApp copia esses dados de lá. As palavras seguem `redigir-com-tom-de-voz`, a data vai no formato de mensagem de `conversar-no-whatsapp`, e cada mensagem segue o sim e o envio do Passo 5 dela. Se o convite leva uma imagem, ela segue `enviar-imagem-no-whatsapp`.
 
 Quando a pessoa confirma a participação, mande nessa conversa o evento nativo do WhatsApp e, à parte, uma mensagem com o link da chamada, o dia e a hora. O cartão do evento não deixa o link à vista de quem só lê a conversa.
 
