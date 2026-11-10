@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.22.2"
+  version: "0.22.3"
   aliases:
     - redigir-mensagem-de-whatsapp
   related:
@@ -111,7 +111,7 @@ Com `Comunicado numa mensagem só` em `sim`, o comunicado de produto também vai
 Escreva o comunicado com essa habilidade, não aqui.
 Um pedido ou uma lista de pendências que acompanha o anúncio é outro assunto e vai em outra mensagem, depois do comunicado.
 O fechamento vai numa mensagem separada. A saudação e o texto se dirigem só a quem está na conversa aberta: quem ela não alcança, como a outra pessoa que assina a organização, entra na terceira pessoa ou fica fora.
-O comprovante de pagamento segue `Canal do comprovante`. Com `e-mail na mesma conversa`, o e-mail segue `redigir-com-tom-de-voz` e o sim da pessoa, e o WhatsApp só avisa que foi por e-mail e pede a confirmação. Sem conversa de e-mail com a organização, mande o arquivo no WhatsApp e diga isso.
+O comprovante de pagamento segue `Canal do comprovante`. Com `e-mail na mesma conversa`, o e-mail segue `redigir-com-tom-de-voz`, e com o sim da pessoa sai pelo conector de e-mail, com o arquivo anexado, sem pedir que a pessoa copie ou anexe, e o WhatsApp só avisa que foi por e-mail e pede a confirmação. Sem conversa de e-mail com a organização, mande o arquivo no WhatsApp e diga isso.
 
 Para responder ou enviar, mostre a conversa de destino, o texto exato e, se for resposta, a mensagem citada. Envie só depois do sim da pessoa a esse texto e a essa conversa. O sim vale para uma mensagem. Outra mensagem pede outro sim.
 
@@ -256,7 +256,7 @@ Mostrei a conversa do Caio e o texto "Podemos falar 15h00?". Enviei depois do si
 ## Pegadinhas
 
 - O rascunho pedido ontem parece continuar valendo. A pessoa pode ter escrito na conversa por conta própria no meio-tempo: leia antes e rascunhe só o que falta.
-- O rascunho de resposta do conector de e-mail não aceita o arquivo anexado por referência. Anexe o arquivo na tela do e-mail antes de enviar.
+- No conector de e-mail, o arquivo anexado por referência só vai no envio com `replyToMessageId` e o endereço em `to`, sem `replyThreadId`. O rascunho de resposta não o aceita.
 - No campo de mensagem, Enter envia. A quebra de linha é shift+Enter.
 - O campo numera a lista sozinho depois de "1. ". Digitar "2." no item seguinte duplica o número: digite só o texto dos itens seguintes.
 - Depois de uma lista, o campo tira a linha em branco antes do parágrafo seguinte.
