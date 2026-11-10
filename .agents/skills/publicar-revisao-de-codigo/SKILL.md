@@ -3,7 +3,7 @@ name: publicar-revisao-de-codigo
 description: Revisa um pull request e publica a revisão numa única review, com os comentários inline, no idioma de quem recebe e no tom do projeto. Usada quando a pessoa pede uma revisão ou outra habilidade precisa publicar uma. Não serve para tratar os comentários que você recebeu no seu PR.
 metadata:
   author: jimmyandrade
-  version: "0.21.0"
+  version: "0.22.0"
   aliases:
     - post-code-review
   related:
@@ -154,7 +154,7 @@ Publique numa única review, com todos os comentários inline numa chamada só, 
 - só Poderia ter: `Ação só com Poderia ter`, e o corpo diz que esses pontos são oportunidades, que podem ir para outro PR;
 - nenhum achado: `Ação sem achados`, só depois da revisão deste pedido. O corpo segue a aprovação sem achado do Passo 9. Não publique só o resumo do que o PR faz.
 
-Se uma passada anterior aprovou e esta achou um problema real, publique a correção. Não proteja o veredito anterior.
+Se uma passada anterior aprovou e esta achou um problema real, publique a ação do achado e diga no corpo que a aprovação veio antes e que a nova revisão achou o problema. Não proteja o veredito anterior.
 
 ### Passo 11
 
@@ -286,7 +286,6 @@ Rodei a revisão e achei bloqueio. Não aprovei. Avisei que ainda não dá para 
 - Aprovação sem texto não conta como o que a pessoa escreveu revisando, ao levantar o idioma.
 - Um comentário que toca o mesmo trecho mas aponta outro problema não é um achado repetido.
 - O primeiro nome parece marcar a pessoa. Só `@` mais o login do GitHub avisa. Um corpo que só descreve o PR não é a aprovação sem achado.
-- Pedir para aprovar parece dispensar a revisão. Sem a revisão, não há aprovação.
 - Feedback que muda o texto já publicado atualiza comentários e respostas sem perguntar, mesmo com `Ler o texto antes de publicar` em `sim`.
 - Uma review sem comentários inline não cobre um ponto de código: ele precisa de uma linha.
 - O corpo não repete o inline. A frase segue a quantidade, sem número.
