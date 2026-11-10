@@ -223,6 +223,7 @@ flowchart LR
   convidar_para_evento --> conversar_no_whatsapp
   convidar_para_evento --> definir_agenda
   convidar_para_evento --> definir_convidado
+  convidar_para_evento --> enviar_imagem_no_whatsapp
   convidar_para_evento --> evoluir_habilidade
   convidar_para_evento --> redigir_com_tom_de_voz
   criar_carrossel_do_instagram --> criar_ideia_de_conteudo
@@ -497,6 +498,7 @@ flowchart LR
   formalizar_decisao --> conversar_no_whatsapp
   formalizar_decisao --> criar_pull_request
   formalizar_decisao --> definir_registro_de_reuniao
+  formalizar_decisao --> enviar_imagem_no_whatsapp
   formalizar_decisao --> enviar_mensagem_no_slack
   formalizar_decisao --> preparar_tarefa_do_pull_request
   garantir_ingresso --> abrir_vendas_na_tiqueteira
