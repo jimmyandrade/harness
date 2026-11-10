@@ -3,7 +3,7 @@ name: redigir-com-tom-de-voz
 description: Use essa habilidade sempre que for criar, redigir, editar, revisar ou responder texto da marca no tom de voz, mesmo sem dizer copy. NÃO use para responder quem conversa com a IA, descrever uma skill, titular tarefa ou oportunidade, cravar a grafia, alterar formato de conteúdo, nem assumir cliente, peça, oportunidade ou histórico.
 metadata:
   author: jimmyandrade
-  version: "0.21.0"
+  version: "0.22.0"
   aliases:
     - escreva-usando-o-tom-de-voz
   related:
@@ -74,6 +74,10 @@ Texto redigido e ainda não enviado volta inteiro, num bloco, em toda resposta q
 Mensagem para uma pessoa não revela contexto interno que ela não precisa saber e que pode deixá-la desconfortável, como a troca frequente de pessoas no papel que ela assume. O motivo neutro entra no lugar, como uma mudança na padronização. A mensagem abre pelo que muda para ela.
 
 A mensagem chama a pessoa como o cadastro de `definir-pessoa` diz que ela é chamada. Um apelido que o cadastro não confirma, mesmo vindo de quem pede o texto, fica de fora: diga isso e use o nome do cadastro. Sem cadastro, use o nome que a pessoa usa para se apresentar.
+
+Afirmação de fato que só vem de uma busca ou de uma leitura sua, como "conferi o código e só X usa Y", não entra como certeza.
+Escreva o que você viu ("não vi Z usar") e, quando alguém é dono do assunto, formule a conferência como pergunta a essa pessoa ("só X usa Y, certo?").
+Decisão que não é de quem escreve entra como recomendação ("é melhor deixar o campo condicional"), não como o que o time faz.
 
 O fechamento diz o próximo passo concreto, como a reunião já marcada, ou o canal de dúvidas que as instruções do projeto ou a pessoa indicam. Fechamento genérico que oferece quem escreve, como "qualquer dúvida, me chama", é clichê de IA e não entra. Sem canal indicado, pergunte.
 
@@ -148,6 +152,14 @@ Se você aprovar um emoji que o vocabulário manda evitar, a versão final carre
 1. Tire o emoji da versão final.
 2. Se ele aparecer, diga que é exemplo ruim, restrição ou referência negativa.
 3. Na dúvida, consulte o vocabulário e pergunte. Não use gosto, tendência de rede nem estética genérica.
+
+### Busca escrita como certeza
+
+Se você escrever "conferi" e uma afirmação fechada sobre o que uma busca ou leitura sua mostrou, quem é dono do assunto lê um fato que ninguém garantiu.
+
+1. Escreva o que você viu, como "não vi Z usar".
+2. Pergunte a quem é dono do assunto, como "só X usa Y, certo?".
+3. Decisão que não é sua entra como recomendação, não como o que o time faz.
 
 ### Dado comercial assumido
 
