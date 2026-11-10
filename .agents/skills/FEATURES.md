@@ -1903,6 +1903,21 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [ ] Three cases validated with the person
 
+### transcrever-audio-e-video
+- **Stability**: experimental
+- **Description**: Transcribe a local audio or video file with the local Whisper, detecting whether it is installed and proposing the install only after the person says yes
+- **Properties**:
+  - Lives at `.agents/skills/transcrever-audio-e-video/SKILL.md`
+  - Reads the model folder, the model file, the spoken language, the prompt terms, and the output folder from the project instructions
+  - Detects whisper-cli, ffmpeg, and the model file, and asks before installing or downloading anything, saying what it downloads and that it is free and local
+  - Never sends the file to an external service unless the person asks, and then says the file leaves the machine
+  - Extracts the audio to 16 kHz mono wav in the output folder without touching the original, and runs whisper-cli with `-ml 0`, the language, the prompt terms, and txt and srt outputs
+  - Reads the text before reporting, says that it does not identify who speaks and that proper names may be wrong, and keeps unclear passages out of a meeting record until the person listens
+  - Hands the text to definir-registro-de-reuniao when it becomes a meeting record
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [ ] Three cases validated with the person
+
 ### validar-plano-de-vocabulario
 - **Stability**: experimental
 - **Description**: Check the fields of a voice-vocabulary plan before it is written
