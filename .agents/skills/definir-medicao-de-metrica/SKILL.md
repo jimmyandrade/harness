@@ -3,7 +3,7 @@ name: definir-medicao-de-metrica
 description: Registra os valores de uma métrica no histórico de medições, um por período, e revisa ou cria a métrica sem duplicar o conceito. Usada quando alguém traz um número para guardar ou atualizar, mesmo sem dizer métrica. Não serve para definir o key result nem gravar o número na página da entidade medida.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
   related:
     - definir-okr
     - evoluir-habilidade
@@ -70,6 +70,7 @@ Ligue o registro à entidade medida, quando houver uma.
 Antes de criar, procure o registro da mesma métrica, entidade, recorte geográfico e período de referência.
 Se ele existe, atualize esse registro e mostre o valor antigo e o novo.
 Se o pedido não diz a que data ou período o número se refere, pergunte antes de gravar.
+Um número calculado na conversa, como uma média ou um acumulado, também não traz período: mostre o período que pretende usar e pergunte.
 Não invente quantidade nem período.
 
 ### Passo 5
@@ -146,6 +147,7 @@ criei três registros da métrica de alcance, um por recorte: Recife, São Paulo
 - A página da entidade medida pode ter um campo de observação que parece o lugar do número. O número vai só para o histórico.
 - O nome do perfil cita uma cidade, mas o alcance dele não é dessa cidade.
 - Duas ferramentas chamam o mesmo número por nomes diferentes. O nome não basta: compare as `Propriedades de desambiguação`.
+- Uma média ou um acumulado calculado na conversa parece já ter período. Ele não tem: pergunte antes de gravar.
 - A data de registro e o período de referência são datas diferentes. Um número de setembro registrado em outubro tem período setembro.
 - O workspace conectado pode ser de outra empresa. Se a lista não estiver na conexão, pare.
 

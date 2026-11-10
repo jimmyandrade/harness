@@ -4,7 +4,7 @@ description: Cria, revisa e atualiza os objetivos e os key results de uma área 
 compatibility: Precisa de Python quando a execução é local.
 metadata:
   author: jimmyandrade
-  version: "0.3.2"
+  version: "0.3.3"
   related:
     - definir-medicao-de-metrica
     - definir-tarefa
@@ -191,8 +191,10 @@ Atualize os key results com as evidências do que mudou: entregas, números, dec
 
 ### Passo 9
 
-Não invente valor-alvo, data-alvo, métrica, área nem pessoa responsável.
+Não invente valor-alvo, data-base, data-alvo, ciclo, métrica, área nem pessoa responsável.
 Se faltar um deles, pergunte antes de gravar.
+O período e o ciclo são confirmados pela pessoa antes de gravar, mesmo quando o pedido cita um mês: mostre a data-base, a data-alvo e o ciclo que pretende usar e pergunte.
+Sem ciclo do período na lista, pergunte se cria o ciclo, liga a um ciclo maior já cadastrado ou grava as datas sem ciclo.
 Com mais de um objetivo ou key result, mostre o plano antes de gravar.
 Depois de gravar, mostre o nome, o status e o link de cada um.
 
@@ -238,6 +240,13 @@ Se você deixar o valor-alvo só na propriedade, o título não se explica na li
 1. Ponha o valor-alvo e a data-alvo no título.
 2. Mantenha os dois também nas propriedades.
 
+### Período e ciclo deduzidos
+
+Se você deduzir a data-base pelo mês do pedido e gravar as datas sem ciclo porque a lista não tem o ciclo do mês, o key result fica fora do agrupamento do ciclo e a pessoa não escolheu o período.
+
+1. Mostre a data-base, a data-alvo e o ciclo antes de gravar.
+2. Sem ciclo do período, pergunte se cria o ciclo, liga a um ciclo maior ou grava as datas sem ciclo.
+
 ### Ação sem mecanismo
 
 Se você vincular uma ação sem dizer por que ela move o key result, o plano vira lista de desejos.
@@ -262,6 +271,7 @@ a área tinha 5 objetivos no ciclo. Sugeri manter os 3 que conversam com a estra
 - O pedido é uma ação ou tarefa: siga `definir-tarefa`.
 - A área já tem `Máximo de objetivos por área` objetivos no ciclo: proponha trocar ou aprofundar um, não criar outro.
 - O key result já existe: revise esse, não crie outro.
+- A lista não tem ciclo do período: pergunte se cria o ciclo, liga a um ciclo maior ou grava as datas sem ciclo.
 - Não há absoluto possível: a porcentagem é o alvo, com a base escrita.
 - As `Fontes da estratégia` estão vazias e as instruções não dizem: peça as páginas antes de validar os objetivos.
 - A lista não está no workspace conectado: pare.
