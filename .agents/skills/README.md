@@ -209,10 +209,12 @@ flowchart LR
   conversar_no_whatsapp --> definir_pessoa
   conversar_no_whatsapp --> definir_rotina
   conversar_no_whatsapp --> definir_tarefa
+  conversar_no_whatsapp --> definir_vocabulario
   conversar_no_whatsapp --> escrever_link
   conversar_no_whatsapp --> evoluir_habilidade
   conversar_no_whatsapp --> procurar_tarefa
   conversar_no_whatsapp --> redigir_com_tom_de_voz
+  conversar_no_whatsapp --> rotular_item
   criar_carrossel_do_instagram --> criar_ideia_de_conteudo
   criar_carrossel_do_instagram --> evoluir_habilidade
   criar_carrossel_do_instagram --> planejar_calendario_de_conteudo
