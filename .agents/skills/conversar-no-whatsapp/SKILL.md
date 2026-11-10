@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.22.0"
+  version: "0.22.1"
   aliases:
     - redigir-mensagem-de-whatsapp
   related:
@@ -99,8 +99,7 @@ Antes de rascunhar, leia a conversa de destino desde a última mensagem que voc�
 Todo rascunho de mensagem aparece na resposta do chat, com o texto inteiro num bloco de código, que preserva a formatação do WhatsApp ao copiar.
 Não diga só que o rascunho está pronto.
 Uma mensagem que diz que um trabalho está em andamento, foi registrado ou foi feito leva o link da tarefa, da página ou do pull request que mostra esse registro. Sem esse registro, crie-o antes, como `definir-tarefa` manda, ou pergunte onde ele está.
-Quando o cliente desenha widget, o widget vem além do bloco, não no lugar dele: com o destinatário, o texto editável, um botão para copiar e um botão que manda o texto aprovado de volta ao chat.
-O widget pode não aparecer para a pessoa.
+Com a ferramenta de widget na sessão, o widget vem sempre, além do bloco, não no lugar dele: com o destinatário, o texto editável de cada mensagem, um botão para copiar e um botão que manda o texto aprovado de volta ao chat. Não espere o cliente desenhá-lo nem o trate como opcional.
 A pergunta que pede o sim vem depois do texto, na mesma resposta.
 Sem o texto à vista, não pergunte se pode enviar.
 Se a pessoa editar, o texto dela substitui o rascunho, e a nova versão aparece no chat antes do sim.
@@ -215,7 +214,7 @@ Se você enviar numa conversa com mensagens não lidas sem mostrar o que elas pe
 Se você disser que o rascunho está pronto sem mostrar o texto, a pessoa não confere nem corrige antes do envio.
 
 1. Mostre o texto inteiro na resposta do chat, num bloco de código.
-2. Com widget, mostre também o texto editável, com copiar e aprovar. O widget não substitui o bloco.
+2. Com a ferramenta de widget na sessão, mostre sempre também o texto editável, com copiar e aprovar. O widget não substitui o bloco.
 3. Pergunte se pode enviar só depois do texto, na mesma resposta.
 
 ### Andamento sem o link
