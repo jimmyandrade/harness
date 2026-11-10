@@ -4,7 +4,7 @@ description: Varre as conversas com mensagem nova no WhatsApp e no Slack, classi
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.1"
   models:
     - relatorio-de-conversas
   related:
@@ -35,14 +35,6 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Fontes":
   - "WhatsApp"
   - "Slack"
-# `Etiquetas de status`: o rótulo de cada estado de uma ação, o mesmo que `organizar-emails` usa no e-mail. Vazio, a triagem não rotula o estado.
-"Etiquetas de status":
-  "Ação pendente": ""
-  "Ação esperada": ""
-  "Respondida": ""
-  "Concluída": ""
-# `Etiquetas de contexto` lista os assuntos das conversas pelo caminho do e-mail, como `Áreas/Feiras`. Onde não há hierarquia, o rótulo é o último nível do caminho.
-"Etiquetas de contexto": []
 # `Cadência do relatório` é `diária`, `semanal` ou `pela atividade`. `pela atividade` faz diária a conversa com mensagem nova em mais da metade dos dias da última semana, e semanal o resto.
 "Cadência do relatório": "pela atividade"
 # `Apagar mensagens sem relevância` é `perguntar` ou `não`. `perguntar` mostra a lista e apaga para você só com o sim da pessoa, onde o canal deixa. `não` só conta as mensagens no relatório.
@@ -89,17 +81,7 @@ Quando a intercorrência ensina algo para as próximas edições, como confirmar
 
 ### Passo 6
 
-Decida o rótulo de cada conversa e passe a escolha para `rotular-item`, que cria o que falta e aplica.
-
-```mermaid
-flowchart LR
-  E{Quem age agora?} -->|o negócio| P[Ação pendente]
-  E -->|o contato| A[Ação esperada]
-  E -->|o negócio já respondeu e nada falta| R[Respondida]
-  E -->|o assunto acabou| C[Concluída]
-```
-
-O nome de cada estado vem de `Etiquetas de status`. O rótulo de contexto vem de `Etiquetas de contexto`, como o das feiras nos grupos de feira. Use só rótulos desses dois parâmetros e não invente outro. No WhatsApp, a lista vai na conversa e, quando o WhatsApp deixa, também na mensagem que pede ação. Rotule só depois de gravar a tarefa ou o comentário. Quando o estado muda, o rótulo antigo sai na mesma rodada.
+Aplique rótulos em cada conversa varrida usando a habilidade `rotular-item`, com quem age agora e o contexto entre `Etiquetas de contexto`, como o das feiras nos grupos de feira. Os nomes e o estado de cada caso ficam lá. Rotule só depois de gravar a tarefa ou o comentário.
 
 ### Passo 7
 
@@ -185,7 +167,6 @@ Mostrei as quatro mensagens de agradecimento, com quem escreveu e a hora. Com o 
 
 ## Pegadinhas
 
-- O WhatsApp não tem hierarquia de rótulos. O rótulo é o último nível do caminho do e-mail, com o mesmo nome.
 - A lista do WhatsApp só aparece para a conta, ao contrário de uma reação, que todo o grupo vê.
 - Apagar para mim tira a mensagem só da conta da pessoa. Os outros membros continuam vendo.
 - Abrir a conversa marca as mensagens como lidas, também para quem enviou.

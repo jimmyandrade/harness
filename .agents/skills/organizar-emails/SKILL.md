@@ -3,7 +3,7 @@ name: organizar-emails
 description: Organiza e-mails por BASB e separa pessoal, trabalho e misto. Usada quando a pessoa quer triar a caixa, etiquetar ou configurar filtros. Não serve para responder mensagens, lançar despesas nem acompanhar veículos.
 metadata:
   author: jimmyandrade
-  version: "0.18.0"
+  version: "0.19.0"
   related:
     - procurar-email
     - evoluir-habilidade
@@ -23,7 +23,7 @@ metadata:
 
 ## Parâmetros de configuração
 
-Leia os valores nas instruções do projeto, na entrada desta habilidade. Na ausência, use os padrões abaixo.
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. `Etiquetas de status` é de `rotular-item` e fica na entrada `Global`.
 
 ```yaml
 "Contas": []
@@ -54,12 +54,6 @@ Leia os valores nas instruções do projeto, na entrada desta habilidade. Na aus
   - "Áreas"
   - "Recursos"
   - "Arquivos"
-# `Etiquetas de status`: a etiqueta de cada estado de uma ação, fora das raízes. Vazio, a triagem só lista as ações.
-"Etiquetas de status":
-  "Ação pendente": ""
-  "Ação esperada": ""
-  "Respondida": ""
-  "Concluída": ""
 # `Etiquetas de ferramenta`: a etiqueta que cada ferramenta ou integração aplica sozinha, como um cliente de e-mail que marca o que processou, por ferramenta. Vazio, nenhuma.
 "Etiquetas de ferramenta": {}
 # `Etiquetas fora da estrutura`: outras etiquetas que a pessoa quer manter fora das raízes. Vazio, nenhuma.

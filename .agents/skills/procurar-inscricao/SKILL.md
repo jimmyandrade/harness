@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search
 compatibility: Precisa de internet. A busca semântica na lista de inscrições usa notion-ai-search no servidor notion.
 metadata:
   author: jimmyandrade
-  version: "0.12.0"
+  version: "0.12.1"
   aliases:
     - responder-inscricao
   related:
@@ -13,6 +13,7 @@ metadata:
     - procurar-email
     - definir-grafia
     - acompanhar-edital
+    - conversar-no-whatsapp
 ---
 
 # Procurar inscrição
@@ -49,7 +50,7 @@ Se houver mais de uma inscrição do mesmo evento, não responda sim. Diga que d
 A inscrição confirmada de quem se apresenta no evento, como artista, palestrante ou expositor, não é a retirada de um ingresso de público.
 Pré-cadastro não é aprovação nem retirada.
 A aprovação não está no registro da inscrição. Quem a mostra é o ponto de contato do evento, com as datas de execução. Quando ele mostra a participação e a inscrição ficou com o status anterior, diga os dois fatos, com o link de cada um, e proponha atualizar o status com `definir-inscricao`. Os dias da participação vêm do ponto de contato, não da taxa nem da nota.
-Quando for preciso achar a mensagem da organização sobre essa oportunidade, como um evento ou um edital, siga `procurar-email`, que é a habilidade que busca e-mail.
+Quando for preciso achar a mensagem da organização sobre essa oportunidade, como um evento ou um edital, siga `procurar-email`, que é a habilidade que busca e-mail. A data da confirmação vazia numa inscrição confirmada também pede essa busca, antes de a resposta dizer que ela falta. Sem resultado no e-mail, siga `conversar-no-whatsapp`. Diga a data achada e a fonte, sem gravá-la aqui.
 Sugira também `acompanhar-edital`, que busca o resultado do edital na web, onde a organização publica.
 Oriente também a conferir os outros canais de contato com a organização.
 Um e-mail de ingresso disponível não aprova o pré-cadastro, a menos que a mensagem diga isso.
