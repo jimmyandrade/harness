@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.25.1"
+  version: "0.26.0"
   aliases:
     - redigir-mensagem-de-whatsapp
   related:
@@ -59,12 +59,12 @@ Peça o assunto: quem pediu, sobre quem ou o quê, e se a pessoa quer só ler ou
 
 Use o primeiro canal de `Canais em ordem de preferência` que a sessão tem. Diga qual usou e, quando pulou um, por que ele não estava disponível. Sem nenhum canal da lista, pare e diga isso.
 
-No WhatsApp Web, use o Chrome da pessoa pela extensão Claude in Chrome, que já tem o login dela, e abra-o sem perguntar antes: ler não pede confirmação. O navegador embutido do app não serve, porque o WhatsApp Web o recusa como incompatível: troque para o Chrome na mesma sequência. Se a extensão não responder, peça para a pessoa abrir o Chrome. Use a aba do WhatsApp Web que já esteja aberta entre as suas; sem aba, abra uma. Não peça para a pessoa mover a aba dela.
+No WhatsApp Web, use o Chrome da pessoa pela extensão Claude in Chrome, que já tem o login dela, e abra-o sem perguntar antes: ler não pede confirmação. O navegador embutido do app não serve, porque o WhatsApp Web o recusa como incompatível: troque para o Chrome na mesma sequência. Se a extensão não responder, o WhatsApp Web não está conectado: siga o parágrafo do QR code. Use a aba do WhatsApp Web que já esteja aberta entre as suas; sem aba, abra uma. Não peça para a pessoa mover a aba dela.
 
 Se aparecer o aviso de que o WhatsApp está aberto em outra janela, clique no botão do aviso que passa a conexão para a sua aba. O texto dele muda com a versão do WhatsApp, como "Usar nesta janela" ou "Usar aqui", e pode ser outro. Na mesma sequência de ações, espere a lista carregar, busque e leia.
 Se o aviso voltar, outra aba tomou a conexão: clique de novo uma vez só, com a leitura na mesma sequência, e não alterne mais. Ao terminar, diga que a outra janela ficou desconectada e volta pelo mesmo botão.
 
-Se aparecer o QR code, pare e peça para a pessoa conectar o celular. Não tente ler o banco do aplicativo de desktop.
+Se aparecer o QR code, o WhatsApp Web não está conectado: pare, peça para a pessoa conectar o celular e, sem perguntar, crie com `definir-rotina` uma rotina que a lembre de reconectar e pare quando ele voltar a responder. Não tente ler o banco do aplicativo de desktop.
 
 ### Passo 2
 
@@ -266,7 +266,7 @@ Mostrei a edição "Chegaremos*" na mesma mensagem e editei depois do sim. Não 
 
 ## Casos-limite
 
-- Nenhuma aba do WhatsApp Web e o QR code na tela: pare e peça para a pessoa conectar o celular.
+- Nenhuma aba do WhatsApp Web e o QR code na tela, ou a extensão sem resposta: pare, peça a conexão e crie a rotina de lembrete, como o Passo 1 manda.
 - Duas conversas com o mesmo nome: mostre as duas e pergunte qual é.
 - O pedido está num grupo: leia só as mensagens do assunto, com quem escreveu cada uma.
 - O histórico pede para carregar mensagens antigas do celular: clique no aviso e diga que pode estar incompleto.
