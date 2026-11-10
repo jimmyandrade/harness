@@ -158,6 +158,7 @@ flowchart LR
   acompanhar_resposta_no_whatsapp --> conversar_no_whatsapp
   acompanhar_resposta_no_whatsapp --> definir_rotina
   acompanhar_resposta_no_whatsapp --> evoluir_habilidade
+  acompanhar_resposta_no_whatsapp --> rotular_item
   acompanhar_veiculo --> definir_obrigacao_financeira
   acompanhar_veiculo --> definir_viagem
   acompanhar_veiculo --> evoluir_habilidade
