@@ -3,7 +3,9 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.21.0"
+  version: "0.22.0"
+  aliases:
+    - redigir-mensagem-de-whatsapp
   related:
     - acompanhar-resposta-no-whatsapp
     - comunicar-novidade-do-produto
@@ -11,10 +13,12 @@ metadata:
     - definir-pessoa
     - definir-rotina
     - definir-tarefa
+    - definir-vocabulario
     - escrever-link
     - evoluir-habilidade
     - procurar-tarefa
     - redigir-com-tom-de-voz
+    - rotular-item
 ---
 
 # Conversar no WhatsApp
@@ -38,6 +42,8 @@ Leia os valores nas instruções do projeto, na entrada desta habilidade. Na aus
 "Comunicado numa mensagem só": "sim"
 # `Não lidas antes de enviar` é `ler e mostrar`, que abre a conversa, lê as não lidas e mostra o que pede ação da pessoa antes de enviar, ou `perguntar antes de abrir`, que avisa que abrir marca como lidas e espera o sim.
 "Não lidas antes de enviar": "ler e mostrar"
+# `Canal do comprovante` é `e-mail na mesma conversa`, que manda o comprovante de pagamento por e-mail, como resposta na conversa do e-mail da organização, com o arquivo anexado, e deixa o WhatsApp só para avisar, ou `WhatsApp`, que manda o arquivo na conversa.
+"Canal do comprovante": "WhatsApp"
 ```
 ## Instruções
 
@@ -105,6 +111,8 @@ Um rascunho de um tipo listado em `Mensagem única para` vai numa mensagem só, 
 Com `Comunicado numa mensagem só` em `sim`, o comunicado de produto também vai numa mensagem só, como `comunicar-novidade-do-produto` manda.
 Escreva o comunicado com essa habilidade, não aqui.
 Um pedido ou uma lista de pendências que acompanha o anúncio é outro assunto e vai em outra mensagem, depois do comunicado.
+O fechamento vai numa mensagem separada. A saudação e o texto se dirigem só a quem está na conversa aberta: quem ela não alcança, como a outra pessoa que assina a organização, entra na terceira pessoa ou fica fora.
+O comprovante de pagamento segue `Canal do comprovante`. Com `e-mail na mesma conversa`, o e-mail segue `redigir-com-tom-de-voz` e o sim da pessoa, e o WhatsApp só avisa que foi por e-mail e pede a confirmação. Sem conversa de e-mail com a organização, mande o arquivo no WhatsApp e diga isso.
 
 Para responder ou enviar, mostre a conversa de destino, o texto exato e, se for resposta, a mensagem citada. Envie só depois do sim da pessoa a esse texto e a essa conversa. O sim vale para uma mensagem. Outra mensagem pede outro sim.
 
@@ -116,6 +124,9 @@ O WhatsApp não usa Markdown. Negrito é um asterisco de cada lado, itálico é 
 
 Antes de apertar Enter, tire um print do campo e confira o texto, a lista e a mensagem citada. Se a formatação sair diferente do aprovado, limpe o campo e digite de novo.
 Depois de enviar, leia a conversa de novo, confira se a mensagem aparece e diga o horário.
+Para corrigir uma mensagem já enviada, edite-a e marque a palavra corrigida com asterisco, sem mandar outra.
+Compare o que saiu com o que você mostrou. Cada diferença vira termo com `definir-vocabulario`; se não souber se é regra ou escolha do momento, pergunte.
+Rotule a conversa, e a do e-mail do comprovante, com `rotular-item`, usando as `Etiquetas de status` e as `Etiquetas de contexto` do projeto. A mensagem que espera resposta leva a etiqueta da ação esperada.
 
 ### Passo 6
 
@@ -246,6 +257,7 @@ Mostrei a conversa do Caio e o texto "Podemos falar 15h00?". Enviei depois do si
 ## Pegadinhas
 
 - O rascunho pedido ontem parece continuar valendo. A pessoa pode ter escrito na conversa por conta própria no meio-tempo: leia antes e rascunhe só o que falta.
+- O rascunho de resposta do conector de e-mail não aceita o arquivo anexado por referência. Anexe o arquivo na tela do e-mail antes de enviar.
 - No campo de mensagem, Enter envia. A quebra de linha é shift+Enter.
 - O campo numera a lista sozinho depois de "1. ". Digitar "2." no item seguinte duplica o número: digite só o texto dos itens seguintes.
 - Depois de uma lista, o campo tira a linha em branco antes do parágrafo seguinte.
