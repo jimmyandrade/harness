@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.25.1"
+  version: "0.26.0"
   aliases:
     - redigir-mensagem-de-whatsapp
   related:
@@ -76,7 +76,7 @@ Se a conversa mostrar o aviso para carregar mensagens antigas do celular, clique
 
 ### Passo 3
 
-Extraia quem pediu, o que pediu, para quem, a data e o horário de cada mensagem que importa, o que já foi respondido ou confirmado e o que ficou sem resposta.
+Extraia quem pediu, o que pediu, para quem, a data e o horário de cada mensagem que importa, o que já foi respondido ou confirmado e o que ficou sem resposta. Um prazo que vence hoje, na mensagem do contato, abre a resposta, com a hora e quanto falta.
 
 Para cada pendência, diga de qual lado ela está e há quanto tempo espera, da última mensagem até agora: a pessoa que usa a habilidade espera o contato, ou o contato espera a pessoa. O tempo de espera acompanha a conversa e não avalia ninguém. Não guarde o tempo de resposta de alguém num perfil nem no vocabulário.
 
@@ -128,6 +128,7 @@ Em conta comercial, veja se a conversa está com o agente de IA. Se estiver, avi
 Toda data no rascunho vai no `Formato da data na mensagem`. Tire o dia da semana de um calendário ou de um comando, nunca de cabeça. O link segue `escrever-link`.
 
 Antes de apertar Enter, tire um print do campo e confira o texto, a lista e a mensagem citada. Se a formatação sair diferente do aprovado, limpe o campo e digite de novo.
+Imagem e arquivo seguem `references/enviar-imagem-no-whatsapp.md`: a imagem nunca vai pela Nova figurinha. Confira a pré-visualização, que na foto tem campo de legenda, e a lista depois do envio, que diz Foto.
 Depois de enviar, leia a conversa de novo, confira se a mensagem aparece e diga o horário.
 Compare o que saiu com o que você mostrou. Cada diferença que a pessoa fez antes de enviar vira termo por `definir-vocabulario`. Se não souber se a diferença é regra ou escolha do momento, pergunte.
 
@@ -283,15 +284,10 @@ Mostrei a edição "Chegaremos*" na mesma mensagem e editei depois do sim. Não 
 - Responder a uma mensagem é pelo menu que aparece ao passar o mouse sobre ela, na opção Responder. A citação aparece em cima do campo.
 - A aba que a pessoa já deixou aberta pode estar fora das abas que você controla. O botão do aviso, como "Usar nesta janela" ou "Usar aqui" conforme a versão, passa a conexão para a sua aba, e a aba dela fica desconectada sem perder o login.
 - Enter na busca da lista abre a primeira conversa e marca as mensagens como lidas. Digite o nome e leia o resultado sem apertar Enter.
-- Fechar a aba do WhatsApp Web desconecta a sessão. A pessoa precisa ler o QR code de novo.
 - O WhatsApp Web leva alguns segundos para carregar. A primeira leitura pode mostrar só a tela de carregamento.
 - O texto da página traz a lista de conversas inteira antes da conversa aberta. A conversa aberta começa depois do nome do contato no cabeçalho.
-- Abrir uma conversa marca as mensagens não lidas como lidas, também para quem enviou.
 - A mensagem editada mostra "Editada", e o texto antigo some para os dois lados.
 - "Mostrar documentos de todas as conversas" lista só os documentos recentes. Um arquivo antigo não aparece ali nem na conversa.
-- O banco do aplicativo de desktop fica num contêiner protegido do sistema. A leitura direta é bloqueada, e contornar o bloqueio não é o caminho.
-- Em conta comercial, a conversa pode estar com o agente de IA, que responde à próxima mensagem do contato.
-- "Sexta-feira" no separador é a última sexta antes de hoje, não a sexta mais próxima de outra data da conversa.
 
 ## Scripts disponíveis
 
