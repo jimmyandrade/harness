@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.3"
+  version: "0.1.4"
   related:
     - definir-empresa
     - definir-pessoa
@@ -50,7 +50,7 @@ Antes de criar, busque a conta pelo banco, pela conta, pela agência e pelo titu
 
 ### Passo 3
 
-Conta PJ liga a empresa titular e marca o tipo de conta como pessoa jurídica. Conta PF liga a pessoa titular e marca pessoa física. A mesma pessoa pode ter as duas no mesmo banco. São registros diferentes. Quando a fonte cita um CNPJ, a conta é a PJ. Ao repassar dados de uma conta, confira na fonte qual das duas foi usada. Ao informar dados para pagamento, leia a chave Pix principal no cadastro da conta e inclua junto com os dados, mesmo que seja a aleatória. Pergunte à pessoa só quando `Chave Pix nos dados para pagamento` for `obrigatória` e a chave faltar: com o campo vazio, peça a chave, grave no campo e então envie. Se a lista não tem um campo para a chave Pix principal, diga no fim e sugira criar o campo. Não grave a chave no corpo nem num comentário.
+Conta PJ liga a empresa titular e marca o tipo de conta como pessoa jurídica. Conta PF liga a pessoa titular e marca pessoa física. A mesma pessoa pode ter as duas no mesmo banco. São registros diferentes. Já a conta que muda de titular no próprio banco, como do CPF para o CNPJ do MEI, continua na mesma página: não crie outra. O pedido da mudança entra como comentário datado. Tipo de conta, empresa titular e nome da página mudam só quando o banco confirma, e a confirmação também vira comentário, com a origem. A pessoa titular do MEI continua ligada, e os lançamentos antigos ficam nessa conta. Quando a fonte cita um CNPJ, a conta é a PJ. Ao repassar dados de uma conta, confira na fonte qual das duas foi usada. Ao informar dados para pagamento, leia a chave Pix principal no cadastro da conta e inclua junto com os dados, mesmo que seja a aleatória. Pergunte à pessoa só quando `Chave Pix nos dados para pagamento` for `obrigatória` e a chave faltar: com o campo vazio, peça a chave, grave no campo e então envie. Se a lista não tem um campo para a chave Pix principal, diga no fim e sugira criar o campo. Não grave a chave no corpo nem num comentário.
 
 ### Passo 4
 
@@ -58,7 +58,7 @@ Grave o número da conta e o dígito nos campos próprios, se a lista os separa.
 
 ### Passo 5
 
-O histórico da conta fica nos comentários da página, nunca no corpo. Histórico é envio dos dados a alguém, teste de ativação, transferência esperada ou recebida, uso da conta num evento e a diferença para outra conta parecida. Cada fato é um comentário que começa com a data do fato e cita a origem. O corpo da página fica vazio. Se encontrar histórico no corpo, copie para comentários datados, confira os comentários e só então peça para limpar o corpo. Menção a outra página no comentário usa o ID da página, sem a URL. Depois de comentar, leia os comentários e confira se cada menção abre a página certa.
+O histórico da conta fica nos comentários da página, nunca no corpo. Histórico é envio dos dados a alguém, teste de ativação, transferência esperada ou recebida, uso da conta num evento, mudança de titular, e-mail ou telefone vinculado à conta sem campo próprio, e a diferença para outra conta parecida. Cada fato é um comentário que começa com a data do fato e cita a origem. O corpo da página fica vazio. Se encontrar histórico no corpo, copie para comentários datados, confira os comentários e só então peça para limpar o corpo. Menção a outra página no comentário usa o ID da página, sem a URL. Depois de comentar, leia os comentários e confira se cada menção abre a página certa.
 
 ### Passo 6
 
@@ -121,6 +121,7 @@ Copiei cada fato para um comentário datado, conferi as menções e pedi para li
 
 - A fonte não mostra a agência: deixe vazia. Não complete.
 - A mesma pessoa tem conta PF e PJ no mesmo banco: são duas páginas. Não junte.
+- A conta foi convertida de CPF para CNPJ no banco: é a mesma página. Antes da confirmação do banco, só o comentário do pedido. Depois, tipo de conta, empresa titular, nome e o comentário da confirmação.
 - `Títulos dos modelos` está vazio e a página parece um modelo sem dados: pergunte antes de preencher.
 - `Chave Pix nos dados para pagamento` é `obrigatória` e só existe a chave aleatória: informe a aleatória.
 - A chave Pix principal já está no cadastro: use. Não pergunte à pessoa.
@@ -131,6 +132,7 @@ Copiei cada fato para um comentário datado, conferi as menções e pedi para li
 
 - O modelo da lista aparece na busca como uma página comum da lista, com os campos vazios.
 - O nome da conta PF pode ser só o banco e o nome da pessoa. Isso não diz que a pessoa não tem PJ.
+- A conversão de CPF para CNPJ parece pedir uma conta PJ nova. É a mesma conta, com outro titular, e o pedido ainda não é a confirmação.
 - Uma menção com a URL completa grava o prefixo duas vezes e quebra o link. O ID sozinho funciona.
 
 ## Scripts disponíveis
