@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search
 compatibility: Precisa de internet. A busca semântica na lista de inscrições usa notion-ai-search no servidor notion.
 metadata:
   author: jimmyandrade
-  version: "0.11.0"
+  version: "0.12.0"
   aliases:
     - responder-inscricao
   related:
@@ -30,11 +30,13 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ### Passo 1
 
-A pergunta é sobre inscrição ou retirada de ingresso. A lista de inscrições, o nome de cada propriedade e as opções de status vêm do mapeamento de dados do projeto, no workspace conectado. Se a lista não estiver nessa conexão, pare. Não use a lista de outro workspace. Este texto usa os conceitos: o título, as observações, os participantes, quem fez a inscrição, o status da inscrição, a data da confirmação e a data do envio. Não responda a partir de uma tarefa. Se a pessoa afirmar que a inscrição foi feita ou confirmada, siga `definir-inscricao`. A comemoração fica junto da gravação. Não pare só na comemoração.
+A pergunta é sobre inscrição ou retirada de ingresso. A lista de inscrições, a de pontos de contato, o nome de cada propriedade e as opções de status vêm do mapeamento de dados do projeto, no workspace conectado. Se a lista não estiver nessa conexão, pare. Não use a lista de outro workspace. Este texto usa os conceitos: o título, as observações, os participantes, quem fez a inscrição, o status da inscrição, a data da confirmação e a data do envio. Não responda a partir de uma tarefa. Se a pessoa afirmar que a inscrição foi feita ou confirmada, siga `definir-inscricao`. A comemoração fica junto da gravação. Não pare só na comemoração.
 
 ### Passo 2
 
 Nessa lista, busque o pedaço no título e nas observações, por consulta direta e por busca semântica. Se o pedaço for um nome, siga `definir-grafia` e busque cada forma da variação, não só o nome do registro. Na frase, escreva a forma correta. Não exija o nome inteiro. Não busque no workspace inteiro.
+
+Consulte também os pontos de contato do evento, com as mesmas duas buscas, antes de perguntar. As datas de execução dizem os dias da participação, e o status diz se o evento aconteceu, como o de caixa fechado. Um ponto de contato com execução registrada mostra que a participação aconteceu, mesmo com a inscrição ainda em pré-cadastro.
 
 ### Passo 3
 
@@ -46,7 +48,7 @@ Se houver mais de uma inscrição do mesmo evento, não responda sim. Diga que d
 
 A inscrição confirmada de quem se apresenta no evento, como artista, palestrante ou expositor, não é a retirada de um ingresso de público.
 Pré-cadastro não é aprovação nem retirada.
-A aprovação não está no registro.
+A aprovação não está no registro da inscrição. Quem a mostra é o ponto de contato do evento, com as datas de execução. Quando ele mostra a participação e a inscrição ficou com o status anterior, diga os dois fatos, com o link de cada um, e proponha atualizar o status com `definir-inscricao`. Os dias da participação vêm do ponto de contato, não da taxa nem da nota.
 Quando for preciso achar a mensagem da organização sobre essa oportunidade, como um evento ou um edital, siga `procurar-email`, que é a habilidade que busca e-mail.
 Sugira também `acompanhar-edital`, que busca o resultado do edital na web, onde a organização publica.
 Oriente também a conferir os outros canais de contato com a organização.
@@ -69,6 +71,14 @@ Se você só comemorar porque a pessoa disse que a inscrição foi confirmada, o
 1. Siga `definir-inscricao`.
 2. A gravação vem junto com a comemoração.
 3. Não pare só na comemoração.
+
+### Só a lista de inscrições
+
+Se você responder só pela lista de inscrições, um pré-cadastro antigo parece pendência, e a pessoa tem de lembrar que o evento já aconteceu.
+
+1. Consulte os pontos de contato do evento, com as datas de execução.
+2. Diga se a participação aconteceu e em quais dias, com o link.
+3. Proponha atualizar o status atrasado com `definir-inscricao`.
 
 ### Sim único
 
@@ -130,7 +140,7 @@ depende do que se chama de retirada. A inscrição de apresentador no Festival R
 ## Casos-limite
 
 - Há mais de uma inscrição do mesmo evento: diga que depende do que se chama de retirada. Mostre cada uma, com status, data e link.
-- O status é o de pré-cadastro: não é aprovação nem retirada. Quando for preciso buscar e-mail, siga `procurar-email`. Oriente a conferir os outros canais de contato.
+- O status é o de pré-cadastro: não é aprovação nem retirada. Confira o ponto de contato do evento antes. Quando for preciso buscar e-mail, siga `procurar-email`. Oriente a conferir os outros canais de contato.
 - A pessoa afirma que a inscrição foi feita ou confirmada: siga `definir-inscricao`. A comemoração fica junto da gravação.
 - A nota fala de ingresso retirado: vale só para a pessoa nomeada. Oriente a conferir com a organização se permanece válida.
 - A nota cita duas pessoas: diga o fato de cada uma. Não junte as duas num sim.
@@ -142,7 +152,7 @@ depende do que se chama de retirada. A inscrição de apresentador no Festival R
 
 - Quem fez a inscrição não é o participante. Quem fez a inscrição é quem registrou a linha. Quem apresenta e quem retirou o ingresso podem ser pessoas diferentes.
 - Um sim para o ingresso parece cobrir o evento. Cada inscrição do mesmo evento é um fato. Pré-cadastro não é confirmação. A nota de retirada não fecha a validade.
-- O pré-cadastro sem aprovação parece o fim da pergunta. A mensagem pode estar no e-mail. Quando for preciso buscar e-mail, siga `procurar-email`. Um e-mail de ingresso disponível não aprova o pré-cadastro.
+- O pré-cadastro sem aprovação parece o fim da pergunta. O ponto de contato do evento diz se a participação aconteceu, e a mensagem pode estar no e-mail. Quando for preciso buscar e-mail, siga `procurar-email`. Um e-mail de ingresso disponível não aprova o pré-cadastro.
 - Dizer que a inscrição foi confirmada parece só notícia. A gravação do status fica em `definir-inscricao`, e a comemoração vem junto. Não pare só na comemoração.
 - Não existe propriedade de retirada de ingresso. A retirada está na observação e vale só para a pessoa nomeada naquela frase.
 - Comprovantes ficam no arquivo da propriedade. Não entram no corpo da página. Código, número do pedido, valor, status e data não se repetem na observação quando a propriedade existe.
