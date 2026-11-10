@@ -3,12 +3,14 @@ name: acompanhar-fila-de-revisao
 description: Roda o ciclo da fila de revisão de pull requests. Confere o horário, cuida primeiro dos seus PRs, acha os pedidos, fecha o laço dos já revisados, escolhe o próximo, revisa um por execução e prepara o aviso a quem pediu. Os avisos ficam só como rascunho, com o link. Não serve para revisar sozinha nem achar pedidos por conta própria.
 metadata:
   author: jimmyandrade
-  version: "0.6.4"
+  version: "0.7.0"
   related:
     - enviar-mensagem-no-slack
     - evoluir-habilidade
     - procurar-pedido-de-revisao
     - publicar-revisao-de-codigo
+    - levantar-contexto-do-pull-request
+    - priorizar-itens
     - atender-revisao-de-pull-request
     - redigir-com-tom-de-voz
 ---
@@ -77,7 +79,10 @@ Passe para a frente da fila o PR que ainda espera um dos `Checks exigidos` termi
 
 ### Passo 6
 
-Revise o primeiro item da fila, até o número de `Revisões por execução`, chamando `publicar-revisao-de-codigo`. Não revise um PR que a skill de achar pedidos marcou como não pronto. Quem revisa trata do estado do PR, da cópia separada e da limpeza.
+Revise o primeiro item da fila, até o número de `Revisões por execução`, chamando `publicar-revisao-de-codigo`.
+A revisão sempre passa por ela, que chama `levantar-contexto-do-pull-request`, a cópia de trabalho separada e `priorizar-itens`. Nunca revise só lendo o diff nem com a `code-review` do Claude sozinha, e nunca mexa no clone da pessoa.
+O link de um PR que a pessoa manda no meio da execução, sem mais texto, é um pedido de revisão: ele entra como primeiro item e segue o mesmo caminho.
+Não revise um PR que a skill de achar pedidos marcou como não pronto. Quem revisa trata do estado do PR, da cópia separada e da limpeza.
 
 Em modo agendado, repasse `Publicar em execução agendada` a `publicar-revisao-de-codigo`: com `não`, a revisão é preparada e o texto e o link do PR vão para o resumo. Com `sim`, ela é publicada, e o resumo diz o que saiu.
 
