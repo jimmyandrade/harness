@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.26.0"
+  version: "0.26.1"
   aliases:
     - redigir-mensagem-de-whatsapp
   related:
@@ -68,7 +68,7 @@ Se aparecer o QR code, o WhatsApp Web não está conectado: pare, peça para a p
 
 ### Passo 2
 
-Espere a lista de conversas carregar antes de ler. Com `Etiqueta das conversas` preenchida, filtre a lista por essa etiqueta antes de procurar. Ache a conversa pelo nome na lista ou pela busca. Um pedido costuma estar em mais de uma conversa: na de quem pediu, na da pessoa envolvida e num grupo. Abra cada conversa ligada ao assunto e leia o texto da conversa aberta, não só a prévia da lista.
+Espere a lista de conversas carregar antes de ler. Com `Etiqueta das conversas` preenchida, filtre a lista por essa etiqueta antes de procurar. Ache a conversa pelo nome na lista ou pela busca. Um pedido costuma estar em mais de uma conversa: na de quem pediu, na da pessoa envolvida e num grupo. Abra cada conversa ligada ao assunto e leia o texto da conversa aberta, não só a prévia da lista. Logo depois de ler cada uma, rotule-a por `rotular-item`, antes do resumo ou de qualquer pergunta.
 
 Uma conversa com mensagens não lidas segue `Não lidas antes de enviar`. Com `ler e mostrar`, abra, leia as não lidas e mostre primeiro o que pede ação da pessoa, como uma menção, uma pergunta ou um pedido para ela, e depois o resto em uma linha. Antes de enviar nessa conversa, pergunte se envia agora ou espera, e siga a resposta. Com `perguntar antes de abrir`, diga que abrir marca essas mensagens como lidas, também no celular de quem enviou, e pergunte se pode abrir. Não diga que nada foi marcado como lido depois de abrir uma conversa assim.
 
@@ -141,7 +141,7 @@ Para convidar uma pessoa ou um grupo para uma call ou um evento pela conversa, s
 
 Quando a mensagem espera resposta, como uma pergunta, um pedido ou um prazo, siga `acompanhar-resposta-no-whatsapp`. A pergunta que pede o sim do Passo 5 já diz que a resposta vai ser acompanhada, com a frequência e até quando.
 
-Antes de terminar, aplique rótulos usando a habilidade `rotular-item` em cada conversa que você leu ou em que enviou, e na do e-mail do comprovante, mesmo quando o pedido era só ler. Passe quem age agora, depois da leitura ou do envio, e o contexto entre `Etiquetas de contexto`. Diga na resposta os rótulos que ficaram.
+Depois do envio, atualize os rótulos de cada conversa em que enviou, e rotule a do e-mail do comprovante. Passe quem age agora e o contexto entre `Etiquetas de contexto`. Diga na resposta os rótulos que ficaram.
 
 Ao terminar, deixe a aba do WhatsApp Web aberta, mesmo quando as outras abas da tarefa forem fechadas.
 
@@ -222,11 +222,12 @@ Se você escrever que a investigação já começou sem o link da tarefa, quem p
 
 ### Conversa sem rótulo
 
-Se você enviar ou ler e terminar sem rotular, a conversa some do filtro de estado, e ninguém vê que o contato espera a resposta.
+Se você ler ou enviar sem rotular, a conversa some do filtro de estado, e ninguém vê que o contato espera a resposta.
 
-1. Siga `rotular-item` com quem age agora e o contexto.
-2. No WhatsApp Business, a etiqueta é a lista, em Adicionar à lista.
-3. Diga na resposta os rótulos que ficaram.
+1. Rotule logo depois de ler e atualize depois de enviar, com `rotular-item`.
+2. No WhatsApp Business, a etiqueta é a lista, em Adicionar à lista. Sem a lista, crie-a em Nova lista, no mesmo menu.
+3. Um filtro de lista ativo limita a busca: volte para Tudo antes de procurar outra conversa.
+4. Diga na resposta os rótulos que ficaram.
 
 ### Correção numa mensagem nova
 
@@ -284,10 +285,8 @@ Mostrei a edição "Chegaremos*" na mesma mensagem e editei depois do sim. Não 
 - A aba que a pessoa já deixou aberta pode estar fora das abas que você controla. O botão do aviso, como "Usar nesta janela" ou "Usar aqui" conforme a versão, passa a conexão para a sua aba, e a aba dela fica desconectada sem perder o login.
 - Enter na busca da lista abre a primeira conversa e marca as mensagens como lidas. Digite o nome e leia o resultado sem apertar Enter.
 - Fechar a aba do WhatsApp Web desconecta a sessão. A pessoa precisa ler o QR code de novo.
-- O WhatsApp Web leva alguns segundos para carregar. A primeira leitura pode mostrar só a tela de carregamento.
 - O texto da página traz a lista de conversas inteira antes da conversa aberta. A conversa aberta começa depois do nome do contato no cabeçalho.
 - Abrir uma conversa marca as mensagens não lidas como lidas, também para quem enviou.
-- A mensagem editada mostra "Editada", e o texto antigo some para os dois lados.
 - "Mostrar documentos de todas as conversas" lista só os documentos recentes. Um arquivo antigo não aparece ali nem na conversa.
 - O banco do aplicativo de desktop fica num contêiner protegido do sistema. A leitura direta é bloqueada, e contornar o bloqueio não é o caminho.
 - Em conta comercial, a conversa pode estar com o agente de IA, que responde à próxima mensagem do contato.
