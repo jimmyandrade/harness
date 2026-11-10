@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.23.1"
+  version: "0.24.0"
   aliases:
     - redigir-mensagem-de-whatsapp
   related:
@@ -53,7 +53,7 @@ Peça o assunto: quem pediu, sobre quem ou o quê, e se a pessoa quer só ler ou
 
 Use o primeiro canal de `Canais em ordem de preferência` que a sessão tem. Diga qual usou e, quando pulou um, por que ele não estava disponível. Sem nenhum canal da lista, pare e diga isso.
 
-No WhatsApp Web, use o Chrome da pessoa pela extensão Claude in Chrome, que já tem o login dela, e abra-o sem perguntar antes: ler não pede confirmação. O navegador embutido do app não serve, porque o WhatsApp Web o recusa com o aviso de navegador incompatível: troque para o Chrome na mesma sequência. Se a extensão não responder, diga isso e peça para a pessoa abrir o Chrome. Procure primeiro uma aba do WhatsApp Web que já esteja aberta entre as abas que você controla e use essa. Sem aba, abra o WhatsApp Web numa aba sua. Não peça para a pessoa mover a aba dela.
+No WhatsApp Web, use o Chrome da pessoa pela extensão Claude in Chrome, que já tem o login dela, e abra-o sem perguntar antes: ler não pede confirmação. O navegador embutido do app não serve, porque o WhatsApp Web o recusa como incompatível: troque para o Chrome na mesma sequência. Se a extensão não responder, peça para a pessoa abrir o Chrome. Use a aba do WhatsApp Web que já esteja aberta entre as suas; sem aba, abra uma. Não peça para a pessoa mover a aba dela.
 
 Se aparecer o aviso de que o WhatsApp está aberto em outra janela, clique no botão do aviso que passa a conexão para a sua aba. O texto dele muda com a versão do WhatsApp, como "Usar nesta janela" ou "Usar aqui", e pode ser outro. Na mesma sequência de ações, espere a lista carregar, busque e leia.
 Se o aviso voltar, outra aba tomou a conexão: clique de novo uma vez só, com a leitura na mesma sequência, e não alterne mais. Ao terminar, diga que a outra janela ficou desconectada e volta pelo mesmo botão.
@@ -94,7 +94,7 @@ Para registrar a demanda, leve a data e o horário da primeira mensagem do pedid
 
 ### Passo 5
 
-Antes de rascunhar, leia a conversa de destino desde a última mensagem que você leu nela, seguindo o Passo 2. A pessoa pode ter escrito ali por conta própria. Tire do rascunho o que já foi dito na conversa e diga, antes do texto, o que ele acrescenta. Se tudo já foi dito, diga isso e não rascunhe.
+Antes de rascunhar, leia a conversa de destino desde a última mensagem que você leu nela, seguindo o Passo 2, e confira cada pergunta do rascunho contra a conversa inteira, inclusive a mensagem que ela cita. A pergunta que o contato já respondeu sai, mesmo quando outra fonte mais antiga diverge: mostre a divergência à pessoa, não ao contato. Tire também o que já foi dito e diga, antes do texto, o que ele acrescenta. Se tudo já foi dito, diga isso e não rascunhe.
 
 Todo rascunho de mensagem aparece na resposta do chat, com o texto inteiro num bloco de código, que preserva a formatação do WhatsApp ao copiar.
 Não diga só que o rascunho está pronto.
@@ -247,7 +247,6 @@ Mostrei a conversa do Caio e o texto "Podemos falar 15h00?". Enviei depois do si
 ## Casos-limite
 
 - Nenhuma aba do WhatsApp Web e o QR code na tela: pare e peça para a pessoa conectar o celular.
-- O WhatsApp Web mostra o aviso de navegador incompatível: era o navegador embutido do app. Abra o Chrome pela extensão, sem perguntar.
 - Duas conversas com o mesmo nome: mostre as duas e pergunte qual é.
 - O pedido está num grupo: leia só as mensagens do assunto, com quem escreveu cada uma.
 - O histórico pede para carregar mensagens antigas do celular: clique no aviso e diga que pode estar incompleto.
