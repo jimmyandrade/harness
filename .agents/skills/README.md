@@ -391,6 +391,7 @@ flowchart LR
   definir_registro_de_reuniao --> evoluir_habilidade
   definir_registro_de_reuniao --> identificar_duplicata
   definir_registro_de_reuniao --> mesclar_registro
+  definir_registro_de_reuniao --> preparar_tarefa_do_pull_request
   definir_registro_de_reuniao --> procurar_agenda
   definir_reserva --> definir_agenda
   definir_reserva --> definir_agenda_de_popstar
