@@ -3,7 +3,7 @@ name: definir-registro-de-reuniao
 description: Cadastra e corrige o registro de uma reunião, com título, data, participantes, resumo e índice, onde o projeto guarda os registros. Usada quando a pessoa cola uma transcrição ou pergunta se uma reunião já está registrada. Não serve para achar o contexto de uma reunião nem escrever a ata.
 metadata:
   author: jimmyandrade
-  version: "0.14.0"
+  version: "0.15.0"
   related:
     - definir-agenda
     - definir-grafia
@@ -11,6 +11,7 @@ metadata:
     - evoluir-habilidade
     - identificar-duplicata
     - mesclar-registro
+    - preparar-tarefa-do-pull-request
     - procurar-agenda
 ---
 
@@ -138,7 +139,7 @@ O que ela confirmar sobre um nome segue `definir-grafia`, e sobre um termo entra
 
 ### Passo 8
 
-Toda reunião registrada ou corrigida em arquivo local ganha uma linha no índice, com data, horário, título, participantes e o nome do registro, em ordem de data. No Notion, as propriedades da página fazem esse papel. No Confluence, a árvore de páginas sob o endereço dos registros faz. No Google Drive, a pasta faz, e só um documento fora da pasta ganha uma linha com o link no documento de índice. Nesses casos não há linha a escrever. Nunca deixe um registro fora do índice.
+Toda reunião registrada ou corrigida em arquivo local ganha uma linha no índice, com data, horário, título, participantes e o nome do registro, em ordem de data. No Notion, as propriedades da página fazem esse papel. No Confluence, a árvore de páginas sob o endereço dos registros faz. No Google Drive, a pasta faz, e só um documento fora da pasta ganha uma linha com o link no documento de índice. Nesses casos não há linha a escrever. Nunca deixe um registro fora do índice. Quando a pessoa pede o comentário nas tarefas que a reunião cita, siga `preparar-tarefa-do-pull-request`, com só o que o resumo diz e sem trecho da transcrição.
 
 ### Passo 9
 
