@@ -629,6 +629,7 @@ flowchart LR
   procurar_email --> procurar_inscricao
   procurar_email --> rotular_item
   procurar_inscricao --> acompanhar_edital
+  procurar_inscricao --> conversar_no_whatsapp
   procurar_inscricao --> definir_grafia
   procurar_inscricao --> definir_inscricao
   procurar_inscricao --> procurar_email
