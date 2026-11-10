@@ -6,6 +6,12 @@
       "prompt": "A rotina confere se a pessoa respondeu à mensagem enviada ontem, com Ao conferir a resposta em ler a lista",
       "expected_output": "A rotina lê só a linha do contato na lista de conversas, sem abrir a conversa. Com a prévia sem os vistos de enviada e posterior à mensagem, ou com contador de não lidas, ela avisa numa linha com o horário e a prévia e para. Sem resposta e dentro do prazo, ela só diz que não houve resposta.",
       "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Envie uma pergunta ao contato no WhatsApp e acompanhe a resposta",
+      "expected_output": "A conversa recebe a etiqueta Ação esperada por rotular-item. A rotina que já lê o WhatsApp Web não é criada de novo nem editada. Quando o contato responde, a rotina avisa e troca Ação esperada por Respondida.",
+      "files": []
     }
   ]
 }

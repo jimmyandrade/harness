@@ -18,3 +18,19 @@ Funcionalidade: Conferir a resposta sem marcar como lida
       Quando a linha do contato mostra duas não lidas
       Então a rotina abre a conversa e traz as duas mensagens
       E avisa que elas ficaram marcadas como lidas
+
+Funcionalidade: Acompanhar pela etiqueta
+
+  Regra: a rotina lê a etiqueta e nunca é editada por contato
+
+    Exemplo: um contato novo passa a ser acompanhado
+      Dado que existe uma rotina que lê as conversas com a etiqueta Ação esperada
+      Quando a pessoa envia uma mensagem que espera resposta
+      Então a conversa recebe a etiqueta Ação esperada
+      E a rotina não é editada
+
+    Exemplo: o contato respondeu
+      Dado que a conversa tem a etiqueta Ação esperada
+      Quando a linha do contato mostra a resposta
+      Então a rotina avisa o horário e a prévia
+      E troca a etiqueta Ação esperada por Respondida
