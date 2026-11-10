@@ -3,7 +3,7 @@ name: levantar-contexto-do-pull-request
 description: Levanta o contexto de um pull request antes de revisar, responder ou ajustar. Cobre o estado, as convenções do repositório, os comentários já feitos, o card e as conversas ligados, o propósito e o trabalho parecido. Usada em PR de outra pessoa e no seu. Não serve para revisar o diff nem publicar texto.
 metadata:
   author: jimmyandrade
-  version: "0.8.0"
+  version: "0.9.0"
   related:
     - criar-pull-request
     - definir-registro-de-reuniao
@@ -65,11 +65,14 @@ Liste a pasta `.github` antes de concluir que o repositório não tem convençõ
 
 Leia tudo o que já foi dito no PR, de qualquer pessoa e de qualquer bot, inclusive o seu: as threads de revisão com o estado de cada uma (resolvida, desatualizada), as respostas, o corpo de cada revisão e os comentários gerais. Para cada ponto, diga quem falou por último, se o autor respondeu e se ainda está aberto.
 
+Abra cada comentário de outra pessoa, inclusive a resposta dentro de uma thread, e leia quem disse o quê. Contar os comentários sem abrir não basta.
 O que já foi dito não se repete. Se alguém levantou o mesmo ponto e ele está aberto, quem chamou responde na thread dele.
 
 ### Passo 4
 
-Procure a chave do card no título, no corpo e no nome da branch, e os links de conversa no PR e no card. Leia o card pelas `Fontes do card`: descrição, critérios, cards irmãos e decisões registradas. Leia as conversas citadas pelas `Fontes de conversa`. Procure nos registros de reunião pelo nome do repositório e pelo tema, pelas `Fontes de registro de reunião`, e leia o registro inteiro quando achar.
+Procure a chave do card no título, no corpo e no nome da branch, e os links de conversa no PR e no card. Leia o card pelas `Fontes do card`: descrição, critérios, cards irmãos e decisões registradas. Leia as conversas citadas pelas `Fontes de conversa`.
+Procure também onde o autor pediu a revisão, nas `Fontes de conversa`, leia a thread inteira e ponha o link dela na ficha. Sem achar, a ficha diz que não achou e onde procurou.
+Procure nos registros de reunião pelo nome do repositório e pelo tema, pelas `Fontes de registro de reunião`, e leia o registro inteiro quando achar.
 
 Marque cada fonte como pública ou privada. Conteúdo de conversa privada, de mensagem direta e de registro de reunião só calibra o que quem chamou pergunta. Nunca vai citado nem parafraseado em texto publicado.
 
