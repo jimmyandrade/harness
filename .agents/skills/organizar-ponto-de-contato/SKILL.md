@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-update-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.18.0"
+  version: "0.19.0"
   aliases:
     - organizar-feira
   related:
@@ -34,6 +34,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Contrato com o organizador": "não exigido"
 # `Cláusulas do contrato` lista o que o contrato com o organizador precisa tratar, como o local do estande no mapa aprovado.
 "Cláusulas do contrato": []
+# `Material para validar com o organizador` lista o que a empresa manda ao organizador para ele validar, como o PDF da expografia.
+"Material para validar com o organizador": []
 ```
 ## Instruções
 
@@ -127,7 +129,7 @@ flowchart LR
 
 ### Passo 11
 
-Ao organizar, leia as lições nas notas do grupo de oportunidades e liste as que valem para esta participação. Com `Contrato com o organizador` em `obrigatório`, confira se o contrato trata cada item de `Cláusulas do contrato` e cada lição, com a consequência se o organizador descumprir. Liste o que falta como pendência, para pedir ao organizador. Não redija o contrato.
+Ao organizar, leia as lições nas notas do grupo de oportunidades e liste as que valem para esta participação. Com `Contrato com o organizador` em `obrigatório`, confira se o contrato trata cada item de `Cláusulas do contrato` e cada lição, com a consequência se o organizador descumprir. Liste o que falta como pendência, para pedir ao organizador. Não redija o contrato. Com `Material para validar com o organizador` preenchido, confira se cada item foi enviado e validado e liste o que falta; sem o e-mail do organizador, a pendência inclui pedi-lo. Não gere o material aqui.
 
 ## Problemas comuns
 
