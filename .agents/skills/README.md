@@ -26,6 +26,7 @@ flowchart LR
     comunicar_novidade_do_produto["comunicar-novidade-do-produto"]
     configurar_harness_de_negocio["configurar-harness-de-negocio"]
     conversar_no_whatsapp["conversar-no-whatsapp"]
+    convidar_para_evento["convidar-para-evento"]
     criar_carrossel_do_instagram["criar-carrossel-do-instagram"]
     criar_commit["criar-commit"]
     criar_copia_de_trabalho["criar-copia-de-trabalho"]
@@ -205,7 +206,7 @@ flowchart LR
   configurar_harness_de_negocio --> levantar_ambiente_do_repositorio
   conversar_no_whatsapp --> acompanhar_resposta_no_whatsapp
   conversar_no_whatsapp --> comunicar_novidade_do_produto
-  conversar_no_whatsapp --> definir_agenda
+  conversar_no_whatsapp --> convidar_para_evento
   conversar_no_whatsapp --> definir_pessoa
   conversar_no_whatsapp --> definir_rotina
   conversar_no_whatsapp --> definir_tarefa
@@ -215,6 +216,12 @@ flowchart LR
   conversar_no_whatsapp --> procurar_tarefa
   conversar_no_whatsapp --> redigir_com_tom_de_voz
   conversar_no_whatsapp --> rotular_item
+  convidar_para_evento --> acompanhar_resposta_no_whatsapp
+  convidar_para_evento --> conversar_no_whatsapp
+  convidar_para_evento --> definir_agenda
+  convidar_para_evento --> definir_convidado
+  convidar_para_evento --> evoluir_habilidade
+  convidar_para_evento --> redigir_com_tom_de_voz
   criar_carrossel_do_instagram --> criar_ideia_de_conteudo
   criar_carrossel_do_instagram --> evoluir_habilidade
   criar_carrossel_do_instagram --> planejar_calendario_de_conteudo
@@ -257,7 +264,7 @@ flowchart LR
   criar_pull_request --> registrar_resultados_da_validacao_na_tarefa
   criar_pull_request --> rotular_item
   criar_pull_request --> sincronizar_status_da_tarefa
-  definir_agenda --> conversar_no_whatsapp
+  definir_agenda --> convidar_para_evento
   definir_agenda --> definir_agenda_de_popstar
   definir_agenda --> definir_convidado
   definir_agenda --> definir_data_significativa
