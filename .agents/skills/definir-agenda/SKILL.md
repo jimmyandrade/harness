@@ -5,9 +5,9 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.46.0"
+  version: "0.47.0"
   related:
-    - conversar-no-whatsapp
+    - convidar-para-evento
     - definir-agenda-de-popstar
     - definir-convidado
     - definir-data-significativa
@@ -178,7 +178,7 @@ Quando `definir-jornada-de-producao` disser que o dia segue a jornada reduzida, 
 Reunião sem modalidade: pergunte. Remota: crie o Google Meet. Presencial: não crie.
 
 Ligação telefônica leva na descrição o nome e o telefone de quem vai ligar ou atender do outro lado, para remarcar sem depender de memória. Sem o número, peça a quem atendeu a ligação que combinou o horário: o histórico de chamadas do celular tem o número, e a gravação, se houver, tem o combinado. Grave o número também no cadastro da pessoa.
-Reunião combinada numa conversa do WhatsApp: depois de criar o evento, siga o Passo 6 de `conversar-no-whatsapp`, que manda na conversa o evento nativo e a mensagem com o link da chamada.
+Compromisso a que uma pessoa ou um grupo deve ser convidado, como uma reunião combinada numa conversa do WhatsApp: depois de criar o evento, siga `convidar-para-evento`, que manda o convite pelo canal em que o compromisso foi combinado.
 
 Com `Pauta obrigatória em evento com convidados` em `sim`, a descrição de um evento com convidados leva uma pauta clara.
 Sem pauta na conversa, pergunte antes de criar.
@@ -277,7 +277,7 @@ Conferi a grafia. O título usou o nome canônico e o papel do encontro. A descr
 - O ponto de contato parece caber na agenda removida. O destino é a agenda editável de `organizar-ponto-de-contato`.
 - O título que cita o nome de uma agenda aposentada parece essa agenda. O aviso usa o calendário.
 - Título diferente parece evento novo. A busca usa variação de nome, não só o título exato. Na dúvida, mostre e confirme.
-- O link da chamada numa mensagem parece marcar a reunião na conversa do WhatsApp. A conversa recebe o evento nativo e a mensagem com o link, pelo Passo 6 de `conversar-no-whatsapp`.
+- O link da chamada numa mensagem parece marcar a reunião na conversa do WhatsApp. O convite sai por `convidar-para-evento`, com o evento nativo e a mensagem com o link.
 - «Feira» ou «Reunião» sozinhos parecem título. A busca precisa do nome canônico. O evento externo segue o Passo 5.
 
 ## Scripts disponíveis

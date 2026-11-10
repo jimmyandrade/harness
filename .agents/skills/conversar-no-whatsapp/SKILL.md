@@ -3,13 +3,13 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.23.1"
+  version: "0.24.0"
   aliases:
     - redigir-mensagem-de-whatsapp
   related:
     - acompanhar-resposta-no-whatsapp
     - comunicar-novidade-do-produto
-    - definir-agenda
+    - convidar-para-evento
     - definir-pessoa
     - definir-rotina
     - definir-tarefa
@@ -87,7 +87,7 @@ flowchart LR
   Q -->|cadastrar quem pediu| P[definir-pessoa]
   Q -->|texto no tom de voz| V[redigir-com-tom-de-voz]
   Q -->|responder ou enviar| E[Passo 5]
-  Q -->|marcar call ou evento| A[definir-agenda e depois Passo 6]
+  Q -->|convidar para call ou evento| A[convidar-para-evento]
 ```
 
 Para registrar a demanda, leve a data e o horário da primeira mensagem do pedido como data da demanda.
@@ -129,19 +129,7 @@ Rotule a conversa, e a do e-mail do comprovante, com `rotular-item`, usando as `
 
 ### Passo 6
 
-Para marcar uma call ou um evento pela conversa, o evento já está na agenda por `definir-agenda`, com o link da chamada. O evento do WhatsApp copia o título, o início e o link de lá. Ele é uma mensagem e segue o sim do Passo 5.
-Quando a pessoa confirma a participação, mande nessa conversa o evento nativo do WhatsApp e, à parte, uma mensagem com o link da chamada, o dia e a hora. O cartão do evento não deixa o link à vista de quem só lê a conversa. Cada mensagem segue o sim do Passo 5.
-
-Checklist do evento:
-- [ ] Botão de anexar da conversa, depois Evento.
-- [ ] Nome do evento e descrição com o link da chamada.
-- [ ] Data de início: clique no campo e digite dia, mês e ano sem separador, como 19102026.
-- [ ] Hora de início: clique na hora e digite hora e minuto, como 1615.
-- [ ] Término, se houver, depois do início. Mudar um desloca o outro: confira os dois a cada mudança. Se não firmar, deixe o término vazio e diga isso.
-- [ ] Antes de criar, amplie o formulário e confira nome, descrição, data e hora.
-- [ ] Botão de criar cinza com o início no passado: diga isso e peça o novo horário. Não mude o horário sozinho.
-- [ ] Depois de criar, confira o cartão do evento na conversa, com o dia e a hora.
-- [ ] Depois do cartão, a mensagem com o link da chamada, o dia e a hora. Com o término vazio, ela diz até que horas vai a call.
+Para convidar uma pessoa ou um grupo para uma call ou um evento pela conversa, siga `convidar-para-evento`. Ele lê o evento da agenda e manda o convite aqui, e cada mensagem segue o sim do Passo 5.
 
 ### Passo 7
 
@@ -272,10 +260,6 @@ Mostrei a conversa do Caio e o texto "Podemos falar 15h00?". Enviei depois do si
 - O banco do aplicativo de desktop fica num contêiner protegido do sistema. A leitura direta é bloqueada, e contornar o bloqueio não é o caminho.
 - Em conta comercial, a conversa pode estar com o agente de IA, que responde à próxima mensagem do contato.
 - "Sexta-feira" no separador é a última sexta antes de hoje, não a sexta mais próxima de outra data da conversa.
-- No formulário de evento, o início e o término se empurram: mudar um muda o dia e a hora do outro.
-- O formulário de evento abre com uma data e uma hora padrão que não são as do pedido.
-- O WhatsApp não cria evento com início no passado. O botão de criar fica cinza, sem mensagem de erro.
-- O cartão do evento mostra a hora no formato de 12 horas, como "Hoje às 4:20".
 
 ## Scripts disponíveis
 
