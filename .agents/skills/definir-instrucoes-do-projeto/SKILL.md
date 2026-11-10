@@ -3,7 +3,7 @@ name: definir-instrucoes-do-projeto
 description: Use essa habilidade sempre que for criar, revisar, enxugar ou reorganizar as instruções do projeto, inclusive os parâmetros das habilidades, mesmo sem dizer AGENTS. NÃO use para escrever uma skill, o guia de contribuição, o mapa da arquitetura nem a documentação do produto.
 metadata:
   author: jimmyandrade
-  version: "0.14.0"
+  version: "0.14.1"
   related:
     - criar-habilidade
     - evoluir-habilidade
@@ -55,7 +55,7 @@ Leia o modelo de saída `agents-md` quando for gerar a saída.
 
 ### Passo 4
 
-Monte os parâmetros no frontmatter, em `metadata.parameters`, como árvore: a entrada `Global` e uma entrada por nome de habilidade. Copie cada chave do bloco de parâmetros da própria habilidade, letra por letra. Um valor que mais de uma habilidade usa fica em `Global`. O resto fica sob o nome da habilidade.
+Monte os parâmetros no frontmatter, em `metadata.parameters`, como árvore: a entrada `Global` e uma entrada por nome de habilidade. Copie cada chave do bloco de parâmetros da própria habilidade, letra por letra. Um valor que mais de uma habilidade usa fica em `Global`, uma vez só, sem cópia na entrada de cada habilidade. O resto fica sob o nome da habilidade.
 
 Entra só o valor que difere do padrão da habilidade e que ela não acha sozinha. O valor que ela calcula, como o repositório a partir do remoto, e o que ela lê de um registro da fonte de dados, como as medidas do formato de um post no Notion, ficam fora do bloco. Antes de propor uma chave, leia no passo da habilidade de onde vem o valor: se vem de um registro, ele fica no registro, porque o parâmetro passaria por cima dele em toda execução e prenderia um valor que varia de registro para registro.
 
