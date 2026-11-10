@@ -3,7 +3,7 @@ name: preparar-tarefa-do-pull-request
 description: Garante a tarefa da demanda antes do pull request e confere se a descrição de qualquer card segue o modelo do tipo. Usada quando falta a tarefa, quando o PR já existe sem ela, ao implementar uma issue e ao escrever ou editar um card, mesmo subtarefa. Não cria sozinha nem escolhe o projeto por um card parecido. Não serve para abrir o PR.
 metadata:
   author: jimmyandrade
-  version: "0.11.1"
+  version: "0.12.0"
   related:
     - definir-tarefa
     - evoluir-habilidade
@@ -12,6 +12,7 @@ metadata:
     - priorizar-itens
     - procurar-tarefa
     - redigir-com-tom-de-voz
+    - sincronizar-status-da-tarefa
 ---
 
 # Preparar tarefa do pull request
@@ -58,7 +59,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ### Passo 1
 
-Veja em qual modo você está. Na criação adiantada, existe só a demanda e ainda não há PR, e este é o fluxo certo: a tarefa nasce antes do PR. Na verificação retroativa, o PR já existe e falta a tarefa, e isso é a exceção. O resto do fluxo é igual nos dois.
+Veja em qual modo você está. Na criação adiantada, existe só a demanda e ainda não há PR, e este é o fluxo certo: a tarefa nasce antes do PR. Na verificação retroativa, o PR já existe e falta a tarefa, e isso é a exceção. O resto do fluxo é igual nos dois. Na verificação retroativa de um PR já mesclado, a tarefa criada segue para `sincronizar-status-da-tarefa` na mesma resposta, para nascer no status do PR e não no começo do fluxo.
 
 Com PR, confira o estado dele agora, antes de redigir qualquer texto sobre ele. O estado pode ter mudado desde que a demanda foi identificada.
 
