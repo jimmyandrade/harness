@@ -1,9 +1,9 @@
 ---
 name: convidar-para-evento
-description: Convida uma pessoa ou um grupo para uma reunião, um show, uma feira ou um lançamento, lendo o evento da agenda e mandando o convite pelo canal em que o compromisso foi combinado, só com o sim da pessoa. Usada quando alguém deve ser convidado ou confirmou uma call. Não serve para criar o evento, cadastrar o convidado nem ler a conversa.
+description: Convida uma pessoa ou um grupo para uma reunião, um show, uma feira ou um lançamento, lendo o evento da agenda e mandando o convite pelos canais que alcançam a pessoa, só com o sim da pessoa. Usada quando alguém deve ser convidado ou confirmou uma call. Não serve para criar o evento, cadastrar o convidado nem ler a conversa.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   related:
     - acompanhar-resposta-no-whatsapp
     - conversar-no-whatsapp
@@ -19,7 +19,9 @@ metadata:
 
 Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo.
 ```yaml
-# `Canais do convite em ordem de preferência` lista por onde o convite sai quando o compromisso não foi combinado numa conversa: `WhatsApp` e `Google Agenda`. A conversa em que o compromisso foi combinado manda mais que esta lista.
+# `Convite multicanal` é `sim`, que manda o convite por todos os canais da lista que alcançam a pessoa, para ela ser lembrada mais de uma vez, ou `não`, que manda por um canal só.
+"Convite multicanal": "sim"
+# `Canais do convite em ordem de preferência` lista os canais do convite: `WhatsApp` e `Google Agenda`. Com `Convite multicanal` em `não`, a conversa em que o compromisso foi combinado manda mais que esta lista, e sem conversa de origem vale o primeiro canal dela.
 "Canais do convite em ordem de preferência": ["WhatsApp", "Google Agenda"]
 "Modo de aprendizado": "perguntar"
 ```
@@ -36,12 +38,16 @@ O evento existe antes do convite. Sem evento, siga `definir-agenda` e volte aqui
 
 ```mermaid
 flowchart LR
-  Q{Onde o compromisso foi combinado?} -->|conversa ou grupo de WhatsApp| W[Passo 3]
-  Q -->|e-mail, ou pessoa que só tem e-mail| G[Passo 4]
-  Q -->|em lugar nenhum, como um show ou uma feira| L[Primeiro canal de Canais do convite em ordem de preferência]
+  Q{Convite multicanal?} -->|sim| M[Cada canal da lista que alcança a pessoa: Passos 3 e 4]
+  Q -->|não| O{Onde o compromisso foi combinado?}
+  O -->|conversa ou grupo de WhatsApp| W[Passo 3]
+  O -->|e-mail, ou pessoa que só tem e-mail| G[Passo 4]
+  O -->|em lugar nenhum, como um show ou uma feira| L[Primeiro canal da lista]
 ```
 
-O convite sai por um canal só. A agenda registra o evento em qualquer caso, e mandar o mesmo convite por dois canais deixa a pessoa com duas respostas a dar. A pessoa que pedir os dois canais decide: pergunte qual vale como resposta.
+Com `Convite multicanal` em `sim`, o convite sai por cada canal que alcança a pessoa: o WhatsApp, para quem tem conversa ou grupo, e o Google Agenda, para quem tem e-mail no evento. Receber o mesmo convite mais de uma vez serve de lembrete. Todos os canais repetem o título, o dia, a hora e o local ou o link do evento, para a pessoa não receber dados diferentes.
+
+Com `Convite multicanal` em `não`, o convite sai por um canal só, o da conversa em que o compromisso foi combinado.
 
 ### Passo 3
 
@@ -62,7 +68,7 @@ Checklist do evento:
 
 ### Passo 4
 
-Convite pelo Google Agenda: a pessoa entra como convidada do evento por `definir-convidado`, e o convite sai do próprio evento, com o link da chamada. Não repita o convite por mensagem, a não ser que a pessoa peça.
+Convite pelo Google Agenda: a pessoa entra como convidada do evento por `definir-convidado`, e o convite sai do próprio evento, com o link da chamada.
 
 ### Passo 5
 
@@ -78,13 +84,12 @@ Se você mandar o convite antes de o evento existir na agenda, o horário fica s
 2. Sem evento, siga `definir-agenda` antes do convite.
 3. Monte o convite com os dados do evento, sem pedir de novo o que ele já tem.
 
-### Convite pelos dois canais
+### Dados diferentes em cada canal
 
-Se você mandar o convite por WhatsApp e também pelo Google Agenda, a pessoa recebe o mesmo convite duas vezes e não sabe qual responder.
+Se você montar o convite de cada canal à mão, a pessoa recebe horários ou links diferentes e não sabe qual vale.
 
-1. Escolha o canal pela conversa em que o compromisso foi combinado.
-2. Sem conversa de origem, use o primeiro canal de `Canais do convite em ordem de preferência`.
-3. Mande por um canal só.
+1. Leia o título, o dia, a hora e o local ou o link do evento na agenda.
+2. Use os mesmos dados em todos os canais.
 
 ### Link só no cartão do evento
 
@@ -103,18 +108,18 @@ O evento já estava na agenda, com o link do Meet. Mostrei o texto, esperei o si
 
 ### convida o grupo para o lançamento de sábado
 
-O evento estava na agenda, sem conversa de origem. O primeiro canal da lista era o WhatsApp, então o convite foi para o grupo, com o evento nativo e a mensagem com o local, o dia e a hora. Não mandei o convite do Google Agenda ao mesmo tempo.
+O evento estava na agenda, e `Convite multicanal` estava em `sim`. O convite foi para o grupo, com o evento nativo e a mensagem com o local, o dia e a hora, e também pelo Google Agenda, para quem tinha e-mail no evento, com os mesmos dados.
 
 ### marca uma reunião com o Caio, que só tem e-mail
 
-O compromisso foi combinado por e-mail. Criei o evento por `definir-agenda`, e o Caio entrou como convidado por `definir-convidado`, o que fez o Google Agenda mandar o convite. Não mandei mensagem.
+O compromisso foi combinado por e-mail, e o Caio não tem conversa de WhatsApp. Criei o evento por `definir-agenda`, e o Caio entrou como convidado por `definir-convidado`, o que fez o Google Agenda mandar o convite. O WhatsApp não o alcançava.
 
 ## Casos-limite
 
 - O grupo tem muita gente: o evento nativo vai uma vez, no grupo, e cada pessoa responde nele.
 - O evento é presencial: o convite leva o local. Só a reunião remota leva o link da chamada.
 - A pessoa corrige o horário depois do convite: altere o evento por `definir-agenda` e mande o convite de novo, avisando o que mudou.
-- O compromisso foi combinado em dois canais: pergunte em qual a pessoa vai responder.
+- `Convite multicanal` em `não` e o compromisso combinado em dois canais: pergunte em qual a pessoa vai responder.
 
 ## Pegadinhas
 
