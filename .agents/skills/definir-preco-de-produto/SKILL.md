@@ -26,10 +26,10 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 # Opções: `sempre`, `nunca`, `perguntar` e `automático`. `automático` lê as versões só quando a fonte do histórico não responde. O Notion não garante guardar as versões, então diga até onde chegam.
 "Leitura do histórico de versões da página": "perguntar"
 "Banco de variações": ""
-"Banco de produtos": "Produtos"
-"Banco do histórico de preços": "Histórico de preços"
-"Propriedades do histórico de preços": "Produto, Variação, Canal, Motivo, Quem decidiu, Preço anterior, Preço novo, Vigência, Custo na data, Preço de comparação"
-"Registro de mudança de preço no Shopify": "metaobjeto de mudança de preço do produto"
+# Nomes de banco e de registro: o projeto define. Vazios, pergunte uma vez e não escolha.
+"Banco de produtos": ""
+"Banco do histórico de preços": ""
+"Registro de mudança de preço no Shopify": ""
 # Vazios: sem valor, pergunte à pessoa e não escolha.
 "Destino do preço de um ponto de venda": ""
 "Fonte do estoque por local": ""
@@ -39,7 +39,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ### Passo 1
 
-O produto fica no banco de `Banco de produtos`. A pessoa informa o data source na execução. Se ele não estiver no workspace conectado, pare.
+O produto fica em `Banco de produtos`. Os nomes das propriedades vêm do mapeamento de dados do projeto. `Banco de produtos` vazio: a pessoa informa o data source na execução. Se ele não estiver no workspace conectado, pare.
 
 ```mermaid
 flowchart LR
@@ -68,11 +68,11 @@ O Notion não garante guardar as versões, então diga até onde chegam. Pergunt
 
 ### Passo 3
 
-Ao registrar uma mudança de preço de catálogo, acrescente uma linha na fonte do histórico. No banco do Notion, é uma linha em `Banco do histórico de preços`. No Shopify, é o `Registro de mudança de preço no Shopify` do produto.
+Ao registrar uma mudança de preço de catálogo, acrescente uma linha na fonte do histórico. No banco do Notion, é uma linha em `Banco do histórico de preços`. No Shopify, é o `Registro de mudança de preço no Shopify` do produto. Com o banco ou o registro vazio, pergunte onde acrescentar.
 
 Nunca edite nem apague uma linha antiga: a correção vai numa linha nova.
 
-Campos da linha, nas propriedades de `Propriedades do histórico de preços`:
+Campos da linha, ligados às propriedades pelo mapeamento de dados do projeto:
 
 - o produto, a variação quando o preço varia por ela, e o canal, varejo ou atacado;
 - o motivo, obrigatório, e quem decidiu, obrigatório;
@@ -95,7 +95,7 @@ Para listar o estoque, o banco de unidades precisa dar as unidades de um local e
 
 Onde registrar o preço de um ponto de venda é `Destino do preço de um ponto de venda`. Com ele vazio, pergunte à pessoa onde registrar e não escolha. `Fonte do estoque por local` vazia também se pergunta.
 
-Não invente nome de banco nem de propriedade para o que o projeto não definiu.
+Não invente nome de banco nem de propriedade para o que o projeto não definiu: nenhum nome de banco entra nesta skill.
 
 ### Passo 6
 

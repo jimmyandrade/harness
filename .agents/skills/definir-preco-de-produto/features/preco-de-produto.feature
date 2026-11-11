@@ -113,6 +113,14 @@ Funcionalidade: Preço de produto
       Quando a habilidade monta a lista
       Então essa unidade não conta como estoque de venda
 
+  Regra: nenhum nome de banco vem da habilidade
+
+    Exemplo: Banco do histórico de preços não definido
+      Dado que as instruções do projeto não definem o banco do histórico de preços
+      Quando a habilidade precisa ler ou acrescentar uma linha
+      Então ela pergunta à pessoa qual é o banco
+      Mas não usa um nome de banco próprio
+
   Regra: o destino do preço de um ponto de venda não é escolhido pela habilidade
 
     Exemplo: Destino vazio
