@@ -395,6 +395,7 @@ flowchart LR
   definir_orcamento_de_fornecedor --> procurar_email
   definir_orcamento_de_fornecedor --> reconhecer_imagem
   definir_orcamento_de_fornecedor --> redigir_com_tom_de_voz
+  definir_orcamento_de_fornecedor --> usar_whatsapp_web
   definir_perfil_social --> definir_grafia
   definir_perfil_social --> definir_pessoa
   definir_perfil_social --> identificar_duplicata
@@ -656,6 +657,7 @@ flowchart LR
   preparar_tarefa_do_pull_request --> priorizar_itens
   preparar_tarefa_do_pull_request --> procurar_tarefa
   preparar_tarefa_do_pull_request --> redigir_com_tom_de_voz
+  preparar_tarefa_do_pull_request --> sincronizar_status_da_tarefa
   priorizar_itens --> evoluir_habilidade
   procurar_agenda --> criar_oportunidade
   procurar_agenda --> definir_agenda

@@ -3,7 +3,7 @@ name: registrar-evidencia-visual
 description: Registra o que a pessoa passa a ver quando um trabalho termina, no pull request e no card. Usada quando a entrega muda a tela, no Storybook, no ambiente local, na pré-produção ou na produção, mesmo sem dizer print. NÃO serve para mudança sem percepção visual, para medir performance, para ler texto de imagem nem para mandar a mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.13.1"
+  version: "0.14.0"
   related:
     - criar-pull-request
 ---
@@ -143,6 +143,7 @@ Esse comentário leva o link do pull request.
 A descrição do pull request é o lugar melhor para o recorte.
 Com `Confirmação antes de gravar` em `sim`, mostre a subpasta, o recorte que entra no texto, o link da página inteira e as legendas, e espere um sim para esse conjunto.
 Envie os arquivos do recorte à pessoa pela ferramenta de envio de arquivos antes de pedir o sim, porque sem ver as imagens ela não confirma o conjunto.
+O pedido diz o que o sim autoriza: quantas imagens são, o caminho da pasta e onde elas entram. A cobrança seguinte repete isso, nunca só "falta o seu sim".
 Peça esse sim assim que o conjunto fica pronto, antes de abrir o pull request, para ele já nascer com as imagens.
 Depois do sim, suba as imagens pelo caminho que gasta menos, e só desça um degrau quando o de cima falhou de verdade:
 1. A linha de comando ou a API do destino, tentando o envio em vez de presumir que não existe.
