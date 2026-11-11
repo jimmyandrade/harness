@@ -3,7 +3,7 @@ name: acompanhar-retornos-pendentes
 description: Mantém uma rotina por canal de comunicação, como e-mail, WhatsApp e Airbnb, que lê as conversas marcadas como Aguardando retorno, avisa quando a resposta chega, troca a etiqueta e entrega o resultado à sessão que espera. Usada quando uma mensagem enviada espera resposta, como a de um anfitrião, de um órgão ou de um contato. Não serve para escrever a resposta nem criar uma rotina por mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   related:
     - acompanhar-resposta-no-whatsapp
     - definir-rotina
@@ -11,6 +11,7 @@ metadata:
     - evoluir-habilidade
     - organizar-emails
     - rotular-item
+    - usar-whatsapp-web
 ---
 
 # Acompanhar retornos pendentes
@@ -63,7 +64,7 @@ O mesmo sim vale para a etiqueta e para a linha.
 ### Passo 3
 
 A rotina do e-mail lê as conversas do Gmail com `Etiqueta de espera`.
-A do WhatsApp lê a lista de mesmo nome, a prévia e o contador de não lidas, sem abrir a conversa.
+A do WhatsApp lê a lista de mesmo nome, a prévia e o contador de não lidas, sem abrir a conversa. Ela acessa o WhatsApp Web como `usar-whatsapp-web` manda: pede a leitura à sessão dona e não abre aba própria.
 
 No e-mail, houve resposta quando a última mensagem foi recebida e é mais nova que a última tratada.
 Ela lê só o texto de cada mensagem nova, nunca a conversa inteira de uma vez.
@@ -140,7 +141,7 @@ A sessão etiquetou a conversa do e-mail como Aguardando retorno e acrescentou u
 
 - O canal não tem rotina: crie uma, só uma, e use-a nas próximas mensagens.
 - A conversa está na etiqueta e fora do registro: avise só a pessoa, sem sessão.
-- O WhatsApp pede o QR code: a rotina avisa a pessoa e segue só com o e-mail.
+- O WhatsApp pede o QR code: a rotina avisa a pessoa, como `usar-whatsapp-web` manda, e segue só com o e-mail.
 - A resposta cobre só parte do que a pessoa espera: a etiqueta de espera fica.
 
 ## Pegadinhas
