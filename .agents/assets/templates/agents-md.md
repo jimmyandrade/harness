@@ -1,7 +1,7 @@
 ---
 description: Traz as instruções gerais e os parâmetros das habilidades deste espaço de trabalho. Usada em qualquer tarefa, inclusive outra habilidade. Não serve para criar nem alterar estas instruções; a mudança vai no repositório.
 metadata:
-  version: "0.3.0"
+  version: "0.4.0"
   parameters:
     "Global":
       "Banco de modelos no Notion": "<link do banco de modelos de saída no Notion>"
@@ -20,7 +20,7 @@ Este documento contém instruções que, dependendo da ferramenta utilizada, pod
 - Um modelo de saída citado pelo nome é o arquivo com esse nome e a extensão `.md` em `.agents/assets/templates/`, no repositório do projeto ou do harness. Fora do repositório, é a página com esse título no banco que `Banco de modelos no Notion` indica. Sem esse parâmetro, procure a página com esse título exato no espaço de trabalho. Se não achar, diga que o modelo falta e não invente o formato.
 - Fale com a pessoa na resposta, sem usar o nome dela no lugar dela. Comece pelo que precisa ser feito. Termine com a sugestão do próximo passo e, se houver, com a decisão que cabe a ela. Terceira pessoa fica na descrição da habilidade.
 - Todo pull request, issue ou commit citado na resposta leva o link completo, inclusive na pergunta sobre quem mescla.
-- Execute as consultas e verificações permitidas que o pedido exige sem pedir uma confirmação que a pessoa já deu. Pergunte só quando faltar um dado ou uma decisão humana que mude a ação.
+- Execute as consultas e verificações permitidas que o pedido exige sem pedir uma confirmação que a pessoa já deu. Antes de perguntar à pessoa um fato do negócio, como um dado de cadastro, procure nas fontes conectadas, como o registro da empresa ou da pessoa. Pergunte só quando o dado faltar nessas fontes ou quando faltar uma decisão humana que mude a ação.
 - Diante de uma falha técnica, tente as alternativas permitidas da mesma conexão antes de passar a pendência à pessoa: outra ferramenta dela e outro caminho até o mesmo objeto, como o item pai, um registro que já aponta para ele, a busca pelo título e a lixeira. A falha de uma chamada, ou a mesma chamada repetida, não prova perda de acesso. Quando o objeto não aparece, a conta conectada pode não ser a que a pessoa usa para ver, e o espaço onde ele está pode não estar compartilhado com ela. Ao passar a pendência, diga o que tentou, o que cada tentativa devolveu e a causa mais provável, como hipótese, liste os espaços que a conta conectada enxerga e pergunte em qual espaço o objeto está e se esse espaço está compartilhado com a conta conectada. Não peça mudança de permissões sem verificar o alcance do bloqueio.
 - Resolva a referência da habilidade seguinte no catálogo conectado quando as regras do ambiente permitirem. A ausência na lista inicial não prova que ela não existe. Não peça à pessoa uma referência que já está na conversa.
 - Distinga a restrição explícita de descoberta, a busca sem resultado e o erro de permissão que a ferramenta devolveu. Não chame uma restrição das instruções de falta de acesso nem prometa que um pull request remove uma restrição do ambiente.
