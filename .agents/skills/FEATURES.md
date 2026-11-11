@@ -438,13 +438,14 @@ How these skills relate is in `README.md`, in this folder.
   - Keeps the appliqué out of the composition and the label
   - Charges the person for everything about a new appliqué and its photo, leaves it pending without the photo, and does not charge an appliqué created before the project cutoff date
   - Warns that correcting an appliqué linked to more than one variant changes all of them
-  - Asks the person for the appliqué database and the photo field when the project instructions leave them empty
+  - Looks for the appliqué database and the photo field in the connected workspace when the project instructions leave them empty, confirms when more than one fits, and asks or suggests creating one when none does
+  - Checks whether a motif is the print of a fabric or an appliqué of a variant, since an appliqué of one variant can look like the print of another fabric
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The appliqué is linked to the variant and not to the product or the fabric
   - [x] A variant without an appliqué is valid
   - [x] A new appliqué without a photo is charged and left pending, and one before the cutoff date is not
-  - [x] An empty database parameter makes the skill ask and not choose
+  - [x] An empty database parameter makes the skill search the workspace, confirm an ambiguity, and ask or suggest creation only when none is found
 
 ### definir-artigo-da-base-de-conhecimento
 - **Stability**: experimental
