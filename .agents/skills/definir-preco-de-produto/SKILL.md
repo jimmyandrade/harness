@@ -23,6 +23,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Modo de aprendizado": "perguntar"
 # Opções: `banco do Notion`, `Shopify` e `banco do Notion e Shopify`.
 "Fonte do histórico de preços": "banco do Notion"
+# `sim` enquanto o banco do histórico não cobre os preços antigos: as versões da página são, por ora, a única fonte deles. O Notion não garante guardar essas versões, então diga até onde chegam.
+"Ler o histórico de versões da página": "sim"
 "Banco de produtos": "Produtos"
 "Banco do histórico de preços": "Histórico de preços"
 "Propriedades do histórico de preços": "Produto, Canal, Motivo, Quem decidiu, Preço anterior, Preço novo, Vigência, Custo na data, Preço de comparação"
@@ -50,9 +52,11 @@ flowchart LR
 
 ### Passo 2
 
-Antes de perguntar um preço anterior ou a data da mudança, leia a fonte do histórico, conforme `Fonte do histórico de preços`. Não leia o histórico de versões da página: o Notion não garante guardá-lo.
+Antes de perguntar um preço anterior ou a data da mudança, leia a fonte do histórico, conforme `Fonte do histórico de preços`.
 
-Pergunte só o que a fonte não responde e diga qual fonte consultou e até onde ela chega.
+O que for anterior às linhas dessa fonte, leia no histórico de versões da página do produto, com `Ler o histórico de versões da página` em `sim`. O Notion não garante guardá-lo, então diga até onde ele chega.
+
+Pergunte só o que nenhuma das duas responde e diga qual fonte consultou.
 
 ### Passo 3
 
@@ -104,8 +108,9 @@ Se você mudar o preço de todos os produtos com o nome citado, os que não esta
 Se você perguntar o preço anterior sem ler a fonte do histórico, a pessoa repete o que o registro já guarda.
 
 1. Leia a fonte do histórico de preços.
-2. Responda com o que achou e diga qual fonte consultou.
-3. Pergunte só o que a fonte não responde.
+2. Para o que vem antes dela, leia as versões da página.
+3. Responda com o que achou e diga qual fonte consultou.
+4. Pergunte só o que nenhuma responde.
 
 ### Linha antiga editada
 
@@ -124,7 +129,7 @@ Listei as camisetas pelo estoque do evento e tirei as vendidas antes. Mostrei a 
 
 ### qual era o preço da camiseta antes e quando mudou?
 
-Li o banco do histórico de preços. A linha com o preço anterior e a vigência estava lá. Disse que o banco chega até março e não perguntei nada.
+Li o banco do histórico de preços, que começa em março. A mudança era de janeiro, então li as versões da página, que mostravam o preço e a data. Disse até onde cada fonte chega e não perguntei nada.
 
 ### baixa o preço da caneca de 60 para 50
 
@@ -132,7 +137,7 @@ Perguntei o motivo e quem decidiu. Acrescentei uma linha com o canal, os preços
 
 ## Casos-limite
 
-- A fonte não chega até a mudança: diga qual fonte consultou, até onde ela chega, e pergunte só o que ficou antes.
+- Nenhuma fonte chega até a mudança: diga qual consultou, até onde cada uma chega, e pergunte só o que ficou antes.
 - A lista do grupo fica vazia: diga isso e não mude nenhum preço.
 - A pessoa diz o preço de um produto só: confirme o produto e o preço antes de mudar.
 - O banco ou o workspace não está conectado: pare e peça.
@@ -142,7 +147,7 @@ Perguntei o motivo e quem decidiu. Acrescentei uma linha com o canal, os preços
 
 - O nome do produto parece o grupo inteiro. Quem define o grupo é o estoque do local.
 - O preço dito no local parece valer para todos os produtos daquele tipo. Vale só para os que estavam lá e ainda tinham estoque.
-- A página do produto parece guardar os preços anteriores. O histórico é a fonte configurada, não a versão da página.
+- A página do produto parece só ter o preço de hoje. As versões dela guardam preços antigos que o banco do histórico ainda não tem.
 - O custo na data parece recalculável. Ele é o custo copiado no dia da mudança.
 
 ## Scripts disponíveis

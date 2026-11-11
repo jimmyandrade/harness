@@ -23,10 +23,18 @@ Funcionalidade: Preço de produto
       Quando a habilidade escolhe onde ler
       Então ela lê o banco do Notion
 
-    Exemplo: O histórico de versões da página não é fonte
-      Dado que o produto tem uma página no Notion
+    Exemplo: Preço antigo que só o histórico de versões da página guarda
+      Dado que a mudança é anterior às linhas da fonte do histórico
+      E que as instruções do projeto mandam ler o histórico de versões da página
       Quando a habilidade procura o preço anterior
-      Então ela não lê o histórico de versões da página
+      Então ela lê o histórico de versões da página do produto
+      E diz até onde esse histórico chega
+      E pergunta à pessoa só o que nenhuma das duas fontes responde
+
+    Exemplo: Leitura das versões da página desligada
+      Dado que as instruções do projeto desligam a leitura do histórico de versões da página
+      Quando a fonte do histórico não responde
+      Então a habilidade pergunta à pessoa sem ler as versões da página
 
   Regra: o histórico só recebe linhas novas
 
