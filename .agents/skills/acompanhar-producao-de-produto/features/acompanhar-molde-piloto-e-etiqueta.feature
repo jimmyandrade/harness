@@ -33,10 +33,15 @@ Funcionalidade: Molde, piloto, etiqueta e status do produto
     Então nenhuma fórmula é gravada
 
   Exemplo: Nomes vindos das instruções do projeto
-    Dado que as instruções do projeto trocam o nome do banco e o de uma propriedade
+    Dado que as instruções do projeto definem o nome do banco e o de cada propriedade
     Quando a skill registra uma produção
     Então ela usa o nome definido nas instruções
-    E sem definição usa o padrão da skill
+
+  Exemplo: Nome não definido
+    Dado que as instruções do projeto não definem o nome do banco de produtos
+    Quando a pessoa pede para registrar uma produção
+    Então a skill pergunta uma vez e para
+    E não usa um nome suposto
 
   Exemplo: Sem ligação com estoque
     Dado que as instruções do projeto não definem a ligação com estoque

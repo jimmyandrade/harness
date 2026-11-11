@@ -21,23 +21,26 @@ metadata:
 
 Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo.
 
+Os nomes dos bancos e das propriedades são do negócio e ficam nas instruções do projeto. Esta habilidade só declara os parâmetros e não traz valor. Parâmetro de banco ou de propriedade sem valor: pergunte uma vez e pare, sem usar um nome suposto.
+
 ```yaml
 "Modo de aprendizado": "perguntar"
-"Banco de produtos": "Produtos"
-"Banco de variações e produção": "Variações e Produção"
+# Bancos.
+"Banco de produtos": ""
+"Banco de variações e produção": ""
 # Propriedades do banco de variações e produção.
-"Relação com o produto": "Produções"
-"Quantidade prevista": "Previstas"
-"Quantidade cortada": "Cortadas"
-"Quantidade produzida": "Produzidas"
+"Relação com o produto": ""
+"Quantidade prevista": ""
+"Quantidade cortada": ""
+"Quantidade produzida": ""
 # Propriedades do banco de produtos.
-"Variações de nome": "Variações de nome"
-"Status da produção": "Status da produção"
-"Status do piloto": "Status do piloto"
-"Status da etiqueta": "Status da etiqueta"
-"Molde": "Moldes"
-"Molde-base": "Moldes-base"
-"Falta produção": "Falta produção"
+"Variações de nome": ""
+"Status da produção": ""
+"Status do piloto": ""
+"Status da etiqueta": ""
+"Molde": ""
+"Molde-base": ""
+"Falta produção": ""
 # `Ligação com o estoque` vazia quer dizer que esta habilidade não move nem lê estoque.
 "Ligação com o estoque": ""
 ```
