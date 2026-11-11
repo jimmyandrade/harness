@@ -427,6 +427,26 @@ How these skills relate is in `README.md`, in this folder.
 - **Test Criteria**:
   - [x] The skill is present at that path
 
+### definir-aplicacao
+- **Stability**: experimental
+- **Description**: Register, correct, and link an appliqué, such as an embroidery or a patch, to the variant that has it, with its photo
+- **Properties**:
+  - Lives at `.agents/skills/definir-aplicacao/SKILL.md`
+  - Links the appliqué to the variant, never to the product or the fabric, and accepts from 0 to N appliqués per variant, so a variant without one is valid
+  - Reads the appliqué database again and looks for a duplicate by name and motif before creating, and reuses an appliqué that exists, including in more than one variant
+  - Keeps the motif as a field of the appliqué, with no relation to a print of the same motif
+  - Keeps the appliqué out of the composition and the label
+  - Charges the person for everything about a new appliqué and its photo, leaves it pending without the photo, and does not charge an appliqué created before the project cutoff date
+  - Warns that correcting an appliqué linked to more than one variant changes all of them
+  - Looks for the appliqué database and the photo field in the connected workspace when the project instructions leave them empty, confirms when more than one fits, and asks or suggests creating one when none does
+  - Checks whether a motif is the print of a fabric or an appliqué of a variant, since an appliqué of one variant can look like the print of another fabric
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The appliqué is linked to the variant and not to the product or the fabric
+  - [x] A variant without an appliqué is valid
+  - [x] A new appliqué without a photo is charged and left pending, and one before the cutoff date is not
+  - [x] An empty database parameter makes the skill search the workspace, confirm an ambiguity, and ask or suggest creation only when none is found
+
 ### definir-artigo-da-base-de-conhecimento
 - **Stability**: experimental
 - **Description**: Create, review, and update the knowledge-base article that answers a practical usage question
@@ -530,7 +550,7 @@ How these skills relate is in `README.md`, in this folder.
   - Keeps one row in the canonical part per variant, asks which face of a double-sided product is the canonical one, and warns that the SKU prefix may change
   - Points each row to the real fabric registered by the fabric skill, and uses a generic fabric only when the person does not know it
   - Builds the label with one item per distinct fabric, counts the same article in different colors once, and leaves out finishing parts whose fabric is already in the front or the back
-  - Treats a print as part of the fabric, never of the composition or the product: another print is another fabric; an appliqué goes to the appliqué record
+  - Treats a print as part of the fabric, never of the composition or the product: another print is another fabric; an appliqué belongs to the variant, optional and from 0 to N, and never enters the composition or the label
   - Asks the person for the composition database, the canonical part, and the finishing parts when the project instructions leave them empty
 - **Test Criteria**:
   - [x] The skill is present at that path

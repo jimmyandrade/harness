@@ -140,8 +140,14 @@ Funcionalidade: Composição têxtil
     Exemplo: Bordado ou patch
       Dado que a pessoa cita um bordado ou um patch
       Quando a habilidade classifica a parte
-      Então ela não grava na composição
-      E aponta o registro de aplicações do projeto
+      Então ela não grava na composição nem na etiqueta
+      E aponta a aplicação da variante, não do produto nem do tecido
+
+    Exemplo: Variante sem aplicação
+      Dado que um produto tem uma variante com aplicação e outra sem
+      Quando a habilidade registra a variante sem aplicação
+      Então ela não exige aplicação
+      E aceita de 0 a N aplicações por variante
 
   Regra: a correção pedida é gravada
 
