@@ -4,6 +4,9 @@ description: Cuida das pessoas que viajam para um compromisso do projeto, seja a
 skills:
   - definir-viagem
   - definir-hospedagem
+metadata:
+  aliases:
+    - tour-manager
 ---
 
 # Coordenação de viagens
