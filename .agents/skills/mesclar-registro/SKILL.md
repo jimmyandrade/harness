@@ -1,11 +1,11 @@
 ---
 name: mesclar-registro
-description: Use essa habilidade sempre que for consolidar nomes ou registros que já são o mesmo item, mesmo sem dizer mesclar ou duplicata. NÃO use para evitar duplicata, registrar a relação de desambiguação, cadastrar o registro, cravar a grafia, nem apagar sem ordem.
+description: Use essa habilidade sempre que for consolidar nomes ou registros que já são o mesmo item, ou renomear um registro existente, mesmo sem dizer mesclar ou duplicata. NÃO use para evitar duplicata, registrar a relação de desambiguação, cadastrar o registro, cravar a grafia, nem apagar sem ordem.
 allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-data-sources notion:notion-update-page notion:notion-create-comment
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.11.4"
+  version: "0.11.5"
   related:
     - definir-empresa
     - definir-grafia

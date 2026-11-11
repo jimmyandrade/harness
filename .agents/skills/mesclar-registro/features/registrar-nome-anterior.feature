@@ -24,3 +24,12 @@ Funcionalidade: Registrar o nome anterior ao renomear
       Dado que existe uma renomeação recente
       Quando a variação antiga ainda está vazia
       Então a skill acrescenta o nome anterior à propriedade de variações
+
+  Regra: Renomear um registro existente aciona a skill
+
+    Exemplo: Renomeação simples pelo título
+      Dado que a pessoa pede para renomear um registro existente
+      E que o registro não será mesclado com outro
+      Quando a habilidade escolhe como atender o pedido
+      Então a skill é acionada mesmo sem consolidação de duplicata
+      E acrescenta o nome anterior à propriedade de variações antes de dar a renomeação por concluída

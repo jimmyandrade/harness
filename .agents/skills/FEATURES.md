@@ -1565,6 +1565,7 @@ How these skills relate is in `README.md`, in this folder.
   - Keeps the canonical name in the title and records a previous name, nickname, wrong spelling, or ambiguous form in the variation property the database already has, without deleting existing items
   - Uses the variation property the data mapping of the project names for the list, or the variation field the list already has
   - Warns and proposes the variation property when it is missing, and adds the previous name when a recent rename left that field empty
+  - Is triggered by a plain rename of an existing record, with no merge, and adds the previous name to the variation property before the rename counts as done
   - Before copying, the reply is a diff of what the canonical page brings and what each duplicate brings, marking what only one page has and what conflicts
   - Copies onto the canonical record any property or relation that only a duplicate has and that does not conflict
   - Deletes the duplicate only when the person ordered it, after every property and relation merges safely; a conflict returns a diff and waits for which value is canonical
