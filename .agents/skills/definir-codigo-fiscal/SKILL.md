@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   related:
     - evoluir-habilidade
     - identificar-duplicata
@@ -16,6 +16,11 @@ metadata:
 ## Parâmetros de configuração
 
 ```yaml
+"Status em estudo": "Em estudo"
+# `Status validado por IA`: a IA conferiu a fonte oficial, a composição e as características.
+"Status validado por IA": "Validado por IA"
+# `Status validado por pessoa`: uma pessoa validou. É a validação mais forte.
+"Status validado por pessoa": "Validado"
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -65,9 +70,12 @@ O comentário guarda o histórico da decisão.
 
 ### Passo 6
 
-O código entra como Em estudo.
-Ele só passa para Validado com o sim de quem decide, como a pessoa ou a contabilidade, e esse sim vira comentário pelo Passo 5.
-A confirmação de uma matéria não valida o código sozinha.
+O código entra como `Status em estudo`.
+Ele passa para `Status validado por IA` quando você conferiu o código na fonte oficial, a composição e, no vestuário, a construção estão confirmadas, e as notas batem com a descrição oficial.
+Registre num comentário o que foi conferido e a fonte, pelo Passo 5.
+Ele só passa para `Status validado por pessoa` com o sim de uma pessoa, como a responsável ou a contabilidade, também registrado em comentário.
+Essa é a validação mais forte, e você nunca a marca sem esse sim.
+A confirmação de uma matéria, sozinha, não valida o código.
 
 ### Passo 7
 
@@ -97,13 +105,13 @@ Se você copiar a matéria e o percentual da composição para o código, a comp
 1. Registre a composição na lista de composição.
 2. No código, cite só a característica, como fibras sintéticas ou artificiais.
 
-### Validado sem o sim
+### Validação por pessoa sem o sim
 
-Se você marcar o código como Validado porque a pessoa confirmou a matéria, a nota pode sair com uma classificação que ninguém aprovou.
+Se você marcar `Status validado por pessoa` porque a pessoa confirmou a matéria ou porque a sua conferência passou, a nota pode sair com uma validação que nenhuma pessoa deu.
 
-1. Mantenha Em estudo.
+1. Com a conferência completa, use `Status validado por IA` e registre o que conferiu.
 2. Pergunte quem valida.
-3. Mude o status só com o sim, registrado em comentário.
+3. Mude para `Status validado por pessoa` só com o sim, registrado em comentário.
 
 ## Exemplos de entrada e saída
 
@@ -111,7 +119,7 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### o tecido da camisa é todo de poliéster
 
-Gravei na página do código um comentário datado com a confirmação, quem confirmou e a data. As notas não mudaram. O status continuou Em estudo. A composição ficou para a lista de composição, que pede o percentual de cada matéria.
+Gravei na página do código um comentário datado com a confirmação, quem confirmou e a data. As notas não mudaram. O status continuou `Status em estudo`. A composição ficou para a lista de composição, que pede o percentual de cada matéria.
 
 ### qual o NCM dessa camisa?
 
