@@ -3,7 +3,7 @@ name: definir-hospedagem
 description: Define a hospedagem de uma viagem depois da reserva, o que ela pede, como nome e documento dos hóspedes, veículo e chegada, e a resposta a quem hospeda, enviada só com a confirmação. Usada quando o anfitrião ou o hotel escreve. Não serve para ler a reserva, registrar a viagem nem redigir no tom da marca.
 metadata:
   author: jimmyandrade
-  version: "0.4.1"
+  version: "0.4.2"
   aliases:
     - responder-pedido-da-hospedagem
   related:
@@ -112,7 +112,7 @@ Não crie uma rotina para a reserva: etiquete a conversa do e-mail como aguardan
 A hospedagem costuma mandar o que falta, como a senha de acesso, perto do check-in.
 Não espere ela escrever primeiro.
 
-A rotina única avisa a pessoa a cada mensagem nova e entrega o resumo à sessão que espera.
+A rotina do canal avisa a pessoa a cada mensagem nova e entrega o resumo à sessão que espera.
 A senha de acesso nunca vai no aviso, no Notion nem em outro lugar: o aviso só diz que ela chegou e onde ver.
 
 Quando a hospedagem faz uma pergunta, deixe um rascunho de resposta, sem enviar.
@@ -132,7 +132,7 @@ Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 Se você deixar para a pessoa abrir a conversa da plataforma, a mensagem com a senha ou com uma exigência chega e fica sem leitura até o dia da chegada.
 
 1. Etiquete a conversa e acrescente a linha ao registro, sem criar rotina.
-2. A rotina única avisa a pessoa e a sessão a cada mensagem nova, sem escrever a senha.
+2. A rotina do canal avisa a pessoa e a sessão a cada mensagem nova, sem escrever a senha.
 3. Registre o tempo de resposta da hospedagem.
 
 ### Dado inventado

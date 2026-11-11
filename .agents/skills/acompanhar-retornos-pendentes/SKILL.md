@@ -1,9 +1,9 @@
 ---
 name: acompanhar-retornos-pendentes
-description: Mantém uma rotina única que lê as conversas marcadas como Aguardando retorno no e-mail e no WhatsApp, avisa quando a resposta chega, troca a etiqueta e entrega o resultado à sessão que espera. Usada quando uma mensagem enviada espera resposta, como a de um anfitrião, de um órgão ou de um contato. Não serve para escrever a resposta nem criar uma rotina por mensagem.
+description: Mantém uma rotina por canal de comunicação, como e-mail, WhatsApp e Airbnb, que lê as conversas marcadas como Aguardando retorno, avisa quando a resposta chega, troca a etiqueta e entrega o resultado à sessão que espera. Usada quando uma mensagem enviada espera resposta, como a de um anfitrião, de um órgão ou de um contato. Não serve para escrever a resposta nem criar uma rotina por mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   related:
     - acompanhar-resposta-no-whatsapp
     - definir-rotina
@@ -21,8 +21,10 @@ metadata:
 # `Etiqueta de espera` marca a conversa que espera resposta, e `Etiqueta de respondida` marca a que já foi respondida. As duas existem no e-mail e no WhatsApp.
 "Etiqueta de espera": "Aguardando retorno"
 "Etiqueta de respondida": "Reply"
-# `Registro das pendências` é onde a rotina lê quem espera cada resposta.
-"Registro das pendências": "pendencias.json, na pasta da rotina"
+# `Registro das pendências` é onde cada rotina lê quem espera cada resposta. O registro é um só, de todos os canais.
+"Registro das pendências": "pendencias.json, na pasta das rotinas"
+# `Canais` mapeia cada canal de comunicação à fonte que a rotina dele lê.
+"Canais": {"e-mail": "conversas do Gmail com a etiqueta de espera", "WhatsApp": "lista de espera do WhatsApp Web", "Airbnb": "e-mail de notificação do Gmail, ou o navegador sem notificação"}
 # `Dias sem resposta para avisar` é depois de quantos dias a rotina avisa, uma vez, que ninguém respondeu.
 "Dias sem resposta para avisar": 3
 "Modo de aprendizado": "perguntar"
@@ -40,9 +42,12 @@ flowchart LR
   Q -->|criar ou ajustar a rotina| R[definir-rotina]
 ```
 
-Existe uma rotina só para todos os retornos, no e-mail e no WhatsApp.
-Antes de qualquer coisa, liste as rotinas e use essa.
-Se ela não existir, crie-a uma vez, seguindo `definir-rotina`.
+Cada canal de comunicação tem uma rotina só, como o e-mail, o WhatsApp e o Airbnb.
+Antes de qualquer coisa, liste as rotinas e use a do canal da mensagem.
+Se o canal não tem rotina, crie uma, só uma, seguindo `definir-rotina`.
+
+Todas as rotinas leem o mesmo registro, e cada uma cuida das linhas do seu canal.
+Um canal cuja plataforma avisa por e-mail, como o Airbnb, usa a rotina do e-mail, e só ganha rotina própria quando não há aviso por e-mail.
 
 ### Passo 2
 
@@ -57,14 +62,14 @@ O mesmo sim vale para a etiqueta e para a linha.
 
 ### Passo 3
 
-A rotina lê o e-mail pelas conversas com `Etiqueta de espera` e o WhatsApp pela lista de mesmo nome.
-No WhatsApp ela lê a prévia e o contador de não lidas, sem abrir a conversa.
+A rotina do e-mail lê as conversas do Gmail com `Etiqueta de espera`.
+A do WhatsApp lê a lista de mesmo nome, a prévia e o contador de não lidas, sem abrir a conversa.
 
 No e-mail, houve resposta quando a última mensagem foi recebida e é mais nova que a última tratada.
 Ela lê só o texto de cada mensagem nova, nunca a conversa inteira de uma vez.
 
 Um anfitrião de plataforma de hospedagem responde pela própria conversa da plataforma, e o aviso dela chega como e-mail.
-Esse e-mail entra na mesma leitura, sem rotina à parte.
+Esse e-mail entra na leitura da rotina do e-mail, sem rotina à parte.
 
 ### Passo 4
 
@@ -82,7 +87,7 @@ O aviso diz que chegaram e onde ver.
 Cada resposta soma ao registro, em minutos, o tempo desde a última mensagem enviada.
 Com esse histórico, o aviso diz se o contato costuma responder em minutos ou em horas.
 
-A rotina sugere uma conferência mais curta ou mais longa para aquele contato.
+A rotina sugere uma conferência mais curta ou mais longa para aquele contato ou canal.
 Mudar a própria cadência é decisão da pessoa.
 
 A conversa que passa de `Dias sem resposta para avisar` ganha um aviso, uma vez, e continua na etiqueta.
@@ -103,9 +108,9 @@ Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 Se você criar uma rotina para cada mensagem que espera resposta, a lista de rotinas e as sessões que elas abrem crescem, e duas rotinas leem a mesma caixa.
 
-1. Liste as rotinas e use a única de retornos pendentes.
+1. Liste as rotinas e use a do canal da mensagem.
 2. Etiquete a conversa e acrescente a linha ao registro.
-3. Se achar rotinas duplicadas, avise a pessoa e aponte qual manter.
+3. Se achar duas rotinas para o mesmo canal, avise a pessoa e aponte qual manter.
 
 ### Resposta que ninguém recebe
 
@@ -129,11 +134,11 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### a pessoa enviou os dados dos hóspedes ao anfitrião, que costuma responder à noite
 
-A sessão etiquetou a conversa do e-mail como Aguardando retorno e acrescentou uma linha ao registro, com o código dela. Não criou rotina. Na hora seguinte, a rotina única viu a resposta, trocou a etiqueta, avisou a pessoa e entregou o resumo à sessão, sem a senha. Somou ao histórico os 12 minutos que o anfitrião levou.
+A sessão etiquetou a conversa do e-mail como Aguardando retorno e acrescentou uma linha ao registro, com o código dela. Não criou rotina. Na hora seguinte, a rotina do e-mail viu a resposta, trocou a etiqueta, avisou a pessoa e entregou o resumo à sessão, sem a senha. Somou ao histórico os 12 minutos que o anfitrião levou.
 
 ## Casos-limite
 
-- Não existe a rotina única: crie-a uma vez e use-a nas próximas mensagens.
+- O canal não tem rotina: crie uma, só uma, e use-a nas próximas mensagens.
 - A conversa está na etiqueta e fora do registro: avise só a pessoa, sem sessão.
 - O WhatsApp pede o QR code: a rotina avisa a pessoa e segue só com o e-mail.
 - A resposta cobre só parte do que a pessoa espera: a etiqueta de espera fica.

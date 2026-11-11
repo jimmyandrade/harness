@@ -36,7 +36,7 @@ Mensagem que não espera nada, como um agradecimento ou um aviso, não leva a et
 Uma rotina, que segue `definir-rotina`, lê todas as conversas com essa etiqueta. Acompanhar ou deixar de acompanhar um contato muda a etiqueta, nunca a rotina.
 Há uma rotina só por canal: antes de criar, liste as rotinas e, se uma já lê o WhatsApp Web, use essa.
 
-A rotina única de `acompanhar-retornos-pendentes` lê esta etiqueta junto com a do e-mail e entrega cada resposta à sessão que espera.
+A rotina do WhatsApp, que `acompanhar-retornos-pendentes` define, lê esta etiqueta e entrega cada resposta à sessão que espera.
 A sessão que enviou a mensagem acrescenta uma linha ao registro das pendências, com o código dela.
 Ela roda onde está o `Canal da rotina de resposta`: com `navegador`, na máquina da pessoa, com o cliente aberto; com `API`, na nuvem.
 A pergunta que pede o sim do envio, em `conversar-no-whatsapp`, já diz que a resposta vai ser acompanhada, e o mesmo sim vale para a etiqueta.
