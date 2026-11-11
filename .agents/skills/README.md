@@ -42,6 +42,7 @@ flowchart LR
     definir_artista["definir-artista"]
     definir_ativo_imobilizado["definir-ativo-imobilizado"]
     definir_campanha_de_conteudo["definir-campanha-de-conteudo"]
+    definir_codigo_fiscal["definir-codigo-fiscal"]
     definir_conta_bancaria["definir-conta-bancaria"]
     definir_convidado["definir-convidado"]
     definir_data_significativa["definir-data-significativa"]
@@ -307,6 +308,8 @@ flowchart LR
   definir_ativo_imobilizado --> registrar_ciclo_do_ativo
   definir_campanha_de_conteudo --> evoluir_habilidade
   definir_campanha_de_conteudo --> planejar_calendario_de_conteudo
+  definir_codigo_fiscal --> evoluir_habilidade
+  definir_codigo_fiscal --> identificar_duplicata
   definir_conta_bancaria --> definir_empresa
   definir_conta_bancaria --> definir_pessoa
   definir_conta_bancaria --> evoluir_habilidade

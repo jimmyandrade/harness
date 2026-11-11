@@ -485,6 +485,21 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses creating the campaign posts, checking the calendar mix, writing the script or the caption, and registering the significant date
 
+### definir-codigo-fiscal
+- **Stability**: experimental
+- **Description**: Register, review, and validate the NCM tax code of a good and link it to the variants
+- **Properties**:
+  - Lives at `.agents/skills/definir-codigo-fiscal/SKILL.md`
+  - Leaves the duplicate check to identificar-duplicata and keeps one record per code number
+  - Keeps in the code record only the characteristics that lead to the classification (kind of good, use, predominant material and, for clothing, construction), never the products that use it
+  - Records every confirmation, decision, or status change as a dated comment on the code page
+  - Reads the predominant material from the composition list and never copies the composition to the code
+  - Moves a code from Em estudo to Validado only with the yes of whoever decides
+  - Links the code to the variant, not to the unit, and links it to the product only as a temporary step while the variant has no field
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses issuing the invoice, registering the material, and setting the price
+
 ### definir-conta-bancaria
 - **Stability**: experimental
 - **Description**: Register, review, or update a bank or payment account, personal or business, and record what happened to it
