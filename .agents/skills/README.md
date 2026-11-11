@@ -505,6 +505,7 @@ flowchart LR
   escrever_teste --> evoluir_habilidade
   escrever_teste --> levantar_ambiente_do_repositorio
   evoluir_habilidade --> criar_commit
+  evoluir_habilidade --> criar_habilidade
   evoluir_habilidade --> criar_pull_request
   evoluir_habilidade --> definir_instrucoes_do_projeto
   evoluir_habilidade --> definir_vocabulario

@@ -3,9 +3,10 @@ name: evoluir-habilidade
 description: Muda uma skill ou as instruções do projeto a pedido ou pelo feedback de uma execução, como falha ou correção da pessoa, e abre o pull request no repositório de origem. Usada ao pedir uma regra nova, mesmo sem dizer evoluir, e ao fim de cada skill. Não serve para testar a skill, criar a primeira versão, ver se a descrição dispara, só revisar nem gravar no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.32.1"
+  version: "0.33.2"
   related:
     - criar-commit
+    - criar-habilidade
     - criar-pull-request
     - definir-instrucoes-do-projeto
     - definir-vocabulario
@@ -65,18 +66,31 @@ Um feedback sobre o comportamento do agente também entra aqui. O alvo é a skil
 
 ### Passo 2
 
-A skill é um documento vivo. A iteração parte do feedback.
-Resultado inconsistente, falha de chamada e correção da pessoa: melhore a instrução e acrescente o tratamento do erro.
-Antes de editar, confira de onde a skill vem e leia a skill inteira, as `related` e os parâmetros. Leia o modelo de saída `skill-md` quando for gerar a saída. A cópia instalada por dependência ou plugin não se edita. A frase nova não contradiz nenhuma: quando a regra muda, reescreva a frase que já existe e cada repetição dela em `Problemas comuns`, `Exemplos de entrada e saída`, `Casos-limite` e `Pegadinhas`. Não acrescente exceção noutro lugar. Valor que muda de um projeto para outro, como pasta, caminho ou nome de banco, vira parâmetro; o passo cita a chave. A explicação do parâmetro fica nos comentários YAML acima da chave, nunca no texto do passo. Decisão sobre palavra, como usar um termo ou outro, ou como escrever uma frase, não entra na skill nem num parâmetro: vai para o vocabulário, por `definir-vocabulario`.
-Subdisparo e sobredisparo vão para `descrever-habilidade-ou-schema`.
-O resultado de `testar-habilidade` edita a skill validada no repositório de origem, na mesma conversa do teste. Sem essa edição, o teste não vale.
-Incorpore todos os resultados, não só as falhas. A edição vem do que a execução mostrou.
-Pergunte o que gerou falso positivo, o que passou despercebido e o que pode sair. Se a execução já mostrou a resposta, edite com ela. Quando a pessoa responder o que ainda faltava, edite de novo na mesma conversa.
-Leia o registro da execução, não só o resultado final. Se o agente gasta tempo em etapa improdutiva, a instrução está vaga, não se aplica à tarefa, ou oferece opções sem escolha padrão. Se o próximo trecho deixar o corpo sem folga abaixo de `Tokens do corpo`, veja antes se ele é a forma de uma saída, como a estrutura de um arquivo: a forma vira um modelo de saída citado pelo nome, sem skill nova. O que não é forma vira outra habilidade, com a responsabilidade separada antes de escrever. Antes de mover para um modelo ou separar, mostre por que, para onde vai cada trecho e o nome de cada modelo ou habilidade, e espere a escolha da pessoa. Antes de commitar, rode a checagem que o lefthook roda no pre-commit. Sem `.git/hooks/pre-commit`, rode `.agents/scripts/check-skill/run-check.sh`. Falha, ou corpo no limite, barra o commit e o push. Não diga que está pronto. O tamanho e o profiling seguem `medir-habilidade`.
+A skill é um documento vivo. A iteração parte do feedback. Resultado inconsistente, falha de chamada e correção da pessoa: melhore a instrução e acrescente o tratamento do erro.
 
-Antes de commitar, releia as linhas que a edição acrescentou.
-Cada parágrafo trata de um tema, e só as frases que fazem sentido juntas ficam na mesma linha, como o modelo de saída `skill-md` manda.
-Um bloco de várias frases em uma linha é refeito antes do commit, sem tirar nenhuma regra.
+Antes de editar, confira de onde a skill vem e leia a skill inteira, as `related` e os parâmetros. Leia o modelo de saída `skill-md` quando for gerar a saída. A cópia instalada por dependência ou plugin não se edita.
+
+A frase nova não contradiz nenhuma: quando a regra muda, reescreva a frase que já existe e cada repetição dela em `Problemas comuns`, `Exemplos de entrada e saída`, `Casos-limite` e `Pegadinhas`. Não acrescente exceção noutro lugar.
+
+Valor que muda de um projeto para outro, como pasta, caminho ou nome de banco, vira parâmetro; o passo cita a chave. A explicação do parâmetro fica nos comentários YAML acima da chave, nunca no texto do passo.
+
+Fato do negócio, como uma data, a situação de uma conta ou o que aconteceu num caso, não vira regra nem parâmetro: fica no data source, e o passo manda consultá-lo. O fato entra no máximo como exemplo, como `criar-habilidade` manda. A regra que o caso ensina é o que entra no passo, como alerta ou pergunta à pessoa.
+
+Decisão sobre palavra, como usar um termo ou outro, ou como escrever uma frase, não entra na skill nem num parâmetro: vai para o vocabulário, por `definir-vocabulario`.
+
+Subdisparo e sobredisparo vão para `descrever-habilidade-ou-schema`.
+
+O resultado de `testar-habilidade` edita a skill validada no repositório de origem, na mesma conversa do teste. Sem essa edição, o teste não vale. Incorpore todos os resultados, não só as falhas. A edição vem do que a execução mostrou.
+
+Pergunte o que gerou falso positivo, o que passou despercebido e o que pode sair. Se a execução já mostrou a resposta, edite com ela. Quando a pessoa responder o que ainda faltava, edite de novo na mesma conversa.
+
+Leia o registro da execução, não só o resultado final. Se o agente gasta tempo em etapa improdutiva, a instrução está vaga, não se aplica à tarefa, ou oferece opções sem escolha padrão.
+
+Se o próximo trecho deixar o corpo sem folga abaixo de `Tokens do corpo`, veja antes se ele é a forma de uma saída, como a estrutura de um arquivo: a forma vira um modelo de saída citado pelo nome, sem skill nova. O que não é forma vira outra habilidade, com a responsabilidade separada antes de escrever. Antes de mover para um modelo ou separar, mostre por que, para onde vai cada trecho e o nome de cada modelo ou habilidade, e espere a escolha da pessoa.
+
+Antes de commitar, rode a checagem que o lefthook roda no pre-commit. Sem `.git/hooks/pre-commit`, rode `.agents/scripts/check-skill/run-check.sh`. Falha, ou corpo no limite, barra o commit e o push. Não diga que está pronto. O tamanho e o profiling seguem `medir-habilidade`.
+
+Antes de commitar, releia as linhas que a edição acrescentou. Cada parágrafo trata de um tema, e só as frases que fazem sentido juntas ficam na mesma linha, como o modelo de saída `skill-md` manda. Um tema novo é um parágrafo novo, nunca emendado num parágrafo que já existe. Um bloco de várias frases em uma linha é refeito antes do commit, sem tirar nenhuma regra.
 
 ### Passo 3
 
@@ -85,7 +99,13 @@ Proponha um script testado uma vez. Com o aceite, grave em `scripts/` quando só
 
 ### Passo 4
 
-Quando outra habilidade chega aqui ao terminar, siga `Modo de aprendizado`. Com `não`, encerre. Com `perguntar` ou `sim`, grave cada lição como um commit numa branch com nome em inglês e siga `criar-pull-request`. Antes de gravar numa branch que já teve PR, confira o estado dele no GitHub. Aberto, a lição entra nessa branch. Mesclado ou fechado, a lição vai numa branch nova a partir da base atualizada, com PR próprio, e a descrição do PR mesclado não muda. Não pergunte se a pessoa quer a lição em um commit. `Criar pull request ao terminar` decide a abertura: `rascunho` abre em rascunho, `sim` abre pronto, `não` não publica. O comando já leva a pessoa atribuída e o rótulo. Depois do push, uma vez, confira o título e a descrição. Várias lições no mesmo push não repetem a conferência. Com `rascunho`, tire do rascunho quando a pessoa encerrar a sequência.
+Quando outra habilidade chega aqui ao terminar, siga `Modo de aprendizado`. Com `não`, encerre. Com `perguntar` ou `sim`, grave cada lição como um commit numa branch com nome em inglês e siga `criar-pull-request`. Não pergunte se a pessoa quer a lição em um commit.
+
+Antes de gravar numa branch que já teve PR, confira o estado dele no GitHub. Aberto, a lição entra nessa branch. Mesclado ou fechado, a lição vai numa branch nova a partir da base atualizada, com PR próprio, e a descrição do PR mesclado não muda.
+
+`Criar pull request ao terminar` decide a abertura: `rascunho` abre em rascunho, `sim` abre pronto, `não` não publica. O comando já leva a pessoa atribuída e o rótulo. Com `rascunho`, tire do rascunho quando a pessoa encerrar a sequência.
+
+Depois do push, uma vez, confira o título e a descrição. Várias lições no mesmo push não repetem a conferência.
 
 ## Problemas comuns
 
@@ -142,7 +162,7 @@ Se você acrescentar uma frase sem ler o resto da skill, ela pode mandar o opost
 
 1. Confira de onde a skill vem e leia a skill inteira, as `related` e os parâmetros antes de editar. A cópia instalada por dependência ou plugin não se edita.
 2. Reescreva a frase que já existe e cada repetição dela. Não acrescente exceção noutro lugar.
-3. Valor que muda de um projeto para outro vira parâmetro. O passo cita a chave.
+3. Valor que muda de um projeto para outro vira parâmetro. O passo cita a chave. Fato do negócio fica no data source, e o passo manda consultá-lo.
 
 ### Rename fora do breaking change
 
@@ -195,6 +215,8 @@ A skill mudou no repositório de origem e o pull request saiu no mesmo turno, em
 
 ## Pegadinhas
 
+- Emendar a frase nova no fim do parágrafo parece o menor diff. Um tema novo num parágrafo que já existe vira bloco gigante, e o diff mostra o parágrafo inteiro.
+- A data ou a situação contada pela pessoa parece um parâmetro. É fato do negócio: fica no data source, e a skill guarda só a regra.
 - A skill parece pronta na primeira versão. Ela é um documento vivo. A iteração parte do feedback.
 - Conferir a cada lição parece necessário. A conferência é uma vez, depois do push.
 - O corpo cheio parece pedir uma skill nova. Quando o trecho é forma, como a estrutura de um arquivo, um modelo de saída resolve sem pesar no catálogo.
