@@ -26,3 +26,13 @@ Funcionalidade: Acompanhar os retornos pendentes com uma rotina só
       Dado que três respostas de um contato vieram em menos de 30 minutos
       Quando a rotina soma o tempo ao histórico
       Então ela sugere uma conferência mais curta para esse contato
+
+  Regra: o aviso que uma tarefa espera atualiza a tarefa, mesmo sem etiqueta
+
+    Exemplo: a fornecedora confirma por e-mail a devolução de um equipamento
+      Dado que o registro liga uma tarefa ao aviso de confirmação da devolução
+      E que o e-mail da confirmação chegou sem etiqueta
+      Quando a rotina do e-mail procura o aviso na caixa toda
+      Então ela etiqueta a conversa
+      E marca na tarefa só os itens que a mensagem prova
+      E avisa a pessoa do que falta
