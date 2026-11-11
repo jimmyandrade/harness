@@ -1,11 +1,11 @@
 ---
 name: definir-codigo-fiscal
-description: Cadastra, revisa e valida o código fiscal NCM de uma mercadoria e liga o código às variações, com as características que levam à classificação e o histórico da decisão em comentários. Usada quando a pessoa pergunta o NCM, confirma a matéria de uma classificação ou valida um código. NÃO serve para emitir a nota, cadastrar o material nem definir o preço.
+description: Cadastra, revisa e valida o código fiscal NCM de uma mercadoria e liga o código às variações, com as características que levam à classificação e o histórico da decisão em comentários. Usada quando a pessoa cadastra ou lança uma variação, pergunta o NCM, confirma a matéria de uma classificação ou valida um código. NÃO serve para emitir a nota, cadastrar o material nem definir o preço.
 allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-data-sources notion:notion-create-pages notion:notion-update-page notion:notion-create-comment
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.5.0"
   related:
     - evoluir-habilidade
     - identificar-duplicata
@@ -63,7 +63,7 @@ A matéria que predomina vem da composição da variação, como a do tecido no 
 A composição fica na lista de composição, com cada matéria e o percentual.
 Não copie a composição para o código.
 No vestuário, a construção, malha ou tecido plano, também conta.
-Sem composição registrada, ou sem a construção no vestuário, pergunte as duas à pessoa de uma vez.
+No cadastro ou no lançamento de uma variação, ou sempre que faltar um desses dados, pergunte de uma vez tudo o que falta: o tipo de mercadoria, como ela é usada, como peça de sair, de dormir ou de banho, o lado do fechamento, a construção, no vestuário, e cada matéria com o percentual.
 A resposta dela é uma confirmação e segue o Passo 5.
 
 ### Passo 5
@@ -88,6 +88,8 @@ O código fica na variação, porque a cor e o material podem mudar a matéria e
 Não ligue o código à unidade.
 Se a variação ainda não tiver o campo, ligue ao produto, diga que a ligação é provisória e sugira o campo na variação.
 Não crie a propriedade.
+Na loja online, o código vai no campo de código harmonizado do país da variante, com os oito dígitos do NCM. O campo geral guarda só o código internacional, de seis dígitos.
+A lista de códigos é a fonte: a loja recebe o código na publicação, e você não o edita direto na loja.
 
 ### Passo 8
 
@@ -153,6 +155,7 @@ Achei a variação, li a composição e procurei o código pelas característica
 - No vestuário, a fibra separa códigos vizinhos. No outro vestuário de uso feminino, algodão é 6211.42 e fibras sintéticas ou artificiais são 6211.43.
 - No vestuário, o lado do fechamento decide o uso: o que se fecha à frente da direita para a esquerda é feminino, e da esquerda para a direita é masculino, salvo quando o corte indica claramente um dos dois. Só o que não se reconhece como um nem outro vai para o feminino.
 - Uma posição residual, como outro vestuário, só vale depois de descartar as posições específicas do capítulo, como a de casacos ou a de roupões.
+- Uma peça de sair usada aberta por cima da roupa pode caber em casacos e semelhantes, a 62.02 no feminino, antes do residual 62.11.
 - O link de consulta do site de normas da Receita pode cair na página de pesquisa. O arquivo da TIPI abre direto.
 - O código fica na variação e não na unidade. Repetir o código em cada unidade não acrescenta informação.
 
