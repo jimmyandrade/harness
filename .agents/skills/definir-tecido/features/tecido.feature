@@ -145,3 +145,40 @@ Funcionalidade: Tecido
       Dado que duas páginas usam a mesma ficha
       Quando a habilidade anexa o PDF
       Então cada página recebe o próprio envio do arquivo
+
+  Regra: a habilidade cobra o que falta do tecido novo
+
+    Exemplo: Tecido novo sem ficha
+      Dado que o tecido é novo e a pessoa não tem a ficha técnica
+      Quando a habilidade termina de gravar
+      Então ela cobra a composição, quando nem a etiqueta a traz
+      E cobra os dados técnicos: largura, gramatura, rendimento, encolhimento e cuidados
+
+    Exemplo: Tecido novo sem foto
+      Dado que o tecido é novo e não tem foto
+      Quando a habilidade termina de gravar
+      Então ela cobra a foto do tecido
+      E deixa o tecido pendente, sem inventar a foto
+
+    Exemplo: Foto de um tecido estampado
+      Dado que a pessoa envia a foto de um tecido estampado
+      Quando a habilidade grava
+      Então ela cadastra a estampa no banco de estampas do projeto
+      E liga a estampa ao tecido
+
+    Exemplo: Campo da foto não definido
+      Dado que as instruções do projeto não definem o campo da foto do tecido
+      Quando a habilidade vai guardar a foto
+      Então ela pergunta onde guardar
+      Mas não escolhe o campo
+
+    Exemplo: Tecido de antes da data de corte
+      Dado que o tecido foi criado antes da data de corte da cobrança
+      Quando a habilidade termina de gravar
+      Então ela não cobra a ficha, os dados técnicos nem a foto
+      E o que falta não vira pendência
+
+    Exemplo: Data de corte vazia
+      Dado que as instruções do projeto não definem a data de corte da cobrança
+      Quando a habilidade termina de gravar
+      Então ela cobra o que falta de todo tecido
