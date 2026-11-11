@@ -1780,6 +1780,25 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses registering or updating a term, writing brand text, and inventing a form
 
+### projetar-caixa
+- **Stability**: experimental
+- **Description**: Project the cash of the next fairs and other opportunities, from each participation's reserve to the period total compared with the recommended safe cash
+- **Properties**:
+  - Lives at `.agents/skills/projetar-caixa/SKILL.md`
+  - Reads the opportunity, location, and contact point sources and every figure (recommended safe cash, contingency, minimum cost for a smaller point, default horizon) from the project instructions, and asks once when one is empty
+  - Uses the registration fee of the specific fair, falls back to the location floor as a provisional fee and says so, and never assumes zero
+  - Computes the projected safe cash as the larger of the costs already booked and the safe fee plus the complementary cost, times one plus the contingency, and takes the larger of that and the group floor as the reserve
+  - Keeps revenue goals, production, travel, lodging, and the revenue share out of the reserve, and lets the contingency absorb food, travel, parking, and structure
+  - Uses the date the person cites and says when the registration is on another date
+  - Says whether the period cash is above, equal to, or below the recommended safe cash, and lists the historical references apart from the projected period and the current parameters
+  - Only reads: it never changes the structure of the databases it consults
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] An empty source or figure makes the skill ask once and not choose
+  - [x] An unknown fee is never zero and a missing floor is asked for
+  - [x] The reserve is the larger of the projected safe cash and the group floor
+  - [x] The response compares the period cash with the recommended safe cash
+
 ### reconhecer-imagem
 - **Stability**: experimental
 - **Description**: Read what an image says and pass that text to another skill
