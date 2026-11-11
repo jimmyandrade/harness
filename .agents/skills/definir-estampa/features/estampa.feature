@@ -22,18 +22,25 @@ Funcionalidade: Estampa
       Então ela cadastra a estampa no outro tecido
       Mas não muda a estampa do tecido antigo
 
-  Regra: o banco não vem da habilidade
+  Regra: o banco se procura antes de perguntar
 
-    Exemplo: Banco de estampas não definido
+    Exemplo: Banco de estampas não definido e achado
       Dado que as instruções do projeto não definem o banco de estampas
+      E que o workspace conectado tem um só banco que serve
       Quando a habilidade precisa ler ou criar uma estampa
-      Então ela pergunta à pessoa qual é o banco
-      Mas não usa um nome de banco próprio
+      Então ela usa esse banco e diz qual usou
+      Mas não pergunta o nome ao usuário
 
-    Exemplo: Banco fora do workspace conectado
-      Dado que o banco de estampas não está no workspace conectado
-      Quando a habilidade começa
-      Então ela para
+    Exemplo: Dois bancos com nomes iguais ou parecidos
+      Dado que o workspace conectado tem dois bancos de nomes iguais ou parecidos que servem
+      Quando a habilidade precisa escolher o banco
+      Então ela confirma com a pessoa qual é o certo
+
+    Exemplo: Nenhum banco de estampas
+      Dado que o workspace conectado não tem nenhum banco que sirva
+      Quando a habilidade precisa ler ou criar uma estampa
+      Então ela pede à pessoa que informe o banco ou sugere criá-lo
+      Mas não cria o banco nem usa um nome próprio sem o sim
 
   Regra: a estampa se busca antes de criar
 
@@ -42,6 +49,12 @@ Funcionalidade: Estampa
       Quando a habilidade vai cadastrar
       Então ela relê o banco e busca com a habilidade de identificar duplicata
       E reaproveita a estampa que existe, sem criar outra
+
+    Exemplo: Flor que pode ser estampa ou aplicação
+      Dado que a pessoa cita um motivo, como uma flor
+      Quando a habilidade decide o que cadastrar
+      Então ela confere se o motivo é a estampa de um tecido ou uma aplicação de uma variante
+      E considera que uma aplicação de uma variante pode parecer a estampa do tecido de outra
 
     Exemplo: Mesmo motivo em duas peças
       Dado que uma estampa e uma aplicação têm o mesmo motivo
@@ -63,11 +76,17 @@ Funcionalidade: Estampa
       Então ela pergunta o nome, o motivo e o que mais o banco pede
       Mas não inventa o que a foto não mostra
 
-    Exemplo: Campo da foto não definido
+    Exemplo: Campo da foto não definido e achado
       Dado que as instruções do projeto não definem o campo da foto da estampa
+      E que o banco tem um só campo de arquivo que serve
       Quando a habilidade vai guardar a foto
-      Então ela pergunta onde guardar
-      Mas não escolhe o campo
+      Então ela usa esse campo e diz qual usou
+
+    Exemplo: Campo da foto ambíguo ou ausente
+      Dado que o banco tem mais de um campo de arquivo que serve, ou nenhum
+      Quando a habilidade vai guardar a foto
+      Então ela confirma com a pessoa qual campo usar, ou sugere criar o campo
+      Mas não cria o campo sem o sim
 
     Exemplo: Estampa de antes da data de corte
       Dado que a estampa foi criada antes da data de corte da cobrança

@@ -618,13 +618,14 @@ How these skills relate is in `README.md`, in this folder.
   - Keeps the motif as a field of the print, with no relation to an appliqué of the same motif
   - Charges the person for the photo and the information of a new print, leaves it pending without the photo, and does not charge a print created before the project cutoff date
   - Warns that correcting a print linked to more than one fabric changes all of them
-  - Asks the person for the print database and the photo field when the project instructions leave them empty
+  - Looks for the print database and the photo field in the connected workspace when the project instructions leave them empty, confirms when more than one fits, and asks or suggests creating one when none does
+  - Checks whether a motif is the print of a fabric or an appliqué of a variant, since an appliqué of one variant can look like the print of another fabric
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The print is linked to the fabric and not to the product or the variant
   - [x] A duplicate is searched before creating
   - [x] A new print without a photo is charged and left pending, and one before the cutoff date is not
-  - [x] An empty database parameter makes the skill ask and not choose
+  - [x] An empty database parameter makes the skill search the workspace, confirm an ambiguity, and ask or suggest creation only when none is found
 
 ### definir-filtro-de-email
 - **Stability**: experimental

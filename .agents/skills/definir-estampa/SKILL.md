@@ -21,7 +21,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ```yaml
 "Modo de aprendizado": "perguntar"
-# Nomes de banco e de campo: o projeto define. Vazios, pergunte uma vez e não escolha.
+# Nomes de banco e de campo: o projeto define. Vazios, procure no workspace conectado antes de perguntar.
 # `Banco de estampas`: uma página por estampa, ligada ao tecido.
 "Banco de estampas": ""
 # `Campo da foto da estampa`: campo de arquivo que guarda a foto da estampa.
@@ -36,7 +36,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 A estampa é do tecido. Ela se liga ao tecido que a tem e nunca ao produto nem à variante: a variante chega à estampa pelo tecido dela. Um tecido que falta é cadastrado por `definir-tecido` antes da estampa.
 
-Os nomes vêm das instruções do projeto. Com `Banco de estampas` vazio, a pessoa informa o data source na execução e você não escolhe um. Se ele não estiver no workspace conectado, pare. Não mude a estrutura do banco.
+Os nomes vêm das instruções do projeto. Com `Banco de estampas` vazio, procure o banco por conta própria no workspace conectado, pelo nome e pelas propriedades (estampa, motivo, foto). Achou um só, use-o e diga qual. Achou mais de um de nome igual ou parecido, confirme com a pessoa qual é. Não achou nenhum, peça que ela informe o banco ou sugira criá-lo, e não crie sem o sim. Não mude a estrutura do banco.
 
 ### Passo 2
 
@@ -44,9 +44,11 @@ Leia de novo o `Banco de estampas` agora, filtrado pelo nome e pelo motivo. Ante
 
 O motivo, como uma flor, é um campo da estampa. Uma aplicação do mesmo motivo é outro registro, e a estampa não se relaciona com ela.
 
+Uma flor pode ser a estampa de um tecido ou uma aplicação numa variante, e a aplicação de uma variante pode parecer a estampa do tecido de outra. Confira qual é antes de cadastrar: estampa é do tecido, aplicação é da variante.
+
 ### Passo 3
 
-Cadastre a estampa com o nome, o motivo, a foto e o tecido. Os nomes das propriedades vêm do mapeamento de dados do projeto. A foto vai em `Campo da foto da estampa`. Com o campo vazio, pergunte onde guardar e não escolha.
+Cadastre a estampa com o nome, o motivo, a foto e o tecido. Os nomes das propriedades vêm do mapeamento de dados do projeto. A foto vai em `Campo da foto da estampa`. Com o campo vazio, procure no banco o campo de arquivo que serve: um só, use-o e diga qual; mais de um, confirme; nenhum, sugira criar o campo e não crie sem o sim.
 
 Outra estampa na variante é outro tecido: cadastre a estampa no outro tecido e deixe a do tecido antigo como está. Corrigir uma estampa ligada a mais de um tecido muda todos eles, então avise antes de gravar.
 
@@ -91,8 +93,9 @@ Se você gravar a estampa sem a foto como se estivesse completa, o cadastro pare
 Se você usar um nome de banco que o projeto não definiu, a escrita cai no banco errado.
 
 1. Leia `Banco de estampas` nas instruções do projeto.
-2. Vazio, pergunte uma vez.
-3. Não escolha um nome.
+2. Vazio, procure o banco no workspace conectado.
+3. Com mais de um parecido, confirme. Sem nenhum, peça ou sugira criar.
+4. Não invente um nome.
 
 ## Exemplos de entrada e saída
 
@@ -111,12 +114,13 @@ Li o banco pelo nome e pelo motivo. A estampa existia: reaproveitei e liguei ao 
 - O tecido não está cadastrado: cadastre-o por `definir-tecido` antes.
 - A estampa é antiga e não tem foto: não cobre, se for anterior à data de corte.
 - A estampa serve a mais de um tecido: corrija com aviso, porque a correção vale para todos.
-- Um parâmetro está vazio nas instruções do projeto: pergunte uma vez e não escolha.
+- Um parâmetro de banco ou de campo está vazio nas instruções do projeto: procure no workspace conectado, confirme se houver ambiguidade e, sem nada, peça ou sugira criar.
 
 ## Pegadinhas
 
 - O produto parece o dono da estampa. O dono é o tecido, e a variante chega a ela pelo tecido.
 - Estampa e aplicação do mesmo motivo parecem uma coisa só. São registros independentes.
+- Uma flor parece sempre estampa. Pode ser aplicação, e a aplicação de uma variante pode parecer a estampa do tecido de outra: confira qual é.
 - Uma correção parece valer para um tecido só. Vale para todos os que usam a estampa.
 - A foto do tecido não é a foto da estampa isolada. Muitas estampas antigas só têm a foto da peça.
 
