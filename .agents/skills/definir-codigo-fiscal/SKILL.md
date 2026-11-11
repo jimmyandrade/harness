@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   related:
     - evoluir-habilidade
     - identificar-duplicata
@@ -53,7 +53,8 @@ As notas não citam produto, variação nem unidade.
 A matéria que predomina vem da composição da variação, como a do tecido no vestuário.
 A composição fica na lista de composição, com cada matéria e o percentual.
 Não copie a composição para o código.
-Sem composição registrada, pergunte à pessoa.
+No vestuário, a construção, malha ou tecido plano, também conta.
+Sem composição registrada, ou sem a construção no vestuário, pergunte as duas à pessoa de uma vez.
 A resposta dela é uma confirmação e segue o Passo 5.
 
 ### Passo 5
@@ -120,13 +121,14 @@ Achei a variação, li a composição e procurei o código pelas característica
 
 - Matérias misturadas sem predominância clara: pergunte. Não escolha.
 - Duas variações do mesmo produto com matérias diferentes: cada uma pode ter um código diferente.
-- A variação não tem composição registrada: pergunte a matéria e o percentual. Sem percentual, registre só o comentário.
+- A variação não tem composição registrada: pergunte a matéria, o percentual e, no vestuário, a construção. Sem percentual, registre só o comentário.
 - As notas antigas citam um produto: proponha reescrever só com as características e espere o sim.
 - O pedido é emitir a nota: diga que a emissão fica fora desta habilidade.
 
 ## Pegadinhas
 
-- No vestuário, o nome do tecido não diz a fibra. Organza e veludo podem ser de seda, de algodão ou de poliéster.
+- No vestuário, a construção decide o capítulo antes da fibra: malha é o capítulo 61, e tecido plano é o 62.
+- No vestuário, o nome do tecido não diz a fibra nem a construção. Organza e veludo podem ser de seda, de algodão ou de poliéster, e o veludo pode ser de malha ou plano.
 - No vestuário, a fibra separa códigos vizinhos. No outro vestuário de uso feminino, algodão é 6211.42 e fibras sintéticas ou artificiais são 6211.43.
 - Vestuário que não se reconhece como masculino nem como feminino se classifica como de uso feminino.
 - O código fica na variação e não na unidade. Repetir o código em cada unidade não acrescenta informação.
