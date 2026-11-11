@@ -64,6 +64,7 @@ flowchart LR
     definir_obra_musical["definir-obra-musical"]
     definir_obrigacao_financeira["definir-obrigacao-financeira"]
     definir_okr["definir-okr"]
+    definir_orcamento_de_fornecedor["definir-orcamento-de-fornecedor"]
     definir_perfil_social["definir-perfil-social"]
     definir_pessoa["definir-pessoa"]
     definir_planejamento_financeiro["definir-planejamento-financeiro"]
@@ -214,6 +215,7 @@ flowchart LR
   conversar_no_whatsapp --> acompanhar_resposta_no_whatsapp
   conversar_no_whatsapp --> comunicar_novidade_do_produto
   conversar_no_whatsapp --> convidar_para_evento
+  conversar_no_whatsapp --> definir_orcamento_de_fornecedor
   conversar_no_whatsapp --> definir_pessoa
   conversar_no_whatsapp --> definir_rotina
   conversar_no_whatsapp --> definir_tarefa
@@ -383,6 +385,13 @@ flowchart LR
   definir_okr --> definir_medicao_de_metrica
   definir_okr --> definir_tarefa
   definir_okr --> evoluir_habilidade
+  definir_orcamento_de_fornecedor --> conversar_no_whatsapp
+  definir_orcamento_de_fornecedor --> definir_empresa
+  definir_orcamento_de_fornecedor --> evoluir_habilidade
+  definir_orcamento_de_fornecedor --> lancar_despesa_da_empresa
+  definir_orcamento_de_fornecedor --> procurar_email
+  definir_orcamento_de_fornecedor --> reconhecer_imagem
+  definir_orcamento_de_fornecedor --> redigir_com_tom_de_voz
   definir_perfil_social --> definir_grafia
   definir_perfil_social --> definir_pessoa
   definir_perfil_social --> identificar_duplicata
