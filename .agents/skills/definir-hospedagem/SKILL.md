@@ -3,7 +3,7 @@ name: definir-hospedagem
 description: Define a hospedagem de uma viagem depois da reserva, o que ela pede, como nome e documento dos hóspedes, veículo e chegada, e a resposta a quem hospeda, enviada só com a confirmação. Usada quando o anfitrião ou o hotel escreve. Não serve para ler a reserva, registrar a viagem nem redigir no tom da marca.
 metadata:
   author: jimmyandrade
-  version: "0.2.1"
+  version: "0.3.0"
   aliases:
     - responder-pedido-da-hospedagem
   related:
@@ -23,6 +23,8 @@ metadata:
 ## Parâmetros de configuração
 
 ```yaml
+# `Nome civil na resposta` é `não`, que manda só o nome completo do cadastro, ou `sim`, que acrescenta o nome civil de registro entre parênteses.
+"Nome civil na resposta": "não"
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -47,6 +49,7 @@ Hotel responde por e-mail ou WhatsApp, com `procurar-email` ou `conversar-no-wha
 ### Passo 2
 
 Junte só o que a hospedagem pediu, nesta ordem de busca: a viagem e a hospedagem no Notion, o cadastro de cada pessoa e, para o veículo, o cadastro que `acompanhar-veiculo` usa. Quem viaja vem das pessoas da viagem ou dos hóspedes da hospedagem, e o veículo vem dos veículos da viagem, nas propriedades que o mapeamento de dados do projeto indica. O banco de veículos tem a placa como título e a pessoa proprietária. Sem a lista de quem viaja, pergunte, e não suponha uma pessoa pelo histórico de outra viagem.
+O nome de cada hóspede é o nome completo do cadastro, o mesmo do documento oficial de quem tem nome social. Com `Nome civil na resposta` em `não`, o nome civil de registro não vai na resposta nem na tela de confirmação, e a hospedagem recebe só o nome do documento.
 Documento, placa e telefone são dados sensíveis: leia do cadastro, mostre na tela de confirmação e nunca copie para outro lugar além da resposta. Dado que falta no cadastro, pergunte uma vez, com o nome da pessoa, e grave a resposta por `definir-pessoa`.
 O banco da viagem ou da hospedagem sem propriedade para as pessoas ou para os veículos é limitação do banco: diga isso na resposta e recomende a propriedade, uma relação com o banco de pessoas e outra com o de veículos. Não crie nem altere propriedade.
 Veículo só entra quando a pessoa vai de carro. Sem o transporte definido, pergunte antes de pedir a placa.
@@ -123,6 +126,7 @@ Respondi pelo e-mail em que o pedido chegou. Mandei nomes e horário. Não mande
 
 - A reserva feita à mão não cria página no Notion, e o banco de viagens e o de hospedagens podem nem ter onde registrar quem viaja e o veículo. Quem viaja e o transporte podem não estar em lugar nenhum.
 - O pedido de documento costuma vir antes do check-in e some da lista de mensagens com a tradução automática. Leia a mensagem original, não a prévia da lista.
+- O cadastro tem o nome completo e o nome civil de registro, e quem tem nome social usa o nome completo no documento oficial. O nome civil só sai com `Nome civil na resposta` em `sim`, ou se a pessoa pedir.
 - Dado sensível não vira texto de memória, de nota nem de comentário na negociação. Ele fica no cadastro e na resposta enviada.
 - A hospedagem que pede os dados também libera o acesso com base neles: um erro no documento trava a entrada.
 
