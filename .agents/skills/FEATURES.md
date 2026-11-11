@@ -1135,6 +1135,7 @@ How these skills relate is in `README.md`, in this folder.
   - Writes the composition as one row per fiber, named with the percentage and the fiber abbreviation, and reuses a row that exists
   - Fills an empty composition, leaves an equal one, corrects a different one when the fabric is the sheet article, and keeps one from another purchase with a comment and a task
   - Links the print to the fabric page, asks which print when the sheet does not say, and never writes the print on the product or the variant
+  - Charges the person for what a new fabric lacks: the composition, the technical data the sheet does not give, and a photo, from which it registers the print of a printed fabric; a fabric created before the project cutoff date is not charged
   - Updates the sheet section of a page instead of adding another, and puts the PDF in the sheet file field when the project defines it
   - Asks the person for the fabric database, the composition database, the print database, and the abbreviation of a missing fiber when the project instructions leave them empty
 - **Test Criteria**:
@@ -1143,6 +1144,7 @@ How these skills relate is in `README.md`, in this folder.
   - [x] An empty database parameter makes the skill ask and not choose
   - [x] A composition from another purchase is kept, commented, and tracked by a task
   - [x] The sheet section is updated and never duplicated
+  - [x] A new fabric without sheet or photo is charged and left pending, and one before the cutoff date is not
 
 ### definir-tipo-do-evento
 - **Stability**: experimental

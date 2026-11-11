@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.2"
+  version: "0.5.0"
   related:
     - acompanhar-producao-de-produto
     - definir-composicao-textil
@@ -32,6 +32,10 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Banco de estampas": ""
 # `Campo do arquivo da ficha`: campo de arquivo do cadastro de tecidos que guarda o PDF da ficha. Vazio, o PDF vai no corpo da página, ou onde o sistema de cadastro usa para anexos.
 "Campo do arquivo da ficha": ""
+# `Campo da foto do tecido`: campo de arquivo que guarda a foto do tecido. Vazio, pergunte onde guardar e não escolha.
+"Campo da foto do tecido": ""
+# `Data de corte da cobrança`: o tecido criado antes dela não é cobrado do que falta. Vazia, todo tecido é cobrado.
+"Data de corte da cobrança": ""
 # `Siglas das fibras`: a sigla de cada fibra no nome da linha de composição.
 "Siglas das fibras": {"algodão": "CO", "viscose": "CV", "poliéster": "PES", "poliamida": "PA", "elastano": "PUE", "linho": "LI", "seda": "SE"}
 ```
@@ -81,6 +85,16 @@ O PDF vai em `Campo do arquivo da ficha`, e o resumo diz que ele está lá. Com 
 Na resposta, dê o link de cada página e de cada linha de composição criada, e a divergência que cabe à pessoa conferir.
 
 ### Passo 5
+
+Antes de encerrar, cobre da pessoa o que falta de cada tecido novo. Tecido novo é o criado depois de `Data de corte da cobrança`. Não grave como completo o que está incompleto.
+
+- [ ] A composição, quando nem a ficha nem a etiqueta a trazem.
+- [ ] Os dados técnicos que a ficha não traz: largura, gramatura, rendimento, encolhimento e cuidados.
+- [ ] A foto do tecido, em `Campo da foto do tecido`, para cadastrar a estampa dele.
+
+Com a foto de um tecido estampado, cadastre a estampa no banco de estampas do projeto e ligue-a ao tecido. Sem a foto, o tecido fica pendente: diga o que falta e não invente. O tecido criado antes da data de corte não é cobrado e o que falta nele não vira pendência, porque a foto e a ficha de muitos tecidos antigos não existem.
+
+### Passo 6
 
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
@@ -148,8 +162,9 @@ A etiqueta não tem ficha. Gravei a composição dela, com o link da fonte, e di
 - O mesmo tecido em duas cores tem duas páginas, mas conta uma vez na etiqueta da variante, como `definir-composicao-textil` monta.
 - A ficha diz que o tecido é estampado e a estampa não está em `Banco de estampas`: pergunte antes de criar.
 - A fibra não tem sigla em `Siglas das fibras`: pergunte a sigla antes de criar a linha.
-- A composição vem só da etiqueta, sem ficha: grave a composição e diga que falta a ficha.
-- A composição está só na nota fiscal ou na cotação: grave com o link da fonte e diga que os cuidados ainda faltam.
+- A composição vem só da etiqueta, sem ficha: grave a composição e cobre a ficha e os dados técnicos.
+- A composição está só na nota fiscal ou na cotação: grave com o link da fonte e cobre os cuidados que faltam.
+- O tecido é de antes da data de corte e não tem foto nem ficha: não cobre e não bloqueie.
 - Um banco ou o campo do arquivo está vazio nas instruções do projeto: pergunte uma vez e não escolha.
 
 ## Pegadinhas
