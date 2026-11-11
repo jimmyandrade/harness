@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.48.0"
+  version: "0.48.1"
   related:
     - convidar-para-evento
     - definir-agenda-de-popstar
@@ -183,6 +183,7 @@ A descrição leva o link da página canônica, uma frase do que o evento é, e 
 Desambiguação curta se for um negócio e não um ponto de contato. Não alongue o que a propriedade já guarda. Criatividade não troca o campo estruturado.
 Quando `definir-jornada-de-producao` disser que o dia segue a jornada reduzida, a descrição registra a jornada reduzida e o motivo.
 Reunião sem modalidade: pergunte. Remota: crie o Google Meet. Presencial: não crie.
+Evento presencial com convidado: leia o evento depois de criar. O Google Agenda pode anexar um Meet sozinho, e a ferramenta de agenda não o remove. Com o link, diga isso e que a pessoa o tira na própria agenda.
 
 Ligação telefônica leva na descrição o nome e o telefone de quem vai ligar ou atender do outro lado, para remarcar sem depender de memória. Sem o número, peça a quem atendeu a ligação que combinou o horário: o histórico de chamadas do celular tem o número, e a gravação, se houver, tem o combinado. Grave o número também no cadastro da pessoa.
 Compromisso a que uma pessoa ou um grupo deve ser convidado, como uma reunião combinada numa conversa do WhatsApp: depois de criar o evento, siga `convidar-para-evento`, que manda o convite pelos canais que alcançam a pessoa.
@@ -287,8 +288,6 @@ Conferi a grafia. O título usou o nome canônico e o papel do encontro. A descr
 - Sem nome, data, organização, oportunidade relacionada ou outro identificador mínimo: peça. Não crie.
 - O evento provável já na agenda: atualize e complete o que falta. Não duplique.
 - A resposta não traz resumo, estado do evento ou fuso: escreva os três.
-- A pessoa diz que o compromisso está marcado e a agenda não o tem: proponha a criação. Não liste só o livre e o ocupado.
-- O nome da marca vem com a forma ouvida de uma transcrição: grave a grafia canônica e busque pelas duas.
 
 ## Pegadinhas
 
@@ -300,6 +299,7 @@ Conferi a grafia. O título usou o nome canônico e o papel do encontro. A descr
 - Título diferente parece evento novo. A busca usa variação de nome, não só o título exato. Na dúvida, mostre e confirme.
 - O link da chamada numa mensagem parece marcar a reunião na conversa do WhatsApp. O convite sai por `convidar-para-evento`, com o evento nativo e a mensagem com o link.
 - «Feira» ou «Reunião» sozinhos parecem título. A busca precisa do nome canônico. O evento externo segue o Passo 5.
+- Não pedir o Meet parece garantir um evento sem chamada. Com convidado, o Google Agenda pode anexá-lo sozinho.
 - A busca vazia parece prova de que o compromisso não existe. Quando a pessoa o deu como marcado, é a agenda que falta, e o próximo passo é criar.
 
 ## Scripts disponíveis
