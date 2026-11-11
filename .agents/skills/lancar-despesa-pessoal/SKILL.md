@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.5.1"
   related:
     - definir-obrigacao-financeira
     - lancar-despesa-da-empresa
@@ -66,6 +66,15 @@ flowchart LR
 ```
 
 Grave o nome curto, o valor original, o vencimento e, quando houver, a parcela no formato número/total e a obrigação de origem. Fatura em aberto não tem data de pagamento. Pagamento só entra com comprovante: data, valor pago, e juros ou multa como a diferença entre o pago e o original. Recibo do pagador num boleto não é comprovante. Quando outra pessoa paga, registre quem pagou, separado de quem deve. Não invente valor, data nem parcela. O histórico fica nos comentários, não no corpo.
+O arquivo do comprovante fica na propriedade de arquivos da despesa, e a despesa é a fonte dele.
+Não deixe o comprovante só no chat nem num arquivo temporário.
+
+Todo comprovante fica no Notion antes de ir por e-mail ou mensagem: primeiro grave, depois envie.
+
+A lista sem essa propriedade é limitação do banco: diga isso e recomende uma propriedade de arquivos.
+A propriedade só é criada com a autorização da pessoa, e ela passa a ser regra da lista.
+
+Para anexar o comprovante a uma mensagem ou a um e-mail, use o arquivo da despesa.
 
 ### Passo 4
 
@@ -84,6 +93,14 @@ Se você gravar só com recebedor, valor e data, a despesa entra sem saber o que
 1. Confira o checklist antes de gravar, inclusive ao complementar um registro.
 2. Pergunte o produto ou serviço, a finalidade e os dados de classificação ainda ausentes.
 3. Espere a resposta e atualize o mesmo lançamento, preservando o comprovante e sem duplicar.
+
+### Comprovante só no chat
+
+Se você gravar o pagamento e deixar o arquivo do comprovante só na conversa, a despesa perde a prova e o próximo anexo depende de a pessoa mandar o arquivo de novo.
+
+1. Anexe o arquivo na propriedade de arquivos da despesa antes de qualquer envio.
+2. Sem essa propriedade, diga a limitação, recomende a propriedade e crie-a só com a autorização da pessoa.
+3. Ao anexar a um e-mail ou a uma mensagem, pegue o arquivo da despesa.
 
 ### Pessoal na lista da empresa
 

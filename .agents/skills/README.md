@@ -80,6 +80,7 @@ flowchart LR
     definir_vocabulario["definir-vocabulario"]
     descrever_habilidade_ou_schema["descrever-habilidade-ou-schema"]
     emitir_documento_oficial["emitir-documento-oficial"]
+    enviar_email["enviar-email"]
     enviar_imagem_no_whatsapp["enviar-imagem-no-whatsapp"]
     enviar_mensagem_no_slack["enviar-mensagem-no-slack"]
     escrever_codigo["escrever-codigo"]
@@ -140,6 +141,7 @@ flowchart LR
     transcrever_audio_e_video["transcrever-audio-e-video"]
     triar_conversas["triar-conversas"]
     validar_plano_de_vocabulario["validar-plano-de-vocabulario"]
+    verificar_origem_do_link["verificar-origem-do-link"]
   end
   abrir_vendas_na_tiqueteira --> definir_lote_de_ingresso
   abrir_vendas_na_tiqueteira --> evoluir_habilidade
@@ -451,6 +453,14 @@ flowchart LR
   descrever_habilidade_ou_schema --> revisar_habilidade
   descrever_habilidade_ou_schema --> testar_habilidade
   emitir_documento_oficial --> evoluir_habilidade
+  enviar_email --> definir_pessoa
+  enviar_email --> definir_vocabulario
+  enviar_email --> evoluir_habilidade
+  enviar_email --> lancar_despesa_da_empresa
+  enviar_email --> lancar_despesa_pessoal
+  enviar_email --> organizar_emails
+  enviar_email --> procurar_email
+  enviar_email --> redigir_com_tom_de_voz
   enviar_imagem_no_whatsapp --> conversar_no_whatsapp
   enviar_imagem_no_whatsapp --> evoluir_habilidade
   enviar_imagem_no_whatsapp --> redigir_com_tom_de_voz
@@ -748,4 +758,8 @@ flowchart LR
   validar_plano_de_vocabulario --> classificar_estado_do_termo
   validar_plano_de_vocabulario --> definir_vocabulario
   validar_plano_de_vocabulario --> gravar_termos_no_vocabulario
+  verificar_origem_do_link --> acompanhar_veiculo
+  verificar_origem_do_link --> evoluir_habilidade
+  verificar_origem_do_link --> organizar_emails
+  verificar_origem_do_link --> procurar_email
 ```

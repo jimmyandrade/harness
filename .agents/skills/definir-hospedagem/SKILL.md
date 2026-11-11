@@ -3,7 +3,7 @@ name: definir-hospedagem
 description: Define a hospedagem de uma viagem depois da reserva, o que ela pede, como nome e documento dos hóspedes, veículo e chegada, e a resposta a quem hospeda, enviada só com a confirmação. Usada quando o anfitrião ou o hotel escreve. Não serve para ler a reserva, registrar a viagem nem redigir no tom da marca.
 metadata:
   author: jimmyandrade
-  version: "0.3.1"
+  version: "0.3.2"
   aliases:
     - responder-pedido-da-hospedagem
   related:
@@ -40,17 +40,38 @@ flowchart LR
 
 Esta habilidade cuida da hospedagem depois da reserva, hoje o pedido de dados do anfitrião ou do hotel. Achar a reserva e ligar a hospedagem à viagem segue `definir-viagem`.
 
-A hospedagem pede os dados logo depois da reserva, e a reserva feita à mão não deixa rastro no Notion. Procure o pedido antes de perguntar à pessoa: na conversa da plataforma de hospedagem, no e-mail da reserva e no WhatsApp ou no e-mail do hotel. Leia o que a hospedagem pediu e a data da mensagem.
-Para ler a conversa, siga a ordem de `definir-viagem`: CLI, API, MCP, skill e, por último, o navegador na aba em que a pessoa já entrou. Não entre na plataforma por ela.
-Hotel responde por e-mail ou WhatsApp, com `procurar-email` ou `conversar-no-whatsapp`. Anfitrião de plataforma responde na própria conversa da reserva.
+A hospedagem pede os dados logo depois da reserva, e a reserva feita à mão não deixa rastro no Notion.
+
+Procure o pedido antes de perguntar à pessoa: na conversa da plataforma de hospedagem, no e-mail da reserva e no WhatsApp ou no e-mail do hotel.
+Leia o que a hospedagem pediu e a data da mensagem.
+
+Para ler a conversa, siga a ordem de `definir-viagem`: CLI, API, MCP, skill e, por último, o navegador na aba em que a pessoa já entrou.
+Não entre na plataforma por ela.
+
+Hotel responde por e-mail ou WhatsApp, com `procurar-email` ou `conversar-no-whatsapp`.
+Anfitrião de plataforma responde na própria conversa da reserva.
 
 ### Passo 2
 
-Junte só o que a hospedagem pediu, nesta ordem de busca: a viagem e a hospedagem no Notion, o cadastro de cada pessoa e, para o veículo, o cadastro que `acompanhar-veiculo` usa. Quem viaja vem das pessoas da viagem ou dos hóspedes da hospedagem, e o veículo vem dos veículos da viagem, nas propriedades que o mapeamento de dados do projeto indica. O banco de veículos tem a placa como título e a pessoa proprietária. Sem a lista de quem viaja, pergunte, e não suponha uma pessoa pelo histórico de outra viagem.
-O nome de cada hóspede é o nome completo do cadastro, o mesmo do documento oficial de quem tem nome social. Com `Nome civil na resposta` em `não`, o nome civil de registro não vai na resposta nem na tela de confirmação, e a hospedagem recebe só o nome do documento.
-Documento, placa e telefone são dados sensíveis: leia do cadastro, mostre na tela de confirmação e nunca copie para outro lugar além da resposta. Dado que falta no cadastro, pergunte uma vez, com o nome da pessoa, e grave a resposta por `definir-pessoa`.
-O banco da viagem ou da hospedagem sem propriedade para as pessoas ou para os veículos é limitação do banco: diga isso na resposta e recomende a propriedade, uma relação com o banco de pessoas e outra com o de veículos. Não crie nem altere propriedade.
-Veículo só entra quando a pessoa vai de carro. Sem o transporte definido, pergunte antes de pedir a placa.
+Junte só o que a hospedagem pediu, nesta ordem de busca: a viagem e a hospedagem no Notion, o cadastro de cada pessoa e, para o veículo, o cadastro que `acompanhar-veiculo` usa.
+
+Quem viaja vem das pessoas da viagem ou dos hóspedes da hospedagem, e o veículo vem dos veículos da viagem, nas propriedades que o mapeamento de dados do projeto indica.
+O banco de veículos tem a placa como título e a pessoa proprietária.
+
+Sem a lista de quem viaja, pergunte, e não suponha uma pessoa pelo histórico de outra viagem.
+
+O nome de cada hóspede é o nome completo do cadastro, o mesmo do documento oficial de quem tem nome social.
+Com `Nome civil na resposta` em `não`, o nome civil de registro não vai na resposta nem na tela de confirmação, e a hospedagem recebe só o nome do documento.
+
+Documento, placa e telefone são dados sensíveis: leia do cadastro, mostre na tela de confirmação e nunca copie para outro lugar além da resposta.
+Dado que falta no cadastro, pergunte uma vez, com o nome da pessoa, e grave a resposta por `definir-pessoa`.
+
+O banco da viagem ou da hospedagem sem propriedade para as pessoas ou para os veículos é limitação do banco.
+Diga isso na resposta e recomende a propriedade, uma relação com o banco de pessoas e outra com o de veículos.
+Não crie nem altere propriedade sem a autorização da pessoa.
+
+Veículo só entra quando a pessoa vai de carro.
+Sem o transporte definido, pergunte antes de pedir a placa.
 
 ### Passo 3
 
@@ -125,7 +146,12 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### o anfitrião pediu, na conversa da reserva, o nome do segundo hóspede, o CPF de ambos e os dados do carro
 
-Li o pedido na conversa da plataforma, pelo navegador, na aba em que a pessoa já estava. A viagem não traz o segundo hóspede e o transporte não está definido: perguntei quem é e se vão de carro. Com as respostas, montei o rascunho no modelo, mostrei o CPF de cada um e a placa, e esperei o sim. Com o sim, enviei na conversa, conferi que saiu e registrei o envio na hospedagem, sem repetir os documentos.
+Li o pedido na conversa da plataforma, pelo navegador, na aba em que a pessoa já estava.
+
+A viagem não traz o segundo hóspede e o transporte não está definido: perguntei quem é e se vão de carro.
+
+Com as respostas, montei o rascunho no modelo, mostrei o CPF de cada um e a placa, e esperei o sim.
+Com o sim, enviei na conversa, conferi que saiu e registrei o envio na hospedagem, sem repetir os documentos.
 
 ### o hotel pediu por e-mail a lista de hóspedes e o horário de chegada
 
