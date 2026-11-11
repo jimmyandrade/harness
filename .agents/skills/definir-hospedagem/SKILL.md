@@ -3,7 +3,7 @@ name: definir-hospedagem
 description: Define a hospedagem de uma viagem depois da reserva, o que ela pede, como nome e documento dos hóspedes, veículo e chegada, e a resposta a quem hospeda, enviada só com a confirmação. Usada quando o anfitrião ou o hotel escreve. Não serve para ler a reserva, registrar a viagem nem redigir no tom da marca.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.3.1"
   aliases:
     - responder-pedido-da-hospedagem
   related:
@@ -14,8 +14,6 @@ metadata:
     - evoluir-habilidade
     - procurar-email
     - redigir-com-tom-de-voz
-  models:
-    - dados-para-a-hospedagem
 ---
 
 # Definir hospedagem
@@ -56,7 +54,26 @@ Veículo só entra quando a pessoa vai de carro. Sem o transporte definido, perg
 
 ### Passo 3
 
-Leia o modelo de saída `dados-para-a-hospedagem` quando for gerar a saída.
+O rascunho mostrado à pessoa segue este formato:
+
+```
+Hospedagem: <nome ou endereço, com o código da reserva>
+Canal: <plataforma, e-mail ou WhatsApp em que a resposta vai>
+O que a hospedagem pediu: <o pedido em uma linha, com a data da mensagem>
+
+Hóspedes
+| Hóspede | Nome completo | Documento | Origem do dado |
+| 1 | <nome> | <documento, ou "falta"> | <página do cadastro, ou "informado agora"> |
+
+Veículo: <marca, modelo, cor e placa, ou "não vai de carro">
+Chegada: <dia e horário previstos, ou "falta">
+Dados que não entram: <o que a hospedagem não pediu>
+
+<texto exato da resposta, num bloco de código>
+
+Falta antes de enviar: <o que a pessoa ainda precisa informar, ou "nada">
+Posso enviar? <pergunta que pede o sim>
+```
 O texto da resposta passa por `redigir-com-tom-de-voz` antes de ser mostrado. A resposta traz só o pedido: quem chega, o veículo se foi pedido e o horário previsto. Não acrescente dado que a hospedagem não pediu.
 Mostre o rascunho completo, com o que falta, e espere o sim. Enviar dado pessoal a outra empresa é ação que só a pessoa autoriza, e o sim dado a um dado não vale para o seguinte.
 
