@@ -1,6 +1,6 @@
 ---
 metadata:
-  version: "1.55.0"
+  version: "1.56.0"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -10,6 +10,7 @@ metadata:
       "Linhas": 500
       "Tokens do catálogo": 100
       "Tokens do corpo": 5000
+      "Caracteres por parágrafo": 600
       "Direção dos fluxogramas": "LR"
       "Ícone das páginas no Notion": "magic-wand"
       "Cor do ícone das páginas no Notion": "gray"

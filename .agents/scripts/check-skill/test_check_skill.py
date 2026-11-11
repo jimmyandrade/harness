@@ -611,6 +611,52 @@ class InstructionsVersionTest(unittest.TestCase):
     def test_should_accept_a_version_without_history(self) -> None:
         self.assertEqual(self.checker.instructions_version_errors(self.text("0.5.0")), [])
 
+class ParagraphLengthTest(unittest.TestCase):
+    def setUp(self) -> None:
+        self.tmp = tempfile.TemporaryDirectory()
+        self.project = Path(self.tmp.name)
+        (self.project / ".agents").mkdir()
+        (self.project / INSTRUCTIONS).write_text(PARAMETERS, encoding="utf-8")
+        self.checker = load_checker(self.project)
+
+    def tearDown(self) -> None:
+        self.tmp.cleanup()
+        os.environ.pop("HARNESS_ROOT", None)
+
+    def errors(self, body: str, previous: str | None = None, limit: int = 40) -> list[str]:
+        lines = [(index + 10, line) for index, line in enumerate(body.splitlines())]
+        return [
+            f"{finding.line}: {finding.message}"
+            for finding in self.checker.paragraph_errors(lines, previous, limit)
+        ]
+
+    def test_a_short_paragraph_passes(self) -> None:
+        self.assertEqual(self.errors("Uma frase curta."), [])
+
+    def test_a_long_new_paragraph_fails(self) -> None:
+        found = self.errors("Primeira frase do tema. Segunda frase de outro tema emendada.")
+        self.assertEqual(len(found), 1)
+        self.assertTrue(found[0].startswith("10: "))
+        self.assertIn("limit 40", found[0])
+
+    def test_a_long_paragraph_already_committed_passes(self) -> None:
+        long = "Primeira frase do tema. Segunda frase de outro tema emendada."
+        self.assertEqual(self.errors(long, previous=f"x\n{long}\n"), [])
+
+    def test_a_committed_paragraph_that_grew_fails(self) -> None:
+        old = "Primeira frase do tema. Segunda frase."
+        new = old + " Terceira frase emendada."
+        self.assertEqual(len(self.errors(new, previous=f"{old}\n")), 1)
+
+    def test_code_blocks_headings_and_tables_are_skipped(self) -> None:
+        long = "x" * 80
+        body = f"```yaml\n{long}\n```\n### {long}\n| {long} |\n<!-- {long} -->"
+        self.assertEqual(self.errors(body), [])
+
+    def test_a_long_list_item_fails(self) -> None:
+        self.assertEqual(len(self.errors("- " + "palavra " * 10)), 1)
+
+
 if __name__ == "__main__":
     unittest.main()
 
