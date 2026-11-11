@@ -50,6 +50,7 @@ flowchart LR
     definir_convidado["definir-convidado"]
     definir_data_significativa["definir-data-significativa"]
     definir_empresa["definir-empresa"]
+    definir_estampa["definir-estampa"]
     definir_filtro_de_email["definir-filtro-de-email"]
     definir_fonograma["definir-fonograma"]
     definir_grafia["definir-grafia"]
@@ -339,6 +340,7 @@ flowchart LR
   definir_codigo_fiscal --> evoluir_habilidade
   definir_codigo_fiscal --> identificar_duplicata
   definir_composicao_textil --> acompanhar_producao_de_produto
+  definir_composicao_textil --> definir_estampa
   definir_composicao_textil --> definir_tarefa
   definir_composicao_textil --> definir_tecido
   definir_composicao_textil --> evoluir_habilidade
@@ -358,6 +360,10 @@ flowchart LR
   definir_empresa --> definir_perfil_social
   definir_empresa --> identificar_duplicata
   definir_empresa --> mesclar_registro
+  definir_estampa --> definir_composicao_textil
+  definir_estampa --> definir_tecido
+  definir_estampa --> evoluir_habilidade
+  definir_estampa --> identificar_duplicata
   definir_filtro_de_email --> evoluir_habilidade
   definir_filtro_de_email --> organizar_emails
   definir_filtro_de_email --> rotular_item
@@ -471,6 +477,7 @@ flowchart LR
   definir_tarefa --> procurar_tarefa
   definir_tecido --> acompanhar_producao_de_produto
   definir_tecido --> definir_composicao_textil
+  definir_tecido --> definir_estampa
   definir_tecido --> definir_tarefa
   definir_tecido --> evoluir_habilidade
   definir_tecido --> gerenciar_estoque
