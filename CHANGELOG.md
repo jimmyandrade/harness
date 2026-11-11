@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.76.0](https://github.com/jimmyandrade/harness/compare/v1.75.0...v1.76.0) (2026-11-11)
+
+
+### Features
+
+* **definir-aplicacao:** add the appliqué skill, linked to the variant and charged for a photo ([#1039](https://github.com/jimmyandrade/harness/issues/1039)) ([f65201b](https://github.com/jimmyandrade/harness/commit/f65201b8d7f9052f9a4c8beae0c626f430013f31))
+* **definir-estampa:** add the print skill, linked to the fabric and charged for a photo ([#1038](https://github.com/jimmyandrade/harness/issues/1038)) ([5610bb2](https://github.com/jimmyandrade/harness/commit/5610bb2163f01cd8d2615ac3742c9bed64928c8b))
+
+
+### Bug Fixes
+
+* **mesclar-registro:** trigger the skill when renaming an existing record ([#1037](https://github.com/jimmyandrade/harness/issues/1037)) ([996f32c](https://github.com/jimmyandrade/harness/commit/996f32ce94cd517f5791b2bc049fd739edac64e8))
+
 ## [1.75.0](https://github.com/jimmyandrade/harness/compare/v1.74.0...v1.75.0) (2026-11-11)
 
 
