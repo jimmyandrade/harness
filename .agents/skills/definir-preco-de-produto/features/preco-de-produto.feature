@@ -23,18 +23,45 @@ Funcionalidade: Preço de produto
       Quando a habilidade escolhe onde ler
       Então ela lê o banco do Notion
 
-    Exemplo: Preço antigo que só o histórico de versões da página guarda
-      Dado que a mudança é anterior às linhas da fonte do histórico
-      E que as instruções do projeto mandam ler o histórico de versões da página
-      Quando a habilidade procura o preço anterior
-      Então ela lê o histórico de versões da página do produto
-      E diz até onde esse histórico chega
-      E pergunta à pessoa só o que nenhuma das duas fontes responde
+  Regra: a leitura das versões da página segue o modo das instruções do projeto
 
-    Exemplo: Leitura das versões da página desligada
-      Dado que as instruções do projeto desligam a leitura do histórico de versões da página
-      Quando a fonte do histórico não responde
-      Então a habilidade pergunta à pessoa sem ler as versões da página
+    Exemplo: Modo automático sem resposta da fonte
+      Dado que o modo de leitura das versões da página é automático
+      E que a fonte do histórico não responde
+      Quando a habilidade procura o preço anterior
+      Então ela lê as versões da página do produto e, se há variação, as da variação
+      E diz até onde esse histórico chega
+      E pergunta à pessoa só o que nada respondeu
+
+    Exemplo: Modo automático com resposta da fonte
+      Dado que o modo de leitura das versões da página é automático
+      E que a fonte do histórico responde
+      Quando a habilidade procura o preço anterior
+      Então ela não lê as versões da página
+
+    Exemplo: Modo sempre
+      Dado que o modo de leitura das versões da página é sempre
+      Quando a habilidade procura o preço anterior
+      Então ela lê a fonte do histórico e as versões da página, mesmo que a fonte responda
+
+    Exemplo: Modo perguntar
+      Dado que o modo de leitura das versões da página é perguntar
+      E que a fonte do histórico não responde
+      Quando a habilidade procura o preço anterior
+      Então ela pergunta à pessoa se lê as versões da página
+      Mas não lê antes da resposta
+
+    Exemplo: Modo nunca
+      Dado que o modo de leitura das versões da página é nunca
+      E que a fonte do histórico não responde
+      Quando a habilidade procura o preço anterior
+      Então ela pergunta à pessoa o preço sem ler as versões da página
+
+    Exemplo: Preço diferente por variação
+      Dado que o produto tem variações com preços diferentes
+      Quando a habilidade lê as versões da página
+      Então ela lê as do produto e as da variação pedida
+      Mas não lê as da unidade
 
   Regra: o histórico só recebe linhas novas
 
@@ -42,7 +69,7 @@ Funcionalidade: Preço de produto
       Dado que a pessoa muda o preço de catálogo de um produto
       Quando a habilidade registra a mudança
       Então ela acrescenta uma linha na fonte do histórico
-      E a linha traz produto, canal, motivo, quem decidiu, preço anterior, preço novo, vigência e custo na data
+      E a linha traz produto, variação quando há, canal, motivo, quem decidiu, preço anterior, preço novo, vigência e custo na data
 
     Exemplo: Correção de uma linha antiga
       Dado que uma linha do histórico tem o preço errado

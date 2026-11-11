@@ -23,11 +23,12 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Modo de aprendizado": "perguntar"
 # Opções: `banco do Notion`, `Shopify` e `banco do Notion e Shopify`.
 "Fonte do histórico de preços": "banco do Notion"
-# `sim` enquanto o banco do histórico não cobre os preços antigos: as versões da página são, por ora, a única fonte deles. O Notion não garante guardar essas versões, então diga até onde chegam.
-"Ler o histórico de versões da página": "sim"
+# Opções: `sempre`, `nunca`, `perguntar` e `automático`. `automático` lê as versões só quando a fonte do histórico não responde. O Notion não garante guardar as versões, então diga até onde chegam.
+"Leitura do histórico de versões da página": "perguntar"
+"Banco de variações": ""
 "Banco de produtos": "Produtos"
 "Banco do histórico de preços": "Histórico de preços"
-"Propriedades do histórico de preços": "Produto, Canal, Motivo, Quem decidiu, Preço anterior, Preço novo, Vigência, Custo na data, Preço de comparação"
+"Propriedades do histórico de preços": "Produto, Variação, Canal, Motivo, Quem decidiu, Preço anterior, Preço novo, Vigência, Custo na data, Preço de comparação"
 "Registro de mudança de preço no Shopify": "metaobjeto de mudança de preço do produto"
 # Vazios: sem valor, pergunte à pessoa e não escolha.
 "Destino do preço de um ponto de venda": ""
@@ -54,9 +55,16 @@ flowchart LR
 
 Antes de perguntar um preço anterior ou a data da mudança, leia a fonte do histórico, conforme `Fonte do histórico de preços`.
 
-O que for anterior às linhas dessa fonte, leia no histórico de versões da página do produto, com `Ler o histórico de versões da página` em `sim`. O Notion não garante guardá-lo, então diga até onde ele chega.
+O que for anterior às linhas dessa fonte pode estar no histórico de versões da página, conforme `Leitura do histórico de versões da página`:
 
-Pergunte só o que nenhuma das duas responde e diga qual fonte consultou.
+- `sempre`: leia a fonte e as versões da página.
+- `automático`: leia as versões só quando a fonte não responde.
+- `perguntar`: quando a fonte não responde, pergunte se lê as versões e espere.
+- `nunca`: não leia as versões.
+
+Leia as versões da página do produto e, se o preço varia por variação, as da variação pedida. `Banco de variações` vazio: pergunte onde estão as variações. Não leia as da unidade.
+
+O Notion não garante guardar as versões, então diga até onde chegam. Pergunte só o que nada respondeu e diga qual fonte consultou.
 
 ### Passo 3
 
@@ -66,7 +74,7 @@ Nunca edite nem apague uma linha antiga: a correção vai numa linha nova.
 
 Campos da linha, nas propriedades de `Propriedades do histórico de preços`:
 
-- o produto e o canal, varejo ou atacado;
+- o produto, a variação quando o preço varia por ela, e o canal, varejo ou atacado;
 - o motivo, obrigatório, e quem decidiu, obrigatório;
 - o preço anterior e o novo;
 - a vigência, a partir de que data;
@@ -108,7 +116,7 @@ Se você mudar o preço de todos os produtos com o nome citado, os que não esta
 Se você perguntar o preço anterior sem ler a fonte do histórico, a pessoa repete o que o registro já guarda.
 
 1. Leia a fonte do histórico de preços.
-2. Para o que vem antes dela, leia as versões da página.
+2. Para o que vem antes dela, siga `Leitura do histórico de versões da página`.
 3. Responda com o que achou e diga qual fonte consultou.
 4. Pergunte só o que nenhuma responde.
 
@@ -147,7 +155,7 @@ Perguntei o motivo e quem decidiu. Acrescentei uma linha com o canal, os preços
 
 - O nome do produto parece o grupo inteiro. Quem define o grupo é o estoque do local.
 - O preço dito no local parece valer para todos os produtos daquele tipo. Vale só para os que estavam lá e ainda tinham estoque.
-- A página do produto parece só ter o preço de hoje. As versões dela guardam preços antigos que o banco do histórico ainda não tem.
+- A página do produto parece só ter o preço de hoje. As versões do produto e da variação guardam preços antigos que o banco do histórico ainda não tem.
 - O custo na data parece recalculável. Ele é o custo copiado no dia da mudança.
 
 ## Scripts disponíveis

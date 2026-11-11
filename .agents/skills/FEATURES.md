@@ -906,7 +906,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Description**: Record, change, or check the price of products, reading the price history from a configured source before asking
 - **Properties**:
   - Lives at `.agents/skills/definir-preco-de-produto/SKILL.md`
-  - Reads the price history from the source set by the price history source parameter (Notion database by default, Shopify, or both) and falls back to the page version history for prices older than that source, while the parameter allows it
+  - Reads the price history from the source set by the price history source parameter (Notion database by default, Shopify, or both) and falls back to the page version history for prices older than that source, following the version history reading mode (always, never, ask, or automatic when the source has no answer), for the product and its variation but not its unit
   - Says which source it consulted and asks only what the source does not answer
   - Adds a new row for each catalog price change with product, channel, reason, who decided, previous and new price, effective date, cost on the date, and comparison price
   - Never edits or deletes an old history row: a correction goes in a new row
