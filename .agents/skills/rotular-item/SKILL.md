@@ -3,7 +3,7 @@ name: rotular-item
 description: Aplica, troca e tira rótulos, etiquetas e tags de organização num item, como pull request, issue, e-mail, conversa ou página, pela escolha da habilidade de origem, sem duplicar rótulo nem mexer no de uma ferramenta. Usada quando outra habilidade rotula um item, lê ou responde uma conversa, ou o estado do item muda. Não serve para decidir o assunto do item, hashtags nem categorias de conteúdo.
 metadata:
   author: jimmyandrade
-  version: "0.4.1"
+  version: "0.4.2"
   related:
     - criar-pull-request
     - definir-filtro-de-email
@@ -21,8 +21,8 @@ metadata:
 Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. A habilidade de origem pode passar o próprio valor de cada chave, e ele vale mais.
 
 ```yaml
-# `Criar rótulo que falta`: `sim` cria o rótulo escolhido que o sistema ainda não tem. `não` diz que ele falta e não aplica outro no lugar. Um rótulo de estado que a habilidade de origem exige é criado nos dois casos.
-"Criar rótulo que falta": "não"
+# `Criar rótulo que falta`: `sim` cria o rótulo escolhido que o sistema ainda não tem e o aplica na mesma rodada, sem perguntar. `não` diz que ele falta e não aplica outro no lugar. Um rótulo de estado que a habilidade de origem exige é criado nos dois casos.
+"Criar rótulo que falta": "sim"
 # `Etiquetas de status` e `Etiquetas de contexto` valem para toda habilidade que rotula conversa, no e-mail e no WhatsApp. O projeto define cada uma uma vez só, na entrada `Global`.
 # `Etiquetas de status`: o rótulo de cada estado de uma conversa. Vazio, a conversa fica sem rótulo de estado.
 "Etiquetas de status":
@@ -53,7 +53,12 @@ flowchart LR
   E -->|o assunto acabou| C[Concluída]
 ```
 
-O contexto é a escolha da habilidade de origem entre `Etiquetas de contexto`. Sem um que sirva, aplique só o estado e diga o contexto que falta, como proposta para o parâmetro. Use só rótulos desses dois parâmetros e não invente outro. Uma conversa que já tem os rótulos certos fica como está. Trocar o estado tira só o rótulo de estado anterior: os rótulos de contexto e os de outra estrutura, como a BASB do e-mail, ficam. Sem `Etiquetas de status` nas instruções do projeto, ou sem uma ferramenta que rotule o canal na sessão, diga quais conversas ficaram sem rótulo e por quê.
+O contexto é a escolha da habilidade de origem, de preferência entre `Etiquetas de contexto`.
+Quando nenhum deles serve, ou o rótulo que ela passou não existe, a escolha é o assunto da conversa pelo esquema BASB de `organizar-emails`: um fornecedor, uma ferramenta ou um serviço que a pessoa usa é `Recursos/<nome>`.
+O rótulo que falta entra pelo Passo 3: é criado e aplicado na mesma rodada, sem perguntar e sem deixar a conversa só com o estado.
+A resposta diz o rótulo criado e propõe acrescentá-lo a `Etiquetas de contexto`.
+
+Uma conversa que já tem os rótulos certos fica como está. Trocar o estado tira só o rótulo de estado anterior: os rótulos de contexto e os de outra estrutura, como a BASB do e-mail, ficam. Sem `Etiquetas de status` nas instruções do projeto, ou sem uma ferramenta que rotule o canal na sessão, diga quais conversas ficaram sem rótulo e por quê.
 
 ### Passo 2
 
@@ -67,6 +72,7 @@ No WhatsApp Business, o rótulo é uma lista, aplicada à conversa e, quando o W
 
 Rótulo de estado que a lista de origem exige e o sistema não tem: crie-o, com a descrição do estado.
 Outro rótulo que falta só é criado com `Criar rótulo que falta` em `sim`. Com `não`, diga na resposta que ele falta e não aplique outro no lugar.
+Com `sim`, a falta do rótulo nunca trava a conversa, nem quando a caixa não tem nenhum rótulo de usuário: crie o rótulo, com as raízes do caminho que ele precisa, e aplique.
 Quando a habilidade de origem exige esse rótulo para criar o item, como o rótulo do tipo de um pull request, o item não é criado sem ele, nem a pedido.
 Diga qual rótulo falta e proponha criá-lo e ligá-lo à regra que rotula sozinha, quando o sistema tem uma, como um script que rotula pelo título.
 Crie o item só depois que o rótulo existir.
@@ -122,6 +128,14 @@ Se você ler ou responder uma conversa e terminar sem rotular, ela some do filtr
 2. Aplique o estado de `Etiquetas de status` e o contexto de `Etiquetas de contexto`.
 3. Leia a conversa de volta e diga os rótulos na resposta.
 
+### Contexto que falta trava a conversa
+
+Se você aplicar só o estado porque nenhum contexto de `Etiquetas de contexto` serve, a conversa fica fora da estrutura e a pessoa precisa pedir o rótulo.
+
+1. Escolha o assunto pelo esquema BASB de `organizar-emails`, como `Recursos/<nome>` para um fornecedor.
+2. Crie o rótulo que falta e aplique na mesma rodada, sem perguntar.
+3. Diga na resposta o rótulo criado e proponha acrescentá-lo a `Etiquetas de contexto`.
+
 ### Item aberto sem rótulo
 
 Se você criar o item e só depois escolher o rótulo, ele fica um tempo sem rótulo, e quem filtra não o vê.
@@ -149,6 +163,10 @@ Tirei `blocked` do PR e mantive `enhancement`. A leitura de volta mostrou só `e
 
 `organizar-emails` mudou o estado da conta. Troquei `Áreas/Finanças/A pagar` por `Áreas/Finanças/Pago` na mesma conversa, e a conversa ficou só com a etiqueta nova.
 
+### A fornecedora de uma máquina confirma por e-mail a devolução, e a caixa não tem rótulo dela
+
+`organizar-emails` passou o assunto como recurso, pelo esquema BASB. Criei `Recursos/<nome da fornecedora>` e o rótulo de estado de concluída, que também faltava, e apliquei os dois na mesma rodada. A resposta disse o que criei e propôs acrescentar o rótulo a `Etiquetas de contexto`.
+
 ### Mensagem enviada a um contato no WhatsApp
 
 `conversar-no-whatsapp` enviou a pergunta sobre as datas e passou a conversa com o contato agindo agora e o contexto das feiras. Apliquei a lista de ação esperada e a lista das feiras pelo Adicionar à lista. A leitura de volta mostrou as duas.
@@ -158,10 +176,12 @@ Tirei `blocked` do PR e mantive `enhancement`. A leitura de volta mostrou só `e
 - A habilidade de origem não mandou a escolha: volte para ela. Não escolha pelo assunto do item.
 - O sistema não deixa rotular na criação: crie o item e aplique o rótulo logo em seguida, antes de qualquer outra edição.
 - O rótulo escolhido é de uma ferramenta: não o aplique e diga isso na resposta.
+- A caixa não tem nenhum rótulo de usuário: crie os que a conversa precisa, com as raízes do caminho, e aplique. Não pare para pedir a estrutura.
 - O pedido é uma hashtag ou uma categoria de conteúdo: não entra aqui. A escolha fica com a habilidade de conteúdo e com o tom de voz.
 
 ## Pegadinhas
 
+- `Etiquetas de contexto` curta parece o limite dos assuntos. Ela só lista o que o projeto já escolheu: um assunto novo vira rótulo novo.
 - Um rótulo com outra grafia parece outro rótulo. Se o sentido é o mesmo, ele serve.
 - `Criar rótulo que falta` em `não` parece barrar também o rótulo de estado. O rótulo de estado que a lista de origem exige é criado nos dois casos.
 - Uma seção da descrição que avisa o estado parece bastar. Quem filtra a lista só vê o rótulo.
