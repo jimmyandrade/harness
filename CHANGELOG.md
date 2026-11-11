@@ -1,5 +1,88 @@
 # Changelog
 
+## [1.73.0](https://github.com/jimmyandrade/harness/compare/v1.72.0...v1.73.0) (2026-11-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* the agent tour-manager is now coordenacao-de-viagens.
+
+### Features
+
+* **acompanhar-resposta-no-whatsapp:** follow replies by label so the routine is never edited per contact ([#971](https://github.com/jimmyandrade/harness/issues/971)) ([17a317f](https://github.com/jimmyandrade/harness/commit/17a317f777a164665650dd46928a04047c7c8f72))
+* add definir-hospedagem and rename the tour-manager agent to coordenacao-de-viagens ([#1005](https://github.com/jimmyandrade/harness/issues/1005)) ([ee297ce](https://github.com/jimmyandrade/harness/commit/ee297ce73da9658f6d37d60beab0036e14cada17))
+* add enviar-email to send an e-mail on behalf of a person ([#1008](https://github.com/jimmyandrade/harness/issues/1008)) ([5f0afb7](https://github.com/jimmyandrade/harness/commit/5f0afb72dd9f44790f931b10f54a0cb438e54e72))
+* add usar-whatsapp-web so every skill reuses one tab and one owner session ([#1017](https://github.com/jimmyandrade/harness/issues/1017)) ([5285871](https://github.com/jimmyandrade/harness/commit/5285871f6acb5bdd1a50f0660a639484257fe7a1))
+* add verificar-origem-do-link to check a link's origin without opening it ([#1006](https://github.com/jimmyandrade/harness/issues/1006)) ([5c4ee4e](https://github.com/jimmyandrade/harness/commit/5c4ee4e37220d0e963b32052c43223e8a110431f))
+* **atualizar-branch-do-pull-request:** choose how to handle rebase conflicts ([#948](https://github.com/jimmyandrade/harness/issues/948)) ([fc88d89](https://github.com/jimmyandrade/harness/commit/fc88d89ebe5c6dbc57e17be7d4b2c97c6984ed1c))
+* **check-skill:** fail a new paragraph above the paragraph character limit ([#1011](https://github.com/jimmyandrade/harness/issues/1011)) ([5c210bd](https://github.com/jimmyandrade/harness/commit/5c210bd7eb42410546731cca016675781237576c))
+* **conversar-no-whatsapp:** create a reminder routine when WhatsApp Web is not connected ([#983](https://github.com/jimmyandrade/harness/issues/983)) ([203ba00](https://github.com/jimmyandrade/harness/commit/203ba009325d605199d0f7f2691df1248e3fe0fd))
+* **conversar-no-whatsapp:** label a conversation right after reading it, before the summary ([#986](https://github.com/jimmyandrade/harness/issues/986)) ([133d1e7](https://github.com/jimmyandrade/harness/commit/133d1e763468aeb2d3910bb714e2fd1d1210266d))
+* **conversar-no-whatsapp:** send the payment receipt by e-mail and WhatsApp, as a photo, with a heads-up to who is only kept in the loop ([#987](https://github.com/jimmyandrade/harness/issues/987)) ([e67902c](https://github.com/jimmyandrade/harness/commit/e67902c94c67d4216edebbc0ee3dacedf3049e45))
+* **conversar-no-whatsapp:** shape the message, label the conversation and send the receipt by e-mail ([#966](https://github.com/jimmyandrade/harness/issues/966)) ([03ad1b1](https://github.com/jimmyandrade/harness/commit/03ad1b18228e5e8babeca843ab21193b801c795e))
+* **convidar-para-evento:** invite a person or a group to an event from the agenda event ([#970](https://github.com/jimmyandrade/harness/issues/970)) ([f614030](https://github.com/jimmyandrade/harness/commit/f614030caf9dd03719be9ea5cb38cc0748db6ef7))
+* create the routine that watches the replies without asking ([#1013](https://github.com/jimmyandrade/harness/issues/1013)) ([4561b51](https://github.com/jimmyandrade/harness/commit/4561b51e0afb5663bdb9716c0c4678d19ecbc633))
+* **definir-agenda:** keep the counterpart's phone on a phone-call event ([#945](https://github.com/jimmyandrade/harness/issues/945)) ([6017689](https://github.com/jimmyandrade/harness/commit/6017689e253f612816d37365dd8a211b3855805d))
+* **definir-codigo-fiscal:** add AI validation, checked against a stable official source ([#1000](https://github.com/jimmyandrade/harness/issues/1000)) ([fd6cfbb](https://github.com/jimmyandrade/harness/commit/fd6cfbb796a6c59c3c77debb5f7695eecf9b6d5b))
+* **definir-codigo-fiscal:** add the NCM tax code skill ([#997](https://github.com/jimmyandrade/harness/issues/997)) ([d4c0e90](https://github.com/jimmyandrade/harness/commit/d4c0e905374c6f46a612b9b3ad1364465519fa52))
+* **definir-codigo-fiscal:** ask the classification traits when a variant is registered ([#1001](https://github.com/jimmyandrade/harness/issues/1001)) ([197a42f](https://github.com/jimmyandrade/harness/commit/197a42fdc441db26a7972f0f304cf7d7c101e66e))
+* **definir-orcamento-de-fornecedor:** read the WhatsApp Web PDF by screenshot and look for an unavailable one where the team forwards it ([#1016](https://github.com/jimmyandrade/harness/issues/1016)) ([1591cdf](https://github.com/jimmyandrade/harness/commit/1591cdf075db40200d9451559028ac4ba65570f0))
+* **definir-orcamento-de-fornecedor:** read, check and record the quote a supplier sends ([#1015](https://github.com/jimmyandrade/harness/issues/1015)) ([6657d70](https://github.com/jimmyandrade/harness/commit/6657d7033e8c2e701b661e38a4e5f0259b314807))
+* **definir-pessoa:** record the role of a person in a company without asking ([#984](https://github.com/jimmyandrade/harness/issues/984)) ([2755808](https://github.com/jimmyandrade/harness/commit/275580858670d254ef8bc695705347297dbd8f73))
+* **definir-viagem:** read the lodging booking before asking the person ([#998](https://github.com/jimmyandrade/harness/issues/998)) ([414ab28](https://github.com/jimmyandrade/harness/commit/414ab28d41097b2215559e93fd261380b31b4e4a))
+* **enviar-email:** repeat the draft link in every request to send ([#1012](https://github.com/jimmyandrade/harness/issues/1012)) ([a76d808](https://github.com/jimmyandrade/harness/commit/a76d80898bf9b1b948575933c8cac69dc9e412bd))
+* **enviar-imagem-no-whatsapp:** send images as photos, never as stickers, from a skill of its own ([#974](https://github.com/jimmyandrade/harness/issues/974)) ([4797fe0](https://github.com/jimmyandrade/harness/commit/4797fe006822c8729660e7cee03e34d717361fd0))
+* follow every pending reply with one routine and delegate to the waiting session ([#1014](https://github.com/jimmyandrade/harness/issues/1014)) ([47f4e9c](https://github.com/jimmyandrade/harness/commit/47f4e9c5f92dbbf6468b93f8bd275412ee238a68))
+* **garantir-ingresso:** put the activity on the calendar after the order ([#944](https://github.com/jimmyandrade/harness/issues/944)) ([2e9a3ba](https://github.com/jimmyandrade/harness/commit/2e9a3ba1054411826979902f0e036950b7bff215))
+* label every email or WhatsApp conversation a skill reads or replies to ([#950](https://github.com/jimmyandrade/harness/issues/950)) ([19a225f](https://github.com/jimmyandrade/harness/commit/19a225f3f8f9f7c9079a5af95f75a60b7f97be26))
+* **organizar-emails:** label the e-mail the agent sends, on the thread, after sending ([#988](https://github.com/jimmyandrade/harness/issues/988)) ([bd499fe](https://github.com/jimmyandrade/harness/commit/bd499fe5518b84ea40f18b0f059425a2bd8493a6))
+* **organizar-ponto-de-contato:** check the material the company sends to the organizer for validation ([#980](https://github.com/jimmyandrade/harness/issues/980)) ([968d494](https://github.com/jimmyandrade/harness/commit/968d494f208300aa035d724ef6c0aea7a4c16fc2))
+* **pedir-revisao-de-pr-no-slack:** schedule the request outside working hours ([#1003](https://github.com/jimmyandrade/harness/issues/1003)) ([2a33c9e](https://github.com/jimmyandrade/harness/commit/2a33c9ee35e03955ebf24664edc37368ebd9bbaf))
+* **preparar-tarefa-do-pull-request:** check a task's title and description when commenting a meeting record on it ([#985](https://github.com/jimmyandrade/harness/issues/985)) ([9d7678f](https://github.com/jimmyandrade/harness/commit/9d7678fd71ff34666680b0e6db5d60efa18d8830))
+* **preparar-tarefa-do-pull-request:** update an existing card after a meeting without losing information ([#959](https://github.com/jimmyandrade/harness/issues/959)) ([5a08cde](https://github.com/jimmyandrade/harness/commit/5a08cded91a6eaedd9132b2a285a891833d8c71f))
+* **procurar-inscricao:** check the contact points of the event before answering ([#968](https://github.com/jimmyandrade/harness/issues/968)) ([430863f](https://github.com/jimmyandrade/harness/commit/430863fb6c83b741c4caf89796b6055ca59938eb))
+* **procurar-inscricao:** look for the confirmation date in e-mail and WhatsApp ([#973](https://github.com/jimmyandrade/harness/issues/973)) ([3756bd2](https://github.com/jimmyandrade/harness/commit/3756bd2ba589ba38c389e8816cd496b85726777d))
+* **redigir-com-tom-de-voz:** state only what was verified and ask the owner ([#978](https://github.com/jimmyandrade/harness/issues/978)) ([c3f5b27](https://github.com/jimmyandrade/harness/commit/c3f5b27e1ddf764adf2a2ac24aeb9283aadd06ec))
+* save every payment receipt in Notion before sending it by e-mail ([#1007](https://github.com/jimmyandrade/harness/issues/1007)) ([e6d85b4](https://github.com/jimmyandrade/harness/commit/e6d85b49dd07960ab24174113b000b76b5b02c9f))
+* **transcrever-audio-e-video:** transcribe a local recording with the local Whisper ([#981](https://github.com/jimmyandrade/harness/issues/981)) ([724eb7c](https://github.com/jimmyandrade/harness/commit/724eb7cac4d9b83a7193ccea59bfcef57c2ba09b))
+
+
+### Bug Fixes
+
+* **acompanhar-resposta-no-whatsapp:** compare times when the chat was already read ([#977](https://github.com/jimmyandrade/harness/issues/977)) ([d4cc6c4](https://github.com/jimmyandrade/harness/commit/d4cc6c4cd5a778de8bbaf37ce9a4f4b99ce7f907))
+* ask which space holds a missing object and list the visible ones ([#994](https://github.com/jimmyandrade/harness/issues/994)) ([a68dc94](https://github.com/jimmyandrade/harness/commit/a68dc94fa0014bdeadb3f268ee7c29913cdd81e3))
+* confirm the period and the cycle before saving a goal or a measurement ([#963](https://github.com/jimmyandrade/harness/issues/963)) ([7711e50](https://github.com/jimmyandrade/harness/commit/7711e50fe3cf6146010df3807ef6c8a03d4cd7bf))
+* **conversar-no-whatsapp:** always show the widget with each text in full when the session has the tool ([#967](https://github.com/jimmyandrade/harness/issues/967)) ([1d173c3](https://github.com/jimmyandrade/harness/commit/1d173c3e18d27c4642fffaea8771020ab07ea785))
+* **conversar-no-whatsapp:** check each draft question against the whole conversation before asking the contact ([#972](https://github.com/jimmyandrade/harness/issues/972)) ([92b9492](https://github.com/jimmyandrade/harness/commit/92b9492e440995ee945fc07574ec51a0c500d77f))
+* **conversar-no-whatsapp:** keep one WhatsApp Web tab for the whole task and check the chat name before reading or sending ([#990](https://github.com/jimmyandrade/harness/issues/990)) ([5878828](https://github.com/jimmyandrade/harness/commit/58788284738a4999017c0df7ba29f11d5b4d48b8))
+* **conversar-no-whatsapp:** open WhatsApp Web in Chrome through the extension, never in the in-app browser ([#964](https://github.com/jimmyandrade/harness/issues/964)) ([3c332a6](https://github.com/jimmyandrade/harness/commit/3c332a6b69e3b37bb8f0167ee98b62d8a43c25d0))
+* **definir-agenda:** apply the voice skill to the title and description of any event with guests ([#960](https://github.com/jimmyandrade/harness/issues/960)) ([0886883](https://github.com/jimmyandrade/harness/commit/08868838edd8fd77daef604f546b955cfbd8852d))
+* **definir-codigo-fiscal:** ask the garment construction together with the fiber ([#999](https://github.com/jimmyandrade/harness/issues/999)) ([70299d8](https://github.com/jimmyandrade/harness/commit/70299d8cb56eb7624cdfd8a8dd5c9d6af7bc4f8b))
+* **definir-conta-bancaria:** keep a CPF to CNPJ conversion on the same account ([#957](https://github.com/jimmyandrade/harness/issues/957)) ([debc4d8](https://github.com/jimmyandrade/harness/commit/debc4d80735eb87e3a91dd8e010eeffc055b2ebf))
+* **definir-inscricao:** read the page back after writing it ([#969](https://github.com/jimmyandrade/harness/issues/969)) ([1b573e0](https://github.com/jimmyandrade/harness/commit/1b573e094d185dc92ecf5b361342f3dec161b99f))
+* **definir-orcamento-de-fornecedor:** open WhatsApp Web through usar-whatsapp-web and its owner session ([#1018](https://github.com/jimmyandrade/harness/issues/1018)) ([baffcf9](https://github.com/jimmyandrade/harness/commit/baffcf990295944f40160d5f461ae5644b6d4cda))
+* **definir-pessoa:** store wrong name transcriptions as variants and read the WhatsApp phone when registering ([#979](https://github.com/jimmyandrade/harness/issues/979)) ([4d6c510](https://github.com/jimmyandrade/harness/commit/4d6c510aba4792286db8311468f9823b39243c3a))
+* **definir-registro-de-reuniao:** search a cited card by its ID before saying there is none ([#958](https://github.com/jimmyandrade/harness/issues/958)) ([38fa98f](https://github.com/jimmyandrade/harness/commit/38fa98fffbf188572bb7b513e8fcf82f392abf9a))
+* **definir-rotina:** warn that a cron with day and month runs again next year ([#962](https://github.com/jimmyandrade/harness/issues/962)) ([19f82f3](https://github.com/jimmyandrade/harness/commit/19f82f3d2be4ca6bf3e350aa37cf4e16adb6c118))
+* **definir-vocabulario:** ask the scope when the person refuses only a fragment ([#976](https://github.com/jimmyandrade/harness/issues/976)) ([b2cd3e5](https://github.com/jimmyandrade/harness/commit/b2cd3e55fb9e3c43ee3667ea5025823c3266ca14))
+* **deps:** update dependency @notionhq/client to v5.31.1 ([#947](https://github.com/jimmyandrade/harness/issues/947)) ([2cf3b87](https://github.com/jimmyandrade/harness/commit/2cf3b874784388b1a7e122a11e832a12d4148ef6))
+* **evoluir-habilidade:** check the pull request state before adding a lesson to its branch ([#995](https://github.com/jimmyandrade/harness/issues/995)) ([df2ac4d](https://github.com/jimmyandrade/harness/commit/df2ac4db81b65b14eab9f22fc2d915162368f669))
+* **evoluir-habilidade:** keep business facts out of skills and one theme per paragraph ([#1010](https://github.com/jimmyandrade/harness/issues/1010)) ([22008cf](https://github.com/jimmyandrade/harness/commit/22008cf58dda880333e3368353970eeef973a6c7))
+* **lancar-despesa-da-empresa:** attach the receipt after creating the page when the tool refuses the file ([#975](https://github.com/jimmyandrade/harness/issues/975)) ([a0bb919](https://github.com/jimmyandrade/harness/commit/a0bb919a90ae7992fa5b5c5724fe5af5a626ddf6))
+* **lancar-despesa-da-empresa:** record the real payer and keep evidence values apart ([#956](https://github.com/jimmyandrade/harness/issues/956)) ([d295417](https://github.com/jimmyandrade/harness/commit/d295417045a0a1723386c4ff452fb200d288e614))
+* list what to try before blaming a lack of access ([#993](https://github.com/jimmyandrade/harness/issues/993)) ([2b57961](https://github.com/jimmyandrade/harness/commit/2b57961b36023e5f10349293e9b6a09978f1146c))
+* look up a business fact in the connected sources before asking ([#1002](https://github.com/jimmyandrade/harness/issues/1002)) ([c938023](https://github.com/jimmyandrade/harness/commit/c938023f4f4c3f47a9ea6079b0c73a3cb867040a))
+* **mesclar-pull-request:** read the sync state and triggers before waiting ([#996](https://github.com/jimmyandrade/harness/issues/996)) ([e0ba43e](https://github.com/jimmyandrade/harness/commit/e0ba43e72f9ece148b6d7a19d743757e9f74fa14))
+* **organizar-emails:** the connector labels the sent thread, only the draft is denied ([#989](https://github.com/jimmyandrade/harness/issues/989)) ([9b80072](https://github.com/jimmyandrade/harness/commit/9b8007294f98d691ebe82cdd791008db7b5fe851))
+* **publicar-resposta-de-revisao:** read the person's language preference first ([#1004](https://github.com/jimmyandrade/harness/issues/1004)) ([a50c1fa](https://github.com/jimmyandrade/harness/commit/a50c1faf2c7aa445ca7f9a4a4c481bffdb0ab5d1))
+* **publicar-revisao-de-codigo:** say in the review body that an earlier approval came first ([#991](https://github.com/jimmyandrade/harness/issues/991)) ([3664d20](https://github.com/jimmyandrade/harness/commit/3664d20b2c99a3f29313978eced1179921dfaae2))
+* **reconhecer-imagem:** route a purchase confirmation to the expense skill by name ([#953](https://github.com/jimmyandrade/harness/issues/953)) ([96f327a](https://github.com/jimmyandrade/harness/commit/96f327a3e7845d46179bae3f0bab2add8f28141a))
+
+
+### Miscellaneous Chores
+
+* release 1.73.0 ([#1019](https://github.com/jimmyandrade/harness/issues/1019)) ([8f741bd](https://github.com/jimmyandrade/harness/commit/8f741bd2d1093373005463750f78d73a402256e7))
+
 ## [1.72.0](https://github.com/jimmyandrade/harness/compare/v1.71.0...v1.72.0) (2026-11-08)
 
 
