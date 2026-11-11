@@ -3,9 +3,10 @@ name: enviar-email
 description: Monta e envia um e-mail em nome de uma pessoa, com a assinatura certa, o destinatário principal e as cópias, o anexo vindo do Notion e o envio só com o sim. Usada quando uma pessoa contata uma organização por e-mail, inclusive com comprovante. Não serve para escrever no tom da marca, achar um e-mail nem triar a caixa.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   related:
     - definir-pessoa
+    - definir-vocabulario
     - evoluir-habilidade
     - lancar-despesa-da-empresa
     - lancar-despesa-pessoal
@@ -53,9 +54,14 @@ O conector de e-mail aceita anexo só com o conteúdo em base64 dentro da chamad
 
 ### Passo 5
 
-O texto passa por `redigir-com-tom-de-voz`. Mostre o rascunho inteiro, com o remetente, o Para, as cópias, o assunto, o anexo e a assinatura, e pergunte se pode enviar. O sim vale para esse texto e esses destinatários. Depois do envio, leia a conversa para confirmar que saiu, etiquete como `organizar-emails` manda e, se a mensagem espera resposta, anote quando conferir.
+Aproveite o e-mail para tratar todos os pontos de uma vez, em vez de mandar um e outro depois: o que a pessoa envia, o que pede e o que ainda não sabe, como valores a cotar. Quando o assunto é uma viagem, diga a ida e a volta, com os dias, para a organização saber o período inteiro e, se for o caso, cotar a extensão do serviço.
+Uma data limite ou um prazo vira urgência, e não limite: "preciso do serviço ativo o quanto antes, de preferência antes de sábado", e não "preciso do serviço ativo até sábado", que parece dizer que a necessidade acaba no sábado. O `definir-vocabulario` guarda cada correção dessas.
 
 ### Passo 6
+
+O texto passa por `redigir-com-tom-de-voz`. Mostre o rascunho inteiro, com o remetente, o Para, as cópias, o assunto, o anexo e a assinatura, e pergunte se pode enviar. O sim vale para esse texto e esses destinatários. Depois do envio, leia a conversa para confirmar que saiu, etiquete como `organizar-emails` manda e, se a mensagem espera resposta, anote quando conferir.
+
+### Passo 7
 
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
