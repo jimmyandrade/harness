@@ -3,9 +3,10 @@ name: publicar-resposta-de-revisao
 description: Publica a resposta a uma revisão recebida, de pessoa ou de bot, de preferência num comentário inline. Marca o login e, com a leitura antes de publicar desligada, publica sem pedir confirmação. NÃO serve para aplicar a sugestão no código nem para revisar o PR de outra pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.4.0"
   related:
     - atender-revisao-de-pull-request
+    - definir-pessoa
     - escrever-link
     - publicar-revisao-de-codigo
 ---
@@ -41,11 +42,11 @@ A resposta a ele sai no `Idioma da resposta a bot` e é publicada sem esperar qu
 
 ### Passo 1
 
-Escreva a resposta no idioma de `Idioma da resposta à revisão`.
+Antes de escolher o idioma, leia a preferência da pessoa a quem você responde no registro dela, com `definir-pessoa`. Ela vale mais que `Idioma da resposta à revisão` e que qualquer lembrança. Um idioma só, sem tradução, é o que a resposta usa: sem bloco recolhido, sem frase sobre o idioma, e nunca diga de onde veio a preferência. O comentário geral do PR segue a mesma preferência. Sem preferência no registro, escreva no idioma de `Idioma da resposta à revisão`.
 A resposta preferida é um comentário inline no trecho do diff que a decisão muda, mesmo quando quem revisou só escreveu no corpo da revisão.
 Sem thread, abra uma revisão sua com esse comentário na linha.
 A conversa do PR fica para o que não tem linha no diff.
-Com esse parâmetro em `o idioma do comentário` ou em `o de quem revisou`, a resposta sai no idioma do comentário.
+Sem preferência no registro e com esse parâmetro em `o idioma do comentário` ou em `o de quem revisou`, a resposta sai no idioma do comentário.
 A resposta diz o que mudou.
 Quando o texto mudou, ela mostra as linhas alteradas num bloco, com o que saiu e o que entrou.
 Ela cita o commit pelo SHA curto linkado, como `[`abc1234`](URL do commit)`, ou diz por que não muda. Toda thread tratada fica com uma resposta registrada, inclusive a de bot e a decidida fora do PR. Comentário desatualizado ganha a explicação do que mudou desde então. Discordância e fora de escopo viram pergunta, nunca veredito. A resposta a outra pessoa abre com o login do GitHub dela em `@login`, trata do ponto que ela escreveu, retoma a ideia dela e diz o que mudou, e nunca é uma fórmula colada. Quem mais entra no ponto também leva `@login`. O primeiro nome sozinho não marca a pessoa. Bot não leva `@`. Self review não marca quem está respondendo. Com `Rótulo de prioridade no texto` em `não`, o nome da categoria nunca aparece.
@@ -171,7 +172,7 @@ A revisão só tinha corpo. A resposta saiu num comentário inline na linha que 
 
 - Uma pessoa pergunta algo que só ela pode decidir: pergunte e não resolva.
 - Quem revisou só no corpo da revisão, ou o comentário está na conversa e não tem thread: a resposta preferida é um comentário inline no trecho que a decisão muda, numa revisão sua. A conversa fica para o que não tem linha no diff, e esse comentário não se resolve.
-- O comentário é self review da pessoa que pediu o atendimento: responda na hora, com as linhas alteradas e o commit, no idioma de `Idioma da resposta à revisão`. Não espere o sim de `Ler o texto antes de publicar`.
+- O comentário é self review da pessoa que pediu o atendimento: responda na hora, com as linhas alteradas e o commit, no idioma que o Passo 1 define. Não espere o sim de `Ler o texto antes de publicar`.
 - `Ler o texto antes de publicar` em `não`: a resposta a outra pessoa e o ajuste pedido depois saem na hora. Devolva o link.
 
 ## Pegadinhas
@@ -187,6 +188,7 @@ A revisão só tinha corpo. A resposta saiu num comentário inline na linha que 
 - Resposta com apóstrofo quebra `-f body='...'` no shell. Grave a resposta num arquivo e envie com `-F body=@<arquivo>`.
 - `Ler o texto antes de publicar` em `não` parece ainda pedir o sim. Publique e devolva o link. Um ajuste pedido depois também sai na hora.
 - A página aberta parece mostrar que a resposta continua no idioma antigo. O texto que vale é o gravado na thread. Diga a primeira frase dele.
+- Uma lembrança de conversa anterior parece a preferência de idioma da pessoa. Só o registro dela vale, e ele pode mandar um idioma só, sem tradução.
 - Citar um PR só pelo número é erro. Escreva o link como manda `escrever-link`.
 
 ## Scripts disponíveis

@@ -655,6 +655,7 @@ flowchart LR
   procurar_variacao_de_termo --> definir_vocabulario
   procurar_variacao_de_termo --> evoluir_habilidade
   publicar_resposta_de_revisao --> atender_revisao_de_pull_request
+  publicar_resposta_de_revisao --> definir_pessoa
   publicar_resposta_de_revisao --> escrever_link
   publicar_resposta_de_revisao --> publicar_revisao_de_codigo
   publicar_revisao_de_codigo --> definir_pessoa
