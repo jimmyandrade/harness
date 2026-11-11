@@ -80,6 +80,7 @@ flowchart LR
     definir_vocabulario["definir-vocabulario"]
     descrever_habilidade_ou_schema["descrever-habilidade-ou-schema"]
     emitir_documento_oficial["emitir-documento-oficial"]
+    enviar_email["enviar-email"]
     enviar_imagem_no_whatsapp["enviar-imagem-no-whatsapp"]
     enviar_mensagem_no_slack["enviar-mensagem-no-slack"]
     escrever_codigo["escrever-codigo"]
@@ -451,6 +452,13 @@ flowchart LR
   descrever_habilidade_ou_schema --> revisar_habilidade
   descrever_habilidade_ou_schema --> testar_habilidade
   emitir_documento_oficial --> evoluir_habilidade
+  enviar_email --> definir_pessoa
+  enviar_email --> evoluir_habilidade
+  enviar_email --> lancar_despesa_da_empresa
+  enviar_email --> lancar_despesa_pessoal
+  enviar_email --> organizar_emails
+  enviar_email --> procurar_email
+  enviar_email --> redigir_com_tom_de_voz
   enviar_imagem_no_whatsapp --> conversar_no_whatsapp
   enviar_imagem_no_whatsapp --> evoluir_habilidade
   enviar_imagem_no_whatsapp --> redigir_com_tom_de_voz
