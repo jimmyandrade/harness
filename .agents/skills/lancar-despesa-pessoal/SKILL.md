@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.5.1"
   related:
     - definir-obrigacao-financeira
     - lancar-despesa-da-empresa
@@ -66,7 +66,15 @@ flowchart LR
 ```
 
 Grave o nome curto, o valor original, o vencimento e, quando houver, a parcela no formato número/total e a obrigação de origem. Fatura em aberto não tem data de pagamento. Pagamento só entra com comprovante: data, valor pago, e juros ou multa como a diferença entre o pago e o original. Recibo do pagador num boleto não é comprovante. Quando outra pessoa paga, registre quem pagou, separado de quem deve. Não invente valor, data nem parcela. O histórico fica nos comentários, não no corpo.
-O arquivo do comprovante fica na propriedade de arquivos da despesa, e a despesa é a fonte dele. Não deixe o comprovante só no chat nem num arquivo temporário. Todo comprovante fica no Notion antes de ir por e-mail ou mensagem: primeiro grave, depois envie. A lista sem essa propriedade é limitação do banco: diga isso e recomende uma propriedade de arquivos. A propriedade só é criada com a autorização da pessoa, e ela passa a ser regra da lista. Para anexar o comprovante a uma mensagem ou a um e-mail, use o arquivo da despesa.
+O arquivo do comprovante fica na propriedade de arquivos da despesa, e a despesa é a fonte dele.
+Não deixe o comprovante só no chat nem num arquivo temporário.
+
+Todo comprovante fica no Notion antes de ir por e-mail ou mensagem: primeiro grave, depois envie.
+
+A lista sem essa propriedade é limitação do banco: diga isso e recomende uma propriedade de arquivos.
+A propriedade só é criada com a autorização da pessoa, e ela passa a ser regra da lista.
+
+Para anexar o comprovante a uma mensagem ou a um e-mail, use o arquivo da despesa.
 
 ### Passo 4
 
