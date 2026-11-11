@@ -45,6 +45,20 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [ ] Three cases validated with the person
 
+### acompanhar-producao-de-produto
+- **Stability**: experimental
+- **Description**: Track what a product needs to produce and what was cut or produced, by unit and size
+- **Properties**:
+  - Lives at `.agents/skills/acompanhar-producao-de-produto/SKILL.md`
+  - Keeps production in the product records, one row per size, and never turns it into a task
+  - Reads the database and property names from the project instructions, declares no default for them, asks once when one is missing, and stops when a database is not in the connected workspace
+  - Confirms the size of every unit, adds only the quantity said, and asks before producing more than planned
+  - Relates the existing mold and base mold, and changes the pilot, label, and production status only when the person says so
+  - Does not write formula properties, create the product, or touch stock unless the project instructions link it
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [ ] Three cases validated with the person
+
 ### acompanhar-veiculo
 - **Stability**: experimental
 - **Description**: See or organize what a car or motorcycle owes or costs, such as tax, insurance, fines, points, tolls, toll tag, installments, or repairs
@@ -786,6 +800,21 @@ How these skills relate is in `README.md`, in this folder.
   - Never writes metric numbers on the page of the measured entity
   - Fills the geographic area only when the data breaks the value down explicitly, one record per area, and never infers it from a profile name or context
   - Leaves the current value of a linked key result to the measurement history, as definir-okr requires
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [ ] The scenarios in `features/` pass in a real measurement
+
+### definir-negociacao
+- **Stability**: experimental
+- **Description**: Record a conversation with a company or a person in the discussion of the right page, and consult the project sources before asking a fact the conversation already answered
+- **Properties**:
+  - Lives at `.agents/skills/definir-negociacao/SKILL.md`
+  - Reads the names of the lists and of the linking properties from the project instructions, and stops when the negotiation list is not in the connected workspace
+  - Keeps a conversation tied to a deal, such as a quote, proposal, partnership or sale, on the negotiation page, and any other conversation on the discussion of the person page, without creating a negotiation
+  - Writes one dated comment per date or block of messages, with the channel and who spoke, and reads the existing comments first so a message is not repeated
+  - Registers the exchange in the same round as the sending, without asking, and says what it registered, with the page link, and what it did not
+  - Checks the comments, the schedule, the registrations, the opportunity pages and the email before asking, and asks only what no source answers
+  - Shows both versions with source and date when two sources disagree, and never picks one
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [ ] The scenarios in `features/` pass in a real measurement

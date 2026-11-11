@@ -14,6 +14,7 @@ flowchart LR
     abrir_vendas_na_tiqueteira["abrir-vendas-na-tiqueteira"]
     acompanhar_edital["acompanhar-edital"]
     acompanhar_fila_de_revisao["acompanhar-fila-de-revisao"]
+    acompanhar_producao_de_produto["acompanhar-producao-de-produto"]
     acompanhar_resposta_no_whatsapp["acompanhar-resposta-no-whatsapp"]
     acompanhar_retornos_pendentes["acompanhar-retornos-pendentes"]
     acompanhar_veiculo["acompanhar-veiculo"]
@@ -62,6 +63,7 @@ flowchart LR
     definir_link_rastreavel["definir-link-rastreavel"]
     definir_lote_de_ingresso["definir-lote-de-ingresso"]
     definir_medicao_de_metrica["definir-medicao-de-metrica"]
+    definir_negociacao["definir-negociacao"]
     definir_obra_musical["definir-obra-musical"]
     definir_obrigacao_financeira["definir-obrigacao-financeira"]
     definir_okr["definir-okr"]
@@ -166,6 +168,10 @@ flowchart LR
   acompanhar_fila_de_revisao --> procurar_pedido_de_revisao
   acompanhar_fila_de_revisao --> publicar_revisao_de_codigo
   acompanhar_fila_de_revisao --> redigir_com_tom_de_voz
+  acompanhar_producao_de_produto --> definir_tarefa
+  acompanhar_producao_de_produto --> evoluir_habilidade
+  acompanhar_producao_de_produto --> gerenciar_estoque
+  acompanhar_producao_de_produto --> identificar_duplicata
   acompanhar_resposta_no_whatsapp --> acompanhar_retornos_pendentes
   acompanhar_resposta_no_whatsapp --> conversar_no_whatsapp
   acompanhar_resposta_no_whatsapp --> definir_rotina
@@ -388,6 +394,12 @@ flowchart LR
   definir_medicao_de_metrica --> evoluir_habilidade
   definir_medicao_de_metrica --> identificar_duplicata
   definir_medicao_de_metrica --> reconhecer_imagem
+  definir_negociacao --> definir_agenda
+  definir_negociacao --> evoluir_habilidade
+  definir_negociacao --> organizar_ponto_de_contato
+  definir_negociacao --> procurar_email
+  definir_negociacao --> redigir_com_tom_de_voz
+  definir_negociacao --> sincronizar_cronograma
   definir_obra_musical --> definir_fonograma
   definir_obra_musical --> evoluir_habilidade
   definir_obrigacao_financeira --> evoluir_habilidade
