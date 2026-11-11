@@ -3,13 +3,14 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.28.1"
+  version: "0.29.0"
   aliases:
     - redigir-mensagem-de-whatsapp
   related:
     - acompanhar-resposta-no-whatsapp
     - comunicar-novidade-do-produto
     - convidar-para-evento
+    - definir-orcamento-de-fornecedor
     - definir-pessoa
     - definir-rotina
     - definir-tarefa
