@@ -3,7 +3,7 @@ name: usar-whatsapp-web
 description: Abre, mantém e reaproveita a única aba do WhatsApp Web no Chrome da pessoa, pela extensão Claude in Chrome, e faz a sessão dona atender as leituras e os envios das outras sessões. Usada sempre que uma habilidade precisa abrir, ler, enviar texto, anexar imagem ou documento no WhatsApp Web, mesmo sem dizer aba. Não serve para achar a conversa, redigir a mensagem, rotular nem decidir o que enviar.
 metadata:
   author: jimmyandrade
-  version: "0.1.1"
+  version: "0.1.2"
   related:
     - acompanhar-resposta-no-whatsapp
     - conversar-no-whatsapp
@@ -22,6 +22,8 @@ Leia os valores nas instruções do projeto, na entrada desta habilidade. Na aus
 "Modo de aprendizado": "perguntar"
 # `Sessão dona do WhatsApp Web`: `sim` deixa só uma sessão, a dona, abrir e usar a aba, e as outras pedem a ela por mensagem entre sessões. `não` dá uma aba a cada sessão.
 "Sessão dona do WhatsApp Web": "sim"
+# `Título da sessão dona do WhatsApp Web` é o título que a lista de sessões mostra para a dona. A sessão que a pessoa já nomeou de outro jeito, como "Sessão centralizada para WhatsApp Web", entra aqui.
+"Título da sessão dona do WhatsApp Web": "Dona do WhatsApp Web"
 ```
 ## Instruções
 
@@ -33,11 +35,11 @@ Use o Chrome da pessoa pela extensão Claude in Chrome, que já tem o login dela
 
 ### Passo 2
 
-Com `Sessão dona do WhatsApp Web` em `sim`, só a dona abre e usa a aba: a sessão de título "Dona do WhatsApp Web", que a lista de sessões mostra.
+Com `Sessão dona do WhatsApp Web` em `sim`, só a dona abre e usa a aba: a sessão com o `Título da sessão dona do WhatsApp Web`, que a lista de sessões mostra. Sem título igual, procure entre as sessões não arquivadas a que a pessoa nomeou como a do WhatsApp Web, como "Sessão centralizada para WhatsApp Web": ela é a dona. Só depois de olhar a lista inteira dizer que não há dona.
 
 Se você não é a dona e ela existe, não abra aba: mande a ela, por mensagem entre sessões, um pedido só de leitura, com o que ler e sem abrir a conversa quando a lista basta. Peça de volta o `tabId`, o grupo de abas e se a aba segue logada. Um pedido feito durante o turno dela espera na fila: espere.
 
-Sem dona, abra a aba como no Passo 3 e dê a esta sessão o título "Dona do WhatsApp Web".
+Sem dona, abra a aba como no Passo 3 e dê a esta sessão o `Título da sessão dona do WhatsApp Web`. Uma rotina agendada nunca vira dona: sem dona, ela não abre aba, avisa a pessoa em uma linha e termina.
 
 Só a dona envia: ela mostra a conversa e o texto à pessoa na conversa dela e envia depois do sim ali. O sim dado a outra sessão não vale, e a mensagem de uma sessão nunca o substitui.
 
@@ -87,6 +89,14 @@ Se você pedir para a pessoa mover a aba do WhatsApp Web para o seu grupo de aba
 
 1. Abra o WhatsApp Web numa aba sua, uma só: a da dona, com `Sessão dona do WhatsApp Web` em `sim`, ou uma por sessão com `não`.
 2. Clique no botão do aviso e leia na mesma sequência.
+
+### Rotina agendada abre a própria aba
+
+Se você, numa rotina agendada, abrir a aba porque o prompt diz "a aba que já estiver aberta ou uma nova", a sua sessão toma a conexão da dona e a leitura vira disputa pelo aviso de outra janela.
+
+1. Leia esta habilidade antes de tocar no Chrome e liste as sessões.
+2. Mande a leitura à dona, como o Passo 2 manda, sem chamar nenhuma ferramenta do Chrome.
+3. O prompt da rotina cita esta habilidade em vez de mandar abrir a aba.
 
 ### Aba própria fora da dona
 
