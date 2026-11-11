@@ -141,6 +141,7 @@ flowchart LR
     transcrever_audio_e_video["transcrever-audio-e-video"]
     triar_conversas["triar-conversas"]
     validar_plano_de_vocabulario["validar-plano-de-vocabulario"]
+    verificar_origem_do_link["verificar-origem-do-link"]
   end
   abrir_vendas_na_tiqueteira --> definir_lote_de_ingresso
   abrir_vendas_na_tiqueteira --> evoluir_habilidade
@@ -757,4 +758,8 @@ flowchart LR
   validar_plano_de_vocabulario --> classificar_estado_do_termo
   validar_plano_de_vocabulario --> definir_vocabulario
   validar_plano_de_vocabulario --> gravar_termos_no_vocabulario
+  verificar_origem_do_link --> acompanhar_veiculo
+  verificar_origem_do_link --> evoluir_habilidade
+  verificar_origem_do_link --> organizar_emails
+  verificar_origem_do_link --> procurar_email
 ```
