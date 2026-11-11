@@ -10,6 +10,7 @@ metadata:
     - definir-composicao-da-peca
   related:
     - acompanhar-producao-de-produto
+    - definir-aplicacao
     - definir-tarefa
     - definir-estampa
     - definir-tecido
@@ -132,7 +133,7 @@ frente em um tecido de 100% CO, uma linha de recorte em uma malha e outra em out
 
 - A pessoa não sabe as porcentagens de uma malha: registre o tecido com as fibras, sem inventar o percentual, e guarde no comentário de onde virá a inferência.
 - A estampa é do tecido, não do produto nem da variante: outra estampa é outro tecido, cadastrado por `definir-tecido`, e a variante troca a linha para ele. Recorte não é aplicação.
-- A aplicação é da variante, não do produto nem do tecido: ela vai por cima do tecido e muda de uma variante para outra. A mesma peça pode ter uma variante com aplicação e outra sem, então a propriedade é opcional e aceita de 0 a N registros. Aplicação não entra na composição nem na etiqueta.
+- A aplicação é da variante, cadastrada por `definir-aplicacao`, não do produto nem do tecido: ela vai por cima do tecido e muda de uma variante para outra. A mesma peça pode ter uma variante com aplicação e outra sem, então a propriedade é opcional e aceita de 0 a N registros. Aplicação não entra na composição nem na etiqueta.
 - A pessoa usa um apelido para o tecido: confira o nome no banco de tecidos antes de ligar a linha.
 - Um parâmetro está vazio nas instruções do projeto: pergunte uma vez e não escolha.
 

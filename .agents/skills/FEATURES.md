@@ -427,6 +427,25 @@ How these skills relate is in `README.md`, in this folder.
 - **Test Criteria**:
   - [x] The skill is present at that path
 
+### definir-aplicacao
+- **Stability**: experimental
+- **Description**: Register, correct, and link an appliqué, such as an embroidery or a patch, to the variant that has it, with its photo
+- **Properties**:
+  - Lives at `.agents/skills/definir-aplicacao/SKILL.md`
+  - Links the appliqué to the variant, never to the product or the fabric, and accepts from 0 to N appliqués per variant, so a variant without one is valid
+  - Reads the appliqué database again and looks for a duplicate by name and motif before creating, and reuses an appliqué that exists, including in more than one variant
+  - Keeps the motif as a field of the appliqué, with no relation to a print of the same motif
+  - Keeps the appliqué out of the composition and the label
+  - Charges the person for everything about a new appliqué and its photo, leaves it pending without the photo, and does not charge an appliqué created before the project cutoff date
+  - Warns that correcting an appliqué linked to more than one variant changes all of them
+  - Asks the person for the appliqué database and the photo field when the project instructions leave them empty
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The appliqué is linked to the variant and not to the product or the fabric
+  - [x] A variant without an appliqué is valid
+  - [x] A new appliqué without a photo is charged and left pending, and one before the cutoff date is not
+  - [x] An empty database parameter makes the skill ask and not choose
+
 ### definir-artigo-da-base-de-conhecimento
 - **Stability**: experimental
 - **Description**: Create, review, and update the knowledge-base article that answers a practical usage question

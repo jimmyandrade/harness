@@ -39,6 +39,7 @@ flowchart LR
     criar_pull_request["criar-pull-request"]
     definir_agenda["definir-agenda"]
     definir_agenda_de_popstar["definir-agenda-de-popstar"]
+    definir_aplicacao["definir-aplicacao"]
     definir_arquivos_da_habilidade["definir-arquivos-da-habilidade"]
     definir_artigo_da_base_de_conhecimento["definir-artigo-da-base-de-conhecimento"]
     definir_artista["definir-artista"]
@@ -317,6 +318,10 @@ flowchart LR
   definir_agenda_de_popstar --> definir_viagem
   definir_agenda_de_popstar --> procurar_agenda
   definir_agenda_de_popstar --> revisar_uso_do_tempo
+  definir_aplicacao --> definir_composicao_textil
+  definir_aplicacao --> definir_estampa
+  definir_aplicacao --> evoluir_habilidade
+  definir_aplicacao --> identificar_duplicata
   definir_arquivos_da_habilidade --> criar_habilidade
   definir_arquivos_da_habilidade --> evoluir_habilidade
   definir_artigo_da_base_de_conhecimento --> criar_habilidade
@@ -340,6 +345,7 @@ flowchart LR
   definir_codigo_fiscal --> evoluir_habilidade
   definir_codigo_fiscal --> identificar_duplicata
   definir_composicao_textil --> acompanhar_producao_de_produto
+  definir_composicao_textil --> definir_aplicacao
   definir_composicao_textil --> definir_estampa
   definir_composicao_textil --> definir_tarefa
   definir_composicao_textil --> definir_tecido
