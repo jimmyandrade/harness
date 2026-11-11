@@ -519,6 +519,26 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses issuing the invoice, registering the material, and setting the price
 
+### definir-composicao-textil
+- **Stability**: experimental
+- **Description**: Record, correct, and review the textile composition of a product variant, one row per part and fabric, and build the label composition without repeating a fabric
+- **Properties**:
+  - Lives at `.agents/skills/definir-composicao-textil/SKILL.md`
+  - Finds the product and variant by name and name variations and reads all the variant composition rows before changing any
+  - Links each part of the variant to a fabric (front one fabric, lining another) and copies neither the composition nor the print of the fabric
+  - Picks the closest option of the part field, says which one it used, and asks for approval before creating an option
+  - Keeps one row in the canonical part per variant, asks which face of a double-sided product is the canonical one, and warns that the SKU prefix may change
+  - Points each row to the real fabric registered by the fabric skill, and uses a generic fabric only when the person does not know it
+  - Builds the label with one item per distinct fabric, counts the same article in different colors once, and leaves out finishing parts whose fabric is already in the front or the back
+  - Treats a print as part of the fabric, never of the composition or the product: another print is another fabric; an appliqué goes to the appliqué record
+  - Asks the person for the composition database, the canonical part, and the finishing parts when the project instructions leave them empty
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] An empty database or canonical part parameter makes the skill ask and not choose
+  - [x] A double-sided product has one canonical row and the other face in the back option
+  - [x] The label counts a fabric once and leaves out repeated finishing parts
+  - [x] A requested correction is written and an unlinked row is deleted only with approval
+
 ### definir-conta-bancaria
 - **Stability**: experimental
 - **Description**: Register, review, or update a bank or payment account, personal or business, and record what happened to it
@@ -1104,6 +1124,25 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The description refuses checking existence, reviewing tasks on a trigger, scanning the list, marking a task complete, and turning a rule without a deliverable into a task
   - [ ] A new task with `Considerar pessoas informadas` set to `sim` asks who is informed before creating it
   - [ ] A card swap without what happens to the old card asks that before creating the task
+
+### definir-tecido
+- **Stability**: experimental
+- **Description**: Register, correct, and complete a fabric from the supplier technical sheet or label, with one page per color, the composition in percentages, and the sheet attached
+- **Properties**:
+  - Lives at `.agents/skills/definir-tecido/SKILL.md`
+  - Looks for the sheet in the quote, the invoice, the product pages, the fabric photos, the conversations, and the email before asking the supplier, and asks only for what is missing
+  - Treats each color of a fabric on the sheet as a page: one page per color, asking the color the sheet does not give
+  - Writes the composition as one row per fiber, named with the percentage and the fiber abbreviation, and reuses a row that exists
+  - Fills an empty composition, leaves an equal one, corrects a different one when the fabric is the sheet article, and keeps one from another purchase with a comment and a task
+  - Links the print to the fabric page, asks which print when the sheet does not say, and never writes the print on the product or the variant
+  - Updates the sheet section of a page instead of adding another, and puts the PDF in the sheet file field when the project defines it
+  - Asks the person for the fabric database, the composition database, the print database, and the abbreviation of a missing fiber when the project instructions leave them empty
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The sheet sources are searched before the supplier is asked
+  - [x] An empty database parameter makes the skill ask and not choose
+  - [x] A composition from another purchase is kept, commented, and tracked by a task
+  - [x] The sheet section is updated and never duplicated
 
 ### definir-tipo-do-evento
 - **Stability**: experimental

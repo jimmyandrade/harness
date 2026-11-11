@@ -45,6 +45,7 @@ flowchart LR
     definir_ativo_imobilizado["definir-ativo-imobilizado"]
     definir_campanha_de_conteudo["definir-campanha-de-conteudo"]
     definir_codigo_fiscal["definir-codigo-fiscal"]
+    definir_composicao_textil["definir-composicao-textil"]
     definir_conta_bancaria["definir-conta-bancaria"]
     definir_convidado["definir-convidado"]
     definir_data_significativa["definir-data-significativa"]
@@ -80,6 +81,7 @@ flowchart LR
     definir_roteiro_de_video["definir-roteiro-de-video"]
     definir_rotina["definir-rotina"]
     definir_tarefa["definir-tarefa"]
+    definir_tecido["definir-tecido"]
     definir_tipo_do_evento["definir-tipo-do-evento"]
     definir_viagem["definir-viagem"]
     definir_vocabulario["definir-vocabulario"]
@@ -336,6 +338,11 @@ flowchart LR
   definir_campanha_de_conteudo --> planejar_calendario_de_conteudo
   definir_codigo_fiscal --> evoluir_habilidade
   definir_codigo_fiscal --> identificar_duplicata
+  definir_composicao_textil --> acompanhar_producao_de_produto
+  definir_composicao_textil --> definir_tarefa
+  definir_composicao_textil --> definir_tecido
+  definir_composicao_textil --> evoluir_habilidade
+  definir_composicao_textil --> identificar_duplicata
   definir_conta_bancaria --> definir_empresa
   definir_conta_bancaria --> definir_pessoa
   definir_conta_bancaria --> evoluir_habilidade
@@ -462,6 +469,12 @@ flowchart LR
   definir_tarefa --> auditar_tarefas
   definir_tarefa --> definir_grafia
   definir_tarefa --> procurar_tarefa
+  definir_tecido --> acompanhar_producao_de_produto
+  definir_tecido --> definir_composicao_textil
+  definir_tecido --> definir_tarefa
+  definir_tecido --> evoluir_habilidade
+  definir_tecido --> gerenciar_estoque
+  definir_tecido --> identificar_duplicata
   definir_tipo_do_evento --> criar_oportunidade
   definir_tipo_do_evento --> definir_agenda
   definir_tipo_do_evento --> definir_agenda_de_popstar
