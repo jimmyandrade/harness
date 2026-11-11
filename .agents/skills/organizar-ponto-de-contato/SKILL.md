@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-update-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.19.0"
+  version: "0.20.0"
   aliases:
     - organizar-feira
   related:
@@ -130,6 +130,8 @@ flowchart LR
 ### Passo 11
 
 Ao organizar, leia as lições nas notas do grupo de oportunidades e liste as que valem para esta participação. Com `Contrato com o organizador` em `obrigatório`, confira se o contrato trata cada item de `Cláusulas do contrato` e cada lição, com a consequência se o organizador descumprir. Liste o que falta como pendência, para pedir ao organizador. Não redija o contrato. Com `Material para validar com o organizador` preenchido, confira se cada item foi enviado e validado e liste o que falta; sem o e-mail do organizador, a pendência inclui pedi-lo. Não gere o material aqui.
+
+Leia também a janela de montagem do ponto e avise a pessoa na hora com o dia e o horário de cada uma, em especial a do dia anterior ao evento, porque ela muda a saída. O planejamento da saída segue `definir-viagem`.
 
 ## Problemas comuns
 
@@ -313,10 +315,8 @@ Removi o evento da sexta. A agenda manteve o domingo.
 - O "hoje" do lembrete parece a data do ponto de contato. É o prazo da tarefa.
 - A data numérica parece bastar. A resposta leva o dia da semana, calculado com a data, o horário e o fuso.
 - Uma página com o nome parecido parece outro ponto. Busque o pedaço e as Variações de nome antes de criar.
-- Fechar com "mencione a habilidade na próxima vez" parece cuidar dos créditos. A resposta não pede isso.
 - A agenda ignorada parece destino porque o histórico ainda a cita. Ela não é referência operacional. O evento fica na agenda do ponto de contato.
 - O número no título da agenda parece provar que é outro evento. A data e participação mudam sem correção manual do nome. A numeração canônica é a do ponto de contato.
-- O endereço da agenda no meio do passo parece o lugar da edição. O valor mora no bloco `yaml` de `Parâmetros de configuração`.
 
 ## Scripts disponíveis
 
