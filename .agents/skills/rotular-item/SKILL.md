@@ -3,7 +3,7 @@ name: rotular-item
 description: Aplica, troca e tira rótulos, etiquetas e tags de organização num item, como pull request, issue, e-mail, conversa ou página, pela escolha da habilidade de origem, sem duplicar rótulo nem mexer no de uma ferramenta. Usada quando outra habilidade rotula um item, lê ou responde uma conversa, ou o estado do item muda. Não serve para decidir o assunto do item, hashtags nem categorias de conteúdo.
 metadata:
   author: jimmyandrade
-  version: "0.4.2"
+  version: "0.5.0"
   related:
     - criar-pull-request
     - definir-filtro-de-email
@@ -54,7 +54,7 @@ flowchart LR
 ```
 
 O contexto é a escolha da habilidade de origem, de preferência entre `Etiquetas de contexto`.
-Quando nenhum deles serve, ou o rótulo que ela passou não existe, a escolha é o assunto da conversa pelo esquema BASB de `organizar-emails`: um fornecedor, uma ferramenta ou um serviço que a pessoa usa é `Recursos/<nome>`.
+Quando nenhum deles serve, ou o rótulo que ela passou não existe, a escolha é o assunto da conversa pelo esquema BASB de `organizar-emails`, que diz o lugar do rótulo.
 O rótulo que falta entra pelo Passo 3: é criado e aplicado na mesma rodada, sem perguntar e sem deixar a conversa só com o estado.
 A resposta diz o rótulo criado e propõe acrescentá-lo a `Etiquetas de contexto`.
 
@@ -73,6 +73,9 @@ No WhatsApp Business, o rótulo é uma lista, aplicada à conversa e, quando o W
 Rótulo de estado que a lista de origem exige e o sistema não tem: crie-o, com a descrição do estado.
 Outro rótulo que falta só é criado com `Criar rótulo que falta` em `sim`. Com `não`, diga na resposta que ele falta e não aplique outro no lugar.
 Com `sim`, a falta do rótulo nunca trava a conversa, nem quando a caixa não tem nenhum rótulo de usuário: crie o rótulo, com as raízes do caminho que ele precisa, e aplique.
+
+Um rótulo de contexto novo para um remetente que se repete volta à habilidade de origem com a proposta de filtro de `definir-filtro-de-email`, para a etiqueta valer também para o que chegar e para o que já existe.
+Até o filtro existir, aplique o rótulo às conversas existentes pela busca do remetente.
 Quando a habilidade de origem exige esse rótulo para criar o item, como o rótulo do tipo de um pull request, o item não é criado sem ele, nem a pedido.
 Diga qual rótulo falta e proponha criá-lo e ligá-lo à regra que rotula sozinha, quando o sistema tem uma, como um script que rotula pelo título.
 Crie o item só depois que o rótulo existir.
@@ -132,7 +135,7 @@ Se você ler ou responder uma conversa e terminar sem rotular, ela some do filtr
 
 Se você aplicar só o estado porque nenhum contexto de `Etiquetas de contexto` serve, a conversa fica fora da estrutura e a pessoa precisa pedir o rótulo.
 
-1. Escolha o assunto pelo esquema BASB de `organizar-emails`, como `Recursos/<nome>` para um fornecedor.
+1. Escolha o assunto pelo esquema BASB de `organizar-emails`, que diz o lugar do rótulo.
 2. Crie o rótulo que falta e aplique na mesma rodada, sem perguntar.
 3. Diga na resposta o rótulo criado e proponha acrescentá-lo a `Etiquetas de contexto`.
 
@@ -165,7 +168,7 @@ Tirei `blocked` do PR e mantive `enhancement`. A leitura de volta mostrou só `e
 
 ### A fornecedora de uma máquina confirma por e-mail a devolução, e a caixa não tem rótulo dela
 
-`organizar-emails` passou o assunto como recurso, pelo esquema BASB. Criei `Recursos/<nome da fornecedora>` e o rótulo de estado de concluída, que também faltava, e apliquei os dois na mesma rodada. A resposta disse o que criei e propôs acrescentar o rótulo a `Etiquetas de contexto`.
+`organizar-emails` passou o assunto como operação da fornecedora, pelo esquema BASB. Criei o rótulo dela no lugar que o esquema manda e o rótulo de estado de concluída, que também faltava, e apliquei os dois na mesma rodada. A resposta disse o que criei e propôs acrescentar o rótulo a `Etiquetas de contexto`.
 
 ### Mensagem enviada a um contato no WhatsApp
 
