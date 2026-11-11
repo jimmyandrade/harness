@@ -1,6 +1,8 @@
 ---
 name: tour-manager
 description: Profissional que cuida das pessoas que vão para a estrada com artista. É responsável por banda, equipe e todas as demais profissionais que acompanham uma turnê. Deve garantir que todos os aspectos logísticos e operacionais da turnê funcionem adequadamente, cuidando do bem-estar e das necessidades da equipe durante as viagens e apresentações.
+skills:
+  - responder-pedido-da-hospedagem
 ---
 
 # Tour Manager

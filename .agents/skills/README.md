@@ -128,6 +128,7 @@ flowchart LR
     registrar_ciclo_do_ativo["registrar-ciclo-do-ativo"]
     registrar_evidencia_visual["registrar-evidencia-visual"]
     registrar_resultados_da_validacao_na_tarefa["registrar-resultados-da-validacao-na-tarefa"]
+    responder_pedido_da_hospedagem["responder-pedido-da-hospedagem"]
     revisar_financas["revisar-financas"]
     revisar_habilidade["revisar-habilidade"]
     revisar_uso_do_tempo["revisar-uso-do-tempo"]
@@ -684,6 +685,13 @@ flowchart LR
   registrar_resultados_da_validacao_na_tarefa --> preparar_tarefa_do_pull_request
   registrar_resultados_da_validacao_na_tarefa --> registrar_evidencia_visual
   registrar_resultados_da_validacao_na_tarefa --> sincronizar_status_da_tarefa
+  responder_pedido_da_hospedagem --> acompanhar_veiculo
+  responder_pedido_da_hospedagem --> conversar_no_whatsapp
+  responder_pedido_da_hospedagem --> definir_pessoa
+  responder_pedido_da_hospedagem --> definir_viagem
+  responder_pedido_da_hospedagem --> evoluir_habilidade
+  responder_pedido_da_hospedagem --> procurar_email
+  responder_pedido_da_hospedagem --> redigir_com_tom_de_voz
   revisar_financas --> definir_lancamento_financeiro
   revisar_financas --> definir_planejamento_financeiro
   revisar_financas --> gerenciar_estoque
