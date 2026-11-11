@@ -519,6 +519,26 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses issuing the invoice, registering the material, and setting the price
 
+### definir-composicao-textil
+- **Stability**: experimental
+- **Description**: Record, correct, and review the textile composition of a product variant, one row per part and fabric, and build the label composition without repeating a fabric
+- **Properties**:
+  - Lives at `.agents/skills/definir-composicao-textil/SKILL.md`
+  - Finds the product and variant by name and name variations and reads all the variant composition rows before changing any
+  - Links each part of the variant to a fabric (front one fabric, lining another) and copies neither the composition nor the print of the fabric
+  - Picks the closest option of the part field, says which one it used, and asks for approval before creating an option
+  - Keeps one row in the canonical part per variant, asks which face of a double-sided product is the canonical one, and warns that the SKU prefix may change
+  - Points each row to the real fabric registered by the fabric skill, and uses a generic fabric only when the person does not know it
+  - Builds the label with one item per distinct fabric, counts the same article in different colors once, and leaves out finishing parts whose fabric is already in the front or the back
+  - Treats a print as part of the fabric, never of the composition or the product: another print is another fabric; an appliqué goes to the appliqué record
+  - Asks the person for the composition database, the canonical part, and the finishing parts when the project instructions leave them empty
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] An empty database or canonical part parameter makes the skill ask and not choose
+  - [x] A double-sided product has one canonical row and the other face in the back option
+  - [x] The label counts a fabric once and leaves out repeated finishing parts
+  - [x] A requested correction is written and an unlinked row is deleted only with approval
+
 ### definir-conta-bancaria
 - **Stability**: experimental
 - **Description**: Register, review, or update a bank or payment account, personal or business, and record what happened to it
@@ -1105,6 +1125,27 @@ How these skills relate is in `README.md`, in this folder.
   - [ ] A new task with `Considerar pessoas informadas` set to `sim` asks who is informed before creating it
   - [ ] A card swap without what happens to the old card asks that before creating the task
 
+### definir-tecido
+- **Stability**: experimental
+- **Description**: Register, correct, and complete a fabric from the supplier technical sheet or label, with one page per color, the composition in percentages, and the sheet attached
+- **Properties**:
+  - Lives at `.agents/skills/definir-tecido/SKILL.md`
+  - Looks for the sheet in the quote, the invoice, the product pages, the fabric photos, the conversations, and the email before asking the supplier, and asks only for what is missing
+  - Treats each color of a fabric on the sheet as a page: one page per color, asking the color the sheet does not give
+  - Writes the composition as one row per fiber, named with the percentage and the fiber abbreviation, and reuses a row that exists
+  - Fills an empty composition, leaves an equal one, corrects a different one when the fabric is the sheet article, and keeps one from another purchase with a comment and a task
+  - Links the print to the fabric page, asks which print when the sheet does not say, and never writes the print on the product or the variant
+  - Charges the person for what a new fabric lacks: the composition, the technical data the sheet does not give, and a photo, from which it registers the print of a printed fabric; a fabric created before the project cutoff date is not charged
+  - Updates the sheet section of a page instead of adding another, and puts the PDF in the sheet file field when the project defines it
+  - Asks the person for the fabric database, the composition database, the print database, and the abbreviation of a missing fiber when the project instructions leave them empty
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The sheet sources are searched before the supplier is asked
+  - [x] An empty database parameter makes the skill ask and not choose
+  - [x] A composition from another purchase is kept, commented, and tracked by a task
+  - [x] The sheet section is updated and never duplicated
+  - [x] A new fabric without sheet or photo is charged and left pending, and one before the cutoff date is not
+
 ### definir-tipo-do-evento
 - **Stability**: experimental
 - **Description**: Decide the real type of a commitment before the agenda writes it
@@ -1415,6 +1456,27 @@ How these skills relate is in `README.md`, in this folder.
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [ ] Three cases validated with the person
+
+### lancar-venda
+- **Stability**: experimental
+- **Description**: Register, complete, correct, or reconcile a sale of one or more products, linking the customer and units that already exist and leaving an audit trail
+- **Properties**:
+  - Lives at `.agents/skills/lancar-venda/SKILL.md`
+  - Reads the sales database, the bank accounts database, the optional units database, the source of the received amount, and the invoice rule from the project instructions, and asks once when a value is empty
+  - Searches the sale by order number, order link, and transaction id before creating, and links a late store order to the original sale
+  - Never creates the person, product, unit, or variant, and never writes the sold pieces or the stock balance
+  - Records the discount reason and keeps nominal price, discount, credit, amount paid, and amount received distinct, with fees and transfers never counted as a discount
+  - Shows a per-field diff when sources diverge and has the person confirm the canonical value of each field
+  - Treats a credit card cash withdrawal as not a sale, and checks who held the card machine account on the date
+  - Flags a shipped sale that needs an invoice from the configured start date, except for the delivery form that does not ship
+  - Leaves a page comment, before the change, for each migration, correction, reversal, or reconciliation decision
+- **Test Criteria**:
+  - [ ] The skill is present at that path
+  - [ ] An existing sale is updated and a second one is never created
+  - [ ] A missing customer or unit stops the skill with a question
+  - [ ] Divergent sources produce a per-field diff before any change
+  - [ ] An entry without a sale that is a card withdrawal is not registered as a sale
+  - [ ] An empty database parameter makes the skill ask and not choose
 
 ### limpar-copias-de-trabalho
 - **Stability**: experimental
@@ -1758,6 +1820,25 @@ How these skills relate is in `README.md`, in this folder.
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses registering or updating a term, writing brand text, and inventing a form
+
+### projetar-caixa
+- **Stability**: experimental
+- **Description**: Project the cash of the next fairs and other opportunities, from each participation's reserve to the period total compared with the recommended safe cash
+- **Properties**:
+  - Lives at `.agents/skills/projetar-caixa/SKILL.md`
+  - Reads the opportunity, location, and contact point sources and every figure (recommended safe cash, contingency, minimum cost for a smaller point, default horizon) from the project instructions, and asks once when one is empty
+  - Uses the registration fee of the specific fair, falls back to the location floor as a provisional fee and says so, and never assumes zero
+  - Computes the projected safe cash as the larger of the costs already booked and the safe fee plus the complementary cost, times one plus the contingency, and takes the larger of that and the group floor as the reserve
+  - Keeps revenue goals, production, travel, lodging, and the revenue share out of the reserve, and lets the contingency absorb food, travel, parking, and structure
+  - Uses the date the person cites and says when the registration is on another date
+  - Says whether the period cash is above, equal to, or below the recommended safe cash, and lists the historical references apart from the projected period and the current parameters
+  - Only reads: it never changes the structure of the databases it consults
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] An empty source or figure makes the skill ask once and not choose
+  - [x] An unknown fee is never zero and a missing floor is asked for
+  - [x] The reserve is the larger of the projected safe cash and the group floor
+  - [x] The response compares the period cash with the recommended safe cash
 
 ### reconhecer-imagem
 - **Stability**: experimental

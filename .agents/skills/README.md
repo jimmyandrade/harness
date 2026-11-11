@@ -45,6 +45,7 @@ flowchart LR
     definir_ativo_imobilizado["definir-ativo-imobilizado"]
     definir_campanha_de_conteudo["definir-campanha-de-conteudo"]
     definir_codigo_fiscal["definir-codigo-fiscal"]
+    definir_composicao_textil["definir-composicao-textil"]
     definir_conta_bancaria["definir-conta-bancaria"]
     definir_convidado["definir-convidado"]
     definir_data_significativa["definir-data-significativa"]
@@ -80,6 +81,7 @@ flowchart LR
     definir_roteiro_de_video["definir-roteiro-de-video"]
     definir_rotina["definir-rotina"]
     definir_tarefa["definir-tarefa"]
+    definir_tecido["definir-tecido"]
     definir_tipo_do_evento["definir-tipo-do-evento"]
     definir_viagem["definir-viagem"]
     definir_vocabulario["definir-vocabulario"]
@@ -104,6 +106,7 @@ flowchart LR
     investigar_problema["investigar-problema"]
     lancar_despesa_da_empresa["lancar-despesa-da-empresa"]
     lancar_despesa_pessoal["lancar-despesa-pessoal"]
+    lancar_venda["lancar-venda"]
     levantar_ambiente_do_repositorio["levantar-ambiente-do-repositorio"]
     levantar_contexto_do_pull_request["levantar-contexto-do-pull-request"]
     liberar_espaco_em_disco["liberar-espaco-em-disco"]
@@ -128,6 +131,7 @@ flowchart LR
     procurar_pedido_de_revisao["procurar-pedido-de-revisao"]
     procurar_tarefa["procurar-tarefa"]
     procurar_variacao_de_termo["procurar-variacao-de-termo"]
+    projetar_caixa["projetar-caixa"]
     publicar_resposta_de_revisao["publicar-resposta-de-revisao"]
     publicar_revisao_de_codigo["publicar-revisao-de-codigo"]
     reconhecer_imagem["reconhecer-imagem"]
@@ -334,6 +338,11 @@ flowchart LR
   definir_campanha_de_conteudo --> planejar_calendario_de_conteudo
   definir_codigo_fiscal --> evoluir_habilidade
   definir_codigo_fiscal --> identificar_duplicata
+  definir_composicao_textil --> acompanhar_producao_de_produto
+  definir_composicao_textil --> definir_tarefa
+  definir_composicao_textil --> definir_tecido
+  definir_composicao_textil --> evoluir_habilidade
+  definir_composicao_textil --> identificar_duplicata
   definir_conta_bancaria --> definir_empresa
   definir_conta_bancaria --> definir_pessoa
   definir_conta_bancaria --> evoluir_habilidade
@@ -460,6 +469,12 @@ flowchart LR
   definir_tarefa --> auditar_tarefas
   definir_tarefa --> definir_grafia
   definir_tarefa --> procurar_tarefa
+  definir_tecido --> acompanhar_producao_de_produto
+  definir_tecido --> definir_composicao_textil
+  definir_tecido --> definir_tarefa
+  definir_tecido --> evoluir_habilidade
+  definir_tecido --> gerenciar_estoque
+  definir_tecido --> identificar_duplicata
   definir_tipo_do_evento --> criar_oportunidade
   definir_tipo_do_evento --> definir_agenda
   definir_tipo_do_evento --> definir_agenda_de_popstar
@@ -601,6 +616,14 @@ flowchart LR
   lancar_despesa_pessoal --> definir_obrigacao_financeira
   lancar_despesa_pessoal --> evoluir_habilidade
   lancar_despesa_pessoal --> lancar_despesa_da_empresa
+  lancar_venda --> definir_lancamento_financeiro
+  lancar_venda --> definir_pessoa
+  lancar_venda --> definir_preco_de_produto
+  lancar_venda --> evoluir_habilidade
+  lancar_venda --> gerenciar_estoque
+  lancar_venda --> identificar_duplicata
+  lancar_venda --> lancar_despesa_da_empresa
+  lancar_venda --> registrar_ciclo_do_ativo
   levantar_ambiente_do_repositorio --> criar_commit
   levantar_ambiente_do_repositorio --> criar_pull_request
   levantar_ambiente_do_repositorio --> escrever_codigo
@@ -715,6 +738,13 @@ flowchart LR
   procurar_tarefa --> procurar_inscricao
   procurar_variacao_de_termo --> definir_vocabulario
   procurar_variacao_de_termo --> evoluir_habilidade
+  projetar_caixa --> criar_oportunidade
+  projetar_caixa --> definir_agenda
+  projetar_caixa --> definir_planejamento_financeiro
+  projetar_caixa --> evoluir_habilidade
+  projetar_caixa --> lancar_despesa_da_empresa
+  projetar_caixa --> organizar_ponto_de_contato
+  projetar_caixa --> revisar_financas
   publicar_resposta_de_revisao --> atender_revisao_de_pull_request
   publicar_resposta_de_revisao --> definir_pessoa
   publicar_resposta_de_revisao --> escrever_link
