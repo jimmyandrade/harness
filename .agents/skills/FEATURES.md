@@ -901,6 +901,24 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses meeting minutes, test reports, and registering the task
 
+### definir-preco-de-produto
+- **Stability**: experimental
+- **Description**: Record, change, or check the price of products, reading the price history from a configured source before asking
+- **Properties**:
+  - Lives at `.agents/skills/definir-preco-de-produto/SKILL.md`
+  - Reads the price history from the source set by the price history source parameter (Notion database by default, Shopify, or both) and never from the page version history
+  - Says which source it consulted and asks only what the source does not answer
+  - Adds a new row for each catalog price change with product, channel, reason, who decided, previous and new price, effective date, cost on the date, and comparison price
+  - Never edits or deletes an old history row: a correction goes in a new row
+  - Defines a price said for a group of products by the stock of the place, removes what sold before, and waits for confirmation of the list
+  - Asks the person where to record a point-of-sale price and where to read stock by place when those parameters are empty
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The history source is read before any question about a previous price
+  - [x] A price change adds a row and an old row is never edited
+  - [x] A group price lists the stock of the place and waits for confirmation
+  - [x] An empty destination parameter makes the skill ask and not choose
+
 ### definir-recurso-de-aprendizado
 - **Stability**: experimental
 - **Description**: Keep a class in the list of learning resources and on Google Calendar, linked to the opportunity

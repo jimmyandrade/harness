@@ -70,6 +70,7 @@ flowchart LR
     definir_pessoa["definir-pessoa"]
     definir_planejamento_financeiro["definir-planejamento-financeiro"]
     definir_post_mortem["definir-post-mortem"]
+    definir_preco_de_produto["definir-preco-de-produto"]
     definir_recurso_de_aprendizado["definir-recurso-de-aprendizado"]
     definir_reel_do_instagram["definir-reel-do-instagram"]
     definir_registro_de_reuniao["definir-registro-de-reuniao"]
@@ -418,6 +419,8 @@ flowchart LR
   definir_planejamento_financeiro --> revisar_financas
   definir_post_mortem --> definir_tarefa
   definir_post_mortem --> evoluir_habilidade
+  definir_preco_de_produto --> evoluir_habilidade
+  definir_preco_de_produto --> gerenciar_estoque
   definir_recurso_de_aprendizado --> definir_agenda
   definir_recurso_de_aprendizado --> procurar_agenda
   definir_reel_do_instagram --> criar_ideia_de_conteudo
