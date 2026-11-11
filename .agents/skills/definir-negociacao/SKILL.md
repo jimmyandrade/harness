@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
   related:
     - definir-agenda
     - evoluir-habilidade
@@ -22,15 +22,7 @@ metadata:
 Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global`. Quando um valor não estiver lá, use o padrão abaixo.
 
 ```yaml
-# Os nomes dos bancos e das propriedades que a habilidade usa.
-"Banco de negociações": "Negociações e Cotações"
-"Banco de pessoas": "Pessoas"
-"Banco de empresas": "Empresas"
-"Banco de cronograma": "Cronograma"
-"Banco de inscrições": "Inscrições"
-"Propriedade da empresa abordada": "Empresa abordada"
-"Propriedade da pessoa abordada": "Pessoa abordada"
-"Propriedade da oportunidade": "Oportunidade"
+# `Modo de aprendizado` diz se a habilidade pergunta antes de evoluir ou evolui sozinha.
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -38,7 +30,9 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ### Passo 1
 
-Conversa ligada a um negócio, como cotação, proposta, parceria ou venda, fica na página da negociação, no `Banco de negociações`. Conversa sem negócio, como convite, agradecimento ou networking, fica na discussão da página da pessoa, no `Banco de pessoas`, e na da empresa, no `Banco de empresas`, quando há uma. Não crie negociação para ela. Se o banco não estiver no workspace conectado, pare e peça.
+Conversa ligada a um negócio, como cotação, proposta, parceria ou venda, fica na página da negociação, na lista de negociações. Conversa sem negócio, como convite, agradecimento ou networking, fica na discussão da página da pessoa, e na da empresa quando há uma. Não crie negociação para ela.
+
+Os nomes das listas e das propriedades vêm do mapeamento de dados do projeto, ou dos parâmetros das instruções do projeto onde a ferramenta não lê o mapeamento. Este texto usa os conceitos: negociação, pessoa, empresa, cronograma, inscrição, empresa abordada, pessoa abordada e oportunidade. Se a lista não estiver no workspace conectado, ou o nome dela não estiver no mapeamento nem nos parâmetros, pare e peça. Não adivinhe o nome.
 
 ```mermaid
 flowchart LR
@@ -53,7 +47,7 @@ flowchart LR
 
 ### Passo 2
 
-Com negócio, ache a negociação da empresa e da oportunidade antes de criar outra. Ligue a página pelas propriedades `Propriedade da empresa abordada`, `Propriedade da pessoa abordada` e `Propriedade da oportunidade`. Se uma segunda pessoa da mesma empresa falar, confira no schema se a propriedade da pessoa abordada aceita mais de uma antes de somar. Se não aceitar, pergunte.
+Com negócio, ache a negociação da empresa e da oportunidade antes de criar outra. Ligue a página à empresa abordada, à pessoa abordada e à oportunidade. Se uma segunda pessoa da mesma empresa falar, confira no schema se a pessoa abordada aceita mais de uma antes de somar. Se não aceitar, pergunte.
 
 ### Passo 3
 
@@ -66,8 +60,8 @@ Depois de enviar uma mensagem, um e-mail ou um comprovante de pagamento a uma em
 Antes de perguntar à pessoa um fato sobre oportunidade, ponto de contato, viagem ou horário, consulte nesta ordem e marque cada fonte:
 
 - [ ] Comentários da negociação e da página da pessoa
-- [ ] `Banco de cronograma`
-- [ ] `Banco de inscrições`
+- [ ] Cronograma
+- [ ] Inscrições
 - [ ] Página da oportunidade e do ponto de contato
 - [ ] E-mail, com `procurar-email`
 
@@ -128,7 +122,7 @@ Não havia cotação, proposta, parceria nem venda. Gravei na discussão da pág
 
 ### a Isadora também respondeu pela Feira Exemplo
 
-Conferi se a propriedade da pessoa abordada aceita mais de uma pessoa antes de somar Isadora Ribeiro à negociação.
+Conferi se a pessoa abordada aceita mais de uma pessoa antes de somar Isadora Ribeiro à negociação.
 
 ## Casos-limite
 
@@ -137,11 +131,11 @@ Conferi se a propriedade da pessoa abordada aceita mais de uma pessoa antes de s
 - A conversa não tem data: use `Data aproximada:` e diga de onde veio.
 - Várias mensagens no mesmo dia e assunto: um comentário só, com os horários.
 - A pessoa corrige um fato já gravado: novo comentário datado com a correção. Não apague o anterior.
-- O banco não está no workspace conectado: pare e peça.
+- A lista não está no workspace conectado, ou o nome dela não está no mapeamento: pare e peça.
 
 ## Pegadinhas
 
-- A página do `Banco de negociações` pode ter um callout com a regra. O corpo não é linha do tempo.
+- A página da negociação pode ter um callout com a regra. O corpo não é linha do tempo.
 - A linha do tempo do cliente numa loja parece o lugar da conversa, mas a API da loja pode não gravar comentário nela. A conversa fica na discussão da página da pessoa.
 - Toda conversa parece pedir uma negociação. Sem cotação, proposta, parceria ou venda, não há negócio: a linha do tempo é a discussão da página da pessoa.
 - Um comentário de propriedade fica escondido no campo. Só a discussão da página aparece no topo.

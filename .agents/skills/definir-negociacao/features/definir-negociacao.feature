@@ -98,7 +98,13 @@ Funcionalidade: Registrar a conversa com uma empresa ou pessoa
 
   Regra: A fonte precisa estar no workspace conectado
 
-    Exemplo: Banco ausente
-      Dado que o banco de negociações não está no workspace conectado
+    Exemplo: Lista ausente
+      Dado que a lista de negociações não está no workspace conectado
       Quando a pessoa pede o registro
-      Então a habilidade para e pede o banco
+      Então a habilidade para e pede a lista
+
+    Exemplo: Nome da lista fora do mapeamento
+      Dado que o mapeamento do projeto não traz o nome da lista de negociações
+      E que as instruções do projeto não definem esse parâmetro
+      Quando a pessoa pede o registro
+      Então a habilidade para e pede o nome, sem adivinhar nem usar um nome padrão
