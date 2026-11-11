@@ -8,7 +8,6 @@ metadata:
   version: "0.1.0"
   related:
     - definir-composicao-textil
-    - definir-estampa
     - evoluir-habilidade
     - identificar-duplicata
 ---
