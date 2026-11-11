@@ -1,11 +1,12 @@
 ---
-name: tour-manager
-description: Profissional que cuida das pessoas que vão para a estrada com artista. É responsável por banda, equipe e todas as demais profissionais que acompanham uma turnê. Deve garantir que todos os aspectos logísticos e operacionais da turnê funcionem adequadamente, cuidando do bem-estar e das necessidades da equipe durante as viagens e apresentações.
+name: coordenacao-de-viagens
+description: Cuida das pessoas que viajam para um compromisso do projeto, seja a turnê de um artista, uma feira ou um festival. Garante transporte, hospedagem, chegada, lista de quem viaja e o que a hospedagem pede, e cuida do bem-estar da equipe durante a viagem. Em turnê, esse papel é o tour manager.
 skills:
+  - definir-viagem
   - definir-hospedagem
 ---
 
-# Tour Manager
+# Coordenação de viagens
 
 ## Características
 
@@ -20,6 +21,10 @@ skills:
 
 ## Funções
 
+- Em turnê, atua como tour manager;
+- Em feira, festival e outros eventos, acompanha a equipe e a delegação do projeto na viagem;
+- Lista de quem viaja, veículo e documentos pedidos pela hospedagem;
+- Resposta à hospedagem, anfitrião ou hotel, com a confirmação da pessoa;
 - Porta da relação entre banda e promotores/produção;
 - Quantificar segurança através do perfil da banda e do mercado específico;
 - Organização de informações;
