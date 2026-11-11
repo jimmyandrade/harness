@@ -3,7 +3,7 @@ name: definir-filtro-de-email
 description: Cria, edita e confere filtros de e-mail. Testa o critério na conta, escolhe as ações sem esconder o que a pessoa quer ver e lê o filtro salvo de volta. Usada quando a triagem pede um filtro ou a pessoa quer mudar um. Não serve para classificar mensagens nem cancelar assinatura.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.4.1"
   related:
     - organizar-emails
     - evoluir-habilidade
@@ -37,6 +37,9 @@ O filtro sai do plano que a triagem de `organizar-emails` validou com a pessoa, 
 Leia os filtros existentes da conta antes de criar outro: um filtro com o mesmo remetente se edita, não se duplica.
 
 Teste o critério na busca da conta exata e leia o assunto das conversas que ele atinge. Examine as correspondências inesperadas: o que não for do tipo confirmado muda o critério antes do filtro.
+
+O critério lista os endereços exatos do remetente, ou o subdomínio dedicado a envio automático.
+O domínio inteiro só serve quando nenhuma pessoa escreve dele: numa organização grande, ele traz também o e-mail de um funcionário a muitos destinatários.
 
 Quando o remetente muda de endereço, o novo entra com `OR` e o antigo fica, para o filtro continuar pegando o histórico.
 
@@ -144,6 +147,7 @@ O filtro procurava o endereço antigo e os e-mails chegam de outro domínio. O c
 
 ## Pegadinhas
 
+- Um filtro pelo domínio de uma organização grande parece pegar tudo dela. Ele pega também o e-mail em massa de um funcionário, que não é do tipo confirmado.
 - O filtro do Gmail busca no texto todo, não só no corpo, e aplica uma etiqueta de usuário por filtro.
 - A ferramenta de etiqueta e a leitura do filtro podem mostrar identificadores distintos; a lista disponível pode não expor a correspondência necessária para verificar o nome no filtro.
 - A criação de filtro pode falhar só em parte e devolver sucesso. A leitura de volta mostra o que faltou.
