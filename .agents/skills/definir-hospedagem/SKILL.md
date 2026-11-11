@@ -3,14 +3,14 @@ name: definir-hospedagem
 description: Define a hospedagem de uma viagem depois da reserva, o que ela pede, como nome e documento dos hóspedes, veículo e chegada, e a resposta a quem hospeda, enviada só com a confirmação. Usada quando o anfitrião ou o hotel escreve. Não serve para ler a reserva, registrar a viagem nem redigir no tom da marca.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.4.1"
   aliases:
     - responder-pedido-da-hospedagem
   related:
     - acompanhar-veiculo
     - conversar-no-whatsapp
     - definir-pessoa
-    - definir-rotina
+    - acompanhar-retornos-pendentes
     - definir-viagem
     - evoluir-habilidade
     - procurar-email
@@ -106,24 +106,20 @@ Registre na hospedagem do Notion que os dados foram enviados e quando, sem repet
 
 ### Passo 5
 
-Com `Rotina de mensagens do anfitrião` em `sim`, toda reserva com canal de mensagens do anfitrião ganha uma rotina que confere esse canal.
-Crie a rotina no mesmo turno, sem perguntar, seguindo `definir-rotina`.
-Não espere a hospedagem escrever primeiro: ela costuma mandar o que falta, como a senha de acesso, perto do check-in.
+Toda reserva com canal de mensagens do anfitrião entra no acompanhamento no mesmo turno, sem perguntar, por `acompanhar-retornos-pendentes`.
+Não crie uma rotina para a reserva: etiquete a conversa do e-mail como aguardando retorno e acrescente uma linha ao registro das pendências.
 
-A janela vai da reserva até o checkout.
-O intervalo inicial é `Intervalo da rotina do anfitrião`, no horário comercial.
+A hospedagem costuma mandar o que falta, como a senha de acesso, perto do check-in.
+Não espere ela escrever primeiro.
 
-A fonte preferida é o e-mail de notificação da plataforma no Gmail, que é mais leve que o navegador.
-Sem e-mail de notificação, use o navegador da pessoa, na aba em que ela já entrou.
-
-Cada mensagem nova vira um aviso curto à pessoa, com o que a hospedagem disse e o que falta fazer.
+A rotina única avisa a pessoa a cada mensagem nova e entrega o resumo à sessão que espera.
 A senha de acesso nunca vai no aviso, no Notion nem em outro lugar: o aviso só diz que ela chegou e onde ver.
 
 Quando a hospedagem faz uma pergunta, deixe um rascunho de resposta, sem enviar.
 O envio segue o Passo 3.
 
-A cada resposta, registre na hospedagem em quantos minutos ela veio, contados da última mensagem enviada.
-Com esses tempos, ajuste o intervalo da rotina: uma hospedagem que responde em minutos pede conferência mais curta que uma que responde em horas.
+A cada resposta, registre na hospedagem em quantos minutos ela veio.
+Esse tempo ensina quando conferir.
 
 ### Passo 6
 
@@ -135,9 +131,9 @@ Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 Se você deixar para a pessoa abrir a conversa da plataforma, a mensagem com a senha ou com uma exigência chega e fica sem leitura até o dia da chegada.
 
-1. Crie a rotina que confere o canal do anfitrião quando a reserva existir, sem perguntar.
-2. Avise a pessoa a cada mensagem nova, sem escrever a senha.
-3. Ajuste o intervalo pelo tempo de resposta que a hospedagem mostrou.
+1. Etiquete a conversa e acrescente a linha ao registro, sem criar rotina.
+2. A rotina única avisa a pessoa e a sessão a cada mensagem nova, sem escrever a senha.
+3. Registre o tempo de resposta da hospedagem.
 
 ### Dado inventado
 

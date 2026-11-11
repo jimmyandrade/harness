@@ -15,6 +15,7 @@ flowchart LR
     acompanhar_edital["acompanhar-edital"]
     acompanhar_fila_de_revisao["acompanhar-fila-de-revisao"]
     acompanhar_resposta_no_whatsapp["acompanhar-resposta-no-whatsapp"]
+    acompanhar_retornos_pendentes["acompanhar-retornos-pendentes"]
     acompanhar_veiculo["acompanhar-veiculo"]
     atender_revisao_de_pull_request["atender-revisao-de-pull-request"]
     atualizar_branch_do_pull_request["atualizar-branch-do-pull-request"]
@@ -164,11 +165,18 @@ flowchart LR
   acompanhar_fila_de_revisao --> procurar_pedido_de_revisao
   acompanhar_fila_de_revisao --> publicar_revisao_de_codigo
   acompanhar_fila_de_revisao --> redigir_com_tom_de_voz
+  acompanhar_resposta_no_whatsapp --> acompanhar_retornos_pendentes
   acompanhar_resposta_no_whatsapp --> conversar_no_whatsapp
   acompanhar_resposta_no_whatsapp --> definir_rotina
   acompanhar_resposta_no_whatsapp --> evoluir_habilidade
   acompanhar_resposta_no_whatsapp --> rotular_item
   acompanhar_resposta_no_whatsapp --> usar_whatsapp_web
+  acompanhar_retornos_pendentes --> acompanhar_resposta_no_whatsapp
+  acompanhar_retornos_pendentes --> definir_rotina
+  acompanhar_retornos_pendentes --> enviar_email
+  acompanhar_retornos_pendentes --> evoluir_habilidade
+  acompanhar_retornos_pendentes --> organizar_emails
+  acompanhar_retornos_pendentes --> rotular_item
   acompanhar_veiculo --> definir_obrigacao_financeira
   acompanhar_veiculo --> definir_viagem
   acompanhar_veiculo --> evoluir_habilidade
@@ -345,10 +353,10 @@ flowchart LR
   definir_grupo_de_oportunidades --> criar_oportunidade
   definir_grupo_de_oportunidades --> procurar_oportunidade
   definir_grupo_de_oportunidades --> triar_conversas
+  definir_hospedagem --> acompanhar_retornos_pendentes
   definir_hospedagem --> acompanhar_veiculo
   definir_hospedagem --> conversar_no_whatsapp
   definir_hospedagem --> definir_pessoa
-  definir_hospedagem --> definir_rotina
   definir_hospedagem --> definir_viagem
   definir_hospedagem --> evoluir_habilidade
   definir_hospedagem --> procurar_email
@@ -467,8 +475,8 @@ flowchart LR
   descrever_habilidade_ou_schema --> revisar_habilidade
   descrever_habilidade_ou_schema --> testar_habilidade
   emitir_documento_oficial --> evoluir_habilidade
+  enviar_email --> acompanhar_retornos_pendentes
   enviar_email --> definir_pessoa
-  enviar_email --> definir_rotina
   enviar_email --> definir_vocabulario
   enviar_email --> evoluir_habilidade
   enviar_email --> lancar_despesa_da_empresa
