@@ -45,6 +45,20 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [ ] Three cases validated with the person
 
+### acompanhar-producao-de-produto
+- **Stability**: experimental
+- **Description**: Track what a product needs to produce and what was cut or produced, by unit and size
+- **Properties**:
+  - Lives at `.agents/skills/acompanhar-producao-de-produto/SKILL.md`
+  - Keeps production in the product records, one row per size, and never turns it into a task
+  - Reads the database and property names from the project instructions, with defaults, and stops when a database is not in the connected workspace
+  - Confirms the size of every unit, adds only the quantity said, and asks before producing more than planned
+  - Relates the existing mold and base mold, and changes the pilot, label, and production status only when the person says so
+  - Does not write formula properties, create the product, or touch stock unless the project instructions link it
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [ ] Three cases validated with the person
+
 ### acompanhar-veiculo
 - **Stability**: experimental
 - **Description**: See or organize what a car or motorcycle owes or costs, such as tax, insurance, fines, points, tolls, toll tag, installments, or repairs

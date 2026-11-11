@@ -14,6 +14,7 @@ flowchart LR
     abrir_vendas_na_tiqueteira["abrir-vendas-na-tiqueteira"]
     acompanhar_edital["acompanhar-edital"]
     acompanhar_fila_de_revisao["acompanhar-fila-de-revisao"]
+    acompanhar_producao_de_produto["acompanhar-producao-de-produto"]
     acompanhar_resposta_no_whatsapp["acompanhar-resposta-no-whatsapp"]
     acompanhar_retornos_pendentes["acompanhar-retornos-pendentes"]
     acompanhar_veiculo["acompanhar-veiculo"]
@@ -165,6 +166,10 @@ flowchart LR
   acompanhar_fila_de_revisao --> procurar_pedido_de_revisao
   acompanhar_fila_de_revisao --> publicar_revisao_de_codigo
   acompanhar_fila_de_revisao --> redigir_com_tom_de_voz
+  acompanhar_producao_de_produto --> definir_tarefa
+  acompanhar_producao_de_produto --> evoluir_habilidade
+  acompanhar_producao_de_produto --> gerenciar_estoque
+  acompanhar_producao_de_produto --> identificar_duplicata
   acompanhar_resposta_no_whatsapp --> acompanhar_retornos_pendentes
   acompanhar_resposta_no_whatsapp --> conversar_no_whatsapp
   acompanhar_resposta_no_whatsapp --> definir_rotina
