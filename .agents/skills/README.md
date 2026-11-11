@@ -141,6 +141,7 @@ flowchart LR
     testar_ponta_a_ponta["testar-ponta-a-ponta"]
     transcrever_audio_e_video["transcrever-audio-e-video"]
     triar_conversas["triar-conversas"]
+    usar_whatsapp_web["usar-whatsapp-web"]
     validar_plano_de_vocabulario["validar-plano-de-vocabulario"]
     verificar_origem_do_link["verificar-origem-do-link"]
   end
@@ -167,6 +168,7 @@ flowchart LR
   acompanhar_resposta_no_whatsapp --> definir_rotina
   acompanhar_resposta_no_whatsapp --> evoluir_habilidade
   acompanhar_resposta_no_whatsapp --> rotular_item
+  acompanhar_resposta_no_whatsapp --> usar_whatsapp_web
   acompanhar_veiculo --> definir_obrigacao_financeira
   acompanhar_veiculo --> definir_viagem
   acompanhar_veiculo --> evoluir_habilidade
@@ -226,6 +228,7 @@ flowchart LR
   conversar_no_whatsapp --> procurar_tarefa
   conversar_no_whatsapp --> redigir_com_tom_de_voz
   conversar_no_whatsapp --> rotular_item
+  conversar_no_whatsapp --> usar_whatsapp_web
   convidar_para_evento --> acompanhar_resposta_no_whatsapp
   convidar_para_evento --> conversar_no_whatsapp
   convidar_para_evento --> definir_agenda
@@ -428,6 +431,7 @@ flowchart LR
   definir_rotina --> acompanhar_resposta_no_whatsapp
   definir_rotina --> conversar_no_whatsapp
   definir_rotina --> evoluir_habilidade
+  definir_rotina --> usar_whatsapp_web
   definir_tarefa --> auditar_tarefas
   definir_tarefa --> definir_grafia
   definir_tarefa --> procurar_tarefa
@@ -475,6 +479,7 @@ flowchart LR
   enviar_imagem_no_whatsapp --> conversar_no_whatsapp
   enviar_imagem_no_whatsapp --> evoluir_habilidade
   enviar_imagem_no_whatsapp --> redigir_com_tom_de_voz
+  enviar_imagem_no_whatsapp --> usar_whatsapp_web
   enviar_mensagem_no_slack --> definir_agenda
   enviar_mensagem_no_slack --> definir_pessoa
   enviar_mensagem_no_slack --> definir_vocabulario
@@ -766,6 +771,13 @@ flowchart LR
   triar_conversas --> procurar_pedido_de_revisao
   triar_conversas --> procurar_tarefa
   triar_conversas --> rotular_item
+  triar_conversas --> usar_whatsapp_web
+  usar_whatsapp_web --> acompanhar_resposta_no_whatsapp
+  usar_whatsapp_web --> conversar_no_whatsapp
+  usar_whatsapp_web --> definir_rotina
+  usar_whatsapp_web --> enviar_imagem_no_whatsapp
+  usar_whatsapp_web --> evoluir_habilidade
+  usar_whatsapp_web --> triar_conversas
   validar_plano_de_vocabulario --> classificar_estado_do_termo
   validar_plano_de_vocabulario --> definir_vocabulario
   validar_plano_de_vocabulario --> gravar_termos_no_vocabulario

@@ -4,7 +4,7 @@ description: Varre as conversas com mensagem nova no WhatsApp e no Slack, classi
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.1"
+  version: "0.3.0"
   models:
     - relatorio-de-conversas
   related:
@@ -21,6 +21,7 @@ metadata:
     - procurar-pedido-de-revisao
     - procurar-tarefa
     - rotular-item
+    - usar-whatsapp-web
 ---
 
 # Triar conversas
@@ -44,7 +45,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ### Passo 1
 
-Leia cada canal de `Fontes`. O WhatsApp segue `conversar-no-whatsapp`: o canal, a aba, o aviso de outra janela e as mensagens não lidas. O Slack é lido pelo conector do Slack: canais, grupos e mensagens diretas. Sem o conector, o relatório diz que o Slack ficou de fora. E-mail não entra aqui: a caixa fica com `organizar-emails`.
+Leia cada canal de `Fontes`. O WhatsApp segue `conversar-no-whatsapp`: o canal e as mensagens não lidas. A aba e o aviso de outra janela seguem `usar-whatsapp-web`. O Slack é lido pelo conector do Slack: canais, grupos e mensagens diretas. Sem o conector, o relatório diz que o Slack ficou de fora. E-mail não entra aqui: a caixa fica com `organizar-emails`.
 
 Varra toda conversa com mensagem nova, de grupo, canal ou individual. Uma conversa silenciada ou arquivada entra só quando a pessoa a nomeia.
 
@@ -93,7 +94,7 @@ Leia o modelo de saída `relatorio-de-conversas` quando for gerar a saída.
 
 O pedido de relatório recorrente segue `definir-rotina`, que roda esta habilidade na `Cadência do relatório`. Com `pela atividade`, conte os dias com mensagem nova na última semana de cada conversa e diga a cadência de cada uma antes de criar a rotina.
 
-Ao terminar, deixe a aba do WhatsApp Web aberta, como `conversar-no-whatsapp` manda.
+Ao terminar, deixe a aba do WhatsApp Web aberta, como `usar-whatsapp-web` manda.
 
 ### Passo 9
 
