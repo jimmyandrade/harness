@@ -3,7 +3,7 @@ name: enviar-mensagem-no-slack
 description: Redige uma mensagem de Slack, num canal, thread ou DM, e entrega o rascunho com o link do destino. Só envia com a autorização explícita da pessoa e, depois do envio, compara o proposto com o aplicado para alimentar o vocabulário. Usada quando a pessoa pede uma mensagem ou resposta no Slack. Não serve para achar conversa antiga nem cadastrar pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.9.0"
+  version: "0.10.0"
   related:
     - definir-agenda
     - definir-pessoa
@@ -164,7 +164,7 @@ Se o Slack recusar criar o rascunho, como num canal compartilhado com outra orga
 
 ### Passo 6
 
-Envie só com a autorização explícita da pessoa a esse texto e a esse destino. O sim vale para uma mensagem: outra mensagem pede outro sim. Nunca envie por conta própria, nunca agende e nunca mande fora do horário que a pessoa deu.
+Envie só com a autorização explícita da pessoa a esse texto e a esse destino. O sim vale para uma mensagem: outra mensagem pede outro sim. Nunca envie nem agende por conta própria: com agendamento, o sim vale para esse texto e esse horário. Nunca mande fora do horário que a pessoa deu.
 
 Em execução agendada ou automática, não envie: deixe o rascunho e o texto no resumo, com o link da thread. Um texto de resposta a uma pessoa passa antes pela leitura de quem usa a habilidade.
 
@@ -243,7 +243,7 @@ Li a mensagem publicada na thread e comparei com o rascunho. Você trocou duas e
 ## Casos-limite
 
 - Canal compartilhado com outra organização, onde o Slack recusa o rascunho: entregue o texto pronto para colar, com o link da thread.
-- A pessoa pede para agendar o envio: não agende. Entregue o rascunho e espere o sim no horário em que ela quiser enviar.
+- A pessoa pede para agendar o envio: mostre o texto e o horário e, com o sim a esse texto e a esse horário, agende com a ferramenta de agendamento do Slack. Uma mensagem agendada não é resposta numa thread que ainda não existe.
 - A pessoa citada não aparece na busca do Slack: pergunte uma vez, ou use `definir-pessoa` se ela é nova no projeto.
 - O destino é uma DM: use só as regras de DM, e não o tom ambiente de um canal.
 
