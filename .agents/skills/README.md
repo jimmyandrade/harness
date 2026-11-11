@@ -343,6 +343,7 @@ flowchart LR
   definir_hospedagem --> acompanhar_veiculo
   definir_hospedagem --> conversar_no_whatsapp
   definir_hospedagem --> definir_pessoa
+  definir_hospedagem --> definir_rotina
   definir_hospedagem --> definir_viagem
   definir_hospedagem --> evoluir_habilidade
   definir_hospedagem --> procurar_email
@@ -454,6 +455,7 @@ flowchart LR
   descrever_habilidade_ou_schema --> testar_habilidade
   emitir_documento_oficial --> evoluir_habilidade
   enviar_email --> definir_pessoa
+  enviar_email --> definir_rotina
   enviar_email --> definir_vocabulario
   enviar_email --> evoluir_habilidade
   enviar_email --> lancar_despesa_da_empresa
