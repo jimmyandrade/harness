@@ -491,6 +491,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Properties**:
   - Lives at `.agents/skills/definir-codigo-fiscal/SKILL.md`
   - Leaves the duplicate check to identificar-duplicata and keeps one record per code number
+  - Saves as the source a stable official link that opens the code, checked before saving, and fills the source when it is empty or broken
   - Keeps in the code record only the characteristics that lead to the classification (kind of good, use, predominant material and, for clothing, construction), never the products that use it
   - Records every confirmation, decision, or status change as a dated comment on the code page
   - Reads the predominant material from the composition list and never copies the composition to the code
