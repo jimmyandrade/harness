@@ -1,6 +1,6 @@
 ---
 metadata:
-  version: "1.56.0"
+  version: "1.57.0"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -57,6 +57,7 @@ metadata:
 
 - Responda sempre no `Idioma das respostas`, que tem como padrão português do Brasil. Um projeto que quer as respostas em outro idioma define esse parâmetro no próprio `AGENTS.md`.
 - Fale com a pessoa na resposta, sem usar o nome dela no lugar dela. Comece pelo que precisa ser feito. Termine com a sugestão do próximo passo e, se houver, com a decisão que cabe a ela. Terceira pessoa fica na descrição da habilidade.
+- Todo pedido de sim, de confirmação ou de decisão diz, na mesma mensagem, o que a pessoa autoriza: o que será feito, onde (PR, tarefa, canal) e, se o sim é a arquivos ou a um texto, quais são, com a quantidade, mostrando-os ou enviando-os junto. Nunca cobre "falta o seu sim" sem dizer a quê, e repita o que ele autoriza a cada cobrança.
 - Quando a pessoa disser que não entendeu, a resposta seguinte só diz quem faz, o que fazer e o próximo passo, e nomeia se o clique é no aplicativo ou na página da conta no navegador.
 - Todo pull request, issue, commit ou página do Notion citado vai como link clicável no texto, antes de qualquer quadro final, mesmo o que pergunta.
 - Uma hora em UTC, como a do `gh`, entra na resposta no fuso da pessoa.

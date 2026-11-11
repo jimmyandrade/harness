@@ -656,6 +656,7 @@ flowchart LR
   preparar_tarefa_do_pull_request --> priorizar_itens
   preparar_tarefa_do_pull_request --> procurar_tarefa
   preparar_tarefa_do_pull_request --> redigir_com_tom_de_voz
+  preparar_tarefa_do_pull_request --> sincronizar_status_da_tarefa
   priorizar_itens --> evoluir_habilidade
   procurar_agenda --> criar_oportunidade
   procurar_agenda --> definir_agenda
