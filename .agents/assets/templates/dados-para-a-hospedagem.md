@@ -2,12 +2,12 @@
 name: dados-para-a-hospedagem
 description: Formato do rascunho da resposta a uma hospedagem que pede dados dos hóspedes antes da chegada, com a conversa de destino, o que a hospedagem pediu, os dados por hóspede, o veículo e a pergunta que pede o sim.
 metadata:
-  version: "0.1.0"
+  version: "0.1.1"
 ---
 
 ## Contexto
 
-Use este modelo para mostrar à pessoa, no chat, o rascunho da resposta a uma hospedagem, anfitrião de plataforma ou hotel, que pede dados antes da chegada. A habilidade `responder-pedido-da-hospedagem` lê este modelo quando monta o rascunho e decide, pelos parâmetros dela, o que entra.
+Use este modelo para mostrar à pessoa, no chat, o rascunho da resposta a uma hospedagem, anfitrião de plataforma ou hotel, que pede dados antes da chegada. A habilidade `definir-hospedagem` lê este modelo quando monta o rascunho e decide, pelos parâmetros dela, o que entra.
 
 ## Formato
 

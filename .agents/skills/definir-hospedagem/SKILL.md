@@ -1,9 +1,11 @@
 ---
-name: responder-pedido-da-hospedagem
-description: Responde o pedido de dados que uma hospedagem, anfitrião ou hotel faz depois da reserva, como nome e documento dos hóspedes, veículo e horário de chegada, juntando o que está no cadastro e enviando só com a confirmação da pessoa. Usada quando a hospedagem escreve pedindo informações da viagem. Não serve para achar os dados da reserva, registrar a viagem, redigir no tom da marca nem cadastrar a pessoa.
+name: definir-hospedagem
+description: Define a hospedagem de uma viagem depois da reserva, o que ela pede, como nome e documento dos hóspedes, veículo e chegada, e a resposta a quem hospeda, enviada só com a confirmação. Usada quando o anfitrião ou o hotel escreve. Não serve para ler a reserva, registrar a viagem nem redigir no tom da marca.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
+  aliases:
+    - responder-pedido-da-hospedagem
   related:
     - acompanhar-veiculo
     - conversar-no-whatsapp
@@ -16,7 +18,7 @@ metadata:
     - dados-para-a-hospedagem
 ---
 
-# Responder pedido da hospedagem
+# Definir hospedagem
 
 ## Parâmetros de configuração
 
@@ -35,6 +37,8 @@ flowchart LR
   Q -->|escrever o texto no tom da marca| R[redigir-com-tom-de-voz]
   Q -->|cadastrar o hóspede| P[definir-pessoa]
 ```
+
+Esta habilidade cuida da hospedagem depois da reserva, hoje o pedido de dados do anfitrião ou do hotel. Achar a reserva e ligar a hospedagem à viagem segue `definir-viagem`.
 
 A hospedagem pede os dados logo depois da reserva, e a reserva feita à mão não deixa rastro no Notion. Procure o pedido antes de perguntar à pessoa: na conversa da plataforma de hospedagem, no e-mail da reserva e no WhatsApp ou no e-mail do hotel. Leia o que a hospedagem pediu e a data da mensagem.
 Para ler a conversa, siga a ordem de `definir-viagem`: CLI, API, MCP, skill e, por último, o navegador na aba em que a pessoa já entrou. Não entre na plataforma por ela.
