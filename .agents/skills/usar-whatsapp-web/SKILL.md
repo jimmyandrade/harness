@@ -3,7 +3,7 @@ name: usar-whatsapp-web
 description: Abre, mantém e reaproveita a única aba do WhatsApp Web no Chrome da pessoa, pela extensão Claude in Chrome, e faz a sessão dona atender as leituras e os envios das outras sessões. Usada sempre que uma habilidade precisa abrir, ler, enviar texto, anexar imagem ou documento no WhatsApp Web, mesmo sem dizer aba. Não serve para achar a conversa, redigir a mensagem, rotular nem decidir o que enviar.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
   related:
     - acompanhar-resposta-no-whatsapp
     - conversar-no-whatsapp
@@ -134,6 +134,7 @@ Capturei a entrada de Fotos e vídeos, enviei o arquivo e vi o campo de legenda.
 - A imagem enviada pela entrada que já existe na página vira figurinha, mesmo com a pré-visualização aberta. O campo de legenda é o que diferencia.
 - O menu de anexos fica aberto atrás da pré-visualização, e o botão de enviar continua funcionando.
 - A prévia da lista de conversas mostra "Foto" no lugar do texto quando a imagem é a última mensagem.
+- O comprovante que o chat mostra como miniatura borrada não baixa no WhatsApp Web. Diga isso e peça o arquivo à pessoa.
 
 ## Scripts disponíveis
 
