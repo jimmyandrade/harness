@@ -1416,6 +1416,27 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [ ] Three cases validated with the person
 
+### lancar-venda
+- **Stability**: experimental
+- **Description**: Register, complete, correct, or reconcile a sale of one or more products, linking the customer and units that already exist and leaving an audit trail
+- **Properties**:
+  - Lives at `.agents/skills/lancar-venda/SKILL.md`
+  - Reads the sales database, the bank accounts database, the optional units database, the source of the received amount, and the invoice rule from the project instructions, and asks once when a value is empty
+  - Searches the sale by order number, order link, and transaction id before creating, and links a late store order to the original sale
+  - Never creates the person, product, unit, or variant, and never writes the sold pieces or the stock balance
+  - Records the discount reason and keeps nominal price, discount, credit, amount paid, and amount received distinct, with fees and transfers never counted as a discount
+  - Shows a per-field diff when sources diverge and has the person confirm the canonical value of each field
+  - Treats a credit card cash withdrawal as not a sale, and checks who held the card machine account on the date
+  - Flags a shipped sale that needs an invoice from the configured start date, except for the delivery form that does not ship
+  - Leaves a page comment, before the change, for each migration, correction, reversal, or reconciliation decision
+- **Test Criteria**:
+  - [ ] The skill is present at that path
+  - [ ] An existing sale is updated and a second one is never created
+  - [ ] A missing customer or unit stops the skill with a question
+  - [ ] Divergent sources produce a per-field diff before any change
+  - [ ] An entry without a sale that is a card withdrawal is not registered as a sale
+  - [ ] An empty database parameter makes the skill ask and not choose
+
 ### limpar-copias-de-trabalho
 - **Stability**: experimental
 - **Description**: Remove the git worktrees and the local branches already merged into the base, including those of other sessions, after checking that nothing is lost
