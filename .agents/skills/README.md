@@ -63,6 +63,7 @@ flowchart LR
     definir_link_rastreavel["definir-link-rastreavel"]
     definir_lote_de_ingresso["definir-lote-de-ingresso"]
     definir_medicao_de_metrica["definir-medicao-de-metrica"]
+    definir_negociacao["definir-negociacao"]
     definir_obra_musical["definir-obra-musical"]
     definir_obrigacao_financeira["definir-obrigacao-financeira"]
     definir_okr["definir-okr"]
@@ -392,6 +393,12 @@ flowchart LR
   definir_medicao_de_metrica --> evoluir_habilidade
   definir_medicao_de_metrica --> identificar_duplicata
   definir_medicao_de_metrica --> reconhecer_imagem
+  definir_negociacao --> definir_agenda
+  definir_negociacao --> evoluir_habilidade
+  definir_negociacao --> organizar_ponto_de_contato
+  definir_negociacao --> procurar_email
+  definir_negociacao --> redigir_com_tom_de_voz
+  definir_negociacao --> sincronizar_cronograma
   definir_obra_musical --> definir_fonograma
   definir_obra_musical --> evoluir_habilidade
   definir_obrigacao_financeira --> evoluir_habilidade

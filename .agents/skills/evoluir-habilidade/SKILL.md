@@ -3,7 +3,7 @@ name: evoluir-habilidade
 description: Muda uma skill ou as instruções do projeto a pedido ou pelo feedback de uma execução, como falha ou correção da pessoa, e abre o pull request no repositório de origem. Usada ao pedir uma regra nova, mesmo sem dizer evoluir, e ao fim de cada skill. Não serve para testar a skill, criar a primeira versão, ver se a descrição dispara, só revisar nem gravar no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.33.2"
+  version: "0.33.3"
   related:
     - criar-commit
     - criar-habilidade
@@ -72,7 +72,7 @@ Antes de editar, confira de onde a skill vem e leia a skill inteira, as `related
 
 A frase nova não contradiz nenhuma: quando a regra muda, reescreva a frase que já existe e cada repetição dela em `Problemas comuns`, `Exemplos de entrada e saída`, `Casos-limite` e `Pegadinhas`. Não acrescente exceção noutro lugar.
 
-Valor que muda de um projeto para outro, como pasta, caminho ou nome de banco, vira parâmetro; o passo cita a chave. A explicação do parâmetro fica nos comentários YAML acima da chave, nunca no texto do passo.
+Valor que muda de um projeto para outro, como pasta ou caminho, vira parâmetro; o passo cita a chave. O nome de uma lista ou de uma propriedade não é padrão do core: a skill fala de conceitos e lê os nomes no mapeamento de dados do projeto. Onde a ferramenta não lê o mapeamento, como o Notion, o harness de negócio define o parâmetro nas próprias instruções, e a skill do core não escreve um nome padrão. Sem o nome no mapeamento nem no parâmetro, a skill para e pede. A explicação do parâmetro fica nos comentários YAML acima da chave, nunca no texto do passo.
 
 Fato do negócio, como uma data, a situação de uma conta ou o que aconteceu num caso, não vira regra nem parâmetro: fica no data source, e o passo manda consultá-lo. O fato entra no máximo como exemplo, como `criar-habilidade` manda. A regra que o caso ensina é o que entra no passo, como alerta ou pergunta à pessoa.
 

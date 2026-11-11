@@ -804,6 +804,21 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [ ] The scenarios in `features/` pass in a real measurement
 
+### definir-negociacao
+- **Stability**: experimental
+- **Description**: Record a conversation with a company or a person in the discussion of the right page, and consult the project sources before asking a fact the conversation already answered
+- **Properties**:
+  - Lives at `.agents/skills/definir-negociacao/SKILL.md`
+  - Reads the names of the lists and of the linking properties from the project instructions, and stops when the negotiation list is not in the connected workspace
+  - Keeps a conversation tied to a deal, such as a quote, proposal, partnership or sale, on the negotiation page, and any other conversation on the discussion of the person page, without creating a negotiation
+  - Writes one dated comment per date or block of messages, with the channel and who spoke, and reads the existing comments first so a message is not repeated
+  - Registers the exchange in the same round as the sending, without asking, and says what it registered, with the page link, and what it did not
+  - Checks the comments, the schedule, the registrations, the opportunity pages and the email before asking, and asks only what no source answers
+  - Shows both versions with source and date when two sources disagree, and never picks one
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [ ] The scenarios in `features/` pass in a real measurement
+
 ### definir-obra-musical
 - **Stability**: experimental
 - **Description**: Register or review a musical work from its composition, lyrics, or its record at a collecting society, in the works database of the business
