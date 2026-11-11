@@ -969,6 +969,35 @@ def example_errors(body: list[tuple[int, str]], name: str) -> list[Finding]:
     return errors
 
 
+def paragraph_errors(
+    body: list[tuple[int, str]], previous: str | None, limit: int
+) -> list[Finding]:
+    """A new or changed paragraph above the limit fails: one theme per paragraph keeps the diff small.
+
+    A paragraph is one line of prose or one list item. A line that is already in the
+    committed version passes, so an old skill is fixed when its paragraph changes.
+    """
+    committed = set(previous.splitlines()) if previous else set()
+    findings: list[Finding] = []
+    fenced = False
+    for lineno, raw in body:
+        stripped = raw.strip()
+        if stripped.startswith("```"):
+            fenced = not fenced
+            continue
+        if fenced or not stripped or stripped.startswith(("#", "|", "<")):
+            continue
+        if len(stripped) > limit and raw not in committed:
+            findings.append(
+                Finding(
+                    f"paragraph has {len(stripped)} characters (limit {limit}); "
+                    "split it into one paragraph per theme",
+                    lineno,
+                )
+            )
+    return findings
+
+
 def flowchart_errors(body: list[tuple[int, str]], direction: str) -> list[Finding]:
     findings: list[Finding] = []
     in_fence = False
@@ -1354,6 +1383,7 @@ def main() -> int:
     line_limit = int(parameters.setting(roots, "Linhas"))
     catalog_limit = int(parameters.setting(roots, "Tokens do catálogo"))
     body_limit = int(parameters.setting(roots, "Tokens do corpo"))
+    paragraph_limit = int(parameters.setting(roots, "Caracteres por parágrafo"))
     author = str(parameters.setting(roots, "Organização"))
     license_required = parameters.setting(roots, "Licença obrigatória") == "sim"
     direction = str(parameters.setting(roots, "Direção dos fluxogramas"))
@@ -1466,6 +1496,8 @@ def main() -> int:
             for finding in gherkin_errors(path.parent, gherkin):
                 add(finding, Path(finding.file))
             previous = committed_text(relative)
+            for finding in paragraph_errors(body, previous, paragraph_limit):
+                add(finding)
             new_key = semver_key(version)
             if previous is not None and previous != text and new_key is not None:
                 old_key = semver_key(

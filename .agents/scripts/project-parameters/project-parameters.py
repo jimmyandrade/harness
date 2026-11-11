@@ -24,7 +24,7 @@ CONFIG_FOLDER = "Pasta dos arquivos de configuração"
 CONFIG_FILE = "config.yaml"
 CONFIG_KEY = "parametros"
 YAML_FENCE = re.compile(r"^```ya?ml\s*$")
-INTEGER_SETTINGS = {"Palavras", "Linhas", "Tokens do catálogo", "Tokens do corpo"}
+INTEGER_SETTINGS = {"Palavras", "Linhas", "Tokens do catálogo", "Tokens do corpo", "Caracteres por parágrafo"}
 TEXT_SETTINGS = {
     "Organização",
     "Idioma do Gherkin",
@@ -55,6 +55,7 @@ SETTING_SKILL = {
     "Linhas": "criar-habilidade",
     "Tokens do catálogo": "criar-habilidade",
     "Tokens do corpo": "criar-habilidade",
+    "Caracteres por parágrafo": "criar-habilidade",
 }
 # The Notion sync reads the frontmatter line by line, so the checker rejects what it cannot read.
 BLOCK_SCALAR = re.compile(r':\s*[>|][+-]?\s*$')
