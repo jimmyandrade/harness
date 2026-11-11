@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.47.1"
+  version: "0.48.0"
   related:
     - convidar-para-evento
     - definir-agenda-de-popstar
@@ -29,7 +29,7 @@ metadata:
 Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo.
 ```yaml
 "Formato da data com dia da semana": "terça-feira, 01/09/2026"
-# `Agendas` lista cada agenda pelo `"Nome"` e pelo `"ID"` opcional, com o `"Uso"`: `padrão`, `em uso`, `só leitura`, `aposentada` ou `ignorada`, e a `"Finalidade"` opcional. O evento novo vai para a `padrão`, ou para a principal da conta. Nunca grave em `só leitura`, `aposentada` ou `ignorada`.
+# `Agendas` lista cada agenda pelo `"Nome"` e pelo `"ID"` opcional, com o `"Uso"`: `padrão`, `em uso`, `só leitura`, `aposentada` ou `ignorada`, e a `"Finalidade"` opcional. O evento novo vai para a `padrão`, ou para a principal da conta, salvo quando o Passo 3 manda confirmar a agenda. Nunca grave em `só leitura`, `aposentada` ou `ignorada`.
 "Agendas": []
 # `Compromissos de vida` lista o que um bloco de carreira não apaga.
 "Compromissos de vida":
@@ -109,6 +109,11 @@ Pode trocar o título existente pelo nome canônico mais buscável.
 Só é mantido o que já está completo.
 Não crie duplicata. Na dúvida, mostre o que encontrou e peça confirmação antes de criar outro.
 Pedido com vários momentos: crie todos, inclusive os de data já passada.
+Vários itens citados para a mesma janela, como as roupas de duas origens, são um evento só, salvo se a pessoa pedir separado.
+
+A pessoa diz que o compromisso já está marcado e a busca não o acha: a agenda é que está desatualizada. Isso é pedido para criar. Na mesma resposta, proponha o evento com o que a pessoa disse e peça só o que falta. Não responda só com o que a agenda mostra, como os horários livres e ocupados.
+
+Mais de uma agenda `padrão` ou `em uso` serviria, e a `Finalidade` não decide, como num compromisso pessoal ou doméstico: confirme a agenda com a pessoa, propondo a `padrão`, na mesma pergunta que confirma a criação. Com a `Finalidade` clara, grave sem perguntar.
 
 Antes de criar ou alterar, leia as agendas de uso `aposentada` em `Agendas`.
 Se houver evento, avise que o produto não é mais usado, mostre o compromisso no formato da data com dia da semana, com o horário da fonte, e sugira mover para a agenda padrão.
@@ -158,6 +163,8 @@ flowchart LR
 ### Passo 5
 
 Antes do título, a grafia segue `definir-grafia`. Não grave a forma do pedido.
+
+Pedido ditado ou transcrito por voz pode trazer o nome da marca com a forma ouvida. Confira pela `definir-grafia` e grave a canônica. Na busca do Passo 3, use as duas formas.
 
 ```mermaid
 flowchart LR
@@ -243,6 +250,14 @@ Se você escrever a data numérica sem o dia da semana, ou aceitar um dia da sem
 2. Escreva no formato da data com dia da semana em cada data.
 3. Se divergir, sinalize e confirme antes de criar ou alterar.
 
+### Agendado e não achado
+
+Se você responder só com os horários livres e ocupados quando a pessoa diz que o compromisso está marcado, a agenda continua sem o evento e a pessoa repete o pedido.
+
+1. Trate a fala como pedido para criar e proponha o evento na mesma resposta.
+2. Confirme a agenda quando mais de uma serviria e a `Finalidade` não decide.
+3. Itens da mesma janela são um evento só, salvo pedido em contrário.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
@@ -259,6 +274,10 @@ O tipo seguiu `definir-tipo-do-evento`. A reunião copiou nome e horário da fon
 
 Gravei terça-feira, 13/10/2026, e quarta-feira, 14/10/2026, sem pedir permissão. A viagem não estava confirmada: propus reservar a saída com horário aproximado ou o dia inteiro.
 
+### O horário das roupas está agendado, mas a busca não achou nada.
+
+Propus um evento só, com a janela dita, e perguntei se ia para a agenda padrão ou para a pessoal. Não listei só os horários livres e ocupados.
+
 ### Agende o debriefing do orçamento. O pedido escreveu o nome da empresa com outra grafia.
 
 Conferi a grafia. O título usou o nome canônico e o papel do encontro. A descrição trouxe a página, uma frase e a variação útil.
@@ -268,6 +287,8 @@ Conferi a grafia. O título usou o nome canônico e o papel do encontro. A descr
 - Sem nome, data, organização, oportunidade relacionada ou outro identificador mínimo: peça. Não crie.
 - O evento provável já na agenda: atualize e complete o que falta. Não duplique.
 - A resposta não traz resumo, estado do evento ou fuso: escreva os três.
+- A pessoa diz que o compromisso está marcado e a agenda não o tem: proponha a criação. Não liste só o livre e o ocupado.
+- O nome da marca vem com a forma ouvida de uma transcrição: grave a grafia canônica e busque pelas duas.
 
 ## Pegadinhas
 
@@ -279,6 +300,7 @@ Conferi a grafia. O título usou o nome canônico e o papel do encontro. A descr
 - Título diferente parece evento novo. A busca usa variação de nome, não só o título exato. Na dúvida, mostre e confirme.
 - O link da chamada numa mensagem parece marcar a reunião na conversa do WhatsApp. O convite sai por `convidar-para-evento`, com o evento nativo e a mensagem com o link.
 - «Feira» ou «Reunião» sozinhos parecem título. A busca precisa do nome canônico. O evento externo segue o Passo 5.
+- A busca vazia parece prova de que o compromisso não existe. Quando a pessoa o deu como marcado, é a agenda que falta, e o próximo passo é criar.
 
 ## Scripts disponíveis
 
