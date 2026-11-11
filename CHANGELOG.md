@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.75.0](https://github.com/jimmyandrade/harness/compare/v1.74.0...v1.75.0) (2026-11-11)
+
+
+### Features
+
+* add the fabric and textile composition skills with configurable databases ([#1030](https://github.com/jimmyandrade/harness/issues/1030)) ([0714b20](https://github.com/jimmyandrade/harness/commit/0714b2030daeee4e015678b3fe373637f8471ea9))
+* **definir-tecido:** charge the composition, the technical data, and the photo of a new fabric ([#1035](https://github.com/jimmyandrade/harness/issues/1035)) ([f25decc](https://github.com/jimmyandrade/harness/commit/f25deccf617af7c097ebd5b38cf20267a4d80efb))
+* **lancar-venda:** add the sale skill, with database names and business rules as parameters ([#1031](https://github.com/jimmyandrade/harness/issues/1031)) ([91572e4](https://github.com/jimmyandrade/harness/commit/91572e48fbf60b981d7ff5ae408bbab7aed16d89))
+* **projetar-caixa:** add the cash projection skill for upcoming fairs and opportunities ([#1028](https://github.com/jimmyandrade/harness/issues/1028)) ([25953ef](https://github.com/jimmyandrade/harness/commit/25953ef5f909108e002a998caf5dbd8132c3f0bc))
+
+
+### Bug Fixes
+
+* **definir-agenda:** read a presential event with guests after creating it, since Google Calendar may add a Meet on its own ([#1029](https://github.com/jimmyandrade/harness/issues/1029)) ([d38469a](https://github.com/jimmyandrade/harness/commit/d38469a3e5c87437ccda575b8d4ebe6139ef4b40))
+
 ## [1.74.0](https://github.com/jimmyandrade/harness/compare/v1.73.0...v1.74.0) (2026-11-11)
 
 
