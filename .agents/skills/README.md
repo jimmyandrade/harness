@@ -395,6 +395,7 @@ flowchart LR
   definir_orcamento_de_fornecedor --> procurar_email
   definir_orcamento_de_fornecedor --> reconhecer_imagem
   definir_orcamento_de_fornecedor --> redigir_com_tom_de_voz
+  definir_orcamento_de_fornecedor --> usar_whatsapp_web
   definir_perfil_social --> definir_grafia
   definir_perfil_social --> definir_pessoa
   definir_perfil_social --> identificar_duplicata
