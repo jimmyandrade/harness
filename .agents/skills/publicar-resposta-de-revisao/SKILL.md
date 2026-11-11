@@ -3,7 +3,7 @@ name: publicar-resposta-de-revisao
 description: Publica a resposta a uma revisão recebida, de pessoa ou de bot, de preferência num comentário inline. Marca o login e, com a leitura antes de publicar desligada, publica sem pedir confirmação. NÃO serve para aplicar a sugestão no código nem para revisar o PR de outra pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.4.1"
   related:
     - atender-revisao-de-pull-request
     - definir-pessoa
@@ -42,7 +42,7 @@ A resposta a ele sai no `Idioma da resposta a bot` e é publicada sem esperar qu
 
 ### Passo 1
 
-Antes de escolher o idioma, leia a preferência da pessoa a quem você responde no registro dela, com `definir-pessoa`. Ela vale mais que `Idioma da resposta à revisão` e que qualquer lembrança. Um idioma só, sem tradução, é o que a resposta usa: sem bloco recolhido, sem frase sobre o idioma, e nunca diga de onde veio a preferência. O comentário geral do PR segue a mesma preferência. Sem preferência no registro, escreva no idioma de `Idioma da resposta à revisão`.
+Antes de escolher o idioma, leia a preferência da pessoa a quem você responde no registro dela, com `definir-pessoa`. Ela vale mais que `Idioma da resposta à revisão` e que qualquer lembrança. Quando o registro manda um idioma só, a resposta sai nele, sem bloco recolhido e sem frase sobre o idioma. Nunca diga de onde veio a preferência. O comentário geral do PR segue a mesma preferência. Sem preferência no registro, escreva no idioma de `Idioma da resposta à revisão`.
 A resposta preferida é um comentário inline no trecho do diff que a decisão muda, mesmo quando quem revisou só escreveu no corpo da revisão.
 Sem thread, abra uma revisão sua com esse comentário na linha.
 A conversa do PR fica para o que não tem linha no diff.
