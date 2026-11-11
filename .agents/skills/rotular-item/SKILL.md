@@ -3,7 +3,7 @@ name: rotular-item
 description: Aplica, troca e tira rótulos, etiquetas e tags de organização num item, como pull request, issue, e-mail, conversa ou página, pela escolha da habilidade de origem, sem duplicar rótulo nem mexer no de uma ferramenta. Usada quando outra habilidade rotula um item, lê ou responde uma conversa, ou o estado do item muda. Não serve para decidir o assunto do item, hashtags nem categorias de conteúdo.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.6.0"
   related:
     - criar-pull-request
     - definir-filtro-de-email
@@ -76,6 +76,9 @@ Com `sim`, a falta do rótulo nunca trava a conversa, nem quando a caixa não te
 
 Um rótulo de contexto novo para um remetente que se repete volta à habilidade de origem com a proposta de filtro de `definir-filtro-de-email`, para a etiqueta valer também para o que chegar e para o que já existe.
 Até o filtro existir, aplique o rótulo às conversas existentes pela busca do remetente.
+
+O nome de um rótulo novo serve à pessoa que procura e à IA que busca: o nome oficial da organização como aparece no remetente, sem sigla; o idioma dos demais rótulos do sistema, sem misturar; o assunto como último nível do caminho, em no máximo três níveis; e o estado fora do assunto, numa hierarquia só dele.
+Quando a mesma organização tem operação (dinheiro, entrega ou contrato) e aviso da conta (acesso, segurança ou novidade), são dois assuntos: a operação fica sob a área dela, em `Áreas/<área>/<nome>`, e o aviso da conta em `Recursos/<nome>`.
 Quando a habilidade de origem exige esse rótulo para criar o item, como o rótulo do tipo de um pull request, o item não é criado sem ele, nem a pedido.
 Diga qual rótulo falta e proponha criá-lo e ligá-lo à regra que rotula sozinha, quando o sistema tem uma, como um script que rotula pelo título.
 Crie o item só depois que o rótulo existir.
@@ -139,6 +142,14 @@ Se você aplicar só o estado porque nenhum contexto de `Etiquetas de contexto` 
 2. Crie o rótulo que falta e aplique na mesma rodada, sem perguntar.
 3. Diga na resposta o rótulo criado e proponha acrescentá-lo a `Etiquetas de contexto`.
 
+### Rótulo sem filtro
+
+Se você criar o rótulo de um remetente e aplicá-lo só à conversa que está lendo, a próxima mensagem dele chega sem rótulo e as antigas ficam espalhadas.
+
+1. Devolva à habilidade de origem a proposta de filtro de `definir-filtro-de-email`, com remetentes exatos.
+2. Peça a aplicação do filtro ao histórico.
+3. Sem caminho que crie o filtro, aplique o rótulo às conversas existentes pela busca do remetente e devolva a consulta do filtro pronta.
+
 ### Item aberto sem rótulo
 
 Se você criar o item e só depois escolher o rótulo, ele fica um tempo sem rótulo, e quem filtra não o vê.
@@ -168,7 +179,7 @@ Tirei `blocked` do PR e mantive `enhancement`. A leitura de volta mostrou só `e
 
 ### A fornecedora de uma máquina confirma por e-mail a devolução, e a caixa não tem rótulo dela
 
-`organizar-emails` passou o assunto como operação da fornecedora, pelo esquema BASB. Criei o rótulo dela no lugar que o esquema manda e o rótulo de estado de concluída, que também faltava, e apliquei os dois na mesma rodada. A resposta disse o que criei e propôs acrescentar o rótulo a `Etiquetas de contexto`.
+`organizar-emails` passou o assunto como operação da fornecedora, pelo esquema BASB. Criei o rótulo dela na área, separado do aviso da conta, e o rótulo de estado de concluída, que também faltava, e apliquei os dois na mesma rodada. Devolvi a proposta de filtro por remetente exato, com a aplicação ao histórico. A resposta disse o que criei e propôs acrescentar o rótulo a `Etiquetas de contexto`.
 
 ### Mensagem enviada a um contato no WhatsApp
 
