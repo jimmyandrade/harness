@@ -3,9 +3,10 @@ name: evoluir-habilidade
 description: Muda uma skill ou as instruções do projeto a pedido ou pelo feedback de uma execução, como falha ou correção da pessoa, e abre o pull request no repositório de origem. Usada ao pedir uma regra nova, mesmo sem dizer evoluir, e ao fim de cada skill. Não serve para testar a skill, criar a primeira versão, ver se a descrição dispara, só revisar nem gravar no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.33.0"
+  version: "0.33.1"
   related:
     - criar-commit
+    - criar-habilidade
     - criar-pull-request
     - definir-instrucoes-do-projeto
     - definir-vocabulario
