@@ -3,7 +3,7 @@ name: evoluir-habilidade
 description: Muda uma skill ou as instruções do projeto a pedido ou pelo feedback de uma execução, como falha ou correção da pessoa, e abre o pull request no repositório de origem. Usada ao pedir uma regra nova, mesmo sem dizer evoluir, e ao fim de cada skill. Não serve para testar a skill, criar a primeira versão, ver se a descrição dispara, só revisar nem gravar no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.32.0"
+  version: "0.32.1"
   related:
     - criar-commit
     - criar-pull-request
@@ -73,6 +73,10 @@ O resultado de `testar-habilidade` edita a skill validada no repositório de ori
 Incorpore todos os resultados, não só as falhas. A edição vem do que a execução mostrou.
 Pergunte o que gerou falso positivo, o que passou despercebido e o que pode sair. Se a execução já mostrou a resposta, edite com ela. Quando a pessoa responder o que ainda faltava, edite de novo na mesma conversa.
 Leia o registro da execução, não só o resultado final. Se o agente gasta tempo em etapa improdutiva, a instrução está vaga, não se aplica à tarefa, ou oferece opções sem escolha padrão. Se o próximo trecho deixar o corpo sem folga abaixo de `Tokens do corpo`, veja antes se ele é a forma de uma saída, como a estrutura de um arquivo: a forma vira um modelo de saída citado pelo nome, sem skill nova. O que não é forma vira outra habilidade, com a responsabilidade separada antes de escrever. Antes de mover para um modelo ou separar, mostre por que, para onde vai cada trecho e o nome de cada modelo ou habilidade, e espere a escolha da pessoa. Antes de commitar, rode a checagem que o lefthook roda no pre-commit. Sem `.git/hooks/pre-commit`, rode `.agents/scripts/check-skill/run-check.sh`. Falha, ou corpo no limite, barra o commit e o push. Não diga que está pronto. O tamanho e o profiling seguem `medir-habilidade`.
+
+Antes de commitar, releia as linhas que a edição acrescentou.
+Cada parágrafo trata de um tema, e só as frases que fazem sentido juntas ficam na mesma linha, como o modelo de saída `skill-md` manda.
+Um bloco de várias frases em uma linha é refeito antes do commit, sem tirar nenhuma regra.
 
 ### Passo 3
 
