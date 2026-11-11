@@ -3,7 +3,7 @@ name: enviar-email
 description: Monta e envia um e-mail em nome de uma pessoa, com a assinatura certa, o destinatário principal e as cópias, o anexo vindo do Notion e o envio só com o sim. Usada quando uma pessoa contata uma organização por e-mail, inclusive com comprovante. Não serve para escrever no tom da marca, achar um e-mail nem triar a caixa.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.2.1"
   related:
     - definir-pessoa
     - definir-vocabulario
@@ -35,31 +35,62 @@ flowchart LR
   Q -->|triar ou etiquetar a caixa| O[organizar-emails]
 ```
 
-Antes de redigir, confira nas configurações da ferramenta se o envio está liberado e, se não estiver, peça a liberação logo, com o nome da ferramenta. A liberação não dispensa o sim da pessoa ao texto e aos destinatários.
+Antes de redigir, confira nas configurações da ferramenta se o envio está liberado.
+Se não estiver, peça a liberação logo, com o nome da ferramenta.
+
+A liberação não dispensa o sim da pessoa ao texto e aos destinatários.
 
 ### Passo 2
 
-Quem fala é a pessoa que contata a organização, e não a empresa dona da caixa. Escreva em primeira pessoa e assine com o nome completo dela, como `definir-pessoa` diz que ela é chamada. Assinar com o nome da empresa só vale quando a empresa é quem fala.
+Quem fala é a pessoa que contata a organização, e não a empresa dona da caixa.
+
+Escreva em primeira pessoa e assine com o nome completo dela, como `definir-pessoa` diz que ela é chamada.
+Assinar com o nome da empresa só vale quando a empresa é quem fala.
+
 Se a organização conhece a pessoa por outro endereço, como o endereço do cadastro de associado, ponha esse endereço em cópia, para a resposta chegar a ela.
 
 ### Passo 3
 
-O destinatário principal é o endereço da área que cuida do assunto, como o setor que pediu a vistoria. Todos os outros endereços que já escreveram à pessoa sobre o assunto entram em cópia, para as áreas ficarem a par.
-Só entra em cópia o endereço de um domínio que se sabe ser da organização. Domínio que ninguém confirmou é verificado antes, pela verificação de origem do link. O e-mail que a pessoa só encaminhou não é resposta: o novo e-mail vai à organização, e não a quem encaminhou.
+O destinatário principal é o endereço da área que cuida do assunto, como o setor que pediu a vistoria.
+
+Todos os outros endereços que já escreveram à pessoa sobre o assunto entram em cópia, para as áreas ficarem a par.
+
+Só entra em cópia o endereço de um domínio que se sabe ser da organização.
+Domínio que ninguém confirmou é verificado antes, pela verificação de origem do link.
+
+O e-mail que a pessoa só encaminhou não é resposta: o novo e-mail vai à organização, e não a quem encaminhou.
 
 ### Passo 4
 
-Anexo de pagamento vem do Notion. Todo comprovante fica na despesa antes de ir por e-mail, como `lancar-despesa-pessoal` e `lancar-despesa-da-empresa` mandam. Sem o comprovante na despesa, grave-o lá primeiro e só depois anexe.
-O conector de e-mail aceita anexo só com o conteúdo em base64 dentro da chamada, grande demais para uma imagem. Crie o rascunho sem anexo, abra-o no navegador da pessoa, anexe o arquivo pelo campo de arquivo escondido da página e confira na tela que o anexo aparece, com o nome e o tamanho.
+Anexo de pagamento vem do Notion.
+Todo comprovante fica na despesa antes de ir por e-mail, como `lancar-despesa-pessoal` e `lancar-despesa-da-empresa` mandam.
+Sem o comprovante na despesa, grave-o lá primeiro e só depois anexe.
+
+O conector de e-mail aceita anexo só com o conteúdo em base64 dentro da chamada, grande demais para uma imagem.
+
+Crie o rascunho sem anexo e abra-o no navegador da pessoa.
+Anexe o arquivo pelo campo de arquivo escondido da página e confira na tela que o anexo aparece, com o nome e o tamanho.
 
 ### Passo 5
 
-Aproveite o e-mail para tratar todos os pontos de uma vez, em vez de mandar um e outro depois: o que a pessoa envia, o que pede e o que ainda não sabe, como valores a cotar. Quando o assunto é uma viagem, diga a ida e a volta, com os dias, para a organização saber o período inteiro e, se for o caso, cotar a extensão do serviço.
-Uma data limite ou um prazo vira urgência, e não limite: "preciso do serviço ativo o quanto antes, de preferência antes de sábado", e não "preciso do serviço ativo até sábado", que parece dizer que a necessidade acaba no sábado. O `definir-vocabulario` guarda cada correção dessas.
+Aproveite o e-mail para tratar todos os pontos de uma vez, em vez de mandar um e outro depois: o que a pessoa envia, o que pede e o que ainda não sabe, como valores a cotar.
+
+Quando o assunto é uma viagem, diga a ida e a volta, com os dias.
+Assim a organização sabe o período inteiro e, se for o caso, cota a extensão do serviço.
+
+Uma data limite ou um prazo vira urgência, e não limite.
+Escreva "preciso do serviço ativo o quanto antes, de preferência antes de sábado", e não "preciso do serviço ativo até sábado", que parece dizer que a necessidade acaba no sábado.
+O `definir-vocabulario` guarda cada correção dessas.
 
 ### Passo 6
 
-O texto passa por `redigir-com-tom-de-voz`. Mostre o rascunho inteiro, com o remetente, o Para, as cópias, o assunto, o anexo e a assinatura, e pergunte se pode enviar. O sim vale para esse texto e esses destinatários. Depois do envio, leia a conversa para confirmar que saiu, etiquete como `organizar-emails` manda e, se a mensagem espera resposta, anote quando conferir.
+O texto passa por `redigir-com-tom-de-voz`.
+
+Mostre o rascunho inteiro, com o remetente, o Para, as cópias, o assunto, o anexo e a assinatura, e pergunte se pode enviar.
+O sim vale para esse texto e esses destinatários.
+
+Depois do envio, leia a conversa para confirmar que saiu e etiquete como `organizar-emails` manda.
+Se a mensagem espera resposta, anote quando conferir.
 
 ### Passo 7
 
@@ -105,7 +136,13 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### a pessoa pagou a mensalidade e quer mandar o comprovante à associação, que já a cobrou por três endereços
 
-Gravei o comprovante na despesa, escrevi em primeira pessoa e assinei com o nome da pessoa. O setor que pediu a vistoria ficou em Para. Os outros dois endereços da associação, de domínio confirmado, e o endereço do cadastro de associado ficaram em cópia. O rascunho foi criado sem anexo e o comprovante foi anexado pelo navegador. Mostrei tudo e esperei o sim.
+Gravei o comprovante na despesa, escrevi em primeira pessoa e assinei com o nome da pessoa.
+
+O setor que pediu a vistoria ficou em Para.
+Os outros dois endereços da associação, de domínio confirmado, e o endereço do cadastro de associado ficaram em cópia.
+
+O rascunho foi criado sem anexo e o comprovante foi anexado pelo navegador.
+Mostrei tudo e esperei o sim.
 
 ## Casos-limite
 
