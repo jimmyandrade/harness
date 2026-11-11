@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.12.0"
+  version: "0.13.0"
   related:
     - definir-empresa
     - definir-grafia
@@ -80,7 +80,9 @@ Telefone vai no formato internacional. Celular do Brasil tem 9 dígitos depois d
 
 Com `Cadastro na loja` em `sim`, crie ou atualize o cliente na loja com o nome, o telefone, o e-mail e o idioma, sem consentimento de marketing. Grave o link do cliente em `Campo do cliente na loja`, ou nas notas quando o campo está vazio. O histórico das conversas fica nos comentários da página da pessoa, não na nota do cliente. O perfil que o print mostrar segue `definir-perfil-social`. Quando esse perfil existir, relacione nos perfis sociais relacionados. Não grave o print no corpo.
 
-Grave como confirmado só o que veio direto da pessoa que usa a habilidade ou de uma fonte que respondeu com certeza. Nunca invente papel, time nem apelido. Sem e-mail em nenhuma fonte, o e-mail fica como pendência no registro. Quando algo precisa ir por e-mail à pessoa, proponha pedir o e-mail na conversa. Uma transcrição errada do nome, como a de uma reunião transcrita por voz, que a pessoa confirma ser errada diante do nome canônico, entra nas variações de grafia, com a data e a fonte. O nome completo fica com o canônico, e a transcrição não se descarta nem vira o nome.
+Grave como confirmado só o que veio direto da pessoa que usa a habilidade ou de uma fonte que respondeu com certeza. Nunca invente papel, time nem apelido. Sem e-mail em nenhuma fonte, o e-mail fica como pendência no registro. Quando algo precisa ir por e-mail à pessoa, proponha pedir o e-mail na conversa.
+Uma transcrição errada do nome, como a de uma reunião transcrita por voz, que a pessoa confirma ser errada diante do nome canônico, entra nas variações de grafia, com a data e a fonte. O nome completo fica com o canônico, e a transcrição não se descarta nem vira o nome.
+O que quem usa a habilidade diz sobre o papel de alguém numa empresa, como quem cuida dos recebimentos e quem só é informado, vem direto dela e entra na mesma rodada, sem perguntar. Na pessoa, vai no campo de papel, ou nas observações quando a lista não tem esse campo. Na empresa, a pessoa entra na lista de pessoas responsáveis, e o papel de cada uma vai nas notas da empresa e nas listas do negócio que o citam, como a negociação e o grupo do evento. Depois de gravar, leia as páginas de volta e diga o que gravou e o que não coube.
 Um apelido ou uma grafia ambígua que a pessoa decide inferir, como "vamos inferir que Bia é a Beatriz", entra no registro de quem foi inferida, na lista das transcrições erradas do nome, com o estado `inferido`, a data, quem inferiu, a frase da transcrição e o que descartou as outras hipóteses.
 A entrada não vira confirmada por ter sido pedida: o estado `confirmado` só vale quando alguém que sabe confirma. Uma entrada sem estado conta como confirmada. Ao atualizar um registro, mude o campo pontualmente: nunca regrave o registro inteiro descartando campos já confirmados ou o conteúdo de `extensions`. Todo texto que nomeia a pessoa usa como ela é chamada, e não o primeiro nome do nome completo quando os dois divergem.
 
@@ -152,6 +154,14 @@ Se você ler o perfil colado, usar a informação na resposta e não gravar o re
 3. A saída da empresa entra nas notas, e o registro fica.
 4. Não pergunte se deve gravar. Depois, diga o que gravou.
 
+### Papel dito e não gravado
+
+Se você só explicar como cadastrar o papel de alguém numa empresa, o que a pessoa já disse fica na conversa, e a próxima consulta não o acha.
+
+1. Grave o papel na pessoa e na empresa, como o Passo 3 manda.
+2. Não pergunte se deve gravar.
+3. Leia as páginas de volta e diga o que gravou.
+
 ### Inferência gravada como confirmada
 
 Se você gravar o que a pessoa só inferiu como confirmado, a próxima consulta trata o palpite como fato e a dúvida some.
@@ -179,6 +189,10 @@ Busquei na lista de pessoas e não havia Ana Exemplo. Criei a página com o nome
 ### a reunião transcrita escreveu Ana Souza, e o nome canônico é Ana Sousa
 
 Cadastrei a página com o nome completo Ana Sousa. Gravei Ana Souza nas variações de grafia, como transcrição errada de uma reunião, com a data. Não usei a transcrição como nome.
+
+### a Tula cuida dos recebimentos da Brasil 75 e o Thi só é informado
+
+A Tula não estava na lista de pessoas. Criei a página dela, com o papel nas observações, e a coloquei nas pessoas responsáveis da empresa do local e da empresa que recebe. O papel de cada um entrou nas notas das duas empresas, e o Thi ficou com a nota de que só é informado. Li as páginas de volta e disse o que gravei.
 
 ## Casos-limite
 
