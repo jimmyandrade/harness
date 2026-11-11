@@ -4,7 +4,7 @@ description: Sincroniza o status de tarefas, cards ou issues com o estado do pul
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.9.1"
+  version: "0.10.0"
   related:
     - criar-commit
     - criar-pull-request
@@ -82,9 +82,10 @@ Com o sim, grave a ligação como `Registro da ligação` manda, no momento que 
 No pull request ainda aberto, a gravação entra nele.
 No pull request já mesclado, a gravação entra na tarefa, com o link do pull request.
 Leia antes os comentários da tarefa: se já existe um seu sobre o mesmo assunto, edite esse comentário em vez de abrir outro.
-Uma citação acrescentada depois do merge não fecha a tarefa.
+Uma citação acrescentada depois do merge a uma tarefa que já existia não fecha a tarefa.
 Percorrer as tarefas abertas e fechá-las não é desta habilidade.
 A tarefa fecha quando o pull request que a cita, ainda aberto, é mesclado, e o critério de pronto dela está cumprido.
+A tarefa criada na mesma resposta para um pull request já mesclado nasce desse trabalho: leve-a ao `Status do PR mesclado`, passo a passo pelo `Fluxo de status`, pedindo a confirmação do plano só com `Pedir confirmação do plano` em `sim`.
 
 ```mermaid
 flowchart LR
@@ -176,7 +177,7 @@ Se você tentar levar a tarefa direto ao destino, a transição não existe e a 
 
 ### Estado do PR mudou e a tarefa ficou parada
 
-Se você abrir, tirar do rascunho ou mesclar o PR pelo `gh` direto, ou ler que a pessoa mesclou, e seguir sem rodar esta habilidade, o status da tarefa fica para trás e o progresso do card sai errado.
+Se você abrir, tirar do rascunho ou mesclar o PR pelo `gh` direto, ou ler que a pessoa mesclou, e seguir sem rodar esta habilidade, o status da tarefa fica para trás e o progresso do card sai errado. O mesmo vale para a tarefa que você acabou de criar para um PR já mesclado.
 
 1. Rode esta habilidade na mesma resposta em que o estado do PR mudou ou foi avisado.
 2. Não espere a pessoa pedir.
@@ -248,7 +249,7 @@ A pessoa pede o que está em revisão. Quatro tarefas: ABC-1 tem o PR aprovado e
 - A habilidade parece servir só quando a pessoa pede a varredura. Ela também roda depois de um commit ou de uma mudança no estado do pull request.
 - O lugar das tarefas parece fixo. Ele muda de um negócio para outro e fica em `Consulta das tarefas`.
 - A busca pela chave parece achar o pull request feito sem citar a tarefa. Parta desse pull request e compare o assunto com as tarefas abertas.
-- Uma citação no pull request já mesclado, ou uma varredura das tarefas abertas, parece fechar a tarefa. A gravação entra na tarefa, com o link do pull request. A tarefa fecha quando o pull request que a cita, ainda aberto, é mesclado, e o critério de pronto dela está cumprido.
+- Uma citação no pull request já mesclado, ou uma varredura das tarefas abertas, parece fechar a tarefa. Numa tarefa que já existia, a gravação entra nela, com o link do pull request, e ela fecha quando o pull request que a cita, ainda aberto, é mesclado, e o critério de pronto dela está cumprido. Só a tarefa criada agora para um pull request já mesclado vai direto ao status de mesclado.
 - Uma frase comprimida parece um recado interno. A skill fica fácil de ler por uma pessoa.
 - Abrir, tirar do rascunho ou mesclar o PR pelo `gh` parece não ter relação com a tarefa. O estado do PR mudou, e a habilidade roda mesmo assim.
 - O aviso de que um PR foi mesclado parece só uma informação. É gatilho: confirme o estado MERGED e sincronize a tarefa na mesma resposta.
