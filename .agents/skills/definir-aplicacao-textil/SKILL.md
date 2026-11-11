@@ -1,11 +1,13 @@
 ---
-name: definir-aplicacao
+name: definir-aplicacao-textil
 description: Use essa habilidade sempre que for cadastrar, corrigir ou ligar uma aplicação, como um bordado ou um patch, a uma variante, ou chegar a foto de uma aplicação, mesmo sem dizer aplicação. NÃO use para cadastrar a estampa, o tecido, a composição nem o produto.
 allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-data-sources notion:notion-create-pages notion:notion-update-page
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
   version: "0.1.0"
+  aliases:
+    - definir-aplicacao
   related:
     - definir-composicao-textil
     - definir-estampa
@@ -13,7 +15,7 @@ metadata:
     - identificar-duplicata
 ---
 
-# Definir aplicação
+# Definir aplicação têxtil
 
 ## Parâmetros de configuração
 

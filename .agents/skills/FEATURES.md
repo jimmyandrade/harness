@@ -427,11 +427,11 @@ How these skills relate is in `README.md`, in this folder.
 - **Test Criteria**:
   - [x] The skill is present at that path
 
-### definir-aplicacao
+### definir-aplicacao-textil
 - **Stability**: experimental
 - **Description**: Register, correct, and link an appliqué, such as an embroidery or a patch, to the variant that has it, with its photo
 - **Properties**:
-  - Lives at `.agents/skills/definir-aplicacao/SKILL.md`
+  - Lives at `.agents/skills/definir-aplicacao-textil/SKILL.md`
   - Links the appliqué to the variant, never to the product or the fabric, and accepts from 0 to N appliqués per variant, so a variant without one is valid
   - Reads the appliqué database again and looks for a duplicate by name and motif before creating, and reuses an appliqué that exists, including in more than one variant
   - Keeps the motif as a field of the appliqué, with no relation to a print of the same motif
