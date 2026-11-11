@@ -521,15 +521,16 @@ How these skills relate is in `README.md`, in this folder.
 
 ### definir-composicao-textil
 - **Stability**: experimental
-- **Description**: Record, correct, and review the textile composition of a product, one row per part and material, and build the label composition without repeating a material
+- **Description**: Record, correct, and review the textile composition of a product variant, one row per part and fabric, and build the label composition without repeating a fabric
 - **Properties**:
   - Lives at `.agents/skills/definir-composicao-textil/SKILL.md`
-  - Finds the product by name and name variations and reads all its composition rows before changing any
+  - Finds the product and variant by name and name variations and reads all the variant composition rows before changing any
+  - Links each part of the variant to a fabric (front one fabric, lining another) and copies neither the composition nor the print of the fabric
   - Picks the closest option of the part field, says which one it used, and asks for approval before creating an option
-  - Keeps one row in the canonical part per product, asks which face of a double-sided product is the canonical one, and warns that the SKU prefix may change
+  - Keeps one row in the canonical part per variant, asks which face of a double-sided product is the canonical one, and warns that the SKU prefix may change
   - Points each row to the real fabric registered by the fabric skill, and uses a generic fabric only when the person does not know it
   - Builds the label with one item per distinct fabric, counts the same article in different colors once, and leaves out finishing parts whose fabric is already in the front or the back
-  - Sends a print to the print record and an appliqué to the appliqué record, never to the composition
+  - Treats a print as part of the fabric, never of the composition or the product: another print is another fabric; an appliqué goes to the appliqué record
   - Asks the person for the composition database, the canonical part, and the finishing parts when the project instructions leave them empty
 - **Test Criteria**:
   - [x] The skill is present at that path
@@ -1130,11 +1131,12 @@ How these skills relate is in `README.md`, in this folder.
 - **Properties**:
   - Lives at `.agents/skills/definir-tecido/SKILL.md`
   - Looks for the sheet in the quote, the invoice, the product pages, the fabric photos, the conversations, and the email before asking the supplier, and asks only for what is missing
-  - Treats a fabric as an article in a color: one page per color, asking the color the sheet does not give
+  - Treats each color of a fabric on the sheet as a page: one page per color, asking the color the sheet does not give
   - Writes the composition as one row per fiber, named with the percentage and the fiber abbreviation, and reuses a row that exists
   - Fills an empty composition, leaves an equal one, corrects a different one when the fabric is the sheet article, and keeps one from another purchase with a comment and a task
+  - Links the print to the fabric page, asks which print when the sheet does not say, and never writes the print on the product or the variant
   - Updates the sheet section of a page instead of adding another, and puts the PDF in the sheet file field when the project defines it
-  - Asks the person for the fabric database, the composition database, and the abbreviation of a missing fiber when the project instructions leave them empty
+  - Asks the person for the fabric database, the composition database, the print database, and the abbreviation of a missing fiber when the project instructions leave them empty
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The sheet sources are searched before the supplier is asked

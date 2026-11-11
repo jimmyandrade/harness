@@ -1,7 +1,7 @@
 # language: pt
 
 Funcionalidade: Composição têxtil
-  A composição de um produto tem uma linha por parte e material, e a composição da etiqueta sai dessas linhas sem repetir material.
+  A composição de uma variante tem uma linha por parte e tecido, e a composição da etiqueta sai dessas linhas sem repetir tecido.
 
   Regra: o banco e as partes não vêm da habilidade
 
@@ -28,13 +28,19 @@ Funcionalidade: Composição têxtil
       Quando a habilidade começa
       Então ela para
 
-  Regra: o produto se lê inteiro antes de mexer
+  Regra: a variante se lê inteira antes de mexer
 
     Exemplo: Produto com variações de nome
       Dado que a pessoa cita o produto por um nome antigo
-      Quando a habilidade procura o produto
+      Quando a habilidade procura o produto e a variante
       Então ela acha pelo nome e pelas variações de nome
-      E lê todas as linhas de composição dele antes de mexer
+      E lê todas as linhas de composição da variante antes de mexer
+
+    Exemplo: Tecido diferente por parte
+      Dado que a frente da variante é um tecido e o forro é outro
+      Quando a habilidade grava
+      Então ela grava uma linha para cada parte, com o tecido dela
+      Mas não copia a composição nem a estampa do tecido para a linha
 
   Regra: a parte vem das opções que existem
 
@@ -55,7 +61,7 @@ Funcionalidade: Composição têxtil
       Quando a habilidade vai registrar a linha
       Então ela pergunta antes de registrar
 
-  Regra: a parte canônica tem uma linha só
+  Regra: a parte canônica tem uma linha só por variante
 
     Exemplo: Produto dupla face
       Dado que o produto é dupla face
@@ -97,7 +103,7 @@ Funcionalidade: Composição têxtil
   Regra: a etiqueta não repete material
 
     Exemplo: Um item por tecido
-      Dado que o mesmo artigo aparece em cores diferentes
+      Dado que o mesmo tecido aparece em cores diferentes
       Quando a habilidade monta a etiqueta
       Então ele conta uma vez
 
@@ -117,13 +123,25 @@ Funcionalidade: Composição têxtil
       Então ela mostra a etiqueta
       E as linhas que ficaram de fora, com o motivo
 
-  Regra: a estampa não é composição
+  Regra: a estampa é do tecido
 
-    Exemplo: Estampa ou aplicação
-      Dado que a pessoa cita uma estampa, um bordado ou um patch
+    Exemplo: Estampa
+      Dado que a pessoa cita uma estampa
+      Quando a habilidade classifica a parte
+      Então ela não grava na composição nem no produto
+      E manda cadastrar a estampa no tecido com a habilidade de definir tecido
+
+    Exemplo: Outra estampa na variante
+      Dado que a variante passa a ter outra estampa
+      Quando a habilidade grava
+      Então ela liga a linha a outro tecido, cadastrado com a habilidade de definir tecido
+      Mas não muda a estampa do tecido antigo
+
+    Exemplo: Bordado ou patch
+      Dado que a pessoa cita um bordado ou um patch
       Quando a habilidade classifica a parte
       Então ela não grava na composição
-      E aponta o registro de estampas ou de aplicações do projeto
+      E aponta o registro de aplicações do projeto
 
   Regra: a correção pedida é gravada
 

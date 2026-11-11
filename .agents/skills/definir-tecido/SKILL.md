@@ -28,6 +28,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Banco de tecidos": ""
 # `Banco de composição`: uma linha por percentual e fibra, como `88% PES`.
 "Banco de composição": ""
+# `Banco de estampas`: uma página por estampa, que a página do tecido liga.
+"Banco de estampas": ""
 # `Campo do arquivo da ficha`: campo de arquivo do cadastro de tecidos que guarda o PDF da ficha. Vazio, o PDF vai no corpo da página, ou onde o sistema de cadastro usa para anexos.
 "Campo do arquivo da ficha": ""
 # `Siglas das fibras`: a sigla de cada fibra no nome da linha de composição.
@@ -44,13 +46,15 @@ Mostre o que achou, com o link de cada fonte, e redija o pedido ao fornecedor s�
 
 Os nomes dos bancos vêm das instruções do projeto. Com `Banco de tecidos` ou `Banco de composição` vazio, a pessoa informa o data source na execução e você não escolhe um. Se um dos dois não estiver no workspace conectado, pare. Não use o banco de outro workspace e não mude a estrutura de nenhum dos dois.
 
-Leia o arquivo inteiro. Uma ficha de nota fiscal traz vários artigos, cada um a partir de um cabeçalho de dados técnicos com o código e o nome do produto. De cada artigo, tire o código, o nome, a composição, a largura, a gramatura, o rendimento, o encolhimento e os cuidados de lavar, passar e costurar.
+Leia o arquivo inteiro. Uma ficha de nota fiscal traz vários tecidos, cada um a partir de um cabeçalho de dados técnicos com o código e o nome do tecido. De cada tecido da ficha, tire o código, o nome, a composição, a largura, a gramatura, o rendimento, o encolhimento e os cuidados de lavar, passar e costurar.
 
 ### Passo 2
 
-Leia de novo agora o `Banco de tecidos` filtrado pela empresa e pelo nome do artigo. A pessoa pode ter renomeado ou criado páginas desde a última leitura. Antes de criar uma página, busque com `identificar-duplicata`.
+Leia de novo agora o `Banco de tecidos` filtrado pela empresa e pelo nome do tecido. A pessoa pode ter renomeado ou criado páginas desde a última leitura. Antes de criar uma página, busque com `identificar-duplicata`.
 
-Um tecido é um artigo numa cor: o mesmo artigo em duas cores são duas páginas, com a mesma composição e a mesma ficha. Pergunte a cor que a ficha não diz. O nome segue o das páginas vizinhas, com o artigo e a cor. A página leva a empresa.
+Cada cor de um tecido da ficha é uma página: o mesmo tecido em duas cores são duas páginas, com a mesma composição e a mesma ficha. Pergunte a cor que a ficha não diz. O nome segue o das páginas vizinhas, com o nome do tecido e a cor. A página leva a empresa.
+
+A estampa é do tecido, não do produto: a página do tecido liga a estampa, e a variante do produto chega a ela pelo tecido. Pergunte qual é a estampa quando o tecido parece estampado e a ficha não diz. Estampa que falta em `Banco de estampas`, ou com o banco vazio, pergunte antes de criar. Não grave a estampa no produto nem na variante.
 
 Monte o plano numa tabela antes de gravar: página, ação (criar, corrigir ou completar), composição de agora e composição da ficha. Mostre o plano e siga.
 
@@ -62,11 +66,11 @@ A composição é a relação com linhas do `Banco de composição`, uma por fib
 flowchart LR
   Q{A composição registrada é?} -->|vazia| G[Grava a da ficha]
   Q -->|igual à ficha| N[Nada muda]
-  Q -->|diferente e o tecido é este artigo| C[Corrige pela ficha e avisa]
+  Q -->|diferente e o tecido é o da ficha| C[Corrige pela ficha e avisa]
   Q -->|diferente e veio de outra compra| M[Mantém, comenta e abre a tarefa por definir-tarefa]
 ```
 
-Quando o produto usa um tecido de outra compra, como uma etiqueta antiga, a composição dele fica como está. Comente no produto o que diverge e por quê, e abra a tarefa de conferência por `definir-tarefa`, com o link da tarefa no comentário.
+Quando o tecido registrado veio de outra compra, como uma etiqueta antiga, a composição dele fica como está. Comente no tecido o que diverge e por quê, e abra a tarefa de conferência por `definir-tarefa`, com o link da tarefa no comentário.
 
 ### Passo 4
 
@@ -97,12 +101,12 @@ Se você anexar a ficha sem ler a página, ela fica com duas seções iguais qua
 1. Leia o corpo da página antes.
 2. Atualize a seção que existe.
 
-### Composição trocada entre artigos
+### Composição trocada entre tecidos
 
-Se você copiar a composição de outra página do mesmo fornecedor, o produto sai com a etiqueta errada.
+Se você copiar a composição de outra página do mesmo fornecedor, a variante sai com a etiqueta errada.
 
-1. Leia a composição no artigo da ficha, pelo código.
-2. Confira cada página do plano contra o artigo dela.
+1. Leia a composição no tecido da ficha, pelo código.
+2. Confira cada página do plano contra o tecido dela.
 
 ### Página renomeada no meio da tarefa
 
@@ -113,9 +117,9 @@ Se você gravar pelo que leu no começo da conversa, a escrita desfaz o que a pe
 
 ### Divergência corrigida sem perguntar a origem
 
-Se você corrigir a composição de um produto que usa um tecido de outra compra, o registro certo vira o errado.
+Se você corrigir a composição de um tecido que veio de outra compra, o registro certo vira o errado.
 
-1. Pergunte se o tecido do produto é o artigo da ficha.
+1. Pergunte se o tecido registrado é o tecido da ficha.
 2. De outra compra, mantenha, comente e abra a tarefa.
 
 ### Nome de banco inventado
@@ -132,7 +136,7 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### Estes PDFs são as fichas das notas 111 e 222 do fornecedor
 
-Quatro artigos: uma viscose lisa, um suede com foil, uma malha estampada em duas cores e uma malha bolha. O plano teve cinco páginas. Corrigi o suede de 100% PES para 88% PES e 12% PUE, criei a viscose lisa e as linhas 88% PES, 12% PUE, 90.5% CO e 9.5% PA, e anexei a ficha da nota de cada artigo. A camiseta diverge e usa tecido de outra compra: ficou como está, com comentário e tarefa.
+Quatro tecidos: uma viscose lisa, um suede com foil, uma malha estampada em duas cores e uma malha bolha. O plano teve cinco páginas. Corrigi o suede de 100% PES para 88% PES e 12% PUE, criei a viscose lisa e as linhas 88% PES, 12% PUE, 90.5% CO e 9.5% PA, e anexei a ficha da nota de cada tecido. Um tecido registrado diverge e veio de outra compra: ficou como está, com comentário e tarefa.
 
 ### Qual a composição do tecido da etiqueta que anexei?
 
@@ -140,8 +144,9 @@ A etiqueta não tem ficha. Gravei a composição dela, com o link da fonte, e di
 
 ## Casos-limite
 
-- A ficha não diz a cor: pergunte. Não crie página sem cor quando o artigo tem mais de uma.
-- O mesmo artigo em duas cores tem duas páginas, mas conta uma vez na etiqueta do produto, como `definir-composicao-textil` monta.
+- A ficha não diz a cor: pergunte. Não crie página sem cor quando o tecido tem mais de uma.
+- O mesmo tecido em duas cores tem duas páginas, mas conta uma vez na etiqueta da variante, como `definir-composicao-textil` monta.
+- A ficha diz que o tecido é estampado e a estampa não está em `Banco de estampas`: pergunte antes de criar.
 - A fibra não tem sigla em `Siglas das fibras`: pergunte a sigla antes de criar a linha.
 - A composição vem só da etiqueta, sem ficha: grave a composição e diga que falta a ficha.
 - A composição está só na nota fiscal ou na cotação: grave com o link da fonte e diga que os cuidados ainda faltam.

@@ -32,24 +32,48 @@ Funcionalidade: Tecido
       Então ela para
       E não usa o banco de outro workspace nem muda a estrutura de nenhum dos dois
 
-  Regra: um tecido é um artigo numa cor
+  Regra: cada cor de um tecido da ficha é uma página
 
     Exemplo: O mesmo artigo em duas cores
-      Dado que a ficha traz um artigo que a pessoa quer em duas cores
+      Dado que a ficha traz um tecido que a pessoa quer em duas cores
       Quando a habilidade monta o plano
       Então ela planeja duas páginas, com a mesma composição e a mesma ficha
 
     Exemplo: A ficha não diz a cor
-      Dado que a ficha não diz a cor do artigo
+      Dado que a ficha não diz a cor do tecido
       Quando a habilidade monta o plano
       Então ela pergunta a cor
-      Mas não cria página sem cor quando o artigo tem mais de uma
+      Mas não cria página sem cor quando o tecido tem mais de uma
 
     Exemplo: Página que já existe
-      Dado que o banco de tecidos tem uma página do artigo na cor pedida
+      Dado que o banco de tecidos tem uma página do tecido na cor pedida
       Quando a habilidade monta o plano
-      Então ela relê o banco filtrado pela empresa e pelo nome do artigo antes de criar
+      Então ela relê o banco filtrado pela empresa e pelo nome do tecido antes de criar
       E busca duplicata com a habilidade de identificar duplicata
+
+  Regra: a estampa é do tecido
+
+    Exemplo: Tecido estampado
+      Dado que o tecido da ficha é estampado
+      Quando a habilidade monta a página
+      Então a página do tecido liga a estampa
+      Mas a habilidade não grava a estampa no produto nem na variante
+
+    Exemplo: Estampa que a ficha não diz
+      Dado que o tecido parece estampado e a ficha não diz a estampa
+      Quando a habilidade monta o plano
+      Então ela pergunta qual é a estampa
+
+    Exemplo: Estampa que não existe
+      Dado que a estampa não está no banco de estampas
+      Quando a habilidade vai ligá-la ao tecido
+      Então ela pergunta antes de criar
+
+    Exemplo: Banco de estampas não definido
+      Dado que as instruções do projeto não definem o banco de estampas
+      Quando a habilidade precisa ler ou criar uma estampa
+      Então ela pergunta à pessoa qual é o banco
+      Mas não usa um nome de banco próprio
 
   Regra: a composição é uma linha por fibra
 
@@ -83,7 +107,7 @@ Funcionalidade: Tecido
 
     Exemplo: Composição diferente e o tecido é o artigo da ficha
       Dado que a composição registrada difere da ficha
-      E que o tecido da página é o artigo da ficha
+      E que o tecido da página é o da ficha
       Quando a habilidade grava
       Então ela corrige pela ficha
       E avisa a pessoa
