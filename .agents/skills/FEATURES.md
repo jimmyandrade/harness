@@ -608,6 +608,24 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The description refuses an existence-only check, spelling, social-profile normalization, merging the same item, and deleting without an order
   - [ ] A payment recipient identified by name and company identifier is registered without inventing a responsible contact and returned for linking to the payment
 
+### definir-estampa
+- **Stability**: experimental
+- **Description**: Register, correct, and link a print to the fabric that has it, with its photo
+- **Properties**:
+  - Lives at `.agents/skills/definir-estampa/SKILL.md`
+  - Links the print to the fabric, never to the product or the variant, and registers a missing fabric with the fabric skill first
+  - Reads the print database again and looks for a duplicate by name and motif before creating, and reuses a print that exists
+  - Keeps the motif as a field of the print, with no relation to an appliqué of the same motif
+  - Charges the person for the photo and the information of a new print, leaves it pending without the photo, and does not charge a print created before the project cutoff date
+  - Warns that correcting a print linked to more than one fabric changes all of them
+  - Asks the person for the print database and the photo field when the project instructions leave them empty
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The print is linked to the fabric and not to the product or the variant
+  - [x] A duplicate is searched before creating
+  - [x] A new print without a photo is charged and left pending, and one before the cutoff date is not
+  - [x] An empty database parameter makes the skill ask and not choose
+
 ### definir-filtro-de-email
 - **Stability**: experimental
 - **Description**: Create, edit, and check email filters without hiding mail the person wants to see

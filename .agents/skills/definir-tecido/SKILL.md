@@ -5,10 +5,11 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.5.1"
   related:
     - acompanhar-producao-de-produto
     - definir-composicao-textil
+    - definir-estampa
     - definir-tarefa
     - evoluir-habilidade
     - gerenciar-estoque
@@ -58,7 +59,7 @@ Leia de novo agora o `Banco de tecidos` filtrado pela empresa e pelo nome do tec
 
 Cada cor de um tecido da ficha é uma página: o mesmo tecido em duas cores são duas páginas, com a mesma composição e a mesma ficha. Pergunte a cor que a ficha não diz. O nome segue o das páginas vizinhas, com o nome do tecido e a cor. A página leva a empresa.
 
-A estampa é do tecido, não do produto: a página do tecido liga a estampa, e a variante do produto chega a ela pelo tecido. Pergunte qual é a estampa quando o tecido parece estampado e a ficha não diz. Estampa que falta em `Banco de estampas`, ou com o banco vazio, pergunte antes de criar. Não grave a estampa no produto nem na variante.
+A estampa é do tecido, não do produto: a página do tecido liga a estampa, e a variante do produto chega a ela pelo tecido. Pergunte qual é a estampa quando o tecido parece estampado e a ficha não diz. Estampa que falta em `Banco de estampas`, ou com o banco vazio, pergunte antes de criar, por `definir-estampa`. Não grave a estampa no produto nem na variante.
 
 Monte o plano numa tabela antes de gravar: página, ação (criar, corrigir ou completar), composição de agora e composição da ficha. Mostre o plano e siga.
 
@@ -92,7 +93,7 @@ Antes de encerrar, cobre da pessoa o que falta de cada tecido novo. Tecido novo 
 - [ ] Os dados técnicos que a ficha não traz: largura, gramatura, rendimento, encolhimento e cuidados.
 - [ ] A foto do tecido, em `Campo da foto do tecido`, para cadastrar a estampa dele.
 
-Com a foto de um tecido estampado, cadastre a estampa no banco de estampas do projeto e ligue-a ao tecido. Sem a foto, o tecido fica pendente: diga o que falta e não invente. O tecido criado antes da data de corte não é cobrado e o que falta nele não vira pendência, porque a foto e a ficha de muitos tecidos antigos não existem.
+Com a foto de um tecido estampado, cadastre a estampa por `definir-estampa`, ligada ao tecido. Sem a foto, o tecido fica pendente: diga o que falta e não invente. O tecido criado antes da data de corte não é cobrado e o que falta nele não vira pendência, porque a foto e a ficha de muitos tecidos antigos não existem.
 
 ### Passo 6
 

@@ -11,6 +11,7 @@ metadata:
   related:
     - acompanhar-producao-de-produto
     - definir-tarefa
+    - definir-estampa
     - definir-tecido
     - evoluir-habilidade
     - identificar-duplicata
@@ -50,7 +51,7 @@ flowchart LR
   Q{A parte é?} -->|corpo ou face principal| F[Parte canônica, uma só]
   Q -->|outra face de dupla face| V[A opção de verso]
   Q -->|recorte de outro tecido| P[A opção de recorte, uma linha por tecido]
-  Q -->|estampa| E[Fica no tecido, por definir-tecido, não na composição]
+  Q -->|estampa| E[Fica no tecido, por definir-estampa, não na composição]
   Q -->|patch ou bordado| A[O registro de aplicações do projeto]
   Q -->|outra parte| O[A opção que existe ou pergunte]
 ```
