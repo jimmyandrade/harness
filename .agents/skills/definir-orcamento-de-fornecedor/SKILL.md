@@ -3,7 +3,7 @@ name: definir-orcamento-de-fornecedor
 description: Lê o orçamento ou a proposta que um fornecedor envia, por PDF, imagem, link ou mensagem, confere preço, prazo e validade, compara com a conversa e o registra onde o projeto indica. Usada quando chega orçamento de fornecedor. NÃO serve para pesquisar preço de compra, decidir se fecha, responder ao fornecedor nem lançar a despesa.
 metadata:
   author: jimmyandrade
-  version: "0.1.1"
+  version: "0.2.0"
   related:
     - conversar-no-whatsapp
     - definir-empresa
@@ -26,6 +26,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Campos do orçamento": ["item", "quantidade", "preço unitário", "preço total", "prazo de produção", "prazo de entrega", "validade", "condições de pagamento", "frete"]
 # `Aviso de validade em dias` é quantos dias antes do vencimento o orçamento já é avisado como perto de vencer.
 "Aviso de validade em dias": 7
+# `Conversa de reenvio do arquivo` é o nome da conversa de WhatsApp onde a equipe reencaminha o arquivo que o WhatsApp Web já não carrega, como a conversa de cada pessoa consigo mesma. Vazio: só peça o reenvio.
+"Conversa de reenvio do arquivo": ""
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -34,7 +36,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 ### Passo 1
 
 Abra o orçamento, não só o nome do arquivo. Ele chega como PDF, imagem, link ou texto na conversa, no e-mail ou na reunião. Ler não pede confirmação.
-Imagem segue `reconhecer-imagem`. Sem o arquivo à mão, ou com o aviso de documento indisponível, diga isso e peça que a pessoa o encaminhe pelo celular, sem procurar noutro lugar antes. O WhatsApp Web só abre o PDF recente.
+Imagem segue `reconhecer-imagem`. Com o aviso de documento indisponível, procure o mesmo arquivo, pelo nome ou pelo número, em `Conversa de reenvio do arquivo`: é lá que a equipe o reencaminha. Sem ela, ou sem o arquivo lá, diga isso e peça que a pessoa o encaminhe pelo celular, sem procurar noutro lugar antes. O WhatsApp Web só abre o PDF recente.
 No visualizador do WhatsApp Web, o texto da página não traz o PDF: diminua o zoom, role e leia por captura de tela, até o rodapé, onde costuma estar a validade.
 Um arquivo reenviado pode ser outro orçamento do mesmo fornecedor: confira o número e a data antes de tratá-lo como o já lido.
 
