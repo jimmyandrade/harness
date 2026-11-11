@@ -104,6 +104,7 @@ flowchart LR
     investigar_problema["investigar-problema"]
     lancar_despesa_da_empresa["lancar-despesa-da-empresa"]
     lancar_despesa_pessoal["lancar-despesa-pessoal"]
+    lancar_venda["lancar-venda"]
     levantar_ambiente_do_repositorio["levantar-ambiente-do-repositorio"]
     levantar_contexto_do_pull_request["levantar-contexto-do-pull-request"]
     liberar_espaco_em_disco["liberar-espaco-em-disco"]
@@ -602,6 +603,14 @@ flowchart LR
   lancar_despesa_pessoal --> definir_obrigacao_financeira
   lancar_despesa_pessoal --> evoluir_habilidade
   lancar_despesa_pessoal --> lancar_despesa_da_empresa
+  lancar_venda --> definir_lancamento_financeiro
+  lancar_venda --> definir_pessoa
+  lancar_venda --> definir_preco_de_produto
+  lancar_venda --> evoluir_habilidade
+  lancar_venda --> gerenciar_estoque
+  lancar_venda --> identificar_duplicata
+  lancar_venda --> lancar_despesa_da_empresa
+  lancar_venda --> registrar_ciclo_do_ativo
   levantar_ambiente_do_repositorio --> criar_commit
   levantar_ambiente_do_repositorio --> criar_pull_request
   levantar_ambiente_do_repositorio --> escrever_codigo
