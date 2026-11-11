@@ -453,6 +453,7 @@ flowchart LR
   descrever_habilidade_ou_schema --> testar_habilidade
   emitir_documento_oficial --> evoluir_habilidade
   enviar_email --> definir_pessoa
+  enviar_email --> definir_vocabulario
   enviar_email --> evoluir_habilidade
   enviar_email --> lancar_despesa_da_empresa
   enviar_email --> lancar_despesa_pessoal
