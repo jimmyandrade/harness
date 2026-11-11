@@ -494,6 +494,7 @@ How these skills relate is in `README.md`, in this folder.
   - Keeps in the code record only the characteristics that lead to the classification (kind of good, use, predominant material and, for clothing, construction), never the products that use it
   - Records every confirmation, decision, or status change as a dated comment on the code page
   - Reads the predominant material from the composition list and never copies the composition to the code
+  - For clothing, asks for the construction (knit or woven) together with the fiber, because the construction decides the chapter first
   - Moves a code from Em estudo to Validado only with the yes of whoever decides
   - Links the code to the variant, not to the unit, and links it to the product only as a temporary step while the variant has no field
 - **Test Criteria**:
