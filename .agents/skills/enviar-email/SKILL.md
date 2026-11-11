@@ -3,7 +3,7 @@ name: enviar-email
 description: Monta e envia um e-mail em nome de uma pessoa, com a assinatura certa, o destinatário principal e as cópias, o anexo vindo do Notion e o envio só com o sim. Usada quando uma pessoa contata uma organização por e-mail, inclusive com comprovante. Não serve para escrever no tom da marca, achar um e-mail nem triar a caixa.
 metadata:
   author: jimmyandrade
-  version: "0.2.1"
+  version: "0.2.2"
   related:
     - definir-pessoa
     - definir-vocabulario
@@ -89,6 +89,9 @@ O texto passa por `redigir-com-tom-de-voz`.
 Mostre o rascunho inteiro, com o remetente, o Para, as cópias, o assunto, o anexo e a assinatura, e pergunte se pode enviar.
 O sim vale para esse texto e esses destinatários.
 
+Toda vez que perguntar se pode enviar, repita o link do rascunho no texto da resposta, antes da pergunta.
+O link da primeira vez sobe na conversa e a pessoa não o acha na hora de dar o sim.
+
 Depois do envio, leia a conversa para confirmar que saiu e etiquete como `organizar-emails` manda.
 Se a mensagem espera resposta, anote quando conferir.
 
@@ -121,6 +124,14 @@ Se você anexar um comprovante que só está no chat, a despesa fica sem prova e
 1. Grave o comprovante na despesa.
 2. Pegue o arquivo de lá.
 3. Anexe e confira na tela.
+
+### Pedido de envio sem o link do rascunho
+
+Se você perguntar se pode enviar sem repetir o link do rascunho, o link da primeira vez já subiu na conversa e a pessoa não o acha para conferir.
+
+1. Escreva o link do rascunho no texto da resposta, antes da pergunta.
+2. Repita o link em cada pergunta, mesmo que o rascunho não tenha mudado.
+3. Se o rascunho foi refeito, use o link novo.
 
 ### Resposta a um e-mail encaminhado
 
