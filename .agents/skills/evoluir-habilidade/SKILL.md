@@ -3,7 +3,7 @@ name: evoluir-habilidade
 description: Muda uma skill ou as instruções do projeto a pedido ou pelo feedback de uma execução, como falha ou correção da pessoa, e abre o pull request no repositório de origem. Usada ao pedir uma regra nova, mesmo sem dizer evoluir, e ao fim de cada skill. Não serve para testar a skill, criar a primeira versão, ver se a descrição dispara, só revisar nem gravar no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.32.1"
+  version: "0.33.0"
   related:
     - criar-commit
     - criar-pull-request
@@ -67,7 +67,7 @@ Um feedback sobre o comportamento do agente também entra aqui. O alvo é a skil
 
 A skill é um documento vivo. A iteração parte do feedback.
 Resultado inconsistente, falha de chamada e correção da pessoa: melhore a instrução e acrescente o tratamento do erro.
-Antes de editar, confira de onde a skill vem e leia a skill inteira, as `related` e os parâmetros. Leia o modelo de saída `skill-md` quando for gerar a saída. A cópia instalada por dependência ou plugin não se edita. A frase nova não contradiz nenhuma: quando a regra muda, reescreva a frase que já existe e cada repetição dela em `Problemas comuns`, `Exemplos de entrada e saída`, `Casos-limite` e `Pegadinhas`. Não acrescente exceção noutro lugar. Valor que muda de um projeto para outro, como pasta, caminho ou nome de banco, vira parâmetro; o passo cita a chave. A explicação do parâmetro fica nos comentários YAML acima da chave, nunca no texto do passo. Decisão sobre palavra, como usar um termo ou outro, ou como escrever uma frase, não entra na skill nem num parâmetro: vai para o vocabulário, por `definir-vocabulario`.
+Antes de editar, confira de onde a skill vem e leia a skill inteira, as `related` e os parâmetros. Leia o modelo de saída `skill-md` quando for gerar a saída. A cópia instalada por dependência ou plugin não se edita. A frase nova não contradiz nenhuma: quando a regra muda, reescreva a frase que já existe e cada repetição dela em `Problemas comuns`, `Exemplos de entrada e saída`, `Casos-limite` e `Pegadinhas`. Não acrescente exceção noutro lugar. Valor que muda de um projeto para outro, como pasta, caminho ou nome de banco, vira parâmetro; o passo cita a chave. Fato do negócio, como uma data, a situação de uma conta ou o que aconteceu num caso, não vira regra nem parâmetro: fica no data source, e o passo manda consultá-lo. O fato entra no máximo como exemplo, como `criar-habilidade` manda. A regra que o caso ensina é o que entra no passo, como alerta ou pergunta à pessoa. A explicação do parâmetro fica nos comentários YAML acima da chave, nunca no texto do passo. Decisão sobre palavra, como usar um termo ou outro, ou como escrever uma frase, não entra na skill nem num parâmetro: vai para o vocabulário, por `definir-vocabulario`.
 Subdisparo e sobredisparo vão para `descrever-habilidade-ou-schema`.
 O resultado de `testar-habilidade` edita a skill validada no repositório de origem, na mesma conversa do teste. Sem essa edição, o teste não vale.
 Incorpore todos os resultados, não só as falhas. A edição vem do que a execução mostrou.
@@ -142,7 +142,7 @@ Se você acrescentar uma frase sem ler o resto da skill, ela pode mandar o opost
 
 1. Confira de onde a skill vem e leia a skill inteira, as `related` e os parâmetros antes de editar. A cópia instalada por dependência ou plugin não se edita.
 2. Reescreva a frase que já existe e cada repetição dela. Não acrescente exceção noutro lugar.
-3. Valor que muda de um projeto para outro vira parâmetro. O passo cita a chave.
+3. Valor que muda de um projeto para outro vira parâmetro. O passo cita a chave. Fato do negócio fica no data source, e o passo manda consultá-lo.
 
 ### Rename fora do breaking change
 
@@ -195,6 +195,7 @@ A skill mudou no repositório de origem e o pull request saiu no mesmo turno, em
 
 ## Pegadinhas
 
+- A data ou a situação contada pela pessoa parece um parâmetro. É fato do negócio: fica no data source, e a skill guarda só a regra.
 - A skill parece pronta na primeira versão. Ela é um documento vivo. A iteração parte do feedback.
 - Conferir a cada lição parece necessário. A conferência é uma vez, depois do push.
 - O corpo cheio parece pedir uma skill nova. Quando o trecho é forma, como a estrutura de um arquivo, um modelo de saída resolve sem pesar no catálogo.
