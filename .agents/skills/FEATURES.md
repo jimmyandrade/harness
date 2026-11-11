@@ -530,7 +530,7 @@ How these skills relate is in `README.md`, in this folder.
   - Keeps one row in the canonical part per variant, asks which face of a double-sided product is the canonical one, and warns that the SKU prefix may change
   - Points each row to the real fabric registered by the fabric skill, and uses a generic fabric only when the person does not know it
   - Builds the label with one item per distinct fabric, counts the same article in different colors once, and leaves out finishing parts whose fabric is already in the front or the back
-  - Treats a print as part of the fabric, never of the composition or the product: another print is another fabric; an appliqué goes to the appliqué record
+  - Treats a print as part of the fabric, never of the composition or the product: another print is another fabric; an appliqué belongs to the variant, optional and from 0 to N, and never enters the composition or the label
   - Asks the person for the composition database, the canonical part, and the finishing parts when the project instructions leave them empty
 - **Test Criteria**:
   - [x] The skill is present at that path
