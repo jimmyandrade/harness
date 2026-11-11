@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.74.0](https://github.com/jimmyandrade/harness/compare/v1.73.0...v1.74.0) (2026-11-11)
+
+
+### Features
+
+* **acompanhar-producao-de-produto:** track product production by unit and size ([#1026](https://github.com/jimmyandrade/harness/issues/1026)) ([ed8c6d6](https://github.com/jimmyandrade/harness/commit/ed8c6d6e31e8b46f096d0562a6b9b3ec2f07d105))
+* **definir-agenda:** create the event when the person says it is booked and the calendar lacks it ([#1027](https://github.com/jimmyandrade/harness/issues/1027)) ([009288e](https://github.com/jimmyandrade/harness/commit/009288e869c730c5dcd2c0eab702d402d5ad396e))
+* **definir-negociacao:** add the skill that records conversations with companies and people ([#1025](https://github.com/jimmyandrade/harness/issues/1025)) ([724496c](https://github.com/jimmyandrade/harness/commit/724496cbe218002c4963379f72f788c506998b50))
+* **definir-preco-de-produto:** add the product price skill with a configurable price history source ([#1024](https://github.com/jimmyandrade/harness/issues/1024)) ([6a90348](https://github.com/jimmyandrade/harness/commit/6a90348244cdc225a5e7dd493d848a36259af2fc))
+
+
+### Bug Fixes
+
+* **usar-whatsapp-web:** ask for the file when the chat shows a receipt as a blurred thumbnail ([#1020](https://github.com/jimmyandrade/harness/issues/1020)) ([be15d8e](https://github.com/jimmyandrade/harness/commit/be15d8e1c75af70c630f33e77623cd6f04bc55b9))
+* **usar-whatsapp-web:** make scheduled routines ask the owner session instead of opening a tab ([#1022](https://github.com/jimmyandrade/harness/issues/1022)) ([8fae76e](https://github.com/jimmyandrade/harness/commit/8fae76e535a24471326e5b3f6da2e10c3bfa18be))
+
 ## [1.73.0](https://github.com/jimmyandrade/harness/compare/v1.72.0...v1.73.0) (2026-11-11)
 
 
