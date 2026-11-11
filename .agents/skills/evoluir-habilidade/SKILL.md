@@ -3,7 +3,7 @@ name: evoluir-habilidade
 description: Muda uma skill ou as instruções do projeto a pedido ou pelo feedback de uma execução, como falha ou correção da pessoa, e abre o pull request no repositório de origem. Usada ao pedir uma regra nova, mesmo sem dizer evoluir, e ao fim de cada skill. Não serve para testar a skill, criar a primeira versão, ver se a descrição dispara, só revisar nem gravar no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.31.0"
+  version: "0.32.0"
   related:
     - criar-commit
     - criar-pull-request
@@ -81,7 +81,7 @@ Proponha um script testado uma vez. Com o aceite, grave em `scripts/` quando só
 
 ### Passo 4
 
-Quando outra habilidade chega aqui ao terminar, siga `Modo de aprendizado`. Com `não`, encerre. Com `perguntar` ou `sim`, grave cada lição como um commit numa branch com nome em inglês e siga `criar-pull-request`. Não pergunte se a pessoa quer a lição em um commit. `Criar pull request ao terminar` decide a abertura: `rascunho` abre em rascunho, `sim` abre pronto, `não` não publica. O comando já leva a pessoa atribuída e o rótulo. Depois do push, uma vez, confira o título e a descrição. Várias lições no mesmo push não repetem a conferência. Com `rascunho`, tire do rascunho quando a pessoa encerrar a sequência.
+Quando outra habilidade chega aqui ao terminar, siga `Modo de aprendizado`. Com `não`, encerre. Com `perguntar` ou `sim`, grave cada lição como um commit numa branch com nome em inglês e siga `criar-pull-request`. Antes de gravar numa branch que já teve PR, confira o estado dele no GitHub. Aberto, a lição entra nessa branch. Mesclado ou fechado, a lição vai numa branch nova a partir da base atualizada, com PR próprio, e a descrição do PR mesclado não muda. Não pergunte se a pessoa quer a lição em um commit. `Criar pull request ao terminar` decide a abertura: `rascunho` abre em rascunho, `sim` abre pronto, `não` não publica. O comando já leva a pessoa atribuída e o rótulo. Depois do push, uma vez, confira o título e a descrição. Várias lições no mesmo push não repetem a conferência. Com `rascunho`, tire do rascunho quando a pessoa encerrar a sequência.
 
 ## Problemas comuns
 
@@ -92,6 +92,14 @@ Se você perguntar se a pessoa quer a lição em um commit, o pull request não 
 1. Grave a lição e siga `criar-pull-request`.
 2. Não pergunte.
 3. `Criar pull request ao terminar` em `rascunho` abre em rascunho. Em `sim`, abre pronto. Em `não`, não publique e diga o nome da branch.
+
+### Lição na branch mesclada
+
+Se você gravar a lição na branch de um PR que já foi mesclado, o commit não chega à base e a descrição do PR passa a contar o que não entrou.
+
+1. Antes do commit, confira o estado do PR da branch no GitHub.
+2. Mesclado ou fechado: crie uma branch nova a partir da base atualizada e abra outro PR, com o link do anterior.
+3. Não edite a descrição do PR mesclado para incluir a lição nova.
 
 ### Conferência a cada lição
 
@@ -179,6 +187,7 @@ A skill mudou no repositório de origem e o pull request saiu no mesmo turno, em
 - A cópia não tem o repositório de origem nem conexão que escreva nele: não peça o repositório. Entregue a mudança pronta, por skill e passo, para a sessão com o repositório de origem.
 - O pedido é só o tamanho ou o tempo: use `medir-habilidade`. Não edite a skill.
 - Várias lições sobem no mesmo push: a conferência do título e da descrição é uma, depois do push.
+- A branch da lição já tem PR mesclado ou fechado: a lição vai numa branch nova a partir da base, com PR próprio.
 
 ## Pegadinhas
 
