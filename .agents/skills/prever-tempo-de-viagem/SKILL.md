@@ -1,10 +1,10 @@
 ---
 name: prever-tempo-de-viagem
-description: Calcula a hora de saída de uma viagem de carro a partir da chegada desejada, pelo histórico do mesmo trecho, e mostra a margem para a janela do compromisso. Usada quando a pessoa pergunta a que horas sair ou quanto a viagem leva. NÃO serve para cadastrar a viagem, escolher a saída pela pessoa nem lançar despesa.
+description: Prevê o tempo de uma viagem de carro pelo histórico do mesmo trecho, com a hora de chegada para uma saída dada ou a hora de saída para uma chegada desejada, e a margem para a janela do compromisso. Usada quando a pessoa pergunta quanto a viagem leva, a que horas chega ou a que horas sai. NÃO serve para cadastrar a viagem, escolher a saída pela pessoa nem lançar despesa.
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
   related:
     - acompanhar-veiculo
     - definir-viagem
@@ -28,7 +28,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ### Passo 1
 
-Peça a data e a hora de chegada desejadas, o trecho e a janela do compromisso, como a montagem de uma feira. Sem a chegada desejada, pergunte e pare. A viagem, o cronograma e o veículo vêm do mapeamento de dados do projeto, e se o veículo ou o cronograma não estiverem no workspace conectado, pare.
+Peça o trecho, a janela do compromisso, como a montagem de uma feira, e o que a pessoa já fixou: a saída, para calcular a chegada, ou a chegada desejada, para calcular a saída. Sem nenhuma das duas, pergunte e pare. A viagem, o cronograma e o veículo vêm do mapeamento de dados do projeto, e se o veículo ou o cronograma não estiverem no workspace conectado, pare.
 
 ### Passo 2
 
@@ -40,11 +40,11 @@ Calcule a duração corrida base pela mediana dos trechos. O pior caso é o maio
 
 ### Passo 4
 
-Confira se o trecho exige abastecer, pelo consumo e pela autonomia do veículo nas leituras. A saída para a chegada desejada é a chegada menos a duração corrida. Mostre a base, a base com folga e o pior caso, cada um com a hora de saída. Se a pessoa já tem uma saída planejada, mostre a chegada de cada cenário e a margem para a janela do compromisso.
+Confira se o trecho exige abastecer, pelo consumo e pela autonomia do veículo nas leituras. Com a saída dada, a chegada de cada cenário é a saída mais a duração corrida. Com a chegada desejada, a saída é a chegada menos a duração corrida. Mostre a base, a base com folga e o pior caso, cada um com a hora calculada e a margem para a janela do compromisso.
 
 ### Passo 5
 
-Recomende a faixa de saída e deixe a escolha com a pessoa. Se a margem do cenário base for menor que a folga, diga isso na primeira linha da resposta. A escolha da saída e o cronograma da viagem seguem `definir-viagem`. A data sai com o dia da semana.
+Recomende a faixa e deixe a escolha com a pessoa. Se a margem do cenário base for menor que a folga, diga isso na primeira linha da resposta. A escolha da saída e o cronograma da viagem seguem `definir-viagem`. A data sai com o dia da semana.
 
 ### Passo 6
 
@@ -84,16 +84,16 @@ Se você decidir a saída pela pessoa, a viagem passa a seguir um horário que e
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
-### a que horas sair para chegar às 15h de sábado?
+### a que horas sair para chegar às 15h de sábado? E se a gente sair às 10h, quando chega?
 
-O histórico tinha dois trechos do mesmo sentido, de 9h40 e 9h54 de tempo de viagem. A previsão base ficou em 9h54 corridos, e a saída para chegar às 15h, às 5h06. Com 60 minutos de folga, a saída foi às 4h06. Avisei que a amostra era pequena. A recomendação foi a faixa das 4h às 5h, e a escolha ficou com a pessoa.
+O histórico tinha dois trechos do mesmo sentido, de 9h40 e 9h54 de tempo de viagem. A previsão base ficou em 9h54 corridos, e a saída para chegar às 15h, às 5h06. Com 60 minutos de folga, a saída foi às 4h06. Avisei que a amostra era pequena. Para a saída às 10h, a chegada ficou às 19h54 no cenário base e às 21h com a folga, e mostrei a margem para a janela. A recomendação foi a faixa das 4h às 5h, e a escolha ficou com a pessoa.
 
 ## Casos-limite
 
 - Sem histórico do trecho: não invente. Diga que a previsão não tem base e peça uma estimativa da pessoa, marcada como estimativa.
 - O sentido do histórico é o oposto: use só como referência e diga isso.
 - Várias paradas sem duração: some as que têm e nomeie as que faltam.
-- A chegada desejada é depois do fim da janela: avise antes de calcular.
+- A chegada desejada, ou a calculada, cai depois do fim da janela: avise antes de seguir.
 - O pedido é só cadastrar a viagem: siga `definir-viagem`.
 
 ## Pegadinhas
