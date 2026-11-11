@@ -52,6 +52,7 @@ flowchart LR
     definir_grafia["definir-grafia"]
     definir_grupo_de_oportunidades["definir-grupo-de-oportunidades"]
     definir_historia_de_usuario["definir-historia-de-usuario"]
+    definir_hospedagem["definir-hospedagem"]
     definir_inscricao["definir-inscricao"]
     definir_instrucoes_do_projeto["definir-instrucoes-do-projeto"]
     definir_issue_do_github["definir-issue-do-github"]
@@ -337,6 +338,13 @@ flowchart LR
   definir_grupo_de_oportunidades --> criar_oportunidade
   definir_grupo_de_oportunidades --> procurar_oportunidade
   definir_grupo_de_oportunidades --> triar_conversas
+  definir_hospedagem --> acompanhar_veiculo
+  definir_hospedagem --> conversar_no_whatsapp
+  definir_hospedagem --> definir_pessoa
+  definir_hospedagem --> definir_viagem
+  definir_hospedagem --> evoluir_habilidade
+  definir_hospedagem --> procurar_email
+  definir_hospedagem --> redigir_com_tom_de_voz
   definir_inscricao --> definir_grafia
   definir_inscricao --> garantir_ingresso
   definir_inscricao --> procurar_inscricao
@@ -655,6 +663,7 @@ flowchart LR
   procurar_variacao_de_termo --> definir_vocabulario
   procurar_variacao_de_termo --> evoluir_habilidade
   publicar_resposta_de_revisao --> atender_revisao_de_pull_request
+  publicar_resposta_de_revisao --> definir_pessoa
   publicar_resposta_de_revisao --> escrever_link
   publicar_resposta_de_revisao --> publicar_revisao_de_codigo
   publicar_revisao_de_codigo --> definir_pessoa

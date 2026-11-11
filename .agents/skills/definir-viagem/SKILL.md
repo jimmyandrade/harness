@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.1"
+  version: "0.4.1"
   related:
     - acompanhar-veiculo
     - definir-agenda
@@ -110,6 +110,8 @@ flowchart LR
 ### Passo 4
 
 O horário que a passagem ou a pessoa trouxe fica no marco correspondente. O horário do voo não vira embarque, e o embarque não vira decolagem. Transfer, atividade, check-in e chegada não ganham hora aproximada. Número de voo e outra informação sem propriedade própria entram no contexto do marco, sem repetir data, hora ou local. O responsável que a fonte nomear entra nos responsáveis. A nota daquele acontecimento entra no contexto. Cada hospedagem é um registro ligado à viagem, e só entra com nome ou endereço confiável. Sem nome confirmado, o título é o endereço em texto. Não invente o nome. Clima e vestuário é a orientação geral da época: frio, calor, seco, chuva e o tipo de roupa a levar. Não é produto nem variante da empresa. Não invente o campo. Valor coberto pela organização e despesa da pessoa participante permanecem distintos. Cidade, aeroporto, hotel, horário, transfer e responsabilidade só entram com fonte que os confirma. Lacuna, divergência e evidência relevante ficam no corpo da viagem. A oportunidade guarda a missão, o evento ou o compromisso que originou a viagem. O roteiro operacional não entra nela nem na inscrição. Não cole o comprovante no corpo da viagem, da hospedagem nem do marco.
+
+Com o link ou o código da reserva e sem nome ou endereço, leia a reserva antes de perguntar, nesta ordem: CLI da plataforma, API, MCP, skill e, por último, o navegador. No navegador, a página que pede login abre na aba em que a pessoa entrou. Não entre por ela nem use senha. Grave o código da reserva, o endereço, o anfitrião, o check-in, o checkout e a regra de cancelamento na hospedagem.
 
 ```mermaid
 flowchart LR
@@ -244,6 +246,14 @@ Se você escrever o roteiro operacional na oportunidade ou na inscrição, a via
 1. Deixe rota, datas, lacuna e divergência na viagem. Cada hospedagem confiável fica ligada a ela.
 2. Deixe cada marco no cronograma, ligado a essa viagem e à oportunidade que já existir.
 3. A oportunidade guarda a missão que originou a viagem. A inscrição não substitui a viagem nem a linha do tempo.
+
+### Dados da reserva pedidos à pessoa
+
+Se você pedir o endereço ou o nome da hospedagem tendo o link ou o código da reserva, a pessoa digita o que a reserva já mostra.
+
+1. Siga a ordem do Passo 4: CLI, API, MCP, skill e, por último, o navegador.
+2. Página que pede login: peça que a pessoa entre na aba do navegador e leia por ela.
+3. Grave a hospedagem ligada à viagem e o código da reserva no lançamento do pagamento.
 
 ### Peça no lugar da orientação
 
