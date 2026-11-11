@@ -3,12 +3,13 @@ name: acompanhar-resposta-no-whatsapp
 description: Acompanha, por uma rotina que lê as conversas com a etiqueta de ação esperada, se o contato respondeu a uma mensagem enviada no WhatsApp, avisa quando a resposta chega e troca a etiqueta. Usada quando a mensagem espera resposta, como uma pergunta, um pedido ou um prazo, ou quando a pessoa pergunta se alguém já respondeu. Não serve para ler, redigir nem enviar a mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.3.1"
+  version: "0.4.0"
   related:
     - conversar-no-whatsapp
     - definir-rotina
     - evoluir-habilidade
     - rotular-item
+    - usar-whatsapp-web
 ---
 
 # Acompanhar resposta no WhatsApp
@@ -40,7 +41,7 @@ A pergunta que pede o sim do envio, em `conversar-no-whatsapp`, já diz que a re
 
 A rotina filtra a lista de conversas pela etiqueta `Ação esperada` e segue `Ao conferir a resposta` em cada conversa do filtro. Com `ler a lista`, ela lê só a prévia e o contador de não lidas, sem abrir a conversa. Com `abrir a conversa`, ela abre, lê as mensagens novas e as marca como lidas, e a pergunta do sim diz isso.
 A resposta chegou quando a prévia da linha do contato não tem os vistos de enviada e chegou depois da mensagem, ou quando há contador de não lidas.
-Ache a conversa e trate a aba como `conversar-no-whatsapp` manda: a mesma aba, o mesmo botão do aviso, o mesmo QR code.
+Ache a conversa e siga `usar-whatsapp-web` para a aba: a mesma aba, o mesmo botão do aviso, o mesmo QR code e a sessão dona.
 
 ### Passo 3
 
@@ -48,8 +49,6 @@ Quando a resposta chega, a rotina avisa a pessoa e troca `Ação esperada` por `
 A conversa que passa de `Dias sem resposta para avisar` sem resposta ganha um aviso, uma vez, e mantém a etiqueta.
 Sem nenhuma conversa na etiqueta, a rotina diz isso em uma linha.
 Uma mensagem que espera resposta e saiu sem a etiqueta, porque a pergunta do sim não citou o acompanhamento ou porque a etiqueta ficou para depois, não sai dos próximos passos da resposta até a conversa ser etiquetada ou a pessoa recusar. Ao perceber a falta, confira antes a lista de conversas: a resposta pode já ter chegado.
-
-Ao terminar, deixe a aba do WhatsApp Web aberta.
 
 ### Passo 4
 
@@ -59,7 +58,7 @@ Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ### Duas rotinas no mesmo WhatsApp Web
 
-Se você criar uma rotina de resposta ao lado de outra que já lê o WhatsApp Web, as duas disparam no mesmo horário: cada execução abre a própria aba e clica no botão do aviso, e uma toma a conexão da outra. As duas alternam sem ler nada.
+Se você criar uma rotina de resposta ao lado de outra que já lê o WhatsApp Web, as duas disparam no mesmo horário: cada execução abre a própria aba em vez de pedir à dona e clica no botão do aviso, e uma toma a conexão da outra. As duas alternam sem ler nada.
 
 1. Antes de criar a rotina, liste as rotinas e procure uma que já leia o WhatsApp Web.
 2. Se existir, use-a: ela já lê a etiqueta `Ação esperada`.
@@ -93,7 +92,7 @@ A rotina filtrou a lista pela etiqueta `Ação esperada` e leu a prévia de cada
 - Abrir a conversa para ver se chegou resposta parece inofensivo. Marca as mensagens como lidas no celular de quem mandou. Com `Ao conferir a resposta` em `ler a lista`, a rotina não abre a conversa.
 - Editar a rotina parece o jeito de acompanhar um contato novo. A etiqueta faz isso, e a rotina fica como está.
 - Perguntar se cria a rotina parece deixar a decisão com a pessoa. Quando a conversa segue para outro assunto, a pergunta some e a resposta do contato espera sem ninguém ver.
-- A rotina agendada roda numa sessão nova, sem as abas da sessão anterior, e sempre abre a própria aba.
+- A rotina agendada roda numa sessão nova, sem as abas da sessão anterior, e pede a leitura à dona, como `usar-whatsapp-web` manda, em vez de abrir a própria aba.
 - Na lista, "Você:" antes da prévia só aparece em grupo. Na conversa individual, a mensagem que você enviou tem os vistos antes da prévia, e a do contato não tem.
 - A lista mostra o horário só nas mensagens de hoje. De ontem em diante, mostra "Ontem", o dia da semana ou a data, sem a hora.
 - Se a pessoa já abriu a conversa, em qualquer janela, o contador de não lidas some e a rotina não reconhece a resposta por ele: compare o horário da última mensagem do contato com o da sua.

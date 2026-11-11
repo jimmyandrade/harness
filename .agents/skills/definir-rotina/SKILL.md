@@ -3,12 +3,13 @@ name: definir-rotina
 description: Cria, revisa e audita rotinas agendadas ou por evento, para rodarem só quando o resultado tem uso. Usada ao pedir, mudar ou auditar uma rotina, ou antes de pedir de novo um resultado que uma rotina já gerou, mesmo sem dizer rotina. Não serve para executar o trabalho da rotina, criar evento na agenda nem medir uma skill.
 metadata:
   author: jimmyandrade
-  version: "0.5.2"
+  version: "0.6.0"
   related:
     - acompanhar-fila-de-revisao
     - acompanhar-resposta-no-whatsapp
     - conversar-no-whatsapp
     - evoluir-habilidade
+    - usar-whatsapp-web
 ---
 
 # Definir rotina
@@ -76,7 +77,7 @@ O prompt da rotina com condição de parada, como a primeira resposta ou a data 
 Com `tentar e perguntar`, ele manda a execução tentar a pausa uma vez, com o motivo na descrição, e, se a chamada falhar, avisar numa linha que a condição chegou e que a pessoa pausa a rotina pelo nome dela.
 Com `perguntar`, ele manda só o aviso, sem chamar a ferramenta.
 A resposta que cria a rotina diz isso. Na próxima conversa com a pessoa, pause as rotinas cuja condição já chegou.
-Rotinas que usam a mesma sessão de navegador, como o WhatsApp Web, viram uma rotina só, que lê todos os itens na mesma execução. Duas execuções no mesmo horário abrem cada uma a própria aba e tomam a conexão uma da outra.
+Rotinas que usam a mesma sessão de navegador, como o WhatsApp Web, viram uma rotina só, que lê todos os itens na mesma execução. Duas execuções no mesmo horário abrem cada uma a própria aba e tomam a conexão uma da outra. No WhatsApp Web, a execução pede a leitura à dona, como `usar-whatsapp-web` manda.
 
 ### Passo 5
 

@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.29.0"
+  version: "0.31.0"
   aliases:
     - redigir-mensagem-de-whatsapp
   related:
@@ -21,6 +21,7 @@ metadata:
     - procurar-tarefa
     - redigir-com-tom-de-voz
     - rotular-item
+    - usar-whatsapp-web
   models:
     - mensagens-do-whatsapp
 ---
@@ -61,12 +62,7 @@ Peça o assunto: quem pediu, sobre quem ou o quê, e se a pessoa quer só ler ou
 
 Use o primeiro canal de `Canais em ordem de preferência` que a sessão tem. Diga qual usou e, quando pulou um, por que ele não estava disponível. Sem nenhum canal da lista, pare e diga isso.
 
-No WhatsApp Web, use o Chrome da pessoa pela extensão Claude in Chrome, que já tem o login dela, e abra-o sem perguntar antes: ler não pede confirmação. O navegador embutido do app não serve, porque o WhatsApp Web o recusa como incompatível: troque para o Chrome na mesma sequência. Se a extensão não responder, o WhatsApp Web não está conectado: siga o parágrafo do QR code. Use, durante toda a tarefa, a aba que a sessão já abriu: não abra outra nem a recarregue. Antes de ler ou enviar, confira no cabeçalho o nome da conversa. Não peça para a pessoa mover a aba dela.
-
-Se aparecer o aviso de que o WhatsApp está aberto em outra janela, clique no botão do aviso que passa a conexão para a sua aba. O texto dele muda com a versão do WhatsApp, como "Usar nesta janela" ou "Usar aqui", e pode ser outro. Na mesma sequência de ações, espere a lista carregar, busque e leia.
-Se o aviso voltar, outra aba tomou a conexão: clique de novo uma vez só, com a leitura na mesma sequência, e não alterne mais. Ao terminar, diga que a outra janela ficou desconectada e volta pelo mesmo botão.
-
-Se aparecer o QR code, o WhatsApp Web não está conectado: pare, peça para a pessoa conectar o celular e, sem perguntar, crie com `definir-rotina` uma rotina que a lembre de reconectar e pare quando ele voltar a responder. Não tente ler o banco do aplicativo de desktop.
+No WhatsApp Web, todo acesso segue `usar-whatsapp-web`: o Chrome da pessoa, a aba única, o aviso de outra janela, o QR code e a sessão dona. Peça a leitura a ela e, antes de ler ou enviar, confira no cabeçalho o nome da conversa. O texto, o destino e o sim do envio continuam sendo daqui.
 
 ### Passo 2
 
@@ -146,28 +142,11 @@ Quando a mensagem espera resposta, como uma pergunta, um pedido ou um prazo, sig
 
 Depois do envio, atualize os rótulos de cada conversa em que enviou, e rotule a do e-mail do comprovante. Passe quem age agora e o contexto entre `Etiquetas de contexto`. Diga na resposta os rótulos que ficaram.
 
-Ao terminar, deixe a aba do WhatsApp Web aberta, mesmo quando as outras abas da tarefa forem fechadas.
-
 ### Passo 8
 
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
-
-### Aba fechada
-
-Se você fechar a aba do WhatsApp Web no fim da tarefa, a sessão cai e a pessoa precisa ler o QR code de novo.
-
-1. Deixe a aba aberta.
-2. Na próxima vez, use essa aba.
-
-### Aba da pessoa fora do alcance
-
-Se você pedir para a pessoa mover a aba do WhatsApp Web para o seu grupo de abas, ela move e você continua sem ver. No Claude in Chrome, o grupo de abas pertence a uma sessão, e o ID muda. Não dá para guardar o ID nem reaproveitar o grupo.
-
-1. Abra o WhatsApp Web numa aba sua, uma só por sessão.
-2. Clique no botão do aviso, como "Usar nesta janela" ou "Usar aqui", e leia na mesma sequência.
-3. Aplique o filtro de `Etiqueta das conversas`.
 
 ### Dia da semana errado
 
@@ -270,7 +249,7 @@ Mostrei a edição "Chegaremos*" na mesma mensagem e editei depois do sim. Não 
 
 ## Casos-limite
 
-- Nenhuma aba do WhatsApp Web e o QR code na tela, ou a extensão sem resposta: pare, peça a conexão e crie a rotina de lembrete, como o Passo 1 manda.
+- Nenhuma aba do WhatsApp Web e o QR code na tela, ou a extensão sem resposta: pare, peça a conexão e crie a rotina de lembrete, como `usar-whatsapp-web` manda.
 - Duas conversas com o mesmo nome: mostre as duas e pergunte qual é.
 - O pedido está num grupo: leia só as mensagens do assunto, com quem escreveu cada uma.
 - O histórico pede para carregar mensagens antigas do celular: clique no aviso e diga que pode estar incompleto.
@@ -284,9 +263,7 @@ Mostrei a edição "Chegaremos*" na mesma mensagem e editei depois do sim. Não 
 - No campo de mensagem, Enter envia. A quebra de linha é shift+Enter.
 - O campo numera a lista sozinho depois de "1. ". Digitar "2." no item seguinte duplica o número: digite só o texto dos itens seguintes.
 - Responder a uma mensagem é pelo menu que aparece ao passar o mouse sobre ela, na opção Responder. A citação aparece em cima do campo.
-- A aba que a pessoa já deixou aberta pode estar fora das abas que você controla. O botão do aviso, como "Usar nesta janela" ou "Usar aqui" conforme a versão, passa a conexão para a sua aba, e a aba dela fica desconectada sem perder o login.
 - Enter na busca da lista abre a primeira conversa e marca as mensagens como lidas. Digite o nome e leia o resultado sem apertar Enter.
-- O WhatsApp Web leva alguns segundos para carregar. A primeira leitura pode mostrar só a tela de carregamento.
 - O texto da página traz a lista de conversas inteira antes da conversa aberta. A conversa aberta começa depois do nome do contato no cabeçalho.
 - A mensagem editada mostra "Editada", e o texto antigo some para os dois lados.
 - "Mostrar documentos de todas as conversas" lista só os documentos recentes. Um arquivo antigo não aparece ali nem na conversa.
