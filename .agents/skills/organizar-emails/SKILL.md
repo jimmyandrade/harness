@@ -3,7 +3,7 @@ name: organizar-emails
 description: Organiza e-mails por BASB e separa pessoal, trabalho e misto. Usada quando a pessoa quer triar a caixa, etiquetar ou configurar filtros. Não serve para responder mensagens, lançar despesas nem acompanhar veículos.
 metadata:
   author: jimmyandrade
-  version: "0.19.0"
+  version: "0.20.1"
   related:
     - procurar-email
     - evoluir-habilidade
@@ -142,6 +142,8 @@ Com `Levantar itens de ação` em `sim`, liste o que ficou em aberto em cada con
 Para cada ação, diga o assunto, quem, o que fazer, o prazo da mensagem, sem inventar, e o link. Conversa com ação pendente fica na entrada. Com `Etiquetas de status` preenchidas, a escolha é a etiqueta da ação pendente ou da esperada, e passa à de concluída quando a ação termina.
 
 A conversa que a pessoa respondeu recebe a etiqueta de respondida e perde a da ação pendente, se a resposta era o que faltava. Quando a resposta dela pede retorno, a conversa recebe também a etiqueta da ação esperada.
+
+O e-mail que o agente envia também é etiquetado, na conversa, depois do envio: tema e, se espera resposta, ação esperada. O conector nega etiqueta no rascunho e aceita na enviada.
 
 Não crie tarefa nem evento: ofereça `definir-tarefa` ou `definir-agenda`.
 

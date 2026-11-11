@@ -3,7 +3,7 @@ name: mesclar-pull-request
 description: Mescla um pull request aberto na branch base e faz o que vem depois do merge, inclusive quando a pessoa avisa que mesclou. Usada quando a pessoa pede para mesclar, colocar na main ou diz que um PR foi mesclado, mesmo sem dizer merge. Não serve para fechar sem merge, abrir ou atualizar o PR nem para responder a revisão.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.5.0"
   related:
     - atender-revisao-de-pull-request
     - atualizar-branch-do-pull-request
@@ -83,7 +83,7 @@ Depois do merge, feito aqui ou avisado pela pessoa, faça tudo isto na mesma res
 - [ ] Procure as tarefas ligadas ao PR: as issues que ele fecha, a chave do card no título ou na branch, e as tarefas que citam o PR.
 - [ ] Para cada tarefa achada, siga `sincronizar-status-da-tarefa`.
 - [ ] Se não achar nenhuma, escreva na resposta que o PR não tem tarefa ligada e onde você procurou. A pessoa decide se liga uma tarefa ou se o PR não precisa de uma.
-- [ ] Se o projeto sincroniza o repositório com outra ferramenta, como as páginas de habilidade no Notion, confira a sincronização.
+- [ ] Se o projeto sincroniza o repositório com outra ferramenta, como as páginas de habilidade no Notion, confira a sincronização. Leia os gatilhos do workflow, como `paths`, e as execuções de todos os workflows no commit mesclado antes de esperar. Mudança fora dos gatilhos não sincroniza: diga isso. Execução concluída: diga o resultado. Em andamento: espere como as instruções do projeto mandam. Execução que o `gh` não mostra: confira pelo navegador.
 - [ ] Com `Comunicar novidade após o merge` em `sim`, siga `comunicar-novidade-do-produto` para o PR.
 - [ ] Siga `limpar-copias-de-trabalho` para a cópia de trabalho e a branch local do PR, com a conferência de cada espaço de trabalho, inclusive a branch remota, na mesma resposta.
 
@@ -171,6 +171,7 @@ O PR mudava a mensagem de erro do CI para uma branch com o prefixo de um agente 
 - `mergeStateStatus` `BLOCKED` com checks verdes costuma ser aprovação ou check exigido que ainda não rodou. Leia os dois antes de dizer por quê.
 - O aviso "mesclado" parece encerrar o assunto. É o gatilho do Passo 3.
 - Fechar e reabrir o PR parece pôr o check na frente da fila. Ele cria execuções novas no fim dela, e a execução anterior do mesmo commit, já concluída, deixa de aparecer nos checks.
+- A sincronização parece começar depois do merge. Ela pode já ter terminado, ou nem disparar, quando você vai conferir. Leia o estado e os gatilhos antes de esperar.
 - A hora de uma execução não diz o commit dela. Leia o `headSha` antes de chamar uma execução de antiga.
 - Uma revisão pendente não aparece para mais ninguém e não segura o merge. Só quem a escreveu a vê, então leia as revisões com o `gh` da pessoa.
 
@@ -182,5 +183,6 @@ O PR mudava a mensagem de erro do CI para uma branch com o prefixo de um agente 
 2. Threads, com os comentários da revisão pendente: `gh api graphql -f query='query{repository(owner:"<dono>",name:"<nome>"){pullRequest(number:<número>){reviewDecision reviewThreads(first:100){nodes{isResolved path line comments(first:20){nodes{author{login} body}}}}}}}'`.
 3. Checks: `gh pr checks <número> --repo <Repositório>`.
 4. Fila: `gh api 'repos/<Repositório>/actions/runs?status=queued' --jq '.total_count'` e `gh run list --repo <Repositório> --branch <branch> --status queued --json databaseId,headSha`. Execução substituída: `gh run cancel <id> --repo <Repositório>`.
-5. Merge: `gh pr merge <número> --repo <Repositório> --<Tipo de merge> --delete-branch`.
-6. Autor, revisões e conversa: `gh pr view <número> --repo <Repositório> --json author,reviews,comments` e `gh api user --jq .login`.
+5. Execuções do commit mesclado: `gh run list --repo <Repositório> --commit <hash> --json workflowName,status,conclusion`.
+6. Merge: `gh pr merge <número> --repo <Repositório> --<Tipo de merge> --delete-branch`.
+7. Autor, revisões e conversa: `gh pr view <número> --repo <Repositório> --json author,reviews,comments` e `gh api user --jq .login`.

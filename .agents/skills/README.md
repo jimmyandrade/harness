@@ -42,6 +42,7 @@ flowchart LR
     definir_artista["definir-artista"]
     definir_ativo_imobilizado["definir-ativo-imobilizado"]
     definir_campanha_de_conteudo["definir-campanha-de-conteudo"]
+    definir_codigo_fiscal["definir-codigo-fiscal"]
     definir_conta_bancaria["definir-conta-bancaria"]
     definir_convidado["definir-convidado"]
     definir_data_significativa["definir-data-significativa"]
@@ -78,6 +79,7 @@ flowchart LR
     definir_vocabulario["definir-vocabulario"]
     descrever_habilidade_ou_schema["descrever-habilidade-ou-schema"]
     emitir_documento_oficial["emitir-documento-oficial"]
+    enviar_imagem_no_whatsapp["enviar-imagem-no-whatsapp"]
     enviar_mensagem_no_slack["enviar-mensagem-no-slack"]
     escrever_codigo["escrever-codigo"]
     escrever_link["escrever-link"]
@@ -134,6 +136,7 @@ flowchart LR
     sincronizar_status_da_tarefa["sincronizar-status-da-tarefa"]
     testar_habilidade["testar-habilidade"]
     testar_ponta_a_ponta["testar-ponta-a-ponta"]
+    transcrever_audio_e_video["transcrever-audio-e-video"]
     triar_conversas["triar-conversas"]
     validar_plano_de_vocabulario["validar-plano-de-vocabulario"]
   end
@@ -212,6 +215,7 @@ flowchart LR
   conversar_no_whatsapp --> definir_rotina
   conversar_no_whatsapp --> definir_tarefa
   conversar_no_whatsapp --> definir_vocabulario
+  conversar_no_whatsapp --> enviar_imagem_no_whatsapp
   conversar_no_whatsapp --> escrever_link
   conversar_no_whatsapp --> evoluir_habilidade
   conversar_no_whatsapp --> procurar_tarefa
@@ -221,6 +225,7 @@ flowchart LR
   convidar_para_evento --> conversar_no_whatsapp
   convidar_para_evento --> definir_agenda
   convidar_para_evento --> definir_convidado
+  convidar_para_evento --> enviar_imagem_no_whatsapp
   convidar_para_evento --> evoluir_habilidade
   convidar_para_evento --> redigir_com_tom_de_voz
   criar_carrossel_do_instagram --> criar_ideia_de_conteudo
@@ -303,6 +308,8 @@ flowchart LR
   definir_ativo_imobilizado --> registrar_ciclo_do_ativo
   definir_campanha_de_conteudo --> evoluir_habilidade
   definir_campanha_de_conteudo --> planejar_calendario_de_conteudo
+  definir_codigo_fiscal --> evoluir_habilidade
+  definir_codigo_fiscal --> identificar_duplicata
   definir_conta_bancaria --> definir_empresa
   definir_conta_bancaria --> definir_pessoa
   definir_conta_bancaria --> evoluir_habilidade
@@ -390,6 +397,7 @@ flowchart LR
   definir_registro_de_reuniao --> evoluir_habilidade
   definir_registro_de_reuniao --> identificar_duplicata
   definir_registro_de_reuniao --> mesclar_registro
+  definir_registro_de_reuniao --> preparar_tarefa_do_pull_request
   definir_registro_de_reuniao --> procurar_agenda
   definir_reserva --> definir_agenda
   definir_reserva --> definir_agenda_de_popstar
@@ -435,6 +443,9 @@ flowchart LR
   descrever_habilidade_ou_schema --> revisar_habilidade
   descrever_habilidade_ou_schema --> testar_habilidade
   emitir_documento_oficial --> evoluir_habilidade
+  enviar_imagem_no_whatsapp --> conversar_no_whatsapp
+  enviar_imagem_no_whatsapp --> evoluir_habilidade
+  enviar_imagem_no_whatsapp --> redigir_com_tom_de_voz
   enviar_mensagem_no_slack --> definir_agenda
   enviar_mensagem_no_slack --> definir_pessoa
   enviar_mensagem_no_slack --> definir_vocabulario
@@ -492,6 +503,7 @@ flowchart LR
   formalizar_decisao --> conversar_no_whatsapp
   formalizar_decisao --> criar_pull_request
   formalizar_decisao --> definir_registro_de_reuniao
+  formalizar_decisao --> enviar_imagem_no_whatsapp
   formalizar_decisao --> enviar_mensagem_no_slack
   formalizar_decisao --> preparar_tarefa_do_pull_request
   garantir_ingresso --> abrir_vendas_na_tiqueteira
@@ -709,6 +721,8 @@ flowchart LR
   testar_ponta_a_ponta --> evoluir_habilidade
   testar_ponta_a_ponta --> preparar_tarefa_do_pull_request
   testar_ponta_a_ponta --> registrar_resultados_da_validacao_na_tarefa
+  transcrever_audio_e_video --> definir_registro_de_reuniao
+  transcrever_audio_e_video --> evoluir_habilidade
   triar_conversas --> conversar_no_whatsapp
   triar_conversas --> criar_oportunidade
   triar_conversas --> definir_grupo_de_oportunidades

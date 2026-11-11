@@ -3,15 +3,16 @@ name: formalizar-decisao
 description: Leva uma decisão de comportamento a quem decide, com a dúvida, a hipótese e o que já está definido, e formaliza a resposta na tarefa e no pull request, em qualquer canal e em qualquer momento, do refinamento ao desk check. Usada quando surge uma dúvida ou uma escolha de comportamento que não é sua, mesmo sem dizer decisão. Não serve para dúvida de código, status de entrega nem para escrever o texto da mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.4.0"
   aliases:
     - abrir-thread-de-decisao
   related:
-    - enviar-mensagem-no-slack
     - conversar-no-whatsapp
-    - definir-registro-de-reuniao
-    - preparar-tarefa-do-pull-request
     - criar-pull-request
+    - definir-registro-de-reuniao
+    - enviar-imagem-no-whatsapp
+    - enviar-mensagem-no-slack
+    - preparar-tarefa-do-pull-request
 ---
 
 # Formalizar decisão
@@ -44,7 +45,7 @@ Leve o pedido a quem decide, no canal que o momento pede:
 - Reunião ou refinamento: pergunte ao vivo e registre o que foi decidido, como diz `definir-registro-de-reuniao`.
 - Depois do refinamento, na demonstração ou no desk check: leve a pergunta quando a dúvida aparece. Não espere o próximo refinamento.
 - Ferramenta com thread, como o Slack: abra uma thread nova só dessa decisão, com o título de `Título da thread própria`, e nunca use a thread de status de uma entrega. Responda em mensagens curtas, uma ideia por mensagem, cada caso com a sua imagem, e a pergunta na última.
-- Ferramenta ou conversa sem thread, como o WhatsApp ou uma mensagem direta: uma mensagem curta, com a imagem e a pergunta.
+- Ferramenta ou conversa sem thread, como o WhatsApp ou uma mensagem direta: uma mensagem curta, com a imagem e a pergunta. No WhatsApp, a imagem segue `enviar-imagem-no-whatsapp`, depois do sim.
 
 Antes de abrir a conversa, confira o propósito do canal no registro de canais do projeto.
 Um canal interno do time não serve para consultar a pessoa de negócio.
@@ -158,7 +159,7 @@ Depois da resposta da Ana, registro a decisão na área de decisões da tarefa e
 ## Casos-limite
 
 - A decisão sai numa reunião: formalize pela ata e pela tarefa, sem abrir thread.
-- A ferramenta não tem thread, como o WhatsApp: uma mensagem curta, com a imagem e a pergunta, e a formalização igual.
+- A ferramenta não tem thread, como o WhatsApp: uma mensagem curta, com a imagem e a pergunta, e a formalização igual. No WhatsApp, a imagem segue `enviar-imagem-no-whatsapp`.
 - `Ferramentas de comunicação` vazio: pergunte em qual ferramenta conversar e grave a resposta.
 - A ferramenta já tem uma thread própria sobre a tarefa e a pessoa: responda nela.
 - A decisão aparece perto do fim da tarefa: formalize antes de fechar o pull request, com o critério e a evidência atualizados.

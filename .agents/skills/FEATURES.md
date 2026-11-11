@@ -485,6 +485,23 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses creating the campaign posts, checking the calendar mix, writing the script or the caption, and registering the significant date
 
+### definir-codigo-fiscal
+- **Stability**: experimental
+- **Description**: Register, review, and validate the NCM tax code of a good and link it to the variants
+- **Properties**:
+  - Lives at `.agents/skills/definir-codigo-fiscal/SKILL.md`
+  - Leaves the duplicate check to identificar-duplicata and keeps one record per code number
+  - Saves as the source a stable official link that opens the code, checked before saving, and fills the source when it is empty or broken
+  - Keeps in the code record only the characteristics that lead to the classification (kind of good, use, predominant material and, for clothing, construction), never the products that use it
+  - Records every confirmation, decision, or status change as a dated comment on the code page
+  - Reads the predominant material from the composition list and never copies the composition to the code
+  - For clothing, asks for the construction (knit or woven) together with the fiber, because the construction decides the chapter first
+  - Moves a code to the AI-validated status after checking the official source, the composition, and the characteristics, and to the person-validated status, the stronger one, only with a person's yes
+  - Links the code to the variant, not to the unit, and links it to the product only as a temporary step while the variant has no field
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses issuing the invoice, registering the material, and setting the price
+
 ### definir-conta-bancaria
 - **Stability**: experimental
 - **Description**: Register, review, or update a bank or payment account, personal or business, and record what happened to it
@@ -946,6 +963,7 @@ How these skills relate is in `README.md`, in this folder.
   - Lists each unknown name or term with the lines around it and asks, and records only what the person confirms, in the spelling variations for a name and in a source of corrections for any other term
   - Keeps the topics the project lists out of the summary, while the raw transcript keeps them
   - Never sends a record outside the place the project names
+  - When the person asks for comments on the tasks a meeting cites, follows preparar-tarefa-do-pull-request with only what the summary says and no transcript excerpt
   - Does not find the context of a past meeting or write the minutes
 - **Test Criteria**:
   - [x] The skill is present at that path
@@ -1899,6 +1917,21 @@ How these skills relate is in `README.md`, in this folder.
   - Compares the run without the skill and with the skill on back-and-forth, failed calls, and tokens, from the run record
   - Starts every run clean, in a child task or a separate session
   - Edits the validated skill in the same conversation through evoluir-habilidade
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [ ] Three cases validated with the person
+
+### transcrever-audio-e-video
+- **Stability**: experimental
+- **Description**: Transcribe a local audio or video file with the local Whisper, detecting whether it is installed and proposing the install only after the person says yes
+- **Properties**:
+  - Lives at `.agents/skills/transcrever-audio-e-video/SKILL.md`
+  - Reads the model folder, the model file, the spoken language, the prompt terms, and the output folder from the project instructions
+  - Detects whisper-cli, ffmpeg, and the model file, and asks before installing or downloading anything, saying what it downloads and that it is free and local
+  - Never sends the file to an external service unless the person asks, and then says the file leaves the machine
+  - Extracts the audio to 16 kHz mono wav in the output folder without touching the original, and runs whisper-cli with `-ml 0`, the language, the prompt terms, and txt and srt outputs
+  - Reads the text before reporting, says that it does not identify who speaks and that proper names may be wrong, and keeps unclear passages out of a meeting record until the person listens
+  - Hands the text to definir-registro-de-reuniao when it becomes a meeting record
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [ ] Three cases validated with the person

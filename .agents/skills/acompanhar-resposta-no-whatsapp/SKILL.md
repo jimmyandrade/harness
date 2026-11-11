@@ -3,7 +3,7 @@ name: acompanhar-resposta-no-whatsapp
 description: Acompanha, por uma rotina que lê as conversas com a etiqueta de ação esperada, se o contato respondeu a uma mensagem enviada no WhatsApp, avisa quando a resposta chega e troca a etiqueta. Usada quando a mensagem espera resposta, como uma pergunta, um pedido ou um prazo, ou quando a pessoa pergunta se alguém já respondeu. Não serve para ler, redigir nem enviar a mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.3.1"
   related:
     - conversar-no-whatsapp
     - definir-rotina
@@ -96,6 +96,7 @@ A rotina filtrou a lista pela etiqueta `Ação esperada` e leu a prévia de cada
 - A rotina agendada roda numa sessão nova, sem as abas da sessão anterior, e sempre abre a própria aba.
 - Na lista, "Você:" antes da prévia só aparece em grupo. Na conversa individual, a mensagem que você enviou tem os vistos antes da prévia, e a do contato não tem.
 - A lista mostra o horário só nas mensagens de hoje. De ontem em diante, mostra "Ontem", o dia da semana ou a data, sem a hora.
+- Se a pessoa já abriu a conversa, em qualquer janela, o contador de não lidas some e a rotina não reconhece a resposta por ele: compare o horário da última mensagem do contato com o da sua.
 - A prévia mostra só a última mensagem. Com mais de uma não lida, o contador diz quantas são, e o conteúdo das outras só aparece com a conversa aberta.
 - O WhatsApp Business limita o número de listas. A lista nova só entra se couber, como `rotular-item` manda.
 
