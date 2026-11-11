@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.2"
+  version: "0.5.0"
   related:
     - acompanhar-veiculo
     - definir-agenda
@@ -166,6 +166,10 @@ A linha do cronograma guarda a data e deixa a hora vazia. O bloco que o flowchar
 
 Diga a viagem canônica, o que entrou, o que ficou vazio, a lacuna, a divergência e os marcos que ficaram separados. Na pergunta, diga o que a busca encontrou e não crie. A data na resposta sai com o dia da semana. Sem horário ou sem fuso, e se o dia puder mudar, peça. Não invente. Planejar quem leva, quem busca ou se cabe ônibus fica nesta habilidade. Viagem de carro próprio só fica concluída com o pedido de extensão da proteção registrado, ou recusado com justificativa, por `acompanhar-veiculo`.
 
+Viagem para um compromisso com montagem, como uma feira, tem a janela de montagem como prazo. Leia o dia e o horário da montagem no manual do organizador, no grupo ou com a organização, antes de propor a saída e a chegada, e avise a pessoa na hora quando a montagem for no dia anterior ao compromisso.
+
+A saída leva folga para imprevisto na estrada: sem ela, a pessoa perde a janela. Sem folga, não decida a saída no mesmo dia nem escolha a janela alternativa por conta própria: mostre à pessoa as janelas, a hora da chegada prevista e a margem, e registre a escolha dela. As janelas de montagem entram no cronograma da viagem, uma linha por janela.
+
 ```mermaid
 flowchart LR
   D{O pedido é o deslocamento?} -->|ida ou volta| T[Decolagem e número do voo]
@@ -298,6 +302,14 @@ Se você preencher cidade, aeroporto, hotel, horário, transfer ou responsabilid
 1. Siga o flowchart do Passo 4.
 2. Deixe a pendência vazia e nomeada.
 3. Preserve as duas fontes quando nenhuma for a mais recente e explicitamente oficial.
+
+### Saída que perde a montagem
+
+Se você planejar a saída sem ler a janela de montagem, ou deixar a chegada colada no fim dela, qualquer atraso na estrada faz a pessoa perder a montagem.
+
+1. Leia a janela de montagem antes de propor a saída e avise na hora quando ela for no dia anterior.
+2. Calcule a chegada com folga para imprevisto e mostre a margem.
+3. Sem folga, a pessoa escolhe entre antecipar a saída e a janela alternativa, e o cronograma registra as duas janelas.
 
 ### Escolha entre fontes
 
