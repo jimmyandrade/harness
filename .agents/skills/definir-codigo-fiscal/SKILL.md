@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.6.0"
   related:
     - evoluir-habilidade
     - identificar-duplicata
@@ -21,6 +21,8 @@ metadata:
 "Status validado por IA": "Validado por IA"
 # `Status validado por pessoa`: uma pessoa validou. É a validação mais forte.
 "Status validado por pessoa": "Validado"
+# `Critério de desempate`: como escolher entre duas posições que cabem. Vazio, a pessoa escolhe. `menos orientado a gênero` prefere a posição que não divide por uso masculino ou feminino.
+"Critério de desempate": ""
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -77,6 +79,8 @@ O comentário guarda o histórico da decisão.
 O código entra como `Status em estudo`.
 Ele passa para `Status validado por IA` quando você abriu a fonte gravada e conferiu nela o código, a descrição e as notas do capítulo, a composição e, no vestuário, a construção estão confirmadas, as notas batem com a descrição oficial, e você descartou as posições mais específicas antes de uma posição residual.
 Com uma dúvida aberta, o código continua em `Status em estudo`, e o comentário diz qual é a dúvida.
+Quando a dúvida é entre duas posições que cabem, siga `Critério de desempate` e diga no comentário que critério escolheu o código.
+Com `menos orientado a gênero`, se as duas posições dividem por uso, o critério não decide, e a pessoa escolhe.
 Registre num comentário o que foi conferido e a fonte, pelo Passo 5.
 Ele só passa para `Status validado por pessoa` com o sim de uma pessoa, como a responsável ou a contabilidade, também registrado em comentário.
 Essa é a validação mais forte, e você nunca a marca sem esse sim.
