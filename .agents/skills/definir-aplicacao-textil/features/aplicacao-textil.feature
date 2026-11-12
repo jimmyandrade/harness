@@ -26,7 +26,27 @@ Funcionalidade: Aplicação
       Dado que a aplicação vai por cima de um tecido
       Quando a habilidade grava
       Então ela não trata a aplicação como tecido
-      E não grava a aplicação na composição nem na etiqueta
+      E não grava a aplicação como linha de composição de tecido
+
+  Regra: a etiqueta é decisão do cadastro
+
+    Exemplo: Aplicação nova
+      Dado que a aplicação é nova
+      Quando a habilidade monta o cadastro
+      Então ela pergunta se a aplicação vai na etiqueta
+      E registra a resposta no cadastro da aplicação
+      Mas não decide sozinha
+
+    Exemplo: Aplicação que não vai na etiqueta
+      Dado que a pessoa diz que a aplicação não vai na etiqueta
+      Quando a habilidade grava
+      Então a aplicação fica fora da etiqueta
+
+    Exemplo: Cadastro sem campo para a etiqueta
+      Dado que o banco de aplicações não tem campo que diga se a aplicação vai na etiqueta
+      Quando a habilidade precisa registrar a resposta
+      Então ela sugere criar o campo
+      Mas não cria o campo sem o sim
 
   Regra: o banco se procura antes de perguntar
 
