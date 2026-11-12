@@ -269,6 +269,7 @@ flowchart LR
   criar_ponto_de_contato --> criar_oportunidade
   criar_ponto_de_contato --> definir_agenda
   criar_ponto_de_contato --> definir_grupo_de_oportunidades
+  criar_ponto_de_contato --> lancar_despesa_da_empresa
   criar_ponto_de_contato --> organizar_ponto_de_contato
   criar_ponto_de_contato --> procurar_oportunidade
   criar_pull_request --> atualizar_branch_do_pull_request
@@ -713,6 +714,7 @@ flowchart LR
   rotular_item --> levantar_contexto_do_pull_request
   rotular_item --> organizar_emails
   rotular_item --> triar_conversas
+  sincronizar_cronograma --> criar_ponto_de_contato
   sincronizar_cronograma --> definir_agenda
   sincronizar_cronograma --> definir_convidado
   sincronizar_cronograma --> definir_jornada_de_producao
