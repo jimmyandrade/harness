@@ -3,7 +3,7 @@ name: acompanhar-retornos-pendentes
 description: Mantém uma rotina por canal, como e-mail, WhatsApp e site ou aplicativo, que lê as conversas em espera, o aviso que uma tarefa espera e a condição que um painel deve mostrar, avisa quando chegam e entrega o resultado à sessão. Usada quando uma mensagem espera resposta, uma tarefa espera um aviso ou um status precisa mudar num painel. Não serve para escrever a resposta, entrar com senha nem criar uma rotina por mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.6.0"
   related:
     - acompanhar-resposta-no-whatsapp
     - definir-rotina
@@ -87,6 +87,9 @@ O aviso de uma plataforma ou de um órgão quase nunca chega etiquetado, então 
 
 A rotina do site lê todas as linhas do canal na mesma execução, pela extensão Claude in Chrome, numa aba nova que ela fecha ao terminar. Abre o endereço do painel na sessão que a pessoa já deixou aberta, lê só a tela que mostra a condição e compara com a esperada.
 Se o painel pede login, código por SMS ou captcha, a rotina não tenta: avisa a pessoa, uma vez por dia, que precisa entrar, e a linha continua.
+
+Numa conversa, com a pessoa presente, peça a credencial ao gerenciador de senhas antes de abrir o painel. A aprovação não faz o login: sem a ferramenta de preenchimento na sessão, ou diante de captcha e de código por SMS, diga isso e peça que a pessoa entre na aba.
+Depois leia todas as telas necessárias numa sequência só, porque o painel pode encerrar a sessão em poucos minutos.
 A primeira conferência é depois do prazo que a empresa informou, e as seguintes seguem a cadência do canal, no horário comercial. Sem linha de site aberta, a execução encerra em silêncio.
 
 ### Passo 4
@@ -205,6 +208,7 @@ A sessão acrescentou ao registro uma linha de site, com o painel da empresa, a 
 - O e-mail do anfitrião de uma plataforma de hospedagem não vem do próprio anfitrião, e sim da plataforma. A etiqueta fica na conversa do e-mail.
 - O aviso de uma plataforma não responde a nenhuma mensagem enviada e chega sem etiqueta. A etiqueta de espera não serve para achá-lo: a busca é pelo remetente, pelo assunto ou pelo código.
 - A página pública de uma empresa parece mostrar o status da conta. Ela só tem oferta e formulário de captação, que a rotina não preenche: a condição está na área logada.
+- O gerenciador de senhas conectado parece fazer o login. Ele só libera a credencial para a ferramenta de preenchimento, que pode faltar na sessão, e o captcha continua sendo da pessoa.
 - A aba do WhatsApp Web é da sessão dona. A rotina do site abre uma aba nova e não mexe nela.
 - Abrir uma conversa do WhatsApp marca as mensagens como lidas para quem enviou. A rotina lê a lista.
 - Uma conversa do e-mail pode passar de cem mil caracteres. A rotina lê só o texto de cada mensagem nova.
