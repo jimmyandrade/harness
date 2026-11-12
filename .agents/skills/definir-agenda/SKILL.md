@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.49.0"
+  version: "0.49.1"
   related:
     - convidar-para-evento
     - definir-agenda-de-popstar
