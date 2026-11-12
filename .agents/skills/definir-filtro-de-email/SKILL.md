@@ -3,7 +3,7 @@ name: definir-filtro-de-email
 description: Cria, edita e confere filtros de e-mail. Testa o critério na conta, escolhe as ações sem esconder o que a pessoa quer ver e lê o filtro salvo de volta. Usada quando a triagem pede um filtro ou a pessoa quer mudar um. Não serve para classificar mensagens nem cancelar assinatura.
 metadata:
   author: jimmyandrade
-  version: "0.4.1"
+  version: "0.5.0"
   related:
     - organizar-emails
     - evoluir-habilidade
@@ -71,7 +71,7 @@ flowchart LR
 
 Use o `Navegador para criar filtro`; o `Navegador do aplicativo para criar filtro` diz quando o navegador do próprio aplicativo entra.
 
-No navegador, confirme que a conta é a da caixa antes de salvar e peça a aprovação do site quando ela ainda não existir. Na tela de login, peça à pessoa que entre na conta no navegador; não entre por ela.
+No navegador, confirme que a conta é a da caixa antes de salvar e peça a aprovação do site quando ela ainda não existir. Na tela de login, peça a credencial ao gerenciador de senhas conectado e preencha com ele. A pessoa entra na conta só sem gerenciador ou quando o preenchimento falha.
 
 A consulta devolvida traz o critério, a etiqueta e as ações do plano, e diz em que tela cada uma fica.
 
@@ -141,7 +141,7 @@ O filtro procurava o endereço antigo e os e-mails chegam de outro domínio. O c
 
 ## Casos-limite
 
-- O conector não cria filtro e o navegador pede login: a pessoa entra na conta, e o filtro sai pelo navegador.
+- O conector não cria filtro e o navegador pede login: o gerenciador de senhas conectado preenche, ou, sem ele, a pessoa entra, e o filtro sai pelo navegador.
 - O critério não atinge nenhuma conversa: o filtro fica. Confira se o endereço está certo e, com o remetente usando outro, acrescente-o com `OR`.
 - O filtro precisa de duas etiquetas: crie dois filtros com o mesmo critério.
 
