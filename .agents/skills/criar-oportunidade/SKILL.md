@@ -5,9 +5,12 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.21.0"
+  version: "0.22.0"
   related:
     - procurar-oportunidade
+    - definir-empresa
+    - criar-ideia-de-conteudo
+    - definir-tarefa
     - definir-grupo-de-oportunidades
     - definir-inscricao
     - organizar-emails
@@ -43,6 +46,8 @@ Confira o mapeamento antes de gravar. O título da edição e a data da edição
 
 O título da edição começa pelo nome da edição, depois a data no formato da data com dia da semana, a cidade e, por fim, o grupo, quando há grupo. Não comece pelo grupo. Ano, número de edição e data entram nesse título quando separam uma data da outra. Dois dias entram os dois. A data da edição recebe o intervalo, com as horas. A data só no título não basta. Data anterior à `Data mínima da edição` não entra. Data já passada, depois dela, entra: a edição fica no radar do grupo, e a presença segue `definir-inscricao`.
 
+Antes de cadastrar ou atualizar, confira se o ano da edição está coberto por algum ciclo da lista de ciclos do projeto. Ano posterior ao último ciclo: busque o ciclo por nome, ano e variações e, se não existir, crie-o sem duplicar antes de seguir. Ano anterior ao ciclo mais antigo: ignore a edição e diga o motivo. Ano incerto, fontes em conflito ou data parcial: pergunte, nunca chute o ano. Nunca promova um evento passado a futuro: o ano é o da fonte, copiado exatamente, com a evidência registrada.
+
 ### Passo 4
 
 O grupo da edição depende de `Considerar grupos de oportunidades`.
@@ -63,6 +68,8 @@ Cada data é uma página na lista de oportunidades, com a data. Não crie outra 
 
 O que é desta data fica na edição: endereço, horário, valor, formulário e número de vagas. Um lugar visto numa data só não vira lugar padrão do grupo. Os perfis da edição só recebem a conta própria desta edição. O perfil oficial fica com `definir-grupo-de-oportunidades`, com `sim`. Não grave o texto do cartaz nem a operação no corpo.
 
+O título e a síntese descrevem a oferta: chamada, edição, modalidade, data, local e entidade responsável. Não dizem que ela é "da" ou "para" o negócio, salvo quando o próprio negócio é o organizador. A candidatura específica vai para as inscrições e as tratativas para as negociações, todas ligadas à mesma oportunidade canônica. Mais de uma candidata na mesma oferta mantém uma só oportunidade.
+
 O arquivo do cartaz, do print da divulgação ou do comunicado desta data vai nos anexos da edição, na mesma gravação, sem pedir confirmação. Preserve os arquivos que já estão lá e não anexe o mesmo arquivo de novo. Use a referência de arquivo aceita pela ferramenta: o ID do anexo da conversa pode não ser um ID de arquivo do Notion. Se o pedido só consulta a edição, ofereça anexar e não grave. Sem os anexos da edição no mapeamento, liste o arquivo no fim, como valor sem propriedade.
 
 Consultar uma programação é leitura; não é inscrição nem escolha de participação. Retome a fonte oficial já identificada sem pedir nova autorização para a consulta solicitada. Carregue o conteúdo completo antes de apresentar a programação como completa. Timeout na leitura rápida não é prova de indisponibilidade: use uma leitura mais completa oferecida pela mesma ferramenta. Não invente horários, palestrantes ou salas a partir de trechos de busca.
@@ -80,11 +87,27 @@ Teste uma sessão real do pedido com todas as propriedades pretendidas antes de 
 
 ### Passo 6
 
-Não preencha fórmula, rollup nem botão. Não invente categoria nem prioridade. O ingresso do visitante é o que paga quem visita. A taxa do expositor é o que paga quem expõe. Gratuidade para um público restrito, como compradores credenciados, não preenche nenhuma das duas. Sem URL no texto, o link de inscrição fica vazio. O e-mail da organização vai na propriedade dele. Links não oficiais recebem só URL. A empresa ou local e a localidade só recebem página que já existe. Não crie empresa nem localidade. A etiqueta de e-mail da edição guarda o nome inteiro da etiqueta que a caixa aplica às conversas desta data, não o identificador: a busca da caixa usa o nome, e o identificador muda de uma conta para outra. Quando a etiqueta é renomeada, o campo muda junto.
+Não preencha fórmula, rollup nem botão. Não invente categoria nem prioridade.
+
+O ingresso do visitante é o que paga quem visita. A taxa do expositor é o que paga quem expõe. Gratuidade para um público restrito, como compradores credenciados, não preenche nenhuma das duas.
+
+Quando a taxa da marca varia entre 1 dia e 2 dias, preencha os dois campos numéricos de taxa por duração. O campo de texto da taxa só recebe taxa variável ou condicional, como a partir de, lote, porcentagem ou metragem. A propriedade de taxa é a fonte prioritária: o valor achado em notas, transcrição, PDF ou formulário migra para ela e some da nota quando fica redundante, mas a fonte fica se for preciso para auditoria (veja o bloco de anotações no Passo 7). Taxa nunca vai no corpo.
+
+Sem URL no texto, o link de inscrição fica vazio. O e-mail da organização vai na propriedade dele. Links não oficiais recebem só URL.
+
+Quando a pessoa envia o link completo de uma página específica de uma plataforma de ingressos e o link oficial ou o de inscrição está vazio, genérico ou menos específico, troque-o pelo específico na oportunidade existente, sem criar outra. Duas URLs da mesma plataforma com o mesmo identificador são a mesma oportunidade.
+
+O local e a localidade seguem `definir-local-fisico`, que confirma o nome do espaço e o endereço, cadastra a empresa do local pelo `definir-empresa` e a localidade pelo `definir-localidade-geografica`, sempre com o sim da pessoa. Esta habilidade não cria empresa nem localidade por conta própria e só vincula o que já existe. Nunca use o estado como aproximação da cidade.
+
+A etiqueta de e-mail da edição guarda o nome inteiro da etiqueta que a caixa aplica às conversas desta data, não o identificador: a busca da caixa usa o nome, e o identificador muda de uma conta para outra. Quando a etiqueta é renomeada, o campo muda junto.
 
 ### Passo 7
 
 Na edição, bloco de anotações, reunião, transcrição, resumo ou outro bloco de notas da pessoa fica inteiro. Não sugira apagar, arquivar, substituir, ocultar nem remover. O bloco é evidência, mesmo quando um fato dele também cabe numa propriedade. Na revisão do conteúdo, do corpo ou das anotações, leia o bloco para preencher a propriedade que a lista já tem. Data, localidade, empresa ou local, canal, links, taxa, variações de nome e decisão humana entram só quando o bloco afirma um valor que a propriedade já aceita. O comentário analítico vai nas notas de curadoria. O bloco não vira checklist, resumo nem texto operacional, e não se copia de novo no corpo. Se o bloco não basta para afirmar, a propriedade fica vazia e a pendência fica nas notas de curadoria. Não invente o dado nem a propriedade. O bloco do grupo fica com `definir-grupo-de-oportunidades`.
+
+Se a página tem um callout com orientações de preenchimento ou governança, preserve-o integralmente ao revisar, limpar ou migrar o corpo. Se ele não existe e a pessoa pede para organizar o corpo, avise antes de concluir.
+
+Ao revisar ou migrar o corpo, uma possível ação de conteúdo, como bastidores, enquete, cobertura, look ou collab de post, vira ideia pela `criar-ideia-de-conteudo` e, se exige execução, tarefa pela `definir-tarefa` ligada à oportunidade, ambas com data. Sem data segura, pergunte. A leitura estratégica de fit e de relação estética vai para as notas de curadoria como síntese permanente, sem checklist.
 
 A intercorrência da edição, como um problema com o local do estande, vai num comentário da edição, não no corpo nem nas notas de curadoria. O comentário começa pela data e hora do fato, e cada fato novo é um comentário novo, para os comentários formarem a linha do tempo.
 
@@ -211,7 +234,7 @@ localidade só entra se a página já existe. Data e taxa ficaram vazias. A pend
 - A data é anterior à `Data mínima da edição`: não grave. Pergunte.
 - Dois dias com hora: a data da edição recebe o intervalo, com as horas. Cada data no texto leva o próprio dia da semana.
 - O texto não traz URL: o link de inscrição fica vazio.
-- A empresa ou a localidade não está na lista: pergunte. Não crie essa página aqui.
+- A empresa ou a localidade não está na lista: pergunte. O local segue `definir-local-fisico`.
 - Seleção, inscrição, edital ou chamada: não vira página na lista de oportunidades.
 - A página já tem bloco de anotações, reunião, transcrição ou resumo: ele fica inteiro. Um fato dele pode ir para a propriedade.
 - O bloco não afirma o valor: a propriedade fica vazia. A pendência vai nas notas de curadoria.
