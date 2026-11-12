@@ -758,7 +758,13 @@ How these skills relate is in `README.md`, in this folder.
   - On an existing row, changes only the named property, attaches the confirmation photo to the receipts in that same write, and does not fill the confirmation date unless the person states it
   - When the person states the day they sent the registration, writes that day and does not ask for the hour
   - Spells names through definir-grafia
-  - Does not store the order number, does not put the photo in the page body, and does not decide whether a task exists
+  - Keeps a contested refusal on the registration as in contestation, proposes creating the option when missing, leaves the opportunity as not selected until the organization decides, and records the outcome in a dated comment
+  - Sets lost when the registration could not be completed and not selected when it was sent and not chosen, waitlist included
+  - Separates the deadline to confirm interest from the deadline to pay across every source, never invents a date, and does not call a participation safe without one unless it is confirmed and paid
+  - Turns a pasted form into an in-progress registration whose body holds the form, never the opportunity body
+  - Keeps a positive conversation as in progress until an operational confirmation, and points to the negotiation in the notes
+  - Stores the order number and the registration code in separate properties, looks up the participant before creating, and attaches closing evidence to the opportunity
+  - Does not put the photo in the page body, and does not decide whether a task exists
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses only celebrating without saving, only looking up who registered, and deciding whether a task exists

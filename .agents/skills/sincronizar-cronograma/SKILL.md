@@ -5,12 +5,13 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.6.1"
+  version: "0.7.0"
   related:
     - definir-agenda
     - definir-convidado
     - definir-jornada-de-producao
     - definir-viagem
+    - criar-ponto-de-contato
     - procurar-agenda
 ---
 
@@ -66,6 +67,8 @@ flowchart LR
 ```
 
 Não substitua vários marcos por um bloco diário nem por um evento de vários dias quando isso reduzir a encontrabilidade, esconder deslocamento, dificultar alteração ou criar convidado indevido. O evento contínuo ou de vários dias só permanece se for compromisso indivisível, tiver utilidade operacional independente ou for pedido explícito, sem duplicar os itens atômicos.
+
+Cada item de horários, como montagem, início, fim, desmontagem e blocos, liga sempre à oportunidade e, havendo ponto de contato correspondente, também a ele. O evento formativo sem ponto de venda liga só à oportunidade. Não crie ponto de contato para ligar o item: a distinção segue `criar-ponto-de-contato`.
 
 ### Passo 5
 

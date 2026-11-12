@@ -5,11 +5,12 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   related:
     - criar-oportunidade
     - definir-agenda
     - definir-grupo-de-oportunidades
+    - lancar-despesa-da-empresa
     - organizar-ponto-de-contato
     - procurar-oportunidade
 ---
@@ -21,6 +22,8 @@ metadata:
 Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo.
 ```yaml
 "Formato da data com dia da semana": "terça-feira, 01/09/2026"
+# `Relação geral padrão das despesas` é a relação que a despesa de uma atividade formativa sem venda usa no lugar do ponto de contato. Vazio: pergunte uma vez.
+"Relação geral padrão das despesas": ""
 ```
 ## Instruções
 
@@ -41,6 +44,13 @@ flowchart LR
 ```
 
 Não invente a página. Não crie outro ponto com o nome de um que já existe.
+
+Antes de criar ou relacionar o ponto, distinga a oportunidade do ponto de venda. Ponto de venda é a feira, o pop-up, o corner, a loja física, a loja virtual, o social commerce, o marketplace ou outra operação em que produtos do negócio são oferecidos à venda. Uma oportunidade, um programa ou um evento com aulas, cursos, oficinas, palestras, mentorias, reuniões, encerramentos ou outra atividade formativa não prova venda. A despesa, o deslocamento, a alimentação, a hospedagem, o cronograma ou a participação ligados a eles também não provam. Inscrição, local, data ou custo idem.
+
+1. Pergunte à pessoa se a atividade também funcionou como ponto de venda físico ou digital do negócio. Explique que «feira» aqui é qualquer ponto de venda físico ou digital, não qualquer evento.
+2. Houve venda: siga o Passo 2.
+3. Não houve venda: não crie nem associe ponto de contato. A atividade fica ligada à oportunidade e ao cronograma. Oriente `lancar-despesa-da-empresa` a usar a `Relação geral padrão das despesas`.
+4. Ambiguidade: interrompa e peça a confirmação explícita. Não decida sozinho.
 
 ### Passo 2
 
@@ -81,6 +91,7 @@ Mostre o nome, o status e o link do que criou ou corrigiu, com o que preencheu s
 Diga o que ficou vazio e o que depende de uma resposta.
 A data do evento na resposta sai no formato da data com dia da semana. Calcule e confira o dia com a data, o horário e o fuso antes de responder. Não copie esse dia para o início da execução.
 Não marque a tarefa como concluída.
+Os itens do cronograma de horários, como montagem, início, fim, desmontagem e blocos, ligam sempre à oportunidade e, havendo ponto de contato correspondente, também a ele. A atividade formativa sem ponto de venda liga só à oportunidade.
 Gravar o evento na agenda fica com `organizar-ponto-de-contato`, que segue `definir-agenda`.
 
 ## Problemas comuns
@@ -108,6 +119,14 @@ Se você deixar o status de fase anterior num ponto cuja data já passou, a list
 
 1. Diga ao achar.
 2. Pergunte qual status vale. O fechamento do caixa depende de outras etapas, então não escolha sozinha.
+
+### Atividade formativa virou ponto de venda
+
+Se você criar o ponto de contato porque a oportunidade tem inscrição, cronograma, local, data ou custo, a lista ganha um ponto comercial em que nada foi vendido.
+
+1. Pergunte se houve venda física ou digital antes de criar ou relacionar.
+2. Sem venda, não crie nem associe o ponto. A atividade fica na oportunidade e no cronograma.
+3. Oriente a despesa a usar a `Relação geral padrão das despesas`.
 
 ### Página repetida
 
@@ -161,9 +180,11 @@ Perguntei qual status vale. Não mudei sozinha.
 - O pedido é saber se a oportunidade existe: siga `procurar-oportunidade`.
 - O pedido é o que falta organizar, o evento na agenda ou a viagem: siga `organizar-ponto-de-contato`.
 - Aula, curso, oficina, reunião ou outra atividade em que a empresa não vende: as instruções do projeto podem restringir o que vira ponto de contato. Na dúvida, confirme com a pessoa antes de criar.
+- A pessoa confirma que não houve venda: não crie nem associe ponto de contato, e a despesa usa a `Relação geral padrão das despesas`. Sem esse valor, pergunte uma vez.
 
 ## Pegadinhas
 
+- Existir oportunidade, inscrição, cronograma, local, data ou custo parece provar que houve venda. Não prova: pergunte.
 - Participação confirmada na oportunidade parece pedir um status adiantado. O status de um ponto novo é Não iniciada, salvo o que a pessoa disser.
 - A ordem visual parece dizer o próximo número. Ela pode estar vazia num ponto antigo. O número vem do nome.
 - O ciclo parece detalhe. Sem ele o ponto some da visão por trimestre.
