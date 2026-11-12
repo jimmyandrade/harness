@@ -188,10 +188,11 @@ Evento presencial com convidado: leia o evento depois de criar. O Google Agenda 
 Ligação telefônica leva na descrição o nome e o telefone de quem vai ligar ou atender do outro lado, para remarcar sem depender de memória. Sem o número, peça a quem atendeu a ligação que combinou o horário: o histórico de chamadas do celular tem o número, e a gravação, se houver, tem o combinado. Grave o número também no cadastro da pessoa.
 Compromisso a que uma pessoa ou um grupo deve ser convidado, como uma reunião combinada numa conversa do WhatsApp: depois de criar o evento, siga `convidar-para-evento`, que manda o convite pelos canais que alcançam a pessoa.
 
-Antes de criar o evento de uma viagem, de uma montagem ou de um ponto de contato de que participa mais de uma pessoa, pergunte quem entra como convidado e por qual e-mail, inclusive a pessoa que usa a agenda. Sem essa resposta, a pergunta fica em aberto e o evento não sai sem convidado.
+Antes de criar o evento de uma viagem, de uma montagem ou de um ponto de contato de que participa mais de uma pessoa, pergunte quem entra como convidado e por qual e-mail, inclusive a pessoa que usa a agenda. Se o projeto registra quem atua em cada ponto, leia esse cadastro e proponha a equipe, como quem foi nas edições anteriores. Sem cadastro, diga que ele falta e recomende o campo, sem criá-lo. Sem a resposta, o evento não sai sem convidado.
 O e-mail que a organização do ponto passou, e os ligados ao evento, entram no convite do evento do ponto. O evento da montagem convida só quem monta, e não a organização.
 
-A saída que a pessoa definiu para a viagem e a janela de montagem que ela escolheu viram evento na agenda. O que só está previsto, ou a janela que sobrou, fica no cronograma.
+O horário da montagem, da entrada e da abertura é da organização do ponto, e não da pessoa. Ache a mensagem, o manual ou o e-mail que o traz antes de perguntar, e escreva na descrição do evento a fonte, o canal e, se houver, o link dela.
+A saída que a pessoa definiu para a viagem e a janela de montagem que ela escolheu entre as da organização viram evento na agenda. O que só está previsto, ou a janela que sobrou, fica no cronograma.
 
 Com `Pauta obrigatória em evento com convidados` em `sim`, a descrição de um evento com convidados leva uma pauta clara.
 Sem pauta na conversa, pergunte antes de criar.
@@ -306,6 +307,7 @@ Conferi a grafia. O título usou o nome canônico e o papel do encontro. A descr
 - «Feira» ou «Reunião» sozinhos parecem título. A busca precisa do nome canônico. O evento externo segue o Passo 5.
 - Não pedir o Meet parece garantir um evento sem chamada. Com convidado, o Google Agenda pode anexá-lo sozinho.
 - Um evento criado parece completo sem a pergunta dos convidados. A pessoa que usa a agenda pode precisar do convite por e-mail, e a organização do ponto, do convite do evento do ponto, não do da montagem.
+- O horário de montagem parece decisão de quem expõe. É da organização, e a fonte dele vai na descrição do evento, com o link quando houver.
 - A busca vazia parece prova de que o compromisso não existe. Quando a pessoa o deu como marcado, é a agenda que falta, e o próximo passo é criar.
 
 ## Scripts disponíveis
