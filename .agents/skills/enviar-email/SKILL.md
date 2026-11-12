@@ -3,7 +3,7 @@ name: enviar-email
 description: Monta e envia um e-mail em nome de uma pessoa, com a assinatura certa, o destinatário principal e as cópias, o anexo vindo do Notion e o envio só com o sim. Usada quando uma pessoa contata uma organização por e-mail, inclusive com comprovante. Não serve para escrever no tom da marca, achar um e-mail nem triar a caixa.
 metadata:
   author: jimmyandrade
-  version: "0.3.2"
+  version: "0.4.0"
   related:
     - definir-pessoa
     - acompanhar-retornos-pendentes
@@ -75,6 +75,8 @@ Anexe o arquivo pelo campo de arquivo escondido da página e confira na tela que
 ### Passo 5
 
 Aproveite o e-mail para tratar todos os pontos de uma vez, em vez de mandar um e outro depois: o que a pessoa envia, o que pede e o que ainda não sabe, como valores a cotar.
+
+Cada assunto vira um item de uma lista numerada, com o pedido dele, e o texto antes da lista diz o contexto. Dois assuntos, como uma análise que se espera e uma extensão que se pede, nunca dividem o mesmo parágrafo. A organização responde pelo número.
 
 Quando o assunto é uma viagem, diga a ida e a volta, com os dias.
 Assim a organização sabe o período inteiro e, se for o caso, cota a extensão do serviço.
