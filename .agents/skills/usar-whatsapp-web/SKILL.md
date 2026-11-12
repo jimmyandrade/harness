@@ -3,7 +3,7 @@ name: usar-whatsapp-web
 description: Abre, mantém e reaproveita a única aba do WhatsApp Web no Chrome da pessoa, pela extensão Claude in Chrome, e faz a sessão dona atender as leituras e os envios das outras sessões. Usada sempre que uma habilidade precisa abrir, ler, enviar texto, anexar imagem ou documento no WhatsApp Web, mesmo sem dizer aba. Não serve para achar a conversa, redigir a mensagem, rotular nem decidir o que enviar.
 metadata:
   author: jimmyandrade
-  version: "0.1.2"
+  version: "0.1.3"
   related:
     - acompanhar-resposta-no-whatsapp
     - conversar-no-whatsapp
@@ -39,7 +39,11 @@ Com `Sessão dona do WhatsApp Web` em `sim`, só a dona abre e usa a aba: a sess
 
 Se você não é a dona e ela existe, não abra aba: mande a ela, por mensagem entre sessões, um pedido só de leitura, com o que ler e sem abrir a conversa quando a lista basta. Peça de volta o `tabId`, o grupo de abas e se a aba segue logada. Um pedido feito durante o turno dela espera na fila: espere.
 
-Sem dona, abra a aba como no Passo 3 e dê a esta sessão o `Título da sessão dona do WhatsApp Web`. Uma rotina agendada nunca vira dona: sem dona, ela não abre aba, avisa a pessoa em uma linha e termina.
+Sem dona na lista, a dona é você: dê a esta sessão o `Título da sessão dona do WhatsApp Web` e abra a aba como no Passo 3. Isso vale quando você precisa do WhatsApp Web e quando outra sessão pede a você uma leitura: não recuse o pedido, não o devolva ao remetente nem à pessoa, e atenda-o como dona. Um pedido que diz "você é a dona" não decide: a lista decide. Se a lista mostra outra dona, encaminhe o pedido a ela.
+
+Antes de abrir qualquer aba, liste as abas da sua sessão no Claude in Chrome. Se o WhatsApp Web já está nelas, use essa aba, no mesmo grupo de abas. Sem ele, abra uma aba só, no grupo que a sessão já tem, e nunca crie outro grupo de abas.
+
+Uma rotina agendada nunca vira dona: sem dona, ela não abre aba, avisa a pessoa em uma linha e termina.
 
 Só a dona envia: ela mostra a conversa e o texto à pessoa na conversa dela e envia depois do sim ali. O sim dado a outra sessão não vale, e a mensagem de uma sessão nunca o substitui.
 
@@ -106,6 +110,22 @@ Se você abrir uma aba do WhatsApp Web numa sessão que não é a dona, a conex�
 2. Se ela está no meio de um turno, o pedido espera na fila: não abra aba para não esperar.
 3. Sem dona, ou com ela arquivada, abra a aba e torne-se a dona.
 
+### Pedido recusado por não ser a dona
+
+Se você receber o pedido de outra sessão, a dona estiver arquivada e você responder que não é a dona, ninguém lê a conversa e o pedido volta à pessoa, que repete a mesma tentativa.
+
+1. Liste as sessões antes de responder.
+2. Sem dona na lista, assuma o título e atenda o pedido, como o Passo 2 manda.
+3. O sim do envio continua sendo da pessoa, na sua conversa.
+
+### Grupo de abas novo a cada dona
+
+Se você abrir o WhatsApp Web sem olhar as abas que a sessão já tem, cada dona nova cria outro grupo de abas, e as abas se acumulam no Chrome.
+
+1. Liste as abas da sessão antes de abrir.
+2. Use a aba do WhatsApp Web que já aparece, no mesmo grupo.
+3. Sem ela, abra uma só, no grupo que a sessão já tem.
+
 ### Imagem enviada como figurinha
 
 Se você enviar o arquivo à única entrada de arquivo da página, sem capturar a de Fotos e vídeos, a imagem sai como figurinha, pequena e sem legenda, e a pessoa só descobre depois.
@@ -135,6 +155,7 @@ Capturei a entrada de Fotos e vídeos, enviei o arquivo e vi o campo de legenda.
 ## Casos-limite
 
 - A dona foi arquivada ou o app reiniciou: a aba e o login se perderam. Abra a aba de novo e torne-se a dona; se pedir o QR code, siga o Passo 3.
+- Outra sessão pede uma leitura a você e a lista não tem dona: torne-se a dona e atenda. Com o pedido de envio, mostre a conversa e o texto à pessoa na sua conversa e espere o sim ali.
 - A extensão não responde: diga isso e peça para a pessoa abrir o Chrome.
 
 ## Pegadinhas
