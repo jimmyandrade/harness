@@ -3,7 +3,7 @@ name: analisar-regulamento-da-oportunidade
 description: Lê o manual, o regulamento, o edital e o contrato de uma oportunidade e separa o que a empresa deve fazer, com prazo, o que o texto não diz e o que as fontes contradizem. Usada quando chega o manual da oportunidade aprovada. NÃO serve para perguntar ao responsável, redigir a tarefa nem organizar a viagem.
 metadata:
   author: jimmyandrade
-  version: "0.1.3"
+  version: "0.1.4"
   related:
     - acompanhar-edital
     - consultar-responsavel-pela-oportunidade
@@ -78,6 +78,7 @@ Antes de cada prazo, avise a pessoa com o link da exigência, como o do formulá
 Exigência vencida: diga isso na hora e proponha cumpri-la agora ou perguntar se ainda é aceita.
 O responsável pela marca é a pessoa dona da empresa do negócio. Leia o nome e o apelido no cadastro de pessoas, e o nome da marca, o telefone, o WhatsApp e o e-mail no cadastro da empresa, e preencha o formulário com eles sem perguntar à pessoa. Com mais de uma dona, pergunte qual responde.
 O contato de uma inscrição é sempre o da empresa, nunca o telefone nem o e-mail pessoal de um sócio, mesmo quando o campo é do responsável. Sem o contato da empresa no cadastro, pare e peça, e não complete com o da pessoa.
+Preencha o formulário na aba que a pessoa já abriu e deixe aberta a aba vazia que sustenta o grupo de abas da sessão: fechá-la desfaz o grupo, e a aba da pessoa sai do alcance com o preenchimento dentro.
 Ao preencher um formulário, leia a dica e a mensagem de erro de cada campo e escreva no formato que ele valida, como um telefone só com os dígitos e o DDD, sem o código do país nem pontuação.
 Confira cada campo depois de preencher e não avance com erro na tela. O envio segue o sim da pessoa.
 Dado de identidade que a exigência pede, como RG e CPF, a pessoa digita. O agente não o digita, mesmo que ele esteja no cadastro.
@@ -149,6 +150,7 @@ As duas janelas entraram na lista de conflitos, lado a lado. Avisei a pessoa do 
 
 ## Pegadinhas
 
+- A aba vazia que a sessão abriu parece sobra para fechar. Se a aba da pessoa foi arrastada para o grupo, fechá-la desfaz o grupo, e o formulário já preenchido some do alcance.
 - O telefone do responsável pela marca parece ser o da pessoa. Numa inscrição, o contato é o da empresa, e o do sócio fica no cadastro dele.
 - O campo de telefone parece aceitar qualquer formato legível. O formulário pode validar só os dígitos com o DDD e recusar o código do país, os parênteses e o hífen, e a mensagem de erro só aparece depois de preenchido.
 - O manual de uma feira parece servir a todas as edições do mesmo grupo. O cabeçalho pode trazer o mês e o local de uma só.
