@@ -534,7 +534,8 @@ How these skills relate is in `README.md`, in this folder.
   - Moves a code to the AI-validated status after checking the official source, the composition, and the characteristics, and to the person-validated status, the stronger one, only with a person's yes
   - Asks all the classification traits at once when a variant is registered or launched: kind of good, how it is used, closing side, construction, and each material with its percentage
   - Publishes the code to the online store in the country harmonized code of the variant, keeping the code list as the source
-  - Breaks a tie between two fitting headings with the project's tie-break criterion, such as the less gender-oriented heading, and leaves the choice to the person when the criterion does not decide
+  - Breaks a tie between two fitting headings with the project's tie-break criteria, applied in order, such as the lowest tax burden for the company's tax regime or the less gender-oriented heading, and leaves the choice to the person when none decides
+  - For the lowest tax burden, reads the rate from the code list, or from the official source when it is missing, and records it on the code page with the source. The tax burden only breaks a tie that the chapter notes and the General Rules of Interpretation leave open
   - Links the code to the variant, not to the unit, and links it to the product only as a temporary step while the variant has no field
 - **Test Criteria**:
   - [x] The skill is present at that path
