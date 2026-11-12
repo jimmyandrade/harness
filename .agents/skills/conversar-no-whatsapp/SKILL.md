@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.33.0"
+  version: "0.33.1"
   aliases:
     - redigir-mensagem-de-whatsapp
   related:
@@ -109,6 +109,7 @@ Quando a pessoa escreve de um número que a organização não tem no cadastro, 
 
 Todo rascunho de mensagem aparece na resposta do chat. Leia o modelo de saída `mensagens-do-whatsapp` quando for gerar a saída.
 Não diga só que o rascunho está pronto.
+O texto vai na mensagem de fechamento do turno, a última que a pessoa lê, junto com o pedido do sim. Um app que mostra um quadro de próximo passo no fim do turno pode cortar o texto escrito antes dele, e então o fechamento que diz só "acima" deixa a pessoa sem o rascunho.
 Uma mensagem que diz que um trabalho está em andamento, foi registrado ou foi feito leva o link da tarefa, da página ou do pull request que mostra esse registro. Sem esse registro, crie-o antes, como `definir-tarefa` manda, ou pergunte onde ele está.
 Com a ferramenta de widget na sessão, o widget vem sempre, além dos blocos, como o modelo de saída diz. Não espere o cliente desenhá-lo nem o trate como opcional.
 Sem o texto à vista, não pergunte se pode enviar.
@@ -200,6 +201,7 @@ Se você disser que o rascunho está pronto sem mostrar o texto, a pessoa não c
 1. Mostre o texto inteiro na resposta do chat, num bloco de código.
 2. Com a ferramenta de widget na sessão, mostre sempre também o texto editável, com copiar e aprovar. O widget não substitui o bloco.
 3. Pergunte se pode enviar só depois do texto, na mesma resposta.
+4. Com um quadro de próximo passo no fim do turno, escreva o texto na mensagem que vem depois dele. Não escreva "acima" nem "no rascunho" sem o texto ali.
 
 ### Andamento sem o link
 
