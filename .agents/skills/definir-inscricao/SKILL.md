@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet. A busca na lista de inscrições usa notion-ai-search no servidor notion.
 metadata:
   author: jimmyandrade
-  version: "0.9.2"
+  version: "0.10.0"
   aliases:
     - atualizar-inscricao
   related:
@@ -13,6 +13,10 @@ metadata:
     - procurar-inscricao
     - definir-grafia
     - garantir-ingresso
+    - definir-negociacao
+    - definir-tarefa
+    - lancar-despesa-da-empresa
+    - procurar-email
 ---
 
 # Definir inscrição
@@ -27,9 +31,11 @@ metadata:
 
 ### Passo 1
 
-A pessoa aponta uma inscrição, ou afirma que ela foi feita, confirmada, aprovada ou aceita. Uma foto de pedido realizado, mesmo sozinha, é essa afirmação. Essa afirmação é o pedido de gravar. Comemore depois de gravar. Não pare na comemoração. Não responda se a tarefa existe. Não busque e-mail nesta habilidade. Se a pessoa disser que a foto foi engano, apague a linha criada por ela.
+A pessoa aponta uma inscrição, ou afirma que ela foi feita, confirmada, aprovada ou aceita. Uma foto de pedido realizado, mesmo sozinha, é essa afirmação. Essa afirmação é o pedido de gravar. Comemore depois de gravar. Não pare na comemoração. Não responda se a tarefa existe. Não busque e-mail nesta habilidade, salvo para o prazo do Passo 5, por `procurar-email`. Se a pessoa disser que a foto foi engano, apague a linha criada por ela.
 
-A lista de inscrições, o nome de cada propriedade e as opções de status vêm do mapeamento de dados do projeto, no workspace conectado. Se a lista não estiver nessa conexão, pare. Não use a lista de outro workspace. Este texto usa os conceitos: a edição, o status da inscrição, quem fez a inscrição, a pessoa ou empresa inscrita, os comprovantes, a data da confirmação, a data do envio e as observações. Os status são o de pré-cadastro e o de inscrição confirmada.
+A lista de inscrições, o nome de cada propriedade e as opções de status vêm do mapeamento de dados do projeto, no workspace conectado. Se a lista não estiver nessa conexão, pare. Não use a lista de outro workspace. Este texto usa os conceitos: a edição, o status da inscrição, quem fez a inscrição, a pessoa ou empresa inscrita, os comprovantes, a data da confirmação, a data do envio e as observações. Os status são o de pré-cadastro, o de inscrição confirmada, o de em andamento, o de em contestação, o de perdida e o de não selecionada.
+
+Citar um status por conceito não o cria: ele precisa existir na lista.
 
 ### Passo 2
 
@@ -43,7 +49,7 @@ flowchart LR
   B -->|nenhuma sem os dois| N[Não crie]
 ```
 
-Sem quem fez a inscrição e sem a pessoa ou empresa, exija essas marcações. Não invente nenhum dos dois. A comemoração dessa confirmação espera a gravação. Antes de escrever um nome, siga `definir-grafia`. Na frase, use a forma correta. A foto entra para saber o evento e se o pedido está confirmado. O arquivo dessa foto vai para os comprovantes. O número do pedido não entra na inscrição.
+Sem quem fez a inscrição e sem a pessoa ou empresa, exija essas marcações. Não invente nenhum dos dois. A comemoração dessa confirmação espera a gravação. Antes de escrever um nome, siga `definir-grafia`. Na frase, use a forma correta. A foto entra para saber o evento e se o pedido está confirmado. O arquivo dessa foto vai para os comprovantes. O número do pedido e o código seguem o Passo 7.
 
 ### Passo 3
 
@@ -55,11 +61,41 @@ A foto do pedido que ela enviou entra nos comprovantes na mesma gravação, mesm
 
 A data da confirmação é a que a pessoa disse ou, quando `garantir-ingresso` viu o pedido confirmado na tela, o dia dessa tela. Sem nenhuma das duas, deixe a data vazia. Se ela disser o dia em que enviou a inscrição, grave esse dia na data do envio. Quando `garantir-ingresso` enviou, grave o dia e a hora do pedido. Sem o horário, grave o dia e não pergunte a hora. Não invente o horário.
 
-Não grave código, número do pedido nem valor. Não preencha fórmula, rollup nem propriedade que copia um dado da pessoa ou da edição.
+Grave o número do pedido e o código só como o Passo 7 manda. Não grave valor. Não preencha fórmula, rollup nem propriedade que copia um dado da pessoa ou da edição.
 
 Se o mapeamento não tiver a edição, o status, quem fez a inscrição ou a pessoa ou empresa, pare antes de criar e diga qual falta. Um valor que caberia numa propriedade opcional ausente do mapeamento não vai para o corpo. Grave o resto e, no fim, liste esse valor e sugira criar a propriedade. Não crie a propriedade.
 
 ### Passo 4
+
+Contestação. Quando a pessoa contesta uma recusa, um resultado ou um critério ligado a uma inscrição, o andamento da contestação fica no status da inscrição: em contestação enquanto o recurso estiver aberto. Se a lista não tem essa opção, proponha criá-la e não adapte outro status. A decisão humana da oportunidade não representa o andamento da contestação: a recusa contestada continua como não selecionada na oportunidade até a organização reverter ou confirmar. Com a resposta definitiva, atualize o status da inscrição e registre o desfecho num comentário datado em cada página relacionada.
+
+Desfecho. O status é o de perdida quando não conseguimos concluir a inscrição: prazo perdido, formulário travado, requisito que faltou, vagas esgotadas ou desistência antes do envio. É o de não selecionada quando a inscrição foi enviada e a candidata não foi selecionada, inclusive na lista de espera.
+
+### Passo 5
+
+Prazos. Ao tratar participação, reserva de vaga, taxa, sinal, boleto ou lista de espera, procure o prazo máximo para responder ou confirmar interesse e o prazo máximo para pagar, e diferencie os dois.
+
+Procure em todas as fontes: propriedades, comentários datados, e-mail por `procurar-email`, canal já registrado, edital, regulamento, formulário, site e PDF. Uma regra relativa, como "até 2 dias após a confirmação", não responde o prazo de confirmação.
+
+Sem data nem regra confiável, sinalize isso antes de qualquer recomendação, sugira perguntar à organização e não considere a participação segura, salvo se já estiver confirmada e paga. Nunca invente a data. O pagamento vai por `lancar-despesa-da-empresa`. Toda pendência acionável vira tarefa por `definir-tarefa`.
+
+### Passo 6
+
+Formulário colado. Quando a pessoa cola o texto de um formulário de inscrição, ache a oportunidade por `procurar-oportunidade` e confira se já existe inscrição ligada a ela. Se não existir, crie a inscrição como espelho operacional, com o status de em andamento, mesmo sem envio.
+
+O formulário vai no corpo da inscrição, nunca no da oportunidade. Não use abas, toggles nem blocos colapsáveis: use títulos, negrito, listas e separadores. Cada pergunta vira um título com um parágrafo livre abaixo. A pergunta de escolha vira caixas de seleção `- [ ]`. O item de documentos ou de confirmações vira lista de marcação. O campo com asterisco ganha "(obrigatório)".
+
+Abordagem positiva. Uma resposta de conversa como "vou analisar" ou "manda o material" mantém a inscrição em andamento até haver confirmação operacional: formulário enviado, aprovação final, vaga, comprovante, credencial, código ou instrução conclusiva. A conversa fica em `definir-negociacao`, e a inscrição aponta para a negociação nas observações.
+
+### Passo 7
+
+Identificadores e participante. O número do pedido e o código de inscrição, de ingresso ou de credencial vão em propriedades separadas, sem juntar os dois e sem repetir nas observações. Se o mapeamento não tiver a propriedade, não grave no corpo e liste o valor no fim. O participante é uma relação com pessoas: busque por nome, e-mail e telefone antes de criar. Não suponha que quem cadastrou ou gerou o PDF é o participante: leia o comprovante. Confira o que a página já cobre antes de acrescentar, para não duplicar.
+
+### Passo 8
+
+Encerramento. Quando a inscrição encerrou, por formulário fechado, edital encerrado ou prazo expirado, anexe as evidências, como prints e PDFs, na propriedade de evidências de encerramento da oportunidade e registre o link da fonte.
+
+### Passo 9
 
 Depois de gravar, leia a página de volta e confira cada propriedade gravada contra o que você quis gravar: o status, as datas, as observações e os comprovantes. Diga o que a leitura mostrou, inclusive o que ficou fora do esperado, como o título que não acompanha o status. Não diga que gravou sem essa leitura.
 
@@ -113,7 +149,7 @@ Se você deixar a foto de fora, ou gravar a foto no corpo, o comprovante não fi
 
 1. Anexe a foto nos comprovantes na mesma gravação.
 2. Não grave a foto no corpo.
-3. Não grave código, número do pedido nem valor.
+3. Não grave valor, e grave código e número do pedido só como o Passo 7 manda.
 
 ### Confirmação como notícia
 
@@ -141,7 +177,7 @@ atualizei só essa inscrição, do pré-cadastro para inscrição confirmada. N�
 
 ### Inscrição de Ana Souza para o Festival Rota Sul 2026 feita, com a foto do pedido confirmado.
 
-A busca não achou a linha. Criei a inscrição de Ana Souza na edição Festival Rota Sul 2026, terça-feira, 29/09/2026 e quarta-feira, 30/09/2026, em Cidade Exemplo, com o status de inscrição confirmada. A foto foi para os comprovantes. Não pedi licença. Não gravei o número do pedido. Indiquei `/definir-inscricao` para a próxima vez.
+A busca não achou a linha. Criei a inscrição de Ana Souza na edição Festival Rota Sul 2026, terça-feira, 29/09/2026 e quarta-feira, 30/09/2026, em Cidade Exemplo, com o status de inscrição confirmada. A foto foi para os comprovantes. Não pedi licença. O número do pedido ficou fora porque o mapeamento não tem essa propriedade, e o listei no fim. Indiquei `/definir-inscricao` para a próxima vez.
 
 ### Eu realizei a inscrição hoje e ela já está confirmada.
 
@@ -166,7 +202,7 @@ busquei a inscrição da Loja Exemplo como expositora no Festival Rota Sul 2026.
 ## Pegadinhas
 
 - Dizer que a inscrição foi feita ou confirmada parece só notícia, ou um pedido de licença para cadastrar. É o pedido de gravar. Se a linha não existe, crie. Comemore depois de gravar.
-- A foto do pedido parece convite para gravar o número, ou para ficar de fora. O arquivo vai para os comprovantes. O número do pedido fica de fora. A foto não entra no corpo.
+- A foto do pedido parece convite para gravar o número, ou para ficar de fora. O arquivo vai para os comprovantes. O número do pedido segue o Passo 7. A foto não entra no corpo.
 - A foto sem nome parece inscrição pronta para cadastrar. Sem quem fez a inscrição e sem a pessoa ou empresa, não cadastre. Exija as duas marcações.
 - Pré-cadastro não é inscrição confirmada. A confirmação da organização muda só o status da linha indicada.
 - O corpo pode dizer que a inscrição não confirma a participação. Esse texto é o espelho do formulário. A confirmação fica no status. Não reescreva o corpo.
