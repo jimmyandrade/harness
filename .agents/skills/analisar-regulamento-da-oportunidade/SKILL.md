@@ -3,7 +3,7 @@ name: analisar-regulamento-da-oportunidade
 description: Lê o manual, o regulamento, o edital e o contrato de uma oportunidade e separa o que a empresa deve fazer, com prazo, o que o texto não diz e o que as fontes contradizem. Usada quando chega o manual da oportunidade aprovada. NÃO serve para perguntar ao responsável, redigir a tarefa nem organizar a viagem.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
   related:
     - acompanhar-edital
     - consultar-responsavel-pela-oportunidade
@@ -78,6 +78,7 @@ Antes de cada prazo, avise a pessoa com o link da exigência, como o do formulá
 Exigência vencida: diga isso na hora e proponha cumpri-la agora ou perguntar se ainda é aceita.
 O responsável pela marca é a pessoa dona da empresa do negócio. Leia o nome, o apelido, o nome da marca e o telefone no cadastro de pessoas e de empresas, e preencha o formulário com eles sem perguntar à pessoa. Com mais de uma dona, pergunte qual responde.
 Dado de identidade que a exigência pede, como RG e CPF, a pessoa digita. O agente não o digita, mesmo que ele esteja no cadastro.
+Diga em qual página do cadastro cada dado está, com o link, e o que o cadastro não tem, sem perguntar o que já está lá. O dado que falta vira recomendação de campo, sem criá-lo.
 
 ### Passo 7
 
