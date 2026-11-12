@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.31.0"
+  version: "0.32.0"
   aliases:
     - redigir-mensagem-de-whatsapp
   related:
@@ -41,6 +41,8 @@ Leia os valores nas instruções do projeto, na entrada desta habilidade. Na aus
 "Canais em ordem de preferência": ["conector", "WhatsApp Web"]
 # `Dividir em mensagens curtas`: `sim` divide o rascunho em mensagens, uma por ideia. `não` manda cada rascunho numa mensagem só.
 "Dividir em mensagens curtas": "sim"
+# `Vários assuntos no rascunho` vale quando o rascunho tem mais de um assunto que pede resposta. `lista numerada` manda uma mensagem só, com a abertura e um item numerado por assunto, para a pessoa responder pelo número. `mensagens separadas` manda uma mensagem por assunto.
+"Vários assuntos no rascunho": "lista numerada"
 # `Mensagem única para` lista os tipos de mensagem que vão numa mensagem só, como um status de demanda para alguém do time.
 "Mensagem única para": []
 # `Comunicado numa mensagem só`: `sim` manda o comunicado de produto numa mensagem só. `não` segue `Dividir em mensagens curtas`.
@@ -109,6 +111,7 @@ Com a ferramenta de widget na sessão, o widget vem sempre, além dos blocos, co
 Sem o texto à vista, não pergunte se pode enviar.
 
 Com `Dividir em mensagens curtas` em `sim`, como as pessoas costumam escrever no WhatsApp, divida o rascunho em mensagens, uma por ideia.
+Dois assuntos que pedem resposta, como uma análise que se espera e uma extensão que se pede, nunca dividem o mesmo parágrafo. Eles seguem `Vários assuntos no rascunho`, e não a divisão por ideia.
 Cada mensagem que responde a algo cita a mensagem da outra pessoa que ela responde, mesmo de semanas atrás: ache-a lendo a conversa inteira.
 Com `Fechamento em mensagem separada` em `sim`, a despedida vai numa mensagem própria, a última.
 Envie na mesma ordem, uma de cada vez.
