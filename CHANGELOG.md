@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.77.0](https://github.com/jimmyandrade/harness/compare/v1.76.0...v1.77.0) (2026-11-12)
+
+
+### Features
+
+* **conversar-no-whatsapp:** put each subject of a draft in its own numbered item ([#1058](https://github.com/jimmyandrade/harness/issues/1058)) ([0628273](https://github.com/jimmyandrade/harness/commit/062827332dbec48c1fc6d0cf9922824460a603ea))
+* **enviar-email:** reuse an unsent draft and confirm the reply channel when it is not the registered one ([#1059](https://github.com/jimmyandrade/harness/issues/1059)) ([6feae85](https://github.com/jimmyandrade/harness/commit/6feae857409e72f074ff7557871dc3bb3f65d2c4))
+* let an appliqué carry a short label text that overrides the project default ([#1055](https://github.com/jimmyandrade/harness/issues/1055)) ([8a67f26](https://github.com/jimmyandrade/harness/commit/8a67f265b07a13e69049cc3f448505122a33a378))
+* **rotular-item:** create the missing context label from the BASB scheme and propose its filter ([#1048](https://github.com/jimmyandrade/harness/issues/1048)) ([732afa8](https://github.com/jimmyandrade/harness/commit/732afa86a5a6ac89ce44ee69d01811e397a9c0f4))
+* warn about the setup window before planning a trip to an event ([#1044](https://github.com/jimmyandrade/harness/issues/1044)) ([033d972](https://github.com/jimmyandrade/harness/commit/033d9722147e3de1b5a68313f8cec1b89dfa2add))
+
+
+### Bug Fixes
+
+* let the appliqué go on the label when its record says so ([#1053](https://github.com/jimmyandrade/harness/issues/1053)) ([906c057](https://github.com/jimmyandrade/harness/commit/906c057f02ba1e989b396bf3f27fc0822e6d45f3))
+* **redigir-com-tom-de-voz:** return the unsent draft in the final message, never as above ([#1047](https://github.com/jimmyandrade/harness/issues/1047)) ([3b46c73](https://github.com/jimmyandrade/harness/commit/3b46c739678ee3487e5b6bf2097ace09ec7ac3e9))
+* **usar-whatsapp-web:** take over as owner when none exists and reuse the tab group ([#1052](https://github.com/jimmyandrade/harness/issues/1052)) ([b30b53c](https://github.com/jimmyandrade/harness/commit/b30b53ccb56d16a9b70d62bccfa6215b5e3055e4))
+
 ## [1.76.0](https://github.com/jimmyandrade/harness/compare/v1.75.0...v1.76.0) (2026-11-11)
 
 
