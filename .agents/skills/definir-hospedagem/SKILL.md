@@ -3,7 +3,7 @@ name: definir-hospedagem
 description: Define a hospedagem de uma viagem depois da reserva, o que ela pede, como nome e documento dos hóspedes, veículo e chegada, e a resposta a quem hospeda, enviada só com a confirmação. Usada quando o anfitrião ou o hotel escreve. Não serve para ler a reserva, registrar a viagem nem redigir no tom da marca.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.5.1"
   aliases:
     - responder-pedido-da-hospedagem
   related:
@@ -112,8 +112,9 @@ Não crie uma rotina para a reserva: etiquete a conversa do e-mail como aguardan
 A hospedagem costuma mandar o que falta, como a senha de acesso, perto do check-in.
 Não espere ela escrever primeiro.
 
-Hospedagem com vaga ou garagem de parceiro: pergunte ao anfitrião, pelo canal da reserva, até que horas a garagem funciona nos dias da viagem e se é preciso interfonar ou avisar antes de entrar.
-Compare com a hora mais tarde em que a pessoa volta, como o fim de uma desmontagem, e registre a resposta na hospedagem.
+Hospedagem com vaga ou garagem de parceiro: pergunte ao anfitrião, pelo canal da reserva, até que horas a garagem funciona nos dias da viagem, se é preciso interfonar ou avisar antes de entrar e se há outra opção quando ela fecha cedo.
+A pergunta não conta ao anfitrião o motivo da volta tarde, como o evento: ele só precisa do dia e da pergunta.
+Compare a resposta com a hora mais tarde em que a pessoa volta, como o fim de uma desmontagem, e registre-a na hospedagem.
 
 A rotina do canal avisa a pessoa a cada mensagem nova e entrega o resumo à sessão que espera.
 A senha de acesso nunca vai no aviso, no Notion nem em outro lugar: o aviso só diz que ela chegou e onde ver.
