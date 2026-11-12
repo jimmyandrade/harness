@@ -39,3 +39,23 @@ Funcionalidade: Cadastrar país, estado e cidade com hierarquia e padrão
       Dado que a fonte é incompleta
       Quando a skill grava
       Então registra nas observações a origem e a dúvida pendente
+
+  Regra: A região só existe nos países configurados
+
+    Exemplo: País com região
+      Dado que o país está em Países com região
+      Quando a skill cadastra um estado
+      Então o estado tem a região como pai
+      E a região tem o país como pai
+
+  Regra: A lista ausente não para o trabalho
+
+    Exemplo: Mais de um banco corresponde
+      Dado que a lista não está no mapeamento
+      Quando a skill procura e acha mais de um banco
+      Então confirma qual com a pessoa
+
+    Exemplo: Nenhum banco corresponde
+      Dado que a lista não está no mapeamento
+      Quando a skill procura e não acha nenhum banco
+      Então pergunta se deve criar ou onde está

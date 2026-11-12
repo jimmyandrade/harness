@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   related:
     - identificar-duplicata
     - definir-grafia
@@ -23,12 +23,16 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Padrão do nome do estado": "Estado {artigo} {nome}"
 # `Padrão do nome da cidade` usa `{nome}` e `{UF}`. A sigla só entra quando ajuda a desambiguar.
 "Padrão do nome da cidade": "{nome} ({UF})"
+# `Países com região` lista os países cuja hierarquia tem o nível de região entre o país e o estado. Vazio: nenhum.
+"Países com região": []
 ```
 ## Instruções
 
 ### Passo 1
 
-A lista de localidades e o nome de cada propriedade vêm do mapeamento de dados do projeto, no workspace conectado. Se a lista não estiver nessa conexão, pare. Não use a lista de outro workspace. Este texto usa os conceitos: o nome, o tipo (país, estado ou cidade), o pai, o código ISO 3166, a abreviatura, a prioridade de oportunidades e as observações. Se o nome, o tipo ou o pai faltar no mapeamento, pare antes de gravar e diga qual.
+A lista de localidades e o nome de cada propriedade vêm do mapeamento de dados do projeto, no workspace conectado. Se o mapeamento não a traz ou ela não abre, não pare: procure nos bancos do workspace conectado um que corresponda. Achou mais de um, confirme qual com a pessoa. Não achou nenhum, pergunte se deve criar ou peça que ela indique onde está. Criar o banco só com o sim, seguindo a regra do projeto para banco novo.
+
+Não use a lista de outro workspace. Este texto usa os conceitos: o nome, o tipo (país, região, estado ou cidade), o pai, o código ISO 3166, a abreviatura, a prioridade de oportunidades e as observações. Se o nome, o tipo ou o pai faltar no mapeamento, pare antes de gravar e diga qual.
 
 Uma propriedade opcional que falta e para a qual há valor: grave o resto e liste o valor no fim, com a proposta da propriedade. Nunca crie schema nem grave o valor no corpo.
 
@@ -40,10 +44,13 @@ Antes de criar, use `identificar-duplicata` com o tipo, o nome, as variações e
 
 A hierarquia é país, estado, cidade, pelo pai. O país não tem pai. O estado tem o país como pai. A cidade tem o estado como pai. Pai vazio ou errado se corrige antes de concluir. Nunca ligue a cidade direto ao país.
 
+Nos países de `Países com região`, a região fica entre o país e o estado: ela tem o país como pai e o estado tem a região como pai. Nos outros países não há região. Se o tipo região não existe no mapeamento, pergunte antes de criar a opção.
+
 ```mermaid
 flowchart LR
   T{Tipo} -->|país| P[Sem pai, ISO 3166-1]
-  T -->|estado| E[Pai é o país, ISO 3166-2]
+  T -->|região| R[Pai é o país, só em país com região]
+  T -->|estado| E[Pai é o país ou a região, ISO 3166-2]
   T -->|cidade| C[Pai é o estado, ISO opcional]
 ```
 
@@ -124,6 +131,8 @@ Criei com a dúvida nas observações: origem "texto do formulário" e pendente 
 - Já existe equivalente: atualize ou relacione. Não duplique.
 - Cidade e estado com o mesmo nome: a cidade leva a sigla pelo padrão; o estado leva o padrão do estado.
 - Estado sem o país: crie o país antes.
+- País com região: o estado tem a região como pai. País sem região: o estado tem o país.
+- A lista não está no mapeamento: procure o banco, confirme se houver vários, pergunte se não houver nenhum.
 - Prioridade da cidade desconhecida: pergunte. Não invente.
 - Código ISO de cidade: opcional, pode ficar vazio.
 - Falta uma propriedade obrigatória no mapeamento: pare e diga qual.
