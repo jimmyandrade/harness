@@ -5,8 +5,9 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.7.0"
   related:
+    - acompanhar-retornos-pendentes
     - definir-obrigacao-financeira
     - lancar-despesa-pessoal
     - lancar-despesa-da-empresa
@@ -57,9 +58,14 @@ A pessoa informa o data source na execução. Sem essa indicação, use a lista 
 
 Um plano de regularização, como uma planilha com dívida, total, parcelas e vencimentos, vira uma obrigação por linha e uma despesa por vencimento. Converta cada coluna de vencimento na data informada pela pessoa; sem o dia, deixe o vencimento pendente. Uma parcela com valor zero não vira despesa. Confira que a soma das parcelas bate com o total de cada linha e aponte a diferença, sem corrigi-la sozinho. Uma linha mensal pode ter no total só o primeiro mês.
 
+Uma cobrança nova de uma dívida que já tem obrigação, como um acordo que quita faturas em atraso, não entra como outra dívida antes do extrato. Peça à empresa o extrato e confira se as faturas já estão nas parcelas.
+Sem o extrato, o pagamento do acordo fica ligado à obrigação existente, com o valor original e o valor pago, e a dúvida fica anotada como pendência.
+
 ### Passo 4
 
 Aviso recebido não é situação conferida. `Canais das pendências` diz, para cada tipo de pendência, onde ela chega ou se consulta: e-mail, aplicativo ou site do órgão. Pendência que não chega por e-mail ganha uma consulta no canal indicado, com `Frequência da consulta nos canais`, e a ausência de e-mail não vale como situação em dia. Tipo ausente do parâmetro: pergunte uma vez onde ele se consulta. Multa, pontos, IPVA e licenciamento se conferem no órgão de trânsito do estado de registro ou no sistema nacional de trânsito; pedágio sem praça, na concessionária ou na tag; parcela, na administradora. Diga de onde veio cada situação. Pontos caem na habilitação de quem a pessoa indicar como condutor; sem indicação, pergunte. Pedágio eletrônico sem praça gera cobrança posterior com prazo: diga o prazo que a concessionária informar, sem inventar outro.
+
+Uma pendência que só se resolve num painel, como a tag que continua inativa depois do pagamento, entra em `acompanhar-retornos-pendentes` com o prazo que a empresa informou. A pessoa não confere à mão.
 
 ### Passo 5
 
@@ -118,13 +124,15 @@ Registrei como despesa pessoal, ligada ao carro e à viagem, com o prazo de paga
 - Várias pessoas dirigem o mesmo carro: a multa vai para quem a pessoa indicar como condutor.
 - O carro foi registrado numa cidade e a pessoa mora em outra: o estado de registro decide o órgão de trânsito.
 - Uma parcela já foi paga por outra pessoa: registre o pagamento e quem pagou.
-- A tag de pedágio está inativa por dívida: a tag fica registrada como inativa, e a dívida dela é uma obrigação.
+- A tag de pedágio está inativa por dívida: a tag fica registrada como inativa e a dívida dela é uma obrigação. Paga a dívida, o desbloqueio entra em `acompanhar-retornos-pendentes` até a tag aparecer ativa no painel.
+- A pessoa que pagou diz que vai combinar o reembolso depois: a obrigação com ela fica `A verificar`, sem valor de parcela.
 
 ## Pegadinhas
 
 - O endereço de quem dirige parece decidir o órgão de trânsito. Quem decide é o estado de registro do veículo.
 - Quem anda no carro parece motorista. Motorista é só quem dirige; passageiro não recebe pontos.
 - O e-mail da tag parece a fatura do pedágio sem praça. São cobranças diferentes.
+- Um acordo com desconto parece uma dívida nova. Ele quita faturas que já existem: as faturas originais vêm do extrato.
 - Planilha com o ano escrito como "26/01" pode ser 2026, e não uma data.
 
 ## Scripts disponíveis
