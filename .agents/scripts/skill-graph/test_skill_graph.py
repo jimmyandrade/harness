@@ -121,6 +121,19 @@ class SkillGraphTest(unittest.TestCase):
         write_skill(self.project, "fechar-pedido")
         self.assertIn("abrir_pedido -.-> fechar_pedido", graph.build(self.project, self.core))
 
+    def test_evoluir_habilidade_has_no_node_and_no_arrows(self) -> None:
+        write_skill(self.core, "evoluir-habilidade", ["criar-pull-request"])
+        write_skill(self.core, "criar-commit", ["criar-pull-request", "evoluir-habilidade"])
+        text = graph.build(self.core, self.core)
+        self.assertNotIn("evoluir_habilidade", text)
+        self.assertIn("criar_commit --> criar_pull_request", text)
+
+    def test_a_project_graph_does_not_show_evoluir_habilidade_either(self) -> None:
+        write_skill(self.core, "evoluir-habilidade")
+        write_skill(self.project, "abrir-pedido", ["evoluir-habilidade", "criar-commit"])
+        text = graph.build(self.project, self.core)
+        self.assertNotIn("evoluir_habilidade", text)
+        self.assertIn("abrir_pedido --> criar_commit", text)
 
 
 class CoreOnlyProjectTest(unittest.TestCase):

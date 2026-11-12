@@ -35,6 +35,14 @@ The learning loop lives in the project instructions, not in the skills.
 - The skills whose task is to write, test, review, describe or measure skills keep citing each other, because that is their task.
 - `criar-habilidade` stops requiring the parameter and the last step, and the skill checker rejects them in a skill.
 
+## Transition
+
+Until the step leaves the skills, the skill graph hides `evoluir-habilidade`: the generator gives it no node and no arrows. This is a stopgap that prepares the 2.0 cut. Drawn, the skill added about 100 arrows, and the graph went past the 500-edge limit of Mermaid on GitHub.
+
+Hiding it is not enough: the graph still has about 600 arrows. The limit is a secure setting of the renderer (`maxEdges`), so a diagram cannot raise it, and GitHub does not let a repository change it. Raising it is possible only in a renderer we control, such as a documentation site or the Mermaid command line.
+
+We do not split the graph by group now. The groups should follow the plugin boundaries of 2.0, and drawing them before those boundaries are decided would bake in a cut that may change. Splitting the graph into one diagram per plugin is part of the later ADR that cuts the core into plugins.
+
 ## Consequences
 
 - Changing how learning works is one edit in the project instructions instead of 74.

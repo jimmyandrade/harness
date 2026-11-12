@@ -95,7 +95,6 @@ flowchart LR
     escrever_codigo["escrever-codigo"]
     escrever_link["escrever-link"]
     escrever_teste["escrever-teste"]
-    evoluir_habilidade["evoluir-habilidade"]
     extrair_tarefas_da_reuniao["extrair-tarefas-da-reuniao"]
     fatiar_pull_request["fatiar-pull-request"]
     fazer_fechamento["fazer-fechamento"]
@@ -157,45 +156,38 @@ flowchart LR
     verificar_origem_do_link["verificar-origem-do-link"]
   end
   abrir_vendas_na_tiqueteira --> definir_lote_de_ingresso
-  abrir_vendas_na_tiqueteira --> evoluir_habilidade
   acompanhar_edital --> criar_oportunidade
   acompanhar_edital --> definir_grafia
   acompanhar_edital --> definir_grupo_de_oportunidades
   acompanhar_edital --> definir_inscricao
   acompanhar_edital --> definir_rotina
-  acompanhar_edital --> evoluir_habilidade
   acompanhar_edital --> procurar_email
   acompanhar_edital --> procurar_inscricao
   acompanhar_edital --> procurar_oportunidade
   acompanhar_fila_de_revisao --> atender_revisao_de_pull_request
   acompanhar_fila_de_revisao --> enviar_mensagem_no_slack
-  acompanhar_fila_de_revisao --> evoluir_habilidade
   acompanhar_fila_de_revisao --> levantar_contexto_do_pull_request
   acompanhar_fila_de_revisao --> priorizar_itens
   acompanhar_fila_de_revisao --> procurar_pedido_de_revisao
   acompanhar_fila_de_revisao --> publicar_revisao_de_codigo
   acompanhar_fila_de_revisao --> redigir_com_tom_de_voz
   acompanhar_producao_de_produto --> definir_tarefa
-  acompanhar_producao_de_produto --> evoluir_habilidade
   acompanhar_producao_de_produto --> gerenciar_estoque
   acompanhar_producao_de_produto --> identificar_duplicata
   acompanhar_resposta_no_whatsapp --> acompanhar_retornos_pendentes
   acompanhar_resposta_no_whatsapp --> conversar_no_whatsapp
   acompanhar_resposta_no_whatsapp --> definir_rotina
-  acompanhar_resposta_no_whatsapp --> evoluir_habilidade
   acompanhar_resposta_no_whatsapp --> rotular_item
   acompanhar_resposta_no_whatsapp --> usar_whatsapp_web
   acompanhar_retornos_pendentes --> acompanhar_resposta_no_whatsapp
   acompanhar_retornos_pendentes --> definir_rotina
   acompanhar_retornos_pendentes --> enviar_email
-  acompanhar_retornos_pendentes --> evoluir_habilidade
   acompanhar_retornos_pendentes --> organizar_emails
   acompanhar_retornos_pendentes --> rotular_item
   acompanhar_retornos_pendentes --> usar_whatsapp_web
   acompanhar_veiculo --> acompanhar_retornos_pendentes
   acompanhar_veiculo --> definir_obrigacao_financeira
   acompanhar_veiculo --> definir_viagem
-  acompanhar_veiculo --> evoluir_habilidade
   acompanhar_veiculo --> lancar_despesa_da_empresa
   acompanhar_veiculo --> lancar_despesa_pessoal
   acompanhar_veiculo --> organizar_emails
@@ -205,7 +197,6 @@ flowchart LR
   atender_revisao_de_pull_request --> criar_pull_request
   atender_revisao_de_pull_request --> escrever_link
   atender_revisao_de_pull_request --> escrever_teste
-  atender_revisao_de_pull_request --> evoluir_habilidade
   atender_revisao_de_pull_request --> fatiar_pull_request
   atender_revisao_de_pull_request --> fechar_pull_request
   atender_revisao_de_pull_request --> levantar_ambiente_do_repositorio
@@ -218,25 +209,19 @@ flowchart LR
   atender_revisao_de_pull_request --> registrar_evidencia_visual
   atualizar_branch_do_pull_request --> atender_revisao_de_pull_request
   atualizar_branch_do_pull_request --> criar_pull_request
-  atualizar_branch_do_pull_request --> evoluir_habilidade
   atualizar_branch_do_pull_request --> fechar_pull_request
-  atualizar_cadastro_fiscal --> evoluir_habilidade
   auditar_tarefas --> definir_tarefa
   avaliar_atualizacoes_de_dependencia --> atender_revisao_de_pull_request
   avaliar_atualizacoes_de_dependencia --> criar_commit
   avaliar_atualizacoes_de_dependencia --> criar_pull_request
-  avaliar_atualizacoes_de_dependencia --> evoluir_habilidade
   avaliar_atualizacoes_de_dependencia --> mesclar_pull_request
   classificar_estado_do_termo --> definir_vocabulario
   classificar_estado_do_termo --> gravar_termos_no_vocabulario
   classificar_estado_do_termo --> validar_plano_de_vocabulario
-  classificar_melhoria_tecnica --> evoluir_habilidade
   classificar_melhoria_tecnica --> priorizar_itens
-  comunicar_novidade_do_produto --> evoluir_habilidade
   comunicar_novidade_do_produto --> redigir_com_tom_de_voz
   configurar_harness_de_negocio --> criar_pull_request
   configurar_harness_de_negocio --> definir_issue_do_github
-  configurar_harness_de_negocio --> evoluir_habilidade
   configurar_harness_de_negocio --> levantar_ambiente_do_repositorio
   conversar_no_whatsapp --> acompanhar_resposta_no_whatsapp
   conversar_no_whatsapp --> comunicar_novidade_do_produto
@@ -248,7 +233,6 @@ flowchart LR
   conversar_no_whatsapp --> definir_vocabulario
   conversar_no_whatsapp --> enviar_imagem_no_whatsapp
   conversar_no_whatsapp --> escrever_link
-  conversar_no_whatsapp --> evoluir_habilidade
   conversar_no_whatsapp --> procurar_tarefa
   conversar_no_whatsapp --> redigir_com_tom_de_voz
   conversar_no_whatsapp --> rotular_item
@@ -258,28 +242,23 @@ flowchart LR
   convidar_para_evento --> definir_agenda
   convidar_para_evento --> definir_convidado
   convidar_para_evento --> enviar_imagem_no_whatsapp
-  convidar_para_evento --> evoluir_habilidade
   convidar_para_evento --> redigir_com_tom_de_voz
   criar_carrossel_do_instagram --> criar_ideia_de_conteudo
-  criar_carrossel_do_instagram --> evoluir_habilidade
   criar_carrossel_do_instagram --> planejar_calendario_de_conteudo
   criar_commit -.-> atualizar_branch_do_pull_request
   criar_commit -.-> criar_pull_request
-  criar_commit -.-> evoluir_habilidade
   criar_commit -.-> fatiar_pull_request
   criar_commit -.-> mesclar_pull_request
   criar_commit -.-> sincronizar_status_da_tarefa
   criar_copia_de_trabalho --> criar_commit
   criar_copia_de_trabalho --> criar_habilidade
   criar_copia_de_trabalho --> criar_pull_request
-  criar_copia_de_trabalho --> evoluir_habilidade
   criar_copia_de_trabalho --> levantar_ambiente_do_repositorio
   criar_copia_de_trabalho --> limpar_copias_de_trabalho
   criar_habilidade --> criar_commit
   criar_habilidade --> criar_pull_request
   criar_habilidade --> definir_arquivos_da_habilidade
   criar_habilidade --> descrever_habilidade_ou_schema
-  criar_habilidade --> evoluir_habilidade
   criar_habilidade --> medir_habilidade
   criar_habilidade --> testar_habilidade
   criar_oportunidade --> definir_grupo_de_oportunidades
@@ -295,7 +274,6 @@ flowchart LR
   criar_pull_request --> atualizar_branch_do_pull_request
   criar_pull_request --> criar_commit
   criar_pull_request --> escrever_link
-  criar_pull_request --> evoluir_habilidade
   criar_pull_request --> fatiar_pull_request
   criar_pull_request --> mesclar_pull_request
   criar_pull_request --> registrar_evidencia_visual
@@ -322,18 +300,14 @@ flowchart LR
   definir_agenda_de_popstar --> revisar_uso_do_tempo
   definir_aplicacao_textil --> definir_composicao_textil
   definir_aplicacao_textil --> definir_estampa
-  definir_aplicacao_textil --> evoluir_habilidade
   definir_aplicacao_textil --> identificar_duplicata
   definir_arquivos_da_habilidade --> criar_habilidade
-  definir_arquivos_da_habilidade --> evoluir_habilidade
   definir_artigo_da_base_de_conhecimento --> criar_habilidade
   definir_artigo_da_base_de_conhecimento --> definir_historia_de_usuario
   definir_artigo_da_base_de_conhecimento --> definir_tarefa
-  definir_artigo_da_base_de_conhecimento --> evoluir_habilidade
   definir_artista --> definir_empresa
   definir_artista --> definir_perfil_social
   definir_artista --> definir_pessoa
-  definir_artista --> evoluir_habilidade
   definir_artista --> procurar_artista
   definir_ativo_imobilizado --> definir_empresa
   definir_ativo_imobilizado --> gerenciar_estoque
@@ -342,20 +316,16 @@ flowchart LR
   definir_ativo_imobilizado --> mesclar_registro
   definir_ativo_imobilizado --> reconhecer_imagem
   definir_ativo_imobilizado --> registrar_ciclo_do_ativo
-  definir_campanha_de_conteudo --> evoluir_habilidade
   definir_campanha_de_conteudo --> planejar_calendario_de_conteudo
-  definir_codigo_fiscal --> evoluir_habilidade
   definir_codigo_fiscal --> identificar_duplicata
   definir_composicao_textil --> acompanhar_producao_de_produto
   definir_composicao_textil --> definir_aplicacao_textil
   definir_composicao_textil --> definir_estampa
   definir_composicao_textil --> definir_tarefa
   definir_composicao_textil --> definir_tecido
-  definir_composicao_textil --> evoluir_habilidade
   definir_composicao_textil --> identificar_duplicata
   definir_conta_bancaria --> definir_empresa
   definir_conta_bancaria --> definir_pessoa
-  definir_conta_bancaria --> evoluir_habilidade
   definir_conta_bancaria --> identificar_duplicata
   definir_conta_bancaria --> lancar_despesa_da_empresa
   definir_convidado --> definir_agenda
@@ -370,13 +340,10 @@ flowchart LR
   definir_empresa --> mesclar_registro
   definir_estampa --> definir_composicao_textil
   definir_estampa --> definir_tecido
-  definir_estampa --> evoluir_habilidade
   definir_estampa --> identificar_duplicata
-  definir_filtro_de_email --> evoluir_habilidade
   definir_filtro_de_email --> organizar_emails
   definir_filtro_de_email --> rotular_item
   definir_fonograma --> definir_obra_musical
-  definir_fonograma --> evoluir_habilidade
   definir_grafia --> definir_perfil_social
   definir_grafia --> definir_pessoa
   definir_grafia --> identificar_duplicata
@@ -389,7 +356,6 @@ flowchart LR
   definir_hospedagem --> conversar_no_whatsapp
   definir_hospedagem --> definir_pessoa
   definir_hospedagem --> definir_viagem
-  definir_hospedagem --> evoluir_habilidade
   definir_hospedagem --> procurar_email
   definir_hospedagem --> redigir_com_tom_de_voz
   definir_inscricao --> definir_grafia
@@ -397,9 +363,7 @@ flowchart LR
   definir_inscricao --> procurar_inscricao
   definir_inscricao --> procurar_oportunidade
   definir_instrucoes_do_projeto --> criar_habilidade
-  definir_instrucoes_do_projeto --> evoluir_habilidade
   definir_issue_do_github --> criar_pull_request
-  definir_issue_do_github --> evoluir_habilidade
   definir_issue_do_github --> levantar_ambiente_do_repositorio
   definir_jornada_de_producao --> definir_agenda
   definir_jornada_de_producao --> definir_agenda_de_popstar
@@ -410,32 +374,24 @@ flowchart LR
   definir_lancamento_financeiro --> gerenciar_estoque
   definir_lancamento_financeiro --> lancar_despesa_da_empresa
   definir_lancamento_financeiro --> revisar_financas
-  definir_link_rastreavel --> evoluir_habilidade
   definir_lote_de_ingresso --> definir_conta_bancaria
-  definir_lote_de_ingresso --> evoluir_habilidade
   definir_medicao_de_metrica --> definir_okr
-  definir_medicao_de_metrica --> evoluir_habilidade
   definir_medicao_de_metrica --> identificar_duplicata
   definir_medicao_de_metrica --> reconhecer_imagem
   definir_negociacao --> definir_agenda
-  definir_negociacao --> evoluir_habilidade
   definir_negociacao --> organizar_ponto_de_contato
   definir_negociacao --> procurar_email
   definir_negociacao --> redigir_com_tom_de_voz
   definir_negociacao --> sincronizar_cronograma
   definir_obra_musical --> definir_fonograma
-  definir_obra_musical --> evoluir_habilidade
-  definir_obrigacao_financeira --> evoluir_habilidade
   definir_obrigacao_financeira --> lancar_despesa_da_empresa
   definir_obrigacao_financeira --> lancar_despesa_pessoal
   definir_obrigacao_financeira --> organizar_emails
   definir_obrigacao_financeira --> procurar_data_significativa
   definir_okr --> definir_medicao_de_metrica
   definir_okr --> definir_tarefa
-  definir_okr --> evoluir_habilidade
   definir_orcamento_de_fornecedor --> conversar_no_whatsapp
   definir_orcamento_de_fornecedor --> definir_empresa
-  definir_orcamento_de_fornecedor --> evoluir_habilidade
   definir_orcamento_de_fornecedor --> lancar_despesa_da_empresa
   definir_orcamento_de_fornecedor --> procurar_email
   definir_orcamento_de_fornecedor --> reconhecer_imagem
@@ -453,19 +409,15 @@ flowchart LR
   definir_planejamento_financeiro --> gerenciar_estoque
   definir_planejamento_financeiro --> revisar_financas
   definir_post_mortem --> definir_tarefa
-  definir_post_mortem --> evoluir_habilidade
-  definir_preco_de_produto --> evoluir_habilidade
   definir_preco_de_produto --> gerenciar_estoque
   definir_recurso_de_aprendizado --> definir_agenda
   definir_recurso_de_aprendizado --> procurar_agenda
   definir_reel_do_instagram --> criar_ideia_de_conteudo
   definir_reel_do_instagram --> definir_roteiro_de_video
-  definir_reel_do_instagram --> evoluir_habilidade
   definir_reel_do_instagram --> planejar_calendario_de_conteudo
   definir_registro_de_reuniao --> definir_agenda
   definir_registro_de_reuniao --> definir_grafia
   definir_registro_de_reuniao --> definir_pessoa
-  definir_registro_de_reuniao --> evoluir_habilidade
   definir_registro_de_reuniao --> identificar_duplicata
   definir_registro_de_reuniao --> mesclar_registro
   definir_registro_de_reuniao --> preparar_tarefa_do_pull_request
@@ -474,11 +426,9 @@ flowchart LR
   definir_reserva --> definir_agenda_de_popstar
   definir_reserva --> revisar_uso_do_tempo
   definir_reserva --> sincronizar_cronograma
-  definir_roteiro_de_video --> evoluir_habilidade
   definir_rotina --> acompanhar_fila_de_revisao
   definir_rotina --> acompanhar_resposta_no_whatsapp
   definir_rotina --> conversar_no_whatsapp
-  definir_rotina --> evoluir_habilidade
   definir_rotina --> usar_whatsapp_web
   definir_tarefa --> auditar_tarefas
   definir_tarefa --> definir_grafia
@@ -487,7 +437,6 @@ flowchart LR
   definir_tecido --> definir_composicao_textil
   definir_tecido --> definir_estampa
   definir_tecido --> definir_tarefa
-  definir_tecido --> evoluir_habilidade
   definir_tecido --> gerenciar_estoque
   definir_tecido --> identificar_duplicata
   definir_tipo_do_evento --> criar_oportunidade
@@ -505,87 +454,64 @@ flowchart LR
   definir_viagem --> acompanhar_veiculo
   definir_viagem --> definir_agenda
   definir_viagem --> definir_inscricao
-  definir_viagem --> evoluir_habilidade
   definir_viagem --> lancar_despesa_da_empresa
   definir_viagem --> organizar_ponto_de_contato
   definir_viagem --> procurar_oportunidade
   definir_viagem --> sincronizar_cronograma
   definir_vocabulario --> classificar_estado_do_termo
-  definir_vocabulario --> evoluir_habilidade
   definir_vocabulario --> gravar_termos_no_vocabulario
   definir_vocabulario --> procurar_variacao_de_termo
   definir_vocabulario --> redigir_com_tom_de_voz
   definir_vocabulario --> validar_plano_de_vocabulario
   descrever_habilidade_ou_schema --> criar_commit
   descrever_habilidade_ou_schema --> criar_pull_request
-  descrever_habilidade_ou_schema --> evoluir_habilidade
   descrever_habilidade_ou_schema --> revisar_habilidade
   descrever_habilidade_ou_schema --> testar_habilidade
-  emitir_documento_oficial --> evoluir_habilidade
   enviar_email --> acompanhar_retornos_pendentes
   enviar_email --> definir_pessoa
   enviar_email --> definir_vocabulario
-  enviar_email --> evoluir_habilidade
   enviar_email --> lancar_despesa_da_empresa
   enviar_email --> lancar_despesa_pessoal
   enviar_email --> organizar_emails
   enviar_email --> procurar_email
   enviar_email --> redigir_com_tom_de_voz
   enviar_imagem_no_whatsapp --> conversar_no_whatsapp
-  enviar_imagem_no_whatsapp --> evoluir_habilidade
   enviar_imagem_no_whatsapp --> redigir_com_tom_de_voz
   enviar_imagem_no_whatsapp --> usar_whatsapp_web
   enviar_mensagem_no_slack --> definir_agenda
   enviar_mensagem_no_slack --> definir_pessoa
   enviar_mensagem_no_slack --> definir_vocabulario
   enviar_mensagem_no_slack --> escrever_link
-  enviar_mensagem_no_slack --> evoluir_habilidade
   enviar_mensagem_no_slack --> pedir_revisao_de_pr_no_slack
   enviar_mensagem_no_slack --> redigir_com_tom_de_voz
   escrever_codigo --> criar_commit
   escrever_codigo --> criar_pull_request
   escrever_codigo --> escrever_teste
-  escrever_codigo --> evoluir_habilidade
   escrever_codigo --> levantar_ambiente_do_repositorio
   escrever_codigo --> preparar_tarefa_do_pull_request
   escrever_link --> conversar_no_whatsapp
   escrever_link --> criar_pull_request
   escrever_link --> enviar_mensagem_no_slack
-  escrever_link --> evoluir_habilidade
   escrever_link --> publicar_resposta_de_revisao
   escrever_link --> publicar_revisao_de_codigo
   escrever_teste --> criar_commit
   escrever_teste --> escrever_codigo
-  escrever_teste --> evoluir_habilidade
   escrever_teste --> levantar_ambiente_do_repositorio
-  evoluir_habilidade --> criar_commit
-  evoluir_habilidade --> criar_habilidade
-  evoluir_habilidade --> criar_pull_request
-  evoluir_habilidade --> definir_instrucoes_do_projeto
-  evoluir_habilidade --> definir_vocabulario
-  evoluir_habilidade --> descrever_habilidade_ou_schema
-  evoluir_habilidade --> medir_habilidade
-  evoluir_habilidade --> revisar_habilidade
-  evoluir_habilidade --> testar_habilidade
   extrair_tarefas_da_reuniao --> definir_registro_de_reuniao
   extrair_tarefas_da_reuniao --> definir_tarefa
-  extrair_tarefas_da_reuniao --> evoluir_habilidade
   extrair_tarefas_da_reuniao --> identificar_duplicata
   extrair_tarefas_da_reuniao --> procurar_tarefa
   fatiar_pull_request --> atender_revisao_de_pull_request
   fatiar_pull_request --> criar_commit
   fatiar_pull_request --> criar_pull_request
-  fatiar_pull_request --> evoluir_habilidade
   fazer_fechamento --> definir_conta_bancaria
   fazer_fechamento --> definir_obrigacao_financeira
-  fazer_fechamento --> evoluir_habilidade
   fazer_fechamento --> lancar_despesa_da_empresa
   fazer_fechamento --> organizar_ponto_de_contato
   fazer_fechamento --> revisar_financas
   fechar_pull_request --> atender_revisao_de_pull_request
   fechar_pull_request --> atualizar_branch_do_pull_request
   fechar_pull_request --> criar_pull_request
-  fechar_pull_request --> evoluir_habilidade
   fechar_pull_request --> fatiar_pull_request
   fechar_pull_request --> limpar_copias_de_trabalho
   fechar_pull_request --> mesclar_pull_request
@@ -601,7 +527,6 @@ flowchart LR
   garantir_ingresso --> definir_empresa
   garantir_ingresso --> definir_inscricao
   garantir_ingresso --> definir_pessoa
-  garantir_ingresso --> evoluir_habilidade
   garantir_ingresso --> procurar_agenda
   garantir_ingresso --> procurar_oportunidade
   garantir_ingresso --> redigir_com_tom_de_voz
@@ -619,7 +544,6 @@ flowchart LR
   investigar_problema --> definir_artigo_da_base_de_conhecimento
   investigar_problema --> definir_post_mortem
   investigar_problema --> definir_tarefa
-  investigar_problema --> evoluir_habilidade
   investigar_problema --> procurar_tarefa
   lancar_despesa_da_empresa --> definir_ativo_imobilizado
   lancar_despesa_da_empresa --> definir_empresa
@@ -629,12 +553,10 @@ flowchart LR
   lancar_despesa_da_empresa --> lancar_despesa_pessoal
   lancar_despesa_da_empresa --> reconhecer_imagem
   lancar_despesa_pessoal --> definir_obrigacao_financeira
-  lancar_despesa_pessoal --> evoluir_habilidade
   lancar_despesa_pessoal --> lancar_despesa_da_empresa
   lancar_venda --> definir_lancamento_financeiro
   lancar_venda --> definir_pessoa
   lancar_venda --> definir_preco_de_produto
-  lancar_venda --> evoluir_habilidade
   lancar_venda --> gerenciar_estoque
   lancar_venda --> identificar_duplicata
   lancar_venda --> lancar_despesa_da_empresa
@@ -643,28 +565,22 @@ flowchart LR
   levantar_ambiente_do_repositorio --> criar_pull_request
   levantar_ambiente_do_repositorio --> escrever_codigo
   levantar_ambiente_do_repositorio --> escrever_teste
-  levantar_ambiente_do_repositorio --> evoluir_habilidade
   levantar_ambiente_do_repositorio --> levantar_contexto_do_pull_request
   levantar_contexto_do_pull_request --> criar_pull_request
   levantar_contexto_do_pull_request --> definir_registro_de_reuniao
-  levantar_contexto_do_pull_request --> evoluir_habilidade
   levantar_contexto_do_pull_request --> levantar_ambiente_do_repositorio
   levantar_contexto_do_pull_request --> mesclar_pull_request
   levantar_contexto_do_pull_request --> rotular_item
-  liberar_espaco_em_disco --> evoluir_habilidade
   liberar_espaco_em_disco --> limpar_copias_de_trabalho
   limpar_copias_de_trabalho --> criar_copia_de_trabalho
   limpar_copias_de_trabalho --> criar_pull_request
-  limpar_copias_de_trabalho --> evoluir_habilidade
   limpar_copias_de_trabalho --> liberar_espaco_em_disco
-  medir_habilidade --> evoluir_habilidade
   medir_habilidade --> testar_habilidade
   mesclar_pull_request --> atender_revisao_de_pull_request
   mesclar_pull_request --> atualizar_branch_do_pull_request
   mesclar_pull_request --> comunicar_novidade_do_produto
   mesclar_pull_request --> criar_pull_request
   mesclar_pull_request --> definir_issue_do_github
-  mesclar_pull_request --> evoluir_habilidade
   mesclar_pull_request --> fechar_pull_request
   mesclar_pull_request --> limpar_copias_de_trabalho
   mesclar_pull_request --> sincronizar_status_da_tarefa
@@ -678,7 +594,6 @@ flowchart LR
   organizar_emails --> definir_inscricao
   organizar_emails --> definir_obrigacao_financeira
   organizar_emails --> definir_tarefa
-  organizar_emails --> evoluir_habilidade
   organizar_emails --> lancar_despesa_da_empresa
   organizar_emails --> lancar_despesa_pessoal
   organizar_emails --> procurar_email
@@ -697,24 +612,19 @@ flowchart LR
   pedir_revisao_de_pr_no_slack --> criar_pull_request
   pedir_revisao_de_pr_no_slack --> enviar_mensagem_no_slack
   pedir_revisao_de_pr_no_slack --> escrever_link
-  pedir_revisao_de_pr_no_slack --> evoluir_habilidade
   pedir_revisao_de_pr_no_slack --> preparar_tarefa_do_pull_request
   pedir_revisao_de_pr_no_slack --> registrar_evidencia_visual
   pedir_revisao_de_pr_no_slack --> registrar_resultados_da_validacao_na_tarefa
   perfilar_tom_de_voz --> definir_vocabulario
-  perfilar_tom_de_voz --> evoluir_habilidade
   perfilar_tom_de_voz --> redigir_com_tom_de_voz
   pesquisar_compra --> definir_ativo_imobilizado
-  pesquisar_compra --> evoluir_habilidade
   pesquisar_compra --> gerenciar_estoque
   pesquisar_compra --> identificar_duplicata
   pesquisar_compra --> lancar_despesa_da_empresa
   planejar_calendario_de_conteudo --> criar_ideia_de_conteudo
   planejar_calendario_de_conteudo --> definir_campanha_de_conteudo
   planejar_calendario_de_conteudo --> definir_reel_do_instagram
-  planejar_calendario_de_conteudo --> evoluir_habilidade
   preparar_tarefa_do_pull_request --> definir_tarefa
-  preparar_tarefa_do_pull_request --> evoluir_habilidade
   preparar_tarefa_do_pull_request --> formalizar_decisao
   preparar_tarefa_do_pull_request --> levantar_contexto_do_pull_request
   preparar_tarefa_do_pull_request --> priorizar_itens
@@ -723,10 +633,8 @@ flowchart LR
   preparar_tarefa_do_pull_request --> sincronizar_status_da_tarefa
   prever_tempo_de_viagem --> acompanhar_veiculo
   prever_tempo_de_viagem --> definir_viagem
-  prever_tempo_de_viagem --> evoluir_habilidade
   prever_tempo_de_viagem --> organizar_ponto_de_contato
   prever_tempo_de_viagem --> sincronizar_cronograma
-  priorizar_itens --> evoluir_habilidade
   procurar_agenda --> criar_oportunidade
   procurar_agenda --> definir_agenda
   procurar_agenda --> definir_agenda_de_popstar
@@ -738,7 +646,6 @@ flowchart LR
   procurar_agenda --> procurar_oportunidade
   procurar_agenda --> revisar_uso_do_tempo
   procurar_artista --> definir_artista
-  procurar_artista --> evoluir_habilidade
   procurar_artista --> mesclar_registro
   procurar_data_significativa --> definir_data_significativa
   procurar_email --> definir_grafia
@@ -754,14 +661,11 @@ flowchart LR
   procurar_pedido_de_revisao --> acompanhar_fila_de_revisao
   procurar_pedido_de_revisao --> definir_pessoa
   procurar_pedido_de_revisao --> enviar_mensagem_no_slack
-  procurar_pedido_de_revisao --> evoluir_habilidade
   procurar_tarefa --> procurar_inscricao
   procurar_variacao_de_termo --> definir_vocabulario
-  procurar_variacao_de_termo --> evoluir_habilidade
   projetar_caixa --> criar_oportunidade
   projetar_caixa --> definir_agenda
   projetar_caixa --> definir_planejamento_financeiro
-  projetar_caixa --> evoluir_habilidade
   projetar_caixa --> lancar_despesa_da_empresa
   projetar_caixa --> organizar_ponto_de_contato
   projetar_caixa --> revisar_financas
@@ -772,7 +676,6 @@ flowchart LR
   publicar_revisao_de_codigo --> definir_pessoa
   publicar_revisao_de_codigo --> enviar_mensagem_no_slack
   publicar_revisao_de_codigo --> escrever_link
-  publicar_revisao_de_codigo --> evoluir_habilidade
   publicar_revisao_de_codigo --> levantar_contexto_do_pull_request
   publicar_revisao_de_codigo --> priorizar_itens
   publicar_revisao_de_codigo --> redigir_com_tom_de_voz
@@ -783,14 +686,12 @@ flowchart LR
   reconhecer_imagem --> procurar_oportunidade
   redigir_com_tom_de_voz --> definir_pessoa
   redigir_com_tom_de_voz --> definir_vocabulario
-  redigir_com_tom_de_voz --> evoluir_habilidade
   registrar_ciclo_do_ativo --> definir_ativo_imobilizado
   registrar_ciclo_do_ativo --> identificar_duplicata
   registrar_ciclo_do_ativo --> lancar_despesa_da_empresa
   registrar_ciclo_do_ativo --> mesclar_registro
   registrar_evidencia_visual --> criar_pull_request
   registrar_resultados_da_validacao_na_tarefa --> criar_pull_request
-  registrar_resultados_da_validacao_na_tarefa --> evoluir_habilidade
   registrar_resultados_da_validacao_na_tarefa --> pedir_revisao_de_pr_no_slack
   registrar_resultados_da_validacao_na_tarefa --> preparar_tarefa_do_pull_request
   registrar_resultados_da_validacao_na_tarefa --> registrar_evidencia_visual
@@ -802,7 +703,6 @@ flowchart LR
   revisar_habilidade --> criar_habilidade
   revisar_habilidade --> criar_pull_request
   revisar_habilidade --> descrever_habilidade_ou_schema
-  revisar_habilidade --> evoluir_habilidade
   revisar_habilidade --> testar_habilidade
   revisar_uso_do_tempo --> definir_agenda
   revisar_uso_do_tempo --> definir_agenda_de_popstar
@@ -810,7 +710,6 @@ flowchart LR
   rotular_item --> conversar_no_whatsapp
   rotular_item --> criar_pull_request
   rotular_item --> definir_filtro_de_email
-  rotular_item --> evoluir_habilidade
   rotular_item --> levantar_contexto_do_pull_request
   rotular_item --> organizar_emails
   rotular_item --> triar_conversas
@@ -821,27 +720,22 @@ flowchart LR
   sincronizar_cronograma --> procurar_agenda
   sincronizar_status_da_tarefa --> criar_commit
   sincronizar_status_da_tarefa --> criar_pull_request
-  sincronizar_status_da_tarefa --> evoluir_habilidade
   sincronizar_status_da_tarefa --> levantar_contexto_do_pull_request
   sincronizar_status_da_tarefa --> mesclar_pull_request
   testar_habilidade --> descrever_habilidade_ou_schema
-  testar_habilidade --> evoluir_habilidade
   testar_habilidade --> medir_habilidade
   testar_habilidade --> revisar_habilidade
   testar_ponta_a_ponta --> definir_issue_do_github
   testar_ponta_a_ponta --> escrever_teste
-  testar_ponta_a_ponta --> evoluir_habilidade
   testar_ponta_a_ponta --> preparar_tarefa_do_pull_request
   testar_ponta_a_ponta --> registrar_resultados_da_validacao_na_tarefa
   transcrever_audio_e_video --> definir_registro_de_reuniao
-  transcrever_audio_e_video --> evoluir_habilidade
   triar_conversas --> conversar_no_whatsapp
   triar_conversas --> criar_oportunidade
   triar_conversas --> definir_grupo_de_oportunidades
   triar_conversas --> definir_rotina
   triar_conversas --> definir_tarefa
   triar_conversas --> enviar_mensagem_no_slack
-  triar_conversas --> evoluir_habilidade
   triar_conversas --> organizar_emails
   triar_conversas --> organizar_ponto_de_contato
   triar_conversas --> procurar_oportunidade
@@ -853,13 +747,11 @@ flowchart LR
   usar_whatsapp_web --> conversar_no_whatsapp
   usar_whatsapp_web --> definir_rotina
   usar_whatsapp_web --> enviar_imagem_no_whatsapp
-  usar_whatsapp_web --> evoluir_habilidade
   usar_whatsapp_web --> triar_conversas
   validar_plano_de_vocabulario --> classificar_estado_do_termo
   validar_plano_de_vocabulario --> definir_vocabulario
   validar_plano_de_vocabulario --> gravar_termos_no_vocabulario
   verificar_origem_do_link --> acompanhar_veiculo
-  verificar_origem_do_link --> evoluir_habilidade
   verificar_origem_do_link --> organizar_emails
   verificar_origem_do_link --> procurar_email
 ```
