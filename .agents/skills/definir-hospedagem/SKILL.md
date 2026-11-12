@@ -3,7 +3,7 @@ name: definir-hospedagem
 description: Define a hospedagem de uma viagem depois da reserva, o que ela pede, como nome e documento dos hóspedes, veículo e chegada, e a resposta a quem hospeda, enviada só com a confirmação. Usada quando o anfitrião ou o hotel escreve. Não serve para ler a reserva, registrar a viagem nem redigir no tom da marca.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.7.0"
   aliases:
     - responder-pedido-da-hospedagem
   related:
@@ -138,6 +138,16 @@ Avaliação que a pessoa ainda não fez fica como pendência: não a preencha po
 
 ### Passo 7
 
+Para completar viagens passadas, leia o histórico de reservas na conta da plataforma de quem reservou, numa aba em que a pessoa já esteja logada. A conta pode não ser a da sessão: peça à pessoa que entre na conta certa e não troque de usuário por ela.
+Leia só datas, horários e o primeiro nome do anfitrião, nunca valor, documento nem endereço, e compare com o Notion antes de gravar.
+A reserva vale mais que a cotação: a data e o status vêm dela, e a cotação fica como histórico.
+Hospedagem paga por terceiro, como a de uma missão ou de um evento, não aparece na plataforma: pergunte quem foi e quem pagou, em vez de concluir que falta.
+A tabela do que achou cita, em cada linha, a viagem e o ponto de contato, ou diz que não há. Viagem sem ponto de contato, como uma formatura, também é viagem, e se cadastra por `definir-viagem`.
+Com só o primeiro nome do anfitrião, não cadastre a pessoa: o nome vai no título da hospedagem e a relação fica vazia.
+Grave só depois que a pessoa aprovar a tabela.
+
+### Passo 8
+
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
@@ -208,6 +218,7 @@ Respondi pelo e-mail em que o pedido chegou. Mandei nomes e horário. Não mande
 
 ## Pegadinhas
 
+- A conta da plataforma que está logada parece ter todas as reservas. Cada pessoa tem a sua, e as viagens de outra só aparecem na conta dela.
 - A hospedagem de um parente parece não precisar de avaliação. A decisão de não voltar vale também para ela, e o motivo é o que a pessoa disse.
 - A reserva feita à mão não cria página no Notion, e o banco de viagens e o de hospedagens podem nem ter onde registrar quem viaja e o veículo. Quem viaja e o transporte podem não estar em lugar nenhum.
 - A vaga que a hospedagem oferece parece valer a qualquer hora. A garagem de um parceiro tem horário, e quem volta à noite precisa saber até quando ela abre e se deve interfonar.
