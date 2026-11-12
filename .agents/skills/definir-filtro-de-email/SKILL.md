@@ -3,7 +3,7 @@ name: definir-filtro-de-email
 description: Cria, edita e confere filtros de e-mail. Testa o critério na conta, escolhe as ações sem esconder o que a pessoa quer ver e lê o filtro salvo de volta. Usada quando a triagem pede um filtro ou a pessoa quer mudar um. Não serve para classificar mensagens nem cancelar assinatura.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.6.0"
   related:
     - organizar-emails
     - evoluir-habilidade
@@ -35,6 +35,8 @@ Leia os valores nas instruções do projeto, na entrada desta habilidade. Na aus
 O filtro sai do plano que a triagem de `organizar-emails` validou com a pessoa, ou do pedido dela para mudar um filtro.
 
 Leia os filtros existentes da conta antes de criar outro: um filtro com o mesmo remetente se edita, não se duplica.
+
+Um filtro sem nenhuma ação, ou com uma etiqueta que a conta não tem mais, perdeu a etiqueta quando ela foi apagada e não organiza nada. Ele entra no plano como filtro a editar: a triagem escolhe a etiqueta, o filtro volta a etiquetar e a aplicação alcança as conversas antigas.
 
 Teste o critério na busca da conta exata e leia o assunto das conversas que ele atinge. Examine as correspondências inesperadas: o que não for do tipo confirmado muda o critério antes do filtro.
 
@@ -154,6 +156,10 @@ O filtro procurava o endereço antigo e os e-mails chegam de outro domínio. O c
 - A caixa pode deixar mensagem marcada como importante passar por cima de "pular a entrada". O filtro que pula a entrada precisa também de nunca marcar como importante.
 - Na interface atual do Gmail, editar um filtro abre primeiro a busca do critério: clique em Continuar para chegar às ações.
 - Na tela das ações, a opção "Também aplicar filtro às conversas correspondentes" aplica o filtro às conversas antigas, e ela vem desmarcada a cada edição.
+- Um filtro sem ação na lista parece só inútil. Ele costuma ser o rastro de uma etiqueta apagada, e as conversas dele chegam sem etiqueta.
+- Importar filtros por arquivo XML cria muitos de uma vez, mas a importação recusa o filtro que categoriza como Promoções ou Atualizações. Importe sem a categoria e acerte a categoria na tela de edição.
+- A importação com "Aplicar os novos filtros aos e-mails existentes" pode mostrar erro e ainda salvar os filtros e etiquetar o histórico. Conte os filtros na lista e as conversas etiquetadas antes de refazer.
+- Depois de importar, a tela de filtros mostra abaixo da lista o resultado da importação, com linhas iguais às dos filtros. Conte só as linhas que têm editar.
 
 ## Scripts disponíveis
 
