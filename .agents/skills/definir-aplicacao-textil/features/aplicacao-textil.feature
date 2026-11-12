@@ -26,7 +26,62 @@ Funcionalidade: Aplicação
       Dado que a aplicação vai por cima de um tecido
       Quando a habilidade grava
       Então ela não trata a aplicação como tecido
-      E não grava a aplicação na composição nem na etiqueta
+      E não grava a aplicação como linha de composição de tecido
+
+  Regra: a etiqueta é decisão do cadastro
+
+    Exemplo: Aplicação nova
+      Dado que a aplicação é nova
+      Quando a habilidade monta o cadastro
+      Então ela pergunta se a aplicação vai na etiqueta
+      E registra a resposta no cadastro da aplicação
+      Mas não decide sozinha
+
+    Exemplo: Aplicação que não vai na etiqueta
+      Dado que a pessoa diz que a aplicação não vai na etiqueta
+      Quando a habilidade grava
+      Então a aplicação fica fora da etiqueta
+
+    Exemplo: Cadastro sem campo para a etiqueta
+      Dado que o banco de aplicações não tem campo que diga se a aplicação vai na etiqueta
+      Quando a habilidade precisa registrar a resposta
+      Então ela sugere criar o campo
+      Mas não cria o campo sem o sim
+
+  Regra: o texto da etiqueta é o padrão do projeto, com override curto e opcional
+
+    Exemplo: Aplicação sem texto específico
+      Dado que a aplicação vai na etiqueta e a pessoa não pede um texto específico
+      Quando a habilidade grava
+      Então o override fica vazio
+      E vale o texto padrão do projeto
+      Mas a habilidade não escreve nenhum texto
+
+    Exemplo: Texto específico pedido
+      Dado que a pessoa pede um texto específico para a etiqueta da aplicação
+      Quando a habilidade registra o override
+      Então ela avisa que o texto foge do padrão do projeto
+      E grava o texto que a pessoa escreveu no campo de override
+      Mas não redige o texto
+
+    Exemplo: Limite de caracteres não definido
+      Dado que as instruções do projeto não definem o limite de caracteres do texto da etiqueta
+      Quando a habilidade vai registrar um override
+      Então ela pergunta o limite uma vez
+      Mas não escolhe um número
+
+    Exemplo: Texto acima do limite
+      Dado que o texto escrito passa do limite de caracteres
+      Quando a habilidade vai gravar o override
+      Então ela recusa o texto
+      E pede uma redação menor
+      Mas não corta o texto
+
+    Exemplo: Banco sem campo de override
+      Dado que o banco de aplicações não tem campo para o texto da etiqueta
+      Quando a habilidade precisa registrar o override
+      Então ela sugere criar o campo
+      Mas não cria o campo sem o sim
 
   Regra: o banco se procura antes de perguntar
 
