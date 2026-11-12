@@ -145,6 +145,7 @@ flowchart LR
     procurar_tarefa["procurar-tarefa"]
     procurar_variacao_de_termo["procurar-variacao-de-termo"]
     projetar_caixa["projetar-caixa"]
+    prospectar_oportunidades["prospectar-oportunidades"]
     publicar_resposta_de_revisao["publicar-resposta-de-revisao"]
     publicar_revisao_de_codigo["publicar-revisao-de-codigo"]
     reconhecer_imagem["reconhecer-imagem"]
@@ -783,6 +784,15 @@ flowchart LR
   projetar_caixa --> organizar_ponto_de_contato
   projetar_caixa --> procurar_banco_de_dados
   projetar_caixa --> revisar_financas
+  prospectar_oportunidades --> criar_ideia_de_conteudo
+  prospectar_oportunidades --> criar_oportunidade
+  prospectar_oportunidades --> definir_grupo_de_oportunidades
+  prospectar_oportunidades --> definir_inscricao
+  prospectar_oportunidades --> definir_rotina
+  prospectar_oportunidades --> definir_tarefa
+  prospectar_oportunidades --> definir_viagem
+  prospectar_oportunidades --> procurar_oportunidade
+  prospectar_oportunidades --> sincronizar_cronograma
   publicar_resposta_de_revisao --> atender_revisao_de_pull_request
   publicar_resposta_de_revisao --> definir_pessoa
   publicar_resposta_de_revisao --> escrever_link
