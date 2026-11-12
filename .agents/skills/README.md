@@ -123,6 +123,7 @@ flowchart LR
     pesquisar_compra["pesquisar-compra"]
     planejar_calendario_de_conteudo["planejar-calendario-de-conteudo"]
     preparar_tarefa_do_pull_request["preparar-tarefa-do-pull-request"]
+    prever_tempo_de_viagem["prever-tempo-de-viagem"]
     priorizar_itens["priorizar-itens"]
     procurar_agenda["procurar-agenda"]
     procurar_artista["procurar-artista"]
@@ -720,6 +721,11 @@ flowchart LR
   preparar_tarefa_do_pull_request --> procurar_tarefa
   preparar_tarefa_do_pull_request --> redigir_com_tom_de_voz
   preparar_tarefa_do_pull_request --> sincronizar_status_da_tarefa
+  prever_tempo_de_viagem --> acompanhar_veiculo
+  prever_tempo_de_viagem --> definir_viagem
+  prever_tempo_de_viagem --> evoluir_habilidade
+  prever_tempo_de_viagem --> organizar_ponto_de_contato
+  prever_tempo_de_viagem --> sincronizar_cronograma
   priorizar_itens --> evoluir_habilidade
   procurar_agenda --> criar_oportunidade
   procurar_agenda --> definir_agenda
