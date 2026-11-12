@@ -6,6 +6,7 @@ project is not this harness, the core group shows a fixed node for the core plug
 only the core skills that project skills declare in metadata.related; body
 citations only link project skills, and only the project draws arrows, so a core release that adds or
 relates core skills leaves the project graph unchanged.
+The skills in HIDDEN get no node and no arrows.
 A skill that lists metadata.related draws solid arrows to those skills. A skill
 without that list draws dotted arrows to the skills its body cites: names between
 backticks in prose, or names in a Mermaid diagram.
@@ -24,6 +25,10 @@ from pathlib import Path
 import yaml
 
 README = Path(".agents") / "skills" / "README.md"
+
+# Skills every skill may call at the end. Drawn, they would add an arrow from almost every
+# node and push the graph over Mermaid's edge limit, so they get no node and no arrows.
+HIDDEN = {"evoluir-habilidade"}
 
 
 def load_parameters():
@@ -64,9 +69,12 @@ def read_skills(root: Path, layer: str) -> list[Skill]:
         front = yaml.safe_load(text[4:end]) or {}
         metadata = front.get("metadata") or {}
         related = metadata.get("related")
+        name = str(front.get("name") or path.parent.name)
+        if name in HIDDEN:
+            continue
         skills.append(
             Skill(
-                name=str(front.get("name") or path.parent.name),
+                name=name,
                 layer=layer,
                 related=[str(item) for item in related] if isinstance(related, list) else None,
                 body=text[end + 4 :],
