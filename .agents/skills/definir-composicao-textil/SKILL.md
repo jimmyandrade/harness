@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.3"
+  version: "0.3.4"
   aliases:
     - definir-composicao-da-peca
   related:
@@ -26,7 +26,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ```yaml
 "Modo de aprendizado": "perguntar"
-# Nomes de banco e de parte: o projeto define. Vazios, pergunte uma vez e não escolha.
+# Nomes de banco e de parte: o projeto define. Banco vazio: procure no workspace conectado antes de perguntar. Parte vazia: pergunte uma vez e não escolha.
 # `Banco de composições`: uma linha por parte e tecido de cada produto.
 "Banco de composições": ""
 # `Parte canônica`: a parte que as fórmulas do produto leem para a composição principal e o prefixo do SKU.
@@ -41,7 +41,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 Ache o produto e a variante pelo nome e pelas variações de nome, e leia todas as linhas de composição da variante antes de mexer.
 
-Os nomes vêm das instruções do projeto. Com `Banco de composições` vazio, a pessoa informa o data source na execução e você não escolhe um. Se ele não estiver no workspace conectado, pare.
+Os nomes vêm das instruções do projeto. Com `Banco de composições` vazio, procure o banco por conta própria no workspace conectado, pelo nome e pelas propriedades. Achou um só, use-o e diga qual. Achou mais de um de nome igual ou parecido, confirme com a pessoa qual é. Não achou nenhum, peça que ela informe o banco ou sugira criá-lo, e não crie sem o sim.
 
 Uma linha é uma parte da variante num tecido: a frente é um tecido, o forro é outro. O tecido tem a composição e a estampa, e a linha só o liga à parte, sem copiar nada dele. A parte vem da opção do campo Parte: a pessoa diz "estrutura" ou "tampa do bolso", e você usa a opção mais próxima e diz qual usou. Parte que não existe pede o sim da pessoa antes de criar a opção, com o nome e a descrição. Não crie propriedade nova no produto para isso.
 
@@ -116,8 +116,9 @@ Se você listar uma composição por linha, a etiqueta repete o mesmo tecido no 
 Se você escolher um banco ou uma parte que o projeto não definiu, a linha cai no lugar errado e a fórmula do produto lê outra.
 
 1. Leia os parâmetros nas instruções do projeto.
-2. Vazios, pergunte uma vez.
-3. Não escolha.
+2. Banco vazio: procure no workspace conectado, confirme se houver mais de um parecido e, sem nenhum, peça ou sugira criar.
+3. Parte vazia: pergunte uma vez.
+4. Não escolha.
 
 ## Exemplos de entrada e saída
 
@@ -137,7 +138,7 @@ frente em um tecido de 100% CO, uma linha de recorte em uma malha e outra em out
 - A estampa é do tecido, não do produto nem da variante: outra estampa é outro tecido, cadastrado por `definir-tecido`, e a variante troca a linha para ele. Recorte não é aplicação.
 - A aplicação é da variante, cadastrada por `definir-aplicacao-textil`, não do produto nem do tecido: ela vai por cima do tecido e muda de uma variante para outra. A mesma peça pode ter uma variante com aplicação e outra sem, então a propriedade é opcional e aceita de 0 a N registros. Ela não é tecido e não vira linha de composição de tecido. Se vai na etiqueta, o cadastro dela diz.
 - A pessoa usa um apelido para o tecido: confira o nome no banco de tecidos antes de ligar a linha.
-- Um parâmetro está vazio nas instruções do projeto: pergunte uma vez e não escolha.
+- O banco está vazio nas instruções do projeto: procure no workspace conectado, confirme se houver ambiguidade e, sem nada, peça ou sugira criar. Parte vazia: pergunte uma vez.
 
 ## Pegadinhas
 

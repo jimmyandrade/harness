@@ -553,10 +553,10 @@ How these skills relate is in `README.md`, in this folder.
   - Builds the label with one item per distinct fabric, counts the same article in different colors once, and leaves out finishing parts whose fabric is already in the front or the back
   - Lists after the fabrics the appliqués of the variant that the record marked for the label, showing the override text when the record has one and saying the project default applies when it does not, without writing any text; unmarked ones stay out
   - Treats a print as part of the fabric, never of the composition or the product: another print is another fabric; an appliqué belongs to the variant, optional and from 0 to N, and is not a fabric composition row
-  - Asks the person for the composition database, the canonical part, and the finishing parts when the project instructions leave them empty
+  - Looks for the composition database in the connected workspace when the project instructions leave it empty, confirms when more than one fits, and asks or suggests creating one when none does; asks the person for the canonical part and the finishing parts when the project instructions leave them empty
 - **Test Criteria**:
   - [x] The skill is present at that path
-  - [x] An empty database or canonical part parameter makes the skill ask and not choose
+  - [x] An empty database parameter makes the skill search the workspace first, and an empty canonical part makes it ask and not choose
   - [x] A double-sided product has one canonical row and the other face in the back option
   - [x] The label counts a fabric once and leaves out repeated finishing parts
   - [x] A requested correction is written and an unlinked row is deleted only with approval
@@ -1178,11 +1178,11 @@ How these skills relate is in `README.md`, in this folder.
   - Links the print to the fabric page, asks which print when the sheet does not say, and never writes the print on the product or the variant
   - Charges the person for what a new fabric lacks: the composition, the technical data the sheet does not give, and a photo, from which it registers the print of a printed fabric; a fabric created before the project cutoff date is not charged
   - Updates the sheet section of a page instead of adding another, and puts the PDF in the sheet file field when the project defines it
-  - Asks the person for the fabric database, the composition database, the print database, and the abbreviation of a missing fiber when the project instructions leave them empty
+  - Looks for the fabric, composition, and print databases and the photo field in the connected workspace when the project instructions leave them empty, confirms when more than one fits, and asks or suggests creating one when none does; asks the abbreviation of a missing fiber
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The sheet sources are searched before the supplier is asked
-  - [x] An empty database parameter makes the skill ask and not choose
+  - [x] An empty database parameter makes the skill search the workspace, confirm an ambiguity, and ask or suggest creation only when none is found
   - [x] A composition from another purchase is kept, commented, and tracked by a task
   - [x] The sheet section is updated and never duplicated
   - [x] A new fabric without sheet or photo is charged and left pending, and one before the cutoff date is not

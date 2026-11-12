@@ -12,25 +12,36 @@ Funcionalidade: Tecido
       E mostra o que achou, com o link de cada fonte
       E pede ao fornecedor só o que faltar
 
-  Regra: os bancos não vêm da habilidade
+  Regra: os bancos se procuram antes de perguntar
 
-    Exemplo: Banco de tecidos não definido
+    Exemplo: Banco de tecidos não definido e achado
       Dado que as instruções do projeto não definem o banco de tecidos
+      E que o workspace conectado tem um só banco que serve
       Quando a habilidade precisa ler ou criar uma página de tecido
-      Então ela pergunta à pessoa qual é o banco
-      Mas não usa um nome de banco próprio
+      Então ela usa esse banco e diz qual usou
+      Mas não pergunta o nome à pessoa
 
-    Exemplo: Banco de composição não definido
+    Exemplo: Banco de composição não definido e achado
       Dado que as instruções do projeto não definem o banco de composição
+      E que o workspace conectado tem um só banco que serve
       Quando a habilidade precisa ler ou criar uma linha de composição
-      Então ela pergunta à pessoa qual é o banco
-      Mas não usa um nome de banco próprio
+      Então ela usa esse banco e diz qual usou
 
-    Exemplo: Banco fora do workspace conectado
-      Dado que um dos bancos não está no workspace conectado
-      Quando a habilidade começa
-      Então ela para
-      E não usa o banco de outro workspace nem muda a estrutura de nenhum dos dois
+    Exemplo: Dois bancos com nomes iguais ou parecidos
+      Dado que o workspace conectado tem dois bancos de nomes iguais ou parecidos que servem
+      Quando a habilidade precisa escolher o banco
+      Então ela confirma com a pessoa qual é o certo
+
+    Exemplo: Nenhum banco
+      Dado que o workspace conectado não tem nenhum banco que sirva
+      Quando a habilidade precisa ler ou criar um registro
+      Então ela pede à pessoa que informe o banco ou sugere criá-lo
+      Mas não cria o banco nem usa um nome próprio sem o sim
+
+    Exemplo: Estrutura dos bancos
+      Dado que a habilidade usa os bancos
+      Quando ela grava
+      Então não muda a estrutura de nenhum dos dois
 
   Regra: cada cor de um tecido da ficha é uma página
 
@@ -166,11 +177,17 @@ Funcionalidade: Tecido
       Então ela cadastra a estampa no banco de estampas do projeto
       E liga a estampa ao tecido
 
-    Exemplo: Campo da foto não definido
+    Exemplo: Campo da foto não definido e achado
       Dado que as instruções do projeto não definem o campo da foto do tecido
+      E que o banco tem um só campo de arquivo que serve
       Quando a habilidade vai guardar a foto
-      Então ela pergunta onde guardar
-      Mas não escolhe o campo
+      Então ela usa esse campo e diz qual usou
+
+    Exemplo: Campo da foto ambíguo ou ausente
+      Dado que o banco tem mais de um campo de arquivo que serve, ou nenhum
+      Quando a habilidade vai guardar a foto
+      Então ela confirma com a pessoa qual campo usar, ou sugere criar o campo
+      Mas não cria o campo sem o sim
 
     Exemplo: Tecido de antes da data de corte
       Dado que o tecido foi criado antes da data de corte da cobrança

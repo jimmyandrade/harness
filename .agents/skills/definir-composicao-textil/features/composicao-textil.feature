@@ -3,13 +3,25 @@
 Funcionalidade: Composição têxtil
   A composição de uma variante tem uma linha por parte e tecido, e a composição da etiqueta sai dessas linhas sem repetir tecido.
 
-  Regra: o banco e as partes não vêm da habilidade
+  Regra: o banco se procura e as partes não vêm da habilidade
 
-    Exemplo: Banco de composições não definido
+    Exemplo: Banco de composições não definido e achado
       Dado que as instruções do projeto não definem o banco de composições
+      E que o workspace conectado tem um só banco que serve
       Quando a habilidade precisa ler ou gravar uma linha
-      Então ela pergunta à pessoa qual é o banco
-      Mas não usa um nome de banco próprio
+      Então ela usa esse banco e diz qual usou
+      Mas não pergunta o nome à pessoa
+
+    Exemplo: Dois bancos com nomes iguais ou parecidos
+      Dado que o workspace conectado tem dois bancos de nomes iguais ou parecidos que servem
+      Quando a habilidade precisa escolher o banco
+      Então ela confirma com a pessoa qual é o certo
+
+    Exemplo: Nenhum banco de composições
+      Dado que o workspace conectado não tem nenhum banco que sirva
+      Quando a habilidade precisa ler ou gravar uma linha
+      Então ela pede à pessoa que informe o banco ou sugere criá-lo
+      Mas não cria o banco nem usa um nome próprio sem o sim
 
     Exemplo: Parte canônica não definida
       Dado que as instruções do projeto não definem a parte canônica
@@ -22,11 +34,6 @@ Funcionalidade: Composição têxtil
       Quando a habilidade monta a etiqueta
       Então ela pergunta à pessoa quais partes saem quando o tecido já está na frente ou no verso
       Mas não presume uma lista
-
-    Exemplo: Banco fora do workspace conectado
-      Dado que o banco de composições não está no workspace conectado
-      Quando a habilidade começa
-      Então ela para
 
   Regra: a variante se lê inteira antes de mexer
 
