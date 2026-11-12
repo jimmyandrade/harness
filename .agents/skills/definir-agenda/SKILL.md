@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.49.1"
+  version: "0.50.0"
   related:
     - convidar-para-evento
     - definir-agenda-de-popstar
@@ -193,6 +193,7 @@ O e-mail que a organização do ponto passou, e os ligados ao evento, entram no 
 
 O horário da montagem, da entrada e da abertura é da organização do ponto, e não da pessoa. Ache a mensagem, o manual ou o e-mail que o traz antes de perguntar, e escreva na descrição do evento a fonte, o canal e, se houver, o link dela.
 A saída que a pessoa definiu para a viagem e a janela de montagem que ela escolheu entre as da organização viram evento na agenda. O que só está previsto, ou a janela que sobrou, fica no cronograma.
+O término de uma montagem ou de uma desmontagem vem da duração que a pessoa mediu nas edições anteriores. Sem medida, diga que ela nunca foi medida, não invente o término e peça a duração real depois do evento, para o próximo.
 
 Com `Pauta obrigatória em evento com convidados` em `sim`, a descrição de um evento com convidados leva uma pauta clara.
 Sem pauta na conversa, pergunte antes de criar.

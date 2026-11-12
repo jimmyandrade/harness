@@ -3,7 +3,7 @@ name: definir-hospedagem
 description: Define a hospedagem de uma viagem depois da reserva, o que ela pede, como nome e documento dos hóspedes, veículo e chegada, e a resposta a quem hospeda, enviada só com a confirmação. Usada quando o anfitrião ou o hotel escreve. Não serve para ler a reserva, registrar a viagem nem redigir no tom da marca.
 metadata:
   author: jimmyandrade
-  version: "0.4.2"
+  version: "0.5.0"
   aliases:
     - responder-pedido-da-hospedagem
   related:
@@ -112,6 +112,9 @@ Não crie uma rotina para a reserva: etiquete a conversa do e-mail como aguardan
 A hospedagem costuma mandar o que falta, como a senha de acesso, perto do check-in.
 Não espere ela escrever primeiro.
 
+Hospedagem com vaga ou garagem de parceiro: pergunte ao anfitrião, pelo canal da reserva, até que horas a garagem funciona nos dias da viagem e se é preciso interfonar ou avisar antes de entrar.
+Compare com a hora mais tarde em que a pessoa volta, como o fim de uma desmontagem, e registre a resposta na hospedagem.
+
 A rotina do canal avisa a pessoa a cada mensagem nova e entrega o resumo à sessão que espera.
 A senha de acesso nunca vai no aviso, no Notion nem em outro lugar: o aviso só diz que ela chegou e onde ver.
 
@@ -194,6 +197,7 @@ Respondi pelo e-mail em que o pedido chegou. Mandei nomes e horário. Não mande
 ## Pegadinhas
 
 - A reserva feita à mão não cria página no Notion, e o banco de viagens e o de hospedagens podem nem ter onde registrar quem viaja e o veículo. Quem viaja e o transporte podem não estar em lugar nenhum.
+- A vaga que a hospedagem oferece parece valer a qualquer hora. A garagem de um parceiro tem horário, e quem volta à noite precisa saber até quando ela abre e se deve interfonar.
 - O pedido de documento costuma vir antes do check-in e some da lista de mensagens com a tradução automática. Leia a mensagem original, não a prévia da lista.
 - O cadastro tem o nome completo e o nome civil de registro, e quem tem nome social usa o nome completo no documento oficial. O nome civil só sai com `Nome civil na resposta` em `sim`, ou se a pessoa pedir.
 - Dado sensível não vira texto de memória, de nota nem de comentário na negociação. Ele fica no cadastro e na resposta enviada.
