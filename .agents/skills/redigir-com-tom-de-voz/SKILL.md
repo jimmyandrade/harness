@@ -3,7 +3,7 @@ name: redigir-com-tom-de-voz
 description: Use essa habilidade sempre que for criar, redigir, editar, revisar ou responder texto da marca no tom de voz, mesmo sem dizer copy. NÃO use para responder quem conversa com a IA, descrever uma skill, titular tarefa ou oportunidade, cravar a grafia, alterar formato de conteúdo, nem assumir cliente, peça, oportunidade ou histórico.
 metadata:
   author: jimmyandrade
-  version: "0.22.0"
+  version: "0.22.1"
   aliases:
     - escreva-usando-o-tom-de-voz
   related:
@@ -69,7 +69,7 @@ Termo da categoria `cliche` não entra como palavra final. A descrição pede im
 
 Frase que sugere perda consumada, cobrança agressiva, exclusão, capacitismo, ameaça real, culpa ou sensação incompatível com o tom sai do texto. A alternativa mantém desejo, urgência e conversa natural, sem dizer que a pessoa já perdeu a chance. O motivo dessa rejeição fica na descrição do termo no vocabulário. Sem essa linha, não invente o termo.
 
-Texto redigido e ainda não enviado volta inteiro, num bloco, em toda resposta que o cita, com o pedido de aprovação. Dizer só que ele continua sem envio deixa a pessoa sem o texto para aprovar.
+Texto redigido e não enviado volta inteiro, num bloco, na mensagem final de toda resposta que o cita, com o pedido de aprovação. Dizer só que ele está acima deixa a pessoa sem o texto para aprovar.
 
 Mensagem para uma pessoa não revela contexto interno que ela não precisa saber e que pode deixá-la desconfortável, como a troca frequente de pessoas no papel que ela assume. O motivo neutro entra no lugar, como uma mudança na padronização. A mensagem abre pelo que muda para ela.
 
