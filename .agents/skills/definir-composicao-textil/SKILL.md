@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.2"
+  version: "0.3.3"
   aliases:
     - definir-composicao-da-peca
   related:
@@ -74,7 +74,7 @@ Monte a composição da etiqueta de uma variante a partir das linhas dela:
 - [ ] Uma linha de `Partes de acabamento` sai quando o tecido dela já está na frente ou no verso.
 - [ ] Dupla face leva uma composição por face. Forro e recorte de tecido próprio entram.
 
-Depois dos tecidos, liste as aplicações da variante que o cadastro marcou para a etiqueta. Não escreva o texto delas: ele é pré-gerado e fica para depois. As não marcadas ficam fora.
+Depois dos tecidos, liste as aplicações da variante que o cadastro marcou para a etiqueta. Com override no cadastro da aplicação, mostre o texto dele. Sem override, diga que vale o texto padrão do projeto, pré-gerado fora desta habilidade, e não o escreva. As não marcadas ficam fora.
 
 `Partes de acabamento` vazias: pergunte quais partes saem e não presuma uma lista. Mostre a etiqueta montada e as linhas que ficaram de fora, com o motivo.
 

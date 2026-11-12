@@ -124,6 +124,17 @@ Funcionalidade: Composição têxtil
       E lista a aplicação marcada depois dos tecidos
       Mas não escreve o texto da aplicação
 
+    Exemplo: Aplicação marcada com override
+      Dado que a aplicação marcada para a etiqueta tem um texto de override
+      Quando a habilidade monta a etiqueta
+      Então ela mostra o texto do override ao listar a aplicação
+
+    Exemplo: Aplicação marcada sem override
+      Dado que a aplicação marcada para a etiqueta não tem texto de override
+      Quando a habilidade monta a etiqueta
+      Então ela diz que vale o texto padrão do projeto
+      Mas não escreve o texto
+
     Exemplo: Aplicação não marcada
       Dado que uma aplicação da variante não foi marcada para a etiqueta
       Quando a habilidade monta a etiqueta
