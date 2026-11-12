@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
   aliases:
     - definir-aplicacao
   related:
@@ -52,7 +52,7 @@ Uma flor pode ser a estampa de um tecido ou uma aplicação numa variante, e a a
 
 Cadastre a aplicação com o nome, o motivo, a técnica, a foto e as variantes. Os nomes das propriedades vêm do mapeamento de dados do projeto. A foto vai em `Campo da foto da aplicação`. Com o campo vazio, procure no banco o campo de arquivo que serve: um só, use-o e diga qual; mais de um, confirme; nenhum, sugira criar o campo e não crie sem o sim.
 
-A aplicação não entra na composição nem na etiqueta, e não é tecido. Corrigir uma aplicação ligada a mais de uma variante muda todas elas, então avise antes de gravar.
+A aplicação não é tecido e não vira linha de composição de tecido. Se ela vai na etiqueta é decisão do cadastro: pergunte à pessoa e registre a resposta no campo que o mapeamento do projeto define para isso. Sem o campo, sugira criá-lo e não crie sem o sim. Não decida sozinha. Corrigir uma aplicação ligada a mais de uma variante muda todas elas, então avise antes de gravar.
 
 ### Passo 4
 
@@ -123,7 +123,7 @@ Li o banco pelo nome e pelo motivo. A aplicação existia: reaproveitei e liguei
 - O produto parece o dono da aplicação. O dono é a variante.
 - Aplicação e estampa do mesmo motivo parecem uma coisa só. São registros independentes.
 - Uma flor parece sempre estampa. Pode ser aplicação, e a aplicação de uma variante pode parecer a estampa do tecido de outra: confira qual é.
-- A aplicação sobre o tecido parece parte dele. Ela não é tecido nem entra na composição.
+- A aplicação sobre o tecido parece parte dele. Ela não é tecido nem vira linha de composição de tecido. Se vai na etiqueta, a pessoa decide.
 - A foto da peça pronta não mostra a aplicação isolada. Muitas aplicações antigas só têm a foto da peça.
 
 ## Scripts disponíveis

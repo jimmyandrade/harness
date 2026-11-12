@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.1"
+  version: "0.3.2"
   aliases:
     - definir-composicao-da-peca
   related:
@@ -74,6 +74,8 @@ Monte a composição da etiqueta de uma variante a partir das linhas dela:
 - [ ] Uma linha de `Partes de acabamento` sai quando o tecido dela já está na frente ou no verso.
 - [ ] Dupla face leva uma composição por face. Forro e recorte de tecido próprio entram.
 
+Depois dos tecidos, liste as aplicações da variante que o cadastro marcou para a etiqueta. Não escreva o texto delas: ele é pré-gerado e fica para depois. As não marcadas ficam fora.
+
 `Partes de acabamento` vazias: pergunte quais partes saem e não presuma uma lista. Mostre a etiqueta montada e as linhas que ficaram de fora, com o motivo.
 
 ### Passo 4
@@ -133,7 +135,7 @@ frente em um tecido de 100% CO, uma linha de recorte em uma malha e outra em out
 
 - A pessoa não sabe as porcentagens de uma malha: registre o tecido com as fibras, sem inventar o percentual, e guarde no comentário de onde virá a inferência.
 - A estampa é do tecido, não do produto nem da variante: outra estampa é outro tecido, cadastrado por `definir-tecido`, e a variante troca a linha para ele. Recorte não é aplicação.
-- A aplicação é da variante, cadastrada por `definir-aplicacao-textil`, não do produto nem do tecido: ela vai por cima do tecido e muda de uma variante para outra. A mesma peça pode ter uma variante com aplicação e outra sem, então a propriedade é opcional e aceita de 0 a N registros. Aplicação não entra na composição nem na etiqueta.
+- A aplicação é da variante, cadastrada por `definir-aplicacao-textil`, não do produto nem do tecido: ela vai por cima do tecido e muda de uma variante para outra. A mesma peça pode ter uma variante com aplicação e outra sem, então a propriedade é opcional e aceita de 0 a N registros. Ela não é tecido e não vira linha de composição de tecido. Se vai na etiqueta, o cadastro dela diz.
 - A pessoa usa um apelido para o tecido: confira o nome no banco de tecidos antes de ligar a linha.
 - Um parâmetro está vazio nas instruções do projeto: pergunte uma vez e não escolha.
 
