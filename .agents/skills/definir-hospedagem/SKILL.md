@@ -3,7 +3,7 @@ name: definir-hospedagem
 description: Define a hospedagem de uma viagem depois da reserva, o que ela pede, como nome e documento dos hóspedes, veículo e chegada, e a resposta a quem hospeda, enviada só com a confirmação. Usada quando o anfitrião ou o hotel escreve. Não serve para ler a reserva, registrar a viagem nem redigir no tom da marca.
 metadata:
   author: jimmyandrade
-  version: "0.7.0"
+  version: "0.7.1"
   aliases:
     - responder-pedido-da-hospedagem
   related:
@@ -135,6 +135,7 @@ Uma viagem pode ter várias hospedagens, cada uma com o seu registro. Viagem lon
 Antes de sugerir onde ficar, leia a avaliação das hospedagens anteriores no mesmo lugar e com o mesmo anfitrião. A avaliada como evitar não é sugerida, e a avaliada como talvez vem com o motivo.
 A avaliação tem o motivo, o dia e quem avaliou, cada um na sua propriedade. Grave quando a pessoa a disser, com o nome de quem decidiu. A casa de um parente segue a mesma regra.
 Avaliação que a pessoa ainda não fez fica como pendência: não a preencha por ela.
+Estadia deixada antes do fim ou trocada por outra registra o check-out do dia em que a pessoa saiu, não o da reserva, e o motivo da troca vai no motivo da avaliação, com o que deu errado e o que foi resolvido.
 
 ### Passo 7
 
@@ -218,6 +219,7 @@ Respondi pelo e-mail em que o pedido chegou. Mandei nomes e horário. Não mande
 
 ## Pegadinhas
 
+- A reserva da plataforma parece mostrar a estadia vivida. Quem trocou de lugar no meio mostra o período reservado, e o vivido é o que a pessoa conta.
 - A conta da plataforma que está logada parece ter todas as reservas. Cada pessoa tem a sua, e as viagens de outra só aparecem na conta dela.
 - A hospedagem de um parente parece não precisar de avaliação. A decisão de não voltar vale também para ela, e o motivo é o que a pessoa disse.
 - A reserva feita à mão não cria página no Notion, e o banco de viagens e o de hospedagens podem nem ter onde registrar quem viaja e o veículo. Quem viaja e o transporte podem não estar em lugar nenhum.
