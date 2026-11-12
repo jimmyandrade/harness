@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.32.0"
+  version: "0.33.0"
   aliases:
     - redigir-mensagem-de-whatsapp
   related:
@@ -103,6 +103,9 @@ Para registrar a demanda, leve a data e o horário da primeira mensagem do pedid
 Antes de rascunhar, leia a conversa de destino desde a última mensagem que você leu nela, seguindo o Passo 2, e confira cada pergunta do rascunho contra a conversa inteira, inclusive a mensagem que ela cita. A pergunta que o contato já respondeu sai, mesmo quando outra fonte mais antiga diverge: mostre a divergência à pessoa, não ao contato. Tire também o que já foi dito e diga, antes do texto, o que ele acrescenta. Se tudo já foi dito, diga isso e não rascunhe.
 
 Com `Página de instruções do WhatsApp` preenchida, leia a página antes de rascunhar e siga a conta e as regras dela. Se ela não abrir na conexão, pare e peça.
+
+Veja também se há um e-mail não enviado sobre o mesmo assunto e alinhe os pedidos com ele.
+Quando a pessoa escreve de um número que a organização não tem no cadastro, por um problema no telefone dela, o texto diz o motivo numa frase e pergunta se pode continuar por esse número.
 
 Todo rascunho de mensagem aparece na resposta do chat. Leia o modelo de saída `mensagens-do-whatsapp` quando for gerar a saída.
 Não diga só que o rascunho está pronto.
