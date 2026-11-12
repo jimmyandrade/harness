@@ -3,7 +3,7 @@ name: investigar-problema
 description: Conduz a investigação de um problema relatado, como um acesso bloqueado, um erro ou um dado errado, com tarefa, fatos, hipóteses e retorno a quem relatou, e oferece artigo e post-mortem. Use essa habilidade sempre que alguém relatar um problema, como um preço errado, antes de oferecer ou começar a investigar, mesmo sem dizer investigar. NÃO use para escrever o artigo, o post-mortem nem corrigir código.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.2.1"
   related:
     - procurar-tarefa
     - definir-tarefa
@@ -50,7 +50,9 @@ A investigação paralela pode ainda estar rodando ou ter acabado depois do seu 
 Liste as hipóteses, da que a evidência mais apoia para a que menos apoia.
 Confira cada uma na fonte: a tela da ferramenta, o registro, a configuração ou quem administra.
 Só leia nesse passo. Uma correção que muda algo, como uma permissão, um pagamento ou uma configuração, espera o sim da pessoa, com o que muda e o risco.
-Sem acesso a uma fonte, diga qual falta e quem tem.
+Cada hipótese e cada ponto que você ainda não conferiu e que dá para conferir, você confere antes de responder, no código, nos dados e nas ferramentas ao seu alcance. O objetivo é achar a causa.
+Só fica como "não verificado" o que depende de um acesso que você não tem: diga qual fonte falta e quem tem.
+Quando um erro é esperado ou não, quando uma taxa é alta ou normal, a resposta traz o número e a comparação, nunca "não verifiquei".
 Cruze a sua conclusão com a da investigação paralela: diga onde concordam, onde divergem e o que cada uma viu que a outra não viu.
 Quando a outra achou algo que você perdeu, corrija a sua conclusão e diga que mudou. Não proteja a primeira resposta.
 Confira na fonte o que só a outra afirma antes de repetir como fato.
@@ -59,6 +61,7 @@ Confira na fonte o que só a outra afirma antes de repetir como fato.
 
 Grave na tarefa o que achou: a causa, a evidência de cada conclusão, o que foi feito e o próximo passo com quem o faz.
 Dê o retorno a quem relatou, com a causa em palavras simples, o que muda para ela e o link da tarefa.
+Uma tarefa para corrigir o que achou só é oferecida depois que a causa está entendida e conferida. Antes disso, siga investigando.
 
 ### Passo 5
 
@@ -85,6 +88,14 @@ Se você responder com a primeira hipótese sem conferir, a causa errada vira o 
 
 1. Confira cada hipótese na fonte.
 2. Diga o que foi visto e o que ainda é suposição.
+
+### Parar no que não foi verificado
+
+Se você entregar uma lista do que não conferiu, como se um erro é esperado ou como uma taxa se compara com a normal, a pessoa fica sem causa e tem de pedir de novo.
+
+1. Confira cada um desses pontos que esteja ao seu alcance antes de responder.
+2. Só deixe como "não verificado" o que exige acesso que você não tem, e diga qual e quem tem.
+3. Não proponha tarefa de correção enquanto a causa não estiver entendida.
 
 ### Investigação sem a habilidade
 
@@ -117,7 +128,7 @@ Não havia tarefa: criei e respondi a quem relatou com o link. O print mostrava 
 
 ## Casos-limite
 
-- A causa não aparece: grave o que foi descartado e o próximo passo, e pergunte pelos registros do mesmo jeito.
+- A causa não aparece depois de conferir todas as fontes ao seu alcance: grave o que foi descartado e o próximo passo, e pergunte pelos registros do mesmo jeito.
 - A correção depende de outra pessoa, como quem administra a conta: diga quem e o que pedir.
 - Já existe artigo sobre o problema: proponha atualizá-lo em vez de criar outro.
 
