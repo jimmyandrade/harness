@@ -658,6 +658,8 @@ flowchart LR
   procurar_inscricao --> procurar_email
   procurar_oportunidade --> criar_oportunidade
   procurar_oportunidade --> definir_inscricao
+  procurar_oportunidade --> identificar_duplicata
+  procurar_oportunidade --> mesclar_registro
   procurar_pedido_de_revisao --> acompanhar_fila_de_revisao
   procurar_pedido_de_revisao --> definir_pessoa
   procurar_pedido_de_revisao --> enviar_mensagem_no_slack
