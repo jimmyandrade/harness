@@ -3,7 +3,7 @@ name: definir-hospedagem
 description: Define a hospedagem de uma viagem depois da reserva, o que ela pede, como nome e documento dos hóspedes, veículo e chegada, e a resposta a quem hospeda, enviada só com a confirmação. Usada quando o anfitrião ou o hotel escreve. Não serve para ler a reserva, registrar a viagem nem redigir no tom da marca.
 metadata:
   author: jimmyandrade
-  version: "0.5.2"
+  version: "0.6.0"
   aliases:
     - responder-pedido-da-hospedagem
   related:
@@ -127,6 +127,17 @@ Esse tempo ensina quando conferir.
 
 ### Passo 6
 
+O dado da hospedagem vai nas propriedades da página, nunca no corpo dela.
+Uma hospedagem nova nasce do modelo de hospedagem do banco, cujo aviso no topo repete essa regra.
+Registre o check-in e o check-out com data e hora, os hóspedes, o anfitrião quando se sabe quem é, e o endereço.
+Uma viagem pode ter várias hospedagens, cada uma com o seu registro. Viagem longa com poucas noites cadastradas é lacuna: pergunte onde a pessoa ficou nas outras.
+
+Antes de sugerir onde ficar, leia a avaliação das hospedagens anteriores no mesmo lugar e com o mesmo anfitrião. A avaliada como evitar não é sugerida, e a avaliada como talvez vem com o motivo.
+A avaliação tem o motivo, o dia e quem avaliou, cada um na sua propriedade. Grave quando a pessoa a disser, com o nome de quem decidiu. A casa de um parente segue a mesma regra.
+Avaliação que a pessoa ainda não fez fica como pendência: não a preencha por ela.
+
+### Passo 7
+
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
@@ -197,6 +208,7 @@ Respondi pelo e-mail em que o pedido chegou. Mandei nomes e horário. Não mande
 
 ## Pegadinhas
 
+- A hospedagem de um parente parece não precisar de avaliação. A decisão de não voltar vale também para ela, e o motivo é o que a pessoa disse.
 - A reserva feita à mão não cria página no Notion, e o banco de viagens e o de hospedagens podem nem ter onde registrar quem viaja e o veículo. Quem viaja e o transporte podem não estar em lugar nenhum.
 - A vaga que a hospedagem oferece parece valer a qualquer hora. A garagem de um parceiro tem horário, e quem volta à noite precisa saber até quando ela abre e se deve interfonar.
 - O pedido de documento costuma vir antes do check-in e some da lista de mensagens com a tradução automática. Leia a mensagem original, não a prévia da lista.
