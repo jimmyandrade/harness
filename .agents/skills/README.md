@@ -191,6 +191,7 @@ flowchart LR
   acompanhar_retornos_pendentes --> organizar_emails
   acompanhar_retornos_pendentes --> rotular_item
   acompanhar_retornos_pendentes --> usar_whatsapp_web
+  acompanhar_veiculo --> acompanhar_retornos_pendentes
   acompanhar_veiculo --> definir_obrigacao_financeira
   acompanhar_veiculo --> definir_viagem
   acompanhar_veiculo --> evoluir_habilidade
