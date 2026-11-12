@@ -111,6 +111,7 @@ flowchart LR
     gerenciar_estoque["gerenciar-estoque"]
     gravar_termos_no_vocabulario["gravar-termos-no-vocabulario"]
     identificar_duplicata["identificar-duplicata"]
+    inscrever_na_oportunidade["inscrever-na-oportunidade"]
     investigar_problema["investigar-problema"]
     lancar_despesa_da_empresa["lancar-despesa-da-empresa"]
     lancar_despesa_pessoal["lancar-despesa-pessoal"]
@@ -128,6 +129,7 @@ flowchart LR
     perfilar_tom_de_voz["perfilar-tom-de-voz"]
     pesquisar_compra["pesquisar-compra"]
     planejar_calendario_de_conteudo["planejar-calendario-de-conteudo"]
+    preparar_itens_do_ponto_de_contato["preparar-itens-do-ponto-de-contato"]
     preparar_tarefa_do_pull_request["preparar-tarefa-do-pull-request"]
     prever_tempo_de_viagem["prever-tempo-de-viagem"]
     priorizar_itens["priorizar-itens"]
@@ -206,7 +208,9 @@ flowchart LR
   analisar_regulamento_da_oportunidade --> definir_grupo_de_oportunidades
   analisar_regulamento_da_oportunidade --> definir_tarefa
   analisar_regulamento_da_oportunidade --> definir_viagem
+  analisar_regulamento_da_oportunidade --> inscrever_na_oportunidade
   analisar_regulamento_da_oportunidade --> organizar_ponto_de_contato
+  analisar_regulamento_da_oportunidade --> preparar_itens_do_ponto_de_contato
   analisar_regulamento_da_oportunidade --> procurar_tarefa
   atender_revisao_de_pull_request --> atualizar_branch_do_pull_request
   atender_revisao_de_pull_request --> criar_commit
@@ -411,6 +415,7 @@ flowchart LR
   definir_inscricao --> garantir_ingresso
   definir_inscricao --> lancar_despesa_da_empresa
   definir_inscricao --> procurar_email
+  definir_inscricao --> inscrever_na_oportunidade
   definir_inscricao --> procurar_inscricao
   definir_inscricao --> procurar_oportunidade
   definir_instrucoes_do_projeto --> criar_habilidade
@@ -611,6 +616,15 @@ flowchart LR
   identificar_duplicata --> definir_grafia
   identificar_duplicata --> definir_perfil_social
   identificar_duplicata --> mesclar_registro
+  inscrever_na_oportunidade --> acompanhar_retornos_pendentes
+  inscrever_na_oportunidade --> analisar_regulamento_da_oportunidade
+  inscrever_na_oportunidade --> definir_empresa
+  inscrever_na_oportunidade --> definir_inscricao
+  inscrever_na_oportunidade --> definir_pessoa
+  inscrever_na_oportunidade --> definir_tarefa
+  inscrever_na_oportunidade --> preparar_itens_do_ponto_de_contato
+  inscrever_na_oportunidade --> procurar_inscricao
+  inscrever_na_oportunidade --> redigir_com_tom_de_voz
   investigar_problema --> definir_artigo_da_base_de_conhecimento
   investigar_problema --> definir_post_mortem
   investigar_problema --> definir_tarefa
@@ -682,6 +696,7 @@ flowchart LR
   organizar_ponto_de_contato --> definir_tarefa
   organizar_ponto_de_contato --> definir_viagem
   organizar_ponto_de_contato --> fazer_fechamento
+  organizar_ponto_de_contato --> preparar_itens_do_ponto_de_contato
   organizar_ponto_de_contato --> procurar_oportunidade
   organizar_ponto_de_contato --> sincronizar_cronograma
   organizar_ponto_de_contato --> triar_conversas
@@ -700,6 +715,14 @@ flowchart LR
   planejar_calendario_de_conteudo --> criar_ideia_de_conteudo
   planejar_calendario_de_conteudo --> definir_campanha_de_conteudo
   planejar_calendario_de_conteudo --> definir_reel_do_instagram
+  preparar_itens_do_ponto_de_contato --> analisar_regulamento_da_oportunidade
+  preparar_itens_do_ponto_de_contato --> definir_ativo_imobilizado
+  preparar_itens_do_ponto_de_contato --> definir_tarefa
+  preparar_itens_do_ponto_de_contato --> definir_viagem
+  preparar_itens_do_ponto_de_contato --> inscrever_na_oportunidade
+  preparar_itens_do_ponto_de_contato --> organizar_ponto_de_contato
+  preparar_itens_do_ponto_de_contato --> procurar_tarefa
+  preparar_itens_do_ponto_de_contato --> registrar_ciclo_do_ativo
   preparar_tarefa_do_pull_request --> definir_tarefa
   preparar_tarefa_do_pull_request --> formalizar_decisao
   preparar_tarefa_do_pull_request --> levantar_contexto_do_pull_request

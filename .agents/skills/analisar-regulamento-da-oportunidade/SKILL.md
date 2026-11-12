@@ -3,7 +3,7 @@ name: analisar-regulamento-da-oportunidade
 description: Lê o manual, o regulamento, o edital e o contrato de uma oportunidade e separa o que a empresa deve fazer, com prazo, o que o texto não diz e o que as fontes contradizem. Usada quando chega o manual da oportunidade aprovada. NÃO serve para perguntar ao responsável, redigir a tarefa nem organizar a viagem.
 metadata:
   author: jimmyandrade
-  version: "0.1.6"
+  version: "0.1.7"
   related:
     - acompanhar-edital
     - consultar-responsavel-pela-oportunidade
@@ -11,6 +11,8 @@ metadata:
     - definir-tarefa
     - definir-viagem
     - evoluir-habilidade
+    - inscrever-na-oportunidade
+    - preparar-itens-do-ponto-de-contato
     - organizar-ponto-de-contato
     - procurar-tarefa
 ---
@@ -74,17 +76,9 @@ Não gere o material aqui.
 Entregue três listas, nesta ordem: exigências, lacunas e conflitos.
 Cada exigência com prazo vira tarefa no mesmo turno: confira antes com `procurar-tarefa` e crie com `definir-tarefa`.
 Pergunte quem responde por cada uma. Não preencha responsável nem prazo que a pessoa não disse.
-Item que o formulário oferece para alugar, como mesa, balcão ou cadeira, e que a empresa leva por conta própria, não se aluga: a resposta é que não precisa, e o item entra no checklist de coisas a levar para a oportunidade, como tarefa com a definição de concluído em itens. Item pago só se escolhe com o sim da pessoa.
 Antes de cada prazo, avise a pessoa com o link da exigência, como o do formulário.
 Exigência vencida: diga isso na hora e proponha cumpri-la agora ou perguntar se ainda é aceita.
-O responsável pela marca é a pessoa dona da empresa do negócio. Leia o nome e o apelido no cadastro de pessoas, e o nome da marca, o telefone, o WhatsApp e o e-mail no cadastro da empresa, e preencha o formulário com eles sem perguntar à pessoa. Com mais de uma dona, pergunte qual responde.
-O contato de uma inscrição é sempre o da empresa, nunca o telefone nem o e-mail pessoal de um sócio, mesmo quando o campo é do responsável. Sem o contato da empresa no cadastro, pare e peça, e não complete com o da pessoa.
-Preencha o formulário numa aba da sessão. Se a pessoa arrastar a aba dela para o grupo e o contexto de abas disser que o grupo não existe, peça o contexto criando o grupo antes de dar a aba por perdida: ela pode aparecer nele.
-O Google Formulários guarda o rascunho na conta: reabrir o link mostra o que já foi preenchido, inclusive os documentos que a pessoa digitou.
-Ao preencher um formulário, leia a dica e a mensagem de erro de cada campo e escreva no formato que ele valida, como um telefone só com os dígitos e o DDD, sem o código do país nem pontuação.
-Confira cada campo depois de preencher e não avance com erro na tela. O envio segue o sim da pessoa.
-Dado de identidade que a exigência pede, como RG e CPF, a pessoa digita. O agente não o digita, mesmo que ele esteja no cadastro.
-Diga em qual página do cadastro cada dado está, com o link, e o que o cadastro não tem, sem perguntar o que já está lá. O dado que falta vira recomendação de campo, sem criá-lo.
+Exigência que é um formulário ou cadastro da organização segue `inscrever-na-oportunidade`, e o que ela manda levar segue `preparar-itens-do-ponto-de-contato`.
 
 ### Passo 7
 
@@ -152,13 +146,9 @@ As duas janelas entraram na lista de conflitos, lado a lado. Avisei a pessoa do 
 
 ## Pegadinhas
 
-- A aba arrastada pela pessoa parece perdida quando o grupo da sessão some do contexto. O preenchimento fica salvo como rascunho no formulário, e recriar o grupo pode trazer a aba de volta.
-- O telefone do responsável pela marca parece ser o da pessoa. Numa inscrição, o contato é o da empresa, e o do sócio fica no cadastro dele.
-- O campo de telefone parece aceitar qualquer formato legível. O formulário pode validar só os dígitos com o DDD e recusar o código do país, os parênteses e o hífen, e a mensagem de erro só aparece depois de preenchido.
 - O manual de uma feira parece servir a todas as edições do mesmo grupo. O cabeçalho pode trazer o mês e o local de uma só.
 - O aviso de grupo parece só comunicado. O formulário com prazo está nele.
 - A mensagem mais recente da organização parece anular o manual. As duas ficam na lista, e a pessoa decide.
-- O formulário pede RG e CPF do responsável. O agente não os digita.
 - Sete dias úteis não são sete dias corridos: fim de semana e feriado não contam.
 
 ## Scripts disponíveis

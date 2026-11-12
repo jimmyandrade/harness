@@ -1,11 +1,11 @@
 ---
 name: definir-inscricao
-description: Use essa habilidade sempre que for definir o status de uma inscrição, ou quando disserem que ela foi feita, confirmada, aprovada ou aceita, mesmo sem a linha existir e mesmo sem dizer definir ou status. NÃO use para só comemorar sem gravar, saber só quem se inscreveu, nem decidir se a tarefa existe.
+description: Use essa habilidade sempre que for definir o status de uma inscrição, ou quando disserem que ela foi feita, confirmada, aprovada ou aceita, mesmo sem a linha existir e mesmo sem dizer definir ou status. NÃO use para só comemorar sem gravar, saber só quem se inscreveu, nem decidir se a tarefa existe, nem preencher o formulário.
 allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-pages notion:notion-update-page
 compatibility: Precisa de internet. A busca na lista de inscrições usa notion-ai-search no servidor notion.
 metadata:
   author: jimmyandrade
-  version: "0.16.0"
+  version: "0.17.0"
   aliases:
     - atualizar-inscricao
   related:
@@ -17,6 +17,7 @@ metadata:
     - definir-tarefa
     - lancar-despesa-da-empresa
     - procurar-email
+    - inscrever-na-oportunidade
 ---
 
 # Definir inscrição

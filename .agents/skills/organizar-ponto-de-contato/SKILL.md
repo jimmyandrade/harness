@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-update-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.21.0"
+  version: "0.21.1"
   aliases:
     - organizar-feira
   related:
@@ -13,6 +13,7 @@ metadata:
     - analisar-regulamento-da-oportunidade
     - consultar-responsavel-pela-oportunidade
     - criar-ponto-de-contato
+    - preparar-itens-do-ponto-de-contato
     - definir-agenda
     - definir-grupo-de-oportunidades
     - definir-tarefa
@@ -127,7 +128,7 @@ flowchart LR
 
 ### Passo 11
 
-O que a organização exige, com prazo, e o que o regulamento deixa de dizer seguem `analisar-regulamento-da-oportunidade`. A pergunta ao responsável pela oportunidade segue `consultar-responsavel-pela-oportunidade`.
+O que a organização exige, com prazo, e o que o regulamento deixa de dizer seguem `analisar-regulamento-da-oportunidade`. A pergunta ao responsável pela oportunidade segue `consultar-responsavel-pela-oportunidade`. O que levar ao ponto segue `preparar-itens-do-ponto-de-contato`.
 
 ## Problemas comuns
 
