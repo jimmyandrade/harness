@@ -3,7 +3,7 @@ name: analisar-regulamento-da-oportunidade
 description: Lê o manual, o regulamento, o edital e o contrato de uma oportunidade e separa o que a empresa deve fazer, com prazo, o que o texto não diz e o que as fontes contradizem. Usada quando chega o manual da oportunidade aprovada. NÃO serve para perguntar ao responsável, redigir a tarefa nem organizar a viagem.
 metadata:
   author: jimmyandrade
-  version: "0.1.5"
+  version: "0.1.6"
   related:
     - acompanhar-edital
     - consultar-responsavel-pela-oportunidade
@@ -74,6 +74,7 @@ Não gere o material aqui.
 Entregue três listas, nesta ordem: exigências, lacunas e conflitos.
 Cada exigência com prazo vira tarefa no mesmo turno: confira antes com `procurar-tarefa` e crie com `definir-tarefa`.
 Pergunte quem responde por cada uma. Não preencha responsável nem prazo que a pessoa não disse.
+Item que o formulário oferece para alugar, como mesa, balcão ou cadeira, e que a empresa leva por conta própria, não se aluga: a resposta é que não precisa, e o item entra no checklist de coisas a levar para a oportunidade, como tarefa com a definição de concluído em itens. Item pago só se escolhe com o sim da pessoa.
 Antes de cada prazo, avise a pessoa com o link da exigência, como o do formulário.
 Exigência vencida: diga isso na hora e proponha cumpri-la agora ou perguntar se ainda é aceita.
 O responsável pela marca é a pessoa dona da empresa do negócio. Leia o nome e o apelido no cadastro de pessoas, e o nome da marca, o telefone, o WhatsApp e o e-mail no cadastro da empresa, e preencha o formulário com eles sem perguntar à pessoa. Com mais de uma dona, pergunte qual responde.
