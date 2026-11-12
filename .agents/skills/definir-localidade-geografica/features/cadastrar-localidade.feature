@@ -10,7 +10,7 @@ Funcionalidade: Cadastrar país, estado e cidade com hierarquia e padrão
       Então atualiza ou relaciona a página existente
       E não cria duplicata
 
-  Regra: A hierarquia é país, estado, cidade pelo pai
+  Regra: Cada página liga ao nível imediatamente acima pelo pai
 
     Exemplo: Cidade com pai errado
       Dado que a cidade está sem pai ou ligada ao país
@@ -40,13 +40,23 @@ Funcionalidade: Cadastrar país, estado e cidade com hierarquia e padrão
       Quando a skill grava
       Então registra nas observações a origem e a dúvida pendente
 
-  Regra: A região só existe nos países configurados
+  Regra: Os níveis da hierarquia são configuráveis
 
-    Exemplo: País com região
-      Dado que o país está em Países com região
-      Quando a skill cadastra um estado
+    Exemplo: Nível acima do país
+      Dado que a hierarquia do projeto inclui o planeta ou um continente
+      Quando a skill cadastra um país
+      Então o país tem esse nível como pai
+
+    Exemplo: Nível só em certos países
+      Dado que a região existe só nos países listados
+      Quando a skill cadastra um estado de um país listado
       Então o estado tem a região como pai
-      E a região tem o país como pai
+      Mas nos outros países o estado liga ao nível de cima
+
+    Exemplo: Hierarquia não configurada
+      Dado que o parâmetro dos níveis está vazio
+      Quando a skill cadastra
+      Então detecta os níveis no workspace e pergunta se a ordem não for clara
 
   Regra: A lista ausente não para o trabalho
 

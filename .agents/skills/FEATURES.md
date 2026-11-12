@@ -842,8 +842,8 @@ How these skills relate is in `README.md`, in this folder.
   - Lives at `.agents/skills/definir-localidade-geografica/SKILL.md`
   - Reads the list and its property names from the data mapping of the project, and stops before writing when the name, the type, or the parent is missing from it
   - Checks for a duplicate through identificar-duplicata before creating, and updates or relates the existing page instead
-  - Keeps the hierarchy country, state, city through the parent, and fixes an empty or wrong parent before finishing
-  - Adds a region level between the country and the state only for the countries in the `Países com região` parameter
+  - Keeps each page under the level right above it through the parent, country, state, city by default, and fixes an empty or wrong parent before finishing
+  - Reads the hierarchy levels from the `Níveis da hierarquia` parameter or detects them in the workspace, so a business may add a planet, a continent, or a region, and limits a level to some countries through `Níveis só em certos países`
   - When the list is not in the data mapping, searches the connected workspace for it, confirms when several match, and asks whether to create it or where it is when none does, instead of stopping
   - Requires ISO 3166-1 on a country and ISO 3166-2 on a state, and leaves the city code optional
   - Names a state and a city by the project parameters `Padrão do nome do estado` and `Padrão do nome da cidade`

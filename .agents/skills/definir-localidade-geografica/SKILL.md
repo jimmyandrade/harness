@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   related:
     - identificar-duplicata
     - definir-grafia
@@ -23,8 +23,10 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Padrão do nome do estado": "Estado {artigo} {nome}"
 # `Padrão do nome da cidade` usa `{nome}` e `{UF}`. A sigla só entra quando ajuda a desambiguar.
 "Padrão do nome da cidade": "{nome} ({UF})"
-# `Países com região` lista os países cuja hierarquia tem o nível de região entre o país e o estado. Vazio: nenhum.
-"Países com região": []
+# `Níveis da hierarquia` lista os tipos do mais alto ao mais baixo, como planeta, continente, país, região, estado e cidade. Vazio: detecte no workspace.
+"Níveis da hierarquia": ""
+# `Níveis só em certos países` liga um nível aos países em que ele existe, como região: [país]. Vazio: nenhum.
+"Níveis só em certos países": {}
 ```
 ## Instruções
 
@@ -32,7 +34,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 A lista de localidades e o nome de cada propriedade vêm do mapeamento de dados do projeto, no workspace conectado. Se o mapeamento não a traz ou ela não abre, não pare: procure nos bancos do workspace conectado um que corresponda. Achou mais de um, confirme qual com a pessoa. Não achou nenhum, pergunte se deve criar ou peça que ela indique onde está. Criar o banco só com o sim, seguindo a regra do projeto para banco novo.
 
-Não use a lista de outro workspace. Este texto usa os conceitos: o nome, o tipo (país, região, estado ou cidade), o pai, o código ISO 3166, a abreviatura, a prioridade de oportunidades e as observações. Se o nome, o tipo ou o pai faltar no mapeamento, pare antes de gravar e diga qual.
+Não use a lista de outro workspace. Este texto usa os conceitos: o nome, o tipo, que é um dos níveis da hierarquia, o pai, o código ISO 3166, a abreviatura, a prioridade de oportunidades e as observações. Se o nome, o tipo ou o pai faltar no mapeamento, pare antes de gravar e diga qual.
 
 Uma propriedade opcional que falta e para a qual há valor: grave o resto e liste o valor no fim, com a proposta da propriedade. Nunca crie schema nem grave o valor no corpo.
 
@@ -42,27 +44,29 @@ Antes de criar, use `identificar-duplicata` com o tipo, o nome, as variações e
 
 ### Passo 3
 
-A hierarquia é país, estado, cidade, pelo pai. O país não tem pai. O estado tem o país como pai. A cidade tem o estado como pai. Pai vazio ou errado se corrige antes de concluir. Nunca ligue a cidade direto ao país.
+Os níveis da hierarquia e a ordem deles vêm de `Níveis da hierarquia`. Vazio: detecte no workspace conectado, pelas opções do tipo e pela relação do pai na lista. Sem ordem clara, pergunte uma vez. A hierarquia padrão é país, estado, cidade. Um negócio pode acrescentar níveis acima do país, como continente ou o planeta como pai de todos, ou entre o país e o estado, como região.
 
-Nos países de `Países com região`, a região fica entre o país e o estado: ela tem o país como pai e o estado tem a região como pai. Nos outros países não há região. Se o tipo região não existe no mapeamento, pergunte antes de criar a opção.
+Cada página tem como pai uma página do nível imediatamente acima. O nível mais alto não tem pai. Pai vazio ou errado se corrige antes de concluir. Nunca pule um nível que existe para aquele lugar.
+
+Um nível de `Níveis só em certos países` existe só nos países listados: nos outros, o filho liga ao nível de cima. Um tipo da hierarquia que o mapeamento não tem como opção: pergunte antes de criar a opção.
 
 ```mermaid
 flowchart LR
-  T{Tipo} -->|país| P[Sem pai, ISO 3166-1]
-  T -->|região| R[Pai é o país, só em país com região]
-  T -->|estado| E[Pai é o país ou a região, ISO 3166-2]
-  T -->|cidade| C[Pai é o estado, ISO opcional]
+  A{Qual é o nível?} --> B[Pai é o nível imediatamente acima]
+  B --> C{Nível só em certos países?}
+  C -->|país não listado| D[Pule esse nível]
+  C -->|país listado| E[Ligue ao nível]
 ```
 
 ### Passo 4
 
-O país usa o ISO 3166-1, como `BR`. O estado usa o ISO 3166-2, como `BR-RS`. Ausente ou fora do padrão, ajuste. Na cidade o código é opcional e pode ficar vazio. A abreviatura é opcional.
+O país usa o ISO 3166-1, como `BR`. O estado usa o ISO 3166-2, como `BR-RS`. Continente, planeta e região não têm ISO. Ausente ou fora do padrão, ajuste. Na cidade o código é opcional e pode ficar vazio. A abreviatura é opcional.
 
 O nome do estado segue `Padrão do nome do estado`, com o artigo mais natural. O padrão do estado não se aplica a cidade. A cidade segue `Padrão do nome da cidade` quando a sigla ajuda a buscar ou evita confusão entre nomes iguais ou parecidos, como uma cidade e um estado de mesmo nome.
 
 ### Passo 5
 
-Cidade que a pessoa cita e não existe na lista: pergunte a prioridade de oportunidades dela e crie já com essa prioridade e com o estado como pai. Não invente a prioridade. Nunca use o estado no lugar da cidade como aproximação, nem ligue a oportunidade à página do estado. Estado que falta, crie primeiro, com o país como pai.
+Cidade que a pessoa cita e não existe na lista: pergunte a prioridade de oportunidades dela e crie já com essa prioridade e com o estado como pai. Não invente a prioridade. Nunca use o estado no lugar da cidade como aproximação, nem ligue a oportunidade à página do estado. Nível acima que falta, como o estado, crie primeiro, com o pai dele.
 
 ### Passo 6
 
@@ -131,7 +135,8 @@ Criei com a dúvida nas observações: origem "texto do formulário" e pendente 
 - Já existe equivalente: atualize ou relacione. Não duplique.
 - Cidade e estado com o mesmo nome: a cidade leva a sigla pelo padrão; o estado leva o padrão do estado.
 - Estado sem o país: crie o país antes.
-- País com região: o estado tem a região como pai. País sem região: o estado tem o país.
+- Nível só em certos países, como região: o filho liga a ele nos países listados e ao nível de cima nos outros.
+- Planeta ou continente como pai do país: valem quando estão em `Níveis da hierarquia`. Sem eles, o país não tem pai.
 - A lista não está no mapeamento: procure o banco, confirme se houver vários, pergunte se não houver nenhum.
 - Prioridade da cidade desconhecida: pergunte. Não invente.
 - Código ISO de cidade: opcional, pode ficar vazio.
