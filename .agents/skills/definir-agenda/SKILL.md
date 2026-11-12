@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.48.1"
+  version: "0.49.0"
   related:
     - convidar-para-evento
     - definir-agenda-de-popstar
@@ -188,6 +188,11 @@ Evento presencial com convidado: leia o evento depois de criar. O Google Agenda 
 Ligação telefônica leva na descrição o nome e o telefone de quem vai ligar ou atender do outro lado, para remarcar sem depender de memória. Sem o número, peça a quem atendeu a ligação que combinou o horário: o histórico de chamadas do celular tem o número, e a gravação, se houver, tem o combinado. Grave o número também no cadastro da pessoa.
 Compromisso a que uma pessoa ou um grupo deve ser convidado, como uma reunião combinada numa conversa do WhatsApp: depois de criar o evento, siga `convidar-para-evento`, que manda o convite pelos canais que alcançam a pessoa.
 
+Antes de criar o evento de uma viagem, de uma montagem ou de um ponto de contato de que participa mais de uma pessoa, pergunte quem entra como convidado e por qual e-mail, inclusive a pessoa que usa a agenda. Sem essa resposta, a pergunta fica em aberto e o evento não sai sem convidado.
+O e-mail que a organização do ponto passou, e os ligados ao evento, entram no convite do evento do ponto. O evento da montagem convida só quem monta, e não a organização.
+
+A saída que a pessoa definiu para a viagem e a janela de montagem que ela escolheu viram evento na agenda. O que só está previsto, ou a janela que sobrou, fica no cronograma.
+
 Com `Pauta obrigatória em evento com convidados` em `sim`, a descrição de um evento com convidados leva uma pauta clara.
 Sem pauta na conversa, pergunte antes de criar.
 Num evento de que a pessoa só participa e que não tem pauta, sugira acrescentá-la e só edite com confirmação.
@@ -300,6 +305,7 @@ Conferi a grafia. O título usou o nome canônico e o papel do encontro. A descr
 - O link da chamada numa mensagem parece marcar a reunião na conversa do WhatsApp. O convite sai por `convidar-para-evento`, com o evento nativo e a mensagem com o link.
 - «Feira» ou «Reunião» sozinhos parecem título. A busca precisa do nome canônico. O evento externo segue o Passo 5.
 - Não pedir o Meet parece garantir um evento sem chamada. Com convidado, o Google Agenda pode anexá-lo sozinho.
+- Um evento criado parece completo sem a pergunta dos convidados. A pessoa que usa a agenda pode precisar do convite por e-mail, e a organização do ponto, do convite do evento do ponto, não do da montagem.
 - A busca vazia parece prova de que o compromisso não existe. Quando a pessoa o deu como marcado, é a agenda que falta, e o próximo passo é criar.
 
 ## Scripts disponíveis
