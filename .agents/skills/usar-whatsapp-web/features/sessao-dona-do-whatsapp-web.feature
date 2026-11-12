@@ -53,6 +53,15 @@ Funcionalidade: Uma sessão dona do WhatsApp Web
       Então a lista decide, e não o pedido
       E a sessão encaminha o pedido à dona da lista, sem abrir aba
 
+  Regra: Uma dona só, mesmo quando duas assumem juntas
+
+    Exemplo: Duas sessões assumem o título na mesma hora
+      Dado que duas sessões viram a lista sem dona e as duas assumiram o título "Dona do WhatsApp Web"
+      Quando uma delas lista as sessões de novo e vê o mesmo título em outra sessão não arquivada
+      Então fica a sessão de `sessionId` menor em ordem alfabética
+      E a outra devolve o título, renomeia a sessão para o assunto dela e encaminha o pedido
+      E nenhuma arquiva a outra sem o sim da pessoa
+
   Regra: Reaproveita a aba e o grupo de abas antes de abrir outro
 
     Exemplo: As abas da sessão já mostram o WhatsApp Web
