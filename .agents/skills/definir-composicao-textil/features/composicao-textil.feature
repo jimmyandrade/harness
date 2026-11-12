@@ -117,6 +117,18 @@ Funcionalidade: Composição têxtil
       Quando a habilidade monta a etiqueta
       Então ela leva uma composição por face
 
+    Exemplo: Aplicação marcada para a etiqueta
+      Dado que uma aplicação da variante foi marcada para a etiqueta
+      Quando a habilidade monta a etiqueta
+      Então ela monta a composição das fibras por parte como antes
+      E lista a aplicação marcada depois dos tecidos
+      Mas não escreve o texto da aplicação
+
+    Exemplo: Aplicação não marcada
+      Dado que uma aplicação da variante não foi marcada para a etiqueta
+      Quando a habilidade monta a etiqueta
+      Então a aplicação fica fora da etiqueta
+
     Exemplo: Resultado mostrado
       Dado que a etiqueta está montada
       Quando a habilidade responde
@@ -140,7 +152,7 @@ Funcionalidade: Composição têxtil
     Exemplo: Bordado ou patch
       Dado que a pessoa cita um bordado ou um patch
       Quando a habilidade classifica a parte
-      Então ela não grava na composição nem na etiqueta
+      Então ela não grava como linha de composição de tecido
       E aponta a aplicação da variante, não do produto nem do tecido
 
     Exemplo: Variante sem aplicação
