@@ -835,6 +835,22 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [ ] Three cases validated with the person
 
+### definir-localidade-geografica
+- **Stability**: experimental
+- **Description**: Register, review, or fix a country, state, or city in the locations list
+- **Properties**:
+  - Lives at `.agents/skills/definir-localidade-geografica/SKILL.md`
+  - Reads the list and its property names from the data mapping of the project, and stops before writing when the name, the type, or the parent is missing from it
+  - Checks for a duplicate through identificar-duplicata before creating, and updates or relates the existing page instead
+  - Keeps the hierarchy country, state, city through the parent, and fixes an empty or wrong parent before finishing
+  - Requires ISO 3166-1 on a country and ISO 3166-2 on a state, and leaves the city code optional
+  - Names a state and a city by the project parameters `Padrão do nome do estado` and `Padrão do nome da cidade`
+  - When a mentioned city is missing, asks its opportunity priority and creates it with that priority and the state as parent, and never uses the state as an approximation
+  - Records the source and the pending doubt in the notes when the source is partial
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses only checking existence, spelling, merging, the physical venue or company, and deleting
+
 ### definir-lote-de-ingresso
 - **Stability**: experimental
 - **Description**: Check, register, or fix an event's ticket batch in the batch database, with the value, the fee, the quantity, the sales window, and the receiving account
