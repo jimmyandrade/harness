@@ -66,7 +66,7 @@ O nome do estado segue `Padrão do nome do estado`, com o artigo mais natural. O
 
 ### Passo 5
 
-Cidade que a pessoa cita e não existe na lista: pergunte a prioridade de oportunidades dela e crie já com essa prioridade e com o estado como pai. Não invente a prioridade. Nunca use o estado no lugar da cidade como aproximação, nem ligue a oportunidade à página do estado. Nível acima que falta, como o estado, crie primeiro, com o pai dele.
+Cidade que a pessoa cita e não existe na lista: pergunte a prioridade de oportunidades dela e crie já com essa prioridade e com o nível acima como pai, o estado na hierarquia padrão. Não invente a prioridade. Nunca use o estado no lugar da cidade como aproximação, nem ligue a oportunidade à página do estado. Nível acima que falta, como o estado, crie primeiro, com o pai dele.
 
 ### Passo 6
 
