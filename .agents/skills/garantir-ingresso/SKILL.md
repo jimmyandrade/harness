@@ -4,7 +4,7 @@ description: Garante o ingresso de um evento na tiqueteira, grátis ou pago, pel
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.6.3"
+  version: "0.7.0"
   aliases:
     - fazer-inscricao
   related:
@@ -72,7 +72,7 @@ Quando nem a página, nem o e-mail, nem a conversa no WhatsApp dizem como se ent
 
 ### Passo 3
 
-Confira o login na tiqueteira. Sem login, peça que a pessoa entre na conta no navegador e espere o aviso.
+Confira o login na tiqueteira. Sem login, peça a credencial ao gerenciador de senhas conectado e preencha com ele; sem gerenciador, ou com o preenchimento falhando, peça que a pessoa entre na conta no navegador e espere o aviso.
 
 A pessoa titular da conta é a participante: confirme o nome que o checkout mostra. Sem a quantidade, peça um ingresso no nome da conta e diga que dá para acrescentar outros.
 
