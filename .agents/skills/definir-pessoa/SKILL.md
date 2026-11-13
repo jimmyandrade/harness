@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.15.0"
+  version: "0.16.0"
   related:
     - definir-empresa
     - definir-grafia
@@ -93,7 +93,13 @@ Todo perfil social que a pessoa informar, em link, print ou handle, como o Linke
 
 Não grave o print no corpo.
 
-Grave como confirmado só o que veio direto da pessoa que usa a habilidade ou de uma fonte que respondeu com certeza. Nunca invente papel, time nem apelido. Sem e-mail em nenhuma fonte, o e-mail fica como pendência no registro. Quando algo precisa ir à pessoa, use o canal que já existe: sem e-mail e com WhatsApp, mande pelo WhatsApp, por `conversar-no-whatsapp`. Só sem nenhum canal, peça o contato.
+Grave como confirmado só o que veio direto da pessoa que usa a habilidade ou de uma fonte que respondeu com certeza. Nunca invente papel, time nem apelido. Sem e-mail em nenhuma fonte, o e-mail fica como pendência no registro.
+
+Antes de encerrar, passe por cada propriedade da lista de pessoas e preencha a que uma fonte responde: telefone, e-mail, as empresas relacionadas e as que ela possui, os perfis sociais e os canais, a localidade, o tipo de público, as variações de grafia e o campo de não confundir com quando há homônimo na lista.
+
+A empresa segue `identificar-duplicata` e `definir-empresa`, e o perfil segue `definir-perfil-social`. Ser dona da empresa só se grava quando a pessoa ou uma fonte diz isso. O nome que o WhatsApp mostra só indica a empresa relacionada.
+
+O que nenhuma fonte responde fica pendente, e a resposta diz qual propriedade e por quê. Quando algo precisa ir à pessoa, use o canal que já existe: sem e-mail e com WhatsApp, mande pelo WhatsApp, por `conversar-no-whatsapp`. Só sem nenhum canal, peça o contato.
 Uma transcrição errada do nome, como a de uma reunião transcrita por voz, que a pessoa confirma ser errada diante do nome canônico, entra nas variações de grafia, com a data e a fonte. O nome completo fica com o canônico, e a transcrição não se descarta nem vira o nome.
 O que quem usa a habilidade diz sobre o papel de alguém numa empresa, como quem cuida dos recebimentos e quem só é informado, vem direto dela e entra na mesma rodada, sem perguntar. Na pessoa, vai no campo de papel, ou nas observações quando a lista não tem esse campo. Na empresa, a pessoa entra na lista de pessoas responsáveis, e o papel de cada uma vai nas notas da empresa e nas listas do negócio que o citam, como a negociação e o grupo do evento. Depois de gravar, leia as páginas de volta e diga o que gravou e o que não coube.
 Um apelido ou uma grafia ambígua que a pessoa decide inferir, como "vamos inferir que Bia é a Beatriz", entra no registro de quem foi inferida, na lista das transcrições erradas do nome, com o estado `inferido`, a data, quem inferiu, a frase da transcrição e o que descartou as outras hipóteses.
@@ -123,6 +129,14 @@ flowchart LR
 - Acrescentar menções a um texto já publicado há tempo pede o sim de quem escreve.
 
 ## Problemas comuns
+
+### Cadastro só com o nome
+
+Se você criar a página só com o nome, a pessoa fica sem o telefone, a empresa e o perfil que as fontes já respondiam, e o próximo cadastro volta a perguntar.
+
+1. Passe por cada propriedade da lista antes de encerrar.
+2. Preencha as que uma fonte responde e deixe a pendência dita no relatório, com a propriedade e o motivo.
+3. Telefone de quem tem conversa no WhatsApp se lê nos dados do contato, também de um membro de grupo: peça a leitura à sessão do WhatsApp Web.
 
 ### Desambiguação pedida antes da busca
 
