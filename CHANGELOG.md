@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.79.0](https://github.com/jimmyandrade/harness/compare/v1.78.0...v1.79.0) (2026-11-13)
+
+
+### Features
+
+* **definir-codigo-fiscal:** break a tie by the lowest tax burden and apply criteria in order ([#1075](https://github.com/jimmyandrade/harness/issues/1075)) ([f268462](https://github.com/jimmyandrade/harness/commit/f268462e254bff8bc1e4c3b43965b3e4c1af7394))
+
 ## [1.78.0](https://github.com/jimmyandrade/harness/compare/v1.77.0...v1.78.0) (2026-11-13)
 
 
