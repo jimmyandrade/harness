@@ -4,7 +4,7 @@ description: Classifica remetentes de spam por uma árvore de decisão, grava a 
 compatibility: Requer Python 3 para montar as listas.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.4.1"
   related:
     - definir-filtro-de-email
     - organizar-emails
@@ -211,9 +211,9 @@ A skill tira o texto do botão, separa 180 endereços e 3 já registrados no ban
 
 ## Scripts disponíveis
 
-- `python3 scripts/montar_lista.py <arquivo> [--ja-existe <arquivo>] [--so-host]`: imprime a lista limpa do arquivo, ordenada em ordem alfabética, sem repetidas e sem as entradas do arquivo de `--ja-existe`, uma por linha. O `--ja-existe` pode vir mais de uma vez, e `--so-host` troca cada URL pelo domínio dele.
+- `python3 scripts/build_list.py <arquivo> [--exclude <arquivo>] [--hosts-only]`: imprime a lista limpa do arquivo, ordenada em ordem alfabética, sem repetidas e sem as entradas do arquivo de `--exclude`, uma por linha. O `--exclude` pode vir mais de uma vez, e `--hosts-only` troca cada URL pelo domínio dele.
 
 1. Com terminal, grave o texto colado num arquivo, rode o script e use a saída como lista.
-2. Para a lista de uma tela do Admin, passe como `--ja-existe` o que a tela já tem, lido como o Passo 2 manda, e só a diferença sai.
-3. Para espelhar a lista do Chrome nos remetentes, passe a lista do Chrome com `--so-host` e como `--ja-existe` o que a tela de remetentes já tem.
+2. Para a lista de uma tela do Admin, passe como `--exclude` o que a tela já tem, lido como o Passo 2 manda, e só a diferença sai.
+3. Para espelhar a lista do Chrome nos remetentes, passe a lista do Chrome com `--hosts-only` e como `--exclude` o que a tela de remetentes já tem.
 4. Sem terminal, faça a mesma limpeza à mão e diga que o script não rodou.
