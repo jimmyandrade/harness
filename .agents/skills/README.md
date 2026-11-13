@@ -890,6 +890,7 @@ flowchart LR
   triar_conversas --> procurar_oportunidade
   triar_conversas --> procurar_pedido_de_revisao
   triar_conversas --> procurar_tarefa
+  triar_conversas --> reconhecer_imagem
   triar_conversas --> rotular_item
   triar_conversas --> transcrever_audio_e_video
   triar_conversas --> usar_whatsapp_web
