@@ -13,6 +13,8 @@ from pathlib import Path
 
 BUTTON_TEXT = "desbloquear"
 ANGLE = re.compile(r"<([^<>]+)>")
+SCHEME = re.compile(r"^[a-z][a-z0-9+.-]*://")
+AFTER_HOST = re.compile(r"[/?#:].*$")
 
 
 def limpar(linha: str) -> str:
@@ -27,10 +29,17 @@ def limpar(linha: str) -> str:
     return texto.strip().lower()
 
 
-def montar(linhas: list[str], ja_existe: list[str] | None = None) -> list[str]:
+def host(entrada: str) -> str:
+    """Return the domain of a URL, without scheme, port, path or query. An address stays as it is."""
+    if "@" in entrada:
+        return entrada
+    return AFTER_HOST.sub("", SCHEME.sub("", entrada))
+
+
+def montar(linhas: list[str], ja_existe: list[str] | None = None, so_host: bool = False) -> list[str]:
     """Return the cleaned entries, sorted, without repeats and without the ones already on the screen."""
     ja = {limpar(linha) for linha in (ja_existe or [])}
-    entradas = {limpar(linha) for linha in linhas}
+    entradas = {host(limpar(linha)) if so_host else limpar(linha) for linha in linhas}
     return sorted(entrada for entrada in entradas if entrada and entrada not in ja)
 
 
@@ -38,12 +47,13 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("entrada", type=Path, help="text file with one sender per line, as pasted")
     parser.add_argument("--ja-existe", type=Path, action="append", default=[], help="file with what the screen already has")
+    parser.add_argument("--so-host", action="store_true", help="turn each URL into its domain")
     args = parser.parse_args(argv)
     linhas = args.entrada.read_text(encoding="utf-8").splitlines()
     existentes: list[str] = []
     for arquivo in args.ja_existe:
         existentes.extend(arquivo.read_text(encoding="utf-8").splitlines())
-    for entrada in montar(linhas, existentes):
+    for entrada in montar(linhas, existentes, args.so_host):
         sys.stdout.write(entrada + "\n")
     return 0
 

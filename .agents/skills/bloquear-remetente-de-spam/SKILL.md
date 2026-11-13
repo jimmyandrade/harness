@@ -4,7 +4,7 @@ description: Classifica remetentes de spam por uma árvore de decisão, grava a 
 compatibility: Requer Python 3 para montar as listas.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.4.0"
   related:
     - definir-filtro-de-email
     - organizar-emails
@@ -46,6 +46,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 # `Tela de remetentes bloqueados` e `Tela de URL do Chrome` são os links das duas telas do Admin onde a pessoa cola as listas. Grave o link sem o parâmetro `rapt`, que expira.
 "Tela de remetentes bloqueados": ""
 "Tela de URL do Chrome": ""
+# `Espelhar a URL do Chrome nos remetentes` é `sim` ou `não`. `sim` põe todo domínio da lista de URL do Chrome também na lista de remetentes, sem esquema nem caminho.
+"Espelhar a URL do Chrome nos remetentes": "sim"
 "Perguntas por lote": 4
 "Modo de aprendizado": "perguntar"
 ```
@@ -62,7 +64,7 @@ Limpe a lista com o script de `Scripts disponíveis`, e não à mão. Ele tira o
 
 Leia o banco e tire da lista o que já tem decisão, por endereço ou por domínio, dando ao script o que o banco já tem como a lista do que existe. Um endereço sob um domínio já bloqueado também sai. Diga quantos saíram.
 
-Se a tela de remetentes estiver aberta no navegador, na conta certa, leia a lista que ela já tem, só para ler, e tire também o que já está lá. A tela de URL do Chrome vale o mesmo: leia a caixa de texto dela antes de entregar a lista. O que está só na tela e falta no banco é decisão antiga da pessoa: pergunte quem decidiu e quando antes de gravar.
+Se a tela de remetentes estiver aberta no navegador, na conta certa, leia a lista que ela já tem, só para ler, e tire também o que já está lá. A tela de URL do Chrome vale o mesmo: leia a caixa de texto dela antes de entregar a lista, e compare as duas telas. Um domínio que está só no Chrome é uma lacuna dos remetentes. O que está só na tela e falta no banco é decisão antiga da pessoa: pergunte quem decidiu e quando antes de gravar.
 
 ### Passo 3
 
@@ -78,7 +80,11 @@ flowchart LR
   C -->|não| D[Domínio dedicado: pergunte]
 ```
 
-Provedor gratuito e plataforma compartilhada nunca têm o domínio bloqueado: o domínio é de outras pessoas. Marca imitada é o nome de exibição de uma marca oficial com o endereço fora dos domínios dela. Na marca imitada e no domínio dedicado, o domínio inteiro vai para a tela de remetentes e para a de URL do Chrome. Cada nó segue o modo do parâmetro dele, `bloquear` sem perguntar ou `perguntar`. O domínio de uma marca oficial nunca entra.
+Provedor gratuito e plataforma compartilhada nunca têm o domínio bloqueado: o domínio é de outras pessoas. Marca imitada é o nome de exibição de uma marca oficial com o endereço fora dos domínios dela. Na marca imitada e no domínio dedicado, o domínio inteiro vai para a tela de remetentes e para a de URL do Chrome.
+
+Com `Espelhar a URL do Chrome nos remetentes` em `sim`, todo domínio com `sim` na URL do Chrome entra também nos remetentes, e a lacuna do Passo 2 entra na lista de remetentes.
+
+Cada nó segue o modo do parâmetro dele, `bloquear` sem perguntar ou `perguntar`. O domínio de uma marca oficial nunca entra.
 
 ### Passo 4
 
@@ -100,7 +106,7 @@ Grave as linhas em lotes de até 70, e confira ao fim a contagem por nó e que n
 
 ### Passo 6
 
-Entregue duas listas, uma por tela do Admin, prontas para colar, uma entrada por linha, sempre ordenadas em ordem alfabética e sem repetidas, montadas pelo script: os endereços e os domínios para a tela de remetentes bloqueados do Gmail, e só os domínios com `sim` na URL do Chrome, com o ponto e o arroba de volta. Os de `talvez` ficam de fora e saem numa lista à parte, para a pessoa decidir.
+Entregue duas listas, uma por tela do Admin, prontas para colar, uma entrada por linha, sempre ordenadas em ordem alfabética e sem repetidas, montadas pelo script: os endereços e os domínios para a tela de remetentes bloqueados do Gmail, e só os domínios com `sim` na URL do Chrome, com o ponto e o arroba de volta. Os de `talvez` ficam de fora e saem numa lista à parte, para a pessoa decidir. Com o espelhamento em `sim`, a lista de remetentes leva também os domínios da lista do Chrome, só o domínio de cada URL.
 
 Grave cada lista num arquivo de texto, na pasta de rascunho da sessão e nunca no repositório, e entregue o link do arquivo em Markdown, para a pessoa abri-lo no painel. Um caminho só em formato de código não abre nada. Entregue também o link da tela, no mesmo trecho, antes de falar de qualquer outra coisa.
 
@@ -192,6 +198,7 @@ A skill tira o texto do botão, separa 180 endereços e 3 já registrados no ban
 - A tela de URL do Chrome é uma só caixa de texto, com um URL por linha e limite de mil, que aceita domínio. Ela já pode ter URLs que a pessoa bloqueou por outro motivo, como sites de ferramentas, e colar a lista inteira por cima repete as entradas. Com o botão Salvar apagado, não há mudança pendente.
 - Logo depois de salvar, o texto da página pode trazer a contagem antiga. Recarregue, com a caixa de edição fechada, porque recarregar com ela aberta descarta o que não foi salvo.
 - Na caixa de edição, o botão de adicionar endereço fica ao lado da seta de página, e um clique por coordenada acrescenta uma linha em branco. Troque de página pelo rótulo "Ir para a próxima página".
+- Um domínio bloqueado só no Chrome não é bloqueado como remetente: as duas telas são listas separadas, e a pessoa pode ter cadastrado só uma.
 - O script põe tudo em minúsculas. Um URL com caminho sensível a maiúsculas precisa de conferência antes de colar.
 - O texto colado do Gmail traz "desbloquear" grudado no fim do endereço, e há linhas sem nome e sem colchetes.
 - Há endereços que trazem outro endereço dentro de si, como os de quem envia por plataforma de newsletter. O remetente é o endereço inteiro.
@@ -204,8 +211,9 @@ A skill tira o texto do botão, separa 180 endereços e 3 já registrados no ban
 
 ## Scripts disponíveis
 
-- `python3 scripts/montar_lista.py <arquivo> [--ja-existe <arquivo>]`: imprime a lista limpa do arquivo, ordenada em ordem alfabética, sem repetidas e sem as entradas do arquivo de `--ja-existe`, uma por linha. O `--ja-existe` pode vir mais de uma vez.
+- `python3 scripts/montar_lista.py <arquivo> [--ja-existe <arquivo>] [--so-host]`: imprime a lista limpa do arquivo, ordenada em ordem alfabética, sem repetidas e sem as entradas do arquivo de `--ja-existe`, uma por linha. O `--ja-existe` pode vir mais de uma vez, e `--so-host` troca cada URL pelo domínio dele.
 
 1. Com terminal, grave o texto colado num arquivo, rode o script e use a saída como lista.
 2. Para a lista de uma tela do Admin, passe como `--ja-existe` o que a tela já tem, lido como o Passo 2 manda, e só a diferença sai.
-3. Sem terminal, faça a mesma limpeza à mão e diga que o script não rodou.
+3. Para espelhar a lista do Chrome nos remetentes, passe a lista do Chrome com `--so-host` e como `--ja-existe` o que a tela de remetentes já tem.
+4. Sem terminal, faça a mesma limpeza à mão e diga que o script não rodou.

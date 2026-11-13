@@ -11,7 +11,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 
-from montar_lista import montar  # noqa: E402
+from montar_lista import host, montar  # noqa: E402
 
 SCRIPT = HERE / "montar_lista.py"
 
@@ -39,6 +39,21 @@ class MontarTest(unittest.TestCase):
         self.assertEqual(montar([linha]), ["ana.exemplo.com@envio.eu"])
 
 
+class HostTest(unittest.TestCase):
+    def test_drops_the_scheme_the_path_and_the_port(self) -> None:
+        self.assertEqual(host("https://pt.exemplo.com/"), "pt.exemplo.com")
+        self.assertEqual(host("exemplo.so/tools/baixar"), "exemplo.so")
+        self.assertEqual(host("exemplo.com:8080/a?b=1"), "exemplo.com")
+
+    def test_keeps_a_plain_domain_and_an_address(self) -> None:
+        self.assertEqual(host("exemplo.com"), "exemplo.com")
+        self.assertEqual(host("ana@exemplo.com"), "ana@exemplo.com")
+
+    def test_the_list_of_hosts_has_no_repeats_and_skips_what_the_screen_has(self) -> None:
+        urls = ["https://pt.exemplo.com/", "pt.exemplo.com", "outro.com/x"]
+        self.assertEqual(montar(urls, ja_existe=["outro.com"], so_host=True), ["pt.exemplo.com"])
+
+
 class CliTest(unittest.TestCase):
     def test_prints_the_list_from_a_file_and_subtracts_another(self) -> None:
         with tempfile.TemporaryDirectory() as pasta:
@@ -53,6 +68,18 @@ class CliTest(unittest.TestCase):
                 check=True,
             )
         self.assertEqual(saida.stdout, "b.com\n")
+
+    def test_the_host_flag_turns_urls_into_domains(self) -> None:
+        with tempfile.TemporaryDirectory() as pasta:
+            entrada = Path(pasta) / "entrada.txt"
+            entrada.write_text("https://b.com/x\na.com/y\n", encoding="utf-8")
+            saida = subprocess.run(
+                [sys.executable, str(SCRIPT), str(entrada), "--so-host"],
+                capture_output=True,
+                text=True,
+                check=True,
+            )
+        self.assertEqual(saida.stdout, "a.com\nb.com\n")
 
 
 if __name__ == "__main__":
