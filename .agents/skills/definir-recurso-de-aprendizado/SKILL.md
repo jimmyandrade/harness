@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.5.0"
   related:
     - definir-agenda
     - procurar-agenda
@@ -42,7 +42,9 @@ Se achar o evento, use data, horário de início, horário de fim, título, loca
 
 ### Passo 5
 
-A data de evento, compromisso, prazo, viagem, reserva, lançamento, entrega ou outro marco, na resposta, no resumo, na tabela, na descrição ou em outro texto, sai no formato da data com dia da semana. Calcule e confira o dia com a data, o horário e o fuso do evento antes de escrever. Sem horário ou sem fuso, e se o dia puder mudar, peça. Não invente. Intervalo ou vários dias: o dia da semana em cada data. Se a fonte trouxer um dia da semana incompatível com a data, sinalize e confirme antes de criar ou alterar a página. A data e hora permanece início e fim válidos. O dia da semana é a camada extra para a pessoa.
+A data de evento, compromisso, prazo, viagem, reserva, lançamento, entrega ou outro marco, na resposta, no resumo, na tabela, na descrição ou em outro texto, sai no formato da data com dia da semana. Calcule o dia da semana com a data, o horário e o fuso do evento, como a regra do dia da semana manda, antes de escrever.
+
+Sem horário ou sem fuso, e se o dia puder mudar, peça. Não invente. Intervalo ou vários dias: o dia da semana em cada data. Se a fonte trouxer um dia da semana incompatível com a data, sinalize e confirme antes de criar ou alterar a página. A data e hora permanece início e fim válidos. O dia da semana é a camada extra para a pessoa.
 
 ## Problemas comuns
 
@@ -81,7 +83,7 @@ Se você inventar o procedimento de aula online ou presencial, a página nasce d
 
 Se você escrever a data numérica sem o dia da semana, ou aceitar um dia da semana que não bate com a data, a pessoa lê a aula errada.
 
-1. Calcule o dia com a data, o horário e o fuso.
+1. Calcule o dia como a regra do dia da semana manda, com a data, o horário e o fuso.
 2. Escreva no formato da data com dia da semana em cada data.
 3. Se divergir, sinalize e confirme antes de criar ou alterar a página. A data e hora permanece início e fim válidos.
 

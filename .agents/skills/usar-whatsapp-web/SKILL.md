@@ -3,7 +3,7 @@ name: usar-whatsapp-web
 description: Abre, mantém e reaproveita a única aba do WhatsApp Web no Chrome da pessoa, pela extensão Claude in Chrome, e faz a sessão dona atender as leituras e os envios das outras sessões. Usada sempre que uma habilidade precisa abrir, ler, enviar texto, anexar imagem ou documento no WhatsApp Web, mesmo sem dizer aba. Não serve para achar a conversa, redigir a mensagem, rotular nem decidir o que enviar.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   related:
     - acompanhar-resposta-no-whatsapp
     - conversar-no-whatsapp
@@ -198,6 +198,7 @@ Capturei a entrada de Fotos e vídeos, enviei o arquivo e vi o campo de legenda.
 - Enter na busca da lista abre a primeira conversa e marca as mensagens como lidas. Digite o nome e leia o resultado sem apertar Enter.
 - O texto da página traz a lista de conversas inteira antes da conversa aberta. A conversa aberta começa depois do nome do contato no cabeçalho.
 - A mensagem editada mostra "Editada", e o texto antigo some para os dois lados.
+- O separador do dia mostra "Ontem" ou só o dia da semana. Ao devolver a leitura a outra sessão, diga a data inteira, com o dia calculado como a regra do dia da semana manda.
 - "Mostrar documentos de todas as conversas" lista só os documentos recentes. Um arquivo antigo não aparece ali nem na conversa.
 - O comprovante que o chat mostra como miniatura borrada não baixa no WhatsApp Web. Diga isso e peça o arquivo à pessoa.
 

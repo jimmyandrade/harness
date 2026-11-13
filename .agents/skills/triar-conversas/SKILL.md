@@ -4,7 +4,7 @@ description: Varre as conversas com mensagem nova no WhatsApp e no Slack, classi
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.5.0"
   models:
     - relatorio-de-conversas
   related:
@@ -80,7 +80,7 @@ Antes de criar a tarefa, siga `procurar-tarefa`. Sem tarefa, siga `definir-taref
 
 ### Passo 5
 
-Ache a edição com `procurar-oportunidade`. Quando a participação foi aprovada, o registro vai no ponto de contato dessa edição. Grave a intercorrência num comentário da página, não no corpo nem nas notas de curadoria. O comentário começa pela data e hora do fato no `Formato da data com dia da semana` e diz quem relatou, o que aconteceu e o link da mensagem, quando houver. Cada fato novo é um comentário novo, e os comentários formam a linha do tempo da edição. Não edite um comentário antigo.
+Ache a edição com `procurar-oportunidade`. Quando a participação foi aprovada, o registro vai no ponto de contato dessa edição. Grave a intercorrência num comentário da página, não no corpo nem nas notas de curadoria. O comentário começa pela data e hora do fato no `Formato da data com dia da semana`, com o dia calculado como a regra do dia da semana manda, e diz quem relatou, o que aconteceu e o link da mensagem, quando houver. Cada fato novo é um comentário novo, e os comentários formam a linha do tempo da edição. Não edite um comentário antigo.
 
 Quando a intercorrência ensina algo para as próximas edições, como confirmar antes o local do estande no mapa da feira, proponha a lição no relatório. Com o sim, a lição vai para o grupo por `definir-grupo-de-oportunidades`, e o contrato da próxima participação é conferido por `organizar-ponto-de-contato`.
 
