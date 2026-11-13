@@ -3,11 +3,12 @@ name: enviar-mensagem-no-slack
 description: Redige uma mensagem de Slack, num canal, thread ou DM, e entrega o rascunho com o link do destino. Só envia com a autorização explícita da pessoa e, depois do envio, compara o proposto com o aplicado para alimentar o vocabulário. Usada quando a pessoa pede uma mensagem ou resposta no Slack. Não serve para achar conversa antiga nem cadastrar pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.10.0"
+  version: "0.11.0"
   related:
     - definir-agenda
     - definir-pessoa
     - definir-vocabulario
+    - entregar-rascunho-de-mensagem
     - escrever-link
     - evoluir-habilidade
     - pedir-revisao-de-pr-no-slack
@@ -20,7 +21,6 @@ metadata:
 
 Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco, depois nas instruções de usuário. Quando um valor não estiver lá, use o padrão abaixo. Um parâmetro vazio não impõe regra.
 ```yaml
-"Limite de rascunhos por canal": "1"
 "Retroalimentar o vocabulário": "sim"
 "Modo de aprendizado": "perguntar"
 # `Emoji do título do post` é o shortcode que abre o título de um post novo, ou vazio para não ter emoji.
@@ -106,7 +106,7 @@ Termos proibidos e alternativas vêm do vocabulário, não desta habilidade.
 - Com `PS no post novo` em `sim`, o post termina, depois de uma linha em branco, com um PS pedindo para responder na thread, na frase do vocabulário. Com `por canal`, leia no registro de canais do projeto se aquele canal incentiva a resposta na thread. Sem essa informação, pergunte antes de redigir e grave a resposta no registro do canal, para não perguntar de novo. Em DM nunca há PS. Num lote de mensagens seguidas no mesmo canal, a saudação vai só na primeira e o PS só na última.
 - Uma resposta dentro de uma thread existente nunca leva título nem PS. Antes de abrir um post novo, confira se o canal já tem uma thread sobre o assunto e responda nela.
 - Quando a pessoa confirma a participação numa call combinada na conversa, a resposta traz o link da chamada, o dia e a hora. O evento fica na agenda por `definir-agenda`.
-- Um aviso ao time inteiro segue `Aviso ao canal inteiro`: com a thread, o post novo leva só o título, com o `Emoji do título de aviso ao time` (vazio usa o do post) e o `Título do aviso ao time`, e cada assunto do detalhe vai numa resposta. Siga `Pessoa do caso em aviso ao time` e `Material de apoio em aviso ao time`. Com `Menção ao canal em aviso ao time` em `nunca`, não use `@channel`, `@here` nem grupo. Com `Pedido de ciência por reação em aviso ao time` em `não`, não peça reação. `Rascunho de aviso ao time` diz o que vira rascunho, dentro do `Limite de rascunhos por canal`.
+- Um aviso ao time inteiro segue `Aviso ao canal inteiro`: com a thread, o post novo leva só o título, com o `Emoji do título de aviso ao time` (vazio usa o do post) e o `Título do aviso ao time`, e cada assunto do detalhe vai numa resposta. Siga `Pessoa do caso em aviso ao time` e `Material de apoio em aviso ao time`. Com `Menção ao canal em aviso ao time` em `nunca`, não use `@channel`, `@here` nem grupo. Com `Pedido de ciência por reação em aviso ao time` em `não`, não peça reação. `Rascunho de aviso ao time` diz o que vira rascunho, e a entrega segue `entregar-rascunho-de-mensagem`.
 - O pedido de revisão de pull request segue `pedir-revisao-de-pr-no-slack`.
 
 **Escrita**
@@ -156,11 +156,7 @@ Ajuste o formato do Slack, valendo para qualquer texto:
 
 ### Passo 5
 
-Mostre o texto inteiro no chat, com o link direto da thread ou da mensagem onde ele vai. Não diga só que o rascunho está pronto. O link tem a forma de um endereço absoluto do Slack, com o canal e o horário da mensagem, e, numa resposta, o da thread-pai.
-
-Crie o rascunho no Slack. Antes, conte os rascunhos que você já criou nesse canal nesta sessão. Com a conta no `Limite de rascunhos por canal`, não crie outro: o Slack guarda poucos rascunhos por canal e o novo apagaria um existente sem avisar. Avise isso e entregue o texto pronto para colar, com o link da thread. Diga que a menção colada vira texto puro e precisa ser digitada de novo no compositor, escolhendo a pessoa na lista.
-
-Se o Slack recusar criar o rascunho, como num canal compartilhado com outra organização, entregue o texto pronto do mesmo jeito. Nunca diga que existem vários rascunhos no mesmo canal.
+Entregue o texto inteiro, com o link direto da thread ou da mensagem onde ele vai, como diz `entregar-rascunho-de-mensagem`.
 
 ### Passo 6
 
@@ -188,28 +184,6 @@ Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
 
-### Segundo rascunho no mesmo canal
-
-Se você criar um segundo rascunho num canal que já tem um, o Slack aceita e apaga o primeiro sem erro. A pessoa não acha o que esperava.
-
-1. Conte os rascunhos que você criou no canal.
-2. No limite, avise e entregue o segundo texto pronto para colar.
-3. Mude o limite só quando a pessoa disser que o Slack passou a aceitar mais de um.
-
-### Menção colada como texto
-
-Se você entregar um texto pronto para colar com `<@ID>` ou `@Nome`, a pessoa cola e o Slack mostra texto puro, sem notificar ninguém.
-
-1. Avise que as menções precisam ser digitadas de novo.
-2. Prefira o rascunho criado pela ferramenta, que converte a menção.
-
-### Link no formato do rótulo
-
-Se você entregar um link como `<url|rótulo>` para colar, o editor mostra o link gigante e os símbolos `<`, `|` e `>`.
-
-1. Use markdown padrão, `[rótulo](url)`.
-2. Com mais de um link, entregue o texto como rascunho.
-
 ### Mensagem enviada sem sim
 
 Se você enviar uma mensagem porque a pessoa pediu o texto, ela perde a chance de revisar e de escolher o horário.
@@ -218,23 +192,13 @@ Se você enviar uma mensagem porque a pessoa pediu o texto, ela perde a chance d
 2. Espere o sim a essa mensagem.
 3. Depois de enviar, devolva o link.
 
-### Rascunho sem o link do destino
-
-Se você entregar o texto sem o link da thread, a pessoa procura onde responder.
-
-1. Devolva sempre o endereço absoluto da thread ou da mensagem, junto do texto.
-
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### Avise a Ana na thread do pedido que os ajustes saíram
 
-Li a thread inteira e achei a mensagem da Ana. Resolvi a menção dela pelo ID do Slack e escrevi o texto no tom de voz. O rascunho está no chat e criado na thread, com o endereço da mensagem da Ana. Não enviei: espero o seu sim a esse texto.
-
-### Mande o mesmo aviso ao Caio no mesmo canal
-
-O canal já tem um rascunho meu desta sessão e o limite é 1. Não criei outro, porque apagaria o primeiro. O texto do Caio está pronto para colar, com o link da thread dele. As menções precisam ser digitadas de novo no compositor.
+Li a thread inteira e achei a mensagem da Ana. Resolvi a menção dela pelo ID do Slack e escrevi o texto no tom de voz. O rascunho foi entregue e criado na thread, com o endereço da mensagem da Ana. Não enviei: espero o seu sim a esse texto.
 
 ### Eu enviei, pode comparar
 
@@ -242,15 +206,12 @@ Li a mensagem publicada na thread e comparei com o rascunho. Você trocou duas e
 
 ## Casos-limite
 
-- Canal compartilhado com outra organização, onde o Slack recusa o rascunho: entregue o texto pronto para colar, com o link da thread.
 - A pessoa pede para agendar o envio: mostre o texto e o horário e, com o sim a esse texto e a esse horário, agende com a ferramenta de agendamento do Slack. Uma mensagem agendada não é resposta numa thread que ainda não existe.
 - A pessoa citada não aparece na busca do Slack: pergunte uma vez, ou use `definir-pessoa` se ela é nova no projeto.
 - O destino é uma DM: use só as regras de DM, e não o tom ambiente de um canal.
 
 ## Pegadinhas
 
-- Um rascunho de resposta numa thread conta como rascunho do canal inteiro, não só da thread.
-- O endereço de uma mensagem usa o horário dela sem o ponto, depois de um `p`. Numa resposta, a thread-pai vai junto no endereço.
 - A busca de pessoa por e-mail completo pode não achar ninguém. Procure pelo nome.
 
 ## Scripts disponíveis
