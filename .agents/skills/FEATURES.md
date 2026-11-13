@@ -53,7 +53,8 @@ How these skills relate is in `README.md`, in this folder.
   - Keeps production in the product records, one row per size, and never turns it into a task
   - Reads the database and property names from the project instructions, declares no default for them, asks once when one is missing, and stops when a database is not in the connected workspace
   - Confirms the size of every unit, adds only the quantity said, and asks before producing more than planned
-  - Relates the existing mold and base mold, and changes the pilot, label, and production status only when the person says so
+  - Relates the existing mold and base mold, and changes the pilot and production status only when the person says so
+  - Tracks labels per physical unit, in the units database: one option per label type in the printed and sewn labels, and a unit counts as labeled only when every required type is sewn
   - Does not write formula properties, create the product, or touch stock unless the project instructions link it
 - **Test Criteria**:
   - [x] The skill is present at that path
@@ -2134,6 +2135,24 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [ ] After a commit or a pull request state change, the skill runs without a separate sweep request
   - [ ] Three cases validated with the person
+
+### sugerir-enquete-de-publico
+- **Stability**: experimental
+- **Description**: Suggest a poll or question to learn about the audience of a business, with its learning goal, options, and the decision it supports
+- **Properties**:
+  - Lives at `.agents/skills/sugerir-enquete-de-publico/SKILL.md`
+  - Reads the content model list of the project and uses a registered idea before creating a new one, which it marks as not yet consolidated
+  - Requires a learning goal about the audience, adjusts or swaps a question that only moves the community, and drops options that do not fit the business
+  - Without a goal, draws an adherent idea and says it is an exploratory suggestion, or stops asking only for the missing data
+  - Applies `Canal padrão` and `Localidade-alvo` when the request has none, and says the values it assumed
+  - Takes the options for a city from the list of localities, with "other city" as a valid option
+  - Does not repeat a recent question without spacing or variation
+  - Delegates the final wording to `redigir-com-tom-de-voz` and the sending to `conversar-no-whatsapp`, only with the person's yes
+  - Registers only on request, and keeps the text of a published poll as it was published
+  - Does not write the final copy, publish, register the idea or the post, or define the campaign
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses writing the final copy, publishing, registering the idea or the post, and defining the campaign
 
 ### testar-habilidade
 - **Stability**: experimental
