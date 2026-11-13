@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.84.0](https://github.com/jimmyandrade/harness/compare/v1.83.0...v1.84.0) (2026-11-13)
+
+
+### Features
+
+* **acompanhar-resposta-no-whatsapp:** follow the reply without asking when the deadline is today ([#1132](https://github.com/jimmyandrade/harness/issues/1132)) ([bf7aac0](https://github.com/jimmyandrade/harness/commit/bf7aac0f65a54310350a853c36dc7d00ef24c2ca))
+* **fatiar-pull-request:** link stacked PRs with gh stack ([#1138](https://github.com/jimmyandrade/harness/issues/1138)) ([57e7063](https://github.com/jimmyandrade/harness/commit/57e7063874885be1fc43543631ee686a0844f7ed))
+* **levantar-gravacoes-de-reunioes:** find a meeting source and list recording status ([#1134](https://github.com/jimmyandrade/harness/issues/1134)) ([1081e36](https://github.com/jimmyandrade/harness/commit/1081e368e4928b530f1fd923bbbc9ffbfc4b04a3))
+
+
+### Bug Fixes
+
+* **acompanhar-resposta-no-whatsapp:** do not count a copy of our own message as the contact's reply ([#1137](https://github.com/jimmyandrade/harness/issues/1137)) ([4f4b0f4](https://github.com/jimmyandrade/harness/commit/4f4b0f45e027c402654f4c250ebafbd25de69c86))
+* **mesclar-pull-request:** read the checks before offering a merge ([#1133](https://github.com/jimmyandrade/harness/issues/1133)) ([bb2eb07](https://github.com/jimmyandrade/harness/commit/bb2eb07782cf10ec030e2ecfa18d9c72741825b5))
+
 ## [1.83.0](https://github.com/jimmyandrade/harness/compare/v1.82.0...v1.83.0) (2026-11-13)
 
 

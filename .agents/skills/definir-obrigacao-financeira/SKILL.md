@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.1"
+  version: "0.5.0"
   related:
     - lancar-despesa-pessoal
     - procurar-data-significativa
@@ -70,15 +70,23 @@ flowchart LR
 
 ### Passo 5
 
+Antes de recomendar ou lançar o pagamento de um tributo ou de uma dívida em atraso, pergunte à pessoa como ela pretende pagar: à vista, parcelado e em quantas parcelas, ou só uma parte agora. O total atualizado não é o que ela vai pagar de uma vez.
+
+Depois, pesquise se há perdão, anistia, desconto ou programa de renegociação do governo vigente para aquele tributo ou credor. Traga a data de corte, quem entra, o que fica de fora, a data em que o benefício passa a valer e a condição para mantê-lo.
+
+Cite a fonte oficial, como o portal do órgão ou a lei publicada. Blog e escritório de contabilidade orientam, mas não confirmam: diga o que não foi confirmado e onde a pessoa verifica antes de decidir. Um benefício que só vale a partir de uma data futura muda o que compensa pagar agora, então mostre as duas opções e deixe a decisão com a pessoa.
+
+### Passo 6
+
 Quando o contrato leva o vencimento de fim de semana ou feriado para o próximo dia útil, ajuste a data de cada fatura. Confira os feriados nacionais e os da cidade de pagamento por `procurar-data-significativa`, e confirme na fonte legal: um feriado pode estar registrado na lista só como data comemorativa.
 
 Toda fatura vencida ou a vencer citada na resposta traz o vencimento e o valor. Sem o valor, diga que falta e onde a pessoa o encontra: o app ou o site do credor. Um PDF protegido por senha não fornece o valor.
 
-### Passo 6
+### Passo 7
 
 Lembrete de vencimento vai para a agenda do contexto em `Agendas por contexto`, com `Antecedência do lembrete`, como evento privado e sem valor na descrição. Sem agenda para o contexto, pergunte. Não use a agenda de outro contexto.
 
-### Passo 7
+### Passo 8
 
 Confira a página salva. Entregue a obrigação, a situação, o próximo vencimento com o valor e as pendências. Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
@@ -98,6 +106,14 @@ Se você registrar o valor de uma empresa de cobrança como dívida confirmada, 
 1. Marque `A verificar`.
 2. Indique o canal oficial do credor.
 3. Não use os links nem os boletos da mensagem.
+
+### Pagamento presumido à vista
+
+Se você apresentar o total atualizado de uma dívida em atraso como o valor a pagar, a pessoa decide sem saber que existe parcelamento, perdão ou desconto.
+
+1. Pergunte como ela pretende pagar.
+2. Pesquise o perdão, a anistia ou o programa de renegociação vigente.
+3. Cite a fonte oficial e diga o que não foi confirmado.
 
 ### Fatura sem valor
 
@@ -122,14 +138,20 @@ Cadastrei a dívida como `Adiada`, com a próxima ação e a data de revisão. A
 
 Cadastrei como `A verificar`, com a empresa de cobrança entre os remetentes. Indiquei o app e o site oficiais do plano. Não usei o link do e-mail.
 
+### o imposto do MEI está atrasado em vários anos e o total passa de cinco mil reais
+
+Perguntei como a pessoa pretende pagar e pesquisei o perdão e o parcelamento vigentes. Citei o portal da Receita Federal, marquei como não confirmado o que só aparecia em blog e deixei a decisão com ela.
+
 ## Casos-limite
 
+- A pessoa já disse como vai pagar: não pergunte de novo, pesquise o benefício e use a resposta dela.
 - O credor tem cartão e empréstimo: duas obrigações.
 - A obrigação muda de situação: atualize a situação e registre o motivo nos comentários.
 - A pessoa não sabe o total de parcelas: grave o que a evidência mostra e deixe o resto pendente.
 
 ## Pegadinhas
 
+- O total atualizado parece a conta a pagar. Quem parcela ou espera um perdão paga outro valor.
 - Pagamento mínimo parece sempre menor que o total. No rotativo, o mínimo pode ser o total.
 - "Recibo do pagador" no boleto parece comprovante. É só a parte destacável do boleto.
 - Empresa de cobrança parece o credor. Ela fala em nome dele, mas não confirma o saldo.
