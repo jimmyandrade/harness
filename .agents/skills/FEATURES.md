@@ -646,6 +646,21 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses looking up when the date falls, the day or week lookup, creating or changing the calendar event, reverse planning, managing travel, registering the opportunity, organizing the contact point, and creating the task
 
+### definir-local-fisico
+- **Stability**: experimental
+- **Description**: Confirm the physical place of an event or contact point: space name, full address, venue company, and locality
+- **Properties**:
+  - Lives at `.agents/skills/definir-local-fisico/SKILL.md`
+  - Reads the company list, the locality list, and their property names from the data mapping of the project
+  - Asks when the space name or the full address is missing, and never deduces the address
+  - Searches the venue company by name and spellings, asks before registering a missing one through definir-empresa, and only then links it
+  - Validates the locality of the place against the locality of the company, and records and confirms a conflict before writing
+  - Sends a city that is missing from the locality list to definir-localidade-geografica, and never uses the state as an approximation
+  - Keeps a room, stage, or auditorium one level below the company, only where the mapping has a place for it, and asks otherwise
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses registering the company itself, the city, state, or country, the trip, the calendar, and the opportunity
+
 ### definir-empresa
 - **Stability**: experimental
 - **Description**: Register, update, validate, or consolidate a company, including a supplier
