@@ -1,13 +1,14 @@
 ---
 name: procurar-oportunidade
-description: Use essa habilidade sempre que for saber se uma oportunidade já existe, mesmo sem dizer oportunidade ou duplicata. Um pedido confirmado, com a edição achada, segue a inscrição. NÃO use para cadastrar a oportunidade, organizar a participação, criar a tarefa, nem reconhecer o texto de uma imagem.
+description: Use essa habilidade sempre que for saber se uma oportunidade já existe, mesmo sem dizer oportunidade ou duplicata. Um pedido confirmado, com a edição achada, segue a inscrição, e o comunicado de evento sem cadastro segue o cadastro. NÃO use para cadastrar a oportunidade, organizar a participação, criar a tarefa, nem reconhecer o texto de uma imagem.
 allowed-tools: notion:notion-ai-search notion:notion-fetch
 compatibility: Precisa de internet. A busca semântica na lista de oportunidades usa notion-ai-search no servidor notion.
 metadata:
   author: jimmyandrade
-  version: "0.8.0"
+  version: "0.9.0"
   related:
     - criar-oportunidade
+    - definir-grupo-de-oportunidades
     - definir-inscricao
     - identificar-duplicata
     - mesclar-registro
@@ -63,13 +64,17 @@ Outra data do mesmo nome é outra edição. Antes de alterar uma edição existe
 
 A pessoa diz que duas edições que parecem a mesma são coisas diferentes, por exemplo mesmo dia, mesmo tema ou mesmo organizador: a desambiguação é a relação Não confundir com entre elas, feita por `identificar-duplicata` e `mesclar-registro`. Oriente isso e não consolide as duas.
 
-Nenhuma: diga que ela não existe na lista de oportunidades. Mostre o link da lista. Repita o nome, a data e o lugar buscados, e que usou as duas buscas. Não crie a oportunidade. Não organize a participação. Não crie tarefa. A resposta não pede para nomear a habilidade.
+Nenhuma: diga que ela não existe na lista de oportunidades. Mostre o link da lista. Repita o nome, a data e o lugar buscados, e que usou as duas buscas. Não organize a participação. Não crie tarefa. A resposta não pede para nomear a habilidade.
+
+A entrada é o texto de um comunicado ou convite de evento, colado ou encaminhado, com nome e data, e a edição não existe: siga `criar-oportunidade` na mesma resposta, sem perguntar o que fazer. A chamada cadastra a edição e, se faltar o grupo, passa por `definir-grupo-de-oportunidades`, e nunca cria o grupo dentro da edição. Só pergunte se faltar o nome ou a data, e só o que falta. Quem manda ou encaminha o texto não é, por isso, a organização: pode estar só divulgando outra feira. Não grave quem encaminhou como organizador.
+
+A entrada é a pergunta se a oportunidade existe, sem o texto de um comunicado: pare na resposta e não crie.
 
 ### Passo 5
 
 Data de evento, compromisso, prazo, viagem, reserva, lançamento, entrega ou outro marco, na resposta, no resumo, na tabela ou em outro texto, sai no formato da data com dia da semana. Calcule o dia da semana com a data, o horário e o fuso do evento, como a regra do dia da semana manda, antes de responder. Sem horário ou sem fuso, e se o dia puder mudar, peça. Não invente. Intervalo ou vários dias: o dia da semana em cada data.
 
-Se a fonte trouxer um dia da semana incompatível com a data, sinalize a divergência. Na consulta, não crie nem altere, a não ser o status de uma edição passada, e só depois da resposta da pessoa sobre quais foram aproveitadas e quais foram perdidas.
+Se a fonte trouxer um dia da semana incompatível com a data, sinalize a divergência. Na consulta pura, não crie nem altere, a não ser o status de uma edição passada, e só depois da resposta da pessoa sobre quais foram aproveitadas e quais foram perdidas.
 
 ## Problemas comuns
 
@@ -105,12 +110,14 @@ Se você buscar a frase da legenda, a lista não tem a edição e o nome certo f
 2. A data é a do evento.
 3. A frase que convida o público não é o título.
 
-### Criar na mesma habilidade
+### Cadastrar nesta habilidade ou perguntar à toa
 
-Se você cadastrar a oportunidade depois de não achar, a verificação vira criação.
+Se você cadastrar aqui a oportunidade que não achou, ou perguntar o que fazer diante de um comunicado de evento com nome e data, a verificação vira criação sem a regra do cadastro, ou a pessoa precisa repetir o pedido.
 
 1. Diga que ela não existe na lista de oportunidades.
-2. Pare. Cadastrar fica com `criar-oportunidade`.
+2. Comunicado ou convite com nome e data: siga `criar-oportunidade` na mesma resposta, sem perguntar. O cadastro fica com ela, nunca com esta habilidade.
+3. Só a pergunta se existe: pare. Falta o nome ou a data: pergunte só o que falta.
+4. Não grave quem encaminhou o texto como organizador.
 
 ### Lista pedida à toa
 
@@ -141,11 +148,15 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### Festival Rota Sul, entrada gratuita, 29 e 30 de setembro de 2026, 09h às 19h, Centro de Eventos Aurora, Rua das Flores, 100, Cidade Exemplo.
 
-a oportunidade não existe na lista de oportunidades. Mostrei o link da lista. Busquei o pedaço "Rota Sul" e as datas terça-feira, 29/09/2026 e quarta-feira, 30/09/2026, 09h às 19h, no Centro de Eventos Aurora, Rua das Flores, 100, Cidade Exemplo, por consulta direta e por busca semântica. Não criei a oportunidade.
+a oportunidade não existe na lista de oportunidades. Mostrei o link da lista. Busquei o pedaço "Rota Sul" e as datas terça-feira, 29/09/2026 e quarta-feira, 30/09/2026, 09h às 19h, no Centro de Eventos Aurora, Rua das Flores, 100, Cidade Exemplo, por consulta direta e por busca semântica. Como o texto é um comunicado com nome e data, segui `criar-oportunidade` na mesma resposta, sem perguntar, e não gravei quem encaminhou como organizador.
+
+### já temos a oportunidade Festival Rota Sul?
+
+Não existe na lista de oportunidades. Mostrei o link da lista e o que busquei. Como é só a pergunta, sem o texto de um comunicado, não cadastrei.
 
 ### a fonte diz segunda-feira, 01/09/2026
 
-01/09/2026 é terça-feira. Sinalizei a divergência. Na resposta, usei o formato da data com dia da semana. Não criei a oportunidade.
+01/09/2026 é terça-feira. Sinalizei a divergência. Na resposta, usei o formato da data com dia da semana. Não cadastrei até a pessoa confirmar a data.
 
 ## Casos-limite
 
@@ -156,7 +167,10 @@ a oportunidade não existe na lista de oportunidades. Mostrei o link da lista. B
 - A pessoa não diz "oportunidade": o texto com o nome da edição e a data basta.
 - A pessoa não passa a lista: use a do mapeamento, no workspace conectado. Não peça.
 - A pessoa indicou outra lista e ela não está no workspace conectado: pare e peça a lista certa.
-- Nada igual nessa lista: diga que não existe. Não crie. Não busque o workspace inteiro.
+- Nada igual nessa lista e a entrada é um comunicado ou convite com nome e data: diga que não existe e siga `criar-oportunidade` na mesma resposta, sem perguntar.
+- Nada igual nessa lista e a entrada é só a pergunta se existe: diga que não existe. Não crie. Não busque o workspace inteiro.
+- O comunicado não traz o nome ou a data: pergunte só o que falta.
+- Quem encaminhou o comunicado não é a organização: não grave quem encaminhou como organizador.
 - O dia da semana da fonte não bate com a data: sinalize. Não grave.
 - A edição achada é anterior a hoje: pergunte quais foram aproveitadas e quais foram perdidas antes de mudar o status.
 - O pedido tem outra data que a da página, com o mesmo nome: é outra edição. Não atualize a existente.
@@ -168,7 +182,8 @@ a oportunidade não existe na lista de oportunidades. Mostrei o link da lista. B
 - Outro evento na mesma cidade, no mesmo lugar ou no mesmo mês parece esta edição. O nome e a data decidem.
 - "Uma oportunidade para conhecer novidades" parece o título. É a legenda.
 - Uma variação nas variações de nome parece apelido solto. É a mesma oportunidade.
-- Não achar parece licença para cadastrar. Esta habilidade para na resposta. Cadastrar fica com `criar-oportunidade`.
+- Não achar um comunicado com nome e data parece pedir uma pergunta à pessoa. Siga `criar-oportunidade` na mesma resposta. Quem manda o comunicado parece ser a organização. Pode ser só quem divulga.
+- Não achar na pergunta se existe parece licença para cadastrar. Sem o texto de um comunicado, a habilidade para na resposta. O cadastro fica com `criar-oportunidade`.
 - Achar a edição parece o fim de um pedido confirmado. A inscrição segue `definir-inscricao` na mesma resposta.
 - Grupo vazio parece pendência desta busca. Esta habilidade não pede o grupo e não preenche.
 - A data numérica parece bastar. A resposta leva o dia da semana, calculado com a data, o horário e o fuso.

@@ -24,6 +24,12 @@
       "prompt": "Essas duas edições parecem a mesma, mas são coisas diferentes (outro organizador).",
       "expected_output": "Orientar que a desambiguação é a relação Não confundir com, via identificar-duplicata e mesclar-registro, sem consolidar as duas.",
       "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "Encaminhei o comunicado de uma feira com nome e data e a oportunidade não está cadastrada.",
+      "expected_output": "Dizer que não existe na lista, seguir criar-oportunidade na mesma resposta sem perguntar o que fazer, passar por definir-grupo-de-oportunidades se faltar o grupo e não gravar quem encaminhou como organizador. Faltando nome ou data, perguntar só o que falta. A pergunta 'já temos X?' sem comunicado não cadastra.",
+      "files": []
     }
   ]
 }
