@@ -165,7 +165,9 @@ How these skills relate is in `README.md`, in this folder.
   - Reads the database of blocked senders, the free providers, the shared platforms, the official brands, and the mode of each node from the project instructions
   - Cleans the pasted list, drops senders that already have a decision, and never blocks the domain of a free provider or a shared platform
   - Blocks the address and the domain of a brand imitation without asking, and asks about each dedicated domain after looking for evidence in the mailbox and on the company site
-  - Asks who decided and never assumes it, stores the value so no tool turns it into a link, keeps the browser URL block as yes, no or maybe, and records each decision with the node, the reason, and when, and hands over one list per admin screen without changing the admin console
+  - Mirrors every domain of the browser URL block into the sender block, without scheme or path, when the project asks for it
+  - Builds every list with a tested script, sorted alphabetically, without repeats and without what the admin screen already has
+  - Asks who decided and never assumes it, stores the value so no tool turns it into a link, keeps the browser URL block as yes, no or maybe, and records each decision with the node, the reason, and when, and hands over one list per admin screen, with the link of each screen read from the project instructions, without changing the admin console
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses mailbox filters, marking a message as spam, and saving the setting in the admin console
