@@ -5,12 +5,13 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
   related:
     - definir-composicao-textil
     - definir-tecido
     - evoluir-habilidade
     - identificar-duplicata
+    - procurar-banco-de-dados
 ---
 
 # Definir estampa
@@ -21,7 +22,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ```yaml
 "Modo de aprendizado": "perguntar"
-# Nomes de banco e de campo: o projeto define. Vazios, procure no workspace conectado antes de perguntar.
+# Nomes de banco e de campo: o projeto define. Vazios, use `procurar-banco-de-dados` antes de perguntar.
 # `Banco de estampas`: uma página por estampa, ligada ao tecido.
 "Banco de estampas": ""
 # `Campo da foto da estampa`: campo de arquivo que guarda a foto da estampa.
@@ -36,7 +37,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 A estampa é do tecido. Ela se liga ao tecido que a tem e nunca ao produto nem à variante: a variante chega à estampa pelo tecido dela. Um tecido que falta é cadastrado por `definir-tecido` antes da estampa.
 
-Os nomes vêm das instruções do projeto. Com `Banco de estampas` vazio, procure o banco por conta própria no workspace conectado, pelo nome e pelas propriedades (estampa, motivo, foto). Achou um só, use-o e diga qual. Achou mais de um de nome igual ou parecido, confirme com a pessoa qual é. Não achou nenhum, peça que ela informe o banco ou sugira criá-lo, e não crie sem o sim. Não mude a estrutura do banco.
+Os nomes vêm das instruções do projeto. Com `Banco de estampas` vazio, use `procurar-banco-de-dados`, dizendo que o banco guarda estampas e que precisa de nome, motivo e foto. Não mude a estrutura do banco.
 
 ### Passo 2
 
@@ -48,7 +49,7 @@ Uma flor pode ser a estampa de um tecido ou uma aplicação numa variante, e a a
 
 ### Passo 3
 
-Cadastre a estampa com o nome, o motivo, a foto e o tecido. Os nomes das propriedades vêm do mapeamento de dados do projeto. A foto vai em `Campo da foto da estampa`. Com o campo vazio, procure no banco o campo de arquivo que serve: um só, use-o e diga qual; mais de um, confirme; nenhum, sugira criar o campo e não crie sem o sim.
+Cadastre a estampa com o nome, o motivo, a foto e o tecido. Os nomes das propriedades vêm do mapeamento de dados do projeto. A foto vai em `Campo da foto da estampa`. Com o campo vazio, use `procurar-banco-de-dados` para achar o campo de arquivo do banco.
 
 Outra estampa na variante é outro tecido: cadastre a estampa no outro tecido e deixe a do tecido antigo como está. Corrigir uma estampa ligada a mais de um tecido muda todos eles, então avise antes de gravar.
 
@@ -93,9 +94,8 @@ Se você gravar a estampa sem a foto como se estivesse completa, o cadastro pare
 Se você usar um nome de banco que o projeto não definiu, a escrita cai no banco errado.
 
 1. Leia `Banco de estampas` nas instruções do projeto.
-2. Vazio, procure o banco no workspace conectado.
-3. Com mais de um parecido, confirme. Sem nenhum, peça ou sugira criar.
-4. Não invente um nome.
+2. Vazio, use `procurar-banco-de-dados`.
+3. Não invente um nome.
 
 ## Exemplos de entrada e saída
 
@@ -114,7 +114,7 @@ Li o banco pelo nome e pelo motivo. A estampa existia: reaproveitei e liguei ao 
 - O tecido não está cadastrado: cadastre-o por `definir-tecido` antes.
 - A estampa é antiga e não tem foto: não cobre, se for anterior à data de corte.
 - A estampa serve a mais de um tecido: corrija com aviso, porque a correção vale para todos.
-- Um parâmetro de banco ou de campo está vazio nas instruções do projeto: procure no workspace conectado, confirme se houver ambiguidade e, sem nada, peça ou sugira criar.
+- Um parâmetro de banco ou de campo está vazio nas instruções do projeto: use `procurar-banco-de-dados`.
 
 ## Pegadinhas
 

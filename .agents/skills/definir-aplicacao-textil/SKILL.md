@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.2.1"
   aliases:
     - definir-aplicacao
   related:
@@ -13,6 +13,7 @@ metadata:
     - definir-estampa
     - evoluir-habilidade
     - identificar-duplicata
+    - procurar-banco-de-dados
 ---
 
 # Definir aplicação têxtil
@@ -23,7 +24,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ```yaml
 "Modo de aprendizado": "perguntar"
-# Nomes de banco e de campo: o projeto define. Vazios, procure no workspace conectado antes de perguntar.
+# Nomes de banco e de campo: o projeto define. Vazios, use `procurar-banco-de-dados` antes de perguntar.
 # `Banco de aplicações`: uma página por aplicação, ligada às variantes que a têm.
 "Banco de aplicações": ""
 # `Campo da foto da aplicação`: campo de arquivo que guarda a foto da aplicação.
@@ -40,7 +41,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 A aplicação é da variante. Ela vai por cima de um tecido e muda de uma variante para outra, então não se liga ao produto nem ao tecido. A propriedade da variante é opcional e aceita de 0 a N registros: uma variante sem aplicação é válida.
 
-Os nomes vêm das instruções do projeto. Com `Banco de aplicações` vazio, procure o banco por conta própria no workspace conectado, pelo nome e pelas propriedades (aplicação, motivo, técnica, foto). Achou um só, use-o e diga qual. Achou mais de um de nome igual ou parecido, confirme com a pessoa qual é. Não achou nenhum, peça que ela informe o banco ou sugira criá-lo, e não crie sem o sim. Não mude a estrutura do banco.
+Os nomes vêm das instruções do projeto. Com `Banco de aplicações` vazio, use `procurar-banco-de-dados`, dizendo que o banco guarda aplicações e que precisa de nome, motivo, técnica e foto. Não mude a estrutura do banco.
 
 ### Passo 2
 
@@ -52,7 +53,7 @@ Uma flor pode ser a estampa de um tecido ou uma aplicação numa variante, e a a
 
 ### Passo 3
 
-Cadastre a aplicação com o nome, o motivo, a técnica, a foto e as variantes. Os nomes das propriedades vêm do mapeamento de dados do projeto. A foto vai em `Campo da foto da aplicação`. Com o campo vazio, procure no banco o campo de arquivo que serve: um só, use-o e diga qual; mais de um, confirme; nenhum, sugira criar o campo e não crie sem o sim.
+Cadastre a aplicação com o nome, o motivo, a técnica, a foto e as variantes. Os nomes das propriedades vêm do mapeamento de dados do projeto. A foto vai em `Campo da foto da aplicação`. Com o campo vazio, use `procurar-banco-de-dados` para achar o campo de arquivo do banco.
 
 A aplicação não é tecido e não vira linha de composição de tecido. Se ela vai na etiqueta é decisão do cadastro: pergunte à pessoa e registre a resposta no campo que o mapeamento do projeto define para isso. Sem o campo, sugira criá-lo e não crie sem o sim. Não decida sozinha. Corrigir uma aplicação ligada a mais de uma variante muda todas elas, então avise antes de gravar.
 
@@ -101,9 +102,8 @@ Se você gravar a aplicação sem a foto como se estivesse completa, o cadastro 
 Se você usar um nome de banco que o projeto não definiu, a escrita cai no banco errado.
 
 1. Leia `Banco de aplicações` nas instruções do projeto.
-2. Vazio, procure o banco no workspace conectado.
-3. Com mais de um parecido, confirme. Sem nenhum, peça ou sugira criar.
-4. Não invente um nome.
+2. Vazio, use `procurar-banco-de-dados`.
+3. Não invente um nome.
 
 ## Exemplos de entrada e saída
 
@@ -122,7 +122,7 @@ Li o banco pelo nome e pelo motivo. A aplicação existia: reaproveitei e liguei
 - A variante não tem aplicação: deixe vazio. Não exija uma.
 - A aplicação é antiga e não tem foto: não cobre, se for anterior à data de corte.
 - A aplicação serve a mais de uma variante: corrija com aviso, porque a correção vale para todas.
-- Um parâmetro de banco ou de campo está vazio nas instruções do projeto: procure no workspace conectado, confirme se houver ambiguidade e, sem nada, peça ou sugira criar.
+- Um parâmetro de banco ou de campo está vazio nas instruções do projeto: use `procurar-banco-de-dados`.
 
 ## Pegadinhas
 

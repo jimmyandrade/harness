@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.5.1"
+  version: "0.5.2"
   related:
     - acompanhar-producao-de-produto
     - definir-composicao-textil
@@ -14,6 +14,7 @@ metadata:
     - evoluir-habilidade
     - gerenciar-estoque
     - identificar-duplicata
+    - procurar-banco-de-dados
 ---
 
 # Definir tecido
@@ -24,7 +25,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ```yaml
 "Modo de aprendizado": "perguntar"
-# Nomes de banco e de campo: o projeto define. Vazios, pergunte uma vez e não escolha.
+# Nomes de banco e de campo: o projeto define. Vazios, use `procurar-banco-de-dados` antes de perguntar.
 # `Banco de tecidos`: uma página por tecido e cor, ligada à empresa e à composição.
 "Banco de tecidos": ""
 # `Banco de composição`: uma linha por percentual e fibra, como `88% PES`.
@@ -33,7 +34,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Banco de estampas": ""
 # `Campo do arquivo da ficha`: campo de arquivo do cadastro de tecidos que guarda o PDF da ficha. Vazio, o PDF vai no corpo da página, ou onde o sistema de cadastro usa para anexos.
 "Campo do arquivo da ficha": ""
-# `Campo da foto do tecido`: campo de arquivo que guarda a foto do tecido. Vazio, pergunte onde guardar e não escolha.
+# `Campo da foto do tecido`: campo de arquivo que guarda a foto do tecido. Vazio, use `procurar-banco-de-dados` para achar o campo de arquivo do banco.
 "Campo da foto do tecido": ""
 # `Data de corte da cobrança`: o tecido criado antes dela não é cobrado do que falta. Vazia, todo tecido é cobrado.
 "Data de corte da cobrança": ""
@@ -49,7 +50,7 @@ Peça a ficha técnica ou a etiqueta e o fornecedor. Sem a ficha à mão, procur
 
 Mostre o que achou, com o link de cada fonte, e redija o pedido ao fornecedor só com o que faltar.
 
-Os nomes dos bancos vêm das instruções do projeto. Com `Banco de tecidos` ou `Banco de composição` vazio, a pessoa informa o data source na execução e você não escolhe um. Se um dos dois não estiver no workspace conectado, pare. Não use o banco de outro workspace e não mude a estrutura de nenhum dos dois.
+Os nomes dos bancos vêm das instruções do projeto. Com `Banco de tecidos` ou `Banco de composição` vazio, use `procurar-banco-de-dados` para cada um, dizendo que o primeiro guarda tecidos por cor e o segundo as linhas de composição por fibra. Não mude a estrutura de nenhum dos dois.
 
 Leia o arquivo inteiro. Uma ficha de nota fiscal traz vários tecidos, cada um a partir de um cabeçalho de dados técnicos com o código e o nome do tecido. De cada tecido da ficha, tire o código, o nome, a composição, a largura, a gramatura, o rendimento, o encolhimento e os cuidados de lavar, passar e costurar.
 
@@ -142,8 +143,8 @@ Se você corrigir a composição de um tecido que veio de outra compra, o regist
 Se você usar um nome de banco que o projeto não definiu, a escrita cai no banco errado ou num que não existe.
 
 1. Leia `Banco de tecidos` e `Banco de composição` nas instruções do projeto.
-2. Vazios, pergunte uma vez qual é o banco.
-3. Não escolha um nome.
+2. Vazios, use `procurar-banco-de-dados`.
+3. Não invente um nome.
 
 ## Exemplos de entrada e saída
 
@@ -166,7 +167,7 @@ A etiqueta não tem ficha. Gravei a composição dela, com o link da fonte, e di
 - A composição vem só da etiqueta, sem ficha: grave a composição e cobre a ficha e os dados técnicos.
 - A composição está só na nota fiscal ou na cotação: grave com o link da fonte e cobre os cuidados que faltam.
 - O tecido é de antes da data de corte e não tem foto nem ficha: não cobre e não bloqueie.
-- Um banco ou o campo do arquivo está vazio nas instruções do projeto: pergunte uma vez e não escolha.
+- Um banco ou o campo da foto está vazio nas instruções do projeto: use `procurar-banco-de-dados`.
 
 ## Pegadinhas
 
