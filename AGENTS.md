@@ -1,6 +1,6 @@
 ---
 metadata:
-  version: "1.58.0"
+  version: "1.60.0"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -65,7 +65,8 @@ metadata:
 ## Execução
 
 - Execute as consultas e verificações permitidas que o pedido exige sem pedir uma confirmação que a pessoa já deu. Antes de perguntar à pessoa um fato do negócio, como um dado de cadastro, procure nas fontes conectadas, como o registro da empresa ou da pessoa. Pergunte só quando o dado faltar nessas fontes ou quando faltar uma decisão humana que mude a ação. Pergunta pede análise, não execução. Em "vale avisar?", entregue o texto, sem enviar.
-- Diante de uma falha técnica, tente as alternativas permitidas da mesma conexão antes de passar a pendência à pessoa: outra ferramenta dela e outro caminho até o mesmo objeto, como o item pai, um registro que já aponta para ele, a busca pelo título e a lixeira. A falha de uma chamada, ou a mesma chamada repetida, não prova perda de acesso. Quando o objeto não aparece, a conta conectada pode não ser a que a pessoa usa para ver, e o espaço onde ele está pode não estar compartilhado com ela. Ao passar a pendência, diga o que tentou, o que cada tentativa devolveu e a causa mais provável, como hipótese, liste os espaços que a conta conectada enxerga e pergunte em qual espaço o objeto está e se esse espaço está compartilhado com a conta conectada. Não peça mudança de permissões sem verificar o alcance do bloqueio.
+- Diante de uma falha técnica, tente as alternativas permitidas da mesma conexão antes de passar a pendência à pessoa: outra ferramenta dela e outro caminho até o mesmo objeto, como o item pai, um registro que já aponta para ele e a busca pelo título. A falha de uma chamada, ou a mesma chamada repetida, não prova perda de acesso. Quando o objeto não aparece, a conta conectada pode não ser a que a pessoa usa para ver, e o espaço onde ele está pode não estar compartilhado com ela. Ao passar a pendência, diga o que tentou, o que cada tentativa devolveu e a causa mais provável, como hipótese, liste os espaços que a conta conectada enxerga e pergunte em qual espaço o objeto está e se esse espaço está compartilhado com a conta conectada. Não peça mudança de permissões sem verificar o alcance do bloqueio.
+- A primeira busca de um objeto, como um banco, uma página ou um registro, deixa de fora a lixeira e os itens arquivados. Sem resultado, proponha à pessoa uma segunda busca na lixeira e nos arquivados antes de dizer que o objeto não existe: alguém pode ter apagado ou arquivado o objeto sem avisar. O objeto achado ali não volta sem o pedido da pessoa.
 - Resolva a referência da habilidade seguinte no catálogo conectado quando as regras do ambiente permitirem. A ausência na lista inicial não prova que ela não existe. Não peça à pessoa uma referência que já está na conversa.
 - Distinga a restrição explícita de descoberta, a busca sem resultado e o erro de permissão que a ferramenta devolveu. Não chame uma restrição das instruções de falta de acesso nem prometa que um pull request remove uma restrição do ambiente.
 - Ao receber uma correção sobre o seu comportamento, siga `evoluir-habilidade` na mesma conversa e transforme o feedback em correção no repositório de origem, não na cópia instalada, em vez de só explicar o erro. Com pedido de pull request, abra-o e diga o que mudou e o que ainda não foi validado.
@@ -105,6 +106,8 @@ metadata:
 
 - Descreva uma fonte de dados com JSON Schema e um mapeamento do Notion separado, como em `docs/adr/0001-describe-data-sources-with-json-schema.md`. Esses arquivos ficam no harness de negócio, não aqui.
 - Uma skill do core que lê uma fonte de dados do negócio fala de conceitos, como o título da edição ou o grupo de uma edição. O mapeamento de cada negócio liga esses conceitos aos nomes da lista e das propriedades. Uma propriedade sem a qual a edição não existe e que falta no mapeamento para a skill antes de ela escrever. Um valor de propriedade opcional que falta no mapeamento é listado no fim, com a sugestão de criar a propriedade: a skill nunca cria schema e nunca escreve esse valor no corpo da página.
+- Um campo legado leva `"deprecated": true` no schema, e a chave dele no mapeamento começa com `legacy_`. Quando outro campo o substitui, `"x-replaced-by"` traz a chave do campo novo, ou `<schema>.<chave>` quando ele fica em outra fonte. Quando ainda há dado a levar, `"x-migration"` diz `pending`, `blocked` ou `done`, e com `blocked` a descrição diz o motivo. Campo legado sem dado a levar não tem `x-migration`.
+- Uma skill não grava dado novo num campo `deprecated`: o dado vai para o campo de `x-replaced-by`. Apagar o campo legado na fonte, mesmo com `done`, espera o sim da pessoa.
 - Banco novo no Notion fica direto no espaço de equipe, sem página que o agrupe. Se a ferramenta só cria banco dentro de página, crie-o privado no workspace e peça à pessoa que o mova.
 - `Considerar grupos de oportunidades` diz se as skills de oportunidade usam grupos. Com `sim`, toda edição pertence a exatamente um grupo, e o verificador falha quando o mapeamento de oportunidades do negócio, `.agents/mappings/oportunidades.notion.json`, não liga `group`. Com `não`, a edição não tem grupo.
 

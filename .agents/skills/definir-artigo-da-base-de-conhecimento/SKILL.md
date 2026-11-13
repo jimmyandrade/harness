@@ -1,14 +1,15 @@
 ---
 name: definir-artigo-da-base-de-conhecimento
-description: Cria, revisa e atualiza o artigo da base de conhecimento que responde uma dúvida prática de uso, com um print abaixo de cada passo de tela. Usada quando uma dúvida vira artigo, FAQ ou como fazer, mesmo sem dizer artigo. Não serve para escrever skill, playbook, história de usuário nem tarefa.
+description: Cria, revisa e atualiza o artigo da base de conhecimento que responde uma dúvida prática de uso, com um print abaixo de cada passo de tela. Usada quando uma dúvida vira artigo, FAQ ou como fazer, mesmo sem dizer artigo. Não serve para escrever skill, política, história de usuário nem tarefa.
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.5.0"
   related:
     - criar-habilidade
     - definir-historia-de-usuario
     - definir-tarefa
+    - definir-politica
     - evoluir-habilidade
 ---
 
@@ -65,7 +66,7 @@ Só peça o nome ou o link do espaço se a busca não achar nenhum ou achar mais
 
 Antes de escrever, decida se o conteúdo é artigo.
 Artigo responde uma dúvida prática de uso: o que fazer, onde fazer e o que evitar.
-Regra operacional, especificação técnica e decisão de governança não são artigo. Avise a pessoa e siga o destino certo.
+Regra operacional, especificação técnica e decisão de governança não são artigo. Avise a pessoa e siga o destino certo: a regra operacional segue `definir-politica`.
 
 ```mermaid
 flowchart LR
@@ -73,7 +74,7 @@ flowchart LR
   Q -->|instrução para a IA| S[criar-habilidade]
   Q -->|experiência de uma pessoa| H[definir-historia-de-usuario]
   Q -->|entrega a fazer| T[definir-tarefa]
-  Q -->|regra operacional| P[Avise e pare]
+  Q -->|regra operacional| P[definir-politica]
 ```
 
 ### Passo 3
@@ -99,7 +100,7 @@ Sem a lista à mão, não decida: diga que não deu para conferir e pergunte.
 ### Passo 5
 
 Quando a dúvida envolve uma ferramenta, abra a página da ferramenta e ligue-a no campo `ferramentas`.
-Quando uma skill ou um playbook governa o tema, use as regras dele como conteúdo.
+Quando uma skill ou uma política governa o tema, use as regras dela como conteúdo e ligue a política no artigo, sem reescrever a regra.
 Não copie critérios de aceite, cenários em BDD nem a estrutura da skill para o artigo.
 O guardrail vira item de checklist, alerta ou passo.
 Quando um passo usa uma ferramenta que a pessoa só recebe depois dele, como um autenticador cujo convite chega na conta que ela ainda está ativando, dê o caminho de quem ainda não tem a ferramenta e diga quando trocar.

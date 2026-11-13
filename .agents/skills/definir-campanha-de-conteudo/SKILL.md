@@ -1,12 +1,13 @@
 ---
 name: definir-campanha-de-conteudo
-description: Use essa habilidade sempre que for criar, revisar, acompanhar ou encerrar uma campanha de conteúdo, inclusive a janela, as etapas por semana, as métricas e promover uma pauta a campanha, mesmo sem dizer campanha. NÃO use para criar os posts da campanha, conferir o mix do calendário, escrever roteiro ou legenda, nem cadastrar a data significativa.
+description: Use essa habilidade sempre que for criar, revisar, acompanhar ou encerrar uma campanha de conteúdo, inclusive a ancorada numa campanha de vendas ou de LIVE de uma plataforma, a janela, as etapas por semana, as métricas e promover uma pauta a campanha, mesmo sem dizer campanha. NÃO use para criar os posts da campanha, conferir o mix do calendário, escrever roteiro ou legenda, nem cadastrar a data significativa.
 metadata:
   author: jimmyandrade
-  version: "0.3.1"
+  version: "0.4.0"
   related:
     - evoluir-habilidade
     - planejar-calendario-de-conteudo
+    - delegar-aviso-de-plataforma
   models:
     - campanha-de-conteudo
 ---
@@ -48,7 +49,7 @@ flowchart LR
 
 Defina a janela.
 
-1. Ancore a campanha numa data significativa quando houver uma. A data de referência e o link dela vão no corpo.
+1. Ancore a campanha numa data significativa ou numa campanha de uma plataforma de vendas, como a oferta de fim de ano de um marketplace, quando houver uma. A data de referência, ou as datas da plataforma, e o link vão no corpo.
 2. Se a data de referência deste ano já passou, use a próxima ocorrência e diga a troca.
 3. A janela não se sobrepõe a outra campanha nem a outra data significativa com narrativa própria. Comece depois dela e diga o motivo.
 4. Não invente data. Sem data de referência nem janela dada pela pessoa, pergunte.
@@ -60,6 +61,8 @@ Uma pauta da lista de posts que ganhou janela própria e vários desdobramentos 
 Leia o modelo de saída `campanha-de-conteudo` quando for gerar a saída.
 
 O objetivo editorial parte das `Referências da estratégia de conteúdo`. A estratégia da campanha fica no corpo da página: conceito, promessa, público, objetivo editorial, etapas por semana, desdobramentos por formato e canal, CTA principal, cadência e decisão editorial. Cada etapa tem a função editorial, os conteúdos sugeridos e as métricas. A promessa e o CTA passam pela `Habilidade de tom de voz`.
+
+Na campanha ancorada numa plataforma, o corpo traz também o que a plataforma exige para entrar: o prazo de inscrição, o preço-alvo, o estoque, os anúncios exigidos com o custo do anúncio automático, e as LIVEs com a missão e a duração. O aviso que trouxe a campanha segue `delegar-aviso-de-plataforma`, que abre a tarefa com responsável e prazo.
 
 ### Passo 4
 
@@ -76,6 +79,7 @@ Valide antes de mostrar. Corrija e repita até passar.
 - [ ] A data de referência é deste ano ou da próxima ocorrência.
 - [ ] Cada etapa tem função editorial, conteúdos sugeridos e métricas.
 - [ ] O status bate com a janela.
+- [ ] A campanha de plataforma traz prazo de inscrição, preço-alvo, estoque, anúncios e LIVEs.
 
 Mostre o link da página, a janela no `Formato da data com dia da semana`, o status e o que ficou pendente.
 
@@ -126,6 +130,7 @@ A pauta virou campanha, com a origem registrada no corpo. A data do ano corrente
 - A janela já começou e o status diz planejada: mude para em andamento e diga.
 - A pessoa pede os posts da campanha: siga `planejar-calendario-de-conteudo`.
 - A data significativa ainda não está na lista: peça para cadastrar antes de ancorar.
+- A campanha da plataforma já passou: registre como perdida no corpo da próxima edição, quando houver, e não abra tarefa.
 
 ## Pegadinhas
 
@@ -133,6 +138,7 @@ A pauta virou campanha, com a origem registrada no corpo. A data do ano corrente
 - A data de referência copiada de outro ano parece valer. Ela é da próxima ocorrência.
 - Uma data significativa sem campanha parece deixar a janela livre. Ela pode ter narrativa própria.
 - O status planejada parece permanente. Ele muda quando a janela começa e quando termina.
+- Entrar na campanha de uma plataforma parece grátis. Algumas exigem anúncio ativo e cobram um anúncio automático de quem não configura a tempo.
 
 ## Scripts disponíveis
 

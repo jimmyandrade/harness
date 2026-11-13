@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "blocked-sender",
+  "title": "Blocked sender",
+  "description": "One decision to block a sender of unwanted email: an address or a whole domain, the node of the decision tree that classified it, and why. One record per value. The data lives in a source of record that the project names, never in this repository.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "value",
+    "kind",
+    "block_chrome_url",
+    "node",
+    "decided_by"
+  ],
+  "properties": {
+    "value": {
+      "description": "The full email address or the domain that is blocked, always in lowercase. It is stored with [.] in place of each dot and [@] in place of each at sign, so no tool turns it into a link, and the lists to paste restore them.",
+      "type": "string",
+      "minLength": 1
+    },
+    "kind": {
+      "description": "What the value is. An address blocks one sender. A domain blocks every address on it.",
+      "type": "string",
+      "enum": [
+        "address",
+        "domain"
+      ]
+    },
+    "block_chrome_url": {
+      "description": "Whether the domain also goes in the browser block list of URLs. It is a choice, never a checkbox: yes and no are decisions of the person, and maybe is a decision that still waits for an answer. Always no for an address.",
+      "type": "string",
+      "enum": [
+        "yes",
+        "no",
+        "maybe"
+      ]
+    },
+    "node": {
+      "description": "The node of the decision tree that classified the value.",
+      "type": "string",
+      "enum": [
+        "free_provider",
+        "shared_platform",
+        "impersonated_brand",
+        "dedicated_domain",
+        "cold_outreach"
+      ]
+    },
+    "reason": {
+      "description": "Why the value was blocked, in one sentence.",
+      "type": "string"
+    },
+    "display_name": {
+      "description": "The name the sender showed in the message.",
+      "type": "string"
+    },
+    "decided_by": {
+      "description": "The person who decided, always asked for and never assumed.",
+      "type": "string"
+    },
+    "decided_at": {
+      "description": "The date of the decision, as an object with start.",
+      "type": "object",
+      "required": [
+        "start"
+      ],
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    }
+  }
+}

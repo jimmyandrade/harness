@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet. A busca na lista de inscrições usa notion-ai-search no servidor notion.
 metadata:
   author: jimmyandrade
-  version: "0.10.0"
+  version: "0.11.0"
   aliases:
     - atualizar-inscricao
   related:
@@ -55,7 +55,7 @@ Sem quem fez a inscrição e sem a pessoa ou empresa, exija essas marcações. N
 
 Na linha que já existe, mude só a propriedade que a pessoa nomeou. Na linha nova, grave a edição, o status, quem fez a inscrição, a pessoa ou empresa e a foto nos comprovantes. Sem esses dois, não cadastre.
 
-Quando a mensagem ou a foto confirma a participação, o status da inscrição passa ao de inscrição confirmada. O valor é um status que a lista já tem. Não invente status. Não escreva o status nas observações nem no corpo.
+Quando a mensagem ou a foto confirma a participação, o status da inscrição passa ao de inscrição confirmada. Se a própria plataforma avisa que registrar interesse não garante participação, o status é o de pré-cadastro até a organização selecionar. O valor é um status que a lista já tem. Não invente status. Não escreva o status nas observações nem no corpo.
 
 A foto do pedido que ela enviou entra nos comprovantes na mesma gravação, mesmo sem ela nomear essa propriedade. Não grave a foto no corpo. O arquivo sobe por upload e entra numa atualização da página depois de criá-la: a criação não aceita o arquivo enviado.
 

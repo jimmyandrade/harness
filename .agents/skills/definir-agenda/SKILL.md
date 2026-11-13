@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.49.1"
+  version: "0.51.0"
   related:
     - convidar-para-evento
     - definir-agenda-de-popstar
@@ -188,11 +188,13 @@ Evento presencial com convidado: leia o evento depois de criar. O Google Agenda 
 Ligação telefônica leva na descrição o nome e o telefone de quem vai ligar ou atender do outro lado, para remarcar sem depender de memória. Sem o número, peça a quem atendeu a ligação que combinou o horário: o histórico de chamadas do celular tem o número, e a gravação, se houver, tem o combinado. Grave o número também no cadastro da pessoa.
 Compromisso a que uma pessoa ou um grupo deve ser convidado, como uma reunião combinada numa conversa do WhatsApp: depois de criar o evento, siga `convidar-para-evento`, que manda o convite pelos canais que alcançam a pessoa.
 
-Antes de criar o evento de uma viagem, de uma montagem ou de um ponto de contato de que participa mais de uma pessoa, pergunte quem entra como convidado e por qual e-mail, inclusive a pessoa que usa a agenda. Se o projeto registra quem atua em cada ponto, leia esse cadastro e proponha a equipe, como quem foi nas edições anteriores. Sem cadastro, diga que ele falta e recomende o campo, sem criá-lo. Sem a resposta, o evento não sai sem convidado.
+Antes de criar o evento de uma viagem, de uma hospedagem, de uma montagem ou de um ponto de contato de que participa mais de uma pessoa, pergunte quem entra como convidado e por qual e-mail, inclusive a pessoa que usa a agenda. Se o projeto registra quem atua em cada ponto ou quem viaja, leia esse cadastro e proponha a equipe, como quem foi nas edições anteriores. Sem cadastro, diga que ele falta e recomende o campo, sem criá-lo. Sem a resposta, o evento não sai sem convidado.
+Cada hospedagem tem dois eventos com hora, o check-in e o check-out, lidos das propriedades dela, e convida as pessoas da viagem. O evento que o e-mail da reserva cria sozinho no Google Agenda não aparece para a ferramenta e não se edita: crie o próprio.
 O e-mail que a organização do ponto passou, e os ligados ao evento, entram no convite do evento do ponto. O evento da montagem convida só quem monta, e não a organização.
 
 O horário da montagem, da entrada e da abertura é da organização do ponto, e não da pessoa. Ache a mensagem, o manual ou o e-mail que o traz antes de perguntar, e escreva na descrição do evento a fonte, o canal e, se houver, o link dela.
 A saída que a pessoa definiu para a viagem e a janela de montagem que ela escolheu entre as da organização viram evento na agenda. O que só está previsto, ou a janela que sobrou, fica no cronograma.
+O término de uma montagem ou de uma desmontagem vem da duração que a pessoa mediu nas edições anteriores. Sem medida, diga que ela nunca foi medida, não invente o término e peça a duração real depois do evento, para o próximo.
 
 Com `Pauta obrigatória em evento com convidados` em `sim`, a descrição de um evento com convidados leva uma pauta clara.
 Sem pauta na conversa, pergunte antes de criar.

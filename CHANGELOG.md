@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.80.0](https://github.com/jimmyandrade/harness/compare/v1.79.0...v1.80.0) (2026-11-13)
+
+
+### Features
+
+* **definir-okr:** record every target change in the key result comments with the reason ([#1085](https://github.com/jimmyandrade/harness/issues/1085)) ([bc2bf55](https://github.com/jimmyandrade/harness/commit/bc2bf55d1331c1447811e5966e15d12b14147dae))
+
 ## [1.79.0](https://github.com/jimmyandrade/harness/compare/v1.78.0...v1.79.0) (2026-11-13)
 
 
