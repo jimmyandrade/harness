@@ -3,7 +3,7 @@ name: bloquear-remetente-de-spam
 description: Classifica remetentes de spam por uma árvore de decisão, grava a decisão no banco do negócio e entrega as listas para colar no bloqueio de remetentes do Gmail e de URL do Chrome do Admin do Google. Usada quando a pessoa cola ou cita remetentes para bloquear. NÃO serve para filtro de caixa, marcar mensagem como spam nem salvar no Admin.
 metadata:
   author: jimmyandrade
-  version: "0.2.3"
+  version: "0.2.4"
   related:
     - definir-filtro-de-email
     - organizar-emails
@@ -61,7 +61,7 @@ Limpe a lista antes de tudo: tire o texto do botão que veio colado junto, como 
 
 Leia o banco e tire da lista o que já tem decisão, por endereço ou por domínio. Um endereço sob um domínio já bloqueado também sai. Diga quantos saíram.
 
-Se a tela de remetentes estiver aberta no navegador, na conta certa, leia a lista que ela já tem, só para ler, e tire também o que já está lá. O que está só na tela e falta no banco é decisão antiga da pessoa: pergunte quem decidiu e quando antes de gravar.
+Se a tela de remetentes estiver aberta no navegador, na conta certa, leia a lista que ela já tem, só para ler, e tire também o que já está lá. A tela de URL do Chrome vale o mesmo: leia a caixa de texto dela antes de entregar a lista. O que está só na tela e falta no banco é decisão antiga da pessoa: pergunte quem decidiu e quando antes de gravar.
 
 ### Passo 3
 
@@ -188,6 +188,7 @@ A skill tira o texto do botão, separa 180 endereços e 3 já registrados no ban
 ## Pegadinhas
 
 - A tela de remetentes mostra 10 linhas por página, e o seletor chega a 100. Ela aceita domínio e endereço na mesma lista e tem um botão para adicionar em massa.
+- A tela de URL do Chrome é uma só caixa de texto, com um URL por linha e limite de mil, que aceita domínio. Ela já pode ter URLs que a pessoa bloqueou por outro motivo, como sites de ferramentas, e colar a lista inteira por cima repete as entradas. Com o botão Salvar apagado, não há mudança pendente.
 - Logo depois de salvar, o texto da página pode trazer a contagem antiga. Recarregue, com a caixa de edição fechada, porque recarregar com ela aberta descarta o que não foi salvo.
 - Na caixa de edição, o botão de adicionar endereço fica ao lado da seta de página, e um clique por coordenada acrescenta uma linha em branco. Troque de página pelo rótulo "Ir para a próxima página".
 - O texto colado do Gmail traz "desbloquear" grudado no fim do endereço, e há linhas sem nome e sem colchetes.
