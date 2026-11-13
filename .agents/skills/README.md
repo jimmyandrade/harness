@@ -204,7 +204,11 @@ flowchart LR
   acompanhar_resposta_no_whatsapp --> rotular_item
   acompanhar_resposta_no_whatsapp --> usar_whatsapp_web
   acompanhar_retornos_pendentes --> acompanhar_resposta_no_whatsapp
+  acompanhar_retornos_pendentes --> definir_hospedagem
+  acompanhar_retornos_pendentes --> definir_negociacao
+  acompanhar_retornos_pendentes --> definir_obrigacao_financeira
   acompanhar_retornos_pendentes --> definir_rotina
+  acompanhar_retornos_pendentes --> definir_tarefa
   acompanhar_retornos_pendentes --> enviar_email
   acompanhar_retornos_pendentes --> organizar_emails
   acompanhar_retornos_pendentes --> rotular_item
