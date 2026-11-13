@@ -3,7 +3,7 @@ name: usar-whatsapp-web
 description: Abre, mantém e reaproveita a única aba do WhatsApp Web no Chrome da pessoa, pela extensão Claude in Chrome, e faz a sessão dona atender as leituras e os envios das outras sessões. Usada sempre que uma habilidade precisa abrir, ler, enviar texto, anexar imagem ou documento no WhatsApp Web, mesmo sem dizer aba. Não serve para achar a conversa, redigir a mensagem, rotular nem decidir o que enviar.
 metadata:
   author: jimmyandrade
-  version: "0.5.1"
+  version: "0.6.0"
   related:
     - acompanhar-resposta-no-whatsapp
     - conversar-no-whatsapp
@@ -58,6 +58,15 @@ Num atendimento automático, como um robô com menu que pede um dado ou oferece 
 Depois que o robô transfere para um atendente, a dona lê a conversa em esperas que dobram a partir de 10 segundos e avisa a pessoa de cada mensagem do atendente. Ele costuma pedir dados e dar uma janela curta, como 5 minutos, antes de encerrar a conversa: a dona leva à pessoa o rascunho da resposta já com os dados e o prazo da janela. Os dados cadastrais, como razão social e telefone, vêm da página da empresa e da pessoa responsável no data source, pelo Chrome quando o conector não está na sessão: ela os consulta antes de perguntar à pessoa.
 
 Com `Notas de comunicação no contato` em `sim`, a dona grava no campo de notas do contato, "Adicione notas sobre seu cliente." na conta comercial, o que a conversa ensinou sobre como falar com ele: o caminho do menu, o horário do atendimento, a janela de resposta e o e-mail de apoio, com a data. Ela lê o campo antes e acrescenta, sem apagar. Senha, código e documento de pessoa não entram.
+
+Quando o contexto da dona está perto de lotar, ela avisa a pessoa antes, para dar tempo de abrir a sessão seguinte: diga o que a sessão ainda faz e peça para abrir a nova. Uma dona lotada é arquivada, e a aba e o login se perdem com ela.
+
+A dona nova é uma sessão nova, aberta com um brief completo, porque ela não herda a conversa. O brief diz:
+- a aba é uma só, no Claude in Chrome, no grupo que a sessão já tem, e a dona nova a abre depois de listar as abas;
+- só a dona envia, e o sim da pessoa vale na conversa da própria dona, nunca em outra sessão;
+- as outras sessões pedem leitura por mensagem entre sessões;
+- a mensagem enviada se edita por 15 minutos: a dona usa esse prazo para corrigir um texto errado;
+- a lista de pendências herdada: o que a dona anterior esperava, como resposta de contato, envio com sim já dado e atendimento aberto.
 
 Com `não`, cada sessão abre a própria aba, uma só.
 
@@ -133,6 +142,14 @@ Se você assumir o título ao mesmo tempo que outra sessão, a lista mostra duas
 3. A outra devolve o título, renomeia a sessão para o assunto dela e encaminha o pedido à que ficou.
 4. Não arquive nenhuma sem o sim da pessoa.
 
+### Dona lotada sem aviso
+
+Se você, sendo a dona, encher o contexto sem avisar a pessoa, a sessão é arquivada no meio do trabalho, a aba e o login se perdem e as pendências ficam sem dono.
+
+1. Avise a pessoa antes de lotar, com o que está pendente.
+2. Peça uma sessão nova com o brief que o Passo 2 lista.
+3. A dona nova lista as abas, abre uma só e assume o título.
+
 ### Pedido recusado por não ser a dona
 
 Se você receber o pedido de outra sessão, a dona estiver arquivada e você responder que não é a dona, ninguém lê a conversa e o pedido volta à pessoa, que repete a mesma tentativa.
@@ -198,7 +215,8 @@ Mostrei o CNPJ como o passo seguinte e pedi o sim, sem dizer que ia falhar. Com 
 ## Casos-limite
 
 - O robô oferece várias opções de menu e a pessoa quer esgotá-las: tente uma de cada vez, na ordem que ela disser, e relate cada resposta. Só se envia o que o sim cobre.
-- A dona foi arquivada ou o app reiniciou: a aba e o login se perderam. Abra a aba de novo e torne-se a dona; se pedir o QR code, siga o Passo 3.
+- A dona foi arquivada ou o app reiniciou: a aba e o login se perderam. Abra a aba de novo e torne-se a dona, com o brief e as pendências herdadas do Passo 2; se pedir o QR code, siga o Passo 3.
+- A dona está perto de lotar o contexto: avise a pessoa antes, para ela abrir a próxima. Não espere o arquivamento.
 - Outra sessão pede uma leitura a você e a lista não tem dona: torne-se a dona e atenda. Com o pedido de envio, mostre a conversa e o texto à pessoa na sua conversa e espere o sim ali.
 - Duas sessões com o título da dona: fica a de `sessionId` menor em ordem alfabética. A outra devolve o título e renomeia a sessão para o assunto dela.
 - A extensão não responde: diga isso e peça para a pessoa abrir o Chrome.
@@ -207,6 +225,7 @@ Mostrei o CNPJ como o passo seguinte e pedi o sim, sem dizer que ia falhar. Com 
 
 ## Pegadinhas
 
+- A dona lotada some sem aviso para quem não olha o contexto dela. A dona nova só herda o que o brief e a lista de pendências dizem: sem eles, o envio com sim já dado se perde.
 - A aba que a pessoa já deixou aberta pode estar fora das abas que você controla. O botão do aviso passa a conexão para a sua aba, e a aba dela fica desconectada sem perder o login.
 - O WhatsApp Web leva alguns segundos para carregar. A primeira leitura pode mostrar só a tela de carregamento.
 - A imagem enviada pela entrada que já existe na página vira figurinha, mesmo com a pré-visualização aberta. O campo de legenda é o que diferencia.
