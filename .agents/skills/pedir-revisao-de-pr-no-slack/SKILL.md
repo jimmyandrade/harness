@@ -3,7 +3,7 @@ name: pedir-revisao-de-pr-no-slack
 description: Redige o pedido de revisão de um pull request para o canal do time no Slack e entrega o rascunho com o link da thread, usando enviar-mensagem-no-slack. Usada quando o PR está pronto e a organização pede revisão pelo Slack, ou quando a pessoa pede apoio para revisar. Não serve para revisar o PR nem para outra mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.8.0"
+  version: "0.9.1"
   related:
     - criar-pull-request
     - enviar-mensagem-no-slack
@@ -33,8 +33,10 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 # `Exigir card` é `sim` quando o pedido só sai com o link do card do rastreador.
 "Exigir card": "sim"
 "Autorrevisar o diff antes de pedir": "não"
-# `Horário de trabalho` traz os dias, as horas e o fuso em que o pedido sai na hora. Fora dele, o pedido é agendado para o início do próximo horário de trabalho. Vazio, o pedido sai na hora.
+# `Horário de trabalho` e `Fuso horário` são globais: valem o da entrada `Global` das instruções do projeto, para todas as habilidades que leem horário.
+# Fora do `Horário de trabalho`, o pedido é agendado para o início do próximo. Vazio, o pedido sai na hora.
 "Horário de trabalho": ""
+"Fuso horário": ""
 # `Respeitar a agenda`: com `sim`, o horário agendado pula a ausência e o foco da pessoa.
 "Respeitar a agenda": "não"
 "Modo de aprendizado": "perguntar"
@@ -78,7 +80,11 @@ Num PR já mesclado, ele leva o endereço do ambiente onde o trabalho está, com
 
 ### Passo 5
 
-Entregue o rascunho e o link do canal, ou da thread, como diz `enviar-mensagem-no-slack`, e cite o PR no chat como manda `escrever-link`. Não envie sem o sim da pessoa. Fora do `Horário de trabalho`, o pedido não sai na hora: agende-o com a ferramenta de agendamento do Slack para o início do próximo horário de trabalho, no fuso desse parâmetro e, com `Respeitar a agenda` em `sim`, depois da ausência e do foco. Antes, mostre o texto exato e o horário agendado no fuso da pessoa: o sim autoriza esse texto e esse horário. Uma mensagem agendada não é resposta numa thread que ainda não existe. A resposta diz o horário agendado. Quem recebe o pedido por mensagem direta é orientado a usar o canal, para o pedido ter mais visibilidade e entrar no rodízio.
+Entregue o rascunho e o link do canal, ou da thread, como diz `enviar-mensagem-no-slack`, e cite o PR no chat como manda `escrever-link`. Não envie sem o sim da pessoa. Fora do `Horário de trabalho`, o pedido não sai na hora: agende-o com a ferramenta de agendamento do Slack para o início do próximo horário de trabalho, no `Fuso horário` e, com `Respeitar a agenda` em `sim`, depois da ausência e do foco.
+
+Antes, mostre o texto exato e o horário agendado no fuso da pessoa: o sim autoriza esse texto e esse horário. Uma mensagem agendada não é resposta numa thread que ainda não existe. A resposta diz o horário agendado.
+
+Quem recebe o pedido por mensagem direta é orientado a usar o canal, para o pedido ter mais visibilidade e entrar no rodízio.
 
 ### Passo 6
 

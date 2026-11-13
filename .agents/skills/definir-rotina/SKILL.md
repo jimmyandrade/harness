@@ -3,7 +3,7 @@ name: definir-rotina
 description: Cria, revisa e audita rotinas agendadas ou por evento, para rodarem só quando o resultado tem uso. Usada ao pedir, mudar ou auditar uma rotina, ou antes de pedir de novo um resultado que uma rotina já gerou, mesmo sem dizer rotina. Não serve para executar o trabalho da rotina, criar evento na agenda nem medir uma skill.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.7.1"
   related:
     - acompanhar-fila-de-revisao
     - acompanhar-resposta-no-whatsapp
@@ -19,9 +19,10 @@ metadata:
 Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco, depois nas instruções de usuário. Quando um valor não estiver lá, use o padrão abaixo.
 
 ```yaml
-# `Horário comercial` traz os dias e as horas em que uma pessoa pode responder a um aviso.
-"Horário comercial": "dias úteis, das 9h às 18h"
-# `Janela de manutenção` traz os dias e as horas da limpeza, da atualização de status e do processamento pesado, fora do `Horário comercial`.
+# `Horário de trabalho` e `Fuso horário` são globais: valem o da entrada `Global` das instruções do projeto, para todas as habilidades que leem horário.
+# Uma pessoa só responde a um aviso dentro do `Horário de trabalho`. Vazio, pergunte o horário antes de agendar uma rotina que avisa alguém.
+"Horário de trabalho": ""
+# `Janela de manutenção` traz os dias e as horas da limpeza, da atualização de status e do processamento pesado, fora do `Horário de trabalho`.
 "Janela de manutenção": "dias úteis, das 0h às 6h"
 "Fuso horário": ""
 # `Cadência de relatório` é `diária`, `semanal`, `mensal` ou outra que a pessoa der.
@@ -66,7 +67,7 @@ Relatório, resumo e consolidação rodam na `Cadência de relatório`.
 
 ### Passo 4
 
-Uma rotina que avisa uma pessoa, lê caixa de entrada ou manda mensagem roda só no `Horário comercial`, no `Fuso horário`.
+Uma rotina que avisa uma pessoa, lê caixa de entrada ou manda mensagem roda só no `Horário de trabalho`, no `Fuso horário`.
 Fora dele, ninguém responde ao aviso, e a execução só gasta.
 Limpeza, atualização de status e processamento pesado que não avisam ninguém rodam na `Janela de manutenção`, para não disputar com o trabalho das pessoas.
 Quando várias pessoas precisam do mesmo resultado, a rotina publica num canal compartilhado, em vez de cada uma pedir o mesmo numa conversa.
@@ -136,11 +137,11 @@ Os editais não precisam ser lidos no fim de semana. A rotina foi criada para os
 
 ### Audite as minhas rotinas
 
-Três rotinas liam a mesma caixa de e-mail, e uma rodava de madrugada para avisar a equipe. Propus juntar as três numa rotina só, no horário comercial, e pausar a de um projeto encerrado. Apliquei depois da confirmação.
+Três rotinas liam a mesma caixa de e-mail, e uma rodava de madrugada para avisar a equipe. Propus juntar as três numa rotina só, no horário de trabalho, e pausar a de um projeto encerrado. Apliquei depois da confirmação.
 
 ## Casos-limite
 
-- O resultado precisa ser fresco, como um alerta de queda do site: a rotina roda fora do horário comercial, e a resposta diz por quê.
+- O resultado precisa ser fresco, como um alerta de queda do site: a rotina roda fora do horário de trabalho, e a resposta diz por quê.
 - A pessoa pede para apagar: confirme se pausar não basta antes de apagar.
 - A ferramenta não oferece gatilho: use a menor frequência que atende quem usa o resultado.
 
