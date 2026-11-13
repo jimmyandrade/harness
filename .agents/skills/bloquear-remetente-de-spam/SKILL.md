@@ -3,7 +3,7 @@ name: bloquear-remetente-de-spam
 description: Classifica remetentes de spam por uma árvore de decisão, grava a decisão no banco do negócio e entrega as listas para colar no bloqueio de remetentes do Gmail e de URL do Chrome do Admin do Google. Usada quando a pessoa cola ou cita remetentes para bloquear. NÃO serve para filtro de caixa, marcar mensagem como spam nem salvar no Admin.
 metadata:
   author: jimmyandrade
-  version: "0.1.1"
+  version: "0.1.2"
   related:
     - definir-filtro-de-email
     - organizar-emails
@@ -92,7 +92,11 @@ Grave o valor sem que uma ferramenta possa torná-lo um link: troque cada ponto 
 
 ### Passo 6
 
-Entregue duas listas, uma por tela do Admin, prontas para colar, uma entrada por linha: os endereços e os domínios para a tela de remetentes bloqueados do Gmail, e só os domínios com `sim` na URL do Chrome, com o ponto e o arroba de volta. Os de `talvez` ficam de fora e saem numa lista à parte, para a pessoa decidir. Escreva cada entrada em formato de código, nunca como link, para a pessoa não abrir o site de quem escreve. Nunca entre na tela do Admin para alterá-la: é configuração de segurança da organização, e quem cola e salva é a pessoa. Diga quantas entradas há em cada lista e o que ficou sem decisão.
+Entregue duas listas, uma por tela do Admin, prontas para colar, uma entrada por linha: os endereços e os domínios para a tela de remetentes bloqueados do Gmail, e só os domínios com `sim` na URL do Chrome, com o ponto e o arroba de volta. Os de `talvez` ficam de fora e saem numa lista à parte, para a pessoa decidir.
+
+Escreva cada entrada em formato de código, nunca como link, para a pessoa não abrir o site de quem escreve.
+
+Nunca entre na tela do Admin para alterá-la: é configuração de segurança da organização, e quem cola e salva é a pessoa. Diga quantas entradas há em cada lista e o que ficou sem decisão.
 
 ### Passo 7
 
