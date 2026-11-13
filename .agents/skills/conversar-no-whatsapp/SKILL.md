@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.37.4"
+  version: "0.37.5"
   aliases:
     - redigir-mensagem-de-whatsapp
   related:
@@ -58,7 +58,7 @@ Leia os valores nas instruções do projeto, na entrada desta habilidade. Na aus
 "Fechamento em mensagem separada": "sim"
 # `Página de instruções do WhatsApp` é o endereço da página com as regras da conta, como a ferramenta comercial por onde a mensagem sai. Vazio pula a leitura.
 "Página de instruções do WhatsApp": ""
-# `Horário de trabalho` vale o da entrada `Global` das instruções. Fora dele, a mensagem pede desculpa pelo horário. Vazio, não pede.
+# `Horário de trabalho`: o da entrada `Global`. Fora dele, a mensagem pede desculpa pelo horário. Vazio, não pede.
 "Horário de trabalho": ""
 ```
 ## Instruções
@@ -105,9 +105,9 @@ Para registrar a demanda, leve a data e o horário da primeira mensagem do pedid
 
 ### Passo 5
 
-Antes de rascunhar, leia a conversa de destino desde a última mensagem que você leu nela, seguindo o Passo 2, e confira cada pergunta do rascunho contra a conversa inteira, inclusive a mensagem que ela cita. A pergunta já respondida sai, mesmo quando outra fonte mais antiga diverge: mostre a divergência à pessoa, não ao contato. Tire também o que já foi dito e diga, antes do texto, o que o texto acrescenta. Se tudo já foi dito, diga isso e não rascunhe.
+Antes de rascunhar, leia a conversa de destino desde a última mensagem lida, pelo Passo 2, e confira cada pergunta do rascunho contra ela inteira, inclusive a mensagem citada. A pergunta já respondida sai, mesmo quando outra fonte mais antiga diverge: mostre a divergência à pessoa, não ao contato. Tire também o que já foi dito e diga antes o que o texto acrescenta. Se tudo já foi dito, diga isso e não rascunhe.
 
-Confira no manual da oportunidade cada pergunta sobre exigência do organizador, como janela de montagem, e use a janela que ele dá.
+Confira no manual da oportunidade cada exigência do organizador, como a janela de montagem, e use a que ele dá.
 
 Abra com a saudação do período, lido no relógio, e uma frase de contexto. Fora do `Horário de trabalho`, peça desculpa pelo horário.
 
@@ -120,7 +120,7 @@ Todo rascunho de mensagem aparece na resposta do chat. Leia o modelo de saída `
 Não diga só que o rascunho está pronto.
 O texto vai na mensagem de fechamento do turno, a última que a pessoa lê, junto com o pedido do sim: o texto escrito antes de um quadro de próximo passo pode ser cortado.
 Uma mensagem que diz que um trabalho está em andamento, foi registrado ou foi feito leva o link da tarefa, da página ou do pull request que mostra esse registro. Sem esse registro, crie-o antes, como `definir-tarefa` manda, ou pergunte onde ele está.
-Com a ferramenta de widget na sessão, o widget vem sempre, além dos blocos, como o modelo de saída diz. Não o trate como opcional.
+Com a ferramenta de widget na sessão, o widget vem sempre, além dos blocos, como o modelo de saída diz.
 Sem o texto à vista, não pergunte se pode enviar.
 
 Com `Dividir em mensagens curtas` em `sim`, como as pessoas costumam escrever no WhatsApp, divida o rascunho em mensagens, uma por ideia.
