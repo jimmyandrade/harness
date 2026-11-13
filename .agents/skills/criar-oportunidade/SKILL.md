@@ -1,19 +1,19 @@
 ---
 name: criar-oportunidade
-description: Use essa habilidade sempre que for cadastrar uma oportunidade que ainda não existe, ou revisar o conteúdo, o corpo ou as anotações da edição, mesmo sem dizer cadastrar. NÃO use para o grupo, saber se ela já existe, organizar a participação, inscrever, criar a tarefa, nem reconhecer o texto de uma imagem.
+description: Use essa habilidade sempre que for cadastrar uma oportunidade que ainda não existe, mesmo sem dizer cadastrar. NÃO use para revisar a edição, o grupo, a programação, saber se ela já existe, organizar a participação, inscrever, criar a tarefa, nem reconhecer o texto de uma imagem.
 allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-pages notion:notion-update-page
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.23.0"
+  version: "0.24.1"
   related:
     - procurar-oportunidade
     - definir-empresa
     - definir-local-fisico
     - definir-localidade-geografica
-    - criar-ideia-de-conteudo
-    - definir-tarefa
     - definir-grupo-de-oportunidades
+    - definir-cronograma
+    - revisar-oportunidade
     - definir-inscricao
     - organizar-emails
     - triar-conversas
@@ -38,7 +38,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 A lista de oportunidades e o nome de cada propriedade vêm do mapeamento de dados do projeto, no workspace conectado. Se a lista não estiver nessa conexão, pare. Não use a lista de outro workspace. Este texto usa os conceitos: o título da edição, a data da edição, o grupo da edição, as variações de nome, os perfis da edição, o ingresso do visitante, a taxa do expositor, o link de inscrição, o e-mail da organização, os links não oficiais, a empresa ou local, a localidade, a etiqueta de e-mail da edição, os anexos da edição, as notas de curadoria e a decisão humana.
 
-Saber se já existe fica com `procurar-oportunidade`. Se a edição existe e o pedido é cadastrar, mostre essa página, anexe o cartaz que ainda não está nos anexos da edição, e pare. Não crie outra. Se o pedido é revisar, limpar, enriquecer, consolidar, reorganizar ou atualizar a edição, o conteúdo, o corpo ou as anotações, siga nessa página. O grupo fica com `definir-grupo-de-oportunidades`.
+Saber se já existe fica com `procurar-oportunidade`. Se a edição existe e o pedido é cadastrar, mostre essa página, anexe o cartaz que ainda não está nos anexos da edição, e pare. Não crie outra. Revisar, limpar, enriquecer, consolidar, reorganizar ou atualizar uma edição que já existe, o conteúdo, o corpo ou as anotações, segue `revisar-oportunidade`. O grupo fica com `definir-grupo-de-oportunidades`.
 
 ### Passo 2
 
@@ -74,18 +74,7 @@ O título e a síntese descrevem a oferta: chamada, edição, modalidade, data, 
 
 O arquivo do cartaz, do print da divulgação ou do comunicado desta data vai nos anexos da edição, na mesma gravação, sem pedir confirmação. Preserve os arquivos que já estão lá e não anexe o mesmo arquivo de novo. Use a referência de arquivo aceita pela ferramenta: o ID do anexo da conversa pode não ser um ID de arquivo do Notion. Se o pedido só consulta a edição, ofereça anexar e não grave. Sem os anexos da edição no mapeamento, liste o arquivo no fim, como valor sem propriedade.
 
-Consultar uma programação é leitura; não é inscrição nem escolha de participação. Retome a fonte oficial já identificada sem pedir nova autorização para a consulta solicitada. Carregue o conteúdo completo antes de apresentar a programação como completa. Timeout na leitura rápida não é prova de indisponibilidade: use uma leitura mais completa oferecida pela mesma ferramenta. Não invente horários, palestrantes ou salas a partir de trechos de busca.
-
-```mermaid
-flowchart LR
-  P{O pedido sobre a programação é?} -->|consultar| L[Leia a fonte e responda sem gravar]
-  P -->|armazenar no cronograma ligado| C[Registre as sessões na relação existente]
-  P -->|escolher participação| H[Deixe a decisão com a pessoa]
-```
-
-No armazenamento solicitado, carregue o esquema do cronograma e consulte os itens já ligados à edição antes de criar. Registre uma sessão por item, com o vínculo para a oportunidade, início e fim planejados no fuso do evento e ordem de leitura. Preserve sessões simultâneas, repetições em horários diferentes e atividades fechadas, com a restrição explícita. Guarde eixo, palestrante informado e URL da fonte no contexto complementar; datas, horários e local ficam nas propriedades próprias. Ausência de palestrante ou de sala permanece ausência. Não confunda programação publicada com presença escolhida, inscrição, tarefa ou compromisso no calendário. O pedido de guardar para escolher depois não autoriza bloquear a agenda nem selecionar sessões.
-
-Teste uma sessão real do pedido com todas as propriedades pretendidas antes de enviar o lote. Reaproveite o registro de teste e não o crie de novo. Examine o resultado por item, não apenas o sucesso da chamada. Campo opcional rejeitado interrompe a repetição do mesmo lote: confira o formato documentado e teste uma correção num único item. Persistindo a rejeição, grave os outros campos e informe a lacuna, sem alterar a estrutura, inventar coordenadas ou mover o local para texto livre. Retome só os itens que não foram gravados; preserve os sucessos parciais. Compare as sessões da fonte com os itens vinculados, seus nomes, início e fim antes de afirmar completude. Não use a quantidade de atividades do anúncio como quantidade da programação publicada.
+As etapas do cronograma da edição, inclusive a programação publicada, seguem `definir-cronograma`. Esta habilidade não as grava.
 
 ### Passo 6
 
@@ -93,7 +82,7 @@ Não preencha fórmula, rollup nem botão. Não invente categoria nem prioridade
 
 O ingresso do visitante é o que paga quem visita. A taxa do expositor é o que paga quem expõe. Gratuidade para um público restrito, como compradores credenciados, não preenche nenhuma das duas.
 
-Quando a taxa da marca varia entre 1 dia e 2 dias, preencha os dois campos numéricos de taxa por duração. O campo de texto da taxa só recebe taxa variável ou condicional, como a partir de, lote, porcentagem ou metragem. A propriedade de taxa é a fonte prioritária: o valor achado em notas, transcrição, PDF ou formulário migra para ela e some da nota quando fica redundante, mas a fonte fica se for preciso para auditoria (veja o bloco de anotações no Passo 7). Taxa nunca vai no corpo.
+Quando a taxa da marca varia entre 1 dia e 2 dias, preencha os dois campos numéricos de taxa por duração. O campo de texto da taxa só recebe taxa variável ou condicional, como a partir de, lote, porcentagem ou metragem. A propriedade de taxa é a fonte prioritária: o valor achado em notas, transcrição, PDF ou formulário migra para ela e some da nota quando fica redundante, mas a fonte fica se for preciso para auditoria. Taxa nunca vai no corpo.
 
 Sem URL no texto, o link de inscrição fica vazio. O e-mail da organização vai na propriedade dele. Links não oficiais recebem só URL.
 
@@ -105,13 +94,7 @@ A etiqueta de e-mail da edição guarda o nome inteiro da etiqueta que a caixa a
 
 ### Passo 7
 
-Na edição, bloco de anotações, reunião, transcrição, resumo ou outro bloco de notas da pessoa fica inteiro. Não sugira apagar, arquivar, substituir, ocultar nem remover. O bloco é evidência, mesmo quando um fato dele também cabe numa propriedade. Na revisão do conteúdo, do corpo ou das anotações, leia o bloco para preencher a propriedade que a lista já tem. Data, localidade, empresa ou local, canal, links, taxa, variações de nome e decisão humana entram só quando o bloco afirma um valor que a propriedade já aceita. O comentário analítico vai nas notas de curadoria. O bloco não vira checklist, resumo nem texto operacional, e não se copia de novo no corpo. Se o bloco não basta para afirmar, a propriedade fica vazia e a pendência fica nas notas de curadoria. Não invente o dado nem a propriedade. O bloco do grupo fica com `definir-grupo-de-oportunidades`.
-
-Se a página tem um callout com orientações de preenchimento ou governança, preserve-o integralmente ao revisar, limpar ou migrar o corpo. Se ele não existe e a pessoa pede para organizar o corpo, avise antes de concluir.
-
-Ao revisar ou migrar o corpo, uma possível ação de conteúdo, como bastidores, enquete, cobertura, look ou collab de post, vira ideia pela `criar-ideia-de-conteudo` e, se exige execução, tarefa pela `definir-tarefa` ligada à oportunidade, ambas com data. Sem data segura, pergunte. A leitura estratégica de fit e de relação estética vai para as notas de curadoria como síntese permanente, sem checklist.
-
-A intercorrência da edição, como um problema com o local do estande, vai num comentário da edição, não no corpo nem nas notas de curadoria. O comentário começa pela data e hora do fato, e cada fato novo é um comentário novo, para os comentários formarem a linha do tempo.
+Revisar o conteúdo, o corpo ou as anotações de uma edição que já existe segue `revisar-oportunidade`. Uma edição nova nasce sem bloco de anotações, sem callout e sem comentário: não os escreva aqui.
 
 ### Passo 8
 
@@ -181,14 +164,6 @@ Se você usar o cartaz só para ler o texto e deixar o arquivo de fora, a ediç�
 2. Preserve os arquivos que já estão lá. Não anexe o mesmo de novo.
 3. Se o pedido só consulta, ofereça anexar e não grave.
 
-### Bloco de anotações removido
-
-Se você apagar, arquivar, substituir, ocultar ou remover o bloco de anotações ao revisar a edição, a evidência da pessoa some.
-
-1. Mantenha o bloco inteiro, com o mesmo texto.
-2. Fato estruturável pode ir para a propriedade.
-3. Não copie o bloco de novo no corpo.
-
 ### Entrada trocada
 
 Se você marcar a taxa do expositor ou o ingresso do visitante porque um público restrito entra de graça, a taxa ou o ingresso sai errado.
@@ -221,10 +196,6 @@ a edição entrou sem grupo, com a data no título e na data da edição. Não p
 
 gravei a edição com o resto. No fim, listei o comentário sem propriedade e propus as notas de curadoria, como texto, com a descrição de por que elas existem. O corpo não recebeu o comentário.
 
-### revise as anotações da edição. O bloco diz que o evento foi em Cidade Exemplo, sem dia e sem valor.
-
-localidade só entra se a página já existe. Data e taxa ficaram vazias. A pendência ficou nas notas de curadoria. O bloco ficou inteiro.
-
 ### a fonte diz segunda-feira, 01/09/2026
 
 01/09/2026 é terça-feira. Sinalizei a divergência e confirmei antes de criar ou alterar. A data da edição ficou um intervalo válido. No título e na resposta, usei o formato da data com dia da semana.
@@ -240,18 +211,16 @@ localidade só entra se a página já existe. Data e taxa ficaram vazias. A pend
 - O texto não traz URL: o link de inscrição fica vazio.
 - A empresa ou a localidade não está na lista: pergunte. O local segue `definir-local-fisico`.
 - Seleção, inscrição, edital ou chamada: não vira página na lista de oportunidades.
-- A página já tem bloco de anotações, reunião, transcrição ou resumo: ele fica inteiro. Um fato dele pode ir para a propriedade.
-- O bloco não afirma o valor: a propriedade fica vazia. A pendência vai nas notas de curadoria.
 - A pessoa enviou cartaz, print ou comunicado da edição: o arquivo vai nos anexos da edição, sem duplicar. Na consulta, só ofereça.
 - Conta própria desta edição: perfis da edição. Perfil oficial fica com `definir-grupo-de-oportunidades`.
-- Intercorrência na edição: comentário datado na página. Não vai no corpo nem nas notas de curadoria.
+- O pedido é revisar uma edição que já existe: `revisar-oportunidade`.
+- O pedido é pôr etapas no cronograma da edição, ou guardar a programação publicada: `definir-cronograma`.
 
 ## Pegadinhas
 
 - Entrada gratuita para um público restrito parece o ingresso do visitante ou a taxa do expositor. Não é nenhuma das duas.
 - O corpo da página parece o lugar do texto do cartaz, ou do valor sem propriedade. As propriedades recebem o fato novo. O valor sem propriedade vai para a lista do fim. O bloco de anotações que já está lá fica.
 - Não gravar o cartaz no corpo parece dispensar o arquivo. O texto não vai ao corpo. O arquivo vai nos anexos da edição.
-- O bloco de anotações parece rascunho que a limpeza apaga. Ele é evidência da pessoa. A propriedade recebe a cópia, e o bloco permanece.
 - Começar o título pelo grupo deixa as linhas iguais. O nome da edição vem primeiro.
 - A data numérica parece bastar. O título e a resposta levam o dia da semana, calculado com a data, o horário e o fuso. A data da edição continua um intervalo válido.
 - Data anterior à `Data mínima da edição`, ou à fundação do negócio, parece válida. A propriedade não aceita.
