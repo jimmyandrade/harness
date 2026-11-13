@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.4.1"
   related:
     - definir-grafia
     - definir-perfil-social
@@ -18,8 +18,8 @@ metadata:
 ## Parâmetros de configuração
 
 ```yaml
-# `Cadastro pelo Chrome` é `sim` ou `não`. `sim` busca e cadastra pelo Notion no Claude in Chrome quando o conector do Notion não responde. `não` para e avisa.
-"Cadastro pelo Chrome": "sim"
+# `Cadastro pelo Chrome` é `nunca`, `se o conector falhar` ou `sempre`. `nunca` usa só o conector e, se ele não responde, para e avisa. `se o conector falhar` cadastra pelo Notion no Claude in Chrome só quando o conector não responde. `sempre` cadastra pelo Chrome sem tentar o conector. O Chrome gasta mais token, então o padrão é `nunca` e o negócio escolhe o valor.
+"Cadastro pelo Chrome": "nunca"
 ```
 
 ## Instruções
@@ -62,7 +62,9 @@ O cadastro mínimo de recebedora financeira não valida a fornecedora para relac
 
 A pessoa responsável é, de preferência, gerente, representante comercial, vendedora, dona ou contato do atendimento. Mais de um registro da mesma pessoa segue o flowchart do Passo 1.
 
-Quando o conector do Notion não responde, confira a conexão antes de dizer que falta acesso. Com `Cadastro pelo Chrome` em `sim`, busque e cadastre pelo Notion no Claude in Chrome, com o login da pessoa. Busque o nome também pelo tipo de local, como feira ou venue, porque a empresa pode já existir com outro tipo, e conte como resultado só a página da lista de empresas.
+O cadastro segue `Cadastro pelo Chrome`. Em `nunca`, use só o conector: se ele não responde, confira a conexão, diga o motivo e pare. Em `se o conector falhar`, confira a conexão e só então siga pelo Chrome. Em `sempre`, vá direto ao Chrome.
+
+No Chrome, busque e cadastre pelo Notion no Claude in Chrome, com o login da pessoa. Busque o nome também pelo tipo de local, como feira ou venue, porque a empresa pode já existir com outro tipo, e conte como resultado só a página da lista de empresas.
 
 Crie a página numa visão sem agrupamento, para o tipo não nascer preenchido. Confira que a página nova abriu antes de digitar. Depois de escolher uma opção, não aperte Escape: ele fecha a página e o texto seguinte cai na tabela. Clique no valor da propriedade, nunca no nome dela. Ao fim, ordene a busca por última edição e confira que só as páginas esperadas mudaram.
 
