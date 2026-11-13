@@ -3,7 +3,7 @@ name: rotular-item
 description: Aplica, troca e tira rótulos, etiquetas e tags de organização num item, como pull request, issue, e-mail, conversa ou página, pela escolha da habilidade de origem, sem duplicar rótulo nem mexer no de uma ferramenta. Usada quando outra habilidade rotula um item, lê ou responde uma conversa, ou o estado do item muda. Não serve para decidir o assunto do item, hashtags nem categorias de conteúdo.
 metadata:
   author: jimmyandrade
-  version: "0.7.1"
+  version: "0.8.0"
   related:
     - criar-pull-request
     - definir-filtro-de-email
@@ -43,7 +43,7 @@ Receba da habilidade de origem o item, o sistema em que ele fica, os rótulos qu
 A escolha é da habilidade de origem: esta habilidade não decide o assunto do item. Sem a escolha, volte para ela.
 A lista de origem diz quais rótulos são de estado, como `blocked` ou `A pagar`, e quais pertencem a uma ferramenta que os aplica sozinha.
 
-Toda conversa que uma habilidade leu ou respondeu, no e-mail ou no WhatsApp, passa por aqui antes de a habilidade terminar, com quem age agora e o contexto escolhido. Ela sai sempre com os dois: o rótulo de estado e o de contexto. O estado sai de quem age agora, e o nome dele vem de `Etiquetas de status`:
+Toda conversa que uma habilidade leu ou respondeu, no e-mail ou no WhatsApp, passa por aqui antes de a habilidade terminar, com quem age agora e o contexto escolhido. Ela sai com os dois, o rótulo de estado e o de contexto, salvo o envio a grupo sem retorno esperado, tratado abaixo. O estado sai de quem age agora, e o nome dele vem de `Etiquetas de status`:
 
 ```mermaid
 flowchart LR
@@ -52,6 +52,8 @@ flowchart LR
   E -->|o negócio já respondeu e nada falta| R[Respondida]
   E -->|o assunto acabou| C[Concluída]
 ```
+
+Um envio a grupo ou comunidade sem resposta esperada de alguém, como um comunicado ou uma enquete, não vira `Ação esperada`: ninguém tem a vez de agir. A conversa fica sem rótulo de estado, só com o de contexto, e a resposta diz isso. A pessoa que quiser acompanhar o grupo diz, e então o estado segue o fluxo.
 
 A concluída só entra depois de ler o corpo de cada mensagem da conversa e confirmar que nada espera o negócio nem o contato. Remetente, assunto e trecho não bastam: um aviso de plataforma pode pedir prazo, pagamento, cadastro ou resposta. Sem essa leitura, não aplique concluída em lote. Na dúvida, a conversa fica com ação pendente e vai à pessoa com a pergunta.
 
@@ -218,6 +220,7 @@ Tirei `blocked` do PR e mantive `enhancement`. A leitura de volta mostrou só `e
 - `Criar rótulo que falta` em `não` parece barrar também o rótulo de estado. O rótulo de estado que a lista de origem exige é criado nos dois casos.
 - Uma seção da descrição que avisa o estado parece bastar. Quem filtra a lista só vê o rótulo.
 - Um check de rótulo que não é obrigatório para o merge parece dispensável. Ele aparece como falha no item mesmo assim.
+- Enviar numa conversa parece criar uma espera de retorno. Num grupo ou comunidade que a pessoa não tria, ninguém específico deve resposta, e `Ação esperada` seria um rótulo sem pendência.
 - Hashtag parece rótulo. Ela serve ao alcance do conteúdo, não à organização do trabalho.
 - No WhatsApp Business, a etiqueta se chama lista. Ver só Adicionar à lista no menu da conversa não quer dizer que a conta não tem etiqueta: é o caminho para rotular.
 - A lista do WhatsApp aparece em maiúsculas embaixo da conversa. O nome cadastrado é o do filtro da lista de conversas.
