@@ -485,6 +485,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Properties**:
   - Lives at `.agents/skills/definir-artista/SKILL.md`, moved from a business harness
   - Reads the artists data source name, the field names, the entry curation status, the page and Spotify profile templates, and the sensitive and automatic fields from the project instructions
+  - Finds the artists data source by that name through the database lookup skill and asks for the link only when the lookup does not resolve it
   - Runs procurar-artista first, and stops when it finds several pages
   - Shows a plan with the current value, the proposed value, and the source of each field, and writes only after confirmation
   - Keeps dated facts in chronological comments on the artist page, never in the internal notes
@@ -925,7 +926,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Description**: Register or review a musical work from its composition, lyrics, or its record at a collecting society, in the works database of the business
 - **Properties**:
   - Lives at `.agents/skills/definir-obra-musical/SKILL.md`
-  - Finds the works database by the `Nome do data source de obras` parameter and maps its fields through `Campos da base de obras`
+  - Finds the works database by the `Nome do data source de obras` parameter through the database lookup skill and maps its fields through `Campos da base de obras`
   - Searches by title and first lines of the lyrics before creating, and stops on more than one match
   - Shows a plan with the current value, the proposed value, and the source of each field, and writes only after the person confirms
   - Keeps the full lyrics in the page body, under `# Letra`, and only the first line of the lyrics and of the chorus in properties
