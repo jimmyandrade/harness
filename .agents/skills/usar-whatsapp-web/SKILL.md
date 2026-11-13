@@ -3,7 +3,7 @@ name: usar-whatsapp-web
 description: Abre, mantém e reaproveita a única aba do WhatsApp Web no Chrome da pessoa, pela extensão Claude in Chrome, e faz a sessão dona atender as leituras e os envios das outras sessões. Usada sempre que uma habilidade precisa abrir, ler, enviar texto, anexar imagem ou documento no WhatsApp Web, mesmo sem dizer aba. Não serve para achar a conversa, redigir a mensagem, rotular nem decidir o que enviar.
 metadata:
   author: jimmyandrade
-  version: "0.1.4"
+  version: "0.2.0"
   related:
     - acompanhar-resposta-no-whatsapp
     - conversar-no-whatsapp
@@ -59,6 +59,8 @@ Se aparecer o aviso de que o WhatsApp está aberto em outra janela, clique no bo
 Se o aviso voltar, outra aba tomou a conexão: clique de novo uma vez só, com a leitura na mesma sequência, e não alterne mais. Ao terminar, diga que a outra janela ficou desconectada e volta pelo mesmo botão.
 
 Se aparecer o QR code, o WhatsApp Web não está conectado: pare, peça para a pessoa conectar o celular e, sem perguntar, crie com `definir-rotina` uma rotina que a lembre de reconectar e pare quando ele voltar a responder. Não tente ler o banco do aplicativo de desktop.
+
+Se a conversa mostrar o aviso para carregar mensagens antigas do celular, clique nele e diga que o histórico pode estar incompleto. Para achar um arquivo, abra os dados do contato, em Mídia, links e docs, na aba Documentos. O rodapé dessa aba diz a data antes da qual as mensagens só aparecem no celular. Sem o arquivo ali e com o pedido anterior a essa data, diga isso logo e peça que a pessoa encaminhe o arquivo, pelo celular, para uma conversa que o WhatsApp Web mostre, como a dela consigo mesma.
 
 Ao terminar, deixe a aba aberta, mesmo quando as outras abas da tarefa forem fechadas.
 
@@ -145,6 +147,14 @@ Se você enviar o arquivo à única entrada de arquivo da página, sem capturar 
 2. Confira a pré-visualização: sem legenda, feche e recomece.
 3. Depois do envio, leia a prévia da lista.
 
+### Arquivo antigo fora do WhatsApp Web
+
+Se você procurar no e-mail, no Drive e no Notion um arquivo que não aparece na conversa, a busca gasta tempo e não acha: o WhatsApp Web não sincroniza as mensagens antigas.
+
+1. Abra a aba Documentos nos dados do contato e leia a data do rodapé.
+2. Diga que o arquivo é anterior a essa data.
+3. Peça que a pessoa encaminhe o arquivo, pelo celular, para uma conversa que o WhatsApp Web mostre.
+
 ### Página deixada com o clique alterado
 
 Se você não rodar o script de restauração, o clique de qualquer entrada de arquivo continua alterado na aba.
@@ -169,6 +179,8 @@ Capturei a entrada de Fotos e vídeos, enviei o arquivo e vi o campo de legenda.
 - Outra sessão pede uma leitura a você e a lista não tem dona: torne-se a dona e atenda. Com o pedido de envio, mostre a conversa e o texto à pessoa na sua conversa e espere o sim ali.
 - Duas sessões com o título da dona: fica a de `sessionId` menor em ordem alfabética. A outra devolve o título e renomeia a sessão para o assunto dela.
 - A extensão não responde: diga isso e peça para a pessoa abrir o Chrome.
+- O histórico pede para carregar mensagens antigas do celular: clique no aviso e diga que pode estar incompleto.
+- O arquivo pedido é anterior à data do rodapé da aba Documentos: peça que a pessoa o encaminhe pelo celular.
 
 ## Pegadinhas
 
@@ -177,6 +189,16 @@ Capturei a entrada de Fotos e vídeos, enviei o arquivo e vi o campo de legenda.
 - A imagem enviada pela entrada que já existe na página vira figurinha, mesmo com a pré-visualização aberta. O campo de legenda é o que diferencia.
 - O menu de anexos fica aberto atrás da pré-visualização, e o botão de enviar continua funcionando.
 - A prévia da lista de conversas mostra "Foto" no lugar do texto quando a imagem é a última mensagem.
+- Em conta comercial, a conversa pode estar com o agente de IA: o aviso aparece na própria conversa.
+- No WhatsApp Business, a etiqueta é a lista, em Adicionar à lista. Sem a lista, crie-a em Nova lista, no mesmo menu. Um filtro de lista ativo limita a busca: volte para Tudo antes de procurar outra conversa.
+- No campo de mensagem, Enter envia. A quebra de linha é shift+Enter.
+- O campo numera a lista sozinho depois de "1. ". Digitar "2." no item seguinte duplica o número: digite só o texto dos itens seguintes.
+- Uma lista numerada dividida em partes recomeça em "1." na parte seguinte. Comece a parte com o número do item, como "3. ", e confira no print. Se o campo recomeçar em 1, separe os itens por uma linha em branco.
+- Responder a uma mensagem é pelo menu que aparece ao passar o mouse sobre ela, na opção Responder. A citação aparece em cima do campo.
+- Enter na busca da lista abre a primeira conversa e marca as mensagens como lidas. Digite o nome e leia o resultado sem apertar Enter.
+- O texto da página traz a lista de conversas inteira antes da conversa aberta. A conversa aberta começa depois do nome do contato no cabeçalho.
+- A mensagem editada mostra "Editada", e o texto antigo some para os dois lados.
+- "Mostrar documentos de todas as conversas" lista só os documentos recentes. Um arquivo antigo não aparece ali nem na conversa.
 - O comprovante que o chat mostra como miniatura borrada não baixa no WhatsApp Web. Diga isso e peça o arquivo à pessoa.
 
 ## Scripts disponíveis
