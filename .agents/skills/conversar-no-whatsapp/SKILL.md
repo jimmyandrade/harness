@@ -94,7 +94,7 @@ Para registrar a demanda, leve a data e o horário da primeira mensagem do pedid
 
 ### Passo 5
 
-Antes de rascunhar, leia a conversa de destino desde a última mensagem lida, pelo Passo 2, e confira cada pergunta do rascunho contra ela inteira, inclusive a mensagem citada. A pergunta já respondida sai, mesmo quando outra fonte mais antiga diverge: mostre a divergência à pessoa, não ao contato. Tire também o que já foi dito e diga antes o que o texto acrescenta. Se tudo já foi dito, diga isso e não rascunhe.
+Antes de rascunhar, leia a conversa de destino desde a última mensagem lida, pelo Passo 2, e confira cada pergunta do rascunho contra ela inteira, inclusive a mensagem citada. A pergunta já respondida sai, mesmo quando outra fonte mais antiga diverge: mostre a divergência à pessoa, não ao contato. Sai também a que o site ou o cadastro da empresa já responde, como o horário de funcionamento. Tire também o que já foi dito e diga antes o que o texto acrescenta. Se tudo já foi dito, diga isso e não rascunhe.
 
 Leia cada resposta como resposta à pergunta como foi escrita. Uma pergunta sem dia, sem janela e sem condição, respondida com "pode" ou "sim", vale para tudo o que ela cobria. Não estreite a resposta com uma condição que a pergunta não tinha, e não repita a pergunta para pedir mais detalhe.
 
