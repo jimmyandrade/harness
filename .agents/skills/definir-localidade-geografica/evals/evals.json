@@ -1,0 +1,17 @@
+{
+  "skill_name": "definir-localidade-geografica",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "A oportunidade é em Cidade Exemplo, que não está na lista de localidades. Cadastre a cidade.",
+      "expected_output": "Perguntar a prioridade de oportunidades da cidade, criar a cidade já com ela e com o estado como pai, sem usar o estado como aproximação e sem inventar a prioridade.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Cadastre o estado do Rio Grande do Sul.",
+      "expected_output": "Buscar duplicata antes, criar com o nome pelo padrão do estado, o país como pai e o código ISO 3166-2, ou atualizar o equivalente existente.",
+      "files": []
+    }
+  ]
+}

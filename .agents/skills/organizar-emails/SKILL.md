@@ -3,7 +3,7 @@ name: organizar-emails
 description: Organiza e-mails por BASB e separa pessoal, trabalho e misto. Usada quando a pessoa quer triar a caixa, etiquetar ou configurar filtros. Não serve para responder mensagens, lançar despesas nem acompanhar veículos.
 metadata:
   author: jimmyandrade
-  version: "0.20.1"
+  version: "0.24.0"
   related:
     - procurar-email
     - evoluir-habilidade
@@ -14,8 +14,11 @@ metadata:
     - definir-tarefa
     - definir-agenda
     - procurar-oportunidade
+    - delegar-aviso-de-plataforma
     - criar-oportunidade
     - definir-inscricao
+    - definir-pessoa
+    - procurar-inscricao
     - rotular-item
 ---
 
@@ -88,7 +91,7 @@ Não copie corpo integral, documento, placa, código, valor financeiro ou link c
 
 Diferencie hipótese, resposta da pessoa e ação executada.
 
-Leia todas as mensagens de uma conversa antes de uma ação no nível da conversa. Separe eventos diferentes: reconhecer uma autorização não reconhece outro login reunido no mesmo assunto.
+Quem escreve e falta na lista de pessoas se cadastra por `definir-pessoa`. Leia todas as mensagens de uma conversa antes de uma ação no nível da conversa. Separe eventos diferentes: reconhecer uma autorização não reconhece outro login reunido no mesmo assunto.
 
 ### Passo 3
 
@@ -139,7 +142,7 @@ Com `Etiquetar também mensagem enviada do mesmo tema` em `sim`, a mensagem que 
 
 Com `Levantar itens de ação` em `sim`, liste o que ficou em aberto em cada conversa triada. Ação pendente é o que a mensagem pede à pessoa e ela não fez, como responder, confirmar ou pagar. Ação esperada é o que a pessoa aguarda de outra, como a resposta ao último e-mail dela.
 
-Para cada ação, diga o assunto, quem, o que fazer, o prazo da mensagem, sem inventar, e o link. Conversa com ação pendente fica na entrada. Com `Etiquetas de status` preenchidas, a escolha é a etiqueta da ação pendente ou da esperada, e passa à de concluída quando a ação termina.
+Para cada ação, diga o assunto, quem, o que fazer, o prazo da mensagem, sem inventar, e o link. Conversa com ação pendente fica na entrada. Com `Etiquetas de status` preenchidas, a escolha é a etiqueta da ação pendente ou da esperada, e passa à de concluída quando a ação termina. A de inscrição só termina com a prova de `procurar-inscricao`.
 
 A conversa que a pessoa respondeu recebe a etiqueta de respondida e perde a da ação pendente, se a resposta era o que faltava. Quando a resposta dela pede retorno, a conversa recebe também a etiqueta da ação esperada.
 
@@ -147,7 +150,9 @@ O e-mail que o agente envia também é etiquetado, na conversa, depois do envio:
 
 Não crie tarefa nem evento: ofereça `definir-tarefa` ou `definir-agenda`.
 
-Conversa que anuncia evento, oficina, edital, programa ou benefício com prazo é uma oportunidade, mesmo com a data passada: a pessoa pode ter ido, e a próxima edição volta. Siga `procurar-oportunidade` com o nome, a edição e a data. Achada, a conversa recebe a etiqueta de e-mail que a edição ou o grupo dela registra, e a resposta traz o link e o status. Sem cadastro, cadastre por `criar-oportunidade`, sem perguntar. A decisão de participar fica para a revisão das oportunidades: não a cobre na triagem. A inscrição e a presença seguem `definir-inscricao`, com o sim da pessoa.
+Conversa que anuncia evento, oficina, edital, programa ou benefício com prazo é uma oportunidade, inclusive a de data passada ou etiquetada por filtro. Siga `procurar-oportunidade` para cada uma, com o nome, a edição e a data. Achada, a conversa recebe a etiqueta de e-mail que a edição ou o grupo dela registra, e a resposta traz o link e o status. Sem cadastro, cadastre por `criar-oportunidade`, sem perguntar.
+
+Aviso de plataforma de venda segue `delegar-aviso-de-plataforma`. A decisão de participar fica para a revisão das oportunidades, não para a triagem. A inscrição e a presença seguem `definir-inscricao`, com o sim da pessoa.
 
 ```mermaid
 flowchart LR
@@ -187,7 +192,7 @@ Quando o pagamento estiver lançado com comprovante, a escolha da conversa da fa
 
 Filtro que tira oferta de negociação da entrada usa só remetentes que, na amostra, enviaram apenas ofertas, e exclui os `Termos de aviso formal`. Não esconda cobrança de obrigação `A verificar`.
 
-Empresa de cobrança não confirma a dívida: não use os links nem os boletos dela. Ela recebe a própria etiqueta, porque pode cobrar por vários credores, e a etiqueta do credor só entra quando o corpo o identifica. Essa é a regra da classificação: o filtro combina o remetente com o nome do credor em qualquer parte da mensagem, porque não busca só no corpo. Mensagem sem credor identificado fica com a etiqueta da empresa e na entrada.
+Empresa de cobrança não confirma a dívida: não use os links nem os boletos dela. Ela recebe a própria etiqueta, porque pode cobrar por vários credores, e a etiqueta do credor só entra quando o corpo o identifica. O filtro combina o remetente com o nome do credor em qualquer parte da mensagem. Mensagem sem credor identificado fica com a etiqueta da empresa e na entrada.
 
 Assunto alarmante, como interdição, bloqueio, CPF sob impedimento ou valor retido, só vira aviso formal se o corpo descrever a medida já tomada; a pessoa confere a medida real no banco, no cadastro de proteção ao crédito, no relatório oficial de dívidas e na consulta processual. "Pagamento aprovado" ou "parcela vence hoje" de uma plataforma de negociação não é pagamento nem parcela de acordo.
 
@@ -216,7 +221,7 @@ Antes de alterações em lote ou de filtros, grave um plano estruturado com cont
 
 Execute apenas ações autorizadas; mantenha os casos não resolvidos fora do lote de ações, sem arquivar nem marcar como lido, e apresente cada um à pessoa com a pergunta.
 
-Toda conversa que a habilidade processa recebe ao menos uma etiqueta de usuário, mesmo a arquivada ou a de confirmação automática: nenhuma sai sem etiqueta.
+Toda conversa sem etiqueta passa pela triagem e recebe etiqueta de usuário, mesmo a arquivada. Todo remetente ganha filtro, mesmo o avulso.
 
 Aplique as etiquetas do plano por `rotular-item`, conforme o Passo 4, passando cada etiqueta pelo nome e pelo identificador que a conta retornou. Use os identificadores opacos completos das conversas na conta correspondente.
 
@@ -317,7 +322,6 @@ As ofertas recebem a etiqueta do credor e saem da entrada por filtro dos remeten
 
 - A caixa pessoal pode ser recuperação de conta de trabalho; um alerta recebido nela pode proteger outra identidade.
 - A data do comprovante pode ser posterior à viagem, inclusive em outro ano.
-- A consulta pode devolver a mensagem já lida antes de qualquer ação do agente; não atribua essa leitura à pessoa nem a desfaça por suposição.
 - Uma caixa de uma atividade antiga pode ter finalidade de trabalho em `Contas` e, mesmo assim, não ser o trabalho atual. `Organizações` decide o contexto.
 - Empresa de cobrança escreve em nome do credor com assunto alarmante, como "seu CPF foi notificado", e o corpo traz só uma proposta de acordo.
 - Uma fatura de cartão no rotativo pode ter pagamento mínimo igual ao total.

@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.6.0"
   related:
     - acompanhar-veiculo
     - definir-agenda
@@ -165,6 +165,10 @@ A linha do cronograma guarda a data e deixa a hora vazia. O bloco que o flowchar
 ### Passo 6
 
 Diga a viagem canônica, o que entrou, o que ficou vazio, a lacuna, a divergência e os marcos que ficaram separados. Na pergunta, diga o que a busca encontrou e não crie. A data na resposta sai com o dia da semana. Sem horário ou sem fuso, e se o dia puder mudar, peça. Não invente. Planejar quem leva, quem busca ou se cabe ônibus fica nesta habilidade. Viagem de carro próprio só fica concluída com o pedido de extensão da proteção registrado, ou recusado com justificativa, por `acompanhar-veiculo`.
+
+Quem viaja e os veículos ficam nas propriedades da viagem, não só no texto. Sem elas, pergunte quem vai.
+
+Viagem passada sem hospedagem, ou com hospedagem sem nome ou de status velho, é incompleta: proponha completá-la pelo e-mail ou pela aba logada da hospedagem, só leitura, e grave o que a pessoa aprovar.
 
 Viagem para um compromisso com montagem, como uma feira, tem a janela de montagem como prazo. Leia o dia e o horário da montagem no manual do organizador, no grupo ou com a organização, antes de propor a saída e a chegada, e avise a pessoa na hora quando a montagem for no dia anterior ao compromisso.
 

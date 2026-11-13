@@ -3,7 +3,7 @@ name: enviar-imagem-no-whatsapp
 description: Envia uma imagem ou um documento já aprovado pelo WhatsApp Web, como foto ou documento e nunca como figurinha, numa conversa, num grupo ou num canal, e confere o envio. Usada quando a pessoa aprova mandar um comprovante, um convite com imagem ou uma postagem. Não serve para redigir o texto, escolher o destino nem enviar só texto.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   related:
     - conversar-no-whatsapp
     - evoluir-habilidade
@@ -41,6 +41,7 @@ Anexe como `usar-whatsapp-web` manda no Passo 4, com a imagem como foto e nunca 
 ### Passo 3
 
 O texto aprovado junto da imagem vai no campo de legenda. Texto que a pessoa aprovou como mensagem separada segue `conversar-no-whatsapp`.
+Uma legenda acima do `Limite de caracteres por mensagem` de `conversar-no-whatsapp` aparece cortada com "Ler mais". Quem chama divide o texto como essa habilidade manda: a primeira parte vai na legenda e as outras saem como mensagens depois da imagem, na ordem, com o sim da pessoa às partes.
 Em grupo e em canal o caminho é o mesmo, com o destino aberto.
 
 ### Passo 4
