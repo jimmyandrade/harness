@@ -3,7 +3,7 @@ name: criar-enquete
 description: Use essa habilidade sempre que for criar ou sugerir uma enquete ou pergunta para conhecer o público de um negócio, como a cidade, o repertório ou o interesse em participar, mesmo sem dizer enquete. NÃO use para escrever a copy final, publicar, cadastrar a ideia ou o post, nem definir a campanha.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.3.1"
   aliases:
     - sugerir-enquete-de-publico
   related:
@@ -59,7 +59,7 @@ Cheque se a enquete gera aprendizado acionável. Uma pergunta divertida que só 
 
 ### Passo 5
 
-Monte as opções. Quando a pergunta é de cidade ou de praça, as opções saem da lista de localidades, com `definir-localidade-geografica`, dentro de `Localidade-alvo`, e "outra cidade" é uma opção válida, com a resposta aberta. Remova ou troque a opção sem aderência ao repertório, à cena, ao público viável ou ao posicionamento do negócio. Não encha a lista com opção fraca.
+Monte as opções. Quando a pergunta é de cidade ou de praça, as opções saem da lista de localidades, com `definir-localidade-geografica`, dentro de `Localidade-alvo`, e "outra cidade" é uma opção válida quando o objetivo é só conhecer o público, com a resposta aberta. Quando a enquete decide uma ação que o negócio só cumpre em certas praças, como uma entrega, entram só as praças atendidas. Remova ou troque a opção sem aderência ao repertório, à cena, ao público viável ou ao posicionamento do negócio. Não encha a lista com opção fraca.
 
 ### Passo 6
 
@@ -69,7 +69,9 @@ Peça a pergunta final e as variações a `redigir-com-tom-de-voz`, com o `Banco
 
 Entregue, nesta ordem, o objetivo de aprendizado, a ideia usada, o canal e o formato recomendados, a pergunta final, as opções, uma justificativa curta do que a enquete descobre e da decisão futura que apoia, e variações controladas quando fizerem sentido. A skill só entrega a enquete pronta, com a pergunta e as opções. O envio no WhatsApp segue `conversar-no-whatsapp` e `usar-whatsapp-web`, e só com o sim da pessoa.
 
-Quando a enquete serve a uma ação, como entregar algo, convidar ou organizar um encontro, a pergunta sozinha não basta. Entregue também uma mensagem de contexto, antes da enquete, com o que é oferecido, quem o fez e qual é o papel do negócio nisso, o limite (como poucas unidades), como a pessoa recebe ou participa e quando e onde. Esses fatos vêm da pessoa ou da fonte do projeto: pergunte o que faltar e não invente autoria, data, local nem quantidade. As opções podem juntar interesse e praça, e quem for de fora das praças responde no grupo.
+Quando a enquete serve a uma ação, como entregar algo, convidar ou organizar um encontro, a pergunta sozinha não basta. Entregue também uma mensagem de contexto, antes da enquete, com o que é oferecido, quem o fez e qual é o papel do negócio nisso, o limite (como poucas unidades), como a pessoa recebe ou participa e quando e onde. Esses fatos vêm da pessoa ou da fonte do projeto: pergunte o que faltar e não invente autoria, data, local nem quantidade. As opções podem juntar interesse e praça atendida.
+
+Se a mensagem de contexto passar do limite de caracteres por mensagem de `conversar-no-whatsapp`, entregue-a já dividida em mensagens, cortadas entre parágrafos e sem mudar palavra.
 
 Nome de pessoa ou de organização na mensagem sai na grafia canônica do cadastro, conferida com `definir-grafia`. Nome que não está no cadastro: avise e não escolha a grafia pelo que a conversa escreveu.
 
@@ -134,7 +136,7 @@ Assumi o canal padrão do projeto e todas as praças. O objetivo é saber onde e
 ## Pegadinhas
 
 - Uma enquete divertida parece sempre boa para a comunidade. Sem decisão que ela apoie, o aprendizado é nulo.
-- "Outra cidade" parece opção fraca. Ela mantém a lista honesta e vira resposta aberta.
+- "Outra cidade" parece opção fraca. Para conhecer o público ela mantém a lista honesta e vira resposta aberta. Para uma entrega que só existe em certas praças, ela promete o que o negócio não cumpre.
 - Uma pergunta curta parece boa para uma enquete. Quando a resposta decide uma ação, sem contexto a pessoa não sabe por que responde, nem se haverá o que receber.
 - O negócio parece o autor do que distribui. Ele pode só apoiar a distribuição de um trabalho de outra pessoa ou grupo, sem fim comercial: a fonte diz quem fez e a mensagem não toma a autoria.
 - A pergunta de uma enquete parece poder apoiar-se na mensagem de cima. A enquete aparece sozinha na lista de conversas e na prévia, e a mensagem pode estar fora da tela.
