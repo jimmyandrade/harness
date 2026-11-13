@@ -411,6 +411,7 @@ flowchart LR
   definir_perfil_social --> definir_pessoa
   definir_perfil_social --> identificar_duplicata
   definir_perfil_social --> mesclar_registro
+  definir_pessoa --> conversar_no_whatsapp
   definir_pessoa --> definir_empresa
   definir_pessoa --> definir_grafia
   definir_pessoa --> definir_perfil_social
@@ -603,10 +604,12 @@ flowchart LR
   organizar_emails --> definir_filtro_de_email
   organizar_emails --> definir_inscricao
   organizar_emails --> definir_obrigacao_financeira
+  organizar_emails --> definir_pessoa
   organizar_emails --> definir_tarefa
   organizar_emails --> lancar_despesa_da_empresa
   organizar_emails --> lancar_despesa_pessoal
   organizar_emails --> procurar_email
+  organizar_emails --> procurar_inscricao
   organizar_emails --> procurar_oportunidade
   organizar_emails --> rotular_item
   organizar_ponto_de_contato --> criar_oportunidade
@@ -744,9 +747,11 @@ flowchart LR
   triar_conversas --> conversar_no_whatsapp
   triar_conversas --> criar_oportunidade
   triar_conversas --> definir_grupo_de_oportunidades
+  triar_conversas --> definir_pessoa
   triar_conversas --> definir_rotina
   triar_conversas --> definir_tarefa
   triar_conversas --> enviar_mensagem_no_slack
+  triar_conversas --> identificar_duplicata
   triar_conversas --> organizar_emails
   triar_conversas --> organizar_ponto_de_contato
   triar_conversas --> procurar_oportunidade
