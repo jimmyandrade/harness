@@ -3,7 +3,7 @@ name: organizar-emails
 description: Organiza e-mails por BASB e separa pessoal, trabalho e misto. Usada quando a pessoa quer triar a caixa, etiquetar ou configurar filtros. Não serve para responder mensagens, lançar despesas nem acompanhar veículos.
 metadata:
   author: jimmyandrade
-  version: "0.21.0"
+  version: "0.21.1"
   related:
     - procurar-email
     - evoluir-habilidade
@@ -16,6 +16,7 @@ metadata:
     - procurar-oportunidade
     - criar-oportunidade
     - definir-inscricao
+    - definir-pessoa
     - procurar-inscricao
     - rotular-item
 ---
@@ -89,7 +90,7 @@ Não copie corpo integral, documento, placa, código, valor financeiro ou link c
 
 Diferencie hipótese, resposta da pessoa e ação executada.
 
-Leia todas as mensagens de uma conversa antes de uma ação no nível da conversa. Separe eventos diferentes: reconhecer uma autorização não reconhece outro login reunido no mesmo assunto.
+Quem escreve e falta na lista de pessoas se cadastra por `definir-pessoa`. Leia todas as mensagens de uma conversa antes de uma ação no nível da conversa. Separe eventos diferentes: reconhecer uma autorização não reconhece outro login reunido no mesmo assunto.
 
 ### Passo 3
 
