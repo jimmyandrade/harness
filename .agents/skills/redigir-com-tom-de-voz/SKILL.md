@@ -3,7 +3,7 @@ name: redigir-com-tom-de-voz
 description: Use essa habilidade sempre que for criar, redigir, editar, revisar ou responder texto da marca no tom de voz, mesmo sem dizer copy. NÃO use para responder quem conversa com a IA, descrever uma skill, titular tarefa ou oportunidade, cravar a grafia, alterar formato de conteúdo, nem assumir cliente, peça, oportunidade ou histórico.
 metadata:
   author: jimmyandrade
-  version: "0.23.0"
+  version: "0.23.1"
   aliases:
     - escreva-usando-o-tom-de-voz
   related:
@@ -44,7 +44,7 @@ Texto que vai ser enviado por um conector, como uma resposta de e-mail, depende 
 
 Consulte o vocabulário com Scripts disponíveis, com `tags` de quem fala, do evento, do canal e do formato do texto, como `maria-silva`, `festival-de-verao`, `palco` ou `whatsapp`. Use a tag que o vocabulário já tem para esse contexto. Consulte no idioma do texto que vai escrever: texto em inglês consulta `en`, texto em português consulta `pt-BR`. A consulta com tags deixa de fora o termo de outra pessoa, de outro evento ou de outro canal. Sem saber quem fala no texto, pergunte.
 
-Quem tem perfil de `perfilar-tom-de-voz`: siga o resumo nas notas do contato ou no cadastro.
+Para o tom de quem fala, siga `perfilar-tom-de-voz`.
 
 O vocabulário é o do negócio para o qual o texto sai e fica no harness dele, não no core nem na pasta da sessão. Com terminal, rode a CLI na pasta desse harness. Sem terminal, chame a ferramenta do servidor `vocabulary`.
 
