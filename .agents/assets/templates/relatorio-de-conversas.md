@@ -2,7 +2,7 @@
 name: relatorio-de-conversas
 description: Formato do relatório da triagem das conversas, com um bloco por canal e por conversa, pontos de atenção, tarefas, intercorrências, rótulos e mensagens sem relevância.
 metadata:
-  version: "0.3.0"
+  version: "0.4.0"
 ---
 
 ## Contexto
@@ -25,6 +25,7 @@ Período lido: <desde quando> até <data e hora da varredura>.
 - **Tarefas:** <título da tarefa, com o link>
 - **Intercorrências:** <o que aconteceu, com o link do comentário ou da página>
 - **Ignorados:** <um registro curto por item sem tarefa nem ação: o que era, de qual conversa, por que ficou sem ação e a data, só do assunto que não tem página para o comentário>
+- **Lido até:** <data e hora, autor e começo da última mensagem triada: o ponto de partida da próxima triagem>
 - **Ações no WhatsApp:** <reações, favoritos e mensagens apagadas para você, com o resultado de cada tentativa>
 
 #### <nome da conversa sem mensagem nova>
