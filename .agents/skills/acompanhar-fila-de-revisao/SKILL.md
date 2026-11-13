@@ -3,7 +3,7 @@ name: acompanhar-fila-de-revisao
 description: Roda o ciclo da fila de revisão de pull requests. Confere o horário, cuida primeiro dos seus PRs, acha os pedidos, fecha o laço dos já revisados, escolhe o próximo, revisa um por execução e prepara o aviso a quem pediu. Os avisos ficam só como rascunho, com o link. Não serve para revisar sozinha nem achar pedidos por conta própria.
 metadata:
   author: jimmyandrade
-  version: "0.8.0"
+  version: "0.8.1"
   related:
     - enviar-mensagem-no-slack
     - evoluir-habilidade
@@ -24,8 +24,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 # `Modo de execução` é `interativo`, numa sessão aberta com a pessoa, ou `agendado`, sem ninguém na frente.
 "Modo de execução": "interativo"
 # `Horário de trabalho` e `Fuso horário` são globais: valem o da entrada `Global` das instruções do projeto, para todas as habilidades que leem horário.
-# O ciclo roda só dentro do `Horário de trabalho`.
-"Horário de trabalho": "dias úteis, das 9h às 18h"
+# O ciclo roda só dentro do `Horário de trabalho`. Vazio, roda sempre.
+"Horário de trabalho": ""
 "Fuso horário": ""
 "Respeitar a agenda": "não"
 # `Ordem da fila` lista os critérios de desempate, do mais forte ao mais fraco.

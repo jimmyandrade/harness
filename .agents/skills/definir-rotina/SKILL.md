@@ -3,7 +3,7 @@ name: definir-rotina
 description: Cria, revisa e audita rotinas agendadas ou por evento, para rodarem só quando o resultado tem uso. Usada ao pedir, mudar ou auditar uma rotina, ou antes de pedir de novo um resultado que uma rotina já gerou, mesmo sem dizer rotina. Não serve para executar o trabalho da rotina, criar evento na agenda nem medir uma skill.
 metadata:
   author: jimmyandrade
-  version: "0.7.0"
+  version: "0.7.1"
   related:
     - acompanhar-fila-de-revisao
     - acompanhar-resposta-no-whatsapp
@@ -20,8 +20,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ```yaml
 # `Horário de trabalho` e `Fuso horário` são globais: valem o da entrada `Global` das instruções do projeto, para todas as habilidades que leem horário.
-# Uma pessoa só responde a um aviso dentro do `Horário de trabalho`.
-"Horário de trabalho": "dias úteis, das 9h às 18h"
+# Uma pessoa só responde a um aviso dentro do `Horário de trabalho`. Vazio, pergunte o horário antes de agendar uma rotina que avisa alguém.
+"Horário de trabalho": ""
 # `Janela de manutenção` traz os dias e as horas da limpeza, da atualização de status e do processamento pesado, fora do `Horário de trabalho`.
 "Janela de manutenção": "dias úteis, das 0h às 6h"
 "Fuso horário": ""

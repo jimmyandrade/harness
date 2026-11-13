@@ -3,7 +3,7 @@ name: pedir-revisao-de-pr-no-slack
 description: Redige o pedido de revisão de um pull request para o canal do time no Slack e entrega o rascunho com o link da thread, usando enviar-mensagem-no-slack. Usada quando o PR está pronto e a organização pede revisão pelo Slack, ou quando a pessoa pede apoio para revisar. Não serve para revisar o PR nem para outra mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.9.0"
+  version: "0.9.1"
   related:
     - criar-pull-request
     - enviar-mensagem-no-slack
@@ -34,8 +34,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Exigir card": "sim"
 "Autorrevisar o diff antes de pedir": "não"
 # `Horário de trabalho` e `Fuso horário` são globais: valem o da entrada `Global` das instruções do projeto, para todas as habilidades que leem horário.
-# Fora do `Horário de trabalho`, o pedido é agendado para o início do próximo.
-"Horário de trabalho": "dias úteis, das 9h às 18h"
+# Fora do `Horário de trabalho`, o pedido é agendado para o início do próximo. Vazio, o pedido sai na hora.
+"Horário de trabalho": ""
 "Fuso horário": ""
 # `Respeitar a agenda`: com `sim`, o horário agendado pula a ausência e o foco da pessoa.
 "Respeitar a agenda": "não"
