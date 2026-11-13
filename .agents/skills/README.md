@@ -97,6 +97,7 @@ flowchart LR
     definir_vocabulario["definir-vocabulario"]
     delegar_aviso_de_plataforma["delegar-aviso-de-plataforma"]
     descrever_habilidade_ou_schema["descrever-habilidade-ou-schema"]
+    dividir_mensagem["dividir-mensagem"]
     emitir_documento_oficial["emitir-documento-oficial"]
     entregar_rascunho_de_mensagem["entregar-rascunho-de-mensagem"]
     enviar_email["enviar-email"]
@@ -285,6 +286,7 @@ flowchart LR
   conversar_no_whatsapp --> definir_tarefa
   conversar_no_whatsapp --> definir_viagem
   conversar_no_whatsapp --> definir_vocabulario
+  conversar_no_whatsapp --> dividir_mensagem
   conversar_no_whatsapp --> enviar_email
   conversar_no_whatsapp --> enviar_imagem_no_whatsapp
   conversar_no_whatsapp --> escrever_link
@@ -572,6 +574,8 @@ flowchart LR
   descrever_habilidade_ou_schema --> criar_pull_request
   descrever_habilidade_ou_schema --> revisar_habilidade
   descrever_habilidade_ou_schema --> testar_habilidade
+  dividir_mensagem --> comunicar_novidade_do_produto
+  dividir_mensagem --> conversar_no_whatsapp
   entregar_rascunho_de_mensagem --> enviar_mensagem_no_slack
   enviar_email --> acompanhar_retornos_pendentes
   enviar_email --> definir_pessoa
@@ -890,6 +894,7 @@ flowchart LR
   triar_conversas --> procurar_oportunidade
   triar_conversas --> procurar_pedido_de_revisao
   triar_conversas --> procurar_tarefa
+  triar_conversas --> reconhecer_imagem
   triar_conversas --> rotular_item
   triar_conversas --> transcrever_audio_e_video
   triar_conversas --> usar_whatsapp_web

@@ -24,6 +24,18 @@
       "prompt": "Triar o grupo de expositores com o conector do Notion desconectado.",
       "expected_output": "Tentar a linha de comando do Notion, a API, o conector e o Chrome com a rede interceptada, nesta ordem, confirmando que apontam o workspace do negócio, e dizer o que cada um devolveu. Só depois de três caminhos falharem, não afirmar cadastro, gravar o registro local e pedir a conferência.",
       "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "No grupo de expositores a organização mandou o mapa da edição, sem legenda, e dois expositores mandaram áudios.",
+      "expected_output": "Transcrever todo áudio, sempre, sem perguntar. Baixar o mapa pela aba, ler por reconhecer-imagem, anexá-lo à edição certa e gravar os valores e as regras nas propriedades. Sem o arquivo ou sem a leitura, dizer o resultado real e listar como ponto de atenção.",
+      "files": []
+    },
+    {
+      "id": 6,
+      "prompt": "Triar um grupo com muitas mensagens e deixar marcado onde a triagem parou, sem parecer que concordamos com nada.",
+      "expected_output": "Gravar o Lido até de cada conversa no relatório (data, hora, autor e começo da última mensagem triada) e começar a próxima triagem dali. Propor a estrela privada na última mensagem triada, com o sim da pessoa, passando a estrela anterior para a nova. Nunca reagir para marcar onde parou.",
+      "files": []
     }
   ]
 }

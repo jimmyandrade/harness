@@ -3,7 +3,7 @@ name: criar-enquete
 description: Use essa habilidade sempre que for criar ou sugerir uma enquete ou pergunta para conhecer o público de um negócio, como a cidade, o repertório ou o interesse em participar, mesmo sem dizer enquete. NÃO use para escrever a copy final, publicar, cadastrar a ideia ou o post, nem definir a campanha.
 metadata:
   author: jimmyandrade
-  version: "0.3.1"
+  version: "0.3.2"
   aliases:
     - sugerir-enquete-de-publico
   related:
@@ -23,7 +23,7 @@ metadata:
 
 Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo.
 ```yaml
-# `Banco de modelos de conteúdo` é a fonte de ideias de enquete e de pergunta do projeto, como o nome do banco no workspace conectado. Vazio: pergunte uma vez e, sem resposta, crie a ideia do zero.
+# `Banco de modelos de conteúdo` é opcional: guarda modelos que o projeto reaproveita, como a mesma peça para praças ou franquias diferentes. Vazio: não pergunte nem procure, e siga sem ele.
 "Banco de modelos de conteúdo": ""
 # `Banco de copy` é a fonte de textos aprovados que `redigir-com-tom-de-voz` consulta. Vazio: só o tom de voz.
 "Banco de copy": ""
@@ -47,11 +47,11 @@ Entenda o que a pessoa quer descobrir sobre o público e a decisão que a enquet
 
 ### Passo 2
 
-Sem objetivo informado, não pare. Sorteie no `Banco de modelos de conteúdo` uma ideia aderente a conhecer o público, diga que é uma sugestão exploratória e o aprendizado provável. Sem ideia aderente, pare e peça só o dado que falta, em uma frase, como "Quero descobrir se esse público…", "A decisão que a enquete apoia é…" ou "Se quiser fugir do padrão: o canal ou a praça é…".
+Sem objetivo informado, não pare. Com `Banco de modelos de conteúdo`, sorteie nele uma ideia aderente a conhecer o público, diga que é uma sugestão exploratória e o aprendizado provável. Sem o banco, ou sem ideia aderente, pare e peça só o dado que falta, em uma frase, como "Quero descobrir se esse público…", "A decisão que a enquete apoia é…" ou "Se quiser fugir do padrão: o canal ou a praça é…".
 
 ### Passo 3
 
-Consulte o `Banco de modelos de conteúdo` antes de propor. A ideia cadastrada e aderente vem antes de qualquer ideia nova, e a resposta diz qual usou. Sem ideia aderente, crie a ideia do zero e marque-a como ainda não consolidada. Se ela puder ser reutilizada e a pessoa a aprovar, recomende cadastrá-la com `criar-ideia-de-conteudo`. Ideia pontual ou experimental não vira padrão.
+Com `Banco de modelos de conteúdo`, consulte-o antes de propor. A ideia cadastrada e aderente vem antes de qualquer ideia nova, e a resposta diz qual usou. Sem o banco, ou sem ideia aderente, crie a ideia do zero e marque-a como ainda não consolidada. Se ela puder ser reutilizada e a pessoa a aprovar, recomende cadastrá-la com `criar-ideia-de-conteudo`. Ideia pontual ou experimental não vira padrão.
 
 ### Passo 4
 
@@ -128,7 +128,7 @@ Assumi o canal padrão do projeto e todas as praças. O objetivo é saber onde e
 
 ## Casos-limite
 
-- Sem `Banco de modelos de conteúdo` na conexão: pergunte uma vez e, sem resposta, crie a ideia do zero e diga isso.
+- Sem `Banco de modelos de conteúdo`: ele é opcional. Não pergunte o nome nem procure, crie a ideia do zero e diga isso.
 - Pedido de escrever, publicar ou cadastrar a ideia: devolva ao `redigir-com-tom-de-voz`, a `conversar-no-whatsapp` ou a `criar-ideia-de-conteudo`.
 - A pessoa quer a mesma pergunta de novo: entregue e diga se é medição ou repetição.
 - Praça fora da lista de localidades: use "outra cidade" e sugira cadastrar a localidade.
