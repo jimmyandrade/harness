@@ -721,6 +721,7 @@ flowchart LR
   procurar_inscricao --> definir_inscricao
   procurar_inscricao --> procurar_email
   procurar_oportunidade --> criar_oportunidade
+  procurar_oportunidade --> definir_grupo_de_oportunidades
   procurar_oportunidade --> definir_inscricao
   procurar_oportunidade --> identificar_duplicata
   procurar_oportunidade --> mesclar_registro

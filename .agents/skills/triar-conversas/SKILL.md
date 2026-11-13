@@ -1,10 +1,10 @@
 ---
 name: triar-conversas
-description: Varre as conversas com mensagem nova no WhatsApp e no Slack, classifica cada mensagem, decide o rótulo de estado e de contexto, leva ao Notion o que pede registro e entrega um relatório por conversa. Usada quando a pessoa quer saber o que chegou ou montar o relatório diário ou semanal das conversas. Não serve para e-mail, responder nem cadastrar a oportunidade.
+description: Varre as conversas com mensagem nova no WhatsApp e no Slack, classifica cada mensagem, decide o rótulo de estado e de contexto, leva ao Notion o que pede registro e entrega um relatório por conversa. Usada quando a pessoa quer saber o que chegou ou montar o relatório diário ou semanal das conversas. Não serve para e-mail nem para responder.
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.6.0"
   models:
     - relatorio-de-conversas
   related:
@@ -70,9 +70,10 @@ flowchart LR
   M -->|pede revisão de pull request| R[procurar-pedido-de-revisao]
   M -->|pede ação, prazo ou resposta do negócio| A[Ação: Passo 4]
   M -->|problema numa edição, mesmo de outra marca| I[Intercorrência: Passo 5]
+  M -->|comunicado ou convite de evento com nome e data| O[Oportunidade: Passo 5]
 ```
 
-Sem relevância é agradecimento, bom dia, figurinha, divulgação de outra marca e pergunta já respondida na conversa. Na dúvida, a mensagem é ponto de atenção.
+Sem relevância é agradecimento, bom dia, figurinha, divulgação de outra marca sem evento com nome e data e pergunta já respondida na conversa. Na dúvida, a mensagem é ponto de atenção.
 
 ### Passo 4
 
@@ -80,7 +81,9 @@ Antes de criar a tarefa, siga `procurar-tarefa`. Sem tarefa, siga `definir-taref
 
 ### Passo 5
 
-Ache a edição com `procurar-oportunidade`. Quando a participação foi aprovada, o registro vai no ponto de contato dessa edição. Grave a intercorrência num comentário da página, não no corpo nem nas notas de curadoria. O comentário começa pela data e hora do fato no `Formato da data com dia da semana`, com o dia calculado como a regra do dia da semana manda, e diz quem relatou, o que aconteceu e o link da mensagem, quando houver. Cada fato novo é um comentário novo, e os comentários formam a linha do tempo da edição. Não edite um comentário antigo.
+Comunicado ou convite de evento com nome e data, inclusive o que alguém encaminha ao grupo, é uma oportunidade e não está sem relevância. Ache a edição com `procurar-oportunidade`. Sem cadastro, ela segue `criar-oportunidade` na mesma varredura, sem perguntar o que fazer, e o grupo, quando falta, passa por `definir-grupo-de-oportunidades`. Falta o nome ou a data: leve só o que falta ao relatório. Quem escreve ou encaminha o comunicado não é, por isso, a organização, porque pode estar só divulgando outra feira. Não grave quem encaminhou como organizador.
+
+Para a intercorrência, ache a edição com `procurar-oportunidade`. Quando a participação foi aprovada, o registro vai no ponto de contato dessa edição. Grave a intercorrência num comentário da página, não no corpo nem nas notas de curadoria. O comentário começa pela data e hora do fato no `Formato da data com dia da semana`, com o dia calculado como a regra do dia da semana manda, e diz quem relatou, o que aconteceu e o link da mensagem, quando houver. Cada fato novo é um comentário novo, e os comentários formam a linha do tempo da edição. Não edite um comentário antigo.
 
 Quando a intercorrência ensina algo para as próximas edições, como confirmar antes o local do estande no mapa da feira, proponha a lição no relatório. Com o sim, a lição vai para o grupo por `definir-grupo-de-oportunidades`, e o contrato da próxima participação é conferido por `organizar-ponto-de-contato`.
 
@@ -138,6 +141,14 @@ Se você classificar um áudio pela prévia ou pela duração, uma reclamação 
 2. Peça a transcrição.
 3. Classifique só depois dela.
 
+### Comunicado de evento perguntado
+
+Se você disser que a edição não está cadastrada e perguntar o que fazer diante de um comunicado ou convite com nome e data, a pessoa tem de pedir o cadastro que a triagem devia ter feito.
+
+1. Ache a edição com `procurar-oportunidade`.
+2. Sem cadastro, siga `criar-oportunidade` na mesma varredura, sem perguntar. Falta o nome ou a data: pergunte só o que falta.
+3. Não grave quem encaminhou como organizador.
+
 ### Pessoa da conversa fora da lista
 
 Se você ler a conversa de uma organização e não conferir quem escreve, a pessoa continua fora da lista e o próximo contato volta a ser um número sem nome.
@@ -158,6 +169,10 @@ Se você apagar a mensagem sem relevância por conta própria, a pessoa perde o 
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
+### a pessoa encaminhou ao grupo o comunicado de uma feira que não está cadastrada, com nome e data
+
+Segui `procurar-oportunidade`, que não achou a edição, e cadastrei a oportunidade por `criar-oportunidade` na mesma varredura, sem perguntar. O grupo faltava e passou por `definir-grupo-de-oportunidades`. Quem encaminhou não entrou como organizador. O relatório traz o link da oportunidade.
+
 ### veja o que chegou nas conversas
 
 No WhatsApp, o grupo da Feira Exemplo teve um áudio de uma expositora às 09h08. Listei o áudio como ponto de atenção e pedi a transcrição. No Slack, um pedido de revisão de PR foi para `procurar-pedido-de-revisao`. As outras conversas não tiveram interação.
@@ -173,7 +188,8 @@ Mostrei as quatro mensagens de agradecimento, com quem escreveu e a hora. Com o 
 ## Casos-limite
 
 - A mensagem pede ação e a tarefa já existe: não crie outra. Cite a tarefa no relatório e rotule a conversa.
-- A edição da intercorrência não está cadastrada: diga isso no relatório. O cadastro fica com `criar-oportunidade`.
+- A edição da intercorrência não está cadastrada e a conversa traz o nome e a data: cadastre por `criar-oportunidade`, como o Passo 5 manda. Sem um dos dois, diga isso no relatório.
+- O comunicado traz o nome e a data e quem o encaminha não organiza o evento: cadastre a oportunidade e não grave quem encaminhou como organizador.
 - A intercorrência é de outra marca, como outra expositora: registre também. Ela mostra como o organizador trata quem expõe.
 - A pessoa pede para responder: no WhatsApp, siga `conversar-no-whatsapp`. No Slack, siga `enviar-mensagem-no-slack`.
 - A pessoa pede para triar o e-mail: siga `organizar-emails`.
@@ -184,6 +200,7 @@ Mostrei as quatro mensagens de agradecimento, com quem escreveu e a hora. Com o 
 - Apagar para mim tira a mensagem só da conta da pessoa. Os outros membros continuam vendo.
 - Abrir a conversa marca as mensagens como lidas, também para quem enviou.
 - O áudio no WhatsApp Web não tem transcrição. A prévia mostra só a duração.
+- A divulgação de outra feira parece sem relevância. Com nome e data de evento, é uma oportunidade a cadastrar, e quem a encaminha não é a organização.
 
 ## Scripts disponíveis
 

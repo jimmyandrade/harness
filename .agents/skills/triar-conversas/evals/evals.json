@@ -1,4 +1,11 @@
 {
   "skill_name": "triar-conversas",
-  "evals": []
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Alguém encaminhou ao grupo o comunicado de uma feira, com nome e data, que não está cadastrada.",
+      "expected_output": "Não classificar como sem relevância nem perguntar o que fazer: achar a edição com procurar-oportunidade e, sem cadastro, seguir criar-oportunidade na mesma varredura, com o grupo por definir-grupo-de-oportunidades. Não gravar quem encaminhou como organizador. Faltando nome ou data, levar só o que falta ao relatório.",
+      "files": []
+    }
+  ]
 }
