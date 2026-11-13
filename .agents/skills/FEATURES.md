@@ -325,27 +325,30 @@ How these skills relate is in `README.md`, in this folder.
   - Titles the offer without saying it belongs to the business, keeping one canonical opportunity for several candidates
   - Replaces a generic link with the specific ticketing page
   - Hands the venue and its locality to definir-local-fisico instead of creating them
-  - Hands the published programme to definir-programacao-da-oportunidade and the review of an edition that already exists to revisar-oportunidade
+  - Hands the schedule steps and the published programme to definir-cronograma and the review of an edition that already exists to revisar-oportunidade
 - **Test Criteria**:
   - [x] The skill is present at that path
-  - [x] The description refuses reviewing the edition, the group, the programme, checking whether the opportunity exists, organizing the participation, registering someone, creating a task, and reading an image
+  - [x] The description refuses reviewing the edition, the group, the schedule, checking whether the opportunity exists, organizing the participation, registering someone, creating a task, and reading an image
 
-### definir-programacao-da-oportunidade
+### definir-cronograma
 - **Stability**: experimental
-- **Description**: Read the published programme of an opportunity from the official source and store each session in the schedule linked to the edition, without choosing attendance
+- **Description**: Create, update, and check the schedule steps linked to an opportunity or a contact point, including the published programme of a fair read from the official source, without creating an agenda event
 - **Properties**:
-  - Lives at `.agents/skills/definir-programacao-da-oportunidade/SKILL.md`
-  - Requires the edition to exist, through procurar-oportunidade or criar-oportunidade
-  - Reads the official source again without asking for a new authorization, and loads the full content before calling the programme complete
-  - Treats a slow read timeout as a reason to use the fuller read, not as an unavailable source
-  - Stores one item per session, with the link to the edition, start and end in the event time zone, and reading order, keeping simultaneous, repeated, and closed sessions
-  - Tests one real session with every intended property before the batch, handles a rejected optional field on one item, and resumes only the items not saved
-  - Compares the sessions of the source with the linked items before saying the programme is complete
+  - Lives at `.agents/skills/definir-cronograma/SKILL.md`
+  - Requires the opportunity to exist, through procurar-oportunidade or criar-oportunidade
+  - Searches the schedule by opportunity, step name, and date before creating, and updates an equivalent instead of duplicating it
+  - Names the step as the action in two to five words, with no connective, no specification, and no parenthetical guidance, and puts the rest in the context field without repeating date, time, or place
+  - Uses one of the step types the list already has and does not create a new one
+  - Links the step to the opportunity and, when there is a matching contact point, to it too, and does not create a contact point to link it
+  - Writes start and end only from what the person or the source stated, and never invents a time or copies the next step's time
+  - Writes a comment on the step with the action summary, the source, the channel, the confirmation date and time, and what is still pending, without duplicating a current one
+  - Reads the official programme again without asking for a new authorization, loads the full content before calling it complete, and treats a read timeout as a reason to use the fuller read
+  - Tests one real session with every intended property before the batch, handles a rejected optional field on one step, and compares the source sessions with the linked steps before saying the programme is complete
   - Does not sign up, choose a session, block the agenda, or create a calendar event
-  - Writes session dates in the reply with `Formato da data com dia da semana`
+  - Writes step dates in the reply with `Formato da data com dia da semana`
 - **Test Criteria**:
   - [x] The skill is present at that path
-  - [x] The description refuses registering the edition, signing up, choosing the participation, and creating an agenda event
+  - [x] The description refuses the trip, taking the step to the agenda, the production workday, signing up, and choosing the participation
 
 ### revisar-oportunidade
 - **Stability**: experimental

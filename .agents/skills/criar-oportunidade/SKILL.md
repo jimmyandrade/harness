@@ -5,14 +5,14 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.24.0"
+  version: "0.24.1"
   related:
     - procurar-oportunidade
     - definir-empresa
     - definir-local-fisico
     - definir-localidade-geografica
     - definir-grupo-de-oportunidades
-    - definir-programacao-da-oportunidade
+    - definir-cronograma
     - revisar-oportunidade
     - definir-inscricao
     - organizar-emails
@@ -74,7 +74,7 @@ O título e a síntese descrevem a oferta: chamada, edição, modalidade, data, 
 
 O arquivo do cartaz, do print da divulgação ou do comunicado desta data vai nos anexos da edição, na mesma gravação, sem pedir confirmação. Preserve os arquivos que já estão lá e não anexe o mesmo arquivo de novo. Use a referência de arquivo aceita pela ferramenta: o ID do anexo da conversa pode não ser um ID de arquivo do Notion. Se o pedido só consulta a edição, ofereça anexar e não grave. Sem os anexos da edição no mapeamento, liste o arquivo no fim, como valor sem propriedade.
 
-A programação publicada da edição segue `definir-programacao-da-oportunidade`. Esta habilidade não guarda sessões no cronograma.
+As etapas do cronograma da edição, inclusive a programação publicada, seguem `definir-cronograma`. Esta habilidade não as grava.
 
 ### Passo 6
 
@@ -214,7 +214,7 @@ gravei a edição com o resto. No fim, listei o comentário sem propriedade e pr
 - A pessoa enviou cartaz, print ou comunicado da edição: o arquivo vai nos anexos da edição, sem duplicar. Na consulta, só ofereça.
 - Conta própria desta edição: perfis da edição. Perfil oficial fica com `definir-grupo-de-oportunidades`.
 - O pedido é revisar uma edição que já existe: `revisar-oportunidade`.
-- O pedido é a programação publicada da edição: `definir-programacao-da-oportunidade`.
+- O pedido é pôr etapas no cronograma da edição, ou guardar a programação publicada: `definir-cronograma`.
 
 ## Pegadinhas
 

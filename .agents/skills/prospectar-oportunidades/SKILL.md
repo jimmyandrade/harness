@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.3.1"
   related:
     - criar-ideia-de-conteudo
     - criar-oportunidade
@@ -13,10 +13,10 @@ metadata:
     - definir-inscricao
     - definir-rotina
     - definir-tarefa
+    - definir-cronograma
     - definir-viagem
     - evoluir-habilidade
     - procurar-oportunidade
-    - sincronizar-cronograma
 ---
 
 # Prospectar oportunidades
@@ -86,7 +86,7 @@ Grave a leitura de fit de cada candidato que passou nas notas de curadoria da ed
 
 ### Passo 6
 
-Quando a localidade-alvo veio de uma viagem e a oportunidade tem vários dias, calcule as datas em comum com a viagem. Tire os dias de feira dessa viagem, que ficam no cronograma e nos pontos de contato. Registre só as atividades dessas datas, cada uma como marco do cronograma ligado à oportunidade, seguindo `sincronizar-cronograma`. Sem data em comum, diga que a edição cai fora da viagem e não registre programação.
+Quando a localidade-alvo veio de uma viagem e a oportunidade tem vários dias, calcule as datas em comum com a viagem. Tire os dias de feira dessa viagem, que ficam no cronograma e nos pontos de contato. Registre só as atividades dessas datas, cada uma como marco do cronograma ligado à oportunidade, seguindo `definir-cronograma`. Sem data em comum, diga que a edição cai fora da viagem e não registre programação.
 
 ### Passo 7
 
