@@ -3,7 +3,7 @@ name: definir-filtro-de-email
 description: Cria, edita e confere filtros de e-mail. Testa o critério na conta, escolhe as ações sem esconder o que a pessoa quer ver e lê o filtro salvo de volta. Usada quando a triagem pede um filtro ou a pessoa quer mudar um. Não serve para classificar mensagens nem cancelar assinatura.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.7.0"
   related:
     - organizar-emails
     - evoluir-habilidade
@@ -45,7 +45,7 @@ O domínio inteiro só serve quando nenhuma pessoa escreve dele: numa organizaç
 
 Quando o remetente muda de endereço, o novo entra com `OR` e o antigo fica, para o filtro continuar pegando o histórico.
 
-Pouca ou nenhuma conversa atingida não é motivo para excluir um filtro: o volume do remetente pode crescer depois. Confira se o endereço do critério é o que o remetente usa e mantenha o filtro. Exclua um filtro só quando a pessoa pedir.
+Pouca ou nenhuma conversa atingida não é motivo para excluir um filtro: o volume do remetente pode crescer depois. Confira se o endereço do critério é o que o remetente usa e mantenha o filtro. Exclua um filtro só quando a pessoa pedir. Substituir um filtro por uma versão nova, como na importação por arquivo, também exclui o antigo e segue a mesma regra.
 
 ### Passo 2
 
@@ -90,6 +90,8 @@ Leia de volta as conversas atingidas. A etiqueta se confere como `rotular-item` 
 Não deduza o nome de uma etiqueta a partir de identificadores diferentes. Sem correspondência fornecida pela integração entre o identificador interno e o nativo, declare a validação do nome no filtro limitada.
 
 Relate o caminho que criou o filtro, ou que nenhum criou, o filtro armazenado, as conversas conferidas e a aplicação automática futura.
+
+Relate também cada filtro excluído ou substituído, um por linha: o critério e as ações de antes, o filtro que ficou no lugar e o motivo. Diga o que se perdeu na troca, como uma ação que a importação recusou, e o tempo em que o critério ficou sem filtro.
 
 ### Passo 6
 
