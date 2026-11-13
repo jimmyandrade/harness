@@ -1,0 +1,17 @@
+{
+  "skill_name": "dividir-mensagem",
+  "evals": [
+    {
+      "id": "texto-acima-do-limite-vira-partes-numeradas",
+      "prompt": "Mande uma mensagem só para a organizadora da feira com a saudação, o aviso de que pagamos a segunda parcela, o pedido para confirmar se a montagem está liberada e a despedida. O texto tem cerca de 900 caracteres.",
+      "expected_output": "A habilidade contou os caracteres e viu que o texto passa de `Limite de caracteres por mensagem`. Avisou uma vez, antes do sim, que o texto vai em partes, mesmo com o pedido de uma mensagem só. Cortou entre parágrafos, deixou a saudação na primeira parte e a despedida à parte, e mostrou as partes numeradas com a contagem de caracteres de cada uma, para o sim valer para todas.",
+      "files": []
+    },
+    {
+      "id": "dois-assuntos-viram-lista-numerada",
+      "prompt": "Escreva para o fornecedor um pedido para confirmar o prazo de entrega e outro para mandar a nota fiscal, na mesma mensagem.",
+      "expected_output": "Os dois assuntos não dividiram o mesmo parágrafo. Com `Vários assuntos no rascunho` em `lista numerada`, a mensagem abriu com o contexto e trouxe um item numerado por assunto, cada um com o pedido dele, dentro do limite de caracteres.",
+      "files": []
+    }
+  ]
+}
