@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search
 compatibility: Precisa de internet. A busca semântica na lista de inscrições usa notion-ai-search no servidor notion.
 metadata:
   author: jimmyandrade
-  version: "0.13.0"
+  version: "0.13.1"
   aliases:
     - responder-inscricao
   related:
@@ -54,6 +54,10 @@ Quando for preciso achar a mensagem da organização sobre essa oportunidade, co
 Sugira também `acompanhar-edital`, que busca o resultado do edital na web, onde a organização publica.
 Oriente também a conferir os outros canais de contato com a organização.
 A inscrição feita numa plataforma de terceiros, como a de um evento, de uma feira ou de um edital, só vale quando o site da plataforma a mostra. Antes de dizer que ela foi feita, confirmada ou concluída, abra o site no navegador, com a sessão da pessoa, e confira a inscrição ou o pedido. Se o site pedir login, peça à pessoa que entre e espere.
+
+Quando a plataforma diz "confirmado" mas avisa que registrar interesse não garante participação, é pré-cadastro: a confirmação é a seleção pela organização.
+
+Sem inscrição em lugar nenhum, consulte a curadoria da oportunidade antes de cobrar: se ela foi vetada por falta de fit, não há inscrição a fazer e a conversa pode ficar concluída, com o motivo dito.
 
 Cruze o que o site mostra com a lista de inscrições: batem, a prova está completa; divergem, ou o site não foi aberto, diga qual lado não confirmou e proponha `definir-inscricao`, que só grava com o sim da pessoa. O e-mail de convite ou lembrete, e a falta de e-mail de confirmação, não provam nada. Cada inscrição do mesmo evento é conferida à parte.
 Um e-mail de ingresso disponível não aprova o pré-cadastro, a menos que a mensagem diga isso.
