@@ -313,6 +313,7 @@ flowchart LR
   definir_aplicacao_textil --> definir_composicao_textil
   definir_aplicacao_textil --> definir_estampa
   definir_aplicacao_textil --> identificar_duplicata
+  definir_aplicacao_textil --> procurar_banco_de_dados
   definir_arquivos_da_habilidade --> criar_habilidade
   definir_artigo_da_base_de_conhecimento --> criar_habilidade
   definir_artigo_da_base_de_conhecimento --> definir_historia_de_usuario
@@ -338,6 +339,7 @@ flowchart LR
   definir_composicao_textil --> definir_tarefa
   definir_composicao_textil --> definir_tecido
   definir_composicao_textil --> identificar_duplicata
+  definir_composicao_textil --> procurar_banco_de_dados
   definir_conta_bancaria --> definir_empresa
   definir_conta_bancaria --> definir_pessoa
   definir_conta_bancaria --> identificar_duplicata
@@ -355,6 +357,7 @@ flowchart LR
   definir_estampa --> definir_composicao_textil
   definir_estampa --> definir_tecido
   definir_estampa --> identificar_duplicata
+  definir_estampa --> procurar_banco_de_dados
   definir_filtro_de_email --> organizar_emails
   definir_filtro_de_email --> rotular_item
   definir_fonograma --> definir_obra_musical
@@ -466,6 +469,7 @@ flowchart LR
   definir_tecido --> definir_tarefa
   definir_tecido --> gerenciar_estoque
   definir_tecido --> identificar_duplicata
+  definir_tecido --> procurar_banco_de_dados
   definir_tipo_do_evento --> criar_oportunidade
   definir_tipo_do_evento --> definir_agenda
   definir_tipo_do_evento --> definir_agenda_de_popstar

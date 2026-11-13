@@ -12,25 +12,26 @@ Funcionalidade: Tecido
       E mostra o que achou, com o link de cada fonte
       E pede ao fornecedor só o que faltar
 
-  Regra: os bancos não vêm da habilidade
+  Regra: o banco vazio chama a procura de banco
 
     Exemplo: Banco de tecidos não definido
       Dado que as instruções do projeto não definem o banco de tecidos
       Quando a habilidade precisa ler ou criar uma página de tecido
-      Então ela pergunta à pessoa qual é o banco
-      Mas não usa um nome de banco próprio
+      Então ela chama a habilidade de procurar banco de dados
+      E diz a ela para que serve o banco e quais propriedades ele precisa ter
+      Mas não pergunta o nome à pessoa antes
 
     Exemplo: Banco de composição não definido
       Dado que as instruções do projeto não definem o banco de composição
       Quando a habilidade precisa ler ou criar uma linha de composição
-      Então ela pergunta à pessoa qual é o banco
-      Mas não usa um nome de banco próprio
+      Então ela chama a habilidade de procurar banco de dados
+      E diz a ela para que serve o banco e quais propriedades ele precisa ter
+      Mas não pergunta o nome à pessoa antes
 
-    Exemplo: Banco fora do workspace conectado
-      Dado que um dos bancos não está no workspace conectado
-      Quando a habilidade começa
-      Então ela para
-      E não usa o banco de outro workspace nem muda a estrutura de nenhum dos dois
+    Exemplo: Estrutura dos bancos
+      Dado que a habilidade usa os bancos
+      Quando ela grava
+      Então não muda a estrutura de nenhum dos dois
 
   Regra: cada cor de um tecido da ficha é uma página
 
@@ -169,7 +170,7 @@ Funcionalidade: Tecido
     Exemplo: Campo da foto não definido
       Dado que as instruções do projeto não definem o campo da foto do tecido
       Quando a habilidade vai guardar a foto
-      Então ela pergunta onde guardar
+      Então ela chama a habilidade de procurar banco de dados para achar o campo de arquivo
       Mas não escolhe o campo
 
     Exemplo: Tecido de antes da data de corte
