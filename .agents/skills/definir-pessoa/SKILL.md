@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.16.0"
+  version: "0.16.1"
   related:
     - definir-empresa
     - definir-grafia
@@ -164,13 +164,13 @@ Se você escrever o nome de quem participou ou de quem responde por uma ação s
 3. Sem o ID, procure pelo e-mail.
 4. Sem resultado único, pergunte.
 
-### Título emendado no cadastro pelo Chrome
+### Texto emendado no cadastro pelo Chrome
 
-Se você digitar o nome sem selecionar o título, ele se junta ao "Nova pessoa" e a lista ganha um registro com o nome errado.
+Se você digitar sem selecionar o texto que já está no campo, como o título "Nova pessoa" ou uma propriedade com valor, o novo texto se junta ao antigo e a lista ganha um registro errado.
 
-1. Selecione o título inteiro, com triplo clique, antes de digitar.
-2. Releia o título e o telefone depois de gravar.
-3. Corrija na mesma rodada, sem criar outra página.
+1. Entre no campo clicando no valor, nunca no nome da propriedade, que abre o menu de renomear e excluir. Depois dê triplo clique para selecionar tudo e digite.
+2. Confira que a página aberta é a da pessoa antes de editar: a busca guarda o termo anterior e o primeiro resultado pode ser outro.
+3. Releia o texto da página depois de gravar e corrija na mesma rodada, sem criar outra página.
 
 ### Pessoa ausente só na frase
 
