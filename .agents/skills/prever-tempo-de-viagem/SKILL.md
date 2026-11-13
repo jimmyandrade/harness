@@ -4,7 +4,7 @@ description: Prevê o tempo de uma viagem de carro pelo histórico do mesmo trec
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.1"
+  version: "0.2.0"
   related:
     - acompanhar-veiculo
     - definir-viagem
@@ -44,7 +44,7 @@ Confira se o trecho exige abastecer, pelo consumo e pela autonomia do veículo n
 
 ### Passo 5
 
-Recomende a faixa e deixe a escolha com a pessoa. Se a margem do cenário base for menor que a folga, diga isso na primeira linha da resposta. A escolha da saída e o cronograma da viagem seguem `definir-viagem`. A data sai com o dia da semana.
+Recomende a faixa e deixe a escolha com a pessoa. Se a margem do cenário base for menor que a folga, diga isso na primeira linha da resposta. A escolha da saída e o cronograma da viagem seguem `definir-viagem`. A data sai com o dia da semana, calculado como a regra do dia da semana manda.
 
 ### Passo 6
 

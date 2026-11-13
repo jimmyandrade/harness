@@ -3,11 +3,12 @@ name: sugerir-enquete-de-publico
 description: Use essa habilidade sempre que for sugerir uma enquete ou pergunta para conhecer o público de um negócio, como a cidade, o repertório ou o interesse em participar, mesmo sem dizer enquete. NÃO use para escrever a copy final, publicar, cadastrar a ideia ou o post, nem definir a campanha.
 metadata:
   author: jimmyandrade
-  version: "0.2.1"
+  version: "0.2.3"
   related:
     - conversar-no-whatsapp
     - criar-ideia-de-conteudo
     - definir-campanha-de-conteudo
+    - definir-grafia
     - definir-localidade-geografica
     - evoluir-habilidade
     - redigir-com-tom-de-voz
@@ -67,6 +68,10 @@ Peça a pergunta final e as variações a `redigir-com-tom-de-voz`, com o `Banco
 Entregue, nesta ordem, o objetivo de aprendizado, a ideia usada, o canal e o formato recomendados, a pergunta final, as opções, uma justificativa curta do que a enquete descobre e da decisão futura que apoia, e variações controladas quando fizerem sentido. A skill só entrega a enquete pronta, com a pergunta e as opções. O envio no WhatsApp segue `conversar-no-whatsapp` e `usar-whatsapp-web`, e só com o sim da pessoa.
 
 Quando a enquete serve a uma ação, como entregar algo, convidar ou organizar um encontro, a pergunta sozinha não basta. Entregue também uma mensagem de contexto, antes da enquete, com o que é oferecido, quem o fez e qual é o papel do negócio nisso, o limite (como poucas unidades), como a pessoa recebe ou participa e quando e onde. Esses fatos vêm da pessoa ou da fonte do projeto: pergunte o que faltar e não invente autoria, data, local nem quantidade. As opções podem juntar interesse e praça, e quem for de fora das praças responde no grupo.
+
+Nome de pessoa ou de organização na mensagem sai na grafia canônica do cadastro, conferida com `definir-grafia`. Nome que não está no cadastro: avise e não escolha a grafia pelo que a conversa escreveu.
+
+A mensagem de contexto abre com uma saudação, mesmo quando a pessoa passa um texto próprio: o texto dela entra no corpo, e a saudação continua. A pergunta da enquete se entende sozinha, porque quem a vê sem ler a mensagem de cima não sabe do que se trata. Ela repete o objeto, como "Você quer pegar um exemplar da fanzine com a gente?", e não só o nome dele.
 
 ### Passo 8
 
@@ -130,6 +135,7 @@ Assumi o canal padrão do projeto e todas as praças. O objetivo é saber onde e
 - "Outra cidade" parece opção fraca. Ela mantém a lista honesta e vira resposta aberta.
 - Uma pergunta curta parece boa para uma enquete. Quando a resposta decide uma ação, sem contexto a pessoa não sabe por que responde, nem se haverá o que receber.
 - O negócio parece o autor do que distribui. Ele pode só apoiar a distribuição de um trabalho de outra pessoa ou grupo, sem fim comercial: a fonte diz quem fez e a mensagem não toma a autoria.
+- A pergunta de uma enquete parece poder apoiar-se na mensagem de cima. A enquete aparece sozinha na lista de conversas e na prévia, e a mensagem pode estar fora da tela.
 - O banco de copy parece o lugar da pergunta final. A escrita passa por `redigir-com-tom-de-voz`.
 - O WhatsApp Web cria a enquete no menu de anexar. Esta habilidade não descreve o clique: ele fica nas habilidades do WhatsApp.
 
