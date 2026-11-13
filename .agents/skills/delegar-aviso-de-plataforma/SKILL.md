@@ -3,7 +3,7 @@ name: delegar-aviso-de-plataforma
 description: Transforma cada aviso de plataforma onde o negócio vende ou divulga, como campanha de vendas, missão de LIVE, regra nova ou pendência da conta, em campanha, tarefa ou playbook com responsável e prazo. Usada quando a triagem acha um aviso de marketplace, rede social ou loja virtual. NÃO serve para oportunidade de evento, posts nem decidir a participação.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   related:
     - organizar-emails
     - definir-campanha-de-conteudo
@@ -21,7 +21,7 @@ metadata:
 Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo.
 ```yaml
 "Formato da data com dia da semana": "terça-feira, 01/09/2026"
-# `Antecedência da tarefa`: quantos dias antes do fim da inscrição, ou do início da campanha quando não há inscrição, a tarefa vence.
+# `Antecedência da tarefa`: quantos dias antes do fim da inscrição, ou do início da campanha quando não há inscrição, a tarefa vence, salvo prazo da plataforma mais cedo.
 "Antecedência da tarefa": 7
 "Modo de aprendizado": "perguntar"
 ```
@@ -47,9 +47,11 @@ flowchart LR
   A -->|propaganda sem janela nem regra| X[Concluída]
 ```
 
-Campanha de vendas, oferta relâmpago, missão de LIVE ou desafio com datas é uma janela da plataforma. Busque a campanha pela janela em `definir-campanha-de-conteudo`; sem ela, crie a campanha com a janela da plataforma como âncora. Na mesma rodada, siga `procurar-tarefa` e, sem tarefa, `definir-tarefa`, com o responsável que a área da plataforma tem, o prazo de `Antecedência da tarefa` antes do fim da inscrição e o link do aviso.
+Campanha de vendas, oferta relâmpago, missão de LIVE ou desafio com datas é uma janela da plataforma. Busque a campanha pela janela em `definir-campanha-de-conteudo`; sem ela, crie a campanha com a janela da plataforma como âncora. Uma campanha própria do negócio na mesma data, como a Black Friday, recebe a janela da plataforma como uma seção, sem abrir outra campanha.
 
-A tarefa da campanha traz o que a plataforma exige para entrar: prazo de inscrição, preço-alvo, estoque, anúncios e as LIVEs com missão e duração. Quando a plataforma cria anúncio automático e cobra do negócio quem não configura a tempo, isso vai em destaque na tarefa.
+Na mesma rodada, siga `procurar-tarefa` e, sem tarefa, `definir-tarefa`, com o responsável que a área da plataforma tem, o prazo mais cedo entre `Antecedência da tarefa` antes do fim da inscrição e cada prazo da própria plataforma, como o dos anúncios antes do início, e o link do aviso.
+
+A tarefa da campanha traz o que a plataforma exige para entrar: prazo de inscrição, preço-alvo, estoque, anúncios e as LIVEs com missão e duração. Quando a plataforma cria anúncio automático e cobra do negócio quem não configura a tempo, isso vai em destaque na tarefa. Um prazo da plataforma que já passou também vai em destaque, e a tarefa pede a decisão antes de inscrever qualquer produto.
 
 Mudança de política, taxa, prazo, métrica ou requisito segue `definir-playbook`, com a regra, a data de vigência e o link do aviso. Quando a regra pede uma ação até uma data, também vira tarefa.
 
@@ -57,7 +59,7 @@ Pendência da conta, como aprovação que pede o primeiro produto, documento ou 
 
 ### Passo 3
 
-O aviso que repete uma campanha ou regra já delegada ganha o link da tarefa ou da página e não abre outra.
+O aviso que repete uma campanha ou regra já delegada ganha o link da tarefa ou da página e não abre outra. Entre os lembretes da mesma campanha, o mais novo fica com ação pendente e os anteriores ficam concluídos.
 
 O estado da conversa segue `rotular-item`. A conversa delegada fica com ação pendente até a tarefa terminar, e a propaganda sem janela nem regra fica concluída.
 
@@ -108,6 +110,7 @@ O playbook de atendimento ganhou a regra nova, com a vigência e o link do aviso
 ## Casos-limite
 
 - O aviso traz uma campanha cuja janela já passou: relate como perdida e não abra tarefa.
+- A janela está aberta, mas um prazo da plataforma dentro dela já passou, como o dos anúncios: a tarefa sai e diz o risco em destaque.
 - A loja ainda não pode participar, como sem produto cadastrado: a tarefa da campanha depende da pendência da conta, e as duas saem ligadas.
 - O aviso é propaganda de recurso, sem janela nem regra: concluída.
 - A área não tem responsável nas instruções do projeto: a tarefa sai sem responsável e a resposta pergunta quem assume.
@@ -117,6 +120,7 @@ O playbook de atendimento ganhou a regra nova, com a vigência e o link do aviso
 
 - E-mail na aba de promoções parece propaganda. Ele pode trazer o prazo de inscrição da campanha do ano.
 - Aviso "a todos os vendedores" parece não dizer respeito ao negócio. Ele muda a regra que o negócio segue na próxima venda.
+- O fim da inscrição parece o prazo da tarefa. A plataforma pode ter um prazo mais cedo, como os anúncios 7 dias antes do início, e é ele que vence primeiro.
 - Participar de campanha parece grátis. Algumas plataformas exigem anúncio ativo e criam um anúncio automático cobrado de quem não configura a tempo.
 - Responder ao e-mail do suporte da plataforma parece abrir um chamado. O endereço pode não receber mensagens, e a resposta volta sem entrega.
 
