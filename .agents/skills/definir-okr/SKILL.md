@@ -4,7 +4,7 @@ description: Cria, revisa e atualiza os objetivos e os key results de uma área 
 compatibility: Precisa de Python quando a execução é local.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.4.1"
   related:
     - definir-medicao-de-metrica
     - definir-tarefa
@@ -198,8 +198,9 @@ Sem ciclo do período na lista, pergunte se cria o ciclo, liga a um ciclo maior 
 Com mais de um objetivo ou key result, mostre o plano antes de gravar.
 Depois de gravar, mostre o nome, o status e o link de cada um.
 
-Toda mudança no valor-alvo, na data-alvo ou na métrica de um key result já gravado entra no histórico do próprio key result, no campo de observações que o mapeamento de dados indica.
-Cada entrada leva a data, o valor anterior, o valor novo e o porquê, nas palavras da pessoa, sem apagar as entradas antigas.
+Toda mudança no valor-alvo, na data-alvo ou na métrica de um key result já gravado entra no histórico do próprio key result.
+O histórico fica nos comentários da página do key result quando a fonte de dados é o Notion, e no lugar equivalente a comentário nas outras fontes. Nunca vai para o corpo da página nem para uma propriedade, como as observações.
+Cada entrada é um comentário novo, com a data, o valor anterior, o valor novo e o porquê, nas palavras da pessoa, sem editar nem apagar os comentários antigos.
 Sem o porquê, pergunte antes de gravar a mudança.
 
 ### Passo 10
@@ -255,9 +256,9 @@ Se você deduzir a data-base pelo mês do pedido e gravar as datas sem ciclo por
 
 Se você trocar o valor-alvo de R$ 3.600 para R$ 5.000 e só sobrescrever o número, ninguém mais sabe que o alvo mudou nem por quê, e a próxima revisão discute de novo a mesma decisão.
 
-1. Acrescente ao histórico do key result a data, o valor anterior, o valor novo e o porquê.
+1. Acrescente um comentário ao key result com a data, o valor anterior, o valor novo e o porquê, e não escreva no corpo nem numa propriedade.
 2. Sem o porquê, pergunte antes de gravar.
-3. Mantenha as entradas antigas.
+3. Mantenha os comentários antigos.
 
 ### Ação sem mecanismo
 
@@ -280,7 +281,7 @@ a área tinha 5 objetivos no ciclo. Sugeri manter os 3 que conversam com a estra
 
 ### troque o alvo de vendas do mês de R$ 3.600 para R$ 5.000, porque é o que precisa entrar por mês na maquininha
 
-o alvo mudou de 3.600 para 5.000 e o histórico do key result ganhou a entrada: "12/11/2026: de R$ 3.600 para R$ 5.000. Motivo: é o valor mensal que precisa entrar na maquininha. Na negociação da taxa, o parceiro de pagamento ofereceu um desconto baixo, e a pessoa elevou o valor ao informar que um concorrente ofereceu condição melhor, com recebimento em dia útil, sem pedir nada em troca." A entrada anterior do histórico continuou no campo.
+o alvo mudou de 3.600 para 5.000 e o key result ganhou um comentário: "12/11/2026: de R$ 3.600 para R$ 5.000. Motivo: é o valor mensal que precisa entrar na maquininha. Na negociação da taxa, o parceiro de pagamento ofereceu um desconto baixo, e a pessoa elevou o valor ao informar que um concorrente ofereceu condição melhor, com recebimento em dia útil, sem pedir nada em troca." Os comentários anteriores continuaram como estavam, e as observações do key result não mudaram.
 
 ## Casos-limite
 
@@ -291,7 +292,7 @@ o alvo mudou de 3.600 para 5.000 e o histórico do key result ganhou a entrada: 
 - Não há absoluto possível: a porcentagem é o alvo, com a base escrita.
 - As `Fontes da estratégia` estão vazias e as instruções não dizem: peça as páginas antes de validar os objetivos.
 - A lista não está no workspace conectado: pare.
-- A mudança de valor chega sem o porquê: pergunte o motivo antes de gravar a entrada do histórico.
+- A mudança de valor chega sem o porquê: pergunte o motivo antes de gravar o comentário do histórico.
 
 ## Pegadinhas
 
