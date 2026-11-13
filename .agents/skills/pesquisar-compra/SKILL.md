@@ -4,7 +4,7 @@ description: Pesquisa o que comprar, cruza com despesas, estoque e bens que já 
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.2"
+  version: "0.3.3"
   related:
     - conversar-no-whatsapp
     - definir-ativo-imobilizado
@@ -80,6 +80,7 @@ A loja que bloqueia leitura automática não se contorna. Use o que a busca most
 
 Responda com `Quantidade de opções` opções, a recomendada primeiro. Para cada uma: o que atende, o que não está confirmado, o preço com fonte e data, e o link.
 Diga também a opção descartada e o motivo, para a pessoa não pesquisar de novo.
+Uma empresa só vale como descartada com a resposta dela. Sem resposta, diga que ela não foi contatada ou que está sem resposta, e liste quem foi contatada, quem respondeu e quem falta.
 Com o custo de hoje do Passo 2, mostre a conta de quando a compra se paga e marque o que é estimativa.
 Termine com a pergunta que ainda falta ao fabricante ou ao vendedor, quando houver, e com a decisão que cabe à pessoa.
 Não compre, não ponha no carrinho e não preencha dado de pagamento.
