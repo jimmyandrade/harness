@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.7.0"
+  version: "0.8.0"
   related:
     - acompanhar-retornos-pendentes
     - definir-obrigacao-financeira
@@ -87,6 +87,10 @@ flowchart LR
 
 O pedido sai com `Dias corridos de antecedência da extensão` antes da partida. Crie o lembrete na agenda do contexto e o marco no cronograma da viagem por `sincronizar-cronograma`. Registre na viagem e no veículo o pedido feito, com data e protocolo, ou a recusa com justificativa. Recusa por falta de caixa numa viagem de trabalho mostra que a projeção de caixa não cobriu a extensão: diga isso e que a participação deve ser revista. Sem pedido nem recusa justificada, diga que o veículo viaja sem a extensão. Proteção veicular não é seguro: confira o que ela cobre, como enchente ou perda de placa, em vez de supor.
 
+O produto adicional, como a extensão, tem regras no contrato: a carência, o intervalo entre alterações e a quem pedir. Leia a carência antes de pedir. Se ela termina depois da viagem, a extensão não cobre a viagem: diga isso e deixe a pessoa decidir se contrata.
+
+Grave no veículo as regras que a empresa informou, o limite de cobertura que ela disser e a decisão da pessoa, com a data, quem decidiu e o motivo, como a carência que termina depois das viagens previstas. Faça isso quando a resposta chegar, sem esperar a pessoa pedir. Uma decisão de não contratar não é recusa por falta de caixa e não pede o aviso sobre a projeção de caixa.
+
 ### Passo 7
 
 Toda fatura ou parcela citada traz o vencimento e o valor. Entregue as pendências do veículo em ordem de vencimento, com o total do mês, e diga o que ainda falta conferir. Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
@@ -99,6 +103,14 @@ Se você der uma multa ou um IPVA como pagos ou pendentes só por um e-mail, a s
 
 1. Diga de onde veio a informação.
 2. Indique a consulta no órgão de trânsito do estado de registro.
+
+### Regra da proteção só na conversa
+
+Se você der a carência e a decisão de não contratar à pessoa e não gravar no veículo, a próxima viagem repete a pergunta e a mesma resposta da empresa.
+
+1. Grave no veículo as regras, o limite e a decisão, com a data e o motivo.
+2. Preencha o raio de cobertura quando a empresa disser o limite.
+3. Diga na resposta qual página mudou, com o link.
 
 ### Planilha copiada sem conferir
 
@@ -119,8 +131,13 @@ Criei uma obrigação por linha, ligada ao carro, e uma despesa por vencimento c
 
 Registrei como despesa pessoal, ligada ao carro e à viagem, com o prazo de pagamento informado pela concessionária.
 
+### a proteção só cobre a assistência até 200 km, e a extensão tem carência de 30 dias
+
+A carência termina depois da viagem do fim de semana, então a extensão não a cobre. A pessoa decidiu não contratar. Gravei no veículo as regras do produto adicional, o limite de 200 km e a decisão com a data e o motivo, e preenchi o raio de cobertura. Não avisei a projeção de caixa, porque não foi recusa por caixa.
+
 ## Casos-limite
 
+- A pessoa decide não contratar a extensão por causa da carência: grave a decisão, a data e o motivo no veículo. A decisão vale para as viagens parecidas até a pessoa mudar.
 - Várias pessoas dirigem o mesmo carro: a multa vai para quem a pessoa indicar como condutor.
 - O carro foi registrado numa cidade e a pessoa mora em outra: o estado de registro decide o órgão de trânsito.
 - Uma parcela já foi paga por outra pessoa: registre o pagamento e quem pagou.
@@ -129,6 +146,7 @@ Registrei como despesa pessoal, ligada ao carro e à viagem, com o prazo de paga
 
 ## Pegadinhas
 
+- A resposta da empresa parece só informação para a conversa. A carência, o limite e a decisão da pessoa mudam a próxima viagem: grave no veículo antes de responder.
 - O endereço de quem dirige parece decidir o órgão de trânsito. Quem decide é o estado de registro do veículo.
 - Quem anda no carro parece motorista. Motorista é só quem dirige; passageiro não recebe pontos.
 - O e-mail da tag parece a fatura do pedágio sem praça. São cobranças diferentes.
