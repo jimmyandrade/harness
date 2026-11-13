@@ -3,7 +3,7 @@ name: mesclar-pull-request
 description: Mescla um pull request aberto na branch base e faz o que vem depois do merge, inclusive quando a pessoa avisa que mesclou. Usada quando a pessoa pede para mesclar, colocar na main ou diz que um PR foi mesclado, mesmo sem dizer merge. Não serve para fechar sem merge, abrir ou atualizar o PR nem para responder a revisão.
 metadata:
   author: jimmyandrade
-  version: "0.5.1"
+  version: "0.6.0"
   related:
     - atender-revisao-de-pull-request
     - atualizar-branch-do-pull-request
@@ -11,6 +11,7 @@ metadata:
     - criar-pull-request
     - definir-issue-do-github
     - evoluir-habilidade
+    - fatiar-pull-request
     - fechar-pull-request
     - limpar-copias-de-trabalho
     - sincronizar-status-da-tarefa
@@ -161,9 +162,12 @@ O PR mudava a mensagem de erro do CI para uma branch com o prefixo de um agente 
 ## Casos-limite
 
 - O PR está em rascunho: diga isso e pergunte se tira do rascunho antes. O merge não tira sozinho.
+- Um PR da pilha está em rascunho: o merge da pilha só aceita PR aberto e fora do rascunho, então pergunte se tira antes.
 - A pessoa pede para mesclar a base na branch: isso é `atualizar-branch-do-pull-request`, que usa rebase.
 - O PR é de release, como o do Release Please: depois do merge, a tag sai pelo CI. Atualize o plugin instalado quando as instruções do projeto mandarem.
-- Vários PRs: mescle na ordem de dependência e faça o Passo 3 para cada um.
+- Vários PRs ligados numa pilha do GitHub, como `fatiar-pull-request` monta: mescle a pilha com `gh stack merge`, que a funde de baixo para cima, tudo ou nada.
+- Vários PRs sem pilha: mescle na ordem de dependência.
+- Em vários PRs, o Passo 2 vale para cada PR até o escolhido, e o Passo 3, para cada PR que entrou.
 - A sugestão já está na base, por outro PR: resolva a thread com o link desse PR e não abra outro.
 
 ## Pegadinhas
@@ -177,6 +181,8 @@ O PR mudava a mensagem de erro do CI para uma branch com o prefixo de um agente 
 - A sincronização parece começar depois do merge. Ela pode já ter terminado, ou nem disparar, quando você vai conferir. Leia o estado e os gatilhos antes de esperar.
 - A hora de uma execução não diz o commit dela. Leia o `headSha` antes de chamar uma execução de antiga.
 - Uma revisão pendente não aparece para mais ninguém e não segura o merge. Só quem a escreveu a vê, então leia as revisões com o `gh` da pessoa.
+- `gh stack merge` parece perguntar até onde mesclar. Sem terminal interativo, ou com `--yes`, ele mescla sem perguntar a pilha inteira, ou até o PR dado, então passe sempre o número do PR.
+- O merge da pilha parece apagar as branches como o `--delete-branch`. O comando não tem essa opção, então confira se as branches saíram.
 
 ## Scripts disponíveis
 
@@ -189,3 +195,4 @@ O PR mudava a mensagem de erro do CI para uma branch com o prefixo de um agente 
 5. Execuções do commit mesclado: `gh run list --repo <Repositório> --commit <hash> --json workflowName,status,conclusion`.
 6. Merge: `gh pr merge <número> --repo <Repositório> --<Tipo de merge> --delete-branch`.
 7. Autor, revisões e conversa: `gh pr view <número> --repo <Repositório> --json author,reviews,comments` e `gh api user --jq .login`.
+8. Pilha: `gh stack merge <número do PR> --<Tipo de merge>`. O comando confere só se o PR está aberto e fora do rascunho, e o GitHub avalia as regras da branch na hora do merge.
