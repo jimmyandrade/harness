@@ -3,7 +3,7 @@ name: criar-pull-request
 description: Use essa habilidade sempre que for abrir ou atualizar PR, subir uma correção ou mandar para a branch principal, mesmo sem dizer PR. NÃO use para mesclar (use mesclar-pull-request), responder comentário de revisão nem para só commitar (use criar-commit).
 metadata:
   author: jimmyandrade
-  version: "0.43.1"
+  version: "0.44.0"
   related:
     - atualizar-branch-do-pull-request
     - criar-commit
@@ -149,8 +149,10 @@ Mande o link na resposta.
 Depois de abrir, leia o status do PR pelas ferramentas de PR do app e vincule o PR se ele não aparecer. Não fique consultando o CI em loop.
 
 Depois de ligar o PR, renomeie a sessão de conversa com a IA, o nome da conversa na lista do app, para `[CHAVE] título do PR`, com a chave do card e o título do PR como estão (`[ABC-123] fix(login): accept an uppercase email`).
-O título do PR e o da issue não mudam: só o nome da conversa muda.
+O título do PR e o da issue não mudam, só o da conversa.
 Sem card, use a chave da issue do projeto, e sem nenhuma das duas, só o título do PR. Confira a chave e o título no GitHub e na tarefa antes, e não pergunte.
+
+Sessão com nome de oportunidade não se renomeia.
 
 Com `Habilidade que pede a revisão` preenchida e o PR fora do rascunho, e com a evidência visual registrada quando a mudança altera a tela, siga essa habilidade para o PR aberto e entregue o que ela devolver, como o rascunho do pedido. Um PR em rascunho não pede revisão.
 
