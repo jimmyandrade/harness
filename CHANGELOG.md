@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.83.0](https://github.com/jimmyandrade/harness/compare/v1.82.0...v1.83.0) (2026-11-13)
+
+
+### Features
+
+* **sincronizar-status-da-tarefa:** read the board backlog for the status panorama ([#1129](https://github.com/jimmyandrade/harness/issues/1129)) ([9f14a26](https://github.com/jimmyandrade/harness/commit/9f14a2640fad33f1c5455a1c5ee7b5667e0d3e53))
+
+
+### Bug Fixes
+
+* **evoluir-habilidade:** send the name and place of a new script to definir-arquivos-da-habilidade ([#1128](https://github.com/jimmyandrade/harness/issues/1128)) ([456635a](https://github.com/jimmyandrade/harness/commit/456635a6b3c1e20e6d96e4525591baebdb263dd0))
+
 ## [1.82.0](https://github.com/jimmyandrade/harness/compare/v1.81.0...v1.82.0) (2026-11-13)
 
 
