@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
   related:
     - definir-empresa
     - identificar-duplicata
@@ -51,6 +51,10 @@ A localidade do local é validada contra a da empresa. Se forem diferentes, regi
 
 A cidade que não está na lista de localidades segue `definir-localidade-geografica`. Não use o estado nem a cidade vizinha como aproximação.
 
+O nome que o endereço traz depois da rua pode ser bairro, distrito ou cidade, e um bairro pode ter o nome de um município. Antes de criar ou propor uma localidade com esse nome, descubra o que ele é: pesquise na internet o endereço, o CEP e o cadastro do espaço, e cite o que achou. A localidade do local é a cidade.
+
+Bairro ou distrito não vira localidade quando a lista não tem esse nível. O bairro fica no endereço da empresa, e a desambiguação da empresa diz que ele não é o município de mesmo nome. Sem como saber qual dos dois é, pergunte.
+
 ### Passo 5
 
 Um espaço dentro do local, como sala, palco ou auditório, fica um nível abaixo da empresa. Ele só é gravado quando o mapeamento tem onde guardá-lo. Sem esse lugar, pergunte onde guardar e não escreva o espaço no corpo nem no nome da empresa.
@@ -84,6 +88,14 @@ Se você preencher o estado porque a cidade não existe na lista, a busca por ci
 1. Chame `definir-localidade-geografica`.
 2. Vincule só depois que a cidade existir.
 
+### Bairro cadastrado como localidade
+
+Se você propuser ou criar como localidade o nome do bairro do endereço, a lista ganha um lugar que não é cidade, ou o local aponta para o município de mesmo nome.
+
+1. Pesquise o que o nome é, com o endereço e o CEP, e cite a fonte.
+2. Vincule à cidade que já existe na lista de localidades.
+3. Grave o bairro no endereço e a diferença para o município homônimo na desambiguação da empresa.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
@@ -96,8 +108,14 @@ O nome do espaço veio, o endereço não. Perguntei o endereço completo antes d
 
 Perguntei se cadastra agora. Com o sim, a `definir-empresa` cadastrou e vinculei o local. A localidade da empresa e a do local batiam.
 
+### o espaço fica na Rua das Flores, 100, Vila Modelo, Cidade Exemplo, e existe também um município chamado Vila Modelo
+
+Pesquisei o endereço e o CEP: Vila Modelo é um bairro de Cidade Exemplo. Não criei localidade para o bairro. Vinculei à Cidade Exemplo, gravei o bairro no endereço da empresa e escrevi na desambiguação que não é o município de Vila Modelo.
+
 ## Casos-limite
 
+- O endereço traz um bairro ou distrito, e a lista de localidades não tem esse nível: a localidade é a cidade. O bairro fica no endereço.
+- O bairro tem o nome de um município: a desambiguação da empresa diz qual é. Sem como saber, pergunte.
 - Nome do espaço sem endereço, ou endereço sem nome: pergunte o que falta.
 - Duas empresas com o mesmo nome em cidades diferentes: o endereço decide. Sem ele, pergunte.
 - A localidade do local difere da da empresa: registre, mostre os dois e confirme.
@@ -111,6 +129,7 @@ Perguntei se cadastra agora. Com o sim, a `definir-empresa` cadastrou e vinculei
 - Um local com vários espaços é uma empresa só. Sala, palco e auditório são o nível de baixo.
 - Empresa nova parece cadastro automático. Esta habilidade pergunta antes de chamar a `definir-empresa`.
 - O estado parece uma aproximação aceitável para a cidade. Não é.
+- O nome depois da rua parece sempre uma cidade. Pode ser um bairro, e pode ter o nome de um município. A localidade é a cidade.
 
 ## Scripts disponíveis
 
