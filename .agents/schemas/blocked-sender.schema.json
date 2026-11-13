@@ -9,11 +9,12 @@
     "value",
     "kind",
     "block_chrome_url",
-    "node"
+    "node",
+    "decided_by"
   ],
   "properties": {
     "value": {
-      "description": "The full email address or the domain that is blocked, always in lowercase.",
+      "description": "The full email address or the domain that is blocked, always in lowercase. It is stored with [.] in place of each dot and [@] in place of each at sign, so no tool turns it into a link, and the lists to paste restore them.",
       "type": "string",
       "minLength": 1
     },
@@ -26,8 +27,13 @@
       ]
     },
     "block_chrome_url": {
-      "description": "True when the domain also goes in the browser block list of URLs. Always false for an address.",
-      "type": "boolean"
+      "description": "Whether the domain also goes in the browser block list of URLs. It is a choice, never a checkbox: yes and no are decisions of the person, and maybe is a decision that still waits for an answer. Always no for an address.",
+      "type": "string",
+      "enum": [
+        "yes",
+        "no",
+        "maybe"
+      ]
     },
     "node": {
       "description": "The node of the decision tree that classified the value.",
@@ -49,7 +55,7 @@
       "type": "string"
     },
     "decided_by": {
-      "description": "The person who decided.",
+      "description": "The person who decided, always asked for and never assumed.",
       "type": "string"
     },
     "decided_at": {
