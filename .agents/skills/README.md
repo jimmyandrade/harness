@@ -98,6 +98,7 @@ flowchart LR
     delegar_aviso_de_plataforma["delegar-aviso-de-plataforma"]
     descrever_habilidade_ou_schema["descrever-habilidade-ou-schema"]
     emitir_documento_oficial["emitir-documento-oficial"]
+    entregar_rascunho_de_mensagem["entregar-rascunho-de-mensagem"]
     enviar_email["enviar-email"]
     enviar_imagem_no_whatsapp["enviar-imagem-no-whatsapp"]
     enviar_mensagem_no_slack["enviar-mensagem-no-slack"]
@@ -563,6 +564,7 @@ flowchart LR
   descrever_habilidade_ou_schema --> criar_pull_request
   descrever_habilidade_ou_schema --> revisar_habilidade
   descrever_habilidade_ou_schema --> testar_habilidade
+  entregar_rascunho_de_mensagem --> enviar_mensagem_no_slack
   enviar_email --> acompanhar_retornos_pendentes
   enviar_email --> definir_pessoa
   enviar_email --> definir_vocabulario
@@ -577,6 +579,7 @@ flowchart LR
   enviar_mensagem_no_slack --> definir_agenda
   enviar_mensagem_no_slack --> definir_pessoa
   enviar_mensagem_no_slack --> definir_vocabulario
+  enviar_mensagem_no_slack --> entregar_rascunho_de_mensagem
   enviar_mensagem_no_slack --> escrever_link
   enviar_mensagem_no_slack --> pedir_revisao_de_pr_no_slack
   enviar_mensagem_no_slack --> redigir_com_tom_de_voz
