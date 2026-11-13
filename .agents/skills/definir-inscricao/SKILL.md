@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet. A busca na lista de inscrições usa notion-ai-search no servidor notion.
 metadata:
   author: jimmyandrade
-  version: "0.14.1"
+  version: "0.15.0"
   aliases:
     - atualizar-inscricao
   related:
@@ -55,6 +55,8 @@ Sem quem fez a inscrição e sem a pessoa ou empresa, exija essas marcações. N
 
 Na linha que já existe, mude só a propriedade que a pessoa nomeou. Na linha nova, grave a edição, o status, quem fez a inscrição, a pessoa ou empresa e a foto nos comprovantes. Sem esses dois, não cadastre.
 
+A linha nova nasce do modelo de página padrão da lista, quando a lista tem um, como o de nova inscrição. Aplique o modelo uma vez e leia a página antes de escrever no corpo: o modelo entra depois da criação, e aplicá-lo de novo repete o conteúdo. O corpo segue as orientações que o modelo traz.
+
 Quando a mensagem ou a foto confirma a participação, o status da inscrição passa ao de inscrição confirmada. Se a própria plataforma avisa que registrar interesse não garante participação, o status é o de pré-cadastro até a organização selecionar. O valor é um status que a lista já tem. Não invente status. Não escreva o status nas observações nem no corpo.
 
 A foto do pedido que ela enviou entra nos comprovantes na mesma gravação, mesmo sem ela nomear essa propriedade. Não grave a foto no corpo. O arquivo sobe por upload e entra numa atualização da página depois de criá-la: a criação não aceita o arquivo enviado.
@@ -83,7 +85,7 @@ Sem data nem regra confiável, sinalize isso antes de qualquer recomendação, s
 
 Formulário colado. Quando a pessoa cola o texto de um formulário de inscrição, ache a oportunidade por `procurar-oportunidade` e confira se já existe inscrição ligada a ela. Se não existir, crie a inscrição como espelho operacional, com o status de em andamento, mesmo sem envio.
 
-O formulário vai no corpo da inscrição, nunca no da oportunidade. Não use abas, toggles nem blocos colapsáveis: use títulos, negrito, listas e separadores. Cada pergunta vira um título com um parágrafo livre abaixo. A pergunta de escolha vira caixas de seleção `- [ ]`. O item de documentos ou de confirmações vira lista de marcação. O campo com asterisco ganha "(obrigatório)".
+O formulário vai no corpo da inscrição, nunca no da oportunidade. Quando você preenche e envia o formulário, o corpo guarda cada pergunta com a resposta enviada, sem esperar pedido. Não use abas, toggles nem blocos colapsáveis: use títulos, negrito, listas e separadores. Cada pergunta vira um título com um parágrafo livre abaixo. A pergunta de escolha vira caixas de seleção `- [ ]`. O item de documentos ou de confirmações vira lista de marcação. O campo com asterisco ganha "(obrigatório)".
 
 Respostas do formulário. A inscrição em nome da empresa usa os contatos da empresa, como o WhatsApp, o e-mail e o site da página dela na lista de empresas, e não os da pessoa que vai participar. Os textos vêm do texto-base de inscrições do negócio. Mostre cada resposta com a fonte dela, para a pessoa corrigir o que estiver desatualizado, e explique na mesma frase o termo do formulário que ela pode não conhecer.
 
@@ -215,6 +217,7 @@ busquei a inscrição da Loja Exemplo como expositora no Festival Rota Sul 2026.
 - Uma propriedade que copia o e-mail da pessoa, a data da edição ou um link do formulário parece pedir valor. Ela não se grava.
 - Uma confirmação de expositor não confirma as outras inscrições do mesmo evento.
 - O telefone de quem vai ao palco parece o contato da inscrição. Na inscrição da empresa, o contato é o da empresa.
+- A tabela do que foi enviado, mostrada na resposta, parece bastar. Quem abre a inscrição depois não vê a conversa: as respostas enviadas vão para o corpo da inscrição.
 - O campo opcional parece dispensável. Quem seleciona lê o formulário inteiro, e o campo vazio é uma chance perdida.
 - A data da confirmação só entra se a pessoa disser a data ou se `garantir-ingresso` viu o pedido confirmado na tela.
 - A criação da página parece aceitar o arquivo enviado nos comprovantes. Ela recusa: o arquivo entra na atualização seguinte.
