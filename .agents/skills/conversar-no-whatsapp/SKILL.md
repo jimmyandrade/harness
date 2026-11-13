@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.36.1"
+  version: "0.37.0"
   aliases:
     - redigir-mensagem-de-whatsapp
   related:
@@ -58,6 +58,8 @@ Leia os valores nas instruções do projeto, na entrada desta habilidade. Na aus
 "Fechamento em mensagem separada": "sim"
 # `Página de instruções do WhatsApp` é o endereço da página com as regras da conta, como a ferramenta comercial por onde a mensagem sai. Vazio pula a leitura.
 "Página de instruções do WhatsApp": ""
+# `Horário de desculpa` é a faixa do relógio em que a mensagem pede desculpa pelo horário. Vazio não pede.
+"Horário de desculpa": "22h às 7h"
 ```
 ## Instruções
 
@@ -104,6 +106,10 @@ Para registrar a demanda, leve a data e o horário da primeira mensagem do pedid
 ### Passo 5
 
 Antes de rascunhar, leia a conversa de destino desde a última mensagem que você leu nela, seguindo o Passo 2, e confira cada pergunta do rascunho contra a conversa inteira, inclusive a mensagem que ela cita. A pergunta que o contato já respondeu sai, mesmo quando outra fonte mais antiga diverge: mostre a divergência à pessoa, não ao contato. Tire também o que já foi dito e diga, antes do texto, o que ele acrescenta. Se tudo já foi dito, diga isso e não rascunhe.
+
+Confira no manual da oportunidade cada pergunta sobre exigência do organizador, como janela de montagem, e use a janela que ele dá.
+
+Abra com a saudação do período, lido no relógio, e uma frase de contexto. Dentro do `Horário de desculpa`, peça desculpa pelo horário.
 
 Com `Página de instruções do WhatsApp` preenchida, leia a página antes de rascunhar e siga a conta e as regras dela. Se ela não abrir na conexão, pare e peça.
 
