@@ -120,6 +120,7 @@ flowchart LR
     lancar_venda["lancar-venda"]
     levantar_ambiente_do_repositorio["levantar-ambiente-do-repositorio"]
     levantar_contexto_do_pull_request["levantar-contexto-do-pull-request"]
+    levantar_gravacoes_de_reunioes["levantar-gravacoes-de-reunioes"]
     liberar_espaco_em_disco["liberar-espaco-em-disco"]
     limpar_copias_de_trabalho["limpar-copias-de-trabalho"]
     medir_habilidade["medir-habilidade"]
@@ -506,6 +507,7 @@ flowchart LR
   definir_registro_de_reuniao --> definir_grafia
   definir_registro_de_reuniao --> definir_pessoa
   definir_registro_de_reuniao --> identificar_duplicata
+  definir_registro_de_reuniao --> levantar_gravacoes_de_reunioes
   definir_registro_de_reuniao --> mesclar_registro
   definir_registro_de_reuniao --> preparar_tarefa_do_pull_request
   definir_registro_de_reuniao --> procurar_agenda
@@ -675,6 +677,9 @@ flowchart LR
   levantar_contexto_do_pull_request --> levantar_ambiente_do_repositorio
   levantar_contexto_do_pull_request --> mesclar_pull_request
   levantar_contexto_do_pull_request --> rotular_item
+  levantar_gravacoes_de_reunioes --> definir_registro_de_reuniao
+  levantar_gravacoes_de_reunioes --> procurar_agenda
+  levantar_gravacoes_de_reunioes --> transcrever_audio_e_video
   liberar_espaco_em_disco --> limpar_copias_de_trabalho
   limpar_copias_de_trabalho --> criar_copia_de_trabalho
   limpar_copias_de_trabalho --> criar_pull_request
