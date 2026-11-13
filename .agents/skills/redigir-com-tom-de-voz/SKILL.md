@@ -3,10 +3,11 @@ name: redigir-com-tom-de-voz
 description: Use essa habilidade sempre que for criar, redigir, editar, revisar ou responder texto da marca no tom de voz, mesmo sem dizer copy. NÃO use para responder quem conversa com a IA, descrever uma skill, titular tarefa ou oportunidade, cravar a grafia, alterar formato de conteúdo, nem assumir cliente, peça, oportunidade ou histórico.
 metadata:
   author: jimmyandrade
-  version: "0.22.2"
+  version: "0.23.0"
   aliases:
     - escreva-usando-o-tom-de-voz
   related:
+    - perfilar-tom-de-voz
     - definir-vocabulario
     - definir-pessoa
     - evoluir-habilidade
@@ -42,6 +43,8 @@ Antes de criar, redigir, editar, revisar ou responder, consulte o vocabulário e
 Texto que vai ser enviado por um conector, como uma resposta de e-mail, depende da ferramenta de envio. Antes de redigir, confira se as configurações da ferramenta a liberam. Sem a liberação, peça-a logo, com o nome da ferramenta, em vez de descobrir o bloqueio só no envio. A liberação não dispensa o sim da pessoa ao texto e ao destino. Se o envio for bloqueado mesmo assim, deixe o rascunho no destino e diga o que bloqueou.
 
 Consulte o vocabulário com Scripts disponíveis, com `tags` de quem fala, do evento, do canal e do formato do texto, como `maria-silva`, `festival-de-verao`, `palco` ou `whatsapp`. Use a tag que o vocabulário já tem para esse contexto. Consulte no idioma do texto que vai escrever: texto em inglês consulta `en`, texto em português consulta `pt-BR`. A consulta com tags deixa de fora o termo de outra pessoa, de outro evento ou de outro canal. Sem saber quem fala no texto, pergunte.
+
+Quem tem perfil de `perfilar-tom-de-voz`: siga o resumo nas notas do contato ou no cadastro.
 
 O vocabulário é o do negócio para o qual o texto sai e fica no harness dele, não no core nem na pasta da sessão. Com terminal, rode a CLI na pasta desse harness. Sem terminal, chame a ferramenta do servidor `vocabulary`.
 
@@ -239,7 +242,7 @@ O título ficou específico, com o nome canônico que a fonte já tinha. Não vi
 - Título só «Reservado», «Evento», «Reunião» ou «Feira»: leve o nome canônico. Provisório pode abrir com «Reservado para» ou «A confirmar».
 - O título vivo cria ambiguidade na busca: mantenha o nome canônico.
 - A grafia ainda não foi conferida: pare. Use a grafia que a pessoa ou as instruções do projeto já fecharam. Não grave a forma do pedido.
-- O texto tem quem fala, evento ou canal: consulte com essas tags. Termo de outro contexto fica de fora. Sem saber quem fala, pergunte.
+- O texto tem quem fala, evento ou canal: consulte com essas tags, como o Passo 2 manda.
 - O texto traz emoji, combinação ou uso simbólico: o estado vem do vocabulário. Sem a linha, pare. Não invente. O cadastro segue `definir-vocabulario`.
 - Emoji marcado como evitar, proibido, ruim, desalinhado ou restrito: sai da versão final. Na dúvida, pergunte. Não aprove por gosto ou tendência.
 - Termo `cliche`: a palavra literal sai. Entra imagem, cena, ação, efeito ou situação. Frase em `rejected` e termo em `related` também saem.
@@ -255,9 +258,9 @@ O título ficou específico, com o nome canônico que a fonte já tinha. Não vi
 - Emoji parece enfeite de legenda. Ele é vocabulário. O nível vem da linha. Sem linha, a copy espera.
 - Um emoji na moda parece melhor que a regra. Evitar, proibido, ruim, desalinhado e restrito saem da versão final.
 - Um sinônimo parece resolver o clichê. A troca é imagem, cena, ação, efeito ou situação. A palavra literal, a frase rejeitada e o termo ligado ficam de fora.
-- Avisar que a chance já passou parece urgência. A alternativa mantém desejo, urgência e conversa natural sem essa perda consumada.
+- Avisar que a chance já passou parece urgência. A alternativa mantém desejo e urgência, sem perda consumada.
 - O motivo verdadeiro de uma mudança parece transparência. Contado a quem chega, como a troca frequente de pessoas no papel, ele é contexto interno e gera desconforto. O motivo neutro entra no lugar.
-- Assunto de e-mail parece legenda. No celular ele é notificação: curto, pessoal e com curiosidade, sem clickbait vazio e sem dizer que a chance já passou.
+- Assunto de e-mail parece legenda. No celular ele é notificação: curto, pessoal e com curiosidade.
 - Um apelido parece deixar a mensagem calorosa. Sem saber se a pessoa gosta dele, ele pode soar íntimo demais: só o cadastro confirma como ela é chamada.
 - O dado que a conversa já citou parece confirmado. Cliente, peça, oportunidade e histórico comercial vêm da fonte que a pessoa indicou.
 - Título publicitário parece o tom de voz. O texto pede intenção, recorte e conexão, e recusa a fórmula genérica. A busca precisa continuar achando o nome canônico.

@@ -3,7 +3,7 @@ name: acompanhar-resposta-no-whatsapp
 description: Acompanha, por uma rotina que lê as conversas com a etiqueta de ação esperada, se o contato respondeu a uma mensagem enviada no WhatsApp, avisa quando a resposta chega e troca a etiqueta. Usada quando a mensagem espera resposta, como uma pergunta, um pedido ou um prazo, ou quando a pessoa pergunta se alguém já respondeu. Não serve para ler, redigir nem enviar a mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.6.1"
+  version: "0.7.1"
   related:
     - acompanhar-retornos-pendentes
     - conversar-no-whatsapp
@@ -59,6 +59,8 @@ Ache a conversa e siga `usar-whatsapp-web` para o resto: o botão do aviso e o Q
 Quando a resposta chega, a rotina avisa a pessoa, com a data inteira e o dia da semana calculado como a regra do dia da semana manda, e troca `Ação esperada` por `Respondida`, por `rotular-item`. A conversa sai do filtro, e a rotina segue como está.
 A conversa que passa de `Dias sem resposta para avisar` sem resposta ganha um aviso, uma vez, e mantém a etiqueta.
 Sem nenhuma conversa na etiqueta, a rotina diz isso em uma linha.
+Uma resposta que fecha o assunto, como uma confirmação ou um ok, não é a última palavra: para fechar o loop, a última mensagem de toda conversa é nossa, com um agradecimento curto. Ao avisar a pessoa que a resposta chegou, a sessão propõe essa mensagem, como `conversar-no-whatsapp` manda para o texto e o sim, e a conversa só ganha a etiqueta de assunto concluído depois que ela sai.
+A mensagem de fechamento só agradece. Se citar dia, horário ou compromisso, usa o que a conversa e o cadastro confirmaram, com o dia conferido na conversa: nunca acrescenta uma data que ninguém confirmou.
 Uma mensagem que espera resposta e saiu sem a etiqueta, porque a pergunta do sim não citou o acompanhamento ou porque a etiqueta ficou para depois, não sai dos próximos passos da resposta até a conversa ser etiquetada ou a pessoa recusar. Ao perceber a falta, confira antes a lista de conversas: a resposta pode já ter chegado.
 
 Quando o prazo da mensagem vence hoje, a sessão que enviou não pergunta se acompanha: o sim do envio já valeu para isso. Ela confere a conversa no mesmo turno, pela dona, a cada espera que dobra a partir de `Primeira espera com prazo no dia`, e diz cada mudança, como uma resposta que chegou ou uma pergunta que ficou sem resposta. A conferência segue `Ao conferir a resposta`. Passado o prazo, ou o tempo que o sim disse, confira a lista de conversas por outro caminho antes de encerrar o turno, e diga o estado da conversa e o que a pessoa decide a seguir.
