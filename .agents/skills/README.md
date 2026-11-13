@@ -64,6 +64,7 @@ flowchart LR
     definir_jornada_de_producao["definir-jornada-de-producao"]
     definir_lancamento_financeiro["definir-lancamento-financeiro"]
     definir_link_rastreavel["definir-link-rastreavel"]
+    definir_localidade_geografica["definir-localidade-geografica"]
     definir_lote_de_ingresso["definir-lote-de-ingresso"]
     definir_medicao_de_metrica["definir-medicao-de-metrica"]
     definir_negociacao["definir-negociacao"]
@@ -269,6 +270,7 @@ flowchart LR
   criar_ponto_de_contato --> criar_oportunidade
   criar_ponto_de_contato --> definir_agenda
   criar_ponto_de_contato --> definir_grupo_de_oportunidades
+  criar_ponto_de_contato --> lancar_despesa_da_empresa
   criar_ponto_de_contato --> organizar_ponto_de_contato
   criar_ponto_de_contato --> procurar_oportunidade
   criar_pull_request --> atualizar_branch_do_pull_request
@@ -359,7 +361,11 @@ flowchart LR
   definir_hospedagem --> procurar_email
   definir_hospedagem --> redigir_com_tom_de_voz
   definir_inscricao --> definir_grafia
+  definir_inscricao --> definir_negociacao
+  definir_inscricao --> definir_tarefa
   definir_inscricao --> garantir_ingresso
+  definir_inscricao --> lancar_despesa_da_empresa
+  definir_inscricao --> procurar_email
   definir_inscricao --> procurar_inscricao
   definir_inscricao --> procurar_oportunidade
   definir_instrucoes_do_projeto --> criar_habilidade
@@ -374,6 +380,10 @@ flowchart LR
   definir_lancamento_financeiro --> gerenciar_estoque
   definir_lancamento_financeiro --> lancar_despesa_da_empresa
   definir_lancamento_financeiro --> revisar_financas
+  definir_localidade_geografica --> definir_empresa
+  definir_localidade_geografica --> definir_grafia
+  definir_localidade_geografica --> identificar_duplicata
+  definir_localidade_geografica --> mesclar_registro
   definir_lote_de_ingresso --> definir_conta_bancaria
   definir_medicao_de_metrica --> definir_okr
   definir_medicao_de_metrica --> identificar_duplicata
@@ -401,6 +411,7 @@ flowchart LR
   definir_perfil_social --> definir_pessoa
   definir_perfil_social --> identificar_duplicata
   definir_perfil_social --> mesclar_registro
+  definir_pessoa --> conversar_no_whatsapp
   definir_pessoa --> definir_empresa
   definir_pessoa --> definir_grafia
   definir_pessoa --> definir_perfil_social
@@ -593,10 +604,12 @@ flowchart LR
   organizar_emails --> definir_filtro_de_email
   organizar_emails --> definir_inscricao
   organizar_emails --> definir_obrigacao_financeira
+  organizar_emails --> definir_pessoa
   organizar_emails --> definir_tarefa
   organizar_emails --> lancar_despesa_da_empresa
   organizar_emails --> lancar_despesa_pessoal
   organizar_emails --> procurar_email
+  organizar_emails --> procurar_inscricao
   organizar_emails --> procurar_oportunidade
   organizar_emails --> rotular_item
   organizar_ponto_de_contato --> criar_oportunidade
@@ -713,6 +726,7 @@ flowchart LR
   rotular_item --> levantar_contexto_do_pull_request
   rotular_item --> organizar_emails
   rotular_item --> triar_conversas
+  sincronizar_cronograma --> criar_ponto_de_contato
   sincronizar_cronograma --> definir_agenda
   sincronizar_cronograma --> definir_convidado
   sincronizar_cronograma --> definir_jornada_de_producao
@@ -733,9 +747,11 @@ flowchart LR
   triar_conversas --> conversar_no_whatsapp
   triar_conversas --> criar_oportunidade
   triar_conversas --> definir_grupo_de_oportunidades
+  triar_conversas --> definir_pessoa
   triar_conversas --> definir_rotina
   triar_conversas --> definir_tarefa
   triar_conversas --> enviar_mensagem_no_slack
+  triar_conversas --> identificar_duplicata
   triar_conversas --> organizar_emails
   triar_conversas --> organizar_ponto_de_contato
   triar_conversas --> procurar_oportunidade

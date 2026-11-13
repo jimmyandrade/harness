@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.33.1"
+  version: "0.34.0"
   aliases:
     - redigir-mensagem-de-whatsapp
   related:
@@ -124,6 +124,7 @@ Com `Comunicado numa mensagem só` em `sim`, o comunicado de produto também vai
 Escreva o comunicado com essa habilidade, não aqui.
 Um pedido ou uma lista de pendências que acompanha o anúncio é outro assunto e vai em outra mensagem, depois do comunicado.
 A saudação e o texto se dirigem só a quem está na conversa aberta: quem ela não alcança, como a outra pessoa que assina a organização, entra na terceira pessoa. Quem só fica a par recebe, na conversa dele, um aviso curto, sem as perguntas de quem decide.
+Numa conversa já aberta com a pessoa, a mensagem não diz quem escreve nem de qual empresa: o nome da conversa já diz. Quem ainda não conhece quem escreve é apresentado uma vez, na primeira mensagem, com o nome e a empresa, como "o Jimmy, da oRnii". Depois disso, nem a abertura repete a apresentação nem o fim leva assinatura com o nome da empresa.
 O comprovante de pagamento segue `Canal do comprovante`. Com `e-mail na mesma conversa`, o e-mail segue `redigir-com-tom-de-voz`, e com o sim da pessoa sai pelo conector de e-mail, com o arquivo anexado, sem pedir que a pessoa copie ou anexe, e o WhatsApp só avisa que foi por e-mail e pede a confirmação. Com `e-mail e WhatsApp`, o arquivo vai também na conversa, antes do aviso. Sem conversa de e-mail com a organização, mande o arquivo no WhatsApp e diga isso.
 
 Para responder ou enviar, mostre a conversa de destino, o texto exato e, se for resposta, a mensagem citada. Envie só depois do sim da pessoa a esse texto e a essa conversa. O sim vale para uma mensagem. Outra mensagem pede outro sim.
@@ -271,6 +272,7 @@ Mostrei a edição "Chegaremos*" na mesma mensagem e editei depois do sim. Não 
 - No campo de mensagem, Enter envia. A quebra de linha é shift+Enter.
 - O campo numera a lista sozinho depois de "1. ". Digitar "2." no item seguinte duplica o número: digite só o texto dos itens seguintes.
 - Responder a uma mensagem é pelo menu que aparece ao passar o mouse sobre ela, na opção Responder. A citação aparece em cima do campo.
+- A mensagem de WhatsApp parece pedir assinatura e "aqui é da empresa" como um e-mail. A conversa já mostra quem escreve: a apresentação vale só na primeira mensagem para quem não conhece a pessoa.
 - Enter na busca da lista abre a primeira conversa e marca as mensagens como lidas. Digite o nome e leia o resultado sem apertar Enter.
 - O texto da página traz a lista de conversas inteira antes da conversa aberta. A conversa aberta começa depois do nome do contato no cabeçalho.
 - A mensagem editada mostra "Editada", e o texto antigo some para os dois lados.

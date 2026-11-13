@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.7.0"
   related:
     - evoluir-habilidade
     - identificar-duplicata
@@ -21,7 +21,7 @@ metadata:
 "Status validado por IA": "Validado por IA"
 # `Status validado por pessoa`: uma pessoa validou. É a validação mais forte.
 "Status validado por pessoa": "Validado"
-# `Critério de desempate`: como escolher entre duas posições que cabem. Vazio, a pessoa escolhe. `menos orientado a gênero` prefere a posição que não divide por uso masculino ou feminino.
+# `Critério de desempate`: como escolher entre duas posições que cabem. Vazio, a pessoa escolhe. `menor tributação` prefere a posição com a menor carga dos tributos que o regime da empresa paga. `menos orientado a gênero` prefere a posição que não divide por uso masculino ou feminino. Vários critérios, separados por vírgula, valem na ordem.
 "Critério de desempate": ""
 "Modo de aprendizado": "perguntar"
 ```
@@ -80,7 +80,14 @@ O código entra como `Status em estudo`.
 Ele passa para `Status validado por IA` quando você abriu a fonte gravada e conferiu nela o código, a descrição e as notas do capítulo, a composição e, no vestuário, a construção estão confirmadas, as notas batem com a descrição oficial, e você descartou as posições mais específicas antes de uma posição residual.
 Com uma dúvida aberta, o código continua em `Status em estudo`, e o comentário diz qual é a dúvida.
 Quando a dúvida é entre duas posições que cabem, siga `Critério de desempate` e diga no comentário que critério escolheu o código.
-Com `menos orientado a gênero`, se as duas posições dividem por uso, o critério não decide, e a pessoa escolhe.
+Com vários critérios, aplique um por vez, na ordem, e passe ao seguinte só quando o anterior não decide.
+Quando nenhum decide, a pessoa escolhe.
+Com `menos orientado a gênero`, se as duas posições dividem por uso, o critério não decide.
+Com `menor tributação`, leia na página da empresa o regime tributário e compare a carga dos tributos que esse regime paga em cada posição, como o IPI da TIPI.
+Procure a alíquota primeiro na lista de códigos.
+Sem ela, procure na fonte oficial, abra o link e confira que ele mostra o código e a alíquota.
+Grave a alíquota na página do código, com a fonte, na propriedade que já existe, ou num comentário datado pelo Passo 5 quando a propriedade não existe, e sugira criá-la.
+Com a mesma carga nas duas posições, o critério não decide.
 Registre num comentário o que foi conferido e a fonte, pelo Passo 5.
 Ele só passa para `Status validado por pessoa` com o sim de uma pessoa, como a responsável ou a contabilidade, também registrado em comentário.
 Essa é a validação mais forte, e você nunca a marca sem esse sim.
@@ -147,6 +154,7 @@ Achei a variação, li a composição e procurei o código pelas característica
 ## Casos-limite
 
 - Matérias misturadas sem predominância clara: pergunte. Não escolha.
+- A alíquota não está na lista de códigos nem abre na fonte oficial: o critério `menor tributação` não decide, e o comentário diz o que faltou.
 - Duas variações do mesmo produto com matérias diferentes: cada uma pode ter um código diferente.
 - A variação não tem composição registrada: pergunte a matéria, o percentual e, no vestuário, a construção. Sem percentual, registre só o comentário.
 - As notas antigas citam um produto: proponha reescrever só com as características e espere o sim.
@@ -158,6 +166,7 @@ Achei a variação, li a composição e procurei o código pelas característica
 - No vestuário, o nome do tecido não diz a fibra nem a construção. Organza e veludo podem ser de seda, de algodão ou de poliéster, e o veludo pode ser de malha ou plano.
 - No vestuário, a fibra separa códigos vizinhos. No outro vestuário de uso feminino, algodão é 6211.42 e fibras sintéticas ou artificiais são 6211.43.
 - No vestuário, o lado do fechamento decide o uso: o que se fecha à frente da direita para a esquerda é feminino, e da esquerda para a direita é masculino, salvo quando o corte indica claramente um dos dois. Só o que não se reconhece como um nem outro vai para o feminino.
+- A menor alíquota parece um motivo para classificar. A classificação vem das notas e das Regras Gerais de Interpretação, e a tributação só desempata o que elas deixam em aberto.
 - Uma posição residual, como outro vestuário, só vale depois de descartar as posições específicas do capítulo, como a de casacos ou a de roupões.
 - Uma peça de sair usada aberta por cima da roupa pode caber em casacos e semelhantes, a 62.02 no feminino, antes do residual 62.11.
 - O link de consulta do site de normas da Receita pode cair na página de pesquisa. O arquivo da TIPI abre direto.

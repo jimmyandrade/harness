@@ -3,7 +3,7 @@ name: definir-filtro-de-email
 description: Cria, edita e confere filtros de e-mail. Testa o critério na conta, escolhe as ações sem esconder o que a pessoa quer ver e lê o filtro salvo de volta. Usada quando a triagem pede um filtro ou a pessoa quer mudar um. Não serve para classificar mensagens nem cancelar assinatura.
 metadata:
   author: jimmyandrade
-  version: "0.4.1"
+  version: "0.9.0"
   related:
     - organizar-emails
     - evoluir-habilidade
@@ -36,6 +36,8 @@ O filtro sai do plano que a triagem de `organizar-emails` validou com a pessoa, 
 
 Leia os filtros existentes da conta antes de criar outro: um filtro com o mesmo remetente se edita, não se duplica.
 
+Um filtro sem nenhuma ação, ou com uma etiqueta que a conta não tem mais, perdeu a etiqueta quando ela foi apagada e não organiza nada. Ele entra no plano como filtro a editar: a triagem escolhe a etiqueta, o filtro volta a etiquetar e a aplicação alcança as conversas antigas.
+
 Teste o critério na busca da conta exata e leia o assunto das conversas que ele atinge. Examine as correspondências inesperadas: o que não for do tipo confirmado muda o critério antes do filtro.
 
 O critério lista os endereços exatos do remetente, ou o subdomínio dedicado a envio automático.
@@ -43,7 +45,9 @@ O domínio inteiro só serve quando nenhuma pessoa escreve dele: numa organizaç
 
 Quando o remetente muda de endereço, o novo entra com `OR` e o antigo fica, para o filtro continuar pegando o histórico.
 
-Pouca ou nenhuma conversa atingida não é motivo para excluir um filtro: o volume do remetente pode crescer depois. Confira se o endereço do critério é o que o remetente usa e mantenha o filtro. Exclua um filtro só quando a pessoa pedir.
+Todo remetente das conversas triadas ganha um filtro, mesmo o que mandou uma mensagem só. Pouco volume não dispensa o filtro: o remetente avulso de hoje pode mandar muito amanhã, e sem filtro as mensagens dele chegam sem etiqueta.
+
+Pouca ou nenhuma conversa atingida não é motivo para excluir um filtro: o volume do remetente pode crescer depois. Confira se o endereço do critério é o que o remetente usa e mantenha o filtro. Exclua um filtro só quando a pessoa pedir. Substituir um filtro por uma versão nova, como na importação por arquivo, também exclui o antigo e segue a mesma regra.
 
 ### Passo 2
 
@@ -71,7 +75,7 @@ flowchart LR
 
 Use o `Navegador para criar filtro`; o `Navegador do aplicativo para criar filtro` diz quando o navegador do próprio aplicativo entra.
 
-No navegador, confirme que a conta é a da caixa antes de salvar e peça a aprovação do site quando ela ainda não existir. Na tela de login, peça à pessoa que entre na conta no navegador; não entre por ela.
+No navegador, confirme que a conta é a da caixa antes de salvar e peça a aprovação do site quando ela ainda não existir. Na tela de login, peça a credencial ao gerenciador de senhas conectado e preencha com ele. A pessoa entra na conta só sem gerenciador ou quando o preenchimento falha.
 
 A consulta devolvida traz o critério, a etiqueta e as ações do plano, e diz em que tela cada uma fica.
 
@@ -88,6 +92,8 @@ Leia de volta as conversas atingidas. A etiqueta se confere como `rotular-item` 
 Não deduza o nome de uma etiqueta a partir de identificadores diferentes. Sem correspondência fornecida pela integração entre o identificador interno e o nativo, declare a validação do nome no filtro limitada.
 
 Relate o caminho que criou o filtro, ou que nenhum criou, o filtro armazenado, as conversas conferidas e a aplicação automática futura.
+
+Relate também cada filtro excluído ou substituído, um por linha: o critério e as ações de antes, o filtro que ficou no lugar e o motivo. Diga o que se perdeu na troca, como uma ação que a importação recusou, e o tempo em que o critério ficou sem filtro.
 
 ### Passo 6
 
@@ -110,6 +116,14 @@ Se você trocar o endereço antigo pelo novo no critério, as próximas mensagen
 1. Mantenha o endereço antigo no critério.
 2. Acrescente o novo com `OR`.
 3. Teste o critério na busca antes de salvar.
+
+### Cauda longa sem filtro
+
+Se você filtrar só os remetentes que mandam muito e deixar de fora os que mandaram uma ou duas mensagens, as conversas deles ficam sem etiqueta, e o remetente que começar a mandar mais chega sem regra.
+
+1. Leve ao plano todo remetente das conversas sem etiqueta, até a consulta delas voltar vazia ou só com perguntas à pessoa.
+2. Crie um filtro para cada remetente, mesmo com uma mensagem só.
+3. Remetente que a triagem não classifica vai à pessoa com a pergunta. Não o declare fora do escopo.
 
 ### Filtro excluído por pouco volume
 
@@ -141,7 +155,8 @@ O filtro procurava o endereço antigo e os e-mails chegam de outro domínio. O c
 
 ## Casos-limite
 
-- O conector não cria filtro e o navegador pede login: a pessoa entra na conta, e o filtro sai pelo navegador.
+- O conector não cria filtro e o navegador pede login: o gerenciador de senhas conectado preenche, ou, sem ele, a pessoa entra, e o filtro sai pelo navegador.
+- O remetente mandou uma mensagem só: ele ganha o filtro do mesmo jeito.
 - O critério não atinge nenhuma conversa: o filtro fica. Confira se o endereço está certo e, com o remetente usando outro, acrescente-o com `OR`.
 - O filtro precisa de duas etiquetas: crie dois filtros com o mesmo critério.
 
@@ -154,6 +169,12 @@ O filtro procurava o endereço antigo e os e-mails chegam de outro domínio. O c
 - A caixa pode deixar mensagem marcada como importante passar por cima de "pular a entrada". O filtro que pula a entrada precisa também de nunca marcar como importante.
 - Na interface atual do Gmail, editar um filtro abre primeiro a busca do critério: clique em Continuar para chegar às ações.
 - Na tela das ações, a opção "Também aplicar filtro às conversas correspondentes" aplica o filtro às conversas antigas, e ela vem desmarcada a cada edição.
+- Um filtro sem ação na lista parece só inútil. Ele costuma ser o rastro de uma etiqueta apagada, e as conversas dele chegam sem etiqueta.
+- Importar filtros por arquivo XML cria muitos de uma vez, mas a importação recusa o filtro que categoriza como Promoções ou Atualizações. Importe sem a categoria e acerte a categoria na tela de edição.
+- A importação com "Aplicar os novos filtros aos e-mails existentes" pode mostrar erro e ainda salvar os filtros e etiquetar o histórico. Conte os filtros na lista e as conversas etiquetadas antes de refazer.
+- Depois de importar, a tela de filtros mostra abaixo da lista o resultado da importação, com linhas iguais às dos filtros. Conte só as linhas que têm editar.
+- A primeira entrada do arquivo importado pode entrar sem a etiqueta, como filtro sem ação. Depois de importar e recarregar, procure as linhas com "Ações:" vazio e acerte cada uma.
+- Editar um filtro pela tela pode mostrar erro e não salvar. Recarregue e confira a linha. Se a edição não salvou, crie o filtro certo pelas opções de pesquisa e só então exclua o antigo, relatando a troca.
 
 ## Scripts disponíveis
 
