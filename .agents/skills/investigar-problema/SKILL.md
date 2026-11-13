@@ -3,7 +3,7 @@ name: investigar-problema
 description: Conduz a investigação de um problema relatado, como um acesso bloqueado, um erro ou um dado errado, com tarefa, fatos, hipóteses e retorno a quem relatou, e oferece artigo e post-mortem. Use essa habilidade sempre que alguém relatar um problema, como um preço errado, antes de oferecer ou começar a investigar, mesmo sem dizer investigar. NÃO use para escrever o artigo, o post-mortem nem corrigir código.
 metadata:
   author: jimmyandrade
-  version: "0.2.1"
+  version: "0.2.2"
   related:
     - procurar-tarefa
     - definir-tarefa
@@ -33,6 +33,9 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 Receba o problema: o que acontece, quem relatou, quando e onde.
 Carregue esta habilidade antes de ler código ou de perguntar se a pessoa quer que você investigue: a pergunta já é o começo da investigação.
 Quando o relato é uma mensagem ou thread do Slack, reaja a ela com o emoji de olhos (`eyes`) antes de ler os detalhes, para quem acompanha ver que alguém assumiu. Se a reação já estiver lá, não repita.
+Leia o relato na fonte: o conector primeiro e, sem ele, cada navegador disponível, o interno do aplicativo e o da pessoa por extensão, que costuma já estar logado.
+Só diga que falta acesso à fonte, ou peça à pessoa que entre nela, depois que todos esses caminhos falharam.
+Uma página que só redireciona costuma oferecer o link para abrir no navegador: siga-o.
 Siga `procurar-tarefa` com esse assunto. Sem tarefa, crie uma com `definir-tarefa`, com quem relatou e a data do relato.
 Todo aviso de andamento a quem relatou leva o link da tarefa.
 
@@ -51,7 +54,7 @@ Liste as hipóteses, da que a evidência mais apoia para a que menos apoia.
 Confira cada uma na fonte: a tela da ferramenta, o registro, a configuração ou quem administra.
 Só leia nesse passo. Uma correção que muda algo, como uma permissão, um pagamento ou uma configuração, espera o sim da pessoa, com o que muda e o risco.
 Cada hipótese e cada ponto que você ainda não conferiu e que dá para conferir, você confere antes de responder, no código, nos dados e nas ferramentas ao seu alcance. O objetivo é achar a causa.
-Só fica como "não verificado" o que depende de um acesso que você não tem: diga qual fonte falta e quem tem.
+Só fica como "não verificado" o que depende de um acesso que nenhum caminho ao seu alcance dá: diga qual fonte falta e quem tem.
 Quando um erro é esperado ou não, quando uma taxa é alta ou normal, a resposta traz o número e a comparação, nunca "não verifiquei".
 Cruze a sua conclusão com a da investigação paralela: diga onde concordam, onde divergem e o que cada uma viu que a outra não viu.
 Quando a outra achou algo que você perdeu, corrija a sua conclusão e diga que mudou. Não proteja a primeira resposta.
@@ -81,6 +84,14 @@ Se você investigar sem tarefa, o andamento fica na conversa e quem relatou não
 
 1. Crie a tarefa antes de começar.
 2. Ponha o link em todo aviso.
+
+### Relato sem acesso à fonte
+
+Se você abrir só o navegador interno, cair no login e pedir à pessoa que entre, ela perde tempo com um caminho que o navegador dela já abria.
+
+1. Tente o conector da fonte.
+2. Sem ele, tente cada navegador disponível, o interno do aplicativo e o da pessoa por extensão.
+3. Só peça ajuda depois que todos falharam, e diga o que tentou.
 
 ### Hipótese tratada como fato
 
@@ -137,6 +148,7 @@ Não havia tarefa: criei e respondi a quem relatou com o link. O print mostrava 
 - O print parece só ilustrar o relato. Ele costuma trazer o aviso exato da ferramenta.
 - Ler uma tela parece seguro em qualquer ferramenta. Uma tela de configuração pode salvar ao fechar: abra, leia e cancele.
 - A thread lida no começo parece completa. Uma investigação paralela pode postar a conclusão minutos depois: releia antes de encerrar.
+- A tela de login do navegador interno parece provar que a fonte exige a pessoa. O navegador dela, por extensão, pode já estar logado e abrir o relato na hora.
 - Uma investigação curta parece não pedir registro. A pergunta pelos registros vale para toda investigação.
 
 ## Scripts disponíveis
