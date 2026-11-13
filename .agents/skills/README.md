@@ -69,6 +69,7 @@ flowchart LR
     definir_jornada_de_producao["definir-jornada-de-producao"]
     definir_lancamento_financeiro["definir-lancamento-financeiro"]
     definir_link_rastreavel["definir-link-rastreavel"]
+    definir_local_fisico["definir-local-fisico"]
     definir_localidade_geografica["definir-localidade-geografica"]
     definir_lote_de_ingresso["definir-lote-de-ingresso"]
     definir_medicao_de_metrica["definir-medicao-de-metrica"]
@@ -313,8 +314,13 @@ flowchart LR
   criar_habilidade --> descrever_habilidade_ou_schema
   criar_habilidade --> medir_habilidade
   criar_habilidade --> testar_habilidade
+  criar_oportunidade --> criar_ideia_de_conteudo
+  criar_oportunidade --> definir_empresa
   criar_oportunidade --> definir_grupo_de_oportunidades
   criar_oportunidade --> definir_inscricao
+  criar_oportunidade --> definir_local_fisico
+  criar_oportunidade --> definir_localidade_geografica
+  criar_oportunidade --> definir_tarefa
   criar_oportunidade --> organizar_emails
   criar_oportunidade --> procurar_oportunidade
   criar_oportunidade --> triar_conversas
@@ -438,6 +444,10 @@ flowchart LR
   definir_lancamento_financeiro --> gerenciar_estoque
   definir_lancamento_financeiro --> lancar_despesa_da_empresa
   definir_lancamento_financeiro --> revisar_financas
+  definir_local_fisico --> definir_empresa
+  definir_local_fisico --> definir_grafia
+  definir_local_fisico --> definir_localidade_geografica
+  definir_local_fisico --> identificar_duplicata
   definir_localidade_geografica --> definir_empresa
   definir_localidade_geografica --> definir_grafia
   definir_localidade_geografica --> identificar_duplicata
@@ -757,6 +767,7 @@ flowchart LR
   procurar_inscricao --> definir_inscricao
   procurar_inscricao --> procurar_email
   procurar_oportunidade --> criar_oportunidade
+  procurar_oportunidade --> definir_grupo_de_oportunidades
   procurar_oportunidade --> definir_inscricao
   procurar_oportunidade --> identificar_duplicata
   procurar_oportunidade --> mesclar_registro

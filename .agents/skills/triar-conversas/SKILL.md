@@ -1,11 +1,12 @@
 ---
 name: triar-conversas
-description: Varre as conversas com mensagem nova no WhatsApp e no Slack, classifica cada mensagem, decide o rótulo de estado e de contexto, leva ao Notion o que pede registro e entrega um relatório por conversa. Usada quando a pessoa quer saber o que chegou ou montar o relatório diário ou semanal das conversas. Não serve para e-mail, responder nem cadastrar a oportunidade.
+description: Varre as conversas com mensagem nova no WhatsApp e no Slack, classifica cada mensagem, decide o rótulo de estado e de contexto, leva ao Notion o que pede registro e entrega um relatório por conversa. Usada quando a pessoa quer saber o que chegou ou montar o relatório diário ou semanal das conversas. Não serve para e-mail nem para responder.
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.7.0"
   models:
+    - arvore-de-decisao-da-triagem
     - relatorio-de-conversas
   related:
     - conversar-no-whatsapp
@@ -40,8 +41,12 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
   - "Slack"
 # `Cadência do relatório` é `diária`, `semanal` ou `pela atividade`. `pela atividade` faz diária a conversa com mensagem nova em mais da metade dos dias da última semana, e semanal o resto.
 "Cadência do relatório": "pela atividade"
-# `Apagar mensagens sem relevância` é `perguntar` ou `não`. `perguntar` mostra a lista e apaga para você só com o sim da pessoa, onde o canal deixa. `não` só conta as mensagens no relatório.
+# `Apagar mensagens sem relevância` é `perguntar` ou `não`. `perguntar` mostra a lista das mensagens ignoradas e apaga para você só com o sim da pessoa, depois do registro, onde o canal deixa. `não` só as registra no relatório.
 "Apagar mensagens sem relevância": "perguntar"
+# `Reagir e favoritar` é `perguntar` ou `não`. `perguntar` mostra a reação ou o favorito que a árvore sugere e o faz no WhatsApp só com o sim da pessoa. `não` só cita a ação no relatório.
+"Reagir e favoritar": "perguntar"
+# `Página da árvore de decisão` é o nome da página do Notion do negócio que guarda a árvore de `arvore-de-decisao-da-triagem`. O harness do negócio define o nome. Vazio segue o modelo e propõe criar a página no relatório.
+"Página da árvore de decisão": ""
 ```
 ## Instruções
 
@@ -63,16 +68,13 @@ Para cada pessoa que escreve na conversa, ou que ela cita como contato de uma or
 
 ### Passo 3
 
-```mermaid
-flowchart LR
-  M{A mensagem} -->|não muda nada para o negócio| S[Sem relevância: Passo 7]
-  M -->|informa algo útil sem ação| P[Ponto de atenção: relatório]
-  M -->|pede revisão de pull request| R[procurar-pedido-de-revisao]
-  M -->|pede ação, prazo ou resposta do negócio| A[Ação: Passo 4]
-  M -->|problema numa edição, mesmo de outra marca| I[Intercorrência: Passo 5]
-```
+Leia o modelo de saída `arvore-de-decisao-da-triagem`. No começo da varredura, leia a página que `Página da árvore de decisão` nomeia, no Notion do negócio, e siga a árvore dela. Sem a página, siga o modelo e proponha no relatório criar a página com ele; crie só com o sim da pessoa.
 
-Sem relevância é agradecimento, bom dia, figurinha, divulgação de outra marca e pergunta já respondida na conversa. Na dúvida, a mensagem é ponto de atenção.
+Para cada mensagem ou conversa, a primeira pergunta da árvore com resposta sim decide o destino: ponto de atenção no relatório, `procurar-pedido-de-revisao` para o pedido de revisão de pull request, o Passo 4 para o pedido de ação, prazo ou resposta do negócio, o Passo 5 para o problema numa edição, mesmo de outra marca, e para o comunicado ou convite de evento, e ignorar quando nenhuma pergunta serve.
+
+Ignorar é não criar tarefa nem ação, e mesmo assim deixar um registro curto: o que era, de qual conversa, por que ficou sem ação e a data, no `Formato da data com dia da semana`. Nada é descartado sem registro, porque o histórico serve para consultar depois o que o negócio já decidiu. Quando o assunto já existe, como a oportunidade, o ponto de contato ou a edição, o registro é um comentário da página, como o da intercorrência do Passo 5. Sem o assunto cadastrado, o registro vai no relatório. Ele nunca vira tarefa.
+
+Ignorado é agradecimento, bom dia, figurinha, divulgação de outra marca sem evento com nome e data e pergunta já respondida na conversa. Na dúvida, a mensagem é ponto de atenção.
 
 ### Passo 4
 
@@ -80,7 +82,9 @@ Antes de criar a tarefa, siga `procurar-tarefa`. Sem tarefa, siga `definir-taref
 
 ### Passo 5
 
-Ache a edição com `procurar-oportunidade`. Quando a participação foi aprovada, o registro vai no ponto de contato dessa edição. Grave a intercorrência num comentário da página, não no corpo nem nas notas de curadoria. O comentário começa pela data e hora do fato no `Formato da data com dia da semana`, com o dia calculado como a regra do dia da semana manda, e diz quem relatou, o que aconteceu e o link da mensagem, quando houver. Cada fato novo é um comentário novo, e os comentários formam a linha do tempo da edição. Não edite um comentário antigo.
+Comunicado ou convite de evento com nome e data, inclusive o que alguém encaminha ao grupo, é uma oportunidade e não está sem relevância. Ache a edição com `procurar-oportunidade`. Sem cadastro, ela segue `criar-oportunidade` na mesma varredura, sem perguntar o que fazer, e o grupo, quando falta, passa por `definir-grupo-de-oportunidades`. Falta o nome ou a data: leve só o que falta ao relatório. Quem escreve ou encaminha o comunicado não é, por isso, a organização, porque pode estar só divulgando outra feira. Não grave quem encaminhou como organizador.
+
+Para a intercorrência, ache a edição com `procurar-oportunidade`. Quando a participação foi aprovada, o registro vai no ponto de contato dessa edição. Grave a intercorrência num comentário da página, não no corpo nem nas notas de curadoria. O comentário começa pela data e hora do fato no `Formato da data com dia da semana`, com o dia calculado como a regra do dia da semana manda, e diz quem relatou, o que aconteceu e o link da mensagem, quando houver. Cada fato novo é um comentário novo, e os comentários formam a linha do tempo da edição. Não edite um comentário antigo.
 
 Quando a intercorrência ensina algo para as próximas edições, como confirmar antes o local do estande no mapa da feira, proponha a lição no relatório. Com o sim, a lição vai para o grupo por `definir-grupo-de-oportunidades`, e o contrato da próxima participação é conferido por `organizar-ponto-de-contato`.
 
@@ -90,7 +94,9 @@ Aplique rótulos em cada conversa varrida usando a habilidade `rotular-item`, co
 
 ### Passo 7
 
-Com `Apagar mensagens sem relevância` em `perguntar`, mostre a lista de cada conversa, com quem escreveu, a hora e o começo do texto, e pergunte. Com o sim para aquela conversa, use Apagar para mim em cada mensagem da lista. O sim vale para a lista mostrada. Nunca apague sem o sim, e nunca use Apagar para todos. No Slack, a mensagem de outra pessoa não se apaga: ela só entra na contagem do relatório.
+Depois do registro dos ignorados e dos rótulos, proponha as ações que a árvore sugeriu nas conversas do WhatsApp: reagir a uma mensagem, que todo o grupo vê, favoritar a conversa ou a mensagem, que só muda a conta da pessoa, e apagar para mim, que também só muda a conta dela. O emoji de cada reação vem da árvore; sem ele, pergunte. Mostre cada ação com a conversa, quem escreveu, a hora, o começo do texto e quem vê o efeito, e pergunte. Cada ação que muda o que a pessoa vê só acontece com o sim, e o sim vale para a lista mostrada. Com `Reagir e favoritar` em `não`, só cite a ação no relatório.
+
+Com `Apagar mensagens sem relevância` em `perguntar`, apague para mim só as mensagens ignoradas da lista, e só depois do registro delas. Nunca apague sem o sim, e nunca use Apagar para todos. Tente cada ação pela aba do WhatsApp Web, como `usar-whatsapp-web` manda, e diga o resultado real de cada tentativa, sem prever que a tela não deixa. No Slack, a mensagem de outra pessoa não se apaga: ela só entra no registro do relatório.
 
 ### Passo 8
 
@@ -138,6 +144,14 @@ Se você classificar um áudio pela prévia ou pela duração, uma reclamação 
 2. Peça a transcrição.
 3. Classifique só depois dela.
 
+### Comunicado de evento perguntado
+
+Se você disser que a edição não está cadastrada e perguntar o que fazer diante de um comunicado ou convite com nome e data, a pessoa tem de pedir o cadastro que a triagem devia ter feito.
+
+1. Ache a edição com `procurar-oportunidade`.
+2. Sem cadastro, siga `criar-oportunidade` na mesma varredura, sem perguntar. Falta o nome ou a data: pergunte só o que falta.
+3. Não grave quem encaminhou como organizador.
+
 ### Pessoa da conversa fora da lista
 
 Se você ler a conversa de uma organização e não conferir quem escreve, a pessoa continua fora da lista e o próximo contato volta a ser um número sem nome.
@@ -146,17 +160,29 @@ Se você ler a conversa de uma organização e não conferir quem escreve, a pes
 2. Ausente, cadastre por `definir-pessoa` na mesma varredura.
 3. Diga no relatório quem foi cadastrado e qual contato do WhatsApp está sem nome salvo.
 
-### Mensagem apagada sem o sim
+### Ignorado sem registro
 
-Se você apagar a mensagem sem relevância por conta própria, a pessoa perde o que talvez quisesse ver.
+Se você ignorar uma mensagem e não deixar o registro, ou apagá-la antes dele, o histórico perde o que o negócio decidiu e nenhuma IA consegue dizer depois por que ficou sem ação.
 
-1. Mostre a lista de cada conversa.
-2. Espere o sim para aquela conversa.
-3. Use Apagar para mim só nas mensagens mostradas.
+1. Registre o que era, de qual conversa, por que ficou sem ação e a data.
+2. Assunto existente: comentário da página. Sem assunto: relatório. Nunca tarefa.
+3. Só depois proponha apagar para mim.
+
+### Ação no WhatsApp sem o sim
+
+Se você reagir, favoritar ou apagar por conta própria, o grupo vê a reação ou a pessoa perde o que talvez quisesse ver.
+
+1. Mostre cada ação, a conversa, a mensagem e quem vê o efeito.
+2. Espere o sim para aquela lista.
+3. Faça só as ações mostradas, nunca Apagar para todos, e diga o resultado real de cada tentativa.
 
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
+
+### a pessoa encaminhou ao grupo o comunicado de uma feira que não está cadastrada, com nome e data
+
+Segui `procurar-oportunidade`, que não achou a edição, e cadastrei a oportunidade por `criar-oportunidade` na mesma varredura, sem perguntar. O grupo faltava e passou por `definir-grupo-de-oportunidades`. Quem encaminhou não entrou como organizador. O relatório traz o link da oportunidade.
 
 ### veja o que chegou nas conversas
 
@@ -168,13 +194,19 @@ Gravei um comentário na edição da Feira Exemplo, começando por sábado, 07/1
 
 ### pode apagar as mensagens sem relevância do grupo da Feira Exemplo
 
-Mostrei as quatro mensagens de agradecimento, com quem escreveu e a hora. Com o sim, apaguei para mim só essas quatro.
+Registrei no relatório as quatro mensagens de agradecimento, com o que eram, a conversa, o motivo e a data. Mostrei a lista, com quem escreveu e a hora. Com o sim, apaguei para mim só essas quatro.
+
+### reaja com um joinha ao aviso da organização e favorite o grupo
+
+Mostrei as duas ações, dizendo que a reação todo o grupo vê e que o favorito só muda a conta. Com o sim, tentei as duas na aba do WhatsApp Web e disse o resultado de cada uma.
 
 ## Casos-limite
 
 - A mensagem pede ação e a tarefa já existe: não crie outra. Cite a tarefa no relatório e rotule a conversa.
-- A edição da intercorrência não está cadastrada: diga isso no relatório. O cadastro fica com `criar-oportunidade`.
+- A edição da intercorrência não está cadastrada e a conversa traz o nome e a data: cadastre por `criar-oportunidade`, como o Passo 5 manda. Sem um dos dois, diga isso no relatório.
+- O comunicado traz o nome e a data e quem o encaminha não organiza o evento: cadastre a oportunidade e não grave quem encaminhou como organizador.
 - A intercorrência é de outra marca, como outra expositora: registre também. Ela mostra como o organizador trata quem expõe.
+- A mensagem não cai em nenhuma pergunta da árvore: ignore com registro, nunca descarte. O assunto existente recebe o comentário. Sem assunto, o registro vai no relatório.
 - A pessoa pede para responder: no WhatsApp, siga `conversar-no-whatsapp`. No Slack, siga `enviar-mensagem-no-slack`.
 - A pessoa pede para triar o e-mail: siga `organizar-emails`.
 
@@ -184,6 +216,8 @@ Mostrei as quatro mensagens de agradecimento, com quem escreveu e a hora. Com o 
 - Apagar para mim tira a mensagem só da conta da pessoa. Os outros membros continuam vendo.
 - Abrir a conversa marca as mensagens como lidas, também para quem enviou.
 - O áudio no WhatsApp Web não tem transcrição. A prévia mostra só a duração.
+- Ignorar parece não deixar rastro. O registro curto é o que permite dizer depois que o negócio sempre recusou aquela feira.
+- A divulgação de outra feira parece sem relevância. Com nome e data de evento, é uma oportunidade a cadastrar, e quem a encaminha não é a organização.
 
 ## Scripts disponíveis
 

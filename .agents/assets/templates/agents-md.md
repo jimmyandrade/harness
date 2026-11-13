@@ -1,7 +1,7 @@
 ---
 description: Traz as instruções gerais e os parâmetros das habilidades deste espaço de trabalho. Usada em qualquer tarefa, inclusive outra habilidade. Não serve para criar nem alterar estas instruções; a mudança vai no repositório.
 metadata:
-  version: "0.6.0"
+  version: "0.7.0"
   parameters:
     "Global":
       "Banco de modelos no Notion": "<link do banco de modelos de saída no Notion>"
@@ -22,6 +22,7 @@ Este documento contém instruções que, dependendo da ferramenta utilizada, pod
 - Todo pull request, issue ou commit citado na resposta leva o link completo, inclusive na pergunta sobre quem mescla.
 - Execute as consultas e verificações permitidas que o pedido exige sem pedir uma confirmação que a pessoa já deu. Antes de perguntar à pessoa um fato do negócio, como um dado de cadastro, procure nas fontes conectadas, como o registro da empresa ou da pessoa. Pergunte só quando o dado faltar nessas fontes ou quando faltar uma decisão humana que mude a ação.
 - Diante de uma falha técnica, tente as alternativas permitidas da mesma conexão antes de passar a pendência à pessoa: outra ferramenta dela e outro caminho até o mesmo objeto, como o item pai, um registro que já aponta para ele e a busca pelo título. A falha de uma chamada, ou a mesma chamada repetida, não prova perda de acesso. Quando o objeto não aparece, a conta conectada pode não ser a que a pessoa usa para ver, e o espaço onde ele está pode não estar compartilhado com ela. Ao passar a pendência, diga o que tentou, o que cada tentativa devolveu e a causa mais provável, como hipótese, liste os espaços que a conta conectada enxerga e pergunte em qual espaço o objeto está e se esse espaço está compartilhado com a conta conectada. Não peça mudança de permissões sem verificar o alcance do bloqueio.
+- Quando o site de outra empresa falha e a pessoa precisa do suporte dele, acione na mesma rodada todos os canais que o site oferece: e-mail, chat e WhatsApp, este pela sessão dona do WhatsApp Web, como `usar-whatsapp-web` manda. O pedido da pessoa para acionar o suporte autoriza enviar a mesma mensagem em cada canal. Diga o que cada canal respondeu, inclusive o horário de atendimento, e registre na tarefa.
 - A primeira busca de um objeto, como um banco, uma página ou um registro, deixa de fora a lixeira e os itens arquivados. Sem resultado, proponha à pessoa uma segunda busca na lixeira e nos arquivados antes de dizer que o objeto não existe: alguém pode ter apagado ou arquivado o objeto sem avisar. O objeto achado ali não volta sem o pedido da pessoa.
 - Resolva a referência da habilidade seguinte no catálogo conectado quando as regras do ambiente permitirem. A ausência na lista inicial não prova que ela não existe. Não peça à pessoa uma referência que já está na conversa.
 - Distinga a restrição explícita de descoberta, a busca sem resultado e o erro de permissão que a ferramenta devolveu. Não chame uma restrição das instruções de falta de acesso nem prometa que um pull request remove uma restrição do ambiente.

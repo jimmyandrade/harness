@@ -1,7 +1,7 @@
 # language: pt
 
 Funcionalidade: Composição têxtil
-  A composição de uma variante tem uma linha por parte e tecido, e a composição da etiqueta sai dessas linhas sem repetir tecido.
+  A composição de um produto tem uma linha por parte e tecido, e a composição da etiqueta sai dessas linhas sem repetir tecido.
 
   Regra: o banco vazio chama a procura de banco e as partes não vêm da habilidade
 
@@ -29,16 +29,16 @@ Funcionalidade: Composição têxtil
       Quando a habilidade começa
       Então ela para
 
-  Regra: a variante se lê inteira antes de mexer
+  Regra: o produto se lê inteiro antes de mexer
 
     Exemplo: Produto com variações de nome
       Dado que a pessoa cita o produto por um nome antigo
-      Quando a habilidade procura o produto e a variante
+      Quando a habilidade procura o produto
       Então ela acha pelo nome e pelas variações de nome
-      E lê todas as linhas de composição da variante antes de mexer
+      E lê todas as linhas de composição do produto antes de mexer
 
     Exemplo: Tecido diferente por parte
-      Dado que a frente da variante é um tecido e o forro é outro
+      Dado que a frente do produto é um tecido e o forro é outro
       Quando a habilidade grava
       Então ela grava uma linha para cada parte, com o tecido dela
       Mas não copia a composição nem a estampa do tecido para a linha
@@ -62,7 +62,7 @@ Funcionalidade: Composição têxtil
       Quando a habilidade vai registrar a linha
       Então ela pergunta antes de registrar
 
-  Regra: a parte canônica tem uma linha só por variante
+  Regra: a parte canônica tem uma linha só por produto
 
     Exemplo: Produto dupla face
       Dado que o produto é dupla face
@@ -155,8 +155,8 @@ Funcionalidade: Composição têxtil
       Então ela não grava na composição nem no produto
       E manda cadastrar a estampa no tecido com a habilidade de definir tecido
 
-    Exemplo: Outra estampa na variante
-      Dado que a variante passa a ter outra estampa
+    Exemplo: Outra estampa no produto
+      Dado que o produto passa a ter outra estampa
       Quando a habilidade grava
       Então ela liga a linha a outro tecido, cadastrado com a habilidade de definir tecido
       Mas não muda a estampa do tecido antigo
