@@ -4,10 +4,11 @@ description: Cadastra ou revisa obra musical a partir de composição, letra, ca
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.1"
+  version: "0.1.2"
   related:
     - definir-fonograma
     - evoluir-habilidade
+    - procurar-banco-de-dados
 ---
 
 # Definir obra musical
@@ -41,7 +42,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ### Passo 1
 
-Procure no workspace conectado o data source com o nome `Nome do data source de obras` e use-o sem perguntar: busque um termo da base e tome o data source de origem dos resultados cujo caminho tem esse nome. Abra o data source e leia o esquema. Só peça o link se a busca não achar nenhum ou achar mais de um. Não use um banco de outro workspace. Se `Campos da base de obras` estiver vazio, pergunte uma vez e pare.
+Ache o data source com o nome `Nome do data source de obras` usando `procurar-banco-de-dados`, dizendo que o banco guarda obras musicais e que precisa dos campos de `Campos da base de obras`. Abra o data source e leia o esquema. Só peça o link se a procura não resolver. Não use um banco de outro workspace. Se `Campos da base de obras` estiver vazio, pergunte uma vez e pare.
 
 Antes de criar ou revisar, procure se a obra já existe: busque pelo título e pelos primeiros versos da letra. Não crie duplicata.
 

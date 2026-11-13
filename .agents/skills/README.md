@@ -324,6 +324,7 @@ flowchart LR
   definir_artista --> definir_perfil_social
   definir_artista --> definir_pessoa
   definir_artista --> procurar_artista
+  definir_artista --> procurar_banco_de_dados
   definir_ativo_imobilizado --> definir_empresa
   definir_ativo_imobilizado --> gerenciar_estoque
   definir_ativo_imobilizado --> identificar_duplicata
@@ -411,6 +412,7 @@ flowchart LR
   definir_negociacao --> redigir_com_tom_de_voz
   definir_negociacao --> sincronizar_cronograma
   definir_obra_musical --> definir_fonograma
+  definir_obra_musical --> procurar_banco_de_dados
   definir_obrigacao_financeira --> lancar_despesa_da_empresa
   definir_obrigacao_financeira --> lancar_despesa_pessoal
   definir_obrigacao_financeira --> organizar_emails

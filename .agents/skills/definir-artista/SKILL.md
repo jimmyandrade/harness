@@ -4,13 +4,14 @@ description: Cadastra ou revisa um artista ou banda na base de artistas a partir
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.8.0"
+  version: "0.8.1"
   related:
     - definir-empresa
     - definir-perfil-social
     - definir-pessoa
     - evoluir-habilidade
     - procurar-artista
+    - procurar-banco-de-dados
 ---
 
 # Definir artista
@@ -56,7 +57,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ### Passo 1
 
-Procure no workspace conectado o data source com o nome `Nome do data source de artistas` e use-o sem perguntar: busque um termo da base e tome o data source de origem dos resultados cujo caminho tem esse nome. Abra o data source e leia o esquema e os modelos de página. Só peça o link se a busca não achar nenhum ou achar mais de um. Não use um banco de outro workspace. Se `Campos da base de artistas` ou `Status de curadoria de entrada` estiver vazio, pergunte uma vez e pare.
+Ache o data source com o nome `Nome do data source de artistas` usando `procurar-banco-de-dados`, dizendo que o banco guarda artistas e que precisa dos campos de `Campos da base de artistas`. Abra o data source e leia o esquema e os modelos de página. Só peça o link se a procura não resolver. Não use um banco de outro workspace. Se `Campos da base de artistas` ou `Status de curadoria de entrada` estiver vazio, pergunte uma vez e pare.
 Sem o resultado de `procurar-artista` nesta conversa, rode essa habilidade antes. Não escreva sem saber se a página existe.
 
 ```mermaid
