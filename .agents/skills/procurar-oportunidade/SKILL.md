@@ -175,6 +175,7 @@ A edição não existia. A sessão passou a se chamar Festival Rota Sul — ter�
 ## Casos-limite
 
 - A sessão ainda leva o nome padrão do app e há nome e data: renomeie para o nome da edição e a data com dia da semana. Nome dado pela pessoa fica.
+- A mensagem fala de uma feira no mesmo lugar, mas de quem a propõe é outro grupo, ou o formato é outro: é outra oferta. Compare quem organiza e o formato com a edição antes de ligar. Sem data definida, ela não é uma edição: leve só o que falta ao relatório.
 - Várias páginas podem ser a edição: mostre título, data e link de cada uma. Não escolha. Não responda sim.
 - O nome bate e a data é outro mês ou outro ano: é outra edição.
 - A data da página está vazia: mostre a página e diga que a data está vazia. Não invente.
@@ -194,7 +195,7 @@ A edição não existia. A sessão passou a se chamar Festival Rota Sul — ter�
 ## Pegadinhas
 
 - Uma palavra do nome, usada como verbo ou adjetivo no texto de outra página, parece o nome. Não é. Outro nome com a mesma palavra é outra oportunidade.
-- Outro evento na mesma cidade, no mesmo lugar ou no mesmo mês parece esta edição. O nome e a data decidem.
+- Outro evento na mesma cidade, no mesmo lugar ou no mesmo mês parece esta edição. O nome, a data e quem organiza decidem: a proposta que um grupo de marcas faz ao dono do espaço, no mesmo lugar e perto da mesma data, é outra oferta, e não a edição da organização.
 - "Uma oportunidade para conhecer novidades" parece o título. É a legenda.
 - Uma variação nas variações de nome parece apelido solto. É a mesma oportunidade.
 - Não achar um comunicado com nome e data parece pedir uma pergunta à pessoa. Siga `criar-oportunidade` na mesma resposta. Quem manda o comunicado parece ser a organização. Pode ser só quem divulga.
