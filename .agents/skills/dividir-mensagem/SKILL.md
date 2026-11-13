@@ -3,7 +3,7 @@ name: dividir-mensagem
 description: Decide como o rascunho de uma mensagem sai, em mensagens curtas por ideia, numa só ou em partes numeradas pelo limite de caracteres, e devolve as mensagens na ordem do envio com a contagem de cada uma. Usada quando um texto de WhatsApp vai ser mostrado ou enviado, ou quando passa do limite. Não serve para escrever o texto, enviar a mensagem nem decidir o tom.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
   related:
     - comunicar-novidade-do-produto
     - conversar-no-whatsapp
@@ -56,6 +56,8 @@ O limite vale para todo rascunho, inclusive os de `Mensagem única para`, o comu
 ### Passo 3
 
 Devolva as mensagens na ordem do envio, numeradas (Mensagem 1, Mensagem 2), com a contagem de caracteres de cada uma, para o sim da pessoa valer para elas. Cada parte sai inteira, depois da anterior, uma de cada vez.
+
+Mostre cada mensagem num bloco de código próprio, na ordem do envio, para o texto inteiro ficar à vista e a formatação do canal sobreviver à cópia. Uma mensagem por assunto quando o texto vai dividido. Um texto em partes leva "Mensagem N de M" e a contagem de caracteres de cada bloco.
 
 ### Passo 4
 
