@@ -759,7 +759,9 @@ flowchart LR
   pedir_revisao_de_pr_no_slack --> registrar_resultados_da_validacao_na_tarefa
   perfilar_tom_de_voz --> definir_vocabulario
   perfilar_tom_de_voz --> redigir_com_tom_de_voz
+  pesquisar_compra --> conversar_no_whatsapp
   pesquisar_compra --> definir_ativo_imobilizado
+  pesquisar_compra --> definir_empresa
   pesquisar_compra --> gerenciar_estoque
   pesquisar_compra --> identificar_duplicata
   pesquisar_compra --> lancar_despesa_da_empresa
