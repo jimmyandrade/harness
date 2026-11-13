@@ -23,6 +23,7 @@ flowchart LR
     atualizar_cadastro_fiscal["atualizar-cadastro-fiscal"]
     auditar_tarefas["auditar-tarefas"]
     avaliar_atualizacoes_de_dependencia["avaliar-atualizacoes-de-dependencia"]
+    bloquear_remetente_de_spam["bloquear-remetente-de-spam"]
     classificar_estado_do_termo["classificar-estado-do-termo"]
     classificar_melhoria_tecnica["classificar-melhoria-tecnica"]
     comunicar_novidade_do_produto["comunicar-novidade-do-produto"]
@@ -75,6 +76,7 @@ flowchart LR
     definir_perfil_social["definir-perfil-social"]
     definir_pessoa["definir-pessoa"]
     definir_planejamento_financeiro["definir-planejamento-financeiro"]
+    definir_politica["definir-politica"]
     definir_post_mortem["definir-post-mortem"]
     definir_preco_de_produto["definir-preco-de-produto"]
     definir_recurso_de_aprendizado["definir-recurso-de-aprendizado"]
@@ -88,6 +90,7 @@ flowchart LR
     definir_tipo_do_evento["definir-tipo-do-evento"]
     definir_viagem["definir-viagem"]
     definir_vocabulario["definir-vocabulario"]
+    delegar_aviso_de_plataforma["delegar-aviso-de-plataforma"]
     descrever_habilidade_ou_schema["descrever-habilidade-ou-schema"]
     emitir_documento_oficial["emitir-documento-oficial"]
     enviar_email["enviar-email"]
@@ -127,6 +130,7 @@ flowchart LR
     priorizar_itens["priorizar-itens"]
     procurar_agenda["procurar-agenda"]
     procurar_artista["procurar-artista"]
+    procurar_banco_de_dados["procurar-banco-de-dados"]
     procurar_data_significativa["procurar-data-significativa"]
     procurar_email["procurar-email"]
     procurar_inscricao["procurar-inscricao"]
@@ -148,6 +152,7 @@ flowchart LR
     rotular_item["rotular-item"]
     sincronizar_cronograma["sincronizar-cronograma"]
     sincronizar_status_da_tarefa["sincronizar-status-da-tarefa"]
+    sugerir_enquete_de_publico["sugerir-enquete-de-publico"]
     testar_habilidade["testar-habilidade"]
     testar_ponta_a_ponta["testar-ponta-a-ponta"]
     transcrever_audio_e_video["transcrever-audio-e-video"]
@@ -216,10 +221,14 @@ flowchart LR
   avaliar_atualizacoes_de_dependencia --> criar_commit
   avaliar_atualizacoes_de_dependencia --> criar_pull_request
   avaliar_atualizacoes_de_dependencia --> mesclar_pull_request
+  bloquear_remetente_de_spam --> definir_filtro_de_email
+  bloquear_remetente_de_spam --> organizar_emails
+  bloquear_remetente_de_spam --> procurar_email
   classificar_estado_do_termo --> definir_vocabulario
   classificar_estado_do_termo --> gravar_termos_no_vocabulario
   classificar_estado_do_termo --> validar_plano_de_vocabulario
   classificar_melhoria_tecnica --> priorizar_itens
+  comunicar_novidade_do_produto --> conversar_no_whatsapp
   comunicar_novidade_do_produto --> redigir_com_tom_de_voz
   configurar_harness_de_negocio --> criar_pull_request
   configurar_harness_de_negocio --> definir_issue_do_github
@@ -232,6 +241,7 @@ flowchart LR
   conversar_no_whatsapp --> definir_rotina
   conversar_no_whatsapp --> definir_tarefa
   conversar_no_whatsapp --> definir_vocabulario
+  conversar_no_whatsapp --> enviar_email
   conversar_no_whatsapp --> enviar_imagem_no_whatsapp
   conversar_no_whatsapp --> escrever_link
   conversar_no_whatsapp --> procurar_tarefa
@@ -306,6 +316,7 @@ flowchart LR
   definir_arquivos_da_habilidade --> criar_habilidade
   definir_artigo_da_base_de_conhecimento --> criar_habilidade
   definir_artigo_da_base_de_conhecimento --> definir_historia_de_usuario
+  definir_artigo_da_base_de_conhecimento --> definir_politica
   definir_artigo_da_base_de_conhecimento --> definir_tarefa
   definir_artista --> definir_empresa
   definir_artista --> definir_perfil_social
@@ -318,6 +329,7 @@ flowchart LR
   definir_ativo_imobilizado --> mesclar_registro
   definir_ativo_imobilizado --> reconhecer_imagem
   definir_ativo_imobilizado --> registrar_ciclo_do_ativo
+  definir_campanha_de_conteudo --> delegar_aviso_de_plataforma
   definir_campanha_de_conteudo --> planejar_calendario_de_conteudo
   definir_codigo_fiscal --> identificar_duplicata
   definir_composicao_textil --> acompanhar_producao_de_produto
@@ -419,6 +431,10 @@ flowchart LR
   definir_planejamento_financeiro --> definir_lancamento_financeiro
   definir_planejamento_financeiro --> gerenciar_estoque
   definir_planejamento_financeiro --> revisar_financas
+  definir_politica --> definir_artigo_da_base_de_conhecimento
+  definir_politica --> definir_tarefa
+  definir_politica --> delegar_aviso_de_plataforma
+  definir_politica --> formalizar_decisao
   definir_post_mortem --> definir_tarefa
   definir_preco_de_produto --> gerenciar_estoque
   definir_recurso_de_aprendizado --> definir_agenda
@@ -474,6 +490,12 @@ flowchart LR
   definir_vocabulario --> procurar_variacao_de_termo
   definir_vocabulario --> redigir_com_tom_de_voz
   definir_vocabulario --> validar_plano_de_vocabulario
+  delegar_aviso_de_plataforma --> definir_campanha_de_conteudo
+  delegar_aviso_de_plataforma --> definir_politica
+  delegar_aviso_de_plataforma --> definir_tarefa
+  delegar_aviso_de_plataforma --> organizar_emails
+  delegar_aviso_de_plataforma --> procurar_tarefa
+  delegar_aviso_de_plataforma --> rotular_item
   descrever_habilidade_ou_schema --> criar_commit
   descrever_habilidade_ou_schema --> criar_pull_request
   descrever_habilidade_ou_schema --> revisar_habilidade
@@ -606,6 +628,7 @@ flowchart LR
   organizar_emails --> definir_obrigacao_financeira
   organizar_emails --> definir_pessoa
   organizar_emails --> definir_tarefa
+  organizar_emails --> delegar_aviso_de_plataforma
   organizar_emails --> lancar_despesa_da_empresa
   organizar_emails --> lancar_despesa_pessoal
   organizar_emails --> procurar_email
@@ -660,6 +683,7 @@ flowchart LR
   procurar_agenda --> revisar_uso_do_tempo
   procurar_artista --> definir_artista
   procurar_artista --> mesclar_registro
+  procurar_banco_de_dados --> identificar_duplicata
   procurar_data_significativa --> definir_data_significativa
   procurar_email --> definir_grafia
   procurar_email --> procurar_inscricao
@@ -736,6 +760,12 @@ flowchart LR
   sincronizar_status_da_tarefa --> criar_pull_request
   sincronizar_status_da_tarefa --> levantar_contexto_do_pull_request
   sincronizar_status_da_tarefa --> mesclar_pull_request
+  sugerir_enquete_de_publico --> conversar_no_whatsapp
+  sugerir_enquete_de_publico --> criar_ideia_de_conteudo
+  sugerir_enquete_de_publico --> definir_campanha_de_conteudo
+  sugerir_enquete_de_publico --> definir_localidade_geografica
+  sugerir_enquete_de_publico --> redigir_com_tom_de_voz
+  sugerir_enquete_de_publico --> usar_whatsapp_web
   testar_habilidade --> descrever_habilidade_ou_schema
   testar_habilidade --> medir_habilidade
   testar_habilidade --> revisar_habilidade

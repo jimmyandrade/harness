@@ -3,7 +3,7 @@ name: atualizar-branch-do-pull-request
 description: Use essa habilidade sempre que for enviar um commit novo a uma branch que já tem pull request, ou ela estiver atrás da base, tiver conflito ou precisar de rebase, mesmo sem dizer rebase. NÃO use para abrir o PR, fazer o primeiro push nem mesclar (use criar-pull-request).
 metadata:
   author: jimmyandrade
-  version: "0.8.2"
+  version: "0.10.0"
   related:
     - criar-pull-request
     - atender-revisao-de-pull-request
@@ -37,7 +37,9 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 Siga `Cópia de trabalho` antes de mexer na branch.
 Se a branch já tem PR, confira o estado dele antes de atualizar e antes de cada push, mesmo sem rebase: ele pode ter sido mesclado depois do último push, e a branch remota pode continuar lá.
-Se já foi mesclado, o commit novo não entra nele: comece uma branch nova a partir da `Branch base` remota e leve só os commits que ficaram fora do merge.
+Se já foi mesclado, o commit novo não entra nele: comece uma branch nova a partir da `Branch base` remota e leve só os commits que ficaram fora do merge. A descrição do PR mesclado não muda; a mudança nova vai no PR novo, com o link do anterior.
+
+O rascunho que você abriu há minutos também passa por essa conferência: outra pessoa pode mesclar a qualquer momento. Leia o estado no mesmo comando do push, como em `Scripts disponíveis`, para nenhum push cair entre a leitura e o envio.
 Se a branch do PR aberto precisa de outro nome, como a `cursor/…` que a ferramenta criou, renomear fecha o PR.
 Abra um PR novo da branch renomeada, com o mesmo título e corpo, e feche o antigo por `fechar-pull-request`, com o link do novo como prova.
 O corpo do novo abre com um alerta `> [!NOTE]` do GitHub com o link do antigo, antes do resto do corpo.
@@ -93,6 +95,14 @@ Se você rebasear sem olhar a revisão do PR, o código que veio da base pode vo
 1. Siga `atender-revisao-de-pull-request` antes de substituir a branch, pelo Passo 2.
 2. Ajuste no mesmo PR o que veio da base fora do padrão pedido.
 
+### Alias de renomeação que ninguém renomeou
+
+Se você receber do CI o erro `metadata.aliases must include <skill>` numa skill que não renomeou, e acrescentar o alias, o nome de uma skill alheia entra na sua e o erro só some.
+
+1. A branch está atrás da `Branch base`: uma skill que entrou depois dela aparece como removida, e um arquivo parecido, como um `evals.json` vazio, como renomeado.
+2. Atualize com rebase, pelo Passo 2, e rode a checagem de skills com a base e o cabeça do rebase.
+3. Não acrescente o alias.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
@@ -108,7 +118,9 @@ A branch tinha PR aberto e a base avançou com um PR vizinho. Atualizei com reba
 
 ## Pegadinhas
 
+- O rascunho aberto há minutos parece aberto. Outra pessoa pode tê-lo mesclado, e o push e a descrição nova não chegam à base.
 - `git pull --rebase` numa branch já publicada rebaseia sobre a própria branch remota, não sobre a `Branch base`. Use o fetch e rebase do Passo 2.
+- O CI compara a base atual com a ponta da branch, não com o ponto onde ela nasceu. Uma branch atrás da base parece ter removido e renomeado o que a base ganhou depois.
 
 ## Scripts disponíveis
 
@@ -116,5 +128,6 @@ A branch tinha PR aberto e a base avançou com um PR vizinho. Atualizei com reba
 - `gh api -X POST repos/<Repositório>/branches/<branch>/rename -f new_name=<tipo>/<descrição>`: renomeia a branch no Passo 1 e fecha o PR.
 - `git fetch origin && git rebase origin/<Branch base>`: Passo 2.
 - `git push --force-with-lease origin <branch>`: Passo 3, só com autorização. Não substitui a `Branch base`.
+- `[ "$(gh pr view <branch> --repo <Repositório> --json state -q .state)" = OPEN ] && <push>`: push numa branch com PR, no Passo 1, que só envia com o PR aberto.
 
 1. Confira o estado do PR, atualize com rebase, resolva os conflitos, atenda a revisão do PR e substitua a branch publicada com autorização.
