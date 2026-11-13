@@ -3,7 +3,7 @@ name: mesclar-pull-request
 description: Mescla um pull request aberto na branch base e faz o que vem depois do merge, inclusive quando a pessoa avisa que mesclou. Usada quando a pessoa pede para mesclar, colocar na main ou diz que um PR foi mesclado, mesmo sem dizer merge. Não serve para fechar sem merge, abrir ou atualizar o PR nem para responder a revisão.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.5.1"
   related:
     - atender-revisao-de-pull-request
     - atualizar-branch-do-pull-request
@@ -46,6 +46,8 @@ Pedido para fechar sem merge: siga `fechar-pull-request`.
 
 Mescle só com pedido explícito, como "mescla", "coloca na main" ou "pode mesclar".
 Abrir o PR, "faça o PR" e "sobe isso" não pedem merge.
+
+Antes de oferecer o merge, como próximo passo ou numa pergunta, leia os checks do PR. Com check falhando, não ofereça o merge: diga qual falha e por quê, pelo log, e pergunte se a pessoa quer seguir mesmo assim ou corrigir antes.
 
 ```mermaid
 flowchart LR
@@ -166,6 +168,7 @@ O PR mudava a mensagem de erro do CI para uma branch com o prefixo de um agente 
 
 ## Pegadinhas
 
+- Um PR de bot, como o de pin de dependência, parece pronto para mesclar. O check dele pode estar falhando: leia antes de oferecer o merge.
 - Depois do squash, a branch local não aparece como mesclada. Só o estado do PR diz que o trabalho entrou.
 - O merge feito pelo botão, ou avisado pela pessoa, pode deixar a branch remota. Só o `fetch --prune` diz se ela sumiu.
 - `mergeStateStatus` `BLOCKED` com checks verdes costuma ser aprovação ou check exigido que ainda não rodou. Leia os dois antes de dizer por quê.
