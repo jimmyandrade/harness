@@ -1,11 +1,11 @@
 ---
 name: prospectar-oportunidades
 description: Prospecta oportunidades novas, como feiras, editais e eventos, na localidade certa, escolhida entre a da viagem ativa, a de maior prioridade e a sede. Usada quando a pessoa pede para procurar oportunidades, quando uma rotina de prospecção roda ou quando uma viagem se aproxima. NÃO serve para cadastrar a edição, saber se ela já existe, inscrever nem cadastrar a viagem.
-allowed-tools: notion:notion-ai-search notion:notion-fetch
+allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-pages
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   related:
     - criar-ideia-de-conteudo
     - criar-oportunidade
@@ -43,7 +43,11 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ### Passo 1
 
-Leia o `Business Model Canvas` e o `Playbook de oportunidades`, e os retornos já registrados dos pontos de contato realizados. Sem o canvas e o playbook, pergunte uma vez e pare. As listas e as propriedades vêm do mapeamento de dados do projeto, no workspace conectado: oportunidades, grupos, localidades, viagens e pontos de contato. Se uma lista não estiver nessa conexão, pare. Não use a lista de outro workspace.
+Leia o `Business Model Canvas` e o `Playbook de oportunidades`, e os retornos já registrados dos pontos de contato realizados.
+
+Quando um dos dois não está nos parâmetros, procure no workspace conectado uma página que faça esse papel e sugira o que achou, com o link. Use-a só com o sim da pessoa. Se não achar, proponha criar a página: entreviste a pessoa sobre o modelo de negócio ou sobre as oportunidades que fazem sentido e as que não, e grave as respostas numa página do workspace só com o sim dela. Peça que a página entre no parâmetro. Rodando por rotina, não há quem entreviste: não prospecte e deixe a falta no resumo. Sem as duas páginas, não prospecte.
+
+As listas e as propriedades vêm do mapeamento de dados do projeto, no workspace conectado: oportunidades, grupos, localidades, viagens e pontos de contato. Se uma lista não estiver nessa conexão, pare. Não use a lista de outro workspace.
 
 ### Passo 2
 
@@ -90,6 +94,13 @@ Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
 
+### Canvas ausente e a skill parou
+
+Se você parar só porque o parâmetro do canvas ou do playbook está vazio, a página que já existe no workspace fica sem uso e a pessoa não sabe o que falta.
+
+1. Procure no workspace conectado uma página que faça esse papel e sugira-a, com o link.
+2. Sem nada, proponha criar a página com uma entrevista e grave só com o sim.
+
 ### Busca sem teto
 
 Se você pesquisar sem parar até achar tudo, a execução gasta mais do que o resultado vale.
@@ -124,7 +135,8 @@ A localidade-alvo é São Paulo, porque a viagem está na janela. O festival de 
 
 - A localidade-alvo é vetada: não procure, diga o motivo e pare.
 - Sem viagem e sem localidade prioritária: use a `Localidade-sede`.
-- O canvas ou o playbook não está nas instruções do projeto: pergunte uma vez e pare.
+- O canvas ou o playbook não está nas instruções do projeto: procure no workspace e sugira o que achou. Sem nada, proponha criar a página e entreviste a pessoa.
+- Rotina sem canvas ou sem playbook: não prospecte e deixe a falta no resumo.
 - A edição já existe: complemente sem criar outra.
 - A data vem sem o ano em fonte confiável: não cadastre e peça a confirmação.
 - Pedido para saber se uma oportunidade já existe: use `procurar-oportunidade`.

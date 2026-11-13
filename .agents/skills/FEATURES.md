@@ -1967,6 +1967,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Properties**:
   - Lives at `.agents/skills/prospectar-oportunidades/SKILL.md`
   - Is called by the person or by a routine from definir-rotina, and reads the business model canvas and the playbook of fitting opportunities from the project instructions
+  - When the canvas or the playbook is missing from the parameters, searches the connected workspace and suggests what it found; with nothing found, proposes creating the page through an interview and saves it only on the person's yes; a routine run without both pages does not prospect
   - Picks the target location from a trip inside the active-trip window, then the highest-priority location, then the headquarters, and does not search a vetoed location
   - Orders opportunity groups by search priority, smallest number first, and treats an empty priority as none, never as high
   - Stops at the parameters that cap candidates and web searches per run, and says what is left for the next run
