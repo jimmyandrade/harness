@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-update-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.21.2"
+  version: "0.21.3"
   aliases:
     - organizar-feira
   related:
@@ -93,7 +93,7 @@ O evento deste ponto em outra agenda editável: migre para a agenda do ponto de 
 
 ### Passo 8
 
-Pop-up, corner, feira, evento comercial ou ativação ligados a um ponto de contato físico usam Pontos de contato como fonte da ordenação e da numeração. A ordem é a que a página já tem na ordem visual. O número é o que o Nome do ponto já mostra. Não invente outro. Sem número na página, pare. Não crie a propriedade.
+Pop-up, corner, feira, evento comercial ou ativação ligados a um ponto de contato físico usam Pontos de contato como fonte da ordenação e da numeração. A ordem é a que a página já tem na ordem visual. O número é o que o Nome do ponto já mostra. Não invente outro. Sem número na página, pare, salvo o ponto de um tipo que não leva número, que fica sem número no título. Não crie a propriedade.
 
 ```mermaid
 flowchart LR

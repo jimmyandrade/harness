@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.4.0"
   related:
     - criar-oportunidade
     - definir-agenda
@@ -24,6 +24,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Formato da data com dia da semana": "terça-feira, 01/09/2026"
 # `Relação geral padrão das despesas` é a relação que a despesa de uma atividade formativa sem venda usa no lugar do ponto de contato. Vazio: pergunte uma vez.
 "Relação geral padrão das despesas": ""
+# `Tipos sem número` lista o tipo de ponto de contato físico que não é feira nem pop-up, como uma vitrine ou um showcase. Esse ponto não leva número no título nem ordem visual, e a numeração dos outros não o conta. Vazio, todo ponto leva número.
+"Tipos sem número": []
 ```
 ## Instruções
 
@@ -59,7 +61,7 @@ Ligue a oportunidade, uma só, e as demais relações que o mapeamento do ponto 
 Grupo de oportunidade que não veio fica com `definir-grupo-de-oportunidades`. Não invente.
 Não preencha fórmula, rollup nem botão. Não escreva a oportunidade nem o contrato no corpo da página.
 
-O número do título é o maior número que aparece no nome dos pontos da lista mais um.
+O número do título é o maior número que aparece no nome dos pontos da lista mais um. Ponto de um dos `Tipos sem número` fica sem número no título e sem ordem visual. Releia os nomes antes de numerar: a pessoa pode ter renumerado os pontos.
 A ordem visual pode estar vazia num ponto antigo, e uma ordenação a põe por último. Leia também os nomes antes de numerar e não repita o número de outro ponto.
 Preencha a ordem visual com o mesmo número do título.
 Preencha o ciclo com o período que contém a data de início da execução, ou a da oportunidade quando o ponto não tem data. O ciclo do trimestre anterior esconde o ponto no trimestre certo.
@@ -186,6 +188,7 @@ Perguntei qual status vale. Não mudei sozinha.
 
 - Existir oportunidade, inscrição, cronograma, local, data ou custo parece provar que houve venda. Não prova: pergunte.
 - Participação confirmada na oportunidade parece pedir um status adiantado. O status de um ponto novo é Não iniciada, salvo o que a pessoa disser.
+- Todo ponto de contato físico parece um pop-up numerado. Um showcase ou uma vitrine é ponto de contato sem ser feira, e não leva número.
 - A ordem visual parece dizer o próximo número. Ela pode estar vazia num ponto antigo. O número vem do nome.
 - O ciclo parece detalhe. Sem ele o ponto some da visão por trimestre.
 - O ciclo do trimestre atual parece servir. O ciclo é o do período da data de início.
