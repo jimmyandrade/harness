@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.14.0"
+  version: "0.15.0"
   related:
     - definir-empresa
     - definir-grafia
@@ -29,6 +29,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Fontes para resolver identidade": ""
 # `Cadastro na loja` é `sim`, que também cria ou atualiza a pessoa como cliente na loja on-line do projeto, mesmo sem compra, ou `não`.
 "Cadastro na loja": "não"
+# `Cadastro pelo Chrome` é `sim` ou `não`. `sim` busca e cadastra pelo Notion no Claude in Chrome quando o conector do Notion não responde. `não` para e avisa.
+"Cadastro pelo Chrome": "sim"
 # `Campo do cliente na loja` é o nome da propriedade da lista de pessoas que guarda o link do cliente na loja. Vazio, o link fica nas notas.
 "Campo do cliente na loja": ""
 ```
@@ -37,6 +39,12 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 ### Passo 1
 
 Cadastrar ou atualizar uma pessoa na lista de pessoas é esta habilidade. A lista e o nome de cada propriedade vêm do mapeamento de dados do projeto, no workspace conectado. Este texto usa os conceitos: o nome completo, as variações de grafia e os perfis sociais relacionados. Se a lista não estiver nessa conexão, pare. Não use a lista de outro workspace.
+
+Quando o conector do Notion não responde, confira a conexão antes de dizer que falta acesso. Com `Cadastro pelo Chrome` em `sim`, busque e cadastre pelo Notion no Claude in Chrome, com o login da pessoa, no mesmo workspace e na lista do mapeamento. Busque cada nome na busca do Notion, também por variações, e conte como resultado só a página da lista de pessoas. Crie a página pelo botão de nova página. O título nasce com "Nova pessoa": selecione o título inteiro, com triplo clique, antes de digitar. Grave o telefone na propriedade dele.
+
+Nas observações vai só o contexto estável. O histórico vai em comentário da página, um por fato.
+
+Releia a página criada antes de dizer que gravou e nunca clique em renomear, editar ou excluir propriedade.
 
 Com `Tipo de armazenamento das pessoas` em `arquivos locais`, `Endereço das pessoas` é a pasta, com um arquivo por pessoa, nomeado pelo e-mail exato dela, no `Nome do arquivo da pessoa`, e um arquivo de índice com uma linha por pessoa: nome completo, como é chamada, e-mail, papel, time e o arquivo.
 Os campos são o nome completo, como a pessoa é chamada, as variações de grafia, as transcrições erradas do nome, o papel, o time, o e-mail, o ID no Slack, o login no GitHub, o ID da conta no Jira, os pronomes e a fonte deles, e os canais e grupos em que ela aparece.
@@ -141,6 +149,14 @@ Se você escrever o nome de quem participou ou de quem responde por uma ação s
 2. Escreva a menção real da plataforma.
 3. Sem o ID, procure pelo e-mail.
 4. Sem resultado único, pergunte.
+
+### Título emendado no cadastro pelo Chrome
+
+Se você digitar o nome sem selecionar o título, ele se junta ao "Nova pessoa" e a lista ganha um registro com o nome errado.
+
+1. Selecione o título inteiro, com triplo clique, antes de digitar.
+2. Releia o título e o telefone depois de gravar.
+3. Corrija na mesma rodada, sem criar outra página.
 
 ### Pessoa ausente só na frase
 
