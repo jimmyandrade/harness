@@ -751,6 +751,7 @@ flowchart LR
   perfilar_tom_de_voz --> definir_vocabulario
   perfilar_tom_de_voz --> redigir_com_tom_de_voz
   pesquisar_compra --> definir_ativo_imobilizado
+  pesquisar_compra --> definir_empresa
   pesquisar_compra --> gerenciar_estoque
   pesquisar_compra --> identificar_duplicata
   pesquisar_compra --> lancar_despesa_da_empresa
