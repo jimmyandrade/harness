@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.7.0"
   related:
     - acompanhar-producao-de-produto
     - definir-composicao-textil
@@ -28,8 +28,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 # Nomes de banco e de campo: o projeto define. Vazios, use `procurar-banco-de-dados` antes de perguntar.
 # `Banco de tecidos`: uma página por tecido e cor, ligada à empresa e à composição.
 "Banco de tecidos": ""
-# `Banco de composição`: uma linha por percentual e fibra, como `88% PES`.
-"Banco de composição": ""
+# `Banco de composição de fibras`: uma linha por percentual e fibra, como `88% PES`.
+"Banco de composição de fibras": ""
 # `Banco de estampas`: uma página por estampa, que a página do tecido liga.
 "Banco de estampas": ""
 # `Campo do arquivo da ficha`: campo de arquivo do cadastro de tecidos que guarda o PDF da ficha. Vazio, o PDF vai no corpo da página, ou onde o sistema de cadastro usa para anexos.
@@ -50,7 +50,7 @@ Peça a ficha técnica ou a etiqueta e o fornecedor. Sem a ficha à mão, procur
 
 Mostre o que achou, com o link de cada fonte, e redija o pedido ao fornecedor só com o que faltar.
 
-Os nomes dos bancos vêm das instruções do projeto. Com `Banco de tecidos` ou `Banco de composição` vazio, use `procurar-banco-de-dados` para cada um, dizendo que o primeiro guarda tecidos por cor e o segundo as linhas de composição por fibra. Não mude a estrutura de nenhum dos dois.
+Os nomes dos bancos vêm das instruções do projeto. Com `Banco de tecidos` ou `Banco de composição de fibras` vazio, use `procurar-banco-de-dados` para cada um, dizendo que o primeiro guarda tecidos por cor e o segundo as linhas de composição por fibra. Não mude a estrutura de nenhum dos dois.
 
 Leia o arquivo inteiro. Uma ficha de nota fiscal traz vários tecidos, cada um a partir de um cabeçalho de dados técnicos com o código e o nome do tecido. De cada tecido da ficha, tire o código, o nome, a composição, a largura, a gramatura, o rendimento, o encolhimento e os cuidados de lavar, passar e costurar.
 
@@ -66,7 +66,7 @@ Monte o plano numa tabela antes de gravar: página, ação (criar, corrigir ou c
 
 ### Passo 3
 
-A composição é a relação com linhas do `Banco de composição`, uma por fibra. O nome da linha é o percentual com ponto decimal e a sigla de `Siglas das fibras`, como `90.5% CO`. O percentual da fibra é a fração, como 0,905, e a linha liga a fibra. Use a linha que já existe com o mesmo nome e a mesma fibra. Crie só a que falta.
+A composição é a relação com linhas do `Banco de composição de fibras`, uma por fibra. O nome da linha é o percentual com ponto decimal e a sigla de `Siglas das fibras`, como `90.5% CO`. O percentual da fibra é a fração, como 0,905, e a linha liga a fibra. Use a linha que já existe com o mesmo nome e a mesma fibra. Crie só a que falta.
 
 ```mermaid
 flowchart LR
@@ -142,7 +142,7 @@ Se você corrigir a composição de um tecido que veio de outra compra, o regist
 
 Se você usar um nome de banco que o projeto não definiu, a escrita cai no banco errado ou num que não existe.
 
-1. Leia `Banco de tecidos` e `Banco de composição` nas instruções do projeto.
+1. Leia `Banco de tecidos` e `Banco de composição de fibras` nas instruções do projeto.
 2. Vazios, use `procurar-banco-de-dados`.
 3. Não invente um nome.
 
