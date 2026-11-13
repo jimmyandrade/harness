@@ -3,7 +3,7 @@ name: acompanhar-retornos-pendentes
 description: Mantém uma rotina por canal, como e-mail, WhatsApp e site ou aplicativo, que lê as conversas em espera, o aviso que uma tarefa espera e a condição que um painel deve mostrar, avisa quando chegam e entrega o resultado à sessão. Usada quando uma mensagem espera resposta, uma tarefa espera um aviso ou um status precisa mudar num painel. Não serve para escrever a resposta, entrar com senha nem criar uma rotina por mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.7.0"
+  version: "0.7.1"
   related:
     - acompanhar-resposta-no-whatsapp
     - definir-rotina
@@ -101,7 +101,7 @@ Para cada linha com tarefa, a rotina do e-mail procura na caixa toda, com ou sem
 A busca é pelo remetente, pelo assunto ou pelo código do envio, e a rotina lê só o texto da mensagem.
 O aviso de uma plataforma ou de um órgão quase nunca chega etiquetado, então a busca pela etiqueta de espera não o acha.
 
-A rotina do site lê todas as linhas do canal na mesma execução, pela extensão Claude in Chrome, numa aba nova que ela fecha ao terminar. Abre o endereço do painel na sessão que a pessoa já deixou aberta, lê só a tela que mostra a condição e compara com a esperada.
+A rotina do site lê todas as linhas do canal na mesma execução, pelo navegador embutido do aplicativo e, quando ele não tem a sessão da pessoa ou não existe na sessão, pela extensão Claude in Chrome, numa aba nova que ela fecha ao terminar. Abre o endereço do painel na sessão que a pessoa já deixou aberta, lê só a tela que mostra a condição e compara com a esperada.
 Se o painel pede login, código por SMS ou captcha, a rotina não tenta: avisa a pessoa, uma vez por dia, que precisa entrar, e a linha continua.
 
 Numa conversa, com a pessoa presente, peça a credencial ao gerenciador de senhas antes de abrir o painel. A aprovação não faz o login: sem a ferramenta de preenchimento na sessão, ou diante de captcha e de código por SMS, diga isso e peça que a pessoa entre na aba.
@@ -191,7 +191,7 @@ Se você ler só as conversas com `Etiqueta de espera`, o aviso que uma tarefa e
 
 Se você deixar a rotina entrar no painel com a senha da pessoa, a credencial passa a morar numa execução que ninguém acompanha, e um código por SMS trava a rotina de qualquer forma.
 
-1. Use só a sessão que a pessoa já deixou aberta no Chrome.
+1. Use só a sessão que a pessoa já deixou aberta, no navegador do aplicativo ou no Chrome.
 2. Se pedir login, avise a pessoa e deixe a linha aberta.
 3. Quem entra com a credencial é a pessoa, numa conversa, nunca a rotina.
 
