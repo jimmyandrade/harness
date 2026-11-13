@@ -223,6 +223,7 @@ flowchart LR
   classificar_estado_do_termo --> gravar_termos_no_vocabulario
   classificar_estado_do_termo --> validar_plano_de_vocabulario
   classificar_melhoria_tecnica --> priorizar_itens
+  comunicar_novidade_do_produto --> conversar_no_whatsapp
   comunicar_novidade_do_produto --> redigir_com_tom_de_voz
   configurar_harness_de_negocio --> criar_pull_request
   configurar_harness_de_negocio --> definir_issue_do_github
