@@ -14,6 +14,7 @@ flowchart LR
     abrir_vendas_na_tiqueteira["abrir-vendas-na-tiqueteira"]
     acompanhar_edital["acompanhar-edital"]
     acompanhar_fila_de_revisao["acompanhar-fila-de-revisao"]
+    acompanhar_itens_do_ponto_de_contato["acompanhar-itens-do-ponto-de-contato"]
     acompanhar_producao_de_produto["acompanhar-producao-de-produto"]
     acompanhar_resposta_no_whatsapp["acompanhar-resposta-no-whatsapp"]
     acompanhar_retornos_pendentes["acompanhar-retornos-pendentes"]
@@ -129,7 +130,6 @@ flowchart LR
     perfilar_tom_de_voz["perfilar-tom-de-voz"]
     pesquisar_compra["pesquisar-compra"]
     planejar_calendario_de_conteudo["planejar-calendario-de-conteudo"]
-    preparar_itens_do_ponto_de_contato["preparar-itens-do-ponto-de-contato"]
     preparar_tarefa_do_pull_request["preparar-tarefa-do-pull-request"]
     prever_tempo_de_viagem["prever-tempo-de-viagem"]
     priorizar_itens["priorizar-itens"]
@@ -181,6 +181,14 @@ flowchart LR
   acompanhar_fila_de_revisao --> procurar_pedido_de_revisao
   acompanhar_fila_de_revisao --> publicar_revisao_de_codigo
   acompanhar_fila_de_revisao --> redigir_com_tom_de_voz
+  acompanhar_itens_do_ponto_de_contato --> analisar_regulamento_da_oportunidade
+  acompanhar_itens_do_ponto_de_contato --> definir_ativo_imobilizado
+  acompanhar_itens_do_ponto_de_contato --> definir_tarefa
+  acompanhar_itens_do_ponto_de_contato --> definir_viagem
+  acompanhar_itens_do_ponto_de_contato --> inscrever_na_oportunidade
+  acompanhar_itens_do_ponto_de_contato --> organizar_ponto_de_contato
+  acompanhar_itens_do_ponto_de_contato --> procurar_tarefa
+  acompanhar_itens_do_ponto_de_contato --> registrar_ciclo_do_ativo
   acompanhar_producao_de_produto --> definir_tarefa
   acompanhar_producao_de_produto --> gerenciar_estoque
   acompanhar_producao_de_produto --> identificar_duplicata
@@ -204,13 +212,13 @@ flowchart LR
   acompanhar_veiculo --> organizar_emails
   acompanhar_veiculo --> sincronizar_cronograma
   analisar_regulamento_da_oportunidade --> acompanhar_edital
+  analisar_regulamento_da_oportunidade --> acompanhar_itens_do_ponto_de_contato
   analisar_regulamento_da_oportunidade --> consultar_responsavel_pela_oportunidade
   analisar_regulamento_da_oportunidade --> definir_grupo_de_oportunidades
   analisar_regulamento_da_oportunidade --> definir_tarefa
   analisar_regulamento_da_oportunidade --> definir_viagem
   analisar_regulamento_da_oportunidade --> inscrever_na_oportunidade
   analisar_regulamento_da_oportunidade --> organizar_ponto_de_contato
-  analisar_regulamento_da_oportunidade --> preparar_itens_do_ponto_de_contato
   analisar_regulamento_da_oportunidade --> procurar_tarefa
   atender_revisao_de_pull_request --> atualizar_branch_do_pull_request
   atender_revisao_de_pull_request --> criar_commit
@@ -616,13 +624,13 @@ flowchart LR
   identificar_duplicata --> definir_grafia
   identificar_duplicata --> definir_perfil_social
   identificar_duplicata --> mesclar_registro
+  inscrever_na_oportunidade --> acompanhar_itens_do_ponto_de_contato
   inscrever_na_oportunidade --> acompanhar_retornos_pendentes
   inscrever_na_oportunidade --> analisar_regulamento_da_oportunidade
   inscrever_na_oportunidade --> definir_empresa
   inscrever_na_oportunidade --> definir_inscricao
   inscrever_na_oportunidade --> definir_pessoa
   inscrever_na_oportunidade --> definir_tarefa
-  inscrever_na_oportunidade --> preparar_itens_do_ponto_de_contato
   inscrever_na_oportunidade --> procurar_inscricao
   inscrever_na_oportunidade --> redigir_com_tom_de_voz
   investigar_problema --> definir_artigo_da_base_de_conhecimento
@@ -687,6 +695,7 @@ flowchart LR
   organizar_emails --> procurar_inscricao
   organizar_emails --> procurar_oportunidade
   organizar_emails --> rotular_item
+  organizar_ponto_de_contato --> acompanhar_itens_do_ponto_de_contato
   organizar_ponto_de_contato --> analisar_regulamento_da_oportunidade
   organizar_ponto_de_contato --> consultar_responsavel_pela_oportunidade
   organizar_ponto_de_contato --> criar_oportunidade
@@ -696,7 +705,6 @@ flowchart LR
   organizar_ponto_de_contato --> definir_tarefa
   organizar_ponto_de_contato --> definir_viagem
   organizar_ponto_de_contato --> fazer_fechamento
-  organizar_ponto_de_contato --> preparar_itens_do_ponto_de_contato
   organizar_ponto_de_contato --> procurar_oportunidade
   organizar_ponto_de_contato --> sincronizar_cronograma
   organizar_ponto_de_contato --> triar_conversas
@@ -715,14 +723,6 @@ flowchart LR
   planejar_calendario_de_conteudo --> criar_ideia_de_conteudo
   planejar_calendario_de_conteudo --> definir_campanha_de_conteudo
   planejar_calendario_de_conteudo --> definir_reel_do_instagram
-  preparar_itens_do_ponto_de_contato --> analisar_regulamento_da_oportunidade
-  preparar_itens_do_ponto_de_contato --> definir_ativo_imobilizado
-  preparar_itens_do_ponto_de_contato --> definir_tarefa
-  preparar_itens_do_ponto_de_contato --> definir_viagem
-  preparar_itens_do_ponto_de_contato --> inscrever_na_oportunidade
-  preparar_itens_do_ponto_de_contato --> organizar_ponto_de_contato
-  preparar_itens_do_ponto_de_contato --> procurar_tarefa
-  preparar_itens_do_ponto_de_contato --> registrar_ciclo_do_ativo
   preparar_tarefa_do_pull_request --> definir_tarefa
   preparar_tarefa_do_pull_request --> formalizar_decisao
   preparar_tarefa_do_pull_request --> levantar_contexto_do_pull_request

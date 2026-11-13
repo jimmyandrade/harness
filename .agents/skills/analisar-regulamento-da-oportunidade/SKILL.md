@@ -3,7 +3,7 @@ name: analisar-regulamento-da-oportunidade
 description: Lê o manual, o regulamento, o edital e o contrato de uma oportunidade e separa o que a empresa deve fazer, com prazo, o que o texto não diz e o que as fontes contradizem. Usada quando chega o manual da oportunidade aprovada. NÃO serve para perguntar ao responsável, redigir a tarefa nem organizar a viagem.
 metadata:
   author: jimmyandrade
-  version: "0.1.7"
+  version: "0.1.8"
   related:
     - acompanhar-edital
     - consultar-responsavel-pela-oportunidade
@@ -12,7 +12,7 @@ metadata:
     - definir-viagem
     - evoluir-habilidade
     - inscrever-na-oportunidade
-    - preparar-itens-do-ponto-de-contato
+    - acompanhar-itens-do-ponto-de-contato
     - organizar-ponto-de-contato
     - procurar-tarefa
 ---
@@ -78,7 +78,7 @@ Cada exigência com prazo vira tarefa no mesmo turno: confira antes com `procura
 Pergunte quem responde por cada uma. Não preencha responsável nem prazo que a pessoa não disse.
 Antes de cada prazo, avise a pessoa com o link da exigência, como o do formulário.
 Exigência vencida: diga isso na hora e proponha cumpri-la agora ou perguntar se ainda é aceita.
-Exigência que é um formulário ou cadastro da organização segue `inscrever-na-oportunidade`, e o que ela manda levar segue `preparar-itens-do-ponto-de-contato`.
+Exigência que é um formulário ou cadastro da organização segue `inscrever-na-oportunidade`, e o que ela manda levar segue `acompanhar-itens-do-ponto-de-contato`.
 
 ### Passo 7
 

@@ -3,7 +3,7 @@ name: inscrever-na-oportunidade
 description: Preenche o cadastro ou o formulário que a organização de uma oportunidade pede para a inscrição, com os dados da empresa, no formato de cada campo, e envia só com o sim da pessoa. Usada quando a inscrição ou o cadastro de uma oportunidade está para ser feito. NÃO serve para registrar a inscrição no Notion, ler o regulamento nem escrever à organização.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
   related:
     - acompanhar-retornos-pendentes
     - analisar-regulamento-da-oportunidade
@@ -12,7 +12,7 @@ metadata:
     - definir-pessoa
     - definir-tarefa
     - evoluir-habilidade
-    - preparar-itens-do-ponto-de-contato
+    - acompanhar-itens-do-ponto-de-contato
     - procurar-inscricao
     - redigir-com-tom-de-voz
 ---
@@ -57,7 +57,7 @@ Quando a pessoa vai de carro, o veículo vem do cadastro de veículos da viagem.
 
 ### Passo 5
 
-Item que o formulário oferece para alugar, como mesa, balcão ou cadeira, e que a empresa leva por conta própria, não se aluga: a resposta é que não precisa, e o item entra no que levar, por `preparar-itens-do-ponto-de-contato`.
+Item que o formulário oferece para alugar, como mesa, balcão ou cadeira, e que a empresa leva por conta própria, não se aluga: a resposta é que não precisa, e o item entra nos itens do ponto, por `acompanhar-itens-do-ponto-de-contato`.
 Item pago só se escolhe com o sim da pessoa.
 
 ### Passo 6
@@ -102,7 +102,7 @@ Se você escolher mesa, balcão ou cadeira pagos, a empresa paga por algo que el
 
 1. Responda que não precisa, quando a empresa leva o item.
 2. Item pago só com o sim da pessoa.
-3. Registre o item em `preparar-itens-do-ponto-de-contato`.
+3. Deixe o item nos itens do ponto, por `acompanhar-itens-do-ponto-de-contato`.
 
 ## Exemplos de entrada e saída
 
