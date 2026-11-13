@@ -50,7 +50,7 @@ A resposta chegou quando a prévia da linha do contato não tem os vistos de env
 
 O contato pode responder copiando as nossas mensagens, inteiras ou em trechos, com a resposta dele junto de cada cópia. A prévia e o contador não distinguem a cópia da resposta: compare o texto dele com o que enviamos, tire o que é cópia e decida só pelo que sobra. Cópia sem texto novo não é resposta: a conversa mantém `Ação esperada`.
 
-Prévia que repete o nosso texto não decide, porque mostra só a última mensagem. Peça à dona que abra a conversa, leia as mensagens do contato desde a nossa e diga à pessoa que a conversa ficou marcada como lida.
+Prévia que repete o nosso texto não decide, porque mostra só a última mensagem. Peça à dona que abra a conversa, expanda a mensagem longa em "Ler mais", leia as mensagens do contato desde a nossa e diga à pessoa que a conversa ficou marcada como lida. A resposta costuma vir marcada, como "Resposta:", entre as cópias.
 Antes de qualquer ferramenta do Chrome, leia `usar-whatsapp-web` e liste as sessões. A rotina não é a dona: ela pede a leitura da lista à dona, por mensagem entre sessões, e não abre aba. O prompt da rotina não manda abrir aba nem usar "uma nova".
 Ache a conversa e siga `usar-whatsapp-web` para o resto: o botão do aviso e o QR code são da dona.
 
