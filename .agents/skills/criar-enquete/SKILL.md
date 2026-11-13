@@ -1,9 +1,11 @@
 ---
-name: sugerir-enquete-de-publico
-description: Use essa habilidade sempre que for sugerir uma enquete ou pergunta para conhecer o público de um negócio, como a cidade, o repertório ou o interesse em participar, mesmo sem dizer enquete. NÃO use para escrever a copy final, publicar, cadastrar a ideia ou o post, nem definir a campanha.
+name: criar-enquete
+description: Use essa habilidade sempre que for criar ou sugerir uma enquete ou pergunta para conhecer o público de um negócio, como a cidade, o repertório ou o interesse em participar, mesmo sem dizer enquete. NÃO use para escrever a copy final, publicar, cadastrar a ideia ou o post, nem definir a campanha.
 metadata:
   author: jimmyandrade
-  version: "0.2.3"
+  version: "0.3.0"
+  aliases:
+    - sugerir-enquete-de-publico
   related:
     - conversar-no-whatsapp
     - criar-ideia-de-conteudo
@@ -15,7 +17,7 @@ metadata:
     - usar-whatsapp-web
 ---
 
-# Sugerir enquete de público
+# Criar enquete
 
 ## Parâmetros de configuração
 
