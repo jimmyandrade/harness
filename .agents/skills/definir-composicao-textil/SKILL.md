@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.4"
+  version: "0.4.0"
   aliases:
     - definir-composicao-da-peca
   related:
@@ -40,11 +40,11 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ### Passo 1
 
-Ache o produto e a variante pelo nome e pelas variações de nome, e leia todas as linhas de composição da variante antes de mexer.
+Ache o produto pelo nome e pelas variações de nome, e leia todas as linhas de composição dele antes de mexer.
 
-Os nomes vêm das instruções do projeto. Com `Banco de composições` vazio, use `procurar-banco-de-dados`, dizendo que o banco guarda uma linha por parte e tecido de cada variante.
+Os nomes vêm das instruções do projeto. Com `Banco de composições` vazio, use `procurar-banco-de-dados`, dizendo que o banco guarda uma linha por parte e tecido de cada produto.
 
-Uma linha é uma parte da variante num tecido: a frente é um tecido, o forro é outro. O tecido tem a composição e a estampa, e a linha só o liga à parte, sem copiar nada dele. A parte vem da opção do campo Parte: a pessoa diz "estrutura" ou "tampa do bolso", e você usa a opção mais próxima e diz qual usou. Parte que não existe pede o sim da pessoa antes de criar a opção, com o nome e a descrição. Não crie propriedade nova no produto para isso.
+Uma linha é uma parte do produto num tecido: a frente é um tecido, o forro é outro. O tecido tem a composição e a estampa, e a linha só o liga à parte, sem copiar nada dele. A parte vem da opção do campo Parte: a pessoa diz "estrutura" ou "tampa do bolso", e você usa a opção mais próxima e diz qual usou. Parte que não existe pede o sim da pessoa antes de criar a opção, com o nome e a descrição. Não crie propriedade nova no produto para isso.
 
 Material que o projeto trata como têxtil entra como tecido, cadastrado por `definir-tecido`, mesmo que não seja têxtil de fato, como um plástico holográfico. Material que o projeto não trata como têxtil, pergunte antes de registrar.
 
@@ -60,15 +60,15 @@ flowchart LR
 
 ### Passo 2
 
-Cada variante tem uma linha só na `Parte canônica`, porque as fórmulas do produto leem a primeira que acham. Com `Parte canônica` vazia, pergunte qual é antes de gravar. Na dupla face, a face que fica para fora no uso principal é a canônica e a outra vai no verso. Pergunte qual é antes de gravar e avise que o prefixo do SKU pode mudar.
+Cada produto tem uma linha só na `Parte canônica`, porque as fórmulas do produto leem a primeira que acham. Com `Parte canônica` vazia, pergunte qual é antes de gravar. Na dupla face, a face que fica para fora no uso principal é a canônica e a outra vai no verso. Pergunte qual é antes de gravar e avise que o prefixo do SKU pode mudar.
 
 A linha aponta para o tecido real em `definir-tecido`. Um tecido genérico, como "100% CO", é coringa: use só quando a pessoa não souber o tecido, e diga que ficou genérico. Um tecido que falta é cadastrado por `definir-tecido` antes da linha.
 
-O título da linha é a parte, o nome atual do produto, a variante e o nome curto do tecido, como "frente de Camisa Giz com 100% PES". O nome curto é decisão do projeto por causa do espaço da etiqueta. Quando o produto muda de nome, renomeie as linhas dele na mesma hora.
+O título da linha é a parte, o nome atual do produto e o nome curto do tecido, como "frente de Camisa Giz com 100% PES". O nome curto é decisão do projeto por causa do espaço da etiqueta. Quando o produto muda de nome, renomeie as linhas dele na mesma hora.
 
 ### Passo 3
 
-Monte a composição da etiqueta de uma variante a partir das linhas dela:
+Monte a composição da etiqueta de um produto a partir das linhas dele:
 
 - [ ] Um item por tecido distinto, com a composição de fibras dele.
 - [ ] O mesmo tecido em cores diferentes conta uma vez.
@@ -136,7 +136,7 @@ frente em um tecido de 100% CO, uma linha de recorte em uma malha e outra em out
 ## Casos-limite
 
 - A pessoa não sabe as porcentagens de uma malha: registre o tecido com as fibras, sem inventar o percentual, e guarde no comentário de onde virá a inferência.
-- A estampa é do tecido, não do produto nem da variante: outra estampa é outro tecido, cadastrado por `definir-tecido`, e a variante troca a linha para ele. Recorte não é aplicação.
+- A estampa é do tecido, não da composição: outra estampa é outro tecido, cadastrado por `definir-tecido`, e a linha do produto troca para ele. Recorte não é aplicação.
 - A aplicação é da variante, cadastrada por `definir-aplicacao-textil`, não do produto nem do tecido: ela vai por cima do tecido e muda de uma variante para outra. A mesma peça pode ter uma variante com aplicação e outra sem, então a propriedade é opcional e aceita de 0 a N registros. Ela não é tecido e não vira linha de composição de tecido. Se vai na etiqueta, o cadastro dela diz.
 - A pessoa usa um apelido para o tecido: confira o nome no banco de tecidos antes de ligar a linha.
 - O banco está vazio nas instruções do projeto: use `procurar-banco-de-dados`. Parte vazia: pergunte uma vez.
