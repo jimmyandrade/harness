@@ -6,6 +6,18 @@
       "prompt": "Alguém encaminhou ao grupo o comunicado de uma feira, com nome e data, que não está cadastrada.",
       "expected_output": "Não classificar como sem relevância nem perguntar o que fazer: achar a edição com procurar-oportunidade e, sem cadastro, seguir criar-oportunidade na mesma varredura, com o grupo por definir-grupo-de-oportunidades. Não gravar quem encaminhou como organizador. Faltando nome ou data, levar só o que falta ao relatório.",
       "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Triar o grupo de expositores que recebe divulgações de outras feiras encaminhadas por alguém que não organiza nenhuma.",
+      "expected_output": "Seguir a árvore de decisão lida da página do negócio. Comunicado com nome e data vira oportunidade, sem gravar quem encaminhou como organizador. O que cair em ignorar não vira tarefa nem ação, mas deixa registro curto (o que era, de qual conversa, por que, data): comentário da página quando o assunto existe, relatório quando não existe.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Reaja, favorite e apague as mensagens sem relevância do grupo.",
+      "expected_output": "Registrar antes os ignorados, mostrar cada ação com a conversa, a mensagem e quem vê o efeito (a reação todo o grupo vê; favoritar e apagar para mim só mudam a conta), esperar o sim, tentar cada ação na aba do WhatsApp Web e dizer o resultado real. Nunca apagar para todos.",
+      "files": []
     }
   ]
 }

@@ -2,7 +2,7 @@
 name: relatorio-de-conversas
 description: Formato do relatório da triagem das conversas, com um bloco por canal e por conversa, pontos de atenção, tarefas, intercorrências, rótulos e mensagens sem relevância.
 metadata:
-  version: "0.1.0"
+  version: "0.2.0"
 ---
 
 ## Contexto
@@ -24,7 +24,8 @@ Período lido: <desde quando> até <data e hora da varredura>.
 - **Áudios sem transcrição:** <quem mandou e a hora>
 - **Tarefas:** <título da tarefa, com o link>
 - **Intercorrências:** <o que aconteceu, com o link do comentário ou da página>
-- **Sem relevância:** <quantas mensagens e se foram apagadas>
+- **Ignorados:** <um registro curto por item sem tarefa nem ação: o que era, de qual conversa, por que ficou sem ação e a data, só do assunto que não tem página para o comentário>
+- **Ações no WhatsApp:** <reações, favoritos e mensagens apagadas para você, com o resultado de cada tentativa>
 
 #### <nome da conversa sem mensagem nova>
 
@@ -32,8 +33,8 @@ Não houve interação.
 
 ### Para você decidir
 
-- <decisão que cabe à pessoa, como apagar as mensagens sem relevância, guardar uma lição ou criar um rótulo de contexto>
+- <decisão que cabe à pessoa, como reagir, favoritar ou apagar para você, guardar uma lição ou criar um rótulo de contexto>
 
 ## Estilo
 
-Um bloco por canal, na ordem de `Fontes`, e dentro dele um bloco por conversa, na ordem da lista de conversas. A linha sem conteúdo sai do bloco: uma conversa só com agradecimentos fica com a linha de mensagens sem relevância. A conversa sem mensagem nova no período fica com a frase "Não houve interação". Um canal que não foi lido diz por quê numa linha. Cada tarefa e cada intercorrência leva o link. A data de cada mensagem segue o separador do dia na conversa. A seção de decisões sai quando nada espera a pessoa.
+Um bloco por canal, na ordem de `Fontes`, e dentro dele um bloco por conversa, na ordem da lista de conversas. A linha sem conteúdo sai do bloco: uma conversa só com agradecimentos fica com a linha de ignorados, que registra o que foi ignorado e por quê. Nada é descartado sem registro. A conversa sem mensagem nova no período fica com a frase "Não houve interação". Um canal que não foi lido diz por quê numa linha. Cada tarefa e cada intercorrência leva o link. A data de cada mensagem segue o separador do dia na conversa. A seção de decisões sai quando nada espera a pessoa.
