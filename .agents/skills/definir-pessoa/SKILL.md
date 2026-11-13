@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.16.2"
+  version: "0.16.3"
   related:
     - definir-empresa
     - definir-grafia
@@ -29,8 +29,6 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Fontes para resolver identidade": ""
 # `Cadastro na loja` é `sim`, que também cria ou atualiza a pessoa como cliente na loja on-line do projeto, mesmo sem compra, ou `não`.
 "Cadastro na loja": "não"
-# `Cadastro pelo Chrome` é `nunca`, `se o conector falhar` ou `sempre`. `nunca` usa só o conector e, se ele não responde, para e avisa. `se o conector falhar` cadastra pelo Notion no Claude in Chrome só quando o conector não responde. `sempre` cadastra pelo Chrome sem tentar o conector. O Chrome gasta mais token, então o padrão é `nunca` e o negócio escolhe o valor.
-"Cadastro pelo Chrome": "nunca"
 # `Campo do cliente na loja` é o nome da propriedade da lista de pessoas que guarda o link do cliente na loja. Vazio, o link fica nas notas.
 "Campo do cliente na loja": ""
 ```
@@ -40,9 +38,9 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 Cadastrar ou atualizar uma pessoa na lista de pessoas é esta habilidade. A lista e o nome de cada propriedade vêm do mapeamento de dados do projeto, no workspace conectado. Este texto usa os conceitos: o nome completo, as variações de grafia e os perfis sociais relacionados. Se a lista não estiver nessa conexão, pare. Não use a lista de outro workspace.
 
-O cadastro segue `Cadastro pelo Chrome`. Em `nunca`, use só o conector: se ele não responde, confira a conexão, diga o motivo e pare. Em `se o conector falhar`, confira a conexão e só então siga pelo Chrome. Em `sempre`, vá direto ao Chrome.
+Quando o conector do Notion falta ou falha, siga a ordem de ferramentas das instruções do projeto: linha de comando, API, conector e, por último, o Claude in Chrome.
 
-No Chrome, busque e cadastre pelo Notion no Claude in Chrome, com o login da pessoa, no mesmo workspace e na lista do mapeamento. Busque cada nome na busca do Notion, também por variações, e conte como resultado só a página da lista de pessoas. Crie a página pelo botão de nova página. O título nasce com "Nova pessoa": selecione o título inteiro, com triplo clique, antes de digitar. Grave o telefone na propriedade dele.
+No Chrome, busque e cadastre pelo Notion, com o login da pessoa, no mesmo workspace e na lista do mapeamento. Busque cada nome na busca do Notion, também por variações, e conte como resultado só a página da lista de pessoas. Crie a página pelo botão de nova página. O título nasce com "Nova pessoa": selecione o título inteiro, com triplo clique, antes de digitar. Grave o telefone na propriedade dele.
 
 Nas observações vai só o contexto estável. O histórico vai em comentário da página, um por fato.
 
