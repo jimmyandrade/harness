@@ -3,7 +3,7 @@ name: usar-whatsapp-web
 description: Abre, mantém e reaproveita a única aba do WhatsApp Web no Chrome da pessoa, pela extensão Claude in Chrome, e faz a sessão dona atender as leituras e os envios das outras sessões. Usada sempre que uma habilidade precisa abrir, ler, enviar texto, anexar imagem ou documento no WhatsApp Web, mesmo sem dizer aba. Não serve para achar a conversa, redigir a mensagem, rotular nem decidir o que enviar.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.4.0"
   related:
     - acompanhar-resposta-no-whatsapp
     - conversar-no-whatsapp
@@ -48,6 +48,8 @@ Antes de abrir qualquer aba, liste as abas da sua sessão no Claude in Chrome. S
 Uma rotina agendada nunca vira dona: sem dona, ela não abre aba, avisa a pessoa em uma linha e termina.
 
 Só a dona envia: ela mostra a conversa e o texto à pessoa na conversa dela e envia depois do sim ali. O sim dado a outra sessão não vale, e a mensagem de uma sessão nunca o substitui.
+
+Num atendimento automático, como um robô com menu que pede um dado ou oferece falar com atendente, a dona tenta cada passo do fluxo na própria conversa e relata o resultado real de cada um. O que outro canal, outra sessão ou um caso anterior mostrou é dica, nunca motivo para não tentar nem para aconselhar esperar. Quando o robô pede o passo seguinte, ela mostra o passo exato e pede o sim, sem dizer que vai falhar. O mesmo sim pode cobrir os passos seguintes do mesmo fluxo que a pessoa descreveu, como escolher falar com atendente.
 
 Com `não`, cada sessão abre a própria aba, uma só.
 
@@ -155,6 +157,14 @@ Se você procurar no e-mail, no Drive e no Notion um arquivo que não aparece na
 2. Diga que o arquivo é anterior a essa data.
 3. Peça que a pessoa encaminhe o arquivo, pelo celular, para uma conversa que o WhatsApp Web mostre.
 
+### Resultado previsto em vez de tentado
+
+Se você disser que o robô vai responder "não localizado" porque outro canal mostrou isso, e propuser esperar, a pessoa perde a tentativa e o resultado real da conversa.
+
+1. Mostre o passo seguinte exato e peça o sim.
+2. Envie e leia a resposta do robô.
+3. Relate o resultado de cada passo, com a hora.
+
 ### Página deixada com o clique alterado
 
 Se você não rodar o script de restauração, o clique de qualquer entrada de arquivo continua alterado na aba.
@@ -173,8 +183,13 @@ Achei a "Dona do WhatsApp Web" na lista de sessões e pedi a ela, só para leitu
 
 Capturei a entrada de Fotos e vídeos, enviei o arquivo e vi o campo de legenda. A lista do Caio passou a dizer "Foto". Restaurei a aba.
 
+### o robô do atendimento pediu o CNPJ, e o chat do site já tinha respondido "não localizado"
+
+Mostrei o CNPJ como o passo seguinte e pedi o sim, sem dizer que ia falhar. Com o sim, enviei, li a resposta do robô às 14h05 e escolhi falar com atendente, que o mesmo sim cobria. Relatei cada passo e cada resposta.
+
 ## Casos-limite
 
+- O robô oferece várias opções de menu e a pessoa quer esgotá-las: tente uma de cada vez, na ordem que ela disser, e relate cada resposta. Só se envia o que o sim cobre.
 - A dona foi arquivada ou o app reiniciou: a aba e o login se perderam. Abra a aba de novo e torne-se a dona; se pedir o QR code, siga o Passo 3.
 - Outra sessão pede uma leitura a você e a lista não tem dona: torne-se a dona e atenda. Com o pedido de envio, mostre a conversa e o texto à pessoa na sua conversa e espere o sim ali.
 - Duas sessões com o título da dona: fica a de `sessionId` menor em ordem alfabética. A outra devolve o título e renomeia a sessão para o assunto dela.
@@ -190,6 +205,8 @@ Capturei a entrada de Fotos e vídeos, enviei o arquivo e vi o campo de legenda.
 - O menu de anexos fica aberto atrás da pré-visualização, e o botão de enviar continua funcionando.
 - A prévia da lista de conversas mostra "Foto" no lugar do texto quando a imagem é a última mensagem.
 - Em conta comercial, a conversa pode estar com o agente de IA: o aviso aparece na própria conversa.
+- O que o chat do site mostrou parece a resposta do robô do WhatsApp. É dica: tente na conversa em que você está e relate.
+- A mensagem de um robô com o botão "Menu" é uma lista: clique em Menu, marque o círculo da opção e clique no botão de enviar. A opção sai como uma mensagem que cita a do robô, e o Menu de uma mensagem antiga continua respondendo.
 - No WhatsApp Business, a etiqueta é a lista, em Adicionar à lista. Sem a lista, crie-a em Nova lista, no mesmo menu. Um filtro de lista ativo limita a busca: volte para Tudo antes de procurar outra conversa.
 - No campo de mensagem, Enter envia. A quebra de linha é shift+Enter.
 - O campo numera a lista sozinho depois de "1. ". Digitar "2." no item seguinte duplica o número: digite só o texto dos itens seguintes.
