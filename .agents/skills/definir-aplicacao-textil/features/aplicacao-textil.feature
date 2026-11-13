@@ -83,25 +83,14 @@ Funcionalidade: Aplicação
       Então ela sugere criar o campo
       Mas não cria o campo sem o sim
 
-  Regra: o banco se procura antes de perguntar
+  Regra: o banco vazio chama a procura de banco
 
-    Exemplo: Banco de aplicações não definido e achado
+    Exemplo: Banco de aplicações não definido
       Dado que as instruções do projeto não definem o banco de aplicações
-      E que o workspace conectado tem um só banco que serve
-      Quando a habilidade precisa ler ou criar uma aplicação
-      Então ela usa esse banco e diz qual usou
-      Mas não pergunta o nome ao usuário
-
-    Exemplo: Dois bancos com nomes iguais ou parecidos
-      Dado que o workspace conectado tem dois bancos de nomes iguais ou parecidos que servem
-      Quando a habilidade precisa escolher o banco
-      Então ela confirma com a pessoa qual é o certo
-
-    Exemplo: Nenhum banco de aplicações
-      Dado que o workspace conectado não tem nenhum banco que sirva
-      Quando a habilidade precisa ler ou criar uma aplicação
-      Então ela pede à pessoa que informe o banco ou sugere criá-lo
-      Mas não cria o banco nem usa um nome próprio sem o sim
+      Quando a habilidade precisa ler ou gravar nele
+      Então ela chama a habilidade de procurar banco de dados
+      E diz a ela para que serve o banco e quais propriedades ele precisa ter
+      Mas não pergunta o nome à pessoa antes
 
   Regra: a aplicação se busca antes de criar
 
@@ -137,17 +126,11 @@ Funcionalidade: Aplicação
       Então ela pergunta tudo sobre a aplicação: o nome, o motivo, a técnica e o que mais o banco pede
       Mas não inventa o que a foto não mostra
 
-    Exemplo: Campo da foto não definido e achado
+    Exemplo: Campo da foto não definido
       Dado que as instruções do projeto não definem o campo da foto da aplicação
-      E que o banco tem um só campo de arquivo que serve
       Quando a habilidade vai guardar a foto
-      Então ela usa esse campo e diz qual usou
-
-    Exemplo: Campo da foto ambíguo ou ausente
-      Dado que o banco tem mais de um campo de arquivo que serve, ou nenhum
-      Quando a habilidade vai guardar a foto
-      Então ela confirma com a pessoa qual campo usar, ou sugere criar o campo
-      Mas não cria o campo sem o sim
+      Então ela chama a habilidade de procurar banco de dados para achar o campo de arquivo
+      Mas não escolhe o campo
 
     Exemplo: Aplicação de antes da data de corte
       Dado que a aplicação foi criada antes da data de corte da cobrança

@@ -439,14 +439,14 @@ How these skills relate is in `README.md`, in this folder.
   - Leaves the label text to the project default, which it never writes, and accepts an optional short override in a field of the record, only when the person asks for a specific text, refusing one above the character limit parameter, which is empty by default and asked once
   - Charges the person for everything about a new appliqué and its photo, leaves it pending without the photo, and does not charge an appliqué created before the project cutoff date
   - Warns that correcting an appliqué linked to more than one variant changes all of them
-  - Looks for the appliqué database and the photo field in the connected workspace when the project instructions leave them empty, confirms when more than one fits, and asks or suggests creating one when none does
+  - Calls the database lookup skill when the appliqué database or the photo field is empty in the project instructions, and never asks for the name first
   - Checks whether a motif is the print of a fabric or an appliqué of a variant, since an appliqué of one variant can look like the print of another fabric
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The appliqué is linked to the variant and not to the product or the fabric
   - [x] A variant without an appliqué is valid
   - [x] A new appliqué without a photo is charged and left pending, and one before the cutoff date is not
-  - [x] An empty database parameter makes the skill search the workspace, confirm an ambiguity, and ask or suggest creation only when none is found
+  - [x] An empty database parameter makes the skill call the database lookup skill and not ask for the name first
 
 ### definir-artigo-da-base-de-conhecimento
 - **Stability**: experimental
@@ -554,7 +554,7 @@ How these skills relate is in `README.md`, in this folder.
   - Builds the label with one item per distinct fabric, counts the same article in different colors once, and leaves out finishing parts whose fabric is already in the front or the back
   - Lists after the fabrics the appliqués of the variant that the record marked for the label, showing the override text when the record has one and saying the project default applies when it does not, without writing any text; unmarked ones stay out
   - Treats a print as part of the fabric, never of the composition or the product: another print is another fabric; an appliqué belongs to the variant, optional and from 0 to N, and is not a fabric composition row
-  - Asks the person for the composition database, the canonical part, and the finishing parts when the project instructions leave them empty
+  - Calls the database lookup skill when the composition database is empty in the project instructions, and asks the person for the canonical part and the finishing parts when those are empty
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] An empty database or canonical part parameter makes the skill ask and not choose
@@ -641,14 +641,14 @@ How these skills relate is in `README.md`, in this folder.
   - Keeps the motif as a field of the print, with no relation to an appliqué of the same motif
   - Charges the person for the photo and the information of a new print, leaves it pending without the photo, and does not charge a print created before the project cutoff date
   - Warns that correcting a print linked to more than one fabric changes all of them
-  - Looks for the print database and the photo field in the connected workspace when the project instructions leave them empty, confirms when more than one fits, and asks or suggests creating one when none does
+  - Calls the database lookup skill when the print database or the photo field is empty in the project instructions, and never asks for the name first
   - Checks whether a motif is the print of a fabric or an appliqué of a variant, since an appliqué of one variant can look like the print of another fabric
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The print is linked to the fabric and not to the product or the variant
   - [x] A duplicate is searched before creating
   - [x] A new print without a photo is charged and left pending, and one before the cutoff date is not
-  - [x] An empty database parameter makes the skill search the workspace, confirm an ambiguity, and ask or suggest creation only when none is found
+  - [x] An empty database parameter makes the skill call the database lookup skill and not ask for the name first
 
 ### definir-filtro-de-email
 - **Stability**: experimental
@@ -1203,7 +1203,7 @@ How these skills relate is in `README.md`, in this folder.
   - Links the print to the fabric page, asks which print when the sheet does not say, and never writes the print on the product or the variant
   - Charges the person for what a new fabric lacks: the composition, the technical data the sheet does not give, and a photo, from which it registers the print of a printed fabric; a fabric created before the project cutoff date is not charged
   - Updates the sheet section of a page instead of adding another, and puts the PDF in the sheet file field when the project defines it
-  - Asks the person for the fabric database, the composition database, the print database, and the abbreviation of a missing fiber when the project instructions leave them empty
+  - Calls the database lookup skill when the fabric database, the composition database, the print database, or the photo field is empty in the project instructions, and asks the abbreviation of a missing fiber
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The sheet sources are searched before the supplier is asked

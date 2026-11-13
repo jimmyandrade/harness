@@ -3,13 +3,14 @@
 Funcionalidade: Composição têxtil
   A composição de uma variante tem uma linha por parte e tecido, e a composição da etiqueta sai dessas linhas sem repetir tecido.
 
-  Regra: o banco e as partes não vêm da habilidade
+  Regra: o banco vazio chama a procura de banco e as partes não vêm da habilidade
 
     Exemplo: Banco de composições não definido
       Dado que as instruções do projeto não definem o banco de composições
       Quando a habilidade precisa ler ou gravar uma linha
-      Então ela pergunta à pessoa qual é o banco
-      Mas não usa um nome de banco próprio
+      Então ela chama a habilidade de procurar banco de dados
+      E diz a ela para que serve o banco e quais propriedades ele precisa ter
+      Mas não pergunta o nome à pessoa antes
 
     Exemplo: Parte canônica não definida
       Dado que as instruções do projeto não definem a parte canônica
