@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet. A busca na lista de inscrições usa notion-ai-search no servidor notion.
 metadata:
   author: jimmyandrade
-  version: "0.12.0"
+  version: "0.13.0"
   aliases:
     - atualizar-inscricao
   related:
@@ -86,6 +86,8 @@ Formulário colado. Quando a pessoa cola o texto de um formulário de inscriçã
 O formulário vai no corpo da inscrição, nunca no da oportunidade. Não use abas, toggles nem blocos colapsáveis: use títulos, negrito, listas e separadores. Cada pergunta vira um título com um parágrafo livre abaixo. A pergunta de escolha vira caixas de seleção `- [ ]`. O item de documentos ou de confirmações vira lista de marcação. O campo com asterisco ganha "(obrigatório)".
 
 Respostas do formulário. A inscrição em nome da empresa usa os contatos da empresa, como o WhatsApp, o e-mail e o site da página dela na lista de empresas, e não os da pessoa que vai participar. Os textos vêm do texto-base de inscrições do negócio. Mostre cada resposta com a fonte dela, para a pessoa corrigir o que estiver desatualizado, e explique na mesma frase o termo do formulário que ela pode não conhecer. O formulário só é enviado com o sim da pessoa.
+
+Antes de redigir, leia em cada campo o rótulo, o texto de exemplo dentro dele e o limite de caracteres. O texto de exemplo costuma mostrar o formato esperado, como "Ajudamos [quem] a [fazer o quê] com [como]": a resposta segue esse formato e cabe no limite. Preencha também o campo opcional quando houver dado nas fontes, porque um formulário mais completo pesa na seleção.
 
 Abordagem positiva. Uma resposta de conversa como "vou analisar" ou "manda o material" mantém a inscrição em andamento até haver confirmação operacional: formulário enviado, aprovação final, vaga, comprovante, credencial, código ou instrução conclusiva. A conversa fica em `definir-negociacao`, e a inscrição aponta para a negociação nas observações.
 
@@ -211,6 +213,7 @@ busquei a inscrição da Loja Exemplo como expositora no Festival Rota Sul 2026.
 - Uma propriedade que copia o e-mail da pessoa, a data da edição ou um link do formulário parece pedir valor. Ela não se grava.
 - Uma confirmação de expositor não confirma as outras inscrições do mesmo evento.
 - O telefone de quem vai ao palco parece o contato da inscrição. Na inscrição da empresa, o contato é o da empresa.
+- O campo opcional parece dispensável. Quem seleciona lê o formulário inteiro, e o campo vazio é uma chance perdida.
 - A data da confirmação só entra se a pessoa disser a data ou se `garantir-ingresso` viu o pedido confirmado na tela.
 - A criação da página parece aceitar o arquivo enviado nos comprovantes. Ela recusa: o arquivo entra na atualização seguinte.
 
