@@ -1,9 +1,10 @@
 ---
 name: bloquear-remetente-de-spam
 description: Classifica remetentes de spam por uma árvore de decisão, grava a decisão no banco do negócio e entrega as listas para colar no bloqueio de remetentes do Gmail e de URL do Chrome do Admin do Google. Usada quando a pessoa cola ou cita remetentes para bloquear. NÃO serve para filtro de caixa, marcar mensagem como spam nem salvar no Admin.
+compatibility: Requer Python 3 para montar as listas.
 metadata:
   author: jimmyandrade
-  version: "0.2.4"
+  version: "0.3.0"
   related:
     - definir-filtro-de-email
     - organizar-emails
@@ -55,11 +56,11 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 Receba os remetentes. Sem `Banco de remetentes bloqueados`, peça o banco e pare. Se ele não estiver no workspace conectado, pare: não use o banco de outro workspace.
 
-Limpe a lista antes de tudo: tire o texto do botão que veio colado junto, como "desbloquear", que muitas vezes vem grudado no endereço. Separe nome e endereço, ponha o endereço em minúsculas e tire os repetidos. Um endereço sem nome e um nome sem colchetes valem do mesmo jeito. Quando o endereço traz outro endereço dentro dele, como o de quem usa uma plataforma de envio, o remetente é o endereço inteiro.
+Limpe a lista com o script de `Scripts disponíveis`, e não à mão. Ele tira o texto do botão que veio colado junto, como "desbloquear", separa nome e endereço, põe tudo em minúsculas, ordena em ordem alfabética e tira os repetidos. Um endereço sem nome e um nome sem colchetes valem do mesmo jeito. Quando o endereço traz outro endereço dentro dele, como o de quem usa uma plataforma de envio, o remetente é o endereço inteiro.
 
 ### Passo 2
 
-Leia o banco e tire da lista o que já tem decisão, por endereço ou por domínio. Um endereço sob um domínio já bloqueado também sai. Diga quantos saíram.
+Leia o banco e tire da lista o que já tem decisão, por endereço ou por domínio, dando ao script o que o banco já tem como a lista do que existe. Um endereço sob um domínio já bloqueado também sai. Diga quantos saíram.
 
 Se a tela de remetentes estiver aberta no navegador, na conta certa, leia a lista que ela já tem, só para ler, e tire também o que já está lá. A tela de URL do Chrome vale o mesmo: leia a caixa de texto dela antes de entregar a lista. O que está só na tela e falta no banco é decisão antiga da pessoa: pergunte quem decidiu e quando antes de gravar.
 
@@ -99,7 +100,7 @@ Grave as linhas em lotes de até 70, e confira ao fim a contagem por nó e que n
 
 ### Passo 6
 
-Entregue duas listas, uma por tela do Admin, prontas para colar, uma entrada por linha: os endereços e os domínios para a tela de remetentes bloqueados do Gmail, e só os domínios com `sim` na URL do Chrome, com o ponto e o arroba de volta. Os de `talvez` ficam de fora e saem numa lista à parte, para a pessoa decidir.
+Entregue duas listas, uma por tela do Admin, prontas para colar, uma entrada por linha, sempre ordenadas em ordem alfabética e sem repetidas, montadas pelo script: os endereços e os domínios para a tela de remetentes bloqueados do Gmail, e só os domínios com `sim` na URL do Chrome, com o ponto e o arroba de volta. Os de `talvez` ficam de fora e saem numa lista à parte, para a pessoa decidir.
 
 Grave cada lista num arquivo de texto, na pasta de rascunho da sessão e nunca no repositório, e entregue o link do arquivo em Markdown, para a pessoa abri-lo no painel. Um caminho só em formato de código não abre nada. Entregue também o link da tela, no mesmo trecho, antes de falar de qualquer outra coisa.
 
@@ -191,6 +192,7 @@ A skill tira o texto do botão, separa 180 endereços e 3 já registrados no ban
 - A tela de URL do Chrome é uma só caixa de texto, com um URL por linha e limite de mil, que aceita domínio. Ela já pode ter URLs que a pessoa bloqueou por outro motivo, como sites de ferramentas, e colar a lista inteira por cima repete as entradas. Com o botão Salvar apagado, não há mudança pendente.
 - Logo depois de salvar, o texto da página pode trazer a contagem antiga. Recarregue, com a caixa de edição fechada, porque recarregar com ela aberta descarta o que não foi salvo.
 - Na caixa de edição, o botão de adicionar endereço fica ao lado da seta de página, e um clique por coordenada acrescenta uma linha em branco. Troque de página pelo rótulo "Ir para a próxima página".
+- O script põe tudo em minúsculas. Um URL com caminho sensível a maiúsculas precisa de conferência antes de colar.
 - O texto colado do Gmail traz "desbloquear" grudado no fim do endereço, e há linhas sem nome e sem colchetes.
 - Há endereços que trazem outro endereço dentro de si, como os de quem envia por plataforma de newsletter. O remetente é o endereço inteiro.
 - A busca na caixa não devolve o que o Gmail marcou como spam ou suspeito. Vazio não prova que a mensagem não existe.
@@ -202,6 +204,8 @@ A skill tira o texto do botão, separa 180 endereços e 3 já registrados no ban
 
 ## Scripts disponíveis
 
-- Nenhum.
+- `python3 scripts/montar_lista.py <arquivo> [--ja-existe <arquivo>]`: imprime a lista limpa do arquivo, ordenada em ordem alfabética, sem repetidas e sem as entradas do arquivo de `--ja-existe`, uma por linha. O `--ja-existe` pode vir mais de uma vez.
 
-1. Não há script para executar.
+1. Com terminal, grave o texto colado num arquivo, rode o script e use a saída como lista.
+2. Para a lista de uma tela do Admin, passe como `--ja-existe` o que a tela já tem, lido como o Passo 2 manda, e só a diferença sai.
+3. Sem terminal, faça a mesma limpeza à mão e diga que o script não rodou.
