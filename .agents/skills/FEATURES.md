@@ -156,6 +156,19 @@ How these skills relate is in `README.md`, in this folder.
   - [ ] A package whose peer dependency waits in another update is grouped with it in the bot configuration before the merge
   - [ ] A repository with only a Dependabot configuration gets the group only in the Dependabot configuration
 
+### bloquear-remetente-de-spam
+- **Stability**: experimental
+- **Description**: Classify spam senders with a decision tree, record each decision in the business's own database, and hand over the lists to paste into the sender block and the browser URL block of the Google admin console
+- **Properties**:
+  - Lives at `.agents/skills/bloquear-remetente-de-spam/SKILL.md`
+  - Reads the database of blocked senders, the free providers, the shared platforms, the official brands, and the mode of each node from the project instructions
+  - Cleans the pasted list, drops senders that already have a decision, and never blocks the domain of a free provider or a shared platform
+  - Blocks the address and the domain of a brand imitation without asking, and asks about each dedicated domain after looking for evidence in the mailbox and on the company site
+  - Records each decision with the node, the reason, who decided, and when, and hands over one list per admin screen without changing the admin console
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses mailbox filters, marking a message as spam, and saving the setting in the admin console
+
 ### comunicar-novidade-do-produto
 - **Stability**: experimental
 - **Description**: Decide whether merged work brings anything new for the people who use the product and, when it does, write the announcement without technical terms
