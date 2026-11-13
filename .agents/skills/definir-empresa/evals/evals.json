@@ -1,4 +1,11 @@
 {
   "skill_name": "definir-empresa",
-  "evals": []
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Cadastre a empresa do atendente, mas a cidade não foi informada e a lista exige a cidade.",
+      "expected_output": "Pesquisar a cidade na internet, no site oficial e em fontes confiáveis, antes de usar uma localidade mais ampla. Uma só sede: relacionar a cidade. Várias cidades: relacionar a localidade mais ampla e dizer nas notas o motivo e as fontes. Não usar empresa de nome parecido como fonte.",
+      "files": []
+    }
+  ]
 }
