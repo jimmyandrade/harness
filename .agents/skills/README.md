@@ -14,10 +14,12 @@ flowchart LR
     abrir_vendas_na_tiqueteira["abrir-vendas-na-tiqueteira"]
     acompanhar_edital["acompanhar-edital"]
     acompanhar_fila_de_revisao["acompanhar-fila-de-revisao"]
+    acompanhar_itens_do_ponto_de_contato["acompanhar-itens-do-ponto-de-contato"]
     acompanhar_producao_de_produto["acompanhar-producao-de-produto"]
     acompanhar_resposta_no_whatsapp["acompanhar-resposta-no-whatsapp"]
     acompanhar_retornos_pendentes["acompanhar-retornos-pendentes"]
     acompanhar_veiculo["acompanhar-veiculo"]
+    analisar_regulamento_da_oportunidade["analisar-regulamento-da-oportunidade"]
     atender_revisao_de_pull_request["atender-revisao-de-pull-request"]
     atualizar_branch_do_pull_request["atualizar-branch-do-pull-request"]
     atualizar_cadastro_fiscal["atualizar-cadastro-fiscal"]
@@ -28,6 +30,7 @@ flowchart LR
     classificar_melhoria_tecnica["classificar-melhoria-tecnica"]
     comunicar_novidade_do_produto["comunicar-novidade-do-produto"]
     configurar_harness_de_negocio["configurar-harness-de-negocio"]
+    consultar_responsavel_pela_oportunidade["consultar-responsavel-pela-oportunidade"]
     conversar_no_whatsapp["conversar-no-whatsapp"]
     convidar_para_evento["convidar-para-evento"]
     criar_carrossel_do_instagram["criar-carrossel-do-instagram"]
@@ -110,6 +113,7 @@ flowchart LR
     gerenciar_estoque["gerenciar-estoque"]
     gravar_termos_no_vocabulario["gravar-termos-no-vocabulario"]
     identificar_duplicata["identificar-duplicata"]
+    inscrever_na_oportunidade["inscrever-na-oportunidade"]
     investigar_problema["investigar-problema"]
     lancar_despesa_da_empresa["lancar-despesa-da-empresa"]
     lancar_despesa_pessoal["lancar-despesa-pessoal"]
@@ -178,6 +182,14 @@ flowchart LR
   acompanhar_fila_de_revisao --> procurar_pedido_de_revisao
   acompanhar_fila_de_revisao --> publicar_revisao_de_codigo
   acompanhar_fila_de_revisao --> redigir_com_tom_de_voz
+  acompanhar_itens_do_ponto_de_contato --> analisar_regulamento_da_oportunidade
+  acompanhar_itens_do_ponto_de_contato --> definir_ativo_imobilizado
+  acompanhar_itens_do_ponto_de_contato --> definir_tarefa
+  acompanhar_itens_do_ponto_de_contato --> definir_viagem
+  acompanhar_itens_do_ponto_de_contato --> inscrever_na_oportunidade
+  acompanhar_itens_do_ponto_de_contato --> organizar_ponto_de_contato
+  acompanhar_itens_do_ponto_de_contato --> procurar_tarefa
+  acompanhar_itens_do_ponto_de_contato --> registrar_ciclo_do_ativo
   acompanhar_producao_de_produto --> definir_tarefa
   acompanhar_producao_de_produto --> gerenciar_estoque
   acompanhar_producao_de_produto --> identificar_duplicata
@@ -200,6 +212,15 @@ flowchart LR
   acompanhar_veiculo --> lancar_despesa_pessoal
   acompanhar_veiculo --> organizar_emails
   acompanhar_veiculo --> sincronizar_cronograma
+  analisar_regulamento_da_oportunidade --> acompanhar_edital
+  analisar_regulamento_da_oportunidade --> acompanhar_itens_do_ponto_de_contato
+  analisar_regulamento_da_oportunidade --> consultar_responsavel_pela_oportunidade
+  analisar_regulamento_da_oportunidade --> definir_grupo_de_oportunidades
+  analisar_regulamento_da_oportunidade --> definir_tarefa
+  analisar_regulamento_da_oportunidade --> definir_viagem
+  analisar_regulamento_da_oportunidade --> inscrever_na_oportunidade
+  analisar_regulamento_da_oportunidade --> organizar_ponto_de_contato
+  analisar_regulamento_da_oportunidade --> procurar_tarefa
   atender_revisao_de_pull_request --> atualizar_branch_do_pull_request
   atender_revisao_de_pull_request --> criar_commit
   atender_revisao_de_pull_request --> criar_pull_request
@@ -235,6 +256,18 @@ flowchart LR
   configurar_harness_de_negocio --> criar_pull_request
   configurar_harness_de_negocio --> definir_issue_do_github
   configurar_harness_de_negocio --> levantar_ambiente_do_repositorio
+  consultar_responsavel_pela_oportunidade --> acompanhar_retornos_pendentes
+  consultar_responsavel_pela_oportunidade --> analisar_regulamento_da_oportunidade
+  consultar_responsavel_pela_oportunidade --> conversar_no_whatsapp
+  consultar_responsavel_pela_oportunidade --> definir_agenda
+  consultar_responsavel_pela_oportunidade --> definir_empresa
+  consultar_responsavel_pela_oportunidade --> definir_grupo_de_oportunidades
+  consultar_responsavel_pela_oportunidade --> definir_negociacao
+  consultar_responsavel_pela_oportunidade --> definir_pessoa
+  consultar_responsavel_pela_oportunidade --> definir_viagem
+  consultar_responsavel_pela_oportunidade --> enviar_email
+  consultar_responsavel_pela_oportunidade --> redigir_com_tom_de_voz
+  consultar_responsavel_pela_oportunidade --> sincronizar_cronograma
   conversar_no_whatsapp --> acompanhar_resposta_no_whatsapp
   conversar_no_whatsapp --> comunicar_novidade_do_produto
   conversar_no_whatsapp --> convidar_para_evento
@@ -394,6 +427,7 @@ flowchart LR
   definir_inscricao --> definir_negociacao
   definir_inscricao --> definir_tarefa
   definir_inscricao --> garantir_ingresso
+  definir_inscricao --> inscrever_na_oportunidade
   definir_inscricao --> lancar_despesa_da_empresa
   definir_inscricao --> procurar_email
   definir_inscricao --> procurar_inscricao
@@ -600,6 +634,15 @@ flowchart LR
   identificar_duplicata --> definir_grafia
   identificar_duplicata --> definir_perfil_social
   identificar_duplicata --> mesclar_registro
+  inscrever_na_oportunidade --> acompanhar_itens_do_ponto_de_contato
+  inscrever_na_oportunidade --> acompanhar_retornos_pendentes
+  inscrever_na_oportunidade --> analisar_regulamento_da_oportunidade
+  inscrever_na_oportunidade --> definir_empresa
+  inscrever_na_oportunidade --> definir_inscricao
+  inscrever_na_oportunidade --> definir_pessoa
+  inscrever_na_oportunidade --> definir_tarefa
+  inscrever_na_oportunidade --> procurar_inscricao
+  inscrever_na_oportunidade --> redigir_com_tom_de_voz
   investigar_problema --> definir_artigo_da_base_de_conhecimento
   investigar_problema --> definir_post_mortem
   investigar_problema --> definir_tarefa
@@ -662,6 +705,9 @@ flowchart LR
   organizar_emails --> procurar_inscricao
   organizar_emails --> procurar_oportunidade
   organizar_emails --> rotular_item
+  organizar_ponto_de_contato --> acompanhar_itens_do_ponto_de_contato
+  organizar_ponto_de_contato --> analisar_regulamento_da_oportunidade
+  organizar_ponto_de_contato --> consultar_responsavel_pela_oportunidade
   organizar_ponto_de_contato --> criar_oportunidade
   organizar_ponto_de_contato --> criar_ponto_de_contato
   organizar_ponto_de_contato --> definir_agenda
