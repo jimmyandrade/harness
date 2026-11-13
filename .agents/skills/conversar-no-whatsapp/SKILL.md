@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.38.0"
+  version: "0.38.1"
   aliases:
     - redigir-mensagem-de-whatsapp
   related:
@@ -109,6 +109,10 @@ Para registrar a demanda, leve a data e o horário da primeira mensagem do pedid
 
 Antes de rascunhar, leia a conversa de destino desde a última mensagem lida, pelo Passo 2, e confira cada pergunta do rascunho contra ela inteira, inclusive a mensagem citada. A pergunta já respondida sai, mesmo quando outra fonte mais antiga diverge: mostre a divergência à pessoa, não ao contato. Tire também o que já foi dito e diga antes o que o texto acrescenta. Se tudo já foi dito, diga isso e não rascunhe.
 
+Leia cada resposta como resposta à pergunta como foi escrita. Uma pergunta sem dia, sem janela e sem condição, respondida com "pode" ou "sim", vale para tudo o que ela cobria. Não estreite a resposta com uma condição que a pergunta não tinha, e não repita a pergunta para pedir mais detalhe.
+
+Antes de qualquer rascunho, diga à pessoa o que o contato respondeu, com as palavras dele e o horário. A pessoa não precisa abrir a conversa para saber.
+
 Confira no manual da oportunidade cada exigência do organizador, como a janela de montagem, e use a que ele dá.
 
 Antes de rascunhar uma mensagem que propõe, aceita ou combina data, hora, lugar, retirada, coleta, entrega, encontro ou prazo, confira a agenda, seguindo `procurar-agenda`, e a viagem ativa ou a próxima, seguindo `definir-viagem`: saída, chegada, a cidade de cada dia e os compromissos que batem.
@@ -127,20 +131,8 @@ O texto vai na mensagem de fechamento do turno, a última que a pessoa lê, junt
 Uma mensagem que diz que um trabalho está em andamento, foi registrado ou foi feito leva o link da tarefa, da página ou do pull request que mostra esse registro. Sem esse registro, crie-o antes, como `definir-tarefa` manda, ou pergunte onde ele está.
 Com a ferramenta de widget na sessão, o widget vem sempre, além dos blocos, como o modelo de saída diz.
 
-Com `Dividir em mensagens curtas` em `sim`, como as pessoas costumam escrever no WhatsApp, divida o rascunho em mensagens, uma por ideia.
-Dois assuntos que pedem resposta, como uma análise que se espera e uma extensão que se pede, nunca dividem o mesmo parágrafo. Eles seguem `Vários assuntos no rascunho`, e não a divisão por ideia.
-Cada mensagem que responde a algo cita a mensagem da outra pessoa que ela responde, mesmo de semanas atrás: ache-a lendo a conversa inteira.
-Com `Fechamento em mensagem separada` em `sim`, a despedida vai numa mensagem própria, a última.
-Envie na mesma ordem, uma de cada vez.
-Um rascunho de um tipo listado em `Mensagem única para` não se divide por ideia: vai numa mensagem, com uma linha em branco entre as ideias, até o limite.
-Com `Comunicado numa mensagem só` em `sim`, o comunicado de produto também não se divide por ideia, como `comunicar-novidade-do-produto` manda.
-Conte os caracteres de cada mensagem do texto aprovado. Acima de `Limite de caracteres por mensagem`, divida em partes que cabem no limite, na mesma ordem, cortando só entre parágrafos ou entre itens de lista, nunca no meio de uma frase nem de um item numerado. Numa lista numerada, cada parte mantém o número do item.
-A saudação fica na primeira parte, e o fechamento pode ser uma parte à parte.
-Mostre as partes numeradas (Mensagem 1, Mensagem 2) com a contagem de cada uma, para o sim valer para elas. Cada parte sai inteira, depois da anterior.
-O limite vale para todo rascunho, inclusive os de `Mensagem única para`, o comunicado e a lista numerada, e mesmo quando o pedido diz "uma mensagem só" ou "sem dividir". Nesse caso avise uma vez, antes do sim, que o texto passa do limite e vai em partes. Envie como mensagem única só se a pessoa insistir por escrito depois do aviso.
-Um pedido que acompanha o anúncio vai em outra mensagem, depois do comunicado, e o comunicado se escreve em `comunicar-novidade-do-produto`.
+A forma do rascunho, como dividir em mensagens, juntar vários assuntos, mandar a despedida à parte, o comunicado e o limite de tamanho, e a apresentação numa conversa já aberta, está no modelo de saída `mensagens-do-whatsapp`. Ele lê `Dividir em mensagens curtas`, `Vários assuntos no rascunho`, `Fechamento em mensagem separada`, `Mensagem única para`, `Comunicado numa mensagem só` e `Limite de caracteres por mensagem`. Envie na mesma ordem, uma de cada vez.
 A saudação e o texto se dirigem só a quem está na conversa aberta: quem ela não alcança, como a outra pessoa que assina a organização, entra na terceira pessoa. Quem só fica a par recebe, na conversa dele, um aviso curto, sem as perguntas de quem decide.
-Numa conversa já aberta com a pessoa, a mensagem não diz quem escreve nem de qual empresa: o nome da conversa já diz. Quem ainda não conhece quem escreve é apresentado uma vez, na primeira mensagem, com o nome e a empresa. Depois, nem a abertura repete a apresentação nem o fim leva assinatura.
 O comprovante de pagamento segue `Canal do comprovante`. O e-mail sai por `enviar-email`, com o arquivo anexado e o sim da pessoa, e o WhatsApp só avisa que foi por e-mail e pede a confirmação. Com `e-mail e WhatsApp`, o arquivo vai também na conversa, antes do aviso. Sem conversa de e-mail com a organização, mande o arquivo no WhatsApp e diga isso.
 
 Para responder ou enviar, mostre a conversa de destino, o texto exato e, se for resposta, a mensagem citada. Envie só depois do sim da pessoa a esse texto e a essa conversa. O sim vale para o texto mostrado, com todas as partes numeradas. Uma parte nova ou alterada pede outro sim.
@@ -195,6 +187,14 @@ Se você enviar com mensagens não lidas sem mostrar o que pedem, ou abrir sem a
 
 1. Siga `Não lidas antes de enviar`.
 2. Depois de abrir, não diga que nada foi marcado como lido.
+
+### Resposta lida como incompleta
+
+Se você disser que a resposta não cobre o dia ou a janela, e a pergunta não os citava, o rascunho repete a pergunta e a pessoa vai ler a conversa à mão.
+
+1. Compare a resposta com a pergunta como foi escrita, e não com o que você gostaria de saber.
+2. Diga à pessoa a resposta do contato, com as palavras dele e o horário.
+3. Pergunte de novo só o que a pergunta anterior não cobria.
 
 ### Rascunho fora da vista
 
@@ -273,8 +273,13 @@ Contei 800 caracteres, acima do limite de 600. Avisei antes do sim que vai em du
 
 Mostrei a edição "Chegaremos*" e editei depois do sim, sem outra mensagem.
 
+### o Pedro respondeu "Pode sim, já adicionamos aqui" à pergunta sobre o carro entrar na montagem, sem citar o dia
+
+Li a resposta como a da pergunta: o carro pode entrar na montagem, em qualquer janela. Disse à pessoa as palavras dele e o horário, e tirei a pergunta do carro do rascunho. Perguntei só o que a conversa ainda não respondia.
+
 ## Casos-limite
 
+- A resposta é "pode" ou "sim" a uma pergunta sem dia nem condição: vale para tudo o que a pergunta cobria. Não rascunhe a pergunta de novo.
 - Nenhuma aba do WhatsApp Web e o QR code na tela, ou a extensão sem resposta: pare, peça a conexão e crie a rotina de lembrete, como `usar-whatsapp-web` manda.
 - Duas conversas com o mesmo nome: mostre as duas e pergunte qual é.
 - O pedido está num grupo: leia só as mensagens do assunto, com quem escreveu cada uma.
@@ -282,6 +287,7 @@ Mostrei a edição "Chegaremos*" e editei depois do sim, sem outra mensagem.
 
 ## Pegadinhas
 
+- Uma resposta curta parece incompleta quando não repete o detalhe que a conversa já traz. Ela responde a pergunta como foi escrita: confira o texto da pergunta antes de achar que falta algo.
 - O rascunho de ontem parece valer. A conversa pode ter mudado: leia antes e rascunhe só o que falta.
 - Ao dividir uma lista numerada, o campo pode renumerar o item solto e a parte que continua a lista voltar para "1.". Confira no print e, no WhatsApp Web, siga `usar-whatsapp-web`.
 - A mensagem parece pedir assinatura como um e-mail. A conversa já mostra quem escreve.
