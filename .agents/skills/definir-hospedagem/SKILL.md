@@ -3,7 +3,7 @@ name: definir-hospedagem
 description: Define a hospedagem de uma viagem depois da reserva, o que ela pede, como nome e documento dos hóspedes, veículo e chegada, e a resposta a quem hospeda, enviada só com a confirmação. Usada quando o anfitrião ou o hotel escreve. Não serve para ler a reserva, registrar a viagem nem redigir no tom da marca.
 metadata:
   author: jimmyandrade
-  version: "0.4.2"
+  version: "0.7.1"
   aliases:
     - responder-pedido-da-hospedagem
   related:
@@ -112,6 +112,10 @@ Não crie uma rotina para a reserva: etiquete a conversa do e-mail como aguardan
 A hospedagem costuma mandar o que falta, como a senha de acesso, perto do check-in.
 Não espere ela escrever primeiro.
 
+Hospedagem com vaga ou garagem de parceiro: pergunte ao anfitrião, pelo canal da reserva, os dias e os horários em que a garagem funciona em toda a estadia, do check-in ao check-out, se é preciso interfonar ou avisar antes de entrar e se há outra opção quando ela fecha cedo.
+A pergunta não cita só o dia do problema: o anfitrião entenderia que a pessoa só chega nesse dia. Também não conta o motivo da volta tarde, como o evento.
+Compare a resposta com a hora mais tarde em que a pessoa volta, como o fim de uma desmontagem, e registre-a na hospedagem.
+
 A rotina do canal avisa a pessoa a cada mensagem nova e entrega o resumo à sessão que espera.
 A senha de acesso nunca vai no aviso, no Notion nem em outro lugar: o aviso só diz que ela chegou e onde ver.
 
@@ -122,6 +126,28 @@ A cada resposta, registre na hospedagem em quantos minutos ela veio.
 Esse tempo ensina quando conferir.
 
 ### Passo 6
+
+O dado da hospedagem vai nas propriedades da página, nunca no corpo dela.
+Uma hospedagem nova nasce do modelo de hospedagem do banco, cujo aviso no topo repete essa regra.
+Registre o check-in e o check-out com data e hora, os hóspedes, o anfitrião quando se sabe quem é, e o endereço.
+Uma viagem pode ter várias hospedagens, cada uma com o seu registro. Viagem longa com poucas noites cadastradas é lacuna: pergunte onde a pessoa ficou nas outras.
+
+Antes de sugerir onde ficar, leia a avaliação das hospedagens anteriores no mesmo lugar e com o mesmo anfitrião. A avaliada como evitar não é sugerida, e a avaliada como talvez vem com o motivo.
+A avaliação tem o motivo, o dia e quem avaliou, cada um na sua propriedade. Grave quando a pessoa a disser, com o nome de quem decidiu. A casa de um parente segue a mesma regra.
+Avaliação que a pessoa ainda não fez fica como pendência: não a preencha por ela.
+Estadia deixada antes do fim ou trocada por outra registra o check-out do dia em que a pessoa saiu, não o da reserva, e o motivo da troca vai no motivo da avaliação, com o que deu errado e o que foi resolvido.
+
+### Passo 7
+
+Para completar viagens passadas, leia o histórico de reservas na conta da plataforma de quem reservou, numa aba em que a pessoa já esteja logada. A conta pode não ser a da sessão: peça à pessoa que entre na conta certa e não troque de usuário por ela.
+Leia só datas, horários e o primeiro nome do anfitrião, nunca valor, documento nem endereço, e compare com o Notion antes de gravar.
+A reserva vale mais que a cotação: a data e o status vêm dela, e a cotação fica como histórico.
+Hospedagem paga por terceiro, como a de uma missão ou de um evento, não aparece na plataforma: pergunte quem foi e quem pagou, em vez de concluir que falta.
+A tabela do que achou cita, em cada linha, a viagem e o ponto de contato, ou diz que não há. Viagem sem ponto de contato, como uma formatura, também é viagem, e se cadastra por `definir-viagem`.
+Com só o primeiro nome do anfitrião, não cadastre a pessoa: o nome vai no título da hospedagem e a relação fica vazia.
+Grave só depois que a pessoa aprovar a tabela.
+
+### Passo 8
 
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
@@ -193,7 +219,11 @@ Respondi pelo e-mail em que o pedido chegou. Mandei nomes e horário. Não mande
 
 ## Pegadinhas
 
+- A reserva da plataforma parece mostrar a estadia vivida. Quem trocou de lugar no meio mostra o período reservado, e o vivido é o que a pessoa conta.
+- A conta da plataforma que está logada parece ter todas as reservas. Cada pessoa tem a sua, e as viagens de outra só aparecem na conta dela.
+- A hospedagem de um parente parece não precisar de avaliação. A decisão de não voltar vale também para ela, e o motivo é o que a pessoa disse.
 - A reserva feita à mão não cria página no Notion, e o banco de viagens e o de hospedagens podem nem ter onde registrar quem viaja e o veículo. Quem viaja e o transporte podem não estar em lugar nenhum.
+- A vaga que a hospedagem oferece parece valer a qualquer hora. A garagem de um parceiro tem horário, e quem volta à noite precisa saber até quando ela abre e se deve interfonar.
 - O pedido de documento costuma vir antes do check-in e some da lista de mensagens com a tradução automática. Leia a mensagem original, não a prévia da lista.
 - O cadastro tem o nome completo e o nome civil de registro, e quem tem nome social usa o nome completo no documento oficial. O nome civil só sai com `Nome civil na resposta` em `sim`, ou se a pessoa pedir.
 - Dado sensível não vira texto de memória, de nota nem de comentário na negociação. Ele fica no cadastro e na resposta enviada.
