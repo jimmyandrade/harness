@@ -1,7 +1,7 @@
 ---
 description: Traz as instruções gerais e os parâmetros das habilidades deste espaço de trabalho. Usada em qualquer tarefa, inclusive outra habilidade. Não serve para criar nem alterar estas instruções; a mudança vai no repositório.
 metadata:
-  version: "0.5.0"
+  version: "0.6.0"
   parameters:
     "Global":
       "Banco de modelos no Notion": "<link do banco de modelos de saída no Notion>"
@@ -26,6 +26,7 @@ Este documento contém instruções que, dependendo da ferramenta utilizada, pod
 - Resolva a referência da habilidade seguinte no catálogo conectado quando as regras do ambiente permitirem. A ausência na lista inicial não prova que ela não existe. Não peça à pessoa uma referência que já está na conversa.
 - Distinga a restrição explícita de descoberta, a busca sem resultado e o erro de permissão que a ferramenta devolveu. Não chame uma restrição das instruções de falta de acesso nem prometa que um pull request remove uma restrição do ambiente.
 - Ao receber uma correção sobre o seu comportamento, siga `evoluir-habilidade` na mesma conversa e transforme o feedback em correção no repositório, em vez de só explicar o erro. Com pedido de pull request, abra-o e diga o que mudou e o que ainda não foi validado.
+- Toda data escrita com dia da semana, em qualquer resposta, lista ou resumo, tem o dia calculado antes de escrever: pelo script `weekday.py` do core harness, ou, sem acesso a comando, contando os dias a partir de uma data de dia conhecido num calendário e avançando o dia pelo resto da divisão por 7. Nunca deduza o dia de cabeça nem o copie de uma mensagem anterior sem recalcular. Ao achar um dia errado, corrija na hora e diga qual era o certo.
 - <Regra que vale no Notion e nas ferramentas de código, em toda sessão.>
 
 ## No Notion

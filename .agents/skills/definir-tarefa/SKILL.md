@@ -3,7 +3,7 @@ name: definir-tarefa
 description: Use essa habilidade sempre que for cadastrar, revisar, validar, editar ou mesclar tarefas a pedido, mesmo sem dizer definir. NÃO use para só saber se ela já existe, revisar tarefas por gatilho em um cronograma ou na base de dados, varrer a lista, marcar tarefa como concluída, nem transformar uma regra sem entrega em tarefa.
 metadata:
   author: jimmyandrade
-  version: "0.17.0"
+  version: "0.18.0"
   aliases:
     - criar-tarefa
     - revisar-tarefa
@@ -77,7 +77,7 @@ Gatilho em um cronograma, de página adicionada à base de dados ou de proprieda
 
 ### Passo 7
 
-Na resposta, no resumo e na tabela, a data sai no formato da data com dia da semana, calculada com a data, o horário e o fuso. Sem um deles, e se o dia puder mudar, peça. Cada data de um intervalo leva o próprio dia. Dia incompatível: sinalize e confirme antes de gravar o prazo. O prazo continua data válida. O título continua sem palavra de tempo.
+Na resposta, no resumo e na tabela, a data sai no formato da data com dia da semana, calculada com a data, o horário e o fuso, como a regra do dia da semana manda. Sem um deles, e se o dia puder mudar, peça. Cada data de um intervalo leva o próprio dia. Dia incompatível: sinalize e confirme antes de gravar o prazo. O prazo continua data válida. O título continua sem palavra de tempo.
 
 ## Problemas comuns
 

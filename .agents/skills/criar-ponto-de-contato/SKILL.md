@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   related:
     - criar-oportunidade
     - definir-agenda
@@ -89,7 +89,7 @@ Vale ao criar e ao achar um ponto que já existe.
 
 Mostre o nome, o status e o link do que criou ou corrigiu, com o que preencheu sem perguntar.
 Diga o que ficou vazio e o que depende de uma resposta.
-A data do evento na resposta sai no formato da data com dia da semana. Calcule e confira o dia com a data, o horário e o fuso antes de responder. Não copie esse dia para o início da execução.
+A data do evento na resposta sai no formato da data com dia da semana. Calcule o dia da semana com a data, o horário e o fuso, como a regra do dia da semana manda, antes de responder. Não copie esse dia para o início da execução.
 Não marque a tarefa como concluída.
 Os itens do cronograma de horários, como montagem, início, fim, desmontagem e blocos, ligam sempre à oportunidade e, havendo ponto de contato correspondente, também a ele. A atividade formativa sem ponto de venda liga só à oportunidade.
 Gravar o evento na agenda fica com `organizar-ponto-de-contato`, que segue `definir-agenda`.

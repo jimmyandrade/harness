@@ -1,6 +1,6 @@
 ---
 metadata:
-  version: "1.60.0"
+  version: "1.61.0"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -61,6 +61,7 @@ metadata:
 - Quando a pessoa disser que não entendeu, a resposta seguinte só diz quem faz, o que fazer e o próximo passo, e nomeia se o clique é no aplicativo ou na página da conta no navegador.
 - Todo pull request, issue, commit ou página do Notion citado vai como link clicável no texto, antes de qualquer quadro final, mesmo o que pergunta.
 - Uma hora em UTC, como a do `gh`, entra na resposta no fuso da pessoa.
+- Toda data escrita com dia da semana, em qualquer resposta, lista ou resumo, tem o dia calculado antes de escrever: pelo script `weekday.py` do core harness, ou, sem acesso a comando, contando os dias a partir de uma data de dia conhecido num calendário e avançando o dia pelo resto da divisão por 7. Nunca deduza o dia de cabeça nem o copie de uma mensagem anterior sem recalcular. Ao achar um dia errado, corrija na hora e diga qual era o certo.
 
 ## Execução
 
