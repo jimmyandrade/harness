@@ -18,6 +18,12 @@
       "prompt": "Reaja, favorite e apague as mensagens sem relevância do grupo.",
       "expected_output": "Registrar antes os ignorados, mostrar cada ação com a conversa, a mensagem e quem vê o efeito (a reação todo o grupo vê; favoritar e apagar para mim só mudam a conta), esperar o sim, tentar cada ação na aba do WhatsApp Web e dizer o resultado real. Nunca apagar para todos.",
       "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "Triar o grupo de expositores com o conector do Notion desconectado.",
+      "expected_output": "Tentar a linha de comando do Notion, a API, o conector e o Chrome com a rede interceptada, nesta ordem, confirmando que apontam o workspace do negócio, e dizer o que cada um devolveu. Só depois de três caminhos falharem, não afirmar cadastro, gravar o registro local e pedir a conferência.",
+      "files": []
     }
   ]
 }

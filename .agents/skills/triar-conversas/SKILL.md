@@ -4,7 +4,7 @@ description: Varre as conversas com mensagem nova nos canais configurados, como 
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.8.0"
+  version: "0.8.1"
   models:
     - arvore-de-decisao-da-triagem
     - relatorio-de-conversas
@@ -58,7 +58,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Reação ao áudio transcrito": ""
 # `Apagar áudio transcrito` é `sim`, `perguntar` ou `não`. Apaga para você o áudio só depois de o texto estar salvo e conferido.
 "Apagar áudio transcrito": "perguntar"
-# `Registro sem o Notion` é `local` ou `Notion pelo Chrome`, para quando o conector do Notion não responde. `Notion pelo Chrome` grava pela extensão Claude in Chrome e cai em `local` se ela também falha. `local` grava o que iria ao Notion em `Pasta do registro local`.
+# `Registro sem o Notion` é `local`, para quando a linha de comando, a API, o conector e o Chrome falharam. `local` grava o que iria ao Notion em `Pasta do registro local`. O valor `Notion pelo Chrome`, de versões anteriores, vale como `local`, porque o Chrome já é um dos caminhos do Passo 3.
 "Registro sem o Notion": "local"
 "Pasta do registro local": ""
 ```
@@ -90,7 +90,9 @@ Ignorar é não criar tarefa nem ação, e mesmo assim deixar um registro curto:
 
 Ignorado é agradecimento, bom dia, figurinha, divulgação de outra marca sem evento com nome e data e pergunta já respondida na conversa. Na dúvida, a mensagem é ponto de atenção. Todo ponto de atenção diz por que importa e o que a pessoa faz, ou que é só informativo.
 
-Antes de gravar no Notion, confira o conector. Sem resposta, siga `Registro sem o Notion`. Sem o Notion, `procurar-oportunidade`, `procurar-tarefa` e `identificar-duplicata` não rodam: não diga que algo não está cadastrado nem o cadastre, diga que não conferiu. O que iria ao Notion fica em `Pasta do registro local`, um arquivo por varredura, e o arquivo conta como o registro do Passo 6.
+Conector do Notion que falta ou falha não encerra a triagem. Tente, nesta ordem, a linha de comando do Notion, a API, o conector (MCP) e, por último, o Claude in Chrome, procurando nas requisições de rede a API que a página chama, como o `AGENTS.md` do core manda. Cada caminho tem de apontar o workspace do negócio: outro workspace não vale. Diga o que cada caminho devolveu e qual funcionou.
+
+Só depois de três caminhos diferentes falharem, siga `Registro sem o Notion`. Sem o Notion, `procurar-oportunidade`, `procurar-tarefa` e `identificar-duplicata` não rodam: não diga que algo não está cadastrado nem o cadastre, diga que não conferiu. O que iria ao Notion fica em `Pasta do registro local`, um arquivo por varredura, e o arquivo conta como o registro do Passo 6.
 
 ### Passo 4
 
@@ -164,11 +166,11 @@ Se você classificar um áudio pela prévia ou pela duração, uma reclamação 
 
 ### Cadastro afirmado sem o Notion
 
-Se você disser que a oportunidade não está cadastrada quando o Notion não respondeu, a pessoa descobre que uma feira em que já participa estava lá.
+Se você disser que a oportunidade não está cadastrada, ou entregar só uma proposta, quando o conector do Notion não respondeu, a pessoa descobre que uma feira em que já participa estava lá, ou que o registro podia ter sido feito por outro caminho.
 
-1. Diga que não conferiu, e por quê.
-2. Grave o que iria ao Notion em `Pasta do registro local`.
-3. Peça a conferência quando o Notion voltar.
+1. Tente a linha de comando, a API, o conector e o Chrome com a rede interceptada, nesta ordem, no workspace do negócio.
+2. Só depois de três caminhos falharem, diga que não conferiu, e o que cada um devolveu.
+3. Grave o que iria ao Notion em `Pasta do registro local` e peça a conferência quando o Notion voltar.
 
 ### Comunicado de evento perguntado
 
@@ -242,6 +244,7 @@ Mostrei as duas ações, dizendo que a reação todo o grupo vê e que o favorit
 - Apagar para mim tira a mensagem só da conta da pessoa. Os outros membros continuam vendo.
 - Abrir a conversa marca as mensagens como lidas, também para quem enviou. Não é motivo para avisar a pessoa a cada varredura.
 - O áudio no WhatsApp Web não tem transcrição. A prévia mostra só a duração, e o arquivo só se baixa pela aba.
+- Um conector do Notion que não responde parece o Notion fora. Há a linha de comando, a API e o Chrome, e um deles pode estar no workspace de outro negócio: confira antes de usar.
 - Ignorar parece não deixar rastro. O registro curto é o que permite dizer depois que o negócio sempre recusou aquela feira.
 - A divulgação de outra feira parece sem relevância. Com nome e data de evento, é uma oportunidade a cadastrar, e quem a encaminha não é a organização.
 
