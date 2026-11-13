@@ -3,7 +3,7 @@ name: pedir-revisao-de-pr-no-slack
 description: Redige o pedido de revisão de um pull request para o canal do time no Slack e entrega o rascunho com o link da thread, usando enviar-mensagem-no-slack. Usada quando o PR está pronto e a organização pede revisão pelo Slack, ou quando a pessoa pede apoio para revisar. Não serve para revisar o PR nem para outra mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.9.1"
+  version: "0.9.2"
   related:
     - criar-pull-request
     - enviar-mensagem-no-slack
@@ -74,7 +74,12 @@ Redija o pedido com `enviar-mensagem-no-slack`, em um dos três formatos:
 - Nova rodada, depois de ajustar os comentários, em resposta na thread, sem título e sem PS, nesta ordem: o link do PR, o que ele corrige, o contexto e o alcance, a menção de quem tinha comentado dizendo que já ajustou, e o pedido ao grupo.
 
 O título carrega o contexto, o link do PR, o link do card e, ao fim, a menção de quem acompanha, e o corpo não repete o que o título e o PR já dizem. As frases do pedido vêm do vocabulário. Cada link vai no identificador, e o PR e o card seguem `Linha do PR` e `Linha do card`.
-O pedido leva o endereço do preview do PR, que o projeto publica enquanto o PR está aberto, numa linha própria.
+O pedido leva o preview do PR, que o projeto publica enquanto o PR está aberto, numa linha própria.
+O link nunca aponta para a raiz do Storybook publicado, porque a raiz não mostra o que o PR muda.
+Ele aponta para as stories que o PR acrescenta ou muda, um link curto por story com o nome dela, e, sem story específica, para a página de docs do componente alterado.
+As stories que o PR muda saem do diff dos arquivos de stories.
+O índice do Storybook publicado, `index.json`, lista o id de cada story e de cada página de docs, e cada id citado existe nele.
+O link de uma story é `<preview>/?path=/story/<id>`, e o da página de docs é `<preview>/?path=/docs/<id>`.
 Sem preview publicado, o pedido diz isso.
 Num PR já mesclado, ele leva o endereço do ambiente onde o trabalho está, como `registrar-resultados-da-validacao-na-tarefa` manda.
 
@@ -121,8 +126,16 @@ Se você redigir o pedido de um PR validado fora dos checks, como num teste loca
 Se você redigir o pedido sem o endereço do preview do PR, quem revisa tem de montar o ambiente para ver o resultado, e a revisão atrasa.
 
 1. Ache o endereço do preview no PR, no comentário de um bot ou no check de deploy.
-2. Ponha o endereço numa linha própria do pedido.
+2. Ponha o preview numa linha própria do pedido, com o link das stories como o Passo 4 manda.
 3. Sem preview publicado, diga isso no pedido.
+
+### Preview que aponta para a raiz
+
+Se você pôr no pedido só o endereço da raiz do Storybook publicado, quem revisa cai numa página que não mostra o que o PR muda e tem de achar sozinha a story certa.
+
+1. Leia no diff do PR os arquivos de stories e ache as stories acrescentadas ou mudadas.
+2. Confira no índice do Storybook publicado que cada id existe.
+3. Ponha um link curto por story, com o nome dela. Sem story específica, aponte para a página de docs do componente.
 
 ### Post novo onde já existia thread
 
@@ -144,7 +157,7 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### peça revisão do PR 120 no Slack
 
-O PR 120 está aberto, fora do rascunho, com o card PAY-45. O canal não tem thread sobre ele. Redigi um pedido curto num post novo, com o link do PR e do card, e o contexto numa resposta na própria thread. O rascunho está no chat, com o link do canal. Não enviei: espero o seu sim.
+O PR 120 está aberto, fora do rascunho, com o card PAY-45. O canal não tem thread sobre ele. Redigi um pedido curto num post novo, com o link do PR e do card, a linha do preview com um link por story que o PR acrescentou, e o contexto numa resposta na própria thread. O rascunho está no chat, com o link do canal. Não enviei: espero o seu sim.
 
 ### peça revisão do PR 121, que ajustei depois dos comentários da Ana
 
@@ -155,6 +168,7 @@ O PR 121 já tem uma thread no canal. Redigi uma nova rodada em resposta nela, c
 - O PR está em rascunho: não redija o pedido. Diga o que falta.
 - O card não existe e `Exigir card` é `sim`: siga `preparar-tarefa-do-pull-request` antes.
 - Dois PRs do mesmo problema: duas mensagens, cada uma com o link da outra, e a segunda como resposta na thread da primeira, se a primeira já foi postada. Fora do `Horário de trabalho`, as duas ficam agendadas, cada uma como post novo.
+- O PR muda um componente sem acrescentar nem mudar story: o preview aponta para a página de docs dele.
 - O canal não está configurado: pergunte uma vez em qual canal pedir e pare.
 - O canal é compartilhado com outra organização e o Slack recusa o rascunho: entregue o texto pronto, como diz `enviar-mensagem-no-slack`.
 
@@ -165,6 +179,7 @@ O PR 121 já tem uma thread no canal. Redigi uma nova rodada em resposta nela, c
 - Um PR sem o rótulo de pronto parece pronto pelo estado. Confira o rótulo quando o projeto o usa.
 - A thread de um PR já revisado parece pedir um post novo. É uma nova rodada na thread.
 - Um follow-up parece só um lembrete do prazo. Ele continua dizendo o que o PR faz.
+- O endereço do preview parece o link certo. A raiz do Storybook publicado não mostra o que o PR muda: aponte para a story ou para a docs.
 - Citar um PR só pelo número é erro. Escreva o link como manda `escrever-link`.
 
 ## Scripts disponíveis
