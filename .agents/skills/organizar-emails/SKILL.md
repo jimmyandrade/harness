@@ -3,7 +3,7 @@ name: organizar-emails
 description: Organiza e-mails por BASB e separa pessoal, trabalho e misto. Usada quando a pessoa quer triar a caixa, etiquetar ou configurar filtros. Não serve para responder mensagens, lançar despesas nem acompanhar veículos.
 metadata:
   author: jimmyandrade
-  version: "0.22.0"
+  version: "0.24.0"
   related:
     - procurar-email
     - evoluir-habilidade
@@ -14,6 +14,7 @@ metadata:
     - definir-tarefa
     - definir-agenda
     - procurar-oportunidade
+    - delegar-aviso-de-plataforma
     - criar-oportunidade
     - definir-inscricao
     - definir-pessoa
@@ -149,7 +150,9 @@ O e-mail que o agente envia também é etiquetado, na conversa, depois do envio:
 
 Não crie tarefa nem evento: ofereça `definir-tarefa` ou `definir-agenda`.
 
-Conversa que anuncia evento, oficina, edital, programa ou benefício com prazo é uma oportunidade, mesmo com a data passada: a pessoa pode ter ido, e a próxima edição volta. Siga `procurar-oportunidade` com o nome, a edição e a data. Achada, a conversa recebe a etiqueta de e-mail que a edição ou o grupo dela registra, e a resposta traz o link e o status. Sem cadastro, cadastre por `criar-oportunidade`, sem perguntar. A decisão de participar fica para a revisão das oportunidades: não a cobre na triagem. A inscrição e a presença seguem `definir-inscricao`, com o sim da pessoa.
+Conversa que anuncia evento, oficina, edital, programa ou benefício com prazo é uma oportunidade, inclusive a de data passada ou etiquetada por filtro. Siga `procurar-oportunidade` para cada uma, com o nome, a edição e a data. Achada, a conversa recebe a etiqueta de e-mail que a edição ou o grupo dela registra, e a resposta traz o link e o status. Sem cadastro, cadastre por `criar-oportunidade`, sem perguntar.
+
+Aviso de plataforma de venda segue `delegar-aviso-de-plataforma`. A decisão de participar fica para a revisão das oportunidades, não para a triagem. A inscrição e a presença seguem `definir-inscricao`, com o sim da pessoa.
 
 ```mermaid
 flowchart LR
@@ -189,7 +192,7 @@ Quando o pagamento estiver lançado com comprovante, a escolha da conversa da fa
 
 Filtro que tira oferta de negociação da entrada usa só remetentes que, na amostra, enviaram apenas ofertas, e exclui os `Termos de aviso formal`. Não esconda cobrança de obrigação `A verificar`.
 
-Empresa de cobrança não confirma a dívida: não use os links nem os boletos dela. Ela recebe a própria etiqueta, porque pode cobrar por vários credores, e a etiqueta do credor só entra quando o corpo o identifica. Essa é a regra da classificação: o filtro combina o remetente com o nome do credor em qualquer parte da mensagem, porque não busca só no corpo. Mensagem sem credor identificado fica com a etiqueta da empresa e na entrada.
+Empresa de cobrança não confirma a dívida: não use os links nem os boletos dela. Ela recebe a própria etiqueta, porque pode cobrar por vários credores, e a etiqueta do credor só entra quando o corpo o identifica. O filtro combina o remetente com o nome do credor em qualquer parte da mensagem. Mensagem sem credor identificado fica com a etiqueta da empresa e na entrada.
 
 Assunto alarmante, como interdição, bloqueio, CPF sob impedimento ou valor retido, só vira aviso formal se o corpo descrever a medida já tomada; a pessoa confere a medida real no banco, no cadastro de proteção ao crédito, no relatório oficial de dívidas e na consulta processual. "Pagamento aprovado" ou "parcela vence hoje" de uma plataforma de negociação não é pagamento nem parcela de acordo.
 

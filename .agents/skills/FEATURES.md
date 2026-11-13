@@ -1800,6 +1800,25 @@ How these skills relate is in `README.md`, in this folder.
 - **Test Criteria**:
   - [x] The skill is present at that path
 
+### procurar-banco-de-dados
+- **Stability**: experimental
+- **Description**: Find the database, or a field of it, that another skill needs when the project parameter is empty, before asking the person for its name
+- **Properties**:
+  - Lives at `.agents/skills/procurar-banco-de-dados/SKILL.md`
+  - Does not search when the project instructions already define the database
+  - Searches only among databases by name and short synonyms, never the page contents or the whole workspace, never uses a database from another workspace, and when no active database fits looks in the trash and the archived ones, shows what it finds as possibly removed by mistake, and restores nothing without a yes; if the tool cannot reach them, asks the person whether the database was archived or deleted
+  - Reads the structure of each candidate and discards one that lacks the properties the calling skill asked for, even with a similar name
+  - Uses the only database that fits and says which, shows the candidates and asks when more than one fits, and asks for the database or suggests creating it when none does, never creating it without a yes
+  - Follows the same path for a field inside the known database
+  - Tells the person the value found so they can fix it in the project instructions, and never writes it there by itself
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] A filled parameter is used without a search
+  - [x] A similar name without the properties is discarded
+  - [x] Two candidates make the skill ask and not choose
+  - [x] With no active database, the trash and the archived ones are searched, or the person is asked if the tool cannot reach them
+  - [x] No candidate makes the skill ask or suggest creation and not create without a yes
+
 ### procurar-data-significativa
 - **Stability**: experimental
 - **Description**: Say when a significant date falls, or whether it is already in the list of significant dates
