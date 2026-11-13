@@ -250,7 +250,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Description**: Suggest a poll or question to learn about the audience of a business, with its learning goal, options, and the decision it supports
 - **Properties**:
   - Lives at `.agents/skills/criar-enquete/SKILL.md`
-  - Reads the content model list of the project and uses a registered idea before creating a new one, which it marks as not yet consolidated
+  - Reads the optional content model list of the project, when it has one, and uses a registered idea before creating a new one; without the list, it creates the idea from scratch without asking for a name, which it marks as not yet consolidated
   - Requires a learning goal about the audience, adjusts or swaps a question that only moves the community, and drops options that do not fit the business
   - Without a goal, draws an adherent idea and says it is an exploratory suggestion, or stops asking only for the missing data
   - Applies `Canal padrão` and `Localidade-alvo` when the request has none, and says the values it assumed
