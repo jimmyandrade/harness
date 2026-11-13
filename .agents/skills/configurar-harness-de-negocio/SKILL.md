@@ -4,7 +4,7 @@ description: Configura um harness de negócio novo seguindo os runbooks do core,
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.5.0"
   related:
     - levantar-ambiente-do-repositorio
     - definir-issue-do-github
@@ -61,12 +61,13 @@ flowchart LR
   N -->|não| M[A pessoa clica e manda o print]
   M --> D[O agente confere o print e diz o próximo clique]
   P -->|comando sem segredo| B[O agente roda e confere]
-  P -->|login, senha ou valor de segredo| C[A pessoa faz]
+  P -->|tela de login| G[Gerenciador de senhas preenche ou a pessoa entra]
+  P -->|valor de segredo| C[A pessoa faz]
   P -->|instalar app ou conceder permissão| S[O agente mostra o que concede e espera o sim]
 ```
 
 Com uma ferramenta que controla o navegador, como a do Claude, de outro agente ou de uma extensão, o agente abre cada tela, clica e confere o resultado nela, sem pedir print.
-Uma tela de login, senha ou código de verificação para o agente: a pessoa entra na conta, e o agente continua.
+Numa tela de login, peça a credencial ao gerenciador de senhas conectado e preencha com ele. A pessoa entra na conta só sem gerenciador, quando o preenchimento falha, ou para digitar um código de verificação, e o agente continua.
 Antes de clicar no botão que instala um app ou concede acesso, mostre o que será concedido e espere o sim da pessoa.
 Confira cada tela antes do próximo passo, contra a verificação do runbook.
 Uma opção que a tela traz marcada por padrão e o runbook não pede é desmarcada antes de seguir.
@@ -159,7 +160,7 @@ O repositório aberto é o core, que já está configurado. Não mudei nada.
 - O client ID do app só parece um segredo, por estar ao lado da chave. Ele vai como variável; só a chave privada vai como segredo.
 - A busca da API respondendo `200` só parece provar o acesso ao banco. Ela responde assim com qualquer token válido.
 - O espaço de equipe na lista de acesso só parece um acesso ao espaço inteiro. É o grupo do banco, e o cabeçalho conta as páginas.
-- Pedir prints só parece o jeito seguro. Com o navegador sob controle, o agente vê a tela na hora e poupa a pessoa; ela entra só no login, no sim e no segredo.
+- Pedir prints só parece o jeito seguro. Com o navegador sob controle, o agente vê a tela na hora e poupa a pessoa; ela entra só no login que o gerenciador de senhas não preenche, no sim e no segredo.
 
 ## Scripts disponíveis
 
