@@ -281,8 +281,13 @@ flowchart LR
   criar_habilidade --> descrever_habilidade_ou_schema
   criar_habilidade --> medir_habilidade
   criar_habilidade --> testar_habilidade
+  criar_oportunidade --> criar_ideia_de_conteudo
+  criar_oportunidade --> definir_empresa
   criar_oportunidade --> definir_grupo_de_oportunidades
   criar_oportunidade --> definir_inscricao
+  criar_oportunidade --> definir_local_fisico
+  criar_oportunidade --> definir_localidade_geografica
+  criar_oportunidade --> definir_tarefa
   criar_oportunidade --> organizar_emails
   criar_oportunidade --> procurar_oportunidade
   criar_oportunidade --> triar_conversas
@@ -716,6 +721,7 @@ flowchart LR
   procurar_inscricao --> definir_inscricao
   procurar_inscricao --> procurar_email
   procurar_oportunidade --> criar_oportunidade
+  procurar_oportunidade --> definir_grupo_de_oportunidades
   procurar_oportunidade --> definir_inscricao
   procurar_oportunidade --> identificar_duplicata
   procurar_oportunidade --> mesclar_registro
