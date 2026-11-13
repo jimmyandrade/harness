@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.16.3"
+  version: "0.16.4"
   related:
     - definir-empresa
     - definir-grafia
@@ -38,9 +38,9 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 Cadastrar ou atualizar uma pessoa na lista de pessoas é esta habilidade. A lista e o nome de cada propriedade vêm do mapeamento de dados do projeto, no workspace conectado. Este texto usa os conceitos: o nome completo, as variações de grafia e os perfis sociais relacionados. Se a lista não estiver nessa conexão, pare. Não use a lista de outro workspace.
 
-Quando o conector do Notion falta ou falha, siga a ordem de ferramentas das instruções do projeto: linha de comando, API, conector e, por último, o Claude in Chrome.
+Quando o conector do Notion falta ou falha, siga a ordem de ferramentas das instruções do projeto: linha de comando, API, conector e, por último, o navegador logado, o do aplicativo primeiro.
 
-No Chrome, busque e cadastre pelo Notion, com o login da pessoa, no mesmo workspace e na lista do mapeamento. Busque cada nome na busca do Notion, também por variações, e conte como resultado só a página da lista de pessoas. Crie a página pelo botão de nova página. O título nasce com "Nova pessoa": selecione o título inteiro, com triplo clique, antes de digitar. Grave o telefone na propriedade dele.
+No navegador, busque e cadastre pelo Notion, com o login da pessoa, no mesmo workspace e na lista do mapeamento. Busque cada nome na busca do Notion, também por variações, e conte como resultado só a página da lista de pessoas. Crie a página pelo botão de nova página. O título nasce com "Nova pessoa": selecione o título inteiro, com triplo clique, antes de digitar. Grave o telefone na propriedade dele.
 
 Nas observações vai só o contexto estável. O histórico vai em comentário da página, um por fato.
 
@@ -164,7 +164,7 @@ Se você escrever o nome de quem participou ou de quem responde por uma ação s
 3. Sem o ID, procure pelo e-mail.
 4. Sem resultado único, pergunte.
 
-### Texto emendado no cadastro pelo Chrome
+### Texto emendado no cadastro pelo navegador
 
 Se você digitar sem selecionar o texto que já está no campo, como o título "Nova pessoa" ou uma propriedade com valor, o novo texto se junta ao antigo e a lista ganha um registro errado.
 
