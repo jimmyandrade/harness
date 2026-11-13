@@ -3,7 +3,7 @@ name: definir-filtro-de-email
 description: Cria, edita e confere filtros de e-mail. Testa o critério na conta, escolhe as ações sem esconder o que a pessoa quer ver e lê o filtro salvo de volta. Usada quando a triagem pede um filtro ou a pessoa quer mudar um. Não serve para classificar mensagens nem cancelar assinatura.
 metadata:
   author: jimmyandrade
-  version: "0.8.0"
+  version: "0.9.0"
   related:
     - organizar-emails
     - evoluir-habilidade
@@ -173,6 +173,8 @@ O filtro procurava o endereço antigo e os e-mails chegam de outro domínio. O c
 - Importar filtros por arquivo XML cria muitos de uma vez, mas a importação recusa o filtro que categoriza como Promoções ou Atualizações. Importe sem a categoria e acerte a categoria na tela de edição.
 - A importação com "Aplicar os novos filtros aos e-mails existentes" pode mostrar erro e ainda salvar os filtros e etiquetar o histórico. Conte os filtros na lista e as conversas etiquetadas antes de refazer.
 - Depois de importar, a tela de filtros mostra abaixo da lista o resultado da importação, com linhas iguais às dos filtros. Conte só as linhas que têm editar.
+- A primeira entrada do arquivo importado pode entrar sem a etiqueta, como filtro sem ação. Depois de importar e recarregar, procure as linhas com "Ações:" vazio e acerte cada uma.
+- Editar um filtro pela tela pode mostrar erro e não salvar. Recarregue e confira a linha. Se a edição não salvou, crie o filtro certo pelas opções de pesquisa e só então exclua o antigo, relatando a troca.
 
 ## Scripts disponíveis
 
