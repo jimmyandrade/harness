@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.16.4"
+  version: "0.16.5"
   related:
     - definir-empresa
     - definir-grafia
@@ -38,7 +38,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 Cadastrar ou atualizar uma pessoa na lista de pessoas é esta habilidade. A lista e o nome de cada propriedade vêm do mapeamento de dados do projeto, no workspace conectado. Este texto usa os conceitos: o nome completo, as variações de grafia e os perfis sociais relacionados. Se a lista não estiver nessa conexão, pare. Não use a lista de outro workspace.
 
-Quando o conector do Notion falta ou falha, siga a ordem de ferramentas das instruções do projeto: linha de comando, API, conector e, por último, o navegador logado, o do aplicativo primeiro.
+Quando o conector do Notion falta ou falha, siga a ordem de meios das instruções do projeto e só peça o dado à pessoa depois de esgotar os meios que a sessão tem.
 
 No navegador, busque e cadastre pelo Notion, com o login da pessoa, no mesmo workspace e na lista do mapeamento. Busque cada nome na busca do Notion, também por variações, e conte como resultado só a página da lista de pessoas. Crie a página pelo botão de nova página. O título nasce com "Nova pessoa": selecione o título inteiro, com triplo clique, antes de digitar. Grave o telefone na propriedade dele.
 
