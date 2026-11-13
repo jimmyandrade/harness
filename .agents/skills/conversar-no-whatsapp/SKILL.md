@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.38.1"
+  version: "0.39.0"
   aliases:
     - redigir-mensagem-de-whatsapp
   related:
@@ -16,6 +16,7 @@ metadata:
     - definir-tarefa
     - definir-viagem
     - definir-vocabulario
+    - dividir-mensagem
     - enviar-email
     - enviar-imagem-no-whatsapp
     - escrever-link
@@ -42,22 +43,10 @@ Leia os valores nas instruções do projeto, na entrada desta habilidade. Na aus
 "Etiqueta das conversas": ""
 # `Canais em ordem de preferência` lista por onde ler e enviar, do preferido ao último recurso. `conector` é um conector ou MCP do WhatsApp na sessão. `WhatsApp Web` é a aba no Chrome da pessoa, pela extensão Claude in Chrome.
 "Canais em ordem de preferência": ["conector", "WhatsApp Web"]
-# `Dividir em mensagens curtas`: `sim` divide o rascunho em mensagens, uma por ideia. `não` não divide por ideia: o rascunho vai inteiro, até o `Limite de caracteres por mensagem`.
-"Dividir em mensagens curtas": "sim"
-# `Vários assuntos no rascunho` vale quando o rascunho tem mais de um assunto que pede resposta. `lista numerada` manda uma mensagem, dentro do `Limite de caracteres por mensagem`, com a abertura e um item numerado por assunto, para a pessoa responder pelo número. `mensagens separadas` manda uma mensagem por assunto.
-"Vários assuntos no rascunho": "lista numerada"
-# `Mensagem única para` lista os tipos de mensagem que não se dividem por ideia e vão numa mensagem, dentro do `Limite de caracteres por mensagem`, como um status de demanda para alguém do time.
-"Mensagem única para": []
-# `Comunicado numa mensagem só`: `sim` não divide o comunicado de produto por ideia, e ele vai numa mensagem dentro do `Limite de caracteres por mensagem`. `não` segue `Dividir em mensagens curtas`.
-"Comunicado numa mensagem só": "sim"
-# `Limite de caracteres por mensagem` é o tamanho acima do qual o WhatsApp corta a mensagem com "Ler mais" e quem lê perde o fim. Cada mensagem enviada cabe nele, e o padrão vale quando o projeto não muda o número. O limite vale para todo tipo de rascunho.
-"Limite de caracteres por mensagem": 600
 # `Não lidas antes de enviar` é `ler e mostrar`, que abre a conversa, lê as não lidas e mostra o que pede ação da pessoa antes de enviar, ou `perguntar antes de abrir`, que avisa que abrir marca como lidas e espera o sim.
 "Não lidas antes de enviar": "ler e mostrar"
 # `Canal do comprovante` é `e-mail na mesma conversa` (e-mail em resposta à organização, com o arquivo anexado; o WhatsApp só avisa), `WhatsApp` (arquivo na conversa) ou `e-mail e WhatsApp` (nos dois).
 "Canal do comprovante": "WhatsApp"
-# `Fechamento em mensagem separada`: `sim` manda a despedida numa mensagem própria, depois das outras. `não` deixa a despedida no fim da última mensagem.
-"Fechamento em mensagem separada": "sim"
 # `Página de instruções do WhatsApp` é o endereço da página com as regras da conta, como a ferramenta comercial por onde a mensagem sai. Vazio pula a leitura.
 "Página de instruções do WhatsApp": ""
 # `Horário de trabalho`: o da entrada `Global`. Fora dele, a mensagem pede desculpa pelo horário. Vazio, não pede.
@@ -131,7 +120,9 @@ O texto vai na mensagem de fechamento do turno, a última que a pessoa lê, junt
 Uma mensagem que diz que um trabalho está em andamento, foi registrado ou foi feito leva o link da tarefa, da página ou do pull request que mostra esse registro. Sem esse registro, crie-o antes, como `definir-tarefa` manda, ou pergunte onde ele está.
 Com a ferramenta de widget na sessão, o widget vem sempre, além dos blocos, como o modelo de saída diz.
 
-A forma do rascunho, como dividir em mensagens, juntar vários assuntos, mandar a despedida à parte, o comunicado e o limite de tamanho, e a apresentação numa conversa já aberta, está no modelo de saída `mensagens-do-whatsapp`. Ele lê `Dividir em mensagens curtas`, `Vários assuntos no rascunho`, `Fechamento em mensagem separada`, `Mensagem única para`, `Comunicado numa mensagem só` e `Limite de caracteres por mensagem`. Envie na mesma ordem, uma de cada vez.
+Depois de escrever o texto, siga `dividir-mensagem` para decidir como ele sai, em mensagens curtas, numa só ou em partes numeradas pelo limite. O sim da pessoa vale para o texto mostrado, com todas as partes numeradas. Envie na mesma ordem, uma de cada vez.
+
+Numa conversa já aberta com a pessoa, a mensagem não diz quem escreve nem de qual empresa: o nome da conversa já diz. Quem ainda não conhece quem escreve é apresentado uma vez, na primeira mensagem, com o nome e a empresa. Depois, nem a abertura repete a apresentação nem o fim leva assinatura.
 A saudação e o texto se dirigem só a quem está na conversa aberta: quem ela não alcança, como a outra pessoa que assina a organização, entra na terceira pessoa. Quem só fica a par recebe, na conversa dele, um aviso curto, sem as perguntas de quem decide.
 O comprovante de pagamento segue `Canal do comprovante`. O e-mail sai por `enviar-email`, com o arquivo anexado e o sim da pessoa, e o WhatsApp só avisa que foi por e-mail e pede a confirmação. Com `e-mail e WhatsApp`, o arquivo vai também na conversa, antes do aviso. Sem conversa de e-mail com a organização, mande o arquivo no WhatsApp e diga isso.
 
