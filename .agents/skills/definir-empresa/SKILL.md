@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.5"
+  version: "0.5.0"
   related:
     - definir-grafia
     - definir-perfil-social
@@ -72,6 +72,8 @@ No navegador, busque e cadastre pelo Notion, com o login da pessoa. Busque o nom
 Crie a página numa visão sem agrupamento, para o tipo não nascer preenchido. Confira que a página nova abriu antes de digitar. Depois de escolher uma opção, não aperte Escape: ele fecha a página e o texto seguinte cai na tabela. Clique no valor da propriedade, nunca no nome dela. Ao fim, ordene a busca por última edição e confira que só as páginas esperadas mudaram.
 
 ### Passo 3
+
+Antes de gravar, leia a descrição de cada propriedade no esquema da lista: ela diz o que é obrigatório, como a cidade, e o que não vai em cada campo, como o telefone fixo no campo do WhatsApp ou o telefone nas notas. Uma propriedade obrigatória sem dado exato recebe o que a fonte sustenta, como o estado quando a cidade não aparece, e a resposta diz que foi inferido. A negociação já cadastrada com a empresa liga-se à empresa nos negócios em que ela foi abordada.
 
 Quando houver pessoa identificada, relacione-a nas pessoas responsáveis. Os donos são outra relação e não substituem essa. Quem verifica é usuário do workspace e não substitui essa. No tipo de público, acrescente a opção de fornecedor quando fizer sentido. Não apague os valores que já estão. Com pessoa vinculada, abra o registro dela e confira as empresas relacionadas. Se a empresa já apareceu, pare. Se não apareceu, relacione. Não relacione de novo. As notas qualificam o papel, o contexto, a pendência ou a certeza. A nota não substitui a relação. Telefone, WhatsApp e endereço não entram na nota.
 
