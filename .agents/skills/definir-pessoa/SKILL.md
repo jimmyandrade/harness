@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.14.0"
+  version: "0.16.3"
   related:
     - definir-empresa
     - definir-grafia
@@ -37,6 +37,14 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 ### Passo 1
 
 Cadastrar ou atualizar uma pessoa na lista de pessoas é esta habilidade. A lista e o nome de cada propriedade vêm do mapeamento de dados do projeto, no workspace conectado. Este texto usa os conceitos: o nome completo, as variações de grafia e os perfis sociais relacionados. Se a lista não estiver nessa conexão, pare. Não use a lista de outro workspace.
+
+Quando o conector do Notion falta ou falha, siga a ordem de ferramentas das instruções do projeto: linha de comando, API, conector e, por último, o Claude in Chrome.
+
+No Chrome, busque e cadastre pelo Notion, com o login da pessoa, no mesmo workspace e na lista do mapeamento. Busque cada nome na busca do Notion, também por variações, e conte como resultado só a página da lista de pessoas. Crie a página pelo botão de nova página. O título nasce com "Nova pessoa": selecione o título inteiro, com triplo clique, antes de digitar. Grave o telefone na propriedade dele.
+
+Nas observações vai só o contexto estável. O histórico vai em comentário da página, um por fato.
+
+Releia a página criada antes de dizer que gravou e nunca clique em renomear, editar ou excluir propriedade.
 
 Com `Tipo de armazenamento das pessoas` em `arquivos locais`, `Endereço das pessoas` é a pasta, com um arquivo por pessoa, nomeado pelo e-mail exato dela, no `Nome do arquivo da pessoa`, e um arquivo de índice com uma linha por pessoa: nome completo, como é chamada, e-mail, papel, time e o arquivo.
 Os campos são o nome completo, como a pessoa é chamada, as variações de grafia, as transcrições erradas do nome, o papel, o time, o e-mail, o ID no Slack, o login no GitHub, o ID da conta no Jira, os pronomes e a fonte deles, e os canais e grupos em que ela aparece.
@@ -85,7 +93,13 @@ Todo perfil social que a pessoa informar, em link, print ou handle, como o Linke
 
 Não grave o print no corpo.
 
-Grave como confirmado só o que veio direto da pessoa que usa a habilidade ou de uma fonte que respondeu com certeza. Nunca invente papel, time nem apelido. Sem e-mail em nenhuma fonte, o e-mail fica como pendência no registro. Quando algo precisa ir à pessoa, use o canal que já existe: sem e-mail e com WhatsApp, mande pelo WhatsApp, por `conversar-no-whatsapp`. Só sem nenhum canal, peça o contato.
+Grave como confirmado só o que veio direto da pessoa que usa a habilidade ou de uma fonte que respondeu com certeza. Nunca invente papel, time nem apelido. Sem e-mail em nenhuma fonte, o e-mail fica como pendência no registro.
+
+Antes de encerrar, passe por cada propriedade da lista de pessoas e preencha a que uma fonte responde: telefone, e-mail, as empresas relacionadas e as que ela possui, os perfis sociais e os canais, a localidade, o tipo de público, as variações de grafia e o campo de não confundir com quando há homônimo na lista.
+
+A empresa segue `identificar-duplicata` e `definir-empresa`, e o perfil segue `definir-perfil-social`. Ser dona da empresa só se grava quando a pessoa ou uma fonte diz isso. O nome que o WhatsApp mostra só indica a empresa relacionada.
+
+O que nenhuma fonte responde fica pendente, e a resposta diz qual propriedade e por quê. Quando algo precisa ir à pessoa, use o canal que já existe: sem e-mail e com WhatsApp, mande pelo WhatsApp, por `conversar-no-whatsapp`. Só sem nenhum canal, peça o contato.
 Uma transcrição errada do nome, como a de uma reunião transcrita por voz, que a pessoa confirma ser errada diante do nome canônico, entra nas variações de grafia, com a data e a fonte. O nome completo fica com o canônico, e a transcrição não se descarta nem vira o nome.
 O que quem usa a habilidade diz sobre o papel de alguém numa empresa, como quem cuida dos recebimentos e quem só é informado, vem direto dela e entra na mesma rodada, sem perguntar. Na pessoa, vai no campo de papel, ou nas observações quando a lista não tem esse campo. Na empresa, a pessoa entra na lista de pessoas responsáveis, e o papel de cada uma vai nas notas da empresa e nas listas do negócio que o citam, como a negociação e o grupo do evento. Depois de gravar, leia as páginas de volta e diga o que gravou e o que não coube.
 Um apelido ou uma grafia ambígua que a pessoa decide inferir, como "vamos inferir que Bia é a Beatriz", entra no registro de quem foi inferida, na lista das transcrições erradas do nome, com o estado `inferido`, a data, quem inferiu, a frase da transcrição e o que descartou as outras hipóteses.
@@ -116,6 +130,14 @@ flowchart LR
 
 ## Problemas comuns
 
+### Cadastro só com o nome
+
+Se você criar a página só com o nome, a pessoa fica sem o telefone, a empresa e o perfil que as fontes já respondiam, e o próximo cadastro volta a perguntar.
+
+1. Passe por cada propriedade da lista antes de encerrar.
+2. Preencha as que uma fonte responde e deixe a pendência dita no relatório, com a propriedade e o motivo.
+3. Telefone de quem tem conversa no WhatsApp se lê nos dados do contato, também de um membro de grupo: peça a leitura à sessão do WhatsApp Web.
+
 ### Desambiguação pedida antes da busca
 
 Se você perguntar à pessoa quem é um nome ambíguo antes de pesquisar, ela responde o que o diretório e as fontes já mostravam.
@@ -141,6 +163,14 @@ Se você escrever o nome de quem participou ou de quem responde por uma ação s
 2. Escreva a menção real da plataforma.
 3. Sem o ID, procure pelo e-mail.
 4. Sem resultado único, pergunte.
+
+### Texto emendado no cadastro pelo Chrome
+
+Se você digitar sem selecionar o texto que já está no campo, como o título "Nova pessoa" ou uma propriedade com valor, o novo texto se junta ao antigo e a lista ganha um registro errado.
+
+1. Entre no campo clicando no valor, nunca no nome da propriedade, que abre o menu de renomear e excluir. Depois dê triplo clique para selecionar tudo e digite.
+2. Confira que a página aberta é a da pessoa antes de editar: a busca guarda o termo anterior e o primeiro resultado pode ser outro.
+3. Releia o texto da página depois de gravar e corrija na mesma rodada, sem criar outra página.
 
 ### Pessoa ausente só na frase
 

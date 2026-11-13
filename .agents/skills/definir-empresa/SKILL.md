@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.4.2"
   related:
     - definir-grafia
     - definir-perfil-social
@@ -61,11 +61,25 @@ O cadastro mínimo de recebedora financeira não valida a fornecedora para relac
 
 A pessoa responsável é, de preferência, gerente, representante comercial, vendedora, dona ou contato do atendimento. Mais de um registro da mesma pessoa segue o flowchart do Passo 1.
 
+Quando o conector do Notion falta ou falha, siga a ordem de ferramentas das instruções do projeto: linha de comando, API, conector e, por último, o Claude in Chrome.
+
+No Chrome, busque e cadastre pelo Notion, com o login da pessoa. Busque o nome também pelo tipo de local, como feira ou venue, porque a empresa pode já existir com outro tipo, e conte como resultado só a página da lista de empresas.
+
+Crie a página numa visão sem agrupamento, para o tipo não nascer preenchido. Confira que a página nova abriu antes de digitar. Depois de escolher uma opção, não aperte Escape: ele fecha a página e o texto seguinte cai na tabela. Clique no valor da propriedade, nunca no nome dela. Ao fim, ordene a busca por última edição e confira que só as páginas esperadas mudaram.
+
 ### Passo 3
 
 Quando houver pessoa identificada, relacione-a nas pessoas responsáveis. Os donos são outra relação e não substituem essa. Quem verifica é usuário do workspace e não substitui essa. No tipo de público, acrescente a opção de fornecedor quando fizer sentido. Não apague os valores que já estão. Com pessoa vinculada, abra o registro dela e confira as empresas relacionadas. Se a empresa já apareceu, pare. Se não apareceu, relacione. Não relacione de novo. As notas qualificam o papel, o contexto, a pendência ou a certeza. A nota não substitui a relação. Telefone, WhatsApp e endereço não entram na nota.
 
 ## Problemas comuns
+
+### Empresa criada sem buscar o tipo de local
+
+Se você buscar só pelo nome da marca, a empresa que já existe como local de feira não aparece e a lista ganha uma duplicata.
+
+1. Busque pelo nome e pelo tipo de local antes de criar.
+2. Empresa já cadastrada com outro tipo: vincule a pessoa a ela, sem criar outra.
+3. Releia as empresas relacionadas na pessoa depois de vincular.
 
 ### Pessoa só na nota
 
