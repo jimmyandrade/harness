@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.3"
+  version: "0.2.4"
   related:
     - definir-agenda
     - definir-agenda-de-popstar
@@ -50,6 +50,8 @@ flowchart LR
 ### Passo 3
 
 A pessoa confirmou a participação: título e descrição passam a dizer que deixou de ser só reserva. O título continua com o nome canônico. A gravação segue `definir-agenda`.
+
+A reserva é de uma oferta só. O título e a descrição dizem de qual, pela organização e pelo formato. Outra oferta parecida, no mesmo lugar ou perto das mesmas datas, entra na descrição como "não confundir com", e nunca como segundo motivo da reserva.
 
 Participação que ainda depende de estoque, pagamento, curadoria, agenda, deslocamento ou confirmação de terceiros fica na descrição, ou o título mantém um marcador de incerteza. Não trate essa pendência como participação livre de condição.
 

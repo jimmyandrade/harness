@@ -4,7 +4,7 @@ description: Varre as conversas com mensagem nova nos canais configurados, como 
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.11.0"
+  version: "0.11.1"
   models:
     - arvore-de-decisao-da-triagem
     - relatorio-de-conversas
@@ -102,6 +102,8 @@ Antes de criar a tarefa, siga `procurar-tarefa`. Sem tarefa, siga `definir-taref
 ### Passo 5
 
 Comunicado ou convite de evento com nome e data, inclusive o que alguém encaminha ao grupo, é uma oportunidade e não está sem relevância. Ache a edição com `procurar-oportunidade`. Sem cadastro, ela segue `criar-oportunidade` na mesma varredura, sem perguntar o que fazer, e o grupo, quando falta, passa por `definir-grupo-de-oportunidades`. Falta o nome ou a data: leve só o que falta ao relatório. Quem escreve ou encaminha o comunicado não é, por isso, a organização, porque pode estar só divulgando outra feira. Não grave quem encaminhou como organizador.
+
+Antes de ligar a mensagem a uma edição, compare quem organiza e o formato. A proposta que um grupo de marcas recebe do dono do espaço, perto das datas de uma feira da organização, é outra oferta. Sem data definida, ela não é uma edição: vai como ponto de atenção e como pendência no relatório, e nunca na reserva nem na oportunidade da outra.
 
 O mapa, o cartaz ou a imagem que a organização manda no grupo para uma edição, com valores, vagas ou regras, também se baixa pela aba e se lê, por `reconhecer-imagem`. Anexe o arquivo aos anexos da edição, como `criar-oportunidade` manda, e grave nas propriedades os valores e as regras que a imagem mostra. Cada edição leva o mapa dela, e o mais recente de cada uma fica anexado. Sem o arquivo ou sem a leitura, diga o resultado real e liste a imagem como ponto de atenção.
 
