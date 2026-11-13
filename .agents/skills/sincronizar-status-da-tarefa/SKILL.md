@@ -4,7 +4,7 @@ description: Sincroniza o status de tarefas, cards ou issues com o estado do pul
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.10.0"
+  version: "0.11.0"
   related:
     - criar-commit
     - criar-pull-request
@@ -34,6 +34,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Etiquetas de PR bloqueado": ""
 # `Status do panorama` é o status das tarefas do panorama por status, quando a pessoa não diz outro.
 "Status do panorama": "em revisão"
+# `Quadro do panorama` é o endereço do quadro cujo backlog, com o sprint e o que está fora dele, o panorama lê quando a pessoa pede para verificar o quadro. Vazio pergunta uma vez e para.
+"Quadro do panorama": ""
 "Ligação entre tarefa e PR": "chave da tarefa no título, na branch ou no corpo do PR"
 # `Registro da ligação` diz como gravar a ligação entre a tarefa e o pull request, no pull request ainda aberto e no pull request já mesclado. `Registro da ligação` vazio pergunta uma vez e para, sem gravar.
 "Registro da ligação": ""
@@ -54,6 +56,11 @@ Para todas as abertas, use a mesma consulta sem o filtro da pessoa e só com as 
 O panorama só lê: ligue cada tarefa ao PR pelo Passo 2, relate pelo Passo 5 e pule o plano, a gravação da ligação e a mudança de status.
 Quando a pessoa pede o panorama de um status, como "o que está em revisão", filtre as tarefas dela pelo status pedido, ou pelo `Status do panorama`, e relate pelo Passo 5 em três blocos.
 Para tarefas de qualquer status misturadas, parta da `Consulta do panorama` sem filtro de status.
+Quando a pessoa pede para verificar o status do quadro ou do backlog, obtenha as tarefas do `Quadro do panorama`, todas, e siga como o panorama de qualquer status.
+Leia o quadro pela ferramenta direta ou pelo conector do rastreador.
+Só quando nenhum dos dois estiver disponível, leia a página do quadro no navegador onde a pessoa já está conectada, que lista chave, título e status de cada tarefa.
+Diga no relato qual caminho leu o quadro.
+O quadro mostra a tarefa-mãe só pela chave: o PR costuma estar nas subtarefas, então busque também por elas antes de dizer que a mãe não tem PR.
 Sem consulta e sem lista, pergunte e pare. Resultado grande que vem em arquivo é lido pelos campos chave, status e título, depois de conferir o formato do arquivo. Anote o status de cada tarefa como o rastreador devolveu.
 
 ### Passo 2
