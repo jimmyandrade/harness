@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.85.0](https://github.com/jimmyandrade/harness/compare/v1.84.0...v1.85.0) (2026-11-13)
+
+
+### Features
+
+* **definir-obrigacao-financeira:** ask how to pay an overdue debt and check government relief first ([#1139](https://github.com/jimmyandrade/harness/issues/1139)) ([c82f194](https://github.com/jimmyandrade/harness/commit/c82f19412ad8701705eb08e35e55933f90e99b51))
+* **triar-conversas:** transcribe audios, mark them with a reaction and keep going without Notion ([#1136](https://github.com/jimmyandrade/harness/issues/1136)) ([c844372](https://github.com/jimmyandrade/harness/commit/c8443728bd2b48dd214a36f1a4d23036160a9139))
+
+
+### Bug Fixes
+
+* **investigar-problema:** try every available browser before saying the report source is out of reach ([#1142](https://github.com/jimmyandrade/harness/issues/1142)) ([2d5a4f6](https://github.com/jimmyandrade/harness/commit/2d5a4f63cb42b9cd37e7651db774f444ea15079a))
+* **sincronizar-status-da-tarefa:** always check subtasks and search the whole organization ([#1131](https://github.com/jimmyandrade/harness/issues/1131)) ([2735317](https://github.com/jimmyandrade/harness/commit/2735317ac8693e1e1c27755f491bfc6bfe32b0fb))
+
 ## [1.84.0](https://github.com/jimmyandrade/harness/compare/v1.83.0...v1.84.0) (2026-11-13)
 
 
