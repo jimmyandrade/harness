@@ -84,6 +84,7 @@ flowchart LR
     definir_politica["definir-politica"]
     definir_post_mortem["definir-post-mortem"]
     definir_preco_de_produto["definir-preco-de-produto"]
+    definir_programacao_da_oportunidade["definir-programacao-da-oportunidade"]
     definir_recurso_de_aprendizado["definir-recurso-de-aprendizado"]
     definir_reel_do_instagram["definir-reel-do-instagram"]
     definir_registro_de_reuniao["definir-registro-de-reuniao"]
@@ -159,6 +160,7 @@ flowchart LR
     registrar_resultados_da_validacao_na_tarefa["registrar-resultados-da-validacao-na-tarefa"]
     revisar_financas["revisar-financas"]
     revisar_habilidade["revisar-habilidade"]
+    revisar_oportunidade["revisar-oportunidade"]
     revisar_uso_do_tempo["revisar-uso-do-tempo"]
     rotular_item["rotular-item"]
     sincronizar_cronograma["sincronizar-cronograma"]
@@ -326,15 +328,15 @@ flowchart LR
   criar_habilidade --> descrever_habilidade_ou_schema
   criar_habilidade --> medir_habilidade
   criar_habilidade --> testar_habilidade
-  criar_oportunidade --> criar_ideia_de_conteudo
   criar_oportunidade --> definir_empresa
   criar_oportunidade --> definir_grupo_de_oportunidades
   criar_oportunidade --> definir_inscricao
   criar_oportunidade --> definir_local_fisico
   criar_oportunidade --> definir_localidade_geografica
-  criar_oportunidade --> definir_tarefa
+  criar_oportunidade --> definir_programacao_da_oportunidade
   criar_oportunidade --> organizar_emails
   criar_oportunidade --> procurar_oportunidade
+  criar_oportunidade --> revisar_oportunidade
   criar_oportunidade --> triar_conversas
   criar_ponto_de_contato --> criar_oportunidade
   criar_ponto_de_contato --> definir_agenda
@@ -508,6 +510,11 @@ flowchart LR
   definir_post_mortem --> definir_tarefa
   definir_preco_de_produto --> gerenciar_estoque
   definir_preco_de_produto --> procurar_banco_de_dados
+  definir_programacao_da_oportunidade --> criar_oportunidade
+  definir_programacao_da_oportunidade --> definir_agenda
+  definir_programacao_da_oportunidade --> definir_inscricao
+  definir_programacao_da_oportunidade --> procurar_oportunidade
+  definir_programacao_da_oportunidade --> sincronizar_cronograma
   definir_recurso_de_aprendizado --> definir_agenda
   definir_recurso_de_aprendizado --> procurar_agenda
   definir_reel_do_instagram --> criar_ideia_de_conteudo
@@ -854,6 +861,11 @@ flowchart LR
   revisar_habilidade --> criar_pull_request
   revisar_habilidade --> descrever_habilidade_ou_schema
   revisar_habilidade --> testar_habilidade
+  revisar_oportunidade --> criar_ideia_de_conteudo
+  revisar_oportunidade --> criar_oportunidade
+  revisar_oportunidade --> definir_grupo_de_oportunidades
+  revisar_oportunidade --> definir_tarefa
+  revisar_oportunidade --> procurar_oportunidade
   revisar_uso_do_tempo --> definir_agenda
   revisar_uso_do_tempo --> definir_agenda_de_popstar
   revisar_uso_do_tempo --> procurar_agenda

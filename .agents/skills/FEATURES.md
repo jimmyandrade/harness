@@ -318,17 +318,51 @@ How these skills relate is in `README.md`, in this folder.
   - Puts edition-specific facts, such as place, hours, price, form, and vacancies, on the edition
   - Relates a profile on the edition only when that account belongs to that edition
   - Does not create an opportunity page for selection, registration, an edital, or a call
-  - Keeps an existing notes block on the edition intact, and may copy a supported fact into a property
   - Does not write the poster in the page body
   - Does not treat free entry for a restricted audience as the visitor ticket or the exhibitor fee
   - Checks that the edition year is covered by a cycle, creating the next cycle without duplicating and asking when the year is uncertain, and never promotes a past event to the future
   - Fills both numeric fee fields when the fee varies by 1 or 2 days, uses the text field only for variable or conditional fees, and never writes the fee in the body
   - Titles the offer without saying it belongs to the business, keeping one canonical opportunity for several candidates
-  - Preserves a guidance callout on the page, turns body content actions into ideas and dated tasks, and replaces a generic link with the specific ticketing page
+  - Replaces a generic link with the specific ticketing page
   - Hands the venue and its locality to definir-local-fisico instead of creating them
+  - Hands the published programme to definir-programacao-da-oportunidade and the review of an edition that already exists to revisar-oportunidade
 - **Test Criteria**:
   - [x] The skill is present at that path
-  - [x] The description refuses the group, checking whether the opportunity exists, organizing the participation, registering someone, creating a task, and reading an image
+  - [x] The description refuses reviewing the edition, the group, the programme, checking whether the opportunity exists, organizing the participation, registering someone, creating a task, and reading an image
+
+### definir-programacao-da-oportunidade
+- **Stability**: experimental
+- **Description**: Read the published programme of an opportunity from the official source and store each session in the schedule linked to the edition, without choosing attendance
+- **Properties**:
+  - Lives at `.agents/skills/definir-programacao-da-oportunidade/SKILL.md`
+  - Requires the edition to exist, through procurar-oportunidade or criar-oportunidade
+  - Reads the official source again without asking for a new authorization, and loads the full content before calling the programme complete
+  - Treats a slow read timeout as a reason to use the fuller read, not as an unavailable source
+  - Stores one item per session, with the link to the edition, start and end in the event time zone, and reading order, keeping simultaneous, repeated, and closed sessions
+  - Tests one real session with every intended property before the batch, handles a rejected optional field on one item, and resumes only the items not saved
+  - Compares the sessions of the source with the linked items before saying the programme is complete
+  - Does not sign up, choose a session, block the agenda, or create a calendar event
+  - Writes session dates in the reply with `Formato da data com dia da semana`
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses registering the edition, signing up, choosing the participation, and creating an agenda event
+
+### revisar-oportunidade
+- **Stability**: experimental
+- **Description**: Review the content, body, and notes of an edition that already exists, keeping the notes block and the callout and moving each fact to the right property
+- **Properties**:
+  - Lives at `.agents/skills/revisar-oportunidade/SKILL.md`
+  - Requires the edition to exist, through procurar-oportunidade or criar-oportunidade
+  - Keeps an existing notes block, meeting, transcript, or summary on the edition intact, and may copy a supported fact into a property
+  - Leaves a property empty and records the pending item in the curation notes when the block does not support the value
+  - Preserves a guidance callout on the page and warns before finishing when it is missing and the person asks to organize the body
+  - Turns body content actions into ideas and dated tasks, and asks when the date is not safe
+  - Writes the strategic reading of fit as a permanent synthesis in the curation notes, without a checklist
+  - Writes an incident as a dated comment on the edition, one comment per fact
+  - Writes dates in the reply with `Formato da data com dia da semana`
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses registering the edition, the group, or the programme, signing up, and creating a task
 
 ### criar-ponto-de-contato
 - **Stability**: experimental
