@@ -243,6 +243,24 @@ How these skills relate is in `README.md`, in this folder.
   - [ ] A copy without the hook item still commits with the hook, after the link, and never with `--no-verify`
   - [ ] A session already inside a copy made by the app uses it and creates no other
 
+### criar-enquete
+- **Stability**: experimental
+- **Description**: Suggest a poll or question to learn about the audience of a business, with its learning goal, options, and the decision it supports
+- **Properties**:
+  - Lives at `.agents/skills/criar-enquete/SKILL.md`
+  - Reads the content model list of the project and uses a registered idea before creating a new one, which it marks as not yet consolidated
+  - Requires a learning goal about the audience, adjusts or swaps a question that only moves the community, and drops options that do not fit the business
+  - Without a goal, draws an adherent idea and says it is an exploratory suggestion, or stops asking only for the missing data
+  - Applies `Canal padrão` and `Localidade-alvo` when the request has none, and says the values it assumed
+  - Takes the options for a city from the list of localities, with "other city" as a valid option
+  - Does not repeat a recent question without spacing or variation
+  - Delegates the final wording to `redigir-com-tom-de-voz` and the sending to `conversar-no-whatsapp`, only with the person's yes
+  - Registers only on request, and keeps the text of a published poll as it was published
+  - Does not write the final copy, publish, register the idea or the post, or define the campaign
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses writing the final copy, publishing, registering the idea or the post, and defining the campaign
+
 ### criar-habilidade
 - **Stability**: production
 - **Description**: Write the smallest skill that still triggers
@@ -2137,24 +2155,6 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [ ] After a commit or a pull request state change, the skill runs without a separate sweep request
   - [ ] Three cases validated with the person
-
-### sugerir-enquete-de-publico
-- **Stability**: experimental
-- **Description**: Suggest a poll or question to learn about the audience of a business, with its learning goal, options, and the decision it supports
-- **Properties**:
-  - Lives at `.agents/skills/sugerir-enquete-de-publico/SKILL.md`
-  - Reads the content model list of the project and uses a registered idea before creating a new one, which it marks as not yet consolidated
-  - Requires a learning goal about the audience, adjusts or swaps a question that only moves the community, and drops options that do not fit the business
-  - Without a goal, draws an adherent idea and says it is an exploratory suggestion, or stops asking only for the missing data
-  - Applies `Canal padrão` and `Localidade-alvo` when the request has none, and says the values it assumed
-  - Takes the options for a city from the list of localities, with "other city" as a valid option
-  - Does not repeat a recent question without spacing or variation
-  - Delegates the final wording to `redigir-com-tom-de-voz` and the sending to `conversar-no-whatsapp`, only with the person's yes
-  - Registers only on request, and keeps the text of a published poll as it was published
-  - Does not write the final copy, publish, register the idea or the post, or define the campaign
-- **Test Criteria**:
-  - [x] The skill is present at that path
-  - [x] The description refuses writing the final copy, publishing, registering the idea or the post, and defining the campaign
 
 ### testar-habilidade
 - **Stability**: experimental

@@ -33,6 +33,7 @@ flowchart LR
     criar_carrossel_do_instagram["criar-carrossel-do-instagram"]
     criar_commit["criar-commit"]
     criar_copia_de_trabalho["criar-copia-de-trabalho"]
+    criar_enquete["criar-enquete"]
     criar_habilidade["criar-habilidade"]
     criar_ideia_de_conteudo["criar-ideia-de-conteudo"]
     criar_oportunidade["criar-oportunidade"]
@@ -152,7 +153,6 @@ flowchart LR
     rotular_item["rotular-item"]
     sincronizar_cronograma["sincronizar-cronograma"]
     sincronizar_status_da_tarefa["sincronizar-status-da-tarefa"]
-    sugerir_enquete_de_publico["sugerir-enquete-de-publico"]
     testar_habilidade["testar-habilidade"]
     testar_ponta_a_ponta["testar-ponta-a-ponta"]
     transcrever_audio_e_video["transcrever-audio-e-video"]
@@ -267,6 +267,13 @@ flowchart LR
   criar_copia_de_trabalho --> criar_pull_request
   criar_copia_de_trabalho --> levantar_ambiente_do_repositorio
   criar_copia_de_trabalho --> limpar_copias_de_trabalho
+  criar_enquete --> conversar_no_whatsapp
+  criar_enquete --> criar_ideia_de_conteudo
+  criar_enquete --> definir_campanha_de_conteudo
+  criar_enquete --> definir_grafia
+  criar_enquete --> definir_localidade_geografica
+  criar_enquete --> redigir_com_tom_de_voz
+  criar_enquete --> usar_whatsapp_web
   criar_habilidade --> criar_commit
   criar_habilidade --> criar_pull_request
   criar_habilidade --> definir_arquivos_da_habilidade
@@ -773,13 +780,6 @@ flowchart LR
   sincronizar_status_da_tarefa --> criar_pull_request
   sincronizar_status_da_tarefa --> levantar_contexto_do_pull_request
   sincronizar_status_da_tarefa --> mesclar_pull_request
-  sugerir_enquete_de_publico --> conversar_no_whatsapp
-  sugerir_enquete_de_publico --> criar_ideia_de_conteudo
-  sugerir_enquete_de_publico --> definir_campanha_de_conteudo
-  sugerir_enquete_de_publico --> definir_grafia
-  sugerir_enquete_de_publico --> definir_localidade_geografica
-  sugerir_enquete_de_publico --> redigir_com_tom_de_voz
-  sugerir_enquete_de_publico --> usar_whatsapp_web
   testar_habilidade --> descrever_habilidade_ou_schema
   testar_habilidade --> medir_habilidade
   testar_habilidade --> revisar_habilidade
