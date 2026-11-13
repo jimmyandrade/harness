@@ -2,7 +2,7 @@
 name: relatorio-de-conversas
 description: Formato do relatório da triagem das conversas, com um bloco por canal e por conversa, pontos de atenção, tarefas, intercorrências, rótulos e mensagens sem relevância.
 metadata:
-  version: "0.2.0"
+  version: "0.3.0"
 ---
 
 ## Contexto
@@ -20,8 +20,8 @@ Período lido: <desde quando> até <data e hora da varredura>.
 #### <nome da conversa>
 
 - **Rótulos:** <estado e contexto aplicados>
-- **Pontos de atenção:** <o que informa algo útil sem ação, com quem escreveu e a hora>
-- **Áudios sem transcrição:** <quem mandou e a hora>
+- **Pontos de atenção:** <o que informa algo útil, com quem escreveu e a hora, por que importa e o que a pessoa faz, ou "só informativo">
+- **Áudios:** <quem mandou, a hora, o arquivo da transcrição e a ação no áudio. Sem transcrição, diga por quê>
 - **Tarefas:** <título da tarefa, com o link>
 - **Intercorrências:** <o que aconteceu, com o link do comentário ou da página>
 - **Ignorados:** <um registro curto por item sem tarefa nem ação: o que era, de qual conversa, por que ficou sem ação e a data, só do assunto que não tem página para o comentário>
