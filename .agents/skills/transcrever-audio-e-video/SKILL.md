@@ -3,7 +3,7 @@ name: transcrever-audio-e-video
 description: Transcreve um áudio ou vídeo local com o Whisper local, detecta se ele está instalado e só propõe instalar com o sim da pessoa. Usada quando a pessoa manda uma gravação para virar texto, mesmo sem dizer Whisper. NÃO serve para reunião que já tem transcrição, identificar quem fala nem enviar o arquivo a um serviço externo.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   related:
     - definir-registro-de-reuniao
     - evoluir-habilidade
@@ -59,7 +59,8 @@ Ponha o caminho do arquivo entre aspas: nome com espaço e acento é comum.
 ### Passo 5
 
 Rode o `whisper-cli` com o `Idioma da transcrição`, `-ml 0` e as saídas `.txt` e `.srt`. Com `Termos do prompt` preenchido, passe-os em `--prompt`.
-Num Apple M4 Pro de 24 GB, 20 minutos de áudio levaram menos de um minuto. Em outra máquina o tempo muda: avise a pessoa antes quando o arquivo é longo e espere o resultado no mesmo turno.
+Num Apple M4 Pro, o tempo é cerca de um dezoito avos da duração do áudio. Leia `references/tempos-medidos.md` quando for avisar o tempo de um arquivo longo ou de um lote. Em outra máquina o tempo muda: avise a pessoa antes e espere o resultado no mesmo turno.
+Com mais de uma gravação, rode o script de lote: ele é retomável, roda uma instância só, começa pelas mais curtas e registra a falha de cada gravação sem parar as outras. Diga o tempo estimado do lote antes de começar.
 
 ### Passo 6
 
@@ -131,7 +132,8 @@ Disse que faltavam o `whisper-cli`, o `ffmpeg` e o modelo de 547 MB, que a insta
 - O prompt ajuda em parte. No teste, ele corrigiu alguns termos e deixou outros errados, e puxou um termo do prompt para mais lugares do que o áudio dizia. Releia os termos do prompt no resultado.
 - O `.txt` não tem tempo. Quem precisa do minuto de uma fala usa o `.srt`.
 - Nome de arquivo com espaço e acento quebra o comando sem aspas.
-- O número de tempo acima vem de uma medição, numa máquina. Não prometa o mesmo tempo em outra.
+- O número de tempo vem de uma medição, numa máquina. Não prometa o mesmo tempo em outra.
+- O `ffmpeg` lê o teclado por padrão. Num laço de shell ele consome as linhas da fila e corta os caminhos: use `-nostdin`, ou o script de lote.
 
 ## Scripts disponíveis
 
@@ -139,7 +141,9 @@ Disse que faltavam o `whisper-cli`, o `ffmpeg` e o modelo de 547 MB, que a insta
 - `ls "<Pasta do modelo>/<Modelo>"` confere o modelo.
 - `brew install whisper-cpp ffmpeg` instala o programa e o `ffmpeg`.
 - `curl -L -o "<Pasta do modelo>/<Modelo>" "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/<Modelo>"` baixa o modelo.
-- `ffmpeg -loglevel error -y -i "<arquivo>" -vn -ar 16000 -ac 1 "<Pasta de saída>/audio.wav"` extrai o áudio.
+- `ffmpeg -nostdin -loglevel error -y -i "<arquivo>" -vn -ar 16000 -ac 1 "<Pasta de saída>/audio.wav"` extrai o áudio.
 - `whisper-cli -m "<Pasta do modelo>/<Modelo>" -l <Idioma da transcrição> -ml 0 --prompt "<Termos do prompt>" -otxt -osrt -of "<Pasta de saída>/transcricao" -f "<Pasta de saída>/audio.wav"` transcreve.
 
-1. Detecte, instale só com o sim, extraia o áudio e transcreva, nessa ordem.
+- `python3 -I scripts/transcribe_batch.py --queue "<arquivo com um caminho por linha>" --out "<Pasta de saída>"` transcreve várias gravações. `--state "<arquivo>"` grava o progresso em JSON e `--dry-run` só conta o que falta.
+
+1. Detecte, instale só com o sim, extraia o áudio e transcreva, nessa ordem. Com várias gravações, use o script de lote no lugar da extração e da transcrição.
