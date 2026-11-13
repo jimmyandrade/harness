@@ -1,9 +1,9 @@
 ---
 name: atualizar-branch-do-pull-request
-description: Use essa habilidade sempre que uma branch com pull request estiver atrás da base, tiver conflito ou precisar de rebase, mesmo sem dizer rebase. NÃO use para abrir o PR, fazer o primeiro push nem mesclar (use criar-pull-request).
+description: Use essa habilidade sempre que for enviar um commit novo a uma branch que já tem pull request, ou ela estiver atrás da base, tiver conflito ou precisar de rebase, mesmo sem dizer rebase. NÃO use para abrir o PR, fazer o primeiro push nem mesclar (use criar-pull-request).
 metadata:
   author: jimmyandrade
-  version: "0.8.1"
+  version: "0.8.2"
   related:
     - criar-pull-request
     - atender-revisao-de-pull-request
