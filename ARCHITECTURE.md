@@ -23,6 +23,7 @@ harness/
 │   │   ├── plugin-manifests/       # Checks that the Cursor manifest and the Codex-readable marketplace agree with .claude-plugin/, run by check-skill
 │   │   ├── project-parameters/     # Reads and validates the parameters in the AGENTS.md frontmatter, for every script
 │   │   ├── skill-graph/            # Writes .agents/skills/README.md, the Mermaid graph of skills
+│   │   ├── weekday/                # Prints the weekday of a date in Portuguese, so no skill works it out in its head
 │   │   ├── skill-folder-icon/      # macOS folder icon for each skill, run by Lefthook in the checker's virtual environment
 │   │   └── sync-notion-pages/      # Notion sync (TypeScript), run by the sync-notion-pages action: one module per page kind, on shared modules
 │   └── skills/                     # Shared skills, one <name>/SKILL.md each

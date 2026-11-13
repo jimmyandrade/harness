@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.12.6"
+  version: "0.13.0"
   related:
     - criar-oportunidade
     - definir-agenda
@@ -77,7 +77,7 @@ Mostre os compromissos achados e o período. Se não houver nenhum, diga isso. A
 
 ### Passo 5
 
-A data de evento, compromisso, prazo, viagem, reserva, lançamento, entrega ou outro marco, na resposta, no resumo, na tabela ou em outro texto, sai no formato da data com dia da semana. Calcule e confira o dia com a data, o horário e o fuso do evento antes de responder. Sem horário ou sem fuso, e se o dia puder mudar, peça. Não invente. Intervalo ou vários dias: o dia da semana em cada data. Se a fonte trouxer um dia da semana incompatível com a data, sinalize a divergência. Não crie nem altere.
+A data de evento, compromisso, prazo, viagem, reserva, lançamento, entrega ou outro marco, na resposta, no resumo, na tabela ou em outro texto, sai no formato da data com dia da semana. Calcule o dia da semana com a data, o horário e o fuso do evento, como a regra do dia da semana manda, antes de responder. Sem horário ou sem fuso, e se o dia puder mudar, peça. Não invente. Intervalo ou vários dias: o dia da semana em cada data. Se a fonte trouxer um dia da semana incompatível com a data, sinalize a divergência. Não crie nem altere.
 
 ## Problemas comuns
 
@@ -117,7 +117,7 @@ Se você disser que a agenda aposentada está vazia porque o dia de hoje não te
 
 Se você escrever a data numérica sem o dia da semana, ou repetir um dia da semana que não bate com a data, a pessoa lê o dia errado.
 
-1. Calcule o dia com a data, o horário e o fuso.
+1. Calcule o dia como a regra do dia da semana manda, com a data, o horário e o fuso.
 2. Escreva no formato da data com dia da semana em cada data.
 3. Se divergir, sinalize. Não crie nem altere.
 

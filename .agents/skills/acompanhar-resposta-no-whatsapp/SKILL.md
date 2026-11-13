@@ -3,7 +3,7 @@ name: acompanhar-resposta-no-whatsapp
 description: Acompanha, por uma rotina que lê as conversas com a etiqueta de ação esperada, se o contato respondeu a uma mensagem enviada no WhatsApp, avisa quando a resposta chega e troca a etiqueta. Usada quando a mensagem espera resposta, como uma pergunta, um pedido ou um prazo, ou quando a pessoa pergunta se alguém já respondeu. Não serve para ler, redigir nem enviar a mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.4.2"
+  version: "0.5.0"
   related:
     - acompanhar-retornos-pendentes
     - conversar-no-whatsapp
@@ -50,7 +50,7 @@ Ache a conversa e siga `usar-whatsapp-web` para o resto: o botão do aviso e o Q
 
 ### Passo 3
 
-Quando a resposta chega, a rotina avisa a pessoa e troca `Ação esperada` por `Respondida`, por `rotular-item`. A conversa sai do filtro, e a rotina segue como está.
+Quando a resposta chega, a rotina avisa a pessoa, com a data inteira e o dia da semana calculado como a regra do dia da semana manda, e troca `Ação esperada` por `Respondida`, por `rotular-item`. A conversa sai do filtro, e a rotina segue como está.
 A conversa que passa de `Dias sem resposta para avisar` sem resposta ganha um aviso, uma vez, e mantém a etiqueta.
 Sem nenhuma conversa na etiqueta, a rotina diz isso em uma linha.
 Uma mensagem que espera resposta e saiu sem a etiqueta, porque a pergunta do sim não citou o acompanhamento ou porque a etiqueta ficou para depois, não sai dos próximos passos da resposta até a conversa ser etiquetada ou a pessoa recusar. Ao perceber a falta, confira antes a lista de conversas: a resposta pode já ter chegado.

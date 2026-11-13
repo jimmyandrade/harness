@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.7.0"
   related:
     - acompanhar-veiculo
     - definir-agenda
@@ -164,7 +164,7 @@ A linha do cronograma guarda a data e deixa a hora vazia. O bloco que o flowchar
 
 ### Passo 6
 
-Diga a viagem canônica, o que entrou, o que ficou vazio, a lacuna, a divergência e os marcos que ficaram separados. Na pergunta, diga o que a busca encontrou e não crie. A data na resposta sai com o dia da semana. Sem horário ou sem fuso, e se o dia puder mudar, peça. Não invente. Planejar quem leva, quem busca ou se cabe ônibus fica nesta habilidade. Viagem de carro próprio só fica concluída com o pedido de extensão da proteção registrado, ou recusado com justificativa, por `acompanhar-veiculo`.
+Diga a viagem canônica, o que entrou, o que ficou vazio, a lacuna, a divergência e os marcos que ficaram separados. Na pergunta, diga o que a busca encontrou e não crie. A data na resposta sai com o dia pela regra do dia da semana. Sem horário ou sem fuso, e se o dia puder mudar, peça. Não invente. Planejar quem leva, quem busca ou se cabe ônibus fica nesta habilidade. Viagem de carro próprio só fica concluída com o pedido de extensão da proteção registrado, ou recusado com justificativa, por `acompanhar-veiculo`.
 
 Quem viaja e os veículos ficam nas propriedades da viagem, não só no texto. Sem elas, pergunte quem vai.
 

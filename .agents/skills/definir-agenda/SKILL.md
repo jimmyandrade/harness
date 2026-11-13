@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.51.0"
+  version: "0.52.0"
   related:
     - convidar-para-evento
     - definir-agenda-de-popstar
@@ -204,7 +204,7 @@ Confira horário e detalhes do evento na ferramenta de agenda, não pela fala da
 ### Passo 6
 
 A data de evento, compromisso, prazo, viagem, reserva, lançamento, entrega ou outro marco, na resposta, no resumo, na tabela, na descrição ou em outro texto, sai no formato da data com dia da semana.
-Calcule e confira o dia com a data, o horário e o fuso antes de escrever.
+Calcule o dia da semana com a data, o horário e o fuso, como a regra do dia da semana manda, antes de escrever.
 Sem horário ou sem fuso, e se o dia puder mudar, peça. Não invente.
 Intervalo ou vários dias: o dia da semana em cada data.
 Dia incompatível com a data, inclusive o da fonte: sinalize e confirme antes de criar ou alterar. Não grave o marco.
@@ -255,7 +255,7 @@ Se você fechar sem o resumo, sem o estado de cada evento ou sem o fuso, a pesso
 
 Se você escrever a data numérica sem o dia da semana, ou aceitar um dia da semana que não bate com a data, a pessoa lê o marco errado.
 
-1. Calcule o dia com a data, o horário e o fuso.
+1. Calcule o dia como a regra do dia da semana manda, com a data, o horário e o fuso.
 2. Escreva no formato da data com dia da semana em cada data.
 3. Se divergir, sinalize e confirme antes de criar ou alterar.
 

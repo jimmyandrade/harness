@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.6.1"
+  version: "0.7.0"
   related:
     - procurar-data-significativa
 ---
@@ -58,7 +58,9 @@ Evento que acontece uma vez por ano, como data comemorativa, feriado fixo, marco
 
 ### Passo 5
 
-Data de evento, compromisso, prazo, viagem, reserva, lançamento, entrega ou outro marco, na resposta, no resumo, na tabela, na descrição ou em outro texto, sai no formato da data com dia da semana. Calcule e confira o dia com a data, o horário e o fuso antes de escrever. Sem horário ou sem fuso, e se o dia puder mudar, peça. Não invente. Intervalo ou vários dias: o dia da semana em cada data. Se a fonte trouxer um dia da semana incompatível com a data, sinalize e confirme antes de criar ou alterar. O campo estruturado permanece válido. O dia da semana é a camada extra para a pessoa.
+Data de evento, compromisso, prazo, viagem, reserva, lançamento, entrega ou outro marco, na resposta, no resumo, na tabela, na descrição ou em outro texto, sai no formato da data com dia da semana. Calcule o dia da semana com a data, o horário e o fuso, como a regra do dia da semana manda, antes de escrever.
+
+Sem horário ou sem fuso, e se o dia puder mudar, peça. Não invente. Intervalo ou vários dias: o dia da semana em cada data. Se a fonte trouxer um dia da semana incompatível com a data, sinalize e confirme antes de criar ou alterar. O campo estruturado permanece válido. O dia da semana é a camada extra para a pessoa.
 
 ## Problemas comuns
 
@@ -106,7 +108,7 @@ Se você gravar a fonte de memória, o registro não aponta uma página.
 
 Se você escrever a data numérica sem o dia da semana, ou aceitar um dia da semana que não bate com a data, a pessoa lê o marco errado.
 
-1. Calcule o dia com a data, o horário e o fuso.
+1. Calcule o dia como a regra do dia da semana manda, com a data, o horário e o fuso.
 2. Escreva no formato da data com dia da semana em cada data.
 3. Se divergir, sinalize e confirme antes de criar ou alterar. O campo estruturado permanece válido.
 

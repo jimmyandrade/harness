@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.6.1"
+  version: "0.7.0"
   related:
     - definir-data-significativa
 ---
@@ -52,7 +52,7 @@ Nenhum: diga que não está na lista de datas significativas. Outro evento não 
 
 ### Passo 6
 
-Data na resposta, no resumo, na tabela ou em outro texto sai no formato da data com dia da semana. Calcule e confira o dia com a data, o horário e o fuso antes de responder. A data do registro sem horário é o dia civil. O dia da semana sai dessa data. Sem horário ou sem fuso, e se o dia puder mudar, peça. Não invente. Intervalo ou vários dias: o dia da semana em cada data. Se a fonte trouxer um dia da semana incompatível com a data, sinalize a divergência. Não crie nem altere.
+Data na resposta, no resumo, na tabela ou em outro texto sai no formato da data com dia da semana. Calcule o dia da semana com a data, o horário e o fuso, como a regra do dia da semana manda, antes de responder. A data do registro sem horário é o dia civil. O dia da semana sai dessa data. Sem horário ou sem fuso, e se o dia puder mudar, peça. Não invente. Intervalo ou vários dias: o dia da semana em cada data. Se a fonte trouxer um dia da semana incompatível com a data, sinalize a divergência. Não crie nem altere.
 
 ## Problemas comuns
 

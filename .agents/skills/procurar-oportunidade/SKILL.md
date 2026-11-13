@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch
 compatibility: Precisa de internet. A busca semântica na lista de oportunidades usa notion-ai-search no servidor notion.
 metadata:
   author: jimmyandrade
-  version: "0.7.0"
+  version: "0.8.0"
   related:
     - criar-oportunidade
     - definir-inscricao
@@ -67,7 +67,7 @@ Nenhuma: diga que ela não existe na lista de oportunidades. Mostre o link da li
 
 ### Passo 5
 
-Data de evento, compromisso, prazo, viagem, reserva, lançamento, entrega ou outro marco, na resposta, no resumo, na tabela ou em outro texto, sai no formato da data com dia da semana. Calcule e confira o dia com a data, o horário e o fuso do evento antes de responder. Sem horário ou sem fuso, e se o dia puder mudar, peça. Não invente. Intervalo ou vários dias: o dia da semana em cada data.
+Data de evento, compromisso, prazo, viagem, reserva, lançamento, entrega ou outro marco, na resposta, no resumo, na tabela ou em outro texto, sai no formato da data com dia da semana. Calcule o dia da semana com a data, o horário e o fuso do evento, como a regra do dia da semana manda, antes de responder. Sem horário ou sem fuso, e se o dia puder mudar, peça. Não invente. Intervalo ou vários dias: o dia da semana em cada data.
 
 Se a fonte trouxer um dia da semana incompatível com a data, sinalize a divergência. Na consulta, não crie nem altere, a não ser o status de uma edição passada, e só depois da resposta da pessoa sobre quais foram aproveitadas e quais foram perdidas.
 
@@ -131,7 +131,7 @@ Se você buscar no workspace inteiro, uma tarefa, uma nota ou outra lista entra 
 
 Se você escrever a data numérica sem o dia da semana, ou repetir um dia da semana que não bate com a data, a pessoa lê outra edição.
 
-1. Calcule o dia com a data, o horário e o fuso.
+1. Calcule o dia como a regra do dia da semana manda, com a data, o horário e o fuso.
 2. Escreva no formato da data com dia da semana em cada data.
 3. Se divergir, sinalize. Não crie nem altere.
 

@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-update-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.20.0"
+  version: "0.21.0"
   aliases:
     - organizar-feira
   related:
@@ -76,7 +76,9 @@ Se a pessoa perguntar o que falta organizar, não crie tarefa nessa passada. Abr
 
 ### Passo 6
 
-A data de evento, compromisso, prazo, viagem, reserva, lançamento, entrega ou outro marco, na resposta, no resumo, na tabela ou em outro texto, sai no formato da data com dia da semana. Calcule e confira o dia com a data, o horário e o fuso do evento antes de responder. Sem horário ou sem fuso, e se o dia puder mudar, peça. Não invente. Intervalo ou vários dias: o dia da semana em cada data. Se a fonte trouxer um dia da semana incompatível com a data, sinalize a divergência. Não copie esse dia para o início da execução, o fim da execução nem a data e hora.
+A data de evento, compromisso, prazo, viagem, reserva, lançamento, entrega ou outro marco, na resposta, no resumo, na tabela ou em outro texto, sai no formato da data com dia da semana. Calcule o dia pela regra do dia da semana, com a data, o horário e o fuso do evento, antes de responder.
+
+Sem horário ou sem fuso, e se o dia puder mudar, peça. Não invente. Intervalo ou vários dias: o dia da semana em cada data. Se a fonte trouxer um dia da semana incompatível com a data, sinalize a divergência. Não copie esse dia para o início da execução, o fim da execução nem a data e hora.
 
 ### Passo 7
 
@@ -226,7 +228,7 @@ Se você fechar pedindo para mencionar a habilidade na próxima vez, a pessoa re
 
 Se você escrever a data numérica sem o dia da semana, ou repetir um dia da semana que não bate com a data, a pessoa lê o evento errado.
 
-1. Calcule o dia com a data, o horário e o fuso.
+1. Calcule o dia pela regra do dia da semana.
 2. Escreva no formato da data com dia da semana em cada data.
 3. Se divergir, sinalize. Não copie o dia para o campo do ponto de contato nem da oportunidade.
 
