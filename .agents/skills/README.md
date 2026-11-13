@@ -821,6 +821,7 @@ flowchart LR
   reconhecer_imagem --> procurar_oportunidade
   redigir_com_tom_de_voz --> definir_pessoa
   redigir_com_tom_de_voz --> definir_vocabulario
+  redigir_com_tom_de_voz --> perfilar_tom_de_voz
   registrar_ciclo_do_ativo --> definir_ativo_imobilizado
   registrar_ciclo_do_ativo --> identificar_duplicata
   registrar_ciclo_do_ativo --> lancar_despesa_da_empresa
