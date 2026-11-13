@@ -3,11 +3,12 @@ name: evoluir-habilidade
 description: Muda uma skill ou as instruções do projeto a pedido ou pelo feedback de uma execução, como falha ou correção da pessoa, e abre o pull request no repositório de origem. Usada ao pedir uma regra nova, mesmo sem dizer evoluir, e ao fim de cada skill. Não serve para testar a skill, criar a primeira versão, ver se a descrição dispara, só revisar nem gravar no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.33.4"
+  version: "0.34.0"
   related:
     - criar-commit
     - criar-habilidade
     - criar-pull-request
+    - definir-arquivos-da-habilidade
     - definir-instrucoes-do-projeto
     - definir-vocabulario
     - descrever-habilidade-ou-schema
@@ -99,6 +100,8 @@ Antes de commitar, releia as linhas que a edição acrescentou. Cada parágrafo 
 Sempre que a skill for executada, compare os rastros do agente entre os casos. Se ele reinventar sozinho a mesma lógica em cada execução, como gerar um gráfico, analisar um formato ou validar a saída, avise a pessoa.
 Proponha um script testado uma vez. Com o aceite, grave em `scripts/` quando só esta skill usa, ou em `.agents/scripts/<nome>/` quando várias usam. Passe a chamá-lo. A lógica deixa de ser reescrita a cada execução. O script que valida as próprias skills é o caso global: a checagem roda igual, em vez de o agente rederivar as regras.
 
+O nome e o lugar do script, desde a proposta, seguem `definir-arquivos-da-habilidade`, inclusive o `Idioma do nome dos scripts`.
+
 ### Passo 4
 
 Quando outra habilidade chega aqui ao terminar, siga `Modo de aprendizado`. Com `não`, encerre. Com `perguntar` ou `sim`, grave cada lição como um commit numa branch com nome em inglês e siga `criar-pull-request`. Não pergunte se a pessoa quer a lição em um commit.
@@ -188,7 +191,7 @@ Se você só anotar o teste, ou só anotar o que a pessoa respondeu, e não edit
 Se você deixar o agente reescrever a mesma lógica em cada caso, a saída muda sem mudança na tarefa.
 
 1. Compare os rastros entre os casos.
-2. Avise a pessoa e proponha um script em `scripts/`, ou em `.agents/scripts/<nome>/` se várias skills usam.
+2. Avise a pessoa e proponha um script em `scripts/`, ou em `.agents/scripts/<nome>/` se várias skills usam, com o nome e o lugar que `definir-arquivos-da-habilidade` manda.
 3. Com o aceite, teste o script uma vez e passe a chamá-lo.
 
 ## Exemplos de entrada e saída
@@ -217,6 +220,7 @@ A skill mudou no repositório de origem e o pull request saiu no mesmo turno, em
 
 ## Pegadinhas
 
+- O nome de um script que você propõe parece livre, ou parece seguir o idioma da skill. Ele segue `definir-arquivos-da-habilidade`, que o quer em inglês mesmo numa skill em português.
 - O push que diz "new branch" para uma branch que já existia mostra que o remoto foi apagado depois do merge. Pare, confira o PR e mova a lição para uma branch nova.
 - Emendar a frase nova no fim do parágrafo parece o menor diff. Um tema novo num parágrafo que já existe vira bloco gigante, e o diff mostra o parágrafo inteiro.
 - A data ou a situação contada pela pessoa parece um parâmetro. É fato do negócio: fica no data source, e a skill guarda só a regra.
