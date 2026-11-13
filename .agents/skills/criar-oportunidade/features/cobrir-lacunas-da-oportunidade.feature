@@ -1,5 +1,5 @@
 # language: pt
-Funcionalidade: Cobrir o ano, a taxa, a oferta, o callout, o local e o link da oportunidade
+Funcionalidade: Cobrir o ano, a taxa, a oferta, o local e o link da oportunidade
   Cada regra vale com os nomes de propriedade do mapeamento de dados do projeto.
 
   Regra: O ano da edição precisa estar num ciclo
@@ -30,13 +30,6 @@ Funcionalidade: Cobrir o ano, a taxa, a oferta, o callout, o local e o link da o
       Quando a skill cadastra a oferta
       Então mantém uma só oportunidade canônica
       E a candidatura vai para as inscrições e a tratativa para as negociações
-
-  Regra: O callout de orientação fica inteiro
-
-    Exemplo: Limpeza do corpo
-      Dado que a página tem um callout de orientações de preenchimento
-      Quando a skill revisa ou migra o corpo
-      Então preserva o callout integralmente
 
   Regra: O local precisa de empresa e localidade confirmadas
 
