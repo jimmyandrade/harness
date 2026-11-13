@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet. A busca na lista de inscrições usa notion-ai-search no servidor notion.
 metadata:
   author: jimmyandrade
-  version: "0.14.0"
+  version: "0.14.1"
   aliases:
     - atualizar-inscricao
   related:
@@ -85,7 +85,9 @@ Formulário colado. Quando a pessoa cola o texto de um formulário de inscriçã
 
 O formulário vai no corpo da inscrição, nunca no da oportunidade. Não use abas, toggles nem blocos colapsáveis: use títulos, negrito, listas e separadores. Cada pergunta vira um título com um parágrafo livre abaixo. A pergunta de escolha vira caixas de seleção `- [ ]`. O item de documentos ou de confirmações vira lista de marcação. O campo com asterisco ganha "(obrigatório)".
 
-Respostas do formulário. A inscrição em nome da empresa usa os contatos da empresa, como o WhatsApp, o e-mail e o site da página dela na lista de empresas, e não os da pessoa que vai participar. Os textos vêm do texto-base de inscrições do negócio. Mostre cada resposta com a fonte dela, para a pessoa corrigir o que estiver desatualizado, e explique na mesma frase o termo do formulário que ela pode não conhecer. O formulário só é enviado com o sim da pessoa. Com esse sim dado, ajustar uma resposta ao formato ou ao limite do campo não pede outro: preencha pelas fontes e pelo texto de exemplo e envie.
+Respostas do formulário. A inscrição em nome da empresa usa os contatos da empresa, como o WhatsApp, o e-mail e o site da página dela na lista de empresas, e não os da pessoa que vai participar. Os textos vêm do texto-base de inscrições do negócio. Mostre cada resposta com a fonte dela, para a pessoa corrigir o que estiver desatualizado, e explique na mesma frase o termo do formulário que ela pode não conhecer.
+
+O formulário só é enviado com o sim da pessoa. Com esse sim dado, ajustar uma resposta ao formato ou ao limite do campo não pede outro: preencha pelas fontes e pelo texto de exemplo e envie.
 
 Antes de redigir, leia em cada campo o rótulo, o texto de exemplo dentro dele e o limite de caracteres. O texto de exemplo costuma mostrar o formato esperado, como "Ajudamos [quem] a [fazer o quê] com [como]": a resposta segue esse formato e cabe no limite. O endereço vai completo, com `https://`, mesmo quando o exemplo o mostra curto. Preencha também o campo opcional quando houver dado nas fontes, porque um formulário mais completo pesa na seleção.
 
