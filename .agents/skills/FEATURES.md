@@ -1961,6 +1961,24 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses registering or updating a term, writing brand text, and inventing a form
 
+### prospectar-oportunidades
+- **Stability**: experimental
+- **Description**: Prospect new opportunities, such as fairs, open calls, and events, in the right place: the active trip's destination, the highest-priority location, or the headquarters
+- **Properties**:
+  - Lives at `.agents/skills/prospectar-oportunidades/SKILL.md`
+  - Is called by the person or by a routine from definir-rotina, and reads the business model canvas and the playbook of fitting opportunities from the project instructions
+  - When the canvas or the playbook is missing from the parameters, searches the connected workspace and suggests what it found; with nothing found, proposes creating the page through an interview and saves it only on the person's yes; a routine run without both pages does not prospect
+  - Picks the target location from a trip inside the active-trip window, then the highest-priority location, then the headquarters, and does not search a vetoed location
+  - Orders opportunity groups by search priority, smallest number first, and treats an empty priority as none, never as high
+  - Stops at the parameters that cap candidates and web searches per run, and says what is left for the next run
+  - Requires a dated source with the year, and skips a weak source, a bare social profile, and a link from another city or event
+  - Hands the existence check to procurar-oportunidade and the registration to criar-oportunidade, and leaves the human decision to the person
+  - For a multi-day opportunity on a trip, registers only the days in common with the trip, without the fair days, through sincronizar-cronograma
+  - Asks whether the person accepts, then offers criar-ideia-de-conteudo, definir-tarefa, and definir-inscricao
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [ ] Three cases validated with the person
+
 ### projetar-caixa
 - **Stability**: experimental
 - **Description**: Project the cash of the next fairs and other opportunities, from each participation's reserve to the period total compared with the recommended safe cash
