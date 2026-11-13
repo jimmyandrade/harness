@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.86.0](https://github.com/jimmyandrade/harness/compare/v1.85.0...v1.86.0) (2026-11-13)
+
+
+### Features
+
+* **acompanhar-resposta-no-whatsapp:** close the loop with our own last message and consult each contact's tone profile ([#1149](https://github.com/jimmyandrade/harness/issues/1149)) ([fffd803](https://github.com/jimmyandrade/harness/commit/fffd8032ffcd059579ed8fb76c4e486fccb083bc))
+* **entregar-rascunho-de-mensagem:** deliver message drafts as a page in the side panel ([#1147](https://github.com/jimmyandrade/harness/issues/1147)) ([6a2586f](https://github.com/jimmyandrade/harness/commit/6a2586f727aae3616d785c1cb4473eaa3c32c789))
+* fall back to the logged-in browser when a connector fails ([#1152](https://github.com/jimmyandrade/harness/issues/1152)) ([99649e3](https://github.com/jimmyandrade/harness/commit/99649e315c6268eac726fd34f3f413002c217947))
+* prefer the command line, the API and the MCP before the Chrome, and register people and companies in that order ([#1143](https://github.com/jimmyandrade/harness/issues/1143)) ([6dd12c2](https://github.com/jimmyandrade/harness/commit/6dd12c2cf99c861f5738bfc13f2136a138b77ec9))
+* **transcrever-audio-e-video:** add batch script and measured times ([#1150](https://github.com/jimmyandrade/harness/issues/1150)) ([0be04d1](https://github.com/jimmyandrade/harness/commit/0be04d1c6bf054e2d794fe7f81a272413a742f5a))
+* **usar-whatsapp-web:** follow the human attendant window and keep contact communication notes ([#1145](https://github.com/jimmyandrade/harness/issues/1145)) ([dd3e5a1](https://github.com/jimmyandrade/harness/commit/dd3e5a139a1f5cdfe903266dc4aad7cc42ae82a8))
+
+
+### Bug Fixes
+
+* **conversar-no-whatsapp:** stay in a flowing conversation instead of proposing email ([#1146](https://github.com/jimmyandrade/harness/issues/1146)) ([569d36d](https://github.com/jimmyandrade/harness/commit/569d36da6cf55eb81b99fa6f1b8b8795b37d559f))
+* **pedir-revisao-de-pr-no-slack:** point the preview link at the changed stories ([#1144](https://github.com/jimmyandrade/harness/issues/1144)) ([2c15bce](https://github.com/jimmyandrade/harness/commit/2c15bcecadcb19b69b2634580bde58959cfc6daa))
+* **rotular-item:** always apply the context label together with the status ([#1151](https://github.com/jimmyandrade/harness/issues/1151)) ([58132db](https://github.com/jimmyandrade/harness/commit/58132db7337814220755d77ad27153ae4f968c00))
+
 ## [1.85.0](https://github.com/jimmyandrade/harness/compare/v1.84.0...v1.85.0) (2026-11-13)
 
 
