@@ -66,6 +66,7 @@ flowchart LR
     definir_jornada_de_producao["definir-jornada-de-producao"]
     definir_lancamento_financeiro["definir-lancamento-financeiro"]
     definir_link_rastreavel["definir-link-rastreavel"]
+    definir_local_fisico["definir-local-fisico"]
     definir_localidade_geografica["definir-localidade-geografica"]
     definir_lote_de_ingresso["definir-lote-de-ingresso"]
     definir_medicao_de_metrica["definir-medicao-de-metrica"]
@@ -404,6 +405,10 @@ flowchart LR
   definir_lancamento_financeiro --> gerenciar_estoque
   definir_lancamento_financeiro --> lancar_despesa_da_empresa
   definir_lancamento_financeiro --> revisar_financas
+  definir_local_fisico --> definir_empresa
+  definir_local_fisico --> definir_grafia
+  definir_local_fisico --> definir_localidade_geografica
+  definir_local_fisico --> identificar_duplicata
   definir_localidade_geografica --> definir_empresa
   definir_localidade_geografica --> definir_grafia
   definir_localidade_geografica --> identificar_duplicata
