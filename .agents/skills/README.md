@@ -75,7 +75,7 @@ flowchart LR
     definir_perfil_social["definir-perfil-social"]
     definir_pessoa["definir-pessoa"]
     definir_planejamento_financeiro["definir-planejamento-financeiro"]
-    definir_playbook["definir-playbook"]
+    definir_politica["definir-politica"]
     definir_post_mortem["definir-post-mortem"]
     definir_preco_de_produto["definir-preco-de-produto"]
     definir_recurso_de_aprendizado["definir-recurso-de-aprendizado"]
@@ -308,6 +308,7 @@ flowchart LR
   definir_arquivos_da_habilidade --> criar_habilidade
   definir_artigo_da_base_de_conhecimento --> criar_habilidade
   definir_artigo_da_base_de_conhecimento --> definir_historia_de_usuario
+  definir_artigo_da_base_de_conhecimento --> definir_politica
   definir_artigo_da_base_de_conhecimento --> definir_tarefa
   definir_artista --> definir_empresa
   definir_artista --> definir_perfil_social
@@ -422,9 +423,10 @@ flowchart LR
   definir_planejamento_financeiro --> definir_lancamento_financeiro
   definir_planejamento_financeiro --> gerenciar_estoque
   definir_planejamento_financeiro --> revisar_financas
-  definir_playbook --> definir_tarefa
-  definir_playbook --> delegar_aviso_de_plataforma
-  definir_playbook --> formalizar_decisao
+  definir_politica --> definir_artigo_da_base_de_conhecimento
+  definir_politica --> definir_tarefa
+  definir_politica --> delegar_aviso_de_plataforma
+  definir_politica --> formalizar_decisao
   definir_post_mortem --> definir_tarefa
   definir_preco_de_produto --> gerenciar_estoque
   definir_recurso_de_aprendizado --> definir_agenda
@@ -481,7 +483,7 @@ flowchart LR
   definir_vocabulario --> redigir_com_tom_de_voz
   definir_vocabulario --> validar_plano_de_vocabulario
   delegar_aviso_de_plataforma --> definir_campanha_de_conteudo
-  delegar_aviso_de_plataforma --> definir_playbook
+  delegar_aviso_de_plataforma --> definir_politica
   delegar_aviso_de_plataforma --> definir_tarefa
   delegar_aviso_de_plataforma --> organizar_emails
   delegar_aviso_de_plataforma --> procurar_tarefa

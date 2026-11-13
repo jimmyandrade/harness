@@ -1,15 +1,15 @@
 ---
 name: delegar-aviso-de-plataforma
-description: Transforma cada aviso de plataforma onde o negócio vende ou divulga, como campanha de vendas, missão de LIVE, regra nova ou pendência da conta, em campanha, tarefa ou playbook com responsável e prazo. Usada quando a triagem acha um aviso de marketplace, rede social ou loja virtual. NÃO serve para oportunidade de evento, posts nem decidir a participação.
+description: Transforma cada aviso de plataforma onde o negócio vende ou divulga, como campanha de vendas, missão de LIVE, regra nova ou pendência da conta, em campanha, tarefa ou política com responsável e prazo. Usada quando a triagem acha um aviso de marketplace, rede social ou loja virtual. NÃO serve para oportunidade de evento, posts nem decidir a participação.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   related:
     - organizar-emails
     - definir-campanha-de-conteudo
     - definir-tarefa
     - procurar-tarefa
-    - definir-playbook
+    - definir-politica
     - rotular-item
     - evoluir-habilidade
 ---
@@ -41,7 +41,7 @@ Classifique o aviso pelo que ele pede ao negócio.
 ```mermaid
 flowchart LR
   A{O aviso traz?} -->|campanha ou missão com janela futura| C[definir-campanha-de-conteudo e definir-tarefa]
-  A -->|regra, taxa, prazo ou requisito novo| P[definir-playbook]
+  A -->|regra, taxa, prazo ou requisito novo| P[definir-politica]
   A -->|pendência da conta| T[definir-tarefa]
   A -->|campanha com janela passada| R[Relatório: perdida]
   A -->|propaganda sem janela nem regra| X[Concluída]
@@ -53,7 +53,7 @@ Na mesma rodada, siga `procurar-tarefa` e, sem tarefa, `definir-tarefa`, com o r
 
 A tarefa da campanha traz o que a plataforma exige para entrar: prazo de inscrição, preço-alvo, estoque, anúncios e as LIVEs com missão e duração. Quando a plataforma cria anúncio automático e cobra do negócio quem não configura a tempo, isso vai em destaque na tarefa. Um prazo da plataforma que já passou também vai em destaque, e a tarefa pede a decisão antes de inscrever qualquer produto.
 
-Mudança de política, taxa, prazo, métrica ou requisito segue `definir-playbook`, com a regra, a data de vigência e o link do aviso. Quando a regra pede uma ação até uma data, também vira tarefa.
+Mudança de política, taxa, prazo, métrica ou requisito segue `definir-politica`, com a regra, a data de vigência e o link do aviso. Quando a regra pede uma ação até uma data, também vira tarefa.
 
 Pendência da conta, como aprovação que pede o primeiro produto, documento ou verificação, segue `procurar-tarefa` e `definir-tarefa`.
 
@@ -81,11 +81,11 @@ Se você marcar como concluído o convite de campanha ou de LIVE, o negócio só
 2. Crie ou atualize a campanha e a tarefa com responsável e prazo.
 3. Deixe a conversa com ação pendente até a tarefa terminar.
 
-### Regra nova sem playbook
+### Regra nova sem política
 
 Se você só etiquetar a mudança de política, o processo do negócio continua com a regra antiga.
 
-1. Siga `definir-playbook` com a regra, a vigência e o link.
+1. Siga `definir-politica` com a regra, a vigência e o link.
 2. Crie a tarefa quando a regra pede ação até uma data.
 
 ### Tarefa repetida
@@ -105,7 +105,7 @@ A campanha entrou com a janela da plataforma como âncora. A tarefa saiu com o r
 
 ### a plataforma reduziu o prazo de revisão de reembolso para 2 dias úteis
 
-O playbook de atendimento ganhou a regra nova, com a vigência e o link do aviso. Como a loja ainda não tinha pedido, não saiu tarefa. A conversa ficou concluída.
+A política de devolução ganhou a regra nova, com a vigência e o link do aviso. Como a loja ainda não tinha pedido, não saiu tarefa. A conversa ficou concluída.
 
 ## Casos-limite
 
