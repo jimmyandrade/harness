@@ -60,7 +60,7 @@ A linha nova nasce do modelo de página padrão da lista, quando a lista tem um,
 
 Quem fez a inscrição é a pessoa que pediu, mesmo quando o Claude preencheu e enviou, e não o usuário da conexão do agente. A tela de confirmação do envio de um formulário entra nos comprovantes sem perguntar.
 
-Quando a mensagem ou a foto confirma a participação, o status da inscrição passa ao de inscrição confirmada. Se a própria plataforma avisa que registrar interesse não garante participação, o status é o de pré-cadastro até a organização selecionar. O valor é um status que a lista já tem. Não invente status. Não escreva o status nas observações nem no corpo.
+Quando a mensagem ou a foto confirma a participação, ou a taxa já foi paga, inteira ou em parcela, o status da inscrição passa ao de inscrição confirmada. Se a própria plataforma avisa que registrar interesse não garante participação, o status é o de pré-cadastro até a organização selecionar. O valor é um status que a lista já tem. Não invente status. Não escreva o status nas observações nem no corpo.
 
 A foto do pedido que ela enviou entra nos comprovantes na mesma gravação, mesmo sem ela nomear essa propriedade. Não grave a foto no corpo. O arquivo sobe por upload e entra numa atualização da página depois de criá-la: a criação não aceita o arquivo enviado.
 
