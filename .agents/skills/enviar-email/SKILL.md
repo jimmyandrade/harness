@@ -3,7 +3,7 @@ name: enviar-email
 description: Monta e envia um e-mail em nome de uma pessoa, com a assinatura certa, o destinatário principal e as cópias, o anexo vindo do Notion e o envio só com o sim. Usada quando uma pessoa contata uma organização por e-mail, inclusive com comprovante. Não serve para escrever no tom da marca, achar um e-mail nem triar a caixa.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.6.0"
   related:
     - definir-pessoa
     - acompanhar-retornos-pendentes
@@ -183,6 +183,8 @@ Mostrei tudo e esperei o sim.
 - O aviso do e-mail sobre destinatário de fora da organização é esperado quando a pessoa escreve a uma empresa. Ele não indica problema.
 - Um endereço de e-mail que escreveu em nome da organização pode ser só de envio automático e não receber resposta. Verifique antes de pô-lo em cópia.
 - Um endereço diferente do cadastro parece só um detalhe. A organização pode desconfiar dele e travar o atendimento, então o texto explica o motivo e pergunta se ela pode responder ali.
+- No conector de e-mail, o arquivo anexado por referência só vai no envio com `replyToMessageId` e o endereço em `to`, sem `replyThreadId`. O rascunho de resposta não o aceita.
+- O comprovante que uma conversa de WhatsApp pede por e-mail segue a conversa de e-mail da organização, com o arquivo anexado, sem pedir que a pessoa copie ou anexe.
 - O nome do arquivo anexado é lido pelo destinatário. Use um nome que diga o que é e a data.
 - O e-mail da empresa pode ser o de contato de uma pessoa, e a organização cadastrou outro endereço dela. Sem o endereço do cadastro em cópia, a resposta pode ir para o lugar errado.
 
