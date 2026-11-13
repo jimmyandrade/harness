@@ -118,8 +118,15 @@ Funcionalidade: Preço de produto
     Exemplo: Banco do histórico de preços não definido
       Dado que as instruções do projeto não definem o banco do histórico de preços
       Quando a habilidade precisa ler ou acrescentar uma linha
-      Então ela pergunta à pessoa qual é o banco
+      Então ela chama a habilidade de procurar banco de dados
+      E diz a ela para que serve o banco e quais propriedades ele precisa ter
       Mas não usa um nome de banco próprio
+
+    Exemplo: Banco de produtos ou de variações não definido
+      Dado que as instruções do projeto não definem o banco de produtos ou o de variações
+      Quando a habilidade precisa ler o produto ou a variação
+      Então ela chama a habilidade de procurar banco de dados
+      Mas não pergunta o nome à pessoa antes
 
   Regra: o destino do preço de um ponto de venda não é escolhido pela habilidade
 

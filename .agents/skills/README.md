@@ -180,6 +180,7 @@ flowchart LR
   acompanhar_producao_de_produto --> definir_tarefa
   acompanhar_producao_de_produto --> gerenciar_estoque
   acompanhar_producao_de_produto --> identificar_duplicata
+  acompanhar_producao_de_produto --> procurar_banco_de_dados
   acompanhar_resposta_no_whatsapp --> acompanhar_retornos_pendentes
   acompanhar_resposta_no_whatsapp --> conversar_no_whatsapp
   acompanhar_resposta_no_whatsapp --> definir_rotina
@@ -313,6 +314,7 @@ flowchart LR
   definir_aplicacao_textil --> definir_composicao_textil
   definir_aplicacao_textil --> definir_estampa
   definir_aplicacao_textil --> identificar_duplicata
+  definir_aplicacao_textil --> procurar_banco_de_dados
   definir_arquivos_da_habilidade --> criar_habilidade
   definir_artigo_da_base_de_conhecimento --> criar_habilidade
   definir_artigo_da_base_de_conhecimento --> definir_historia_de_usuario
@@ -338,6 +340,7 @@ flowchart LR
   definir_composicao_textil --> definir_tarefa
   definir_composicao_textil --> definir_tecido
   definir_composicao_textil --> identificar_duplicata
+  definir_composicao_textil --> procurar_banco_de_dados
   definir_conta_bancaria --> definir_empresa
   definir_conta_bancaria --> definir_pessoa
   definir_conta_bancaria --> identificar_duplicata
@@ -355,6 +358,7 @@ flowchart LR
   definir_estampa --> definir_composicao_textil
   definir_estampa --> definir_tecido
   definir_estampa --> identificar_duplicata
+  definir_estampa --> procurar_banco_de_dados
   definir_filtro_de_email --> organizar_emails
   definir_filtro_de_email --> rotular_item
   definir_fonograma --> definir_obra_musical
@@ -402,6 +406,7 @@ flowchart LR
   definir_medicao_de_metrica --> reconhecer_imagem
   definir_negociacao --> definir_agenda
   definir_negociacao --> organizar_ponto_de_contato
+  definir_negociacao --> procurar_banco_de_dados
   definir_negociacao --> procurar_email
   definir_negociacao --> redigir_com_tom_de_voz
   definir_negociacao --> sincronizar_cronograma
@@ -437,6 +442,7 @@ flowchart LR
   definir_politica --> formalizar_decisao
   definir_post_mortem --> definir_tarefa
   definir_preco_de_produto --> gerenciar_estoque
+  definir_preco_de_produto --> procurar_banco_de_dados
   definir_recurso_de_aprendizado --> definir_agenda
   definir_recurso_de_aprendizado --> procurar_agenda
   definir_reel_do_instagram --> criar_ideia_de_conteudo
@@ -466,6 +472,7 @@ flowchart LR
   definir_tecido --> definir_tarefa
   definir_tecido --> gerenciar_estoque
   definir_tecido --> identificar_duplicata
+  definir_tecido --> procurar_banco_de_dados
   definir_tipo_do_evento --> criar_oportunidade
   definir_tipo_do_evento --> definir_agenda
   definir_tipo_do_evento --> definir_agenda_de_popstar
@@ -593,6 +600,7 @@ flowchart LR
   lancar_venda --> gerenciar_estoque
   lancar_venda --> identificar_duplicata
   lancar_venda --> lancar_despesa_da_empresa
+  lancar_venda --> procurar_banco_de_dados
   lancar_venda --> registrar_ciclo_do_ativo
   levantar_ambiente_do_repositorio --> criar_commit
   levantar_ambiente_do_repositorio --> criar_pull_request
@@ -707,6 +715,7 @@ flowchart LR
   projetar_caixa --> definir_planejamento_financeiro
   projetar_caixa --> lancar_despesa_da_empresa
   projetar_caixa --> organizar_ponto_de_contato
+  projetar_caixa --> procurar_banco_de_dados
   projetar_caixa --> revisar_financas
   publicar_resposta_de_revisao --> atender_revisao_de_pull_request
   publicar_resposta_de_revisao --> definir_pessoa

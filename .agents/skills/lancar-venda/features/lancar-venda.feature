@@ -179,3 +179,12 @@ Funcionalidade: Lançar venda
       Então o ponto de contato guarda onde a venda aconteceu e a retirada fica em local da retirada
       Mas origem do estoque, destino do envio e local de processamento não ocupam esses campos
       E a habilidade sugere a propriedade que falta e espera o sim
+
+  Regra: o banco vazio chama a procura de banco
+
+    Exemplo: Banco de vendas não definido
+      Dado que as instruções do projeto não definem o banco de vendas
+      Quando a habilidade precisa ler ou gravar uma venda
+      Então ela chama a habilidade de procurar banco de dados
+      E diz a ela para que serve o banco e quais propriedades ele precisa ter
+      Mas não pergunta o nome à pessoa antes

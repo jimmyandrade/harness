@@ -108,3 +108,12 @@ Funcionalidade: Registrar a conversa com uma empresa ou pessoa
       E que as instruções do projeto não definem esse parâmetro
       Quando a pessoa pede o registro
       Então a habilidade para e pede o nome, sem adivinhar nem usar um nome padrão
+
+  Regra: a lista sem nome chama a procura de banco
+
+    Exemplo: Lista de negociações sem nome
+      Dado que o mapeamento do projeto não traz o nome de uma lista que a habilidade usa
+      Quando a habilidade precisa ler ou gravar nela
+      Então ela chama a habilidade de procurar banco de dados
+      E diz a ela para que serve o banco e quais propriedades ele precisa ter
+      Mas não pergunta o nome à pessoa antes

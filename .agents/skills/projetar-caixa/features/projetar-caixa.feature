@@ -138,3 +138,12 @@ Funcionalidade: Projetar o caixa das próximas participações
       Quando a habilidade identifica a falta
       Então ela diz a limitação ou recomenda o campo na resposta
       Mas não cria, renomeia, exclui nem reconfigura a estrutura dos bancos
+
+  Regra: o banco vazio chama a procura de banco
+
+    Exemplo: Banco de oportunidades ou de localidades não definido
+      Dado que as instruções do projeto não definem o banco de oportunidades ou o de localidades
+      Quando a habilidade precisa consultá-lo
+      Então ela chama a habilidade de procurar banco de dados
+      E diz a ela para que serve o banco e quais propriedades ele precisa ter
+      Mas não pergunta o nome à pessoa antes
