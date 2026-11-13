@@ -29,7 +29,7 @@ Quem chamou diz o nome do parâmetro vazio, para que serve o banco e as propried
 
 ### Passo 2
 
-Procure só entre bancos, pelo nome do parâmetro e por sinônimos curtos. Não varra o conteúdo das páginas nem o workspace inteiro: essa busca gasta mais créditos. Banco na lixeira ou arquivado não conta.
+Procure só entre bancos, pelo nome do parâmetro e por sinônimos curtos. Não varra o conteúdo das páginas nem o workspace inteiro: essa busca gasta mais créditos. Procure primeiro entre os bancos ativos.
 
 Leia a estrutura de cada candidato e compare com as propriedades que quem chamou pediu. O nome parecido não basta: um banco sem as propriedades essenciais fica fora. Não use o banco de outro workspace.
 
@@ -39,10 +39,14 @@ Leia a estrutura de cada candidato e compare com as propriedades que quem chamou
 flowchart LR
   Q{Quantos bancos servem?} -->|um| U[Use e diga qual, com o link]
   Q -->|mais de um| C[Mostre e peça a escolha]
-  Q -->|nenhum| N[Peça o banco ou sugira criá-lo]
+  Q -->|nenhum ativo| T[Procure na lixeira e nos arquivados]
+  T -->|achou| R[Mostre e pergunte se restaura]
+  T -->|nada| N[Peça o banco ou sugira criá-lo]
 ```
 
-Um só: devolva-o com o link e diga qual usou, sem perguntar o nome. Mais de um de nome igual ou parecido: mostre cada um, com o nome, o link e as propriedades, e peça a escolha. Nenhum: peça que a pessoa informe o banco e sugira criá-lo, com o nome e as propriedades esperadas. Não crie sem o sim.
+Um só: devolva-o com o link e diga qual usou, sem perguntar o nome. Mais de um de nome igual ou parecido: mostre cada um, com o nome, o link e as propriedades, e peça a escolha. Nenhum ativo: procure então na lixeira e entre os arquivados, pelo mesmo nome. Um banco achado ali pode ter sido apagado ou arquivado por engano: mostre-o, com o link e onde está, diga isso e pergunte se a pessoa o restaura. Não o restaure nem o use sem o sim.
+
+Se a ferramenta não alcança a lixeira nem os arquivados, pergunte se o banco foi arquivado ou apagado. Nada, nem ali: peça que a pessoa informe o banco e sugira criá-lo, com o nome e as propriedades esperadas. Não crie sem o sim.
 
 ### Passo 4
 
@@ -70,6 +74,14 @@ Se você devolver um banco só porque o nome lembra o pedido, a escrita cai num 
 1. Leia a estrutura de cada candidato.
 2. Compare com as propriedades pedidas.
 3. Descarte o que não tem as essenciais.
+
+### Lixeira e arquivados ignorados
+
+Se você sugerir criar um banco sem olhar a lixeira e os arquivados, o banco apagado ou arquivado por engano fica perdido e o workspace ganha um repetido.
+
+1. Sem banco ativo, procure na lixeira e entre os arquivados.
+2. Se a ferramenta não alcança, pergunte à pessoa se o banco foi arquivado ou apagado.
+3. Restaure só com o sim.
 
 ### Banco criado sem o sim
 
@@ -99,18 +111,24 @@ Mostrei os dois, com o link e as propriedades de cada um, e pedi que a pessoa es
 
 ### Nenhum banco de textos de etiqueta
 
-Não achei candidato. Pedi que a pessoa informasse o banco e sugeri criá-lo, com o nome e as propriedades. Não criei antes do sim.
+Não achei candidato entre os ativos e procurei na lixeira e nos arquivados. Nada. Pedi que a pessoa informasse o banco e sugeri criá-lo, com o nome e as propriedades. Não criei antes do sim.
+
+### O banco de tecidos não está entre os ativos
+
+Achei um banco com esse nome na lixeira, com as propriedades certas. Mostrei o link, disse que pode ter sido apagado por engano e perguntei se a pessoa o restaura. Não o restaurei antes do sim.
 
 ## Casos-limite
 
 - Não há workspace conectado: diga isso e peça o banco à pessoa.
 - Um banco que serve está em outro workspace: não o use.
+- Um banco ativo e outro igual na lixeira: use o ativo e não procure na lixeira.
 - O campo do tipo esperado não existe no banco: sugira criá-lo e espere o sim.
 - Quem chamou não disse as propriedades esperadas: peça a ela antes de comparar.
 
 ## Pegadinhas
 
 - O banco achado parece o banco certo pelo nome. Só as propriedades dizem.
+- A falta de banco ativo parece provar que ele não existe. Ele pode estar na lixeira ou arquivado por engano.
 - Procurar parece grátis. A busca no workspace inteiro gasta créditos.
 - O valor achado parece poder ser gravado para a próxima vez. Quem fixa o parâmetro é a pessoa.
 - Dois bancos parecidos parecem pedir que se escolha o mais novo. A escolha é da pessoa.

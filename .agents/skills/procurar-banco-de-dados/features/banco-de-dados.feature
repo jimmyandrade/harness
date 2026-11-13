@@ -39,8 +39,27 @@ Funcionalidade: Banco de dados
 
   Regra: sem banco, a pessoa informa ou autoriza criar
 
-    Exemplo: Nenhum banco serve
-      Dado que nenhum banco do workspace conectado serve
+    Exemplo: Nenhum banco ativo serve
+      Dado que nenhum banco ativo do workspace conectado serve
+      Quando a habilidade termina a busca entre os ativos
+      Então ela procura o banco na lixeira e entre os arquivados
+
+    Exemplo: Banco achado na lixeira ou arquivado
+      Dado que um banco que serve está na lixeira ou arquivado
+      Quando a habilidade o acha
+      Então ela mostra o banco, com o link e onde ele está
+      E diz que ele pode ter sido apagado ou arquivado por engano
+      E pergunta à pessoa se o restaura
+      Mas não o restaura nem o usa sem o sim
+
+    Exemplo: A ferramenta não alcança a lixeira
+      Dado que a ferramenta conectada não procura na lixeira nem nos arquivados
+      Quando a habilidade termina a busca entre os ativos sem achar
+      Então ela pergunta à pessoa se o banco foi arquivado ou apagado
+      E só depois pede que ela informe o banco
+
+    Exemplo: Nenhum banco, nem na lixeira
+      Dado que nenhum banco serve, nem na lixeira nem entre os arquivados
       Quando a habilidade termina a busca
       Então ela pede à pessoa que informe o banco
       E sugere criá-lo, com o nome e as propriedades esperadas
@@ -65,10 +84,11 @@ Funcionalidade: Banco de dados
       Então ela busca entre os bancos, pelo nome e por sinônimos curtos
       Mas não varre o conteúdo das páginas nem o workspace inteiro
 
-    Exemplo: Banco na lixeira ou arquivado
-      Dado que um banco que serve está na lixeira ou arquivado
+    Exemplo: Banco ativo e banco na lixeira
+      Dado que há um banco ativo que serve e outro igual na lixeira
       Quando a habilidade confere os candidatos
-      Então ela não o conta como candidato
+      Então ela usa o banco ativo
+      Mas não procura na lixeira
 
   Regra: um campo dentro do banco segue o mesmo caminho
 
