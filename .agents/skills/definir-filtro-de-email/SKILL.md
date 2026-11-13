@@ -3,7 +3,7 @@ name: definir-filtro-de-email
 description: Cria, edita e confere filtros de e-mail. Testa o critério na conta, escolhe as ações sem esconder o que a pessoa quer ver e lê o filtro salvo de volta. Usada quando a triagem pede um filtro ou a pessoa quer mudar um. Não serve para classificar mensagens nem cancelar assinatura.
 metadata:
   author: jimmyandrade
-  version: "0.7.0"
+  version: "0.8.0"
   related:
     - organizar-emails
     - evoluir-habilidade
@@ -44,6 +44,8 @@ O critério lista os endereços exatos do remetente, ou o subdomínio dedicado a
 O domínio inteiro só serve quando nenhuma pessoa escreve dele: numa organização grande, ele traz também o e-mail de um funcionário a muitos destinatários.
 
 Quando o remetente muda de endereço, o novo entra com `OR` e o antigo fica, para o filtro continuar pegando o histórico.
+
+Todo remetente das conversas triadas ganha um filtro, mesmo o que mandou uma mensagem só. Pouco volume não dispensa o filtro: o remetente avulso de hoje pode mandar muito amanhã, e sem filtro as mensagens dele chegam sem etiqueta.
 
 Pouca ou nenhuma conversa atingida não é motivo para excluir um filtro: o volume do remetente pode crescer depois. Confira se o endereço do critério é o que o remetente usa e mantenha o filtro. Exclua um filtro só quando a pessoa pedir. Substituir um filtro por uma versão nova, como na importação por arquivo, também exclui o antigo e segue a mesma regra.
 
@@ -115,6 +117,14 @@ Se você trocar o endereço antigo pelo novo no critério, as próximas mensagen
 2. Acrescente o novo com `OR`.
 3. Teste o critério na busca antes de salvar.
 
+### Cauda longa sem filtro
+
+Se você filtrar só os remetentes que mandam muito e deixar de fora os que mandaram uma ou duas mensagens, as conversas deles ficam sem etiqueta, e o remetente que começar a mandar mais chega sem regra.
+
+1. Leve ao plano todo remetente das conversas sem etiqueta, até a consulta delas voltar vazia ou só com perguntas à pessoa.
+2. Crie um filtro para cada remetente, mesmo com uma mensagem só.
+3. Remetente que a triagem não classifica vai à pessoa com a pergunta. Não o declare fora do escopo.
+
 ### Filtro excluído por pouco volume
 
 Se você propor excluir um filtro porque ele quase não pega mensagens, a caixa fica sem regra quando o remetente passar a mandar mais.
@@ -146,6 +156,7 @@ O filtro procurava o endereço antigo e os e-mails chegam de outro domínio. O c
 ## Casos-limite
 
 - O conector não cria filtro e o navegador pede login: o gerenciador de senhas conectado preenche, ou, sem ele, a pessoa entra, e o filtro sai pelo navegador.
+- O remetente mandou uma mensagem só: ele ganha o filtro do mesmo jeito.
 - O critério não atinge nenhuma conversa: o filtro fica. Confira se o endereço está certo e, com o remetente usando outro, acrescente-o com `OR`.
 - O filtro precisa de duas etiquetas: crie dois filtros com o mesmo critério.
 

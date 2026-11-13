@@ -3,7 +3,7 @@ name: organizar-emails
 description: Organiza e-mails por BASB e separa pessoal, trabalho e misto. Usada quando a pessoa quer triar a caixa, etiquetar ou configurar filtros. Não serve para responder mensagens, lançar despesas nem acompanhar veículos.
 metadata:
   author: jimmyandrade
-  version: "0.21.1"
+  version: "0.22.0"
   related:
     - procurar-email
     - evoluir-habilidade
@@ -218,7 +218,7 @@ Antes de alterações em lote ou de filtros, grave um plano estruturado com cont
 
 Execute apenas ações autorizadas; mantenha os casos não resolvidos fora do lote de ações, sem arquivar nem marcar como lido, e apresente cada um à pessoa com a pergunta.
 
-Toda conversa que a habilidade processa recebe ao menos uma etiqueta de usuário, mesmo a arquivada ou a de confirmação automática: nenhuma sai sem etiqueta.
+Toda conversa sem etiqueta passa pela triagem e recebe etiqueta de usuário, mesmo a arquivada. Todo remetente ganha filtro, mesmo o avulso.
 
 Aplique as etiquetas do plano por `rotular-item`, conforme o Passo 4, passando cada etiqueta pelo nome e pelo identificador que a conta retornou. Use os identificadores opacos completos das conversas na conta correspondente.
 
