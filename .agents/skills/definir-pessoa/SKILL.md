@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.16.6"
+  version: "0.17.0"
   related:
     - definir-empresa
     - definir-grafia
@@ -92,6 +92,8 @@ Com `Cadastro na loja` em `sim`, crie ou atualize o cliente na loja com o nome, 
 Todo perfil social que a pessoa informar, em link, print ou handle, como o LinkedIn ou o Instagram, é cadastrado por `definir-perfil-social` na mesma resposta e relacionado nos perfis sociais relacionados. O link do perfil nunca vai nas notas, e a skill não deixa o perfil de fora.
 
 Não grave o print no corpo.
+
+Antes de gravar, leia a descrição de cada propriedade no esquema da lista: ela diz o que é obrigatório e o que não vai em cada campo. Preencha a localidade com a cidade que a fonte sustenta, como a do perfil comercial do contato.
 
 Grave como confirmado só o que veio direto da pessoa que usa a habilidade ou de uma fonte que respondeu com certeza. Nunca invente papel, time nem apelido. Sem e-mail em nenhuma fonte, o e-mail fica como pendência no registro.
 
