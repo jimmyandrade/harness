@@ -3,11 +3,12 @@ name: sugerir-enquete-de-publico
 description: Use essa habilidade sempre que for sugerir uma enquete ou pergunta para conhecer o público de um negócio, como a cidade, o repertório ou o interesse em participar, mesmo sem dizer enquete. NÃO use para escrever a copy final, publicar, cadastrar a ideia ou o post, nem definir a campanha.
 metadata:
   author: jimmyandrade
-  version: "0.2.1"
+  version: "0.2.2"
   related:
     - conversar-no-whatsapp
     - criar-ideia-de-conteudo
     - definir-campanha-de-conteudo
+    - definir-grafia
     - definir-localidade-geografica
     - evoluir-habilidade
     - redigir-com-tom-de-voz
@@ -67,6 +68,8 @@ Peça a pergunta final e as variações a `redigir-com-tom-de-voz`, com o `Banco
 Entregue, nesta ordem, o objetivo de aprendizado, a ideia usada, o canal e o formato recomendados, a pergunta final, as opções, uma justificativa curta do que a enquete descobre e da decisão futura que apoia, e variações controladas quando fizerem sentido. A skill só entrega a enquete pronta, com a pergunta e as opções. O envio no WhatsApp segue `conversar-no-whatsapp` e `usar-whatsapp-web`, e só com o sim da pessoa.
 
 Quando a enquete serve a uma ação, como entregar algo, convidar ou organizar um encontro, a pergunta sozinha não basta. Entregue também uma mensagem de contexto, antes da enquete, com o que é oferecido, quem o fez e qual é o papel do negócio nisso, o limite (como poucas unidades), como a pessoa recebe ou participa e quando e onde. Esses fatos vêm da pessoa ou da fonte do projeto: pergunte o que faltar e não invente autoria, data, local nem quantidade. As opções podem juntar interesse e praça, e quem for de fora das praças responde no grupo.
+
+Nome de pessoa ou de organização na mensagem sai na grafia canônica do cadastro, conferida com `definir-grafia`. Nome que não está no cadastro: avise e não escolha a grafia pelo que a conversa escreveu.
 
 ### Passo 8
 
