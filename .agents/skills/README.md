@@ -411,6 +411,7 @@ flowchart LR
   definir_perfil_social --> definir_pessoa
   definir_perfil_social --> identificar_duplicata
   definir_perfil_social --> mesclar_registro
+  definir_pessoa --> conversar_no_whatsapp
   definir_pessoa --> definir_empresa
   definir_pessoa --> definir_grafia
   definir_pessoa --> definir_perfil_social
