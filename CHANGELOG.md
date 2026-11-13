@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.82.0](https://github.com/jimmyandrade/harness/compare/v1.81.0...v1.82.0) (2026-11-13)
+
+
+### Features
+
+* **bloquear-remetente-de-spam:** hand over the link of each admin screen next to its list ([#1126](https://github.com/jimmyandrade/harness/issues/1126)) ([d7e27fb](https://github.com/jimmyandrade/harness/commit/d7e27fb339ed8e9e17998b78303ef1c119876c2c))
+
 ## [1.81.0](https://github.com/jimmyandrade/harness/compare/v1.80.0...v1.81.0) (2026-11-13)
 
 
