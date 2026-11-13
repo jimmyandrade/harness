@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.40.1"
+  version: "0.40.2"
   aliases:
     - redigir-mensagem-de-whatsapp
   related:
@@ -93,6 +93,8 @@ flowchart LR
 Para registrar a demanda, leve a data e o horário da primeira mensagem do pedido como data da demanda.
 
 ### Passo 5
+
+Uma empresa que a pessoa só conhece pelo site ou pela busca pode já estar salva no WhatsApp dela, com histórico. Antes do primeiro contato, procure a conversa pelo nome e pelo número. Achada, leia o histórico e continue a conversa, em vez de escrever como se fosse a primeira.
 
 Antes de rascunhar, leia a conversa de destino desde a última mensagem lida, pelo Passo 2, e confira cada pergunta do rascunho contra ela inteira, inclusive a mensagem citada. A pergunta já respondida sai, mesmo quando outra fonte mais antiga diverge: mostre a divergência à pessoa, não ao contato. Sai também a que o site ou o cadastro da empresa já responde, como o horário de funcionamento. Tire também o que já foi dito e diga antes o que o texto acrescenta. Se tudo já foi dito, diga isso e não rascunhe.
 
