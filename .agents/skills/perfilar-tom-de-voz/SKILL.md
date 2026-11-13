@@ -3,7 +3,7 @@ name: perfilar-tom-de-voz
 description: Perfila o tom de voz de uma pessoa ou de um canal a partir de uma amostra real de mensagens e registra os padrões no vocabulário, com a etiqueta da pessoa ou do canal. Usada quando a pessoa pede para perfilar como alguém conversa ou o tom de um canal. Não serve para escrever texto, cadastrar um termo solto nem perfilar sem pedido.
 metadata:
   author: jimmyandrade
-  version: "0.1.2"
+  version: "0.2.0"
   related:
     - definir-vocabulario
     - evoluir-habilidade
@@ -42,6 +42,8 @@ Extraia os padrões observáveis, só os que se repetem. De uma pessoa: saudaç�
 ### Passo 4
 
 Escreva um resumo curto do tom em `Onde guardar o resumo do tom`. Registre com `definir-vocabulario` só os padrões concretos e recorrentes, com a etiqueta da pessoa ou do canal, e prefira termos pequenos e reutilizáveis a frases inteiras: se uma frase decompõe em fragmentos, cada fragmento vira o próprio termo. Mantenha a frase inteira só quando ela é uma expressão fixa que perde o sentido se partida.
+
+O resumo fica onde `Onde guardar o resumo do tom` manda, como as notas do contato no WhatsApp e o cadastro da pessoa. Quem for escrever para ela consulta esse resumo, por `redigir-com-tom-de-voz`.
 
 ### Passo 5
 
