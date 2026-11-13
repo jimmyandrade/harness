@@ -4,7 +4,7 @@ description: Cria, revisa e atualiza os objetivos e os key results de uma área 
 compatibility: Precisa de Python quando a execução é local.
 metadata:
   author: jimmyandrade
-  version: "0.3.3"
+  version: "0.4.0"
   related:
     - definir-medicao-de-metrica
     - definir-tarefa
@@ -198,6 +198,10 @@ Sem ciclo do período na lista, pergunte se cria o ciclo, liga a um ciclo maior 
 Com mais de um objetivo ou key result, mostre o plano antes de gravar.
 Depois de gravar, mostre o nome, o status e o link de cada um.
 
+Toda mudança no valor-alvo, na data-alvo ou na métrica de um key result já gravado entra no histórico do próprio key result, no campo de observações que o mapeamento de dados indica.
+Cada entrada leva a data, o valor anterior, o valor novo e o porquê, nas palavras da pessoa, sem apagar as entradas antigas.
+Sem o porquê, pergunte antes de gravar a mudança.
+
 ### Passo 10
 
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
@@ -247,6 +251,14 @@ Se você deduzir a data-base pelo mês do pedido e gravar as datas sem ciclo por
 1. Mostre a data-base, a data-alvo e o ciclo antes de gravar.
 2. Sem ciclo do período, pergunte se cria o ciclo, liga a um ciclo maior ou grava as datas sem ciclo.
 
+### Mudança de alvo sem histórico
+
+Se você trocar o valor-alvo de R$ 3.600 para R$ 5.000 e só sobrescrever o número, ninguém mais sabe que o alvo mudou nem por quê, e a próxima revisão discute de novo a mesma decisão.
+
+1. Acrescente ao histórico do key result a data, o valor anterior, o valor novo e o porquê.
+2. Sem o porquê, pergunte antes de gravar.
+3. Mantenha as entradas antigas.
+
 ### Ação sem mecanismo
 
 Se você vincular uma ação sem dizer por que ela move o key result, o plano vira lista de desejos.
@@ -266,6 +278,10 @@ o custo de setembro, R$ 3.912,28, está no histórico de medições e é a base 
 
 a área tinha 5 objetivos no ciclo. Sugeri manter os 3 que conversam com a estratégia. Um key result era "Criar 10 campanhas" e virou tarefa. Outro estava como "Nova página": parei e renomeei antes de seguir.
 
+### troque o alvo de vendas do mês de R$ 3.600 para R$ 5.000, porque é o que precisa entrar por mês na maquininha
+
+o alvo mudou de 3.600 para 5.000 e o histórico do key result ganhou a entrada: "12/11/2026: de R$ 3.600 para R$ 5.000. Motivo: é o valor mensal que precisa entrar na maquininha. Na negociação da taxa, o parceiro de pagamento ofereceu um desconto baixo, e a pessoa elevou o valor ao informar que um concorrente ofereceu condição melhor, com recebimento em dia útil, sem pedir nada em troca." A entrada anterior do histórico continuou no campo.
+
 ## Casos-limite
 
 - O pedido é uma ação ou tarefa: siga `definir-tarefa`.
@@ -275,6 +291,7 @@ a área tinha 5 objetivos no ciclo. Sugeri manter os 3 que conversam com a estra
 - Não há absoluto possível: a porcentagem é o alvo, com a base escrita.
 - As `Fontes da estratégia` estão vazias e as instruções não dizem: peça as páginas antes de validar os objetivos.
 - A lista não está no workspace conectado: pare.
+- A mudança de valor chega sem o porquê: pergunte o motivo antes de gravar a entrada do histórico.
 
 ## Pegadinhas
 
@@ -285,6 +302,7 @@ a área tinha 5 objetivos no ciclo. Sugeri manter os 3 que conversam com a estra
 - Um key result recém-criado sem título aparece como "Nova página" e some na busca pelo assunto.
 - A descrição da propriedade de título na lista traz o padrão de nome. Leia antes de gravar.
 - Um alvo de 100% parece ambicioso, mas vira perfeccionismo e esconde o quanto já foi feito.
+- Trocar o número parece a edição inteira. O alvo novo sem a data, o valor anterior e o porquê apaga a decisão, e a revisão seguinte não sabe por que ele subiu ou desceu.
 - O workspace conectado pode ser de outra empresa. Se a lista não estiver na conexão, pare.
 
 ## Scripts disponíveis
