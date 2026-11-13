@@ -3,7 +3,7 @@ name: enviar-email
 description: Monta e envia um e-mail em nome de uma pessoa, com a assinatura certa, o destinatário principal e as cópias, o anexo vindo do Notion e o envio só com o sim. Usada quando uma pessoa contata uma organização por e-mail, inclusive com comprovante. Não serve para escrever no tom da marca, achar um e-mail nem triar a caixa.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.6.1"
   related:
     - definir-pessoa
     - acompanhar-retornos-pendentes
@@ -43,6 +43,7 @@ A liberação não dispensa o sim da pessoa ao texto e aos destinatários.
 
 Antes de redigir, procure na caixa um rascunho não enviado na mesma conversa e mostre-o à pessoa.
 Se existir, edite esse rascunho em vez de criar outro, para os dois não saírem com pedidos diferentes. Uma sessão que acompanha as respostas costuma deixá-lo.
+Leia também as conversas com o mesmo contato no e-mail e no WhatsApp, desde a última mensagem sua. Uma resposta nova pode mudar o pedido: diga à pessoa o que chegou antes de rascunhar.
 
 ### Passo 2
 
