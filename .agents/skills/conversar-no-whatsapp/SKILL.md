@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.36.1"
+  version: "0.37.5"
   aliases:
     - redigir-mensagem-de-whatsapp
   related:
@@ -58,6 +58,8 @@ Leia os valores nas instruções do projeto, na entrada desta habilidade. Na aus
 "Fechamento em mensagem separada": "sim"
 # `Página de instruções do WhatsApp` é o endereço da página com as regras da conta, como a ferramenta comercial por onde a mensagem sai. Vazio pula a leitura.
 "Página de instruções do WhatsApp": ""
+# `Horário de trabalho`: o da entrada `Global`. Fora dele, a mensagem pede desculpa pelo horário. Vazio, não pede.
+"Horário de trabalho": ""
 ```
 ## Instruções
 
@@ -103,7 +105,11 @@ Para registrar a demanda, leve a data e o horário da primeira mensagem do pedid
 
 ### Passo 5
 
-Antes de rascunhar, leia a conversa de destino desde a última mensagem que você leu nela, seguindo o Passo 2, e confira cada pergunta do rascunho contra a conversa inteira, inclusive a mensagem que ela cita. A pergunta que o contato já respondeu sai, mesmo quando outra fonte mais antiga diverge: mostre a divergência à pessoa, não ao contato. Tire também o que já foi dito e diga, antes do texto, o que ele acrescenta. Se tudo já foi dito, diga isso e não rascunhe.
+Antes de rascunhar, leia a conversa de destino desde a última mensagem lida, pelo Passo 2, e confira cada pergunta do rascunho contra ela inteira, inclusive a mensagem citada. A pergunta já respondida sai, mesmo quando outra fonte mais antiga diverge: mostre a divergência à pessoa, não ao contato. Tire também o que já foi dito e diga antes o que o texto acrescenta. Se tudo já foi dito, diga isso e não rascunhe.
+
+Confira no manual da oportunidade cada exigência do organizador, como a janela de montagem, e use a que ele dá.
+
+Abra com a saudação do período, lido no relógio, e uma frase de contexto. Fora do `Horário de trabalho`, peça desculpa pelo horário.
 
 Com `Página de instruções do WhatsApp` preenchida, leia a página antes de rascunhar e siga a conta e as regras dela. Se ela não abrir na conexão, pare e peça.
 
@@ -114,7 +120,7 @@ Todo rascunho de mensagem aparece na resposta do chat. Leia o modelo de saída `
 Não diga só que o rascunho está pronto.
 O texto vai na mensagem de fechamento do turno, a última que a pessoa lê, junto com o pedido do sim: o texto escrito antes de um quadro de próximo passo pode ser cortado.
 Uma mensagem que diz que um trabalho está em andamento, foi registrado ou foi feito leva o link da tarefa, da página ou do pull request que mostra esse registro. Sem esse registro, crie-o antes, como `definir-tarefa` manda, ou pergunte onde ele está.
-Com a ferramenta de widget na sessão, o widget vem sempre, além dos blocos, como o modelo de saída diz. Não espere o cliente desenhá-lo nem o trate como opcional.
+Com a ferramenta de widget na sessão, o widget vem sempre, além dos blocos, como o modelo de saída diz.
 Sem o texto à vista, não pergunte se pode enviar.
 
 Com `Dividir em mensagens curtas` em `sim`, como as pessoas costumam escrever no WhatsApp, divida o rascunho em mensagens, uma por ideia.
@@ -253,17 +259,13 @@ Usei a aba aberta. O pedido está na conversa da Ana, na sexta-feira, 16/10/2026
 
 Mostrei a conversa do Caio e o texto "Podemos falar 15h00?". Enviei depois do sim. A conversa estava com o agente de IA da conta comercial, e avisei antes. Li a conversa de novo e a mensagem aparece às 14h05.
 
-### Pergunte à organizadora da feira quais datas estão livres
-
-Mostrei a conversa e o texto, e enviei depois do sim. A conversa recebeu, usando a habilidade `rotular-item`, a lista de ação esperada e a lista com o último nível da etiqueta de e-mail que a edição da feira registra.
-
 ### Mande uma mensagem só com as duas perguntas e o resumo da conversa (800 caracteres)
 
 Contei 800 caracteres, acima do limite de 600. Avisei antes do sim que vai em duas partes, cortadas entre os itens: a Mensagem 1 com a saudação e o item 1 (410 caracteres) e a Mensagem 2 com o item 2 e o fechamento (390). Enviei uma depois da outra, com o sim às duas.
 
 ### escrevi chegamos, mas a gente ainda não chegou
 
-Mostrei a edição "Chegaremos*" na mesma mensagem e editei depois do sim. Não mandei outra mensagem.
+Mostrei a edição "Chegaremos*" e editei depois do sim, sem outra mensagem.
 
 ## Casos-limite
 
