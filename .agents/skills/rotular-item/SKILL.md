@@ -3,7 +3,7 @@ name: rotular-item
 description: Aplica, troca e tira rótulos, etiquetas e tags de organização num item, como pull request, issue, e-mail, conversa ou página, pela escolha da habilidade de origem, sem duplicar rótulo nem mexer no de uma ferramenta. Usada quando outra habilidade rotula um item, lê ou responde uma conversa, ou o estado do item muda. Não serve para decidir o assunto do item, hashtags nem categorias de conteúdo.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.7.0"
   related:
     - criar-pull-request
     - definir-filtro-de-email
@@ -52,6 +52,8 @@ flowchart LR
   E -->|o negócio já respondeu e nada falta| R[Respondida]
   E -->|o assunto acabou| C[Concluída]
 ```
+
+A concluída só entra depois de ler o corpo de cada mensagem da conversa e confirmar que nada espera o negócio nem o contato. Remetente, assunto e trecho não bastam: um aviso de plataforma pode pedir prazo, pagamento, cadastro ou resposta. Sem essa leitura, não aplique concluída em lote. Na dúvida, a conversa fica com ação pendente e vai à pessoa com a pergunta.
 
 O contexto é a escolha da habilidade de origem, de preferência entre `Etiquetas de contexto`.
 Quando nenhum deles serve, ou o rótulo que ela passou não existe, a escolha é o assunto da conversa pelo esquema BASB de `organizar-emails`, que diz o lugar do rótulo.
@@ -133,6 +135,14 @@ Se você ler ou responder uma conversa e terminar sem rotular, ela some do filtr
 1. Receba da habilidade de origem quem age agora e o contexto.
 2. Aplique o estado de `Etiquetas de status` e o contexto de `Etiquetas de contexto`.
 3. Leia a conversa de volta e diga os rótulos na resposta.
+
+### Concluída sem ler
+
+Se você marcar como concluída pelo remetente ou pelo assunto, um boleto, um prazo ou um cadastro pedido some do filtro de ação pendente.
+
+1. Leia o corpo de cada mensagem da conversa.
+2. Aplique concluída só quando nada espera o negócio nem o contato.
+3. Na dúvida, ação pendente e a pergunta à pessoa.
 
 ### Contexto que falta trava a conversa
 

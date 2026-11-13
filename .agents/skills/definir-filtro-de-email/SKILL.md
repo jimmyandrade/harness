@@ -3,7 +3,7 @@ name: definir-filtro-de-email
 description: Cria, edita e confere filtros de e-mail. Testa o critério na conta, escolhe as ações sem esconder o que a pessoa quer ver e lê o filtro salvo de volta. Usada quando a triagem pede um filtro ou a pessoa quer mudar um. Não serve para classificar mensagens nem cancelar assinatura.
 metadata:
   author: jimmyandrade
-  version: "0.9.0"
+  version: "0.10.0"
   related:
     - organizar-emails
     - evoluir-habilidade
@@ -58,6 +58,8 @@ Antes de pôr a etiqueta no filtro, siga `rotular-item` com ela e com as listas 
 Pular a entrada e marcar como lida servem só para remetente que nunca traz o que ela possa querer acompanhar ou responder, como relatório automático. Na dúvida, pergunte antes de pular a entrada.
 
 Remetente que anuncia evento, workshop, curso, convite ou oportunidade fica na entrada: o filtro só etiqueta, e pode tirar a importância e categorizar. Mensagem de uma organização que pode valer uma resposta, como o agradecimento depois de um evento, também fica na entrada: responder estreita a relação institucional.
+
+A etiqueta de concluída no filtro vale a mesma regra de pular a entrada: só para remetente que nunca traz ação, como relatório automático ou newsletter. Remetente de cobrança, venda, operação, evento, cliente ou pessoa ganha só a etiqueta do assunto, e o status sai da leitura de cada conversa, como `rotular-item` manda.
 
 Quando o filtro pula a entrada, inclua nunca marcar como importante, porque a caixa pode estar configurada para as mensagens importantes passarem por cima dos filtros.
 
