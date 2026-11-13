@@ -148,6 +148,7 @@ flowchart LR
     procurar_variacao_de_termo["procurar-variacao-de-termo"]
     projetar_caixa["projetar-caixa"]
     prospectar_oportunidades["prospectar-oportunidades"]
+    publicar_ata_de_reuniao["publicar-ata-de-reuniao"]
     publicar_resposta_de_revisao["publicar-resposta-de-revisao"]
     publicar_revisao_de_codigo["publicar-revisao-de-codigo"]
     reconhecer_imagem["reconhecer-imagem"]
@@ -203,7 +204,11 @@ flowchart LR
   acompanhar_resposta_no_whatsapp --> rotular_item
   acompanhar_resposta_no_whatsapp --> usar_whatsapp_web
   acompanhar_retornos_pendentes --> acompanhar_resposta_no_whatsapp
+  acompanhar_retornos_pendentes --> definir_hospedagem
+  acompanhar_retornos_pendentes --> definir_negociacao
+  acompanhar_retornos_pendentes --> definir_obrigacao_financeira
   acompanhar_retornos_pendentes --> definir_rotina
+  acompanhar_retornos_pendentes --> definir_tarefa
   acompanhar_retornos_pendentes --> enviar_email
   acompanhar_retornos_pendentes --> organizar_emails
   acompanhar_retornos_pendentes --> rotular_item
@@ -514,6 +519,7 @@ flowchart LR
   definir_registro_de_reuniao --> mesclar_registro
   definir_registro_de_reuniao --> preparar_tarefa_do_pull_request
   definir_registro_de_reuniao --> procurar_agenda
+  definir_registro_de_reuniao --> publicar_ata_de_reuniao
   definir_reserva --> definir_agenda
   definir_reserva --> definir_agenda_de_popstar
   definir_reserva --> revisar_uso_do_tempo
@@ -806,6 +812,8 @@ flowchart LR
   prospectar_oportunidades --> definir_viagem
   prospectar_oportunidades --> procurar_oportunidade
   prospectar_oportunidades --> sincronizar_cronograma
+  publicar_ata_de_reuniao --> definir_pessoa
+  publicar_ata_de_reuniao --> definir_registro_de_reuniao
   publicar_resposta_de_revisao --> atender_revisao_de_pull_request
   publicar_resposta_de_revisao --> definir_pessoa
   publicar_resposta_de_revisao --> escrever_link
