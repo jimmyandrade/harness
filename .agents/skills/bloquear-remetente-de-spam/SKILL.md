@@ -3,7 +3,7 @@ name: bloquear-remetente-de-spam
 description: Classifica remetentes de spam por uma árvore de decisão, grava a decisão no banco do negócio e entrega as listas para colar no bloqueio de remetentes do Gmail e de URL do Chrome do Admin do Google. Usada quando a pessoa cola ou cita remetentes para bloquear. NÃO serve para filtro de caixa, marcar mensagem como spam nem salvar no Admin.
 metadata:
   author: jimmyandrade
-  version: "0.2.1"
+  version: "0.2.2"
   related:
     - definir-filtro-de-email
     - organizar-emails
@@ -107,7 +107,7 @@ Ponha ao lado de cada lista o link da tela dela, lido de `Tela de remetentes blo
 
 Nunca entre na tela do Admin para alterá-la: é configuração de segurança da organização, e quem cola e salva é a pessoa. Diga quantas entradas há em cada lista e o que ficou sem decisão.
 
-Quando a pessoa disser que colou e salvou, não afirme que o bloqueio vale: você não leu a tela. A conferência é dela.
+Quando a pessoa disser que colou e salvou, e a tela estiver aberta no navegador na conta certa, confira só lendo: com a caixa de edição fechada, recarregue a página e compare a contagem com a esperada. Sem a tela, não afirme que o bloqueio vale: você não leu. Uma contagem igual não prova o conteúdo, e a conferência do conteúdo é a da caixa de edição, antes de salvar.
 
 ### Passo 7
 
@@ -186,6 +186,8 @@ A skill tira o texto do botão, separa 180 endereços e 3 já registrados no ban
 ## Pegadinhas
 
 - A tela de remetentes mostra 10 linhas por página, e o seletor chega a 100. Ela aceita domínio e endereço na mesma lista e tem um botão para adicionar em massa.
+- Logo depois de salvar, o texto da página pode trazer a contagem antiga. Recarregue, com a caixa de edição fechada, porque recarregar com ela aberta descarta o que não foi salvo.
+- Na caixa de edição, o botão de adicionar endereço fica ao lado da seta de página, e um clique por coordenada acrescenta uma linha em branco. Troque de página pelo rótulo "Ir para a próxima página".
 - O texto colado do Gmail traz "desbloquear" grudado no fim do endereço, e há linhas sem nome e sem colchetes.
 - Há endereços que trazem outro endereço dentro de si, como os de quem envia por plataforma de newsletter. O remetente é o endereço inteiro.
 - A busca na caixa não devolve o que o Gmail marcou como spam ou suspeito. Vazio não prova que a mensagem não existe.
