@@ -1,11 +1,11 @@
 ---
 name: revisar-financas
-description: Use essa habilidade sempre que for ver o caixa, o lucro, a DRE, o fluxo de caixa, o diagnóstico, a auditoria ou o preço de venda, mesmo sem dizer revisar. NÃO use para registrar a venda ou o gasto, mover o estoque, planejar o mês, nem projetar o caixa das feiras.
+description: Use essa habilidade sempre que for ver o caixa, o lucro, a DRE, a receita bruta ou o faturamento de um período, o fluxo de caixa, o diagnóstico, a auditoria ou o preço de venda, mesmo sem dizer revisar. NÃO use para registrar a venda ou o gasto, mover o estoque, planejar o mês, nem projetar o caixa das feiras.
 allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-data-sources
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.2"
+  version: "0.5.0"
   related:
     - definir-lancamento-financeiro
     - definir-planejamento-financeiro
@@ -83,6 +83,12 @@ Diagnóstico, consultoria e auditoria saem quando a pessoa pede, e só com dado 
 
 Preço de venda lê custos e despesas já lançados. Mostre margem, risco de prejuízo, pontos de atenção e sugestão de ajuste. Sugestão de preço pede a margem desejada. Sem ela, pergunte. Não invente a margem nem o custo. Explique como o preço se formou, o impacto no lucro e o cuidado na prática.
 
+### Passo 7
+
+Receita bruta de um período, como a que um cadastro, um edital ou um simulador pede, é a soma do valor das vendas com data no período, sem o frete, na lista de vendas do mapeamento. Calcule antes de perguntar: a lista já responde.
+
+Diga o período em datas, quantas vendas entraram, o total e o repasse a terceiros à parte. Avise que a venda fora do registro, como a de uma plataforma ainda não conciliada, não entra na soma.
+
 ## Problemas comuns
 
 ### Número que a fonte não tem
@@ -142,6 +148,7 @@ Não havia margem desejada. Perguntei. Não inventei o custo.
 
 ## Pegadinhas
 
+- O faturamento que um formulário pede parece um dado só da pessoa. Ele sai da lista de vendas, e a pessoa só confirma o que falta no registro.
 - DRE simplificada parece outra conta. O modelo é a estrutura com meses e total anual. A explicação é que fica simples.
 - A projeção do caixa parece este fluxo. Ela segue a `Habilidade de projeção de caixa`, quando as instruções do projeto a indicarem.
 - Preço parece sair do custo sozinho. Sem a margem desejada, pergunte. Não invente.
