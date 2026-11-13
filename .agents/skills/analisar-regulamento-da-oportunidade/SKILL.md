@@ -3,7 +3,7 @@ name: analisar-regulamento-da-oportunidade
 description: Lê o manual, o regulamento, o edital e o contrato de uma oportunidade e separa o que a empresa deve fazer, com prazo, o que o texto não diz e o que as fontes contradizem. Usada quando chega o manual da oportunidade aprovada. NÃO serve para perguntar ao responsável, redigir a tarefa nem organizar a viagem.
 metadata:
   author: jimmyandrade
-  version: "0.1.8"
+  version: "0.1.9"
   related:
     - acompanhar-edital
     - consultar-responsavel-pela-oportunidade
@@ -46,7 +46,7 @@ O manual traz a edição, a data e o local no cabeçalho: registre-os e diga à 
 Liste cada exigência: o que a empresa deve fazer, enviar, levar, pagar ou não fazer.
 Cada exigência diz o prazo, quem cumpre e a fonte, com a página.
 Formulário, cadastro de pessoas e de veículo, necessidade de energia, cardápio e pagamento são exigências com prazo, mesmo quando chegam como aviso no meio de um grupo.
-Prazo relativo, como sete dias úteis antes, vira data: conte no calendário, com os feriados, e escreva no `Formato da data com dia da semana`, nunca de cabeça.
+Prazo relativo, como sete dias úteis antes, vira data: conte no calendário, com os feriados, e escreva no `Formato da data com dia da semana`, com o dia calculado pela regra do dia da semana.
 O prazo que já passou fica marcado como vencido, com a data de hoje.
 
 ### Passo 3
@@ -105,7 +105,7 @@ Se você ler o formulário com prazo como mais uma mensagem do grupo, o prazo pa
 Se você contar sete dias úteis sem o calendário, o prazo cai num feriado ou num fim de semana e a conta erra.
 
 1. Conte no calendário, com os feriados do local.
-2. Escreva a data com o dia da semana.
+2. Calcule o dia da semana pela regra do dia da semana e escreva a data.
 3. Dúvida sobre feriado: pergunte, em vez de arredondar.
 
 ### Lacuna preenchida por suposição

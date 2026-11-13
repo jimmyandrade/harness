@@ -421,9 +421,9 @@ flowchart LR
   definir_inscricao --> definir_negociacao
   definir_inscricao --> definir_tarefa
   definir_inscricao --> garantir_ingresso
+  definir_inscricao --> inscrever_na_oportunidade
   definir_inscricao --> lancar_despesa_da_empresa
   definir_inscricao --> procurar_email
-  definir_inscricao --> inscrever_na_oportunidade
   definir_inscricao --> procurar_inscricao
   definir_inscricao --> procurar_oportunidade
   definir_instrucoes_do_projeto --> criar_habilidade
