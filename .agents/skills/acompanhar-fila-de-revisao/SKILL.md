@@ -3,7 +3,7 @@ name: acompanhar-fila-de-revisao
 description: Roda o ciclo da fila de revisão de pull requests. Confere o horário, cuida primeiro dos seus PRs, acha os pedidos, fecha o laço dos já revisados, escolhe o próximo, revisa um por execução e prepara o aviso a quem pediu. Os avisos ficam só como rascunho, com o link. Não serve para revisar sozinha nem achar pedidos por conta própria.
 metadata:
   author: jimmyandrade
-  version: "0.7.0"
+  version: "0.8.0"
   related:
     - enviar-mensagem-no-slack
     - evoluir-habilidade
@@ -23,8 +23,9 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 ```yaml
 # `Modo de execução` é `interativo`, numa sessão aberta com a pessoa, ou `agendado`, sem ninguém na frente.
 "Modo de execução": "interativo"
-# `Horário de funcionamento` traz os dias e as horas em que o ciclo roda.
-"Horário de funcionamento": ""
+# `Horário de trabalho` e `Fuso horário` são globais: valem o da entrada `Global` das instruções do projeto, para todas as habilidades que leem horário.
+# O ciclo roda só dentro do `Horário de trabalho`.
+"Horário de trabalho": "dias úteis, das 9h às 18h"
 "Fuso horário": ""
 "Respeitar a agenda": "não"
 # `Ordem da fila` lista os critérios de desempate, do mais forte ao mais fraco.
@@ -52,7 +53,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ### Passo 1
 
-Confira o horário no `Fuso horário`. Fora do `Horário de funcionamento`, encerre sem fazer nada. Só em modo interativo, e só quando a pessoa pedir, pule esta conferência.
+Confira o horário no `Fuso horário`. Fora do `Horário de trabalho`, encerre sem fazer nada. Só em modo interativo, e só quando a pessoa pedir, pule esta conferência.
 
 Com `Respeitar a agenda` em `sim`, veja se a pessoa está agora em ausência ou em foco. Numa ausência, não varra nada novo e encerre. Se a ausência vai até o fim do dia ou além, proponha, uma única vez, um aviso a quem está esperando revisão. Em foco, o ciclo também pausa.
 
@@ -173,7 +174,7 @@ Estava dentro do horário e sem ausência. Dois PRs seus tinham comentários abe
 
 ### Rode a fila fora do horário
 
-Eram dez da noite, fora do horário de funcionamento. Encerrei sem varrer nada.
+Eram dez da noite, fora do horário de trabalho. Encerrei sem varrer nada.
 
 ## Casos-limite
 
