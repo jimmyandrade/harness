@@ -53,7 +53,8 @@ How these skills relate is in `README.md`, in this folder.
   - Keeps production in the product records, one row per size, and never turns it into a task
   - Reads the database and property names from the project instructions, declares no default for them, asks once when one is missing, and stops when a database is not in the connected workspace
   - Confirms the size of every unit, adds only the quantity said, and asks before producing more than planned
-  - Relates the existing mold and base mold, and changes the pilot, label, and production status only when the person says so
+  - Relates the existing mold and base mold, and changes the pilot and production status only when the person says so
+  - Tracks labels per physical unit, in the units database: one option per label type in the printed and sewn labels, and a unit counts as labeled only when every required type is sewn
   - Does not write formula properties, create the product, or touch stock unless the project instructions link it
 - **Test Criteria**:
   - [x] The skill is present at that path
