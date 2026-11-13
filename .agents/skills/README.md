@@ -877,6 +877,7 @@ flowchart LR
   triar_conversas --> procurar_pedido_de_revisao
   triar_conversas --> procurar_tarefa
   triar_conversas --> rotular_item
+  triar_conversas --> transcrever_audio_e_video
   triar_conversas --> usar_whatsapp_web
   usar_whatsapp_web --> acompanhar_resposta_no_whatsapp
   usar_whatsapp_web --> conversar_no_whatsapp
