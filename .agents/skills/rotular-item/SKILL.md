@@ -3,7 +3,7 @@ name: rotular-item
 description: Aplica, troca e tira rótulos, etiquetas e tags de organização num item, como pull request, issue, e-mail, conversa ou página, pela escolha da habilidade de origem, sem duplicar rótulo nem mexer no de uma ferramenta. Usada quando outra habilidade rotula um item, lê ou responde uma conversa, ou o estado do item muda. Não serve para decidir o assunto do item, hashtags nem categorias de conteúdo.
 metadata:
   author: jimmyandrade
-  version: "0.7.0"
+  version: "0.7.1"
   related:
     - criar-pull-request
     - definir-filtro-de-email
@@ -43,7 +43,7 @@ Receba da habilidade de origem o item, o sistema em que ele fica, os rótulos qu
 A escolha é da habilidade de origem: esta habilidade não decide o assunto do item. Sem a escolha, volte para ela.
 A lista de origem diz quais rótulos são de estado, como `blocked` ou `A pagar`, e quais pertencem a uma ferramenta que os aplica sozinha.
 
-Toda conversa que uma habilidade leu ou respondeu, no e-mail ou no WhatsApp, passa por aqui antes de a habilidade terminar, com quem age agora e o contexto escolhido. Ela sai com o rótulo de estado e, quando o assunto tem um, com o de contexto. O estado sai de quem age agora, e o nome dele vem de `Etiquetas de status`:
+Toda conversa que uma habilidade leu ou respondeu, no e-mail ou no WhatsApp, passa por aqui antes de a habilidade terminar, com quem age agora e o contexto escolhido. Ela sai sempre com os dois: o rótulo de estado e o de contexto. O estado sai de quem age agora, e o nome dele vem de `Etiquetas de status`:
 
 ```mermaid
 flowchart LR
@@ -143,6 +143,14 @@ Se você marcar como concluída pelo remetente ou pelo assunto, um boleto, um pr
 1. Leia o corpo de cada mensagem da conversa.
 2. Aplique concluída só quando nada espera o negócio nem o contato.
 3. Na dúvida, ação pendente e a pergunta à pessoa.
+
+### Pedido que cita só o estado
+
+Se você aplicar só o estado quando outra sessão, ou a pessoa, pede "rotule como Ação esperada", a conversa some do filtro do assunto e a pessoa precisa pedir o contexto.
+
+1. Trate o pedido como o estado e escolha o contexto você mesma, de `Etiquetas de contexto`.
+2. Aplique os dois na mesma rodada e leia a conversa de volta.
+3. Diga na resposta os dois rótulos que ficaram. Sem contexto que sirva, siga o problema abaixo.
 
 ### Contexto que falta trava a conversa
 
