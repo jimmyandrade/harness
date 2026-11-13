@@ -1,5 +1,53 @@
 # Changelog
 
+## [1.81.0](https://github.com/jimmyandrade/harness/compare/v1.80.0...v1.81.0) (2026-11-13)
+
+
+### Features
+
+* **acompanhar-producao-de-produto:** track labels per unit, with printed and sewn label types ([#1082](https://github.com/jimmyandrade/harness/issues/1082)) ([d00225e](https://github.com/jimmyandrade/harness/commit/d00225ee81a0720508dfd12f7bb337ca5f210c8a))
+* add skills to analyze an opportunity's rules, consult its responsible, sign up and prepare what to take ([#1074](https://github.com/jimmyandrade/harness/issues/1074)) ([3cc2af4](https://github.com/jimmyandrade/harness/commit/3cc2af4f240c9e778fa40513c16910ae826caa45))
+* **bloquear-remetente-de-spam:** classify spam senders by a decision tree and hand over the admin block lists ([#1093](https://github.com/jimmyandrade/harness/issues/1093)) ([0e52ae6](https://github.com/jimmyandrade/harness/commit/0e52ae62b87464cc164a82314e25e431f630c521))
+* calculate the weekday with a script and keep one rule for it ([#1116](https://github.com/jimmyandrade/harness/issues/1116)) ([c0e392a](https://github.com/jimmyandrade/harness/commit/c0e392a2f9a8ce8d5462321d1e4e5a87063d041b))
+* contact a failing site's support on every channel it offers in the same round ([#1118](https://github.com/jimmyandrade/harness/issues/1118)) ([aa4763e](https://github.com/jimmyandrade/harness/commit/aa4763ebf3fbee6e1c810d320c9b127d0cbeeb07))
+* **conversar-no-whatsapp:** split texts above a character limit and move interface details to usar-whatsapp-web ([#1096](https://github.com/jimmyandrade/harness/issues/1096)) ([eabd912](https://github.com/jimmyandrade/harness/commit/eabd91294add824688dbf9fdb39779e8d77bdc34))
+* **criar-enquete:** rename sugerir-enquete-de-publico to criar-enquete ([#1117](https://github.com/jimmyandrade/harness/issues/1117)) ([cc57182](https://github.com/jimmyandrade/harness/commit/cc57182a0e4a250b059ee2314b13ce3a32753276))
+* **criar-oportunidade:** add year gate, fee by duration, neutral offer title, callout, specific link and venue handoff ([#1079](https://github.com/jimmyandrade/harness/issues/1079)) ([62f3c85](https://github.com/jimmyandrade/harness/commit/62f3c85c1c8e266cd4f019baee41eb2e927f4b66))
+* **definir-filtro-de-email:** give every sender a filter and catch filters that lose their action ([#1089](https://github.com/jimmyandrade/harness/issues/1089)) ([1dd0942](https://github.com/jimmyandrade/harness/commit/1dd09422b1723491e16165f3d2c604afffdce85e))
+* **definir-hospedagem:** ask the garage hours and keep unmeasured durations out of the event end ([#1067](https://github.com/jimmyandrade/harness/issues/1067)) ([a4fb1f3](https://github.com/jimmyandrade/harness/commit/a4fb1f3857415294c0ad316f29b1b9691efb6b43))
+* **definir-inscricao:** create a signup from the list's page template and keep the submitted answers in its body ([#1107](https://github.com/jimmyandrade/harness/issues/1107)) ([0877cc0](https://github.com/jimmyandrade/harness/commit/0877cc0395742feaee527712e8660789d7427fed))
+* **definir-inscricao:** follow the business policy on who appears and ask for consent when it says so ([#1110](https://github.com/jimmyandrade/harness/issues/1110)) ([3876fea](https://github.com/jimmyandrade/harness/commit/3876feaf952d32316fedf2f779c99807fb87c023))
+* **definir-inscricao:** use the company contacts in a company signup and show the source of each answer ([#1104](https://github.com/jimmyandrade/harness/issues/1104)) ([fd4ffc5](https://github.com/jimmyandrade/harness/commit/fd4ffc57f0ff0759ef3b0fab67f5b2e73178a0ba))
+* **definir-local-fisico:** confirm the physical place with venue company and locality ([#1077](https://github.com/jimmyandrade/harness/issues/1077)) ([7154151](https://github.com/jimmyandrade/harness/commit/7154151863dc6bc50dbea18a76b62b7c178bfe36))
+* **delegar-aviso-de-plataforma:** restore platform notice delegation, add definir-politica and set deadlines by the earliest platform deadline ([#1097](https://github.com/jimmyandrade/harness/issues/1097)) ([7455d23](https://github.com/jimmyandrade/harness/commit/7455d23485bdb46ccd46021e7d94369a01952e20))
+* greet by the time of day and check the manual before asking in whatsapp ([#1090](https://github.com/jimmyandrade/harness/issues/1090)) ([d3bb89c](https://github.com/jimmyandrade/harness/commit/d3bb89c5cb847fac2437491874bce87ec1d4a788))
+* mark legacy fields in data schemas with deprecated, replacement and migration status ([#1084](https://github.com/jimmyandrade/harness/issues/1084)) ([9603ada](https://github.com/jimmyandrade/harness/commit/9603adad3819ef0a8a4fc89155f461bc70e01181))
+* **procurar-banco-de-dados:** add the skill that finds a database before asking for its name ([#1094](https://github.com/jimmyandrade/harness/issues/1094)) ([471409b](https://github.com/jimmyandrade/harness/commit/471409b79a0245214f06842d46f4b35d4cd10615))
+* **procurar-inscricao:** confirm the registration on the platform site and cross it with the list before closing an email action ([#1088](https://github.com/jimmyandrade/harness/issues/1088)) ([9ef9984](https://github.com/jimmyandrade/harness/commit/9ef9984b0c0abc8604a611a336f586cbf554b527))
+* **procurar-oportunidade:** return status, ask about past editions and keep other dates apart ([#1070](https://github.com/jimmyandrade/harness/issues/1070)) ([dd3d7cb](https://github.com/jimmyandrade/harness/commit/dd3d7cbd54def42f27637f4820afbad6caac9482))
+* **prospectar-oportunidades:** prospect opportunities where the trip, the priority or the headquarters points ([#1068](https://github.com/jimmyandrade/harness/issues/1068)) ([af63e91](https://github.com/jimmyandrade/harness/commit/af63e916bd5cc1f3e2447182d34a0bbb6643cd72))
+* register an event announcement as an opportunity when it is not on the list ([#1123](https://github.com/jimmyandrade/harness/issues/1123)) ([1db74e1](https://github.com/jimmyandrade/harness/commit/1db74e19cd9284fb3920415342b90b61c69d89fb))
+* **revisar-financas:** calculate the gross revenue of a period before asking the person ([#1120](https://github.com/jimmyandrade/harness/issues/1120)) ([885aacb](https://github.com/jimmyandrade/harness/commit/885aacba97f2894206a54afed650a9012cc47495))
+* search the trash and archive only on a second pass the person accepts ([#1095](https://github.com/jimmyandrade/harness/issues/1095)) ([0635faf](https://github.com/jimmyandrade/harness/commit/0635fafc57438889560a2d5b3723923792aee95c))
+* **sugerir-enquete-de-publico:** add a context message when the poll serves an action ([#1111](https://github.com/jimmyandrade/harness/issues/1111)) ([2855027](https://github.com/jimmyandrade/harness/commit/285502711eac9db4170f990571eb75b10c745cb0))
+* **sugerir-enquete-de-publico:** add a skill that suggests audience polls with a learning goal ([#1100](https://github.com/jimmyandrade/harness/issues/1100)) ([f4eb602](https://github.com/jimmyandrade/harness/commit/f4eb6021e5b44384971d1a4cd574bbe98c47be9a)), closes [#1099](https://github.com/jimmyandrade/harness/issues/1099)
+* **usar-whatsapp-web:** try every step of an automated service and report the real result ([#1119](https://github.com/jimmyandrade/harness/issues/1119)) ([1382834](https://github.com/jimmyandrade/harness/commit/13828341e7f1470d6efedd2b63ab3ed3f91834b2))
+
+
+### Bug Fixes
+
+* **atualizar-branch-do-pull-request:** do not add an alias the CI asks for on a branch that is behind the base ([#1103](https://github.com/jimmyandrade/harness/issues/1103)) ([419a695](https://github.com/jimmyandrade/harness/commit/419a6956bdb3ebca35839120b8a29afac5b6760e))
+* **atualizar-branch-do-pull-request:** read the pull request state in the same command as each push ([#1098](https://github.com/jimmyandrade/harness/issues/1098)) ([568bec1](https://github.com/jimmyandrade/harness/commit/568bec1ab036dafbcb20fcc1580d0ba0f48afa51))
+* **atualizar-branch-do-pull-request:** trigger before a new commit is pushed to a branch that has a pull request ([#1083](https://github.com/jimmyandrade/harness/issues/1083)) ([c3960cb](https://github.com/jimmyandrade/harness/commit/c3960cb59f5bc61db2b15634cc03181cbfe34204))
+* **bloquear-remetente-de-spam:** find the deciding person by name and write the rows in batches ([#1105](https://github.com/jimmyandrade/harness/issues/1105)) ([da63e8e](https://github.com/jimmyandrade/harness/commit/da63e8e32d8ad83b1483e205e7e7d14e1168110e))
+* **comunicar-novidade-do-produto:** let a product announcement split above the WhatsApp character limit ([#1101](https://github.com/jimmyandrade/harness/issues/1101)) ([a628c44](https://github.com/jimmyandrade/harness/commit/a628c444a091deab5da885fdd567ee5efdd61730))
+* **criar-enquete:** offer only places the business serves and split a long context message ([#1124](https://github.com/jimmyandrade/harness/issues/1124)) ([f2ce7c0](https://github.com/jimmyandrade/harness/commit/f2ce7c0bd0ffb0e731cc0881a15e38ffcbd95004))
+* **evoluir-habilidade:** check the PR state before every commit and push, also on a direct request ([#1106](https://github.com/jimmyandrade/harness/issues/1106)) ([19f12aa](https://github.com/jimmyandrade/harness/commit/19f12aaf1b01ca7fe39b3d5b19b24fe89ed723a5))
+* **redigir-com-tom-de-voz:** look up the vocabulary in the harness of the business, not in the session folder ([#1109](https://github.com/jimmyandrade/harness/issues/1109)) ([b71287d](https://github.com/jimmyandrade/harness/commit/b71287d6fddfd7c124c8c4b6dbc3fd0453c0b211))
+* **sugerir-enquete-de-publico:** check the canonical spelling of names in the context message ([#1113](https://github.com/jimmyandrade/harness/issues/1113)) ([5ab5a95](https://github.com/jimmyandrade/harness/commit/5ab5a95e2171b3f0d6779eeb5f913c1697a5cc22))
+* **sugerir-enquete-de-publico:** keep the greeting and make the poll question stand alone ([#1115](https://github.com/jimmyandrade/harness/issues/1115)) ([56e695d](https://github.com/jimmyandrade/harness/commit/56e695d7e09ea644c4b315056092e4ff52262452))
+* **sugerir-enquete-de-publico:** name who made the offer and the role of the business in the context message ([#1112](https://github.com/jimmyandrade/harness/issues/1112)) ([8047655](https://github.com/jimmyandrade/harness/commit/8047655af9139a1e11a876a174dd1a05fc6ab3f5))
+
 ## [1.80.0](https://github.com/jimmyandrade/harness/compare/v1.79.0...v1.80.0) (2026-11-13)
 
 
