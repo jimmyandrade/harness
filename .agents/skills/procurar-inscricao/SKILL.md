@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search
 compatibility: Precisa de internet. A busca semântica na lista de inscrições usa notion-ai-search no servidor notion.
 metadata:
   author: jimmyandrade
-  version: "0.12.1"
+  version: "0.13.0"
   aliases:
     - responder-inscricao
   related:
@@ -53,6 +53,9 @@ A aprovação não está no registro da inscrição. Quem a mostra é o ponto de
 Quando for preciso achar a mensagem da organização sobre essa oportunidade, como um evento ou um edital, siga `procurar-email`, que é a habilidade que busca e-mail. A data da confirmação vazia numa inscrição confirmada também pede essa busca, antes de a resposta dizer que ela falta. Sem resultado no e-mail, siga `conversar-no-whatsapp`. Diga a data achada e a fonte, sem gravá-la aqui.
 Sugira também `acompanhar-edital`, que busca o resultado do edital na web, onde a organização publica.
 Oriente também a conferir os outros canais de contato com a organização.
+A inscrição feita numa plataforma de terceiros, como a de um evento, de uma feira ou de um edital, só vale quando o site da plataforma a mostra. Antes de dizer que ela foi feita, confirmada ou concluída, abra o site no navegador, com a sessão da pessoa, e confira a inscrição ou o pedido. Se o site pedir login, peça à pessoa que entre e espere.
+
+Cruze o que o site mostra com a lista de inscrições: batem, a prova está completa; divergem, ou o site não foi aberto, diga qual lado não confirmou e proponha `definir-inscricao`, que só grava com o sim da pessoa. O e-mail de convite ou lembrete, e a falta de e-mail de confirmação, não provam nada. Cada inscrição do mesmo evento é conferida à parte.
 Um e-mail de ingresso disponível não aprova o pré-cadastro, a menos que a mensagem diga isso.
 Se a nota disser que a inscrição de uma pessoa foi um ingresso retirado, diga isso só dessa pessoa e oriente a conferir com a organização se a inscrição permanece válida.
 Não responda que o evento inteiro teve ingresso retirado: a nota vale só para a pessoa que ela nomeia.
@@ -153,6 +156,7 @@ depende do que se chama de retirada. A inscrição de apresentador no Festival R
 
 - Quem fez a inscrição não é o participante. Quem fez a inscrição é quem registrou a linha. Quem apresenta e quem retirou o ingresso podem ser pessoas diferentes.
 - Um sim para o ingresso parece cobrir o evento. Cada inscrição do mesmo evento é um fato. Pré-cadastro não é confirmação. A nota de retirada não fecha a validade.
+- O e-mail ou a tarefa parece prova de que a inscrição foi feita. A prova é o site da plataforma cruzado com a lista de inscrições.
 - O pré-cadastro sem aprovação parece o fim da pergunta. O ponto de contato do evento diz se a participação aconteceu, e a mensagem pode estar no e-mail. Quando for preciso buscar e-mail, siga `procurar-email`. Um e-mail de ingresso disponível não aprova o pré-cadastro.
 - Dizer que a inscrição foi confirmada parece só notícia. A gravação do status fica em `definir-inscricao`, e a comemoração vem junto. Não pare só na comemoração.
 - Não existe propriedade de retirada de ingresso. A retirada está na observação e vale só para a pessoa nomeada naquela frase.

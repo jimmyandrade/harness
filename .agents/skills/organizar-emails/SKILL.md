@@ -3,7 +3,7 @@ name: organizar-emails
 description: Organiza e-mails por BASB e separa pessoal, trabalho e misto. Usada quando a pessoa quer triar a caixa, etiquetar ou configurar filtros. Não serve para responder mensagens, lançar despesas nem acompanhar veículos.
 metadata:
   author: jimmyandrade
-  version: "0.20.1"
+  version: "0.21.0"
   related:
     - procurar-email
     - evoluir-habilidade
@@ -16,6 +16,7 @@ metadata:
     - procurar-oportunidade
     - criar-oportunidade
     - definir-inscricao
+    - procurar-inscricao
     - rotular-item
 ---
 
@@ -139,7 +140,7 @@ Com `Etiquetar também mensagem enviada do mesmo tema` em `sim`, a mensagem que 
 
 Com `Levantar itens de ação` em `sim`, liste o que ficou em aberto em cada conversa triada. Ação pendente é o que a mensagem pede à pessoa e ela não fez, como responder, confirmar ou pagar. Ação esperada é o que a pessoa aguarda de outra, como a resposta ao último e-mail dela.
 
-Para cada ação, diga o assunto, quem, o que fazer, o prazo da mensagem, sem inventar, e o link. Conversa com ação pendente fica na entrada. Com `Etiquetas de status` preenchidas, a escolha é a etiqueta da ação pendente ou da esperada, e passa à de concluída quando a ação termina.
+Para cada ação, diga o assunto, quem, o que fazer, o prazo da mensagem, sem inventar, e o link. Conversa com ação pendente fica na entrada. Com `Etiquetas de status` preenchidas, a escolha é a etiqueta da ação pendente ou da esperada, e passa à de concluída quando a ação termina. A de inscrição só termina com a prova de `procurar-inscricao`.
 
 A conversa que a pessoa respondeu recebe a etiqueta de respondida e perde a da ação pendente, se a resposta era o que faltava. Quando a resposta dela pede retorno, a conversa recebe também a etiqueta da ação esperada.
 
@@ -317,7 +318,6 @@ As ofertas recebem a etiqueta do credor e saem da entrada por filtro dos remeten
 
 - A caixa pessoal pode ser recuperação de conta de trabalho; um alerta recebido nela pode proteger outra identidade.
 - A data do comprovante pode ser posterior à viagem, inclusive em outro ano.
-- A consulta pode devolver a mensagem já lida antes de qualquer ação do agente; não atribua essa leitura à pessoa nem a desfaça por suposição.
 - Uma caixa de uma atividade antiga pode ter finalidade de trabalho em `Contas` e, mesmo assim, não ser o trabalho atual. `Organizações` decide o contexto.
 - Empresa de cobrança escreve em nome do credor com assunto alarmante, como "seu CPF foi notificado", e o corpo traz só uma proposta de acordo.
 - Uma fatura de cartão no rotativo pode ter pagamento mínimo igual ao total.

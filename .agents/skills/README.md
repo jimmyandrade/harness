@@ -607,6 +607,7 @@ flowchart LR
   organizar_emails --> lancar_despesa_da_empresa
   organizar_emails --> lancar_despesa_pessoal
   organizar_emails --> procurar_email
+  organizar_emails --> procurar_inscricao
   organizar_emails --> procurar_oportunidade
   organizar_emails --> rotular_item
   organizar_ponto_de_contato --> criar_oportunidade
