@@ -647,11 +647,13 @@ flowchart LR
   inscrever_na_oportunidade --> acompanhar_itens_do_ponto_de_contato
   inscrever_na_oportunidade --> acompanhar_retornos_pendentes
   inscrever_na_oportunidade --> analisar_regulamento_da_oportunidade
+  inscrever_na_oportunidade --> criar_oportunidade
   inscrever_na_oportunidade --> definir_empresa
   inscrever_na_oportunidade --> definir_inscricao
   inscrever_na_oportunidade --> definir_pessoa
   inscrever_na_oportunidade --> definir_tarefa
   inscrever_na_oportunidade --> procurar_inscricao
+  inscrever_na_oportunidade --> procurar_oportunidade
   inscrever_na_oportunidade --> redigir_com_tom_de_voz
   investigar_problema --> definir_artigo_da_base_de_conhecimento
   investigar_problema --> definir_post_mortem
