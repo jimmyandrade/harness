@@ -4,7 +4,7 @@ description: Procura se um artista ou banda já está na base de artistas a part
 compatibility: Precisa de internet. O caminho local precisa de Python.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.5.1"
   related:
     - definir-artista
     - evoluir-habilidade
@@ -106,7 +106,8 @@ Se você buscar no workspace inteiro, voltam pessoas com o mesmo sobrenome, insc
 Se você abrir o endereço normal do perfil, a resposta vem só com cabeçalho e rodapé.
 
 1. Leia o link pela versão simplificada da página.
-2. Se ela também vier vazia, peça à pessoa o nome, as músicas e os créditos que a página mostra.
+2. Se ela também vier vazia, abra a página no navegador do aplicativo e, sem ele, no Claude in Chrome, e leia o nome, as músicas e os créditos.
+3. Só peça esses dados à pessoa depois de esses meios falharem, e diga quais tentou.
 
 ### Artista diz que tocou e não aparece
 
