@@ -3,7 +3,7 @@ name: redigir-com-tom-de-voz
 description: Use essa habilidade sempre que for criar, redigir, editar, revisar ou responder texto da marca no tom de voz, mesmo sem dizer copy. NÃO use para responder quem conversa com a IA, descrever uma skill, titular tarefa ou oportunidade, cravar a grafia, alterar formato de conteúdo, nem assumir cliente, peça, oportunidade ou histórico.
 metadata:
   author: jimmyandrade
-  version: "0.22.1"
+  version: "0.22.2"
   aliases:
     - escreva-usando-o-tom-de-voz
   related:
@@ -41,7 +41,7 @@ Antes de criar, redigir, editar, revisar ou responder, consulte o vocabulário e
 
 Texto que vai ser enviado por um conector, como uma resposta de e-mail, depende da ferramenta de envio. Antes de redigir, confira se as configurações da ferramenta a liberam. Sem a liberação, peça-a logo, com o nome da ferramenta, em vez de descobrir o bloqueio só no envio. A liberação não dispensa o sim da pessoa ao texto e ao destino. Se o envio for bloqueado mesmo assim, deixe o rascunho no destino e diga o que bloqueou.
 
-Consulte o vocabulário com Scripts disponíveis, com `tags` de quem fala, do evento, do canal e do formato do texto, como `maria-silva`, `festival-de-verao`, `palco` ou `whatsapp`. Use a tag que o vocabulário já tem para esse contexto. Consulte no idioma do texto que vai escrever: texto em inglês consulta `en`, texto em português consulta `pt-BR`. A consulta com tags deixa de fora o termo de outra pessoa, de outro evento ou de outro canal. Sem saber quem fala no texto, pergunte. Com terminal e a CLI instalada, rode o comando. Sem terminal, ou sem a CLI, chame a ferramenta do servidor `vocabulary`. Sem os dois, como num agente do Notion, o vocabulário vem de uma fonte do workspace conectado que as instruções do projeto nomeiam. Sem essa fonte, pare e diga que a consulta roda numa ferramenta de código com o projeto aberto. Não leia o vocabulário de memória.
+Consulte o vocabulário com Scripts disponíveis, com `tags` de quem fala, do evento, do canal e do formato do texto, como `maria-silva`, `festival-de-verao`, `palco` ou `whatsapp`. Use a tag que o vocabulário já tem para esse contexto. Consulte no idioma do texto que vai escrever: texto em inglês consulta `en`, texto em português consulta `pt-BR`. A consulta com tags deixa de fora o termo de outra pessoa, de outro evento ou de outro canal. Sem saber quem fala no texto, pergunte. O vocabulário é o do negócio para o qual o texto sai e fica no harness dele, não no core nem na pasta da sessão. Com terminal, rode a CLI na pasta desse harness. Sem terminal, chame a ferramenta do servidor `vocabulary`. Se ela disser que não há glossário, a sessão está noutra pasta: ache o harness do negócio, não rode `init` e não conclua que o vocabulário não existe. Sem os dois, como num agente do Notion, o vocabulário vem de uma fonte do workspace conectado que as instruções do projeto nomeiam. Sem essa fonte, pare e diga que a consulta roda numa ferramenta de código com o projeto aberto. Não leia o vocabulário de memória.
 
 Intenção clara, recorte específico e conexão humana. O que a pessoa precisa entender para agir. Como o texto se conecta com ela. Se faz ela sentir algo. Não fale para todo mundo. Não escreva fórmula genérica, ritmo previsível nem chamada vazia.
 
@@ -229,7 +229,6 @@ O título ficou específico, com o nome canônico que a fonte já tinha. Não vi
 
 - Falta contexto, canal, público, fonte da marca, vocabulário ou intenção criativa: pare e peça. Não aprove.
 - A fonte da persona, do posicionamento, do vocabulário ou do termo proibido não está no workspace conectado: pare. Não invente.
-- Sem a CLI e sem o servidor `vocabulary`, como num agente do Notion, e sem fonte do vocabulário no workspace: pare. Não aprove.
 - A copy depende de cliente, peça, oportunidade ou histórico comercial: consulte a fonte que a pessoa indicou. Não assuma.
 - O pedido altera um formato de conteúdo: pare. A copy não muda esse formato.
 - O pedido é gravar o evento, e não o título: pare. Esta habilidade não grava o evento.
@@ -272,6 +271,5 @@ O título ficou específico, com o nome canônico que a fonte já tinha. Não vi
 - Passe o formato ou o canal do texto como tag, como `review` ou `chat`. Quando a tag está em `forbidden_in` ou `allowed_in` do termo, `classify-text` devolve o nível para esse contexto, com `base_state` no nível guardado e, se ficou proibido só pelo contexto, o motivo e as alternativas.
 - `lookup_term`, `exists_in_text` e `classify_text`, no servidor `vocabulary`, fazem a mesma consulta quando não há terminal ou quando a CLI não está disponível, com o mesmo campo `tags`.
 
-1. Com terminal e a CLI instalada, rode `exists` com o texto e `lookup` para cada termo que precisar da linha inteira, com as tags de quem fala, do evento e do canal. Escreva o comando inteiro em cada chamada.
+1. Com terminal e a CLI instalada, na pasta do harness do negócio, rode `exists` com o texto e `lookup` para cada termo que precisar da linha inteira, com as tags de quem fala, do evento e do canal. Escreva o comando inteiro em cada chamada.
 2. Sem terminal, ou quando a CLI não está disponível, chame `exists_in_text` e `lookup_term` com os mesmos campos.
-3. Sem a CLI e sem o servidor `vocabulary`, use a fonte do vocabulário que as instruções do projeto nomeiam. Sem ela, pare.
