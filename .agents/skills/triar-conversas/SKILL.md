@@ -4,7 +4,7 @@ description: Varre as conversas com mensagem nova nos canais configurados, como 
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.9.1"
+  version: "0.10.0"
   models:
     - arvore-de-decisao-da-triagem
     - relatorio-de-conversas
@@ -71,7 +71,7 @@ Varra toda conversa com mensagem nova, de grupo, canal ou individual. Uma conver
 
 ### Passo 2
 
-Em cada conversa, leia as mensagens desde a última varredura: o fim do relatório anterior ou, sem ele, o marcador de não lidas ou o período da cadência. Leia a conversa aberta, não a prévia da lista. Uma conversa sem mensagem nova no período entra no relatório com a frase "Não houve interação".
+Em cada conversa, leia as mensagens desde o ponto de leitura dela: o `Lido até` do relatório anterior ou, sem ele, o marcador de não lidas ou o período da cadência. Leia a conversa aberta, não a prévia da lista. Uma conversa sem mensagem nova no período entra no relatório com a frase "Não houve interação".
 
 O WhatsApp Web não toca o áudio, mas guarda o arquivo. Todo áudio, e todo vídeo curto com fala, se transcreve, sempre, sem perguntar: baixe cada um pela aba, como `usar-whatsapp-web` manda, e siga `transcrever-audio-e-video`. Grave o texto em `Pasta das transcrições`, com a conversa, quem mandou, a data e a hora, e leia o arquivo antes de seguir. Classifique o áudio pelo texto, como as outras mensagens. Sem o arquivo ou sem a transcrição, diga o resultado real da tentativa, liste quem mandou e a hora como ponto de atenção e peça a transcrição à pessoa.
 
@@ -114,6 +114,8 @@ Aplique rótulos em cada conversa varrida usando a habilidade `rotular-item`, co
 ### Passo 7
 
 Depois do registro dos ignorados e dos rótulos, proponha as ações que a árvore sugeriu nas conversas do WhatsApp: reagir a uma mensagem, que todo o grupo vê, favoritar a conversa ou a mensagem, que só muda a conta da pessoa, e apagar para mim, que também só muda a conta dela. O emoji de cada reação vem da árvore; sem ele, pergunte. Mostre cada ação com a conversa, quem escreveu, a hora, o começo do texto e quem vê o efeito, e pergunte. Cada ação que muda o que a pessoa vê só acontece com o sim, e o sim vale para a lista mostrada. Com `Reagir e favoritar` em `não`, só cite a ação no relatório.
+
+O `Lido até` do relatório guarda o ponto de leitura de cada conversa. A marca visível é a estrela privada na última mensagem triada, com o sim da pessoa, passando a estrela anterior para a nova. Nunca reaja para marcar onde parou: o grupo vê e pode ler como concordância.
 
 O áudio transcrito segue os parâmetros próprios. Com `Reação ao áudio transcrito` preenchida, reaja a cada áudio guardado, sem perguntar. Com `Apagar áudio transcrito` em `sim`, apague para mim o áudio depois de o texto estar salvo e conferido, e então não reaja a ele: a reação ficaria no grupo e a mensagem sumiria para você. Em `perguntar`, mostre a lista como as outras ações.
 
