@@ -36,3 +36,12 @@ Funcionalidade: Produção por unidade e tamanho
     Dado que o banco de produtos não está no workspace conectado
     Quando a pessoa pede para registrar uma produção
     Então a skill para e não usa a lista de outro workspace
+
+  Regra: o banco vazio chama a procura de banco
+
+    Exemplo: Banco sem valor
+      Dado que as instruções do projeto não definem um dos bancos
+      Quando a habilidade precisa ler ou gravar nele
+      Então ela chama a habilidade de procurar banco de dados
+      E diz a ela para que serve o banco e quais propriedades ele precisa ter
+      Mas não pergunta o nome à pessoa antes

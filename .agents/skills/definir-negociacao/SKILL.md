@@ -5,11 +5,12 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.1"
+  version: "0.1.2"
   related:
     - definir-agenda
     - evoluir-habilidade
     - organizar-ponto-de-contato
+    - procurar-banco-de-dados
     - procurar-email
     - redigir-com-tom-de-voz
     - sincronizar-cronograma
@@ -32,7 +33,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 Conversa ligada a um negócio, como cotação, proposta, parceria ou venda, fica na página da negociação, na lista de negociações. Conversa sem negócio, como convite, agradecimento ou networking, fica na discussão da página da pessoa, e na da empresa quando há uma. Não crie negociação para ela.
 
-Os nomes das listas e das propriedades vêm do mapeamento de dados do projeto, ou dos parâmetros das instruções do projeto onde a ferramenta não lê o mapeamento. Este texto usa os conceitos: negociação, pessoa, empresa, cronograma, inscrição, empresa abordada, pessoa abordada e oportunidade. Se a lista não estiver no workspace conectado, ou o nome dela não estiver no mapeamento nem nos parâmetros, pare e peça. Não adivinhe o nome.
+Os nomes das listas e das propriedades vêm do mapeamento de dados do projeto, ou dos parâmetros das instruções do projeto onde a ferramenta não lê o mapeamento. Este texto usa os conceitos: negociação, pessoa, empresa, cronograma, inscrição, empresa abordada, pessoa abordada e oportunidade. Se o nome da lista não estiver no mapeamento nem nos parâmetros, use `procurar-banco-de-dados`, dizendo para que serve a lista. Se a lista não estiver no workspace conectado, pare e peça. Não adivinhe o nome.
 
 ```mermaid
 flowchart LR

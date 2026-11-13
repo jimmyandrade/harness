@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.2.1"
   aliases:
     - acompanhar-producao-de-peca
   related:
@@ -13,6 +13,7 @@ metadata:
     - evoluir-habilidade
     - gerenciar-estoque
     - identificar-duplicata
+    - procurar-banco-de-dados
 ---
 
 # Acompanhar produção de produto
@@ -21,7 +22,7 @@ metadata:
 
 Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo.
 
-Os nomes dos bancos e das propriedades são do negócio e ficam nas instruções do projeto. Esta habilidade só declara os parâmetros e não traz valor. Parâmetro de banco ou de propriedade sem valor: pergunte uma vez e pare, sem usar um nome suposto.
+Os nomes dos bancos e das propriedades são do negócio e ficam nas instruções do projeto. Esta habilidade só declara os parâmetros e não traz valor. Banco sem valor: use `procurar-banco-de-dados`. Propriedade sem valor: pergunte uma vez e pare, sem usar um nome suposto.
 
 ```yaml
 "Modo de aprendizado": "perguntar"
@@ -61,7 +62,7 @@ A produção fica nos registros do produto, não em tarefa. O produto fica no `B
 
 Cada unidade física é uma linha do `Banco de unidades`, ligada à variação pela `Relação da unidade com a variação`. A etiqueta fica nela.
 
-A pessoa informa o data source na execução. Se um dos bancos não estiver no workspace conectado, pare. Não use a lista de outro workspace.
+Banco sem valor: use `procurar-banco-de-dados` para cada um, dizendo para que serve. Não use a lista de outro workspace.
 
 ```mermaid
 flowchart LR

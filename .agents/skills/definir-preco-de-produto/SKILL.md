@@ -5,12 +5,13 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
   aliases:
     - definir-preco-da-peca
   related:
     - evoluir-habilidade
     - gerenciar-estoque
+    - procurar-banco-de-dados
 ---
 
 # Definir preço de produto
@@ -26,7 +27,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 # Opções: `sempre`, `nunca`, `perguntar` e `automático`. `automático` lê as versões só quando a fonte do histórico não responde. O Notion não garante guardar as versões, então diga até onde chegam.
 "Leitura do histórico de versões da página": "perguntar"
 "Banco de variações": ""
-# Nomes de banco e de registro: o projeto define. Vazios, pergunte uma vez e não escolha.
+# Nomes de banco e de registro: o projeto define. Banco vazio: use `procurar-banco-de-dados` antes de perguntar. Registro vazio: pergunte uma vez e não escolha.
 "Banco de produtos": ""
 "Banco do histórico de preços": ""
 "Registro de mudança de preço no Shopify": ""
@@ -39,7 +40,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ### Passo 1
 
-O produto fica em `Banco de produtos`. Os nomes das propriedades vêm do mapeamento de dados do projeto. `Banco de produtos` vazio: a pessoa informa o data source na execução. Se ele não estiver no workspace conectado, pare.
+O produto fica em `Banco de produtos`. Os nomes das propriedades vêm do mapeamento de dados do projeto. `Banco de produtos` vazio: use `procurar-banco-de-dados`, dizendo que o banco guarda os produtos e seus preços.
 
 ```mermaid
 flowchart LR
@@ -62,13 +63,13 @@ O que for anterior às linhas dessa fonte pode estar no histórico de versões d
 - `perguntar`: quando a fonte não responde, pergunte se lê as versões e espere.
 - `nunca`: não leia as versões.
 
-Leia as versões da página do produto e, se o preço varia por variação, as da variação pedida. `Banco de variações` vazio: pergunte onde estão as variações. Não leia as da unidade.
+Leia as versões da página do produto e, se o preço varia por variação, as da variação pedida. `Banco de variações` vazio: use `procurar-banco-de-dados`. Não leia as da unidade.
 
 O Notion não garante guardar as versões, então diga até onde chegam. Pergunte só o que nada respondeu e diga qual fonte consultou.
 
 ### Passo 3
 
-Ao registrar uma mudança de preço de catálogo, acrescente uma linha na fonte do histórico. No banco do Notion, é uma linha em `Banco do histórico de preços`. No Shopify, é o `Registro de mudança de preço no Shopify` do produto. Com o banco ou o registro vazio, pergunte onde acrescentar.
+Ao registrar uma mudança de preço de catálogo, acrescente uma linha na fonte do histórico. No banco do Notion, é uma linha em `Banco do histórico de preços`. No Shopify, é o `Registro de mudança de preço no Shopify` do produto. Com `Banco do histórico de preços` vazio, use `procurar-banco-de-dados`. Com o registro do Shopify vazio, pergunte onde acrescentar.
 
 Nunca edite nem apague uma linha antiga: a correção vai numa linha nova.
 
