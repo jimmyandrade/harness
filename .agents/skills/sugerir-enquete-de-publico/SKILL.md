@@ -3,7 +3,7 @@ name: sugerir-enquete-de-publico
 description: Use essa habilidade sempre que for sugerir uma enquete ou pergunta para conhecer o público de um negócio, como a cidade, o repertório ou o interesse em participar, mesmo sem dizer enquete. NÃO use para escrever a copy final, publicar, cadastrar a ideia ou o post, nem definir a campanha.
 metadata:
   author: jimmyandrade
-  version: "0.2.2"
+  version: "0.2.3"
   related:
     - conversar-no-whatsapp
     - criar-ideia-de-conteudo
@@ -71,6 +71,8 @@ Quando a enquete serve a uma ação, como entregar algo, convidar ou organizar u
 
 Nome de pessoa ou de organização na mensagem sai na grafia canônica do cadastro, conferida com `definir-grafia`. Nome que não está no cadastro: avise e não escolha a grafia pelo que a conversa escreveu.
 
+A mensagem de contexto abre com uma saudação, mesmo quando a pessoa passa um texto próprio: o texto dela entra no corpo, e a saudação continua. A pergunta da enquete se entende sozinha, porque quem a vê sem ler a mensagem de cima não sabe do que se trata. Ela repete o objeto, como "Você quer pegar um exemplar da fanzine com a gente?", e não só o nome dele.
+
 ### Passo 8
 
 Sem pedido de registro, só sugira e não crie página. Com o pedido, grave o post no `Banco de posts` e as opções no `Banco de opções de enquete`. Enquete já publicada é registrada com o texto publicado, sem reescrever nem melhorar: a melhoria vira aprendizado para a próxima. Enquete aprovada com potencial de reuso: recomende o cadastro como modelo, com título, objetivo, formato, modelo de copy e referência.
@@ -133,6 +135,7 @@ Assumi o canal padrão do projeto e todas as praças. O objetivo é saber onde e
 - "Outra cidade" parece opção fraca. Ela mantém a lista honesta e vira resposta aberta.
 - Uma pergunta curta parece boa para uma enquete. Quando a resposta decide uma ação, sem contexto a pessoa não sabe por que responde, nem se haverá o que receber.
 - O negócio parece o autor do que distribui. Ele pode só apoiar a distribuição de um trabalho de outra pessoa ou grupo, sem fim comercial: a fonte diz quem fez e a mensagem não toma a autoria.
+- A pergunta de uma enquete parece poder apoiar-se na mensagem de cima. A enquete aparece sozinha na lista de conversas e na prévia, e a mensagem pode estar fora da tela.
 - O banco de copy parece o lugar da pergunta final. A escrita passa por `redigir-com-tom-de-voz`.
 - O WhatsApp Web cria a enquete no menu de anexar. Esta habilidade não descreve o clique: ele fica nas habilidades do WhatsApp.
 
