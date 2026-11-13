@@ -534,7 +534,8 @@ How these skills relate is in `README.md`, in this folder.
   - Moves a code to the AI-validated status after checking the official source, the composition, and the characteristics, and to the person-validated status, the stronger one, only with a person's yes
   - Asks all the classification traits at once when a variant is registered or launched: kind of good, how it is used, closing side, construction, and each material with its percentage
   - Publishes the code to the online store in the country harmonized code of the variant, keeping the code list as the source
-  - Breaks a tie between two fitting headings with the project's tie-break criterion, such as the less gender-oriented heading, and leaves the choice to the person when the criterion does not decide
+  - Breaks a tie between two fitting headings with the project's tie-break criteria, applied in order, such as the lowest tax burden for the company's tax regime or the less gender-oriented heading, and leaves the choice to the person when none decides
+  - For the lowest tax burden, reads the rate from the code list, or from the official source when it is missing, and records it on the code page with the source. The tax burden only breaks a tie that the chapter notes and the General Rules of Interpretation leave open
   - Links the code to the variant, not to the unit, and links it to the product only as a temporary step while the variant has no field
 - **Test Criteria**:
   - [x] The skill is present at that path
@@ -758,7 +759,13 @@ How these skills relate is in `README.md`, in this folder.
   - On an existing row, changes only the named property, attaches the confirmation photo to the receipts in that same write, and does not fill the confirmation date unless the person states it
   - When the person states the day they sent the registration, writes that day and does not ask for the hour
   - Spells names through definir-grafia
-  - Does not store the order number, does not put the photo in the page body, and does not decide whether a task exists
+  - Keeps a contested refusal on the registration as in contestation, proposes creating the option when missing, leaves the opportunity as not selected until the organization decides, and records the outcome in a dated comment
+  - Sets lost when the registration could not be completed and not selected when it was sent and not chosen, waitlist included
+  - Separates the deadline to confirm interest from the deadline to pay across every source, never invents a date, and does not call a participation safe without one unless it is confirmed and paid
+  - Turns a pasted form into an in-progress registration whose body holds the form, never the opportunity body
+  - Keeps a positive conversation as in progress until an operational confirmation, and points to the negotiation in the notes
+  - Stores the order number and the registration code in separate properties, looks up the participant before creating, and attaches closing evidence to the opportunity
+  - Does not put the photo in the page body, and does not decide whether a task exists
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses only celebrating without saving, only looking up who registered, and deciding whether a task exists
@@ -834,6 +841,24 @@ How these skills relate is in `README.md`, in this folder.
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [ ] Three cases validated with the person
+
+### definir-localidade-geografica
+- **Stability**: experimental
+- **Description**: Register, review, or fix a country, state, or city in the locations list
+- **Properties**:
+  - Lives at `.agents/skills/definir-localidade-geografica/SKILL.md`
+  - Reads the list and its property names from the data mapping of the project, and stops before writing when the name, the type, or the parent is missing from it
+  - Checks for a duplicate through identificar-duplicata before creating, and updates or relates the existing page instead
+  - Keeps each page under the level right above it through the parent, country, state, city by default, and fixes an empty or wrong parent before finishing
+  - Reads the hierarchy levels from the `Níveis da hierarquia` parameter or detects them in the workspace, so a business may add a planet, a continent, or a region, and limits a level to some countries through `Níveis só em certos países`
+  - When the list is not in the data mapping, searches the connected workspace for it, confirms when several match, and asks whether to create it or where it is when none does, instead of stopping
+  - Requires ISO 3166-1 on a country and ISO 3166-2 on a state, and leaves the city code optional
+  - Names a state and a city by the project parameters `Padrão do nome do estado` and `Padrão do nome da cidade`
+  - When a mentioned city is missing, asks its opportunity priority and creates it with that priority and the state as parent, and never uses the state as an approximation
+  - Records the source and the pending doubt in the notes when the source is partial
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses only checking existence, spelling, merging, the physical venue or company, and deleting
 
 ### definir-lote-de-ingresso
 - **Stability**: experimental

@@ -3,7 +3,7 @@ name: enviar-email
 description: Monta e envia um e-mail em nome de uma pessoa, com a assinatura certa, o destinatário principal e as cópias, o anexo vindo do Notion e o envio só com o sim. Usada quando uma pessoa contata uma organização por e-mail, inclusive com comprovante. Não serve para escrever no tom da marca, achar um e-mail nem triar a caixa.
 metadata:
   author: jimmyandrade
-  version: "0.3.2"
+  version: "0.5.0"
   related:
     - definir-pessoa
     - acompanhar-retornos-pendentes
@@ -41,6 +41,9 @@ Se não estiver, peça a liberação logo, com o nome da ferramenta.
 
 A liberação não dispensa o sim da pessoa ao texto e aos destinatários.
 
+Antes de redigir, procure na caixa um rascunho não enviado na mesma conversa e mostre-o à pessoa.
+Se existir, edite esse rascunho em vez de criar outro, para os dois não saírem com pedidos diferentes. Uma sessão que acompanha as respostas costuma deixá-lo.
+
 ### Passo 2
 
 Quem fala é a pessoa que contata a organização, e não a empresa dona da caixa.
@@ -49,6 +52,9 @@ Escreva em primeira pessoa e assine com o nome completo dela, como `definir-pess
 Assinar com o nome da empresa só vale quando a empresa é quem fala.
 
 Se a organização conhece a pessoa por outro endereço, como o endereço do cadastro de associado, ponha esse endereço em cópia, para a resposta chegar a ela.
+
+Quando o e-mail sai de um endereço que não é o do cadastro, por um problema no telefone ou na conta da pessoa, o texto diz isso numa frase e avisa que o endereço do cadastro está em cópia, para a pessoa ter acesso depois.
+Ele também pergunta se a organização pode responder por esse endereço, porque ela pode desconfiar de um endereço que não conhece.
 
 ### Passo 3
 
@@ -75,6 +81,8 @@ Anexe o arquivo pelo campo de arquivo escondido da página e confira na tela que
 ### Passo 5
 
 Aproveite o e-mail para tratar todos os pontos de uma vez, em vez de mandar um e outro depois: o que a pessoa envia, o que pede e o que ainda não sabe, como valores a cotar.
+
+Cada assunto vira um item de uma lista numerada, com o pedido dele, e o texto antes da lista diz o contexto. Dois assuntos, como uma análise que se espera e uma extensão que se pede, nunca dividem o mesmo parágrafo. A organização responde pelo número.
 
 Quando o assunto é uma viagem, diga a ida e a volta, com os dias.
 Assim a organização sabe o período inteiro e, se for o caso, cota a extensão do serviço.
@@ -174,6 +182,7 @@ Mostrei tudo e esperei o sim.
 
 - O aviso do e-mail sobre destinatário de fora da organização é esperado quando a pessoa escreve a uma empresa. Ele não indica problema.
 - Um endereço de e-mail que escreveu em nome da organização pode ser só de envio automático e não receber resposta. Verifique antes de pô-lo em cópia.
+- Um endereço diferente do cadastro parece só um detalhe. A organização pode desconfiar dele e travar o atendimento, então o texto explica o motivo e pergunta se ela pode responder ali.
 - O nome do arquivo anexado é lido pelo destinatário. Use um nome que diga o que é e a data.
 - O e-mail da empresa pode ser o de contato de uma pessoa, e a organização cadastrou outro endereço dela. Sem o endereço do cadastro em cópia, a resposta pode ir para o lugar errado.
 

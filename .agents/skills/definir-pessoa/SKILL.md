@@ -5,10 +5,11 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.13.0"
+  version: "0.14.0"
   related:
     - definir-empresa
     - definir-grafia
+    - conversar-no-whatsapp
     - definir-perfil-social
     - identificar-duplicata
 ---
@@ -78,9 +79,13 @@ O nome completo é o nome da pessoa. O handle não entra nesse nome. Não invent
 
 Telefone vai no formato internacional. Celular do Brasil tem 9 dígitos depois do DDD: o WhatsApp às vezes mostra o número sem o 9. Número de 8 dígitos começado por 6, 7, 8 ou 9 é celular sem o 9: pergunte o número completo antes de gravar.
 
-Com `Cadastro na loja` em `sim`, crie ou atualize o cliente na loja com o nome, o telefone, o e-mail e o idioma, sem consentimento de marketing. Grave o link do cliente em `Campo do cliente na loja`, ou nas notas quando o campo está vazio. O histórico das conversas fica nos comentários da página da pessoa, não na nota do cliente. O perfil que o print mostrar segue `definir-perfil-social`. Quando esse perfil existir, relacione nos perfis sociais relacionados. Não grave o print no corpo.
+Com `Cadastro na loja` em `sim`, crie ou atualize o cliente na loja com o nome, o telefone, o e-mail e o idioma, sem consentimento de marketing. Grave o link do cliente em `Campo do cliente na loja`, ou nas notas quando o campo está vazio. O histórico das conversas fica nos comentários da página da pessoa, não na nota do cliente.
 
-Grave como confirmado só o que veio direto da pessoa que usa a habilidade ou de uma fonte que respondeu com certeza. Nunca invente papel, time nem apelido. Sem e-mail em nenhuma fonte, o e-mail fica como pendência no registro. Quando algo precisa ir por e-mail à pessoa, proponha pedir o e-mail na conversa.
+Todo perfil social que a pessoa informar, em link, print ou handle, como o LinkedIn ou o Instagram, é cadastrado por `definir-perfil-social` na mesma resposta e relacionado nos perfis sociais relacionados. O link do perfil nunca vai nas notas, e a skill não deixa o perfil de fora.
+
+Não grave o print no corpo.
+
+Grave como confirmado só o que veio direto da pessoa que usa a habilidade ou de uma fonte que respondeu com certeza. Nunca invente papel, time nem apelido. Sem e-mail em nenhuma fonte, o e-mail fica como pendência no registro. Quando algo precisa ir à pessoa, use o canal que já existe: sem e-mail e com WhatsApp, mande pelo WhatsApp, por `conversar-no-whatsapp`. Só sem nenhum canal, peça o contato.
 Uma transcrição errada do nome, como a de uma reunião transcrita por voz, que a pessoa confirma ser errada diante do nome canônico, entra nas variações de grafia, com a data e a fonte. O nome completo fica com o canônico, e a transcrição não se descarta nem vira o nome.
 O que quem usa a habilidade diz sobre o papel de alguém numa empresa, como quem cuida dos recebimentos e quem só é informado, vem direto dela e entra na mesma rodada, sem perguntar. Na pessoa, vai no campo de papel, ou nas observações quando a lista não tem esse campo. Na empresa, a pessoa entra na lista de pessoas responsáveis, e o papel de cada uma vai nas notas da empresa e nas listas do negócio que o citam, como a negociação e o grupo do evento. Depois de gravar, leia as páginas de volta e diga o que gravou e o que não coube.
 Um apelido ou uma grafia ambígua que a pessoa decide inferir, como "vamos inferir que Bia é a Beatriz", entra no registro de quem foi inferida, na lista das transcrições erradas do nome, com o estado `inferido`, a data, quem inferiu, a frase da transcrição e o que descartou as outras hipóteses.

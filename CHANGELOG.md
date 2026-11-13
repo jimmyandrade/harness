@@ -1,5 +1,60 @@
 # Changelog
 
+## [1.80.0](https://github.com/jimmyandrade/harness/compare/v1.79.0...v1.80.0) (2026-11-13)
+
+
+### Features
+
+* **definir-okr:** record every target change in the key result comments with the reason ([#1085](https://github.com/jimmyandrade/harness/issues/1085)) ([bc2bf55](https://github.com/jimmyandrade/harness/commit/bc2bf55d1331c1447811e5966e15d12b14147dae))
+
+## [1.79.0](https://github.com/jimmyandrade/harness/compare/v1.78.0...v1.79.0) (2026-11-13)
+
+
+### Features
+
+* **definir-codigo-fiscal:** break a tie by the lowest tax burden and apply criteria in order ([#1075](https://github.com/jimmyandrade/harness/issues/1075)) ([f268462](https://github.com/jimmyandrade/harness/commit/f268462e254bff8bc1e4c3b43965b3e4c1af7394))
+
+## [1.78.0](https://github.com/jimmyandrade/harness/compare/v1.77.0...v1.78.0) (2026-11-13)
+
+
+### Features
+
+* **acompanhar-retornos-pendentes:** poll active conversations more often with a second routine per channel ([#1069](https://github.com/jimmyandrade/harness/issues/1069)) ([b3fe887](https://github.com/jimmyandrade/harness/commit/b3fe88705cc76cb2ed38756cedfe3426516ba22c))
+* **acompanhar-retornos-pendentes:** treat the password manager approval as permission, not as a login ([#1062](https://github.com/jimmyandrade/harness/issues/1062)) ([c78635f](https://github.com/jimmyandrade/harness/commit/c78635f86e2b2263b32e8b006a239c84c02ff0a7))
+* **acompanhar-retornos-pendentes:** watch the email notice a task waits for and update the task ([#1046](https://github.com/jimmyandrade/harness/issues/1046)) ([c0c4931](https://github.com/jimmyandrade/harness/commit/c0c49313902b60de755f1c1729652270f0818e35))
+* add prever-tempo-de-viagem to forecast a trip's arrival or departure time ([#1045](https://github.com/jimmyandrade/harness/issues/1045)) ([270f707](https://github.com/jimmyandrade/harness/commit/270f70747768659e430ac815a10fe4e6155ef384))
+* **criar-ponto-de-contato:** distinguish opportunity from point of sale before creating a touchpoint ([#1072](https://github.com/jimmyandrade/harness/issues/1072)) ([6a3d4f3](https://github.com/jimmyandrade/harness/commit/6a3d4f31cee5f765d429a06cf2dbd44f4b723c1f))
+* **definir-agenda:** ask who to invite and put the chosen departure and setup window in the calendar ([#1065](https://github.com/jimmyandrade/harness/issues/1065)) ([b0b0abd](https://github.com/jimmyandrade/harness/commit/b0b0abdb9d6aa5ae0b3cbc02ceb32352ac9653c0))
+* **definir-inscricao:** cover contest, outcome, deadlines, pasted form and identifiers ([#1071](https://github.com/jimmyandrade/harness/issues/1071)) ([d6dbe36](https://github.com/jimmyandrade/harness/commit/d6dbe36c88496bcab00f756a4a1273bf958b00f2))
+* **definir-localidade-geografica:** add a skill to register and fix countries, states and cities ([#1076](https://github.com/jimmyandrade/harness/issues/1076)) ([e6df4c8](https://github.com/jimmyandrade/harness/commit/e6df4c8c61aefc154ed5f5c5ad8687baa8600ae4))
+* sign in through the password manager and repair filters left without an action ([#1080](https://github.com/jimmyandrade/harness/issues/1080)) ([024eb26](https://github.com/jimmyandrade/harness/commit/024eb26a38d2d04b3bd5c0f63da12f078bda3392))
+* stop repeating who is writing and the company signature in an open WhatsApp chat ([#1073](https://github.com/jimmyandrade/harness/issues/1073)) ([f65e896](https://github.com/jimmyandrade/harness/commit/f65e896198f2f88dfae81dfe0d7891038fb0a646))
+
+
+### Bug Fixes
+
+* hide evoluir-habilidade from the skills graph ([#1064](https://github.com/jimmyandrade/harness/issues/1064)) ([9b5a304](https://github.com/jimmyandrade/harness/commit/9b5a304b76174082226052ff963afc97a063cbfc))
+* **investigar-problema:** verify every checkable point before answering ([#1060](https://github.com/jimmyandrade/harness/issues/1060)) ([d275e68](https://github.com/jimmyandrade/harness/commit/d275e6889604d242dac8a9d07d32130d6b79ccba))
+* show the WhatsApp draft in the closing message of the turn ([#1043](https://github.com/jimmyandrade/harness/issues/1043)) ([4efdede](https://github.com/jimmyandrade/harness/commit/4efdede7d5e2c512c82925e32fc3ad68bf416ea3))
+
+## [1.77.0](https://github.com/jimmyandrade/harness/compare/v1.76.0...v1.77.0) (2026-11-12)
+
+
+### Features
+
+* **conversar-no-whatsapp:** put each subject of a draft in its own numbered item ([#1058](https://github.com/jimmyandrade/harness/issues/1058)) ([0628273](https://github.com/jimmyandrade/harness/commit/062827332dbec48c1fc6d0cf9922824460a603ea))
+* **enviar-email:** reuse an unsent draft and confirm the reply channel when it is not the registered one ([#1059](https://github.com/jimmyandrade/harness/issues/1059)) ([6feae85](https://github.com/jimmyandrade/harness/commit/6feae857409e72f074ff7557871dc3bb3f65d2c4))
+* let an appliqué carry a short label text that overrides the project default ([#1055](https://github.com/jimmyandrade/harness/issues/1055)) ([8a67f26](https://github.com/jimmyandrade/harness/commit/8a67f265b07a13e69049cc3f448505122a33a378))
+* **rotular-item:** create the missing context label from the BASB scheme and propose its filter ([#1048](https://github.com/jimmyandrade/harness/issues/1048)) ([732afa8](https://github.com/jimmyandrade/harness/commit/732afa86a5a6ac89ce44ee69d01811e397a9c0f4))
+* warn about the setup window before planning a trip to an event ([#1044](https://github.com/jimmyandrade/harness/issues/1044)) ([033d972](https://github.com/jimmyandrade/harness/commit/033d9722147e3de1b5a68313f8cec1b89dfa2add))
+
+
+### Bug Fixes
+
+* let the appliqué go on the label when its record says so ([#1053](https://github.com/jimmyandrade/harness/issues/1053)) ([906c057](https://github.com/jimmyandrade/harness/commit/906c057f02ba1e989b396bf3f27fc0822e6d45f3))
+* **redigir-com-tom-de-voz:** return the unsent draft in the final message, never as above ([#1047](https://github.com/jimmyandrade/harness/issues/1047)) ([3b46c73](https://github.com/jimmyandrade/harness/commit/3b46c739678ee3487e5b6bf2097ace09ec7ac3e9))
+* **usar-whatsapp-web:** take over as owner when none exists and reuse the tab group ([#1052](https://github.com/jimmyandrade/harness/issues/1052)) ([b30b53c](https://github.com/jimmyandrade/harness/commit/b30b53ccb56d16a9b70d62bccfa6215b5e3055e4))
+
 ## [1.76.0](https://github.com/jimmyandrade/harness/compare/v1.75.0...v1.76.0) (2026-11-11)
 
 

@@ -2,7 +2,7 @@
 name: mensagens-do-whatsapp
 description: Formato do rascunho de mensagens de WhatsApp mostrado no chat antes do envio, com a conversa de destino, um bloco por mensagem, a mensagem citada, o fechamento e a pergunta que pede o sim.
 metadata:
-  version: "0.1.1"
+  version: "0.2.0"
 ---
 
 ## Contexto
@@ -37,7 +37,7 @@ Use este modelo para mostrar à pessoa, no chat, o rascunho de uma ou mais mensa
 
 ## Estilo
 
-Um bloco de código por mensagem, na ordem do envio, para o texto inteiro ficar à vista e a formatação do WhatsApp sobreviver à cópia. Uma mensagem por assunto quando o texto vai dividido; com um assunto só, uma mensagem só. A mensagem que responde a algo diz em cima qual mensagem da outra pessoa ela cita, mesmo que seja de semanas atrás. A que não responde a nada vai sem a linha de citação. O fechamento, como uma despedida, vai num bloco próprio quando vai sozinho, e senão fica no fim da última mensagem.
+Um bloco de código por mensagem, na ordem do envio, para o texto inteiro ficar à vista e a formatação do WhatsApp sobreviver à cópia. Uma mensagem por assunto quando o texto vai dividido; com um assunto só, uma mensagem só. Com mais de um assunto que pede resposta, o assunto nunca divide parágrafo com outro: pela `lista numerada`, a mensagem abre com o contexto e traz um item numerado por assunto, cada um com o pedido dele, em linhas próprias (`1.`, `2.`); por `mensagens separadas`, cada assunto tem a sua mensagem. A mensagem que responde a algo diz em cima qual mensagem da outra pessoa ela cita, mesmo que seja de semanas atrás. A que não responde a nada vai sem a linha de citação. O fechamento, como uma despedida, vai num bloco próprio quando vai sozinho, e senão fica no fim da última mensagem.
 
 O texto não usa Markdown: negrito é um asterisco de cada lado, itálico é sublinhado, e não há título nem link entre colchetes. Toda data vai por extenso, com o dia da semana e a data completa, nunca só "até quinta" nem só a data.
 

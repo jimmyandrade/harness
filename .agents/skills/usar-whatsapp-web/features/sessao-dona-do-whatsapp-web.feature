@@ -37,6 +37,46 @@ Funcionalidade: Uma sessão dona do WhatsApp Web
       Então a sessão abre a aba de novo e torna-se a dona
       E, se pedir o QR code, para e pede a conexão
 
+  Regra: Sem dona, quem recebe o pedido é a dona
+
+    Exemplo: Outra sessão pede e a lista não tem dona
+      Dado que `Sessão dona do WhatsApp Web` está em `sim`
+      E que a lista de sessões não tem a dona, porque ela foi arquivada
+      E que outra sessão pede a esta uma leitura, dizendo que ela é a dona
+      Quando a sessão confere a lista de sessões
+      Então ela assume o título "Dona do WhatsApp Web" e atende o pedido
+      E não recusa o pedido nem o devolve à pessoa ou ao remetente
+
+    Exemplo: O pedido diz que a sessão é a dona, mas a lista mostra outra
+      Dado que a lista de sessões tem a dona, e não é esta sessão
+      Quando outra sessão pede a esta uma leitura, dizendo que ela é a dona
+      Então a lista decide, e não o pedido
+      E a sessão encaminha o pedido à dona da lista, sem abrir aba
+
+  Regra: Uma dona só, mesmo quando duas assumem juntas
+
+    Exemplo: Duas sessões assumem o título na mesma hora
+      Dado que duas sessões viram a lista sem dona e as duas assumiram o título "Dona do WhatsApp Web"
+      Quando uma delas lista as sessões de novo e vê o mesmo título em outra sessão não arquivada
+      Então fica a sessão de `sessionId` menor em ordem alfabética
+      E a outra devolve o título, renomeia a sessão para o assunto dela e encaminha o pedido
+      E nenhuma arquiva a outra sem o sim da pessoa
+
+  Regra: Reaproveita a aba e o grupo de abas antes de abrir outro
+
+    Exemplo: As abas da sessão já mostram o WhatsApp Web
+      Dado que a sessão é a dona
+      E que a lista de abas dela no Claude in Chrome já mostra o WhatsApp Web
+      Quando ela precisa ler ou enviar
+      Então usa essa aba, no mesmo grupo de abas
+      E não cria outro grupo de abas
+
+    Exemplo: A sessão ainda não tem a aba
+      Dado que a sessão passa a ser a dona
+      E que a lista de abas dela não mostra o WhatsApp Web
+      Quando ela abre o WhatsApp Web
+      Então abre uma aba só, no grupo de abas que a sessão já tem
+
   Regra: Só a dona envia, e o sim vale na conversa dela
 
     Exemplo: Outra sessão pede um envio

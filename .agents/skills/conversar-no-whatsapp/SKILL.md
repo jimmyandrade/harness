@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.31.0"
+  version: "0.34.0"
   aliases:
     - redigir-mensagem-de-whatsapp
   related:
@@ -41,6 +41,8 @@ Leia os valores nas instruções do projeto, na entrada desta habilidade. Na aus
 "Canais em ordem de preferência": ["conector", "WhatsApp Web"]
 # `Dividir em mensagens curtas`: `sim` divide o rascunho em mensagens, uma por ideia. `não` manda cada rascunho numa mensagem só.
 "Dividir em mensagens curtas": "sim"
+# `Vários assuntos no rascunho` vale quando o rascunho tem mais de um assunto que pede resposta. `lista numerada` manda uma mensagem só, com a abertura e um item numerado por assunto, para a pessoa responder pelo número. `mensagens separadas` manda uma mensagem por assunto.
+"Vários assuntos no rascunho": "lista numerada"
 # `Mensagem única para` lista os tipos de mensagem que vão numa mensagem só, como um status de demanda para alguém do time.
 "Mensagem única para": []
 # `Comunicado numa mensagem só`: `sim` manda o comunicado de produto numa mensagem só. `não` segue `Dividir em mensagens curtas`.
@@ -102,13 +104,18 @@ Antes de rascunhar, leia a conversa de destino desde a última mensagem que voc�
 
 Com `Página de instruções do WhatsApp` preenchida, leia a página antes de rascunhar e siga a conta e as regras dela. Se ela não abrir na conexão, pare e peça.
 
+Veja também se há um e-mail não enviado sobre o mesmo assunto e alinhe os pedidos com ele.
+Quando a pessoa escreve de um número que a organização não tem no cadastro, por um problema no telefone dela, o texto diz o motivo numa frase e pergunta se pode continuar por esse número.
+
 Todo rascunho de mensagem aparece na resposta do chat. Leia o modelo de saída `mensagens-do-whatsapp` quando for gerar a saída.
 Não diga só que o rascunho está pronto.
+O texto vai na mensagem de fechamento do turno, a última que a pessoa lê, junto com o pedido do sim. Um app que mostra um quadro de próximo passo no fim do turno pode cortar o texto escrito antes dele, e então o fechamento que diz só "acima" deixa a pessoa sem o rascunho.
 Uma mensagem que diz que um trabalho está em andamento, foi registrado ou foi feito leva o link da tarefa, da página ou do pull request que mostra esse registro. Sem esse registro, crie-o antes, como `definir-tarefa` manda, ou pergunte onde ele está.
 Com a ferramenta de widget na sessão, o widget vem sempre, além dos blocos, como o modelo de saída diz. Não espere o cliente desenhá-lo nem o trate como opcional.
 Sem o texto à vista, não pergunte se pode enviar.
 
 Com `Dividir em mensagens curtas` em `sim`, como as pessoas costumam escrever no WhatsApp, divida o rascunho em mensagens, uma por ideia.
+Dois assuntos que pedem resposta, como uma análise que se espera e uma extensão que se pede, nunca dividem o mesmo parágrafo. Eles seguem `Vários assuntos no rascunho`, e não a divisão por ideia.
 Cada mensagem que responde a algo cita a mensagem da outra pessoa que ela responde, mesmo de semanas atrás: ache-a lendo a conversa inteira.
 Com `Fechamento em mensagem separada` em `sim`, a despedida vai numa mensagem própria, a última.
 Envie na mesma ordem, uma de cada vez.
@@ -117,6 +124,7 @@ Com `Comunicado numa mensagem só` em `sim`, o comunicado de produto também vai
 Escreva o comunicado com essa habilidade, não aqui.
 Um pedido ou uma lista de pendências que acompanha o anúncio é outro assunto e vai em outra mensagem, depois do comunicado.
 A saudação e o texto se dirigem só a quem está na conversa aberta: quem ela não alcança, como a outra pessoa que assina a organização, entra na terceira pessoa. Quem só fica a par recebe, na conversa dele, um aviso curto, sem as perguntas de quem decide.
+Numa conversa já aberta com a pessoa, a mensagem não diz quem escreve nem de qual empresa: o nome da conversa já diz. Quem ainda não conhece quem escreve é apresentado uma vez, na primeira mensagem, com o nome e a empresa, como "o Jimmy, da oRnii". Depois disso, nem a abertura repete a apresentação nem o fim leva assinatura com o nome da empresa.
 O comprovante de pagamento segue `Canal do comprovante`. Com `e-mail na mesma conversa`, o e-mail segue `redigir-com-tom-de-voz`, e com o sim da pessoa sai pelo conector de e-mail, com o arquivo anexado, sem pedir que a pessoa copie ou anexe, e o WhatsApp só avisa que foi por e-mail e pede a confirmação. Com `e-mail e WhatsApp`, o arquivo vai também na conversa, antes do aviso. Sem conversa de e-mail com a organização, mande o arquivo no WhatsApp e diga isso.
 
 Para responder ou enviar, mostre a conversa de destino, o texto exato e, se for resposta, a mensagem citada. Envie só depois do sim da pessoa a esse texto e a essa conversa. O sim vale para uma mensagem. Outra mensagem pede outro sim.
@@ -194,6 +202,7 @@ Se você disser que o rascunho está pronto sem mostrar o texto, a pessoa não c
 1. Mostre o texto inteiro na resposta do chat, num bloco de código.
 2. Com a ferramenta de widget na sessão, mostre sempre também o texto editável, com copiar e aprovar. O widget não substitui o bloco.
 3. Pergunte se pode enviar só depois do texto, na mesma resposta.
+4. Com um quadro de próximo passo no fim do turno, escreva o texto na mensagem que vem depois dele. Não escreva "acima" nem "no rascunho" sem o texto ali.
 
 ### Andamento sem o link
 
@@ -263,6 +272,7 @@ Mostrei a edição "Chegaremos*" na mesma mensagem e editei depois do sim. Não 
 - No campo de mensagem, Enter envia. A quebra de linha é shift+Enter.
 - O campo numera a lista sozinho depois de "1. ". Digitar "2." no item seguinte duplica o número: digite só o texto dos itens seguintes.
 - Responder a uma mensagem é pelo menu que aparece ao passar o mouse sobre ela, na opção Responder. A citação aparece em cima do campo.
+- A mensagem de WhatsApp parece pedir assinatura e "aqui é da empresa" como um e-mail. A conversa já mostra quem escreve: a apresentação vale só na primeira mensagem para quem não conhece a pessoa.
 - Enter na busca da lista abre a primeira conversa e marca as mensagens como lidas. Digite o nome e leia o resultado sem apertar Enter.
 - O texto da página traz a lista de conversas inteira antes da conversa aberta. A conversa aberta começa depois do nome do contato no cabeçalho.
 - A mensagem editada mostra "Editada", e o texto antigo some para os dois lados.
