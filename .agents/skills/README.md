@@ -774,6 +774,7 @@ flowchart LR
   sugerir_enquete_de_publico --> conversar_no_whatsapp
   sugerir_enquete_de_publico --> criar_ideia_de_conteudo
   sugerir_enquete_de_publico --> definir_campanha_de_conteudo
+  sugerir_enquete_de_publico --> definir_grafia
   sugerir_enquete_de_publico --> definir_localidade_geografica
   sugerir_enquete_de_publico --> redigir_com_tom_de_voz
   sugerir_enquete_de_publico --> usar_whatsapp_web
