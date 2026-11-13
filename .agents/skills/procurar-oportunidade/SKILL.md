@@ -5,10 +5,12 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch
 compatibility: Precisa de internet. A busca semântica na lista de oportunidades usa notion-ai-search no servidor notion.
 metadata:
   author: jimmyandrade
-  version: "0.6.1"
+  version: "0.7.0"
   related:
     - criar-oportunidade
     - definir-inscricao
+    - identificar-duplicata
+    - mesclar-registro
 ---
 
 # Procurar oportunidade
@@ -51,15 +53,23 @@ Leia cada página encontrada. A mesma edição tem o nome, ou uma variação, e 
 
 ### Passo 4
 
-Uma edição com o mesmo nome e a mesma data: ela existe. Mostre o título, a data e o link. Se entrou por uma variação, diga qual. Na mesma resposta, diga o pedaço buscado e que usou as duas buscas. Se o texto é um pedido realizado ou confirmado, siga `definir-inscricao` nessa mesma resposta. Não pare na edição.
+Uma edição com o mesmo nome e a mesma data: ela existe. Mostre o título, a data, o status atual e o link. O status vem da propriedade de status da lista do projeto, com o valor que a página tem. Sem status na página, diga que está vazio. Não invente. Se entrou por uma variação, diga qual. Na mesma resposta, diga o pedaço buscado e que usou as duas buscas. Se o texto é um pedido realizado ou confirmado, siga `definir-inscricao` nessa mesma resposta. Não pare na edição.
 
-Várias que podem ser a edição: mostre título, data e link de cada uma. Não escolha. Não responda sim.
+Várias que podem ser a edição: mostre título, data, status atual e link de cada uma, inclusive as possíveis duplicatas. Não escolha. Não responda sim.
+
+Edição achada com data, ou intervalo, anterior a hoje: antes de qualquer alteração, pergunte quais foram aproveitadas e quais foram perdidas, listando cada uma com título, data e status atual. Só depois da resposta, atualize o status de cada uma para o valor da lista que corresponde a aproveitada ou a perdida. Sem resposta, não altere o status. Um intervalo conta como anterior a hoje quando o último dia já passou.
+
+Outra data do mesmo nome é outra edição. Antes de alterar uma edição existente, compare a data da página com a do pedido. Se o pedido se refere a outra data, não atualize a existente: trate como edição nova, e o cadastro dela segue `criar-oportunidade`. Sem data clara no pedido, peça a confirmação da data ou trate como edição nova. Não altere a existente no escuro.
+
+A pessoa diz que duas edições que parecem a mesma são coisas diferentes, por exemplo mesmo dia, mesmo tema ou mesmo organizador: a desambiguação é a relação Não confundir com entre elas, feita por `identificar-duplicata` e `mesclar-registro`. Oriente isso e não consolide as duas.
 
 Nenhuma: diga que ela não existe na lista de oportunidades. Mostre o link da lista. Repita o nome, a data e o lugar buscados, e que usou as duas buscas. Não crie a oportunidade. Não organize a participação. Não crie tarefa. A resposta não pede para nomear a habilidade.
 
 ### Passo 5
 
-Data de evento, compromisso, prazo, viagem, reserva, lançamento, entrega ou outro marco, na resposta, no resumo, na tabela ou em outro texto, sai no formato da data com dia da semana. Calcule e confira o dia com a data, o horário e o fuso do evento antes de responder. Sem horário ou sem fuso, e se o dia puder mudar, peça. Não invente. Intervalo ou vários dias: o dia da semana em cada data. Se a fonte trouxer um dia da semana incompatível com a data, sinalize a divergência. Não crie nem altere.
+Data de evento, compromisso, prazo, viagem, reserva, lançamento, entrega ou outro marco, na resposta, no resumo, na tabela ou em outro texto, sai no formato da data com dia da semana. Calcule e confira o dia com a data, o horário e o fuso do evento antes de responder. Sem horário ou sem fuso, e se o dia puder mudar, peça. Não invente. Intervalo ou vários dias: o dia da semana em cada data.
+
+Se a fonte trouxer um dia da semana incompatível com a data, sinalize a divergência. Na consulta, não crie nem altere, a não ser o status de uma edição passada, e só depois da resposta da pessoa sobre quais foram aproveitadas e quais foram perdidas.
 
 ## Problemas comuns
 
@@ -148,6 +158,9 @@ a oportunidade não existe na lista de oportunidades. Mostrei o link da lista. B
 - A pessoa indicou outra lista e ela não está no workspace conectado: pare e peça a lista certa.
 - Nada igual nessa lista: diga que não existe. Não crie. Não busque o workspace inteiro.
 - O dia da semana da fonte não bate com a data: sinalize. Não grave.
+- A edição achada é anterior a hoje: pergunte quais foram aproveitadas e quais foram perdidas antes de mudar o status.
+- O pedido tem outra data que a da página, com o mesmo nome: é outra edição. Não atualize a existente.
+- A pessoa diz que duas edições parecidas são diferentes: oriente a relação Não confundir com, por `identificar-duplicata` e `mesclar-registro`.
 
 ## Pegadinhas
 

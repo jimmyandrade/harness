@@ -3,7 +3,7 @@ name: bloquear-remetente-de-spam
 description: Classifica remetentes de spam por uma árvore de decisão, grava a decisão no banco do negócio e entrega as listas para colar no bloqueio de remetentes do Gmail e de URL do Chrome do Admin do Google. Usada quando a pessoa cola ou cita remetentes para bloquear. NÃO serve para filtro de caixa, marcar mensagem como spam nem salvar no Admin.
 metadata:
   author: jimmyandrade
-  version: "0.1.2"
+  version: "0.1.3"
   related:
     - definir-filtro-de-email
     - organizar-emails
@@ -82,13 +82,15 @@ Antes de perguntar sobre um domínio que parece empresa real, procure sinais: bu
 
 ### Passo 5
 
-Pergunte quem decidiu antes de gravar, uma vez por execução, e nunca presuma a pessoa nem deixe o campo em branco. Quem decidiu é quem respondeu as perguntas do Passo 4.
+Pergunte quem decidiu antes de gravar, uma vez por execução, e nunca presuma a pessoa nem deixe o campo em branco. Quem decidiu é quem respondeu as perguntas do Passo 4. Ache essa pessoa no banco pelo nome que ela deu, e não pelo usuário da conexão, que pode ser outra pessoa.
 
 Grave cada decisão no banco antes de entregar as listas: o valor, se é endereço ou domínio, o nó da árvore, o motivo em uma frase, o nome de exibição, quem decidiu e a data. A URL do Chrome é uma escolha entre `sim`, `não` e `talvez`, nunca uma caixa de marcar: `sim` e `não` são decisões da pessoa, e `talvez` é a que ainda espera resposta.
 
 Cada correção da pessoa sobre uma decisão já gravada atualiza a linha e não cria outra. Se o banco tiver um campo que a skill não conhece, deixe como está.
 
 Grave o valor sem que uma ferramenta possa torná-lo um link: troque cada ponto por `[.]` e cada arroba por `[@]`. Ao ler o banco, desfaça a troca antes de comparar.
+
+Grave as linhas em lotes de até 70, e confira ao fim a contagem por nó e que nenhuma ficou sem quem decidiu.
 
 ### Passo 6
 
@@ -177,6 +179,7 @@ A skill tira o texto do botão, separa 180 endereços e 3 já registrados no ban
 - Há endereços que trazem outro endereço dentro de si, como os de quem envia por plataforma de newsletter. O remetente é o endereço inteiro.
 - A busca na caixa não devolve o que o Gmail marcou como spam ou suspeito. Vazio não prova que a mensagem não existe.
 - O bloqueio de URL do Chrome impede abrir o site, e o de remetentes impede só o e-mail. Um site de empresa real fica fora do segundo.
+- O usuário da conexão com o banco pode não ser quem decide. Procure a pessoa pelo nome antes de gravá-la em `Decidido por`.
 - Uma caixa de marcar se desfaz com um clique. Por isso a URL do Chrome é `sim`, `não` ou `talvez`.
 - O banco do negócio é privado. Nome de remetente, de empresa e de domínio não entra em issue, pull request, commit nem arquivo do repositório.
 

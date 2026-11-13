@@ -6,6 +6,24 @@
       "prompt": "Mas você já deveria verificar se consegue consultar a lista ou o data source sem precisar confirmar comigo",
       "expected_output": "Depois da falha ao carregar a base, usar a referência conhecida da fonte na mesma conexão, carregar seu esquema e fazer a consulta direta e a busca semântica sem nova confirmação. Explicar o alcance da falha sem pedir liberação de acesso indevidamente. A execução observada recuperou a leitura; a instrução revisada ainda precisa de reexecução isolada.",
       "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Já temos a oportunidade com esse nome? Achei duas páginas parecidas, uma com data de agosto deste ano.",
+      "expected_output": "Mostrar título, data, status atual e link de cada página, inclusive possível duplicata. Para a de data anterior a hoje, perguntar quais foram aproveitadas e quais perdidas antes de alterar o status; atualizar só depois da resposta.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Atualize o status da edição que já existe, mas o pedido é para uma data diferente da página.",
+      "expected_output": "Não atualizar a edição existente: outra data do mesmo nome é outra edição. Conferir a data, e sem data clara pedir confirmação ou tratar como edição nova, com o cadastro por criar-oportunidade.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "Essas duas edições parecem a mesma, mas são coisas diferentes (outro organizador).",
+      "expected_output": "Orientar que a desambiguação é a relação Não confundir com, via identificar-duplicata e mesclar-registro, sem consolidar as duas.",
+      "files": []
     }
   ]
 }

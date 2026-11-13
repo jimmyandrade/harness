@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.1"
+  version: "0.2.0"
   aliases:
     - acompanhar-producao-de-peca
   related:
@@ -28,6 +28,8 @@ Os nomes dos bancos e das propriedades são do negócio e ficam nas instruções
 # Bancos.
 "Banco de produtos": ""
 "Banco de variações e produção": ""
+# `Banco de unidades`: uma linha por unidade física, ligada à variação.
+"Banco de unidades": ""
 # Propriedades do banco de variações e produção.
 "Relação com o produto": ""
 "Quantidade prevista": ""
@@ -37,10 +39,16 @@ Os nomes dos bancos e das propriedades são do negócio e ficam nas instruções
 "Variações de nome": ""
 "Status da produção": ""
 "Status do piloto": ""
-"Status da etiqueta": ""
 "Molde": ""
 "Molde-base": ""
 "Falta produção": ""
+# Propriedades do banco de unidades.
+"Relação da unidade com a variação": ""
+# `Etiquetas impressas` e `Etiquetas costuradas` são seleções múltiplas com um tipo de etiqueta por opção.
+"Etiquetas impressas": ""
+"Etiquetas costuradas": ""
+# `Etiquetas exigidas` lista os tipos que precisam estar costurados para a unidade contar como etiquetada.
+"Etiquetas exigidas": []
 # `Ligação com o estoque` vazia quer dizer que esta habilidade não move nem lê estoque.
 "Ligação com o estoque": ""
 ```
@@ -49,13 +57,18 @@ Os nomes dos bancos e das propriedades são do negócio e ficam nas instruções
 
 ### Passo 1
 
-A produção fica nos registros do produto, não em tarefa. O produto fica no `Banco de produtos`. Cada tamanho dele é uma linha do `Banco de variações e produção`, ligada ao produto pela `Relação com o produto`, com a quantidade prevista, a cortada e a produzida. A pessoa informa o data source na execução. Se um dos dois bancos não estiver no workspace conectado, pare. Não use a lista de outro workspace.
+A produção fica nos registros do produto, não em tarefa. O produto fica no `Banco de produtos`. Cada tamanho dele é uma linha do `Banco de variações e produção`, ligada ao produto pela `Relação com o produto`, com a quantidade prevista, a cortada e a produzida.
+
+Cada unidade física é uma linha do `Banco de unidades`, ligada à variação pela `Relação da unidade com a variação`. A etiqueta fica nela.
+
+A pessoa informa o data source na execução. Se um dos bancos não estiver no workspace conectado, pare. Não use a lista de outro workspace.
 
 ```mermaid
 flowchart LR
   Q{O pedido é?} -->|produzir, cortar ou produziu| T[Confirma produto e tamanho]
   Q -->|molde, molde-base ou medida final| T
-  Q -->|piloto ou etiqueta| P[Atualiza o produto]
+  Q -->|piloto| P[Atualiza o produto]
+  Q -->|etiqueta| U[Atualiza a unidade]
   Q -->|entrega sem produto, como compra ou reunião| D[definir-tarefa]
   Q -->|venda do produto| V[A skill de venda]
   Q -->|tecido, aviamento ou insumo| E[gerenciar-estoque]
@@ -89,7 +102,11 @@ Some só a quantidade dita. Sem número, a quantidade é 1 só quando a pessoa f
 
 Molde e molde-base são relações do produto. Relacione o registro que já existe. O molde-base é o ponto de partida. O molde é o final do produto, mesmo quando é o mesmo registro. Não crie o molde sem pedir.
 
-O status do piloto e o da etiqueta mudam só quando a pessoa disser. A etiqueta corre em paralelo e não muda o status da produção.
+O status do piloto muda só quando a pessoa disser.
+
+A etiqueta é da unidade, no `Banco de unidades`, e não do produto. Uma unidade pode ter várias etiquetas, uma por tipo. Quando a pessoa disser que imprimiu ou costurou, acrescente o tipo em `Etiquetas impressas` ou em `Etiquetas costuradas` de cada unidade citada. Sem o tipo, pergunte qual foi. Não tire um tipo que já está marcado.
+
+A unidade conta como etiquetada quando todos os tipos de `Etiquetas exigidas` estão em `Etiquetas costuradas`. A etiqueta corre em paralelo e não muda o status da produção.
 
 ### Passo 5
 
@@ -136,9 +153,9 @@ Perguntei o tamanho antes de gravar.
 
 Confirmei o tamanho XGG e relacionei o molde da camisa. Não criei tarefa.
 
-### a blusa já está etiquetada
+### costurei a etiqueta padrão e a do QR Code na blusa M
 
-Mudei o status da etiqueta para etiquetada. O status da produção ficou como estava.
+Acrescentei os dois tipos em Etiquetas costuradas da unidade da blusa M. O status da produção ficou como estava.
 
 ## Casos-limite
 
@@ -146,13 +163,14 @@ Mudei o status da etiqueta para etiquetada. O status da produção ficou como es
 - O produto não existe: diga e pergunte. Não crie aqui.
 - Produzidas passaria de previstas: pergunte antes de gravar.
 - Vários tamanhos no mesmo pedido: uma linha por tamanho.
+- A etiqueta é citada sem a unidade, como "etiquetei as blusas": pergunte quais unidades e quais tipos.
 - O pedido é uma entrega que não é o produto: `definir-tarefa`.
 
 ## Pegadinhas
 
 - O produto tem o status da produção, mas a quantidade por tamanho fica no banco de variações e produção.
 - Falta de produção, total produzido, total previsto e progresso são fórmulas. Não grave nelas.
-- Produto finalizado com etiqueta em produção pode acender um alerta de etiqueta. Não trate o produto como pronto.
+- Imprimir parece etiquetar. A unidade só conta como etiquetada com os tipos exigidos em `Etiquetas costuradas`.
 
 ## Scripts disponíveis
 
