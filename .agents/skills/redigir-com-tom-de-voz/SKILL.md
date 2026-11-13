@@ -3,7 +3,7 @@ name: redigir-com-tom-de-voz
 description: Use essa habilidade sempre que for criar, redigir, editar, revisar ou responder texto da marca no tom de voz, mesmo sem dizer copy. NÃO use para responder quem conversa com a IA, descrever uma skill, titular tarefa ou oportunidade, cravar a grafia, alterar formato de conteúdo, nem assumir cliente, peça, oportunidade ou histórico.
 metadata:
   author: jimmyandrade
-  version: "0.23.0"
+  version: "0.23.1"
   aliases:
     - escreva-usando-o-tom-de-voz
   related:
@@ -265,6 +265,7 @@ O título ficou específico, com o nome canônico que a fonte já tinha. Não vi
 - O dado que a conversa já citou parece confirmado. Cliente, peça, oportunidade e histórico comercial vêm da fonte que a pessoa indicou.
 - Título publicitário parece o tom de voz. O texto pede intenção, recorte e conexão, e recusa a fórmula genérica. A busca precisa continuar achando o nome canônico.
 - "Reunião com X" parece claro. Em evento externo, o título diz o encontro e guarda o nome mais buscável.
+- O nível `allowed_with_care` de `classify-text` parece liberar o termo. Ele só mostra o nível: leia o `when` de cada linha com `lookup` antes de aprovar, como o do ponto final, que no WhatsApp some da última frase.
 - Guardar o comando da CLI numa variável de shell parece encurtar a chamada. O zsh não separa as palavras da variável e a chamada falha. Escreva o comando inteiro.
 - Criatividade parece substituir o campo estruturado. Edição, data, cidade e contexto curto podem entrar no título quando ajudam a busca. Horário, convidados, link e página continuam fora do título.
 
