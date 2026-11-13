@@ -3,7 +3,7 @@ name: usar-whatsapp-web
 description: Abre, mantém e reaproveita a única aba do WhatsApp Web no Chrome da pessoa, pela extensão Claude in Chrome, e faz a sessão dona atender as leituras e os envios das outras sessões. Usada sempre que uma habilidade precisa abrir, ler, enviar texto, anexar imagem ou documento no WhatsApp Web, mesmo sem dizer aba. Não serve para achar a conversa, redigir a mensagem, rotular nem decidir o que enviar.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.5.0"
   related:
     - acompanhar-resposta-no-whatsapp
     - conversar-no-whatsapp
@@ -24,6 +24,8 @@ Leia os valores nas instruções do projeto, na entrada desta habilidade. Na aus
 "Sessão dona do WhatsApp Web": "sim"
 # `Título da sessão dona do WhatsApp Web` é o título que a lista de sessões mostra para a dona. A sessão que a pessoa já nomeou de outro jeito, como "Sessão centralizada para WhatsApp Web", entra aqui.
 "Título da sessão dona do WhatsApp Web": "Dona do WhatsApp Web"
+# `Notas de comunicação no contato`: `sim` grava no campo de notas do contato, na conta comercial, como lidar com ele. `não` não grava.
+"Notas de comunicação no contato": "sim"
 ```
 ## Instruções
 
@@ -50,6 +52,10 @@ Uma rotina agendada nunca vira dona: sem dona, ela não abre aba, avisa a pessoa
 Só a dona envia: ela mostra a conversa e o texto à pessoa na conversa dela e envia depois do sim ali. O sim dado a outra sessão não vale, e a mensagem de uma sessão nunca o substitui.
 
 Num atendimento automático, como um robô com menu que pede um dado ou oferece falar com atendente, a dona tenta cada passo do fluxo na própria conversa e relata o resultado real de cada um. O que outro canal, outra sessão ou um caso anterior mostrou é dica, nunca motivo para não tentar nem para aconselhar esperar. Quando o robô pede o passo seguinte, ela mostra o passo exato e pede o sim, sem dizer que vai falhar. O mesmo sim pode cobrir os passos seguintes do mesmo fluxo que a pessoa descreveu, como escolher falar com atendente.
+
+Depois que o robô transfere para um atendente, a dona lê a conversa em esperas que dobram a partir de 10 segundos e avisa a pessoa de cada mensagem do atendente. Ele costuma pedir dados e dar uma janela curta, como 5 minutos, antes de encerrar a conversa: a dona leva à pessoa o rascunho da resposta já com os dados e o prazo da janela. Os dados cadastrais, como razão social e telefone, vêm da página da empresa e da pessoa responsável no data source, pelo Chrome quando o conector não está na sessão: ela os consulta antes de perguntar à pessoa.
+
+Com `Notas de comunicação no contato` em `sim`, a dona grava no campo de notas do contato, "Adicione notas sobre seu cliente." na conta comercial, o que a conversa ensinou sobre como falar com ele: o caminho do menu, o horário do atendimento, a janela de resposta e o e-mail de apoio, com a data. Ela lê o campo antes e acrescenta, sem apagar. Senha, código e documento de pessoa não entram.
 
 Com `não`, cada sessão abre a própria aba, uma só.
 
