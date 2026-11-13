@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.37.5"
+  version: "0.37.6"
   aliases:
     - redigir-mensagem-de-whatsapp
   related:
@@ -113,11 +113,10 @@ Abra com a saudação do período, lido no relógio, e uma frase de contexto. Fo
 
 Com `Página de instruções do WhatsApp` preenchida, leia a página antes de rascunhar e siga a conta e as regras dela. Se ela não abrir na conexão, pare e peça.
 
-Veja também se há um e-mail não enviado sobre o mesmo assunto e alinhe os pedidos com ele.
+Numa conversa que não está fluindo, veja também se há um e-mail não enviado sobre o mesmo assunto e alinhe os pedidos com ele.
 Quando a pessoa escreve de um número fora do cadastro da organização, o texto diz o motivo numa frase e pergunta se pode continuar por esse número.
 
 Todo rascunho de mensagem aparece na resposta do chat. Leia o modelo de saída `mensagens-do-whatsapp` quando for gerar a saída.
-Não diga só que o rascunho está pronto.
 O texto vai na mensagem de fechamento do turno, a última que a pessoa lê, junto com o pedido do sim: o texto escrito antes de um quadro de próximo passo pode ser cortado.
 Uma mensagem que diz que um trabalho está em andamento, foi registrado ou foi feito leva o link da tarefa, da página ou do pull request que mostra esse registro. Sem esse registro, crie-o antes, como `definir-tarefa` manda, ou pergunte onde ele está.
 Com a ferramenta de widget na sessão, o widget vem sempre, além dos blocos, como o modelo de saída diz.
@@ -143,6 +142,8 @@ O comprovante de pagamento segue `Canal do comprovante`. O e-mail sai por `envia
 Para responder ou enviar, mostre a conversa de destino, o texto exato e, se for resposta, a mensagem citada. Envie só depois do sim da pessoa a esse texto e a essa conversa. O sim vale para o texto mostrado, com todas as partes numeradas. Uma parte nova ou alterada pede outro sim.
 
 Se a conversa estiver com um agente de IA, avise antes de enviar: ele responde à próxima mensagem do contato. No WhatsApp Web, veja isso como `usar-whatsapp-web` manda, inclusive num robô com menu: tente cada passo, não preveja o resultado.
+
+Uma conversa que já começou e está fluindo continua no WhatsApp, e a resposta sai rápido. Um e-mail, formulário ou telefone que o atendimento cite é dica, não motivo para trocar de canal: tente cada passo do fluxo na conversa. Quando uma pessoa responde, mostre o rascunho na hora, sem desvio. Só com a conversa parada, depois de dizer o tempo de espera, ofereça outro canal, como complemento.
 
 Toda data no rascunho vai no `Formato da data na mensagem`. Calcule o dia da semana como a regra do dia da semana manda. O link segue `escrever-link`.
 
@@ -171,18 +172,10 @@ Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ### Dia da semana errado
 
-Se você converter "sexta-feira" contando a partir de outro dia que não hoje, a data da demanda sai um dia errada.
+Se você converter "sexta-feira" contando a partir de outro dia que não hoje, ou escrever "vale até quarta" calculando de cabeça, a data sai um dia errada e a pessoa perde o prazo.
 
-1. Conte a partir de hoje.
-2. Pegue o último dia com esse nome antes de hoje.
-3. Calcule o dia da semana da data como a regra manda.
-
-### Prazo só com o dia da semana
-
-Se você escrever "vale até quarta" calculando de cabeça, o dia sai errado e a pessoa perde o prazo.
-
-1. Escreva a data no `Formato da data na mensagem`.
-2. Calcule o dia da semana como a regra manda.
+1. Conte a partir de hoje e pegue o último dia com esse nome antes de hoje.
+2. Escreva a data no `Formato da data na mensagem`, com o dia da semana calculado como a regra manda.
 3. Confira o rascunho antes de pedir o sim.
 
 ### Pedido em uma conversa só
@@ -206,14 +199,12 @@ Se você disser que o rascunho está pronto sem mostrar o texto, a pessoa não c
 1. Mostre o texto inteiro na resposta do chat, num bloco de código.
 2. Com a ferramenta de widget na sessão, mostre sempre também o texto editável, com copiar e aprovar. O widget não substitui o bloco.
 3. Pergunte se pode enviar só depois do texto, na mesma resposta.
-4. Com um quadro de próximo passo no fim do turno, escreva o texto na mensagem que vem depois dele. Não escreva "acima" nem "no rascunho" sem o texto ali.
 
 ### Andamento sem o link
 
 Se você escrever que a investigação já começou sem o link da tarefa, quem pediu não tem onde acompanhar e volta a perguntar.
 
 1. Ponha na mensagem o link do registro do trabalho.
-2. Sem registro, crie a tarefa antes de redigir.
 
 ### Conversa sem rótulo
 
@@ -229,7 +220,6 @@ Se você mandar um texto acima de `Limite de caracteres por mensagem` numa mensa
 
 1. Conte os caracteres antes de mostrar o rascunho.
 2. Acima do limite, divida em partes numeradas, com a contagem de cada uma.
-3. Se o pedido disse "uma mensagem só", avise uma vez, antes do sim.
 
 ### Correção numa mensagem nova
 
@@ -238,6 +228,13 @@ Se você mandar outra mensagem só para corrigir uma palavra, a conversa fica co
 1. Edite a mensagem enviada.
 2. Marque a palavra corrigida com um asterisco no fim.
 3. Mostre a edição e espere o sim.
+
+### Troca de canal com a conversa fluindo
+
+Se você propuser e-mail porque o atendimento citou um endereço, o atendente fica sem resposta.
+
+1. Continue na conversa e tente cada passo do fluxo.
+2. Ofereça outro canal só com a conversa parada, como complemento.
 
 ### Envio sem confirmação
 
@@ -263,6 +260,10 @@ Mostrei a conversa do Caio e o texto "Podemos falar 15h00?". Enviei depois do si
 
 Contei 800 caracteres, acima do limite de 600. Avisei antes do sim que vai em duas partes, cortadas entre os itens: a Mensagem 1 com a saudação e o item 1 (410 caracteres) e a Mensagem 2 com o item 2 e o fechamento (390). Enviei uma depois da outra, com o sim às duas.
 
+### cobre o atendimento do fornecedor, que citou um e-mail
+
+Não propus e-mail. Mostrei o rascunho da resposta ao atendente, que espera há 3 minutos, e pedi o sim.
+
 ### escrevi chegamos, mas a gente ainda não chegou
 
 Mostrei a edição "Chegaremos*" e editei depois do sim, sem outra mensagem.
@@ -272,16 +273,14 @@ Mostrei a edição "Chegaremos*" e editei depois do sim, sem outra mensagem.
 - Nenhuma aba do WhatsApp Web e o QR code na tela, ou a extensão sem resposta: pare, peça a conexão e crie a rotina de lembrete, como `usar-whatsapp-web` manda.
 - Duas conversas com o mesmo nome: mostre as duas e pergunte qual é.
 - O pedido está num grupo: leia só as mensagens do assunto, com quem escreveu cada uma.
-- O histórico do canal parece incompleto: diga isso. No WhatsApp Web, siga `usar-whatsapp-web`.
-- O pedido diz "uma mensagem só" ou "sem dividir" e o texto passa do limite: avise uma vez, antes do sim, e envie em partes. Só uma insistência por escrito, depois do aviso, manda como mensagem única.
 - Uma frase ou um item numerado sozinho passa do limite: não corte no meio. Proponha encurtar o texto.
-- A pessoa quer o texto no tom de voz: siga `redigir-com-tom-de-voz` e volte aqui para enviar.
+- O atendimento cita e-mail, formulário ou telefone com a conversa fluindo: continue no WhatsApp. Só a conversa parada oferece outro canal, como complemento.
 
 ## Pegadinhas
 
 - O rascunho pedido ontem parece continuar valendo. A pessoa pode ter escrito na conversa no meio-tempo: leia antes e rascunhe só o que falta.
-- "Uma mensagem só" no pedido parece ordem que dispensa o limite. Só a insistência depois do aviso dispensa.
 - Ao dividir uma lista numerada, o campo pode renumerar o item solto e a parte que continua a lista voltar para "1.". Confira no print e, no WhatsApp Web, siga `usar-whatsapp-web`.
+- O e-mail citado pelo bot parece o caminho. É dica: a conversa fluindo segue no WhatsApp.
 - A mensagem de WhatsApp parece pedir assinatura como um e-mail. A conversa já mostra quem escreve: a apresentação vale só na primeira mensagem.
 
 ## Scripts disponíveis
