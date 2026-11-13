@@ -598,8 +598,10 @@ flowchart LR
   extrair_tarefas_da_reuniao --> identificar_duplicata
   extrair_tarefas_da_reuniao --> procurar_tarefa
   fatiar_pull_request --> atender_revisao_de_pull_request
+  fatiar_pull_request --> atualizar_branch_do_pull_request
   fatiar_pull_request --> criar_commit
   fatiar_pull_request --> criar_pull_request
+  fatiar_pull_request --> mesclar_pull_request
   fazer_fechamento --> definir_conta_bancaria
   fazer_fechamento --> definir_obrigacao_financeira
   fazer_fechamento --> lancar_despesa_da_empresa
@@ -690,6 +692,7 @@ flowchart LR
   mesclar_pull_request --> comunicar_novidade_do_produto
   mesclar_pull_request --> criar_pull_request
   mesclar_pull_request --> definir_issue_do_github
+  mesclar_pull_request --> fatiar_pull_request
   mesclar_pull_request --> fechar_pull_request
   mesclar_pull_request --> limpar_copias_de_trabalho
   mesclar_pull_request --> sincronizar_status_da_tarefa
