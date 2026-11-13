@@ -3,7 +3,7 @@ name: evoluir-habilidade
 description: Muda uma skill ou as instruções do projeto a pedido ou pelo feedback de uma execução, como falha ou correção da pessoa, e abre o pull request no repositório de origem. Usada ao pedir uma regra nova, mesmo sem dizer evoluir, e ao fim de cada skill. Não serve para testar a skill, criar a primeira versão, ver se a descrição dispara, só revisar nem gravar no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.33.3"
+  version: "0.33.4"
   related:
     - criar-commit
     - criar-habilidade
@@ -57,6 +57,8 @@ flowchart LR
 ```
 
 Renomear uma skill é mudança que quebra: o assunto do commit leva `!` depois do tipo, o rodapé começa com `BREAKING CHANGE:` com o nome antigo e o novo, e cada nome anterior entra em `metadata.aliases`, sem tirar os que já existiam.
+
+Antes de cada commit e de cada push numa branch que já teve PR, inclusive a segunda lição do mesmo pedido, confira o estado do PR como o Passo 4 manda.
 
 No mesmo turno, grave o commit e abra o pull request seguindo `criar-commit` e `criar-pull-request`. Não pergunte se a pessoa quer a lição em um commit. `Criar pull request ao terminar` decide a abertura: `rascunho` abre em rascunho, `sim` abre pronto, `não` não publica e a resposta diz o nome da branch.
 
@@ -121,7 +123,7 @@ Se você perguntar se a pessoa quer a lição em um commit, o pull request não 
 
 Se você gravar a lição na branch de um PR que já foi mesclado, o commit não chega à base e a descrição do PR passa a contar o que não entrou.
 
-1. Antes do commit, confira o estado do PR da branch no GitHub.
+1. Antes do commit e antes de cada push, confira o estado do PR da branch no GitHub, também quando a lição chega por pedido direto.
 2. Mesclado ou fechado: crie uma branch nova a partir da base atualizada e abra outro PR, com o link do anterior.
 3. Não edite a descrição do PR mesclado para incluir a lição nova.
 
@@ -215,6 +217,7 @@ A skill mudou no repositório de origem e o pull request saiu no mesmo turno, em
 
 ## Pegadinhas
 
+- O push que diz "new branch" para uma branch que já existia mostra que o remoto foi apagado depois do merge. Pare, confira o PR e mova a lição para uma branch nova.
 - Emendar a frase nova no fim do parágrafo parece o menor diff. Um tema novo num parágrafo que já existe vira bloco gigante, e o diff mostra o parágrafo inteiro.
 - A data ou a situação contada pela pessoa parece um parâmetro. É fato do negócio: fica no data source, e a skill guarda só a regra.
 - A skill parece pronta na primeira versão. Ela é um documento vivo. A iteração parte do feedback.
