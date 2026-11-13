@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.86.1](https://github.com/jimmyandrade/harness/compare/v1.86.0...v1.86.1) (2026-11-13)
+
+
+### Bug Fixes
+
+* **acompanhar-retornos-pendentes:** read the site panel in the app's browser before the Claude in Chrome ([#1162](https://github.com/jimmyandrade/harness/issues/1162)) ([240cc2b](https://github.com/jimmyandrade/harness/commit/240cc2b512deb650ef6abaedc5467b30d3dd4c55))
+* **conversar-no-whatsapp:** check the calendar and the trip before proposing a date, time or place ([#1159](https://github.com/jimmyandrade/harness/issues/1159)) ([e70472c](https://github.com/jimmyandrade/harness/commit/e70472c689aa94aa4bbf396d1f40fd5897c8647d))
+* **definir-empresa:** follow the project's order of means when the Notion connector fails ([#1160](https://github.com/jimmyandrade/harness/issues/1160)) ([19597bf](https://github.com/jimmyandrade/harness/commit/19597bf9b60db8d0757cb32543d16869c7f403c4))
+* **definir-pessoa:** follow the project's order of means when the Notion connector fails ([#1161](https://github.com/jimmyandrade/harness/issues/1161)) ([d36bbd4](https://github.com/jimmyandrade/harness/commit/d36bbd4ace4b81f135bf377bce8aef2778ef415a))
+* **enviar-email:** read both channels with the contact before drafting ([#1153](https://github.com/jimmyandrade/harness/issues/1153)) ([9e356e7](https://github.com/jimmyandrade/harness/commit/9e356e70a2e9834f319ee4694a352caac27b9168))
+* **procurar-artista:** try the browsers before asking the person for an empty page ([#1163](https://github.com/jimmyandrade/harness/issues/1163)) ([a99b73d](https://github.com/jimmyandrade/harness/commit/a99b73d99466a74f3ce949498704f4b3b9004610))
+* try every notion path before handing the registration back in triar-conversas ([#1155](https://github.com/jimmyandrade/harness/issues/1155)) ([662449a](https://github.com/jimmyandrade/harness/commit/662449a3c5de5456f80f744c0f5b194661041047))
+* try the next means in order when a tool or connector fails ([#1157](https://github.com/jimmyandrade/harness/issues/1157)) ([c1d7c05](https://github.com/jimmyandrade/harness/commit/c1d7c055c4e139df5fcfbce1e1f350f443f7ee8e))
+* use the app's own browser before the Claude in Chrome ([#1156](https://github.com/jimmyandrade/harness/issues/1156)) ([394edf7](https://github.com/jimmyandrade/harness/commit/394edf71850f1f65dd165453474359d1db778884))
+
 ## [1.86.0](https://github.com/jimmyandrade/harness/compare/v1.85.0...v1.86.0) (2026-11-13)
 
 
