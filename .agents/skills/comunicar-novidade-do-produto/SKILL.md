@@ -3,8 +3,9 @@ name: comunicar-novidade-do-produto
 description: Use essa habilidade sempre que um PR for mesclado, alguém perguntar o que há de novo no produto para quem o usa ou for rodar um reparo ou migração de dados que o público usa, mesmo sem dizer novidade, para decidir se há o que contar e escrever o comunicado sem termos técnicos. NÃO use para a descrição do PR, o changelog nem release notes técnicas.
 metadata:
   author: jimmyandrade
-  version: "0.12.0"
+  version: "0.13.0"
   related:
+    - conversar-no-whatsapp
     - evoluir-habilidade
     - redigir-com-tom-de-voz
 ---
@@ -80,7 +81,7 @@ Achou: use e sugira preencher `Habilidade de tom de voz`. Não achou: pergunte s
 
 Entregue no `Canal do comunicado`, com a formatação dele. Ao perguntar quem publica ou o canal, as opções saem só das instruções do projeto: nunca sugira um canal que elas não citam. A opção de publicar vem primeiro, e a de não comunicar vem por último.
 
-O comunicado vai numa mensagem só, com parágrafos curtos, mesmo no WhatsApp, onde a conversa costuma ir em mensagens quebradas. Só a novidade entra nessa mensagem: um pedido, uma cobrança ou uma lista de pendências é outro assunto e vai numa mensagem à parte, depois do comunicado.
+O comunicado não se divide por ideia: vai com parágrafos curtos, mesmo no WhatsApp, onde a conversa costuma ir em mensagens quebradas. No WhatsApp, o texto acima do `Limite de caracteres por mensagem` de `conversar-no-whatsapp` vai em partes numeradas, como essa habilidade manda, porque o fim apareceria cortado com "Ler mais". Só a novidade entra nessa mensagem: um pedido, uma cobrança ou uma lista de pendências é outro assunto e vai numa mensagem à parte, depois do comunicado.
 
 Mostre o rascunho antes de qualquer pergunta: num widget com o texto editável, um botão para copiar e um para aprovar, quando o cliente desenha widget, ou num bloco de código. Uma pergunta que encerra o turno pode esconder o texto escrito antes dela.
 

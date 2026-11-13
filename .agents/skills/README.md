@@ -23,6 +23,7 @@ flowchart LR
     atualizar_cadastro_fiscal["atualizar-cadastro-fiscal"]
     auditar_tarefas["auditar-tarefas"]
     avaliar_atualizacoes_de_dependencia["avaliar-atualizacoes-de-dependencia"]
+    bloquear_remetente_de_spam["bloquear-remetente-de-spam"]
     classificar_estado_do_termo["classificar-estado-do-termo"]
     classificar_melhoria_tecnica["classificar-melhoria-tecnica"]
     comunicar_novidade_do_produto["comunicar-novidade-do-produto"]
@@ -219,10 +220,14 @@ flowchart LR
   avaliar_atualizacoes_de_dependencia --> criar_commit
   avaliar_atualizacoes_de_dependencia --> criar_pull_request
   avaliar_atualizacoes_de_dependencia --> mesclar_pull_request
+  bloquear_remetente_de_spam --> definir_filtro_de_email
+  bloquear_remetente_de_spam --> organizar_emails
+  bloquear_remetente_de_spam --> procurar_email
   classificar_estado_do_termo --> definir_vocabulario
   classificar_estado_do_termo --> gravar_termos_no_vocabulario
   classificar_estado_do_termo --> validar_plano_de_vocabulario
   classificar_melhoria_tecnica --> priorizar_itens
+  comunicar_novidade_do_produto --> conversar_no_whatsapp
   comunicar_novidade_do_produto --> redigir_com_tom_de_voz
   configurar_harness_de_negocio --> criar_pull_request
   configurar_harness_de_negocio --> definir_issue_do_github

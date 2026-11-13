@@ -3,7 +3,7 @@ name: atualizar-branch-do-pull-request
 description: Use essa habilidade sempre que for enviar um commit novo a uma branch que já tem pull request, ou ela estiver atrás da base, tiver conflito ou precisar de rebase, mesmo sem dizer rebase. NÃO use para abrir o PR, fazer o primeiro push nem mesclar (use criar-pull-request).
 metadata:
   author: jimmyandrade
-  version: "0.9.0"
+  version: "0.10.0"
   related:
     - criar-pull-request
     - atender-revisao-de-pull-request
@@ -95,6 +95,14 @@ Se você rebasear sem olhar a revisão do PR, o código que veio da base pode vo
 1. Siga `atender-revisao-de-pull-request` antes de substituir a branch, pelo Passo 2.
 2. Ajuste no mesmo PR o que veio da base fora do padrão pedido.
 
+### Alias de renomeação que ninguém renomeou
+
+Se você receber do CI o erro `metadata.aliases must include <skill>` numa skill que não renomeou, e acrescentar o alias, o nome de uma skill alheia entra na sua e o erro só some.
+
+1. A branch está atrás da `Branch base`: uma skill que entrou depois dela aparece como removida, e um arquivo parecido, como um `evals.json` vazio, como renomeado.
+2. Atualize com rebase, pelo Passo 2, e rode a checagem de skills com a base e o cabeça do rebase.
+3. Não acrescente o alias.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
@@ -112,6 +120,7 @@ A branch tinha PR aberto e a base avançou com um PR vizinho. Atualizei com reba
 
 - O rascunho aberto há minutos parece aberto. Outra pessoa pode tê-lo mesclado, e o push e a descrição nova não chegam à base.
 - `git pull --rebase` numa branch já publicada rebaseia sobre a própria branch remota, não sobre a `Branch base`. Use o fetch e rebase do Passo 2.
+- O CI compara a base atual com a ponta da branch, não com o ponto onde ela nasceu. Uma branch atrás da base parece ter removido e renomeado o que a base ganhou depois.
 
 ## Scripts disponíveis
 
