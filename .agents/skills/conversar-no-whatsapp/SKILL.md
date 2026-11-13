@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.36.0"
+  version: "0.36.1"
   aliases:
     - redigir-mensagem-de-whatsapp
   related:
@@ -136,7 +136,7 @@ O comprovante de pagamento segue `Canal do comprovante`. O e-mail sai por `envia
 
 Para responder ou enviar, mostre a conversa de destino, o texto exato e, se for resposta, a mensagem citada. Envie só depois do sim da pessoa a esse texto e a essa conversa. O sim vale para o texto mostrado, com todas as partes numeradas. Uma parte nova ou alterada pede outro sim.
 
-Se a conversa estiver com um agente de IA, avise antes de enviar: ele responde à próxima mensagem do contato. No WhatsApp Web, veja isso como `usar-whatsapp-web` manda.
+Se a conversa estiver com um agente de IA, avise antes de enviar: ele responde à próxima mensagem do contato. No WhatsApp Web, veja isso como `usar-whatsapp-web` manda, inclusive num robô com menu: tente cada passo, não preveja o resultado.
 
 Toda data no rascunho vai no `Formato da data na mensagem`. Calcule o dia da semana como a regra do dia da semana manda. O link segue `escrever-link`.
 
