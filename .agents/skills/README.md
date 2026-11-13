@@ -152,6 +152,7 @@ flowchart LR
     rotular_item["rotular-item"]
     sincronizar_cronograma["sincronizar-cronograma"]
     sincronizar_status_da_tarefa["sincronizar-status-da-tarefa"]
+    sugerir_enquete_de_publico["sugerir-enquete-de-publico"]
     testar_habilidade["testar-habilidade"]
     testar_ponta_a_ponta["testar-ponta-a-ponta"]
     transcrever_audio_e_video["transcrever-audio-e-video"]
@@ -759,6 +760,12 @@ flowchart LR
   sincronizar_status_da_tarefa --> criar_pull_request
   sincronizar_status_da_tarefa --> levantar_contexto_do_pull_request
   sincronizar_status_da_tarefa --> mesclar_pull_request
+  sugerir_enquete_de_publico --> conversar_no_whatsapp
+  sugerir_enquete_de_publico --> criar_ideia_de_conteudo
+  sugerir_enquete_de_publico --> definir_campanha_de_conteudo
+  sugerir_enquete_de_publico --> definir_localidade_geografica
+  sugerir_enquete_de_publico --> redigir_com_tom_de_voz
+  sugerir_enquete_de_publico --> usar_whatsapp_web
   testar_habilidade --> descrever_habilidade_ou_schema
   testar_habilidade --> medir_habilidade
   testar_habilidade --> revisar_habilidade
