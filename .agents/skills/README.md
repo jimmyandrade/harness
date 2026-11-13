@@ -278,10 +278,12 @@ flowchart LR
   conversar_no_whatsapp --> definir_pessoa
   conversar_no_whatsapp --> definir_rotina
   conversar_no_whatsapp --> definir_tarefa
+  conversar_no_whatsapp --> definir_viagem
   conversar_no_whatsapp --> definir_vocabulario
   conversar_no_whatsapp --> enviar_email
   conversar_no_whatsapp --> enviar_imagem_no_whatsapp
   conversar_no_whatsapp --> escrever_link
+  conversar_no_whatsapp --> procurar_agenda
   conversar_no_whatsapp --> procurar_tarefa
   conversar_no_whatsapp --> redigir_com_tom_de_voz
   conversar_no_whatsapp --> rotular_item
