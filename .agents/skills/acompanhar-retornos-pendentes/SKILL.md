@@ -3,10 +3,14 @@ name: acompanhar-retornos-pendentes
 description: Mantém uma rotina por canal, como e-mail, WhatsApp e site ou aplicativo, que lê as conversas em espera, o aviso que uma tarefa espera e a condição que um painel deve mostrar, avisa quando chegam e entrega o resultado à sessão. Usada quando uma mensagem espera resposta, uma tarefa espera um aviso ou um status precisa mudar num painel. Não serve para escrever a resposta, entrar com senha nem criar uma rotina por mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.7.1"
+  version: "0.8.0"
   related:
     - acompanhar-resposta-no-whatsapp
+    - definir-hospedagem
+    - definir-negociacao
+    - definir-obrigacao-financeira
     - definir-rotina
+    - definir-tarefa
     - enviar-email
     - evoluir-habilidade
     - organizar-emails
@@ -116,6 +120,12 @@ Se a resposta não cobre tudo o que a pessoa espera, a etiqueta de espera fica e
 Ela entrega o resumo à sessão registrada, por mensagem de sessão, e avisa a pessoa em uma linha.
 Sem sessão, ou com a sessão arquivada, só a pessoa recebe o aviso.
 
+A resposta traz fato novo, como uma regra, um horário, um endereço ou um prazo. Quem a recebe, a sessão registrada ou a que a leu, grava esse fato na página que o assunto já tem, antes de falar com a pessoa e sem perguntar. A habilidade do assunto grava: `definir-hospedagem`, `definir-obrigacao-financeira`, `definir-negociacao` ou `definir-tarefa`, entre outras.
+
+O fato entra com a data e a hora da mensagem, e o que ainda falta fica dito como pendente. A resposta que cobre só parte grava a parte que chegou e deixa o resto aberto.
+
+O resumo diz quais páginas mudaram, com o link de cada uma.
+
 Quando o aviso de uma tarefa chega, a rotina etiqueta a conversa por `rotular-item` e atualiza a tarefa no rastreador do projeto, com os nomes das propriedades do mapeamento de dados dele.
 Ela marca na definição de concluído só os itens que a mensagem prova e escreve nas observações o que chegou e quando, no presente.
 Um item que depende de uma ação da pessoa, como guardar um comprovante, fica sem marca.
@@ -203,6 +213,14 @@ Se você escrever a senha de acesso ou um link com prazo no aviso, ele passa a m
 2. Não grave a senha no Notion.
 3. Não abra o link.
 
+### Resposta lida e não gravada
+
+Se você só repassar a resposta à pessoa, o fato fica na conversa, e a próxima sessão que abrir a página da hospedagem, da obrigação ou da tarefa age sobre o dado antigo.
+
+1. Ache a página que o assunto já tem.
+2. Grave o fato novo pela habilidade do assunto, com a data e a hora da mensagem, antes de responder.
+3. Diga na resposta o que gravou e o link da página, e o que ainda falta.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
@@ -223,9 +241,14 @@ A sessão acrescentou ao registro uma linha de site, com o painel da empresa, a 
 
 A sessão etiquetou a conversa, acrescentou a linha ao registro marcada como conversa ativa e criou a rotina da conversa ativa do canal, que confere de cinco em cinco minutos. A rotina espaçada ignorou a linha. Quando o robô pediu um dado que só a pessoa tinha, a rotina avisou em poucos minutos. Com a conversa encerrada pela empresa, a linha saiu da conversa ativa e a rotina da conversa ativa foi encerrada.
 
+### o anfitrião diz onde fica a vaga e o horário do manobrista, e falta a senha pessoal de acesso
+
+A rotina do e-mail avisou. A sessão gravou na página da hospedagem o estacionamento, o endereço dele, os horários e onde fica a chave, com a data e a hora da mensagem, e deixou a senha pessoal como pendente, sem a senha. Disse as páginas que mudaram, com o link, e que a etiqueta de espera ficou porque a senha não chegou.
+
 ## Casos-limite
 
 - O canal não tem rotina: crie uma, só uma, e use-a nas próximas mensagens.
+- A resposta traz fato novo e a página do assunto não existe: siga a habilidade do assunto para criá-la ou diga que ela falta. Não deixe o fato só na conversa.
 - A conversa está na etiqueta e fora do registro: avise só a pessoa, sem sessão.
 - O WhatsApp pede o QR code: a rotina avisa a pessoa, como `usar-whatsapp-web` manda, e segue só com o e-mail.
 - A resposta cobre só parte do que a pessoa espera: a etiqueta de espera fica.
@@ -246,6 +269,7 @@ A sessão etiquetou a conversa, acrescentou a linha ao registro marcada como con
 - O gerenciador de senhas conectado parece fazer o login. Ele só libera a credencial para a ferramenta de preenchimento, que pode faltar na sessão, e o captcha continua sendo da pessoa.
 - A aba do WhatsApp Web é da sessão dona. A rotina do site abre uma aba nova e não mexe nela.
 - Abrir uma conversa do WhatsApp marca as mensagens como lidas para quem enviou. A rotina lê a lista.
+- Repassar a resposta parece cumprir o aviso. A página do assunto continua com o dado antigo até alguém gravá-lo: grave antes de responder, sem esperar a pessoa pedir.
 - Uma conversa do e-mail pode passar de cem mil caracteres. A rotina lê só o texto de cada mensagem nova.
 - A rotina agendada roda só com o app aberto. Fechado, ela roda na próxima abertura.
 
