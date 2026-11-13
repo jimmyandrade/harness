@@ -3,7 +3,7 @@ name: acompanhar-resposta-no-whatsapp
 description: Acompanha, por uma rotina que lê as conversas com a etiqueta de ação esperada, se o contato respondeu a uma mensagem enviada no WhatsApp, avisa quando a resposta chega e troca a etiqueta. Usada quando a mensagem espera resposta, como uma pergunta, um pedido ou um prazo, ou quando a pessoa pergunta se alguém já respondeu. Não serve para ler, redigir nem enviar a mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.6.1"
   related:
     - acompanhar-retornos-pendentes
     - conversar-no-whatsapp
@@ -46,7 +46,11 @@ A pergunta que pede o sim do envio, em `conversar-no-whatsapp`, já diz que a re
 ### Passo 2
 
 A rotina filtra a lista de conversas pela etiqueta `Ação esperada` e segue `Ao conferir a resposta` em cada conversa do filtro. Com `ler a lista`, ela lê só a prévia e o contador de não lidas, sem abrir a conversa. Com `abrir a conversa`, ela abre, lê as mensagens novas e as marca como lidas, e a pergunta do sim diz isso.
-A resposta chegou quando a prévia da linha do contato não tem os vistos de enviada e chegou depois da mensagem, ou quando há contador de não lidas.
+A resposta chegou quando a prévia da linha do contato não tem os vistos de enviada, chegou depois da mensagem e traz texto que não é cópia do que enviamos, ou quando há contador de não lidas com esse texto novo.
+
+O contato pode responder copiando as nossas mensagens, inteiras ou em trechos, com a resposta dele junto de cada cópia. A prévia e o contador não distinguem a cópia da resposta: compare o texto dele com o que enviamos, tire o que é cópia e decida só pelo que sobra. Cópia sem texto novo não é resposta: a conversa mantém `Ação esperada`.
+
+Prévia que repete o nosso texto não decide, porque mostra só a última mensagem. Peça à dona que abra a conversa, expanda a mensagem longa em "Ler mais", leia as mensagens do contato desde a nossa e diga à pessoa que a conversa ficou marcada como lida. A resposta costuma vir marcada, como "Resposta:", entre as cópias.
 Antes de qualquer ferramenta do Chrome, leia `usar-whatsapp-web` e liste as sessões. A rotina não é a dona: ela pede a leitura da lista à dona, por mensagem entre sessões, e não abre aba. O prompt da rotina não manda abrir aba nem usar "uma nova".
 Ache a conversa e siga `usar-whatsapp-web` para o resto: o botão do aviso e o QR code são da dona.
 
@@ -89,6 +93,14 @@ Se você perguntar "quer que eu volte a olhar?" depois de enviar uma mensagem co
 2. Confira a conversa no mesmo turno, em esperas que dobram a partir de `Primeira espera com prazo no dia`.
 3. Diga cada mudança e, ao fim, o estado da conversa.
 
+### Resposta que copia a nossa mensagem
+
+Se você tratar como resposta a mensagem em que o contato copiou o texto que enviamos, a conversa sai de `Ação esperada` e a pergunta continua sem resposta.
+
+1. Compare cada trecho da mensagem dele com o que enviamos.
+2. Tire a cópia e leia o que sobra: ele responde cada pergunta, só algumas ou nenhuma.
+3. Troque a etiqueta só quando o texto novo responde. Diga à pessoa quais perguntas ficaram sem resposta.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
@@ -101,10 +113,15 @@ A rotina filtrou a lista pela etiqueta `Ação esperada` e leu a prévia de cada
 
 Não perguntei se acompanho. Conferi a prévia da conversa pela dona a cada 10 s, 20 s, 40 s e 80 s, sem abrir a conversa, e disse a cada passo que a última mensagem ainda era a minha, sem resposta. Ao fim, confirmei na lista que nada tinha chegado e disse a hora, o prazo e o que a pessoa decide a seguir.
 
+### O contato respondeu copiando o que enviamos
+
+A prévia da linha repetia o nosso texto sobre a montagem. Pedi à dona que abrisse a conversa e li as mensagens dele desde a nossa. Tirei as cópias: o texto novo respondia o cadastro e a montagem, e a entrada do carro seguia sem resposta. Avisei a pessoa e disse que a conversa ficou marcada como lida.
+
 ## Casos-limite
 
 - O QR code aparece na execução: pare e avise que o WhatsApp Web precisa ser conectado.
 - O contato passou de `Dias sem resposta para avisar` sem responder: avise uma vez e mantenha a etiqueta.
+- A mensagem do contato só copia o nosso texto, sem nada novo: não é resposta. Mantenha a etiqueta.
 - A pessoa recusa o acompanhamento: a conversa não leva `Ação esperada` e a mensagem sai dos próximos passos.
 - Nenhuma conversa com a etiqueta: a rotina diz isso em uma linha e termina.
 - O prazo vence hoje e a pessoa já está na sessão: confira a conversa e não pergunte se acompanha.
@@ -116,6 +133,7 @@ Não perguntei se acompanho. Conferi a prévia da conversa pela dona a cada 10 s
 - Editar a rotina parece o jeito de acompanhar um contato novo. A etiqueta faz isso, e a rotina fica como está.
 - Perguntar se cria a rotina parece deixar a decisão com a pessoa. Quando a conversa segue para outro assunto, a pergunta some e a resposta do contato espera sem ninguém ver.
 - A rotina agendada roda numa sessão nova, sem as abas da sessão anterior, e pede a leitura à dona, como `usar-whatsapp-web` manda, em vez de abrir a própria aba. Um prompt que diz "a aba que já estiver aberta ou uma nova" leva a rotina a abrir a própria: a dona pode ter outro título, como "Sessão centralizada para WhatsApp Web", e a rotina deve achá-la pela lista de sessões.
+- A cópia do nosso texto na mensagem do contato parece resposta pronta. Quem copia costuma intercalar a resposta entre os trechos, ou não responder tudo: leia o que sobra depois de tirar a cópia, pergunta por pergunta.
 - Na lista, "Você:" antes da prévia só aparece em grupo. Na conversa individual, a mensagem que você enviou tem os vistos antes da prévia, e a do contato não tem.
 - A lista mostra o horário só nas mensagens de hoje. De ontem em diante, mostra "Ontem", o dia da semana ou a data, sem a hora.
 - Se a pessoa já abriu a conversa, em qualquer janela, o contador de não lidas some e a rotina não reconhece a resposta por ele: compare o horário da última mensagem do contato com o da sua.
