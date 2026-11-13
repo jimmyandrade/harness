@@ -3,7 +3,7 @@ name: inscrever-na-oportunidade
 description: Preenche o cadastro ou o formulário que a organização de uma oportunidade pede para a inscrição, com os dados da empresa, no formato de cada campo, e envia só com o sim da pessoa. Usada quando a inscrição ou o cadastro de uma oportunidade está para ser feito. NÃO serve para registrar a inscrição no Notion, ler o regulamento nem escrever à organização.
 metadata:
   author: jimmyandrade
-  version: "0.1.1"
+  version: "0.1.2"
   related:
     - acompanhar-retornos-pendentes
     - analisar-regulamento-da-oportunidade
@@ -64,7 +64,10 @@ Item pago só se escolhe com o sim da pessoa.
 
 Antes de enviar, mostre tudo o que está preenchido, de todas as páginas, sem repetir documento, e peça o sim.
 Envie só depois dele. O sim vale para esse formulário.
-Depois do envio, registre a inscrição por `definir-inscricao`, marque a tarefa da exigência como feita com o aval da pessoa e, se a organização deve responder, siga `acompanhar-retornos-pendentes`.
+Ao começar a preencher, procure a inscrição dessa oportunidade na lista e, se não existir, crie-a em andamento por `definir-inscricao`: a inscrição nunca depende de lembrar no fim.
+Logo depois do envio, antes de qualquer mensagem ao organizador ou tarefa, atualize essa inscrição com a hora do envio e o comprovante, releia a página e dê o link na resposta.
+O envio só está concluído com a página lida e o link dito.
+Depois, marque a tarefa da exigência como feita com o aval da pessoa e, se a organização deve responder, siga `acompanhar-retornos-pendentes`.
 
 ### Passo 7
 
@@ -103,6 +106,14 @@ Se você escolher mesa, balcão ou cadeira pagos, a empresa paga por algo que el
 1. Responda que não precisa, quando a empresa leva o item.
 2. Item pago só com o sim da pessoa.
 3. Deixe o item nos itens do ponto, por `acompanhar-itens-do-ponto-de-contato`.
+
+### Envio sem a inscrição registrada
+
+Se você enviar o formulário e seguir para a mensagem ao organizador sem criar a inscrição, a lista de inscrições da oportunidade fica vazia e a pessoa descobre sozinha.
+
+1. Crie a inscrição em andamento ao começar a preencher.
+2. Depois do envio, atualize a hora e o comprovante e releia a página.
+3. Dê o link da inscrição antes de tratar qualquer outro assunto.
 
 ## Exemplos de entrada e saída
 
