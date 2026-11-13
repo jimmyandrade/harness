@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.13.2"
+  version: "0.13.3"
   aliases:
     - definir-venda
   related:
@@ -16,6 +16,7 @@ metadata:
     - gerenciar-estoque
     - identificar-duplicata
     - lancar-despesa-da-empresa
+    - procurar-banco-de-dados
     - registrar-ciclo-do-ativo
 ---
 
@@ -23,7 +24,7 @@ metadata:
 
 ## Parâmetros de configuração
 
-Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. Valor vazio: pergunte à pessoa uma vez e não escolha.
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo. Banco vazio: use `procurar-banco-de-dados`. Outro valor vazio: pergunte à pessoa uma vez e não escolha.
 
 ```yaml
 "Modo de aprendizado": "perguntar"
@@ -48,7 +49,7 @@ Cadastrar, completar, corrigir ou conciliar uma venda de um ou mais produtos é 
 
 A página de venda serve para acompanhar a evolução das vendas e o retorno. A evolução usa a data real e as peças. O retorno por ponto de contato usa o ponto já vinculado. Não crie propriedade de retorno e não grave um número para ele.
 
-`Banco de vendas` vazio: a pessoa informa o data source na execução. Se ele não estiver no workspace conectado, pare. Não use a lista de outro workspace.
+`Banco de vendas` vazio: use `procurar-banco-de-dados`, dizendo que o banco guarda as vendas. Não use a lista de outro workspace.
 
 ```mermaid
 flowchart LR

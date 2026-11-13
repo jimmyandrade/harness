@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
   related:
     - criar-oportunidade
     - definir-agenda
@@ -13,6 +13,7 @@ metadata:
     - evoluir-habilidade
     - lancar-despesa-da-empresa
     - organizar-ponto-de-contato
+    - procurar-banco-de-dados
     - revisar-financas
 ---
 
@@ -26,7 +27,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Modo de aprendizado": "perguntar"
 "Formato do período de referência": "DD/MM/AAAA a DD/MM/AAAA"
 "Método de custo de participação": "taxa de inscrição + custo operacional complementar médio + contingência"
-# Nomes de banco: o projeto define. Vazios, pergunte uma vez e não escolha.
+# Nomes de banco: o projeto define. Vazios, use `procurar-banco-de-dados` antes de perguntar.
 "Banco de oportunidades": ""
 "Banco de localidades": ""
 "Banco de pontos de contato": ""
@@ -60,7 +61,7 @@ flowchart LR
 
 ### Passo 2
 
-Consulte `Banco de oportunidades` e, para os pisos, `Banco de localidades`. Os nomes das propriedades vêm do mapeamento de dados do projeto. Banco vazio: pergunte uma vez qual é a fonte e não escolha. Banco que não está no espaço conectado: pare e não use o de outro espaço.
+Consulte `Banco de oportunidades` e, para os pisos, `Banco de localidades`. Os nomes das propriedades vêm do mapeamento de dados do projeto. Banco vazio: use `procurar-banco-de-dados`, dizendo que um guarda as oportunidades e o outro os pisos por localidade. Não use o banco de outro espaço.
 
 Nem toda oportunidade é feira efetiva. A feira efetiva é a participação em `Banco de pontos de contato`, off-line ou on-line, em que o negócio realiza vendas. Não trate a oportunidade como participação confirmada.
 

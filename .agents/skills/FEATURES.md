@@ -51,7 +51,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Properties**:
   - Lives at `.agents/skills/acompanhar-producao-de-produto/SKILL.md`
   - Keeps production in the product records, one row per size, and never turns it into a task
-  - Reads the database and property names from the project instructions, declares no default for them, asks once when one is missing, and stops when a database is not in the connected workspace
+  - Reads the database and property names from the project instructions, declares no default for them, calls the database lookup skill when a database is missing, and asks once when a property is missing
   - Confirms the size of every unit, adds only the quantity said, and asks before producing more than planned
   - Relates the existing mold and base mold, and changes the pilot and production status only when the person says so
   - Tracks labels per physical unit, in the units database: one option per label type in the printed and sewn labels, and a unit counts as labeled only when every required type is sewn
@@ -913,6 +913,7 @@ How these skills relate is in `README.md`, in this folder.
   - Keeps a conversation tied to a deal, such as a quote, proposal, partnership or sale, on the negotiation page, and any other conversation on the discussion of the person page, without creating a negotiation
   - Writes one dated comment per date or block of messages, with the channel and who spoke, and reads the existing comments first so a message is not repeated
   - Registers the exchange in the same round as the sending, without asking, and says what it registered, with the page link, and what it did not
+  - Calls the database lookup skill when the name of a list is neither in the mapping nor in the parameters, before stopping to ask
   - Checks the comments, the schedule, the registrations, the opportunity pages and the email before asking, and asks only what no source answers
   - Shows both versions with source and date when two sources disagree, and never picks one
 - **Test Criteria**:
@@ -1040,7 +1041,7 @@ How these skills relate is in `README.md`, in this folder.
   - Adds a new row for each catalog price change with product, channel, reason, who decided, previous and new price, effective date, cost on the date, and comparison price
   - Never edits or deletes an old history row: a correction goes in a new row
   - Defines a price said for a group of products by the stock of the place, removes what sold before, and waits for confirmation of the list
-  - Asks the person where to record a point-of-sale price and where to read stock by place when those parameters are empty
+  - Asks the person where to record a point-of-sale price and where to read stock by place when those parameters are empty, and calls the database lookup skill when the product, variation, or price history database is empty
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The history source is read before any question about a previous price
@@ -1542,7 +1543,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Description**: Register, complete, correct, or reconcile a sale of one or more products, linking the customer and units that already exist and leaving an audit trail
 - **Properties**:
   - Lives at `.agents/skills/lancar-venda/SKILL.md`
-  - Reads the sales database, the bank accounts database, the optional units database, the source of the received amount, and the invoice rule from the project instructions, and asks once when a value is empty
+  - Reads the sales database, the bank accounts database, the optional units database, the source of the received amount, and the invoice rule from the project instructions, and asks once when a value other than a database is empty, and calls the database lookup skill for a database
   - Searches the sale by order number, order link, and transaction id before creating, and links a late store order to the original sale
   - Never creates the person, product, unit, or variant, and never writes the sold pieces or the stock balance
   - Records the discount reason and keeps nominal price, discount, credit, amount paid, and amount received distinct, with fees and transfers never counted as a discount
@@ -1556,7 +1557,7 @@ How these skills relate is in `README.md`, in this folder.
   - [ ] A missing customer or unit stops the skill with a question
   - [ ] Divergent sources produce a per-field diff before any change
   - [ ] An entry without a sale that is a card withdrawal is not registered as a sale
-  - [ ] An empty database parameter makes the skill ask and not choose
+  - [ ] An empty database parameter makes the skill call the database lookup skill and not ask for the name first
 
 ### limpar-copias-de-trabalho
 - **Stability**: experimental
@@ -1935,7 +1936,7 @@ How these skills relate is in `README.md`, in this folder.
   - Only reads: it never changes the structure of the databases it consults
 - **Test Criteria**:
   - [x] The skill is present at that path
-  - [x] An empty source or figure makes the skill ask once and not choose
+  - [x] An empty database makes the skill call the database lookup skill, and an empty figure makes it ask once and not choose
   - [x] An unknown fee is never zero and a missing floor is asked for
   - [x] The reserve is the larger of the projected safe cash and the group floor
   - [x] The response compares the period cash with the recommended safe cash
