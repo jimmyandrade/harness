@@ -3,7 +3,7 @@ name: bloquear-remetente-de-spam
 description: Classifica remetentes de spam por uma árvore de decisão, grava a decisão no banco do negócio e entrega as listas para colar no bloqueio de remetentes do Gmail e de URL do Chrome do Admin do Google. Usada quando a pessoa cola ou cita remetentes para bloquear. NÃO serve para filtro de caixa, marcar mensagem como spam nem salvar no Admin.
 metadata:
   author: jimmyandrade
-  version: "0.1.3"
+  version: "0.2.0"
   related:
     - definir-filtro-de-email
     - organizar-emails
@@ -42,6 +42,9 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
   - "Vercel": ["vercel.com"]
   - "Google": ["google.com"]
   - "PayPal": ["paypal.com"]
+# `Tela de remetentes bloqueados` e `Tela de URL do Chrome` são os links das duas telas do Admin onde a pessoa cola as listas. Grave o link sem o parâmetro `rapt`, que expira.
+"Tela de remetentes bloqueados": ""
+"Tela de URL do Chrome": ""
 "Perguntas por lote": 4
 "Modo de aprendizado": "perguntar"
 ```
@@ -98,7 +101,11 @@ Entregue duas listas, uma por tela do Admin, prontas para colar, uma entrada por
 
 Escreva cada entrada em formato de código, nunca como link, para a pessoa não abrir o site de quem escreve.
 
+Ponha ao lado de cada lista o link da tela dela, lido de `Tela de remetentes bloqueados` e `Tela de URL do Chrome`, para a pessoa chegar com um clique. Sem o link, pergunte uma vez e diga que ele vai no parâmetro, sem o `rapt`.
+
 Nunca entre na tela do Admin para alterá-la: é configuração de segurança da organização, e quem cola e salva é a pessoa. Diga quantas entradas há em cada lista e o que ficou sem decisão.
+
+Quando a pessoa disser que colou e salvou, não afirme que o bloqueio vale: você não leu a tela. A conferência é dela.
 
 ### Passo 7
 
@@ -155,7 +162,8 @@ Se você gravar em `Decidido por` a pessoa que está na conversa sem perguntar, 
 Se você entrar no Admin do Google para colar e salvar as listas, você altera uma configuração de segurança da organização sem a pessoa.
 
 1. Entregue as duas listas prontas.
-2. Diga em que tela cada uma vai e deixe quem cola e salva ser a pessoa.
+2. Dê o link de cada tela e deixe quem cola e salva ser a pessoa.
+3. Se o navegador cair na tela de login, não entre na conta: diga que não leu a tela.
 
 ## Exemplos de entrada e saída
 
@@ -180,6 +188,7 @@ A skill tira o texto do botão, separa 180 endereços e 3 já registrados no ban
 - A busca na caixa não devolve o que o Gmail marcou como spam ou suspeito. Vazio não prova que a mensagem não existe.
 - O bloqueio de URL do Chrome impede abrir o site, e o de remetentes impede só o e-mail. Um site de empresa real fica fora do segundo.
 - O usuário da conexão com o banco pode não ser quem decide. Procure a pessoa pelo nome antes de gravá-la em `Decidido por`.
+- O link de uma tela do Admin traz o `rapt`, que expira, e o identificador da unidade da pessoa. O parâmetro leva o link sem o `rapt`, e esse link fica nas instruções do negócio, nunca no repositório do core.
 - Uma caixa de marcar se desfaz com um clique. Por isso a URL do Chrome é `sim`, `não` ou `talvez`.
 - O banco do negócio é privado. Nome de remetente, de empresa e de domínio não entra em issue, pull request, commit nem arquivo do repositório.
 
