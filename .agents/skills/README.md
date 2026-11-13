@@ -129,6 +129,7 @@ flowchart LR
     priorizar_itens["priorizar-itens"]
     procurar_agenda["procurar-agenda"]
     procurar_artista["procurar-artista"]
+    procurar_banco_de_dados["procurar-banco-de-dados"]
     procurar_data_significativa["procurar-data-significativa"]
     procurar_email["procurar-email"]
     procurar_inscricao["procurar-inscricao"]
@@ -676,6 +677,7 @@ flowchart LR
   procurar_agenda --> revisar_uso_do_tempo
   procurar_artista --> definir_artista
   procurar_artista --> mesclar_registro
+  procurar_banco_de_dados --> identificar_duplicata
   procurar_data_significativa --> definir_data_significativa
   procurar_email --> definir_grafia
   procurar_email --> procurar_inscricao
