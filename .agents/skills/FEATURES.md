@@ -319,6 +319,11 @@ How these skills relate is in `README.md`, in this folder.
   - Keeps an existing notes block on the edition intact, and may copy a supported fact into a property
   - Does not write the poster in the page body
   - Does not treat free entry for a restricted audience as the visitor ticket or the exhibitor fee
+  - Checks that the edition year is covered by a cycle, creating the next cycle without duplicating and asking when the year is uncertain, and never promotes a past event to the future
+  - Fills both numeric fee fields when the fee varies by 1 or 2 days, uses the text field only for variable or conditional fees, and never writes the fee in the body
+  - Titles the offer without saying it belongs to the business, keeping one canonical opportunity for several candidates
+  - Preserves a guidance callout on the page, turns body content actions into ideas and dated tasks, and replaces a generic link with the specific ticketing page
+  - Hands the venue and its locality to definir-local-fisico instead of creating them
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses the group, checking whether the opportunity exists, organizing the participation, registering someone, creating a task, and reading an image
