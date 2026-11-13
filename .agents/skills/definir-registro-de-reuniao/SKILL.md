@@ -3,13 +3,14 @@ name: definir-registro-de-reuniao
 description: Cadastra e corrige o registro de uma reunião, com título, data, participantes, resumo e índice, onde o projeto guarda os registros. Usada quando a pessoa cola uma transcrição ou pergunta se uma reunião já está registrada. Não serve para achar o contexto de uma reunião nem escrever a ata.
 metadata:
   author: jimmyandrade
-  version: "0.15.0"
+  version: "0.16.0"
   related:
     - definir-agenda
     - definir-grafia
     - definir-pessoa
     - evoluir-habilidade
     - identificar-duplicata
+    - levantar-gravacoes-de-reunioes
     - mesclar-registro
     - preparar-tarefa-do-pull-request
     - procurar-agenda
@@ -55,6 +56,8 @@ Nos arquivos locais, `Endereço dos registros` é a pasta. No Notion, o banco e 
 ### Passo 2
 
 Veja se a reunião já está registrada, pela data, pelo título e pelos participantes. Em arquivos locais, leia o índice, que tem o `Nome do índice`. No Notion, o próprio banco é o índice. No Confluence, são as páginas sob o endereço dos registros. No Google Drive, a pasta é o índice. Só quando há documentos de reunião fora da pasta, como os criados por outra conta, existe um documento de índice com o `Nome do índice`, que lista esses documentos por link. Se já está, corrija o registro que existe. Não crie outro. Num banco do Notion, a checagem segue `identificar-duplicata`, e dois registros da mesma reunião seguem `mesclar-registro`.
+
+Reunião sem transcrição à mão, ou pedido de levantamento das gravações, segue `levantar-gravacoes-de-reunioes`, que acha o documento ou a gravação antes de a pessoa ser perguntada.
 
 Quando a transcrição já mora num documento do armazenamento, como as anotações que a ferramenta de reunião gera, use esse documento como registro. Não copie o texto: acrescente o resumo e a linha do índice, e deixe a transcrição como está.
 
