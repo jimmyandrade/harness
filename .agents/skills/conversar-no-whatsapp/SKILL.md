@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.37.1"
+  version: "0.37.2"
   aliases:
     - redigir-mensagem-de-whatsapp
   related:
@@ -59,7 +59,7 @@ Leia os valores nas instruções do projeto, na entrada desta habilidade. Na aus
 # `Página de instruções do WhatsApp` é o endereço da página com as regras da conta, como a ferramenta comercial por onde a mensagem sai. Vazio pula a leitura.
 "Página de instruções do WhatsApp": ""
 # `Horário de trabalho` vale o da entrada `Global` das instruções. Fora dele, a mensagem pede desculpa pelo horário.
-"Horário de trabalho": "segunda a sexta, 8h às 18h"
+"Horário de trabalho": "dias úteis, das 9h às 18h"
 ```
 ## Instruções
 
