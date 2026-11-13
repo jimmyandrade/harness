@@ -4,7 +4,7 @@ description: Sincroniza o status de tarefas, cards ou issues com o estado do pul
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.11.0"
+  version: "0.11.1"
   related:
     - criar-commit
     - criar-pull-request
@@ -60,7 +60,9 @@ Quando a pessoa pede para verificar o status do quadro ou do backlog, obtenha as
 Leia o quadro pela ferramenta direta ou pelo conector do rastreador.
 Só quando nenhum dos dois estiver disponível, leia a página do quadro no navegador onde a pessoa já está conectada, que lista chave, título e status de cada tarefa.
 Diga no relato qual caminho leu o quadro.
-O quadro mostra a tarefa-mãe só pela chave: o PR costuma estar nas subtarefas, então busque também por elas antes de dizer que a mãe não tem PR.
+O quadro mostra a tarefa-mãe só pela chave: o PR costuma estar nas subtarefas, então confira sempre as subtarefas de cada tarefa-mãe, mesmo quando a mãe já tem um PR.
+Busque o PR na organização inteira, não só no repositório aberto, porque o trabalho de uma tarefa pode estar em outros repositórios.
+Ligue só depois de ler o corpo do PR: a busca por texto traz PR que só cita a chave ou que casou por outro motivo, e ligar pelo assunto confunde as tarefas.
 Sem consulta e sem lista, pergunte e pare. Resultado grande que vem em arquivo é lido pelos campos chave, status e título, depois de conferir o formato do arquivo. Anote o status de cada tarefa como o rastreador devolveu.
 
 ### Passo 2
