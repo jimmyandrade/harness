@@ -3,7 +3,7 @@ name: escrever-link
 description: Escreve o link de um texto lido numa plataforma, como Jira, Confluence, GitHub, Slack, WhatsApp ou a conversa com a IA, com o endereço lido da fonte, o texto certo e a sintaxe que funciona nela. Usada sempre que um texto vai citar PR, issue, card, página ou arquivo. Não serve para decidir o que o texto diz nem para enviá-lo.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.2.1"
   related:
     - conversar-no-whatsapp
     - criar-pull-request
@@ -33,7 +33,7 @@ metadata:
 
 Leia o endereço na fonte antes de escrever o link.
 O PR e a issue vêm do campo `url` do `gh`. O repositório vem do remoto `origin`. O card, a página e o comentário vêm do retorno da ferramenta que os criou ou leu.
-Nunca monte o endereço de memória nem ponha o login pessoal como dono do repositório.
+Nunca monte o endereço de memória, nem com o login pessoal como dono do repositório, nem com o nome da pasta ou do projeto como nome do repositório.
 Sem ter lido, leia agora. Se não der, diga que falta o link e não escreva um.
 
 ### Passo 2
@@ -169,6 +169,7 @@ Escrevi "PR 123: corrige o filtro" numa linha e a URL inteira na linha de baixo.
 - O Slack só pré-visualiza os 5 primeiros links de uma mensagem.
 - Um comentário no GitHub tem endereço próprio, `#issuecomment-<id>` ou `#discussion_r<id>`. O endereço do PR não leva ao comentário.
 - O login pessoal de quem escreve não é o dono do repositório. O dono vem do `origin`.
+- O nome da pasta de trabalho ou do projeto parece o nome do repositório, e o do harness de negócio costuma ser outro. O link de um PR sai do campo `url` do `gh pr view`, também quando o link é de um PR que já foi citado antes na conversa.
 
 ## Scripts disponíveis
 
