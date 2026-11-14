@@ -5,9 +5,10 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.1"
+  version: "0.4.0"
   related:
     - criar-ideia-de-conteudo
+    - consultar-responsavel-pela-oportunidade
     - criar-oportunidade
     - definir-grupo-de-oportunidades
     - definir-inscricao
@@ -16,6 +17,7 @@ metadata:
     - definir-cronograma
     - definir-viagem
     - evoluir-habilidade
+    - inscrever-na-oportunidade
     - procurar-oportunidade
 ---
 
@@ -90,7 +92,15 @@ Quando a localidade-alvo veio de uma viagem e a oportunidade tem vários dias, c
 
 ### Passo 7
 
-Responda com uma linha por candidato: título, datas com dia da semana, o que cai na viagem, por que combina com o negócio e o que falta para decidir. Pergunte se a pessoa topa. Com o sim, ofereça `criar-ideia-de-conteudo` para o que produzir no evento, `definir-tarefa` para cada pendência com ação e `definir-inscricao` para inscrever. Rodando por rotina, não pergunte no meio: cadastre o que passou, deixe a decisão para a pessoa e entregue o resumo. Diga o que ficou de fora por causa dos tetos.
+Responda com uma linha por candidato: título, datas com dia da semana, o que cai na viagem, por que combina com o negócio e o que falta para decidir.
+
+Cada candidato que combina leva também o caminho para participar: o link do edital ou do formulário, o prazo e, com o prazo vencido ou sem link, o canal para perguntar à organização se ainda aceita, como o produtor da página do evento ou a mensagem direta de quem orienta o grupo.
+
+Leva ainda quem a empresa já conhece, achado no Notion: pessoas, negociações e edições anteriores do mesmo grupo ou de eventos parecidos em que alguém da empresa atuou, como apresentadora ou expositora. Isso serve de abertura na mensagem.
+
+Pergunte se a pessoa topa e se escreve à organização. Com o sim ao contato, o rascunho segue `consultar-responsavel-pela-oportunidade`, e nada é enviado antes do sim ao texto.
+
+Com o sim da pessoa a participar, ofereça `criar-ideia-de-conteudo` para o que produzir no evento, `definir-tarefa` para cada pendência com ação e `definir-inscricao` para inscrever. Rodando por rotina, não pergunte no meio: cadastre o que passou, deixe a decisão para a pessoa e entregue o resumo. Diga o que ficou de fora por causa dos tetos.
 
 ### Passo 8
 
@@ -126,6 +136,14 @@ Se você pesquisar localidade e grupos quando a pessoa trouxe uma feira e pergun
 1. Pule os Passos 2 a 4 e compare só esse candidato com o playbook e com o canvas.
 2. Grave a leitura de fit nas notas de curadoria da edição.
 3. Deixe a decisão humana com a pessoa.
+
+### Candidato que combina sem caminho para participar
+
+Se você disser só "falta decidir", a pessoa descobre sozinha que a inscrição fechou e ninguém procura a organização.
+
+1. Ache o edital, o prazo e o canal de contato da organização.
+2. Com o prazo vencido, proponha perguntar se ainda aceita, usando quem a empresa já conhece.
+3. Não mande nada sem o sim ao texto.
 
 ### Programação da edição inteira
 
@@ -167,6 +185,7 @@ Não escolhi localidade nem pesquisei grupos. A feira já estava cadastrada. Com
 - A prioridade da localidade e a prioridade de busca do grupo são duas. A primeira diz se procura ali, a segunda diz por onde começar.
 - O resultado mais recente da busca parece o mais importante. A fila é a prioridade do grupo.
 - Os dias de feira parecem tempo livre. Eles ficam fora da programação registrada.
+- Candidato que combina parece pronto quando está cadastrado. Falta o caminho para participar e quem escreve à organização.
 - A pergunta "combina com o negócio?" parece pedir uma busca nova. Com o candidato na mão, a skill só o compara com o playbook e com o canvas.
 
 ## Scripts disponíveis
