@@ -174,12 +174,12 @@ Funcionalidade: Tecido
       Mas não escolhe o campo
 
     Exemplo: Tecido de antes da data de corte
-      Dado que o tecido foi criado antes da data de corte da cobrança
+      Dado que o tecido foi criado antes da data de corte para cadastro completo
       Quando a habilidade termina de gravar
       Então ela não cobra a ficha, os dados técnicos nem a foto
       E o que falta não vira pendência
 
     Exemplo: Data de corte vazia
-      Dado que as instruções do projeto não definem a data de corte da cobrança
+      Dado que as instruções do projeto não definem a data de corte para cadastro completo
       Quando a habilidade termina de gravar
       Então ela cobra o que falta de todo tecido

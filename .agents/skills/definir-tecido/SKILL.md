@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.5.2"
+  version: "0.6.0"
   related:
     - acompanhar-producao-de-produto
     - definir-composicao-textil
@@ -36,8 +36,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Campo do arquivo da ficha": ""
 # `Campo da foto do tecido`: campo de arquivo que guarda a foto do tecido. Vazio, use `procurar-banco-de-dados` para achar o campo de arquivo do banco.
 "Campo da foto do tecido": ""
-# `Data de corte da cobrança`: o tecido criado antes dela não é cobrado do que falta. Vazia, todo tecido é cobrado.
-"Data de corte da cobrança": ""
+# `Data de corte para cadastro completo`: o tecido criado antes dela não é cobrado do que falta. Vazia, todo tecido é cobrado.
+"Data de corte para cadastro completo": ""
 # `Siglas das fibras`: a sigla de cada fibra no nome da linha de composição.
 "Siglas das fibras": {"algodão": "CO", "viscose": "CV", "poliéster": "PES", "poliamida": "PA", "elastano": "PUE", "linho": "LI", "seda": "SE"}
 ```
@@ -88,7 +88,7 @@ Na resposta, dê o link de cada página e de cada linha de composição criada, 
 
 ### Passo 5
 
-Antes de encerrar, cobre da pessoa o que falta de cada tecido novo. Tecido novo é o criado depois de `Data de corte da cobrança`. Não grave como completo o que está incompleto.
+Antes de encerrar, cobre da pessoa o que falta de cada tecido novo. Tecido novo é o criado depois de `Data de corte para cadastro completo`. Não grave como completo o que está incompleto.
 
 - [ ] A composição, quando nem a ficha nem a etiqueta a trazem.
 - [ ] Os dados técnicos que a ficha não traz: largura, gramatura, rendimento, encolhimento e cuidados.
