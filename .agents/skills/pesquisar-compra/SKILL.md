@@ -4,7 +4,7 @@ description: Pesquisa o que comprar, cruza com despesas, estoque e bens que já 
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.7"
+  version: "0.3.8"
   related:
     - conversar-no-whatsapp
     - definir-ativo-imobilizado
@@ -98,6 +98,7 @@ Antes de recomendar o contato com a empresa, veja se já houve conversa com ela,
 Quando a compra é um serviço de terceiro e nenhuma empresa achada atende, não responda que não há opção. Siga para a próxima: a da lista de empresas, a que um contato indicou, a da web. Cadastre cada uma, veja se há conversa e, sem conversa, prepare o primeiro contato pelo WhatsApp, com o texto pronto e o sim da pessoa. Só pare quando uma empresa confirmar que atende ou a pessoa mandar parar.
 O primeiro contato é por mensagem, pelo WhatsApp, pelo e-mail ou pelo formulário da empresa, e sai em qualquer hora: a loja fechada não adia a mensagem. Ligação é o último recurso, só quando a empresa não tem canal de texto. Prepare a mensagem para cada empresa de uma vez e peça o sim da pessoa a todas.
 A primeira mensagem já traz o que a empresa vai perguntar: o material, o formato, a quantidade e o prazo. Antes de enviar, confira nos registros o que já se sabe de cada um e pergunte à pessoa só o que falta, como a quantidade. A resposta da empresa não deve abrir uma segunda rodada de perguntas que a primeira mensagem já podia responder.
+Quando a empresa responde, leia a resposta e responda com os fatos que já se sabe, sem pedir à pessoa o que a conversa já tem. Delegue a leitura e a resposta à habilidade de conversa. Só leve à pessoa a decisão que é dela: aceitar preço ou orçamento, pagar, combinar data e hora de retirada ou entrega, e passar dado pessoal ou fiscal. Nesses casos, diga as palavras da empresa e a opção que você recomenda.
 Na resposta, leve o link da página de cada empresa cadastrada.
 
 ### Passo 7
