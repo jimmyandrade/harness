@@ -21,9 +21,9 @@ Funcionalidade: Tecido
       E diz a ela para que serve o banco e quais propriedades ele precisa ter
       Mas não pergunta o nome à pessoa antes
 
-    Exemplo: Banco de composição não definido
-      Dado que as instruções do projeto não definem o banco de composição
-      Quando a habilidade precisa ler ou criar uma linha de composição
+    Exemplo: Banco de composição de fibras não definido
+      Dado que as instruções do projeto não definem o banco de composição de fibras
+      Quando a habilidade precisa ler ou criar uma linha de composição de fibras
       Então ela chama a habilidade de procurar banco de dados
       E diz a ela para que serve o banco e quais propriedades ele precisa ter
       Mas não pergunta o nome à pessoa antes
@@ -84,7 +84,7 @@ Funcionalidade: Tecido
       Então o nome da linha é o percentual com ponto decimal e a sigla da fibra, como 90.5% CO
 
     Exemplo: Linha que já existe
-      Dado que o banco de composição já tem uma linha com o mesmo nome e a mesma fibra
+      Dado que o banco de composição de fibras já tem uma linha com o mesmo nome e a mesma fibra
       Quando a habilidade grava a composição
       Então ela usa essa linha
       E cria só a que falta

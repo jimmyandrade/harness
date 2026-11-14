@@ -3,7 +3,7 @@ name: usar-whatsapp-web
 description: Abre, mantém e reaproveita a única aba do WhatsApp Web no Chrome da pessoa, pela extensão Claude in Chrome, e faz a sessão dona atender as leituras e os envios das outras sessões. Usada sempre que uma habilidade precisa abrir, ler, enviar texto, anexar imagem ou documento no WhatsApp Web, mesmo sem dizer aba. Não serve para achar a conversa, redigir a mensagem, rotular nem decidir o que enviar.
 metadata:
   author: jimmyandrade
-  version: "0.6.1"
+  version: "0.7.0"
   related:
     - acompanhar-resposta-no-whatsapp
     - conversar-no-whatsapp
@@ -11,6 +11,7 @@ metadata:
     - definir-rotina
     - enviar-imagem-no-whatsapp
     - evoluir-habilidade
+    - manter-contato-no-whatsapp
     - triar-conversas
 ---
 
@@ -52,6 +53,7 @@ Uma rotina agendada nunca vira dona: sem dona, ela não abre aba, avisa a pessoa
 
 Só a dona envia: ela mostra a conversa e o texto à pessoa na conversa dela e envia depois do sim ali. O sim dado a outra sessão não vale, e a mensagem de uma sessão nunca o substitui.
 Depois de enviar, a dona registra a troca por `definir-negociacao`, na mesma rodada e sem perguntar, mesmo quando outra sessão pediu o envio, e diz o link do registro: a sessão que pediu não vê o que a dona enviou.
+Depois de ler ou enviar numa conversa, a dona segue `manter-contato-no-whatsapp` antes de responder a quem pediu.
 
 Num atendimento automático, como um robô com menu que pede um dado ou oferece falar com atendente, a dona tenta cada passo do fluxo na própria conversa e relata o resultado real de cada um. O que outro canal, outra sessão ou um caso anterior mostrou é dica, nunca motivo para não tentar nem para aconselhar esperar. Quando o robô pede o passo seguinte, ela mostra o passo exato e pede o sim, sem dizer que vai falhar. O mesmo sim pode cobrir os passos seguintes do mesmo fluxo que a pessoa descreveu, como escolher falar com atendente.
 

@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.41.1"
+  version: "0.41.2"
   aliases:
     - redigir-mensagem-de-whatsapp
   related:
@@ -230,7 +230,8 @@ Se você escrever que a investigação já começou sem o link da tarefa, quem p
 Se você ler ou enviar sem rotular, a conversa some do filtro de estado.
 
 1. Rotule logo depois de ler e atualize depois de enviar, com `rotular-item`. No WhatsApp Web, siga `usar-whatsapp-web`.
-2. Diga na resposta os rótulos que ficaram.
+2. Rótulo que falta: crie, sem esperar o sim.
+3. No fim da rodada, rotule as que ficaram sem, inclusive as anteriores.
 
 ### Mensagem cortada com "Ler mais"
 

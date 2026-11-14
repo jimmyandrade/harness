@@ -3,7 +3,7 @@ name: consultar-responsavel-pela-oportunidade
 description: Pergunta ao responsável por uma oportunidade o que o regulamento não diz e a logística exige, pelos canais dele, e grava a resposta na oportunidade, no ponto de contato e nas notas do grupo. Usada quando a análise do regulamento deixa uma lacuna. NÃO serve para ler o regulamento, redigir no tom da marca nem acompanhar resposta já pedida.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   related:
     - acompanhar-retornos-pendentes
     - analisar-regulamento-da-oportunidade
@@ -28,6 +28,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 ```yaml
 # `Sugestões ao responsável` é `sim`, `perguntar` ou `não`. Depois da oportunidade, `sim` e `perguntar` mandam a ele a lista do que faltou no regulamento, para o próximo, com o sim da pessoa a esse texto.
 "Sugestões ao responsável": "perguntar"
+# `Página de apresentação da marca` é a página do projeto que diz como a marca se apresenta a uma organização ou a outra marca, e quem fala por ela. Vazio, pergunte à pessoa como apresentar a marca antes de escrever a um responsável novo.
+"Página de apresentação da marca": ""
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -45,6 +47,8 @@ Sem o responsável identificado, pergunte à pessoa quem é. Não escreva ao pri
 
 Leia a conversa de cada canal antes de escrever, e tire a pergunta que a organização já respondeu, no grupo ou no manual.
 O grupo de expositores costuma ser um canal só de comunicados da organização, em que a marca não escreve. A pergunta de uma marca vai no e-mail ou na conversa individual com o responsável.
+Quando a conversa com o responsável é nova, a mensagem abre com a marca se apresentando, antes de qualquer pergunta, na primeira pessoa de quem a representa, como a `Página de apresentação da marca` manda: quem é, o que faz e o que liga a marca à causa ou ao público da organização, sem exagerar. Um pedido direto, sem apresentação, não gera interesse em quem não conhece a marca.
+
 Reúna as lacunas numa mensagem por canal, em lista numerada, uma pergunta curta e concreta por item.
 O prazo da resposta vem uma vez, no fim, na frase cuidadosa do vocabulário, nunca como cobrança.
 A pergunta que depende de um prazo vencido diz isso sem culpa e pede mesmo assim, citando o material que a empresa já enviou.
@@ -110,6 +114,14 @@ Se você perguntar o que o manual ou o grupo já responderam, o responsável per
 1. Leia as fontes e a conversa.
 2. Tire a pergunta respondida.
 3. Pergunte só o que sobrou.
+
+### Pergunta sem apresentação
+
+Se você abrir a primeira mensagem com a pergunta, a organização não sabe quem escreve nem por que importa, e a mensagem soa direta demais.
+
+1. Leia a `Página de apresentação da marca`.
+2. Abra com a marca, na primeira pessoa de quem a representa.
+3. Só depois faça a pergunta, com cuidado.
 
 ### Contato errado
 

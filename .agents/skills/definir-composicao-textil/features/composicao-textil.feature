@@ -1,11 +1,11 @@
 # language: pt
 
 Funcionalidade: Composição têxtil
-  A composição de um produto tem uma linha por parte e tecido, e a composição da etiqueta sai dessas linhas sem repetir tecido.
+  Os materiais de um produto têm uma linha por parte e tecido, e a composição têxtil da etiqueta sai dessas linhas sem repetir tecido.
 
   Regra: o banco vazio chama a procura de banco e as partes não vêm da habilidade
 
-    Exemplo: Banco de composições não definido
+    Exemplo: Banco de materiais do produto não definido
       Dado que as instruções do projeto não definem o banco de composições
       Quando a habilidade precisa ler ou gravar uma linha
       Então ela chama a habilidade de procurar banco de dados
@@ -35,13 +35,13 @@ Funcionalidade: Composição têxtil
       Dado que a pessoa cita o produto por um nome antigo
       Quando a habilidade procura o produto
       Então ela acha pelo nome e pelas variações de nome
-      E lê todas as linhas de composição do produto antes de mexer
+      E lê todas as linhas de materiais do produto antes de mexer
 
     Exemplo: Tecido diferente por parte
       Dado que a frente do produto é um tecido e o forro é outro
       Quando a habilidade grava
       Então ela grava uma linha para cada parte, com o tecido dela
-      Mas não copia a composição nem a estampa do tecido para a linha
+      Mas não copia a composição de fibras nem a estampa do tecido para a linha
 
   Regra: a parte vem das opções que existem
 
