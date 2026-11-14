@@ -4,7 +4,7 @@ description: Pesquisa o que comprar, cruza com despesas, estoque e bens que já 
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.12"
+  version: "0.3.13"
   related:
     - conversar-no-whatsapp
     - definir-ativo-imobilizado
@@ -100,7 +100,10 @@ O primeiro contato é por mensagem, pelo WhatsApp, pelo e-mail ou pelo formulár
 Antes do primeiro envio a cada empresa, ela precisa estar cadastrada, com o rótulo no WhatsApp e o link da página dela na nota do contato. A pressa não adia esses três.
 A primeira mensagem explica o que é o item e para que a pessoa o usa, com o link do anúncio ou da compra quando houver, e já traz o que a empresa vai perguntar: o material, o formato, a quantidade e o prazo. Uma empresa que não conhece o item não consegue dizer se atende: explique antes de pedir indicação. Antes de enviar, confira nos registros o que já se sabe de cada um e pergunte à pessoa só o que falta, como a quantidade. A resposta da empresa não deve abrir uma segunda rodada de perguntas que a primeira mensagem já podia responder.
 
-A mensagem só diz onde a pessoa está, ou quando chega, depois de conferir isso no momento do envio: a viagem em `definir-viagem` e o que ela disse hoje. Uma frase dita horas antes não vale, porque quem viaja muda de lugar. Sem certeza, tire a frase de localização e mande só o pedido. Se uma mensagem já enviada afirmou um lugar que deixou de valer, avise a pessoa com a lista de empresas e o horário de cada envio, e peça a correção à habilidade de conversa.
+A mensagem diz à empresa só o que ela precisa para orçar e a disponibilidade da pessoa: quando ela pode retirar ou levar. Não conte que a pessoa viaja, onde está nem quando chega. Confira a disponibilidade no momento do envio, na viagem de `definir-viagem` e no que a pessoa disse hoje, porque uma frase dita horas antes pode ter deixado de valer.
+
+Uma mensagem já enviada com dado errado ou a mais se corrige editando essa mensagem, não mandando outra. Se a edição não é mais possível, não envie nada e diga à pessoa quais empresas ficaram assim.
+
 Quando a empresa responde, leia a resposta e responda com os fatos que já se sabe, sem pedir à pessoa o que a conversa já tem. Delegue a leitura e a resposta à habilidade de conversa. Só leve à pessoa a decisão que é dela: aceitar preço ou orçamento, pagar, combinar data e hora de retirada ou entrega, e passar dado pessoal ou fiscal. Nesses casos, diga as palavras da empresa e a opção que você recomenda.
 Na resposta, leve o link da página de cada empresa cadastrada.
 
