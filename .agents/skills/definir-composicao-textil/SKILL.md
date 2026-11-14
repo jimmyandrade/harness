@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.5.0"
   aliases:
     - definir-composicao-da-peca
   related:
@@ -28,8 +28,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 ```yaml
 "Modo de aprendizado": "perguntar"
 # Nomes de banco e de parte: o projeto define. Banco vazio: use `procurar-banco-de-dados` antes de perguntar. Parte vazia: pergunte uma vez e não escolha.
-# `Banco de composições`: uma linha por parte e tecido de cada produto.
-"Banco de composições": ""
+# `Banco de materiais do produto`: uma linha por parte e material de cada produto.
+"Banco de materiais do produto": ""
 # `Parte canônica`: a parte que as fórmulas do produto leem para a composição principal e o prefixo do SKU.
 "Parte canônica": ""
 # `Partes de acabamento`: partes que saem da etiqueta quando o tecido delas já está na frente ou no verso. Um exemplo é a gola.
@@ -40,9 +40,9 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ### Passo 1
 
-Ache o produto pelo nome e pelas variações de nome, e leia todas as linhas de composição dele antes de mexer.
+Ache o produto pelo nome e pelas variações de nome, e leia todas as linhas de materiais dele antes de mexer.
 
-Os nomes vêm das instruções do projeto. Com `Banco de composições` vazio, use `procurar-banco-de-dados`, dizendo que o banco guarda uma linha por parte e tecido de cada produto.
+Os nomes vêm das instruções do projeto. Com `Banco de materiais do produto` vazio, use `procurar-banco-de-dados`, dizendo que o banco guarda uma linha por parte e tecido de cada produto.
 
 Uma linha é uma parte do produto num tecido: a frente é um tecido, o forro é outro. O tecido tem a composição e a estampa, e a linha só o liga à parte, sem copiar nada dele. A parte vem da opção do campo Parte: a pessoa diz "estrutura" ou "tampa do bolso", e você usa a opção mais próxima e diz qual usou. Parte que não existe pede o sim da pessoa antes de criar a opção, com o nome e a descrição. Não crie propriedade nova no produto para isso.
 
@@ -53,7 +53,7 @@ flowchart LR
   Q{A parte é?} -->|corpo ou face principal| F[Parte canônica, uma só]
   Q -->|outra face de dupla face| V[A opção de verso]
   Q -->|recorte de outro tecido| P[A opção de recorte, uma linha por tecido]
-  Q -->|estampa| E[Fica no tecido, por definir-estampa, não na composição]
+  Q -->|estampa| E[Fica no tecido, por definir-estampa, não nos materiais]
   Q -->|patch ou bordado| A[Aplicação da variante, 0 a N]
   Q -->|outra parte| O[A opção que existe ou pergunte]
 ```
@@ -136,13 +136,14 @@ frente em um tecido de 100% CO, uma linha de recorte em uma malha e outra em out
 ## Casos-limite
 
 - A pessoa não sabe as porcentagens de uma malha: registre o tecido com as fibras, sem inventar o percentual, e guarde no comentário de onde virá a inferência.
-- A estampa é do tecido, não da composição: outra estampa é outro tecido, cadastrado por `definir-tecido`, e a linha do produto troca para ele. Recorte não é aplicação.
-- A aplicação é da variante, cadastrada por `definir-aplicacao-textil`, não do produto nem do tecido: ela vai por cima do tecido e muda de uma variante para outra. A mesma peça pode ter uma variante com aplicação e outra sem, então a propriedade é opcional e aceita de 0 a N registros. Ela não é tecido e não vira linha de composição de tecido. Se vai na etiqueta, o cadastro dela diz.
+- A estampa é do tecido, não dos materiais do produto: outra estampa é outro tecido, cadastrado por `definir-tecido`, e a linha do produto troca para ele. Recorte não é aplicação.
+- A aplicação é da variante, cadastrada por `definir-aplicacao-textil`, não do produto nem do tecido: ela vai por cima do tecido e muda de uma variante para outra. A mesma peça pode ter uma variante com aplicação e outra sem, então a propriedade é opcional e aceita de 0 a N registros. Ela não é tecido e não vira linha de materiais. Se vai na etiqueta, o cadastro dela diz.
 - A pessoa usa um apelido para o tecido: confira o nome no banco de tecidos antes de ligar a linha.
 - O banco está vazio nas instruções do projeto: use `procurar-banco-de-dados`. Parte vazia: pergunte uma vez.
 
 ## Pegadinhas
 
+- "Composição" tem três sentidos perto um do outro. Os materiais do produto são as partes, cada uma num material. A composição de fibras é o que cada tecido é feito. A composição têxtil é o texto da etiqueta, montado a partir dos dois.
 - As fórmulas do produto pegam a primeira linha da `Parte canônica`. Duas linhas ali dão um SKU que depende da ordem.
 - O banco pode exigir uma linha na `Parte canônica`. Uma frente toda em recortes leva um tecido na canônica e os outros nos recortes.
 - Elastano aparece como PUE nas linhas de fibra.
