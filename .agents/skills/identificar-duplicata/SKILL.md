@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.13.0"
+  version: "0.14.0"
   related:
     - definir-data-significativa
     - definir-grafia
@@ -32,6 +32,8 @@ Buscar ou cadastrar um registro novo pede esta checagem antes de criar. A pessoa
 O termo principal é o título da lista. Busque o nome como a pessoa escreveu. Busque também o nome alternativo e a grafia diferente: sigla, apelido, nome antigo, e o nome com edição ou ano e sem eles. A variação que a fonte já guarda entra na mesma busca: alias, variação de nome e grafia. Não confundir com aponta o parecido que é outro registro. Não trate esse vínculo como o mesmo cadastro.
 
 Pessoa de outra empresa com o primeiro nome, o apelido ou a forma curta igual aos de alguém do próprio negócio é outra pessoa, até uma fonte dizer o contrário. Não herde o cadastro, o telefone, o perfil nem a empresa de quem é de dentro. Ligue as duas em Não confundir com na hora, com a empresa de cada uma no contexto da desambiguação, e use o registro da pessoa certa ao escrever ou enviar.
+
+Ao buscar por telefone de celular do Brasil, busque as duas formas, com e sem o 9 depois do DDD: o contato antigo do WhatsApp guarda o número sem ele. Dois registros da mesma pessoa, um com o número de cada forma, são duplicata.
 
 ### Passo 3
 
@@ -173,6 +175,7 @@ Busquei o nome como foi escrito, o nome alternativo, a grafia diferente, a sigla
 - Um perfil social e dois registros da mesma pessoa: mostre o diff na mesma resposta. Não chame uma de canônica. Não confundir com não separa essa duplicata. Consolidar fica com `mesclar-registro`.
 - Dois registros já na lista: o diff diz o que cada página traz. Não chame uma de canônica.
 - Nome parecido sem confirmação: nomeie cada um e pergunte. Não crie. Não ligue.
+- Celular do Brasil achado só numa das formas, com ou sem o 9 depois do DDD: é a mesma pessoa se o resto bate. Mostre o diff e não crie outro registro.
 - Pessoa de outra empresa com o primeiro nome, o apelido ou a forma curta igual aos de alguém do próprio negócio: é outra pessoa. Ligue as duas em Não confundir com e não herde dados da de dentro.
 - Nomes parecidos confirmados como outra entidade: cada registro canônico permanece. Não consolide. Diga se Não confundir com existe. Com segurança, relacione antes de concluir.
 - O banco não tem Não confundir com: diga que não existe e proponha a relação para o próprio banco, ou para o banco adequado. Com o sim, crie a propriedade e só então ligue. Sem o sim, não conclua.
