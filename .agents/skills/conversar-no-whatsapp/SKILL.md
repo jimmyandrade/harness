@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.41.0"
+  version: "0.41.1"
   aliases:
     - redigir-mensagem-de-whatsapp
   related:
@@ -112,6 +112,8 @@ Antes de qualquer rascunho, diga à pessoa o que o contato respondeu, com as pal
 Com a mesma pessoa ou empresa pode haver mais de um pedido aberto, como duas coisas a imprimir em materiais diferentes. Antes de rascunhar, liste os pedidos abertos com ela. A mensagem diz de qual pedido trata, pelo material e pelo uso. Com mais de um, numere cada um, com o material e o que precisa agora, como o prazo. Resposta que não diz a qual pedido responde: confirme de qual ele falava, antes de seguir.
 
 Confira no manual da oportunidade cada exigência do organizador, como a janela de montagem, e use a que ele dá.
+
+A resposta que confirma interesse diz de qual oferta fala, pela organização e pelo formato. Duas ofertas parecidas, no mesmo lugar ou perto das mesmas datas, não entram na mesma frase.
 
 Antes de rascunhar uma mensagem que propõe, aceita ou combina data, hora, lugar, retirada, coleta, entrega, encontro ou prazo, confira a agenda, seguindo `procurar-agenda`, e a viagem ativa ou a próxima, seguindo `definir-viagem`: saída, chegada, a cidade de cada dia e os compromissos que batem.
 
