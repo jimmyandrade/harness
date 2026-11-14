@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.17.0"
+  version: "0.18.0"
   related:
     - definir-empresa
     - definir-grafia
@@ -85,7 +85,7 @@ flowchart LR
 
 O nome completo é o nome da pessoa. O handle não entra nesse nome. Não invente e-mail, telefone, pronome, tipo de público nem empresa.
 
-Telefone vai no formato internacional. Celular do Brasil tem 9 dígitos depois do DDD: o WhatsApp às vezes mostra o número sem o 9. Número de 8 dígitos começado por 6, 7, 8 ou 9 é celular sem o 9: pergunte o número completo antes de gravar.
+Telefone vai no formato internacional. Celular do Brasil tem 9 dígitos depois do DDD: o contato antigo do WhatsApp mostra o número sem o 9. Número de 8 dígitos começado por 6, 7, 8 ou 9 é celular sem o 9: confira na conversa e grave com o 9 na frente, dizendo que o acrescentou. Pergunte só se não for celular.
 
 Com `Cadastro na loja` em `sim`, crie ou atualize o cliente na loja com o nome, o telefone, o e-mail e o idioma, sem consentimento de marketing. Grave o link do cliente em `Campo do cliente na loja`, ou nas notas quando o campo está vazio. O histórico das conversas fica nos comentários da página da pessoa, não na nota do cliente.
 

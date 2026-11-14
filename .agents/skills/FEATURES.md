@@ -2098,6 +2098,24 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses registering the asset, choosing stock, recording the payment, and creating the company
 
+### registrar-preco-de-combustivel
+- **Stability**: experimental
+- **Description**: Record the fuel price seen or paid at a roadside station, with time, brand, side of the road, map location, and the receipt as an expense when the person fills up
+- **Properties**:
+  - Lives at `.agents/skills/registrar-preco-de-combustivel/SKILL.md`
+  - Reads the fuel price database from the data source the person gives, uses the database lookup skill when it is missing, and stops when it is not in the connected workspace
+  - Treats every price the person tells as a station on the trip's side of the road without asking, and keeps a station the person calls out as on the opposite side out, because the person cannot turn to fill up there
+  - Creates one row per station notice and never merges two notices because the brand, price, or place candidate match, and links look-alike rows with a do-not-confuse-with relation in both directions
+  - Marks a price read in passing without a photo, and records the order of the stations and the side of the road
+  - Resolves the station by the name and tax number on the receipt, never by a web search, and keeps the brand apart
+  - Computes the price per liter as the amount paid divided by the liters when the pump price is covered, and asks the person to confirm it
+  - Treats the phone position as ahead of the station, because the car keeps moving while the person reports the price, and looks for the station behind it using the references the person gives, such as a neighboring business
+  - Uses a place candidate for the map location only when the references confirm it, and otherwise keeps the phone position, marked as approximate and as ahead of the station
+  - Posts the expense through the company expense skill and links it to the price row, the trip, and the vehicle, and keeps only the last four digits of the card
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses posting only the expense, registering the trip, and recommending where to stop
+
 ### registrar-resultados-da-validacao-na-tarefa
 - **Stability**: experimental
 - **Description**: Record on the task, in a single comment, the results of the validation at each stage of the work (local, pull request preview, pre-production, production), with the address of the environment, and edit that comment as the work moves on

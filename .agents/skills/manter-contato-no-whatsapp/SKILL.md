@@ -3,7 +3,7 @@ name: manter-contato-no-whatsapp
 description: Mantém o contato de uma conversa do WhatsApp Web em dia depois de ler ou enviar, com o link da página da pessoa na nota, o número salvo no padrão de nome e a lista de conferência da conversa. Usada pela sessão dona do WhatsApp Web depois de cada leitura ou envio, mesmo sem dizer contato. Não serve para abrir a aba, achar a conversa, redigir a mensagem nem rotular sozinha.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   related:
     - conversar-no-whatsapp
     - definir-empresa
@@ -51,6 +51,8 @@ Depois de enviar, a troca entra também num comentário datado na página da pes
 
 Com `Salvar contato sem número salvo` em `sim`, salve o número de uma conversa que ainda não está nos contatos, no `Padrão do nome do contato`, com o nome e a organização lidos da página da pessoa ou da conversa.
 O contato salvo sem a organização recebe-a no nome. Sem a organização, pergunte à pessoa.
+
+Celular do Brasil leva o 9 depois do DDD, mesmo quando a conversa antiga mostra o número sem ele. O contato salvo, o link da conversa e o número da página da pessoa usam o número com o 9. Ao procurar o contato pelo número, busque as duas formas.
 
 ### Passo 4
 
@@ -116,6 +118,7 @@ Com `Salvar contato sem número salvo` em `sim`, salvei como "Caio (Casa Azul)",
 - A conversa é um grupo: sem nota de contato, o que ela guardaria vai para o registro no data source.
 - `Salvar contato sem número salvo` em `não`: deixe o número como está e diga que não salvou.
 - Sem a organização da pessoa, nem na página nem na conversa: pergunte uma vez e pare.
+- A conversa mostra um celular sem o 9 depois do DDD: grave e salve com o 9, e procure o contato nas duas formas.
 
 ## Pegadinhas
 
