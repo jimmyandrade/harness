@@ -3,7 +3,7 @@ name: analisar-regulamento-da-oportunidade
 description: Lê o manual, o regulamento, o edital e o contrato de uma oportunidade e separa o que a empresa deve fazer, com prazo, o que o texto não diz e o que as fontes contradizem. Usada quando chega o manual da oportunidade aprovada. NÃO serve para perguntar ao responsável, redigir a tarefa nem organizar a viagem.
 metadata:
   author: jimmyandrade
-  version: "0.1.9"
+  version: "0.2.0"
   related:
     - acompanhar-edital
     - consultar-responsavel-pela-oportunidade
@@ -36,6 +36,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 ## Instruções
 
 ### Passo 1
+
+Antes de reunir as fontes, confirme com a pessoa de qual feira ou oportunidade se trata quando o pedido não nomeia a edição, ou quando a pessoa citada, o grupo ou a data pode ligar-se a mais de uma. Diga qual você entendeu e espere a confirmação. Não use o que achou de uma para responder sobre outra, nem escolha a mais recente ou a mais conhecida.
 
 Reúna as fontes da oportunidade: o manual, o regulamento ou o edital, o contrato, os e-mails e as mensagens da organização, incluindo as de grupo, e as notas do grupo de oportunidades. A página da oportunidade e a do ponto de contato vêm do mapeamento de dados do projeto.
 Sem o texto, peça à pessoa e pare.
@@ -120,7 +122,7 @@ Se você supor que o carro entra na desmontagem porque entrou na montagem, a pes
 
 Se você usar o manual de uma edição ou de outro local como regra desta, as exigências e os horários não valem.
 
-1. Leia a edição, a data e o local no cabeçalho.
+1. Confirme de qual oportunidade a pessoa fala antes de buscar. Leia a edição, a data e o local no cabeçalho.
 2. Diga à pessoa de qual manual saiu cada exigência.
 3. Peça a ela que confirme se o manual vale para o grupo inteiro.
 
