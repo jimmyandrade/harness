@@ -38,7 +38,13 @@ FLOWCHART = re.compile(
     re.IGNORECASE,
 )
 FLOWCHART_DIRECTIONS = {"LR", "RL", "TD", "TB", "BT"}
-SKILL_PATH = re.compile(r"^\.agents/skills/([^/]+)/(?:SKILL|skill)\.md$")
+SKILL_FOLDER = r"(?:\.agents/skills|plugins/[^/]+/skills)"
+SKILL_PATH = re.compile(rf"^{SKILL_FOLDER}/([^/]+)/(?:SKILL|skill)\.md$")
+SKILL_FILE = re.compile(rf"^({SKILL_FOLDER})/([^/]+)/")
+# git pathspecs for the folders that hold skills
+SKILL_PATHSPECS = [".agents/skills", ":(glob)plugins/*/skills/**"]
+# Where a skill that is gone from the project lived, read from the diff.
+KNOWN_PATHS: dict[str, str] = {}
 ALLOWED_FIELDS = {
     "name",
     "description",
@@ -148,7 +154,12 @@ INSTRUCTIONS = parameters.INSTRUCTIONS
 
 def item_path(name: str) -> str:
     """Repository path of a checked item: a skill name, or the project instructions."""
-    return INSTRUCTIONS if name == INSTRUCTIONS else f".agents/skills/{name}/SKILL.md"
+    if name == INSTRUCTIONS:
+        return INSTRUCTIONS
+    for folder in parameters.skill_folders(ROOT):
+        if (folder / name / "SKILL.md").is_file():
+            return (folder / name / "SKILL.md").relative_to(ROOT).as_posix()
+    return KNOWN_PATHS.get(name, f".agents/skills/{name}/SKILL.md")
 
 
 def body_measure(text: str, encoding) -> tuple[str | None, int | None]:
@@ -167,13 +178,13 @@ def changed_skill_names() -> set[str] | None:
         if not base or not head or set(base) <= {"0"}:
             return None
         raw = git_output(
-            ["git", "diff", "--name-only", base, head, "--", ".agents/skills", INSTRUCTIONS]
+            ["git", "diff", "--name-only", base, head, "--", *SKILL_PATHSPECS, INSTRUCTIONS]
         )
     else:
         chunks: list[str] = []
         for args in (
-            ["git", "diff", "--name-only", "--", ".agents/skills", INSTRUCTIONS],
-            ["git", "diff", "--cached", "--name-only", "--", ".agents/skills", INSTRUCTIONS],
+            ["git", "diff", "--name-only", "--", *SKILL_PATHSPECS, INSTRUCTIONS],
+            ["git", "diff", "--cached", "--name-only", "--", *SKILL_PATHSPECS, INSTRUCTIONS],
         ):
             raw = git_output(args)
             if raw is None:
@@ -182,6 +193,10 @@ def changed_skill_names() -> set[str] | None:
         raw = "\n".join(chunks)
     if raw is None:
         return None
+    for line in raw.splitlines():
+        found = SKILL_FILE.match(line.strip())
+        if found:
+            KNOWN_PATHS.setdefault(found.group(2), f"{found.group(1)}/{found.group(2)}/SKILL.md")
     return {
         skill_key(Path(line.strip()))
         for line in raw.splitlines()
@@ -1172,12 +1187,12 @@ def rename_alias_findings() -> list[tuple[Path, Finding]]:
     head = os.environ.get("CHECK_SKILL_HEAD", "")
     if base and head and not set(base) <= {"0"}:
         raw = git_output(
-            ["git", "diff", "--name-status", "-M", base, head, "--", ".agents/skills"]
+            ["git", "diff", "--name-status", "-M", base, head, "--", *SKILL_PATHSPECS]
         )
         old_rev, new_rev = base, head
     else:
         raw = git_output(
-            ["git", "diff", "--cached", "--name-status", "-M", "--", ".agents/skills"]
+            ["git", "diff", "--cached", "--name-status", "-M", "--", *SKILL_PATHSPECS]
         )
         old_rev, new_rev = "HEAD", "INDEX"
     if not raw:
@@ -1330,14 +1345,31 @@ def eval_file_errors(skill_dir: Path, name: str, version: str) -> list[Finding]:
 
 
 def skill_files(root: Path) -> list[Path]:
-    skills = root / ".agents" / "skills"
-    if not skills.is_dir():
-        return []
-    return sorted(
-        path
-        for path in skills.glob("*/*")
-        if path.name in SKILL_NAMES and path.is_file()
-    )
+    """Every SKILL.md under .agents/skills and plugins/<plugin>/skills, the first root first."""
+    files: list[Path] = []
+    for skills in parameters.skill_folders(root):
+        files.extend(
+            sorted(
+                path
+                for path in skills.glob("*/*")
+                if path.name in SKILL_NAMES and path.is_file()
+            )
+        )
+    return files
+
+
+def duplicate_name_findings(root: Path) -> list[tuple[Path, Finding]]:
+    """A skill name is the name of its folder, so two roots cannot both hold the same one."""
+    first: dict[str, Path] = {}
+    findings: list[tuple[Path, Finding]] = []
+    for path in skill_files(root):
+        name = path.parent.name
+        relative = path.relative_to(root)
+        if name not in first:
+            first[name] = relative
+            continue
+        findings.append((relative, Finding(f"skill name also at {first[name].as_posix()}", 1)))
+    return findings
 
 
 def instructions_errors(text: str, encoding, word_limit: int, line_limit: int, body_limit: int) -> list[Finding]:
@@ -1520,7 +1552,7 @@ def main() -> int:
                     )
         except SystemExit as exc:
             add(Finding(str(exc)))
-    for relative, finding in rename_alias_findings():
+    for relative, finding in duplicate_name_findings(ROOT) + rename_alias_findings():
         failed = True
         key = skill_key(relative)
         results.setdefault(key, [])

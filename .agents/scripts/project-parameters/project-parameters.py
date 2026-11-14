@@ -85,6 +85,12 @@ def project_root(start: Path) -> Path:
     return start
 
 
+def skill_folders(root: Path) -> list[Path]:
+    """The folders that hold skills: .agents/skills, then plugins/<plugin>/skills for each plugin."""
+    folders = [root / ".agents" / "skills", *sorted(root.glob("plugins/*/skills"))]
+    return [folder for folder in folders if folder.is_dir()]
+
+
 def is_harness(root: Path) -> bool:
     """A harness has its own skills folder. A project that links it only uses the core skills."""
     skills = root / ".agents" / "skills"
