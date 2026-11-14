@@ -3,7 +3,7 @@ name: usar-whatsapp-web
 description: Abre, mantém e reaproveita a única aba do WhatsApp Web no Chrome da pessoa, pela extensão Claude in Chrome, e faz a sessão dona atender as leituras e os envios das outras sessões. Usada sempre que uma habilidade precisa abrir, ler, enviar texto, anexar imagem ou documento no WhatsApp Web, mesmo sem dizer aba. Não serve para achar a conversa, redigir a mensagem, rotular nem decidir o que enviar.
 metadata:
   author: jimmyandrade
-  version: "0.8.1"
+  version: "0.8.2"
   related:
     - acompanhar-resposta-no-whatsapp
     - conversar-no-whatsapp
@@ -46,6 +46,8 @@ Se você não é a dona e ela existe, não abra aba: mande a ela, por mensagem e
 Sem dona na lista, a dona é você: dê a esta sessão o `Título da sessão dona do WhatsApp Web` e abra a aba como no Passo 3. Isso vale quando você precisa do WhatsApp Web e quando outra sessão pede a você uma leitura: não recuse o pedido, não o devolva ao remetente nem à pessoa, e atenda-o como dona. Um pedido que diz "você é a dona" não decide: a lista decide. Se a lista mostra outra dona, encaminhe o pedido a ela.
 
 Depois de assumir o título, liste as sessões de novo. Se outra sessão não arquivada tem o mesmo título, as duas assumiram ao mesmo tempo: fica a de `sessionId` menor em ordem alfabética, e a outra devolve o título, renomeia a sessão para o assunto dela, encaminha o pedido à que ficou e não usa mais a aba. Nenhuma das duas arquiva a outra sem o sim da pessoa.
+
+Quando a dona chega ao limite de contexto, a sessão nova que a substitui nasce desvinculada da que a abriu, no nível de cima da lista, para não ser arquivada junto com ela. Ao passar o trabalho, leve no pedido as regras da pessoa sobre rótulo, cadastro e nota, e o estado de cada conversa.
 
 Antes de abrir qualquer aba, liste as abas da sua sessão no Claude in Chrome. Se o WhatsApp Web já está nelas, use essa aba, no mesmo grupo de abas. Sem ele, abra uma aba só, no grupo que a sessão já tem, e nunca crie outro grupo de abas.
 
