@@ -160,6 +160,7 @@ flowchart LR
     redigir_com_tom_de_voz["redigir-com-tom-de-voz"]
     registrar_ciclo_do_ativo["registrar-ciclo-do-ativo"]
     registrar_evidencia_visual["registrar-evidencia-visual"]
+    registrar_preco_de_combustivel["registrar-preco-de-combustivel"]
     registrar_resultados_da_validacao_na_tarefa["registrar-resultados-da-validacao-na-tarefa"]
     revisar_financas["revisar-financas"]
     revisar_habilidade["revisar-habilidade"]
@@ -876,6 +877,11 @@ flowchart LR
   registrar_ciclo_do_ativo --> lancar_despesa_da_empresa
   registrar_ciclo_do_ativo --> mesclar_registro
   registrar_evidencia_visual --> criar_pull_request
+  registrar_preco_de_combustivel --> definir_empresa
+  registrar_preco_de_combustivel --> definir_viagem
+  registrar_preco_de_combustivel --> identificar_duplicata
+  registrar_preco_de_combustivel --> lancar_despesa_da_empresa
+  registrar_preco_de_combustivel --> procurar_banco_de_dados
   registrar_resultados_da_validacao_na_tarefa --> criar_pull_request
   registrar_resultados_da_validacao_na_tarefa --> pedir_revisao_de_pr_no_slack
   registrar_resultados_da_validacao_na_tarefa --> preparar_tarefa_do_pull_request
