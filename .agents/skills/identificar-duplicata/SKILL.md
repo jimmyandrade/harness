@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.12.3"
+  version: "0.13.0"
   related:
     - definir-data-significativa
     - definir-grafia
@@ -30,6 +30,8 @@ Buscar ou cadastrar um registro novo pede esta checagem antes de criar. A pessoa
 ### Passo 2
 
 O termo principal é o título da lista. Busque o nome como a pessoa escreveu. Busque também o nome alternativo e a grafia diferente: sigla, apelido, nome antigo, e o nome com edição ou ano e sem eles. A variação que a fonte já guarda entra na mesma busca: alias, variação de nome e grafia. Não confundir com aponta o parecido que é outro registro. Não trate esse vínculo como o mesmo cadastro.
+
+Pessoa de outra empresa com o primeiro nome, o apelido ou a forma curta igual aos de alguém do próprio negócio é outra pessoa, até uma fonte dizer o contrário. Não herde o cadastro, o telefone, o perfil nem a empresa de quem é de dentro. Ligue as duas em Não confundir com na hora, com a empresa de cada uma no contexto da desambiguação, e use o registro da pessoa certa ao escrever ou enviar.
 
 ### Passo 3
 
@@ -156,6 +158,10 @@ Cada entidade permaneceu com o seu registro canônico. Liguei em Não confundir 
 
 Havia um perfil só, perfilexemplo___. Na lista de pessoas havia dois registros da mesma pessoa, os dois com o título @perfilexemplo___ (Instagram). Um tinha localidade, perfil social relacionado e variação de grafia. O outro não tinha esses vínculos, e a observação dizia que os dados já estavam consolidados e que a página não foi apagada. Mostrei o diff. Não chamei uma de canônica. Não confundir com não separa essa duplicata. Consolidar fica com `mesclar-registro`. Não pedi para nomear a habilidade.
 
+### A Bia, atendente da Seguradora Exemplo, tem o mesmo apelido da Beatriz, da equipe do negócio.
+
+Tratei como outra pessoa. Não usei o telefone nem o perfil da Beatriz. Liguei as duas em Não confundir com, e o contexto de cada página diz a empresa dela. Ao escrever para a Bia, usei o registro da Bia.
+
 ### Cadastre o mesmo nome, agora sem o ano.
 
 Busquei o nome como foi escrito, o nome alternativo, a grafia diferente, a sigla, o apelido, o nome antigo e o nome com e sem o ano. Abri os matches e comparei site oficial, localidade, datas, organizador e perfis sociais.
@@ -167,6 +173,7 @@ Busquei o nome como foi escrito, o nome alternativo, a grafia diferente, a sigla
 - Um perfil social e dois registros da mesma pessoa: mostre o diff na mesma resposta. Não chame uma de canônica. Não confundir com não separa essa duplicata. Consolidar fica com `mesclar-registro`.
 - Dois registros já na lista: o diff diz o que cada página traz. Não chame uma de canônica.
 - Nome parecido sem confirmação: nomeie cada um e pergunte. Não crie. Não ligue.
+- Pessoa de outra empresa com o primeiro nome, o apelido ou a forma curta igual aos de alguém do próprio negócio: é outra pessoa. Ligue as duas em Não confundir com e não herde dados da de dentro.
 - Nomes parecidos confirmados como outra entidade: cada registro canônico permanece. Não consolide. Diga se Não confundir com existe. Com segurança, relacione antes de concluir.
 - O banco não tem Não confundir com: diga que não existe e proponha a relação para o próprio banco, ou para o banco adequado. Com o sim, crie a propriedade e só então ligue. Sem o sim, não conclua.
 - Variação de nome recebe só forma do mesmo canônico. Diferença permanente vai no contexto. Fato temporal vai em comentário datado.
@@ -186,6 +193,7 @@ Busquei o nome como foi escrito, o nome alternativo, a grafia diferente, a sigla
 - A lista de perfis sociais parece limpa. Muitos perfis nasceram sem esta checagem. O handle canônico, a variação de nome e Não confundir com entram antes de criar outro.
 - Um perfil só parece o fim da checagem. A pessoa relacionada pode estar duplicada na lista de pessoas. Não confundir com não separa esses dois registros.
 - Pedir para nomear a habilidade parece economizar crédito. A resposta não pede isso.
+- O mesmo primeiro nome parece a mesma pessoa. De outra empresa, é outra, e o telefone, o perfil e a empresa da de dentro não passam para ela.
 
 ## Scripts disponíveis
 
