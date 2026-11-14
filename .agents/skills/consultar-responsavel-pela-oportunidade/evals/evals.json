@@ -1,4 +1,11 @@
 {
   "skill_name": "consultar-responsavel-pela-oportunidade",
-  "evals": []
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Escreva à organização de uma feira que a marca ainda não conhece, para perguntar se as inscrições foram prorrogadas.",
+      "expected_output": "Ler a página de apresentação da marca e abrir a mensagem com a marca se apresentando, na primeira pessoa de quem a representa, antes da pergunta. Só depois perguntar, com cuidado, da prorrogação e da próxima data. Mostrar o rascunho e não enviar sem o sim.",
+      "files": []
+    }
+  ]
 }
