@@ -4,7 +4,7 @@ description: Pesquisa o que comprar, cruza com despesas, estoque e bens que já 
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.6.1"
   related:
     - conversar-no-whatsapp
     - definir-ativo-imobilizado
@@ -36,7 +36,9 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 Entenda o que a pessoa precisa comprar e para que vai usar. O uso decide os requisitos, e o requisito decide a opção.
 Use o que a pessoa já disse. Pergunte, uma vez, só o que muda a recomendação: o uso, o orçamento, a voltagem ou o prazo.
 Não pare numa pergunta que a pesquisa responde. Comece e leve a dúvida junto com as primeiras opções. A especificação do que vai ser comprado é a exceção: sem ela, o Passo 3 manda parar e entrevistar a pessoa antes de pesquisar empresas.
-Quando o pedido cita um lugar que pode ter mais de um alcance, como um nome que é ao mesmo tempo o da cidade e o do estado, confirme com a pessoa o alcance antes de pesquisar e antes de cadastrar: só a cidade, a região metropolitana ou o estado inteiro. Diga o que entendeu e espere a resposta. Não escolha o alcance mais amplo nem o mais conhecido. Esta é a pergunta que a pesquisa não responde, então ela vem antes das primeiras opções.
+Quando o pedido cita um lugar que pode ter mais de um alcance, como um nome que é ao mesmo tempo o da cidade e o do estado, confirme com a pessoa o alcance antes de pesquisar e antes de cadastrar. Diga o que entendeu e espere a resposta. Esta é a pergunta que a pesquisa não responde, então ela vem antes das primeiras opções.
+
+Para uma compra específica, o padrão é só a cidade nomeada, e cidade não é região metropolitana nem estado. O mesmo vale para o lugar onde a pessoa está: se ela está numa cidade, é essa cidade. Só quando a pesquisa não achar nada na cidade, sugira por conta própria ampliar para a região metropolitana, dizendo qual serviço existe e em que cidade vizinha, e espere o sim.
 
 ### Passo 2
 
@@ -98,7 +100,7 @@ Não compre, não ponha no carrinho e não preencha dado de pagamento.
 Cadastre na lista de empresas do mapeamento de dados do projeto cada empresa que apareceu como opção, recomendada ou descartada: a loja que vende, a gráfica, a prestadora do serviço. Não espere a pessoa decidir nem comprar. Assim a empresa se acha depois, sem pesquisar de novo.
 Siga `definir-empresa`, que busca antes por nome, variações e CNPJ e reaproveita a empresa que já existe. Grave só o que a página da própria empresa mostrou, como contato, endereço, horário e CNPJ. O que ficou sem confirmação, como se ela atende o que a pessoa precisa, vai nas notas, não nos campos de contato.
 Marketplace e loja grande entram como empresa quando o vendedor é a opção. O vendedor do anúncio é a empresa, não a plataforma.
-A empresa que a busca trouxe de fora do alcance confirmado no Passo 1 não é opção: não a cadastre nem a contate. Cite-a, no máximo, como fora do alcance, com a cidade, e deixe a pessoa decidir se o alcance cresce.
+A empresa que a busca trouxe de fora do alcance confirmado no Passo 1 não é opção: não a cadastre nem a contate. Cite-a, no máximo, como fora do alcance, com a cidade, e deixe a pessoa decidir se o alcance cresce, como o Passo 1 manda.
 Abra o site da empresa e leia os links da página, como WhatsApp, telefone e redes, antes de dizer que não achou o contato. O trecho que a busca mostrou não basta.
 Antes de recomendar o contato com a empresa, veja se já houve conversa com ela, seguindo `conversar-no-whatsapp`. Diga o que o histórico já responde.
 Quando a compra é um serviço de terceiro e nenhuma empresa achada atende, não responda que não há opção. Siga para a próxima: a da lista de empresas, a que um contato indicou, a da web. Cadastre cada uma, veja se há conversa e, sem conversa, prepare o primeiro contato pelo WhatsApp, com o texto pronto e o sim da pessoa. Só pare quando uma empresa confirmar que atende ou a pessoa mandar parar.
@@ -197,10 +199,10 @@ Se você parar no trecho que a busca mostrou e disser que não achou o contato, 
 
 ### Lugar tomado pelo alcance mais amplo
 
-Se você ler como o estado inteiro um pedido que diz só o nome de um lugar, a pesquisa traz e a lista cadastra empresas de cidades onde a pessoa nunca quis ir, e a primeira mensagem sai para quem ela não pretendia procurar.
+Se você ler como a região metropolitana ou como o estado inteiro um pedido que diz só o nome de uma cidade, a pesquisa traz e a lista cadastra empresas de cidades onde a pessoa nunca quis ir, e a primeira mensagem sai para quem ela não pretendia procurar.
 
-1. Confirme o alcance antes de pesquisar: a cidade, a região metropolitana ou o estado.
-2. Pesquise e cadastre só dentro do alcance confirmado.
+1. Confirme o alcance antes de pesquisar. Numa compra específica, o padrão é só a cidade nomeada.
+2. Pesquise e cadastre só dentro do alcance confirmado. Sem achar nada na cidade, sugira a região metropolitana, com o serviço e a cidade vizinha.
 3. Diga a cidade de cada empresa na resposta, e deixe a de fora do alcance como fora do alcance.
 
 ### Empresa consultada sem a especificação
@@ -252,7 +254,8 @@ Li o estoque e achei um rolo do mesmo tecido com saldo. Mostrei o saldo e pergun
 - O item é híbrido, entre estoque e bem durável: pergunte o destino antes de encaminhar.
 - É um serviço, não um produto: use os mesmos passos, com o escopo e o prazo no lugar dos requisitos do item.
 - A compra não tem requisito, ou só tem o de um item parecido: siga `definir-requisito-de-compra` e entreviste a pessoa antes de pesquisar.
-- O pedido cita um lugar sem dizer o alcance, como o nome de uma cidade que também é o do estado: confirme o alcance antes de pesquisar. Uma empresa fora dele fica de fora do cadastro e do contato.
+- O pedido cita um lugar sem dizer o alcance, como o nome de uma cidade que também é o do estado: confirme o alcance antes de pesquisar, e numa compra específica use só a cidade. Uma empresa fora dele fica de fora do cadastro e do contato.
+- A pesquisa não achou nada na cidade: sugira por conta própria a região metropolitana, com o serviço e a cidade vizinha, e espere o sim antes de cadastrar ou contatar.
 
 ## Pegadinhas
 
@@ -266,6 +269,7 @@ Li o estoque e achei um rolo do mesmo tecido com saldo. Mostrei o saldo e pergun
 - A ficha de outro vendedor do mesmo insumo, como a gramatura, não vale para o insumo comprado. Marque como não confirmado.
 - O pedido mínimo parece o mesmo em toda empresa. Ele muda de uma para outra, e o de uma página de produto pode não ser o de quem imprime ou borda sob encomenda: pergunte a cada uma.
 - O nome de um lugar parece ter um único alcance. Quem pede por um estado e quem pede só pela capital usam a mesma palavra, e a busca não sabe qual dos dois a pessoa quis. A cidade da empresa, vista na página dela, é o que mostra a diferença.
+- A cidade vizinha parece parte da cidade. Guarulhos não é São Paulo, e Contagem e Betim não são Belo Horizonte: a região metropolitana só entra depois que a cidade não deu resultado.
 
 ## Scripts disponíveis
 
