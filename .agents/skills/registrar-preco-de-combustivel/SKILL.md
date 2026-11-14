@@ -4,7 +4,7 @@ description: Registra o preço de combustível visto num posto da estrada, com d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.1"
+  version: "0.1.2"
   related:
     - definir-empresa
     - definir-viagem
@@ -48,7 +48,11 @@ Resolva o posto pelo nome e pelo CNPJ do comprovante, nunca por busca na web: o 
 
 ### Passo 4
 
-Preencha o local no mapa pela pesquisa de lugares, com o nome e a localização aproximada que a pessoa deu, como a avenida e o trecho. Sem endereço confirmado, use o ponto aproximado e escreva "local aproximado" nas observações. Não invente número de rua. Se o posto não aparecer, deixe o local vazio e proponha o histórico de locais do celular da pessoa no horário da parada.
+A posição do celular não é a do posto. De carro, a 80 km/h, o carro anda cerca de 1,3 km por minuto, e passam-se a leitura da placa, a mensagem da pessoa e a consulta da posição. O posto fica atrás da posição lida, no sentido contrário ao da viagem. Se você tem duas posições seguidas, o rumo vem delas. Sem as duas, o rumo vem do trecho da viagem.
+
+Busque o posto na pesquisa de lugares perto da posição lida, olhando para trás, pelo nome, a bandeira e as referências que a pessoa deu, como um estabelecimento ao lado. Um candidato que bate com as referências vale mais que o mais próximo. Candidato a mais de uns 2 km da posição lida só entra como hipótese nas observações.
+
+Para o local no mapa, use o candidato só quando as referências o confirmarem. Sem confirmação, use a posição lida, escreva "local aproximado" e nomeie nas observações a hipótese e que a posição lida está à frente do posto. Não invente número de rua. Sem candidato, deixe o local como a posição lida e proponha o histórico de locais do celular da pessoa no horário da parada.
 
 ### Passo 5
 
@@ -87,6 +91,14 @@ Se você gravar um preço lido de passagem como se fosse da foto, a análise con
 1. Marque nas observações se houve foto, bomba ou só leitura de passagem.
 2. Não arredonde nem complete o preço que não foi lido.
 
+### Posição do celular tratada como a do posto
+
+Se você gravar a posição lida como o local do posto, o ponto cai à frente dele, de uma a alguns quilômetros, e a análise mostra o posto no lugar errado.
+
+1. Procure o posto atrás da posição lida, pelas referências da pessoa.
+2. Use o candidato só com referência que o confirme.
+3. Sem confirmação, grave a posição lida como aproximada e diga que ela está à frente do posto.
+
 ### Cartão inteiro gravado
 
 Se você guardar o número do cartão do cupom, o dado sensível vai para o banco.
@@ -123,6 +135,7 @@ Não criei a linha: o posto está na contramão e não dá para virar. Avisei qu
 - A bomba pode estar parcialmente coberta: o preço por litro sai do cupom, com a confirmação da pessoa.
 - Perguntar o lado da pista de cada posto cansa a pessoa: ela já disse que conta só os do sentido dela.
 - O horário do cupom é o do pagamento, não o da leitura da placa de outro posto.
+- A posição lida parece a do posto. Ela está à frente dele, porque o carro não para enquanto a pessoa avisa e a posição é consultada.
 
 ## Scripts disponíveis
 

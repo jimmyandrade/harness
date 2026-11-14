@@ -2108,7 +2108,8 @@ How these skills relate is in `README.md`, in this folder.
   - Marks a price read in passing without a photo, and records the order of the stations and the side of the road
   - Resolves the station by the name and tax number on the receipt, never by a web search, and keeps the brand apart
   - Computes the price per liter as the amount paid divided by the liters when the pump price is covered, and asks the person to confirm it
-  - Fills the map location from a place search with the approximate position and says when it is approximate
+  - Treats the phone position as ahead of the station, because the car keeps moving while the person reports the price, and looks for the station behind it using the references the person gives, such as a neighboring business
+  - Uses a place candidate for the map location only when the references confirm it, and otherwise keeps the phone position, marked as approximate and as ahead of the station
   - Posts the expense through the company expense skill and links it to the price row, the trip, and the vehicle, and keeps only the last four digits of the card
 - **Test Criteria**:
   - [x] The skill is present at that path
