@@ -3,7 +3,7 @@ name: enviar-imagem-no-whatsapp
 description: Envia uma imagem ou um documento já aprovado pelo WhatsApp Web, como foto ou documento e nunca como figurinha, numa conversa, num grupo ou num canal, e confere o envio. Usada quando a pessoa aprova mandar um comprovante, um convite com imagem ou uma postagem. Não serve para redigir o texto, escolher o destino nem enviar só texto.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.4.0"
   related:
     - conversar-no-whatsapp
     - evoluir-habilidade
@@ -31,12 +31,22 @@ flowchart LR
 ```
 
 Quem chama já tem o destino, o arquivo e o sim da pessoa a essa imagem e a esse destino. Sem o sim, não envie.
-O acesso ao WhatsApp Web e o anexo, com os scripts de captura e restauração, seguem `usar-whatsapp-web`: a mesma aba, o aviso de outra janela, o QR code e a sessão dona.
+O acesso ao WhatsApp Web segue `usar-whatsapp-web`: a mesma aba, o aviso de outra janela, o QR code e a sessão dona. O anexo e os scripts de captura e restauração são desta habilidade.
 Antes de anexar, confira no cabeçalho o nome do destino: a aba pode estar noutra conversa. Use PNG ou JPEG. Converta o WebP antes, por exemplo com `sips -s format png <arquivo> --out <pasta da sessão>/<nome>.png`.
 
 ### Passo 2
 
-Anexe como `usar-whatsapp-web` manda no Passo 4, com a imagem como foto e nunca como figurinha. Releia a lista de conversas: a prévia da linha diz "Foto" ou o nome do documento, nunca "Figurinha".
+O menu Anexar tem Documento, Fotos e vídeos e Nova figurinha. A única entrada de arquivo que existe na página é a da Nova figurinha: mandar por ela envia uma figurinha. A entrada de Fotos e vídeos só nasce ao clicar nessa opção, e o seletor nativo não se opera pela automação. Por isso o script de captura roda antes do clique.
+
+- [ ] Abra o destino e o menu Anexar.
+- [ ] Rode o script de captura.
+- [ ] Clique em Fotos e vídeos, ou em Documento para um documento.
+- [ ] Confira a entrada capturada: `data-wa-captured` preenchido e, para foto, `accept` com `video`. A que já existia, só com `image/*`, é a da figurinha: não use.
+- [ ] Ache o novo `file-input` com `find` ou `read_page` e envie o arquivo a ele com `file_upload`.
+- [ ] Confira a pré-visualização. Foto tem o campo de legenda e o botão de mais. Sem legenda é figurinha: feche no X e recomece.
+- [ ] Envie.
+- [ ] Rode o script de restauração.
+- [ ] Releia a lista de conversas: a prévia da linha diz "Foto" ou o nome do documento, nunca "Figurinha".
 
 ### Passo 3
 
@@ -56,11 +66,17 @@ Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ### Imagem enviada como figurinha
 
-Se você enviar a imagem sem seguir o anexo de `usar-whatsapp-web`, ela sai como figurinha, pequena e sem legenda, e a pessoa só descobre depois.
+Se você enviar o arquivo à única entrada de arquivo da página, sem capturar a de Fotos e vídeos, a imagem sai como figurinha, pequena e sem legenda, e a pessoa só descobre depois.
 
-1. Anexe como o Passo 4 de `usar-whatsapp-web` manda.
-2. Depois do envio, leia a prévia da lista.
-3. Se disser "Figurinha", siga o Passo 4 daqui.
+1. Rode o script de captura antes de clicar em Fotos e vídeos.
+2. Confira a pré-visualização: sem legenda, feche e recomece.
+3. Depois do envio, leia a prévia da lista. Se disser "Figurinha", siga o Passo 4.
+
+### Página deixada com o clique alterado
+
+Se você não rodar o script de restauração, o clique de qualquer entrada de arquivo continua alterado na aba.
+
+1. Rode o script de restauração depois do envio, também quando cancelar.
 
 ## Exemplos de entrada e saída
 
@@ -68,7 +84,7 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### mande o comprovante do Pix ao Caio, depois do sim da pessoa
 
-Converti o WebP para PNG, anexei pelo `usar-whatsapp-web`, enviei o arquivo, vi a legenda na pré-visualização e enviei. A lista do Caio passou a dizer "Foto". Restaurei a aba.
+Converti o WebP para PNG, capturei a entrada de Fotos e vídeos, enviei o arquivo, vi a legenda na pré-visualização e enviei. A lista do Caio passou a dizer "Foto". Restaurei a aba.
 
 ### a lista diz Figurinha depois do envio
 
@@ -82,12 +98,35 @@ Avisei a pessoa e propus apagar para todos e reenviar como foto. Esperei o sim e
 
 ## Pegadinhas
 
-- A imagem enviada pela entrada que já existe na página vira figurinha, mesmo com a pré-visualização aberta. O campo de legenda é o que diferencia: veja `usar-whatsapp-web`.
+- A imagem enviada pela entrada que já existe na página vira figurinha, mesmo com a pré-visualização aberta. O campo de legenda é o que diferencia.
+- O menu de anexos fica aberto atrás da pré-visualização, e o botão de enviar continua funcionando.
 - O botão "Usar nesta janela" derruba a conexão da janela da pessoa. Avise ao terminar.
 - A prévia da lista de conversas mostra "Foto" no lugar do texto quando a imagem é a última mensagem.
 
 ## Scripts disponíveis
 
-- Nenhum. Os scripts de captura e restauração ficam em `usar-whatsapp-web`.
+- Captura, antes de clicar em Fotos e vídeos. Faz o WhatsApp entregar a entrada de arquivo que ele cria ao clicar:
 
-1. Não há script para executar.
+```js
+window.__waInputs = [];
+window.__origClick = window.__origClick || HTMLInputElement.prototype.click;
+HTMLInputElement.prototype.click = function () {
+  if (this.type === 'file') {
+    this.setAttribute('data-wa-captured', String(window.__waInputs.length));
+    this.style.display = 'none';
+    document.body.appendChild(this);
+    window.__waInputs.push(this);
+    return;
+  }
+  return window.__origClick.call(this);
+};
+```
+
+- Restauração, depois do envio:
+
+```js
+HTMLInputElement.prototype.click = window.__origClick;
+document.querySelectorAll('input[data-wa-captured]').forEach(e => e.remove());
+```
+
+1. Rode cada script com a ferramenta de JavaScript do Chrome, na aba do WhatsApp Web.
