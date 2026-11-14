@@ -4,7 +4,7 @@ description: Registra o preço de combustível visto num posto da estrada, com d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
   related:
     - definir-empresa
     - definir-viagem
@@ -34,7 +34,7 @@ O registro é uma linha no banco de preços de combustível, uma por posto e por
 
 Confira antes de gravar e marque o que já está sustentado:
 
-- [ ] Posto no sentido da viagem. Posto na contramão não entra: não dá para virar e abastecer. Não crie a linha; se ela já existe, marque o sentido da pista como contramão e deixe fora da análise.
+- [ ] Sentido da pista. Todo preço que a pessoa conta é de um posto no sentido da viagem, então grave "mesmo sentido" sem perguntar. Posto na contramão só entra se a pessoa disser que está na contramão: aí não crie a linha, porque não dá para virar e abastecer; se ela já existe, marque a contramão e deixe fora da análise.
 - [ ] Combustível e preço por litro, lidos na placa ou na bomba.
 - [ ] Hora da leitura, mesmo aproximada. O horário do cupom vale quando houve abastecimento.
 - [ ] Origem do preço: foto, bomba ou visto de passagem. Sem foto, diga isso nas observações.
@@ -68,9 +68,9 @@ Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 Se você registrar o posto do outro lado da pista como se desse para parar, a análise recomenda um posto que a pessoa não alcança.
 
-1. Não crie a linha de um posto na contramão.
+1. Não crie a linha de um posto que a pessoa diz estar na contramão.
 2. Se já existe, marque o sentido e deixe fora da análise.
-3. Se a pessoa não sabe o lado, pergunte uma vez e não suponha.
+3. Não pergunte o lado: sem aviso, o posto é do sentido da viagem.
 
 ### Nome do posto vindo da web
 
@@ -121,7 +121,7 @@ Não criei a linha: o posto está na contramão e não dá para virar. Avisei qu
 
 - O nome da razão social, o do cupom e a bandeira da placa são três coisas. O cupom manda no cadastro.
 - A bomba pode estar parcialmente coberta: o preço por litro sai do cupom, com a confirmação da pessoa.
-- Dois postos da mesma bandeira em lados opostos da pista são dois postos, e só o do sentido da viagem entra.
+- Perguntar o lado da pista de cada posto cansa a pessoa: ela já disse que conta só os do sentido dela.
 - O horário do cupom é o do pagamento, não o da leitura da placa de outro posto.
 
 ## Scripts disponíveis
