@@ -777,6 +777,7 @@ flowchart LR
   pesquisar_compra --> conversar_no_whatsapp
   pesquisar_compra --> definir_ativo_imobilizado
   pesquisar_compra --> definir_empresa
+  pesquisar_compra --> definir_viagem
   pesquisar_compra --> gerenciar_estoque
   pesquisar_compra --> identificar_duplicata
   pesquisar_compra --> lancar_despesa_da_empresa
