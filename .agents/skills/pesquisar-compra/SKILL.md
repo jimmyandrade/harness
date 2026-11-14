@@ -4,7 +4,7 @@ description: Pesquisa o que comprar, cruza com despesas, estoque e bens que já 
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.1"
+  version: "0.4.2"
   related:
     - conversar-no-whatsapp
     - definir-ativo-imobilizado
@@ -102,6 +102,8 @@ O primeiro contato é por mensagem, pelo WhatsApp, pelo e-mail ou pelo formulár
 Antes do primeiro envio a cada empresa, ela precisa estar cadastrada, com o rótulo no WhatsApp e o link da página dela na nota do contato. A pressa não adia esses três.
 A primeira mensagem explica o que é o item e para que a pessoa o usa, com o link do anúncio ou da compra quando houver, e já traz o que a empresa vai perguntar: o material, o formato, a quantidade e o prazo. Uma empresa que não conhece o item não consegue dizer se atende: explique antes de pedir indicação. Antes de enviar, confira nos registros o que já se sabe de cada um e pergunte à pessoa só o que falta, como a quantidade. A resposta da empresa não deve abrir uma segunda rodada de perguntas que a primeira mensagem já podia responder.
 
+Quando a compra é por quantidade, a empresa tem um pedido mínimo (MOQ), e a primeira mensagem o pergunta a cada uma. O mínimo que a empresa responde vai para as notas da página dela, com a data. O mínimo de uma empresa não vale para outra e não decide a quantidade da pessoa. Consulte, antes, o que o projeto já registra como mínimo costumeiro desse item, no data source que o mapeamento indica, e diga que é costume e não confirmação da empresa.
+
 A mensagem diz à empresa só o que ela precisa para orçar e a disponibilidade da pessoa: quando ela pode retirar ou levar. Não conte que a pessoa viaja, onde está nem quando chega. Confira a disponibilidade no momento do envio, na viagem de `definir-viagem` e no que a pessoa disse hoje, porque uma frase dita horas antes pode ter deixado de valer.
 
 Uma mensagem já enviada com dado errado ou a mais se corrige editando essa mensagem, não mandando outra. Se a edição não é mais possível, não envie nada e diga à pessoa quais empresas ficaram assim.
@@ -193,6 +195,14 @@ Se você ler como o estado inteiro um pedido que diz só o nome de um lugar, a p
 2. Pesquise e cadastre só dentro do alcance confirmado.
 3. Diga a cidade de cada empresa na resposta, e deixe a de fora do alcance como fora do alcance.
 
+### Mínimo de uma empresa tomado como quantidade
+
+Se você sugerir à pessoa a quantidade que uma empresa aceita como mínimo, ou usar o mínimo de uma na mensagem a outra, a quantidade sai sem base e a pessoa decide com um número que não é dela.
+
+1. Pergunte o MOQ a cada empresa, na primeira mensagem, como o Passo 6 manda.
+2. Grave o que cada uma respondeu nas notas da página dela, com a data.
+3. A quantidade é da pessoa: leve a ela o mínimo de cada empresa e o que o projeto registra como costume, sem escolher por ela.
+
 ### Compra feita pela pesquisa
 
 Se você ficar no carrinho ou na tela de pagamento, a pessoa perde a decisão que era dela.
@@ -237,6 +247,7 @@ Li o estoque e achei um rolo do mesmo tecido com saldo. Mostrei o saldo e pergun
 - A lista de despesas guarda o que foi pago, não a ficha do que foi comprado. A compatibilidade vem do fabricante.
 - O vendedor do insumo raramente cita modelo de equipamento. Ele diz a tecnologia, como "só laser". O fabricante do equipamento diz se aceita aquele tipo de mídia e por qual entrada.
 - A ficha de outro vendedor do mesmo insumo, como a gramatura, não vale para o insumo comprado. Marque como não confirmado.
+- O pedido mínimo parece o mesmo em toda empresa. Ele muda de uma para outra, e o de uma página de produto pode não ser o de quem imprime ou borda sob encomenda: pergunte a cada uma.
 - O nome de um lugar parece ter um único alcance. Quem pede por um estado e quem pede só pela capital usam a mesma palavra, e a busca não sabe qual dos dois a pessoa quis. A cidade da empresa, vista na página dela, é o que mostra a diferença.
 
 ## Scripts disponíveis
