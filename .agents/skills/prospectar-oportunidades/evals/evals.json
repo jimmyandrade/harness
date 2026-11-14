@@ -1,4 +1,11 @@
 {
   "skill_name": "prospectar-oportunidades",
-  "evals": []
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Vi uma feira que combina com a oRnii, mas as inscrições do edital já encerraram. Por que a gente não está entrando em contato?",
+      "expected_output": "Trazer, além do fit, o caminho para participar: edital, prazo e o canal para perguntar à organização se ainda aceita (produtor da página do evento ou a mensagem direta de quem orienta o grupo). Trazer quem a empresa já conhece no Notion (pessoas, negociações e edições anteriores, como ter sido apresentadora num evento parecido) como abertura. Redigir o rascunho por consultar-responsavel-pela-oportunidade e não enviar nada antes do sim.",
+      "files": []
+    }
+  ]
 }
