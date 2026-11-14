@@ -3,7 +3,7 @@ name: analisar-regulamento-da-oportunidade
 description: Lê o manual, o regulamento, o edital e o contrato de uma oportunidade e separa o que a empresa deve fazer, com prazo, o que o texto não diz e o que as fontes contradizem. Usada quando chega o manual da oportunidade aprovada. NÃO serve para perguntar ao responsável, redigir a tarefa nem organizar a viagem.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   related:
     - acompanhar-edital
     - consultar-responsavel-pela-oportunidade
@@ -41,6 +41,10 @@ Antes de reunir as fontes, confirme com a pessoa de qual feira ou oportunidade s
 
 Reúna as fontes da oportunidade: o manual, o regulamento ou o edital, o contrato, os e-mails e as mensagens da organização, incluindo as de grupo, e as notas do grupo de oportunidades. A página da oportunidade e a do ponto de contato vêm do mapeamento de dados do projeto.
 Sem o texto, peça à pessoa e pare.
+
+Toda oportunidade tem o edital e o manual anexados na própria página, nas propriedades de editais e anexos. Sem eles, procure nas fontes e diga à pessoa que faltam, também nas oportunidades antigas. Só libere a falta quando a pessoa der a justificativa de por que não existem ou não foram anexados. Sem justificativa, insista.
+
+O arquivo que não sobe para o Notion não encerra o assunto. Diga à pessoa o erro exato e investigue a causa antes de dizer que não consegue, como o tamanho, o tipo ou o jeito de anexar. Não reclame do limite sem ter descoberto o porquê.
 O manual traz a edição, a data e o local no cabeçalho: registre-os e diga à pessoa que ela confirma se o manual vale só para esta oportunidade ou para o grupo inteiro.
 
 ### Passo 2
@@ -85,6 +89,8 @@ Exigência que é um formulário ou cadastro da organização segue `inscrever-n
 ### Passo 7
 
 Leia também a janela de montagem e avise a pessoa na hora com o dia e o horário de cada uma, em especial a do dia anterior ao evento, porque ela muda a saída. O planejamento da saída segue `definir-viagem`.
+O conteúdo do manual fica no corpo da página da oportunidade, abaixo do callout, para ninguém precisar abrir o PDF de novo. Com transcrição de reunião na página, não a substitua: ponha as informações do manual na parte de anotações. O manual muito extenso pode ficar no corpo, mesmo quando o callout pede só propriedades; se o callout ou o modelo da oportunidade disser o contrário, proponha atualizá-los.
+
 Leia as lições nas notas do grupo de oportunidades e liste as que valem para esta participação.
 O que o texto não trazia e a análise ensinou vira lição nas notas do grupo, por `definir-grupo-de-oportunidades`.
 
