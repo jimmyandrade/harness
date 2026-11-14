@@ -4,7 +4,7 @@ description: Pesquisa o que comprar, cruza com despesas, estoque e bens que já 
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.13"
+  version: "0.4.0"
   related:
     - conversar-no-whatsapp
     - definir-ativo-imobilizado
@@ -35,6 +35,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 Entenda o que a pessoa precisa comprar e para que vai usar. O uso decide os requisitos, e o requisito decide a opção.
 Use o que a pessoa já disse. Pergunte, uma vez, só o que muda a recomendação: o uso, o orçamento, a voltagem ou o prazo.
 Não pare numa pergunta que a pesquisa responde. Comece e leve a dúvida junto com as primeiras opções.
+Quando o pedido cita um lugar que pode ter mais de um alcance, como um nome que é ao mesmo tempo o da cidade e o do estado, confirme com a pessoa o alcance antes de pesquisar e antes de cadastrar: só a cidade, a região metropolitana ou o estado inteiro. Diga o que entendeu e espere a resposta. Não escolha o alcance mais amplo nem o mais conhecido. Esta é a pergunta que a pesquisa não responde, então ela vem antes das primeiras opções.
 
 ### Passo 2
 
@@ -93,6 +94,7 @@ Não compre, não ponha no carrinho e não preencha dado de pagamento.
 Cadastre na lista de empresas do mapeamento de dados do projeto cada empresa que apareceu como opção, recomendada ou descartada: a loja que vende, a gráfica, a prestadora do serviço. Não espere a pessoa decidir nem comprar. Assim a empresa se acha depois, sem pesquisar de novo.
 Siga `definir-empresa`, que busca antes por nome, variações e CNPJ e reaproveita a empresa que já existe. Grave só o que a página da própria empresa mostrou, como contato, endereço, horário e CNPJ. O que ficou sem confirmação, como se ela atende o que a pessoa precisa, vai nas notas, não nos campos de contato.
 Marketplace e loja grande entram como empresa quando o vendedor é a opção. O vendedor do anúncio é a empresa, não a plataforma.
+A empresa que a busca trouxe de fora do alcance confirmado no Passo 1 não é opção: não a cadastre nem a contate. Cite-a, no máximo, como fora do alcance, com a cidade, e deixe a pessoa decidir se o alcance cresce.
 Abra o site da empresa e leia os links da página, como WhatsApp, telefone e redes, antes de dizer que não achou o contato. O trecho que a busca mostrou não basta.
 Antes de recomendar o contato com a empresa, veja se já houve conversa com ela, seguindo `conversar-no-whatsapp`. Diga o que o histórico já responde.
 Quando a compra é um serviço de terceiro e nenhuma empresa achada atende, não responda que não há opção. Siga para a próxima: a da lista de empresas, a que um contato indicou, a da web. Cadastre cada uma, veja se há conversa e, sem conversa, prepare o primeiro contato pelo WhatsApp, com o texto pronto e o sim da pessoa. Só pare quando uma empresa confirmar que atende ou a pessoa mandar parar.
@@ -175,6 +177,14 @@ Se você parar no trecho que a busca mostrou e disser que não achou o contato, 
 2. Leia os links da página, como WhatsApp, telefone e redes.
 3. Só então diga que o contato falta.
 
+### Lugar tomado pelo alcance mais amplo
+
+Se você ler como o estado inteiro um pedido que diz só o nome de um lugar, a pesquisa traz e a lista cadastra empresas de cidades onde a pessoa nunca quis ir, e a primeira mensagem sai para quem ela não pretendia procurar.
+
+1. Confirme o alcance antes de pesquisar: a cidade, a região metropolitana ou o estado.
+2. Pesquise e cadastre só dentro do alcance confirmado.
+3. Diga a cidade de cada empresa na resposta, e deixe a de fora do alcance como fora do alcance.
+
 ### Compra feita pela pesquisa
 
 Se você ficar no carrinho ou na tela de pagamento, a pessoa perde a decisão que era dela.
@@ -207,6 +217,7 @@ Li o estoque e achei um rolo do mesmo tecido com saldo. Mostrei o saldo e pergun
 - A lista de empresas não está no workspace conectado: diga isso e siga com a resposta. Não cadastre em outra lista.
 - O item é híbrido, entre estoque e bem durável: pergunte o destino antes de encaminhar.
 - É um serviço, não um produto: use os mesmos passos, com o escopo e o prazo no lugar dos requisitos do item.
+- O pedido cita um lugar sem dizer o alcance, como o nome de uma cidade que também é o do estado: confirme o alcance antes de pesquisar. Uma empresa fora dele fica de fora do cadastro e do contato.
 
 ## Pegadinhas
 
@@ -218,6 +229,7 @@ Li o estoque e achei um rolo do mesmo tecido com saldo. Mostrei o saldo e pergun
 - A lista de despesas guarda o que foi pago, não a ficha do que foi comprado. A compatibilidade vem do fabricante.
 - O vendedor do insumo raramente cita modelo de equipamento. Ele diz a tecnologia, como "só laser". O fabricante do equipamento diz se aceita aquele tipo de mídia e por qual entrada.
 - A ficha de outro vendedor do mesmo insumo, como a gramatura, não vale para o insumo comprado. Marque como não confirmado.
+- O nome de um lugar parece ter um único alcance. Quem pede por um estado e quem pede só pela capital usam a mesma palavra, e a busca não sabe qual dos dois a pessoa quis. A cidade da empresa, vista na página dela, é o que mostra a diferença.
 
 ## Scripts disponíveis
 
