@@ -4,7 +4,7 @@ description: Pesquisa o que comprar, cruza com despesas, estoque e bens que já 
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.5.1"
   related:
     - conversar-no-whatsapp
     - definir-ativo-imobilizado
@@ -72,7 +72,9 @@ Escreva os requisitos antes das opções. Cada requisito diz de onde veio: do qu
 
 Procure na lista de requisitos de compra o requisito do item e, separado, o do serviço sobre ele, como a impressão, o bordado ou a costura: o produto físico e o serviço têm requisitos diferentes. O requisito de um item parecido não vale para este, como o da etiqueta interna para a etiqueta bordada com logo.
 
-Sem o requisito do item ou do serviço, pare antes de pesquisar empresas e antes de escrever a qualquer uma, e entreviste a pessoa. Proponha as perguntas que definem o item ou o serviço, a partir do que você sabe do assunto e do que o fornecedor costuma perguntar, como a arte, a quantidade, o tamanho, o material, as cores e o acabamento, e deixe a pessoa adiantar o que já decidiu. Feche a especificação com ela e grave-a como requisito na lista de requisitos de compra do projeto. Só então pergunte às empresas. Sem o nome da lista no mapeamento nem nos parâmetros, diga qual falta e entregue a especificação na resposta.
+Sem o requisito do item ou do serviço, pare antes de pesquisar empresas e antes de escrever a qualquer uma, e entreviste a pessoa. Proponha as perguntas que definem o item ou o serviço, a partir do que você sabe do assunto e do que o fornecedor costuma perguntar, como a arte, a quantidade, o tamanho, o material, as cores e o acabamento, e deixe a pessoa adiantar o que já decidiu.
+
+Feche a especificação com ela e grave-a como requisito na lista de requisitos de compra do projeto. Só então pergunte às empresas. Sem o nome da lista no mapeamento nem nos parâmetros, diga qual falta e entregue a especificação na resposta.
 O requisito que ninguém confirmou fica marcado como não confirmado. Não complete com o que o modelo supõe.
 
 ### Passo 4
@@ -104,7 +106,9 @@ Antes de recomendar o contato com a empresa, veja se já houve conversa com ela,
 Quando a compra é um serviço de terceiro e nenhuma empresa achada atende, não responda que não há opção. Siga para a próxima: a da lista de empresas, a que um contato indicou, a da web. Cadastre cada uma, veja se há conversa e, sem conversa, prepare o primeiro contato pelo WhatsApp, com o texto pronto e o sim da pessoa. Só pare quando uma empresa confirmar que atende ou a pessoa mandar parar.
 O primeiro contato é por mensagem, pelo WhatsApp, pelo e-mail ou pelo formulário da empresa, e sai em qualquer hora: a loja fechada não adia a mensagem. Ligação é o último recurso, só quando a empresa não tem canal de texto. A empresa que só tem telefone fixo no site, sem WhatsApp, recebe o primeiro contato pelo e-mail ou pelo formulário dela, quando existir, e não fica sem contato nem espera a ligação. Prepare a mensagem para cada empresa de uma vez e peça o sim da pessoa a todas.
 Antes do primeiro envio a cada empresa, ela precisa estar cadastrada, com o rótulo no WhatsApp e o link da página dela na nota do contato. A pressa não adia esses três.
-A primeira mensagem explica o que é o item e para que a pessoa o usa, com o link do anúncio ou da compra quando houver, e já traz o que a empresa vai perguntar: o material, o formato, a quantidade e o prazo. Uma empresa que não conhece o item não consegue dizer se atende: explique antes de pedir indicação. Antes de enviar, confira nos registros o que já se sabe de cada um e pergunte à pessoa só o que falta, como a quantidade. A resposta da empresa não deve abrir uma segunda rodada de perguntas que a primeira mensagem já podia responder. O que a mensagem traz vem da especificação fechada no Passo 3: a empresa que pede um dado que ela já cobre o recebe do requisito, e a que pede um dado que ela não cobre leva a dúvida de volta ao Passo 3, com a pergunta à pessoa.
+A primeira mensagem explica o que é o item e para que a pessoa o usa, com o link do anúncio ou da compra quando houver, e já traz o que a empresa vai perguntar: o material, o formato, a quantidade e o prazo. Uma empresa que não conhece o item não consegue dizer se atende: explique antes de pedir indicação. Antes de enviar, confira nos registros o que já se sabe de cada um e pergunte à pessoa só o que falta, como a quantidade. A resposta da empresa não deve abrir uma segunda rodada de perguntas que a primeira mensagem já podia responder.
+
+O que a mensagem traz vem da especificação fechada no Passo 3: a empresa que pede um dado que ela já cobre o recebe do requisito, e a que pede um dado que ela não cobre leva a dúvida de volta ao Passo 3, com a pergunta à pessoa.
 
 Quando a compra é por quantidade, a empresa tem um pedido mínimo (MOQ), e a primeira mensagem o pergunta a cada uma. O mínimo que a empresa responde vai para as notas da página dela, com a data. O mínimo de uma empresa não vale para outra e não decide a quantidade da pessoa. Quando o mínimo da empresa passa da quantidade necessária, diga à pessoa o excesso que sobraria.
 
