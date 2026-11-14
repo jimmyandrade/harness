@@ -829,6 +829,7 @@ flowchart LR
   projetar_caixa --> organizar_ponto_de_contato
   projetar_caixa --> procurar_banco_de_dados
   projetar_caixa --> revisar_financas
+  prospectar_oportunidades --> consultar_responsavel_pela_oportunidade
   prospectar_oportunidades --> criar_ideia_de_conteudo
   prospectar_oportunidades --> criar_oportunidade
   prospectar_oportunidades --> definir_cronograma
@@ -837,6 +838,7 @@ flowchart LR
   prospectar_oportunidades --> definir_rotina
   prospectar_oportunidades --> definir_tarefa
   prospectar_oportunidades --> definir_viagem
+  prospectar_oportunidades --> inscrever_na_oportunidade
   prospectar_oportunidades --> procurar_oportunidade
   publicar_ata_de_reuniao --> definir_pessoa
   publicar_ata_de_reuniao --> definir_registro_de_reuniao
