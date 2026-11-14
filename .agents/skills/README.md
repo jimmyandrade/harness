@@ -20,6 +20,7 @@ flowchart LR
     acompanhar_retornos_pendentes["acompanhar-retornos-pendentes"]
     acompanhar_veiculo["acompanhar-veiculo"]
     analisar_regulamento_da_oportunidade["analisar-regulamento-da-oportunidade"]
+    anexar_arquivo_no_whatsapp["anexar-arquivo-no-whatsapp"]
     atender_revisao_de_pull_request["atender-revisao-de-pull-request"]
     atualizar_branch_do_pull_request["atualizar-branch-do-pull-request"]
     atualizar_cadastro_fiscal["atualizar-cadastro-fiscal"]
@@ -89,6 +90,7 @@ flowchart LR
     definir_recurso_de_aprendizado["definir-recurso-de-aprendizado"]
     definir_reel_do_instagram["definir-reel-do-instagram"]
     definir_registro_de_reuniao["definir-registro-de-reuniao"]
+    definir_requisito_de_compra["definir-requisito-de-compra"]
     definir_reserva["definir-reserva"]
     definir_roteiro_de_video["definir-roteiro-de-video"]
     definir_rotina["definir-rotina"]
@@ -103,7 +105,6 @@ flowchart LR
     emitir_documento_oficial["emitir-documento-oficial"]
     entregar_rascunho_de_mensagem["entregar-rascunho-de-mensagem"]
     enviar_email["enviar-email"]
-    enviar_imagem_no_whatsapp["enviar-imagem-no-whatsapp"]
     enviar_mensagem_no_slack["enviar-mensagem-no-slack"]
     escrever_codigo["escrever-codigo"]
     escrever_link["escrever-link"]
@@ -235,6 +236,9 @@ flowchart LR
   analisar_regulamento_da_oportunidade --> inscrever_na_oportunidade
   analisar_regulamento_da_oportunidade --> organizar_ponto_de_contato
   analisar_regulamento_da_oportunidade --> procurar_tarefa
+  anexar_arquivo_no_whatsapp --> conversar_no_whatsapp
+  anexar_arquivo_no_whatsapp --> redigir_com_tom_de_voz
+  anexar_arquivo_no_whatsapp --> usar_whatsapp_web
   atender_revisao_de_pull_request --> atualizar_branch_do_pull_request
   atender_revisao_de_pull_request --> criar_commit
   atender_revisao_de_pull_request --> criar_pull_request
@@ -286,6 +290,7 @@ flowchart LR
   consultar_vocabulario --> procurar_variacao_de_termo
   consultar_vocabulario --> redigir_com_tom_de_voz
   conversar_no_whatsapp --> acompanhar_resposta_no_whatsapp
+  conversar_no_whatsapp --> anexar_arquivo_no_whatsapp
   conversar_no_whatsapp --> comunicar_novidade_do_produto
   conversar_no_whatsapp --> convidar_para_evento
   conversar_no_whatsapp --> definir_orcamento_de_fornecedor
@@ -296,7 +301,6 @@ flowchart LR
   conversar_no_whatsapp --> definir_vocabulario
   conversar_no_whatsapp --> dividir_mensagem
   conversar_no_whatsapp --> enviar_email
-  conversar_no_whatsapp --> enviar_imagem_no_whatsapp
   conversar_no_whatsapp --> escrever_link
   conversar_no_whatsapp --> procurar_agenda
   conversar_no_whatsapp --> procurar_tarefa
@@ -305,10 +309,10 @@ flowchart LR
   conversar_no_whatsapp --> triar_conversas
   conversar_no_whatsapp --> usar_whatsapp_web
   convidar_para_evento --> acompanhar_resposta_no_whatsapp
+  convidar_para_evento --> anexar_arquivo_no_whatsapp
   convidar_para_evento --> conversar_no_whatsapp
   convidar_para_evento --> definir_agenda
   convidar_para_evento --> definir_convidado
-  convidar_para_evento --> enviar_imagem_no_whatsapp
   convidar_para_evento --> redigir_com_tom_de_voz
   criar_carrossel_do_instagram --> criar_ideia_de_conteudo
   criar_carrossel_do_instagram --> planejar_calendario_de_conteudo
@@ -538,6 +542,9 @@ flowchart LR
   definir_registro_de_reuniao --> preparar_tarefa_do_pull_request
   definir_registro_de_reuniao --> procurar_agenda
   definir_registro_de_reuniao --> publicar_ata_de_reuniao
+  definir_requisito_de_compra --> gerenciar_estoque
+  definir_requisito_de_compra --> identificar_duplicata
+  definir_requisito_de_compra --> pesquisar_compra
   definir_reserva --> definir_agenda
   definir_reserva --> definir_agenda_de_popstar
   definir_reserva --> revisar_uso_do_tempo
@@ -601,9 +608,6 @@ flowchart LR
   enviar_email --> organizar_emails
   enviar_email --> procurar_email
   enviar_email --> redigir_com_tom_de_voz
-  enviar_imagem_no_whatsapp --> conversar_no_whatsapp
-  enviar_imagem_no_whatsapp --> redigir_com_tom_de_voz
-  enviar_imagem_no_whatsapp --> usar_whatsapp_web
   enviar_mensagem_no_slack --> definir_agenda
   enviar_mensagem_no_slack --> definir_pessoa
   enviar_mensagem_no_slack --> definir_vocabulario
@@ -645,10 +649,10 @@ flowchart LR
   fechar_pull_request --> limpar_copias_de_trabalho
   fechar_pull_request --> mesclar_pull_request
   fechar_pull_request --> sincronizar_status_da_tarefa
+  formalizar_decisao --> anexar_arquivo_no_whatsapp
   formalizar_decisao --> conversar_no_whatsapp
   formalizar_decisao --> criar_pull_request
   formalizar_decisao --> definir_registro_de_reuniao
-  formalizar_decisao --> enviar_imagem_no_whatsapp
   formalizar_decisao --> enviar_mensagem_no_slack
   formalizar_decisao --> preparar_tarefa_do_pull_request
   garantir_ingresso --> abrir_vendas_na_tiqueteira
@@ -778,6 +782,7 @@ flowchart LR
   pesquisar_compra --> conversar_no_whatsapp
   pesquisar_compra --> definir_ativo_imobilizado
   pesquisar_compra --> definir_empresa
+  pesquisar_compra --> definir_requisito_de_compra
   pesquisar_compra --> definir_viagem
   pesquisar_compra --> gerenciar_estoque
   pesquisar_compra --> identificar_duplicata
@@ -940,10 +945,10 @@ flowchart LR
   triar_conversas --> transcrever_audio_e_video
   triar_conversas --> usar_whatsapp_web
   usar_whatsapp_web --> acompanhar_resposta_no_whatsapp
+  usar_whatsapp_web --> anexar_arquivo_no_whatsapp
   usar_whatsapp_web --> conversar_no_whatsapp
   usar_whatsapp_web --> definir_negociacao
   usar_whatsapp_web --> definir_rotina
-  usar_whatsapp_web --> enviar_imagem_no_whatsapp
   usar_whatsapp_web --> manter_contato_no_whatsapp
   usar_whatsapp_web --> triar_conversas
   validar_plano_de_vocabulario --> classificar_estado_do_termo

@@ -4,11 +4,12 @@ description: Pesquisa o que comprar, cruza com despesas, estoque e bens que já 
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.9"
+  version: "0.6.0"
   related:
     - conversar-no-whatsapp
     - definir-ativo-imobilizado
     - definir-empresa
+    - definir-requisito-de-compra
     - definir-viagem
     - evoluir-habilidade
     - gerenciar-estoque
@@ -34,7 +35,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 Entenda o que a pessoa precisa comprar e para que vai usar. O uso decide os requisitos, e o requisito decide a opção.
 Use o que a pessoa já disse. Pergunte, uma vez, só o que muda a recomendação: o uso, o orçamento, a voltagem ou o prazo.
-Não pare numa pergunta que a pesquisa responde. Comece e leve a dúvida junto com as primeiras opções.
+Não pare numa pergunta que a pesquisa responde. Comece e leve a dúvida junto com as primeiras opções. A especificação do que vai ser comprado é a exceção: sem ela, o Passo 3 manda parar e entrevistar a pessoa antes de pesquisar empresas.
+Quando o pedido cita um lugar que pode ter mais de um alcance, como um nome que é ao mesmo tempo o da cidade e o do estado, confirme com a pessoa o alcance antes de pesquisar e antes de cadastrar: só a cidade, a região metropolitana ou o estado inteiro. Diga o que entendeu e espere a resposta. Não escolha o alcance mais amplo nem o mais conhecido. Esta é a pergunta que a pesquisa não responde, então ela vem antes das primeiras opções.
 
 ### Passo 2
 
@@ -68,6 +70,9 @@ Um insumo que está nas despesas e falta no estoque fica no fim da resposta, com
 ### Passo 3
 
 Escreva os requisitos antes das opções. Cada requisito diz de onde veio: do que a pessoa disse, de um registro nosso, da ficha técnica do fabricante ou de um anúncio.
+
+Procure o requisito do que vai ser comprado e, sem ele, siga `definir-requisito-de-compra` antes de pesquisar empresas e de escrever a qualquer uma: ele entrevista a pessoa, fecha a especificação e a grava como requisito. A compra de um item pronto da empresa tem um requisito só, e o requisito de um item parecido não vale para este.
+
 O requisito que ninguém confirmou fica marcado como não confirmado. Não complete com o que o modelo supõe.
 
 ### Passo 4
@@ -93,11 +98,24 @@ Não compre, não ponha no carrinho e não preencha dado de pagamento.
 Cadastre na lista de empresas do mapeamento de dados do projeto cada empresa que apareceu como opção, recomendada ou descartada: a loja que vende, a gráfica, a prestadora do serviço. Não espere a pessoa decidir nem comprar. Assim a empresa se acha depois, sem pesquisar de novo.
 Siga `definir-empresa`, que busca antes por nome, variações e CNPJ e reaproveita a empresa que já existe. Grave só o que a página da própria empresa mostrou, como contato, endereço, horário e CNPJ. O que ficou sem confirmação, como se ela atende o que a pessoa precisa, vai nas notas, não nos campos de contato.
 Marketplace e loja grande entram como empresa quando o vendedor é a opção. O vendedor do anúncio é a empresa, não a plataforma.
+A empresa que a busca trouxe de fora do alcance confirmado no Passo 1 não é opção: não a cadastre nem a contate. Cite-a, no máximo, como fora do alcance, com a cidade, e deixe a pessoa decidir se o alcance cresce.
 Abra o site da empresa e leia os links da página, como WhatsApp, telefone e redes, antes de dizer que não achou o contato. O trecho que a busca mostrou não basta.
 Antes de recomendar o contato com a empresa, veja se já houve conversa com ela, seguindo `conversar-no-whatsapp`. Diga o que o histórico já responde.
 Quando a compra é um serviço de terceiro e nenhuma empresa achada atende, não responda que não há opção. Siga para a próxima: a da lista de empresas, a que um contato indicou, a da web. Cadastre cada uma, veja se há conversa e, sem conversa, prepare o primeiro contato pelo WhatsApp, com o texto pronto e o sim da pessoa. Só pare quando uma empresa confirmar que atende ou a pessoa mandar parar.
-O primeiro contato é por mensagem, pelo WhatsApp, pelo e-mail ou pelo formulário da empresa, e sai em qualquer hora: a loja fechada não adia a mensagem. Ligação é o último recurso, só quando a empresa não tem canal de texto. Prepare a mensagem para cada empresa de uma vez e peça o sim da pessoa a todas.
+O primeiro contato é por mensagem, pelo WhatsApp, pelo e-mail ou pelo formulário da empresa, e sai em qualquer hora: a loja fechada não adia a mensagem. Ligação é o último recurso, só quando a empresa não tem canal de texto. A empresa que só tem telefone fixo no site, sem WhatsApp, recebe o primeiro contato pelo e-mail ou pelo formulário dela, quando existir, e não fica sem contato nem espera a ligação. Prepare a mensagem para cada empresa de uma vez e peça o sim da pessoa a todas.
+Antes do primeiro envio a cada empresa, ela precisa estar cadastrada, com o rótulo no WhatsApp e o link da página dela na nota do contato. A pressa não adia esses três.
 A primeira mensagem explica o que é o item e para que a pessoa o usa, com o link do anúncio ou da compra quando houver, e já traz o que a empresa vai perguntar: o material, o formato, a quantidade e o prazo. Uma empresa que não conhece o item não consegue dizer se atende: explique antes de pedir indicação. Antes de enviar, confira nos registros o que já se sabe de cada um e pergunte à pessoa só o que falta, como a quantidade. A resposta da empresa não deve abrir uma segunda rodada de perguntas que a primeira mensagem já podia responder.
+
+O que a mensagem traz vem da especificação fechada no Passo 3: a empresa que pede um dado que ela já cobre o recebe do requisito, e a que pede um dado que ela não cobre leva a dúvida de volta ao Passo 3, com a pergunta à pessoa.
+
+Quando a compra é por quantidade, a empresa tem um pedido mínimo (MOQ), e a primeira mensagem o pergunta a cada uma. O mínimo que a empresa responde vai para as notas da página dela, com a data. O mínimo de uma empresa não vale para outra e não decide a quantidade da pessoa. Quando o mínimo da empresa passa da quantidade necessária, diga à pessoa o excesso que sobraria.
+
+Quando o insumo é para peças que a própria marca produz, como etiqueta ou embalagem, a quantidade a orçar vem das unidades dessas peças: as produzidas mais as previstas, menos as já vendidas. Leia essas contagens nos dados do projeto, seguindo `gerenciar-estoque`, e leve o total à pessoa para confirmar antes do envio. A mensagem leva essa quantidade, e nunca um número tirado de costume, de memória ou do mínimo de outra empresa.
+
+A mensagem diz à empresa só o que ela precisa para orçar e a disponibilidade da pessoa: quando ela pode retirar ou levar. Não conte que a pessoa viaja, onde está nem quando chega. Confira a disponibilidade no momento do envio, na viagem de `definir-viagem` e no que a pessoa disse hoje, porque uma frase dita horas antes pode ter deixado de valer.
+
+Uma mensagem já enviada com dado errado ou a mais se corrige editando essa mensagem, não mandando outra. Se a edição não é mais possível, não envie nada e diga à pessoa quais empresas ficaram assim.
+
 Quando a empresa responde, leia a resposta e responda com os fatos que já se sabe, sem pedir à pessoa o que a conversa já tem. Delegue a leitura e a resposta à habilidade de conversa. Só leve à pessoa a decisão que é dela: aceitar preço ou orçamento, pagar, combinar data e hora de retirada ou entrega, e passar dado pessoal ou fiscal. Nesses casos, diga as palavras da empresa e a opção que você recomenda.
 Na resposta, leve o link da página de cada empresa cadastrada.
 
@@ -161,6 +179,14 @@ Se você recomendar ou descartar uma empresa e não a cadastrar, na próxima bus
 2. Não espere a pessoa decidir nem comprar.
 3. Leve o link da página na resposta.
 
+### Empresa deixada sem contato por ter só telefone fixo
+
+Se você deixar sem mensagem a empresa cujo site traz só telefone fixo, ela fica fora da rodada embora tenha e-mail ou formulário, e a pessoa descobre depois.
+
+1. Procure o e-mail e o formulário no site, como o Passo 6 manda.
+2. Prepare a mensagem para esse canal, com o mesmo texto das outras e o sim da pessoa.
+3. Só sem nenhum canal de texto a ligação entra, como último recurso, e a resposta diz isso.
+
 ### Contato dado como não achado
 
 Se você parar no trecho que a busca mostrou e disser que não achou o contato, a pessoa vai procurar o que estava na página da empresa.
@@ -168,6 +194,30 @@ Se você parar no trecho que a busca mostrou e disser que não achou o contato, 
 1. Abra o site da empresa.
 2. Leia os links da página, como WhatsApp, telefone e redes.
 3. Só então diga que o contato falta.
+
+### Lugar tomado pelo alcance mais amplo
+
+Se você ler como o estado inteiro um pedido que diz só o nome de um lugar, a pesquisa traz e a lista cadastra empresas de cidades onde a pessoa nunca quis ir, e a primeira mensagem sai para quem ela não pretendia procurar.
+
+1. Confirme o alcance antes de pesquisar: a cidade, a região metropolitana ou o estado.
+2. Pesquise e cadastre só dentro do alcance confirmado.
+3. Diga a cidade de cada empresa na resposta, e deixe a de fora do alcance como fora do alcance.
+
+### Empresa consultada sem a especificação
+
+Se você escrever às empresas antes de fechar a especificação do que vai ser comprado, elas pedem a arte, a quantidade e o acabamento, e a pessoa responde a perguntas que devia ter fechado antes.
+
+1. Procure o requisito no Passo 3.
+2. Sem ele, siga `definir-requisito-de-compra` antes de pesquisar e de escrever.
+3. Só então pergunte às empresas.
+
+### Mínimo de uma empresa tomado como quantidade
+
+Se você sugerir à pessoa a quantidade que uma empresa aceita como mínimo, passar um número de costume, ou usar o mínimo de uma na mensagem a outra, a quantidade sai sem base e a pessoa decide com um número que não é dela.
+
+1. Pergunte o MOQ a cada empresa, na primeira mensagem, como o Passo 6 manda.
+2. Grave o que cada uma respondeu nas notas da página dela, com a data.
+3. A quantidade vem das unidades das peças, como o Passo 6 manda, e a pessoa a confirma: leve a ela esse total e o mínimo de cada empresa.
 
 ### Compra feita pela pesquisa
 
@@ -201,6 +251,8 @@ Li o estoque e achei um rolo do mesmo tecido com saldo. Mostrei o saldo e pergun
 - A lista de empresas não está no workspace conectado: diga isso e siga com a resposta. Não cadastre em outra lista.
 - O item é híbrido, entre estoque e bem durável: pergunte o destino antes de encaminhar.
 - É um serviço, não um produto: use os mesmos passos, com o escopo e o prazo no lugar dos requisitos do item.
+- A compra não tem requisito, ou só tem o de um item parecido: siga `definir-requisito-de-compra` e entreviste a pessoa antes de pesquisar.
+- O pedido cita um lugar sem dizer o alcance, como o nome de uma cidade que também é o do estado: confirme o alcance antes de pesquisar. Uma empresa fora dele fica de fora do cadastro e do contato.
 
 ## Pegadinhas
 
@@ -212,6 +264,8 @@ Li o estoque e achei um rolo do mesmo tecido com saldo. Mostrei o saldo e pergun
 - A lista de despesas guarda o que foi pago, não a ficha do que foi comprado. A compatibilidade vem do fabricante.
 - O vendedor do insumo raramente cita modelo de equipamento. Ele diz a tecnologia, como "só laser". O fabricante do equipamento diz se aceita aquele tipo de mídia e por qual entrada.
 - A ficha de outro vendedor do mesmo insumo, como a gramatura, não vale para o insumo comprado. Marque como não confirmado.
+- O pedido mínimo parece o mesmo em toda empresa. Ele muda de uma para outra, e o de uma página de produto pode não ser o de quem imprime ou borda sob encomenda: pergunte a cada uma.
+- O nome de um lugar parece ter um único alcance. Quem pede por um estado e quem pede só pela capital usam a mesma palavra, e a busca não sabe qual dos dois a pessoa quis. A cidade da empresa, vista na página dela, é o que mostra a diferença.
 
 ## Scripts disponíveis
 

@@ -3,13 +3,13 @@ name: usar-whatsapp-web
 description: Abre, mantém e reaproveita a única aba do WhatsApp Web no Chrome da pessoa, pela extensão Claude in Chrome, e faz a sessão dona atender as leituras e os envios das outras sessões. Usada sempre que uma habilidade precisa abrir, ler, enviar texto, anexar imagem ou documento no WhatsApp Web, mesmo sem dizer aba. Não serve para achar a conversa, redigir a mensagem, rotular nem decidir o que enviar.
 metadata:
   author: jimmyandrade
-  version: "0.7.0"
+  version: "0.8.1"
   related:
     - acompanhar-resposta-no-whatsapp
     - conversar-no-whatsapp
     - definir-negociacao
     - definir-rotina
-    - enviar-imagem-no-whatsapp
+    - anexar-arquivo-no-whatsapp
     - evoluir-habilidade
     - manter-contato-no-whatsapp
     - triar-conversas
@@ -55,6 +55,12 @@ Só a dona envia: ela mostra a conversa e o texto à pessoa na conversa dela e e
 Depois de enviar, a dona registra a troca por `definir-negociacao`, na mesma rodada e sem perguntar, mesmo quando outra sessão pediu o envio, e diz o link do registro: a sessão que pediu não vê o que a dona enviou.
 Depois de ler ou enviar numa conversa, a dona segue `manter-contato-no-whatsapp` antes de responder a quem pediu.
 
+Antes de cada Enter, a dona relê a conversa inteira, desde a última mensagem que ela enviou, e compara com o texto que vai mandar. O texto vem de quem o escreveu, com o que essa pessoa ou sessão sabia na hora, e a conversa pode ter mudado depois. Se a pessoa do outro lado respondeu, mesmo com um "olá" ou um "só fazendo teste", o texto não sai como veio: a dona o refaz à luz da resposta e o mostra de novo, como o parágrafo acima manda.
+
+Uma resposta que não responde à pergunta, como uma saudação ou um teste, quer dizer que a pessoa não leu ou não entendeu: o próximo texto não repete a pergunta igual.
+
+A conta pode estar em uso por outra pessoa ao mesmo tempo, pelo celular ou por outra janela: ela responde, edita ou apaga no meio do envio. A dona confere o estado da conversa antes de cada envio e não assume que a última mensagem foi dela.
+
 Num atendimento automático, como um robô com menu que pede um dado ou oferece falar com atendente, a dona tenta cada passo do fluxo na própria conversa e relata o resultado real de cada um. O que outro canal, outra sessão ou um caso anterior mostrou é dica, nunca motivo para não tentar nem para aconselhar esperar. Quando o robô pede o passo seguinte, ela mostra o passo exato e pede o sim, sem dizer que vai falhar. O mesmo sim pode cobrir os passos seguintes do mesmo fluxo que a pessoa descreveu, como escolher falar com atendente.
 
 Depois que o robô transfere para um atendente, a dona lê a conversa em esperas que dobram a partir de 10 segundos e avisa a pessoa de cada mensagem do atendente. Ele costuma pedir dados e dar uma janela curta, como 5 minutos, antes de encerrar a conversa: a dona leva à pessoa o rascunho da resposta já com os dados e o prazo da janela. Os dados cadastrais, como razão social e telefone, vêm da página da empresa e da pessoa responsável no data source, pelo Chrome quando o conector não está na sessão: ela os consulta antes de perguntar à pessoa.
@@ -76,7 +82,7 @@ Com `não`, cada sessão abre a própria aba, uma só.
 
 Use, durante toda a tarefa, a aba que a sessão já abriu: não abra outra nem a recarregue. Antes de ler ou enviar, confira no cabeçalho o nome da conversa. Não peça para a pessoa mover a aba dela.
 
-Se aparecer o aviso de que o WhatsApp está aberto em outra janela, clique no botão do aviso que passa a conexão para a sua aba. O texto dele muda com a versão, como "Usar nesta janela" ou "Usar aqui". Na mesma sequência de ações, espere a lista carregar, busque e leia.
+A sessão dona é a única que opera o WhatsApp Web. Se aparecer o aviso de que o WhatsApp está aberto em outra janela, clique já no botão do aviso que passa a conexão para a sua aba, sem perguntar à pessoa: a outra janela é desconectada de propósito. O texto dele muda com a versão, como "Usar nesta janela" ou "Usar aqui". Na mesma sequência de ações, espere a lista carregar, busque e leia.
 Se o aviso voltar, outra aba tomou a conexão: clique de novo uma vez só, com a leitura na mesma sequência, e não alterne mais. Ao terminar, diga que a outra janela ficou desconectada e volta pelo mesmo botão.
 
 Se aparecer o QR code, o WhatsApp Web não está conectado: pare, peça para a pessoa conectar o celular e, sem perguntar, crie com `definir-rotina` uma rotina que a lembre de reconectar e pare quando ele voltar a responder. Não tente ler o banco do aplicativo de desktop.
@@ -87,17 +93,7 @@ Ao terminar, deixe a aba aberta, mesmo quando as outras abas da tarefa forem fec
 
 ### Passo 4
 
-Para anexar uma imagem ou um documento, quem chama já tem o destino, o arquivo e o sim da pessoa. O menu Anexar tem Documento, Fotos e vídeos e Nova figurinha. A única entrada de arquivo que existe na página é a da Nova figurinha: mandar por ela envia uma figurinha. A entrada de Fotos e vídeos só nasce ao clicar nessa opção, e o seletor nativo não se opera pela automação. Por isso o script de captura roda antes do clique.
-
-- [ ] Abra o destino e o menu Anexar.
-- [ ] Rode o script de captura.
-- [ ] Clique em Fotos e vídeos, ou em Documento para um documento.
-- [ ] Confira a entrada capturada: `data-wa-captured` preenchido e, para foto, `accept` com `video`. A que já existia, só com `image/*`, é a da figurinha: não use.
-- [ ] Ache o novo `file-input` com `find` ou `read_page` e envie o arquivo a ele com `file_upload`.
-- [ ] Confira a pré-visualização. Foto tem o campo de legenda e o botão de mais. Sem legenda é figurinha: feche no X e recomece.
-- [ ] Envie.
-- [ ] Rode o script de restauração.
-- [ ] Releia a lista de conversas: a prévia da linha diz "Foto" ou o nome do documento, nunca "Figurinha".
+Para anexar uma imagem ou um documento, siga `anexar-arquivo-no-whatsapp`: o destino, o arquivo e o sim da pessoa já vêm de quem chama, e o anexo, com os scripts de captura e restauração, é dela.
 
 ### Passo 5
 
@@ -168,14 +164,6 @@ Se você abrir o WhatsApp Web sem olhar as abas que a sessão já tem, cada dona
 2. Use a aba do WhatsApp Web que já aparece, no mesmo grupo.
 3. Sem ela, abra uma só, no grupo que a sessão já tem.
 
-### Imagem enviada como figurinha
-
-Se você enviar o arquivo à única entrada de arquivo da página, sem capturar a de Fotos e vídeos, a imagem sai como figurinha, pequena e sem legenda, e a pessoa só descobre depois.
-
-1. Rode o script de captura antes de clicar em Fotos e vídeos.
-2. Confira a pré-visualização: sem legenda, feche e recomece.
-3. Depois do envio, leia a prévia da lista.
-
 ### Arquivo antigo fora do WhatsApp Web
 
 Se você procurar no e-mail, no Drive e no Notion um arquivo que não aparece na conversa, a busca gasta tempo e não acha: o WhatsApp Web não sincroniza as mensagens antigas.
@@ -192,11 +180,13 @@ Se você disser que o robô vai responder "não localizado" porque outro canal m
 2. Envie e leia a resposta do robô.
 3. Relate o resultado de cada passo, com a hora.
 
-### Página deixada com o clique alterado
+### Texto pronto enviado sem reler
 
-Se você não rodar o script de restauração, o clique de qualquer entrada de arquivo continua alterado na aba.
+Se você enviar o texto que outra sessão escreveu sem reler a conversa, a pergunta sai de novo depois de a pessoa já ter respondido, e quem usa a conta tem de editar a mensagem a tempo para não passar vergonha.
 
-1. Rode o script de restauração depois do envio, também quando cancelar.
+1. Releia a conversa inteira, desde a sua última mensagem, antes do Enter.
+2. Se a pessoa respondeu, refaça o texto à luz da resposta e mostre-o de novo.
+3. Resposta que não responde, como "olá" ou "só fazendo teste", não pede a mesma pergunta outra vez.
 
 ## Exemplos de entrada e saída
 
@@ -205,10 +195,6 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 ### leia a conversa do Caio, numa sessão que não é a dona
 
 Achei a "Dona do WhatsApp Web" na lista de sessões e pedi a ela, só para leitura, a primeira linha da conversa do Caio. Ela respondeu com o `tabId` da mesma aba, o mesmo grupo de abas e a aba logada, em cerca de 3 s. Não abri aba nesta sessão.
-
-### anexe o comprovante na conversa do Caio, depois do sim
-
-Capturei a entrada de Fotos e vídeos, enviei o arquivo e vi o campo de legenda. A lista do Caio passou a dizer "Foto". Restaurei a aba.
 
 ### o robô do atendimento pediu o CNPJ, e o chat do site já tinha respondido "não localizado"
 
@@ -221,6 +207,7 @@ Mostrei o CNPJ como o passo seguinte e pedi o sim, sem dizer que ia falhar. Com 
 - A dona está perto de lotar o contexto: avise a pessoa antes, para ela abrir a próxima. Não espere o arquivamento.
 - Outra sessão pede uma leitura a você e a lista não tem dona: torne-se a dona e atenda. Com o pedido de envio, mostre a conversa e o texto à pessoa na sua conversa e espere o sim ali.
 - Duas sessões com o título da dona: fica a de `sessionId` menor em ordem alfabética. A outra devolve o título e renomeia a sessão para o assunto dela.
+- Outra sessão manda um texto pronto e a pessoa do outro lado já respondeu depois de ele ser escrito: não envie como veio. Refaça o texto à luz da resposta e mostre-o de novo.
 - A extensão não responde: diga isso e peça para a pessoa abrir o Chrome.
 - O histórico pede para carregar mensagens antigas do celular: clique no aviso e diga que pode estar incompleto.
 - O arquivo pedido é anterior à data do rodapé da aba Documentos: peça que a pessoa o encaminhe pelo celular.
@@ -230,9 +217,6 @@ Mostrei o CNPJ como o passo seguinte e pedi o sim, sem dizer que ia falhar. Com 
 - A dona lotada some sem aviso para quem não olha o contexto dela. A dona nova só herda o que o brief e a lista de pendências dizem: sem eles, o envio com sim já dado se perde.
 - A aba que a pessoa já deixou aberta pode estar fora das abas que você controla. O botão do aviso passa a conexão para a sua aba, e a aba dela fica desconectada sem perder o login.
 - O WhatsApp Web leva alguns segundos para carregar. A primeira leitura pode mostrar só a tela de carregamento.
-- A imagem enviada pela entrada que já existe na página vira figurinha, mesmo com a pré-visualização aberta. O campo de legenda é o que diferencia.
-- O menu de anexos fica aberto atrás da pré-visualização, e o botão de enviar continua funcionando.
-- A prévia da lista de conversas mostra "Foto" no lugar do texto quando a imagem é a última mensagem.
 - Em conta comercial, a conversa pode estar com o agente de IA: o aviso aparece na própria conversa.
 - O que o chat do site mostrou parece a resposta do robô do WhatsApp. É dica: tente na conversa em que você está e relate.
 - A mensagem de um robô com o botão "Menu" é uma lista: clique em Menu, marque o círculo da opção e clique no botão de enviar. A opção sai como uma mensagem que cita a do robô, e o Menu de uma mensagem antiga continua respondendo.
@@ -243,7 +227,9 @@ Mostrei o CNPJ como o passo seguinte e pedi o sim, sem dizer que ia falhar. Com 
 - Responder a uma mensagem é pelo menu que aparece ao passar o mouse sobre ela, na opção Responder. A citação aparece em cima do campo.
 - Enter na busca da lista abre a primeira conversa e marca as mensagens como lidas. Digite o nome e leia o resultado sem apertar Enter.
 - O texto da página traz a lista de conversas inteira antes da conversa aberta. A conversa aberta começa depois do nome do contato no cabeçalho.
-- A mensagem editada mostra "Editada", e o texto antigo some para os dois lados.
+- A mensagem editada mostra "Editada", e o texto antigo some para os dois lados. Uma mensagem sua pode aparecer editada por outra pessoa que usa a conta: leia a conversa antes de enviar de novo.
+- Um "olá" ou um "só fazendo teste" parece resposta à pergunta que você fez. Não é: a pessoa não leu ou não entendeu, e repetir a pergunta igual é o erro.
+- O texto pronto de outra sessão parece seguro por já estar escrito. Ele vale para a conversa do momento em que foi escrito: releia antes de mandar.
 - O separador do dia mostra "Ontem" ou só o dia da semana. Ao devolver a leitura a outra sessão, diga a data inteira, com o dia calculado como a regra do dia da semana manda.
 - "Mostrar documentos de todas as conversas" lista só os documentos recentes. Um arquivo antigo não aparece ali nem na conversa.
 - Baixar um áudio, pelo menu da mensagem, não deixa o arquivo com o nome dele: ele cai em Downloads como um arquivo oculto `.com.google.Chrome.*`. Ache-o pela duração, com o `ffprobe`, e mova-o com o nome da conversa, da pessoa e da hora.
@@ -251,28 +237,6 @@ Mostrei o CNPJ como o passo seguinte e pedi o sim, sem dizer que ia falhar. Com 
 
 ## Scripts disponíveis
 
-- Captura, antes de clicar em Fotos e vídeos. Faz o WhatsApp entregar a entrada de arquivo que ele cria ao clicar:
+- Nenhum. Os scripts de captura e restauração ficam em `anexar-arquivo-no-whatsapp`.
 
-```js
-window.__waInputs = [];
-window.__origClick = window.__origClick || HTMLInputElement.prototype.click;
-HTMLInputElement.prototype.click = function () {
-  if (this.type === 'file') {
-    this.setAttribute('data-wa-captured', String(window.__waInputs.length));
-    this.style.display = 'none';
-    document.body.appendChild(this);
-    window.__waInputs.push(this);
-    return;
-  }
-  return window.__origClick.call(this);
-};
-```
-
-- Restauração, depois do envio:
-
-```js
-HTMLInputElement.prototype.click = window.__origClick;
-document.querySelectorAll('input[data-wa-captured]').forEach(e => e.remove());
-```
-
-1. Rode cada script com a ferramenta de JavaScript do Chrome, na aba do WhatsApp Web.
+1. Não há script para executar.
