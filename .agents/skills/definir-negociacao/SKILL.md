@@ -1,11 +1,11 @@
 ---
 name: definir-negociacao
-description: Use essa habilidade sempre que for registrar uma conversa com empresa ou pessoa, por WhatsApp, e-mail ou reunião, inclusive a que você acabou de enviar, ou antes de perguntar algo que essa conversa já pode ter respondido, como data, horário, valor ou combinado, mesmo sem dizer negociação. NÃO use para achar o e-mail, gravar o evento na agenda, organizar o ponto de contato, redigir a mensagem, nem cadastrar a oportunidade.
+description: Use essa habilidade sempre que for registrar uma conversa com empresa ou pessoa, por WhatsApp, e-mail ou reunião, inclusive a que você acabou de enviar, ou antes de perguntar algo que essa conversa já pode ter respondido, como data, horário, valor, combinado ou canal anterior, mesmo sem dizer negociação. NÃO use para achar o e-mail, gravar o evento na agenda, organizar o ponto de contato, redigir a mensagem, nem cadastrar a oportunidade.
 allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-data-sources notion:notion-get-comments notion:notion-create-comment notion:notion-create-pages notion:notion-update-page
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   related:
     - definir-agenda
     - evoluir-habilidade
@@ -68,6 +68,10 @@ Antes de perguntar à pessoa um fato sobre oportunidade, ponto de contato, viage
 
 Pergunte só o que nenhuma fonte responde e diga quais você consultou. Se duas fontes divergem, mostre as duas com a data de cada uma. Não escolha uma.
 
+Antes de redigir ou enviar a retomada de um contato, leia nos comentários a data e o canal da troca anterior. A mensagem anterior que a pessoa cola vale com a data que ela tem: "hoje", "agora" e "estamos" eram do dia dela, e o que mudou desde então vem das fontes.
+
+Não presuma que o contato anterior foi no mesmo canal do atual: confirme o canal antes de escrever. O texto diz o canal certo, como "pelo Instagram", e não "por aqui" quando o canal mudou. Diga como o contato foi achado quando a pessoa contar, como a postagem ou o site, e não invente a origem.
+
 ### Passo 5
 
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
@@ -81,6 +85,14 @@ Se você perguntar um horário ou combinado sem ler a negociação, a pessoa rep
 1. Siga o checklist do Passo 4.
 2. Responda com o que achou e a fonte.
 3. Pergunte só o que faltou.
+
+### Contato retomado no canal errado
+
+Se você escrever a retomada com a data e o canal que a mensagem anterior parecia ter, o texto diz "hoje" de um dia que já passou ou "por aqui" de um canal que já mudou.
+
+1. Leia a data e o canal da troca anterior nos comentários, ou pergunte quando faltarem.
+2. Confirme o canal do contato atual. Não presuma que é o mesmo.
+3. Escreva o canal certo e a origem do contato que a pessoa contou.
 
 ### Histórico no corpo da página
 
@@ -129,6 +141,10 @@ Consultei os comentários da negociação, o cronograma, as inscrições e o e-m
 
 Não havia cotação, proposta, parceria nem venda. Gravei na discussão da página da pessoa, com a data, o canal e quem falou, e a pendência da resposta ao café. Não criei negociação.
 
+### cole a mensagem que mandei à organização da Feira Exemplo e escreva a retomada pelo WhatsApp
+
+A mensagem colada não tinha data. Li os comentários: foi enviada pelo Instagram em 9 de maio, e a retomada sai seis meses depois, pelo WhatsApp. Troquei o "hoje" dela pelo que mudou desde então, escrevi "no Instagram" para o contato anterior e perguntei como o número foi achado antes de afirmar a origem.
+
 ### a Isadora também respondeu pela Feira Exemplo
 
 Conferi se a pessoa abordada aceita mais de uma pessoa antes de somar Isadora Ribeiro à negociação.
@@ -140,6 +156,8 @@ Conferi se a pessoa abordada aceita mais de uma pessoa antes de somar Isadora Ri
 - A conversa não tem data: use `Data aproximada:` e diga de onde veio.
 - Várias mensagens no mesmo dia e assunto: um comentário só, com os horários.
 - A pessoa corrige um fato já gravado: novo comentário datado com a correção. Não apague o anterior.
+- A mensagem anterior chega colada, sem data nem canal: pergunte os dois antes de escrever a retomada. Não presuma que o canal é o mesmo do atual.
+- O canal do contato mudou, como do Instagram para o WhatsApp: o texto diz o canal do contato anterior e a origem do novo, como a pessoa contou.
 - A lista não está no workspace conectado, ou o nome dela não está no mapeamento: pare e peça.
 
 ## Pegadinhas
@@ -149,6 +167,7 @@ Conferi se a pessoa abordada aceita mais de uma pessoa antes de somar Isadora Ri
 - Toda conversa parece pedir uma negociação. Sem cotação, proposta, parceria ou venda, não há negócio: a linha do tempo é a discussão da página da pessoa.
 - Um comentário de propriedade fica escondido no campo. Só a discussão da página aparece no topo.
 - O mesmo fato pode estar no WhatsApp, no e-mail e no manual com horários diferentes. A data mais recente não é automaticamente a certa.
+- A mensagem anterior parece valer como está hoje. O "hoje" e o "estamos" dela eram do dia em que foi enviada, e o canal dela pode não ser o de agora.
 - A empresa abordada e a pessoa abordada são relações. Telefone e grafias vêm por rollup e não se gravam aqui.
 
 ## Scripts disponíveis
