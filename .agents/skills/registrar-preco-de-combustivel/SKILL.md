@@ -4,7 +4,7 @@ description: Registra o preço de combustível visto num posto da estrada, com d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.2"
+  version: "0.1.3"
   related:
     - definir-empresa
     - definir-viagem
@@ -28,7 +28,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ### Passo 1
 
-O registro é uma linha no banco de preços de combustível, uma por posto e por leitura. A pessoa informa o data source na execução. Sem ele, use `procurar-banco-de-dados`; se o banco não existir no workspace conectado, pare e peça. Os conceitos do banco são: registro, data e hora, posto (empresa), local no mapa, combustível, preço por litro, se abastecemos, litros, valor pago, sentido da pista, viagem, veículo, comprovante (despesa), quem informou e observações. Um conceito que o esquema não tem fica vazio e nomeado, sem criar propriedade.
+O registro é uma linha no banco de preços de combustível, uma por posto e por leitura. A pessoa informa o data source na execução. Sem ele, use `procurar-banco-de-dados`; se o banco não existir no workspace conectado, pare e peça. Os conceitos do banco são: registro, data e hora, posto (empresa), local no mapa, combustível, preço por litro, se abastecemos, litros, valor pago, sentido da pista, viagem, veículo, comprovante (despesa), não confundir com (outras linhas do mesmo banco), quem informou e observações. Um conceito que o esquema não tem fica vazio e nomeado, sem criar propriedade.
 
 ### Passo 2
 
@@ -44,9 +44,13 @@ Preço visto de passagem e sem foto entra mesmo assim, marcado como sem foto. A 
 
 ### Passo 3
 
-Resolva o posto pelo nome e pelo CNPJ do comprovante, nunca por busca na web: o nome do cupom é o do estabelecimento, que pode diferir da razão social e da bandeira. Busque a empresa antes com `identificar-duplicata` e cadastre só se faltar, por `definir-empresa`. A bandeira da placa vai nas observações e na desambiguação da empresa, porque a análise pode comparar bandeiras. Sem comprovante, o posto é a bandeira mais o lugar, sem inventar razão social.
+Todo aviso de posto é uma linha nova. Não junte dois avisos num posto só porque a bandeira e o preço são iguais, nem porque o Google devolve o mesmo candidato: a estrada tem vários postos da mesma bandeira. Só reaproveite uma linha quando a pessoa disser que é o mesmo posto. Ligue as linhas de nome, bandeira ou preço parecidos pelo conceito "não confundir com", nos dois sentidos, e nomeie nas observações o que as distingue.
 
 ### Passo 4
+
+Resolva o posto pelo nome e pelo CNPJ do comprovante, nunca por busca na web: o nome do cupom é o do estabelecimento, que pode diferir da razão social e da bandeira. Busque a empresa antes com `identificar-duplicata` e cadastre só se faltar, por `definir-empresa`. A bandeira da placa vai nas observações e na desambiguação da empresa, porque a análise pode comparar bandeiras. Sem comprovante, o posto é a bandeira mais o lugar, sem inventar razão social.
+
+### Passo 5
 
 A posição do celular não é a do posto. De carro, a 80 km/h, o carro anda cerca de 1,3 km por minuto, e passam-se a leitura da placa, a mensagem da pessoa e a consulta da posição. O posto fica atrás da posição lida, no sentido contrário ao da viagem. Se você tem duas posições seguidas, o rumo vem delas. Sem as duas, o rumo vem do trecho da viagem.
 
@@ -54,15 +58,15 @@ Busque o posto na pesquisa de lugares perto da posição lida, olhando para trá
 
 Para o local no mapa, use o candidato só quando as referências o confirmarem. Sem confirmação, use a posição lida, escreva "local aproximado" e nomeie nas observações a hipótese e que a posição lida está à frente do posto. Não invente número de rua. Sem candidato, deixe o local como a posição lida e proponha o histórico de locais do celular da pessoa no horário da parada.
 
-### Passo 5
+### Passo 6
 
 Quando abasteceram, siga esta ordem: leia o cupom, registre o preço e depois lance a despesa por `lancar-despesa-da-empresa`, ligando a despesa, a viagem e o veículo à linha de preço. Se a bomba estava coberta, calcule o preço por litro como o valor pago dividido pelos litros e peça a confirmação da pessoa. Do cartão guarde só os quatro últimos dígitos, no cadastro de cartões, nunca o número. A pessoa que pagou e a conta seguem `lancar-despesa-da-empresa`.
 
-### Passo 6
+### Passo 7
 
 Releia a linha salva, confira os vínculos e responda com o link, o que ficou vazio e o que depende da pessoa. Quando a pessoa pedir a análise de onde parar, use só as linhas no sentido da viagem, compare o mesmo combustível e diga quantas leituras sustentam cada posto e quais não têm foto.
 
-### Passo 7
+### Passo 8
 
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
@@ -90,6 +94,14 @@ Se você gravar um preço lido de passagem como se fosse da foto, a análise con
 
 1. Marque nas observações se houve foto, bomba ou só leitura de passagem.
 2. Não arredonde nem complete o preço que não foi lido.
+
+### Dois avisos fundidos num posto só
+
+Se você reaproveitar a linha de um posto porque o novo aviso tem a mesma bandeira, o mesmo preço ou o mesmo candidato no Google, um posto da estrada some do registro e o local de outro fica errado.
+
+1. Crie uma linha para cada aviso, a menos que a pessoa diga que é o mesmo posto.
+2. Ligue as linhas parecidas em "não confundir com", nos dois sentidos.
+3. Se já fundiu, restaure a linha antiga com os dados que ela tinha e crie a nova.
 
 ### Posição do celular tratada como a do posto
 
@@ -134,6 +146,7 @@ Não criei a linha: o posto está na contramão e não dá para virar. Avisei qu
 - O nome da razão social, o do cupom e a bandeira da placa são três coisas. O cupom manda no cadastro.
 - A bomba pode estar parcialmente coberta: o preço por litro sai do cupom, com a confirmação da pessoa.
 - Perguntar o lado da pista de cada posto cansa a pessoa: ela já disse que conta só os do sentido dela.
+- Dois postos da mesma bandeira e do mesmo preço no mesmo trecho são dois postos, até a pessoa dizer o contrário.
 - O horário do cupom é o do pagamento, não o da leitura da placa de outro posto.
 - A posição lida parece a do posto. Ela está à frente dele, porque o carro não para enquanto a pessoa avisa e a posição é consultada.
 

@@ -2105,6 +2105,7 @@ How these skills relate is in `README.md`, in this folder.
   - Lives at `.agents/skills/registrar-preco-de-combustivel/SKILL.md`
   - Reads the fuel price database from the data source the person gives, uses the database lookup skill when it is missing, and stops when it is not in the connected workspace
   - Treats every price the person tells as a station on the trip's side of the road without asking, and keeps a station the person calls out as on the opposite side out, because the person cannot turn to fill up there
+  - Creates one row per station notice and never merges two notices because the brand, price, or place candidate match, and links look-alike rows with a do-not-confuse-with relation in both directions
   - Marks a price read in passing without a photo, and records the order of the stations and the side of the road
   - Resolves the station by the name and tax number on the receipt, never by a web search, and keeps the brand apart
   - Computes the price per liter as the amount paid divided by the liters when the pump price is covered, and asks the person to confirm it
