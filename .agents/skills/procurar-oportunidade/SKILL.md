@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch
 compatibility: Precisa de internet. A busca semântica na lista de oportunidades usa notion-ai-search no servidor notion.
 metadata:
   author: jimmyandrade
-  version: "0.9.0"
+  version: "0.10.0"
   related:
     - criar-oportunidade
     - definir-grupo-de-oportunidades
@@ -69,6 +69,8 @@ Nenhuma: diga que ela não existe na lista de oportunidades. Mostre o link da li
 A entrada é o texto de um comunicado ou convite de evento, colado ou encaminhado, com nome e data, e a edição não existe: siga `criar-oportunidade` na mesma resposta, sem perguntar o que fazer. A chamada cadastra a edição e, se faltar o grupo, passa por `definir-grupo-de-oportunidades`, e nunca cria o grupo dentro da edição. Só pergunte se faltar o nome ou a data, e só o que falta. Quem manda ou encaminha o texto não é, por isso, a organização: pode estar só divulgando outra feira. Não grave quem encaminhou como organizador.
 
 A entrada é a pergunta se a oportunidade existe, sem o texto de um comunicado: pare na resposta e não crie.
+
+Com o nome da edição e a data na mão, ela existindo ou não, renomeie a sessão de conversa com a IA, o nome da conversa na lista do app, para o nome da edição e a data no formato da data com dia da semana, sem o grupo e sem a cidade. Só renomeie quando a sessão ainda leva o nome padrão do app: um nome que a pessoa deu fica como está. Não pergunte.
 
 ### Passo 5
 
@@ -142,6 +144,14 @@ Se você escrever a data numérica sem o dia da semana, ou repetir um dia da sem
 2. Escreva no formato da data com dia da semana em cada data.
 3. Se divergir, sinalize. Não crie nem altere.
 
+### Sessão com o nome padrão
+
+Se você achar ou não achar a edição e deixar a sessão com o nome padrão do app, a pessoa não acha a conversa pela oportunidade, e o PR de uma lição que sai dela passa a dar o nome.
+
+1. Renomeie a sessão para o nome da edição e a data com dia da semana, sem o grupo e sem a cidade.
+2. Só renomeie se a sessão ainda leva o nome padrão. Um nome dado pela pessoa fica.
+3. Não pergunte.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
@@ -158,8 +168,13 @@ Não existe na lista de oportunidades. Mostrei o link da lista e o que busquei. 
 
 01/09/2026 é terça-feira. Sinalizei a divergência. Na resposta, usei o formato da data com dia da semana. Não cadastrei até a pessoa confirmar a data.
 
+### o print de um comunicado chega numa sessão que ainda se chama New session
+
+A edição não existia. A sessão passou a se chamar Festival Rota Sul — terça-feira, 29/09/2026, sem o grupo e sem a cidade, e o cadastro seguiu `criar-oportunidade`. Se a pessoa já tivesse dado um nome à sessão, ele ficaria.
+
 ## Casos-limite
 
+- A sessão ainda leva o nome padrão do app e há nome e data: renomeie para o nome da edição e a data com dia da semana. Nome dado pela pessoa fica.
 - Várias páginas podem ser a edição: mostre título, data e link de cada uma. Não escolha. Não responda sim.
 - O nome bate e a data é outro mês ou outro ano: é outra edição.
 - A data da página está vazia: mostre a página e diga que a data está vazia. Não invente.
@@ -187,6 +202,7 @@ Não existe na lista de oportunidades. Mostrei o link da lista e o que busquei. 
 - Achar a edição parece o fim de um pedido confirmado. A inscrição segue `definir-inscricao` na mesma resposta.
 - Grupo vazio parece pendência desta busca. Esta habilidade não pede o grupo e não preenche.
 - A data numérica parece bastar. A resposta leva o dia da semana, calculado com a data, o horário e o fuso.
+- O nome padrão da sessão parece inofensivo. A pessoa procura a conversa pela oportunidade, então ela leva o nome da edição e a data.
 
 ## Scripts disponíveis
 
