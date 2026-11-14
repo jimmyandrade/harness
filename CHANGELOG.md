@@ -1,5 +1,39 @@
 # Changelog
 
+## [1.87.0](https://github.com/jimmyandrade/harness/compare/v1.86.1...v1.87.0) (2026-11-14)
+
+
+### Features
+
+* **acompanhar-retornos-pendentes:** record the new facts of a reply on the subject's page before answering ([#1171](https://github.com/jimmyandrade/harness/issues/1171)) ([1f180b3](https://github.com/jimmyandrade/harness/commit/1f180b38f6067d1bb5b8cff706c48cf0900287fb))
+* **acompanhar-veiculo:** record the protection terms and the decision on an add-on in the vehicle ([#1176](https://github.com/jimmyandrade/harness/issues/1176)) ([c338eda](https://github.com/jimmyandrade/harness/commit/c338eda9fc6950fa37a8909757bfb71706f23054))
+* always transcribe audio and attach the organizer maps in triar-conversas ([#1177](https://github.com/jimmyandrade/harness/issues/1177)) ([b5a93ae](https://github.com/jimmyandrade/harness/commit/b5a93ae3b0c6a6bce3597e32c2491a7e6fd8834c))
+* **conversar-no-whatsapp:** say which open order a message to a contact is about ([#1188](https://github.com/jimmyandrade/harness/issues/1188)) ([7ba0936](https://github.com/jimmyandrade/harness/commit/7ba09365fe92c6685aef13a09d2e38411d6e4e98))
+* **definir-empresa:** read the property descriptions of the list before registering ([#1183](https://github.com/jimmyandrade/harness/issues/1183)) ([9099df0](https://github.com/jimmyandrade/harness/commit/9099df065fb08a294da263995620c20bd353d465))
+* **definir-grupo-de-oportunidades:** search the web for the canonical name before asking ([#1173](https://github.com/jimmyandrade/harness/issues/1173)) ([cd6bc8c](https://github.com/jimmyandrade/harness/commit/cd6bc8cc3d1d0e721c31307b643ba48445f9a14b))
+* **definir-negociacao:** one negotiation per opportunity ([#1165](https://github.com/jimmyandrade/harness/issues/1165)) ([2efe14f](https://github.com/jimmyandrade/harness/commit/2efe14f351ddda9452505550c9433c1c4f679970))
+* **dividir-mensagem:** add the skill that splits a message, and read a reply as it was asked ([#1181](https://github.com/jimmyandrade/harness/issues/1181)) ([69904c8](https://github.com/jimmyandrade/harness/commit/69904c80a4f8df83ec324397744dc645f7596091))
+* **inscrever-na-oportunidade:** check the agenda, the registration and the structure before accepting an invitation ([#1164](https://github.com/jimmyandrade/harness/issues/1164)) ([3d8f440](https://github.com/jimmyandrade/harness/commit/3d8f4404989af33407a4bab55e0bef138aeca7d3))
+* mark where the triage stopped with a reading point instead of a reaction ([#1182](https://github.com/jimmyandrade/harness/issues/1182)) ([ab1e683](https://github.com/jimmyandrade/harness/commit/ab1e68326e9518089c9c3c6344e8c4a9169351ce))
+* **perfilar-tom-de-voz:** follow the contact's tone when drafting for someone without a profile ([#1179](https://github.com/jimmyandrade/harness/issues/1179)) ([fdff36b](https://github.com/jimmyandrade/harness/commit/fdff36bfad95c67051107154f6df961ada085283))
+* **pesquisar-compra:** register each company that appears as an option ([#1186](https://github.com/jimmyandrade/harness/issues/1186)) ([c785f0b](https://github.com/jimmyandrade/harness/commit/c785f0b8c261fb6ade9c2a33fb48842c91593917))
+* **procurar-oportunidade:** name the session after the opportunity when it still has the default name ([#1184](https://github.com/jimmyandrade/harness/issues/1184)) ([4c1c822](https://github.com/jimmyandrade/harness/commit/4c1c8222c6fb42fc5daea48ee32c127882ed25cd))
+* **prospectar-oportunidades:** assess the fit of an opportunity the person brought and record it in the curation notes ([#1178](https://github.com/jimmyandrade/harness/issues/1178)) ([2003090](https://github.com/jimmyandrade/harness/commit/2003090db5bf96f2c1ac313022fde8073a3be1c3))
+* **publicar-ata-de-reuniao:** add a skill that triages and publishes the minutes ([#1167](https://github.com/jimmyandrade/harness/issues/1167)) ([a78b440](https://github.com/jimmyandrade/harness/commit/a78b4404e83c2ff72f3d63312ce8e183c81d626c))
+* split the review and the schedule out of criar-oportunidade into two skills ([#1189](https://github.com/jimmyandrade/harness/issues/1189)) ([78697b9](https://github.com/jimmyandrade/harness/commit/78697b9d912fbdc2f2365a5a4205c1022524e39b))
+* **triar-conversas:** triage only the WhatsApp groups that carry the triage label ([#1196](https://github.com/jimmyandrade/harness/issues/1196)) ([784cc90](https://github.com/jimmyandrade/harness/commit/784cc90061b7db4193c26a774b6c568c6176cba9)), closes [#1195](https://github.com/jimmyandrade/harness/issues/1195)
+* **usar-whatsapp-web,redigir-com-tom-de-voz:** hand over the WhatsApp Web owner and look phrases up whole ([#1190](https://github.com/jimmyandrade/harness/issues/1190)) ([84d6400](https://github.com/jimmyandrade/harness/commit/84d64003beeab193727b3821bf9dbb62a7ca69fc))
+
+
+### Bug Fixes
+
+* create the missing company when registering a person in definir-pessoa ([#1172](https://github.com/jimmyandrade/harness/issues/1172)) ([a914484](https://github.com/jimmyandrade/harness/commit/a914484fdd21c200e45d117b20fba8dfe036b066))
+* **criar-enquete:** make the content model bank optional ([#1180](https://github.com/jimmyandrade/harness/issues/1180)) ([ee8c2d2](https://github.com/jimmyandrade/harness/commit/ee8c2d21ce963febd963aeb01c61755417eaf8ed))
+* **definir-empresa:** search again at the moment of creating the company ([#1194](https://github.com/jimmyandrade/harness/issues/1194)) ([ddc427e](https://github.com/jimmyandrade/harness/commit/ddc427e3815821b5ee6be07bb8a4f4e2a4b1ba36))
+* **definir-local-fisico:** check whether the name in the address is a district or a city before using it as the locality ([#1175](https://github.com/jimmyandrade/harness/issues/1175)) ([ab64c9f](https://github.com/jimmyandrade/harness/commit/ab64c9f9235ae3708190cdf34db6a71cfd2dd08c))
+* **rotular-item:** leave a broadcast to a group without an expected reply unlabeled by state ([#1191](https://github.com/jimmyandrade/harness/issues/1191)) ([2449c02](https://github.com/jimmyandrade/harness/commit/2449c029204da483e5d330eb791328b09b0fccc6))
+* search the web for the company city before using a broader place in definir-empresa ([#1174](https://github.com/jimmyandrade/harness/issues/1174)) ([91cb8d4](https://github.com/jimmyandrade/harness/commit/91cb8d453c8075b7d9e485f37537249b40543fa5))
+
 ## [1.86.1](https://github.com/jimmyandrade/harness/compare/v1.86.0...v1.86.1) (2026-11-13)
 
 
