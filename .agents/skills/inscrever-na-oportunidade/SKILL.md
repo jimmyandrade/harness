@@ -3,7 +3,7 @@ name: inscrever-na-oportunidade
 description: Preenche o cadastro ou o formulário que a organização de uma oportunidade pede para a inscrição, com os dados da empresa, no formato de cada campo, e envia só com o sim da pessoa. Usada quando a inscrição ou o cadastro de uma oportunidade está para ser feito. NÃO serve para registrar a inscrição no Notion, ler o regulamento nem escrever à organização.
 metadata:
   author: jimmyandrade
-  version: "0.1.4"
+  version: "0.2.0"
   related:
     - acompanhar-retornos-pendentes
     - analisar-regulamento-da-oportunidade
@@ -11,9 +11,11 @@ metadata:
     - definir-inscricao
     - definir-pessoa
     - definir-tarefa
+    - criar-oportunidade
     - evoluir-habilidade
     - acompanhar-itens-do-ponto-de-contato
     - procurar-inscricao
+    - procurar-oportunidade
     - redigir-com-tom-de-voz
 ---
 
@@ -24,6 +26,8 @@ metadata:
 Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo.
 ```yaml
 "Modo de aprendizado": "perguntar"
+# `Estrutura de exposição a perguntar` diz o que perguntar à organização sobre o que a marca pode levar, quando o convite não traz. Vazio, não pergunta.
+"Estrutura de exposição a perguntar": ""
 ```
 
 ## Instruções
@@ -33,6 +37,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 Reúna o link do formulário ou do cadastro, a oportunidade e a exigência de `analisar-regulamento-da-oportunidade`, com o prazo.
 Sem o link, peça à pessoa e pare. A inscrição que já foi feita e só falta registrar segue `definir-inscricao`.
 Prazo vencido: diga isso na hora, preencha mesmo assim e, se o envio for recusado, proponha perguntar à organização se ainda aceita.
+
+Um convite da organização por mensagem, que a marca vai aceitar, segue o mesmo caminho antes do rascunho da resposta: confira a agenda nos dias e nos horários do evento, e garanta a oportunidade cadastrada com os dados, por `procurar-oportunidade` e, sem cadastro, `criar-oportunidade`. Com `Estrutura de exposição a perguntar` preenchida e a estrutura fora do convite, a resposta de aceite pergunta isso à organização.
 
 ### Passo 2
 
