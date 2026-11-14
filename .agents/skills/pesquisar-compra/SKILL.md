@@ -4,9 +4,11 @@ description: Pesquisa o que comprar, cruza com despesas, estoque e bens que já 
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.3"
   related:
+    - conversar-no-whatsapp
     - definir-ativo-imobilizado
+    - definir-empresa
     - evoluir-habilidade
     - gerenciar-estoque
     - identificar-duplicata
@@ -78,11 +80,22 @@ A loja que bloqueia leitura automática não se contorna. Use o que a busca most
 
 Responda com `Quantidade de opções` opções, a recomendada primeiro. Para cada uma: o que atende, o que não está confirmado, o preço com fonte e data, e o link.
 Diga também a opção descartada e o motivo, para a pessoa não pesquisar de novo.
+Uma empresa só vale como descartada com a resposta dela. Sem resposta, diga que ela não foi contatada ou que está sem resposta, e liste quem foi contatada, quem respondeu e quem falta.
 Com o custo de hoje do Passo 2, mostre a conta de quando a compra se paga e marque o que é estimativa.
 Termine com a pergunta que ainda falta ao fabricante ou ao vendedor, quando houver, e com a decisão que cabe à pessoa.
 Não compre, não ponha no carrinho e não preencha dado de pagamento.
 
 ### Passo 6
+
+Cadastre na lista de empresas do mapeamento de dados do projeto cada empresa que apareceu como opção, recomendada ou descartada: a loja que vende, a gráfica, a prestadora do serviço. Não espere a pessoa decidir nem comprar. Assim a empresa se acha depois, sem pesquisar de novo.
+Siga `definir-empresa`, que busca antes por nome, variações e CNPJ e reaproveita a empresa que já existe. Grave só o que a página da própria empresa mostrou, como contato, endereço, horário e CNPJ. O que ficou sem confirmação, como se ela atende o que a pessoa precisa, vai nas notas, não nos campos de contato.
+Marketplace e loja grande entram como empresa quando o vendedor é a opção. O vendedor do anúncio é a empresa, não a plataforma.
+Abra o site da empresa e leia os links da página, como WhatsApp, telefone e redes, antes de dizer que não achou o contato. O trecho que a busca mostrou não basta.
+Antes de recomendar o contato com a empresa, veja se já houve conversa com ela, seguindo `conversar-no-whatsapp`. Diga o que o histórico já responde.
+Quando a compra é um serviço de terceiro e nenhuma empresa achada atende, não responda que não há opção. Siga para a próxima: a da lista de empresas, a que um contato indicou, a da web. Cadastre cada uma, veja se há conversa e, sem conversa, prepare o primeiro contato pelo WhatsApp, com o texto pronto e o sim da pessoa. Só pare quando uma empresa confirmar que atende ou a pessoa mandar parar.
+Na resposta, leve o link da página de cada empresa cadastrada.
+
+### Passo 7
 
 O registro da compra só acontece depois que a pessoa disser que comprou.
 
@@ -94,9 +107,9 @@ flowchart LR
   C -->|híbrido ou dúvida| P[Pergunte o destino antes]
 ```
 
-Esta habilidade não grava nada. Ela encaminha, e cada habilidade acima grava o que é dela.
+Do registro da compra, esta habilidade não grava nada. Ela encaminha, e cada habilidade acima grava o que é dela.
 
-### Passo 7
+### Passo 8
 
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
@@ -134,6 +147,22 @@ Se você tentar outro caminho depois que a loja bloqueia a leitura, a resposta p
 2. Diga que a página não abriu.
 3. Peça a descrição colada ou o link, ou a pergunta ao vendedor.
 
+### Empresa pesquisada sem cadastro
+
+Se você recomendar ou descartar uma empresa e não a cadastrar, na próxima busca ninguém a acha e a pessoa pesquisa de novo.
+
+1. Cadastre cada empresa que apareceu como opção, pelo Passo 6.
+2. Não espere a pessoa decidir nem comprar.
+3. Leve o link da página na resposta.
+
+### Contato dado como não achado
+
+Se você parar no trecho que a busca mostrou e disser que não achou o contato, a pessoa vai procurar o que estava na página da empresa.
+
+1. Abra o site da empresa.
+2. Leia os links da página, como WhatsApp, telefone e redes.
+3. Só então diga que o contato falta.
+
 ### Compra feita pela pesquisa
 
 Se você ficar no carrinho ou na tela de pagamento, a pessoa perde a decisão que era dela.
@@ -161,12 +190,15 @@ Li o estoque e achei um rolo do mesmo tecido com saldo. Mostrei o saldo e pergun
 - Uma lista de dados não está no workspace conectado: diga qual e siga com as outras.
 - A loja bloqueia a leitura: use o que a busca mostrou e peça a descrição.
 - Só existe uma opção que atende: diga isso e não complete a lista com opção que não atende.
-- A pessoa diz que comprou: encaminhe pelo Passo 6 e não grave aqui.
+- A pessoa diz que comprou: encaminhe pelo Passo 7 e não grave aqui.
+- A empresa já está na lista: reaproveite a página e complete só o que faltava. Não crie outra.
+- A lista de empresas não está no workspace conectado: diga isso e siga com a resposta. Não cadastre em outra lista.
 - O item é híbrido, entre estoque e bem durável: pergunte o destino antes de encaminhar.
 - É um serviço, não um produto: use os mesmos passos, com o escopo e o prazo no lugar dos requisitos do item.
 
 ## Pegadinhas
 
+- A empresa descartada parece não merecer cadastro. Ela volta numa próxima compra, e o motivo do descarte nas notas poupa a pesquisa.
 - A busca na web só abre página que apareceu num resultado. Um link que a pessoa colou ou que vem de um registro nosso pode falhar até ser achado numa busca.
 - Marketplace e loja grande costumam bloquear a leitura automática. A listagem de busca ainda mostra título e preço, mas não a ficha.
 - O mesmo modelo existe em voltagens e códigos diferentes, e o preço muda entre eles. Confirme o código completo e a voltagem antes de recomendar.

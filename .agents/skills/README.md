@@ -54,6 +54,7 @@ flowchart LR
     definir_composicao_textil["definir-composicao-textil"]
     definir_conta_bancaria["definir-conta-bancaria"]
     definir_convidado["definir-convidado"]
+    definir_cronograma["definir-cronograma"]
     definir_data_significativa["definir-data-significativa"]
     definir_empresa["definir-empresa"]
     definir_estampa["definir-estampa"]
@@ -97,6 +98,7 @@ flowchart LR
     definir_vocabulario["definir-vocabulario"]
     delegar_aviso_de_plataforma["delegar-aviso-de-plataforma"]
     descrever_habilidade_ou_schema["descrever-habilidade-ou-schema"]
+    dividir_mensagem["dividir-mensagem"]
     emitir_documento_oficial["emitir-documento-oficial"]
     entregar_rascunho_de_mensagem["entregar-rascunho-de-mensagem"]
     enviar_email["enviar-email"]
@@ -148,6 +150,7 @@ flowchart LR
     procurar_variacao_de_termo["procurar-variacao-de-termo"]
     projetar_caixa["projetar-caixa"]
     prospectar_oportunidades["prospectar-oportunidades"]
+    publicar_ata_de_reuniao["publicar-ata-de-reuniao"]
     publicar_resposta_de_revisao["publicar-resposta-de-revisao"]
     publicar_revisao_de_codigo["publicar-revisao-de-codigo"]
     reconhecer_imagem["reconhecer-imagem"]
@@ -157,6 +160,7 @@ flowchart LR
     registrar_resultados_da_validacao_na_tarefa["registrar-resultados-da-validacao-na-tarefa"]
     revisar_financas["revisar-financas"]
     revisar_habilidade["revisar-habilidade"]
+    revisar_oportunidade["revisar-oportunidade"]
     revisar_uso_do_tempo["revisar-uso-do-tempo"]
     rotular_item["rotular-item"]
     sincronizar_cronograma["sincronizar-cronograma"]
@@ -203,7 +207,11 @@ flowchart LR
   acompanhar_resposta_no_whatsapp --> rotular_item
   acompanhar_resposta_no_whatsapp --> usar_whatsapp_web
   acompanhar_retornos_pendentes --> acompanhar_resposta_no_whatsapp
+  acompanhar_retornos_pendentes --> definir_hospedagem
+  acompanhar_retornos_pendentes --> definir_negociacao
+  acompanhar_retornos_pendentes --> definir_obrigacao_financeira
   acompanhar_retornos_pendentes --> definir_rotina
+  acompanhar_retornos_pendentes --> definir_tarefa
   acompanhar_retornos_pendentes --> enviar_email
   acompanhar_retornos_pendentes --> organizar_emails
   acompanhar_retornos_pendentes --> rotular_item
@@ -280,6 +288,7 @@ flowchart LR
   conversar_no_whatsapp --> definir_tarefa
   conversar_no_whatsapp --> definir_viagem
   conversar_no_whatsapp --> definir_vocabulario
+  conversar_no_whatsapp --> dividir_mensagem
   conversar_no_whatsapp --> enviar_email
   conversar_no_whatsapp --> enviar_imagem_no_whatsapp
   conversar_no_whatsapp --> escrever_link
@@ -319,15 +328,15 @@ flowchart LR
   criar_habilidade --> descrever_habilidade_ou_schema
   criar_habilidade --> medir_habilidade
   criar_habilidade --> testar_habilidade
-  criar_oportunidade --> criar_ideia_de_conteudo
+  criar_oportunidade --> definir_cronograma
   criar_oportunidade --> definir_empresa
   criar_oportunidade --> definir_grupo_de_oportunidades
   criar_oportunidade --> definir_inscricao
   criar_oportunidade --> definir_local_fisico
   criar_oportunidade --> definir_localidade_geografica
-  criar_oportunidade --> definir_tarefa
   criar_oportunidade --> organizar_emails
   criar_oportunidade --> procurar_oportunidade
+  criar_oportunidade --> revisar_oportunidade
   criar_oportunidade --> triar_conversas
   criar_ponto_de_contato --> criar_oportunidade
   criar_ponto_de_contato --> definir_agenda
@@ -402,6 +411,13 @@ flowchart LR
   definir_convidado --> procurar_agenda
   definir_convidado --> revisar_uso_do_tempo
   definir_convidado --> sincronizar_cronograma
+  definir_cronograma --> criar_oportunidade
+  definir_cronograma --> criar_ponto_de_contato
+  definir_cronograma --> definir_agenda
+  definir_cronograma --> definir_jornada_de_producao
+  definir_cronograma --> definir_viagem
+  definir_cronograma --> procurar_oportunidade
+  definir_cronograma --> sincronizar_cronograma
   definir_data_significativa --> procurar_data_significativa
   definir_empresa --> definir_grafia
   definir_empresa --> definir_perfil_social
@@ -514,6 +530,7 @@ flowchart LR
   definir_registro_de_reuniao --> mesclar_registro
   definir_registro_de_reuniao --> preparar_tarefa_do_pull_request
   definir_registro_de_reuniao --> procurar_agenda
+  definir_registro_de_reuniao --> publicar_ata_de_reuniao
   definir_reserva --> definir_agenda
   definir_reserva --> definir_agenda_de_popstar
   definir_reserva --> revisar_uso_do_tempo
@@ -566,6 +583,8 @@ flowchart LR
   descrever_habilidade_ou_schema --> criar_pull_request
   descrever_habilidade_ou_schema --> revisar_habilidade
   descrever_habilidade_ou_schema --> testar_habilidade
+  dividir_mensagem --> comunicar_novidade_do_produto
+  dividir_mensagem --> conversar_no_whatsapp
   entregar_rascunho_de_mensagem --> enviar_mensagem_no_slack
   enviar_email --> acompanhar_retornos_pendentes
   enviar_email --> definir_pessoa
@@ -742,7 +761,9 @@ flowchart LR
   pedir_revisao_de_pr_no_slack --> registrar_resultados_da_validacao_na_tarefa
   perfilar_tom_de_voz --> definir_vocabulario
   perfilar_tom_de_voz --> redigir_com_tom_de_voz
+  pesquisar_compra --> conversar_no_whatsapp
   pesquisar_compra --> definir_ativo_imobilizado
+  pesquisar_compra --> definir_empresa
   pesquisar_compra --> gerenciar_estoque
   pesquisar_compra --> identificar_duplicata
   pesquisar_compra --> lancar_despesa_da_empresa
@@ -801,13 +822,15 @@ flowchart LR
   projetar_caixa --> revisar_financas
   prospectar_oportunidades --> criar_ideia_de_conteudo
   prospectar_oportunidades --> criar_oportunidade
+  prospectar_oportunidades --> definir_cronograma
   prospectar_oportunidades --> definir_grupo_de_oportunidades
   prospectar_oportunidades --> definir_inscricao
   prospectar_oportunidades --> definir_rotina
   prospectar_oportunidades --> definir_tarefa
   prospectar_oportunidades --> definir_viagem
   prospectar_oportunidades --> procurar_oportunidade
-  prospectar_oportunidades --> sincronizar_cronograma
+  publicar_ata_de_reuniao --> definir_pessoa
+  publicar_ata_de_reuniao --> definir_registro_de_reuniao
   publicar_resposta_de_revisao --> atender_revisao_de_pull_request
   publicar_resposta_de_revisao --> definir_pessoa
   publicar_resposta_de_revisao --> escrever_link
@@ -844,6 +867,11 @@ flowchart LR
   revisar_habilidade --> criar_pull_request
   revisar_habilidade --> descrever_habilidade_ou_schema
   revisar_habilidade --> testar_habilidade
+  revisar_oportunidade --> criar_ideia_de_conteudo
+  revisar_oportunidade --> criar_oportunidade
+  revisar_oportunidade --> definir_grupo_de_oportunidades
+  revisar_oportunidade --> definir_tarefa
+  revisar_oportunidade --> procurar_oportunidade
   revisar_uso_do_tempo --> definir_agenda
   revisar_uso_do_tempo --> definir_agenda_de_popstar
   revisar_uso_do_tempo --> procurar_agenda
@@ -884,6 +912,7 @@ flowchart LR
   triar_conversas --> procurar_oportunidade
   triar_conversas --> procurar_pedido_de_revisao
   triar_conversas --> procurar_tarefa
+  triar_conversas --> reconhecer_imagem
   triar_conversas --> rotular_item
   triar_conversas --> transcrever_audio_e_video
   triar_conversas --> usar_whatsapp_web

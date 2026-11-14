@@ -1,11 +1,11 @@
 ---
 name: prospectar-oportunidades
-description: Prospecta oportunidades novas, como feiras, editais e eventos, na localidade certa, escolhida entre a da viagem ativa, a de maior prioridade e a sede. Usada quando a pessoa pede para procurar oportunidades, quando uma rotina de prospecção roda ou quando uma viagem se aproxima. NÃO serve para cadastrar a edição, saber se ela já existe, inscrever nem cadastrar a viagem.
-allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-pages
+description: Prospecta oportunidades novas, como feiras, editais e eventos, na localidade certa, escolhida entre a da viagem ativa, a de maior prioridade e a sede, e avalia se uma que a pessoa trouxe combina com o negócio. Usada ao procurar oportunidades, ao perguntar se uma combina, em rotina ou quando uma viagem se aproxima. NÃO serve para só cadastrar a edição, saber se ela já existe, inscrever nem cadastrar a viagem.
+allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-pages notion:notion-update-page
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.1"
   related:
     - criar-ideia-de-conteudo
     - criar-oportunidade
@@ -13,10 +13,10 @@ metadata:
     - definir-inscricao
     - definir-rotina
     - definir-tarefa
+    - definir-cronograma
     - definir-viagem
     - evoluir-habilidade
     - procurar-oportunidade
-    - sincronizar-cronograma
 ---
 
 # Prospectar oportunidades
@@ -49,6 +49,8 @@ Quando um dos dois não está nos parâmetros, procure no workspace conectado um
 
 As listas e as propriedades vêm do mapeamento de dados do projeto, no workspace conectado: oportunidades, grupos, localidades, viagens e pontos de contato. Se uma lista não estiver nessa conexão, pare. Não use a lista de outro workspace.
 
+A execução parte de uma busca ou de um candidato que a pessoa trouxe, como um print, um link ou uma edição já cadastrada. Com candidato trazido, não escolha localidade nem pesquise grupos: vá ao Passo 5 só com ele, e o teto de candidatos não vale. A data vem do candidato. Sem data ou sem ano em fonte confiável, pergunte.
+
 ### Passo 2
 
 Escolha a localidade-alvo.
@@ -80,9 +82,11 @@ Pesquise na web as edições futuras do grupo na localidade-alvo, até o `Máxim
 
 Para cada candidato, até o `Máximo de candidatos por execução`, compare com o playbook e com o canvas. O que o playbook veta cai fora, com o motivo na resposta. Antes de cadastrar, siga `procurar-oportunidade`: se a edição existe, complemente o que faltar sem criar outra, e outra data do mesmo grupo é outra edição. Se não existe, siga `criar-oportunidade`. A decisão humana não é sua: deixe o valor inicial da lista.
 
+Grave a leitura de fit de cada candidato que passou nas notas de curadoria da edição, como síntese permanente: o que combina e o que não combina com o playbook e com o canvas, sem checklist. Edição que ainda não existe é cadastrada antes, por `criar-oportunidade`. Candidato trazido que o playbook veta: diga o motivo, grave-o nas notas se a edição já existe e não cadastre sem pedido da pessoa.
+
 ### Passo 6
 
-Quando a localidade-alvo veio de uma viagem e a oportunidade tem vários dias, calcule as datas em comum com a viagem. Tire os dias de feira dessa viagem, que ficam no cronograma e nos pontos de contato. Registre só as atividades dessas datas, cada uma como marco do cronograma ligado à oportunidade, seguindo `sincronizar-cronograma`. Sem data em comum, diga que a edição cai fora da viagem e não registre programação.
+Quando a localidade-alvo veio de uma viagem e a oportunidade tem vários dias, calcule as datas em comum com a viagem. Tire os dias de feira dessa viagem, que ficam no cronograma e nos pontos de contato. Registre só as atividades dessas datas, cada uma como marco do cronograma ligado à oportunidade, seguindo `definir-cronograma`. Sem data em comum, diga que a edição cai fora da viagem e não registre programação.
 
 ### Passo 7
 
@@ -115,6 +119,14 @@ Se você tratar um grupo sem prioridade como importante por parecer relevante, a
 1. Trate como sem prioridade.
 2. Registre na resposta quando isso pesar.
 
+### Candidato trazido tratado como busca
+
+Se você pesquisar localidade e grupos quando a pessoa trouxe uma feira e perguntou se combina, a execução gasta buscas e devolve outros candidatos no lugar da resposta.
+
+1. Pule os Passos 2 a 4 e compare só esse candidato com o playbook e com o canvas.
+2. Grave a leitura de fit nas notas de curadoria da edição.
+3. Deixe a decisão humana com a pessoa.
+
 ### Programação da edição inteira
 
 Se você registrar a programação de todos os dias de uma edição de vários dias, o cronograma enche de atividades a que ninguém vai.
@@ -131,7 +143,14 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 A localidade-alvo é São Paulo, porque a viagem está na janela. O festival de 12 a 22 de novembro foi cadastrado, e a programação só dos dias 12, 13 e de 17 a 22 foi para o cronograma, sem os dias de feira. A resposta listou cada candidato com as datas em comum e perguntou se a pessoa topa.
 
+### a pessoa manda o print de uma feira do bairro e pergunta se combina com a oRnii
+
+Não escolhi localidade nem pesquisei grupos. A feira já estava cadastrada. Comparei com o playbook e com o canvas e gravei a leitura de fit nas notas de curadoria da edição. A resposta trouxe uma linha com as datas com dia da semana, por que combina e o que falta para decidir. A decisão humana ficou com a pessoa.
+
 ## Casos-limite
+
+- A pessoa trouxe uma feira, um edital ou um evento e quer saber se combina: avalie só esse candidato, sem busca, e grave a leitura nas notas de curadoria.
+- O candidato trazido não tem data ou ano em fonte confiável: pergunte antes de avaliar.
 
 - A localidade-alvo é vetada: não procure, diga o motivo e pare.
 - Sem viagem e sem localidade prioritária: use a `Localidade-sede`.
@@ -140,7 +159,7 @@ A localidade-alvo é São Paulo, porque a viagem está na janela. O festival de 
 - A edição já existe: complemente sem criar outra.
 - A data vem sem o ano em fonte confiável: não cadastre e peça a confirmação.
 - Pedido para saber se uma oportunidade já existe: use `procurar-oportunidade`.
-- Pedido para cadastrar uma edição já conhecida: use `criar-oportunidade`.
+- Pedido só para cadastrar uma edição já conhecida, sem perguntar se combina: use `criar-oportunidade`.
 
 ## Pegadinhas
 
@@ -148,6 +167,7 @@ A localidade-alvo é São Paulo, porque a viagem está na janela. O festival de 
 - A prioridade da localidade e a prioridade de busca do grupo são duas. A primeira diz se procura ali, a segunda diz por onde começar.
 - O resultado mais recente da busca parece o mais importante. A fila é a prioridade do grupo.
 - Os dias de feira parecem tempo livre. Eles ficam fora da programação registrada.
+- A pergunta "combina com o negócio?" parece pedir uma busca nova. Com o candidato na mão, a skill só o compara com o playbook e com o canvas.
 
 ## Scripts disponíveis
 

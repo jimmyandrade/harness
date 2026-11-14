@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.1"
+  version: "0.2.0"
   related:
     - definir-composicao-textil
     - definir-tecido
@@ -27,8 +27,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Banco de estampas": ""
 # `Campo da foto da estampa`: campo de arquivo que guarda a foto da estampa.
 "Campo da foto da estampa": ""
-# `Data de corte da cobrança`: a estampa criada antes dela não é cobrada do que falta. Vazia, toda estampa é cobrada.
-"Data de corte da cobrança": ""
+# `Data de corte para cadastro completo`: a estampa criada antes dela não é cobrada do que falta. Vazia, toda estampa é cobrada.
+"Data de corte para cadastro completo": ""
 ```
 
 ## Instruções
@@ -55,7 +55,7 @@ Outra estampa na variante é outro tecido: cadastre a estampa no outro tecido e 
 
 ### Passo 4
 
-Cobre da pessoa o que falta de cada estampa nova. Estampa nova é a criada depois de `Data de corte da cobrança`. Pergunte o nome, o motivo e o que mais o banco pede, e exija a foto. Não invente o que a foto não mostra.
+Cobre da pessoa o que falta de cada estampa nova. Estampa nova é a criada depois de `Data de corte para cadastro completo`. Pergunte o nome, o motivo e o que mais o banco pede, e exija a foto. Não invente o que a foto não mostra.
 
 Sem a foto, a estampa fica pendente: diga o que falta. A estampa criada antes da data de corte não é cobrada e o que falta nela não vira pendência, porque muitas estampas antigas não têm foto isolada.
 

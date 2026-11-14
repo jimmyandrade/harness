@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.16.5"
+  version: "0.17.0"
   related:
     - definir-empresa
     - definir-grafia
@@ -93,11 +93,15 @@ Todo perfil social que a pessoa informar, em link, print ou handle, como o Linke
 
 Não grave o print no corpo.
 
+Antes de gravar, leia a descrição de cada propriedade no esquema da lista: ela diz o que é obrigatório e o que não vai em cada campo. Preencha a localidade com a cidade que a fonte sustenta, como a do perfil comercial do contato.
+
 Grave como confirmado só o que veio direto da pessoa que usa a habilidade ou de uma fonte que respondeu com certeza. Nunca invente papel, time nem apelido. Sem e-mail em nenhuma fonte, o e-mail fica como pendência no registro.
 
 Antes de encerrar, passe por cada propriedade da lista de pessoas e preencha a que uma fonte responde: telefone, e-mail, as empresas relacionadas e as que ela possui, os perfis sociais e os canais, a localidade, o tipo de público, as variações de grafia e o campo de não confundir com quando há homônimo na lista.
 
 A empresa segue `identificar-duplicata` e `definir-empresa`, e o perfil segue `definir-perfil-social`. Ser dona da empresa só se grava quando a pessoa ou uma fonte diz isso. O nome que o WhatsApp mostra só indica a empresa relacionada.
+
+A empresa que o cadastro cita, como a do atendente ou a que o contato representa, e que `identificar-duplicata` não acha na lista de empresas, é cadastrada por `definir-empresa` na mesma rodada, sem perguntar, e a pessoa entra nas pessoas responsáveis dela. Só pergunte o dado que as fontes não respondem. O nome da empresa nas observações não substitui a página, e a resposta não termina em "não existe" sem a página criada.
 
 O que nenhuma fonte responde fica pendente, e a resposta diz qual propriedade e por quê. Quando algo precisa ir à pessoa, use o canal que já existe: sem e-mail e com WhatsApp, mande pelo WhatsApp, por `conversar-no-whatsapp`. Só sem nenhum canal, peça o contato.
 Uma transcrição errada do nome, como a de uma reunião transcrita por voz, que a pessoa confirma ser errada diante do nome canônico, entra nas variações de grafia, com a data e a fonte. O nome completo fica com o canônico, e a transcrição não se descarta nem vira o nome.
@@ -137,6 +141,14 @@ Se você criar a página só com o nome, a pessoa fica sem o telefone, a empresa
 1. Passe por cada propriedade da lista antes de encerrar.
 2. Preencha as que uma fonte responde e deixe a pendência dita no relatório, com a propriedade e o motivo.
 3. Telefone de quem tem conversa no WhatsApp se lê nos dados do contato, também de um membro de grupo: peça a leitura à sessão do WhatsApp Web.
+
+### Empresa citada e não cadastrada
+
+Se você gravar o nome da empresa só nas observações, ou disser que ela não existe na lista, a pessoa fica sem a empresa relacionada e o próximo cadastro repete a pergunta.
+
+1. Busque a empresa por `identificar-duplicata`.
+2. Sem equivalente, cadastre por `definir-empresa` na mesma rodada, sem perguntar, com a pessoa nas pessoas responsáveis.
+3. Leia a página da empresa e a da pessoa de volta, e diga o que ficou pendente.
 
 ### Desambiguação pedida antes da busca
 
@@ -225,6 +237,10 @@ Busquei na lista de pessoas e não havia Ana Exemplo. Criei a página com o nome
 
 Cadastrei a página com o nome completo Ana Sousa. Gravei Ana Souza nas variações de grafia, como transcrição errada de uma reunião, com a data. Não usei a transcrição como nome.
 
+### cadastre a Bia, atendente da Seguradora Exemplo, que não está na lista de empresas
+
+Busquei a pessoa e a empresa, e nenhuma existia. Criei a página da Bia e, por `definir-empresa`, a da Seguradora Exemplo, com a Bia nas pessoas responsáveis. Li as duas de volta e disse que a cidade da empresa ficou pendente.
+
 ### a Tula cuida dos recebimentos da Brasil 75 e o Thi só é informado
 
 A Tula não estava na lista de pessoas. Criei a página dela, com o papel nas observações, e a coloquei nas pessoas responsáveis da empresa do local e da empresa que recebe. O papel de cada um entrou nas notas das duas empresas, e o Thi ficou com a nota de que só é informado. Li as páginas de volta e disse o que gravei.
@@ -232,6 +248,7 @@ A Tula não estava na lista de pessoas. Criei a página dela, com o papel nas ob
 ## Casos-limite
 
 - A lista de pessoas não está no workspace conectado: pare.
+- A empresa citada não está na lista de empresas: cadastre por `definir-empresa` na mesma rodada, sem perguntar. Não deixe só o nome nas observações.
 - Já existe uma pessoa: use essa página. Não crie outra.
 - Há mais de uma: liste. Não crie.
 - O print traz handle e nome: o nome fica aqui. O perfil segue `definir-perfil-social`.
@@ -243,6 +260,7 @@ A Tula não estava na lista de pessoas. Criei a página dela, com o papel nas ob
 
 ## Pegadinhas
 
+- A empresa citada parece só contexto da pessoa. Sem página na lista de empresas, ela é cadastrada por `definir-empresa` na mesma rodada.
 - O número do WhatsApp parece o telefone completo. Num celular do Brasil, ele pode vir sem o 9 depois do DDD, e a loja recusa o número de 8 dígitos.
 - A linha do tempo do cliente na loja parece o lugar da conversa. A API da loja pode não gravar comentário nela: a conversa fica na página da pessoa.
 

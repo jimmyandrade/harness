@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.4"
+  version: "0.5.1"
   related:
     - definir-grafia
     - definir-perfil-social
@@ -40,6 +40,7 @@ flowchart LR
 ### Passo 2
 
 Antes de criar, use `identificar-duplicata` com nome, variações e CNPJ disponíveis. Não trate um novo nome no comprovante como empresa nova sem essa comparação.
+Repita a busca no instante de criar, no mesmo passo e depois de qualquer pesquisa na web. Outra sessão ou pessoa pode ter cadastrado a mesma empresa enquanto você pesquisava, e uma busca feita minutos antes não vale.
 
 ```mermaid
 flowchart LR
@@ -59,6 +60,10 @@ Uma compra pontual, como uma refeição em restaurante, não exige conhecer o do
 
 O cadastro mínimo de recebedora financeira não valida a fornecedora para relacionamento comercial. Nele, site e razão social completa ausentes ficam como pendências, sem impedir o vínculo com o pagamento. O contato responsável ausente só vira pendência quando há relacionamento continuado. Não invente esses dados nem trate a instituição de pagamento como recebedora.
 
+Quando a lista exige a cidade da empresa e ninguém a informou, pesquise na internet, no site oficial e em fontes confiáveis, antes de usar uma localidade mais ampla. Empresa com uma só sede ou um só endereço: relacione essa cidade. Empresa que atua em várias cidades, com unidades ou escritórios regionais: relacione a localidade mais ampla que as cobre, como o país, e diga nas notas que é de propósito e quais fontes mostraram as unidades.
+
+Não escolha a sede só por ser a mais citada. Nome parecido de outra empresa, como uma filial ou uma entidade de outro porte, não vale como fonte: registre a distinção em `Não confundir com` ou nas notas.
+
 A pessoa responsável é, de preferência, gerente, representante comercial, vendedora, dona ou contato do atendimento. Mais de um registro da mesma pessoa segue o flowchart do Passo 1.
 
 Quando o conector do Notion falta ou falha, siga a ordem de meios das instruções do projeto e só peça o dado à pessoa depois de esgotar os meios que a sessão tem.
@@ -69,9 +74,19 @@ Crie a página numa visão sem agrupamento, para o tipo não nascer preenchido. 
 
 ### Passo 3
 
+Antes de gravar, leia a descrição de cada propriedade no esquema da lista: ela diz o que é obrigatório, como a cidade, e o que não vai em cada campo, como o telefone fixo no campo do WhatsApp ou o telefone nas notas. Uma propriedade obrigatória sem dado exato recebe o que a fonte sustenta, como o estado quando a cidade não aparece, e a resposta diz que foi inferido. A negociação já cadastrada com a empresa liga-se à empresa nos negócios em que ela foi abordada.
+
 Quando houver pessoa identificada, relacione-a nas pessoas responsáveis. Os donos são outra relação e não substituem essa. Quem verifica é usuário do workspace e não substitui essa. No tipo de público, acrescente a opção de fornecedor quando fizer sentido. Não apague os valores que já estão. Com pessoa vinculada, abra o registro dela e confira as empresas relacionadas. Se a empresa já apareceu, pare. Se não apareceu, relacione. Não relacione de novo. As notas qualificam o papel, o contexto, a pendência ou a certeza. A nota não substitui a relação. Telefone, WhatsApp e endereço não entram na nota.
 
 ## Problemas comuns
+
+### Empresa criada com a busca antiga
+
+Se você criar a página confiando numa busca feita antes da pesquisa na web, outra sessão pode já ter cadastrado a mesma empresa e a lista ganha uma duplicata.
+
+1. Busque de novo pelo nome e pelas variações, no mesmo passo em que cria.
+2. Achada, atualize essa página e não crie outra.
+3. Duas páginas já criadas: pare e diga qual fica, sem apagar nenhuma.
 
 ### Empresa criada sem buscar o tipo de local
 
@@ -80,6 +95,14 @@ Se você buscar só pelo nome da marca, a empresa que já existe como local de f
 1. Busque pelo nome e pelo tipo de local antes de criar.
 2. Empresa já cadastrada com outro tipo: vincule a pessoa a ela, sem criar outra.
 3. Releia as empresas relacionadas na pessoa depois de vincular.
+
+### Cidade preenchida sem pesquisar
+
+Se você gravar o país, ou chutar uma cidade, sem pesquisar, a empresa fica com a localidade errada ou genérica e ninguém sabe se foi de propósito.
+
+1. Pesquise a cidade no site oficial e em fontes confiáveis.
+2. Uma só sede: relacione essa cidade. Várias cidades: relacione a localidade mais ampla e diga nas notas o motivo e a fonte.
+3. Não use uma empresa de nome parecido como fonte.
 
 ### Pessoa só na nota
 
@@ -105,8 +128,13 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 Associei a pessoa nas pessoas responsáveis. A nota ficou com o papel. O tipo de público ganhou a opção de fornecedor. As empresas relacionadas na pessoa mostraram a empresa.
 
+### cadastre a empresa de proteção veicular onde a atendente trabalha, sem cidade
+
+Pesquisei a cidade no site oficial e em uma matéria sobre a associação. Ela tem sede em uma capital e unidades em outras regiões, então relacionei o país e escrevi nas notas o motivo e as fontes. Uma entidade de nome parecido, de veículos pesados, ficou fora, com a distinção nas notas.
+
 ## Casos-limite
 
+- A cidade da empresa não foi informada: pesquise na internet antes de usar uma localidade mais ampla, como o Passo 2 manda. Várias cidades: localidade mais ampla, com o motivo nas notas.
 - A exigência de contato segue o flowchart do Passo 2. Não invente o nome nem confunda contato operacional com dono.
 - Cadastro mínimo de recebedora: registre como pendência o que faltar, salvo o contato numa compra pontual, e devolva a página para vincular o pagamento. Não dê a validação comercial por concluída.
 - A pessoa já existe: aponte o registro. Não crie outra.
@@ -119,6 +147,7 @@ Associei a pessoa nas pessoas responsáveis. A nota ficou com o papel. O tipo de
 
 - Ter recebido uma compra não torna o estabelecimento um relacionamento comercial continuado. O contato nominal não é requisito universal do cadastro.
 
+- A cidade desconhecida parece pedir o país direto. Pesquise antes, e deixe o motivo nas notas quando a empresa atua em várias cidades.
 - Os donos parecem a pessoa responsável. É outra relação. A pessoa responsável fica nas pessoas responsáveis.
 - Quem verifica parece o contato da fornecedora. É um usuário do workspace, não uma página da lista de pessoas.
 - As pessoas responsáveis parecem preencher as empresas relacionadas. São relações diferentes. Confira a pessoa. Se a empresa não apareceu, relacione.

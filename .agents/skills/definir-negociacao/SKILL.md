@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.2"
+  version: "0.2.0"
   related:
     - definir-agenda
     - evoluir-habilidade
@@ -48,7 +48,7 @@ flowchart LR
 
 ### Passo 2
 
-Com negócio, ache a negociação da empresa e da oportunidade antes de criar outra. Ligue a página à empresa abordada, à pessoa abordada e à oportunidade. Se uma segunda pessoa da mesma empresa falar, confira no schema se a pessoa abordada aceita mais de uma antes de somar. Se não aceitar, pergunte.
+Com negócio, a negociação é uma por oportunidade, a edição com data. Ache a negociação dessa oportunidade antes de criar outra. Uma edição nova da mesma empresa e da mesma pessoa é negociação nova: ela cita o link da anterior e não herda o histórico, que fica na antiga. Ligue a página à empresa abordada, à pessoa abordada e a uma oportunidade só. Se uma segunda pessoa da mesma empresa falar, confira no schema se a pessoa abordada aceita mais de uma antes de somar. Se não aceitar, pergunte.
 
 ### Passo 3
 
@@ -98,6 +98,14 @@ Se você enviar a mensagem e só oferecer registrar a troca, a negociação fica
 2. Diga na resposta o que registrou, com o link, e o que não registrou.
 3. Um pagamento já registrado como despesa entra no comentário com o link da despesa.
 
+### Negociação que junta edições
+
+Se você gravar a conversa de uma edição nova na negociação de outra, o histórico, a taxa, o prazo e a decisão de duas oportunidades ficam misturados.
+
+1. Procure a negociação da oportunidade, não só a da empresa.
+2. Sem ela, crie uma nova, ligada só a essa oportunidade, com o link da anterior.
+3. Não mova o histórico antigo para a nova.
+
 ### Divergência escondida
 
 Se você escolher uma das fontes quando elas divergem, a pessoa chega na hora errada.
@@ -127,7 +135,7 @@ Conferi se a pessoa abordada aceita mais de uma pessoa antes de somar Isadora Ri
 
 ## Casos-limite
 
-- A negociação não existe: busque pela empresa e pela oportunidade antes de criar, e só crie quando há negócio.
+- A negociação não existe, ou é de outra edição da mesma empresa: busque pela empresa e pela oportunidade antes de criar, e só crie quando há negócio.
 - A conversa é um convite, um agradecimento ou um café, sem negócio: grave na discussão da página da pessoa. Não crie negociação.
 - A conversa não tem data: use `Data aproximada:` e diga de onde veio.
 - Várias mensagens no mesmo dia e assunto: um comentário só, com os horários.

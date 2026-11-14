@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.7.0"
   aliases:
     - definir-grupo
   related:
@@ -47,7 +47,11 @@ Ao criar ou renomear, o título do grupo fica sem ano, sem número de edição e
 
 ### Passo 4
 
-Antes de criar, busque título exato e aproximado, nome canônico, aliases, organizador, empresa ou local padrão, perfil oficial, link, nome da edição, tema, família e edições anteriores, com e sem acento, pontuação, sigla, barra, parêntese e palavra genérica. Palavra genérica sozinha não é o grupo. Mesmo organizador, empresa ou local, perfil oficial ou família: use esse candidato. Não crie outro. Se o candidato parecer o certo, a edição aponta para ele pelo grupo da edição, no máximo um. Dúvida: pare e pergunte. Crie só com evidência de outro grupo, programa, evento-marca ou família. Aí grave os aliases, um nome por linha, e só então a edição entra.
+Antes de criar, busque título exato e aproximado, nome canônico, aliases, organizador, empresa ou local padrão, perfil oficial, link, nome da edição, tema, família e edições anteriores, com e sem acento, pontuação, sigla, barra, parêntese e palavra genérica. Palavra genérica sozinha não é o grupo. Mesmo organizador, empresa ou local, perfil oficial ou família: use esse candidato. Não crie outro. Se o candidato parecer o certo, a edição aponta para ele pelo grupo da edição, no máximo um.
+
+Dúvida sobre o nome canônico, o organizador ou a família: antes de perguntar, pesquise na internet o site oficial, o perfil social, a página de ingressos e a imprensa do evento e do local, com a grafia do cartaz e as variações, e cite o que achou. Pergunte só o que a pesquisa não resolveu, trazendo a evidência e o que não achou.
+
+Crie só com evidência de outro grupo, programa, evento-marca ou família. Aí grave os aliases, um nome por linha, e só então a edição entra.
 
 ### Passo 5
 
@@ -86,8 +90,16 @@ Mostre o título do grupo e o link. Liste os valores que ficaram sem propriedade
 Se você criar outro grupo porque o título não bateu, ou criar na dúvida, a família se parte.
 
 1. Busque título, nome canônico, aliases, organizador, local, perfil, link, família e edições anteriores.
-2. Candidato: use. Dúvida: pergunte.
+2. Candidato: use. Dúvida: pesquise o nome canônico na internet e só então pergunte o que sobrou.
 3. Crie só com evidência de outro grupo, programa, evento-marca ou família.
+
+### Pergunta sem pesquisar
+
+Se você perguntar o nome do grupo antes de pesquisar na internet, a pessoa precisa mandar a pesquisa que a skill já podia fazer.
+
+1. Pesquise o site oficial, o perfil social, a página de ingressos e a imprensa do evento e do local, com a grafia do cartaz e as variações.
+2. Cite o que achou e o que não achou, com os links.
+3. Pergunte só o que a pesquisa não resolveu, como duas séries que se juntam numa edição.
 
 ### Duplicata deixada
 
@@ -177,6 +189,10 @@ religuei a edição ao grupo canônico. Mesclei o que era útil. Pedi confirmaç
 
 busquei as edições com data e sem grupo. Liguei cada uma ao grupo achado, ou criado com evidência. Listei as ligadas e as que ficaram sem grupo por dúvida.
 
+### cadastre a edição de 12 de dezembro de 2026. O cartaz junta a festa anual do Espaço Exemplo e a Feira Convidada, e a lista não tem grupo para nenhuma.
+
+pesquisei na internet. A festa anual do Espaço Exemplo tem edições anteriores publicadas em 2024 e 2025, no site do espaço e na página de ingressos. A Feira Convidada não aparece fora do cartaz. O grupo é a festa do Espaço Exemplo, sem ano, e a Feira Convidada entrou nos aliases. Citei os links e disse o que não achei. Não precisei perguntar.
+
 ### Considerar grupos de oportunidades é não. Crie o grupo deste evento.
 
 este negócio não usa grupos de oportunidades. Parei sem criar.
@@ -184,7 +200,8 @@ este negócio não usa grupos de oportunidades. Parei sem criar.
 ## Casos-limite
 
 - `Considerar grupos de oportunidades` é `não`: diga que este negócio não usa grupos e pare.
-- O evento já tem grupo, ou um candidato com o mesmo organizador, local, perfil ou família: use. Não crie outro. Dúvida: pare e pergunte.
+- O evento já tem grupo, ou um candidato com o mesmo organizador, local, perfil ou família: use. Não crie outro. Dúvida: pesquise o nome canônico na internet e pergunte só o que a pesquisa não resolveu.
+- O cartaz junta duas séries numa edição, como um evento anual do local e uma feira convidada: pesquise qual delas se repete, com edições anteriores publicadas. O grupo é a que se repete. A outra entra nos aliases. Sem evidência de qual se repete, pergunte.
 - Criar ou renomear: o título fica sem ano, sem edição e sem data.
 - Oficina ou curso recorrente do mesmo organizador: um grupo só para as oficinas. Cada oficina é uma página na lista de oportunidades.
 - Programa com público ou escopo próprio, do mesmo organizador ou no mesmo lugar: grupo separado.
@@ -197,7 +214,7 @@ este negócio não usa grupos de oportunidades. Parei sem criar.
 
 ## Pegadinhas
 
-- Título diferente parece outro grupo. O mesmo organizador, local, perfil ou família é candidato. Sem evidência de outro grupo, pergunte.
+- Título diferente parece outro grupo. O mesmo organizador, local, perfil ou família é candidato. Sem evidência de outro grupo, pesquise na internet e pergunte só o que sobrar.
 - O ano no título do grupo parece o nome canônico. O grupo fica sem data. A data fica na oportunidade.
 - Cada oficina parece um grupo. O grupo é o conjunto de oficinas do organizador. A oficina é a edição.
 - O mesmo organizador ou o mesmo lugar parece licença para juntar um programa com público próprio ao grupo de oficinas. Público ou escopo próprio fica no grupo dele.

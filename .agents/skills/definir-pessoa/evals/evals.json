@@ -1,4 +1,11 @@
 {
   "skill_name": "definir-pessoa",
-  "evals": []
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Cadastre a atendente de uma empresa de serviços, vinculada à empresa e à obrigação dela. A empresa não está na lista de empresas.",
+      "expected_output": "Buscar a pessoa e a empresa. Sem equivalente da empresa, cadastrá-la por definir-empresa na mesma rodada, sem perguntar, com a pessoa nas pessoas responsáveis, e ler as duas páginas de volta. Não deixar o nome da empresa só nas observações nem dizer que ela não existe. Dizer o que ficou pendente, como a cidade.",
+      "files": []
+    }
+  ]
 }

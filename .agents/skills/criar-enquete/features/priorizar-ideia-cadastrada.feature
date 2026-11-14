@@ -15,3 +15,11 @@ Funcionalidade: Priorizar a ideia já cadastrada
       Quando a skill cria uma ideia nova
       Então a ideia sai marcada como ainda não consolidada
       E a skill recomenda cadastrá-la com criar-ideia-de-conteudo só se for reutilizável e aprovada
+
+  Regra: O banco de modelos é opcional
+
+    Exemplo: O projeto não tem banco de modelos
+      Dado que o parâmetro do banco de modelos de conteúdo está vazio
+      Quando a skill sugere a enquete
+      Então ela não pergunta o nome do banco nem o procura
+      E cria a ideia do zero e diz isso
