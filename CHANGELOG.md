@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.89.0](https://github.com/jimmyandrade/harness/compare/v1.88.0...v1.89.0) (2026-11-14)
+
+
+### Features
+
+* **analisar-regulamento-da-oportunidade:** require edital and manual on every opportunity and keep the manual in the page body ([#1216](https://github.com/jimmyandrade/harness/issues/1216)) ([8d1d548](https://github.com/jimmyandrade/harness/commit/8d1d548c6fb1a21d9e961983ddcd3d4fbbd2cfb3))
+* **definir-requisito-de-compra:** split the purchase specification out of pesquisar-compra ([#1217](https://github.com/jimmyandrade/harness/issues/1217)) ([b589c6f](https://github.com/jimmyandrade/harness/commit/b589c6f2c885d967a3a4318f22a80ff19a47a5cc))
+* **registrar-preco-de-combustivel:** add skill to record fuel prices seen on the road ([#1208](https://github.com/jimmyandrade/harness/issues/1208)) ([48b3dc9](https://github.com/jimmyandrade/harness/commit/48b3dc91f5dd88ca34a62f9ba79e5ee0ccbfde0a))
+* search a Brazilian mobile number with and without the nine and register it with the nine ([#1219](https://github.com/jimmyandrade/harness/issues/1219)) ([23ce549](https://github.com/jimmyandrade/harness/commit/23ce549cd93403226b099c2b386049844fa941e5))
+
+
+### Bug Fixes
+
+* **analisar-regulamento-da-oportunidade:** confirm which fair the person means before searching ([#1215](https://github.com/jimmyandrade/harness/issues/1215)) ([2807df3](https://github.com/jimmyandrade/harness/commit/2807df35afed031e0059a8edc57cee875253c0d4))
+* confirm location and register the company before the first message ([#1209](https://github.com/jimmyandrade/harness/issues/1209)) ([1fc521a](https://github.com/jimmyandrade/harness/commit/1fc521a3ec74037f8f3440528d93259a10548037))
+* **redigir-com-tom-de-voz:** return the affection a person shows us ([#1218](https://github.com/jimmyandrade/harness/issues/1218)) ([846ed52](https://github.com/jimmyandrade/harness/commit/846ed52ab1c2a59493327287c89d89a5443d3355))
+* **usar-whatsapp-web:** reread before every send, keep one owner window, move attachments to anexar-arquivo-no-whatsapp ([#1210](https://github.com/jimmyandrade/harness/issues/1210)) ([0cdb8b9](https://github.com/jimmyandrade/harness/commit/0cdb8b9c7ff57ba2a87c86c0b60734ac5a051248))
+
 ## [1.88.0](https://github.com/jimmyandrade/harness/compare/v1.87.0...v1.88.0) (2026-11-14)
 
 
