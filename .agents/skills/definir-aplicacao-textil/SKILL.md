@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.1"
+  version: "0.3.0"
   aliases:
     - definir-aplicacao
   related:
@@ -29,8 +29,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Banco de aplicações": ""
 # `Campo da foto da aplicação`: campo de arquivo que guarda a foto da aplicação.
 "Campo da foto da aplicação": ""
-# `Data de corte da cobrança`: a aplicação criada antes dela não é cobrada do que falta. Vazia, toda aplicação é cobrada.
-"Data de corte da cobrança": ""
+# `Data de corte para cadastro completo`: a aplicação criada antes dela não é cobrada do que falta. Vazia, toda aplicação é cobrada.
+"Data de corte para cadastro completo": ""
 # `Limite de caracteres do texto da etiqueta`: o tamanho máximo do texto de override. Vazio, pergunte uma vez e não escolha um número.
 "Limite de caracteres do texto da etiqueta": ""
 ```
@@ -63,7 +63,7 @@ O override é exceção. Só o ofereça quando a pessoa pedir um texto específi
 
 ### Passo 4
 
-Cobre da pessoa tudo sobre cada aplicação nova. Aplicação nova é a criada depois de `Data de corte da cobrança`. Pergunte o nome, o motivo, a técnica e o que mais o banco pede, e exija a foto. Não invente o que a foto não mostra.
+Cobre da pessoa tudo sobre cada aplicação nova. Aplicação nova é a criada depois de `Data de corte para cadastro completo`. Pergunte o nome, o motivo, a técnica e o que mais o banco pede, e exija a foto. Não invente o que a foto não mostra.
 
 Sem a foto, a aplicação fica pendente: diga o que falta. A aplicação criada antes da data de corte não é cobrada e o que falta nela não vira pendência, porque muitas já estão aplicadas nas variantes e não têm foto isolada.
 

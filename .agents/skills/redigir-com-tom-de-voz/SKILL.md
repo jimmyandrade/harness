@@ -3,7 +3,7 @@ name: redigir-com-tom-de-voz
 description: Use essa habilidade sempre que for criar, redigir, editar, revisar ou responder texto da marca no tom de voz, mesmo sem dizer copy. NÃO use para responder quem conversa com a IA, descrever uma skill, titular tarefa ou oportunidade, cravar a grafia, alterar formato de conteúdo, nem assumir cliente, peça, oportunidade ou histórico.
 metadata:
   author: jimmyandrade
-  version: "0.23.0"
+  version: "0.24.0"
   aliases:
     - escreva-usando-o-tom-de-voz
   related:
@@ -44,7 +44,9 @@ Texto que vai ser enviado por um conector, como uma resposta de e-mail, depende 
 
 Consulte o vocabulário com Scripts disponíveis, com `tags` de quem fala, do evento, do canal e do formato do texto, como `maria-silva`, `festival-de-verao`, `palco` ou `whatsapp`. Use a tag que o vocabulário já tem para esse contexto. Consulte no idioma do texto que vai escrever: texto em inglês consulta `en`, texto em português consulta `pt-BR`. A consulta com tags deixa de fora o termo de outra pessoa, de outro evento ou de outro canal. Sem saber quem fala no texto, pergunte.
 
-Quem tem perfil de `perfilar-tom-de-voz`: siga o resumo nas notas do contato ou no cadastro.
+A consulta lê o texto de duas formas, e as duas valem. `classify_text` e `classify-text` leem palavra por palavra e deixam passar um termo de mais de uma palavra, como uma expressão proibida. Por isso, antes de rascunhar, consulte também cada expressão que o texto pode usar, inteira, com `lookup_terms`.
+
+Para o tom de quem fala, siga `perfilar-tom-de-voz`.
 
 O vocabulário é o do negócio para o qual o texto sai e fica no harness dele, não no core nem na pasta da sessão. Com terminal, rode a CLI na pasta desse harness. Sem terminal, chame a ferramenta do servidor `vocabulary`.
 
@@ -136,6 +138,14 @@ Se você manter a palavra clichê, ou trocar por outro termo da mesma fórmula, 
 2. Escreva imagem, cena, ação, efeito ou situação com a mesma sensação.
 3. O termo ligado em `related` também fica de fora.
 
+### Expressão que passa na checagem por palavra
+
+Se você confiar só em `classify_text`, que lê palavra por palavra, uma expressão proibida de mais de uma palavra passa no rascunho.
+
+1. Antes de rascunhar, consulte as expressões do texto, inteiras, com `lookup_terms`.
+2. Depois de rascunhar, consulte de novo cada expressão que o rascunho usa.
+3. Tire a que voltar proibida ou a evitar, com a troca da linha.
+
 ### Fala de outra pessoa
 
 Se você consultar o vocabulário sem as tags do texto, a fala em primeira pessoa de uma pessoa, ou o grito de um evento, entra no texto de outro contexto.
@@ -151,14 +161,6 @@ Se você espalhar emoji sem a linha do vocabulário, o texto ganha um símbolo q
 1. Consulte o vocabulário.
 2. Siga o nível da linha, como para a palavra.
 3. Sem linha, pare. Não invente se o emoji pode.
-
-### Emoji a evitar
-
-Se você aprovar um emoji que o vocabulário manda evitar, a versão final carrega um símbolo restrito.
-
-1. Tire o emoji da versão final.
-2. Se ele aparecer, diga que é exemplo ruim, restrição ou referência negativa.
-3. Na dúvida, consulte o vocabulário e pergunte. Não use gosto, tendência de rede nem estética genérica.
 
 ### Busca escrita como certeza
 
@@ -220,9 +222,9 @@ Consultei o vocabulário e as regras desta habilidade. Pedi contexto, canal, pú
 
 Consultei o vocabulário com as tags de quem fala, do festival e do palco. As falas de Maria Silva em primeira pessoa ficaram de fora. O grito VERÃO! (CHEGOU!) entrou, com a plateia, como o when diz.
 
-### A legenda fecha com um emoji que o vocabulário manda evitar.
+### Rascunhe a resposta. O texto pode usar uma expressão de duas ou mais palavras.
 
-Consultei o vocabulário. O emoji saiu da versão final. Onde ele aparecia, ficou marcado como exemplo ruim. Não aprovei por gosto nem por tendência.
+Consultei as palavras e, à parte, a expressão inteira com `lookup_terms`: uma delas voltou proibida. Escrevi a frase sem ela, com a troca da linha. A checagem por palavra sozinha teria deixado a expressão passar.
 
 ### Escreva o assunto do e-mail. A pessoa vê isso no celular.
 
@@ -234,20 +236,12 @@ O título ficou específico, com o nome canônico que a fonte já tinha. Não vi
 
 ## Casos-limite
 
-- Falta contexto, canal, público, fonte da marca, vocabulário ou intenção criativa: pare e peça. Não aprove.
-- A fonte da persona, do posicionamento, do vocabulário ou do termo proibido não está no workspace conectado: pare. Não invente.
 - A copy depende de cliente, peça, oportunidade ou histórico comercial: consulte a fonte que a pessoa indicou. Não assuma.
 - O pedido altera um formato de conteúdo: pare. A copy não muda esse formato.
-- O pedido é gravar o evento, e não o título: pare. Esta habilidade não grava o evento.
 - Título só «Reservado», «Evento», «Reunião» ou «Feira»: leve o nome canônico. Provisório pode abrir com «Reservado para» ou «A confirmar».
-- O título vivo cria ambiguidade na busca: mantenha o nome canônico.
 - A grafia ainda não foi conferida: pare. Use a grafia que a pessoa ou as instruções do projeto já fecharam. Não grave a forma do pedido.
-- O texto tem quem fala, evento ou canal: consulte com essas tags, como o Passo 2 manda.
 - O texto traz emoji, combinação ou uso simbólico: o estado vem do vocabulário. Sem a linha, pare. Não invente. O cadastro segue `definir-vocabulario`.
-- Emoji marcado como evitar, proibido, ruim, desalinhado ou restrito: sai da versão final. Na dúvida, pergunte. Não aprove por gosto ou tendência.
-- Termo `cliche`: a palavra literal sai. Entra imagem, cena, ação, efeito ou situação. Frase em `rejected` e termo em `related` também saem.
-- Frase com perda consumada, cobrança agressiva, exclusão, capacitismo, ameaça real, culpa ou sensação incompatível com o tom: sai. A alternativa mantém desejo, urgência e conversa natural, sem dizer que a chance já passou.
-- Assunto, prévia, cabeçalho ou chamada inicial de e-mail visto como banner no celular: curto, pessoal, específico e chamativo. O gatilho é ação ou curiosidade. A curiosidade não vira perda consumada. Clickbait vazio fica de fora.
+- O rascunho tem uma expressão de mais de uma palavra: `classify_text` não a pega. Consulte a expressão inteira com `lookup_terms`, como o Passo 2 manda.
 
 ## Pegadinhas
 
@@ -265,6 +259,7 @@ O título ficou específico, com o nome canônico que a fonte já tinha. Não vi
 - O dado que a conversa já citou parece confirmado. Cliente, peça, oportunidade e histórico comercial vêm da fonte que a pessoa indicou.
 - Título publicitário parece o tom de voz. O texto pede intenção, recorte e conexão, e recusa a fórmula genérica. A busca precisa continuar achando o nome canônico.
 - "Reunião com X" parece claro. Em evento externo, o título diz o encontro e guarda o nome mais buscável.
+- A checagem do rascunho inteiro parece cobrir expressões. Ela lê palavra por palavra: a expressão inteira só a consulta por `lookup_terms` ou `lookup-terms` pega.
 - Guardar o comando da CLI numa variável de shell parece encurtar a chamada. O zsh não separa as palavras da variável e a chamada falha. Escreva o comando inteiro.
 - Criatividade parece substituir o campo estruturado. Edição, data, cidade e contexto curto podem entrar no título quando ajudam a busca. Horário, convidados, link e página continuam fora do título.
 
@@ -273,10 +268,11 @@ O título ficou específico, com o nome canônico que a fonte já tinha. Não vi
 - `node node_modules/harness/vocabulary/dist/cli.js lookup --language <idioma> --term <termo> --tags <tag>` lê um termo e devolve se ele existe e a linha guardada.
 - `node node_modules/harness/vocabulary/dist/cli.js exists --language <idioma> --text <trecho> --tags <tag>` devolve só o registro de cada token do trecho para se ele existe.
 - Com `case_matches` falso, a caixa do texto não é a guardada. Escreva a grafia de `term`.
-- `node node_modules/harness/vocabulary/dist/cli.js classify-text --language <idioma> --text <trecho> --tags <tag>` devolve o nível de cada palavra, emoji e pontuação do trecho, com a troca recomendada de quem é evitado, que vem da substituição da linha. Confere o rascunho inteiro de uma vez.
+- `node node_modules/harness/vocabulary/dist/cli.js classify-text --language <idioma> --text <trecho> --tags <tag>` devolve o nível de cada palavra, emoji e pontuação do trecho, com a troca recomendada de quem é evitado, que vem da substituição da linha. Confere o rascunho inteiro de uma vez, mas só palavra por palavra: não pega uma expressão de mais de uma palavra.
+- `node node_modules/harness/vocabulary/dist/cli.js lookup-terms --language <idioma> --term <expressão> --term <expressão> --tags <tag>` lê cada expressão inteira, em uma chamada, e devolve `results` na ordem enviada.
 - `--tags` repete, um valor por vez. Termo sem tag vale em qualquer texto. Termo com tag só volta quando uma tag dele está na consulta.
 - Passe o formato ou o canal do texto como tag, como `review` ou `chat`. Quando a tag está em `forbidden_in` ou `allowed_in` do termo, `classify-text` devolve o nível para esse contexto, com `base_state` no nível guardado e, se ficou proibido só pelo contexto, o motivo e as alternativas.
-- `lookup_term`, `exists_in_text` e `classify_text`, no servidor `vocabulary`, fazem a mesma consulta quando não há terminal ou quando a CLI não está disponível, com o mesmo campo `tags`.
+- `lookup_term`, `lookup_terms`, `exists_in_text` e `classify_text`, no servidor `vocabulary`, fazem a mesma consulta quando não há terminal ou quando a CLI não está disponível, com o mesmo campo `tags`.
 
-1. Com terminal e a CLI instalada, na pasta do harness do negócio, rode `exists` com o texto e `lookup` para cada termo que precisar da linha inteira, com as tags de quem fala, do evento e do canal. Escreva o comando inteiro em cada chamada.
-2. Sem terminal, ou quando a CLI não está disponível, chame `exists_in_text` e `lookup_term` com os mesmos campos.
+1. Com terminal e a CLI instalada, na pasta do harness do negócio, rode `exists` com o texto, `lookup-terms` com cada expressão que o texto pode usar e `lookup` para cada termo que precisar da linha inteira, com as tags de quem fala, do evento e do canal. Escreva o comando inteiro em cada chamada.
+2. Sem terminal, ou quando a CLI não está disponível, chame `exists_in_text`, `lookup_term` e `lookup_terms` com os mesmos campos.

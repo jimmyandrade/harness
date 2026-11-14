@@ -54,6 +54,7 @@ flowchart LR
     definir_composicao_textil["definir-composicao-textil"]
     definir_conta_bancaria["definir-conta-bancaria"]
     definir_convidado["definir-convidado"]
+    definir_cronograma["definir-cronograma"]
     definir_data_significativa["definir-data-significativa"]
     definir_empresa["definir-empresa"]
     definir_estampa["definir-estampa"]
@@ -159,6 +160,7 @@ flowchart LR
     registrar_resultados_da_validacao_na_tarefa["registrar-resultados-da-validacao-na-tarefa"]
     revisar_financas["revisar-financas"]
     revisar_habilidade["revisar-habilidade"]
+    revisar_oportunidade["revisar-oportunidade"]
     revisar_uso_do_tempo["revisar-uso-do-tempo"]
     rotular_item["rotular-item"]
     sincronizar_cronograma["sincronizar-cronograma"]
@@ -326,15 +328,15 @@ flowchart LR
   criar_habilidade --> descrever_habilidade_ou_schema
   criar_habilidade --> medir_habilidade
   criar_habilidade --> testar_habilidade
-  criar_oportunidade --> criar_ideia_de_conteudo
+  criar_oportunidade --> definir_cronograma
   criar_oportunidade --> definir_empresa
   criar_oportunidade --> definir_grupo_de_oportunidades
   criar_oportunidade --> definir_inscricao
   criar_oportunidade --> definir_local_fisico
   criar_oportunidade --> definir_localidade_geografica
-  criar_oportunidade --> definir_tarefa
   criar_oportunidade --> organizar_emails
   criar_oportunidade --> procurar_oportunidade
+  criar_oportunidade --> revisar_oportunidade
   criar_oportunidade --> triar_conversas
   criar_ponto_de_contato --> criar_oportunidade
   criar_ponto_de_contato --> definir_agenda
@@ -409,6 +411,13 @@ flowchart LR
   definir_convidado --> procurar_agenda
   definir_convidado --> revisar_uso_do_tempo
   definir_convidado --> sincronizar_cronograma
+  definir_cronograma --> criar_oportunidade
+  definir_cronograma --> criar_ponto_de_contato
+  definir_cronograma --> definir_agenda
+  definir_cronograma --> definir_jornada_de_producao
+  definir_cronograma --> definir_viagem
+  definir_cronograma --> procurar_oportunidade
+  definir_cronograma --> sincronizar_cronograma
   definir_data_significativa --> procurar_data_significativa
   definir_empresa --> definir_grafia
   definir_empresa --> definir_perfil_social
@@ -750,7 +759,9 @@ flowchart LR
   pedir_revisao_de_pr_no_slack --> registrar_resultados_da_validacao_na_tarefa
   perfilar_tom_de_voz --> definir_vocabulario
   perfilar_tom_de_voz --> redigir_com_tom_de_voz
+  pesquisar_compra --> conversar_no_whatsapp
   pesquisar_compra --> definir_ativo_imobilizado
+  pesquisar_compra --> definir_empresa
   pesquisar_compra --> gerenciar_estoque
   pesquisar_compra --> identificar_duplicata
   pesquisar_compra --> lancar_despesa_da_empresa
@@ -809,13 +820,13 @@ flowchart LR
   projetar_caixa --> revisar_financas
   prospectar_oportunidades --> criar_ideia_de_conteudo
   prospectar_oportunidades --> criar_oportunidade
+  prospectar_oportunidades --> definir_cronograma
   prospectar_oportunidades --> definir_grupo_de_oportunidades
   prospectar_oportunidades --> definir_inscricao
   prospectar_oportunidades --> definir_rotina
   prospectar_oportunidades --> definir_tarefa
   prospectar_oportunidades --> definir_viagem
   prospectar_oportunidades --> procurar_oportunidade
-  prospectar_oportunidades --> sincronizar_cronograma
   publicar_ata_de_reuniao --> definir_pessoa
   publicar_ata_de_reuniao --> definir_registro_de_reuniao
   publicar_resposta_de_revisao --> atender_revisao_de_pull_request
@@ -854,6 +865,11 @@ flowchart LR
   revisar_habilidade --> criar_pull_request
   revisar_habilidade --> descrever_habilidade_ou_schema
   revisar_habilidade --> testar_habilidade
+  revisar_oportunidade --> criar_ideia_de_conteudo
+  revisar_oportunidade --> criar_oportunidade
+  revisar_oportunidade --> definir_grupo_de_oportunidades
+  revisar_oportunidade --> definir_tarefa
+  revisar_oportunidade --> procurar_oportunidade
   revisar_uso_do_tempo --> definir_agenda
   revisar_uso_do_tempo --> definir_agenda_de_popstar
   revisar_uso_do_tempo --> procurar_agenda
