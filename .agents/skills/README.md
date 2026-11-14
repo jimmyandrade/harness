@@ -296,6 +296,7 @@ flowchart LR
   conversar_no_whatsapp --> procurar_tarefa
   conversar_no_whatsapp --> redigir_com_tom_de_voz
   conversar_no_whatsapp --> rotular_item
+  conversar_no_whatsapp --> triar_conversas
   conversar_no_whatsapp --> usar_whatsapp_web
   convidar_para_evento --> acompanhar_resposta_no_whatsapp
   convidar_para_evento --> conversar_no_whatsapp
