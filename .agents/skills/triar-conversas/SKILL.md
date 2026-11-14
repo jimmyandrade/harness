@@ -4,7 +4,7 @@ description: Varre as conversas com mensagem nova nos canais configurados, como 
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.10.0"
+  version: "0.11.0"
   models:
     - arvore-de-decisao-da-triagem
     - relatorio-de-conversas
@@ -41,6 +41,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Fontes":
   - "WhatsApp"
   - "Slack"
+# `Etiqueta dos grupos em triagem` é o nome da lista do WhatsApp Business que marca os grupos que a pessoa quer triar. Vazio varre todo grupo. Preenchido, o grupo sem a etiqueta não é lido, não entra no relatório nem é rotulado, e a conversa individual e o Slack seguem como estão.
+"Etiqueta dos grupos em triagem": ""
 # `Cadência do relatório` é `diária`, `semanal` ou `pela atividade`. `pela atividade` faz diária a conversa com mensagem nova em mais da metade dos dias da última semana, e semanal o resto.
 "Cadência do relatório": "pela atividade"
 # `Apagar mensagens sem relevância` é `sim`, `perguntar` ou `não`. `sim` apaga para você as mensagens ignoradas, depois do registro, onde o canal deixa, e vale como o sim da pessoa. `perguntar` mostra a lista e apaga só com o sim dela. `não` só as registra no relatório.
@@ -67,7 +69,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 Leia cada canal de `Fontes`. O WhatsApp segue `conversar-no-whatsapp`: o canal e as mensagens não lidas. A aba e o aviso de outra janela seguem `usar-whatsapp-web`. O Slack é lido pelo conector do Slack: canais, grupos e mensagens diretas. Canal de `Fontes` sem conector fica de fora, e o relatório diz isso. E-mail não entra aqui: a caixa fica com `organizar-emails`.
 
-Varra toda conversa com mensagem nova, de grupo, canal ou individual. Uma conversa silenciada ou arquivada entra só quando a pessoa a nomeia.
+Varra toda conversa com mensagem nova, de grupo, canal ou individual. Uma conversa silenciada ou arquivada entra só quando a pessoa a nomeia. O mesmo vale para o grupo do WhatsApp sem `Etiqueta dos grupos em triagem`, quando ela está preenchida.
 
 ### Passo 2
 

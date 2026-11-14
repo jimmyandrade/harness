@@ -3,7 +3,7 @@ name: rotular-item
 description: Aplica, troca e tira rótulos, etiquetas e tags de organização num item, como pull request, issue, e-mail, conversa ou página, pela escolha da habilidade de origem, sem duplicar rótulo nem mexer no de uma ferramenta. Usada quando outra habilidade rotula um item, lê ou responde uma conversa, ou o estado do item muda. Não serve para decidir o assunto do item, hashtags nem categorias de conteúdo.
 metadata:
   author: jimmyandrade
-  version: "0.8.0"
+  version: "0.9.0"
   related:
     - criar-pull-request
     - definir-filtro-de-email
@@ -53,7 +53,7 @@ flowchart LR
   E -->|o assunto acabou| C[Concluída]
 ```
 
-Um envio a grupo ou comunidade sem resposta esperada de alguém, como um comunicado ou uma enquete, não vira `Ação esperada`: ninguém tem a vez de agir. A conversa fica sem rótulo de estado, só com o de contexto, e a resposta diz isso. A pessoa que quiser acompanhar o grupo diz, e então o estado segue o fluxo.
+Um envio a grupo ou comunidade sem resposta esperada de alguém, como um comunicado ou uma enquete, não vira `Ação esperada`: ninguém tem a vez de agir. A conversa fica sem rótulo de estado, só com o de contexto, e a resposta diz isso. O grupo com a etiqueta de triagem que `triar-conversas` define, ou que a pessoa pede para acompanhar, segue o fluxo.
 
 A concluída só entra depois de ler o corpo de cada mensagem da conversa e confirmar que nada espera o negócio nem o contato. Remetente, assunto e trecho não bastam: um aviso de plataforma pode pedir prazo, pagamento, cadastro ou resposta. Sem essa leitura, não aplique concluída em lote. Na dúvida, a conversa fica com ação pendente e vai à pessoa com a pergunta.
 
