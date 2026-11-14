@@ -3,13 +3,13 @@ name: usar-whatsapp-web
 description: Abre, mantém e reaproveita a única aba do WhatsApp Web no Chrome da pessoa, pela extensão Claude in Chrome, e faz a sessão dona atender as leituras e os envios das outras sessões. Usada sempre que uma habilidade precisa abrir, ler, enviar texto, anexar imagem ou documento no WhatsApp Web, mesmo sem dizer aba. Não serve para achar a conversa, redigir a mensagem, rotular nem decidir o que enviar.
 metadata:
   author: jimmyandrade
-  version: "0.8.0"
+  version: "0.8.1"
   related:
     - acompanhar-resposta-no-whatsapp
     - conversar-no-whatsapp
     - definir-negociacao
     - definir-rotina
-    - enviar-imagem-no-whatsapp
+    - anexar-arquivo-no-whatsapp
     - evoluir-habilidade
     - manter-contato-no-whatsapp
     - triar-conversas
@@ -93,7 +93,7 @@ Ao terminar, deixe a aba aberta, mesmo quando as outras abas da tarefa forem fec
 
 ### Passo 4
 
-Para anexar uma imagem ou um documento, siga `enviar-imagem-no-whatsapp`: o destino, o arquivo e o sim da pessoa já vêm de quem chama, e o anexo, com os scripts de captura e restauração, é dela.
+Para anexar uma imagem ou um documento, siga `anexar-arquivo-no-whatsapp`: o destino, o arquivo e o sim da pessoa já vêm de quem chama, e o anexo, com os scripts de captura e restauração, é dela.
 
 ### Passo 5
 
@@ -237,6 +237,6 @@ Mostrei o CNPJ como o passo seguinte e pedi o sim, sem dizer que ia falhar. Com 
 
 ## Scripts disponíveis
 
-- Nenhum. Os scripts de captura e restauração ficam em `enviar-imagem-no-whatsapp`.
+- Nenhum. Os scripts de captura e restauração ficam em `anexar-arquivo-no-whatsapp`.
 
 1. Não há script para executar.

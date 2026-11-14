@@ -1,9 +1,11 @@
 ---
-name: enviar-imagem-no-whatsapp
-description: Envia uma imagem ou um documento já aprovado pelo WhatsApp Web, como foto ou documento e nunca como figurinha, numa conversa, num grupo ou num canal, e confere o envio. Usada quando a pessoa aprova mandar um comprovante, um convite com imagem ou uma postagem. Não serve para redigir o texto, escolher o destino nem enviar só texto.
+name: anexar-arquivo-no-whatsapp
+description: Anexa e envia um arquivo já aprovado pelo WhatsApp Web, imagem como foto e nunca como figurinha, ou documento, numa conversa, num grupo ou num canal, e confere o envio. Usada quando a pessoa aprova mandar um comprovante, um convite com imagem, uma postagem ou um documento. Não serve para redigir o texto, escolher o destino nem enviar só texto.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.5.0"
+  aliases:
+    - enviar-imagem-no-whatsapp
   related:
     - conversar-no-whatsapp
     - evoluir-habilidade
@@ -11,7 +13,7 @@ metadata:
     - usar-whatsapp-web
 ---
 
-# Enviar imagem no WhatsApp
+# Anexar arquivo no WhatsApp
 
 ## Parâmetros de configuração
 
