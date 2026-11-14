@@ -126,6 +126,7 @@ flowchart LR
     levantar_gravacoes_de_reunioes["levantar-gravacoes-de-reunioes"]
     liberar_espaco_em_disco["liberar-espaco-em-disco"]
     limpar_copias_de_trabalho["limpar-copias-de-trabalho"]
+    manter_contato_no_whatsapp["manter-contato-no-whatsapp"]
     medir_habilidade["medir-habilidade"]
     mesclar_pull_request["mesclar-pull-request"]
     mesclar_registro["mesclar-registro"]
@@ -713,6 +714,13 @@ flowchart LR
   limpar_copias_de_trabalho --> criar_copia_de_trabalho
   limpar_copias_de_trabalho --> criar_pull_request
   limpar_copias_de_trabalho --> liberar_espaco_em_disco
+  manter_contato_no_whatsapp --> conversar_no_whatsapp
+  manter_contato_no_whatsapp --> definir_empresa
+  manter_contato_no_whatsapp --> definir_negociacao
+  manter_contato_no_whatsapp --> definir_pessoa
+  manter_contato_no_whatsapp --> perfilar_tom_de_voz
+  manter_contato_no_whatsapp --> rotular_item
+  manter_contato_no_whatsapp --> usar_whatsapp_web
   medir_habilidade --> testar_habilidade
   mesclar_pull_request --> atender_revisao_de_pull_request
   mesclar_pull_request --> atualizar_branch_do_pull_request
@@ -924,6 +932,7 @@ flowchart LR
   usar_whatsapp_web --> definir_negociacao
   usar_whatsapp_web --> definir_rotina
   usar_whatsapp_web --> enviar_imagem_no_whatsapp
+  usar_whatsapp_web --> manter_contato_no_whatsapp
   usar_whatsapp_web --> triar_conversas
   validar_plano_de_vocabulario --> classificar_estado_do_termo
   validar_plano_de_vocabulario --> definir_vocabulario
