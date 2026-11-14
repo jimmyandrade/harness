@@ -4,7 +4,7 @@ description: Pesquisa o que comprar, cruza com despesas, estoque e bens que já 
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.4.1"
   related:
     - conversar-no-whatsapp
     - definir-ativo-imobilizado
@@ -98,7 +98,7 @@ A empresa que a busca trouxe de fora do alcance confirmado no Passo 1 não é op
 Abra o site da empresa e leia os links da página, como WhatsApp, telefone e redes, antes de dizer que não achou o contato. O trecho que a busca mostrou não basta.
 Antes de recomendar o contato com a empresa, veja se já houve conversa com ela, seguindo `conversar-no-whatsapp`. Diga o que o histórico já responde.
 Quando a compra é um serviço de terceiro e nenhuma empresa achada atende, não responda que não há opção. Siga para a próxima: a da lista de empresas, a que um contato indicou, a da web. Cadastre cada uma, veja se há conversa e, sem conversa, prepare o primeiro contato pelo WhatsApp, com o texto pronto e o sim da pessoa. Só pare quando uma empresa confirmar que atende ou a pessoa mandar parar.
-O primeiro contato é por mensagem, pelo WhatsApp, pelo e-mail ou pelo formulário da empresa, e sai em qualquer hora: a loja fechada não adia a mensagem. Ligação é o último recurso, só quando a empresa não tem canal de texto. Prepare a mensagem para cada empresa de uma vez e peça o sim da pessoa a todas.
+O primeiro contato é por mensagem, pelo WhatsApp, pelo e-mail ou pelo formulário da empresa, e sai em qualquer hora: a loja fechada não adia a mensagem. Ligação é o último recurso, só quando a empresa não tem canal de texto. A empresa que só tem telefone fixo no site, sem WhatsApp, recebe o primeiro contato pelo e-mail ou pelo formulário dela, quando existir, e não fica sem contato nem espera a ligação. Prepare a mensagem para cada empresa de uma vez e peça o sim da pessoa a todas.
 Antes do primeiro envio a cada empresa, ela precisa estar cadastrada, com o rótulo no WhatsApp e o link da página dela na nota do contato. A pressa não adia esses três.
 A primeira mensagem explica o que é o item e para que a pessoa o usa, com o link do anúncio ou da compra quando houver, e já traz o que a empresa vai perguntar: o material, o formato, a quantidade e o prazo. Uma empresa que não conhece o item não consegue dizer se atende: explique antes de pedir indicação. Antes de enviar, confira nos registros o que já se sabe de cada um e pergunte à pessoa só o que falta, como a quantidade. A resposta da empresa não deve abrir uma segunda rodada de perguntas que a primeira mensagem já podia responder.
 
@@ -168,6 +168,14 @@ Se você recomendar ou descartar uma empresa e não a cadastrar, na próxima bus
 1. Cadastre cada empresa que apareceu como opção, pelo Passo 6.
 2. Não espere a pessoa decidir nem comprar.
 3. Leve o link da página na resposta.
+
+### Empresa deixada sem contato por ter só telefone fixo
+
+Se você deixar sem mensagem a empresa cujo site traz só telefone fixo, ela fica fora da rodada embora tenha e-mail ou formulário, e a pessoa descobre depois.
+
+1. Procure o e-mail e o formulário no site, como o Passo 6 manda.
+2. Prepare a mensagem para esse canal, com o mesmo texto das outras e o sim da pessoa.
+3. Só sem nenhum canal de texto a ligação entra, como último recurso, e a resposta diz isso.
 
 ### Contato dado como não achado
 
