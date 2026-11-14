@@ -1,6 +1,6 @@
 ---
 metadata:
-  version: "1.67.0"
+  version: "1.68.0"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -82,6 +82,7 @@ metadata:
 - Execute cada habilidade dessa ordem até o fim. Ler o arquivo começa a habilidade e não a encerra. Sem `Comando de testes`, `escrever-teste` ainda é chamada: o resultado é dizer que o comando não existe, sem inventar um runner. O modo de abertura é `Criar pull request ao terminar`. Um projeto que quer outro modo define o parâmetro no próprio `AGENTS.md`. A resposta diz o nome da branch, se ela está no GitHub e, quando o pull request existe, o link.
 - Um comando em segundo plano não encerra o turno. Quando o próximo passo depende do resultado dele, como uma instalação, uma suíte de testes, um build ou um check, leia antes o estado atual uma vez: o resultado pode já ter saído, ou o gatilho pode nem disparar. Para esperar, acompanhe em segundo plano, com intervalos que dobram a partir de 10 segundos, e dê o status à pessoa a cada mudança. Passado o tempo esperado, confira por outro caminho, como o navegador, ou pergunte à pessoa se já terminou. Siga com o resultado no mesmo turno. Encerre o turno só quando o trabalho terminar ou quando faltar uma decisão da pessoa.
 - Diante de uma tela de login no navegador, peça a credencial ao gerenciador de senhas conectado e preencha com ele antes de pedir que a pessoa entre. A pessoa entra só quando nenhum gerenciador está conectado, quando o preenchimento falha ou quando a tela pede um código ou um captcha que o gerenciador não resolve. A senha nunca passa pela conversa.
+- Antes de buscar uma informação sobre uma feira, um evento ou uma oportunidade, confirme com a pessoa de qual se trata quando o pedido não nomeia a edição ou quando a pessoa citada, o grupo ou a data pode ligar-se a mais de um. Não use o que achou de um evento para responder sobre outro, nem escolha o mais recente ou o mais conhecido. Diga qual evento você entendeu e peça a confirmação antes de procurar e antes de redigir o que depende dele.
 - Toda habilidade que lê ou responde uma conversa, por e-mail ou WhatsApp, deixa a conversa rotulada seguindo `rotular-item`, mesmo quando o pedido era só ler.
 - Uma regra de comportamento que vale para todos os projetos fica nestas instruções. O valor de um parâmetro fica nas instruções do projeto. O guia de contribuição cita o nome do parâmetro e não copia o valor, para a mudança acontecer num lugar só. Uma convenção de código que não é parâmetro fica no guia de contribuição. Não fica na memória de um projeto.
 
