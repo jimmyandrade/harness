@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.40.2"
+  version: "0.41.0"
   aliases:
     - redigir-mensagem-de-whatsapp
   related:
@@ -25,6 +25,7 @@ metadata:
     - procurar-tarefa
     - redigir-com-tom-de-voz
     - rotular-item
+    - triar-conversas
     - usar-whatsapp-web
 ---
 
@@ -43,6 +44,8 @@ Leia os valores nas instruções do projeto, na entrada desta habilidade. Na aus
 "Canais em ordem de preferência": ["conector", "WhatsApp Web"]
 # `Não lidas antes de enviar` é `ler e mostrar`, que abre a conversa, lê as não lidas e mostra o que pede ação da pessoa antes de enviar, ou `perguntar antes de abrir`, que avisa que abrir marca como lidas e espera o sim.
 "Não lidas antes de enviar": "ler e mostrar"
+# `Reação ao áudio transcrito` é o emoji que marca o áudio já transcrito. Vazio não reage. A pessoa do outro lado vê a reação, e o valor preenchido vale como o sim da pessoa.
+"Reação ao áudio transcrito": ""
 # `Canal do comprovante` é `e-mail na mesma conversa` (e-mail em resposta à organização, com o arquivo anexado; o WhatsApp só avisa), `WhatsApp` (arquivo na conversa) ou `e-mail e WhatsApp` (nos dois).
 "Canal do comprovante": "WhatsApp"
 # `Página de instruções do WhatsApp` é o endereço da página com as regras da conta, como a ferramenta comercial por onde a mensagem sai. Vazio pula a leitura.
@@ -65,6 +68,8 @@ No WhatsApp Web, todo acesso segue `usar-whatsapp-web`: o Chrome da pessoa, a ab
 Espere a lista de conversas carregar antes de ler. Com `Etiqueta das conversas` preenchida, filtre a lista por essa etiqueta antes de procurar. Ache a conversa pelo nome na lista ou pela busca. Um pedido costuma estar em mais de uma conversa: na de quem pediu, na da pessoa envolvida e num grupo. Abra cada conversa ligada ao assunto e leia o texto da conversa aberta, não só a prévia da lista. Logo depois de ler cada uma, rotule-a por `rotular-item`, antes do resumo ou de qualquer pergunta. O contexto é o do assunto que a pessoa trata: quem só fica a par não recebe o de quem cuida dele.
 
 Uma conversa com mensagens não lidas segue `Não lidas antes de enviar`. Com `ler e mostrar`, leia as não lidas e mostre primeiro o que pede ação da pessoa, como uma menção, uma pergunta ou um pedido para ela, e depois o resto em uma linha. Antes de enviar nessa conversa, pergunte se envia agora ou espera. Com `perguntar antes de abrir`, diga que abrir marca essas mensagens como lidas, também para quem enviou, e pergunte se pode abrir.
+
+Um áudio na conversa lida vira texto: baixe-o e transcreva-o como o Passo 2 de `triar-conversas` manda, sem perguntar, e mostre o texto inteiro, sem resumir, e a palavra que pode estar errada. Com `Reação ao áudio transcrito` preenchida, reaja ao áudio, sem perguntar.
 
 Se o canal não mostrar o histórico inteiro, diga que ele pode estar incompleto; no WhatsApp Web, siga `usar-whatsapp-web`. Procure noutro lugar só se a pessoa pedir.
 
@@ -96,7 +101,9 @@ Para registrar a demanda, leve a data e o horário da primeira mensagem do pedid
 
 Uma empresa que a pessoa só conhece pelo site ou pela busca pode já estar salva no WhatsApp dela, com histórico. Antes do primeiro contato, procure a conversa pelo nome e pelo número. Achada, leia o histórico e continue a conversa, em vez de escrever como se fosse a primeira.
 
-Antes de rascunhar, leia a conversa de destino desde a última mensagem lida, pelo Passo 2, e confira cada pergunta do rascunho contra ela inteira, inclusive a mensagem citada. A pergunta já respondida sai, mesmo quando outra fonte mais antiga diverge: mostre a divergência à pessoa, não ao contato. Sai também a que o site ou o cadastro da empresa já responde, como o horário de funcionamento. Tire também o que já foi dito e diga antes o que o texto acrescenta. Se tudo já foi dito, diga isso e não rascunhe.
+Antes de rascunhar, leia a conversa de destino desde a última mensagem lida, pelo Passo 2, e confira cada pergunta do rascunho contra ela inteira, inclusive a mensagem citada. A pergunta já respondida sai, mesmo quando outra fonte mais antiga diverge: mostre a divergência à pessoa, não ao contato. Sai também a que o site ou o cadastro da empresa já responde, como o horário de funcionamento.
+
+Tire também o que já foi dito e diga antes o que o texto acrescenta. O dado que o contato ou a oportunidade já traz, como a chave de pagamento de antes, entra no texto para confirmar, e não como pergunta aberta. Se tudo já foi dito, diga isso e não rascunhe.
 
 Leia cada resposta como resposta à pergunta como foi escrita. Uma pergunta sem dia, sem janela e sem condição, respondida com "pode" ou "sim", vale para tudo o que ela cobria. Não estreite a resposta com uma condição que a pergunta não tinha, e não repita a pergunta para pedir mais detalhe.
 
@@ -126,6 +133,7 @@ O texto não usa Markdown: negrito é um asterisco de cada lado, itálico é sub
 
 Depois de escrever o texto, siga `dividir-mensagem` para decidir como ele sai, em mensagens curtas, numa só ou em partes numeradas pelo limite. O sim da pessoa vale para o texto mostrado, com todas as partes numeradas. Envie na mesma ordem, uma de cada vez.
 
+A mensagem que responde a um áudio usa o Responder dele e quebra a transcrição em trechos, cada um em citação, com a resposta logo abaixo. Cada linha do trecho começa com `> `, e uma linha em branco o separa da resposta. Tudo o que a pessoa falou entra em algum trecho e recebe resposta: o trecho sem pergunta recebe uma frase curta de retorno.
 Numa conversa já aberta com a pessoa, a mensagem não diz quem escreve nem de qual empresa: o nome da conversa já diz. Quem ainda não conhece quem escreve é apresentado uma vez, na primeira mensagem, com o nome e a empresa. Depois, nem a abertura repete a apresentação nem o fim leva assinatura.
 A saudação e o texto se dirigem só a quem está na conversa aberta: quem ela não alcança, como a outra pessoa que assina a organização, entra na terceira pessoa. Quem só fica a par recebe, na conversa dele, um aviso curto, sem as perguntas de quem decide.
 O comprovante de pagamento segue `Canal do comprovante`. O e-mail sai por `enviar-email`, com o arquivo anexado e o sim da pessoa, e o WhatsApp só avisa que foi por e-mail e pede a confirmação. Com `e-mail e WhatsApp`, o arquivo vai também na conversa, antes do aviso. Sem conversa de e-mail com a organização, mande o arquivo no WhatsApp e diga isso.
@@ -142,6 +150,8 @@ Antes de enviar, tire um print do campo e confira o texto, a lista e a mensagem 
 Imagem e arquivo seguem `enviar-imagem-no-whatsapp`, depois do sim: a imagem nunca vai pela Nova figurinha.
 Depois de enviar, leia a conversa de novo, confira se a mensagem aparece e diga o horário.
 Compare o que saiu com o que você mostrou. Cada diferença que a pessoa fez antes de enviar vira termo por `definir-vocabulario`. Se não souber se a diferença é regra ou escolha do momento, pergunte.
+
+O que a pessoa ditou duas vezes sai uma vez, e mensagem que ela não escreveu não entra.
 
 Para corrigir uma mensagem já enviada, edite-a e marque a palavra corrigida com um asterisco no fim, como `Chegaremos*`. Não mande outra mensagem só para corrigir. A edição também pede o sim.
 
@@ -213,13 +223,6 @@ Se você escrever que a investigação já começou sem o link da tarefa, quem p
 
 1. Ponha na mensagem o link do registro do trabalho.
 
-### Combinar sem conferir a agenda
-
-Se você redigir uma mensagem que propõe data, hora ou lugar sem conferir a agenda e a viagem, o combinado pode cair num horário em que a pessoa já está noutra cidade.
-
-1. Confira a agenda e a viagem, como o Passo 5 manda, antes do texto.
-2. Diga o conflito antes do rascunho e ofereça a alternativa.
-
 ### Conversa sem rótulo
 
 Se você ler ou enviar sem rotular, a conversa some do filtro de estado.
@@ -232,29 +235,6 @@ Se você ler ou enviar sem rotular, a conversa some do filtro de estado.
 Se você mandar um texto acima de `Limite de caracteres por mensagem` numa mensagem só, o fim some atrás de "Ler mais".
 
 1. Conte os caracteres e, acima do limite, divida em partes numeradas, com a contagem de cada uma.
-
-### Correção numa mensagem nova
-
-Se você mandar outra mensagem só para corrigir uma palavra, a conversa fica com as duas versões, e o contato lê o erro antes da correção.
-
-1. Edite a mensagem enviada.
-2. Marque a palavra corrigida com um asterisco no fim.
-3. Mostre a edição e espere o sim.
-
-### Troca de canal com a conversa fluindo
-
-Se você propuser e-mail porque o atendimento citou um endereço, o atendente fica sem resposta.
-
-1. Continue na conversa e tente cada passo do fluxo.
-2. Ofereça outro canal só com a conversa parada.
-
-### Envio sem confirmação
-
-Se você enviar porque a pessoa pediu para responder, sem mostrar o texto, a mensagem sai em nome dela sem o sim.
-
-1. Mostre conversa, texto e mensagem citada.
-2. Envie só depois do sim.
-3. Leia a conversa de novo depois de enviar.
 
 ## Exemplos de entrada e saída
 
