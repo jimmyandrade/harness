@@ -3,12 +3,13 @@ name: redigir-com-tom-de-voz
 description: Use essa habilidade sempre que for criar, redigir, editar, revisar ou responder texto da marca no tom de voz, mesmo sem dizer copy. NÃO use para responder quem conversa com a IA, descrever uma skill, titular tarefa ou oportunidade, cravar a grafia, alterar formato de conteúdo, nem assumir cliente, peça, oportunidade ou histórico.
 metadata:
   author: jimmyandrade
-  version: "0.24.0"
+  version: "0.25.0"
   aliases:
     - escreva-usando-o-tom-de-voz
   related:
     - perfilar-tom-de-voz
     - definir-vocabulario
+    - consultar-vocabulario
     - definir-pessoa
     - evoluir-habilidade
 ---
@@ -42,15 +43,9 @@ Antes de criar, redigir, editar, revisar ou responder, consulte o vocabulário e
 
 Texto que vai ser enviado por um conector, como uma resposta de e-mail, depende da ferramenta de envio. Antes de redigir, confira se as configurações da ferramenta a liberam. Sem a liberação, peça-a logo, com o nome da ferramenta, em vez de descobrir o bloqueio só no envio. A liberação não dispensa o sim da pessoa ao texto e ao destino. Se o envio for bloqueado mesmo assim, deixe o rascunho no destino e diga o que bloqueou.
 
-Consulte o vocabulário com Scripts disponíveis, com `tags` de quem fala, do evento, do canal e do formato do texto, como `maria-silva`, `festival-de-verao`, `palco` ou `whatsapp`. Use a tag que o vocabulário já tem para esse contexto. Consulte no idioma do texto que vai escrever: texto em inglês consulta `en`, texto em português consulta `pt-BR`. A consulta com tags deixa de fora o termo de outra pessoa, de outro evento ou de outro canal. Sem saber quem fala no texto, pergunte.
-
-A consulta lê o texto de duas formas, e as duas valem. `classify_text` e `classify-text` leem palavra por palavra e deixam passar um termo de mais de uma palavra, como uma expressão proibida. Por isso, antes de rascunhar, consulte também cada expressão que o texto pode usar, inteira, com `lookup_terms`.
+Consulte o vocabulário com `consultar-vocabulario`, com as `tags` de quem fala, do evento, do canal e do formato do texto, no idioma do texto que vai escrever. Ele consulta o texto por palavra e cada expressão que o texto pode usar, inteira, e devolve o `when` dos termos permitidos com ressalva, que vale para este texto. Sem saber quem fala, pergunte.
 
 Para o tom de quem fala, siga `perfilar-tom-de-voz`.
-
-O vocabulário é o do negócio para o qual o texto sai e fica no harness dele, não no core nem na pasta da sessão. Com terminal, rode a CLI na pasta desse harness. Sem terminal, chame a ferramenta do servidor `vocabulary`.
-
-Se ela disser que não há glossário, a sessão está noutra pasta: ache o harness do negócio, não rode `init` e não conclua que o vocabulário não existe. Sem os dois, como num agente do Notion, o vocabulário vem de uma fonte do workspace conectado que as instruções do projeto nomeiam. Sem essa fonte, pare e diga que a consulta roda numa ferramenta de código com o projeto aberto. Não leia o vocabulário de memória.
 
 Intenção clara, recorte específico e conexão humana. O que a pessoa precisa entender para agir. Como o texto se conecta com ela. Se faz ela sentir algo. Não fale para todo mundo. Não escreva fórmula genérica, ritmo previsível nem chamada vazia.
 
@@ -265,14 +260,6 @@ O título ficou específico, com o nome canônico que a fonte já tinha. Não vi
 
 ## Scripts disponíveis
 
-- `node node_modules/harness/vocabulary/dist/cli.js lookup --language <idioma> --term <termo> --tags <tag>` lê um termo e devolve se ele existe e a linha guardada.
-- `node node_modules/harness/vocabulary/dist/cli.js exists --language <idioma> --text <trecho> --tags <tag>` devolve só o registro de cada token do trecho para se ele existe.
-- Com `case_matches` falso, a caixa do texto não é a guardada. Escreva a grafia de `term`.
-- `node node_modules/harness/vocabulary/dist/cli.js classify-text --language <idioma> --text <trecho> --tags <tag>` devolve o nível de cada palavra, emoji e pontuação do trecho, com a troca recomendada de quem é evitado, que vem da substituição da linha. Confere o rascunho inteiro de uma vez, mas só palavra por palavra: não pega uma expressão de mais de uma palavra.
-- `node node_modules/harness/vocabulary/dist/cli.js lookup-terms --language <idioma> --term <expressão> --term <expressão> --tags <tag>` lê cada expressão inteira, em uma chamada, e devolve `results` na ordem enviada.
-- `--tags` repete, um valor por vez. Termo sem tag vale em qualquer texto. Termo com tag só volta quando uma tag dele está na consulta.
-- Passe o formato ou o canal do texto como tag, como `review` ou `chat`. Quando a tag está em `forbidden_in` ou `allowed_in` do termo, `classify-text` devolve o nível para esse contexto, com `base_state` no nível guardado e, se ficou proibido só pelo contexto, o motivo e as alternativas.
-- `lookup_term`, `lookup_terms`, `exists_in_text` e `classify_text`, no servidor `vocabulary`, fazem a mesma consulta quando não há terminal ou quando a CLI não está disponível, com o mesmo campo `tags`.
+- Nenhum.
 
-1. Com terminal e a CLI instalada, na pasta do harness do negócio, rode `exists` com o texto, `lookup-terms` com cada expressão que o texto pode usar e `lookup` para cada termo que precisar da linha inteira, com as tags de quem fala, do evento e do canal. Escreva o comando inteiro em cada chamada.
-2. Sem terminal, ou quando a CLI não está disponível, chame `exists_in_text`, `lookup_term` e `lookup_terms` com os mesmos campos.
+1. Não há script para executar.

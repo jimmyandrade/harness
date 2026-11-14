@@ -31,6 +31,7 @@ flowchart LR
     comunicar_novidade_do_produto["comunicar-novidade-do-produto"]
     configurar_harness_de_negocio["configurar-harness-de-negocio"]
     consultar_responsavel_pela_oportunidade["consultar-responsavel-pela-oportunidade"]
+    consultar_vocabulario["consultar-vocabulario"]
     conversar_no_whatsapp["conversar-no-whatsapp"]
     convidar_para_evento["convidar-para-evento"]
     criar_carrossel_do_instagram["criar-carrossel-do-instagram"]
@@ -280,6 +281,9 @@ flowchart LR
   consultar_responsavel_pela_oportunidade --> enviar_email
   consultar_responsavel_pela_oportunidade --> redigir_com_tom_de_voz
   consultar_responsavel_pela_oportunidade --> sincronizar_cronograma
+  consultar_vocabulario --> definir_vocabulario
+  consultar_vocabulario --> procurar_variacao_de_termo
+  consultar_vocabulario --> redigir_com_tom_de_voz
   conversar_no_whatsapp --> acompanhar_resposta_no_whatsapp
   conversar_no_whatsapp --> comunicar_novidade_do_produto
   conversar_no_whatsapp --> convidar_para_evento
@@ -858,6 +862,7 @@ flowchart LR
   reconhecer_imagem --> definir_inscricao
   reconhecer_imagem --> lancar_despesa_da_empresa
   reconhecer_imagem --> procurar_oportunidade
+  redigir_com_tom_de_voz --> consultar_vocabulario
   redigir_com_tom_de_voz --> definir_pessoa
   redigir_com_tom_de_voz --> definir_vocabulario
   redigir_com_tom_de_voz --> perfilar_tom_de_voz
