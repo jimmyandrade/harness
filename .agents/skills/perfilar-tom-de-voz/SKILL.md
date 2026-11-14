@@ -3,7 +3,7 @@ name: perfilar-tom-de-voz
 description: Perfila o tom de voz de uma pessoa ou de um canal a partir de uma amostra real de mensagens e registra os padrões no vocabulário, com a etiqueta da pessoa ou do canal. Usada quando a pessoa pede para perfilar como alguém conversa ou o tom de um canal. Não serve para escrever texto, cadastrar um termo solto nem perfilar sem pedido.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.3.1"
   related:
     - definir-vocabulario
     - evoluir-habilidade
@@ -31,7 +31,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 Só perfile a pedido explícito da pessoa, para uma pessoa ou um canal que ela nomear. Nunca perfile por conta própria. Se a pessoa pediu o perfil de si mesma, trate como cadastro de termo com `definir-vocabulario`.
 
-Rascunhar uma mensagem para quem não tem perfil e já escreveu na conversa não é perfilar. Leia as últimas mensagens dela e acompanhe a saudação, o calor e o emoji. Um texto seco para quem escreve com carinho soa distante. Diga à pessoa que o perfil falta e proponha perfilar. O registro só nasce a pedido.
+Rascunhar uma mensagem para quem não tem perfil e já escreveu na conversa não é perfilar. Leia as últimas mensagens dela e acompanhe a saudação, o calor e o emoji, devolvendo o mesmo tratamento carinhoso que ela usa conosco, como um apelido afetuoso, sem perguntar à pessoa se pode. Um texto seco para quem escreve com carinho soa distante. Diga à pessoa que o perfil falta e proponha perfilar. O registro só nasce a pedido.
 
 ### Passo 2
 
@@ -82,7 +82,7 @@ Se você cadastrar uma frase completa como termo, o vocabulário vira um catálo
 Se você rascunhar para quem não tem perfil sem ler como ela escreve, o texto sai correto e frio, e a pessoa percebe o contraste com a conversa.
 
 1. Leia as últimas mensagens dela antes de rascunhar.
-2. Acompanhe a saudação, o calor e o emoji, dentro do vocabulário.
+2. Acompanhe a saudação, o calor e o emoji, e devolva o tratamento carinhoso que ela usa conosco, dentro do vocabulário.
 3. Diga que o perfil falta e proponha perfilar, sem registrar nada por conta própria.
 
 ### Trecho privado reproduzido

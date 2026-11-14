@@ -3,7 +3,7 @@ name: redigir-com-tom-de-voz
 description: Use essa habilidade sempre que for criar, redigir, editar, revisar ou responder texto da marca no tom de voz, mesmo sem dizer copy. NÃO use para responder quem conversa com a IA, descrever uma skill, titular tarefa ou oportunidade, cravar a grafia, alterar formato de conteúdo, nem assumir cliente, peça, oportunidade ou histórico.
 metadata:
   author: jimmyandrade
-  version: "0.25.0"
+  version: "0.26.0"
   aliases:
     - escreva-usando-o-tom-de-voz
   related:
@@ -77,7 +77,9 @@ Texto redigido e não enviado volta inteiro, num bloco, na mensagem final de tod
 
 Mensagem para uma pessoa não revela contexto interno que ela não precisa saber e que pode deixá-la desconfortável, como a troca frequente de pessoas no papel que ela assume. O motivo neutro entra no lugar, como uma mudança na padronização. A mensagem abre pelo que muda para ela.
 
-A mensagem chama a pessoa como o cadastro de `definir-pessoa` diz que ela é chamada. Um apelido que o cadastro não confirma, mesmo vindo de quem pede o texto, fica de fora: diga isso e use o nome do cadastro. Sem cadastro, use o nome que a pessoa usa para se apresentar.
+A mensagem chama a pessoa como o cadastro de `definir-pessoa` diz que ela é chamada. Um apelido que a pessoa nunca usou conosco e que o cadastro não confirma, mesmo vindo de quem pede o texto, fica de fora: diga isso e use o nome do cadastro. Sem cadastro, use o nome que a pessoa usa para se apresentar.
+
+O tratamento carinhoso que a própria pessoa usa conosco, como "meu querido", "amiga" ou um diminutivo afetuoso, volta na mesma medida: é rapport, e não apelido inventado. Leia as últimas mensagens dela antes de rascunhar e devolva o mesmo grau de calor, de risada e de emoji, dentro do vocabulário, sem perguntar a quem escreve se pode. Quem é cordial e formal recebe o mesmo tom, e o calor não se oferece a quem não o deu primeiro.
 
 Afirmação de fato que só vem de uma busca ou de uma leitura sua, como "conferi o código e só X usa Y", não entra como certeza.
 Escreva o que você viu ("não vi Z usar") e, quando alguém é dono do assunto, formule a conferência como pergunta a essa pessoa ("só X usa Y, certo?").
@@ -140,6 +142,14 @@ Se você confiar só em `classify_text`, que lê palavra por palavra, uma expres
 1. Antes de rascunhar, consulte as expressões do texto, inteiras, com `lookup_terms`.
 2. Depois de rascunhar, consulte de novo cada expressão que o rascunho usa.
 3. Tire a que voltar proibida ou a evitar, com a troca da linha.
+
+### Tratamento carinhoso não devolvido
+
+Se você escrever num tom neutro ou formal para quem nos trata com carinho, como "meu querido", o texto sai correto e frio, e a pessoa percebe que não houve rapport.
+
+1. Leia as últimas mensagens dela antes de rascunhar.
+2. Devolva o mesmo tratamento, a mesma saudação e o mesmo grau de calor, dentro do vocabulário.
+3. Não transforme isso em pergunta à pessoa que escreve, e não use apelido que ela não usou.
 
 ### Fala de outra pessoa
 
@@ -250,7 +260,7 @@ O título ficou específico, com o nome canônico que a fonte já tinha. Não vi
 - Avisar que a chance já passou parece urgência. A alternativa mantém desejo e urgência, sem perda consumada.
 - O motivo verdadeiro de uma mudança parece transparência. Contado a quem chega, como a troca frequente de pessoas no papel, ele é contexto interno e gera desconforto. O motivo neutro entra no lugar.
 - Assunto de e-mail parece legenda. No celular ele é notificação: curto, pessoal e com curiosidade.
-- Um apelido parece deixar a mensagem calorosa. Sem saber se a pessoa gosta dele, ele pode soar íntimo demais: só o cadastro confirma como ela é chamada.
+- Um apelido inventado por quem escreve parece deixar a mensagem calorosa, mas pode soar íntimo demais: só o cadastro confirma como a pessoa é chamada. O tratamento carinhoso que ela mesma usa conosco é outra coisa, e devolvê-lo é o rapport que esta habilidade pede.
 - O dado que a conversa já citou parece confirmado. Cliente, peça, oportunidade e histórico comercial vêm da fonte que a pessoa indicou.
 - Título publicitário parece o tom de voz. O texto pede intenção, recorte e conexão, e recusa a fórmula genérica. A busca precisa continuar achando o nome canônico.
 - "Reunião com X" parece claro. Em evento externo, o título diz o encontro e guarda o nome mais buscável.
