@@ -37,7 +37,7 @@ jobs:
           head: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
       - name: Run script tests
         if: steps.scope.outputs.code == 'true'
-        run: for test in .agents/scripts/*/test_*.py .agents/skills/*/scripts/test_*.py; do .venv/bin/python "$test" || exit 1; done
+        run: shopt -s nullglob; for test in .agents/scripts/*/test_*.py .agents/skills/*/scripts/test_*.py plugins/*/skills/*/scripts/test_*.py; do .venv/bin/python "$test" || exit 1; done
       - name: Set up Node.js
         if: steps.scope.outputs.node == 'true'
         uses: actions/setup-node@v7
