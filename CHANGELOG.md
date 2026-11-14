@@ -1,5 +1,28 @@
 # Changelog
 
+## [1.88.0](https://github.com/jimmyandrade/harness/compare/v1.87.0...v1.88.0) (2026-11-14)
+
+
+### Features
+
+* add the consultar-vocabulario skill and move the vocabulary queries out of redigir-com-tom-de-voz ([#1207](https://github.com/jimmyandrade/harness/issues/1207)) ([408d05a](https://github.com/jimmyandrade/harness/commit/408d05a99e9a90b51721858d99b12609f42106a9))
+* **conversar-no-whatsapp:** transcribe audios when reading and quote the excerpt in the reply ([#1166](https://github.com/jimmyandrade/harness/issues/1166)) ([a93be95](https://github.com/jimmyandrade/harness/commit/a93be955894637704073f84c615971ae95104a50))
+* **definir-negociacao:** check the date and the channel of the previous contact before writing the resumption ([#1202](https://github.com/jimmyandrade/harness/issues/1202)) ([9772a71](https://github.com/jimmyandrade/harness/commit/9772a714df6ddabc7a4de01c52f704bbf97b314e))
+* **identificar-duplicata:** treat a person from another company who shares a first name with someone of the business as a different person ([#1199](https://github.com/jimmyandrade/harness/issues/1199)) ([2c9eb9a](https://github.com/jimmyandrade/harness/commit/2c9eb9ae4bb7757c06d94c75998f46e44a8150d6))
+* introduce the brand first when writing to a new responsible in consultar-responsavel-pela-oportunidade ([#1206](https://github.com/jimmyandrade/harness/issues/1206)) ([5a7a63c](https://github.com/jimmyandrade/harness/commit/5a7a63c1cf939020de768b6dc6e58afade621ddd))
+* propose the way to take part and the contacts in prospectar-oportunidades ([#1205](https://github.com/jimmyandrade/harness/issues/1205)) ([0a9e2c6](https://github.com/jimmyandrade/harness/commit/0a9e2c6de9824633d997d1367736b4627396a809))
+* **usar-whatsapp-web:** save unsaved contacts, link notes to the data source and check each conversation ([#1169](https://github.com/jimmyandrade/harness/issues/1169)) ([c326625](https://github.com/jimmyandrade/harness/commit/c3266252656b887858fbb9b3539aae7126eb662b))
+
+
+### Bug Fixes
+
+* **conversar-no-whatsapp:** create the missing label and label the earlier conversations ([#1203](https://github.com/jimmyandrade/harness/issues/1203)) ([10639e4](https://github.com/jimmyandrade/harness/commit/10639e444ca059c8089ded6c3af83fb204a55716))
+* **escrever-link:** never build the repository name from the project folder ([#1201](https://github.com/jimmyandrade/harness/issues/1201)) ([d225412](https://github.com/jimmyandrade/harness/commit/d2254128caa020086f95484aa62ba7e4605f56bb))
+* never mix the organizer's edition with a proposal that another group received at the same place ([#1185](https://github.com/jimmyandrade/harness/issues/1185)) ([fa07632](https://github.com/jimmyandrade/harness/commit/fa076322afe9aee936b6294183d56180cbab0747))
+* **pesquisar-compra:** first contact by message at any hour, call as last resort ([#1198](https://github.com/jimmyandrade/harness/issues/1198)) ([c75d1b8](https://github.com/jimmyandrade/harness/commit/c75d1b8c5836149ede097996f95ba0c273e4fc86))
+* **pesquisar-compra:** start the search where and when the person will be ([#1200](https://github.com/jimmyandrade/harness/issues/1200)) ([2f02e56](https://github.com/jimmyandrade/harness/commit/2f02e56e8ef2664bf24cd5d806409a02ca51f642))
+* show the exact text of pending drafts, never only a number ([#1204](https://github.com/jimmyandrade/harness/issues/1204)) ([5f0fc33](https://github.com/jimmyandrade/harness/commit/5f0fc33014a59d77dc5dc5cdac03949ec16d0c0a))
+
 ## [1.87.0](https://github.com/jimmyandrade/harness/compare/v1.86.1...v1.87.0) (2026-11-14)
 
 
