@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.41.2"
+  version: "0.41.3"
   aliases:
     - redigir-mensagem-de-whatsapp
   related:
@@ -18,7 +18,7 @@ metadata:
     - definir-vocabulario
     - dividir-mensagem
     - enviar-email
-    - enviar-imagem-no-whatsapp
+    - anexar-arquivo-no-whatsapp
     - escrever-link
     - evoluir-habilidade
     - procurar-agenda
@@ -149,7 +149,7 @@ Uma conversa que está fluindo continua no WhatsApp, e a resposta sai rápido. U
 Toda data no rascunho vai no `Formato da data na mensagem`. Calcule o dia da semana como a regra do dia da semana manda. O link segue `escrever-link`.
 
 Antes de enviar, tire um print do campo e confira o texto, a lista e a mensagem citada. Se a formatação sair diferente do aprovado, limpe o campo e digite de novo.
-Imagem e arquivo seguem `enviar-imagem-no-whatsapp`, depois do sim: a imagem nunca vai pela Nova figurinha.
+Imagem e arquivo seguem `anexar-arquivo-no-whatsapp`, depois do sim: a imagem nunca vai pela Nova figurinha.
 Depois de enviar, leia a conversa de novo, confira se a mensagem aparece e diga o horário.
 Compare o que saiu com o que você mostrou. Cada diferença que a pessoa fez antes de enviar vira termo por `definir-vocabulario`. Se não souber se a diferença é regra ou escolha do momento, pergunte.
 
