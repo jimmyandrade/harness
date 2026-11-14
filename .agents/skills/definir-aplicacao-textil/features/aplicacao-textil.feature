@@ -133,13 +133,13 @@ Funcionalidade: Aplicação
       Mas não escolhe o campo
 
     Exemplo: Aplicação de antes da data de corte
-      Dado que a aplicação foi criada antes da data de corte da cobrança
+      Dado que a aplicação foi criada antes da data de corte para cadastro completo
       Quando a habilidade termina de gravar
       Então ela não cobra a foto nem as informações
       E o que falta não vira pendência
 
     Exemplo: Data de corte vazia
-      Dado que as instruções do projeto não definem a data de corte da cobrança
+      Dado que as instruções do projeto não definem a data de corte para cadastro completo
       Quando a habilidade termina de gravar
       Então ela cobra o que falta de toda aplicação
 
