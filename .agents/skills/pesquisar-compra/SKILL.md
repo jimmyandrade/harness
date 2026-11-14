@@ -4,7 +4,7 @@ description: Pesquisa o que comprar, cruza com despesas, estoque e bens que já 
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.5.1"
+  version: "0.5.2"
   related:
     - conversar-no-whatsapp
     - definir-ativo-imobilizado
@@ -70,9 +70,11 @@ Um insumo que está nas despesas e falta no estoque fica no fim da resposta, com
 
 Escreva os requisitos antes das opções. Cada requisito diz de onde veio: do que a pessoa disse, de um registro nosso, da ficha técnica do fabricante ou de um anúncio.
 
-Procure na lista de requisitos de compra o requisito do item e, separado, o do serviço sobre ele, como a impressão, o bordado ou a costura: o produto físico e o serviço têm requisitos diferentes. O requisito de um item parecido não vale para este, como o da etiqueta interna para a etiqueta bordada com logo.
+Procure na lista de requisitos de compra o requisito do que vai ser comprado. Quando a empresa entrega o item pronto, como uma etiqueta bordada que ela mesma fornece, é um requisito só, o do item entregue. Só quando a pessoa fornece o item e compra o trabalho sobre ele, como imprimir ou bordar numa peça que ela já tem, são dois requisitos, o do item e o do serviço.
 
-Sem o requisito do item ou do serviço, pare antes de pesquisar empresas e antes de escrever a qualquer uma, e entreviste a pessoa. Proponha as perguntas que definem o item ou o serviço, a partir do que você sabe do assunto e do que o fornecedor costuma perguntar, como a arte, a quantidade, o tamanho, o material, as cores e o acabamento, e deixe a pessoa adiantar o que já decidiu.
+Não junte compras diferentes num requisito: a etiqueta de cuidados de uma peça, o serviço de imprimir nela e a etiqueta de marca que a empresa fornece são três compras. O requisito de um item parecido não vale para este.
+
+Sem o requisito do que vai ser comprado, pare antes de pesquisar empresas e antes de escrever a qualquer uma, e entreviste a pessoa. Proponha as perguntas que definem o item ou o serviço, a partir do que você sabe do assunto e do que o fornecedor costuma perguntar, como a arte, a quantidade, o tamanho, o material, as cores e o acabamento, e deixe a pessoa adiantar o que já decidiu.
 
 Feche a especificação com ela e grave-a como requisito na lista de requisitos de compra do projeto. Só então pergunte às empresas. Sem o nome da lista no mapeamento nem nos parâmetros, diga qual falta e entregue a especificação na resposta.
 O requisito que ninguém confirmou fica marcado como não confirmado. Não complete com o que o modelo supõe.
@@ -207,9 +209,9 @@ Se você ler como o estado inteiro um pedido que diz só o nome de um lugar, a p
 
 ### Empresa consultada sem a especificação
 
-Se você escrever às empresas antes de ver os requisitos do item e do serviço, elas pedem a arte, a quantidade e o acabamento, e a pessoa responde a perguntas que a especificação devia ter fechado antes. Um requisito de item parecido, como o da etiqueta interna, não cobre a etiqueta bordada, e o produto físico não cobre o serviço de imprimir ou bordar nele.
+Se você escrever às empresas antes de ver o requisito do que vai ser comprado, elas pedem a arte, a quantidade e o acabamento, e a pessoa responde a perguntas que a especificação devia ter fechado antes. Um requisito de item parecido, como o da etiqueta de cuidados, não cobre a etiqueta de marca bordada, e a especificação de um item não cobre o serviço de imprimir nele.
 
-1. Procure no Passo 3 o requisito do item e o do serviço, separados.
+1. Procure no Passo 3 o requisito do que vai ser comprado: um só, se a empresa entrega o item pronto, ou o do item e o do serviço, se a pessoa fornece o item.
 2. Sem eles, entreviste a pessoa e feche a especificação antes de pesquisar e de escrever.
 3. Grave a especificação como requisito e só depois pergunte às empresas.
 
@@ -253,7 +255,8 @@ Li o estoque e achei um rolo do mesmo tecido com saldo. Mostrei o saldo e pergun
 - A lista de empresas não está no workspace conectado: diga isso e siga com a resposta. Não cadastre em outra lista.
 - O item é híbrido, entre estoque e bem durável: pergunte o destino antes de encaminhar.
 - É um serviço, não um produto: use os mesmos passos, com o escopo e o prazo no lugar dos requisitos do item.
-- A compra junta um item e um serviço sobre ele, como a etiqueta e a impressão nela: são dois requisitos, e a pesquisa só começa com os dois fechados.
+- A pessoa fornece o item e compra o trabalho sobre ele, como a etiqueta de cuidados e a impressão nela: são dois requisitos, e a pesquisa só começa com os dois fechados.
+- A empresa entrega o item pronto, como a etiqueta de marca bordada que ela mesma fornece: é um requisito só, o do item entregue, com o que a empresa combina e entrega.
 - O requisito do item não existe, mas existe o de um item parecido: não use o parecido. Entreviste a pessoa.
 - O pedido cita um lugar sem dizer o alcance, como o nome de uma cidade que também é o do estado: confirme o alcance antes de pesquisar. Uma empresa fora dele fica de fora do cadastro e do contato.
 
