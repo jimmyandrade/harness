@@ -4,7 +4,7 @@ description: Pesquisa o que comprar, cruza com despesas, estoque e bens que já 
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.5"
+  version: "0.3.6"
   related:
     - conversar-no-whatsapp
     - definir-ativo-imobilizado
@@ -61,6 +61,7 @@ Leia também a viagem ativa ou a próxima, seguindo `definir-viagem`: onde a pes
 Se a lista não estiver no workspace conectado, diga qual faltou e siga com as outras. Não use a lista de outro workspace.
 Um bem ou um saldo que já serve responde a pergunta: mostre o que achou e pergunte se a pessoa ainda quer comprar.
 Uma compra anterior vale como fonte do requisito. O insumo que já foi comprado diz o que o equipamento precisa aguentar.
+Não conclua onde o insumo está, nem se a pessoa o tem, por uma frase solta da conversa. Confira a compra anterior e o estoque e, na dúvida, pergunte antes de mudar o que se procura.
 O comprovante da compra anterior diz o vendedor, como o recebedor do pagamento. Guarde o nome para o Passo 4.
 Um insumo que está nas despesas e falta no estoque fica no fim da resposta, com a sugestão de `gerenciar-estoque`. Não grave.
 
