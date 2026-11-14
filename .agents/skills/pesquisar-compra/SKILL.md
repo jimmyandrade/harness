@@ -4,11 +4,12 @@ description: Pesquisa o que comprar, cruza com despesas, estoque e bens que já 
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.4"
+  version: "0.3.5"
   related:
     - conversar-no-whatsapp
     - definir-ativo-imobilizado
     - definir-empresa
+    - definir-viagem
     - evoluir-habilidade
     - gerenciar-estoque
     - identificar-duplicata
@@ -56,6 +57,7 @@ flowchart LR
 A lista de despesas, a de estoque e a de ativos imobilizados vêm do mapeamento de dados do projeto.
 Quando o projeto tem uma lista de requisitos de compra ou de custos de produção, leia as duas também.
 O requisito já escrito evita perguntar de novo, e o custo de hoje, como um serviço de terceiro que a compra substitui, mostra em quanto tempo ela se paga. Siga `lancar-despesa-da-empresa`, `gerenciar-estoque` e `definir-ativo-imobilizado` para ler cada uma, e `identificar-duplicata` para o item que parece o mesmo com outro nome.
+Leia também a viagem ativa ou a próxima, seguindo `definir-viagem`: onde a pessoa vai estar, em que dias e horas, e onde ficam os itens que ela precisa. A busca de empresas começa pelas dos lugares e dos horários em que a pessoa estará. Uma empresa de onde ela só volta depois do prazo fica para depois, e a resposta diz a cidade de cada empresa.
 Se a lista não estiver no workspace conectado, diga qual faltou e siga com as outras. Não use a lista de outro workspace.
 Um bem ou um saldo que já serve responde a pergunta: mostre o que achou e pergunte se a pessoa ainda quer comprar.
 Uma compra anterior vale como fonte do requisito. O insumo que já foi comprado diz o que o equipamento precisa aguentar.
