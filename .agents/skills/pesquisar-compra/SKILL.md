@@ -4,7 +4,7 @@ description: Pesquisa o que comprar, cruza com despesas, estoque e bens que já 
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.2"
+  version: "0.4.3"
   related:
     - conversar-no-whatsapp
     - definir-ativo-imobilizado
@@ -102,7 +102,9 @@ O primeiro contato é por mensagem, pelo WhatsApp, pelo e-mail ou pelo formulár
 Antes do primeiro envio a cada empresa, ela precisa estar cadastrada, com o rótulo no WhatsApp e o link da página dela na nota do contato. A pressa não adia esses três.
 A primeira mensagem explica o que é o item e para que a pessoa o usa, com o link do anúncio ou da compra quando houver, e já traz o que a empresa vai perguntar: o material, o formato, a quantidade e o prazo. Uma empresa que não conhece o item não consegue dizer se atende: explique antes de pedir indicação. Antes de enviar, confira nos registros o que já se sabe de cada um e pergunte à pessoa só o que falta, como a quantidade. A resposta da empresa não deve abrir uma segunda rodada de perguntas que a primeira mensagem já podia responder.
 
-Quando a compra é por quantidade, a empresa tem um pedido mínimo (MOQ), e a primeira mensagem o pergunta a cada uma. O mínimo que a empresa responde vai para as notas da página dela, com a data. O mínimo de uma empresa não vale para outra e não decide a quantidade da pessoa. Consulte, antes, o que o projeto já registra como mínimo costumeiro desse item, no data source que o mapeamento indica, e diga que é costume e não confirmação da empresa.
+Quando a compra é por quantidade, a empresa tem um pedido mínimo (MOQ), e a primeira mensagem o pergunta a cada uma. O mínimo que a empresa responde vai para as notas da página dela, com a data. O mínimo de uma empresa não vale para outra e não decide a quantidade da pessoa. Quando o mínimo da empresa passa da quantidade necessária, diga à pessoa o excesso que sobraria.
+
+Quando o insumo é para peças que a própria marca produz, como etiqueta ou embalagem, a quantidade a orçar vem das unidades dessas peças: as produzidas mais as previstas, menos as já vendidas. Leia essas contagens nos dados do projeto, seguindo `gerenciar-estoque`, e leve o total à pessoa para confirmar antes do envio. A mensagem leva essa quantidade, e nunca um número tirado de costume, de memória ou do mínimo de outra empresa.
 
 A mensagem diz à empresa só o que ela precisa para orçar e a disponibilidade da pessoa: quando ela pode retirar ou levar. Não conte que a pessoa viaja, onde está nem quando chega. Confira a disponibilidade no momento do envio, na viagem de `definir-viagem` e no que a pessoa disse hoje, porque uma frase dita horas antes pode ter deixado de valer.
 
@@ -197,11 +199,11 @@ Se você ler como o estado inteiro um pedido que diz só o nome de um lugar, a p
 
 ### Mínimo de uma empresa tomado como quantidade
 
-Se você sugerir à pessoa a quantidade que uma empresa aceita como mínimo, ou usar o mínimo de uma na mensagem a outra, a quantidade sai sem base e a pessoa decide com um número que não é dela.
+Se você sugerir à pessoa a quantidade que uma empresa aceita como mínimo, passar um número de costume, ou usar o mínimo de uma na mensagem a outra, a quantidade sai sem base e a pessoa decide com um número que não é dela.
 
 1. Pergunte o MOQ a cada empresa, na primeira mensagem, como o Passo 6 manda.
 2. Grave o que cada uma respondeu nas notas da página dela, com a data.
-3. A quantidade é da pessoa: leve a ela o mínimo de cada empresa e o que o projeto registra como costume, sem escolher por ela.
+3. A quantidade vem das unidades das peças, como o Passo 6 manda, e a pessoa a confirma: leve a ela esse total e o mínimo de cada empresa.
 
 ### Compra feita pela pesquisa
 
