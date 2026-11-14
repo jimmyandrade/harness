@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.5.1"
   related:
     - definir-grafia
     - definir-perfil-social
@@ -40,6 +40,7 @@ flowchart LR
 ### Passo 2
 
 Antes de criar, use `identificar-duplicata` com nome, variações e CNPJ disponíveis. Não trate um novo nome no comprovante como empresa nova sem essa comparação.
+Repita a busca no instante de criar, no mesmo passo e depois de qualquer pesquisa na web. Outra sessão ou pessoa pode ter cadastrado a mesma empresa enquanto você pesquisava, e uma busca feita minutos antes não vale.
 
 ```mermaid
 flowchart LR
@@ -78,6 +79,14 @@ Antes de gravar, leia a descrição de cada propriedade no esquema da lista: ela
 Quando houver pessoa identificada, relacione-a nas pessoas responsáveis. Os donos são outra relação e não substituem essa. Quem verifica é usuário do workspace e não substitui essa. No tipo de público, acrescente a opção de fornecedor quando fizer sentido. Não apague os valores que já estão. Com pessoa vinculada, abra o registro dela e confira as empresas relacionadas. Se a empresa já apareceu, pare. Se não apareceu, relacione. Não relacione de novo. As notas qualificam o papel, o contexto, a pendência ou a certeza. A nota não substitui a relação. Telefone, WhatsApp e endereço não entram na nota.
 
 ## Problemas comuns
+
+### Empresa criada com a busca antiga
+
+Se você criar a página confiando numa busca feita antes da pesquisa na web, outra sessão pode já ter cadastrado a mesma empresa e a lista ganha uma duplicata.
+
+1. Busque de novo pelo nome e pelas variações, no mesmo passo em que cria.
+2. Achada, atualize essa página e não crie outra.
+3. Duas páginas já criadas: pare e diga qual fica, sem apagar nenhuma.
 
 ### Empresa criada sem buscar o tipo de local
 
