@@ -3,7 +3,7 @@ name: conferir-pedidos-da-viagem
 description: Confere os pedidos de comida feitos num aplicativo de entrega durante uma viagem contra as despesas de alimentação lançadas para ela e aponta o que falta cadastrar. Usada quando a pessoa pergunta se todos os pedidos da viagem estão lançados, ou ao fechar a prestação de contas da viagem. NÃO serve para lançar a despesa, cadastrar a viagem nem conferir outro tipo de gasto.
 metadata:
   author: jimmyandrade
-  version: "0.1.1"
+  version: "0.1.2"
   related:
     - definir-viagem
     - evoluir-habilidade
@@ -103,6 +103,7 @@ Li a viagem, com o destino e o período, e o histórico que você trouxe. Deixei
 - O pedido foi cancelado ou reembolsado por inteiro: não é despesa. Diga que ficou de fora e por quê.
 - O pedido saiu em nome de outra pessoa que viajou junto: é da viagem. Siga `lancar-despesa-da-empresa` para saber quem pagou.
 - A viagem não tem período no cadastro: peça a ida e a volta e diga que o cadastro está incompleto. Não deduza o período.
+- Um segundo cartão do mesmo restaurante, perto de um pedido já lançado, pode ser a reentrega do que faltou na primeira: o aplicativo a registra como pedido novo, mas o pagamento é um só. Pergunte antes de apontá-lo como faltante. Se for reentrega, não lance outra despesa e diga na despesa existente que houve duas entregas.
 - Há mais de um aplicativo de entrega no período: confira o histórico de cada um, por vez.
 - O pedido já está lançado e ligado à viagem: só confirme. Não lance de novo.
 

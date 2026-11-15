@@ -17,3 +17,12 @@ Funcionalidade: Conferir os pedidos da viagem pelo endereço de entrega
       Quando o agente confere os pedidos da viagem
       Então o agente complementa o vínculo na mesma despesa
       E não cria outro lançamento
+
+  Regra: A reentrega do que faltou não é outro pagamento
+
+    Exemplo: Segundo cartão do mesmo restaurante depois de uma entrega incompleta
+      Dado que uma despesa de jantar já está lançada e o histórico traz outro cartão do mesmo restaurante perto da mesma data
+      E que a pessoa diz que o restaurante reenviou o que faltou na primeira entrega
+      Quando o agente confere os pedidos da viagem
+      Então o agente não aponta o segundo cartão como despesa faltante
+      E registra na despesa existente que houve duas entregas
