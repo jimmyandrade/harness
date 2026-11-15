@@ -2,6 +2,7 @@
  * Vocabulary commands.
  *
  * lookup reads one term. lookup-terms reads several in one call: repeat --term, and a term of more than one word is read as a whole. exists maps each token of a text to whether it exists. classify-text gives the level of each word, emoji, and punctuation mark of a text, with the recommended term of an avoided one: its alternative or, without one, its substitution.
+ * audit lists what a glossary contradicts or leaves out: an example, an alternative, or a substitution that holds a forbidden term, and a field a level expects and a row lacks. diff compares the glossary with the one in the directory --against, by spelling and tags, and lists the rows added, removed, and changed, each with the fields that differ. Neither writes.
  * terms writes one language in one pass. Flags are key and value.
  * --language, --mode, and --validation apply to the whole batch. --dry-run
  * validates and reports what the write would do, with every problem that would
@@ -41,6 +42,8 @@
  * Run: node api/cli.ts terms --language pt-BR --mode upsert --state allowed --term iPhone --case-sensitive --categories brand --description "..." --reason "..."
  * Run: node api/cli.ts terms --file lote.json --mode upsert
  * Run: node api/cli.ts terms --file lote.json --mode upsert --dry-run
+ * Run: node api/cli.ts audit --language pt-BR
+ * Run: node api/cli.ts diff --language pt-BR --against /caminho/da/outra/pasta
  * Run: node api/cli.ts delete --language pt-BR --term contigo --tags maria-silva
  * Run: node api/cli.ts delete --language pt-BR --term contigo --tags "" --dry-run
  * Run: node api/cli.ts init --language es
@@ -53,6 +56,7 @@ import { readFileSync } from "node:fs"
 import { classifyPhrase } from "./routes/classify-text/index.ts"
 import { existsPhrase } from "./routes/exists/index.ts"
 import { lookupTerm, lookupTerms } from "./routes/lookup/index.ts"
+import { auditGlossary, diffGlossaries } from "./shared/review.ts"
 import { Glossary, InvalidGlossary, deleteBatch, initGlossary, migrate, writeBatch } from "./shared/glossary.ts"
 import { parseBody } from "./shared/http.ts"
 import { readOptions, report } from "./shared/options.ts"
@@ -149,6 +153,15 @@ export function run(argv: string[]): number {
       console.log(JSON.stringify(writeBatch(glossary, termsFrom(rest))))
     } else if (command === "delete") {
       console.log(JSON.stringify(deleteBatch(glossary, deleteFrom(rest))))
+    } else if (command === "audit") {
+      const flags = flagsFrom(rest, ["language"])
+      if (flags.language === undefined) throw new InvalidGlossary("Unknown language.")
+      console.log(JSON.stringify(auditGlossary(glossary, String(flags.language))))
+    } else if (command === "diff") {
+      const flags = flagsFrom(rest, ["language", "against"])
+      if (flags.language === undefined) throw new InvalidGlossary("Unknown language.")
+      if (flags.against === undefined) throw new InvalidGlossary("Provide the directory of the glossary to compare with.")
+      console.log(JSON.stringify(diffGlossaries(glossary, String(flags.language), String(flags.against))))
     } else if (command === "version") {
       console.log(JSON.stringify(versionInfo()))
     } else if (command === "init") {

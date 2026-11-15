@@ -16,6 +16,6 @@ test("a business harness creates the vocabulary server from harness/vocabulary/m
   await client.connect(clientSide)
 
   assert.deepEqual(await client.ping(), {})
-  assert.equal((await client.listTools()).tools.length, 9)
+  assert.equal((await client.listTools()).tools.length, 10)
   await client.close()
 })

@@ -213,7 +213,7 @@ test("the server answers initialize and write_terms on stdio", async () => {
     assert.equal(frames[0]?.result?.protocolVersion, "2024-11-05")
     assert.deepEqual(
       frames[1]?.result?.tools?.map((tool) => tool.name),
-      ["lookup_term", "lookup_terms", "exists_in_text", "classify_text", "write_terms", "delete_terms", "get_version", "migrate_glossary", "init_glossary"],
+      ["lookup_term", "lookup_terms", "exists_in_text", "classify_text", "write_terms", "delete_terms", "get_version", "migrate_glossary", "audit_glossary", "init_glossary"],
     )
     const payload = JSON.parse(frames[2]?.result?.content?.[0]?.text ?? "{}")
     assert.equal(payload.inserted.length, 1)

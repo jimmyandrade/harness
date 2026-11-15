@@ -745,3 +745,26 @@ test("classify-text applies forbidden_in and allowed_in to the --tags of the rea
     console.log = write
   }
 })
+
+test("audit and diff read the glossary and write nothing", () => {
+  const decided = { decided_by: { name: "Jimmy Andrade" }, decided_at: "2026-11-13" }
+  const now = mkdtempSync(join(tmpdir(), "glossary-"))
+  const before = mkdtempSync(join(tmpdir(), "glossary-"))
+  const rows = {
+    look: { state: "allowed", description: "visual", reason: "usar", examples: ["peça confortável"], ...decided },
+    peça: { state: "forbidden", description: "ambígua", substitution: "produto", rejected: [], alternatives: [], ...decided },
+  }
+  writeFileSync(join(now, "pt-BR.json"), `${JSON.stringify(rows, null, 2)}\n`)
+  writeFileSync(join(before, "pt-BR.json"), `${JSON.stringify({ look: rows.look }, null, 2)}\n`)
+  const lines: string[] = []
+  const write = console.log
+  console.log = (line: string) => lines.push(line)
+  try {
+    assert.equal(run(["--glossary", now, "audit", "--language", "pt-BR"]), 0)
+    assert.equal(run(["--glossary", now, "diff", "--language", "pt-BR", "--against", before]), 0)
+  } finally {
+    console.log = write
+  }
+  assert.equal(JSON.parse(lines[0] ?? "{}").findings[0].kind, "forbidden-term-in-example")
+  assert.deepEqual(JSON.parse(lines[1] ?? "{}").added, [{ term: "peça", tags: [] }])
+})
