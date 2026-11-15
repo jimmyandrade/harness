@@ -254,3 +254,17 @@ Funcionalidade: Preço de produto
       Quando a habilidade responde
       Então ela mostra o preço da pessoa ao lado
       E pergunta antes de tratar o novo preço como final
+
+  Regra: o preço à vista segue a terminação das instruções do projeto
+
+    Exemplo: Pix com terminação definida
+      Dado que as instruções do projeto definem a terminação do preço à vista como 9
+      Quando a habilidade define o preço do Pix
+      Então ele termina em 9, como R$ 299
+      E a habilidade diz que o à vista é um preço de conversão
+      E a etiqueta de preço cheio segue a decisão do formato
+
+    Exemplo: Débito derivado do Pix
+      Dado que as instruções do projeto definem a terminação do preço à vista como 9
+      Quando a habilidade deriva o preço do débito a partir do Pix
+      Então ela arredonda para cima até a terminação do preço à vista
