@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.90.0](https://github.com/jimmyandrade/harness/compare/v1.89.0...v1.90.0) (2026-11-15)
+
+
+### Features
+
+* **definir-hospedagem:** send a dictated thanks or notice without the confirmation screen ([#1222](https://github.com/jimmyandrade/harness/issues/1222)) ([3965097](https://github.com/jimmyandrade/harness/commit/396509710a7a3cbc503dc540ac4022562205fead))
+
+
+### Bug Fixes
+
+* **pesquisar-compra:** default the reach of a purchase search to the named city ([#1220](https://github.com/jimmyandrade/harness/issues/1220)) ([9fa1a31](https://github.com/jimmyandrade/harness/commit/9fa1a3178c104cd5a8ce7c456e6bc1ae37fa4f1a))
+
 ## [1.89.0](https://github.com/jimmyandrade/harness/compare/v1.88.0...v1.89.0) (2026-11-14)
 
 
