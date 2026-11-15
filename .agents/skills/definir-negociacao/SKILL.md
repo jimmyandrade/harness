@@ -5,13 +5,15 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.5.5"
   related:
     - definir-agenda
     - evoluir-habilidade
+    - inscrever-na-oportunidade
     - organizar-ponto-de-contato
     - procurar-banco-de-dados
     - procurar-email
+    - procurar-oportunidade
     - redigir-com-tom-de-voz
     - sincronizar-cronograma
 ---
@@ -25,6 +27,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 ```yaml
 # `Modo de aprendizado` diz se a habilidade pergunta antes de evoluir ou evolui sozinha.
 "Modo de aprendizado": "perguntar"
+# `Ordem dos canais de execução` é a ordem em que a habilidade tenta enviar uma mensagem ou fazer uma inscrição. Passa ao canal seguinte só quando o anterior não existe ou falha.
+"Ordem dos canais de execução": ["conector", "linha de comando", "API", "navegador do app", "extensão do navegador"]
 ```
 
 ## Instruções
@@ -32,6 +36,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 ### Passo 1
 
 Conversa ligada a um negócio, como cotação, proposta, parceria ou venda, fica na página da negociação, na lista de negociações. Conversa sem negócio, como convite, agradecimento ou networking, fica na discussão da página da pessoa, e na da empresa quando há uma. Não crie negociação para ela.
+
+Leia a descrição da lista de negociações no esquema antes de gravar: se ela proíbe o contato com a organização de uma oportunidade, como a de uma feira, esse contato não é negociação. Ele fica na discussão da página da pessoa e na da empresa organizadora, e a inscrição fica na página da inscrição.
 
 Os nomes das listas e das propriedades vêm do mapeamento de dados do projeto, ou dos parâmetros das instruções do projeto onde a ferramenta não lê o mapeamento. Este texto usa os conceitos: negociação, pessoa, empresa, cronograma, inscrição, empresa abordada, pessoa abordada e oportunidade. Se o nome da lista não estiver no mapeamento nem nos parâmetros, use `procurar-banco-de-dados`, dizendo para que serve a lista. Se a lista não estiver no workspace conectado, pare e peça. Não adivinhe o nome.
 
@@ -71,6 +77,16 @@ Pergunte só o que nenhuma fonte responde e diga quais você consultou. Se duas 
 Antes de redigir ou enviar a retomada de um contato, leia nos comentários a data e o canal da troca anterior. A mensagem anterior que a pessoa cola vale com a data que ela tem: "hoje", "agora" e "estamos" eram do dia dela, e o que mudou desde então vem das fontes.
 
 Não presuma que o contato anterior foi no mesmo canal do atual: confirme o canal antes de escrever. O texto diz o canal certo, como "pelo Instagram", e não "por aqui" quando o canal mudou. Diga como o contato foi achado quando a pessoa contar, como a postagem ou o site, e não invente a origem.
+
+Quando a pergunta é se já houve contato com uma empresa ou pessoa e nenhuma fonte tem registro, não encerre com "não achei". Confira se a oportunidade dela está cadastrada, com `procurar-oportunidade`. Pesquise na internet o site, o perfil social e o contato público da empresa, da pessoa ou da oportunidade, e veja se há edição futura e formulário de inscrição ou de curadoria. Diga o que achou, com os links.
+
+Com formulário aberto, tente a inscrição já. Antes de abrir o formulário, carregue `inscrever-na-oportunidade` e preencha só como ela manda, com o contato da empresa e o formato que cada campo valida.
+
+Com ou sem inscrição, proponha também o contato direto, pelo canal em que a organização responde, para a marca se apresentar e avisar da inscrição. O texto cita quem indicou a marca quando a pessoa contar, e não inventa indicação. Ele sai por `redigir-com-tom-de-voz`.
+
+A primeira mensagem a uma pessoa se apresenta por quem fala, com nome e papel, e não só pela marca. Leia no cadastro de pessoas quem assina e pergunte quando houver mais de uma. Com várias pessoas, o texto nomeia cada uma.
+
+Com o texto e o destino aprovados, envie você mesmo, sem pedir à pessoa que envie. Tente os canais na `Ordem dos canais de execução` e passe ao seguinte só quando o anterior não existir ou falhar. Se nenhum enviar, entregue o texto pronto e diga o que falhou em cada canal. Sem a aprovação, não envie nem cadastre a empresa ou a pessoa. Depois do envio, registre a troca como o Passo 3 manda.
 
 ### Passo 5
 
@@ -118,6 +134,22 @@ Se você gravar a conversa de uma edição nova na negociação de outra, o hist
 2. Sem ela, crie uma nova, ligada só a essa oportunidade, com o link da anterior.
 3. Não mova o histórico antigo para a nova.
 
+### Sem registro e sem proposta
+
+Se você responder só que não achou registro de contato, a pessoa tem de pedir a pesquisa e a abordagem, e o contato não anda.
+
+1. Depois do checklist do Passo 4, confira se a oportunidade está cadastrada e pesquise na internet o site, o perfil social, o contato público, a próxima edição e o formulário de inscrição.
+2. Com formulário aberto, tente a inscrição. Responda com o que achou, com os links, e proponha o canal, o motivo e o texto da primeira mensagem, apresentada por quem fala e com a indicação quando a pessoa contar.
+3. Não envie nem cadastre sem a aprovação do texto e do destino.
+
+### Envio devolvido à pessoa
+
+Se você escrever o texto aprovado e esperar a pessoa mandar, o contato atrasa e a negociação fica sem o registro do envio.
+
+1. Com a aprovação, envie o texto pela `Ordem dos canais de execução`.
+2. Só entregue o texto à pessoa quando nenhum canal enviar, e diga o que falhou em cada um.
+3. Registre a troca na mesma rodada do envio, como o Passo 3 manda.
+
 ### Divergência escondida
 
 Se você escolher uma das fontes quando elas divergem, a pessoa chega na hora errada.
@@ -145,6 +177,14 @@ Não havia cotação, proposta, parceria nem venda. Gravei na discussão da pág
 
 A mensagem colada não tinha data. Li os comentários: foi enviada pelo Instagram em 9 de maio, e a retomada sai seis meses depois, pelo WhatsApp. Troquei o "hoje" dela pelo que mudou desde então, escrevi "no Instagram" para o contato anterior e perguntei como o número foi achado antes de afirmar a origem.
 
+### já falamos com a Lia, do Ateliê Exemplo?
+
+Consultei os comentários, o cronograma, as inscrições e o e-mail, e nenhum tem registro. A oportunidade não estava cadastrada. Pesquisei na internet: o Ateliê Exemplo tem site e perfil no Instagram, que responde a mensagens, e não tem formulário de inscrição. Propus abordar pelo Instagram, para pedir uma cotação de bordado, com o texto no tom de voz. Não enviei nem cadastrei a empresa antes da aprovação. Aprovado o texto, enviei pelo conector do Instagram, registrei a troca na discussão da página da pessoa e disse o que registrei.
+
+### já falamos com a organização da Feira Exemplo?
+
+Sem registro, achei a feira cadastrada e, no Instagram dela, um formulário aberto de curadoria para a edição de março. Tentei a inscrição e propus também uma mensagem pelo Instagram para a organizadora, que se apresenta por Ana e Beto, as duas pessoas que assinam a marca, com nome e papel, e cita a Lia como quem indicou a marca, porque a pessoa contou isso. Depois do envio, registrei o formulário na página da inscrição e a mensagem na discussão da organizadora, sem criar negociação, porque a lista de negociações proíbe o contato com a organização de feiras.
+
 ### a Isadora também respondeu pela Feira Exemplo
 
 Conferi se a pessoa abordada aceita mais de uma pessoa antes de somar Isadora Ribeiro à negociação.
@@ -153,12 +193,16 @@ Conferi se a pessoa abordada aceita mais de uma pessoa antes de somar Isadora Ri
 
 - A negociação não existe, ou é de outra edição da mesma empresa: busque pela empresa e pela oportunidade antes de criar, e só crie quando há negócio.
 - A conversa é um convite, um agradecimento ou um café, sem negócio: grave na discussão da página da pessoa. Não crie negociação.
+- A lista de negociações proíbe o contato com a organização de feiras: grave a DM e o formulário na discussão da pessoa e da inscrição. Não crie negociação.
 - A conversa não tem data: use `Data aproximada:` e diga de onde veio.
 - Várias mensagens no mesmo dia e assunto: um comentário só, com os horários.
 - A pessoa corrige um fato já gravado: novo comentário datado com a correção. Não apague o anterior.
 - A mensagem anterior chega colada, sem data nem canal: pergunte os dois antes de escrever a retomada. Não presuma que o canal é o mesmo do atual.
 - O canal do contato mudou, como do Instagram para o WhatsApp: o texto diz o canal do contato anterior e a origem do novo, como a pessoa contou.
 - A lista não está no workspace conectado, ou o nome dela não está no mapeamento: pare e peça.
+- Sem registro de contato, e a pesquisa na internet não acha site, perfil nem contato público: diga o que pesquisou e peça à pessoa o canal. Não invente um contato.
+- Nenhum canal de execução consegue enviar: entregue o texto pronto e diga o que falhou em cada canal. Não peça à pessoa que tente primeiro.
+- A pesquisa acha mais de uma empresa ou pessoa com o mesmo nome: mostre as candidatas com o link de cada uma e pergunte qual é, antes de propor a abordagem.
 
 ## Pegadinhas
 
@@ -168,7 +212,10 @@ Conferi se a pessoa abordada aceita mais de uma pessoa antes de somar Isadora Ri
 - Um comentário de propriedade fica escondido no campo. Só a discussão da página aparece no topo.
 - O mesmo fato pode estar no WhatsApp, no e-mail e no manual com horários diferentes. A data mais recente não é automaticamente a certa.
 - A mensagem anterior parece valer como está hoje. O "hoje" e o "estamos" dela eram do dia em que foi enviada, e o canal dela pode não ser o de agora.
+- O texto aprovado parece o fim do trabalho. A aprovação é o sim ao envio, e quem envia é você, pelos canais da `Ordem dos canais de execução`.
+- "Não achei registro" parece uma resposta completa. Ela só diz que as fontes do workspace estão vazias: a próxima ação é pesquisar na internet e propor a abordagem.
 - A empresa abordada e a pessoa abordada são relações. Telefone e grafias vêm por rollup e não se gravam aqui.
+- Um formulário aberto parece pedir só os campos preenchidos com os dados que você já tem. A skill de inscrição define de onde vem cada dado e o formato de cada campo, como o celular só com dígitos: carregue-a antes de digitar.
 
 ## Scripts disponíveis
 

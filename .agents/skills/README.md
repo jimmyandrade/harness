@@ -496,9 +496,11 @@ flowchart LR
   definir_medicao_de_metrica --> identificar_duplicata
   definir_medicao_de_metrica --> reconhecer_imagem
   definir_negociacao --> definir_agenda
+  definir_negociacao --> inscrever_na_oportunidade
   definir_negociacao --> organizar_ponto_de_contato
   definir_negociacao --> procurar_banco_de_dados
   definir_negociacao --> procurar_email
+  definir_negociacao --> procurar_oportunidade
   definir_negociacao --> redigir_com_tom_de_voz
   definir_negociacao --> sincronizar_cronograma
   definir_obra_musical --> definir_fonograma
