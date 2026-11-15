@@ -404,7 +404,7 @@ function listHasText(value: unknown): boolean {
   return Array.isArray(value) && value.some((item) => typeof item === "string" && collapse(item) !== "")
 }
 
-export const writeModeSchema = z.enum(["insert", "update", "upsert"], { error: "Provide the mode." })
+export const writeModeSchema = z.enum(["insert", "update", "upsert", "fill"], { error: "Provide the mode." })
 export type WriteMode = z.infer<typeof writeModeSchema>
 
 export const termsRequest = z.object({

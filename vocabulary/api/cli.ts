@@ -41,6 +41,7 @@
  * Run: node api/cli.ts terms --language pt-BR --mode insert --state allowed --term "!" --category punctuation --description "Ponto de exclamação" --reason "..." 
  * Run: node api/cli.ts terms --language pt-BR --mode upsert --state allowed --term iPhone --case-sensitive --categories brand --description "..." --reason "..."
  * Run: node api/cli.ts terms --file lote.json --mode upsert
+ * Run: node api/cli.ts terms --file lote.json --mode fill
  * Run: node api/cli.ts terms --file lote.json --mode upsert --dry-run
  * Run: node api/cli.ts audit --language pt-BR
  * Run: node api/cli.ts diff --language pt-BR --against /caminho/da/outra/pasta

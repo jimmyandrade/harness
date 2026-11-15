@@ -115,7 +115,7 @@ export type ExistsResult = Record<string, boolean | { exists: true; term: string
 /**
  * Write operation mode.
  */
-export type WriteMode = "insert" | "update" | "upsert"
+export type WriteMode = "insert" | "update" | "upsert" | "fill"
 
 /**
  * Validation level for write operations.
