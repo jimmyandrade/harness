@@ -1,0 +1,23 @@
+{
+  "skill_name": "escrever-legenda-do-post",
+  "evals": [
+    {
+      "id": "legenda-de-reel-dentro-do-limite",
+      "prompt": "Escreva a legenda deste Reel de bastidor, com hashtags e CTA: <link da página do Reel>",
+      "expected_output": "A habilidade lê o formato do Reel e o perfil autor antes de escrever. A legenda conta o que a fala não contou, sem repetir o roteiro, e fecha com um CTA principal que diz a ação e o destino. A resposta traz a contagem de caracteres e de hashtags contra o máximo do formato. As hashtags ficam fora do texto. Nenhuma marcação de tom entra na legenda. A legenda nova vai na versão da IA, e a versão humana não muda.",
+      "files": []
+    },
+    {
+      "id": "legenda-de-evento-sem-depender-de-comentario",
+      "prompt": "Escreva a legenda do carrossel que divulga a feira deste sábado: <link da página do evento>",
+      "expected_output": "A habilidade lê o nome, a data, o horário e o endereço na página do evento e pergunta se a página não existir. A legenda segue três blocos: o quê, quando e onde; por que vale ir, com provas concretas; e o CTA. O horário e o endereço aparecem na legenda e na imagem, e nenhum depende de comentário, de outro post ou de contexto externo. A data do post é anterior à do evento.",
+      "files": []
+    },
+    {
+      "id": "legenda-para-outra-rede-sem-registro",
+      "prompt": "Escreva a legenda deste post para o LinkedIn: <link da página do post>",
+      "expected_output": "A habilidade não aplica o limite nem a regra de hashtag do Instagram. Lê o limite de caracteres e as hashtags no registro do formato dessa rede e, sem registro ou sem o valor, pergunta e para. Não escreve com número de memória. Depois de ter o limite, escreve a legenda com o CTA principal e diz a contagem.",
+      "files": []
+    }
+  ]
+}
