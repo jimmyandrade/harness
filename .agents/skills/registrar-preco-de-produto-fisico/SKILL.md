@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.1"
+  version: "0.3.0"
   aliases:
     - definir-preco-de-produto
     - definir-preco-da-peca
@@ -127,7 +127,11 @@ Porta de entrada da marca, acessório, item de menor risco para a primeira compr
 
 Peça em promoção, saldo de coleção, última peça, bazar, outlet, campanha com prazo, cupom, peça-piloto, drop anterior ou outra condição especial pode ter preço quebrado para comunicar oportunidade. Preserve, quando existir, a âncora de preço cheio, de preferência redonda, como "De R$ 450 por R$ 399,90". Não deixe o quebrado de campanha parecer o preço normal da peça. Registre se o preço é cheio, promocional, de saldo, de campanha ou de condição especial.
 
-Preço calculado perto de um valor de `Barreiras psicológicas de preço`, como R$ 299,90 contra R$ 300, pede cuidado. Um preço exatamente na barreira conta como perto dela. Veja se a peça está numa faixa comercial em que reduzir a barreira ajuda a conversão, e evite essa lógica quando a peça precisa sustentar desejo, imagem, exclusividade, autoria ou percepção premium. O preço à vista de `Terminação do preço à vista` pode ficar logo abaixo da barreira, como R$ 299, porque é preço de conversão. Compare o ganho provável de conversão com o risco de reduzir o valor percebido, e diga por que o preço escolhido protege melhor a estratégia da peça e da coleção.
+Preço calculado perto de um valor de `Barreiras psicológicas de preço`, como R$ 299,90 contra R$ 300, pede cuidado. Um preço exatamente na barreira conta como perto dela.
+
+Veja se a peça está numa faixa comercial em que reduzir a barreira ajuda a conversão, e evite essa lógica quando a peça precisa sustentar desejo, imagem, exclusividade, autoria ou percepção premium. Compare o ganho provável de conversão com o risco de reduzir o valor percebido, e diga por que o preço escolhido protege melhor a estratégia da peça e da coleção.
+
+O preço à vista de `Terminação do preço à vista` pode ficar logo abaixo da barreira, como R$ 299, porque é preço de conversão.
 
 O preço também comunica posicionamento. Diga se o número escolhido comunica decisão, confiança e valor autoral, ou conversão, oportunidade e menor barreira de compra. Não recomende o quebrado só porque parece mais barato, sem ver se combina com a marca. Na dúvida, pergunte à pessoa: "esse preço precisa vender por impulso ou sustentar desejo?".
 
