@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.5.1"
   related:
     - definir-agenda
     - evoluir-habilidade
@@ -80,6 +80,8 @@ Quando a pergunta é se já houve contato com uma empresa ou pessoa e nenhuma fo
 
 Com formulário aberto, tente a inscrição já, seguindo `inscrever-na-oportunidade`. Com ou sem inscrição, proponha também o contato direto, pelo canal em que a organização responde, para a marca se apresentar e avisar da inscrição. O texto cita quem indicou a marca quando a pessoa contar, e não inventa indicação. Ele sai por `redigir-com-tom-de-voz`.
 
+A primeira mensagem a uma pessoa se apresenta por quem fala, com nome e papel, e não só pela marca. Leia no cadastro de pessoas quem assina e pergunte quando houver mais de uma. Com várias pessoas, o texto nomeia cada uma.
+
 Com o texto e o destino aprovados, envie você mesmo, sem pedir à pessoa que envie. Tente os canais na `Ordem dos canais de execução` e passe ao seguinte só quando o anterior não existir ou falhar. Se nenhum enviar, entregue o texto pronto e diga o que falhou em cada canal. Sem a aprovação, não envie nem cadastre a empresa ou a pessoa. Depois do envio, registre a troca como o Passo 3 manda.
 
 ### Passo 5
@@ -133,7 +135,7 @@ Se você gravar a conversa de uma edição nova na negociação de outra, o hist
 Se você responder só que não achou registro de contato, a pessoa tem de pedir a pesquisa e a abordagem, e o contato não anda.
 
 1. Depois do checklist do Passo 4, confira se a oportunidade está cadastrada e pesquise na internet o site, o perfil social, o contato público, a próxima edição e o formulário de inscrição.
-2. Com formulário aberto, tente a inscrição. Responda com o que achou, com os links, e proponha o canal, o motivo e o texto da primeira mensagem, com a indicação quando a pessoa contar.
+2. Com formulário aberto, tente a inscrição. Responda com o que achou, com os links, e proponha o canal, o motivo e o texto da primeira mensagem, apresentada por quem fala e com a indicação quando a pessoa contar.
 3. Não envie nem cadastre sem a aprovação do texto e do destino.
 
 ### Envio devolvido à pessoa
@@ -177,7 +179,7 @@ Consultei os comentários, o cronograma, as inscrições e o e-mail, e nenhum te
 
 ### já falamos com a organização da Feira Exemplo?
 
-Sem registro, achei a feira cadastrada e, no Instagram dela, um formulário aberto de curadoria para a edição de março. Tentei a inscrição e propus também uma mensagem pelo Instagram para a organizadora, que cita a Lia como quem indicou a marca, porque a pessoa contou isso.
+Sem registro, achei a feira cadastrada e, no Instagram dela, um formulário aberto de curadoria para a edição de março. Tentei a inscrição e propus também uma mensagem pelo Instagram para a organizadora, que se apresenta por Dora e Mel, com nome e papel, e cita a Lia como quem indicou a marca, porque a pessoa contou isso.
 
 ### a Isadora também respondeu pela Feira Exemplo
 
