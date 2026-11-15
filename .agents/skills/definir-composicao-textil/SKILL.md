@@ -5,11 +5,11 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.5.1"
   aliases:
     - definir-composicao-da-peca
   related:
-    - acompanhar-producao-de-produto
+    - acompanhar-producao-de-produto-fisico
     - definir-aplicacao-textil
     - definir-tarefa
     - definir-estampa
