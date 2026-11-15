@@ -3,7 +3,7 @@ name: fatiar-pull-request
 description: Corta a demanda em um rascunho por pergunta de revisão, empilha esses rascunhos e liga a pilha no GitHub. Usada quando a mesma demanda junta a chave, o componente e o lugar em que ele aparece, ou quando PRs abertos dependem uns dos outros. NÃO serve para commits da mesma pergunta nem para mesclar.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.6.0"
   related:
     - criar-pull-request
     - criar-commit
@@ -24,6 +24,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Fatiar por subtarefa": "não"
 # `Cópia de trabalho` é `Global` e cada skill pode sobrescrevê-lo. `worktree` trabalha num git worktree novo da `main`, nunca no clone da pessoa. Vazio trabalha onde a pessoa já está.
 "Cópia de trabalho": "worktree"
+# `PR que depende de outro`: `sempre` põe na pilha todo PR aberto da pessoa no repositório, na ordem de abertura, dependam ou não. Vazio empilha só o que depende de outro.
+"PR que depende de outro": ""
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -70,6 +72,7 @@ A resposta no antigo aponta o commit do novo.
 ### Passo 3
 
 Com mais de um PR que depende de outro, ligue-os numa pilha do GitHub.
+Com `PR que depende de outro` em `sempre`, todo PR aberto seu no repositório entra na pilha, na ordem em que foi aberto, mesmo sem dependência. O de baixo é o mais antigo e entra primeiro.
 A pilha é uma cadeia: cada PR abre contra a branch do de baixo, e há um PR por degrau.
 Um PR irmão, que abre contra a mesma branch de outro, não cabe na cadeia.
 
