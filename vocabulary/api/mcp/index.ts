@@ -19,11 +19,12 @@ import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprot
 import { classifyPhrase } from "../routes/classify-text/index.ts"
 import { existsPhrase } from "../routes/exists/index.ts"
 import { lookupTerm, lookupTerms } from "../routes/lookup/index.ts"
+import { auditGlossary } from "../shared/review.ts"
 import { Glossary, deleteBatch, initGlossary, migrate, writeBatch } from "../shared/glossary.ts"
 import { parseBody } from "../shared/http.ts"
 import { readOptions } from "../shared/options.ts"
 import { versionInfo } from "../shared/version.ts"
-import { LEVELS, LOOKUP_LIMIT, classifyTextRequest, lookupRequest, initRequest, lookupTermsRequest, migrateRequest } from "../shared/schema.ts"
+import { LEVELS, LOOKUP_LIMIT, auditRequest, classifyTextRequest, lookupRequest, initRequest, lookupTermsRequest, migrateRequest } from "../shared/schema.ts"
 import { isMain } from "../shared/main.ts"
 
 const languageProperty = { type: "string", description: "BCP 47 tag of the text, such as pt-BR." }
@@ -221,6 +222,17 @@ export const tools = [
     },
   },
   {
+    name: "audit_glossary",
+    description: "Review the glossary of one language without changing it. A finding is an example, an alternative, or a substitution that holds a term a row without tags forbids, or a field that the level of a row expects and a row that records a decision lacks. counts gives the rows, the rows that record no decision, which are the rows the glossary made on its own, and the findings. Call it before a commit that changes the glossary.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        language: languageProperty,
+      },
+      required: ["language"],
+    },
+  },
+  {
     name: "init_glossary",
     description: "Create the empty glossary of a language that has none yet, after the person confirms the language. Every other tool answers that a language without a glossary has none yet. An existing glossary stays as it is, and created is false. An invalid tag answers Unknown language and creates nothing. Never create the glossary file by hand.",
     inputSchema: {
@@ -290,6 +302,10 @@ export function callTool(directory: string, params: unknown): ToolResult {
     if (record?.name === "migrate_glossary") {
       const body = parseBody(migrateRequest, record.arguments)
       return reply(migrate(directory, body.language, body.write))
+    }
+    if (record?.name === "audit_glossary") {
+      const body = parseBody(auditRequest, record.arguments)
+      return reply(auditGlossary(directory, body.language))
     }
     if (record?.name === "init_glossary") {
       const body = parseBody(initRequest, record.arguments)

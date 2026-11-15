@@ -475,6 +475,10 @@ export const initRequest = z.object({
   language: prose("Unknown language."),
 })
 
+export const auditRequest = z.object({
+  language: prose("Unknown language."),
+})
+
 export const classificationSchema = z.object({
   from: z.literal("query"),
   language: z.string(),
