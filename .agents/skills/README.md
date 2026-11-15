@@ -31,6 +31,7 @@ flowchart LR
     classificar_estado_do_termo["classificar-estado-do-termo"]
     classificar_melhoria_tecnica["classificar-melhoria-tecnica"]
     comunicar_novidade_do_produto["comunicar-novidade-do-produto"]
+    conferir_pedidos_da_viagem["conferir-pedidos-da-viagem"]
     configurar_harness_de_negocio["configurar-harness-de-negocio"]
     consultar_responsavel_pela_oportunidade["consultar-responsavel-pela-oportunidade"]
     consultar_vocabulario["consultar-vocabulario"]
@@ -277,6 +278,11 @@ flowchart LR
   classificar_melhoria_tecnica --> priorizar_itens
   comunicar_novidade_do_produto --> conversar_no_whatsapp
   comunicar_novidade_do_produto --> redigir_com_tom_de_voz
+  conferir_pedidos_da_viagem --> definir_viagem
+  conferir_pedidos_da_viagem --> identificar_duplicata
+  conferir_pedidos_da_viagem --> lancar_despesa_da_empresa
+  conferir_pedidos_da_viagem --> lancar_despesa_pessoal
+  conferir_pedidos_da_viagem --> reconhecer_imagem
   configurar_harness_de_negocio --> criar_pull_request
   configurar_harness_de_negocio --> definir_issue_do_github
   configurar_harness_de_negocio --> levantar_ambiente_do_repositorio
