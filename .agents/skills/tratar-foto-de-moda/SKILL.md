@@ -3,7 +3,7 @@ name: tratar-foto-de-moda
 description: Trata e recria a foto de uma peça ou look a partir da foto enviada, preservando a fidelidade do produto, a identidade da pessoa modelo e a apresentação profissional. Usada ao gerar, tratar, corrigir ou revisar uma imagem de moda, mesmo sem dizer tratar. NÃO serve para registrar ou classificar a foto nem para publicá-la.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
   related:
     - evoluir-habilidade
 ---
@@ -86,7 +86,7 @@ Corrigir um erro não pode apagar outro detalhe: escreva o novo pedido de geraç
 
 ### Passo 10
 
-O registro da foto, o status e o histórico seguem `definir-foto-de-moda`. Aqui, uma imagem com falha de fidelidade fica `Precisa revisar`, e uma que a ferramenta só consegue recortar sem deformar a peça fica `Precisa gerar`. Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
+O registro da foto, o status e o histórico seguem `cadastrar-foto-de-moda`. Aqui, uma imagem com falha de fidelidade fica `Precisa revisar`, e uma que a ferramenta só consegue recortar sem deformar a peça fica `Precisa gerar`. Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
 
