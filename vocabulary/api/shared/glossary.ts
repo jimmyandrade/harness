@@ -48,7 +48,9 @@
  * row. A new term is stored
  * in lowercase, unless it is written with case_sensitive, which keeps its
  * casing as given. insert leaves a row that is already in the file.
- * update leaves a term that is absent. An update or an upsert of a term that is
+ * update leaves a term that is absent. fill is an upsert that leaves a row that
+ * holds a decision, one with decided_by or decided_at, and reports it as skipped.
+ * An update or an upsert of a term that is
  * in the file keeps every field the call does not send, so a call that sends
  * only a reason does not erase the description or the notes. A field sent
  * empty, as "" or [], is cleared. A row whose fields already match is
@@ -470,7 +472,15 @@ export function writeTerms(
   const path = glossaryFile(directory, tag)
   const { entries: loaded, format } = readGlossary(path)
   const problems: Problem[] = [...(options.problems ?? [])]
+  const held = new Set<BulkTerm>()
   const items = terms.map((term) => {
+    if (mode === "fill") {
+      const stored = targetRow(loaded, term, mode)
+      if (stored !== undefined && holdsDecision(stored)) {
+        held.add(term)
+        return term
+      }
+    }
     const { item, issues } = withStored(loaded, term, mode)
     for (const message of issues) problems.push({ term: term.term, message })
     return item
@@ -482,6 +492,7 @@ export function writeTerms(
       problems.push({ term: item.term, message: `${JSON.stringify(item.term)} is duplicated.` })
     }
     batch.push(item)
+    if (held.has(item)) continue
     for (const message of exampleIssues(item.term, [...item.examples, ...item.rejected], item.alternatives)) {
       problems.push({ term: item.term, message })
     }
@@ -501,6 +512,10 @@ export function writeTerms(
   for (const item of items) {
     const found = targetRow(loaded, item, mode)
     if (found !== undefined) {
+      if (held.has(item)) {
+        skipped.push({ term: item.term, reason: "The row holds a decision." })
+        continue
+      }
       const reason =
         matchKey(found.term) === matchKey(item.term)
           ? "Already in the glossary."
@@ -719,6 +734,11 @@ export function migrate(directory: string, language: string, write = false): Mig
  * a whole, so a call that moves a row to a level that refuses a stored field is
  * refused until it clears that field.
  */
+/** A row holds a decision when it records who decided or the day it was decided. */
+function holdsDecision(entry: Entry): boolean {
+  return entry.decidedBy !== undefined || entry.decidedAt !== undefined
+}
+
 function withStored(entries: readonly Entry[], item: BulkTerm, mode: WriteMode): { item: BulkTerm; issues: string[] } {
   if (mode === "insert") return { item, issues: [] }
   const stored = targetRow(entries, item, mode)
