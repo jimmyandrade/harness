@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.5.1"
+  version: "0.5.2"
   related:
     - definir-agenda
     - evoluir-habilidade
@@ -179,7 +179,7 @@ Consultei os comentários, o cronograma, as inscrições e o e-mail, e nenhum te
 
 ### já falamos com a organização da Feira Exemplo?
 
-Sem registro, achei a feira cadastrada e, no Instagram dela, um formulário aberto de curadoria para a edição de março. Tentei a inscrição e propus também uma mensagem pelo Instagram para a organizadora, que se apresenta por Dora e Mel, com nome e papel, e cita a Lia como quem indicou a marca, porque a pessoa contou isso.
+Sem registro, achei a feira cadastrada e, no Instagram dela, um formulário aberto de curadoria para a edição de março. Tentei a inscrição e propus também uma mensagem pelo Instagram para a organizadora, que se apresenta por Ana e Beto, as duas pessoas que assinam a marca, com nome e papel, e cita a Lia como quem indicou a marca, porque a pessoa contou isso.
 
 ### a Isadora também respondeu pela Feira Exemplo
 
