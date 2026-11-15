@@ -5,13 +5,15 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.5.0"
   related:
     - definir-agenda
     - evoluir-habilidade
+    - inscrever-na-oportunidade
     - organizar-ponto-de-contato
     - procurar-banco-de-dados
     - procurar-email
+    - procurar-oportunidade
     - redigir-com-tom-de-voz
     - sincronizar-cronograma
 ---
@@ -25,6 +27,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 ```yaml
 # `Modo de aprendizado` diz se a habilidade pergunta antes de evoluir ou evolui sozinha.
 "Modo de aprendizado": "perguntar"
+# `Ordem dos canais de execução` é a ordem em que a habilidade tenta enviar uma mensagem ou fazer uma inscrição. Passa ao canal seguinte só quando o anterior não existe ou falha.
+"Ordem dos canais de execução": ["conector", "linha de comando", "API", "navegador do app", "extensão do navegador"]
 ```
 
 ## Instruções
@@ -72,7 +76,11 @@ Antes de redigir ou enviar a retomada de um contato, leia nos comentários a dat
 
 Não presuma que o contato anterior foi no mesmo canal do atual: confirme o canal antes de escrever. O texto diz o canal certo, como "pelo Instagram", e não "por aqui" quando o canal mudou. Diga como o contato foi achado quando a pessoa contar, como a postagem ou o site, e não invente a origem.
 
-Quando a pergunta é se já houve contato com uma empresa ou pessoa e nenhuma fonte tem registro, não encerre com "não achei". Pesquise na internet o site, o perfil social e o contato público dela, e diga o que achou com o link. Proponha a abordagem: o canal pelo qual ela responde, o motivo do contato e o texto, que sai por `redigir-com-tom-de-voz`. Não envie nem cadastre a empresa ou a pessoa sem a confirmação da pessoa.
+Quando a pergunta é se já houve contato com uma empresa ou pessoa e nenhuma fonte tem registro, não encerre com "não achei". Confira se a oportunidade dela está cadastrada, com `procurar-oportunidade`. Pesquise na internet o site, o perfil social e o contato público da empresa, da pessoa ou da oportunidade, e veja se há edição futura e formulário de inscrição ou de curadoria. Diga o que achou, com os links.
+
+Com formulário aberto, tente a inscrição já, seguindo `inscrever-na-oportunidade`. Com ou sem inscrição, proponha também o contato direto, pelo canal em que a organização responde, para a marca se apresentar e avisar da inscrição. O texto cita quem indicou a marca quando a pessoa contar, e não inventa indicação. Ele sai por `redigir-com-tom-de-voz`.
+
+Com o texto e o destino aprovados, envie você mesmo, sem pedir à pessoa que envie. Tente os canais na `Ordem dos canais de execução` e passe ao seguinte só quando o anterior não existir ou falhar. Se nenhum enviar, entregue o texto pronto e diga o que falhou em cada canal. Sem a aprovação, não envie nem cadastre a empresa ou a pessoa. Depois do envio, registre a troca como o Passo 3 manda.
 
 ### Passo 5
 
@@ -124,9 +132,17 @@ Se você gravar a conversa de uma edição nova na negociação de outra, o hist
 
 Se você responder só que não achou registro de contato, a pessoa tem de pedir a pesquisa e a abordagem, e o contato não anda.
 
-1. Depois do checklist do Passo 4, pesquise na internet o site, o perfil social e o contato público da empresa ou da pessoa.
-2. Responda com o que achou, com os links, e proponha o canal, o motivo e o texto da primeira mensagem.
-3. Não envie nem cadastre sem a confirmação.
+1. Depois do checklist do Passo 4, confira se a oportunidade está cadastrada e pesquise na internet o site, o perfil social, o contato público, a próxima edição e o formulário de inscrição.
+2. Com formulário aberto, tente a inscrição. Responda com o que achou, com os links, e proponha o canal, o motivo e o texto da primeira mensagem, com a indicação quando a pessoa contar.
+3. Não envie nem cadastre sem a aprovação do texto e do destino.
+
+### Envio devolvido à pessoa
+
+Se você escrever o texto aprovado e esperar a pessoa mandar, o contato atrasa e a negociação fica sem o registro do envio.
+
+1. Com a aprovação, envie o texto pela `Ordem dos canais de execução`.
+2. Só entregue o texto à pessoa quando nenhum canal enviar, e diga o que falhou em cada um.
+3. Registre a troca na mesma rodada do envio, como o Passo 3 manda.
 
 ### Divergência escondida
 
@@ -157,7 +173,11 @@ A mensagem colada não tinha data. Li os comentários: foi enviada pelo Instagra
 
 ### já falamos com a Lia, do Ateliê Exemplo?
 
-Consultei os comentários, o cronograma, as inscrições e o e-mail, e nenhum tem registro. Pesquisei na internet: o Ateliê Exemplo tem site e perfil no Instagram, que responde a mensagens. Propus abordar pelo Instagram, para pedir uma cotação de bordado, com o texto escrito no tom de voz. Não enviei nem cadastrei a empresa antes da confirmação.
+Consultei os comentários, o cronograma, as inscrições e o e-mail, e nenhum tem registro. A oportunidade não estava cadastrada. Pesquisei na internet: o Ateliê Exemplo tem site e perfil no Instagram, que responde a mensagens, e não tem formulário de inscrição. Propus abordar pelo Instagram, para pedir uma cotação de bordado, com o texto no tom de voz. Não enviei nem cadastrei a empresa antes da aprovação. Aprovado o texto, enviei pelo conector do Instagram, registrei a troca na discussão da página da pessoa e disse o que registrei.
+
+### já falamos com a organização da Feira Exemplo?
+
+Sem registro, achei a feira cadastrada e, no Instagram dela, um formulário aberto de curadoria para a edição de março. Tentei a inscrição e propus também uma mensagem pelo Instagram para a organizadora, que cita a Lia como quem indicou a marca, porque a pessoa contou isso.
 
 ### a Isadora também respondeu pela Feira Exemplo
 
@@ -174,6 +194,7 @@ Conferi se a pessoa abordada aceita mais de uma pessoa antes de somar Isadora Ri
 - O canal do contato mudou, como do Instagram para o WhatsApp: o texto diz o canal do contato anterior e a origem do novo, como a pessoa contou.
 - A lista não está no workspace conectado, ou o nome dela não está no mapeamento: pare e peça.
 - Sem registro de contato, e a pesquisa na internet não acha site, perfil nem contato público: diga o que pesquisou e peça à pessoa o canal. Não invente um contato.
+- Nenhum canal de execução consegue enviar: entregue o texto pronto e diga o que falhou em cada canal. Não peça à pessoa que tente primeiro.
 - A pesquisa acha mais de uma empresa ou pessoa com o mesmo nome: mostre as candidatas com o link de cada uma e pergunte qual é, antes de propor a abordagem.
 
 ## Pegadinhas
@@ -184,6 +205,7 @@ Conferi se a pessoa abordada aceita mais de uma pessoa antes de somar Isadora Ri
 - Um comentário de propriedade fica escondido no campo. Só a discussão da página aparece no topo.
 - O mesmo fato pode estar no WhatsApp, no e-mail e no manual com horários diferentes. A data mais recente não é automaticamente a certa.
 - A mensagem anterior parece valer como está hoje. O "hoje" e o "estamos" dela eram do dia em que foi enviada, e o canal dela pode não ser o de agora.
+- O texto aprovado parece o fim do trabalho. A aprovação é o sim ao envio, e quem envia é você, pelos canais da `Ordem dos canais de execução`.
 - "Não achei registro" parece uma resposta completa. Ela só diz que as fontes do workspace estão vazias: a próxima ação é pesquisar na internet e propor a abordagem.
 - A empresa abordada e a pessoa abordada são relações. Telefone e grafias vêm por rollup e não se gravam aqui.
 
