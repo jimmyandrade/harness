@@ -1,6 +1,6 @@
 ---
 metadata:
-  version: "1.67.0"
+  version: "1.68.0"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -25,6 +25,7 @@ metadata:
       "Idioma das decisões de arquitetura": "inglês"
       "Idioma da mensagem de commit": "inglês"
       "Idioma do PR": "inglês"
+      "PR que depende de outro": "sempre"
     "preparar-tarefa-do-pull-request":
       "Onde ficam as tarefas": "issues do GitHub"
       "Projeto da tarefa por repositório": "issues do próprio repositório"
