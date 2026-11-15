@@ -1,15 +1,17 @@
 ---
-name: definir-foto-de-moda
+name: cadastrar-foto-de-moda
 description: Registra e classifica cada foto de moda, com tipo, ângulo, cena, vínculos, nome do arquivo, texto alternativo, status e histórico. Usada quando uma foto de peça ou look chega, é migrada, revisada ou aprovada, mesmo sem dizer registro. NÃO serve para tratar ou recriar a imagem nem para publicar a foto.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
+  aliases:
+    - definir-foto-de-moda
   related:
     - definir-pessoa
     - evoluir-habilidade
 ---
 
-# Definir foto de moda
+# Cadastrar foto de moda
 
 ## Parâmetros de configuração
 
