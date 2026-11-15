@@ -175,6 +175,7 @@ flowchart LR
     testar_habilidade["testar-habilidade"]
     testar_ponta_a_ponta["testar-ponta-a-ponta"]
     transcrever_audio_e_video["transcrever-audio-e-video"]
+    tratar_foto_de_moda["tratar-foto-de-moda"]
     triar_conversas["triar-conversas"]
     usar_whatsapp_web["usar-whatsapp-web"]
     validar_plano_de_vocabulario["validar-plano-de-vocabulario"]
