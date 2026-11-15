@@ -3,7 +3,7 @@ name: gravar-termos-no-vocabulario
 description: Use essa habilidade sempre que, ao cadastrar ou corrigir termos do vocabulário do tom de voz, for hora de pesquisar a grafia, testar, gravar o lote ou apagar uma linha, mesmo sem dizer gravar. NÃO use para decidir o nível, validar os campos, perguntar quais variações foram cadastradas, escrever o texto da marca, nem inventar um termo.
 metadata:
   author: jimmyandrade
-  version: "0.12.1"
+  version: "0.13.0"
   related:
     - definir-vocabulario
     - procurar-variacao-de-termo
@@ -57,6 +57,7 @@ Quando as duas linhas existirem, `related` aponta de uma para a outra. `related`
 
 Teste antes com `--dry-run` ou `dry_run`, no mesmo formato da escrita: um `--term` por termo, ou `write_terms`. `refused` lista os problemas. Grave o plano inteiro numa escrita só. Não crie um JSON do lote, nem no repositório, nem em pasta temporária, nem com a ferramenta de escrever arquivo. A pessoa só ouve a quantidade e a lista do que entrou no glossário. Com terminal, rode o comando. Sem terminal, chame a ferramenta do servidor `vocabulary`. Termo que não existia fica em minúsculas. Marca com caixa própria, como iPhone, leva `case_sensitive` e guarda a caixa. A linha que já existia conserva a grafia guardada. Se nenhum termo do plano existia, a resposta começa com a quantidade e segue com a lista do que entrou. Depois sugira plural, singular, feminino, masculino e outra grafia quando a palavra tiver. Não grave a sugestão.
 Pergunte se a gente usa essa forma, se evita ou se não usa. Evite só perguntar qual é o "estado" da palavra, pois nem sempre o usuário entende esse jargão.
+Um lote que vem de outra fonte, como um banco do Notion, grava com `--mode fill`: ele escreve o termo que falta e preenche só a linha que o vocabulário criou sozinho, sem `decided_by` nem `decided_at`. A linha que guarda uma decisão volta em `skipped`, com a razão, e a skill pergunta à pessoa antes de mudá-la.
 Pontuação e emoji não ganham essa sugestão. Um exemplo que também vem completo no lote permanece com essa linha. Um exemplo citado e ausente do lote nasce no estado desse vínculo, com as tags do termo. Uma falha deixa o vocabulário como estava. Não confirme o cadastro sem essa resposta.
 
 ### Passo 5
