@@ -3,7 +3,7 @@ name: fatiar-pull-request
 description: Corta a demanda em um rascunho por pergunta de revisão, empilha esses rascunhos e liga a pilha no GitHub. Usada quando a mesma demanda junta a chave, o componente e o lugar em que ele aparece, ou quando PRs abertos dependem uns dos outros. NÃO serve para commits da mesma pergunta nem para mesclar.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.6.1"
   related:
     - criar-pull-request
     - criar-commit
@@ -215,6 +215,7 @@ Atualizei com a branch do terceiro, mantive as stories dos dois lados e rodei bu
 - A tarefa da demanda parece bastar para todos os rascunhos. Cada rascunho tem a própria tarefa filha.
 - Atualizar só a de baixo parece não mexer nas de cima. O diff delas mistura os arquivos de baixo. Elas andam junto.
 - `gh stack link` parece só ligar PRs. Ele também troca a base de quem está fora da cadeia, sem avisar.
+- `gh stack link` parece deixar o rascunho como está, mesmo sem `--open`. Ao criar a pilha, ele tirou do rascunho PRs que estavam em rascunho. Releia o estado de cada PR depois e devolva o rascunho com `gh pr ready --undo`.
 - `gh stack view` parece mostrar a pilha ligada com `link`. Sem estado local, ele diz que a branch não faz parte da pilha.
 - O nome da branch local parece não importar. O commit de merge feito numa cópia de trabalho leva esse nome na mensagem, então dê à branch local o nome da de destino.
 
