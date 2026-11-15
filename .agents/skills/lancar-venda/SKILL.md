@@ -5,13 +5,13 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.13.3"
+  version: "0.13.4"
   aliases:
     - definir-venda
   related:
     - definir-lancamento-financeiro
     - definir-pessoa
-    - definir-preco-de-produto
+    - registrar-preco-de-produto-fisico
     - evoluir-habilidade
     - gerenciar-estoque
     - identificar-duplicata
@@ -56,7 +56,7 @@ flowchart LR
   Q{O pedido é?} -->|venda de produtos| A[Lança aqui]
   Q -->|gasto| D[lancar-despesa-da-empresa]
   Q -->|frase mista de caixa| L[definir-lancamento-financeiro]
-  Q -->|preço| P[definir-preco-de-produto]
+  Q -->|preço| P[registrar-preco-de-produto-fisico]
   Q -->|insumo| E[gerenciar-estoque]
   Q -->|bem durável| I[registrar-ciclo-do-ativo]
 ```
@@ -109,7 +109,7 @@ Pedido, ID da confirmação e ID da transação são três dados separados. O n�
 
 ### Passo 6
 
-O preço nominal é o valor inferido da venda, calculado das peças. O desconto comercial aplicado também é calculado. Grave só o motivo do desconto. Definir o preço de catálogo segue `definir-preco-de-produto`.
+O preço nominal é o valor inferido da venda, calculado das peças. O desconto comercial aplicado também é calculado. Grave só o motivo do desconto. Definir o preço de catálogo segue `registrar-preco-de-produto-fisico`.
 
 O motivo diz o porquê de cada parte do desconto, como o ajuste ao preço dos vizinhos ou o desconto do Pix à vista, e quem concedeu, quando a pessoa disse. Um rótulo como "preço do evento" não basta. Quando o porquê muda com a coleção do produto, leia a coleção na página do produto antes de perguntar.
 

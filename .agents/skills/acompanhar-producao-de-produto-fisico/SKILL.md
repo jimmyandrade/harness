@@ -1,12 +1,13 @@
 ---
-name: acompanhar-producao-de-produto
+name: acompanhar-producao-de-produto-fisico
 description: Use essa habilidade sempre que for lembrar que um produto precisa ser produzido, ou registrar que ele foi cortado ou produzido, por unidade e tamanho, inclusive molde, piloto e etiqueta, mesmo sem dizer produção. NÃO use para criar a tarefa, lançar a venda, mover o estoque de insumo, nem definir o preço.
 allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-data-sources notion:notion-create-pages notion:notion-update-page
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.1"
+  version: "0.3.0"
   aliases:
+    - acompanhar-producao-de-produto
     - acompanhar-producao-de-peca
   related:
     - definir-tarefa
@@ -16,7 +17,7 @@ metadata:
     - procurar-banco-de-dados
 ---
 
-# Acompanhar produção de produto
+# Acompanhar produção de produto físico
 
 ## Parâmetros de configuração
 

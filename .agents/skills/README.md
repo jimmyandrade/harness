@@ -15,7 +15,7 @@ flowchart LR
     acompanhar_edital["acompanhar-edital"]
     acompanhar_fila_de_revisao["acompanhar-fila-de-revisao"]
     acompanhar_itens_do_ponto_de_contato["acompanhar-itens-do-ponto-de-contato"]
-    acompanhar_producao_de_produto["acompanhar-producao-de-produto"]
+    acompanhar_producao_de_produto_fisico["acompanhar-producao-de-produto-fisico"]
     acompanhar_resposta_no_whatsapp["acompanhar-resposta-no-whatsapp"]
     acompanhar_retornos_pendentes["acompanhar-retornos-pendentes"]
     acompanhar_veiculo["acompanhar-veiculo"]
@@ -86,7 +86,6 @@ flowchart LR
     definir_planejamento_financeiro["definir-planejamento-financeiro"]
     definir_politica["definir-politica"]
     definir_post_mortem["definir-post-mortem"]
-    definir_preco_de_produto["definir-preco-de-produto"]
     definir_recurso_de_aprendizado["definir-recurso-de-aprendizado"]
     definir_reel_do_instagram["definir-reel-do-instagram"]
     definir_registro_de_reuniao["definir-registro-de-reuniao"]
@@ -161,6 +160,7 @@ flowchart LR
     registrar_ciclo_do_ativo["registrar-ciclo-do-ativo"]
     registrar_evidencia_visual["registrar-evidencia-visual"]
     registrar_preco_de_combustivel["registrar-preco-de-combustivel"]
+    registrar_preco_de_produto_fisico["registrar-preco-de-produto-fisico"]
     registrar_resultados_da_validacao_na_tarefa["registrar-resultados-da-validacao-na-tarefa"]
     revisar_financas["revisar-financas"]
     revisar_habilidade["revisar-habilidade"]
@@ -201,10 +201,10 @@ flowchart LR
   acompanhar_itens_do_ponto_de_contato --> organizar_ponto_de_contato
   acompanhar_itens_do_ponto_de_contato --> procurar_tarefa
   acompanhar_itens_do_ponto_de_contato --> registrar_ciclo_do_ativo
-  acompanhar_producao_de_produto --> definir_tarefa
-  acompanhar_producao_de_produto --> gerenciar_estoque
-  acompanhar_producao_de_produto --> identificar_duplicata
-  acompanhar_producao_de_produto --> procurar_banco_de_dados
+  acompanhar_producao_de_produto_fisico --> definir_tarefa
+  acompanhar_producao_de_produto_fisico --> gerenciar_estoque
+  acompanhar_producao_de_produto_fisico --> identificar_duplicata
+  acompanhar_producao_de_produto_fisico --> procurar_banco_de_dados
   acompanhar_resposta_no_whatsapp --> acompanhar_retornos_pendentes
   acompanhar_resposta_no_whatsapp --> conversar_no_whatsapp
   acompanhar_resposta_no_whatsapp --> definir_rotina
@@ -406,7 +406,7 @@ flowchart LR
   definir_campanha_de_conteudo --> delegar_aviso_de_plataforma
   definir_campanha_de_conteudo --> planejar_calendario_de_conteudo
   definir_codigo_fiscal --> identificar_duplicata
-  definir_composicao_textil --> acompanhar_producao_de_produto
+  definir_composicao_textil --> acompanhar_producao_de_produto_fisico
   definir_composicao_textil --> definir_aplicacao_textil
   definir_composicao_textil --> definir_estampa
   definir_composicao_textil --> definir_tarefa
@@ -526,8 +526,6 @@ flowchart LR
   definir_politica --> delegar_aviso_de_plataforma
   definir_politica --> formalizar_decisao
   definir_post_mortem --> definir_tarefa
-  definir_preco_de_produto --> gerenciar_estoque
-  definir_preco_de_produto --> procurar_banco_de_dados
   definir_recurso_de_aprendizado --> definir_agenda
   definir_recurso_de_aprendizado --> procurar_agenda
   definir_reel_do_instagram --> criar_ideia_de_conteudo
@@ -556,7 +554,7 @@ flowchart LR
   definir_tarefa --> auditar_tarefas
   definir_tarefa --> definir_grafia
   definir_tarefa --> procurar_tarefa
-  definir_tecido --> acompanhar_producao_de_produto
+  definir_tecido --> acompanhar_producao_de_produto_fisico
   definir_tecido --> definir_composicao_textil
   definir_tecido --> definir_estampa
   definir_tecido --> definir_tarefa
@@ -700,12 +698,12 @@ flowchart LR
   lancar_despesa_pessoal --> lancar_despesa_da_empresa
   lancar_venda --> definir_lancamento_financeiro
   lancar_venda --> definir_pessoa
-  lancar_venda --> definir_preco_de_produto
   lancar_venda --> gerenciar_estoque
   lancar_venda --> identificar_duplicata
   lancar_venda --> lancar_despesa_da_empresa
   lancar_venda --> procurar_banco_de_dados
   lancar_venda --> registrar_ciclo_do_ativo
+  lancar_venda --> registrar_preco_de_produto_fisico
   levantar_ambiente_do_repositorio --> criar_commit
   levantar_ambiente_do_repositorio --> criar_pull_request
   levantar_ambiente_do_repositorio --> escrever_codigo
@@ -882,6 +880,8 @@ flowchart LR
   registrar_preco_de_combustivel --> identificar_duplicata
   registrar_preco_de_combustivel --> lancar_despesa_da_empresa
   registrar_preco_de_combustivel --> procurar_banco_de_dados
+  registrar_preco_de_produto_fisico --> gerenciar_estoque
+  registrar_preco_de_produto_fisico --> procurar_banco_de_dados
   registrar_resultados_da_validacao_na_tarefa --> criar_pull_request
   registrar_resultados_da_validacao_na_tarefa --> pedir_revisao_de_pr_no_slack
   registrar_resultados_da_validacao_na_tarefa --> preparar_tarefa_do_pull_request
