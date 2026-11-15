@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.5.4"
+  version: "0.5.5"
   related:
     - definir-agenda
     - evoluir-habilidade
@@ -215,7 +215,6 @@ Conferi se a pessoa abordada aceita mais de uma pessoa antes de somar Isadora Ri
 - O texto aprovado parece o fim do trabalho. A aprovação é o sim ao envio, e quem envia é você, pelos canais da `Ordem dos canais de execução`.
 - "Não achei registro" parece uma resposta completa. Ela só diz que as fontes do workspace estão vazias: a próxima ação é pesquisar na internet e propor a abordagem.
 - A empresa abordada e a pessoa abordada são relações. Telefone e grafias vêm por rollup e não se gravam aqui.
-
 - Um formulário aberto parece pedir só os campos preenchidos com os dados que você já tem. A skill de inscrição define de onde vem cada dado e o formato de cada campo, como o celular só com dígitos: carregue-a antes de digitar.
 
 ## Scripts disponíveis
