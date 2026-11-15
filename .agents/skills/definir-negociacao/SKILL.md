@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.5.2"
+  version: "0.5.3"
   related:
     - definir-agenda
     - evoluir-habilidade
@@ -36,6 +36,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 ### Passo 1
 
 Conversa ligada a um negócio, como cotação, proposta, parceria ou venda, fica na página da negociação, na lista de negociações. Conversa sem negócio, como convite, agradecimento ou networking, fica na discussão da página da pessoa, e na da empresa quando há uma. Não crie negociação para ela.
+
+Leia a descrição da lista de negociações no esquema antes de gravar: se ela proíbe o contato com a organização de uma oportunidade, como a de uma feira, esse contato não é negociação. Ele fica na discussão da página da pessoa e na da empresa organizadora, e a inscrição fica na página da inscrição.
 
 Os nomes das listas e das propriedades vêm do mapeamento de dados do projeto, ou dos parâmetros das instruções do projeto onde a ferramenta não lê o mapeamento. Este texto usa os conceitos: negociação, pessoa, empresa, cronograma, inscrição, empresa abordada, pessoa abordada e oportunidade. Se o nome da lista não estiver no mapeamento nem nos parâmetros, use `procurar-banco-de-dados`, dizendo para que serve a lista. Se a lista não estiver no workspace conectado, pare e peça. Não adivinhe o nome.
 
@@ -179,7 +181,7 @@ Consultei os comentários, o cronograma, as inscrições e o e-mail, e nenhum te
 
 ### já falamos com a organização da Feira Exemplo?
 
-Sem registro, achei a feira cadastrada e, no Instagram dela, um formulário aberto de curadoria para a edição de março. Tentei a inscrição e propus também uma mensagem pelo Instagram para a organizadora, que se apresenta por Ana e Beto, as duas pessoas que assinam a marca, com nome e papel, e cita a Lia como quem indicou a marca, porque a pessoa contou isso.
+Sem registro, achei a feira cadastrada e, no Instagram dela, um formulário aberto de curadoria para a edição de março. Tentei a inscrição e propus também uma mensagem pelo Instagram para a organizadora, que se apresenta por Ana e Beto, as duas pessoas que assinam a marca, com nome e papel, e cita a Lia como quem indicou a marca, porque a pessoa contou isso. Depois do envio, registrei o formulário na página da inscrição e a mensagem na discussão da organizadora, sem criar negociação, porque a lista de negociações proíbe o contato com a organização de feiras.
 
 ### a Isadora também respondeu pela Feira Exemplo
 
@@ -189,6 +191,7 @@ Conferi se a pessoa abordada aceita mais de uma pessoa antes de somar Isadora Ri
 
 - A negociação não existe, ou é de outra edição da mesma empresa: busque pela empresa e pela oportunidade antes de criar, e só crie quando há negócio.
 - A conversa é um convite, um agradecimento ou um café, sem negócio: grave na discussão da página da pessoa. Não crie negociação.
+- A lista de negociações proíbe o contato com a organização de feiras: grave a DM e o formulário na discussão da pessoa e da inscrição. Não crie negociação.
 - A conversa não tem data: use `Data aproximada:` e diga de onde veio.
 - Várias mensagens no mesmo dia e assunto: um comentário só, com os horários.
 - A pessoa corrige um fato já gravado: novo comentário datado com a correção. Não apague o anterior.
