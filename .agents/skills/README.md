@@ -859,6 +859,7 @@ flowchart LR
   publicar_ata_de_reuniao --> definir_pessoa
   publicar_ata_de_reuniao --> definir_registro_de_reuniao
   publicar_produto_fisico_na_loja_virtual --> gerenciar_estoque
+  publicar_produto_fisico_na_loja_virtual --> registrar_preco_de_produto_fisico
   publicar_resposta_de_revisao --> atender_revisao_de_pull_request
   publicar_resposta_de_revisao --> definir_pessoa
   publicar_resposta_de_revisao --> escrever_link

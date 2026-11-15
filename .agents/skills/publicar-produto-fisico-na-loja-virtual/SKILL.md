@@ -3,11 +3,11 @@ name: publicar-produto-fisico-na-loja-virtual
 description: Publica e corrige um produto físico na loja virtual, com título, slug, variantes, estoque e prontidão para venda e marcação em post. Usada quando o produto vai à loja virtual ou precisa de correção lá, mesmo sem dizer loja. NÃO serve para cadastrar o produto, registrar o preço, movimentar estoque, vender no ponto de venda físico nem escrever o post.
 metadata:
   author: jimmyandrade
-  version: "0.1.1"
+  version: "0.1.2"
   aliases:
     - definir-produto-na-loja
   related:
-    - definir-preco-de-produto
+    - registrar-preco-de-produto-fisico
     - gerenciar-estoque
     - evoluir-habilidade
 ---
@@ -43,7 +43,7 @@ Ao trocar o slug de um produto que já tem endereço público, crie o redirecion
 
 ### Passo 4
 
-Cada eixo de variação, como o tamanho, é uma opção do produto. Preço e SKU de cada variante seguem o registro. Preço novo ou mudança de preço seguem `definir-preco-de-produto`.
+Cada eixo de variação, como o tamanho, é uma opção do produto. Preço e SKU de cada variante seguem o registro. Preço novo ou mudança de preço seguem `registrar-preco-de-produto-fisico`.
 
 ### Passo 5
 
