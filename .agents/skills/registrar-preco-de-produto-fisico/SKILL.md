@@ -1,6 +1,6 @@
 ---
 name: registrar-preco-de-produto-fisico
-description: Use essa habilidade sempre que for registrar, mudar ou conferir o preço de um ou mais produtos físicos, inclusive o preço dito para um grupo ou o preço anterior e a data da mudança, mesmo sem dizer preço. NÃO use para lançar a venda, cadastrar o produto, mover o estoque nem acompanhar a produção.
+description: Use essa habilidade sempre que for registrar, mudar, sugerir ou conferir o preço de um ou mais produtos físicos, inclusive o preço dito para um grupo ou o preço anterior e a data da mudança, mesmo sem dizer preço. NÃO use para lançar a venda, cadastrar o produto, mover o estoque nem acompanhar a produção.
 allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-data-sources notion:notion-create-pages notion:notion-update-page
 compatibility: Precisa de internet.
 metadata:
@@ -35,6 +35,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 # Vazios: sem valor, pergunte à pessoa e não escolha.
 "Destino do preço de um ponto de venda": ""
 "Fonte do estoque por local": ""
+# Terminação que fecha o preço quebrado, como `,90` em R$ 449,90. Só vale quando o Passo 5 aceita o preço quebrado.
+"Terminação do preço quebrado": ",90"
 ```
 
 ## Instruções
@@ -48,6 +50,7 @@ flowchart LR
   Q{O pedido é?} -->|preço anterior ou data da mudança| H[Passo 2]
   Q -->|preço de catálogo novo| R[Passo 3]
   Q -->|preço dito para um grupo| G[Passo 4]
+  Q -->|preço sugerido, conferido ou registrado| F[Passo 5]
   Q -->|venda| V[A skill de venda]
   Q -->|produzir o produto| P[A skill de produção]
   Q -->|insumo| E[gerenciar-estoque]
@@ -95,11 +98,21 @@ Para listar o estoque, o banco de unidades precisa dar as unidades de um local e
 
 ### Passo 5
 
+Ao sugerir, conferir, validar ou registrar um preço de venda, decida se ele é redondo, como R$ 450, ou quebrado, como R$ 449,90, antes de dar o número. A decisão parte da função que o preço precisa cumprir: sustentar valor percebido, autoria e desejo, ou favorecer conversão, entrada e comparação.
+
+O padrão é o preço redondo. Ele serve quando a peça precisa comunicar coleção, presença, acabamento, confiança, marca, valor autoral ou desejo.
+
+O preço quebrado só entra com uma justificativa clara, ligada a conversão, produto de entrada, campanha, saldo, condição especial ou barreira psicológica relevante. Diga na resposta qual é a função do preço e por que o formato escolhido a cumpre. Quando for quebrado, termine em `Terminação do preço quebrado`.
+
+Não termine todos os preços em `Terminação do preço quebrado` por hábito: cada peça passa pela decisão. Sem dado para saber a função da peça, pergunte antes de escolher o formato.
+
+### Passo 6
+
 Onde registrar o preço de um ponto de venda é `Destino do preço de um ponto de venda`. Com ele vazio, pergunte à pessoa onde registrar e não escolha. `Fonte do estoque por local` vazia também se pergunta.
 
 Não invente nome de banco nem de propriedade para o que o projeto não definiu: nenhum nome de banco entra nesta skill.
 
-### Passo 6
+### Passo 7
 
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
@@ -129,6 +142,14 @@ Se você editar ou apagar uma linha do histórico, o registro deixa de provar o 
 1. Acrescente uma linha nova com a correção.
 2. Deixe a linha antiga como está.
 
+### Preço quebrado por hábito
+
+Se você terminar todos os preços em `Terminação do preço quebrado`, a peça que precisava sustentar desejo passa a parecer promocional.
+
+1. Pergunte qual função o preço cumpre.
+2. Use o redondo quando a função for valor percebido, autoria ou desejo.
+3. Use o quebrado só com a justificativa de conversão, entrada, campanha, saldo, condição especial ou barreira psicológica, e diga qual é.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
@@ -141,6 +162,14 @@ Listei as camisetas pelo estoque do evento e tirei as vendidas antes. Mostrei a 
 
 Li o banco do histórico de preços, que começa em março. A mudança era de janeiro, então li as versões da página, que mostravam o preço e a data. Disse até onde cada fonte chega e não perguntei nada.
 
+### sugere o preço de uma peça autoral que custou 210
+
+Sugeri R$ 450 em vez de R$ 449,90. A peça precisa sustentar valor autoral e desejo, e disse isso na resposta. Não usei o preço quebrado, porque nenhuma função de conversão o justificava.
+
+### sugere o preço de um item de entrada que custou 40
+
+Sugeri R$ 89,90. O item é a porta de entrada da marca, e o quebrado ajuda a reduzir a barreira da primeira compra. Disse essa função na resposta.
+
 ### baixa o preço da caneca de 60 para 50
 
 Perguntei o motivo e quem decidiu. Acrescentei uma linha com o canal, os preços, a vigência e o custo na data. Não editei a linha antiga.
@@ -150,11 +179,13 @@ Perguntei o motivo e quem decidiu. Acrescentei uma linha com o canal, os preços
 - Nenhuma fonte chega até a mudança: diga qual consultou, até onde cada uma chega, e pergunte só o que ficou antes.
 - A lista do grupo fica vazia: diga isso e não mude nenhum preço.
 - A pessoa diz o preço de um produto só: confirme o produto e o preço antes de mudar.
+- A função da peça não está clara, como entrada, campanha ou valor autoral: pergunte antes de escolher o formato do preço.
 - O banco ou o workspace não está conectado: pare e peça.
 - O destino do preço do ponto de venda está vazio: pergunte onde registrar.
 
 ## Pegadinhas
 
+- O preço terminado em `,90` parece o padrão do varejo. Aqui o padrão é o redondo, e o quebrado precisa de uma função dita.
 - O nome do produto parece o grupo inteiro. Quem define o grupo é o estoque do local.
 - O preço dito no local parece valer para todos os produtos daquele tipo. Vale só para os que estavam lá e ainda tinham estoque.
 - A página do produto parece só ter o preço de hoje. As versões do produto e da variação guardam preços antigos que o banco do histórico ainda não tem.
