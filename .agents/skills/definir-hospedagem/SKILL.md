@@ -1,9 +1,9 @@
 ---
 name: definir-hospedagem
-description: Define a hospedagem de uma viagem depois da reserva, o que ela pede, como nome e documento dos hóspedes, veículo e chegada, e a resposta a quem hospeda, enviada só com a confirmação. Usada quando o anfitrião ou o hotel escreve. Não serve para ler a reserva, registrar a viagem nem redigir no tom da marca.
+description: Define a hospedagem de uma viagem depois da reserva, o que ela pede, como nome e documento dos hóspedes, veículo e chegada, e a resposta a quem hospeda, com o sim se leva dado pessoal. Usada quando o anfitrião ou o hotel escreve, ou a pessoa pede para agradecer ou avisar. Não serve para ler a reserva, registrar a viagem nem redigir no tom da marca.
 metadata:
   author: jimmyandrade
-  version: "0.7.1"
+  version: "0.8.0"
   aliases:
     - responder-pedido-da-hospedagem
   related:
@@ -34,6 +34,7 @@ metadata:
 ```mermaid
 flowchart LR
   Q{O pedido é?} -->|responder o que a hospedagem pediu| E[Esta habilidade]
+  Q -->|agradecer ou avisar quem hospeda| E
   Q -->|achar nome, endereço ou código da reserva| V[definir-viagem]
   Q -->|escrever o texto no tom da marca| R[redigir-com-tom-de-voz]
   Q -->|cadastrar o hóspede| P[definir-pessoa]
@@ -97,7 +98,8 @@ Falta antes de enviar: <o que a pessoa ainda precisa informar, ou "nada">
 Posso enviar? <pergunta que pede o sim>
 ```
 O texto da resposta passa por `redigir-com-tom-de-voz` antes de ser mostrado. A resposta traz só o pedido: quem chega, o veículo se foi pedido e o horário previsto. Não acrescente dado que a hospedagem não pediu.
-Mostre o rascunho completo, com o que falta, e espere o sim. Enviar dado pessoal a outra empresa é ação que só a pessoa autoriza, e o sim dado a um dado não vale para o seguinte.
+Quando a pessoa dita o texto, como um agradecimento ou um aviso de chegada, e ele não leva dado pessoal nem promessa além do que ela disse, o pedido já é o sim: envie pelo canal da reserva, sem a tela de confirmação, e diga o que enviou. Devolver só o rascunho nesse caso deixa o envio para a pessoa.
+Quando a resposta leva dado pessoal, mostre o rascunho completo, com o que falta, e espere o sim. Enviar dado pessoal a outra empresa é ação que só a pessoa autoriza, e o sim dado a um dado não vale para o seguinte.
 
 ### Passo 4
 
@@ -119,7 +121,7 @@ Compare a resposta com a hora mais tarde em que a pessoa volta, como o fim de um
 A rotina do canal avisa a pessoa a cada mensagem nova e entrega o resumo à sessão que espera.
 A senha de acesso nunca vai no aviso, no Notion nem em outro lugar: o aviso só diz que ela chegou e onde ver.
 
-Quando a hospedagem faz uma pergunta, deixe um rascunho de resposta, sem enviar.
+Quando a hospedagem faz uma pergunta e a pessoa ainda não mandou responder, deixe um rascunho de resposta, sem enviar.
 O envio segue o Passo 3.
 
 A cada resposta, registre na hospedagem em quantos minutos ela veio.
@@ -192,6 +194,14 @@ Se você responder o anfitrião de plataforma por e-mail, ou o hotel pela plataf
 1. Responda no canal em que o pedido chegou.
 2. Sem acesso a esse canal, entregue o texto pronto e diga onde colar.
 
+### Rascunho no lugar do envio
+
+Se você devolver só o rascunho de um agradecimento ou de um aviso que a pessoa ditou, ela tem de copiar e colar o texto, e o anfitrião fica sem resposta.
+
+1. Texto ditado, sem dado pessoal nem promessa além do dito: envie pelo canal da reserva e confira que saiu.
+2. Dado pessoal na resposta: mostre o rascunho e espere o sim.
+3. Diga o que enviou e onde.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
@@ -216,6 +226,7 @@ Respondi pelo e-mail em que o pedido chegou. Mandei nomes e horário. Não mande
 - O pedido chegou por um canal que a sessão não alcança: entregue o texto pronto e diga onde colar.
 - A pessoa já respondeu à mão: leia a conversa, não repita os dados e só registre o envio.
 - O pedido é só uma pergunta de confirmação, sem dado pessoal: responda sem o modelo.
+- A pessoa dita um agradecimento ou um aviso, como a hora em que chegou: envie sem a tela de confirmação, pelo canal da reserva.
 
 ## Pegadinhas
 
