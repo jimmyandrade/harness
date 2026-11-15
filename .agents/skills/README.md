@@ -27,6 +27,7 @@ flowchart LR
     auditar_tarefas["auditar-tarefas"]
     avaliar_atualizacoes_de_dependencia["avaliar-atualizacoes-de-dependencia"]
     bloquear_remetente_de_spam["bloquear-remetente-de-spam"]
+    cadastrar_foto_de_moda["cadastrar-foto-de-moda"]
     classificar_estado_do_termo["classificar-estado-do-termo"]
     classificar_melhoria_tecnica["classificar-melhoria-tecnica"]
     comunicar_novidade_do_produto["comunicar-novidade-do-produto"]
@@ -267,6 +268,7 @@ flowchart LR
   bloquear_remetente_de_spam --> definir_filtro_de_email
   bloquear_remetente_de_spam --> organizar_emails
   bloquear_remetente_de_spam --> procurar_email
+  cadastrar_foto_de_moda --> definir_pessoa
   classificar_estado_do_termo --> definir_vocabulario
   classificar_estado_do_termo --> gravar_termos_no_vocabulario
   classificar_estado_do_termo --> validar_plano_de_vocabulario
