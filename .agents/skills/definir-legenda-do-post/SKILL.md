@@ -3,7 +3,7 @@ name: definir-legenda-do-post
 description: Escreve e revisa a legenda de um post de qualquer rede, com limite de caracteres, hashtags, CTA principal, dados de evento e créditos. Usada quando se cria, revisa ou finaliza a legenda de um Reel, carrossel ou foto, mesmo sem dizer legenda. NÃO serve para escolher as palavras no tom de voz, escrever o roteiro nem publicar o post.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
   related:
     - definir-reel-do-instagram
     - criar-carrossel-do-instagram
@@ -172,6 +172,7 @@ A legenda abriu com o que, quando e onde, com horário e endereço, seguiu com d
 - A pessoa dá o evento sem horário: pergunte antes de escrever. Não ponha horário de memória.
 - O post não tem objetivo claro: pergunte, porque o CTA depende dele.
 - O vocabulário proíbe um termo que a pessoa quer na legenda: avise o conflito, não troque em silêncio.
+- O formato tem máximo de hashtags e não tem quantidade ideal: use até o máximo e sugira preencher a quantidade ideal.
 
 ## Pegadinhas
 
@@ -180,6 +181,7 @@ A legenda abriu com o que, quando e onde, com horário e endereço, seguiu com d
 - A marcação de tom parece fazer parte da legenda quando o roteiro a traz. Ela é direção e nunca entra, nem na contagem.
 - A legenda consolidada parece só um espelho. Ela é a versão final e prioriza a humana.
 - O endereço nos comentários parece bastar. A legenda precisa dizer sozinha.
+- A fala do vídeo parece liberar a palavra na legenda. O vocabulário decide: um termo que a fala usa pode ser proibido, e a legenda leva o recomendado.
 
 ## Scripts disponíveis
 
