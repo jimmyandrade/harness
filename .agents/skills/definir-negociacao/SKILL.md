@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.4.0"
   related:
     - definir-agenda
     - evoluir-habilidade
@@ -72,6 +72,8 @@ Antes de redigir ou enviar a retomada de um contato, leia nos comentários a dat
 
 Não presuma que o contato anterior foi no mesmo canal do atual: confirme o canal antes de escrever. O texto diz o canal certo, como "pelo Instagram", e não "por aqui" quando o canal mudou. Diga como o contato foi achado quando a pessoa contar, como a postagem ou o site, e não invente a origem.
 
+Quando a pergunta é se já houve contato com uma empresa ou pessoa e nenhuma fonte tem registro, não encerre com "não achei". Pesquise na internet o site, o perfil social e o contato público dela, e diga o que achou com o link. Proponha a abordagem: o canal pelo qual ela responde, o motivo do contato e o texto, que sai por `redigir-com-tom-de-voz`. Não envie nem cadastre a empresa ou a pessoa sem a confirmação da pessoa.
+
 ### Passo 5
 
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
@@ -118,6 +120,14 @@ Se você gravar a conversa de uma edição nova na negociação de outra, o hist
 2. Sem ela, crie uma nova, ligada só a essa oportunidade, com o link da anterior.
 3. Não mova o histórico antigo para a nova.
 
+### Sem registro e sem proposta
+
+Se você responder só que não achou registro de contato, a pessoa tem de pedir a pesquisa e a abordagem, e o contato não anda.
+
+1. Depois do checklist do Passo 4, pesquise na internet o site, o perfil social e o contato público da empresa ou da pessoa.
+2. Responda com o que achou, com os links, e proponha o canal, o motivo e o texto da primeira mensagem.
+3. Não envie nem cadastre sem a confirmação.
+
 ### Divergência escondida
 
 Se você escolher uma das fontes quando elas divergem, a pessoa chega na hora errada.
@@ -145,6 +155,10 @@ Não havia cotação, proposta, parceria nem venda. Gravei na discussão da pág
 
 A mensagem colada não tinha data. Li os comentários: foi enviada pelo Instagram em 9 de maio, e a retomada sai seis meses depois, pelo WhatsApp. Troquei o "hoje" dela pelo que mudou desde então, escrevi "no Instagram" para o contato anterior e perguntei como o número foi achado antes de afirmar a origem.
 
+### já falamos com a Lia, do Ateliê Exemplo?
+
+Consultei os comentários, o cronograma, as inscrições e o e-mail, e nenhum tem registro. Pesquisei na internet: o Ateliê Exemplo tem site e perfil no Instagram, que responde a mensagens. Propus abordar pelo Instagram, para pedir uma cotação de bordado, com o texto escrito no tom de voz. Não enviei nem cadastrei a empresa antes da confirmação.
+
 ### a Isadora também respondeu pela Feira Exemplo
 
 Conferi se a pessoa abordada aceita mais de uma pessoa antes de somar Isadora Ribeiro à negociação.
@@ -159,6 +173,8 @@ Conferi se a pessoa abordada aceita mais de uma pessoa antes de somar Isadora Ri
 - A mensagem anterior chega colada, sem data nem canal: pergunte os dois antes de escrever a retomada. Não presuma que o canal é o mesmo do atual.
 - O canal do contato mudou, como do Instagram para o WhatsApp: o texto diz o canal do contato anterior e a origem do novo, como a pessoa contou.
 - A lista não está no workspace conectado, ou o nome dela não está no mapeamento: pare e peça.
+- Sem registro de contato, e a pesquisa na internet não acha site, perfil nem contato público: diga o que pesquisou e peça à pessoa o canal. Não invente um contato.
+- A pesquisa acha mais de uma empresa ou pessoa com o mesmo nome: mostre as candidatas com o link de cada uma e pergunte qual é, antes de propor a abordagem.
 
 ## Pegadinhas
 
@@ -168,6 +184,7 @@ Conferi se a pessoa abordada aceita mais de uma pessoa antes de somar Isadora Ri
 - Um comentário de propriedade fica escondido no campo. Só a discussão da página aparece no topo.
 - O mesmo fato pode estar no WhatsApp, no e-mail e no manual com horários diferentes. A data mais recente não é automaticamente a certa.
 - A mensagem anterior parece valer como está hoje. O "hoje" e o "estamos" dela eram do dia em que foi enviada, e o canal dela pode não ser o de agora.
+- "Não achei registro" parece uma resposta completa. Ela só diz que as fontes do workspace estão vazias: a próxima ação é pesquisar na internet e propor a abordagem.
 - A empresa abordada e a pessoa abordada são relações. Telefone e grafias vêm por rollup e não se gravam aqui.
 
 ## Scripts disponíveis
