@@ -62,6 +62,7 @@ flowchart LR
     definir_estampa["definir-estampa"]
     definir_filtro_de_email["definir-filtro-de-email"]
     definir_fonograma["definir-fonograma"]
+    definir_foto_de_moda["definir-foto-de-moda"]
     definir_grafia["definir-grafia"]
     definir_grupo_de_oportunidades["definir-grupo-de-oportunidades"]
     definir_historia_de_usuario["definir-historia-de-usuario"]
@@ -444,6 +445,7 @@ flowchart LR
   definir_filtro_de_email --> organizar_emails
   definir_filtro_de_email --> rotular_item
   definir_fonograma --> definir_obra_musical
+  definir_foto_de_moda --> definir_pessoa
   definir_grafia --> definir_perfil_social
   definir_grafia --> definir_pessoa
   definir_grafia --> identificar_duplicata

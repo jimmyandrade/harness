@@ -1,0 +1,23 @@
+{
+  "skill_name": "definir-foto-de-moda",
+  "evals": [
+    {
+      "id": "registrar-fotos-de-cenas-diferentes",
+      "prompt": "Salve estas três fotos da jaqueta: uma com pessoa usando em casa e duas da peça sozinha: <anexos>",
+      "expected_output": "A habilidade abre cada imagem antes de classificar. Cria registros separados por cena: um da peça isolada com as duas originais e outro com pessoa usando, vinculado à pessoa do cadastro de pessoas. Nomes de arquivo em minúsculas, sem acento e com hífens. A foto tratada fica vazia e o status é Precisa gerar. Confere as relações dos dois lados antes de dizer que salvou.",
+      "files": []
+    },
+    {
+      "id": "corrigir-foto-com-pessoa-marcada-como-isolada",
+      "prompt": "Revise este registro de foto: ele está como produto isolado, mas o nome do arquivo diz que é a pessoa usando.",
+      "expected_output": "A habilidade abre a foto tratada e a leitura visual vence o metadado. Muda o tipo para o tipo com pessoa, pede ou vincula a pessoa do cadastro, confere nome do arquivo, ângulo e texto alternativo, e registra nas observações que a classificação foi validada visualmente. Não aprova sem a pessoa vinculada.",
+      "files": []
+    },
+    {
+      "id": "historico-no-corpo-da-pagina",
+      "prompt": "Gere de novo a foto tratada deste registro. O histórico das tentativas está nas observações de fidelidade.",
+      "expected_output": "A habilidade lê os comentários do registro antes de agir, move a cronologia das observações para os comentários e deixa nas observações só o estado atual, os riscos abertos e as referências vigentes. A tentativa nova entra como comentário com data, objetivo, referências, resultado e decisão.",
+      "files": []
+    }
+  ]
+}
