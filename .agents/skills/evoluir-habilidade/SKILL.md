@@ -3,7 +3,7 @@ name: evoluir-habilidade
 description: Muda uma skill ou as instruções do projeto a pedido ou pelo feedback de uma execução, como falha ou correção da pessoa, e abre o pull request no repositório de origem. Usada ao pedir uma regra nova, mesmo sem dizer evoluir, e ao fim de cada skill. Não serve para testar a skill, criar a primeira versão, ver se a descrição dispara, só revisar nem gravar no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.34.0"
+  version: "0.35.0"
   related:
     - criar-commit
     - criar-habilidade
@@ -51,13 +51,13 @@ Um pedido para acrescentar, tirar ou trocar uma regra também entra aqui e só e
 flowchart LR
   A{Mudança?} -->|vazia| V["0.0.x só título"]
   A -->|correção| P[patch]
-  A -->|nova| M[minor]
-  A -->|breaking ou renomear| B{3 evals validados?}
+  A -->|nova ou renomear| M[minor]
+  A -->|breaking| B{3 evals validados?}
   B -->|sim| C["major zera minor e patch"]
   B -->|não| D["0.x sobe o 2º"]
 ```
 
-Renomear uma skill é mudança que quebra: o assunto do commit leva `!` depois do tipo, o rodapé começa com `BREAKING CHANGE:` com o nome antigo e o novo, e cada nome anterior entra em `metadata.aliases`, sem tirar os que já existiam.
+Renomear uma skill não quebra, porque cada nome anterior entra em `metadata.aliases`, sem tirar os que já existiam. A versão sobe como mudança nova, e o assunto do commit não leva `!`. Tirar um alias ou renomear sem manter o nome antigo quebra: siga o fluxo de breaking, com `!` e `BREAKING CHANGE:` com o nome antigo e o novo.
 
 Antes de cada commit e de cada push numa branch que já teve PR, inclusive a segunda lição do mesmo pedido, confira o estado do PR como o Passo 4 manda.
 
@@ -169,14 +169,13 @@ Se você acrescentar uma frase sem ler o resto da skill, ela pode mandar o opost
 2. Reescreva a frase que já existe e cada repetição dela. Não acrescente exceção noutro lugar.
 3. Valor que muda de um projeto para outro vira parâmetro. O passo cita a chave. Fato do negócio fica no data source, e o passo manda consultá-lo.
 
-### Rename fora do breaking change
+### Rename sem o nome antigo
 
-Se você renomear o `name` e tratar a versão como correção ou funcionalidade, ou commitar sem breaking change, o nome antigo quebra sem aviso.
+Se você renomear o `name` e não gravar o nome antigo em `metadata.aliases`, quem chama a skill pelo nome antigo perde o acesso sem aviso.
 
-1. Suba o major e zere minor e patch. Sem 3 evals validados, suba o segundo número, zere o patch, e mantenha `0.x`.
-2. Ponha `!` depois do tipo no assunto.
-3. Comece o rodapé com `BREAKING CHANGE:` e cite o nome antigo e o novo.
-4. Grave cada nome anterior em `metadata.aliases` e mantenha os que já existiam.
+1. Grave cada nome anterior em `metadata.aliases` e mantenha os que já existiam.
+2. Suba a versão como mudança nova, sem `!` no assunto.
+3. Se o nome antigo não puder ficar, trate como breaking: suba o major e zere minor e patch, ou o segundo número em `0.x`, ponha `!` depois do tipo e comece o rodapé com `BREAKING CHANGE:`, citando o nome antigo e o novo.
 
 ### Feedback sem edição
 
