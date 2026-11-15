@@ -1,0 +1,116 @@
+---
+name: definir-produto-na-loja
+description: Cadastra e corrige um produto na loja online, com título, slug, variantes, estoque e prontidão para venda e marcação em post. Usada quando um produto vai à loja ou precisa de correção lá, mesmo sem dizer loja. NÃO serve para definir o preço, movimentar estoque nem escrever o post.
+metadata:
+  author: jimmyandrade
+  version: "0.1.0"
+  related:
+    - definir-preco-de-produto
+    - gerenciar-estoque
+    - evoluir-habilidade
+---
+
+# Definir produto na loja
+
+## Parâmetros de configuração
+
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo.
+```yaml
+# `Canais exigidos` lista os canais de venda onde o produto precisa estar publicado para ser marcado num post. Vazio, nenhum canal é exigido.
+"Canais exigidos": []
+"Modo de aprendizado": "perguntar"
+```
+
+## Instruções
+
+### Passo 1
+
+O registro de produtos do projeto manda: nome completo, variantes, preço e estoque saem dele, e a loja é o destino. Sem o registro, pergunte uma vez. Não invente nome, tamanho, preço, SKU nem quantidade.
+
+Antes de gravar, leia o produto na loja. Mostre a diferença entre o registro e a loja e grave só o que a pessoa pediu.
+
+### Passo 2
+
+O título da loja é o nome completo do produto no registro. Um título mais curto que o nome do registro é divergência: mostre e proponha o alinhamento.
+
+### Passo 3
+
+O slug é adequado quando deriva do nome completo do produto, em minúsculas, ASCII, kebab-case, sem palavra cortada, sem número de id e igual ao slug do registro, quando ele existe. Alerte antes de gravar um slug fora disso e mostre o slug proposto. Alerte também quando o slug que já está na loja diverge do nome, como o que omite uma palavra do nome.
+
+Ao trocar o slug de um produto que já tem endereço público, crie o redirecionamento do endereço antigo para o novo na mesma chamada. Sem ele, os links já publicados quebram.
+
+### Passo 4
+
+Cada eixo de variação, como o tamanho, é uma opção do produto. Preço e SKU de cada variante seguem o registro. Preço novo ou mudança de preço seguem `definir-preco-de-produto`.
+
+### Passo 5
+
+Defina o estoque de cada variante e local com a quantidade do registro. Quando a loja ou o registro divergem de uma quantidade, pergunte qual vale antes de gravar. Movimento de entrada ou saída segue `gerenciar-estoque`.
+
+### Passo 6
+
+O produto está pronto para venda e para marcação num post quando:
+
+- [ ] Tem ao menos uma foto aprovada pela pessoa.
+- [ ] A descrição foi aprovada pela pessoa. Sugestão da IA não aprovada não é gravada.
+- [ ] O título e o slug passaram pelos Passos 2 e 3.
+- [ ] O status está ativo, e cada variante tem preço e estoque.
+- [ ] O produto está publicado em cada canal de `Canais exigidos`.
+
+Diga o que falta. Um canal que um aplicativo gerencia, como o do Instagram, não publica por API: peça à pessoa que o faça no painel da loja e avise que a sincronização com a rede leva tempo.
+
+### Passo 7
+
+Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
+
+## Problemas comuns
+
+### Slug que corta o nome
+
+Se você aceitar um slug sem uma palavra do nome do produto, o endereço, o link do post e o registro dizem coisas diferentes.
+
+1. Derive o slug do nome completo.
+2. Mostre o alerta e o slug proposto antes de gravar.
+
+### Slug trocado sem redirecionamento
+
+Se você trocar o slug de um produto já divulgado sem redirecionar, os links antigos dão erro.
+
+1. Troque o slug com o redirecionamento do antigo para o novo.
+2. Confira o endereço novo depois.
+
+### Produto marcado sem estar pronto
+
+Se você disser que o produto pode ser marcado no post sem conferir o Passo 6, a marcação falha na hora da publicação.
+
+1. Rode a lista do Passo 6.
+2. Diga cada item que falta e quem faz.
+
+## Exemplos de entrada e saída
+
+Estes exemplos ilustram fatos. Eles podem não estar no data source.
+
+### use "calca-dupla-nhee" como slug da Calça Dupla Face nhEe
+
+Alertei que o slug omite "face", propus `calca-dupla-face-nhee`, troquei com o redirecionamento do antigo e confirmei o endereço novo. O título curto da loja ficou como divergência para a pessoa decidir.
+
+## Casos-limite
+
+- O registro não tem slug: derive do nome completo e mostre antes de gravar.
+- O slug adequado já existe em outro produto: pergunte. Não acrescente sufixo de número em silêncio.
+- A pessoa insiste num slug fora da regra: grave com o alerta dito, sem repetir a objeção.
+- O produto não tem foto: deixe fora de venda e marcação e diga que falta a foto.
+- A quantidade do registro e a da loja divergem: pergunte qual vale.
+
+## Pegadinhas
+
+- Um produto pode estar na loja sem estar à venda: o status não ativo o esconde, e a marcação em post exige o produto ativo e publicado no canal.
+- O canal do Instagram é gerenciado por aplicativo: a publicação por API não acusa erro, mas também não o publica.
+- A API de estoque atual exige uma chave de idempotência em cada gravação. Sem ela, a chamada falha.
+- O nome do canal de venda pelo campo antigo de nome está obsoleto: leia o título do catálogo.
+
+## Scripts disponíveis
+
+- Nenhum.
+
+1. Não há script para executar.
