@@ -154,6 +154,7 @@ flowchart LR
     projetar_caixa["projetar-caixa"]
     prospectar_oportunidades["prospectar-oportunidades"]
     publicar_ata_de_reuniao["publicar-ata-de-reuniao"]
+    publicar_produto_fisico_na_loja_virtual["publicar-produto-fisico-na-loja-virtual"]
     publicar_resposta_de_revisao["publicar-resposta-de-revisao"]
     publicar_revisao_de_codigo["publicar-revisao-de-codigo"]
     reconhecer_imagem["reconhecer-imagem"]
@@ -857,6 +858,7 @@ flowchart LR
   prospectar_oportunidades --> procurar_oportunidade
   publicar_ata_de_reuniao --> definir_pessoa
   publicar_ata_de_reuniao --> definir_registro_de_reuniao
+  publicar_produto_fisico_na_loja_virtual --> gerenciar_estoque
   publicar_resposta_de_revisao --> atender_revisao_de_pull_request
   publicar_resposta_de_revisao --> definir_pessoa
   publicar_resposta_de_revisao --> escrever_link

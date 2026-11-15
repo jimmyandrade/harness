@@ -1,16 +1,18 @@
 ---
-name: definir-produto-na-loja
-description: Cadastra e corrige um produto na loja online, com título, slug, variantes, estoque e prontidão para venda e marcação em post. Usada quando um produto vai à loja ou precisa de correção lá, mesmo sem dizer loja. NÃO serve para definir o preço, movimentar estoque nem escrever o post.
+name: publicar-produto-fisico-na-loja-virtual
+description: Publica e corrige um produto físico na loja virtual, com título, slug, variantes, estoque e prontidão para venda e marcação em post. Usada quando o produto vai à loja virtual ou precisa de correção lá, mesmo sem dizer loja. NÃO serve para cadastrar o produto, registrar o preço, movimentar estoque, vender no ponto de venda físico nem escrever o post.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
+  aliases:
+    - definir-produto-na-loja
   related:
     - definir-preco-de-produto
     - gerenciar-estoque
     - evoluir-habilidade
 ---
 
-# Definir produto na loja
+# Publicar produto físico na loja virtual
 
 ## Parâmetros de configuração
 
