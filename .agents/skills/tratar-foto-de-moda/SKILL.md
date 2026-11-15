@@ -3,8 +3,9 @@ name: tratar-foto-de-moda
 description: Trata e recria a foto de uma peça ou look a partir da foto enviada, preservando a fidelidade do produto, a identidade da pessoa modelo e a apresentação profissional. Usada ao gerar, tratar, corrigir ou revisar uma imagem de moda, mesmo sem dizer tratar. NÃO serve para registrar ou classificar a foto nem para publicá-la.
 metadata:
   author: jimmyandrade
-  version: "0.1.1"
+  version: "0.1.2"
   related:
+    - cadastrar-foto-de-moda
     - evoluir-habilidade
 ---
 
