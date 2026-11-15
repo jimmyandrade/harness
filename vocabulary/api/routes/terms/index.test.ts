@@ -695,3 +695,45 @@ test("a rejected example or an alternative with a real link is refused", async (
     assert.equal(readFileSync(join(root, "pt-BR.json"), "utf8"), initial)
   })
 })
+
+test("fill writes a new term and fills a row without a decision, and leaves a row that holds one", async () => {
+  const initial = JSON.stringify(
+    {
+      look: { state: "allowed" },
+      peça: {
+        state: "forbidden",
+        description: "Palavra ambígua.",
+        substitution: "produto",
+        rejected: [],
+        alternatives: [],
+        decided_by: { name: "Jimmy Andrade" },
+        decided_at: "2026-11-13",
+      },
+    },
+    null,
+    2,
+  )
+  await withGlossary(`${initial}\n`, async (base, root) => {
+    const response = await post(base, {
+      language: "pt-BR",
+      mode: "fill",
+      terms: [
+        { state: "allowed", term: "look", category: "word", description: "Visual montado.", reason: "usar", examples: [] },
+        { state: "allowed", term: "peça", category: "word", description: "Item de moda.", reason: "usar", examples: [] },
+        { state: "allowed", term: "sacola", category: "word", description: "Área de checkout.", reason: "usar", examples: [] },
+      ],
+    })
+    assert.equal(response.status, 200)
+    const body = await response.json()
+    assert.equal(body.mode, "fill")
+    assert.deepEqual(body.updated.map((row: { term: string }) => row.term), ["look"])
+    assert.deepEqual(body.inserted.map((row: { term: string }) => row.term), ["sacola"])
+    assert.deepEqual(body.skipped, [{ term: "peça", reason: "The row holds a decision." }])
+    const entries = load(readFileSync(join(root, "pt-BR.json"), "utf8"))
+    assert.equal(entries.find((entry) => entry.term === "look")?.description, "Visual montado.")
+    const kept = entries.find((entry) => entry.term === "peça")
+    assert.equal(kept?.state, "forbidden")
+    assert.equal(kept?.description, "Palavra ambígua.")
+    assert.equal(kept?.decidedAt, "2026-11-13")
+  })
+})
