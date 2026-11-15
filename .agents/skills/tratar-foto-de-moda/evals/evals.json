@@ -1,0 +1,23 @@
+{
+  "skill_name": "tratar-foto-de-moda",
+  "evals": [
+    {
+      "id": "calca-no-manequim-preto",
+      "prompt": "Trate esta foto da calça no manequim preto para publicar: <anexo>",
+      "expected_output": "A habilidade aceita o manequim preto, analisa a peça e pergunta o que não está claro, como zíper ou botão. Reconstrói a apresentação alinhando cós, fechamento e barras sem mudar a modelagem, em fundo branco ou transparência. Revisa resíduos de manequim e detalhes inventados antes de aprovar, e não entrega só o recorte sobre branco.",
+      "files": []
+    },
+    {
+      "id": "conjunto-pedido-como-packshot",
+      "prompt": "Faça um packshot do conjunto de camisa e calça que vendemos juntos.",
+      "expected_output": "A habilidade lê a fonte dos tipos, explica que packshot não serve a um conjunto de peças e redireciona para estilo de vida ou editorial, mostrando todas as peças vendidas. Exige foto de pessoa real para o tipo com modelo e nunca gera modelo fictício, oferecendo alternativas sem pessoa.",
+      "files": []
+    },
+    {
+      "id": "rosto-alterado-na-geracao",
+      "prompt": "Gere a foto de lookbook com a modelo a partir destas referências. O rosto saiu diferente na última tentativa.",
+      "expected_output": "A habilidade trata a identidade como restrição primária, separa a função de cada referência e compara a nova imagem com a referência de identidade. Se a ferramenta não preservar o rosto, reduz a ambição, com enquadramento de torso ou nova referência de frente. Registra a falha, mantém Precisa revisar e não aprova.",
+      "files": []
+    }
+  ]
+}

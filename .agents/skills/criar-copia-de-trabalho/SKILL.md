@@ -3,7 +3,7 @@ name: criar-copia-de-trabalho
 description: Cria a cópia de trabalho do git, uma worktree ao lado do clone, a partir da branch base atualizada, com a branch nomeada e o que falta ligado ao clone. Usada antes de escrever código, uma habilidade ou uma revisão num repositório quando `Cópia de trabalho` pede worktree. Não serve para remover cópias, instalar dependência nem rodar teste.
 metadata:
   author: jimmyandrade
-  version: "0.1.2"
+  version: "0.2.0"
   related:
     - criar-commit
     - criar-habilidade
@@ -24,6 +24,8 @@ metadata:
 "Padrão do nome da pasta": "<repositório>-wt-<nome>"
 # `Itens a ligar do clone` lista o que o git não versiona e a cópia precisa para commitar e rodar. Cada item entra na cópia como link para o do clone, só se existir no clone e faltar na cópia.
 "Itens a ligar do clone": [".husky/_", "node_modules"]
+# `PR que depende de outro`: `sempre` faz a cópia nascer da branch do PR de cima da pilha, quando a pessoa já tem PR aberto no repositório.
+"PR que depende de outro": ""
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -58,6 +60,7 @@ Nomeie a pasta pelo `Padrão do nome da pasta`, ao lado do clone. Não crie dent
 ### Passo 4
 
 Atualize a `Branch base` remota e crie a cópia a partir dela, sem rastrear a base.
+Com `PR que depende de outro` em `sempre` e um PR seu aberto, crie a cópia a partir da branch do PR de cima da pilha, no remoto.
 Uma branch que rastreia a base manda o `push` para a base.
 Com o `Passo 2` em "ler o PR de outra pessoa", crie a cópia a partir da cabeça do PR e não leve commit seu.
 

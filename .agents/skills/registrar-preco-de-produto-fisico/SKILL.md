@@ -1,12 +1,13 @@
 ---
-name: definir-preco-de-produto
-description: Use essa habilidade sempre que for registrar, mudar ou conferir o preço de um ou mais produtos, inclusive o preço dito para um grupo ou o preço anterior e a data da mudança, mesmo sem dizer preço. NÃO use para lançar a venda, cadastrar o produto, mover o estoque nem acompanhar a produção.
+name: registrar-preco-de-produto-fisico
+description: Use essa habilidade sempre que for registrar, mudar ou conferir o preço de um ou mais produtos físicos, inclusive o preço dito para um grupo ou o preço anterior e a data da mudança, mesmo sem dizer preço. NÃO use para lançar a venda, cadastrar o produto, mover o estoque nem acompanhar a produção.
 allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-data-sources notion:notion-create-pages notion:notion-update-page
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.1"
+  version: "0.2.0"
   aliases:
+    - definir-preco-de-produto
     - definir-preco-da-peca
   related:
     - evoluir-habilidade
@@ -14,7 +15,7 @@ metadata:
     - procurar-banco-de-dados
 ---
 
-# Definir preço de produto
+# Registrar preço de produto físico
 
 ## Parâmetros de configuração
 

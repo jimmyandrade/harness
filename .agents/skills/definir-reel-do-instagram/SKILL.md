@@ -4,10 +4,11 @@ description: Use essa habilidade sempre que for criar, revisar, completar ou cad
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.15.1"
+  version: "0.16.1"
   related:
     - criar-ideia-de-conteudo
     - definir-roteiro-de-video
+    - escrever-legenda-do-post
     - planejar-calendario-de-conteudo
     - evoluir-habilidade
   models:
@@ -86,15 +87,7 @@ Para revisar um Reel que já existe, leia a página inteira antes de mudar: o co
 
 ### Passo 3
 
-A legenda complementa o vídeo. Conta o que a fala não contou e não repete o roteiro.
-
-- Cabe no máximo de caracteres do formato.
-- Fecha com um CTA principal, ligado ao objetivo do Reel. Ele diz a ação e onde fazer: comentar, compartilhar, salvar, mandar uma palavra no Direct ou abrir o link da bio. Um CTA secundário só entra se não competir com o principal.
-- O CTA da legenda e o do vídeo levam ao mesmo caminho, sem se contradizer. O destino existe quando o post sai: o link está na bio, a palavra no Direct tem quem responda.
-- Marcação de perfil e collab entram só quando a pessoa disse.
-- As hashtags vão na propriedade de hashtags. A quantidade segue a ideal do formato, sem passar do máximo. Sem máximo no formato, o limite é 5, o do Instagram para Reel, post único e carrossel. Cada hashtag liga o tema ao nicho do perfil. Hashtag genérica, só pelo volume, fica de fora. Hashtag que a lista ainda não tem entra só com o sim da pessoa.
-
-As palavras da legenda passam pela `Habilidade de tom de voz`.
+A legenda segue `escrever-legenda-do-post`, com o formato do Reel, o perfil autor e o roteiro. No Reel, ela conta o que a fala não contou, e o CTA da legenda e o do vídeo levam ao mesmo caminho.
 
 ### Passo 4
 

@@ -5,9 +5,9 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.7.0"
+  version: "0.7.1"
   related:
-    - acompanhar-producao-de-produto
+    - acompanhar-producao-de-produto-fisico
     - definir-composicao-textil
     - definir-estampa
     - definir-tarefa

@@ -1,0 +1,23 @@
+{
+  "skill_name": "publicar-produto-fisico-na-loja-virtual",
+  "evals": [
+    {
+      "id": "slug-que-corta-o-nome",
+      "prompt": "Use calca-dupla-nhee como slug da Calça Dupla Face nhEe na loja.",
+      "expected_output": "A habilidade lê o nome completo no registro de produtos, alerta que o slug omite uma palavra do nome e propõe o slug derivado do nome completo. Ao trocar o slug de um produto com endereço público, cria o redirecionamento do antigo para o novo. O título da loja é comparado com o nome do registro e a divergência fica para a pessoa decidir.",
+      "files": []
+    },
+    {
+      "id": "produto-pronto-para-marcar-no-post",
+      "prompt": "Esse produto já pode ser marcado no Reel?",
+      "expected_output": "A habilidade lê o produto na loja e roda a lista de prontidão: foto aprovada, descrição aprovada, título e slug adequados, status ativo com preço e estoque por variante e publicação em cada canal exigido. Diz o que falta e quem faz, e pede que a pessoa publique no canal gerenciado por aplicativo pelo painel, sem tentar por API.",
+      "files": []
+    },
+    {
+      "id": "estoque-diverge-do-registro",
+      "prompt": "Cadastre o estoque desse produto na loja conforme o registro.",
+      "expected_output": "A habilidade lê a quantidade de cada variante no registro e na loja. Quando divergem, pergunta qual vale antes de gravar. Ao gravar, usa a chave de idempotência que a API exige. Não registra pagamento nem movimento de entrada ou saída aqui.",
+      "files": []
+    }
+  ]
+}
