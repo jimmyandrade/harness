@@ -172,3 +172,71 @@ Funcionalidade: Preço de produto
       Dado que a habilidade não sabe se a peça é de entrada, de campanha ou autoral
       Quando ela vai escolher o formato do preço
       Então ela pergunta à pessoa a função da peça antes de escolher
+
+  Regra: peça autoral ou protagonista pede preço redondo
+
+    Exemplo: Peça conceitual
+      Dado que a peça é conceitual, premium, limitada, sob medida ou central da coleção
+      Quando a habilidade define ou valida o preço
+      Então ela prefere um preço redondo
+      E evita o quebrado que faça a peça parecer promocional ou menos autoral
+
+    Exemplo: Quebrado recomendado para uma peça autoral
+      Dado que a habilidade ainda assim recomenda um preço quebrado para uma peça autoral
+      Quando ela entrega a recomendação
+      Então ela explica objetivamente por que a conversão pesa mais que o valor percebido nessa peça
+
+  Regra: o preço quebrado é permitido em entrada, volume e conversão
+
+    Exemplo: Peça acima do nível de entrada
+      Dado que a peça está em um dos níveis acima da entrada da curva de preço
+      Quando a habilidade considera um preço quebrado
+      Então ela reavalia se o preço redondo protege melhor a percepção de valor
+
+    Exemplo: Conflito com a curva ou o posicionamento
+      Dado que um preço quebrado entra em conflito com a curva de preço, a pirâmide de mix ou o posicionamento da marca
+      Quando a habilidade confere o preço
+      Então ela sinaliza o conflito antes de recomendar
+
+  Regra: preço cheio e preço de campanha se diferenciam
+
+    Exemplo: Peça em saldo
+      Dado que a peça está em saldo, campanha, condição especial ou outra promoção
+      Quando a habilidade sugere o preço
+      Então ela pode usar um preço quebrado
+      E preserva a âncora do preço cheio, de preferência redonda
+      E registra se o preço é cheio, promocional, de saldo, de campanha ou de condição especial
+
+  Regra: a barreira psicológica de preço se usa com cuidado
+
+    Exemplo: Peça que precisa sustentar desejo perto da barreira
+      Dado que o preço calculado está perto de uma barreira das instruções do projeto
+      E que a peça precisa sustentar desejo, autoria ou percepção premium
+      Quando a habilidade avalia o preço quebrado
+      Então ela não reduz o preço para baixo da barreira só para converter
+
+    Exemplo: Peça comercial perto da barreira
+      Dado que o preço calculado está perto de uma barreira das instruções do projeto
+      E que a peça está numa faixa comercial
+      Quando a habilidade avalia o preço quebrado
+      Então ela compara o ganho provável de conversão com o risco de reduzir o valor percebido
+
+  Regra: o número comunica posicionamento
+
+    Exemplo: Dúvida entre os dois formatos
+      Dado que há dúvida entre vender por impulso e sustentar desejo
+      Quando a habilidade orienta a pessoa
+      Então ela pergunta se o preço precisa vender por impulso ou sustentar desejo
+
+  Regra: todo preço leva justificativa
+
+    Exemplo: Preço sugerido
+      Dado que a habilidade sugere ou valida um preço
+      Quando ela responde
+      Então ela justifica o preço com os critérios que usou, como uma pessoa mentora
+      E diz quais critérios pesaram mais
+
+    Exemplo: Critério não consultado
+      Dado que a habilidade não consultou um critério, como o markup
+      Quando ela escreve a justificativa
+      Então ela não cita esse critério como usado

@@ -37,6 +37,13 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Fonte do estoque por local": ""
 # Terminação que fecha o preço quebrado, como `,90` em R$ 449,90. Só vale quando o Passo 5 aceita o preço quebrado.
 "Terminação do preço quebrado": ",90"
+# Valores em que o preço trava a compra, como 300 ou 500. Vazio: a habilidade não trata barreira.
+"Barreiras psicológicas de preço": []
+# Níveis da curva de preço do projeto. Vazios: pergunte à pessoa em que nível a peça está.
+"Nível de entrada da curva de preço": ""
+"Níveis acima da entrada": []
+# O que pesa na justificativa do preço, como o programa de mentoria, a pirâmide de mix, a curva de preço e o posicionamento da marca. Vazio: justifique só com o que a pessoa e as fontes do projeto disseram, sem inventar critério.
+"Fontes da justificativa do preço": []
 ```
 
 ## Instruções
@@ -50,7 +57,7 @@ flowchart LR
   Q{O pedido é?} -->|preço anterior ou data da mudança| H[Passo 2]
   Q -->|preço de catálogo novo| R[Passo 3]
   Q -->|preço dito para um grupo| G[Passo 4]
-  Q -->|preço sugerido, conferido ou registrado| F[Passo 5]
+  Q -->|preço sugerido, conferido ou registrado| F[Passos 5 e 6]
   Q -->|venda| V[A skill de venda]
   Q -->|produzir o produto| P[A skill de produção]
   Q -->|insumo| E[gerenciar-estoque]
@@ -102,17 +109,35 @@ Ao sugerir, conferir, validar ou registrar um preço de venda, decida se ele é 
 
 O padrão é o preço redondo. Ele serve quando a peça precisa comunicar coleção, presença, acabamento, confiança, marca, valor autoral ou desejo.
 
-O preço quebrado só entra com uma justificativa clara, ligada a conversão, produto de entrada, campanha, saldo, condição especial ou barreira psicológica relevante. Diga na resposta qual é a função do preço e por que o formato escolhido a cumpre. Quando for quebrado, termine em `Terminação do preço quebrado`.
+O preço quebrado só entra com uma justificativa clara, ligada a conversão, produto de entrada, campanha, saldo, condição especial ou barreira psicológica relevante. Quando for quebrado, termine em `Terminação do preço quebrado`.
 
 Não termine todos os preços em `Terminação do preço quebrado` por hábito: cada peça passa pela decisão. Sem dado para saber a função da peça, pergunte antes de escolher o formato.
 
+Peça central da coleção, de campanha, limitada, sob medida, conceitual, premium ou com narrativa forte pede preço redondo e seguro, que sustenta melhor o valor percebido. Evite o quebrado quando ele fizer a peça parecer promocional, massificada, varejista ou menos autoral. Se ainda assim recomendar o quebrado, explique objetivamente por que a conversão pesa mais que o valor percebido naquela peça. Preço quebrado sem essa explicação enfraquece a postura da marca e parece esconder o valor real da peça.
+
+Porta de entrada da marca, acessório, item de menor risco para a primeira compra, produto de maior volume ou peça mais comercial pode ter preço quebrado, como R$ 89,90 ou R$ 299,90, quando isso reduz a barreira de compra. Diga que, nesses casos, o quebrado é ferramenta de conversão e não a linguagem principal de valor da marca. Confira se ele não entra em conflito com a posição da peça na curva de preço, na pirâmide de mix e no posicionamento da marca. Peça em `Níveis acima da entrada` reavalie se o redondo protege melhor a percepção de valor.
+
+Peça em promoção, saldo de coleção, última peça, bazar, outlet, campanha com prazo, cupom, peça-piloto, drop anterior ou outra condição especial pode ter preço quebrado para comunicar oportunidade. Preserve, quando existir, a âncora de preço cheio, de preferência redonda, como "De R$ 450 por R$ 399,90". Não deixe o quebrado de campanha parecer o preço normal da peça. Registre se o preço é cheio, promocional, de saldo, de campanha ou de condição especial.
+
+Preço calculado perto de um valor de `Barreiras psicológicas de preço`, como R$ 299,90 contra R$ 300, pede cuidado. Veja se a peça está numa faixa comercial em que reduzir a barreira ajuda a conversão, e evite essa lógica quando a peça precisa sustentar desejo, imagem, exclusividade, autoria ou percepção premium. Compare o ganho provável de conversão com o risco de reduzir o valor percebido, e diga por que o preço escolhido protege melhor a estratégia da peça e da coleção.
+
+O preço também comunica posicionamento. Diga se o número escolhido comunica decisão, confiança e valor autoral, ou conversão, oportunidade e menor barreira de compra. Não recomende o quebrado só porque parece mais barato, sem ver se combina com a marca. Na dúvida, pergunte à pessoa: "esse preço precisa vender por impulso ou sustentar desejo?".
+
 ### Passo 6
+
+Justifique todo preço que sugerir, conferir, validar ou registrar, na resposta e antes de atualizar o banco de produtos. Escreva como uma pessoa mentora, que orienta a decisão com senso crítico, clareza e visão de negócio, e não só devolve um número.
+
+A justificativa explica por que o preço faz sentido para a peça, com os critérios que você de fato usou, como custo, markup, curva de preço, posição da peça na coleção, pirâmide de mix, complexidade produtiva, valor percebido, coerência comercial e posicionamento da marca. Leia o conhecimento de `Fontes da justificativa do preço`. Não cite como usado um critério que você não consultou, nem invente um que a fonte não traz.
+
+Diga quais critérios pesaram mais. Não valide um preço sem isso.
+
+### Passo 7
 
 Onde registrar o preço de um ponto de venda é `Destino do preço de um ponto de venda`. Com ele vazio, pergunte à pessoa onde registrar e não escolha. `Fonte do estoque por local` vazia também se pergunta.
 
 Não invente nome de banco nem de propriedade para o que o projeto não definiu: nenhum nome de banco entra nesta skill.
 
-### Passo 7
+### Passo 8
 
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
@@ -142,6 +167,14 @@ Se você editar ou apagar uma linha do histórico, o registro deixa de provar o 
 1. Acrescente uma linha nova com a correção.
 2. Deixe a linha antiga como está.
 
+### Preço sem justificativa
+
+Se você devolver só o número, a pessoa não sabe o que pesou e não tem como discordar.
+
+1. Escreva a justificativa antes de atualizar o banco de produtos.
+2. Diga os critérios que você usou e quais pesaram mais.
+3. Não valide o preço sem isso.
+
 ### Preço quebrado por hábito
 
 Se você terminar todos os preços em `Terminação do preço quebrado`, a peça que precisava sustentar desejo passa a parecer promocional.
@@ -170,6 +203,14 @@ Sugeri R$ 450 em vez de R$ 449,90. A peça precisa sustentar valor autoral e des
 
 Sugeri R$ 89,90. O item é a porta de entrada da marca, e o quebrado ajuda a reduzir a barreira da primeira compra. Disse essa função na resposta.
 
+### sugere o preço de uma peça conceitual que custou 300
+
+Sugeri R$ 690 e não R$ 679,90. A peça é conceitual e precisa sustentar autoria, e o quebrado a faria parecer varejista. Expliquei os critérios que mais pesaram: custo, posição na coleção e valor percebido.
+
+### dá um preço de saldo para a peça de 450
+
+Sugeri R$ 399,90 com a âncora "De R$ 450 por R$ 399,90". Registrei que é preço de saldo, para o quebrado não parecer o preço normal da peça.
+
 ### baixa o preço da caneca de 60 para 50
 
 Perguntei o motivo e quem decidiu. Acrescentei uma linha com o canal, os preços, a vigência e o custo na data. Não editei a linha antiga.
@@ -179,12 +220,15 @@ Perguntei o motivo e quem decidiu. Acrescentei uma linha com o canal, os preços
 - Nenhuma fonte chega até a mudança: diga qual consultou, até onde cada uma chega, e pergunte só o que ficou antes.
 - A lista do grupo fica vazia: diga isso e não mude nenhum preço.
 - A pessoa diz o preço de um produto só: confirme o produto e o preço antes de mudar.
+- O preço fica a poucos reais de uma barreira, como R$ 300: confira se a peça precisa sustentar desejo antes de usar o quebrado.
+- O preço é de saldo, campanha ou condição especial: registre isso e preserve a âncora do preço cheio.
 - A função da peça não está clara, como entrada, campanha ou valor autoral: pergunte antes de escolher o formato do preço.
 - O banco ou o workspace não está conectado: pare e peça.
 - O destino do preço do ponto de venda está vazio: pergunte onde registrar.
 
 ## Pegadinhas
 
+- O preço quebrado parece mais barato e por isso melhor. Em peça autoral ele a faz parecer promocional.
 - O preço terminado em `,90` parece o padrão do varejo. Aqui o padrão é o redondo, e o quebrado precisa de uma função dita.
 - O nome do produto parece o grupo inteiro. Quem define o grupo é o estoque do local.
 - O preço dito no local parece valer para todos os produtos daquele tipo. Vale só para os que estavam lá e ainda tinham estoque.
