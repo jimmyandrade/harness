@@ -240,3 +240,17 @@ Funcionalidade: Preço de produto
       Dado que a habilidade não consultou um critério, como o markup
       Quando ela escreve a justificativa
       Então ela não cita esse critério como usado
+
+  Regra: o preço derivado de uma taxa também segue o formato
+
+    Exemplo: Cheio que embute a taxa do parcelamento
+      Dado que o preço cheio a prazo sai do preço à vista dividido por um menos a taxa do parcelamento
+      Quando a habilidade define o preço da etiqueta
+      Então ela arredonda para o preço redondo mais próximo acima
+      E mostra que o valor líquido não fica abaixo do preço-base
+
+    Exemplo: Mudar o preço que a pessoa já definiu
+      Dado que o formato pede mudar um preço que a pessoa já definiu, como de 299 para 300
+      Quando a habilidade responde
+      Então ela mostra o preço da pessoa ao lado
+      E pergunta antes de tratar o novo preço como final

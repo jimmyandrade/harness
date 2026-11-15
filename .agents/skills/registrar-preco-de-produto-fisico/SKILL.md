@@ -113,13 +113,17 @@ O preço quebrado só entra com uma justificativa clara, ligada a conversão, pr
 
 Não termine todos os preços em `Terminação do preço quebrado` por hábito: cada peça passa pela decisão. Sem dado para saber a função da peça, pergunte antes de escolher o formato.
 
+O formato vale para cada preço que a pessoa vai ver ou usar, como o cheio a prazo, o do débito e o do Pix. O preço que sai de uma taxa ou de um prazo, como o cheio que embute a taxa do parcelamento, não sai com os centavos da conta: arredonde para o preço redondo mais próximo acima, de modo que o valor líquido não fique abaixo do preço-base, e mostre essa conferência.
+
+Mudar um preço que a pessoa já definiu para ajustar o formato, como de 299 para 300, é uma proposta. Mostre o preço dela ao lado e pergunte antes de tratá-lo como final.
+
 Peça central da coleção, de campanha, limitada, sob medida, conceitual, premium ou com narrativa forte pede preço redondo e seguro, que sustenta melhor o valor percebido. Evite o quebrado quando ele fizer a peça parecer promocional, massificada, varejista ou menos autoral. Se ainda assim recomendar o quebrado, explique objetivamente por que a conversão pesa mais que o valor percebido naquela peça. Preço quebrado sem essa explicação enfraquece a postura da marca e parece esconder o valor real da peça.
 
 Porta de entrada da marca, acessório, item de menor risco para a primeira compra, produto de maior volume ou peça mais comercial pode ter preço quebrado, como R$ 89,90 ou R$ 299,90, quando isso reduz a barreira de compra. Diga que, nesses casos, o quebrado é ferramenta de conversão e não a linguagem principal de valor da marca. Confira se ele não entra em conflito com a posição da peça na curva de preço, na pirâmide de mix e no posicionamento da marca. Peça em `Níveis acima da entrada` reavalie se o redondo protege melhor a percepção de valor.
 
 Peça em promoção, saldo de coleção, última peça, bazar, outlet, campanha com prazo, cupom, peça-piloto, drop anterior ou outra condição especial pode ter preço quebrado para comunicar oportunidade. Preserve, quando existir, a âncora de preço cheio, de preferência redonda, como "De R$ 450 por R$ 399,90". Não deixe o quebrado de campanha parecer o preço normal da peça. Registre se o preço é cheio, promocional, de saldo, de campanha ou de condição especial.
 
-Preço calculado perto de um valor de `Barreiras psicológicas de preço`, como R$ 299,90 contra R$ 300, pede cuidado. Veja se a peça está numa faixa comercial em que reduzir a barreira ajuda a conversão, e evite essa lógica quando a peça precisa sustentar desejo, imagem, exclusividade, autoria ou percepção premium. Compare o ganho provável de conversão com o risco de reduzir o valor percebido, e diga por que o preço escolhido protege melhor a estratégia da peça e da coleção.
+Preço calculado perto de um valor de `Barreiras psicológicas de preço`, como R$ 299,90 contra R$ 300, pede cuidado. Um preço exatamente na barreira conta como perto dela. Veja se a peça está numa faixa comercial em que reduzir a barreira ajuda a conversão, e evite essa lógica quando a peça precisa sustentar desejo, imagem, exclusividade, autoria ou percepção premium. Compare o ganho provável de conversão com o risco de reduzir o valor percebido, e diga por que o preço escolhido protege melhor a estratégia da peça e da coleção.
 
 O preço também comunica posicionamento. Diga se o número escolhido comunica decisão, confiança e valor autoral, ou conversão, oportunidade e menor barreira de compra. Não recomende o quebrado só porque parece mais barato, sem ver se combina com a marca. Na dúvida, pergunte à pessoa: "esse preço precisa vender por impulso ou sustentar desejo?".
 
@@ -228,6 +232,7 @@ Perguntei o motivo e quem decidiu. Acrescentei uma linha com o canal, os preços
 
 ## Pegadinhas
 
+- O preço cheio que embute a taxa do parcelamento parece valer com os centavos da conta. Arredonde e confira o líquido.
 - O preço quebrado parece mais barato e por isso melhor. Em peça autoral ele a faz parecer promocional.
 - O preço terminado em `,90` parece o padrão do varejo. Aqui o padrão é o redondo, e o quebrado precisa de uma função dita.
 - O nome do produto parece o grupo inteiro. Quem define o grupo é o estoque do local.
