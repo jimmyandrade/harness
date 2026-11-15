@@ -4,11 +4,11 @@ description: Use essa habilidade sempre que for criar, revisar, completar ou cad
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.16.0"
+  version: "0.16.1"
   related:
     - criar-ideia-de-conteudo
     - definir-roteiro-de-video
-    - definir-legenda-do-post
+    - escrever-legenda-do-post
     - planejar-calendario-de-conteudo
     - evoluir-habilidade
   models:
@@ -87,7 +87,7 @@ Para revisar um Reel que já existe, leia a página inteira antes de mudar: o co
 
 ### Passo 3
 
-A legenda segue `definir-legenda-do-post`, com o formato do Reel, o perfil autor e o roteiro. No Reel, ela conta o que a fala não contou, e o CTA da legenda e o do vídeo levam ao mesmo caminho.
+A legenda segue `escrever-legenda-do-post`, com o formato do Reel, o perfil autor e o roteiro. No Reel, ela conta o que a fala não contou, e o CTA da legenda e o do vídeo levam ao mesmo caminho.
 
 ### Passo 4
 

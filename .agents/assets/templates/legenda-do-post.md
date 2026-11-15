@@ -2,14 +2,14 @@
 name: legenda-do-post
 description: Formato da resposta que entrega a legenda de um post, com a legenda, a contagem de caracteres, as hashtags, o CTA principal, os créditos e o que ficou pendente.
 metadata:
-  version: "0.1.0"
+  version: "0.1.1"
   aliases:
     - legenda
 ---
 
 ## Contexto
 
-Use este modelo para montar a resposta que entrega a legenda de um post de qualquer rede. A habilidade `definir-legenda-do-post` lê este modelo quando gera a saída.
+Use este modelo para montar a resposta que entrega a legenda de um post de qualquer rede. A habilidade `escrever-legenda-do-post` lê este modelo quando gera a saída.
 
 ## Formato
 

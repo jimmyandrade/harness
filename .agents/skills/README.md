@@ -71,7 +71,6 @@ flowchart LR
     definir_issue_do_github["definir-issue-do-github"]
     definir_jornada_de_producao["definir-jornada-de-producao"]
     definir_lancamento_financeiro["definir-lancamento-financeiro"]
-    definir_legenda_do_post["definir-legenda-do-post"]
     definir_link_rastreavel["definir-link-rastreavel"]
     definir_local_fisico["definir-local-fisico"]
     definir_localidade_geografica["definir-localidade-geografica"]
@@ -107,6 +106,7 @@ flowchart LR
     enviar_email["enviar-email"]
     enviar_mensagem_no_slack["enviar-mensagem-no-slack"]
     escrever_codigo["escrever-codigo"]
+    escrever_legenda_do_post["escrever-legenda-do-post"]
     escrever_link["escrever-link"]
     escrever_teste["escrever-teste"]
     extrair_tarefas_da_reuniao["extrair-tarefas-da-reuniao"]
@@ -316,7 +316,7 @@ flowchart LR
   convidar_para_evento --> definir_convidado
   convidar_para_evento --> redigir_com_tom_de_voz
   criar_carrossel_do_instagram --> criar_ideia_de_conteudo
-  criar_carrossel_do_instagram --> definir_legenda_do_post
+  criar_carrossel_do_instagram --> escrever_legenda_do_post
   criar_carrossel_do_instagram --> planejar_calendario_de_conteudo
   criar_commit -.-> atualizar_branch_do_pull_request
   criar_commit -.-> criar_pull_request
@@ -478,9 +478,6 @@ flowchart LR
   definir_lancamento_financeiro --> gerenciar_estoque
   definir_lancamento_financeiro --> lancar_despesa_da_empresa
   definir_lancamento_financeiro --> revisar_financas
-  definir_legenda_do_post --> criar_carrossel_do_instagram
-  definir_legenda_do_post --> definir_reel_do_instagram
-  definir_legenda_do_post --> redigir_com_tom_de_voz
   definir_local_fisico --> definir_empresa
   definir_local_fisico --> definir_grafia
   definir_local_fisico --> definir_localidade_geografica
@@ -534,8 +531,8 @@ flowchart LR
   definir_recurso_de_aprendizado --> definir_agenda
   definir_recurso_de_aprendizado --> procurar_agenda
   definir_reel_do_instagram --> criar_ideia_de_conteudo
-  definir_reel_do_instagram --> definir_legenda_do_post
   definir_reel_do_instagram --> definir_roteiro_de_video
+  definir_reel_do_instagram --> escrever_legenda_do_post
   definir_reel_do_instagram --> planejar_calendario_de_conteudo
   definir_registro_de_reuniao --> definir_agenda
   definir_registro_de_reuniao --> definir_grafia
@@ -624,6 +621,9 @@ flowchart LR
   escrever_codigo --> escrever_teste
   escrever_codigo --> levantar_ambiente_do_repositorio
   escrever_codigo --> preparar_tarefa_do_pull_request
+  escrever_legenda_do_post --> criar_carrossel_do_instagram
+  escrever_legenda_do_post --> definir_reel_do_instagram
+  escrever_legenda_do_post --> redigir_com_tom_de_voz
   escrever_link --> conversar_no_whatsapp
   escrever_link --> criar_pull_request
   escrever_link --> enviar_mensagem_no_slack

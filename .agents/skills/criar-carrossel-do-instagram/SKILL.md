@@ -3,10 +3,10 @@ name: criar-carrossel-do-instagram
 description: Use essa habilidade sempre que for criar, revisar ou cadastrar um carrossel ou um post de imagem única no Instagram, inclusive os slides, a legenda, os créditos e as collabs, mesmo sem dizer carrossel. NÃO use para Reel, Story, cadastrar só a ideia, planejar o calendário, nem publicar o post.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.3.1"
   related:
     - criar-ideia-de-conteudo
-    - definir-legenda-do-post
+    - escrever-legenda-do-post
     - evoluir-habilidade
     - planejar-calendario-de-conteudo
 ---
@@ -105,7 +105,7 @@ Confira cada imagem pelas especificações do Passo 2:
 
 Com `Habilidade de tom de voz` preenchida, os textos dos slides e a legenda seguem essa habilidade, com o perfil autor como contexto.
 Sem ela, pergunte qual perfil publica o post.
-A legenda segue `definir-legenda-do-post`, com o limite de caracteres e as hashtags do formato do carrossel.
+A legenda segue `escrever-legenda-do-post`, com o limite de caracteres e as hashtags do formato do carrossel.
 Perfil institucional ou coletivo escreve em terceira pessoa.
 Perfil pessoal segue o tom da pessoa.
 

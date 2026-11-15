@@ -1,9 +1,11 @@
 ---
-name: definir-legenda-do-post
+name: escrever-legenda-do-post
 description: Escreve e revisa a legenda de um post de qualquer rede, com limite de caracteres, hashtags, CTA principal, dados de evento e créditos. Usada quando se cria, revisa ou finaliza a legenda de um Reel, carrossel ou foto, mesmo sem dizer legenda. NÃO serve para escolher as palavras no tom de voz, escrever o roteiro nem publicar o post.
 metadata:
   author: jimmyandrade
-  version: "0.1.1"
+  version: "0.1.2"
+  aliases:
+    - definir-legenda-do-post
   related:
     - definir-reel-do-instagram
     - criar-carrossel-do-instagram
@@ -13,7 +15,7 @@ metadata:
     - legenda-do-post
 ---
 
-# Definir legenda do post
+# Escrever legenda do post
 
 ## Parâmetros de configuração
 
