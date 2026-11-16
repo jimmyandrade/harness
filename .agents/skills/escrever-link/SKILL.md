@@ -3,7 +3,7 @@ name: escrever-link
 description: Escreve o link de um texto lido numa plataforma, como Jira, Confluence, GitHub, Slack, WhatsApp ou a conversa com a IA, com o endereço lido da fonte, o texto certo e a sintaxe que funciona nela. Usada sempre que um texto vai citar PR, issue, card, página ou arquivo. Não serve para decidir o que o texto diz nem para enviá-lo.
 metadata:
   author: jimmyandrade
-  version: "0.2.2"
+  version: "0.2.3"
   related:
     - conversar-no-whatsapp
     - criar-pull-request
@@ -44,7 +44,8 @@ O texto diz o que o leitor abre. Um PR é `#123`, um card é a chave ou o títul
 Um item citado só pelo número, como `#123` ou `PR 123`, não é link. Uma chave solta também não é. Uma URL crua no meio da frase só serve onde o Passo 3 manda.
 Num link do Atlassian que fica sozinho, o texto não entra: o smart link do Passo 3 mostra o título atual da página.
 Cite cada alvo como link toda vez que ele aparece, inclusive numa lista, num resumo, num título e quando já foi citado antes.
-Uma linha de um banco, como a do Notion, é uma página: citá-la pelo título ou pelo nome do arquivo, sem o link, é número solto. Isso vale também para a linha que o turno só leu, conferiu ou gravou em lote, e para a de uma tabela de resultados.
+Uma linha de um banco, como a do Notion, é uma página: citá-la pelo título ou pelo nome do arquivo, sem o link, é número solto. Isso vale também para a linha que o turno só leu, conferiu ou gravou em lote, para a de uma tabela de resultados e para a que a resposta aponta para a pessoa revisar, mesmo quando citada por descrição, como "a foto preta da regata" ou "várias fotos do produto".
+Cada linha apontada e cada produto nomeado leva o próprio link, e um grupo vira uma lista com um link por linha, já na primeira resposta, sem esperar o pedido.
 
 ### Passo 3
 
@@ -141,7 +142,8 @@ Se você citar uma linha do Notion só pelo título ou pelo nome do arquivo, a p
 
 1. Leia o endereço no campo `url` que a ferramenta devolve para a linha.
 2. Escreva `[título](url)` em cada citação, inclusive a de um resultado de gravação em lote.
-3. Releia o texto antes de entregar.
+3. Para uma lista de itens a revisar, escreva um link por linha apontada e um por produto nomeado, e não só a contagem ou o grupo.
+4. Releia o texto antes de entregar.
 
 ## Exemplos de entrada e saída
 
@@ -178,6 +180,7 @@ Escrevi "PR 123: corrige o filtro" numa linha e a URL inteira na linha de baixo.
 - O Slack só pré-visualiza os 5 primeiros links de uma mensagem.
 - Um comentário no GitHub tem endereço próprio, `#issuecomment-<id>` ou `#discussion_r<id>`. O endereço do PR não leva ao comentário.
 - O login pessoal de quem escreve não é o dono do repositório. O dono vem do `origin`.
+- Um ponto de revisão parece um aviso e não um alvo. Quando a resposta pede que a pessoa confira algo, cada linha apontada e cada produto nomeado leva o link na mesma resposta.
 - Uma linha que o turno só conferiu, ou que sai de uma consulta em lote, parece contexto e não alvo. Se a resposta a nomeia, ela leva o link.
 - O nome da pasta de trabalho ou do projeto parece o nome do repositório, e o do harness de negócio costuma ser outro. O link de um PR sai do campo `url` do `gh pr view`, também quando o link é de um PR que já foi citado antes na conversa.
 
