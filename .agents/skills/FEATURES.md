@@ -1535,6 +1535,22 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses a durable good, recording the payment, and creating the cost category
 
+### gerenciar-pedidos-de-delivery
+- **Stability**: experimental
+- **Description**: Manage the food orders placed in a delivery app, during a trip or in any period: read the history, decide whose each order is, check it against the recorded food expenses and point out what is missing
+- **Properties**:
+  - Lives at `.agents/skills/gerenciar-pedidos-de-delivery/SKILL.md`
+  - Takes the order history from what the person brought, never inventing an order, and asks for the detail of an order before recording it
+  - Decides whether an order belongs to the trip or period by its delivery address, not by its date alone, and leaves out the orders delivered elsewhere, such as the city of origin
+  - Searches the expenses of the trip or period and the ones recorded without the link, compares by order number, amount paid, date and place, and completes the link on the existing expense instead of creating another
+  - Treats a second card of the same place near a recorded order as a possible redelivery, asking before pointing it out as missing
+  - Hands each missing order to lancar-despesa-da-empresa, with the trip when there is one, and a personal one to lancar-despesa-pessoal
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [ ] An order delivered in the city of origin on the day of departure stays out of the list
+  - [ ] An expense recorded without the trip is linked, not duplicated
+  - [ ] Three cases validated with the person
+
 ### identificar-duplicata
 - **Stability**: experimental
 - **Description**: Check for an equivalent record before creating one, and point at the existing record
