@@ -3,12 +3,13 @@ name: cadastrar-foto-de-moda
 description: Registra e classifica cada foto de moda, com tipo, ângulo, cena, vínculos, nome do arquivo, texto alternativo, status e histórico. Usada quando uma foto de peça ou look chega, é migrada, revisada ou aprovada, mesmo sem dizer registro. NÃO serve para tratar ou recriar a imagem nem para publicar a foto.
 metadata:
   author: jimmyandrade
-  version: "0.1.2"
+  version: "0.1.3"
   aliases:
     - definir-foto-de-moda
   related:
     - tratar-foto-de-moda
     - definir-pessoa
+    - escrever-link
     - evoluir-habilidade
 ---
 
@@ -93,6 +94,7 @@ Valide antes de responder. Corrija e repita até passar.
 - [ ] Os vínculos da peça, do look e da pessoa modelo existem dos dois lados.
 - [ ] A tratada não repete as originais, e o status vale o estágio real.
 - [ ] O histórico está nos comentários.
+- [ ] Cada registro que a resposta cita, inclusive os de um lote, leva o link da página, como `escrever-link` manda.
 
 ### Passo 11
 

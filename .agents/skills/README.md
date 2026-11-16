@@ -271,6 +271,7 @@ flowchart LR
   bloquear_remetente_de_spam --> organizar_emails
   bloquear_remetente_de_spam --> procurar_email
   cadastrar_foto_de_moda --> definir_pessoa
+  cadastrar_foto_de_moda --> escrever_link
   cadastrar_foto_de_moda --> tratar_foto_de_moda
   classificar_estado_do_termo --> definir_vocabulario
   classificar_estado_do_termo --> gravar_termos_no_vocabulario
@@ -950,6 +951,7 @@ flowchart LR
   testar_ponta_a_ponta --> registrar_resultados_da_validacao_na_tarefa
   transcrever_audio_e_video --> definir_registro_de_reuniao
   tratar_foto_de_moda --> cadastrar_foto_de_moda
+  tratar_foto_de_moda --> escrever_link
   triar_conversas --> conversar_no_whatsapp
   triar_conversas --> criar_oportunidade
   triar_conversas --> definir_grupo_de_oportunidades
