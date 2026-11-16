@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.91.1](https://github.com/jimmyandrade/harness/compare/v1.91.0...v1.91.1) (2026-11-16)
+
+
+### Bug Fixes
+
+* **redigir-com-tom-de-voz:** show the editable preview widget with every message draft ([#1237](https://github.com/jimmyandrade/harness/issues/1237)) ([30f7d58](https://github.com/jimmyandrade/harness/commit/30f7d581744f74ce14c22b2516de8cc90972da27))
+
 ## [1.91.0](https://github.com/jimmyandrade/harness/compare/v1.90.0...v1.91.0) (2026-11-16)
 
 
