@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.5.5"
+  version: "0.6.0"
   related:
     - definir-agenda
     - evoluir-habilidade
@@ -84,7 +84,11 @@ Com formulário aberto, tente a inscrição já. Antes de abrir o formulário, c
 
 Com ou sem inscrição, proponha também o contato direto, pelo canal em que a organização responde, para a marca se apresentar e avisar da inscrição. O texto cita quem indicou a marca quando a pessoa contar, e não inventa indicação. Ele sai por `redigir-com-tom-de-voz`.
 
-A primeira mensagem a uma pessoa se apresenta por quem fala, com nome e papel, e não só pela marca. Leia no cadastro de pessoas quem assina e pergunte quando houver mais de uma. Com várias pessoas, o texto nomeia cada uma.
+A primeira mensagem se apresenta em primeira pessoa por quem assina, com nome e papel, e não só pela marca. Quem assina vem do cadastro de pessoas e das instruções do projeto, que dizem quem representa a marca e quando outra pessoa pode aparecer. Sem essa fonte, pergunte. Não ponha uma segunda pessoa sem a condição que a fonte pede.
+
+A organização e quem a dirige costumam ter perfis separados. Procure o perfil de cada um, na bio, no site de links e nas publicações, e proponha uma mensagem para cada, escrita para quem lê aquele perfil: o perfil da organização recebe um texto para a equipe, no plural, e o perfil pessoal recebe um texto com o nome da pessoa. Não mande ao perfil da organização um texto endereçado a uma pessoa.
+
+Antes de redigir, pergunte como o contato nasceu quando nenhuma fonte diz, como o evento em que a marca esteve, quem apresentou ou o encontro que não aconteceu. O texto conta essa cena, com quem indicou e o que cada um disse, só com o que a pessoa contou.
 
 Com o texto e o destino aprovados, envie você mesmo, sem pedir à pessoa que envie. Tente os canais na `Ordem dos canais de execução` e passe ao seguinte só quando o anterior não existir ou falhar. Se nenhum enviar, entregue o texto pronto e diga o que falhou em cada canal. Sem a aprovação, não envie nem cadastre a empresa ou a pessoa. Depois do envio, registre a troca como o Passo 3 manda.
 
@@ -150,6 +154,14 @@ Se você escrever o texto aprovado e esperar a pessoa mandar, o contato atrasa e
 2. Só entregue o texto à pessoa quando nenhum canal enviar, e diga o que falhou em cada um.
 3. Registre a troca na mesma rodada do envio, como o Passo 3 manda.
 
+### Um texto para dois perfis
+
+Se você escrever uma só mensagem para a organização e a mandar ao perfil dela endereçada a uma pessoa, quem lê não se reconhece no texto, e o perfil pessoal de quem dirige fica sem contato.
+
+1. Procure o perfil da organização e o da pessoa que a dirige.
+2. Proponha uma mensagem para cada um: plural para a equipe, o nome da pessoa no perfil pessoal.
+3. Assine em primeira pessoa quem a fonte diz que representa a marca, com nome e papel.
+
 ### Divergência escondida
 
 Se você escolher uma das fontes quando elas divergem, a pessoa chega na hora errada.
@@ -183,7 +195,9 @@ Consultei os comentários, o cronograma, as inscrições e o e-mail, e nenhum te
 
 ### já falamos com a organização da Feira Exemplo?
 
-Sem registro, achei a feira cadastrada e, no Instagram dela, um formulário aberto de curadoria para a edição de março. Tentei a inscrição e propus também uma mensagem pelo Instagram para a organizadora, que se apresenta por Ana e Beto, as duas pessoas que assinam a marca, com nome e papel, e cita a Lia como quem indicou a marca, porque a pessoa contou isso. Depois do envio, registrei o formulário na página da inscrição e a mensagem na discussão da organizadora, sem criar negociação, porque a lista de negociações proíbe o contato com a organização de feiras.
+Sem registro, achei a feira cadastrada e, no Instagram dela, um formulário aberto de curadoria para a edição de março. Tentei a inscrição e propus também duas mensagens pelo Instagram, uma para o perfil da organização, no plural, e outra para o perfil pessoal da organizadora, as duas assinadas pela Ana, que representa a marca, com nome e papel, e citando a Lia como quem indicou a marca, porque a pessoa contou isso.
+
+Depois do envio, registrei o formulário na página da inscrição e a mensagem na discussão da organizadora, sem criar negociação, porque a lista de negociações proíbe o contato com a organização de feiras.
 
 ### a Isadora também respondeu pela Feira Exemplo
 
@@ -192,6 +206,7 @@ Conferi se a pessoa abordada aceita mais de uma pessoa antes de somar Isadora Ri
 ## Casos-limite
 
 - A negociação não existe, ou é de outra edição da mesma empresa: busque pela empresa e pela oportunidade antes de criar, e só crie quando há negócio.
+- O perfil pessoal de quem dirige a organização não aparece na busca: proponha só a mensagem do perfil da organização e diga que não achou o pessoal.
 - A conversa é um convite, um agradecimento ou um café, sem negócio: grave na discussão da página da pessoa. Não crie negociação.
 - A lista de negociações proíbe o contato com a organização de feiras: grave a DM e o formulário na discussão da pessoa e da inscrição. Não crie negociação.
 - A conversa não tem data: use `Data aproximada:` e diga de onde veio.
