@@ -117,6 +117,7 @@ flowchart LR
     formalizar_decisao["formalizar-decisao"]
     garantir_ingresso["garantir-ingresso"]
     gerenciar_estoque["gerenciar-estoque"]
+    gerenciar_pedidos_de_delivery["gerenciar-pedidos-de-delivery"]
     gravar_termos_no_vocabulario["gravar-termos-no-vocabulario"]
     identificar_duplicata["identificar-duplicata"]
     inscrever_na_oportunidade["inscrever-na-oportunidade"]
@@ -678,6 +679,11 @@ flowchart LR
   gerenciar_estoque --> definir_lancamento_financeiro
   gerenciar_estoque --> identificar_duplicata
   gerenciar_estoque --> mesclar_registro
+  gerenciar_pedidos_de_delivery --> definir_viagem
+  gerenciar_pedidos_de_delivery --> identificar_duplicata
+  gerenciar_pedidos_de_delivery --> lancar_despesa_da_empresa
+  gerenciar_pedidos_de_delivery --> lancar_despesa_pessoal
+  gerenciar_pedidos_de_delivery --> reconhecer_imagem
   gravar_termos_no_vocabulario --> definir_vocabulario
   gravar_termos_no_vocabulario --> procurar_variacao_de_termo
   gravar_termos_no_vocabulario --> validar_plano_de_vocabulario
