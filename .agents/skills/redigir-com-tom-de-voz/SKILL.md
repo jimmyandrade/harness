@@ -3,7 +3,7 @@ name: redigir-com-tom-de-voz
 description: Use essa habilidade sempre que for criar, redigir, editar, revisar ou responder texto da marca no tom de voz, mesmo sem dizer copy. NÃO use para responder quem conversa com a IA, descrever uma skill, titular tarefa ou oportunidade, cravar a grafia, alterar formato de conteúdo, nem assumir cliente, peça, oportunidade ou histórico.
 metadata:
   author: jimmyandrade
-  version: "0.26.0"
+  version: "0.26.1"
   aliases:
     - escreva-usando-o-tom-de-voz
   related:
@@ -11,6 +11,7 @@ metadata:
     - definir-vocabulario
     - consultar-vocabulario
     - definir-pessoa
+    - conversar-no-whatsapp
     - evoluir-habilidade
 ---
 
@@ -42,6 +43,8 @@ flowchart LR
 Antes de criar, redigir, editar, revisar ou responder, consulte o vocabulário e as regras desta habilidade. O público é o `Público`, salvo quando o pedido nomeia outro. O texto tem contexto, canal, público, as fontes da marca que as instruções do projeto nomeiam, o vocabulário e a intenção criativa. Falta algum desses: pare e peça. Não aprove. Não invente persona, posicionamento, vocabulário nem termo proibido. A pessoa informa a fonte. Se ela não estiver no workspace conectado, pare.
 
 Texto que vai ser enviado por um conector, como uma resposta de e-mail, depende da ferramenta de envio. Antes de redigir, confira se as configurações da ferramenta a liberam. Sem a liberação, peça-a logo, com o nome da ferramenta, em vez de descobrir o bloqueio só no envio. A liberação não dispensa o sim da pessoa ao texto e ao destino. Se o envio for bloqueado mesmo assim, deixe o rascunho no destino e diga o que bloqueou.
+
+A mensagem que a pessoa vai aprovar para envio aparece no chat num bloco de código e, com a ferramenta de widget na sessão, também no widget editável: um campo por mensagem, com copiar e um botão que manda o texto aprovado de volta ao chat. Vale mesmo quando a sessão só rascunha e outra envia, como a dona do WhatsApp Web, e mesmo quando a ferramenta aparece como carregável. O Passo 5 de `conversar-no-whatsapp` descreve o widget. Sem a ferramenta, diga que a sessão não a tem.
 
 Consulte o vocabulário com `consultar-vocabulario`, com as `tags` de quem fala, do evento, do canal e do formato do texto, no idioma do texto que vai escrever. Ele consulta o texto por palavra e cada expressão que o texto pode usar, inteira, e devolve o `when` dos termos permitidos com ressalva, que vale para este texto. Sem saber quem fala, pergunte.
 
@@ -151,6 +154,14 @@ Se você escrever num tom neutro ou formal para quem nos trata com carinho, como
 2. Devolva o mesmo tratamento, a mesma saudação e o mesmo grau de calor, dentro do vocabulário.
 3. Não transforme isso em pergunta à pessoa que escreve, e não use apelido que ela não usou.
 
+### Rascunho sem a prévia
+
+Se você mostrar a mensagem só num bloco de código, a pessoa pergunta pela prévia, não consegue editar cada mensagem e precisa copiar o texto à mão.
+
+1. Mostre o bloco de código e, com a ferramenta de widget na sessão, o widget editável.
+2. Faça isso também na sessão que só rascunha, como a dona do WhatsApp Web.
+3. Peça o sim depois do texto, na mesma resposta. A versão editada no widget substitui o rascunho.
+
 ### Fala de outra pessoa
 
 Se você consultar o vocabulário sem as tags do texto, a fala em primeira pessoa de uma pessoa, ou o grito de um evento, entra no texto de outro contexto.
@@ -254,6 +265,7 @@ O título ficou específico, com o nome canônico que a fonte já tinha. Não vi
 - Pontuação e diminutivo parecem neutros. Os que o vocabulário proíbe saem quando enfraquecem desejo, clareza, personalidade ou potência comercial.
 - Evitável parece permitido com moderação. Sem a cena do `when`, ele sai.
 - Uma frase cadastrada parece valer para qualquer texto. A fala em primeira pessoa de uma pessoa só entra no texto dela.
+- Um bloco de código parece prévia suficiente. Com a ferramenta de widget na sessão, a pessoa também espera o widget editável, com copiar e aprovar.
 - Emoji parece enfeite de legenda. Ele é vocabulário. O nível vem da linha. Sem linha, a copy espera.
 - Um emoji na moda parece melhor que a regra. Evitar, proibido, ruim, desalinhado e restrito saem da versão final.
 - Um sinônimo parece resolver o clichê. A troca é imagem, cena, ação, efeito ou situação. A palavra literal, a frase rejeitada e o termo ligado ficam de fora.
