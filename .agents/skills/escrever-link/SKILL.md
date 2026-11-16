@@ -3,7 +3,7 @@ name: escrever-link
 description: Escreve o link de um texto lido numa plataforma, como Jira, Confluence, GitHub, Slack, WhatsApp ou a conversa com a IA, com o endereço lido da fonte, o texto certo e a sintaxe que funciona nela. Usada sempre que um texto vai citar PR, issue, card, página ou arquivo. Não serve para decidir o que o texto diz nem para enviá-lo.
 metadata:
   author: jimmyandrade
-  version: "0.2.1"
+  version: "0.2.2"
   related:
     - conversar-no-whatsapp
     - criar-pull-request
@@ -44,6 +44,7 @@ O texto diz o que o leitor abre. Um PR é `#123`, um card é a chave ou o títul
 Um item citado só pelo número, como `#123` ou `PR 123`, não é link. Uma chave solta também não é. Uma URL crua no meio da frase só serve onde o Passo 3 manda.
 Num link do Atlassian que fica sozinho, o texto não entra: o smart link do Passo 3 mostra o título atual da página.
 Cite cada alvo como link toda vez que ele aparece, inclusive numa lista, num resumo, num título e quando já foi citado antes.
+Uma linha de um banco, como a do Notion, é uma página: citá-la pelo título ou pelo nome do arquivo, sem o link, é número solto. Isso vale também para a linha que o turno só leu, conferiu ou gravou em lote, e para a de uma tabela de resultados.
 
 ### Passo 3
 
@@ -68,7 +69,7 @@ flowchart LR
 
 Depois de publicar, releia o texto no lugar onde o leitor o vê, ou no retorno da ferramenta, e confira o link.
 O link tem texto, o endereço abre o alvo certo e nenhuma URL ficou crua. Se ficou, edite o item publicado.
-Antes de entregar uma resposta, releia o próprio texto atrás de número de PR ou de chave de card sem link.
+Antes de entregar uma resposta, releia o próprio texto atrás de número de PR, de chave de card e de título ou nome de arquivo de página sem link.
 
 ### Passo 5
 
@@ -134,6 +135,14 @@ Se você disser que publicou uma review ou um comentário e não devolver o link
 1. Devolva o link direto do item.
 2. Antes de publicar, diga que ainda não há link.
 
+### Linha do banco citada sem link
+
+Se você citar uma linha do Notion só pelo título ou pelo nome do arquivo, a pessoa não consegue abri-la para conferir.
+
+1. Leia o endereço no campo `url` que a ferramenta devolve para a linha.
+2. Escreva `[título](url)` em cada citação, inclusive a de um resultado de gravação em lote.
+3. Releia o texto antes de entregar.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
@@ -169,6 +178,7 @@ Escrevi "PR 123: corrige o filtro" numa linha e a URL inteira na linha de baixo.
 - O Slack só pré-visualiza os 5 primeiros links de uma mensagem.
 - Um comentário no GitHub tem endereço próprio, `#issuecomment-<id>` ou `#discussion_r<id>`. O endereço do PR não leva ao comentário.
 - O login pessoal de quem escreve não é o dono do repositório. O dono vem do `origin`.
+- Uma linha que o turno só conferiu, ou que sai de uma consulta em lote, parece contexto e não alvo. Se a resposta a nomeia, ela leva o link.
 - O nome da pasta de trabalho ou do projeto parece o nome do repositório, e o do harness de negócio costuma ser outro. O link de um PR sai do campo `url` do `gh pr view`, também quando o link é de um PR que já foi citado antes na conversa.
 
 ## Scripts disponíveis
