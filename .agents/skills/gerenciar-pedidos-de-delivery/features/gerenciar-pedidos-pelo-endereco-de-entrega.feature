@@ -52,3 +52,12 @@ Funcionalidade: Gerenciar os pedidos de delivery pelo endereço de entrega
       Quando o agente confere os pedidos
       Então o agente compara pelo total do detalhe final
       E pergunta qual valor vale quando o total e o reembolso não fecham
+
+  Regra: O pedido vai para a viagem cujo período contém a data dele, sem duplicar
+
+    Exemplo: Dois destinos iguais em meses diferentes
+      Dado que há uma viagem a São Paulo em outubro e outra em novembro
+      E que um pedido foi criado em 15 de novembro
+      Quando o agente vai lançar o pedido
+      Então o agente procura o número do pedido em todas as despesas
+      E liga a despesa à viagem de novembro, sem usar a de outubro

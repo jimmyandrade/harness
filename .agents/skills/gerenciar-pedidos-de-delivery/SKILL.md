@@ -3,7 +3,7 @@ name: gerenciar-pedidos-de-delivery
 description: Gerencia os pedidos de comida feitos num aplicativo de entrega, numa viagem ou em qualquer período. Lê o histórico, decide de quem é cada pedido pelo endereço, confere contra as despesas lançadas e aponta o que falta cadastrar. Usada quando a pessoa pergunta se os pedidos estão lançados, ou ao fechar a prestação de contas. NÃO serve para lançar a despesa nem cadastrar a viagem.
 metadata:
   author: jimmyandrade
-  version: "0.2.2"
+  version: "0.2.3"
   aliases:
     - conferir-pedidos-da-viagem
   related:
@@ -63,6 +63,8 @@ Entregue a lista dos pedidos do recorte com estabelecimento, data, valor pago e 
 
 Para cada pedido não lançado, siga `lancar-despesa-da-empresa`, com a viagem quando houver, usando o comprovante que a pessoa já trouxe. O print do detalhe do pedido é o comprovante: anexe-o à despesa, sem deixá-lo como pendência. O que faltar de evidência fica como pendência dita na resposta. Sem o total pago, não grave: o pedido fica na lista com o que falta pedir. Para o lançamento fora do recorte, complemente o vínculo na mesma despesa, sem criar outra. Se a pessoa disser que um pedido era pessoal, siga `lancar-despesa-pessoal`.
 
+Antes de gravar cada pedido, busque a despesa pelo número do pedido, pelo valor e pela data em todas as despesas, não só nas da viagem. Escolha a viagem cujo período contém a data de criação do pedido: duas viagens ao mesmo destino, em meses diferentes, não se misturam. Sem o endereço no detalhe, a pessoa confirma que o pedido é da viagem, e o endereço fica dito como pendência na despesa.
+
 ### Passo 5
 
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
@@ -84,6 +86,14 @@ Se você buscar apenas o que já está ligado à viagem ou ao período, uma desp
 1. Busque também por número do pedido, valor e data, fora do recorte.
 2. Complemente o vínculo na despesa que já existe.
 3. Só trate como faltante o que nenhuma busca achou.
+
+### Pedido gravado na viagem errada
+
+Se você ligar o pedido à viagem do mesmo destino que está à mão, em vez de à do período dele, o custo vai para a prestação de contas de outra feira.
+
+1. Compare a data de criação do pedido com o período de cada viagem cadastrada.
+2. Ligue o pedido só à viagem que contém essa data.
+3. Procure o número do pedido em todas as despesas antes de gravar, para não criar duplicata.
 
 ### Pedido que a pessoa não trouxe
 
