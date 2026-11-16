@@ -1,6 +1,6 @@
 ---
 metadata:
-  version: "1.72.1"
+  version: "1.72.2"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -77,7 +77,7 @@ metadata:
 - Quando uma habilidade precisa de um banco, de uma lista ou de um campo dele e a pessoa não o indicou, leia antes o parâmetro e o mapeamento de dados do projeto. Sem o valor lá, siga `procurar-banco-de-dados` antes de perguntar. Pergunte só quando a busca não achar um banco que sirva ou achar mais de um.
 - Resolva a referência da habilidade seguinte no catálogo conectado quando as regras do ambiente permitirem. A ausência na lista inicial não prova que ela não existe. Não peça à pessoa uma referência que já está na conversa.
 - Todo texto gravado no Notion, em propriedade ou no corpo, escreve o cifrão de um valor com barra invertida, como `R\$ 62,87`. O Notion lê o trecho entre dois cifrões sem barra como fórmula e o texto sai ilegível. Releia o campo depois de gravar um texto com valor em reais.
-- Para anexar um arquivo local a uma página do Notion, use a linha de comando `ntn`: `ntn files create --filename <nome> --content-type <tipo> < <arquivo>` devolve o id do envio, e `ntn api -X PATCH v1/pages/<id> -d <json>` põe o envio na propriedade de arquivos da página. Rode o `ntn api` com `< /dev/null`, senão ele espera a entrada e trava. Um anexo só fica como pendência depois de tentar o `ntn`.
+- Para anexar um arquivo local a uma página do Notion, use `ntn`: `ntn files create --filename <nome> --content-type <tipo> < <arquivo>` devolve o id do envio, e `ntn api -X PATCH v1/pages/<id> -d <json>` o põe na propriedade de arquivos. Rode o `ntn api` com `< /dev/null`, senão ele trava. Para somar a um anexo que já existe, mande no `PATCH` a lista que a leitura da página devolveu mais o novo, senão o antigo some. Só deixe o anexo pendente depois de tentar o `ntn`.
 - Distinga a restrição explícita de descoberta, a busca sem resultado e o erro de permissão que a ferramenta devolveu. Não chame uma restrição das instruções de falta de acesso nem prometa que um pull request remove uma restrição do ambiente.
 - Ao receber uma correção sobre o seu comportamento, siga `evoluir-habilidade` na mesma conversa e transforme o feedback em correção no repositório de origem, não na cópia instalada, em vez de só explicar o erro. Com pedido de pull request, abra-o e diga o que mudou e o que ainda não foi validado.
 - Ao começar a trabalhar num repositório, antes do primeiro passo, siga `levantar-ambiente-do-repositorio`: liste as habilidades do próprio repositório e as que chegam por dependência ou plugin, como as deste repositório, e abra as que a tarefa vai usar. A ausência na lista da sessão não prova que ela não existe.
