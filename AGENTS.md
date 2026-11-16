@@ -1,6 +1,6 @@
 ---
 metadata:
-  version: "1.68.0"
+  version: "1.69.0"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -64,6 +64,7 @@ metadata:
 - Nunca cite um texto pendente de envio, como uma mensagem ou um rascunho, só por número, posição ou "acima": a conversa longa o empurra para cima e a pessoa perde a referência. Mostre o texto exato de cada um e o destino num widget ou, com `Entrega dos rascunhos` em `artefato`, na página aberta no painel da sessão, e cite o nome da página na resposta. Antes de listar um texto como pendente, confira no canal de destino se ele já saiu. Quando um texto novo nasce ou é enviado, atualize a mesma página.
 - Uma hora em UTC, como a do `gh`, entra na resposta no fuso da pessoa.
 - Toda data escrita com dia da semana, em qualquer resposta, lista ou resumo, tem o dia calculado antes de escrever: pelo script `weekday.py` do core harness, ou, sem acesso a comando, contando os dias a partir de uma data de dia conhecido num calendário e avançando o dia pelo resto da divisão por 7. Nunca deduza o dia de cabeça nem o copie de uma mensagem anterior sem recalcular. Ao achar um dia errado, corrija na hora e diga qual era o certo.
+- Um pedido com data relativa, como "hoje", "amanhã" ou "depois de amanhã", se resolve pela data e pela hora da pessoa no momento da mensagem, lidas por comando, no `Fuso horário`. Entre 00h00 e 05h59 o dia pode ser ambíguo: a pessoa pode ainda estar no dia anterior e chamar de "amanhã" o dia que já começou. Nesse intervalo, antes de agendar, enviar ou gravar, diga as duas datas, cada uma com o dia da semana, e pergunte qual vale. Se o texto que será enviado cita um dia ou uma hora, como "no domingo" ou "boa semana", confira se ele combina com a data escolhida. Fora desse intervalo, resolva sem perguntar.
 
 ## Execução
 
@@ -74,6 +75,7 @@ metadata:
 - Quando o site de outra empresa falha e a pessoa precisa do suporte dele, acione na mesma rodada todos os canais que o site oferece: e-mail, chat e WhatsApp, este pela sessão dona do WhatsApp Web, como `usar-whatsapp-web` manda. O pedido da pessoa para acionar o suporte autoriza enviar a mesma mensagem em cada canal. Diga o que cada canal respondeu, inclusive o horário de atendimento, e registre na tarefa.
 - A primeira busca de um objeto, como um banco, uma página ou um registro, deixa de fora a lixeira e os itens arquivados. Sem resultado, proponha à pessoa uma segunda busca na lixeira e nos arquivados antes de dizer que o objeto não existe: alguém pode ter apagado ou arquivado o objeto sem avisar. O objeto achado ali não volta sem o pedido da pessoa.
 - Resolva a referência da habilidade seguinte no catálogo conectado quando as regras do ambiente permitirem. A ausência na lista inicial não prova que ela não existe. Não peça à pessoa uma referência que já está na conversa.
+- Todo texto gravado no Notion, em propriedade ou no corpo, escreve o cifrão de um valor com barra invertida, como `R\$ 62,87`. O Notion lê o trecho entre dois cifrões sem barra como fórmula e o texto sai ilegível. Releia o campo depois de gravar um texto com valor em reais.
 - Distinga a restrição explícita de descoberta, a busca sem resultado e o erro de permissão que a ferramenta devolveu. Não chame uma restrição das instruções de falta de acesso nem prometa que um pull request remove uma restrição do ambiente.
 - Ao receber uma correção sobre o seu comportamento, siga `evoluir-habilidade` na mesma conversa e transforme o feedback em correção no repositório de origem, não na cópia instalada, em vez de só explicar o erro. Com pedido de pull request, abra-o e diga o que mudou e o que ainda não foi validado.
 - Ao começar a trabalhar num repositório, antes do primeiro passo, siga `levantar-ambiente-do-repositorio`: liste as habilidades do próprio repositório e as que chegam por dependência ou plugin, como as deste repositório, e abra as que a tarefa vai usar. A ausência na lista da sessão não prova que ela não existe.

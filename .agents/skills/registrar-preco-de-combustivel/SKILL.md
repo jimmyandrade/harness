@@ -4,7 +4,7 @@ description: Registra o preço de combustível visto num posto da estrada, com d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.3"
+  version: "0.1.4"
   related:
     - definir-empresa
     - definir-viagem
@@ -149,6 +149,7 @@ Não criei a linha: o posto está na contramão e não dá para virar. Avisei qu
 - Dois postos da mesma bandeira e do mesmo preço no mesmo trecho são dois postos, até a pessoa dizer o contrário.
 - O horário do cupom é o do pagamento, não o da leitura da placa de outro posto.
 - A posição lida parece a do posto. Ela está à frente dele, porque o carro não para enquanto a pessoa avisa e a posição é consultada.
+- O Notion lê o trecho entre dois cifrões sem barra como fórmula. Num texto com valor em reais, escreva `R\$ 10,00` e releia o campo depois de gravar. A propriedade numérica não precisa da barra.
 
 ## Scripts disponíveis
 

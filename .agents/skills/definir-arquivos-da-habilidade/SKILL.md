@@ -3,7 +3,7 @@ name: definir-arquivos-da-habilidade
 description: Define onde ficam os scripts, referências, modelos e testes de uma skill e escreve Scripts disponíveis. Usada quando a skill ganha, move ou renomeia um arquivo além do SKILL.md, ou quando se propõe um script. Não serve para escrever o texto da skill, a descrição nem gravar no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.9.0"
+  version: "0.10.0"
   related:
     - criar-habilidade
     - evoluir-habilidade
@@ -29,6 +29,7 @@ Script de uma skill fica em `scripts/` dela. No Notion, é arquivo dessa página
 O nome do script, e o da pasta dele em `.agents/scripts/`, fica no `Idioma do nome dos scripts`, sem acento e na convenção de nome da linguagem.
 O nome e o lugar seguem essa regra desde a proposta, inclusive numa lista na conversa, antes de o arquivo existir.
 Antes de propor um script, decida pelo [Passo 3](#passo-3) se ele é preciso: comando curto ou de ferramenta que já resolve fica listado em `Scripts disponíveis`, e só comando longo vira script.
+Script devolve informação, como JSON ou texto. Quem a mostra é o agente, num widget ou num artefato, também a de um trabalho longo em tempo real: o script escreve o estado e o agente o lê e o exibe. Não grave página HTML dentro de um script, nem faça o script servir uma página.
 Tabela que estoura o limite vai para `references/`, com a condição de leitura. "Leia o material se a API não retornar 200" serve.
 
 Uma decisão de caso que a skill aprende com a pessoa, como classificar um item ou escolher um destino, fica numa árvore de decisão Mermaid, `flowchart TD`, num arquivo `.mmd` ao lado do `config.yaml`, e um parâmetro cita o arquivo. A árvore é lida de cima para baixo e a primeira pergunta que bater decide. Quando nenhuma bate, a skill pergunta e acrescenta a regra na árvore. O texto da skill guarda só o comportamento geral, nunca a decisão de um caso.
@@ -74,6 +75,14 @@ Se você descrever o formato em texto corrido ou colar o modelo na skill, o agen
 2. Deixe no corpo só a frase que manda ler o modelo: o de saída pelo nome, o de entrada pelo caminho.
 3. Não leia o modelo em nenhum outro passo.
 
+### Script que gera a página
+
+Se você propuser um script com uma página HTML embutida, ou que serve uma página para acompanhar um trabalho, a skill ganha um arquivo de interface que a pessoa não quer manter, e a página some com o script.
+
+1. Faça o script devolver o estado em JSON ou texto, e atualizá-lo a cada passo do trabalho.
+2. Leia esse estado e exiba-o como widget ou artefato.
+3. Não embuta HTML em Python nem em outra linguagem de script.
+
 ### Script compartilhado na skill
 
 Se você deixar em uma skill um script que outras também usam, ele fica preso na página dessa skill.
@@ -94,6 +103,7 @@ O script sai de `scripts/` da primeira skill e vai para `.agents/scripts/check-s
 
 - O script vale para uma skill: `scripts/` dentro dela. Vale para várias: `.agents/scripts/<nome>/`.
 - A skill passaria do limite de linhas ou de tokens do corpo: proponha `references/` e a condição de leitura.
+- A skill quer mostrar o andamento de um trabalho longo: o script escreve o estado e o agente o exibe, sem página no script.
 - O script já existe com o nome em outro idioma: renomeie para o `Idioma do nome dos scripts` e atualize `Scripts disponíveis`.
 - Um pacote já resolve: o comando fica em `Scripts disponíveis`, sem `scripts/`.
 - A skill não tem script: a lista é `Nenhum.` e a execução diz que não há script.
@@ -103,6 +113,7 @@ O script sai de `scripts/` da primeira skill e vai para `.agents/scripts/check-s
 - Juntar comandos curtos num script só parece mais organizado. Ele esconde o que cada comando faz e pode faltar na página do Notion; listados, os comandos valem nos dois lugares.
 - O nome de um script proposto só parece seguir o idioma da skill. Ele segue `Idioma do nome dos scripts`, que tem inglês como padrão, mesmo numa skill em português.
 - Modelo de saída não entra no corpo. Fica em `.agents/assets/templates/`, e a frase cita o nome, não o caminho.
+- Uma página que se atualiza sozinha parece a forma mais simples de acompanhar um trabalho. Ela vira código de interface dentro do script. O script devolve o estado e o agente o exibe.
 - No Notion, o script pode faltar na página. A execução precisa de um caminho sem ele.
 
 ## Scripts disponíveis
