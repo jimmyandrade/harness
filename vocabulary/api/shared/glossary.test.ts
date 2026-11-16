@@ -1,5 +1,5 @@
 import assert from "node:assert/strict"
-import { existsSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs"
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs"
 import { tmpdir } from "node:os"
 import { join, resolve } from "node:path"
 import test from "node:test"
@@ -82,6 +82,15 @@ test("the glossary lives in the project unless HARNESS_GLOSSARY_DIR names anothe
   assert.equal(glossaryDirectory({}, "/work/site"), resolve("/work/site/.agents/glossary"))
   assert.equal(glossaryDirectory({ HARNESS_ROOT: "/work/brand" }, "/work/site"), resolve("/work/brand/.agents/glossary"))
   assert.equal(glossaryDirectory({ HARNESS_GLOSSARY_DIR: "/data/terms", HARNESS_ROOT: "/work/brand" }, "/work/site"), resolve("/data/terms"))
+})
+
+test("the glossary falls back to the working folder when HARNESS_ROOT holds none", () => {
+  const spare = mkdtempSync(join(tmpdir(), "spare-"))
+  const project = mkdtempSync(join(tmpdir(), "project-"))
+  mkdirSync(join(project, ".agents", "glossary"), { recursive: true })
+  assert.equal(glossaryDirectory({ HARNESS_ROOT: spare }, project), join(project, ".agents", "glossary"))
+  assert.equal(glossaryDirectory({ HARNESS_ROOT: project }, spare), join(project, ".agents", "glossary"))
+  assert.equal(glossaryDirectory({ HARNESS_ROOT: spare }, spare), join(spare, ".agents", "glossary"))
 })
 
 test("init creates an empty glossary for a new language, with its directory", () => {

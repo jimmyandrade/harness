@@ -112,7 +112,11 @@ export const STATES = new Set(stateSchema.options)
 const LANGUAGE = /^[A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$/
 export function glossaryDirectory(env: Record<string, string | undefined>, cwd: string): string {
   if (env.HARNESS_GLOSSARY_DIR) return resolve(env.HARNESS_GLOSSARY_DIR)
-  return resolve(env.HARNESS_ROOT || cwd, ".agents", "glossary")
+  const inRoot = resolve(env.HARNESS_ROOT || cwd, ".agents", "glossary")
+  // A host can start the server before it binds the session to the project, so HARNESS_ROOT may name a
+  // temporary folder with no glossary. The working folder is then the project: use it when it has one.
+  const inCwd = resolve(cwd, ".agents", "glossary")
+  return !existsSync(inRoot) && existsSync(inCwd) ? inCwd : inRoot
 }
 
 export const defaultDirectory = glossaryDirectory(process.env, process.cwd())

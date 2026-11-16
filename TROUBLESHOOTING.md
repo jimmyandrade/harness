@@ -144,3 +144,11 @@ A session in the Claude desktop app lists skills or subagents of a core older th
 4. Remove `node_modules` from that plugin folder, and `.vocabulary-install.lock` if it is there. Both hold only installed dependencies, which the launcher installs again.
 5. Start a new session, or reconnect `plugin:core:vocabulary` in `/mcp`. The first start installs the dependencies again.
 6. The current launcher installs under a lock and checks `node_modules/.vocabulary-installed`, which it writes only after npm ci finishes, so it repairs a half-installed folder by itself. `/mcp` listing `plugin:core:vocabulary` as connected closes the case.
+
+## The vocabulary server answers "No glossary for pt-BR yet" in a project that has one
+
+`/mcp` lists `plugin:core:vocabulary` as connected, yet every read answers that the language has no glossary, and `.agents/glossary/pt-BR.json` is in the project.
+
+1. The plugin passes `HARNESS_ROOT=${CLAUDE_PROJECT_DIR}`. A host that starts the server before it binds the session to the project can pass a temporary folder, such as one under `~/.claude/spares/`, so the server looked for the glossary there.
+2. The server now uses the working folder when `HARNESS_ROOT` has no `.agents/glossary/` and the working folder has one. Update the `core` plugin and start a new session.
+3. On an older plugin, set `HARNESS_GLOSSARY_DIR` to the `.agents/glossary` folder of the project, or open the session from the project folder, and reconnect `plugin:core:vocabulary` in `/mcp`.
