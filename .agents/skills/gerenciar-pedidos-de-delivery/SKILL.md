@@ -61,7 +61,7 @@ Busque também fora do recorte, por `identificar-duplicata`. Um lançamento sem 
 
 Entregue a lista dos pedidos do recorte com estabelecimento, data, valor pago e situação, e a página de cada despesa já lançada. Diga quantos pedidos conferiu e de qual fonte vieram.
 
-Para cada pedido não lançado, siga `lancar-despesa-da-empresa`, com a viagem quando houver, usando o comprovante que a pessoa já trouxe. O que faltar de evidência fica como pendência dita na resposta. Sem o total pago, não grave: o pedido fica na lista com o que falta pedir. Para o lançamento fora do recorte, complemente o vínculo na mesma despesa, sem criar outra. Se a pessoa disser que um pedido era pessoal, siga `lancar-despesa-pessoal`.
+Para cada pedido não lançado, siga `lancar-despesa-da-empresa`, com a viagem quando houver, usando o comprovante que a pessoa já trouxe. O print do detalhe do pedido é o comprovante: anexe-o à despesa, sem deixá-lo como pendência. O que faltar de evidência fica como pendência dita na resposta. Sem o total pago, não grave: o pedido fica na lista com o que falta pedir. Para o lançamento fora do recorte, complemente o vínculo na mesma despesa, sem criar outra. Se a pessoa disser que um pedido era pessoal, siga `lancar-despesa-pessoal`.
 
 ### Passo 5
 
