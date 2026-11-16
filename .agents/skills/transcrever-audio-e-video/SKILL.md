@@ -3,7 +3,7 @@ name: transcrever-audio-e-video
 description: Transcreve um áudio ou vídeo local com o Whisper local ou o SpeechAnalyzer da Apple, detecta o que está instalado e só propõe instalar com o sim da pessoa. Usada quando a pessoa manda uma gravação para virar texto, mesmo sem dizer Whisper. NÃO serve para reunião que já tem transcrição, identificar quem fala nem enviar o arquivo a um serviço externo.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.3.1"
   related:
     - definir-registro-de-reuniao
     - evoluir-habilidade
@@ -67,7 +67,7 @@ Ponha o caminho do arquivo entre aspas: nome com espaço e acento é comum.
 ### Passo 5
 
 Com o `SpeechTranscriber`, compile `scripts/speech_transcribe.swift` na `Pasta de saída` e rode-o com o `Idioma do SpeechAnalyzer`. Ele imprime o texto corrido, sem `.srt` e sem tempos. Para a pessoa que precisa dos tempos, rode o `Whisper`.
-Não use o `SFSpeechRecognizer`: no terminal da ferramenta de código ele aborta por falta de permissão e não superou o `SpeechTranscriber` na medição. `references/comparacao-de-motores.md` traz a medição e o jeito de rodá-lo, se for preciso.
+Não use o `SFSpeechRecognizer`: no terminal da ferramenta de código ele aborta por falta de permissão e não superou o `DictationTranscriber` na medição, que a ADR 0027 do core registra. `references/sfspeechrecognizer.md` traz o jeito de rodá-lo, se for preciso.
 
 Com o `Whisper`, rode o `whisper-cli` com o `Idioma da transcrição`, `-ml 0` e as saídas `.txt` e `.srt`. Com `Termos do prompt` preenchido, passe-os em `--prompt`.
 Num Apple M4 Pro, o tempo é cerca de um dezoito avos da duração do áudio. Leia `references/tempos-medidos.md` quando for avisar o tempo de um arquivo longo ou de um lote. Em outra máquina o tempo muda: avise a pessoa antes e espere o resultado no mesmo turno.
