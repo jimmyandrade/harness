@@ -39,7 +39,7 @@ The skill offers the local Whisper and `SpeechTranscriber`, in the order of the 
 - The Whisper stays first because it was measured on 45 recordings and it writes the `.srt` with times. `SpeechTranscriber` is the engine that needs nothing installed.
 - The installation step opens only when no engine is available.
 - After the Whisper, the skill looks for a repeated phrase and a jump of subject. Found one, it runs the other engine on that audio, or says the passage is not reliable.
-- `SFSpeechRecognizer` is not offered. It did not beat `DictationTranscriber`, and it needs a permission that the code tool does not hold. The skill keeps the way to run it in `references/sfspeechrecognizer.md`.
+- `SFSpeechRecognizer` is not offered. It did not beat `DictationTranscriber`, and it needs a permission that the code tool does not hold. The way to run it is in the section below.
 - `scripts/speech_transcribe.swift` runs `SpeechTranscriber`, and `DictationTranscriber` as an option.
 
 ## Consequences
@@ -48,3 +48,11 @@ The skill offers the local Whisper and `SpeechTranscriber`, in the order of the 
 - No engine won in the measurement, so the order is a default and not a ranking. A project that prefers `SpeechTranscriber` first changes the parameter.
 - `SpeechTranscriber` has no measurement on a long recording. The skill says so when the recording is long.
 - The measurement is one sample. A new engine, a new macOS or a new audio calls for another measurement and, if the order should change, a new record.
+
+## Running SFSpeechRecognizer
+
+The skill does not use it. It is recorded here for the day it is needed.
+
+- Called from a binary run in the terminal of the code tool, the process aborts with `SIGABRT` from TCC: "attempted to access privacy-sensitive data without a usage description". The responsible app is the code tool, and an `Info.plist` embedded in the binary does not count.
+- Two ways work. The first is to run it in the Terminal panel of the app. The second is to package the binary as an `.app` with its own `Info.plist` (`CFBundleExecutable`, `CFBundleIdentifier`, `LSUIElement` and `NSSpeechRecognitionUsageDescription`), sign it with `codesign --force --sign - App.app` and launch it with `open -W -n App.app --stdout out.txt --stderr err.txt --args audio.wav`.
+- Ask for `requiresOnDeviceRecognition = true`. With partial results the text restarts at each segment, and the final result holds only the last one. Join the segments: when the new text is much shorter than the previous one, keep the previous one and go on.
