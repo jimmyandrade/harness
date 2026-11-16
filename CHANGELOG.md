@@ -1,5 +1,34 @@
 # Changelog
 
+## [1.91.1](https://github.com/jimmyandrade/harness/compare/v1.91.0...v1.91.1) (2026-11-16)
+
+
+### Bug Fixes
+
+* **redigir-com-tom-de-voz:** show the editable preview widget with every message draft ([#1237](https://github.com/jimmyandrade/harness/issues/1237)) ([30f7d58](https://github.com/jimmyandrade/harness/commit/30f7d581744f74ce14c22b2516de8cc90972da27))
+
+## [1.91.0](https://github.com/jimmyandrade/harness/compare/v1.90.0...v1.91.0) (2026-11-16)
+
+
+### Features
+
+* add a fill mode to the vocabulary terms write ([#1223](https://github.com/jimmyandrade/harness/issues/1223)) ([11d1508](https://github.com/jimmyandrade/harness/commit/11d15087a9a5c24ec223d92ea90134a5a58da248))
+* add audit and diff to the vocabulary ([#1224](https://github.com/jimmyandrade/harness/issues/1224)) ([d678561](https://github.com/jimmyandrade/harness/commit/d678561ad9290e769ffc659a3e2148eff5fad328))
+* **cadastrar-foto-de-moda:** add a skill to record and classify fashion photos ([#1231](https://github.com/jimmyandrade/harness/issues/1231)) ([ee04f12](https://github.com/jimmyandrade/harness/commit/ee04f12a26ec4329edff4e1a4dd21d7c8ff6f499))
+* **definir-arquivos-da-habilidade:** return data from a script and let the agent show it ([#1243](https://github.com/jimmyandrade/harness/issues/1243)) ([45ff339](https://github.com/jimmyandrade/harness/commit/45ff339b9db8dfc148917d7713cdc869617755e0))
+* **definir-negociacao:** research the opportunity, try the enrollment and send the approved message ([#1227](https://github.com/jimmyandrade/harness/issues/1227)) ([e50a553](https://github.com/jimmyandrade/harness/commit/e50a553214bd61e16b7fd89b2d727c8c8f1616d4))
+* **descrever-habilidade-ou-schema:** use cadastrar as the verb and keep renames non-breaking ([#1233](https://github.com/jimmyandrade/harness/issues/1233)) ([3c16028](https://github.com/jimmyandrade/harness/commit/3c160286427e7955bfa6dc6b163420297b4c815d))
+* **escrever-legenda-do-post:** add a skill for the caption of any post ([#1229](https://github.com/jimmyandrade/harness/issues/1229)) ([40d7fd1](https://github.com/jimmyandrade/harness/commit/40d7fd1f570a87e8de0511cbbb89ed62355d53fc))
+* **fatiar-pull-request:** stack every open pull request when asked ([#1235](https://github.com/jimmyandrade/harness/issues/1235)) ([909cde6](https://github.com/jimmyandrade/harness/commit/909cde64f9c00808dbf53968e286a30d99988418))
+* **publicar-produto-fisico-na-loja-virtual:** add a skill to publish a physical product in the virtual store ([#1230](https://github.com/jimmyandrade/harness/issues/1230)) ([0f5171b](https://github.com/jimmyandrade/harness/commit/0f5171bb586dae98d1c0a677d426f8aa5c9b40e9))
+* **tratar-foto-de-moda:** add a skill to treat and recreate fashion photos ([#1232](https://github.com/jimmyandrade/harness/issues/1232)) ([d7a2adb](https://github.com/jimmyandrade/harness/commit/d7a2adbd99a42594de0417159117de5238e414a9))
+
+
+### Bug Fixes
+
+* ask which day is meant when a relative date comes after midnight ([#1244](https://github.com/jimmyandrade/harness/issues/1244)) ([a6699c1](https://github.com/jimmyandrade/harness/commit/a6699c1016b2e9da0ac81bf7fcbf213f0c95af5f))
+* escape the dollar sign of a value in text written to Notion ([#1241](https://github.com/jimmyandrade/harness/issues/1241)) ([19b5a97](https://github.com/jimmyandrade/harness/commit/19b5a97571c432922ce4f7fc86e234f997befa74))
+
 ## [1.90.0](https://github.com/jimmyandrade/harness/compare/v1.89.0...v1.90.0) (2026-11-15)
 
 

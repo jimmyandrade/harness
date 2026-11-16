@@ -888,6 +888,7 @@ flowchart LR
   reconhecer_imagem --> lancar_despesa_da_empresa
   reconhecer_imagem --> procurar_oportunidade
   redigir_com_tom_de_voz --> consultar_vocabulario
+  redigir_com_tom_de_voz --> conversar_no_whatsapp
   redigir_com_tom_de_voz --> definir_pessoa
   redigir_com_tom_de_voz --> definir_vocabulario
   redigir_com_tom_de_voz --> perfilar_tom_de_voz

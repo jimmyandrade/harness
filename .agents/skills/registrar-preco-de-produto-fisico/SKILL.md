@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.2.1"
   aliases:
     - definir-preco-de-produto
     - definir-preco-da-peca
@@ -159,6 +159,7 @@ Perguntei o motivo e quem decidiu. Acrescentei uma linha com o canal, os preços
 - O preço dito no local parece valer para todos os produtos daquele tipo. Vale só para os que estavam lá e ainda tinham estoque.
 - A página do produto parece só ter o preço de hoje. As versões do produto e da variação guardam preços antigos que o banco do histórico ainda não tem.
 - O custo na data parece recalculável. Ele é o custo copiado no dia da mudança.
+- O Notion lê o trecho entre dois cifrões sem barra como fórmula. Num texto com valor em reais, escreva `R\$ 10,00` e releia o campo depois de gravar. A propriedade numérica não precisa da barra.
 
 ## Scripts disponíveis
 
