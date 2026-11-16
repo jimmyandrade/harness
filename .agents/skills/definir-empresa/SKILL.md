@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.5.1"
+  version: "0.6.0"
   related:
     - definir-grafia
     - definir-perfil-social
@@ -78,6 +78,12 @@ Antes de gravar, leia a descrição de cada propriedade no esquema da lista: ela
 
 Quando houver pessoa identificada, relacione-a nas pessoas responsáveis. Os donos são outra relação e não substituem essa. Quem verifica é usuário do workspace e não substitui essa. No tipo de público, acrescente a opção de fornecedor quando fizer sentido. Não apague os valores que já estão. Com pessoa vinculada, abra o registro dela e confira as empresas relacionadas. Se a empresa já apareceu, pare. Se não apareceu, relacione. Não relacione de novo. As notas qualificam o papel, o contexto, a pendência ou a certeza. A nota não substitui a relação. Telefone, WhatsApp e endereço não entram na nota.
 
+Quando a pessoa descobre que o nome que usávamos para a empresa estava errado, o nome certo vira o nome da empresa e o nome que entendemos antes entra nas variações de grafia, no feitio de `definir-grafia`, sem apagar os itens que já estão. Registre também a página que já existir com o nome errado, em vez de criar outra.
+
+As pistas de memória são o que a pessoa lembra da empresa e ajuda a achá-la depois: o que ela faz, o que fazia, o ramo e a referência de lugar, como "fica perto da Avenida Pedro II, não na avenida". Grave cada pista que a pessoa der, na primeira vez que ela falar da empresa, mesmo antes de achar o nome.
+
+Pista não é variação de grafia, nota nem endereço. A busca da empresa lê as pistas, como `identificar-duplicata` lê as variações. Sem a propriedade de pistas de memória na lista, avise, proponha a criação e não a crie antes do sim.
+
 ## Problemas comuns
 
 ### Empresa criada com a busca antiga
@@ -112,6 +118,14 @@ Se você gravar o nome da pessoa responsável só na nota, a fornecedora fica se
 2. A nota fica com o papel, o contexto, a pendência ou a certeza.
 3. Confira as empresas relacionadas na pessoa.
 
+### Nome errado que some
+
+Se você trocar o nome da empresa e não guardar o que entendíamos antes, a próxima busca pelo nome antigo não acha nada e a empresa volta a ser cadastrada.
+
+1. O nome certo vai no nome da empresa.
+2. O nome anterior entra nas variações de grafia.
+3. As pistas que a pessoa deu entram nas pistas de memória.
+
 ### Dono no lugar do responsável
 
 Se você ligar a pessoa só nos donos, a fornecedora continua sem a pessoa responsável.
@@ -132,8 +146,14 @@ Associei a pessoa nas pessoas responsáveis. A nota ficou com o papel. O tipo de
 
 Pesquisei a cidade no site oficial e em uma matéria sobre a associação. Ela tem sede em uma capital e unidades em outras regiões, então relacionei o país e escrevi nas notas o motivo e as fontes. Uma entidade de nome parecido, de veículos pesados, ficou fora, com a distinção nas notas.
 
+### Empresa lembrada pelo ramo e pelo lugar
+
+Contei que achávamos "Design Print", fica perto da Avenida Pedro II e imprime em tecido. O nome certo era "Dream Estamparia Digital". Gravei o nome certo, guardei "Design Print" nas variações e as três pistas nas pistas de memória.
+
 ## Casos-limite
 
+- A pessoa não lembra o nome da empresa e dá só pistas: guarde as pistas, procure por elas e só cadastre quando o nome vier. Não invente o nome.
+- A lista não tem a propriedade de pistas de memória: avise e proponha. Não ponha as pistas na nota nem na variação de grafia.
 - A cidade da empresa não foi informada: pesquise na internet antes de usar uma localidade mais ampla, como o Passo 2 manda. Várias cidades: localidade mais ampla, com o motivo nas notas.
 - A exigência de contato segue o flowchart do Passo 2. Não invente o nome nem confunda contato operacional com dono.
 - Cadastro mínimo de recebedora: registre como pendência o que faltar, salvo o contato numa compra pontual, e devolva a página para vincular o pagamento. Não dê a validação comercial por concluída.
@@ -152,6 +172,9 @@ Pesquisei a cidade no site oficial e em uma matéria sobre a associação. Ela t
 - Quem verifica parece o contato da fornecedora. É um usuário do workspace, não uma página da lista de pessoas.
 - As pessoas responsáveis parecem preencher as empresas relacionadas. São relações diferentes. Confira a pessoa. Se a empresa não apareceu, relacione.
 - A nota com o nome da pessoa parece o vínculo. A nota não substitui as pessoas responsáveis.
+
+- A nota com a pista parece lugar da memória. A pista tem propriedade própria, e a nota qualifica o papel, o contexto, a pendência ou a certeza.
+- O nome errado parece descartável depois da correção. Ele fica nas variações de grafia, porque a pessoa e as conversas antigas ainda o usam.
 
 ## Scripts disponíveis
 
