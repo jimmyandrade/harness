@@ -5,12 +5,13 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.7.0"
+  version: "0.8.0"
   aliases:
     - definir-grupo
   related:
     - procurar-oportunidade
     - criar-oportunidade
+    - organizar-emails
     - triar-conversas
 ---
 
@@ -22,6 +23,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 ```yaml
 # `Considerar grupos de oportunidades` é `sim` ou `não`.
 "Considerar grupos de oportunidades": "sim"
+# `Pasta das etiquetas de oportunidades` é a pasta das etiquetas de e-mail dos grupos, sob uma das raízes da estrutura de `organizar-emails`. Cada grupo tem uma etiqueta dentro dela, e cada edição, uma dentro da do grupo.
+"Pasta das etiquetas de oportunidades": "Projetos/Oportunidades"
 ```
 ## Instruções
 
@@ -60,6 +63,8 @@ Oficina ou curso recorrente do mesmo organizador usa um grupo só, nomeado pelo 
 ### Passo 6
 
 O que é estável fica no grupo. Regra geral, canal oficial que se repete e princípio de curadoria vão nas notas do grupo. Organizador e empresa ou local padrão só quando não mudam entre edições. Local fixo só quando o evento é daquele lugar. Perfil social oficial, como o do evento ou da organização, vai nos perfis oficiais. Só relacione página de perfil que já existe. Não crie o perfil. Conta própria de uma edição fica nos perfis da edição, com `criar-oportunidade`. Link oficial recorrente vai nas notas do grupo, quando o grupo não tem link oficial. Endereço, horário, valor, formulário e vaga de uma data ficam na edição. Não grave isso no corpo. A etiqueta de e-mail do grupo guarda o nome inteiro da etiqueta das conversas do grupo, sem ano e sem data, e a etiqueta de cada data fica na edição, com `criar-oportunidade`.
+
+Ao criar o grupo, grave o nome da etiqueta de e-mail dele, mesmo sem conversa ainda: `Pasta das etiquetas de oportunidades`, uma barra e o título do grupo, como `Projetos/Oportunidades/Festival Rota Sul`. Grupo existente com a etiqueta vazia recebe o nome na revisão. O Gmail não leva a etiqueta do grupo junto com a da edição: a conversa recebe as duas, e `organizar-emails` aplica.
 
 A lição que uma edição ensina para as próximas, como confirmar antes o local do estande no mapa da feira, vai nas notas do grupo, numa linha nova que começa pela data da edição de origem. Grave só com o sim da pessoa. Não apague a linha de uma lição anterior. A intercorrência que gerou a lição fica num comentário da edição, como `triar-conversas` grava.
 

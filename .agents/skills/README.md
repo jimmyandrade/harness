@@ -458,6 +458,7 @@ flowchart LR
   definir_grafia --> identificar_duplicata
   definir_grafia --> mesclar_registro
   definir_grupo_de_oportunidades --> criar_oportunidade
+  definir_grupo_de_oportunidades --> organizar_emails
   definir_grupo_de_oportunidades --> procurar_oportunidade
   definir_grupo_de_oportunidades --> triar_conversas
   definir_hospedagem --> acompanhar_retornos_pendentes

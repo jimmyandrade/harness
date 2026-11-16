@@ -3,7 +3,7 @@ name: organizar-emails
 description: Organiza e-mails por BASB e separa pessoal, trabalho e misto. Usada quando a pessoa quer triar a caixa, etiquetar ou configurar filtros. Não serve para responder mensagens, lançar despesas nem acompanhar veículos.
 metadata:
   author: jimmyandrade
-  version: "0.24.0"
+  version: "0.25.0"
   related:
     - procurar-email
     - evoluir-habilidade
@@ -150,7 +150,7 @@ O e-mail que o agente envia também é etiquetado, na conversa, depois do envio:
 
 Não crie tarefa nem evento: ofereça `definir-tarefa` ou `definir-agenda`.
 
-Conversa que anuncia evento, oficina, edital, programa ou benefício com prazo é uma oportunidade, inclusive a de data passada ou etiquetada por filtro. Siga `procurar-oportunidade` para cada uma, com o nome, a edição e a data. Achada, a conversa recebe a etiqueta de e-mail que a edição ou o grupo dela registra, e a resposta traz o link e o status. Sem cadastro, cadastre por `criar-oportunidade`, sem perguntar.
+Conversa que anuncia evento, oficina, edital, programa ou benefício com prazo é uma oportunidade, inclusive a de data passada ou etiquetada por filtro. Siga `procurar-oportunidade` para cada uma, com o nome, a edição e a data. Achada, a conversa recebe a etiqueta do grupo e a de cada edição que ela trata, e a resposta traz o link e o status. Sem cadastro, cadastre por `criar-oportunidade`, sem perguntar.
 
 Aviso de plataforma de venda segue `delegar-aviso-de-plataforma`. A decisão de participar fica para a revisão das oportunidades, não para a triagem. A inscrição e a presença seguem `definir-inscricao`, com o sim da pessoa.
 
