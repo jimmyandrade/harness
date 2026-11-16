@@ -3,7 +3,7 @@ name: gerenciar-pedidos-de-delivery
 description: Gerencia os pedidos de comida feitos num aplicativo de entrega, numa viagem ou em qualquer período. Lê o histórico, decide de quem é cada pedido pelo endereço, confere contra as despesas lançadas e aponta o que falta cadastrar. Usada quando a pessoa pergunta se os pedidos estão lançados, ou ao fechar a prestação de contas. NÃO serve para lançar a despesa nem cadastrar a viagem.
 metadata:
   author: jimmyandrade
-  version: "0.2.1"
+  version: "0.2.2"
   aliases:
     - conferir-pedidos-da-viagem
   related:
