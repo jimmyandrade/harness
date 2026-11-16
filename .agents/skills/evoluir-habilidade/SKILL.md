@@ -3,7 +3,7 @@ name: evoluir-habilidade
 description: Muda uma skill ou as instruções do projeto a pedido ou pelo feedback de uma execução, como falha ou correção da pessoa, e abre o pull request no repositório de origem. Usada ao pedir uma regra nova, mesmo sem dizer evoluir, e ao fim de cada skill. Não serve para testar a skill, criar a primeira versão, ver se a descrição dispara, só revisar nem gravar no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.35.0"
+  version: "0.35.1"
   related:
     - criar-commit
     - criar-habilidade
@@ -168,6 +168,14 @@ Se você acrescentar uma frase sem ler o resto da skill, ela pode mandar o opost
 1. Confira de onde a skill vem e leia a skill inteira, as `related` e os parâmetros antes de editar. A cópia instalada por dependência ou plugin não se edita.
 2. Reescreva a frase que já existe e cada repetição dela. Não acrescente exceção noutro lugar.
 3. Valor que muda de um projeto para outro vira parâmetro. O passo cita a chave. Fato do negócio fica no data source, e o passo manda consultá-lo.
+
+### Feedback de comportamento nas instruções do projeto
+
+Se você gravar nas instruções do projeto a regra de uma tarefa que uma skill cobre, o agente que executa a skill não a lê, e a regra repete o erro que o feedback queria evitar.
+
+1. Ache a skill da tarefa em que o comportamento aconteceu, mesmo quando o pedido nasce numa conversa sobre outra coisa.
+2. Edite essa skill. Valor que muda de um projeto para outro vira parâmetro dela.
+3. As instruções do projeto só recebem a regra que vale para toda tarefa e não cabe em nenhuma skill.
 
 ### Rename sem o nome antigo
 
