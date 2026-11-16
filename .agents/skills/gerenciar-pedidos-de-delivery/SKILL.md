@@ -3,7 +3,7 @@ name: gerenciar-pedidos-de-delivery
 description: Gerencia os pedidos de comida feitos num aplicativo de entrega, numa viagem ou em qualquer período. Lê o histórico, decide de quem é cada pedido pelo endereço, confere contra as despesas lançadas e aponta o que falta cadastrar. Usada quando a pessoa pergunta se os pedidos estão lançados, ou ao fechar a prestação de contas. NÃO serve para lançar a despesa nem cadastrar a viagem.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.2.1"
   aliases:
     - conferir-pedidos-da-viagem
   related:
@@ -33,6 +33,8 @@ Defina o recorte da conferência: uma viagem ou um período. Numa viagem, ache-a
 Peça o histórico de pedidos do aplicativo, se a pessoa ainda não trouxe. A fonte é o que ela trouxe ou indicou: print do histórico, recibo, e-mail ou o próprio aplicativo aberto por ela. Leia print por `reconhecer-imagem`. Sem histórico, não deduza pedido: diga que a conferência depende dele.
 
 A lista do aplicativo mostra o estabelecimento, os itens e a data, mas não o total pago, o número do pedido nem o endereço: esses ficam dentro de cada pedido. Uma lista basta para conferir o que existe e não para lançar. Para lançar, peça o detalhe do pedido.
+
+O endereço de entrega e a forma de pagamento ficam no fim da tela do detalhe, e o print costuma cortá-los. Quando faltarem, peça o print rolado até o fim.
 
 ### Passo 2
 
@@ -109,7 +111,9 @@ Li o histórico que você trouxe e conferi os pedidos de 1 a 30 de novembro cont
 - O pedido foi cancelado ou reembolsado por inteiro: não é despesa. Diga que ficou de fora e por quê.
 - O pedido saiu em nome de outra pessoa que viajou junto: é da viagem. Siga `lancar-despesa-da-empresa` para saber quem pagou.
 - A viagem não tem período no cadastro: peça a ida e a volta e diga que o cadastro está incompleto. Não deduza o período.
-- Um segundo cartão do mesmo restaurante, perto de um pedido já lançado, pode ser a reentrega do que faltou na primeira: o aplicativo a registra como pedido novo, mas o pagamento é um só. Pergunte antes de apontá-lo como faltante. Se for reentrega, não lance outra despesa e diga na despesa existente que houve duas entregas.
+- Um segundo cartão do mesmo restaurante, perto de um pedido já lançado, pode ser outra refeição do mesmo dia, como o almoço e o jantar, ou a reentrega do que faltou na primeira. Compare a hora de criação, os itens e o total no detalhe de cada pedido e pergunte antes de apontá-lo como faltante.
+- A reentrega é pedido novo no aplicativo, mas o pagamento é um só. Só é reentrega quando o detalhe mostra o pedido concluído com alteração ou reembolso e a pessoa confirma: então não lance outra despesa e diga na despesa existente que houve duas entregas. Sem isso, é outro pagamento e outra despesa.
+- O pedido saiu concluído com alteração, com item removido e reembolso: o valor pago é o total do detalhe final, não o do print feito durante o preparo. Se o total e o reembolso não fecham, pergunte qual valor vale antes de mudar a despesa.
 - Há mais de um aplicativo de entrega no período: confira o histórico de cada um, por vez.
 - O pedido já está lançado e dentro do recorte: só confirme. Não lance de novo.
 
