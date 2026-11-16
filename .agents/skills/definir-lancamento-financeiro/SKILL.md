@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.4.1"
   aliases:
     - definir-lancamento
   related:
@@ -161,6 +161,7 @@ O valor em dólar, o câmbio, a data e a fonte do câmbio vieram da fatura. O va
 - Empréstimo e financiamento parecem custo. Na chave `Classes do gasto`, ficam em despesas financeiras.
 - A conversa parece o histórico. O saldo sai da fonte. Lançamento anterior permanece.
 - A fatura em dólar parece já estar na `Moeda`. O valor original, o câmbio e o valor convertido ficam juntos. Sem o câmbio, pergunte.
+- O Notion lê o trecho entre dois cifrões sem barra como fórmula. Num texto com valor em reais, escreva `R\$ 10,00` e releia o campo depois de gravar. A propriedade numérica não precisa da barra.
 
 ## Scripts disponíveis
 

@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.8.0"
+  version: "0.8.1"
   related:
     - acompanhar-retornos-pendentes
     - definir-obrigacao-financeira
@@ -152,6 +152,7 @@ A carência termina depois da viagem do fim de semana, então a extensão não a
 - O e-mail da tag parece a fatura do pedágio sem praça. São cobranças diferentes.
 - Um acordo com desconto parece uma dívida nova. Ele quita faturas que já existem: as faturas originais vêm do extrato.
 - Planilha com o ano escrito como "26/01" pode ser 2026, e não uma data.
+- O Notion lê o trecho entre dois cifrões sem barra como fórmula. Num texto com valor em reais, escreva `R\$ 10,00` e releia o campo depois de gravar. A propriedade numérica não precisa da barra.
 
 ## Scripts disponíveis
 

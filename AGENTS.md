@@ -1,6 +1,6 @@
 ---
 metadata:
-  version: "1.68.0"
+  version: "1.68.1"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -74,6 +74,7 @@ metadata:
 - Quando o site de outra empresa falha e a pessoa precisa do suporte dele, acione na mesma rodada todos os canais que o site oferece: e-mail, chat e WhatsApp, este pela sessão dona do WhatsApp Web, como `usar-whatsapp-web` manda. O pedido da pessoa para acionar o suporte autoriza enviar a mesma mensagem em cada canal. Diga o que cada canal respondeu, inclusive o horário de atendimento, e registre na tarefa.
 - A primeira busca de um objeto, como um banco, uma página ou um registro, deixa de fora a lixeira e os itens arquivados. Sem resultado, proponha à pessoa uma segunda busca na lixeira e nos arquivados antes de dizer que o objeto não existe: alguém pode ter apagado ou arquivado o objeto sem avisar. O objeto achado ali não volta sem o pedido da pessoa.
 - Resolva a referência da habilidade seguinte no catálogo conectado quando as regras do ambiente permitirem. A ausência na lista inicial não prova que ela não existe. Não peça à pessoa uma referência que já está na conversa.
+- Todo texto gravado no Notion, em propriedade ou no corpo, escreve o cifrão de um valor com barra invertida, como `R\$ 62,87`. O Notion lê o trecho entre dois cifrões sem barra como fórmula e o texto sai ilegível. Releia o campo depois de gravar um texto com valor em reais.
 - Distinga a restrição explícita de descoberta, a busca sem resultado e o erro de permissão que a ferramenta devolveu. Não chame uma restrição das instruções de falta de acesso nem prometa que um pull request remove uma restrição do ambiente.
 - Ao receber uma correção sobre o seu comportamento, siga `evoluir-habilidade` na mesma conversa e transforme o feedback em correção no repositório de origem, não na cópia instalada, em vez de só explicar o erro. Com pedido de pull request, abra-o e diga o que mudou e o que ainda não foi validado.
 - Ao começar a trabalhar num repositório, antes do primeiro passo, siga `levantar-ambiente-do-repositorio`: liste as habilidades do próprio repositório e as que chegam por dependência ou plugin, como as deste repositório, e abra as que a tarefa vai usar. A ausência na lista da sessão não prova que ela não existe.
