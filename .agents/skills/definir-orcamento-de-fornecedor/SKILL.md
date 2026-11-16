@@ -3,7 +3,7 @@ name: definir-orcamento-de-fornecedor
 description: Lê o orçamento ou a proposta que um fornecedor envia, por PDF, imagem, link ou mensagem, confere preço, prazo e validade, compara com a conversa e o registra onde o projeto indica. Usada quando chega orçamento de fornecedor. NÃO serve para pesquisar preço de compra, decidir se fecha, responder ao fornecedor nem lançar a despesa.
 metadata:
   author: jimmyandrade
-  version: "0.2.1"
+  version: "0.2.2"
   related:
     - conversar-no-whatsapp
     - definir-empresa
@@ -113,6 +113,7 @@ Abri o PDF: 500 etiquetas a R$ 0,90 a unidade, R$ 450,00 no total, produção em
 - A mensagem marcada como encaminhada pode ser um reenvio de outro orçamento, com número ou data diferente.
 - No WhatsApp Web, o PDF de semanas atrás abre "Documento indisponível" quando já não está no celular. O reenviado no dia abre.
 - O total de uma proposta pode já incluir o frete ou o imposto. Confira antes de comparar.
+- O Notion lê o trecho entre dois cifrões sem barra como fórmula. Num texto com valor em reais, escreva `R\$ 10,00` e releia o campo depois de gravar. A propriedade numérica não precisa da barra.
 
 ## Scripts disponíveis
 

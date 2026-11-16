@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.5.1"
+  version: "0.5.2"
   related:
     - definir-obrigacao-financeira
     - lancar-despesa-da-empresa
@@ -139,6 +139,7 @@ Lancei como despesa avulsa, sem obrigação, com o valor e a data de pagamento d
 - O comprovante identifica a transferência, não necessariamente a compra. Recebedor e Pix não são produto nem finalidade.
 - Ser sócia da empresa parece tornar o gasto da empresa. A finalidade decide.
 - Fatura com vencimento parece despesa paga. Sem comprovante, ela segue em aberto.
+- O Notion lê o trecho entre dois cifrões sem barra como fórmula. Num texto com valor em reais, escreva `R\$ 10,00` e releia o campo depois de gravar. A propriedade numérica não precisa da barra.
 
 ## Scripts disponíveis
 
