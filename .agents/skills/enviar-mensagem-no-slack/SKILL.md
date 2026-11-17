@@ -3,15 +3,15 @@ name: enviar-mensagem-no-slack
 description: Redige uma mensagem de Slack, num canal, thread ou DM, e entrega o rascunho com o link do destino. Só envia com a autorização explícita da pessoa e, depois do envio, compara o proposto com o aplicado para alimentar o vocabulário. Usada quando a pessoa pede uma mensagem ou resposta no Slack. Não serve para achar conversa antiga nem cadastrar pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.11.0"
+  version: "0.12.0"
   related:
     - definir-agenda
     - definir-pessoa
     - definir-vocabulario
-    - entregar-rascunho-de-mensagem
     - escrever-link
     - evoluir-habilidade
     - pedir-revisao-de-pr-no-slack
+    - rascunhar-mensagem
     - redigir-com-tom-de-voz
 ---
 
@@ -22,6 +22,8 @@ metadata:
 Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco, depois nas instruções de usuário. Quando um valor não estiver lá, use o padrão abaixo. Um parâmetro vazio não impõe regra.
 ```yaml
 "Retroalimentar o vocabulário": "sim"
+# `Limite de rascunhos por canal` é quantos rascunhos você cria num mesmo canal nesta sessão, porque o Slack guarda poucos por canal.
+"Limite de rascunhos por canal": "1"
 "Modo de aprendizado": "perguntar"
 # `Emoji do título do post` é o shortcode que abre o título de um post novo, ou vazio para não ter emoji.
 "Emoji do título do post": ""
@@ -156,7 +158,11 @@ Ajuste o formato do Slack, valendo para qualquer texto:
 
 ### Passo 5
 
-Entregue o texto inteiro, com o link direto da thread ou da mensagem onde ele vai, como diz `entregar-rascunho-de-mensagem`.
+Entregue o texto inteiro, com o link direto da thread ou da mensagem onde ele vai: o endereço absoluto do Slack, com o canal e o horário da mensagem sem o ponto, depois de um `p`, e, numa resposta, o da thread-pai. Não diga só que o rascunho está pronto.
+
+Crie o rascunho no Slack. Antes, conte os que você já criou nesse canal nesta sessão: um rascunho de resposta numa thread conta no canal inteiro. No `Limite de rascunhos por canal`, não crie outro, porque o Slack apagaria um existente sem avisar. Nunca diga que há vários rascunhos no mesmo canal.
+Com o limite atingido, avise e entregue o texto pronto para colar, com o link da thread, e diga que a menção colada vira texto puro e precisa ser digitada de novo no compositor. Se o Slack recusar o rascunho, como num canal compartilhado com outra organização, entregue o texto pronto do mesmo jeito.
+Com `Entrega dos rascunhos` em `artefato`, a página dos rascunhos pendentes segue `rascunhar-mensagem`.
 
 ### Passo 6
 
@@ -191,6 +197,14 @@ Se você enviar uma mensagem porque a pessoa pediu o texto, ela perde a chance d
 1. Mostre o texto e o destino.
 2. Espere o sim a essa mensagem.
 3. Depois de enviar, devolva o link.
+
+### Segundo rascunho no mesmo canal
+
+Se você criar um segundo rascunho num canal que já tem um, o Slack aceita e apaga o primeiro sem erro, e a pessoa não acha o que esperava.
+
+1. Conte os rascunhos que você criou no canal.
+2. No limite, avise e entregue o segundo texto pronto para colar.
+3. Mude o limite só quando a pessoa disser que o Slack passou a aceitar mais de um.
 
 ## Exemplos de entrada e saída
 
