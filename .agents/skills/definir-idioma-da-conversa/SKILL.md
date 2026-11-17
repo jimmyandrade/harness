@@ -3,7 +3,7 @@ name: definir-idioma-da-conversa
 description: Define o idioma em que se escreve um texto dirigido a uma pessoa, a tradução recolhível e se o texto leva a frase sobre o idioma. Usada antes de escrever uma revisão, uma resposta ou uma mensagem quando o idioma de quem recebe não está dito. Não serve para o idioma de PR, commit ou documento do projeto, nem para traduzir.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
   related:
     - definir-pessoa
     - evoluir-habilidade
@@ -21,7 +21,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Idioma pelo histórico": "o idioma que predomina"
 # `Gravar o idioma levantado` é `sim` ou `não`. Com `sim`, grava no registro da pessoa o que o histórico mostrou.
 "Gravar o idioma levantado": "não"
-# `Frase sobre o idioma` é `sim` ou `não`. Com `sim`, o texto diz numa frase que foi escrito naquele idioma pensando na pessoa.
+# `Frase sobre o idioma` é `sim` ou `não`. Com `sim`, o texto diz numa frase em que idioma foi escrito, com a redação do vocabulário.
 "Frase sobre o idioma": "sim"
 "Modo de aprendizado": "perguntar"
 ```
@@ -46,7 +46,7 @@ Sem histórico, use `Idioma sem preferência conhecida`.
 
 Devolva a quem chamou três coisas: o idioma principal, a tradução recolhível, se houver, e se o texto leva a frase sobre o idioma.
 Com tradução recolhível, o texto principal vem no primeiro idioma e a tradução logo abaixo, dentro de um bloco recolhido, com a mesma voz. Código, nomes de arquivo e identificadores ficam iguais.
-Com `Frase sobre o idioma` em `sim`, o texto diz numa frase, uma vez por rodada, que foi escrito naquele idioma pensando na pessoa. Nunca diga de onde veio a preferência nem que foi combinada em privado.
+Com `Frase sobre o idioma` em `sim`, o texto diz numa frase, uma vez por rodada, em que idioma foi escrito. A redação da frase vem do vocabulário: busque a expressão com `lookup_terms` antes de escrever e use a alternativa que ele indica para o caso, preferência dita ou levantada pelo histórico. Nunca a escreva de memória nem copie uma redação de rascunho anterior, porque o vocabulário proíbe redações que já saíram. Nunca diga de onde veio a preferência nem que foi combinada em privado.
 
 ### Passo 5
 
