@@ -3,7 +3,7 @@ name: gerenciar-pedidos-de-delivery
 description: Gerencia os pedidos de comida feitos num aplicativo de entrega, numa viagem ou em qualquer período. Lê o histórico, decide de quem é cada pedido pelo endereço, confere contra as despesas lançadas e aponta o que falta cadastrar. Usada quando a pessoa pergunta se os pedidos estão lançados, ou ao fechar a prestação de contas. NÃO serve para lançar a despesa nem cadastrar a viagem.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.2.3"
   aliases:
     - conferir-pedidos-da-viagem
   related:
@@ -34,6 +34,8 @@ Peça o histórico de pedidos do aplicativo, se a pessoa ainda não trouxe. A fo
 
 A lista do aplicativo mostra o estabelecimento, os itens e a data, mas não o total pago, o número do pedido nem o endereço: esses ficam dentro de cada pedido. Uma lista basta para conferir o que existe e não para lançar. Para lançar, peça o detalhe do pedido.
 
+O endereço de entrega e a forma de pagamento ficam no fim da tela do detalhe, e o print costuma cortá-los. Quando faltarem, peça o print rolado até o fim.
+
 ### Passo 2
 
 Decida de quem é cada pedido pelo endereço de entrega, e só depois pela data.
@@ -59,7 +61,9 @@ Busque também fora do recorte, por `identificar-duplicata`. Um lançamento sem 
 
 Entregue a lista dos pedidos do recorte com estabelecimento, data, valor pago e situação, e a página de cada despesa já lançada. Diga quantos pedidos conferiu e de qual fonte vieram.
 
-Para cada pedido não lançado, siga `lancar-despesa-da-empresa`, com a viagem quando houver, usando o comprovante que a pessoa já trouxe. O que faltar de evidência fica como pendência dita na resposta. Sem o total pago, não grave: o pedido fica na lista com o que falta pedir. Para o lançamento fora do recorte, complemente o vínculo na mesma despesa, sem criar outra. Se a pessoa disser que um pedido era pessoal, siga `lancar-despesa-pessoal`.
+Para cada pedido não lançado, siga `lancar-despesa-da-empresa`, com a viagem quando houver, usando o comprovante que a pessoa já trouxe. O print do detalhe do pedido é o comprovante: anexe-o à despesa, sem deixá-lo como pendência. O que faltar de evidência fica como pendência dita na resposta. Sem o total pago, não grave: o pedido fica na lista com o que falta pedir. Para o lançamento fora do recorte, complemente o vínculo na mesma despesa, sem criar outra. Se a pessoa disser que um pedido era pessoal, siga `lancar-despesa-pessoal`.
+
+Antes de gravar cada pedido, busque a despesa pelo número do pedido, pelo valor e pela data em todas as despesas, não só nas da viagem. Escolha a viagem cujo período contém a data de criação do pedido: duas viagens ao mesmo destino, em meses diferentes, não se misturam. Sem o endereço no detalhe, a pessoa confirma que o pedido é da viagem, e o endereço fica dito como pendência na despesa.
 
 ### Passo 5
 
@@ -82,6 +86,14 @@ Se você buscar apenas o que já está ligado à viagem ou ao período, uma desp
 1. Busque também por número do pedido, valor e data, fora do recorte.
 2. Complemente o vínculo na despesa que já existe.
 3. Só trate como faltante o que nenhuma busca achou.
+
+### Pedido gravado na viagem errada
+
+Se você ligar o pedido à viagem do mesmo destino que está à mão, em vez de à do período dele, o custo vai para a prestação de contas de outra feira.
+
+1. Compare a data de criação do pedido com o período de cada viagem cadastrada.
+2. Ligue o pedido só à viagem que contém essa data.
+3. Procure o número do pedido em todas as despesas antes de gravar, para não criar duplicata.
 
 ### Pedido que a pessoa não trouxe
 
@@ -109,7 +121,9 @@ Li o histórico que você trouxe e conferi os pedidos de 1 a 30 de novembro cont
 - O pedido foi cancelado ou reembolsado por inteiro: não é despesa. Diga que ficou de fora e por quê.
 - O pedido saiu em nome de outra pessoa que viajou junto: é da viagem. Siga `lancar-despesa-da-empresa` para saber quem pagou.
 - A viagem não tem período no cadastro: peça a ida e a volta e diga que o cadastro está incompleto. Não deduza o período.
-- Um segundo cartão do mesmo restaurante, perto de um pedido já lançado, pode ser a reentrega do que faltou na primeira: o aplicativo a registra como pedido novo, mas o pagamento é um só. Pergunte antes de apontá-lo como faltante. Se for reentrega, não lance outra despesa e diga na despesa existente que houve duas entregas.
+- Um segundo cartão do mesmo restaurante, perto de um pedido já lançado, pode ser outra refeição do mesmo dia, como o almoço e o jantar, ou a reentrega do que faltou na primeira. Compare a hora de criação, os itens e o total no detalhe de cada pedido e pergunte antes de apontá-lo como faltante.
+- A reentrega é pedido novo no aplicativo, mas o pagamento é um só. Só é reentrega quando o detalhe mostra o pedido concluído com alteração ou reembolso e a pessoa confirma: então não lance outra despesa e diga na despesa existente que houve duas entregas. Sem isso, é outro pagamento e outra despesa.
+- O pedido saiu concluído com alteração, com item removido e reembolso: o valor pago é o total do detalhe final, não o do print feito durante o preparo. Se o total e o reembolso não fecham, pergunte qual valor vale antes de mudar a despesa.
 - Há mais de um aplicativo de entrega no período: confira o histórico de cada um, por vez.
 - O pedido já está lançado e dentro do recorte: só confirme. Não lance de novo.
 

@@ -34,3 +34,30 @@ Funcionalidade: Gerenciar os pedidos de delivery pelo endereço de entrega
       Quando o agente confere os pedidos
       Então o agente não aponta o segundo cartão como despesa faltante
       E registra na despesa existente que houve duas entregas
+
+  Regra: Dois pedidos do mesmo restaurante no mesmo dia são outra despesa sem a confirmação de reentrega
+
+    Exemplo: Almoço e jantar no mesmo restaurante
+      Dado que o histórico traz dois pedidos do mesmo restaurante no mesmo dia, um criado à tarde e outro à noite
+      E que o detalhe do segundo não mostra alteração nem reembolso
+      Quando o agente confere os pedidos
+      Então o agente trata o segundo como outro pedido
+      E segue o lançamento dele como despesa própria
+
+  Regra: O valor pago de um pedido concluído com alteração é o do detalhe final
+
+    Exemplo: Despesa lançada com o total do print feito durante o preparo
+      Dado que uma despesa foi lançada com o total do pedido em preparo
+      E que o detalhe final mostra o pedido concluído com alteração e um reembolso
+      Quando o agente confere os pedidos
+      Então o agente compara pelo total do detalhe final
+      E pergunta qual valor vale quando o total e o reembolso não fecham
+
+  Regra: O pedido vai para a viagem cujo período contém a data dele, sem duplicar
+
+    Exemplo: Dois destinos iguais em meses diferentes
+      Dado que há uma viagem a São Paulo em outubro e outra em novembro
+      E que um pedido foi criado em 15 de novembro
+      Quando o agente vai lançar o pedido
+      Então o agente procura o número do pedido em todas as despesas
+      E liga a despesa à viagem de novembro, sem usar a de outubro
