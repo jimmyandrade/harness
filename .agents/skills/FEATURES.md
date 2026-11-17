@@ -690,6 +690,20 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses looking up when the date falls, the day or week lookup, creating or changing the calendar event, reverse planning, managing travel, registering the opportunity, organizing the contact point, and creating the task
 
+### definir-idioma-da-conversa
+- **Stability**: experimental
+- **Description**: Define the language of a text written to a person
+- **Properties**:
+  - Lives at `.agents/skills/definir-idioma-da-conversa/SKILL.md`
+  - Reads the language preference from the person's record with definir-pessoa, and never overrides a preference the person stated
+  - Without a preference, reads what the person wrote in conversations of the same kind, ignoring code, backticks, and links, and decides by the project's rule
+  - Offers the collapsible translation only when the person stated it, never from the history
+  - Returns the main language, the collapsible translation, and whether the text carries the sentence about the language
+  - Does not decide the language of a pull request, a commit, or a project document, and does not translate
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses the language of a pull request, a commit, or a project document, and translating
+
 ### definir-local-fisico
 - **Stability**: experimental
 - **Description**: Confirm the physical place of an event or contact point: space name, full address, venue company, and locality
