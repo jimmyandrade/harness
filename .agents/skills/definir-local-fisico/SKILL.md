@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.1"
+  version: "0.2.0"
   related:
     - definir-empresa
     - identificar-duplicata
@@ -30,7 +30,7 @@ O lugar físico é onde algo acontece: o nome do espaço, o endereço completo, 
 ```mermaid
 flowchart LR
   Q{O que falta?} -->|nome do espaço ou endereço| P[Pergunte]
-  Q -->|empresa do local| E[Busque; se não existe, pergunte e use definir-empresa]
+  Q -->|empresa do local| E[Busque; se não existe, cadastre com definir-empresa]
   Q -->|cidade| L[definir-localidade-geografica]
   Q -->|tudo confirmado| V[Valide a localidade e vincule]
 ```
@@ -43,7 +43,7 @@ O local só está confirmado com o nome do espaço e o endereço completo. Nome 
 
 Busque a empresa do local pelo nome do espaço e por suas grafias, com e sem acento, com e sem o tipo (centro, teatro, casa). A existência segue `identificar-duplicata` e a grafia segue `definir-grafia`. Achou uma só: use-a. Achou várias: mostre e pergunte.
 
-Não achou: pergunte se cadastra agora. Só com o sim, cadastre pela `definir-empresa` e então vincule. Sem o sim, deixe o vínculo vazio e liste a pendência. Não vincule a uma empresa parecida.
+Não achou, com o nome do espaço e o endereço confirmados: cadastre a empresa pela `definir-empresa` na mesma resposta, sem perguntar, e então vincule. Sem o endereço, pergunte antes, como o Passo 2 manda. Não vincule a uma empresa parecida.
 
 ### Passo 4
 
@@ -63,6 +63,8 @@ Um espaço dentro do local, como sala, palco ou auditório, fica um nível abaix
 
 Mostre o nome do espaço, o endereço, a empresa vinculada, a localidade e o que ficou pendente. Quando um dado faltou, diga qual e a pergunta feita.
 
+Mostre sempre o link do Google Maps do local, para a pessoa ver como é o lugar antes de decidir. O link é `https://www.google.com/maps/search/?api=1&query=` seguido do nome do espaço e do endereço, codificados para URL. Local online não tem link.
+
 ## Problemas comuns
 
 ### Endereço deduzido
@@ -78,8 +80,8 @@ Se você completar o endereço pela cidade ou pela memória, o local grava um en
 Se você vincular o local à empresa de nome parecido, o evento aparece no lugar errado.
 
 1. Busque por nome e grafias.
-2. Várias ou nenhuma: pergunte.
-3. Cadastre pela `definir-empresa` só com o sim.
+2. Várias: mostre e pergunte.
+3. Nenhuma igual, com o nome do espaço e o endereço confirmados: cadastre pela `definir-empresa` e vincule, sem perguntar.
 
 ### Estado no lugar da cidade
 
@@ -87,6 +89,14 @@ Se você preencher o estado porque a cidade não existe na lista, a busca por ci
 
 1. Chame `definir-localidade-geografica`.
 2. Vincule só depois que a cidade existir.
+
+### Local sem o link do mapa
+
+Se você mostrar só o nome e o endereço, a pessoa precisa procurar o lugar por conta própria para entender como ele é.
+
+1. Monte o link do Google Maps com o nome do espaço e o endereço, codificados para URL.
+2. Mostre-o na resposta, também quando a empresa já existia.
+3. Local online: não há link.
 
 ### Bairro cadastrado como localidade
 
@@ -106,7 +116,7 @@ O nome do espaço veio, o endereço não. Perguntei o endereço completo antes d
 
 ### a empresa Centro Cultural Aurora não existe, e o endereço é Rua das Flores, 100, Cidade Exemplo
 
-Perguntei se cadastra agora. Com o sim, a `definir-empresa` cadastrou e vinculei o local. A localidade da empresa e a do local batiam.
+Como o nome do espaço e o endereço estavam confirmados, a `definir-empresa` cadastrou a empresa na mesma resposta, sem perguntar, e vinculei o local. A localidade da empresa e a do local batiam. A resposta trouxe o link do Google Maps com o nome e o endereço.
 
 ### o espaço fica na Rua das Flores, 100, Vila Modelo, Cidade Exemplo, e existe também um município chamado Vila Modelo
 
@@ -121,13 +131,14 @@ Pesquisei o endereço e o CEP: Vila Modelo é um bairro de Cidade Exemplo. Não 
 - A localidade do local difere da da empresa: registre, mostre os dois e confirme.
 - A cidade não está na lista de localidades: `definir-localidade-geografica`.
 - O mapeamento não tem onde guardar o espaço: pergunte onde guardar.
-- Local online: não há endereço físico. Diga que não se aplica e não invente um.
+- Local online: não há endereço físico nem link do mapa. Diga que não se aplica e não invente um.
+- A empresa do local não existe e o nome do espaço e o endereço vieram da fonte: cadastre pela `definir-empresa`, sem perguntar. Sem o endereço, pergunte.
 
 ## Pegadinhas
 
 - O nome do evento parece o nome do local. O local é o espaço onde ele acontece.
 - Um local com vários espaços é uma empresa só. Sala, palco e auditório são o nível de baixo.
-- Empresa nova parece cadastro automático. Esta habilidade pergunta antes de chamar a `definir-empresa`.
+- Empresa nova parece pedir licença. Com o nome do espaço e o endereço confirmados, a habilidade chama a `definir-empresa` na hora. Sem o endereço, ela pergunta.
 - O estado parece uma aproximação aceitável para a cidade. Não é.
 - O nome depois da rua parece sempre uma cidade. Pode ser um bairro, e pode ter o nome de um município. A localidade é a cidade.
 
