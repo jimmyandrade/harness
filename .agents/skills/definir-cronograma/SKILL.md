@@ -5,12 +5,14 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
   aliases:
     - definir-programacao-da-oportunidade
   related:
     - criar-oportunidade
     - procurar-oportunidade
+    - procurar-data-significativa
+    - revisar-oportunidade
     - criar-ponto-de-contato
     - definir-viagem
     - definir-agenda
@@ -58,6 +60,10 @@ O tipo da etapa é uma das opções que a lista já tem. Não crie opção nova.
 
 A etapa liga sempre à oportunidade e, havendo ponto de contato correspondente, também a ele. A atividade formativa, sem ponto de venda, liga só à oportunidade. Não crie ponto de contato para ligar a etapa: a distinção segue `criar-ponto-de-contato`.
 
+Antes de gravar a etapa, compare o dia dela com a data e o título da oportunidade. Etapa fora do período, ou título que cita menos dias do que a fonte afirma, é divergência: corrija a oportunidade por `revisar-oportunidade` antes de gravar a etapa, e diga o que mudou. A organização pode estender o evento, como num feriado, então releia a mensagem mais recente da fonte antes de confiar na data cadastrada.
+
+Dia de feriado ou de ponte pede a confirmação do horário com a organização: pode valer o de sábado, o de domingo ou outro. Confira o feriado por `procurar-data-significativa` e faça a pergunta ao marcar a participação, sem esperar o dia chegar. Grave o horário só depois da resposta. Quando a oRnii organiza o evento, o comunicado traz o horário do feriado e avisa que a data pode mudar.
+
 Início e fim planejados só vêm do que a pessoa ou a fonte afirmou. Sem horário, a etapa fica sem ele. Não invente o horário nem copie o da etapa seguinte. Levar a etapa para a agenda segue `sincronizar-cronograma`, e o evento com início e fim segue `definir-agenda`.
 
 Ao criar, atualizar ou relacionar uma etapa de uma oportunidade, quando a ação afeta data, horário, ordem do dia, equipe, responsável, montagem ou apresentação, registre num comentário da etapa o resumo da ação, a origem da informação, o canal, e a data e a hora da confirmação. Diga o que está confirmado e o que ainda depende da produção ou de outra pessoa. Não duplique o comentário quando a mesma informação já está registrada e atual.
@@ -100,6 +106,14 @@ Se a fonte trouxer um dia da semana incompatível com a data, sinalize a diverg�
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
+
+### Etapa fora da data da oportunidade
+
+Se você gravar a etapa sem comparar o dia com a data e o título da oportunidade, a oportunidade continua com os dias antigos e a pessoa descobre a divergência sozinha.
+
+1. Compare o dia da etapa com o período e o título da oportunidade.
+2. Corrija a oportunidade por `revisar-oportunidade` e diga o que mudou.
+3. Em dia de feriado, confirme o horário com a organização antes de gravar.
 
 ### Nome de etapa com texto de orientação
 
@@ -157,6 +171,10 @@ Consultei a fonte oficial já identificada, sem pedir nova confirmação. A leit
 
 Testei uma sessão com todas as propriedades, corrigi o campo de local rejeitado numa única etapa e gravei o lote. Todas as sessões publicadas ficaram vinculadas à oportunidade, inclusive as simultâneas e as fechadas, com início, fim e palestrante quando informados. Nenhuma sessão foi escolhida e nenhum evento foi criado na agenda.
 
+### A organização escreveu que terá feira na sexta, sábado e domingo, e a oportunidade cita só sábado e domingo.
+
+Corrigi o título e a data da oportunidade para os três dias antes de gravar as etapas. A sexta era feriado, então a etapa de abertura levou o horário que a organização disse valer, o de sábado, e o comentário registrou a origem e o que faltava confirmar.
+
 ## Casos-limite
 
 - A oportunidade não existe: siga `procurar-oportunidade` e, se faltar, `criar-oportunidade`. Não grave etapa sem ela.
@@ -174,6 +192,7 @@ Testei uma sessão com todas as propriedades, corrigi o campo de local rejeitado
 - O timeout da leitura rápida parece fonte indisponível. A mesma ferramenta tem uma leitura mais completa.
 - A quantidade de atividades do anúncio parece o total da programação. O total é o que a fonte publica, conferido etapa a etapa.
 - O nome da etapa parece o lugar de explicar a regra. O nome é a ação, e a explicação vai no contexto e observações.
+- A data da oportunidade parece certa porque já está cadastrada. A organização pode estender o evento, como num feriado, e o título pode ficar com os dias antigos: releia a fonte antes de gravar a etapa.
 - Ausência de palestrante ou de sala parece lacuna a preencher. Ela permanece ausência.
 - Pôr a etapa no cronograma parece pô-la na agenda. A agenda segue `sincronizar-cronograma` e `definir-agenda`.
 

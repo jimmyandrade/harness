@@ -1,5 +1,29 @@
 # Changelog
 
+## [1.93.0](https://github.com/jimmyandrade/harness/compare/v1.92.0...v1.93.0) (2026-11-17)
+
+
+### Features
+
+* find the task database before asking for the list ([#1265](https://github.com/jimmyandrade/harness/issues/1265)) ([1415605](https://github.com/jimmyandrade/harness/commit/1415605db8194fff3271b1ef7f6bce82c38f6d6d))
+* **investigar-problema:** retry a failing portal signup with evidence and give feedback ([#1278](https://github.com/jimmyandrade/harness/issues/1278)) ([9aca9b8](https://github.com/jimmyandrade/harness/commit/9aca9b850156fc5e3d82399df9ee6c4eec2511a5))
+* **levantar-contexto-do-pull-request:** look for swapped digits before asking about a mismatched item ([#1259](https://github.com/jimmyandrade/harness/issues/1259)) ([f9b5303](https://github.com/jimmyandrade/harness/commit/f9b53038508a2080ce3019bfbade3570ce91a30b))
+* **pesquisar-compra:** record a refusal and send the measure we already have ([#1264](https://github.com/jimmyandrade/harness/issues/1264)) ([3ee6a96](https://github.com/jimmyandrade/harness/commit/3ee6a96be94c7615abb9c4e79a215c6bc486742d))
+* **publicar-revisao-de-codigo:** verify facts before asking the author, extract the language choice ([#1260](https://github.com/jimmyandrade/harness/issues/1260)) ([838ed4a](https://github.com/jimmyandrade/harness/commit/838ed4aea95ed1ef6e6f62183b7b5c0fb13f6aee))
+* **transcrever-audio-e-video:** choose between local transcription engines ([#1253](https://github.com/jimmyandrade/harness/issues/1253)) ([6367121](https://github.com/jimmyandrade/harness/commit/636712112fc82b0ee91d52671b6229edfdf177ce))
+
+
+### Bug Fixes
+
+* **definir-cronograma:** check the event dates and the holiday hours before saving a stage ([#1271](https://github.com/jimmyandrade/harness/issues/1271)) ([672b488](https://github.com/jimmyandrade/harness/commit/672b488a90b29a598da42a18b4fad58530e472de))
+* **definir-hospedagem:** register and address the guest by the social name ([#1279](https://github.com/jimmyandrade/harness/issues/1279)) ([a338f4a](https://github.com/jimmyandrade/harness/commit/a338f4a1ffa7561c92723065b95f1037796a937f))
+* keep task rules in the task skill, not in the project instructions ([#1258](https://github.com/jimmyandrade/harness/issues/1258)) ([42ea30a](https://github.com/jimmyandrade/harness/commit/42ea30a8d9c7b6430c98fe705e26c68fc8104b79))
+* **lancar-despesa-da-empresa:** warn the person when a payment identifier differs from the record ([#1267](https://github.com/jimmyandrade/harness/issues/1267)) ([f64b4ec](https://github.com/jimmyandrade/harness/commit/f64b4ec50f8a86c4e94f55f82d1d91e37f9ecb51))
+* **pesquisar-compra:** resolve the place before searching a local service ([#1263](https://github.com/jimmyandrade/harness/issues/1263)) ([4cda402](https://github.com/jimmyandrade/harness/commit/4cda402ffd1c9081d76e12710d36c00d1def6f3d))
+* **publicar-revisao-de-codigo:** take the language sentence from the vocabulary ([#1275](https://github.com/jimmyandrade/harness/issues/1275)) ([8f3cc0d](https://github.com/jimmyandrade/harness/commit/8f3cc0d8058d57186a6375867fc2418abc2e9bfb))
+* **publicar-revisao-de-codigo:** try the alternative route before saying a check could not run ([#1262](https://github.com/jimmyandrade/harness/issues/1262)) ([9fec6b1](https://github.com/jimmyandrade/harness/commit/9fec6b1b6e98702f5cc63d5458b8bedba58eafc0))
+* **redigir-com-tom-de-voz:** greet once a day and call only a known name ([#1268](https://github.com/jimmyandrade/harness/issues/1268)) ([e985872](https://github.com/jimmyandrade/harness/commit/e9858725cc3b48fd0b6198f4a287e2e85eea2210))
+
 ## [1.92.0](https://github.com/jimmyandrade/harness/compare/v1.91.1...v1.92.0) (2026-11-16)
 
 
