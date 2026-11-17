@@ -3,13 +3,14 @@ name: definir-tarefa
 description: Use essa habilidade sempre que for cadastrar, revisar, validar, editar ou mesclar tarefas a pedido, mesmo sem dizer definir. NÃO use para só saber se ela já existe, revisar tarefas por gatilho em um cronograma ou na base de dados, varrer a lista, marcar tarefa como concluída, nem transformar uma regra sem entrega em tarefa.
 metadata:
   author: jimmyandrade
-  version: "0.18.0"
+  version: "0.18.1"
   aliases:
     - criar-tarefa
     - revisar-tarefa
   related:
     - auditar-tarefas
     - definir-grafia
+    - procurar-banco-de-dados
     - procurar-tarefa
 ---
 
@@ -31,11 +32,17 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ### Passo 1
 
-Peça o que será feito, ou as tarefas que já existem, e a lista. Se a pessoa passou o link de cada tarefa, essas são as tarefas. Não busque outras tarefas. Se a pessoa nomeou a tarefa que já existe e não passou o link, abra essa tarefa no workspace conectado. Se esse título não estiver nessa conexão, peça a lista e pare. Se não veio lista, nem link, nem o nome da tarefa que já existe, peça. Se ela não estiver no workspace conectado, pare. Não use a lista de outro workspace. O nome de cada propriedade e as opções de status vêm do mapeamento de dados do projeto. Este texto usa os conceitos: o título, o prazo, o status, a definição de concluído, os responsáveis, as observações, o link de referência, a data da demanda e a data do cadastro. Na matriz RACI, os responsáveis executam. Quem responde pela tarefa, as pessoas consultadas e as informadas são os outros papéis, quando a lista os tiver. O status concluído é a opção que encerra a tarefa.
+Peça o que será feito, ou as tarefas que já existem. A lista é a que a pessoa indicou. Sem ela, é a lista de tarefas do mapeamento de dados do projeto, no workspace conectado. Se o mapeamento não a traz, siga `procurar-banco-de-dados` antes de perguntar. Não peça a lista nesses casos. 
+
+Se a pessoa passou o link de cada tarefa, essas são as tarefas. Não busque outras tarefas. Se a pessoa nomeou a tarefa que já existe e não passou o link, abra essa tarefa no workspace conectado. Se esse título não estiver nessa conexão, peça a lista e pare. Se não veio o que será feito, nem link, nem o nome da tarefa que já existe, peça. Se a lista que a pessoa indicou não estiver no workspace conectado, pare. Não use a lista de outro workspace. 
+
+O nome de cada propriedade e as opções de status vêm do mapeamento de dados do projeto. Este texto usa os conceitos: o título, o prazo, o status, a definição de concluído, os responsáveis, as observações, o link de referência, a data da demanda e a data do cadastro. 
+
+Na matriz RACI, os responsáveis executam. Quem responde pela tarefa, as pessoas consultadas e as informadas são os outros papéis, quando a lista os tiver. O status concluído é a opção que encerra a tarefa.
 
 ### Passo 2
 
-Se for tarefa nova e a lista já veio, siga `procurar-tarefa` com o mesmo assunto e a mesma lista. Se a tarefa já existe, mostre o nome, o status e o link, e pare. Não crie outra. Sem a lista, peça e pare. Não abra a busca.
+Se for tarefa nova e a lista já veio, siga `procurar-tarefa` com o mesmo assunto e a mesma lista. Se a tarefa já existe, mostre o nome, o status e o link, e pare. Não crie outra. Sem a lista, mesmo depois de `procurar-banco-de-dados`, peça e pare. Não abra a busca de tarefa.
 
 Se for tarefa que já existe, leia o título, o prazo, o status, a definição de concluído, os responsáveis, as observações, o link de referência e o corpo da página de cada tarefa pedida. Não leia o workspace inteiro. Não busque a lista quando os links já vieram.
 
@@ -118,6 +125,14 @@ Se você corrigir para "Ir às gráficas", a tarefa continua sem dizer o que ser
 
 1. O conjunto da tarefa responde aos cinco pontos: específica, mensurável, atingível, relevante e temporal.
 2. Não invente o que falta.
+
+### Lista pedida à toa
+
+Se você pedir a lista quando a pessoa não a indicou, a tarefa não é cadastrada e a pessoa responde o que o projeto já sabe.
+
+1. Use a lista de tarefas do mapeamento de dados do projeto.
+2. Sem ela no mapeamento, siga `procurar-banco-de-dados`.
+3. Peça a lista só quando a busca não achar um banco que sirva, ou achar mais de um.
 
 ### Tarefa que já existe
 
@@ -214,6 +229,10 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 não criei com o título "Ir às gráficas". Não diz o que será realizado nem quanto. O prazo recebe a data de amanhã. Peço o que falta antes de criar.
 
+### cadastrar três tarefas ditas em áudio, sem lista nem link, e o mapeamento do projeto não traz a lista de tarefas.
+
+não pedi a lista. Segui `procurar-banco-de-dados`, busquei entre os bancos pelo nome e comparei as propriedades. Achei um só, usei-o e disse qual, com o link. Com ele, segui `procurar-tarefa` e perguntei só o que faltava: prazo, quantidade e responsáveis.
+
 ### cadastrar "Costurar etiquetas fim do dia amanhã".
 
 título "Costurar etiquetas nas peças". O prazo recebe essa data. O prazo não está no título.
@@ -257,7 +276,8 @@ não criei. Perguntei em quais serviços, por que trocar, quem responde, quem é
 ## Casos-limite
 
 - Nomeou a tarefa e não passou o link: abra essa tarefa. Título ausente na conexão: peça a lista e pare.
-- Sem lista, sem link e sem nome: peça e pare.
+- Sem lista indicada: use a do mapeamento. Se o mapeamento não a traz, siga `procurar-banco-de-dados`. Peça e pare só quando a busca não resolver.
+- Sem o que será feito, sem link e sem nome: peça e pare.
 - Benefício dito na revisão: grave nas observações nessa resposta, com o que já está. Não descarte o fato que ela separou desta tarefa.
 - Começo só numa conversa que você não lê: siga o flowchart de Data fora do alcance.
 - Prazo vazio e título sem data: diga que está vazio. Não traga data de outra conversa.
@@ -269,6 +289,7 @@ não criei. Perguntei em quais serviços, por que trocar, quem responde, quem é
 - "Amanhã", "segunda" e "fim do dia" parecem parte do trabalho. São prazo. Saem do título e vão para o prazo.
 - "Ir às gráficas e avaliar opções" parece o título que sobra na mescla. Não permanece. A data de criação de uma tarefa não vai para a outra.
 - "Sair para ir nas gráficas" começa com verbo. O verbo não é o trabalho. É o mesmo trabalho da outra tarefa de gráficas. Mesclar não autoriza o título "Ir às gráficas".
+- A lista não vir na conversa parece pedir que se pergunte. O mapeamento e `procurar-banco-de-dados` respondem antes da pessoa.
 - Os links já apontam as tarefas. Uma busca na lista traz tarefa que ninguém pediu.
 - "Hoje" nas observações parece contexto. É tempo. Sai. A data permanece no prazo.
 - O status concluído parece licença para viabilizou. O benefício fica no presente, como viabiliza e amplia. Vai não entra.
