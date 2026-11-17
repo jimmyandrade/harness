@@ -5,10 +5,11 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.3.1"
   aliases:
     - definir-aplicacao
   related:
+    - anexar-arquivo-no-notion
     - definir-composicao-textil
     - definir-estampa
     - evoluir-habilidade
@@ -53,7 +54,7 @@ Uma flor pode ser a estampa de um tecido ou uma aplicação numa variante, e a a
 
 ### Passo 3
 
-Cadastre a aplicação com o nome, o motivo, a técnica, a foto e as variantes. Os nomes das propriedades vêm do mapeamento de dados do projeto. A foto vai em `Campo da foto da aplicação`. Com o campo vazio, use `procurar-banco-de-dados` para achar o campo de arquivo do banco.
+Cadastre a aplicação com o nome, o motivo, a técnica, a foto e as variantes. Os nomes das propriedades vêm do mapeamento de dados do projeto. A foto vai em `Campo da foto da aplicação`. Com o campo vazio, use `procurar-banco-de-dados` para achar o campo de arquivo do banco. O arquivo local sobe como `anexar-arquivo-no-notion` manda.
 
 A aplicação não é tecido e não vira linha de composição de tecido. Se ela vai na etiqueta é decisão do cadastro: pergunte à pessoa e registre a resposta no campo que o mapeamento do projeto define para isso. Sem o campo, sugira criá-lo e não crie sem o sim. Não decida sozinha. Corrigir uma aplicação ligada a mais de uma variante muda todas elas, então avise antes de gravar.
 

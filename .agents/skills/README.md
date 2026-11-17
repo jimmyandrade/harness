@@ -20,6 +20,7 @@ flowchart LR
     acompanhar_retornos_pendentes["acompanhar-retornos-pendentes"]
     acompanhar_veiculo["acompanhar-veiculo"]
     analisar_regulamento_da_oportunidade["analisar-regulamento-da-oportunidade"]
+    anexar_arquivo_no_notion["anexar-arquivo-no-notion"]
     anexar_arquivo_no_whatsapp["anexar-arquivo-no-whatsapp"]
     atender_revisao_de_pull_request["atender-revisao-de-pull-request"]
     atualizar_branch_do_pull_request["atualizar-branch-do-pull-request"]
@@ -236,6 +237,7 @@ flowchart LR
   acompanhar_veiculo --> sincronizar_cronograma
   analisar_regulamento_da_oportunidade --> acompanhar_edital
   analisar_regulamento_da_oportunidade --> acompanhar_itens_do_ponto_de_contato
+  analisar_regulamento_da_oportunidade --> anexar_arquivo_no_notion
   analisar_regulamento_da_oportunidade --> consultar_responsavel_pela_oportunidade
   analisar_regulamento_da_oportunidade --> definir_grupo_de_oportunidades
   analisar_regulamento_da_oportunidade --> definir_tarefa
@@ -243,6 +245,7 @@ flowchart LR
   analisar_regulamento_da_oportunidade --> inscrever_na_oportunidade
   analisar_regulamento_da_oportunidade --> organizar_ponto_de_contato
   analisar_regulamento_da_oportunidade --> procurar_tarefa
+  anexar_arquivo_no_notion --> procurar_banco_de_dados
   anexar_arquivo_no_whatsapp --> conversar_no_whatsapp
   anexar_arquivo_no_whatsapp --> rascunhar_mensagem
   anexar_arquivo_no_whatsapp --> redigir_com_tom_de_voz
@@ -354,6 +357,7 @@ flowchart LR
   criar_habilidade --> descrever_habilidade_ou_schema
   criar_habilidade --> medir_habilidade
   criar_habilidade --> testar_habilidade
+  criar_oportunidade --> anexar_arquivo_no_notion
   criar_oportunidade --> conversar_no_whatsapp
   criar_oportunidade --> definir_cronograma
   criar_oportunidade --> definir_empresa
@@ -402,6 +406,7 @@ flowchart LR
   definir_agenda_de_popstar --> definir_viagem
   definir_agenda_de_popstar --> procurar_agenda
   definir_agenda_de_popstar --> revisar_uso_do_tempo
+  definir_aplicacao_textil --> anexar_arquivo_no_notion
   definir_aplicacao_textil --> definir_composicao_textil
   definir_aplicacao_textil --> definir_estampa
   definir_aplicacao_textil --> identificar_duplicata
@@ -456,6 +461,7 @@ flowchart LR
   definir_empresa --> definir_perfil_social
   definir_empresa --> identificar_duplicata
   definir_empresa --> mesclar_registro
+  definir_estampa --> anexar_arquivo_no_notion
   definir_estampa --> definir_composicao_textil
   definir_estampa --> definir_tecido
   definir_estampa --> identificar_duplicata
@@ -479,6 +485,7 @@ flowchart LR
   definir_hospedagem --> procurar_email
   definir_hospedagem --> redigir_com_tom_de_voz
   definir_idioma_da_conversa --> definir_pessoa
+  definir_inscricao --> anexar_arquivo_no_notion
   definir_inscricao --> definir_grafia
   definir_inscricao --> definir_negociacao
   definir_inscricao --> definir_tarefa
@@ -584,6 +591,7 @@ flowchart LR
   definir_tarefa --> procurar_banco_de_dados
   definir_tarefa --> procurar_tarefa
   definir_tecido --> acompanhar_producao_de_produto_fisico
+  definir_tecido --> anexar_arquivo_no_notion
   definir_tecido --> definir_composicao_textil
   definir_tecido --> definir_estampa
   definir_tecido --> definir_tarefa
@@ -732,6 +740,7 @@ flowchart LR
   investigar_problema --> enviar_email
   investigar_problema --> procurar_tarefa
   investigar_problema --> redigir_com_tom_de_voz
+  lancar_despesa_da_empresa --> anexar_arquivo_no_notion
   lancar_despesa_da_empresa --> definir_ativo_imobilizado
   lancar_despesa_da_empresa --> definir_empresa
   lancar_despesa_da_empresa --> definir_grafia
@@ -739,6 +748,7 @@ flowchart LR
   lancar_despesa_da_empresa --> identificar_duplicata
   lancar_despesa_da_empresa --> lancar_despesa_pessoal
   lancar_despesa_da_empresa --> reconhecer_imagem
+  lancar_despesa_pessoal --> anexar_arquivo_no_notion
   lancar_despesa_pessoal --> definir_obrigacao_financeira
   lancar_despesa_pessoal --> lancar_despesa_da_empresa
   lancar_venda --> definir_lancamento_financeiro

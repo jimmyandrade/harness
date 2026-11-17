@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.26.0"
+  version: "0.26.1"
   related:
     - procurar-oportunidade
     - procurar-inscricao
@@ -22,6 +22,7 @@ metadata:
     - definir-inscricao
     - organizar-emails
     - triar-conversas
+    - anexar-arquivo-no-notion
 ---
 
 # Criar oportunidade
@@ -77,7 +78,7 @@ O que é desta data fica na edição: endereço, horário, valor, formulário e 
 
 O título e a síntese descrevem a oferta: chamada, edição, modalidade, data, local e entidade responsável. Não dizem que ela é "da" ou "para" o negócio, salvo quando o próprio negócio é o organizador. A candidatura específica vai para as inscrições e as tratativas para as negociações, todas ligadas à mesma oportunidade canônica. Mais de uma candidata na mesma oferta mantém uma só oportunidade.
 
-O arquivo do cartaz, do print da divulgação ou do comunicado desta data vai nos anexos da edição, na mesma gravação, sem pedir confirmação. Preserve os arquivos que já estão lá e não anexe o mesmo arquivo de novo. Use a referência de arquivo aceita pela ferramenta: o ID do anexo da conversa pode não ser um ID de arquivo do Notion. Se o pedido só consulta a edição, ofereça anexar e não grave. Sem os anexos da edição no mapeamento, liste o arquivo no fim, como valor sem propriedade.
+O arquivo do cartaz, do print da divulgação ou do comunicado desta data vai nos anexos da edição, na mesma gravação, sem pedir confirmação. Preserve os arquivos que já estão lá e não anexe o mesmo arquivo de novo. Use a referência de arquivo aceita pela ferramenta: o ID do anexo da conversa pode não ser um ID de arquivo do Notion. Se o pedido só consulta a edição, ofereça anexar e não grave. Sem os anexos da edição no mapeamento, liste o arquivo no fim, como valor sem propriedade. O arquivo local sobe como `anexar-arquivo-no-notion` manda.
 
 A legenda de um post muitas vezes não traz o nome, a data, o local ou o prazo. Leia também a imagem do card, por `reconhecer-imagem`, antes de perguntar à pessoa o que falta, e diga na resposta de onde veio cada dado, como "a data veio da imagem". Dado que só a imagem traz não é falha nem pede aviso.
 

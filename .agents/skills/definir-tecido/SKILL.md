@@ -5,9 +5,10 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.7.1"
+  version: "0.7.2"
   related:
     - acompanhar-producao-de-produto-fisico
+    - anexar-arquivo-no-notion
     - definir-composicao-textil
     - definir-estampa
     - definir-tarefa
@@ -82,7 +83,7 @@ Quando o tecido registrado veio de outra compra, como uma etiqueta antiga, a com
 
 Leia o corpo de cada página antes de anexar. Se ela já tem a seção da ficha, atualize essa seção e não crie outra. Sem a seção, escreva no fim da página um título com o fornecedor, uma linha com o código, a nota fiscal e a data da ficha, e uma lista curta com a composição, as medidas, os cuidados e o alerta do fornecedor.
 
-O PDF vai em `Campo do arquivo da ficha`, e o resumo diz que ele está lá. Com o parâmetro vazio, ou sem esse campo no cadastro, o PDF vai no fim do resumo. O mesmo PDF fica num lugar só. Cada página recebe o próprio envio do arquivo.
+O PDF vai em `Campo do arquivo da ficha`, e o resumo diz que ele está lá. O arquivo local sobe como `anexar-arquivo-no-notion` manda. Com o parâmetro vazio, ou sem esse campo no cadastro, o PDF vai no fim do resumo. O mesmo PDF fica num lugar só. Cada página recebe o próprio envio do arquivo.
 
 Na resposta, dê o link de cada página e de cada linha de composição criada, e a divergência que cabe à pessoa conferir.
 
