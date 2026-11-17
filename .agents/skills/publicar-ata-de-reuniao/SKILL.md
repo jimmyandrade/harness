@@ -3,8 +3,9 @@ name: publicar-ata-de-reuniao
 description: Publica a ata de um registro de reunião no destino compartilhado, depois de uma triagem que separa o que é privado, como um one-on-one ou um assunto sensível, e do sim da pessoa. Usada quando o registro está pronto e a ata vai para a página do time. NÃO serve para registrar a reunião, escrever o resumo nem publicar a transcrição.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   related:
+    - definir-agenda
     - definir-pessoa
     - definir-registro-de-reuniao
     - evoluir-habilidade
@@ -27,6 +28,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Árvore da triagem da ata": ""
 # `Confirmar a triagem antes de publicar` em `sim` mostra a triagem à pessoa e espera o sim dela.
 "Confirmar a triagem antes de publicar": "sim"
+# `Linkar a ata no evento da agenda` em `sim` leva o link da ata publicada à descrição do evento da reunião, depois do sim da pessoa. Com `não`, a habilidade não mexe na agenda.
+"Linkar a ata no evento da agenda": "sim"
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -71,6 +74,13 @@ Grave o link da ata no registro e entregue à pessoa o link com o título da pá
 
 ### Passo 5
 
+Com `Linkar a ata no evento da agenda` em `sim`, leve o link da ata ao evento da reunião, depois de publicar e também ao processar uma reunião anterior que já tem ata.
+Ache o evento como `definir-registro-de-reuniao` manda, e use só ele.
+Anexe o link com o título da página numa seção separada da descrição, com `definir-agenda`, sem sobrescrever o que já está escrito, e releia o evento. Um evento com convidados é visível a outras pessoas, então mostre o texto e o evento e espere o sim da pessoa, como no Passo 3.
+O título do evento segue o vocabulário: consulte o termo antes de propor um título novo, e proponha a correção quando o título usa uma grafia que o vocabulário não aceita. Só a pessoa organizadora muda o título. Quando a pessoa não é a organizadora, entregue o texto pronto e quem organiza o evento, e não tente gravar.
+
+### Passo 6
+
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
@@ -111,6 +121,14 @@ Se você publicar a ata de um one-on-one no destino do time, o assunto pessoal f
 
 1. Siga a árvore antes de escolher o destino.
 2. Com dúvida, mostre à pessoa e pergunte.
+
+### Ata publicada e fora do evento
+
+Se você publicar a ata e deixar o evento da agenda sem o link, quem abre o convite não acha a ata, e o título do evento segue com a grafia antiga.
+
+1. Siga o Passo 5 no mesmo turno, com o sim da pessoa.
+2. Faça o mesmo ao processar uma reunião anterior que já tem ata.
+3. Quando a pessoa não organiza o evento, entregue o texto pronto e diga quem organiza.
 
 ## Exemplos de entrada e saída
 
