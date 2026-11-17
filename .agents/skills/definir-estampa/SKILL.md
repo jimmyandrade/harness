@@ -5,8 +5,9 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.2.1"
   related:
+    - anexar-arquivo-no-notion
     - definir-composicao-textil
     - definir-tecido
     - evoluir-habilidade
@@ -49,7 +50,7 @@ Uma flor pode ser a estampa de um tecido ou uma aplicação numa variante, e a a
 
 ### Passo 3
 
-Cadastre a estampa com o nome, o motivo, a foto e o tecido. Os nomes das propriedades vêm do mapeamento de dados do projeto. A foto vai em `Campo da foto da estampa`. Com o campo vazio, use `procurar-banco-de-dados` para achar o campo de arquivo do banco.
+Cadastre a estampa com o nome, o motivo, a foto e o tecido. Os nomes das propriedades vêm do mapeamento de dados do projeto. A foto vai em `Campo da foto da estampa`. Com o campo vazio, use `procurar-banco-de-dados` para achar o campo de arquivo do banco. O arquivo local sobe como `anexar-arquivo-no-notion` manda.
 
 Outra estampa na variante é outro tecido: cadastre a estampa no outro tecido e deixe a do tecido antigo como está. Corrigir uma estampa ligada a mais de um tecido muda todos eles, então avise antes de gravar.
 

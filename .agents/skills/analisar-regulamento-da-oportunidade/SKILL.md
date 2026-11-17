@@ -3,16 +3,17 @@ name: analisar-regulamento-da-oportunidade
 description: Lê o manual, o regulamento, o edital e o contrato de uma oportunidade e separa o que a empresa deve fazer, com prazo, o que o texto não diz e o que as fontes contradizem. Usada quando chega o manual da oportunidade aprovada. NÃO serve para perguntar ao responsável, redigir a tarefa, organizar a viagem nem escrever o projeto que a inscrição pede.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.4.1"
   related:
     - acompanhar-edital
+    - acompanhar-itens-do-ponto-de-contato
+    - anexar-arquivo-no-notion
     - consultar-responsavel-pela-oportunidade
     - definir-grupo-de-oportunidades
     - definir-tarefa
     - definir-viagem
     - evoluir-habilidade
     - inscrever-na-oportunidade
-    - acompanhar-itens-do-ponto-de-contato
     - organizar-ponto-de-contato
     - procurar-tarefa
 ---
@@ -44,7 +45,7 @@ Sem o texto, peça à pessoa e pare.
 
 Toda oportunidade tem o edital e o manual anexados na própria página, nas propriedades de editais e anexos. Sem eles, procure nas fontes e diga à pessoa que faltam, também nas oportunidades antigas. Só libere a falta quando a pessoa der a justificativa de por que não existem ou não foram anexados. Sem justificativa, insista.
 
-O arquivo que não sobe para o Notion não encerra o assunto. Diga à pessoa o erro exato e investigue a causa antes de dizer que não consegue, como o tamanho, o tipo ou o jeito de anexar. Não reclame do limite sem ter descoberto o porquê.
+O arquivo que não sobe para o Notion não encerra o assunto. O arquivo local sobe como `anexar-arquivo-no-notion` manda. Diga à pessoa o erro exato e investigue a causa antes de dizer que não consegue, como o tamanho, o tipo ou o jeito de anexar. Não reclame do limite sem ter descoberto o porquê.
 O manual traz a edição, a data e o local no cabeçalho: registre-os e diga à pessoa que ela confirma se o manual vale só para esta oportunidade ou para o grupo inteiro.
 
 ### Passo 2
