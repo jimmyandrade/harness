@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.2.1"
   related:
     - definir-empresa
     - identificar-duplicata
@@ -38,6 +38,10 @@ flowchart LR
 ### Passo 2
 
 O local só está confirmado com o nome do espaço e o endereço completo. Nome de cidade, de bairro ou de evento não bastam. Faltando um dos dois, pergunte e não deduza o endereço por memória.
+
+Em feira de rua, o endereço pode não ter número: o nome da rua, o bairro e a cidade bastam, e o nome do espaço é o da rua com o bairro. Não pergunte nem barre o cadastro por causa do número.
+
+O CEP e o ponto no mapa que os formulários da feira não trazem se pesquisam na internet, sem perguntar à pessoa. Procure o CEP do endereço em mais de uma fonte, e o ponto numa fonte de mapa aberto. Grave o CEP no endereço e o ponto no mapa da empresa, e escreva nas notas de onde cada um veio. Rua com mais de um CEP, ou número fora das faixas que as fontes listam: grave os CEPs, use o ponto do trecho que a fonte sustenta e deixe o trecho exato como pendência.
 
 ### Passo 3
 
@@ -98,6 +102,22 @@ Se você mostrar só o nome e o endereço, a pessoa precisa procurar o lugar por
 2. Mostre-o na resposta, também quando a empresa já existia.
 3. Local online: não há link.
 
+### CEP e mapa pedidos à pessoa
+
+Se você deixar o CEP e o mapa vazios, ou perguntar à pessoa por eles, o local fica incompleto por um dado que a internet responde.
+
+1. Pesquise o CEP em mais de uma fonte e o ponto numa fonte de mapa aberto.
+2. Grave os dois na empresa do local e diga nas notas de onde vieram.
+3. Rua com mais de um CEP: grave todos e deixe o trecho exato como pendência.
+
+### Feira de rua barrada pela falta de número
+
+Se você pedir o número do endereço de uma feira de rua, a pessoa responde que não existe, e o cadastro para por um dado que o formato do evento não tem.
+
+1. Aceite a rua, o bairro e a cidade como endereço.
+2. Dê ao espaço o nome da rua com o bairro.
+3. Pesquise CEP e mapa e deixe o trecho exato como pendência.
+
 ### Bairro cadastrado como localidade
 
 Se você propuser ou criar como localidade o nome do bairro do endereço, a lista ganha um lugar que não é cidade, ou o local aponta para o município de mesmo nome.
@@ -122,8 +142,14 @@ Como o nome do espaço e o endereço estavam confirmados, a `definir-empresa` ca
 
 Pesquisei o endereço e o CEP: Vila Modelo é um bairro de Cidade Exemplo. Não criei localidade para o bairro. Vinculei à Cidade Exemplo, gravei o bairro no endereço da empresa e escrevi na desambiguação que não é o município de Vila Modelo.
 
+### a feira é na Rua Exemplo, no bairro Modelo, sem número, e o formulário não traz CEP
+
+Aceitei a rua, o bairro e a cidade como endereço e dei ao espaço o nome da rua com o bairro. Pesquisei o CEP em duas fontes e o ponto num mapa aberto. A rua tinha dois CEPs: gravei os dois, usei o ponto do primeiro trecho e deixei o trecho exato como pendência, com as fontes nas notas.
+
 ## Casos-limite
 
+- O evento é uma feira de rua e o endereço não tem número: rua, bairro e cidade bastam. Pesquise CEP e mapa.
+- O formulário não traz CEP nem mapa: pesquise na internet e grave, com as fontes nas notas.
 - O endereço traz um bairro ou distrito, e a lista de localidades não tem esse nível: a localidade é a cidade. O bairro fica no endereço.
 - O bairro tem o nome de um município: a desambiguação da empresa diz qual é. Sem como saber, pergunte.
 - Nome do espaço sem endereço, ou endereço sem nome: pergunte o que falta.
@@ -136,6 +162,8 @@ Pesquisei o endereço e o CEP: Vila Modelo é um bairro de Cidade Exemplo. Não 
 
 ## Pegadinhas
 
+- O número parece obrigatório em todo endereço. Numa feira de rua ele pode não existir.
+- O CEP e o mapa parecem coisa para perguntar à pessoa. A internet responde, e a nota diz a fonte.
 - O nome do evento parece o nome do local. O local é o espaço onde ele acontece.
 - Um local com vários espaços é uma empresa só. Sala, palco e auditório são o nível de baixo.
 - Empresa nova parece pedir licença. Com o nome do espaço e o endereço confirmados, a habilidade chama a `definir-empresa` na hora. Sem o endereço, ela pergunta.
