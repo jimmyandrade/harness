@@ -993,7 +993,9 @@ flowchart LR
   testar_ponta_a_ponta --> escrever_teste
   testar_ponta_a_ponta --> preparar_tarefa_do_pull_request
   testar_ponta_a_ponta --> registrar_resultados_da_validacao_na_tarefa
+  transcrever_audio_e_video --> conversar_no_whatsapp
   transcrever_audio_e_video --> definir_registro_de_reuniao
+  transcrever_audio_e_video --> triar_conversas
   tratar_foto_de_moda --> cadastrar_foto_de_moda
   tratar_foto_de_moda --> escrever_link
   triar_conversas --> conversar_no_whatsapp

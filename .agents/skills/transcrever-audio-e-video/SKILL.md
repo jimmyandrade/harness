@@ -3,10 +3,12 @@ name: transcrever-audio-e-video
 description: Transcreve um áudio ou vídeo local com o SpeechAnalyzer da Apple ou o Whisper local, detecta o que está instalado e só propõe instalar com o sim da pessoa. Usada quando a pessoa manda uma gravação para virar texto, mesmo sem dizer Whisper. NÃO serve para reunião que já tem transcrição, identificar quem fala nem enviar o arquivo a um serviço externo.
 metadata:
   author: jimmyandrade
-  version: "0.5.1"
+  version: "0.5.2"
   related:
+    - conversar-no-whatsapp
     - definir-registro-de-reuniao
     - evoluir-habilidade
+    - triar-conversas
 ---
 
 # Transcrever áudio e vídeo
@@ -38,7 +40,7 @@ metadata:
 Receba o caminho do arquivo de áudio ou vídeo e confirme que ele existe.
 A transcrição roda na máquina da pessoa, com terminal. Sessão sem terminal e sem acesso aos arquivos locais, como o Notion, não roda esta skill: pare e diga que a transcrição roda numa ferramenta de código com o arquivo na máquina.
 Não envie o arquivo a um serviço externo.
-Baixar o áudio de uma conversa precisa do sim da pessoa, com nome, origem e tamanho. O download do Chrome deixa na pasta Downloads um temporário oculto, `.com.google.Chrome.*`, já completo em Ogg/Opus e sem o nome final: copie-o para a `Pasta de saída` e não mexa no original.
+O áudio de uma conversa do WhatsApp se baixa sem perguntar, como `triar-conversas` e `conversar-no-whatsapp` mandam. O download de qualquer outro arquivo precisa do sim da pessoa, com nome, origem e tamanho. O download do Chrome deixa na pasta Downloads um temporário oculto, `.com.google.Chrome.*`, já completo em Ogg/Opus e sem o nome final: copie-o para a `Pasta de saída` e não mexa no original.
 
 ### Passo 2
 
@@ -154,6 +156,7 @@ Rodei o `SpeechTranscriber`, sem instalar nada, e avisei que o primeiro uso do i
 
 ## Pegadinhas
 
+- O áudio de uma conversa do WhatsApp parece pedir o sim para baixar. Não pede: a triagem e a conversa mandam baixar e transcrever sem perguntar. O sim é para instalar programa ou baixar modelo, e para qualquer outro arquivo.
 - A fórmula `whisper-cpp` do Homebrew instala o `whisper-cli`, mas não baixa modelo nenhum.
 - O prompt ajuda em parte. No teste, ele corrigiu alguns termos e deixou outros errados, e puxou um termo do prompt para mais lugares do que o áudio dizia. Releia os termos do prompt no resultado.
 - O `.txt` não tem tempo. Quem precisa do minuto de uma fala usa o `.srt`.
