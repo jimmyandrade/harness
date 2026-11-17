@@ -57,6 +57,7 @@ Three engines transcribed one 18 min 16 s meeting recording in Portuguese (an mp
 - `SFSpeechRecognizer` skipped most of the speech, with the segments joined by their time stamps and also by the length rule above. What it kept is right, so it is a loss of content, not of accuracy, and a reader would not notice it.
 - The permission prompt for `SFSpeechRecognizer` appears for each new build of the `.app`, because the ad hoc signature changes. A run that waits on it looks like a hang.
 - Calling it from the main thread with a blocking wait never returns: the results are delivered on the main queue, so the process has to run the main loop.
+- The two measurements ran on different machines, a MacBook Air and a MacBook Pro with an M4 Pro, so their times do not compare with each other. Only the comparison between engines inside each measurement holds.
 - Two recordings are still a small sample. A new macOS or a new kind of audio calls for another measurement.
 
 ## Consequences
