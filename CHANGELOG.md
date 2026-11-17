@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.92.0](https://github.com/jimmyandrade/harness/compare/v1.91.1...v1.92.0) (2026-11-16)
+
+
+### Features
+
+* **definir-empresa:** keep the mistaken company name and the memory cues ([#1254](https://github.com/jimmyandrade/harness/issues/1254)) ([5595bbc](https://github.com/jimmyandrade/harness/commit/5595bbce297fb099834a91a4acaa08fd1d5bd958))
+* **gerenciar-pedidos-de-delivery:** manage delivery orders against the food expenses ([#1240](https://github.com/jimmyandrade/harness/issues/1240)) ([fdfb336](https://github.com/jimmyandrade/harness/commit/fdfb3360c51f324506860a0b1cefaa53eb0e9089))
+
+
+### Bug Fixes
+
+* **definir-agenda:** create the external event when the vocabulary is not connected ([#1255](https://github.com/jimmyandrade/harness/issues/1255)) ([3893959](https://github.com/jimmyandrade/harness/commit/3893959dea22c573c326ee89d41d65e77c15a8c3))
+* **definir-agenda:** read the glossary directly when the vocabulary server misses it ([#1256](https://github.com/jimmyandrade/harness/issues/1256)) ([c146b42](https://github.com/jimmyandrade/harness/commit/c146b42036cbbca8fe7b004b0196e550d3869657))
+* **definir-negociacao:** write each first message for its profile and signer ([#1239](https://github.com/jimmyandrade/harness/issues/1239)) ([2250a5c](https://github.com/jimmyandrade/harness/commit/2250a5cfbf93a74cd929d325ff38c4f645a54138))
+* **escrever-link:** link every row and product an answer points to for review ([#1252](https://github.com/jimmyandrade/harness/issues/1252)) ([cdec812](https://github.com/jimmyandrade/harness/commit/cdec812ff813cac96849daf7b8bb3ee0a3f17fb3))
+* **escrever-link:** require the link for every Notion row an answer names ([#1249](https://github.com/jimmyandrade/harness/issues/1249)) ([64e0531](https://github.com/jimmyandrade/harness/commit/64e053147af462d8d7369d45a90a82341208ab42))
+* **vocabulary:** fall back to the working folder when the root holds no glossary ([#1257](https://github.com/jimmyandrade/harness/issues/1257)) ([281d3c7](https://github.com/jimmyandrade/harness/commit/281d3c768198b61c60ef06753278d3b117d73b51))
+
 ## [1.91.1](https://github.com/jimmyandrade/harness/compare/v1.91.0...v1.91.1) (2026-11-16)
 
 
