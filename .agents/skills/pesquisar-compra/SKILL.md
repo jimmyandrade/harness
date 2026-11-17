@@ -4,7 +4,7 @@ description: Pesquisa o que comprar, cruza com despesas, estoque e bens que já 
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.7.0"
+  version: "0.7.1"
   related:
     - anexar-arquivo-no-whatsapp
     - conversar-no-whatsapp
@@ -89,6 +89,8 @@ Guia de melhores e página de afiliado indicam o que olhar, não provam compatib
 Anote o preço com a loja e a data da consulta. O preço de uma busca ou de um cache pode ser antigo.
 Diga quando o preço veio só do resultado da busca, sem a página aberta. Página esgotada não tem preço atual: diga que está esgotada.
 A loja que bloqueia leitura automática não se contorna. Use o que a busca mostrou, diga que a página não abriu e peça que a pessoa cole a descrição ou o link, ou pergunte ao vendedor.
+
+Para achar empresas que prestam um serviço, a fonte é a listagem local: trabalho acadêmico e diretório do estado só ensinam os sinônimos do serviço. Na cidade do Passo 1, busque o serviço e os sinônimos, quem o faz dentro do próprio negócio e as listagens locais, como o mapa e o diretório do sindicato. Sem empresa achada, faça a próxima busca do Passo 6, sem perguntar se deve seguir.
 
 ### Passo 5
 
