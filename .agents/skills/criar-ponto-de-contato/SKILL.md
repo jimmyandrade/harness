@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.5.0"
   related:
     - criar-oportunidade
     - definir-agenda
@@ -86,6 +86,7 @@ Vale ao criar e ao achar um ponto que já existe.
 4. Início da execução vazio: diga isso, com o que falta para preencher. Com o dia e o horário sabidos, grave.
 5. Início em intervalo do dia com ele mesmo e sem horário: troque por data única.
 6. Data já passada com status de fase anterior à execução: pergunte qual status vale. Não escolha sozinha.
+7. Despesa já lançada que cita o evento, pelo nome, pelas datas ou pela viagem, e não tem ponto: ligue ao ponto sem perguntar e diga quais ligou.
 
 ### Passo 4
 
@@ -145,6 +146,13 @@ Se você terminar a criação com o início da execução vazio e não disser na
 1. Diga na resposta que ficou vazio.
 2. Diga o que falta para preencher.
 
+### Despesa solta
+
+Se você criar ou achar o ponto e não procurar as despesas que citam o evento, elas ficam sem ponto, e o fechamento sai sem esses custos.
+
+1. Busque as despesas que citam o evento e não têm ponto.
+2. Ligue-as ao ponto e diga quais ligou.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
@@ -194,6 +202,7 @@ Perguntei qual status vale. Não mudei sozinha.
 - O ciclo do trimestre atual parece servir. O ciclo é o do período da data de início.
 - Uma reserva na agenda parece data de execução. Reserva provisória não é data confirmada.
 - O dia do lembrete parece a data do ponto. É o prazo da tarefa.
+- Uma despesa lançada para o evento parece ligada a ele. Sem a relação, ela não entra no fechamento.
 - Um intervalo de um dia só parece data. Sem horário, é data única.
 
 ## Scripts disponíveis

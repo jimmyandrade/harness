@@ -4,12 +4,15 @@ description: Faz o fechamento financeiro de um ponto de contato, como evento, sh
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   related:
     - definir-conta-bancaria
+    - consultar-responsavel-pela-oportunidade
+    - criar-ponto-de-contato
     - definir-obrigacao-financeira
     - evoluir-habilidade
     - lancar-despesa-da-empresa
+    - lancar-venda
     - organizar-ponto-de-contato
     - revisar-financas
 ---
@@ -78,6 +81,10 @@ Se a lista ou a planilha não estiver no workspace conectado, pare. Não use a d
 
 ### Passo 3
 
+Antes de marcar o checklist, confira o status do ponto de contato com a data e com as pendências.
+Um status de caixa fechado não prova que o caixa fechou: ele pode ter sido posto antes da hora.
+Status que não bate com o que falta: mostre e pergunte qual vale, como `criar-ponto-de-contato` manda.
+
 Para cada ponto de contato, marque este checklist:
 
 - [ ] Entradas, pelas `Fontes`.
@@ -86,7 +93,17 @@ Para cada ponto de contato, marque este checklist:
 - [ ] Regra de divisão do parceiro, em `Regras de divisão`.
 - [ ] Total do fechamento, quanto pagar a cada pessoa e quanto cobrar ou repassar ao parceiro.
 
+Nos custos, procure primeiro as despesas que citam o ponto, pelo nome, pelas datas ou pela viagem, e que não estão ligadas a ele.
+Mostre cada uma e ligue ao ponto depois do sim, dizendo que estava solta.
+Procure também o consumo de alimentação nas datas do ponto, e o que não foi lançado segue `lancar-despesa-da-empresa`.
+Tire da lista só o custo que a pessoa disser que não houve, como a taxa de inscrição ou o aluguel de estrutura, e não o pergunte de novo.
+
+Nas entradas, uma fonte que nenhuma conexão alcança, como a operadora de pagamento, é dita pelo nome.
+Ofereça o navegador da pessoa ou um extrato, e não conclua que a venda não existe.
+Um contato que a pessoa coletou no ponto não é canal de venda: a venda segue `lancar-venda`.
+
 Sem a regra de divisão, não calcule a divisão. Diga que a regra do parceiro está pendente.
+Ofereça perguntar ao responsável, por `consultar-responsavel-pela-oportunidade`, e não suponha que não há repasse.
 Dado que falta, como o borderô, o caixa do parceiro ou o Pix: diga o que falta e de quem. Não estime o valor.
 O cálculo não depende de onde o fechamento fica. O mesmo ponto fechado no Notion e na planilha dá os mesmos totais, pagamentos e cobranças.
 
@@ -140,6 +157,22 @@ Se você supor o percentual do parceiro, o valor a cobrar ou repassar sai errado
 2. Sem regra, diga que está pendente.
 3. Não estime.
 
+### Custo solto e status adiantado
+
+Se você fechar só com o que já está ligado ao ponto e aceitar o status que a página mostra, o fechamento sai sem um custo que a pessoa lançou e não ligou, ou sobre um caixa que não fechou.
+
+1. Procure as despesas que citam o ponto e não têm ponto, e ligue-as depois do sim.
+2. Procure o consumo de alimentação nas datas do ponto.
+3. Confira o status com a data e as pendências antes de calcular.
+
+### Fonte fora do alcance
+
+Se você não achar a fonte de uma entrada e disser que a venda não existe, o fechamento perde dinheiro que entrou.
+
+1. Diga qual fonte nenhuma conexão alcança.
+2. Ofereça o navegador da pessoa ou um extrato.
+3. Não estime o valor.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
@@ -151,6 +184,12 @@ O pedido não disse o ponto de contato nem o intervalo. Perguntei o que fechar, 
 ### fecha a semana passada na planilha
 
 A semana virou as datas de segunda-feira, 19/10/2026, a domingo, 25/10/2026. Fechei os dois eventos dela na mesma planilha, depois do sim ao plano. Um artista estava sem Pix: o pagamento dele ficou como pendente.
+
+### fecha o ponto que a página já mostra como caixa fechado
+
+Conferi o status com a data e as pendências antes de calcular.
+Achei uma despesa que citava o ponto e estava solta, e o consumo de alimentação da data sem lançamento.
+Mostrei as duas, liguei a despesa depois do sim e mandei o consumo para `lancar-despesa-da-empresa`.
 
 ### faz o fechamento de caixa da pop-up de sábado
 
@@ -166,12 +205,16 @@ O caixa contado deu 40,00 a menos que as vendas registradas em dinheiro. Mostrei
 - Pessoa a pagar sem Pix: o pagamento fica pendente, com o pedido do Pix.
 - Linha já paga com valor diferente: mostre a diferença e pergunte.
 - Gasto do intervalo sem ponto de contato: à parte.
+- Despesa que cita o ponto e não está ligada a ele: mostre e ligue depois do sim.
+- Fonte de entrada que nenhuma conexão alcança: diga qual, e ofereça o navegador ou um extrato.
 
 ## Pegadinhas
 
 - O conector que lê e cria arquivos no Drive parece editar a planilha. Ele não edita um arquivo que já existe. A edição pede um conector de planilha com edição.
 - A planilha de outra pessoa não aparece na busca do conector até ser compartilhada com a conta conectada. Achar nada não prova que ela não existe.
 - A API do Notion devolve o resultado de uma fórmula, mas não o código dela. O total de uma propriedade de fechamento não mostra a regra. Confira o total com as entradas e os custos ligados ao ponto.
+- O status de caixa fechado parece o fim do trabalho. Ele pode ter sido posto antes da hora, e o fechamento confere.
+- A despesa que a pessoa lançou parece ligada ao ponto. Ela pode estar solta, e só a busca pelo nome e pelas datas a acha.
 - O ponto de contato do negócio pode ter outro nome, como `evento` ou `show`. O nome vem de `Nome do ponto de contato`.
 
 ## Scripts disponíveis
