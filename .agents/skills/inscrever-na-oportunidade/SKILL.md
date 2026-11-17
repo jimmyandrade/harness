@@ -3,7 +3,7 @@ name: inscrever-na-oportunidade
 description: Preenche o cadastro ou o formulário que a organização de uma oportunidade pede para a inscrição, com os dados da empresa, no formato de cada campo, e envia só com o sim da pessoa. Usada quando a inscrição ou o cadastro de uma oportunidade está para ser feito. NÃO serve para registrar a inscrição no Notion, ler o regulamento, escrever à organização, salvo a resposta que confirma o envio, nem escrever o projeto que a inscrição pede.
 metadata:
   author: jimmyandrade
-  version: "0.4.2"
+  version: "0.4.3"
   related:
     - acompanhar-retornos-pendentes
     - analisar-regulamento-da-oportunidade
@@ -76,6 +76,7 @@ Antes de enviar, mostre tudo o que está preenchido, de todas as páginas, sem r
 Envie só depois dele. O sim vale para esse formulário.
 Ao começar a preencher, procure a inscrição dessa oportunidade na lista e, se não existir, crie-a em andamento, ou confirmada se a taxa já foi paga, por `definir-inscricao`: a inscrição nunca depende de lembrar no fim.
 Logo depois do envio, antes de qualquer mensagem ao organizador ou tarefa, atualize essa inscrição com a hora do envio e a tela de confirmação do formulário nos comprovantes, sem perguntar, releia a página e dê o link na resposta.
+O print da confirmação é seu: tire-o na própria aba, assim que o formulário confirmar o recebimento, e anexe o arquivo à inscrição pelo caminho de arquivos que a lista aceita. Nunca peça à pessoa o print nem que ela o anexe.
 Quem fez a inscrição é a pessoa que pediu, e a data da confirmação fica vazia até a organização responder.
 O envio só está concluído com a página lida e o link dito.
 Quando a mesma conversa trata de mais de uma inscrição, como duas edições da mesma feira, cada uma tem a própria página. A resposta que fala de uma delas lista todas, com o link, o status e o comprovante de cada uma, e diz o que não foi feito e por quê, como um formulário fechado. Não fale só da última.
@@ -138,6 +139,14 @@ Se você preencher o campo dos produtos com a descrição da marca ou da empresa
 2. Deixe de fora o produto de outra marca que divide o catálogo.
 3. Releia o campo antes do envio e confira que a lista cobre o que vai à feira.
 
+### Comprovante pedido à pessoa
+
+Se você deixar a inscrição sem o comprovante e pedir à pessoa o print ou o anexo, ela faz um trabalho que era seu, e a inscrição fica incompleta até ela mandar.
+
+1. Tire o print da tela de confirmação na própria aba, logo que o formulário confirmar.
+2. Anexe o arquivo à inscrição, releia a página e confira que o comprovante apareceu.
+3. Só peça a imagem se nenhuma captura da aba for possível, e diga o que falhou.
+
 ### Só a última inscrição na resposta
 
 Se você falar só da inscrição que acabou de fechar, a pessoa acha que as outras da mesma conversa não foram registradas e pergunta por elas.
@@ -188,6 +197,7 @@ Li o catálogo de produtos e corrigi o campo com as famílias das peças ativas,
 
 ## Casos-limite
 
+- A resposta enviada saiu errada e o link de edição se perdeu: com o sim da pessoa, envie de novo, atualize a mesma inscrição com a hora e o comprovante novos, e diga que a primeira resposta continua com a organização.
 - A conversa tem mais de uma inscrição: a resposta lista todas, com link, status e comprovante, e o que ficou de fora.
 - O formulário pede os produtos: liste as famílias, ou os produtos específicos, do catálogo. Descrição da marca não basta.
 - A resposta já foi enviada e precisa de correção: edite pelo link de edição ou pela aba da pessoa. Sem eles, peça. Não envie o formulário de novo.
@@ -205,6 +215,7 @@ Li o catálogo de produtos e corrigi o campo com as famílias das peças ativas,
 - A aba arrastada pela pessoa parece perdida quando o grupo da sessão some do contexto. O preenchimento fica salvo como rascunho no formulário.
 - O formulário pede RG e CPF do responsável. O agente não os digita.
 - O campo dos produtos parece aceitar a descrição da marca. Ele pede o que a marca vende, em famílias ou peças.
+- O print da confirmação parece trabalho da pessoa, porque ela vê a tela. Quem tira e anexa é você, na aba, no mesmo instante.
 - O link do formulário parece o caminho para corrigir a resposta. Depois do envio ele abre em branco. A correção é o link de edição da confirmação.
 
 ## Scripts disponíveis
