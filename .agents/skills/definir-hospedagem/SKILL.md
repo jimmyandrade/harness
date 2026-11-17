@@ -3,7 +3,7 @@ name: definir-hospedagem
 description: Define a hospedagem de uma viagem depois da reserva, o que ela pede, como nome e documento dos hóspedes, veículo e chegada, e a resposta a quem hospeda, com o sim se leva dado pessoal. Usada quando o anfitrião ou o hotel escreve, ou a pessoa pede para agradecer ou avisar. Não serve para ler a reserva, registrar a viagem nem redigir no tom da marca.
 metadata:
   author: jimmyandrade
-  version: "0.8.0"
+  version: "0.8.1"
   aliases:
     - responder-pedido-da-hospedagem
   related:
@@ -62,8 +62,9 @@ O banco de veículos tem a placa como título e a pessoa proprietária.
 
 Sem a lista de quem viaja, pergunte, e não suponha uma pessoa pelo histórico de outra viagem.
 
-O nome de cada hóspede é o nome completo do cadastro, o mesmo do documento oficial de quem tem nome social.
-Com `Nome civil na resposta` em `não`, o nome civil de registro não vai na resposta nem na tela de confirmação, e a hospedagem recebe só o nome do documento.
+O nome de cada hóspede é o nome completo do cadastro, que em quem tem nome social é o nome social: a pessoa se cadastra na hospedagem com ele e é tratada por ele.
+Com `Nome civil na resposta` em `não`, o nome civil de registro não vai na resposta nem na tela de confirmação, e nenhuma mensagem trata a pessoa por ele.
+Com `sim`, o nome civil entra entre parênteses só onde o documento o exige, e o tratamento segue o nome social.
 
 Documento, placa e telefone são dados sensíveis: leia do cadastro, mostre na tela de confirmação e nunca copie para outro lugar além da resposta.
 Dado que falta no cadastro, pergunte uma vez, com o nome da pessoa, e grave a resposta por `definir-pessoa`.
@@ -236,7 +237,7 @@ Respondi pelo e-mail em que o pedido chegou. Mandei nomes e horário. Não mande
 - A reserva feita à mão não cria página no Notion, e o banco de viagens e o de hospedagens podem nem ter onde registrar quem viaja e o veículo. Quem viaja e o transporte podem não estar em lugar nenhum.
 - A vaga que a hospedagem oferece parece valer a qualquer hora. A garagem de um parceiro tem horário, e quem volta à noite precisa saber até quando ela abre e se deve interfonar.
 - O pedido de documento costuma vir antes do check-in e some da lista de mensagens com a tradução automática. Leia a mensagem original, não a prévia da lista.
-- O cadastro tem o nome completo e o nome civil de registro, e quem tem nome social usa o nome completo no documento oficial. O nome civil só sai com `Nome civil na resposta` em `sim`, ou se a pessoa pedir.
+- O cadastro tem o nome completo e o nome civil de registro. Quem tem nome social se cadastra e é tratada por ele, e tratá-la pelo nome civil a constrange. O nome civil só sai com `Nome civil na resposta` em `sim`, ou se a pessoa pedir.
 - Dado sensível não vira texto de memória, de nota nem de comentário na negociação. Ele fica no cadastro e na resposta enviada.
 - A hospedagem que pede os dados também libera o acesso com base neles: um erro no documento trava a entrada.
 
