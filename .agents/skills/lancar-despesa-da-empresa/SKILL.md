@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.11.1"
+  version: "0.11.2"
   aliases:
     - definir-despesa
     - lancar-despesa
@@ -152,6 +152,8 @@ flowchart LR
 
 Não encerre com apenas "empresa não cadastrada" ou "vínculo pendente": entregue a ação realizada ou a proposta concreta e o bloqueio. Reaproveite a leitura e os comprovantes; cadastrar a recebedora não cria outra despesa. Nome no título, no assunto do comprovante ou nas observações não substitui a relação com a empresa. Confira o vínculo salvo e preserve a conta, a pessoa pagadora e os anexos já confirmados. Não infira que o nome exibido no Pix seja dono, contato ou responsável pela empresa.
 
+Compare cada identificador do comprovante com o que o cadastro da recebedora guarda: chave Pix, CNPJ, nome, instituição e conta. Uma diferença, mesmo de uma letra, é discrepância. Avise a pessoa antes de seguir, com os dois valores lado a lado, porque pode ser tentativa de golpe. A pessoa decide qual vale. Corrija o cadastro só depois da decisão dela, e diga o que mudou.
+
 Vincule a conta de origem somente quando os dados da conta no comprovante identificarem inequivocamente um cadastro ou quando a pessoa já tiver confirmado a conta deste pagamento. Nome do titular e instituição, sozinhos, indicam uma candidata, não a conta usada: podem existir contas pessoais e empresariais no mesmo banco. Ter apenas uma candidata cadastrada não supre a identificação. Cruze também o tipo e os dígitos visíveis do CPF ou CNPJ do titular da conta de origem com os documentos dos cadastros, respeitando as posições da máscara e sem completar dígitos ocultos. Use o documento do pagador, não o do recebedor nem o da instituição. Esse cruzamento pode distinguir titularidades de pessoa física e jurídica; não confunda identificar o titular com identificar uma conta específica. Combine-o com a instituição e os demais dados da conta presentes na evidência. Se o conjunto identificar inequivocamente a conta, vincule sem perguntar; se houver colisão de trechos, mais de uma conta compatível ou identificação insuficiente, confirme com a pessoa. Reutilize a leitura da evidência e não repita uma confirmação já dada para este pagamento.
 
 ```mermaid
@@ -193,6 +195,14 @@ Se você gravar só com recebedor, valor e data, a despesa entra sem saber o que
 1. Confira o checklist antes de gravar, inclusive ao complementar um registro.
 2. Pergunte o produto ou serviço, a finalidade e os dados de classificação ainda ausentes.
 3. Espere a resposta e atualize o mesmo lançamento, preservando o comprovante e sem duplicar.
+
+### Discrepância tratada como erro de digitação
+
+Se você corrigir sozinho o identificador que diverge do cadastro, a pessoa não sabe que a chave ou o documento mudou, e um golpe passa como engano.
+
+1. Compare a chave Pix, o CNPJ, o nome e a instituição do comprovante com o cadastro da recebedora.
+2. Mostre os dois valores lado a lado e avise que pode ser golpe.
+3. Corrija depois da decisão da pessoa.
 
 ### Categoria deixada vazia
 
@@ -238,6 +248,10 @@ O lançamento que originou a compra é este. A página da máquina fica em `defi
 
 Busquei pelo recebedor, documento, valor e data. Registrei um lançamento com as duas evidências. Não fiz dois lançamentos nem inventei a finalidade do tecido.
 
+### o comprovante traz financeiro@empresa.com e o cadastro da recebedora guarda financeiroo@empresa.com
+
+Avisei que as duas chaves diferem por uma letra e que isso pode ser tentativa de golpe, com as duas lado a lado. Esperei a pessoa dizer qual é a certa, corrigi o cadastro e contei o que mudou.
+
 ## Casos-limite
 
 - A lista de despesas e investimentos não está no workspace conectado: pare. Não use a lista de outro workspace.
@@ -257,6 +271,7 @@ Busquei pelo recebedor, documento, valor e data. Registrei um lançamento com as
 - Nota fiscal e print de cartão podem ser o mesmo gasto. Dois arquivos não são duas despesas.
 - Uma tela pode dizer "Crédito" como modalidade do cartão, não como entrada de receita.
 - "Não invente categoria" parece proibir propor uma. Proibido é gravar sem aceite. Buscar, propor a existente e sugerir criar a que falta fazem parte do lançamento.
+- Uma chave Pix parecida com a do cadastro parece a mesma. Uma letra a mais ou a menos é discrepância: avise antes de seguir.
 - O mapeamento pode estar atrás da base. Um nome de propriedade que o esquema não mostra é divergência do mapeamento, não falta de acesso nem campo vazio.
 
 ## Scripts disponíveis
