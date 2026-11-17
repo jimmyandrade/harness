@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.8.0"
+  version: "0.8.1"
   related:
     - definir-agenda
     - evoluir-habilidade
@@ -28,7 +28,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 ```yaml
 # `Modo de aprendizado` diz se a habilidade pergunta antes de evoluir ou evolui sozinha.
 "Modo de aprendizado": "perguntar"
-# `Ordem dos canais de execução` é a ordem em que a habilidade tenta enviar uma mensagem ou fazer uma inscrição. Passa ao canal seguinte só quando o anterior não existe ou falha.
+# `Ordem dos canais de execução` é a ordem em que a habilidade tenta ler ou enviar uma mensagem ou fazer uma inscrição. Passa ao canal seguinte só quando o anterior não existe ou falha.
 "Ordem dos canais de execução": ["conector", "linha de comando", "API", "navegador do app", "extensão do navegador"]
 ```
 
@@ -58,6 +58,8 @@ flowchart LR
 Com negócio, a negociação é uma por oportunidade, a edição com data. Ache a negociação dessa oportunidade antes de criar outra. Uma edição nova da mesma empresa e da mesma pessoa é negociação nova: ela cita o link da anterior e não herda o histórico, que fica na antiga. Ligue a página à empresa abordada, à pessoa abordada e a uma oportunidade só. Se uma segunda pessoa da mesma empresa falar, confira no schema se a pessoa abordada aceita mais de uma antes de somar. Se não aceitar, pergunte.
 
 ### Passo 3
+
+Quando a pessoa só avisa que alguém entrou em contato por um canal, como uma DM do Instagram, sem colar o texto, não peça o texto. Leia a conversa você mesmo, pela `Ordem dos canais de execução`, e passe ao canal seguinte só quando o anterior não existir ou falhar. Sem conector, o navegador do app e a extensão do navegador leem a conversa na conta em que a pessoa já está logada. Peça a colagem só quando nenhum canal ler, e diga o que falhou em cada um.
 
 Grave cada troca como um comentário na discussão da página da negociação, ou da pessoa quando não há negócio, uma por data ou bloco de mensagens. Comece com `Data da mensagem:` e a data, ou `Data do registro:` quando for uma ação do negócio sem mensagem, e diga o canal e quem falou. Resuma os fatos: datas, horários, valores, decisões e pendências. Cite entre aspas só a frase cuja grafia importa, como um horário dito de outro jeito. Antes de gravar, leia os comentários que já existem e não repita a mesma mensagem.
 
@@ -110,6 +112,14 @@ Se você perguntar um horário ou combinado sem ler a negociação, a pessoa rep
 1. Siga o checklist do Passo 4.
 2. Responda com o que achou e a fonte.
 3. Pergunte só o que faltou.
+
+### Texto da mensagem pedido à pessoa
+
+Se você pedir o texto de uma DM que a pessoa só avisou que chegou, ela cola o que a conta dela já mostra e o contato espera. Falta de conector não é falta de canal.
+
+1. Leia a conversa pela `Ordem dos canais de execução`: conector, linha de comando, API, navegador do app e extensão do navegador.
+2. Siga com o texto lido: registre a troca como o Passo 3 manda e escreva a resposta por `redigir-com-tom-de-voz`.
+3. Peça a colagem só quando nenhum canal ler, e diga o que falhou em cada um.
 
 ### Contato retomado no canal errado
 
@@ -206,6 +216,10 @@ Consultei os comentários da negociação, o cronograma, as inscrições e o e-m
 
 Não havia cotação, proposta, parceria nem venda. Gravei na discussão da página da pessoa, com a data, o canal e quem falou, e a pendência da resposta ao café. Não criei negociação.
 
+### o pessoal da Feira Exemplo acabou de entrar em contato com a gente via DM no Instagram
+
+Não havia conector do Instagram. Não pedi o texto: abri a conversa no navegador do app, na conta em que a pessoa já estava logada, e li a mensagem com a data e o horário. Registrei a troca na discussão da página da pessoa, sem criar negociação, e propus a resposta no tom de voz. Se o navegador do app não abrisse a conversa, tentaria a extensão do navegador, e só então pediria a colagem, dizendo o que falhou em cada um.
+
 ### cole a mensagem que mandei à organização da Feira Exemplo e escreva a retomada pelo WhatsApp
 
 A mensagem colada não tinha data. Li os comentários: foi enviada pelo Instagram em 9 de maio, e a retomada sai seis meses depois, pelo WhatsApp. Troquei o "hoje" dela pelo que mudou desde então, escrevi "no Instagram" para o contato anterior e perguntei como o número foi achado antes de afirmar a origem.
@@ -230,6 +244,8 @@ Conferi se a pessoa abordada aceita mais de uma pessoa antes de somar Isadora Ri
 - O perfil pessoal de quem dirige a organização não aparece na busca: proponha só a mensagem do perfil da organização e diga que não achou o pessoal.
 - A conversa é um convite, um agradecimento ou um café, sem negócio: grave na discussão da página da pessoa. Não crie negociação.
 - A lista de negociações proíbe o contato com a organização de feiras: grave a DM e o formulário na discussão da pessoa e da inscrição. Não crie negociação.
+- A pessoa avisa de um contato por um canal sem conector e sem colar o texto: leia a conversa pelo navegador do app e, se não abrir, pela extensão do navegador. Não peça o texto antes.
+- Nenhum canal consegue ler a conversa: peça a colagem e diga o que falhou em cada canal.
 - A conversa não tem data: use `Data aproximada:` e diga de onde veio.
 - Várias mensagens no mesmo dia e assunto: um comentário só, com os horários.
 - A pessoa corrige um fato já gravado: novo comentário datado com a correção. Não apague o anterior.
@@ -248,6 +264,7 @@ Conferi se a pessoa abordada aceita mais de uma pessoa antes de somar Isadora Ri
 - Um comentário de propriedade fica escondido no campo. Só a discussão da página aparece no topo.
 - O mesmo fato pode estar no WhatsApp, no e-mail e no manual com horários diferentes. A data mais recente não é automaticamente a certa.
 - A mensagem anterior parece valer como está hoje. O "hoje" e o "estamos" dela eram do dia em que foi enviada, e o canal dela pode não ser o de agora.
+- Sem conector do canal, parece que só a pessoa tem a mensagem. A conta dela está logada no navegador do app e na extensão do navegador, e a leitura é sua.
 - O texto aprovado parece o fim do trabalho. A aprovação é o sim ao envio, e quem envia é você, pelos canais da `Ordem dos canais de execução`.
 - "Não achei registro" parece uma resposta completa. Ela só diz que as fontes do workspace estão vazias: a próxima ação é pesquisar na internet e propor a abordagem.
 - A empresa abordada e a pessoa abordada são relações. Telefone e grafias vêm por rollup e não se gravam aqui.
