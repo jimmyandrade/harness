@@ -3,7 +3,7 @@ name: definir-registro-de-reuniao
 description: Cadastra e corrige o registro de uma reunião, com título, data, participantes, resumo e índice, onde o projeto guarda os registros. Usada quando a pessoa cola uma transcrição ou pergunta se uma reunião já está registrada. Não serve para achar o contexto de uma reunião nem escrever a ata.
 metadata:
   author: jimmyandrade
-  version: "0.17.0"
+  version: "0.17.1"
   related:
     - definir-agenda
     - definir-grafia
@@ -133,13 +133,14 @@ Sem sinal nenhum, o nome fica sem hipótese.
 O diretório só tem quem foi cadastrado, então ser o único com aquele nome nele não prova que é o único da empresa.
 Para um termo que não é nome, como sigla, jargão ou palavra solta, traga as pistas que a busca achou e uma hipótese `inferido` quando houver.
 Liste para a pessoa só o que a busca não resolveu.
-Ao listar, não mostre só a frase em volta: mostre o parágrafo ou o bloco inteiro em que aparece, os itens vizinhos da lista ou da seção e as pistas da busca.
-Cada nome ou termo listado vem com as falas em que aparece, ditas como saíram, entre aspas e sem mudar o texto: a fala que o traz, a anterior e a seguinte.
-Sem identificação de quem fala, a conversa em volta é o único contexto que a pessoa tem.
-A mensagem que lista os pendentes carrega essas falas. Não mande a pessoa abrir o registro para achá-las.
-Com muitos pendentes, liste todos com as falas, ou pergunte um por vez, com as falas do nome da vez. Nunca nomes soltos, com só a hipótese.
+Cada nome ou termo listado vem com as falas em que aparece, ditas como saíram, entre aspas e sem mudar o texto: a que o traz, a anterior e a seguinte, o bloco inteiro, os itens vizinhos e as pistas da busca.
+Sem identificação de quem fala, a conversa em volta é o único contexto da pessoa.
+A própria mensagem carrega as falas: nunca mande a pessoa abrir o registro.
+Com muitos pendentes, pergunte um por vez, com as falas do nome da vez, ou liste todos com as falas.
+Nunca nomes soltos, com só a hipótese, nem num lembrete no fim da resposta: o que ainda falta entra só como quantidade.
 Para um nome de pessoa, junte os candidatos já pesquisados (nome completo e o que ajuda a diferenciar, como cargo e e-mail).
 O que ela confirmar sobre um nome segue `definir-grafia`, e sobre um termo entra em `Fonte de correções de termos`. O que ela não souber fica como pendente, com o contexto maior.
+Depois de cada confirmação, a mesma mensagem já traz o próximo pendente com as falas, sem perguntar se a pessoa quer seguir.
 
 ### Passo 8
 
@@ -188,7 +189,7 @@ Se você disser que um nome é de uma pessoa porque o nome combina e ela é a ú
 Se você listar um nome ou termo só com o nome e a hipótese, ou mandar a pessoa abrir o registro, ela não tem o contexto e pergunta de volta o que foi dito.
 
 1. Ponha na mesma mensagem as falas em que o nome aparece, entre aspas e sem mudar o texto: a que o traz, a anterior e a seguinte.
-2. Com muitos pendentes, liste todos com as falas, ou pergunte um por vez.
+2. Com muitos pendentes, pergunte um por vez ou liste todos com as falas.
 3. Sem fala a citar, diga que não achou o trecho.
 
 ### Ação atribuída pelo pronome
@@ -264,8 +265,7 @@ Escrevi no resumo que a correção sobe no dia seguinte, com o responsável como
 
 ## Pegadinhas
 
-- Duas linhas em volta parecem contexto bastante. Para um termo que a pessoa não conhece, mostre o parágrafo ou o bloco inteiro, os itens vizinhos e o que a busca achou.
-- Um nome e uma hipótese parecem resumir o pendente. Sem as falas ditas, a pessoa não decide, porque quem decide é o contexto da conversa.
+- Duas linhas em volta, ou um nome com a hipótese, parecem resumir o pendente. Quem decide é o contexto: mostre o bloco inteiro, os itens vizinhos, o que a busca achou e as falas ditas. Um "ficam pendentes A, B e C" no fecho é lista de nomes soltos: diga só quantos faltam.
 - O único nome no diretório parece o único da empresa. O diretório só tem quem foi cadastrado, e um nome parecido com um canal em comum não prova que a pessoa estava na reunião.
 - O título de um documento de anotações herda o nome da reunião recorrente, mesmo quando a sessão foi outra, num horário que não é o do evento. Quem estava ausente ou recusou o convite ainda pode receber o documento.
 - Texto colado de outra interface pode trazer lixo no começo, como o nome de um botão ou de um arquivo de áudio. Não é fala.
