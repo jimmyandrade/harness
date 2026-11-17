@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-update-
 compatibility: Precisa de internet. A busca semântica nas listas usa notion-ai-search no servidor notion.
 metadata:
   author: jimmyandrade
-  version: "0.8.0"
+  version: "0.9.0"
   aliases:
     - procurar-grafia
   related:
@@ -41,6 +41,10 @@ Separe duas listas. A busca usa o nome do registro e todas as formas entre aspas
 
 Se a forma citada já está na lista, não duplique. Se ainda não está e só um registro casa, acrescente um item na mesma hora, sem apagar os que já estão. O item tem a forma entre aspas e termina com ponto e vírgula. A nota entre parênteses entra quando explica que a forma é correta ou que a transcrição a captou, no mesmo feitio dos itens que já existem. Se a lista estiver vazia, o primeiro item segue esse mesmo feitio. Não mude o nome completo nem o nome da empresa. A variação não cria a página. Não crie a empresa. O print de quem não está na lista segue o Passo 5. Se houver mais de um registro, não grave. Corrigir a grafia do título guarda a forma anterior, o erro e o termo ambíguo na variação, quando ainda ajudam a busca. O nome canônico permanece no título. Renomear o registro ou consolidar o nome canônico fica com `mesclar-registro`. Sem a propriedade de variações, avise e proponha a criação. Não dê a correção por concluída para a dedupe. Não crie a propriedade antes do sim. Renomeação recente com a variação antiga vazia: acrescente o nome anterior, sem apagar os itens que já estão. A variação recebe só nome, grafia, apelido, transcrição incorreta e forma alternativa da mesma pessoa ou empresa. Diferença permanente entre registros não entra na variação. As variações de grafia não substituem Não confundir com. Esse vínculo e o contexto permanente ficam com `identificar-duplicata`. Contato, preço, disponibilidade, resposta, decisão, status, prazo e mudança operacional vão em comentário datado.
 
+Antes de acrescentar uma forma que veio de uma fala, confira se ela é um erro de transcrição ou um apelido de verdade.
+Quando a fala puder ser brincadeira, pergunte à pessoa.
+O apelido que a pessoa diz ter sido brincadeira da conversa não entra na lista.
+
 ### Passo 5
 
 Devolva à habilidade de origem o nome canônico, o vínculo do registro e as formas de busca. Ela retoma a operação pedida, sem repetir a checagem concluída. Não altere a evidência original nem reescreva outras páginas para trocar a grafia. Não execute o lançamento nesta habilidade. Diga o pedaço buscado e que usou as duas buscas. Não crie a empresa.
@@ -69,6 +73,14 @@ Se você trocar o nome por uma forma que não está no registro, uma transcriç�
 1. Escreva o nome completo, ou o nome da empresa.
 2. Use a forma que a variação marca como correta.
 3. A forma errada entra na variação. Não vira o nome do registro.
+
+### Brincadeira gravada como variação
+
+Se você acrescentar à lista um apelido que só valeu como brincadeira numa conversa, a pessoa passa a ser chamada assim em todo texto.
+
+1. Pergunte se a forma é erro de transcrição ou apelido de verdade, quando a fala puder ser brincadeira.
+2. Não grave o que a pessoa disse ter sido brincadeira.
+3. Se já entrou, mostre o item e espere o sim para tirá-lo.
 
 ### Variação parada
 
@@ -136,6 +148,7 @@ na lista de pessoas, o nome completo é Bia Moreira. Bia é o apelido correto, B
 - Apelido correto, primeiro nome correto e erro de transcrição parecem pessoas diferentes. Quando a variação marca as três como o mesmo registro, a frase usa só a forma correta. A busca usa todas, inclusive o primeiro nome e esse nome, ponto, e o sobrenome, como texto, mesmo com e-mail vazio. Não diga que a busca pelo primeiro nome não achou o apelido. O operador from: não filtra o remetente.
 - Cada item traz a forma entre aspas e termina com ponto e vírgula. A nota entre parênteses diz se a forma é correta ou se a transcrição a captou.
 - Uma forma errada não muda o nome completo. Ela entra na variação.
+- Um apelido dito numa reunião parece variação de grafia. Pode ser brincadeira só daquela conversa, e só a pessoa sabe.
 - Nome civil vazio não se completa com o e-mail.
 - Grafia de empresa não mora na lista de pessoas. Mora na lista de empresas, nas variações de grafia dela.
 - A forma escrita no pedido, inclusive por ditado, pode ser erro de transcrição. A forma canônica sai do cadastro confirmado, não da semelhança sonora.
