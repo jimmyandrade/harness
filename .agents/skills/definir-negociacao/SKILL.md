@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.7.0"
+  version: "0.8.0"
   related:
     - definir-agenda
     - evoluir-habilidade
@@ -95,6 +95,8 @@ Antes de redigir, pergunte como o contato nasceu quando nenhuma fonte diz, como 
 
 Com o texto e o destino aprovados, envie você mesmo, sem pedir à pessoa que envie. Tente os canais na `Ordem dos canais de execução` e passe ao seguinte só quando o anterior não existir ou falhar. Se nenhum enviar, entregue o texto pronto e diga o que falhou em cada canal. Sem a aprovação, não envie nem cadastre a empresa ou a pessoa. Depois do envio, registre a troca como o Passo 3 manda.
 
+Quando a organização atende num grupo, como o de uma feira, e a marca escreveu a ela no privado, proponha também uma mensagem curta ao grupo, endereçada à pessoa da organização pelo nome. Ela só avisa que a marca já escreveu no privado, o que pediu, como a baia escolhida, e que aguarda o retorno. Não repete valor nem dado do privado. Ela sai com o sim da pessoa, pelo mesmo caminho, e o registro do Passo 3 a inclui.
+
 ### Passo 5
 
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
@@ -132,6 +134,14 @@ Se você só relatar a recusa, a empresa volta à lista na próxima compra e a c
 1. Grave a troca com as palavras da empresa, como o Passo 3 manda.
 2. Escreva a data e o que ela recusou na nota do contato no WhatsApp.
 3. Aplique o rótulo de estado de concluída, por `rotular-item`.
+
+### Privado sem aviso ao grupo
+
+Se você escrever à organização só no privado, quem atende o grupo pode não ligar a mensagem à marca e responder as outras primeiro.
+
+1. Depois do envio, proponha ao grupo uma mensagem curta, endereçada à pessoa da organização.
+2. Ela diz que a marca já escreveu no privado, o que pediu e que aguarda o retorno.
+3. Envie só com o sim da pessoa e registre a mensagem como o Passo 3 manda.
 
 ### Registro que espera pergunta
 
