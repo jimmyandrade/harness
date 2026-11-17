@@ -3,8 +3,9 @@ name: enviar-email
 description: Monta e envia um e-mail em nome de uma pessoa, com a assinatura certa, o destinatário principal e as cópias, o anexo vindo do Notion e o envio só com o sim. Usada quando uma pessoa contata uma organização por e-mail, inclusive com comprovante. Não serve para escrever no tom da marca, achar um e-mail nem triar a caixa.
 metadata:
   author: jimmyandrade
-  version: "0.6.1"
+  version: "0.6.2"
   related:
+    - conversar-no-whatsapp
     - definir-pessoa
     - acompanhar-retornos-pendentes
     - definir-vocabulario
@@ -44,6 +45,9 @@ A liberação não dispensa o sim da pessoa ao texto e aos destinatários.
 Antes de redigir, procure na caixa um rascunho não enviado na mesma conversa e mostre-o à pessoa.
 Se existir, edite esse rascunho em vez de criar outro, para os dois não saírem com pedidos diferentes. Uma sessão que acompanha as respostas costuma deixá-lo.
 Leia também as conversas com o mesmo contato no e-mail e no WhatsApp, desde a última mensagem sua. Uma resposta nova pode mudar o pedido: diga à pessoa o que chegou antes de rascunhar.
+
+Antes de propor um e-mail, confira no Gmail e nas conversas se já saiu um sobre o assunto e o que a organização respondeu. Um e-mail repetido atrapalha o atendimento.
+Com a conversa fluindo no WhatsApp, o e-mail só entra como complemento depois que ela parar, como `conversar-no-whatsapp` diz.
 
 ### Passo 2
 
@@ -149,6 +153,14 @@ Se você perguntar se pode enviar sem repetir o link do rascunho, o link da prim
 1. Escreva o link do rascunho no texto da resposta, antes da pergunta.
 2. Repita o link em cada pergunta, mesmo que o rascunho não tenha mudado.
 3. Se o rascunho foi refeito, use o link novo.
+
+### E-mail proposto sem conferir o que já saiu
+
+Se você propuser um e-mail sem olhar o Gmail e as conversas, a organização recebe o mesmo pedido duas vezes, ou a pessoa troca um WhatsApp que flui por um canal mais lento.
+
+1. Procure no Gmail e nas conversas um e-mail anterior sobre o assunto, com a resposta.
+2. Com o WhatsApp fluindo, continue nele. O e-mail é complemento da conversa parada.
+3. Diga à pessoa o que achou antes de propor.
 
 ### Resposta a um e-mail encaminhado
 
