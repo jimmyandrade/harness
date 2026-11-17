@@ -3,7 +3,7 @@ name: investigar-problema
 description: Conduz a investigação de um problema, como um acesso bloqueado, um cadastro que falha em portal alheio ou um erro, com tarefa, fatos e hipóteses, e oferece artigo e post-mortem. Use essa habilidade sempre que alguém relatar um problema, como um preço errado, antes de oferecer ou começar a investigar, mesmo sem dizer investigar. NÃO use para escrever o artigo, o post-mortem nem corrigir código.
 metadata:
   author: jimmyandrade
-  version: "0.3.1"
+  version: "0.3.2"
   related:
     - procurar-tarefa
     - definir-tarefa
@@ -27,6 +27,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Registros ao fim da investigação":
   - "artigo da base de conhecimento"
   - "post-mortem"
+# `Destino do dossiê` é o nome do banco ou do espaço, no sistema de conhecimento conectado, onde o dossiê de um problema em portal de outra empresa fica. Vazio, o dossiê vai na tarefa da investigação.
+"Destino do dossiê": ""
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -76,7 +78,7 @@ Confira na fonte o que só a outra afirma antes de repetir como fato.
 ### Passo 4
 
 Grave na tarefa o que achou: a causa, a evidência de cada conclusão, o que foi feito e o próximo passo com quem o faz.
-Quando a causa está no portal de outra empresa, reúna tudo num dossiê no Notion, na tarefa ou na página do assunto, antes de cobrar o atendente: a linha do tempo com dia e hora, o print de cada etapa, as requisições, os e-mails que chegaram e o que cada tentativa devolveu.
+Quando a causa está no portal de outra empresa, reúna tudo num dossiê, em `Destino do dossiê`, antes de cobrar o atendente: a linha do tempo com dia e hora, o print de cada etapa, as requisições, os e-mails que chegaram e o que cada tentativa devolveu.
 O dossiê é o que o atendente recebe, para não ter de pedir de novo.
 
 A mensagem ao atendente é um feedback, não uma cobrança: diz o que acontece, com os fatos e os prints, conta o que já foi tentado e pede a melhoria, como a correção do erro ou do link de validação.
@@ -118,7 +120,7 @@ Se você abrir só o navegador interno, cair no login e pedir à pessoa que entr
 Se você cobrar o atendente do portal só com o relato da pessoa, ele não acha o cadastro e a conversa recomeça a cada contato.
 
 1. Refaça o fluxo, capture os prints e as requisições e confira o e-mail.
-2. Grave o dossiê no Notion.
+2. Grave o dossiê em `Destino do dossiê`.
 3. Mande o feedback com os fatos e os prints, e peça a melhoria sem tom de cobrança.
 
 ### Hipótese tratada como fato
