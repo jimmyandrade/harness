@@ -29,3 +29,20 @@ Funcionalidade: Inscrever na oportunidade
       Quando a habilidade chega ao campo do projeto
       Então ela usa o texto entregue, no formato e no limite do formulário
       E mostra o projeto junto do resto antes de pedir o sim
+
+  Regra: O campo dos produtos lista o que a marca vende
+
+    Exemplo: Formulário que pede os produtos
+      Dado que o formulário de uma feira fictícia pede os produtos que a marca leva
+      Quando a habilidade preenche o campo
+      Então ela lê o catálogo de produtos do negócio
+      E lista as famílias de produtos, ou os produtos específicos, das peças ativas
+      Mas não responde só com a descrição da marca
+
+  Regra: A resposta enviada se corrige pela edição
+
+    Exemplo: Correção depois do envio
+      Dado que a resposta do formulário já foi enviada
+      Quando um campo precisa de correção
+      Então a habilidade edita a resposta pela aba de confirmação da pessoa ou pelo link de edição guardado
+      Mas não abre o formulário de novo nem envia uma segunda inscrição
