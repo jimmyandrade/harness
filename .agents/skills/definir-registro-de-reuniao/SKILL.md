@@ -3,7 +3,7 @@ name: definir-registro-de-reuniao
 description: Cadastra e corrige o registro de uma reunião, com título, data, participantes, resumo e índice, onde o projeto guarda os registros. Usada quando a pessoa cola uma transcrição ou pergunta se uma reunião já está registrada. Não serve para achar o contexto de uma reunião nem escrever a ata.
 metadata:
   author: jimmyandrade
-  version: "0.17.1"
+  version: "0.18.0"
   related:
     - definir-agenda
     - definir-grafia
@@ -24,6 +24,8 @@ metadata:
 Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo.
 
 ```yaml
+# `Modelo da ata` é a página ou o arquivo com o modelo do registro publicado. Vazio, a skill procura um modelo no destino.
+"Modelo da ata": ""
 "Tipo de armazenamento dos registros": ""
 "Endereço dos registros": ""
 "Padrão do nome do arquivo": "AAAA-MM-DD-HH-MM-titulo-curto"
@@ -85,7 +87,9 @@ flowchart LR
 
 O nome do registro depende do tipo de armazenamento. Arquivo local tem nome de arquivo, que é a data da reunião, o horário de início e um título curto, no `Padrão do nome do arquivo`: ano, mês, dia, hora e minuto separados por hífen, depois o título em minúsculas, sem acento e com hífens, e a `Extensão dos registros em arquivo` no fim. Página do Notion ou do Confluence e documento do Google Drive têm título, e título é texto como uma pessoa o escreve: com acento, maiúscula de início de frase e nome próprio, seguindo o `Padrão do título da página`. Não use o nome de arquivo como título. No Notion, a data, o horário e os participantes também vão para as propriedades do mapeamento. A data é a da reunião, não a da criação do registro. O horário nunca falta, porque a mesma pessoa tem mais de uma reunião no mesmo dia.
 
-O registro começa com o título em heading de nível 1.
+O registro segue o `Modelo da ata`. Com o valor vazio, procure antes de escrever uma página `Template` ou `Modelo` no destino e siga as seções dela, na ordem, também na ata de Daily.
+O que as outras regras pedem, como menção real, decisão e glossário, entra por cima do modelo. Outra ata só serve de referência se nenhum modelo existir.
+Sem modelo, o registro começa com o título em heading de nível 1.
 Logo abaixo, um bloco curto com a data e o horário, os participantes e a fonte do texto.
 Em `Fonte de identidade das pessoas`, ache o nome canônico e o papel de cada participante.
 Quem falta na lista de pessoas do projeto segue `definir-pessoa`.
@@ -268,11 +272,7 @@ Escrevi no resumo que a correção sobe no dia seguinte, com o responsável como
 - Duas linhas em volta, ou um nome com a hipótese, parecem resumir o pendente. Quem decide é o contexto: mostre o bloco inteiro, os itens vizinhos, o que a busca achou e as falas ditas. Um "ficam pendentes A, B e C" no fecho é lista de nomes soltos: diga só quantos faltam.
 - O único nome no diretório parece o único da empresa. O diretório só tem quem foi cadastrado, e um nome parecido com um canal em comum não prova que a pessoa estava na reunião.
 - O título de um documento de anotações herda o nome da reunião recorrente, mesmo quando a sessão foi outra, num horário que não é o do evento. Quem estava ausente ou recusou o convite ainda pode receber o documento.
-- Texto colado de outra interface pode trazer lixo no começo, como o nome de um botão ou de um arquivo de áudio. Não é fala.
-- Slug de arquivo e título de página são coisas diferentes. Um título escrito como slug, sem acento e com hífens, fica estranho no Notion, no Confluence e no Google Drive.
 - O reconhecimento de voz erra nome de pessoa e sigla de um jeito que parece outra palavra. O apelido de quem fala também vira outro nome quando alguém o chama.
-- O horário de criação do registro é aproximado: a reunião pode ter começado antes dele.
-- Transcrição com falas identificadas pode ter a pessoa errada atribuída a um trecho.
 - Um `a confirmar` parece definitivo. Um card ou o autor do trabalho pode nomear a pessoa depois, com a fonte escrita na célula.
 
 ## Scripts disponíveis
