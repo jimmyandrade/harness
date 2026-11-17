@@ -437,7 +437,9 @@ flowchart LR
   definir_cronograma --> definir_agenda
   definir_cronograma --> definir_jornada_de_producao
   definir_cronograma --> definir_viagem
+  definir_cronograma --> procurar_data_significativa
   definir_cronograma --> procurar_oportunidade
+  definir_cronograma --> revisar_oportunidade
   definir_cronograma --> sincronizar_cronograma
   definir_data_significativa --> procurar_data_significativa
   definir_empresa --> definir_grafia
