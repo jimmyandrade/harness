@@ -3,10 +3,10 @@ name: dividir-mensagem
 description: Decide como o rascunho de uma mensagem sai, em mensagens curtas por ideia, numa só ou em partes numeradas pelo limite de caracteres, e devolve as mensagens na ordem do envio com a contagem de cada uma. Usada quando um texto de WhatsApp vai ser mostrado ou enviado, ou quando passa do limite. Não serve para escrever o texto, enviar a mensagem nem decidir o tom.
 metadata:
   author: jimmyandrade
-  version: "0.1.1"
+  version: "0.1.2"
   related:
+    - rascunhar-mensagem
     - comunicar-novidade-do-produto
-    - conversar-no-whatsapp
     - evoluir-habilidade
 ---
 

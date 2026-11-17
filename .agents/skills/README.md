@@ -160,6 +160,7 @@ flowchart LR
     publicar_produto_fisico_na_loja_virtual["publicar-produto-fisico-na-loja-virtual"]
     publicar_resposta_de_revisao["publicar-resposta-de-revisao"]
     publicar_revisao_de_codigo["publicar-revisao-de-codigo"]
+    rascunhar_mensagem["rascunhar-mensagem"]
     reconhecer_imagem["reconhecer-imagem"]
     redigir_com_tom_de_voz["redigir-com-tom-de-voz"]
     registrar_ciclo_do_ativo["registrar-ciclo-do-ativo"]
@@ -214,6 +215,7 @@ flowchart LR
   acompanhar_resposta_no_whatsapp --> acompanhar_retornos_pendentes
   acompanhar_resposta_no_whatsapp --> conversar_no_whatsapp
   acompanhar_resposta_no_whatsapp --> definir_rotina
+  acompanhar_resposta_no_whatsapp --> rascunhar_mensagem
   acompanhar_resposta_no_whatsapp --> rotular_item
   acompanhar_resposta_no_whatsapp --> usar_whatsapp_web
   acompanhar_retornos_pendentes --> acompanhar_resposta_no_whatsapp
@@ -243,6 +245,7 @@ flowchart LR
   analisar_regulamento_da_oportunidade --> organizar_ponto_de_contato
   analisar_regulamento_da_oportunidade --> procurar_tarefa
   anexar_arquivo_no_whatsapp --> conversar_no_whatsapp
+  anexar_arquivo_no_whatsapp --> rascunhar_mensagem
   anexar_arquivo_no_whatsapp --> redigir_com_tom_de_voz
   anexar_arquivo_no_whatsapp --> usar_whatsapp_web
   atender_revisao_de_pull_request --> atualizar_branch_do_pull_request
@@ -278,14 +281,13 @@ flowchart LR
   classificar_estado_do_termo --> gravar_termos_no_vocabulario
   classificar_estado_do_termo --> validar_plano_de_vocabulario
   classificar_melhoria_tecnica --> priorizar_itens
-  comunicar_novidade_do_produto --> conversar_no_whatsapp
+  comunicar_novidade_do_produto --> rascunhar_mensagem
   comunicar_novidade_do_produto --> redigir_com_tom_de_voz
   configurar_harness_de_negocio --> criar_pull_request
   configurar_harness_de_negocio --> definir_issue_do_github
   configurar_harness_de_negocio --> levantar_ambiente_do_repositorio
   consultar_responsavel_pela_oportunidade --> acompanhar_retornos_pendentes
   consultar_responsavel_pela_oportunidade --> analisar_regulamento_da_oportunidade
-  consultar_responsavel_pela_oportunidade --> conversar_no_whatsapp
   consultar_responsavel_pela_oportunidade --> definir_agenda
   consultar_responsavel_pela_oportunidade --> definir_empresa
   consultar_responsavel_pela_oportunidade --> definir_grupo_de_oportunidades
@@ -293,6 +295,7 @@ flowchart LR
   consultar_responsavel_pela_oportunidade --> definir_pessoa
   consultar_responsavel_pela_oportunidade --> definir_viagem
   consultar_responsavel_pela_oportunidade --> enviar_email
+  consultar_responsavel_pela_oportunidade --> rascunhar_mensagem
   consultar_responsavel_pela_oportunidade --> redigir_com_tom_de_voz
   consultar_responsavel_pela_oportunidade --> sincronizar_cronograma
   consultar_vocabulario --> definir_vocabulario
@@ -313,6 +316,8 @@ flowchart LR
   conversar_no_whatsapp --> escrever_link
   conversar_no_whatsapp --> procurar_agenda
   conversar_no_whatsapp --> procurar_tarefa
+  conversar_no_whatsapp --> rascunhar_mensagem
+  conversar_no_whatsapp --> reconhecer_imagem
   conversar_no_whatsapp --> redigir_com_tom_de_voz
   conversar_no_whatsapp --> rotular_item
   conversar_no_whatsapp --> triar_conversas
@@ -322,6 +327,7 @@ flowchart LR
   convidar_para_evento --> conversar_no_whatsapp
   convidar_para_evento --> definir_agenda
   convidar_para_evento --> definir_convidado
+  convidar_para_evento --> rascunhar_mensagem
   convidar_para_evento --> redigir_com_tom_de_voz
   criar_carrossel_do_instagram --> criar_ideia_de_conteudo
   criar_carrossel_do_instagram --> escrever_legenda_do_post
@@ -336,11 +342,11 @@ flowchart LR
   criar_copia_de_trabalho --> criar_pull_request
   criar_copia_de_trabalho --> levantar_ambiente_do_repositorio
   criar_copia_de_trabalho --> limpar_copias_de_trabalho
-  criar_enquete --> conversar_no_whatsapp
   criar_enquete --> criar_ideia_de_conteudo
   criar_enquete --> definir_campanha_de_conteudo
   criar_enquete --> definir_grafia
   criar_enquete --> definir_localidade_geografica
+  criar_enquete --> rascunhar_mensagem
   criar_enquete --> redigir_com_tom_de_voz
   criar_enquete --> usar_whatsapp_web
   criar_habilidade --> criar_commit
@@ -620,7 +626,7 @@ flowchart LR
   descrever_habilidade_ou_schema --> revisar_habilidade
   descrever_habilidade_ou_schema --> testar_habilidade
   dividir_mensagem --> comunicar_novidade_do_produto
-  dividir_mensagem --> conversar_no_whatsapp
+  dividir_mensagem --> rascunhar_mensagem
   entregar_rascunho_de_mensagem --> enviar_mensagem_no_slack
   enviar_email --> acompanhar_retornos_pendentes
   enviar_email --> conversar_no_whatsapp
@@ -908,6 +914,19 @@ flowchart LR
   publicar_revisao_de_codigo --> levantar_contexto_do_pull_request
   publicar_revisao_de_codigo --> priorizar_itens
   publicar_revisao_de_codigo --> redigir_com_tom_de_voz
+  rascunhar_mensagem --> acompanhar_resposta_no_whatsapp
+  rascunhar_mensagem --> anexar_arquivo_no_whatsapp
+  rascunhar_mensagem --> conversar_no_whatsapp
+  rascunhar_mensagem --> definir_tarefa
+  rascunhar_mensagem --> definir_viagem
+  rascunhar_mensagem --> definir_vocabulario
+  rascunhar_mensagem --> dividir_mensagem
+  rascunhar_mensagem --> enviar_email
+  rascunhar_mensagem --> escrever_link
+  rascunhar_mensagem --> procurar_agenda
+  rascunhar_mensagem --> redigir_com_tom_de_voz
+  rascunhar_mensagem --> rotular_item
+  rascunhar_mensagem --> usar_whatsapp_web
   reconhecer_imagem --> criar_oportunidade
   reconhecer_imagem --> definir_grafia
   reconhecer_imagem --> definir_inscricao
@@ -919,6 +938,7 @@ flowchart LR
   redigir_com_tom_de_voz --> definir_pessoa
   redigir_com_tom_de_voz --> definir_vocabulario
   redigir_com_tom_de_voz --> perfilar_tom_de_voz
+  redigir_com_tom_de_voz --> rascunhar_mensagem
   registrar_ciclo_do_ativo --> definir_ativo_imobilizado
   registrar_ciclo_do_ativo --> identificar_duplicata
   registrar_ciclo_do_ativo --> lancar_despesa_da_empresa

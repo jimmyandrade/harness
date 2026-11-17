@@ -38,4 +38,4 @@ Funcionalidade: Entregar a enquete
       Dado que a enquete está pronta
       Quando a pessoa quer publicá-la no WhatsApp
       Então a skill entrega só a pergunta e as opções
-      E o envio segue conversar-no-whatsapp e só com o sim da pessoa
+      E o envio segue rascunhar-mensagem e só com o sim da pessoa

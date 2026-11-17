@@ -3,11 +3,11 @@ name: criar-enquete
 description: Use essa habilidade sempre que for criar ou sugerir uma enquete ou pergunta para conhecer o público de um negócio, como a cidade, o repertório ou o interesse em participar, mesmo sem dizer enquete. NÃO use para escrever a copy final, publicar, cadastrar a ideia ou o post, nem definir a campanha.
 metadata:
   author: jimmyandrade
-  version: "0.3.2"
+  version: "0.3.3"
   aliases:
     - sugerir-enquete-de-publico
   related:
-    - conversar-no-whatsapp
+    - rascunhar-mensagem
     - criar-ideia-de-conteudo
     - definir-campanha-de-conteudo
     - definir-grafia
@@ -67,11 +67,11 @@ Peça a pergunta final e as variações a `redigir-com-tom-de-voz`, com o `Banco
 
 ### Passo 7
 
-Entregue, nesta ordem, o objetivo de aprendizado, a ideia usada, o canal e o formato recomendados, a pergunta final, as opções, uma justificativa curta do que a enquete descobre e da decisão futura que apoia, e variações controladas quando fizerem sentido. A skill só entrega a enquete pronta, com a pergunta e as opções. O envio no WhatsApp segue `conversar-no-whatsapp` e `usar-whatsapp-web`, e só com o sim da pessoa.
+Entregue, nesta ordem, o objetivo de aprendizado, a ideia usada, o canal e o formato recomendados, a pergunta final, as opções, uma justificativa curta do que a enquete descobre e da decisão futura que apoia, e variações controladas quando fizerem sentido. A skill só entrega a enquete pronta, com a pergunta e as opções. O envio no WhatsApp segue `rascunhar-mensagem` e `usar-whatsapp-web`, e só com o sim da pessoa.
 
 Quando a enquete serve a uma ação, como entregar algo, convidar ou organizar um encontro, a pergunta sozinha não basta. Entregue também uma mensagem de contexto, antes da enquete, com o que é oferecido, quem o fez e qual é o papel do negócio nisso, o limite (como poucas unidades), como a pessoa recebe ou participa e quando e onde. Esses fatos vêm da pessoa ou da fonte do projeto: pergunte o que faltar e não invente autoria, data, local nem quantidade. As opções podem juntar interesse e praça atendida.
 
-Se a mensagem de contexto passar do limite de caracteres por mensagem de `conversar-no-whatsapp`, entregue-a já dividida em mensagens, cortadas entre parágrafos e sem mudar palavra.
+Se a mensagem de contexto passar do limite de caracteres por mensagem de `rascunhar-mensagem`, entregue-a já dividida em mensagens, cortadas entre parágrafos e sem mudar palavra.
 
 Nome de pessoa ou de organização na mensagem sai na grafia canônica do cadastro, conferida com `definir-grafia`. Nome que não está no cadastro: avise e não escolha a grafia pelo que a conversa escreveu.
 
@@ -129,7 +129,7 @@ Assumi o canal padrão do projeto e todas as praças. O objetivo é saber onde e
 ## Casos-limite
 
 - Sem `Banco de modelos de conteúdo`: ele é opcional. Não pergunte o nome nem procure, crie a ideia do zero e diga isso.
-- Pedido de escrever, publicar ou cadastrar a ideia: devolva ao `redigir-com-tom-de-voz`, a `conversar-no-whatsapp` ou a `criar-ideia-de-conteudo`.
+- Pedido de escrever, publicar ou cadastrar a ideia: devolva ao `redigir-com-tom-de-voz`, a `rascunhar-mensagem` ou a `criar-ideia-de-conteudo`.
 - A pessoa quer a mesma pergunta de novo: entregue e diga se é medição ou repetição.
 - Praça fora da lista de localidades: use "outra cidade" e sugira cadastrar a localidade.
 

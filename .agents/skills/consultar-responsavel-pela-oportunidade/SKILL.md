@@ -3,11 +3,11 @@ name: consultar-responsavel-pela-oportunidade
 description: Pergunta ao responsável por uma oportunidade o que o regulamento não diz e a logística exige, pelos canais dele, e grava a resposta na oportunidade, no ponto de contato e nas notas do grupo. Usada quando a análise do regulamento deixa uma lacuna. NÃO serve para ler o regulamento, redigir no tom da marca nem acompanhar resposta já pedida.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.2.1"
   related:
+    - rascunhar-mensagem
     - acompanhar-retornos-pendentes
     - analisar-regulamento-da-oportunidade
-    - conversar-no-whatsapp
     - definir-agenda
     - definir-empresa
     - definir-grupo-de-oportunidades
@@ -57,7 +57,7 @@ Numa conversa já aberta, a mensagem não diz de novo quem escreve.
 ### Passo 3
 
 Passe o texto por `redigir-com-tom-de-voz`.
-Mostre o rascunho inteiro de cada canal, o WhatsApp por `conversar-no-whatsapp` e o e-mail por `enviar-email`, e envie só com o sim da pessoa.
+Mostre o rascunho inteiro de cada canal, o WhatsApp por `rascunhar-mensagem` e o e-mail por `enviar-email`, e envie só com o sim da pessoa.
 Com mais de um canal, pergunte se vai em todos. Um sim vale para um texto.
 Antes de enviar, diga a pessoa o que a mensagem pede e o que a empresa ainda não fez, como um formulário vencido.
 
