@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.7.0"
   related:
     - definir-agenda
     - evoluir-habilidade
@@ -15,6 +15,7 @@ metadata:
     - procurar-email
     - procurar-oportunidade
     - redigir-com-tom-de-voz
+    - rotular-item
     - sincronizar-cronograma
 ---
 
@@ -61,6 +62,8 @@ Com negócio, a negociação é uma por oportunidade, a edição com data. Ache 
 Grave cada troca como um comentário na discussão da página da negociação, ou da pessoa quando não há negócio, uma por data ou bloco de mensagens. Comece com `Data da mensagem:` e a data, ou `Data do registro:` quando for uma ação do negócio sem mensagem, e diga o canal e quem falou. Resuma os fatos: datas, horários, valores, decisões e pendências. Cite entre aspas só a frase cuja grafia importa, como um horário dito de outro jeito. Antes de gravar, leia os comentários que já existem e não repita a mesma mensagem.
 
 Depois de enviar uma mensagem, um e-mail ou um comprovante de pagamento a uma empresa ou pessoa, registre a troca na mesma rodada, sem perguntar se deve registrar. Na resposta, diga o que registrou, com o link da página, e o que não registrou e por quê.
+
+Quando a empresa recusa, a recusa fica em três lugares, na mesma rodada: o comentário da troca, com as palavras dela; a nota do contato no WhatsApp, com a data e o que ela recusou; e a conversa, que leva o rótulo de estado de concluída, por `rotular-item`. Diga o que a recusa não deixou claro, como a que pode valer só para um material. Um rótulo só para recusa não existe até o projeto o definir: proponha-o à pessoa e não o crie.
 
 ### Passo 4
 
@@ -121,6 +124,14 @@ Se você gravar o histórico no corpo da página ou num comentário de proprieda
 1. Grave na discussão da página.
 2. Deixe o corpo como está.
 3. Se o fato tiver propriedade própria, como status ou valor, atualize a propriedade.
+
+### Recusa só contada à pessoa
+
+Se você só relatar a recusa, a empresa volta à lista na próxima compra e a conversa segue entre as que esperam resposta.
+
+1. Grave a troca com as palavras da empresa, como o Passo 3 manda.
+2. Escreva a data e o que ela recusou na nota do contato no WhatsApp.
+3. Aplique o rótulo de estado de concluída, por `rotular-item`.
 
 ### Registro que espera pergunta
 
