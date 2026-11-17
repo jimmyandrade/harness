@@ -3,7 +3,7 @@ name: publicar-revisao-de-codigo
 description: Revisa um pull request e publica a revisão numa única review, com os comentários inline, no idioma de quem recebe e no tom do projeto. Usada quando a pessoa pede uma revisão ou outra habilidade precisa publicar uma. Não serve para tratar os comentários que você recebeu no seu PR.
 metadata:
   author: jimmyandrade
-  version: "0.23.0"
+  version: "0.24.0"
   aliases:
     - post-code-review
   related:
@@ -102,6 +102,8 @@ Chame `priorizar-itens` com os achados e junte o resultado com a ficha:
 
 - Um achado que coincide com um comentário já existente e ainda aberto vira resposta na thread dele, com o complemento ou um reforço curto. Não abre comentário novo, e não descarta o achado em silêncio. Em thread que o autor encerrou, ou já resolvida, não responda.
 - Antes de perguntar ao autor, verifique sozinho o que der: o comportamento no ambiente do PR, o que a dependência ou outro serviço devolve, o dado de um monitor. O comentário traz o que foi rodado e o que apareceu, e pergunta só o que está fora do alcance ou é decisão do autor.
+- Não escreva que não conseguiu verificar antes de tentar o caminho alternativo. Um timeout no ambiente do PR pede conferir se a VPN está conectada, e a pessoa conecta. O comportamento de um framework se testa dentro dele. O que um serviço repassa se confirma no código dele e na telemetria.
+- Um achado fora do escopo do PR, como a versão de uma dependência com aviso de segurança, não vira pedido ao autor: diga à pessoa que ele merece uma tarefa à parte.
 - Um achado fraco, sem cenário concreto de falha, vira pergunta que espera resposta, tratada como importante. Nunca como "não bloqueia".
 - Aplique as `Lentes de revisão`. Com `Nível de detalhe` em `enxuta`, publique só Deve ter e Deveria ter, mais o Poderia ter que o `Limite de Poderia ter publicado` permitir. Quando o `Critério de revisão completa` se cumpre, publique tudo.
 - Aplique a `Prioridade por tema`: o achado de um tema listado ganha a categoria dada. Um achado de acessibilidade, com o valor padrão, é Deve ter e leva sugestão de código.
