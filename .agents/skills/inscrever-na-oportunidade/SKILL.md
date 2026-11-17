@@ -1,9 +1,9 @@
 ---
 name: inscrever-na-oportunidade
-description: Preenche o cadastro ou o formulário que a organização de uma oportunidade pede para a inscrição, com os dados da empresa, no formato de cada campo, e envia só com o sim da pessoa. Usada quando a inscrição ou o cadastro de uma oportunidade está para ser feito. NÃO serve para registrar a inscrição no Notion, ler o regulamento, escrever à organização nem escrever o projeto que a inscrição pede.
+description: Preenche o cadastro ou o formulário que a organização de uma oportunidade pede para a inscrição, com os dados da empresa, no formato de cada campo, e envia só com o sim da pessoa. Usada quando a inscrição ou o cadastro de uma oportunidade está para ser feito. NÃO serve para registrar a inscrição no Notion, ler o regulamento, escrever à organização, salvo a resposta que confirma o envio, nem escrever o projeto que a inscrição pede.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.4.0"
   related:
     - acompanhar-retornos-pendentes
     - analisar-regulamento-da-oportunidade
@@ -77,6 +77,8 @@ Ao começar a preencher, procure a inscrição dessa oportunidade na lista e, se
 Logo depois do envio, antes de qualquer mensagem ao organizador ou tarefa, atualize essa inscrição com a hora do envio e a tela de confirmação do formulário nos comprovantes, sem perguntar, releia a página e dê o link na resposta.
 Quem fez a inscrição é a pessoa que pediu, e a data da confirmação fica vazia até a organização responder.
 O envio só está concluído com a página lida e o link dito.
+Quando o convite ou o pedido de inscrição chegou por e-mail da organização, responda esse e-mail logo depois do envio, confirmando a inscrição, com o print da tela de confirmação colado no corpo da mensagem e não só anexo, sem pedir o sim. O texto segue `redigir-com-tom-de-voz`, e a conversa recebe o rótulo de quem espera o retorno.
+O conector de e-mail pede a imagem em base64: recorte o print só na confirmação e reduza as cores antes de enviar, e leia a mensagem enviada para conferir que o anexo ficou com o tamanho do arquivo.
 Depois, marque a tarefa da exigência como feita com o aval da pessoa e, se a organização deve responder, siga `acompanhar-retornos-pendentes`.
 
 ### Passo 7
@@ -133,9 +135,21 @@ Se você escrever a justificativa ou o orçamento que o edital pede, o texto nã
 2. Use o texto entregue, no formato e no limite do formulário.
 3. Sem o texto, deixe a pendência com o prazo e pare antes do envio.
 
+### Organização sem confirmação do envio
+
+Se você enviar o formulário de um convite que veio por e-mail e não responder esse e-mail, a organização não sabe que a inscrição saiu, e a pessoa precisa pedir a resposta.
+
+1. Depois de registrar a inscrição, responda o e-mail do convite, confirmando.
+2. Cole o print da tela de confirmação no corpo, sem pedir o sim.
+3. Rotule a conversa como à espera de retorno.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
+
+### o convite do plano de assinatura chegou por e-mail e o formulário foi enviado
+
+Depois do envio, registrei a inscrição e respondi o e-mail do convite, confirmando a inscrição, com o print da tela de confirmação no corpo. Não pedi o sim para essa resposta. A conversa ficou como à espera de retorno.
 
 ### o grupo da feira mandou o formulário de cadastro de expositores
 
@@ -148,6 +162,7 @@ Li o cadastro da empresa e preenchi o nome do responsável, o apelido, a marca e
 - A inscrição é por e-mail e não por formulário: o texto da mensagem segue `redigir-com-tom-de-voz`, e o envio, a skill de e-mail.
 - A pessoa já preencheu à mão: leia o rascunho e só registre.
 - O projeto ainda não foi entregue pela produção cultural: prepare o resto e pare antes do envio, com o prazo da pendência.
+- O convite não veio por e-mail, como num link da bio: não há e-mail para responder, e a organização só é avisada se a pessoa pedir.
 
 ## Pegadinhas
 
