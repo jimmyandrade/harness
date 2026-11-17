@@ -3,15 +3,16 @@ name: redigir-com-tom-de-voz
 description: Use essa habilidade sempre que for criar, redigir, editar, revisar ou responder texto da marca no tom de voz, mesmo sem dizer copy. NÃO use para responder quem conversa com a IA, descrever uma skill, titular tarefa ou oportunidade, cravar a grafia, alterar formato de conteúdo, nem assumir cliente, peça, oportunidade ou histórico.
 metadata:
   author: jimmyandrade
-  version: "0.27.0"
+  version: "0.28.0"
   aliases:
     - escreva-usando-o-tom-de-voz
   related:
     - perfilar-tom-de-voz
     - definir-vocabulario
     - consultar-vocabulario
-    - definir-pessoa
     - conversar-no-whatsapp
+    - definir-negociacao
+    - definir-pessoa
     - evoluir-habilidade
 ---
 
@@ -22,6 +23,8 @@ metadata:
 ```yaml
 # `Público` é o público padrão. Vazio, o pedido informa. Se o pedido nomeia outro público, vale o do pedido. As regras de voz ficam nesta habilidade e no vocabulário. Um playbook antigo não é uma segunda fonte: a regra dele entra aqui ou no vocabulário.
 "Público": ""
+# `Pessoa que fala`: quem assina a mensagem para uma pessoa, com a empresa. Vazio, pergunte quem fala.
+"Pessoa que fala": ""
 "Modo de aprendizado": "perguntar"
 ```
 ## Instruções
@@ -47,6 +50,8 @@ Texto que vai ser enviado por um conector, como uma resposta de e-mail, depende 
 A mensagem que a pessoa vai aprovar para envio aparece no chat num bloco de código e, com a ferramenta de widget na sessão, também no widget editável: um campo por mensagem, com copiar e um botão que manda o texto aprovado de volta ao chat. Vale mesmo quando a sessão só rascunha e outra envia, como a dona do WhatsApp Web, e mesmo quando a ferramenta aparece como carregável. O Passo 5 de `conversar-no-whatsapp` descreve o widget. Sem a ferramenta, diga que a sessão não a tem.
 
 Consulte o vocabulário com `consultar-vocabulario`, com as `tags` de quem fala, do evento, do canal e do formato do texto, no idioma do texto que vai escrever. Ele consulta o texto por palavra e cada expressão que o texto pode usar, inteira, e devolve o `when` dos termos permitidos com ressalva, que vale para este texto. Sem saber quem fala, pergunte.
+
+Mensagem para uma pessoa sai de uma pessoa, a `Pessoa que fala`, nunca da empresa, e continua a conversa que já houve: leia-a antes de rascunhar. Detalhes em `references/mensagem-para-uma-pessoa.md`.
 
 Para o tom de quem fala, siga `perfilar-tom-de-voz`.
 
