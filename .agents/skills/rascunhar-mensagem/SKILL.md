@@ -3,7 +3,7 @@ name: rascunhar-mensagem
 description: Escreve, mostra e envia a mensagem de WhatsApp depois de a conversa ser lida, com o destino, o texto, a divisão e o comprovante conferidos. Usada quando a pessoa quer responder, mandar ou corrigir uma mensagem. NÃO serve para ler a conversa, redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   aliases:
     - entregar-rascunho-de-mensagem
     - rascunhar-mensagem-no-whatsapp
@@ -85,9 +85,9 @@ Numa conversa que não está fluindo, veja também o e-mail com o mesmo contato 
 ### Passo 3
 
 Todo rascunho de mensagem aparece na resposta do chat. Mostre a conversa de destino, uma linha do que o rascunho acrescenta ao que já foi dito e, em cada mensagem que responde a algo, a mensagem citada, com a data. Fecha o rascunho a pergunta que pede o sim para esta conversa e este texto, com a frequência e o prazo do acompanhamento quando a mensagem espera resposta.
-O texto vai na mensagem de fechamento do turno, junto com o pedido do sim: o escrito antes de um quadro de próximo passo pode ser cortado.
+O texto redigido e não enviado volta inteiro, num bloco, na mensagem final de toda resposta que o cita, junto com o pedido do sim, e vai de novo em cada turno que deixa o envio pendente. Dizer só que ele está acima deixa a pessoa sem o texto para aprovar. O quadro de próximo passo, que mostra só a pergunta, não substitui o bloco: com a aprovação perguntada nele, o texto ainda vai inteiro na mensagem final, e o escrito antes do quadro pode ser cortado.
 Uma mensagem que diz que um trabalho está em andamento, foi registrado ou foi feito leva o link da tarefa, da página ou do pull request que mostra esse registro. Sem esse registro, crie-o antes, como `definir-tarefa` manda, ou pergunte onde ele está.
-Com a ferramenta de widget na sessão, o widget vem sempre, além dos blocos: o destinatário, um campo editável por mensagem com a altura do texto inteiro, um botão para copiar e um botão que manda o texto aprovado de volta ao chat. Se a pessoa editar, a versão dela substitui o rascunho e aparece de novo antes do sim.
+Com a ferramenta de widget na sessão, o widget vem sempre, além dos blocos: o destinatário, um campo editável por mensagem com a altura do texto inteiro, um botão para copiar e um botão que manda o texto aprovado de volta ao chat. Se a pessoa editar, a versão dela substitui o rascunho e aparece de novo antes do sim. Vale mesmo quando a sessão só rascunha e outra envia, como a dona do WhatsApp Web, e mesmo quando a ferramenta aparece como carregável. Sem a ferramenta, diga que a sessão não a tem.
 Com `Entrega dos rascunhos` em `artefato`, o rascunho nunca fica só no chat: uma página única, aberta no painel, guarda cada rascunho como registro num banco dela, com a ordem, o título, o destino com link, o texto, uma nota, se foi enviado e quando, e uma caixa de marcar como enviado. O rascunho novo entra no fim e o enviado desce para `Já enviados`. Atualize a mesma página, leia a marca de cada registro antes de mudar a lista e nunca desmarque o que a pessoa marcou. A resposta cita a página. Sem a ferramenta de página, entregue no chat e diga isso.
 
 O texto não usa Markdown: negrito é um asterisco de cada lado, itálico é sublinhado, e não há título nem link entre colchetes.
@@ -158,11 +158,11 @@ Se você disser que a resposta não cobre o dia ou a janela, e a pergunta não o
 
 ### Rascunho fora da vista
 
-Se você disser que o rascunho está pronto sem mostrar o texto, a pessoa não confere nem corrige antes do envio.
+Se você disser que o rascunho está pronto sem mostrar o texto, ou o mostrar só num bloco de código, a pessoa não confere nem corrige antes do envio, pergunta pela prévia, não consegue editar cada mensagem e precisa copiar o texto à mão.
 
 1. Mostre o texto inteiro na resposta do chat, num bloco de código.
-2. Com a ferramenta de widget na sessão, mostre sempre também o texto editável, com copiar e aprovar. O widget não substitui o bloco.
-3. Pergunte se pode enviar só depois do texto, na mesma resposta.
+2. Com a ferramenta de widget na sessão, mostre sempre também o texto editável, com copiar e aprovar. O widget não substitui o bloco. Faça isso também na sessão que só rascunha, como a dona do WhatsApp Web.
+3. Pergunte se pode enviar só depois do texto, na mesma resposta. A versão editada no widget substitui o rascunho.
 
 
 ### Andamento sem o link
@@ -227,6 +227,7 @@ Li a resposta como a da pergunta: o carro pode entrar na montagem, em qualquer j
 
 ## Pegadinhas
 
+- Um bloco de código parece prévia suficiente. Com a ferramenta de widget na sessão, a pessoa também espera o widget editável, com copiar e aprovar.
 - Uma resposta curta parece incompleta quando não repete o detalhe que a conversa já traz. Ela responde a pergunta como foi escrita: confira o texto da pergunta antes de achar que falta algo.
 - O rascunho de ontem parece valer. A conversa pode ter mudado: leia antes e rascunhe só o que falta.
 - Ao dividir uma lista numerada, o campo pode renumerar o item solto e a parte que continua a lista voltar para "1.". Confira no print e, no WhatsApp Web, siga `usar-whatsapp-web`.

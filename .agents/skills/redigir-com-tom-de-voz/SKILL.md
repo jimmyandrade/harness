@@ -48,7 +48,7 @@ Antes de criar, redigir, editar, revisar ou responder, consulte o vocabulário e
 
 Texto que vai ser enviado por um conector, como uma resposta de e-mail, depende da ferramenta de envio. Antes de redigir, confira se as configurações da ferramenta a liberam. Sem a liberação, peça-a logo, com o nome da ferramenta, em vez de descobrir o bloqueio só no envio. A liberação não dispensa o sim da pessoa ao texto e ao destino. Se o envio for bloqueado mesmo assim, deixe o rascunho no destino e diga o que bloqueou.
 
-A mensagem que a pessoa vai aprovar para envio aparece no chat num bloco de código e, com a ferramenta de widget na sessão, também no widget editável: um campo por mensagem, com copiar e um botão que manda o texto aprovado de volta ao chat. Vale mesmo quando a sessão só rascunha e outra envia, como a dona do WhatsApp Web, e mesmo quando a ferramenta aparece como carregável. `rascunhar-mensagem` descreve o widget. Sem a ferramenta, diga que a sessão não a tem.
+O texto redigido que a pessoa vai aprovar antes do envio, no bloco e no widget, segue `rascunhar-mensagem`.
 
 Consulte o vocabulário com `consultar-vocabulario`, com as `tags` de quem fala, do evento, do canal e do formato do texto, no idioma do texto que vai escrever. Ele consulta o texto por palavra e cada expressão que o texto pode usar, inteira, e devolve o `when` dos termos permitidos com ressalva, que vale para este texto. Sem saber quem fala, pergunte.
 
@@ -81,8 +81,6 @@ Emoji marcado como evitar, proibido, ruim, desalinhado ou restrito não entra na
 Termo da categoria `cliche` não entra como palavra final. A descrição pede imagem, cena, ação, efeito ou situação com a mesma sensação. Use isso. Não troque o clichê por sinônimo. A frase em `rejected` e o termo ligado em `related` também ficam de fora.
 
 Frase que sugere perda consumada, cobrança agressiva, exclusão, capacitismo, ameaça real, culpa ou sensação incompatível com o tom sai do texto. A alternativa mantém desejo, urgência e conversa natural, sem dizer que a pessoa já perdeu a chance. O motivo dessa rejeição fica na descrição do termo no vocabulário. Sem essa linha, não invente o termo.
-
-Texto redigido e não enviado volta inteiro, num bloco, na mensagem final de toda resposta que o cita, com o pedido de aprovação. Dizer só que ele está acima deixa a pessoa sem o texto para aprovar. O quadro de próximo passo, que mostra só a pergunta, não substitui o bloco: com a aprovação perguntada nele, o texto ainda vai inteiro na mensagem final, e vai de novo em cada turno que deixa o envio pendente.
 
 Mensagem para uma pessoa não revela contexto interno que ela não precisa saber e que pode deixá-la desconfortável, como a troca frequente de pessoas no papel que ela assume. O motivo neutro entra no lugar, como uma mudança na padronização. A mensagem abre pelo que muda para ela.
 
@@ -169,14 +167,6 @@ Se você chamar o contato pelo nome do perfil ou repetir a saudação que já sa
 1. Chame por nome só quem se apresentou ou consta no cadastro. O nome da conta não vale.
 2. Leia as mensagens nossas de hoje na conversa antes de abrir o texto.
 3. Com saudação já enviada hoje, comece direto pelo assunto.
-
-### Rascunho sem a prévia
-
-Se você mostrar a mensagem só num bloco de código, a pessoa pergunta pela prévia, não consegue editar cada mensagem e precisa copiar o texto à mão.
-
-1. Mostre o bloco de código e, com a ferramenta de widget na sessão, o widget editável.
-2. Faça isso também na sessão que só rascunha, como a dona do WhatsApp Web.
-3. Peça o sim depois do texto, na mesma resposta. A versão editada no widget substitui o rascunho.
 
 ### Fala de outra pessoa
 
@@ -281,7 +271,6 @@ O título ficou específico, com o nome canônico que a fonte já tinha. Não vi
 - Pontuação e diminutivo parecem neutros. Os que o vocabulário proíbe saem quando enfraquecem desejo, clareza, personalidade ou potência comercial.
 - Evitável parece permitido com moderação. Sem a cena do `when`, ele sai.
 - Uma frase cadastrada parece valer para qualquer texto. A fala em primeira pessoa de uma pessoa só entra no texto dela.
-- Um bloco de código parece prévia suficiente. Com a ferramenta de widget na sessão, a pessoa também espera o widget editável, com copiar e aprovar.
 - Emoji parece enfeite de legenda. Ele é vocabulário. O nível vem da linha. Sem linha, a copy espera.
 - Um emoji na moda parece melhor que a regra. Evitar, proibido, ruim, desalinhado e restrito saem da versão final.
 - Um sinônimo parece resolver o clichê. A troca é imagem, cena, ação, efeito ou situação. A palavra literal, a frase rejeitada e o termo ligado ficam de fora.
