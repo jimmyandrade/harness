@@ -567,6 +567,7 @@ flowchart LR
   definir_rotina --> usar_whatsapp_web
   definir_tarefa --> auditar_tarefas
   definir_tarefa --> definir_grafia
+  definir_tarefa --> procurar_banco_de_dados
   definir_tarefa --> procurar_tarefa
   definir_tecido --> acompanhar_producao_de_produto_fisico
   definir_tecido --> definir_composicao_textil
