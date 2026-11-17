@@ -3,7 +3,7 @@ name: publicar-ata-de-reuniao
 description: Publica a ata de um registro de reunião no destino compartilhado, depois de uma triagem que separa o que é privado, como um one-on-one ou um assunto sensível, e do sim da pessoa. Usada quando o registro está pronto e a ata vai para a página do time. NÃO serve para registrar a reunião, escrever o resumo nem publicar a transcrição.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   related:
     - definir-agenda
     - definir-pessoa
