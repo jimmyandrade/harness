@@ -1,9 +1,9 @@
 ---
 name: inscrever-na-oportunidade
-description: Preenche o cadastro ou o formulário que a organização de uma oportunidade pede para a inscrição, com os dados da empresa, no formato de cada campo, e envia só com o sim da pessoa. Usada quando a inscrição ou o cadastro de uma oportunidade está para ser feito. NÃO serve para registrar a inscrição no Notion, ler o regulamento nem escrever à organização.
+description: Preenche o cadastro ou o formulário que a organização de uma oportunidade pede para a inscrição, com os dados da empresa, no formato de cada campo, e envia só com o sim da pessoa. Usada quando a inscrição ou o cadastro de uma oportunidade está para ser feito. NÃO serve para registrar a inscrição no Notion, ler o regulamento, escrever à organização nem escrever o projeto que a inscrição pede.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   related:
     - acompanhar-retornos-pendentes
     - analisar-regulamento-da-oportunidade
@@ -38,6 +38,8 @@ Reúna o link do formulário ou do cadastro, a oportunidade e a exigência de `a
 Sem o link, peça à pessoa e pare. A inscrição que já foi feita e só falta registrar segue `definir-inscricao`.
 Prazo vencido: diga isso na hora, preencha mesmo assim e, se o envio for recusado, proponha perguntar à organização se ainda aceita.
 
+Quando a exigência pede um projeto escrito, o texto vem pronto da produção cultural, pela tarefa que `analisar-regulamento-da-oportunidade` criou. Confira se a tarefa está feita e leia o texto entregue. Sem ele, não escreva o projeto aqui: prepare o resto, deixe o campo do projeto como pendência, diga o prazo e pare antes do envio.
+
 Um convite da organização por mensagem, que a marca vai aceitar, segue o mesmo caminho antes do rascunho da resposta: confira a agenda nos dias e nos horários do evento, e garanta a oportunidade cadastrada com os dados, por `procurar-oportunidade` e, sem cadastro, `criar-oportunidade`. Com `Estrutura de exposição a perguntar` preenchida e a estrutura fora do convite, a resposta de aceite pergunta isso à organização.
 
 ### Passo 2
@@ -59,6 +61,7 @@ Preencha numa aba da sessão. Se a pessoa arrastar a aba dela para o grupo e o c
 O Google Formulários guarda o rascunho na conta: reabrir o link mostra o que já foi preenchido, inclusive o que a pessoa digitou.
 Leia a dica e a mensagem de erro de cada campo e escreva no formato que ele valida, como um telefone só com os dígitos e o DDD, sem o código do país nem pontuação.
 Confira cada campo depois de preencher e não avance com erro na tela.
+O campo ou o anexo do projeto leva o texto entregue pela produção cultural, no formato e no limite que o formulário pede, sem reescrevê-lo. Se o limite não cabe, devolva o texto à produção cultural com o limite.
 Quando a pessoa vai de carro, o veículo vem do cadastro de veículos da viagem.
 
 ### Passo 5
@@ -68,7 +71,7 @@ Item pago só se escolhe com o sim da pessoa.
 
 ### Passo 6
 
-Antes de enviar, mostre tudo o que está preenchido, de todas as páginas, sem repetir documento, e peça o sim.
+Antes de enviar, mostre tudo o que está preenchido, de todas as páginas, sem repetir documento, e peça o sim. Se a inscrição pede um projeto, mostre-o também e não envie sem ele.
 Envie só depois dele. O sim vale para esse formulário.
 Ao começar a preencher, procure a inscrição dessa oportunidade na lista e, se não existir, crie-a em andamento, ou confirmada se a taxa já foi paga, por `definir-inscricao`: a inscrição nunca depende de lembrar no fim.
 Logo depois do envio, antes de qualquer mensagem ao organizador ou tarefa, atualize essa inscrição com a hora do envio e a tela de confirmação do formulário nos comprovantes, sem perguntar, releia a página e dê o link na resposta.
@@ -122,6 +125,14 @@ Se você enviar o formulário e seguir para a mensagem ao organizador sem criar 
 2. Depois do envio, atualize a hora e o comprovante e releia a página.
 3. Dê o link da inscrição antes de tratar qualquer outro assunto.
 
+### Projeto escrito por esta habilidade
+
+Se você escrever a justificativa ou o orçamento que o edital pede, o texto não passa pela produção cultural e a marca envia um projeto sem a revisão do papel responsável.
+
+1. Confira se a tarefa do projeto está feita.
+2. Use o texto entregue, no formato e no limite do formulário.
+3. Sem o texto, deixe a pendência com o prazo e pare antes do envio.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
@@ -136,6 +147,7 @@ Li o cadastro da empresa e preenchi o nome do responsável, o apelido, a marca e
 - O cadastro não tem o contato da empresa: pare e recomende o campo.
 - A inscrição é por e-mail e não por formulário: o texto da mensagem segue `redigir-com-tom-de-voz`, e o envio, a skill de e-mail.
 - A pessoa já preencheu à mão: leia o rascunho e só registre.
+- O projeto ainda não foi entregue pela produção cultural: prepare o resto e pare antes do envio, com o prazo da pendência.
 
 ## Pegadinhas
 
