@@ -3,7 +3,7 @@ name: inscrever-na-oportunidade
 description: Preenche o cadastro ou o formulário que a organização de uma oportunidade pede para a inscrição, com os dados da empresa, no formato de cada campo, e envia só com o sim da pessoa. Usada quando a inscrição ou o cadastro de uma oportunidade está para ser feito. NÃO serve para registrar a inscrição no Notion, ler o regulamento, escrever à organização, salvo a resposta que confirma o envio, nem escrever o projeto que a inscrição pede.
 metadata:
   author: jimmyandrade
-  version: "0.4.3"
+  version: "0.4.4"
   related:
     - acompanhar-retornos-pendentes
     - analisar-regulamento-da-oportunidade
@@ -52,8 +52,9 @@ Diga em qual página do cadastro cada dado está, com o link, e o que o cadastro
 
 ### Passo 3
 
-Dado de identidade que o formulário pede, como RG e CPF, a pessoa digita. O agente não o digita, mesmo que ele esteja no cadastro.
+Dado de identidade de pessoa que o formulário pede, como RG e CPF, a pessoa digita. O agente não o digita, mesmo que ele esteja no cadastro.
 Peça à pessoa que o digite na aba e avise, e siga para o campo seguinte.
+O CNPJ é da empresa, não da pessoa: leia-o no cadastro da empresa e digite você mesmo, só com os dígitos quando o campo valida assim. Campo que aceita CPF ou CNPJ recebe o CNPJ da empresa. Campo que só aceita CPF segue a regra do CPF.
 
 ### Passo 4
 
@@ -114,6 +115,14 @@ Se você digitar RG ou CPF, a regra de segurança é quebrada, mesmo com o dado 
 1. Diga onde o dado está.
 2. Peça que a pessoa digite.
 3. Continue pelo campo seguinte.
+
+### CNPJ pedido à pessoa
+
+Se você pedir à pessoa que digite o CNPJ, ela faz um trabalho que era seu, e o formulário fica parado por um dado da empresa que o cadastro já tem.
+
+1. Leia o CNPJ no cadastro da empresa.
+2. Digite no campo, no formato que ele valida, e confira o campo antes de avançar.
+3. Peça à pessoa só o CPF e o RG.
 
 ### Item pago escolhido por conta própria
 
@@ -189,7 +198,7 @@ Depois do envio, registrei a inscrição e respondi o e-mail do convite, confirm
 
 ### o grupo da feira mandou o formulário de cadastro de expositores
 
-Li o cadastro da empresa e preenchi o nome do responsável, o apelido, a marca e o WhatsApp da empresa, em dígitos. O RG e o CPF a pessoa digitou. O veículo veio do cadastro. Respondi que não precisava de mesa, balcão nem cadeira extra, porque a empresa leva a própria. Mostrei tudo e esperei o sim antes de enviar.
+Li o cadastro da empresa e preenchi o nome do responsável, o apelido, a marca e o WhatsApp da empresa, em dígitos. O RG e o CPF a pessoa digitou, e o CNPJ da empresa eu li no cadastro e digitei. O veículo veio do cadastro. Respondi que não precisava de mesa, balcão nem cadeira extra, porque a empresa leva a própria. Mostrei tudo e esperei o sim antes de enviar.
 
 ### o formulário da feira pediu os produtos e a resposta enviada só descrevia a marca
 
@@ -197,6 +206,7 @@ Li o catálogo de produtos e corrigi o campo com as famílias das peças ativas,
 
 ## Casos-limite
 
+- O campo pede CPF ou CNPJ: digite o CNPJ da empresa. Se só aceita CPF, a pessoa digita.
 - A resposta enviada saiu errada e o link de edição se perdeu: com o sim da pessoa, envie de novo, atualize a mesma inscrição com a hora e o comprovante novos, e diga que a primeira resposta continua com a organização.
 - A conversa tem mais de uma inscrição: a resposta lista todas, com link, status e comprovante, e o que ficou de fora.
 - O formulário pede os produtos: liste as famílias, ou os produtos específicos, do catálogo. Descrição da marca não basta.
@@ -214,6 +224,7 @@ Li o catálogo de produtos e corrigi o campo com as famílias das peças ativas,
 - O campo de telefone parece aceitar qualquer formato legível. O formulário pode validar só os dígitos com o DDD.
 - A aba arrastada pela pessoa parece perdida quando o grupo da sessão some do contexto. O preenchimento fica salvo como rascunho no formulário.
 - O formulário pede RG e CPF do responsável. O agente não os digita.
+- O CNPJ parece dado sensível como o CPF. É da empresa: o agente o lê no cadastro e o digita.
 - O campo dos produtos parece aceitar a descrição da marca. Ele pede o que a marca vende, em famílias ou peças.
 - O print da confirmação parece trabalho da pessoa, porque ela vê a tela. Quem tira e anexa é você, na aba, no mesmo instante.
 - O link do formulário parece o caminho para corrigir a resposta. Depois do envio ele abre em branco. A correção é o link de edição da confirmação.
