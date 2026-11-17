@@ -4,9 +4,11 @@ description: Pesquisa o que comprar, cruza com despesas, estoque e bens que já 
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.6.2"
+  version: "0.7.0"
   related:
+    - anexar-arquivo-no-whatsapp
     - conversar-no-whatsapp
+    - definir-negociacao
     - definir-ativo-imobilizado
     - definir-empresa
     - definir-requisito-de-compra
@@ -108,9 +110,9 @@ Antes de recomendar o contato com a empresa, veja se já houve conversa com ela,
 Quando a compra é um serviço de terceiro e nenhuma empresa achada atende, não responda que não há opção. Siga para a próxima: a da lista de empresas, a que um contato indicou, a da web. Cadastre cada uma, veja se há conversa e, sem conversa, prepare o primeiro contato pelo WhatsApp, com o texto pronto e o sim da pessoa. Só pare quando uma empresa confirmar que atende ou a pessoa mandar parar.
 O primeiro contato é por mensagem, pelo WhatsApp, pelo e-mail ou pelo formulário da empresa, e sai em qualquer hora: a loja fechada não adia a mensagem. Ligação é o último recurso, só quando a empresa não tem canal de texto. A empresa que só tem telefone fixo no site, sem WhatsApp, recebe o primeiro contato pelo e-mail ou pelo formulário dela, quando existir, e não fica sem contato nem espera a ligação. Prepare a mensagem para cada empresa de uma vez e peça o sim da pessoa a todas.
 Antes do primeiro envio a cada empresa, ela precisa estar cadastrada, com o rótulo no WhatsApp e o link da página dela na nota do contato. A pressa não adia esses três.
-A primeira mensagem explica o que é o item e para que a pessoa o usa, com o link do anúncio ou da compra quando houver, e já traz o que a empresa vai perguntar: o material, o formato, a quantidade e o prazo. Uma empresa que não conhece o item não consegue dizer se atende: explique antes de pedir indicação. Antes de enviar, confira nos registros o que já se sabe de cada um e pergunte à pessoa só o que falta, como a quantidade. A resposta da empresa não deve abrir uma segunda rodada de perguntas que a primeira mensagem já podia responder.
+A primeira mensagem explica o que é o item e para que a pessoa o usa, com o link do anúncio ou da compra quando houver, e já traz o que a empresa vai perguntar: o material, o formato, a medida, a quantidade e o prazo. Uma empresa que não conhece o item não consegue dizer se atende: explique antes de pedir indicação. Antes de enviar, confira nos registros o que já se sabe de cada um e pergunte à pessoa só o que falta, como a quantidade. A resposta da empresa não deve abrir uma segunda rodada de perguntas que a primeira mensagem já podia responder.
 
-O que a mensagem traz vem da especificação fechada no Passo 3: a empresa que pede um dado que ela já cobre o recebe do requisito, e a que pede um dado que ela não cobre leva a dúvida de volta ao Passo 3, com a pergunta à pessoa.
+O que a mensagem traz vem da especificação fechada no Passo 3 e do cadastro do item que o Passo 2 leu, como a medida de um bem que já temos: a empresa que pede um dado que um dos dois cobre o recebe dele, sem perguntar à pessoa. A que pede um dado que nenhum cobre leva a dúvida de volta ao Passo 3, com a pergunta à pessoa. A foto do item segue `anexar-arquivo-no-whatsapp`, com o sim da pessoa.
 
 Quando a compra é por quantidade, a empresa tem um pedido mínimo (MOQ), e a primeira mensagem o pergunta a cada uma. O mínimo que a empresa responde vai para as notas da página dela, com a data. O mínimo de uma empresa não vale para outra e não decide a quantidade da pessoa. Quando o mínimo da empresa passa da quantidade necessária, diga à pessoa o excesso que sobraria.
 
@@ -121,6 +123,7 @@ A mensagem diz à empresa só o que ela precisa para orçar e a disponibilidade 
 Uma mensagem já enviada com dado errado ou a mais se corrige editando essa mensagem, não mandando outra. Se a edição não é mais possível, não envie nada e diga à pessoa quais empresas ficaram assim.
 
 Quando a empresa responde, leia a resposta e responda com os fatos que já se sabe, sem pedir à pessoa o que a conversa já tem. Delegue a leitura e a resposta à habilidade de conversa. Só leve à pessoa a decisão que é dela: aceitar preço ou orçamento, pagar, combinar data e hora de retirada ou entrega, e passar dado pessoal ou fiscal. Nesses casos, diga as palavras da empresa e a opção que você recomenda.
+A recusa de uma empresa se registra como `definir-negociacao` manda, no mesmo turno, e o Passo 5 a trata como descartada, com o motivo.
 Na resposta, leve o link da página de cada empresa cadastrada.
 
 ### Passo 7

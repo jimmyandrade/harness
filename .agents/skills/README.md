@@ -506,6 +506,7 @@ flowchart LR
   definir_negociacao --> procurar_email
   definir_negociacao --> procurar_oportunidade
   definir_negociacao --> redigir_com_tom_de_voz
+  definir_negociacao --> rotular_item
   definir_negociacao --> sincronizar_cronograma
   definir_obra_musical --> definir_fonograma
   definir_obra_musical --> procurar_banco_de_dados
@@ -799,9 +800,11 @@ flowchart LR
   pedir_revisao_de_pr_no_slack --> registrar_resultados_da_validacao_na_tarefa
   perfilar_tom_de_voz --> definir_vocabulario
   perfilar_tom_de_voz --> redigir_com_tom_de_voz
+  pesquisar_compra --> anexar_arquivo_no_whatsapp
   pesquisar_compra --> conversar_no_whatsapp
   pesquisar_compra --> definir_ativo_imobilizado
   pesquisar_compra --> definir_empresa
+  pesquisar_compra --> definir_negociacao
   pesquisar_compra --> definir_requisito_de_compra
   pesquisar_compra --> definir_viagem
   pesquisar_compra --> gerenciar_estoque
