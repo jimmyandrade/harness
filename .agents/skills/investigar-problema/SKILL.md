@@ -1,14 +1,18 @@
 ---
 name: investigar-problema
-description: Conduz a investigação de um problema relatado, como um acesso bloqueado, um erro ou um dado errado, com tarefa, fatos, hipóteses e retorno a quem relatou, e oferece artigo e post-mortem. Use essa habilidade sempre que alguém relatar um problema, como um preço errado, antes de oferecer ou começar a investigar, mesmo sem dizer investigar. NÃO use para escrever o artigo, o post-mortem nem corrigir código.
+description: Conduz a investigação de um problema, como um acesso bloqueado, um cadastro que falha em portal alheio ou um erro, com tarefa, fatos e hipóteses, e oferece artigo e post-mortem. Use essa habilidade sempre que alguém relatar um problema, como um preço errado, antes de oferecer ou começar a investigar, mesmo sem dizer investigar. NÃO use para escrever o artigo, o post-mortem nem corrigir código.
 metadata:
   author: jimmyandrade
-  version: "0.2.2"
+  version: "0.3.3"
   related:
     - procurar-tarefa
     - definir-tarefa
     - definir-artigo-da-base-de-conhecimento
     - definir-post-mortem
+    - definir-pessoa
+    - redigir-com-tom-de-voz
+    - conversar-no-whatsapp
+    - enviar-email
     - evoluir-habilidade
 ---
 
@@ -23,6 +27,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Registros ao fim da investigação":
   - "artigo da base de conhecimento"
   - "post-mortem"
+# `Destino do dossiê` é o nome do banco ou do espaço, no sistema de conhecimento conectado, onde o dossiê de um problema em portal de outra empresa fica. Vazio, o dossiê vai na tarefa da investigação.
+"Destino do dossiê": ""
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -45,6 +51,15 @@ Reúna os fatos antes de supor: a mensagem e os prints de quem relatou, o que a 
 Leia a imagem que a pessoa mandou. Ela costuma trazer o aviso exato.
 Corte os dados por página, origem de tráfego, dispositivo e versão antes de dizer que o volume é estável: a média do site inteiro esconde um aumento numa página só.
 Separe o que foi visto do que se supõe.
+
+Quando o problema é um cadastro ou um acesso que falha no portal de outra empresa, refaça o fluxo no navegador antes de cobrar o atendente.
+Capture um print de cada etapa e as requisições de rede, com o erro exato da tela e o da resposta.
+O nome que o cadastro leva e o que a conversa usa seguem `definir-pessoa`.
+
+Confira o e-mail, porque o portal costuma mandar mensagem mesmo com erro na tela.
+Abra o link de validação, que pode cair na página inicial sem confirmar nada, e tente a recuperação de senha, que muitas vezes destrava a conta criada pela metade.
+
+Pare na senha. Quem a digita é a pessoa, ou o gerenciador de senhas a preenche. Você nunca a digita nem a grava, e ela não entra na tarefa, no dossiê nem na conversa.
 Procure uma investigação que outro agente ou ferramenta já fez sobre o mesmo problema, como a de um agente do sistema de monitoramento na thread do alerta ou numa mensagem logo abaixo, e leia a causa, as evidências e os próximos passos dela.
 A investigação paralela pode ainda estar rodando ou ter acabado depois do seu primeiro retorno. Releia a thread e o canal antes de encerrar.
 
@@ -63,6 +78,13 @@ Confira na fonte o que só a outra afirma antes de repetir como fato.
 ### Passo 4
 
 Grave na tarefa o que achou: a causa, a evidência de cada conclusão, o que foi feito e o próximo passo com quem o faz.
+Quando a causa está no portal de outra empresa, reúna tudo num dossiê, em `Destino do dossiê`, antes de cobrar o atendente: a linha do tempo com dia e hora, o print de cada etapa, as requisições, os e-mails que chegaram e o que cada tentativa devolveu.
+O dossiê é o que o atendente recebe, para não ter de pedir de novo.
+
+A mensagem ao atendente é um feedback, não uma cobrança: diz o que acontece, com os fatos e os prints, conta o que já foi tentado e pede a melhoria, como a correção do erro ou do link de validação.
+Ela não leva tom de reclamação, de culpa nem prazo ameaçador.
+O texto passa por `redigir-com-tom-de-voz`, e o canal segue `conversar-no-whatsapp` ou `enviar-email`.
+
 Dê o retorno a quem relatou, com a causa em palavras simples, o que muda para ela e o link da tarefa.
 Uma tarefa para corrigir o que achou só é oferecida depois que a causa está entendida e conferida. Antes disso, siga investigando.
 
@@ -92,6 +114,14 @@ Se você abrir só o navegador interno, cair no login e pedir à pessoa que entr
 1. Tente o conector da fonte.
 2. Sem ele, tente cada navegador disponível, o interno do aplicativo e o da pessoa por extensão.
 3. Só peça ajuda depois que todos falharam, e diga o que tentou.
+
+### Cobrança sem dossiê
+
+Se você cobrar o atendente do portal só com o relato da pessoa, ele não acha o cadastro e a conversa recomeça a cada contato.
+
+1. Refaça o fluxo, capture os prints e as requisições e confira o e-mail.
+2. Grave o dossiê em `Destino do dossiê`.
+3. Mande o feedback com os fatos e os prints, e peça a melhoria sem tom de cobrança.
 
 ### Hipótese tratada como fato
 
@@ -149,6 +179,7 @@ Não havia tarefa: criei e respondi a quem relatou com o link. O print mostrava 
 - Ler uma tela parece seguro em qualquer ferramenta. Uma tela de configuração pode salvar ao fechar: abra, leia e cancele.
 - A thread lida no começo parece completa. Uma investigação paralela pode postar a conclusão minutos depois: releia antes de encerrar.
 - A tela de login do navegador interno parece provar que a fonte exige a pessoa. O navegador dela, por extensão, pode já estar logado e abrir o relato na hora.
+- O erro na tela do portal parece provar que o cadastro não foi criado. A conta pode existir, e o e-mail e a recuperação de senha mostram isso.
 - Uma investigação curta parece não pedir registro. A pergunta pelos registros vale para toda investigação.
 
 ## Scripts disponíveis

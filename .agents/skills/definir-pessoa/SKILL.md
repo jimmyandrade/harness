@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.18.0"
+  version: "0.19.1"
   related:
     - definir-empresa
     - definir-grafia
@@ -108,6 +108,11 @@ Uma transcrição errada do nome, como a de uma reunião transcrita por voz, que
 O que quem usa a habilidade diz sobre o papel de alguém numa empresa, como quem cuida dos recebimentos e quem só é informado, vem direto dela e entra na mesma rodada, sem perguntar. Na pessoa, vai no campo de papel, ou nas observações quando a lista não tem esse campo. Na empresa, a pessoa entra na lista de pessoas responsáveis, e o papel de cada uma vai nas notas da empresa e nas listas do negócio que o citam, como a negociação e o grupo do evento. Depois de gravar, leia as páginas de volta e diga o que gravou e o que não coube.
 Um apelido ou uma grafia ambígua que a pessoa decide inferir, como "vamos inferir que Bia é a Beatriz", entra no registro de quem foi inferida, na lista das transcrições erradas do nome, com o estado `inferido`, a data, quem inferiu, a frase da transcrição e o que descartou as outras hipóteses.
 A entrada não vira confirmada por ter sido pedida: o estado `confirmado` só vale quando alguém que sabe confirma. Uma entrada sem estado conta como confirmada. Ao atualizar um registro, mude o campo pontualmente: nunca regrave o registro inteiro descartando campos já confirmados ou o conteúdo de `extensions`. Todo texto que nomeia a pessoa usa como ela é chamada, e não o primeiro nome do nome completo quando os dois divergem.
+
+Nome civil e nome social são campos separados, e o nome civil só se grava quando a pessoa ou uma fonte o informa.
+Formulário que exige o documento oficial, como contrato, nota e documento fiscal, leva o nome civil. Cadastro que aceita nome social, como o de uma hospedagem, leva o nome social.
+Nenhuma mensagem, e-mail ou saudação trata a pessoa pelo nome civil: ela é chamada pelo nome social.
+Leia os dois no registro, nunca os escreva na habilidade, e sem o nome civil pare e pergunte antes de preencher o formulário.
 
 ### Passo 4
 

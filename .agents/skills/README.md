@@ -617,6 +617,7 @@ flowchart LR
   dividir_mensagem --> conversar_no_whatsapp
   entregar_rascunho_de_mensagem --> enviar_mensagem_no_slack
   enviar_email --> acompanhar_retornos_pendentes
+  enviar_email --> conversar_no_whatsapp
   enviar_email --> definir_pessoa
   enviar_email --> definir_vocabulario
   enviar_email --> lancar_despesa_da_empresa
@@ -709,10 +710,14 @@ flowchart LR
   inscrever_na_oportunidade --> procurar_inscricao
   inscrever_na_oportunidade --> procurar_oportunidade
   inscrever_na_oportunidade --> redigir_com_tom_de_voz
+  investigar_problema --> conversar_no_whatsapp
   investigar_problema --> definir_artigo_da_base_de_conhecimento
+  investigar_problema --> definir_pessoa
   investigar_problema --> definir_post_mortem
   investigar_problema --> definir_tarefa
+  investigar_problema --> enviar_email
   investigar_problema --> procurar_tarefa
+  investigar_problema --> redigir_com_tom_de_voz
   lancar_despesa_da_empresa --> definir_ativo_imobilizado
   lancar_despesa_da_empresa --> definir_empresa
   lancar_despesa_da_empresa --> definir_grafia
