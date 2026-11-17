@@ -349,14 +349,19 @@ flowchart LR
   criar_habilidade --> descrever_habilidade_ou_schema
   criar_habilidade --> medir_habilidade
   criar_habilidade --> testar_habilidade
+  criar_oportunidade --> conversar_no_whatsapp
   criar_oportunidade --> definir_cronograma
   criar_oportunidade --> definir_empresa
   criar_oportunidade --> definir_grupo_de_oportunidades
   criar_oportunidade --> definir_inscricao
   criar_oportunidade --> definir_local_fisico
   criar_oportunidade --> definir_localidade_geografica
+  criar_oportunidade --> enviar_email
   criar_oportunidade --> organizar_emails
+  criar_oportunidade --> procurar_inscricao
   criar_oportunidade --> procurar_oportunidade
+  criar_oportunidade --> reconhecer_imagem
+  criar_oportunidade --> redigir_com_tom_de_voz
   criar_oportunidade --> revisar_oportunidade
   criar_oportunidade --> triar_conversas
   criar_ponto_de_contato --> criar_oportunidade
