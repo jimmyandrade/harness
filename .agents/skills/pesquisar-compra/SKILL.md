@@ -4,7 +4,7 @@ description: Pesquisa o que comprar, cruza com despesas, estoque e bens que já 
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.6.1"
+  version: "0.6.2"
   related:
     - conversar-no-whatsapp
     - definir-ativo-imobilizado
@@ -39,6 +39,8 @@ Não pare numa pergunta que a pesquisa responde. Comece e leve a dúvida junto c
 Quando o pedido cita um lugar que pode ter mais de um alcance, como um nome que é ao mesmo tempo o da cidade e o do estado, confirme com a pessoa o alcance antes de pesquisar e antes de cadastrar. Diga o que entendeu e espere a resposta. Esta é a pergunta que a pesquisa não responde, então ela vem antes das primeiras opções.
 
 Para uma compra específica, o padrão é só a cidade nomeada, e cidade não é região metropolitana nem estado. O mesmo vale para o lugar onde a pessoa está: se ela está numa cidade, é essa cidade. Só quando a pesquisa não achar nada na cidade, sugira por conta própria ampliar para a região metropolitana, dizendo qual serviço existe e em que cidade vizinha, e espere o sim.
+
+Quando o pedido de um serviço ou de uma loja local não cita o lugar, resolva-o antes da primeira busca: leia a viagem ativa ou a próxima, seguindo `definir-viagem`, e, sem viagem, a sede do negócio nos dados do projeto. Diga a cidade que usou e pesquise só nela. Pergunte à pessoa só quando os dados não responderem. Uma busca sem cidade traz empresas de qualquer lugar: não as apresente como opção, nem peça a cidade depois de listá-las.
 
 ### Passo 2
 
