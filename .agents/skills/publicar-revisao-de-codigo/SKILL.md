@@ -7,7 +7,7 @@ metadata:
   aliases:
     - post-code-review
   related:
-    - definir-pessoa
+    - definir-idioma-da-conversa
     - enviar-mensagem-no-slack
     - escrever-link
     - evoluir-habilidade
@@ -101,7 +101,7 @@ Ajuste o esforço ao risco do PR: baixo para documentação e renomeação, alto
 Chame `priorizar-itens` com os achados e junte o resultado com a ficha:
 
 - Um achado que coincide com um comentário já existente e ainda aberto vira resposta na thread dele, com o complemento ou um reforço curto. Não abre comentário novo, e não descarta o achado em silêncio. Em thread que o autor encerrou, ou já resolvida, não responda.
-- Antes de perguntar ao autor, verifique sozinho o que der, como manda `references/verificar-antes-de-perguntar.md`.
+- Antes de perguntar ao autor, verifique sozinho o que der: o comportamento no ambiente do PR, o que a dependência ou outro serviço devolve, o dado de um monitor. O comentário traz o que foi rodado e o que apareceu, e pergunta só o que está fora do alcance ou é decisão do autor.
 - Um achado fraco, sem cenário concreto de falha, vira pergunta que espera resposta, tratada como importante. Nunca como "não bloqueia".
 - Aplique as `Lentes de revisão`. Com `Nível de detalhe` em `enxuta`, publique só Deve ter e Deveria ter, mais o Poderia ter que o `Limite de Poderia ter publicado` permitir. Quando o `Critério de revisão completa` se cumpre, publique tudo.
 - Aplique a `Prioridade por tema`: o achado de um tema listado ganha a categoria dada. Um achado de acessibilidade, com o valor padrão, é Deve ter e leva sugestão de código.
@@ -112,17 +112,7 @@ Chame `priorizar-itens` com os achados e junte o resultado com a ficha:
 
 ### Passo 7
 
-Escolha o idioma de quem recebe a revisão:
-
-1. Leia a preferência dela no registro da pessoa, com `definir-pessoa`: um idioma só, ou um idioma com a tradução recolhível em outro.
-2. Sem preferência, levante o que ela escreveu revisando PRs, nos de outras pessoas e nos seus, ignorando código, crases e links. Use o idioma que predomina.
-3. Sem histórico, use `Idioma da revisão sem preferência conhecida`.
-
-Com tradução recolhível, o texto principal vem no primeiro idioma e a tradução logo abaixo, dentro de um bloco recolhido, com a mesma voz. Código, nomes de arquivo e identificadores ficam iguais.
-
-`Idioma pelo histórico` diz como decidir pelo que a pessoa já escreveu, e uma regra de limiar, como "se o português é metade ou mais, o idioma é inglês com tradução recolhida em português; abaixo disso, só inglês, de forma provisória até ela se posicionar", vale no lugar do idioma que predomina. O histórico sozinho nunca decide que a revisão sai no idioma da própria pessoa com tradução no outro: isso só vem de uma preferência dita por ela. Nunca sobrescreva uma preferência que a pessoa disse ou que já se estabeleceu. Com `Gravar o idioma levantado` em `sim`, grave no registro da pessoa o idioma, que veio do histórico, a proporção e uma amostra, e nunca diga a proporção em texto publicado.
-
-Com `Frase sobre o idioma` em `sim`, diga numa frase, uma vez por rodada, que você escreveu naquele idioma pensando na pessoa. Nunca diga de onde veio a preferência nem que foi combinada em privado.
+Siga `definir-idioma-da-conversa` para a pessoa que recebe a revisão, passando `Idioma da revisão sem preferência conhecida`, `Idioma pelo histórico`, `Gravar o idioma levantado` e `Frase sobre o idioma`, com as revisões que ela publicou como histórico, nos PRs de outras pessoas e nos seus.
 
 ### Passo 8
 
