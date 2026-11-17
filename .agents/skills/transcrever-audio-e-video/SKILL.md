@@ -3,7 +3,7 @@ name: transcrever-audio-e-video
 description: Transcreve um áudio ou vídeo local com o SpeechAnalyzer da Apple ou o Whisper local, detecta o que está instalado e só propõe instalar com o sim da pessoa. Usada quando a pessoa manda uma gravação para virar texto, mesmo sem dizer Whisper. NÃO serve para reunião que já tem transcrição, identificar quem fala nem enviar o arquivo a um serviço externo.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.5.0"
   related:
     - definir-registro-de-reuniao
     - evoluir-habilidade
@@ -77,6 +77,7 @@ Com mais de uma gravação, rode o script de lote: ele é retomável, roda uma i
 
 Leia o texto antes de relatar. Entregue o caminho do `.txt`, que é o texto corrido, e do `.srt`, que traz os tempos. O `SpeechTranscriber` só imprime o texto: grave-o num `.txt` na `Pasta de saída` e diga que não há `.srt`.
 Procure no texto uma frase que se repete e um salto de assunto: o `Whisper` pode cair num laço e perder o trecho que veio antes dele. Achado um, rode o outro motor da `Ordem dos motores` só nesse áudio e compare, ou diga à pessoa que o trecho não é confiável.
+Para comparar dois ou mais textos do mesmo áudio, como num teste de motores, rode `scripts/compare_transcripts.py` em vez de reescrever a conta: ele mostra palavras, vírgulas, o quanto cada texto tem do outro e os trechos que diferem.
 Diga três coisas: o texto não diz quem fala, nomes próprios e termos do time podem sair errados, e um trecho confuso fica sem uso em ata ou registro até a pessoa ouvir.
 Um termo que errou e volta a aparecer é candidato a `Termos do prompt`: sugira, sem gravar.
 Apague o wav intermediário. Se a transcrição vira registro de reunião, siga `definir-registro-de-reuniao`.
@@ -175,6 +176,7 @@ Rodei o `SpeechTranscriber`, sem instalar nada, e avisei que o primeiro uso do i
 - `ffmpeg -nostdin -loglevel error -y -i "<arquivo>" -vn -ar 16000 -ac 1 "<Pasta de saída>/audio.wav"` extrai o áudio.
 - `whisper-cli -m "<Pasta do modelo>/<Modelo>" -l <Idioma da transcrição> -ml 0 --prompt "<Termos do prompt>" -otxt -osrt -of "<Pasta de saída>/transcricao" -f "<Pasta de saída>/audio.wav"` transcreve.
 
+- `python3 -I scripts/compare_transcripts.py "<texto de referência>" "<outro texto>" ...` compara os textos de motores diferentes. O primeiro é a referência da comparação, não a verdade. `--min-words <n>` muda o tamanho mínimo de um trecho que difere.
 - `python3 -I scripts/transcribe_batch.py --queue "<arquivo com um caminho por linha>" --out "<Pasta de saída>"` transcreve várias gravações. `--state "<arquivo>"` grava o progresso em JSON e `--dry-run` só conta o que falta.
 
 1. Detecte o motor, instale só com o sim, extraia o áudio e transcreva, nessa ordem. Com várias gravações, use o script de lote no lugar da extração e da transcrição.
