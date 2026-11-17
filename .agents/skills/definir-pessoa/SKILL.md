@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.19.0"
+  version: "0.19.1"
   related:
     - definir-empresa
     - definir-grafia
@@ -110,8 +110,8 @@ Um apelido ou uma grafia ambígua que a pessoa decide inferir, como "vamos infer
 A entrada não vira confirmada por ter sido pedida: o estado `confirmado` só vale quando alguém que sabe confirma. Uma entrada sem estado conta como confirmada. Ao atualizar um registro, mude o campo pontualmente: nunca regrave o registro inteiro descartando campos já confirmados ou o conteúdo de `extensions`. Todo texto que nomeia a pessoa usa como ela é chamada, e não o primeiro nome do nome completo quando os dois divergem.
 
 Nome civil e nome social são campos separados, e o nome civil só se grava quando a pessoa ou uma fonte o informa.
-Formulário oficial, como cadastro em portal, contrato, nota e documento fiscal, leva o nome civil, igual ao documento oficial.
-Mensagem, e-mail e saudação usam o nome social, como a pessoa é chamada.
+Formulário que exige o documento oficial, como contrato, nota e documento fiscal, leva o nome civil. Cadastro que aceita nome social, como o de uma hospedagem, leva o nome social.
+Nenhuma mensagem, e-mail ou saudação trata a pessoa pelo nome civil: ela é chamada pelo nome social.
 Leia os dois no registro, nunca os escreva na habilidade, e sem o nome civil pare e pergunte antes de preencher o formulário.
 
 ### Passo 4
