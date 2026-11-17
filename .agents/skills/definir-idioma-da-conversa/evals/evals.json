@@ -1,0 +1,17 @@
+{
+  "skill_name": "definir-idioma-da-conversa",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Vou revisar o PR de uma colega. O registro dela não diz em que idioma ela prefere receber a revisão. Em que idioma escrevo?",
+      "expected_output": "Ler o registro, ver que não há preferência, levantar o que ela escreveu revisando PRs sem contar código, crases e links, e decidir por Idioma pelo histórico. Devolver o idioma principal, sem tradução recolhível, e se leva a frase sobre o idioma. Não gravar nada no registro com Gravar o idioma levantado em não.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Vou responder ao comentário de um colega. O registro dele diz português com a tradução recolhível em inglês.",
+      "expected_output": "Usar a preferência do registro sem olhar o histórico. Devolver português, a tradução em inglês num bloco recolhido e a frase sobre o idioma, sem dizer de onde veio a preferência.",
+      "files": []
+    }
+  ]
+}
