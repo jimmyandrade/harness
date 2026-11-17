@@ -3,7 +3,7 @@ name: enviar-email
 description: Monta e envia um e-mail em nome de uma pessoa, com a assinatura certa, o destinatário principal e as cópias, o anexo vindo do Notion e o envio só com o sim. Usada quando uma pessoa contata uma organização por e-mail, inclusive com comprovante. Não serve para escrever no tom da marca, achar um e-mail nem triar a caixa.
 metadata:
   author: jimmyandrade
-  version: "0.6.2"
+  version: "0.6.3"
   related:
     - conversar-no-whatsapp
     - definir-pessoa
@@ -15,6 +15,7 @@ metadata:
     - organizar-emails
     - procurar-email
     - redigir-com-tom-de-voz
+    - rotular-item
 ---
 
 # Enviar e-mail
@@ -106,7 +107,7 @@ O sim vale para esse texto e esses destinatários.
 Toda vez que perguntar se pode enviar, repita o link do rascunho no texto da resposta, antes da pergunta.
 O link da primeira vez sobe na conversa e a pessoa não o acha na hora de dar o sim.
 
-Depois do envio, leia a conversa para confirmar que saiu e etiquete como `organizar-emails` manda.
+Rotule a conversa assim que criar o rascunho, por `rotular-item`, com o estado de ação esperada e o contexto: o rótulo da conversa vale para a mensagem que a pessoa enviar depois, mesmo pelo Gmail, quando você não está presente. Depois do envio, leia a conversa para confirmar que saiu e confira os rótulos, como `organizar-emails` manda.
 
 Uma mensagem que espera resposta entra no acompanhamento no mesmo turno, sem perguntar, por `acompanhar-retornos-pendentes`.
 Não crie rotina: etiquete a conversa como aguardando retorno e acrescente uma linha ao registro das pendências, com a sessão que espera.
@@ -146,6 +147,14 @@ Se você anexar um comprovante que só está no chat, a despesa fica sem prova e
 2. Pegue o arquivo de lá.
 3. Anexe e confira na tela.
 
+### E-mail enviado pela pessoa sem rótulo
+
+Se você rotular só depois do envio e a pessoa enviar o rascunho pelo Gmail, a conversa fica sem estado e sem contexto, e ninguém vê que a organização tem a vez de responder.
+
+1. Rotule a conversa do rascunho na hora em que criá-lo, por `rotular-item`.
+2. Aplique o estado de ação esperada e o contexto, e crie o rótulo que faltar.
+3. Depois do envio, leia a conversa e confira os rótulos.
+
 ### Pedido de envio sem o link do rascunho
 
 Se você perguntar se pode enviar sem repetir o link do rascunho, o link da primeira vez já subiu na conversa e a pessoa não o acha para conferir.
@@ -184,6 +193,10 @@ Os outros dois endereços da associação, de domínio confirmado, e o endereço
 O rascunho foi criado sem anexo e o comprovante foi anexado pelo navegador.
 Mostrei tudo e esperei o sim.
 
+### o comprovante vai à organização por um rascunho que a pessoa envia pelo Gmail
+
+Criei o rascunho com o comprovante e rotulei a conversa na hora, com o estado de ação esperada e os contextos de financeiro e da oportunidade, criando o rótulo da oportunidade que faltava. Quando a pessoa enviou, a mensagem já saiu com os rótulos, e eu os conferi na conversa.
+
 ## Casos-limite
 
 - A empresa é quem fala, e não uma pessoa: assine com o nome da empresa e fale em primeira pessoa do plural.
@@ -193,6 +206,7 @@ Mostrei tudo e esperei o sim.
 
 ## Pegadinhas
 
+- Rotular depois do envio parece o momento certo. Se a pessoa envia o rascunho sem você, o envio passa sem rótulo: a conversa do rascunho já leva os rótulos que valem para a mensagem enviada.
 - O aviso do e-mail sobre destinatário de fora da organização é esperado quando a pessoa escreve a uma empresa. Ele não indica problema.
 - Um endereço de e-mail que escreveu em nome da organização pode ser só de envio automático e não receber resposta. Verifique antes de pô-lo em cópia.
 - Um endereço diferente do cadastro parece só um detalhe. A organização pode desconfiar dele e travar o atendimento, então o texto explica o motivo e pergunta se ela pode responder ali.
