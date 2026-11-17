@@ -16,6 +16,14 @@ Funcionalidade: Inscrever na oportunidade
       Quando a habilidade chega a esse campo
       Então ela diz onde o dado está e pede que a pessoa o digite
 
+  Regra: o CNPJ da empresa o agente digita
+
+    Exemplo: o formulário pede CPF ou CNPJ
+      Dado que o CNPJ está no cadastro da empresa
+      Quando a habilidade chega a esse campo
+      Então ela lê o CNPJ no cadastro da empresa e o digita, no formato que o campo valida
+      Mas não pede à pessoa que o digite
+
   Regra: o projeto escrito vem da produção cultural
 
     Exemplo: o edital pede o projeto e o texto ainda não foi entregue
