@@ -886,6 +886,7 @@ flowchart LR
   prospectar_oportunidades --> definir_viagem
   prospectar_oportunidades --> inscrever_na_oportunidade
   prospectar_oportunidades --> procurar_oportunidade
+  publicar_ata_de_reuniao --> definir_agenda
   publicar_ata_de_reuniao --> definir_pessoa
   publicar_ata_de_reuniao --> definir_registro_de_reuniao
   publicar_produto_fisico_na_loja_virtual --> gerenciar_estoque
