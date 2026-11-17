@@ -3,7 +3,7 @@ name: rotular-item
 description: Aplica, troca e tira rótulos, etiquetas e tags de organização num item, como pull request, issue, e-mail, conversa ou página, pela escolha da habilidade de origem, sem duplicar rótulo nem mexer no de uma ferramenta. Usada quando outra habilidade rotula um item, lê ou responde uma conversa, ou o estado do item muda. Não serve para decidir o assunto do item, hashtags nem categorias de conteúdo.
 metadata:
   author: jimmyandrade
-  version: "0.9.0"
+  version: "0.9.1"
   related:
     - criar-pull-request
     - definir-filtro-de-email
@@ -60,6 +60,8 @@ A concluída só entra depois de ler o corpo de cada mensagem da conversa e conf
 O contexto é a escolha da habilidade de origem, de preferência entre `Etiquetas de contexto`.
 Quando nenhum deles serve, ou o rótulo que ela passou não existe, a escolha é o assunto da conversa pelo esquema BASB de `organizar-emails`, que diz o lugar do rótulo.
 O rótulo que falta entra pelo Passo 3: é criado e aplicado na mesma rodada, sem perguntar e sem deixar a conversa só com o estado.
+
+Um contexto de `Etiquetas de contexto` que serve ao assunto e ainda não existe no sistema entra do mesmo jeito: é criado e aplicado na mesma rodada, sem perguntar se a pessoa quer. Se o caminho dele não começa por uma raiz do esquema BASB de `organizar-emails`, crie-o sob a raiz que serve ao assunto, como `Recursos` para o que é referência, com o mesmo último nível, e a resposta propõe corrigir o parâmetro.
 A resposta diz o rótulo criado e propõe acrescentá-lo a `Etiquetas de contexto`.
 
 Uma conversa que já tem os rótulos certos fica como está. Trocar o estado tira só o rótulo de estado anterior: os rótulos de contexto e os de outra estrutura, como a BASB do e-mail, ficam. Sem `Etiquetas de status` nas instruções do projeto, ou sem uma ferramenta que rotule o canal na sessão, diga quais conversas ficaram sem rótulo e por quê.
@@ -154,6 +156,14 @@ Se você aplicar só o estado quando outra sessão, ou a pessoa, pede "rotule co
 2. Aplique os dois na mesma rodada e leia a conversa de volta.
 3. Diga na resposta os dois rótulos que ficaram. Sem contexto que sirva, siga o problema abaixo.
 
+### Contexto do parâmetro que falta no sistema
+
+Se você deixar de aplicar um contexto de `Etiquetas de contexto` porque o rótulo ainda não existe no sistema, e oferecer criá-lo depois, a conversa fica sem ele e a pessoa precisa pedir.
+
+1. Crie o rótulo na mesma rodada, sem perguntar.
+2. Mantenha o esquema BASB: um caminho fora das raízes entra sob a raiz que serve ao assunto, com o mesmo último nível.
+3. Aplique o rótulo e proponha corrigir o parâmetro.
+
 ### Contexto que falta trava a conversa
 
 Se você aplicar só o estado porque nenhum contexto de `Etiquetas de contexto` serve, a conversa fica fora da estrutura e a pessoa precisa pedir o rótulo.
@@ -215,6 +225,7 @@ Tirei `blocked` do PR e mantive `enhancement`. A leitura de volta mostrou só `e
 
 ## Pegadinhas
 
+- Um contexto cadastrado nas instruções do projeto parece existir no sistema. Confira os rótulos: se ele falta, crie e aplique na mesma rodada, sem oferecer, e sob uma raiz BASB.
 - `Etiquetas de contexto` curta parece o limite dos assuntos. Ela só lista o que o projeto já escolheu: um assunto novo vira rótulo novo.
 - Um rótulo com outra grafia parece outro rótulo. Se o sentido é o mesmo, ele serve.
 - `Criar rótulo que falta` em `não` parece barrar também o rótulo de estado. O rótulo de estado que a lista de origem exige é criado nos dois casos.
