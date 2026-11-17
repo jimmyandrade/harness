@@ -67,6 +67,7 @@ flowchart LR
     definir_grupo_de_oportunidades["definir-grupo-de-oportunidades"]
     definir_historia_de_usuario["definir-historia-de-usuario"]
     definir_hospedagem["definir-hospedagem"]
+    definir_idioma_da_conversa["definir-idioma-da-conversa"]
     definir_inscricao["definir-inscricao"]
     definir_instrucoes_do_projeto["definir-instrucoes-do-projeto"]
     definir_issue_do_github["definir-issue-do-github"]
@@ -464,6 +465,7 @@ flowchart LR
   definir_hospedagem --> definir_viagem
   definir_hospedagem --> procurar_email
   definir_hospedagem --> redigir_com_tom_de_voz
+  definir_idioma_da_conversa --> definir_pessoa
   definir_inscricao --> definir_grafia
   definir_inscricao --> definir_negociacao
   definir_inscricao --> definir_tarefa
@@ -504,6 +506,7 @@ flowchart LR
   definir_negociacao --> procurar_email
   definir_negociacao --> procurar_oportunidade
   definir_negociacao --> redigir_com_tom_de_voz
+  definir_negociacao --> rotular_item
   definir_negociacao --> sincronizar_cronograma
   definir_obra_musical --> definir_fonograma
   definir_obra_musical --> procurar_banco_de_dados
@@ -565,6 +568,7 @@ flowchart LR
   definir_rotina --> usar_whatsapp_web
   definir_tarefa --> auditar_tarefas
   definir_tarefa --> definir_grafia
+  definir_tarefa --> procurar_banco_de_dados
   definir_tarefa --> procurar_tarefa
   definir_tecido --> acompanhar_producao_de_produto_fisico
   definir_tecido --> definir_composicao_textil
@@ -797,9 +801,11 @@ flowchart LR
   pedir_revisao_de_pr_no_slack --> registrar_resultados_da_validacao_na_tarefa
   perfilar_tom_de_voz --> definir_vocabulario
   perfilar_tom_de_voz --> redigir_com_tom_de_voz
+  pesquisar_compra --> anexar_arquivo_no_whatsapp
   pesquisar_compra --> conversar_no_whatsapp
   pesquisar_compra --> definir_ativo_imobilizado
   pesquisar_compra --> definir_empresa
+  pesquisar_compra --> definir_negociacao
   pesquisar_compra --> definir_requisito_de_compra
   pesquisar_compra --> definir_viagem
   pesquisar_compra --> gerenciar_estoque
@@ -872,12 +878,13 @@ flowchart LR
   publicar_ata_de_reuniao --> definir_pessoa
   publicar_ata_de_reuniao --> definir_registro_de_reuniao
   publicar_produto_fisico_na_loja_virtual --> gerenciar_estoque
+  publicar_produto_fisico_na_loja_virtual --> redigir_com_tom_de_voz
   publicar_produto_fisico_na_loja_virtual --> registrar_preco_de_produto_fisico
   publicar_resposta_de_revisao --> atender_revisao_de_pull_request
   publicar_resposta_de_revisao --> definir_pessoa
   publicar_resposta_de_revisao --> escrever_link
   publicar_resposta_de_revisao --> publicar_revisao_de_codigo
-  publicar_revisao_de_codigo --> definir_pessoa
+  publicar_revisao_de_codigo --> definir_idioma_da_conversa
   publicar_revisao_de_codigo --> enviar_mensagem_no_slack
   publicar_revisao_de_codigo --> escrever_link
   publicar_revisao_de_codigo --> levantar_contexto_do_pull_request

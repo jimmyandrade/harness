@@ -3,7 +3,7 @@ name: levantar-contexto-do-pull-request
 description: Levanta o contexto de um pull request antes de revisar, responder ou ajustar. Cobre o estado, as convenções do repositório, os comentários já feitos, o card e as conversas ligados, o propósito e o trabalho parecido. Usada em PR de outra pessoa e no seu. Não serve para revisar o diff nem publicar texto.
 metadata:
   author: jimmyandrade
-  version: "0.9.0"
+  version: "0.10.0"
   related:
     - criar-pull-request
     - definir-registro-de-reuniao
@@ -42,6 +42,14 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 ### Passo 1
 
 Peça o número ou o link do pull request. Veja o estado dele: aberto, mesclado ou fechado, rascunho ou pronto, autor, rótulos e checks. Diga o estado logo na primeira linha. Um PR mesclado ou fechado muda o que vale a pena fazer: avise quem chamou antes de seguir.
+
+O número que a pessoa passou pode estar com os dígitos trocados.
+Quando o PR, a issue ou o card lido não tem a ver com o assunto que ela descreveu, não pergunte ainda.
+Monte as permutações dos dígitos do número, como 258, 285, 528, 582, 825 e 852.
+Busque todas de uma vez, uma consulta com a lista de chaves nas `Fontes do card` ou `gh pr view` e `gh issue view` para PR e issue.
+Compare o título e a descrição de cada uma com o assunto.
+Se só uma combina, siga com ela e diga na primeira frase que o número veio trocado e qual você usou.
+Se mais de uma combina, ou nenhuma, mostre as candidatas com o título e pergunte qual vale, sem seguir com nenhuma.
 
 Um PR aberto sem rótulo recebe um antes de qualquer proposta de merge. Escolha o rótulo que descreve a mudança pelo tipo do Conventional Commits, como `criar-pull-request` manda: `fix` usa o de bug, `docs` o de documentação. Sem tipo no título, o tipo segue o que a mudança faz. Com `Rótulo do PR sem rótulo` em `aplicar` e permissão de escrita, siga `rotular-item` para o PR, com essa escolha e `Criar rótulo que falta` em `não`, e diga qual rótulo ficou. Com `sugerir`, sem permissão ou sem rótulo que sirva, sugira o rótulo, o mais próximo ou um novo, e pergunte. A proposta de merge espera o rótulo.
 
@@ -143,6 +151,14 @@ Se você misturar conversa privada com pública sem marcar, quem chama cita o qu
 1. Marque a visibilidade de cada fonte.
 2. Deixe o conteúdo privado só como calibragem.
 
+### Número trocado
+
+Se você levantar o contexto do item que a pessoa colou sem conferir o assunto, a ficha sai de um item que não era o que ela pedia.
+
+1. Compare o título e a descrição do item com o assunto descrito.
+2. Se não têm a ver, busque as permutações dos dígitos antes de perguntar.
+3. Diga na primeira frase que o número veio trocado e qual você usou, ou mostre as candidatas e pergunte.
+
 ### Merge proposto sem rótulo
 
 Se você propuser o merge de um PR sem rótulo, ele entra na base sem a classificação que as notas da release e os filtros usam.
@@ -170,6 +186,10 @@ O PR está aberto, pronto para revisão, com um check pendente. Ele cita o card 
 
 O PR é seu e está aberto. Há quatro comentários: dois de pessoas, um de bot, um geral. Dois estão abertos. O card pede mais um critério que o PR ainda não cumpre. Os checks passaram.
 
+### Levante o contexto do PR 258, que a Ana abriu para exportar relatórios
+
+O PR 258 é de outro assunto. Busquei o 285, o 528, o 582, o 825 e o 852, e só o 825 trata da exportação de relatórios. A ficha abre dizendo que o número veio trocado e que o contexto é do PR 825.
+
 ## Casos-limite
 
 - O PR não cita card nem conversa: entregue a ficha com "Não achei" e peça o card, se faltar.
@@ -179,6 +199,7 @@ O PR é seu e está aberto. Há quatro comentários: dois de pessoas, um de bot,
 - A fonte exige acesso que você não tem: diga qual fonte não abriu e siga.
 - O PR está sem rótulo e nenhum do repositório serve: sugira o mais próximo ou um novo e pergunte antes de propor o merge. Não crie o rótulo sem a resposta.
 - O PR já tem rótulo: não troque nem acrescente.
+- Mais de uma permutação trata do assunto, ou nenhuma: mostre as candidatas com o título e pergunte. Não escolha.
 
 ## Pegadinhas
 
@@ -188,6 +209,7 @@ O PR é seu e está aberto. Há quatro comentários: dois de pessoas, um de bot,
 - Um check pendente não é um check que falhou.
 - Dois PRs que criam o mesmo arquivo a partir da mesma base conflitam no segundo a entrar.
 - O mesmo assunto pode estar numa conversa pública e numa privada. Cite só a pública.
+- O número parece certo porque o item existe. Um item existente de outro assunto é o sinal de que os dígitos podem estar trocados.
 - Um PR de bot, como o que configura uma ferramenta de dependências, costuma vir sem tipo no título e sem rótulo. O tipo segue o que a mudança faz.
 
 ## Scripts disponíveis

@@ -1,6 +1,6 @@
 ---
 metadata:
-  version: "1.69.0"
+  version: "1.70.0"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -74,6 +74,7 @@ metadata:
 - Quando uma tarefa depende do navegador porque faltam linha de comando, API e conector, proponha criar a abstração que falta: uma linha de comando, uma API, um MCP ou uma habilidade. Diga o que ela troca e quanto de token poupa, uma vez por serviço.
 - Quando o site de outra empresa falha e a pessoa precisa do suporte dele, acione na mesma rodada todos os canais que o site oferece: e-mail, chat e WhatsApp, este pela sessão dona do WhatsApp Web, como `usar-whatsapp-web` manda. O pedido da pessoa para acionar o suporte autoriza enviar a mesma mensagem em cada canal. Diga o que cada canal respondeu, inclusive o horário de atendimento, e registre na tarefa.
 - A primeira busca de um objeto, como um banco, uma página ou um registro, deixa de fora a lixeira e os itens arquivados. Sem resultado, proponha à pessoa uma segunda busca na lixeira e nos arquivados antes de dizer que o objeto não existe: alguém pode ter apagado ou arquivado o objeto sem avisar. O objeto achado ali não volta sem o pedido da pessoa.
+- Quando uma habilidade precisa de um banco, de uma lista ou de um campo dele e a pessoa não o indicou, leia antes o parâmetro e o mapeamento de dados do projeto. Sem o valor lá, siga `procurar-banco-de-dados` antes de perguntar. Pergunte só quando a busca não achar um banco que sirva ou achar mais de um.
 - Resolva a referência da habilidade seguinte no catálogo conectado quando as regras do ambiente permitirem. A ausência na lista inicial não prova que ela não existe. Não peça à pessoa uma referência que já está na conversa.
 - Todo texto gravado no Notion, em propriedade ou no corpo, escreve o cifrão de um valor com barra invertida, como `R\$ 62,87`. O Notion lê o trecho entre dois cifrões sem barra como fórmula e o texto sai ilegível. Releia o campo depois de gravar um texto com valor em reais.
 - Distinga a restrição explícita de descoberta, a busca sem resultado e o erro de permissão que a ferramenta devolveu. Não chame uma restrição das instruções de falta de acesso nem prometa que um pull request remove uma restrição do ambiente.

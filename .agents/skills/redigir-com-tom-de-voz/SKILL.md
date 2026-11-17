@@ -3,7 +3,7 @@ name: redigir-com-tom-de-voz
 description: Use essa habilidade sempre que for criar, redigir, editar, revisar ou responder texto da marca no tom de voz, mesmo sem dizer copy. NÃO use para responder quem conversa com a IA, descrever uma skill, titular tarefa ou oportunidade, cravar a grafia, alterar formato de conteúdo, nem assumir cliente, peça, oportunidade ou histórico.
 metadata:
   author: jimmyandrade
-  version: "0.26.1"
+  version: "0.27.0"
   aliases:
     - escreva-usando-o-tom-de-voz
   related:
@@ -80,9 +80,11 @@ Texto redigido e não enviado volta inteiro, num bloco, na mensagem final de tod
 
 Mensagem para uma pessoa não revela contexto interno que ela não precisa saber e que pode deixá-la desconfortável, como a troca frequente de pessoas no papel que ela assume. O motivo neutro entra no lugar, como uma mudança na padronização. A mensagem abre pelo que muda para ela.
 
-A mensagem chama a pessoa como o cadastro de `definir-pessoa` diz que ela é chamada. Um apelido que a pessoa nunca usou conosco e que o cadastro não confirma, mesmo vindo de quem pede o texto, fica de fora: diga isso e use o nome do cadastro. Sem cadastro, use o nome que a pessoa usa para se apresentar.
+A mensagem chama a pessoa como o cadastro de `definir-pessoa` diz que ela é chamada. Um apelido que a pessoa nunca usou conosco e que o cadastro não confirma, mesmo vindo de quem pede o texto, fica de fora: diga isso e use o nome do cadastro. Sem cadastro, use o nome que a pessoa usa para se apresentar. Sem nenhum dos dois, não chame por nome: o nome de um perfil ou de uma conta, como o de uma organização, não é o de quem responde.
 
 O tratamento carinhoso que a própria pessoa usa conosco, como "meu querido", "amiga" ou um diminutivo afetuoso, volta na mesma medida: é rapport, e não apelido inventado. Leia as últimas mensagens dela antes de rascunhar e devolva o mesmo grau de calor, de risada e de emoji, dentro do vocabulário, sem perguntar a quem escreve se pode. Quem é cordial e formal recebe o mesmo tom, e o calor não se oferece a quem não o deu primeiro.
+
+A saudação do período sai uma vez por dia em cada conversa. Se uma mensagem nossa já saudou hoje, a seguinte começa direto, sem bom dia, boa tarde nem boa noite.
 
 Afirmação de fato que só vem de uma busca ou de uma leitura sua, como "conferi o código e só X usa Y", não entra como certeza.
 Escreva o que você viu ("não vi Z usar") e, quando alguém é dono do assunto, formule a conferência como pergunta a essa pessoa ("só X usa Y, certo?").
@@ -153,6 +155,14 @@ Se você escrever num tom neutro ou formal para quem nos trata com carinho, como
 1. Leia as últimas mensagens dela antes de rascunhar.
 2. Devolva o mesmo tratamento, a mesma saudação e o mesmo grau de calor, dentro do vocabulário.
 3. Não transforme isso em pergunta à pessoa que escreve, e não use apelido que ela não usou.
+
+### Nome ou saudação que a conversa já resolveu
+
+Se você chamar o contato pelo nome do perfil ou repetir a saudação que já saiu hoje, o texto soa descuidado e a pessoa corrige de novo.
+
+1. Chame por nome só quem se apresentou ou consta no cadastro. O nome da conta não vale.
+2. Leia as mensagens nossas de hoje na conversa antes de abrir o texto.
+3. Com saudação já enviada hoje, comece direto pelo assunto.
 
 ### Rascunho sem a prévia
 

@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.41.3"
+  version: "0.41.4"
   aliases:
     - redigir-mensagem-de-whatsapp
   related:
@@ -107,7 +107,7 @@ Tire também o que já foi dito e diga antes o que o texto acrescenta. O dado qu
 
 Leia cada resposta como resposta à pergunta como foi escrita. Uma pergunta sem dia, sem janela e sem condição, respondida com "pode" ou "sim", vale para tudo o que ela cobria. Não estreite a resposta com uma condição que a pergunta não tinha, e não repita a pergunta para pedir mais detalhe.
 
-Antes de qualquer rascunho, diga à pessoa o que o contato respondeu, com as palavras dele e o horário. A pessoa não precisa abrir a conversa para saber.
+Antes de qualquer rascunho, diga à pessoa o que o contato respondeu, com as palavras dele e o horário, para ela não ter de abrir a conversa.
 
 Com a mesma pessoa ou empresa pode haver mais de um pedido aberto, como duas coisas a imprimir em materiais diferentes. Antes de rascunhar, liste os pedidos abertos com ela. A mensagem diz de qual pedido trata, pelo material e pelo uso. Com mais de um, numere cada um, com o material e o que precisa agora, como o prazo. Resposta que não diz a qual pedido responde: confirme de qual ele falava, antes de seguir.
 
@@ -119,7 +119,7 @@ Antes de rascunhar uma mensagem que propõe, aceita ou combina data, hora, lugar
 
 Se a proposta conflita, como uma retirada numa cidade de onde a pessoa já saiu naquele horário, diga o conflito antes do texto e ofereça o que cabe: outro dia ou horário, outra pessoa ou o correio. Sem acesso à agenda ou à viagem, pare e peça o dado.
 
-Abra com a saudação do período, lido no relógio, e uma frase de contexto. Fora do `Horário de trabalho`, peça desculpa pelo horário.
+Abra com a frase de contexto e, se nenhuma mensagem nossa já saudou hoje, a saudação do período, lida no relógio. Fora do `Horário de trabalho`, peça desculpa pelo horário.
 
 Com `Página de instruções do WhatsApp` preenchida, leia a página antes de rascunhar e siga a conta e as regras dela. Se ela não abrir na conexão, pare e peça.
 
@@ -127,7 +127,7 @@ Numa conversa que não está fluindo, veja também o e-mail com o mesmo contato 
 Quando a pessoa escreve de um número fora do cadastro da organização, o texto diz o motivo numa frase e pergunta se pode continuar por esse número.
 
 Todo rascunho de mensagem aparece na resposta do chat. Mostre a conversa de destino, uma linha do que o rascunho acrescenta ao que já foi dito e, em cada mensagem que responde a algo, a mensagem citada, com a data. Fecha o rascunho a pergunta que pede o sim para esta conversa e este texto, com a frequência e o prazo do acompanhamento quando a mensagem espera resposta.
-O texto vai na mensagem de fechamento do turno, a última que a pessoa lê, junto com o pedido do sim: o texto escrito antes de um quadro de próximo passo pode ser cortado.
+O texto vai na mensagem de fechamento do turno, junto com o pedido do sim: o escrito antes de um quadro de próximo passo pode ser cortado.
 Uma mensagem que diz que um trabalho está em andamento, foi registrado ou foi feito leva o link da tarefa, da página ou do pull request que mostra esse registro. Sem esse registro, crie-o antes, como `definir-tarefa` manda, ou pergunte onde ele está.
 Com a ferramenta de widget na sessão, o widget vem sempre, além dos blocos: o destinatário, um campo editável por mensagem com a altura do texto inteiro, um botão para copiar e um botão que manda o texto aprovado de volta ao chat. Se a pessoa editar, a versão dela substitui o rascunho e aparece de novo antes do sim.
 
