@@ -117,3 +117,21 @@ Funcionalidade: Registrar a conversa com uma empresa ou pessoa
       Então ela chama a habilidade de procurar banco de dados
       E diz a ela para que serve o banco e quais propriedades ele precisa ter
       Mas não pergunta o nome à pessoa antes
+
+  Regra: A conversa avisada sem texto é lida pelos canais
+
+    Exemplo: DM do Instagram sem conector
+      Dado que a pessoa avisa que a organização da feira fictícia "Feira Exemplo" escreveu por DM no Instagram
+      E que não há conector do Instagram
+      E que a pessoa não colou o texto
+      Quando a habilidade precisa do conteúdo da mensagem
+      Então ela lê a conversa pelo navegador do app, na conta em que a pessoa já está logada
+      E tenta a extensão do navegador quando o navegador do app não abre a conversa
+      E registra a troca na discussão da página da pessoa
+      Mas não pede o texto antes de tentar os canais
+
+    Exemplo: Nenhum canal lê a conversa
+      Dado que o navegador do app e a extensão do navegador não abrem a conversa
+      Quando a habilidade desiste de ler
+      Então ela pede a colagem do texto
+      E diz o que falhou em cada canal
