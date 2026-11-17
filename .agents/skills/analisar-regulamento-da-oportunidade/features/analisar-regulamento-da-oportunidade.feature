@@ -17,3 +17,11 @@ Funcionalidade: Analisar o regulamento de uma oportunidade
       Quando a habilidade lista o que falta
       Então ela marca o acesso na desmontagem como lacuna com a pergunta pronta
       E não supõe que o acesso é igual ao da montagem
+
+  Regra: o projeto escrito é exigência à parte
+
+    Exemplo: o edital pede justificativa, orçamento e cronograma
+      Dado que o regulamento do edital pede um projeto escrito com prazo, limite de páginas e critérios
+      Quando a habilidade lista as exigências
+      Então ela lista o projeto como exigência à parte, com prazo, formato, limite e critérios
+      E propõe a produção cultural como responsável da tarefa, sem escrever o projeto

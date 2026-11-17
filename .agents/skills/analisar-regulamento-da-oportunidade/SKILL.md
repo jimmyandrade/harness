@@ -1,9 +1,9 @@
 ---
 name: analisar-regulamento-da-oportunidade
-description: Lê o manual, o regulamento, o edital e o contrato de uma oportunidade e separa o que a empresa deve fazer, com prazo, o que o texto não diz e o que as fontes contradizem. Usada quando chega o manual da oportunidade aprovada. NÃO serve para perguntar ao responsável, redigir a tarefa nem organizar a viagem.
+description: Lê o manual, o regulamento, o edital e o contrato de uma oportunidade e separa o que a empresa deve fazer, com prazo, o que o texto não diz e o que as fontes contradizem. Usada quando chega o manual da oportunidade aprovada. NÃO serve para perguntar ao responsável, redigir a tarefa, organizar a viagem nem escrever o projeto que a inscrição pede.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.4.0"
   related:
     - acompanhar-edital
     - consultar-responsavel-pela-oportunidade
@@ -54,6 +54,7 @@ Cada exigência diz o prazo, quem cumpre e a fonte, com a página.
 Formulário, cadastro de pessoas e de veículo, necessidade de energia, cardápio e pagamento são exigências com prazo, mesmo quando chegam como aviso no meio de um grupo.
 Prazo relativo, como sete dias úteis antes, vira data: conte no calendário, com os feriados, e escreva no `Formato da data com dia da semana`, com o dia calculado pela regra do dia da semana.
 O prazo que já passou fica marcado como vencido, com a data de hoje.
+Quando a inscrição pede um projeto escrito, como justificativa, objetivos, orçamento ou cronograma, ele é uma exigência à parte: liste o prazo, o formato, o limite de tamanho e os critérios de avaliação, que são o que o projeto precisa atender.
 
 ### Passo 3
 
@@ -82,6 +83,7 @@ Não gere o material aqui.
 Entregue três listas, nesta ordem: exigências, lacunas e conflitos.
 Cada exigência com prazo vira tarefa no mesmo turno: confira antes com `procurar-tarefa` e crie com `definir-tarefa`.
 Pergunte quem responde por cada uma. Não preencha responsável nem prazo que a pessoa não disse.
+A exigência de projeto escrito tem como responsável a produção cultural, o papel do agente `producao-cultural`: proponha-o e a pessoa confirma. A tarefa leva o regulamento lido, o prazo, o formato, o limite e os critérios. Esta habilidade não escreve o projeto, e `inscrever-na-oportunidade` só usa o texto que a produção cultural devolver.
 Antes de cada prazo, avise a pessoa com o link da exigência, como o do formulário.
 Exigência vencida: diga isso na hora e proponha cumpri-la agora ou perguntar se ainda é aceita.
 Exigência que é um formulário ou cadastro da organização segue `inscrever-na-oportunidade`, e o que ela manda levar segue `acompanhar-itens-do-ponto-de-contato`.
@@ -150,6 +152,7 @@ As duas janelas entraram na lista de conflitos, lado a lado. Avisei a pessoa do 
 - A oportunidade é um edital: as exigências são as regras da seleção. O resultado e as datas do edital seguem `acompanhar-edital`.
 - O manual está só como imagem ou PDF escaneado: leia o texto da imagem e diga que a leitura pode ter falha.
 - A pessoa quer a tarefa já escrita: o título, o prazo e a definição de concluído seguem `definir-tarefa`.
+- A inscrição pede um projeto escrito: ele vira exigência, com a tarefa para a produção cultural, e a análise não o escreve.
 - O contrato não existe ainda: liste a pendência de pedi-lo ao responsável.
 
 ## Pegadinhas
@@ -158,6 +161,7 @@ As duas janelas entraram na lista de conflitos, lado a lado. Avisei a pessoa do 
 - O aviso de grupo parece só comunicado. O formulário com prazo está nele.
 - A mensagem mais recente da organização parece anular o manual. As duas ficam na lista, e a pessoa decide.
 - Sete dias úteis não são sete dias corridos: fim de semana e feriado não contam.
+- O edital parece só um formulário. Ele pode pedir um projeto escrito, com prazo próprio e outro responsável.
 
 ## Scripts disponíveis
 
