@@ -3,7 +3,7 @@ name: inscrever-na-oportunidade
 description: Preenche o cadastro ou o formulário que a organização de uma oportunidade pede para a inscrição, com os dados da empresa, no formato de cada campo, e envia só com o sim da pessoa. Usada quando a inscrição ou o cadastro de uma oportunidade está para ser feito. NÃO serve para registrar a inscrição no Notion, ler o regulamento, escrever à organização, salvo a resposta que confirma o envio, nem escrever o projeto que a inscrição pede.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.4.1"
   related:
     - acompanhar-retornos-pendentes
     - analisar-regulamento-da-oportunidade
@@ -58,9 +58,10 @@ Peça à pessoa que o digite na aba e avise, e siga para o campo seguinte.
 ### Passo 4
 
 Preencha numa aba da sessão. Se a pessoa arrastar a aba dela para o grupo e o contexto de abas disser que o grupo não existe, peça o contexto criando o grupo antes de dar a aba por perdida: ela pode aparecer nele.
-O Google Formulários guarda o rascunho na conta: reabrir o link mostra o que já foi preenchido, inclusive o que a pessoa digitou.
+O Google Formulários guarda o rascunho na conta: reabrir o link antes do envio mostra o que já foi preenchido, inclusive o que a pessoa digitou. Depois do envio, o mesmo link abre um formulário em branco.
 Leia a dica e a mensagem de erro de cada campo e escreva no formato que ele valida, como um telefone só com os dígitos e o DDD, sem o código do país nem pontuação.
 Confira cada campo depois de preencher e não avance com erro na tela.
+O campo que pede os produtos da marca recebe a lista dos produtos específicos ou, no mínimo, das famílias de produtos que a marca leva, lida do catálogo de produtos do negócio, nas peças ativas e só nas da própria marca. Descrever a marca ou a empresa não responde o campo. A organização pode pedir a retirada do que não está listado, então a lista cobre tudo o que vai à feira.
 O campo ou o anexo do projeto leva o texto entregue pela produção cultural, no formato e no limite que o formulário pede, sem reescrevê-lo. Se o limite não cabe, devolva o texto à produção cultural com o limite.
 Quando a pessoa vai de carro, o veículo vem do cadastro de veículos da viagem.
 
@@ -77,6 +78,7 @@ Ao começar a preencher, procure a inscrição dessa oportunidade na lista e, se
 Logo depois do envio, antes de qualquer mensagem ao organizador ou tarefa, atualize essa inscrição com a hora do envio e a tela de confirmação do formulário nos comprovantes, sem perguntar, releia a página e dê o link na resposta.
 Quem fez a inscrição é a pessoa que pediu, e a data da confirmação fica vazia até a organização responder.
 O envio só está concluído com a página lida e o link dito.
+A aba de confirmação do formulário guarda o link para editar a resposta. Não a feche antes de conferir os campos enviados e de guardar esse link na inscrição. Corrigir uma resposta já enviada é editar essa resposta, na aba da pessoa ou pelo link guardado, nunca enviar o formulário de novo: o link do formulário abre em branco e criaria uma segunda inscrição.
 Quando o convite ou o pedido de inscrição chegou por e-mail da organização, responda esse e-mail logo depois do envio, confirmando a inscrição, com o print da tela de confirmação colado no corpo da mensagem e não só anexo, sem pedir o sim. O texto segue `redigir-com-tom-de-voz`, e a conversa recebe o rótulo de quem espera o retorno.
 O conector de e-mail pede a imagem em base64: recorte o print só na confirmação e reduza as cores antes de enviar, e leia a mensagem enviada para conferir que o anexo ficou com o tamanho do arquivo.
 Depois, marque a tarefa da exigência como feita com o aval da pessoa e, se a organização deve responder, siga `acompanhar-retornos-pendentes`.
@@ -127,6 +129,22 @@ Se você enviar o formulário e seguir para a mensagem ao organizador sem criar 
 2. Depois do envio, atualize a hora e o comprovante e releia a página.
 3. Dê o link da inscrição antes de tratar qualquer outro assunto.
 
+### Marca descrita no lugar dos produtos
+
+Se você preencher o campo dos produtos com a descrição da marca ou da empresa, a organização não sabe o que a marca leva e pode pedir a retirada de peças.
+
+1. Leia o catálogo de produtos do negócio e ponha no campo as famílias de produtos, ou os produtos específicos, das peças ativas.
+2. Deixe de fora o produto de outra marca que divide o catálogo.
+3. Releia o campo antes do envio e confira que a lista cobre o que vai à feira.
+
+### Resposta corrigida numa aba nova
+
+Se você abrir o link do formulário para corrigir uma resposta já enviada, ele abre em branco, e a correção vira uma segunda inscrição.
+
+1. Edite pela aba de confirmação da pessoa ou pelo link de edição que a inscrição guarda.
+2. Sem nenhum dos dois, peça à pessoa a aba ou o link. Não envie de novo.
+3. Não feche a aba de confirmação antes de guardar o link de edição.
+
 ### Projeto escrito por esta habilidade
 
 Se você escrever a justificativa ou o orçamento que o edital pede, o texto não passa pela produção cultural e a marca envia um projeto sem a revisão do papel responsável.
@@ -155,8 +173,14 @@ Depois do envio, registrei a inscrição e respondi o e-mail do convite, confirm
 
 Li o cadastro da empresa e preenchi o nome do responsável, o apelido, a marca e o WhatsApp da empresa, em dígitos. O RG e o CPF a pessoa digitou. O veículo veio do cadastro. Respondi que não precisava de mesa, balcão nem cadeira extra, porque a empresa leva a própria. Mostrei tudo e esperei o sim antes de enviar.
 
+### o formulário da feira pediu os produtos e a resposta enviada só descrevia a marca
+
+Li o catálogo de produtos e corrigi o campo com as famílias das peças ativas, como camisas, coletes, regatas e shorts, sem as de outra marca. Editei a resposta pela aba de confirmação da pessoa, sem abrir o formulário de novo, e conferi que não saiu uma segunda inscrição.
+
 ## Casos-limite
 
+- O formulário pede os produtos: liste as famílias, ou os produtos específicos, do catálogo. Descrição da marca não basta.
+- A resposta já foi enviada e precisa de correção: edite pelo link de edição ou pela aba da pessoa. Sem eles, peça. Não envie o formulário de novo.
 - O formulário pede pagamento: o pagamento não é desta habilidade. Pare e peça à pessoa.
 - O cadastro não tem o contato da empresa: pare e recomende o campo.
 - A inscrição é por e-mail e não por formulário: o texto da mensagem segue `redigir-com-tom-de-voz`, e o envio, a skill de e-mail.
@@ -170,6 +194,8 @@ Li o cadastro da empresa e preenchi o nome do responsável, o apelido, a marca e
 - O campo de telefone parece aceitar qualquer formato legível. O formulário pode validar só os dígitos com o DDD.
 - A aba arrastada pela pessoa parece perdida quando o grupo da sessão some do contexto. O preenchimento fica salvo como rascunho no formulário.
 - O formulário pede RG e CPF do responsável. O agente não os digita.
+- O campo dos produtos parece aceitar a descrição da marca. Ele pede o que a marca vende, em famílias ou peças.
+- O link do formulário parece o caminho para corrigir a resposta. Depois do envio ele abre em branco. A correção é o link de edição da confirmação.
 
 ## Scripts disponíveis
 
