@@ -3,11 +3,12 @@ name: perfilar-tom-de-voz
 description: Perfila o tom de voz de uma pessoa ou de um canal a partir de uma amostra real de mensagens e registra os padrões no vocabulário, com a etiqueta da pessoa ou do canal. Usada quando a pessoa pede para perfilar como alguém conversa ou o tom de um canal. Não serve para escrever texto, cadastrar um termo solto nem perfilar sem pedido.
 metadata:
   author: jimmyandrade
-  version: "0.3.1"
+  version: "0.4.0"
   related:
     - definir-vocabulario
     - evoluir-habilidade
     - redigir-com-tom-de-voz
+    - rotular-item
 ---
 
 # Perfilar tom de voz
@@ -23,6 +24,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Tamanho da amostra": ""
 # `Onde guardar o resumo do tom` diz onde fica o resumo curto de cada pessoa ou canal.
 "Onde guardar o resumo do tom": ""
+# `Rótulo de perfilamento em andamento` marca a conversa enquanto o perfil ainda aprende com cada mensagem nova. Liga ao começar e desliga ao finalizar. Vazio, não rotula.
+"Rótulo de perfilamento em andamento": ""
 "Modo de aprendizado": "perguntar"
 ```
 ## Instruções
@@ -32,6 +35,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 Só perfile a pedido explícito da pessoa, para uma pessoa ou um canal que ela nomear. Nunca perfile por conta própria. Se a pessoa pediu o perfil de si mesma, trate como cadastro de termo com `definir-vocabulario`.
 
 Rascunhar uma mensagem para quem não tem perfil e já escreveu na conversa não é perfilar. Leia as últimas mensagens dela e acompanhe a saudação, o calor e o emoji, devolvendo o mesmo tratamento carinhoso que ela usa conosco, como um apelido afetuoso, sem perguntar à pessoa se pode. Um texto seco para quem escreve com carinho soa distante. Diga à pessoa que o perfil falta e proponha perfilar. O registro só nasce a pedido.
+
+Quando a pessoa pede para ir aprendendo com cada mensagem da conversa, o perfil fica em andamento. Com `Rótulo de perfilamento em andamento` preenchido, aplique-o à conversa por `rotular-item` ao começar.
 
 ### Passo 2
 
@@ -48,6 +53,8 @@ Escreva um resumo curto do tom em `Onde guardar o resumo do tom`. Registre com `
 O resumo fica onde `Onde guardar o resumo do tom` manda, como as notas do contato no WhatsApp e o cadastro da pessoa. Quem for escrever para ela consulta esse resumo, por `redigir-com-tom-de-voz`.
 
 ### Passo 5
+
+Perfil em andamento: leia cada mensagem nova da pessoa na conversa e acrescente só o padrão novo e recorrente ao termo e ao resumo. O perfil só é final quando a pessoa disser que finalizou: nesse momento, tire o rótulo por `rotular-item` e diga que o resumo é o definitivo.
 
 Anote a origem do perfil: quantas mensagens, de que período e que as de quem pediu foram excluídas. Mostre à pessoa o que foi derivado, para ela corrigir se não bateu.
 
@@ -85,6 +92,14 @@ Se você rascunhar para quem não tem perfil sem ler como ela escreve, o texto s
 2. Acompanhe a saudação, o calor e o emoji, e devolva o tratamento carinhoso que ela usa conosco, dentro do vocabulário.
 3. Diga que o perfil falta e proponha perfilar, sem registrar nada por conta própria.
 
+### Rótulo de perfilamento esquecido
+
+Se você deixar o rótulo ligado depois de a pessoa finalizar, a conversa parece ainda em perfilamento e o agente segue acrescentando padrão a um perfil fechado.
+
+1. Ao finalizar, tire o rótulo por `rotular-item`.
+2. Diga que o resumo é o definitivo.
+3. Sem `Rótulo de perfilamento em andamento`, não rotule.
+
 ### Trecho privado reproduzido
 
 Se você citar uma mensagem da conversa privada para justificar um termo, o conteúdo privado aparece em outro contexto.
@@ -110,6 +125,7 @@ Li o histórico da nossa conversa privada. Ela alonga as vogais, abrevia "pra" e
 - A amostra tem poucas mensagens: diga isso e registre só o que se repete.
 - O canal só tem mensagens de bot: diga isso e pare.
 - Um padrão apareceu uma vez só: não registre.
+- `Rótulo de perfilamento em andamento` vazio: perfile e acompanhe sem rotular.
 
 ## Pegadinhas
 
@@ -117,6 +133,7 @@ Li o histórico da nossa conversa privada. Ela alonga as vogais, abrevia "pra" e
 - O perfil de uma pessoa não vale para outra, nem o de um canal para uma pessoa.
 - Uma frase que a pessoa disse uma vez parece um padrão. Só vira termo o que se repete.
 - A conversa privada serve para derivar o padrão, nunca para ser citada.
+- Uma conversa com o rótulo ligado parece perfil pronto. Ela ainda aprende: só a pessoa a finaliza.
 
 ## Scripts disponíveis
 
