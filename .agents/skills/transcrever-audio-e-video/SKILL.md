@@ -1,9 +1,9 @@
 ---
 name: transcrever-audio-e-video
-description: Transcreve um áudio ou vídeo local com o Whisper local ou o SpeechAnalyzer da Apple, detecta o que está instalado e só propõe instalar com o sim da pessoa. Usada quando a pessoa manda uma gravação para virar texto, mesmo sem dizer Whisper. NÃO serve para reunião que já tem transcrição, identificar quem fala nem enviar o arquivo a um serviço externo.
+description: Transcreve um áudio ou vídeo local com o SpeechAnalyzer da Apple ou o Whisper local, detecta o que está instalado e só propõe instalar com o sim da pessoa. Usada quando a pessoa manda uma gravação para virar texto, mesmo sem dizer Whisper. NÃO serve para reunião que já tem transcrição, identificar quem fala nem enviar o arquivo a um serviço externo.
 metadata:
   author: jimmyandrade
-  version: "0.3.2"
+  version: "0.4.0"
   related:
     - definir-registro-de-reuniao
     - evoluir-habilidade
@@ -14,8 +14,8 @@ metadata:
 ## Parâmetros de configuração
 
 ```yaml
-# `Ordem dos motores` lista os motores locais, do primeiro ao último. `Whisper` é o `whisper-cli`. `SpeechTranscriber` é o SpeechAnalyzer da Apple, do macOS 26 em diante. O primeiro disponível roda.
-"Ordem dos motores": ["Whisper", "SpeechTranscriber"]
+# `Ordem dos motores` lista os motores locais, do primeiro ao último. `SpeechTranscriber` é o SpeechAnalyzer da Apple, do macOS 26 em diante. `Whisper` é o `whisper-cli`. O primeiro disponível roda. O `SFSpeechRecognizer` não entra na lista: a ADR 0027 mostra que ele perde a maior parte da fala.
+"Ordem dos motores": ["SpeechTranscriber", "Whisper"]
 # `Idioma do SpeechAnalyzer` é o locale do `SpeechTranscriber`, como `pt-BR` ou `en-US`.
 "Idioma do SpeechAnalyzer": "pt-BR"
 # `Pasta do modelo` é a pasta dos arquivos de modelo do Whisper.
@@ -67,7 +67,7 @@ Ponha o caminho do arquivo entre aspas: nome com espaço e acento é comum.
 ### Passo 5
 
 Com o `SpeechTranscriber`, compile `scripts/speech_transcribe.swift` na `Pasta de saída` e rode-o com o `Idioma do SpeechAnalyzer`. Ele imprime o texto corrido, sem `.srt` e sem tempos. Para a pessoa que precisa dos tempos, rode o `Whisper`.
-Não use o `SFSpeechRecognizer`: no terminal da ferramenta de código ele aborta por falta de permissão e não superou o `DictationTranscriber` na medição, que a ADR 0027 do core registra, com o jeito de rodá-lo, se for preciso.
+Não use o `SFSpeechRecognizer`, nem como reserva: numa reunião de 18 minutos ele devolveu cerca de um terço das palavras dos outros dois e ainda pede permissão de fala. A ADR 0027 do core registra a medição e o jeito de rodá-lo, se for preciso.
 
 Com o `Whisper`, rode o `whisper-cli` com o `Idioma da transcrição`, `-ml 0` e as saídas `.txt` e `.srt`. Com `Termos do prompt` preenchido, passe-os em `--prompt`.
 Num Apple M4 Pro, o tempo é cerca de um dezoito avos da duração do áudio. Leia `references/tempos-medidos.md` quando for avisar o tempo de um arquivo longo ou de um lote. Em outra máquina o tempo muda: avise a pessoa antes e espere o resultado no mesmo turno.
@@ -145,7 +145,7 @@ Rodei o `SpeechTranscriber`, sem instalar nada, e avisei que o primeiro uso do i
 
 - O arquivo já é áudio, como mp3 ou m4a: o `ffmpeg` converte do mesmo jeito para wav de 16 kHz e mono.
 - O áudio está em outro idioma: troque `Idioma da transcrição` e `Idioma do SpeechAnalyzer` para a execução.
-- O `SpeechTranscriber` foi medido só em um áudio de três minutos: para uma gravação longa, diga que não mediu o tempo nem a qualidade dele nesse tamanho.
+- O `SpeechTranscriber` foi medido em dois áudios, um de três e um de 18 minutos: para uma gravação bem mais longa, diga que não mediu o tempo nem a qualidade dele nesse tamanho.
 - O modelo escolhido não é o padrão: o tamanho vem do repositório do modelo. Diga que não mediu a qualidade nem o tempo dele.
 - A reunião já tem transcrição pronta, como a do Meet: use essa, que traz quem fala. Esta skill não é para ela.
 - A pessoa pede um serviço externo: só com pedido explícito, avisando que o arquivo sai da máquina.
@@ -159,7 +159,8 @@ Rodei o `SpeechTranscriber`, sem instalar nada, e avisei que o primeiro uso do i
 - Nome de arquivo com espaço e acento quebra o comando sem aspas.
 - O número de tempo vem de uma medição, numa máquina. Não prometa o mesmo tempo em outra.
 - O `ffmpeg` lê o teclado por padrão. Num laço de shell ele consome as linhas da fila e corta os caminhos: use `-nostdin`, ou o script de lote.
-- Nenhum motor ganhou na medição. O `Whisper` pontuou tudo e acertou nomes próprios, mas caiu num laço e perdeu um trecho. O `SpeechTranscriber` não perdeu trecho, mas saiu sem vírgulas e errou um nome próprio. Use o primeiro da `Ordem dos motores` e o outro como segunda opinião.
+- Nenhum motor ganhou em tudo. No áudio de três minutos o `Whisper` pontuou tudo e acertou nomes próprios, mas caiu num laço e perdeu um trecho. O `SpeechTranscriber` não perdeu trecho, mas saiu sem vírgulas e errou um nome próprio. Na reunião de 18 minutos os dois ficaram a 90% de palavras em comum, e o `SpeechTranscriber` levou um quinto do tempo. Use o primeiro da `Ordem dos motores` e o outro como segunda opinião.
+- O `SFSpeechRecognizer` parece uma reserva natural, por ser o motor antigo da Apple. Na medição ele perdeu cerca de 70% da fala de uma reunião e só devolveu texto depois de a pessoa liberar a permissão de fala para o app. Fica fora da ordem.
 - O modelo do Whisper que a pessoa lembra de ter baixado costuma já estar na `Pasta do modelo`. Procure lá antes de propor o download.
 
 ## Scripts disponíveis

@@ -14,3 +14,7 @@ Ao todo, 1714 minutos de áudio levaram 94 minutos de relógio, a 18,3 vezes o t
 - O tempo esperado de uma gravação é a duração dividida por 18, como estimativa. Não é promessa.
 - O Whisper não informa o progresso. Uma barra de porcentagem é estimativa a partir dessa velocidade.
 - Outra máquina, outro modelo ou outro idioma muda os números. Meça antes de prometer.
+
+## SpeechTranscriber
+
+Numa reunião de 18 min 16 s, em português, num Apple M4 Pro de 24 GB com macOS 27.2, o `SpeechTranscriber` levou 9,7 s, cerca de 113 vezes o tempo real, e o `whisper-cli` com o mesmo modelo levou 49,6 s, cerca de 22 vezes. Duas gravações são pouco: meça outra antes de prometer o tempo.
