@@ -3,11 +3,12 @@ name: anexar-arquivo-no-whatsapp
 description: Anexa e envia um arquivo já aprovado pelo WhatsApp Web, imagem como foto e nunca como figurinha, ou documento, numa conversa, num grupo ou num canal, e confere o envio. Usada quando a pessoa aprova mandar um comprovante, um convite com imagem, uma postagem ou um documento. Não serve para redigir o texto, escolher o destino nem enviar só texto.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.5.1"
   aliases:
     - enviar-imagem-no-whatsapp
   related:
     - conversar-no-whatsapp
+    - rascunhar-mensagem
     - evoluir-habilidade
     - redigir-com-tom-de-voz
     - usar-whatsapp-web
@@ -52,8 +53,8 @@ O menu Anexar tem Documento, Fotos e vídeos e Nova figurinha. A única entrada 
 
 ### Passo 3
 
-O texto aprovado junto da imagem vai no campo de legenda. Texto que a pessoa aprovou como mensagem separada segue `conversar-no-whatsapp`.
-Uma legenda acima do `Limite de caracteres por mensagem` de `conversar-no-whatsapp` aparece cortada com "Ler mais". Quem chama divide o texto como essa habilidade manda: a primeira parte vai na legenda e as outras saem como mensagens depois da imagem, na ordem, com o sim da pessoa às partes.
+O texto aprovado junto da imagem vai no campo de legenda. Texto que a pessoa aprovou como mensagem separada segue `rascunhar-mensagem`.
+Uma legenda acima do `Limite de caracteres por mensagem` de `rascunhar-mensagem` aparece cortada com "Ler mais". Quem chama divide o texto como essa habilidade manda: a primeira parte vai na legenda e as outras saem como mensagens depois da imagem, na ordem, com o sim da pessoa às partes.
 Em grupo e em canal o caminho é o mesmo, com o destino aberto.
 
 ### Passo 4

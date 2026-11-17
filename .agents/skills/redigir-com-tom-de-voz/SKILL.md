@@ -3,10 +3,11 @@ name: redigir-com-tom-de-voz
 description: Use essa habilidade sempre que for criar, redigir, editar, revisar ou responder texto da marca no tom de voz, mesmo sem dizer copy. NÃO use para responder quem conversa com a IA, descrever uma skill, titular tarefa ou oportunidade, cravar a grafia, alterar formato de conteúdo, nem assumir cliente, peça, oportunidade ou histórico.
 metadata:
   author: jimmyandrade
-  version: "0.28.0"
+  version: "0.28.1"
   aliases:
     - escreva-usando-o-tom-de-voz
   related:
+    - rascunhar-mensagem
     - perfilar-tom-de-voz
     - definir-vocabulario
     - consultar-vocabulario
@@ -47,7 +48,7 @@ Antes de criar, redigir, editar, revisar ou responder, consulte o vocabulário e
 
 Texto que vai ser enviado por um conector, como uma resposta de e-mail, depende da ferramenta de envio. Antes de redigir, confira se as configurações da ferramenta a liberam. Sem a liberação, peça-a logo, com o nome da ferramenta, em vez de descobrir o bloqueio só no envio. A liberação não dispensa o sim da pessoa ao texto e ao destino. Se o envio for bloqueado mesmo assim, deixe o rascunho no destino e diga o que bloqueou.
 
-A mensagem que a pessoa vai aprovar para envio aparece no chat num bloco de código e, com a ferramenta de widget na sessão, também no widget editável: um campo por mensagem, com copiar e um botão que manda o texto aprovado de volta ao chat. Vale mesmo quando a sessão só rascunha e outra envia, como a dona do WhatsApp Web, e mesmo quando a ferramenta aparece como carregável. O Passo 5 de `conversar-no-whatsapp` descreve o widget. Sem a ferramenta, diga que a sessão não a tem.
+A mensagem que a pessoa vai aprovar para envio aparece no chat num bloco de código e, com a ferramenta de widget na sessão, também no widget editável: um campo por mensagem, com copiar e um botão que manda o texto aprovado de volta ao chat. Vale mesmo quando a sessão só rascunha e outra envia, como a dona do WhatsApp Web, e mesmo quando a ferramenta aparece como carregável. `rascunhar-mensagem` descreve o widget. Sem a ferramenta, diga que a sessão não a tem.
 
 Consulte o vocabulário com `consultar-vocabulario`, com as `tags` de quem fala, do evento, do canal e do formato do texto, no idioma do texto que vai escrever. Ele consulta o texto por palavra e cada expressão que o texto pode usar, inteira, e devolve o `when` dos termos permitidos com ressalva, que vale para este texto. Sem saber quem fala, pergunte.
 
