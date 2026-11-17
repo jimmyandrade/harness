@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.24.1"
+  version: "0.25.0"
   related:
     - procurar-oportunidade
     - definir-empresa
@@ -92,13 +92,15 @@ O local e a localidade seguem `definir-local-fisico`, que confirma o nome do esp
 
 A etiqueta de e-mail da edição guarda o nome inteiro da etiqueta que a caixa aplica às conversas desta data, não o identificador: a busca da caixa usa o nome, e o identificador muda de uma conta para outra. Quando a etiqueta é renomeada, o campo muda junto.
 
+Ao cadastrar a edição, grave na mesma gravação o nome da etiqueta de e-mail dela, mesmo sem conversa ainda: a etiqueta de e-mail do grupo, uma barra, a data da edição em AAAA-MM-DD, um hífen e o nome da edição, como `Projetos/Oportunidades/Festival Rota Sul/2026-09-29 - Festival Rota Sul`. A etiqueta em si é criada pela primeira conversa que a recebe, por `organizar-emails`, ou agora, quando a sessão tem o e-mail conectado. O Gmail não leva a etiqueta do grupo junto com a da edição: a conversa recebe as duas, e a que trata de mais de uma edição recebe a de cada uma.
+
 ### Passo 7
 
 Revisar o conteúdo, o corpo ou as anotações de uma edição que já existe segue `revisar-oportunidade`. Uma edição nova nasce sem bloco de anotações, sem callout e sem comentário: não os escreva aqui.
 
 ### Passo 8
 
-Mostre o título, a data, o grupo, quando há, os arquivos anexados e o link. Liste os valores que ficaram sem propriedade. Na edição nova de um grupo, mostre as lições das notas do grupo, cada uma com a data, como pontos de atenção da próxima participação. A decisão humana fica vazia e não vira pergunta nem pendência na resposta: ela é da revisão das oportunidades, quando a pessoa quiser. Não organize a participação. Não inscreva. Não crie tarefa. A resposta não pede para nomear a habilidade.
+Mostre o título, a data, o grupo, quando há, o nome da etiqueta de e-mail, os arquivos anexados e o link. Liste os valores que ficaram sem propriedade. Na edição nova de um grupo, mostre as lições das notas do grupo, cada uma com a data, como pontos de atenção da próxima participação. A decisão humana fica vazia e não vira pergunta nem pendência na resposta: ela é da revisão das oportunidades, quando a pessoa quiser. Não organize a participação. Não inscreva. Não crie tarefa. A resposta não pede para nomear a habilidade.
 
 ### Passo 9
 
@@ -172,6 +174,15 @@ Se você marcar a taxa do expositor ou o ingresso do visitante porque um públic
 2. Deixe as duas vazias quando o texto não disser a taxa de quem expõe nem o ingresso de quem visita.
 3. Não invente o valor.
 
+### Edição sem etiqueta de e-mail
+
+Se você cadastrar a edição com a etiqueta de e-mail vazia, as conversas dela ficam só na pasta geral das oportunidades e a pessoa não as acha por edição.
+
+1. Grave o nome da etiqueta na mesma gravação da edição.
+2. A etiqueta fica dentro da do grupo, com a data da edição em AAAA-MM-DD e o nome da edição.
+3. A etiqueta é criada pela primeira conversa que a recebe, ou agora, com o e-mail conectado.
+4. Grupo com a etiqueta de e-mail vazia: pare e passe para `definir-grupo-de-oportunidades`, que grava o nome dela.
+
 ### Data sem o dia da semana
 
 Se você escrever a data numérica sem o dia da semana, ou aceitar um dia da semana que não bate com a data, a pessoa lê a edição errada.
@@ -187,6 +198,10 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 ### a oportunidade Festival Rota Sul não existe na lista de oportunidades. Datas 29 de setembro de 2026 a 30 de setembro de 2026, das 09h às 19h, no Centro de Eventos Aurora, Rua das Flores, 100, Cidade Exemplo. Entrada gratuita para compradores credenciados.
 
 a edição não existia. O grupo foi para `definir-grupo-de-oportunidades`. A edição entrou com a data, o endereço e o horário. No título e na resposta, terça-feira, 29/09/2026 e quarta-feira, 30/09/2026. A data da edição ficou o intervalo válido. Sem página de inscrição. O ingresso do visitante e a taxa do expositor ficaram vazios. O vínculo aponta para um grupo só.
+
+### cadastre o Festival Rota Sul de sábado, 12/12/2026 e domingo, 13/12/2026. O grupo existe, com a etiqueta de e-mail `Projetos/Oportunidades/Festival Rota Sul`.
+
+a edição entrou com a etiqueta de e-mail `Projetos/Oportunidades/Festival Rota Sul/2026-12-12 - Festival Rota Sul`, gravada na mesma gravação. A etiqueta no Gmail fica para a primeira conversa que a receber. A resposta mostrou o nome dela.
 
 ### Considerar grupos de oportunidades é não. Cadastre o Festival Rota Sul de 29 de setembro de 2026.
 
@@ -228,6 +243,7 @@ gravei a edição com o resto. No fim, listei o comentário sem propriedade e pr
 - Uma propriedade ausente parece pedir para ser criada já. Esta habilidade propõe o nome, o tipo e a descrição, e cria só com o sim da pessoa.
 - Seleção, inscrição, edital e chamada parecem outra oportunidade. São conteúdo do grupo ou da edição.
 - Criar o grupo junto da edição parece um passo só. O grupo fica com `definir-grupo-de-oportunidades`.
+- A etiqueta de e-mail parece nascer quando chega a primeira conversa. O nome dela é da edição desde o cadastro.
 
 ## Scripts disponíveis
 
