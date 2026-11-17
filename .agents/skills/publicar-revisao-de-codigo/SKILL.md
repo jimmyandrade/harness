@@ -3,7 +3,7 @@ name: publicar-revisao-de-codigo
 description: Revisa um pull request e publica a revisão numa única review, com os comentários inline, no idioma de quem recebe e no tom do projeto. Usada quando a pessoa pede uma revisão ou outra habilidade precisa publicar uma. Não serve para tratar os comentários que você recebeu no seu PR.
 metadata:
   author: jimmyandrade
-  version: "0.22.0"
+  version: "0.23.0"
   aliases:
     - post-code-review
   related:
@@ -39,7 +39,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Nível de detalhe": "enxuta"
 # `Critério de revisão completa` diz quando a revisão sai completa mesmo com `Nível de detalhe` em `enxuta`, como uma pessoa que pediu assim ou um PR de criticidade alta, e lista o que conta como criticidade alta; na dúvida, fica enxuta.
 "Critério de revisão completa": ""
-# `Limite de Poderia ter publicado` diz até quantos achados de Poderia ter entram numa revisão enxuta, por exemplo só quando Deve ter mais Deveria ter publicados somam no máximo 2 e o total fica em até 5, e o que passa do limite vai só para o resumo.
+# `Limite de Poderia ter publicado` diz até quantos achados de Poderia ter entram numa revisão enxuta, por exemplo só quando Deve ter mais Deveria ter publicados somam no máximo 2 e o total fica em até 5, e o que passa do limite não é publicado, só contado no resumo.
 "Limite de Poderia ter publicado": ""
 # `Prioridade por tema` liga um tema do achado a uma categoria, como acessibilidade a Deve ter ou desvio da convenção de testes a Deveria ter.
 "Prioridade por tema": "acessibilidade: Deve ter, com sugestão de código"
@@ -101,6 +101,7 @@ Ajuste o esforço ao risco do PR: baixo para documentação e renomeação, alto
 Chame `priorizar-itens` com os achados e junte o resultado com a ficha:
 
 - Um achado que coincide com um comentário já existente e ainda aberto vira resposta na thread dele, com o complemento ou um reforço curto. Não abre comentário novo, e não descarta o achado em silêncio. Em thread que o autor encerrou, ou já resolvida, não responda.
+- Antes de perguntar ao autor, verifique sozinho o que der, como manda `references/verificar-antes-de-perguntar.md`.
 - Um achado fraco, sem cenário concreto de falha, vira pergunta que espera resposta, tratada como importante. Nunca como "não bloqueia".
 - Aplique as `Lentes de revisão`. Com `Nível de detalhe` em `enxuta`, publique só Deve ter e Deveria ter, mais o Poderia ter que o `Limite de Poderia ter publicado` permitir. Quando o `Critério de revisão completa` se cumpre, publique tudo.
 - Aplique a `Prioridade por tema`: o achado de um tema listado ganha a categoria dada. Um achado de acessibilidade, com o valor padrão, é Deve ter e leva sugestão de código.
@@ -111,7 +112,7 @@ Chame `priorizar-itens` com os achados e junte o resultado com a ficha:
 
 ### Passo 7
 
-Este passo só depende do PR e do registro da pessoa, e pode virar uma habilidade própria. Escolha o idioma de quem recebe a revisão:
+Escolha o idioma de quem recebe a revisão:
 
 1. Leia a preferência dela no registro da pessoa, com `definir-pessoa`: um idioma só, ou um idioma com a tradução recolhível em outro.
 2. Sem preferência, levante o que ela escreveu revisando PRs, nos de outras pessoas e nos seus, ignorando código, crases e links. Use o idioma que predomina.
@@ -125,7 +126,7 @@ Com `Frase sobre o idioma` em `sim`, diga numa frase, uma vez por rodada, que vo
 
 ### Passo 8
 
-Este passo só depende do PR e pode virar uma habilidade própria. Com `Prova visual em PR de interface` em `sim`, um PR que muda tela, componente ou estilo precisa de prova visual: print, vídeo, um exemplo publicado ou o resultado de uma ferramenta de comparação.
+Com `Prova visual em PR de interface` em `sim`, um PR que muda tela, componente ou estilo precisa de prova visual: print, vídeo, um exemplo publicado ou o resultado de uma ferramenta de comparação.
 
 Procure a prova em todo lugar antes de pedir: o corpo do PR, os comentários do autor, os checks e o card. Se achar, use e siga. Nunca peça uma prova que já existe. Só se não achar nada, pergunte com gentileza se dá para anexar, sem bloquear.
 
@@ -162,7 +163,7 @@ Limpe sempre, mesmo se algo falhou antes. Apague o comentário de início e reti
 
 ### Passo 12
 
-Devolva a quem chamou o link da review e de cada comentário publicado, como manda `escrever-link`, e um resumo dos achados por prioridade, com o nível de detalhe usado e quantos Poderia ter ficaram de fora. Avisar a pessoa que pediu a revisão é de quem chamou, com `enviar-mensagem-no-slack`.
+Devolva a quem chamou o link da review e de cada comentário publicado, como manda `escrever-link`, e um resumo dos achados por prioridade, sem repetir o inline, com o nível de detalhe usado e quantos Poderia ter ficaram de fora. Avisar a pessoa que pediu a revisão é de quem chamou, com `enviar-mensagem-no-slack`.
 
 ### Passo 13
 
