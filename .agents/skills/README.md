@@ -657,9 +657,12 @@ flowchart LR
   fatiar_pull_request --> criar_commit
   fatiar_pull_request --> criar_pull_request
   fatiar_pull_request --> mesclar_pull_request
+  fazer_fechamento --> consultar_responsavel_pela_oportunidade
+  fazer_fechamento --> criar_ponto_de_contato
   fazer_fechamento --> definir_conta_bancaria
   fazer_fechamento --> definir_obrigacao_financeira
   fazer_fechamento --> lancar_despesa_da_empresa
+  fazer_fechamento --> lancar_venda
   fazer_fechamento --> organizar_ponto_de_contato
   fazer_fechamento --> revisar_financas
   fechar_pull_request --> atender_revisao_de_pull_request

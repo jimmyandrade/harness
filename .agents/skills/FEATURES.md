@@ -379,6 +379,7 @@ How these skills relate is in `README.md`, in this folder.
   - Starts the status at "Não iniciada" unless the person says another, and does not move it for a confirmed participation, a reservation, or a pre-production mention
   - Writes the start only from a date the person said or the opportunity confirms, treats a provisional reservation as no date, saves the date and time when the opening time is known, saves a single date when there is no time, and says when the start stayed empty
   - Fills a missing cycle and an empty visual order without asking, renumbers a repeated number without asking, and asks which status applies when the date has passed and the status is from an earlier phase
+  - Links without asking the already-launched expenses that cite the event but have no touchpoint, and says which ones
   - Writes the event date in replies with the weekday, formatted from the YAML mapping under Parâmetros de configuração
   - Leaves the planning, the calendar event, and the trip to organizar-ponto-de-contato and definir-viagem
 - **Test Criteria**:
@@ -1513,6 +1514,8 @@ How these skills relate is in `README.md`, in this folder.
   - Shows the plan before writing, writes only the fields the mapping allows, and keeps the payment status, date and receipt
   - Does not estimate a missing figure or a missing split rule, and says what is missing and from whom
   - Compares the counted cash with the recorded sales of a touchpoint with a till
+  - Checks the status of the touchpoint against its date and pending items before accepting a closed cash, and links the expenses that cite the event but have no touchpoint
+  - Looks for unrecorded food consumption on the dates, names a payment source that no connection reaches and offers the browser or an extract, and offers to ask the partner when there is no split rule
   - Leaves an unrecorded cost to lancar-despesa-da-empresa, a missing Pix to definir-conta-bancaria, an overdue settlement to definir-obrigacao-financeira, and the result of the interval to revisar-financas
 - **Test Criteria**:
   - [x] The skill is present at that path
