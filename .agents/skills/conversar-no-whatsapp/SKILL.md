@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, lê o pedido, quem pediu e a data, e responde ou envia mensagem só com a confirmação da pessoa. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp, conferir o que alguém pediu ou mandar uma mensagem. Não serve para redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.41.4"
+  version: "0.41.5"
   aliases:
     - redigir-mensagem-de-whatsapp
   related:
@@ -135,7 +135,7 @@ O texto não usa Markdown: negrito é um asterisco de cada lado, itálico é sub
 
 Depois de escrever o texto, siga `dividir-mensagem` para decidir como ele sai, em mensagens curtas, numa só ou em partes numeradas pelo limite. O sim da pessoa vale para o texto mostrado, com todas as partes numeradas. Envie na mesma ordem, uma de cada vez.
 
-A mensagem que responde a um áudio usa o Responder dele e quebra a transcrição em trechos, cada um em citação, com a resposta logo abaixo. Cada linha do trecho começa com `> `, e uma linha em branco o separa da resposta. Tudo o que a pessoa falou entra em algum trecho e recebe resposta: o trecho sem pergunta recebe uma frase curta de retorno.
+A mensagem que responde a um áudio usa o Responder dele e quebra a transcrição em trechos, cada um com a resposta logo abaixo. Um `> ` só abre o trecho, que é uma linha, e uma linha em branco o separa da resposta. Tudo o que a pessoa falou entra em algum trecho e recebe resposta: o trecho sem pergunta recebe uma frase curta de retorno.
 Numa conversa já aberta com a pessoa, a mensagem não diz quem escreve nem de qual empresa: o nome da conversa já diz. Quem ainda não conhece quem escreve é apresentado uma vez, na primeira mensagem, com o nome e a empresa. Depois, nem a abertura repete a apresentação nem o fim leva assinatura.
 A saudação e o texto se dirigem só a quem está na conversa aberta: quem ela não alcança, como a outra pessoa que assina a organização, entra na terceira pessoa. Quem só fica a par recebe, na conversa dele, um aviso curto, sem as perguntas de quem decide.
 O comprovante de pagamento segue `Canal do comprovante`. O e-mail sai por `enviar-email`, com o arquivo anexado e o sim da pessoa, e o WhatsApp só avisa que foi por e-mail e pede a confirmação. Com `e-mail e WhatsApp`, o arquivo vai também na conversa, antes do aviso. Sem conversa de e-mail com a organização, mande o arquivo no WhatsApp e diga isso.
