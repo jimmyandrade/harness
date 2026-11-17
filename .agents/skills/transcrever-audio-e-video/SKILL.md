@@ -3,7 +3,7 @@ name: transcrever-audio-e-video
 description: Transcreve um áudio ou vídeo local com o SpeechAnalyzer da Apple ou o Whisper local, detecta o que está instalado e só propõe instalar com o sim da pessoa. Usada quando a pessoa manda uma gravação para virar texto, mesmo sem dizer Whisper. NÃO serve para reunião que já tem transcrição, identificar quem fala nem enviar o arquivo a um serviço externo.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.5.1"
   related:
     - definir-registro-de-reuniao
     - evoluir-habilidade
@@ -70,7 +70,7 @@ Com o `SpeechTranscriber`, compile `scripts/speech_transcribe.swift` na `Pasta d
 Não use o `SFSpeechRecognizer`, nem como reserva: numa reunião de 18 minutos ele devolveu cerca de um terço das palavras dos outros dois e ainda pede permissão de fala. A ADR 0027 do core registra a medição e o jeito de rodá-lo, se for preciso.
 
 Com o `Whisper`, rode o `whisper-cli` com o `Idioma da transcrição`, `-ml 0` e as saídas `.txt` e `.srt`. Com `Termos do prompt` preenchido, passe-os em `--prompt`.
-Num Apple M4 Pro, o tempo é cerca de um dezoito avos da duração do áudio. Leia `references/tempos-medidos.md` quando for avisar o tempo de um arquivo longo ou de um lote. Em outra máquina o tempo muda: avise a pessoa antes e espere o resultado no mesmo turno.
+Num Apple M4 Pro, o tempo é cerca de um dezoito avos da duração do áudio. Leia a seção "Whisper speed on 45 recordings" da ADR 0027 do core quando for avisar o tempo de um arquivo longo ou de um lote. Em outra máquina o tempo muda: avise a pessoa antes e espere o resultado no mesmo turno.
 Com mais de uma gravação, rode o script de lote: ele é retomável, roda uma instância só, começa pelas mais curtas e registra a falha de cada gravação sem parar as outras. Diga o tempo estimado do lote antes de começar.
 
 ### Passo 6

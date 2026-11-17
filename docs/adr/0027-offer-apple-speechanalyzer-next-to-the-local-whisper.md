@@ -60,6 +60,23 @@ Three engines transcribed one 18 min 16 s meeting recording in Portuguese (an mp
 - The two measurements ran on different machines, a MacBook Air and a MacBook Pro with an M4 Pro, so their times do not compare with each other. Only the comparison between engines inside each measurement holds.
 - Two recordings are still a small sample. A new macOS or a new kind of audio calls for another measurement.
 
+## Whisper speed on 45 recordings
+
+Measured on 45 meeting recordings in Portuguese, on an Apple M4 Pro with 24 GB, with `ggml-large-v3-turbo-q5_0.bin`, `-ml 0` and the wav extraction included in the time. In all, 1714 minutes of audio took 94 minutes of wall clock, at 18.3 times the real time.
+
+| Recording length | Recordings | Average speed |
+| --- | --- | --- |
+| up to 30 min | 24 | 19.0x |
+| 30 to 60 min | 13 | 19.5x |
+| 60 to 90 min | 2 | 20.2x |
+| 90 min or more | 6 | 16.7x |
+
+- The speed per recording went from 3x to 41x, with a median of 19.8x. The cause of the 3x, which appeared once, was not found.
+- The expected time of a recording is its length divided by 18, as an estimate and not a promise.
+- The Whisper does not report progress. A percentage bar is an estimate from this speed.
+- Another machine, another model or another language changes the numbers. Measure before promising.
+- On the 18 min 16 s recording of the second measurement, `SpeechTranscriber` ran at about 113 times the real time and `whisper-cli` at about 22 times. Two recordings are too few to promise a time.
+
 ## Consequences
 
 - A Mac with macOS 26 or later transcribes with nothing to install. The first use of a language may download the Apple language model.
