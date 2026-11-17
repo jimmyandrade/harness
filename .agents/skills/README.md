@@ -712,6 +712,7 @@ flowchart LR
   inscrever_na_oportunidade --> redigir_com_tom_de_voz
   investigar_problema --> conversar_no_whatsapp
   investigar_problema --> definir_artigo_da_base_de_conhecimento
+  investigar_problema --> definir_pessoa
   investigar_problema --> definir_post_mortem
   investigar_problema --> definir_tarefa
   investigar_problema --> enviar_email
