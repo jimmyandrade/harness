@@ -626,6 +626,7 @@ flowchart LR
   enviar_email --> organizar_emails
   enviar_email --> procurar_email
   enviar_email --> redigir_com_tom_de_voz
+  enviar_email --> rotular_item
   enviar_mensagem_no_slack --> definir_agenda
   enviar_mensagem_no_slack --> definir_pessoa
   enviar_mensagem_no_slack --> definir_vocabulario
