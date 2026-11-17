@@ -3,7 +3,7 @@ name: publicar-ata-de-reuniao
 description: Publica a ata de um registro de reunião no destino compartilhado, depois de uma triagem que separa o que é privado, como um one-on-one ou um assunto sensível, e do sim da pessoa. Usada quando o registro está pronto e a ata vai para a página do time. NÃO serve para registrar a reunião, escrever o resumo nem publicar a transcrição.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   related:
     - definir-pessoa
     - definir-registro-de-reuniao
@@ -19,6 +19,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 ```yaml
 # `Destino da ata` é a página ou pasta compartilhada onde a ata pública fica. Vazio, a habilidade não publica.
 "Destino da ata": ""
+# `Modelo da ata` é a página ou o arquivo com o modelo da ata. Vazio, a habilidade procura uma página `Template` ou `Modelo` no destino.
+"Modelo da ata": ""
 # `Destino da ata privada` é a página ou pasta de acesso restrito da ata que a triagem marca como privada. Vazio, a ata privada não é publicada.
 "Destino da ata privada": ""
 # `Árvore da triagem da ata` é o arquivo `.mmd` com as perguntas da triagem, lido de cima para baixo. Vazio, cada reunião é uma pergunta à pessoa.
@@ -62,6 +64,8 @@ Espere o sim da pessoa para essa ata e para esse destino. O sim a uma ata não v
 
 A ata leva o resumo, as ações, os participantes e a fonte. Nunca leva a transcrição bruta nem um trecho dela.
 O título e a data são os do registro. Participantes e responsáveis vão com menção real da plataforma, como manda `definir-pessoa`.
+A página segue o `Modelo da ata`, também na ata de Daily: procure o modelo no destino antes de escrever e siga as seções dele, na ordem. O que as outras regras pedem, como menção e decisão, entra por cima. Outra ata só serve de referência se nenhum modelo existir.
+Diga na resposta qual modelo usou, com o link.
 Publique no destino escolhido. Releia a página publicada e confira que nenhum trecho sensível entrou.
 Grave o link da ata no registro e entregue à pessoa o link com o título da página, o destino e o que ficou fora.
 
@@ -93,6 +97,14 @@ Se você publicar a transcrição ou um trecho dela para a ata ficar completa, o
 1. Publique só o resumo, as ações, os participantes e a fonte.
 2. A transcrição fica no registro.
 
+### Ata no formato de outra ata
+
+Se você copiar a estrutura da ata de outra reunião quando o destino tem um modelo, a ata sai fora do padrão do time.
+
+1. Procure o modelo no destino antes de escrever.
+2. Siga as seções dele, na ordem.
+3. Use outra ata só se nenhum modelo existir.
+
 ### Reunião de dois tratada como do time
 
 Se você publicar a ata de um one-on-one no destino do time, o assunto pessoal fica visível a todos.
@@ -122,6 +134,7 @@ A primeira pergunta da árvore bateu: só duas pessoas, e uma é quem pediu. A a
 
 ## Pegadinhas
 
+- A ata da reunião anterior parece o modelo. Ela é só uma ata, e o modelo é a página `Template` ou `Modelo` do destino.
 - O título de uma reunião recorrente do time parece provar que ela é do time. A conversa pode ter sido só entre duas pessoas.
 - A lista de convidados parece a lista de participantes. Confira com quem falou.
 - Uma menção parece só um jeito de escrever o nome. Ela notifica a pessoa assim que a página sai.
