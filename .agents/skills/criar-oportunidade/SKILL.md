@@ -5,9 +5,14 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.25.0"
+  version: "0.26.0"
   related:
     - procurar-oportunidade
+    - procurar-inscricao
+    - reconhecer-imagem
+    - conversar-no-whatsapp
+    - enviar-email
+    - redigir-com-tom-de-voz
     - definir-empresa
     - definir-local-fisico
     - definir-localidade-geografica
@@ -74,6 +79,10 @@ O título e a síntese descrevem a oferta: chamada, edição, modalidade, data, 
 
 O arquivo do cartaz, do print da divulgação ou do comunicado desta data vai nos anexos da edição, na mesma gravação, sem pedir confirmação. Preserve os arquivos que já estão lá e não anexe o mesmo arquivo de novo. Use a referência de arquivo aceita pela ferramenta: o ID do anexo da conversa pode não ser um ID de arquivo do Notion. Se o pedido só consulta a edição, ofereça anexar e não grave. Sem os anexos da edição no mapeamento, liste o arquivo no fim, como valor sem propriedade.
 
+A legenda de um post muitas vezes não traz o nome, a data, o local ou o prazo. Leia também a imagem do card, por `reconhecer-imagem`, antes de perguntar à pessoa o que falta, e diga na resposta de onde veio cada dado, como "a data veio da imagem". Dado que só a imagem traz não é falha nem pede aviso.
+
+Legenda e imagem com datas diferentes: avise a organização na hora, sem esperar a pessoa pedir. Prefira o WhatsApp ou o e-mail que já temos dela e, sem canal, um comentário no post. O texto passa por `redigir-com-tom-de-voz`, o envio segue `conversar-no-whatsapp` ou `enviar-email`, e a resposta conta o que foi avisado. A data a gravar segue o Passo 3, para fontes em conflito.
+
 As etapas do cronograma da edição, inclusive a programação publicada, seguem `definir-cronograma`. Esta habilidade não as grava.
 
 ### Passo 6
@@ -88,7 +97,7 @@ Sem URL no texto, o link de inscrição fica vazio. O e-mail da organização va
 
 Quando a pessoa envia o link completo de uma página específica de uma plataforma de ingressos e o link oficial ou o de inscrição está vazio, genérico ou menos específico, troque-o pelo específico na oportunidade existente, sem criar outra. Duas URLs da mesma plataforma com o mesmo identificador são a mesma oportunidade.
 
-O local e a localidade seguem `definir-local-fisico`, que confirma o nome do espaço e o endereço, cadastra a empresa do local pelo `definir-empresa` e a localidade pelo `definir-localidade-geografica`, sempre com o sim da pessoa. Esta habilidade não cria empresa nem localidade por conta própria e só vincula o que já existe. Nunca use o estado como aproximação da cidade.
+O local e a localidade seguem `definir-local-fisico`, que confirma o nome do espaço e o endereço e cadastra a empresa do local pelo `definir-empresa`. A empresa fora da lista, com o nome do espaço e o endereço vindos da fonte, é cadastrada na mesma resposta, sem perguntar. A localidade que falta segue `definir-localidade-geografica`. Esta habilidade não cria empresa nem localidade por conta própria: chama essas habilidades e vincula o resultado. Nunca use o estado como aproximação da cidade.
 
 A etiqueta de e-mail da edição guarda o nome inteiro da etiqueta que a caixa aplica às conversas desta data, não o identificador: a busca da caixa usa o nome, e o identificador muda de uma conta para outra. Quando a etiqueta é renomeada, o campo muda junto.
 
@@ -100,7 +109,11 @@ Revisar o conteúdo, o corpo ou as anotações de uma edição que já existe se
 
 ### Passo 8
 
-Mostre o título, a data, o grupo, quando há, o nome da etiqueta de e-mail, os arquivos anexados e o link. Liste os valores que ficaram sem propriedade. Na edição nova de um grupo, mostre as lições das notas do grupo, cada uma com a data, como pontos de atenção da próxima participação. A decisão humana fica vazia e não vira pergunta nem pendência na resposta: ela é da revisão das oportunidades, quando a pessoa quiser. Não organize a participação. Não inscreva. Não crie tarefa. A resposta não pede para nomear a habilidade.
+Mostre o título, a data, o grupo, quando há, o nome da etiqueta de e-mail, os arquivos anexados e o link. Liste os valores que ficaram sem propriedade. Mostre o link do Google Maps do local, que `definir-local-fisico` devolve, para a pessoa ver como é o lugar.
+
+Procure por `procurar-inscricao` uma inscrição em outra oportunidade na mesma data da edição nova. Havendo, avise do conflito: diga as duas oportunidades, a data com o dia da semana e o status de cada inscrição, e que quem vai em cada uma é decisão da pessoa, caso a marca seja selecionada nas duas. Não decida isso e não crie tarefa.
+
+Na edição nova de um grupo, mostre as lições das notas do grupo, cada uma com a data, como pontos de atenção da próxima participação. A decisão humana fica vazia e não vira pergunta nem pendência na resposta: ela é da revisão das oportunidades, quando a pessoa quiser. Não organize a participação. Não inscreva. Não crie tarefa. A resposta não pede para nomear a habilidade.
 
 ### Passo 9
 
@@ -224,7 +237,9 @@ gravei a edição com o resto. No fim, listei o comentário sem propriedade e pr
 - A data é anterior à `Data mínima da edição`: não grave. Pergunte.
 - Dois dias com hora: a data da edição recebe o intervalo, com as horas. Cada data no texto leva o próprio dia da semana.
 - O texto não traz URL: o link de inscrição fica vazio.
-- A empresa ou a localidade não está na lista: pergunte. O local segue `definir-local-fisico`.
+- A empresa do local não está na lista e a fonte traz o nome do espaço e o endereço: cadastre por `definir-local-fisico`, sem perguntar. Sem o endereço, ou com a localidade fora da lista, a pergunta é a dela.
+- A legenda não traz o dado, e a imagem traz: use a imagem e diga que veio dela. Legenda e imagem com datas diferentes: avise a organização, como o Passo 5 manda.
+- Já há inscrição em outra oportunidade na mesma data: avise do conflito. Não decida quem vai em cada uma.
 - Seleção, inscrição, edital ou chamada: não vira página na lista de oportunidades.
 - A pessoa enviou cartaz, print ou comunicado da edição: o arquivo vai nos anexos da edição, sem duplicar. Na consulta, só ofereça.
 - Conta própria desta edição: perfis da edição. Perfil oficial fica com `definir-grupo-de-oportunidades`.
