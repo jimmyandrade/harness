@@ -3,7 +3,7 @@ name: definir-instrucoes-do-projeto
 description: Use essa habilidade sempre que for criar, revisar, enxugar ou reorganizar as instruções do projeto, inclusive os parâmetros das habilidades, mesmo sem dizer AGENTS. NÃO use para escrever uma skill, o guia de contribuição, o mapa da arquitetura nem a documentação do produto.
 metadata:
   author: jimmyandrade
-  version: "0.14.1"
+  version: "0.14.2"
   related:
     - criar-habilidade
     - evoluir-habilidade
@@ -83,6 +83,14 @@ Se você escrever "Idioma da mensagem" quando a habilidade lê "Idioma da mensag
 
 1. Abra o bloco de parâmetros da habilidade instalada.
 2. Copie a chave exata.
+
+### Regra de tarefa nas instruções
+
+Se você gravar nas instruções do projeto a regra de uma tarefa que uma skill cobre, como validar a descrição de um produto ou sincronizá-la com a loja, o agente que executa a skill não a lê e a regra falha onde importa.
+
+1. Ache a skill da tarefa e leve a regra para ela, com `evoluir-habilidade`.
+2. Valor que muda de um projeto para outro vira parâmetro dessa skill.
+3. Nas instruções ficam só a regra que vale para toda tarefa e a que nenhuma skill cobre.
 
 ### Regra de código duplicada
 

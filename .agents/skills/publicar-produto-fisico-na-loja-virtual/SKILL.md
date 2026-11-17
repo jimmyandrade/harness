@@ -1,14 +1,15 @@
 ---
 name: publicar-produto-fisico-na-loja-virtual
-description: Publica e corrige um produto físico na loja virtual, com título, slug, variantes, estoque e prontidão para venda e marcação em post. Usada quando o produto vai à loja virtual ou precisa de correção lá, mesmo sem dizer loja. NÃO serve para cadastrar o produto, registrar o preço, movimentar estoque, vender no ponto de venda físico nem escrever o post.
+description: Publica e corrige um produto físico na loja virtual, com título, slug, descrição, variantes, estoque e prontidão para venda e marcação em post. Usada quando o produto vai à loja virtual ou precisa de correção lá, mesmo sem dizer loja. NÃO serve para cadastrar o produto, registrar o preço, movimentar estoque, vender no ponto de venda físico nem escrever o post.
 metadata:
   author: jimmyandrade
-  version: "0.1.2"
+  version: "0.2.0"
   aliases:
     - definir-produto-na-loja
   related:
     - registrar-preco-de-produto-fisico
     - gerenciar-estoque
+    - redigir-com-tom-de-voz
     - evoluir-habilidade
 ---
 
@@ -63,6 +64,10 @@ Diga o que falta. Um canal que um aplicativo gerencia, como o do Instagram, não
 
 ### Passo 7
 
+Quando a descrição do produto muda no registro, valide o texto novo contra o vocabulário, com `redigir-com-tom-de-voz`, antes de gravar, e sincronize a descrição com o produto na loja na mesma passada. Produto que ainda não está na loja: diga que não há o que sincronizar.
+
+### Passo 8
+
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
@@ -87,6 +92,14 @@ Se você disser que o produto pode ser marcado no post sem conferir o Passo 6, a
 
 1. Rode a lista do Passo 6.
 2. Diga cada item que falta e quem faz.
+
+### Descrição alterada sem sincronizar
+
+Se você grava a descrição nova no registro e não a leva à loja, o texto da loja diz outra coisa que o do registro.
+
+1. Valide o texto contra o vocabulário antes de gravar.
+2. Leia o produto na loja e grave a descrição nova na mesma passada.
+3. Produto fora da loja: diga que não há o que sincronizar.
 
 ## Exemplos de entrada e saída
 
