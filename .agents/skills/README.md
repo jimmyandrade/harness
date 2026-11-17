@@ -104,7 +104,6 @@ flowchart LR
     descrever_habilidade_ou_schema["descrever-habilidade-ou-schema"]
     dividir_mensagem["dividir-mensagem"]
     emitir_documento_oficial["emitir-documento-oficial"]
-    entregar_rascunho_de_mensagem["entregar-rascunho-de-mensagem"]
     enviar_email["enviar-email"]
     enviar_mensagem_no_slack["enviar-mensagem-no-slack"]
     escrever_codigo["escrever-codigo"]
@@ -627,7 +626,6 @@ flowchart LR
   descrever_habilidade_ou_schema --> testar_habilidade
   dividir_mensagem --> comunicar_novidade_do_produto
   dividir_mensagem --> rascunhar_mensagem
-  entregar_rascunho_de_mensagem --> enviar_mensagem_no_slack
   enviar_email --> acompanhar_retornos_pendentes
   enviar_email --> conversar_no_whatsapp
   enviar_email --> definir_pessoa
@@ -641,9 +639,9 @@ flowchart LR
   enviar_mensagem_no_slack --> definir_agenda
   enviar_mensagem_no_slack --> definir_pessoa
   enviar_mensagem_no_slack --> definir_vocabulario
-  enviar_mensagem_no_slack --> entregar_rascunho_de_mensagem
   enviar_mensagem_no_slack --> escrever_link
   enviar_mensagem_no_slack --> pedir_revisao_de_pr_no_slack
+  enviar_mensagem_no_slack --> rascunhar_mensagem
   enviar_mensagem_no_slack --> redigir_com_tom_de_voz
   escrever_codigo --> criar_commit
   escrever_codigo --> criar_pull_request

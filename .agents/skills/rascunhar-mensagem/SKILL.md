@@ -3,8 +3,9 @@ name: rascunhar-mensagem
 description: Escreve, mostra e envia a mensagem de WhatsApp depois de a conversa ser lida, com o destino, o texto, a divisão e o comprovante conferidos. Usada quando a pessoa quer responder, mandar ou corrigir uma mensagem. NÃO serve para ler a conversa, redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   aliases:
+    - entregar-rascunho-de-mensagem
     - rascunhar-mensagem-no-whatsapp
   related:
     - acompanhar-resposta-no-whatsapp
@@ -32,6 +33,8 @@ Leia os valores nas instruções do projeto, na entrada desta habilidade. Na aus
 # `Formato da data na mensagem` vale para o texto que vai a uma pessoa: por extenso, sem zero no dia, não deixa dúvida entre dia e mês.
 "Formato da data na mensagem": "terça-feira, 1 de setembro de 2026"
 "Modo de aprendizado": "perguntar"
+# `Entrega dos rascunhos` é `chat` ou `artefato`. Com `artefato`, os rascunhos pendentes ficam numa página única, aberta no painel da sessão, com uma caixa de marcar o que já foi enviado.
+"Entrega dos rascunhos": "chat"
 # `Canal do comprovante` é `e-mail na mesma conversa` (e-mail em resposta à organização, com o arquivo anexado; o WhatsApp só avisa), `WhatsApp` (arquivo na conversa) ou `e-mail e WhatsApp` (nos dois).
 "Canal do comprovante": "WhatsApp"
 # `Página de instruções do WhatsApp` é o endereço da página com as regras da conta, como a ferramenta comercial por onde a mensagem sai. Vazio pula a leitura.
@@ -85,6 +88,7 @@ Todo rascunho de mensagem aparece na resposta do chat. Mostre a conversa de dest
 O texto vai na mensagem de fechamento do turno, junto com o pedido do sim: o escrito antes de um quadro de próximo passo pode ser cortado.
 Uma mensagem que diz que um trabalho está em andamento, foi registrado ou foi feito leva o link da tarefa, da página ou do pull request que mostra esse registro. Sem esse registro, crie-o antes, como `definir-tarefa` manda, ou pergunte onde ele está.
 Com a ferramenta de widget na sessão, o widget vem sempre, além dos blocos: o destinatário, um campo editável por mensagem com a altura do texto inteiro, um botão para copiar e um botão que manda o texto aprovado de volta ao chat. Se a pessoa editar, a versão dela substitui o rascunho e aparece de novo antes do sim.
+Com `Entrega dos rascunhos` em `artefato`, o rascunho nunca fica só no chat: uma página única, aberta no painel, guarda cada rascunho como registro num banco dela, com a ordem, o título, o destino com link, o texto, uma nota, se foi enviado e quando, e uma caixa de marcar como enviado. O rascunho novo entra no fim e o enviado desce para `Já enviados`. Atualize a mesma página, leia a marca de cada registro antes de mudar a lista e nunca desmarque o que a pessoa marcou. A resposta cita a página. Sem a ferramenta de página, entregue no chat e diga isso.
 
 O texto não usa Markdown: negrito é um asterisco de cada lado, itálico é sublinhado, e não há título nem link entre colchetes.
 
@@ -226,6 +230,7 @@ Li a resposta como a da pergunta: o carro pode entrar na montagem, em qualquer j
 - Uma resposta curta parece incompleta quando não repete o detalhe que a conversa já traz. Ela responde a pergunta como foi escrita: confira o texto da pergunta antes de achar que falta algo.
 - O rascunho de ontem parece valer. A conversa pode ter mudado: leia antes e rascunhe só o que falta.
 - Ao dividir uma lista numerada, o campo pode renumerar o item solto e a parte que continua a lista voltar para "1.". Confira no print e, no WhatsApp Web, siga `usar-whatsapp-web`.
+- A caixa de marcar parece só do agente. A pessoa também a marca, e a marca dela não se desfaz.
 - A mensagem parece pedir assinatura como um e-mail. A conversa já mostra quem escreve.
 - "Vimos seu aviso de ontem" parece educado. Se a mensagem mais recente do contato é de hoje, a frase responde à anterior: confira a data de cada mensagem citada e use a última.
 - Uma chave Pix em forma de e-mail parece só um destino de pagamento. Quando a organização a mandou para pagar, o comprovante vai para esse endereço, e perguntar se ele serve repete o que ela já disse.
