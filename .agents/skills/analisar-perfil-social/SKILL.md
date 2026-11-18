@@ -131,7 +131,7 @@ Se você descrever o conteúdo de um destaque pelo nome dele ou pela edição qu
 1. Abra cada destaque, em qualquer modo, inclusive no automático.
 2. Confira se os quadros abriram. Quadro vazio ou preto não foi lido.
 3. Liste o destaque em `Limites da análise`.
-3. Ofereça ler no navegador da própria pessoa.
+4. Ofereça ler no navegador da própria pessoa.
 
 ### Nota única
 
