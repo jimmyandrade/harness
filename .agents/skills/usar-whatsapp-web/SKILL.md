@@ -3,7 +3,7 @@ name: usar-whatsapp-web
 description: Abre, mantém e reaproveita a única aba do WhatsApp Web no Chrome da pessoa, pela extensão Claude in Chrome, e faz a sessão dona atender as leituras e os envios das outras sessões. Usada sempre que uma habilidade precisa abrir, ler, enviar texto, anexar imagem ou documento no WhatsApp Web, mesmo sem dizer aba. Não serve para achar a conversa, redigir a mensagem, rotular nem decidir o que enviar.
 metadata:
   author: jimmyandrade
-  version: "0.8.4"
+  version: "0.8.5"
   related:
     - transcrever-audio-e-video
     - acompanhar-resposta-no-whatsapp
@@ -57,6 +57,8 @@ Depois de enviar, a dona registra a troca por `definir-negociacao`, na mesma rod
 Depois de ler ou enviar numa conversa, a dona segue `manter-contato-no-whatsapp` antes de responder a quem pediu.
 
 Áudio recebido na conversa lida é transcrito na mesma leitura, por `transcrever-audio-e-video`, e a dona devolve a transcrição completa, palavra por palavra, com a duração e o horário. Quem pediu mostra essa transcrição completa à pessoa, na própria resposta e antes de qualquer resumo ou conclusão, e nunca só um resumo. A pessoa nunca precisa ouvir o áudio para saber o que ele diz. Só se a transcrição falhar, diga o que falhou e peça o arquivo.
+
+Antes de dizer que um áudio falta transcrever, leia a reação nossa nele e as respostas citadas: se trazem o texto, mostre-o inteiro, sem transcrever de novo.
 
 Antes de cada Enter, a dona relê a conversa inteira, desde a última mensagem que ela enviou, e compara com o texto que vai mandar. O texto vem de quem o escreveu, com o que essa pessoa ou sessão sabia na hora, e a conversa pode ter mudado depois. Se a pessoa do outro lado respondeu, mesmo com um "olá" ou um "só fazendo teste", o texto não sai como veio: a dona o refaz à luz da resposta e o mostra de novo, como o parágrafo acima manda.
 
