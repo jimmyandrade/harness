@@ -1,5 +1,28 @@
 # Changelog
 
+## [1.97.0](https://github.com/jimmyandrade/harness/compare/v1.96.0...v1.97.0) (2026-11-18)
+
+
+### Features
+
+* **acompanhar-retornos-pendentes:** follow the panel link a portal email points to ([#1330](https://github.com/jimmyandrade/harness/issues/1330)) ([64098ff](https://github.com/jimmyandrade/harness/commit/64098ff93a95e65a8a90b4392b2ffd4e127fbcc7))
+* **analisar-perfil-social:** limit the scan, open every highlight and ask before opening them ([#1322](https://github.com/jimmyandrade/harness/issues/1322)) ([14a1680](https://github.com/jimmyandrade/harness/commit/14a1680ddbf68c685e02f8177343a81319663ad7))
+* **analisar-perfil-social:** make the reach of the profile reading three parameters ([#1321](https://github.com/jimmyandrade/harness/issues/1321)) ([0730e85](https://github.com/jimmyandrade/harness/commit/0730e8552ecf32d6fc3ae4033ae349056eb185a9))
+* **analisar-perfil-social:** require the analysis to reach its destination and link the profile ([#1323](https://github.com/jimmyandrade/harness/issues/1323)) ([60da43e](https://github.com/jimmyandrade/harness/commit/60da43ea90e33ef5ff71cbf260dbd6d3817acf58))
+* **escrever-texto-da-revisao:** write the review text in its own skill ([#1332](https://github.com/jimmyandrade/harness/issues/1332)) ([74e9c06](https://github.com/jimmyandrade/harness/commit/74e9c06dd4318e8f969615025946945aa48cd04b))
+* **redigir-com-tom-de-voz:** ban availability offers at the end of any text ([#1319](https://github.com/jimmyandrade/harness/issues/1319)) ([b343610](https://github.com/jimmyandrade/harness/commit/b343610767ceee6baebeb0c2eabfbd62cabec59a))
+* **transcrever-audio-e-video:** run every available engine and compare the texts ([#1326](https://github.com/jimmyandrade/harness/issues/1326)) ([e6b36c2](https://github.com/jimmyandrade/harness/commit/e6b36c2218157351a820117454ccbf77667c186d))
+
+
+### Bug Fixes
+
+* **acompanhar-fila-de-revisao:** scan the chat in every run and read the request thread before reviewing ([#1328](https://github.com/jimmyandrade/harness/issues/1328)) ([e5a705b](https://github.com/jimmyandrade/harness/commit/e5a705b09287ed52e869d0eb65ec77591de606f0))
+* **analisar-perfil-social:** link the profile of an organizer who is a person only to the person ([#1324](https://github.com/jimmyandrade/harness/issues/1324)) ([07b534a](https://github.com/jimmyandrade/harness/commit/07b534aee42be03fbf81f46594777fbd87e59fdd))
+* **definir-artigo-da-base-de-conhecimento:** put the article link in the final message ([#1327](https://github.com/jimmyandrade/harness/issues/1327)) ([437489c](https://github.com/jimmyandrade/harness/commit/437489cde288162b53d0165399c1087cab73d8d2))
+* **instructions:** open the answer by saying whether the requested action was done ([#1331](https://github.com/jimmyandrade/harness/issues/1331)) ([8395f15](https://github.com/jimmyandrade/harness/commit/8395f1582f5fb162ea7f2022f84e0739b2b73dbf))
+* **procurar-email:** label every email thread read before reporting it ([#1329](https://github.com/jimmyandrade/harness/issues/1329)) ([187d552](https://github.com/jimmyandrade/harness/commit/187d552ad707c76d0ee1c8e691d9033704f9f21e))
+* **usar-whatsapp-web:** read the reaction and the quoted replies before calling an audio untranscribed ([#1325](https://github.com/jimmyandrade/harness/issues/1325)) ([4671530](https://github.com/jimmyandrade/harness/commit/4671530233dcdfeb123c5a1db26532d2f0f1b328))
+
 ## [1.96.0](https://github.com/jimmyandrade/harness/compare/v1.95.0...v1.96.0) (2026-11-18)
 
 
