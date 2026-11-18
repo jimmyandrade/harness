@@ -3,7 +3,7 @@ name: acompanhar-fila-de-revisao
 description: Roda o ciclo da fila de revisão de pull requests. Confere o horário, cuida primeiro dos seus PRs, acha os pedidos, fecha o laço dos já revisados, escolhe o próximo, revisa um por execução e prepara o aviso a quem pediu. Os avisos ficam só como rascunho, com o link. Não serve para revisar sozinha nem achar pedidos por conta própria.
 metadata:
   author: jimmyandrade
-  version: "0.8.1"
+  version: "0.8.2"
   related:
     - enviar-mensagem-no-slack
     - evoluir-habilidade
@@ -64,6 +64,7 @@ Cuide primeiro dos PRs da própria pessoa que precisam de ação, antes de qualq
 ### Passo 3
 
 Chame `procurar-pedido-de-revisao` e use a lista dele: os candidatos, o nível de cada um, as novas rodadas, os que esperam confirmação e as perguntas propostas.
+A varredura da conversa não se pula, nem em modo agendado e nem quando o GitHub já deu candidatos.
 
 ### Passo 4
 
@@ -81,6 +82,7 @@ Passe para a frente da fila o PR que ainda espera um dos `Checks exigidos` termi
 ### Passo 6
 
 Revise o primeiro item da fila, até o número de `Revisões por execução`, chamando `publicar-revisao-de-codigo`.
+Antes de revisar o item, leia a thread do pedido dele e ponha o link na ficha. Sem pedido achado, diga onde procurou.
 A revisão sempre passa por ela, que chama `levantar-contexto-do-pull-request`, a cópia de trabalho separada e `priorizar-itens`. Nunca revise só lendo o diff nem com a `code-review` do Claude sozinha, e nunca mexa no clone da pessoa.
 O link de um PR que a pessoa manda no meio da execução, sem mais texto, é um pedido de revisão: ele entra como primeiro item e segue o mesmo caminho.
 Não revise um PR que a skill de achar pedidos marcou como não pronto. Quem revisa trata do estado do PR, da cópia separada e da limpeza.
@@ -110,6 +112,8 @@ Guarde o estado da fila e as datas das varreduras em `Onde guardar o estado da f
 ### Passo 9
 
 Termine com um resumo de uma coisa de cada vez, com todo PR citado como link `[#123](url)`: abra só com o item que precisa da decisão da pessoa agora, em até cinco linhas e com uma única pergunta, e ofereça o próximo. O resto (o que foi achado, os pedidos cujo PR já estava mesclado ou fechado, os PRs que esperam checks, os rascunhos com o link da thread de cada um, as falhas e as pendências) fica guardado no estado da fila e só aparece quando a pessoa pedir. Uma fonte que falhou, como a agenda, ganha uma linha no resumo e é tentada de novo na execução seguinte, sem perguntar. Em modo agendado, uma pergunta de calibração, de grupo, de canal ou de login nunca vai por mensagem direta: fica no resumo, uma de cada vez, e se repete a cada execução até a pessoa responder no chat. Em modo interativo, a mesma pergunta é feita no chat.
+
+Uma linha do resumo diz quais fontes foram varridas e quais não.
 
 Todo PR citado leva o endereço lido do campo `url` do próprio PR, nunca montado de cabeça nem com o login da pessoa como dono.
 
@@ -142,6 +146,13 @@ Se você avisar por mensagem direta que revisou, a pessoa de quem pediu fica sem
 1. Revise o pedido normalmente.
 2. Diga no resumo que ele veio por mensagem direta, com o link.
 3. Não avise por lá.
+
+### Conversa não varrida
+
+Se você pular o Slack porque o laço ou o GitHub já deram candidatos, um pedido da conversa fica sem resposta e a thread do pedido não é lida.
+
+1. Rode `procurar-pedido-de-revisao` com a conversa em toda execução, também no modo agendado.
+2. Leia a thread do pedido do item antes de revisar e diga no resumo quais fontes foram varridas.
 
 ### Pergunta feita sem ninguém na frente
 
@@ -190,6 +201,7 @@ Eram dez da noite, fora do horário de trabalho. Encerrei sem varrer nada.
 
 - A fila é cíclica: uma review nova manda o PR para o fim.
 - O laço lê só o GitHub. Não depende de pedido na conversa nem de mensagem direta.
+- Um laço ou um GitHub com candidatos parece dispensar o Slack. A conversa é varrida de qualquer jeito.
 - Um canal compartilhado com outra organização pode recusar reação e envio. Não insista nem avise por isso.
 - O aviso de status nunca traz o conteúdo dos achados.
 - Dois rascunhos no mesmo canal se apagam. Entregue o segundo como texto pronto.
