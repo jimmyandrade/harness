@@ -83,6 +83,8 @@ How these skills relate is in `README.md`, in this folder.
   - Opens the whole profile: bio, bio link, grid, highlights, pinned posts, and the configured number of recent posts, with captions and comments
   - When the channel opens the profile with a login notice, stops before reading, asks the person to sign in through the browser, says what the login unlocks, and without it lists what was left out; never types the person's password
   - With the password manager credential tool in the session, offers the login through it after the person says yes; the person approves the item in the manager, the value goes straight into the page, and the skill never sees the password or the verification code
+  - Reads the platform label and the like, comment, and share counters of each post, records an AI-content label as a signal with the post and date rather than an accusation, and checks what each counter is before using it
+  - Lists a highlight whose frames open empty or black as not read, does not infer its content from its title, offers to read it in the person's own browser, and says when opening a highlight may show the logged-in account as a viewer
   - Chooses the sections of the perfil-social output model by profile type, and leaves out the product fit and approach sections for a brand, fair, or event
   - Cites the post or highlight and its date for each signal, and writes an ambiguous item as a hypothesis with the possible readings, never as the intent of the person
   - Scores aesthetics and values and discourse separately, lists up to 5 green and 5 red signals, a one-sentence summary, and a next step that names the axis that weighed
