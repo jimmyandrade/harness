@@ -3,7 +3,7 @@ name: inscrever-na-oportunidade
 description: Preenche o cadastro ou o formulário que a organização de uma oportunidade pede para a inscrição, com os dados da empresa, no formato de cada campo, e envia só com o sim da pessoa. Usada quando a inscrição ou o cadastro de uma oportunidade está para ser feito. NÃO serve para registrar a inscrição no Notion, ler o regulamento, escrever à organização, salvo a resposta que confirma o envio, nem escrever o projeto que a inscrição pede.
 metadata:
   author: jimmyandrade
-  version: "0.4.4"
+  version: "0.4.5"
   related:
     - acompanhar-retornos-pendentes
     - analisar-regulamento-da-oportunidade
@@ -37,6 +37,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 Reúna o link do formulário ou do cadastro, a oportunidade e a exigência de `analisar-regulamento-da-oportunidade`, com o prazo.
 Sem o link, peça à pessoa e pare. A inscrição que já foi feita e só falta registrar segue `definir-inscricao`.
 Prazo vencido: diga isso na hora, preencha mesmo assim e, se o envio for recusado, proponha perguntar à organização se ainda aceita.
+
+Antes de preencher, de pré-inscrever ou de aceitar o convite, leia para quem a oportunidade se declara, como um público por gênero, porte ou local. Se a descrição restringe o público e a pessoa dona da empresa pode não se enquadrar, não inscreva: diga a restrição, não suponha a identidade de ninguém e proponha à pessoa perguntar à organização se a marca pode participar.
 
 Quando a exigência pede um projeto escrito, o texto vem pronto da produção cultural, pela tarefa que `analisar-regulamento-da-oportunidade` criou. Confira se a tarefa está feita e leia o texto entregue. Sem ele, não escreva o projeto aqui: prepare o resto, deixe o campo do projeto como pendência, diga o prazo e pare antes do envio.
 
@@ -187,6 +189,14 @@ Se você enviar o formulário de um convite que veio por e-mail e não responder
 1. Depois de registrar a inscrição, responda o e-mail do convite, confirmando.
 2. Cole o print da tela de confirmação no corpo, sem pedir o sim.
 3. Rotule a conversa como à espera de retorno.
+
+### Inscrição sem conferir o público
+
+Se você pré-inscrever numa oportunidade que se declara para um público e só depois ler a descrição, a marca pode estar inscrita onde não cabe e a pessoa descobre depois.
+
+1. Leia o público que a oportunidade declara antes de preencher.
+2. Restrição que a marca pode não atender: pare e proponha perguntar à organização.
+3. Inscreva só depois da resposta dela.
 
 ## Exemplos de entrada e saída
 
