@@ -3,7 +3,7 @@ name: acompanhar-retornos-pendentes
 description: Mantém uma rotina por canal, como e-mail, WhatsApp e site ou aplicativo, que lê as conversas em espera, o aviso que uma tarefa espera e a condição que um painel deve mostrar, avisa quando chegam e entrega o resultado à sessão. Usada quando uma mensagem espera resposta, uma tarefa espera um aviso ou um status precisa mudar num painel. Não serve para escrever a resposta, entrar com senha nem criar uma rotina por mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.9.1"
+  version: "0.9.2"
   related:
     - acompanhar-resposta-no-whatsapp
     - definir-hospedagem
@@ -119,6 +119,7 @@ Nessa primeira visita, procure nas requisições da página a API que ela chama,
 Achada a API, proponha uma vez por serviço trocar a leitura da tela por ela, como as instruções do projeto mandam.
 Se a API só responde com o token da sessão, não o copie: registre o achado na tarefa do assunto, com o endereço, o que cada chamada devolve e se o status vem na própria página, e siga lendo o texto da página no navegador já logado.
 Ela compara a tela com o último estado gravado na linha e avisa só quando muda.
+A resposta de uma sessão que abriu o painel começa dizendo que o abriu, a hora e o estado lido, antes de qualquer achado.
 Se o painel e a página de detalhe divergirem, vale a página inicial do painel, e o aviso diz a divergência.
 
 Numa conversa, com a pessoa presente, peça a credencial ao gerenciador de senhas antes de abrir o painel. A aprovação não faz o login: sem a ferramenta de preenchimento na sessão, ou diante de captcha e de código por SMS, diga isso e peça que a pessoa entre na aba.
