@@ -74,6 +74,24 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [ ] Three cases validated with the person
 
+### analisar-perfil-social
+- **Stability**: experimental
+- **Description**: Analyze the social profile of a person, brand, fair, or event for aesthetics, values, audience, and brand risk, and return a fit verdict
+- **Properties**:
+  - Lives at `.agents/skills/analisar-perfil-social/SKILL.md`
+  - Reads the brand positioning from the project instructions, and when it is missing asks once where it is and stops without scoring
+  - Opens the whole profile: bio, bio link, grid, highlights, pinned posts, and the configured number of recent posts, with captions and comments
+  - Chooses the sections of the perfil-social output model by profile type, and leaves out the product fit and approach sections for a brand, fair, or event
+  - Cites the post or highlight and its date for each signal, and writes an ambiguous item as a hypothesis with the possible readings, never as the intent of the person
+  - Scores aesthetics and values and discourse separately, lists up to 5 green and 5 red signals, a one-sentence summary, and a next step that names the axis that weighed
+  - States what the profile does not show, such as the presence at the venue of a fair or event
+  - Returns the analysis in the reply and writes nothing to a database, page, or task unless asked
+  - Says it did not analyze a private, blocked, or missing profile, and does not infer aesthetics or values from a name
+  - Does not register the profile, measure metrics in depth, or write the approach message
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses registering the profile, in-depth metrics, and writing the approach
+
 ### atender-revisao-de-pull-request
 - **Stability**: experimental
 - **Description**: Handle the review a pull request received: classify each suggestion, apply the safe ones, reply on each thread, and resolve the ones that were met
