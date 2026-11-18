@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.95.0](https://github.com/jimmyandrade/harness/compare/v1.94.1...v1.95.0) (2026-11-18)
+
+
+### Features
+
+* read the skills under plugins/*/skills/ in the skill checker ([#1213](https://github.com/jimmyandrade/harness/issues/1213)) ([ad08643](https://github.com/jimmyandrade/harness/commit/ad086432aa093e5629acb84b29a71094a9f99bd7))
+
+
+### Bug Fixes
+
+* open a store that answers 403 in the browser before asking for the page ([#1306](https://github.com/jimmyandrade/harness/issues/1306)) ([051eac4](https://github.com/jimmyandrade/harness/commit/051eac4400be9a3701fd5234a04be124dd68f1ad))
+* **perfilar-tom-de-voz:** close a reply to someone warm with an affectionate thank-you ([#1304](https://github.com/jimmyandrade/harness/issues/1304)) ([ead8bdf](https://github.com/jimmyandrade/harness/commit/ead8bdfa4b2e52d319498abb37020d026b4b0ea3))
+* **usar-whatsapp-web:** transcribe the audio in the same reading and never ask the person to listen ([#1303](https://github.com/jimmyandrade/harness/issues/1303)) ([9cb1869](https://github.com/jimmyandrade/harness/commit/9cb1869dbcde409375b9333e271482ea14b5478f))
+
 ## [1.94.1](https://github.com/jimmyandrade/harness/compare/v1.94.0...v1.94.1) (2026-11-18)
 
 
