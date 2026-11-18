@@ -3,7 +3,7 @@ name: redigir-com-tom-de-voz
 description: Use essa habilidade sempre que for criar, redigir, editar, revisar ou responder texto da marca no tom de voz, mesmo sem dizer copy. NÃO use para responder quem conversa com a IA, descrever uma skill, titular tarefa ou oportunidade, cravar a grafia, alterar formato de conteúdo, nem assumir cliente, peça, oportunidade ou histórico.
 metadata:
   author: jimmyandrade
-  version: "0.28.3"
+  version: "0.29.0"
   aliases:
     - escreva-usando-o-tom-de-voz
   related:
@@ -96,7 +96,11 @@ Afirmação de fato que só vem de uma busca ou de uma leitura sua, como "confer
 Escreva o que você viu ("não vi Z usar") e, quando alguém é dono do assunto, formule a conferência como pergunta a essa pessoa ("só X usa Y, certo?").
 Decisão que não é de quem escreve entra como recomendação ("é melhor deixar o campo condicional"), não como o que o time faz.
 
-O fechamento diz o próximo passo concreto, como a reunião já marcada, ou o canal de dúvidas que as instruções do projeto ou a pessoa indicam. Fechamento genérico que oferece quem escreve, como "qualquer dúvida, me chama", é clichê de IA e não entra. Sem canal indicado, pergunte.
+O fechamento diz o próximo passo concreto, como a reunião já marcada, ou o canal de dúvidas que as instruções do projeto ou a pessoa indicam.
+Oferta de disponibilidade no fim não entra em nenhum texto: nem "qualquer dúvida, me chama", nem "se preferir outra coisa, me fala", nem "fico à disposição", nem "qualquer coisa, me avisa".
+É clichê de IA e passa uma tarefa a mais para a pessoa.
+No lugar, o fechamento pede uma ação simples, como "dá uma olhadinha quando conseguir um tempo", ou deixa a pessoa livre para ajustar, como "fique à vontade para fazer os ajustes".
+Sem canal indicado, pergunte.
 
 Assunto, prévia, cabeçalho ou chamada inicial de e-mail, quando a pessoa provavelmente vê o texto como banner no celular, fica curto, pessoal, específico e chamativo. Verbo no imperativo pode faltar. O texto gera gatilho de ação ou de curiosidade. Essa curiosidade não diz que a chance já passou. Clickbait vazio fica de fora.
 
@@ -280,6 +284,7 @@ O título ficou específico, com o nome canônico que a fonte já tinha. Não vi
 - O motivo verdadeiro de uma mudança parece transparência. Contado a quem chega, como a troca frequente de pessoas no papel, ele é contexto interno e gera desconforto. O motivo neutro entra no lugar.
 - Assunto de e-mail parece legenda. No celular ele é notificação: curto, pessoal e com curiosidade.
 - Um apelido inventado por quem escreve parece deixar a mensagem calorosa, mas pode soar íntimo demais: só o cadastro confirma como a pessoa é chamada. O tratamento carinhoso que ela mesma usa conosco é outra coisa, e devolvê-lo é o rapport que esta habilidade pede.
+- Oferecer disponibilidade no fim parece cortesia. "Se preferir, me fala" e "qualquer dúvida, me chama" deixam a pessoa com mais uma tarefa. Peça uma ação simples ou deixe-a livre para ajustar.
 - O dado que a conversa já citou parece confirmado. Cliente, peça, oportunidade e histórico comercial vêm da fonte que a pessoa indicou.
 - Título publicitário parece o tom de voz. O texto pede intenção, recorte e conexão, e recusa a fórmula genérica. A busca precisa continuar achando o nome canônico.
 - "Reunião com X" parece claro. Em evento externo, o título diz o encontro e guarda o nome mais buscável.
