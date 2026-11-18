@@ -3,8 +3,9 @@ name: usar-whatsapp-web
 description: Abre, mantém e reaproveita a única aba do WhatsApp Web no Chrome da pessoa, pela extensão Claude in Chrome, e faz a sessão dona atender as leituras e os envios das outras sessões. Usada sempre que uma habilidade precisa abrir, ler, enviar texto, anexar imagem ou documento no WhatsApp Web, mesmo sem dizer aba. Não serve para achar a conversa, redigir a mensagem, rotular nem decidir o que enviar.
 metadata:
   author: jimmyandrade
-  version: "0.8.1"
+  version: "0.8.4"
   related:
+    - transcrever-audio-e-video
     - acompanhar-resposta-no-whatsapp
     - conversar-no-whatsapp
     - definir-negociacao
@@ -55,6 +56,8 @@ Só a dona envia: ela mostra a conversa e o texto à pessoa na conversa dela e e
 Depois de enviar, a dona registra a troca por `definir-negociacao`, na mesma rodada e sem perguntar, mesmo quando outra sessão pediu o envio, e diz o link do registro: a sessão que pediu não vê o que a dona enviou.
 Depois de ler ou enviar numa conversa, a dona segue `manter-contato-no-whatsapp` antes de responder a quem pediu.
 
+Áudio recebido na conversa lida é transcrito na mesma leitura, por `transcrever-audio-e-video`, e a dona devolve a transcrição completa, palavra por palavra, com a duração e o horário. Quem pediu mostra essa transcrição completa à pessoa, na própria resposta e antes de qualquer resumo ou conclusão, e nunca só um resumo. A pessoa nunca precisa ouvir o áudio para saber o que ele diz. Só se a transcrição falhar, diga o que falhou e peça o arquivo.
+
 Antes de cada Enter, a dona relê a conversa inteira, desde a última mensagem que ela enviou, e compara com o texto que vai mandar. O texto vem de quem o escreveu, com o que essa pessoa ou sessão sabia na hora, e a conversa pode ter mudado depois. Se a pessoa do outro lado respondeu, mesmo com um "olá" ou um "só fazendo teste", o texto não sai como veio: a dona o refaz à luz da resposta e o mostra de novo, como o parágrafo acima manda.
 
 Uma resposta que não responde à pergunta, como uma saudação ou um teste, quer dizer que a pessoa não leu ou não entendeu: o próximo texto não repete a pergunta igual.
@@ -100,6 +103,14 @@ Para anexar uma imagem ou um documento, siga `anexar-arquivo-no-whatsapp`: o des
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
+
+### Áudio devolvido à pessoa para ouvir
+
+Se você deixar o áudio da conversa sem transcrição, ou só resumir o que ele diz, a pessoa precisa ouvi-lo ela mesma e a resposta atrasa.
+
+1. Baixe o áudio e transcreva por `transcrever-audio-e-video` na mesma leitura.
+2. Devolva a transcrição completa, com a duração, o horário e os trechos incertos marcados, e mostre-a inteira à pessoa na resposta, antes de qualquer resumo.
+3. Só peça o arquivo se a transcrição falhar, e diga o que falhou.
 
 ### Aba fechada
 
