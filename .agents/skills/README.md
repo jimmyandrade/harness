@@ -1034,6 +1034,7 @@ flowchart LR
   usar_whatsapp_web --> definir_negociacao
   usar_whatsapp_web --> definir_rotina
   usar_whatsapp_web --> manter_contato_no_whatsapp
+  usar_whatsapp_web --> transcrever_audio_e_video
   usar_whatsapp_web --> triar_conversas
   validar_plano_de_vocabulario --> classificar_estado_do_termo
   validar_plano_de_vocabulario --> definir_vocabulario
