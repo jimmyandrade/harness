@@ -3,7 +3,7 @@ name: redigir-com-tom-de-voz
 description: Use essa habilidade sempre que for criar, redigir, editar, revisar ou responder texto da marca no tom de voz, mesmo sem dizer copy. NÃO use para responder quem conversa com a IA, descrever uma skill, titular tarefa ou oportunidade, cravar a grafia, alterar formato de conteúdo, nem assumir cliente, peça, oportunidade ou histórico.
 metadata:
   author: jimmyandrade
-  version: "0.28.2"
+  version: "0.28.3"
   aliases:
     - escreva-usando-o-tom-de-voz
   related:
@@ -88,6 +88,8 @@ A mensagem chama a pessoa como o cadastro de `definir-pessoa` diz que ela é cha
 
 O tratamento carinhoso que a própria pessoa usa conosco, como "meu querido", "amiga" ou um diminutivo afetuoso, volta na mesma medida: é rapport, e não apelido inventado. Leia as últimas mensagens dela antes de rascunhar e devolva o mesmo grau de calor, de risada e de emoji, dentro do vocabulário, sem perguntar a quem escreve se pode. Quem é cordial e formal recebe o mesmo tom, e o calor não se oferece a quem não o deu primeiro.
 
+A saudação com que ela abre a conversa volta igual, com a mesma grafia e o mesmo alongamento de vogal, como "Oieee", mesmo que ela a tenha usado uma vez só: isso é rapport, e não padrão a cadastrar no vocabulário.
+
 A saudação do período sai uma vez por dia em cada conversa. Se uma mensagem nossa já saudou hoje, a seguinte começa direto, sem bom dia, boa tarde nem boa noite.
 
 Afirmação de fato que só vem de uma busca ou de uma leitura sua, como "conferi o código e só X usa Y", não entra como certeza.
@@ -157,7 +159,7 @@ Se você confiar só em `classify_text`, que lê palavra por palavra, uma expres
 Se você escrever num tom neutro ou formal para quem nos trata com carinho, como "meu querido", o texto sai correto e frio, e a pessoa percebe que não houve rapport.
 
 1. Leia as últimas mensagens dela antes de rascunhar.
-2. Devolva o mesmo tratamento, a mesma saudação e o mesmo grau de calor, dentro do vocabulário.
+2. Devolva o mesmo tratamento, a mesma saudação, com o mesmo alongamento de vogal, e o mesmo grau de calor, dentro do vocabulário.
 3. Não transforme isso em pergunta à pessoa que escreve, e não use apelido que ela não usou.
 
 ### Nome ou saudação que a conversa já resolveu
