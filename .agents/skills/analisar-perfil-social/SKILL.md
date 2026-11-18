@@ -4,7 +4,7 @@ description: Analisa o perfil social de uma pessoa, marca, feira ou evento pela 
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.6.0"
   related:
     - definir-perfil-social
     - reconhecer-imagem
@@ -25,6 +25,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Posts recentes a olhar": 12
 # `Leitura do feed inteiro` é `sempre`, `nunca` ou `automático`. `sempre` varre o grid do primeiro ao último post, miniatura por miniatura. `nunca` fica nos `Posts recentes a olhar`. `automático` varre quando o que já foi lido não basta para a conclusão.
 "Leitura do feed inteiro": "automático"
+# `Limite de posts por varredura` é quantos posts o modo `automático` varre no grid e nos reposts antes de parar. Perfil com mais posts que o limite é varrido até ele, do mais recente para trás, e a análise diz o quanto cobriu. `0` não põe limite. `sempre` ignora o limite.
+"Limite de posts por varredura": 150
 # `Leitura dos reposts` é `sempre`, `nunca` ou `automático`, com o mesmo sentido, para a aba de reposts.
 "Leitura dos reposts": "automático"
 # `Abertura dos posts` é `todos`, `nenhum`, `automático em conjunto` ou `automático um por um`. `todos` abre cada post lido, com a legenda e os comentários. `nenhum` lê só a miniatura e o texto alternativo. `automático em conjunto` decide uma vez, pelo conjunto, entre abrir todos ou nenhum. `automático um por um` decide a cada post.
@@ -62,17 +64,21 @@ Com a ferramenta de credencial do gerenciador de senhas na sessão, ofereça o l
 
 Leia o perfil inteiro, não só o último post: a bio e o link da bio, o grid, os destaques, os posts fixados e os `Posts recentes a olhar`, com legendas e comentários. Destaque e post fixado contam como identidade do perfil, porque ficam ali mesmo depois de anos.
 
+Abra cada destaque, em todos os modos, e leia os quadros. O título do destaque não diz o conteúdo, e o destaque fica no perfil por anos. Quadro que não abriu ou abriu preto fica em `Limites da análise`, como a skill já manda.
+
 O alcance da leitura segue `Leitura do feed inteiro`, `Leitura dos reposts` e `Abertura dos posts`. Os `Posts recentes a olhar` são o mínimo e valem em todos os modos. O destaque não substitui o post, nem o post o destaque: os dois entram.
 
 No modo `automático`, a leitura é suficiente quando cada nota e cada sinal do veredito cita um post ou um destaque com data. Ela não basta quando o que você viu aponta para um tema que pesa na marca, como política, religião ou discurso, e ficou ambíguo, ou quando a miniatura traz texto na imagem, bandeira, slogan ou um post sem legenda que a plataforma descreve como imagem de texto.
 
-Um tema que só aparece dentro de uma imagem não aparece na legenda. Antes do veredito, releia o que reuniu. Se não basta, amplie o que o parâmetro deixar automático: varra o feed, leia os reposts ou abra os posts que faltam.
+Um tema que só aparece dentro de uma imagem não aparece na legenda. Antes do veredito, releia o que reuniu. Se não basta, amplie o que o parâmetro deixar automático: varra o feed, leia os reposts ou abra os posts que faltam. A varredura automática para no `Limite de posts por varredura`, e a análise diz o quanto do total cobriu.
 
 Com `Abertura dos posts` em `automático um por um`, abra o post que a miniatura ou a legenda mostrar que pesa. Em `automático em conjunto`, decida pelo conjunto: abra todos se a leitura não basta, nenhum se basta.
 
 Post que não carregou é aberto de novo, e o que continua sem abrir fica listado com a data em `Limites da análise`.
 
-Em `Limites da análise`, diga o que cada parâmetro fez e, no modo automático, o que decidiu e por quê. Conte os posts abertos, os que só viu na miniatura e o total do perfil, e diga se leu os reposts. Não escreva que um tema não aparece no perfil quando o alcance foi `nunca`, `nenhum` ou uma amostra pequena do total, nem que leu um post que só viu na grade.
+Em `Limites da análise`, diga o que cada parâmetro fez e, no modo automático, o que decidiu e por quê. Conte os posts abertos, os que só viu na miniatura e o total do perfil, diga se leu os reposts e quanto varreu do total quando o limite parou a leitura. Não escreva que um tema não aparece no perfil quando o alcance foi `nunca`, `nenhum` ou uma amostra pequena do total, nem que leu um post que só viu na grade.
+
+Post só de imagem pode não devolver texto pelo leitor de página. Leia o texto pela página aberta no navegador ou pela captura, e não conte como lido o post que não devolveu nada.
 
 Em cada post, leia o rótulo da plataforma, como "Conteúdo de IA", e os contadores de curtidas, comentários e compartilhamentos. Confira o que cada número é antes de usá-lo.
 
@@ -122,8 +128,9 @@ Se você ler o perfil que abriu com aviso de login sem pedir o login antes, a an
 
 Se você descrever o conteúdo de um destaque pelo nome dele ou pela edição que ele arquiva, a análise afirma o que não viu.
 
-1. Confira se os quadros abriram. Quadro vazio ou preto não foi lido.
-2. Liste o destaque em `Limites da análise`.
+1. Abra cada destaque, em qualquer modo, inclusive no automático.
+2. Confira se os quadros abriram. Quadro vazio ou preto não foi lido.
+3. Liste o destaque em `Limites da análise`.
 3. Ofereça ler no navegador da própria pessoa.
 
 ### Nota única
@@ -148,6 +155,7 @@ Se você ler os destaques e alguns posts, e concluir que o perfil não tem um te
 2. Tente de novo o que não carregou e liste o que continuar fechado.
 3. Diga em `Limites da análise` o que cada parâmetro fez, quantos posts abriu, quantos só viu na miniatura e o total do perfil.
 4. Com alcance `nunca` ou `nenhum`, não afirme que um tema não aparece.
+5. Perfil com mais posts que o `Limite de posts por varredura`: varra até o limite e diga o quanto cobriu do total.
 
 ### Conclusão sem evidência
 
