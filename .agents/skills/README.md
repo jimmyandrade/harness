@@ -552,6 +552,7 @@ flowchart LR
   definir_pessoa --> definir_grafia
   definir_pessoa --> definir_perfil_social
   definir_pessoa --> identificar_duplicata
+  definir_pessoa --> usar_whatsapp_web
   definir_planejamento_financeiro --> definir_lancamento_financeiro
   definir_planejamento_financeiro --> gerenciar_estoque
   definir_planejamento_financeiro --> revisar_financas

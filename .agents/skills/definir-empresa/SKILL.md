@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.6.1"
   related:
     - definir-grafia
     - definir-perfil-social
@@ -62,6 +62,8 @@ O cadastro mínimo de recebedora financeira não valida a fornecedora para relac
 
 Quando a lista exige a cidade da empresa e ninguém a informou, pesquise na internet, no site oficial e em fontes confiáveis, antes de usar uma localidade mais ampla. Empresa com uma só sede ou um só endereço: relacione essa cidade. Empresa que atua em várias cidades, com unidades ou escritórios regionais: relacione a localidade mais ampla que as cobre, como o país, e diga nas notas que é de propósito e quais fontes mostraram as unidades.
 
+O site, o CNPJ e o WhatsApp da empresa que as fontes respondem entram na mesma rodada do cadastro, sem avisar a pessoa antes. Pesquise o site e o perfil social oficial, o link da bio do perfil, o que o convite ou o formulário trazem e, para o CNPJ, a internet. Grave o que achou e diga as fontes. Só o que a busca não respondeu vira pendência, com o motivo e o que a resolve, como o contrato. Não liste como pendência o que ninguém tentou achar.
+
 Não escolha a sede só por ser a mais citada. Nome parecido de outra empresa, como uma filial ou uma entidade de outro porte, não vale como fonte: registre a distinção em `Não confundir com` ou nas notas.
 
 A pessoa responsável é, de preferência, gerente, representante comercial, vendedora, dona ou contato do atendimento. Mais de um registro da mesma pessoa segue o flowchart do Passo 1.
@@ -101,6 +103,14 @@ Se você buscar só pelo nome da marca, a empresa que já existe como local de f
 1. Busque pelo nome e pelo tipo de local antes de criar.
 2. Empresa já cadastrada com outro tipo: vincule a pessoa a ela, sem criar outra.
 3. Releia as empresas relacionadas na pessoa depois de vincular.
+
+### Dado listado como pendente sem pesquisar
+
+Se você cadastrar a empresa e listar o site, o CNPJ ou o WhatsApp como pendência sem tê-los procurado, a pessoa descobre que o dado estava ao alcance e pede o que já era seu.
+
+1. Pesquise o site, o perfil social e o link da bio, e o CNPJ, na mesma rodada do cadastro.
+2. Grave o que achou, com as fontes nas notas.
+3. Deixe como pendência só o que a busca não respondeu, com o motivo e o que a resolve.
 
 ### Cidade preenchida sem pesquisar
 
