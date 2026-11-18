@@ -3,7 +3,7 @@ name: acompanhar-retornos-pendentes
 description: Mantém uma rotina por canal, como e-mail, WhatsApp e site ou aplicativo, que lê as conversas em espera, o aviso que uma tarefa espera e a condição que um painel deve mostrar, avisa quando chegam e entrega o resultado à sessão. Usada quando uma mensagem espera resposta, uma tarefa espera um aviso ou um status precisa mudar num painel. Não serve para escrever a resposta, entrar com senha nem criar uma rotina por mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.8.0"
+  version: "0.8.1"
   related:
     - acompanhar-resposta-no-whatsapp
     - definir-hospedagem
@@ -126,7 +126,7 @@ O fato entra com a data e a hora da mensagem, e o que ainda falta fica dito como
 
 O resumo diz quais páginas mudaram, com o link de cada uma.
 
-Quando o aviso de uma tarefa chega, a rotina etiqueta a conversa por `rotular-item` e atualiza a tarefa no rastreador do projeto, com os nomes das propriedades do mapeamento de dados dele.
+Quando o aviso de uma tarefa chega, a rotina etiqueta a conversa por `rotular-item`, como concluída se só confirma o que já se sabe e como ação pendente se pede um passo do negócio, depois de ler o corpo, e atualiza a tarefa no rastreador do projeto, com os nomes das propriedades do mapeamento de dados dele.
 Ela marca na definição de concluído só os itens que a mensagem prova e escreve nas observações o que chegou e quando, no presente.
 Um item que depende de uma ação da pessoa, como guardar um comprovante, fica sem marca.
 
