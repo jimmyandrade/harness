@@ -3,17 +3,16 @@ name: publicar-revisao-de-codigo
 description: Revisa um pull request e publica a revisão numa única review, com os comentários inline, no idioma de quem recebe e no tom do projeto. Usada quando a pessoa pede uma revisão ou outra habilidade precisa publicar uma. Não serve para tratar os comentários que você recebeu no seu PR.
 metadata:
   author: jimmyandrade
-  version: "0.24.1"
+  version: "0.25.0"
   aliases:
     - post-code-review
   related:
-    - definir-idioma-da-conversa
     - enviar-mensagem-no-slack
     - escrever-link
+    - escrever-texto-da-revisao
     - evoluir-habilidade
     - levantar-contexto-do-pull-request
     - priorizar-itens
-    - redigir-com-tom-de-voz
 ---
 
 # Publicar revisão de código
@@ -22,15 +21,6 @@ metadata:
 
 Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco, depois nas instruções de usuário. Quando um valor não estiver lá, use o padrão abaixo. Um valor vazio não impõe regra.
 ```yaml
-# `Postura dos comentários` é `pergunta` ou `veredito`: com `pergunta`, nenhum achado vira "isto é um erro", e sim o que você viu e uma pergunta.
-"Postura dos comentários": "pergunta"
-"Revelar que a revisão foi automática": "sim"
-"Idioma da revisão sem preferência conhecida": "o idioma do projeto"
-"Tradução recolhível": "não"
-"Idioma pelo histórico": "o idioma que predomina"
-"Gravar o idioma levantado": "não"
-"Voz em PR aberto por bot": ""
-"Frase sobre o idioma": "sim"
 "Ação com Deve ter": "solicitar mudanças"
 "Ação com Deveria ter": "comentar sem aprovar"
 "Ação só com Poderia ter": "aprovar com os comentários"
@@ -44,12 +34,9 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 # `Prioridade por tema` liga um tema do achado a uma categoria, como acessibilidade a Deve ter ou desvio da convenção de testes a Deveria ter.
 "Prioridade por tema": "acessibilidade: Deve ter, com sugestão de código"
 "Prova visual em PR de interface": "sim"
-"Validar rodando o comportamento": "não"
+"Validar rodando o comportamento": "sim"
 "Cobertura integrada em comportamento crítico": "não"
 "Tamanho de PR que pede divisão": ""
-"Rótulo de prioridade no texto": "não"
-# `Abertura da revisão`: `versão curta e versão longa` escreve o par com os rótulos do vocabulário. `versão única` ou vazio escreve uma vez, sem rótulos. O vocabulário não cobre essa escolha.
-"Abertura da revisão": ""
 # `Lentes de revisão` lista critérios que você aplica antes de publicar sem citá-los no texto.
 "Lentes de revisão": ""
 # `Ler o texto antes de publicar`: `sim` mostra a primeira publicação e espera o sim. `não` publica na hora. Feedback que muda texto já publicado atualiza comentários e respostas sem perguntar.
@@ -80,7 +67,10 @@ Não revise com um check pendente: diga qual e espere terminar. Um check que fal
 
 ### Passo 3
 
-Siga `Cópia de trabalho`. Com `worktree`, o ideal, abra um worktree novo em `Pasta das cópias separadas`, a partir do PR, antes de ler o código, sem o clone da pessoa e sem reutilizar outra tarefa. Use `workspace`, cópia independente com a raiz nela, só se o `worktree` falhar e o clone não for seguro. Com valor vazio, pule a cópia se a revisão só lê o diff e, para executar código:
+Siga `Cópia de trabalho`. Com `worktree`, o ideal, abra um worktree novo em `Pasta das cópias separadas`, a partir do PR, antes de ler qualquer linha de código, sem o clone da pessoa e sem reutilizar outra tarefa.
+O diff e os arquivos lidos pela API do GitHub não substituem a cópia: ela abre em toda revisão, também em execução agendada e em PR pequeno.
+Use `workspace`, cópia independente com a raiz nela, só se o `worktree` falhar e o clone não for seguro.
+Com valor vazio, a cópia separada continua sendo o caminho, e vale:
 
 1. Procure uma trava do repositório: uma revisão em andamento em outra execução, que é a cópia separada dele em `Pasta das cópias separadas`. Se existir, não comece: diga qual PR e há quanto tempo. Uma trava mais velha que `Idade máxima da trava` não se apaga em silêncio: avise e pergunte.
 2. Crie a cópia separada a partir do PR antes de tocar em qualquer arquivo. A cópia é a trava.
@@ -96,6 +86,9 @@ Rode a `code-review` do Claude, com o mesmo alvo e o mesmo nível de esforço re
 
 Ajuste o esforço ao risco do PR: baixo para documentação e renomeação, alto para o que mexe em pagamento, segurança, dados ou integração. A `code-review` nunca é pulada, nem em diff pequeno.
 
+Com a cópia aberta, rode os testes dos projetos que o PR muda e diga no texto o que rodou e o que apareceu.
+Um número ou fato que o autor informou, como uma medida, um "testei" ou um tamanho, não é premissa de achado: confirme medindo ou rodando, e o texto diz o que foi medido.
+
 ### Passo 6
 
 Chame `priorizar-itens` com os achados e junte o resultado com a ficha:
@@ -108,13 +101,13 @@ Chame `priorizar-itens` com os achados e junte o resultado com a ficha:
 - Aplique as `Lentes de revisão`. Com `Nível de detalhe` em `enxuta`, publique só Deve ter e Deveria ter, mais o Poderia ter que o `Limite de Poderia ter publicado` permitir. Quando o `Critério de revisão completa` se cumpre, publique tudo.
 - Aplique a `Prioridade por tema`: o achado de um tema listado ganha a categoria dada. Um achado de acessibilidade, com o valor padrão, é Deve ter e leva sugestão de código.
 - Teste novo ou alterado confere a convenção de testes que o repositório define, só nas linhas tocadas.
-- Com `Validar rodando o comportamento` em `sim`, num PR que muda fluxo de interface ou comportamento observável, indique ou faça o teste local do branch quando for viável, e não conclua só pela leitura do código.
+- Com `Validar rodando o comportamento` em `sim`, num PR que muda fluxo de interface ou comportamento observável, rode o comportamento na cópia ou no ambiente do PR, e não conclua só pela leitura do código.
 - Com `Cobertura integrada em comportamento crítico` em `sim`, num PR que muda comportamento crítico, confira se há cobertura integrada ou de ponta a ponta dos cenários afetados e sinalize quando faltar, mesmo com os testes unitários passando.
 - Com `Tamanho de PR que pede divisão` preenchido, um PR acima desse tamanho é sinalizado ao autor, com a sugestão de dividir em partes menores quando fizer sentido, antes da revisão ponto a ponto.
 
 ### Passo 7
 
-Siga `definir-idioma-da-conversa` para a pessoa que recebe a revisão, passando `Idioma da revisão sem preferência conhecida`, `Idioma pelo histórico`, `Gravar o idioma levantado` e `Frase sobre o idioma`, com as revisões que ela publicou como histórico, nos PRs de outras pessoas e nos seus.
+Siga `escrever-texto-da-revisao` para o idioma da pessoa que recebe a revisão.
 
 ### Passo 8
 
@@ -124,21 +117,7 @@ Procure a prova em todo lugar antes de pedir: o corpo do PR, os comentários do 
 
 ### Passo 9
 
-Antes de escrever, inclusive no rascunho agendado, consulte o vocabulário com `redigir-com-tom-de-voz`: agradecimento e fecho vêm dele, nunca de memória. Um comentário de achado diz o que você viu, por que importa e o que muda para quem usa ou mantém o código, e termina convidando a pessoa a responder.
-
-Um pedido para aprovar não pula a revisão: rode os critérios atuais antes e aprove só sem bloqueio. Uma aprovação sem achado não é a descrição do PR: abre com o `@login` de quem abriu, agradece a ajuda concreta deste PR, diz que a revisão não achou nada bloqueante e só então lista, em tópicos, o que o PR faz.
-
-Conte os comentários inline publicados, nenhum, um ou mais, e use a frase do vocabulário dessa quantidade. A de idioma fica num PS no fim, com a redação do vocabulário buscada por `lookup_terms`, nunca de memória. Sem frase para essa quantidade, não invente. PR aberto por bot não leva `@`.
-
-- Com `Postura dos comentários` em `pergunta`, não declare erro confirmado e não dê ordem: separe o fato da decisão e termine em pergunta.
-- Todo ponto sobre uma linha de código vai inline, ancorado na linha do diff mais próxima. O corpo geral não cita arquivo, função nem chamada. Só fica no corpo o que não é sobre linha.
-- Escreva em palavras, não pelo rótulo: com `Rótulo de prioridade no texto` em `não`, o nome da categoria nunca aparece.
-- Com `Revelar que a revisão foi automática` em `não`, não mencione automação, ferramenta nem nome de habilidade, e não deixe rodapé de ferramenta.
-- Siga `Abertura da revisão`. O par só entra com `versão curta e versão longa`, também na tradução.
-- Cada comentário que fala com uma pessoa abre com o `@login` do GitHub dela. Quem mais entra no ponto também leva `@login`. O primeiro nome sozinho não marca a pessoa.
-- Com `Voz em PR aberto por bot` em `nós`, num PR aberto por um bot, nunca escreva "você", "seu" nem @menção ao autor: use a primeira pessoa do plural, "nós", como se o ponto fosse para a discussão do time. Vale no corpo, nos comentários, nas respostas em thread e na tradução. Essa voz não leva `@`.
-- Seja curto. Não escreva frase que uma pessoa não escreveria.
-- Um comentário de revisão é curto e trata do próprio PR. Uma proposta que vai além dele, como mudar o processo ou a integração contínua, ou reunir várias ideias com blocos de código, vira uma proposta escrita à parte, numa issue ou numa página, no formato que o repositório usa, e o comentário só traz o link.
+Escreva o texto com `escrever-texto-da-revisao`, passando os achados priorizados. Um pedido para aprovar não pula a revisão: rode os critérios atuais e aprove só sem bloqueio.
 
 ### Passo 10
 
@@ -149,7 +128,7 @@ Publique numa única review, com todos os comentários inline numa chamada só, 
 - algum Deve ter: `Ação com Deve ter`;
 - Deveria ter em aberto: `Ação com Deveria ter`;
 - só Poderia ter: `Ação só com Poderia ter`, e o corpo diz que esses pontos são oportunidades, que podem ir para outro PR;
-- nenhum achado: `Ação sem achados`, só depois da revisão deste pedido. O corpo segue a aprovação sem achado do Passo 9. Não publique só o resumo do que o PR faz.
+- nenhum achado: `Ação sem achados`, só depois da revisão deste pedido. O corpo segue a aprovação sem achado de `escrever-texto-da-revisao`. Não publique só o resumo do que o PR faz.
 
 Se uma passada anterior aprovou e esta achou um problema real, publique a ação do achado e diga no corpo que a aprovação veio antes e que a nova revisão achou o problema. Não proteja o veredito anterior.
 
@@ -159,7 +138,7 @@ Limpe sempre, mesmo se algo falhou antes. Apague o comentário de início e reti
 
 ### Passo 12
 
-Devolva a quem chamou o link da review e de cada comentário publicado, como manda `escrever-link`, e um resumo dos achados por prioridade, sem repetir o inline, com o nível de detalhe usado e quantos Poderia ter ficaram de fora. Avisar a pessoa que pediu a revisão é de quem chamou, com `enviar-mensagem-no-slack`.
+Devolva a quem chamou o link da review e de cada comentário publicado, como manda `escrever-link`, e um resumo dos achados por prioridade, sem repetir o inline, com o nível de detalhe usado, quantos Poderia ter ficaram de fora, o que foi rodado, e o idioma escolhido com a base dele. Avisar a pessoa que pediu a revisão é de quem chamou, com `enviar-mensagem-no-slack`.
 
 ### Passo 13
 
@@ -190,16 +169,6 @@ Se você aprovar porque pediram para aprovar, sem a revisão com os critérios a
 1. Rode a revisão mesmo com o pedido de aprovar.
 2. Aprove só sem bloqueio. Com bloqueio, publique a ação do achado.
 
-### Aprovação que só descreve o PR
-
-Se você publicar uma aprovação sem achado que não marca quem abriu, não diz que a revisão aprovou e só repete o que o PR faz, a pessoa não é avisada e o texto parece um resumo do diff.
-
-1. Abra com o `@login` do GitHub de quem abriu o PR.
-2. Agradeça a ajuda concreta deste PR, diga que a revisão não achou nada bloqueante e só então liste, em tópicos, o que o PR faz. As frases vêm do vocabulário.
-3. A frase de idioma fica num PS no fim, com a redação do vocabulário, e segue a quantidade.
-4. Corrija o comentário já publicado.
-5. PR aberto por bot segue `Voz em PR aberto por bot` e não leva `@`.
-
 ### Ponto já dito repetido
 
 Se você publicar um achado que um comentário existente já levanta, o autor vê o mesmo ponto duas vezes e acha que ninguém leu o que já foi dito.
@@ -207,13 +176,6 @@ Se você publicar um achado que um comentário existente já levanta, o autor v�
 1. Use a ficha do contexto.
 2. Responda na thread existente, com o complemento ou um reforço.
 3. Não responda em thread encerrada.
-
-### Código no corpo da review
-
-Se você citar arquivo ou função no corpo geral, o ponto perde a linha onde a pessoa o veria.
-
-1. Ancore cada ponto de código num comentário inline.
-2. Se nenhuma linha alterada se relaciona, diga isso numa frase no corpo.
 
 ### Prova visual pedida sem procurar
 
@@ -228,6 +190,13 @@ Se você escrever que algo não bloqueia para rebaixar um achado, a pessoa lê o
 
 1. Publique o achado como pergunta que espera resposta.
 2. Comente sem aprovar até ela responder.
+
+### Revisão só pelo diff
+
+Se você ler o diff pela API do GitHub e repetir a medida do autor, a revisão não prova nada do que o PR faz.
+
+1. Abra a cópia no Passo 3, também em execução agendada e em PR pequeno.
+2. Rode os testes e confirme medindo o que o autor informou.
 
 ### Trava deixada para trás
 
@@ -271,7 +240,6 @@ Rodei a revisão e achei bloqueio. Não aprovei. Avisei que ainda não dá para 
 - O PR está mesclado ou fechado: pare e diga.
 - A pessoa já respondeu a um achado: não repita.
 - O PR muda interface e já traz o antes e o depois: use e siga.
-- Não achou o registro da pessoa: use o histórico dela, e depois o idioma padrão.
 - Execução agendada: com `Publicar em execução agendada` em `não`, deixe o texto e o link no resumo, sem publicar. Em `sim`, publique e diga no resumo.
 - O contexto veio de conversa privada: use só para calibrar o que você pergunta, sem citar.
 - Um check está pendente: não revise, diga qual e espere.
@@ -280,14 +248,11 @@ Rodei a revisão e achei bloqueio. Não aprovei. Avisei que ainda não dá para 
 ## Pegadinhas
 
 - A `code-review` devolve categoria e confiança. Ambas são dado de trabalho, nunca texto.
-- Aprovação sem texto não conta como o que a pessoa escreveu revisando, ao levantar o idioma.
 - Um comentário que toca o mesmo trecho mas aponta outro problema não é um achado repetido.
-- O primeiro nome parece marcar a pessoa. Só `@` mais o login do GitHub avisa. Um corpo que só descreve o PR não é a aprovação sem achado.
 - Feedback que muda o texto já publicado atualiza comentários e respostas sem perguntar, mesmo com `Ler o texto antes de publicar` em `sim`.
-- Uma review sem comentários inline não cobre um ponto de código: ele precisa de uma linha.
-- O corpo não repete o inline. A frase segue a quantidade, sem número.
 - O clone da pessoa pode ter alterações não salvas. Nunca as guarde nem as mova.
 - Um check pendente não é um check que falhou.
+- O diff lido pelo `gh` e a medida da descrição parecem bastar. Sem a cópia e sem rodar, a revisão só repete o autor.
 
 ## Scripts disponíveis
 
