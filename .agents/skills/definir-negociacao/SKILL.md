@@ -5,8 +5,9 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.8.1"
+  version: "0.9.0"
   related:
+    - acompanhar-retornos-pendentes
     - definir-agenda
     - evoluir-habilidade
     - inscrever-na-oportunidade
@@ -62,6 +63,8 @@ Com negócio, a negociação é uma por oportunidade, a edição com data. Ache 
 Quando a pessoa só avisa que alguém entrou em contato por um canal, como uma DM do Instagram, sem colar o texto, não peça o texto. Leia a conversa você mesmo, pela `Ordem dos canais de execução`, e passe ao canal seguinte só quando o anterior não existir ou falhar. Sem conector, o navegador do app e a extensão do navegador leem a conversa na conta em que a pessoa já está logada. Peça a colagem só quando nenhum canal ler, e diga o que falhou em cada um.
 
 Grave cada troca como um comentário na discussão da página da negociação, ou da pessoa quando não há negócio, uma por data ou bloco de mensagens. Comece com `Data da mensagem:` e a data, ou `Data do registro:` quando for uma ação do negócio sem mensagem, e diga o canal e quem falou. Resuma os fatos: datas, horários, valores, decisões e pendências. Cite entre aspas só a frase cuja grafia importa, como um horário dito de outro jeito. Antes de gravar, leia os comentários que já existem e não repita a mesma mensagem.
+
+Quando o e-mail da empresa diz que o status se acompanha num painel, a pendência segue `acompanhar-retornos-pendentes`, que registra também o painel.
 
 Depois de enviar uma mensagem, um e-mail ou um comprovante de pagamento a uma empresa ou pessoa, registre a troca na mesma rodada, sem perguntar se deve registrar. Na resposta, diga o que registrou, com o link da página, e o que não registrou e por quê.
 
