@@ -59,6 +59,7 @@ flowchart LR
     definir_composicao_textil["definir-composicao-textil"]
     definir_conta_bancaria["definir-conta-bancaria"]
     definir_convidado["definir-convidado"]
+    definir_cor["definir-cor"]
     definir_cronograma["definir-cronograma"]
     definir_data_significativa["definir-data-significativa"]
     definir_empresa["definir-empresa"]
@@ -451,6 +452,13 @@ flowchart LR
   definir_convidado --> procurar_agenda
   definir_convidado --> revisar_uso_do_tempo
   definir_convidado --> sincronizar_cronograma
+  definir_cor --> definir_empresa
+  definir_cor --> definir_estampa
+  definir_cor --> definir_grafia
+  definir_cor --> definir_tecido
+  definir_cor --> gerenciar_estoque
+  definir_cor --> identificar_duplicata
+  definir_cor --> procurar_banco_de_dados
   definir_cronograma --> criar_oportunidade
   definir_cronograma --> criar_ponto_de_contato
   definir_cronograma --> definir_agenda
