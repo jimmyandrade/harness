@@ -4,7 +4,7 @@ description: Analisa o perfil social de uma pessoa, marca, feira ou evento pela 
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.1"
+  version: "0.4.2"
   related:
     - definir-perfil-social
     - reconhecer-imagem
@@ -56,7 +56,11 @@ Com a ferramenta de credencial do gerenciador de senhas na sessão, ofereça o l
 
 Leia o perfil inteiro, não só o último post: a bio e o link da bio, o grid, os destaques, os posts fixados e os `Posts recentes a olhar`, com legendas e comentários. Destaque e post fixado contam como identidade do perfil, porque ficam ali mesmo depois de anos.
 
-Abra os `Posts recentes a olhar` um por um, com a legenda e os comentários. O destaque não substitui o post, nem o post o destaque: os dois entram. Post que não carregou é aberto de novo, e o que continua sem abrir fica listado com a data em `Limites da análise`. Conte os posts que você abriu e leu, e diga na análise quantos foram, de quantos pedidos. Não escreva que leu um post que só viu na grade ou que não abriu.
+Abra os `Posts recentes a olhar` um por um, com a legenda e os comentários. O destaque não substitui o post, nem o post o destaque: os dois entram. Post que não carregou é aberto de novo, e o que continua sem abrir fica listado com a data em `Limites da análise`.
+
+Os `Posts recentes a olhar` são o mínimo para o estilo e o público. Para o eixo de valores, varra o grid inteiro até o último post e a aba de reposts, miniatura por miniatura. Abra todo post com texto na imagem, bandeira, slogan, religião ou política, e todo post sem legenda que a plataforma descreve como imagem de texto. Um tema que só aparece dentro de uma imagem não aparece na legenda.
+
+Conte os posts que você abriu, os que só viu na miniatura e o total do perfil, e diga os três números em `Limites da análise`. Não escreva que um tema não aparece no perfil com base numa amostra pequena do total, nem que leu um post que só viu na grade.
 
 Em cada post, leia o rótulo da plataforma, como "Conteúdo de IA", e os contadores de curtidas, comentários e compartilhamentos. Confira o que cada número é antes de usá-lo.
 
@@ -124,13 +128,13 @@ Se você ler só os posts mais recentes, o destaque e o post fixado, que ficam a
 1. Abra a bio, os destaques e os fixados antes dos posts.
 2. Cite a data de cada sinal.
 
-### Destaques no lugar dos posts
+### Amostra pequena tomada como o perfil inteiro
 
-Se você ler os destaques e só alguns posts, ou disser que leu mais posts do que abriu, a análise parece completa e quem lê a toma por inteira.
+Se você ler os destaques e alguns posts, e concluir que o perfil não tem um tema, o conteúdo que fica nas imagens, nos reposts e nos posts que você não abriu passa sem leitura.
 
-1. Abra cada um dos `Posts recentes a olhar`, com legenda e comentários, além dos destaques.
+1. Varra o grid inteiro e a aba de reposts, e abra todo post com texto na imagem, bandeira, slogan, religião ou política.
 2. Tente de novo o que não carregou e liste o que continuar fechado.
-3. Diga na análise quantos posts leu, de quantos pedidos.
+3. Diga em `Limites da análise` quantos posts abriu, quantos só viu na miniatura e o total do perfil.
 
 ### Conclusão sem evidência
 
