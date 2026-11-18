@@ -691,6 +691,27 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses recording the event time, syncing an untimed item, updating a registration, and auditing time use
 
+### definir-cor
+- **Stability**: experimental
+- **Description**: Catalog a supplier or manufacturer color and link it to fabrics, trims, threads, and stock items
+- **Properties**:
+  - Lives at `.agents/skills/definir-cor/SKILL.md`
+  - Writes the color number as text with the characters the supplier gave, including a leading zero and the library abbreviation, and never writes one library's hex on another
+  - Titles the page with the company and the number, adding the commercial name in parentheses only when the supplier catalog gives it, and links the company in the company relation
+  - Leaves the commercial name empty until confirmed and never assumes a generic visual name
+  - Records the origin of the hex in the page body, not in the name variations, and leaves metals without a hex
+  - Never starts a trial or a subscription and does not get around the Pantone paywall
+  - Takes the family from the color page of the supplier library, warns only when the registered family differs from it, and does not correct it alone
+  - Looks the color up before another skill links it to an item, and creates it with the company and the number when it is missing
+  - Calls the duplicate and database lookup skills, and the company and spelling skills for the company
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] A code with a leading zero is written as text
+  - [x] The TCX and TPG hex are never swapped
+  - [x] The page title follows the company, number, and optional commercial name
+  - [x] A color without an official name keeps the name empty
+  - [x] A missing color is created with the company and the number before the link is made
+
 ### definir-data-significativa
 - **Stability**: experimental
 - **Description**: Register, review, or alter a record in the list of significant dates
