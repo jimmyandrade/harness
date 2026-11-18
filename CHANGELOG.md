@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.94.1](https://github.com/jimmyandrade/harness/compare/v1.94.0...v1.94.1) (2026-11-18)
+
+
+### Bug Fixes
+
+* **definir-reserva:** create the event of a competing fair and record the competition in each reservation ([#1302](https://github.com/jimmyandrade/harness/issues/1302)) ([0531eff](https://github.com/jimmyandrade/harness/commit/0531eff62241004d8a533648e221f959a3275ea4))
+* **inscrever-na-oportunidade:** read who the opportunity is for before registering ([#1301](https://github.com/jimmyandrade/harness/issues/1301)) ([96d3ddc](https://github.com/jimmyandrade/harness/commit/96d3ddc6dc56beaa23e422223366c722048c7107))
+* **manter-contato-no-whatsapp:** keep the contact, the note and the labels before the first message ([#1300](https://github.com/jimmyandrade/harness/issues/1300)) ([42bcc4c](https://github.com/jimmyandrade/harness/commit/42bcc4c1dd53e95ce614cfc6506b8b883f806f35))
+* **redigir-com-tom-de-voz:** answer the greeting with the same stretched vowels the person used ([#1298](https://github.com/jimmyandrade/harness/issues/1298)) ([49cece7](https://github.com/jimmyandrade/harness/commit/49cece76eacc3dcd94f1b59d69a5c49e3a460cc1))
+
 ## [1.94.0](https://github.com/jimmyandrade/harness/compare/v1.93.0...v1.94.0) (2026-11-18)
 
 
