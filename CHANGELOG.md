@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.96.0](https://github.com/jimmyandrade/harness/compare/v1.95.0...v1.96.0) (2026-11-18)
+
+
+### Features
+
+* **analisar-perfil-social:** add skill to analyze the fit of a social profile ([#1307](https://github.com/jimmyandrade/harness/issues/1307)) ([fe9820d](https://github.com/jimmyandrade/harness/commit/fe9820d2176be2e3b12a8a297c632e0d2de3ccb0))
+* **analisar-perfil-social:** offer the login through the password manager ([#1312](https://github.com/jimmyandrade/harness/issues/1312)) ([69092b1](https://github.com/jimmyandrade/harness/commit/69092b10f66587842edb1c630ac36d919c47e8fe))
+* **analisar-perfil-social:** publish the analysis on the social profile page ([#1318](https://github.com/jimmyandrade/harness/issues/1318)) ([ab50f08](https://github.com/jimmyandrade/harness/commit/ab50f086531b48b89c51cd99d7471e4db57722c1))
+* **analisar-perfil-social:** read platform signals and flag highlights that do not open ([#1317](https://github.com/jimmyandrade/harness/issues/1317)) ([63258c7](https://github.com/jimmyandrade/harness/commit/63258c7e209f229b71a7349a3f4e49cf3d0f4a42))
+* **definir-artigo-da-base-de-conhecimento:** follow formalizar-decisao for decisions and name feature toggles exactly ([#1316](https://github.com/jimmyandrade/harness/issues/1316)) ([6f5cfe2](https://github.com/jimmyandrade/harness/commit/6f5cfe22832b6afdee9d4edcb1942f7d6779c691))
+* **definir-cor:** add skill to catalog supplier colors and link them to materials ([#1314](https://github.com/jimmyandrade/harness/issues/1314)) ([4528243](https://github.com/jimmyandrade/harness/commit/452824377d5b56e1a649f72b919077de5662764c))
+* **definir-prestacao-de-contas:** reconcile the statement and report what a transfer paid for ([#1309](https://github.com/jimmyandrade/harness/issues/1309)) ([545f390](https://github.com/jimmyandrade/harness/commit/545f3907260f9586ff1c41cade656c68e82fb1af))
+* **prospectar-oportunidades:** read the fair's social bio for announced dates and list every contact channel ([#1308](https://github.com/jimmyandrade/harness/issues/1308)) ([a977d58](https://github.com/jimmyandrade/harness/commit/a977d5870194921267621e8fe4d6629eb5fa6659))
+
+
+### Bug Fixes
+
+* **analisar-perfil-social:** ask for a login before reading a profile that opens behind one ([#1311](https://github.com/jimmyandrade/harness/issues/1311)) ([a5cb0a9](https://github.com/jimmyandrade/harness/commit/a5cb0a99195127069a51f93abc3717d5e058a513))
+* **enviar-email:** label the conversation right after a direct send ([#1315](https://github.com/jimmyandrade/harness/issues/1315)) ([cba3fe2](https://github.com/jimmyandrade/harness/commit/cba3fe20afa1b21b42676771fbe62cc885611011))
+
 ## [1.95.0](https://github.com/jimmyandrade/harness/compare/v1.94.1...v1.95.0) (2026-11-18)
 
 
