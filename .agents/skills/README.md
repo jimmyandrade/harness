@@ -19,6 +19,7 @@ flowchart LR
     acompanhar_resposta_no_whatsapp["acompanhar-resposta-no-whatsapp"]
     acompanhar_retornos_pendentes["acompanhar-retornos-pendentes"]
     acompanhar_veiculo["acompanhar-veiculo"]
+    analisar_perfil_social["analisar-perfil-social"]
     analisar_regulamento_da_oportunidade["analisar-regulamento-da-oportunidade"]
     anexar_arquivo_no_notion["anexar-arquivo-no-notion"]
     anexar_arquivo_no_whatsapp["anexar-arquivo-no-whatsapp"]
@@ -235,6 +236,8 @@ flowchart LR
   acompanhar_veiculo --> lancar_despesa_pessoal
   acompanhar_veiculo --> organizar_emails
   acompanhar_veiculo --> sincronizar_cronograma
+  analisar_perfil_social --> definir_perfil_social
+  analisar_perfil_social --> reconhecer_imagem
   analisar_regulamento_da_oportunidade --> acompanhar_edital
   analisar_regulamento_da_oportunidade --> acompanhar_itens_do_ponto_de_contato
   analisar_regulamento_da_oportunidade --> anexar_arquivo_no_notion

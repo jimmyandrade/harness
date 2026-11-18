@@ -1,0 +1,29 @@
+{
+  "skill_name": "analisar-perfil-social",
+  "evals": [
+    {
+      "id": "feira-que-destoa-da-marca",
+      "prompt": "Antes de fechar a Feira Exemplo, analise o Instagram dela: instagram.com/feiraexemplo",
+      "expected_output": "A habilidade lê o posicionamento da marca nas instruções do projeto, abre a bio, os destaques e os posts recentes, e usa só as seções do modelo que valem para feira. Cada sinal vermelho cita o post ou o destaque e a data. O veredito traz a nota de estética separada da de valores, até 5 sinais verdes, até 5 vermelhos, uma frase e o próximo passo. A resposta diz que o perfil não mostra a presença no local. Nada é gravado em banco ou página.",
+      "files": []
+    },
+    {
+      "id": "influenciador-com-estetica-forte-e-valor-fraco",
+      "prompt": "Analise o perfil @perfilexemplo para a lista de perfis ideais.",
+      "expected_output": "A habilidade preenche todas as seções do modelo para uma pessoa. A nota de estética e a de valores aparecem separadas, sem nota única. O post ambíguo vira hipótese com as leituras possíveis, sem acusar a pessoa. O próximo passo é um dos cinco do modelo e cita o eixo que pesou.",
+      "files": []
+    },
+    {
+      "id": "sem-posicionamento-da-marca",
+      "prompt": "Analise o Instagram da Feira Exemplo.",
+      "expected_output": "As instruções do projeto não trazem o posicionamento da marca. A habilidade pergunta uma vez onde ele está e para, sem abrir o perfil e sem dar nota.",
+      "files": []
+    },
+    {
+      "id": "perfil-privado",
+      "prompt": "Analise o Instagram da Feira Exemplo.",
+      "expected_output": "O perfil está privado. A habilidade diz que não analisou e por quê, não deduz estética nem valores do nome ou de um print antigo, e pergunta se a pessoa quer trazer capturas.",
+      "files": []
+    }
+  ]
+}
