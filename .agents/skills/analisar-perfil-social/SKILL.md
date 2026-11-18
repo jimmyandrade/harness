@@ -4,7 +4,7 @@ description: Analisa o perfil social de uma pessoa, marca, feira ou evento pela 
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.4.0"
   related:
     - definir-perfil-social
     - reconhecer-imagem
@@ -23,6 +23,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Posicionamento da marca": ""
 # `Posts recentes a olhar` é quantos posts a habilidade lê além da bio, dos destaques e dos fixados.
 "Posts recentes a olhar": 12
+# `Publicar a análise no perfil social` é `sim` ou `não`. `sim` publica a análise no corpo da página do perfil, na lista de perfis sociais do mapeamento de dados do projeto. `não` só entrega a análise na resposta.
+"Publicar a análise no perfil social": "sim"
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -78,7 +80,11 @@ Diga em `Limites da análise` o que o perfil não mostra. Numa feira ou num even
 
 ### Passo 6
 
-Entregue a análise na resposta, no modelo. Não grave em banco, página nem tarefa: quem pediu decide onde lançar. Com mais de uma análise na conversa, feche com os `Padrões` do modelo.
+Entregue a análise na resposta, no modelo. Com mais de uma análise na conversa, feche com os `Padrões` do modelo.
+
+Com `Publicar a análise no perfil social` em `sim`, publique a análise também no corpo da página do perfil analisado, na lista de perfis sociais do mapeamento de dados do projeto, e dê o link da página na resposta. Cada canal tem a própria página de perfil e a própria análise: não publique na página da pessoa nem da empresa, porque a leitura muda de um canal para outro.
+
+Perfil sem página na lista: cadastre-o com `definir-perfil-social` antes de publicar. Página que já tem uma análise: acrescente a nova abaixo da anterior, com a data no título, e não apague a anterior, porque o histórico mostra como o perfil mudou. Sem a lista no workspace conectado, entregue só na resposta e diga que não publicou.
 
 ### Passo 7
 
@@ -130,12 +136,20 @@ Se você afirmar a intenção ou o valor de uma pessoa a partir de um post ambí
 1. Descreva o que está visível.
 2. Liste as leituras possíveis e deixe a decisão para quem lê.
 
-### Análise gravada sem pedido
+### Análise publicada na página errada
 
-Se você gravar o resultado num banco ou numa página, a análise vira registro sem a pessoa ter decidido.
+Se você publicar a análise na página da pessoa ou da empresa do perfil, ela mistura canais diferentes e a leitura de um canal passa pela de outro.
 
-1. Entregue o texto na resposta, no modelo.
-2. Grave só quando a pessoa pedir, com a habilidade do destino.
+1. Publique no corpo da página do perfil do canal analisado.
+2. Deixe a página da pessoa e a da empresa como estão.
+3. Dê o link da página do perfil na resposta.
+
+### Análise anterior apagada
+
+Se você substituir a análise que a página do perfil já tinha, o histórico some e ninguém vê como o perfil mudou.
+
+1. Acrescente a análise nova abaixo da anterior.
+2. Ponha a data no título de cada análise.
 
 ## Exemplos de entrada e saída
 
@@ -143,7 +157,7 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### Antes de fechar a Feira Exemplo, analise o Instagram dela
 
-Li o posicionamento da marca, abri a bio, os destaques e os 12 posts recentes e usei as seções que valem para feira. O feed mistura vários estilos sem curadoria, e um destaque de 2024 tem conteúdo político que destoa dos valores da marca, citado com a data como hipótese de posicionamento. Estética 3/10 e valores 4/10, três sinais vermelhos e um verde, próximo passo descartar pelo eixo da estética. Avisei que o perfil não mostra a presença no local.
+Li o posicionamento da marca, abri a bio, os destaques e os 12 posts recentes e usei as seções que valem para feira. O feed mistura vários estilos sem curadoria, e um destaque de 2024 tem conteúdo político que destoa dos valores da marca, citado com a data como hipótese de posicionamento. Estética 3/10 e valores 4/10, três sinais vermelhos e um verde, próximo passo descartar pelo eixo da estética. Avisei que o perfil não mostra a presença no local. Publiquei a análise na página do perfil `feiraexemplo`, na lista de perfis sociais, e dei o link.
 
 ## Casos-limite
 
@@ -155,11 +169,14 @@ Li o posicionamento da marca, abri a bio, os destaques e os 12 posts recentes e 
 - Mais de um perfil da mesma feira ou pessoa: analise cada um e junte no veredito.
 - A pessoa pede a nota sem o posicionamento da marca: pergunte onde está e pare.
 - A pessoa quer cadastrar o perfil analisado: siga `definir-perfil-social`.
+- O perfil analisado não tem página na lista de perfis sociais: cadastre-o com `definir-perfil-social` antes de publicar.
+- `Publicar a análise no perfil social` está em `não`: entregue só na resposta.
 
 ## Pegadinhas
 
 - O aviso de login parece só uma janela a fechar. O grid inicial ainda carrega por baixo, mas os destaques, as legendas e os comentários não abrem sem a conta.
 - A ferramenta de credencial do gerenciador de senhas parece valer em qualquer navegador da sessão. Ela age só no navegador da própria pessoa, não no embutido no aplicativo, e pode estar sem conexão com o gerenciador. Sem ela, a pessoa entra pela aba.
+- A página da pessoa ou da empresa parece o lugar natural da análise. A estética e o público mudam de um canal para outro, então a análise fica na página do perfil de cada canal.
 - O destaque aberto parece lido. No navegador embutido no aplicativo os quadros podem abrir pretos, e o título do destaque não diz o que há nele.
 - O destaque parece conteúdo antigo e menos importante. Ele fica fixo no perfil e pesa tanto quanto o último post.
 - A estética do feed parece a estética do evento. O perfil mostra a apresentação digital, não a presença no local.
