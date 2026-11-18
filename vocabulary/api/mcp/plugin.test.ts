@@ -167,7 +167,12 @@ test("two launchers started together install once and both start the server", as
     assert.equal(result.code, 0, result.stderr)
     assert.equal(result.stdout.trim(), "started")
   }
-  assert.equal(npmCalls(dir).length, 1)
+  const calls = npmCalls(dir)
+  assert.equal(
+    calls.length,
+    1,
+    `expected one install, got ${calls.length}: ${JSON.stringify(calls)}; stderr of each launcher: ${JSON.stringify(results.map((result) => result.stderr))}`,
+  )
 })
 
 test("a failed install says what to do, frees the lock, and leaves no marker", () => {
