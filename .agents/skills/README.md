@@ -756,6 +756,7 @@ flowchart LR
   inscrever_na_oportunidade --> procurar_inscricao
   inscrever_na_oportunidade --> procurar_oportunidade
   inscrever_na_oportunidade --> redigir_com_tom_de_voz
+  investigar_problema --> acompanhar_retornos_pendentes
   investigar_problema --> conversar_no_whatsapp
   investigar_problema --> definir_artigo_da_base_de_conhecimento
   investigar_problema --> definir_pessoa

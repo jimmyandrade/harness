@@ -3,13 +3,14 @@ name: investigar-problema
 description: Conduz a investigação de um problema, como um acesso bloqueado, um cadastro que falha em portal alheio ou um erro, com tarefa, fatos e hipóteses, e oferece artigo e post-mortem. Use essa habilidade sempre que alguém relatar um problema, como um preço errado, antes de oferecer ou começar a investigar, mesmo sem dizer investigar. NÃO use para escrever o artigo, o post-mortem nem corrigir código.
 metadata:
   author: jimmyandrade
-  version: "0.3.3"
+  version: "0.3.4"
   related:
     - procurar-tarefa
     - definir-tarefa
     - definir-artigo-da-base-de-conhecimento
     - definir-post-mortem
     - definir-pessoa
+    - acompanhar-retornos-pendentes
     - redigir-com-tom-de-voz
     - conversar-no-whatsapp
     - enviar-email
@@ -54,6 +55,8 @@ Separe o que foi visto do que se supõe.
 
 Quando o problema é um cadastro ou um acesso que falha no portal de outra empresa, refaça o fluxo no navegador antes de cobrar o atendente.
 Capture um print de cada etapa e as requisições de rede, com o erro exato da tela e o da resposta.
+Abra primeiro o painel da conta, se o portal tiver um, e leia o estado antes de refazer o fluxo: o cadastro pode já existir.
+Nas requisições, procure a API que a página chama, sem ler cookie, token nem endereço com parâmetros, e siga o que `acompanhar-retornos-pendentes` manda quando ela só aceita o token da sessão.
 O nome que o cadastro leva e o que a conversa usa seguem `definir-pessoa`.
 
 Confira o e-mail, porque o portal costuma mandar mensagem mesmo com erro na tela.
