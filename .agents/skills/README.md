@@ -114,6 +114,7 @@ flowchart LR
     escrever_legenda_do_post["escrever-legenda-do-post"]
     escrever_link["escrever-link"]
     escrever_teste["escrever-teste"]
+    escrever_texto_da_revisao["escrever-texto-da-revisao"]
     extrair_tarefas_da_reuniao["extrair-tarefas-da-reuniao"]
     fatiar_pull_request["fatiar-pull-request"]
     fazer_fechamento["fazer-fechamento"]
@@ -690,6 +691,10 @@ flowchart LR
   escrever_teste --> criar_commit
   escrever_teste --> escrever_codigo
   escrever_teste --> levantar_ambiente_do_repositorio
+  escrever_texto_da_revisao --> definir_idioma_da_conversa
+  escrever_texto_da_revisao --> publicar_resposta_de_revisao
+  escrever_texto_da_revisao --> publicar_revisao_de_codigo
+  escrever_texto_da_revisao --> redigir_com_tom_de_voz
   extrair_tarefas_da_reuniao --> definir_registro_de_reuniao
   extrair_tarefas_da_reuniao --> definir_tarefa
   extrair_tarefas_da_reuniao --> identificar_duplicata
@@ -942,13 +947,12 @@ flowchart LR
   publicar_resposta_de_revisao --> atender_revisao_de_pull_request
   publicar_resposta_de_revisao --> definir_pessoa
   publicar_resposta_de_revisao --> escrever_link
-  publicar_resposta_de_revisao --> publicar_revisao_de_codigo
-  publicar_revisao_de_codigo --> definir_idioma_da_conversa
+  publicar_resposta_de_revisao --> escrever_texto_da_revisao
   publicar_revisao_de_codigo --> enviar_mensagem_no_slack
   publicar_revisao_de_codigo --> escrever_link
+  publicar_revisao_de_codigo --> escrever_texto_da_revisao
   publicar_revisao_de_codigo --> levantar_contexto_do_pull_request
   publicar_revisao_de_codigo --> priorizar_itens
-  publicar_revisao_de_codigo --> redigir_com_tom_de_voz
   rascunhar_mensagem --> acompanhar_resposta_no_whatsapp
   rascunhar_mensagem --> anexar_arquivo_no_whatsapp
   rascunhar_mensagem --> conversar_no_whatsapp

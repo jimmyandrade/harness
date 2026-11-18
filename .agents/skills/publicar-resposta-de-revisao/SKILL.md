@@ -3,12 +3,12 @@ name: publicar-resposta-de-revisao
 description: Publica a resposta a uma revisão recebida, de pessoa ou de bot, de preferência num comentário inline. Marca o login e, com a leitura antes de publicar desligada, publica sem pedir confirmação. NÃO serve para aplicar a sugestão no código nem para revisar o PR de outra pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.4.1"
+  version: "0.4.2"
   related:
     - atender-revisao-de-pull-request
     - definir-pessoa
     - escrever-link
-    - publicar-revisao-de-codigo
+    - escrever-texto-da-revisao
 ---
 
 # Publicar resposta de revisão
@@ -60,7 +60,7 @@ Comentário de self review, da mesma pessoa que pediu o atendimento, recebe a re
 A resposta diz o que mudou, mostra as linhas alteradas e cita o commit.
 A mensagem do bot é lida, respondida e considerada.
 A resposta a ele é publicada sem esperar que a pessoa leia esse texto antes.
-Num PR aberto por bot, siga a `Voz em PR aberto por bot` de `publicar-revisao-de-codigo`.
+Num PR aberto por bot, siga a `Voz em PR aberto por bot` de `escrever-texto-da-revisao`.
 O GitHub só aceita uma revisão pendente por pessoa.
 Se a pessoa tem uma revisão sem enviar no PR, a resposta falha com o erro 422 `user_id can only have one pending review per pull request`.
 Antes de publicar, procure as revisões pendentes dela no PR.
