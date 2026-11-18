@@ -4,7 +4,7 @@ description: Analisa o perfil social de uma pessoa, marca, feira ou evento pela 
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.7.0"
+  version: "0.7.1"
   related:
     - definir-perfil-social
     - reconhecer-imagem
@@ -114,6 +114,8 @@ Entregue a análise na resposta, no modelo. Com mais de uma análise na conversa
 
 Com `Publicar a análise no perfil social` em `sim`, publique a análise também no corpo da página do perfil analisado, na lista de perfis sociais do mapeamento de dados do projeto, e dê o link da página na resposta. Cada canal tem a própria página de perfil e a própria análise: não publique na página da pessoa nem da empresa, porque a leitura muda de um canal para outro.
 
+Com `sim`, publique sempre, também quando a execução é um teste da skill ou da análise. Quem não quer a publicação define `não` ou diz antes de rodar. Não decida por conta própria deixar de publicar.
+
 Perfil sem página na lista: cadastre-o com `definir-perfil-social` antes de publicar. Página que já tem uma análise: acrescente a nova abaixo da anterior, com a data no título, e não apague a anterior, porque o histórico mostra como o perfil mudou. Sem a lista no workspace conectado, entregue só na resposta e diga que não publicou.
 
 ### Passo 7
@@ -176,6 +178,14 @@ Se você afirmar a intenção ou o valor de uma pessoa a partir de um post ambí
 
 1. Descreva o que está visível.
 2. Liste as leituras possíveis e deixe a decisão para quem lê.
+
+### Publicação pulada por ser teste
+
+Se você não publicar porque a execução parece um teste, a análise fica só na conversa, e a pessoa descobre depois que a página do perfil não existe.
+
+1. Com `Publicar a análise no perfil social` em `sim`, cadastre o perfil, se falta, e publique.
+2. Para não publicar, o parâmetro é `não` ou a pessoa diz antes de rodar.
+3. Não decida a omissão por conta própria. Se tiver dúvida, pergunte antes de rodar.
 
 ### Análise publicada na página errada
 
