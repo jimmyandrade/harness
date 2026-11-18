@@ -6,7 +6,7 @@ locale: en
 
 ## Status
 
-Accepted.
+Accepted. The part that sets an order and runs only the first available engine is superseded by [ADR 0028](0028-run-both-transcription-engines-and-compare-them.md).
 
 ## Context
 
