@@ -3,7 +3,7 @@ name: acompanhar-retornos-pendentes
 description: Mantém uma rotina por canal, como e-mail, WhatsApp e site ou aplicativo, que lê as conversas em espera, o aviso que uma tarefa espera e a condição que um painel deve mostrar, avisa quando chegam e entrega o resultado à sessão. Usada quando uma mensagem espera resposta, uma tarefa espera um aviso ou um status precisa mudar num painel. Não serve para escrever a resposta, entrar com senha nem criar uma rotina por mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.8.1"
+  version: "0.9.0"
   related:
     - acompanhar-resposta-no-whatsapp
     - definir-hospedagem
@@ -80,6 +80,10 @@ Quem ler ou atualizar uma tarefa aberta cuja definição de concluído depende d
 Uma pendência que se resolve num painel, e não numa mensagem, como a tag de pedágio que desbloqueia depois do pagamento ou o status de um pedido, entra no registro com o canal `site`.
 A linha diz o endereço do painel, a condição esperada, o prazo que a empresa informou e desde quando. Ela nunca leva usuário, senha nem link com token.
 
+Quando o e-mail de um portal diz que o status se acompanha num painel, como "acompanhe pelo painel do associado", a pendência ganha também a linha do canal `site`, além da do e-mail.
+O painel muda antes do e-mail, e o e-mail pode atrasar ou nem vir.
+A linha diz o endereço do painel, o que ler nele, quando o item termina e o último estado lido.
+
 A pergunta que pede o sim do envio já diz que a resposta será acompanhada.
 O mesmo sim vale para a etiqueta e para a linha.
 
@@ -107,6 +111,11 @@ O aviso de uma plataforma ou de um órgão quase nunca chega etiquetado, então 
 
 A rotina do site lê todas as linhas do canal na mesma execução, pelo navegador embutido do aplicativo e, quando ele não tem a sessão da pessoa ou não existe na sessão, pela extensão Claude in Chrome, numa aba nova que ela fecha ao terminar. Abre o endereço do painel na sessão que a pessoa já deixou aberta, lê só a tela que mostra a condição e compara com a esperada.
 Se o painel pede login, código por SMS ou captcha, a rotina não tenta: avisa a pessoa, uma vez por dia, que precisa entrar, e a linha continua.
+Uma execução agendada não tem a pessoa para aprovar o login: esse é o limite, e o aviso diz que o painel não foi lido.
+
+A rotina abre o painel só para ler: nunca assina, paga, envia nem baixa nada.
+Ela compara a tela com o último estado gravado na linha e avisa só quando muda.
+Se o painel e a página de detalhe divergirem, vale a página inicial do painel, e o aviso diz a divergência.
 
 Numa conversa, com a pessoa presente, peça a credencial ao gerenciador de senhas antes de abrir o painel. A aprovação não faz o login: sem a ferramenta de preenchimento na sessão, ou diante de captcha e de código por SMS, diga isso e peça que a pessoa entre na aba.
 Depois leia todas as telas necessárias numa sequência só, porque o painel pode encerrar a sessão em poucos minutos.
@@ -188,6 +197,14 @@ Se você deixar a rotina só avisar a pessoa, a sessão que enviou a mensagem n�
 1. Registre o código da sessão que espera na linha do registro.
 2. Entregue o resumo a essa sessão quando a resposta chegar.
 3. Sem sessão, avise só a pessoa.
+
+### Painel ignorado
+
+Se você acompanhar só a caixa de entrada quando o e-mail diz que o status está num painel, o aviso chega depois da mudança, ou nunca chega.
+
+1. Registre também a linha do canal `site`, com o endereço do painel.
+2. Leia o painel só para ler e avise só quando o estado mudar.
+3. Diante de login, senha ou código, avise a pessoa e não digite nada.
 
 ### Aviso sem etiqueta
 

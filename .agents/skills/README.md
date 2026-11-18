@@ -532,6 +532,7 @@ flowchart LR
   definir_medicao_de_metrica --> definir_okr
   definir_medicao_de_metrica --> identificar_duplicata
   definir_medicao_de_metrica --> reconhecer_imagem
+  definir_negociacao --> acompanhar_retornos_pendentes
   definir_negociacao --> definir_agenda
   definir_negociacao --> inscrever_na_oportunidade
   definir_negociacao --> organizar_ponto_de_contato
