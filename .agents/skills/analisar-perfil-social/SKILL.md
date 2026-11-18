@@ -4,7 +4,7 @@ description: Analisa o perfil social de uma pessoa, marca, feira ou evento pela 
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.4.1"
   related:
     - definir-perfil-social
     - reconhecer-imagem
@@ -55,6 +55,8 @@ Abra o perfil. Se o canal abrir com um aviso de login, pare antes de ler e peça
 Com a ferramenta de credencial do gerenciador de senhas na sessão, ofereça o login por ela e espere o sim da pessoa. A pessoa aprova o item no próprio gerenciador, o valor entra direto na página e você nunca o vê, nem o código de verificação. Sem essa ferramenta, a pessoa entra pelo navegador. Nunca peça nem digite a senha da pessoa.
 
 Leia o perfil inteiro, não só o último post: a bio e o link da bio, o grid, os destaques, os posts fixados e os `Posts recentes a olhar`, com legendas e comentários. Destaque e post fixado contam como identidade do perfil, porque ficam ali mesmo depois de anos.
+
+Abra os `Posts recentes a olhar` um por um, com a legenda e os comentários. O destaque não substitui o post, nem o post o destaque: os dois entram. Post que não carregou é aberto de novo, e o que continua sem abrir fica listado com a data em `Limites da análise`. Conte os posts que você abriu e leu, e diga na análise quantos foram, de quantos pedidos. Não escreva que leu um post que só viu na grade ou que não abriu.
 
 Em cada post, leia o rótulo da plataforma, como "Conteúdo de IA", e os contadores de curtidas, comentários e compartilhamentos. Confira o que cada número é antes de usá-lo.
 
@@ -121,6 +123,14 @@ Se você ler só os posts mais recentes, o destaque e o post fixado, que ficam a
 
 1. Abra a bio, os destaques e os fixados antes dos posts.
 2. Cite a data de cada sinal.
+
+### Destaques no lugar dos posts
+
+Se você ler os destaques e só alguns posts, ou disser que leu mais posts do que abriu, a análise parece completa e quem lê a toma por inteira.
+
+1. Abra cada um dos `Posts recentes a olhar`, com legenda e comentários, além dos destaques.
+2. Tente de novo o que não carregou e liste o que continuar fechado.
+3. Diga na análise quantos posts leu, de quantos pedidos.
 
 ### Conclusão sem evidência
 
