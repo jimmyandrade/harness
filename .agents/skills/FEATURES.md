@@ -89,7 +89,10 @@ How these skills relate is in `README.md`, in this folder.
   - Cites the post or highlight and its date for each signal, and writes an ambiguous item as a hypothesis with the possible readings, never as the intent of the person
   - Scores aesthetics and values and discourse separately, lists up to 5 green and 5 red signals, a one-sentence summary, and a next step that names the axis that weighed
   - States what the profile does not show, such as the presence at the venue of a fair or event
-  - Returns the analysis in the reply and writes nothing to a database, page, or task unless asked
+  - Returns the analysis in the reply and, when the publish parameter is on, also publishes it in the body of the profile's page in the social profile list of the project data mapping, with the link in the reply
+  - Publishes on the page of the profile of the analyzed channel, never on the person's or company's page, because the reading changes from one channel to another
+  - Registers a profile that has no page with definir-perfil-social before publishing, and adds a new dated analysis below an earlier one without deleting it
+  - Returns the analysis without publishing, and says so, when the social profile list is not in the connected workspace
   - Says it did not analyze a private, blocked, or missing profile, and does not infer aesthetics or values from a name
   - Does not register the profile, measure metrics in depth, or write the approach message
 - **Test Criteria**:

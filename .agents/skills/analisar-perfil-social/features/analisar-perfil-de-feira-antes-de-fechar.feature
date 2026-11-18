@@ -12,8 +12,3 @@ Funcionalidade: Analisar o perfil de uma feira antes de fechar a participação
     E cada sinal vermelho cita o post ou o destaque que o sustenta
     E o veredito traz a nota por eixo, os sinais verdes e vermelhos e o próximo passo
     E a resposta diz que o perfil não mostra a presença no local
-
-  Cenário: A habilidade não grava o resultado
-    Quando a análise termina
-    Então a resposta entrega o texto no modelo
-    E nada é gravado em banco, página ou tarefa sem a pessoa pedir

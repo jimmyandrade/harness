@@ -4,7 +4,7 @@
     {
       "id": "feira-que-destoa-da-marca",
       "prompt": "Antes de fechar a Feira Exemplo, analise o Instagram dela: instagram.com/feiraexemplo",
-      "expected_output": "A habilidade lê o posicionamento da marca nas instruções do projeto, abre a bio, os destaques e os posts recentes, e usa só as seções do modelo que valem para feira. Cada sinal vermelho cita o post ou o destaque e a data. O veredito traz a nota de estética separada da de valores, até 5 sinais verdes, até 5 vermelhos, uma frase e o próximo passo. A resposta diz que o perfil não mostra a presença no local. Nada é gravado em banco ou página.",
+      "expected_output": "A habilidade lê o posicionamento da marca nas instruções do projeto, abre a bio, os destaques e os posts recentes, e usa só as seções do modelo que valem para feira. Cada sinal vermelho cita o post ou o destaque e a data. O veredito traz a nota de estética separada da de valores, até 5 sinais verdes, até 5 vermelhos, uma frase e o próximo passo. A resposta diz que o perfil não mostra a presença no local. A análise é publicada no corpo da página do perfil, na lista de perfis sociais, e a resposta dá o link. Nada é publicado na página da pessoa nem da empresa.",
       "files": []
     },
     {
@@ -41,6 +41,12 @@
       "id": "post-com-rotulo-de-ia-e-contadores",
       "prompt": "Analise o Instagram da Feira Exemplo, já logada.",
       "expected_output": "A habilidade lê, em cada post, o rótulo da plataforma e os três contadores. O rótulo de conteúdo de IA entra como sinal, com o post e a data, e não como acusação. Os contadores têm o significado conferido antes do uso e são comparados com o número de seguidores.",
+      "files": []
+    },
+    {
+      "id": "reanalise-de-perfil-ja-publicado",
+      "prompt": "Analise novamente o Instagram da Feira Exemplo.",
+      "expected_output": "A página do perfil na lista de perfis sociais já tem uma análise. A habilidade acrescenta a análise nova abaixo da anterior, com a data no título, e não apaga a anterior. A resposta dá o link da página.",
       "files": []
     },
     {
