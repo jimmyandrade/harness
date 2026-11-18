@@ -2,7 +2,7 @@
 name: perfil-social
 description: Formato da análise de um perfil social, com identidade, estética, público, risco de marca e o veredito com a nota por eixo, os sinais verdes e vermelhos e o próximo passo.
 metadata:
-  version: "0.1.0"
+  version: "0.2.0"
 ---
 
 ## Contexto
@@ -30,6 +30,7 @@ Use este modelo para montar a análise de um perfil social, de uma pessoa, uma m
 - Referências culturais e artísticas: <música, cena, filmes, clubes, artistas, símbolos>
 - Sensualidade: <o tipo que o perfil comunica, se comunica, e com qual vertente da marca é coerente>
 - Consistência visual: <luz, cor, styling, cenários e edição, com o que se repete e o que quebra>
+- Rótulos da plataforma: <como "Conteúdo de IA", com o post e a data, ou nenhum>
 - Assinatura visual: <o que no visual é marca da pessoa ou do perfil>
 
 ### Corpo, estilo e encaixe com o produto
