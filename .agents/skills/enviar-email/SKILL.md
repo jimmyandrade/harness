@@ -3,7 +3,7 @@ name: enviar-email
 description: Monta e envia um e-mail em nome de uma pessoa, com a assinatura certa, o destinatário principal e as cópias, o anexo vindo do Notion e o envio só com o sim. Usada quando uma pessoa contata uma organização por e-mail, inclusive com comprovante. Não serve para escrever no tom da marca, achar um e-mail nem triar a caixa.
 metadata:
   author: jimmyandrade
-  version: "0.6.3"
+  version: "0.6.4"
   related:
     - conversar-no-whatsapp
     - definir-pessoa
@@ -109,6 +109,8 @@ O link da primeira vez sobe na conversa e a pessoa não o acha na hora de dar o 
 
 Rotule a conversa assim que criar o rascunho, por `rotular-item`, com o estado de ação esperada e o contexto: o rótulo da conversa vale para a mensagem que a pessoa enviar depois, mesmo pelo Gmail, quando você não está presente. Depois do envio, leia a conversa para confirmar que saiu e confira os rótulos, como `organizar-emails` manda.
 
+O envio direto, sem rascunho, não dispensa o rótulo: a conversa do e-mail novo nasce no envio, então rotule-a no mesmo turno, logo depois de ler que saiu, antes de registrar a troca em qualquer outro lugar.
+
 Uma mensagem que espera resposta entra no acompanhamento no mesmo turno, sem perguntar, por `acompanhar-retornos-pendentes`.
 Não crie rotina: etiquete a conversa como aguardando retorno e acrescente uma linha ao registro das pendências, com a sessão que espera.
 
@@ -154,6 +156,7 @@ Se você rotular só depois do envio e a pessoa enviar o rascunho pelo Gmail, a 
 1. Rotule a conversa do rascunho na hora em que criá-lo, por `rotular-item`.
 2. Aplique o estado de ação esperada e o contexto, e crie o rótulo que faltar.
 3. Depois do envio, leia a conversa e confira os rótulos.
+4. Sem rascunho, porque o envio foi direto, rotule a conversa nova logo depois do envio, no mesmo turno.
 
 ### Pedido de envio sem o link do rascunho
 
