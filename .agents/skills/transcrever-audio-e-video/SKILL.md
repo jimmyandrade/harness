@@ -1,9 +1,9 @@
 ---
 name: transcrever-audio-e-video
-description: Transcreve um áudio ou vídeo local com o SpeechAnalyzer da Apple ou o Whisper local, detecta o que está instalado e só propõe instalar com o sim da pessoa. Usada quando a pessoa manda uma gravação para virar texto, mesmo sem dizer Whisper. NÃO serve para reunião que já tem transcrição, identificar quem fala nem enviar o arquivo a um serviço externo.
+description: Transcreve um áudio ou vídeo local com o SpeechAnalyzer da Apple e o Whisper local, os dois no mesmo áudio, compara os textos, detecta o que está instalado e só propõe instalar com o sim da pessoa. Usada quando a pessoa manda uma gravação para virar texto, mesmo sem dizer Whisper. NÃO serve para reunião que já tem transcrição, identificar quem fala nem enviar o arquivo a um serviço externo.
 metadata:
   author: jimmyandrade
-  version: "0.5.2"
+  version: "0.6.0"
   related:
     - conversar-no-whatsapp
     - definir-registro-de-reuniao
@@ -16,7 +16,7 @@ metadata:
 ## Parâmetros de configuração
 
 ```yaml
-# `Ordem dos motores` lista os motores locais, do primeiro ao último. `SpeechTranscriber` é o SpeechAnalyzer da Apple, do macOS 26 em diante. `Whisper` é o `whisper-cli`. O primeiro disponível roda. O `SFSpeechRecognizer` não entra na lista: a ADR 0027 mostra que ele perde a maior parte da fala.
+# `Ordem dos motores` lista os motores locais, na ordem em que rodam. Todos os disponíveis rodam no mesmo áudio, e a comparação entre eles dá o texto final. `SpeechTranscriber` é o SpeechAnalyzer da Apple, do macOS 26 em diante. `Whisper` é o `whisper-cli`. O `SFSpeechRecognizer` não entra na lista: a ADR 0027 mostra que ele perde a maior parte da fala.
 "Ordem dos motores": ["SpeechTranscriber", "Whisper"]
 # `Idioma do SpeechAnalyzer` é o locale do `SpeechTranscriber`, como `pt-BR` ou `en-US`.
 "Idioma do SpeechAnalyzer": "pt-BR"
@@ -46,13 +46,16 @@ O áudio de uma conversa do WhatsApp se baixa sem perguntar, como `triar-convers
 
 ```mermaid
 flowchart LR
-  A{Algum motor da Ordem dos motores?} -->|sim| B[Passo 4]
+  A{Quantos motores da Ordem dos motores?} -->|dois| B[Passo 4]
+  A -->|um| E[Passo 4, sem segunda opinião]
   A -->|nenhum| C[Passo 3]
   C -->|sem Homebrew| D[Diga e pare]
 ```
 
 Detecte o ambiente com os comandos de Scripts disponíveis. O `Whisper` precisa de `whisper-cli`, `ffmpeg` e do arquivo do `Modelo` na `Pasta do modelo`. O `SpeechTranscriber` precisa do macOS 26 ou mais, do `swiftc` e do `ffmpeg`.
-O primeiro motor disponível, na `Ordem dos motores`, roda. O `SpeechTranscriber` não instala programa: o primeiro uso de um idioma pode baixar o modelo de idioma da Apple, e a resposta diz isso.
+Todo motor disponível da `Ordem dos motores` roda, porque nenhum ganhou em tudo e a diferença entre os dois mostra onde cada um errou.
+Com um só motor disponível, ele roda e a resposta diz que não há segunda opinião, sem instalar o outro: a instalação só entra no Passo 3.
+O `SpeechTranscriber` não instala programa: o primeiro uso de um idioma pode baixar o modelo de idioma da Apple, e a resposta diz isso.
 
 ### Passo 3
 
@@ -68,6 +71,7 @@ Ponha o caminho do arquivo entre aspas: nome com espaço e acento é comum.
 
 ### Passo 5
 
+Rode cada motor disponível sobre o mesmo wav.
 Com o `SpeechTranscriber`, compile `scripts/speech_transcribe.swift` na `Pasta de saída` e rode-o com o `Idioma do SpeechAnalyzer`. Ele imprime o texto corrido, sem `.srt` e sem tempos. Para a pessoa que precisa dos tempos, rode o `Whisper`.
 Não use o `SFSpeechRecognizer`, nem como reserva: numa reunião de 18 minutos ele devolveu cerca de um terço das palavras dos outros dois e ainda pede permissão de fala. A ADR 0027 do core registra a medição e o jeito de rodá-lo, se for preciso.
 
@@ -77,9 +81,12 @@ Com mais de uma gravação, rode o script de lote: ele é retomável, roda uma i
 
 ### Passo 6
 
-Leia o texto antes de relatar. Entregue o caminho do `.txt`, que é o texto corrido, e do `.srt`, que traz os tempos. O `SpeechTranscriber` só imprime o texto: grave-o num `.txt` na `Pasta de saída` e diga que não há `.srt`.
-Procure no texto uma frase que se repete e um salto de assunto: o `Whisper` pode cair num laço e perder o trecho que veio antes dele. Achado um, rode o outro motor da `Ordem dos motores` só nesse áudio e compare, ou diga à pessoa que o trecho não é confiável.
-Para comparar dois ou mais textos do mesmo áudio, como num teste de motores, rode `scripts/compare_transcripts.py` em vez de reescrever a conta: ele mostra palavras, vírgulas, o quanto cada texto tem do outro e os trechos que diferem.
+Leia o texto antes de relatar. Entregue o caminho do `.txt` de cada motor, que é o texto corrido, e do `.srt`, que traz os tempos. O `SpeechTranscriber` só imprime o texto: grave-o num `.txt` na `Pasta de saída` e diga que não há `.srt`.
+Com os dois textos, rode `scripts/compare_transcripts.py` e leia cada trecho que difere, as frases repetidas e os saltos de assunto, antes de relatar.
+O texto de trabalho é o do `Whisper`, que tem pontuação e o `.srt`. Em cada trecho em que o `Whisper` caiu num laço ou perdeu palavras, e o `SpeechTranscriber` diz algo que combina com a conversa em volta, use o do `SpeechTranscriber` e diga que trocou.
+Trecho em que os dois divergem e a conversa em volta não decide fica marcado como não confiável, com as duas versões.
+Com um só motor, procure no texto uma frase que se repete e um salto de assunto, e diga à pessoa que não houve segunda opinião.
+O `scripts/compare_transcripts.py` mostra palavras, vírgulas, o quanto cada texto tem do outro e os trechos que diferem. Rode-o em vez de reescrever a conta. O primeiro texto é a referência da comparação.
 Diga três coisas: o texto não diz quem fala, nomes próprios e termos do time podem sair errados, e um trecho confuso fica sem uso em ata ou registro até a pessoa ouvir.
 Um termo que errou e volta a aparecer é candidato a `Termos do prompt`: sugira, sem gravar.
 Apague o wav intermediário. Se a transcrição vira registro de reunião, siga `definir-registro-de-reuniao`.
@@ -102,16 +109,16 @@ Se você instalar o programa ou baixar o modelo antes de a pessoa dizer sim, a m
 
 Se você enviar o áudio a um serviço de transcrição quando o motor local falta, a gravação sai da máquina sem a pessoa saber.
 
-1. Use o próximo motor da `Ordem dos motores` ou proponha a instalação local, como no Passo 3.
+1. Use o motor local que existe, ou proponha a instalação local, como no Passo 3.
 2. Serviço externo só entra se a pessoa pedir, e a resposta avisa que o arquivo sai da máquina.
 
 ### Laço repetido do Whisper
 
-Se você entregar o texto sem reler, uma frase repetida três vezes passa por transcrição certa e o trecho dito antes dela some.
+Se você entregar o texto do `Whisper` sem comparar com o do `SpeechTranscriber`, uma frase repetida três vezes passa por transcrição certa e o trecho dito antes dela some.
 
-1. Procure frases repetidas e saltos de assunto no Passo 6.
-2. Rode o outro motor da `Ordem dos motores` no mesmo áudio e compare o trecho.
-3. Sem outro motor, diga que o trecho não é confiável.
+1. Rode `scripts/compare_transcripts.py` nos dois textos e leia as frases repetidas e os saltos de assunto.
+2. Troque o trecho pelo do outro motor quando ele combina com a conversa em volta.
+3. Sem outro motor, ou com os dois divergindo, diga que o trecho não é confiável.
 
 ### Texto picado
 
@@ -134,7 +141,7 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### Transcreva esta gravação de uma daily: um vídeo de 20 minutos na área de trabalho.
 
-Detectei `whisper-cli`, `ffmpeg` e o modelo. Extraí o áudio para wav e transcrevi em português, com `-ml 0` e `.txt` e `.srt`. Entreguei os dois caminhos e avisei que o texto não diz quem fala e que alguns nomes podiam estar errados. Apaguei o wav.
+Detectei os dois motores. Extraí o áudio para wav e transcrevi em português com o `SpeechTranscriber` e com o `Whisper`, com `-ml 0` e `.txt` e `.srt`. Comparei os textos, troquei um trecho em que o `Whisper` repetiu uma frase e entreguei os caminhos, dizendo o que troquei. Avisei que o texto não diz quem fala e que alguns nomes podiam estar errados. Apaguei o wav.
 
 ### Transcreva este áudio, e a máquina não tem o Whisper nem o macOS 26.
 
@@ -142,7 +149,7 @@ Disse que faltavam o `whisper-cli`, o `ffmpeg` e o modelo de 547 MB, que a insta
 
 ### Transcreva este áudio, e a máquina tem o macOS 26, o `swiftc` e o `ffmpeg`, mas não o Whisper.
 
-Rodei o `SpeechTranscriber`, sem instalar nada, e avisei que o primeiro uso do idioma pode baixar o modelo da Apple. Entreguei o texto num `.txt`, disse que não há `.srt` e conferi se alguma frase se repetia.
+Rodei só o `SpeechTranscriber`, sem instalar nada, e avisei que o primeiro uso do idioma pode baixar o modelo da Apple. Entreguei o texto num `.txt`, disse que não há `.srt` nem segunda opinião e conferi se alguma frase se repetia.
 
 ## Casos-limite
 
@@ -163,7 +170,8 @@ Rodei o `SpeechTranscriber`, sem instalar nada, e avisei que o primeiro uso do i
 - Nome de arquivo com espaço e acento quebra o comando sem aspas.
 - O número de tempo vem de uma medição, numa máquina. Não prometa o mesmo tempo em outra.
 - O `ffmpeg` lê o teclado por padrão. Num laço de shell ele consome as linhas da fila e corta os caminhos: use `-nostdin`, ou o script de lote.
-- Nenhum motor ganhou em tudo. No áudio de três minutos o `Whisper` pontuou tudo e acertou nomes próprios, mas caiu num laço e perdeu um trecho. O `SpeechTranscriber` não perdeu trecho, mas saiu sem vírgulas e errou um nome próprio. Na reunião de 18 minutos os dois ficaram a 90% de palavras em comum, e o `SpeechTranscriber` levou um quinto do tempo. Use o primeiro da `Ordem dos motores` e o outro como segunda opinião.
+- Nenhum motor ganhou em tudo. No áudio de três minutos o `Whisper` pontuou tudo e acertou nomes próprios, mas caiu num laço e perdeu um trecho. O `SpeechTranscriber` não perdeu trecho, mas saiu sem vírgulas e errou um nome próprio. Na reunião de 18 minutos os dois ficaram a 90% de palavras em comum, e o `SpeechTranscriber` levou um quinto do tempo. Por isso os dois rodam e o texto sai da comparação.
+- Numa daily de 11 minutos, o `Whisper` repetiu três vezes uma frase perto do fim e o `SpeechTranscriber` ouviu outra coisa naquele trecho. Sem rodar os dois, a repetição passaria por fala certa.
 - O `SFSpeechRecognizer` parece uma reserva natural, por ser o motor antigo da Apple. Na medição ele perdeu cerca de 70% da fala de uma reunião e só devolveu texto depois de a pessoa liberar a permissão de fala para o app. Fica fora da ordem.
 - O modelo do Whisper que a pessoa lembra de ter baixado costuma já estar na `Pasta do modelo`. Procure lá antes de propor o download.
 
