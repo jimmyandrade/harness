@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.5.0"
   related:
     - criar-ideia-de-conteudo
     - consultar-responsavel-pela-oportunidade
@@ -78,7 +78,9 @@ Ordene os grupos pela prioridade de busca, do menor número para o maior. Priori
 
 ### Passo 4
 
-Pesquise na web as edições futuras do grupo na localidade-alvo, até o `Máximo de buscas na web por execução`. Abra a página inteira, não só o trecho da busca. A data com dia, mês e ano vem de uma fonte confiável, nunca do título nem de uma temporada, como "Resort 26". Fonte única que sumiu, perfil social sem edição nem data e link de outra cidade ou de outro evento não valem como evidência. Sem evidência, não cadastre: cite o que faltou.
+Pesquise na web as edições futuras do grupo na localidade-alvo, até o `Máximo de buscas na web por execução`. Abra a página inteira, não só o trecho da busca. A data com dia, mês e ano vem de uma fonte confiável, nunca do título nem de uma temporada, como "Resort 26". Fonte única que sumiu e link de outra cidade ou de outro evento não valem como evidência. Sem evidência, não cadastre: cite o que faltou.
+
+Leia também a bio dos perfis sociais oficiais do grupo e o evento ou o destaque que ela fixa, porque a organização costuma anunciar ali a data da próxima edição antes de abrir a inscrição. Bio com data, mas sem o ano, o local ou o link da inscrição, é pista e não evidência: não cadastre, e leve a data ao Passo 7 como o motivo de perguntar à organização quando abre a curadoria. Perfil sem data na bio e sem edição não vale como evidência.
 
 ### Passo 5
 
@@ -94,7 +96,7 @@ Quando a localidade-alvo veio de uma viagem e a oportunidade tem vários dias, c
 
 Responda com uma linha por candidato: título, datas com dia da semana, o que cai na viagem, por que combina com o negócio e o que falta para decidir.
 
-Cada candidato que combina leva também o caminho para participar: o link do edital ou do formulário, o prazo e, com o prazo vencido ou sem link, o canal para perguntar à organização se ainda aceita, como o produtor da página do evento ou a mensagem direta de quem orienta o grupo.
+Cada candidato que combina leva também o caminho para participar: o link do edital ou do formulário, o prazo e, com o prazo vencido ou sem link, os canais para perguntar à organização se ainda aceita, ou quando abre a curadoria, todos os que o Notion e o perfil mostram, como o e-mail, o WhatsApp, o produtor da página do evento e a mensagem direta de quem orienta o grupo, cada um com a fonte. Dos canais que a organização atende, a pessoa escolhe por qual escrever.
 
 Leva ainda quem a empresa já conhece, achado no Notion: pessoas, negociações e edições anteriores do mesmo grupo ou de eventos parecidos em que alguém da empresa atuou, como apresentadora ou expositora. Isso serve de abertura na mensagem.
 
@@ -145,6 +147,14 @@ Se você disser só "falta decidir", a pessoa descobre sozinha que a inscrição
 2. Com o prazo vencido, proponha perguntar se ainda aceita, usando quem a empresa já conhece.
 3. Não mande nada sem o sim ao texto.
 
+### Data na bio deixada de fora
+
+Se você olhar só a página do evento e ignorar a bio do perfil da organização, a data da próxima edição, como a de Natal, passa despercebida e ninguém pergunta quando a curadoria abre.
+
+1. Leia a bio e o destaque fixado dos perfis oficiais do grupo em cada busca.
+2. Data sem ano, local ou link de inscrição é pista: não cadastre.
+3. Leve a pista ao Passo 7 e proponha perguntar à organização por todos os canais conhecidos.
+
 ### Programação da edição inteira
 
 Se você registrar a programação de todos os dias de uma edição de vários dias, o cronograma enche de atividades a que ninguém vai.
@@ -186,6 +196,7 @@ Não escolhi localidade nem pesquisei grupos. A feira já estava cadastrada. Com
 - O resultado mais recente da busca parece o mais importante. A fila é a prioridade do grupo.
 - Os dias de feira parecem tempo livre. Eles ficam fora da programação registrada.
 - Candidato que combina parece pronto quando está cadastrado. Falta o caminho para participar e quem escreve à organização.
+- A bio do perfil parece só apresentação. Ela é onde a organização anuncia a data antes de abrir a inscrição, e a data dela é pista até a organização confirmar.
 - A pergunta "combina com o negócio?" parece pedir uma busca nova. Com o candidato na mão, a skill só o compara com o playbook e com o canvas.
 
 ## Scripts disponíveis
