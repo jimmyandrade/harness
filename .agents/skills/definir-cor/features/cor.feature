@@ -57,12 +57,18 @@ Funcionalidade: Cor
       Quando a habilidade grava
       Então ela deixa a cor sem hex
 
-  Regra: a família inconsistente é apontada
+  Regra: a família é a que a página da cor mostra
 
-    Exemplo: Família estranha
+    Exemplo: Família que parece estranha mas confere
       Dado que uma cor roxo-claro está na família vermelho
+      E que a página da cor na Pantone mostra a família vermelho
       Quando a habilidade confere a família
-      Então ela aponta a inconsistência na resposta
+      Então ela não aponta inconsistência
+
+    Exemplo: Família que diverge da página da cor
+      Dado que a família cadastrada é diferente da que a página da cor mostra
+      Quando a habilidade confere a família
+      Então ela avisa a divergência na resposta
       Mas não corrige a família sozinha
 
   Regra: outra skill consulta o banco antes de ligar

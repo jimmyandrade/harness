@@ -701,7 +701,7 @@ How these skills relate is in `README.md`, in this folder.
   - Leaves the commercial name empty until confirmed and never assumes a generic visual name
   - Records the origin of the hex in the page body, not in the name variations, and leaves metals without a hex
   - Never starts a trial or a subscription and does not get around the Pantone paywall
-  - Points out a color family that looks wrong and does not correct it alone
+  - Takes the family from the color page of the supplier library, warns only when the registered family differs from it, and does not correct it alone
   - Looks the color up before another skill links it to an item, and creates it with the company and the number when it is missing
   - Calls the duplicate and database lookup skills, and the company and spelling skills for the company
 - **Test Criteria**:

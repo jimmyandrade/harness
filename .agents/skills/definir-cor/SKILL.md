@@ -78,7 +78,7 @@ A origem do hex vai no corpo da página, nunca em variações de nome. A Pantone
 
 ### Passo 7
 
-Confira a família de cor contra o hex e o nome. Uma classificação que parece estranha, como um roxo-claro em vermelho, só é apontada na resposta, com o link da página. Não corrija a família sozinha.
+A família vem da página da cor na biblioteca do fornecedor, como a Pantone mostra, e não do hex nem do nome. Uma família que parece estranha a olho, como um roxo-claro em `Red`, não é erro: não aponte nem corrija por suspeita. Só avise, com o link da página, quando a família cadastrada diverge da que a página da cor mostra. Não corrija sozinha.
 
 ### Passo 8
 
@@ -86,7 +86,7 @@ Quando outra skill, como `definir-tecido`, `definir-estampa` ou `gerenciar-estoq
 
 ### Passo 9
 
-Na resposta, dê o link de cada página criada ou mudada, o que ficou sem nome, sem hex ou sem família e as inconsistências apontadas. Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
+Na resposta, dê o link de cada página criada ou mudada, o que ficou sem nome, sem hex ou sem família e as famílias que divergem da página da cor. Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
 
@@ -162,7 +162,7 @@ Ouro é metal e fica sem hex. Não preenchi o campo.
 - O número vem sem a sigla da biblioteca: pergunte qual é, TCX ou TPG, antes de gravar.
 - O hex só aparece com a assinatura da Pantone: deixe vazio, diga que falta e não inicie teste.
 - A cor existe com outro nome na grafia do fornecedor: reaproveite a página e registre a grafia em variações de nome.
-- A família parece errada: aponte na resposta e não corrija.
+- A família cadastrada diverge da que a página da cor mostra: avise na resposta e não corrija. Parecer estranha não basta.
 - A empresa não está cadastrada: cadastre por `definir-empresa` antes.
 - Um banco ou campo está vazio nas instruções do projeto: use `procurar-banco-de-dados`.
 
@@ -172,7 +172,7 @@ Ouro é metal e fica sem hex. Não preenchi o campo.
 - O mesmo número em duas bibliotecas parece a mesma cor. TCX e TPG têm hex diferentes.
 - O hex parece a cor do fornecedor. É uma aproximação de tela.
 - Um nome visual, como "vermelho-vivo", parece um nome comercial. Só o nome do catálogo do fornecedor vale.
-- A família no banco parece confiável. Algumas cores estão em família estranha.
+- A família parece não combinar com o tom. A que vale é a da página do fornecedor, e a Pantone classifica algumas cores de modo que parece estranho.
 
 ## Scripts disponíveis
 
