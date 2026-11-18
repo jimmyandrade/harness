@@ -17,7 +17,7 @@ import hashlib
 import importlib.util
 import json
 import os
-import re
+import re as regex
 import subprocess
 import sys
 import unicodedata
@@ -26,21 +26,21 @@ from pathlib import Path
 
 import yaml
 
-HEADING = re.compile(r"^(#{1,6})[ \t]+(.+?)\s*$")
-STEP = re.compile(r"^Passo ([1-9]\d*)$")
-FRONTMATTER_FIELD = re.compile(r"^([A-Za-z0-9-]+):(.*)$")
-ASCII_NAME = re.compile(r"^[a-z0-9-]+$")
-NOTION_URL = re.compile(r"notion\.(?:so|com)|collection://|view://", re.IGNORECASE)
+HEADING = regex.compile(r"^(#{1,6})[ \t]+(.+?)\s*$")
+STEP = regex.compile(r"^Passo ([1-9]\d*)$")
+FRONTMATTER_FIELD = regex.compile(r"^([A-Za-z0-9-]+):(.*)$")
+ASCII_NAME = regex.compile(r"^[a-z0-9-]+$")
+NOTION_URL = regex.compile(r"notion\.(?:so|com)|collection://|view://", regex.IGNORECASE)
 SKILL_NAMES = {"SKILL.md", "skill.md"}
 EXAMPLE_NOTICE = "Estes exemplos ilustram fatos. Eles podem não estar no data source."
-FLOWCHART = re.compile(
+FLOWCHART = regex.compile(
     r"^(?:flowchart|graph)(?:[ \t]+([A-Za-z]{2}))?(?:[ \t]|$)",
-    re.IGNORECASE,
+    regex.IGNORECASE,
 )
 FLOWCHART_DIRECTIONS = {"LR", "RL", "TD", "TB", "BT"}
 SKILL_FOLDER = r"(?:\.agents/skills|plugins/[^/]+/skills)"
-SKILL_PATH = re.compile(rf"^{SKILL_FOLDER}/(?P<name>[^/]+)/(?:SKILL|skill)\.md$")
-SKILL_FILE = re.compile(rf"^(?P<folder>{SKILL_FOLDER})/(?P<name>[^/]+)/")
+SKILL_PATH = regex.compile(rf"^{SKILL_FOLDER}/(?P<name>[^/]+)/(?:SKILL|skill)\.md$")
+SKILL_FILE = regex.compile(rf"^(?P<folder>{SKILL_FOLDER})/(?P<name>[^/]+)/")
 # git pathspecs for the folders that hold skills
 SKILL_PATHSPECS = [".agents/skills", ":(glob)plugins/*/skills/**"]
 # Where a skill that is gone from the project lived, read from the diff.
@@ -53,7 +53,7 @@ ALLOWED_FIELDS = {
     "metadata",
     "compatibility",
 }
-SEMVER = re.compile(
+SEMVER = regex.compile(
     r"^\"(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)"
     r"(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)"
     r"(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?"
@@ -534,8 +534,8 @@ def metadata_list_errors(block: str) -> list[Finding]:
             continue
         if not in_metadata or not raw.strip():
             continue
-        if re.match(r"^\s+-\s+", raw):
-            item = re.sub(r"^\s+-\s+", "", raw).strip()
+        if regex.match(r"^\s+-\s+", raw):
+            item = regex.sub(r"^\s+-\s+", "", raw).strip()
             if list_key is None:
                 errors.append(Finding("metadata list item has no key", lineno))
             elif not item:
@@ -572,9 +572,9 @@ def metadata_list(block: str, wanted: str) -> tuple[list[str], int] | None:
             continue
         if not in_metadata or not raw.strip():
             continue
-        if re.match(r"^\s+-\s+", raw):
+        if regex.match(r"^\s+-\s+", raw):
             if items is not None:
-                items.append(re.sub(r"^\s+-\s+", "", raw).strip().strip('"'))
+                items.append(regex.sub(r"^\s+-\s+", "", raw).strip().strip('"'))
             continue
         if items is not None:
             break
@@ -592,8 +592,8 @@ def known_skill_names() -> set[str]:
     return names
 
 
-MERMAID_BLOCK = re.compile(r"^```mermaid[^\n]*\n(.*?)^```", re.M | re.S)
-BACKTICKED = re.compile(r"`([a-z0-9][a-z0-9-]*)`")
+MERMAID_BLOCK = regex.compile(r"^```mermaid[^\n]*\n(.*?)^```", regex.M | regex.S)
+BACKTICKED = regex.compile(r"`([a-z0-9][a-z0-9-]*)`")
 
 
 def cited_names(body: str, candidates: set[str]) -> set[str]:
@@ -603,7 +603,7 @@ def cited_names(body: str, candidates: set[str]) -> set[str]:
         found.update(
             name
             for name in candidates
-            if re.search(r"(?<![a-z0-9-])" + re.escape(name) + r"(?![a-z0-9-])", block)
+            if regex.search(r"(?<![a-z0-9-])" + regex.escape(name) + r"(?![a-z0-9-])", block)
         )
     return found
 
@@ -635,7 +635,7 @@ def related_errors(block: str, body: str, name: str, known: set[str]) -> list[Fi
 
 
 MODELS = Path(".agents") / "assets" / "templates"
-MODEL_PATH = re.compile(r"\.agents/assets/templates/([A-Za-z0-9_.-]+?)(?:\.md)?(?![A-Za-z0-9_.-])")
+MODEL_PATH = regex.compile(r"\.agents/assets/templates/([A-Za-z0-9_.-]+?)(?:\.md)?(?![A-Za-z0-9_.-])")
 
 
 def known_model_names() -> set[str]:
@@ -957,7 +957,7 @@ def example_errors(body: list[tuple[int, str]], name: str) -> list[Finding]:
     line = body[start][0]
     errors: list[Finding] = []
     for lineno, raw in section:
-        if re.search(r"</?(?:dl|dt|dd)\b", raw, flags=re.IGNORECASE):
+        if regex.search(r"</?(?:dl|dt|dd)\b", raw, flags=regex.IGNORECASE):
             errors.append(Finding("examples must not use dl, dt, or dd", lineno))
             return errors
     notice = next(((lineno, raw) for lineno, raw in section if raw.strip()), None)
@@ -1051,7 +1051,7 @@ def issue_errors(
         index += 1
     while index < len(lines) and not lines[index][1].strip():
         index += 1
-    if index >= len(lines) or re.match(r"^\d+\. ", lines[index][1]) is None:
+    if index >= len(lines) or regex.match(r"^\d+\. ", lines[index][1]) is None:
         line = lines[index][0] if index < len(lines) else heading
         return [Finding(f"{title}: ordered list must follow the paragraph", line)]
     return []
@@ -1084,8 +1084,8 @@ def metadata_aliases(text: str) -> list[str]:
             continue
         if not in_metadata:
             continue
-        if in_aliases and re.match(r"^\s+-\s+", raw):
-            item = re.sub(r"^\s+-\s+", "", raw).strip().strip("'\"")
+        if in_aliases and regex.match(r"^\s+-\s+", raw):
+            item = regex.sub(r"^\s+-\s+", "", raw).strip().strip("'\"")
             if item:
                 aliases.append(item)
             continue
@@ -1268,7 +1268,7 @@ def opportunity_group_errors(text: str, roots: list[Path]) -> list[tuple[str, in
     return [(f'"{GROUPS}" is sim, but {OPPORTUNITY_MAPPING} does not map group; map it or set não', line)]
 
 
-GIVEN_PT = re.compile(r"^\s*(Dado|Dada|Dados|Dadas)\b(.*)$")
+GIVEN_PT = regex.compile(r"^\s*(Dado|Dada|Dados|Dadas)\b(.*)$")
 
 
 def gherkin_errors(skill_dir: Path, language: str) -> list[Finding]:
