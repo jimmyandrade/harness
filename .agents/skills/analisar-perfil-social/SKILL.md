@@ -4,7 +4,7 @@ description: Analisa o perfil social de uma pessoa, marca, feira ou evento pela 
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.7.1"
+  version: "0.8.0"
   related:
     - definir-perfil-social
     - reconhecer-imagem
@@ -35,8 +35,10 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Quadros por destaque": 3
 # `Destaques com a conta logada` é `perguntar`, `sempre` ou `nunca`. Abrir um destaque com a conta logada pode mostrar essa conta como quem viu, para a pessoa dona do perfil. `perguntar` diz isso uma vez por análise, com o nome da conta e o número de destaques, e espera o sim. `sempre` abre sem perguntar. `nunca` não abre.
 "Destaques com a conta logada": "perguntar"
-# `Publicar a análise no perfil social` é `sim` ou `não`. `sim` publica a análise no corpo da página do perfil, na lista de perfis sociais do mapeamento de dados do projeto. `não` só entrega a análise na resposta.
+# `Publicar a análise no perfil social` é `sim` ou `não`. `sim` grava a análise no `Destino da análise`. `não` só entrega a análise na resposta.
 "Publicar a análise no perfil social": "sim"
+# `Destino da análise` é onde a análise é gravada quando `Publicar a análise no perfil social` é `sim`. O padrão é o corpo da página do perfil, na lista de perfis sociais do mapeamento de dados do projeto. Um negócio que grava noutro lugar descreve o lugar aqui.
+"Destino da análise": "corpo da página do perfil social"
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -47,6 +49,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 Leia o `Posicionamento da marca` nas instruções do projeto. Sem ele, pergunte uma vez onde está e pare: sem a base de comparação, a nota não diz nada.
 
 Peça o canal e o perfil, se a pessoa não os trouxe, e o gatilho: por que esse perfil entrou na lista.
+
+Com `Publicar a análise no perfil social` em `sim`, confira antes de ler o perfil que o `Destino da análise` está ao alcance: a lista existe no workspace conectado e a ferramenta escreve nela. Sem isso, pare e diga, antes de gastar a leitura. A análise não é feita para ficar só na conversa.
 
 ### Passo 2
 
@@ -110,13 +114,19 @@ Diga em `Limites da análise` o que o perfil não mostra. Numa feira ou num even
 
 ### Passo 6
 
-Entregue a análise na resposta, no modelo. Com mais de uma análise na conversa, feche com os `Padrões` do modelo.
+Entregue a análise no modelo. Com mais de uma análise na conversa, feche com os `Padrões` do modelo.
 
-Com `Publicar a análise no perfil social` em `sim`, publique a análise também no corpo da página do perfil analisado, na lista de perfis sociais do mapeamento de dados do projeto, e dê o link da página na resposta. Cada canal tem a própria página de perfil e a própria análise: não publique na página da pessoa nem da empresa, porque a leitura muda de um canal para outro.
+Com `Publicar a análise no perfil social` em `sim`, a análise não termina na conversa: grave no `Destino da análise` e dê o link na resposta. Com o destino padrão, é o corpo da página do perfil analisado. Cada canal tem a própria página de perfil e a própria análise: não grave na página da pessoa nem da empresa, porque a leitura muda de um canal para outro.
+
+Grave só no `Destino da análise`. Não deixe a análise num arquivo local, numa página solta, num comentário ou só na conversa.
+
+Depois de gravar, abra a página e confira que o texto está lá. A resposta abre com o link da página. Se não gravou, a primeira linha diz "Não publicada" e o motivo, e o texto vai na resposta para a pessoa guardar.
 
 Com `sim`, publique sempre, também quando a execução é um teste da skill ou da análise. Quem não quer a publicação define `não` ou diz antes de rodar. Não decida por conta própria deixar de publicar.
 
-Perfil sem página na lista: cadastre-o com `definir-perfil-social` antes de publicar. Página que já tem uma análise: acrescente a nova abaixo da anterior, com a data no título, e não apague a anterior, porque o histórico mostra como o perfil mudou. Sem a lista no workspace conectado, entregue só na resposta e diga que não publicou.
+Perfil sem página na lista: cadastre-o com `definir-perfil-social` antes de publicar. Página que já tem uma análise: acrescente a nova abaixo da anterior, com a data no título, e não apague a anterior, porque o histórico mostra como o perfil mudou.
+
+Ligue o perfil ao que ele representa. Um perfil que é a conta própria de uma feira entra nos perfis oficiais do grupo de oportunidades dela. Um perfil de uma edição específica entra nos perfis do evento da oportunidade. O perfil da empresa que organiza entra nos perfis da empresa, e o da pessoa, nos da pessoa. Cada perfil entra só no que representa, e uma mesma feira pode ter o perfil da empresa, o da feira e o da edição. Sem certeza de qual deles é, pergunte antes de ligar.
 
 ### Passo 7
 
@@ -178,6 +188,14 @@ Se você afirmar a intenção ou o valor de uma pessoa a partir de um post ambí
 
 1. Descreva o que está visível.
 2. Liste as leituras possíveis e deixe a decisão para quem lê.
+
+### Análise que não chega ao destino
+
+Se você entregar a análise só na conversa, ou gravar num lugar que não é o `Destino da análise`, ela se perde, e a leitura gasta não serve a ninguém.
+
+1. Antes de ler, confira que o destino está ao alcance. Sem isso, pare.
+2. Grave só no `Destino da análise` e confira abrindo a página.
+3. Abra a resposta com o link, ou com "Não publicada" e o motivo.
 
 ### Publicação pulada por ser teste
 
