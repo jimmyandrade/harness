@@ -729,6 +729,7 @@ flowchart LR
   inscrever_na_oportunidade --> definir_empresa
   inscrever_na_oportunidade --> definir_inscricao
   inscrever_na_oportunidade --> definir_pessoa
+  inscrever_na_oportunidade --> definir_reserva
   inscrever_na_oportunidade --> definir_tarefa
   inscrever_na_oportunidade --> procurar_inscricao
   inscrever_na_oportunidade --> procurar_oportunidade
