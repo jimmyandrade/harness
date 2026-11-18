@@ -1,5 +1,42 @@
 # Changelog
 
+## [1.94.0](https://github.com/jimmyandrade/harness/compare/v1.93.0...v1.94.0) (2026-11-18)
+
+
+### Features
+
+* **anexar-arquivo-no-notion:** attach a local file to a Notion page with the ntn command line ([#1248](https://github.com/jimmyandrade/harness/issues/1248)) ([0e7c6b3](https://github.com/jimmyandrade/harness/commit/0e7c6b3d22e3e15dc0899123eb04f2c073b9da68))
+* **criar-oportunidade:** read the post card, register the place with a map link and warn of date conflicts ([#1292](https://github.com/jimmyandrade/harness/issues/1292)) ([ba0a776](https://github.com/jimmyandrade/harness/commit/ba0a7760f595baacd2e88ea6690a73b4e607fe25))
+* **definir-negociacao:** tell the group after writing to the organizer in private ([#1266](https://github.com/jimmyandrade/harness/issues/1266)) ([ab6e786](https://github.com/jimmyandrade/harness/commit/ab6e786a55d3f5e9fd3babd53112e7551cc470f4))
+* **definir-preco-de-produto:** choose a round or broken price and justify every price ([#1226](https://github.com/jimmyandrade/harness/issues/1226)) ([c8d9c22](https://github.com/jimmyandrade/harness/commit/c8d9c22aafd8f3e6ba838dd7c98e162d2f9c83c8))
+* **fazer-fechamento:** link loose expenses and check status before closing ([#1269](https://github.com/jimmyandrade/harness/issues/1269)) ([d8df89c](https://github.com/jimmyandrade/harness/commit/d8df89c3cc086f45fcd082bd8727205a53a3abcf))
+* **inscrever-na-oportunidade:** reply to the organizer's email with the confirmation screen pasted in ([#1281](https://github.com/jimmyandrade/harness/issues/1281)) ([edb5f39](https://github.com/jimmyandrade/harness/commit/edb5f393a013b01dd6fa9778ab5991dd3887b6c0))
+* **inscrever-na-oportunidade:** send the written project of an edital to cultural production ([#1283](https://github.com/jimmyandrade/harness/issues/1283)) ([5db1380](https://github.com/jimmyandrade/harness/commit/5db1380f96489e8b3c9ff2e4461da67c41b1878c))
+* **organizar-emails:** label each opportunity email with the group and every edition it covers ([#1250](https://github.com/jimmyandrade/harness/issues/1250)) ([067e791](https://github.com/jimmyandrade/harness/commit/067e791ce8938d479502b674d07508c8b596f415))
+* **perfilar-tom-de-voz:** toggle a label while a voice profile keeps learning from new messages ([#1296](https://github.com/jimmyandrade/harness/issues/1296)) ([5560508](https://github.com/jimmyandrade/harness/commit/5560508ba97283f3ab28c52a1c9b91c486f92bf2))
+* **publicar-ata-de-reuniao:** follow the meeting model before another ata ([#1282](https://github.com/jimmyandrade/harness/issues/1282)) ([df8ba55](https://github.com/jimmyandrade/harness/commit/df8ba558eb8aef55c023168ca1bd2369ebfb180a))
+* **publicar-ata-de-reuniao:** link the published minutes on the meeting's calendar event ([#1277](https://github.com/jimmyandrade/harness/issues/1277)) ([e034bf6](https://github.com/jimmyandrade/harness/commit/e034bf6af87b6eab7b21a43aed85e1e5914cbefb))
+* **rascunhar-mensagem:** split the draft and the send from the WhatsApp reading ([#1276](https://github.com/jimmyandrade/harness/issues/1276)) ([60bee70](https://github.com/jimmyandrade/harness/commit/60bee70bfecc8f5fb44c9b21345e185b793f521f))
+* **redigir-com-tom-de-voz:** write to a person as a person and continue the existing conversation ([#1238](https://github.com/jimmyandrade/harness/issues/1238)) ([c84462d](https://github.com/jimmyandrade/harness/commit/c84462d563997b55b33dcb331cf6f8338dd73bd6))
+
+
+### Bug Fixes
+
+* **conversar-no-whatsapp:** quote an audio excerpt with a single marker in one line ([#1288](https://github.com/jimmyandrade/harness/issues/1288)) ([f4a48b2](https://github.com/jimmyandrade/harness/commit/f4a48b25656dad8245a2ddd0ac2113f156ffd9a1))
+* **definir-empresa:** search the site, the CNPJ and the WhatsApp in the same round and read the person's phone on WhatsApp Web ([#1295](https://github.com/jimmyandrade/harness/issues/1295)) ([41a7c83](https://github.com/jimmyandrade/harness/commit/41a7c8345e3a4d0b1a087c31980932017d43f90b))
+* **definir-grafia:** ask before a joke nickname becomes a spelling variation ([#1284](https://github.com/jimmyandrade/harness/issues/1284)) ([1a139c5](https://github.com/jimmyandrade/harness/commit/1a139c5898dd405f63cce7b77069ed25e4aaff65))
+* **definir-local-fisico:** accept street fairs without a number and search the zip code and the map online ([#1294](https://github.com/jimmyandrade/harness/issues/1294)) ([ee4f84c](https://github.com/jimmyandrade/harness/commit/ee4f84cc675e3bbfbec594d83878e4f6bfcbda9a))
+* **definir-negociacao:** read the contact through the channels before asking for the text ([#1289](https://github.com/jimmyandrade/harness/issues/1289)) ([d1c54b1](https://github.com/jimmyandrade/harness/commit/d1c54b1c7d5cd43c87bfc6cbc5c09a408d2ac4b9))
+* **definir-registro-de-reuniao:** never list pending names without their lines of speech ([#1274](https://github.com/jimmyandrade/harness/issues/1274)) ([d5cc953](https://github.com/jimmyandrade/harness/commit/d5cc95357d6d84495677b7c9f4534f9bc9adc348))
+* **enviar-email:** label the thread when the draft is created ([#1272](https://github.com/jimmyandrade/harness/issues/1272)) ([09b8394](https://github.com/jimmyandrade/harness/commit/09b839434a3e33531dfbdf8f67c9e2632f5499a3))
+* **gerenciar-pedidos-de-delivery:** tell lunch and dinner from a redelivery, read the final total and link the right trip ([#1247](https://github.com/jimmyandrade/harness/issues/1247)) ([ee09759](https://github.com/jimmyandrade/harness/commit/ee09759c25b8a06448fe796acb2dc6a165b16c13))
+* **inscrever-na-oportunidade:** list the products in the registration form, edit a sent answer and list every registration ([#1291](https://github.com/jimmyandrade/harness/issues/1291)) ([b44b122](https://github.com/jimmyandrade/harness/commit/b44b122c1d66d02312c0ba25f0e71650e25763d0))
+* **inscrever-na-oportunidade:** take the confirmation screenshot and type the company CNPJ instead of asking the person ([#1293](https://github.com/jimmyandrade/harness/issues/1293)) ([c978173](https://github.com/jimmyandrade/harness/commit/c9781734849c78fb4a6d71d1094d3fd3bd6486fe))
+* **pesquisar-compra:** look for service companies in local listings, not in papers ([#1270](https://github.com/jimmyandrade/harness/issues/1270)) ([3ce0962](https://github.com/jimmyandrade/harness/commit/3ce0962d44be220ff18fa25b8ef7e9b0c7db164f))
+* **redigir-com-tom-de-voz:** repeat the whole draft when the approval question sits in the next-step box ([#1251](https://github.com/jimmyandrade/harness/issues/1251)) ([043dcb4](https://github.com/jimmyandrade/harness/commit/043dcb41b5a1f7c070a8dd013f320fbfca2a29ee))
+* **rotular-item:** create a missing context label under the BASB roots without asking ([#1273](https://github.com/jimmyandrade/harness/issues/1273)) ([fbf441c](https://github.com/jimmyandrade/harness/commit/fbf441c30ea760335739db584a144ca0edc7ffaa))
+* **transcrever-audio-e-video:** download a WhatsApp conversation audio without asking ([#1287](https://github.com/jimmyandrade/harness/issues/1287)) ([65af615](https://github.com/jimmyandrade/harness/commit/65af6153a096886ff3296595488a30f5a2b75a3d))
+
 ## [1.93.0](https://github.com/jimmyandrade/harness/compare/v1.92.0...v1.93.0) (2026-11-17)
 
 
