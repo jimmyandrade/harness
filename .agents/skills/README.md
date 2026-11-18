@@ -19,6 +19,7 @@ flowchart LR
     acompanhar_resposta_no_whatsapp["acompanhar-resposta-no-whatsapp"]
     acompanhar_retornos_pendentes["acompanhar-retornos-pendentes"]
     acompanhar_veiculo["acompanhar-veiculo"]
+    analisar_perfil_social["analisar-perfil-social"]
     analisar_regulamento_da_oportunidade["analisar-regulamento-da-oportunidade"]
     anexar_arquivo_no_notion["anexar-arquivo-no-notion"]
     anexar_arquivo_no_whatsapp["anexar-arquivo-no-whatsapp"]
@@ -89,6 +90,7 @@ flowchart LR
     definir_planejamento_financeiro["definir-planejamento-financeiro"]
     definir_politica["definir-politica"]
     definir_post_mortem["definir-post-mortem"]
+    definir_prestacao_de_contas["definir-prestacao-de-contas"]
     definir_recurso_de_aprendizado["definir-recurso-de-aprendizado"]
     definir_reel_do_instagram["definir-reel-do-instagram"]
     definir_registro_de_reuniao["definir-registro-de-reuniao"]
@@ -235,6 +237,8 @@ flowchart LR
   acompanhar_veiculo --> lancar_despesa_pessoal
   acompanhar_veiculo --> organizar_emails
   acompanhar_veiculo --> sincronizar_cronograma
+  analisar_perfil_social --> definir_perfil_social
+  analisar_perfil_social --> reconhecer_imagem
   analisar_regulamento_da_oportunidade --> acompanhar_edital
   analisar_regulamento_da_oportunidade --> acompanhar_itens_do_ponto_de_contato
   analisar_regulamento_da_oportunidade --> anexar_arquivo_no_notion
@@ -561,6 +565,14 @@ flowchart LR
   definir_politica --> delegar_aviso_de_plataforma
   definir_politica --> formalizar_decisao
   definir_post_mortem --> definir_tarefa
+  definir_prestacao_de_contas --> definir_conta_bancaria
+  definir_prestacao_de_contas --> definir_grafia
+  definir_prestacao_de_contas --> definir_negociacao
+  definir_prestacao_de_contas --> enviar_email
+  definir_prestacao_de_contas --> fazer_fechamento
+  definir_prestacao_de_contas --> lancar_despesa_da_empresa
+  definir_prestacao_de_contas --> procurar_email
+  definir_prestacao_de_contas --> redigir_com_tom_de_voz
   definir_recurso_de_aprendizado --> definir_agenda
   definir_recurso_de_aprendizado --> procurar_agenda
   definir_reel_do_instagram --> criar_ideia_de_conteudo
@@ -747,6 +759,7 @@ flowchart LR
   lancar_despesa_da_empresa --> definir_empresa
   lancar_despesa_da_empresa --> definir_grafia
   lancar_despesa_da_empresa --> definir_lancamento_financeiro
+  lancar_despesa_da_empresa --> definir_prestacao_de_contas
   lancar_despesa_da_empresa --> identificar_duplicata
   lancar_despesa_da_empresa --> lancar_despesa_pessoal
   lancar_despesa_da_empresa --> reconhecer_imagem
