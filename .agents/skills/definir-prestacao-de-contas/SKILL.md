@@ -1,0 +1,136 @@
+---
+name: definir-prestacao-de-contas
+description: Faz a prestação de contas de um repasse recebido, cruzando o extrato da conta com os gastos lançados e declarando o que ficou fora do repasse. Usada quando quem repassou o dinheiro pede a prestação, quando o prazo dela chega ou quando se concilia um extrato, mesmo sem dizer prestação. NÃO serve para lançar o gasto, fechar o caixa de um ponto de contato nem redigir a mensagem.
+metadata:
+  author: jimmyandrade
+  version: "0.1.0"
+  related:
+    - definir-conta-bancaria
+    - definir-grafia
+    - definir-negociacao
+    - enviar-email
+    - evoluir-habilidade
+    - fazer-fechamento
+    - lancar-despesa-da-empresa
+    - procurar-email
+    - redigir-com-tom-de-voz
+---
+
+# Definir prestação de contas
+
+## Parâmetros de configuração
+
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo.
+```yaml
+"Modo de aprendizado": "perguntar"
+```
+
+## Instruções
+
+### Passo 1
+
+Antes de montar, descubra o que o repasse pede e se a prestação já saiu.
+
+- [ ] Quem repassou, quanto, para quê e a data em que o dinheiro entrou.
+- [ ] O prazo e a quem a prestação vai, como a negociação ou o e-mail do repasse combinaram.
+- [ ] Os comprovantes que a pessoa pediu para guardar.
+- [ ] Se a prestação já foi enviada, no e-mail ou na conversa.
+
+Leia o histórico da negociação com `definir-negociacao` e busque o e-mail com `procurar-email`. Prestação já enviada não se refaz: confira o que falta e diga a diferença.
+
+### Passo 2
+
+Ache a conta que recebeu o repasse, pelo cadastro da conta com `definir-conta-bancaria`, e o extrato do período. O extrato costuma chegar por e-mail em PDF, CSV e OFX: leia o CSV ou o OFX, que têm uma linha por lançamento.
+
+Confirme com a pessoa de qual conta é o extrato quando o e-mail vier de outro endereço, e diga o período que ele cobre. Não presuma a titularidade.
+
+### Passo 3
+
+Dê um destino a cada linha do extrato do período do evento. O destino é o lançamento que a explica, a devolução ou o repasse que a anula, ou a pendência sem lançamento.
+
+```mermaid
+flowchart LR
+  A[Linha do extrato] --> B{Contraparte resolvida?}
+  B -->|não| C[definir-grafia, também pelo nome civil]
+  C --> B
+  B -->|sim| D{Pessoa de quem opera?}
+  D -->|sim| E[Devolução ou repasse dela]
+  D -->|não| F{Há lançamento por data, valor e recebedor?}
+  F -->|sim| G[Cita o lançamento]
+  F -->|não| H[Pendência: lancar-despesa-da-empresa]
+```
+
+Resolva cada contraparte de Pix antes de tratá-la como terceira. Um Pix no nome civil de registro de quem opera é dessa pessoa, devolução ou repasse dela, não dinheiro de fora.
+
+O nome que o extrato mostra diferente do cadastro, como o do titular da maquininha de um posto, é hipótese. Busque na internet e só afirme que é a mesma empresa com a confirmação, ou pergunte.
+
+### Passo 4
+
+Liste o que não foi pago com o repasse. Os gastos do mesmo evento que saíram de outra conta, de outra pessoa ou em dinheiro ficam declarados como fora do repasse, com a fonte de pagamento, para quem o enviou não os procurar no extrato.
+
+Não afirme que um gasto não passou pela conta sem ter cruzado o extrato inteiro do período. Consulte os gastos da viagem ou do ponto de contato no Notion, com `fazer-fechamento` e `lancar-despesa-da-empresa`.
+
+### Passo 5
+
+Monte a prestação com o valor recebido, o total gasto com comprovante, a diferença, cada linha e seu destino, e a declaração do que ficou fora do repasse. Diga na resposta o que já está conciliado e o que está pendente, antes do texto.
+
+O texto para quem repassou passa por `redigir-com-tom-de-voz`. O envio segue `enviar-email` ou o canal em que a conversa aconteceu, só com a confirmação da pessoa, com o extrato e os comprovantes que o repasse pediu. Quem assina é quem as instruções do projeto definem.
+
+### Passo 6
+
+Registre o envio no histórico da negociação, como `definir-negociacao` manda. Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
+
+## Problemas comuns
+
+### Contraparte do Pix tratada como terceira
+
+Se você chamar de terceira a pessoa de um Pix do extrato sem consultar o cadastro, ela pode ser quem opera, pelo nome civil de registro, e a conciliação conta a devolução dela como dinheiro de fora.
+
+1. Resolva o nome do Pix com `definir-grafia`, também pelo nome civil.
+2. Trate o Pix de quem opera como devolução ou repasse dela.
+3. Dê um destino a cada linha do extrato.
+
+### Linha do extrato sem destino
+
+Se você deixar uma linha do extrato sem dizer onde está a despesa, quem recebe a prestação não consegue conferir e a pessoa tem de perguntar.
+
+1. Busque por data, valor e recebedor antes de dizer que não há lançamento.
+2. Diga onde está cada despesa e de que conta ela saiu.
+3. Entregue o que não achou como pendência.
+
+### Prestação que só lista o que passou pela conta
+
+Se você prestar contas só do que está no extrato, quem repassou não sabe o que foi pago por fora e procura no extrato o que não está lá.
+
+1. Liste os gastos do mesmo evento que não saíram do repasse.
+2. Diga a fonte de pagamento de cada um.
+3. Confirme o cruzamento do extrato inteiro antes de afirmar que não passaram pela conta.
+
+## Exemplos de entrada e saída
+
+Estes exemplos ilustram fatos. Eles podem não estar no data source.
+
+### precisamos fazer a prestação de contas do repasse do festival; o extrato já está no e-mail?
+
+Achei o extrato do mês no e-mail, em CSV, PDF e OFX, e li o CSV. Cruzei cada linha com os gastos lançados: os três postos e o Uber batem, a devolução em nome civil de quem opera é dela, e as linhas sem lançamento ficaram como pendência. Listei pedágios, entrega, hospedagem e refeições como pagos por fora do repasse. Não enviei nada.
+
+## Casos-limite
+
+- O extrato vem de um e-mail de outra pessoa: confirme de qual conta é e o período antes de cruzar.
+- A prestação já foi enviada: compare com o extrato e diga só o que falta.
+- O gasto do evento não está lançado: siga `lancar-despesa-da-empresa` e volte.
+- O pedido é o acerto de caixa de um ponto de contato: `fazer-fechamento`.
+- O repasse pede um formato próprio de documento: siga o que a negociação combinou e diga a diferença.
+
+## Pegadinhas
+
+- Um nome de pessoa que você não reconhece num Pix parece terceiro. Pode ser o nome civil de registro de quem opera.
+- O status de conciliação de um gasto mede o comprovante, não o cruzamento com o banco.
+- Um nome diferente no extrato parece outra empresa. Pode ser o titular da maquininha do mesmo posto.
+- O prazo da prestação costuma estar na negociação, não no extrato.
+
+## Scripts disponíveis
+
+- Nenhum.
+
+1. Não há script para executar.
