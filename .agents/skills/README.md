@@ -532,6 +532,7 @@ flowchart LR
   definir_medicao_de_metrica --> definir_okr
   definir_medicao_de_metrica --> identificar_duplicata
   definir_medicao_de_metrica --> reconhecer_imagem
+  definir_negociacao --> acompanhar_retornos_pendentes
   definir_negociacao --> definir_agenda
   definir_negociacao --> inscrever_na_oportunidade
   definir_negociacao --> organizar_ponto_de_contato
@@ -755,6 +756,7 @@ flowchart LR
   inscrever_na_oportunidade --> procurar_inscricao
   inscrever_na_oportunidade --> procurar_oportunidade
   inscrever_na_oportunidade --> redigir_com_tom_de_voz
+  investigar_problema --> acompanhar_retornos_pendentes
   investigar_problema --> conversar_no_whatsapp
   investigar_problema --> definir_artigo_da_base_de_conhecimento
   investigar_problema --> definir_pessoa

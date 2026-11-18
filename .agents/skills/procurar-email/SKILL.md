@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search
 compatibility: Precisa de internet. A busca no e-mail conectado usa notion-ai-search no servidor notion.
 metadata:
   author: jimmyandrade
-  version: "0.6.1"
+  version: "0.7.0"
   related:
     - procurar-inscricao
     - definir-grafia
@@ -39,6 +39,14 @@ Leia cada resultado cujo tipo é e-mail. Uma página do Notion não é a mensage
 Não copie o corpo inteiro, código, número do pedido nem link com token, a menos que a pessoa peça. Não altere a lista de inscrições. Não crie tarefa. Não responda, encaminhe nem apague a mensagem.
 
 Aplique rótulos sempre usando a habilidade `rotular-item` em cada conversa de e-mail que você leu, com quem age agora e o contexto entre `Etiquetas de contexto`. Sem uma ferramenta que rotule e-mail na sessão, diga quais conversas ficaram sem rótulo.
+
+Rotule antes de relatar o que achou, mesmo quando a pessoa só pediu para conferir o e-mail.
+A resposta diz o estado e o contexto de cada conversa, junto do fato dela.
+
+A escolha do estado vem de quem age agora, depois de ler o corpo de cada mensagem, e o como é de `rotular-item`.
+No e-mail de um portal ou de um atendimento, o aviso automático que um fato posterior superou e a confirmação que o portal repete são concluídos.
+O aviso que pede um passo do negócio, como assinar um contrato ou pagar, é ação pendente.
+A conversa em que o negócio respondeu e a outra parte já agiu é respondida, e o estado anterior sai, como a etiqueta de espera.
 
 ### Passo 5
 
@@ -101,6 +109,14 @@ Se você negar o e-mail depois que a pessoa disse que ele existe, o relato dela 
 1. O que ela já disse sobre a mensagem vale.
 2. Diga se essa mensagem fala do que foi perguntado.
 3. Um e-mail sobre o evento que não pede inscrição nem ingresso de novo continua sendo e-mail dela.
+
+### E-mail relatado sem rótulo
+
+Se você ler os e-mails de um portal e só contar o que dizem, as conversas ficam sem estado e a pessoa precisa perguntar por que não foram rotuladas.
+
+1. Leia o corpo de cada mensagem e decida quem age agora.
+2. Passe cada conversa por `rotular-item` na mesma rodada, com o estado e o contexto.
+3. Diga o rótulo de cada conversa junto do fato.
 
 ### Pedir o nome da habilidade
 
