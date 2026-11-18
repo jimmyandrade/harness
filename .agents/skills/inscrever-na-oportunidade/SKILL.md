@@ -3,11 +3,12 @@ name: inscrever-na-oportunidade
 description: Preenche o cadastro ou o formulário que a organização de uma oportunidade pede para a inscrição, com os dados da empresa, no formato de cada campo, e envia só com o sim da pessoa. Usada quando a inscrição ou o cadastro de uma oportunidade está para ser feito. NÃO serve para registrar a inscrição no Notion, ler o regulamento, escrever à organização, salvo a resposta que confirma o envio, nem escrever o projeto que a inscrição pede.
 metadata:
   author: jimmyandrade
-  version: "0.4.5"
+  version: "0.4.6"
   related:
     - acompanhar-retornos-pendentes
     - analisar-regulamento-da-oportunidade
     - definir-empresa
+    - definir-reserva
     - definir-inscricao
     - definir-pessoa
     - definir-tarefa
@@ -42,7 +43,7 @@ Antes de preencher, de pré-inscrever ou de aceitar o convite, leia para quem a 
 
 Quando a exigência pede um projeto escrito, o texto vem pronto da produção cultural, pela tarefa que `analisar-regulamento-da-oportunidade` criou. Confira se a tarefa está feita e leia o texto entregue. Sem ele, não escreva o projeto aqui: prepare o resto, deixe o campo do projeto como pendência, diga o prazo e pare antes do envio.
 
-Um convite da organização por mensagem, que a marca vai aceitar, segue o mesmo caminho antes do rascunho da resposta: confira a agenda nos dias e nos horários do evento, e garanta a oportunidade cadastrada com os dados, por `procurar-oportunidade` e, sem cadastro, `criar-oportunidade`. Com `Estrutura de exposição a perguntar` preenchida e a estrutura fora do convite, a resposta de aceite pergunta isso à organização.
+Um convite da organização por mensagem, que a marca vai aceitar, segue o mesmo caminho antes do rascunho da resposta: confira a agenda nos dias e nos horários do evento e, com reserva «a confirmar» de outra feira nas mesmas datas, siga `definir-reserva` para criar o evento desta e registrar a concorrência nas duas, e garanta a oportunidade cadastrada com os dados, por `procurar-oportunidade` e, sem cadastro, `criar-oportunidade`. Com `Estrutura de exposição a perguntar` preenchida e a estrutura fora do convite, a resposta de aceite pergunta isso à organização.
 
 ### Passo 2
 

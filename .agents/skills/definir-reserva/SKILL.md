@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.4"
+  version: "0.2.5"
   related:
     - definir-agenda
     - definir-agenda-de-popstar
@@ -51,7 +51,9 @@ flowchart LR
 
 A pessoa confirmou a participação: título e descrição passam a dizer que deixou de ser só reserva. O título continua com o nome canônico. A gravação segue `definir-agenda`.
 
-A reserva é de uma oferta só. O título e a descrição dizem de qual, pela organização e pelo formato. Outra oferta parecida, no mesmo lugar ou perto das mesmas datas, entra na descrição como "não confundir com", e nunca como segundo motivo da reserva.
+A reserva é de uma oferta só. O título e a descrição dizem de qual, pela organização e pelo formato. Outra oferta parecida, no mesmo lugar ou perto das mesmas datas, que a marca não disputa, entra na descrição como "não confundir com", e nunca como segundo motivo da reserva.
+
+Quando a marca demonstra interesse em outra feira nas mesmas datas de uma reserva «a confirmar», como uma inscrição, um aceite de convite ou um voto, crie o evento «a confirmar» dessa feira, também de uma oferta só, e atualize a descrição de cada reserva que concorre com ela, dizendo a data e o nome de cada concorrente. Assim a agenda mostra que há mais de uma feira possível nessa data. A concorrência fica na descrição, nunca no título, e não confirma nenhuma.
 
 Participação que ainda depende de estoque, pagamento, curadoria, agenda, deslocamento ou confirmação de terceiros fica na descrição, ou o título mantém um marcador de incerteza. Não trate essa pendência como participação livre de condição.
 
@@ -64,6 +66,14 @@ Se você converter reserva, bloqueio, «a confirmar» ou lembrete em participaç
 1. Mantenha a natureza provisória.
 2. A oportunidade aprovada não confirma a participação.
 3. Confirme só quando a pessoa ou a fonte confirmar.
+
+### Feira concorrente sem evento
+
+Se você registrar o interesse numa feira só no Notion e deixar a agenda como estava, a data parece ter uma feira só, e a pessoa descobre o conflito perto do dia.
+
+1. Crie o evento «a confirmar» da nova feira, de uma oferta só.
+2. Atualize a descrição de cada reserva da mesma data com o nome e a data da concorrente.
+3. Mantenha todas provisórias: a concorrência não confirma nenhuma.
 
 ### Pendência apagada
 
@@ -89,7 +99,13 @@ Título e descrição deixaram de dizer que era só reserva. A gravação ficou 
 
 A confirmação ficou registrada. A descrição guardou a pendência de pagamento. O título manteve o marcador de incerteza.
 
+### a pessoa se inscreveu numa feira em São Paulo no mesmo fim de semana de uma reserva «a confirmar» de outra feira
+
+Criei o evento «a confirmar» da feira nova, com a oferta e a fonte. Atualizei a descrição da reserva que já estava, dizendo qual feira concorre e em que datas. Nenhuma virou participação confirmada, e os títulos ficaram como estavam.
+
 ## Casos-limite
+
+- A marca demonstra interesse em outra feira nas mesmas datas de uma reserva: crie o evento da feira nova e registre a concorrência na descrição das duas.
 
 - Reserva, bloqueio provisório, «a confirmar» ou lembrete sem confirmação explícita: mantenha a natureza provisória.
 - A oportunidade aprovada: não converte a reserva em participação confirmada.
