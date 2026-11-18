@@ -4,7 +4,7 @@ description: Cria, revisa e atualiza o artigo da base de conhecimento que respon
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.6.1"
+  version: "0.6.2"
   related:
     - criar-habilidade
     - definir-historia-de-usuario
@@ -156,7 +156,9 @@ Antes de concluir, confira o artigo com esta lista:
 - [ ] O nome exato de cada feature toggle ou flag aparece entre crases onde o artigo fala dela.
 
 Corrija o que falhar e confira de novo.
-Responda com o link de cada artigo criado ou alterado.
+A mensagem final da resposta traz o link de cada artigo criado ou alterado, em markdown com o título da página, como texto próprio dela.
+O link escrito antes de um quadro de encerramento, como o de `wrap_up`, ou "o link está acima" não conta, porque a pessoa pode não ver esse trecho.
+Uma página publicada sem link na mensagem final deixa o turno aberto.
 
 ### Passo 9
 
@@ -202,6 +204,14 @@ Se você criar o artigo sem buscar, a base fica com duas respostas para a mesma 
 1. Busque pelo título, pelas variações e pelo tema.
 2. Atualize o que já responde.
 
+### Link só antes do quadro final
+
+Se você escrever o link do artigo antes do quadro de encerramento e a mensagem final disser "o link está acima", a pessoa abre a resposta sem link e tem de pedir.
+
+1. Ponha o link do artigo, em markdown com o título da página, na mensagem final.
+2. Repita o link ali mesmo que já tenha aparecido antes.
+3. Releia a mensagem final antes de enviar e confira que cada página criada ou alterada tem o link.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
@@ -230,6 +240,7 @@ Os critérios ficaram de fora. Cada guardrail virou item do diagnóstico rápido
 - Esperar os prints da pessoa parece o caminho seguro. Quem escreve o artigo captura os prints que faltam.
 - Dizer que não dá para capturar parece uma resposta honesta. Sem a tentativa de abrir a tela, é uma suposição.
 - Uma página com o título genérico da ferramenta e o corpo só com o texto de exemplo parece um rascunho esquecido, e também pode ser o modelo do banco. Só a lista de modelos do data source diz qual dos dois é.
+- O link escrito antes do quadro de encerramento parece entregar o artigo. A pessoa lê a mensagem final, então o link vai nela.
 - Um artigo que manda usar uma ferramenta parece valer para todo mundo. Antes de dizer que uma orientação contradiz o artigo, confira a ordem dos acessos: quem ainda não recebeu a ferramenta segue outro caminho.
 
 ## Scripts disponíveis
