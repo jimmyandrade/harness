@@ -3,7 +3,7 @@ name: manter-contato-no-whatsapp
 description: Mantém o contato de uma conversa do WhatsApp Web em dia depois de ler ou enviar, com o link da página da pessoa na nota, o número salvo no padrão de nome e a lista de conferência da conversa. Usada pela sessão dona do WhatsApp Web depois de cada leitura ou envio, mesmo sem dizer contato. Não serve para abrir a aba, achar a conversa, redigir a mensagem nem rotular sozinha.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.2.1"
   related:
     - conversar-no-whatsapp
     - definir-empresa
@@ -56,7 +56,7 @@ Celular do Brasil leva o 9 depois do DDD, mesmo quando a conversa antiga mostra 
 
 ### Passo 4
 
-Depois de ler ou enviar numa conversa, inclusive num envio que outra sessão pediu, confira a lista antes de responder a quem pediu, uma vez:
+Ao abrir uma conversa, antes de redigir ou enviar a primeira mensagem nossa, confira a lista: o contato, a nota e os rótulos não esperam o envio. Depois de ler ou enviar, inclusive num envio que outra sessão pediu, confira de novo antes de responder a quem pediu, uma vez:
 - [ ] o rótulo de estado e o de contexto, por `rotular-item`;
 - [ ] o nome do contato;
 - [ ] a nota com o link da página;
@@ -91,6 +91,14 @@ Se você ler uma conversa a pedido de outra sessão e responder sem rotular, a p
 
 1. Rotule a conversa com estado e contexto antes de responder.
 2. Diga os rótulos que ficaram.
+
+### Primeira mensagem antes do contato
+
+Se você enviar a primeira mensagem a um número novo e deixar o contato, a nota e os rótulos para depois, a conversa fica sem nome, sem link da página e sem estado, e a pessoa cobra o que devia ter vindo antes.
+
+1. Ao abrir a conversa, confira a lista do Passo 4 antes de redigir.
+2. Salve o contato, grave a nota e rotule, e só então envie.
+3. Diga a quem pediu o que ficou feito.
 
 ### Contato salvo sem a organização
 
