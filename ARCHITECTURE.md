@@ -44,6 +44,7 @@ harness/
 │   └── runbooks/                   # Setup steps, one runbook per tool
 │       └── images/                 # Screenshots of the runbooks, one folder per runbook, with no personal data
 ├── examples/                       # Files the runbooks copy into a project, pinned as vX.Y.Z
+├── plugins/                        # Plugins by area, each with skills/<name>/SKILL.md; the skill checker reads them like .agents/skills/ (issue 1212, under issue 884)
 ├── vocabulary/                     # Vocabulary engine: API, CLI, and MCP server of the glossary
 │   ├── api/
 │   │   ├── cli.ts                  # Reads and writes glossary terms from the command line
@@ -138,7 +139,7 @@ None. People reach the core through their agent (Claude Code, Cursor), GitHub, a
 - Name: Skills, models, configuration, mappings
 - Type: Markdown, YAML, and JSON files
 - Purpose: Git is the write source of every skill and setting
-- Key Schemas/Collections: `.agents/skills/<name>/SKILL.md`, `.agents/assets/templates/<name>.md`, `AGENTS.md` and the parameters in its frontmatter, `.agents/mappings/skill-page.notion.json`, `.agents/mappings/template-page.notion.json`
+- Key Schemas/Collections: `.agents/skills/<name>/SKILL.md` and `plugins/<plugin>/skills/<name>/SKILL.md`, `.agents/assets/templates/<name>.md`, `AGENTS.md` and the parameters in its frontmatter, `.agents/mappings/skill-page.notion.json`, `.agents/mappings/template-page.notion.json`
 
 ### 4.2. Notion
 

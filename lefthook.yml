@@ -1,5 +1,6 @@
 # Lefthook runs the skill checker on commit.
-# `**` matches one or more directories, so skills live at .agents/skills/<name>/SKILL.md.
+# `**` matches one or more directories, so skills live at .agents/skills/<name>/SKILL.md
+# or at plugins/<plugin>/skills/<name>/SKILL.md.
 # On macOS, skill-folder-icon writes the "Símbolo da pasta no macOS" parameter onto each skill folder,
 # with the Python of the harness virtual environment.
 
@@ -8,6 +9,7 @@ pre-commit:
     skill-check:
       glob:
         - ".agents/skills/**/SKILL.md"
+        - "plugins/*/skills/**/SKILL.md"
         - "AGENTS.md"
         - ".agents/assets/templates/*.md"
         - ".agents/scripts/**"

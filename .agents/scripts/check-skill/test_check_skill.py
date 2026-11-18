@@ -30,10 +30,17 @@ def load_checker(project: Path):
     return module
 
 
-def write_skill(root: Path, name: str, related: list[str] | None = None, body: str = "") -> None:
-    folder = root / ".agents" / "skills" / name
+def write_skill(
+    root: Path,
+    name: str,
+    related: list[str] | None = None,
+    body: str = "",
+    skills: str = ".agents/skills",
+    author: str = "example",
+) -> None:
+    folder = root / skills / name
     folder.mkdir(parents=True, exist_ok=True)
-    lines = ["---", f"name: {name}", "description: x", "metadata:", "  author: example", '  version: "0.1.0"']
+    lines = ["---", f"name: {name}", "description: x", "metadata:", f"  author: {author}", '  version: "0.1.0"']
     if related is not None:
         lines.append("  related:")
         lines.extend(f"    - {item}" for item in related)
@@ -145,6 +152,117 @@ class PluginSkillsTest(unittest.TestCase):
         result = self.check_instructions('    "definir-termo":\n      "Cores": "x"\n')
         self.assertEqual(result.returncode, 1)
         self.assertIn('"Cores" is not a parameter of definir-termo', result.stdout + result.stderr)
+
+
+PLUGIN_SKILLS = "plugins/mobilidade/skills"
+
+
+class PluginFolderSkillsTest(unittest.TestCase):
+    """Skills under plugins/<plugin>/skills/ are checked like the ones under .agents/skills/."""
+
+    def setUp(self) -> None:
+        self.tmp = tempfile.TemporaryDirectory()
+        self.project = Path(self.tmp.name)
+        (self.project / ".agents").mkdir()
+        (self.project / INSTRUCTIONS).write_text(PARAMETERS, encoding="utf-8")
+        write_skill(self.project, "abrir-pedido")
+        write_skill(self.project, "consultar-preco", skills=PLUGIN_SKILLS)
+        self.checker = load_checker(self.project)
+
+    def tearDown(self) -> None:
+        self.tmp.cleanup()
+        os.environ.pop("HARNESS_ROOT", None)
+
+    def run_checker(self, *args: str) -> subprocess.CompletedProcess:
+        env = {**os.environ, "HARNESS_ROOT": str(self.project)}
+        env.pop("GITHUB_STEP_SUMMARY", None)
+        return subprocess.run(
+            [sys.executable, str(HERE / "check-skill.py"), *args],
+            env=env,
+            cwd=self.project,
+            capture_output=True,
+            text=True,
+        )
+
+    def test_the_skill_files_include_the_plugin_folders(self) -> None:
+        names = sorted(path.parent.name for path in self.checker.skill_files(self.project))
+        self.assertEqual(names, ["abrir-pedido", "consultar-preco"])
+
+    def test_known_names_include_a_skill_in_a_plugin_folder(self) -> None:
+        self.assertIn("consultar-preco", self.checker.known_skill_names())
+
+    def test_the_folder_name_of_a_skill_path_reads_both_roots(self) -> None:
+        self.assertEqual(self.checker.skill_dir_name(".agents/skills/abrir-pedido/SKILL.md"), "abrir-pedido")
+        self.assertEqual(self.checker.skill_dir_name(f"{PLUGIN_SKILLS}/consultar-preco/SKILL.md"), "consultar-preco")
+        self.assertIsNone(self.checker.skill_dir_name("plugins/mobilidade/agents/coordenacao.md"))
+        self.assertIsNone(self.checker.skill_dir_name("plugins/mobilidade/skills/consultar-preco/evals/evals.json"))
+
+    def test_the_path_of_a_skill_is_where_the_skill_is(self) -> None:
+        self.assertEqual(self.checker.item_path("abrir-pedido"), ".agents/skills/abrir-pedido/SKILL.md")
+        self.assertEqual(self.checker.item_path("consultar-preco"), f"{PLUGIN_SKILLS}/consultar-preco/SKILL.md")
+
+    def test_the_path_of_a_skill_that_is_gone_defaults_to_the_agents_folder(self) -> None:
+        self.assertEqual(self.checker.item_path("antiga"), ".agents/skills/antiga/SKILL.md")
+
+    def test_the_key_of_a_plugin_skill_path_is_its_folder_name(self) -> None:
+        self.assertEqual(self.checker.skill_key(Path(f"{PLUGIN_SKILLS}/consultar-preco/SKILL.md")), "consultar-preco")
+
+    def test_distinct_names_in_two_roots_have_no_duplicate(self) -> None:
+        self.assertEqual(self.checker.duplicate_name_findings(self.project), [])
+
+    def test_a_name_in_two_roots_is_a_duplicate(self) -> None:
+        write_skill(self.project, "abrir-pedido", skills=PLUGIN_SKILLS)
+        found = self.checker.duplicate_name_findings(self.project)
+        self.assertEqual([path for path, _ in found], [Path(f"{PLUGIN_SKILLS}/abrir-pedido/SKILL.md")])
+        self.assertIn(".agents/skills/abrir-pedido/SKILL.md", found[0][1].message)
+
+    def test_the_command_checks_a_skill_in_a_plugin_folder(self) -> None:
+        write_skill(self.project, "consultar-preco", skills=PLUGIN_SKILLS, author="outra-pessoa")
+        result = self.run_checker(f"{PLUGIN_SKILLS}/consultar-preco/SKILL.md")
+        self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+        self.assertIn("metadata.author must be example", result.stderr)
+
+    def test_the_command_without_arguments_checks_the_plugin_folders_too(self) -> None:
+        write_skill(self.project, "consultar-preco", skills=PLUGIN_SKILLS, author="outra-pessoa")
+        result = self.run_checker()
+        self.assertIn("plugins/mobilidade/skills/consultar-preco/SKILL.md", result.stderr)
+
+    def git(self, *args: str) -> str:
+        return subprocess.run(
+            ["git", "-c", "user.email=t@example.com", "-c", "user.name=T", *args],
+            cwd=self.project,
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.strip()
+
+    def test_a_changed_and_a_removed_plugin_skill_are_found_in_the_diff(self) -> None:
+        write_skill(self.project, "antiga", skills=PLUGIN_SKILLS)
+        self.git("init", "-q")
+        self.git("add", ".")
+        self.git("commit", "-q", "-m", "base")
+        base = self.git("rev-parse", "HEAD")
+        write_skill(self.project, "consultar-preco", body="mudou", skills=PLUGIN_SKILLS)
+        (self.project / PLUGIN_SKILLS / "antiga" / "SKILL.md").unlink()
+        (self.project / "plugins" / "mobilidade" / "agents").mkdir()
+        (self.project / "plugins" / "mobilidade" / "agents" / "viagens.md").write_text("x", encoding="utf-8")
+        self.git("add", "-A")
+        self.git("commit", "-q", "-m", "head")
+        head = self.git("rev-parse", "HEAD")
+        os.environ["CHECK_SKILL_BASE"], os.environ["CHECK_SKILL_HEAD"] = base, head
+        try:
+            checker = load_checker(self.project)
+            self.assertEqual(checker.changed_skill_names(), {"consultar-preco", "antiga"})
+            self.assertEqual(checker.item_path("antiga"), f"{PLUGIN_SKILLS}/antiga/SKILL.md")
+        finally:
+            os.environ.pop("CHECK_SKILL_BASE", None)
+            os.environ.pop("CHECK_SKILL_HEAD", None)
+
+    def test_the_command_fails_on_a_name_in_two_roots(self) -> None:
+        write_skill(self.project, "abrir-pedido", skills=PLUGIN_SKILLS)
+        result = self.run_checker()
+        self.assertEqual(result.returncode, 1)
+        self.assertIn("also at .agents/skills/abrir-pedido/SKILL.md", result.stderr)
 
 
 def write_model(root: Path, name: str) -> None:

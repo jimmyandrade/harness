@@ -17,7 +17,7 @@ import hashlib
 import importlib.util
 import json
 import os
-import re
+import re as regex
 import subprocess
 import sys
 import unicodedata
@@ -26,19 +26,25 @@ from pathlib import Path
 
 import yaml
 
-HEADING = re.compile(r"^(#{1,6})[ \t]+(.+?)\s*$")
-STEP = re.compile(r"^Passo ([1-9]\d*)$")
-FRONTMATTER_FIELD = re.compile(r"^([A-Za-z0-9-]+):(.*)$")
-ASCII_NAME = re.compile(r"^[a-z0-9-]+$")
-NOTION_URL = re.compile(r"notion\.(?:so|com)|collection://|view://", re.IGNORECASE)
+HEADING = regex.compile(r"^(#{1,6})[ \t]+(.+?)\s*$")
+STEP = regex.compile(r"^Passo ([1-9]\d*)$")
+FRONTMATTER_FIELD = regex.compile(r"^([A-Za-z0-9-]+):(.*)$")
+ASCII_NAME = regex.compile(r"^[a-z0-9-]+$")
+NOTION_URL = regex.compile(r"notion\.(?:so|com)|collection://|view://", regex.IGNORECASE)
 SKILL_NAMES = {"SKILL.md", "skill.md"}
 EXAMPLE_NOTICE = "Estes exemplos ilustram fatos. Eles podem não estar no data source."
-FLOWCHART = re.compile(
+FLOWCHART = regex.compile(
     r"^(?:flowchart|graph)(?:[ \t]+([A-Za-z]{2}))?(?:[ \t]|$)",
-    re.IGNORECASE,
+    regex.IGNORECASE,
 )
 FLOWCHART_DIRECTIONS = {"LR", "RL", "TD", "TB", "BT"}
-SKILL_PATH = re.compile(r"^\.agents/skills/([^/]+)/(?:SKILL|skill)\.md$")
+SKILL_FOLDER = r"(?:\.agents/skills|plugins/[^/]+/skills)"
+SKILL_PATH = regex.compile(rf"^{SKILL_FOLDER}/(?P<name>[^/]+)/(?:SKILL|skill)\.md$")
+SKILL_FILE = regex.compile(rf"^(?P<folder>{SKILL_FOLDER})/(?P<name>[^/]+)/")
+# git pathspecs for the folders that hold skills
+SKILL_PATHSPECS = [".agents/skills", ":(glob)plugins/*/skills/**"]
+# Where a skill that is gone from the project lived, read from the diff.
+KNOWN_PATHS: dict[str, str] = {}
 ALLOWED_FIELDS = {
     "name",
     "description",
@@ -47,7 +53,7 @@ ALLOWED_FIELDS = {
     "metadata",
     "compatibility",
 }
-SEMVER = re.compile(
+SEMVER = regex.compile(
     r"^\"(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)"
     r"(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)"
     r"(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?"
@@ -148,7 +154,12 @@ INSTRUCTIONS = parameters.INSTRUCTIONS
 
 def item_path(name: str) -> str:
     """Repository path of a checked item: a skill name, or the project instructions."""
-    return INSTRUCTIONS if name == INSTRUCTIONS else f".agents/skills/{name}/SKILL.md"
+    if name == INSTRUCTIONS:
+        return INSTRUCTIONS
+    for folder in parameters.skill_folders(ROOT):
+        if (folder / name / "SKILL.md").is_file():
+            return (folder / name / "SKILL.md").relative_to(ROOT).as_posix()
+    return KNOWN_PATHS.get(name, f".agents/skills/{name}/SKILL.md")
 
 
 def body_measure(text: str, encoding) -> tuple[str | None, int | None]:
@@ -167,13 +178,13 @@ def changed_skill_names() -> set[str] | None:
         if not base or not head or set(base) <= {"0"}:
             return None
         raw = git_output(
-            ["git", "diff", "--name-only", base, head, "--", ".agents/skills", INSTRUCTIONS]
+            ["git", "diff", "--name-only", base, head, "--", *SKILL_PATHSPECS, INSTRUCTIONS]
         )
     else:
         chunks: list[str] = []
         for args in (
-            ["git", "diff", "--name-only", "--", ".agents/skills", INSTRUCTIONS],
-            ["git", "diff", "--cached", "--name-only", "--", ".agents/skills", INSTRUCTIONS],
+            ["git", "diff", "--name-only", "--", *SKILL_PATHSPECS, INSTRUCTIONS],
+            ["git", "diff", "--cached", "--name-only", "--", *SKILL_PATHSPECS, INSTRUCTIONS],
         ):
             raw = git_output(args)
             if raw is None:
@@ -182,6 +193,10 @@ def changed_skill_names() -> set[str] | None:
         raw = "\n".join(chunks)
     if raw is None:
         return None
+    for line in raw.splitlines():
+        found = SKILL_FILE.match(line.strip())
+        if found:
+            KNOWN_PATHS.setdefault(found["name"], f"{found['folder']}/{found['name']}/SKILL.md")
     return {
         skill_key(Path(line.strip()))
         for line in raw.splitlines()
@@ -519,8 +534,8 @@ def metadata_list_errors(block: str) -> list[Finding]:
             continue
         if not in_metadata or not raw.strip():
             continue
-        if re.match(r"^\s+-\s+", raw):
-            item = re.sub(r"^\s+-\s+", "", raw).strip()
+        if regex.match(r"^\s+-\s+", raw):
+            item = regex.sub(r"^\s+-\s+", "", raw).strip()
             if list_key is None:
                 errors.append(Finding("metadata list item has no key", lineno))
             elif not item:
@@ -557,9 +572,9 @@ def metadata_list(block: str, wanted: str) -> tuple[list[str], int] | None:
             continue
         if not in_metadata or not raw.strip():
             continue
-        if re.match(r"^\s+-\s+", raw):
+        if regex.match(r"^\s+-\s+", raw):
             if items is not None:
-                items.append(re.sub(r"^\s+-\s+", "", raw).strip().strip('"'))
+                items.append(regex.sub(r"^\s+-\s+", "", raw).strip().strip('"'))
             continue
         if items is not None:
             break
@@ -577,8 +592,8 @@ def known_skill_names() -> set[str]:
     return names
 
 
-MERMAID_BLOCK = re.compile(r"^```mermaid[^\n]*\n(.*?)^```", re.M | re.S)
-BACKTICKED = re.compile(r"`([a-z0-9][a-z0-9-]*)`")
+MERMAID_BLOCK = regex.compile(r"^```mermaid[^\n]*\n(.*?)^```", regex.M | regex.S)
+BACKTICKED = regex.compile(r"`([a-z0-9][a-z0-9-]*)`")
 
 
 def cited_names(body: str, candidates: set[str]) -> set[str]:
@@ -588,7 +603,7 @@ def cited_names(body: str, candidates: set[str]) -> set[str]:
         found.update(
             name
             for name in candidates
-            if re.search(r"(?<![a-z0-9-])" + re.escape(name) + r"(?![a-z0-9-])", block)
+            if regex.search(r"(?<![a-z0-9-])" + regex.escape(name) + r"(?![a-z0-9-])", block)
         )
     return found
 
@@ -620,7 +635,7 @@ def related_errors(block: str, body: str, name: str, known: set[str]) -> list[Fi
 
 
 MODELS = Path(".agents") / "assets" / "templates"
-MODEL_PATH = re.compile(r"\.agents/assets/templates/([A-Za-z0-9_.-]+?)(?:\.md)?(?![A-Za-z0-9_.-])")
+MODEL_PATH = regex.compile(r"\.agents/assets/templates/([A-Za-z0-9_.-]+?)(?:\.md)?(?![A-Za-z0-9_.-])")
 
 
 def known_model_names() -> set[str]:
@@ -942,7 +957,7 @@ def example_errors(body: list[tuple[int, str]], name: str) -> list[Finding]:
     line = body[start][0]
     errors: list[Finding] = []
     for lineno, raw in section:
-        if re.search(r"</?(?:dl|dt|dd)\b", raw, flags=re.IGNORECASE):
+        if regex.search(r"</?(?:dl|dt|dd)\b", raw, flags=regex.IGNORECASE):
             errors.append(Finding("examples must not use dl, dt, or dd", lineno))
             return errors
     notice = next(((lineno, raw) for lineno, raw in section if raw.strip()), None)
@@ -1036,7 +1051,7 @@ def issue_errors(
         index += 1
     while index < len(lines) and not lines[index][1].strip():
         index += 1
-    if index >= len(lines) or re.match(r"^\d+\. ", lines[index][1]) is None:
+    if index >= len(lines) or regex.match(r"^\d+\. ", lines[index][1]) is None:
         line = lines[index][0] if index < len(lines) else heading
         return [Finding(f"{title}: ordered list must follow the paragraph", line)]
     return []
@@ -1051,7 +1066,7 @@ def semver_key(quoted: str) -> tuple[int, int, int] | None:
 
 def skill_dir_name(path: str) -> str | None:
     match = SKILL_PATH.fullmatch(path)
-    return match.group(1) if match else None
+    return match["name"] if match else None
 
 
 def metadata_aliases(text: str) -> list[str]:
@@ -1069,8 +1084,8 @@ def metadata_aliases(text: str) -> list[str]:
             continue
         if not in_metadata:
             continue
-        if in_aliases and re.match(r"^\s+-\s+", raw):
-            item = re.sub(r"^\s+-\s+", "", raw).strip().strip("'\"")
+        if in_aliases and regex.match(r"^\s+-\s+", raw):
+            item = regex.sub(r"^\s+-\s+", "", raw).strip().strip("'\"")
             if item:
                 aliases.append(item)
             continue
@@ -1172,12 +1187,12 @@ def rename_alias_findings() -> list[tuple[Path, Finding]]:
     head = os.environ.get("CHECK_SKILL_HEAD", "")
     if base and head and not set(base) <= {"0"}:
         raw = git_output(
-            ["git", "diff", "--name-status", "-M", base, head, "--", ".agents/skills"]
+            ["git", "diff", "--name-status", "-M", base, head, "--", *SKILL_PATHSPECS]
         )
         old_rev, new_rev = base, head
     else:
         raw = git_output(
-            ["git", "diff", "--cached", "--name-status", "-M", "--", ".agents/skills"]
+            ["git", "diff", "--cached", "--name-status", "-M", "--", *SKILL_PATHSPECS]
         )
         old_rev, new_rev = "HEAD", "INDEX"
     if not raw:
@@ -1253,7 +1268,7 @@ def opportunity_group_errors(text: str, roots: list[Path]) -> list[tuple[str, in
     return [(f'"{GROUPS}" is sim, but {OPPORTUNITY_MAPPING} does not map group; map it or set não', line)]
 
 
-GIVEN_PT = re.compile(r"^\s*(Dado|Dada|Dados|Dadas)\b(.*)$")
+GIVEN_PT = regex.compile(r"^\s*(Dado|Dada|Dados|Dadas)\b(.*)$")
 
 
 def gherkin_errors(skill_dir: Path, language: str) -> list[Finding]:
@@ -1330,14 +1345,31 @@ def eval_file_errors(skill_dir: Path, name: str, version: str) -> list[Finding]:
 
 
 def skill_files(root: Path) -> list[Path]:
-    skills = root / ".agents" / "skills"
-    if not skills.is_dir():
-        return []
-    return sorted(
-        path
-        for path in skills.glob("*/*")
-        if path.name in SKILL_NAMES and path.is_file()
-    )
+    """Every SKILL.md under .agents/skills and plugins/<plugin>/skills, the first root first."""
+    files: list[Path] = []
+    for skills in parameters.skill_folders(root):
+        files.extend(
+            sorted(
+                path
+                for path in skills.glob("*/*")
+                if path.name in SKILL_NAMES and path.is_file()
+            )
+        )
+    return files
+
+
+def duplicate_name_findings(root: Path) -> list[tuple[Path, Finding]]:
+    """A skill name is the name of its folder, so two roots cannot both hold the same one."""
+    first: dict[str, Path] = {}
+    findings: list[tuple[Path, Finding]] = []
+    for path in skill_files(root):
+        name = path.parent.name
+        relative = path.relative_to(root)
+        if name not in first:
+            first[name] = relative
+            continue
+        findings.append((relative, Finding(f"skill name also at {first[name].as_posix()}", 1)))
+    return findings
 
 
 def instructions_errors(text: str, encoding, word_limit: int, line_limit: int, body_limit: int) -> list[Finding]:
@@ -1520,7 +1552,7 @@ def main() -> int:
                     )
         except SystemExit as exc:
             add(Finding(str(exc)))
-    for relative, finding in rename_alias_findings():
+    for relative, finding in duplicate_name_findings(ROOT) + rename_alias_findings():
         failed = True
         key = skill_key(relative)
         results.setdefault(key, [])

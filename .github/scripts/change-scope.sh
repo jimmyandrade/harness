@@ -3,7 +3,7 @@
 # code=false when every changed file is documentation, which needs no check at all.
 # node=false when every changed file is documentation or the text of a skill
 # (SKILL.md, evals/, features/, and the generated README.md and FEATURES.md of
-# the skills), which the Node.js tests and the typecheck never read.
+# the skills, under .agents/skills/ or plugins/<plugin>/skills/), which the Node.js tests and the typecheck never read.
 # Documentation is docs/ and Markdown at the root, except AGENTS.md and CLAUDE.md,
 # which the skill check reads. Usage: change-scope.sh <base> <head>
 set -euo pipefail
@@ -26,6 +26,7 @@ while IFS= read -r path; do
     docs/*) ;;
     .agents/skills/README.md | .agents/skills/FEATURES.md) code=true ;;
     .agents/skills/*/SKILL.md | .agents/skills/*/evals/* | .agents/skills/*/features/*) code=true ;;
+    plugins/*/skills/*/SKILL.md | plugins/*/skills/*/evals/* | plugins/*/skills/*/features/*) code=true ;;
     */*) code=true node=true ;;
     *.md) ;;
     *) code=true node=true ;;

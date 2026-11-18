@@ -182,6 +182,30 @@ class SettingTest(unittest.TestCase):
             self.assertFalse(parameters.is_harness(root))
 
 
+class SkillFoldersTest(unittest.TestCase):
+    def test_should_list_the_agents_folder_first_then_each_plugin_folder_with_skills(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / ".agents" / "skills").mkdir(parents=True)
+            (root / "plugins" / "mobilidade" / "skills").mkdir(parents=True)
+            (root / "plugins" / "agenda" / "skills").mkdir(parents=True)
+            (root / "plugins" / "sem-skills" / "agents").mkdir(parents=True)
+            self.assertEqual(
+                parameters.skill_folders(root),
+                [root / ".agents" / "skills", root / "plugins" / "agenda" / "skills", root / "plugins" / "mobilidade" / "skills"],
+            )
+
+    def test_should_list_only_the_plugin_folders_when_the_project_has_no_agents_folder(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "plugins" / "mobilidade" / "skills").mkdir(parents=True)
+            self.assertEqual(parameters.skill_folders(root), [root / "plugins" / "mobilidade" / "skills"])
+
+    def test_should_list_nothing_for_a_project_without_skills(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            self.assertEqual(parameters.skill_folders(Path(tmp)), [])
+
+
 class ConfigFileTest(unittest.TestCase):
     def project(self, instructions: str, files: dict[str, str]) -> Path:
         root = Path(tempfile.mkdtemp())

@@ -59,6 +59,17 @@ class ChangeScopeTest(unittest.TestCase):
         )
         self.assertEqual(result, {"code": "true", "node": "false"})
 
+    def test_a_plugin_skill_text_skips_node_but_runs_the_skill_check(self):
+        result = self.scope(
+            "plugins/mobilidade/skills/a/SKILL.md",
+            "plugins/mobilidade/skills/a/evals/evals.json",
+            "plugins/mobilidade/skills/a/features/x.feature",
+        )
+        self.assertEqual(result, {"code": "true", "node": "false"})
+
+    def test_a_plugin_skill_script_runs_node(self):
+        self.assertEqual(self.scope("plugins/mobilidade/skills/a/scripts/read.py"), {"code": "true", "node": "true"})
+
     def test_skill_script_runs_node(self):
         self.assertEqual(self.scope(".agents/skills/a/scripts/read.py"), {"code": "true", "node": "true"})
 
