@@ -421,6 +421,7 @@ flowchart LR
   definir_artigo_da_base_de_conhecimento --> definir_historia_de_usuario
   definir_artigo_da_base_de_conhecimento --> definir_politica
   definir_artigo_da_base_de_conhecimento --> definir_tarefa
+  definir_artigo_da_base_de_conhecimento --> formalizar_decisao
   definir_artista --> definir_empresa
   definir_artista --> definir_perfil_social
   definir_artista --> definir_pessoa
