@@ -39,8 +39,8 @@ FLOWCHART = re.compile(
 )
 FLOWCHART_DIRECTIONS = {"LR", "RL", "TD", "TB", "BT"}
 SKILL_FOLDER = r"(?:\.agents/skills|plugins/[^/]+/skills)"
-SKILL_PATH = re.compile(rf"^{SKILL_FOLDER}/([^/]+)/(?:SKILL|skill)\.md$")
-SKILL_FILE = re.compile(rf"^({SKILL_FOLDER})/([^/]+)/")
+SKILL_PATH = re.compile(rf"^{SKILL_FOLDER}/(?P<name>[^/]+)/(?:SKILL|skill)\.md$")
+SKILL_FILE = re.compile(rf"^(?P<folder>{SKILL_FOLDER})/(?P<name>[^/]+)/")
 # git pathspecs for the folders that hold skills
 SKILL_PATHSPECS = [".agents/skills", ":(glob)plugins/*/skills/**"]
 # Where a skill that is gone from the project lived, read from the diff.
@@ -196,7 +196,7 @@ def changed_skill_names() -> set[str] | None:
     for line in raw.splitlines():
         found = SKILL_FILE.match(line.strip())
         if found:
-            KNOWN_PATHS.setdefault(found.group(2), f"{found.group(1)}/{found.group(2)}/SKILL.md")
+            KNOWN_PATHS.setdefault(found["name"], f"{found['folder']}/{found['name']}/SKILL.md")
     return {
         skill_key(Path(line.strip()))
         for line in raw.splitlines()
@@ -1066,7 +1066,7 @@ def semver_key(quoted: str) -> tuple[int, int, int] | None:
 
 def skill_dir_name(path: str) -> str | None:
     match = SKILL_PATH.fullmatch(path)
-    return match.group(1) if match else None
+    return match["name"] if match else None
 
 
 def metadata_aliases(text: str) -> list[str]:
