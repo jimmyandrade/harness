@@ -4,13 +4,14 @@ description: Cria, revisa e atualiza o artigo da base de conhecimento que respon
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.6.1"
   related:
     - criar-habilidade
     - definir-historia-de-usuario
     - definir-tarefa
     - definir-politica
     - evoluir-habilidade
+    - formalizar-decisao
 ---
 
 # Definir artigo da base de conhecimento
@@ -120,6 +121,10 @@ Não presuma que a pessoa conhece a modelagem dos dados: diga o nome do banco, d
 Quando dois bancos parecidos causam erro, explique a diferença entre eles.
 Quando a dúvida vem de uma conversa, um print, uma reunião ou um caso real, use esse caso como exemplo concreto no artigo, sem nome de pessoa nem dado pessoal.
 Ao criar, use o `Status inicial`.
+Uma decisão tomada que o artigo conta, de comportamento, de padrão ou de quem liga o quê, é registrada como manda `formalizar-decisao`, no `Registro de decisão`, e nunca em parágrafo corrido.
+Se a decisão ainda está aberta, ela fica pendente, como a mesma habilidade manda.
+Quando o artigo trata de uma feature toggle ou flag, o nome exato dela aparece entre crases na seção de abertura, em cada passo, decisão e observação que fala dela, e no título ou nas variações quando couber.
+"A feature toggle" sozinha não basta: quem procura pelo nome não acha o artigo.
 
 ### Passo 7
 
@@ -147,6 +152,8 @@ Antes de concluir, confira o artigo com esta lista:
 - [ ] Nenhum print mostra nome, e-mail, telefone ou outro dado pessoal.
 - [ ] A pessoa sabe o que fazer, onde fazer e o que evitar sem abrir outro documento.
 - [ ] A ferramenta está ligada quando a dúvida é sobre ela.
+- [ ] Cada decisão está no `Registro de decisão`, com quem decidiu e quando, e não em parágrafo.
+- [ ] O nome exato de cada feature toggle ou flag aparece entre crases onde o artigo fala dela.
 
 Corrija o que falhar e confira de novo.
 Responda com o link de cada artigo criado ou alterado.

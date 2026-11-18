@@ -4,7 +4,7 @@ description: Analisa o perfil social de uma pessoa, marca, feira ou evento pela 
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   related:
     - definir-perfil-social
     - reconhecer-imagem
@@ -54,7 +54,11 @@ Com a ferramenta de credencial do gerenciador de senhas na sessão, ofereça o l
 
 Leia o perfil inteiro, não só o último post: a bio e o link da bio, o grid, os destaques, os posts fixados e os `Posts recentes a olhar`, com legendas e comentários. Destaque e post fixado contam como identidade do perfil, porque ficam ali mesmo depois de anos.
 
+Em cada post, leia o rótulo da plataforma, como "Conteúdo de IA", e os contadores de curtidas, comentários e compartilhamentos. Confira o que cada número é antes de usá-lo.
+
 Sem o login, leia só o que está visível e liste em `Limites da análise` o que ficou de fora.
+
+Quadro de destaque que abre vazio ou preto não foi lido. Não deduza o conteúdo pelo título do destaque: liste-o em `Limites da análise` e ofereça ler no navegador da própria pessoa. Abrir um destaque com a conta logada pode mostrar a conta como quem viu, então diga na resposta que abriu.
 
 Perfil privado, bloqueado ou fora do ar: diga que não analisou e por quê, e pergunte se a pessoa quer trazer capturas. Não deduza estética nem valores do nome. Capturas trazidas pela pessoa seguem `reconhecer-imagem`.
 
@@ -63,6 +67,8 @@ Perfil privado, bloqueado ou fora do ar: diga que não analisou e por quê, e pe
 Preencha cada seção só com o que o perfil mostra. Cada sinal cita o post ou o destaque e a data que o sustenta.
 
 Conteúdo cujo sentido depende de contexto que o perfil não dá fica como hipótese: diga o que está visível, liste as leituras possíveis e não afirme a intenção da pessoa nem o valor que ela defende. A decisão é de quem lê a análise.
+
+O rótulo de conteúdo de IA entra como sinal, com o post e a data, e não como acusação: ele diz o que a plataforma marcou. Os contadores servem para medir o engajamento contra o tamanho do perfil.
 
 ### Passo 5
 
@@ -87,6 +93,14 @@ Se você ler o perfil que abriu com aviso de login sem pedir o login antes, a an
 1. Pare antes de ler e peça à pessoa que entre na conta, pelo gerenciador de senhas ou pelo navegador.
 2. Diga o que o login libera.
 3. Sem o login, liste em `Limites da análise` o que ficou de fora.
+
+### Destaque lido pelo título
+
+Se você descrever o conteúdo de um destaque pelo nome dele ou pela edição que ele arquiva, a análise afirma o que não viu.
+
+1. Confira se os quadros abriram. Quadro vazio ou preto não foi lido.
+2. Liste o destaque em `Limites da análise`.
+3. Ofereça ler no navegador da própria pessoa.
 
 ### Nota única
 
@@ -136,6 +150,7 @@ Li o posicionamento da marca, abri a bio, os destaques e os 12 posts recentes e 
 - O perfil é de pessoa: use todas as seções do modelo.
 - O perfil é de feira, evento ou marca: omita o encaixe com o produto e a aproximação.
 - O canal não é o Instagram: leia o equivalente de bio, destaques, fixados e posts recentes, e diga o que o canal não oferece.
+- Os quadros de um destaque abrem pretos: o destaque conta como não lido. Diga isso e ofereça ler no navegador da pessoa.
 - O canal abre com aviso de login: peça à pessoa que entre na conta antes de ler, e ofereça o gerenciador de senhas quando a sessão tem a ferramenta. Se ela não quiser, siga com o que está visível e diga o que ficou de fora.
 - Mais de um perfil da mesma feira ou pessoa: analise cada um e junte no veredito.
 - A pessoa pede a nota sem o posicionamento da marca: pergunte onde está e pare.
@@ -145,6 +160,7 @@ Li o posicionamento da marca, abri a bio, os destaques e os 12 posts recentes e 
 
 - O aviso de login parece só uma janela a fechar. O grid inicial ainda carrega por baixo, mas os destaques, as legendas e os comentários não abrem sem a conta.
 - A ferramenta de credencial do gerenciador de senhas parece valer em qualquer navegador da sessão. Ela age só no navegador da própria pessoa, não no embutido no aplicativo, e pode estar sem conexão com o gerenciador. Sem ela, a pessoa entra pela aba.
+- O destaque aberto parece lido. No navegador embutido no aplicativo os quadros podem abrir pretos, e o título do destaque não diz o que há nele.
 - O destaque parece conteúdo antigo e menos importante. Ele fica fixo no perfil e pesa tanto quanto o último post.
 - A estética do feed parece a estética do evento. O perfil mostra a apresentação digital, não a presença no local.
 - Um número de seguidores alto parece bom sinal. A qualidade da conversa nos comentários pesa mais.

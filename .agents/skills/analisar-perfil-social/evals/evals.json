@@ -32,6 +32,18 @@
       "files": []
     },
     {
+      "id": "destaque-que-abre-preto",
+      "prompt": "Analise o perfil completo da Feira Exemplo, com os destaques.",
+      "expected_output": "Os quadros de um destaque abrem pretos. A habilidade lista o destaque em Limites da análise como não lido, não deduz o conteúdo pelo título e oferece ler no navegador da própria pessoa. Avisa que abrir o destaque com a conta logada pode mostrar a conta como quem viu.",
+      "files": []
+    },
+    {
+      "id": "post-com-rotulo-de-ia-e-contadores",
+      "prompt": "Analise o Instagram da Feira Exemplo, já logada.",
+      "expected_output": "A habilidade lê, em cada post, o rótulo da plataforma e os três contadores. O rótulo de conteúdo de IA entra como sinal, com o post e a data, e não como acusação. Os contadores têm o significado conferido antes do uso e são comparados com o número de seguidores.",
+      "files": []
+    },
+    {
       "id": "perfil-privado",
       "prompt": "Analise o Instagram da Feira Exemplo.",
       "expected_output": "O perfil está privado. A habilidade diz que não analisou e por quê, não deduz estética nem valores do nome ou de um print antigo, e pergunta se a pessoa quer trazer capturas.",

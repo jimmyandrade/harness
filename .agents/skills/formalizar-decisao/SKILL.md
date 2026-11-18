@@ -3,7 +3,7 @@ name: formalizar-decisao
 description: Leva uma decisão de comportamento a quem decide, com a dúvida, a hipótese e o que já está definido, e formaliza a resposta na tarefa e no pull request, em qualquer canal e em qualquer momento, do refinamento ao desk check. Usada quando surge uma dúvida ou uma escolha de comportamento que não é sua, mesmo sem dizer decisão. Não serve para dúvida de código, status de entrega nem para escrever o texto da mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.4.1"
+  version: "0.5.0"
   aliases:
     - abrir-thread-de-decisao
   related:
@@ -165,6 +165,7 @@ Depois da resposta da Ana, registro a decisão na área de decisões da tarefa e
 - A decisão aparece perto do fim da tarefa: formalize antes de fechar o pull request, com o critério e a evidência atualizados.
 - A ferramenta de tarefas não tem bloco de decisão: use a seção Decisões em texto, com os mesmos campos.
 - A ferramenta de tarefas aceita criar o bloco de decisão por API: crie por ela, no estado de decidido, e confira na tela.
+- A decisão aparece num artigo ou numa página de documentação: registre-a do mesmo jeito, no `Registro de decisão`, com os mesmos campos.
 - A tarefa ainda não existe: siga `preparar-tarefa-do-pull-request` antes de formalizar.
 - A dúvida é de código: ela vai para o pull request, não para esta habilidade.
 
