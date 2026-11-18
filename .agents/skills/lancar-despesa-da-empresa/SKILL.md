@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.11.3"
+  version: "0.11.4"
   aliases:
     - definir-despesa
     - lancar-despesa
@@ -15,6 +15,7 @@ metadata:
     - definir-empresa
     - definir-grafia
     - definir-lancamento-financeiro
+    - definir-prestacao-de-contas
     - identificar-duplicata
     - lancar-despesa-pessoal
     - reconhecer-imagem
@@ -44,7 +45,7 @@ flowchart LR
   Q -->|página do bem durável| I[definir-ativo-imobilizado]
 ```
 
-Venda ou frase que mistura venda, gasto e estoque segue `definir-lancamento-financeiro`. Esta habilidade grava o gasto da empresa.
+Venda ou frase que mistura venda, gasto e estoque segue `definir-lancamento-financeiro`. Conciliar um extrato ou prestar contas de um repasse segue `definir-prestacao-de-contas`. Esta habilidade grava o gasto da empresa.
 
 Antes da primeira chamada no Notion, identifique o tipo da entidade pelo mapeamento ou pelo contexto estruturado. Não deduza o tipo só pelo título ou por um UUID.
 
