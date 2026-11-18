@@ -4,7 +4,7 @@ description: Pesquisa o que comprar, cruza com despesas, estoque e bens que já 
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.7.1"
+  version: "0.7.2"
   related:
     - anexar-arquivo-no-whatsapp
     - conversar-no-whatsapp
@@ -84,11 +84,12 @@ O requisito que ninguém confirmou fica marcado como não confirmado. Não compl
 ### Passo 4
 
 Pesquise na web, uma busca por opção, e prefira nesta ordem: o fabricante, a loja que vende, o guia ou a avaliação.
-Para o insumo já comprado, busque também a loja própria do vendedor pelo nome do Passo 2. Ela costuma abrir quando o marketplace bloqueia e traz a ficha.
+Para o insumo já comprado, busque também a loja própria do vendedor pelo nome do Passo 2: ela traz a ficha.
 Guia de melhores e página de afiliado indicam o que olhar, não provam compatibilidade.
 Anote o preço com a loja e a data da consulta. O preço de uma busca ou de um cache pode ser antigo.
-Diga quando o preço veio só do resultado da busca, sem a página aberta. Página esgotada não tem preço atual: diga que está esgotada.
-A loja que bloqueia leitura automática não se contorna. Use o que a busca mostrou, diga que a página não abriu e peça que a pessoa cole a descrição ou o link, ou pergunte ao vendedor.
+Diga quando o preço veio só da busca. Página esgotada não tem preço atual.
+O 403 da ferramenta de busca é falha técnica: abra a página no navegador embutido e, se falhar, no Claude in Chrome, e diga qual abriu.
+Captcha e login não se contornam: use o que a busca mostrou, diga que a página não abriu e peça a descrição ou o link, ou pergunte ao vendedor.
 
 Para achar empresas que prestam um serviço, a fonte é a listagem local: trabalho acadêmico e diretório do estado só ensinam os sinônimos do serviço. Na cidade do Passo 1, busque o serviço e os sinônimos, quem o faz dentro do próprio negócio e as listagens locais, como o mapa e o diretório do sindicato. Sem empresa achada, faça a próxima busca do Passo 6, sem perguntar se deve seguir.
 
@@ -174,11 +175,11 @@ Se você citar o preço sem a loja e a data, a pessoa não sabe se ele ainda val
 
 ### Loja que não abre
 
-Se você tentar outro caminho depois que a loja bloqueia a leitura, a resposta passa a depender de uma página que ela não quis entregar.
+Se você parar no 403 sem abrir o navegador, o preço vem só da busca. Se insistir após um captcha, a resposta depende de uma página que ela não quis entregar.
 
-1. Use o trecho que a busca mostrou.
-2. Diga que a página não abriu.
-3. Peça a descrição colada ou o link, ou a pergunta ao vendedor.
+1. No 403, abra a página no navegador embutido e, se falhar, no Claude in Chrome.
+2. Diante de captcha ou login, pare e diga que a página não abriu.
+3. Peça a descrição ou o link, ou pergunte ao vendedor.
 
 ### Empresa pesquisada sem cadastro
 
@@ -242,7 +243,9 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### preciso de uma impressora laser que imprima as folhas A4 de etiqueta de composição que já compramos
 
-Li as despesas e achei a compra das folhas, com o modelo, a quantidade, o valor e o vendedor pelo comprovante. Não há impressora nos ativos, e as folhas não estão no estoque. Os custos de produção dizem quanto custa hoje imprimir a página fora. O marketplace bloqueou, e a loja própria do vendedor deu o material e as medidas, sem citar impressora. A entrada que aceita etiqueta veio da ficha de cada fabricante de impressora. Recomendo três laser monocromáticas, com preço, loja e data de cada uma. Falta saber, com o vendedor das folhas, qual impressora ele indica e se a folha pode passar pela frente e verso automático.
+Li as despesas e achei a compra das folhas, com o modelo, a quantidade, o valor e o vendedor pelo comprovante. Não há impressora nos ativos, e as folhas não estão no estoque. Os custos de produção dizem quanto custa hoje imprimir a página fora. O marketplace devolveu 403, o navegador abriu a página, e a loja própria do vendedor deu o material e as medidas, sem citar impressora.
+
+A entrada que aceita etiqueta veio da ficha de cada fabricante de impressora. Recomendo três laser monocromáticas, com preço, loja e data de cada uma. Falta saber, com o vendedor das folhas, qual impressora ele indica e se a folha pode passar pela frente e verso automático.
 
 ### quero um tecido de algodão cru
 
@@ -253,7 +256,6 @@ Li o estoque e achei um rolo do mesmo tecido com saldo. Mostrei o saldo e pergun
 - O item já existe no estoque ou nos ativos: mostre-o primeiro e pergunte se ainda quer comprar.
 - A pessoa não diz o uso: pergunte uma vez e leve as primeiras opções junto.
 - Uma lista de dados não está no workspace conectado: diga qual e siga com as outras.
-- A loja bloqueia a leitura: use o que a busca mostrou e peça a descrição.
 - Só existe uma opção que atende: diga isso e não complete a lista com opção que não atende.
 - A pessoa diz que comprou: encaminhe pelo Passo 7 e não grave aqui.
 - A empresa já está na lista: reaproveite a página e complete só o que faltava. Não crie outra.
@@ -268,7 +270,6 @@ Li o estoque e achei um rolo do mesmo tecido com saldo. Mostrei o saldo e pergun
 
 - A empresa descartada parece não merecer cadastro. Ela volta numa próxima compra, e o motivo do descarte nas notas poupa a pesquisa.
 - A busca na web só abre página que apareceu num resultado. Um link que a pessoa colou ou que vem de um registro nosso pode falhar até ser achado numa busca.
-- Marketplace e loja grande costumam bloquear a leitura automática. A listagem de busca ainda mostra título e preço, mas não a ficha.
 - O mesmo modelo existe em voltagens e códigos diferentes, e o preço muda entre eles. Confirme o código completo e a voltagem antes de recomendar.
 - Uma oferta de loja pode ser antiga. A data da página ou a da oferta fica na resposta.
 - A lista de despesas guarda o que foi pago, não a ficha do que foi comprado. A compatibilidade vem do fabricante.
