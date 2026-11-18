@@ -4,7 +4,7 @@ description: Analisa o perfil social de uma pessoa, marca, feira ou evento pela 
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.5.0"
   related:
     - definir-perfil-social
     - reconhecer-imagem
@@ -23,6 +23,12 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Posicionamento da marca": ""
 # `Posts recentes a olhar` é quantos posts a habilidade lê além da bio, dos destaques e dos fixados.
 "Posts recentes a olhar": 12
+# `Leitura do feed inteiro` é `sempre`, `nunca` ou `automático`. `sempre` varre o grid do primeiro ao último post, miniatura por miniatura. `nunca` fica nos `Posts recentes a olhar`. `automático` varre quando o que já foi lido não basta para a conclusão.
+"Leitura do feed inteiro": "automático"
+# `Leitura dos reposts` é `sempre`, `nunca` ou `automático`, com o mesmo sentido, para a aba de reposts.
+"Leitura dos reposts": "automático"
+# `Abertura dos posts` é `todos`, `nenhum`, `automático em conjunto` ou `automático um por um`. `todos` abre cada post lido, com a legenda e os comentários. `nenhum` lê só a miniatura e o texto alternativo. `automático em conjunto` decide uma vez, pelo conjunto, entre abrir todos ou nenhum. `automático um por um` decide a cada post.
+"Abertura dos posts": "automático um por um"
 # `Publicar a análise no perfil social` é `sim` ou `não`. `sim` publica a análise no corpo da página do perfil, na lista de perfis sociais do mapeamento de dados do projeto. `não` só entrega a análise na resposta.
 "Publicar a análise no perfil social": "sim"
 "Modo de aprendizado": "perguntar"
@@ -55,6 +61,18 @@ Abra o perfil. Se o canal abrir com um aviso de login, pare antes de ler e peça
 Com a ferramenta de credencial do gerenciador de senhas na sessão, ofereça o login por ela e espere o sim da pessoa. A pessoa aprova o item no próprio gerenciador, o valor entra direto na página e você nunca o vê, nem o código de verificação. Sem essa ferramenta, a pessoa entra pelo navegador. Nunca peça nem digite a senha da pessoa.
 
 Leia o perfil inteiro, não só o último post: a bio e o link da bio, o grid, os destaques, os posts fixados e os `Posts recentes a olhar`, com legendas e comentários. Destaque e post fixado contam como identidade do perfil, porque ficam ali mesmo depois de anos.
+
+O alcance da leitura segue `Leitura do feed inteiro`, `Leitura dos reposts` e `Abertura dos posts`. Os `Posts recentes a olhar` são o mínimo e valem em todos os modos. O destaque não substitui o post, nem o post o destaque: os dois entram.
+
+No modo `automático`, a leitura é suficiente quando cada nota e cada sinal do veredito cita um post ou um destaque com data. Ela não basta quando o que você viu aponta para um tema que pesa na marca, como política, religião ou discurso, e ficou ambíguo, ou quando a miniatura traz texto na imagem, bandeira, slogan ou um post sem legenda que a plataforma descreve como imagem de texto.
+
+Um tema que só aparece dentro de uma imagem não aparece na legenda. Antes do veredito, releia o que reuniu. Se não basta, amplie o que o parâmetro deixar automático: varra o feed, leia os reposts ou abra os posts que faltam.
+
+Com `Abertura dos posts` em `automático um por um`, abra o post que a miniatura ou a legenda mostrar que pesa. Em `automático em conjunto`, decida pelo conjunto: abra todos se a leitura não basta, nenhum se basta.
+
+Post que não carregou é aberto de novo, e o que continua sem abrir fica listado com a data em `Limites da análise`.
+
+Em `Limites da análise`, diga o que cada parâmetro fez e, no modo automático, o que decidiu e por quê. Conte os posts abertos, os que só viu na miniatura e o total do perfil, e diga se leu os reposts. Não escreva que um tema não aparece no perfil quando o alcance foi `nunca`, `nenhum` ou uma amostra pequena do total, nem que leu um post que só viu na grade.
 
 Em cada post, leia o rótulo da plataforma, como "Conteúdo de IA", e os contadores de curtidas, comentários e compartilhamentos. Confira o que cada número é antes de usá-lo.
 
@@ -121,6 +139,15 @@ Se você ler só os posts mais recentes, o destaque e o post fixado, que ficam a
 
 1. Abra a bio, os destaques e os fixados antes dos posts.
 2. Cite a data de cada sinal.
+
+### Amostra pequena tomada como o perfil inteiro
+
+Se você ler os destaques e alguns posts, e concluir que o perfil não tem um tema, o conteúdo que fica nas imagens, nos reposts e nos posts que você não abriu passa sem leitura.
+
+1. Confira `Leitura do feed inteiro`, `Leitura dos reposts` e `Abertura dos posts`. No modo automático, releia o que reuniu e amplie quando não basta.
+2. Tente de novo o que não carregou e liste o que continuar fechado.
+3. Diga em `Limites da análise` o que cada parâmetro fez, quantos posts abriu, quantos só viu na miniatura e o total do perfil.
+4. Com alcance `nunca` ou `nenhum`, não afirme que um tema não aparece.
 
 ### Conclusão sem evidência
 
