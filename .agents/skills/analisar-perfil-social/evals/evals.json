@@ -20,6 +20,12 @@
       "files": []
     },
     {
+      "id": "instagram-abre-com-aviso-de-login",
+      "prompt": "Analise o Instagram da Feira Exemplo: instagram.com/feiraexemplo",
+      "expected_output": "O perfil abre com um aviso de login por cima. A habilidade para antes de ler, pede à pessoa que entre na conta pelo navegador e diz o que o login libera: destaques, legendas, comentários e os posts além dos primeiros. Só começa a análise depois que a pessoa entra ou diz que não quer entrar. Sem o login, segue com o que está visível e lista em Limites da análise o que ficou de fora. Nunca digita a senha da pessoa.",
+      "files": []
+    },
+    {
       "id": "perfil-privado",
       "prompt": "Analise o Instagram da Feira Exemplo.",
       "expected_output": "O perfil está privado. A habilidade diz que não analisou e por quê, não deduz estética nem valores do nome ou de um print antigo, e pergunta se a pessoa quer trazer capturas.",
