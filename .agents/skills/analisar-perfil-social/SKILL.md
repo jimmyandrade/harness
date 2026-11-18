@@ -4,7 +4,7 @@ description: Analisa o perfil social de uma pessoa, marca, feira ou evento pela 
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.8.0"
+  version: "0.8.1"
   related:
     - definir-perfil-social
     - reconhecer-imagem
@@ -126,7 +126,9 @@ Com `sim`, publique sempre, também quando a execução é um teste da skill ou 
 
 Perfil sem página na lista: cadastre-o com `definir-perfil-social` antes de publicar. Página que já tem uma análise: acrescente a nova abaixo da anterior, com a data no título, e não apague a anterior, porque o histórico mostra como o perfil mudou.
 
-Ligue o perfil ao que ele representa. Um perfil que é a conta própria de uma feira entra nos perfis oficiais do grupo de oportunidades dela. Um perfil de uma edição específica entra nos perfis do evento da oportunidade. O perfil da empresa que organiza entra nos perfis da empresa, e o da pessoa, nos da pessoa. Cada perfil entra só no que representa, e uma mesma feira pode ter o perfil da empresa, o da feira e o da edição. Sem certeza de qual deles é, pergunte antes de ligar.
+Ligue o perfil ao que ele representa. Um perfil que é a conta própria de uma feira entra nos perfis oficiais do grupo de oportunidades dela. Um perfil de uma edição específica entra nos perfis do evento da oportunidade. O perfil da empresa que organiza entra nos perfis da empresa, e o da pessoa, nos da pessoa.
+
+Cada perfil entra só no que representa, e uma mesma feira pode ter o perfil da empresa, o da feira e o da edição. Quando o organizador é uma pessoa física, o perfil dela entra só nos da pessoa, e a skill não cria uma empresa para isso. Sem certeza de qual deles é, pergunte antes de ligar.
 
 ### Passo 7
 
