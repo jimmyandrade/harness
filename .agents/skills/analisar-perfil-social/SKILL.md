@@ -4,7 +4,7 @@ description: Analisa o perfil social de uma pessoa, marca, feira ou evento pela 
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
   related:
     - definir-perfil-social
     - reconhecer-imagem
@@ -48,7 +48,11 @@ Leia o modelo de saída `perfil-social` quando for gerar a saída.
 
 ### Passo 3
 
-Abra o perfil inteiro, não só o último post: a bio e o link da bio, o grid, os destaques, os posts fixados e os `Posts recentes a olhar`, com legendas e comentários. Destaque e post fixado contam como identidade do perfil, porque ficam ali mesmo depois de anos.
+Abra o perfil. Se o canal abrir com um aviso de login, pare antes de ler e peça à pessoa que entre na conta pelo navegador. Diga o que o login libera, como os destaques, as legendas, os comentários e os posts além dos primeiros, e espere a resposta. Siga só depois que ela entrar ou disser que não quer entrar. Nunca digite a senha da pessoa.
+
+Leia o perfil inteiro, não só o último post: a bio e o link da bio, o grid, os destaques, os posts fixados e os `Posts recentes a olhar`, com legendas e comentários. Destaque e post fixado contam como identidade do perfil, porque ficam ali mesmo depois de anos.
+
+Sem o login, leia só o que está visível e liste em `Limites da análise` o que ficou de fora.
 
 Perfil privado, bloqueado ou fora do ar: diga que não analisou e por quê, e pergunte se a pessoa quer trazer capturas. Não deduza estética nem valores do nome. Capturas trazidas pela pessoa seguem `reconhecer-imagem`.
 
@@ -73,6 +77,14 @@ Entregue a análise na resposta, no modelo. Não grave em banco, página nem tar
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
+
+### Análise começada sem o login
+
+Se você ler o perfil que abriu com aviso de login sem pedir o login antes, a análise sai sem os destaques, as legendas e os comentários, e a pessoa só descobre depois.
+
+1. Pare antes de ler e peça à pessoa que entre na conta pelo navegador.
+2. Diga o que o login libera.
+3. Sem o login, liste em `Limites da análise` o que ficou de fora.
 
 ### Nota única
 
@@ -122,12 +134,14 @@ Li o posicionamento da marca, abri a bio, os destaques e os 12 posts recentes e 
 - O perfil é de pessoa: use todas as seções do modelo.
 - O perfil é de feira, evento ou marca: omita o encaixe com o produto e a aproximação.
 - O canal não é o Instagram: leia o equivalente de bio, destaques, fixados e posts recentes, e diga o que o canal não oferece.
+- O canal abre com aviso de login: peça à pessoa que entre na conta antes de ler. Se ela não quiser, siga com o que está visível e diga o que ficou de fora.
 - Mais de um perfil da mesma feira ou pessoa: analise cada um e junte no veredito.
 - A pessoa pede a nota sem o posicionamento da marca: pergunte onde está e pare.
 - A pessoa quer cadastrar o perfil analisado: siga `definir-perfil-social`.
 
 ## Pegadinhas
 
+- O aviso de login parece só uma janela a fechar. O grid inicial ainda carrega por baixo, mas os destaques, as legendas e os comentários não abrem sem a conta.
 - O destaque parece conteúdo antigo e menos importante. Ele fica fixo no perfil e pesa tanto quanto o último post.
 - A estética do feed parece a estética do evento. O perfil mostra a apresentação digital, não a presença no local.
 - Um número de seguidores alto parece bom sinal. A qualidade da conversa nos comentários pesa mais.
