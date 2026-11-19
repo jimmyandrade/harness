@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.98.0](https://github.com/jimmyandrade/harness/compare/v1.97.0...v1.98.0) (2026-11-19)
+
+
+### Features
+
+* **acompanhar-fila-de-revisao:** choose what to do with a PR whose checks are still running ([#1333](https://github.com/jimmyandrade/harness/issues/1333)) ([610756c](https://github.com/jimmyandrade/harness/commit/610756c8bc77b0468b545d78d890b038e98539d1))
+* **analisar-perfil-social:** sample the highlights and add the automatic value for the logged account ([#1338](https://github.com/jimmyandrade/harness/issues/1338)) ([ffe18c1](https://github.com/jimmyandrade/harness/commit/ffe18c1adf2237965bbc0b3b662cf95495fccc93))
+
+
+### Bug Fixes
+
+* validate the message draft and prepare a separate reply for who declined ([#1336](https://github.com/jimmyandrade/harness/issues/1336)) ([d1dfcbf](https://github.com/jimmyandrade/harness/commit/d1dfcbfde2b59aa099d3e4bc837afc495d87a701))
+
 ## [1.97.0](https://github.com/jimmyandrade/harness/compare/v1.96.0...v1.97.0) (2026-11-18)
 
 
