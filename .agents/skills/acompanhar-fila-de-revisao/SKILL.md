@@ -3,7 +3,7 @@ name: acompanhar-fila-de-revisao
 description: Roda o ciclo da fila de revisão de pull requests. Confere o horário, cuida primeiro dos seus PRs, acha os pedidos, fecha o laço dos já revisados, escolhe o próximo, revisa um por execução e prepara o aviso a quem pediu. Os avisos ficam só como rascunho, com o link. Não serve para revisar sozinha nem achar pedidos por conta própria.
 metadata:
   author: jimmyandrade
-  version: "0.8.2"
+  version: "0.9.0"
   related:
     - enviar-mensagem-no-slack
     - evoluir-habilidade
@@ -36,6 +36,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Revisões por execução": "1"
 # `Checks exigidos` lista os checks que precisam ter terminado antes da revisão, e vazio exige todos.
 "Checks exigidos": ""
+# `Check em andamento` diz o que fazer com o PR cujo check exigido ainda roda: `passar para o próximo` marca esperando checks, revisa o próximo e volta ao PR na execução seguinte, `esperar` mantém o PR como primeiro e espera o check terminar, `não esperar` revisa sem esperar.
+"Check em andamento": "passar para o próximo"
 # `Política de checks` diz, por check, se ele precisa passar, se uma falha é aceita e se a revisão pode seguir com a confirmação da pessoa; um check sem regra segue `Checks exigidos`.
 "Política de checks": ""
 # `Sinais de status` diz que marca colocar na mensagem do pedido em cada estado: na fila, em revisão, pausado, esperando checks, com resultado, mesclado depois da revisão e mesclado na chegada.
@@ -77,7 +79,11 @@ Feche o laço antes de qualquer PR novo. O laço são os PRs abertos de outras p
 
 ### Passo 5
 
-Passe para a frente da fila o PR que ainda espera um dos `Checks exigidos` terminar: ele não é revisado agora, fica como esperando checks e o ciclo segue para o próximo. Um check cuja `Política de checks` exige que passe, e que falhou, também trava a revisão: avise a pessoa, no chat ou no resumo, e peça a confirmação de que passou ou de que vale seguir com a falha já conhecida. Guarde a confirmação junto do commit a que ela vale, porque um commit novo pede de novo. Um check que a política deixa falhar não trava nada. Ordene o resto da fila pela `Ordem da fila`, com a `Prioridade por repositório` e a `Prioridade por pessoa`. O `Teto de nível por pessoa` limita o nível da fonte de PRs de certas pessoas. O laço do Passo 4 vem sempre primeiro, e os PRs que saíram de andamento ficam na frente dos outros do mesmo nível.
+Siga `Check em andamento` com o PR que ainda espera um dos `Checks exigidos` terminar. Com `passar para o próximo`, ele não é revisado agora, fica como esperando checks na frente da fila da próxima execução e o ciclo segue para o próximo. Com `esperar`, ele continua como primeiro item e o ciclo o revisa quando o check terminar. Com `não esperar`, ele é revisado já.
+
+Um check cuja `Política de checks` exige que passe, e que falhou, também trava a revisão: avise a pessoa, no chat ou no resumo, e peça a confirmação de que passou ou de que vale seguir com a falha já conhecida. Guarde a confirmação junto do commit a que ela vale, porque um commit novo pede de novo. Um check que a política deixa falhar não trava nada.
+
+Ordene o resto da fila pela `Ordem da fila`, com a `Prioridade por repositório` e a `Prioridade por pessoa`. O `Teto de nível por pessoa` limita o nível da fonte de PRs de certas pessoas. O laço do Passo 4 vem sempre primeiro, e os PRs que saíram de andamento ficam na frente dos outros do mesmo nível.
 
 ### Passo 6
 
@@ -134,10 +140,11 @@ Se você revisar um PR novo antes de fechar o laço dos já revisados, os PRs qu
 
 ### Check pendente travando a fila
 
-Se você parar o ciclo porque o primeiro item espera um check, os outros PRs ficam parados por um deles.
+Se você parar o ciclo porque o primeiro item espera um check, com `Check em andamento` em `passar para o próximo`, os outros PRs ficam parados por um deles.
 
 1. Marque o PR como esperando checks.
 2. Siga para o próximo da fila.
+3. Repasse `Check em andamento` a `publicar-revisao-de-codigo`, para ela não esperar de novo o check que a fila já decidiu pular.
 
 ### Aviso por mensagem direta
 
