@@ -3,11 +3,12 @@ name: levantar-gravacoes-de-reunioes
 description: Acha a fonte de uma reunião, o documento de anotações ou a gravação local, e diz o estado de cada gravação, se tem transcrição local, registro e página publicada. Usada quando a reunião não tem transcrição à mão ou a pessoa pede o levantamento das gravações, mesmo sem dizer gravação. NÃO serve para transcrever, registrar nem escrever a ata.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
   related:
     - definir-registro-de-reuniao
     - evoluir-habilidade
     - procurar-agenda
+    - publicar-ata-de-reuniao
     - transcrever-audio-e-video
 ---
 
@@ -56,6 +57,7 @@ Quando a pessoa pede o levantamento, cruze cada gravação com o que o projeto j
 Diga, para cada uma, se já tem transcrição local, se já tem registro e se já foi para a página publicada.
 A transcrição local é um registro em arquivo ou o texto que `transcrever-audio-e-video` deixou na pasta de saída.
 O registro e a página seguem o armazenamento de `definir-registro-de-reuniao`, pela data, pelo horário e pelo título.
+A página se procura em todos os destinos da `Árvore do destino da ata` de `publicar-ata-de-reuniao`, não só no do time: a reunião sem página no destino do time pode estar no espaço pessoal ou no de um chapter.
 Entregue uma tabela com uma linha por gravação.
 O levantamento só lê e lista: não transcreve, não registra nem publica.
 
@@ -122,7 +124,7 @@ Listei as gravações das pastas configuradas, cruzei com os registros e com as 
 - A data de modificação parece o começo da reunião. Ela é o fim da gravação.
 - Um arquivo com o horário no nome parece bastar. O horário de criação do registro também é aproximado, então cruze com a agenda.
 - Uma transcrição local parece registro. Ela ainda não identifica quem fala e não está no armazenamento dos registros.
-- Uma gravação sem página publicada parece pendência. Reunião pessoal ou de assunto interno pode ficar só no armazenamento privado.
+- Uma gravação sem página publicada parece pendência. Reunião pessoal ou de assunto interno pode ficar só no armazenamento privado, e a do chapter, no espaço do chapter. Procure nos destinos da árvore antes de listá-la como sem página.
 
 ## Scripts disponíveis
 
