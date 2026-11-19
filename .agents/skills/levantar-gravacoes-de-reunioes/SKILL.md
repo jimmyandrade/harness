@@ -3,7 +3,7 @@ name: levantar-gravacoes-de-reunioes
 description: Acha a fonte de uma reunião, o documento de anotações, o registro da ferramenta de reunião ou a gravação local, e diz o estado de cada gravação, se tem transcrição local, registro e página publicada. Usada quando a reunião não tem transcrição à mão ou a pessoa pede o levantamento das gravações, mesmo sem dizer gravação. NÃO serve para transcrever, registrar nem escrever a ata.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.2.1"
   related:
     - definir-registro-de-reuniao
     - evoluir-habilidade
@@ -59,6 +59,7 @@ Só considere os arquivos com uma das `Extensões das gravações`.
 
 Quando a pessoa pede o levantamento, cruze cada gravação com o que o projeto já guarda.
 Diga, para cada uma, se já tem transcrição local, se já tem registro, se está na ferramenta de reunião e se já foi para a página publicada.
+Cite cada reunião pela data, pelo horário e pelo assunto em poucas palavras, tirado do título do registro, nunca só pela data: a pessoa decide o que fazer com ela sem abrir o registro.
 A transcrição local é um registro em arquivo ou o texto que `transcrever-audio-e-video` deixou na pasta de saída.
 O registro e a página seguem o armazenamento de `definir-registro-de-reuniao`, pela data, pelo horário e pelo título.
 A página se procura em todos os destinos da `Árvore do destino da ata` de `publicar-ata-de-reuniao`, não só no do time: a reunião sem página no destino do time pode estar no espaço pessoal ou no de um chapter.
@@ -96,6 +97,14 @@ Se você parar no documento de anotações, ou só na ferramenta de reunião, pe
 
 1. Procure nas duas fontes mesmo achando uma.
 2. Cruze as duas e diga o que diverge.
+
+### Reunião citada só pela data
+
+Se você escrever "a ata de 09/10" ou "a gravação das 11h", a pessoa não lembra qual reunião foi e precisa abrir o registro para decidir.
+
+1. Cite a data, o horário e o assunto em poucas palavras, do título do registro.
+2. Vale também para a lista, a pergunta e a pendência.
+3. Sem registro, use o título do evento da agenda.
 
 ### Pasta presumida
 
