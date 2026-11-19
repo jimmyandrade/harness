@@ -4,7 +4,7 @@ description: Analisa o perfil social de uma pessoa, marca, feira ou evento pela 
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.9.0"
+  version: "0.10.0"
   related:
     - definir-perfil-social
     - reconhecer-imagem
