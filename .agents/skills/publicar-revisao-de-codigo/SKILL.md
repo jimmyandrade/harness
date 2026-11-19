@@ -3,7 +3,7 @@ name: publicar-revisao-de-codigo
 description: Revisa um pull request e publica a revisão numa única review, com os comentários inline, no idioma de quem recebe e no tom do projeto. Usada quando a pessoa pede uma revisão ou outra habilidade precisa publicar uma. Não serve para tratar os comentários que você recebeu no seu PR.
 metadata:
   author: jimmyandrade
-  version: "0.26.0"
+  version: "0.26.1"
   aliases:
     - post-code-review
   related:
@@ -140,7 +140,9 @@ Limpe sempre, mesmo se algo falhou antes. Apague o comentário de início e reti
 
 ### Passo 12
 
-Devolva a quem chamou o link da review e de cada comentário publicado, como manda `escrever-link`, e um resumo dos achados por prioridade, sem repetir o inline, com o nível de detalhe usado, quantos Poderia ter ficaram de fora, o que foi rodado, e o idioma escolhido com a base dele. Avisar a pessoa que pediu a revisão é de quem chamou, com `enviar-mensagem-no-slack`.
+Devolva a quem chamou o link da review e de cada comentário publicado, como manda `escrever-link`, e um resumo dos achados por prioridade, sem repetir o inline, com o nível de detalhe usado, quantos Poderia ter ficaram de fora, o que foi rodado, e o idioma escolhido com a base dele.
+
+Depois de publicar, procure a conversa em que o autor pediu a revisão, nas fontes de conversa, e prepare o aviso de status na thread dela com `enviar-mensagem-no-slack`, sem perguntar se a pessoa quer. Devolva o rascunho com o link da thread. Sem achar a thread, diga onde procurou.
 
 ### Passo 13
 
@@ -155,6 +157,14 @@ Se você revisar um PR sem conferir o estado agora, a revisão chega depois do m
 1. Confira o estado no Passo 1, mesmo que a fila já o tenha conferido.
 2. Se mesclou ou fechou, pare e diga.
 3. Faça o mesmo com um PR com conflito de merge.
+
+### Aviso oferecido em vez de preparado
+
+Se você publicar a revisão e só oferecer procurar a thread do pedido, o autor fica sem aviso e a pessoa tem de pedir de novo.
+
+1. Procure a thread no Passo 12, sem perguntar.
+2. Prepare o rascunho do aviso, com o link da thread.
+3. Sem achar, diga onde procurou.
 
 ### Confirmação pedida de novo
 
