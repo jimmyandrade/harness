@@ -58,6 +58,10 @@ flowchart LR
 
 Com negócio, a negociação é uma por oportunidade, a edição com data. Ache a negociação dessa oportunidade antes de criar outra. Uma edição nova da mesma empresa e da mesma pessoa é negociação nova: ela cita o link da anterior e não herda o histórico, que fica na antiga. Ligue a página à empresa abordada, à pessoa abordada e a uma oportunidade só. Se uma segunda pessoa da mesma empresa falar, confira no schema se a pessoa abordada aceita mais de uma antes de somar. Se não aceitar, pergunte.
 
+Uma página de negociação que nasceu de uma ata de reunião, com o nome padrão e as propriedades vazias, não está pronta. Complete-a na mesma rodada: o nome diz o que se negocia e com quem, a data de início é a do primeiro contato, e a empresa abordada e a pessoa abordada vêm dos cadastros. O que a ata decidiu vira comentário datado. O que nenhuma fonte diz fica vazio, e você avisa a pessoa.
+
+Outra empresa que passa a cotar o item que a primeira não faz é negociação própria, com a conversa dela. A negociação da primeira registra a mudança.
+
 ### Passo 3
 
 Quando a pessoa só avisa que alguém entrou em contato por um canal, como uma DM do Instagram, sem colar o texto, não peça o texto. Leia a conversa você mesmo, pela `Ordem dos canais de execução`, e passe ao canal seguinte só quando o anterior não existir ou falhar. Sem conector, o navegador do app e a extensão do navegador leem a conversa na conta em que a pessoa já está logada. Peça a colagem só quando nenhum canal ler, e diga o que falhou em cada um.
