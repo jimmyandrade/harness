@@ -245,6 +245,7 @@ Li a resposta como a da pergunta: o carro pode entrar na montagem, em qualquer j
 
 - "A mesma mensagem para cada uma" parece pedir um texto só. Quem já recusou não precisa ouvir nossa recusa: leia cada conversa e prepare antes o rascunho à parte.
 - O rascunho parece certo porque soa natural. Soar natural não é estar no vocabulário: a classificação mostra a palavra que a pessoa já recusou, como a forma que marca gênero.
+- O nome de quem atendeu parece óbvio. O nome que o cadastro ou a conversa antiga traz pode não ser o de quem falou na visita. Confirme com quem a pessoa falou antes de usar o nome, e sem fonte escreva a mensagem sem nome.
 - O widget parece guardar o rascunho. Ele sobe com a conversa e some, e a pessoa não acha o que ficou pendente. O artefato com os rascunhos pendentes fica no mesmo endereço.
 - Um bloco de código parece prévia suficiente. Com a ferramenta de widget na sessão, a pessoa também espera o widget editável, com copiar e aprovar.
 - Uma resposta curta parece incompleta quando não repete o detalhe que a conversa já traz. Ela responde a pergunta como foi escrita: confira o texto da pergunta antes de achar que falta algo.

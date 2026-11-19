@@ -168,6 +168,7 @@ Disse que a organização confirmou a feira para sexta, sábado e domingo, com a
 ## Pegadinhas
 
 - Uma mensagem num grupo parece ser da pessoa que costuma falar pela organização. O remetente é o que o canal mostra naquela mensagem: confira o nome ou o número antes de atribuí-la.
+- O texto que a leitura devolve parece dizer quem falou. Ele só traz as frases. Antes de atribuir uma fala ou um dado, como onde alguém trabalhou, confira o lado da bolha na captura: a verde, à direita, é nossa, e a cinza, à esquerda, é do contato.
 - Uma imagem que o canal não lê parece um dado que não existe. O mapa e os valores podem estar nela, e quem fala pela organização pode prometer o que já mandou: leia a imagem antes de dizer que falta.
 - Uma resposta sem data nem valor parece não confirmar nada. O que ela afirma está confirmado, e só o que ela omite é pendência.
 

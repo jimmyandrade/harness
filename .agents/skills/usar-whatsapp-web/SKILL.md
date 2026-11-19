@@ -248,6 +248,7 @@ Mostrei o CNPJ como o passo seguinte e pedi o sim, sem dizer que ia falhar. Com 
 - O separador do dia mostra "Ontem" ou só o dia da semana. Ao devolver a leitura a outra sessão, diga a data inteira, com o dia calculado como a regra do dia da semana manda.
 - "Mostrar documentos de todas as conversas" lista só os documentos recentes. Um arquivo antigo não aparece ali nem na conversa.
 - Baixar um áudio, pelo menu da mensagem, não deixa o arquivo com o nome dele: ele cai em Downloads como um arquivo oculto `.com.google.Chrome.*`. Ache-o pela duração, com o `ffprobe`, e mova-o com o nome da conversa, da pessoa e da hora.
+- Documento: abra no visualizador e baixe pelo ícone do topo; o menu de contexto pode não abrir. Cai em Downloads como `.com.google.Chrome.*`: copie como `.pdf`. O sim para baixar vale para PDF e imagem.
 - O comprovante que o chat mostra como miniatura borrada não baixa no WhatsApp Web. Diga isso e peça o arquivo à pessoa.
 
 ## Scripts disponíveis
