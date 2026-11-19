@@ -3,7 +3,7 @@ name: investigar-problema
 description: Conduz a investigação de um problema, como um acesso bloqueado, um cadastro que falha em portal alheio ou um erro, com tarefa, fatos e hipóteses, e oferece artigo e post-mortem. Use sempre que alguém relatar um problema, como um preço errado, ou pedir "investigue isso" com um link, antes de ler. NÃO use para escrever o artigo, o post-mortem nem corrigir código.
 metadata:
   author: jimmyandrade
-  version: "0.3.7"
+  version: "0.3.8"
   related:
     - procurar-tarefa
     - definir-tarefa
@@ -143,6 +143,7 @@ Se você entregar uma lista do que não conferiu, como se um erro é esperado ou
 4. Antes de pedir a quem relatou um dado do caso, como o id, a cor, a versão ou o que foi cadastrado, procure-o por conta própria: no que a ferramenta de monitoramento registrou no horário do relato, no conector da fonte e no navegador.
 5. Só peça a quem relatou depois que cada um desses caminhos falhou, e diga o que cada um devolveu.
 6. Não diga que um sistema não dá acesso, nem descreva o que ele mostra, sem ter tentado abri-lo: sem a tentativa, a frase é suposição.
+7. Quando o próximo passo é um teste ou uma consulta ao seu alcance, rode-o no mesmo turno em vez de propô-lo. Proponha à pessoa só o que depende de acesso ou de decisão dela.
 
 ### Investigação sem a habilidade
 
