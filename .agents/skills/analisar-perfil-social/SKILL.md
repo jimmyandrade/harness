@@ -136,9 +136,9 @@ Perfil sem página na lista: cadastre-o com `definir-perfil-social` antes de pub
 
 Com `mesclar`, grave uma análise só, com a data nova no título. Cada sinal mantém o post ou o destaque e a data de onde veio, seja da análise anterior ou da nova. Um sinal da anterior só sai quando a evidência nova o contradiz, e a análise diz o que mudou.
 
-Quando as notas das duas leituras divergem, a nota segue a leitura que cobriu mais do perfil. Em `Limites da análise`, diga o que cada leitura cobriu e por que as notas diferem, e registre as notas anteriores com a data delas.
+Quando as notas divergem, a nota segue a leitura que cobriu mais do perfil. Em `Limites da análise`, diga o que cada leitura cobriu e por que as notas diferem, e registre as notas anteriores com a data.
 
-Com `automático`, diga na resposta qual caminho escolheu e por quê. Com `perguntar`, não grave antes da resposta.
+Com `automático`, diga na resposta o caminho escolhido e por quê. Com `perguntar`, não grave antes da resposta.
 
 Ligue o perfil ao que ele representa. Um perfil que é a conta própria de uma feira entra nos perfis oficiais do grupo de oportunidades dela. Um perfil de uma edição específica entra nos perfis do evento da oportunidade. O perfil da empresa que organiza entra nos perfis da empresa, e o da pessoa, nos da pessoa.
 
@@ -235,8 +235,7 @@ Se você publicar a análise na página da pessoa ou da empresa do perfil, ela m
 Se você grava a análise nova sem ler a que a página já tinha, uma leitura rasa pode cobrir uma funda, ou as duas ficam com notas que se contradizem sem explicação.
 
 1. Leia a análise anterior inteira e siga `Quando já existe análise publicada`.
-2. Ao mesclar, mantenha o post e a data de cada sinal, siga a nota da leitura que cobriu mais e registre as notas anteriores com a data.
-3. Só substitua com `substituir`. Com `nunca substituir`, a anterior não muda.
+2. Só substitua com `substituir`. Com `nunca substituir`, a anterior não muda.
 
 ## Exemplos de entrada e saída
 
@@ -258,7 +257,6 @@ Li o posicionamento da marca, abri a bio, os destaques e os 12 posts recentes e 
 - A pessoa quer cadastrar o perfil analisado: siga `definir-perfil-social`.
 - O perfil analisado não tem página na lista de perfis sociais: cadastre-o com `definir-perfil-social` antes de publicar.
 - `Publicar a análise no perfil social` está em `não`: entregue só na resposta.
-- A página do perfil já tem uma análise: siga `Quando já existe análise publicada`. O padrão `perguntar` mostra as duas e espera a escolha.
 
 ## Pegadinhas
 
