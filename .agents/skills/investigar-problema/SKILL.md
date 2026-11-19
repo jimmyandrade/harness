@@ -1,9 +1,9 @@
 ---
 name: investigar-problema
-description: Conduz a investigação de um problema, como um acesso bloqueado, um cadastro que falha em portal alheio ou um erro, com tarefa, fatos e hipóteses, e oferece artigo e post-mortem. Use essa habilidade sempre que alguém relatar um problema, como um preço errado, antes de oferecer ou começar a investigar, mesmo sem dizer investigar. NÃO use para escrever o artigo, o post-mortem nem corrigir código.
+description: Conduz a investigação de um problema, como um acesso bloqueado, um cadastro que falha em portal alheio ou um erro, com tarefa, fatos e hipóteses, e oferece artigo e post-mortem. Use sempre que alguém relatar um problema, como um preço errado, ou pedir "investigue isso" com um link, antes de ler. NÃO use para escrever o artigo, o post-mortem nem corrigir código.
 metadata:
   author: jimmyandrade
-  version: "0.3.4"
+  version: "0.3.5"
   related:
     - procurar-tarefa
     - definir-tarefa
@@ -147,6 +147,7 @@ Se você oferecer investigar, ou começar a ler código, sem carregar esta habil
 
 1. Carregue a habilidade assim que alguém relatar um problema, mesmo sem a palavra investigar.
 2. Só depois pergunte se a pessoa quer que você investigue.
+3. Um pedido de investigar com só um link, um print ou um arquivo também conta: o relato está no conteúdo, então carregue a habilidade antes de abri-lo.
 
 ### Investigação paralela ignorada
 
@@ -183,6 +184,7 @@ Não havia tarefa: criei e respondi a quem relatou com o link. O print mostrava 
 - A thread lida no começo parece completa. Uma investigação paralela pode postar a conclusão minutos depois: releia antes de encerrar.
 - A tela de login do navegador interno parece provar que a fonte exige a pessoa. O navegador dela, por extensão, pode já estar logado e abrir o relato na hora.
 - O erro na tela do portal parece provar que o cadastro não foi criado. A conta pode existir, e o e-mail e a recuperação de senha mostram isso.
+- "Investigue isso" com um link parece um pedido de leitura. O link é o relato do problema: a habilidade vem antes de abri-lo.
 - Uma investigação curta parece não pedir registro. A pergunta pelos registros vale para toda investigação.
 
 ## Scripts disponíveis

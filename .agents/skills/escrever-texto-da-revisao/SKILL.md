@@ -3,7 +3,7 @@ name: escrever-texto-da-revisao
 description: Escreve o texto de uma revisão de pull request, o corpo e os comentários inline, no idioma da pessoa que recebe, com a postura de pergunta e o `@login` de quem abriu. Usada por quem publica uma revisão. Não serve para achar os problemas, decidir a ação da revisão nem publicar.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
   related:
     - definir-idioma-da-conversa
     - evoluir-habilidade
@@ -44,6 +44,8 @@ O idioma sai desse perfil, com o histórico dos textos dela, e nunca do idioma d
 Antes de escrever, inclusive no rascunho agendado, consulte o vocabulário com `redigir-com-tom-de-voz`: agradecimento e fecho vêm dele, nunca de memória. Um comentário de achado diz o que você viu, por que importa e o que muda para quem usa ou mantém o código, e termina convidando a pessoa a responder.
 
 Uma aprovação sem achado não é a descrição do PR: abre com o `@login` de quem abriu, agradece a ajuda concreta deste PR, diz que a revisão não achou nada bloqueante e só então lista, em tópicos, o que o PR faz.
+
+O agradecimento é por uma ajuda concreta deste PR, nunca por algo trivial, como avisar na descrição o que qualquer PR já diz. Sem ajuda concreta, agradeça só o PR, com a frase do vocabulário.
 
 Conte os comentários inline publicados, nenhum, um ou mais, e use a frase do vocabulário dessa quantidade. A de idioma fica num PS no fim, com a redação do vocabulário buscada por `lookup_terms`, nunca de memória. Sem frase para essa quantidade, não invente. PR aberto por bot não leva `@`.
 
