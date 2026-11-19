@@ -4,7 +4,7 @@ description: Analisa o perfil social de uma pessoa, marca, feira ou evento pela 
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.9.0"
+  version: "0.10.0"
   related:
     - definir-perfil-social
     - reconhecer-imagem
@@ -41,6 +41,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Publicar a análise no perfil social": "sim"
 # `Destino da análise` é onde a análise é gravada quando `Publicar a análise no perfil social` é `sim`. O padrão é o corpo da página do perfil, na lista de perfis sociais do mapeamento de dados do projeto. Um negócio que grava noutro lugar descreve o lugar aqui.
 "Destino da análise": "corpo da página do perfil social"
+# `Quando já existe análise publicada` é `perguntar`, `mesclar`, `substituir`, `nunca substituir` ou `automático`. `perguntar` mostra as duas análises e espera a escolha. `mesclar` grava uma análise só, com o que há de melhor nas duas. `substituir` põe a nova no lugar da anterior. `nunca substituir` deixa a anterior como está e acrescenta a nova abaixo. `automático` mescla quando as duas leem o mesmo perfil no mesmo período e acrescenta abaixo quando o perfil mudou e a comparação no tempo importa.
+"Quando já existe análise publicada": "perguntar"
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -130,7 +132,13 @@ Depois de gravar, abra a página e confira que o texto está lá. A resposta abr
 
 Com `sim`, publique sempre, também quando a execução é um teste da skill ou da análise. Quem não quer a publicação define `não` ou diz antes de rodar. Não decida por conta própria deixar de publicar.
 
-Perfil sem página na lista: cadastre-o com `definir-perfil-social` antes de publicar. Página que já tem uma análise: acrescente a nova abaixo da anterior, com a data no título, e não apague a anterior, porque o histórico mostra como o perfil mudou.
+Perfil sem página na lista: cadastre-o com `definir-perfil-social` antes de publicar. Página que já tem uma análise: siga `Quando já existe análise publicada`, depois de ler a análise anterior inteira.
+
+Com `mesclar`, grave uma análise só, com a data nova no título. Cada sinal mantém o post ou o destaque e a data de onde veio, seja da análise anterior ou da nova. Um sinal da anterior só sai quando a evidência nova o contradiz, e a análise diz o que mudou.
+
+Quando as notas divergem, a nota segue a leitura que cobriu mais do perfil. Em `Limites da análise`, diga o que cada leitura cobriu e por que as notas diferem, e registre as notas anteriores com a data.
+
+Com `automático`, diga na resposta o caminho escolhido e por quê. Com `perguntar`, não grave antes da resposta.
 
 Ligue o perfil ao que ele representa. Um perfil que é a conta própria de uma feira entra nos perfis oficiais do grupo de oportunidades dela. Um perfil de uma edição específica entra nos perfis do evento da oportunidade. O perfil da empresa que organiza entra nos perfis da empresa, e o da pessoa, nos da pessoa.
 
@@ -222,12 +230,12 @@ Se você publicar a análise na página da pessoa ou da empresa do perfil, ela m
 2. Deixe a página da pessoa e a da empresa como estão.
 3. Dê o link da página do perfil na resposta.
 
-### Análise anterior apagada
+### Análise anterior coberta pela nova
 
-Se você substituir a análise que a página do perfil já tinha, o histórico some e ninguém vê como o perfil mudou.
+Se você grava a análise nova sem ler a que a página já tinha, uma leitura rasa pode cobrir uma funda, ou as duas ficam com notas que se contradizem sem explicação.
 
-1. Acrescente a análise nova abaixo da anterior.
-2. Ponha a data no título de cada análise.
+1. Leia a análise anterior inteira e siga `Quando já existe análise publicada`.
+2. Só substitua com `substituir`. Com `nunca substituir`, a anterior não muda.
 
 ## Exemplos de entrada e saída
 

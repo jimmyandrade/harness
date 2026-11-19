@@ -3,7 +3,7 @@ name: rotular-item
 description: Aplica, troca e tira rótulos, etiquetas e tags de organização num item, como pull request, issue, e-mail, conversa ou página, pela escolha da habilidade de origem, sem duplicar rótulo nem mexer no de uma ferramenta. Usada quando outra habilidade rotula um item, lê ou responde uma conversa, ou o estado do item muda. Não serve para decidir o assunto do item, hashtags nem categorias de conteúdo.
 metadata:
   author: jimmyandrade
-  version: "0.9.1"
+  version: "0.9.2"
   related:
     - criar-pull-request
     - definir-filtro-de-email
@@ -30,6 +30,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
   "Ação esperada": ""
   "Respondida": ""
   "Concluída": ""
+  "Sem fit": ""
 # `Etiquetas de contexto` lista os assuntos pelo caminho do e-mail, como `Áreas/Feiras`.
 "Etiquetas de contexto": []
 "Modo de aprendizado": "perguntar"
@@ -51,9 +52,12 @@ flowchart LR
   E -->|o contato| A[Ação esperada]
   E -->|o negócio já respondeu e nada falta| R[Respondida]
   E -->|o assunto acabou| C[Concluída]
+  E -->|a marca decidiu que não há fit| F[Sem fit]
 ```
 
 Um envio a grupo ou comunidade sem resposta esperada de alguém, como um comunicado ou uma enquete, não vira `Ação esperada`: ninguém tem a vez de agir. A conversa fica sem rótulo de estado, só com o de contexto, e a resposta diz isso. O grupo com a etiqueta de triagem que `triar-conversas` define, ou que a pessoa pede para acompanhar, segue o fluxo.
+
+Sem fit é o estado da conversa em que a marca decidiu que não combina com ela: uma feira vetada, um cliente dispensado ou uma pessoa que a marca não vai atender. Vem depois da decisão, nunca da dúvida, e vale no lugar de concluída, porque diz o motivo. Sem `Sem fit` nas instruções do projeto, a conversa leva concluída e a resposta propõe o rótulo.
 
 A concluída só entra depois de ler o corpo de cada mensagem da conversa e confirmar que nada espera o negócio nem o contato. Remetente, assunto e trecho não bastam: um aviso de plataforma pode pedir prazo, pagamento, cadastro ou resposta. Sem essa leitura, não aplique concluída em lote. Na dúvida, a conversa fica com ação pendente e vai à pessoa com a pergunta.
 
