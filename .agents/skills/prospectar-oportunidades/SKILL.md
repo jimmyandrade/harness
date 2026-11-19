@@ -5,20 +5,21 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.5.1"
   related:
-    - criar-ideia-de-conteudo
     - consultar-responsavel-pela-oportunidade
+    - criar-ideia-de-conteudo
     - criar-oportunidade
+    - definir-cronograma
     - definir-grupo-de-oportunidades
     - definir-inscricao
     - definir-rotina
     - definir-tarefa
-    - definir-cronograma
     - definir-viagem
     - evoluir-habilidade
     - inscrever-na-oportunidade
     - procurar-oportunidade
+    - rotular-item
 ---
 
 # Prospectar oportunidades
@@ -181,6 +182,7 @@ Não escolhi localidade nem pesquisei grupos. A feira já estava cadastrada. Com
 - O candidato trazido não tem data ou ano em fonte confiável: pergunte antes de avaliar.
 
 - A localidade-alvo é vetada: não procure, diga o motivo e pare.
+- A oportunidade é vetada por falta de fit: as conversas dela, com a organização e com o grupo, ganham o estado `Sem fit`, por `rotular-item`.
 - Sem viagem e sem localidade prioritária: use a `Localidade-sede`.
 - O canvas ou o playbook não está nas instruções do projeto: procure no workspace e sugira o que achou. Sem nada, proponha criar a página e entreviste a pessoa.
 - Rotina sem canvas ou sem playbook: não prospecte e deixe a falta no resumo.
