@@ -3,7 +3,7 @@ name: manter-contato-no-whatsapp
 description: Mantém o contato de uma conversa do WhatsApp Web em dia depois de ler ou enviar, com o link da página da pessoa na nota, o número salvo no padrão de nome e a lista de conferência da conversa. Usada pela sessão dona do WhatsApp Web depois de cada leitura ou envio, mesmo sem dizer contato. Não serve para abrir a aba, achar a conversa, redigir a mensagem nem rotular sozinha.
 metadata:
   author: jimmyandrade
-  version: "0.2.1"
+  version: "0.2.2"
   related:
     - conversar-no-whatsapp
     - definir-empresa
@@ -45,7 +45,7 @@ Só a sessão dona do WhatsApp Web mexe no contato, porque só ela tem a aba. O 
 
 A nota de todo contato abre com o link da página da pessoa no data source, e a página recebe o link da conversa, `https://wa.me/<número>`. A nota é a de `Notas de comunicação no contato`, de `usar-whatsapp-web`: leia o campo antes e acrescente, sem apagar.
 Contato sem o link o recebe assim que a dona abre a conversa, sem pedir. A pessoa ou a empresa sem página é cadastrada por `definir-pessoa` ou `definir-empresa` na mesma rodada, sem perguntar à pessoa se pode.
-Depois de enviar, a troca entra também num comentário datado na página da pessoa, com o que foi dito e combinado, para a página formar a linha do tempo da relação.
+Depois de enviar e depois de receber, a troca entra num comentário datado na página da pessoa e na da empresa, com o que foi dito e combinado, na mesma rodada. Nunca no corpo nem nas notas: a página forma a linha do tempo da relação só pelos comentários.
 
 ### Passo 3
 

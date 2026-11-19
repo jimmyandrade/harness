@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.6.1"
+  version: "0.6.2"
   related:
     - definir-grafia
     - definir-perfil-social
@@ -74,6 +74,8 @@ No navegador, busque e cadastre pelo Notion, com o login da pessoa. Busque o nom
 
 Crie a página numa visão sem agrupamento, para o tipo não nascer preenchido. Confira que a página nova abriu antes de digitar. Depois de escolher uma opção, não aperte Escape: ele fecha a página e o texto seguinte cai na tabela. Clique no valor da propriedade, nunca no nome dela. Ao fim, ordene a busca por última edição e confira que só as páginas esperadas mudaram.
 
+Toda conversa enviada ou recebida, por WhatsApp, e-mail, reunião ou outro canal, é registrada em comentário datado na discussão da página do assunto, e nunca no corpo nem numa propriedade. Isso vale para a conversa de agora e para a que ficou sem registro. Conversa que já está no corpo é copiada para comentários datados, e o corpo só é limpo com o sim da pessoa.
+
 ### Passo 3
 
 Antes de gravar, leia a descrição de cada propriedade no esquema da lista: ela diz o que é obrigatório, como a cidade, e o que não vai em cada campo, como o telefone fixo no campo do WhatsApp ou o telefone nas notas. Uma propriedade obrigatória sem dado exato recebe o que a fonte sustenta, como o estado quando a cidade não aparece, e a resposta diz que foi inferido. A negociação já cadastrada com a empresa liga-se à empresa nos negócios em que ela foi abordada.
@@ -127,6 +129,14 @@ Se você gravar o nome da pessoa responsável só na nota, a fornecedora fica se
 1. Relacione a pessoa nas pessoas responsáveis.
 2. A nota fica com o papel, o contexto, a pendência ou a certeza.
 3. Confira as empresas relacionadas na pessoa.
+
+### Conversa gravada no corpo
+
+Se você gravar no corpo da página, ou nas notas, o que a empresa disse ou o que enviamos, o histórico se perde na próxima edição e a linha do tempo não existe.
+
+1. Grave um comentário datado por troca, com o canal e quem falou.
+2. Se a conversa já está no corpo, copie cada fato para um comentário antes de qualquer limpeza.
+3. Limpe o corpo só com o sim da pessoa, e avise que o histórico de versões ainda guarda o texto.
 
 ### Nome errado que some
 
