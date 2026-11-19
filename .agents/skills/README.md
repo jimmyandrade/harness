@@ -1052,6 +1052,7 @@ flowchart LR
   triar_conversas --> definir_tarefa
   triar_conversas --> enviar_mensagem_no_slack
   triar_conversas --> identificar_duplicata
+  triar_conversas --> manter_contato_no_whatsapp
   triar_conversas --> organizar_emails
   triar_conversas --> organizar_ponto_de_contato
   triar_conversas --> procurar_oportunidade
