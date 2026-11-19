@@ -3,7 +3,7 @@ name: medir-habilidade
 description: Use essa habilidade sempre que for medir o tamanho de uma skill ou o profiling de uma execução no Claude, no Cursor ou em outro harness, mesmo sem dizer token, linha ou tempo. NÃO use no Notion, nem abra o repositório a partir dele, nem para testar se a skill atendeu o caso, evoluir a skill, nem gravar o eval.
 metadata:
   author: jimmyandrade
-  version: "0.5.1"
+  version: "0.6.0"
   related:
     - evoluir-habilidade
     - testar-habilidade
@@ -27,6 +27,10 @@ Se a sessão é Notion, pare. Não meça. Não procure o script no disco, não a
 ### Passo 2
 
 O tamanho não roda a skill. Rode a medição do arquivo. Use só essa saída. Não reconte com outro codificador.
+A medição roda no Python do harness, nunca no do sistema.
+Se o módulo de contagem faltar nesse Python, prepare o ambiente do harness com a checagem, que o cria e instala o que o harness declara, e meça de novo, sem perguntar.
+Nunca estime o tamanho quando a medição é possível: diga o número medido.
+Uma dependência que o harness não declara só entra com o sim da pessoa.
 O corpo é o texto depois do fechamento do frontmatter. O catálogo é o nome, uma quebra de linha e a descrição. Os tokens usam o200k_base.
 A saída traz tokens do corpo, a fatia do limite com uma casa decimal, linhas e palavras do arquivo, caracteres do corpo e tokens do catálogo. Não há limite de caracteres.
 
@@ -70,6 +74,14 @@ Se você reprovar palavras ou tokens do catálogo quando o número é igual ao l
 2. Linhas no limite falham.
 3. Palavras e tokens do catálogo no limite passam.
 
+### Dependência faltando e medição desistida
+
+Se você rodar a medição com o Python do sistema, receber que falta o módulo de contagem e disser que não consegue medir, a pessoa fica sem o número e o ambiente já estava pronto.
+
+1. Rode a medição com o Python do harness.
+2. Se o módulo faltar, prepare o ambiente com a checagem e meça de novo, sem perguntar.
+3. Diga o número medido. Não estime.
+
 ### Duração inventada
 
 Se você preencher o tempo sem o registro, o profiling mostra uma duração que ninguém mediu.
@@ -108,6 +120,7 @@ li o registro. Disse a duração e o passo que gastou o tempo. Sem duração no 
 - A skill mudou: meça o tamanho e entregue os números, mesmo sem pedido explícito.
 - Não houve execução: não há profiling. Meça só o tamanho.
 - O script não está no harness: não invente os números. Diga que a medição não rodou.
+- O módulo de contagem falta: prepare o ambiente do harness com a checagem e meça de novo. Não diga que não consegue medir.
 - A pessoa pergunta se a skill atendeu o caso: use `testar-habilidade`.
 
 ## Pegadinhas
@@ -116,6 +129,7 @@ li o registro. Disse a duração e o passo que gastou o tempo. Sem duração no 
 - Outro codificador muda o total. A saída da medição é o número. O codificador é o200k_base.
 - Igual ao limite de tokens do corpo falha. Igual ao limite de linhas falha. Igual ao limite de palavras ou do catálogo passa.
 - Profiling não diz se a skill passou. Os JSON do eval não se escrevem à mão e não saem desta habilidade.
+- O Python do sistema parece servir à medição e falha por falta do módulo. O do harness já o tem, ou a checagem o instala.
 - Caracteres do corpo não têm limite. O número entra no relatório.
 
 ## Scripts disponíveis
@@ -123,6 +137,6 @@ li o registro. Disse a duração e o passo que gastou o tempo. Sem duração no 
 - `measure.py` imprime o tamanho de uma skill. Lê os limites da configuração do projeto e, no que faltar, a do harness que traz esta habilidade. Não imprime profiling.
 
 1. Com o repositório: `<python da checagem> <pasta desta habilidade>/scripts/measure.py .agents/skills/<nome>/SKILL.md`. O Python da checagem é o `.venv/bin/python` do harness que traz esta habilidade.
-2. O ambiente é o mesmo da checagem. Python, com tiktoken. Sem rede.
+2. O ambiente é o mesmo da checagem. Python, com tiktoken. Sem rede. Se faltar, rode a checagem do harness, `.agents/scripts/check-skill/run-check.sh`, que cria o `.venv` e instala o `requirements.txt` dele, e meça de novo.
 3. Use só essa saída para o tamanho. Os caracteres do corpo vêm nela. O profiling vem do registro da execução, no passo 4.
 4. No Notion, esta lista não autoriza abrir o repositório nem rodar o script. Sem o script no harness: não invente os números.

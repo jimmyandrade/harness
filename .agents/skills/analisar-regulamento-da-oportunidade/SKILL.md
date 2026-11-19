@@ -3,7 +3,7 @@ name: analisar-regulamento-da-oportunidade
 description: Lê o manual, o regulamento, o edital e o contrato de uma oportunidade e separa o que a empresa deve fazer, com prazo, o que o texto não diz e o que as fontes contradizem. Usada quando chega o manual da oportunidade aprovada. NÃO serve para perguntar ao responsável, redigir a tarefa, organizar a viagem nem escrever o projeto que a inscrição pede.
 metadata:
   author: jimmyandrade
-  version: "0.4.1"
+  version: "0.5.0"
   related:
     - acompanhar-edital
     - acompanhar-itens-do-ponto-de-contato
@@ -42,6 +42,10 @@ Antes de reunir as fontes, confirme com a pessoa de qual feira ou oportunidade s
 
 Reúna as fontes da oportunidade: o manual, o regulamento ou o edital, o contrato, os e-mails e as mensagens da organização, incluindo as de grupo, e as notas do grupo de oportunidades. A página da oportunidade e a do ponto de contato vêm do mapeamento de dados do projeto.
 Sem o texto, peça à pessoa e pare.
+
+O contrato, ou outro documento que a pessoa vai assinar ou conferir, que você leu ou cita fica aberto para ela no navegador embutido do aplicativo, e não no Chrome dela, na primeira página ou no trecho citado.
+Se ele só abre por um link pessoal com token, como o de uma assinatura eletrônica, abra só para ler: nunca clique em assinar, concluir nem enviar, e diga isso.
+Se o navegador do aplicativo não o abrir, a resposta traz ao menos o link.
 
 Toda oportunidade tem o edital e o manual anexados na própria página, nas propriedades de editais e anexos. Sem eles, procure nas fontes e diga à pessoa que faltam, também nas oportunidades antigas. Só libere a falta quando a pessoa der a justificativa de por que não existem ou não foram anexados. Sem justificativa, insista.
 
@@ -89,6 +93,8 @@ Antes de cada prazo, avise a pessoa com o link da exigência, como o do formulá
 Exigência vencida: diga isso na hora e proponha cumpri-la agora ou perguntar se ainda é aceita.
 Exigência que é um formulário ou cadastro da organização segue `inscrever-na-oportunidade`, e o que ela manda levar segue `acompanhar-itens-do-ponto-de-contato`.
 
+Toda resposta que cita o contrato leva o link para abri-lo, o do e-mail ou o da plataforma de assinatura, em Markdown clicável, junto de cada cláusula citada, com o número da cláusula e o da página.
+
 ### Passo 7
 
 Leia também a janela de montagem e avise a pessoa na hora com o dia e o horário de cada uma, em especial a do dia anterior ao evento, porque ela muda a saída. O planejamento da saída segue `definir-viagem`.
@@ -126,6 +132,14 @@ Se você supor que o carro entra na desmontagem porque entrou na montagem, a pes
 1. Marque como lacuna o que o texto não diz.
 2. Entregue a pergunta a `consultar-responsavel-pela-oportunidade`.
 3. Só trate como resposta o que o responsável escreveu.
+
+### Contrato citado sem link
+
+Se você citar uma cláusula e não deixar o contrato aberto nem o link, a pessoa confere de memória ou procura o e-mail.
+
+1. Abra o documento no navegador do aplicativo, só para ler.
+2. Ponha o link clicável em toda resposta que o cita.
+3. Cite cada cláusula com o número dela e o da página.
 
 ### Manual de outra edição
 
