@@ -3,7 +3,7 @@ name: publicar-ata-de-reuniao
 description: Publica a ata de um registro de reunião no destino compartilhado, depois de uma triagem que separa o que é privado, como um one-on-one ou um assunto sensível, e do sim da pessoa. Usada quando o registro está pronto e a ata vai para a página do time. NÃO serve para registrar a reunião, escrever o resumo nem publicar a transcrição.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.4.0"
   related:
     - definir-agenda
     - definir-pessoa
@@ -26,6 +26,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Destino da ata privada": ""
 # `Árvore da triagem da ata` é o arquivo `.mmd` com as perguntas da triagem, lido de cima para baixo. Vazio, cada reunião é uma pergunta à pessoa.
 "Árvore da triagem da ata": ""
+# `Árvore do destino da ata` é o arquivo `.mmd` com as perguntas que escolhem o destino e o modelo da ata, lido de cima para baixo. Vazio, o destino vem do resultado da triagem e do `Destino da ata`.
+"Árvore do destino da ata": ""
 # `Confirmar a triagem antes de publicar` em `sim` mostra a triagem à pessoa e espera o sim dela.
 "Confirmar a triagem antes de publicar": "sim"
 # `Linkar a ata no evento da agenda` em `sim` leva o link da ata publicada à descrição do evento da reunião, depois do sim da pessoa. Com `não`, a habilidade não mexe na agenda.
@@ -39,7 +41,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 Parta do registro que `definir-registro-de-reuniao` guarda. Sem registro, pare e peça.
 Sem `Destino da ata`, pare e diga que a publicação não está configurada.
-Procure a ata no destino público e no privado, pelo título e pela data. Se já existe, corrija essa página e não crie outra.
+Procure a ata em todos os destinos da `Árvore do destino da ata`, como o do time, o privado e o de cada chapter ou guilda, pelo título e pela data. Sem árvore, procure no destino público e no privado. Se já existe, corrija essa página e não crie outra.
 
 ### Passo 2
 
@@ -48,6 +50,8 @@ Siga a `Árvore da triagem da ata`, de cima para baixo. A primeira pergunta que 
 Sem árvore, ou quando nenhuma pergunta bate, mostre o trecho à pessoa, pergunte e acrescente a regra à árvore na mesma hora.
 Numa ata pública, marque também cada trecho sensível: ele fica fora do texto.
 Os assuntos que o registro deixa fora do resumo valem para a ata.
+Escolha o destino e o modelo da ata pela `Árvore do destino da ata`, de cima para baixo: a primeira pergunta que bater decide.
+Nenhuma pergunta bate: mostre o caso à pessoa, pergunte o destino e acrescente a regra à árvore na mesma hora.
 
 ### Passo 3
 
@@ -67,7 +71,7 @@ Espere o sim da pessoa para essa ata e para esse destino. O sim a uma ata não v
 
 A ata leva o resumo, as ações, os participantes e a fonte. Nunca leva a transcrição bruta nem um trecho dela.
 O título e a data são os do registro. Participantes e responsáveis vão com menção real da plataforma, como manda `definir-pessoa`.
-A página segue o `Modelo da ata`, também na ata de Daily: procure o modelo no destino antes de escrever e siga as seções dele, na ordem. O que as outras regras pedem, como menção e decisão, entra por cima. Outra ata só serve de referência se nenhum modelo existir.
+A página segue o modelo que a árvore do destino indica, ou o `Modelo da ata` quando não há árvore, também na ata de Daily: procure o modelo no destino antes de escrever e siga as seções dele, na ordem. O que as outras regras pedem, como menção e decisão, entra por cima. Outra ata só serve de referência se nenhum modelo existir.
 Diga na resposta qual modelo usou, com o link.
 Publique no destino escolhido. Releia a página publicada e confira que nenhum trecho sensível entrou.
 Grave o link da ata no registro e entregue à pessoa o link com o título da página, o destino e o que ficou fora.
@@ -114,6 +118,14 @@ Se você copiar a estrutura da ata de outra reunião quando o destino tem um mod
 1. Procure o modelo no destino antes de escrever.
 2. Siga as seções dele, na ordem.
 3. Use outra ata só se nenhum modelo existir.
+
+### Ata procurada só no destino do time
+
+Se você procurar a ata só no destino do time, a reunião que já tem página no espaço pessoal ou no de um chapter parece sem ata, e uma segunda página nasce.
+
+1. Procure em todos os destinos da `Árvore do destino da ata`, pelo título e pela data.
+2. Já existe: corrija essa página.
+3. Só diga que não há ata depois de procurar em todos.
 
 ### Reunião de dois tratada como do time
 
