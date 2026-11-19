@@ -3,7 +3,7 @@ name: rascunhar-mensagem
 description: Escreve, mostra e envia a mensagem de WhatsApp depois de a conversa ser lida, com o destino, o texto, a divisão e o comprovante conferidos. Usada quando a pessoa quer responder, mandar ou corrigir uma mensagem. NÃO serve para ler a conversa, redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.3.1"
+  version: "0.3.2"
   aliases:
     - entregar-rascunho-de-mensagem
     - rascunhar-mensagem-no-whatsapp
@@ -73,6 +73,8 @@ A resposta que confirma interesse diz de qual oferta fala, pela organização e 
 Antes de rascunhar uma mensagem que propõe, aceita ou combina data, hora, lugar, retirada, coleta, entrega, encontro ou prazo, confira a agenda, seguindo `procurar-agenda`, e a viagem ativa ou a próxima, seguindo `definir-viagem`: saída, chegada, a cidade de cada dia e os compromissos que batem.
 
 Se a proposta conflita, como uma retirada numa cidade de onde a pessoa já saiu naquele horário, diga o conflito antes do texto e ofereça o que cabe: outro dia ou horário, outra pessoa ou o correio. Sem acesso à agenda ou à viagem, pare e peça o dado.
+
+Quando o mesmo texto vai para vários destinos, como uma resposta a cada empresa de uma lista, leia a conversa de cada destino antes de montar o texto. Quem já recusou, como uma empresa que disse que não faz o serviço, ganha um rascunho à parte, um agradecimento curto que não repete a recusa que nós iríamos dar, e fica de fora do texto comum. Mostre os dois rascunhos juntos, para a pessoa aprovar cada um.
 
 Antes de mostrar o rascunho, valide o texto inteiro contra o vocabulário, seguindo `redigir-com-tom-de-voz`: rode a classificação do texto com as tags de quem escreve e do canal, e leia as expressões com a consulta de termos, porque a classificação lê palavra por palavra. Palavra proibida ou muito desaconselhada, como a que marca gênero ou o plural de tratamento, sai do texto e entra a alternativa do vocabulário. Cada correção de um rascunho já mostrado passa pela mesma validação antes de voltar à pessoa.
 
@@ -237,6 +239,7 @@ Li a resposta como a da pergunta: o carro pode entrar na montagem, em qualquer j
 
 ## Pegadinhas
 
+- "A mesma mensagem para cada uma" parece pedir um texto só. Quem já recusou não precisa ouvir nossa recusa: leia cada conversa e prepare antes o rascunho à parte.
 - O rascunho parece certo porque soa natural. Soar natural não é estar no vocabulário: a classificação mostra a palavra que a pessoa já recusou, como a forma que marca gênero.
 - Um bloco de código parece prévia suficiente. Com a ferramenta de widget na sessão, a pessoa também espera o widget editável, com copiar e aprovar.
 - Uma resposta curta parece incompleta quando não repete o detalhe que a conversa já traz. Ela responde a pergunta como foi escrita: confira o texto da pergunta antes de achar que falta algo.
