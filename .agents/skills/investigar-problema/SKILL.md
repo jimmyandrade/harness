@@ -3,7 +3,7 @@ name: investigar-problema
 description: Conduz a investigação de um problema, como um acesso bloqueado, um cadastro que falha em portal alheio ou um erro, com tarefa, fatos e hipóteses, e oferece artigo e post-mortem. Use sempre que alguém relatar um problema, como um preço errado, ou pedir "investigue isso" com um link, antes de ler. NÃO use para escrever o artigo, o post-mortem nem corrigir código.
 metadata:
   author: jimmyandrade
-  version: "0.3.5"
+  version: "0.3.8"
   related:
     - procurar-tarefa
     - definir-tarefa
@@ -140,6 +140,10 @@ Se você entregar uma lista do que não conferiu, como se um erro é esperado ou
 1. Confira cada um desses pontos que esteja ao seu alcance antes de responder.
 2. Só deixe como "não verificado" o que exige acesso que você não tem, e diga qual e quem tem.
 3. Não proponha tarefa de correção enquanto a causa não estiver entendida.
+4. Antes de pedir a quem relatou um dado do caso, como o id, a cor, a versão ou o que foi cadastrado, procure-o por conta própria: no que a ferramenta de monitoramento registrou no horário do relato, no conector da fonte e no navegador.
+5. Só peça a quem relatou depois que cada um desses caminhos falhou, e diga o que cada um devolveu.
+6. Não diga que um sistema não dá acesso, nem descreva o que ele mostra, sem ter tentado abri-lo: sem a tentativa, a frase é suposição.
+7. Quando o próximo passo é um teste ou uma consulta ao seu alcance, rode-o no mesmo turno em vez de propô-lo. Proponha à pessoa só o que depende de acesso ou de decisão dela.
 
 ### Investigação sem a habilidade
 
@@ -185,6 +189,7 @@ Não havia tarefa: criei e respondi a quem relatou com o link. O print mostrava 
 - A tela de login do navegador interno parece provar que a fonte exige a pessoa. O navegador dela, por extensão, pode já estar logado e abrir o relato na hora.
 - O erro na tela do portal parece provar que o cadastro não foi criado. A conta pode existir, e o e-mail e a recuperação de senha mostram isso.
 - "Investigue isso" com um link parece um pedido de leitura. O link é o relato do problema: a habilidade vem antes de abri-lo.
+- Perguntar a quem relatou parece o passo seguinte quando falta um dado. O horário do relato e o que a ferramenta registrou nele costumam bastar para achá-lo.
 - Uma investigação curta parece não pedir registro. A pergunta pelos registros vale para toda investigação.
 
 ## Scripts disponíveis

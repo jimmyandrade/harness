@@ -313,6 +313,7 @@ flowchart LR
   conversar_no_whatsapp --> anexar_arquivo_no_whatsapp
   conversar_no_whatsapp --> comunicar_novidade_do_produto
   conversar_no_whatsapp --> convidar_para_evento
+  conversar_no_whatsapp --> definir_negociacao
   conversar_no_whatsapp --> definir_orcamento_de_fornecedor
   conversar_no_whatsapp --> definir_pessoa
   conversar_no_whatsapp --> definir_rotina
@@ -903,6 +904,7 @@ flowchart LR
   procurar_artista --> mesclar_registro
   procurar_banco_de_dados --> identificar_duplicata
   procurar_data_significativa --> definir_data_significativa
+  procurar_email --> analisar_regulamento_da_oportunidade
   procurar_email --> definir_grafia
   procurar_email --> procurar_inscricao
   procurar_email --> rotular_item
@@ -958,6 +960,7 @@ flowchart LR
   rascunhar_mensagem --> acompanhar_resposta_no_whatsapp
   rascunhar_mensagem --> anexar_arquivo_no_whatsapp
   rascunhar_mensagem --> conversar_no_whatsapp
+  rascunhar_mensagem --> definir_negociacao
   rascunhar_mensagem --> definir_tarefa
   rascunhar_mensagem --> definir_viagem
   rascunhar_mensagem --> definir_vocabulario

@@ -3,15 +3,15 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, e lê o pedido, quem pediu, a data, o que o contato afirmou e o que falta. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp ou conferir o que alguém pediu. Não serve para escrever ou enviar a mensagem, redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.42.0"
+  version: "0.42.1"
   aliases:
     - redigir-mensagem-de-whatsapp
   related:
-    - rascunhar-mensagem
-    - reconhecer-imagem
     - acompanhar-resposta-no-whatsapp
+    - anexar-arquivo-no-whatsapp
     - comunicar-novidade-do-produto
     - convidar-para-evento
+    - definir-negociacao
     - definir-orcamento-de-fornecedor
     - definir-pessoa
     - definir-rotina
@@ -20,11 +20,12 @@ metadata:
     - definir-vocabulario
     - dividir-mensagem
     - enviar-email
-    - anexar-arquivo-no-whatsapp
     - escrever-link
     - evoluir-habilidade
     - procurar-agenda
     - procurar-tarefa
+    - rascunhar-mensagem
+    - reconhecer-imagem
     - redigir-com-tom-de-voz
     - rotular-item
     - triar-conversas
@@ -107,6 +108,8 @@ Para responder ou enviar, siga `rascunhar-mensagem` com a conversa de destino, q
 ### Passo 6
 
 Para convidar uma pessoa ou um grupo para uma call ou um evento pela conversa, siga `convidar-para-evento`. Ele lê o evento da agenda e manda o convite aqui, e cada mensagem segue o sim de `rascunhar-mensagem`.
+
+Cada leitura de conversa com mensagem nova também vira comentário datado na página do assunto, por `definir-negociacao`, na mesma rodada. Uma conversa que ficou sem registro, ou que está registrada no corpo da página, é registrada em comentário agora. Nunca no corpo.
 
 ### Passo 7
 

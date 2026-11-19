@@ -3,7 +3,7 @@ name: rascunhar-mensagem
 description: Escreve, mostra e envia a mensagem de WhatsApp depois de a conversa ser lida, com o destino, o texto, a divisão e o comprovante conferidos. Usada quando a pessoa quer responder, mandar ou corrigir uma mensagem. NÃO serve para ler a conversa, redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.3.3"
+  version: "0.3.4"
   aliases:
     - entregar-rascunho-de-mensagem
     - rascunhar-mensagem-no-whatsapp
@@ -11,6 +11,7 @@ metadata:
     - acompanhar-resposta-no-whatsapp
     - anexar-arquivo-no-whatsapp
     - conversar-no-whatsapp
+    - definir-negociacao
     - definir-tarefa
     - definir-viagem
     - definir-vocabulario
@@ -126,6 +127,8 @@ Para corrigir uma mensagem já enviada, edite-a e marque a palavra corrigida com
 Quando a mensagem espera resposta, como uma pergunta, um pedido ou um prazo, siga `acompanhar-resposta-no-whatsapp`. A pergunta que pede o sim do Passo 3 já diz que a resposta vai ser acompanhada, com a frequência e até quando.
 
 Depois do envio, atualize os rótulos de cada conversa em que enviou, e rotule a do e-mail do comprovante. Passe quem age agora e o contexto entre `Etiquetas de contexto`. Diga na resposta os rótulos que ficaram.
+
+Depois de cada envio, e depois de cada resposta lida, registre a troca em comentário datado na discussão da página do assunto, seguindo `definir-negociacao`, na mesma rodada e sem perguntar. Nunca grave a conversa no corpo da página nem nas notas.
 
 ### Passo 5
 

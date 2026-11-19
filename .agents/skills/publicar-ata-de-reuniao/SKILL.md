@@ -3,7 +3,7 @@ name: publicar-ata-de-reuniao
 description: Publica a ata de um registro de reunião no destino compartilhado, depois de uma triagem que separa o que é privado, como um one-on-one ou um assunto sensível, e do sim da pessoa. Usada quando o registro está pronto e a ata vai para a página do time. NÃO serve para registrar a reunião, escrever o resumo nem publicar a transcrição.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.4.1"
   related:
     - definir-agenda
     - definir-pessoa
@@ -49,6 +49,7 @@ Faça a triagem lendo o resumo e a transcrição inteira, não só o resumo. O r
 Siga a `Árvore da triagem da ata`, de cima para baixo. A primeira pergunta que bater decide se a ata é pública ou privada.
 Sem árvore, ou quando nenhuma pergunta bate, mostre o trecho à pessoa, pergunte e acrescente a regra à árvore na mesma hora.
 Numa ata pública, marque também cada trecho sensível: ele fica fora do texto.
+Detalhe de segurança de um sistema também é trecho sensível: o jeito de proteger os dados, onde ficam chaves, cookies e tokens, as regras de acesso ao repositório e o que ainda não está protegido. A ata conta o que o sistema faz e por quê, sem o mecanismo, e a triagem mostra o trecho à pessoa.
 Os assuntos que o registro deixa fora do resumo valem para a ata.
 Escolha o destino e o modelo da ata pela `Árvore do destino da ata`, de cima para baixo: a primeira pergunta que bater decide.
 Nenhuma pergunta bate: mostre o caso à pessoa, pergunte o destino e acrescente a regra à árvore na mesma hora.
@@ -103,6 +104,14 @@ Se você publicar a segunda ata porque a pessoa disse sim à primeira, o trecho 
 
 1. Mostre a triagem de cada ata.
 2. Espere o sim daquela ata e daquele destino.
+
+### Detalhe de segurança na ata pública
+
+Se você deixar na ata de uma apresentação técnica o jeito como o fluxo protege os dados, onde ficam chaves e cookies ou quem tem acesso ao repositório, a ata vira um mapa do que atacar para quem lê o espaço.
+
+1. Na triagem, marque cada trecho desse tipo como sensível, com a fala como saiu.
+2. Escreva só o que o sistema faz e por que, sem o mecanismo.
+3. Mostre os trechos à pessoa, que decide se algum fica.
 
 ### Transcrição que sobe junto
 
