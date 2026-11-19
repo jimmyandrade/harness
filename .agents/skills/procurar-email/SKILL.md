@@ -5,10 +5,11 @@ allowed-tools: notion:notion-ai-search
 compatibility: Precisa de internet. A busca no e-mail conectado usa notion-ai-search no servidor notion.
 metadata:
   author: jimmyandrade
-  version: "0.7.0"
+  version: "0.7.1"
   related:
     - procurar-inscricao
     - definir-grafia
+    - analisar-regulamento-da-oportunidade
     - rotular-item
 ---
 
@@ -33,6 +34,8 @@ Antes de buscar um nome, siga `definir-grafia`. A busca conectada não entende o
 ### Passo 3
 
 Leia cada resultado cujo tipo é e-mail. Uma página do Notion não é a mensagem, mesmo quando ela diz que a pessoa enviou mensagem. Para cada e-mail, diga o assunto, quem enviou, a data e o fato que responde à pergunta. Se houver mais de uma, liste cada uma. Não junte num sim só. Na frase, escreva a forma correta do nome. O primeiro nome correto, quando a variação o marca como o dela, é a mesma pessoa. Não escreva que a busca pelo primeiro nome não achou e-mail do apelido. Uma mensagem é dessa pessoa se o remetente ou o endereço do e-mail casa com o registro dela, mesmo quando o nome exibido é outro. O primeiro nome sozinho não basta quando outro registro tem esse primeiro nome. Se a pessoa entregar um link da caixa de e-mail, ou já tiver dito que o e-mail existe, esse relato é a mensagem. Diga o fato de cada uma e se ela fala do que foi perguntado. Um e-mail sobre o evento que não pede inscrição nem ingresso de novo continua sendo e-mail dela. Não responda que não há e-mail enviado diretamente por ela. Não abra o link como página do Notion.
+
+Quando o e-mail traz um contrato ou outro documento para assinar ou conferir, a resposta leva o link do e-mail ou do documento, clicável, e a abertura dele segue `analisar-regulamento-da-oportunidade`.
 
 ### Passo 4
 
