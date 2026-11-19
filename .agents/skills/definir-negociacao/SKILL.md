@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.9.0"
+  version: "0.9.1"
   related:
     - acompanhar-retornos-pendentes
     - definir-agenda
@@ -68,7 +68,7 @@ Quando o e-mail da empresa diz que o status se acompanha num painel, a pendênci
 
 Depois de enviar uma mensagem, um e-mail ou um comprovante de pagamento a uma empresa ou pessoa, registre a troca na mesma rodada, sem perguntar se deve registrar. Na resposta, diga o que registrou, com o link da página, e o que não registrou e por quê.
 
-Quando a empresa recusa, a recusa fica em três lugares, na mesma rodada: o comentário da troca, com as palavras dela; a nota do contato no WhatsApp, com a data e o que ela recusou; e a conversa, que leva o rótulo de estado de concluída, por `rotular-item`. Diga o que a recusa não deixou claro, como a que pode valer só para um material. Um rótulo só para recusa não existe até o projeto o definir: proponha-o à pessoa e não o crie.
+Quando a empresa recusa, a recusa fica em três lugares, na mesma rodada: o comentário da troca, com as palavras dela; a nota do contato no WhatsApp, com a data e o que ela recusou; e a conversa, que leva o rótulo de estado de concluída, por `rotular-item`. Diga o que a recusa não deixou claro, como a que pode valer só para um material. Quando a decisão é da marca, como o veto de uma feira ou o cliente dispensado, o estado é `Sem fit`, por `rotular-item`, com o motivo no comentário.
 
 ### Passo 4
 

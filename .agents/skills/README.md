@@ -802,6 +802,7 @@ flowchart LR
   levantar_contexto_do_pull_request --> rotular_item
   levantar_gravacoes_de_reunioes --> definir_registro_de_reuniao
   levantar_gravacoes_de_reunioes --> procurar_agenda
+  levantar_gravacoes_de_reunioes --> publicar_ata_de_reuniao
   levantar_gravacoes_de_reunioes --> transcrever_audio_e_video
   liberar_espaco_em_disco --> limpar_copias_de_trabalho
   limpar_copias_de_trabalho --> criar_copia_de_trabalho
@@ -938,6 +939,7 @@ flowchart LR
   prospectar_oportunidades --> definir_viagem
   prospectar_oportunidades --> inscrever_na_oportunidade
   prospectar_oportunidades --> procurar_oportunidade
+  prospectar_oportunidades --> rotular_item
   publicar_ata_de_reuniao --> definir_agenda
   publicar_ata_de_reuniao --> definir_pessoa
   publicar_ata_de_reuniao --> definir_registro_de_reuniao
