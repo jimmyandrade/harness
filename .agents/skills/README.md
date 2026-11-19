@@ -903,6 +903,7 @@ flowchart LR
   procurar_artista --> mesclar_registro
   procurar_banco_de_dados --> identificar_duplicata
   procurar_data_significativa --> definir_data_significativa
+  procurar_email --> analisar_regulamento_da_oportunidade
   procurar_email --> definir_grafia
   procurar_email --> procurar_inscricao
   procurar_email --> rotular_item
