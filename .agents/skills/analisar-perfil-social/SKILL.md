@@ -4,7 +4,7 @@ description: Analisa o perfil social de uma pessoa, marca, feira ou evento pela 
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.8.1"
+  version: "0.9.0"
   related:
     - definir-perfil-social
     - reconhecer-imagem
@@ -33,7 +33,9 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Abertura dos posts": "automático um por um"
 # `Quadros por destaque` é quantos quadros a habilidade lê em cada destaque, do primeiro em diante. `0` lê todos.
 "Quadros por destaque": 3
-# `Destaques com a conta logada` é `perguntar`, `sempre` ou `nunca`. Abrir um destaque com a conta logada pode mostrar essa conta como quem viu, para a pessoa dona do perfil. `perguntar` diz isso uma vez por análise, com o nome da conta e o número de destaques, e espera o sim. `sempre` abre sem perguntar. `nunca` não abre.
+# `Amostra de destaques` é quantos destaques a habilidade abre primeiro, para decidir se lê os outros. Vale em todos os modos em que ela abre destaques.
+"Amostra de destaques": 3
+# `Destaques com a conta logada` é `perguntar`, `sempre`, `automático` ou `nunca`. Abrir um destaque com a conta logada pode mostrar essa conta como quem viu, para a pessoa dona do perfil. `perguntar` diz isso uma vez por análise, com o nome da conta e o número de destaques, e espera o sim. Com o sim, segue como `automático`. `sempre` abre todos sem perguntar. `automático` abre sem perguntar a amostra e decide pelos demais. `nunca` não abre.
 "Destaques com a conta logada": "perguntar"
 # `Publicar a análise no perfil social` é `sim` ou `não`. `sim` grava a análise no `Destino da análise`. `não` só entrega a análise na resposta.
 "Publicar a análise no perfil social": "sim"
@@ -72,9 +74,13 @@ Com a ferramenta de credencial do gerenciador de senhas na sessão, ofereça o l
 
 Leia o perfil inteiro, não só o último post: a bio e o link da bio, o grid, os destaques, os posts fixados e os `Posts recentes a olhar`, com legendas e comentários. Destaque e post fixado contam como identidade do perfil, porque ficam ali mesmo depois de anos.
 
-Abra cada destaque, em todos os modos, e leia os `Quadros por destaque`. O título do destaque não diz o conteúdo, e o destaque fica no perfil por anos. Diga em `Limites da análise` quantos quadros leu de cada destaque, e que quadro não abriu ou abriu preto.
+Conte os destaques do perfil. Antes de abrir, siga `Destaques com a conta logada`. Com `nunca`, ou com a pessoa dizendo não, nenhum destaque abre e todos ficam em `Limites da análise`, sem dedução pelo título.
 
-Antes de abrir, siga `Destaques com a conta logada`. Com `nunca`, ou com a pessoa dizendo não, nenhum destaque abre e todos ficam em `Limites da análise`, sem dedução pelo título.
+Abra a `Amostra de destaques`: o mais recente, o mais antigo e os do meio, e leia os `Quadros por destaque` de cada um. O título do destaque não diz o conteúdo, e o destaque fica no perfil por anos.
+
+Decida pela amostra se lê os demais. Leia todos quando a amostra mostra conteúdo que não se resume à divulgação do evento, como discurso, posicionamento, identidade ou um tema que pesa na marca, ou quando os destaques da amostra diferem entre si. Pare quando a amostra repete o mesmo formato, como o cartaz de cada edição. Com `sempre`, leia todos.
+
+Diga em `Limites da análise` quantos destaques o perfil tem, quantos abriu, quantos quadros leu de cada um e quais abriram pretos.
 
 O alcance da leitura segue `Leitura do feed inteiro`, `Leitura dos reposts` e `Abertura dos posts`. Os `Posts recentes a olhar` são o mínimo e valem em todos os modos. O destaque não substitui o post, nem o post o destaque: os dois entram.
 
@@ -148,10 +154,11 @@ Se você ler o perfil que abriu com aviso de login sem pedir o login antes, a an
 
 Se você descrever o conteúdo de um destaque pelo nome dele ou pela edição que ele arquiva, a análise afirma o que não viu.
 
-1. Abra cada destaque, em qualquer modo, inclusive no automático, depois de seguir `Destaques com a conta logada`.
-2. Confira se os quadros abriram. Quadro vazio ou preto não foi lido.
-3. Liste o destaque em `Limites da análise`, com os quadros lidos.
-4. Ofereça ler no navegador da própria pessoa.
+1. Conte os destaques e abra a `Amostra de destaques`, em qualquer modo, depois de seguir `Destaques com a conta logada`.
+2. Decida pela amostra se lê os demais.
+3. Confira se os quadros abriram. Quadro vazio ou preto não foi lido.
+4. Liste o destaque em `Limites da análise`, com os quadros lidos.
+5. Ofereça ler no navegador da própria pessoa.
 
 ### Nota única
 
