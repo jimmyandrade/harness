@@ -3,7 +3,7 @@ name: rascunhar-mensagem
 description: Escreve, mostra e envia a mensagem de WhatsApp depois de a conversa ser lida, com o destino, o texto, a divisão e o comprovante conferidos. Usada quando a pessoa quer responder, mandar ou corrigir uma mensagem. NÃO serve para ler a conversa, redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.3.2"
+  version: "0.3.3"
   aliases:
     - entregar-rascunho-de-mensagem
     - rascunhar-mensagem-no-whatsapp
@@ -174,6 +174,7 @@ Se você disser que o rascunho está pronto sem mostrar o texto, ou o mostrar s�
 
 1. Mostre o texto inteiro na resposta do chat, num bloco de código.
 2. Com a ferramenta de widget na sessão, mostre sempre também o texto editável, com copiar e aprovar. O widget não substitui o bloco. Faça isso também na sessão que só rascunha, como a dona do WhatsApp Web.
+   Com a ferramenta de artefato, publique também os rascunhos que esperam o sim num artefato só, atualizado a cada rodada, porque o widget sobe com a conversa e some. A resposta traz o link do artefato e lista os rascunhos que ainda esperam.
 3. Pergunte se pode enviar só depois do texto, na mesma resposta. A versão editada no widget substitui o rascunho.
 
 
@@ -241,6 +242,7 @@ Li a resposta como a da pergunta: o carro pode entrar na montagem, em qualquer j
 
 - "A mesma mensagem para cada uma" parece pedir um texto só. Quem já recusou não precisa ouvir nossa recusa: leia cada conversa e prepare antes o rascunho à parte.
 - O rascunho parece certo porque soa natural. Soar natural não é estar no vocabulário: a classificação mostra a palavra que a pessoa já recusou, como a forma que marca gênero.
+- O widget parece guardar o rascunho. Ele sobe com a conversa e some, e a pessoa não acha o que ficou pendente. O artefato com os rascunhos pendentes fica no mesmo endereço.
 - Um bloco de código parece prévia suficiente. Com a ferramenta de widget na sessão, a pessoa também espera o widget editável, com copiar e aprovar.
 - Uma resposta curta parece incompleta quando não repete o detalhe que a conversa já traz. Ela responde a pergunta como foi escrita: confira o texto da pergunta antes de achar que falta algo.
 - O rascunho de ontem parece valer. A conversa pode ter mudado: leia antes e rascunhe só o que falta.
