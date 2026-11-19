@@ -3,7 +3,7 @@ name: manter-contato-no-whatsapp
 description: Mantém o contato de uma conversa do WhatsApp Web em dia depois de ler ou enviar, com o link da página da pessoa na nota, o número salvo no padrão de nome e a lista de conferência da conversa. Usada pela sessão dona do WhatsApp Web depois de cada leitura ou envio, mesmo sem dizer contato. Não serve para abrir a aba, achar a conversa, redigir a mensagem nem rotular sozinha.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.3.1"
   related:
     - conversar-no-whatsapp
     - definir-empresa
@@ -52,7 +52,7 @@ Depois de enviar e depois de receber, a troca entra num comentário datado na p�
 Com `Salvar contato sem número salvo` em `sim`, salve o número de uma conversa que ainda não está nos contatos, no `Padrão do nome do contato`, com o nome e a organização lidos da página da pessoa ou da conversa.
 O contato salvo sem a organização recebe-a no nome. Sem a organização, pergunte à pessoa.
 
-A conversa cujo nome de exibição é só o número é contato sem nome, e vale para qualquer leitura ou envio, inclusive a triagem e o pedido de outra sessão. Salve o contato na hora, antes de seguir, e garanta que a pessoa e a empresa dele estão no data source, por `definir-pessoa` e `definir-empresa`. Sem o nome da pessoa, use o setor ou o papel que a conversa mostra, e pergunte só quando nem isso houver.
+A conversa cujo nome de exibição é só o número é contato sem nome, e vale para qualquer leitura ou envio, inclusive a triagem e o pedido de outra sessão. Antes de salvar, procure a empresa e a pessoa no data source e confira o cadastro: o telefone com o 9, o link `wa.me` e a pessoa responsável. O que falta é cadastrado ou completado por `definir-pessoa` e `definir-empresa`. Depois de salvar, grave a nota com o link da página e mostre a lista do Passo 4 com o resultado de cada item. Sem o nome da pessoa, use o setor ou o papel que a conversa mostra, e pergunte só quando nem isso houver.
 
 Celular do Brasil leva o 9 depois do DDD, mesmo quando a conversa antiga mostra o número sem ele. O contato salvo, o link da conversa e o número da página da pessoa usam o número com o 9. Ao procurar o contato pelo número, busque as duas formas.
 
@@ -106,9 +106,9 @@ Se você enviar a primeira mensagem a um número novo e deixar o contato, a nota
 
 Se você ler ou enviar numa conversa que mostra só o número e seguir adiante, o contato continua sem nome e sem cadastro, e o próximo envio repete o problema.
 
-1. Salve o contato no padrão de nome antes de seguir.
-2. Cadastre a pessoa e a empresa no data source.
-3. Diga na resposta qual contato foi salvo.
+1. Procure a empresa e a pessoa no data source e confira o cadastro antes de salvar.
+2. Salve o contato no padrão de nome e grave a nota com o link da página.
+3. Mostre a lista do Passo 4 com o resultado de cada item e diga qual contato foi salvo.
 
 ### Contato salvo sem a organização
 
@@ -141,6 +141,7 @@ Com `Salvar contato sem número salvo` em `sim`, salvei como "Caio (Casa Azul)",
 ## Pegadinhas
 
 - A sessão que pediu a leitura não vê o que a dona fez no contato: diga o que mudou.
+- Salvar o contato parece o fim. Sem o cadastro conferido e a nota gravada, a pessoa não vê o que foi verificado.
 - A leitura de triagem parece só olhar, então deixar o número sem nome parece inofensivo. Abrir a conversa já pede o nome salvo.
 - Senha, código e documento de pessoa nunca entram na nota.
 - A nota tem um só campo: leia antes e acrescente, nunca substitua.
