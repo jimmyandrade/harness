@@ -3,7 +3,7 @@ name: publicar-revisao-de-codigo
 description: Revisa um pull request e publica a revisão numa única review, com os comentários inline, no idioma de quem recebe e no tom do projeto. Usada quando a pessoa pede uma revisão ou outra habilidade precisa publicar uma. Não serve para tratar os comentários que você recebeu no seu PR.
 metadata:
   author: jimmyandrade
-  version: "0.25.0"
+  version: "0.26.0"
   aliases:
     - post-code-review
   related:
@@ -43,6 +43,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Ler o texto antes de publicar": "sim"
 # `Publicar em execução agendada` é `sim` ou `não` e só vale quando ninguém está na frente: com `não`, a habilidade prepara a revisão e não publica.
 "Publicar em execução agendada": "não"
+# `Check em andamento` diz o que fazer quando um check ainda roda: `esperar` não revisa e espera terminar, `não esperar` revisa mesmo assim, `passar para o próximo` devolve a quem chamou o aviso de que o PR espera checks. Quem chama, como a fila, repassa o valor dela.
+"Check em andamento": "esperar"
 # `Pasta das cópias separadas` diz onde criar a cópia de trabalho de cada repositório, e vazio usa a pasta temporária do sistema, com uma subpasta por repositório.
 "Pasta das cópias separadas": ""
 # `Cópia de trabalho` é `Global`, mas esta skill pode sobrescrevê-lo.
@@ -63,7 +65,7 @@ Peça o número ou o link do pull request. Confira o estado dele agora, mesmo qu
 
 Chame `levantar-contexto-do-pull-request` e use a ficha dele: convenções, comentários existentes, card e conversas, propósito e trabalho parecido. Não refaça a leitura. Quando a ficha traz o refinamento técnico, confronte o PR com o que ficou decidido e em aberto: uma decisão que o PR contraria, ou uma dúvida em aberto que ele resolve sem discutir, vira ponto da revisão, em forma de pergunta.
 
-Não revise com um check pendente: diga qual e espere terminar. Um check que falhou não impede a revisão, mas leia o registro dele antes de perguntar.
+Siga `Check em andamento` com um check pendente: com `esperar`, diga qual e espere terminar; com `passar para o próximo`, diga qual e devolva o PR a quem chamou como esperando checks, sem revisar; com `não esperar`, revise já. Um check que falhou não impede a revisão, mas leia o registro dele antes de perguntar.
 
 ### Passo 3
 
@@ -242,7 +244,7 @@ Rodei a revisão e achei bloqueio. Não aprovei. Avisei que ainda não dá para 
 - O PR muda interface e já traz o antes e o depois: use e siga.
 - Execução agendada: com `Publicar em execução agendada` em `não`, deixe o texto e o link no resumo, sem publicar. Em `sim`, publique e diga no resumo.
 - O contexto veio de conversa privada: use só para calibrar o que você pergunta, sem citar.
-- Um check está pendente: não revise, diga qual e espere.
+- Um check está pendente: siga `Check em andamento`. O padrão é não revisar, dizer qual e esperar.
 - Existe uma trava antiga do repositório: avise e pergunte antes de apagar.
 
 ## Pegadinhas
