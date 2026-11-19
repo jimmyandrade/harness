@@ -20,8 +20,7 @@ Funcionalidade: Publicar a análise na página do perfil social
   Cenário: Perfil que já tem análise publicada
     Dado que a página do perfil já tem uma análise anterior
     Quando a habilidade publica a análise nova
-    Então a análise nova entra abaixo da anterior, com a data no título
-    E a análise anterior não é apagada
+    Então ela segue Quando já existe análise publicada
 
   Cenário: A lista de perfis sociais não está no workspace conectado
     Dado que a lista de perfis sociais não está no workspace conectado

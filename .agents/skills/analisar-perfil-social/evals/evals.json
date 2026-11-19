@@ -46,7 +46,7 @@
     {
       "id": "reanalise-de-perfil-ja-publicado",
       "prompt": "Analise novamente o Instagram da Feira Exemplo.",
-      "expected_output": "A página do perfil na lista de perfis sociais já tem uma análise. A habilidade acrescenta a análise nova abaixo da anterior, com a data no título, e não apaga a anterior. A resposta dá o link da página.",
+      "expected_output": "A página do perfil na lista de perfis sociais já tem uma análise. Com `Quando já existe análise publicada` em `mesclar`, a habilidade lê a análise anterior inteira e grava uma análise só, com a data nova no título, mantendo o post e a data de cada sinal e registrando as notas anteriores. Se as notas divergem, segue a leitura que cobriu mais e diz o que cada uma cobriu. Em `perguntar`, mostra as duas e espera a escolha. A resposta dá o link da página.",
       "files": []
     },
     {
