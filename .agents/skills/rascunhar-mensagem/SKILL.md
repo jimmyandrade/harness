@@ -3,7 +3,7 @@ name: rascunhar-mensagem
 description: Escreve, mostra e envia a mensagem de WhatsApp depois de a conversa ser lida, com o destino, o texto, a divisão e o comprovante conferidos. Usada quando a pessoa quer responder, mandar ou corrigir uma mensagem. NÃO serve para ler a conversa, redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.3.1"
   aliases:
     - entregar-rascunho-de-mensagem
     - rascunhar-mensagem-no-whatsapp
@@ -73,6 +73,8 @@ A resposta que confirma interesse diz de qual oferta fala, pela organização e 
 Antes de rascunhar uma mensagem que propõe, aceita ou combina data, hora, lugar, retirada, coleta, entrega, encontro ou prazo, confira a agenda, seguindo `procurar-agenda`, e a viagem ativa ou a próxima, seguindo `definir-viagem`: saída, chegada, a cidade de cada dia e os compromissos que batem.
 
 Se a proposta conflita, como uma retirada numa cidade de onde a pessoa já saiu naquele horário, diga o conflito antes do texto e ofereça o que cabe: outro dia ou horário, outra pessoa ou o correio. Sem acesso à agenda ou à viagem, pare e peça o dado.
+
+Antes de mostrar o rascunho, valide o texto inteiro contra o vocabulário, seguindo `redigir-com-tom-de-voz`: rode a classificação do texto com as tags de quem escreve e do canal, e leia as expressões com a consulta de termos, porque a classificação lê palavra por palavra. Palavra proibida ou muito desaconselhada, como a que marca gênero ou o plural de tratamento, sai do texto e entra a alternativa do vocabulário. Cada correção de um rascunho já mostrado passa pela mesma validação antes de voltar à pessoa.
 
 Abra com a frase de contexto e, se nenhuma mensagem nossa já saudou hoje, a saudação do período, lida no relógio. Fora do `Horário de trabalho`, peça desculpa pelo horário.
 
@@ -156,6 +158,14 @@ Se você disser que a resposta não cobre o dia ou a janela, e a pergunta não o
 3. Pergunte de novo só o que a pergunta anterior não cobria.
 
 
+### Rascunho sem validar no vocabulário
+
+Se você mostrar o rascunho sem classificá-lo, ele traz palavra que o vocabulário desaconselha, a pessoa corrige à mão e a mesma palavra volta no rascunho seguinte.
+
+1. Valide o texto inteiro antes de mostrar, como o Passo 2 manda.
+2. Troque cada palavra proibida ou muito desaconselhada pela alternativa do vocabulário.
+3. Valide de novo o texto corrigido, e mostre só a versão validada.
+
 ### Rascunho fora da vista
 
 Se você disser que o rascunho está pronto sem mostrar o texto, ou o mostrar só num bloco de código, a pessoa não confere nem corrige antes do envio, pergunta pela prévia, não consegue editar cada mensagem e precisa copiar o texto à mão.
@@ -227,6 +237,7 @@ Li a resposta como a da pergunta: o carro pode entrar na montagem, em qualquer j
 
 ## Pegadinhas
 
+- O rascunho parece certo porque soa natural. Soar natural não é estar no vocabulário: a classificação mostra a palavra que a pessoa já recusou, como a forma que marca gênero.
 - Um bloco de código parece prévia suficiente. Com a ferramenta de widget na sessão, a pessoa também espera o widget editável, com copiar e aprovar.
 - Uma resposta curta parece incompleta quando não repete o detalhe que a conversa já traz. Ela responde a pergunta como foi escrita: confira o texto da pergunta antes de achar que falta algo.
 - O rascunho de ontem parece valer. A conversa pode ter mudado: leia antes e rascunhe só o que falta.
