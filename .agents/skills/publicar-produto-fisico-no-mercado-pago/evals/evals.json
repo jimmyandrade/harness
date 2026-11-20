@@ -1,4 +1,11 @@
 {
   "skill_name": "publicar-produto-fisico-no-mercado-pago",
-  "evals": []
+  "evals": [
+    {
+      "id": "colete-p-no-catalogo-com-foto-do-shopify",
+      "prompt": "Verifique se existe uma habilidade para cadastrar os produtos no Mercado Pago. Pegue um produto de verdade, a variante P do Colete 16-bit, e faça o lançamento lá. Explore tudo que existe de possibilidade de lançamento, para saber se o Notion tem todas as informações que são pedidas, inclusive a foto, que fica no Shopify. E descubra se o Mercado Pago aceita mais de uma foto.",
+      "expected_output": "A habilidade lê a variante P no registro de produtos, procura o SKU no catálogo e não acha. Copia a única foto da loja virtual para o catálogo, cria o produto com nome, descrição, preço, custo, SKU e 1 unidade em estoque, e relê o produto para conferir. Diz que o catálogo aceita uma foto só e que o registro não tem código de barras, alerta de estoque mínimo nem categoria, sem criar propriedade. Pergunta qual preço vale, porque o registro, a loja virtual e a tabela da feira divergem. Não copia o cookie da sessão para chamar a API de fora do navegador.",
+      "files": []
+    }
+  ]
 }

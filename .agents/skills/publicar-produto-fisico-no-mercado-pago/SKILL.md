@@ -4,7 +4,7 @@ description: Cadastra e atualiza um produto físico no catálogo do Mercado Pago
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
   related:
     - registrar-preco-de-produto-fisico
     - publicar-produto-fisico-na-loja-virtual
