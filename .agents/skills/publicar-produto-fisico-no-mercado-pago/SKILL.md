@@ -4,7 +4,7 @@ description: Cadastra e atualiza um produto físico no catálogo do Mercado Pago
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.1"
+  version: "0.2.0"
   related:
     - registrar-preco-de-produto-fisico
     - publicar-produto-fisico-na-loja-virtual
@@ -61,17 +61,23 @@ O catálogo não tem API pública com credencial: o painel chama endpoints do pr
 
 Os endpoints, todos no domínio do painel e com a sessão: ler um produto com `GET /products/api/products/{id}`, criar com `POST /products/api/products`, atualizar com `PUT /products/api/products/{id}`, listar com `POST /products/list/api/list/v1` e subir a foto com `POST /products/api/file-upload`, em multipart com o campo `file`, que devolve o id da foto.
 
-O produto é um objeto com título, `family_name`, preço, custo, descrição, `picture_id`, SKU, quantidade, `unit_measure`, `type` simples e `segment` varejo. O corpo da criação segue o que a leitura devolve, e a atualização com o mesmo corpo foi validada. A criação por esse caminho ainda não foi validada: a primeira vez foi pelo formulário.
+O produto é um objeto com título, `family_name`, preço, custo, descrição, `picture_id`, SKU, quantidade, `unit_measure`, `type` simples e `segment` varejo. O corpo da criação segue o que a leitura devolve, e a criação e a atualização por esse caminho foram validadas.
+
+O catálogo normaliza o título: o nome "aGue’i" voltou como "Aguei", sem o apóstrofo e com a maiúscula no começo. Ele também junta os parágrafos da descrição sem espaço, tanto pelo formulário quanto pela API. Releia o título e a descrição e diga o que foi gravado.
 
 ### Passo 5
 
 Antes de criar, liste o catálogo e procure o SKU do produto. Achou: é atualização, mostre a diferença campo a campo e grave só o que a pessoa pediu. Não achou: crie. Nunca crie um segundo produto com o mesmo SKU.
 
-O preço do catálogo é o do registro de produtos. Quando o registro, a loja virtual e o que a pessoa disse divergem, pergunte qual vale antes de gravar. O catálogo tem um preço só: desconto à vista não entra aqui. Mudança de preço segue `registrar-preco-de-produto-fisico`.
+O preço do catálogo é o preço de etiqueta, o cheio a prazo, e nunca o preço à vista que a equipe dá na hora. Quando o registro, a loja virtual e o que a pessoa disse divergem, pergunte qual vale antes de gravar. Mudança de preço segue `registrar-preco-de-produto-fisico`.
+
+O catálogo também tem listas de preços. Cada lista guarda, por produto, um preço na lista, com atualização em massa por porcentagem, para mais ou para menos, e arredondamento para inteiros. A opção "Preços sincronizados" muda o preço da lista na mesma proporção quando o preço base muda: um preço com final fixo deixa de terminar assim depois de uma mudança de preço.
+
+Como a lista entra na cobrança não foi validado. Não crie lista sem pedido da pessoa, e diga que o preço à vista dela pode sair do final combinado quando o preço base mudar.
 
 ### Passo 6
 
-Depois de gravar, releia o produto e compare cada campo com o registro. Confira a foto pelo endereço que a leitura devolve e confira a descrição, porque o formulário juntou os parágrafos sem espaço. Mostre o que gravou, com o link da lista de produtos do painel.
+Depois de gravar, releia o produto e compare cada campo com o registro. Confira a foto pelo endereço que a leitura devolve e confira o título e a descrição, porque o catálogo os normaliza. Mostre o que gravou, com o link da lista de produtos do painel.
 
 O estoque do catálogo é um número próprio. Ele não acompanha o registro nem a loja virtual: diga que pode divergir e que o movimento segue `gerenciar-estoque`. Venda cobrada na maquininha segue `lancar-venda`.
 
@@ -125,13 +131,16 @@ Procurei o SKU no catálogo e não achei. Copiei a única foto da loja virtual, 
 - O SKU já existe no catálogo: atualize e mostre a diferença.
 - Sem navegador logado: peça à pessoa que entre no painel.
 - A pessoa pede variações, planilha ou XML: diga que não foram validados e peça o sim.
+- O produto ainda não está no catálogo quando o preço muda: diga e pergunte se o lança, com o preço de etiqueta.
 
 ## Pegadinhas
 
 - O catálogo parece guardar várias fotos. Ele guarda uma só, e o seletor de arquivo não aceita mais de um.
 - O campo de preço do formulário parece aceitar o valor escrito de fora. Ele só aceita o que é digitado na tela, e a chamada de API não tem esse limite.
+- A lista de preços parece o lugar do preço à vista. Com os preços sincronizados, ela segue o preço base na mesma proporção, e o final combinado se perde.
 - O painel parece ter API pública para o catálogo. A documentação pública não traz um endpoint de produtos, e o painel usa endpoints do próprio domínio.
-- A descrição digitada no formulário perde a quebra de parágrafo.
+- A descrição perde a quebra de parágrafo, no formulário e na API.
+- O título volta normalizado: o apóstrofo some e a maiúscula muda.
 - A categoria não vem pronta: a pessoa cria as categorias no painel.
 
 ## Scripts disponíveis

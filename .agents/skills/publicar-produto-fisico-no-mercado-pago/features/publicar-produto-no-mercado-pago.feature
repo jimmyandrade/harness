@@ -33,3 +33,17 @@ Funcionalidade: Publicar um produto do registro no catálogo do Mercado Pago
       Quando a habilidade vai cadastrar o produto
       Então atualiza e mostra a diferença campo a campo
       Mas não cria um segundo produto com o mesmo SKU
+
+  Regra: o preço do catálogo é o preço de etiqueta
+
+    Exemplo: Preço à vista fora do catálogo
+      Dado que a equipe dá um preço à vista diferente do da etiqueta
+      Quando a habilidade grava o preço no catálogo
+      Então grava o preço de etiqueta, o cheio a prazo
+      Mas não grava o preço à vista
+
+    Exemplo: Lista de preços sem pedido
+      Dado que o catálogo tem listas de preços
+      Quando a habilidade cadastra o produto
+      Então não cria lista
+      E diz que a lista sincronizada muda o preço com o preço base
