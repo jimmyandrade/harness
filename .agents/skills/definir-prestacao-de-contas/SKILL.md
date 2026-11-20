@@ -3,7 +3,7 @@ name: definir-prestacao-de-contas
 description: Faz a prestação de contas de um repasse recebido, cruzando o extrato da conta com os gastos lançados e declarando o que ficou fora do repasse. Usada quando quem repassou o dinheiro pede a prestação, quando o prazo dela chega ou quando se concilia um extrato, mesmo sem dizer prestação. NÃO serve para lançar o gasto, fechar o caixa de um ponto de contato nem redigir a mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
   related:
     - definir-conta-bancaria
     - definir-grafia
@@ -74,6 +74,10 @@ Não afirme que um gasto não passou pela conta sem ter cruzado o extrato inteir
 
 Monte a prestação com o valor recebido, o total gasto com comprovante, a diferença, cada linha e seu destino, e a declaração do que ficou fora do repasse. Diga na resposta o que já está conciliado e o que está pendente, antes do texto.
 
+Cada linha da prestação leva data e hora, não só a data, e a tabela vai do mais antigo ao mais recente, por data e hora. O repasse recebido e a emissão do documento também levam a hora.
+
+O extrato costuma trazer só a data, e a ordem das linhas do mesmo dia nem sempre é a do relógio. Tire a hora do comprovante de cada pagamento, como a via da maquininha, a NFC-e ou o comprovante do Pix, e ordene por ela. A hora que nenhum comprovante mostra é pergunta à pessoa: não a deduza pela ordem do extrato.
+
 O texto para quem repassou passa por `redigir-com-tom-de-voz`. O envio segue `enviar-email` ou o canal em que a conversa aconteceu, só com a confirmação da pessoa, com o extrato e os comprovantes que o repasse pediu. Quem assina é quem as instruções do projeto definem.
 
 ### Passo 6
@@ -106,13 +110,21 @@ Se você prestar contas só do que está no extrato, quem repassou não sabe o q
 2. Diga a fonte de pagamento de cada um.
 3. Confirme o cruzamento do extrato inteiro antes de afirmar que não passaram pela conta.
 
+### Linha só com data ou fora da ordem do relógio
+
+Se você copiar a data e a ordem do extrato, a tabela perde a hora e fica numa ordem que o relógio dos comprovantes contradiz.
+
+1. Leia a hora no comprovante de cada pagamento e no aviso do repasse.
+2. Ordene a tabela do mais antigo ao mais recente, por data e hora.
+3. Peça a hora que nenhum comprovante mostra, em vez de deduzir pela ordem do extrato.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### precisamos fazer a prestação de contas do repasse do festival; o extrato já está no e-mail?
 
-Achei o extrato do mês no e-mail, em CSV, PDF e OFX, e li o CSV. Cruzei cada linha com os gastos lançados: os três postos e o Uber batem, a devolução em nome civil de quem opera é dela, e as linhas sem lançamento ficaram como pendência. Listei pedágios, entrega, hospedagem e refeições como pagos por fora do repasse. Não enviei nada.
+Achei o extrato do mês no e-mail, em CSV, PDF e OFX, e li o CSV. Cruzei cada linha com os gastos lançados: os três postos e o Uber batem, a devolução em nome civil de quem opera é dela, e as linhas sem lançamento ficaram como pendência. Listei pedágios, entrega, hospedagem e refeições como pagos por fora do repasse. Pus a hora de cada comprovante em cada linha e ordenei a tabela do mais antigo ao mais recente. A hora do repasse recebido não aparece em nenhum comprovante: pedi à pessoa. Não enviei nada.
 
 ## Casos-limite
 
@@ -121,6 +133,7 @@ Achei o extrato do mês no e-mail, em CSV, PDF e OFX, e li o CSV. Cruzei cada li
 - O gasto do evento não está lançado: siga `lancar-despesa-da-empresa` e volte.
 - O pedido é o acerto de caixa de um ponto de contato: `fazer-fechamento`.
 - O repasse pede um formato próprio de documento: siga o que a negociação combinou e diga a diferença.
+- Um pagamento ou o repasse só aparece no extrato, sem comprovante com hora: peça a hora à pessoa e não feche a tabela sem ela.
 
 ## Pegadinhas
 
@@ -128,6 +141,7 @@ Achei o extrato do mês no e-mail, em CSV, PDF e OFX, e li o CSV. Cruzei cada li
 - O status de conciliação de um gasto mede o comprovante, não o cruzamento com o banco.
 - Um nome diferente no extrato parece outra empresa. Pode ser o titular da maquininha do mesmo posto.
 - O prazo da prestação costuma estar na negociação, não no extrato.
+- A ordem das linhas do extrato parece a do relógio. Dentro do mesmo dia ela pode não ser, e o saldo corrido também pode contradizer a hora do comprovante.
 
 ## Scripts disponíveis
 
