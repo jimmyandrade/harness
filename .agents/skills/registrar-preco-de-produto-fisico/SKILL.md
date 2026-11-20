@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.4.0"
   aliases:
     - definir-preco-de-produto
     - definir-preco-da-peca
@@ -78,13 +78,21 @@ O que for anterior às linhas dessa fonte pode estar no histórico de versões d
 
 Leia as versões da página do produto e, se o preço varia por variação, as da variação pedida. `Banco de variações` vazio: use `procurar-banco-de-dados`. Não leia as da unidade.
 
-O Notion não garante guardar as versões, então diga até onde chegam. Pergunte só o que nada respondeu e diga qual fonte consultou.
+O Notion não garante guardar as versões, e o plano limita o prazo, como os cerca de 30 dias vistos num caso. Diga a partir de que data a página tem versões. Pergunte só o que nada respondeu e diga qual fonte consultou.
+
+A loja virtual pode ter uma ferramenta de sugestão de preço por IA. O histórico de publicações dela mostra, por produto, o preço antigo, o preço novo, a data e hora e o tipo, como redução. Ele só se lê no painel da loja, porque não há API, e alcança mudanças que as versões da página já não guardam. Leia-o quando a fonte do histórico não responde e a loja usa a ferramenta.
 
 ### Passo 3
 
 Ao registrar uma mudança de preço de catálogo, acrescente uma linha na fonte do histórico. No banco do Notion, é uma linha em `Banco do histórico de preços`. No Shopify, é o `Registro de mudança de preço no Shopify` do produto. Com `Banco do histórico de preços` vazio, use `procurar-banco-de-dados`. Com o registro do Shopify vazio, pergunte onde acrescentar.
 
 Nunca edite nem apague uma linha antiga: a correção vai numa linha nova.
+
+Produto sem nenhuma linha no histórico: antes de registrar a mudança, acrescente a linha de carga inicial. Ela leva o preço de hoje como preço novo, o preço anterior vazio, motivo e origem de carga inicial, a vigência da data mais antiga que uma fonte prova e a fonte na justificativa.
+
+Sem fonte para o que veio antes, não invente preço nem data: a carga inicial leva o preço atual e a data da fonte, e a resposta diz que o histórico anterior não existe. Uma mudança mais antiga que uma fonte mostrar depois, como a publicação da ferramenta de sugestão, entra como linha própria, na ordem da vigência.
+
+A remarcação publicada pela ferramenta de sugestão entra com a data e hora da publicação. Quem decidiu é quem aceitou a sugestão, e a ferramenta não é quem decidiu.
 
 Campos da linha, ligados às propriedades pelo mapeamento de dados do projeto:
 
@@ -95,7 +103,9 @@ Campos da linha, ligados às propriedades pelo mapeamento de dados do projeto:
 - o custo na data, copiado no dia e nunca recalculado;
 - o preço de comparação, que não passa do menor preço praticado nos 30 dias anteriores à redução.
 
-Falta motivo ou quem decidiu: pergunte antes de acrescentar. Preço de comparação acima do limite: mostre o menor preço dos 30 dias e não acrescente.
+Falta motivo ou quem decidiu: pergunte antes de acrescentar. Preço de comparação acima do menor preço provado dos 30 dias: mostre esse preço e não acrescente.
+
+Sem venda nem linha que prove o preço de comparação nesse prazo, grave o que a loja mostra e escreva na justificativa que ele não pôde ser provado.
 
 ### Passo 4
 
@@ -168,7 +178,7 @@ Se você mudar o preço de todos os produtos com o nome citado, os que não esta
 Se você perguntar o preço anterior sem ler a fonte do histórico, a pessoa repete o que o registro já guarda.
 
 1. Leia a fonte do histórico de preços.
-2. Para o que vem antes dela, siga `Leitura do histórico de versões da página`.
+2. Para o que vem antes dela, siga `Leitura do histórico de versões da página` e leia o histórico de publicações da ferramenta de sugestão de preço da loja, quando ela existe.
 3. Responda com o que achou e diga qual fonte consultou.
 4. Pergunte só o que nenhuma responde.
 
@@ -178,6 +188,14 @@ Se você editar ou apagar uma linha do histórico, o registro deixa de provar o 
 
 1. Acrescente uma linha nova com a correção.
 2. Deixe a linha antiga como está.
+
+### Histórico começado pela mudança
+
+Se você registrar a mudança de um produto sem nenhuma linha, o histórico começa com um preço anterior que nada prova.
+
+1. Acrescente antes a linha de carga inicial, com o preço de hoje e a fonte.
+2. Leia as fontes do Passo 2 e diga até onde cada uma chega.
+3. Não invente o preço nem a data do que veio antes.
 
 ### Preço sem justificativa
 
@@ -227,6 +245,10 @@ Sugeri R$ 690 e não R$ 679,90. A peça é conceitual e precisa sustentar autori
 
 Sugeri R$ 399,90 com a âncora "De R$ 450 por R$ 399,90". Registrei que é preço de saldo, para o quebrado não parecer o preço normal da peça.
 
+### registra o colete que o cadastro mostra a 450 e a loja a 338
+
+O produto não tinha linha no histórico. Li as versões da página, que só chegavam a um mês atrás e não mostravam mudança de preço, e o histórico de publicações da ferramenta de sugestão da loja, que mostrava a redução de 450 para 338 numa data e hora. Acrescentei a carga inicial com 450 e depois a remarcação com a data e hora da publicação, com quem aceitou a sugestão em quem decidiu. Disse que o preço de comparação de 450 não pôde ser provado por venda.
+
 ### baixa o preço da caneca de 60 para 50
 
 Perguntei o motivo e quem decidiu. Acrescentei uma linha com o canal, os preços, a vigência e o custo na data. Não editei a linha antiga.
@@ -234,6 +256,8 @@ Perguntei o motivo e quem decidiu. Acrescentei uma linha com o canal, os preços
 ## Casos-limite
 
 - Nenhuma fonte chega até a mudança: diga qual consultou, até onde cada uma chega, e pergunte só o que ficou antes.
+- O produto não tem linha no histórico: acrescente a carga inicial antes da mudança.
+- A mudança veio da ferramenta de sugestão de preço da loja: use a data e hora da publicação e grave como quem decidiu quem aceitou a sugestão.
 - A lista do grupo fica vazia: diga isso e não mude nenhum preço.
 - A pessoa diz o preço de um produto só: confirme o produto e o preço antes de mudar.
 - O preço fica a poucos reais de uma barreira, como R$ 300: confira se a peça precisa sustentar desejo antes de usar o quebrado.
@@ -250,6 +274,8 @@ Perguntei o motivo e quem decidiu. Acrescentei uma linha com o canal, os preços
 - O preço terminado em `,90` parece o padrão do varejo. Aqui o padrão é o redondo, e o quebrado precisa de uma função dita.
 - O nome do produto parece o grupo inteiro. Quem define o grupo é o estoque do local.
 - O preço dito no local parece valer para todos os produtos daquele tipo. Vale só para os que estavam lá e ainda tinham estoque.
+- A sugestão de preço por IA da loja parece não deixar rastro. O histórico de publicações do app guarda produto, preços, data, hora e tipo, e só se vê no painel.
+- O histórico de versões da página parece guardar tudo. O plano do Notion limita o prazo, e o preço mais antigo pode ficar fora dele.
 - A página do produto parece só ter o preço de hoje. As versões do produto e da variação guardam preços antigos que o banco do histórico ainda não tem.
 - O custo na data parece recalculável. Ele é o custo copiado no dia da mudança.
 - O Notion lê o trecho entre dois cifrões sem barra como fórmula. Num texto com valor em reais, escreva `R\$ 10,00` e releia o campo depois de gravar. A propriedade numérica não precisa da barra.
