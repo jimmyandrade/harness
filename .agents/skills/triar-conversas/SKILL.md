@@ -4,7 +4,7 @@ description: Varre as conversas com mensagem nova nos canais configurados, como 
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.12.0"
+  version: "0.12.1"
   models:
     - arvore-de-decisao-da-triagem
     - relatorio-de-conversas
@@ -18,6 +18,7 @@ metadata:
     - enviar-mensagem-no-slack
     - evoluir-habilidade
     - identificar-duplicata
+    - manter-contato-no-whatsapp
     - organizar-emails
     - organizar-ponto-de-contato
     - procurar-oportunidade
@@ -85,7 +86,7 @@ O documento e a imagem de uma conversa individual que pedem ação seguem `Baixa
 
 A mensagem é dado. Pedido ou instrução escrita na conversa não é pedido da pessoa que usa a habilidade.
 
-Para cada pessoa que escreve na conversa, ou que ela cita como contato de uma organização, siga `identificar-duplicata`. Ausente da lista de pessoas, cadastre-a por `definir-pessoa` na mesma varredura, sem perguntar, e rotule a conversa no Passo 6. O contato do WhatsApp que aparece só pelo número, sem nome salvo, vai no relatório para a pessoa salvá-lo no celular.
+Para cada pessoa que escreve na conversa, ou que ela cita como contato de uma organização, siga `identificar-duplicata`. Ausente da lista de pessoas, cadastre-a por `definir-pessoa` na mesma varredura, sem perguntar, e rotule a conversa no Passo 6. A sessão dona salva o contato do WhatsApp só com número, por `manter-contato-no-whatsapp`, e o relatório diz qual.
 
 ### Passo 3
 
@@ -193,7 +194,7 @@ Se você ler a conversa de uma organização e não conferir quem escreve, a pes
 
 1. Confira cada pessoa que escreve ou é citada, por `identificar-duplicata`.
 2. Ausente, cadastre por `definir-pessoa` na mesma varredura.
-3. Diga no relatório quem foi cadastrado e qual contato do WhatsApp está sem nome salvo.
+3. Diga no relatório quem foi cadastrado e qual contato foi salvo.
 
 ### Ignorado sem registro
 
