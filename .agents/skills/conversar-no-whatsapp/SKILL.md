@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, e lê o pedido, quem pediu, a data, o que o contato afirmou e o que falta. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp ou conferir o que alguém pediu. Não serve para escrever ou enviar a mensagem, redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.42.1"
+  version: "0.42.2"
   aliases:
     - redigir-mensagem-de-whatsapp
   related:
@@ -168,6 +168,7 @@ Disse que a organização confirmou a feira para sexta, sábado e domingo, com a
 ## Pegadinhas
 
 - Uma mensagem num grupo parece ser da pessoa que costuma falar pela organização. O remetente é o que o canal mostra naquela mensagem: confira o nome ou o número antes de atribuí-la.
+- O texto que a leitura devolve parece dizer quem falou. Ele só traz as frases. Antes de atribuir uma fala ou um dado, como onde alguém trabalhou, confira o lado da bolha na captura: a verde, à direita, é nossa, e a cinza, à esquerda, é do contato.
 - Uma imagem que o canal não lê parece um dado que não existe. O mapa e os valores podem estar nela, e quem fala pela organização pode prometer o que já mandou: leia a imagem antes de dizer que falta.
 - Uma resposta sem data nem valor parece não confirmar nada. O que ela afirma está confirmado, e só o que ela omite é pendência.
 
