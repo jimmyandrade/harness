@@ -83,6 +83,18 @@ Funcionalidade: Preço de produto
       Então ela pergunta o motivo antes de acrescentar
       E faz o mesmo com quem decidiu
 
+    Exemplo: Produto sem linha no histórico
+      Dado que o produto não tem nenhuma linha no histórico
+      Quando a habilidade registra uma mudança de preço
+      Então acrescenta antes a linha de carga inicial, com o preço atual e a fonte
+      Mas não inventa o preço nem a data do que veio antes
+
+    Exemplo: Remarcação da ferramenta de sugestão de preço
+      Dado que o histórico de publicações da ferramenta de sugestão mostra uma redução com data e hora
+      Quando a habilidade registra essa mudança
+      Então usa a data e hora da publicação e grava como quem decidiu quem aceitou a sugestão
+      E diz quando o preço de comparação não pôde ser provado por venda
+
     Exemplo: Preço de comparação acima do menor preço recente
       Dado que o novo preço é uma redução com preço de comparação
       Quando o preço de comparação passa do menor preço praticado nos 30 dias anteriores
