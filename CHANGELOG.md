@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.99.2](https://github.com/jimmyandrade/harness/compare/v1.99.1...v1.99.2) (2026-11-20)
+
+
+### Bug Fixes
+
+* attribute messages by bubble side, download the PDF through the viewer and use no unconfirmed name ([#1346](https://github.com/jimmyandrade/harness/issues/1346)) ([970d924](https://github.com/jimmyandrade/harness/commit/970d9240f39f9e0513d55a7bc65c68fd9bef5dcd))
+* complete negotiations created by a meeting note and follow a purchase change ([#1345](https://github.com/jimmyandrade/harness/issues/1345)) ([cbe9f4d](https://github.com/jimmyandrade/harness/commit/cbe9f4d7fe7aaa5b26082dc258897a8991fdaf39))
+* **levantar-gravacoes-de-reunioes:** cite each meeting with its time and subject, not only the date ([#1349](https://github.com/jimmyandrade/harness/issues/1349)) ([bfe2488](https://github.com/jimmyandrade/harness/commit/bfe24884bd0bfb75bff92dca8740aae99034682f))
+* save contacts shown only by number during reading and triage ([#1337](https://github.com/jimmyandrade/harness/issues/1337)) ([3b585ff](https://github.com/jimmyandrade/harness/commit/3b585ff46d394a8bedd750b890601671706c73c4))
+
 ## [1.99.1](https://github.com/jimmyandrade/harness/compare/v1.99.0...v1.99.1) (2026-11-20)
 
 
