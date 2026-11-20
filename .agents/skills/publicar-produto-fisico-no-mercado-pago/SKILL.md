@@ -4,7 +4,7 @@ description: Cadastra e atualiza um produto físico no catálogo do Mercado Pago
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   related:
     - registrar-preco-de-produto-fisico
     - publicar-produto-fisico-na-loja-virtual
@@ -42,9 +42,11 @@ O catálogo guarda cópia da foto. Foto trocada na fonte depois não chega ao ca
 
 ### Passo 3
 
-O formato padrão é um produto único por variante, com o tamanho no fim do nome, como o produto "Colete X P". Cada variante do registro vira um produto, com o SKU e o estoque dela.
+O formato é sempre o cadastro com variações, mesmo para um produto de uma variante só, para que uma variação nova entre depois sem refazer o produto. O produto único nunca se usa: ele não vira produto com variações, e o catálogo recusa um SKU repetido, então refazer pede excluir o produto único antes, com o sim da pessoa.
 
-O catálogo também tem o cadastro com variações, com até 3 atributos entre tamanho, peso, cor, sabor, voltagem, material e personalizado, e preço e estoque por variação. Só use quando a pessoa pedir: ele ainda não foi validado com um produto real. Cadastro por planilha e por XML também existem e não foram exploradas.
+O nome do produto é o do registro, sem o tamanho. O tamanho entra como o atributo da variação, e o catálogo compõe o título de cada variante com o nome e o valor, como "Colete Asa Curta 16-bit P". Cada variante do registro é uma variação, com o SKU, o preço, o custo e o estoque dela. O cadastro aceita até 3 atributos entre tamanho, peso, cor, sabor, voltagem, material e personalizado.
+
+Cadastro por planilha e por XML também existem e não foram exploradas.
 
 ### Passo 4
 
@@ -59,15 +61,17 @@ flowchart LR
 
 O catálogo não tem API pública com credencial: o painel chama endpoints do próprio domínio, autorizados pela sessão da pessoa. Chame-os de dentro da página do painel, sem clicar nem tirar captura de tela. Não leia nem copie o cookie da sessão para chamar de fora do navegador.
 
-Os endpoints, todos no domínio do painel e com a sessão: ler um produto com `GET /products/api/products/{id}`, criar com `POST /products/api/products`, atualizar com `PUT /products/api/products/{id}`, listar com `POST /products/list/api/list/v1` e subir a foto com `POST /products/api/file-upload`, em multipart com o campo `file`, que devolve o id da foto.
+Os endpoints, todos no domínio do painel e com a sessão: ler uma variante com `GET /products/api/products/{id}`, atualizar com `PUT /products/api/products/{id}`, listar com `POST /products/list/api/list/v1`, excluir com `DELETE /products/list/api/single-actions/products/{id}/delete` e subir a foto com `POST /products/api/file-upload`, em multipart com o campo `file`, que devolve o id da foto. A exclusão responde 202 e conclui em alguns segundos.
 
-O produto é um objeto com título, `family_name`, preço, custo, descrição, `picture_id`, SKU, quantidade, `unit_measure`, `type` simples e `segment` varejo. O corpo da criação segue o que a leitura devolve, e a criação e a atualização por esse caminho foram validadas.
+A lista e a leitura devolvem cada variante como um item: `type` variante, `attributes` com o tamanho, `family_id`, `family_name` com o nome do produto, `picture_id`, preço, custo, descrição, SKU, quantidade, `unit_measure` e `segment` varejo. A atualização com o mesmo corpo foi validada.
 
-O catálogo normaliza o título: o nome "aGue’i" voltou como "Aguei", sem o apóstrofo e com a maiúscula no começo. Ele também junta os parágrafos da descrição sem espaço, tanto pelo formulário quanto pela API. Releia o título e a descrição e diga o que foi gravado.
+A criação do produto com variações é pelo formulário. Uma chamada de criação com o tipo variante e o tamanho respondeu 400, e o endpoint do formulário de variações não foi achado. A criação por `POST /products/api/products` serve ao produto único, que não se usa.
+
+O catálogo normaliza o título: o nome "aGue’i" voltou como "Aguei", sem o apóstrofo e com a maiúscula no começo. O cadastro com variações manteve as quebras de parágrafo da descrição. Releia o título e a descrição e diga o que foi gravado.
 
 ### Passo 5
 
-Antes de criar, liste o catálogo e procure o SKU do produto. Achou: é atualização, mostre a diferença campo a campo e grave só o que a pessoa pediu. Não achou: crie. Nunca crie um segundo produto com o mesmo SKU.
+Antes de criar, liste o catálogo e procure o SKU do produto. Achou: é atualização, mostre a diferença campo a campo e grave só o que a pessoa pediu. Não achou: crie, com variações. O catálogo recusa um SKU repetido, e nunca se cria um segundo produto com o mesmo SKU.
 
 O preço do catálogo é o preço de etiqueta, o cheio a prazo, e nunca o preço à vista que a equipe dá na hora. Quando o registro, a loja virtual e o que a pessoa disse divergem, pergunte qual vale antes de gravar. Mudança de preço segue `registrar-preco-de-produto-fisico`.
 
@@ -93,6 +97,13 @@ Se você baixar a foto, abrir o seletor de arquivos e subir de novo, a pessoa te
 
 1. Copie a foto direto da fonte para o catálogo, pelo endpoint de envio.
 2. Diga qual foto usou quando a fonte tem várias.
+
+### Produto único criado
+
+Se você criar o produto único, ele não vira produto com variações, e o SKU dele bloqueia o produto certo.
+
+1. Crie sempre com variações, mesmo com uma variação só.
+2. Refazer pede excluir o produto único, e a exclusão é permanente: peça o sim da pessoa e diga o que sai.
 
 ### Produto duplicado
 
@@ -121,7 +132,7 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### lance o Colete Asa Curta 16-bit P no Mercado Pago, com a foto do Shopify
 
-Procurei o SKU no catálogo e não achei. Copiei a única foto da loja virtual, criei o produto "Colete Asa Curta 16-bit P" com a descrição, o preço, o custo, o SKU e 1 unidade em estoque, e reli o produto. Disse que o catálogo aceita uma foto só e que o registro não tem GTIN nem alerta de estoque mínimo.
+Procurei o SKU no catálogo e não achei. Copiei a única foto da loja virtual e criei, com variações, o produto "Colete Asa Curta 16-bit" com a variação de tamanho P, com a descrição, o preço, o custo, o SKU e 1 unidade em estoque, e reli a variante. Disse que o catálogo aceita uma foto só e que o registro não tem GTIN nem alerta de estoque mínimo.
 
 ## Casos-limite
 
@@ -130,7 +141,8 @@ Procurei o SKU no catálogo e não achei. Copiei a única foto da loja virtual, 
 - A descrição passa de 2500 caracteres: pergunte o que cortar.
 - O SKU já existe no catálogo: atualize e mostre a diferença.
 - Sem navegador logado: peça à pessoa que entre no painel.
-- A pessoa pede variações, planilha ou XML: diga que não foram validados e peça o sim.
+- A pessoa pede planilha ou XML: diga que não foram validados e peça o sim.
+- Um produto único já existe com o SKU: exclua-o antes, com o sim da pessoa, porque o catálogo recusa o SKU repetido.
 - O produto ainda não está no catálogo quando o preço muda: diga e pergunte se o lança, com o preço de etiqueta.
 
 ## Pegadinhas
@@ -139,7 +151,7 @@ Procurei o SKU no catálogo e não achei. Copiei a única foto da loja virtual, 
 - O campo de preço do formulário parece aceitar o valor escrito de fora. Ele só aceita o que é digitado na tela, e a chamada de API não tem esse limite.
 - A lista de preços parece o lugar do preço à vista. Com os preços sincronizados, ela segue o preço base na mesma proporção, e o final combinado se perde.
 - O painel parece ter API pública para o catálogo. A documentação pública não traz um endpoint de produtos, e o painel usa endpoints do próprio domínio.
-- A descrição perde a quebra de parágrafo, no formulário e na API.
+- A descrição do produto único perdeu a quebra de parágrafo, e a do cadastro com variações a manteve.
 - O título volta normalizado: o apóstrofo some e a maiúscula muda.
 - A categoria não vem pronta: a pessoa cria as categorias no painel.
 
