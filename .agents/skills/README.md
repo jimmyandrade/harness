@@ -616,6 +616,7 @@ flowchart LR
   definir_prestacao_de_contas --> lancar_despesa_da_empresa
   definir_prestacao_de_contas --> procurar_email
   definir_prestacao_de_contas --> redigir_com_tom_de_voz
+  definir_prestacao_de_contas --> usar_whatsapp_web
   definir_recurso_de_aprendizado --> definir_agenda
   definir_recurso_de_aprendizado --> procurar_agenda
   definir_reel_do_instagram --> criar_ideia_de_conteudo
