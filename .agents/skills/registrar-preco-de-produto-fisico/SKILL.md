@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.5.0"
   aliases:
     - definir-preco-de-produto
     - definir-preco-da-peca
@@ -76,7 +76,7 @@ O que for anterior às linhas dessa fonte pode estar no histórico de versões d
 - `perguntar`: quando a fonte não responde, pergunte se lê as versões e espere.
 - `nunca`: não leia as versões.
 
-Leia as versões da página do produto e, se o preço varia por variação, as da variação pedida. `Banco de variações` vazio: use `procurar-banco-de-dados`. Não leia as da unidade.
+Leia as versões da página do produto e, quando as variantes têm preços diferentes por outro motivo que o tamanho, as da variante pedida. `Banco de variações` vazio: use `procurar-banco-de-dados`. Não leia as da unidade.
 
 O Notion não garante guardar as versões, e o plano limita o prazo, como os cerca de 30 dias vistos num caso. Diga a partir de que data a página tem versões. Pergunte só o que nada respondeu e diga qual fonte consultou.
 
@@ -96,7 +96,7 @@ A remarcação publicada pela ferramenta de sugestão entra com a data e hora da
 
 Campos da linha, ligados às propriedades pelo mapeamento de dados do projeto:
 
-- o produto, a variação quando o preço varia por ela, e o canal, varejo ou atacado;
+- o produto, as variantes que a mudança cobre, e o canal, varejo ou atacado. Variantes que só diferem pelo tamanho têm sempre o mesmo preço e entram na mesma linha;
 - o motivo, obrigatório, e quem decidiu, obrigatório;
 - o preço anterior e o novo;
 - a vigência, a partir de que data;
@@ -189,6 +189,14 @@ Se você editar ou apagar uma linha do histórico, o registro deixa de provar o 
 1. Acrescente uma linha nova com a correção.
 2. Deixe a linha antiga como está.
 
+### Tamanhos com preços diferentes
+
+Se você achar preços diferentes entre variantes que só diferem pelo tamanho, trata como mudança de preço o que é erro de cadastro, e o histórico guarda o erro como se fosse decisão.
+
+1. Mostre a diferença e não a grave como mudança.
+2. Pergunte qual preço vale.
+3. Corrija com uma linha de correção de cadastro, que cobre todas as variantes de tamanho.
+
 ### Histórico começado pela mudança
 
 Se você registrar a mudança de um produto sem nenhuma linha, o histórico começa com um preço anterior que nada prova.
@@ -257,6 +265,8 @@ Perguntei o motivo e quem decidiu. Acrescentei uma linha com o canal, os preços
 
 - Nenhuma fonte chega até a mudança: diga qual consultou, até onde cada uma chega, e pergunte só o que ficou antes.
 - O produto não tem linha no histórico: acrescente a carga inicial antes da mudança.
+- Variantes que diferem só pelo tamanho com preços diferentes: é divergência de cadastro. Mostre e pergunte qual vale.
+- Variantes que diferem por outro motivo, como a cor, com preços diferentes: uma linha por preço, cada uma com as variantes que ele cobre.
 - A mudança veio da ferramenta de sugestão de preço da loja: use a data e hora da publicação e grave como quem decidiu quem aceitou a sugestão.
 - A lista do grupo fica vazia: diga isso e não mude nenhum preço.
 - A pessoa diz o preço de um produto só: confirme o produto e o preço antes de mudar.
