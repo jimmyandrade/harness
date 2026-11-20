@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.16.0"
+  version: "0.17.0"
   aliases:
     - definir-venda
   related:
@@ -32,7 +32,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Modo de aprendizado": "perguntar"
 # Nomes de banco: o projeto define. Os nomes das propriedades vêm do mapeamento de dados do projeto.
 "Banco de vendas": ""
-# Opcional. Vazio: a venda não vincula unidade nem mexe no saldo, e o produto vendido entra pelo mapeamento.
+# Opcional. Vazio: a venda não vincula unidade, não marca a situação dela e não mexe no saldo, e o produto vendido entra pelo mapeamento.
 "Banco de unidades": ""
 # `Início da nota no envio`: data, no formato AAAA-MM-DD, a partir da qual a venda com envio exige nota fiscal para transportar a mercadoria.
 "Início da nota no envio": ""
@@ -82,7 +82,9 @@ Com `Banco de unidades` preenchido, a unidade traz o tamanho e as outras variant
 
 Antes de vincular, busque com `identificar-duplicata`. Sem a página, ou sem a variante na unidade, pare e pergunte. Não crie a pessoa, o produto, a unidade nem a variante na venda. Não escolha entre parecidos.
 
-O saldo segue `gerenciar-estoque`. Não altere o saldo aqui.
+Com `Banco de unidades` preenchido, marque cada unidade vinculada como vendida, na propriedade de situação da unidade, e releia a unidade para conferir que ela aponta para a venda. Unidade que já consta como vendida em outra venda: pare e pergunte.
+
+A situação da unidade não é o saldo. O saldo segue `gerenciar-estoque`. Não altere o saldo aqui.
 
 ### Passo 4
 
@@ -196,7 +198,7 @@ Se você reescrever a venda ao completar um campo, o dado válido que já existi
 
 Se você preencher as peças vendidas ou alterar o saldo, o histórico e o rastro saem da unidade.
 
-1. Vincule a pessoa cliente, o conjunto e as unidades com as variantes que já existem.
+1. Vincule a pessoa cliente, o conjunto e as unidades com as variantes que já existem, e marque cada unidade como vendida.
 2. Deixe as peças vendidas e os tipos de peças calculados.
 3. Deixe o saldo em `gerenciar-estoque`.
 
@@ -254,7 +256,7 @@ Preenchi o que faltava. O dado válido permaneceu. A correção ficou no coment�
 
 ### Relacione a cliente, o conjunto, as peças e as unidades desta venda.
 
-Vinculei a pessoa cliente, o conjunto e as unidades que já existiam, com as variantes. As peças continuaram calculadas. O saldo não mudou.
+Vinculei a pessoa cliente, o conjunto e as unidades que já existiam, com as variantes. Marquei cada unidade como vendida e li a unidade de volta. As peças continuaram calculadas. O saldo não mudou.
 
 ### Cadastre esta venda de duas peças.
 
@@ -295,7 +297,8 @@ O comentário da página disse o que voltou, por que voltou, a fonte e quando. A
 - Lançamento retroativo sem a venda original na lista: pare e pergunte. Não crie uma segunda venda a partir do pedido tardio.
 - Reversão ou decisão de conciliação: o comentário da página vem antes da alteração e traz o que mudou, o porquê, a fonte e quando.
 - Entrada no extrato sem venda ou liberação a conciliar: `conciliar-recebimento`.
-- `Banco de unidades` vazio: não vincule unidade nem mexa no saldo.
+- Unidade que já consta como vendida em outra venda: pare e pergunte. Não a marque de novo.
+- `Banco de unidades` vazio: não vincule unidade, não marque a situação dela e não mexa no saldo.
 - Gasto: `lancar-despesa-da-empresa`. Frase mista de caixa: `definir-lancamento-financeiro`. Insumo: `gerenciar-estoque`. Venda de bem durável: `registrar-ciclo-do-ativo`.
 
 ## Pegadinhas
@@ -303,6 +306,7 @@ O comentário da página disse o que voltou, por que voltou, a fonte e quando. A
 - O número do pedido parece confirmação e transação. Pedido, ID da confirmação e ID da transação são três dados.
 - A data em que o pedido entrou na loja parece a data da venda. No lançamento retroativo, a data real permanece.
 - O pedido tardio na loja parece uma venda nova. Ele vincula a venda original. Data, pagamento, valor e contexto reais permanecem.
+- Vincular a unidade parece terminar a venda. A unidade continua em estoque até alguém marcar a situação dela como vendida.
 - Relacionar o produto parece preencher as peças vendidas. A peça sai da unidade, e a variante está nessa unidade. O saldo fica em `gerenciar-estoque`.
 - Valor pago, valor recebido e preço nominal parecem o mesmo número. Preço nominal é o valor inferido. Valor pago pelos produtos exclui frete e taxa. Valor recebido é o líquido liberado, lido por `conciliar-recebimento`.
 - O WhatsApp usado para achar a cliente parece o canal da venda. Ele só identifica a pessoa. O ponto de contato vem da pessoa, perguntado antes de criar.
