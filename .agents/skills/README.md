@@ -158,6 +158,7 @@ flowchart LR
     procurar_pedido_de_revisao["procurar-pedido-de-revisao"]
     procurar_tarefa["procurar-tarefa"]
     procurar_variacao_de_termo["procurar-variacao-de-termo"]
+    procurar_venda["procurar-venda"]
     projetar_caixa["projetar-caixa"]
     prospectar_oportunidades["prospectar-oportunidades"]
     publicar_ata_de_reuniao["publicar-ata-de-reuniao"]
@@ -789,6 +790,7 @@ flowchart LR
   lancar_venda --> identificar_duplicata
   lancar_venda --> lancar_despesa_da_empresa
   lancar_venda --> procurar_banco_de_dados
+  lancar_venda --> procurar_venda
   lancar_venda --> registrar_ciclo_do_ativo
   lancar_venda --> registrar_preco_de_produto_fisico
   levantar_ambiente_do_repositorio --> criar_commit
@@ -923,6 +925,10 @@ flowchart LR
   procurar_pedido_de_revisao --> enviar_mensagem_no_slack
   procurar_tarefa --> procurar_inscricao
   procurar_variacao_de_termo --> definir_vocabulario
+  procurar_venda --> definir_grafia
+  procurar_venda --> lancar_despesa_da_empresa
+  procurar_venda --> lancar_venda
+  procurar_venda --> procurar_banco_de_dados
   projetar_caixa --> criar_oportunidade
   projetar_caixa --> definir_agenda
   projetar_caixa --> definir_planejamento_financeiro

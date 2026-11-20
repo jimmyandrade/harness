@@ -1,11 +1,11 @@
 ---
 name: lancar-venda
-description: Use essa habilidade sempre que for cadastrar, completar, corrigir ou conciliar uma venda de um ou mais produtos, mesmo sem dizer venda. NÃO use para lançar um gasto, cadastrar a pessoa ou o produto, definir o preço, mover o estoque, nem vender um bem durável.
+description: Use essa habilidade sempre que for cadastrar, completar, corrigir ou conciliar uma venda de um ou mais produtos, mesmo sem dizer venda. NÃO use para só saber se a venda já foi lançada, lançar um gasto, cadastrar a pessoa ou o produto, definir o preço, mover o estoque, nem vender um bem durável.
 allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-data-sources notion:notion-create-pages notion:notion-update-page notion:notion-create-comment
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.13.4"
+  version: "0.14.0"
   aliases:
     - definir-venda
   related:
@@ -17,6 +17,7 @@ metadata:
     - identificar-duplicata
     - lancar-despesa-da-empresa
     - procurar-banco-de-dados
+    - procurar-venda
     - registrar-ciclo-do-ativo
 ---
 
@@ -76,7 +77,7 @@ Se parte desse dinheiro pagou um débito da empresa, quem pagou segue `lancar-de
 
 ### Passo 3
 
-Antes de criar, busque a venda pelo número do pedido, pelo link do pedido e pelo identificador da transação.
+Antes de criar, siga `procurar-venda` com o número do pedido, o link do pedido e o identificador da transação. Sem nenhum dos três, com a data real, a pessoa cliente e as unidades.
 
 ```mermaid
 flowchart LR
@@ -101,7 +102,7 @@ O saldo segue `gerenciar-estoque`. Não altere o saldo aqui.
 
 A data real da venda fica na data e hora da venda. Ponto de contato entra quando a venda aconteceu nele. O projeto chega por esse ponto, e a ordem do projeto é calculada. Não preencha.
 
-Quando o pedido da loja on-line é lançamento retroativo de uma venda que já ocorreu, busque a venda original pela data real, pelo cliente e pelas unidades. Vincule o pedido nessa página. Não crie outra. Sem a venda original, pare e pergunte.
+Quando o pedido da loja on-line é lançamento retroativo de uma venda que já ocorreu, siga `procurar-venda` para achar a venda original pela data real, pelo cliente e pelas unidades. Vincule o pedido nessa página. Não crie outra. Sem a venda original, pare e pergunte.
 
 A data da loja fica no campo de lançamento na loja. Pedido, ID da confirmação e link do pedido entram para conciliar com o canal. Data real, meio de pagamento, valor e contexto permanecem. Contexto é cliente, unidades, conjunto, ponto de contato, local e forma de entrega. O meio e o valor do lançamento tardio não substituem os da venda real.
 
@@ -157,7 +158,7 @@ Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 Se você criar uma página nova porque o pedido da loja chegou depois, a venda original e o canal ficam separados.
 
-1. Busque a venda original pela data real, pelo cliente e pelas unidades.
+1. Siga `procurar-venda` com a data real, o cliente e as unidades.
 2. Vincule o pedido nessa página. Grave a data da loja, o pedido, a confirmação e o link.
 3. Deixe data real, pagamento, valor e contexto como estão. Sem a venda original, pare e pergunte.
 
@@ -288,7 +289,7 @@ O comentário da página disse o que voltou, por que voltou, a fonte e quando. A
 ## Casos-limite
 
 - O banco de vendas não está no workspace conectado: pare. Não use a lista de outro workspace.
-- Venda provável já existe: atualize. Não duplique. Dúvida: mostre e confirme.
+- Venda provável já existe: atualize. Não duplique. Dúvida, ou várias parecidas: mostre e confirme.
 - Venda existente com um campo ausente e os demais válidos: preencha o ausente. Os válidos permanecem.
 - Cliente, unidade ou conjunto ausente: pare e pergunte. Não crie.
 - Unidade sem a variante dita: pare e pergunte. Não invente a variante na venda. O saldo não muda aqui.
