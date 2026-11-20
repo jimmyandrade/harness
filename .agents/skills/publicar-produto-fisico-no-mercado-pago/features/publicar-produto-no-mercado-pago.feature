@@ -47,3 +47,17 @@ Funcionalidade: Publicar um produto do registro no catálogo do Mercado Pago
       Quando a habilidade cadastra o produto
       Então não cria lista
       E diz que a lista sincronizada muda o preço com o preço base
+
+  Regra: o produto é sempre cadastrado com variações
+
+    Exemplo: Produto de uma variante só
+      Dado que o produto do registro tem uma variante só
+      Quando a habilidade cadastra o produto no catálogo
+      Então cadastra com variações, com o tamanho como atributo
+      Mas não cadastra como produto único
+
+    Exemplo: Produto único com o mesmo SKU
+      Dado que o catálogo tem um produto único com o SKU
+      Quando a habilidade vai cadastrar com variações
+      Então pede o sim da pessoa para excluir o produto único antes
+      E diz que a exclusão é permanente
