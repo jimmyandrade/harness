@@ -3,7 +3,7 @@ name: definir-requisito-de-compra
 description: Fecha e grava a especificação do que vai ser comprado, entrevistando a pessoa com o briefing de especificação, antes de pesquisar empresas e de pedir orçamento. Usada quando a compra de um item ou serviço ainda não tem requisito cadastrado, ou quando a empresa pede dados que a pessoa ainda não definiu. NÃO serve para pesquisar empresas, pedir orçamento nem registrar a compra.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
   related:
     - evoluir-habilidade
     - gerenciar-estoque
@@ -48,6 +48,8 @@ Adapte as perguntas ao que vai ser comprado, com o que você sabe do assunto e d
 Anote cada resposta como a pessoa deu, sem completar com suposição. O que ela não sabe fica em aberto, com a pergunta que falta. Quando uma resposta mostra que a compra é de outro tipo, corrija o tipo antes de seguir.
 
 A quantidade vem das unidades que o item atende, lidas nos dados do projeto, como `pesquisar-compra` manda, e a pessoa a confirma. Não use um número de costume nem o mínimo de uma empresa.
+
+Quando o fornecedor diz o que não faz, como não fornecer o tecido ou não fazer um dos itens, a compra muda de tipo ou de fornecedor. Corrija o requisito no mesmo dia: o título, o contexto e o objetivo seguem o tipo novo, a atualização datada vai no topo da página, e o valor antigo fica marcado como substituído, com a data. O item que a pessoa passa a comprar por conta própria ganha o requisito dele, como o Passo 1 manda.
 
 ### Passo 3
 
@@ -98,6 +100,14 @@ Se você completar a resposta com o que o modelo supõe, a especificação afirm
 1. Grave cada resposta como a pessoa deu.
 2. Deixe o que ela não sabe em aberto, com a pergunta.
 3. Não feche a especificação com campo inventado.
+
+### Requisito que diz o que o fornecedor já negou
+
+Se você deixar o requisito como "fornecido pronto pela empresa" depois de a empresa dizer que só imprime e não fornece o tecido, a especificação cobra dela o que ela não faz e a compra do tecido some.
+
+1. Corrija o tipo, o título, o contexto e o objetivo no mesmo requisito.
+2. Grave a atualização datada no topo e marque a quantidade antiga como substituída.
+3. Crie o requisito do item que a pessoa passa a comprar.
 
 ## Exemplos de entrada e saída
 

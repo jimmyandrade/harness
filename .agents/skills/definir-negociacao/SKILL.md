@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.9.1"
+  version: "0.9.2"
   related:
     - acompanhar-retornos-pendentes
     - definir-agenda
@@ -57,6 +57,10 @@ flowchart LR
 ### Passo 2
 
 Com negócio, a negociação é uma por oportunidade, a edição com data. Ache a negociação dessa oportunidade antes de criar outra. Uma edição nova da mesma empresa e da mesma pessoa é negociação nova: ela cita o link da anterior e não herda o histórico, que fica na antiga. Ligue a página à empresa abordada, à pessoa abordada e a uma oportunidade só. Se uma segunda pessoa da mesma empresa falar, confira no schema se a pessoa abordada aceita mais de uma antes de somar. Se não aceitar, pergunte.
+
+Negociação que nasceu de uma ata de reunião, com o nome padrão e as propriedades vazias, não está pronta. Complete-a já: o nome diz o que se negocia e com quem, a data de início é a do primeiro contato, e a empresa abordada e a pessoa abordada vêm dos cadastros. O que a ata decidiu vira comentário datado. O que nenhuma fonte diz fica vazio, com aviso.
+
+Outra empresa que passa a cotar o item que a primeira não faz é negociação própria, com a conversa dela. A negociação da primeira registra a mudança.
 
 ### Passo 3
 
