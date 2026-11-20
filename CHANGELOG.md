@@ -1,5 +1,30 @@
 # Changelog
 
+## [1.99.0](https://github.com/jimmyandrade/harness/compare/v1.98.0...v1.99.0) (2026-11-20)
+
+
+### Features
+
+* add the Sem fit conversation state for what the brand decided does not fit ([#1351](https://github.com/jimmyandrade/harness/issues/1351)) ([33799a4](https://github.com/jimmyandrade/harness/commit/33799a476e1da48b7d4fe8cf9732274f86521ad2))
+* **analisar-perfil-social:** choose what happens when the profile already has an analysis ([#1339](https://github.com/jimmyandrade/harness/issues/1339)) ([e126ad3](https://github.com/jimmyandrade/harness/commit/e126ad33d5c985d906494863a0ecf3bd2386cbe0))
+* **analisar-regulamento-da-oportunidade:** leave the contract open and link it in every answer ([#1353](https://github.com/jimmyandrade/harness/issues/1353)) ([fda1e0d](https://github.com/jimmyandrade/harness/commit/fda1e0d64ee45dcb1d27801acb480f00a3fba036))
+* **levantar-gravacoes-de-reunioes:** cross the notes document with the meeting tool record ([#1348](https://github.com/jimmyandrade/harness/issues/1348)) ([406e0e9](https://github.com/jimmyandrade/harness/commit/406e0e93fe8ca6bce5147ba8a93d579567e2cec0))
+* **publicar-ata-de-reuniao:** pick the minutes destination with a decision tree ([#1347](https://github.com/jimmyandrade/harness/issues/1347)) ([9c9b948](https://github.com/jimmyandrade/harness/commit/9c9b94869506394caeb498be4f9766c62dd4aa91))
+* **triar-conversas:** handle a missing triage list, a task with no owner and a document that asks for action ([#1335](https://github.com/jimmyandrade/harness/issues/1335)) ([782a3b3](https://github.com/jimmyandrade/harness/commit/782a3b3cb95bf010db8488b861b7ca743328d333)), closes [#1334](https://github.com/jimmyandrade/harness/issues/1334)
+
+
+### Bug Fixes
+
+* **assessoria-juridica:** require checking the text of the norm in an official source and never answer from memory ([#1357](https://github.com/jimmyandrade/harness/issues/1357)) ([057684c](https://github.com/jimmyandrade/harness/commit/057684ce67ef8143125309a19da7c3b80db1e83d))
+* **escrever-texto-da-revisao:** thank only for a concrete help of the PR ([#1344](https://github.com/jimmyandrade/harness/issues/1344)) ([b21666f](https://github.com/jimmyandrade/harness/commit/b21666f6ad8b91e90ae4b615ace636b3010b373c))
+* **investigar-problema:** look for a case detail in the tools before asking who reported it ([#1354](https://github.com/jimmyandrade/harness/issues/1354)) ([5c1d542](https://github.com/jimmyandrade/harness/commit/5c1d5425152c4815139ea8f72c57b1f9db9f787f))
+* **investigar-problema:** run the next test instead of proposing it ([#1355](https://github.com/jimmyandrade/harness/issues/1355)) ([d17ac4a](https://github.com/jimmyandrade/harness/commit/d17ac4a8c0ad27bcce08dbe4bb4341671dd7024d))
+* **investigar-problema:** trigger on "look into this" requests that carry only a link ([#1352](https://github.com/jimmyandrade/harness/issues/1352)) ([3e8e20e](https://github.com/jimmyandrade/harness/commit/3e8e20ebdab9409644b52340a85301587b934344))
+* keep the pending message drafts in an artifact so they do not scroll away ([#1342](https://github.com/jimmyandrade/harness/issues/1342)) ([a07c346](https://github.com/jimmyandrade/harness/commit/a07c34646f1721ad4bbbe8ddbbbbbcca9644c9f1))
+* **publicar-ata-de-reuniao:** keep security details of a system out of the public minutes ([#1356](https://github.com/jimmyandrade/harness/issues/1356)) ([e823eb1](https://github.com/jimmyandrade/harness/commit/e823eb18dca2411db6e3ad0e1b59390c73168b66))
+* **publicar-revisao-de-codigo:** look for the review request thread and draft the status notice without asking ([#1341](https://github.com/jimmyandrade/harness/issues/1341)) ([06d9552](https://github.com/jimmyandrade/harness/commit/06d95524b309f239dd9e7da22fe9bfa939a7817b))
+* record every conversation in dated comments, never in the page body ([#1350](https://github.com/jimmyandrade/harness/issues/1350)) ([f3bc626](https://github.com/jimmyandrade/harness/commit/f3bc6268fdf5fd76e6c4b70ecb9eea441a16bc56))
+
 ## [1.98.0](https://github.com/jimmyandrade/harness/compare/v1.97.0...v1.98.0) (2026-11-19)
 
 
