@@ -162,6 +162,7 @@ flowchart LR
     prospectar_oportunidades["prospectar-oportunidades"]
     publicar_ata_de_reuniao["publicar-ata-de-reuniao"]
     publicar_produto_fisico_na_loja_virtual["publicar-produto-fisico-na-loja-virtual"]
+    publicar_produto_fisico_no_mercado_pago["publicar-produto-fisico-no-mercado-pago"]
     publicar_resposta_de_revisao["publicar-resposta-de-revisao"]
     publicar_revisao_de_codigo["publicar-revisao-de-codigo"]
     rascunhar_mensagem["rascunhar-mensagem"]
@@ -948,6 +949,10 @@ flowchart LR
   publicar_produto_fisico_na_loja_virtual --> gerenciar_estoque
   publicar_produto_fisico_na_loja_virtual --> redigir_com_tom_de_voz
   publicar_produto_fisico_na_loja_virtual --> registrar_preco_de_produto_fisico
+  publicar_produto_fisico_no_mercado_pago --> gerenciar_estoque
+  publicar_produto_fisico_no_mercado_pago --> lancar_venda
+  publicar_produto_fisico_no_mercado_pago --> publicar_produto_fisico_na_loja_virtual
+  publicar_produto_fisico_no_mercado_pago --> registrar_preco_de_produto_fisico
   publicar_resposta_de_revisao --> atender_revisao_de_pull_request
   publicar_resposta_de_revisao --> definir_pessoa
   publicar_resposta_de_revisao --> escrever_link
