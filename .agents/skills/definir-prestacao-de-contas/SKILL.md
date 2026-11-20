@@ -3,7 +3,7 @@ name: definir-prestacao-de-contas
 description: Faz a prestação de contas de um repasse recebido, cruzando o extrato da conta com os gastos lançados e declarando o que ficou fora do repasse. Usada quando quem repassou o dinheiro pede a prestação, quando o prazo dela chega ou quando se concilia um extrato, mesmo sem dizer prestação. NÃO serve para lançar o gasto, fechar o caixa de um ponto de contato nem redigir a mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.1.3"
+  version: "0.1.4"
   related:
     - definir-conta-bancaria
     - definir-grafia
@@ -85,6 +85,8 @@ Para a hora de uma linha sem comprovante, como o Pix recebido do repasse, busque
 
 A mensagem que pede o repasse e a resposta que diz que ele sai agora dão o limite de baixo. A mensagem que diz que o dinheiro caiu dá o limite de cima. Ponha no documento a hora do limite de baixo, marcada como aproximada, diga a base à pessoa e peça o comprovante do aplicativo do banco ou um extrato detalhado para confirmar. Sem nenhuma pista nos canais, peça a hora à pessoa.
 
+As colunas de data e hora saem em fonte monoespaçada, como as de valor: os dígitos alinham linha a linha, e quem confere a tabela escaneia melhor. Use o recurso do design system do projeto para isso. Se ele não tiver, diga à pessoa e proponha a mudança ao design system.
+
 O texto para quem repassou passa por `redigir-com-tom-de-voz`. O envio segue `enviar-email` ou o canal em que a conversa aconteceu, só com a confirmação da pessoa, com o extrato e os comprovantes que o repasse pediu. Quem assina é quem as instruções do projeto definem.
 
 ### Passo 6
@@ -151,6 +153,7 @@ Pus a hora de cada comprovante em cada linha e ordenei a tabela do mais antigo a
 - O status de conciliação de um gasto mede o comprovante, não o cruzamento com o banco.
 - Um nome diferente no extrato parece outra empresa. Pode ser o titular da maquininha do mesmo posto.
 - O prazo da prestação costuma estar na negociação, não no extrato.
+- Data e hora parecem texto comum. Numa coluna de tabela, a fonte monoespaçada alinha os dígitos, como nos valores.
 - A mensagem "o dinheiro caiu" parece a hora do repasse. É só o limite de cima: o dinheiro pode ter caído horas antes.
 - A ordem das linhas do extrato parece a do relógio. Dentro do mesmo dia ela pode não ser, e o saldo corrido também pode contradizer a hora do comprovante.
 
