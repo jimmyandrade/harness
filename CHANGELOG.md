@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.99.1](https://github.com/jimmyandrade/harness/compare/v1.99.0...v1.99.1) (2026-11-20)
+
+
+### Bug Fixes
+
+* **assessoria-juridica:** read every layer that applies and call a partial opinion partial ([#1358](https://github.com/jimmyandrade/harness/issues/1358)) ([c1bffff](https://github.com/jimmyandrade/harness/commit/c1bffff8175f7e7dea8c76216fae8cda6200cc91))
+* **pesquisar-compra:** link only pages the browser opened and drop options that need equipment we lack ([#1359](https://github.com/jimmyandrade/harness/issues/1359)) ([4410d35](https://github.com/jimmyandrade/harness/commit/4410d35d15d20c1f727c801b5df6c84a87efd859))
+* start the replacement WhatsApp Web owner session unlinked with the registration rules ([#1361](https://github.com/jimmyandrade/harness/issues/1361)) ([18333da](https://github.com/jimmyandrade/harness/commit/18333da908df1196cf9fdd2f919999bc856cbf70))
+
 ## [1.99.0](https://github.com/jimmyandrade/harness/compare/v1.98.0...v1.99.0) (2026-11-20)
 
 
