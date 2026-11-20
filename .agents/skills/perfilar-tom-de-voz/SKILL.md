@@ -3,7 +3,7 @@ name: perfilar-tom-de-voz
 description: Perfila o tom de voz de uma pessoa ou de um canal a partir de uma amostra real de mensagens e registra os padrões no vocabulário, com a etiqueta da pessoa ou do canal. Usada quando a pessoa pede para perfilar como alguém conversa ou o tom de um canal. Não serve para escrever texto, cadastrar um termo solto nem perfilar sem pedido.
 metadata:
   author: jimmyandrade
-  version: "0.4.1"
+  version: "0.4.2"
   related:
     - definir-vocabulario
     - evoluir-habilidade
@@ -34,7 +34,9 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 Só perfile a pedido explícito da pessoa, para uma pessoa ou um canal que ela nomear. Nunca perfile por conta própria. Se a pessoa pediu o perfil de si mesma, trate como cadastro de termo com `definir-vocabulario`.
 
-Rascunhar uma mensagem para quem não tem perfil e já escreveu na conversa não é perfilar. Leia as últimas mensagens dela e acompanhe a saudação, o calor e o emoji, devolvendo o mesmo tratamento carinhoso que ela usa conosco, como um apelido afetuoso, sem perguntar à pessoa se pode. Um texto seco para quem escreve com carinho soa distante. O fim também acompanha o calor: com quem acolheu a marca, feche com um agradecimento carinhoso, e não com o próximo passo ou a disponibilidade. Diga à pessoa que o perfil falta e proponha perfilar. O registro só nasce a pedido.
+Rascunhar uma mensagem para quem já escreveu na conversa não é perfilar, tenha ela perfil ou não. Leia as últimas mensagens dela e acompanhe a saudação, o calor e o emoji, devolvendo o mesmo tratamento carinhoso que ela usa conosco, como "queridos" ou um apelido afetuoso, sem perguntar à pessoa se pode. Um texto seco para quem escreve com carinho soa distante. O fim também acompanha o calor: com quem acolheu a marca, feche com um agradecimento carinhoso, e não com o próximo passo ou a disponibilidade.
+
+Quando ela já tem perfil, usar o perfil dela é aplicar os termos que ele registra, como "te", e também o calor das últimas mensagens da conversa de agora, que o perfil não guarda. Os termos do perfil sozinhos não bastam, e citar o perfil no pedido não é chamar a pessoa pelo nome. Sem perfil, diga que ele falta e proponha perfilar. O registro só nasce a pedido.
 
 Quando a pessoa pede para ir aprendendo com cada mensagem da conversa, o perfil fica em andamento. Com `Rótulo de perfilamento em andamento` preenchido, aplique-o à conversa por `rotular-item` ao começar.
 
@@ -86,11 +88,11 @@ Se você cadastrar uma frase completa como termo, o vocabulário vira um catálo
 
 ### Rascunho seco para quem escreve com calor
 
-Se você rascunhar para quem não tem perfil sem ler como ela escreve, o texto sai correto e frio, e a pessoa percebe o contraste com a conversa.
+Se você rascunhar para quem já escreveu na conversa sem ler como ela escreve, o texto sai correto e frio, e a pessoa percebe o contraste com a conversa. Ter o perfil dela não muda isso: aplicar só os termos do perfil, como "te", deixa o texto frio.
 
-1. Leia as últimas mensagens dela antes de rascunhar.
+1. Leia as últimas mensagens dela antes de rascunhar, com ou sem perfil.
 2. Acompanhe a saudação, o calor e o emoji, e devolva o tratamento carinhoso que ela usa conosco, dentro do vocabulário. Feche com um agradecimento carinhoso.
-3. Diga que o perfil falta e proponha perfilar, sem registrar nada por conta própria.
+3. Com perfil, some a isso os termos dele. Sem perfil, diga que o perfil falta e proponha perfilar, sem registrar nada por conta própria.
 
 ### Rótulo de perfilamento esquecido
 
@@ -121,7 +123,7 @@ Li o histórico da nossa conversa privada. Ela alonga as vogais, abrevia "pra" e
 
 ## Casos-limite
 
-- A pessoa não pediu o perfil: não perfile. Ao rascunhar para quem não tem perfil, acompanhe o tom das mensagens dela e proponha perfilar.
+- A pessoa não pediu o perfil: não perfile. Ao rascunhar para quem já escreveu na conversa, acompanhe o calor das mensagens dela, com ou sem perfil. Sem perfil, proponha perfilar.
 - A amostra tem poucas mensagens: diga isso e registre só o que se repete.
 - O canal só tem mensagens de bot: diga isso e pare.
 - Um padrão apareceu uma vez só: não registre.
@@ -130,6 +132,7 @@ Li o histórico da nossa conversa privada. Ela alonga as vogais, abrevia "pra" e
 ## Pegadinhas
 
 - Um texto correto e sem erro parece pronto. Para quem escreve com carinho, ele soa seco: compare o tom do rascunho com o das mensagens dela.
+- Usar o perfil de uma pessoa parece ser só aplicar os termos dele. O perfil não guarda o calor de agora: leia as últimas mensagens dela, e o perfil nunca vira o nome com que a chamamos.
 - O perfil de uma pessoa não vale para outra, nem o de um canal para uma pessoa.
 - Uma frase que a pessoa disse uma vez parece um padrão. Só vira termo o que se repete.
 - A conversa privada serve para derivar o padrão, nunca para ser citada.
