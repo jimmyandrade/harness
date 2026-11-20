@@ -3,7 +3,7 @@ name: definir-prestacao-de-contas
 description: Faz a prestação de contas de um repasse recebido, cruzando o extrato da conta com os gastos lançados e declarando o que ficou fora do repasse. Usada quando quem repassou o dinheiro pede a prestação, quando o prazo dela chega ou quando se concilia um extrato, mesmo sem dizer prestação. NÃO serve para lançar o gasto, fechar o caixa de um ponto de contato nem redigir a mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.1.1"
+  version: "0.1.2"
   related:
     - definir-conta-bancaria
     - definir-grafia
@@ -40,7 +40,9 @@ Leia o histórico da negociação com `definir-negociacao` e busque o e-mail com
 
 ### Passo 2
 
-Ache a conta que recebeu o repasse, pelo cadastro da conta com `definir-conta-bancaria`, e o extrato do período. O extrato costuma chegar por e-mail em PDF, CSV e OFX: leia o CSV ou o OFX, que têm uma linha por lançamento.
+Ache a conta que recebeu o repasse, pelo cadastro da conta com `definir-conta-bancaria`, e o extrato do período. O extrato costuma chegar por e-mail em PDF, CSV e OFX.
+
+O CSV e o OFX têm uma linha por lançamento, e o PDF mostra o saldo por transação. Abra os três antes de dizer que o extrato não traz a hora de um lançamento. O `Solicitado em` do PDF é a hora do pedido do extrato, não a de um lançamento.
 
 Confirme com a pessoa de qual conta é o extrato quando o e-mail vier de outro endereço, e diga o período que ele cobre. Não presuma a titularidade.
 
@@ -116,7 +118,8 @@ Se você copiar a data e a ordem do extrato, a tabela perde a hora e fica numa o
 
 1. Leia a hora no comprovante de cada pagamento e no aviso do repasse.
 2. Ordene a tabela do mais antigo ao mais recente, por data e hora.
-3. Peça a hora que nenhum comprovante mostra, em vez de deduzir pela ordem do extrato.
+3. Antes de pedir a hora, abra o extrato nos três formatos e diga à pessoa o que cada um traz.
+4. Peça a hora que nenhum comprovante mostra, em vez de deduzir pela ordem do extrato.
 
 ## Exemplos de entrada e saída
 
