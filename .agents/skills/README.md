@@ -510,6 +510,7 @@ flowchart LR
   definir_inscricao --> procurar_email
   definir_inscricao --> procurar_inscricao
   definir_inscricao --> procurar_oportunidade
+  definir_inscricao --> rotular_item
   definir_instrucoes_do_projeto --> criar_habilidade
   definir_issue_do_github --> criar_pull_request
   definir_issue_do_github --> levantar_ambiente_do_repositorio
@@ -554,6 +555,8 @@ flowchart LR
   definir_okr --> definir_tarefa
   definir_orcamento_de_fornecedor --> conversar_no_whatsapp
   definir_orcamento_de_fornecedor --> definir_empresa
+  definir_orcamento_de_fornecedor --> definir_localidade_geografica
+  definir_orcamento_de_fornecedor --> definir_negociacao
   definir_orcamento_de_fornecedor --> lancar_despesa_da_empresa
   definir_orcamento_de_fornecedor --> procurar_email
   definir_orcamento_de_fornecedor --> reconhecer_imagem
@@ -1010,7 +1013,9 @@ flowchart LR
   revisar_habilidade --> testar_habilidade
   revisar_oportunidade --> criar_ideia_de_conteudo
   revisar_oportunidade --> criar_oportunidade
+  revisar_oportunidade --> definir_empresa
   revisar_oportunidade --> definir_grupo_de_oportunidades
+  revisar_oportunidade --> definir_inscricao
   revisar_oportunidade --> definir_tarefa
   revisar_oportunidade --> procurar_oportunidade
   revisar_uso_do_tempo --> definir_agenda

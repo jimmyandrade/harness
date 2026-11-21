@@ -3,10 +3,12 @@ name: definir-orcamento-de-fornecedor
 description: Lê o orçamento ou a proposta que um fornecedor envia, por PDF, imagem, link ou mensagem, confere preço, prazo e validade, compara com a conversa e o registra onde o projeto indica. Usada quando chega orçamento de fornecedor. NÃO serve para pesquisar preço de compra, decidir se fecha, responder ao fornecedor nem lançar a despesa.
 metadata:
   author: jimmyandrade
-  version: "0.2.2"
+  version: "0.3.0"
   related:
     - conversar-no-whatsapp
     - definir-empresa
+    - definir-localidade-geografica
+    - definir-negociacao
     - evoluir-habilidade
     - lancar-despesa-da-empresa
     - procurar-email
@@ -59,6 +61,17 @@ Compare a validade com hoje. Vencido, ou a menos de `Aviso de validade em dias`,
 ### Passo 5
 
 Registre em `Registro do orçamento`, sem pedir antes, com o link do arquivo. Leve o link do registro na resposta e não diga que está registrado sem ele.
+
+Cada dado que tem propriedade própria no registro vai nela antes de nota ou comentário, e você confere isso antes de concluir: o identificador externo da fonte, como número de cotação, protocolo, pedido ou rastreamento; a empresa abordada; a data e a hora de início, reais quando a fonte as traz; o preço à vista, como valor numérico; e a categoria de custo, da lista de categorias do projeto.
+
+Com mais de um identificador de naturezas diferentes, preserve todos ou peça confirmação antes de substituir o que já está. A conversa e a evidência datada ficam em comentário datado, mesmo com a propriedade preenchida.
+
+Frete ou transporte de mercadorias leva também a localidade de origem e a de destino, da lista de localidades do projeto, reutilizando a que já existe. Se a fonte trouxer só o CEP, um endereço parcial ou o apelido de uma praça, grave a localidade só com correspondência segura, ou pergunte antes de criar uma.
+
+O contato com um fornecedor, representante ou intermediário que viabiliza um negócio com um cliente, como pedir cotação, disponibilidade, amostra ou validação técnica, é evidência desse negócio mesmo quando quem responde não é o cliente. Ligue o orçamento à negociação do cliente e preserve os dois lados, o que se falou com o cliente e o que se falou com o fornecedor. Sem dados para ligar ao negócio com segurança, registre a pessoa fornecedora e diga o que falta.
+
+Quando a pessoa recusa o orçamento, o estado da negociação diz o desfecho e o motivo vai na propriedade própria, sem virar outro estado. A opção do motivo nomeia a causa pela decisão de quem recusou, como encontrar outro fornecedor mais barato, e não por um rótulo que pareça vantagem da empresa recusada. A análise e a nuance da decisão ficam em comentário datado.
+
 Aceitar, recusar ou fechar é da pessoa. Responder ao fornecedor segue `redigir-com-tom-de-voz`, e o gasto só vira despesa quando for pago, por `lancar-despesa-da-empresa`.
 
 ### Passo 6
@@ -92,6 +105,14 @@ Se você registrar o preço sem a validade, a pessoa fecha depois do prazo e o f
 1. Leia a validade, que pode estar só no rodapé.
 2. Avise quando estiver vencida ou perto de vencer.
 
+### Dado com propriedade própria deixado na nota
+
+Se você deixar o protocolo, o preço à vista, a origem ou o motivo da recusa só na nota ou no comentário, o registro não filtra nem soma, e o dado se perde na próxima revisão.
+
+1. Passe cada dado para a propriedade que o registro já tem, como o Passo 5 manda.
+2. Deixe o histórico datado em comentário.
+3. Falta a propriedade: diga qual e proponha criá-la. Não a crie antes do sim.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
@@ -100,12 +121,18 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 Abri o PDF: 500 etiquetas a R$ 0,90 a unidade, R$ 450,00 no total, produção em 5 dias úteis, válido até sexta-feira, 20/11/2026. A conta fecha. Na conversa ela avisou que arte com fundo todo preto perde qualidade, e isso entrou como condição. Falta 1 dia útil para a validade. Registrei no histórico da negociação, com o link do arquivo.
 
+### a transportadora mandou a cotação de frete com o protocolo e o preço à vista
+
+Gravei o protocolo, a empresa abordada, o preço à vista em reais, a categoria de transporte de mercadorias e as localidades de origem e destino, reutilizando as que já existiam. A conversa ficou em comentário datado, e a negociação do cliente recebeu o link do orçamento.
+
 ## Casos-limite
 
 - O orçamento tem vários itens e a conversa cita um: registre todos e destaque o citado.
 - Só há o valor dito na conversa, sem arquivo: registre como valor verbal, sem validade, e peça o arquivo.
 - O fornecedor ainda depende de um terceiro para fechar um item: registre o item como pendente.
 - Há dois orçamentos do mesmo item: mostre os dois lado a lado, sem escolher.
+- O registro não tem a propriedade de um dado, como o identificador externo ou o motivo da recusa: diga qual falta e proponha criá-la. Não ponha o dado na nota no lugar.
+- O contato com o fornecedor não tem negociação de cliente para ligar: registre a pessoa fornecedora e diga o que falta para ligar sem duplicar.
 
 ## Pegadinhas
 
@@ -113,6 +140,7 @@ Abri o PDF: 500 etiquetas a R$ 0,90 a unidade, R$ 450,00 no total, produção em
 - A mensagem marcada como encaminhada pode ser um reenvio de outro orçamento, com número ou data diferente.
 - No WhatsApp Web, o PDF de semanas atrás abre "Documento indisponível" quando já não está no celular. O reenviado no dia abre.
 - O total de uma proposta pode já incluir o frete ou o imposto. Confira antes de comparar.
+- O protocolo e o preço citados na conversa parecem bastar como registro. Sem a propriedade própria preenchida, o dado não filtra nem soma.
 - O Notion lê o trecho entre dois cifrões sem barra como fórmula. Num texto com valor em reais, escreva `R\$ 10,00` e releia o campo depois de gravar. A propriedade numérica não precisa da barra.
 
 ## Scripts disponíveis
