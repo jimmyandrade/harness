@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.100.0](https://github.com/jimmyandrade/harness/compare/v1.99.2...v1.100.0) (2026-11-21)
+
+
+### Features
+
+* **cadastrar-foto-de-moda:** propose alt text from a local reading when a photo has none ([#1370](https://github.com/jimmyandrade/harness/issues/1370)) ([fb18e00](https://github.com/jimmyandrade/harness/commit/fb18e006c4a461fdd5281e4e8a38daccaefa3051))
+* migrate the rules of a legacy B2B skill into the skills that own each topic ([#1373](https://github.com/jimmyandrade/harness/issues/1373)) ([b44180d](https://github.com/jimmyandrade/harness/commit/b44180d0906362396f86952d7cd4cf698994e8cd))
+* split the contact approach and the person mention out of two full skills ([#1374](https://github.com/jimmyandrade/harness/issues/1374)) ([8899fdb](https://github.com/jimmyandrade/harness/commit/8899fdbe073fde7998d15ab14ba0e988f19e66c1))
+
+
+### Bug Fixes
+
+* **definir-arquivos-da-habilidade:** split by a storage-agnostic responsibility, not by a reference file ([#1378](https://github.com/jimmyandrade/harness/issues/1378)) ([f327a0d](https://github.com/jimmyandrade/harness/commit/f327a0da0e0686f1db990a3ae3eee35087676204))
+* mirror the warmth of the contact's recent messages even when a tone profile exists ([#1369](https://github.com/jimmyandrade/harness/issues/1369)) ([300b452](https://github.com/jimmyandrade/harness/commit/300b452923918cf231da78bd1b2b7f2e43965516))
+
 ## [1.99.2](https://github.com/jimmyandrade/harness/compare/v1.99.1...v1.99.2) (2026-11-20)
 
 
