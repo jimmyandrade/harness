@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.13.0"
+  version: "0.14.0"
   related:
     - criar-oportunidade
     - definir-agenda
@@ -30,6 +30,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Agendas": []
 # `Apelidos da agenda` lista os nomes pelos quais a pessoa chama a agenda, como o nome de uma secretária. Vazia quer dizer que a agenda não tem apelido.
 "Apelidos da agenda": []
+# `Duração padrão da proposta` vale quando o pedido de horário livre não diz quanto tempo o compromisso leva.
+"Duração padrão da proposta": "30 minutos"
 ```
 ## Instruções
 
@@ -37,11 +39,14 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 As listas e o nome de cada propriedade vêm do mapeamento de dados do projeto. Perguntar como está o dia, qual é a agenda hoje, o que tem hoje ou o que já está no dia ou na semana é esta habilidade. O mesmo vale quando o pedido traz um nome de `Apelidos da agenda`, ou uma grafia parecida, em vocativo, apelido, terceira pessoa ou referência indireta, mesmo sem dizer agenda, calendário, evento, compromisso ou horário. A menção basta. Não peça para nomear a habilidade de novo. Com apelido, a resposta fala como a secretária da agenda, no gênero do apelido. A regra desta busca não afrouxa.
 
+Achar um dia ou um horário livre para marcar algo também é esta habilidade, pelo Passo 6.
+
 Antes de tratar o nome como a secretária, confira o contexto. Cliente, fornecedora, marca ou pessoa na lista de pessoas não é esse chamado. Dúvida real: pergunte. Não escolha. Se o pedido não for de agenda, resolva o que foi pedido e ofereça ajuda com a agenda. Não ignore o chamado.
 
 ```mermaid
 flowchart LR
   Q{O chamado é?} -->|o dia ou a semana| A[Busca aqui]
+  Q -->|horário livre| L[Passo 6]
   Q -->|criar ou alterar| D[definir-agenda]
   Q -->|popstar ou reversa| P[definir-agenda-de-popstar]
   Q -->|outro pedido| O[Resolva e ofereça]
@@ -79,7 +84,21 @@ Mostre os compromissos achados e o período. Se não houver nenhum, diga isso. A
 
 A data de evento, compromisso, prazo, viagem, reserva, lançamento, entrega ou outro marco, na resposta, no resumo, na tabela ou em outro texto, sai no formato da data com dia da semana. Calcule o dia da semana com a data, o horário e o fuso do evento, como a regra do dia da semana manda, antes de responder. Sem horário ou sem fuso, e se o dia puder mudar, peça. Não invente. Intervalo ou vários dias: o dia da semana em cada data. Se a fonte trouxer um dia da semana incompatível com a data, sinalize a divergência. Não crie nem altere.
 
+### Passo 6
+
+Falta o dia ou o horário de algo a marcar, e ele depende só da agenda da pessoa, como uma reunião ou uma call: não pergunte em aberto. Leia as agendas `padrão` e `em uso`, os compromissos de vida e a jornada de produção, ache os horários livres e proponha um, com até duas alternativas, no formato da data com dia da semana, para a pessoa só confirmar. A duração vem do pedido ou, sem ela, da `Duração padrão da proposta`.
+
+Com convidado, cruze a disponibilidade dele quando a ferramenta mostrar. O horário que vem de fora, como o da organização ou o da saída de uma viagem, sai da fonte e não vira proposta. Com o sim, a gravação segue `definir-agenda`.
+
 ## Problemas comuns
+
+### Pergunta aberta de horário
+
+Se você perguntar que dia ou que horário a pessoa quer, ela precisa abrir a agenda sozinha e a marcação atrasa.
+
+1. Leia as agendas, os compromissos de vida e a jornada.
+2. Proponha um horário livre, com até duas alternativas, para a pessoa só confirmar.
+3. Com o sim, grave por `definir-agenda`.
 
 ### Agenda sem checagem
 
@@ -152,6 +171,10 @@ A agenda está em `Agendas`, com uso aposentada. Sem dia no pedido, cobri a agen
 ### a fonte diz segunda-feira, 01/09/2026
 
 01/09/2026 é terça-feira. Sinalizei a divergência. Na resposta, usei o formato da data com dia da semana. Não criei nem alterei.
+
+### Marque uma call com a fornecedora na semana que vem.
+
+Li a agenda padrão e a jornada e propus terça-feira, 01/12/2026, das 10h às 10h30, com quarta e quinta de alternativa. Não perguntei o dia. A gravação ficou para `definir-agenda`, depois do sim.
 
 ## Casos-limite
 

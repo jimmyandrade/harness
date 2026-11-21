@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.52.2"
+  version: "0.53.0"
   related:
     - convidar-para-evento
     - definir-agenda-de-popstar
@@ -65,7 +65,7 @@ flowchart LR
   Q -->|reserva, bloqueio, a confirmar ou lembrete| K[definir-reserva]
   Q -->|popstar, reversa, vida, demanda ou reserva de carreira, ou bloco que cobre um compromisso de vida| P[definir-agenda-de-popstar]
   Q -->|uso do tempo ou obra| U[revisar-uso-do-tempo]
-  Q -->|o que já está no dia ou na semana| S[procurar-agenda]
+  Q -->|o que já está no dia ou na semana, ou horário livre a propor| S[procurar-agenda]
   Q -->|jornada de produção, dia útil, feriado, sábado, domingo ou alternância de sábados| J[definir-jornada-de-producao]
   Q -->|roteiro de viagem| V[definir-viagem]
   Q -->|convidado| C[definir-convidado]
@@ -128,7 +128,7 @@ O nome e o horário vêm do que a pessoa indicou para esse tipo no Notion e dess
 Compromisso, oportunidade, reunião, entrega ou evento comercial sem fonte na conexão: pare. Não crie o evento.
 Quando mais de uma página traz a data, a fonte é a página do time dono do evento, não a de outro time.
 Busque primeiro nas páginas do próprio time e só use a de outro time se a do time não traz a data.
-Antes de concluir que não consegue, confira Calendar Tools, Google Agenda, Notion Calendar ou equivalente nesta sessão. Não afirme que não há ferramenta sem essa checagem.
+Antes de dizer que não há ferramenta, confira Calendar Tools, Google Agenda, Notion Calendar ou equivalente nesta sessão.
 
 ```mermaid
 flowchart LR

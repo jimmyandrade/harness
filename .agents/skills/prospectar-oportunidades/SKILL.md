@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.5.1"
+  version: "0.6.0"
   related:
     - consultar-responsavel-pela-oportunidade
     - criar-ideia-de-conteudo
@@ -46,7 +46,9 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ### Passo 1
 
-Leia o `Business Model Canvas` e o `Playbook de oportunidades`, e os retornos já registrados dos pontos de contato realizados.
+Leia o `Business Model Canvas` e o `Playbook de oportunidades`.
+
+O retorno da empresa sobre uma participação fica na própria página da edição, quase sempre no bloco de notas de reunião, como uma retrospectiva, com resumo, notas, transcrição e comentários. Antes de avaliar o fit, abra cada edição anterior do mesmo grupo e leia esse bloco inteiro, com a transcrição quando o resumo não diz se valeu a pena. Leia também o retorno do ponto de contato realizado. Sem retorno registrado, diga isso. Não deduza o retorno da decisão humana nem do status.
 
 Quando um dos dois não está nos parâmetros, procure no workspace conectado uma página que faça esse papel e sugira o que achou, com o link. Use-a só com o sim da pessoa. Se não achar, proponha criar a página: entreviste a pessoa sobre o modelo de negócio ou sobre as oportunidades que fazem sentido e as que não, e grave as respostas numa página do workspace só com o sim dela. Peça que a página entre no parâmetro. Rodando por rotina, não há quem entreviste: não prospecte e deixe a falta no resumo. Sem as duas páginas, não prospecte.
 
@@ -87,7 +89,7 @@ Leia também a bio dos perfis sociais oficiais do grupo e o evento ou o destaque
 
 Para cada candidato, até o `Máximo de candidatos por execução`, compare com o playbook e com o canvas. O que o playbook veta cai fora, com o motivo na resposta. Antes de cadastrar, siga `procurar-oportunidade`: se a edição existe, complemente o que faltar sem criar outra, e outra data do mesmo grupo é outra edição. Se não existe, siga `criar-oportunidade`. A decisão humana não é sua: deixe o valor inicial da lista.
 
-Grave a leitura de fit de cada candidato que passou nas notas de curadoria da edição, como síntese permanente: o que combina e o que não combina com o playbook e com o canvas, sem checklist. Edição que ainda não existe é cadastrada antes, por `criar-oportunidade`. Candidato trazido que o playbook veta: diga o motivo, grave-o nas notas se a edição já existe e não cadastre sem pedido da pessoa.
+Grave a leitura de fit de cada candidato que passou nas notas de curadoria da edição, como síntese permanente: o que combina e o que não combina com o playbook, com o canvas e com o retorno das edições anteriores do grupo, sem checklist. Edição que ainda não existe é cadastrada antes, por `criar-oportunidade`. Candidato trazido que o playbook veta: diga o motivo, grave-o nas notas se a edição já existe e não cadastre sem pedido da pessoa.
 
 ### Passo 6
 
@@ -95,7 +97,7 @@ Quando a localidade-alvo veio de uma viagem e a oportunidade tem vários dias, c
 
 ### Passo 7
 
-Responda com uma linha por candidato: título, datas com dia da semana, o que cai na viagem, por que combina com o negócio e o que falta para decidir.
+Responda com uma linha por candidato: título, datas com dia da semana, o que cai na viagem, por que combina com o negócio, o que o retorno das edições anteriores disse, com o link da nota de reunião, e o que falta para decidir.
 
 Cada candidato que combina leva também o caminho para participar: o link do edital ou do formulário, o prazo e, com o prazo vencido ou sem link, os canais para perguntar à organização se ainda aceita, ou quando abre a curadoria, todos os que o Notion e o perfil mostram, como o e-mail, o WhatsApp, o produtor da página do evento e a mensagem direta de quem orienta o grupo, cada um com a fonte. Dos canais que a organização atende, a pessoa escolhe por qual escrever.
 
@@ -117,6 +119,14 @@ Se você parar só porque o parâmetro do canvas ou do playbook está vazio, a p
 
 1. Procure no workspace conectado uma página que faça esse papel e sugira-a, com o link.
 2. Sem nada, proponha criar a página com uma entrevista e grave só com o sim.
+
+### Retorno da edição anterior ignorado
+
+Se você avaliar o fit sem ler a nota de reunião das edições anteriores, a pessoa repete uma participação que já disse não ter dado venda, ou perde a que valeu pelas conexões.
+
+1. Abra cada edição anterior do grupo e leia o bloco de notas de reunião inteiro.
+2. Cite o que funcionou e o que não funcionou, com o link.
+3. Sem retorno, diga isso.
 
 ### Busca sem teto
 
