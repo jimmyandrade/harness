@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.21.3"
+  version: "0.22.0"
   related:
     - definir-empresa
     - definir-grafia
@@ -33,6 +33,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Cadastro na loja": "não"
 # `Campo do cliente na loja` é o nome da propriedade da lista de pessoas que guarda o link do cliente na loja. Vazio, o link fica nas notas.
 "Campo do cliente na loja": ""
+# `Campos da pessoa em arquivo` lista os campos que o arquivo local guarda de cada pessoa. O projeto acrescenta os que o negócio dele usa.
+"Campos da pessoa em arquivo": ["nome completo e como a pessoa é chamada", "variações de grafia e transcrições erradas do nome", "papel e time", "e-mail, ID no Slack, login no GitHub e ID da conta no Jira", "pronomes e a fonte deles", "canais e grupos em que ela aparece"]
 ```
 ## Instruções
 
@@ -49,14 +51,7 @@ Nas observações vai só o contexto estável. O histórico vai em comentário d
 Releia a página criada antes de dizer que gravou e nunca clique em renomear, editar ou excluir propriedade.
 
 Com `Tipo de armazenamento das pessoas` em `arquivos locais`, `Endereço das pessoas` é a pasta, com um arquivo por pessoa, nomeado pelo e-mail exato dela, no `Nome do arquivo da pessoa`, e um arquivo de índice com uma linha por pessoa: nome completo, como é chamada, e-mail, papel, time e o arquivo.
-Os campos incluem, sem se restringir a eles:
-
-- o nome completo e como a pessoa é chamada
-- as variações de grafia e as transcrições erradas do nome
-- o papel e o time
-- o e-mail, o ID no Slack, o login no GitHub e o ID da conta no Jira
-- os pronomes e a fonte deles
-- os canais e grupos em que ela aparece
+Os campos são os de `Campos da pessoa em arquivo`, e o projeto acrescenta os que o negócio dele usa.
 
 Os pronomes só se gravam quando a própria pessoa os declarou ou quem usa a habilidade os informou, e a fonte diz qual dos dois foi: sem isso, o campo fica vazio e os textos citam a pessoa sem pronome.
 O login e o ID do Jira servem para citar a pessoa com menção real fora do Slack, como `mencionar-pessoa` manda.
