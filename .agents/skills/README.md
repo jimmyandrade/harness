@@ -549,10 +549,12 @@ flowchart LR
   definir_jornada_de_producao --> organizar_ponto_de_contato
   definir_jornada_de_producao --> procurar_agenda
   definir_lancamento_financeiro --> definir_ativo_imobilizado
+  definir_lancamento_financeiro --> definir_obrigacao_financeira
   definir_lancamento_financeiro --> definir_planejamento_financeiro
   definir_lancamento_financeiro --> gerenciar_estoque
   definir_lancamento_financeiro --> lancar_despesa_da_empresa
   definir_lancamento_financeiro --> lancar_despesa_pessoal
+  definir_lancamento_financeiro --> lancar_venda
   definir_lancamento_financeiro --> revisar_financas
   definir_local_fisico --> definir_empresa
   definir_local_fisico --> definir_grafia

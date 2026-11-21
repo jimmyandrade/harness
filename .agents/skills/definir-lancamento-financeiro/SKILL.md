@@ -5,15 +5,17 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.5.1"
   aliases:
     - definir-lancamento
   related:
     - definir-ativo-imobilizado
+    - definir-obrigacao-financeira
     - definir-planejamento-financeiro
     - gerenciar-estoque
     - lancar-despesa-da-empresa
     - lancar-despesa-pessoal
+    - lancar-venda
     - revisar-financas
 ---
 
@@ -110,10 +112,21 @@ flowchart LR
   L -->|saída pessoal| P[lancar-despesa-pessoal]
   L -->|tarifa ou taxa do meio de pagamento| T[Gasto da empresa, em despesas comerciais ou financeiras]
   L -->|transferência entre contas do titular| N[Não é receita nem gasto: não grave]
+  L -->|transação não aprovada| X[Fica fora: rejeitada, cancelada ou devolvida]
+  L -->|empréstimo, entrada ou parcela| E[Pergunta: da empresa ou pessoal]
+  L -->|entrada e saída parecida logo depois| S[Pergunta: pode ser saque no cartão de crédito]
   L -->|liberação sem venda, estorno, rendimento ou dúvida| Q[Pergunta]
 ```
 
+Só a transação aprovada conta. Uma tentativa rejeitada ou cancelada não é gasto nem venda, mesmo repetida várias vezes no mesmo minuto, e fica fora da contagem de valores.
+
+O par de uma entrada e de uma saída de valor próximo, feitas em minutos, segue a regra do saque com cartão de crédito de `lancar-venda`: a entrada não é venda até a pessoa responder.
+
+A parcela de um contrato de empréstimo, depois da resposta, segue `definir-obrigacao-financeira`.
+
 Cada habilidade dona busca antes de criar, então uma linha que já tem lançamento não vira outro, e rodar a mesma lista de novo não duplica. Não grave pela conversa.
+
+Compare a data e a hora no fuso da conta de origem. A fonte pode guardar o horário em UTC, e um lançamento do fim do dia cai no dia seguinte quando o fuso não é convertido.
 
 As linhas que pedem pergunta vão juntas numa só, com a linha, o valor, a data e as opções. As outras seguem sem esperar a resposta, e as da pergunta não são gravadas até ela chegar.
 
@@ -126,8 +139,9 @@ A resposta começa pela tabela do Passo 5 e traz a contagem por destino: lançad
 Se você pedir uma pergunta por linha ou gravar a lista inteira sem classificar, a pessoa responde dezenas de vezes ou a transferência entre contas vira despesa.
 
 1. Classifique cada linha antes de gravar, pelo Passo 6.
-2. Junte o que depende de resposta numa pergunta só.
-3. Grave o que está claro e entregue a contagem por destino.
+2. Deixe de fora a transação não aprovada e compare as datas no fuso da conta.
+3. Junte o que depende de resposta numa pergunta só.
+4. Grave o que está claro e entregue a contagem por destino.
 
 ### Venda gravada como despesa
 
@@ -173,9 +187,9 @@ Faltavam as parcelas e o valor de cada uma. Perguntei. Não gravei.
 
 Era pessoal. Ficou fora da fonte da empresa e seguiu `lancar-despesa-pessoal`.
 
-### As atividades do mês no Mercado Pago, com 40 linhas
+### As atividades do mês no Mercado Pago, com 43 linhas
 
-Cada linha foi classificada. As vendas seguiram a habilidade de venda, os gastos da empresa seguiram `lancar-despesa-da-empresa`, e uma transferência entre contas do titular ficou de fora. Uma liberação sem venda entrou na pergunta única. A resposta trouxe a tabela e a contagem por destino.
+Três tentativas rejeitadas do mesmo Pix ficaram de fora. Cada linha aprovada foi classificada. As vendas seguiram a habilidade de venda, os gastos da empresa seguiram `lancar-despesa-da-empresa`, e uma transferência entre contas do titular ficou de fora. Uma entrada de R$ 1.000,00 seguida de uma saída de R$ 950,00 dois minutos depois, os empréstimos e os gastos sem dono claro entraram na pergunta única. A resposta trouxe a tabela e a contagem por destino.
 
 ### Assinatura cobrada em dólar
 
@@ -188,6 +202,8 @@ O valor em dólar, o câmbio, a data e a fonte do câmbio vieram da fatura. O va
 - Venda: a `Habilidade de venda`, quando houver. Não use a lista de despesas e investimentos.
 - Pessoal: fora da fonte da empresa, e segue `lancar-despesa-pessoal`.
 - A lista não traz o período ou de onde ler: pergunte. Não grave.
+- A lista traz uma transação rejeitada, cancelada ou devolvida: não grave e não some o valor.
+- A lista traz um empréstimo, na entrada ou na parcela: pergunte se é da empresa ou pessoal antes de gravar.
 - A mesma lista chega de novo: cada habilidade dona busca antes de criar. Não duplique.
 - A classe não existe na fonte: pergunte. Não crie a categoria.
 - A lista de estoque segue `gerenciar-estoque`. DRE, fluxo, diagnóstico, auditoria e preço seguem `revisar-financas`. O mês à frente segue `definir-planejamento-financeiro`.
