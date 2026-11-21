@@ -2,14 +2,14 @@
 name: janela-de-contato
 description: Formato da conferência da janela de contato de uma pessoa antes de enviar mensagem, e-mail ou convite, com o registro lido, a hora no fuso dela, a decisão e o próximo horário permitido.
 metadata:
-  version: "0.1.0"
+  version: "0.1.1"
 ---
 
 ## Contexto
 
 Use este modelo antes de qualquer mensagem, e-mail ou convite a uma pessoa, e de novo na hora do envio de um rascunho ou agendamento. As habilidades que contatam uma pessoa leem este modelo quando conferem a janela.
 
-A janela é o que o registro da pessoa diz sobre quando ela não é contatada. As três propriedades da lista de pessoas vêm dos parâmetros `Propriedade dos dias sem contato`, `Propriedade do horário sem contato a partir de` e `Propriedade do horário sem contato até`. Parâmetro vazio, ou propriedade vazia no registro, não impõe regra: siga com o envio e não gere o bloco.
+A janela é o que o registro da pessoa diz sobre quando ela não é contatada. As três propriedades da lista de pessoas vêm dos parâmetros `Dias sem contato`, `Sem contato a partir de` e `Sem contato até`. Parâmetro vazio, ou propriedade vazia no registro, não impõe regra: siga com o envio e não gere o bloco.
 
 Como conferir:
 

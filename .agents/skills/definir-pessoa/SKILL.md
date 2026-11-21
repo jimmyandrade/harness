@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.22.0"
+  version: "0.22.1"
   related:
     - definir-empresa
     - definir-grafia
@@ -34,9 +34,9 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 # `Campo do cliente na loja` é o nome da propriedade da lista de pessoas que guarda o link do cliente na loja. Vazio, o link fica nas notas.
 "Campo do cliente na loja": ""
 # Globais: os nomes das propriedades da lista de pessoas que guardam a janela de contato. Vazio não impõe regra.
-"Propriedade dos dias sem contato": ""
-"Propriedade do horário sem contato a partir de": ""
-"Propriedade do horário sem contato até": ""
+"Dias sem contato": ""
+"Sem contato a partir de": ""
+"Sem contato até": ""
 ```
 ## Instruções
 

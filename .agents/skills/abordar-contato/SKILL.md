@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.4.1"
   related:
     - definir-empresa
     - definir-negociacao
@@ -33,9 +33,9 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 # `Posição sobre o serviço oferecido` é o que a marca afirma, na segunda etapa da resposta ao contato frio, sobre o serviço que o contato oferece, como não trabalhar com esse tipo de empresa. Vazio, a segunda etapa não toma posição.
 "Posição sobre o serviço oferecido": ""
 # Globais: os nomes das propriedades da lista de pessoas que guardam a janela de contato. Vazio não impõe regra.
-"Propriedade dos dias sem contato": ""
-"Propriedade do horário sem contato a partir de": ""
-"Propriedade do horário sem contato até": ""
+"Dias sem contato": ""
+"Sem contato a partir de": ""
+"Sem contato até": ""
 ```
 
 ## Instruções

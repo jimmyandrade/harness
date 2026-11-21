@@ -6,7 +6,7 @@ A janela de contato diz em que dias e em que horas a pessoa não deve ser contat
 
 ### Exemplo: A propriedade existe na lista
 
-- Dado que `Propriedade dos dias sem contato` nomeia uma propriedade da lista de pessoas
+- Dado que `Dias sem contato` nomeia uma propriedade da lista de pessoas
 - E que quem usa a habilidade diz que a pessoa não é contatada na segunda-feira nem na terça-feira
 - Quando a pessoa é cadastrada ou atualizada
 - Então os dias vão na propriedade dos dias sem contato
@@ -23,7 +23,7 @@ A janela de contato diz em que dias e em que horas a pessoa não deve ser contat
 
 ### Exemplo: O parâmetro está vazio
 
-- Dado que `Propriedade dos dias sem contato` está vazio
+- Dado que `Dias sem contato` está vazio
 - Quando quem usa a habilidade informa uma janela
 - Então a habilidade avisa que o projeto não definiu onde guardá-la
 - E diz a janela na resposta, sem gravá-la nas observações

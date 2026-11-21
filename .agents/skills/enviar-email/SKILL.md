@@ -3,7 +3,7 @@ name: enviar-email
 description: Monta e envia um e-mail em nome de uma pessoa, com a assinatura certa, o destinatário principal e as cópias, o anexo vindo do Notion e o envio só com o sim. Usada quando uma pessoa contata uma organização por e-mail, inclusive com comprovante. Não serve para escrever no tom da marca, achar um e-mail nem triar a caixa.
 metadata:
   author: jimmyandrade
-  version: "0.7.0"
+  version: "0.7.1"
   related:
     - conversar-no-whatsapp
     - definir-pessoa
@@ -27,9 +27,9 @@ metadata:
 ```yaml
 "Modo de aprendizado": "perguntar"
 # Globais: os nomes das propriedades da lista de pessoas que guardam a janela de contato. Vazio não impõe regra.
-"Propriedade dos dias sem contato": ""
-"Propriedade do horário sem contato a partir de": ""
-"Propriedade do horário sem contato até": ""
+"Dias sem contato": ""
+"Sem contato a partir de": ""
+"Sem contato até": ""
 ```
 
 ## Instruções

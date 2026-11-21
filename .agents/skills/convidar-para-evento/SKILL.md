@@ -3,7 +3,7 @@ name: convidar-para-evento
 description: Convida uma pessoa ou um grupo para uma reunião, um show, uma feira ou um lançamento, lendo o evento da agenda e mandando o convite pelos canais que alcançam a pessoa, só com o sim da pessoa. Usada quando alguém deve ser convidado ou confirmou uma call. Não serve para criar o evento, cadastrar o convidado nem ler a conversa.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.4.1"
   related:
     - rascunhar-mensagem
     - acompanhar-resposta-no-whatsapp
@@ -29,9 +29,9 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Canais do convite em ordem de preferência": ["WhatsApp", "Google Agenda"]
 "Modo de aprendizado": "perguntar"
 # Globais: os nomes das propriedades da lista de pessoas que guardam a janela de contato. Vazio não impõe regra.
-"Propriedade dos dias sem contato": ""
-"Propriedade do horário sem contato a partir de": ""
-"Propriedade do horário sem contato até": ""
+"Dias sem contato": ""
+"Sem contato a partir de": ""
+"Sem contato até": ""
 ```
 
 ## Instruções
