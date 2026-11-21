@@ -3,12 +3,13 @@ name: publicar-produto-fisico-na-loja-virtual
 description: Publica e corrige um produto físico na loja virtual, com título, slug, descrição, variantes, estoque e prontidão para venda e marcação em post. Usada quando o produto vai à loja virtual ou precisa de correção lá, mesmo sem dizer loja. NÃO serve para cadastrar o produto, registrar o preço, movimentar estoque, vender no ponto de venda físico nem escrever o post.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.4.0"
   aliases:
     - definir-produto-na-loja
   related:
     - registrar-preco-de-produto-fisico
     - gerenciar-estoque
+    - identificar-duplicata
     - redigir-com-tom-de-voz
     - evoluir-habilidade
 ---
@@ -30,6 +31,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 O registro de produtos do projeto manda: nome completo, variantes, preço e estoque saem dele, e a loja é o destino. Sem o registro, pergunte uma vez. Não invente nome, tamanho, preço, SKU nem quantidade.
 
+Ache o produto do registro pelo título e pelas Variações de nome, com `identificar-duplicata`, e pelo SKU quando houver. Produto renomeado guarda o nome antigo nas variações, e olhar só o título diz que ele não existe.
+
 Antes de gravar, leia o produto na loja. Mostre a diferença entre o registro e a loja e grave só o que a pessoa pediu.
 
 ### Passo 2
@@ -44,11 +47,15 @@ Ao trocar o slug de um produto que já tem endereço público, crie o redirecion
 
 ### Passo 4
 
-Cada eixo de variação, como o tamanho, é uma opção do produto. Preço e SKU de cada variante seguem o registro. Preço novo ou mudança de preço seguem `registrar-preco-de-produto-fisico`.
+Cada eixo de variação, como o tamanho, é uma opção do produto. Preço e SKU de cada variante seguem o registro.
+
+Toda variante leva SKU, vindo da variante do registro, em cada lançamento e em cada correção. Variante sem SKU na loja é pendência: corrija na hora e diga o que gravou. Preço novo ou mudança de preço seguem `registrar-preco-de-produto-fisico`.
 
 ### Passo 5
 
 Defina o estoque de cada variante e local com a quantidade do registro. Quando a loja ou o registro divergem de uma quantidade, pergunte qual vale antes de gravar. Movimento de entrada ou saída segue `gerenciar-estoque`.
+
+Variante prevista no registro, sem unidade cortada nem produzida, pode entrar na loja com estoque zero, para mostrar a disponibilidade futura. Isso não é divergência de estoque: diga que a variante é prevista e que o zero é esperado.
 
 ### Passo 6
 
@@ -57,7 +64,7 @@ O produto está pronto para venda e para marcação num post quando:
 - [ ] Tem ao menos uma foto aprovada pela pessoa.
 - [ ] A descrição foi aprovada pela pessoa. Sugestão da IA não aprovada não é gravada.
 - [ ] O título e o slug passaram pelos Passos 2 e 3.
-- [ ] O status está ativo, e cada variante tem preço e estoque.
+- [ ] O status está ativo, e cada variante tem preço, SKU e estoque.
 - [ ] O produto está publicado em cada canal de `Canais exigidos`.
 
 Diga o que falta. Um canal que um aplicativo gerencia, como o do Instagram, não publica por API: peça à pessoa que o faça no painel da loja e avise que a sincronização com a rede leva tempo.
@@ -85,6 +92,20 @@ Se você trocar o slug de um produto já divulgado sem redirecionar, os links an
 
 1. Troque o slug com o redirecionamento do antigo para o novo.
 2. Confira o endereço novo depois.
+
+### Produto achado só pelo título
+
+Se você buscar o produto da loja pelo título e disser que ele não está no registro, um produto renomeado fica sem par, e o histórico e o preço vão para o lugar errado.
+
+1. Busque também nas Variações de nome e pelo SKU.
+2. Só diga que o produto não existe depois dessas buscas.
+
+### Variante sem SKU
+
+Se você publicar ou corrigir o produto e deixar uma variante sem SKU, a loja e o registro deixam de se encontrar pelo SKU.
+
+1. Leia o SKU da variante no registro e grave na variante da loja.
+2. Releia a variante e diga o que gravou.
 
 ### Produto marcado sem estar pronto
 
@@ -116,9 +137,14 @@ Alertei que o slug omite "face", propus `calca-dupla-face-nhee`, troquei com o r
 - A pessoa insiste num slug fora da regra: grave com o alerta dito, sem repetir a objeção.
 - O produto não tem foto: deixe fora de venda e marcação e diga que falta a foto.
 - A quantidade do registro e a da loja divergem: pergunte qual vale.
+- O nome da loja não bate com o título do registro: procure nas Variações de nome e pelo SKU antes de dizer que o produto não existe.
+- A variante é só prevista, sem unidade produzida: pode entrar com estoque zero. Não pergunte qual quantidade vale.
+- A variante da loja não tem SKU: grave o do registro, e sem SKU no registro pergunte.
 
 ## Pegadinhas
 
+- O estoque zero numa variante parece produto esgotado. Pode ser variante prevista, que mostra a disponibilidade futura e ainda não foi produzida.
+- A loja aceita variante sem SKU e não acusa erro. O SKU é o que liga a variante ao registro.
 - Um produto pode estar na loja sem estar à venda: o status não ativo o esconde, e a marcação em post exige o produto ativo e publicado no canal.
 - O canal do Instagram é gerenciado por aplicativo: a publicação por API não acusa erro, mas também não o publica.
 - A API de estoque atual exige uma chave de idempotência em cada gravação. Sem ela, a chamada falha.
