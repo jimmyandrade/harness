@@ -1702,7 +1702,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Properties**:
   - Lives at `.agents/skills/lancar-venda/SKILL.md`
   - Reads the sales database, the bank accounts database, the optional units database, the source of the received amount, and the invoice rule from the project instructions, and asks once when a value other than a database is empty, and calls the database lookup skill for a database
-  - Searches the sale by order number, order link, and transaction id before creating, and links a late store order to the original sale
+  - Follows procurar-venda before creating, by order number, order link, and transaction id, or by the real date, the customer, and the units when none of the three exists, and links a late store order to the original sale
   - Never creates the person, product, unit, or variant, and never writes the sold pieces or the stock balance
   - Records the discount reason and keeps nominal price, discount, credit, amount paid, and amount received distinct, with fees and transfers never counted as a discount
   - Shows a per-field diff when sources diverge and has the person confirm the canonical value of each field
@@ -2066,6 +2066,26 @@ How these skills relate is in `README.md`, in this folder.
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses creating, editing, or completing the task, and searching outside the task list
+
+### procurar-venda
+- **Stability**: experimental
+- **Description**: Answer whether a sale was already registered and which sales happened on a day, of a product, or for a person, reading only
+- **Properties**:
+  - Lives at `.agents/skills/procurar-venda/SKILL.md`
+  - Reads the sales database from the project instructions, falling back to the entry of lancar-venda, and calls the database lookup skill when it is empty
+  - Searches by date or period, product or variant, customer, touchpoint, order number, order link, transaction id, and amount, with every criterion the person gave
+  - Finds the page of the person, product, unit, or touchpoint first and searches the sales linked to it, with every spelling of a name through definir-grafia
+  - Compares an amount with the amount paid for the products, the amount with shipping, and the amount received, and says which one matched
+  - Shows, for each sale, the page link, the order, the date and time, the amount, the payment status, the customer, the variants, and the linked units, and says which field is empty
+  - Shows every similar sale without choosing, and a sale that matches only part of the criteria with what matches and what diverges
+  - With no result, names the criteria used and says it found nothing
+  - Never creates, completes, or corrects a sale, which stays with lancar-venda
+- **Test Criteria**:
+  - [ ] The skill is present at that path
+  - [ ] The description refuses registering, completing, correcting, or reconciling the sale
+  - [ ] A sale is found by each criterion alone
+  - [ ] Several similar sales are all shown and none is chosen
+  - [ ] No result names the criteria used and creates nothing
 
 ### procurar-variacao-de-termo
 - **Stability**: experimental

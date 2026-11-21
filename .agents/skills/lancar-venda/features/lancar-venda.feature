@@ -23,6 +23,13 @@ Funcionalidade: Lançar venda
       Então atualiza essa venda
       Mas não cria outra
 
+    Exemplo: Venda sem pedido que já existe
+      Dado que a venda não tem número do pedido, link nem identificador da transação
+      E que a busca pela data real, pela pessoa cliente e pelas unidades acha a venda
+      Quando a habilidade lança a venda
+      Então atualiza essa venda
+      Mas não cria outra
+
     Exemplo: Venda ligada ao ponto de contato
       Dado que a venda aconteceu num ponto de contato
       Quando a habilidade registra a venda
