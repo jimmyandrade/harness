@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.21.0"
+  version: "0.22.0"
   related:
     - definir-empresa
     - definir-grafia
@@ -101,6 +101,8 @@ Grave como confirmado só o que veio direto da pessoa que usa a habilidade ou de
 Antes de encerrar, passe por cada propriedade da lista de pessoas e preencha a que uma fonte responde: telefone, e-mail, as empresas relacionadas e as que ela possui, os perfis sociais e os canais, a localidade, o tipo de público, as variações de grafia e o campo de não confundir com quando há homônimo na lista.
 
 A empresa segue `identificar-duplicata` e `definir-empresa`, e o perfil segue `definir-perfil-social`. Ser dona da empresa só se grava quando a pessoa ou uma fonte diz isso. O nome que o WhatsApp mostra só indica a empresa relacionada.
+
+Quando uma pessoa ou uma empresa indica esta pessoa, ou esta pessoa indica outra pessoa ou uma empresa, a indicação liga as duas páginas por relação, e o comentário não substitui a relação. Use a relação de indicação que o mapeamento de dados tem, como a da negociação ou a das empresas relacionadas. Sem relação para o par, não crie propriedade: diga a limitação e recomende o campo na resposta, e registre quem indicou nas observações até lá.
 
 A empresa que o cadastro cita, como a do atendente ou a que o contato representa, e que `identificar-duplicata` não acha na lista de empresas, é cadastrada por `definir-empresa` na mesma rodada, sem perguntar, e a pessoa entra nas pessoas responsáveis dela. Só pergunte o dado que as fontes não respondem. O nome da empresa nas observações não substitui a página, e a resposta não termina em "não existe" sem a página criada.
 
