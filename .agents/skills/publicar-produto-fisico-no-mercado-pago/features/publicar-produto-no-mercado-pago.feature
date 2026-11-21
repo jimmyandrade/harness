@@ -61,3 +61,17 @@ Funcionalidade: Publicar um produto do registro no catálogo do Mercado Pago
       Quando a habilidade vai cadastrar com variações
       Então pede o sim da pessoa para excluir o produto único antes
       E diz que a exclusão é permanente
+
+  Regra: só entra no catálogo o que existe
+
+    Exemplo: Variante prevista e não produzida
+      Dado que o registro prevê uma variante que ainda não tem unidade produzida
+      Quando a habilidade cadastra o produto no catálogo
+      Então deixa a variante de fora
+      E diz que ela entra quando houver uma unidade
+
+    Exemplo: Produto sem custo
+      Dado que o produto não tem custo no registro
+      Quando a habilidade cadastra o produto
+      Então deixa o custo vazio
+      E diz que o custo falta

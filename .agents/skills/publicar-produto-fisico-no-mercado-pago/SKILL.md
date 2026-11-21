@@ -4,7 +4,7 @@ description: Cadastra e atualiza um produto físico no catálogo do Mercado Pago
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.4.0"
   related:
     - registrar-preco-de-produto-fisico
     - publicar-produto-fisico-na-loja-virtual
@@ -28,7 +28,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ### Passo 1
 
-O registro de produtos do projeto manda: nome, descrição, preço, custo, SKU e estoque saem dele, e o catálogo do Mercado Pago é o destino. Sem o registro do produto, pergunte uma vez. Não invente nome, tamanho, preço, custo, SKU nem quantidade.
+O registro de produtos do projeto manda: nome, descrição, preço, custo, SKU e estoque saem dele, e o catálogo do Mercado Pago é o destino. Sem o registro do produto, pergunte uma vez. Não invente nome, tamanho, preço, custo, SKU nem quantidade. Produto sem custo no registro entra com o custo vazio, e a resposta diz que falta.
 
 O catálogo pede, de cada produto: nome (até 60 caracteres, obrigatório), descrição (até 2500), preço de venda (obrigatório), unidade de medida (unidade, metro, litro ou quilograma), custo, SKU, código de barras (GTIN), categoria, estoque atual e alerta de estoque mínimo. Aceita uma foto só.
 
@@ -44,7 +44,7 @@ O catálogo guarda cópia da foto. Foto trocada na fonte depois não chega ao ca
 
 O formato é sempre o cadastro com variações, mesmo para um produto de uma variante só, para que uma variação nova entre depois sem refazer o produto. O produto único nunca se usa: ele não vira produto com variações, e o catálogo recusa um SKU repetido, então refazer pede excluir o produto único antes, com o sim da pessoa.
 
-O nome do produto é o do registro, sem o tamanho. O tamanho entra como o atributo da variação, e o catálogo compõe o título de cada variante com o nome e o valor, como "Colete Asa Curta 16-bit P". Cada variante do registro é uma variação, com o SKU, o preço, o custo e o estoque dela. O cadastro aceita até 3 atributos entre tamanho, peso, cor, sabor, voltagem, material e personalizado.
+O nome do produto é o do registro, sem o tamanho. O tamanho entra como o atributo da variação, e o catálogo compõe o título de cada variante com o nome e o valor, como "Colete Asa Curta 16-bit P". Cada variante do registro que tem unidade em estoque é uma variação, com o SKU, o preço, o custo e o estoque dela. Variante prevista e ainda não produzida fica de fora: o catálogo cobra o que existe, e a loja virtual pode mostrar a variante prevista com estoque zero sem que o catálogo a tenha. O cadastro aceita até 3 atributos entre tamanho, peso, cor, sabor, voltagem, material e personalizado.
 
 Cadastro por planilha e por XML também existem e não foram exploradas.
 
@@ -143,11 +143,13 @@ Procurei o SKU no catálogo e não achei. Copiei a única foto da loja virtual e
 - Sem navegador logado: peça à pessoa que entre no painel.
 - A pessoa pede planilha ou XML: diga que não foram validados e peça o sim.
 - Um produto único já existe com o SKU: exclua-o antes, com o sim da pessoa, porque o catálogo recusa o SKU repetido.
+- A variante está prevista no registro e não foi produzida: não entra no catálogo. Diga que ela entra quando houver uma unidade.
 - O produto ainda não está no catálogo quando o preço muda: diga e pergunte se o lança, com o preço de etiqueta.
 
 ## Pegadinhas
 
 - O catálogo parece guardar várias fotos. Ele guarda uma só, e o seletor de arquivo não aceita mais de um.
+- A variante prevista parece pedir um lugar no catálogo, como na loja virtual. O catálogo cobra na hora, então só entra o que tem unidade em estoque.
 - O campo de preço do formulário parece aceitar o valor escrito de fora. Ele só aceita o que é digitado na tela, e a chamada de API não tem esse limite.
 - A lista de preços parece o lugar do preço à vista. Com os preços sincronizados, ela segue o preço base na mesma proporção, e o final combinado se perde.
 - O painel parece ter API pública para o catálogo. A documentação pública não traz um endpoint de produtos, e o painel usa endpoints do próprio domínio.
