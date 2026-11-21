@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.52.2"
+  version: "0.53.0"
   related:
     - convidar-para-evento
     - definir-agenda-de-popstar
@@ -140,7 +140,9 @@ flowchart LR
 Não pronta: inicie a conexão. Não responda só com instrução manual.
 Ativa: confirme e siga a tarefa original. Não peça para repetir o pedido.
 Falhou, indisponível ou ação fora do chat: explique o bloqueio e só então dê a alternativa manual.
-Não invente fonte, data, horário nem duração. A data sem horário fica sem horário. Número que não está no material: peça só o que falta.
+Não invente fonte, data, horário nem duração. O horário que vem de fora, como o da organização ou o da saída de uma viagem, sai da fonte, e a data sem ele fica sem horário. Número que não está no material: peça só o que falta.
+
+Falta o dia ou o horário que só depende da agenda da pessoa, como numa reunião a marcar: não pergunte em aberto. Leia as agendas, os `Compromissos de vida` e a jornada e proponha um horário livre, com até duas alternativas e a duração, para a pessoa só confirmar. Com convidado, cruze a disponibilidade dele quando a ferramenta mostrar. Grave depois do sim. O plano para um dia nomeado segue o Passo 1.
 
 Revisão ou alteração de evento ligado a oportunidade, negócio ou ponto de contato lê a página canônica no Notion antes de mudar título, horário, data, local ou contexto.
 Priorize a propriedade estruturada que a página já tem: data e hora, localidade, empresa ou local, decisão humana, curadoria por IA, status, oportunidade relacionada e pessoa ou empresa abordada.
@@ -260,6 +262,14 @@ Se você escrever a data numérica sem o dia da semana, ou aceitar um dia da sem
 1. Calcule o dia como a regra do dia da semana manda, com a data, o horário e o fuso.
 2. Escreva no formato da data com dia da semana em cada data.
 3. Se divergir, sinalize e confirme antes de criar ou alterar.
+
+### Pergunta aberta de horário
+
+Se você perguntar que dia ou que horário a pessoa quer, ela precisa abrir a agenda sozinha e a marcação atrasa.
+
+1. Leia as agendas, os `Compromissos de vida` e a jornada.
+2. Proponha um horário livre, com até duas alternativas, para a pessoa só confirmar.
+3. Grave depois do sim.
 
 ### Agendado e não achado
 
