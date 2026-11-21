@@ -8,6 +8,23 @@ How these skills relate is in `README.md`, in this folder.
 
 ## Features
 
+### abordar-contato
+- **Stability**: experimental
+- **Description**: Find whether we already talked to a company, organization or person and, with no record, propose and send the first message
+- **Properties**:
+  - Lives at `.agents/skills/abordar-contato/SKILL.md`
+  - Starts from the sources that definir-negociacao checks, and never ends with "no record found"
+  - Searches the site, social profile, public contact, next edition and application form, and says what it found with the links
+  - Tries the application when the form is open, and proposes a direct contact on the channel where the organization answers
+  - Writes the first message in first person by whoever signs, with name and role, and quotes who referred the brand only when the person said so
+  - Proposes one message for the organization profile, in the plural, and another for the profile of whoever runs it, with that person's name
+  - Sends the approved text itself through the channels in the configured order, and hands the ready text over only when none sends
+  - Proposes a short message to the group when the organization answers in one, and records every exchange through definir-negociacao
+  - Leaves the record of the exchange to definir-negociacao, the tone to redigir-com-tom-de-voz, and the application to inscrever-na-oportunidade
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses recording the exchange, writing in the brand tone, and applying
+
 ### abrir-vendas-na-tiqueteira
 - **Stability**: experimental
 - **Description**: Open an event's presale on its ticketing platform, from the missing dates to the public link saved on the event
@@ -1138,6 +1155,7 @@ How these skills relate is in `README.md`, in this folder.
   - Relates the social profile after the profile exists, and leaves the profile to definir-perfil-social
   - Uses an existing person instead of creating another, and lists several matches without creating
   - Does not invent email, phone, pronouns, audience, or a company
+  - Leaves citing a person with a real mention to mencionar-pessoa
   - Does not only check existence, lock the spelling of someone already listed, register the profile, register the company, or delete without an order
 - **Test Criteria**:
   - [x] The skill is present at that path
@@ -1768,6 +1786,20 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses Notion, opening the repository from Notion, testing whether the skill met the case, evolving the skill, and writing the eval
   - [x] A limit missing from the project comes from the harness that ships the skill, and a limit in the project wins
+
+### mencionar-pessoa
+- **Stability**: experimental
+- **Description**: Cite a person in a published text with a real mention instead of the name as text
+- **Properties**:
+  - Lives at `.agents/skills/mencionar-pessoa/SKILL.md`
+  - Finds the ID in the person's record and writes the mention as the platform asks: Slack, GitHub, Jira, or Confluence
+  - Writes the Confluence page body in HTML, because Markdown does not generate a mention
+  - Searches the platform by email when the record has no ID, uses only a single result, and asks otherwise
+  - Saves the ID it found in the record
+  - Asks the author before adding mentions to a text published long ago
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses registering the person and writing the text in the brand tone
 
 ### mesclar-pull-request
 - **Stability**: experimental

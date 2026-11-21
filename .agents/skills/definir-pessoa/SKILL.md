@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.19.2"
+  version: "0.20.0"
   related:
     - definir-empresa
     - definir-grafia
@@ -13,6 +13,7 @@ metadata:
     - usar-whatsapp-web
     - definir-perfil-social
     - identificar-duplicata
+    - mencionar-pessoa
 ---
 
 # Definir pessoa
@@ -47,12 +48,7 @@ Nas observações vai só o contexto estável. O histórico vai em comentário d
 
 Releia a página criada antes de dizer que gravou e nunca clique em renomear, editar ou excluir propriedade.
 
-Com `Tipo de armazenamento das pessoas` em `arquivos locais`, `Endereço das pessoas` é a pasta, com um arquivo por pessoa, nomeado pelo e-mail exato dela, no `Nome do arquivo da pessoa`, e um arquivo de índice com uma linha por pessoa: nome completo, como é chamada, e-mail, papel, time e o arquivo.
-Os campos são o nome completo, como a pessoa é chamada, as variações de grafia, as transcrições erradas do nome, o papel, o time, o e-mail, o ID no Slack, o login no GitHub, o ID da conta no Jira, os pronomes e a fonte deles, e os canais e grupos em que ela aparece.
-Os pronomes só se gravam quando a própria pessoa os declarou ou quem usa a habilidade os informou, e a fonte diz qual dos dois foi: sem isso, o campo fica vazio e os textos citam a pessoa sem pronome.
-O login e o ID do Jira servem para citar a pessoa com menção real fora do Slack, como o Passo 4 manda.
-O arquivo local tem ainda o campo `extensions`, que guarda dados de outras habilidades sobre a pessoa, uma entrada por habilidade ou assunto, como o idioma em que ela prefere receber uma revisão.
-Esta habilidade não define nem valida o conteúdo de `extensions`: ao atualizar o registro, deixa o campo e tudo o que há nele como estão.
+Com `Tipo de armazenamento das pessoas` em `arquivos locais`, siga `references/armazenamento-em-arquivos.md`.
 
 ```mermaid
 flowchart LR
@@ -117,26 +113,7 @@ Leia os dois no registro, nunca os escreva na habilidade, e sem o nome civil par
 
 ### Passo 4
 
-Quem cita uma pessoa num texto publicado, em qualquer plataforma, marca a pessoa com menção real e não com o nome em texto.
-Ache o ID no registro da pessoa e escreva a menção como a plataforma pede:
-
-```mermaid
-flowchart LR
-  P{Onde o texto é publicado?} -->|Slack| S["<@ID> do Slack"]
-  P -->|GitHub| G["@login"]
-  P -->|Jira| J["chip com o ID da conta no Jira"]
-  P -->|Confluence| C["span de menção em HTML"]
-```
-
-- No Confluence, a menção é `<span data-type="mention" data-user-id="ID">@Nome</span>`, com o ID da conta no Jira.
-- No Confluence, o corpo da página vai em HTML ao criar e ao atualizar, porque o markdown não gera menção.
-- O login do GitHub vem do registro da pessoa ou do autor de pull requests recentes.
-- Sem o ID no registro, procure pelo e-mail na plataforma e use só um resultado único.
-- Grave o ID que achou no registro.
-- Sem e-mail e com mais de um resultado, ou com dois registros de nome parecido, pergunte.
-- Confira pelo assunto da fala quem é a pessoa e nunca escolha o primeiro resultado.
-- A menção notifica a pessoa.
-- Acrescentar menções a um texto já publicado há tempo pede o sim de quem escreve.
+Citar uma pessoa num texto publicado, com menção real, segue `mencionar-pessoa`.
 
 ## Problemas comuns
 
@@ -172,15 +149,6 @@ Se você listar um nome como pendente sem ter pesquisado, a pessoa confirma o qu
 1. Pesquise no mesmo turno, antes de listar, no diretório e em cada ferramenta de `Fontes para resolver identidade`, pelo nome e pelo e-mail.
 2. Um candidato plausível entra como `inferido`, com a frase.
 3. A lista de pendentes leva só o que a busca em todas as fontes não resolveu.
-
-### Nome em texto onde cabia menção
-
-Se você escrever o nome de quem participou ou de quem responde por uma ação só como texto, a pessoa não é notificada e o texto não leva até ela.
-
-1. Ache o ID no registro, como o Passo 4 manda.
-2. Escreva a menção real da plataforma.
-3. Sem o ID, procure pelo e-mail.
-4. Sem resultado único, pergunte.
 
 ### Texto emendado no cadastro pelo navegador
 
@@ -275,8 +243,6 @@ A Tula não estava na lista de pessoas. Criei a página dela, com o papel nas ob
 - O nome exibido com o nicho parece o nome completo. O nome completo é o nome da pessoa. O restante fica no perfil.
 - O handle parece o título da pessoa. Ele fica no perfil.
 - O primeiro nome do nome completo nem sempre é como a pessoa é chamada: um texto que usa o primeiro nome erra o nome dela.
-- O markdown não gera menção no Confluence: o texto sai com o nome puro e ninguém é notificado. Use HTML.
-- Uma menção parece só um jeito de escrever o nome. Ela notifica a pessoa.
 - Uma inferência que a pessoa decidiu parece confirmação. Ela é hipótese até alguém que sabe confirmar.
 
 ## Scripts disponíveis

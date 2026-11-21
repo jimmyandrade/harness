@@ -11,6 +11,7 @@ Solid arrows come from `metadata.related`. Dotted arrows are skills cited in the
 ```mermaid
 flowchart LR
   subgraph core["Core"]
+    abordar_contato["abordar-contato"]
     abrir_vendas_na_tiqueteira["abrir-vendas-na-tiqueteira"]
     acompanhar_edital["acompanhar-edital"]
     acompanhar_fila_de_revisao["acompanhar-fila-de-revisao"]
@@ -137,6 +138,7 @@ flowchart LR
     limpar_copias_de_trabalho["limpar-copias-de-trabalho"]
     manter_contato_no_whatsapp["manter-contato-no-whatsapp"]
     medir_habilidade["medir-habilidade"]
+    mencionar_pessoa["mencionar-pessoa"]
     mesclar_pull_request["mesclar-pull-request"]
     mesclar_registro["mesclar-registro"]
     organizar_emails["organizar-emails"]
@@ -188,6 +190,12 @@ flowchart LR
     validar_plano_de_vocabulario["validar-plano-de-vocabulario"]
     verificar_origem_do_link["verificar-origem-do-link"]
   end
+  abordar_contato --> definir_empresa
+  abordar_contato --> definir_negociacao
+  abordar_contato --> definir_pessoa
+  abordar_contato --> inscrever_na_oportunidade
+  abordar_contato --> procurar_oportunidade
+  abordar_contato --> redigir_com_tom_de_voz
   abrir_vendas_na_tiqueteira --> definir_lote_de_ingresso
   acompanhar_edital --> criar_oportunidade
   acompanhar_edital --> definir_grafia
@@ -535,6 +543,7 @@ flowchart LR
   definir_medicao_de_metrica --> definir_okr
   definir_medicao_de_metrica --> identificar_duplicata
   definir_medicao_de_metrica --> reconhecer_imagem
+  definir_negociacao --> abordar_contato
   definir_negociacao --> acompanhar_retornos_pendentes
   definir_negociacao --> definir_agenda
   definir_negociacao --> inscrever_na_oportunidade
@@ -571,6 +580,7 @@ flowchart LR
   definir_pessoa --> definir_grafia
   definir_pessoa --> definir_perfil_social
   definir_pessoa --> identificar_duplicata
+  definir_pessoa --> mencionar_pessoa
   definir_pessoa --> usar_whatsapp_web
   definir_planejamento_financeiro --> definir_lancamento_financeiro
   definir_planejamento_financeiro --> gerenciar_estoque
@@ -820,6 +830,8 @@ flowchart LR
   manter_contato_no_whatsapp --> rotular_item
   manter_contato_no_whatsapp --> usar_whatsapp_web
   medir_habilidade --> testar_habilidade
+  mencionar_pessoa --> definir_pessoa
+  mencionar_pessoa --> redigir_com_tom_de_voz
   mesclar_pull_request --> atender_revisao_de_pull_request
   mesclar_pull_request --> atualizar_branch_do_pull_request
   mesclar_pull_request --> comunicar_novidade_do_produto

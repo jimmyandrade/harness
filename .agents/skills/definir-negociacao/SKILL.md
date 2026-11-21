@@ -5,8 +5,9 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.9.2"
+  version: "0.10.0"
   related:
+    - abordar-contato
     - acompanhar-retornos-pendentes
     - definir-agenda
     - evoluir-habilidade
@@ -52,6 +53,7 @@ flowchart LR
   Q -->|evento com horário na agenda| A[definir-agenda]
   Q -->|planejar o ponto de contato| P[organizar-ponto-de-contato]
   Q -->|texto para a empresa ou pessoa| T[redigir-com-tom-de-voz]
+  Q -->|sem registro ou abordagem nova| B[abordar-contato]
 ```
 
 ### Passo 2
@@ -90,21 +92,7 @@ Antes de redigir ou enviar a retomada de um contato, leia nos comentários a dat
 
 Não presuma que o contato anterior foi no mesmo canal do atual: confirme o canal antes de escrever. O texto diz o canal certo, como "pelo Instagram", e não "por aqui" quando o canal mudou. Diga como o contato foi achado quando a pessoa contar, como a postagem ou o site, e não invente a origem.
 
-Quando a pergunta é se já houve contato com uma empresa ou pessoa e nenhuma fonte tem registro, não encerre com "não achei". Confira se a oportunidade dela está cadastrada, com `procurar-oportunidade`. Pesquise na internet o site, o perfil social e o contato público da empresa, da pessoa ou da oportunidade, e veja se há edição futura e formulário de inscrição ou de curadoria. Diga o que achou, com os links.
-
-Com formulário aberto, tente a inscrição já. Antes de abrir o formulário, carregue `inscrever-na-oportunidade` e preencha só como ela manda, com o contato da empresa e o formato que cada campo valida.
-
-Com ou sem inscrição, proponha também o contato direto, pelo canal em que a organização responde, para a marca se apresentar e avisar da inscrição. O texto cita quem indicou a marca quando a pessoa contar, e não inventa indicação. Ele sai por `redigir-com-tom-de-voz`.
-
-A primeira mensagem se apresenta em primeira pessoa por quem assina, com nome e papel, e não só pela marca. Quem assina vem do cadastro de pessoas e das instruções do projeto, que dizem quem representa a marca e quando outra pessoa pode aparecer. Sem essa fonte, pergunte. Não ponha uma segunda pessoa sem a condição que a fonte pede.
-
-A organização e quem a dirige costumam ter perfis separados. Procure o perfil de cada um, na bio, no site de links e nas publicações, e proponha uma mensagem para cada, escrita para quem lê aquele perfil: o perfil da organização recebe um texto para a equipe, no plural, e o perfil pessoal recebe um texto com o nome da pessoa. Não mande ao perfil da organização um texto endereçado a uma pessoa.
-
-Antes de redigir, pergunte como o contato nasceu quando nenhuma fonte diz, como o evento em que a marca esteve, quem apresentou ou o encontro que não aconteceu. O texto conta essa cena, com quem indicou e o que cada um disse, só com o que a pessoa contou.
-
-Com o texto e o destino aprovados, envie você mesmo, sem pedir à pessoa que envie. Tente os canais na `Ordem dos canais de execução` e passe ao seguinte só quando o anterior não existir ou falhar. Se nenhum enviar, entregue o texto pronto e diga o que falhou em cada canal. Sem a aprovação, não envie nem cadastre a empresa ou a pessoa. Depois do envio, registre a troca como o Passo 3 manda.
-
-Quando a organização atende num grupo, como o de uma feira, e a marca escreveu a ela no privado, proponha também uma mensagem curta ao grupo, endereçada à pessoa da organização pelo nome. Ela só avisa que a marca já escreveu no privado, o que pediu, como a baia escolhida, e que aguarda o retorno. Não repete valor nem dado do privado. Ela sai com o sim da pessoa, pelo mesmo caminho, e o registro do Passo 3 a inclui.
+Quando nenhuma fonte tem registro de contato, ou quando a pessoa pede para abordar uma empresa, organização ou pessoa, siga `abordar-contato`. O registro da troca, depois do envio, segue o Passo 3.
 
 ### Passo 5
 
@@ -152,14 +140,6 @@ Se você só relatar a recusa, a empresa volta à lista na próxima compra e a c
 2. Escreva a data e o que ela recusou na nota do contato no WhatsApp.
 3. Aplique o rótulo de estado de concluída, por `rotular-item`.
 
-### Privado sem aviso ao grupo
-
-Se você escrever à organização só no privado, quem atende o grupo pode não ligar a mensagem à marca e responder as outras primeiro.
-
-1. Depois do envio, proponha ao grupo uma mensagem curta, endereçada à pessoa da organização.
-2. Ela diz que a marca já escreveu no privado, o que pediu e que aguarda o retorno.
-3. Envie só com o sim da pessoa e registre a mensagem como o Passo 3 manda.
-
 ### Registro que espera pergunta
 
 Se você enviar a mensagem e só oferecer registrar a troca, a negociação fica sem o que o negócio disse e a pessoa tem de pedir o registro.
@@ -175,30 +155,6 @@ Se você gravar a conversa de uma edição nova na negociação de outra, o hist
 1. Procure a negociação da oportunidade, não só a da empresa.
 2. Sem ela, crie uma nova, ligada só a essa oportunidade, com o link da anterior.
 3. Não mova o histórico antigo para a nova.
-
-### Sem registro e sem proposta
-
-Se você responder só que não achou registro de contato, a pessoa tem de pedir a pesquisa e a abordagem, e o contato não anda.
-
-1. Depois do checklist do Passo 4, confira se a oportunidade está cadastrada e pesquise na internet o site, o perfil social, o contato público, a próxima edição e o formulário de inscrição.
-2. Com formulário aberto, tente a inscrição. Responda com o que achou, com os links, e proponha o canal, o motivo e o texto da primeira mensagem, apresentada por quem fala e com a indicação quando a pessoa contar.
-3. Não envie nem cadastre sem a aprovação do texto e do destino.
-
-### Envio devolvido à pessoa
-
-Se você escrever o texto aprovado e esperar a pessoa mandar, o contato atrasa e a negociação fica sem o registro do envio.
-
-1. Com a aprovação, envie o texto pela `Ordem dos canais de execução`.
-2. Só entregue o texto à pessoa quando nenhum canal enviar, e diga o que falhou em cada um.
-3. Registre a troca na mesma rodada do envio, como o Passo 3 manda.
-
-### Um texto para dois perfis
-
-Se você escrever uma só mensagem para a organização e a mandar ao perfil dela endereçada a uma pessoa, quem lê não se reconhece no texto, e o perfil pessoal de quem dirige fica sem contato.
-
-1. Procure o perfil da organização e o da pessoa que a dirige.
-2. Proponha uma mensagem para cada um: plural para a equipe, o nome da pessoa no perfil pessoal.
-3. Assine em primeira pessoa quem a fonte diz que representa a marca, com nome e papel.
 
 ### Divergência escondida
 
@@ -231,16 +187,6 @@ Não havia conector do Instagram. Não pedi o texto: abri a conversa no navegado
 
 A mensagem colada não tinha data. Li os comentários: foi enviada pelo Instagram em 9 de maio, e a retomada sai seis meses depois, pelo WhatsApp. Troquei o "hoje" dela pelo que mudou desde então, escrevi "no Instagram" para o contato anterior e perguntei como o número foi achado antes de afirmar a origem.
 
-### já falamos com a Lia, do Ateliê Exemplo?
-
-Consultei os comentários, o cronograma, as inscrições e o e-mail, e nenhum tem registro. A oportunidade não estava cadastrada. Pesquisei na internet: o Ateliê Exemplo tem site e perfil no Instagram, que responde a mensagens, e não tem formulário de inscrição. Propus abordar pelo Instagram, para pedir uma cotação de bordado, com o texto no tom de voz. Não enviei nem cadastrei a empresa antes da aprovação. Aprovado o texto, enviei pelo conector do Instagram, registrei a troca na discussão da página da pessoa e disse o que registrei.
-
-### já falamos com a organização da Feira Exemplo?
-
-Sem registro, achei a feira cadastrada e, no Instagram dela, um formulário aberto de curadoria para a edição de março. Tentei a inscrição e propus também duas mensagens pelo Instagram, uma para o perfil da organização, no plural, e outra para o perfil pessoal da organizadora, as duas assinadas pela Ana, que representa a marca, com nome e papel, e citando a Lia como quem indicou a marca, porque a pessoa contou isso.
-
-Depois do envio, registrei o formulário na página da inscrição e a mensagem na discussão da organizadora, sem criar negociação, porque a lista de negociações proíbe o contato com a organização de feiras.
-
 ### a Isadora também respondeu pela Feira Exemplo
 
 Conferi se a pessoa abordada aceita mais de uma pessoa antes de somar Isadora Ribeiro à negociação.
@@ -248,7 +194,6 @@ Conferi se a pessoa abordada aceita mais de uma pessoa antes de somar Isadora Ri
 ## Casos-limite
 
 - A negociação não existe, ou é de outra edição da mesma empresa: busque pela empresa e pela oportunidade antes de criar, e só crie quando há negócio.
-- O perfil pessoal de quem dirige a organização não aparece na busca: proponha só a mensagem do perfil da organização e diga que não achou o pessoal.
 - A conversa é um convite, um agradecimento ou um café, sem negócio: grave na discussão da página da pessoa. Não crie negociação.
 - A lista de negociações proíbe o contato com a organização de feiras: grave a DM e o formulário na discussão da pessoa e da inscrição. Não crie negociação.
 - A pessoa avisa de um contato por um canal sem conector e sem colar o texto: leia a conversa pelo navegador do app e, se não abrir, pela extensão do navegador. Não peça o texto antes.
@@ -259,9 +204,6 @@ Conferi se a pessoa abordada aceita mais de uma pessoa antes de somar Isadora Ri
 - A mensagem anterior chega colada, sem data nem canal: pergunte os dois antes de escrever a retomada. Não presuma que o canal é o mesmo do atual.
 - O canal do contato mudou, como do Instagram para o WhatsApp: o texto diz o canal do contato anterior e a origem do novo, como a pessoa contou.
 - A lista não está no workspace conectado, ou o nome dela não está no mapeamento: pare e peça.
-- Sem registro de contato, e a pesquisa na internet não acha site, perfil nem contato público: diga o que pesquisou e peça à pessoa o canal. Não invente um contato.
-- Nenhum canal de execução consegue enviar: entregue o texto pronto e diga o que falhou em cada canal. Não peça à pessoa que tente primeiro.
-- A pesquisa acha mais de uma empresa ou pessoa com o mesmo nome: mostre as candidatas com o link de cada uma e pergunte qual é, antes de propor a abordagem.
 
 ## Pegadinhas
 
@@ -272,10 +214,7 @@ Conferi se a pessoa abordada aceita mais de uma pessoa antes de somar Isadora Ri
 - O mesmo fato pode estar no WhatsApp, no e-mail e no manual com horários diferentes. A data mais recente não é automaticamente a certa.
 - A mensagem anterior parece valer como está hoje. O "hoje" e o "estamos" dela eram do dia em que foi enviada, e o canal dela pode não ser o de agora.
 - Sem conector do canal, parece que só a pessoa tem a mensagem. A conta dela está logada no navegador do app e na extensão do navegador, e a leitura é sua.
-- O texto aprovado parece o fim do trabalho. A aprovação é o sim ao envio, e quem envia é você, pelos canais da `Ordem dos canais de execução`.
-- "Não achei registro" parece uma resposta completa. Ela só diz que as fontes do workspace estão vazias: a próxima ação é pesquisar na internet e propor a abordagem.
 - A empresa abordada e a pessoa abordada são relações. Telefone e grafias vêm por rollup e não se gravam aqui.
-- Um formulário aberto parece pedir só os campos preenchidos com os dados que você já tem. A skill de inscrição define de onde vem cada dado e o formato de cada campo, como o celular só com dígitos: carregue-a antes de digitar.
 
 ## Scripts disponíveis
 
