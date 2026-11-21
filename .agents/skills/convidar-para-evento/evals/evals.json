@@ -6,6 +6,12 @@
       "prompt": "Teste numa conversa real com Gui",
       "expected_output": "Depois que a pessoa confirmou a call na conversa, e depois do sim ao texto, a conversa recebe o evento nativo do WhatsApp, com o nome, o link da chamada na descrição e o início no dia e na hora da agenda. Em seguida recebe, à parte, uma mensagem com o dia, a hora e o link da chamada. O término que desloca o início fica vazio, e a mensagem com o link diz até que horas vai a call.",
       "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Convide a pessoa, em dia que o registro dela marca como sem contato, por WhatsApp e Google Agenda.",
+      "expected_output": "Nenhum convite sai por nenhum canal. A resposta diz o motivo e o próximo horário permitido, e o convite fica para esse horário.",
+      "files": []
     }
   ]
 }

@@ -1,4 +1,11 @@
 {
   "skill_name": "rascunhar-mensagem",
-  "evals": []
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Envie a mensagem à pessoa cujo registro tem a terça-feira nos dias sem contato, numa terça-feira.",
+      "expected_output": "Ler a janela no registro, calcular o dia da semana por comando no fuso da localidade da pessoa e não enviar. Dizer o motivo e o próximo horário permitido, com o dia da semana calculado por comando, e deixar o rascunho para esse horário.",
+      "files": []
+    }
+  ]
 }

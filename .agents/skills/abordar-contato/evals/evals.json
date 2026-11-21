@@ -1,4 +1,11 @@
 {
   "skill_name": "abordar-contato",
-  "evals": []
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Aborde por mensagem uma pessoa já cadastrada que não é contatada às terças, e hoje é terça-feira.",
+      "expected_output": "Depois da aprovação do texto, ler a janela no registro e não enviar. Dizer o motivo e o próximo horário permitido. Pessoa sem cadastro não tem janela.",
+      "files": []
+    }
+  ]
 }
