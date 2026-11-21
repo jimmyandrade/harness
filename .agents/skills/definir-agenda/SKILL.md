@@ -65,7 +65,7 @@ flowchart LR
   Q -->|reserva, bloqueio, a confirmar ou lembrete| K[definir-reserva]
   Q -->|popstar, reversa, vida, demanda ou reserva de carreira, ou bloco que cobre um compromisso de vida| P[definir-agenda-de-popstar]
   Q -->|uso do tempo ou obra| U[revisar-uso-do-tempo]
-  Q -->|o que já está no dia ou na semana| S[procurar-agenda]
+  Q -->|o que já está no dia ou na semana, ou horário livre a propor| S[procurar-agenda]
   Q -->|jornada de produção, dia útil, feriado, sábado, domingo ou alternância de sábados| J[definir-jornada-de-producao]
   Q -->|roteiro de viagem| V[definir-viagem]
   Q -->|convidado| C[definir-convidado]
@@ -128,7 +128,7 @@ O nome e o horário vêm do que a pessoa indicou para esse tipo no Notion e dess
 Compromisso, oportunidade, reunião, entrega ou evento comercial sem fonte na conexão: pare. Não crie o evento.
 Quando mais de uma página traz a data, a fonte é a página do time dono do evento, não a de outro time.
 Busque primeiro nas páginas do próprio time e só use a de outro time se a do time não traz a data.
-Antes de concluir que não consegue, confira Calendar Tools, Google Agenda, Notion Calendar ou equivalente nesta sessão. Não afirme que não há ferramenta sem essa checagem.
+Antes de dizer que não há ferramenta, confira Calendar Tools, Google Agenda, Notion Calendar ou equivalente nesta sessão.
 
 ```mermaid
 flowchart LR
@@ -140,9 +140,7 @@ flowchart LR
 Não pronta: inicie a conexão. Não responda só com instrução manual.
 Ativa: confirme e siga a tarefa original. Não peça para repetir o pedido.
 Falhou, indisponível ou ação fora do chat: explique o bloqueio e só então dê a alternativa manual.
-Não invente fonte, data, horário nem duração. O horário que vem de fora, como o da organização ou o da saída de uma viagem, sai da fonte, e a data sem ele fica sem horário. Número que não está no material: peça só o que falta.
-
-Falta o dia ou o horário que só depende da agenda da pessoa, como numa reunião a marcar: não pergunte em aberto. Leia as agendas, os `Compromissos de vida` e a jornada e proponha um horário livre, com até duas alternativas e a duração, para a pessoa só confirmar. Com convidado, cruze a disponibilidade dele quando a ferramenta mostrar. Grave depois do sim. O plano para um dia nomeado segue o Passo 1.
+Não invente fonte, data, horário nem duração. A data sem horário fica sem horário. Número que não está no material: peça só o que falta.
 
 Revisão ou alteração de evento ligado a oportunidade, negócio ou ponto de contato lê a página canônica no Notion antes de mudar título, horário, data, local ou contexto.
 Priorize a propriedade estruturada que a página já tem: data e hora, localidade, empresa ou local, decisão humana, curadoria por IA, status, oportunidade relacionada e pessoa ou empresa abordada.
@@ -262,14 +260,6 @@ Se você escrever a data numérica sem o dia da semana, ou aceitar um dia da sem
 1. Calcule o dia como a regra do dia da semana manda, com a data, o horário e o fuso.
 2. Escreva no formato da data com dia da semana em cada data.
 3. Se divergir, sinalize e confirme antes de criar ou alterar.
-
-### Pergunta aberta de horário
-
-Se você perguntar que dia ou que horário a pessoa quer, ela precisa abrir a agenda sozinha e a marcação atrasa.
-
-1. Leia as agendas, os `Compromissos de vida` e a jornada.
-2. Proponha um horário livre, com até duas alternativas, para a pessoa só confirmar.
-3. Grave depois do sim.
 
 ### Agendado e não achado
 
