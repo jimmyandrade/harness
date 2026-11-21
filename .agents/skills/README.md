@@ -554,6 +554,7 @@ flowchart LR
   definir_negociacao --> redigir_com_tom_de_voz
   definir_negociacao --> rotular_item
   definir_negociacao --> sincronizar_cronograma
+  definir_negociacao --> usar_whatsapp_web
   definir_obra_musical --> definir_fonograma
   definir_obra_musical --> procurar_banco_de_dados
   definir_obrigacao_financeira --> lancar_despesa_da_empresa

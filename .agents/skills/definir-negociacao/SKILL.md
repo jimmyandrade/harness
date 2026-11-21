@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.10.0"
+  version: "0.11.0"
   related:
     - abordar-contato
     - acompanhar-retornos-pendentes
@@ -19,6 +19,7 @@ metadata:
     - redigir-com-tom-de-voz
     - rotular-item
     - sincronizar-cronograma
+    - usar-whatsapp-web
 ---
 
 # Definir negociação
@@ -69,6 +70,12 @@ Outra empresa que passa a cotar o item que a primeira não faz é negociação p
 Quando a pessoa só avisa que alguém entrou em contato por um canal, como uma DM do Instagram, sem colar o texto, não peça o texto. Leia a conversa você mesmo, pela `Ordem dos canais de execução`, e passe ao canal seguinte só quando o anterior não existir ou falhar. Sem conector, o navegador do app e a extensão do navegador leem a conversa na conta em que a pessoa já está logada. Peça a colagem só quando nenhum canal ler, e diga o que falhou em cada um.
 
 Grave cada troca como um comentário na discussão da página da negociação, ou da pessoa quando não há negócio, uma por data ou bloco de mensagens. Comece com `Data da mensagem:` e a data, ou `Data do registro:` quando for uma ação do negócio sem mensagem, e diga o canal e quem falou. Resuma os fatos: datas, horários, valores, decisões e pendências. Cite entre aspas só a frase cuja grafia importa, como um horário dito de outro jeito. Antes de gravar, leia os comentários que já existem e não repita a mesma mensagem.
+
+Não deduza o canal da mensagem. Se a pessoa não o disse e a evidência não deixa claro se veio por Instagram, WhatsApp, e-mail ou outro, pergunte o canal antes do primeiro registro. Antes de concluir, compare o canal e o identificador gravados com a evidência e corrija qualquer dedução.
+
+Com o canal WhatsApp confirmado, veja se o número foi dado. Sem ele, leia-o no WhatsApp Web, por `usar-whatsapp-web`, e só pergunte se nada o traz. Enquanto não houver o número, escreva "número de WhatsApp pendente de confirmação" no comentário, sem preencher o telefone com dado incerto nem reaproveitar outro número.
+
+Registre o comentário datado em cada página relacionada e aplicável, como a da pessoa, a da empresa, a da negociação e a da oportunidade, mesmo quando a mensagem colada não muda nenhuma propriedade. Se faltar identificar uma relação, preserve a evidência no destino seguro e diga a pendência no comentário e na resposta. Falha de permissão ou comentário pendente deixa o registro incompleto, e a resposta diz isso.
 
 Quando o e-mail da empresa diz que o status se acompanha num painel, a pendência segue `acompanhar-retornos-pendentes`, que registra também o painel.
 
@@ -123,6 +130,14 @@ Se você escrever a retomada com a data e o canal que a mensagem anterior pareci
 1. Leia a data e o canal da troca anterior nos comentários, ou pergunte quando faltarem.
 2. Confirme o canal do contato atual. Não presuma que é o mesmo.
 3. Escreva o canal certo e a origem do contato que a pessoa contou.
+
+### Canal deduzido
+
+Se você gravar a primeira troca com o canal que a mensagem parecia ter, o registro nasce com um canal ou um número que ninguém confirmou.
+
+1. Pergunte o canal quando a pessoa não disse e a evidência não deixa claro.
+2. No WhatsApp, leia o número ou escreva que está pendente de confirmação.
+3. Compare o canal e o número gravados com a evidência antes de concluir.
 
 ### Histórico no corpo da página
 
@@ -199,6 +214,7 @@ Conferi se a pessoa abordada aceita mais de uma pessoa antes de somar Isadora Ri
 - A pessoa avisa de um contato por um canal sem conector e sem colar o texto: leia a conversa pelo navegador do app e, se não abrir, pela extensão do navegador. Não peça o texto antes.
 - Nenhum canal consegue ler a conversa: peça a colagem e diga o que falhou em cada canal.
 - A conversa não tem data: use `Data aproximada:` e diga de onde veio.
+- A mensagem colada não diz o canal: pergunte antes do primeiro registro. Não presuma Instagram, WhatsApp nem e-mail.
 - Várias mensagens no mesmo dia e assunto: um comentário só, com os horários.
 - A pessoa corrige um fato já gravado: novo comentário datado com a correção. Não apague o anterior.
 - A mensagem anterior chega colada, sem data nem canal: pergunte os dois antes de escrever a retomada. Não presuma que o canal é o mesmo do atual.
