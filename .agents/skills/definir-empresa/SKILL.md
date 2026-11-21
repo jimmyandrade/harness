@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.6.2"
+  version: "0.7.0"
   related:
     - definir-grafia
     - definir-perfil-social
@@ -17,8 +17,11 @@ metadata:
 
 ## Parâmetros de configuração
 
+Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global`. Quando um valor não estiver lá, use o padrão abaixo.
+
 ```yaml
-{}
+# `Praça prioritária do endereço` é a cidade cujo endereço a empresa recebe como canônico quando tem mais de um. Vazio, vale o endereço que a fonte mais forte sustenta, e a resposta diz que não há praça prioritária.
+"Praça prioritária do endereço": ""
 ```
 
 ## Instruções
@@ -60,11 +63,17 @@ Uma compra pontual, como uma refeição em restaurante, não exige conhecer o do
 
 O cadastro mínimo de recebedora financeira não valida a fornecedora para relacionamento comercial. Nele, site e razão social completa ausentes ficam como pendências, sem impedir o vínculo com o pagamento. O contato responsável ausente só vira pendência quando há relacionamento continuado. Não invente esses dados nem trate a instituição de pagamento como recebedora.
 
-Quando a lista exige a cidade da empresa e ninguém a informou, pesquise na internet, no site oficial e em fontes confiáveis, antes de usar uma localidade mais ampla. Empresa com uma só sede ou um só endereço: relacione essa cidade. Empresa que atua em várias cidades, com unidades ou escritórios regionais: relacione a localidade mais ampla que as cobre, como o país, e diga nas notas que é de propósito e quais fontes mostraram as unidades.
+Quando a lista exige a cidade da empresa e ninguém a informou, pesquise na internet, no site oficial e em fontes confiáveis, antes de usar uma localidade mais ampla. Empresa com uma só sede ou um só endereço: relacione essa cidade. Empresa que atua em várias cidades, com unidades ou escritórios regionais e sem unidade na `Praça prioritária do endereço`: relacione a localidade mais ampla que as cobre, como o país, e diga nas notas que é de propósito e quais fontes mostraram as unidades.
 
 O site, o CNPJ e o WhatsApp da empresa que as fontes respondem entram na mesma rodada do cadastro, sem avisar a pessoa antes. Pesquise o site e o perfil social oficial, o link da bio do perfil, o que o convite ou o formulário trazem e, para o CNPJ, a internet. Grave o que achou e diga as fontes. Só o que a busca não respondeu vira pendência, com o motivo e o que a resolve, como o contrato. Não liste como pendência o que ninguém tentou achar.
 
 Não escolha a sede só por ser a mais citada. Nome parecido de outra empresa, como uma filial ou uma entidade de outro porte, não vale como fonte: registre a distinção em `Não confundir com` ou nas notas.
+
+Empresa com mais de um endereço, como matriz, filial, ponto de coleta ou galpão: com `Praça prioritária do endereço`, o endereço canônico é o dessa praça sempre que a empresa tiver ali unidade, atendimento ou operação confirmada. Os outros endereços relevantes ficam em comentário datado, ou na propriedade própria quando existir. Não troque o canônico pelo de outra cidade só porque ele apareceu primeiro na busca, no site, no comprovante ou na nota de reunião.
+
+Se o endereço da praça prioritária for hipótese, estiver incompleto, conflitar com uma fonte mais forte ou puder ser de uma empresa homônima, confirme com a pessoa antes de gravar. Escolhido o canônico, relacione a localidade dessa praça na empresa.
+
+A cidade onde a operação de uma cotação acontece vai nas propriedades da negociação, como origem e destino, e não no endereço da empresa.
 
 A pessoa responsável é, de preferência, gerente, representante comercial, vendedora, dona ou contato do atendimento. Mais de um registro da mesma pessoa segue o flowchart do Passo 1.
 
@@ -119,8 +128,16 @@ Se você cadastrar a empresa e listar o site, o CNPJ ou o WhatsApp como pendênc
 Se você gravar o país, ou chutar uma cidade, sem pesquisar, a empresa fica com a localidade errada ou genérica e ninguém sabe se foi de propósito.
 
 1. Pesquise a cidade no site oficial e em fontes confiáveis.
-2. Uma só sede: relacione essa cidade. Várias cidades: relacione a localidade mais ampla e diga nas notas o motivo e a fonte.
+2. Uma só sede: relacione essa cidade. Várias cidades sem unidade na praça prioritária: relacione a localidade mais ampla e diga nas notas o motivo e a fonte.
 3. Não use uma empresa de nome parecido como fonte.
+
+### Endereço de outra praça como canônico
+
+Se você gravar o primeiro endereço que a busca mostrou, a empresa fica com o de uma unidade que a marca não usa, e a coleta ou a visita vai à cidade errada.
+
+1. Veja `Praça prioritária do endereço` e procure a unidade, a filial ou o atendimento da empresa nela.
+2. Confirmada, grave esse endereço como canônico e relacione a localidade. Os outros vão em comentário datado.
+3. Hipótese, endereço incompleto ou possível homônima: confirme com a pessoa antes de gravar.
 
 ### Pessoa só na nota
 
@@ -166,6 +183,10 @@ Associei a pessoa nas pessoas responsáveis. A nota ficou com o papel. O tipo de
 
 Pesquisei a cidade no site oficial e em uma matéria sobre a associação. Ela tem sede em uma capital e unidades em outras regiões, então relacionei o país e escrevi nas notas o motivo e as fontes. Uma entidade de nome parecido, de veículos pesados, ficou fora, com a distinção nas notas.
 
+### a fornecedora tem matriz em outra capital e uma filial na praça prioritária
+
+Com a praça prioritária preenchida, gravei o endereço da filial como canônico e relacionei a localidade dela. A matriz, que a busca mostrou primeiro, ficou num comentário datado e não substituiu o endereço da filial.
+
 ### Empresa lembrada pelo ramo e pelo lugar
 
 Contei que achávamos "Design Print", fica perto da Avenida Pedro II e imprime em tecido. O nome certo era "Dream Estamparia Digital". Gravei o nome certo, guardei "Design Print" nas variações e as três pistas nas pistas de memória.
@@ -174,7 +195,8 @@ Contei que achávamos "Design Print", fica perto da Avenida Pedro II e imprime e
 
 - A pessoa não lembra o nome da empresa e dá só pistas: guarde as pistas, procure por elas e só cadastre quando o nome vier. Não invente o nome.
 - A lista não tem a propriedade de pistas de memória: avise e proponha. Não ponha as pistas na nota nem na variação de grafia.
-- A cidade da empresa não foi informada: pesquise na internet antes de usar uma localidade mais ampla, como o Passo 2 manda. Várias cidades: localidade mais ampla, com o motivo nas notas.
+- A cidade da empresa não foi informada: pesquise na internet antes de usar uma localidade mais ampla, como o Passo 2 manda. Várias cidades sem unidade na praça prioritária: localidade mais ampla, com o motivo nas notas.
+- A empresa tem mais de um endereço e `Praça prioritária do endereço` está vazia: grave o que a fonte mais forte sustenta e diga que não há praça prioritária. Não invente uma.
 - A exigência de contato segue o flowchart do Passo 2. Não invente o nome nem confunda contato operacional com dono.
 - Cadastro mínimo de recebedora: registre como pendência o que faltar, salvo o contato numa compra pontual, e devolva a página para vincular o pagamento. Não dê a validação comercial por concluída.
 - A pessoa já existe: aponte o registro. Não crie outra.
@@ -187,6 +209,7 @@ Contei que achávamos "Design Print", fica perto da Avenida Pedro II e imprime e
 
 - Ter recebido uma compra não torna o estabelecimento um relacionamento comercial continuado. O contato nominal não é requisito universal do cadastro.
 
+- O endereço que a busca mostra primeiro parece o canônico. Com `Praça prioritária do endereço`, vale o da praça, quando confirmado.
 - A cidade desconhecida parece pedir o país direto. Pesquise antes, e deixe o motivo nas notas quando a empresa atua em várias cidades.
 - Os donos parecem a pessoa responsável. É outra relação. A pessoa responsável fica nas pessoas responsáveis.
 - Quem verifica parece o contato da fornecedora. É um usuário do workspace, não uma página da lista de pessoas.
