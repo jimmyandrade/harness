@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.22.2"
+  version: "0.22.3"
   related:
     - definir-empresa
     - definir-grafia
@@ -121,10 +121,10 @@ Formulário que exige o documento oficial, como contrato, nota e documento fisca
 Nenhuma mensagem, e-mail ou saudação trata a pessoa pelo nome civil: ela é chamada pelo nome social.
 Leia os dois no registro, nunca os escreva na habilidade, e sem o nome civil pare e pergunte antes de preencher o formulário.
 
-A janela de contato é quando a pessoa não deve ser contatada: dias de descanso e o horário a partir do qual, ou até o qual, não há contato. Ela vai nas propriedades que os parâmetros da janela nomeiam, nunca nas observações: os dias, na dos dias, e cada horário, na sua, como o texto `HH:MM` de 24 horas, com `19:00` para "depois das 19h". O fuso é o da localidade da pessoa.
-Grave no turno em que ela chegar, mudando só o campo informado. Sem a propriedade na lista, ou com o parâmetro vazio, avise, proponha criá-la e preencher o parâmetro, e diga a janela na resposta. Não crie a propriedade sem o sim.
+A janela de contato é quando a pessoa não deve ser contatada: dias de descanso e o horário a partir do qual, ou até o qual, não há contato. Ela vai nas propriedades que os parâmetros nomeiam, nunca nas observações, com cada horário como o texto `HH:MM` de 24 horas, como `19:00`. Grave só o campo informado.
+Sem a propriedade na lista, ou com o parâmetro vazio, avise, proponha criá-la e diga a janela na resposta. Não crie a propriedade sem o sim.
 Quem contata a pessoa confere a janela antes de enviar e de novo na hora do envio: leia as três propriedades no registro, e em grupo as de cada pessoa nomeada. Leia o dia e a hora no fuso da localidade dela por comando, como `TZ=<fuso> date '+%Y-%m-%d %H:%M'`, com o dia da semana como a regra do dia da semana manda. Sem fuso e com janela preenchida, não envie e pergunte uma vez.
-Está bloqueado o dia sem contato, a hora igual ou depois de `Sem contato a partir de` e a hora antes de `Sem contato até`, que já é permitida. Fora da janela nada sai, por nenhum canal: diga o motivo e o próximo horário permitido, com o dia da semana, no fuso dela e no de quem usa, e deixe o rascunho para esse horário. A janela só muda no registro, por esta habilidade.
+Está bloqueado o dia sem contato, a hora igual ou depois de `Sem contato a partir de` e a hora antes de `Sem contato até`, que já é permitida. Fora da janela nada sai, por nenhum canal: diga o motivo e o próximo horário permitido, com o dia da semana, no fuso dela e no de quem usa, e deixe o rascunho para esse horário. A janela só muda no registro.
 
 ### Passo 4
 
@@ -245,7 +245,6 @@ A Tula não estava na lista de pessoas. Criei a página dela, com o papel nas ob
 - O perfil colado tem poucos campos: grave os que vieram e deixe o resto vazio. Não espere o perfil completo.
 - A pessoa saiu da empresa: atualize ou crie o registro com a nota. Não apague.
 - O apelido ambíguo cabe a mais de uma pessoa e a pessoa infere uma: grave só no registro da inferida, com as outras hipóteses nas notas. Não grave nas outras.
-- A janela informada tem um horário sem dia, ou dias sem horário: grave só o que veio e deixe o resto vazio, que não impõe regra.
 - Dois registros têm nomes parecidos, como Ana Souza e Ana Souza Lima: não marque pelo primeiro resultado. Confira pelo assunto da fala e pelo perfil nas fontes. Na dúvida, liste os candidatos com o que os diferencia, como cargo e e-mail, e pergunte.
 
 ## Pegadinhas
