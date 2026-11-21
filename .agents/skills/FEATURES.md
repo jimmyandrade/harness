@@ -1507,6 +1507,19 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses writing the body, grading output, describing a product, and writing the skill page in Notion
 
+### diagnosticar-funil
+- **Stability**: experimental
+- **Description**: Say in which stage of the sales funnel an opportunity with another company is, and why
+- **Properties**:
+  - Lives at `.agents/skills/diagnosticar-funil/SKILL.md`
+  - Reads the stages only from the learning resources the project names, and stops and asks when there are none
+  - Chooses the stage from the context, the conversation, the reply received and the negotiation, and justifies it with the evidence
+  - Says the stage is uncertain, what is missing and the next question or action when the evidence does not support one
+  - Puts the stage and the evidence in the final answer every time, even when the delivery is only a ready message
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses registering the opportunity, writing the message, and creating the task
+
 ### emitir-documento-oficial
 - **Stability**: experimental
 - **Description**: Issue official certificates and clearances as PDFs from government portals, starting with the CCMEI
