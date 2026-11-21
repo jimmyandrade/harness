@@ -4,12 +4,13 @@ description: Cadastra e atualiza um produto físico no catálogo do Mercado Pago
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.5.0"
   related:
     - registrar-preco-de-produto-fisico
     - publicar-produto-fisico-na-loja-virtual
     - gerenciar-estoque
     - lancar-venda
+    - identificar-duplicata
     - evoluir-habilidade
 ---
 
@@ -28,7 +29,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ### Passo 1
 
-O registro de produtos do projeto manda: nome, descrição, preço, custo, SKU e estoque saem dele, e o catálogo do Mercado Pago é o destino. Sem o registro do produto, pergunte uma vez. Não invente nome, tamanho, preço, custo, SKU nem quantidade. Produto sem custo no registro entra com o custo vazio, e a resposta diz que falta.
+O registro de produtos do projeto manda: nome, descrição, preço, custo, SKU e estoque saem dele, e o catálogo do Mercado Pago é o destino. Ache o produto do registro pelo SKU e, sem SKU, pelo título e pelas Variações de nome, com `identificar-duplicata`: produto renomeado guarda o nome antigo nelas. Sem o registro do produto, pergunte uma vez. Não invente nome, tamanho, preço, custo, SKU nem quantidade. Produto sem custo no registro entra com o custo vazio, e a resposta diz que falta.
 
 O catálogo pede, de cada produto: nome (até 60 caracteres, obrigatório), descrição (até 2500), preço de venda (obrigatório), unidade de medida (unidade, metro, litro ou quilograma), custo, SKU, código de barras (GTIN), categoria, estoque atual e alerta de estoque mínimo. Aceita uma foto só.
 
@@ -97,6 +98,13 @@ Se você baixar a foto, abrir o seletor de arquivos e subir de novo, a pessoa te
 
 1. Copie a foto direto da fonte para o catálogo, pelo endpoint de envio.
 2. Diga qual foto usou quando a fonte tem várias.
+
+### Produto achado só pelo título
+
+Se você buscar o produto pelo título e disser que ele não está no registro, um produto renomeado fica sem par, e o catálogo recebe um produto duplicado.
+
+1. Busque pelo SKU e pelas Variações de nome.
+2. Só diga que o produto não existe depois dessas buscas.
 
 ### Produto único criado
 
