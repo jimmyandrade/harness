@@ -3,7 +3,7 @@ name: redigir-com-tom-de-voz
 description: Use essa habilidade sempre que for criar, redigir, editar, revisar ou responder texto da marca no tom de voz, mesmo sem dizer copy. NÃO use para responder quem conversa com a IA, descrever uma skill, titular tarefa ou oportunidade, cravar a grafia, alterar formato de conteúdo, nem assumir cliente, peça, oportunidade ou histórico.
 metadata:
   author: jimmyandrade
-  version: "0.29.0"
+  version: "0.29.1"
   aliases:
     - escreva-usando-o-tom-de-voz
   related:
@@ -88,6 +88,8 @@ A mensagem chama a pessoa como o cadastro de `definir-pessoa` diz que ela é cha
 
 O tratamento carinhoso que a própria pessoa usa conosco, como "meu querido", "amiga" ou um diminutivo afetuoso, volta na mesma medida: é rapport, e não apelido inventado. Leia as últimas mensagens dela antes de rascunhar e devolva o mesmo grau de calor, de risada e de emoji, dentro do vocabulário, sem perguntar a quem escreve se pode. Quem é cordial e formal recebe o mesmo tom, e o calor não se oferece a quem não o deu primeiro.
 
+Isso vale também quando a pessoa tem perfil de tom no vocabulário: os termos do perfil, como "te", entram, e o calor vem das últimas mensagens da conversa de agora, que o perfil não guarda. Pedir "o perfil dela" não é pedir que a mensagem a chame pelo nome.
+
 A saudação com que ela abre a conversa volta igual, com a mesma grafia e o mesmo alongamento de vogal, como "Oieee", mesmo que ela a tenha usado uma vez só: isso é rapport, e não padrão a cadastrar no vocabulário.
 
 A saudação do período sai uma vez por dia em cada conversa. Se uma mensagem nossa já saudou hoje, a seguinte começa direto, sem bom dia, boa tarde nem boa noite.
@@ -165,6 +167,7 @@ Se você escrever num tom neutro ou formal para quem nos trata com carinho, como
 1. Leia as últimas mensagens dela antes de rascunhar.
 2. Devolva o mesmo tratamento, a mesma saudação, com o mesmo alongamento de vogal, e o mesmo grau de calor, dentro do vocabulário.
 3. Não transforme isso em pergunta à pessoa que escreve, e não use apelido que ela não usou.
+4. Com perfil de tom, aplique os termos dele e, além deles, o calor das últimas mensagens: o perfil sozinho deixa o texto frio.
 
 ### Nome ou saudação que a conversa já resolveu
 
