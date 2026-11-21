@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.4.0"
   related:
     - definir-empresa
     - definir-negociacao
@@ -15,6 +15,8 @@ metadata:
     - inscrever-na-oportunidade
     - procurar-oportunidade
     - redigir-com-tom-de-voz
+  models:
+    - janela-de-contato
 ---
 
 # Abordar contato
@@ -30,6 +32,10 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Ordem dos canais de execução": ["conector", "linha de comando", "API", "navegador do app", "extensão do navegador"]
 # `Posição sobre o serviço oferecido` é o que a marca afirma, na segunda etapa da resposta ao contato frio, sobre o serviço que o contato oferece, como não trabalhar com esse tipo de empresa. Vazio, a segunda etapa não toma posição.
 "Posição sobre o serviço oferecido": ""
+# Globais: os nomes das propriedades da lista de pessoas que guardam a janela de contato. Vazio não impõe regra.
+"Propriedade dos dias sem contato": ""
+"Propriedade do horário sem contato a partir de": ""
+"Propriedade do horário sem contato até": ""
 ```
 
 ## Instruções
@@ -56,7 +62,11 @@ Antes de redigir, pergunte como o contato nasceu quando nenhuma fonte diz, como 
 
 ### Passo 4
 
-Com o texto e o destino aprovados, envie você mesmo, sem pedir à pessoa que envie. Tente os canais na `Ordem dos canais de execução` e passe ao seguinte só quando o anterior não existir ou falhar. Se nenhum enviar, entregue o texto pronto e diga o que falhou em cada canal. Sem a aprovação, não envie nem cadastre a empresa ou a pessoa. Depois do envio, registre a troca como `definir-negociacao` manda.
+Com o texto e o destino aprovados, envie você mesmo, sem pedir à pessoa que envie. Tente os canais na `Ordem dos canais de execução` e passe ao seguinte só quando o anterior não existir ou falhar. Se nenhum enviar, entregue o texto pronto e diga o que falhou em cada canal.
+
+Antes do envio, quando a pessoa já está cadastrada, confira a janela de contato dela no registro. Fora da janela, a mensagem aprovada não sai e espera o próximo horário permitido. Quem não tem cadastro não tem janela.
+Leia o modelo de saída `janela-de-contato` quando for gerar a saída.
+ Sem a aprovação, não envie nem cadastre a empresa ou a pessoa. Depois do envio, registre a troca como `definir-negociacao` manda.
 
 ### Passo 5
 

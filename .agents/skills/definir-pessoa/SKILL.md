@@ -33,6 +33,10 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Cadastro na loja": "não"
 # `Campo do cliente na loja` é o nome da propriedade da lista de pessoas que guarda o link do cliente na loja. Vazio, o link fica nas notas.
 "Campo do cliente na loja": ""
+# Globais: os nomes das propriedades da lista de pessoas que guardam a janela de contato. Vazio não impõe regra.
+"Propriedade dos dias sem contato": ""
+"Propriedade do horário sem contato a partir de": ""
+"Propriedade do horário sem contato até": ""
 ```
 ## Instruções
 
@@ -117,6 +121,9 @@ Formulário que exige o documento oficial, como contrato, nota e documento fisca
 Nenhuma mensagem, e-mail ou saudação trata a pessoa pelo nome civil: ela é chamada pelo nome social.
 Leia os dois no registro, nunca os escreva na habilidade, e sem o nome civil pare e pergunte antes de preencher o formulário.
 
+A janela de contato é quando a pessoa não deve ser contatada: dias de descanso e o horário a partir do qual, ou até o qual, não há contato. Ela vai nas propriedades que os parâmetros da janela nomeiam, nunca nas observações: os dias, na dos dias, e cada horário, na sua, como o texto `HH:MM` de 24 horas, com `19:00` para "depois das 19h". O fuso é o da localidade da pessoa.
+Grave no turno em que ela chegar, mudando só o campo informado. Sem a propriedade na lista, ou com o parâmetro vazio, avise, proponha criá-la e preencher o parâmetro, e diga a janela na resposta. Não crie a propriedade sem o sim.
+
 ### Passo 4
 
 Citar uma pessoa num texto publicado, com menção real, segue `mencionar-pessoa`.
@@ -197,6 +204,14 @@ Se você gravar o que a pessoa só inferiu como confirmado, a próxima consulta 
 2. Escreva nas notas o que descartou as outras hipóteses e quais ficam abertas.
 3. Ao usá-la, diga que é inferência e peça a confirmação quando houver chance.
 
+### Janela de contato nas observações
+
+Se você gravar nas observações que a pessoa não é contatada em certos dias ou horas, nenhuma habilidade de envio a lê e o contato sai fora da janela.
+
+1. Grave a janela nas propriedades dos parâmetros, e só o campo informado.
+2. Sem a propriedade na lista, avise e proponha criá-la, sem criar antes do sim.
+3. Leia o registro de volta e diga o que gravou.
+
 ### Handle no nome
 
 Se você gravar o arroba no nome completo, o perfil vira a pessoa.
@@ -236,6 +251,7 @@ A Tula não estava na lista de pessoas. Criei a página dela, com o papel nas ob
 - O perfil colado tem poucos campos: grave os que vieram e deixe o resto vazio. Não espere o perfil completo.
 - A pessoa saiu da empresa: atualize ou crie o registro com a nota. Não apague.
 - O apelido ambíguo cabe a mais de uma pessoa e a pessoa infere uma: grave só no registro da inferida, com as outras hipóteses nas notas. Não grave nas outras.
+- A janela informada tem um horário sem dia, ou dias sem horário: grave só o que veio e deixe o resto vazio, que não impõe regra.
 - Dois registros têm nomes parecidos, como Ana Souza e Ana Souza Lima: não marque pelo primeiro resultado. Confira pelo assunto da fala e pelo perfil nas fontes. Na dúvida, liste os candidatos com o que os diferencia, como cargo e e-mail, e pergunte.
 
 ## Pegadinhas
