@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.20.0"
+  version: "0.21.0"
   related:
     - definir-empresa
     - definir-grafia
@@ -87,6 +87,10 @@ Telefone vai no formato internacional. Celular do Brasil tem 9 dígitos depois d
 Com `Cadastro na loja` em `sim`, crie ou atualize o cliente na loja com o nome, o telefone, o e-mail e o idioma, sem consentimento de marketing. Grave o link do cliente em `Campo do cliente na loja`, ou nas notas quando o campo está vazio. O histórico das conversas fica nos comentários da página da pessoa, não na nota do cliente.
 
 Todo perfil social que a pessoa informar, em link, print ou handle, como o LinkedIn ou o Instagram, é cadastrado por `definir-perfil-social` na mesma resposta e relacionado nos perfis sociais relacionados. O link do perfil nunca vai nas notas, e a skill não deixa o perfil de fora.
+
+Nome parcial, sem sobrenome: só cadastre com um identificador que desambigue, como telefone, e-mail, perfil social, cargo específico ou relação verificável com a empresa. Sem nenhum, não crie a pessoa: registre-a como contato citado em comentário datado e diga o que falta. Com o identificador, o título provisório é "Nome (Empresa)", com `Não confundir com` se houver homônimo, e as observações dizem que o cadastro é parcial, sem inventar sobrenome nem e-mail. Com a empresa e a negociação já ligadas, o título volta a ser o nome limpo.
+
+Em contexto de negócio, parceria, fornecimento ou curadoria, veja se a pessoa já tem perfil de LinkedIn nos perfis sociais. Sem perfil, peça o link quando ajudar a rastrear, sem travar o cadastro.
 
 Não grave o print no corpo.
 
