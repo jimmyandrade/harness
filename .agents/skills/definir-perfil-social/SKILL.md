@@ -5,8 +5,9 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.8.2"
+  version: "0.9.0"
   related:
+    - analisar-perfil-social
     - definir-grafia
     - definir-pessoa
     - identificar-duplicata
@@ -50,6 +51,16 @@ Em Variações de nome, use uma lista de bullets, um nome alternativo por item, 
 
 Perfil parecido confirmado como outro perfil: verifique Não confundir com e diga se existe, mesmo sem a pessoa perguntar o esquema. Com segurança, relacione antes de concluir. Sem a propriedade, proponha a relação para o próprio banco. Com o sim, crie a propriedade e só então ligue. Variações de nome não substituem essa relação. A correção não fica só no chat. Sem segurança sobre quais páginas ligar, pergunte antes de salvar. Em Variações de nome, use uma lista de bullets, um nome por item, com ponto e vírgula no fim. Grave só nome, grafia, apelido e forma alternativa do mesmo perfil, inclusive com e sem sigla e com e sem ano. Forma que já está na lista não entra de novo. A diferença permanente vai no contexto da desambiguação, ou na propriedade equivalente, e não substitui Não confundir com. Contato, preço, disponibilidade, resposta, decisão, status, prazo e mudança operacional vão em comentário datado. Com a propriedade específica, não guarde o contexto permanente no corpo nem em observação geral. Não junte esses registros. Cada perfil permanece o seu registro canônico. Sem o contexto, avise e proponha a criação. Não dê a desambiguação por pronta. Não crie essa propriedade de contexto antes do sim.
 
+### Passo 5
+
+Perfil ausente da lista é cadastrado sem perguntar se a pessoa quer o cadastro, também quando a pergunta foi só se ele já existe. Perfil que só aparece como link no texto de outra página está ausente.
+
+Ligue o perfil ao que ele representa. Um perfil que é a conta própria de uma feira entra nos perfis oficiais do grupo de oportunidades dela. Um perfil de uma edição específica entra nos perfis do evento da oportunidade. O perfil da empresa que organiza entra nos perfis da empresa, e o da pessoa, nos da pessoa.
+
+Cada perfil entra só no que representa, e uma mesma feira pode ter o perfil da empresa, o da feira e o da edição. Quando o organizador é uma pessoa física, o perfil dela entra só nos da pessoa, e a skill não cria uma empresa para isso. Sem certeza de qual deles é, ligue à página onde o perfil apareceu e diga na resposta qual ligação ficou em aberto.
+
+Perfil ligado a uma oportunidade, a um grupo de oportunidades ou a quem organiza uma delas segue `analisar-perfil-social` na mesma resposta, sem perguntar. A análise decide se a oportunidade combina com a marca, e quem cadastra o perfil de uma feira quer essa resposta.
+
 ## Problemas comuns
 
 ### Título com arroba
@@ -75,6 +86,14 @@ Se você usar o print só para corrigir a frase, o perfil que ele mostra fica fo
 1. Busque o handle.
 2. Ausente: crie o perfil e grave o que o print mostra.
 3. O print entra nas capturas de tela. A pessoa segue `definir-pessoa`.
+
+### Cadastro oferecido em vez de feito
+
+Se você disser que o perfil não tem página e perguntar se a pessoa quer o cadastro, ela volta só para dizer sim, e a análise da oportunidade fica para depois.
+
+1. Cadastre o perfil ausente na mesma resposta.
+2. Ligue ao que ele representa, como o Passo 5 manda.
+3. Perfil de oportunidade, de grupo ou de quem organiza: siga `analisar-perfil-social`.
 
 ### Parecido juntado
 
@@ -110,6 +129,8 @@ Liguei os dois em Não confundir com na hora. A variação de nome recebeu a for
 - Sem Não confundir com: avise, proponha a criação e não dê a desambiguação por concluída. Não crie a propriedade antes do sim.
 - Só saber se já existe: pare e siga `identificar-duplicata`.
 - O print mostra um perfil ausente: crie esse perfil, grave o que o print mostra e ponha o print nas capturas de tela.
+- A pessoa pergunta se o perfil já está registrado e ele não tem página: cadastre sem perguntar e ligue ao que ele representa.
+- O perfil só aparece como link no texto de uma oportunidade: está ausente. Cadastre, ligue à oportunidade e siga `analisar-perfil-social`.
 
 ## Pegadinhas
 
