@@ -3,12 +3,13 @@ name: publicar-produto-fisico-na-loja-virtual
 description: Publica e corrige um produto físico na loja virtual, com título, slug, descrição, variantes, estoque e prontidão para venda e marcação em post. Usada quando o produto vai à loja virtual ou precisa de correção lá, mesmo sem dizer loja. NÃO serve para cadastrar o produto, registrar o preço, movimentar estoque, vender no ponto de venda físico nem escrever o post.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.4.0"
   aliases:
     - definir-produto-na-loja
   related:
     - registrar-preco-de-produto-fisico
     - gerenciar-estoque
+    - identificar-duplicata
     - redigir-com-tom-de-voz
     - evoluir-habilidade
 ---
@@ -29,6 +30,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 ### Passo 1
 
 O registro de produtos do projeto manda: nome completo, variantes, preço e estoque saem dele, e a loja é o destino. Sem o registro, pergunte uma vez. Não invente nome, tamanho, preço, SKU nem quantidade.
+
+Ache o produto do registro pelo título e pelas Variações de nome, com `identificar-duplicata`, e pelo SKU quando houver. Produto renomeado guarda o nome antigo nas variações, e olhar só o título diz que ele não existe.
 
 Antes de gravar, leia o produto na loja. Mostre a diferença entre o registro e a loja e grave só o que a pessoa pediu.
 
@@ -90,6 +93,13 @@ Se você trocar o slug de um produto já divulgado sem redirecionar, os links an
 1. Troque o slug com o redirecionamento do antigo para o novo.
 2. Confira o endereço novo depois.
 
+### Produto achado só pelo título
+
+Se você buscar o produto da loja pelo título e disser que ele não está no registro, um produto renomeado fica sem par, e o histórico e o preço vão para o lugar errado.
+
+1. Busque também nas Variações de nome e pelo SKU.
+2. Só diga que o produto não existe depois dessas buscas.
+
 ### Variante sem SKU
 
 Se você publicar ou corrigir o produto e deixar uma variante sem SKU, a loja e o registro deixam de se encontrar pelo SKU.
@@ -127,6 +137,7 @@ Alertei que o slug omite "face", propus `calca-dupla-face-nhee`, troquei com o r
 - A pessoa insiste num slug fora da regra: grave com o alerta dito, sem repetir a objeção.
 - O produto não tem foto: deixe fora de venda e marcação e diga que falta a foto.
 - A quantidade do registro e a da loja divergem: pergunte qual vale.
+- O nome da loja não bate com o título do registro: procure nas Variações de nome e pelo SKU antes de dizer que o produto não existe.
 - A variante é só prevista, sem unidade produzida: pode entrar com estoque zero. Não pergunte qual quantidade vale.
 - A variante da loja não tem SKU: grave o do registro, e sem SKU no registro pergunte.
 
