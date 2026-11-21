@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-update-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.21.3"
+  version: "0.22.0"
   aliases:
     - organizar-feira
   related:
@@ -70,6 +70,8 @@ Criar a página do ponto de contato, e corrigir o número, o ciclo, a ordem visu
 ### Passo 5
 
 Se a pessoa perguntar o que falta organizar, não crie tarefa nessa passada. Abra o ponto de contato e a oportunidade do nome. Leia o status do ponto, a data e hora, as passagens compradas, as tarefas e ações e a lista de inscrições. Liste cada tarefa aberta com o que ainda está nela, e diga se os responsáveis ou Prazo está vazio. Separe o que a página já registra e ainda não tem tarefa vinculada. Não invente pendência. Use a data do evento para propor uma ordem. Não preencha responsável, prazo nem status. Não altere inscrição. Se a inscrição já está confirmada ou o ingresso já foi retirado, diga isso. Não diga que o evento inteiro está confirmado. A resposta não pede para nomear a habilidade nem fala de créditos.
+
+Leia também o retorno das edições anteriores do mesmo grupo, no bloco de notas de reunião da página de cada edição, e diga o que ele ensina para esta, com o link. Sem retorno registrado, diga isso.
 
 ### Passo 6
 
