@@ -5,11 +5,12 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   related:
     - definir-empresa
     - definir-negociacao
     - definir-pessoa
+    - diagnosticar-funil
     - evoluir-habilidade
     - inscrever-na-oportunidade
     - procurar-oportunidade
@@ -33,7 +34,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ### Passo 1
 
-Abordar é procurar o contato com uma empresa, organização ou pessoa e, sem registro, propor e enviar a primeira mensagem. A conversa que já existe se consulta antes, pelo checklist do Passo 4 de `definir-negociacao`.
+Abordar é procurar o contato com uma empresa, organização ou pessoa e, sem registro, propor e enviar a primeira mensagem. A conversa que já existe se consulta antes, pelo checklist do Passo 4 de `definir-negociacao`. Diga também em que etapa do funil o contato está, por `diagnosticar-funil`.
 
 Quando a pergunta é se já houve contato com uma empresa ou pessoa e nenhuma fonte tem registro, não encerre com "não achei". Confira se a oportunidade dela está cadastrada, com `procurar-oportunidade`. Pesquise na internet o site, o perfil social e o contato público da empresa, da pessoa ou da oportunidade, e veja se há edição futura e formulário de inscrição ou de curadoria. Diga o que achou, com os links.
 
