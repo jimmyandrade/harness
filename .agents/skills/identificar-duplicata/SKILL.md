@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.14.0"
+  version: "0.15.0"
   related:
     - definir-data-significativa
     - definir-grafia
@@ -72,7 +72,21 @@ flowchart LR
   B -->|nenhum| O[A entidade pode criar]
 ```
 
-Equivalente confirmado: não crie outro. Um registro só: aponte essa página como o registro canônico existente e oriente a usar ou relacionar. Dois registros do mesmo item: a resposta traz o diff do que cada página traz, inclusive o que uma tem e a outra deixa vazio. Não chame uma de canônica. Não escolha qual usar. Consolidar fica com `mesclar-registro`. Nomes parecidos confirmados como outra entidade: não consolide. Cada entidade permanece com o seu registro canônico. A correção não fica só no chat. Sem segurança sobre quais páginas ligar, pergunte antes de salvar. Com as páginas certas e com segurança suficiente, relacione por Não confundir com antes de concluir. A variação recebe só nome, grafia, apelido, transcrição incorreta e forma alternativa do mesmo registro canônico. Quando a propriedade é Variações de nome, use uma lista de bullets, um nome por item, com ponto e vírgula no fim, e mantenha as formas com e sem sigla e com e sem ano. Forma que já está na lista não entra de novo. A diferença permanente, como categoria, produto semelhante, localidade, endereço, perfil, organizador, função ou comentário estável sobre uma grafia, vai no contexto da desambiguação, ou na propriedade equivalente. Com os dois registros distintos, relacione em Não confundir com e use esse texto como explicação complementar. O texto não substitui a relação. Contato, preço, disponibilidade, resposta, decisão, status, prazo e mudança operacional vão em comentário datado. Com a propriedade específica, não guarde o contexto permanente no corpo nem em observação geral. Sem Não confundir com, diga que não existe e proponha criá-la como relação para o próprio banco, ou para o banco adequado. Não crie antes do sim. Com o sim, crie a propriedade e só então registre a desambiguação. Banco que já tem pares parecidos conhecidos: sugira ou faça o vínculo desses pares. Não consolide conceitos diferentes. Data significativa segue `definir-data-significativa`. Perfil social segue `definir-perfil-social`, inclusive o vínculo. Sem confirmação, nomeie cada um e pergunte. Não escolha. Não crie. Nenhum equivalente: pare nesta habilidade. A habilidade da entidade segue o cadastro.
+Equivalente confirmado: não crie outro. Um registro só: aponte essa página como o registro canônico existente e oriente a usar ou relacionar. Dois registros do mesmo item: a resposta traz o diff do que cada página traz, inclusive o que uma tem e a outra deixa vazio. Não chame uma de canônica. Não escolha qual usar. Consolidar fica com `mesclar-registro`.
+
+Nomes parecidos confirmados como outra entidade: não consolide. Cada entidade permanece com o seu registro canônico. A correção não fica só no chat. Sem segurança sobre quais páginas ligar, pergunte antes de salvar. Com as páginas certas e com segurança suficiente, relacione por Não confundir com antes de concluir.
+
+A variação recebe só nome, grafia, apelido, transcrição incorreta e forma alternativa do mesmo registro canônico. Quando a propriedade é Variações de nome, use uma lista de bullets, um nome por item, com ponto e vírgula no fim, e mantenha as formas com e sem sigla e com e sem ano. Forma que já está na lista não entra de novo.
+
+A diferença permanente, como categoria, produto semelhante, localidade, endereço, perfil, organizador, função ou comentário estável sobre uma grafia, vai no contexto da desambiguação, ou na propriedade equivalente. Com os dois registros distintos, relacione em Não confundir com e use esse texto como explicação complementar. O texto não substitui a relação.
+
+Contato, preço, disponibilidade, resposta, decisão, status, prazo e mudança operacional vão em comentário datado. Com a propriedade específica, não guarde o contexto permanente no corpo nem em observação geral.
+
+Sem Não confundir com, diga que não existe e proponha criá-la como relação para o próprio banco, ou para o banco adequado. Não crie antes do sim. Com o sim, crie a propriedade e só então registre a desambiguação. Banco que já tem pares parecidos conhecidos: sugira ou faça o vínculo desses pares. Não consolide conceitos diferentes.
+
+Data significativa segue `definir-data-significativa`. Perfil social segue `definir-perfil-social`, inclusive o vínculo. Sem confirmação, nomeie cada um e pergunte. Não escolha. Não crie.
+
+Nenhum equivalente: esta habilidade não cria, e a habilidade da entidade cadastra na mesma resposta, sem perguntar se a pessoa quer o cadastro. Vale também quando a pergunta é só se o item já está registrado. Um link ou uma menção do item no texto de outra página não é registro: conta como ausente, e o cadastro liga as duas páginas pela relação.
 
 ## Problemas comuns
 
@@ -132,6 +146,14 @@ Se você cadastrar mesmo depois de achar o equivalente, a lista ganha a duplicat
 2. Aponte o registro canônico existente.
 3. Oriente a usar ou relacionar essa página.
 
+### Cadastro oferecido em vez de feito
+
+Se você responder que o item não tem página e perguntar se a pessoa quer o cadastro, ela precisa voltar só para dizer sim, e o item segue fora da lista.
+
+1. Busque como o Passo 2 manda.
+2. Nenhum equivalente, ou só um link no texto de outra página: siga a habilidade da entidade e cadastre na mesma resposta.
+3. Ligue a página nova à página que tinha o link.
+
 ### Parecido tratado como o mesmo
 
 Se você consolidar nomes parecidos que são outra entidade, duas entidades viram uma.
@@ -164,6 +186,10 @@ Havia um perfil só, perfilexemplo___. Na lista de pessoas havia dois registros 
 
 Tratei como outra pessoa. Não usei o telefone nem o perfil da Beatriz. Liguei as duas em Não confundir com, e o contexto de cada página diz a empresa dela. Ao escrever para a Bia, usei o registro da Bia.
 
+### @perfilexemplo já está registrado?
+
+O handle só aparecia como link no texto de uma oportunidade, sem página na lista de perfis sociais. Contei como ausente, cadastrei o perfil com `definir-perfil-social` na mesma resposta, sem perguntar, e liguei a página nova à oportunidade.
+
 ### Cadastre o mesmo nome, agora sem o ano.
 
 Busquei o nome como foi escrito, o nome alternativo, a grafia diferente, a sigla, o apelido, o nome antigo e o nome com e sem o ano. Abri os matches e comparei site oficial, localidade, datas, organizador e perfis sociais.
@@ -183,7 +209,7 @@ Busquei o nome como foi escrito, o nome alternativo, a grafia diferente, a sigla
 - Propriedade recém-criada num banco com pares parecidos conhecidos: sugira ou faça o vínculo. Não consolide conceitos diferentes.
 - Falta título canônico, Variações de nome, Não confundir com ou o contexto da desambiguação: avise, proponha a propriedade que falta e não dê a desambiguação por pronta.
 - Não confundir com: liste como outro registro. Não escolha. Não consolide.
-- Nenhum equivalente: pare. A habilidade da entidade cria.
+- Nenhum equivalente: a habilidade da entidade cadastra na mesma resposta, sem perguntar. Um link no texto de outra página conta como ausente.
 - A página não traz site, localidade, data, organizador ou perfil: não invente a evidência.
 
 ## Pegadinhas
