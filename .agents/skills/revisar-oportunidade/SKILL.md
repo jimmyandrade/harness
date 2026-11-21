@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-update-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   related:
     - criar-oportunidade
     - procurar-oportunidade
@@ -30,7 +30,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ### Passo 1
 
-A lista de oportunidades e o nome de cada propriedade vêm do mapeamento de dados do projeto, no workspace conectado. Se a lista não estiver nessa conexão, pare. Não use a lista de outro workspace. Este texto usa os conceitos: o corpo da edição, o bloco de anotações, o callout de orientações, as notas de curadoria, a decisão humana e o grupo da edição.
+A lista de oportunidades e o nome de cada propriedade vêm do mapeamento de dados do projeto, no workspace conectado. Se a lista não estiver nessa conexão, pare. Não use a lista de outro workspace. Este texto usa os conceitos: o título da edição, a sugestão de título, o corpo da edição, o bloco de anotações, o callout de orientações, as notas de curadoria, a decisão humana e o grupo da edição.
 
 A edição precisa existir. Saber se ela existe fica com `procurar-oportunidade`, e cadastrá-la fica com `criar-oportunidade`. O grupo fica com `definir-grupo-de-oportunidades`. Não preencha fórmula, rollup nem botão. Não invente categoria nem prioridade.
 
@@ -41,6 +41,10 @@ Na edição, bloco de anotações, reunião, transcrição, resumo ou outro bloc
 Na revisão do conteúdo, do corpo ou das anotações, leia o bloco para preencher a propriedade que a lista já tem. Data, localidade, empresa ou local, canal, links, taxa, variações de nome e decisão humana entram só quando o bloco afirma um valor que a propriedade já aceita.
 
 O comentário analítico vai nas notas de curadoria. O bloco não vira checklist, resumo nem texto operacional, e não se copia de novo no corpo. Se o bloco não basta para afirmar, a propriedade fica vazia e a pendência fica nas notas de curadoria. Não invente o dado nem a propriedade. O bloco do grupo fica com `definir-grupo-de-oportunidades`.
+
+Texto que uma automação deixou no corpo, como o aviso de que a página foi criada para prospecção ou uma lista do que verificar, não é bloco da pessoa. Faça cada verificação que ele pede numa fonte, grave o resultado na propriedade ou nas notas de curadoria, com o que faltou e o canal para perguntar, e só então tire o texto do corpo.
+
+Quando o mapeamento tem a sugestão de título e o título da edição difere do valor dela, copie o valor para o título.
 
 ### Passo 3
 
@@ -159,6 +163,7 @@ Gravei um comentário na edição, começando pela data e hora do fato. Não esc
 ## Pegadinhas
 
 - O bloco de anotações parece rascunho que a limpeza apaga. Ele é evidência da pessoa. A propriedade recebe a cópia, e o bloco permanece.
+- Uma lista "Verificar" no corpo parece anotação da pessoa. Quando uma automação a escreveu, ela é tarefa: a verificação é feita, o resultado vai às notas de curadoria e a lista sai.
 - O callout parece texto de rascunho do corpo. Ele guarda as orientações de preenchimento e a governança da página.
 - A intercorrência parece nota de curadoria. As notas guardam a síntese permanente. O fato do dia é comentário.
 - A lista de espera parece quase uma aprovação. Sem confirmação de participação, é não seleção.

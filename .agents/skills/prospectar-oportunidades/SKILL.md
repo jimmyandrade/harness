@@ -91,6 +91,8 @@ Para cada candidato, até o `Máximo de candidatos por execução`, compare com 
 
 Grave a leitura de fit de cada candidato que passou nas notas de curadoria da edição, como síntese permanente: o que combina e o que não combina com o playbook, com o canvas e com o retorno das edições anteriores do grupo, sem checklist. Edição que ainda não existe é cadastrada antes, por `criar-oportunidade`. Candidato trazido que o playbook veta: diga o motivo, grave-o nas notas se a edição já existe e não cadastre sem pedido da pessoa.
 
+Cada critério do playbook, como o custo de participação, a curadoria e o público, é conferido numa fonte antes de a leitura de fit ir às notas. Critério sem evidência fica nas notas como pendência, com o que faltou e o canal para perguntar, e a edição não é marcada como pronta para a decisão humana. Não deixe a lista do que verificar no corpo da edição.
+
 ### Passo 6
 
 Quando a localidade-alvo veio de uma viagem e a oportunidade tem vários dias, calcule as datas em comum com a viagem. Tire os dias de feira dessa viagem, que ficam no cronograma e nos pontos de contato. Registre só as atividades dessas datas, cada uma como marco do cronograma ligado à oportunidade, seguindo `definir-cronograma`. Sem data em comum, diga que a edição cai fora da viagem e não registre programação.
