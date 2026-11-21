@@ -3,12 +3,13 @@ name: inscrever-na-oportunidade
 description: Preenche o cadastro ou o formulário que a organização de uma oportunidade pede para a inscrição, com os dados da empresa, no formato de cada campo, e envia só com o sim da pessoa. Usada quando a inscrição ou o cadastro de uma oportunidade está para ser feito. NÃO serve para registrar a inscrição no Notion, ler o regulamento, escrever à organização, salvo a resposta que confirma o envio, nem escrever o projeto que a inscrição pede.
 metadata:
   author: jimmyandrade
-  version: "0.4.6"
+  version: "0.5.0"
   related:
     - acompanhar-retornos-pendentes
     - analisar-regulamento-da-oportunidade
     - definir-empresa
     - definir-reserva
+    - definir-roteiro-de-video
     - definir-inscricao
     - definir-pessoa
     - definir-tarefa
@@ -43,19 +44,26 @@ Antes de preencher, de pré-inscrever ou de aceitar o convite, leia para quem a 
 
 Quando a exigência pede um projeto escrito, o texto vem pronto da produção cultural, pela tarefa que `analisar-regulamento-da-oportunidade` criou. Confira se a tarefa está feita e leia o texto entregue. Sem ele, não escreva o projeto aqui: prepare o resto, deixe o campo do projeto como pendência, diga o prazo e pare antes do envio.
 
+Quando a exigência pede um vídeo, o roteiro segue `definir-roteiro-de-video`, com a história da marca lida no cadastro da marca e os critérios que o regulamento dá para a seleção. A gravação fica com a pessoa. Não peça o vídeo como um dado do formulário: prepare o resto, entregue o roteiro e deixe o anexo como pendência, com o prazo.
+
 Um convite da organização por mensagem, que a marca vai aceitar, segue o mesmo caminho antes do rascunho da resposta: confira a agenda nos dias e nos horários do evento e, com reserva «a confirmar» de outra feira nas mesmas datas, siga `definir-reserva` para criar o evento desta e registrar a concorrência nas duas, e garanta a oportunidade cadastrada com os dados, por `procurar-oportunidade` e, sem cadastro, `criar-oportunidade`. Com `Estrutura de exposição a perguntar` preenchida e a estrutura fora do convite, a resposta de aceite pergunta isso à organização.
 
 ### Passo 2
 
 Os dados vêm do cadastro, sem perguntar à pessoa.
-O responsável pela marca é a pessoa dona da empresa do negócio: leia o nome e o apelido no cadastro de pessoas.
+O responsável pela marca é a pessoa dona da empresa do negócio: leia no cadastro de pessoas o nome, o apelido, a data de nascimento, o endereço, os pronomes e tudo o mais que o formulário pedir dela.
+O que o cadastro tem nunca vai para a lista do que falta, nem como pergunta à pessoa.
 O nome da marca, o telefone, o WhatsApp e o e-mail vêm do cadastro da empresa. Com mais de uma dona, pergunte qual responde.
 O contato de uma inscrição é sempre o da empresa, nunca o telefone nem o e-mail pessoal de um sócio, mesmo quando o campo é do responsável. Sem o contato da empresa no cadastro, pare e peça, e não complete com o da pessoa.
 Diga em qual página do cadastro cada dado está, com o link, e o que o cadastro não tem. O dado que falta vira recomendação de campo, sem criá-lo.
 
+Pergunta de autodeclaração, como gênero, orientação, raça, deficiência ou morar em favela ou periferia, leva só o que o cadastro ou a pessoa já declarou. Não suponha a identidade de ninguém. O que só a pessoa pode declarar e o cadastro não tem vai numa pergunta única, depois de ler o cadastro.
+O território não se responde pelo nome do bairro: compare o endereço do cadastro com o critério que a organização publica e com as fontes oficiais, como a lista de vilas, favelas e ZEIS da prefeitura, e mostre a evidência com o link. A resposta é da pessoa.
+
 ### Passo 3
 
 Dado de identidade de pessoa que o formulário pede, como RG e CPF, a pessoa digita. O agente não o digita, mesmo que ele esteja no cadastro.
+Ele também não entra na lista do que falta antes do preenchimento: diga que o cadastro o tem e que a pessoa o digita na aba.
 Peça à pessoa que o digite na aba e avise, e siga para o campo seguinte.
 O CNPJ é da empresa, não da pessoa: leia-o no cadastro da empresa e digite você mesmo, só com os dígitos quando o campo valida assim. Campo que aceita CPF ou CNPJ recebe o CNPJ da empresa. Campo que só aceita CPF segue a regra do CPF.
 
@@ -94,6 +102,14 @@ Depois, marque a tarefa da exigência como feita com o aval da pessoa e, se a or
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
+
+### Dado do cadastro pedido à pessoa
+
+Se você listar nome, nascimento, endereço, marca ou contato como dados que faltam, a pessoa responde o que o cadastro já diz e a inscrição para à espera dela.
+
+1. Leia a página da pessoa dona e a da empresa antes de dizer o que falta.
+2. Mostre cada dado com o link da página onde está.
+3. Pergunte só o que o cadastro não tem e só a pessoa pode declarar, numa pergunta única.
 
 ### Contato pessoal no formulário
 
@@ -227,6 +243,8 @@ Li o catálogo de produtos e corrigi o campo com as famílias das peças ativas,
 - A inscrição é por e-mail e não por formulário: o texto da mensagem segue `redigir-com-tom-de-voz`, e o envio, a skill de e-mail.
 - A pessoa já preencheu à mão: leia o rascunho e só registre.
 - O projeto ainda não foi entregue pela produção cultural: prepare o resto e pare antes do envio, com o prazo da pendência.
+- O formulário pede um vídeo: o roteiro segue `definir-roteiro-de-video`, a pessoa grava, e o anexo fica como pendência com o prazo.
+- O formulário pergunta se a pessoa mora em favela ou periferia: mostre o endereço do cadastro, o critério da organização e a fonte oficial do território. A pessoa decide.
 - O convite não veio por e-mail, como num link da bio: não há e-mail para responder, e a organização só é avisada se a pessoa pedir.
 
 ## Pegadinhas
@@ -235,6 +253,8 @@ Li o catálogo de produtos e corrigi o campo com as famílias das peças ativas,
 - O campo de telefone parece aceitar qualquer formato legível. O formulário pode validar só os dígitos com o DDD.
 - A aba arrastada pela pessoa parece perdida quando o grupo da sessão some do contexto. O preenchimento fica salvo como rascunho no formulário.
 - O formulário pede RG e CPF do responsável. O agente não os digita.
+- Os dados pessoais do responsável parecem coisa a perguntar. Eles estão no cadastro de pessoas, e só o que ele não tem vira pergunta.
+- O nome do bairro parece dizer se é periferia. Um bairro de classe média pode conter uma vila listada pela prefeitura, e o critério é o da organização.
 - O CNPJ parece dado sensível como o CPF. É da empresa: o agente o lê no cadastro e o digita.
 - O campo dos produtos parece aceitar a descrição da marca. Ele pede o que a marca vende, em famílias ou peças.
 - O print da confirmação parece trabalho da pessoa, porque ela vê a tela. Quem tira e anexa é você, na aba, no mesmo instante.
