@@ -5,11 +5,12 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.11.0"
+  version: "0.12.0"
   related:
     - abordar-contato
     - acompanhar-retornos-pendentes
     - definir-agenda
+    - diagnosticar-funil
     - evoluir-habilidade
     - inscrever-na-oportunidade
     - organizar-ponto-de-contato
@@ -74,6 +75,8 @@ Grave cada troca como um comentário na discussão da página da negociação, o
 Não deduza o canal da mensagem. Se a pessoa não o disse e a evidência não deixa claro se veio por Instagram, WhatsApp, e-mail ou outro, pergunte o canal antes do primeiro registro. Antes de concluir, compare o canal e o identificador gravados com a evidência e corrija qualquer dedução.
 
 Com o canal WhatsApp confirmado, veja se o número foi dado. Sem ele, leia-o no WhatsApp Web, por `usar-whatsapp-web`, e só pergunte se nada o traz. Enquanto não houver o número, escreva "número de WhatsApp pendente de confirmação" no comentário, sem preencher o telefone com dado incerto nem reaproveitar outro número.
+
+Ao registrar ou retomar uma negociação comercial, diga em que etapa do funil ela está, por `diagnosticar-funil`.
 
 Registre o comentário datado em cada página relacionada e aplicável, como a da pessoa, a da empresa, a da negociação e a da oportunidade, mesmo quando a mensagem colada não muda nenhuma propriedade. Se faltar identificar uma relação, preserve a evidência no destino seguro e diga a pendência no comentário e na resposta. Falha de permissão ou comentário pendente deixa o registro incompleto, e a resposta diz isso.
 

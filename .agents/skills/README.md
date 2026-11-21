@@ -107,6 +107,7 @@ flowchart LR
     definir_vocabulario["definir-vocabulario"]
     delegar_aviso_de_plataforma["delegar-aviso-de-plataforma"]
     descrever_habilidade_ou_schema["descrever-habilidade-ou-schema"]
+    diagnosticar_funil["diagnosticar-funil"]
     dividir_mensagem["dividir-mensagem"]
     emitir_documento_oficial["emitir-documento-oficial"]
     enviar_email["enviar-email"]
@@ -193,6 +194,7 @@ flowchart LR
   abordar_contato --> definir_empresa
   abordar_contato --> definir_negociacao
   abordar_contato --> definir_pessoa
+  abordar_contato --> diagnosticar_funil
   abordar_contato --> inscrever_na_oportunidade
   abordar_contato --> procurar_oportunidade
   abordar_contato --> redigir_com_tom_de_voz
@@ -546,6 +548,7 @@ flowchart LR
   definir_negociacao --> abordar_contato
   definir_negociacao --> acompanhar_retornos_pendentes
   definir_negociacao --> definir_agenda
+  definir_negociacao --> diagnosticar_funil
   definir_negociacao --> inscrever_na_oportunidade
   definir_negociacao --> organizar_ponto_de_contato
   definir_negociacao --> procurar_banco_de_dados
@@ -671,6 +674,9 @@ flowchart LR
   descrever_habilidade_ou_schema --> criar_pull_request
   descrever_habilidade_ou_schema --> revisar_habilidade
   descrever_habilidade_ou_schema --> testar_habilidade
+  diagnosticar_funil --> abordar_contato
+  diagnosticar_funil --> definir_negociacao
+  diagnosticar_funil --> definir_recurso_de_aprendizado
   dividir_mensagem --> comunicar_novidade_do_produto
   dividir_mensagem --> rascunhar_mensagem
   enviar_email --> acompanhar_retornos_pendentes

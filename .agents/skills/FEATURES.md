@@ -20,6 +20,7 @@ How these skills relate is in `README.md`, in this folder.
   - Proposes one message for the organization profile, in the plural, and another for the profile of whoever runs it, with that person's name
   - Sends the approved text itself through the channels in the configured order, and hands the ready text over only when none sends
   - Proposes a short message to the group when the organization answers in one, and records every exchange through definir-negociacao
+  - Answers a cold contact in two stages: only the question of who is writing, signed by whoever speaks for the brand, then the explanation after the reply, with the brand's position on the service offered
   - Leaves the record of the exchange to definir-negociacao, the tone to redigir-com-tom-de-voz, and the application to inscrever-na-oportunidade
 - **Test Criteria**:
   - [x] The skill is present at that path
@@ -1506,6 +1507,19 @@ How these skills relate is in `README.md`, in this folder.
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses writing the body, grading output, describing a product, and writing the skill page in Notion
+
+### diagnosticar-funil
+- **Stability**: experimental
+- **Description**: Say in which stage of the sales funnel an opportunity with another company is, and why
+- **Properties**:
+  - Lives at `.agents/skills/diagnosticar-funil/SKILL.md`
+  - Reads the stages only from the learning resources the project names, and stops and asks when there are none
+  - Chooses the stage from the context, the conversation, the reply received and the negotiation, and justifies it with the evidence
+  - Says the stage is uncertain, what is missing and the next question or action when the evidence does not support one
+  - Puts the stage and the evidence in the final answer every time, even when the delivery is only a ready message
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses registering the opportunity, writing the message, and creating the task
 
 ### emitir-documento-oficial
 - **Stability**: experimental

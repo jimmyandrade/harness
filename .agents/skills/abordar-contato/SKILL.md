@@ -1,15 +1,16 @@
 ---
 name: abordar-contato
-description: Use essa habilidade sempre que perguntarem se já falamos com uma empresa, organização ou pessoa e nenhuma fonte tiver registro, ou quando for abordá-la pela primeira vez, mesmo sem dizer abordar. NÃO use para registrar a troca, redigir no tom da marca nem inscrever.
+description: Use essa habilidade sempre que perguntarem se já falamos com uma empresa, organização ou pessoa e nenhuma fonte tiver registro, quando for abordá-la pela primeira vez, ou quando alguém nos abordar sem se apresentar, mesmo sem dizer abordar. NÃO use para registrar a troca, redigir no tom da marca nem inscrever.
 allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-data-sources notion:notion-get-comments notion:notion-create-comment notion:notion-create-pages notion:notion-update-page
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.3.0"
   related:
     - definir-empresa
     - definir-negociacao
     - definir-pessoa
+    - diagnosticar-funil
     - evoluir-habilidade
     - inscrever-na-oportunidade
     - procurar-oportunidade
@@ -27,13 +28,15 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Modo de aprendizado": "perguntar"
 # `Ordem dos canais de execução` é a ordem em que a habilidade tenta enviar uma mensagem ou fazer uma inscrição. Passa ao canal seguinte só quando o anterior não existe ou falha.
 "Ordem dos canais de execução": ["conector", "linha de comando", "API", "navegador do app", "extensão do navegador"]
+# `Posição sobre o serviço oferecido` é o que a marca afirma, na segunda etapa da resposta ao contato frio, sobre o serviço que o contato oferece, como não trabalhar com esse tipo de empresa. Vazio, a segunda etapa não toma posição.
+"Posição sobre o serviço oferecido": ""
 ```
 
 ## Instruções
 
 ### Passo 1
 
-Abordar é procurar o contato com uma empresa, organização ou pessoa e, sem registro, propor e enviar a primeira mensagem. A conversa que já existe se consulta antes, pelo checklist do Passo 4 de `definir-negociacao`.
+Abordar é procurar o contato com uma empresa, organização ou pessoa e, sem registro, propor e enviar a primeira mensagem. A conversa que já existe se consulta antes, pelo checklist do Passo 4 de `definir-negociacao`. Diga também em que etapa do funil o contato está, por `diagnosticar-funil`.
 
 Quando a pergunta é se já houve contato com uma empresa ou pessoa e nenhuma fonte tem registro, não encerre com "não achei". Confira se a oportunidade dela está cadastrada, com `procurar-oportunidade`. Pesquise na internet o site, o perfil social e o contato público da empresa, da pessoa ou da oportunidade, e veja se há edição futura e formulário de inscrição ou de curadoria. Diga o que achou, com os links.
 
@@ -61,9 +64,33 @@ Quando a organização atende num grupo, como o de uma feira, e a marca escreveu
 
 ### Passo 6
 
+Contato frio é quem escreve sem se apresentar, sem dizer como chegou até a marca e só manda conteúdo ou oferta, como um vídeo sem texto. Ele não vira negociação sem pedido, proposta ou interesse verificável, e não recebe a resposta inteira de uma vez.
+
+```mermaid
+flowchart LR
+  C{O contato respondeu?} -->|não| A[Etapa 1: só a pergunta de quem é]
+  C -->|sim| B[Etapa 2: a explicação, a partir da resposta]
+```
+
+Na etapa 1, escreva um parágrafo só, por quem fala pela marca, com nome e papel. Ele pergunta com quem a gente está falando, diz que a marca não lembra do contato e pergunta se alguém da marca conversou com ele recentemente. Não critique a abordagem nesse parágrafo, e espere a resposta antes de seguir.
+
+A etapa 2 só vem depois da resposta. Ela explica que quem quer conquistar cliente começa uma conversa e entende quem está do outro lado, e que conteúdo sem texto passa a impressão de spam em vez de abordagem de vendas. Diga também a posição da marca em `Posição sobre o serviço oferecido`.
+
+Os dois textos saem por `redigir-com-tom-de-voz` e só com o sim da pessoa. A conversa é registrada como `definir-negociacao` manda.
+
+### Passo 7
+
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
+
+### Contato frio respondido por inteiro
+
+Se você mandar de uma vez a pergunta, a crítica e a posição da marca, a resposta soa como bronca a quem pode ser alguém que a marca já conhece, e ninguém disse ainda quem é.
+
+1. Mande só a etapa 1, a pergunta de quem é.
+2. Espere a resposta.
+3. Só então escreva a etapa 2, a partir do que o contato disse.
 
 ### Sem registro e sem proposta
 
@@ -101,6 +128,10 @@ Se você escrever à organização só no privado, quem atende o grupo pode não
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
+### uma consultoria mandou um vídeo sem texto no direct
+
+Escrevi só a etapa 1, assinada por quem fala pela marca: com quem a gente está falando, que a marca não lembra da consultoria e se já houve conversa. Não critiquei a abordagem. Esperei a resposta e só então escrevi a etapa 2, com a explicação e a posição da marca sobre o serviço oferecido.
+
 ### já falamos com a Lia, do Ateliê Exemplo?
 
 Consultei os comentários, o cronograma, as inscrições e o e-mail, e nenhum tem registro. A oportunidade não estava cadastrada. Pesquisei na internet: o Ateliê Exemplo tem site e perfil no Instagram, que responde a mensagens, e não tem formulário de inscrição. Propus abordar pelo Instagram, para pedir uma cotação de bordado, com o texto no tom de voz. Não enviei nem cadastrei a empresa antes da aprovação. Aprovado o texto, enviei pelo conector do Instagram, registrei a troca na discussão da página da pessoa e disse o que registrei.
@@ -113,6 +144,8 @@ Depois do envio, registrei o formulário na página da inscrição e a mensagem 
 
 ## Casos-limite
 
+- O contato frio responde quem é e o que oferece: escreva a etapa 2 a partir da resposta. Se for alguém que a marca conhece, siga a conversa normal.
+- Quem escreveu já é conhecido da marca: não é contato frio. Siga `definir-negociacao`.
 - O perfil pessoal de quem dirige a organização não aparece na busca: proponha só a mensagem do perfil da organização e diga que não achou o pessoal.
 - Sem registro de contato, e a pesquisa na internet não acha site, perfil nem contato público: diga o que pesquisou e peça à pessoa o canal. Não invente um contato.
 - Nenhum canal de execução consegue enviar: entregue o texto pronto e diga o que falhou em cada canal. Não peça à pessoa que tente primeiro.
@@ -120,6 +153,7 @@ Depois do envio, registrei o formulário na página da inscrição e a mensagem 
 
 ## Pegadinhas
 
+- A crítica à abordagem parece cabida já na primeira resposta. Antes de saber quem é, a pergunta vem sozinha.
 - O texto aprovado parece o fim do trabalho. A aprovação é o sim ao envio, e quem envia é você, pelos canais da `Ordem dos canais de execução`.
 - "Não achei registro" parece uma resposta completa. Ela só diz que as fontes do workspace estão vazias: a próxima ação é pesquisar na internet e propor a abordagem.
 - Um formulário aberto parece pedir só os campos preenchidos com os dados que você já tem. A skill de inscrição define de onde vem cada dado e o formato de cada campo, como o celular só com dígitos: carregue-a antes de digitar.
