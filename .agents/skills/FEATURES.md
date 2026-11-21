@@ -20,6 +20,7 @@ How these skills relate is in `README.md`, in this folder.
   - Proposes one message for the organization profile, in the plural, and another for the profile of whoever runs it, with that person's name
   - Sends the approved text itself through the channels in the configured order, and hands the ready text over only when none sends
   - Proposes a short message to the group when the organization answers in one, and records every exchange through definir-negociacao
+  - Answers a cold contact in two stages: only the question of who is writing, signed by whoever speaks for the brand, then the explanation after the reply, with the brand's position on the service offered
   - Leaves the record of the exchange to definir-negociacao, the tone to redigir-com-tom-de-voz, and the application to inscrever-na-oportunidade
 - **Test Criteria**:
   - [x] The skill is present at that path
