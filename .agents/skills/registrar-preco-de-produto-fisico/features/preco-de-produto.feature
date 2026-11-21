@@ -58,10 +58,16 @@ Funcionalidade: Preço de produto
       Então ela pergunta à pessoa o preço sem ler as versões da página
 
     Exemplo: Preço diferente por variação
-      Dado que o produto tem variações com preços diferentes
+      Dado que o produto tem variantes de cores diferentes com preços diferentes
       Quando a habilidade lê as versões da página
-      Então ela lê as do produto e as da variação pedida
+      Então ela lê as do produto e as da variante pedida
       Mas não lê as da unidade
+
+    Exemplo: Tamanhos com preços diferentes
+      Dado que duas variantes só diferem pelo tamanho e têm preços diferentes
+      Quando a habilidade vai registrar a mudança
+      Então mostra a diferença como divergência de cadastro e pergunta qual preço vale
+      Mas não a grava como mudança de preço
 
   Regra: o histórico só recebe linhas novas
 
@@ -82,6 +88,18 @@ Funcionalidade: Preço de produto
       Quando a habilidade monta a linha
       Então ela pergunta o motivo antes de acrescentar
       E faz o mesmo com quem decidiu
+
+    Exemplo: Produto sem linha no histórico
+      Dado que o produto não tem nenhuma linha no histórico
+      Quando a habilidade registra uma mudança de preço
+      Então acrescenta antes a linha de carga inicial, com o preço atual e a fonte
+      Mas não inventa o preço nem a data do que veio antes
+
+    Exemplo: Remarcação da ferramenta de sugestão de preço
+      Dado que o histórico de publicações da ferramenta de sugestão mostra uma redução com data e hora
+      Quando a habilidade registra essa mudança
+      Então usa a data e hora da publicação e grava como quem decidiu quem aceitou a sugestão
+      E diz quando o preço de comparação não pôde ser provado por venda
 
     Exemplo: Preço de comparação acima do menor preço recente
       Dado que o novo preço é uma redução com preço de comparação
