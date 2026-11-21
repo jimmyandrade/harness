@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.11.5"
+  version: "0.12.0"
   related:
     - definir-empresa
     - definir-grafia
@@ -51,6 +51,12 @@ Escolha um registro como canônico. Prefira o que tem o link oficial correto. Em
 ### Passo 3
 
 No canônico, o título permanece o nome canônico. Renomear ou consolidar esse nome guarda a forma anterior quando ela ainda ajuda a busca, o histórico, a dedupe ou evita confusão. Entram o nome anterior, o apelido, a grafia incorreta, a grafia ambígua e a variação. Use a propriedade de variações que o mapeamento indica para a lista. Sem mapeamento, use a propriedade de variações que a lista já tem, como Variações de nome, ou outro campo de grafias. Quando a propriedade é Variações de nome, use uma lista de bullets, um nome alternativo por item, e termine cada item com ponto e vírgula. Mantenha as grafias úteis para a busca, com e sem sigla e com e sem ano, quando forem do mesmo registro canônico. Não apague as variações que já estão. Forma que já está na lista não entra de novo. A forma igual ao título canônico não entra. Forma diferente que veio da duplicata entra. Não troque o título do canônico pela forma da duplicata. Grafia de pessoa ou de empresa segue o flowchart do Passo 1. Sem a propriedade, avise e proponha a criação. Não dê a renomeação por concluída para a dedupe. Não crie a propriedade antes do sim. Renomeação recente com a variação antiga vazia: acrescente o nome anterior. Diferença permanente entre registros não entra na variação. A variação recebe só nome, grafia, apelido, transcrição incorreta e forma alternativa do mesmo canônico. O contexto permanente e o vínculo de parecidos seguem o flowchart do Passo 1. Contato, preço, disponibilidade, resposta, decisão, status, prazo e mudança operacional vão em comentário datado.
+
+O mapeamento de dados pode trazer, por lista, até quatro chaves de título padronizado, todas opcionais: `name_variants`, `suggested_title`, `title_matches_suggestion` e `apply_suggested_title`. Lista sem a chave não usa o recurso. Não crie a propriedade sem o sim da pessoa.
+
+Ao renomear numa lista com `suggested_title`, confira se o título é igual à sugestão. Se for diferente e a pessoa quer o título padronizado, grave o valor da sugestão no título. A API não aperta botão: `apply_suggested_title` só diz que o botão existe, e a pessoa o aperta na interface se preferir.
+
+Quando o nome do registro filho é derivado do pai por uma automação do projeto, renomear o pai atualiza os filhos. Não renomeie os filhos à mão. Depois, acrescente o nome anterior de cada filho às variações dele, porque a automação não guarda o nome anterior.
 
 ### Passo 4
 
@@ -110,6 +116,14 @@ Se você concluir a renomeação com a variação vazia, a dedupe perde o nome a
 1. Acrescente o nome anterior na propriedade de variações.
 2. Sem a propriedade, avise e proponha a criação.
 3. Não dê por concluída para a dedupe. Não crie a propriedade antes do sim.
+
+### Filho renomeado à mão
+
+Se você renomear à mão o filho que a automação do projeto deriva do pai, o próximo ajuste da automação desfaz o nome e o nome anterior do filho não fica guardado.
+
+1. Renomeie só o pai.
+2. Confira o nome novo dos filhos.
+3. Acrescente o nome anterior de cada filho às variações dele.
 
 ### Resposta sem o diff
 
@@ -185,6 +199,8 @@ Conferi propriedades e relações. A data em conflito virou diff. Perguntei qual
 - Ordem para apagar e há conflito: diff, confirmação, e o valor morto na propriedade que existir, ou no corpo.
 - Duplicata numa lista de `Listas que excluem a duplicata reconciliada` com os dados úteis já no canônico: exclua. Não arquive.
 - Exclusão com risco de perda, ou dúvida sobre a duplicidade: peça confirmação. Não exclua nessa passada.
+- Lista sem `suggested_title` no mapeamento: não use título padronizado e não crie a propriedade.
+- Filho com nome derivado do pai: renomeie o pai, confira os filhos e guarde o nome anterior de cada um.
 - O data source não está no workspace conectado: pare.
 
 ## Pegadinhas
@@ -195,6 +211,7 @@ Conferi propriedades e relações. A data em conflito virou diff. Perguntei qual
 - Variações de nome é uma lista de bullets, um nome por item, com ponto e vírgula no fim. Os aliases de um grupo são um nome por linha.
 - Apagar parece o jeito de consolidar. Sem ordem, a duplicata fica, com a nota, e sai das referências futuras. Nas listas de `Listas que excluem a duplicata reconciliada`, a duplicata já reconciliada é excluída. Arquivar não resolve governança, busca nem reconciliação.
 - Uma frase só parece bastar. O diff separa o que a canônica traz e o que cada duplicata traz.
+- O botão de aplicar a sugestão parece algo que a skill aperta. A API não aperta botão: grave o valor da sugestão no título.
 - Uma propriedade de valor morto parece obrigatória. Ela só recebe o valor se a lista já a tiver. Sem ela, o corpo da página recebe.
 
 ## Scripts disponíveis

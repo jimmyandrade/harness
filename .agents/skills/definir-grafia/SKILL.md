@@ -1,11 +1,11 @@
 ---
 name: definir-grafia
-description: Use essa habilidade sempre que for verificar nome de pessoa ou empresa, inclusive transcrito de comando por voz ou usado numa despesa, ou guardar uma forma errada. Um print de pessoa ou perfil segue o cadastro do que falta. NÃO use para criar empresa, renomear registro nem executar a operação de destino.
+description: Use essa habilidade sempre que for verificar nome de pessoa ou empresa, inclusive transcrito de comando por voz ou usado numa despesa, ou guardar uma forma errada. Um print de pessoa ou perfil segue o cadastro do que falta. NÃO use para criar empresa, renomear registro (use mesclar-registro) nem executar a operação de destino.
 allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-update-page
 compatibility: Precisa de internet. A busca semântica nas listas usa notion-ai-search no servidor notion.
 metadata:
   author: jimmyandrade
-  version: "0.9.0"
+  version: "0.9.1"
   aliases:
     - procurar-grafia
   related:

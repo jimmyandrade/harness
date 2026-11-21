@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.15.0"
+  version: "0.15.1"
   related:
     - definir-data-significativa
     - definir-grafia
@@ -34,6 +34,8 @@ O termo principal é o título da lista. Busque o nome como a pessoa escreveu. B
 Pessoa de outra empresa com o primeiro nome, o apelido ou a forma curta igual aos de alguém do próprio negócio é outra pessoa, até uma fonte dizer o contrário. Não herde o cadastro, o telefone, o perfil nem a empresa de quem é de dentro. Ligue as duas em Não confundir com na hora, com a empresa de cada uma no contexto da desambiguação, e use o registro da pessoa certa ao escrever ou enviar.
 
 Ao buscar por telefone de celular do Brasil, busque as duas formas, com e sem o 9 depois do DDD: o contato antigo do WhatsApp guarda o número sem ele. Dois registros da mesma pessoa, um com o número de cada forma, são duplicata.
+
+Quando o mapeamento de dados traz `name_variants` para a lista, essa é a propriedade das variações que entra na busca pelo nome antigo.
 
 ### Passo 3
 
