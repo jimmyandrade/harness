@@ -346,6 +346,7 @@ flowchart LR
   convidar_para_evento --> conversar_no_whatsapp
   convidar_para_evento --> definir_agenda
   convidar_para_evento --> definir_convidado
+  convidar_para_evento --> definir_pessoa
   convidar_para_evento --> rascunhar_mensagem
   convidar_para_evento --> redigir_com_tom_de_voz
   criar_carrossel_do_instagram --> criar_ideia_de_conteudo
@@ -983,6 +984,7 @@ flowchart LR
   rascunhar_mensagem --> anexar_arquivo_no_whatsapp
   rascunhar_mensagem --> conversar_no_whatsapp
   rascunhar_mensagem --> definir_negociacao
+  rascunhar_mensagem --> definir_pessoa
   rascunhar_mensagem --> definir_tarefa
   rascunhar_mensagem --> definir_viagem
   rascunhar_mensagem --> definir_vocabulario

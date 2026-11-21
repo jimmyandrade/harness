@@ -3,7 +3,7 @@ name: rascunhar-mensagem
 description: Escreve, mostra e envia a mensagem de WhatsApp depois de a conversa ser lida, com o destino, o texto, a divisão e o comprovante conferidos. Usada quando a pessoa quer responder, mandar ou corrigir uma mensagem. NÃO serve para ler a conversa, redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.4.1"
+  version: "0.4.2"
   aliases:
     - entregar-rascunho-de-mensagem
     - rascunhar-mensagem-no-whatsapp
@@ -12,6 +12,7 @@ metadata:
     - anexar-arquivo-no-whatsapp
     - conversar-no-whatsapp
     - definir-negociacao
+    - definir-pessoa
     - definir-tarefa
     - definir-viagem
     - definir-vocabulario
@@ -23,8 +24,6 @@ metadata:
     - redigir-com-tom-de-voz
     - rotular-item
     - usar-whatsapp-web
-  models:
-    - janela-de-contato
 ---
 
 # Rascunhar mensagem
@@ -59,8 +58,7 @@ O destino do rascunho é quem mandou a mensagem respondida, na conversa que a pe
 
 No WhatsApp Web, todo acesso segue `usar-whatsapp-web`: antes de enviar, confira no cabeçalho o nome da conversa. O texto, o destino e o sim do envio são daqui.
 
-Antes de rascunhar e de novo ao enviar, confira a janela de contato de quem recebe. Fora dela, o rascunho espera o próximo horário permitido e nada sai.
-Leia o modelo de saída `janela-de-contato` quando for gerar a saída.
+Antes de rascunhar e de novo ao enviar, confira a janela de contato de quem recebe, como `definir-pessoa` manda. Fora dela, o rascunho espera o próximo horário permitido e nada sai.
 
 ### Passo 2
 

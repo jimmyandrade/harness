@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.22.1"
+  version: "0.22.2"
   related:
     - definir-empresa
     - definir-grafia
@@ -123,6 +123,8 @@ Leia os dois no registro, nunca os escreva na habilidade, e sem o nome civil par
 
 A janela de contato é quando a pessoa não deve ser contatada: dias de descanso e o horário a partir do qual, ou até o qual, não há contato. Ela vai nas propriedades que os parâmetros da janela nomeiam, nunca nas observações: os dias, na dos dias, e cada horário, na sua, como o texto `HH:MM` de 24 horas, com `19:00` para "depois das 19h". O fuso é o da localidade da pessoa.
 Grave no turno em que ela chegar, mudando só o campo informado. Sem a propriedade na lista, ou com o parâmetro vazio, avise, proponha criá-la e preencher o parâmetro, e diga a janela na resposta. Não crie a propriedade sem o sim.
+Quem contata a pessoa confere a janela antes de enviar e de novo na hora do envio: leia as três propriedades no registro, e em grupo as de cada pessoa nomeada. Leia o dia e a hora no fuso da localidade dela por comando, como `TZ=<fuso> date '+%Y-%m-%d %H:%M'`, com o dia da semana como a regra do dia da semana manda. Sem fuso e com janela preenchida, não envie e pergunte uma vez.
+Está bloqueado o dia sem contato, a hora igual ou depois de `Sem contato a partir de` e a hora antes de `Sem contato até`, que já é permitida. Fora da janela nada sai, por nenhum canal: diga o motivo e o próximo horário permitido, com o dia da semana, no fuso dela e no de quem usa, e deixe o rascunho para esse horário. A janela só muda no registro, por esta habilidade.
 
 ### Passo 4
 
@@ -203,14 +205,6 @@ Se você gravar o que a pessoa só inferiu como confirmado, a próxima consulta 
 1. Grave a entrada com o estado `inferido`, a data, quem inferiu e a frase da transcrição.
 2. Escreva nas notas o que descartou as outras hipóteses e quais ficam abertas.
 3. Ao usá-la, diga que é inferência e peça a confirmação quando houver chance.
-
-### Janela de contato nas observações
-
-Se você gravar nas observações que a pessoa não é contatada em certos dias ou horas, nenhuma habilidade de envio a lê e o contato sai fora da janela.
-
-1. Grave a janela nas propriedades dos parâmetros, e só o campo informado.
-2. Sem a propriedade na lista, avise e proponha criá-la, sem criar antes do sim.
-3. Leia o registro de volta e diga o que gravou.
 
 ### Handle no nome
 

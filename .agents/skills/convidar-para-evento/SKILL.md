@@ -3,18 +3,17 @@ name: convidar-para-evento
 description: Convida uma pessoa ou um grupo para uma reunião, um show, uma feira ou um lançamento, lendo o evento da agenda e mandando o convite pelos canais que alcançam a pessoa, só com o sim da pessoa. Usada quando alguém deve ser convidado ou confirmou uma call. Não serve para criar o evento, cadastrar o convidado nem ler a conversa.
 metadata:
   author: jimmyandrade
-  version: "0.4.1"
+  version: "0.4.2"
   related:
     - rascunhar-mensagem
     - acompanhar-resposta-no-whatsapp
     - conversar-no-whatsapp
     - definir-agenda
     - definir-convidado
+    - definir-pessoa
     - anexar-arquivo-no-whatsapp
     - evoluir-habilidade
     - redigir-com-tom-de-voz
-  models:
-    - janela-de-contato
 ---
 
 # Convidar para evento
@@ -42,8 +41,7 @@ Peça o que falta do compromisso: quem convida, quem recebe o convite, pessoa ou
 
 O evento existe antes do convite. Sem evento, siga `definir-agenda` e volte aqui com ele criado. Um convite com horário que não está na agenda deixa a pessoa com um compromisso que ninguém guarda.
 
-Antes de convidar por qualquer canal, confira a janela de contato de cada pessoa convidada, no registro dela, e de novo na hora do envio. O convite do Google Agenda também conta: ele chega à pessoa quando ela entra como convidada do evento. Fora da janela, nenhum convite sai, por nenhum canal, e ele espera o próximo horário permitido. O evento na agenda fica como está.
-Leia o modelo de saída `janela-de-contato` quando for gerar a saída.
+Antes de convidar por qualquer canal, confira a janela de contato de cada pessoa convidada, como `definir-pessoa` manda, e de novo na hora do envio. O convite do Google Agenda também conta: ele chega à pessoa quando ela entra como convidada do evento. Fora da janela, nenhum convite sai, por nenhum canal, e ele espera o próximo horário permitido. O evento na agenda fica como está.
 
 ### Passo 2
 
