@@ -950,6 +950,7 @@ flowchart LR
   publicar_produto_fisico_na_loja_virtual --> redigir_com_tom_de_voz
   publicar_produto_fisico_na_loja_virtual --> registrar_preco_de_produto_fisico
   publicar_produto_fisico_no_mercado_pago --> gerenciar_estoque
+  publicar_produto_fisico_no_mercado_pago --> identificar_duplicata
   publicar_produto_fisico_no_mercado_pago --> lancar_venda
   publicar_produto_fisico_no_mercado_pago --> publicar_produto_fisico_na_loja_virtual
   publicar_produto_fisico_no_mercado_pago --> registrar_preco_de_produto_fisico
