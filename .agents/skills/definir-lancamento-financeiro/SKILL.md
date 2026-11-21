@@ -1,11 +1,11 @@
 ---
 name: definir-lancamento-financeiro
-description: Use essa habilidade sempre que chegar uma venda, um gasto ou outra movimentação financeira de dinheiro em frase simples, mesmo sem dizer lançamento financeiro. Trata de receitas, vendas, gastos e pagamentos. NÃO use para montar a DRE, o fluxo de caixa, o preço, o planejamento do mês, cadastrar o bem durável, nem projetar o caixa. NÃO confunda com lançamento musical ou de produto.
+description: Use essa habilidade sempre que chegar uma venda, um gasto ou outra movimentação financeira de dinheiro em frase simples ou numa lista de transações, como um extrato, mesmo sem dizer lançamento financeiro. NÃO use para montar a DRE, o fluxo de caixa, o preço, o planejamento do mês, cadastrar o bem durável, nem projetar o caixa. NÃO confunda com lançamento musical ou de produto.
 allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-data-sources notion:notion-create-pages notion:notion-update-page
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.1"
+  version: "0.5.0"
   aliases:
     - definir-lancamento
   related:
@@ -13,6 +13,7 @@ metadata:
     - definir-planejamento-financeiro
     - gerenciar-estoque
     - lancar-despesa-da-empresa
+    - lancar-despesa-pessoal
     - revisar-financas
 ---
 
@@ -63,13 +64,15 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ### Passo 1
 
-Interpretar uma venda, um gasto ou outra movimentação de dinheiro em frase simples, e encaminhar o que não é esse lançamento, é esta habilidade. A pessoa informa o data source na execução. Se ele não estiver no workspace conectado, pare. Não use a fonte de outro workspace.
+Interpretar uma venda, um gasto ou outra movimentação de dinheiro em frase simples ou numa lista de transações, e encaminhar o que não é esse lançamento, é esta habilidade. A pessoa informa o data source na execução. Se ele não estiver no workspace conectado, pare. Não use a fonte de outro workspace.
+
+Uma lista de transações segue o Passo 6, e cada linha dela passa pelos Passos 1 a 5.
 
 ```mermaid
 flowchart LR
   T{O que chegou?} -->|gasto da empresa| D[lancar-despesa-da-empresa]
   T -->|venda| V[Habilidade de venda]
-  T -->|pessoal| P[Fora da fonte da empresa]
+  T -->|pessoal| P[lancar-despesa-pessoal]
   T -->|falta dado| Q[Pergunte e não grave]
   T -->|estoque| E[gerenciar-estoque]
   T -->|DRE, fluxo ou preço| R[revisar-financas]
@@ -84,7 +87,7 @@ Sem dizer se é da empresa ou pessoal, se é venda ou gasto, ou a forma de receb
 
 ### Passo 3
 
-Pessoal fica fora da fonte da empresa. Gasto da empresa segue `lancar-despesa-da-empresa`. Não crie uma segunda página. Venda segue a `Habilidade de venda`, quando as instruções do projeto a indicarem. Sem ela, diga que a venda fica fora desta habilidade e não grave. Não use a lista de despesas e investimentos para venda. Não invente a fonte.
+Pessoal fica fora da fonte da empresa e segue `lancar-despesa-pessoal`. Gasto da empresa segue `lancar-despesa-da-empresa`. Não crie uma segunda página. Venda segue a `Habilidade de venda`, quando as instruções do projeto a indicarem. Sem ela, diga que a venda fica fora desta habilidade e não grave. Não use a lista de despesas e investimentos para venda. Não invente a fonte.
 
 ### Passo 4
 
@@ -94,7 +97,37 @@ Classifique o gasto numa classe de `Classes do gasto`. Se a fonte não tiver ess
 
 Não apague lançamento anterior. Não refaça saldo, vendas, despesas nem resultado a partir da conversa. Leia o que a fonte já tem, some este lançamento e atualize saldo de caixa, total de vendas, total de despesas e resultado acumulado. A resposta começa pela tabela de entradas, saídas e saldo, na `Moeda`. Depois vêm resumo curto, alerta e orientação.
 
+### Passo 6
+
+Uma lista de transações, como o extrato ou as atividades de um meio de pagamento, é percorrida linha a linha. A pessoa informa o período e de onde ler. Sem isso, pergunte. Leia a lista inteira antes de gravar.
+
+Classifique cada linha pelo que a evidência mostra, não pelo sinal do valor, e encaminhe pelo Passo 1:
+
+```mermaid
+flowchart LR
+  L{Que linha é?} -->|entrada de venda| V[Habilidade de venda]
+  L -->|saída da empresa| D[lancar-despesa-da-empresa]
+  L -->|saída pessoal| P[lancar-despesa-pessoal]
+  L -->|tarifa ou taxa do meio de pagamento| T[Gasto da empresa, em despesas comerciais ou financeiras]
+  L -->|transferência entre contas do titular| N[Não é receita nem gasto: não grave]
+  L -->|liberação sem venda, estorno, rendimento ou dúvida| Q[Pergunta]
+```
+
+Cada habilidade dona busca antes de criar, então uma linha que já tem lançamento não vira outro, e rodar a mesma lista de novo não duplica. Não grave pela conversa.
+
+As linhas que pedem pergunta vão juntas numa só, com a linha, o valor, a data e as opções. As outras seguem sem esperar a resposta, e as da pergunta não são gravadas até ela chegar.
+
+A resposta começa pela tabela do Passo 5 e traz a contagem por destino: lançadas, já existentes, fora dos registros e à espera de resposta.
+
 ## Problemas comuns
+
+### Lista tratada como uma frase
+
+Se você pedir uma pergunta por linha ou gravar a lista inteira sem classificar, a pessoa responde dezenas de vezes ou a transferência entre contas vira despesa.
+
+1. Classifique cada linha antes de gravar, pelo Passo 6.
+2. Junte o que depende de resposta numa pergunta só.
+3. Grave o que está claro e entregue a contagem por destino.
 
 ### Venda gravada como despesa
 
@@ -138,7 +171,11 @@ Faltavam as parcelas e o valor de cada uma. Perguntei. Não gravei.
 
 ### paguei o aluguel de casa
 
-Era pessoal. Ficou fora da fonte da empresa.
+Era pessoal. Ficou fora da fonte da empresa e seguiu `lancar-despesa-pessoal`.
+
+### As atividades do mês no Mercado Pago, com 40 linhas
+
+Cada linha foi classificada. As vendas seguiram a habilidade de venda, os gastos da empresa seguiram `lancar-despesa-da-empresa`, e uma transferência entre contas do titular ficou de fora. Uma liberação sem venda entrou na pergunta única. A resposta trouxe a tabela e a contagem por destino.
 
 ### Assinatura cobrada em dólar
 
@@ -149,7 +186,9 @@ O valor em dólar, o câmbio, a data e a fonte do câmbio vieram da fatura. O va
 - A fonte não está no workspace conectado: pare. Não use a fonte de outro workspace.
 - Falta empresa ou pessoal, venda ou gasto, ou a forma: pergunte. Não grave.
 - Venda: a `Habilidade de venda`, quando houver. Não use a lista de despesas e investimentos.
-- Pessoal: fora da fonte da empresa.
+- Pessoal: fora da fonte da empresa, e segue `lancar-despesa-pessoal`.
+- A lista não traz o período ou de onde ler: pergunte. Não grave.
+- A mesma lista chega de novo: cada habilidade dona busca antes de criar. Não duplique.
 - A classe não existe na fonte: pergunte. Não crie a categoria.
 - A lista de estoque segue `gerenciar-estoque`. DRE, fluxo, diagnóstico, auditoria e preço seguem `revisar-financas`. O mês à frente segue `definir-planejamento-financeiro`.
 - A projeção do caixa segue a `Habilidade de projeção de caixa`, quando houver. Bem durável segue `definir-ativo-imobilizado`.
@@ -159,6 +198,8 @@ O valor em dólar, o câmbio, a data e a fonte do câmbio vieram da fatura. O va
 - Venda recebida na hora parece gasto. A lista de despesas e investimentos não recebe venda.
 - Aluguel parece sempre da empresa. Aluguel de casa é pessoal e fica fora da fonte da empresa.
 - Empréstimo e financiamento parecem custo. Na chave `Classes do gasto`, ficam em despesas financeiras.
+- Uma transferência entre contas do titular parece saída e entrada. Não é gasto nem receita, e fica fora dos registros.
+- A tarifa do meio de pagamento parece ruído do extrato. É gasto da empresa.
 - A conversa parece o histórico. O saldo sai da fonte. Lançamento anterior permanece.
 - A fatura em dólar parece já estar na `Moeda`. O valor original, o câmbio e o valor convertido ficam juntos. Sem o câmbio, pergunte.
 - O Notion lê o trecho entre dois cifrões sem barra como fórmula. Num texto com valor em reais, escreva `R\$ 10,00` e releia o campo depois de gravar. A propriedade numérica não precisa da barra.
