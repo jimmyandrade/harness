@@ -1,4 +1,11 @@
 {
   "skill_name": "enviar-email",
-  "evals": []
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Envie o e-mail aprovado à pessoa que não é contatada a partir das 19h, e são 19h40 no fuso dela.",
+      "expected_output": "Ler a janela no registro, não enviar, dizer o motivo e o próximo horário permitido, e deixar o rascunho na caixa para esse horário.",
+      "files": []
+    }
+  ]
 }

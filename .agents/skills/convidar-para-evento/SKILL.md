@@ -3,13 +3,14 @@ name: convidar-para-evento
 description: Convida uma pessoa ou um grupo para uma reunião, um show, uma feira ou um lançamento, lendo o evento da agenda e mandando o convite pelos canais que alcançam a pessoa, só com o sim da pessoa. Usada quando alguém deve ser convidado ou confirmou uma call. Não serve para criar o evento, cadastrar o convidado nem ler a conversa.
 metadata:
   author: jimmyandrade
-  version: "0.3.2"
+  version: "0.4.2"
   related:
     - rascunhar-mensagem
     - acompanhar-resposta-no-whatsapp
     - conversar-no-whatsapp
     - definir-agenda
     - definir-convidado
+    - definir-pessoa
     - anexar-arquivo-no-whatsapp
     - evoluir-habilidade
     - redigir-com-tom-de-voz
@@ -26,6 +27,10 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 # `Canais do convite em ordem de preferência` lista os canais do convite: `WhatsApp` e `Google Agenda`. Com `Convite multicanal` em `não`, a conversa em que o compromisso foi combinado manda mais que esta lista, e sem conversa de origem vale o primeiro canal dela.
 "Canais do convite em ordem de preferência": ["WhatsApp", "Google Agenda"]
 "Modo de aprendizado": "perguntar"
+# Globais: os nomes das propriedades da lista de pessoas que guardam a janela de contato. Vazio não impõe regra.
+"Dias sem contato": ""
+"Sem contato a partir de": ""
+"Sem contato até": ""
 ```
 
 ## Instruções
@@ -35,6 +40,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 Peça o que falta do compromisso: quem convida, quem recebe o convite, pessoa ou grupo, e o que é, como uma reunião, um show, uma feira ou um lançamento. Leia o evento na agenda antes de pedir qualquer outro dado: o título, o início, o término, o local ou o link da chamada e os convidados vêm dele.
 
 O evento existe antes do convite. Sem evento, siga `definir-agenda` e volte aqui com ele criado. Um convite com horário que não está na agenda deixa a pessoa com um compromisso que ninguém guarda.
+
+Antes de convidar por qualquer canal, confira a janela de contato de cada pessoa convidada, como `definir-pessoa` manda, e de novo na hora do envio. O convite do Google Agenda também conta: ele chega à pessoa quando ela entra como convidada do evento. Fora da janela, nenhum convite sai, por nenhum canal, e ele espera o próximo horário permitido. O evento na agenda fica como está.
 
 ### Passo 2
 

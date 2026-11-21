@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, e lê o pedido, quem pediu, a data, o que o contato afirmou e o que falta. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp ou conferir o que alguém pediu. Não serve para escrever ou enviar a mensagem, redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.42.2"
+  version: "0.42.3"
   aliases:
     - redigir-mensagem-de-whatsapp
   related:
@@ -103,7 +103,7 @@ Para registrar a demanda, leve a data e o horário da primeira mensagem do pedid
 
 ### Passo 5
 
-Para responder ou enviar, siga `rascunhar-mensagem` com a conversa de destino, quem mandou a última mensagem e o que o contato respondeu, com as palavras dele e o horário. `Não lidas antes de enviar` continua valendo antes de qualquer envio.
+Para responder ou enviar, siga `rascunhar-mensagem` com a conversa de destino, quem mandou a última mensagem e o que o contato respondeu, com as palavras dele e o horário. `Não lidas antes de enviar` continua valendo antes de qualquer envio, e a janela de contato de quem recebe é conferida lá.
 
 ### Passo 6
 

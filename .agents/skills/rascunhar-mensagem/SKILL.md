@@ -3,7 +3,7 @@ name: rascunhar-mensagem
 description: Escreve, mostra e envia a mensagem de WhatsApp depois de a conversa ser lida, com o destino, o texto, a divisão e o comprovante conferidos. Usada quando a pessoa quer responder, mandar ou corrigir uma mensagem. NÃO serve para ler a conversa, redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.3.5"
+  version: "0.4.2"
   aliases:
     - entregar-rascunho-de-mensagem
     - rascunhar-mensagem-no-whatsapp
@@ -12,6 +12,7 @@ metadata:
     - anexar-arquivo-no-whatsapp
     - conversar-no-whatsapp
     - definir-negociacao
+    - definir-pessoa
     - definir-tarefa
     - definir-viagem
     - definir-vocabulario
@@ -42,6 +43,10 @@ Leia os valores nas instruções do projeto, na entrada desta habilidade. Na aus
 "Página de instruções do WhatsApp": ""
 # `Horário de trabalho`: o da entrada `Global`. Fora dele, a mensagem pede desculpa pelo horário. Vazio, não pede.
 "Horário de trabalho": ""
+# Globais: os nomes das propriedades da lista de pessoas que guardam a janela de contato. Vazio não impõe regra.
+"Dias sem contato": ""
+"Sem contato a partir de": ""
+"Sem contato até": ""
 ```
 ## Instruções
 
@@ -52,6 +57,8 @@ A leitura da conversa é de `conversar-no-whatsapp`. Receba dela a conversa de d
 O destino do rascunho é quem mandou a mensagem respondida, na conversa que a pessoa indicou. Diga "para X, na conversa Y" antes do texto.
 
 No WhatsApp Web, todo acesso segue `usar-whatsapp-web`: antes de enviar, confira no cabeçalho o nome da conversa. O texto, o destino e o sim do envio são daqui.
+
+Antes de rascunhar e de novo ao enviar, confira a janela de contato de quem recebe, como `definir-pessoa` manda. Fora dela, o rascunho espera o próximo horário permitido e nada sai.
 
 ### Passo 2
 
@@ -105,7 +112,7 @@ A saudação e o texto se dirigem só a quem está na conversa aberta: quem ela 
 O comprovante de pagamento segue `Canal do comprovante`. O e-mail do comprovante é o que a organização já mandou para o pagamento, inclusive uma chave Pix em forma de e-mail: a mensagem diz para onde o comprovante vai, sem perguntar se o endereço serve. Pergunte só quando a conversa e o cadastro não trazem nenhum e-mail.
 O e-mail sai por `enviar-email`, com o arquivo anexado e o sim da pessoa, e o WhatsApp só avisa que foi por e-mail e pede a confirmação. Com `e-mail e WhatsApp`, o arquivo vai também na conversa, antes do aviso. Sem conversa de e-mail com a organização, mande o arquivo no WhatsApp e diga isso.
 
-Para responder ou enviar, mostre a conversa de destino, o texto exato e, se for resposta, a mensagem citada. Envie só depois do sim da pessoa a esse texto e a essa conversa. O sim vale para o texto mostrado, com todas as partes numeradas. Uma parte nova ou alterada pede outro sim.
+Para responder ou enviar, mostre a conversa de destino, o texto exato e, se for resposta, a mensagem citada. Envie só depois do sim da pessoa a esse texto e a essa conversa. Uma parte nova ou alterada pede outro sim.
 
 Se a conversa estiver com um agente de IA, avise antes de enviar: ele responde à próxima mensagem do contato. No WhatsApp Web, veja isso como `usar-whatsapp-web` manda, inclusive num robô com menu: tente cada passo, não preveja o resultado.
 
@@ -249,11 +256,9 @@ Li a resposta como a da pergunta: o carro pode entrar na montagem, em qualquer j
 - O widget parece guardar o rascunho. Ele sobe com a conversa e some, e a pessoa não acha o que ficou pendente. O artefato com os rascunhos pendentes fica no mesmo endereço.
 - Um bloco de código parece prévia suficiente. Com a ferramenta de widget na sessão, a pessoa também espera o widget editável, com copiar e aprovar.
 - Uma resposta curta parece incompleta quando não repete o detalhe que a conversa já traz. Ela responde a pergunta como foi escrita: confira o texto da pergunta antes de achar que falta algo.
-- O rascunho de ontem parece valer. A conversa pode ter mudado: leia antes e rascunhe só o que falta.
 - Ao dividir uma lista numerada, o campo pode renumerar o item solto e a parte que continua a lista voltar para "1.". Confira no print e, no WhatsApp Web, siga `usar-whatsapp-web`.
 - A caixa de marcar parece só do agente. A pessoa também a marca, e a marca dela não se desfaz.
 - A mensagem parece pedir assinatura como um e-mail. A conversa já mostra quem escreve.
-- "Vimos seu aviso de ontem" parece educado. Se a mensagem mais recente do contato é de hoje, a frase responde à anterior: confira a data de cada mensagem citada e use a última.
 - Uma chave Pix em forma de e-mail parece só um destino de pagamento. Quando a organização a mandou para pagar, o comprovante vai para esse endereço, e perguntar se ele serve repete o que ela já disse.
 
 ## Scripts disponíveis
