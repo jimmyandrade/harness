@@ -3,7 +3,7 @@ name: definir-arquivos-da-habilidade
 description: Define onde ficam os scripts, referências, modelos e testes de uma skill e escreve Scripts disponíveis. Usada quando a skill ganha, move ou renomeia um arquivo além do SKILL.md, ou quando se propõe um script. Não serve para escrever o texto da skill, a descrição nem gravar no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.10.0"
+  version: "0.10.1"
   related:
     - criar-habilidade
     - evoluir-habilidade
@@ -31,6 +31,8 @@ O nome e o lugar seguem essa regra desde a proposta, inclusive numa lista na con
 Antes de propor um script, decida pelo [Passo 3](#passo-3) se ele é preciso: comando curto ou de ferramenta que já resolve fica listado em `Scripts disponíveis`, e só comando longo vira script.
 Script devolve informação, como JSON ou texto. Quem a mostra é o agente, num widget ou num artefato, também a de um trabalho longo em tempo real: o script escreve o estado e o agente o lê e o exibe. Não grave página HTML dentro de um script, nem faça o script servir uma página.
 Tabela que estoura o limite vai para `references/`, com a condição de leitura. "Leia o material se a API não retornar 200" serve.
+
+A skill é agnóstica a onde as coisas são guardadas. O detalhe de um modo de armazenamento, como os campos de um arquivo local, fica no texto da skill, mesmo acima de 95% do limite, e não vai para `references/`. Quando for preciso separar, separe uma responsabilidade que não dependa do armazenamento.
 
 Uma decisão de caso que a skill aprende com a pessoa, como classificar um item ou escolher um destino, fica numa árvore de decisão Mermaid, `flowchart TD`, num arquivo `.mmd` ao lado do `config.yaml`, e um parâmetro cita o arquivo. A árvore é lida de cima para baixo e a primeira pergunta que bater decide. Quando nenhuma bate, a skill pergunta e acrescenta a regra na árvore. O texto da skill guarda só o comportamento geral, nunca a decisão de um caso.
 
@@ -102,7 +104,7 @@ O script sai de `scripts/` da primeira skill e vai para `.agents/scripts/check-s
 ## Casos-limite
 
 - O script vale para uma skill: `scripts/` dentro dela. Vale para várias: `.agents/scripts/<nome>/`.
-- A skill passaria do limite de linhas ou de tokens do corpo: proponha `references/` e a condição de leitura.
+- A skill passaria do limite de linhas ou de tokens do corpo: proponha separar uma responsabilidade que não dependa do armazenamento, com o porquê, o destino de cada trecho e o nome de cada skill. Não mande o detalhe de um modo de armazenamento para `references/` nem para uma skill própria.
 - A skill quer mostrar o andamento de um trabalho longo: o script escreve o estado e o agente o exibe, sem página no script.
 - O script já existe com o nome em outro idioma: renomeie para o `Idioma do nome dos scripts` e atualize `Scripts disponíveis`.
 - Um pacote já resolve: o comando fica em `Scripts disponíveis`, sem `scripts/`.
@@ -115,6 +117,7 @@ O script sai de `scripts/` da primeira skill e vai para `.agents/scripts/check-s
 - Modelo de saída não entra no corpo. Fica em `.agents/assets/templates/`, e a frase cita o nome, não o caminho.
 - Uma página que se atualiza sozinha parece a forma mais simples de acompanhar um trabalho. Ela vira código de interface dentro do script. O script devolve o estado e o agente o exibe.
 - No Notion, o script pode faltar na página. A execução precisa de um caminho sem ele.
+- O detalhe de um modo de armazenamento parece material de `references/`. A skill é agnóstica ao armazenamento: ele fica no texto dela.
 
 ## Scripts disponíveis
 
