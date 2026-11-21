@@ -11,6 +11,7 @@ Solid arrows come from `metadata.related`. Dotted arrows are skills cited in the
 ```mermaid
 flowchart LR
   subgraph core["Core"]
+    abordar_contato["abordar-contato"]
     abrir_vendas_na_tiqueteira["abrir-vendas-na-tiqueteira"]
     acompanhar_edital["acompanhar-edital"]
     acompanhar_fila_de_revisao["acompanhar-fila-de-revisao"]
@@ -106,6 +107,7 @@ flowchart LR
     definir_vocabulario["definir-vocabulario"]
     delegar_aviso_de_plataforma["delegar-aviso-de-plataforma"]
     descrever_habilidade_ou_schema["descrever-habilidade-ou-schema"]
+    diagnosticar_funil["diagnosticar-funil"]
     dividir_mensagem["dividir-mensagem"]
     emitir_documento_oficial["emitir-documento-oficial"]
     enviar_email["enviar-email"]
@@ -137,6 +139,7 @@ flowchart LR
     limpar_copias_de_trabalho["limpar-copias-de-trabalho"]
     manter_contato_no_whatsapp["manter-contato-no-whatsapp"]
     medir_habilidade["medir-habilidade"]
+    mencionar_pessoa["mencionar-pessoa"]
     mesclar_pull_request["mesclar-pull-request"]
     mesclar_registro["mesclar-registro"]
     organizar_emails["organizar-emails"]
@@ -188,6 +191,13 @@ flowchart LR
     validar_plano_de_vocabulario["validar-plano-de-vocabulario"]
     verificar_origem_do_link["verificar-origem-do-link"]
   end
+  abordar_contato --> definir_empresa
+  abordar_contato --> definir_negociacao
+  abordar_contato --> definir_pessoa
+  abordar_contato --> diagnosticar_funil
+  abordar_contato --> inscrever_na_oportunidade
+  abordar_contato --> procurar_oportunidade
+  abordar_contato --> redigir_com_tom_de_voz
   abrir_vendas_na_tiqueteira --> definir_lote_de_ingresso
   acompanhar_edital --> criar_oportunidade
   acompanhar_edital --> definir_grafia
@@ -510,6 +520,7 @@ flowchart LR
   definir_inscricao --> procurar_email
   definir_inscricao --> procurar_inscricao
   definir_inscricao --> procurar_oportunidade
+  definir_inscricao --> rotular_item
   definir_instrucoes_do_projeto --> criar_habilidade
   definir_issue_do_github --> criar_pull_request
   definir_issue_do_github --> levantar_ambiente_do_repositorio
@@ -534,8 +545,10 @@ flowchart LR
   definir_medicao_de_metrica --> definir_okr
   definir_medicao_de_metrica --> identificar_duplicata
   definir_medicao_de_metrica --> reconhecer_imagem
+  definir_negociacao --> abordar_contato
   definir_negociacao --> acompanhar_retornos_pendentes
   definir_negociacao --> definir_agenda
+  definir_negociacao --> diagnosticar_funil
   definir_negociacao --> inscrever_na_oportunidade
   definir_negociacao --> organizar_ponto_de_contato
   definir_negociacao --> procurar_banco_de_dados
@@ -544,6 +557,7 @@ flowchart LR
   definir_negociacao --> redigir_com_tom_de_voz
   definir_negociacao --> rotular_item
   definir_negociacao --> sincronizar_cronograma
+  definir_negociacao --> usar_whatsapp_web
   definir_obra_musical --> definir_fonograma
   definir_obra_musical --> procurar_banco_de_dados
   definir_obrigacao_financeira --> lancar_despesa_da_empresa
@@ -554,6 +568,8 @@ flowchart LR
   definir_okr --> definir_tarefa
   definir_orcamento_de_fornecedor --> conversar_no_whatsapp
   definir_orcamento_de_fornecedor --> definir_empresa
+  definir_orcamento_de_fornecedor --> definir_localidade_geografica
+  definir_orcamento_de_fornecedor --> definir_negociacao
   definir_orcamento_de_fornecedor --> lancar_despesa_da_empresa
   definir_orcamento_de_fornecedor --> procurar_email
   definir_orcamento_de_fornecedor --> reconhecer_imagem
@@ -568,6 +584,7 @@ flowchart LR
   definir_pessoa --> definir_grafia
   definir_pessoa --> definir_perfil_social
   definir_pessoa --> identificar_duplicata
+  definir_pessoa --> mencionar_pessoa
   definir_pessoa --> usar_whatsapp_web
   definir_planejamento_financeiro --> definir_lancamento_financeiro
   definir_planejamento_financeiro --> gerenciar_estoque
@@ -657,6 +674,9 @@ flowchart LR
   descrever_habilidade_ou_schema --> criar_pull_request
   descrever_habilidade_ou_schema --> revisar_habilidade
   descrever_habilidade_ou_schema --> testar_habilidade
+  diagnosticar_funil --> abordar_contato
+  diagnosticar_funil --> definir_negociacao
+  diagnosticar_funil --> definir_recurso_de_aprendizado
   dividir_mensagem --> comunicar_novidade_do_produto
   dividir_mensagem --> rascunhar_mensagem
   enviar_email --> acompanhar_retornos_pendentes
@@ -817,6 +837,8 @@ flowchart LR
   manter_contato_no_whatsapp --> rotular_item
   manter_contato_no_whatsapp --> usar_whatsapp_web
   medir_habilidade --> testar_habilidade
+  mencionar_pessoa --> definir_pessoa
+  mencionar_pessoa --> redigir_com_tom_de_voz
   mesclar_pull_request --> atender_revisao_de_pull_request
   mesclar_pull_request --> atualizar_branch_do_pull_request
   mesclar_pull_request --> comunicar_novidade_do_produto
@@ -1011,7 +1033,9 @@ flowchart LR
   revisar_habilidade --> testar_habilidade
   revisar_oportunidade --> criar_ideia_de_conteudo
   revisar_oportunidade --> criar_oportunidade
+  revisar_oportunidade --> definir_empresa
   revisar_oportunidade --> definir_grupo_de_oportunidades
+  revisar_oportunidade --> definir_inscricao
   revisar_oportunidade --> definir_tarefa
   revisar_oportunidade --> procurar_oportunidade
   revisar_uso_do_tempo --> definir_agenda

@@ -1,15 +1,17 @@
 ---
 name: revisar-oportunidade
-description: Revisa o conteúdo, o corpo e as anotações de uma edição que já existe, preserva o bloco de anotações e o callout e passa cada fato para a propriedade certa. Usada quando a pessoa pede para revisar, limpar, enriquecer, consolidar, reorganizar ou atualizar uma edição. NÃO serve para cadastrar a edição, o grupo ou a programação, nem para inscrever ou criar a tarefa.
+description: Revisa o conteúdo, o corpo e as anotações de uma edição que já existe, preserva o bloco e o callout e passa cada fato para a propriedade certa. Registra a resposta da organização com feedback ou seleção. Usada ao revisar, limpar, consolidar ou atualizar uma edição, ou ao colar essa resposta. NÃO serve para cadastrar a edição, o grupo ou a programação, nem para inscrever ou criar a tarefa.
 allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-update-page notion:notion-create-comment
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   related:
     - criar-oportunidade
     - procurar-oportunidade
     - definir-grupo-de-oportunidades
+    - definir-empresa
+    - definir-inscricao
     - criar-ideia-de-conteudo
     - definir-tarefa
     - evoluir-habilidade
@@ -56,11 +58,36 @@ A intercorrência da edição, como um problema com o local do estande, vai num 
 
 ### Passo 6
 
+A mensagem que a organização mandou, colada ou lida, com feedback, resposta de seleção, aceite, recusa, lista de espera, pedido de complemento, objeção, critério de curadoria ou orientação, é evidência operacional: registre-a, e não a deixe só numa leitura solta no chat.
+
+Primeiro identifique a edição, o grupo e a empresa a que ela se refere, pelo nome do evento, a organização, o perfil, o link, a data, a cidade, o canal e o histórico. Com dúvida entre duas ou mais possibilidades, pare e pergunte antes de registrar.
+
+```mermaid
+flowchart LR
+  I{O que a informação é?} -->|vale só para esta edição| E[Edição]
+  I -->|estável ou recorrente do evento| G[Grupo]
+  I -->|sobre a organização ou o local| C[Empresa]
+```
+
+Na edição entram prazo, status, resposta de curadoria, condição de participação, taxa, local, canal de inscrição e próximos passos. No grupo entram critério geral de curadoria, padrão de seleção, perfil de marcas aceitas, regra permanente e aprendizado para as próximas edições. Na empresa entram a forma de trabalho, a preferência de comunicação, a reputação, a restrição e a exigência geral. Mensagem de mais de uma natureza é repartida entre os destinos, com o contexto para rastrear.
+
+Atualize antes as propriedades que já existem em cada destino. O contexto, a justificativa, a ressalva e o que não tem propriedade vão em comentário datado, com a data no texto e um fato por comentário. O comentário traz uma síntese fiel: quem enviou, o canal, a data, o conteúdo relevante, a leitura objetiva e o impacto na decisão. Não invente motivo de seleção ou de reprovação que a mensagem não trouxe.
+
+Prazo, data de envio, horário, mudança de programação e retorno recebido ficam no comentário, e as notas de curadoria só recebem a síntese estável. Na dúvida se a informação é estável ou do momento, trate como do momento.
+
+Diferencie o feedback da resposta oficial. Só a mensagem que confirma vaga, aceite, credenciamento ou instrução conclusiva é seleção. A inscrição enviada que a organização diz que não foi selecionada, ou que ficou em lista de espera sem confirmar a participação, é não seleção. Organização que vai avaliar, pede material ou dados, mostra interesse sem confirmar vaga ou encaminha a conversa a outra pessoa é negociação em análise.
+
+O resultado da inscrição segue `definir-inscricao`. A mensagem ambígua entra como ambiguidade, e a decisão humana continua com a pessoa. O feedback útil que não muda o status entra no destino certo sem forçar uma mudança.
+
+Antes de concluir, releia as propriedades de observação e mova para comentário o que ficou nelas sobre prazo, data, horário, decisão datada ou acompanhamento.
+
+### Passo 7
+
 Mostre a edição, o que passou do bloco para cada propriedade, o que ficou pendente nas notas de curadoria e o link. Data de evento, compromisso ou prazo sai no formato da data com dia da semana, calculado com a data, o horário e o fuso do evento. Sem horário ou sem fuso, e se o dia puder mudar, peça. Não invente.
 
 Se a fonte trouxer um dia da semana incompatível com a data, sinalize e não grave. A decisão humana fica com a pessoa e não vira pergunta nem pendência na resposta.
 
-### Passo 7
+### Passo 8
 
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
@@ -90,9 +117,21 @@ Se você gravar uma intercorrência nas notas de curadoria ou no corpo, a linha 
 2. Comece o comentário pela data e hora do fato.
 3. Cada fato novo é um comentário novo.
 
+### Feedback lido e não registrado
+
+Se você só comentar no chat a resposta da organização, o aprendizado some e a próxima edição repete a pergunta.
+
+1. Identifique a edição, o grupo e a empresa, ou pergunte quando houver dúvida.
+2. Passe cada trecho ao destino do Passo 6, com as propriedades antes do comentário.
+3. Grave a síntese fiel em comentário datado e releia as notas de curadoria.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
+
+### a organização respondeu: o perfil da marca foi bem avaliado, mas as vagas fecharam e ela entrou na lista de espera
+
+Identifiquei a edição pelo nome e pela data da mensagem. Tratei como não seleção, porque a lista de espera não confirma a participação. A síntese, com quem enviou, o canal, a data e o motivo que a organização deu, ficou em comentário datado na edição. O critério de curadoria, que vale para as próximas edições, foi para o grupo. A decisão humana ficou como estava.
 
 ### revise as anotações da edição. O bloco diz que o evento foi em Cidade Exemplo, sem dia e sem valor.
 
@@ -114,12 +153,16 @@ Gravei um comentário na edição, começando pela data e hora do fato. Não esc
 - O callout não existe e a pessoa pede para organizar o corpo: avise antes de concluir.
 - Ação de conteúdo sem data segura: pergunte a data antes de criar a ideia ou a tarefa.
 - Intercorrência na edição: comentário datado na página. Não vai no corpo nem nas notas de curadoria.
+- A mensagem da organização serve a duas edições ou a dois grupos: pare e pergunte antes de registrar.
+- A mensagem é ambígua entre feedback e seleção: registre a ambiguidade em comentário e não mude a decisão humana.
 
 ## Pegadinhas
 
 - O bloco de anotações parece rascunho que a limpeza apaga. Ele é evidência da pessoa. A propriedade recebe a cópia, e o bloco permanece.
 - O callout parece texto de rascunho do corpo. Ele guarda as orientações de preenchimento e a governança da página.
 - A intercorrência parece nota de curadoria. As notas guardam a síntese permanente. O fato do dia é comentário.
+- A lista de espera parece quase uma aprovação. Sem confirmação de participação, é não seleção.
+- A resposta da organização parece caber só na edição. O critério que vale para o evento todo vai ao grupo, e o que é da organização vai à empresa.
 - Revisar parece poder cadastrar o que falta. O cadastro fica com `criar-oportunidade`, e o grupo com `definir-grupo-de-oportunidades`.
 
 ## Scripts disponíveis

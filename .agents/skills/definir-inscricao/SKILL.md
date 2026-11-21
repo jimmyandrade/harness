@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet. A busca na lista de inscrições usa notion-ai-search no servidor notion.
 metadata:
   author: jimmyandrade
-  version: "0.17.1"
+  version: "0.18.0"
   aliases:
     - atualizar-inscricao
   related:
@@ -19,6 +19,7 @@ metadata:
     - procurar-email
     - procurar-inscricao
     - procurar-oportunidade
+    - rotular-item
 ---
 
 # Definir inscrição
@@ -33,7 +34,7 @@ metadata:
 
 ### Passo 1
 
-A pessoa aponta uma inscrição, ou afirma que ela foi feita, confirmada, aprovada ou aceita. Uma foto de pedido realizado, mesmo sozinha, é essa afirmação. Essa afirmação é o pedido de gravar. Comemore depois de gravar. Não pare na comemoração. Não responda se a tarefa existe. Não busque e-mail nesta habilidade, salvo para o prazo do Passo 5, por `procurar-email`. Se a pessoa disser que a foto foi engano, apague a linha criada por ela.
+A pessoa aponta uma inscrição, ou afirma que ela foi feita, confirmada, aprovada ou aceita. Uma foto de pedido realizado, mesmo sozinha, é essa afirmação. Essa afirmação é o pedido de gravar. Comemore depois de gravar. Não pare na comemoração. Não responda se a tarefa existe. Não busque e-mail nesta habilidade, salvo para o prazo do Passo 5 e para o pedido da tiqueteira do Passo 7, por `procurar-email`. Se a pessoa disser que a foto foi engano, apague a linha criada por ela.
 
 A lista de inscrições, o nome de cada propriedade e as opções de status vêm do mapeamento de dados do projeto, no workspace conectado. Se a lista não estiver nessa conexão, pare. Não use a lista de outro workspace. Este texto usa os conceitos: a edição, o status da inscrição, quem fez a inscrição, a pessoa ou empresa inscrita, os comprovantes, a data da confirmação, a data do envio e as observações. Os status são o de pré-cadastro, o de inscrição confirmada, o de em andamento, o de em contestação, o de perdida e o de não selecionada.
 
@@ -105,6 +106,10 @@ Abordagem positiva. Uma resposta de conversa como "vou analisar" ou "manda o mat
 
 Identificadores e participante. O número do pedido e o código de inscrição, de ingresso ou de credencial vão em propriedades separadas, sem juntar os dois e sem repetir nas observações. Se o mapeamento não tiver a propriedade, não grave no corpo e liste o valor no fim. O participante é uma relação com pessoas: busque por nome, e-mail e telefone antes de criar. Não suponha que quem cadastrou ou gerou o PDF é o participante: leia o comprovante. Confira o que a página já cobre antes de acrescentar, para não duplicar.
 
+Pedido pela tiqueteira. Quando a inscrição, o ingresso, o pagamento ou a confirmação vem de uma tiqueteira e a pessoa conta que comprou, vai comprar, recebeu a confirmação, cola os dados do pedido ou manda o print dele, procure no e-mail conectado a conversa da tiqueteira, por `procurar-email`, antes de concluir. Busque pelo nome do evento, o número do pedido, o código do ingresso, o remetente e a data aproximada.
+
+Achada, use a conversa inteira como evidência para a inscrição e, com pagamento, para a despesa, por `lancar-despesa-da-empresa`, e rotule-a com o marcador da oportunidade, por `rotular-item`. Sem a conversa, registre a limitação e peça a conferência depois.
+
 ### Passo 8
 
 Encerramento. Quando a inscrição encerrou, por formulário fechado, edital encerrado ou prazo expirado, anexe as evidências, como prints e PDFs, na propriedade de evidências de encerramento da oportunidade e registre o link da fonte.
@@ -173,6 +178,13 @@ Se você só comemorar porque a pessoa disse que a inscrição foi confirmada, o
 2. Uma inscrição casa: atualize essa e comemore. Mais de uma: pergunte qual.
 3. Não pare na comemoração.
 
+### Pedido da tiqueteira sem o e-mail
+
+Se você gravar a inscrição só com o print do pedido, o número, o código e o marcador da oportunidade ficam fora, e a despesa perde a evidência.
+
+1. Procure a conversa da tiqueteira no e-mail, como o Passo 7 manda.
+2. Achada, passe os dados à inscrição e à despesa e rotule a conversa.
+
 ### Inscrição ausente
 
 Se você perguntar se pode cadastrar, ou parar porque a linha não existe, a inscrição fica fora do registro.
@@ -222,6 +234,7 @@ busquei a inscrição da Loja Exemplo como expositora no Festival Rota Sul 2026.
 - O corpo pode dizer que a inscrição não confirma a participação. Esse texto é o espelho do formulário. A confirmação fica no status. Não reescreva o corpo.
 - Uma propriedade que copia o e-mail da pessoa, a data da edição ou um link do formulário parece pedir valor. Ela não se grava.
 - Uma confirmação de expositor não confirma as outras inscrições do mesmo evento.
+- O print do pedido parece bastar para a inscrição. O e-mail da tiqueteira traz o número, o código e o remetente que o print não prova.
 - O telefone de quem vai ao palco parece o contato da inscrição. Na inscrição da empresa, o contato é o da empresa.
 - A tabela do que foi enviado, mostrada na resposta, parece bastar. Quem abre a inscrição depois não vê a conversa: as respostas enviadas vão para o corpo da inscrição.
 - Uma restrição a uma pessoa parece mais segura quanto mais ampla. A política diz em que caso perguntar, e fora dele a pessoa aparece normalmente.
