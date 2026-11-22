@@ -47,5 +47,6 @@ Funcionalidade: Conciliar recebimento
       Quando a habilidade concilia a venda
       Então grava na venda o link do detalhe, o cliente e a referência inteira
       E anexa o comprovante completo, ou pergunta antes de enviá-lo por e-mail ou SMS
+      E, depois de anexar o comprovante do e-mail, rotula a conversa e a tira da caixa de entrada, sem aplicar a etiqueta de arquivo
       E grava na nota da transação os IDs da venda, do cliente, das unidades, das variantes, dos produtos, da família e do ponto de contato
       Mas, se a nota recusar link e pontuação, grava uma nota por registro só com letras, números e espaços
