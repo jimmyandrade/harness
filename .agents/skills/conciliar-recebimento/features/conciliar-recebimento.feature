@@ -38,3 +38,15 @@ Funcionalidade: Conciliar recebimento
       Então avisa que o saque infla o faturamento e recomenda não repetir
       E registra a entrada e a devolução como um par de lançamentos financeiros
       Mas confirma o tratamento contábil com quem cuida da contabilidade
+
+  Regra: Todo o detalhe da transação volta para a venda e a fonte aponta para a venda
+
+    Exemplo: Detalhe completo, comprovante e nota
+      Dado que o detalhe da transação mostra o cliente e uma referência cortada com reticências
+      E a fonte permite uma nota na transação
+      Quando a habilidade concilia a venda
+      Então grava na venda o link do detalhe, o cliente e a referência inteira
+      E anexa o comprovante completo, ou pergunta antes de enviá-lo por e-mail ou SMS
+      E, depois de anexar o comprovante do e-mail, rotula a conversa e a tira da caixa de entrada, sem aplicar a etiqueta de arquivo
+      E grava na nota da transação os IDs da venda, do cliente, das unidades, das variantes, dos produtos, da família e do ponto de contato
+      Mas, se a nota recusar link e pontuação, grava uma nota por registro só com letras, números e espaços
