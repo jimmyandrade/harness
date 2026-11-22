@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.18.1"
+  version: "0.18.2"
   aliases:
     - definir-venda
   related:
@@ -81,6 +81,8 @@ Pessoa cliente, conjunto e unidades são páginas que já existem. A pessoa clie
 
 Com `Banco de unidades` preenchido, a unidade traz o tamanho e as outras variantes, e esse vínculo é o rastro do estoque. As peças vendidas e os tipos de peças saem dessas unidades. Não preencha. Um conjunto não substitui as unidades. Com o banco vazio, vincule só o produto vendido, pelo mapeamento, e não vincule unidade.
 
+Antes de vincular a pessoa cliente, confirme com a pessoa quem é, também quando a busca acha uma página só. Mostre a página achada, com o nome completo e a localidade, ao lado do que a pessoa disse. Vincule sem perguntar apenas quando o nome completo, ou outro dado que ela disse, como a cidade, bate com a página. O primeiro nome, ou o nome parcial, não basta. Um comprovante de cartão na máquina não traz o nome de quem pagou, e a liberação do dinheiro só o traz quando mostra o pagador: sem isso, a conferência é a confirmação da pessoa.
+
 Antes de vincular, busque com `identificar-duplicata`. Sem a página, ou sem a variante na unidade, pare e pergunte. Não crie a pessoa, o produto, a unidade nem a variante na venda. Não escolha entre parecidos.
 
 Com `Banco de unidades` preenchido, marque cada unidade vinculada como vendida, na propriedade de situação da unidade, e releia a unidade para conferir que ela aponta para a venda. Unidade que já consta como vendida em outra venda: pare e pergunte.
@@ -109,7 +111,7 @@ Taxa de transação inferida, valor líquido final, valor real com frete, peças
 
 ### Passo 6
 
-O ponto de contato é o lugar em que a venda aconteceu, como uma feira ou um evento. Sem o lugar dito pela pessoa, pergunte o ponto de contato antes de criar a venda e, na retirada, o local. O canal usado para achar a cliente, como o WhatsApp dela, não é o ponto da venda: não o grave no título, no ponto nem no corpo.
+O ponto de contato é o lugar em que a venda aconteceu, como uma feira ou um evento. Sem o lugar dito pela pessoa, pergunte o ponto de contato antes de criar a venda e, na retirada, o local. O ponto das vendas vizinhas, ou o único evento em andamento, não é o lugar dito: pergunte também nesse caso. O canal usado para achar a cliente, como o WhatsApp dela, não é o ponto da venda: não o grave no título, no ponto nem no corpo.
 
 Não copie esse ponto para o local da retirada, que é só onde a pessoa retirou os produtos. O ponto que originou o crédito não é o ponto da venda, a origem do estoque nem o local da retirada.
 
@@ -211,6 +213,14 @@ Se você responder só com o resumo da venda, ou só disser que marcou as unidad
 2. Com `Banco de unidades` vazio, ponha o link da venda e do produto.
 3. Escreva cada link como `escrever-link` manda.
 
+### Cliente ligada pelo primeiro nome
+
+Se você vincular a pessoa cliente porque a busca pelo primeiro nome achou uma página só, a venda pode ir para a homônima errada e o histórico de compras muda de dono.
+
+1. Mostre a página achada, com o nome completo e a localidade, e o que a pessoa disse.
+2. Vincule sem perguntar só quando o nome completo, ou a cidade dita, bate com a página.
+3. Só diga que conferiu no meio de pagamento se ele mostra o pagador.
+
 ### Pessoa ou unidade duplicada
 
 Se você criar cliente ou unidade que já existe, a venda aponta para o registro errado.
@@ -289,6 +299,7 @@ O comentário da página disse o que voltou, por que voltou, a fonte e quando. A
 - Venda provável já existe: atualize. Não duplique. Dúvida, ou várias parecidas: mostre e confirme.
 - Venda existente com um campo ausente e os demais válidos: preencha o ausente. Os válidos permanecem.
 - Cliente, unidade ou conjunto ausente: pare e pergunte. Não crie.
+- Cliente achada só pelo primeiro nome, ou por um nome parcial, mesmo em página única: mostre a página e confirme antes de vincular.
 - Unidade sem a variante dita: pare e pergunte. Não invente a variante na venda. O saldo não muda aqui.
 - Taxa, repasse ou diferença sem explicação: não grave como desconto. Mostre o diff e pergunte.
 - O pedido é acompanhar evolução ou retorno: registre a venda com a data real, as peças e, quando houve, o ponto de contato. Não crie propriedade de retorno.
