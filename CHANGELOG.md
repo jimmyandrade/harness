@@ -1,5 +1,53 @@
 # Changelog
 
+## [1.100.0](https://github.com/jimmyandrade/harness/compare/v1.99.2...v1.100.0) (2026-11-22)
+
+
+### Features
+
+* add the card and the purchase completion skills for company expenses paid by card ([#1387](https://github.com/jimmyandrade/harness/issues/1387)) ([a7ba61d](https://github.com/jimmyandrade/harness/commit/a7ba61deebc34494fdba3232ea407bf2589523f0))
+* **cadastrar-foto-de-moda:** propose alt text from a local reading when a photo has none ([#1370](https://github.com/jimmyandrade/harness/issues/1370)) ([fb18e00](https://github.com/jimmyandrade/harness/commit/fb18e006c4a461fdd5281e4e8a38daccaefa3051))
+* check the store for duplicates and send product links when publishing ([#1389](https://github.com/jimmyandrade/harness/issues/1389)) ([ee5cf08](https://github.com/jimmyandrade/harness/commit/ee5cf0845c87a8c963a0c9a68e2ac6d1d9c3b9ef))
+* **conciliar-recebimento:** carry the full transaction detail, receipt and back-link note ([#1396](https://github.com/jimmyandrade/harness/issues/1396)) ([669e7dc](https://github.com/jimmyandrade/harness/commit/669e7dc20712f529ff46abbb5ada6c0b7cafa26d))
+* **conciliar-recebimento:** rotula e arquiva o e-mail do comprovante depois de anexar ([#1398](https://github.com/jimmyandrade/harness/issues/1398)) ([b5a596b](https://github.com/jimmyandrade/harness/commit/b5a596b180996e0655e68338185f385aae682faa))
+* **definir-cliente-da-loja:** add the store customer skill and point definir-pessoa to it ([#1403](https://github.com/jimmyandrade/harness/issues/1403)) ([51719d9](https://github.com/jimmyandrade/harness/commit/51719d9ac9503a5399bbc8914ed707b4a6301c6e))
+* **definir-lancamento-financeiro:** route a list of transactions line by line ([#1381](https://github.com/jimmyandrade/harness/issues/1381)) ([5a11c79](https://github.com/jimmyandrade/harness/commit/5a11c79b1df0a33710b0eeaaa82397920ff5335d))
+* **definir-pessoa:** name the local person file by a parameter and let secondary identifiers point to it ([#1408](https://github.com/jimmyandrade/harness/issues/1408)) ([9f6ea30](https://github.com/jimmyandrade/harness/commit/9f6ea300824fc1bc50e15325fdbbabc0959f6ece))
+* **definir-pessoa:** take the fields of the local person file from a parameter ([#1379](https://github.com/jimmyandrade/harness/issues/1379)) ([7f23840](https://github.com/jimmyandrade/harness/commit/7f23840a467737932d3493a334e145b71a987dd4))
+* **gravar-termos-no-vocabulario:** grava só no glossário do harness do negócio ([#1400](https://github.com/jimmyandrade/harness/issues/1400)) ([a564bcf](https://github.com/jimmyandrade/harness/commit/a564bcfa7ee9d87a7868d952607d7baf2450eecf))
+* **inscrever-na-oportunidade:** read the owner's data from the registry instead of asking ([#1392](https://github.com/jimmyandrade/harness/issues/1392)) ([866f8f2](https://github.com/jimmyandrade/harness/commit/866f8f274ec5a0376bfb12b0b5d1021c28bef503))
+* keep person and company names out of the brand vocabulary ([#1407](https://github.com/jimmyandrade/harness/issues/1407)) ([cfe91fd](https://github.com/jimmyandrade/harness/commit/cfe91fd51da9eb7bf186479d55a5f2407ef20d17))
+* **lancar-despesa-da-empresa:** read the payment account statement before asking for expense data ([#1410](https://github.com/jimmyandrade/harness/issues/1410)) ([0698f27](https://github.com/jimmyandrade/harness/commit/0698f27968ba124d81f2a28467f1e6273d40c7b6))
+* **lancar-venda:** link records in the reply and reconcile the net release in conciliar-recebimento ([#1393](https://github.com/jimmyandrade/harness/issues/1393)) ([12954f9](https://github.com/jimmyandrade/harness/commit/12954f91f64c4218aac9a12e464db995aaf6a6bf))
+* **lancar-venda:** mark the linked unit as sold ([#1364](https://github.com/jimmyandrade/harness/issues/1364)) ([4532faf](https://github.com/jimmyandrade/harness/commit/4532faf5cd143b86c2df34420ab23b9de33c7f53))
+* link a recommendation to the recommended person or company by relation ([#1380](https://github.com/jimmyandrade/harness/issues/1380)) ([bbcb135](https://github.com/jimmyandrade/harness/commit/bbcb1354661f34f5bb7bd2fae364b8a9b259d575))
+* match glossary expressions of more than one word in classify-text ([#1406](https://github.com/jimmyandrade/harness/issues/1406)) ([91490b2](https://github.com/jimmyandrade/harness/commit/91490b294ce96dce2d29e65c0fd977e64940bb57))
+* **mesclar-registro:** standardize the record title when renaming ([#1391](https://github.com/jimmyandrade/harness/issues/1391)) ([01c88e1](https://github.com/jimmyandrade/harness/commit/01c88e12a7d037aee56b47bcba70d8f0f5e29332)), closes [#1390](https://github.com/jimmyandrade/harness/issues/1390)
+* migrate the rules of a legacy B2B skill into the skills that own each topic ([#1373](https://github.com/jimmyandrade/harness/issues/1373)) ([b44180d](https://github.com/jimmyandrade/harness/commit/b44180d0906362396f86952d7cd4cf698994e8cd))
+* offer to schedule a send outside the contact window of a person ([#1402](https://github.com/jimmyandrade/harness/issues/1402)) ([87919ce](https://github.com/jimmyandrade/harness/commit/87919ce3bc15581fdcbeab87aeb8c016bb801d3c))
+* **procurar-venda:** add the skill that searches sales already made ([#1368](https://github.com/jimmyandrade/harness/issues/1368)) ([311aaf0](https://github.com/jimmyandrade/harness/commit/311aaf04ce42946e040f2e140d133c9abafcc4fc)), closes [#1367](https://github.com/jimmyandrade/harness/issues/1367)
+* **publicar-produto-fisico-na-loja-virtual:** always write the SKU and accept forecast variants ([#1372](https://github.com/jimmyandrade/harness/issues/1372)) ([b02045a](https://github.com/jimmyandrade/harness/commit/b02045aac2d3476eecac9a0cc6d668d2802acec5))
+* **publicar-produto-fisico-no-mercado-pago:** add the skill that lists a product in the payment catalog ([#1365](https://github.com/jimmyandrade/harness/issues/1365)) ([c59fe26](https://github.com/jimmyandrade/harness/commit/c59fe26b674de2f9a65352f86eec0f50300aa1f1))
+* read past-edition feedback in meeting notes and propose free calendar slots ([#1388](https://github.com/jimmyandrade/harness/issues/1388)) ([8158f0d](https://github.com/jimmyandrade/harness/commit/8158f0d25e3ca1344256360d7c070553f7f53f2a))
+* register an absent social profile without asking and analyze it when tied to an opportunity ([#1385](https://github.com/jimmyandrade/harness/issues/1385)) ([ab9574b](https://github.com/jimmyandrade/harness/commit/ab9574bdcd1fb92bcbc660c2b5cfc0f3d7449fc7))
+* **registrar-preco-de-produto-fisico:** add the initial price load and the price suggestion history ([#1366](https://github.com/jimmyandrade/harness/issues/1366)) ([91210ba](https://github.com/jimmyandrade/harness/commit/91210badf8c48639294ee3a87d2c07c2e0f0fbfe))
+* **registrar-preco-de-produto-fisico:** sync the new price to every sales channel ([#1395](https://github.com/jimmyandrade/harness/issues/1395)) ([015c7d9](https://github.com/jimmyandrade/harness/commit/015c7d9fcb3cb3ca93654bfd06e3749296dae765))
+* respect the contact window of a person before sending a message, an email or an invite ([#1383](https://github.com/jimmyandrade/harness/issues/1383)) ([2aaa5ee](https://github.com/jimmyandrade/harness/commit/2aaa5ee983e39e00ca2eae5b2d9692f8fd0a1fb5))
+* split the contact approach and the person mention out of two full skills ([#1374](https://github.com/jimmyandrade/harness/issues/1374)) ([8899fdb](https://github.com/jimmyandrade/harness/commit/8899fdbe073fde7998d15ab14ba0e988f19e66c1))
+
+
+### Bug Fixes
+
+* **conciliar-recebimento:** keep the gross in the sale value and let formulas compute fee and final net ([#1394](https://github.com/jimmyandrade/harness/issues/1394)) ([f308051](https://github.com/jimmyandrade/harness/commit/f3080519f2103ef2ebc9ae676480cb49a54c9881))
+* **criar-oportunidade:** title editions from the title suggestion and keep pending checks out of the body ([#1386](https://github.com/jimmyandrade/harness/issues/1386)) ([e87e590](https://github.com/jimmyandrade/harness/commit/e87e5906be58f41b81fa5ea0f0eb13114fca87d6))
+* **definir-arquivos-da-habilidade:** split by a storage-agnostic responsibility, not by a reference file ([#1378](https://github.com/jimmyandrade/harness/issues/1378)) ([f327a0d](https://github.com/jimmyandrade/harness/commit/f327a0da0e0686f1db990a3ae3eee35087676204))
+* **definir-prestacao-de-contas:** show the time of every line, estimate missing times, order by date and time ([#1363](https://github.com/jimmyandrade/harness/issues/1363)) ([df149ce](https://github.com/jimmyandrade/harness/commit/df149cefbe846347269c2deb7d665bf3980ef96f))
+* mirror the warmth of the contact's recent messages even when a tone profile exists ([#1369](https://github.com/jimmyandrade/harness/issues/1369)) ([300b452](https://github.com/jimmyandrade/harness/commit/300b452923918cf231da78bd1b2b7f2e43965516))
+* **publicar-produto-fisico-na-loja-virtual:** keep the product in draft until the readiness list is complete ([#1409](https://github.com/jimmyandrade/harness/issues/1409)) ([9bce7e8](https://github.com/jimmyandrade/harness/commit/9bce7e8f3946b12eb59800cfa381c4824fb4d2ce))
+* **redigir-com-tom-de-voz:** check the recipient's tone profile before drafting a message to a person ([#1384](https://github.com/jimmyandrade/harness/issues/1384)) ([e409298](https://github.com/jimmyandrade/harness/commit/e409298100aff8e1422b0562228571e9adce39c1))
+* **registrar-preco-de-produto-fisico:** send the channel photo with the browser file upload tool ([#1399](https://github.com/jimmyandrade/harness/issues/1399)) ([d3000b4](https://github.com/jimmyandrade/harness/commit/d3000b4f49fe5e8502b60b6789da55a6c54a9fa2))
+* **sincronizar-status-da-tarefa:** read each PR's state before citing it as pending ([#1397](https://github.com/jimmyandrade/harness/issues/1397)) ([e9523ff](https://github.com/jimmyandrade/harness/commit/e9523ff07d30f2040a3a7bc9cadff8e2c76a6112))
+
 ## [1.99.2](https://github.com/jimmyandrade/harness/compare/v1.99.1...v1.99.2) (2026-11-20)
 
 
