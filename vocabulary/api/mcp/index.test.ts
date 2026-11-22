@@ -302,6 +302,14 @@ test("classify_text returns the level of each word and filters by tags", () => {
   assert.equal(refused.content[0]?.text, "Provide the tags as a list.")
 })
 
+test("classify_text reports the rows of more than one word in expressions", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  writeFileSync(join(root, "pt-BR.json"), '{ "em mãos": { "state": "forbidden", "alternative": "entrega" } }\n')
+  const read = callTool(root, { name: "classify_text", arguments: { language: "pt-BR", text: "Entrego em mãos" } })
+  const body = JSON.parse(read.content[0]?.text ?? "") as { expressions: { submitted: string; start: number; end: number; to: string; recommended?: string }[] }
+  assert.deepEqual(body.expressions.map((item) => [item.submitted, item.start, item.end, item.to, item.recommended]), [["em mãos", 1, 3, "forbidden", "entrega"]])
+})
+
 test("classify_text recommends the substitution of a row in the current format", () => {
   const root = mkdtempSync(join(tmpdir(), "glossary-"))
   writeFileSync(join(root, "pt-BR.json"), '{ "chave": { "state": "strongly_discouraged", "substitution": "feature toggle" } }\n')

@@ -1,7 +1,7 @@
 /**
  * Vocabulary commands.
  *
- * lookup reads one term. lookup-terms reads several in one call: repeat --term, and a term of more than one word is read as a whole. exists maps each token of a text to whether it exists. classify-text gives the level of each word, emoji, and punctuation mark of a text, with the recommended term of an avoided one: its alternative or, without one, its substitution.
+ * lookup reads one term. lookup-terms reads several in one call: repeat --term, and a term of more than one word is read as a whole. exists maps each token of a text to whether it exists. classify-text gives the level of each word, emoji, and punctuation mark of a text in words, with the recommended term of an avoided one: its alternative or, without one, its substitution, and the level of each glossary row of more than one word that the text uses in expressions, with start and end as indexes into words.
  * audit lists what a glossary contradicts or leaves out: an example, an alternative, or a substitution that holds a forbidden term, and a field a level expects and a row lacks. diff compares the glossary with the one in the directory --against, by spelling and tags, and lists the rows added, removed, and changed, each with the fields that differ. Neither writes.
  * terms writes one language in one pass. Flags are key and value.
  * --language, --mode, and --validation apply to the whole batch. --dry-run

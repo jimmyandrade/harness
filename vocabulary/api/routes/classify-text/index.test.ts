@@ -82,6 +82,82 @@ test("a glossary expression is not matched as one word", () => {
   )
 })
 
+const EXPRESSIONS = `{
+  "a casa": { "state": "forbidden", "alternative": "o lar" },
+  "aqui é Maria, da Loja": { "state": "allowed_with_care", "tags": ["maria"] },
+  "casa nova": { "state": "discouraged", "substitution": "casa recém-chegada" },
+  "em mãos": { "state": "forbidden", "alternative": "entrega" },
+  "ok": { "state": "allowed" }
+}`
+
+test("a row of more than one word is reported in expressions with the tokens it covers", () => {
+  const response = classifyText(load(EXPRESSIONS), "Entrego em mãos, ok", "pt-BR")
+  assert.deepEqual(
+    response.words.map((word) => word.to),
+    ["not_registered", "not_registered", "not_registered", "not_registered", "allowed"],
+  )
+  assert.deepEqual(response.expressions, [
+    { from: "query", language: "pt-BR", submitted: "em mãos", start: 1, end: 3, to: "forbidden", term: "em mãos", recommended: "entrega" },
+  ])
+})
+
+test("a text without an expression has an empty expressions list", () => {
+  assert.deepEqual(classifyText(load(EXPRESSIONS), "ok", "pt-BR").expressions, [])
+})
+
+test("an expression is found whatever the casing and the spacing of the text", () => {
+  const response = classifyText(load(EXPRESSIONS), "Entrego EM   MÃOS\nagora", "pt-BR")
+  assert.deepEqual(response.expressions.map((item) => [item.submitted, item.start, item.end, item.to]), [["EM MÃOS", 1, 3, "forbidden"]])
+})
+
+test("an expression with punctuation inside is found as written", () => {
+  const response = classifyText(load(EXPRESSIONS), "Oi! Aqui é Maria, da Loja.", "pt-BR", ["maria"])
+  assert.deepEqual(
+    response.expressions.map((item) => [item.submitted, item.start, item.end, item.to, item.term]),
+    [["Aqui é Maria, da Loja", 2, 8, "allowed_with_care", "aqui é Maria, da Loja"]],
+  )
+})
+
+test("two expressions that overlap are both reported, in the order of the text", () => {
+  const response = classifyText(load(EXPRESSIONS), "a casa nova", "pt-BR")
+  assert.deepEqual(
+    response.expressions.map((item) => [item.submitted, item.start, item.end, item.to, item.recommended]),
+    [["a casa", 0, 2, "forbidden", "o lar"], ["casa nova", 1, 3, "discouraged", "casa recém-chegada"]],
+  )
+})
+
+test("an expression tagged for another speaker reads as absent", () => {
+  assert.deepEqual(classifyText(applicableFor(EXPRESSIONS, []), "aqui é Maria, da Loja", "pt-BR").expressions, [])
+  assert.equal(classifyText(applicableFor(EXPRESSIONS, ["maria"]), "aqui é Maria, da Loja", "pt-BR", ["maria"]).expressions.length, 1)
+})
+
+test("a tag in forbidden_in makes an expression forbidden and keeps the base level", () => {
+  const glossary = '{ "em breve": { "state": "allowed_with_care", "forbidden_in": ["review"], "reason": "Vague.", "alternatives": ["amanhã"] } }'
+  const item = classifyPhrase(new Glossary(writeRoot(glossary)), "pt-BR", "Fica pronto em breve", ["review"]).expressions[0]
+  assert.equal(item?.to, "forbidden")
+  assert.equal(item?.base_state, "allowed_with_care")
+  assert.equal(item?.reason, "Vague.")
+  assert.deepEqual(item?.alternatives, ["amanhã"])
+})
+
+test("a case-sensitive expression says whether its casing matches", () => {
+  const entries = load('{ "app store": { "state": "allowed", "case_sensitive": true } }')
+  const items = classifyText(entries, "Na App Store e na app store", "pt-BR").expressions
+  assert.deepEqual(items.map((item) => [item.submitted, item.case_matches]), [["App Store", false], ["app store", true]])
+})
+
+test("POST returns the expressions of the text", async () => {
+  await withServer(writeRoot(EXPRESSIONS), async (base) => {
+    const response = await fetch(`${base}/v1/classify-text`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ language: "pt-BR", text: "Entrego em mãos" }),
+    })
+    const body = await response.json()
+    assert.deepEqual(body.expressions.map((item: { submitted: string; to: string }) => [item.submitted, item.to]), [["em mãos", "forbidden"]])
+  })
+})
+
 test("POST classifies each word", async () => {
   const root = mkdtempSync(join(tmpdir(), "glossary-"))
   writeFileSync(
@@ -192,6 +268,10 @@ test("POST with tags in forbidden_in returns forbidden", async () => {
     assert.equal((await response.json()).words[0].to, "forbidden")
   })
 })
+
+function applicableFor(contents: string, tags: string[]) {
+  return new Glossary(writeRoot(contents)).entries("pt-BR").entries.filter((entry) => tags.length > 0 || entry.tags === undefined)
+}
 
 function writeRoot(contents: string): string {
   const root = mkdtempSync(join(tmpdir(), "glossary-"))

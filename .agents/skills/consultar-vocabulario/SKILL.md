@@ -3,7 +3,7 @@ name: consultar-vocabulario
 description: Use essa habilidade sempre que, antes de escrever ou conferir um texto da marca, for preciso ler o vocabulário do tom de voz, por palavra e por expressão inteira, com as tags de quem fala, do evento e do canal, mesmo sem dizer glossário. NÃO use para cadastrar ou corrigir termo, escrever o texto, nem decidir o nível de um termo.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   related:
     - redigir-com-tom-de-voz
     - definir-vocabulario
@@ -36,11 +36,11 @@ Se ela disser que não há glossário, a sessão está noutra pasta: ache o harn
 
 ### Passo 3
 
-Consulte o texto por palavra e cada expressão inteira. A consulta por palavra lê palavra por palavra e deixa passar um termo de mais de uma palavra, como uma expressão proibida. Por isso, antes de rascunhar, consulte também cada expressão que o texto pode usar, inteira.
+Classifique o texto: a resposta traz o nível de cada palavra em `words` e o de cada expressão do vocabulário que o texto usa em `expressions`. Uma expressão proibida de mais de uma palavra só aparece em `expressions`, então leia as duas listas. Antes de rascunhar, consulte também cada expressão que o texto pode usar, inteira, para ler a linha completa dela.
 
 ### Passo 4
 
-Leia a linha inteira de cada termo permitido com ressalva, em especial o `when`. A palavra ou a frase só vale no contexto que o `when` descreve: a consulta por palavra não o aplica, e a leitura é sua. Um termo permitido só nesse contexto não é permitido fora dele.
+Leia a linha inteira de cada termo permitido com ressalva, em especial o `when`. A palavra ou a frase só vale no contexto que o `when` descreve: a classificação não o aplica, e a leitura é sua. Um termo permitido só nesse contexto não é permitido fora dele.
 
 Devolva, por termo, se a gente usa, evita ou não usa, a troca recomendada de quem é evitado e o `when` de quem tem ressalva.
 
@@ -50,12 +50,12 @@ Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
 
-### Frase checada só palavra por palavra
+### Expressão ignorada na classificação
 
-Se você conferir o rascunho só por palavra, uma expressão proibida de mais de uma palavra passa.
+Se você ler só `words` na resposta da classificação, uma expressão proibida de mais de uma palavra passa, porque ela vem em `expressions`.
 
-1. Consulte cada expressão que o texto pode usar, inteira.
-2. Confira o rascunho inteiro por palavra depois.
+1. Leia `words` e `expressions`.
+2. Consulte cada expressão que o texto pode usar, inteira, para ler a linha completa.
 
 ### Permitido com ressalva lido como permitido
 
@@ -77,7 +77,7 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### Consulte o vocabulário para uma mensagem de WhatsApp de despedida
 
-Consultei com as tags do canal e de quem fala, cada expressão inteira e o rascunho por palavra. O ponto final está permitido só fora da última frase do WhatsApp, pelo `when` da linha, então a despedida ficou sem ponto.
+Consultei com as tags do canal e de quem fala, cada expressão inteira e a classificação do rascunho, com `words` e `expressions`. O ponto final está permitido só fora da última frase do WhatsApp, pelo `when` da linha, então a despedida ficou sem ponto.
 
 ## Casos-limite
 
@@ -88,7 +88,7 @@ Consultei com as tags do canal e de quem fala, cada expressão inteira e o rascu
 
 ## Pegadinhas
 
-- A consulta por palavra parece cobrir o texto inteiro. Ela não pega uma expressão de mais de uma palavra.
+- A classificação parece listar só palavras. A expressão de mais de uma palavra vem em `expressions`, fora de `words`, e ler só `words` a deixa passar.
 - Um termo permitido parece valer em qualquer texto. O `when` limita o contexto.
 - Uma consulta sem tags parece completa. Ela só devolve a linha sem tags, e a de outro contexto só aparece com a tag dele.
 
@@ -97,11 +97,11 @@ Consultei com as tags do canal e de quem fala, cada expressão inteira e o rascu
 - `node node_modules/harness/vocabulary/dist/cli.js lookup --language <idioma> --term <termo> --tags <tag>` lê um termo e devolve se ele existe e a linha guardada.
 - `node node_modules/harness/vocabulary/dist/cli.js exists --language <idioma> --text <trecho> --tags <tag>` devolve só o registro de cada token do trecho para se ele existe.
 - Com `case_matches` falso, a caixa do texto não é a guardada. Escreva a grafia de `term`.
-- `node node_modules/harness/vocabulary/dist/cli.js classify-text --language <idioma> --text <trecho> --tags <tag>` devolve o nível de cada palavra, emoji e pontuação do trecho, com a troca recomendada de quem é evitado, que vem da substituição da linha. Confere o rascunho inteiro de uma vez, mas só palavra por palavra: não pega uma expressão de mais de uma palavra.
+- `node node_modules/harness/vocabulary/dist/cli.js classify-text --language <idioma> --text <trecho> --tags <tag>` devolve em `words` o nível de cada palavra, emoji e pontuação do trecho, com a troca recomendada de quem é evitado, que vem da substituição da linha, e em `expressions` o nível de cada expressão do vocabulário que o trecho usa, com `start` e `end` nos índices de `words`. Confere o rascunho inteiro de uma vez.
 - `node node_modules/harness/vocabulary/dist/cli.js lookup-terms --language <idioma> --term <expressão> --term <expressão> --tags <tag>` lê cada expressão inteira, em uma chamada, e devolve `results` na ordem enviada.
 - `--tags` repete, um valor por vez. Termo sem tag vale em qualquer texto. Termo com tag só volta quando uma tag dele está na consulta.
 - Passe o formato ou o canal do texto como tag, como `review` ou `chat`. Quando a tag está em `forbidden_in` ou `allowed_in` do termo, `classify-text` devolve o nível para esse contexto, com `base_state` no nível guardado e, se ficou proibido só pelo contexto, o motivo e as alternativas.
 - `lookup_term`, `lookup_terms`, `exists_in_text` e `classify_text`, no servidor `vocabulary`, fazem a mesma consulta quando não há terminal ou quando a CLI não está disponível, com o mesmo campo `tags`.
 
-1. Com terminal e a CLI instalada, na pasta do harness do negócio, rode `exists` com o texto, `lookup-terms` com cada expressão que o texto pode usar e `lookup` para cada termo que precisar da linha inteira, com as tags de quem fala, do evento e do canal. Escreva o comando inteiro em cada chamada.
-2. Sem terminal, ou quando a CLI não está disponível, chame `exists_in_text`, `lookup_term` e `lookup_terms` com os mesmos campos.
+1. Com terminal e a CLI instalada, na pasta do harness do negócio, rode `classify-text` com o texto, `lookup-terms` com cada expressão que o texto pode usar e `lookup` para cada termo que precisar da linha inteira, com as tags de quem fala, do evento e do canal. Escreva o comando inteiro em cada chamada.
+2. Sem terminal, ou quando a CLI não está disponível, chame `classify_text`, `lookup_term` e `lookup_terms` com os mesmos campos.

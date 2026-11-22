@@ -7,8 +7,16 @@
  * its own. An emoji keeps its variation selector, skin tone, and ZWJ sequence
  * together. Given tags, a row tagged only for another speaker, event, or channel
  * reads as not registered, and a tag in forbidden_in or allowed_in changes the level of a word as in lookup:
- * to is the level for that context and base_state keeps the level of the row. A glossary row of more than one word is not matched across words.
+ * to is the level for that context and base_state keeps the level of the row.
  * A word that matches a case_sensitive row says whether its casing matches.
+ *
+ * words has one item per token and does not change. A glossary row of more than
+ * one word is not matched in words: expressions lists each one the text uses,
+ * found as a run of tokens, whatever the casing and the spacing, with the same
+ * fields as a word plus start and end, the index of its first token in words and
+ * the index after its last. Two expressions that overlap are both listed, in the
+ * order of the text and the longer one first when they start together. The level
+ * of each one follows the same context rules as a word.
  *
  * Run: node api/routes/classify-text/index.ts <language> <text>
  */
@@ -17,7 +25,7 @@ import { classify } from "../classify/index.ts"
 import { Glossary, InvalidGlossary, applicable, collapse, type Entry } from "../../shared/glossary.ts"
 import { parseBody, type Route } from "../../shared/http.ts"
 import { readOptions, report } from "../../shared/options.ts"
-import { classifyTextRequest, type TextClassification } from "../../shared/schema.ts"
+import { classifyTextRequest, type ExpressionClassification, type TextClassification } from "../../shared/schema.ts"
 import { isMain } from "../../shared/main.ts"
 
 export type { TextClassification }
@@ -30,8 +38,27 @@ export function classifyText(
 ): TextClassification {
   const query = collapse(submitted)
   if (query === "") throw new InvalidGlossary("Provide the text.")
-  const words = tokensIn(query).map((token) => classify(entries, token, language, tags))
-  return { from: "query", language, submitted: query, words }
+  const spans = tokenSpans(query)
+  const words = spans.map((span) => classify(entries, span.text, language, tags))
+  return { from: "query", language, submitted: query, words, expressions: expressionsIn(entries, query, spans, language, tags) }
+}
+
+function expressionsIn(
+  entries: readonly Entry[],
+  query: string,
+  spans: readonly Span[],
+  language: string,
+  tags: readonly string[],
+): ExpressionClassification[] {
+  const longest = entries.reduce((most, entry) => Math.max(most, tokensIn(entry.term).length), 1)
+  const found: ExpressionClassification[] = []
+  for (let start = 0; start < spans.length - 1; start++) {
+    for (let end = Math.min(spans.length, start + longest); end >= start + 2; end--) {
+      const read = classify(entries, query.slice(spans[start].start, spans[end - 1].end), language, tags)
+      if (read.to !== "not_registered") found.push({ ...read, start, end })
+    }
+  }
+  return found
 }
 
 export function classifyPhrase(
@@ -64,7 +91,17 @@ const PUNCT = /\p{P}/uy
 const PATTERNS = [FLAG, KEYCAP, EMOJI, WORD, PUNCT]
 
 export function tokensIn(text: string): string[] {
-  const tokens: string[] = []
+  return tokenSpans(text).map((span) => span.text)
+}
+
+interface Span {
+  text: string
+  start: number
+  end: number
+}
+
+function tokenSpans(text: string): Span[] {
+  const tokens: Span[] = []
   let index = 0
   while (index < text.length) {
     const space = take(SPACE, text, index)
@@ -82,7 +119,7 @@ export function tokensIn(text: string): string[] {
       index += point > 0xffff ? 2 : 1
       continue
     }
-    tokens.push(token)
+    tokens.push({ text: token, start: index, end: index + token.length })
     index += token.length
   }
   return tokens
