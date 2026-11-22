@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.27.1"
+  version: "0.27.2"
   related:
     - definir-empresa
     - definir-grafia
@@ -113,7 +113,7 @@ Não grave o print no corpo.
 
 Crie a página pelo modelo da lista de pessoas, quando a lista tem um: o conteúdo dele guia o cadastro.
 
-Antes de gravar, leia a descrição de cada propriedade no esquema da lista: ela diz o que é obrigatório e o que não vai em cada campo. Preencha a localidade com a cidade que a fonte sustenta, como a do perfil comercial do contato. Sem fonte, pergunte a cidade a quem usa a habilidade na resposta do cadastro, sem travá-lo.
+Antes de gravar, leia a descrição de cada propriedade no esquema da lista: ela diz o que é obrigatório e o que não vai em cada campo. Preencha a localidade com a cidade que a fonte sustenta, como a do perfil comercial do contato. Com só a cidade e o estado, grave-os também no endereço de entrega, sem inventar rua nem número, para que o endereço não fique vazio. Sem fonte, pergunte a cidade a quem usa a habilidade na resposta do cadastro, sem travá-lo.
 
 Grave como confirmado só o que veio direto da pessoa que usa a habilidade ou de uma fonte que respondeu com certeza. Nunca invente papel, time nem apelido. Sem e-mail em nenhuma fonte, o e-mail fica como pendência no registro.
 
