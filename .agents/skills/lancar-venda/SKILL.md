@@ -1,11 +1,11 @@
 ---
 name: lancar-venda
-description: Use essa habilidade sempre que for cadastrar, completar, corrigir ou conciliar uma venda de um ou mais produtos, mesmo sem dizer venda. NÃO use para lançar um gasto, cadastrar a pessoa ou o produto, definir o preço, mover o estoque, nem vender um bem durável.
+description: Use essa habilidade sempre que for cadastrar, completar, corrigir ou conciliar uma venda de um ou mais produtos, ou marcar unidades como vendidas, mesmo sem dizer venda. NÃO use para lançar um gasto, cadastrar a pessoa ou o produto, definir o preço, mover o estoque, nem vender um bem durável.
 allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-data-sources notion:notion-create-pages notion:notion-update-page notion:notion-create-comment
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.14.0"
+  version: "0.15.0"
   aliases:
     - definir-venda
   related:
@@ -150,7 +150,9 @@ Propriedade que não existe: sugira e espere o sim. Não crie. Um caso isolado n
 
 ### Passo 11
 
-A resposta de cada venda lançada, completada, corrigida ou conciliada traz o link do Notion da venda, de cada unidade, da variante de cada unidade e do produto, para a pessoa navegar e conferir. Com `Banco de unidades` vazio, traz o link da venda e do produto. Cada link segue `escrever-link`.
+A resposta de cada venda lançada, completada, corrigida ou conciliada, e de cada unidade marcada como vendida, traz o link do Notion de cada venda, de cada unidade, da variante de cada unidade e do produto, para a pessoa navegar e conferir. Com `Banco de unidades` vazio, traz o link da venda e do produto. Cada link segue `escrever-link`.
+
+Unidade marcada como vendida sem venda vinculada: diga qual é e pergunte. Não crie a venda.
 
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
@@ -214,9 +216,9 @@ Se você preencher as peças vendidas ou alterar o saldo, o histórico e o rastr
 
 ### Resposta sem os links
 
-Se você responder só com o resumo da venda, a pessoa precisa procurar cada página no Notion para conferir.
+Se você responder só com o resumo da venda, ou só disser que marcou as unidades como vendidas, a pessoa precisa procurar cada página no Notion para conferir.
 
-1. Ponha o link da venda, de cada unidade, da variante de cada unidade e do produto.
+1. Ponha o link de cada venda, de cada unidade, da variante de cada unidade e do produto, também quando só marcou unidades como vendidas.
 2. Com `Banco de unidades` vazio, ponha o link da venda e do produto.
 3. Escreva cada link como `escrever-link` manda.
 
