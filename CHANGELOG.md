@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.101.0](https://github.com/jimmyandrade/harness/compare/v1.100.1...v1.101.0) (2026-11-22)
+
+
+### Features
+
+* **procurar-email:** record the selection result from the email in the registration without asking ([#1414](https://github.com/jimmyandrade/harness/issues/1414)) ([c4db7db](https://github.com/jimmyandrade/harness/commit/c4db7db0b6504474eea65122f282a12380193214))
+* **procurar-email:** treat a rejection email as an internal contestation and draft the reply ([#1416](https://github.com/jimmyandrade/harness/issues/1416)) ([0277d8e](https://github.com/jimmyandrade/harness/commit/0277d8e05f099ebec38554ed78b7edb1da8af19c))
+
 ## [1.100.1](https://github.com/jimmyandrade/harness/compare/v1.100.0...v1.100.1) (2026-11-22)
 
 
