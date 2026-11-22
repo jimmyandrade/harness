@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.1"
+  version: "0.4.2"
   aliases:
     - definir-preco-de-produto
     - definir-preco-da-peca
@@ -160,6 +160,8 @@ O preço novo vale em cada canal de `Canais que repetem o preço`, na mesma pass
 
 Produto que falta num canal é cadastrado nele sempre como produto com variações, uma variação por variante do registro, mesmo quando só uma existe. Cadastre só as variantes que já foram produzidas, com o preço do registro. Não invente custo, estoque nem SKU: o campo que o registro não traz fica vazio, e a resposta diz o que faltou.
 
+Todo produto cadastrado num canal leva foto. Use a foto do produto isolado, de frente, do registro de fotos do produto. Sem essa foto no registro, diga que falta. Quando a ferramenta não consegue enviar o arquivo ao canal, entregue a foto à pessoa e diga onde clicar para escolhê-la.
+
 Depois de salvar, releia o nome no canal. Um canal pode trocar as maiúsculas, como "beRá" por "Berá", e recusar o nome que só difere nelas, dizendo que ele já existe. Tente a correção uma vez, no produto que agrupa as variações, e releia depois de recarregar a página. Se o canal voltar a trocar, deixe o nome dele e diga isso na resposta. Não use nome provisório para contornar.
 
 A resposta diz, por canal, o preço antes e depois, ou que o produto foi cadastrado.
@@ -256,7 +258,7 @@ Perguntei o motivo e quem decidiu. Acrescentei uma linha com o canal, os preços
 
 ### a regata passa a custar 220 em qualquer canal
 
-Acrescentei a linha no histórico e mudei a variante da loja virtual de R$ 350 para R$ 220. A regata não estava no catálogo da maquininha: cadastrei como produto com variações, só com o tamanho produzido, a R$ 220, sem custo nem estoque. O canal trocou "beRá" por "Berá" e voltou a trocar depois da correção, então deixei o nome dele e avisei na resposta.
+Acrescentei a linha no histórico e mudei a variante da loja virtual de R$ 350 para R$ 220. A regata não estava no catálogo da maquininha: cadastrei como produto com variações, só com o tamanho produzido, a R$ 220, com a foto do produto isolado de frente, sem custo nem estoque. O canal trocou "beRá" por "Berá" e voltou a trocar depois da correção, então deixei o nome dele e avisei na resposta.
 
 ## Casos-limite
 
@@ -269,7 +271,7 @@ Acrescentei a linha no histórico e mudei a variante da loja virtual de R$ 350 p
 - O banco ou o workspace não está conectado: pare e peça.
 - O destino do preço do ponto de venda está vazio: pergunte onde registrar.
 - `Canais que repetem o preço` está vazio: pergunte uma vez em quais canais o preço aparece.
-- O produto falta num canal: cadastre como produto com variações, mesmo com uma variação só.
+- O produto falta num canal: cadastre como produto com variações, mesmo com uma variação só, e com a foto do produto isolado.
 
 ## Pegadinhas
 
