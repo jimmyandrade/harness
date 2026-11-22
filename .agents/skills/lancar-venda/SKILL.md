@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.18.5"
+  version: "0.18.6"
   aliases:
     - definir-venda
   related:
@@ -21,6 +21,7 @@ metadata:
     - procurar-venda
     - registrar-ciclo-do-ativo
     - escrever-link
+    - rotular-item
 ---
 
 # Lançar venda
@@ -35,6 +36,10 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Banco de vendas": ""
 # Opcional. Vazio: a venda não vincula unidade, não marca a situação dela e não mexe no saldo, e o produto vendido entra pelo mapeamento.
 "Banco de unidades": ""
+# `Etiqueta do contato que pagou` é a etiqueta de contato que a pessoa cliente ganha quando a venda está paga. Vazio, a venda não etiqueta a pessoa.
+"Etiqueta do contato que pagou": ""
+# `Etiqueta do contato com envio` é a etiqueta de contato da venda que tem envio, com postagem. Vazio, a venda não a aplica.
+"Etiqueta do contato com envio": ""
 # `Início da nota no envio`: data, no formato AAAA-MM-DD, a partir da qual a venda com envio exige nota fiscal para transportar a mercadoria.
 "Início da nota no envio": ""
 # `Forma de entrega sem envio`: a forma de entrega que não transporta a mercadoria e dispensa a nota do envio.
@@ -90,6 +95,8 @@ Quando a pessoa diz que a cliente é outra, a venda não reaproveita a página d
 Antes de vincular, busque com `identificar-duplicata`, também a pessoa cliente pelo nome, pelas variações, pelas notas e pelo nome civil. Sem a página, ou sem a variante na unidade, pare e pergunte. Não crie o produto, a unidade nem a variante na venda. Não escolha entre parecidos.
 
 Com `Banco de unidades` preenchido, marque cada unidade vinculada como vendida, na propriedade de situação da unidade, e releia a unidade para conferir que ela aponta para a venda. Unidade que já consta como vendida em outra venda: pare e pergunte.
+
+Com o pagamento pago, aplique a `Etiqueta do contato que pagou` à pessoa cliente, por `rotular-item`. A `Etiqueta do contato com envio` entra só quando a venda tem envio: retirada no local não leva.
 
 A situação da unidade não é o saldo. O saldo segue `gerenciar-estoque`. Não altere o saldo aqui.
 
@@ -264,14 +271,6 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 A venda ficou nas vendas, com a data real e as peças. Não criei propriedade de retorno.
 
-### Complete esta venda. O restante já está certo.
-
-Preenchi o que faltava. O dado válido permaneceu. A correção ficou no comentário da página.
-
-### Relacione a cliente, o conjunto, as peças e as unidades desta venda.
-
-Vinculei a pessoa cliente, o conjunto e as unidades que já existiam, com as variantes. Marquei cada unidade como vendida e li a unidade de volta. As peças continuaram calculadas. O saldo não mudou.
-
 ### Cadastre esta venda de duas peças.
 
 Vinculei as unidades que já existiam. Não criei pessoa nem produto. O valor inferido continuou calculado. A resposta trouxe o link da venda, das duas unidades, da variante de cada uma e do produto.
@@ -291,10 +290,6 @@ O ponto de contato ficou no lugar em que a venda aconteceu. A retirada ficou no 
 ### Registre o pagamento desta venda, com desconto e crédito.
 
 O preço nominal e o desconto comercial continuaram calculados. Gravei o motivo, o valor pago pelos produtos, o valor recebido, o crédito usado e o meio efetivo. Taxa e repasse não entraram como desconto.
-
-### Reverta esta correção e deixe a trilha.
-
-O comentário da página disse o que voltou, por que voltou, a fonte e quando. A reversão não ficou só no chat.
 
 ## Casos-limite
 
