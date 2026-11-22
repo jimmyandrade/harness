@@ -3,7 +3,7 @@ name: redigir-com-tom-de-voz
 description: Use essa habilidade sempre que for criar, redigir, editar, revisar ou responder texto da marca no tom de voz, mesmo sem dizer copy. NÃO use para responder quem conversa com a IA, descrever uma skill, titular tarefa ou oportunidade, cravar a grafia, alterar formato de conteúdo, nem assumir cliente, peça, oportunidade ou histórico.
 metadata:
   author: jimmyandrade
-  version: "0.29.2"
+  version: "0.30.0"
   aliases:
     - escreva-usando-o-tom-de-voz
   related:
@@ -50,7 +50,7 @@ Texto que vai ser enviado por um conector, como uma resposta de e-mail, depende 
 
 O texto redigido que a pessoa vai aprovar antes do envio, no bloco e no widget, segue `rascunhar-mensagem`.
 
-Consulte o vocabulário com `consultar-vocabulario`, com as `tags` de quem fala, do evento, do canal e do formato do texto, no idioma do texto que vai escrever. Ele consulta o texto por palavra e cada expressão que o texto pode usar, inteira, e devolve o `when` dos termos permitidos com ressalva, que vale para este texto. Sem saber quem fala, pergunte.
+Consulte o vocabulário com `consultar-vocabulario`, com as `tags` de quem fala, do evento, do canal e do formato do texto, no idioma do texto que vai escrever. Ele classifica o texto, consulta cada expressão que o texto pode usar, inteira, e devolve o `when` dos termos permitidos com ressalva, que vale para este texto. Sem saber quem fala, pergunte.
 
 Mensagem para uma pessoa sai de uma pessoa, a `Pessoa que fala`, nunca da empresa, e continua a conversa que já houve: leia-a antes de rascunhar. Detalhes em `references/mensagem-para-uma-pessoa.md`.
 
@@ -152,12 +152,12 @@ Se você manter a palavra clichê, ou trocar por outro termo da mesma fórmula, 
 2. Escreva imagem, cena, ação, efeito ou situação com a mesma sensação.
 3. O termo ligado em `related` também fica de fora.
 
-### Expressão que passa na checagem por palavra
+### Expressão ignorada na classificação
 
-Se você confiar só em `classify_text`, que lê palavra por palavra, uma expressão proibida de mais de uma palavra passa no rascunho.
+Se você ler só `words` na resposta de `classify_text`, uma expressão proibida de mais de uma palavra passa no rascunho, porque a classificação a devolve em `expressions`.
 
-1. Antes de rascunhar, consulte as expressões do texto, inteiras, com `lookup_terms`.
-2. Depois de rascunhar, consulte de novo cada expressão que o rascunho usa.
+1. Depois de rascunhar, classifique o texto inteiro e leia `words` e `expressions`.
+2. Antes de rascunhar, consulte as expressões que o texto pode usar, inteiras, com `lookup_terms`, para ler a linha completa de cada uma.
 3. Tire a que voltar proibida ou a evitar, com a troca da linha.
 
 ### Tratamento carinhoso não devolvido
@@ -255,7 +255,7 @@ Consultei o vocabulário com as tags de quem fala, do festival e do palco. As fa
 
 ### Rascunhe a resposta. O texto pode usar uma expressão de duas ou mais palavras.
 
-Consultei as palavras e, à parte, a expressão inteira com `lookup_terms`: uma delas voltou proibida. Escrevi a frase sem ela, com a troca da linha. A checagem por palavra sozinha teria deixado a expressão passar.
+Classifiquei o rascunho: uma expressão de duas palavras voltou proibida em `expressions`. Escrevi a frase sem ela, com a troca da linha. Ler só `words` teria deixado a expressão passar.
 
 ### Escreva o assunto do e-mail. A pessoa vê isso no celular.
 
@@ -272,7 +272,7 @@ O título ficou específico, com o nome canônico que a fonte já tinha. Não vi
 - Título só «Reservado», «Evento», «Reunião» ou «Feira»: leve o nome canônico. Provisório pode abrir com «Reservado para» ou «A confirmar».
 - A grafia ainda não foi conferida: pare. Use a grafia que a pessoa ou as instruções do projeto já fecharam. Não grave a forma do pedido.
 - O texto traz emoji, combinação ou uso simbólico: o estado vem do vocabulário. Sem a linha, pare. Não invente. O cadastro segue `definir-vocabulario`.
-- O rascunho tem uma expressão de mais de uma palavra: `classify_text` não a pega. Consulte a expressão inteira com `lookup_terms`, como o Passo 2 manda.
+- O rascunho tem uma expressão de mais de uma palavra: `classify_text` a devolve em `expressions`, fora de `words`. Leia as duas listas e consulte a expressão inteira com `lookup_terms` quando precisar da linha completa.
 
 ## Pegadinhas
 
@@ -291,7 +291,7 @@ O título ficou específico, com o nome canônico que a fonte já tinha. Não vi
 - O dado que a conversa já citou parece confirmado. Cliente, peça, oportunidade e histórico comercial vêm da fonte que a pessoa indicou.
 - Título publicitário parece o tom de voz. O texto pede intenção, recorte e conexão, e recusa a fórmula genérica. A busca precisa continuar achando o nome canônico.
 - "Reunião com X" parece claro. Em evento externo, o título diz o encontro e guarda o nome mais buscável.
-- A checagem do rascunho inteiro parece cobrir expressões. Ela lê palavra por palavra: a expressão inteira só a consulta por `lookup_terms` ou `lookup-terms` pega.
+- A classificação do rascunho parece listar só palavras. A expressão de mais de uma palavra vem em `expressions`, fora de `words`: ler só `words` a deixa passar.
 - Guardar o comando da CLI numa variável de shell parece encurtar a chamada. O zsh não separa as palavras da variável e a chamada falha. Escreva o comando inteiro.
 - Criatividade parece substituir o campo estruturado. Edição, data, cidade e contexto curto podem entrar no título quando ajudam a busca. Horário, convidados, link e página continuam fora do título.
 

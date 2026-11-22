@@ -3,7 +3,7 @@ name: rascunhar-mensagem
 description: Escreve, mostra e envia a mensagem de WhatsApp depois de a conversa ser lida, com o destino, o texto, a divisão e o comprovante conferidos. Usada quando a pessoa quer responder, mandar ou corrigir uma mensagem. NÃO serve para ler a conversa, redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.4.2"
+  version: "0.4.3"
   aliases:
     - entregar-rascunho-de-mensagem
     - rascunhar-mensagem-no-whatsapp
@@ -84,7 +84,7 @@ Se a proposta conflita, como uma retirada numa cidade de onde a pessoa já saiu 
 
 Quando o mesmo texto vai para vários destinos, como uma resposta a cada empresa de uma lista, leia a conversa de cada destino antes de montar o texto. Quem já recusou, como uma empresa que disse que não faz o serviço, ganha um rascunho à parte, um agradecimento curto que não repete a recusa que nós iríamos dar, e fica de fora do texto comum. Mostre os dois rascunhos juntos, para a pessoa aprovar cada um.
 
-Antes de mostrar o rascunho, valide o texto inteiro contra o vocabulário, seguindo `redigir-com-tom-de-voz`: rode a classificação do texto com as tags de quem escreve e do canal, e leia as expressões com a consulta de termos, porque a classificação lê palavra por palavra. Palavra proibida ou muito desaconselhada, como a que marca gênero ou o plural de tratamento, sai do texto e entra a alternativa do vocabulário. Cada correção de um rascunho já mostrado passa pela mesma validação antes de voltar à pessoa.
+Antes de mostrar o rascunho, valide o texto inteiro contra o vocabulário, seguindo `redigir-com-tom-de-voz`: rode a classificação do texto com as tags de quem escreve e do canal, e leia `words` e `expressions`, porque uma expressão de mais de uma palavra vem em `expressions`. Palavra proibida ou muito desaconselhada, como a que marca gênero ou o plural de tratamento, sai do texto e entra a alternativa do vocabulário. Cada correção de um rascunho já mostrado passa pela mesma validação antes de voltar à pessoa.
 
 Abra com a frase de contexto e, se nenhuma mensagem nossa já saudou hoje, a saudação do período, lida no relógio. Fora do `Horário de trabalho`, peça desculpa pelo horário.
 
