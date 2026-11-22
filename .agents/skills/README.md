@@ -1029,6 +1029,7 @@ flowchart LR
   registrar_preco_de_combustivel --> procurar_banco_de_dados
   registrar_preco_de_produto_fisico --> gerenciar_estoque
   registrar_preco_de_produto_fisico --> procurar_banco_de_dados
+  registrar_preco_de_produto_fisico --> publicar_produto_fisico_na_loja_virtual
   registrar_resultados_da_validacao_na_tarefa --> criar_pull_request
   registrar_resultados_da_validacao_na_tarefa --> pedir_revisao_de_pr_no_slack
   registrar_resultados_da_validacao_na_tarefa --> preparar_tarefa_do_pull_request

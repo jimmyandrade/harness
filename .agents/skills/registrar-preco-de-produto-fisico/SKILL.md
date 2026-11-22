@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.4.2"
   aliases:
     - definir-preco-de-produto
     - definir-preco-da-peca
@@ -13,6 +13,7 @@ metadata:
     - evoluir-habilidade
     - gerenciar-estoque
     - procurar-banco-de-dados
+    - publicar-produto-fisico-na-loja-virtual
 ---
 
 # Registrar preço de produto físico
@@ -35,6 +36,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 # Vazios: sem valor, pergunte à pessoa e não escolha.
 "Destino do preço de um ponto de venda": ""
 "Fonte do estoque por local": ""
+# Canais de venda que mostram o preço do registro, como a loja virtual e o catálogo de produtos da maquininha. Vazio: pergunte uma vez em quais canais o preço aparece.
+"Canais que repetem o preço": []
 # Terminação que fecha o preço quebrado, como `,90` em R$ 449,90. Só vale quando o Passo 5 aceita o preço quebrado.
 "Terminação do preço quebrado": ",90"
 # Terminação do preço à vista que a pessoa comunica como desconto, como `9` em R$ 299 ou `,90` em R$ 299,90. Vazio: o preço à vista segue a decisão do Passo 5, como qualquer outro.
@@ -97,6 +100,8 @@ Campos da linha, ligados às propriedades pelo mapeamento de dados do projeto:
 
 Falta motivo ou quem decidiu: pergunte antes de acrescentar. Preço de comparação acima do limite: mostre o menor preço dos 30 dias e não acrescente.
 
+Com a linha acrescentada, leve o preço novo aos canais, como o Passo 8 manda.
+
 ### Passo 4
 
 Um preço dito para um grupo, como "o grupo ficou por 250 no local", vale só para os produtos que estavam naquele local e ainda tinham estoque. O grupo é definido pelo estoque do local, não pelo nome.
@@ -151,6 +156,18 @@ Não invente nome de banco nem de propriedade para o que o projeto não definiu:
 
 ### Passo 8
 
+O preço novo vale em cada canal de `Canais que repetem o preço`, na mesma passada. Antes de gravar, leia o produto em cada canal e mostre o preço que ele tem lá. A loja virtual segue `publicar-produto-fisico-na-loja-virtual`.
+
+Produto que falta num canal é cadastrado nele sempre como produto com variações, uma variação por variante do registro, mesmo quando só uma existe. Cadastre só as variantes que já foram produzidas, com o preço do registro. Não invente custo, estoque nem SKU: o campo que o registro não traz fica vazio, e a resposta diz o que faltou.
+
+Todo produto cadastrado num canal leva foto. Use a foto do produto isolado, de frente, do registro de fotos do produto. Sem essa foto no registro, diga que falta. Quando a ferramenta não consegue enviar o arquivo ao canal, entregue a foto à pessoa e diga onde clicar para escolhê-la.
+
+Depois de salvar, releia o nome no canal. Um canal pode trocar as maiúsculas, como "beRá" por "Berá", e recusar o nome que só difere nelas, dizendo que ele já existe. Tente a correção uma vez, no produto que agrupa as variações, e releia depois de recarregar a página. Se o canal voltar a trocar, deixe o nome dele e diga isso na resposta. Não use nome provisório para contornar.
+
+A resposta diz, por canal, o preço antes e depois, ou que o produto foi cadastrado.
+
+### Passo 9
+
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
@@ -195,6 +212,14 @@ Se você terminar todos os preços em `Terminação do preço quebrado`, a peça
 2. Use o redondo quando a função for valor percebido, autoria ou desejo.
 3. Use o quebrado só com a justificativa de conversão, entrada, campanha, saldo, condição especial ou barreira psicológica, e diga qual é.
 
+### Preço novo só no registro
+
+Se você registrar o preço e não levar aos canais, a loja e a maquininha cobram o preço antigo, e a venda parece ter desconto.
+
+1. Leia o produto em cada canal de `Canais que repetem o preço`.
+2. Grave o preço novo, ou cadastre o produto que falta como produto com variações.
+3. Releia o nome e o preço no canal.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
@@ -231,6 +256,10 @@ Sugeri R$ 399,90 com a âncora "De R$ 450 por R$ 399,90". Registrei que é preç
 
 Perguntei o motivo e quem decidiu. Acrescentei uma linha com o canal, os preços, a vigência e o custo na data. Não editei a linha antiga.
 
+### a regata passa a custar 220 em qualquer canal
+
+Acrescentei a linha no histórico e mudei a variante da loja virtual de R$ 350 para R$ 220. A regata não estava no catálogo da maquininha: cadastrei como produto com variações, só com o tamanho produzido, a R$ 220, com a foto do produto isolado de frente, sem custo nem estoque. O canal trocou "beRá" por "Berá" e voltou a trocar depois da correção, então deixei o nome dele e avisei na resposta.
+
 ## Casos-limite
 
 - Nenhuma fonte chega até a mudança: diga qual consultou, até onde cada uma chega, e pergunte só o que ficou antes.
@@ -241,6 +270,8 @@ Perguntei o motivo e quem decidiu. Acrescentei uma linha com o canal, os preços
 - A função da peça não está clara, como entrada, campanha ou valor autoral: pergunte antes de escolher o formato do preço.
 - O banco ou o workspace não está conectado: pare e peça.
 - O destino do preço do ponto de venda está vazio: pergunte onde registrar.
+- `Canais que repetem o preço` está vazio: pergunte uma vez em quais canais o preço aparece.
+- O produto falta num canal: cadastre como produto com variações, mesmo com uma variação só, e com a foto do produto isolado.
 
 ## Pegadinhas
 
@@ -251,6 +282,7 @@ Perguntei o motivo e quem decidiu. Acrescentei uma linha com o canal, os preços
 - O nome do produto parece o grupo inteiro. Quem define o grupo é o estoque do local.
 - O preço dito no local parece valer para todos os produtos daquele tipo. Vale só para os que estavam lá e ainda tinham estoque.
 - A página do produto parece só ter o preço de hoje. As versões do produto e da variação guardam preços antigos que o banco do histórico ainda não tem.
+- O produto com uma variação só parece pedir o cadastro de produto único. O cadastro é sempre com variações, para a variação nova entrar no mesmo produto.
 - O custo na data parece recalculável. Ele é o custo copiado no dia da mudança.
 - O Notion lê o trecho entre dois cifrões sem barra como fórmula. Num texto com valor em reais, escreva `R\$ 10,00` e releia o campo depois de gravar. A propriedade numérica não precisa da barra.
 

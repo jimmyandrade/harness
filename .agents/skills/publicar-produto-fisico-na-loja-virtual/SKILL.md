@@ -3,7 +3,7 @@ name: publicar-produto-fisico-na-loja-virtual
 description: Publica e corrige um produto físico na loja virtual, com título, slug, descrição, variantes, estoque e prontidão para venda e marcação em post. Usada quando o produto vai à loja virtual ou precisa de correção lá, mesmo sem dizer loja. NÃO serve para cadastrar o produto, registrar o preço, movimentar estoque, vender no ponto de venda físico nem escrever o post.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.3.1"
   aliases:
     - definir-produto-na-loja
   related:
@@ -44,6 +44,8 @@ O título da loja é o nome completo do produto no registro. Um título mais cur
 O slug é adequado quando deriva do nome completo do produto, em minúsculas, ASCII, kebab-case, sem palavra cortada, sem número de id e igual ao slug do registro, quando ele existe. Alerte antes de gravar um slug fora disso e mostre o slug proposto. Alerte também quando o slug que já está na loja diverge do nome, como o que omite uma palavra do nome.
 
 Ao trocar o slug de um produto que já tem endereço público, crie o redirecionamento do endereço antigo para o novo na mesma chamada. Sem ele, os links já publicados quebram.
+
+Cada endereço anterior continua valendo. Quando o slug troca de novo, aponte direto para o endereço novo os redirecionamentos que já existiam, sem cadeia de um endereço para outro. Atualize também o slug e o link do produto no registro.
 
 ### Passo 4
 
