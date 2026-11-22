@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-update-
 compatibility: Precisa de internet. A busca semântica nas listas usa notion-ai-search no servidor notion.
 metadata:
   author: jimmyandrade
-  version: "0.9.1"
+  version: "0.10.0"
   aliases:
     - procurar-grafia
   related:
@@ -36,6 +36,11 @@ Busque o pedaço no nome e nas variações, por consulta direta e por busca sem�
 ### Passo 3
 
 Separe duas listas. A busca usa o nome do registro e todas as formas entre aspas, certas e erradas. A frase para a pessoa usa só a forma correta: o nome completo, ou o nome da empresa, e a forma que a nota marca como correta naquele papel, como apelido ou primeiro nome. Não escreva o erro. Não reduza a busca à forma correta. A busca de remetente não espera a caixa mostrar o endereço e não usa o operador from:. Esse operador não filtra o remetente: devolve páginas que citam o texto. A busca usa, como texto, o primeiro nome marcado como correto, e esse primeiro nome, ponto, e o sobrenome do nome completo. E-mail vazio não dispensa essas formas. O endereço não vira nome civil. Se houver mais de um registro, liste cada um. Não escolha um. Não confundir com separa homônimos. Não junte os registros. Quando a pessoa confirma que são pessoas ou empresas diferentes, o vínculo sai na hora com `identificar-duplicata`. A correção não fica só no chat.
+
+Nome civil e nome social são campos separados, e o nome civil só se grava quando a pessoa ou uma fonte o informa.
+Formulário que exige o documento oficial, como contrato, nota e documento fiscal, leva o nome civil. Cadastro que aceita nome social, como o de uma hospedagem, leva o nome social.
+Nenhuma mensagem, e-mail ou saudação trata a pessoa pelo nome civil: ela é chamada pelo nome social.
+Leia os dois no registro, nunca os escreva na habilidade, e sem o nome civil pare e pergunte antes de preencher o formulário.
 
 ### Passo 4
 
