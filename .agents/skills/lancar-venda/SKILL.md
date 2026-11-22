@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.18.3"
+  version: "0.18.4"
   aliases:
     - definir-venda
   related:
@@ -81,7 +81,9 @@ Pessoa cliente, conjunto e unidades são páginas que já existem. A pessoa clie
 
 Com `Banco de unidades` preenchido, a unidade traz o tamanho e as outras variantes, e esse vínculo é o rastro do estoque. As peças vendidas e os tipos de peças saem dessas unidades. Não preencha. Um conjunto não substitui as unidades. Com o banco vazio, vincule só o produto vendido, pelo mapeamento, e não vincule unidade.
 
-Antes de vincular a pessoa cliente, confira quem é, também quando a busca acha uma página só. Vincule apenas quando o nome completo, ou outro dado que a pessoa disse, como a cidade, bate com a página. O primeiro nome, ou o nome parcial, não basta. Quando não bate, leia o pagador no meio de pagamento da venda, tentando nesta ordem a linha de comando, a API, o conector, o navegador do app e, por último, a extensão do Chrome. Só então pergunte, mostrando a página achada, o que a pessoa disse e o que o meio de pagamento mostrou. Não diga que ele não mostra o pagador sem ter aberto a transação.
+Antes de vincular a pessoa cliente, confira quem é, também quando a busca acha uma página só. Vincule apenas quando o nome completo, ou outro dado dito pela pessoa, como a cidade, bate com a página. O primeiro nome não basta.
+
+Quando não bate, leia o pagador no meio de pagamento da venda, na ordem: linha de comando, API, conector, navegador do app e, por último, a extensão do Chrome. Só então pergunte, mostrando a página, o que a pessoa disse e o que o meio mostrou. Não diga que ele não mostra o pagador sem abrir a transação. Cartão presencial costuma vir sem cliente associado e o Pix traz o pagador.
 
 Antes de vincular, busque com `identificar-duplicata`. Sem a página, ou sem a variante na unidade, pare e pergunte. Não crie a pessoa, o produto, a unidade nem a variante na venda. Não escolha entre parecidos.
 
