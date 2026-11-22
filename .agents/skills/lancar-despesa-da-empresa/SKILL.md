@@ -5,13 +5,15 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.11.4"
+  version: "0.12.0"
   aliases:
     - definir-despesa
     - lancar-despesa
   related:
     - anexar-arquivo-no-notion
+    - completar-despesa-de-compra
     - definir-ativo-imobilizado
+    - definir-cartao
     - definir-empresa
     - definir-grafia
     - definir-lancamento-financeiro
@@ -112,6 +114,8 @@ Antes de qualquer gravação, confira e marque este checklist com o que a evidê
 O recebedor e a modalidade Pix não identificam o produto nem sua finalidade. Dizer apenas “despesa pessoal” ou “despesa da empresa” só confirma a natureza. Consulte o contexto e os registros relacionados; reúna as perguntas que faltam, espere as respostas e só depois grave. Não repita perguntas já respondidas nem exija campos sem relação com o gasto. Não use nome genérico de recebedor como substituto da identificação.
 
 Quem pagou é quem arcou com o dinheiro, não o titular da conta. Um débito da empresa pode sair do dinheiro de outra pessoa que só passou pela conta, como a venda dela numa maquininha da empresa. Quando essa pessoa aceitou arcar com o débito, grave-a como pessoa pagadora e conte nas observações de onde veio o dinheiro. Sem esse aceite, pergunte: o valor é uma dívida com ela.
+
+Compra online ou no cartão, com recebedora, comprovante ou pagador por completar, segue `completar-despesa-de-compra`, e o cartão fica em `definir-cartao`.
 
 Antes de deixar a categoria de custo vazia, busque na lista que a propriedade de categoria aponta, pelo produto e pela finalidade confirmados, e pelas variações e grafias da categoria. Sem propriedade de categoria no mapeamento, informe a limitação; não crie estrutura nem grave uma categoria inventada no corpo. Isso não impede registrar um gasto já identificado com os vínculos disponíveis. Uma informação opcional ausente não substitui a identificação obrigatória do produto e da finalidade.
 

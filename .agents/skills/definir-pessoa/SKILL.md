@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.25.0"
+  version: "0.27.0"
   related:
     - definir-empresa
     - definir-grafia
@@ -28,13 +28,19 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Tipo de armazenamento das pessoas": "lista do projeto"
 # `Endereço das pessoas` é a pasta, nos arquivos locais.
 "Endereço das pessoas": ""
-"Nome do arquivo da pessoa": "e-mail.json"
+# `Identificador do arquivo da pessoa` é o dado que nomeia o arquivo local de cada pessoa, como o e-mail ou o telefone.
+"Identificador do arquivo da pessoa": "e-mail"
+# `Identificadores secundários da pessoa` lista os dados que também acham o arquivo, como o telefone. Todos apontam para o mesmo arquivo.
+"Identificadores secundários da pessoa": []
+"Nome do arquivo da pessoa": "<identificador>.json"
 # `Fontes para resolver identidade` lista as ferramentas em que achar dados de pessoas (o diretório) antes de perguntar, como agenda, Slack, Atlassian Confluence, Atlassian Jira, GitHub, Notion, Instagram, Google Contatos ou WhatsApp.
 "Fontes para resolver identidade": ""
 # `Cadastro na loja` é `sim`, que também cria ou atualiza a pessoa como cliente na loja do projeto, física ou virtual, mesmo sem compra, ou `não`.
 "Cadastro na loja": "não"
 # `Campo do cliente na loja` é o nome da propriedade da lista de pessoas que guarda o link do cliente na loja. Vazio, o link fica nas notas.
 "Campo do cliente na loja": ""
+# `Campos da pessoa em arquivo` lista os campos que o arquivo local guarda de cada pessoa. O projeto acrescenta os que o negócio dele usa.
+"Campos da pessoa em arquivo": ["nome completo e como a pessoa é chamada", "variações de grafia e transcrições erradas do nome", "papel e time", "e-mail, ID no Slack, login no GitHub e ID da conta no Jira", "pronomes e a fonte deles", "canais e grupos em que ela aparece"]
 ```
 ## Instruções
 
@@ -50,15 +56,10 @@ Nas observações vai só o contexto estável. O histórico vai em comentário d
 
 Releia a página criada antes de dizer que gravou e nunca clique em renomear, editar ou excluir propriedade.
 
-Com `Tipo de armazenamento das pessoas` em `arquivos locais`, `Endereço das pessoas` é a pasta, com um arquivo por pessoa, nomeado pelo e-mail exato dela, no `Nome do arquivo da pessoa`, e um arquivo de índice com uma linha por pessoa: nome completo, como é chamada, e-mail, papel, time e o arquivo.
-Os campos incluem, sem se restringir a eles:
+Com `Tipo de armazenamento das pessoas` em `arquivos locais`, `Endereço das pessoas` é a pasta, com um arquivo por pessoa, nomeado pelo `Identificador do arquivo da pessoa` exato dela, no `Nome do arquivo da pessoa`, e um arquivo de índice com uma linha por pessoa: nome completo, como é chamada, e-mail, papel, time e o arquivo.
+Os campos são os de `Campos da pessoa em arquivo`, e o projeto acrescenta os que o negócio dele usa.
 
-- o nome completo e como a pessoa é chamada
-- as variações de grafia e as transcrições erradas do nome
-- o papel e o time
-- o e-mail, o ID no Slack, o login no GitHub e o ID da conta no Jira
-- os pronomes e a fonte deles
-- os canais e grupos em que ela aparece
+Os `Identificadores secundários da pessoa` também acham o arquivo, pelo índice, e todos apontam para o mesmo: a pessoa nunca ganha um segundo arquivo. Sem o identificador principal, o arquivo nasce com o primeiro secundário que ela tem, e o principal entra no mesmo arquivo quando aparecer.
 
 Os pronomes só se gravam quando a própria pessoa os declarou ou quem usa a habilidade os informou, e a fonte diz qual dos dois foi: sem isso, o campo fica vazio e os textos citam a pessoa sem pronome.
 O login e o ID do Jira servem para citar a pessoa com menção real fora do Slack, como `mencionar-pessoa` manda.
@@ -104,7 +105,7 @@ Com `Cadastro na loja` em `sim`, o cliente da pessoa na loja segue `definir-clie
 
 Todo perfil social que a pessoa informar, em link, print ou handle, como o LinkedIn, o Instagram ou o WhatsApp que ela passou para contato, é cadastrado por `definir-perfil-social` na mesma resposta e relacionado nos perfis sociais relacionados. O link do perfil nunca vai nas notas, e a skill não deixa o perfil de fora.
 
-Nome parcial, sem sobrenome: só cadastre com um identificador que desambigue, como telefone, e-mail, perfil social, cargo específico ou relação verificável com a empresa. Sem nenhum, não crie a pessoa: registre-a como contato citado em comentário datado e diga o que falta. Com o identificador, o título provisório é "Nome (Empresa)", com `Não confundir com` se houver homônimo, e as observações dizem que o cadastro é parcial, sem inventar sobrenome nem e-mail. Com a empresa e a negociação já ligadas, o título volta a ser o nome limpo.
+O cadastro de uma pessoa com nome parcial, sem sobrenome, segue `identificar-duplicata`.
 
 Em contexto de negócio, parceria, fornecimento ou curadoria, veja se a pessoa já tem perfil de LinkedIn nos perfis sociais. Sem perfil, peça o link quando ajudar a rastrear, sem travar o cadastro.
 
@@ -130,10 +131,7 @@ O que quem usa a habilidade diz sobre o papel de alguém numa empresa, como quem
 Um apelido ou uma grafia ambígua que a pessoa decide inferir, como "vamos inferir que Bia é a Beatriz", entra no registro de quem foi inferida, na lista das transcrições erradas do nome, com o estado `inferido`, a data, quem inferiu, a frase da transcrição e o que descartou as outras hipóteses.
 A entrada não vira confirmada por ter sido pedida: o estado `confirmado` só vale quando alguém que sabe confirma. Uma entrada sem estado conta como confirmada. Ao atualizar um registro, mude o campo pontualmente: nunca regrave o registro inteiro descartando campos já confirmados ou o conteúdo de `extensions`. Todo texto que nomeia a pessoa usa como ela é chamada, e não o primeiro nome do nome completo quando os dois divergem.
 
-Nome civil e nome social são campos separados, e o nome civil só se grava quando a pessoa ou uma fonte o informa.
-Formulário que exige o documento oficial, como contrato, nota e documento fiscal, leva o nome civil. Cadastro que aceita nome social, como o de uma hospedagem, leva o nome social.
-Nenhuma mensagem, e-mail ou saudação trata a pessoa pelo nome civil: ela é chamada pelo nome social.
-Leia os dois no registro, nunca os escreva na habilidade, e sem o nome civil pare e pergunte antes de preencher o formulário.
+O nome civil, o nome social e qual deles vai em cada uso seguem `definir-grafia`.
 
 A janela de contato, os dias e os horários em que a pessoa não deve ser contatada, segue `definir-janela-de-contato`: grave nela quando quem usa a habilidade a informar, e confira nela antes de contatar a pessoa.
 

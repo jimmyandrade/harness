@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.3.1"
   related:
     - lancar-venda
     - definir-lancamento-financeiro
@@ -45,7 +45,7 @@ flowchart LR
 
 ### Passo 2
 
-Abra `Fonte do valor recebido` na parte de vendas e leia o detalhe de cada venda do período, uma por uma, mesmo quando o resumo mostra o total. O detalhe traz o valor bruto cobrado, a taxa, o valor líquido, a data e a hora da liberação do dinheiro e o ID da transação. Leve tudo isso para a venda, por `lancar-venda`.
+Abra `Fonte do valor recebido` na parte de vendas e leia o detalhe de cada venda do período, uma por uma, mesmo quando o resumo mostra o total. O detalhe traz o valor bruto cobrado, a taxa, o valor líquido, a data e a hora da liberação do dinheiro e o ID da transação. Leve para a venda, por `lancar-venda`, o bruto no valor real da venda, o líquido liberado no valor recebido, a liberação e o ID. A taxa de transação e o valor líquido final da venda são calculados pela diferença: confira a taxa calculada com a do detalhe e não grave nenhuma das duas.
 
 O valor recebido pela empresa é o líquido liberado, e não o bruto cobrado. Sem o detalhe, não grave o bruto no valor recebido: diga qual venda ficou sem o líquido e pergunte. A pessoa não precisa abrir o aplicativo do meio de pagamento para descobrir a liberação.
 
@@ -87,7 +87,7 @@ Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 Se você gravar o valor bruto cobrado no valor recebido, a venda esconde a taxa e ninguém sabe o líquido.
 
 1. Abra o detalhe de cada venda em `Fonte do valor recebido`.
-2. Grave o líquido liberado, a hora da liberação e o ID da transação, por `lancar-venda`.
+2. Grave o líquido liberado no valor recebido, a hora da liberação e o ID da transação, por `lancar-venda`. O valor real da venda continua com o bruto.
 3. Sem o detalhe, diga qual venda ficou sem o líquido e pergunte.
 
 ### Só o resumo lido
@@ -105,6 +105,14 @@ Se você levar só o bruto, a taxa e o líquido, a venda perde o cliente, a refe
 2. Anexe o comprovante completo, ou pergunte quando a fonte só o envia por e-mail ou SMS.
 3. Depois de anexar o comprovante do e-mail, rotule a conversa e tire-a da caixa de entrada.
 4. Grave na nota da transação os IDs da venda, do cliente, das unidades, das variantes, dos produtos, da família e do ponto de contato.
+
+### Líquido no lugar do bruto
+
+Se você gravar o líquido no valor real da venda, ou preencher a taxa e o valor líquido final, o desconto comercial e a taxa calculada saem errados.
+
+1. Valor real da venda: o bruto que a pessoa cliente pagou.
+2. Valor recebido: o líquido liberado.
+3. Taxa de transação e valor líquido final: deixe as fórmulas calcularem.
 
 ### Liberação na venda errada
 
@@ -144,7 +152,8 @@ Perguntei se era venda ou saque com cartão de crédito. Uma parente tinha passa
 
 ## Pegadinhas
 
-- O valor cobrado na maquininha parece o valor recebido. O recebido é o líquido liberado, depois da taxa.
+- O valor cobrado na maquininha parece o valor recebido. O cobrado é o valor real da venda. O recebido é o líquido liberado, depois da taxa.
+- O valor líquido final parece o mesmo que o valor recebido. O líquido final é calculado a partir do recebido e não se grava.
 - O resumo do painel parece bastar. A taxa, o líquido e a hora da liberação aparecem no detalhe de cada venda.
 - Duas vendas do mesmo bruto parecem ter o mesmo líquido. A taxa muda com o meio, como débito, crédito ou Pix, e o líquido muda junto.
 - A referência que aparece com reticências parece o valor inteiro. O valor inteiro vem pelo botão de copiar ou pela requisição da página.

@@ -33,6 +33,7 @@ flowchart LR
     cadastrar_foto_de_moda["cadastrar-foto-de-moda"]
     classificar_estado_do_termo["classificar-estado-do-termo"]
     classificar_melhoria_tecnica["classificar-melhoria-tecnica"]
+    completar_despesa_de_compra["completar-despesa-de-compra"]
     comunicar_novidade_do_produto["comunicar-novidade-do-produto"]
     conciliar_recebimento["conciliar-recebimento"]
     configurar_harness_de_negocio["configurar-harness-de-negocio"]
@@ -57,6 +58,7 @@ flowchart LR
     definir_artista["definir-artista"]
     definir_ativo_imobilizado["definir-ativo-imobilizado"]
     definir_campanha_de_conteudo["definir-campanha-de-conteudo"]
+    definir_cartao["definir-cartao"]
     definir_cliente_da_loja["definir-cliente-da-loja"]
     definir_codigo_fiscal["definir-codigo-fiscal"]
     definir_composicao_textil["definir-composicao-textil"]
@@ -306,6 +308,10 @@ flowchart LR
   classificar_estado_do_termo --> gravar_termos_no_vocabulario
   classificar_estado_do_termo --> validar_plano_de_vocabulario
   classificar_melhoria_tecnica --> priorizar_itens
+  completar_despesa_de_compra --> anexar_arquivo_no_notion
+  completar_despesa_de_compra --> definir_cartao
+  completar_despesa_de_compra --> definir_empresa
+  completar_despesa_de_compra --> lancar_despesa_da_empresa
   comunicar_novidade_do_produto --> rascunhar_mensagem
   comunicar_novidade_do_produto --> redigir_com_tom_de_voz
   conciliar_recebimento --> definir_lancamento_financeiro
@@ -462,6 +468,12 @@ flowchart LR
   definir_ativo_imobilizado --> registrar_ciclo_do_ativo
   definir_campanha_de_conteudo --> delegar_aviso_de_plataforma
   definir_campanha_de_conteudo --> planejar_calendario_de_conteudo
+  definir_cartao --> completar_despesa_de_compra
+  definir_cartao --> definir_conta_bancaria
+  definir_cartao --> definir_empresa
+  definir_cartao --> definir_pessoa
+  definir_cartao --> identificar_duplicata
+  definir_cartao --> lancar_despesa_da_empresa
   definir_cliente_da_loja --> definir_perfil_social
   definir_cliente_da_loja --> definir_pessoa
   definir_cliente_da_loja --> definir_tarefa
@@ -549,9 +561,12 @@ flowchart LR
   definir_jornada_de_producao --> organizar_ponto_de_contato
   definir_jornada_de_producao --> procurar_agenda
   definir_lancamento_financeiro --> definir_ativo_imobilizado
+  definir_lancamento_financeiro --> definir_obrigacao_financeira
   definir_lancamento_financeiro --> definir_planejamento_financeiro
   definir_lancamento_financeiro --> gerenciar_estoque
   definir_lancamento_financeiro --> lancar_despesa_da_empresa
+  definir_lancamento_financeiro --> lancar_despesa_pessoal
+  definir_lancamento_financeiro --> lancar_venda
   definir_lancamento_financeiro --> revisar_financas
   definir_local_fisico --> definir_empresa
   definir_local_fisico --> definir_grafia
@@ -805,6 +820,7 @@ flowchart LR
   inscrever_na_oportunidade --> definir_inscricao
   inscrever_na_oportunidade --> definir_pessoa
   inscrever_na_oportunidade --> definir_reserva
+  inscrever_na_oportunidade --> definir_roteiro_de_video
   inscrever_na_oportunidade --> definir_tarefa
   inscrever_na_oportunidade --> procurar_inscricao
   inscrever_na_oportunidade --> procurar_oportunidade
@@ -819,7 +835,9 @@ flowchart LR
   investigar_problema --> procurar_tarefa
   investigar_problema --> redigir_com_tom_de_voz
   lancar_despesa_da_empresa --> anexar_arquivo_no_notion
+  lancar_despesa_da_empresa --> completar_despesa_de_compra
   lancar_despesa_da_empresa --> definir_ativo_imobilizado
+  lancar_despesa_da_empresa --> definir_cartao
   lancar_despesa_da_empresa --> definir_empresa
   lancar_despesa_da_empresa --> definir_grafia
   lancar_despesa_da_empresa --> definir_lancamento_financeiro
