@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.26.1"
+  version: "0.27.0"
   related:
     - procurar-oportunidade
     - procurar-inscricao
@@ -42,7 +42,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ### Passo 1
 
-A lista de oportunidades e o nome de cada propriedade vêm do mapeamento de dados do projeto, no workspace conectado. Se a lista não estiver nessa conexão, pare. Não use a lista de outro workspace. Este texto usa os conceitos: o título da edição, a data da edição, o grupo da edição, as variações de nome, os perfis da edição, o ingresso do visitante, a taxa do expositor, o link de inscrição, o e-mail da organização, os links não oficiais, a empresa ou local, a localidade, a etiqueta de e-mail da edição, os anexos da edição, as notas de curadoria e a decisão humana.
+A lista de oportunidades e o nome de cada propriedade vêm do mapeamento de dados do projeto, no workspace conectado. Se a lista não estiver nessa conexão, pare. Não use a lista de outro workspace. Este texto usa os conceitos: o título da edição, a sugestão de título, a data da edição, o grupo da edição, as variações de nome, os perfis da edição, o ingresso do visitante, a taxa do expositor, o link de inscrição, o e-mail da organização, os links não oficiais, a empresa ou local, a localidade, a etiqueta de e-mail da edição, os anexos da edição, as notas de curadoria e a decisão humana.
 
 Saber se já existe fica com `procurar-oportunidade`. Se a edição existe e o pedido é cadastrar, mostre essa página, anexe o cartaz que ainda não está nos anexos da edição, e pare. Não crie outra. Revisar, limpar, enriquecer, consolidar, reorganizar ou atualizar uma edição que já existe, o conteúdo, o corpo ou as anotações, segue `revisar-oportunidade`. O grupo fica com `definir-grupo-de-oportunidades`.
 
@@ -53,6 +53,8 @@ Confira o mapeamento antes de gravar. O título da edição e a data da edição
 ### Passo 3
 
 O título da edição começa pelo nome da edição, depois a data no formato da data com dia da semana, a cidade e, por fim, o grupo, quando há grupo. Não comece pelo grupo. Ano, número de edição e data entram nesse título quando separam uma data da outra. Dois dias entram os dois. A data da edição recebe o intervalo, com as horas. A data só no título não basta. Data anterior à `Data mínima da edição` não entra. Data já passada, depois dela, entra: a edição fica no radar do grupo, e a presença segue `definir-inscricao`.
+
+Quando o mapeamento tem a sugestão de título, uma fórmula que monta o título da edição, ela vale no lugar da ordem acima: grave a data, o grupo e a localidade, leia o valor da sugestão de título e copie-o para o título da edição, na mesma execução. O título da edição nunca fica só com o nome do grupo.
 
 Antes de cadastrar ou atualizar, confira se o ano da edição está coberto por algum ciclo da lista de ciclos do projeto. Ano posterior ao último ciclo: busque o ciclo por nome, ano e variações e, se não existir, crie-o sem duplicar antes de seguir. Ano anterior ao ciclo mais antigo: ignore a edição e diga o motivo. Ano incerto, fontes em conflito ou data parcial: pergunte, nunca chute o ano. Nunca promova um evento passado a futuro: o ano é o da fonte, copiado exatamente, com a evidência registrada.
 
@@ -106,7 +108,7 @@ Ao cadastrar a edição, grave na mesma gravação o nome da etiqueta de e-mail 
 
 ### Passo 7
 
-Revisar o conteúdo, o corpo ou as anotações de uma edição que já existe segue `revisar-oportunidade`. Uma edição nova nasce sem bloco de anotações, sem callout e sem comentário: não os escreva aqui.
+Revisar o conteúdo, o corpo ou as anotações de uma edição que já existe segue `revisar-oportunidade`. Uma edição nova nasce sem bloco de anotações, sem callout e sem comentário: não os escreva aqui. O corpo também não recebe aviso de que a página foi criada por automação nem lista do que falta verificar: a verificação feita e a pendência vão nas notas de curadoria.
 
 ### Passo 8
 
@@ -169,7 +171,7 @@ Se você escrever a data só no título, a data da edição fica vazia.
 Se você colar o texto da imagem no corpo da página, a operação fica fora das propriedades.
 
 1. O título, a data e o grupo vão nas propriedades.
-2. O corpo não recebe o cartaz.
+2. O corpo não recebe o cartaz, aviso de automação nem lista do que verificar.
 3. Sem URL, o link fica vazio.
 
 ### Cartaz fora dos anexos
@@ -253,6 +255,7 @@ gravei a edição com o resto. No fim, listei o comentário sem propriedade e pr
 - O corpo da página parece o lugar do texto do cartaz, ou do valor sem propriedade. As propriedades recebem o fato novo. O valor sem propriedade vai para a lista do fim. O bloco de anotações que já está lá fica.
 - Não gravar o cartaz no corpo parece dispensar o arquivo. O texto não vai ao corpo. O arquivo vai nos anexos da edição.
 - Começar o título pelo grupo deixa as linhas iguais. O nome da edição vem primeiro.
+- O nome do grupo parece bastar como título da edição. Com a sugestão de título no mapeamento, o título é o valor dela, com a data e a cidade.
 - A data numérica parece bastar. O título e a resposta levam o dia da semana, calculado com a data, o horário e o fuso. A data da edição continua um intervalo válido.
 - Data anterior à `Data mínima da edição`, ou à fundação do negócio, parece válida. A propriedade não aceita.
 - "Link na bio" parece um endereço. Sem URL, o campo fica vazio.

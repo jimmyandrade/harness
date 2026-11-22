@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch
 compatibility: Precisa de internet. A busca semântica na lista de oportunidades usa notion-ai-search no servidor notion.
 metadata:
   author: jimmyandrade
-  version: "0.10.1"
+  version: "0.11.0"
   related:
     - criar-oportunidade
     - definir-grupo-de-oportunidades
@@ -55,6 +55,8 @@ Leia cada página encontrada. A mesma edição tem o nome, ou uma variação, e 
 ### Passo 4
 
 Uma edição com o mesmo nome e a mesma data: ela existe. Mostre o título, a data, o status atual e o link. O status vem da propriedade de status da lista do projeto, com o valor que a página tem. Sem status na página, diga que está vazio. Não invente. Se entrou por uma variação, diga qual. Na mesma resposta, diga o pedaço buscado e que usou as duas buscas. Se o texto é um pedido realizado ou confirmado, siga `definir-inscricao` nessa mesma resposta. Não pare na edição.
+
+A resposta descreve a edição só com o que a página e as fontes dizem. A data é a da data da edição, nunca a da criação da página. Data que coincide com uma data comemorativa ou com outro evento não é relação: só cite o outro evento quando uma fonte ligar os dois, com o link dela.
 
 Várias que podem ser a edição: mostre título, data, status atual e link de cada uma, inclusive as possíveis duplicatas. Não escolha. Não responda sim.
 
