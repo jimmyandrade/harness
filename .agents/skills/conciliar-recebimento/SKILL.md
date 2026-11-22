@@ -11,6 +11,7 @@ metadata:
     - definir-lancamento-financeiro
     - lancar-despesa-da-empresa
     - procurar-banco-de-dados
+    - rotular-item
     - evoluir-habilidade
 ---
 
