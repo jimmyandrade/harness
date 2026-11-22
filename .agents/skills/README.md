@@ -981,6 +981,7 @@ flowchart LR
   procurar_data_significativa --> definir_data_significativa
   procurar_email --> analisar_regulamento_da_oportunidade
   procurar_email --> definir_grafia
+  procurar_email --> definir_inscricao
   procurar_email --> procurar_inscricao
   procurar_email --> rotular_item
   procurar_inscricao --> acompanhar_edital

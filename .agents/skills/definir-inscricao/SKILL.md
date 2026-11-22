@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet. A busca na lista de inscrições usa notion-ai-search no servidor notion.
 metadata:
   author: jimmyandrade
-  version: "0.18.0"
+  version: "0.19.0"
   aliases:
     - atualizar-inscricao
   related:
@@ -35,6 +35,8 @@ metadata:
 ### Passo 1
 
 A pessoa aponta uma inscrição, ou afirma que ela foi feita, confirmada, aprovada ou aceita. Uma foto de pedido realizado, mesmo sozinha, é essa afirmação. Essa afirmação é o pedido de gravar. Comemore depois de gravar. Não pare na comemoração. Não responda se a tarefa existe. Não busque e-mail nesta habilidade, salvo para o prazo do Passo 5 e para o pedido da tiqueteira do Passo 7, por `procurar-email`. Se a pessoa disser que a foto foi engano, apague a linha criada por ela.
+
+O e-mail que `procurar-email` leu e que traz o resultado de uma seleção também é esse pedido: grave o status no mesmo turno, sem perguntar.
 
 A lista de inscrições, o nome de cada propriedade e as opções de status vêm do mapeamento de dados do projeto, no workspace conectado. Se a lista não estiver nessa conexão, pare. Não use a lista de outro workspace. Este texto usa os conceitos: a edição, o status da inscrição, quem fez a inscrição, a pessoa ou empresa inscrita, os comprovantes, a data da confirmação, a data do envio e as observações. Os status são o de pré-cadastro, o de inscrição confirmada, o de em andamento, o de em contestação, o de perdida e o de não selecionada.
 
