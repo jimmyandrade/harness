@@ -457,6 +457,7 @@ flowchart LR
   definir_campanha_de_conteudo --> delegar_aviso_de_plataforma
   definir_campanha_de_conteudo --> planejar_calendario_de_conteudo
   definir_cliente_da_loja --> definir_pessoa
+  definir_cliente_da_loja --> definir_tarefa
   definir_cliente_da_loja --> identificar_duplicata
   definir_codigo_fiscal --> identificar_duplicata
   definir_composicao_textil --> acompanhar_producao_de_produto_fisico

@@ -4,7 +4,7 @@ description: Use essa habilidade sempre que for achar, criar ou atualizar o clie
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   related:
     - definir-pessoa
     - identificar-duplicata
