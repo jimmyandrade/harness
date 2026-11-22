@@ -836,6 +836,7 @@ flowchart LR
   investigar_problema --> redigir_com_tom_de_voz
   lancar_despesa_da_empresa --> anexar_arquivo_no_notion
   lancar_despesa_da_empresa --> completar_despesa_de_compra
+  lancar_despesa_da_empresa --> conciliar_recebimento
   lancar_despesa_da_empresa --> definir_ativo_imobilizado
   lancar_despesa_da_empresa --> definir_cartao
   lancar_despesa_da_empresa --> definir_empresa
