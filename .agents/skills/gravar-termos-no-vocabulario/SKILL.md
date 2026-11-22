@@ -55,7 +55,7 @@ Termo que não existe e vai entrar como proibido, sem termos relacionados: pare 
 
 Quando as duas linhas existirem, `related` aponta de uma para a outra. `related` vale nos três estados e não cria termo ausente. A escrita recusa o ponteiro solto.
 
-O vocabulário fica só no glossário do harness do negócio. Nunca grave num banco do Notion nem em outra fonte do espaço de trabalho, nem num banco antigo de vocabulário que ainda exista. Quando o servidor `vocabulary` falha ou não escreve, rode a CLI numa cópia de trabalho do harness do negócio e mande a mudança por `criar-commit` e `criar-pull-request`. Sem esse repositório na sessão, peça uma sessão que o tenha e não grave em outro lugar.
+O vocabulário fica só no glossário do harness do negócio, nunca no Notion. Sem escrita no servidor `vocabulary`, use a CLI numa cópia desse harness e abra o pull request.
 
 ### Passo 4
 
@@ -129,14 +129,6 @@ Se você cadastrar o plural, o gênero ou outra grafia junto com a palavra nova,
 2. Diga a quantidade e a lista.
 3. Sugira as outras formas e pergunte se a gente usa, evita ou não usa. Evite só perguntar qual é o "estado" da palavra, pois nem sempre o usuário entende esse jargão.
 
-### Termo gravado fora do harness
-
-Se você gravar o termo num banco do Notion porque o servidor `vocabulary` falhou, o vocabulário do harness não muda e o banco guarda uma regra que ninguém lê.
-
-1. Não grave em banco do Notion nem em outra fonte do espaço de trabalho.
-2. Rode a CLI numa cópia de trabalho do harness do negócio e abra o pull request.
-3. Sem o repositório na sessão, peça uma sessão que o tenha.
-
 ### Proibido sem termo relacionado
 
 Se você gravar o proibido novo sem perguntar pelos termos relacionados, a pessoa perde a chance de ligar o que usar no lugar.
@@ -188,7 +180,6 @@ O plano ficou em update. A reticências que já estava foi reescrita, com o quan
 - A grafia já está com a tag de outro contexto e a regra nova é geral ou de outro contexto: grave outra linha, sem tags ou com as tags dela. A linha que já está fica como está.
 - Lote que já chegou num arquivo, vindo de outra ferramenta: `terms --file` nesse arquivo, com `upsert`. O arquivo já existia. Não crie um JSON para isso, não mostre o arquivo como entrega e não cite o caminho. Diga o que entrou, o que foi atualizado e o que ficou em `incomplete`.
 - Sem terminal e sem o servidor `vocabulary`, como num agente do Notion: pare. O cadastro roda numa ferramenta de código com o projeto aberto. Não confirme nada.
-- O servidor `vocabulary` falha ou não escreve e há terminal: grave pela CLI numa cópia de trabalho do harness do negócio e abra o pull request. Não grave num banco do Notion.
 - `Glossário no repositório atual` vazio: pergunte uma vez e pare. Não crie o arquivo no repositório atual nem na pasta do glossário.
 - `Glossário no repositório atual` em `não`: o arquivo do idioma nasce só na `Pasta do glossário`, no computador, e não sobe no Git. Vazia, pergunte o caminho uma vez e pare.
 - `Glossário no repositório atual` em `sim`: o arquivo do idioma nasce no glossário do repositório atual e sobe no Git.
@@ -199,7 +190,6 @@ O plano ficou em update. A reticências que já estava foi reescrita, com o quan
 
 ## Pegadinhas
 
-- Um banco de vocabulário no Notion parece servir quando o servidor falha. O vocabulário fica só no glossário do harness do negócio, e a mudança entra por pull request.
 - `$schema`, a primeira chave do arquivo, parece um termo. Ela diz o formato do arquivo. A recusa de um formato mais novo pede para atualizar o plugin ou a dependência antes de gravar. Não apague a chave nem edite o arquivo à mão.
 - Cadastrar parece reescrever o que já está. Com `insert`, a linha que já existe fica.
 - `Already in the glossary` parece dizer que a regra já está. Ele só vale para a mesma grafia com o mesmo conjunto de tags.

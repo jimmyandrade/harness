@@ -11,4 +11,3 @@ Funcionalidade: Gravar o termo só no glossário do harness do negócio
       Então ela não grava no banco do Notion
       E grava pela linha de comando numa cópia de trabalho do harness do negócio
       E abre o pull request com a mudança
-      Mas, sem o repositório na sessão, pede uma sessão que o tenha
