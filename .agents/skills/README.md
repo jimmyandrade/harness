@@ -306,6 +306,7 @@ flowchart LR
   conciliar_recebimento --> lancar_despesa_da_empresa
   conciliar_recebimento --> lancar_venda
   conciliar_recebimento --> procurar_banco_de_dados
+  conciliar_recebimento --> rotular_item
   configurar_harness_de_negocio --> criar_pull_request
   configurar_harness_de_negocio --> definir_issue_do_github
   configurar_harness_de_negocio --> levantar_ambiente_do_repositorio
