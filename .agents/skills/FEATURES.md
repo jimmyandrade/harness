@@ -919,6 +919,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Description**: Settle the spelling of a person or a company and keep a newly seen wrong form
 - **Properties**:
   - Lives at `.agents/skills/definir-grafia/SKILL.md`
+  - Says which name goes in each use: the civil name for a form that asks for the official document, the social name for a registration that accepts it and for every message, and stops to ask when the civil name is empty
   - Reads the list of people and the company list, with their property names, from the data mapping of the project, in the connected workspace
   - Writes the full name or the company name in the reply, and searches with every variation plus the correct first name and surname as plain text, without the from: operator
   - Treats a nickname and the correct first name of one record as the same person, and does not report a first-name search as a miss for the nickname
@@ -1210,6 +1211,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Description**: Register or update a person
 - **Properties**:
   - Lives at `.agents/skills/definir-pessoa/SKILL.md`
+  - Names the file of a local person record by a parameter, the email by default, and lets secondary identifiers point to the same file so a person never gets a second one
   - Creates the page from the template of the list of people and registers the WhatsApp the person gave as a social profile
   - Asks the person who uses the skill for the city when no source gives the locality, without blocking the registration
   - Reads the list of people and its property names from the data mapping of the project
@@ -1715,6 +1717,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Description**: Check for an equivalent record before creating one, and point at the existing record
 - **Properties**:
   - Lives at `.agents/skills/identificar-duplicata/SKILL.md`
+  - Registers a person with a partial name, without a surname, only with an identifier that tells them apart, and otherwise records them as a cited contact in a dated comment
   - When the data mapping of the project describes the list, reads the property names from it
   - Runs when the person searches or tries to register a new record, including when another skill asks for the check
   - Searches the name as written, plus alternative names and different spellings: acronyms, nicknames, former names, and the name with and without an edition or year

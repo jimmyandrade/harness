@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.3"
+  version: "0.4.4"
   related:
     - definir-empresa
     - definir-negociacao
@@ -63,7 +63,7 @@ Antes de redigir, pergunte como o contato nasceu quando nenhuma fonte diz, como 
 
 Com o texto e o destino aprovados, envie você mesmo, sem pedir à pessoa que envie. Tente os canais na `Ordem dos canais de execução` e passe ao seguinte só quando o anterior não existir ou falhar. Se nenhum enviar, entregue o texto pronto e diga o que falhou em cada canal.
 
-Antes do envio, quando a pessoa já está cadastrada, confira a janela de contato dela, como `definir-janela-de-contato` manda. Fora da janela, a mensagem aprovada não sai e espera o próximo horário permitido. Quem não tem cadastro não tem janela.
+Antes do envio, quando a pessoa já está cadastrada, confira a janela de contato dela, como `definir-janela-de-contato` manda. Fora da janela, a mensagem aprovada não sai: espera o próximo horário permitido, ou o envio é agendado. Quem não tem cadastro não tem janela.
  Sem a aprovação, não envie nem cadastre a empresa ou a pessoa. Depois do envio, registre a troca como `definir-negociacao` manda.
 
 ### Passo 5

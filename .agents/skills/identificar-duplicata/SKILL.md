@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.15.1"
+  version: "0.16.0"
   related:
     - definir-data-significativa
     - definir-grafia
@@ -34,6 +34,8 @@ O termo principal é o título da lista. Busque o nome como a pessoa escreveu. B
 Pessoa de outra empresa com o primeiro nome, o apelido ou a forma curta igual aos de alguém do próprio negócio é outra pessoa, até uma fonte dizer o contrário. Não herde o cadastro, o telefone, o perfil nem a empresa de quem é de dentro. Ligue as duas em Não confundir com na hora, com a empresa de cada uma no contexto da desambiguação, e use o registro da pessoa certa ao escrever ou enviar.
 
 Ao buscar por telefone de celular do Brasil, busque as duas formas, com e sem o 9 depois do DDD: o contato antigo do WhatsApp guarda o número sem ele. Dois registros da mesma pessoa, um com o número de cada forma, são duplicata.
+
+Nome parcial, sem sobrenome: só cadastre com um identificador que desambigue, como telefone, e-mail, perfil social, cargo específico ou relação verificável com a empresa. Sem nenhum, não crie a pessoa: registre-a como contato citado em comentário datado e diga o que falta. Com o identificador, o título provisório é "Nome (Empresa)", com `Não confundir com` se houver homônimo, e as observações dizem que o cadastro é parcial, sem inventar sobrenome nem e-mail. Com a empresa e a negociação já ligadas, o título volta a ser o nome limpo.
 
 Quando o mapeamento de dados traz `name_variants` para a lista, essa é a propriedade das variações que entra na busca pelo nome antigo.
 

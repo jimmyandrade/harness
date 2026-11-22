@@ -6,6 +6,12 @@
       "prompt": "Envie o e-mail aprovado à pessoa que não é contatada a partir das 19h, e são 19h40 no fuso dela.",
       "expected_output": "Ler a janela no registro, não enviar, dizer o motivo e o próximo horário permitido, e deixar o rascunho na caixa para esse horário.",
       "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Rascunhe o e-mail à pessoa cuja janela de contato fecha às 19h, quando já passa dessa hora, e a pessoa pergunta se dá para programar.",
+      "expected_output": "Oferecer deixar o rascunho ou agendar o envio para o próximo horário permitido, calculado por comando, sem oferecer enviar agora. O agendamento, por tarefa agendada da ferramenta quando o conector não agenda, só vale com o sim ao texto, ao destino e ao horário, com a ferramenta de envio liberada antes. A tarefa reconfere a janela na hora de enviar e, se mudou, não envia e avisa.",
+      "files": []
     }
   ]
 }
