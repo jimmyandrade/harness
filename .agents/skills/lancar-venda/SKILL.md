@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.18.0"
+  version: "0.18.1"
   aliases:
     - definir-venda
   related:
@@ -103,7 +103,7 @@ O preço nominal é o valor inferido da venda, calculado das peças. O desconto 
 
 O motivo diz o porquê de cada parte do desconto, como o ajuste ao preço dos vizinhos ou o desconto do Pix à vista, e quem concedeu, quando a pessoa disse. Um rótulo como "preço do evento" não basta. Quando o porquê muda com a coleção do produto, leia a coleção na página do produto antes de perguntar.
 
-O valor pago pelos produtos fica no valor real da venda, sem o frete. O valor recebido pela empresa é o líquido liberado e segue `conciliar-recebimento`. O meio efetivo é o meio de pagamento da venda real. O crédito da loja utilizado é só o crédito usado, sem somar o pagamento novo.
+O valor pago pelos produtos fica no valor real da venda, sem o frete: é o bruto que a pessoa cliente pagou, sem tirar a taxa. O valor recebido pela empresa é o líquido liberado e segue `conciliar-recebimento`. O meio efetivo é o meio de pagamento da venda real. O crédito da loja utilizado é só o crédito usado, sem somar o pagamento novo.
 
 Taxa de transação inferida, valor líquido final, valor real com frete, peças vendidas e tipos de peças são calculados. Não preencha. Taxa, repasse e erro de lançamento não entram como desconto. Sem repasse de espaço ou de evento, o repasse fica zero.
 
@@ -309,7 +309,7 @@ O comentário da página disse o que voltou, por que voltou, a fonte e quando. A
 - O pedido tardio na loja parece uma venda nova. Ele vincula a venda original. Data, pagamento, valor e contexto reais permanecem.
 - Vincular a unidade parece terminar a venda. A unidade continua em estoque até alguém marcar a situação dela como vendida.
 - Relacionar o produto parece preencher as peças vendidas. A peça sai da unidade, e a variante está nessa unidade. O saldo fica em `gerenciar-estoque`.
-- Valor pago, valor recebido e preço nominal parecem o mesmo número. Preço nominal é o valor inferido. Valor pago pelos produtos exclui frete e taxa. Valor recebido é o líquido liberado, lido por `conciliar-recebimento`.
+- Valor pago, valor recebido e preço nominal parecem o mesmo número. Preço nominal é o valor inferido. Valor pago pelos produtos é o bruto que a pessoa cliente pagou, sem o frete e sem tirar a taxa. Valor recebido é o líquido liberado, lido por `conciliar-recebimento`.
 - O WhatsApp usado para achar a cliente parece o canal da venda. Ele só identifica a pessoa. O ponto de contato vem da pessoa, perguntado antes de criar.
 - O endereço de envio parece local da retirada. Retirada é onde a pessoa retirou. Destino do envio, origem do estoque e local de processamento não são propriedades da venda.
 - O histórico da página parece a trilha. Migração, correção, reversão e decisão de conciliação ficam num comentário, com o que mudou, o porquê, a fonte e quando.
