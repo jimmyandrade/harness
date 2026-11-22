@@ -3,7 +3,7 @@ name: definir-prestacao-de-contas
 description: Faz a prestação de contas de um repasse recebido, cruzando o extrato da conta com os gastos lançados e declarando o que ficou fora do repasse. Usada quando quem repassou o dinheiro pede a prestação, quando o prazo dela chega ou quando se concilia um extrato, mesmo sem dizer prestação. NÃO serve para lançar o gasto, fechar o caixa de um ponto de contato nem redigir a mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.4"
   related:
     - definir-conta-bancaria
     - definir-grafia
@@ -14,6 +14,7 @@ metadata:
     - lancar-despesa-da-empresa
     - procurar-email
     - redigir-com-tom-de-voz
+    - usar-whatsapp-web
 ---
 
 # Definir prestação de contas
@@ -40,7 +41,9 @@ Leia o histórico da negociação com `definir-negociacao` e busque o e-mail com
 
 ### Passo 2
 
-Ache a conta que recebeu o repasse, pelo cadastro da conta com `definir-conta-bancaria`, e o extrato do período. O extrato costuma chegar por e-mail em PDF, CSV e OFX: leia o CSV ou o OFX, que têm uma linha por lançamento.
+Ache a conta que recebeu o repasse, pelo cadastro da conta com `definir-conta-bancaria`, e o extrato do período. O extrato costuma chegar por e-mail em PDF, CSV e OFX.
+
+O CSV e o OFX têm uma linha por lançamento, e o PDF mostra o saldo por transação. Abra os três antes de dizer que o extrato não traz a hora de um lançamento. O `Solicitado em` do PDF é a hora do pedido do extrato, não a de um lançamento.
 
 Confirme com a pessoa de qual conta é o extrato quando o e-mail vier de outro endereço, e diga o período que ele cobre. Não presuma a titularidade.
 
@@ -74,6 +77,16 @@ Não afirme que um gasto não passou pela conta sem ter cruzado o extrato inteir
 
 Monte a prestação com o valor recebido, o total gasto com comprovante, a diferença, cada linha e seu destino, e a declaração do que ficou fora do repasse. Diga na resposta o que já está conciliado e o que está pendente, antes do texto.
 
+Cada linha da prestação leva data e hora, não só a data, e a tabela vai do mais antigo ao mais recente, por data e hora. O repasse recebido e a emissão do documento também levam a hora.
+
+O extrato costuma trazer só a data, e a ordem das linhas do mesmo dia nem sempre é a do relógio. Tire a hora do comprovante de cada pagamento, como a via da maquininha, a NFC-e ou o comprovante do Pix, e ordene por ela. Não deduza a hora pela ordem das linhas do extrato.
+
+Para a hora de uma linha sem comprovante, como o Pix recebido do repasse, busque antes uma hora aproximada nos canais com quem repassou: o e-mail e as conversas de WhatsApp dessa pessoa e da equipe dela, lidas pela sessão dona do WhatsApp Web, só em leitura e só essas conversas, como `usar-whatsapp-web` manda.
+
+A mensagem que pede o repasse e a resposta que diz que ele sai agora dão o limite de baixo. A mensagem que diz que o dinheiro caiu dá o limite de cima. Ponha no documento a hora do limite de baixo, marcada como aproximada, diga a base à pessoa e peça o comprovante do aplicativo do banco ou um extrato detalhado para confirmar. Sem nenhuma pista nos canais, peça a hora à pessoa.
+
+As colunas de data e hora saem em fonte monoespaçada, como as de valor: os dígitos alinham linha a linha, e quem confere a tabela escaneia melhor. Use o recurso do design system do projeto para isso. Se ele não tiver, diga à pessoa e proponha a mudança ao design system.
+
 O texto para quem repassou passa por `redigir-com-tom-de-voz`. O envio segue `enviar-email` ou o canal em que a conversa aconteceu, só com a confirmação da pessoa, com o extrato e os comprovantes que o repasse pediu. Quem assina é quem as instruções do projeto definem.
 
 ### Passo 6
@@ -106,13 +119,24 @@ Se você prestar contas só do que está no extrato, quem repassou não sabe o q
 2. Diga a fonte de pagamento de cada um.
 3. Confirme o cruzamento do extrato inteiro antes de afirmar que não passaram pela conta.
 
+### Linha só com data ou fora da ordem do relógio
+
+Se você copiar a data e a ordem do extrato, a tabela perde a hora e fica numa ordem que o relógio dos comprovantes contradiz.
+
+1. Leia a hora no comprovante de cada pagamento e no aviso do repasse.
+2. Ordene a tabela do mais antigo ao mais recente, por data e hora.
+3. Antes de pedir a hora, abra o extrato nos três formatos e diga à pessoa o que cada um traz.
+4. Sem comprovante, busque a hora aproximada no e-mail e no WhatsApp de quem repassou, marque-a como aproximada e peça o comprovante do banco, em vez de deduzir pela ordem do extrato.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### precisamos fazer a prestação de contas do repasse do festival; o extrato já está no e-mail?
 
-Achei o extrato do mês no e-mail, em CSV, PDF e OFX, e li o CSV. Cruzei cada linha com os gastos lançados: os três postos e o Uber batem, a devolução em nome civil de quem opera é dela, e as linhas sem lançamento ficaram como pendência. Listei pedágios, entrega, hospedagem e refeições como pagos por fora do repasse. Não enviei nada.
+Achei o extrato do mês no e-mail, em CSV, PDF e OFX, e li o CSV. Cruzei cada linha com os gastos lançados: os três postos e o Uber batem, a devolução em nome civil de quem opera é dela, e as linhas sem lançamento ficaram como pendência. Listei pedágios, entrega, hospedagem e refeições como pagos por fora do repasse.
+
+Pus a hora de cada comprovante em cada linha e ordenei a tabela do mais antigo ao mais recente. A hora do repasse recebido não aparece em nenhum comprovante: li o e-mail e as conversas de WhatsApp de quem repassou, usei a hora da mensagem que dizia que o Pix saía agora, marquei como aproximada e pedi o comprovante do aplicativo do banco. Não enviei nada.
 
 ## Casos-limite
 
@@ -121,6 +145,7 @@ Achei o extrato do mês no e-mail, em CSV, PDF e OFX, e li o CSV. Cruzei cada li
 - O gasto do evento não está lançado: siga `lancar-despesa-da-empresa` e volte.
 - O pedido é o acerto de caixa de um ponto de contato: `fazer-fechamento`.
 - O repasse pede um formato próprio de documento: siga o que a negociação combinou e diga a diferença.
+- Um pagamento ou o repasse só aparece no extrato, sem comprovante com hora: busque a hora aproximada nos canais de quem repassou, marque-a como aproximada e peça o comprovante do banco. Sem nenhuma pista, peça a hora à pessoa e não feche a tabela sem ela.
 
 ## Pegadinhas
 
@@ -128,6 +153,9 @@ Achei o extrato do mês no e-mail, em CSV, PDF e OFX, e li o CSV. Cruzei cada li
 - O status de conciliação de um gasto mede o comprovante, não o cruzamento com o banco.
 - Um nome diferente no extrato parece outra empresa. Pode ser o titular da maquininha do mesmo posto.
 - O prazo da prestação costuma estar na negociação, não no extrato.
+- Data e hora parecem texto comum. Numa coluna de tabela, a fonte monoespaçada alinha os dígitos, como nos valores.
+- A mensagem "o dinheiro caiu" parece a hora do repasse. É só o limite de cima: o dinheiro pode ter caído horas antes.
+- A ordem das linhas do extrato parece a do relógio. Dentro do mesmo dia ela pode não ser, e o saldo corrido também pode contradizer a hora do comprovante.
 
 ## Scripts disponíveis
 
