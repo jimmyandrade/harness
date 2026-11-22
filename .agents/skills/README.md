@@ -983,6 +983,7 @@ flowchart LR
   procurar_email --> definir_grafia
   procurar_email --> definir_inscricao
   procurar_email --> procurar_inscricao
+  procurar_email --> redigir_com_tom_de_voz
   procurar_email --> rotular_item
   procurar_inscricao --> acompanhar_edital
   procurar_inscricao --> conversar_no_whatsapp

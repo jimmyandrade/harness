@@ -5,10 +5,11 @@ allowed-tools: notion:notion-ai-search
 compatibility: Precisa de internet. A busca no e-mail conectado usa notion-ai-search no servidor notion.
 metadata:
   author: jimmyandrade
-  version: "0.8.0"
+  version: "0.9.1"
   related:
     - procurar-inscricao
     - definir-inscricao
+    - redigir-com-tom-de-voz
     - definir-grafia
     - analisar-regulamento-da-oportunidade
     - rotular-item
@@ -45,6 +46,12 @@ Não copie o corpo inteiro, código, número do pedido nem link com token, a men
 Aplique rótulos sempre usando a habilidade `rotular-item` em cada conversa de e-mail que você leu, com quem age agora e o contexto entre `Etiquetas de contexto`. Sem uma ferramenta que rotule e-mail na sessão, diga quais conversas ficaram sem rótulo.
 
 Quando o e-mail que você leu traz o resultado de uma seleção, como aprovada, não selecionada ou lista de espera, grave o resultado no mesmo turno, seguindo `definir-inscricao`, na inscrição da edição de que o e-mail fala. Não pergunte se a pessoa quer gravar: o e-mail é a prova, e ela já espera a lista atualizada. Se a inscrição não existe na lista, diga isso e não crie uma só por esse e-mail. Se casam várias, nomeie e pergunte, como `definir-inscricao` manda. A resposta diz o que foi gravado, com o link da página.
+
+Quando o resultado é uma recusa ou uma não seleção, trate-o também como uma contestação interna, sem perguntar se a pessoa quer: grave o status de em contestação no lugar de só registrar a recusa, e rascunhe a resposta ao e-mail com `redigir-com-tom-de-voz`, pedindo um parecer técnico sobre o que pesou e um encaixe se alguém desistir. O texto não usa a palavra contestação nem soa como recurso. Ele só sai com o sim da pessoa ao texto e ao destino.
+
+O destino dessa resposta é o endereço de uma pessoa com quem já trocamos mensagem, achado nas conversas enviadas e sem recusa de entrega do servidor. O remetente de um disparo automático, como um subdomínio de envio, não é o destino: confira antes de enviar e diga qual endereço usou e por quê.
+
+Se a lista não tem o status do resultado, como o de não selecionada, grave um comentário datado na inscrição, diga a opção que falta e não adapte outro status.
 
 Rotule antes de relatar o que achou, mesmo quando a pessoa só pediu para conferir o e-mail.
 A resposta diz o estado e o contexto de cada conversa, junto do fato dela.
