@@ -498,11 +498,18 @@ export const classificationSchema = z.object({
 })
 export type Classification = z.infer<typeof classificationSchema>
 
+export const expressionClassificationSchema = classificationSchema.extend({
+  start: z.number().int(),
+  end: z.number().int(),
+})
+export type ExpressionClassification = z.infer<typeof expressionClassificationSchema>
+
 export const textClassificationSchema = z.object({
   from: z.literal("query"),
   language: z.string(),
   submitted: z.string(),
   words: z.array(classificationSchema),
+  expressions: z.array(expressionClassificationSchema),
 })
 export type TextClassification = z.infer<typeof textClassificationSchema>
 

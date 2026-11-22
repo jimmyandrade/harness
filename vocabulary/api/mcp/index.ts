@@ -2,7 +2,7 @@
  * MCP server for the vocabulary.
  *
  * lookup_term reads one term, and lookup_terms reads several in one call. exists_in_text maps each token to whether it
- * exists. classify_text gives the level of each word, emoji, and punctuation mark. write_terms inserts, updates, upserts, or fills terms for one language. delete_terms deletes rows.
+ * exists. classify_text gives the level of each word, emoji, and punctuation mark, and of each expression of the glossary that the text uses. write_terms inserts, updates, upserts, or fills terms for one language. delete_terms deletes rows.
  * get_version returns the version of the engine. migrate_glossary rewrites the rows that use a deprecated state
  * or category. init_glossary creates the empty glossary of a new language.
  *
@@ -77,7 +77,7 @@ export const tools = [
   },
   {
     name: "classify_text",
-    description: "Classify each word, emoji, and punctuation mark of a text. Returns language, submitted, and words, one per token and in order, each with its level (forbidden, strongly_discouraged, discouraged, allowed_with_care, allowed, stop_word, or not_registered), the stored term, and, for a level that is avoided, the recommended term: the row's alternative or, without one, its substitution. Words are matched one by one: a row of more than one word is not matched across words, so read an expression with lookup_terms. Use it to check a draft before publishing it. With tags, a row tagged only for another speaker, event, or channel reads as not registered, and a tag in forbidden_in or allowed_in changes the level of a word: the level is the one for that context and base_state keeps the level of the row. A word forbidden only by its context also returns the reason, the when, and the alternatives of the row, so pass the format or channel of the draft as a tag, such as review or chat. Without tags the level is the stored one.",
+    description: "Classify each word, emoji, and punctuation mark of a text, and each glossary row of more than one word that the text uses. Returns language, submitted, words, and expressions. words has one item per token and in order, each with its level (forbidden, strongly_discouraged, discouraged, allowed_with_care, allowed, stop_word, or not_registered), the stored term, and, for a level that is avoided, the recommended term: the row's alternative or, without one, its substitution. A row of more than one word is not matched in words: expressions lists each one the text uses, found whatever its casing and spacing, with the same fields as a word plus start and end, the index of its first token in words and the index after its last. Two expressions that overlap are both listed. Read words and expressions, since a forbidden expression only appears in expressions. Use it to check a draft before publishing it. With tags, a row tagged only for another speaker, event, or channel reads as not registered, and a tag in forbidden_in or allowed_in changes the level of a word: the level is the one for that context and base_state keeps the level of the row. A word or an expression forbidden only by its context also returns the reason, the when, and the alternatives of the row, so pass the format or channel of the draft as a tag, such as review or chat. Without tags the level is the stored one.",
     inputSchema: {
       type: "object",
       properties: {

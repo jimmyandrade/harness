@@ -718,6 +718,21 @@ test("classify-text prints the substitution of a row in the current format as re
   }
 })
 
+test("classify-text prints the expressions of the text", () => {
+  const root = mkdtempSync(join(tmpdir(), "glossary-"))
+  writeFileSync(join(root, "pt-BR.json"), '{ "em mãos": { "state": "forbidden", "alternative": "entrega" } }\n')
+  const lines: string[] = []
+  const write = console.log
+  console.log = (line: string) => lines.push(line)
+  try {
+    assert.equal(run(["--glossary", root, "classify-text", "--language", "pt-BR", "--text", "Entrego em mãos"]), 0)
+    const { expressions } = JSON.parse(lines.at(-1) ?? "{}") as { expressions: { submitted: string; start: number; end: number; to: string; recommended: string }[] }
+    assert.deepEqual(expressions, [{ from: "query", language: "pt-BR", submitted: "em mãos", start: 1, end: 3, to: "forbidden", term: "em mãos", recommended: "entrega" }])
+  } finally {
+    console.log = write
+  }
+})
+
 test("version prints the version when the path to the CLI goes through a symbolic link", () => {
   const { version } = JSON.parse(readFileSync(new URL("../../package.json", import.meta.url), "utf8")) as { version: string }
   const link = join(mkdtempSync(join(tmpdir(), "link-")), "harness")
