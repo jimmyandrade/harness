@@ -30,7 +30,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Nome do arquivo da pessoa": "e-mail.json"
 # `Fontes para resolver identidade` lista as ferramentas em que achar dados de pessoas (o diretório) antes de perguntar, como agenda, Slack, Atlassian Confluence, Atlassian Jira, GitHub, Notion, Instagram, Google Contatos ou WhatsApp.
 "Fontes para resolver identidade": ""
-# `Cadastro na loja` é `sim`, que também cria ou atualiza a pessoa como cliente na loja on-line do projeto, mesmo sem compra, ou `não`.
+# `Cadastro na loja` é `sim`, que também cria ou atualiza a pessoa como cliente na loja do projeto, física ou virtual, mesmo sem compra, ou `não`.
 "Cadastro na loja": "não"
 # `Campo do cliente na loja` é o nome da propriedade da lista de pessoas que guarda o link do cliente na loja. Vazio, o link fica nas notas.
 "Campo do cliente na loja": ""

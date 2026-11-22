@@ -25,3 +25,12 @@ Funcionalidade: Definir o cliente da loja de uma pessoa
       Dado que a loja tem um cliente com o telefone da pessoa
       Quando a skill precisa do cliente
       Então ela atualiza esse cliente e não cria outro
+
+  Regra: Quem só demonstrou interesse também é cliente
+
+    Exemplo: Pessoa que pediu retorno na loja física
+      Dado que uma pessoa demonstrou interesse num produto sem comprar
+      E que deixou um telefone
+      Quando a skill cadastra o cliente
+      Então ela cria o cliente na base da loja sem consentimento de marketing
+      E grava o interesse e o combinado em comentário datado na página da pessoa

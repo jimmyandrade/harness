@@ -392,11 +392,12 @@ How these skills relate is in `README.md`, in this folder.
 
 ### definir-cliente-da-loja
 - **Stability**: experimental
-- **Description**: Find, create, or update the store customer of a person and link it to the person's record
+- **Description**: Find, create, or update the customer of a person in the store, physical or virtual, and link it to the person's record
 - **Properties**:
   - Lives at `.agents/skills/definir-cliente-da-loja/SKILL.md`
   - Treats the link of a store customer as a request to register the person, through definir-pessoa, when the list has no page for them
   - Searches the list of people restricted to it, by name and phone, instead of the whole workspace
+  - Treats a person who only showed interest and did not buy as a customer, and keeps the interest and the agreed contact in a dated comment
   - Looks for the customer by phone and email before creating, updates the one it finds, and never creates another
   - Saves the customer link in the store field of the person, or in the notes when the field is empty, and keeps the conversation history in the comments of the person's page
   - Does not register the person without the skill that owns it, nor handle sales, orders, products, or marketing consent
