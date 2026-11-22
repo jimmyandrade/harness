@@ -5,13 +5,14 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.12.0"
+  version: "0.13.0"
   aliases:
     - definir-despesa
     - lancar-despesa
   related:
     - anexar-arquivo-no-notion
     - completar-despesa-de-compra
+    - conciliar-recebimento
     - definir-ativo-imobilizado
     - definir-cartao
     - definir-empresa
@@ -61,7 +62,13 @@ flowchart LR
 
 Preserve as URLs retornadas. Não transforme o UUID de uma fonte em URL de banco ou página. Um modelo é uma página: seu `parent.url` identifica a fonte, não a URL do banco. Leia o esquema da fonte antes de consultar ou gravar suas propriedades. Confira nele cada nome do mapeamento. Um nome que o esquema não mostra, como um título renomeado, não entra na consulta nem na gravação: ache a propriedade equivalente pelo tipo e pela descrição, como a única de tipo título, use o nome do esquema e avise a divergência para corrigir o mapeamento. Sem equivalente seguro, pergunte antes de gravar.
 
-Erro genérico de acesso descreve a chamada que falhou, não prova a causa nem a falta de acesso ao banco inteiro. Confira os argumentos e o tipo da entidade. Corrija a chamada somente com evidência de incompatibilidade; não repita a mesma chamada, não alterne carregadores por tentativa e não contorne uma negativa real. Uma leitura bem-sucedida da fonte ou do modelo é evidência de leitura desse recurso, não garantia de acesso a todos os registros nem de escrita. Com a fonte corretamente carregada, continue a busca de duplicata e o fluxo do gasto, sem pedir que a pessoa libere um acesso cuja ausência não foi demonstrada. Se a chamada correta continuar bloqueada, informe a operação e o erro retornado, diga que a causa específica não foi informada e não afirme que houve lançamento.
+Erro genérico de acesso descreve a chamada que falhou, não prova a causa nem a falta de acesso ao banco inteiro. Confira os argumentos e o tipo da entidade, e corrija a chamada só com evidência de incompatibilidade: não repita a mesma chamada, não alterne carregadores por tentativa e não contorne uma negativa real.
+
+Uma leitura bem-sucedida prova a leitura desse recurso, não o acesso a todos os registros nem a escrita. Com a fonte carregada, continue a busca de duplicata e o fluxo do gasto, sem pedir a liberação de um acesso cuja ausência não foi demonstrada. Se a chamada correta continuar bloqueada, informe a operação e o erro retornado, diga que a causa não foi informada e não afirme que houve lançamento.
+
+Quando a pessoa disser que o gasto saiu de uma conta de pagamento, como o Mercado Pago, ou faltar valor, hora, recebedor ou comprovante, leia o extrato dessa conta antes de perguntar: abra o detalhe e baixe o comprovante como `conciliar-recebimento` faz com a venda. O pedido de lançar a partir do extrato já autoriza baixar o comprovante da própria conta.
+
+Cruze a descrição da pessoa com as movimentações do dia. Uma compatível é a evidência, e mais de uma, ou nenhuma, vira pergunta com as candidatas. O extrato não traz o produto nem a finalidade. No navegador, não acione a ação de imprimir: ela trava a aba.
 
 Conclua a preparação antes de buscar ou gravar o lançamento. Quando a entrada já vem de `reconhecer-imagem`, reutilize a leitura entregue; não chame a mesma leitura de novo. Confira os nomes tanto na evidência quanto no comando original, inclusive os de pessoa sócia em uma exclusão de item pessoal.
 
@@ -97,7 +104,7 @@ flowchart LR
   K -->|não| H
 ```
 
-A inferência precisa de evidência no contexto da empresa, no produto ou na finalidade informada. Ter um comprovante ou um CPF não basta. Não exija a palavra "lançar". A leitura não prova que a busca ou a gravação já aconteceu.
+A inferência precisa de evidência no contexto da empresa, no produto ou na finalidade informada. Ter um comprovante ou um CPF não basta. Não exija a palavra "lançar".
 
 ### Passo 3
 
@@ -117,7 +124,7 @@ Quem pagou é quem arcou com o dinheiro, não o titular da conta. Um débito da 
 
 Compra online ou no cartão, com recebedora, comprovante ou pagador por completar, segue `completar-despesa-de-compra`, e o cartão fica em `definir-cartao`.
 
-Antes de deixar a categoria de custo vazia, busque na lista que a propriedade de categoria aponta, pelo produto e pela finalidade confirmados, e pelas variações e grafias da categoria. Sem propriedade de categoria no mapeamento, informe a limitação; não crie estrutura nem grave uma categoria inventada no corpo. Isso não impede registrar um gasto já identificado com os vínculos disponíveis. Uma informação opcional ausente não substitui a identificação obrigatória do produto e da finalidade.
+Antes de deixar a categoria de custo vazia, busque na lista que a propriedade de categoria aponta, pelo produto e pela finalidade confirmados, e pelas variações e grafias da categoria. Sem propriedade de categoria no mapeamento, informe a limitação; não crie estrutura nem grave uma categoria inventada no corpo. Isso não impede registrar um gasto já identificado com os vínculos disponíveis.
 
 ```mermaid
 flowchart LR
@@ -132,7 +139,7 @@ flowchart LR
 
 A categoria nova segue o padrão de nome e de grupo das categorias que já existem na lista. Não force uma categoria vizinha só porque o grupo combina.
 
-A placa serve para localizar o veículo existente, não para preencher o título, a descrição ou as observações da despesa. O cadastro do veículo é a fonte da placa. Associe a mesma despesa ao veículo pela relação mapeada, conferindo também o lado do veículo; a relação pode existir só nesse lado. A viagem é outro vínculo: preserve a associação confirmada para a prestação de contas, sem substituir a relação com o veículo.
+A placa serve para localizar o veículo existente, não para preencher o título, a descrição ou as observações da despesa. Associe a mesma despesa ao veículo pela relação mapeada, conferindo também o lado do veículo; a relação pode existir só nesse lado. A viagem é outro vínculo: preserve a associação confirmada para a prestação de contas, sem substituir a relação com o veículo.
 
 ```mermaid
 flowchart LR
@@ -156,11 +163,13 @@ flowchart LR
   E -->|não| H[Propõe o cadastro e pede só o dado ou a autorização necessária]
 ```
 
-Não encerre com apenas "empresa não cadastrada" ou "vínculo pendente": entregue a ação realizada ou a proposta concreta e o bloqueio. Reaproveite a leitura e os comprovantes; cadastrar a recebedora não cria outra despesa. Nome no título, no assunto do comprovante ou nas observações não substitui a relação com a empresa. Confira o vínculo salvo e preserve a conta, a pessoa pagadora e os anexos já confirmados. Não infira que o nome exibido no Pix seja dono, contato ou responsável pela empresa.
+Não encerre com apenas "empresa não cadastrada" ou "vínculo pendente": entregue a ação realizada ou a proposta concreta e o bloqueio. Reaproveite a leitura e os comprovantes; cadastrar a recebedora não cria outra despesa. Nome no título, no assunto do comprovante ou nas observações não substitui a relação com a empresa. Preserve a conta, a pessoa pagadora e os anexos já confirmados. Não infira que o nome exibido no Pix seja dono, contato ou responsável pela empresa.
 
 Compare cada identificador do comprovante com o que o cadastro da recebedora guarda: chave Pix, CNPJ, nome, instituição e conta. Uma diferença, mesmo de uma letra, é discrepância. Avise a pessoa antes de seguir, com os dois valores lado a lado, porque pode ser tentativa de golpe. A pessoa decide qual vale. Corrija o cadastro só depois da decisão dela, e diga o que mudou.
 
-Vincule a conta de origem somente quando os dados da conta no comprovante identificarem inequivocamente um cadastro ou quando a pessoa já tiver confirmado a conta deste pagamento. Nome do titular e instituição, sozinhos, indicam uma candidata, não a conta usada: podem existir contas pessoais e empresariais no mesmo banco. Ter apenas uma candidata cadastrada não supre a identificação. Cruze também o tipo e os dígitos visíveis do CPF ou CNPJ do titular da conta de origem com os documentos dos cadastros, respeitando as posições da máscara e sem completar dígitos ocultos. Use o documento do pagador, não o do recebedor nem o da instituição. Esse cruzamento pode distinguir titularidades de pessoa física e jurídica; não confunda identificar o titular com identificar uma conta específica. Combine-o com a instituição e os demais dados da conta presentes na evidência. Se o conjunto identificar inequivocamente a conta, vincule sem perguntar; se houver colisão de trechos, mais de uma conta compatível ou identificação insuficiente, confirme com a pessoa. Reutilize a leitura da evidência e não repita uma confirmação já dada para este pagamento.
+Vincule a conta de origem somente quando os dados da conta no comprovante identificarem inequivocamente um cadastro ou quando a pessoa já tiver confirmado a conta deste pagamento. Nome do titular e instituição, sozinhos, indicam uma candidata, não a conta usada: podem existir contas pessoais e empresariais no mesmo banco.
+
+Cruze também o tipo e os dígitos visíveis do CPF ou CNPJ do titular da conta de origem com os documentos dos cadastros, respeitando as posições da máscara e sem completar dígitos ocultos. Use o documento do pagador, não o do recebedor nem o da instituição. Identificar o titular não identifica uma conta específica: combine-o com a instituição e os demais dados da conta na evidência. Se o conjunto identificar inequivocamente a conta, vincule sem perguntar; se houver colisão de trechos, mais de uma conta compatível ou identificação insuficiente, confirme com a pessoa.
 
 ```mermaid
 flowchart LR
@@ -172,7 +181,9 @@ flowchart LR
 
 A falta de identificação da conta não bloqueia o lançamento quando os demais dados obrigatórios estão sustentados. Até a resposta, mantenha o vínculo vazio e informe a pendência. Uma confirmação vale para o pagamento confirmado, não vira regra para outros pagamentos do mesmo banco. Ao receber a resposta, complemente a mesma despesa sem duplicá-la nem alterar os comprovantes.
 
-Grave os dados nas propriedades mapeadas, não no corpo. Separe a data do documento da data de pagamento. Não invente valor, data, conta, finalidade, categoria nem parcelas. Um valor ou uma data que a pessoa informa de memória e que diverge da evidência, como o extrato ou o comprovante, não substitui o da evidência: grave o da evidência e aponte a diferença na resposta. Desconto por antecipação, juros e multa mudam o valor pago, não o original: grave o valor cheio da cobrança no valor original e o efetivamente pago no valor final. Juros e multa vão nos campos deles quando a evidência os separa. Campo opcional ausente fica pendente; produto, finalidade e informação necessária à classificação não são opcionais. Depois do checklist completo, a pendência opcional não impede o lançamento. Preserve o modelo da página.
+Grave os dados nas propriedades mapeadas, não no corpo. Separe a data do documento da data de pagamento. Não invente valor, data, conta, finalidade, categoria nem parcelas. Um valor ou uma data que a pessoa informa de memória e que diverge da evidência, como o extrato ou o comprovante, não substitui o da evidência: grave o da evidência e aponte a diferença na resposta.
+
+Desconto por antecipação, juros e multa mudam o valor pago, não o original: grave o valor cheio da cobrança no valor original e o efetivamente pago no valor final. Juros e multa vão nos campos deles quando a evidência os separa. Campo opcional ausente fica pendente; produto, finalidade e informação necessária à classificação não são opcionais. Preserve o modelo da página.
 
 Anexe os originais na propriedade mapeada de comprovantes na mesma execução do lançamento, sem novo reconhecimento e sem pedir confirmação adicional. O arquivo local sobe como `anexar-arquivo-no-notion` manda. Recupere os anexos já enviados do histórico antes de declarar que estão inacessíveis. Use a referência de arquivo aceita pela ferramenta; um ID de anexo da conversa não é necessariamente um ID de arquivo do Notion.
 Erro de arquivo não encontrado exige conferir a referência original e usar o formato suportado, não pedir novo envio nem tratar a falha de referência como falta do comprovante. Se a ferramenta recusar o arquivo enviado ao criar a página, crie a página sem o anexo, com a conciliação em `A conciliar`, anexe o arquivo ao lançamento já criado e confira o anexo na página salva antes de marcar como comprovado.
