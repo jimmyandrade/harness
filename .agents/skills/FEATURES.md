@@ -788,6 +788,20 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses looking up when the date falls, the day or week lookup, creating or changing the calendar event, reverse planning, managing travel, registering the opportunity, organizing the contact point, and creating the task
 
+### definir-formato-do-preco
+- **Stability**: experimental
+- **Description**: Decide whether a sale price is round or broken, its ending, and the rounding of the cash and installment prices
+- **Properties**:
+  - Lives at `.agents/skills/definir-formato-do-preco/SKILL.md`
+  - Keeps the round price as the default and accepts a broken one only with a stated function, such as conversion, entry product, campaign, clearance, or a price barrier
+  - Rounds a price that comes from a fee or an installment term up to the nearest round price and shows that the net value is not below the base price
+  - Gives the cash price the ending the project sets and says that it is a conversion price
+  - Asks before treating a price that the person already set as changed to fit the format
+  - Leaves recording the price, its history and its justification to registrar-preco-de-produto-fisico
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] A piece that must sustain desire gets a round price, and an entry item may get a broken one with the function said
+
 ### definir-idioma-da-conversa
 - **Stability**: experimental
 - **Description**: Define the language of a text written to a person

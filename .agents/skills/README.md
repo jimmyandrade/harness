@@ -69,6 +69,7 @@ flowchart LR
     definir_estampa["definir-estampa"]
     definir_filtro_de_email["definir-filtro-de-email"]
     definir_fonograma["definir-fonograma"]
+    definir_formato_do_preco["definir-formato-do-preco"]
     definir_grafia["definir-grafia"]
     definir_grupo_de_oportunidades["definir-grupo-de-oportunidades"]
     definir_historia_de_usuario["definir-historia-de-usuario"]
@@ -507,6 +508,7 @@ flowchart LR
   definir_filtro_de_email --> organizar_emails
   definir_filtro_de_email --> rotular_item
   definir_fonograma --> definir_obra_musical
+  definir_formato_do_preco --> registrar_preco_de_produto_fisico
   definir_grafia --> definir_perfil_social
   definir_grafia --> definir_pessoa
   definir_grafia --> identificar_duplicata
@@ -1042,6 +1044,7 @@ flowchart LR
   registrar_preco_de_combustivel --> identificar_duplicata
   registrar_preco_de_combustivel --> lancar_despesa_da_empresa
   registrar_preco_de_combustivel --> procurar_banco_de_dados
+  registrar_preco_de_produto_fisico --> definir_formato_do_preco
   registrar_preco_de_produto_fisico --> gerenciar_estoque
   registrar_preco_de_produto_fisico --> procurar_banco_de_dados
   registrar_preco_de_produto_fisico --> publicar_produto_fisico_na_loja_virtual

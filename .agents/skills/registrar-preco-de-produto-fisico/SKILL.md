@@ -5,11 +5,12 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.3"
+  version: "0.6.0"
   aliases:
     - definir-preco-de-produto
     - definir-preco-da-peca
   related:
+    - definir-formato-do-preco
     - evoluir-habilidade
     - gerenciar-estoque
     - procurar-banco-de-dados
@@ -38,15 +39,6 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Fonte do estoque por local": ""
 # Canais de venda que mostram o preço do registro, como a loja virtual e o catálogo de produtos da maquininha. Vazio: pergunte uma vez em quais canais o preço aparece.
 "Canais que repetem o preço": []
-# Terminação que fecha o preço quebrado, como `,90` em R$ 449,90. Só vale quando o Passo 5 aceita o preço quebrado.
-"Terminação do preço quebrado": ",90"
-# Terminação do preço à vista que a pessoa comunica como desconto, como `9` em R$ 299 ou `,90` em R$ 299,90. Vazio: o preço à vista segue a decisão do Passo 5, como qualquer outro.
-"Terminação do preço à vista": ""
-# Valores em que o preço trava a compra, como 300 ou 500. Vazio: a habilidade não trata barreira.
-"Barreiras psicológicas de preço": []
-# Níveis da curva de preço do projeto. Vazios: pergunte à pessoa em que nível a peça está.
-"Nível de entrada da curva de preço": ""
-"Níveis acima da entrada": []
 # O que pesa na justificativa do preço, como o programa de mentoria, a pirâmide de mix, a curva de preço e o posicionamento da marca. Vazio: justifique só com o que a pessoa e as fontes do projeto disseram, sem inventar critério.
 "Fontes da justificativa do preço": []
 ```
@@ -79,9 +71,11 @@ O que for anterior às linhas dessa fonte pode estar no histórico de versões d
 - `perguntar`: quando a fonte não responde, pergunte se lê as versões e espere.
 - `nunca`: não leia as versões.
 
-Leia as versões da página do produto e, se o preço varia por variação, as da variação pedida. `Banco de variações` vazio: use `procurar-banco-de-dados`. Não leia as da unidade.
+Leia as versões da página do produto e, quando as variantes têm preços diferentes por outro motivo que o tamanho, as da variante pedida. `Banco de variações` vazio: use `procurar-banco-de-dados`. Não leia as da unidade.
 
-O Notion não garante guardar as versões, então diga até onde chegam. Pergunte só o que nada respondeu e diga qual fonte consultou.
+O Notion não garante guardar as versões, e o plano limita o prazo, como os cerca de 30 dias vistos num caso. Diga a partir de que data a página tem versões. Pergunte só o que nada respondeu e diga qual fonte consultou.
+
+A loja virtual pode ter uma ferramenta de sugestão de preço por IA. O histórico de publicações dela mostra, por produto, o preço antigo, o preço novo, a data e hora e o tipo, como redução. Ele só se lê no painel da loja, porque não há API, e alcança mudanças que as versões da página já não guardam. Leia-o quando a fonte do histórico não responde e a loja usa a ferramenta.
 
 ### Passo 3
 
@@ -89,16 +83,24 @@ Ao registrar uma mudança de preço de catálogo, acrescente uma linha na fonte 
 
 Nunca edite nem apague uma linha antiga: a correção vai numa linha nova.
 
+Produto sem nenhuma linha no histórico: antes de registrar a mudança, acrescente a linha de carga inicial. Ela leva o preço de hoje como preço novo, o preço anterior vazio, motivo e origem de carga inicial, a vigência da data mais antiga que uma fonte prova e a fonte na justificativa.
+
+Sem fonte para o que veio antes, não invente preço nem data: a carga inicial leva o preço atual e a data da fonte, e a resposta diz que o histórico anterior não existe. Uma mudança mais antiga que uma fonte mostrar depois, como a publicação da ferramenta de sugestão, entra como linha própria, na ordem da vigência.
+
+A remarcação publicada pela ferramenta de sugestão entra com a data e hora da publicação. Quem decidiu é quem aceitou a sugestão, e a ferramenta não é quem decidiu.
+
 Campos da linha, ligados às propriedades pelo mapeamento de dados do projeto:
 
-- o produto, a variação quando o preço varia por ela, e o canal, varejo ou atacado;
+- o produto, as variantes que a mudança cobre, e o canal, varejo ou atacado. Variantes que só diferem pelo tamanho têm sempre o mesmo preço e entram na mesma linha;
 - o motivo, obrigatório, e quem decidiu, obrigatório;
 - o preço anterior e o novo;
 - a vigência, a partir de que data;
 - o custo na data, copiado no dia e nunca recalculado;
 - o preço de comparação, que não passa do menor preço praticado nos 30 dias anteriores à redução.
 
-Falta motivo ou quem decidiu: pergunte antes de acrescentar. Preço de comparação acima do limite: mostre o menor preço dos 30 dias e não acrescente.
+Falta motivo ou quem decidiu: pergunte antes de acrescentar. Preço de comparação acima do menor preço provado dos 30 dias: mostre esse preço e não acrescente.
+
+Sem venda nem linha que prove o preço de comparação nesse prazo, grave o que a loja mostra e escreva na justificativa que ele não pôde ser provado.
 
 Com a linha acrescentada, leve o preço novo aos canais, como o Passo 8 manda.
 
@@ -112,33 +114,7 @@ Para listar o estoque, o banco de unidades precisa dar as unidades de um local e
 
 ### Passo 5
 
-Ao sugerir, conferir, validar ou registrar um preço de venda, decida se ele é redondo, como R$ 450, ou quebrado, como R$ 449,90, antes de dar o número. A decisão parte da função que o preço precisa cumprir: sustentar valor percebido, autoria e desejo, ou favorecer conversão, entrada e comparação.
-
-O padrão é o preço redondo. Ele serve quando a peça precisa comunicar coleção, presença, acabamento, confiança, marca, valor autoral ou desejo.
-
-O preço quebrado só entra com uma justificativa clara, ligada a conversão, produto de entrada, campanha, saldo, condição especial ou barreira psicológica relevante. Quando for quebrado, termine em `Terminação do preço quebrado`.
-
-Não termine todos os preços em `Terminação do preço quebrado` por hábito: cada peça passa pela decisão. Sem dado para saber a função da peça, pergunte antes de escolher o formato.
-
-O formato vale para cada preço que a pessoa vai ver ou usar, como o cheio a prazo, o do débito e o do Pix. O preço que sai de uma taxa ou de um prazo, como o cheio que embute a taxa do parcelamento, não sai com os centavos da conta: arredonde para o preço redondo mais próximo acima, de modo que o valor líquido não fique abaixo do preço-base, e mostre essa conferência.
-
-O preço à vista que a pessoa comunica como desconto, como o do Pix e o do débito, cumpre a função de conversão. Com `Terminação do preço à vista` preenchida, ele termina assim, e o à vista derivado de outro, como o débito, é arredondado para cima até essa terminação. O preço cheio da etiqueta segue a decisão acima. Diga na resposta que o à vista é um preço de conversão.
-
-Mudar um preço que a pessoa já definiu para ajustar o formato, como de 299 para 300, é uma proposta. Mostre o preço dela ao lado e pergunte antes de tratá-lo como final.
-
-Peça central da coleção, de campanha, limitada, sob medida, conceitual, premium ou com narrativa forte pede preço redondo e seguro, que sustenta melhor o valor percebido. Evite o quebrado quando ele fizer a peça parecer promocional, massificada, varejista ou menos autoral. Se ainda assim recomendar o quebrado, explique objetivamente por que a conversão pesa mais que o valor percebido naquela peça. Preço quebrado sem essa explicação enfraquece a postura da marca e parece esconder o valor real da peça.
-
-Porta de entrada da marca, acessório, item de menor risco para a primeira compra, produto de maior volume ou peça mais comercial pode ter preço quebrado, como R$ 89,90 ou R$ 299,90, quando isso reduz a barreira de compra. Diga que, nesses casos, o quebrado é ferramenta de conversão e não a linguagem principal de valor da marca. Confira se ele não entra em conflito com a posição da peça na curva de preço, na pirâmide de mix e no posicionamento da marca. Peça em `Níveis acima da entrada` reavalie se o redondo protege melhor a percepção de valor.
-
-Peça em promoção, saldo de coleção, última peça, bazar, outlet, campanha com prazo, cupom, peça-piloto, drop anterior ou outra condição especial pode ter preço quebrado para comunicar oportunidade. Preserve, quando existir, a âncora de preço cheio, de preferência redonda, como "De R$ 450 por R$ 399,90". Não deixe o quebrado de campanha parecer o preço normal da peça. Registre se o preço é cheio, promocional, de saldo, de campanha ou de condição especial.
-
-Preço calculado perto de um valor de `Barreiras psicológicas de preço`, como R$ 299,90 contra R$ 300, pede cuidado. Um preço exatamente na barreira conta como perto dela.
-
-Veja se a peça está numa faixa comercial em que reduzir a barreira ajuda a conversão, e evite essa lógica quando a peça precisa sustentar desejo, imagem, exclusividade, autoria ou percepção premium. Compare o ganho provável de conversão com o risco de reduzir o valor percebido, e diga por que o preço escolhido protege melhor a estratégia da peça e da coleção.
-
-O preço à vista de `Terminação do preço à vista` pode ficar logo abaixo da barreira, como R$ 299, porque é preço de conversão.
-
-O preço também comunica posicionamento. Diga se o número escolhido comunica decisão, confiança e valor autoral, ou conversão, oportunidade e menor barreira de compra. Não recomende o quebrado só porque parece mais barato, sem ver se combina com a marca. Na dúvida, pergunte à pessoa: "esse preço precisa vender por impulso ou sustentar desejo?".
+Ao sugerir, conferir, validar ou registrar um preço de venda, o formato do preço, redondo ou quebrado, e a terminação seguem `definir-formato-do-preco`, antes de dar o número.
 
 ### Passo 6
 
@@ -187,7 +163,7 @@ Se você mudar o preço de todos os produtos com o nome citado, os que não esta
 Se você perguntar o preço anterior sem ler a fonte do histórico, a pessoa repete o que o registro já guarda.
 
 1. Leia a fonte do histórico de preços.
-2. Para o que vem antes dela, siga `Leitura do histórico de versões da página`.
+2. Para o que vem antes dela, siga `Leitura do histórico de versões da página` e leia o histórico de publicações da ferramenta de sugestão de preço da loja, quando ela existe.
 3. Responda com o que achou e diga qual fonte consultou.
 4. Pergunte só o que nenhuma responde.
 
@@ -198,6 +174,22 @@ Se você editar ou apagar uma linha do histórico, o registro deixa de provar o 
 1. Acrescente uma linha nova com a correção.
 2. Deixe a linha antiga como está.
 
+### Tamanhos com preços diferentes
+
+Se você achar preços diferentes entre variantes que só diferem pelo tamanho, trata como mudança de preço o que é erro de cadastro, e o histórico guarda o erro como se fosse decisão.
+
+1. Mostre a diferença e não a grave como mudança.
+2. Pergunte qual preço vale.
+3. Corrija com uma linha de correção de cadastro, que cobre todas as variantes de tamanho.
+
+### Histórico começado pela mudança
+
+Se você registrar a mudança de um produto sem nenhuma linha, o histórico começa com um preço anterior que nada prova.
+
+1. Acrescente antes a linha de carga inicial, com o preço de hoje e a fonte.
+2. Leia as fontes do Passo 2 e diga até onde cada uma chega.
+3. Não invente o preço nem a data do que veio antes.
+
 ### Preço sem justificativa
 
 Se você devolver só o número, a pessoa não sabe o que pesou e não tem como discordar.
@@ -205,14 +197,6 @@ Se você devolver só o número, a pessoa não sabe o que pesou e não tem como 
 1. Escreva a justificativa antes de atualizar o banco de produtos.
 2. Diga os critérios que você usou e quais pesaram mais.
 3. Não valide o preço sem isso.
-
-### Preço quebrado por hábito
-
-Se você terminar todos os preços em `Terminação do preço quebrado`, a peça que precisava sustentar desejo passa a parecer promocional.
-
-1. Pergunte qual função o preço cumpre.
-2. Use o redondo quando a função for valor percebido, autoria ou desejo.
-3. Use o quebrado só com a justificativa de conversão, entrada, campanha, saldo, condição especial ou barreira psicológica, e diga qual é.
 
 ### Preço novo só no registro
 
@@ -234,25 +218,9 @@ Listei as camisetas pelo estoque do evento e tirei as vendidas antes. Mostrei a 
 
 Li o banco do histórico de preços, que começa em março. A mudança era de janeiro, então li as versões da página, que mostravam o preço e a data. Disse até onde cada fonte chega e não perguntei nada.
 
-### sugere o preço de uma peça autoral que custou 210
+### registra o colete que o cadastro mostra a 450 e a loja a 338
 
-Sugeri R$ 450 em vez de R$ 449,90. A peça precisa sustentar valor autoral e desejo, e disse isso na resposta. Não usei o preço quebrado, porque nenhuma função de conversão o justificava.
-
-### sugere o preço de um item de entrada que custou 40
-
-Sugeri R$ 89,90. O item é a porta de entrada da marca, e o quebrado ajuda a reduzir a barreira da primeira compra. Disse essa função na resposta.
-
-### define os preços de uma peça de etiqueta R$ 320 com Pix a 299
-
-Deixei a etiqueta redonda em R$ 320 e o Pix em R$ 299, porque `Terminação do preço à vista` pede o final 9. Disse que o Pix é um preço de conversão, que parece abaixo do que é, e que o cheio da etiqueta sustenta o valor da peça.
-
-### sugere o preço de uma peça conceitual que custou 300
-
-Sugeri R$ 690 e não R$ 679,90. A peça é conceitual e precisa sustentar autoria, e o quebrado a faria parecer varejista. Expliquei os critérios que mais pesaram: custo, posição na coleção e valor percebido.
-
-### dá um preço de saldo para a peça de 450
-
-Sugeri R$ 399,90 com a âncora "De R$ 450 por R$ 399,90". Registrei que é preço de saldo, para o quebrado não parecer o preço normal da peça.
+O produto não tinha linha no histórico. Li as versões da página, que só chegavam a um mês atrás e não mostravam mudança de preço, e o histórico de publicações da ferramenta de sugestão da loja, que mostrava a redução de 450 para 338 numa data e hora. Acrescentei a carga inicial com 450 e depois a remarcação com a data e hora da publicação, com quem aceitou a sugestão em quem decidiu. Disse que o preço de comparação de 450 não pôde ser provado por venda.
 
 ### baixa o preço da caneca de 60 para 50
 
@@ -265,11 +233,12 @@ Acrescentei a linha no histórico e mudei a variante da loja virtual de R$ 350 p
 ## Casos-limite
 
 - Nenhuma fonte chega até a mudança: diga qual consultou, até onde cada uma chega, e pergunte só o que ficou antes.
+- O produto não tem linha no histórico: acrescente a carga inicial antes da mudança.
+- Variantes que diferem só pelo tamanho com preços diferentes: é divergência de cadastro. Mostre e pergunte qual vale.
+- Variantes que diferem por outro motivo, como a cor, com preços diferentes: uma linha por preço, cada uma com as variantes que ele cobre.
+- A mudança veio da ferramenta de sugestão de preço da loja: use a data e hora da publicação e grave como quem decidiu quem aceitou a sugestão.
 - A lista do grupo fica vazia: diga isso e não mude nenhum preço.
 - A pessoa diz o preço de um produto só: confirme o produto e o preço antes de mudar.
-- O preço fica a poucos reais de uma barreira, como R$ 300: confira se a peça precisa sustentar desejo antes de usar o quebrado.
-- O preço é de saldo, campanha ou condição especial: registre isso e preserve a âncora do preço cheio.
-- A função da peça não está clara, como entrada, campanha ou valor autoral: pergunte antes de escolher o formato do preço.
 - O banco ou o workspace não está conectado: pare e peça.
 - O destino do preço do ponto de venda está vazio: pergunte onde registrar.
 - `Canais que repetem o preço` está vazio: pergunte uma vez em quais canais o preço aparece.
@@ -277,12 +246,10 @@ Acrescentei a linha no histórico e mudei a variante da loja virtual de R$ 350 p
 
 ## Pegadinhas
 
-- O Pix parece pedir o preço redondo como a etiqueta. Com `Terminação do preço à vista` preenchida, ele termina nela, e só a etiqueta segue o redondo.
-- O preço cheio que embute a taxa do parcelamento parece valer com os centavos da conta. Arredonde e confira o líquido.
-- O preço quebrado parece mais barato e por isso melhor. Em peça autoral ele a faz parecer promocional.
-- O preço terminado em `,90` parece o padrão do varejo. Aqui o padrão é o redondo, e o quebrado precisa de uma função dita.
 - O nome do produto parece o grupo inteiro. Quem define o grupo é o estoque do local.
 - O preço dito no local parece valer para todos os produtos daquele tipo. Vale só para os que estavam lá e ainda tinham estoque.
+- A sugestão de preço por IA da loja parece não deixar rastro. O histórico de publicações do app guarda produto, preços, data, hora e tipo, e só se vê no painel.
+- O histórico de versões da página parece guardar tudo. O plano do Notion limita o prazo, e o preço mais antigo pode ficar fora dele.
 - A página do produto parece só ter o preço de hoje. As versões do produto e da variação guardam preços antigos que o banco do histórico ainda não tem.
 - O produto com uma variação só parece pedir o cadastro de produto único. O cadastro é sempre com variações, para a variação nova entrar no mesmo produto.
 - O custo na data parece recalculável. Ele é o custo copiado no dia da mudança.
