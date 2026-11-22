@@ -3,7 +3,7 @@ name: definir-janela-de-contato
 description: Use essa habilidade sempre que for gravar a janela de contato de uma pessoa, os dias de descanso e os horários sem contato, ou conferi-la antes de enviar uma mensagem, um e-mail ou um convite, mesmo sem dizer janela. NÃO use para cadastrar a pessoa, redigir a mensagem nem escolher o canal.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   related:
     - definir-pessoa
     - evoluir-habilidade
