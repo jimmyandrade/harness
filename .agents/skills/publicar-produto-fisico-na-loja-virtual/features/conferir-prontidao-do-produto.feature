@@ -18,3 +18,10 @@ Funcionalidade: Conferir a prontidão do produto
       Então a variante entra com estoque zero
       Mas não trata o zero como divergência de estoque
 
+  Regra: produto só é ativado com a lista completa
+
+    Exemplo: Pedido para ativar sem foto aprovada
+      Dado que o produto está em rascunho e não tem foto aprovada nem descrição aprovada
+      Quando a pessoa pede para ativar o produto
+      Então o produto continua em rascunho e fora dos canais
+      E a resposta diz o que falta e quem faz cada item
