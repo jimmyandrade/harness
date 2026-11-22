@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.18.6"
+  version: "0.18.7"
   aliases:
     - definir-venda
   related:
@@ -97,6 +97,8 @@ Antes de vincular, busque com `identificar-duplicata`, também a pessoa cliente 
 Com `Banco de unidades` preenchido, marque cada unidade vinculada como vendida, na propriedade de situação da unidade, e releia a unidade para conferir que ela aponta para a venda. Unidade que já consta como vendida em outra venda: pare e pergunte.
 
 Com o pagamento pago, aplique a `Etiqueta do contato que pagou` à pessoa cliente, por `rotular-item`. A `Etiqueta do contato com envio` entra só quando a venda tem envio: retirada no local não leva.
+
+Depois de vincular, releia o valor inferido e o desconto aplicado. Valor vazio, ou desconto igual ao valor pago, diz que o cálculo lê uma relação que falta: ache-a na fórmula e vincule, como as vendas anteriores.
 
 A situação da unidade não é o saldo. O saldo segue `gerenciar-estoque`. Não altere o saldo aqui.
 
@@ -310,8 +312,6 @@ O preço nominal e o desconto comercial continuaram calculados. Gravei o motivo,
 
 ## Pegadinhas
 
-- O número do pedido parece confirmação e transação. Pedido, ID da confirmação e ID da transação são três dados.
-- A data em que o pedido entrou na loja parece a data da venda. No lançamento retroativo, a data real permanece.
 - O pedido tardio na loja parece uma venda nova. Ele vincula a venda original. Data, pagamento, valor e contexto reais permanecem.
 - Vincular a unidade parece terminar a venda. A unidade continua em estoque até alguém marcar a situação dela como vendida.
 - Relacionar o produto parece preencher as peças vendidas. A peça sai da unidade, e a variante está nessa unidade. O saldo fica em `gerenciar-estoque`.
