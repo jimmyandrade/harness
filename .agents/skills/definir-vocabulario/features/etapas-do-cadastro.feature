@@ -30,3 +30,17 @@ Funcionalidade: Cadastrar o termo em etapas
       Quando a skill monta o plano
       Então o antes fica proibido e a substituição é o depois
       E o depois fica permitido no mesmo lote
+
+  Regra: Nome de pessoa ou de empresa não entra no vocabulário
+
+    Exemplo: Trecho do nome de uma empresa pedido como apelido
+      Dado que "Brisa" é parte do nome de uma empresa na lista de empresas
+      Quando a pessoa pede para cadastrar "Brisa" como apelido
+      Então o termo sai do plano
+      E a desambiguação vai para o cadastro da empresa por definir-empresa
+
+    Exemplo: Termo que pode ser nome e não aparece nas listas
+      Dado que a busca nas listas de pessoas e de empresas não acha o termo
+      E o termo pode ser um nome
+      Quando a skill monta o plano
+      Então pergunta se o termo é nome antes de gravar

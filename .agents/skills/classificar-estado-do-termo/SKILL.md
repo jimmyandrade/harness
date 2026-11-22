@@ -3,7 +3,7 @@ name: classificar-estado-do-termo
 description: Use essa habilidade sempre que, ao cadastrar um termo do vocabulário do tom de voz, for preciso decidir o nível dele, de proibido a permitido, o contexto ou as tags, mesmo sem dizer estado. NÃO use para cadastrar o termo, validar os campos, escrever o texto da marca, nem decidir o nível sem as fontes da marca.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.3.1"
   related:
     - definir-vocabulario
     - gravar-termos-no-vocabulario
@@ -25,6 +25,8 @@ Esta habilidade não tem parâmetro próprio.
 ### Passo 1
 
 `definir-vocabulario` monta o plano e chama esta habilidade para decidir o `state`, as `tags`, o `allowed_in` e o `forbidden_in` de cada termo. Esta habilidade só classifica. A validação dos campos segue `validar-plano-de-vocabulario`, e a escrita segue `gravar-termos-no-vocabulario`. Use só o que a pessoa enviou.
+
+Nome de pessoa ou de empresa, inteiro ou em parte, não recebe nível nem vira tag de termo: devolva a `definir-vocabulario`, que o tira do plano e leva a desambiguação ao cadastro.
 
 ```mermaid
 flowchart LR
@@ -129,6 +131,7 @@ O emoji ficou um termo. A combinação junta ficou um termo só. O estado, a des
 - Falta uma fonte da marca que as instruções do projeto nomeiam: pare e peça. Não invente.
 - Permitidos, proibidos e situacionais no mesmo plano: classifique cada termo pelo próprio nível. Não copie o nível do termo vizinho.
 - O pedido é saber se a frase pode: não é esta habilidade.
+- O termo é nome de pessoa ou de empresa, ou parte dele: não classifique. Ele volta a `definir-vocabulario`.
 
 ## Pegadinhas
 

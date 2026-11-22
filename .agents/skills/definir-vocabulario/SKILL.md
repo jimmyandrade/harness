@@ -3,9 +3,11 @@ name: definir-vocabulario
 description: Use essa habilidade sempre que for cadastrar ou atualizar um ou mais termos do vocabulário do tom de voz, mesmo sem dizer glossário, lote ou estado. NÃO use para escrever, revisar ou aprovar o texto da marca, classificar uma frase, perguntar quais variações de gênero, número ou grafia foram cadastradas, nem inventar um termo que a pessoa não enviou.
 metadata:
   author: jimmyandrade
-  version: "0.36.0"
+  version: "0.37.0"
   related:
     - classificar-estado-do-termo
+    - definir-empresa
+    - definir-pessoa
     - evoluir-habilidade
     - gravar-termos-no-vocabulario
     - procurar-variacao-de-termo
@@ -29,6 +31,8 @@ metadata:
 ### Passo 1
 
 A pessoa responsável pelo tom de voz quer cadastrar ou atualizar termos. Perguntar se um termo ou uma variação faltou segue `procurar-variacao-de-termo`. Monte o plano com idioma, modo e a lista. Cada item tem `state`, `term`, `categories` e os campos desse nível. Use o que a pessoa enviou. O texto que você monta a partir disso, como o `reason`, vai marcado como seu.
+
+Nome de pessoa ou de empresa, inteiro ou em parte, nunca entra no vocabulário, nem como apelido, termo permitido ou proibido. Antes de montar o plano, procure cada termo na lista de pessoas e na lista de empresas do mapeamento de dados do projeto, pelo nome, pelas variações de grafia e por trecho do nome, como faz `identificar-duplicata`. O termo que é nome ou parte de um nome sai do plano. A desambiguação dele, como "é parte do nome de uma empresa, não apelido de pessoa", vai para o cadastro dessa pessoa ou empresa por `definir-pessoa` ou `definir-empresa`, no campo de desambiguação que o mapeamento liga. Sem esse campo no mapeamento, ela vai nas notas da empresa ou nas observações da pessoa, e a resposta sugere o campo. Busca sem resultado e termo que pode ser nome, como uma palavra com maiúscula que não é palavra comum: pergunte se é nome antes de gravar.
 
 Quando a pessoa manda um par rotulado de antes e depois, cada lado é um termo no mesmo lote. O antes fica `forbidden`, e `substitution` e `alternatives` são o depois, com o texto que ela escreveu. O depois fica `allowed`. `related` liga os dois. Não invente outra alternativa. "Nunca use uma palavra, use outra" tem o mesmo formato, sem `when` e sem `tags`. A frase inteira, com a pontuação e com um símbolo no fim, é um termo. Termo novo entra em minúsculas. Quando a pessoa cita só um trecho de uma frase que você escreveu, como "não gosto do `se der…`", pergunte se recusa o trecho, a frase inteira ou os dois, e grave o que ela disser, sem ampliar a recusa por suposição. Se ela der depois um substituto para um termo recusado que ficou sem alternativa, atualize esse termo com `update`.
 
@@ -92,6 +96,14 @@ Se você gravar o par como um termo só, ou só o depois, o antes continua valen
 2. O depois entra como `allowed` no mesmo lote, e os dois ficam em `related`.
 3. Não invente outra alternativa.
 
+### Nome gravado como termo
+
+Se você gravar um nome, ou um trecho dele, como apelido ou termo, o vocabulário passa a tratar uma empresa como pessoa, e a desambiguação some do cadastro onde ela serve.
+
+1. Procure o termo nas listas de pessoas e de empresas antes do plano, também por trecho do nome.
+2. Achou: tire do plano e grave a desambiguação no cadastro achado, por `definir-pessoa` ou `definir-empresa`.
+3. Não achou e o termo pode ser nome: pergunte antes de gravar.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
@@ -108,9 +120,14 @@ A mensagem era em português e só levava uma palavra em inglês. A linha ficou 
 
 A comunicação era em português. O antes ficou proibido e a substituição foi o depois. O depois ficou permitido. Os dois ficaram ligados no mesmo lote.
 
+### Cadastre `Brisa` como apelido de uma pessoa.
+
+A busca achou `Brisa` como parte do nome de uma empresa na lista de empresas. O termo não entrou no vocabulário. A desambiguação "parte do nome da empresa, não apelido de pessoa" foi para o cadastro da empresa, por `definir-empresa`.
+
 ## Casos-limite
 
 - Permitidos, proibidos e situacionais juntos: um lote e um modo.
+- Um termo do lote é nome de pessoa ou de empresa, ou parte dele: só ele sai do plano e vai como desambiguação ao cadastro. O resto do lote segue.
 - A pessoa manda pares antes e depois: os dois entram no mesmo lote, o antes proibido e o depois permitido, ligados entre si.
 - A mesma palavra vale de um jeito num contexto e de outro no resto: uma linha sem tags e uma com as tags do contexto, no mesmo lote.
 - A pessoa pergunta se um termo ou uma variação faltou: `procurar-variacao-de-termo`.
@@ -124,6 +141,9 @@ A comunicação era em português. O antes ficou proibido e a substituição foi
 - O par antes e depois parece uma frase só, ou só o depois. Cada lado é um termo, e o antes aponta para o depois que a pessoa escreveu.
 - Trocar a palavra proibida parece só trocar o substantivo. O artigo, o pronome e o adjetivo concordam com o gênero do substituto: "o toggle ligado" vira "a feature toggle ligada".
 - Um `pt-BR.json` à mão parece o lugar de tudo. O e-mail inteiro em inglês mora em `en`, com a frase inteira.
+
+- Um apelido parece palavra do tom de voz. Apelido de pessoa e trecho do nome de empresa são cadastro, não vocabulário.
+- A tag de contexto de quem fala, como `maria-silva`, parece nome no vocabulário. Ela filtra a consulta e continua valendo. O que não entra é o nome como termo.
 
 ## Scripts disponíveis
 
