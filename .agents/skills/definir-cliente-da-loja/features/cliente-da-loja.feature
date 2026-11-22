@@ -34,3 +34,9 @@ Funcionalidade: Definir o cliente da loja de uma pessoa
       Quando a skill cadastra o cliente
       Então ela cria o cliente na base da loja sem consentimento de marketing
       E grava o interesse e o combinado em comentário datado na página da pessoa
+
+    Exemplo: Tipo de público e perfil do WhatsApp
+      Dado que a pessoa demonstrou interesse e passou o WhatsApp
+      Quando a skill cadastra a pessoa
+      Então o tipo de público é o que o parâmetro nomeia para quem demonstrou interesse
+      E o WhatsApp entra nos perfis sociais por definir-perfil-social

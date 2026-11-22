@@ -456,6 +456,7 @@ flowchart LR
   definir_ativo_imobilizado --> registrar_ciclo_do_ativo
   definir_campanha_de_conteudo --> delegar_aviso_de_plataforma
   definir_campanha_de_conteudo --> planejar_calendario_de_conteudo
+  definir_cliente_da_loja --> definir_perfil_social
   definir_cliente_da_loja --> definir_pessoa
   definir_cliente_da_loja --> definir_tarefa
   definir_cliente_da_loja --> identificar_duplicata

@@ -4,9 +4,10 @@ description: Use essa habilidade sempre que for achar, criar ou atualizar o clie
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   related:
     - definir-pessoa
+    - definir-perfil-social
     - identificar-duplicata
     - definir-tarefa
     - evoluir-habilidade
@@ -18,6 +19,8 @@ metadata:
 
 Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo.
 ```yaml
+# `Tipo de público de quem demonstrou interesse` é o tipo de público que o projeto dá a quem demonstrou interesse e ainda não comprou. Vazio, o tipo não é preenchido.
+"Tipo de público de quem demonstrou interesse": ""
 # `Campo do cliente na loja` é o nome da propriedade da lista de pessoas que guarda o link do cliente na base de clientes da loja. Vazio, o link fica nas notas.
 "Campo do cliente na loja": ""
 "Modo de aprendizado": "perguntar"
@@ -34,6 +37,7 @@ Use o meio que as instruções do projeto ordenam para a loja: linha de comando,
 
 Ache a pessoa na lista de pessoas, como `definir-pessoa` manda: restrita à lista, pelo nome e pelo telefone.
 Sem página, cadastre-a por `definir-pessoa` com o nome e o telefone do cliente, e volte aqui para ligar o link.
+Quem demonstrou interesse e ainda não comprou entra com o `Tipo de público de quem demonstrou interesse`, sem trocar o tipo que a pessoa já tem.
 
 ### Passo 3
 
@@ -70,13 +74,21 @@ Se você criar o cliente sem procurá-lo, a loja passa a ter dois com o mesmo te
 2. Achado, atualize esse cliente.
 3. Com dois já existentes, liste-os e pergunte qual vale. Não apague.
 
+### Cadastro sem tipo de público, perfil nem localidade
+
+Se você criar a página só com o nome, o telefone e o link, a pessoa fica sem o tipo de público, sem o WhatsApp nos perfis sociais e sem a cidade, e o próximo contato repete a pergunta.
+
+1. Preencha o tipo de público pelo parâmetro.
+2. O WhatsApp que ela passou segue `definir-perfil-social`.
+3. Pergunte a cidade a quem usa a habilidade, na resposta do cadastro.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### a Dani Exemplo passou na loja física, gostou de uma peça e pediu que a gente chame na semana que vem
 
-Busquei o cliente na base da loja pelo telefone que ela deixou e não achei. Busquei na lista de pessoas, restrita a ela, e também não. Cadastrei a página por `definir-pessoa`, criei o cliente sem consentimento de marketing e gravei o link no campo. O interesse e o combinado entraram em comentário datado, e o retorno virou tarefa por `definir-tarefa`.
+Busquei o cliente na base da loja pelo telefone que ela deixou e não achei. Busquei na lista de pessoas, restrita a ela, e também não. Cadastrei a página por `definir-pessoa`, pelo modelo da lista, com o tipo de público de quem demonstrou interesse e o WhatsApp dela como perfil social. Criei o cliente sem consentimento de marketing e gravei o link no campo. O interesse e o combinado entraram em comentário datado, e o retorno virou tarefa por `definir-tarefa`. Perguntei a cidade dela, que nenhuma fonte trouxe.
 
 ### o link do cliente da loja de Caio Exemplo, que acabou de ser criado
 

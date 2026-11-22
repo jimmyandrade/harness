@@ -395,6 +395,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Description**: Find, create, or update the customer of a person in the store, physical or virtual, and link it to the person's record
 - **Properties**:
   - Lives at `.agents/skills/definir-cliente-da-loja/SKILL.md`
+  - Gives the audience type the project names to a person who showed interest and has not bought, and registers the WhatsApp as a social profile
   - Treats the link of a store customer as a request to register the person, through definir-pessoa, when the list has no page for them
   - Searches the list of people restricted to it, by name and phone, instead of the whole workspace
   - Treats a person who only showed interest and did not buy as a customer, and keeps the interest and the agreed contact in a dated comment
@@ -1162,6 +1163,7 @@ How these skills relate is in `README.md`, in this folder.
 - **Description**: Normalize a social profile when registering or consolidating it
 - **Properties**:
   - Lives at `.agents/skills/definir-perfil-social/SKILL.md`
+  - Creates the profile from the template of its channel and titles a WhatsApp profile with the number in international format
   - Reads the social profile list and its property names from the data mapping of the project, when the person does not name another list
   - Runs when a social profile is registered or consolidated, and leaves the existence check to identificar-duplicata and the page merge to mesclar-registro
   - Does not treat a single profile as proof the person is unique; the related person check stays with identificar-duplicata, and two records of the same person go to mesclar-registro
@@ -1181,6 +1183,8 @@ How these skills relate is in `README.md`, in this folder.
 - **Description**: Register or update a person
 - **Properties**:
   - Lives at `.agents/skills/definir-pessoa/SKILL.md`
+  - Creates the page from the template of the list of people and registers the WhatsApp the person gave as a social profile
+  - Asks the person who uses the skill for the city when no source gives the locality, without blocking the registration
   - Reads the list of people and its property names from the data mapping of the project
   - Creates a missing person in the list of people when a spelling screenshot shows that person
   - Writes the full name as the person's name and keeps the handle out of that name

@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.23.1"
+  version: "0.24.0"
   related:
     - definir-empresa
     - definir-grafia
@@ -92,7 +92,7 @@ Telefone vai no formato internacional. Celular do Brasil tem 9 dígitos depois d
 
 Com `Cadastro na loja` em `sim`, o cliente da pessoa na loja segue `definir-cliente-da-loja`, e o link dele vai em `Campo do cliente na loja`, ou nas notas quando o campo está vazio. O histórico das conversas fica nos comentários da página da pessoa, não na nota do cliente.
 
-Todo perfil social que a pessoa informar, em link, print ou handle, como o LinkedIn ou o Instagram, é cadastrado por `definir-perfil-social` na mesma resposta e relacionado nos perfis sociais relacionados. O link do perfil nunca vai nas notas, e a skill não deixa o perfil de fora.
+Todo perfil social que a pessoa informar, em link, print ou handle, como o LinkedIn, o Instagram ou o WhatsApp que ela passou para contato, é cadastrado por `definir-perfil-social` na mesma resposta e relacionado nos perfis sociais relacionados. O link do perfil nunca vai nas notas, e a skill não deixa o perfil de fora.
 
 Nome parcial, sem sobrenome: só cadastre com um identificador que desambigue, como telefone, e-mail, perfil social, cargo específico ou relação verificável com a empresa. Sem nenhum, não crie a pessoa: registre-a como contato citado em comentário datado e diga o que falta. Com o identificador, o título provisório é "Nome (Empresa)", com `Não confundir com` se houver homônimo, e as observações dizem que o cadastro é parcial, sem inventar sobrenome nem e-mail. Com a empresa e a negociação já ligadas, o título volta a ser o nome limpo.
 
@@ -100,7 +100,9 @@ Em contexto de negócio, parceria, fornecimento ou curadoria, veja se a pessoa j
 
 Não grave o print no corpo.
 
-Antes de gravar, leia a descrição de cada propriedade no esquema da lista: ela diz o que é obrigatório e o que não vai em cada campo. Preencha a localidade com a cidade que a fonte sustenta, como a do perfil comercial do contato.
+Crie a página pelo modelo da lista de pessoas, quando a lista tem um: o conteúdo dele guia o cadastro.
+
+Antes de gravar, leia a descrição de cada propriedade no esquema da lista: ela diz o que é obrigatório e o que não vai em cada campo. Preencha a localidade com a cidade que a fonte sustenta, como a do perfil comercial do contato. Sem fonte, pergunte a cidade a quem usa a habilidade na resposta do cadastro, sem travá-lo.
 
 Grave como confirmado só o que veio direto da pessoa que usa a habilidade ou de uma fonte que respondeu com certeza. Nunca invente papel, time nem apelido. Sem e-mail em nenhuma fonte, o e-mail fica como pendência no registro.
 

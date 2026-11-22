@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.9.0"
+  version: "0.10.0"
   related:
     - analisar-perfil-social
     - definir-grafia
@@ -38,6 +38,8 @@ flowchart LR
   A -->|website| C[URL na propriedade]
   C --> D[Título não recebe a URL]
 ```
+
+Crie o perfil pelo modelo do canal, quando a lista tem um. No WhatsApp, o título é o número no formato internacional, com `+`.
 
 Instagram e canal de handle: o título fica sem `@`, em minúsculas e sem espaços. Website: a URL completa fica na URL do perfil. O título não recebe essa URL. Não invente o título a partir do domínio.
 
