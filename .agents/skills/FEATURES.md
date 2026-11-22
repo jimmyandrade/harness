@@ -816,6 +816,19 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses the language of a pull request, a commit, or a project document, and translating
 
+### definir-janela-de-contato
+- **Stability**: experimental
+- **Description**: Record the contact window of a person and check it before a message, an email, or an invite is sent
+- **Properties**:
+  - Lives at `.agents/skills/definir-janela-de-contato/SKILL.md`
+  - Saves the rest days and the times without contact in the properties the parameters name, never in the notes, with each time as `HH:MM` text of 24 hours
+  - Asks before creating a missing property and says the window in the reply when the parameter is empty
+  - Checks the window before sending and again at the time of sending, for each person named in a group, and sends nothing outside it, by any channel
+  - Does not send when the window is filled and the person has no time zone, and asks once
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The window goes in the property and never in the notes
+
 ### definir-local-fisico
 - **Stability**: experimental
 - **Description**: Confirm the physical place of an event or contact point: space name, full address, venue company, and locality

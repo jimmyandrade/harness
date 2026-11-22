@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.24.3"
+  version: "0.25.0"
   related:
     - definir-empresa
     - definir-grafia
@@ -15,6 +15,7 @@ metadata:
     - identificar-duplicata
     - mencionar-pessoa
     - definir-cliente-da-loja
+    - definir-janela-de-contato
 ---
 
 # Definir pessoa
@@ -34,10 +35,6 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Cadastro na loja": "não"
 # `Campo do cliente na loja` é o nome da propriedade da lista de pessoas que guarda o link do cliente na loja. Vazio, o link fica nas notas.
 "Campo do cliente na loja": ""
-# Globais: os nomes das propriedades da lista de pessoas que guardam a janela de contato. Vazio não impõe regra.
-"Dias sem contato": ""
-"Sem contato a partir de": ""
-"Sem contato até": ""
 ```
 ## Instruções
 
@@ -138,10 +135,7 @@ Formulário que exige o documento oficial, como contrato, nota e documento fisca
 Nenhuma mensagem, e-mail ou saudação trata a pessoa pelo nome civil: ela é chamada pelo nome social.
 Leia os dois no registro, nunca os escreva na habilidade, e sem o nome civil pare e pergunte antes de preencher o formulário.
 
-A janela de contato é quando a pessoa não deve ser contatada: dias de descanso e o horário a partir do qual, ou até o qual, não há contato. Ela vai nas propriedades que os parâmetros nomeiam, nunca nas observações, com cada horário como o texto `HH:MM` de 24 horas, como `19:00`. Grave só o campo informado.
-Sem a propriedade na lista, ou com o parâmetro vazio, avise, proponha criá-la e diga a janela na resposta. Não crie a propriedade sem o sim.
-Quem contata a pessoa confere a janela antes de enviar e de novo na hora do envio: leia as três propriedades no registro, e em grupo as de cada pessoa nomeada. Leia o dia e a hora no fuso da localidade dela por comando, como `TZ=<fuso> date '+%Y-%m-%d %H:%M'`, com o dia da semana como a regra do dia da semana manda. Sem fuso e com janela preenchida, não envie e pergunte uma vez.
-Está bloqueado o dia sem contato, a hora igual ou depois de `Sem contato a partir de` e a hora antes de `Sem contato até`, que já é permitida. Fora da janela nada sai, por nenhum canal: diga o motivo e o próximo horário permitido, com o dia da semana, no fuso dela e no de quem usa, e deixe o rascunho para esse horário. A janela só muda no registro.
+A janela de contato, os dias e os horários em que a pessoa não deve ser contatada, segue `definir-janela-de-contato`: grave nela quando quem usa a habilidade a informar, e confira nela antes de contatar a pessoa.
 
 ### Passo 4
 
