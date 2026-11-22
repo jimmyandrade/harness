@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.100.1](https://github.com/jimmyandrade/harness/compare/v1.100.0...v1.100.1) (2026-11-22)
+
+
+### Bug Fixes
+
+* **definir-pessoa:** fill the delivery address with the city and state when only those are known ([#1412](https://github.com/jimmyandrade/harness/issues/1412)) ([a03f2ed](https://github.com/jimmyandrade/harness/commit/a03f2ed182dcb7b6ccc40a1a9a5ea2ec1a0b9ec2))
+* **lancar-venda:** confirm the customer and the touchpoint, and label the paying contact ([#1411](https://github.com/jimmyandrade/harness/issues/1411)) ([64d59e4](https://github.com/jimmyandrade/harness/commit/64d59e4e7d4e827955ab5c13724387fbd5a7c681))
+
 ## [1.100.0](https://github.com/jimmyandrade/harness/compare/v1.99.2...v1.100.0) (2026-11-22)
 
 
