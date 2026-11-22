@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.18.4"
+  version: "0.18.5"
   aliases:
     - definir-venda
   related:
@@ -85,7 +85,9 @@ Antes de vincular a pessoa cliente, confira quem é, também quando a busca acha
 
 Quando não bate, leia o pagador no meio de pagamento da venda, na ordem: linha de comando, API, conector, navegador do app e, por último, a extensão do Chrome. Só então pergunte, mostrando a página, o que a pessoa disse e o que o meio mostrou. Não diga que ele não mostra o pagador sem abrir a transação. Cartão presencial costuma vir sem cliente associado e o Pix traz o pagador.
 
-Antes de vincular, busque com `identificar-duplicata`. Sem a página, ou sem a variante na unidade, pare e pergunte. Não crie a pessoa, o produto, a unidade nem a variante na venda. Não escolha entre parecidos.
+Quando a pessoa diz que a cliente é outra, a venda não reaproveita a página do homônimo. Cadastre a cliente por `definir-pessoa`, com a localidade dita e o não confundir com ligado ao homônimo, e só então vincule.
+
+Antes de vincular, busque com `identificar-duplicata`, também a pessoa cliente pelo nome, pelas variações, pelas notas e pelo nome civil. Sem a página, ou sem a variante na unidade, pare e pergunte. Não crie o produto, a unidade nem a variante na venda. Não escolha entre parecidos.
 
 Com `Banco de unidades` preenchido, marque cada unidade vinculada como vendida, na propriedade de situação da unidade, e releia a unidade para conferir que ela aponta para a venda. Unidade que já consta como vendida em outra venda: pare e pergunte.
 
@@ -217,11 +219,10 @@ Se você responder só com o resumo da venda, ou só disser que marcou as unidad
 
 ### Cliente ligada pelo primeiro nome
 
-Se você vincular a pessoa cliente porque a busca pelo primeiro nome achou uma página só, a venda pode ir para a homônima errada e o histórico de compras muda de dono.
+Se você vincular a pessoa cliente porque a busca pelo primeiro nome achou uma página só, a venda pode ir para a homônima e o histórico de compras muda de dono.
 
-1. Compare o nome completo e a cidade dita com a página achada.
-2. Sem bater, abra a transação no meio de pagamento, pela ordem do Passo 3, e leia o pagador.
-3. Sem resposta lá, pergunte, mostrando a página, o que a pessoa disse e o que o meio mostrou.
+1. Siga o Passo 3: compare o nome completo e a cidade, leia o pagador no meio de pagamento e, sem resposta lá, pergunte.
+2. Cliente que não é a página achada: cadastre-a por `definir-pessoa`, com o não confundir com ligado ao homônimo.
 
 ### Pessoa ou unidade duplicada
 
@@ -229,7 +230,7 @@ Se você criar cliente ou unidade que já existe, a venda aponta para o registro
 
 1. Busque com `identificar-duplicata` antes de vincular.
 2. Sem a página, pare e pergunte.
-3. Não crie a pessoa, o produto nem a unidade.
+3. Não crie o produto nem a unidade. A pessoa se cadastra por `definir-pessoa`.
 
 ### Retorno inventado
 
@@ -300,18 +301,15 @@ O comentário da página disse o que voltou, por que voltou, a fonte e quando. A
 - O banco de vendas não está no workspace conectado: pare. Não use a lista de outro workspace.
 - Venda provável já existe: atualize. Não duplique. Dúvida, ou várias parecidas: mostre e confirme.
 - Venda existente com um campo ausente e os demais válidos: preencha o ausente. Os válidos permanecem.
-- Cliente, unidade ou conjunto ausente: pare e pergunte. Não crie.
-- Cliente achada só pelo primeiro nome, ou por um nome parcial, mesmo em página única: leia o pagador no meio de pagamento antes de vincular e, sem resposta lá, pergunte.
+- Cliente, unidade ou conjunto ausente: pare e pergunte. A cliente se cadastra por `definir-pessoa`, e o conjunto e a unidade não se criam aqui.
 - Unidade sem a variante dita: pare e pergunte. Não invente a variante na venda. O saldo não muda aqui.
 - Taxa, repasse ou diferença sem explicação: não grave como desconto. Mostre o diff e pergunte.
-- O pedido é acompanhar evolução ou retorno: registre a venda com a data real, as peças e, quando houve, o ponto de contato. Não crie propriedade de retorno.
 - Retirada sem local, ou venda sem o ponto de contato em que aconteceu: confirme antes de gravar.
 - Origem do estoque, destino do envio, local de processamento ou um local da venda diferente do ponto de contato: não grave em ponto de contato nem em local da retirada. Sugira e espere o sim.
 - Há outra fonte da mesma venda: ela entra no diff do campo em que diverge. O canônico daquele campo não vale para os outros.
 - Lançamento retroativo sem a venda original na lista: pare e pergunte. Não crie uma segunda venda a partir do pedido tardio.
 - Reversão ou decisão de conciliação: o comentário da página vem antes da alteração e traz o que mudou, o porquê, a fonte e quando.
 - Entrada no extrato sem venda ou liberação a conciliar: `conciliar-recebimento`.
-- Unidade que já consta como vendida em outra venda: pare e pergunte. Não a marque de novo.
 - `Banco de unidades` vazio: não vincule unidade, não marque a situação dela e não mexa no saldo.
 - Gasto: `lancar-despesa-da-empresa`. Frase mista de caixa: `definir-lancamento-financeiro`. Insumo: `gerenciar-estoque`. Venda de bem durável: `registrar-ciclo-do-ativo`.
 
