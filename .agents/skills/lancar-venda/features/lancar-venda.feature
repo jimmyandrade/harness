@@ -47,6 +47,19 @@ Funcionalidade: Lançar venda
       Então as peças saem das unidades
       Mas não preenche as peças vendidas nem altera o saldo do estoque
 
+    Exemplo: Unidade marcada como vendida
+      Dado que o banco de unidades está preenchido e a venda tem uma unidade em estoque
+      Quando a habilidade vincula a unidade à venda
+      Então marca a situação da unidade como vendida
+      E relê a unidade para conferir que ela aponta para a venda
+      Mas não altera o saldo do estoque
+
+    Exemplo: Unidade já vendida em outra venda
+      Dado que a unidade já consta como vendida em outra venda
+      Quando a habilidade vai vinculá-la a esta venda
+      Então para e pergunta
+      Mas não marca a unidade de novo
+
   Regra: o completar e o corrigir mantêm o dado válido
 
     Exemplo: Campo ausente
@@ -139,7 +152,7 @@ Funcionalidade: Lançar venda
     Exemplo: Controle de estoque por unidade vazio
       Dado que o banco de unidades está vazio
       Quando a habilidade vincula os produtos vendidos
-      Então não vincula unidade nem mexe no saldo
+      Então não vincula unidade, não marca a situação dela e não mexe no saldo
 
   Regra: migração, correção e reversão deixam a trilha
 
