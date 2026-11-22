@@ -3,7 +3,7 @@ name: publicar-produto-fisico-na-loja-virtual
 description: Publica e corrige um produto físico na loja virtual, com título, slug, descrição, variantes, estoque e prontidão para venda e marcação em post. Usada quando o produto vai à loja virtual ou precisa de correção lá, mesmo sem dizer loja. NÃO serve para cadastrar o produto, registrar o preço, movimentar estoque, vender no ponto de venda físico nem escrever o post.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.5.0"
   aliases:
     - definir-produto-na-loja
   related:
@@ -41,6 +41,8 @@ Antes de criar um produto, procure na loja o que pode ser o mesmo, seguindo `ide
 
 O título da loja é o nome completo do produto no registro. Um título mais curto que o nome do registro é divergência: mostre e proponha o alinhamento.
 
+O título mantém a grafia do registro, com as maiúsculas internas, como em tanGa. Um canal que normaliza o nome, como o catálogo da maquininha, fica com a grafia dele, e a resposta diz isso.
+
 ### Passo 3
 
 O slug é adequado quando deriva do nome completo do produto, em minúsculas, ASCII, kebab-case, sem palavra cortada, sem número de id e igual ao slug do registro, quando ele existe. Alerte antes de gravar um slug fora disso e mostre o slug proposto. Alerte também quando o slug que já está na loja diverge do nome, como o que omite uma palavra do nome.
@@ -74,6 +76,8 @@ O produto está pronto para venda e para marcação num post quando:
 - [ ] O título e o slug passaram pelos Passos 2 e 3.
 - [ ] O status está ativo, e cada variante tem preço, SKU e estoque.
 - [ ] O produto está publicado em cada canal de `Canais exigidos`.
+
+A lista vale também quando a pessoa pede para ativar ou publicar. Com item faltando, não ative nem publique em canal: o produto fica em rascunho. Complete antes o que o registro já tem, como título, preço, SKU, estoque, tipo, atributos e a descrição aprovada, e diga o que falta e quem faz. Ative quando a lista estiver completa.
 
 Diga o que falta. Um canal que um aplicativo gerencia, como o do Instagram, não publica por API: peça à pessoa que o faça no painel da loja e avise que a sincronização com a rede leva tempo.
 
@@ -142,6 +146,14 @@ Se você criar um produto sem procurar o que já está na loja, a loja fica com 
 2. Achado um candidato, mostre o link e pergunte.
 3. Diga na resposta o que buscou e o que apareceu.
 
+### Produto ativado com a lista incompleta
+
+Se você ativar o produto e publicá-lo em canal sem a foto aprovada, a descrição aprovada ou outro item do Passo 7, a loja mostra uma página vazia a quem compra, mesmo que a pessoa tenha pedido para ativar.
+
+1. Rode a lista do Passo 7 antes de ativar, também quando o pedido é só ativar.
+2. Com item faltando, mantenha o rascunho, complete o que o registro já tem e diga o que falta e quem faz.
+3. Ative e publique quando a lista estiver completa.
+
 ### Resposta sem link
 
 Se você disser que criou ou alterou um produto sem mandar o link, a pessoa precisa procurar o produto para conferir.
@@ -153,6 +165,10 @@ Se você disser que criou ou alterou um produto sem mandar o link, a pessoa prec
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
+### ativa o Cropped Nadador tanGa
+
+Conferi o Passo 7: o produto não tinha foto aprovada nem descrição aprovada. Mantive o rascunho, completei título, preço, SKU e estoque do registro e disse que faltavam a foto e a descrição e quem aprova cada uma. Não ativei nem publiquei em canal.
+
 ### use "calca-dupla-nhee" como slug da Calça Dupla Face nhEe
 
 Alertei que o slug omite "face", propus `calca-dupla-face-nhee`, troquei com o redirecionamento do antigo e confirmei o endereço novo. O título curto da loja ficou como divergência para a pessoa decidir.
@@ -162,7 +178,7 @@ Alertei que o slug omite "face", propus `calca-dupla-face-nhee`, troquei com o r
 - O registro não tem slug: derive do nome completo e mostre antes de gravar.
 - O slug adequado já existe em outro produto: pergunte. Não acrescente sufixo de número em silêncio.
 - A pessoa insiste num slug fora da regra: grave com o alerta dito, sem repetir a objeção.
-- O produto não tem foto: deixe fora de venda e marcação e diga que falta a foto.
+- O produto não tem foto, ou outro item do Passo 7 falta: deixe em rascunho e diga o que falta. Vale também quando a pessoa pediu para ativar.
 - A quantidade do registro e a da loja divergem: pergunte qual vale.
 - A busca acha um produto parecido de outra peça: mostre o link e diga por que parece outra, sem criar nem apagar.
 - A categoria não aceita um atributo do registro: deixe o atributo na descrição e diga qual ficou fora.
@@ -181,6 +197,9 @@ Alertei que o slug omite "face", propus `calca-dupla-face-nhee`, troquei com o r
 
 - A busca pelo título exato parece bastar. A mesma peça pode estar na loja com outro nome, outra grafia ou só no conjunto: busque também pelas palavras do nome e pelo tipo.
 - O campo de atributo com o mesmo nome parece valer para toda categoria. Cada categoria aceita só os seus: a gravação de um campo de outra categoria falha.
+
+- O pedido de ativar parece dispensar a lista do Passo 7. Ele não dispensa: um produto ativo e publicado sem foto nem descrição aprovadas aparece vazio na loja.
+- O título da loja parece poder seguir a grafia que o canal devolve. Ele segue a do registro, como tanGa, mesmo que outro canal troque as maiúsculas.
 
 ## Scripts disponíveis
 
