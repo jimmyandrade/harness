@@ -10,6 +10,7 @@ metadata:
     - definir-pessoa
     - evoluir-habilidade
     - gravar-termos-no-vocabulario
+    - identificar-duplicata
     - procurar-variacao-de-termo
     - redigir-com-tom-de-voz
     - validar-plano-de-vocabulario
@@ -32,7 +33,13 @@ metadata:
 
 A pessoa responsável pelo tom de voz quer cadastrar ou atualizar termos. Perguntar se um termo ou uma variação faltou segue `procurar-variacao-de-termo`. Monte o plano com idioma, modo e a lista. Cada item tem `state`, `term`, `categories` e os campos desse nível. Use o que a pessoa enviou. O texto que você monta a partir disso, como o `reason`, vai marcado como seu.
 
-Nome de pessoa ou de empresa, inteiro ou em parte, nunca entra no vocabulário, nem como apelido, termo permitido ou proibido. Antes de montar o plano, procure cada termo na lista de pessoas e na lista de empresas do mapeamento de dados do projeto, pelo nome, pelas variações de grafia e por trecho do nome, como faz `identificar-duplicata`. O termo que é nome ou parte de um nome sai do plano. A desambiguação dele, como "é parte do nome de uma empresa, não apelido de pessoa", vai para o cadastro dessa pessoa ou empresa por `definir-pessoa` ou `definir-empresa`, no campo de desambiguação que o mapeamento liga. Sem esse campo no mapeamento, ela vai nas notas da empresa ou nas observações da pessoa, e a resposta sugere o campo. Busca sem resultado e termo que pode ser nome, como uma palavra com maiúscula que não é palavra comum: pergunte se é nome antes de gravar.
+Nome de pessoa ou de empresa, inteiro ou em parte, nunca entra no vocabulário, nem como apelido, termo permitido ou proibido. Antes de montar o plano, procure cada termo na lista de pessoas e na lista de empresas do mapeamento de dados do projeto, pelo nome, pelas variações de grafia e por trecho do nome, como faz `identificar-duplicata`.
+
+O termo que é nome ou parte de um nome sai do plano. A desambiguação dele, como "é parte do nome de uma empresa, não apelido de pessoa", vai para o cadastro dessa pessoa ou empresa por `definir-pessoa` ou `definir-empresa`, no campo de desambiguação que o mapeamento liga.
+
+Sem esse campo no mapeamento, ela vai nas notas da empresa ou nas observações da pessoa, e a resposta sugere o campo.
+
+Busca sem resultado e termo que pode ser nome, como uma palavra com maiúscula que não é palavra comum: pergunte se é nome antes de gravar.
 
 Quando a pessoa manda um par rotulado de antes e depois, cada lado é um termo no mesmo lote. O antes fica `forbidden`, e `substitution` e `alternatives` são o depois, com o texto que ela escreveu. O depois fica `allowed`. `related` liga os dois. Não invente outra alternativa. "Nunca use uma palavra, use outra" tem o mesmo formato, sem `when` e sem `tags`. A frase inteira, com a pontuação e com um símbolo no fim, é um termo. Termo novo entra em minúsculas. Quando a pessoa cita só um trecho de uma frase que você escreveu, como "não gosto do `se der…`", pergunte se recusa o trecho, a frase inteira ou os dois, e grave o que ela disser, sem ampliar a recusa por suposição. Se ela der depois um substituto para um termo recusado que ficou sem alternativa, atualize esse termo com `update`.
 

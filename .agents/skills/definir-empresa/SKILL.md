@@ -28,7 +28,9 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ### Passo 1
 
-Cadastrar, atualizar, validar ou consolidar uma empresa na lista de empresas é esta habilidade. A pessoa informa o data source na execução. Sem essa indicação, use a lista de empresas do mapeamento de dados do projeto. O nome de cada propriedade e as opções vêm desse mapeamento. Este texto usa os conceitos: o nome da empresa, as pessoas responsáveis, os donos, quem verifica, o tipo de público com a opção de fornecedor, as notas, a desambiguação, que diz o que um nome ou parte dele não é, e, na lista de pessoas, as empresas relacionadas. Se a lista não estiver no workspace conectado, pare. Não use a lista de outro workspace.
+Cadastrar, atualizar, validar ou consolidar uma empresa na lista de empresas é esta habilidade. A pessoa informa o data source na execução. Sem essa indicação, use a lista de empresas do mapeamento de dados do projeto. O nome de cada propriedade e as opções vêm desse mapeamento.
+
+Este texto usa os conceitos: o nome da empresa, as pessoas responsáveis, os donos, quem verifica, o tipo de público com a opção de fornecedor, as notas, a desambiguação, que diz o que um nome ou parte dele não é, e, na lista de pessoas, as empresas relacionadas. Se a lista não estiver no workspace conectado, pare. Não use a lista de outro workspace.
 
 Quando uma pessoa ou outra empresa indica esta empresa, ou esta empresa indica uma pessoa ou outra empresa, a indicação liga as duas páginas por relação, e o comentário não substitui a relação. Use a relação de indicação que o mapeamento de dados tem. Sem relação para o par, não crie propriedade: diga a limitação e recomende o campo na resposta, e registre quem indicou nas notas até lá.
 

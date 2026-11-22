@@ -702,6 +702,7 @@ flowchart LR
   definir_vocabulario --> definir_empresa
   definir_vocabulario --> definir_pessoa
   definir_vocabulario --> gravar_termos_no_vocabulario
+  definir_vocabulario --> identificar_duplicata
   definir_vocabulario --> procurar_variacao_de_termo
   definir_vocabulario --> redigir_com_tom_de_voz
   definir_vocabulario --> validar_plano_de_vocabulario
