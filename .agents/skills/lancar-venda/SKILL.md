@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.18.1"
+  version: "0.18.7"
   aliases:
     - definir-venda
   related:
@@ -21,6 +21,7 @@ metadata:
     - procurar-venda
     - registrar-ciclo-do-ativo
     - escrever-link
+    - rotular-item
 ---
 
 # Lançar venda
@@ -35,6 +36,10 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Banco de vendas": ""
 # Opcional. Vazio: a venda não vincula unidade, não marca a situação dela e não mexe no saldo, e o produto vendido entra pelo mapeamento.
 "Banco de unidades": ""
+# `Etiqueta do contato que pagou` é a etiqueta de contato que a pessoa cliente ganha quando a venda está paga. Vazio, a venda não etiqueta a pessoa.
+"Etiqueta do contato que pagou": ""
+# `Etiqueta do contato com envio` é a etiqueta de contato da venda que tem envio, com postagem. Vazio, a venda não a aplica.
+"Etiqueta do contato com envio": ""
 # `Início da nota no envio`: data, no formato AAAA-MM-DD, a partir da qual a venda com envio exige nota fiscal para transportar a mercadoria.
 "Início da nota no envio": ""
 # `Forma de entrega sem envio`: a forma de entrega que não transporta a mercadoria e dispensa a nota do envio.
@@ -81,9 +86,19 @@ Pessoa cliente, conjunto e unidades são páginas que já existem. A pessoa clie
 
 Com `Banco de unidades` preenchido, a unidade traz o tamanho e as outras variantes, e esse vínculo é o rastro do estoque. As peças vendidas e os tipos de peças saem dessas unidades. Não preencha. Um conjunto não substitui as unidades. Com o banco vazio, vincule só o produto vendido, pelo mapeamento, e não vincule unidade.
 
-Antes de vincular, busque com `identificar-duplicata`. Sem a página, ou sem a variante na unidade, pare e pergunte. Não crie a pessoa, o produto, a unidade nem a variante na venda. Não escolha entre parecidos.
+Antes de vincular a pessoa cliente, confira quem é, também quando a busca acha uma página só. Vincule apenas quando o nome completo, ou outro dado dito pela pessoa, como a cidade, bate com a página. O primeiro nome não basta.
+
+Quando não bate, leia o pagador no meio de pagamento da venda, na ordem: linha de comando, API, conector, navegador do app e, por último, a extensão do Chrome. Só então pergunte, mostrando a página, o que a pessoa disse e o que o meio mostrou. Não diga que ele não mostra o pagador sem abrir a transação. Cartão presencial costuma vir sem cliente associado e o Pix traz o pagador.
+
+Quando a pessoa diz que a cliente é outra, a venda não reaproveita a página do homônimo. Cadastre a cliente por `definir-pessoa`, com a localidade dita e o não confundir com ligado ao homônimo, e só então vincule.
+
+Antes de vincular, busque com `identificar-duplicata`, também a pessoa cliente pelo nome, pelas variações, pelas notas e pelo nome civil. Sem a página, ou sem a variante na unidade, pare e pergunte. Não crie o produto, a unidade nem a variante na venda. Não escolha entre parecidos.
 
 Com `Banco de unidades` preenchido, marque cada unidade vinculada como vendida, na propriedade de situação da unidade, e releia a unidade para conferir que ela aponta para a venda. Unidade que já consta como vendida em outra venda: pare e pergunte.
+
+Com o pagamento pago, aplique a `Etiqueta do contato que pagou` à pessoa cliente, por `rotular-item`. A `Etiqueta do contato com envio` entra só quando a venda tem envio: retirada no local não leva.
+
+Depois de vincular, releia o valor inferido e o desconto aplicado. Valor vazio, ou desconto igual ao valor pago, diz que o cálculo lê uma relação que falta: ache-a na fórmula e vincule, como as vendas anteriores.
 
 A situação da unidade não é o saldo. O saldo segue `gerenciar-estoque`. Não altere o saldo aqui.
 
@@ -109,7 +124,7 @@ Taxa de transação inferida, valor líquido final, valor real com frete, peças
 
 ### Passo 6
 
-O ponto de contato é o lugar em que a venda aconteceu, como uma feira ou um evento. Sem o lugar dito pela pessoa, pergunte o ponto de contato antes de criar a venda e, na retirada, o local. O canal usado para achar a cliente, como o WhatsApp dela, não é o ponto da venda: não o grave no título, no ponto nem no corpo.
+O ponto de contato é o lugar em que a venda aconteceu, como uma feira ou um evento. Sem o lugar dito pela pessoa, pergunte o ponto de contato antes de criar a venda e, na retirada, o local. O ponto das vendas vizinhas, ou o único evento em andamento, não é o lugar dito: pergunte também nesse caso. O canal usado para achar a cliente, como o WhatsApp dela, não é o ponto da venda: não o grave no título, no ponto nem no corpo.
 
 Não copie esse ponto para o local da retirada, que é só onde a pessoa retirou os produtos. O ponto que originou o crédito não é o ponto da venda, a origem do estoque nem o local da retirada.
 
@@ -211,13 +226,20 @@ Se você responder só com o resumo da venda, ou só disser que marcou as unidad
 2. Com `Banco de unidades` vazio, ponha o link da venda e do produto.
 3. Escreva cada link como `escrever-link` manda.
 
+### Cliente ligada pelo primeiro nome
+
+Se você vincular a pessoa cliente porque a busca pelo primeiro nome achou uma página só, a venda pode ir para a homônima e o histórico de compras muda de dono.
+
+1. Siga o Passo 3: compare o nome completo e a cidade, leia o pagador no meio de pagamento e, sem resposta lá, pergunte.
+2. Cliente que não é a página achada: cadastre-a por `definir-pessoa`, com o não confundir com ligado ao homônimo.
+
 ### Pessoa ou unidade duplicada
 
 Se você criar cliente ou unidade que já existe, a venda aponta para o registro errado.
 
 1. Busque com `identificar-duplicata` antes de vincular.
 2. Sem a página, pare e pergunte.
-3. Não crie a pessoa, o produto nem a unidade.
+3. Não crie o produto nem a unidade. A pessoa se cadastra por `definir-pessoa`.
 
 ### Retorno inventado
 
@@ -251,14 +273,6 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 A venda ficou nas vendas, com a data real e as peças. Não criei propriedade de retorno.
 
-### Complete esta venda. O restante já está certo.
-
-Preenchi o que faltava. O dado válido permaneceu. A correção ficou no comentário da página.
-
-### Relacione a cliente, o conjunto, as peças e as unidades desta venda.
-
-Vinculei a pessoa cliente, o conjunto e as unidades que já existiam, com as variantes. Marquei cada unidade como vendida e li a unidade de volta. As peças continuaram calculadas. O saldo não mudou.
-
 ### Cadastre esta venda de duas peças.
 
 Vinculei as unidades que já existiam. Não criei pessoa nem produto. O valor inferido continuou calculado. A resposta trouxe o link da venda, das duas unidades, da variante de cada uma e do produto.
@@ -279,33 +293,25 @@ O ponto de contato ficou no lugar em que a venda aconteceu. A retirada ficou no 
 
 O preço nominal e o desconto comercial continuaram calculados. Gravei o motivo, o valor pago pelos produtos, o valor recebido, o crédito usado e o meio efetivo. Taxa e repasse não entraram como desconto.
 
-### Reverta esta correção e deixe a trilha.
-
-O comentário da página disse o que voltou, por que voltou, a fonte e quando. A reversão não ficou só no chat.
-
 ## Casos-limite
 
 - O banco de vendas não está no workspace conectado: pare. Não use a lista de outro workspace.
 - Venda provável já existe: atualize. Não duplique. Dúvida, ou várias parecidas: mostre e confirme.
 - Venda existente com um campo ausente e os demais válidos: preencha o ausente. Os válidos permanecem.
-- Cliente, unidade ou conjunto ausente: pare e pergunte. Não crie.
+- Cliente, unidade ou conjunto ausente: pare e pergunte. A cliente se cadastra por `definir-pessoa`, e o conjunto e a unidade não se criam aqui.
 - Unidade sem a variante dita: pare e pergunte. Não invente a variante na venda. O saldo não muda aqui.
 - Taxa, repasse ou diferença sem explicação: não grave como desconto. Mostre o diff e pergunte.
-- O pedido é acompanhar evolução ou retorno: registre a venda com a data real, as peças e, quando houve, o ponto de contato. Não crie propriedade de retorno.
 - Retirada sem local, ou venda sem o ponto de contato em que aconteceu: confirme antes de gravar.
 - Origem do estoque, destino do envio, local de processamento ou um local da venda diferente do ponto de contato: não grave em ponto de contato nem em local da retirada. Sugira e espere o sim.
 - Há outra fonte da mesma venda: ela entra no diff do campo em que diverge. O canônico daquele campo não vale para os outros.
 - Lançamento retroativo sem a venda original na lista: pare e pergunte. Não crie uma segunda venda a partir do pedido tardio.
 - Reversão ou decisão de conciliação: o comentário da página vem antes da alteração e traz o que mudou, o porquê, a fonte e quando.
 - Entrada no extrato sem venda ou liberação a conciliar: `conciliar-recebimento`.
-- Unidade que já consta como vendida em outra venda: pare e pergunte. Não a marque de novo.
 - `Banco de unidades` vazio: não vincule unidade, não marque a situação dela e não mexa no saldo.
 - Gasto: `lancar-despesa-da-empresa`. Frase mista de caixa: `definir-lancamento-financeiro`. Insumo: `gerenciar-estoque`. Venda de bem durável: `registrar-ciclo-do-ativo`.
 
 ## Pegadinhas
 
-- O número do pedido parece confirmação e transação. Pedido, ID da confirmação e ID da transação são três dados.
-- A data em que o pedido entrou na loja parece a data da venda. No lançamento retroativo, a data real permanece.
 - O pedido tardio na loja parece uma venda nova. Ele vincula a venda original. Data, pagamento, valor e contexto reais permanecem.
 - Vincular a unidade parece terminar a venda. A unidade continua em estoque até alguém marcar a situação dela como vendida.
 - Relacionar o produto parece preencher as peças vendidas. A peça sai da unidade, e a variante está nessa unidade. O saldo fica em `gerenciar-estoque`.
