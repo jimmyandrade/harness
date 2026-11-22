@@ -1,0 +1,11 @@
+{
+  "skill_name": "definir-janela-de-contato",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Cadastre a Ana, que não deve ser contatada na segunda e na terça nem a partir das 19h, e a lista de pessoas tem as propriedades da janela de contato.",
+      "expected_output": "Gravar os dias, o horário `19:00` e, se houver, o início do silêncio nas propriedades nomeadas pelos parâmetros, em texto HH:MM de 24 horas, e nunca nas observações. Mudar só os campos informados. Sem a propriedade na lista, avisar e propor criá-la, sem criar antes do sim.",
+      "files": []
+    }
+  ]
+}

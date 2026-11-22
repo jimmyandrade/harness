@@ -78,6 +78,7 @@ flowchart LR
     definir_inscricao["definir-inscricao"]
     definir_instrucoes_do_projeto["definir-instrucoes-do-projeto"]
     definir_issue_do_github["definir-issue-do-github"]
+    definir_janela_de_contato["definir-janela-de-contato"]
     definir_jornada_de_producao["definir-jornada-de-producao"]
     definir_lancamento_financeiro["definir-lancamento-financeiro"]
     definir_link_rastreavel["definir-link-rastreavel"]
@@ -197,6 +198,7 @@ flowchart LR
     verificar_origem_do_link["verificar-origem-do-link"]
   end
   abordar_contato --> definir_empresa
+  abordar_contato --> definir_janela_de_contato
   abordar_contato --> definir_negociacao
   abordar_contato --> definir_pessoa
   abordar_contato --> diagnosticar_funil
@@ -356,6 +358,7 @@ flowchart LR
   convidar_para_evento --> conversar_no_whatsapp
   convidar_para_evento --> definir_agenda
   convidar_para_evento --> definir_convidado
+  convidar_para_evento --> definir_janela_de_contato
   convidar_para_evento --> definir_pessoa
   convidar_para_evento --> rascunhar_mensagem
   convidar_para_evento --> redigir_com_tom_de_voz
@@ -540,6 +543,7 @@ flowchart LR
   definir_instrucoes_do_projeto --> criar_habilidade
   definir_issue_do_github --> criar_pull_request
   definir_issue_do_github --> levantar_ambiente_do_repositorio
+  definir_janela_de_contato --> definir_pessoa
   definir_jornada_de_producao --> definir_agenda
   definir_jornada_de_producao --> definir_agenda_de_popstar
   definir_jornada_de_producao --> organizar_ponto_de_contato
@@ -600,6 +604,7 @@ flowchart LR
   definir_pessoa --> definir_cliente_da_loja
   definir_pessoa --> definir_empresa
   definir_pessoa --> definir_grafia
+  definir_pessoa --> definir_janela_de_contato
   definir_pessoa --> definir_perfil_social
   definir_pessoa --> identificar_duplicata
   definir_pessoa --> mencionar_pessoa
@@ -700,6 +705,7 @@ flowchart LR
   dividir_mensagem --> rascunhar_mensagem
   enviar_email --> acompanhar_retornos_pendentes
   enviar_email --> conversar_no_whatsapp
+  enviar_email --> definir_janela_de_contato
   enviar_email --> definir_pessoa
   enviar_email --> definir_vocabulario
   enviar_email --> lancar_despesa_da_empresa
@@ -1016,6 +1022,7 @@ flowchart LR
   rascunhar_mensagem --> acompanhar_resposta_no_whatsapp
   rascunhar_mensagem --> anexar_arquivo_no_whatsapp
   rascunhar_mensagem --> conversar_no_whatsapp
+  rascunhar_mensagem --> definir_janela_de_contato
   rascunhar_mensagem --> definir_negociacao
   rascunhar_mensagem --> definir_pessoa
   rascunhar_mensagem --> definir_tarefa

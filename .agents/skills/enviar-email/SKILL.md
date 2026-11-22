@@ -3,7 +3,7 @@ name: enviar-email
 description: Monta e envia um e-mail em nome de uma pessoa, com a assinatura certa, o destinatário principal e as cópias, o anexo vindo do Notion e o envio só com o sim. Usada quando uma pessoa contata uma organização por e-mail, inclusive com comprovante. Não serve para escrever no tom da marca, achar um e-mail nem triar a caixa.
 metadata:
   author: jimmyandrade
-  version: "0.7.2"
+  version: "0.7.3"
   related:
     - conversar-no-whatsapp
     - definir-pessoa
@@ -16,6 +16,7 @@ metadata:
     - procurar-email
     - redigir-com-tom-de-voz
     - rotular-item
+    - definir-janela-de-contato
 ---
 
 # Enviar e-mail
@@ -105,7 +106,7 @@ O `definir-vocabulario` guarda cada correção dessas.
 
 O texto passa por `redigir-com-tom-de-voz`.
 
-Confira a janela de contato de cada destinatário, como `definir-pessoa` manda, antes de pedir o sim e de novo na hora do envio. Fora da janela de qualquer um, o e-mail não sai: o rascunho fica na caixa para o próximo horário permitido e, se o conector agenda o envio, a pessoa decide se ele fica agendado para esse horário.
+Confira a janela de contato de cada destinatário, como `definir-janela-de-contato` manda, antes de pedir o sim e de novo na hora do envio. Fora da janela de qualquer um, o e-mail não sai: o rascunho fica na caixa para o próximo horário permitido e, se o conector agenda o envio, a pessoa decide se ele fica agendado para esse horário.
 
 Mostre o rascunho inteiro, com o remetente, o Para, as cópias, o assunto, o anexo e a assinatura, e pergunte se pode enviar.
 O sim vale para esse texto e esses destinatários.
