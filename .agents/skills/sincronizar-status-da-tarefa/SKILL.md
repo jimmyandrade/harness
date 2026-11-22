@@ -4,7 +4,7 @@ description: Sincroniza o status de tarefas, cards ou issues com o estado do pul
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.11.1"
+  version: "0.11.2"
   related:
     - criar-commit
     - criar-pull-request
@@ -159,6 +159,13 @@ Se você disser que a tarefa está no status de destino porque era o plano, o re
 1. Releia o status de cada tarefa com negação ou erro.
 2. Relate o status que a ferramenta devolveu.
 3. Anote "não feito" para o que não chegou ao destino.
+
+### PR citado de memória
+
+Se você disser que um PR está em rascunho ou pendente pelo que lembra, o estado pode ter mudado.
+
+1. Leia o estado de cada PR no GitHub antes de citá-lo.
+2. Se a pessoa perguntar se tem certeza, releia e corrija.
 
 ### Total de memória
 
