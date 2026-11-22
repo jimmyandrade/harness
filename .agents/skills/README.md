@@ -863,6 +863,7 @@ flowchart LR
   lancar_venda --> procurar_venda
   lancar_venda --> registrar_ciclo_do_ativo
   lancar_venda --> registrar_preco_de_produto_fisico
+  lancar_venda --> rotular_item
   levantar_ambiente_do_repositorio --> criar_commit
   levantar_ambiente_do_repositorio --> criar_pull_request
   levantar_ambiente_do_repositorio --> escrever_codigo
