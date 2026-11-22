@@ -108,27 +108,6 @@ Funcionalidade: Lançar venda
       Quando a habilidade registra o desconto
       Então pergunta o porquê antes de gravar
 
-  Regra: a entrada de um saque no cartão não é venda
-
-    Exemplo: Entrada sem venda, devolvida logo depois
-      Dado que o extrato tem uma entrada sem venda, devolvida logo depois para quem passou o cartão
-      Quando a habilidade concilia a entrada
-      Então pergunta à pessoa se foi um saque no cartão de crédito
-      Mas não cria uma venda para fechar a conciliação
-
-    Exemplo: Saque numa conta de pessoa física
-      Dado que a entrada é um saque e a conta da máquina era de pessoa física na data
-      Quando a habilidade concilia a entrada
-      Então a entrada não vai para as vendas
-      E o comentário da conciliação diz o que ela é
-
-    Exemplo: Saque numa conta da empresa
-      Dado que a entrada é um saque e a conta da máquina era da empresa na data
-      Quando a habilidade concilia a entrada
-      Então avisa que o saque infla o faturamento e recomenda não repetir
-      E registra a entrada e a devolução como um par de lançamentos financeiros
-      Mas confirma o tratamento contábil com quem cuida da contabilidade
-
   Regra: a nota fiscal do envio segue os parâmetros
 
     Exemplo: Envio a partir do início da nota

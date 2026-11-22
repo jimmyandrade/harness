@@ -232,6 +232,22 @@ How these skills relate is in `README.md`, in this folder.
   - [ ] A period with a visible change yields an announcement without technical terms
   - [ ] Without a publisher or a channel in the project instructions, the question suggests no channel and puts not announcing last
 
+### conciliar-recebimento
+- **Stability**: experimental
+- **Description**: Reconcile what the payment provider released with the sales, reading each sale's detail at the source, and keep entries that are not sales, such as a card cash withdrawal, out of the sales
+- **Properties**:
+  - Lives at `.agents/skills/conciliar-recebimento/SKILL.md`
+  - Reads the sales database, the bank accounts database, and the source of the received amount from the project instructions, and calls the database lookup skill for a database
+  - Opens the detail of every sale in the period and reads the gross amount, fee, net amount, release date and time, and transaction id
+  - Records the net release as the amount received, never the gross, and asks when the detail is missing
+  - Matches each release to a sale by transaction id, and has the person confirm when two sales share the gross amount
+  - Treats a credit card cash withdrawal as not a sale, and checks who held the card machine account on the date
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [ ] Two sales with the same gross amount get their own net release
+  - [ ] A missing sale detail stops the skill with a question and the gross is not recorded as received
+  - [ ] An entry without a sale that is a card withdrawal is not registered as a sale
+
 ### configurar-harness-de-negocio
 - **Stability**: experimental
 - **Description**: Set up a new business harness by following the core runbooks in order, including the sync of the skills with Notion, and check each screen from the person's screenshot. The core is already set up and is not a target
@@ -1733,12 +1749,12 @@ How these skills relate is in `README.md`, in this folder.
 - **Description**: Register, complete, correct, or reconcile a sale of one or more products, linking the customer and units that already exist and leaving an audit trail
 - **Properties**:
   - Lives at `.agents/skills/lancar-venda/SKILL.md`
-  - Reads the sales database, the bank accounts database, the optional units database, the source of the received amount, and the invoice rule from the project instructions, and asks once when a value other than a database is empty, and calls the database lookup skill for a database
+  - Reads the sales database, the optional units database, and the invoice rule from the project instructions, and asks once when a value other than a database is empty, and calls the database lookup skill for a database
   - Searches the sale by order number, order link, and transaction id before creating, and links a late store order to the original sale
   - Never creates the person, product, unit, or variant, and never writes the sold pieces or the stock balance
   - Records the discount reason and keeps nominal price, discount, credit, amount paid, and amount received distinct, with fees and transfers never counted as a discount
   - Shows a per-field diff when sources diverge and has the person confirm the canonical value of each field
-  - Treats a credit card cash withdrawal as not a sale, and checks who held the card machine account on the date
+  - Takes the amount received, the net release, from the received-amount reconciliation skill
   - Flags a shipped sale that needs an invoice from the configured start date, except for the delivery form that does not ship
   - Leaves a page comment, before the change, for each migration, correction, reversal, or reconciliation decision
 - **Test Criteria**:
@@ -1746,7 +1762,6 @@ How these skills relate is in `README.md`, in this folder.
   - [ ] An existing sale is updated and a second one is never created
   - [ ] A missing customer or unit stops the skill with a question
   - [ ] Divergent sources produce a per-field diff before any change
-  - [ ] An entry without a sale that is a card withdrawal is not registered as a sale
   - [ ] An empty database parameter makes the skill call the database lookup skill and not ask for the name first
 
 ### limpar-copias-de-trabalho
