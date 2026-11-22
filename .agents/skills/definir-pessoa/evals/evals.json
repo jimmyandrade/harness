@@ -6,6 +6,12 @@
       "prompt": "Cadastre a atendente de uma empresa de serviços, vinculada à empresa e à obrigação dela. A empresa não está na lista de empresas.",
       "expected_output": "Buscar a pessoa e a empresa. Sem equivalente da empresa, cadastrá-la por definir-empresa na mesma rodada, sem perguntar, com a pessoa nas pessoas responsáveis, e ler as duas páginas de volta. Não deixar o nome da empresa só nas observações nem dizer que ela não existe. Dizer o que ficou pendente, como a cidade.",
       "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Cadastre o Caio, que só passou o WhatsApp, e depois a mesma pessoa mandou o e-mail. O armazenamento é em arquivos locais e o identificador secundário é o telefone.",
+      "expected_output": "Achar o arquivo pelo telefone, nomeado pelo identificador do arquivo, e acrescentar o e-mail ao mesmo arquivo e ao índice, sem criar um segundo arquivo para a mesma pessoa.",
+      "files": []
     }
   ]
 }
