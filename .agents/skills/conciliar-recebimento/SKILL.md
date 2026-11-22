@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   related:
     - lancar-venda
     - definir-lancamento-financeiro
@@ -51,6 +51,8 @@ O valor recebido pela empresa é o líquido liberado, e não o bruto cobrado. Se
 Leia também todos os outros campos que o detalhe mostra, como o nome do cliente, a referência adicional, o meio e a bandeira, os dígitos finais, as parcelas, o nome na fatura e a loja ou o caixa. Um valor que a tela corta, como uma referência com reticências, vem inteiro pelo botão de copiar ou pela requisição que a página faz. Grave na venda o link do detalhe da transação e o que a venda não tem campo para guardar, por `lancar-venda`. O cliente que o detalhe nomeia é procurado e ligado à venda, por `lancar-venda`.
 
 O comprovante completo da transação vai para o campo de comprovantes da venda, quando a venda ainda não tem um. Baixe o arquivo que a fonte oferece e anexe. Quando a fonte só envia o comprovante por e-mail ou SMS, pergunte à pessoa se envia para a caixa da empresa, e anexe o arquivo que chegar. Diga qual venda ficou sem comprovante.
+
+Depois de anexar o comprovante que chegou por e-mail, rotule a conversa por `rotular-item` e arquive. Arquivar é tirar a conversa da caixa de entrada, e não aplicar uma etiqueta com nome de arquivo. Cada cópia do mesmo comprovante, como a do pagador e a do recebedor, recebe o mesmo tratamento. Conversa cujo arquivo não foi anexado fica na entrada.
 
 Quando a fonte permite uma nota na transação, grave nela a ligação de volta com o sistema: a venda, o cliente, cada unidade, cada variante, cada produto, a família do produto e o ponto de contato, cada um com o ID do registro. A nota pode ter limite de tamanho e recusar link, acento e pontuação: teste uma nota antes, e com a recusa grave uma nota por registro, só com letras, números e espaços. Registro que ainda não existe, como a unidade sem página, entra na nota como pendência.
 
@@ -100,7 +102,8 @@ Se você levar só o bruto, a taxa e o líquido, a venda perde o cliente, a refe
 
 1. Leia todos os campos do detalhe e pegue inteiro o valor que a tela corta.
 2. Anexe o comprovante completo, ou pergunte quando a fonte só o envia por e-mail ou SMS.
-3. Grave na nota da transação os IDs da venda, do cliente, das unidades, das variantes, dos produtos, da família e do ponto de contato.
+3. Depois de anexar o comprovante do e-mail, rotule a conversa e tire-a da caixa de entrada.
+4. Grave na nota da transação os IDs da venda, do cliente, das unidades, das variantes, dos produtos, da família e do ponto de contato.
 
 ### Liberação na venda errada
 
@@ -144,6 +147,7 @@ Perguntei se era venda ou saque com cartão de crédito. Uma parente tinha passa
 - O resumo do painel parece bastar. A taxa, o líquido e a hora da liberação aparecem no detalhe de cada venda.
 - Duas vendas do mesmo bruto parecem ter o mesmo líquido. A taxa muda com o meio, como débito, crédito ou Pix, e o líquido muda junto.
 - A referência que aparece com reticências parece o valor inteiro. O valor inteiro vem pelo botão de copiar ou pela requisição da página.
+- Arquivar o e-mail parece mover para a etiqueta de arquivo. Arquivar é tirar da caixa de entrada, depois de rotular.
 - A nota que falha parece um defeito da fonte. A nota pode recusar link, acento e pontuação: só letras, números e espaços passam.
 - A liberação de dinheiro no extrato parece venda. Um saque com cartão de crédito na máquina de cartão não é venda nem receita.
 
