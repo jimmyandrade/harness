@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.2"
+  version: "0.4.3"
   aliases:
     - definir-preco-de-produto
     - definir-preco-da-peca
@@ -160,7 +160,9 @@ O preço novo vale em cada canal de `Canais que repetem o preço`, na mesma pass
 
 Produto que falta num canal é cadastrado nele sempre como produto com variações, uma variação por variante do registro, mesmo quando só uma existe. Cadastre só as variantes que já foram produzidas, com o preço do registro. Não invente custo, estoque nem SKU: o campo que o registro não traz fica vazio, e a resposta diz o que faltou.
 
-Todo produto cadastrado num canal leva foto. Use a foto do produto isolado, de frente, do registro de fotos do produto. Sem essa foto no registro, diga que falta. Quando a ferramenta não consegue enviar o arquivo ao canal, entregue a foto à pessoa e diga onde clicar para escolhê-la.
+Todo produto cadastrado num canal leva foto. Use a foto do produto isolado, de frente, do registro de fotos do produto. Sem essa foto no registro, diga que falta.
+
+Envie a foto pela ferramenta de envio de arquivo do navegador, com o caminho do arquivo, numa sessão que tem o arquivo e o navegador no mesmo computador. Sem essa ferramenta na sessão, abra uma no computador da pessoa antes de desistir. Não preencha o campo de arquivo com script na página: a checagem de permissões bloqueia. Só sem nenhum desses meios, entregue a foto à pessoa e diga onde clicar.
 
 Depois de salvar, releia o nome no canal. Um canal pode trocar as maiúsculas, como "beRá" por "Berá", e recusar o nome que só difere nelas, dizendo que ele já existe. Tente a correção uma vez, no produto que agrupa as variações, e releia depois de recarregar a página. Se o canal voltar a trocar, deixe o nome dele e diga isso na resposta. Não use nome provisório para contornar.
 
