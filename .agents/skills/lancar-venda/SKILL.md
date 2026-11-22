@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.13.4"
+  version: "0.14.0"
   aliases:
     - definir-venda
   related:
@@ -18,6 +18,7 @@ metadata:
     - lancar-despesa-da-empresa
     - procurar-banco-de-dados
     - registrar-ciclo-do-ativo
+    - escrever-link
 ---
 
 # Lançar venda
@@ -149,6 +150,8 @@ Propriedade que não existe: sugira e espere o sim. Não crie. Um caso isolado n
 
 ### Passo 11
 
+A resposta de cada venda lançada, completada, corrigida ou conciliada traz o link do Notion da venda, de cada unidade, da variante de cada unidade e do produto, para a pessoa navegar e conferir. Com `Banco de unidades` vazio, traz o link da venda e do produto. Cada link segue `escrever-link`.
+
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
@@ -209,6 +212,14 @@ Se você preencher as peças vendidas ou alterar o saldo, o histórico e o rastr
 2. Deixe as peças vendidas e os tipos de peças calculados.
 3. Deixe o saldo em `gerenciar-estoque`.
 
+### Resposta sem os links
+
+Se você responder só com o resumo da venda, a pessoa precisa procurar cada página no Notion para conferir.
+
+1. Ponha o link da venda, de cada unidade, da variante de cada unidade e do produto.
+2. Com `Banco de unidades` vazio, ponha o link da venda e do produto.
+3. Escreva cada link como `escrever-link` manda.
+
 ### Pessoa ou unidade duplicada
 
 Se você criar cliente ou unidade que já existe, a venda aponta para o registro errado.
@@ -259,7 +270,7 @@ Vinculei a pessoa cliente, o conjunto e as unidades que já existiam, com as var
 
 ### Cadastre esta venda de duas peças.
 
-Vinculei as unidades que já existiam. Não criei pessoa nem produto. O valor inferido continuou calculado.
+Vinculei as unidades que já existiam. Não criei pessoa nem produto. O valor inferido continuou calculado. A resposta trouxe o link da venda, das duas unidades, da variante de cada uma e do produto.
 
 ### O pedido foi lançado retroativamente na loja. Preserve a data real da venda.
 

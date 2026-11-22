@@ -807,6 +807,7 @@ flowchart LR
   lancar_despesa_pessoal --> lancar_despesa_da_empresa
   lancar_venda --> definir_lancamento_financeiro
   lancar_venda --> definir_pessoa
+  lancar_venda --> escrever_link
   lancar_venda --> gerenciar_estoque
   lancar_venda --> identificar_duplicata
   lancar_venda --> lancar_despesa_da_empresa
