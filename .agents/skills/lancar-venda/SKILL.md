@@ -1,14 +1,15 @@
 ---
 name: lancar-venda
-description: Use essa habilidade sempre que for cadastrar, completar, corrigir ou conciliar uma venda de um ou mais produtos, mesmo sem dizer venda. NÃO use para lançar um gasto, cadastrar a pessoa ou o produto, definir o preço, mover o estoque, nem vender um bem durável.
+description: Use essa habilidade sempre que for cadastrar, completar, corrigir ou conciliar uma venda de um ou mais produtos, ou marcar unidades como vendidas, mesmo sem dizer venda. NÃO use para lançar um gasto, cadastrar a pessoa ou o produto, definir o preço, mover o estoque, nem vender um bem durável.
 allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-data-sources notion:notion-create-pages notion:notion-update-page notion:notion-create-comment
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.13.4"
+  version: "0.16.0"
   aliases:
     - definir-venda
   related:
+    - conciliar-recebimento
     - definir-lancamento-financeiro
     - definir-pessoa
     - registrar-preco-de-produto-fisico
@@ -18,6 +19,7 @@ metadata:
     - lancar-despesa-da-empresa
     - procurar-banco-de-dados
     - registrar-ciclo-do-ativo
+    - escrever-link
 ---
 
 # Lançar venda
@@ -30,11 +32,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Modo de aprendizado": "perguntar"
 # Nomes de banco: o projeto define. Os nomes das propriedades vêm do mapeamento de dados do projeto.
 "Banco de vendas": ""
-"Banco de contas bancárias": ""
 # Opcional. Vazio: a venda não vincula unidade nem mexe no saldo, e o produto vendido entra pelo mapeamento.
 "Banco de unidades": ""
-# `Fonte do valor recebido` é onde se lê o valor que entrou, como o extrato do meio de pagamento.
-"Fonte do valor recebido": ""
 # `Início da nota no envio`: data, no formato AAAA-MM-DD, a partir da qual a venda com envio exige nota fiscal para transportar a mercadoria.
 "Início da nota no envio": ""
 # `Forma de entrega sem envio`: a forma de entrega que não transporta a mercadoria e dispensa a nota do envio.
@@ -59,22 +58,10 @@ flowchart LR
   Q -->|preço| P[registrar-preco-de-produto-fisico]
   Q -->|insumo| E[gerenciar-estoque]
   Q -->|bem durável| I[registrar-ciclo-do-ativo]
+  Q -->|liberação ou extrato| R[conciliar-recebimento]
 ```
 
 ### Passo 2
-
-Saque com cartão de crédito na máquina de cartão não é venda. Alguém passa o próprio cartão para receber o dinheiro, sem levar produto. Não há receita, e a entrada não vai para as vendas, mesmo quando o extrato mostra a liberação do dinheiro.
-
-Uma entrada sem venda, devolvida logo depois para quem passou o cartão, pode ser um saque desse tipo. Antes de conciliar, pergunte à pessoa. Não crie uma venda para fechar a conciliação. Se a pessoa contar que vai passar um cartão para sacar, avise antes, pelos motivos abaixo.
-
-Quando for saque, consulte em `Banco de contas bancárias` quem era titular da conta da máquina na data da entrada:
-
-- Conta de pessoa física: o saque é movimento dessa pessoa e não entra nos registros da empresa. Comente na conciliação o que a entrada é, para ninguém procurar a venda de novo.
-- Conta da empresa: avise que o saque infla o faturamento e que a máquina não aceita cobrança sem venda, e recomende não repetir. Registre a entrada e a devolução como um par, em `definir-lancamento-financeiro`, com os comprovantes. Confirme o tratamento contábil com quem cuida da contabilidade.
-
-Se parte desse dinheiro pagou um débito da empresa, quem pagou segue `lancar-despesa-da-empresa`.
-
-### Passo 3
 
 Antes de criar, busque a venda pelo número do pedido, pelo link do pedido e pelo identificador da transação.
 
@@ -85,9 +72,9 @@ flowchart LR
   V -->|não| N[Siga o cadastro]
 ```
 
-Complete só o que falta. Corrija só o que está errado. Dado válido que já está na propriedade certa permanece. Não reescreva a página. Dado no lugar errado, correção e reversão seguem o Passo 10.
+Complete só o que falta. Corrija só o que está errado. Dado válido que já está na propriedade certa permanece. Não reescreva a página. Dado no lugar errado, correção e reversão seguem o Passo 9.
 
-### Passo 4
+### Passo 3
 
 Pessoa cliente, conjunto e unidades são páginas que já existem. A pessoa cliente, no máximo uma, é o histórico de compras. Cadastrar a pessoa segue `definir-pessoa`.
 
@@ -97,7 +84,7 @@ Antes de vincular, busque com `identificar-duplicata`. Sem a página, ou sem a v
 
 O saldo segue `gerenciar-estoque`. Não altere o saldo aqui.
 
-### Passo 5
+### Passo 4
 
 A data real da venda fica na data e hora da venda. Ponto de contato entra quando a venda aconteceu nele. O projeto chega por esse ponto, e a ordem do projeto é calculada. Não preencha.
 
@@ -107,17 +94,17 @@ A data da loja fica no campo de lançamento na loja. Pedido, ID da confirmação
 
 Pedido, ID da confirmação e ID da transação são três dados separados. O número do pedido não confirma a venda nem identifica a transação.
 
-### Passo 6
+### Passo 5
 
 O preço nominal é o valor inferido da venda, calculado das peças. O desconto comercial aplicado também é calculado. Grave só o motivo do desconto. Definir o preço de catálogo segue `registrar-preco-de-produto-fisico`.
 
 O motivo diz o porquê de cada parte do desconto, como o ajuste ao preço dos vizinhos ou o desconto do Pix à vista, e quem concedeu, quando a pessoa disse. Um rótulo como "preço do evento" não basta. Quando o porquê muda com a coleção do produto, leia a coleção na página do produto antes de perguntar.
 
-O valor pago pelos produtos fica no valor real da venda, sem o frete. O valor recebido pela empresa vem de `Fonte do valor recebido`. O meio efetivo é o meio de pagamento da venda real. O crédito da loja utilizado é só o crédito usado, sem somar o pagamento novo.
+O valor pago pelos produtos fica no valor real da venda, sem o frete. O valor recebido pela empresa é o líquido liberado e segue `conciliar-recebimento`. O meio efetivo é o meio de pagamento da venda real. O crédito da loja utilizado é só o crédito usado, sem somar o pagamento novo.
 
 Taxa de transação inferida, valor líquido final, valor real com frete, peças vendidas e tipos de peças são calculados. Não preencha. Taxa, repasse e erro de lançamento não entram como desconto. Sem repasse de espaço ou de evento, o repasse fica zero.
 
-### Passo 7
+### Passo 6
 
 O ponto de contato é o lugar em que a venda aconteceu, como uma feira ou um evento. Sem o lugar dito pela pessoa, pergunte o ponto de contato antes de criar a venda e, na retirada, o local. O canal usado para achar a cliente, como o WhatsApp dela, não é o ponto da venda: não o grave no título, no ponto nem no corpo.
 
@@ -127,13 +114,13 @@ Origem do estoque, destino do envio e local de processamento não são proprieda
 
 Entrega em mãos no ponto de contato: o custo de frete para a loja pode ficar vazio ou zero. Comprovante vai no campo de comprovantes, não no corpo. O status do pagamento é a definir ou pago.
 
+### Passo 7
+
+Concilie a loja on-line, o comprovante, o relato e qualquer outra fonte da mesma venda, por campo. O valor recebido segue `conciliar-recebimento`. O valor com frete pode vir da loja. O valor inferido vem das peças.
+
+Fonte que diverge: mostre o diff por campo antes de alterar o valor ambíguo. A pessoa confirma qual valor e qual fonte são canônicos naquele campo. Essa confirmação não vale para os outros campos. Não escolha uma fonte para todos os campos. A decisão canônica segue o Passo 9, antes da alteração.
+
 ### Passo 8
-
-Concilie a loja on-line, o comprovante, o relato e qualquer outra fonte da mesma venda, por campo. O valor recebido vem de `Fonte do valor recebido`. O valor com frete pode vir da loja. O valor inferido vem das peças.
-
-Fonte que diverge: mostre o diff por campo antes de alterar o valor ambíguo. A pessoa confirma qual valor e qual fonte são canônicos naquele campo. Essa confirmação não vale para os outros campos. Não escolha uma fonte para todos os campos. A decisão canônica segue o Passo 10, antes da alteração.
-
-### Passo 9
 
 Grave a forma de entrega em toda venda. A situação da nota fiscal é calculada pela data de emissão, pela forma de entrega e pela data da venda. Não preencha.
 
@@ -141,13 +128,17 @@ Venda a partir de `Início da nota no envio` com forma de entrega diferente de `
 
 Um dos dois parâmetros vazio: pergunte uma vez se o projeto exige a nota no envio e não imponha regra. Quando um deles mudar, proponha trocar os mesmos valores no começo da fórmula da situação da nota e espere o sim.
 
-### Passo 10
+### Passo 9
 
 Migração, correção, reversão e decisão de conciliação registram a trilha num comentário da página, antes de apagar, mover ou reverter. O comentário diz o que mudou, por que mudou, qual fonte foi usada e quando a alteração aconteceu. Completar um campo vazio não exige esse comentário. O chat não substitui o comentário.
 
 Propriedade que não existe: sugira e espere o sim. Não crie. Um caso isolado não remodela a lista.
 
-### Passo 11
+### Passo 10
+
+A resposta de cada venda lançada, completada, corrigida ou conciliada, e de cada unidade marcada como vendida, traz o link do Notion de cada venda, de cada unidade, da variante de cada unidade e do produto, para a pessoa navegar e conferir. Com `Banco de unidades` vazio, traz o link da venda e do produto. Cada link segue `escrever-link`.
+
+Unidade marcada como vendida sem venda vinculada: diga qual é e pergunte. Não crie a venda.
 
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
@@ -183,7 +174,7 @@ Se você gravar taxa, repasse ou erro de lançamento como desconto, o resultado 
 
 1. Deixe o preço nominal e o desconto comercial aplicado calculados. Grave o motivo.
 2. Separe valor pago pelos produtos, valor recebido, crédito usado e meio efetivo.
-3. Taxa e repasse ficam nos campos deles. Divergência segue o Passo 8.
+3. Taxa e repasse ficam nos campos deles. Divergência segue o Passo 7.
 
 ### Fórmula preenchida
 
@@ -208,6 +199,14 @@ Se você preencher as peças vendidas ou alterar o saldo, o histórico e o rastr
 1. Vincule a pessoa cliente, o conjunto e as unidades com as variantes que já existem.
 2. Deixe as peças vendidas e os tipos de peças calculados.
 3. Deixe o saldo em `gerenciar-estoque`.
+
+### Resposta sem os links
+
+Se você responder só com o resumo da venda, ou só disser que marcou as unidades como vendidas, a pessoa precisa procurar cada página no Notion para conferir.
+
+1. Ponha o link de cada venda, de cada unidade, da variante de cada unidade e do produto, também quando só marcou unidades como vendidas.
+2. Com `Banco de unidades` vazio, ponha o link da venda e do produto.
+3. Escreva cada link como `escrever-link` manda.
 
 ### Pessoa ou unidade duplicada
 
@@ -259,15 +258,11 @@ Vinculei a pessoa cliente, o conjunto e as unidades que já existiam, com as var
 
 ### Cadastre esta venda de duas peças.
 
-Vinculei as unidades que já existiam. Não criei pessoa nem produto. O valor inferido continuou calculado.
+Vinculei as unidades que já existiam. Não criei pessoa nem produto. O valor inferido continuou calculado. A resposta trouxe o link da venda, das duas unidades, da variante de cada uma e do produto.
 
 ### O pedido foi lançado retroativamente na loja. Preserve a data real da venda.
 
 A data real ficou na data e hora da venda. A data da loja ficou no lançamento na loja. O meio de pagamento real não foi trocado.
-
-### O extrato tem uma liberação sem venda. Concilie.
-
-Perguntei se era venda ou saque com cartão de crédito. Uma parente tinha passado o cartão, e o dinheiro voltou para ela no mesmo dia, sem as taxas. Na data, a conta da máquina era de pessoa física, conforme as contas bancárias. A entrada ficou fora das vendas, e o comentário da conciliação disse o que ela era.
 
 ### Concilie esta venda. Os valores divergem entre as fontes.
 
@@ -299,18 +294,17 @@ O comentário da página disse o que voltou, por que voltou, a fonte e quando. A
 - Há outra fonte da mesma venda: ela entra no diff do campo em que diverge. O canônico daquele campo não vale para os outros.
 - Lançamento retroativo sem a venda original na lista: pare e pergunte. Não crie uma segunda venda a partir do pedido tardio.
 - Reversão ou decisão de conciliação: o comentário da página vem antes da alteração e traz o que mudou, o porquê, a fonte e quando.
-- Entrada no extrato sem venda que é saque com cartão de crédito: não entra nas vendas. O titular da conta na data da entrada decide se fica fora dos registros ou se vira o par de entrada e devolução, com o alerta.
+- Entrada no extrato sem venda ou liberação a conciliar: `conciliar-recebimento`.
 - `Banco de unidades` vazio: não vincule unidade nem mexa no saldo.
 - Gasto: `lancar-despesa-da-empresa`. Frase mista de caixa: `definir-lancamento-financeiro`. Insumo: `gerenciar-estoque`. Venda de bem durável: `registrar-ciclo-do-ativo`.
 
 ## Pegadinhas
 
-- A liberação de dinheiro no extrato parece venda. Um saque com cartão de crédito na máquina de cartão não é venda nem receita.
 - O número do pedido parece confirmação e transação. Pedido, ID da confirmação e ID da transação são três dados.
 - A data em que o pedido entrou na loja parece a data da venda. No lançamento retroativo, a data real permanece.
 - O pedido tardio na loja parece uma venda nova. Ele vincula a venda original. Data, pagamento, valor e contexto reais permanecem.
 - Relacionar o produto parece preencher as peças vendidas. A peça sai da unidade, e a variante está nessa unidade. O saldo fica em `gerenciar-estoque`.
-- Valor pago, valor recebido e preço nominal parecem o mesmo número. Preço nominal é o valor inferido. Valor pago pelos produtos exclui frete e taxa. Valor recebido é o que entrou pela fonte do valor recebido.
+- Valor pago, valor recebido e preço nominal parecem o mesmo número. Preço nominal é o valor inferido. Valor pago pelos produtos exclui frete e taxa. Valor recebido é o líquido liberado, lido por `conciliar-recebimento`.
 - O WhatsApp usado para achar a cliente parece o canal da venda. Ele só identifica a pessoa. O ponto de contato vem da pessoa, perguntado antes de criar.
 - O endereço de envio parece local da retirada. Retirada é onde a pessoa retirou. Destino do envio, origem do estoque e local de processamento não são propriedades da venda.
 - O histórico da página parece a trilha. Migração, correção, reversão e decisão de conciliação ficam num comentário, com o que mudou, o porquê, a fonte e quando.

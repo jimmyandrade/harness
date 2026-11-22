@@ -34,6 +34,7 @@ flowchart LR
     classificar_estado_do_termo["classificar-estado-do-termo"]
     classificar_melhoria_tecnica["classificar-melhoria-tecnica"]
     comunicar_novidade_do_produto["comunicar-novidade-do-produto"]
+    conciliar_recebimento["conciliar-recebimento"]
     configurar_harness_de_negocio["configurar-harness-de-negocio"]
     consultar_responsavel_pela_oportunidade["consultar-responsavel-pela-oportunidade"]
     consultar_vocabulario["consultar-vocabulario"]
@@ -301,6 +302,10 @@ flowchart LR
   classificar_melhoria_tecnica --> priorizar_itens
   comunicar_novidade_do_produto --> rascunhar_mensagem
   comunicar_novidade_do_produto --> redigir_com_tom_de_voz
+  conciliar_recebimento --> definir_lancamento_financeiro
+  conciliar_recebimento --> lancar_despesa_da_empresa
+  conciliar_recebimento --> lancar_venda
+  conciliar_recebimento --> procurar_banco_de_dados
   configurar_harness_de_negocio --> criar_pull_request
   configurar_harness_de_negocio --> definir_issue_do_github
   configurar_harness_de_negocio --> levantar_ambiente_do_repositorio
@@ -805,8 +810,10 @@ flowchart LR
   lancar_despesa_pessoal --> anexar_arquivo_no_notion
   lancar_despesa_pessoal --> definir_obrigacao_financeira
   lancar_despesa_pessoal --> lancar_despesa_da_empresa
+  lancar_venda --> conciliar_recebimento
   lancar_venda --> definir_lancamento_financeiro
   lancar_venda --> definir_pessoa
+  lancar_venda --> escrever_link
   lancar_venda --> gerenciar_estoque
   lancar_venda --> identificar_duplicata
   lancar_venda --> lancar_despesa_da_empresa
