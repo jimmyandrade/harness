@@ -390,6 +390,20 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses reviewing the edition, the group, the schedule, checking whether the opportunity exists, organizing the participation, registering someone, creating a task, and reading an image
 
+### definir-cliente-da-loja
+- **Stability**: experimental
+- **Description**: Find, create, or update the store customer of a person and link it to the person's record
+- **Properties**:
+  - Lives at `.agents/skills/definir-cliente-da-loja/SKILL.md`
+  - Treats the link of a store customer as a request to register the person, through definir-pessoa, when the list has no page for them
+  - Searches the list of people restricted to it, by name and phone, instead of the whole workspace
+  - Looks for the customer by phone and email before creating, updates the one it finds, and never creates another
+  - Saves the customer link in the store field of the person, or in the notes when the field is empty, and keeps the conversation history in the comments of the person's page
+  - Does not register the person without the skill that owns it, nor handle sales, orders, products, or marketing consent
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses registering the person in the list, sales, orders, products, and marketing consent
+
 ### definir-cronograma
 - **Stability**: experimental
 - **Description**: Create, update, and check the schedule steps linked to an opportunity or a contact point, including the published programme of a fair read from the official source, without creating an agenda event
@@ -1171,6 +1185,7 @@ How these skills relate is in `README.md`, in this folder.
   - Writes the full name as the person's name and keeps the handle out of that name
   - Relates the social profile after the profile exists, and leaves the profile to definir-perfil-social
   - Uses an existing person instead of creating another, and lists several matches without creating
+  - Searches the list of people restricted to it, by name and phone, and leaves the store customer to definir-cliente-da-loja
   - Does not invent email, phone, pronouns, audience, or a company
   - Leaves citing a person with a real mention to mencionar-pessoa
   - Does not only check existence, lock the spelling of someone already listed, register the profile, register the company, or delete without an order

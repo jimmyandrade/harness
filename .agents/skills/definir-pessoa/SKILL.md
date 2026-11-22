@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.22.3"
+  version: "0.23.0"
   related:
     - definir-empresa
     - definir-grafia
@@ -14,6 +14,7 @@ metadata:
     - definir-perfil-social
     - identificar-duplicata
     - mencionar-pessoa
+    - definir-cliente-da-loja
 ---
 
 # Definir pessoa
@@ -69,6 +70,7 @@ Um perfil colado por quem usa a habilidade, em texto ou imagem, é o pedido de c
 
 Busque o nome na lista de pessoas, no nome e nas variações, por consulta direta e por busca semântica. Antes de perguntar qualquer dado de identidade, consulte o registro da pessoa. Se faltar, resolva pelas `Fontes para resolver identidade`: consulte cada ferramenta da lista que estiver conectada, pelo nome e, quando houver, pelo e-mail (perfil, autor, login). Um nome parcial, um apelido ou uma grafia estranha, sem e-mail, também se resolve nessas fontes. Compare o cargo, o time e os canais com o assunto da conversa.
 Não peça à pessoa que desambigue antes dessa busca.
+Pelo conector, busque só na lista de pessoas, por nome e telefone.
 Só pergunte o que nem o registro nem essas fontes respondem. O telefone de quem escreveu pelo WhatsApp se lê no WhatsApp Web, por `usar-whatsapp-web`, e se grava na hora, sem pendência.
 Um candidato único e plausível pelo contexto entra como hipótese `inferido`, com a frase da fonte. Só o que a fonte responde com certeza entra como confirmado.
 Com vários candidatos, liste cada um com o que ajuda a diferenciar, como cargo e e-mail, e com outros dados que as fontes tragam, junto da frase em que o nome aparece, e pergunte só qual deles. Nunca pergunte só pelo nome.
@@ -88,7 +90,7 @@ O nome completo é o nome da pessoa. O handle não entra nesse nome. Não invent
 
 Telefone vai no formato internacional. Celular do Brasil tem 9 dígitos depois do DDD: o contato antigo do WhatsApp mostra o número sem o 9. Número de 8 dígitos começado por 6, 7, 8 ou 9 é celular sem o 9: confira na conversa e grave com o 9 na frente, dizendo que o acrescentou. Pergunte só se não for celular.
 
-Com `Cadastro na loja` em `sim`, crie ou atualize o cliente na loja com o nome, o telefone, o e-mail e o idioma, sem consentimento de marketing. Grave o link do cliente em `Campo do cliente na loja`, ou nas notas quando o campo está vazio. O histórico das conversas fica nos comentários da página da pessoa, não na nota do cliente.
+Com `Cadastro na loja` em `sim`, o cliente da pessoa na loja segue `definir-cliente-da-loja`, e o link dele vai em `Campo do cliente na loja`, ou nas notas quando o campo está vazio. O histórico das conversas fica nos comentários da página da pessoa, não na nota do cliente.
 
 Todo perfil social que a pessoa informar, em link, print ou handle, como o LinkedIn ou o Instagram, é cadastrado por `definir-perfil-social` na mesma resposta e relacionado nos perfis sociais relacionados. O link do perfil nunca vai nas notas, e a skill não deixa o perfil de fora.
 
@@ -250,8 +252,7 @@ A Tula não estava na lista de pessoas. Criei a página dela, com o papel nas ob
 ## Pegadinhas
 
 - A empresa citada parece só contexto da pessoa. Sem página na lista de empresas, ela é cadastrada por `definir-empresa` na mesma rodada.
-- O número do WhatsApp parece o telefone completo. Num celular do Brasil, ele pode vir sem o 9 depois do DDD, e a loja recusa o número de 8 dígitos.
-- A linha do tempo do cliente na loja parece o lugar da conversa. A API da loja pode não gravar comentário nela: a conversa fica na página da pessoa.
+- O número do WhatsApp parece o telefone completo. Num celular do Brasil, ele pode vir sem o 9 depois do DDD.
 
 - Um perfil colado parece só contexto para a resposta. É o pedido de cadastro: grave no mesmo turno.
 - Corrigir a frase parece cadastrar. A pessoa ausente ganha página na lista de pessoas.

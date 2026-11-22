@@ -57,6 +57,7 @@ flowchart LR
     definir_artista["definir-artista"]
     definir_ativo_imobilizado["definir-ativo-imobilizado"]
     definir_campanha_de_conteudo["definir-campanha-de-conteudo"]
+    definir_cliente_da_loja["definir-cliente-da-loja"]
     definir_codigo_fiscal["definir-codigo-fiscal"]
     definir_composicao_textil["definir-composicao-textil"]
     definir_conta_bancaria["definir-conta-bancaria"]
@@ -455,6 +456,8 @@ flowchart LR
   definir_ativo_imobilizado --> registrar_ciclo_do_ativo
   definir_campanha_de_conteudo --> delegar_aviso_de_plataforma
   definir_campanha_de_conteudo --> planejar_calendario_de_conteudo
+  definir_cliente_da_loja --> definir_pessoa
+  definir_cliente_da_loja --> identificar_duplicata
   definir_codigo_fiscal --> identificar_duplicata
   definir_composicao_textil --> acompanhar_producao_de_produto_fisico
   definir_composicao_textil --> definir_aplicacao_textil
@@ -588,6 +591,7 @@ flowchart LR
   definir_perfil_social --> identificar_duplicata
   definir_perfil_social --> mesclar_registro
   definir_pessoa --> conversar_no_whatsapp
+  definir_pessoa --> definir_cliente_da_loja
   definir_pessoa --> definir_empresa
   definir_pessoa --> definir_grafia
   definir_pessoa --> definir_perfil_social
