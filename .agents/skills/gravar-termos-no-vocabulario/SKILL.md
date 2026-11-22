@@ -3,8 +3,10 @@ name: gravar-termos-no-vocabulario
 description: Use essa habilidade sempre que, ao cadastrar ou corrigir termos do vocabulário do tom de voz, for hora de pesquisar a grafia, testar, gravar o lote ou apagar uma linha, mesmo sem dizer gravar. NÃO use para decidir o nível, validar os campos, perguntar quais variações foram cadastradas, escrever o texto da marca, nem inventar um termo.
 metadata:
   author: jimmyandrade
-  version: "0.13.0"
+  version: "0.14.0"
   related:
+    - criar-commit
+    - criar-pull-request
     - definir-vocabulario
     - procurar-variacao-de-termo
     - validar-plano-de-vocabulario
@@ -52,6 +54,8 @@ Plural, singular, feminino, masculino e outra palavra do mesmo assunto são linh
 Termo que não existe e vai entrar como proibido, sem termos relacionados: pare e pergunte se a pessoa quer cadastrar um ou mais. Eles entram em `alternatives`. Se ela não quiser, a lista fica vazia. Não invente. Termo que já existe não pede essa pergunta.
 
 Quando as duas linhas existirem, `related` aponta de uma para a outra. `related` vale nos três estados e não cria termo ausente. A escrita recusa o ponteiro solto.
+
+O vocabulário fica só no glossário do harness do negócio, nunca no Notion. Sem escrita no servidor `vocabulary`, use a CLI numa cópia desse harness e abra o pull request.
 
 ### Passo 4
 

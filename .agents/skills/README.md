@@ -771,6 +771,8 @@ flowchart LR
   gerenciar_pedidos_de_delivery --> lancar_despesa_da_empresa
   gerenciar_pedidos_de_delivery --> lancar_despesa_pessoal
   gerenciar_pedidos_de_delivery --> reconhecer_imagem
+  gravar_termos_no_vocabulario --> criar_commit
+  gravar_termos_no_vocabulario --> criar_pull_request
   gravar_termos_no_vocabulario --> definir_vocabulario
   gravar_termos_no_vocabulario --> procurar_variacao_de_termo
   gravar_termos_no_vocabulario --> validar_plano_de_vocabulario
