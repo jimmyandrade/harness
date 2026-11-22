@@ -59,7 +59,7 @@ O destino do rascunho é quem mandou a mensagem respondida, na conversa que a pe
 
 No WhatsApp Web, todo acesso segue `usar-whatsapp-web`: antes de enviar, confira no cabeçalho o nome da conversa. O texto, o destino e o sim do envio são daqui.
 
-Antes de rascunhar e de novo ao enviar, confira a janela de contato de quem recebe, como `definir-janela-de-contato` manda. Fora dela, o rascunho espera o próximo horário permitido e nada sai.
+Antes de rascunhar e de novo ao enviar, confira a janela de contato de quem recebe, como `definir-janela-de-contato` manda. Fora dela, nada sai: o rascunho espera o próximo horário permitido, ou o envio é agendado.
 
 ### Passo 2
 

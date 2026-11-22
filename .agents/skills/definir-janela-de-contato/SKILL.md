@@ -32,8 +32,10 @@ Sem a propriedade na lista, ou com o parâmetro vazio, avise, proponha criá-la 
 
 ### Passo 2
 
-Quem contata a pessoa confere a janela antes de enviar e de novo na hora do envio: leia as três propriedades no registro, e em grupo as de cada pessoa nomeada. Leia o dia e a hora no fuso da localidade dela por comando, como `TZ=<fuso> date '+%Y-%m-%d %H:%M'`, com o dia da semana como a regra do dia da semana manda. Sem fuso e com janela preenchida, não envie e pergunte uma vez.
-Está bloqueado o dia sem contato, a hora igual ou depois de `Sem contato a partir de` e a hora antes de `Sem contato até`, que já é permitida. Fora da janela nada sai, por nenhum canal: diga o motivo e o próximo horário permitido, com o dia da semana, no fuso dela e no de quem usa, e deixe o rascunho para esse horário. A janela só muda no registro.
+Quem contata a pessoa confere a janela antes de enviar e de novo na hora do envio: leia as três propriedades no registro, e em grupo as de cada pessoa nomeada. Leia o dia e a hora no fuso da localidade dela por comando, `date`, com o dia da semana como a regra do dia da semana manda. Sem fuso e com janela preenchida, não envie e pergunte uma vez.
+Está bloqueado o dia sem contato, a hora igual ou depois de `Sem contato a partir de` e a hora antes de `Sem contato até`, que já é permitida. Fora da janela nada sai: diga o motivo e o próximo horário permitido, com o dia da semana, nos dois fusos, e ofereça deixar o rascunho ou agendar o envio para esse horário.
+Quem pede para programar recebe a mesma opção, ao lado de enviar agora. Agendar vale com o sim ao texto, ao destino e ao horário, por tarefa agendada quando o canal não agenda, com a ferramenta de envio liberada antes: peça a liberação logo, com o nome. A tarefa reconfere a janela ao enviar e, se mudou, não envia e avisa.
+A janela só muda no registro.
 
 ### Passo 3
 

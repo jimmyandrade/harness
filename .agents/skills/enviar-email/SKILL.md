@@ -106,7 +106,7 @@ O `definir-vocabulario` guarda cada correção dessas.
 
 O texto passa por `redigir-com-tom-de-voz`.
 
-Confira a janela de contato de cada destinatário, como `definir-janela-de-contato` manda, antes de pedir o sim e de novo na hora do envio. Fora da janela de qualquer um, o e-mail não sai: o rascunho fica na caixa para o próximo horário permitido e, se o conector agenda o envio, a pessoa decide se ele fica agendado para esse horário.
+Confira a janela de contato de cada destinatário, como `definir-janela-de-contato` manda, antes de pedir o sim e de novo na hora do envio. Fora da janela de qualquer um, o e-mail não sai: o rascunho fica na caixa e a pessoa escolhe entre deixá-lo ou agendar o envio para o próximo horário permitido, como `definir-janela-de-contato` manda. O conector de e-mail pode não agendar: use a tarefa agendada.
 
 Mostre o rascunho inteiro, com o remetente, o Para, as cópias, o assunto, o anexo e a assinatura, e pergunte se pode enviar.
 O sim vale para esse texto e esses destinatários.
