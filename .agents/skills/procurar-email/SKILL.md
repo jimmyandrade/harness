@@ -1,13 +1,14 @@
 ---
 name: procurar-email
-description: Use essa habilidade sempre que for achar um ou mais e-mails sobre um assunto, ou saber o que a mensagem diz, mesmo sem dizer caixa de entrada. NÃO use para responder, encaminhar ou apagar a mensagem, nem para decidir se a inscrição foi confirmada ou se a tarefa existe.
+description: Use essa habilidade sempre que for achar um ou mais e-mails sobre um assunto, ou saber o que a mensagem diz, mesmo sem dizer caixa de entrada. NÃO use para responder, encaminhar ou apagar a mensagem, nem para decidir se a tarefa existe. O resultado de seleção que o e-mail traz é gravado por `definir-inscricao`.
 allowed-tools: notion:notion-ai-search
 compatibility: Precisa de internet. A busca no e-mail conectado usa notion-ai-search no servidor notion.
 metadata:
   author: jimmyandrade
-  version: "0.7.1"
+  version: "0.8.0"
   related:
     - procurar-inscricao
+    - definir-inscricao
     - definir-grafia
     - analisar-regulamento-da-oportunidade
     - rotular-item
@@ -39,9 +40,11 @@ Quando o e-mail traz um contrato ou outro documento para assinar ou conferir, a 
 
 ### Passo 4
 
-Não copie o corpo inteiro, código, número do pedido nem link com token, a menos que a pessoa peça. Não altere a lista de inscrições. Não crie tarefa. Não responda, encaminhe nem apague a mensagem.
+Não copie o corpo inteiro, código, número do pedido nem link com token, a menos que a pessoa peça. Não crie tarefa. Não responda, encaminhe nem apague a mensagem.
 
 Aplique rótulos sempre usando a habilidade `rotular-item` em cada conversa de e-mail que você leu, com quem age agora e o contexto entre `Etiquetas de contexto`. Sem uma ferramenta que rotule e-mail na sessão, diga quais conversas ficaram sem rótulo.
+
+Quando o e-mail que você leu traz o resultado de uma seleção, como aprovada, não selecionada ou lista de espera, grave o resultado no mesmo turno, seguindo `definir-inscricao`, na inscrição da edição de que o e-mail fala. Não pergunte se a pessoa quer gravar: o e-mail é a prova, e ela já espera a lista atualizada. Se a inscrição não existe na lista, diga isso e não crie uma só por esse e-mail. Se casam várias, nomeie e pergunte, como `definir-inscricao` manda. A resposta diz o que foi gravado, com o link da página.
 
 Rotule antes de relatar o que achou, mesmo quando a pessoa só pediu para conferir o e-mail.
 A resposta diz o estado e o contexto de cada conversa, junto do fato dela.
@@ -53,7 +56,7 @@ A conversa em que o negócio respondeu e a outra parte já agiu é respondida, e
 
 ### Passo 5
 
-Se a pessoa já disse que o e-mail existe, não diga que a busca não devolveu e-mail dela. Diga o que essa mensagem afirma. Se a busca conectada não devolver o e-mail e a pessoa não tiver falado dele, diga que a busca conectada não devolveu as mensagens. Diga as buscas que rodaram, sem from:. Não diga que ela não enviou nada. Não diga que a caixa está vazia. Liste à parte as mensagens do assunto que não são dela, com assunto, remetente e data. Não peça para a pessoa nomear a habilidade. Não crie tarefa. Não crie inscrição.
+Se a pessoa já disse que o e-mail existe, não diga que a busca não devolveu e-mail dela. Diga o que essa mensagem afirma. Se a busca conectada não devolver o e-mail e a pessoa não tiver falado dele, diga que a busca conectada não devolveu as mensagens. Diga as buscas que rodaram, sem from:. Não diga que ela não enviou nada. Não diga que a caixa está vazia. Liste à parte as mensagens do assunto que não são dela, com assunto, remetente e data. Não peça para a pessoa nomear a habilidade. Não crie tarefa.
 
 ## Problemas comuns
 
@@ -143,7 +146,15 @@ Se você responder a partir de uma tarefa ou de uma inscrição, a nota vira a m
 
 1. Leia o e-mail conectado.
 2. A página do Notion não é a mensagem.
-3. Não crie tarefa nem inscrição.
+3. Não crie tarefa. A inscrição só muda pelo resultado que o e-mail afirma, por `definir-inscricao`.
+
+### Resultado lido e não gravado
+
+Se você ler o e-mail do resultado da seleção e só contar o que ele diz, a inscrição fica com o status antigo e a pessoa precisa pedir a atualização.
+
+1. Grave o resultado no mesmo turno, por `definir-inscricao`, sem perguntar.
+2. Sem a inscrição na lista, diga isso e não a crie.
+3. A resposta diz o status gravado e o link da página.
 
 ### Um sim para várias mensagens
 
@@ -159,7 +170,7 @@ Se você tratar uma mensagem de ingresso disponível como aprovação de outra i
 
 1. Diga o que o texto afirma.
 2. Não aprove outra inscrição por causa dessa mensagem.
-3. O status da inscrição fica em `procurar-inscricao`.
+3. O status da inscrição fica em `procurar-inscricao`, e o resultado de seleção que o e-mail afirma é gravado por `definir-inscricao`.
 
 ## Exemplos de entrada e saída
 
@@ -177,6 +188,10 @@ Bia Lima e Beatriz Lima são a mesma pessoa. Busquei Beatriz e beatriz.lima, com
 
 A mensagem da organizadora diz o horário da montagem e não pede resposta. Apliquei, usando a habilidade `rotular-item`, a etiqueta de respondida e a etiqueta de e-mail que a edição da feira registra.
 
+### a CASE respondeu sobre a seleção?
+
+Sim: o e-mail de 22/11/2026 da VeeCee diz que a startup não foi selecionada para as Rodadas de Negócios do CASE 2026. Gravei o status de não selecionada na inscrição dessa edição, por `definir-inscricao`, e deixei o link da página. Não perguntei antes de gravar.
+
 ## Casos-limite
 
 - Há mais de uma mensagem: liste cada uma, com assunto, remetente e data.
@@ -187,7 +202,8 @@ A mensagem da organizadora diz o horário da montagem e não pede resposta. Apli
 - A busca devolveu página do Notion: isso não é o e-mail.
 - O e-mail não está conectado: pare. Não use outra caixa.
 - Nada com esse pedaço: diga que a busca conectada não devolveu a mensagem. Não crie tarefa nem inscrição.
-- A pergunta é se a inscrição foi confirmada: diga o que a mensagem afirma. Não altere a lista de inscrições.
+- O e-mail traz o resultado de uma seleção: grave-o na inscrição pelo `definir-inscricao`, sem perguntar. Sem a inscrição na lista, diga isso e não a crie.
+- A pergunta é se a inscrição foi confirmada: diga o que a mensagem afirma e, se ela traz o resultado, grave-o pelo `definir-inscricao`.
 
 ## Pegadinhas
 
