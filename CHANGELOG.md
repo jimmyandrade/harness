@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.104.2](https://github.com/jimmyandrade/harness/compare/v1.104.1...v1.104.2) (2026-11-23)
+
+
+### Bug Fixes
+
+* **definir-artigo-da-base-de-conhecimento:** give the full steps when the person has to do one by hand ([#1459](https://github.com/jimmyandrade/harness/issues/1459)) ([3c6f08e](https://github.com/jimmyandrade/harness/commit/3c6f08e77e608341ac60d43fde8997d76ad27ce2))
+* **definir-artigo-da-base-de-conhecimento:** try every browser before leaving a step without a screenshot ([#1457](https://github.com/jimmyandrade/harness/issues/1457)) ([b385027](https://github.com/jimmyandrade/harness/commit/b38502797a8a16d3956f32cca70b35b5ea14ac57))
+
 ## [1.104.1](https://github.com/jimmyandrade/harness/compare/v1.104.0...v1.104.1) (2026-11-23)
 
 
