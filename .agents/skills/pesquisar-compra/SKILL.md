@@ -1,10 +1,10 @@
 ---
 name: pesquisar-compra
-description: Pesquisa o que comprar, cruza com despesas, estoque e bens que já existem e recomenda opções com preço, fonte e data, sem comprar. Usada quando a pessoa precisa achar, comparar ou escolher produto, insumo, equipamento ou serviço, mesmo sem dizer comprar. Não serve para registrar a compra ou o pagamento nem finalizar o pedido.
+description: Pesquisa o que comprar, cruza com despesas, estoque e bens que já existem e recomenda opções com preço, fonte e data, sem comprar, salvo quando a pessoa pede a compra. Usada quando a pessoa precisa achar, comparar ou escolher produto, insumo, equipamento ou serviço, mesmo sem dizer comprar. Não serve para registrar a compra ou o pagamento.
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.7.4"
+  version: "0.7.5"
   related:
     - anexar-arquivo-no-whatsapp
     - conversar-no-whatsapp
@@ -17,6 +17,7 @@ metadata:
     - gerenciar-estoque
     - identificar-duplicata
     - lancar-despesa-da-empresa
+    - realizar-compra
 ---
 
 # Pesquisar compra
@@ -102,7 +103,7 @@ Diga também a opção descartada e o motivo, para a pessoa não pesquisar de no
 Uma empresa só vale como descartada com a resposta dela. Sem resposta, diga que ela não foi contatada ou que está sem resposta, e liste quem foi contatada, quem respondeu e quem falta.
 Com o custo de hoje do Passo 2, mostre a conta de quando a compra se paga e marque o que é estimativa.
 Termine com a pergunta que ainda falta ao fabricante ou ao vendedor, quando houver, e com a decisão que cabe à pessoa.
-Não compre, não ponha no carrinho e não preencha pagamento.
+Sem o pedido da pessoa para comprar, não compre, não ponha no carrinho e não preencha pagamento. Com o pedido, siga `realizar-compra`.
 Quando a pessoa pede para compartilhar as opções, grave o link de cada uma no requisito, seguindo `definir-requisito-de-compra`.
 
 ### Passo 6
@@ -199,12 +200,6 @@ Se você deixar sem mensagem a empresa cujo site traz só telefone fixo, ela fic
 2. Prepare a mensagem para esse canal, com o mesmo texto das outras e o sim da pessoa.
 3. Só sem nenhum canal de texto a ligação entra, como último recurso, e a resposta diz isso.
 
-### Contato dado como não achado
-
-Se você parar no trecho que a busca mostrou e disser que não achou o contato, a pessoa procura o que estava na página.
-
-1. Abra o site e leia os links dele, como WhatsApp, telefone e redes, antes de dizer que o contato falta.
-
 ### Lugar tomado pelo alcance mais amplo
 
 Se você ler como a região metropolitana ou como o estado inteiro um pedido que diz só o nome de uma cidade, a pesquisa traz e a lista cadastra empresas de cidades onde a pessoa nunca quis ir, e a primeira mensagem sai para quem ela não pretendia procurar.
@@ -230,10 +225,11 @@ Se você sugerir à pessoa a quantidade que uma empresa aceita como mínimo, pas
 
 ### Compra feita pela pesquisa
 
-Se você ficar no carrinho ou na tela de pagamento, a pessoa perde a decisão que era dela.
+Se você ficar no carrinho ou na tela de pagamento sem a pessoa ter pedido a compra, ela perde a decisão que era dela.
 
-1. Pare na recomendação e entregue os links.
-2. Registre só depois que a pessoa disser que comprou.
+1. Sem o pedido de compra, pare na recomendação e entregue os links.
+2. Com o pedido, siga `realizar-compra`.
+3. Registre só depois que a pessoa disser que comprou.
 
 ## Exemplos de entrada e saída
 
