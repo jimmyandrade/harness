@@ -3,7 +3,7 @@ name: evoluir-habilidade
 description: Muda uma skill ou as instruções do projeto a pedido ou pelo feedback de uma execução, como falha ou correção da pessoa, e abre o pull request no repositório de origem. Usada ao pedir uma regra nova, mesmo sem dizer evoluir, e ao fim de cada skill. Não serve para testar a skill, criar a primeira versão, ver se a descrição dispara, só revisar nem gravar no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.35.1"
+  version: "0.35.2"
   related:
     - criar-commit
     - criar-habilidade
@@ -93,6 +93,8 @@ Se o próximo trecho deixar o corpo sem folga abaixo de `Tokens do corpo`, veja 
 
 Antes de commitar, rode a checagem que o lefthook roda no pre-commit. Sem `.git/hooks/pre-commit`, rode `.agents/scripts/check-skill/run-check.sh`. Falha, ou corpo no limite, barra o commit e o push. Não diga que está pronto. O tamanho e o profiling seguem `medir-habilidade`.
 
+Checagem que não roda no ambiente, como por bloqueio de rede, não reprova a skill: rode-a numa sessão no computador da pessoa, com o repositório de origem. A mudança não fica só num arquivo de patch, porque o destino dela é o pull request. Quando ela chega a um pull request, apague o arquivo de patch que ficou para trás e ofereça apagar a branch duplicada.
+
 Antes de commitar, releia as linhas que a edição acrescentou. Cada parágrafo trata de um tema, e só as frases que fazem sentido juntas ficam na mesma linha, como o modelo de saída `skill-md` manda. Um tema novo é um parágrafo novo, nunca emendado num parágrafo que já existe. Um bloco de várias frases em uma linha é refeito antes do commit, sem tirar nenhuma regra.
 
 ### Passo 3
@@ -152,6 +154,14 @@ Se você vir resultado inconsistente, falha de chamada ou correção da pessoa, 
 1. Melhore a instrução.
 2. Acrescente o tratamento do erro.
 3. Subdisparo e sobredisparo vão para `descrever-habilidade-ou-schema`.
+
+### Patch deixado para trás
+
+Se você guardar a mudança num arquivo de patch e não abrir o pull request, ou deixar o arquivo depois que a mudança entrou num pull request, a pessoa acha que ainda falta publicar algo.
+
+1. Checagem que não roda no ambiente: rode-a no computador da pessoa e abra o pull request.
+2. Mudança já num pull request: apague o arquivo de patch.
+3. Branch duplicada: ofereça apagá-la.
 
 ### Repositório pedido à pessoa
 
