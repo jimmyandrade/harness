@@ -839,6 +839,7 @@ flowchart LR
   investigar_problema --> enviar_email
   investigar_problema --> procurar_tarefa
   investigar_problema --> redigir_com_tom_de_voz
+  investigar_problema --> usar_whatsapp_web
   lancar_despesa_da_empresa --> anexar_arquivo_no_notion
   lancar_despesa_da_empresa --> completar_despesa_de_compra
   lancar_despesa_da_empresa --> conciliar_recebimento
