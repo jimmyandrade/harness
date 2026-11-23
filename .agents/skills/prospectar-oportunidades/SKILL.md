@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.6.1"
+  version: "0.6.2"
   related:
     - consultar-responsavel-pela-oportunidade
     - criar-ideia-de-conteudo
@@ -54,7 +54,7 @@ Quando um dos dois não está nos parâmetros, procure no workspace conectado um
 
 As listas e as propriedades vêm do mapeamento de dados do projeto, no workspace conectado: oportunidades, grupos, localidades, viagens e pontos de contato. Se uma lista não estiver nessa conexão, pare. Não use a lista de outro workspace.
 
-A execução parte de uma busca ou de um candidato que a pessoa trouxe, como um print, um link ou uma edição já cadastrada. Com candidato trazido, não escolha localidade nem pesquise grupos: vá ao Passo 5 só com ele, e o teto de candidatos não vale. A data vem do candidato. Sem data ou sem ano em fonte confiável, pergunte.
+A execução parte de uma busca ou de um candidato que a pessoa trouxe, como um print, um link ou uma edição já cadastrada. Com candidato trazido, não escolha localidade nem pesquise grupos: vá ao Passo 5 só com ele, e o teto de candidatos não vale. A edição já cadastrada que a pessoa cita, ou que a consulta mostra sem leitura de fit, também é candidato trazido. A data vem do candidato. Sem data ou sem ano em fonte confiável, pergunte.
 
 ### Passo 2
 
@@ -90,6 +90,8 @@ Leia também a bio dos perfis sociais oficiais do grupo e o evento ou o destaque
 Para cada candidato, até o `Máximo de candidatos por execução`, compare com o playbook e com o canvas. O que o playbook veta cai fora, com o motivo na resposta. Antes de cadastrar, siga `procurar-oportunidade`: se a edição existe, complemente o que faltar sem criar outra, e outra data do mesmo grupo é outra edição. Se não existe, siga `criar-oportunidade`. A decisão humana não é sua: deixe o valor inicial da lista.
 
 Grave a leitura de fit de cada candidato que passou nas notas de curadoria da edição, como síntese permanente: o que combina e o que não combina com o playbook, com o canvas e com o retorno das edições anteriores do grupo, sem checklist. Edição que ainda não existe é cadastrada antes, por `criar-oportunidade`. Candidato trazido que o playbook veta: diga o motivo, grave-o nas notas se a edição já existe e não cadastre sem pedido da pessoa.
+
+A avaliação do fit é sua e não espera a pessoa pedir: compare com o posicionamento da marca no canvas e no playbook e grave a leitura nas notas de curadoria da edição no mesmo turno, junto com a curadoria por IA, aprovada, vetada ou aguardando revisão humana. Não pergunte se deve avaliar nem se deve registrar. A pergunta fica para a decisão humana, a participação e o contato.
 
 Cada critério do playbook, como o custo de participação, a curadoria e o público, é conferido numa fonte antes de a leitura de fit ir às notas. Critério sem evidência fica nas notas como pendência, com o que faltou e o canal para perguntar, e a edição não é marcada como pronta para a decisão humana. Não deixe a lista do que verificar no corpo da edição.
 
@@ -129,6 +131,14 @@ Se você avaliar o fit sem ler a nota de reunião das edições anteriores, a pe
 1. Abra cada edição anterior do grupo e leia o bloco de notas de reunião inteiro.
 2. Cite o que funcionou e o que não funcionou, com o link.
 3. Sem retorno, diga isso.
+
+### Edição cadastrada sem avaliação e a pessoa perguntada
+
+Se você responder só o que existe sobre uma edição cadastrada e perguntar se a pessoa quer que avalie, a leitura de fit não chega ao Notion e a pessoa precisa pedir o que já era seu.
+
+1. Compare a edição com o canvas e com o playbook na hora.
+2. Grave a leitura nas notas de curadoria e marque a curadoria por IA.
+3. Deixe a decisão humana como está e pergunte só se a pessoa topa participar.
 
 ### Busca sem teto
 
@@ -191,6 +201,7 @@ Não escolhi localidade nem pesquisei grupos. A feira já estava cadastrada. Com
 ## Casos-limite
 
 - A pessoa trouxe uma feira, um edital ou um evento e quer saber se combina: avalie só esse candidato, sem busca, e grave a leitura nas notas de curadoria.
+- A pessoa pergunta se já prospectamos uma edição que existe sem leitura de fit: avalie e grave agora, sem perguntar.
 - O candidato trazido não tem data ou ano em fonte confiável: pergunte antes de avaliar.
 
 - A localidade-alvo é vetada: não procure, diga o motivo e pare.

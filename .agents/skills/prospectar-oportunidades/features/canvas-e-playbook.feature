@@ -24,3 +24,12 @@ Funcionalidade: Achar o canvas e o playbook antes de prospectar
       E que o canvas não está nos parâmetros nem no workspace
       Quando a skill lê o canvas e o playbook
       Então a skill não prospecta e deixa a falta no resumo
+
+  Regra: A leitura de fit é gravada sem a pessoa pedir
+
+    Exemplo: Edição cadastrada sem leitura de fit
+      Dado que a edição existe com decisão humana a avaliar e sem leitura de fit nas notas de curadoria
+      Quando a pessoa pergunta se a oportunidade já foi prospectada
+      Então a skill compara a edição com o canvas e com o playbook
+      E grava a leitura nas notas de curadoria sem perguntar
+      E deixa a decisão humana como está
