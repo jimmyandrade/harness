@@ -3,7 +3,7 @@ name: registrar-resultados-da-validacao-na-tarefa
 description: Registra na tarefa, num comentário só, os resultados da validação de cada etapa (local, preview do PR, pré-produção e produção), com o endereço do ambiente, para comprovar que foi testada. Usada quando a tarefa muda de etapa ou um teste novo roda, mesmo sem dizer comentar. Não serve para escrever a descrição, mudar o status nem registrar evidência visual.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.2.1"
   aliases:
     - registrar-validacao-na-tarefa
   related:
@@ -66,6 +66,8 @@ O endereço da etapa atual entra em todos os `Destinos do endereço do ambiente`
 Onde ele falta, ponha, ou diga o que falta.
 A mensagem do Slack é escrita por `pedir-revisao-de-pr-no-slack`: aqui você só confere que o endereço entrou.
 Sem preview publicado pelo projeto, diga isso. Não invente endereço.
+Quando a validação precisa de um item de teste num sistema de conteúdo, como uma entrada num CMS, descubra antes de criá-lo de qual ambiente o preview lê, pela configuração do deploy ou por quem cuida do sistema.
+Um item criado noutro ambiente não aparece no preview, e criar conteúdo no ambiente de produção espera o sim da pessoa.
 
 ### Passo 4
 
@@ -134,6 +136,14 @@ Se você registrar o resultado do ambiente local como se fosse do preview, ou o 
 1. Rode as validações no ambiente da etapa atual.
 2. Registre cada resultado na seção da etapa onde rodou.
 3. Se a etapa ainda não rodou, deixe na última seção.
+
+### Item de teste criado onde o preview não lê
+
+Se você criar o item de teste num ambiente do sistema de conteúdo sem saber de qual o preview lê, o item não aparece no preview, e a validação para na primeira tentativa.
+
+1. Descubra, pela configuração do deploy ou por quem cuida do sistema, de qual ambiente o preview lê.
+2. Crie o item nesse ambiente. Em produção, peça o sim da pessoa antes, porque o item fica visível a quem visita o site.
+3. Se o ambiente certo não puder receber o item, registre isso na última seção e valide pelo que o preview já mostra, dizendo que a fonte pode mudar entre uma carga e outra.
 
 ### Endereço do ambiente fora de um destino
 
