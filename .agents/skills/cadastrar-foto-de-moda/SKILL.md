@@ -1,9 +1,10 @@
 ---
 name: cadastrar-foto-de-moda
 description: Registra e classifica cada foto de moda, com tipo, ângulo, cena, vínculos, nome do arquivo, texto alternativo, status e histórico. Usada quando uma foto de peça ou look chega, é migrada, revisada ou aprovada, mesmo sem dizer registro. NÃO serve para tratar ou recriar a imagem nem para publicar a foto.
+compatibility: O rascunho local do texto alternativo precisa de Python e de um macOS 27 ou superior com swiftc.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   aliases:
     - definir-foto-de-moda
   related:
@@ -72,7 +73,7 @@ O título do registro é o nome do arquivo, sem extensão, em minúsculas, sem a
 
 O texto alternativo descreve só aquela imagem e os elementos visíveis nela. Quando a peça é renomeada, revise o nome do arquivo, o texto alternativo e as observações de todas as fotos dela, sem mexer nos arquivos. Antes de aprovar, o título não tem extensão, maiúscula, acento, espaço nem pontuação decorativa.
 
-Uma foto sem texto alternativo recebe uma proposta, sem esperar o pedido. Gere o rascunho no próprio computador, com a leitura do Vision e o modelo do Foundation Models com a imagem anexada, e dê a peça, o tipo e o ângulo do registro como contexto. Sem o modelo local, escreva a proposta a partir da imagem aberta e diga isso.
+Uma foto sem texto alternativo recebe uma proposta, sem esperar o pedido. Numa sessão local num macOS 27 ou superior, gere o rascunho com o script de rascunho local, que usa a leitura do Vision e o modelo do Foundation Models com a imagem anexada, e dê a peça, o tipo e o ângulo do registro como contexto. Fora disso, ou quando o script diz que o rascunho local não está disponível, escreva a proposta a partir da imagem aberta e diga isso.
 
 O rascunho local é ponto de partida: confira cada afirmação dele contra a imagem aberta e corrija antes de mostrar. Mostre a proposta ao lado do link do registro e só grave o texto com o sim da pessoa.
 
@@ -159,7 +160,7 @@ Gerei um rascunho de cada foto no próprio computador, com a peça, o tipo e o �
 
 - A foto mostra uma pessoa e a pessoa não está no cadastro: não crie nem vincule em silêncio, pergunte.
 - O arquivo não abre: diga, não confirme o ângulo e deixe `Precisa revisar`.
-- O modelo local não está disponível ou recusa a imagem: escreva a proposta a partir da imagem aberta e diga que não houve rascunho local.
+- A sessão não é local, o macOS é anterior ao 27, ou o modelo local não está disponível ou recusa a imagem: não rode nem conserte o script, escreva a proposta a partir da imagem aberta e diga que não houve rascunho local.
 - A foto mistura peça dobrada e aberta: dois registros.
 - A pessoa quer separar por ângulo dentro da mesma cena: separe, porque ela pediu.
 - Existe campo de arquivo no look com foto antiga: avise que a fonte é o registro de foto, migre e pergunte antes de limpar.
@@ -172,10 +173,14 @@ Gerei um rascunho de cada foto no próprio computador, com a peça, o tipo e o �
 - Um título em formato humano parece inofensivo. Ele quebra a busca e o nome do arquivo.
 
 - O rascunho do modelo local parece descrever a foto. Ele chama a peça de "peça", inventa manga e troca o enquadramento, e só a imagem aberta decide.
-- A leitura local falha em silêncio dentro de um sandbox e devolve rótulos vazios. Rode fora dele antes de concluir que a imagem não tem o que ler.
+- A leitura local falha em silêncio dentro de um sandbox e devolve rótulos vazios. Rode o script fora dele antes de concluir que a imagem não tem o que ler.
+- O filtro do modelo local recusa uma foto de roupa comum de vez em quando. A recusa não diz nada sobre a foto: siga pela imagem aberta.
 
 ## Scripts disponíveis
 
-- Nenhum.
+- `draft_alt_text.py` imprime em JSON os rótulos do Vision, o número de pessoas e o rascunho do texto alternativo de uma foto. Só roda numa sessão local num macOS 27 ou superior, com `swiftc`.
+- `draft_alt_text.swift` é compilado por `draft_alt_text.py`. Não rode este arquivo direto.
 
-1. Não há script para executar.
+1. Numa sessão local num macOS 27 ou superior, com o repositório: `python3 -I scripts/draft_alt_text.py "<imagem>" "<peça, tipo e ângulo do registro>"`, fora do sandbox.
+2. A primeira execução compila com `swiftc` e guarda o binário. Não usa rede. As seguintes usam o cache.
+3. Quando o script responde `local draft unavailable`, e em qualquer outro ambiente, como o Notion, não há rascunho local: o passo segue pela imagem aberta.
