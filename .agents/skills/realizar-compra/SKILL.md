@@ -4,7 +4,7 @@ description: Leva até a tela final o pedido de compra que a pessoa mandou fazer
 compatibility: Precisa de navegador.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
   related:
     - definir-ativo-imobilizado
     - evoluir-habilidade
@@ -40,6 +40,8 @@ Na revisão, leia e guarde o endereço de entrega, a forma e o prazo de entrega,
 
 O que o checkout oferece além do item, como seguro, garantia estendida, assinatura ou frete mais caro, é decisão da pessoa. Não aceite nem recuse sozinho: mostre cada extra, o preço e a opção que o site marca por padrão, e espere a resposta.
 
+A pergunta vem como enquete, com uma alternativa para cada opção do site, com o nome, a cobertura e o preço, e uma para seguir sem o extra. Antes dela, ponha o navegador embutido à frente, aberto na tela do checkout onde as opções aparecem, para a pessoa conferir com os próprios olhos. Texto corrido numa resposta, sem enquete e sem a tela à vista, não conta como perguntar.
+
 O endereço, o nome da nota e o meio de pagamento também são dela. Diga o que o site mostra, aponte o que difere do que a pessoa disse, como a nota em nome de outra pessoa, e espere. Não digite número de cartão, código de segurança, CPF nem senha.
 
 ### Passo 4
@@ -62,7 +64,7 @@ Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 Se você recusar ou aceitar o seguro, a garantia estendida ou outro extra sem perguntar, a pessoa paga o que não quis ou fica sem a cobertura que queria.
 
-1. Pare na oferta e mostre o extra, o preço e a opção que o site marca por padrão.
+1. Pare na oferta, ponha o checkout à frente no navegador e abra a enquete com cada opção, o preço e a opção que o site marca por padrão.
 2. Espere a resposta antes de marcar ou recusar.
 3. Só depois siga para o pagamento.
 
@@ -87,7 +89,7 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### realize a compra desta impressora, entrega amanhã na minha casa
 
-Abri o anúncio e conferi o item e o preço. Fui até a revisão: endereço, entrega no dia seguinte e total. O checkout ofereceu seguro e mostrei o preço antes de decidir. A nota estava no nome de outra pessoa, e avisei. Perguntei o meio de pagamento e finalizei só depois do sim ao item, ao total e ao meio.
+Abri o anúncio e conferi o item e o preço. Fui até a revisão: endereço, entrega no dia seguinte e total. O checkout ofereceu seguro: deixei a tela das opções à frente e abri a enquete com cada plano e o preço. A nota estava no nome de outra pessoa, e avisei. Perguntei o meio de pagamento e finalizei só depois do sim ao item, ao total e ao meio.
 
 ## Casos-limite
 
