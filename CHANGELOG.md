@@ -1,5 +1,37 @@
 # Changelog
 
+## [1.102.0](https://github.com/jimmyandrade/harness/compare/v1.101.0...v1.102.0) (2026-11-23)
+
+
+### Features
+
+* add the industrial property agent for trademark opinions and defense ([#1433](https://github.com/jimmyandrade/harness/issues/1433)) ([99258b0](https://github.com/jimmyandrade/harness/commit/99258b03f00fc7abeda90d269e5d3d72b21829ac)), closes [#1432](https://github.com/jimmyandrade/harness/issues/1432)
+* link the purchase and finance skills to the accounting and financial management agents ([#1424](https://github.com/jimmyandrade/harness/issues/1424)) ([5b603b4](https://github.com/jimmyandrade/harness/commit/5b603b46acbd5cfa9a612fbd52b25a405fbed6e6))
+* name each pending item exactly instead of by category or count ([#1437](https://github.com/jimmyandrade/harness/issues/1437)) ([219ea26](https://github.com/jimmyandrade/harness/commit/219ea26be4853dbab1ef78aff697f9579a6391b3))
+* **prospectar-oportunidades:** register the full programming of a visit under evaluation and choose when the programming goes to the schedule ([#1423](https://github.com/jimmyandrade/harness/issues/1423)) ([0d22695](https://github.com/jimmyandrade/harness/commit/0d2269531c70b5f847653aa852b5621c929f8c05))
+* **revisar-inscricoes:** add the registration review to the core ([#1425](https://github.com/jimmyandrade/harness/issues/1425)) ([8545a44](https://github.com/jimmyandrade/harness/commit/8545a4470bf346ba1de60ab888c21f2a978be3cf))
+
+
+### Bug Fixes
+
+* **analisar-perfil-social:** check the handle, the account and the names before concluding ([#1436](https://github.com/jimmyandrade/harness/issues/1436)) ([7ddb1a2](https://github.com/jimmyandrade/harness/commit/7ddb1a2a9a18d5c6b9193083757589d696022f9c))
+* **assessoria-juridica:** search the index and the title when a source link is broken, never a guessed URL ([#1428](https://github.com/jimmyandrade/harness/issues/1428)) ([f531d21](https://github.com/jimmyandrade/harness/commit/f531d2159d5e6dd396f1b061e73f772a9be3bd48))
+* **definir-artigo-da-base-de-conhecimento:** put the tool address in the article and in the reply ([#1429](https://github.com/jimmyandrade/harness/issues/1429)) ([c324506](https://github.com/jimmyandrade/harness/commit/c324506fac2e7785df809069426974fa5d366ab8))
+* **definir-issue-do-github:** confirm a legal rule with the legal agent before writing the issue ([#1426](https://github.com/jimmyandrade/harness/issues/1426)) ([57afffa](https://github.com/jimmyandrade/harness/commit/57afffa9da42087d0ed262bfa12ed077285d9492))
+* **escrever-link:** send the full URL of each source when the person asks for links ([#1427](https://github.com/jimmyandrade/harness/issues/1427)) ([438164e](https://github.com/jimmyandrade/harness/commit/438164ec49c874780d42ea85cf9b643209516a8a))
+* **escrever-link:** treat an address inside backticks as a raw URL ([#1430](https://github.com/jimmyandrade/harness/issues/1430)) ([1079a17](https://github.com/jimmyandrade/harness/commit/1079a17ece7fe6af8d69efca2a66c0c456c86cc2))
+* **evoluir-habilidade:** open the PR instead of leaving a patch file behind ([#1440](https://github.com/jimmyandrade/harness/issues/1440)) ([89afc88](https://github.com/jimmyandrade/harness/commit/89afc88c5c10f983dee0dd16042f96c2d3239824))
+* **lancar-venda:** rename a product sold under its old name ([#1441](https://github.com/jimmyandrade/harness/issues/1441)) ([5f5dd5d](https://github.com/jimmyandrade/harness/commit/5f5dd5d4edd9239169b965f33d79b959356e0679))
+* **mencionar-pessoa:** never infer a person's pronoun from the name or the login ([#1442](https://github.com/jimmyandrade/harness/issues/1442)) ([fe7fd01](https://github.com/jimmyandrade/harness/commit/fe7fd0105631c3093951a5cd4a8001c03cd3258e))
+* **mesclar-pull-request:** link the PR and name its number when offering the merge ([#1438](https://github.com/jimmyandrade/harness/issues/1438)) ([88c0187](https://github.com/jimmyandrade/harness/commit/88c0187b315e6ec4921e5ac215fde0c21354a60e))
+* **pedir-revisao-de-pr-no-slack:** add the link of a test item the validation uses ([#1431](https://github.com/jimmyandrade/harness/issues/1431)) ([5f8ffad](https://github.com/jimmyandrade/harness/commit/5f8ffad06bca030f5549c3ec6178f1ee41d215ac))
+* **pesquisar-compra:** confirm equipment details and add realizar-compra for the checkout ([#1417](https://github.com/jimmyandrade/harness/issues/1417)) ([cf1e2b7](https://github.com/jimmyandrade/harness/commit/cf1e2b7f57336890e0ef72ac31c0d8dfa43d4f7a))
+* **prospectar-oportunidades:** assess brand fit and record it without asking ([#1419](https://github.com/jimmyandrade/harness/issues/1419)) ([5e824b4](https://github.com/jimmyandrade/harness/commit/5e824b48e2055b2341fdd682fb9b4c52d58ab1ae))
+* **prospectar-oportunidades:** say how to enter a visit and explain the playbook lines ([#1421](https://github.com/jimmyandrade/harness/issues/1421)) ([24933a2](https://github.com/jimmyandrade/harness/commit/24933a2e0c67258ea41b37e23f4bd464424571ff))
+* **prospectar-oportunidades:** search the web when asked what exists on a weekend in a city ([#1435](https://github.com/jimmyandrade/harness/issues/1435)) ([ff5e291](https://github.com/jimmyandrade/harness/commit/ff5e291333df31dc3516324bea3a94da1f119e2a))
+* **realizar-compra:** register the expense after payment and follow the delivery with a routine ([#1422](https://github.com/jimmyandrade/harness/issues/1422)) ([bbabf35](https://github.com/jimmyandrade/harness/commit/bbabf3554d8022b579ee4e1d046a24053513bdea))
+* **revisar-oportunidade:** read the pending file of an edition before answering about it ([#1434](https://github.com/jimmyandrade/harness/issues/1434)) ([10166b9](https://github.com/jimmyandrade/harness/commit/10166b970c017f336599acc4498c950daeca1312))
+
 ## [1.101.0](https://github.com/jimmyandrade/harness/compare/v1.100.1...v1.101.0) (2026-11-22)
 
 
