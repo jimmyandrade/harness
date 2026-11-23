@@ -4,7 +4,7 @@ description: Pesquisa o que comprar, cruza com despesas, estoque e bens que já 
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.7.3"
+  version: "0.7.4"
   related:
     - anexar-arquivo-no-whatsapp
     - conversar-no-whatsapp
@@ -62,7 +62,7 @@ flowchart LR
   C --> R
 ```
 
-A lista de despesas, a de estoque e a de ativos imobilizados vêm do mapeamento de dados do projeto. Quando o projeto tem uma de requisitos de compra ou de custos de produção, leia-as também.
+A lista de despesas, a de estoque e a de ativos imobilizados vêm do mapeamento de dados do projeto. Leia também a de requisitos de compra e a de custos de produção. Sem elas no mapeamento, procure-as pelo nome no workspace antes de dizer que faltam.
 O requisito já escrito evita perguntar de novo, e o custo de hoje, como um serviço de terceiro que a compra substitui, mostra em quanto tempo ela se paga. Siga `lancar-despesa-da-empresa`, `gerenciar-estoque` e `definir-ativo-imobilizado` para ler cada uma, e `identificar-duplicata` para o item que parece o mesmo com outro nome.
 Leia também a viagem ativa ou a próxima, seguindo `definir-viagem`: onde a pessoa vai estar, em que dias e horas, e onde ficam os itens que ela precisa. A busca de empresas começa pelas dos lugares e dos horários em que a pessoa estará. Uma empresa de onde ela só volta depois do prazo fica para depois, e a resposta diz a cidade de cada empresa.
 Se a lista não estiver no workspace conectado, diga qual faltou e siga com as outras. Não use a lista de outro workspace.
@@ -83,13 +83,14 @@ O requisito que ninguém confirmou fica marcado como não confirmado. Não compl
 ### Passo 4
 
 Pesquise na web, uma busca por opção, e prefira nesta ordem: o fabricante, a loja que vende, o guia ou a avaliação.
-Para o insumo já comprado, busque também a loja própria do vendedor pelo nome do Passo 2: ela traz a ficha.
-Guia de melhores e página de afiliado indicam o que olhar, não provam compatibilidade.
+Do insumo já comprado, busque também a loja do vendedor pelo nome do Passo 2: ela traz a ficha.
+Guia e página de afiliado indicam o que olhar, não provam compatibilidade.
 Anote o preço com a loja e a data da consulta. O preço de uma busca ou de um cache pode ser antigo.
-Diga quando o preço veio só da busca. Página esgotada não tem preço atual.
+Diga quando o preço veio só da busca. Página esgotada não tem preço.
 O 403 da ferramenta de busca é falha técnica: abra a página no navegador embutido e, se falhar, no Claude in Chrome, e diga qual abriu.
 Captcha e login não se contornam: use o que a busca mostrou, diga que a página não abriu e peça a descrição ou o link, ou pergunte ao vendedor.
 Abra a página de cada opção e use como link o endereço que o navegador mostrou. Nunca monte um endereço nem aponte para a página inicial da loja. Sem página aberta, a opção vai sem link, e a resposta diz onde ela apareceu.
+De cada equipamento, confirme na página do fabricante ou da loja o que acompanha a caixa, como o rolo e o tamanho dele, a bateria, o aplicativo e os aparelhos compatíveis. O que a página não traz fica como não confirmado, com a pergunta ao vendedor.
 
 Para achar empresas que prestam um serviço, a fonte é a listagem local: trabalho acadêmico e diretório do estado só ensinam os sinônimos do serviço. Na cidade do Passo 1, busque o serviço e os sinônimos, quem o faz dentro do próprio negócio e as listagens locais, como o mapa e o diretório do sindicato. Sem empresa achada, faça a próxima busca do Passo 6, sem perguntar se deve seguir.
 
@@ -102,6 +103,7 @@ Uma empresa só vale como descartada com a resposta dela. Sem resposta, diga que
 Com o custo de hoje do Passo 2, mostre a conta de quando a compra se paga e marque o que é estimativa.
 Termine com a pergunta que ainda falta ao fabricante ou ao vendedor, quando houver, e com a decisão que cabe à pessoa.
 Não compre, não ponha no carrinho e não preencha pagamento.
+Quando a pessoa pede para compartilhar as opções, grave o link de cada uma no requisito, seguindo `definir-requisito-de-compra`.
 
 ### Passo 6
 
@@ -114,7 +116,7 @@ Antes de recomendar o contato com a empresa, veja se já houve conversa com ela,
 Quando a compra é um serviço de terceiro e nenhuma empresa achada atende, não responda que não há opção. Siga para a próxima: a da lista de empresas, a que um contato indicou, a da web. Cadastre cada uma, veja se há conversa e, sem conversa, prepare o primeiro contato pelo WhatsApp, com o texto pronto e o sim da pessoa. Só pare quando uma empresa confirmar que atende ou a pessoa mandar parar.
 O primeiro contato é por mensagem, pelo WhatsApp, pelo e-mail ou pelo formulário da empresa, e sai em qualquer hora: a loja fechada não adia a mensagem. Ligação é o último recurso, só quando a empresa não tem canal de texto. A empresa que só tem telefone fixo no site, sem WhatsApp, recebe o primeiro contato pelo e-mail ou pelo formulário dela, quando existir, e não fica sem contato nem espera a ligação. Prepare a mensagem para cada empresa de uma vez e peça o sim da pessoa a todas.
 Antes do primeiro envio a cada empresa, ela precisa estar cadastrada, com o rótulo no WhatsApp e o link da página dela na nota do contato. A pressa não adia esses três.
-A primeira mensagem explica o que é o item e para que a pessoa o usa, com o link do anúncio ou da compra quando houver. Uma empresa que não conhece o item não consegue dizer se atende: explique antes de pedir indicação. A mensagem já traz o que a empresa vai perguntar: o material, o formato, a medida, a quantidade e o prazo. Antes de enviar, confira nos registros o que já se sabe de cada um e pergunte à pessoa só o que falta, como a quantidade. A resposta da empresa não deve abrir uma segunda rodada de perguntas que a primeira mensagem já podia responder.
+A primeira mensagem explica o que é o item e para que a pessoa o usa, com o link do anúncio ou da compra quando houver. Uma empresa que não conhece o item não consegue dizer se atende: explique antes de pedir indicação. A mensagem já traz o que a empresa vai perguntar: o material, o formato, a medida, a quantidade e o prazo. Antes de enviar, confira nos registros o que já se sabe e pergunte à pessoa só o que falta, como a quantidade, para a empresa não abrir uma segunda rodada de perguntas.
 
 O que a mensagem traz vem da especificação fechada no Passo 3 e do cadastro do item que o Passo 2 leu, como a medida de um bem que já temos: a empresa que pede um dado que um dos dois cobre o recebe dele, sem perguntar à pessoa. A que pede um dado que nenhum cobre leva a dúvida de volta ao Passo 3, com a pergunta à pessoa. A foto do item segue `anexar-arquivo-no-whatsapp`, com o sim da pessoa.
 
@@ -124,7 +126,7 @@ Quando o insumo é para peças que a própria marca produz, como etiqueta ou emb
 
 A mensagem diz à empresa só o que ela precisa para orçar e a disponibilidade da pessoa: quando ela pode retirar ou levar. Não conte que a pessoa viaja, onde está nem quando chega. Confira a disponibilidade no momento do envio, na viagem de `definir-viagem` e no que a pessoa disse hoje, porque uma frase dita horas antes pode ter deixado de valer.
 
-Uma mensagem já enviada com dado errado ou a mais se corrige editando-a, não mandando outra. Se não der para editar, não envie nada e diga à pessoa quais empresas ficaram assim.
+Uma mensagem enviada com dado errado ou a mais se corrige editando-a, não mandando outra. Se não der, diga à pessoa quais empresas ficaram assim.
 
 Quando a empresa responde, leia a resposta e responda com os fatos que já se sabe, sem pedir à pessoa o que a conversa já tem. Delegue a leitura e a resposta à habilidade de conversa. Só leve à pessoa a decisão que é dela: aceitar preço ou orçamento, pagar, combinar data e hora de retirada ou entrega, e passar dado pessoal ou fiscal. Nesses casos, diga as palavras da empresa e a opção que você recomenda.
 A recusa de uma empresa se registra como `definir-negociacao` manda, no mesmo turno, e o Passo 5 a trata como descartada, com o motivo.
@@ -186,9 +188,8 @@ Se você parar no 403 sem abrir o navegador, o preço vem só da busca. Se insis
 
 Se você recomendar ou descartar uma empresa e não a cadastrar, na próxima busca ninguém a acha e a pessoa pesquisa de novo.
 
-1. Cadastre cada empresa que apareceu como opção, pelo Passo 6.
-2. Não espere a pessoa decidir nem comprar.
-3. Leve o link da página na resposta.
+1. Cadastre cada empresa que apareceu como opção, pelo Passo 6, sem esperar a decisão nem a compra.
+2. Leve o link da página na resposta.
 
 ### Empresa deixada sem contato por ter só telefone fixo
 
@@ -202,8 +203,7 @@ Se você deixar sem mensagem a empresa cujo site traz só telefone fixo, ela fic
 
 Se você parar no trecho que a busca mostrou e disser que não achou o contato, a pessoa procura o que estava na página.
 
-1. Abra o site da empresa e leia os links dela, como WhatsApp, telefone e redes.
-2. Só então diga que o contato falta.
+1. Abra o site e leia os links dele, como WhatsApp, telefone e redes, antes de dizer que o contato falta.
 
 ### Lugar tomado pelo alcance mais amplo
 
@@ -232,9 +232,8 @@ Se você sugerir à pessoa a quantidade que uma empresa aceita como mínimo, pas
 
 Se você ficar no carrinho ou na tela de pagamento, a pessoa perde a decisão que era dela.
 
-1. Pare na recomendação.
-2. Entregue os links.
-3. Registre só depois que a pessoa disser que comprou.
+1. Pare na recomendação e entregue os links.
+2. Registre só depois que a pessoa disser que comprou.
 
 ## Exemplos de entrada e saída
 
@@ -242,9 +241,9 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### preciso de uma impressora laser que imprima as folhas A4 de etiqueta de composição que já compramos
 
-Li as despesas e achei a compra das folhas, com o modelo, a quantidade, o valor e o vendedor pelo comprovante. Não há impressora nos ativos, e as folhas não estão no estoque. Os custos de produção dizem quanto custa hoje imprimir a página fora. O marketplace devolveu 403, o navegador abriu a página, e a loja própria do vendedor deu o material e as medidas, sem citar impressora.
+Li as despesas e achei a compra das folhas, com o modelo, o valor e o vendedor pelo comprovante. Não há impressora nos ativos, e as folhas não estão no estoque. O marketplace devolveu 403, o navegador abriu a página, e a loja do vendedor deu o material e as medidas, sem citar impressora.
 
-A entrada que aceita etiqueta veio da ficha de cada fabricante de impressora. Recomendo três laser monocromáticas, com preço, loja e data de cada uma. Falta saber, com o vendedor das folhas, qual impressora ele indica e se a folha pode passar pela frente e verso automático.
+A entrada que aceita etiqueta veio da ficha de cada fabricante. Recomendo três laser monocromáticas, com preço, loja e data de cada uma. Falta saber, com o vendedor das folhas, qual impressora ele indica e se a folha passa pelo verso automático.
 
 ### quero um tecido de algodão cru
 
