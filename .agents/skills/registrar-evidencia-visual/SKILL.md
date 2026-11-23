@@ -3,7 +3,9 @@ name: registrar-evidencia-visual
 description: Registra o que a pessoa passa a ver quando um trabalho termina, no pull request e no card. Usada quando a entrega muda a tela, no Storybook, no ambiente local, na pré-produção ou na produção, mesmo sem dizer print. NÃO serve para mudança sem percepção visual, para medir performance, para ler texto de imagem nem para mandar a mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.14.0"
+  version: "0.15.0"
+  models:
+    - evidencia-visual-do-pr
   related:
     - criar-pull-request
 ---
@@ -13,7 +15,7 @@ metadata:
 ## Parâmetros de configuração
 
 ```yaml
-# `Variações de tema` lista os temas do projeto que a evidência e as stories cobrem, como o tema padrão e o sazonal ativo. Vazio, descubra os temas no repositório.
+# `Variações de tema` lista todos os temas do projeto que a evidência e as stories cobrem, como a marca, o claro e o escuro, o de campanha e o sazonal, ativo ou não. Vazio, descubra todos no repositório e nas instruções do projeto.
 "Variações de tema": ""
 "Confirmação antes de gravar": "sim"
 "Fuso horário da legenda": "America/Sao_Paulo"
@@ -38,11 +40,13 @@ Grave um vídeo do carregamento ou uma tabela que compare os tempos.
 ### Passo 2
 
 Liste só a superfície que este trabalho realmente tem, e cada cenário que uma pessoa pediu ou prometeu mostrar num comentário do PR: um estado como hover ou foco, uma variante como com e sem link.
-Cada superfície aparece em cada variação de tema do projeto, o tema padrão e os sazonais ou variações ativos, como diz `Variações de tema`.
+Cada superfície aparece em todos os temas possíveis do projeto: a marca, o claro e o escuro, o de campanha e o sazonal, como diz `Variações de tema` e como o código e as instruções do projeto mostram.
+Um tema que ninguém ligou hoje também entra.
 Um efeito que aparece com o ponteiro, como o sublinhado ou a cor do hover, pede também a captura do foco por teclado, aberta com a tecla Tab, e o mesmo efeito tem de existir nos dois.
 Cada cenário é uma captura própria, legendada com o que ele prova.
 Quando o componente que mudou vive junto de outros, como uma barra acima de um cabeçalho, mostre-o na composição, com o que está em volta, para dar para comparar.
 Uma mudança de cor, de espaço ou de tamanho só se avalia ao lado do vizinho.
+Cada componente ou tela que usa o código alterado também entra na evidência, em cada tema, para mostrar se houve impacto, e a descrição do pull request diz qual foi.
 A composição entra em cada tema e em cada largura, e a story da composição confere as duas cores lado a lado.
 Um comentário que promete a evidência, como "vou deixar uma evidência visual", chama esta habilidade, e a resposta na thread leva o link para ela.
 A ordem é o ambiente local, o Storybook, a pré-produção e a produção.
@@ -80,8 +84,8 @@ O efeito da mudança aplicado à mão noutro ambiente, como a produção, é uma
 Quando a simulação é a única imagem possível, a legenda diz que é simulação e a resposta diz que a captura da mudança ainda falta.
 Numa correção de bug, a evidência refaz o caminho do relato, antes e depois.
 Quando o bug acontece numa interação, como rolar e tocar, grave um vídeo curto desse caminho.
-Antes de capturar, confira que a story cobre cada tema da lista.
-Se faltar, acrescente a story do tema, porque ela também dá a base da regressão visual, e só então capture.
+Antes de capturar, confira que a story cobre cada tema da lista, para o componente alterado e para cada componente que usa o código alterado.
+Se faltar, acrescente a story, porque ela também dá a base da regressão visual, e só então capture.
 A imagem de um tema sem story não substitui a story.
 Antes de capturar, leia o texto que a tela vai mostrar.
 Ele vem do negócio ou do conteúdo real, nunca inventado por você.
@@ -133,10 +137,7 @@ A página inteira entra como link para o arquivo anexado, não como imagem dentr
 Uma imagem muito alta alonga o card e atrapalha a leitura.
 O pull request segue a mesma regra, na seção de imagens que o modelo do repositório já tem.
 Não abra outra seção.
-Dentro dela, cada captura tem o próprio título, agrupado por superfície: computador, telefone, com e sem link, estados.
-Cada captura leva três partes separadas por linha em branco: o título, a imagem e a legenda em itálico.
-Sem a linha em branco, a imagem encosta no texto de baixo.
-O GitHub remove as tags `figure` e `figcaption` da descrição, então não as use ali. Use-as só onde o destino as mostra.
+A evidência de todos os temas e a do impacto ficam na descrição do pull request, no formato do modelo de saída `evidencia-visual-do-pr`.
 Se o corpo do card não aceitar arquivo, o recorte vai num comentário e a página inteira continua como link. Se o card já tem um comentário seu com a evidência deste trabalho, edite esse comentário em vez de abrir outro.
 Comentário numa issue do rastreador só entra se a pessoa pedir.
 Esse comentário leva o link do pull request.
@@ -231,11 +232,12 @@ Se você capturar a story com uma frase que a IA escreveu, a evidência mostra u
 
 ### Só o tema padrão
 
-Se você mostrar a mudança só no tema padrão, ninguém vê como ela fica no tema sazonal, e a regressão visual não cobre o tema.
+Se você mostrar a mudança só no tema padrão, ou só nos temas ativos, ninguém vê como ela fica no tema de campanha ou no escuro, e a regressão visual não cobre o tema.
 
-1. Liste os temas do projeto em `Variações de tema`, ou descubra no repositório.
-2. Garanta uma story por tema e capture cada uma.
+1. Liste todos os temas do projeto em `Variações de tema`, ou descubra no repositório e nas instruções do projeto.
+2. Garanta uma story por tema, para o componente alterado e para os que usam o código alterado, e capture cada uma.
 3. Legende cada imagem com o tema.
+4. Ponha as imagens de todos os temas na descrição do pull request.
 
 ### Hover sem foco por teclado
 
