@@ -4,9 +4,10 @@ description: Leva até a tela final o pedido de compra que a pessoa mandou fazer
 compatibility: Precisa de navegador.
 metadata:
   author: jimmyandrade
-  version: "0.1.3"
+  version: "0.1.4"
   related:
     - definir-ativo-imobilizado
+    - completar-despesa-de-compra
     - definir-rotina
     - evoluir-habilidade
     - gerenciar-estoque
@@ -60,7 +61,7 @@ O insumo vai para `gerenciar-estoque` e o bem durável para `definir-ativo-imobi
 
 Compra com entrega futura ganha, no mesmo turno, uma rotina que acompanha a entrega, seguindo `definir-rotina`: ao confirmar a entrega ela cria o ativo, avisa a pessoa e se pausa. A rotina também pede a nota fiscal ao vendedor, porque o chat do marketplace só abre depois do recebimento. O pedido da nota é texto da marca e passa por `redigir-com-tom-de-voz` antes de ir para a rotina.
 
-Se a lista de meios de pagamento não tem o meio usado, como o saldo da conta de pagamento, deixe o meio vazio, diga qual das opções existentes é a mais próxima e não mude a lista.
+O meio de pagamento da despesa segue `completar-despesa-de-compra`: compra paga com o saldo de uma conta de pagamento tem o meio de saldo de conta de pagamento. Se a lista não tem o meio usado, deixe-o vazio, diga qual é o mais próximo e não mude a lista.
 
 ### Passo 6
 
