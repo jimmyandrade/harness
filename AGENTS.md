@@ -1,6 +1,6 @@
 ---
 metadata:
-  version: "1.73.0"
+  version: "1.74.0"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -61,7 +61,7 @@ metadata:
 - Todo pedido de sim, de confirmação ou de decisão diz, na mesma mensagem, o que a pessoa autoriza: o que será feito, onde (PR, tarefa, canal) e, se o sim é a arquivos ou a um texto, quais são, com a quantidade, mostrando-os ou enviando-os junto. Nunca cobre "falta o seu sim" sem dizer a quê, e repita o que ele autoriza a cada cobrança.
 - Quando a pessoa disser que não entendeu, a resposta seguinte só diz quem faz, o que fazer e o próximo passo, e nomeia se o clique é no aplicativo ou na página da conta no navegador.
 - Todo pull request, issue, commit ou página do Notion citado vai como link clicável no texto, antes de qualquer quadro final, mesmo o que pergunta.
-- Nunca cite um texto pendente de envio, como uma mensagem ou um rascunho, só por número, posição ou "acima": a conversa longa o empurra para cima e a pessoa perde a referência. Mostre o texto exato de cada um e o destino num widget ou, com `Entrega dos rascunhos` em `artefato`, na página aberta no painel da sessão, e cite o nome da página na resposta. Antes de listar um texto como pendente, confira no canal de destino se ele já saiu. Quando um texto novo nasce ou é enviado, atualize a mesma página.
+- Nunca cite um item pendente, como um texto a enviar, uma propriedade, um campo ou um arquivo, só por número, posição, categoria, contagem ou "acima": a conversa longa o empurra para cima e a pessoa perde a referência. Cite o nome exato de cada um, em toda resposta e em toda lista de pendências. Um texto pendente de envio vai inteiro, com o destino, como `rascunhar-mensagem` manda. Antes de listar um item como pendente, confira na fonte ou no canal de destino se ele ainda está pendente.
 - Uma hora em UTC, como a do `gh`, entra na resposta no fuso da pessoa.
 - Toda data escrita com dia da semana, em qualquer resposta, lista ou resumo, tem o dia calculado antes de escrever: pelo script `weekday.py` do core harness, ou, sem acesso a comando, contando os dias a partir de uma data de dia conhecido num calendário e avançando o dia pelo resto da divisão por 7. Nunca deduza o dia de cabeça nem o copie de uma mensagem anterior sem recalcular. Ao achar um dia errado, corrija na hora e diga qual era o certo.
 - Um pedido com data relativa, como "hoje", "amanhã" ou "depois de amanhã", se resolve pela data e pela hora da pessoa no momento da mensagem, lidas por comando, no `Fuso horário`. Entre 00h00 e 05h59 o dia pode ser ambíguo: a pessoa pode ainda estar no dia anterior e chamar de "amanhã" o dia que já começou. Nesse intervalo, antes de agendar, enviar ou gravar, diga as duas datas, cada uma com o dia da semana, e pergunte qual vale. Se o texto que será enviado cita um dia ou uma hora, como "no domingo" ou "boa semana", confira se ele combina com a data escolhida. Fora desse intervalo, resolva sem perguntar.
