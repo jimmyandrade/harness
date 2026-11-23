@@ -4,7 +4,7 @@ description: Analisa o perfil social de uma pessoa, marca, feira ou evento pela 
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.10.1"
+  version: "0.10.2"
   related:
     - definir-perfil-social
     - reconhecer-imagem
@@ -54,6 +54,8 @@ Leia o `Posicionamento da marca` nas instruções do projeto. Sem ele, pergunte 
 
 Peça o canal e o perfil, se a pessoa não os trouxe, e o gatilho: por que esse perfil entrou na lista.
 
+Confira que o handle abre no canal antes de ler. O nome de um grupo ou um alias não é handle: procure o perfil oficial citado na página da oportunidade e, sem achá-lo, pergunte. Se o perfil é do espaço onde a feira acontece, diga isso no contexto e nos sinais vermelhos, porque ele não fala da feira.
+
 Com `Publicar a análise no perfil social` em `sim`, confira antes de ler o perfil que o `Destino da análise` está ao alcance: a lista existe no workspace conectado e a ferramenta escreve nela. Sem isso, pare e diga, antes de gastar a leitura. A análise não é feita para ficar só na conversa.
 
 ### Passo 2
@@ -70,7 +72,7 @@ Leia o modelo de saída `perfil-social` quando for gerar a saída.
 
 ### Passo 3
 
-Abra o perfil. Se o canal abrir com um aviso de login, pare antes de ler e peça à pessoa que entre na conta. Diga o que o login libera, como os destaques, as legendas, os comentários e os posts além dos primeiros, e espere a resposta. Siga só depois que ela entrar ou disser que não quer entrar.
+Abra o perfil. Se o navegador da pessoa já abre o perfil logado, siga sem pedir login nem credencial e diga com qual conta leu. Se o canal abrir com um aviso de login, pare antes de ler e peça à pessoa que entre na conta. Diga o que o login libera, como os destaques, as legendas, os comentários e os posts além dos primeiros, e espere a resposta. Siga só depois que ela entrar ou disser que não quer entrar.
 
 Com a ferramenta de credencial do gerenciador de senhas na sessão, ofereça o login por ela e espere o sim da pessoa. A pessoa aprova o item no próprio gerenciador, o valor entra direto na página e você nunca o vê, nem o código de verificação. Sem essa ferramenta, a pessoa entra pelo navegador. Nunca peça nem digite a senha da pessoa.
 
@@ -96,7 +98,7 @@ Post que não carregou é aberto de novo, e o que continua sem abrir fica listad
 
 Em `Limites da análise`, diga o que cada parâmetro fez e, no modo automático, o que decidiu e por quê. Conte os posts abertos, os que só viu na miniatura e o total do perfil, diga se leu os reposts e quanto varreu do total quando o limite parou a leitura. Não escreva que um tema não aparece no perfil quando o alcance foi `nunca`, `nenhum` ou uma amostra pequena do total, nem que leu um post que só viu na grade.
 
-Post só de imagem pode não devolver texto pelo leitor de página. Leia o texto pela página aberta no navegador ou pela captura, e não conte como lido o post que não devolveu nada.
+Post só de imagem ou documento escaneado pode não devolver texto pelo leitor de página. Leia o texto pela página aberta, pela captura ou pelas páginas como imagem, e não conte como lido o que não devolveu nada.
 
 Em cada post, leia o rótulo da plataforma, como "Conteúdo de IA", e os contadores de curtidas, comentários e compartilhamentos. Confira o que cada número é antes de usá-lo.
 
@@ -110,7 +112,7 @@ Perfil privado, bloqueado ou fora do ar: diga que não analisou e por quê, e pe
 
 Preencha cada seção só com o que o perfil mostra. Cada sinal cita o post ou o destaque e a data que o sustenta.
 
-Conteúdo cujo sentido depende de contexto que o perfil não dá fica como hipótese: diga o que está visível, liste as leituras possíveis e não afirme a intenção da pessoa nem o valor que ela defende. A decisão é de quem lê a análise.
+Nome de perfil ou de pessoa que a captura não deixa ler não entra: escreva que não conseguiu ler. Conteúdo cujo sentido depende de contexto que o perfil não dá fica como hipótese: diga o que está visível, liste as leituras possíveis e não afirme a intenção da pessoa nem o valor que ela defende. A decisão é de quem lê a análise.
 
 O rótulo de conteúdo de IA entra como sinal, com o post e a data, e não como acusação: ele diz o que a plataforma marcou. Os contadores servem para medir o engajamento contra o tamanho do perfil.
 
