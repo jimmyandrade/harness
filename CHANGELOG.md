@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.106.0](https://github.com/jimmyandrade/harness/compare/v1.105.0...v1.106.0) (2026-11-23)
+
+
+### Features
+
+* **registrar-evidencia-visual:** cover every theme and the impact in the PR evidence ([#1465](https://github.com/jimmyandrade/harness/issues/1465)) ([539efb9](https://github.com/jimmyandrade/harness/commit/539efb9627a3210b0f64566b249e32cc05448e64))
+* reinstall dependencies when the lockfile changes ([#1464](https://github.com/jimmyandrade/harness/issues/1464)) ([2a9e451](https://github.com/jimmyandrade/harness/commit/2a9e451f5f45d2e1a1a9739e1ae57dea3d224026))
+
 ## [1.105.0](https://github.com/jimmyandrade/harness/compare/v1.104.2...v1.105.0) (2026-11-23)
 
 
