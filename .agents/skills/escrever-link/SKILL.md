@@ -3,7 +3,7 @@ name: escrever-link
 description: Escreve o link de um texto lido numa plataforma, como Jira, Confluence, GitHub, Slack, WhatsApp ou a conversa com a IA, com o endereço lido da fonte, o texto certo e a sintaxe que funciona nela. Usada sempre que um texto vai citar PR, issue, card, página ou arquivo. Não serve para decidir o que o texto diz nem para enviá-lo.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.4.0"
   related:
     - conversar-no-whatsapp
     - criar-pull-request
@@ -21,7 +21,7 @@ metadata:
 # `Texto do link de PR` e `Texto do link de issue` dizem o que aparece no link, como `número` para `[#123](url)`.
 "Texto do link de PR": "número"
 "Texto do link de issue": "número"
-# `Texto do link de card` é `chave` para `[ABC-12](url)` ou `título` para o título do card.
+# `Texto do link de card` é `chave` para `[ABC-12](url)`, `título` para o título do card ou `chave e título` para `[ABC-12: título](url)`.
 "Texto do link de card": "chave"
 # `Texto do link de página` é `título` para o título da página e `nome` para o nome do arquivo.
 "Texto do link de página": "título"
@@ -43,7 +43,7 @@ Se o relatório não traz a URL, peça-a a quem a usou ou leia-a no registro del
 ### Passo 2
 
 Escolha o texto do link pelo tipo do alvo, com os parâmetros `Texto do link de PR`, `Texto do link de issue`, `Texto do link de card` e `Texto do link de página`.
-O texto diz o que o leitor abre. Um PR é `#123`, um card é a chave ou o título e uma página é o título dela.
+O texto diz o que o leitor abre. Um PR é `#123`, um card é a chave, o título ou os dois, como `Texto do link de card` manda, e uma página é o título dela.
 `aqui`, `clique aqui` e `link` não dizem nada e não entram.
 Um item citado só pelo número, como `#123` ou `PR 123`, não é link. Uma chave solta também não é. Uma URL crua no meio da frase só serve onde o Passo 3 manda.
 Um endereço entre crases também é URL crua: o código não vira link em nenhuma plataforma.
@@ -111,6 +111,14 @@ Se você escrever o título inteiro de uma página como texto de um link que fic
 
 1. Troque por um smart link, com o texto vazio.
 2. Deixe o texto do link só quando o link está no meio de uma frase.
+
+### Card citado só pela chave
+
+Se você citar o card só pela chave quando `Texto do link de card` pede o título, a pessoa não reconhece de qual card se fala e pergunta de volta.
+
+1. Leia o título do card na fonte antes de citar.
+2. Escreva a chave e o título no texto do link, em toda menção, também em lista e resumo.
+3. Se não leu o card, leia antes de citar.
 
 ### Número solto
 
