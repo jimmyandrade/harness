@@ -3,7 +3,7 @@ name: rascunhar-mensagem
 description: Escreve, mostra e envia a mensagem de WhatsApp depois de a conversa ser lida, com o destino, o texto, a divisão e o comprovante conferidos. Usada quando a pessoa quer responder, mandar ou corrigir uma mensagem. NÃO serve para ler a conversa, redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.4.5"
+  version: "0.4.6"
   aliases:
     - entregar-rascunho-de-mensagem
     - rascunhar-mensagem-no-whatsapp
@@ -98,6 +98,8 @@ Numa conversa que não está fluindo, veja também o e-mail com o mesmo contato 
 ### Passo 3
 
 Todo rascunho de mensagem aparece na resposta do chat. Mostre a conversa de destino, uma linha do que o rascunho acrescenta ao que já foi dito e, em cada mensagem que responde a algo, a mensagem citada, com a data. Fecha o rascunho a pergunta que pede o sim para esta conversa e este texto, com a frequência e o prazo do acompanhamento quando a mensagem espera resposta.
+Com duas versões, recomende uma e peça o sim a ela.
+
 O texto redigido e não enviado volta inteiro, num bloco, na mensagem final de toda resposta que o cita, junto com o pedido do sim, e vai de novo em cada turno que deixa o envio pendente. Dizer só que ele está acima deixa a pessoa sem o texto para aprovar. O quadro de próximo passo, que mostra só a pergunta, não substitui o bloco: com a aprovação perguntada nele, o texto ainda vai inteiro na mensagem final, e o escrito antes do quadro pode ser cortado.
 Uma mensagem que diz que um trabalho está em andamento, foi registrado ou foi feito leva o link da tarefa, da página ou do pull request que mostra esse registro. Sem esse registro, crie-o antes, como `definir-tarefa` manda, ou pergunte onde ele está.
 Com a ferramenta de widget na sessão, o widget vem sempre, além dos blocos: o destinatário, um campo editável por mensagem com a altura do texto inteiro, um botão para copiar e um botão que manda o texto aprovado de volta ao chat. Se a pessoa editar, a versão dela substitui o rascunho e aparece de novo antes do sim. Vale mesmo quando a sessão só rascunha e outra envia, como a dona do WhatsApp Web, e mesmo quando a ferramenta aparece como carregável. Sem a ferramenta, diga que a sessão não a tem.
