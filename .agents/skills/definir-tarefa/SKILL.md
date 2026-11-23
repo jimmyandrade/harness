@@ -3,7 +3,7 @@ name: definir-tarefa
 description: Use essa habilidade sempre que for cadastrar, revisar, validar, editar ou mesclar tarefas a pedido, mesmo sem dizer definir. NÃO use para só saber se ela já existe, revisar tarefas por gatilho em um cronograma ou na base de dados, varrer a lista, marcar tarefa como concluída, nem transformar uma regra sem entrega em tarefa.
 metadata:
   author: jimmyandrade
-  version: "0.18.1"
+  version: "0.18.2"
   aliases:
     - criar-tarefa
     - revisar-tarefa
@@ -77,6 +77,8 @@ Se for tarefa que já existe, dê o veredicto e o que falta em específica, mens
 ### Passo 5
 
 Se a pessoa pedir para aplicar ou editar, grave só a correção que ela aceitou. Com mais de uma tarefa, mostre cada mudança antes de gravar. Grave na definição de concluído e nos responsáveis só o que a pessoa disse. Não invente. Não marque como concluída. Não crie tarefa nova nessa passada. Com `Considerar pessoas informadas` em `sim`, comente o que mudou e marque as pessoas informadas.
+
+Antes de tirar uma tarefa da sprint ou de pô-la noutra, veja o tipo dela. Subtarefa não tem sprint própria: herda a do item pai, e o rastreador recusa a edição. Ela só muda de sprint com o pai, e isso é uma decisão da pessoa.
 
 ### Passo 6
 
@@ -167,6 +169,14 @@ Se você só disser que o título passou ou falhou, a revisão perde o prazo ven
 1. Para cada tarefa, dê o veredicto e o que falta em cada um dos cinco pontos.
 2. Se o prazo for anterior ao dia da revisão, diga que venceu e avise quem está nos responsáveis.
 3. Feche com a lista do que fazer. Não aplique título, status, prazo, definição de concluído nem os responsáveis.
+
+### Subtarefa tirada da sprint
+
+Se você tentar tirar a subtarefa da sprint e já tiver escrito num comentário que ela saiu, o texto publicado conta o que não aconteceu.
+
+1. Veja o tipo da tarefa antes de editar a sprint.
+2. Subtarefa herda a sprint do item pai: diga que só sai com ele e pergunte se é isso que a pessoa quer.
+3. Escreva o comentário só depois de a gravação dar certo e de reler o estado. Comentário publicado com afirmação errada se corrige na hora, e a resposta diz que foi corrigido.
 
 ### Conteúdo no corpo
 
