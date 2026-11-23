@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.105.0](https://github.com/jimmyandrade/harness/compare/v1.104.2...v1.105.0) (2026-11-23)
+
+
+### Features
+
+* **escrever-link:** let the card link text carry the key and the title ([#1462](https://github.com/jimmyandrade/harness/issues/1462)) ([526f653](https://github.com/jimmyandrade/harness/commit/526f653c559a4c2da005b9f4297f5c693e8f1234))
+
+
+### Bug Fixes
+
+* **definir-tarefa:** tell that a subtask only leaves the sprint with its parent ([#1463](https://github.com/jimmyandrade/harness/issues/1463)) ([20180b4](https://github.com/jimmyandrade/harness/commit/20180b499d4364fe6bfc5a050e875c3a3221c910))
+* **registrar-resultados-da-validacao-na-tarefa:** find the source the preview reads before creating a test item ([#1460](https://github.com/jimmyandrade/harness/issues/1460)) ([1f0cc63](https://github.com/jimmyandrade/harness/commit/1f0cc63acc43a9c8e23ef5ecaad0b0523fa6ee40))
+
 ## [1.104.2](https://github.com/jimmyandrade/harness/compare/v1.104.1...v1.104.2) (2026-11-23)
 
 
