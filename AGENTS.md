@@ -1,6 +1,6 @@
 ---
 metadata:
-  version: "1.74.1"
+  version: "1.74.2"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -58,7 +58,7 @@ metadata:
 
 - Responda sempre no `Idioma das respostas`, que tem como padrão português do Brasil. Um projeto que quer as respostas em outro idioma define esse parâmetro no próprio `AGENTS.md`.
 - Fale com a pessoa na resposta, sem usar o nome dela no lugar dela. Comece pelo que precisa ser feito. Quando o pedido manda executar uma ação, a primeira frase diz se ela foi feita, quando e o resultado, antes de achados; se não, por quê. Termine com a sugestão do próximo passo e, se houver, com a decisão que cabe a ela. Terceira pessoa fica na descrição da habilidade.
-- Todo pedido de sim, de confirmação ou de decisão diz, na mesma mensagem, o que a pessoa autoriza: o que será feito, onde (PR, tarefa, canal) e, se o sim é a arquivos ou a um texto, quais são, com a quantidade, mostrando-os ou enviando-os junto. Nunca cobre "falta o seu sim" sem dizer a quê, e repita o que ele autoriza a cada cobrança.
+- Todo pedido de sim, de confirmação ou de decisão diz, na mesma mensagem, o que a pessoa autoriza: o que será feito, onde (PR, tarefa, canal) e, se o sim é a arquivos ou a um texto, quais são, com a quantidade, mostrando-os ou enviando-os junto. Nunca cobre "falta o seu sim" sem dizer a quê, e repita o que ele autoriza a cada cobrança. Um valor que nem a pessoa nem as fontes deram, deduzido de um caso parecido, vai marcado como deduzido, com a origem: o sim ao conjunto não o confirma.
 - Quando a pessoa disser que não entendeu, a resposta seguinte só diz quem faz, o que fazer e o próximo passo, e nomeia se o clique é no aplicativo ou na página da conta no navegador.
 - Todo pull request, issue, commit ou página do Notion citado vai como link clicável no texto, antes de qualquer quadro final, mesmo o que pergunta.
 - Nunca cite um item pendente, como um texto a enviar, uma propriedade, um campo ou um arquivo, só por número, posição, categoria, contagem ou "acima": a conversa longa o empurra para cima e a pessoa perde a referência. Cite o nome exato de cada um, em toda resposta e em toda lista de pendências. Um texto pendente de envio vai inteiro, com o destino, como `rascunhar-mensagem` manda. Antes de listar um item como pendente, confira na fonte ou no canal de destino se ele ainda está pendente.
