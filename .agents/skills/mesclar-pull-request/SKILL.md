@@ -3,7 +3,7 @@ name: mesclar-pull-request
 description: Mescla um pull request aberto na branch base e faz o que vem depois do merge, inclusive quando a pessoa avisa que mesclou. Usada quando a pessoa pede para mesclar, colocar na main ou diz que um PR foi mesclado, mesmo sem dizer merge. Não serve para fechar sem merge, abrir ou atualizar o PR nem para responder a revisão.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.6.1"
   related:
     - atender-revisao-de-pull-request
     - atualizar-branch-do-pull-request
@@ -49,6 +49,9 @@ Mescle só com pedido explícito, como "mescla", "coloca na main" ou "pode mescl
 Abrir o PR, "faça o PR" e "sobe isso" não pedem merge.
 
 Antes de oferecer o merge, como próximo passo ou numa pergunta, leia os checks do PR. Com check falhando, não ofereça o merge: diga qual falha e por quê, pelo log, e pergunte se a pessoa quer seguir mesmo assim ou corrigir antes.
+
+Ao oferecer o merge, o texto da resposta traz antes o link do PR em questão, `[#123](url)`, porque o quadro do próximo passo não abre link.
+O botão ou a resposta sugerida que avisa o merge cita o número do PR, como "Mesclei o 123": sem o número, a pessoa não sabe qual PR mesclar.
 
 ```mermaid
 flowchart LR
@@ -112,6 +115,14 @@ Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
 
+### Oferta de merge sem o PR
+
+Se você oferecer o merge só com um botão ou uma resposta sugerida, como "Mesclei o PR", a pessoa não vê qual PR mesclar e precisa pedir o link.
+
+1. Ponha no texto, antes do quadro do próximo passo, o link do PR em questão.
+2. Cite o número no botão ou na resposta sugerida, como "Mesclei o 123".
+3. Com mais de um PR a mesclar, um link e um número por PR, na ordem de dependência.
+
 ### Merge negado
 
 Se você repetir o merge por outro caminho depois que o modo automático negou, está contornando a decisão.
@@ -172,6 +183,7 @@ O PR mudava a mensagem de erro do CI para uma branch com o prefixo de um agente 
 
 ## Pegadinhas
 
+- O botão "Mesclei o PR" parece dizer tudo. Ele não abre link e não diz qual PR: o link vai no texto antes do quadro e o número vai no botão.
 - Um PR de bot, como o de pin de dependência, parece pronto para mesclar. O check dele pode estar falhando: leia antes de oferecer o merge.
 - Depois do squash, a branch local não aparece como mesclada. Só o estado do PR diz que o trabalho entrou.
 - O merge feito pelo botão, ou avisado pela pessoa, pode deixar a branch remota. Só o `fetch --prune` diz se ela sumiu.

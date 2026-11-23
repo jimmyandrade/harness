@@ -1117,6 +1117,7 @@ flowchart LR
   revisar_inscricoes --> procurar_email
   revisar_inscricoes --> procurar_inscricao
   revisar_inscricoes --> procurar_oportunidade
+  revisar_oportunidade --> conversar_no_whatsapp
   revisar_oportunidade --> criar_ideia_de_conteudo
   revisar_oportunidade --> criar_oportunidade
   revisar_oportunidade --> definir_empresa

@@ -4,7 +4,7 @@ description: Cria, revisa e atualiza o artigo da base de conhecimento que respon
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.6.2"
+  version: "0.6.3"
   related:
     - criar-habilidade
     - definir-historia-de-usuario
@@ -101,6 +101,9 @@ Sem a lista à mão, não decida: diga que não deu para conferir e pergunte.
 ### Passo 5
 
 Quando a dúvida envolve uma ferramenta, abra a página da ferramenta e ligue-a no campo `ferramentas`.
+Quando a ferramenta tem um endereço de acesso, como o link de uma tela, um endereço interno ou um IP, esse endereço entra por extenso, como link clicável, no passo que manda abri-lo e no resumo do artigo, e a resposta à pessoa também o traz.
+Dizer só "o IP" ou "a ferramenta" obriga a pessoa a perguntar onde fica.
+Quando a ferramenta responde por mais de um endereço, o artigo diz qual usar e quando.
 Quando uma skill ou uma política governa o tema, use as regras dela como conteúdo e ligue a política no artigo, sem reescrever a regra.
 Não copie critérios de aceite, cenários em BDD nem a estrutura da skill para o artigo.
 O guardrail vira item de checklist, alerta ou passo.
@@ -152,6 +155,7 @@ Antes de concluir, confira o artigo com esta lista:
 - [ ] Nenhum print mostra nome, e-mail, telefone ou outro dado pessoal.
 - [ ] A pessoa sabe o que fazer, onde fazer e o que evitar sem abrir outro documento.
 - [ ] A ferramenta está ligada quando a dúvida é sobre ela.
+- [ ] O endereço de acesso da ferramenta aparece por extenso, como link clicável, em cada passo que manda abri-lo.
 - [ ] Cada decisão está no `Registro de decisão`, com quem decidiu e quando, e não em parágrafo.
 - [ ] O nome exato de cada feature toggle ou flag aparece entre crases onde o artigo fala dela.
 
@@ -212,6 +216,14 @@ Se você escrever o link do artigo antes do quadro de encerramento e a mensagem 
 2. Repita o link ali mesmo que já tenha aparecido antes.
 3. Releia a mensagem final antes de enviar e confira que cada página criada ou alterada tem o link.
 
+### Endereço da ferramenta só por apelido
+
+Se você escrever "acesse pelo IP" ou "abra a ferramenta" sem o endereço, a pessoa lê o artigo e a resposta e não sabe aonde ir.
+
+1. Escreva o endereço por extenso, como link clicável, no passo e no resumo do artigo.
+2. Traga o mesmo endereço na resposta à pessoa.
+3. Com mais de um endereço, diga qual usar e quando.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
@@ -240,6 +252,7 @@ Os critérios ficaram de fora. Cada guardrail virou item do diagnóstico rápido
 - Esperar os prints da pessoa parece o caminho seguro. Quem escreve o artigo captura os prints que faltam.
 - Dizer que não dá para capturar parece uma resposta honesta. Sem a tentativa de abrir a tela, é uma suposição.
 - Uma página com o título genérico da ferramenta e o corpo só com o texto de exemplo parece um rascunho esquecido, e também pode ser o modelo do banco. Só a lista de modelos do data source diz qual dos dois é.
+- O apelido da ferramenta, como "o IP" ou "o portal", parece bastar porque a conversa já o usou. A pessoa que lê o artigo não estava nela, então o endereço vai por extenso.
 - O link escrito antes do quadro de encerramento parece entregar o artigo. A pessoa lê a mensagem final, então o link vai nela.
 - Um artigo que manda usar uma ferramenta parece valer para todo mundo. Antes de dizer que uma orientação contradiz o artigo, confira a ordem dos acessos: quem ainda não recebeu a ferramenta segue outro caminho.
 

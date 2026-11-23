@@ -5,11 +5,12 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-update-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.3.1"
   related:
     - criar-oportunidade
     - procurar-oportunidade
     - definir-grupo-de-oportunidades
+    - conversar-no-whatsapp
     - definir-empresa
     - definir-inscricao
     - criar-ideia-de-conteudo
@@ -43,6 +44,8 @@ Na revisão do conteúdo, do corpo ou das anotações, leia o bloco para preench
 O comentário analítico vai nas notas de curadoria. O bloco não vira checklist, resumo nem texto operacional, e não se copia de novo no corpo. Se o bloco não basta para afirmar, a propriedade fica vazia e a pendência fica nas notas de curadoria. Não invente o dado nem a propriedade. O bloco do grupo fica com `definir-grupo-de-oportunidades`.
 
 Texto que uma automação deixou no corpo, como o aviso de que a página foi criada para prospecção ou uma lista do que verificar, não é bloco da pessoa. Faça cada verificação que ele pede numa fonte, grave o resultado na propriedade ou nas notas de curadoria, com o que faltou e o canal para perguntar, e só então tire o texto do corpo.
+
+Uma nota que diz que um arquivo da edição ainda não foi lido, como o PDF do formato de seleção, a tabela de preços ou o mapa, e uma suspeita sobre o formato ou a taxa são verificações pendentes. Leia o arquivo antes de afirmar o formato, a taxa ou o fit, por `conversar-no-whatsapp` ou pela fonte que o trouxe. Se o canal não entrega o arquivo, peça à pessoa o sim para baixá-lo ou o arquivo, e diga o que a leitura do grupo já confirmou. Grave o resultado nas propriedades e nas notas de curadoria, e a suspeita só sai da nota quando a fonte a confirma ou a contradiz.
 
 Quando o mapeamento tem a sugestão de título e o título da edição difere do valor dela, copie o valor para o título.
 
@@ -87,6 +90,8 @@ Antes de concluir, releia as propriedades de observação e mova para comentári
 
 ### Passo 7
 
+Quando a pessoa pergunta se há oportunidade de um tipo, num lugar e numa data, diga a edição exata de cada uma: o grupo, o local, a data, o formato, a taxa e o prazo da seleção, e se a seleção já fechou. Confirme na fonte o que a nota só suspeita antes de responder, e não devolva a nota como resposta.
+
 Mostre a edição, o que passou do bloco para cada propriedade, o que ficou pendente nas notas de curadoria e o link. Data de evento, compromisso ou prazo sai no formato da data com dia da semana, calculado com a data, o horário e o fuso do evento. Sem horário ou sem fuso, e se o dia puder mudar, peça. Não invente.
 
 Se a fonte trouxer um dia da semana incompatível com a data, sinalize e não grave. A decisão humana fica com a pessoa e não vira pergunta nem pendência na resposta.
@@ -120,6 +125,14 @@ Se você gravar uma intercorrência nas notas de curadoria ou no corpo, a linha 
 1. Grave a intercorrência num comentário da edição.
 2. Comece o comentário pela data e hora do fato.
 3. Cada fato novo é um comentário novo.
+
+### Arquivo pendente repassado como resposta
+
+Se você responder com a nota de curadoria que diz que o PDF da edição ainda não foi lido, a pessoa decide uma viagem ou uma venda sem saber qual é a edição nem o formato.
+
+1. Leia o arquivo, ou a leitura do grupo, antes de responder.
+2. Diga a edição exata, o formato, a taxa e se a seleção fechou.
+3. Se o arquivo não vem, peça o sim para baixá-lo e diga o que já está confirmado.
 
 ### Feedback lido e não registrado
 
@@ -168,6 +181,7 @@ Gravei um comentário na edição, começando pela data e hora do fato. Não esc
 - A intercorrência parece nota de curadoria. As notas guardam a síntese permanente. O fato do dia é comentário.
 - A lista de espera parece quase uma aprovação. Sem confirmação de participação, é não seleção.
 - A resposta da organização parece caber só na edição. O critério que vale para o evento todo vai ao grupo, e o que é da organização vai à empresa.
+- Uma nota "ainda não lido" parece pendência que a próxima revisão resolve. Ela barra a resposta de hoje: leia o arquivo, ou diga que não o leu e peça o sim para baixá-lo.
 - Revisar parece poder cadastrar o que falta. O cadastro fica com `criar-oportunidade`, e o grupo com `definir-grupo-de-oportunidades`.
 
 ## Scripts disponíveis

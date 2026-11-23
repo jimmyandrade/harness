@@ -3,7 +3,7 @@ name: escrever-link
 description: Escreve o link de um texto lido numa plataforma, como Jira, Confluence, GitHub, Slack, WhatsApp ou a conversa com a IA, com o endereço lido da fonte, o texto certo e a sintaxe que funciona nela. Usada sempre que um texto vai citar PR, issue, card, página ou arquivo. Não serve para decidir o que o texto diz nem para enviá-lo.
 metadata:
   author: jimmyandrade
-  version: "0.2.4"
+  version: "0.3.0"
   related:
     - conversar-no-whatsapp
     - criar-pull-request
@@ -35,6 +35,10 @@ Leia o endereço na fonte antes de escrever o link.
 O PR e a issue vêm do campo `url` do `gh`. O repositório vem do remoto `origin`. O card, a página e o comentário vêm do retorno da ferramenta que os criou ou leu.
 Nunca monte o endereço de memória, nem com o login pessoal como dono do repositório, nem com o nome da pasta ou do projeto como nome do repositório.
 Sem ter lido, leia agora. Se não der, diga que falta o link e não escreva um.
+
+Quando a pessoa pede links, cada fonte vai com a URL completa, com o protocolo e o caminho inteiro, e não com o nome do site ou do documento.
+Isso vale também para a fonte que um subagente ou outra sessão citou só pelo site, como "o site do Inmetro" ou "a página do DOU".
+Se o relatório não traz a URL, peça-a a quem a usou ou leia-a no registro dele antes de responder. Só diga que falta o link depois dessa busca.
 
 ### Passo 2
 
@@ -92,6 +96,14 @@ Se você escrever o endereço no meio da frase, ou entre crases, a plataforma o 
 1. Troque por `[texto](url)`, com o texto do Passo 2.
 2. No WhatsApp, ponha o texto numa linha e a URL inteira na linha de baixo.
 3. Releia o item publicado e confira.
+
+### Site no lugar do link
+
+Se você responder a um pedido de links com o nome do site ou do documento, como "a página de legislação do Inmetro", a pessoa não tem o que abrir nem o que repassar.
+
+1. Escreva a URL completa de cada fonte, com o protocolo e o caminho.
+2. Fonte que veio de um subagente ou de outra sessão sem a URL: peça-a a quem a usou, ou leia o registro, antes de responder.
+3. Só diga que falta o link quando nem essa busca o trouxe.
 
 ### Texto comprido num link do Atlassian
 

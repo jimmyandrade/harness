@@ -111,6 +111,8 @@ How these skills relate is in `README.md`, in this folder.
   - Publishes on the page of the profile of the analyzed channel, never on the person's or company's page, because the reading changes from one channel to another
   - Registers a profile that has no page with definir-perfil-social before publishing, and, when the page already has an analysis, follows a parameter: ask, merge, replace, never replace, or automatic
   - When merging, writes one analysis with the new date, keeps the post and date of each signal, follows the reading that covered more of the profile when the scores differ, and records the earlier scores with their date
+  - Checks that the handle opens before reading, looks for the official profile cited on the opportunity page when the list only has an alias, says when the profile is the venue and not the fair, and reads with the browser account that is already signed in without asking for a login
+  - Does not complete a name it could not read in a capture, and reads a scanned document as images instead of counting it as read
   - Returns the analysis without publishing, and says so, when the social profile list is not in the connected workspace
   - Says it did not analyze a private, blocked, or missing profile, and does not infer aesthetics or values from a name
   - Does not register the profile, measure metrics in depth, or write the approach message
