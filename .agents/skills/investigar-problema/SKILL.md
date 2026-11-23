@@ -3,7 +3,7 @@ name: investigar-problema
 description: Conduz a investigação de um problema, como um acesso bloqueado, um cadastro que falha em portal alheio ou um erro, com tarefa, fatos e hipóteses, e oferece artigo e post-mortem. Use sempre que alguém relatar um problema, como um preço errado, ou pedir "investigue isso" com um link, antes de ler. NÃO use para escrever o artigo, o post-mortem nem corrigir código.
 metadata:
   author: jimmyandrade
-  version: "0.3.8"
+  version: "0.4.0"
   related:
     - procurar-tarefa
     - definir-tarefa
@@ -14,6 +14,7 @@ metadata:
     - redigir-com-tom-de-voz
     - conversar-no-whatsapp
     - enviar-email
+    - usar-whatsapp-web
     - evoluir-habilidade
 ---
 
@@ -87,6 +88,9 @@ O dossiê é o que o atendente recebe, para não ter de pedir de novo.
 A mensagem ao atendente é um feedback, não uma cobrança: diz o que acontece, com os fatos e os prints, conta o que já foi tentado e pede a melhoria, como a correção do erro ou do link de validação.
 Ela não leva tom de reclamação, de culpa nem prazo ameaçador.
 O texto passa por `redigir-com-tom-de-voz`, e o canal segue `conversar-no-whatsapp` ou `enviar-email`.
+Quando a pessoa precisa do suporte dessa empresa, acione na mesma rodada todos os canais que o site oferece, como e-mail, chat e WhatsApp, este pela sessão dona do WhatsApp Web, como `usar-whatsapp-web` manda.
+O pedido da pessoa para acionar o suporte autoriza enviar a mesma mensagem em cada canal.
+Diga o que cada canal respondeu, inclusive o horário de atendimento, e registre na tarefa.
 
 Dê o retorno a quem relatou, com a causa em palavras simples, o que muda para ela e o link da tarefa.
 Uma tarefa para corrigir o que achou só é oferecida depois que a causa está entendida e conferida. Antes disso, siga investigando.
