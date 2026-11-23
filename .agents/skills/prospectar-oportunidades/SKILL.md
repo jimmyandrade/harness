@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.6.3"
+  version: "0.6.4"
   related:
     - consultar-responsavel-pela-oportunidade
     - criar-ideia-de-conteudo
@@ -97,7 +97,9 @@ Cada critério do playbook, como o custo de participação, a curadoria e o púb
 
 ### Passo 6
 
-Quando a localidade-alvo veio de uma viagem e a oportunidade tem vários dias, calcule as datas em comum com a viagem. Tire os dias de feira dessa viagem, que ficam no cronograma e nos pontos de contato. Registre só as atividades dessas datas, cada uma como marco do cronograma ligado à oportunidade, seguindo `definir-cronograma`. Sem data em comum, diga que a edição cai fora da viagem e não registre programação.
+Quando a oportunidade é uma visita em avaliação, como uma semana de moda, registre toda a programação publicada, cada sessão como marco do cronograma ligado à oportunidade, seguindo `definir-cronograma`, haja ou não viagem decidida. A programação inteira ajuda a decidir se vale ir e em quais dias. Não escolha sessão nem bloqueie a agenda.
+
+Quando a localidade-alvo veio de uma viagem e a oportunidade é outra, de vários dias, calcule as datas em comum com a viagem. Tire os dias de feira dessa viagem, que ficam no cronograma e nos pontos de contato. Registre só as atividades dessas datas. Sem data em comum, diga que a edição cai fora da viagem e não registre programação.
 
 ### Passo 7
 
@@ -190,11 +192,11 @@ Se você olhar só a página do evento e ignorar a bio do perfil da organizaçã
 
 ### Programação da edição inteira
 
-Se você registrar a programação de todos os dias de uma edição de vários dias, o cronograma enche de atividades a que ninguém vai.
+Se você registrar a programação de todos os dias de uma edição que não é uma visita em avaliação, o cronograma enche de atividades a que ninguém vai. Se, ao contrário, cortar a programação de uma visita em avaliação pelos dias da viagem, a pessoa perde a base para decidir se vai e em quais dias.
 
-1. Calcule as datas em comum com a viagem.
-2. Tire os dias de feira.
-3. Registre só o que sobrou.
+1. Visita em avaliação: registre toda a programação publicada, haja ou não viagem decidida.
+2. Outra oportunidade, com viagem: calcule as datas em comum e tire os dias de feira.
+3. Registre só o que sobrou nesse segundo caso.
 
 ## Exemplos de entrada e saída
 

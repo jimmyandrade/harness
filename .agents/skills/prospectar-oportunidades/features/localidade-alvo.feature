@@ -20,3 +20,12 @@ Funcionalidade: Escolher a localidade-alvo da prospecção
       Dado que a oportunidade dura vários dias e a viagem tem dias de feira
       Quando a skill registra a programação
       Então só as atividades dos dias em comum, sem os dias de feira, entram no cronograma
+
+  Regra: A visita em avaliação tem a programação inteira registrada
+
+    Exemplo: Semana de moda sem viagem decidida
+      Dado que a oportunidade é uma visita em avaliação com programação publicada
+      E que a viagem ainda não foi decidida
+      Quando a skill registra a programação
+      Então todas as sessões publicadas entram no cronograma ligado à oportunidade
+      E nenhuma sessão é escolhida nem entra na agenda
