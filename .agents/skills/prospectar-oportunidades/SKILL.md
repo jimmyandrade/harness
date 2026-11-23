@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.7.0"
+  version: "0.7.1"
   related:
     - consultar-responsavel-pela-oportunidade
     - criar-ideia-de-conteudo
@@ -57,6 +57,12 @@ Quando um dos dois não está nos parâmetros, procure no workspace conectado um
 As listas e as propriedades vêm do mapeamento de dados do projeto, no workspace conectado: oportunidades, grupos, localidades, viagens e pontos de contato. Se uma lista não estiver nessa conexão, pare. Não use a lista de outro workspace.
 
 A execução parte de uma busca ou de um candidato que a pessoa trouxe, como um print, um link ou uma edição já cadastrada. Com candidato trazido, não escolha localidade nem pesquise grupos: vá ao Passo 5 só com ele, e o teto de candidatos não vale. A edição já cadastrada que a pessoa cita, ou que a consulta mostra sem leitura de fit, também é candidato trazido. A data vem do candidato. Sem data ou sem ano em fonte confiável, pergunte.
+
+A pergunta por uma data e uma cidade, como "que oportunidades há neste fim de semana em Belo Horizonte", é uma busca com localidade e datas dadas: pule a escolha do Passo 2. Consulte primeiro o banco, pelas datas que cruzam o período e pela localidade, com toda decisão humana, inclusive as vetadas, e pelas edições sem data ou recorrentes da cidade.
+
+Depois pesquise sempre na web, também quando o banco trouxe uma edição, porque ele só tem o que já foi cadastrado. Leia as páginas de agenda e de feiras do portal da cidade, a venda de ingressos e a imprensa local, com um subagente de leitura quando houver muitas páginas. Confira o ano de cada evento: guia de outro ano não vale.
+
+Responda com cada oportunidade do período, a do banco e a da web: nome, data e horário com dia da semana, local, entrada, se há expositores e como se inscrever, e o link da fonte. Diga o que foi pesquisado, onde, e o que a fonte não informa. Dizer só que não achou no banco não responde.
 
 ### Passo 2
 
@@ -156,6 +162,14 @@ Se você avaliar uma visita só pelo fit e deixar de dizer como entrar, a pessoa
 2. Diga o que a fonte não informa e proponha perguntar à organização.
 3. Explique em palavras simples cada trecho do playbook que você citar, sem o jargão da página.
 
+### Fim de semana respondido só com o banco
+
+Se você responder a pergunta por um fim de semana numa cidade só com o que o banco já tem, a pessoa decide a viagem sem ver as feiras que ninguém cadastrou.
+
+1. Consulte o banco pelo período e pela localidade, com toda decisão humana.
+2. Pesquise na web as agendas e os portais da cidade do período, com um subagente de leitura se houver muitas páginas.
+3. Liste cada oportunidade com data, horário, local, entrada, expositores, inscrição e link, e diga o que a fonte não informa.
+
 ### Busca sem teto
 
 Se você pesquisar sem parar até achar tudo, a execução gasta mais do que o resultado vale.
@@ -227,6 +241,7 @@ Não escolhi localidade nem pesquisei grupos. A feira já estava cadastrada. Com
 - Rotina sem canvas ou sem playbook: não prospecte e deixe a falta no resumo.
 - A edição já existe: complemente sem criar outra.
 - A data vem sem o ano em fonte confiável: não cadastre e peça a confirmação.
+- A pessoa pergunta o que há num fim de semana ou num período de uma cidade: consulte o banco e pesquise na web, e liste tudo do período, sem esperar a pergunta de fit.
 - Pedido para saber se uma oportunidade já existe: use `procurar-oportunidade`.
 - Pedido só para cadastrar uma edição já conhecida, sem perguntar se combina: use `criar-oportunidade`.
 
@@ -238,6 +253,7 @@ Não escolhi localidade nem pesquisei grupos. A feira já estava cadastrada. Com
 - Os dias de feira parecem tempo livre. Eles ficam fora da programação registrada.
 - Candidato que combina parece pronto quando está cadastrado. Falta o caminho para participar e quem escreve à organização.
 - A bio do perfil parece só apresentação. Ela é onde a organização anuncia a data antes de abrir a inscrição, e a data dela é pista até a organização confirmar.
+- O banco sem nada no período parece resposta pronta. Ele só tem o que já foi cadastrado: pesquise na web antes de dizer que não há nada.
 - A pergunta "combina com o negócio?" parece pedir uma busca nova. Com o candidato na mão, a skill só o compara com o playbook e com o canvas.
 
 ## Scripts disponíveis
