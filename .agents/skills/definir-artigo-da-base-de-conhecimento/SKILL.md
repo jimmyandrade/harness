@@ -4,7 +4,7 @@ description: Cria, revisa e atualiza o artigo da base de conhecimento que respon
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.8.0"
+  version: "0.8.1"
   related:
     - criar-habilidade
     - definir-historia-de-usuario
@@ -136,6 +136,8 @@ Quando o artigo trata de uma feature toggle ou flag, o nome exato dela aparece e
 
 Sempre que criar ou atualizar um passo a passo de uma tela, capture um print de cada passo.
 Mostre na tela o estado do passo, como o menu aberto ou a janela com o botão, antes de capturar.
+Capture em tamanho cheio, sem reduzir a escala: um print reduzido sobe ilegível ao artigo.
+Numa tela de login que a pessoa preenche, capture cada estado enquanto ela avança, porque depois do login não dá para voltar a essa tela sem sair da conta.
 Numa tela que muda dados, abra o passo, capture e cancele. O passo que só aparece depois de salvar fica sem print.
 Antes de subir, cubra no print o nome, o e-mail, o telefone e outro dado pessoal de quem aparece, com um rótulo neutro como "e-mail pessoal", e confira a imagem coberta.
 Quando o navegador deixa, cubra antes de capturar: troque na própria página o texto do nome, do e-mail e do telefone pelo rótulo neutro e esconda as fotos de perfil, e capture com a página já coberta.
