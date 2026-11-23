@@ -186,6 +186,7 @@ flowchart LR
     registrar_resultados_da_validacao_na_tarefa["registrar-resultados-da-validacao-na-tarefa"]
     revisar_financas["revisar-financas"]
     revisar_habilidade["revisar-habilidade"]
+    revisar_inscricoes["revisar-inscricoes"]
     revisar_oportunidade["revisar-oportunidade"]
     revisar_uso_do_tempo["revisar-uso-do-tempo"]
     rotular_item["rotular-item"]
@@ -1105,6 +1106,13 @@ flowchart LR
   revisar_habilidade --> criar_pull_request
   revisar_habilidade --> descrever_habilidade_ou_schema
   revisar_habilidade --> testar_habilidade
+  revisar_inscricoes --> conversar_no_whatsapp
+  revisar_inscricoes --> criar_oportunidade
+  revisar_inscricoes --> definir_grafia
+  revisar_inscricoes --> definir_inscricao
+  revisar_inscricoes --> procurar_email
+  revisar_inscricoes --> procurar_inscricao
+  revisar_inscricoes --> procurar_oportunidade
   revisar_oportunidade --> criar_ideia_de_conteudo
   revisar_oportunidade --> criar_oportunidade
   revisar_oportunidade --> definir_empresa

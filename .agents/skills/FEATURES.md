@@ -426,6 +426,23 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses the trip, taking the step to the agenda, the production workday, signing up, and choosing the participation
 
+### revisar-inscricoes
+- **Stability**: experimental
+- **Description**: Review the registrations in opportunities, move each one forward on the Kanban when there is proof, and flag what is missing
+- **Properties**:
+  - Lives at `.agents/skills/revisar-inscricoes/SKILL.md`
+  - Reads the registration list, its property names, and the status options from the data mapping of the project, and stops when the list is not in the connected workspace
+  - Scans the list from the most behind status to the most advanced one, or reviews only the registration the person points to
+  - Checks the related edition, who registered, the participants, the send date and time, the receipts, and the confirmation date that each status requires, and whether the row follows the registration model
+  - Moves a registration forward one Kanban column at a time, only with proof such as a receipt, an email, a conversation, or the contact point of the edition, and writes the status through definir-inscricao
+  - Never invents a date, time, person, or receipt, and comments what is missing and mentions who registered, without repeating a request already commented
+  - Leaves a registration with an error or in dispute for the person to decide
+  - Moves a registration to not selected when the organization's result shows no spot, and only after a confirmed refusal when it was in dispute
+  - Delivers the report in the output model relatorio-de-inscricoes
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses registering, creating a new registration, and answering who registered
+
 ### revisar-oportunidade
 - **Stability**: experimental
 - **Description**: Review the content, body, and notes of an edition that already exists, keeping the notes block and the callout and moving each fact to the right property
