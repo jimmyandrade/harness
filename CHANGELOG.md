@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.104.0](https://github.com/jimmyandrade/harness/compare/v1.103.0...v1.104.0) (2026-11-23)
+
+
+### Features
+
+* **definir-artigo-da-base-de-conhecimento:** check the article against the task as the person runs it ([#1448](https://github.com/jimmyandrade/harness/issues/1448)) ([3fd6544](https://github.com/jimmyandrade/harness/commit/3fd65449f070b2fcc5c9268d2327e0e09da081eb))
+* **definir-artigo-da-base-de-conhecimento:** cover personal data on the page before capturing ([#1451](https://github.com/jimmyandrade/harness/issues/1451)) ([be61134](https://github.com/jimmyandrade/harness/commit/be61134dd9be45cda65477c0f06abfca3224b940))
+
+
+### Bug Fixes
+
+* **definir-grafia:** search the web before splitting a name out of an email handle ([#1449](https://github.com/jimmyandrade/harness/issues/1449)) ([d8a14b1](https://github.com/jimmyandrade/harness/commit/d8a14b15e27fc59bab7549dcb1312602e8160041))
+* mark an inferred value in a confirmation request ([#1453](https://github.com/jimmyandrade/harness/issues/1453)) ([155c7af](https://github.com/jimmyandrade/harness/commit/155c7af1076e11c3716f4e3e4339a1c39eeb22fa))
+
 ## [1.103.0](https://github.com/jimmyandrade/harness/compare/v1.102.1...v1.103.0) (2026-11-23)
 
 
