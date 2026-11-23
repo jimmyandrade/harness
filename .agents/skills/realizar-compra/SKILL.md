@@ -4,13 +4,16 @@ description: Leva até a tela final o pedido de compra que a pessoa mandou fazer
 compatibility: Precisa de navegador.
 metadata:
   author: jimmyandrade
-  version: "0.1.2"
+  version: "0.1.4"
   related:
     - definir-ativo-imobilizado
+    - completar-despesa-de-compra
+    - definir-rotina
     - evoluir-habilidade
     - gerenciar-estoque
     - lancar-despesa-da-empresa
     - pesquisar-compra
+    - redigir-com-tom-de-voz
 ---
 
 # Realizar compra
@@ -52,7 +55,13 @@ Depois de finalizar, confira a confirmação do site e diga o número do pedido,
 
 ### Passo 5
 
-O registro da compra segue o Passo 7 de `pesquisar-compra`: o pagamento vai para `lancar-despesa-da-empresa`, o insumo para `gerenciar-estoque` e o bem durável para `definir-ativo-imobilizado`. Esta habilidade não grava nada.
+Com o pagamento confirmado pelo site, registre a despesa no mesmo turno, sem perguntar, seguindo `lancar-despesa-da-empresa`. Capture as telas da revisão, do seguro e da confirmação enquanto estão abertas e anexe todas como evidência.
+
+O insumo vai para `gerenciar-estoque` e o bem durável para `definir-ativo-imobilizado` quando chegarem, como o Passo 7 de `pesquisar-compra` manda: o item pago e ainda a caminho não é imobilizado. Diga à pessoa que o bem espera a entrega.
+
+Compra com entrega futura ganha, no mesmo turno, uma rotina que acompanha a entrega, seguindo `definir-rotina`: ao confirmar a entrega ela cria o ativo, avisa a pessoa e se pausa. A rotina também pede a nota fiscal ao vendedor, porque o chat do marketplace só abre depois do recebimento. O pedido da nota é texto da marca e passa por `redigir-com-tom-de-voz` antes de ir para a rotina.
+
+O meio de pagamento da despesa segue `completar-despesa-de-compra`: compra paga com o saldo de uma conta de pagamento tem o meio de saldo de conta de pagamento. Se a lista não tem o meio usado, deixe-o vazio, diga qual é o mais próximo e não mude a lista.
 
 ### Passo 6
 
@@ -67,6 +76,14 @@ Se você recusar ou aceitar o seguro, a garantia estendida ou outro extra sem pe
 1. Pare na oferta, ponha o checkout à frente no navegador e abra a enquete com cada opção, o preço e a opção que o site marca por padrão.
 2. Espere a resposta antes de marcar ou recusar.
 3. Só depois siga para o pagamento.
+
+### Despesa deixada para depois
+
+Se você perguntar se deve registrar a despesa de uma compra que o site confirmou, a pessoa repete o que já pediu e o lançamento atrasa.
+
+1. Registre a despesa no mesmo turno da confirmação.
+2. Anexe as telas do checkout como evidência.
+3. Deixe o bem durável para a entrega.
 
 ### Pagamento sem o sim ao total
 
