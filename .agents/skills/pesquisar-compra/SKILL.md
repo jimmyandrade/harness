@@ -4,7 +4,7 @@ description: Pesquisa o que comprar, cruza com despesas, estoque e bens que já 
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.7.6"
+  version: "0.8.0"
   related:
     - anexar-arquivo-no-whatsapp
     - conversar-no-whatsapp
@@ -104,7 +104,7 @@ Uma empresa só vale como descartada com a resposta dela. Sem resposta, diga que
 Com o custo de hoje do Passo 2, mostre a conta de quando a compra se paga e marque o que é estimativa.
 Termine com a pergunta que ainda falta ao fabricante ou ao vendedor, quando houver, e com a decisão que cabe à pessoa.
 Sem o pedido da pessoa para comprar, não compre, não ponha no carrinho e não preencha pagamento. Com o pedido, siga `realizar-compra`.
-Quando a pessoa pede para compartilhar as opções, grave o link de cada uma no requisito, seguindo `definir-requisito-de-compra`.
+Ao responder, acrescente ao requisito a entrada desta pesquisa, seguindo `definir-requisito-de-compra` e a seção `Histórico da pesquisa` do modelo `briefing-de-especificacao-de-compra`.
 
 ### Passo 6
 
@@ -145,7 +145,7 @@ flowchart LR
   C -->|híbrido ou dúvida| P[Pergunte o destino antes]
 ```
 
-Esta habilidade não grava nada: ela encaminha.
+Ela não registra a compra, só encaminha. O que ela grava é o rastro da pesquisa: requisito, histórico e empresas.
 
 ### Passo 8
 
@@ -251,12 +251,11 @@ Li o estoque e achei um rolo do mesmo tecido com saldo. Mostrei o saldo e pergun
 - A pessoa não diz o uso: pergunte uma vez e leve as primeiras opções junto.
 - Uma lista de dados não está no workspace conectado: diga qual e siga com as outras.
 - Só existe uma opção que atende: diga isso e não complete a lista com opção que não atende.
-- A pessoa diz que comprou, ou o checkout confirma: encaminhe pelo Passo 7 e não grave aqui.
+- A pessoa diz que comprou, ou o checkout confirma: encaminhe pelo Passo 7.
 - A empresa já está na lista: reaproveite a página e complete só o que faltava. Não crie outra.
 - A lista de empresas não está no workspace conectado: diga isso e siga com a resposta. Não cadastre em outra lista.
 - O item é híbrido, entre estoque e bem durável: pergunte o destino antes de encaminhar.
 - É um serviço, não um produto: use os mesmos passos, com o escopo e o prazo no lugar dos requisitos do item.
-- A compra não tem requisito, ou só tem o de um item parecido: siga `definir-requisito-de-compra` e entreviste a pessoa antes de pesquisar.
 - O pedido cita um lugar sem dizer o alcance, como o nome de uma cidade que também é o do estado: confirme o alcance antes de pesquisar, e numa compra específica use só a cidade. Uma empresa fora dele fica de fora do cadastro e do contato.
 - A pesquisa não achou nada na cidade: sugira por conta própria a região metropolitana, com o serviço e a cidade vizinha, e espere o sim antes de cadastrar ou contatar.
 

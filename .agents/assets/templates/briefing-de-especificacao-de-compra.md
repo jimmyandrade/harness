@@ -2,12 +2,12 @@
 name: briefing-de-especificacao-de-compra
 description: Formato do briefing que fecha a especificação do que vai ser comprado, com as perguntas por grupo, o que a empresa entrega e combina, e o veredito que vem depois das respostas das empresas.
 metadata:
-  version: "0.1.0"
+  version: "0.2.0"
 ---
 
 ## Contexto
 
-Use este modelo para entrevistar a pessoa e fechar a especificação de um item, de um serviço ou de um item que a empresa entrega pronto, antes de pesquisar empresas e de pedir orçamento. A habilidade `definir-requisito-de-compra` lê este modelo ao entrevistar e ao gravar o requisito.
+Use este modelo para entrevistar a pessoa e fechar a especificação de um item, de um serviço ou de um item que a empresa entrega pronto, antes de pesquisar empresas e de pedir orçamento. A habilidade `definir-requisito-de-compra` lê este modelo ao entrevistar e ao gravar o requisito, e `pesquisar-compra` acrescenta a entrada de cada pesquisa ao histórico.
 
 As perguntas abaixo são o ponto de partida. Adapte-as ao que vai ser comprado, tire a que a pessoa já respondeu e acrescente a que o fornecedor costuma perguntar daquele item. Cada resposta entra como a pessoa deu, e o que ela não sabe fica em aberto.
 
@@ -83,6 +83,17 @@ Preencha só o que vale para o tipo de compra.
 
 1. <pergunta que a pessoa ainda não respondeu>
 2. <pergunta que depende da amostra ou da resposta da empresa>
+
+## Histórico da pesquisa
+
+Uma entrada por pesquisa, a mais recente primeiro. As entradas antigas ficam.
+
+### <data da pesquisa> — <o que foi pesquisado>
+
+- **Onde buscou:** <fabricante, lojas, guias ou listagens locais>
+- **Opções:** <opção — preço, fonte, data da consulta e link>
+- **Descartadas:** <opção — motivo>
+- **Empresas contatadas:** <empresa — canal e resposta>
 
 ## Veredito
 
