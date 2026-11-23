@@ -4,7 +4,7 @@ description: Use essa habilidade sempre que for citar uma pessoa num texto publi
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   related:
     - definir-pessoa
     - evoluir-habilidade
@@ -49,6 +49,8 @@ flowchart LR
 - A menção notifica a pessoa.
 - Acrescentar menções a um texto já publicado há tempo pede o sim de quem escreve.
 
+Fora da menção, o texto se refere à pessoa pelo pronome registrado nela. Sem pronome registrado, escreva sem pronome, com o nome, o login ou uma frase neutra, como "na revisão". Nunca deduza o pronome do nome, do apelido, do login nem da foto.
+
 ### Passo 2
 
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
@@ -63,6 +65,14 @@ Se você escrever o nome de quem participou ou de quem responde por uma ação s
 2. Escreva a menção real da plataforma.
 3. Sem o ID, procure pelo e-mail.
 4. Sem resultado único, pergunte.
+
+### Pronome deduzido do nome
+
+Se você escolher o pronome pelo nome, pelo apelido ou pelo login, o texto pode errar o gênero da pessoa num lugar público.
+
+1. Leia o pronome no registro, como `definir-pessoa` grava.
+2. Sem pronome registrado, escreva sem pronome.
+3. Ao ser corrigido, ache cada texto publicado com o pronome errado, corrija-o e diga onde.
 
 ## Exemplos de entrada e saída
 
@@ -81,6 +91,7 @@ Achei o login no registro da pessoa e escrevi `@login`. Conferi pelo assunto do 
 
 - O markdown não gera menção no Confluence: o texto sai com o nome puro e ninguém é notificado. Use HTML.
 - Uma menção parece só um jeito de escrever o nome. Ela notifica a pessoa.
+- Um nome ou um apelido parece dizer o pronome da pessoa. Só o registro diz.
 
 ## Scripts disponíveis
 
