@@ -33,3 +33,11 @@ Funcionalidade: Achar o canvas e o playbook antes de prospectar
       Então a skill compara a edição com o canvas e com o playbook
       E grava a leitura nas notas de curadoria sem perguntar
       E deixa a decisão humana como está
+
+  Regra: A visita diz como entrar
+
+    Exemplo: Semana de moda para visitar
+      Dado que a oportunidade é uma visita a uma semana de moda
+      Quando a skill avalia o fit
+      Então a resposta diz se a entrada pede ingresso, convite ou credencial, onde retirar e o prazo
+      E diz o que a fonte não informa e propõe perguntar à organização
