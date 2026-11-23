@@ -187,3 +187,12 @@ Funcionalidade: Lançar venda
       Então ela chama a habilidade de procurar banco de dados
       E diz a ela para que serve o banco e quais propriedades ele precisa ter
       Mas não pergunta o nome à pessoa antes
+
+  Regra: o nome antigo do produto é trocado na hora
+
+    Exemplo: Produto vendido com o nome antigo
+      Dado que a venda é de um produto cadastrado com um nome que uma fonte diz ser antigo
+      Quando a habilidade lança ou completa a venda
+      Então troca o nome do produto e o de cada variante pelo nome atual
+      E guarda o nome antigo nas variações de nome
+      Mas não deixa a troca só no corpo ou no motivo da venda

@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.18.7"
+  version: "0.19.0"
   aliases:
     - definir-venda
   related:
@@ -91,6 +91,8 @@ Antes de vincular a pessoa cliente, confira quem é, também quando a busca acha
 Quando não bate, leia o pagador no meio de pagamento da venda, na ordem: linha de comando, API, conector, navegador do app e, por último, a extensão do Chrome. Só então pergunte, mostrando a página, o que a pessoa disse e o que o meio mostrou. Não diga que ele não mostra o pagador sem abrir a transação. Cartão presencial costuma vir sem cliente associado e o Pix traz o pagador.
 
 Quando a pessoa diz que a cliente é outra, a venda não reaproveita a página do homônimo. Cadastre a cliente por `definir-pessoa`, com a localidade dita e o não confundir com ligado ao homônimo, e só então vincule.
+
+Produto ou variante cadastrado com um nome que a pessoa ou uma fonte da venda diz ser antigo: troque, na mesma rodada, o nome do produto e o de cada variante pelo nome atual, e guarde o antigo nas variações de nome. Não deixe a troca só no corpo ou no motivo da venda.
 
 Antes de vincular, busque com `identificar-duplicata`, também a pessoa cliente pelo nome, pelas variações, pelas notas e pelo nome civil. Sem a página, ou sem a variante na unidade, pare e pergunte. Não crie o produto, a unidade nem a variante na venda. Não escolha entre parecidos.
 
