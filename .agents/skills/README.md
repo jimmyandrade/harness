@@ -1063,6 +1063,7 @@ flowchart LR
   rascunhar_mensagem --> redigir_com_tom_de_voz
   rascunhar_mensagem --> rotular_item
   rascunhar_mensagem --> usar_whatsapp_web
+  realizar_compra --> completar_despesa_de_compra
   realizar_compra --> definir_ativo_imobilizado
   realizar_compra --> definir_rotina
   realizar_compra --> gerenciar_estoque
