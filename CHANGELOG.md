@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.104.1](https://github.com/jimmyandrade/harness/compare/v1.104.0...v1.104.1) (2026-11-23)
+
+
+### Bug Fixes
+
+* **definir-artigo-da-base-de-conhecimento:** capture prints at full size and step by step on a login screen ([#1454](https://github.com/jimmyandrade/harness/issues/1454)) ([fbd327b](https://github.com/jimmyandrade/harness/commit/fbd327b1e9411e456a5cbc72c7622749487b8ca0))
+
 ## [1.104.0](https://github.com/jimmyandrade/harness/compare/v1.103.0...v1.104.0) (2026-11-23)
 
 
