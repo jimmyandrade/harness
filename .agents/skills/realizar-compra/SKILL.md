@@ -4,7 +4,7 @@ description: Leva até a tela final o pedido de compra que a pessoa mandou fazer
 compatibility: Precisa de navegador.
 metadata:
   author: jimmyandrade
-  version: "0.1.1"
+  version: "0.1.2"
   related:
     - definir-ativo-imobilizado
     - evoluir-habilidade
@@ -40,7 +40,7 @@ Na revisão, leia e guarde o endereço de entrega, a forma e o prazo de entrega,
 
 O que o checkout oferece além do item, como seguro, garantia estendida, assinatura ou frete mais caro, é decisão da pessoa. Não aceite nem recuse sozinho: mostre cada extra, o preço e a opção que o site marca por padrão, e espere a resposta.
 
-A pergunta vem como enquete, com uma alternativa para cada opção do site, com o nome, a cobertura e o preço, e uma para seguir sem o extra. Antes dela, ponha o navegador embutido à frente, aberto na tela do checkout onde as opções aparecem, para a pessoa conferir com os próprios olhos. Texto corrido numa resposta, sem enquete e sem a tela à vista, não conta como perguntar.
+A pergunta vem como enquete, com uma alternativa para cada opção do site, com o nome, a cobertura e o preço, e uma para seguir sem o extra. Quando as opções variam em tempo de cobertura, como o seguro de 1, 1,5 e 2 anos, a alternativa de maior tempo leva a marca "tempo máximo" no nome. Antes dela, ponha o navegador embutido à frente, aberto na tela do checkout onde as opções aparecem, para a pessoa conferir com os próprios olhos. Texto corrido numa resposta, sem enquete e sem a tela à vista, não conta como perguntar.
 
 O endereço, o nome da nota e o meio de pagamento também são dela. Diga o que o site mostra, aponte o que difere do que a pessoa disse, como a nota em nome de outra pessoa, e espere. Não digite número de cartão, código de segurança, CPF nem senha.
 
