@@ -4,7 +4,7 @@ description: Abre, revisa, edita e traduz issues do GitHub pelo modelo e no idio
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.10.0"
+  version: "0.11.0"
   aliases:
     - definir-issue
   related:
@@ -26,6 +26,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Idioma da issue": "português do Brasil"
 # `Material sem artifact` é `perguntar`, `descrição` ou `comentário`: onde vai o material de apoio quando não dá para criar artifact.
 "Material sem artifact": "perguntar"
+# `Agente de norma ou lei` é o agente que confirma uma regra de norma, lei ou regulamento, com o item e a fonte. Vazio, a regra entra na issue como ponto em aberto.
+"Agente de norma ou lei": "core:assessoria-juridica"
 "Modo de aprendizado": "perguntar"
 ```
 ## Instruções
@@ -49,6 +51,8 @@ Leia o modelo de saída `issue-do-github` antes de escrever ou editar qualquer i
 ### Passo 5
 
 Escreva o corpo inteiro no `Idioma da issue`: problema com o caso real, proposta e critério de pronto verificável. Nome de arquivo, de comando e de parâmetro fica como no código. As seções ficam no idioma da issue: em inglês, Problem, Proposal e Done when.
+
+Quando a entrega depende de uma regra de norma, lei ou regulamento, como o tamanho mínimo que uma portaria exige ou como ele é medido, confirme a regra com o `Agente de norma ou lei` antes de escrever. A issue traz a resposta com o item e o link da fonte. A proposta não pede à pessoa que confirme a norma. O que o agente não confirmou entra como ponto em aberto, com o que ele achou.
 
 ### Passo 6
 
@@ -108,6 +112,14 @@ Se você juntar duas entregas numa issue, o pull request não consegue fechá-la
 
 1. Separe em duas issues.
 2. Marque a dependência em Relationships. Não comente "Depende de".
+
+### Norma deixada para a pessoa confirmar
+
+Se você escrever na proposta "confirmar na portaria como a regra é medida", a pessoa recebe uma pesquisa que o agente de norma ou lei já faz, e a issue nasce sem o critério de pronto fechado.
+
+1. Antes de escrever, chame o `Agente de norma ou lei` com a regra e o caso real.
+2. Escreva na issue a regra com o item e o link da fonte.
+3. Só o que o agente não confirmou fica como ponto em aberto, com o que ele achou.
 
 ### Issue escrita sem o modelo
 
