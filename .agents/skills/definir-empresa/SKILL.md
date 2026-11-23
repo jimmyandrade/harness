@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.8.1"
+  version: "0.8.2"
   related:
     - definir-grafia
     - definir-perfil-social
@@ -101,7 +101,17 @@ As pistas de memória são o que a pessoa lembra da empresa e ajuda a achá-la d
 
 Pista não é variação de grafia, nota nem endereço. A busca da empresa lê as pistas, como `identificar-duplicata` lê as variações. Sem a propriedade de pistas de memória na lista, avise, proponha a criação e não a crie antes do sim.
 
+O corpo da página fica só com o que o modelo da lista traz, como o aviso do modelo. Serviço, endereço, telefone, WhatsApp e site vão na propriedade que o esquema tem para cada um, e a fonte da informação vai nas notas. Dado sem propriedade própria não vai para o corpo: diga a limitação e recomende o campo, como o Passo 1 manda.
+
 ## Problemas comuns
+
+### Dado no corpo ou no campo errado
+
+Se você gravar o serviço no corpo, o WhatsApp no campo do telefone fixo ou o endereço nas notas, a página foge do modelo e a pessoa descobre o erro depois de cobrar.
+
+1. Leia a descrição de cada propriedade no esquema antes de gravar.
+2. Grave cada dado no campo próprio e deixe o corpo só com o aviso do modelo.
+3. Sem campo para o dado, diga a limitação e recomende o campo. Não use o corpo.
 
 ### Empresa criada com a busca antiga
 

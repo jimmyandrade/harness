@@ -3,7 +3,7 @@ name: redigir-com-tom-de-voz
 description: Use essa habilidade sempre que for criar, redigir, editar, revisar ou responder texto da marca no tom de voz, mesmo sem dizer copy. NÃO use para responder quem conversa com a IA, descrever uma skill, titular tarefa ou oportunidade, cravar a grafia, alterar formato de conteúdo, nem assumir cliente, peça, oportunidade ou histórico.
 metadata:
   author: jimmyandrade
-  version: "0.30.0"
+  version: "0.30.1"
   aliases:
     - escreva-usando-o-tom-de-voz
   related:
@@ -50,7 +50,9 @@ Texto que vai ser enviado por um conector, como uma resposta de e-mail, depende 
 
 O texto redigido que a pessoa vai aprovar antes do envio, no bloco e no widget, segue `rascunhar-mensagem`.
 
-Consulte o vocabulário com `consultar-vocabulario`, com as `tags` de quem fala, do evento, do canal e do formato do texto, no idioma do texto que vai escrever. Ele classifica o texto, consulta cada expressão que o texto pode usar, inteira, e devolve o `when` dos termos permitidos com ressalva, que vale para este texto. Sem saber quem fala, pergunte.
+Consulte o vocabulário com `consultar-vocabulario`, com as `tags` de quem fala, do evento, do canal e do formato do texto, no idioma do texto que vai escrever. Ele classifica o texto, consulta cada expressão que o texto pode usar, inteira, e devolve o `when` dos termos permitidos com ressalva, que vale para este texto.
+
+Quem fala vem de `Pessoa que fala` e das instruções do projeto: pergunte só se nenhuma fonte disser. Só diga que o vocabulário não existe depois de consultá-lo.
 
 Mensagem para uma pessoa sai de uma pessoa, a `Pessoa que fala`, nunca da empresa, e continua a conversa que já houve: leia-a antes de rascunhar. Detalhes em `references/mensagem-para-uma-pessoa.md`.
 
@@ -278,12 +280,10 @@ O título ficou específico, com o nome canônico que a fonte já tinha. Não vi
 
 - Texto fluido parece aprovado. Sem contexto, canal, público, fonte da marca, vocabulário e intenção, a copy espera.
 - Pontuação e diminutivo parecem neutros. Os que o vocabulário proíbe saem quando enfraquecem desejo, clareza, personalidade ou potência comercial.
-- Evitável parece permitido com moderação. Sem a cena do `when`, ele sai.
 - Uma frase cadastrada parece valer para qualquer texto. A fala em primeira pessoa de uma pessoa só entra no texto dela.
 - Emoji parece enfeite de legenda. Ele é vocabulário. O nível vem da linha. Sem linha, a copy espera.
 - Um emoji na moda parece melhor que a regra. Evitar, proibido, ruim, desalinhado e restrito saem da versão final.
 - Um sinônimo parece resolver o clichê. A troca é imagem, cena, ação, efeito ou situação. A palavra literal, a frase rejeitada e o termo ligado ficam de fora.
-- Avisar que a chance já passou parece urgência. A alternativa mantém desejo e urgência, sem perda consumada.
 - O motivo verdadeiro de uma mudança parece transparência. Contado a quem chega, como a troca frequente de pessoas no papel, ele é contexto interno e gera desconforto. O motivo neutro entra no lugar.
 - Assunto de e-mail parece legenda. No celular ele é notificação: curto, pessoal e com curiosidade.
 - Um apelido inventado por quem escreve parece deixar a mensagem calorosa, mas pode soar íntimo demais: só o cadastro confirma como a pessoa é chamada. O tratamento carinhoso que ela mesma usa conosco é outra coisa, e devolvê-lo é o rapport que esta habilidade pede.

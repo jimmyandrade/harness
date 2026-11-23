@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.4"
+  version: "0.4.5"
   related:
     - definir-empresa
     - definir-negociacao
@@ -53,7 +53,7 @@ Com formulário aberto, tente a inscrição já. Antes de abrir o formulário, c
 
 Com ou sem inscrição, proponha também o contato direto, pelo canal em que a organização responde, para a marca se apresentar e avisar da inscrição. O texto cita quem indicou a marca quando a pessoa contar, e não inventa indicação. Ele sai por `redigir-com-tom-de-voz`.
 
-A primeira mensagem se apresenta em primeira pessoa por quem assina, com nome e papel, e não só pela marca. Quem assina vem do cadastro de pessoas e das instruções do projeto, que dizem quem representa a marca e quando outra pessoa pode aparecer. Sem essa fonte, pergunte. Não ponha uma segunda pessoa sem a condição que a fonte pede.
+A primeira mensagem se apresenta em primeira pessoa por quem assina, com nome e papel, e não só pela marca. Quem assina vem do cadastro de pessoas e das instruções do projeto, que dizem quem representa a marca e quando outra pessoa pode aparecer. Leia essas fontes antes de perguntar: o nome de quem representa a marca, citado em terceira pessoa por quem pede o texto, é o de quem assina. Sem essa fonte, pergunte. Não ponha uma segunda pessoa sem a condição que a fonte pede.
 
 A organização e quem a dirige costumam ter perfis separados. Procure o perfil de cada um, na bio, no site de links e nas publicações, e proponha uma mensagem para cada, escrita para quem lê aquele perfil: o perfil da organização recebe um texto para a equipe, no plural, e o perfil pessoal recebe um texto com o nome da pessoa. Não mande ao perfil da organização um texto endereçado a uma pessoa.
 
