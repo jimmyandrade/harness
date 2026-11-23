@@ -23,6 +23,14 @@ The Lefthook `skill-folder-icon` command fails on checkout or commit with `Modul
 3. When the message is `skill folder symbol is missing` instead, `node_modules/harness` is older than the version `package.json` pins, and reads a configuration file that no longer exists. Run `npm ci`.
 4. Run `npx lefthook run post-checkout`. Exit code 0 closes the case.
 
+## A test fails right after a dependency update
+
+A hook test fails on code that is correct, after a pull request that moved a dependency in `package-lock.json` was merged or checked out. The installed version of that package, in `node_modules/<package>/package.json`, is older than the one in the lockfile.
+
+1. Run `npm ci` and run the test again. A pass confirms the install was older than the lockfile.
+2. To stop it from happening again, call `reinstall-dependencies` from `post-checkout` and `post-merge`, as in `examples/business-harness/lefthook.yml`. It runs `npm ci` whenever the lockfile changed.
+3. In a worktree whose `node_modules` links to the main clone, the script skips: run `npm ci` in the main clone.
+
 ## The checker or the sync reads the wrong project
 
 The message names a skill, a config key, or a mapping that belongs to another repository.

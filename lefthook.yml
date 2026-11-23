@@ -3,6 +3,7 @@
 # or at plugins/<plugin>/skills/<name>/SKILL.md.
 # On macOS, skill-folder-icon writes the "Símbolo da pasta no macOS" parameter onto each skill folder,
 # with the Python of the harness virtual environment.
+# After a checkout or a merge that changed package-lock.json, reinstall-dependencies runs npm ci.
 
 pre-commit:
   commands:
@@ -21,5 +22,12 @@ pre-commit:
 
 post-checkout:
   commands:
+    reinstall-dependencies:
+      run: .agents/scripts/reinstall-dependencies/reinstall-dependencies.sh post-checkout {1} {2} {3}
     skill-folder-icon:
       run: .agents/scripts/skill-folder-icon/run-folder-icon.sh
+
+post-merge:
+  commands:
+    reinstall-dependencies:
+      run: .agents/scripts/reinstall-dependencies/reinstall-dependencies.sh post-merge

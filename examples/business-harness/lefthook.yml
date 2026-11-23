@@ -12,5 +12,12 @@ pre-commit:
 
 post-checkout:
   commands:
+    reinstall-dependencies:
+      run: node_modules/harness/.agents/scripts/reinstall-dependencies/reinstall-dependencies.sh post-checkout {1} {2} {3}
     skill-folder-icon:
       run: node_modules/harness/.agents/scripts/skill-folder-icon/run-folder-icon.sh
+
+post-merge:
+  commands:
+    reinstall-dependencies:
+      run: node_modules/harness/.agents/scripts/reinstall-dependencies/reinstall-dependencies.sh post-merge

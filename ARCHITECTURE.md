@@ -21,6 +21,7 @@ harness/
 │   │   ├── check-models/           # Checks the frontmatter and the sections of each model in assets/templates, run by check-skill
 │   │   ├── core-pins/              # Checks that every pin of the core in a project names the same tag, run by check-skill
 │   │   ├── plugin-manifests/       # Checks that the Cursor manifest and the Codex-readable marketplace agree with .claude-plugin/, run by check-skill
+│   │   ├── reinstall-dependencies/ # Reinstalls the dependencies when the lockfile changed, run by Lefthook after a checkout or a merge
 │   │   ├── project-parameters/     # Reads and validates the parameters in the AGENTS.md frontmatter, for every script
 │   │   ├── skill-graph/            # Writes .agents/skills/README.md, the Mermaid graph of skills
 │   │   ├── weekday/                # Prints the weekday of a date in Portuguese, so no skill works it out in its head
