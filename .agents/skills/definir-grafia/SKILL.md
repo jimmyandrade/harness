@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-update-
 compatibility: Precisa de internet. A busca semântica nas listas usa notion-ai-search no servidor notion.
 metadata:
   author: jimmyandrade
-  version: "0.10.0"
+  version: "0.10.1"
   aliases:
     - procurar-grafia
   related:
@@ -36,6 +36,10 @@ Busque o pedaço no nome e nas variações, por consulta direta e por busca sem�
 ### Passo 3
 
 Separe duas listas. A busca usa o nome do registro e todas as formas entre aspas, certas e erradas. A frase para a pessoa usa só a forma correta: o nome completo, ou o nome da empresa, e a forma que a nota marca como correta naquele papel, como apelido ou primeiro nome. Não escreva o erro. Não reduza a busca à forma correta. A busca de remetente não espera a caixa mostrar o endereço e não usa o operador from:. Esse operador não filtra o remetente: devolve páginas que citam o texto. A busca usa, como texto, o primeiro nome marcado como correto, e esse primeiro nome, ponto, e o sobrenome do nome completo. E-mail vazio não dispensa essas formas. O endereço não vira nome civil. Se houver mais de um registro, liste cada um. Não escolha um. Não confundir com separa homônimos. Não junte os registros. Quando a pessoa confirma que são pessoas ou empresas diferentes, o vínculo sai na hora com `identificar-duplicata`. A correção não fica só no chat.
+
+Quando o registro não existe e o nome só aparece num endereço de e-mail ou num handle, busque o nome na internet, em perfis públicos e páginas que citem a pessoa, antes de devolvê-lo à habilidade de origem.
+Não divida o endereço em nome e sobrenome por conta própria: `joaodasilvaneto` pode ser da Silva Neto ou Dasilva Neto.
+Sem fonte que confirme, devolva as formas possíveis e pergunte à pessoa antes de a operação usar o nome.
 
 Nome civil e nome social são campos separados, e o nome civil só se grava quando a pessoa ou uma fonte o informa.
 Formulário que exige o documento oficial, como contrato, nota e documento fiscal, leva o nome civil. Cadastro que aceita nome social, como o de uma hospedagem, leva o nome social.
@@ -110,6 +114,14 @@ Se você buscar só pela grafia correta, a mensagem enviada com outra forma ou c
 1. A busca usa todas as formas entre aspas, mais o nome do registro.
 2. A forma correta só entra na frase para a pessoa.
 3. A busca de remetente usa, como texto, o primeiro nome correto e esse nome, ponto, e o sobrenome. Não mande from:. E-mail vazio não dispensa. O endereço não vira nome civil.
+
+### Sobrenome tirado do endereço
+
+Se você separar o nome e o sobrenome de um e-mail ou de um handle, um cadastro difícil de desfazer, como uma conta, sai com o nome errado.
+
+1. Busque o nome na internet antes de usá-lo.
+2. Sem fonte que confirme, mostre as formas possíveis e pergunte.
+3. Não escreva o nome na operação antes da confirmação.
 
 ### Print sem cadastro
 
