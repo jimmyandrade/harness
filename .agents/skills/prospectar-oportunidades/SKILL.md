@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.6.4"
+  version: "0.7.0"
   related:
     - consultar-responsavel-pela-oportunidade
     - criar-ideia-de-conteudo
@@ -36,6 +36,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 # `Localidade-sede` é a localidade usada quando não há viagem ativa nem localidade prioritária.
 "Localidade-sede": ""
 "Janela da viagem ativa": "7 dias"
+# `Registrar a programação da oportunidade` é `automático`, que segue o Passo 6, `sempre`, `perguntar` ou `nunca`.
+"Registrar a programação da oportunidade": "automático"
 "Máximo de candidatos por execução": 5
 "Máximo de buscas na web por execução": 10
 "Formato da data com dia da semana": "terça-feira, 01/09/2026"
@@ -96,6 +98,8 @@ A avaliação do fit é sua e não espera a pessoa pedir: compare com o posicion
 Cada critério do playbook, como o custo de participação, a curadoria e o público, é conferido numa fonte antes de a leitura de fit ir às notas. Critério sem evidência fica nas notas como pendência, com o que faltou e o canal para perguntar, e a edição não é marcada como pronta para a decisão humana. Não deixe a lista do que verificar no corpo da edição.
 
 ### Passo 6
+
+Siga `Registrar a programação da oportunidade`. Com `sempre`, registre toda a programação publicada de qualquer oportunidade, com ou sem viagem. Com `perguntar`, pergunte antes de registrar a de cada uma. Com `nunca`, não registre programação. Com `automático`, siga as regras abaixo.
 
 Quando a oportunidade é uma visita em avaliação, como uma semana de moda, registre toda a programação publicada, cada sessão como marco do cronograma ligado à oportunidade, seguindo `definir-cronograma`, haja ou não viagem decidida. A programação inteira ajuda a decidir se vale ir e em quais dias. Não escolha sessão nem bloqueie a agenda.
 

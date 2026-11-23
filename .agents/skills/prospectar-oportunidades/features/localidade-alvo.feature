@@ -29,3 +29,22 @@ Funcionalidade: Escolher a localidade-alvo da prospecção
       Quando a skill registra a programação
       Então todas as sessões publicadas entram no cronograma ligado à oportunidade
       E nenhuma sessão é escolhida nem entra na agenda
+
+  Regra: O parâmetro decide quando a programação entra no cronograma
+
+    Exemplo: Oportunidade fora da viagem com o parâmetro em sempre
+      Dado que "Registrar a programação da oportunidade" está em "sempre"
+      E que a oportunidade não cai em nenhuma viagem
+      Quando a skill registra a programação
+      Então todas as sessões publicadas entram no cronograma ligado à oportunidade
+
+    Exemplo: Parâmetro em perguntar
+      Dado que "Registrar a programação da oportunidade" está em "perguntar"
+      Quando a skill vai registrar a programação de uma oportunidade
+      Então ela pergunta antes e só registra com o sim
+
+    Exemplo: Parâmetro em nunca
+      Dado que "Registrar a programação da oportunidade" está em "nunca"
+      Quando a skill avalia uma visita em avaliação com programação publicada
+      Então nenhuma sessão entra no cronograma
+
