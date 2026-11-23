@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.102.1](https://github.com/jimmyandrade/harness/compare/v1.102.0...v1.102.1) (2026-11-23)
+
+
+### Bug Fixes
+
+* stop asking who signs and keep company data in its own fields ([#1443](https://github.com/jimmyandrade/harness/issues/1443)) ([def3dd8](https://github.com/jimmyandrade/harness/commit/def3dd899db4da4f227e433527fc543929cd9b35))
+
 ## [1.102.0](https://github.com/jimmyandrade/harness/compare/v1.101.0...v1.102.0) (2026-11-23)
 
 
