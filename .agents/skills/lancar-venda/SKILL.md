@@ -71,13 +71,6 @@ flowchart LR
 
 Antes de criar, siga `procurar-venda` com o número do pedido, o link do pedido e o identificador da transação. Sem nenhum dos três, com a data real, a pessoa cliente e as unidades.
 
-```mermaid
-flowchart LR
-  V{A busca acha?} -->|provável| U[Atualize essa]
-  V -->|dúvida| C[Mostre e confirme]
-  V -->|não| N[Siga o cadastro]
-```
-
 Complete só o que falta. Corrija só o que está errado. Dado válido que já está na propriedade certa permanece. Não reescreva a página. Dado no lugar errado, correção e reversão seguem o Passo 9.
 
 ### Passo 3
@@ -88,11 +81,11 @@ Com `Banco de unidades` preenchido, a unidade traz o tamanho e as outras variant
 
 Antes de vincular a pessoa cliente, confira quem é, também quando a busca acha uma página só. Vincule apenas quando o nome completo, ou outro dado dito pela pessoa, como a cidade, bate com a página. O primeiro nome não basta.
 
-Quando não bate, leia o pagador no meio de pagamento da venda, na ordem: linha de comando, API, conector, navegador do app e, por último, a extensão do Chrome. Só então pergunte, mostrando a página, o que a pessoa disse e o que o meio mostrou. Não diga que ele não mostra o pagador sem abrir a transação. Cartão presencial costuma vir sem cliente associado e o Pix traz o pagador.
+Quando não bate, leia o pagador no meio de pagamento da venda, na ordem de meios das instruções do projeto. Só então pergunte, mostrando a página, o que a pessoa disse e o que o meio mostrou. Não diga que ele não mostra o pagador sem abrir a transação. Cartão presencial costuma vir sem cliente associado e o Pix traz o pagador.
 
 Quando a pessoa diz que a cliente é outra, a venda não reaproveita a página do homônimo. Cadastre a cliente por `definir-pessoa`, com a localidade dita e o não confundir com ligado ao homônimo, e só então vincule.
 
-Produto ou variante cadastrado com um nome que a pessoa ou uma fonte da venda diz ser antigo: troque, na mesma rodada, o nome do produto e o de cada variante pelo nome atual, e guarde o antigo nas variações de nome. Não deixe a troca só no corpo ou no motivo da venda.
+Nome antigo no produto ou na variante, dito pela pessoa ou por uma fonte: troque já pelo atual no produto e em cada variante e guarde o antigo nas variações de nome, nunca só no corpo ou no motivo da venda.
 
 Antes de vincular, busque com `identificar-duplicata`, também a pessoa cliente pelo nome, pelas variações, pelas notas e pelo nome civil. Sem a página, ou sem a variante na unidade, pare e pergunte. Não crie o produto, a unidade nem a variante na venda. Não escolha entre parecidos.
 
