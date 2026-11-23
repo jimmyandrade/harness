@@ -4,7 +4,7 @@ description: Cria, revisa e atualiza o artigo da base de conhecimento que respon
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.7.0"
+  version: "0.8.0"
   related:
     - criar-habilidade
     - definir-historia-de-usuario
@@ -138,6 +138,8 @@ Sempre que criar ou atualizar um passo a passo de uma tela, capture um print de 
 Mostre na tela o estado do passo, como o menu aberto ou a janela com o botão, antes de capturar.
 Numa tela que muda dados, abra o passo, capture e cancele. O passo que só aparece depois de salvar fica sem print.
 Antes de subir, cubra no print o nome, o e-mail, o telefone e outro dado pessoal de quem aparece, com um rótulo neutro como "e-mail pessoal", e confira a imagem coberta.
+Quando o navegador deixa, cubra antes de capturar: troque na própria página o texto do nome, do e-mail e do telefone pelo rótulo neutro e esconda as fotos de perfil, e capture com a página já coberta.
+Uma lista com várias pessoas também é coberta, linha por linha.
 Suba cada imagem pelo upload de arquivo da ferramenta da base.
 Ponha a imagem logo abaixo do passo que ela mostra, num bloco próprio.
 Escreva a legenda com o que a tela mostra: o menu, a janela, o campo e o nome da pasta ou da arte quando aparece.
