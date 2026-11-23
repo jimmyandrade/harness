@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.6.2"
+  version: "0.6.3"
   related:
     - consultar-responsavel-pela-oportunidade
     - criar-ideia-de-conteudo
@@ -105,6 +105,8 @@ Responda com uma linha por candidato: título, datas com dia da semana, o que ca
 
 Cada candidato que combina leva também o caminho para participar: o link do edital ou do formulário, o prazo e, com o prazo vencido ou sem link, os canais para perguntar à organização se ainda aceita, ou quando abre a curadoria, todos os que o Notion e o perfil mostram, como o e-mail, o WhatsApp, o produtor da página do evento e a mensagem direta de quem orienta o grupo, cada um com a fonte. Dos canais que a organização atende, a pessoa escolhe por qual escrever.
 
+Quando a oportunidade é uma visita, como a de uma semana de moda, o caminho para participar diz como entrar: se a entrada é livre, se pede ingresso, convite ou credencial, onde se retira, até quando e o que a fonte não diz. Cada trecho do playbook que a resposta cita, como o foco atual ou o prazo mínimo, vem com o que ele quer dizer em palavras simples e com o limite do que a página afirma.
+
 Leva ainda quem a empresa já conhece, achado no Notion: pessoas, negociações e edições anteriores do mesmo grupo ou de eventos parecidos em que alguém da empresa atuou, como apresentadora ou expositora. Isso serve de abertura na mensagem.
 
 Pergunte se a pessoa topa e se escreve à organização. Com o sim ao contato, o rascunho segue `consultar-responsavel-pela-oportunidade`, e nada é enviado antes do sim ao texto.
@@ -139,6 +141,14 @@ Se você responder só o que existe sobre uma edição cadastrada e perguntar se
 1. Compare a edição com o canvas e com o playbook na hora.
 2. Grave a leitura nas notas de curadoria e marque a curadoria por IA.
 3. Deixe a decisão humana como está e pergunte só se a pessoa topa participar.
+
+### Visita sem caminho de entrada
+
+Se você avaliar uma visita só pelo fit e deixar de dizer como entrar, a pessoa precisa perguntar se há ingresso e como visitar, e a resposta chega depois da decisão.
+
+1. Pesquise na página oficial e na imprensa se a entrada exige ingresso, convite ou credencial, onde retirar e o prazo.
+2. Diga o que a fonte não informa e proponha perguntar à organização.
+3. Explique em palavras simples cada trecho do playbook que você citar, sem o jargão da página.
 
 ### Busca sem teto
 
