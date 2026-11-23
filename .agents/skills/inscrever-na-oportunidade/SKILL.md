@@ -3,7 +3,7 @@ name: inscrever-na-oportunidade
 description: Preenche o cadastro ou o formulário que a organização de uma oportunidade pede para a inscrição, com os dados da empresa, no formato de cada campo, e envia só com o sim da pessoa. Usada quando a inscrição ou o cadastro de uma oportunidade está para ser feito. NÃO serve para registrar a inscrição no Notion, ler o regulamento, escrever à organização, salvo a resposta que confirma o envio, nem escrever o projeto que a inscrição pede.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.5.1"
   related:
     - acompanhar-retornos-pendentes
     - analisar-regulamento-da-oportunidade
@@ -56,6 +56,8 @@ O que o cadastro tem nunca vai para a lista do que falta, nem como pergunta à p
 O nome da marca, o telefone, o WhatsApp e o e-mail vêm do cadastro da empresa. Com mais de uma dona, pergunte qual responde.
 O contato de uma inscrição é sempre o da empresa, nunca o telefone nem o e-mail pessoal de um sócio, mesmo quando o campo é do responsável. Sem o contato da empresa no cadastro, pare e peça, e não complete com o da pessoa.
 Diga em qual página do cadastro cada dado está, com o link, e o que o cadastro não tem. O dado que falta vira recomendação de campo, sem criá-lo.
+
+O dado de uma conta de plataforma que o formulário pede e o cadastro não tem, como o e-mail da conta no Pinterest, o link do perfil ou se a conta está conectada a outra rede, se lê no navegador, na conta que a pessoa já deixou logada, antes de supor e antes de perguntar. Abra a plataforma numa aba, leia o menu da conta ou a página de configurações e mostre o que leu, com a fonte, na conferência do Passo 6. Não troque de conta, não altere nada e não digite senha. Sem sessão logada, ou com o dado fora da tela, pergunte à pessoa e diga o que tentou.
 
 Pergunta de autodeclaração, como gênero, orientação, raça, deficiência ou morar em favela ou periferia, leva só o que o cadastro ou a pessoa já declarou. Não suponha a identidade de ninguém. O que só a pessoa pode declarar e o cadastro não tem vai numa pergunta única, depois de ler o cadastro.
 O território não se responde pelo nome do bairro: compare o endereço do cadastro com o critério que a organização publica e com as fontes oficiais, como a lista de vilas, favelas e ZEIS da prefeitura, e mostre a evidência com o link. A resposta é da pessoa.
@@ -110,6 +112,14 @@ Se você listar nome, nascimento, endereço, marca ou contato como dados que fal
 1. Leia a página da pessoa dona e a da empresa antes de dizer o que falta.
 2. Mostre cada dado com o link da página onde está.
 3. Pergunte só o que o cadastro não tem e só a pessoa pode declarar, numa pergunta única.
+
+### Dado de conta de plataforma suposto
+
+Se você supuser o e-mail ou o perfil da conta de uma plataforma, ou perguntar à pessoa antes de olhar, o formulário segue com um dado que pode estar errado e a pessoa responde o que a tela já mostra.
+
+1. Abra a plataforma no navegador, na conta que a pessoa já deixou logada.
+2. Leia o menu da conta ou a configuração e mostre o dado com a fonte.
+3. Sem sessão logada, ou com o dado fora da tela, pergunte e diga o que tentou.
 
 ### Contato pessoal no formulário
 
@@ -241,6 +251,7 @@ Li o catálogo de produtos e corrigi o campo com as famílias das peças ativas,
 - O formulário pede pagamento: o pagamento não é desta habilidade. Pare e peça à pessoa.
 - O cadastro não tem o contato da empresa: pare e recomende o campo.
 - A inscrição é por e-mail e não por formulário: o texto da mensagem segue `redigir-com-tom-de-voz`, e o envio, a skill de e-mail.
+- O formulário pede um dado da conta de uma plataforma e o cadastro não o tem: leia no navegador, na conta já logada, e mostre a fonte. Sem sessão logada, pergunte.
 - A pessoa já preencheu à mão: leia o rascunho e só registre.
 - O projeto ainda não foi entregue pela produção cultural: prepare o resto e pare antes do envio, com o prazo da pendência.
 - O formulário pede um vídeo: o roteiro segue `definir-roteiro-de-video`, a pessoa grava, e o anexo fica como pendência com o prazo.
@@ -255,6 +266,7 @@ Li o catálogo de produtos e corrigi o campo com as famílias das peças ativas,
 - O formulário pede RG e CPF do responsável. O agente não os digita.
 - Os dados pessoais do responsável parecem coisa a perguntar. Eles estão no cadastro de pessoas, e só o que ele não tem vira pergunta.
 - O nome do bairro parece dizer se é periferia. Um bairro de classe média pode conter uma vila listada pela prefeitura, e o critério é o da organização.
+- O e-mail da conta de uma plataforma parece igual ao da empresa. Só a conta logada diz qual é, e a conferência mostra de onde veio.
 - O CNPJ parece dado sensível como o CPF. É da empresa: o agente o lê no cadastro e o digita.
 - O campo dos produtos parece aceitar a descrição da marca. Ele pede o que a marca vende, em famílias ou peças.
 - O print da confirmação parece trabalho da pessoa, porque ela vê a tela. Quem tira e anexa é você, na aba, no mesmo instante.
