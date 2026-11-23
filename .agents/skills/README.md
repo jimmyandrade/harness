@@ -176,6 +176,7 @@ flowchart LR
     publicar_resposta_de_revisao["publicar-resposta-de-revisao"]
     publicar_revisao_de_codigo["publicar-revisao-de-codigo"]
     rascunhar_mensagem["rascunhar-mensagem"]
+    realizar_compra["realizar-compra"]
     reconhecer_imagem["reconhecer-imagem"]
     redigir_com_tom_de_voz["redigir-com-tom-de-voz"]
     registrar_ciclo_do_ativo["registrar-ciclo-do-ativo"]
@@ -951,6 +952,7 @@ flowchart LR
   pesquisar_compra --> gerenciar_estoque
   pesquisar_compra --> identificar_duplicata
   pesquisar_compra --> lancar_despesa_da_empresa
+  pesquisar_compra --> realizar_compra
   planejar_calendario_de_conteudo --> criar_ideia_de_conteudo
   planejar_calendario_de_conteudo --> definir_campanha_de_conteudo
   planejar_calendario_de_conteudo --> definir_reel_do_instagram
@@ -1060,6 +1062,10 @@ flowchart LR
   rascunhar_mensagem --> redigir_com_tom_de_voz
   rascunhar_mensagem --> rotular_item
   rascunhar_mensagem --> usar_whatsapp_web
+  realizar_compra --> definir_ativo_imobilizado
+  realizar_compra --> gerenciar_estoque
+  realizar_compra --> lancar_despesa_da_empresa
+  realizar_compra --> pesquisar_compra
   reconhecer_imagem --> criar_oportunidade
   reconhecer_imagem --> definir_grafia
   reconhecer_imagem --> definir_inscricao
