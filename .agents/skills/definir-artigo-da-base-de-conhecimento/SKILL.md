@@ -4,7 +4,7 @@ description: Cria, revisa e atualiza o artigo da base de conhecimento que respon
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.6.3"
+  version: "0.7.0"
   related:
     - criar-habilidade
     - definir-historia-de-usuario
@@ -91,6 +91,9 @@ Na seção de observações, aponte para o outro artigo em vez de repetir a expl
 Para cada pergunta, busque no data source, ou no espaço do Confluence, pelo título, pelas variações e pelo tema.
 Se um artigo já responde a mesma pergunta, atualize-o.
 Só crie um artigo novo quando nenhum responde.
+Quando a pessoa executa a tarefa que um artigo ensina, acompanhe a execução contra o artigo, passo a passo.
+Cada diferença que a execução mostra, como uma tela que mudou, um custo, uma aprovação ou um caso que o artigo não prevê, entra no artigo na mesma sessão, sem esperar outro pedido.
+Um assunto novo que a execução levanta vira outro artigo, como manda o Passo 3.
 No Confluence, ignore a conferência de modelo abaixo: o espaço não tem lista de modelos.
 Confira se uma página é modelo do banco pela lista de modelos do data source, que a API do Notion devolve.
 O texto de exemplo das seções no corpo não prova que é modelo, porque alguém pode criar uma página a partir de um modelo e não mudar nada.
@@ -253,6 +256,7 @@ Os critérios ficaram de fora. Cada guardrail virou item do diagnóstico rápido
 - Dizer que não dá para capturar parece uma resposta honesta. Sem a tentativa de abrir a tela, é uma suposição.
 - Uma página com o título genérico da ferramenta e o corpo só com o texto de exemplo parece um rascunho esquecido, e também pode ser o modelo do banco. Só a lista de modelos do data source diz qual dos dois é.
 - O apelido da ferramenta, como "o IP" ou "o portal", parece bastar porque a conversa já o usou. A pessoa que lê o artigo não estava nela, então o endereço vai por extenso.
+- Um artigo encontrado e completo parece encerrar o trabalho. Se a pessoa vai executar a tarefa em seguida, a execução é a conferência: o que ela mostra e o artigo não diz entra nele.
 - O link escrito antes do quadro de encerramento parece entregar o artigo. A pessoa lê a mensagem final, então o link vai nela.
 - Um artigo que manda usar uma ferramenta parece valer para todo mundo. Antes de dizer que uma orientação contradiz o artigo, confira a ordem dos acessos: quem ainda não recebeu a ferramenta segue outro caminho.
 
