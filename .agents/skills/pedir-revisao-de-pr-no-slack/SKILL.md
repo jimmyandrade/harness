@@ -3,7 +3,7 @@ name: pedir-revisao-de-pr-no-slack
 description: Redige o pedido de revisão de um pull request para o canal do time no Slack e entrega o rascunho com o link da thread, usando enviar-mensagem-no-slack. Usada quando o PR está pronto e a organização pede revisão pelo Slack, ou quando a pessoa pede apoio para revisar. Não serve para revisar o PR nem para outra mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.9.2"
+  version: "0.9.3"
   related:
     - criar-pull-request
     - enviar-mensagem-no-slack
@@ -81,6 +81,7 @@ As stories que o PR muda saem do diff dos arquivos de stories.
 O índice do Storybook publicado, `index.json`, lista o id de cada story e de cada página de docs, e cada id citado existe nele.
 O link de uma story é `<preview>/?path=/story/<id>`, e o da página de docs é `<preview>/?path=/docs/<id>`.
 Sem preview publicado, o pedido diz isso.
+Quando a validação usa um item criado fora do PR, como uma entrada num CMS de teste ou uma conta de teste, o pedido leva o link direto desse item, numa linha própria, e diz o que o acesso exige, como VPN ou login.
 Num PR já mesclado, ele leva o endereço do ambiente onde o trabalho está, como `registrar-resultados-da-validacao-na-tarefa` manda.
 
 ### Passo 5
@@ -128,6 +129,14 @@ Se você redigir o pedido sem o endereço do preview do PR, quem revisa tem de m
 1. Ache o endereço do preview no PR, no comentário de um bot ou no check de deploy.
 2. Ponha o preview numa linha própria do pedido, com o link das stories como o Passo 4 manda.
 3. Sem preview publicado, diga isso no pedido.
+
+### Pedido sem o link do item de teste
+
+Se você citar no pedido um item de teste criado fora do PR e não pôr o link dele, quem revisa tem de procurá-lo no sistema onde ele foi criado, e a revisão atrasa.
+
+1. Ache o endereço direto do item, na tela que o mostra.
+2. Ponha o link numa linha própria do pedido, com o que o acesso exige, como VPN ou login.
+3. Se o preview do PR não mostra o item, diga isso na mesma linha.
 
 ### Preview que aponta para a raiz
 
