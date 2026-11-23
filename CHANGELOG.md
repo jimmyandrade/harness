@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.103.0](https://github.com/jimmyandrade/harness/compare/v1.102.1...v1.103.0) (2026-11-23)
+
+
+### Features
+
+* **cadastrar-foto-de-moda:** add the script that drafts alt text locally ([#1447](https://github.com/jimmyandrade/harness/issues/1447)) ([f7695e2](https://github.com/jimmyandrade/harness/commit/f7695e2f22ef959870c9006df8f24ccfcf99abbd))
+
+
+### Bug Fixes
+
+* **inscrever-na-oportunidade:** read platform account data in the browser instead of guessing or asking ([#1445](https://github.com/jimmyandrade/harness/issues/1445)) ([498ed97](https://github.com/jimmyandrade/harness/commit/498ed976e103143ac4dfea6cab0cb595d7e64a4e))
+
 ## [1.102.1](https://github.com/jimmyandrade/harness/compare/v1.102.0...v1.102.1) (2026-11-23)
 
 
