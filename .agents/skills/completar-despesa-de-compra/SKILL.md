@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
   related:
     - anexar-arquivo-no-notion
     - definir-cartao
@@ -48,6 +48,7 @@ Compra com nota fiscal: baixe o PDF e o XML da nota sem pedir o sim, e anexe os 
 
 Compare o destinatário da nota com a pessoa ou a empresa que comprou. Quando a nota sai em nome de pessoa física numa compra da empresa, diga isso na resposta e grave na observação da despesa. É um fato do cadastro, não uma orientação fiscal.
 
+Compra paga com o dinheiro que já estava numa conta de pagamento, como o saldo de um marketplace, tem o meio de saldo de conta de pagamento: o valor sai na hora, sem fatura nem parcela, e não é Pix nem cartão. A conta de pagamento vai em quem pagou. Se ela financiou ou parcelou a compra, o meio é o do crédito. Sem esse meio na lista de meios, deixe-o vazio, diga qual é o mais próximo e não mude a lista.
 Sem nota fiscal, capture as telas dos detalhes da compra, com valor, data, situação, meio de pagamento, número da transação e produto, e anexe como comprovante mínimo. Confira os anexos na página salva antes de marcar a conciliação como comprovada.
 
 ### Passo 4
