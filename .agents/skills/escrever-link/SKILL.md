@@ -3,7 +3,7 @@ name: escrever-link
 description: Escreve o link de um texto lido numa plataforma, como Jira, Confluence, GitHub, Slack, WhatsApp ou a conversa com a IA, com o endereço lido da fonte, o texto certo e a sintaxe que funciona nela. Usada sempre que um texto vai citar PR, issue, card, página ou arquivo. Não serve para decidir o que o texto diz nem para enviá-lo.
 metadata:
   author: jimmyandrade
-  version: "0.2.3"
+  version: "0.2.4"
   related:
     - conversar-no-whatsapp
     - criar-pull-request
@@ -42,6 +42,7 @@ Escolha o texto do link pelo tipo do alvo, com os parâmetros `Texto do link de 
 O texto diz o que o leitor abre. Um PR é `#123`, um card é a chave ou o título e uma página é o título dela.
 `aqui`, `clique aqui` e `link` não dizem nada e não entram.
 Um item citado só pelo número, como `#123` ou `PR 123`, não é link. Uma chave solta também não é. Uma URL crua no meio da frase só serve onde o Passo 3 manda.
+Um endereço entre crases também é URL crua: o código não vira link em nenhuma plataforma.
 Num link do Atlassian que fica sozinho, o texto não entra: o smart link do Passo 3 mostra o título atual da página.
 Cite cada alvo como link toda vez que ele aparece, inclusive numa lista, num resumo, num título e quando já foi citado antes.
 Uma linha de um banco, como a do Notion, é uma página: citá-la pelo título ou pelo nome do arquivo, sem o link, é número solto. Isso vale também para a linha que o turno só leu, conferiu ou gravou em lote, para a de uma tabela de resultados e para a que a resposta aponta para a pessoa revisar, mesmo quando citada por descrição, como "a foto preta da regata" ou "várias fotos do produto".
@@ -69,7 +70,7 @@ flowchart LR
 ### Passo 4
 
 Depois de publicar, releia o texto no lugar onde o leitor o vê, ou no retorno da ferramenta, e confira o link.
-O link tem texto, o endereço abre o alvo certo e nenhuma URL ficou crua. Se ficou, edite o item publicado.
+O link tem texto, o endereço abre o alvo certo e nenhuma URL ficou crua, nem entre crases. Se ficou, edite o item publicado.
 Antes de entregar uma resposta, releia o próprio texto atrás de número de PR, de chave de card e de título ou nome de arquivo de página sem link.
 
 ### Passo 5
@@ -86,7 +87,7 @@ Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ### URL crua no texto
 
-Se você escrever o endereço no meio da frase, a plataforma o mostra como texto comprido e a pessoa não sabe o que abre.
+Se você escrever o endereço no meio da frase, ou entre crases, a plataforma o mostra como texto comprido e a pessoa não sabe o que abre.
 
 1. Troque por `[texto](url)`, com o texto do Passo 2.
 2. No WhatsApp, ponha o texto numa linha e a URL inteira na linha de baixo.
