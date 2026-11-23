@@ -4,7 +4,7 @@ description: Cria, revisa e atualiza o artigo da base de conhecimento que respon
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.8.1"
+  version: "0.8.2"
   related:
     - criar-habilidade
     - definir-historia-de-usuario
@@ -146,8 +146,9 @@ Suba cada imagem pelo upload de arquivo da ferramenta da base.
 Ponha a imagem logo abaixo do passo que ela mostra, num bloco próprio.
 Escreva a legenda com o que a tela mostra: o menu, a janela, o campo e o nome da pasta ou da arte quando aparece.
 A imagem que a pessoa mandou entra do mesmo jeito, no passo que ela mostra.
-Antes de dizer que não consegue capturar um passo, tente: abra a tela num navegador que a sessão tenha e capture o estado do passo.
-Só deixe um passo sem print depois dessa tentativa, e diga qual ficou sem print e o que a tentativa mostrou, como um login que a sessão não tem ou uma ferramenta da base sem upload de arquivo.
+Não pergunte se pode capturar: capture.
+Antes de dizer que não consegue capturar um passo, abra a tela em cada navegador que a sessão tenha, inclusive o que usa os logins da pessoa, e capture o estado do passo. A tela de login num navegador não encerra a tentativa: passe para o próximo.
+Só deixe um passo sem print depois dessa tentativa, e diga qual ficou sem print e o que a tentativa mostrou, como um login que nenhum navegador da sessão tem ou uma ferramenta da base sem upload de arquivo.
 Nunca escreva que não deu para capturar sem ter aberto a tela.
 
 ### Passo 8
@@ -204,8 +205,8 @@ Se você escrever o passo a passo de uma tela só com texto, a pessoa não recon
 
 Se você escrever que o passo ficou sem print sem ter aberto a tela, o artigo sai sem imagem por uma suposição, e a pessoa descobre que o print era possível.
 
-1. Abra a tela num navegador que a sessão tenha e capture o estado do passo.
-2. Só com a tentativa feita, diga qual ficou sem print e o que ela mostrou.
+1. Abra a tela em cada navegador que a sessão tenha, inclusive o que usa os logins da pessoa, e capture o estado do passo.
+2. Só com a tentativa feita em todos, diga qual ficou sem print e o que ela mostrou.
 3. Ponha o aviso no topo do artigo com esse motivo.
 
 ### Artigo repetido
@@ -256,7 +257,8 @@ Os critérios ficaram de fora. Cada guardrail virou item do diagnóstico rápido
 - O upload da imagem parece aceitar o link do print. A imagem precisa ser enviada como arquivo pelo upload de arquivo da ferramenta, e o bloco de imagem cita o arquivo enviado.
 - A imagem colada na mesma linha do passo parece ficar abaixo dele. Ela só vira bloco próprio com uma linha em branco antes e depois.
 - O print da tela inicial parece bastar. O passo mostra o estado em que a pessoa clica: o menu aberto, o submenu, a janela de busca.
-- Esperar os prints da pessoa parece o caminho seguro. Quem escreve o artigo captura os prints que faltam.
+- Esperar os prints da pessoa, ou perguntar se pode capturar, parece o caminho seguro. Quem escreve o artigo captura os prints que faltam, sem perguntar.
+- A tela de login num navegador parece encerrar a tentativa. Outro navegador da sessão pode já ter o login da pessoa.
 - Dizer que não dá para capturar parece uma resposta honesta. Sem a tentativa de abrir a tela, é uma suposição.
 - Uma página com o título genérico da ferramenta e o corpo só com o texto de exemplo parece um rascunho esquecido, e também pode ser o modelo do banco. Só a lista de modelos do data source diz qual dos dois é.
 - O apelido da ferramenta, como "o IP" ou "o portal", parece bastar porque a conversa já o usou. A pessoa que lê o artigo não estava nela, então o endereço vai por extenso.
