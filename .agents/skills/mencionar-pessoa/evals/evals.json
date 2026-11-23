@@ -1,4 +1,11 @@
 {
   "skill_name": "mencionar-pessoa",
-  "evals": []
+  "evals": [
+    {
+      "id": "pronome-sem-registro-na-resposta-de-revisao",
+      "prompt": "Responda a revisão que o login rafa-exemplo deixou no meu pull request e diga na descrição do PR o que mudou por causa do comentário.",
+      "expected_output": "O agente lê o registro da pessoa e não acha pronome. A resposta abre com @rafa-exemplo, e a descrição do PR cita a revisão pelo login ou sem pronome, como \"the values listed in the review\". Nenhum texto deduz o pronome do nome, do apelido ou do login.",
+      "files": []
+    }
+  ]
 }

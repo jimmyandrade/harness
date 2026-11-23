@@ -3,10 +3,11 @@ name: publicar-resposta-de-revisao
 description: Publica a resposta a uma revisão recebida, de pessoa ou de bot, de preferência num comentário inline. Marca o login e, com a leitura antes de publicar desligada, publica sem pedir confirmação. NÃO serve para aplicar a sugestão no código nem para revisar o PR de outra pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.4.2"
+  version: "0.4.3"
   related:
     - atender-revisao-de-pull-request
     - definir-pessoa
+    - mencionar-pessoa
     - escrever-link
     - escrever-texto-da-revisao
 ---
@@ -49,7 +50,9 @@ A conversa do PR fica para o que não tem linha no diff.
 Sem preferência no registro e com esse parâmetro em `o idioma do comentário` ou em `o de quem revisou`, a resposta sai no idioma do comentário.
 A resposta diz o que mudou.
 Quando o texto mudou, ela mostra as linhas alteradas num bloco, com o que saiu e o que entrou.
-Ela cita o commit pelo SHA curto linkado, como `[`abc1234`](URL do commit)`, ou diz por que não muda. Toda thread tratada fica com uma resposta registrada, inclusive a de bot e a decidida fora do PR. Comentário desatualizado ganha a explicação do que mudou desde então. Discordância e fora de escopo viram pergunta, nunca veredito. A resposta a outra pessoa abre com o login do GitHub dela em `@login`, trata do ponto que ela escreveu, retoma a ideia dela e diz o que mudou, e nunca é uma fórmula colada. Quem mais entra no ponto também leva `@login`. O primeiro nome sozinho não marca a pessoa. Bot não leva `@`. Self review não marca quem está respondendo. Com `Rótulo de prioridade no texto` em `não`, o nome da categoria nunca aparece.
+Ela cita o commit pelo SHA curto linkado, como `[`abc1234`](URL do commit)`, ou diz por que não muda. Toda thread tratada fica com uma resposta registrada, inclusive a de bot e a decidida fora do PR. Comentário desatualizado ganha a explicação do que mudou desde então. Discordância e fora de escopo viram pergunta, nunca veredito.
+
+A resposta a outra pessoa abre com o login do GitHub dela em `@login`, seguindo `mencionar-pessoa`, que também decide o pronome, trata do ponto que ela escreveu, retoma a ideia dela e diz o que mudou, e nunca é uma fórmula colada. Quem mais entra no ponto também leva `@login`. O primeiro nome sozinho não marca a pessoa. Bot não leva `@`. Self review não marca quem está respondendo. Com `Rótulo de prioridade no texto` em `não`, o nome da categoria nunca aparece.
 
 Com `Linkar as fontes da explicação` em `sim`, a resposta que explica ou defende uma escolha, como uma exceção, uma recusa ou um motivo, linka a fonte de cada afirmação. A fonte do código é o link do trecho no commit atual do PR, com o SHA e as linhas, e a de uma regra é o documento, a decisão de arquitetura ou a conversa onde ela está. Uma afirmação sem fonte que você leu vira inferência, e a resposta diz isso. Não explique de memória.
 
