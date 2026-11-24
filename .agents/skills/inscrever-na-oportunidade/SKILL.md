@@ -3,7 +3,7 @@ name: inscrever-na-oportunidade
 description: Preenche o cadastro ou o formulário que a organização de uma oportunidade pede para a inscrição, com os dados da empresa, no formato de cada campo, e envia só com o sim da pessoa. Usada quando a inscrição ou o cadastro de uma oportunidade está para ser feito. NÃO serve para registrar a inscrição no Notion, ler o regulamento, escrever à organização, salvo a resposta que confirma o envio, nem escrever o projeto que a inscrição pede.
 metadata:
   author: jimmyandrade
-  version: "0.5.1"
+  version: "0.5.2"
   related:
     - acompanhar-retornos-pendentes
     - analisar-regulamento-da-oportunidade
@@ -38,7 +38,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 Reúna o link do formulário ou do cadastro, a oportunidade e a exigência de `analisar-regulamento-da-oportunidade`, com o prazo.
 Sem o link, peça à pessoa e pare. A inscrição que já foi feita e só falta registrar segue `definir-inscricao`.
-Prazo vencido: diga isso na hora, preencha mesmo assim e, se o envio for recusado, proponha perguntar à organização se ainda aceita.
+Prazo vencido, mesmo o que o comunicado diz: diga isso na hora, abra o formulário e, se ele ainda aceita respostas, preencha mesmo assim e, se o envio for recusado, proponha perguntar à organização se ainda aceita. Formulário fechado: diga e não preencha.
 
 Antes de preencher, de pré-inscrever ou de aceitar o convite, leia para quem a oportunidade se declara, como um público por gênero, porte ou local. Se a descrição restringe o público e a pessoa dona da empresa pode não se enquadrar, não inscreva: diga a restrição, não suponha a identidade de ninguém e proponha à pessoa perguntar à organização se a marca pode participar.
 
