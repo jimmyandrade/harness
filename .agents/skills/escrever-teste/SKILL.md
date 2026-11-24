@@ -3,7 +3,7 @@ name: escrever-teste
 description: Escreve ou altera testes de unidade antes do código, em TDD, só para a lógica do próprio projeto, seguindo a convenção de testes do projeto, com o Better Specs como padrão. Usada quando uma mudança precisa de teste novo, quando um teste existente muda ou quando uma revisão pede um teste. Não serve para rodar a suíte inteira nem refatorar testes antigos.
 metadata:
   author: jimmyandrade
-  version: "0.9.0"
+  version: "0.10.0"
   related:
     - criar-commit
     - escrever-codigo
@@ -55,6 +55,7 @@ Os títulos ficam no `Idioma dos títulos dos testes`.
 
 A preparação que se repete entre arquivos de teste, como subir um servidor e montar o endereço dele, vai para um helper compartilhado, fora do build.
 Um valor que o código já tem como constante, como o host, vem dessa constante, não de um texto escrito no teste.
+O nome de uma constante, de um dado de teste ou de um arquivo de teste segue a regra do repositório, achada como o Passo 1 de `escrever-codigo` manda. Diga de onde veio a escolha.
 
 Antes de chamar uma função no teste, leia a assinatura dela e copie a chamada de um teste vizinho: o tipo de cada argumento, como um caminho ou um objeto já carregado.
 
