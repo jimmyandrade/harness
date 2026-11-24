@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.109.0](https://github.com/jimmyandrade/harness/compare/v1.108.0...v1.109.0) (2026-11-24)
+
+
+### Features
+
+* **registrar-preco-de-produto-fisico:** send the label price to every channel ([#1474](https://github.com/jimmyandrade/harness/issues/1474)) ([0c42adf](https://github.com/jimmyandrade/harness/commit/0c42adf3c9afadebfb3d23e1b968f5758db5ce7f))
+
+
+### Bug Fixes
+
+* **rascunhar-mensagem:** say who provides and who brings each item ([#1473](https://github.com/jimmyandrade/harness/issues/1473)) ([47aa929](https://github.com/jimmyandrade/harness/commit/47aa92975a8bb87d84fe2acc12c7dcb6ca7ac019))
+
 ## [1.108.0](https://github.com/jimmyandrade/harness/compare/v1.107.0...v1.108.0) (2026-11-24)
 
 
