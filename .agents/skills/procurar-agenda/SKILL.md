@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.14.0"
+  version: "0.14.1"
   related:
     - criar-oportunidade
     - definir-agenda
@@ -88,6 +88,8 @@ A data de evento, compromisso, prazo, viagem, reserva, lançamento, entrega ou o
 
 Falta o dia ou o horário de algo a marcar, e ele depende só da agenda da pessoa, como uma reunião ou uma call: não pergunte em aberto. Leia as agendas `padrão` e `em uso`, os compromissos de vida e a jornada de produção, ache os horários livres e proponha um, com até duas alternativas, no formato da data com dia da semana, para a pessoa só confirmar. A duração vem do pedido ou, sem ela, da `Duração padrão da proposta`.
 
+Antes de propor, leia na lista de viagens as viagens futuras, também as planejadas e as em rascunho, como `definir-viagem` manda. O dia de ida e o de volta são de estrada ou aeroporto, e os dias no destino ficam com o compromisso de lá: nenhum vira horário livre, mesmo com a agenda vazia. Uma viagem sem transporte definido bloqueia o dia inteiro de ida e de volta.
+
 Com convidado, cruze a disponibilidade dele quando a ferramenta mostrar. O horário que vem de fora, como o da organização ou o da saída de uma viagem, sai da fonte e não vira proposta. Com o sim, a gravação segue `definir-agenda`.
 
 ## Problemas comuns
@@ -99,6 +101,14 @@ Se você perguntar que dia ou que horário a pessoa quer, ela precisa abrir a ag
 1. Leia as agendas, os compromissos de vida e a jornada.
 2. Proponha um horário livre, com até duas alternativas, para a pessoa só confirmar.
 3. Com o sim, grave por `definir-agenda`.
+
+### Dia de viagem proposto como livre
+
+Se você propuser um horário só pela agenda, ele pode cair no dia em que a pessoa está na estrada ou no aeroporto, porque a viagem planejada ainda não tem evento na agenda.
+
+1. Leia as viagens futuras na lista de viagens, inclusive as planejadas.
+2. Tire da proposta o dia de ida, o de volta e os dias no destino.
+3. Proponha só o que sobra livre.
 
 ### Agenda sem checagem
 
