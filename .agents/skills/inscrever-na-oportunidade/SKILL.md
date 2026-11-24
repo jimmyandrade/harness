@@ -3,7 +3,7 @@ name: inscrever-na-oportunidade
 description: Preenche o cadastro ou o formulário que a organização de uma oportunidade pede para a inscrição, com os dados da empresa, no formato de cada campo, e envia só com o sim da pessoa. Usada quando a inscrição ou o cadastro de uma oportunidade está para ser feito. NÃO serve para registrar a inscrição no Notion, ler o regulamento, escrever à organização, salvo a resposta que confirma o envio, nem escrever o projeto que a inscrição pede.
 metadata:
   author: jimmyandrade
-  version: "0.5.1"
+  version: "0.5.4"
   related:
     - acompanhar-retornos-pendentes
     - analisar-regulamento-da-oportunidade
@@ -30,6 +30,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Modo de aprendizado": "perguntar"
 # `Estrutura de exposição a perguntar` diz o que perguntar à organização sobre o que a marca pode levar, quando o convite não traz. Vazio, não pergunta.
 "Estrutura de exposição a perguntar": ""
+# `Pessoa que responde pela empresa` é o nome da pessoa dona que responde pela marca nas inscrições. Vazio, e com mais de uma dona, pergunta.
+"Pessoa que responde pela empresa": ""
 ```
 
 ## Instruções
@@ -38,7 +40,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 Reúna o link do formulário ou do cadastro, a oportunidade e a exigência de `analisar-regulamento-da-oportunidade`, com o prazo.
 Sem o link, peça à pessoa e pare. A inscrição que já foi feita e só falta registrar segue `definir-inscricao`.
-Prazo vencido: diga isso na hora, preencha mesmo assim e, se o envio for recusado, proponha perguntar à organização se ainda aceita.
+Prazo vencido, mesmo o que o comunicado diz: diga isso na hora, abra o formulário e, se ele ainda aceita respostas, preencha mesmo assim e, se o envio for recusado, proponha perguntar à organização se ainda aceita. Formulário fechado: diga e não preencha.
 
 Antes de preencher, de pré-inscrever ou de aceitar o convite, leia para quem a oportunidade se declara, como um público por gênero, porte ou local. Se a descrição restringe o público e a pessoa dona da empresa pode não se enquadrar, não inscreva: diga a restrição, não suponha a identidade de ninguém e proponha à pessoa perguntar à organização se a marca pode participar.
 
@@ -51,9 +53,9 @@ Um convite da organização por mensagem, que a marca vai aceitar, segue o mesmo
 ### Passo 2
 
 Os dados vêm do cadastro, sem perguntar à pessoa.
-O responsável pela marca é a pessoa dona da empresa do negócio: leia no cadastro de pessoas o nome, o apelido, a data de nascimento, o endereço, os pronomes e tudo o mais que o formulário pedir dela.
+O responsável pela marca é a `Pessoa que responde pela empresa`, ou a dona da empresa do negócio: leia no cadastro de pessoas o nome, o apelido, a data de nascimento, o endereço, os pronomes e tudo o mais que o formulário pedir dela.
 O que o cadastro tem nunca vai para a lista do que falta, nem como pergunta à pessoa.
-O nome da marca, o telefone, o WhatsApp e o e-mail vêm do cadastro da empresa. Com mais de uma dona, pergunte qual responde.
+O nome da marca, o telefone, o WhatsApp e o e-mail vêm do cadastro da empresa. Com mais de uma dona e o parâmetro vazio, pergunte qual responde. A pessoa que responde pela organização do evento não é a responsável pela marca que se inscreve, mesmo sendo sócia dela.
 O contato de uma inscrição é sempre o da empresa, nunca o telefone nem o e-mail pessoal de um sócio, mesmo quando o campo é do responsável. Sem o contato da empresa no cadastro, pare e peça, e não complete com o da pessoa.
 Diga em qual página do cadastro cada dado está, com o link, e o que o cadastro não tem. O dado que falta vira recomendação de campo, sem criá-lo.
 
@@ -73,6 +75,7 @@ O CNPJ é da empresa, não da pessoa: leia-o no cadastro da empresa e digite voc
 
 Preencha numa aba da sessão. Se a pessoa arrastar a aba dela para o grupo e o contexto de abas disser que o grupo não existe, peça o contexto criando o grupo antes de dar a aba por perdida: ela pode aparecer nele.
 O Google Formulários guarda o rascunho na conta: reabrir o link antes do envio mostra o que já foi preenchido, inclusive o que a pessoa digitou. Depois do envio, o mesmo link abre um formulário em branco.
+Campo que pede fotos ou outro arquivo da marca: a pessoa escolhe e sobe na aba. Prepare o resto, diga que falta o arquivo e, depois que ela avisar, leia o rascunho do formulário e confira tudo antes do envio.
 Leia a dica e a mensagem de erro de cada campo e escreva no formato que ele valida, como um telefone só com os dígitos e o DDD, sem o código do país nem pontuação.
 Confira cada campo depois de preencher e não avance com erro na tela.
 O campo que pede os produtos da marca recebe a lista dos produtos específicos ou, no mínimo, das famílias de produtos que a marca leva, lida do catálogo de produtos do negócio, nas peças ativas e só nas da própria marca. Descrever a marca ou a empresa não responde o campo. A organização pode pedir a retirada do que não está listado, então a lista cobre tudo o que vai à feira.
