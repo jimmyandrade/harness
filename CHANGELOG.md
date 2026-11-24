@@ -1,5 +1,30 @@
 # Changelog
 
+## [1.110.0](https://github.com/jimmyandrade/harness/compare/v1.109.0...v1.110.0) (2026-11-24)
+
+
+### Features
+
+* **agents:** add cultural references curation agent ([#1486](https://github.com/jimmyandrade/harness/issues/1486)) ([b42095c](https://github.com/jimmyandrade/harness/commit/b42095c6ce0afefb7eb377da4effd0bfbce07b24))
+* **definir-empresa:** confirm the state registration at the state source ([#1483](https://github.com/jimmyandrade/harness/issues/1483)) ([f7d5b18](https://github.com/jimmyandrade/harness/commit/f7d5b1816969f7c5c584e710a3659217879467ce))
+* **definir-hospedagem:** default the nightly ceiling from the history of the locality ([#1499](https://github.com/jimmyandrade/harness/issues/1499)) ([c81d370](https://github.com/jimmyandrade/harness/commit/c81d3703f80680dc2323924bc7ed009aa8257806))
+* **definir-hospedagem:** link each lodging with the date range filled ([#1500](https://github.com/jimmyandrade/harness/issues/1500)) ([e03c8e2](https://github.com/jimmyandrade/harness/commit/e03c8e2a0ca5e7bac317eec1a85af066cb99c4ff))
+* **definir-hospedagem:** quote the lodging before deciding the trip dates ([#1494](https://github.com/jimmyandrade/harness/issues/1494)) ([659688d](https://github.com/jimmyandrade/harness/commit/659688d9792f37ec044bf9a57ad642d280109896))
+* **definir-hospedagem:** read the travel policy through a link parameter ([#1495](https://github.com/jimmyandrade/harness/issues/1495)) ([1c561de](https://github.com/jimmyandrade/harness/commit/1c561de9dc81edad6d020988bcdc0c5884359d5f))
+* **definir-inscricao:** send the receipt and ask for the spot confirmation after paying the fee ([#1488](https://github.com/jimmyandrade/harness/issues/1488)) ([6f45e2c](https://github.com/jimmyandrade/harness/commit/6f45e2cd14511936a00551ea6c755983de18636a))
+* **definir-rotina:** slow the watch for a person's reply outside their working hours ([#1496](https://github.com/jimmyandrade/harness/issues/1496)) ([8aae8fd](https://github.com/jimmyandrade/harness/commit/8aae8fd8b5f918c44c98b799a73deda7b32031f8))
+* **definir-vocabulario:** split a before-and-after message into one pair per sentence ([#1476](https://github.com/jimmyandrade/harness/issues/1476)) ([f6a99b2](https://github.com/jimmyandrade/harness/commit/f6a99b23ff32921542d980fc1a0fbdab28a23a31))
+* **dividir-mensagem:** end the message with a short phrase that makes the person want to open ([#1477](https://github.com/jimmyandrade/harness/issues/1477)) ([0673a80](https://github.com/jimmyandrade/harness/commit/0673a80ddd4054bc0899c3c4087eb3235861dfc5))
+
+
+### Bug Fixes
+
+* **criar-oportunidade:** follow the signup after registering an announcement ([#1498](https://github.com/jimmyandrade/harness/issues/1498)) ([3b99154](https://github.com/jimmyandrade/harness/commit/3b99154043008a80a231f8df9811ebc7eb3c97dd))
+* **definir-hospedagem:** identify the lodging by its reservation before recording ([#1501](https://github.com/jimmyandrade/harness/issues/1501)) ([6602499](https://github.com/jimmyandrade/harness/commit/66024991e699030b617a71cca35455f751624909))
+* **definir-negociacao:** keep negotiation specs in the knowledge system ([#1485](https://github.com/jimmyandrade/harness/issues/1485)) ([48c584d](https://github.com/jimmyandrade/harness/commit/48c584db97fadbe94c000a28df7ee469f6a17cb1))
+* **lancar-despesa-da-empresa:** let a requested payment authorize downloading its receipt ([#1482](https://github.com/jimmyandrade/harness/issues/1482)) ([bc591de](https://github.com/jimmyandrade/harness/commit/bc591dea1bd8a6a364a6b89634cf7086bdb29cdf))
+* **procurar-agenda:** skip trip days when proposing free slots ([#1497](https://github.com/jimmyandrade/harness/issues/1497)) ([8ece335](https://github.com/jimmyandrade/harness/commit/8ece3355d55b933f28e454ba0dd5aba343dc77cc))
+
 ## [1.109.0](https://github.com/jimmyandrade/harness/compare/v1.108.0...v1.109.0) (2026-11-24)
 
 
