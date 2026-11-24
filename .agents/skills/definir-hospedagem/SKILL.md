@@ -3,7 +3,7 @@ name: definir-hospedagem
 description: Define a hospedagem de uma viagem, da cotação que decide a data até o que ela pede depois da reserva, como nome e documento dos hóspedes, veículo e chegada, e a resposta a quem hospeda, com o sim se leva dado pessoal. Usada quando o anfitrião ou o hotel escreve, ou a pessoa pede para agradecer ou avisar. Não serve para ler a reserva, registrar a viagem nem redigir no tom da marca.
 metadata:
   author: jimmyandrade
-  version: "0.20.0"
+  version: "0.21.0"
   aliases:
     - responder-pedido-da-hospedagem
   related:
@@ -147,7 +147,11 @@ Antes de buscar, leia no cadastro de cada pessoa que viaja as necessidades e as 
 O teto por noite é o que a pessoa disser. Sem ele, não pergunte: use o maior valor por noite das hospedagens anteriores da mesma localidade, lido nas propriedades de preço e de noites que o mapeamento de dados do projeto indica, e diga que o teto veio do histórico. Sem histórico da localidade ou sem essas propriedades no mapeamento, diga a limitação e pergunte o teto.
 Busque pelo endereço exato do compromisso, não pelo bairro: digite o endereço completo na busca da plataforma, centre o mapa nele e anote a distância de cada candidata até o local. A busca pelo nome do bairro ou por um retângulo do bairro no mapa não é a busca pelo endereço. Filtre a busca pelo que o cadastro e a pessoa pedem, como estacionamento, ar-condicionado e a cama preferida. Candidata sem a cama preferida não entra na tabela: a pessoa a recusa sem precisar dizer.
 
-Classifique cada candidata lendo primeiro as avaliações mais baixas, para ver o risco. Na plataforma que ordena as avaliações, ordene pelas mais baixas e leia as piores, em vez de ler as mais relevantes. Confira nas comodidades se o que é necessidade não aparece como indisponível. Avaliação que cita colchão manchado, sem lençol ou com plástico conta como incidente de colchão e descarta a candidata.
+Classifique cada candidata lendo primeiro as avaliações mais baixas, para ver o risco. Na plataforma que ordena as avaliações, ordene pelas mais baixas e leia as piores, em vez de ler as mais relevantes.
+
+Leia cada avaliação baixa inteira, abrindo o "Mostrar mais" e conferindo que o texto não foi cortado, porque a queixa costuma vir no fim, depois dos elogios. Uma avaliação de 4★ ou 3★ pode trazer o problema, como o acesso difícil por falta de biometria para hóspede, e vale tanto quanto uma de 1★. Nunca declare "sem queixa" por um trecho cortado.
+
+Confira nas comodidades se o que é necessidade não aparece como indisponível. Avaliação que cita colchão manchado, sem lençol ou com plástico conta como incidente de colchão e descarta a candidata.
 
 Com poucas avaliações a ordenação não abre: leia todas, diga que a evidência é pouca e não trate a nota máxima como segurança. Anfitrião com pouca história se verifica pelos outros anúncios e avaliações dele, para saber se o perfil é real. Descarte a que cair numa regra da política ou numa sensibilidade de quem viaja, lida no cadastro de cada pessoa, como o histórico de mofo ou o barulho extremo para quem não tolera barulho.
 
