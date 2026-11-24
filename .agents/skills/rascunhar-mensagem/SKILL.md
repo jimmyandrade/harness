@@ -3,7 +3,7 @@ name: rascunhar-mensagem
 description: Escreve, mostra e envia a mensagem de WhatsApp depois de a conversa ser lida, com o destino, o texto, a divisão e o comprovante conferidos. Usada quando a pessoa quer responder, mandar ou corrigir uma mensagem. NÃO serve para ler a conversa, redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.4.7"
+  version: "0.4.8"
   aliases:
     - entregar-rascunho-de-mensagem
     - rascunhar-mensagem-no-whatsapp
@@ -67,7 +67,7 @@ Uma empresa que a pessoa só conhece pelo site ou pela busca pode já estar salv
 
 Antes de rascunhar, leia a conversa de destino desde a última mensagem lida, como `conversar-no-whatsapp` manda, e confira cada pergunta do rascunho contra ela inteira, inclusive a mensagem citada. A pergunta já respondida sai, mesmo quando outra fonte mais antiga diverge: mostre a divergência à pessoa, não ao contato. Sai também a que o site ou o cadastro da empresa já responde, como o horário de funcionamento.
 
-Tire também o que já foi dito e diga antes o que o texto acrescenta. O dado que o contato ou a oportunidade já traz, como a chave de pagamento de antes, entra no texto para confirmar, e não como pergunta aberta. Se tudo já foi dito, diga isso e não rascunhe.
+Tire o que já foi dito e o que o contato confirmou, e diga antes o que o texto acrescenta. O dado que ele traz sem pergunta nossa e vai na mensagem, como a chave de pagamento, entra como confirmação, não como pergunta. Se tudo já foi dito, diga isso e não rascunhe.
 
 Leia cada resposta como resposta à pergunta como foi escrita. Uma pergunta sem dia, sem janela e sem condição, respondida com "pode" ou "sim", vale para tudo o que ela cobria. Não estreite a resposta com uma condição que a pergunta não tinha, e não repita a pergunta para pedir mais detalhe.
 
