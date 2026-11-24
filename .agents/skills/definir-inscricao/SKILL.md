@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet. A busca na lista de inscrições usa notion-ai-search no servidor notion.
 metadata:
   author: jimmyandrade
-  version: "0.20.1"
+  version: "0.20.2"
   aliases:
     - atualizar-inscricao
   related:
@@ -27,7 +27,8 @@ metadata:
 ## Parâmetros de configuração
 
 ```yaml
-{}
+# `Prazo curto para pagar` é o tempo que falta até o prazo máximo de pagamento, abaixo do qual o prazo conta como em cima da hora. Com o prazo curto, a mensagem à organização não pergunta de desconto nem de condição.
+"Prazo curto para pagar": "48 horas"
 ```
 
 ## Instruções
@@ -89,6 +90,8 @@ Procure em todas as fontes: propriedades, comentários datados, e-mail por `proc
 A vaga se confirma depois do pagamento. Antes dele, a mensagem à organização pede só o que falta para pagar, como o valor, a chave Pix e o titular. Depois de enviar o comprovante, ela pede que a organização confirme que a vaga está reservada. Perguntar da reserva antes de pagar não faz sentido.
 
 Para confirmar o valor, a mensagem pede que a organização o informe e não repete o valor que a marca calculou, porque o valor dela pode ser outro e a conta da marca soaria como uma exigência. A conta da marca fica para a pessoa conferir contra a resposta.
+
+Com o prazo de pagamento dentro de `Prazo curto para pagar`, a mensagem não pergunta de desconto nem de outra condição: o desconto que a organização já ofereceu por escrito vale como ela disse, e a mensagem pede só o que falta para pagar. Qualquer dúvida sobre o desconto fica para depois do pagamento, com o comprovante.
 
 Sem data nem regra confiável, sinalize isso antes de qualquer recomendação, sugira perguntar à organização e não considere a participação segura, salvo se já estiver confirmada e paga. Nunca invente a data. O pagamento vai por `lancar-despesa-da-empresa`. Toda pendência acionável vira tarefa por `definir-tarefa`.
 
@@ -186,21 +189,13 @@ Se você só comemorar porque a pessoa disse que a inscrição foi confirmada, o
 2. Uma inscrição casa: atualize essa e comemore. Mais de uma: pergunte qual.
 3. Não pare na comemoração.
 
-### Reserva perguntada antes do pagamento
+### Pedido à organização antes do pagamento
 
-Se você perguntar à organização se a vaga já está reservada antes de pagar, a pergunta não faz sentido, porque a vaga se reserva com o pagamento, e a organização estranha o pedido.
+Se você perguntar da reserva antes de pagar, escrever o valor da marca no pedido de confirmação ou perguntar do desconto com o prazo curto, a organização estranha o pedido, esconde o valor dela atrás de um sim ou gasta o tempo que falta.
 
-1. Antes do pagamento, peça só o que falta para pagar: o valor, a chave Pix e o titular.
-2. Pague, e a pessoa decide o pagamento.
-3. Envie o comprovante e peça que a organização confirme que a vaga está reservada.
-
-### Valor da marca repetido no pedido de confirmação
-
-Se você escrever na mensagem o valor que a marca calculou e pedir que a organização o confirme, ela responde sim ou não ao número da marca, e o valor real dela pode ficar escondido.
-
-1. Peça que a organização informe o valor, com o desconto combinado, sem escrever o número.
-2. Confira a resposta contra a conta da marca antes de pagar.
-3. Se os dois divergirem, mostre os dois à pessoa e não pague.
+1. Antes do pagamento, peça só o que falta para pagar, e que a organização informe o valor, sem escrever o número da marca.
+2. Dentro de `Prazo curto para pagar`, não toque no desconto.
+3. Confira a resposta contra a conta da marca: se divergirem, mostre os dois à pessoa e não pague. A reserva e a dúvida do desconto vão na mensagem do comprovante.
 
 ### Pedido da tiqueteira sem o e-mail
 
@@ -261,7 +256,7 @@ busquei a inscrição da Loja Exemplo como expositora no Festival Rota Sul 2026.
 - O print do pedido parece bastar para a inscrição. O e-mail da tiqueteira traz o número, o código e o remetente que o print não prova.
 - O telefone de quem vai ao palco parece o contato da inscrição. Na inscrição da empresa, o contato é o da empresa.
 - A tabela do que foi enviado, mostrada na resposta, parece bastar. Quem abre a inscrição depois não vê a conversa: as respostas enviadas vão para o corpo da inscrição.
-- Perguntar se a vaga está reservada parece prudência antes de pagar. A reserva vem do pagamento: a pergunta entra na mensagem que envia o comprovante.
+- Perguntar da reserva ou do desconto parece prudência antes de pagar. A reserva vem do pagamento, e com o prazo curto o desconto já oferecido por escrito vale como foi dito.
 - Uma restrição a uma pessoa parece mais segura quanto mais ampla. A política diz em que caso perguntar, e fora dele a pessoa aparece normalmente.
 - O campo opcional parece dispensável. Quem seleciona lê o formulário inteiro, e o campo vazio é uma chance perdida.
 - A data da confirmação só entra com a resposta da organização, dita pela pessoa ou lida nela, ou se `garantir-ingresso` viu o pedido confirmado na tela. O envio não conta.
