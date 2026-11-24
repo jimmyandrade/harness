@@ -3,7 +3,7 @@ name: definir-hospedagem
 description: Define a hospedagem de uma viagem, da cotação que decide a data até o que ela pede depois da reserva, como nome e documento dos hóspedes, veículo e chegada, e a resposta a quem hospeda, com o sim se leva dado pessoal. Usada quando o anfitrião ou o hotel escreve, ou a pessoa pede para agradecer ou avisar. Não serve para ler a reserva, registrar a viagem nem redigir no tom da marca.
 metadata:
   author: jimmyandrade
-  version: "0.10.0"
+  version: "0.18.0"
   aliases:
     - responder-pedido-da-hospedagem
   related:
@@ -25,6 +25,8 @@ metadata:
 # `Nome civil na resposta` é `não`, que manda só o nome completo do cadastro, ou `sim`, que acrescenta o nome civil de registro entre parênteses.
 "Nome civil na resposta": "não"
 "Modo de aprendizado": "perguntar"
+# `Política de viagem` é o link da página da política de viagem do negócio. Vazio, a habilidade não a lê.
+"Política de viagem": ""
 ```
 
 ## Instruções
@@ -138,10 +140,20 @@ Uma viagem pode ter várias hospedagens, cada uma com o seu registro. Viagem lon
 
 Antes de decidir a data de uma viagem, cote a hospedagem das datas candidatas: cada opção é uma hospedagem em cotação, ligada à viagem, e a data sai da comparação.
 
-As datas candidatas vêm das preferências de viagem: leia os dias para não viajar e os preferenciais da localidade, e os melhores dias de cada pessoa que viaja, nas propriedades que o mapeamento de dados do projeto indica. Data que cai num dia a evitar não é candidata. Sem essas propriedades no mapeamento, diga a limitação e pergunte à pessoa os dias.
+As datas candidatas vêm das preferências de viagem: leia os dias para não viajar e os preferenciais da localidade, e os melhores dias de cada pessoa que viaja, nas propriedades que o mapeamento de dados do projeto indica. Data que cai num dia a evitar não é candidata. Sem essas propriedades no mapeamento, diga a limitação e pergunte à pessoa os dias. Com `Política de viagem` preenchida, leia também a política e siga as regras gerais dela, como a antecedência e o dia da volta.
 
-Antes de sugerir onde ficar, leia a avaliação das hospedagens anteriores no mesmo lugar e com o mesmo anfitrião. A avaliada como evitar não é sugerida, e a avaliada como talvez vem com o motivo.
+Antes de buscar, leia no cadastro de cada pessoa que viaja as necessidades e as preferências, como cama de casal, ar-condicionado e sensibilidade a barulho, e pergunte uma vez só o que o cadastro não diz: se vão de carro próprio, e se a cama precisa ser de casal ou podem ser duas camas. De carro, a hospedagem precisa de estacionamento e o veículo entra na viagem.
+
+O teto por noite é o que a pessoa disser. Sem ele, não pergunte: use o maior valor por noite das hospedagens anteriores da mesma localidade, lido nas propriedades de preço e de noites que o mapeamento de dados do projeto indica, e diga que o teto veio do histórico. Sem histórico da localidade ou sem essas propriedades no mapeamento, diga a limitação e pergunte o teto.
+Busque pelo endereço exato do compromisso, não pelo bairro: digite o endereço completo na busca da plataforma, centre o mapa nele e anote a distância de cada candidata até o local. A busca pelo nome do bairro ou por um retângulo do bairro no mapa não é a busca pelo endereço. Filtre a busca pelo que o cadastro e a pessoa pedem, como estacionamento, ar-condicionado e a cama preferida. Candidata sem a cama preferida não entra na tabela: a pessoa a recusa sem precisar dizer.
+
+Classifique cada candidata lendo primeiro as avaliações mais baixas, para ver o risco. Na plataforma que ordena as avaliações, ordene pelas mais baixas e leia as piores, em vez de ler as mais relevantes. Confira nas comodidades se o que é necessidade não aparece como indisponível. Avaliação que cita colchão manchado, sem lençol ou com plástico conta como incidente de colchão e descarta a candidata.
+
+Com poucas avaliações a ordenação não abre: leia todas, diga que a evidência é pouca e não trate a nota máxima como segurança. Anfitrião com pouca história se verifica pelos outros anúncios e avaliações dele, para saber se o perfil é real. Descarte a que cair numa regra da política ou numa sensibilidade de quem viaja, lida no cadastro de cada pessoa, como o histórico de mofo ou o barulho extremo para quem não tolera barulho.
+
+Antes de sugerir onde ficar, leia a avaliação e o motivo de todas as hospedagens anteriores, de qualquer lugar, porque um incidente de uma cidade vale para as outras. A avaliada como evitar não é sugerida, e a avaliada como talvez vem com o motivo.
 A avaliação tem o motivo, o dia e quem avaliou, cada um na sua propriedade. Grave quando a pessoa a disser, com o nome de quem decidiu. A casa de um parente segue a mesma regra.
+Incidente que a pessoa conta, como mofo, colchão com plástico ou tratamento na portaria, é motivo da avaliação da hospedagem em que aconteceu: pergunte qual foi se não souber, e não o deixe só numa política, porque as avaliações são a fonte que guia a busca seguinte.
 Avaliação que a pessoa ainda não fez fica como pendência: não a preencha por ela.
 Estadia deixada antes do fim ou trocada por outra registra o check-out do dia em que a pessoa saiu, não o da reserva, e o motivo da troca vai no motivo da avaliação, com o que deu errado e o que foi resolvido.
 
@@ -245,6 +257,7 @@ Respondi pelo e-mail em que o pedido chegou. Mandei nomes e horário. Não mande
 - O cadastro tem o nome completo e o nome civil de registro. Quem tem nome social se cadastra e é tratada por ele, e tratá-la pelo nome civil a constrange. O nome civil só sai com `Nome civil na resposta` em `sim`, ou se a pessoa pedir.
 - Dado sensível não vira texto de memória, de nota nem de comentário na negociação. Ele fica no cadastro e na resposta enviada.
 - A hospedagem que pede os dados também libera o acesso com base neles: um erro no documento trava a entrada.
+- A busca por bairro parece bastar. O endereço exato do compromisso é o centro da busca, e a nota alta de uma candidata não mostra o risco que as avaliações baixas mostram.
 - A data da viagem parece vir antes da hospedagem. A cotação vem antes e decide a data.
 
 ## Scripts disponíveis
