@@ -3,7 +3,7 @@ name: investigar-problema
 description: Conduz a investigação de um problema, como um acesso bloqueado, um cadastro que falha em portal alheio ou um erro, com tarefa, fatos e hipóteses, e oferece artigo e post-mortem. Use sempre que alguém relatar um problema, como um preço errado, ou pedir "investigue isso" com um link, antes de ler. NÃO use para escrever o artigo, o post-mortem nem corrigir código.
 metadata:
   author: jimmyandrade
-  version: "0.4.1"
+  version: "0.4.2"
   related:
     - procurar-tarefa
     - definir-tarefa
@@ -66,6 +66,10 @@ Abra o link de validação, que pode cair na página inicial sem confirmar nada,
 Pare na senha. Quem a digita é a pessoa, ou o gerenciador de senhas a preenche. Você nunca a digita nem a grava, e ela não entra na tarefa, no dossiê nem na conversa.
 Procure uma investigação que outro agente ou ferramenta já fez sobre o mesmo problema, como a de um agente do sistema de monitoramento na thread do alerta ou numa mensagem logo abaixo, e leia a causa, as evidências e os próximos passos dela.
 A investigação paralela pode ainda estar rodando ou ter acabado depois do seu primeiro retorno. Releia a thread e o canal antes de encerrar.
+
+Quando o que falha é um ambiente compartilhado, como um preview, o cluster de desenvolvimento ou o executor de integração contínua, procure antes o aviso do time no canal do ambiente e as execuções de manutenção, como a de limpeza.
+O ambiente pode ter caído, e ser apagado e recriado, por um motivo que não vem da mudança que você testa.
+Enquanto não souber o estado dele, não peça mais carga a ele, como publicar mais aplicações.
 
 ### Passo 3
 
@@ -168,6 +172,14 @@ Se você concluir sem ler o que outro agente ou ferramenta já investigou, a res
 1. Procure na thread e no canal a investigação paralela.
 2. Cruze as conclusões e corrija a sua quando a outra viu algo que você perdeu.
 
+### Ambiente compartilhado diagnosticado sem o aviso do time
+
+Se você diagnosticar a falha de um preview ou de um cluster compartilhado só pelas respostas dele, a causa pode ser a queda do próprio ambiente, que o time já avisou no canal, e a conclusão e o próximo teste saem errados.
+
+1. Procure no canal do ambiente o aviso do time e as execuções de manutenção, como a de limpeza, antes de diagnosticar.
+2. Enquanto o estado do ambiente for desconhecido, não peça carga a ele, como publicar mais aplicações.
+3. Diga na conclusão o que o ambiente estava passando, com o link do aviso.
+
 ### Aprendizado perdido
 
 Se você encerrar sem perguntar pelos registros, a próxima pessoa com o mesmo problema começa do zero.
@@ -199,6 +211,7 @@ Não havia tarefa: criei e respondi a quem relatou com o link. O print mostrava 
 - "Investigue isso" com um link parece um pedido de leitura. O link é o relato do problema: a habilidade vem antes de abri-lo.
 - Perguntar a quem relatou parece o passo seguinte quando falta um dado. O horário do relato e o que a ferramenta registrou nele costumam bastar para achá-lo.
 - A reprodução num exemplo mínimo parece provar o caso real. Ela prova o mecanismo, e o ambiente real está nos registros das execuções: leia-os antes de listar o limite como "não provado".
+- Um erro de certificado ou de rota num preview parece falha da mudança testada. O ambiente compartilhado pode ter caído e estar sendo apagado, e o aviso do time está no canal.
 - Uma investigação curta parece não pedir registro. A pergunta pelos registros vale para toda investigação.
 
 ## Scripts disponíveis
