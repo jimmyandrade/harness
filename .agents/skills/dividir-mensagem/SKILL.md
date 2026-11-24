@@ -3,7 +3,7 @@ name: dividir-mensagem
 description: Decide como o rascunho de uma mensagem sai, em mensagens curtas por ideia, numa só ou em partes numeradas pelo limite de caracteres, e devolve as mensagens na ordem do envio com a contagem de cada uma. Usada quando um texto de WhatsApp vai ser mostrado ou enviado, ou quando passa do limite. Não serve para escrever o texto, enviar a mensagem nem decidir o tom.
 metadata:
   author: jimmyandrade
-  version: "0.1.2"
+  version: "0.2.0"
   related:
     - rascunhar-mensagem
     - comunicar-novidade-do-produto
@@ -24,8 +24,12 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Mensagem única para": []
 # `Comunicado numa mensagem só`: `sim` não divide o comunicado de produto por ideia, e ele vai numa mensagem dentro do `Limite de caracteres por mensagem`. `não` segue `Dividir em mensagens curtas`.
 "Comunicado numa mensagem só": "sim"
-# `Fechamento em mensagem separada`: `sim` manda a despedida numa mensagem própria, depois das outras. `não` deixa a despedida no fim da última mensagem.
+# `Fechamento em mensagem separada`: `sim` manda o fechamento numa mensagem própria, depois das outras. `não` deixa a despedida no fim da última mensagem. Com `Última mensagem que convida a abrir` em `sim`, o fechamento é a frase que convida a abrir, e a despedida vai no fim da mensagem anterior.
 "Fechamento em mensagem separada": "sim"
+# `Última mensagem que convida a abrir`: `sim` faz da última mensagem enviada uma frase curta que desperta na pessoa a vontade de abrir a conversa, porque a lista de conversas mostra só a última. `não` deixa a última mensagem como o rascunho a trouxe.
+"Última mensagem que convida a abrir": "sim"
+# `Limite de caracteres da última mensagem` é o tamanho máximo da frase que convida a abrir, para ela caber inteira na prévia da lista de conversas.
+"Limite de caracteres da última mensagem": 60
 # `Limite de caracteres por mensagem` é o tamanho acima do qual o canal corta a mensagem com "Ler mais" e quem lê perde o fim. Cada mensagem enviada cabe nele, e o padrão vale quando o projeto não muda o número. O limite vale para todo tipo de rascunho.
 "Limite de caracteres por mensagem": 600
 "Modo de aprendizado": "perguntar"
@@ -43,7 +47,12 @@ Um rascunho de um tipo listado em `Mensagem única para` não se divide por idei
 
 Com `Comunicado numa mensagem só` em `sim`, o comunicado de produto também não se divide por ideia, como `comunicar-novidade-do-produto` manda. Um pedido que acompanha o anúncio vai em outra mensagem, depois do comunicado.
 
-Com `Fechamento em mensagem separada` em `sim`, a despedida vai numa mensagem própria, a última.
+Com `Fechamento em mensagem separada` em `sim`, o fechamento vai numa mensagem própria, a última.
+
+Com `Última mensagem que convida a abrir` em `sim`, a última mensagem enviada é uma frase curta, até `Limite de caracteres da última mensagem`, que desperta na pessoa a vontade de abrir, porque a lista de conversas mostra só ela.
+A frase nasce do próprio texto, como a pergunta que a pessoa quer ver respondida ou o próximo passo que a espera, e não promete o que o texto não traz nem inventa urgência.
+
+A despedida, como um abraço ou um agradecimento, vai no fim da mensagem anterior, e a frase que convida a abrir não repete o que a mensagem anterior já disse. Um rascunho de uma mensagem só ganha essa frase como segunda mensagem. O limite do Passo 2 vale para a frase.
 
 ### Passo 2
 
@@ -81,6 +90,14 @@ Se você juntar um pedido de resposta com outro no mesmo parágrafo, a pessoa re
 2. Na lista numerada, abra com o contexto e dê um item por assunto.
 3. Em mensagens separadas, mande uma por assunto.
 
+### Última mensagem que só se despede
+
+Se você terminar com "um abraço" ou "obrigado" sozinho, a lista de conversas mostra a despedida e a pessoa não vê motivo para abrir.
+
+1. Ponha a despedida no fim da mensagem anterior.
+2. Termine com uma frase curta, dentro de `Limite de caracteres da última mensagem`, que desperte a vontade de abrir.
+3. Tire a frase do texto: a pergunta a responder ou o próximo passo, sem urgência inventada.
+
 ### Pedido junto do comunicado
 
 Se você puser o pedido na mesma mensagem do comunicado de produto, o comunicado perde a leitura limpa e o pedido passa despercebido.
@@ -94,11 +111,11 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### um aviso de pagamento, o comprovante e um pedido de confirmação, com despedida
 
-Dividi por ideia: o aviso numa mensagem, o pedido noutra e a despedida sozinha, a última. Todas cabiam no limite. Mostrei as quatro numeradas, com a contagem de cada uma.
+Dividi por ideia: o aviso numa mensagem e o pedido noutra, com a despedida no fim do pedido. Fechei com uma frase curta que convida a abrir, tirada do pedido ("Consegue confirmar hoje?"). Todas cabiam no limite. Mostrei as três numeradas, com a contagem de cada uma.
 
 ### um texto de 900 caracteres com saudação, três parágrafos e despedida
 
-Passava do limite. Cortei entre parágrafos em duas partes, deixei a saudação na primeira e a despedida à parte. Mostrei as três com a contagem, para o sim valer para as três.
+Passava do limite. Cortei entre parágrafos em duas partes, deixei a saudação na primeira e a despedida no fim da segunda. Acrescentei a frase curta que convida a abrir como terceira mensagem. Mostrei as três com a contagem, para o sim valer para as três.
 
 ## Casos-limite
 
@@ -106,12 +123,15 @@ Passava do limite. Cortei entre parágrafos em duas partes, deixei a saudação 
 - O rascunho é de um tipo em `Mensagem única para` e passa do limite: o limite vale, e ele vai em partes.
 - A lista numerada passa do limite: corte entre itens e mantenha o número de cada item.
 - Uma frase sozinha passa do limite: corte no fim de uma frase anterior, nunca no meio.
+- O texto não tem pergunta nem próximo passo para virar a frase que convida a abrir: use uma frase curta com o assunto da mensagem e não invente urgência. Se nada cabe sem prometer o que o texto não traz, deixe a última mensagem como o rascunho trouxe e diga isso à pessoa.
+- A frase que convida a abrir passa de `Limite de caracteres da última mensagem`: encurte, sem cortar no meio de uma palavra.
 
 ## Pegadinhas
 
 - "Uma mensagem só" parece pedir para ignorar o limite. O limite vale para todo rascunho, e o aviso vem uma vez, antes do sim.
 - O comunicado numa mensagem só parece isento do limite. Ele também vai em partes quando passa.
-- A despedida sozinha parece mensagem à toa. Com `Fechamento em mensagem separada` em `sim`, ela é a última mensagem.
+- A despedida sozinha parece o fechamento certo. Com `Última mensagem que convida a abrir` em `sim`, a despedida vai no fim da mensagem anterior, e o fechamento é a frase curta que desperta a vontade de abrir.
+- A frase que convida a abrir parece licença para chamar a atenção a qualquer custo. Ela nasce do texto e não inventa urgência nem promete o que ele não traz.
 
 ## Scripts disponíveis
 
