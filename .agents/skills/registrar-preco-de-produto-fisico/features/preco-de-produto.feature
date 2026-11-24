@@ -173,3 +173,11 @@ Funcionalidade: Preço de produto
       Quando ela escreve a justificativa
       Então ela não cita esse critério como usado
 
+  Regra: O preço que vai aos canais é o de etiqueta
+
+    Exemplo: Produto com preço à vista mais baixo
+      Dado que o registro tem o preço de etiqueta de R$ 299,90 a prazo
+      E que o preço à vista do mesmo produto é R$ 279,90
+      Quando a habilidade leva o preço novo aos canais
+      Então cada canal recebe R$ 299,90
+      E nenhum canal recebe R$ 279,90
