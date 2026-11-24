@@ -3,7 +3,7 @@ name: manter-contato-no-whatsapp
 description: Mantém o contato de uma conversa do WhatsApp Web em dia depois de ler ou enviar, com o link da página da pessoa na nota, o número salvo no padrão de nome e a lista de conferência da conversa. Usada pela sessão dona do WhatsApp Web depois de cada leitura ou envio, mesmo sem dizer contato. Não serve para abrir a aba, achar a conversa, redigir a mensagem nem rotular sozinha.
 metadata:
   author: jimmyandrade
-  version: "0.3.1"
+  version: "0.4.0"
   related:
     - conversar-no-whatsapp
     - definir-empresa
@@ -72,6 +72,8 @@ Diga o que mudou e o que falta.
 
 A leitura que outra sessão pediu, e a de um grupo, também fecha a lista: rotule toda conversa que abriu, com estado e contexto, e diga os rótulos que ficaram, sem esperar a pessoa cobrar.
 Grupo não tem nota de contato, então o que a nota guardaria vai para o registro no data source.
+
+O grupo em que a organização de uma participação nos coloca recebe a etiqueta dos grupos em triagem de `triar-conversas` e os rótulos de contexto, por `rotular-item`, assim que a pessoa avisa ou a lista o mostra, mesmo sem tarefa sobre ele. Sem essa etiqueta, a triagem não lê o grupo.
 
 ### Passo 6
 
@@ -145,6 +147,7 @@ Com `Salvar contato sem número salvo` em `sim`, salvei como "Caio (Casa Azul)",
 - A leitura de triagem parece só olhar, então deixar o número sem nome parece inofensivo. Abrir a conversa já pede o nome salvo.
 - Senha, código e documento de pessoa nunca entram na nota.
 - A nota tem um só campo: leia antes e acrescente, nunca substitua.
+- O grupo que a organização criou parece de leitura opcional. Sem a etiqueta de triagem ele fica fora da triagem, e a pessoa só o vê quando cobra.
 
 ## Scripts disponíveis
 
