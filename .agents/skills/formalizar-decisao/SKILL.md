@@ -3,7 +3,7 @@ name: formalizar-decisao
 description: Leva uma decisão de comportamento a quem decide, com a dúvida, a hipótese e o que já está definido, e formaliza a resposta na tarefa e no pull request, em qualquer canal e em qualquer momento, do refinamento ao desk check. Usada quando surge uma dúvida ou uma escolha de comportamento que não é sua, mesmo sem dizer decisão. Não serve para dúvida de código, status de entrega nem para escrever o texto da mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.6.0"
   aliases:
     - abrir-thread-de-decisao
   related:
@@ -27,6 +27,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Registro de decisão": ""
 # `Título da thread própria` descreve o título do post que abre a thread em ferramentas como o Slack. Vazio, o título leva a chave da tarefa, a pessoa e o assunto.
 "Título da thread própria": ""
+# `Fontes antes de perguntar` lista onde procurar a resposta antes de perguntar, como a ferramenta de desenho, os registros de reunião e de refinamento, os cards e a conversa. Vazio, procure em todas as fontes que o projeto tem.
+"Fontes antes de perguntar": ""
 ```
 ## Instruções
 
@@ -36,11 +38,16 @@ Reconheça a decisão: uma dúvida, uma hipótese ou uma escolha entre opções 
 
 ### Passo 2
 
-Monte o pedido: o que já está definido, a dúvida ou a hipótese, as opções e a sua recomendação quando houver, e a evidência de cada caso, como uma imagem ou um número. Faça uma pergunta só, no fim.
+Antes de perguntar, procure a resposta em `Fontes antes de perguntar`: os comentários, as páginas e os arquivos ligados do desenho, o que ele liga a tokens e a variáveis, a data da última mudança, os registros de refinamento e de reunião, o card com os comentários dele e a conversa.
+Uma fonte que responde, com data e autor, vira decisão já tomada: siga o Passo 7 e não pergunte.
+Uma fonte que responde só em parte reduz a pergunta ao que falta.
+Fontes que se contradizem entram no pedido como contradição, cada uma com o seu link.
+
+Monte o pedido: o que já está definido e onde você achou, o que foi procurado e não respondeu, a dúvida ou a hipótese, as opções e a sua recomendação quando houver, e a evidência de cada caso, como uma imagem ou um número. Faça uma pergunta só, no fim.
 
 ### Passo 3
 
-Leve o pedido a quem decide, no canal que o momento pede:
+Leve a quem decide só o que as fontes não responderam, no canal que o momento pede:
 
 - Reunião ou refinamento: pergunte ao vivo e registre o que foi decidido, como diz `definir-registro-de-reuniao`.
 - Depois do refinamento, na demonstração ou no desk check: leve a pergunta quando a dúvida aparece. Não espere o próximo refinamento.
@@ -87,6 +94,14 @@ Registre como no Passo 5, com o permalink de cada mensagem que a sustenta.
 O que ficou ambíguo entra como pendente.
 
 ## Problemas comuns
+
+### Pergunta que a fonte já respondia
+
+Se você perguntar a uma pessoa o que o desenho, o registro de refinamento, o card ou a conversa já diziam, ela responde de memória, perde tempo, e a resposta pode contradizer a fonte sem ninguém notar.
+
+1. Procure em `Fontes antes de perguntar` antes de montar o pedido.
+2. Achou a resposta, com data e autor: formalize pelo Passo 7 e não pergunte.
+3. Não achou, ou achou em parte: pergunte só o que falta e diga na pergunta o que foi procurado e onde.
 
 ### Decisão só na conversa
 
@@ -156,6 +171,12 @@ Mostrei o tema padrão, com a linha entre os dois, e o tema sazonal, sem ela, ca
 Não usei a thread de status da entrega.
 Depois da resposta da Ana, registro a decisão na área de decisões da tarefa e do pull request, com o que foi decidido, quem decidiu, quando, onde e o link da thread, e atualizo o critério da tarefa e a descrição do pull request.
 
+### o desenho do cartão é a versão final? pergunte à Ana
+
+Antes de escrever para a Ana, procurei no arquivo do desenho: os comentários da página, as páginas vizinhas, o que o cartão liga a tokens e a data da última mudança. Procurei também nos registros de refinamento e nos comentários do card.
+O desenho trazia uma nota dela datada e nenhum comentário depois. O registro de refinamento deixava a mesma dúvida em aberto.
+Perguntei só o que as fontes não respondiam: "A nota de 12/03 é a versão final?", com o que procurei e onde, os links e uma pergunta no fim.
+
 ## Casos-limite
 
 - A decisão sai numa reunião: formalize pela ata e pela tarefa, sem abrir thread.
@@ -168,6 +189,8 @@ Depois da resposta da Ana, registro a decisão na área de decisões da tarefa e
 - A decisão aparece num artigo ou numa página de documentação: registre-a do mesmo jeito, no `Registro de decisão`, com os mesmos campos.
 - A tarefa ainda não existe: siga `preparar-tarefa-do-pull-request` antes de formalizar.
 - A dúvida é de código: ela vai para o pull request, não para esta habilidade.
+- A fonte que responde é mais antiga que uma mudança posterior no mesmo assunto: não a use como decisão. Leve a data das duas à pessoa.
+- A ferramenta de desenho não mostra o histórico de versões: diga que não foi possível ler, com o que o arquivo mostra no lugar, e não conclua que o desenho é final.
 
 ## Pegadinhas
 
@@ -176,6 +199,8 @@ Depois da resposta da Ana, registro a decisão na área de decisões da tarefa e
 - A resposta na conversa parece registrar a decisão. O registro é a área de decisões da tarefa e do pull request.
 - A decisão tomada no desk check parece pequena demais para formalizar. Ela muda o critério e a evidência do mesmo jeito.
 - Um post novo parece barulho no canal. Uma thread por assunto mantém cada decisão achável.
+- Perguntar parece mais seguro que procurar. A pessoa responde de memória, e a fonte já tinha a resposta com data e autor.
+- A ausência de comentário depois da nota parece prova de versão final. Ela só mostra que ninguém comentou, e a pergunta continua valendo, dita com o que foi procurado.
 
 ## Scripts disponíveis
 
