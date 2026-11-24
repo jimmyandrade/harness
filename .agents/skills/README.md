@@ -94,6 +94,7 @@ flowchart LR
     definir_obrigacao_financeira["definir-obrigacao-financeira"]
     definir_okr["definir-okr"]
     definir_orcamento_de_fornecedor["definir-orcamento-de-fornecedor"]
+    definir_pagamento_da_inscricao["definir-pagamento-da-inscricao"]
     definir_perfil_social["definir-perfil-social"]
     definir_pessoa["definir-pessoa"]
     definir_planejamento_financeiro["definir-planejamento-financeiro"]
@@ -560,6 +561,7 @@ flowchart LR
   definir_inscricao --> anexar_arquivo_no_notion
   definir_inscricao --> definir_grafia
   definir_inscricao --> definir_negociacao
+  definir_inscricao --> definir_pagamento_da_inscricao
   definir_inscricao --> definir_tarefa
   definir_inscricao --> garantir_ingresso
   definir_inscricao --> inscrever_na_oportunidade
@@ -626,6 +628,11 @@ flowchart LR
   definir_orcamento_de_fornecedor --> reconhecer_imagem
   definir_orcamento_de_fornecedor --> redigir_com_tom_de_voz
   definir_orcamento_de_fornecedor --> usar_whatsapp_web
+  definir_pagamento_da_inscricao --> definir_inscricao
+  definir_pagamento_da_inscricao --> definir_negociacao
+  definir_pagamento_da_inscricao --> definir_tarefa
+  definir_pagamento_da_inscricao --> lancar_despesa_da_empresa
+  definir_pagamento_da_inscricao --> procurar_email
   definir_perfil_social --> analisar_perfil_social
   definir_perfil_social --> definir_grafia
   definir_perfil_social --> definir_pessoa
