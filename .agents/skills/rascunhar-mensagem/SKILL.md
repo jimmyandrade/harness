@@ -3,7 +3,7 @@ name: rascunhar-mensagem
 description: Escreve, mostra e envia a mensagem de WhatsApp depois de a conversa ser lida, com o destino, o texto, a divisão e o comprovante conferidos. Usada quando a pessoa quer responder, mandar ou corrigir uma mensagem. NÃO serve para ler a conversa, redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.4.6"
+  version: "0.4.7"
   aliases:
     - entregar-rascunho-de-mensagem
     - rascunhar-mensagem-no-whatsapp
@@ -71,19 +71,21 @@ Tire também o que já foi dito e diga antes o que o texto acrescenta. O dado qu
 
 Leia cada resposta como resposta à pergunta como foi escrita. Uma pergunta sem dia, sem janela e sem condição, respondida com "pode" ou "sim", vale para tudo o que ela cobria. Não estreite a resposta com uma condição que a pergunta não tinha, e não repita a pergunta para pedir mais detalhe.
 
-Antes de qualquer rascunho, diga à pessoa o que o contato respondeu, com as palavras dele e o horário, para ela não ter de abrir a conversa.
+Antes de qualquer rascunho, diga o que o contato respondeu, com as palavras dele e o horário.
 
-Com a mesma pessoa ou empresa pode haver mais de um pedido aberto, como duas coisas a imprimir em materiais diferentes. Antes de rascunhar, liste os pedidos abertos com ela. A mensagem diz de qual pedido trata, pelo material e pelo uso. Com mais de um, numere cada um, com o material e o que precisa agora, como o prazo. Resposta que não diz a qual pedido responde: confirme de qual ele falava, antes de seguir.
+A mesma pessoa ou empresa pode ter mais de um pedido aberto, como duas impressões em materiais diferentes. Antes de rascunhar, liste os pedidos abertos com ela. A mensagem diz de qual pedido trata, pelo material e pelo uso. Com mais de um, numere cada um, com o material e o que precisa agora, como o prazo. Resposta que não diz a qual pedido responde: confirme de qual ele falava, antes de seguir.
 
 Confira no manual da oportunidade cada exigência do organizador, como a janela de montagem, e use a que ele dá.
 
 A resposta que confirma interesse diz de qual oferta fala, pela organização e pelo formato. Duas ofertas parecidas, no mesmo lugar ou perto das mesmas datas, não entram na mesma frase.
 
+Ao confirmar mobiliário, estrutura ou equipamento, diga quem fornece e quem leva cada item, sem lista única. O que a conversa não diz vira pergunta.
+
 Antes de rascunhar uma mensagem que propõe, aceita ou combina data, hora, lugar, retirada, coleta, entrega, encontro ou prazo, confira a agenda, seguindo `procurar-agenda`, e a viagem ativa ou a próxima, seguindo `definir-viagem`: saída, chegada, a cidade de cada dia e os compromissos que batem.
 
 Se a proposta conflita, como uma retirada numa cidade de onde a pessoa já saiu naquele horário, diga o conflito antes do texto e ofereça o que cabe: outro dia ou horário, outra pessoa ou o correio. Sem acesso à agenda ou à viagem, pare e peça o dado.
 
-Quando o mesmo texto vai para vários destinos, como uma resposta a cada empresa de uma lista, leia a conversa de cada destino antes de montar o texto. Quem já recusou, como uma empresa que disse que não faz o serviço, ganha um rascunho à parte, um agradecimento curto que não repete a recusa que nós iríamos dar, e fica de fora do texto comum. Mostre os dois rascunhos juntos, para a pessoa aprovar cada um.
+Quando o mesmo texto vai para vários destinos, como uma resposta a cada empresa de uma lista, leia a conversa de cada destino antes de montar o texto. Quem já recusou, como a empresa que não faz o serviço, ganha à parte um agradecimento curto, que não repete a nossa recusa, e fica fora do texto comum. Mostre os dois rascunhos juntos, para a pessoa aprovar cada um.
 
 Antes de mostrar o rascunho, valide o texto inteiro contra o vocabulário, seguindo `redigir-com-tom-de-voz`: rode a classificação do texto com as tags de quem escreve e do canal, e leia `words` e `expressions`, porque uma expressão de mais de uma palavra vem em `expressions`. Palavra proibida ou muito desaconselhada, como a que marca gênero ou o plural de tratamento, sai do texto e entra a alternativa do vocabulário. Cada correção de um rascunho já mostrado passa pela mesma validação antes de voltar à pessoa.
 
@@ -93,7 +95,7 @@ Palavra de tempo relativo no rascunho, como "ontem", "hoje" e "agora há pouco",
 
 Com `Página de instruções do WhatsApp` preenchida, leia a página antes de rascunhar e siga a conta e as regras dela. Se ela não abrir na conexão, pare e peça.
 
-Numa conversa que não está fluindo, veja também o e-mail com o mesmo contato desde a última mensagem e alinhe os pedidos com ele.
+Numa conversa parada, veja o e-mail com o mesmo contato desde a última mensagem e alinhe os pedidos.
 
 ### Passo 3
 
