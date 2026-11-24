@@ -3,7 +3,7 @@ name: formalizar-decisao
 description: Leva uma decisão de comportamento a quem decide, com a dúvida, a hipótese e o que já está definido, e formaliza a resposta na tarefa e no pull request, em qualquer canal e em qualquer momento, do refinamento ao desk check. Usada quando surge uma dúvida ou uma escolha de comportamento que não é sua, mesmo sem dizer decisão. Não serve para dúvida de código, status de entrega nem para escrever o texto da mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.6.1"
   aliases:
     - abrir-thread-de-decisao
   related:
@@ -75,6 +75,11 @@ Quando outra pessoa concorda, a entrada diz quem decidiu e quem concordou, e cad
 6. Atualize o teste, a story e a evidência que a decisão muda.
 7. Diga a quem participou onde a decisão ficou registrada.
 
+Antes de dizer quem respondeu, concordou ou reagiu, leia quem foi.
+A leitura da thread mostra de uma reação só o emoji e a contagem: peça à ferramenta a lista de quem reagiu.
+Sem essa lista, diga que não sabe quem foi.
+Nunca atribua uma reação, nem uma resposta, a quem você esperava que a desse: a pessoa pode ir perguntar a ela.
+
 Se a resposta não deixa claro qual das opções foi escolhida, ela não é uma decisão tomada.
 Pergunte de novo e deixe a decisão pendente.
 Quando a decisão substitui outra, registre a nova, diga qual ela substitui e marque a antiga como substituída, sem apagá-la.
@@ -135,6 +140,14 @@ Se você registrar como decidido o que a pessoa respondeu de um jeito que cabe e
 2. Deixe a decisão pendente até a resposta.
 3. Registre só a opção confirmada.
 
+### Reação atribuída a quem não reagiu
+
+Se você disser que uma pessoa reagiu ou concordou sem ler a lista de quem reagiu, a atribuição pode estar errada, e a pessoa que pediu a consulta vai confirmar com quem não fez nada.
+
+1. Leia a lista de quem reagiu antes de citar um nome.
+2. Sem a lista, diga que não sabe quem foi.
+3. Reação sozinha é sinal fraco, e só conta como resposta de quem decide a uma pergunta de sim ou não.
+
 ### Consulta no canal interno
 
 Se você abrir a thread num canal interno do time, a pessoa de negócio pode nem estar nele, e a consulta precisa ser refeita.
@@ -190,11 +203,13 @@ Perguntei só o que as fontes não respondiam: "A nota de 12/03 é a versão fin
 - A tarefa ainda não existe: siga `preparar-tarefa-do-pull-request` antes de formalizar.
 - A dúvida é de código: ela vai para o pull request, não para esta habilidade.
 - A fonte que responde é mais antiga que uma mudança posterior no mesmo assunto: não a use como decisão. Leve a data das duas à pessoa.
+- A thread mostra uma reação e a ferramenta não lista quem reagiu: diga que não sabe quem foi e não a atribua a ninguém.
 - A ferramenta de desenho não mostra o histórico de versões: diga que não foi possível ler, com o que o arquivo mostra no lugar, e não conclua que o desenho é final.
 
 ## Pegadinhas
 
 - Uma thread geral de status parece o lugar mais rápido para perguntar. A decisão se perde nela.
+- Um joinha numa thread parece vir de quem foi consultado. A leitura da thread não diz quem reagiu: leia a lista antes de citar um nome.
 - O Slack parece a única ferramenta. O negócio pode conversar também em outra, com ou sem thread.
 - A resposta na conversa parece registrar a decisão. O registro é a área de decisões da tarefa e do pull request.
 - A decisão tomada no desk check parece pequena demais para formalizar. Ela muda o critério e a evidência do mesmo jeito.
