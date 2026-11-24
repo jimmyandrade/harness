@@ -12,6 +12,7 @@ metadata:
     - evoluir-habilidade
     - perfilar-tom-de-voz
     - rotular-item
+    - triar-conversas
     - usar-whatsapp-web
 ---
 
