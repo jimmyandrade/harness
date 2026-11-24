@@ -3,7 +3,7 @@ name: inscrever-na-oportunidade
 description: Preenche o cadastro ou o formulário que a organização de uma oportunidade pede para a inscrição, com os dados da empresa, no formato de cada campo, e envia só com o sim da pessoa. Usada quando a inscrição ou o cadastro de uma oportunidade está para ser feito. NÃO serve para registrar a inscrição no Notion, ler o regulamento, escrever à organização, salvo a resposta que confirma o envio, nem escrever o projeto que a inscrição pede.
 metadata:
   author: jimmyandrade
-  version: "0.5.3"
+  version: "0.5.4"
   related:
     - acompanhar-retornos-pendentes
     - analisar-regulamento-da-oportunidade
@@ -75,6 +75,7 @@ O CNPJ é da empresa, não da pessoa: leia-o no cadastro da empresa e digite voc
 
 Preencha numa aba da sessão. Se a pessoa arrastar a aba dela para o grupo e o contexto de abas disser que o grupo não existe, peça o contexto criando o grupo antes de dar a aba por perdida: ela pode aparecer nele.
 O Google Formulários guarda o rascunho na conta: reabrir o link antes do envio mostra o que já foi preenchido, inclusive o que a pessoa digitou. Depois do envio, o mesmo link abre um formulário em branco.
+Campo que pede fotos ou outro arquivo da marca: a pessoa escolhe e sobe na aba. Prepare o resto, diga que falta o arquivo e, depois que ela avisar, leia o rascunho do formulário e confira tudo antes do envio.
 Leia a dica e a mensagem de erro de cada campo e escreva no formato que ele valida, como um telefone só com os dígitos e o DDD, sem o código do país nem pontuação.
 Confira cada campo depois de preencher e não avance com erro na tela.
 O campo que pede os produtos da marca recebe a lista dos produtos específicos ou, no mínimo, das famílias de produtos que a marca leva, lida do catálogo de produtos do negócio, nas peças ativas e só nas da própria marca. Descrever a marca ou a empresa não responde o campo. A organização pode pedir a retirada do que não está listado, então a lista cobre tudo o que vai à feira.
