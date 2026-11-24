@@ -3,7 +3,7 @@ name: consultar-vocabulario
 description: Use essa habilidade sempre que, antes de escrever ou conferir um texto da marca, for preciso ler o vocabulário do tom de voz, por palavra e por expressão inteira, com as tags de quem fala, do evento e do canal, mesmo sem dizer glossário. NÃO use para cadastrar ou corrigir termo, escrever o texto, nem decidir o nível de um termo.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   related:
     - redigir-com-tom-de-voz
     - definir-vocabulario
@@ -63,6 +63,14 @@ Se você ler só o nível do termo e ignorar o `when`, um termo que vale em um c
 
 1. Leia a linha inteira de cada termo permitido com ressalva.
 2. Aplique o `when` ao canal e ao destino do texto, inclusive a pontuação e o fim da última frase.
+
+### Consulta recusada por ordem do glossário
+
+Se você seguir sem validar quando a ferramenta recusa a consulta com o erro de que um termo está fora da ordem alfabética, o texto sai sem a checagem, e dava para consertar.
+
+1. O erro cita um termo do arquivo do idioma que alguém acrescentou fora de lugar. Corrija: reordene as linhas, sem mudar o conteúdo, pelo critério do arquivo, que ignora acento e maiúsculas, e confira que uma linha só mudou de lugar.
+2. Rode a consulta de novo. Se o arquivo tem alterações sem commit de outra sessão, a reordenação não as altera, e a resposta diz o que foi movido.
+3. Só diga que não validou se a ferramenta continuar falhando por outro motivo, e diga qual.
 
 ### Vocabulário de outro negócio
 
