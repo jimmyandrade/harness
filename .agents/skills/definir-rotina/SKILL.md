@@ -3,7 +3,7 @@ name: definir-rotina
 description: Cria, revisa e audita rotinas agendadas ou por evento, para rodarem só quando o resultado tem uso. Usada ao pedir, mudar ou auditar uma rotina, ou antes de pedir de novo um resultado que uma rotina já gerou, mesmo sem dizer rotina. Não serve para executar o trabalho da rotina, criar evento na agenda nem medir uma skill.
 metadata:
   author: jimmyandrade
-  version: "0.7.1"
+  version: "0.8.0"
   related:
     - acompanhar-fila-de-revisao
     - acompanhar-resposta-no-whatsapp
@@ -52,6 +52,8 @@ Leia as datas das últimas atualizações, como o `Last-Modified`, as datas do f
 O dado quente muda em minutos ou horas, o morno muda por dia, e o frio muda por semana ou mais.
 A rotina não roda com mais frequência que a fonte muda, e a resposta mostra a temperatura e as datas usadas.
 Sem datas, comece pela menor frequência que atende quem usa o resultado e meça de novo depois de algumas execuções.
+
+Quando a fonte é a resposta de uma pessoa, a temperatura segue o horário dela: no horário de trabalho dela, a vigia roda a cada meia hora, e fora dele, de hora em hora, porque ela raramente responde de madrugada. A resposta diz os dois horários e a pessoa decide se muda.
 
 ### Passo 3
 
@@ -141,7 +143,8 @@ Três rotinas liam a mesma caixa de e-mail, e uma rodava de madrugada para avisa
 
 ## Casos-limite
 
-- O resultado precisa ser fresco, como um alerta de queda do site: a rotina roda fora do horário de trabalho, e a resposta diz por quê.
+- O resultado precisa ser fresco, como um alerta de queda do site, que nenhuma pessoa tem de escrever: a rotina roda fora do horário de trabalho, e a resposta diz por quê.
+- A vigia espera a resposta de uma pessoa e o prazo vence antes do próximo horário de trabalho dela: a frequência baixa fora do horário de trabalho, e o prazo vira aviso na resposta, e não motivo para vigiar de 5 em 5 minutos.
 - A pessoa pede para apagar: confirme se pausar não basta antes de apagar.
 - A ferramenta não oferece gatilho: use a menor frequência que atende quem usa o resultado.
 
