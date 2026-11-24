@@ -1325,6 +1325,21 @@ How these skills relate is in `README.md`, in this folder.
   - [x] A group price lists the stock of the place and waits for confirmation
   - [x] An empty destination parameter makes the skill ask and not choose
 
+### definir-referencia-cultural
+- **Stability**: experimental
+- **Description**: Search for and record a source about a cultural reference in the project's reference base, with source level, credit, and open, restricted, or sacred use
+- **Properties**:
+  - Lives at `.agents/skills/definir-referencia-cultural/SKILL.md`
+  - Looks in the reference base before searching the web and reuses a source that already exists, even under another title or spelling
+  - Records every source found, including the discarded ones, with the reason, the consult date, what the source says, and what it does not bring
+  - Ranks each source by level, and keeps an AI summary and an unsigned list of names as a lead only
+  - Marks the use of a symbol or name as open, restricted, sacred, or unchecked, and says the community must be consulted before commercial use when it is not open
+  - Never creates schema and never writes a value without a property into the page body: it lists the missing property at the end and suggests creating it
+  - Leaves the check of a word's meaning to conferir-termo-de-lingua-indigena
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses checking the meaning, choosing the name, creating the art, and registering the collection
+
 ### definir-recurso-de-aprendizado
 - **Stability**: experimental
 - **Description**: Keep a class in the list of learning resources and on Google Calendar, linked to the opportunity
