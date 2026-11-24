@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, e lê o pedido, quem pediu, a data, o que o contato afirmou e o que falta. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp ou conferir o que alguém pediu. Não serve para escrever ou enviar a mensagem, redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.44.3"
+  version: "0.44.4"
   aliases:
     - redigir-mensagem-de-whatsapp
   related:
@@ -20,6 +20,7 @@ metadata:
     - definir-tarefa
     - definir-viagem
     - definir-vocabulario
+    - diagnosticar-funil
     - dividir-mensagem
     - enviar-email
     - escrever-link
@@ -94,7 +95,11 @@ Quando o contato pergunta como foi uma participação, como a experiência numa 
 
 Antes de repassar o resumo de outra sessão ou de um subagente, compare cada "não confirmado" e "não achei" com a mensagem que ele citou. Se a mensagem afirma o fato, corrija o resumo antes de mostrá-lo à pessoa.
 
-Quando o contato descreve a marca de um jeito que o `Posicionamento da marca` não confirma, como o tipo de negócio, o resumo traz isso como ponto de ação, antes de qualquer outro. A resposta corrige o que a marca é, com as palavras do posicionamento, e pergunta se isso faz sentido para a curadoria dele. Sem `Posicionamento da marca`, pergunte uma vez onde está e não escreva a correção de memória.
+Quando o contato descreve a marca de um jeito que o `Posicionamento da marca` não confirma, como o tipo de negócio, o resumo traz isso como ponto de ação, antes de qualquer outro. A resposta diz o que a marca é, com as palavras do posicionamento, sem negar o negócio do contato, porque ele pode ter justamente esse negócio.
+
+A etapa da oportunidade decide o resto. Quando a marca abordou e o contato ainda não convidou, a resposta pergunta se isso faz sentido para a curadoria dele. Quando o contato já convidou ou já cobra o pagamento, a oportunidade passou dessa etapa: a resposta não pergunta pelo encaixe, posiciona e avança a reserva. Na dúvida sobre a etapa, siga `diagnosticar-funil`.
+
+Sem `Posicionamento da marca`, pergunte uma vez onde está e não escreva a correção de memória.
 
 Cada mensagem tem um remetente: o nome ou o número que o canal mostra naquela mensagem. Não atribua a mensagem a quem assinou outra, nem a quem o grupo cita. Número sem nome fica como número até a pessoa confirmar quem é.
 
@@ -193,7 +198,8 @@ Se você resumir o elogio do contato sem notar que ele descreve a marca como out
 
 1. Compare a descrição dele com o `Posicionamento da marca`.
 2. Ponha a correção entre os pontos de ação, antes de qualquer outro.
-3. A resposta diz o que a marca é e pergunta se faz sentido para a curadoria dele.
+3. A resposta diz o que a marca é, sem negar o negócio do contato.
+4. Só pergunte se faz sentido para a curadoria dele quando ele ainda não convidou a marca.
 
 ### Oferta lida sem pontos de ação
 
@@ -218,9 +224,9 @@ Disse que a organização confirmou a feira para sexta, sábado e domingo, com a
 
 Resumi o que ela afirmou e o que falta. Fechei com os pontos de ação, sem gravar nada: lançar R$ 250 como despesa da empresa quando a pessoa mandar pagar, pôr os dois pagamentos no cronograma e na agenda, cadastrar montagem e feira, e perguntar a desmontagem e pedir o contrato na resposta.
 
-### a organizadora elogiou "seu brechó" e a marca produz as próprias peças
+### a organizadora que já convidou e cobra o sinal elogiou "seu brechó" e a marca produz as próprias peças
 
-Pus a correção como primeiro ponto de ação: a marca não é um brechó, é uma marca de moda autoral que produz as próprias peças, nas palavras do posicionamento. A resposta propõe perguntar se isso faz sentido para a curadoria dela, antes de falar de valores e prazos.
+Pus a correção como primeiro ponto de ação: a marca não é um brechó, é uma marca de moda autoral que produz as próprias peças, nas palavras do posicionamento. Como ela já tinha convidado e cobrava o sinal, a resposta não negou o brechó dela nem perguntou pelo encaixe na curadoria: disse o que a marca é e avançou a reserva, com contrato, desmontagem e dados de público.
 
 ## Casos-limite
 
@@ -230,6 +236,7 @@ Pus a correção como primeiro ponto de ação: a marca não é um brechó, é u
 
 ## Pegadinhas
 
+- A pergunta se a marca faz sentido para a curadoria parece cortesia. Com o convite feito e o pagamento em pauta, ela volta a uma etapa que já passou e põe em dúvida o que o contato decidiu.
 - Um elogio do contato parece só simpatia. Se ele descreve a marca como outro tipo de negócio, responder só "obrigada" o confirma.
 
 - Uma mensagem num grupo parece ser da pessoa que costuma falar pela organização. O remetente é o que o canal mostra naquela mensagem: confira o nome ou o número antes de atribuí-la.
