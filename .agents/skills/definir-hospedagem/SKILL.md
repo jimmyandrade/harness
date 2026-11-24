@@ -3,7 +3,7 @@ name: definir-hospedagem
 description: Define a hospedagem de uma viagem, da cotação que decide a data até o que ela pede depois da reserva, como nome e documento dos hóspedes, veículo e chegada, e a resposta a quem hospeda, com o sim se leva dado pessoal. Usada quando o anfitrião ou o hotel escreve, ou a pessoa pede para agradecer ou avisar. Não serve para ler a reserva, registrar a viagem nem redigir no tom da marca.
 metadata:
   author: jimmyandrade
-  version: "0.18.0"
+  version: "0.19.0"
   aliases:
     - responder-pedido-da-hospedagem
   related:
@@ -150,6 +150,8 @@ Busque pelo endereço exato do compromisso, não pelo bairro: digite o endereço
 Classifique cada candidata lendo primeiro as avaliações mais baixas, para ver o risco. Na plataforma que ordena as avaliações, ordene pelas mais baixas e leia as piores, em vez de ler as mais relevantes. Confira nas comodidades se o que é necessidade não aparece como indisponível. Avaliação que cita colchão manchado, sem lençol ou com plástico conta como incidente de colchão e descarta a candidata.
 
 Com poucas avaliações a ordenação não abre: leia todas, diga que a evidência é pouca e não trate a nota máxima como segurança. Anfitrião com pouca história se verifica pelos outros anúncios e avaliações dele, para saber se o perfil é real. Descarte a que cair numa regra da política ou numa sensibilidade de quem viaja, lida no cadastro de cada pessoa, como o histórico de mofo ou o barulho extremo para quem não tolera barulho.
+
+Todo link de hospedagem que você mostrar leva as datas da viagem e o número de hóspedes já preenchidos, como `?check_in=AAAA-MM-DD&check_out=AAAA-MM-DD&adults=N` no Airbnb, para a pessoa abrir o preço e a disponibilidade do período. Sem o formato da plataforma, mostre o link simples e diga que as datas não vêm preenchidas.
 
 Antes de sugerir onde ficar, leia a avaliação e o motivo de todas as hospedagens anteriores, de qualquer lugar, porque um incidente de uma cidade vale para as outras. A avaliada como evitar não é sugerida, e a avaliada como talvez vem com o motivo.
 A avaliação tem o motivo, o dia e quem avaliou, cada um na sua propriedade. Grave quando a pessoa a disser, com o nome de quem decidiu. A casa de um parente segue a mesma regra.
