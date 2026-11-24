@@ -405,6 +405,7 @@ flowchart LR
   criar_oportunidade --> definir_local_fisico
   criar_oportunidade --> definir_localidade_geografica
   criar_oportunidade --> enviar_email
+  criar_oportunidade --> inscrever_na_oportunidade
   criar_oportunidade --> organizar_emails
   criar_oportunidade --> procurar_inscricao
   criar_oportunidade --> procurar_oportunidade
