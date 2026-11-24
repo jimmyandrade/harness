@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet. A busca na lista de inscrições usa notion-ai-search no servidor notion.
 metadata:
   author: jimmyandrade
-  version: "0.19.0"
+  version: "0.20.0"
   aliases:
     - atualizar-inscricao
   related:
@@ -87,6 +87,8 @@ Prazos. Ao tratar participação, reserva de vaga, taxa, sinal, boleto ou lista 
 Procure em todas as fontes: propriedades, comentários datados, e-mail por `procurar-email`, canal já registrado, edital, regulamento, formulário, site e PDF. Uma regra relativa, como "até 2 dias após a confirmação", não responde o prazo de confirmação.
 
 Sem data nem regra confiável, sinalize isso antes de qualquer recomendação, sugira perguntar à organização e não considere a participação segura, salvo se já estiver confirmada e paga. Nunca invente a data. O pagamento vai por `lancar-despesa-da-empresa`. Toda pendência acionável vira tarefa por `definir-tarefa`.
+
+Com a taxa paga, mande o comprovante à organização e peça a confirmação do recebimento e da vaga, sem esperar a pessoa lembrar. O comprovante já está no Notion antes de sair. As outras perguntas pendentes da participação só vão depois dessa confirmação.
 
 ### Passo 6
 
@@ -243,6 +245,7 @@ busquei a inscrição da Loja Exemplo como expositora no Festival Rota Sul 2026.
 - O campo opcional parece dispensável. Quem seleciona lê o formulário inteiro, e o campo vazio é uma chance perdida.
 - A data da confirmação só entra com a resposta da organização, dita pela pessoa ou lida nela, ou se `garantir-ingresso` viu o pedido confirmado na tela. O envio não conta.
 - A criação da página parece aceitar o arquivo enviado nos comprovantes. Ela recusa: o arquivo entra na atualização seguinte.
+- A taxa paga parece fechar o assunto. O comprovante ainda precisa chegar à organização, com o pedido de confirmar o recebimento e a vaga.
 
 ## Scripts disponíveis
 
