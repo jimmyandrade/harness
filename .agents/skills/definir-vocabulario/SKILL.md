@@ -3,7 +3,7 @@ name: definir-vocabulario
 description: Use essa habilidade sempre que for cadastrar ou atualizar um ou mais termos do vocabulário do tom de voz, mesmo sem dizer glossário, lote ou estado. NÃO use para escrever, revisar ou aprovar o texto da marca, classificar uma frase, perguntar quais variações de gênero, número ou grafia foram cadastradas, nem inventar um termo que a pessoa não enviou.
 metadata:
   author: jimmyandrade
-  version: "0.37.0"
+  version: "0.38.0"
   related:
     - classificar-estado-do-termo
     - definir-empresa
@@ -42,6 +42,8 @@ Sem esse campo no mapeamento, ela vai nas notas da empresa ou nas observações 
 Busca sem resultado e termo que pode ser nome, como uma palavra com maiúscula que não é palavra comum: pergunte se é nome antes de gravar.
 
 Quando a pessoa manda um par rotulado de antes e depois, cada lado é um termo no mesmo lote. O antes fica `forbidden`, e `substitution` e `alternatives` são o depois, com o texto que ela escreveu. O depois fica `allowed`. `related` liga os dois. Não invente outra alternativa. "Nunca use uma palavra, use outra" tem o mesmo formato, sem `when` e sem `tags`. A frase inteira, com a pontuação e com um símbolo no fim, é um termo. Termo novo entra em minúsculas. Quando a pessoa cita só um trecho de uma frase que você escreveu, como "não gosto do `se der…`", pergunte se recusa o trecho, a frase inteira ou os dois, e grave o que ela disser, sem ampliar a recusa por suposição. Se ela der depois um substituto para um termo recusado que ficou sem alternativa, atualize esse termo com `update`.
+
+Um par rotulado enviado como uma mensagem inteira, com várias frases, vira um par por frase. Pareie cada frase do antes com a frase do depois que a substitui, mostre o pareamento e grave só depois do sim. A frase sem par fica de fora, como a saudação que só muda com o horário e a decisão de não perguntar algo, que pertence ao texto e não ao vocabulário. O par não leva `tags`: o vocabulário recusa uma linha com tags que seja `forbidden` ou `allowed`.
 
 O idioma de cada linha é o da comunicação inteira, não o do arquivo que já existe. Comunicação inteira em inglês, como um e-mail, uma review ou uma mensagem, grava o termo e a frase em `en`. Comunicação principalmente em português que só leva um termo em inglês no meio, como `header`, grava em `pt-BR`. Idioma ambíguo: pergunte. Sem idioma ou sem termo, pare e peça.
 
@@ -146,6 +148,7 @@ A busca achou `Brisa` como parte do nome de uma empresa na lista de empresas. O 
 
 - Uma palavra em inglês dentro do texto em português parece termo do vocabulário em inglês. Ela mora no vocabulário desse texto.
 - O par antes e depois parece uma frase só, ou só o depois. Cada lado é um termo, e o antes aponta para o depois que a pessoa escreveu.
+- A mensagem inteira enviada como antes e depois parece um par só. Cada frase pareada é um par, e a que não tem par fica fora.
 - Trocar a palavra proibida parece só trocar o substantivo. O artigo, o pronome e o adjetivo concordam com o gênero do substituto: "o toggle ligado" vira "a feature toggle ligada".
 - Um `pt-BR.json` à mão parece o lugar de tudo. O e-mail inteiro em inglês mora em `en`, com a frase inteira.
 
