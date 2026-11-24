@@ -88,6 +88,8 @@ Procure em todas as fontes: propriedades, comentários datados, e-mail por `proc
 
 A vaga se confirma depois do pagamento. Antes dele, a mensagem à organização pede só o que falta para pagar, como o valor, a chave Pix e o titular. Depois de enviar o comprovante, ela pede que a organização confirme que a vaga está reservada. Perguntar da reserva antes de pagar não faz sentido.
 
+Para confirmar o valor, a mensagem pede que a organização o informe e não repete o valor que a marca calculou, porque o valor dela pode ser outro e a conta da marca soaria como uma exigência. A conta da marca fica para a pessoa conferir contra a resposta.
+
 Sem data nem regra confiável, sinalize isso antes de qualquer recomendação, sugira perguntar à organização e não considere a participação segura, salvo se já estiver confirmada e paga. Nunca invente a data. O pagamento vai por `lancar-despesa-da-empresa`. Toda pendência acionável vira tarefa por `definir-tarefa`.
 
 Com a taxa paga, mande o comprovante à organização e peça a confirmação do recebimento e da vaga, sem esperar a pessoa lembrar. O comprovante já está no Notion antes de sair. As outras perguntas pendentes da participação só vão depois dessa confirmação.
@@ -191,6 +193,14 @@ Se você perguntar à organização se a vaga já está reservada antes de pagar
 1. Antes do pagamento, peça só o que falta para pagar: o valor, a chave Pix e o titular.
 2. Pague, e a pessoa decide o pagamento.
 3. Envie o comprovante e peça que a organização confirme que a vaga está reservada.
+
+### Valor da marca repetido no pedido de confirmação
+
+Se você escrever na mensagem o valor que a marca calculou e pedir que a organização o confirme, ela responde sim ou não ao número da marca, e o valor real dela pode ficar escondido.
+
+1. Peça que a organização informe o valor, com o desconto combinado, sem escrever o número.
+2. Confira a resposta contra a conta da marca antes de pagar.
+3. Se os dois divergirem, mostre os dois à pessoa e não pague.
 
 ### Pedido da tiqueteira sem o e-mail
 
