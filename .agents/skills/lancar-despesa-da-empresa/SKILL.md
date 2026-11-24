@@ -1,11 +1,11 @@
 ---
 name: lancar-despesa-da-empresa
-description: Use essa habilidade sempre que for buscar ou registrar gasto da empresa, inclusive nota, recibo, comprovante ou transação lidos de imagem sem pedido escrito. NÃO use para venda, gasto pessoal, cadastrar oportunidade, atualizar inscrição, criar tarefa, montar agenda nem cadastrar ativo.
+description: Use essa habilidade sempre que for buscar ou registrar gasto da empresa, inclusive o que a pessoa mandou pagar, e nota, recibo, comprovante ou transação lidos de imagem sem pedido escrito. NÃO use para venda, gasto pessoal, cadastrar oportunidade, atualizar inscrição, criar tarefa, montar agenda nem cadastrar ativo.
 allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-data-sources notion:notion-create-pages notion:notion-update-page notion:notion-create-comment
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.13.0"
+  version: "0.13.1"
   aliases:
     - definir-despesa
     - lancar-despesa
@@ -66,7 +66,7 @@ Erro genérico de acesso descreve a chamada que falhou, não prova a causa nem a
 
 Uma leitura bem-sucedida prova a leitura desse recurso, não o acesso a todos os registros nem a escrita. Com a fonte carregada, continue a busca de duplicata e o fluxo do gasto, sem pedir a liberação de um acesso cuja ausência não foi demonstrada. Se a chamada correta continuar bloqueada, informe a operação e o erro retornado, diga que a causa não foi informada e não afirme que houve lançamento.
 
-Quando a pessoa disser que o gasto saiu de uma conta de pagamento, como o Mercado Pago, ou faltar valor, hora, recebedor ou comprovante, leia o extrato dessa conta antes de perguntar: abra o detalhe e baixe o comprovante como `conciliar-recebimento` faz com a venda. O pedido de lançar a partir do extrato já autoriza baixar o comprovante da própria conta.
+Quando a pessoa disser que o gasto saiu de uma conta de pagamento, como o Mercado Pago, ou faltar valor, hora, recebedor ou comprovante, leia o extrato dessa conta antes de perguntar: abra o detalhe e baixe o comprovante como `conciliar-recebimento` faz com a venda. Lançar do extrato ou pagar pela conta já autoriza baixar o comprovante, sem pedir sim.
 
 Cruze a descrição da pessoa com as movimentações do dia. Uma compatível é a evidência, e mais de uma, ou nenhuma, vira pergunta com as candidatas. O extrato não traz o produto nem a finalidade. No navegador, não acione a ação de imprimir: ela trava a aba.
 
