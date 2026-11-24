@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.7.0"
   aliases:
     - definir-preco-de-produto
     - definir-preco-da-peca
@@ -132,7 +132,7 @@ Não invente nome de banco nem de propriedade para o que o projeto não definiu:
 
 ### Passo 8
 
-O preço novo vale em cada canal de `Canais que repetem o preço`, na mesma passada. Antes de gravar, leia o produto em cada canal e mostre o preço que ele tem lá. A loja virtual segue `publicar-produto-fisico-na-loja-virtual`.
+O preço novo vale em cada canal de `Canais que repetem o preço`, na mesma passada. O preço que vai aos canais é o de etiqueta, o cheio a prazo, e nunca o preço à vista. Antes de gravar, leia o produto em cada canal e mostre o preço que ele tem lá. A loja virtual segue `publicar-produto-fisico-na-loja-virtual`.
 
 Produto que falta num canal é cadastrado nele sempre como produto com variações, uma variação por variante do registro, mesmo quando só uma existe. Cadastre só as variantes que já foram produzidas, com o preço do registro. Não invente custo, estoque nem SKU: o campo que o registro não traz fica vazio, e a resposta diz o que faltou.
 
