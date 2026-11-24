@@ -26,6 +26,16 @@ Funcionalidade: Ferramentas de linha de comando desatualizadas
       Quando a skill monta a ficha
       Então ela marca essa atualização como de cuidado, com a versão que o projeto exige
 
+  Regra: Runtime mais novo que o do projeto vira proposta de atualizar o projeto
+
+    Exemplo: O gerenciador de pacotes avisa de motor incompatível
+      Dado que o runtime ativo está numa versão principal mais nova que a que o manifesto exige
+      E que a hospedagem do projeto já suporta essa versão como estável
+      Quando a skill monta a ficha
+      Então a ficha registra as duas versões
+      E propõe levar o projeto à versão da hospedagem, com cada arquivo que fixa a versão e o que muda no comportamento
+      E a skill não altera nenhum arquivo
+
   Regra: Depois da atualização, a versão é conferida de novo
 
     Exemplo: A pessoa pergunta se a atualização deu certo

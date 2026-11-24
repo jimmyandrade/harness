@@ -3,7 +3,7 @@ name: levantar-ambiente-do-repositorio
 description: Levanta o ambiente de trabalho de um repositório antes de escrever código, testes, commit ou pull request. Acha o runtime e como ativá-lo, os comandos de instalar, lint, tipos, testes e build, as habilidades do repositório que se aplicam e as pegadinhas que ele documenta. Não serve para rodar os comandos, instalar dependências nem decidir a convenção de código.
 metadata:
   author: jimmyandrade
-  version: "0.13.0"
+  version: "0.14.0"
   related:
     - criar-commit
     - criar-pull-request
@@ -51,6 +51,12 @@ Compare o runtime instalado com o exigido, pelo gerenciador de versões, como em
 Versão exigida que não está instalada entra na ficha com o comando de instalar pelo gerenciador.
 Quem chamou instala essa versão e avisa a pessoa, e nunca roda lint, tipos ou testes numa versão menor sem dizer.
 Se não pode instalar, a resposta diz que a pessoa precisa atualizar o runtime.
+
+Runtime ativo numa versão principal mais nova que a do projeto, como o aviso de motor incompatível do gerenciador de pacotes, entra na ficha com as duas versões.
+Leia na documentação da plataforma que roda o projeto, como a hospedagem e o CI, a versão estável mais nova que ela suporta.
+Quando ela é mais nova que a do projeto, proponha levar o projeto até ela, com cada arquivo que fixa a versão: o arquivo de versão, o campo do manifesto e do lock, os workflows de CI e as instruções.
+Diga também o que muda no comportamento, pelas notas da versão, e onde o código usa o que muda.
+A mudança é um pull request próprio de quem chamou, depois do sim da pessoa.
 Leia também a versão das ferramentas de linha de comando que o trabalho usa, como `git`, `gh` e o runtime, e o que o gerenciador de pacotes do sistema lista como desatualizado e nos avisos do diagnóstico dele, como `brew outdated` e `brew doctor`.
 Um aviso de versão nova que um comando imprimiu na sessão entra também.
 Registre cada ferramenta desatualizada com a versão instalada, a nova e o comando de atualizar; das outras do gerenciador, diga quantas são.
@@ -172,6 +178,7 @@ Não achei arquivo de instruções nem habilidade do repositório. O `pyproject.
 - O hook de pre-push pode levar minutos e parece travado.
 - A pasta de dependências existir parece instalação em dia. Num worktree, ela pode ter outra versão principal do framework que a do lock, e o typecheck e o build passam do mesmo jeito.
 - O aviso de versão nova no fim de um comando parece ruído. Ele entra na ficha com o comando de atualizar.
+- O aviso de motor incompatível com um runtime mais novo parece ruído, porque a instalação termina. Ele mostra que o projeto ficou numa versão mais antiga que a máquina e talvez que a hospedagem.
 - Atualizar tudo parece seguro. A atualização do runtime pode passar da versão que o projeto exige.
 - Remover um pacote parece remover só ele. O gerenciador pode levar junto as dependências que ficaram sem uso, inclusive o runtime de um ambiente virtual.
 - O link do diagnóstico parece só uma referência para a pessoa. Ele traz a orientação do fabricante, que pode pedir mais passos do que a correção sugerida.
