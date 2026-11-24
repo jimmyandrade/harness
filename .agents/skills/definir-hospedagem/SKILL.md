@@ -3,7 +3,7 @@ name: definir-hospedagem
 description: Define a hospedagem de uma viagem, da cotação que decide a data até o que ela pede depois da reserva, como nome e documento dos hóspedes, veículo e chegada, e a resposta a quem hospeda, com o sim se leva dado pessoal. Usada quando o anfitrião ou o hotel escreve, ou a pessoa pede para agradecer ou avisar. Não serve para ler a reserva, registrar a viagem nem redigir no tom da marca.
 metadata:
   author: jimmyandrade
-  version: "0.13.0"
+  version: "0.14.0"
   aliases:
     - responder-pedido-da-hospedagem
   related:
@@ -144,7 +144,7 @@ As datas candidatas vêm das preferências de viagem: leia os dias para não via
 
 Antes de buscar, pergunte uma vez se vão de carro próprio, se a cama precisa ser de casal ou podem ser duas camas, e qual é o teto por noite. De carro, a hospedagem precisa de estacionamento e o veículo entra na viagem.
 Busque pelo endereço exato do compromisso, não pelo bairro.
-Classifique cada candidata lendo primeiro as avaliações mais baixas, para ver o risco, e descarte a que cair numa regra da política, como o histórico de mofo.
+Classifique cada candidata lendo primeiro as avaliações mais baixas, para ver o risco. Descarte a que cair numa regra da política ou numa sensibilidade de quem viaja, lida no cadastro de cada pessoa, como o histórico de mofo ou o barulho extremo para quem não tolera barulho.
 
 Antes de sugerir onde ficar, leia a avaliação e o motivo de todas as hospedagens anteriores, de qualquer lugar, porque um incidente de uma cidade vale para as outras. A avaliada como evitar não é sugerida, e a avaliada como talvez vem com o motivo.
 A avaliação tem o motivo, o dia e quem avaliou, cada um na sua propriedade. Grave quando a pessoa a disser, com o nome de quem decidiu. A casa de um parente segue a mesma regra.
