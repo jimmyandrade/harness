@@ -3,7 +3,7 @@ name: definir-hospedagem
 description: Define a hospedagem de uma viagem, da cotação que decide a data até o que ela pede depois da reserva, como nome e documento dos hóspedes, veículo e chegada, e a resposta a quem hospeda, com o sim se leva dado pessoal. Usada quando o anfitrião ou o hotel escreve, ou a pessoa pede para agradecer ou avisar. Não serve para ler a reserva, registrar a viagem nem redigir no tom da marca.
 metadata:
   author: jimmyandrade
-  version: "0.24.1"
+  version: "0.24.2"
   aliases:
     - responder-pedido-da-hospedagem
   related:
@@ -169,7 +169,7 @@ A avaliação tem o motivo, o dia e quem avaliou, cada um na sua propriedade. Gr
 Incidente que a pessoa conta, como mofo, colchão com plástico ou tratamento na portaria, é motivo da avaliação da hospedagem em que aconteceu: pergunte qual foi se não souber, e não o deixe só numa política, porque as avaliações são a fonte que guia a busca seguinte.
 Avaliação que a pessoa ainda não fez fica como pendência: não a preencha por ela.
 
-Antes de gravar a avaliação ou uma despesa, identifique a hospedagem pela reserva, com o nome do anúncio, o código e as datas, que a página da reserva da plataforma mostra, e não pelo bairro que a pessoa citou: dois endereços do mesmo bairro podem ser estadias diferentes. A linha do extrato só traz o valor, as datas e a cidade, então abra a reserva antes de perguntar à pessoa.
+Antes de gravar a avaliação ou uma despesa, e antes de criar uma página, procure a hospedagem já cadastrada nas hospedagens da viagem pelas datas e pelo código, porque o cadastro pode ter só o anfitrião no título. Identifique a hospedagem pela reserva, com o nome do anúncio, o código e as datas, que a página da reserva da plataforma mostra, e não pelo bairro que a pessoa citou: dois endereços do mesmo bairro podem ser estadias diferentes. A linha do extrato só traz o valor, as datas e a cidade, então abra a reserva antes de perguntar à pessoa.
 Estadia deixada antes do fim ou trocada por outra registra o check-out do dia em que a pessoa saiu, não o da reserva, e o motivo da troca vai no motivo da avaliação, com o que deu errado e o que foi resolvido.
 
 ### Passo 7
