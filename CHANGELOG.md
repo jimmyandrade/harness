@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.107.0](https://github.com/jimmyandrade/harness/compare/v1.106.0...v1.107.0) (2026-11-24)
+
+
+### Features
+
+* **levantar-ambiente-do-repositorio:** propose moving to the runtime the host supports ([#1467](https://github.com/jimmyandrade/harness/issues/1467)) ([acc6d1d](https://github.com/jimmyandrade/harness/commit/acc6d1dc95632e3af36d75bd089595d3a229a6ec))
+
 ## [1.106.0](https://github.com/jimmyandrade/harness/compare/v1.105.0...v1.106.0) (2026-11-23)
 
 
