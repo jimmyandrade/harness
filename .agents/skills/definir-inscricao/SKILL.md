@@ -86,6 +86,8 @@ Prazos. Ao tratar participação, reserva de vaga, taxa, sinal, boleto ou lista 
 
 Procure em todas as fontes: propriedades, comentários datados, e-mail por `procurar-email`, canal já registrado, edital, regulamento, formulário, site e PDF. Uma regra relativa, como "até 2 dias após a confirmação", não responde o prazo de confirmação.
 
+A vaga se confirma depois do pagamento. Antes dele, a mensagem à organização pede só o que falta para pagar, como o valor, a chave Pix e o titular. Depois de enviar o comprovante, ela pede que a organização confirme que a vaga está reservada. Perguntar da reserva antes de pagar não faz sentido.
+
 Sem data nem regra confiável, sinalize isso antes de qualquer recomendação, sugira perguntar à organização e não considere a participação segura, salvo se já estiver confirmada e paga. Nunca invente a data. O pagamento vai por `lancar-despesa-da-empresa`. Toda pendência acionável vira tarefa por `definir-tarefa`.
 
 Com a taxa paga, mande o comprovante à organização e peça a confirmação do recebimento e da vaga, sem esperar a pessoa lembrar. O comprovante já está no Notion antes de sair. As outras perguntas pendentes da participação só vão depois dessa confirmação.
@@ -182,6 +184,14 @@ Se você só comemorar porque a pessoa disse que a inscrição foi confirmada, o
 2. Uma inscrição casa: atualize essa e comemore. Mais de uma: pergunte qual.
 3. Não pare na comemoração.
 
+### Reserva perguntada antes do pagamento
+
+Se você perguntar à organização se a vaga já está reservada antes de pagar, a pergunta não faz sentido, porque a vaga se reserva com o pagamento, e a organização estranha o pedido.
+
+1. Antes do pagamento, peça só o que falta para pagar: o valor, a chave Pix e o titular.
+2. Pague, e a pessoa decide o pagamento.
+3. Envie o comprovante e peça que a organização confirme que a vaga está reservada.
+
 ### Pedido da tiqueteira sem o e-mail
 
 Se você gravar a inscrição só com o print do pedido, o número, o código e o marcador da oportunidade ficam fora, e a despesa perde a evidência.
@@ -241,6 +251,7 @@ busquei a inscrição da Loja Exemplo como expositora no Festival Rota Sul 2026.
 - O print do pedido parece bastar para a inscrição. O e-mail da tiqueteira traz o número, o código e o remetente que o print não prova.
 - O telefone de quem vai ao palco parece o contato da inscrição. Na inscrição da empresa, o contato é o da empresa.
 - A tabela do que foi enviado, mostrada na resposta, parece bastar. Quem abre a inscrição depois não vê a conversa: as respostas enviadas vão para o corpo da inscrição.
+- Perguntar se a vaga está reservada parece prudência antes de pagar. A reserva vem do pagamento: a pergunta entra na mensagem que envia o comprovante.
 - Uma restrição a uma pessoa parece mais segura quanto mais ampla. A política diz em que caso perguntar, e fora dele a pessoa aparece normalmente.
 - O campo opcional parece dispensável. Quem seleciona lê o formulário inteiro, e o campo vazio é uma chance perdida.
 - A data da confirmação só entra com a resposta da organização, dita pela pessoa ou lida nela, ou se `garantir-ingresso` viu o pedido confirmado na tela. O envio não conta.
