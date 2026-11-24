@@ -3,7 +3,7 @@ name: definir-hospedagem
 description: Define a hospedagem de uma viagem, da cotação que decide a data até o que ela pede depois da reserva, como nome e documento dos hóspedes, veículo e chegada, e a resposta a quem hospeda, com o sim se leva dado pessoal. Usada quando o anfitrião ou o hotel escreve, ou a pessoa pede para agradecer ou avisar. Não serve para ler a reserva, registrar a viagem nem redigir no tom da marca.
 metadata:
   author: jimmyandrade
-  version: "0.25.1"
+  version: "0.25.2"
   aliases:
     - responder-pedido-da-hospedagem
   related:
@@ -152,7 +152,7 @@ Classifique cada candidata lendo primeiro as avaliações mais baixas, para ver 
 
 Leia cada avaliação baixa inteira, abrindo o "Mostrar mais" e conferindo que o texto não foi cortado, porque a queixa costuma vir no fim, depois dos elogios. Uma avaliação de 4★ ou 3★ pode trazer o problema, como o acesso difícil por falta de biometria para hóspede, e vale tanto quanto uma de 1★. Nunca declare "sem queixa" por um trecho cortado. Leia também a resposta do anfitrião a cada avaliação baixa: culpar o hóspede, ser passivo-agressivo, ignorar a queixa ou colar um texto de IA é sinal de risco.
 
-Guarde no Notion, na hora que a pessoa mandar, toda candidata lida, também a descartada, com as avaliações baixas, a postura do anfitrião e o motivo, para a próxima busca não reler o Airbnb. De toda hospedagem usada, guarde o link do anúncio na própria hospedagem, para a pessoa poder voltar a ela.
+Guarde no Notion toda candidata lida na sessão, também a descartada, sem esperar pedido, com as avaliações baixas, a postura do anfitrião e o motivo, para a próxima busca não reler o Airbnb. De toda hospedagem usada, guarde o link do anúncio na própria hospedagem, para a pessoa poder voltar a ela.
 
 Confira na página de comodidades de cada candidata, uma a uma, se o que é necessidade existe e não aparece como indisponível: o filtro da busca não garante, e a candidata que passou no filtro pode listar "Indisponível: Ar-condicionado". Avaliação que cita colchão manchado, sem lençol ou com plástico conta como incidente de colchão e descarta a candidata.
 
