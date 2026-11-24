@@ -1,9 +1,9 @@
 ---
 name: escrever-codigo
-description: Aplica as preferências de código da pessoa antes de escrever ou alterar código, como comentários, estilo inline e o que fazer antes de criar um componente. Usada quando uma mudança vai escrever ou alterar código, inclusive quando o pedido é implementar uma issue. Não serve para testes, para commit nem para decidir a arquitetura. O pedido de implementar só termina quando a resposta tem o link do pull request.
+description: Aplica as preferências de código da pessoa antes de escrever ou alterar código, como comentários, tokens de design, estilo inline e o que fazer antes de criar um componente. Usada quando uma mudança vai escrever ou alterar código, inclusive quando o pedido é implementar uma issue. Não serve para testes, para commit nem para decidir a arquitetura. O pedido de implementar só termina quando a resposta tem o link do pull request.
 metadata:
   author: jimmyandrade
-  version: "0.10.0"
+  version: "0.11.0"
   related:
     - criar-commit
     - criar-pull-request
@@ -24,6 +24,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Idioma dos comentários": "inglês"
 # `Estilo inline` diz quando o estilo escrito na própria marcação é aceito, e qual é o sistema de estilos do projeto.
 "Estilo inline": ""
+# `Tokens de design` diz onde ficam os tokens do projeto e como ler o nome de cada um, como o tema ou o arquivo de variáveis. Vazio, procure no sistema de estilos e nas instruções do projeto.
+"Tokens de design": ""
 # `Antes de criar um componente` lista o que ler e quais habilidades do repositório chamar, em ordem.
 "Antes de criar um componente": ""
 # `Cópia de trabalho` é `Global` e cada skill pode sobrescrevê-lo. `worktree` é o ideal: um git worktree novo da `main`. `workspace` é a exceção, uma cópia independente quando o `worktree` falha e usar o clone não é seguro. Vazio trabalha onde a pessoa já está.
@@ -44,7 +46,13 @@ Siga `Comentários no código`. Com um valor vazio, não comente o que o código
 
 ### Passo 3
 
-Siga `Estilo inline`. Um valor que já tem uma variável de design ou uma classe vai para o sistema de estilos do projeto. O estilo inline fica para o valor calculado em tempo de execução.
+Siga `Estilo inline` e `Tokens de design`.
+Todo valor de cor, espaço, tipografia, raio e borda vem de um token do projeto e nunca é gravado como valor fixo.
+Um valor que já tem uma variável de design ou uma classe vai para o sistema de estilos do projeto.
+O estilo inline fica para o valor calculado em tempo de execução.
+O valor que o desenho pede e não tem token não é gravado em silêncio: pare e diga à pessoa qual valor falta, de onde ele veio (o desenho, a variável e o valor lido) e qual é o token mais próximo.
+Proponha as saídas: usar o token mais próximo, pedir o token novo a quem cuida do sistema de design, ou gravar o valor fixo com um comentário e a pendência declarada.
+Siga a escolha da pessoa e registre-a na descrição do pull request.
 
 ### Passo 4
 
@@ -81,12 +89,20 @@ Se você comentar o que a linha já diz, o comentário envelhece e engana.
 1. Apague o comentário.
 2. Se a razão não é óbvia, escreva o porquê num bloco de documentação.
 
-### Estilo inline para valor fixo
+### Valor fixo no lugar do token
 
-Se você escrever `style={{ padding: 16 }}` para um valor que já tem variável de design, o desenho deixa de acompanhar o tema.
+Se você escrever `style={{ padding: 16 }}` ou uma cor em hexadecimal para um valor que já tem token, o desenho deixa de acompanhar o tema.
 
-1. Troque pelo sistema de estilos do projeto.
+1. Troque pelo token, no sistema de estilos do projeto.
 2. Deixe o estilo inline só para o valor que depende de dado em execução.
+
+### Valor sem token gravado em silêncio
+
+Se você gravar o valor fixo de algo que o desenho pede e que não tem token, sem avisar, o tema deixa de acompanhá-lo e ninguém sabe que o token falta.
+
+1. Pare antes de gravar.
+2. Diga qual valor falta, de onde ele veio e qual é o token mais próximo.
+3. Proponha as três saídas do Passo 3, espere a escolha e registre-a na descrição do pull request.
 
 ### Implementação sem pull request
 
@@ -109,11 +125,17 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### Crie o componente de cartão de resumo do pedido
 
-Li o desenho do cartão e chamei a habilidade do repositório que cria componentes, depois a que confere o resultado. Usei o sistema de estilos do projeto para o espaçamento e a cor. Só a largura da barra de progresso, calculada pelo valor do pedido, ficou inline. Não deixei comentário que repete o código.
+Li o desenho do cartão e chamei a habilidade do repositório que cria componentes, depois a que confere o resultado. Usei os tokens do projeto para o espaçamento e a cor. Só a largura da barra de progresso, calculada pelo valor do pedido, ficou inline. Não deixei comentário que repete o código.
 
 ### Implemente a barra de anúncio da issue PROJ-1
 
 Conferi a descrição contra o modelo antes do código. No fim, o pull request estava em rascunho e a resposta levou o link.
+
+### Aplique o desenho do cartão no tema escuro
+
+Troquei cada cor e cada espaço pelo token do projeto.
+O fundo do item fechado, `#1f1f21` no desenho, não tinha token, e o mais próximo era um cinza bem mais escuro.
+Parei e disse isso, com a variável do desenho e os três caminhos. A pessoa escolheu pedir o token novo e usar o mais próximo até ele chegar, e o pull request registrou a escolha e a pendência.
 
 ### Ajuste o formatador de moeda
 
@@ -123,7 +145,7 @@ Mudei a função sem comentário novo. Um `eslint-disable-next-line` com o motiv
 
 - O repositório permite outro estilo: siga o repositório.
 - Não há desenho de origem para o componente: diga isso e peça o desenho antes de criar.
-- O valor de estilo é fixo mas o sistema de estilos não tem variável para ele: use o sistema de estilos e diga que falta a variável.
+- O valor de estilo é fixo mas o sistema de estilos não tem token para ele: não grave o valor. Diga qual falta, de onde veio e o token mais próximo, ofereça as três saídas do Passo 3 e registre a escolha.
 - O código é de um arquivo gerado: não aplique as preferências.
 - Vários commits sobem juntos: a conferência do título e da descrição é uma, depois do push.
 - `Cópia de trabalho` em `workspace` ou `worktree`: a tarefa não entra no clone aberto nem numa cópia já ocupada.
@@ -134,6 +156,8 @@ Mudei a função sem comentário novo. Um `eslint-disable-next-line` com o motiv
 - Uma diretiva de ferramenta não é um comentário de explicação: ela fica em comentário de linha, mesmo com `Comentários no código` em `evitar`.
 - Várias linhas de `//` acima de uma função parecem mais leves que um bloco. O editor mostra o bloco de documentação ao passar o mouse na função, e a sequência de `//` não.
 - O estilo inline é aceito para valor calculado, mesmo com `Estilo inline` restrito.
+- Um hexadecimal que veio do desenho parece o valor certo para gravar. O desenho liga o valor a uma variável, e o token do projeto é que o acompanha no tema.
+- Gravar o valor fixo parece mais rápido que avisar. O aviso custa uma frase, e o token que falta fica registrado para quem cuida do sistema de design.
 - Preferência da pessoa não vai para a habilidade nem para as instruções de um repositório sem consenso do time.
 - Conferir a cada commit parece necessário. A conferência é uma vez, depois do push.
 - Reutilizar a worktree aberta parece mais rápido. Com `Cópia de trabalho` em `workspace` ou `worktree`, a tarefa abre uma cópia nova e ela fica no fim.
