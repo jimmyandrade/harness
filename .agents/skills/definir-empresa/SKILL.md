@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.8.2"
+  version: "0.9.0"
   related:
     - definir-grafia
     - definir-perfil-social
@@ -70,6 +70,8 @@ O cadastro mínimo de recebedora financeira não valida a fornecedora para relac
 Quando a lista exige a cidade da empresa e ninguém a informou, pesquise na internet, no site oficial e em fontes confiáveis, antes de usar uma localidade mais ampla. Empresa com uma só sede ou um só endereço: relacione essa cidade. Empresa que atua em várias cidades, com unidades ou escritórios regionais e sem unidade na `Praça prioritária do endereço`: relacione a localidade mais ampla que as cobre, como o país, e diga nas notas que é de propósito e quais fontes mostraram as unidades.
 
 O site, o CNPJ e o WhatsApp da empresa que as fontes respondem entram na mesma rodada do cadastro, sem avisar a pessoa antes. Pesquise o site e o perfil social oficial, o link da bio do perfil, o que o convite ou o formulário trazem e, para o CNPJ, a internet. Grave o que achou e diga as fontes. Só o que a busca não respondeu vira pendência, com o motivo e o que a resolve, como o contrato. Não liste como pendência o que ninguém tentou achar.
+
+A inscrição estadual vale por UF e tem dígito verificador. Antes de gravá-la na empresa ou de usá-la num formulário, confirme o número, pelo CNPJ, na consulta pública do cadastro de contribuintes da UF do endereço, como o Sintegra da UF. Número que essa fonte não confirma, ou que o formulário recusa, não se grava nem se reenvia: corrija o registro pela fonte. A consulta com captcha é da pessoa: peça que ela a resolva e leia o resultado depois. Empresa sem inscrição, como um MEI isento, só se marca como isenta com a fonte ou com o sim da pessoa.
 
 Não escolha a sede só por ser a mais citada. Nome parecido de outra empresa, como uma filial ou uma entidade de outro porte, não vale como fonte: registre a distinção em `Não confundir com` ou nas notas.
 
@@ -136,6 +138,14 @@ Se você cadastrar a empresa e listar o site, o CNPJ ou o WhatsApp como pendênc
 1. Pesquise o site, o perfil social e o link da bio, e o CNPJ, na mesma rodada do cadastro.
 2. Grave o que achou, com as fontes nas notas.
 3. Deixe como pendência só o que a busca não respondeu, com o motivo e o que a resolve.
+
+### Inscrição estadual sem fonte
+
+Se você usar a inscrição estadual como veio de um cadastro antigo, o formulário do fornecedor a recusa e o dado errado continua no registro.
+
+1. Consulte a UF do endereço, pelo CNPJ, antes de gravar ou de usar o número.
+2. Grave o número confirmado e corrija o registro antigo.
+3. Captcha na consulta: peça à pessoa que o resolva.
 
 ### Cidade preenchida sem pesquisar
 
@@ -217,6 +227,7 @@ Contei que achávamos "Design Print", fica perto da Avenida Pedro II e imprime e
 - O tipo de público já tem outros valores: acrescente a opção de fornecedor quando fizer sentido. Não apague os outros.
 - As empresas relacionadas já mostram a empresa: não relacione de novo.
 - A empresa não apareceu nas empresas relacionadas: relacione.
+- A inscrição estadual gravada é recusada pelo formulário ou pela UF: consulte a fonte da UF antes de reenviar e corrija o registro.
 - Donos preenchidos não autorizam presumir quem é o contato operacional. Preserve as relações existentes.
 
 ## Pegadinhas
@@ -231,6 +242,7 @@ Contei que achávamos "Design Print", fica perto da Avenida Pedro II e imprime e
 - A nota com o nome da pessoa parece o vínculo. A nota não substitui as pessoas responsáveis.
 
 - A nota com a pista parece lugar da memória. A pista tem propriedade própria, e a nota qualifica o papel, o contexto, a pendência ou a certeza.
+- A inscrição estadual gravada parece confiável. Ela é por UF e pode ter sido gravada errada: confirme na consulta da UF do endereço.
 - O nome errado parece descartável depois da correção. Ele fica nas variações de grafia, porque a pessoa e as conversas antigas ainda o usam.
 
 ## Scripts disponíveis
