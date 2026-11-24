@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, e lê o pedido, quem pediu, a data, o que o contato afirmou e o que falta. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp ou conferir o que alguém pediu. Não serve para escrever ou enviar a mensagem, redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.42.3"
+  version: "0.43.0"
   aliases:
     - redigir-mensagem-de-whatsapp
   related:
@@ -11,6 +11,8 @@ metadata:
     - anexar-arquivo-no-whatsapp
     - comunicar-novidade-do-produto
     - convidar-para-evento
+    - definir-agenda
+    - definir-cronograma
     - definir-negociacao
     - definir-orcamento-de-fornecedor
     - definir-pessoa
@@ -22,6 +24,7 @@ metadata:
     - enviar-email
     - escrever-link
     - evoluir-habilidade
+    - lancar-despesa-da-empresa
     - procurar-agenda
     - procurar-tarefa
     - rascunhar-mensagem
@@ -97,9 +100,18 @@ flowchart LR
   Q -->|texto no tom de voz| V[redigir-com-tom-de-voz]
   Q -->|responder ou enviar| E[rascunhar-mensagem]
   Q -->|convidar para call ou evento| A[convidar-para-evento]
+  Q -->|oferta de vaga numa feira ou evento| O[Pontos de ação da oferta]
 ```
 
 Para registrar a demanda, leve a data e o horário da primeira mensagem do pedido como data da demanda.
+
+Uma conversa que oferece uma vaga numa feira ou num evento termina o resumo com os pontos de ação da oferta, cada um com a habilidade que o cumpre:
+- O pagamento que o contato pede, com valor e prazo, é despesa da empresa, lançada por `lancar-despesa-da-empresa` quando a pessoa mandar pagar.
+- Cada prazo de pagamento, como o sinal e o restante, vai ao cronograma por `definir-cronograma` e à agenda por `definir-agenda`.
+- Os horários de montagem, de desmontagem e do próprio evento são cadastrados do mesmo modo. Um horário que a conversa não traz, como o da desmontagem, entra na pergunta ao contato.
+- O contrato, quando a conversa não o trouxe, é pedido ao contato para a pessoa assinar, por `rascunhar-mensagem`.
+
+Sem o sim da pessoa à participação, só liste os pontos: nada é lançado nem gravado, e a mensagem segue `rascunhar-mensagem`.
 
 ### Passo 5
 
@@ -147,6 +159,13 @@ Se você ler ou enviar sem rotular, a conversa some do filtro de estado.
 2. Rótulo que falta: crie, sem esperar o sim.
 3. No fim da rodada, rotule as que ficaram sem, inclusive as anteriores.
 
+### Oferta lida sem pontos de ação
+
+Se você resumir a oferta de uma vaga e parar no que o contato disse, a pessoa decide sem ver o que a aceitação cria: um pagamento a lançar, prazos e horários a gravar e um contrato a pedir.
+
+1. Termine o resumo com os pontos de ação do Passo 4, cada um com a habilidade que o cumpre.
+2. Sem o sim à participação, não lance nem grave: só liste.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
@@ -158,6 +177,10 @@ Usei a aba aberta. O pedido está na conversa da Ana, na sexta-feira, 16/10/2026
 ### o grupo perguntou "está confirmada a feira desse fim de semana?" e a organização respondeu, horas depois, "Terá feira na sexta, sábado e domingo"
 
 Disse que a organização confirmou a feira para sexta, sábado e domingo, com a mensagem e o horário. Deduzi sexta, 20/11/2026, a domingo, 22/11/2026, pelo calendário, e avisei que a mensagem não traz as datas. Listei como pendências o mapa, os valores e a vaga na baia. Não escrevi "não confirmado".
+
+### A Vera ofereceu duas araras de 1,5 m por R$ 500, com 50% hoje até as 13h e o restante na sexta-feira, 27/11/2026
+
+Resumi o que ela afirmou e o que falta. Fechei com os pontos de ação, sem gravar nada: lançar R$ 250 como despesa da empresa quando a pessoa mandar pagar, pôr os dois pagamentos no cronograma e na agenda, cadastrar montagem e feira, e perguntar a desmontagem e pedir o contrato na resposta.
 
 ## Casos-limite
 

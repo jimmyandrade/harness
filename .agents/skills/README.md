@@ -343,6 +343,8 @@ flowchart LR
   conversar_no_whatsapp --> anexar_arquivo_no_whatsapp
   conversar_no_whatsapp --> comunicar_novidade_do_produto
   conversar_no_whatsapp --> convidar_para_evento
+  conversar_no_whatsapp --> definir_agenda
+  conversar_no_whatsapp --> definir_cronograma
   conversar_no_whatsapp --> definir_negociacao
   conversar_no_whatsapp --> definir_orcamento_de_fornecedor
   conversar_no_whatsapp --> definir_pessoa
@@ -353,6 +355,7 @@ flowchart LR
   conversar_no_whatsapp --> dividir_mensagem
   conversar_no_whatsapp --> enviar_email
   conversar_no_whatsapp --> escrever_link
+  conversar_no_whatsapp --> lancar_despesa_da_empresa
   conversar_no_whatsapp --> procurar_agenda
   conversar_no_whatsapp --> procurar_tarefa
   conversar_no_whatsapp --> rascunhar_mensagem
