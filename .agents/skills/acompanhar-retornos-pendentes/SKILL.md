@@ -3,7 +3,7 @@ name: acompanhar-retornos-pendentes
 description: Mantém uma rotina por canal, como e-mail, WhatsApp e site ou aplicativo, que lê as conversas em espera, o aviso que uma tarefa espera e a condição que um painel deve mostrar, avisa quando chegam e entrega o resultado à sessão. Usada quando uma mensagem espera resposta, uma tarefa espera um aviso ou um status precisa mudar num painel. Não serve para escrever a resposta, entrar com senha nem criar uma rotina por mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.9.2"
+  version: "0.9.3"
   related:
     - acompanhar-resposta-no-whatsapp
     - definir-hospedagem
@@ -144,6 +144,10 @@ Quando o aviso de uma tarefa chega, a rotina etiqueta a conversa por `rotular-it
 Ela marca na definição de concluído só os itens que a mensagem prova e escreve nas observações o que chegou e quando, no presente.
 Um item que depende de uma ação da pessoa, como guardar um comprovante, fica sem marca.
 
+O aviso que chega sozinho pelo WhatsApp, como a confirmação automática de um cadastro, abre uma conversa que a rotina leu, e ela sai com estado e contexto, como a do e-mail, por `rotular-item`, antes do resumo à sessão.
+Um aviso de recebimento que diz que o contato vai analisar e responder é ação esperada.
+O WhatsApp Web é acessado pela sessão dona, como `usar-whatsapp-web` manda: sem ela, o aviso diz que a conversa ficou sem rótulo e qual falta.
+
 Com `Concluir a tarefa pelo aviso` em `sim` e todos os itens provados, a rotina leva a tarefa a concluída e preenche a data da conclusão.
 Sem isso, a tarefa fica em andamento e o aviso diz o que falta.
 
@@ -242,6 +246,14 @@ Se você só repassar a resposta à pessoa, o fato fica na conversa, e a próxim
 1. Ache a página que o assunto já tem.
 2. Grave o fato novo pela habilidade do assunto, com a data e a hora da mensagem, antes de responder.
 3. Diga na resposta o que gravou e o link da página, e o que ainda falta.
+
+### Aviso de WhatsApp lido e não rotulado
+
+Se você ler o aviso automático que chegou pelo WhatsApp e só o resumir à sessão, a conversa fica sem estado nem contexto, e a pessoa descobre depois, ao abrir a lista.
+
+1. Rotule a conversa por `rotular-item`, com estado e contexto, antes do resumo.
+2. No WhatsApp Web, peça à sessão dona, como `usar-whatsapp-web` manda.
+3. Sem a sessão dona, diga na resposta que a conversa ficou sem rótulo e qual falta.
 
 ## Exemplos de entrada e saída
 

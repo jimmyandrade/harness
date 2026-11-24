@@ -36,3 +36,9 @@ Funcionalidade: Acompanhar os retornos pendentes com uma rotina só
       Então ela etiqueta a conversa
       E marca na tarefa só os itens que a mensagem prova
       E avisa a pessoa do que falta
+
+    Exemplo: a empresa confirma o cadastro por uma mensagem automática no WhatsApp
+      Dado que a mensagem de recebimento chegou sozinha e diz que a análise sai por e-mail
+      Quando a rotina lê a conversa pela sessão dona do WhatsApp Web
+      Então ela rotula a conversa com o estado de ação esperada e o contexto do assunto
+      E só depois entrega o resumo à sessão
