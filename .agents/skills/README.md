@@ -622,8 +622,10 @@ flowchart LR
   definir_pagamento_da_inscricao --> definir_inscricao
   definir_pagamento_da_inscricao --> definir_negociacao
   definir_pagamento_da_inscricao --> definir_tarefa
+  definir_pagamento_da_inscricao --> enviar_email
   definir_pagamento_da_inscricao --> lancar_despesa_da_empresa
   definir_pagamento_da_inscricao --> procurar_email
+  definir_pagamento_da_inscricao --> rascunhar_mensagem
   definir_perfil_social --> analisar_perfil_social
   definir_perfil_social --> definir_grafia
   definir_perfil_social --> definir_pessoa

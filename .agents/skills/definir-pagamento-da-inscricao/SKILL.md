@@ -5,13 +5,15 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch
 compatibility: Precisa de internet e, para conferir o titular, do app de pagamento da empresa aberto no navegador.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.2.0"
   related:
     - definir-inscricao
     - definir-negociacao
     - definir-tarefa
+    - enviar-email
     - lancar-despesa-da-empresa
     - procurar-email
+    - rascunhar-mensagem
 ---
 
 # Definir pagamento da inscrição
@@ -21,6 +23,8 @@ metadata:
 ```yaml
 # `Prazo curto para pagar` é o tempo que falta até o prazo máximo de pagamento, abaixo do qual o prazo conta como em cima da hora. Com o prazo curto, a mensagem à organização não pergunta de desconto nem de condição.
 "Prazo curto para pagar": "48 horas"
+# `Design system do e-mail` é o design system com que o e-mail do comprovante à organização é montado. Vazio, o e-mail sai em texto simples.
+"Design system do e-mail": ""
 ```
 
 ## Instruções
@@ -49,7 +53,11 @@ Compare o titular e o banco com o nome da organização e com o que ela informou
 
 ### Passo 4
 
-Registre o resultado da consulta como comentário datado na discussão da página da pessoa ou da empresa, por `definir-negociacao`. O pagamento feito vai por `lancar-despesa-da-empresa`.
+Com o pagamento aprovado, abra o comprovante no app e baixe o arquivo sem pedir o sim: é o comprovante da própria empresa e o download não tira nada da conta. Guarde-o na pasta da sessão, anexe-o no Notion e confira o valor, o titular e o horário nele antes de enviar.
+
+Envie o comprovante à organização pelos dois canais. Pelo WhatsApp, o arquivo vem antes do texto que pede a confirmação do recebimento e da vaga, por `rascunhar-mensagem`. Por e-mail, por `enviar-email`, com o comprovante em anexo e o corpo montado com o `Design system do e-mail`. Sem o e-mail da organização, procure-o nas fontes, como o regulamento, o formulário e o histórico, e diga que não achou se for o caso. Cada texto passa pelo vocabulário e segue o sim da pessoa a ele.
+
+Registre o resultado como comentário datado na discussão da página da pessoa ou da empresa, por `definir-negociacao`. O pagamento feito vai por `lancar-despesa-da-empresa`, com o comprovante.
 
 ## Problemas comuns
 
@@ -60,6 +68,14 @@ Se você perguntar da reserva antes de pagar, escrever o valor da marca no pedid
 1. Antes do pagamento, peça só o que falta para pagar, e que a organização informe o valor, sem escrever o número da marca.
 2. Dentro de `Prazo curto para pagar`, não toque no desconto.
 3. Confira a resposta contra a conta da marca: se divergirem, mostre os dois à pessoa e não pague. A reserva e a dúvida do desconto vão na mensagem do comprovante.
+
+### Comprovante pedido ou enviado por um canal só
+
+Se você pedir o sim para baixar o comprovante, ou enviá-lo só pelo WhatsApp, a pessoa repete o pedido e a organização fica sem o documento por e-mail.
+
+1. Baixe o comprovante assim que o pagamento for aprovado.
+2. Envie pelo WhatsApp e por e-mail, com o e-mail montado no `Design system do e-mail`.
+3. Registre o envio dos dois canais no Notion.
 
 ### Pagamento sem conferir o titular
 
