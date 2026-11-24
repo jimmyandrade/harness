@@ -603,6 +603,8 @@ flowchart LR
   definir_negociacao --> abordar_contato
   definir_negociacao --> acompanhar_retornos_pendentes
   definir_negociacao --> definir_agenda
+  definir_negociacao --> definir_empresa
+  definir_negociacao --> definir_pessoa
   definir_negociacao --> diagnosticar_funil
   definir_negociacao --> inscrever_na_oportunidade
   definir_negociacao --> organizar_ponto_de_contato
