@@ -3,7 +3,7 @@ name: rascunhar-mensagem
 description: Escreve, mostra e envia a mensagem de WhatsApp depois de a conversa ser lida, com o destino, o texto, a divisão e o comprovante conferidos. Usada quando a pessoa quer responder, mandar ou corrigir uma mensagem. NÃO serve para ler a conversa, redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.4.8"
+  version: "0.4.7"
   aliases:
     - entregar-rascunho-de-mensagem
     - rascunhar-mensagem-no-whatsapp
@@ -21,7 +21,6 @@ metadata:
     - escrever-link
     - evoluir-habilidade
     - procurar-agenda
-    - prospectar-oportunidades
     - redigir-com-tom-de-voz
     - rotular-item
     - usar-whatsapp-web
@@ -77,8 +76,6 @@ Antes de qualquer rascunho, diga o que o contato respondeu, com as palavras dele
 A mesma pessoa ou empresa pode ter mais de um pedido aberto, como duas impressões em materiais diferentes. Antes de rascunhar, liste os pedidos abertos com ela. A mensagem diz de qual pedido trata, pelo material e pelo uso. Com mais de um, numere cada um, com o material e o que precisa agora, como o prazo. Resposta que não diz a qual pedido responde: confirme de qual ele falava, antes de seguir.
 
 Confira no manual da oportunidade cada exigência do organizador, como a janela de montagem, e use a que ele dá.
-
-Quando o contato pergunta como foi uma participação, como a experiência numa feira, num festival ou num evento, leia antes o retorno da empresa na página da edição, quase sempre a retrospectiva no bloco de notas de reunião, como `prospectar-oportunidades` manda. O rascunho responde com esse retorno, já completo, e a pessoa só é perguntada sobre o que o registro não diz. Sem retorno registrado, diga isso antes de perguntar.
 
 A resposta que confirma interesse diz de qual oferta fala, pela organização e pelo formato. Duas ofertas parecidas, no mesmo lugar ou perto das mesmas datas, não entram na mesma frase.
 
@@ -150,14 +147,6 @@ Depois de cada envio, e depois de cada resposta lida, registre a troca em coment
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
-
-### Opinião sobre a participação perguntada à pessoa
-
-Se você deixar entre colchetes, ou perguntar à pessoa, o que achou de um evento que já tem retrospectiva registrada, o rascunho sai incompleto e ela repete o que já disse.
-
-1. Abra a página da edição e leia o bloco de notas de reunião inteiro.
-2. Escreva a resposta com o que valeu a pena e a ressalva, no tom de voz.
-3. Pergunte só o que o registro não diz.
 
 ### Dia da semana errado
 
