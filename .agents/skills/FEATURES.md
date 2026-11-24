@@ -250,6 +250,22 @@ How these skills relate is in `README.md`, in this folder.
   - [ ] A missing sale detail stops the skill with a question and the gross is not recorded as received
   - [ ] An entry without a sale that is a card withdrawal is not registered as a sale
 
+### conferir-termo-de-lingua-indigena
+- **Stability**: experimental
+- **Description**: Check the meaning of an indigenous-language word by language and variety, with the source of each claim and what stayed unchecked
+- **Properties**:
+  - Lives at `.agents/skills/conferir-termo-de-lingua-indigena/SKILL.md`
+  - Asks the language and variety once when no source gives them, and never completes them by guess
+  - Looks in the reference base before the web and uses a registered check with its date
+  - Searches by confidence, and keeps an AI summary, a collaborative list, and an unsigned portal as a lead only
+  - Does not treat an article that uses the word as proof of its meaning
+  - Answers in three blocks: checked, lead, and unchecked, each claim with language, variety, source, and link
+  - Says that the community must be consulted before commercial use when a symbol seems sacred or restricted, and does not decide for it
+  - Sends each source to definir-referencia-cultural to be recorded
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses choosing the name, translating a text, recording the source, and deciding what is sacred
+
 ### configurar-harness-de-negocio
 - **Stability**: experimental
 - **Description**: Set up a new business harness by following the core runbooks in order, including the sync of the skills with Notion, and check each screen from the person's screenshot. The core is already set up and is not a target
