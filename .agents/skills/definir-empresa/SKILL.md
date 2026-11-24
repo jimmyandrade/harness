@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.9.0"
+  version: "0.9.1"
   related:
     - definir-grafia
     - definir-perfil-social
@@ -71,7 +71,17 @@ Quando a lista exige a cidade da empresa e ninguém a informou, pesquise na inte
 
 O site, o CNPJ e o WhatsApp da empresa que as fontes respondem entram na mesma rodada do cadastro, sem avisar a pessoa antes. Pesquise o site e o perfil social oficial, o link da bio do perfil, o que o convite ou o formulário trazem e, para o CNPJ, a internet. Grave o que achou e diga as fontes. Só o que a busca não respondeu vira pendência, com o motivo e o que a resolve, como o contrato. Não liste como pendência o que ninguém tentou achar.
 
-A inscrição estadual vale por UF e tem dígito verificador. Antes de gravá-la na empresa ou de usá-la num formulário, confirme o número, pelo CNPJ, na consulta pública do cadastro de contribuintes da UF do endereço, como o Sintegra da UF. Número que essa fonte não confirma, ou que o formulário recusa, não se grava nem se reenvia: corrija o registro pela fonte. A consulta com captcha é da pessoa: peça que ela a resolva e leia o resultado depois. Empresa sem inscrição, como um MEI isento, só se marca como isenta com a fonte ou com o sim da pessoa.
+A inscrição estadual vale por UF e tem dígito verificador. Antes de gravá-la na empresa ou de usá-la num formulário, confirme o número, pelo CNPJ, na consulta pública do cadastro de contribuintes da UF do endereço, como o Sintegra da UF.
+
+Número que essa fonte não confirma não se grava nem se reenvia: corrija o registro pela fonte.
+
+Número que a fonte confirma e o formulário recusa fica como está no registro: o formulário pode validar o formato de outro jeito, e a pessoa decide se tenta de novo ou fala com o suporte do site.
+
+A consulta com captcha é da pessoa: peça que ela a resolva e leia o resultado depois.
+
+Consulta que o navegador embutido não abre, como uma conexão recusada, segue a ordem de meios das instruções do projeto até o Claude in Chrome, e a página da Secretaria da Fazenda da UF costuma levar à consulta quando o mapa do Sintegra nacional não abre.
+
+Empresa sem inscrição, como um MEI isento, só se marca como isenta com a fonte ou com o sim da pessoa.
 
 Não escolha a sede só por ser a mais citada. Nome parecido de outra empresa, como uma filial ou uma entidade de outro porte, não vale como fonte: registre a distinção em `Não confundir com` ou nas notas.
 
@@ -141,10 +151,10 @@ Se você cadastrar a empresa e listar o site, o CNPJ ou o WhatsApp como pendênc
 
 ### Inscrição estadual sem fonte
 
-Se você usar a inscrição estadual como veio de um cadastro antigo, o formulário do fornecedor a recusa e o dado errado continua no registro.
+Se você usar a inscrição estadual como veio de um cadastro antigo, ou trocar o número só porque o formulário o recusou, o dado errado continua no registro ou o certo é apagado.
 
 1. Consulte a UF do endereço, pelo CNPJ, antes de gravar ou de usar o número.
-2. Grave o número confirmado e corrija o registro antigo.
+2. A fonte diverge: grave o número confirmado e corrija o registro antigo. A fonte confirma: não mude o registro e leve a recusa do formulário à pessoa.
 3. Captcha na consulta: peça à pessoa que o resolva.
 
 ### Cidade preenchida sem pesquisar
@@ -227,7 +237,7 @@ Contei que achávamos "Design Print", fica perto da Avenida Pedro II e imprime e
 - O tipo de público já tem outros valores: acrescente a opção de fornecedor quando fizer sentido. Não apague os outros.
 - As empresas relacionadas já mostram a empresa: não relacione de novo.
 - A empresa não apareceu nas empresas relacionadas: relacione.
-- A inscrição estadual gravada é recusada pelo formulário ou pela UF: consulte a fonte da UF antes de reenviar e corrija o registro.
+- A inscrição estadual gravada é recusada pelo formulário: consulte a fonte da UF antes de reenviar. Se a fonte diverge, corrija o registro. Se confirma, mantenha o registro e leve a recusa à pessoa.
 - Donos preenchidos não autorizam presumir quem é o contato operacional. Preserve as relações existentes.
 
 ## Pegadinhas
@@ -242,7 +252,7 @@ Contei que achávamos "Design Print", fica perto da Avenida Pedro II e imprime e
 - A nota com o nome da pessoa parece o vínculo. A nota não substitui as pessoas responsáveis.
 
 - A nota com a pista parece lugar da memória. A pista tem propriedade própria, e a nota qualifica o papel, o contexto, a pendência ou a certeza.
-- A inscrição estadual gravada parece confiável. Ela é por UF e pode ter sido gravada errada: confirme na consulta da UF do endereço.
+- A inscrição estadual gravada parece confiável, e a recusa do formulário parece provar que está errada. Nenhuma das duas prova: só a consulta da UF do endereço decide.
 - O nome errado parece descartável depois da correção. Ele fica nas variações de grafia, porque a pessoa e as conversas antigas ainda o usam.
 
 ## Scripts disponíveis
