@@ -3,7 +3,7 @@ name: escrever-codigo
 description: Aplica as preferências de código da pessoa antes de escrever ou alterar código, como comentários, tokens de design, estilo inline e o que fazer antes de criar um componente. Usada quando uma mudança vai escrever ou alterar código, inclusive quando o pedido é implementar uma issue. Não serve para testes, para commit nem para decidir a arquitetura. O pedido de implementar só termina quando a resposta tem o link do pull request.
 metadata:
   author: jimmyandrade
-  version: "0.11.0"
+  version: "0.12.0"
   related:
     - criar-commit
     - criar-pull-request
@@ -39,6 +39,11 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 Siga `Cópia de trabalho` antes de escrever. Com `worktree`, o ideal, crie um git worktree novo desta tarefa. Só use `workspace`, uma cópia independente do repositório, exclusiva desta tarefa e com a raiz de trabalho nela, quando o `worktree` não funcionar e escrever no clone não for seguro. Não use o clone aberto da pessoa nem uma cópia que outra tarefa já ocupa. Não apague a cópia no fim: o trabalho continua nela. Com valor vazio, escreva onde a pessoa já está.
 
 Chame `levantar-ambiente-do-repositorio` para achar a convenção de código e as habilidades do repositório, nas instruções do projeto e nas habilidades do próprio repositório. Ela vale mais que qualquer preferência desta habilidade. Diga à pessoa quando uma preferência dela contraria o repositório e siga o repositório. Se a demanda é uma issue do rastreador, siga `preparar-tarefa-do-pull-request` para conferir se a descrição está no modelo do tipo antes de escrever. Não escreva código enquanto a descrição estiver fora do modelo. Antes de escrever o código, siga `escrever-teste`: com TDD, o padrão dela, o teste que falha vem primeiro, e o código é o que o faz passar.
+
+Toda escolha de convenção que o código pede, como o nome de uma constante, de um arquivo ou de um tipo, a estrutura da pasta e a forma de um export, sai do repositório e nunca do hábito.
+Antes de escolher, procure a regra nas instruções do projeto, nas habilidades e nos guias do repositório, e leia a que achar.
+Sem regra escrita, copie um arquivo vizinho do mesmo tipo.
+Diga na resposta de onde veio cada escolha, como "UPPER_CASE, do guia de nomes do repositório" ou "copiado do vizinho".
 
 ### Passo 2
 
@@ -81,6 +86,14 @@ Se você conferir o título e a descrição a cada commit, a conferência gasta 
 
 1. Faça os commits sem essa conferência.
 2. Depois do push, uma vez, siga a conferência de `criar-pull-request`.
+
+### Convenção escolhida de hábito
+
+Se você nomear uma constante ou um arquivo pelo que costuma usar, sem conferir o repositório, a escolha pode coincidir com a regra dele ou contrariá-la, e você não sabe qual dos dois.
+
+1. Procure a regra nas instruções do projeto, nas habilidades e nos guias do repositório antes de escolher.
+2. Sem regra escrita, copie um vizinho do mesmo tipo.
+3. Diga na resposta de onde veio a escolha.
 
 ### Comentário que repete o código
 
@@ -160,6 +173,7 @@ Mudei a função sem comentário novo. Um `eslint-disable-next-line` com o motiv
 - Gravar o valor fixo parece mais rápido que avisar. O aviso custa uma frase, e o token que falta fica registrado para quem cuida do sistema de design.
 - Preferência da pessoa não vai para a habilidade nem para as instruções de um repositório sem consenso do time.
 - Conferir a cada commit parece necessário. A conferência é uma vez, depois do push.
+- O nome que você usa sempre parece o certo. Acertar por hábito não prova que o repositório tem essa regra, e a pessoa pergunta de onde veio.
 - Reutilizar a worktree aberta parece mais rápido. Com `Cópia de trabalho` em `workspace` ou `worktree`, a tarefa abre uma cópia nova e ela fica no fim.
 - O código pronto parece o fim do pedido de implementar. O fim é o link do pull request.
 
