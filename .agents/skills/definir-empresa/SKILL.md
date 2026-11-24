@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.9.2"
+  version: "0.9.3"
   related:
     - definir-grafia
     - definir-perfil-social
@@ -77,7 +77,9 @@ Procure antes, nos arquivos conectados do projeto, o comprovante da inscrição 
 
 Número que essa fonte não confirma não se grava nem se reenvia: corrija o registro pela fonte.
 
-Número que a fonte confirma e o formulário recusa fica como está no registro: o formulário pode validar o formato de outro jeito, e a pessoa decide se tenta de novo ou fala com o suporte do site.
+Grave a inscrição como texto, com o tamanho que a UF define e com os zeros à esquerda. Uma fonte que mostra o número sem os zeros, como o cadastro nacional de contribuintes, pode estar cortando o início: confira o tamanho na página da Secretaria da Fazenda da UF e os dígitos verificadores antes de gravar ou de desconfiar do formulário.
+
+Número que a fonte confirma e o formulário recusa fica como está no registro, depois de conferir o tamanho: o formulário pode validar o formato de outro jeito, e a pessoa decide se tenta de novo ou fala com o suporte do site.
 
 A consulta com captcha é da pessoa: peça que ela a resolva e leia o resultado depois.
 
@@ -155,8 +157,8 @@ Se você cadastrar a empresa e listar o site, o CNPJ ou o WhatsApp como pendênc
 
 Se você usar a inscrição estadual como veio de um cadastro antigo, ou trocar o número só porque o formulário o recusou, o dado errado continua no registro ou o certo é apagado.
 
-1. Procure o comprovante nos arquivos conectados e consulte a UF do endereço, pelo CNPJ, antes de gravar ou de usar o número.
-2. A fonte diverge: grave o número confirmado e corrija o registro antigo. A fonte confirma: não mude o registro e leve a recusa do formulário à pessoa.
+1. Procure o comprovante nos arquivos conectados e consulte a UF do endereço, pelo CNPJ, antes de gravar ou de usar o número. Confira o tamanho da inscrição na UF e complete os zeros à esquerda.
+2. A fonte diverge, ou só cortou os zeros: grave o número confirmado e corrija o registro antigo. A fonte confirma: não mude o registro e leve a recusa do formulário à pessoa.
 3. Captcha na consulta: peça à pessoa que o resolva.
 
 ### Cidade preenchida sem pesquisar
