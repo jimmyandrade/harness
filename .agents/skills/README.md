@@ -352,6 +352,7 @@ flowchart LR
   conversar_no_whatsapp --> definir_tarefa
   conversar_no_whatsapp --> definir_viagem
   conversar_no_whatsapp --> definir_vocabulario
+  conversar_no_whatsapp --> diagnosticar_funil
   conversar_no_whatsapp --> dividir_mensagem
   conversar_no_whatsapp --> enviar_email
   conversar_no_whatsapp --> escrever_link
