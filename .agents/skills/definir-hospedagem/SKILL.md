@@ -3,12 +3,13 @@ name: definir-hospedagem
 description: Define a hospedagem de uma viagem, da cotação que decide a data até o que ela pede depois da reserva, como nome e documento dos hóspedes, veículo e chegada, e a resposta a quem hospeda, com o sim se leva dado pessoal. Usada quando o anfitrião ou o hotel escreve, ou a pessoa pede para agradecer ou avisar. Não serve para ler a reserva, registrar a viagem nem redigir no tom da marca.
 metadata:
   author: jimmyandrade
-  version: "0.26.1"
+  version: "0.26.2"
   aliases:
     - responder-pedido-da-hospedagem
   related:
     - acompanhar-veiculo
     - conversar-no-whatsapp
+    - definir-empresa
     - definir-perfil-social
     - definir-pessoa
     - acompanhar-retornos-pendentes
@@ -155,7 +156,7 @@ Leia cada avaliação baixa inteira, abrindo o "Mostrar mais" e conferindo que o
 
 Guarde no Notion toda candidata lida na sessão, também a descartada, sem esperar pedido, com as avaliações baixas, a postura do anfitrião e o motivo, para a próxima busca não reler o Airbnb. De toda hospedagem usada, guarde o link do anúncio na própria hospedagem, para a pessoa poder voltar a ela.
 
-Cadastre também o anfitrião de toda candidata lida: o perfil da plataforma, por `definir-perfil-social`, com o ID do perfil como chave, ligado à hospedagem, e a pessoa, por `definir-pessoa`, com as observações do que as avaliações mostram: ao achar outro anúncio de um anfitrião conhecido, diga que é o mesmo e o que já se sabe dele.
+Cadastre também o anfitrião de toda candidata lida: o perfil da plataforma, por `definir-perfil-social`, com o ID do perfil como chave, ligado à hospedagem. A pessoa, por `definir-pessoa`, só entra com nome e sobrenome, para evitar ambiguidade. Anfitrião empresa liga o perfil à empresa, por `definir-empresa`. Outro anúncio de anfitrião conhecido: diga que é o mesmo e o que já se sabe.
 
 Confira na página de comodidades de cada candidata, uma a uma, se o que é necessidade existe e não aparece como indisponível: o filtro da busca não garante, e a candidata que passou no filtro pode listar "Indisponível: Ar-condicionado". Avaliação que cita colchão manchado, sem lençol ou com plástico conta como incidente de colchão e descarta a candidata.
 
