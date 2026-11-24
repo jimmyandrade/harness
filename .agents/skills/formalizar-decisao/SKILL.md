@@ -3,7 +3,7 @@ name: formalizar-decisao
 description: Leva uma decisão de comportamento a quem decide, com a dúvida, a hipótese e o que já está definido, e formaliza a resposta na tarefa e no pull request, em qualquer canal e em qualquer momento, do refinamento ao desk check. Usada quando surge uma dúvida ou uma escolha de comportamento que não é sua, mesmo sem dizer decisão. Não serve para dúvida de código, status de entrega nem para escrever o texto da mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.6.1"
+  version: "0.6.2"
   aliases:
     - abrir-thread-de-decisao
   related:
@@ -38,10 +38,14 @@ Reconheça a decisão: uma dúvida, uma hipótese ou uma escolha entre opções 
 
 ### Passo 2
 
-Antes de perguntar, procure a resposta em `Fontes antes de perguntar`: os comentários, as páginas e os arquivos ligados do desenho, o que ele liga a tokens e a variáveis, a data da última mudança, os registros de refinamento e de reunião, o card com os comentários dele e a conversa.
+Antes de perguntar, procure a resposta em `Fontes antes de perguntar`: os comentários, as páginas e os arquivos ligados do desenho, o que ele liga a tokens e a variáveis, a data da última mudança, os registros de refinamento e de reunião, o card com os comentários dele, cada ata ou página que o card cita e a conversa.
 Uma fonte que responde, com data e autor, vira decisão já tomada: siga o Passo 7 e não pergunte.
 Uma fonte que responde só em parte reduz a pergunta ao que falta.
 Fontes que se contradizem entram no pedido como contradição, cada uma com o seu link.
+
+Uma proposta de implementação que difere de uma decisão já registrada, como um contrato de dados que não segue a história, não é contradição entre fontes nem pergunta a quem decidiu.
+Aponte a diferença a quem propôs, cite a fonte da decisão e peça o ajuste.
+Pergunte a quem decide só o que nenhuma fonte responde.
 
 Monte o pedido: o que já está definido e onde você achou, o que foi procurado e não respondeu, a dúvida ou a hipótese, as opções e a sua recomendação quando houver, e a evidência de cada caso, como uma imagem ou um número. Faça uma pergunta só, no fim.
 
@@ -140,6 +144,14 @@ Se você registrar como decidido o que a pessoa respondeu de um jeito que cabe e
 2. Deixe a decisão pendente até a resposta.
 3. Registre só a opção confirmada.
 
+### Consulta sobre o que já estava decidido
+
+Se você perguntar a quem decide o que a história, o desenho ou uma ata já respondeu, ou tratar uma proposta de implementação como se fosse uma dúvida de produto, a pessoa repete uma decisão que já tinha dado e o time vê a consulta como falta de leitura.
+
+1. Abra cada ata ou página que o card cita, além do card e do desenho, antes de escrever a pergunta.
+2. Compare a proposta com a decisão registrada. Se ela difere, aponte a diferença a quem propôs, com a fonte, e peça o ajuste.
+3. Leve a quem decide só o que nenhuma fonte responde, e marque o resto como já decidido, com o link.
+
 ### Reação atribuída a quem não reagiu
 
 Se você disser que uma pessoa reagiu ou concordou sem ler a lista de quem reagiu, a atribuição pode estar errada, e a pessoa que pediu a consulta vai confirmar com quem não fez nada.
@@ -203,12 +215,14 @@ Perguntei só o que as fontes não respondiam: "A nota de 12/03 é a versão fin
 - A tarefa ainda não existe: siga `preparar-tarefa-do-pull-request` antes de formalizar.
 - A dúvida é de código: ela vai para o pull request, não para esta habilidade.
 - A fonte que responde é mais antiga que uma mudança posterior no mesmo assunto: não a use como decisão. Leve a data das duas à pessoa.
+- A proposta de quem implementa difere da história, do desenho ou de uma ata: não consulte quem decidiu. Aponte a diferença a quem propôs e peça o ajuste.
 - A thread mostra uma reação e a ferramenta não lista quem reagiu: diga que não sabe quem foi e não a atribua a ninguém.
 - A ferramenta de desenho não mostra o histórico de versões: diga que não foi possível ler, com o que o arquivo mostra no lugar, e não conclua que o desenho é final.
 
 ## Pegadinhas
 
 - Uma thread geral de status parece o lugar mais rápido para perguntar. A decisão se perde nela.
+- Uma proposta de implementação que não bate com a história parece uma dúvida de produto. A decisão já existe, e quem propôs ajusta.
 - Um joinha numa thread parece vir de quem foi consultado. A leitura da thread não diz quem reagiu: leia a lista antes de citar um nome.
 - O Slack parece a única ferramenta. O negócio pode conversar também em outra, com ou sem thread.
 - A resposta na conversa parece registrar a decisão. O registro é a área de decisões da tarefa e do pull request.
