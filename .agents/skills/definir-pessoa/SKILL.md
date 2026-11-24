@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.27.2"
+  version: "0.27.3"
   related:
     - definir-empresa
     - definir-grafia
@@ -82,6 +82,7 @@ Um perfil colado por quem usa a habilidade, em texto ou imagem, é o pedido de c
 Busque o nome na lista de pessoas, no nome e nas variações, por consulta direta e por busca semântica. Antes de perguntar qualquer dado de identidade, consulte o registro da pessoa. Se faltar, resolva pelas `Fontes para resolver identidade`: consulte cada ferramenta da lista que estiver conectada, pelo nome e, quando houver, pelo e-mail (perfil, autor, login). Um nome parcial, um apelido ou uma grafia estranha, sem e-mail, também se resolve nessas fontes. Compare o cargo, o time e os canais com o assunto da conversa.
 Não peça à pessoa que desambigue antes dessa busca.
 Pelo conector, busque só na lista de pessoas, por nome e telefone.
+Confirmação que a pessoa admite não lembrar não vale: o nome segue `inferido`.
 Só pergunte o que nem o registro nem essas fontes respondem. O telefone de quem escreveu pelo WhatsApp se lê no WhatsApp Web, por `usar-whatsapp-web`, e se grava na hora, sem pendência.
 Um candidato único e plausível pelo contexto entra como hipótese `inferido`, com a frase da fonte. Só o que a fonte responde com certeza entra como confirmado.
 Com vários candidatos, liste cada um com o que ajuda a diferenciar, como cargo e e-mail, e com outros dados que as fontes tragam, junto da frase em que o nome aparece, e pergunte só qual deles. Nunca pergunte só pelo nome.
