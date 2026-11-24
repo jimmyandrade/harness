@@ -4,7 +4,7 @@ description: Abre, revisa, edita e traduz issues do GitHub pelo modelo e no idio
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.11.0"
+  version: "0.11.1"
   aliases:
     - definir-issue
   related:
@@ -90,6 +90,7 @@ O material de apoio que não cabe no corpo vai como artifact da issue, não cola
 O plano de implementação entra como `plan`, a pesquisa ou a nota de design como `generic`, o diagrama ou o protótipo como `embedded_html`, e a conversa ou a página de fora como `link`.
 O corpo continua no modelo e cita o artifact só quando ele explica a proposta.
 O artifact segue o `Idioma da issue` e, em repositório público, a mesma regra da issue.
+O nome do artifact, depois do `#`, só aceita letras, números, espaços, pontos, hífens e sublinhados, e começa e termina em letra ou número. Qualquer outro sinal, como parênteses, faz o `gh` recusar esse anexo.
 Para mudar um artifact, edite o mesmo, que guarda a versão. Não apague para criar outro: a exclusão leva o histórico.
 Se a linha de comando do GitHub, o `gh`, estiver abaixo da 2.103 ou não estiver disponível, e não houver outra conexão que crie artifact, avise a pessoa e siga `Material sem artifact`. Com `perguntar`, proponha pôr o material na descrição, num comentário ou nos dois, e espere a escolha. Com `descrição` ou `comentário`, ponha o material lá.
 
@@ -129,6 +130,14 @@ Se você escrever a issue pelo hábito, com título solto e seções próprias c
 2. Use o título `tipo: descrição` e as seções do modelo, na ordem, com bullets em Proposta e em Pronto quando.
 3. Vale também para a issue que nasce de um achado no meio de outro trabalho.
 
+### Nome de artifact recusado
+
+Se você der ao artifact um nome com parênteses ou outro sinal, como "Script (protótipo)", o `gh` recusa só esse anexo e os outros entram, e a issue fica com o material incompleto.
+
+1. Use só letras, números, espaços, pontos, hífens e sublinhados, começando e terminando em letra ou número.
+2. Confira com `gh issue artifact list <número>` que cada anexo entrou.
+3. Crie de novo o anexo recusado, com o nome certo. Não apague os que entraram.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
@@ -153,6 +162,7 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 - Commit e pull request seguem os próprios idiomas. O `Idioma da issue` vale só para a issue.
 - O título em inglês parece obrigatório por causa do Conventional Commits. Só o tipo é fixo. A descrição segue o `Idioma da issue`.
 - Um plano ou uma pesquisa longa parece caber num comentário. O comentário não tem nome nem versão. O artifact tem os dois.
+- O nome do artifact parece livre, como o título da issue. Ele aceita só letras, números, espaços, pontos, hífens e sublinhados, e o anexo com parênteses é recusado enquanto os outros entram.
 - O artifact parece visível só para quem tem acesso ao repositório. Em repositório público, qualquer pessoa vê o artifact, como vê a issue.
 - A busca só nas abertas parece bastar. A issue fechada também conta, e reabrir é melhor que duplicar.
 - Uma varredura das issues abertas parece dizer quais fechar. A issue fecha quando o pull request que a cita, ainda aberto, é mesclado, e o `Pronto quando` está cumprido.
