@@ -3,7 +3,7 @@ name: definir-hospedagem
 description: Define a hospedagem de uma viagem, da cotação que decide a data até o que ela pede depois da reserva, como nome e documento dos hóspedes, veículo e chegada, e a resposta a quem hospeda, com o sim se leva dado pessoal. Usada quando o anfitrião ou o hotel escreve, ou a pessoa pede para agradecer ou avisar. Não serve para ler a reserva, registrar a viagem nem redigir no tom da marca.
 metadata:
   author: jimmyandrade
-  version: "0.11.0"
+  version: "0.12.0"
   aliases:
     - responder-pedido-da-hospedagem
   related:
@@ -142,7 +142,11 @@ Antes de decidir a data de uma viagem, cote a hospedagem das datas candidatas: c
 
 As datas candidatas vêm das preferências de viagem: leia os dias para não viajar e os preferenciais da localidade, e os melhores dias de cada pessoa que viaja, nas propriedades que o mapeamento de dados do projeto indica. Data que cai num dia a evitar não é candidata. Sem essas propriedades no mapeamento, diga a limitação e pergunte à pessoa os dias. Com `Política de viagem` preenchida, leia também a política e siga as regras gerais dela, como a antecedência e o dia da volta.
 
-Antes de sugerir onde ficar, leia a avaliação das hospedagens anteriores no mesmo lugar e com o mesmo anfitrião. A avaliada como evitar não é sugerida, e a avaliada como talvez vem com o motivo.
+Antes de buscar, pergunte uma vez se vão de carro próprio, se a cama precisa ser de casal ou podem ser duas camas, e qual é o teto por noite. De carro, a hospedagem precisa de estacionamento e o veículo entra na viagem.
+Busque pelo endereço exato do compromisso, não pelo bairro.
+Classifique cada candidata lendo primeiro as avaliações mais baixas, para ver o risco, e descarte a que cair numa regra da política, como o histórico de mofo.
+
+Antes de sugerir onde ficar, leia a avaliação e o motivo de todas as hospedagens anteriores, de qualquer lugar, porque um incidente de uma cidade vale para as outras. A avaliada como evitar não é sugerida, e a avaliada como talvez vem com o motivo.
 A avaliação tem o motivo, o dia e quem avaliou, cada um na sua propriedade. Grave quando a pessoa a disser, com o nome de quem decidiu. A casa de um parente segue a mesma regra.
 Avaliação que a pessoa ainda não fez fica como pendência: não a preencha por ela.
 Estadia deixada antes do fim ou trocada por outra registra o check-out do dia em que a pessoa saiu, não o da reserva, e o motivo da troca vai no motivo da avaliação, com o que deu errado e o que foi resolvido.
@@ -247,6 +251,7 @@ Respondi pelo e-mail em que o pedido chegou. Mandei nomes e horário. Não mande
 - O cadastro tem o nome completo e o nome civil de registro. Quem tem nome social se cadastra e é tratada por ele, e tratá-la pelo nome civil a constrange. O nome civil só sai com `Nome civil na resposta` em `sim`, ou se a pessoa pedir.
 - Dado sensível não vira texto de memória, de nota nem de comentário na negociação. Ele fica no cadastro e na resposta enviada.
 - A hospedagem que pede os dados também libera o acesso com base neles: um erro no documento trava a entrada.
+- A busca por bairro parece bastar. O endereço exato do compromisso é o centro da busca, e a nota alta de uma candidata não mostra o risco que as avaliações baixas mostram.
 - A data da viagem parece vir antes da hospedagem. A cotação vem antes e decide a data.
 
 ## Scripts disponíveis
