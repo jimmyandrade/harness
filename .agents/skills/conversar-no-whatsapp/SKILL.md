@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, e lê o pedido, quem pediu, a data, o que o contato afirmou e o que falta. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp ou conferir o que alguém pediu. Não serve para escrever ou enviar a mensagem, redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.44.0"
+  version: "0.44.1"
   aliases:
     - redigir-mensagem-de-whatsapp
   related:
@@ -27,6 +27,7 @@ metadata:
     - lancar-despesa-da-empresa
     - procurar-agenda
     - procurar-tarefa
+    - prospectar-oportunidades
     - rascunhar-mensagem
     - reconhecer-imagem
     - redigir-com-tom-de-voz
@@ -86,6 +87,8 @@ A data vem do separador do dia na conversa. "Hoje" e "Ontem" contam a partir de 
 
 Separe o que o contato afirmou do que a mensagem dele não diz. O que quem fala pela organização afirma, como "terá feira na sexta, sábado e domingo", está confirmado por ela: diga como confirmado, com as palavras dela e o horário. O que falta vai em outra linha, como pendência, e só ela fica sem confirmação, como a data exata, o mapa e o valor. Um "ainda não está confirmado" só vale para o que ninguém da organização afirmou. A pergunta de um membro do grupo, como "está confirmada?", fica respondida quando a organização afirma depois.
 
+Quando o contato pergunta como foi uma participação, como a experiência numa feira, num festival ou num evento, leia o retorno da empresa na página da edição, quase sempre a retrospectiva no bloco de notas de reunião, como `prospectar-oportunidades` manda. Esse retorno entra no que vai para `rascunhar-mensagem`, e a resposta já sai completa: a pessoa só é perguntada sobre o que o registro não diz. Sem retorno registrado, diga isso antes de perguntar.
+
 Antes de repassar o resumo de outra sessão ou de um subagente, compare cada "não confirmado" e "não achei" com a mensagem que ele citou. Se a mensagem afirma o fato, corrija o resumo antes de mostrá-lo à pessoa.
 
 Quando o contato descreve a marca de um jeito que o `Posicionamento da marca` não confirma, como o tipo de negócio, o resumo traz isso como ponto de ação, antes de qualquer outro. A resposta corrige o que a marca é, com as palavras do posicionamento, e pergunta se isso faz sentido para a curadoria dele. Sem `Posicionamento da marca`, pergunte uma vez onde está e não escreva a correção de memória.
@@ -134,6 +137,14 @@ Cada leitura de conversa com mensagem nova também vira comentário datado na p�
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
+
+### Opinião sobre a participação perguntada à pessoa
+
+Se você deixar entre colchetes, ou perguntar à pessoa, o que ela achou de um evento que já tem retrospectiva registrada, o rascunho sai incompleto e ela repete o que já disse.
+
+1. Abra a página da edição e leia o bloco de notas de reunião inteiro.
+2. Leve o que valeu a pena e a ressalva para o rascunho.
+3. Pergunte só o que o registro não diz.
 
 ### Pedido em uma conversa só
 

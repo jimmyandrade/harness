@@ -358,6 +358,7 @@ flowchart LR
   conversar_no_whatsapp --> lancar_despesa_da_empresa
   conversar_no_whatsapp --> procurar_agenda
   conversar_no_whatsapp --> procurar_tarefa
+  conversar_no_whatsapp --> prospectar_oportunidades
   conversar_no_whatsapp --> rascunhar_mensagem
   conversar_no_whatsapp --> reconhecer_imagem
   conversar_no_whatsapp --> redigir_com_tom_de_voz
@@ -1067,7 +1068,6 @@ flowchart LR
   rascunhar_mensagem --> enviar_email
   rascunhar_mensagem --> escrever_link
   rascunhar_mensagem --> procurar_agenda
-  rascunhar_mensagem --> prospectar_oportunidades
   rascunhar_mensagem --> redigir_com_tom_de_voz
   rascunhar_mensagem --> rotular_item
   rascunhar_mensagem --> usar_whatsapp_web
