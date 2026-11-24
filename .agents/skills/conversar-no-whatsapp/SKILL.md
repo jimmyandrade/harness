@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, e lê o pedido, quem pediu, a data, o que o contato afirmou e o que falta. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp ou conferir o que alguém pediu. Não serve para escrever ou enviar a mensagem, redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.44.1"
+  version: "0.44.2"
   aliases:
     - redigir-mensagem-de-whatsapp
   related:
@@ -24,6 +24,7 @@ metadata:
     - enviar-email
     - escrever-link
     - evoluir-habilidade
+    - manter-contato-no-whatsapp
     - lancar-despesa-da-empresa
     - procurar-agenda
     - procurar-tarefa
@@ -68,6 +69,8 @@ No WhatsApp Web, todo acesso segue `usar-whatsapp-web`: o Chrome da pessoa, a ab
 ### Passo 2
 
 Espere a lista de conversas carregar antes de ler. Com `Etiqueta das conversas` preenchida, filtre a lista por essa etiqueta antes de procurar. Ache a conversa pelo nome na lista ou pela busca. Um pedido costuma estar em mais de uma conversa: na de quem pediu, na da pessoa envolvida e num grupo. Abra cada conversa ligada ao assunto e leia o texto da conversa aberta, não só a prévia da lista. Logo depois de ler cada uma, rotule-a por `rotular-item`, antes do resumo ou de qualquer pergunta. O contexto é o do assunto que a pessoa trata: quem só fica a par não recebe o de quem cuida dele.
+
+Na mesma rodada, antes do resumo, siga a lista de `manter-contato-no-whatsapp` em cada conversa aberta, também numa leitura só: a pessoa e a empresa procuradas no data source pelo nome e pelo telefone, e cadastradas quando faltam; o número sem nome salvo nos contatos; a nota com o link da página. A resposta diz o resultado de cada item. Não espere a pessoa cobrar, nem o envio.
 
 Uma conversa com mensagens não lidas segue `Não lidas antes de enviar`. Com `ler e mostrar`, leia as não lidas e mostre primeiro o que pede ação da pessoa, como uma menção, uma pergunta ou um pedido para ela, e depois o resto em uma linha. Antes de enviar nessa conversa, pergunte se envia agora ou espera. Com `perguntar antes de abrir`, diga que abrir marca essas mensagens como lidas, também para quem enviou, e pergunte se pode abrir.
 
@@ -145,6 +148,14 @@ Se você deixar entre colchetes, ou perguntar à pessoa, o que ela achou de um e
 1. Abra a página da edição e leia o bloco de notas de reunião inteiro.
 2. Leve o que valeu a pena e a ressalva para o rascunho.
 3. Pergunte só o que o registro não diz.
+
+### Contato deixado sem cadastro
+
+Se você ler ou responder a um número sem nome e não seguir `manter-contato-no-whatsapp`, a pessoa fica fora do data source e do WhatsApp, e quem usa a habilidade precisa cobrar.
+
+1. Procure a pessoa e a empresa no data source pelo nome e pelo telefone, e cadastre o que falta.
+2. Salve o contato e grave a nota com o link da página.
+3. Confira os rótulos e diga o resultado de cada item.
 
 ### Pedido em uma conversa só
 
