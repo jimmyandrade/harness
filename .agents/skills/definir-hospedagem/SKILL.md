@@ -3,7 +3,7 @@ name: definir-hospedagem
 description: Define a hospedagem de uma viagem, da cotação que decide a data até o que ela pede depois da reserva, como nome e documento dos hóspedes, veículo e chegada, e a resposta a quem hospeda, com o sim se leva dado pessoal. Usada quando o anfitrião ou o hotel escreve, ou a pessoa pede para agradecer ou avisar. Não serve para ler a reserva, registrar a viagem nem redigir no tom da marca.
 metadata:
   author: jimmyandrade
-  version: "0.28.0"
+  version: "0.28.1"
   aliases:
     - responder-pedido-da-hospedagem
   related:
@@ -106,7 +106,7 @@ Posso enviar? <pergunta que pede o sim>
 ```
 O texto da resposta passa por `redigir-com-tom-de-voz` antes de ser mostrado. A resposta traz só o pedido: quem chega, o veículo se foi pedido e o horário previsto. Não acrescente dado que a hospedagem não pediu.
 Quando a pessoa dita o texto, como um agradecimento ou um aviso de chegada, e ele não leva dado pessoal nem promessa além do que ela disse, o pedido já é o sim: envie pelo canal da reserva, sem a tela de confirmação, e diga o que enviou.
-Quando a hospedagem pede dado de hóspedes já cadastrados na hospedagem do Notion, monte o rascunho completo sem perguntar. Documento e placa você nunca digita, nem em formulário nem em link que o anfitrião mandou: a pessoa os digita ou envia, com o rascunho já pronto. Dado de quem não está cadastrado espera o sim.
+Quando a hospedagem pede dado de hóspedes já cadastrados na hospedagem do Notion, monte o rascunho completo sem perguntar. Abra o link do anfitrião sem perguntar, para ler os campos e o domínio e montar o rascunho nos campos dele. Documento e placa você nunca digita: a pessoa os digita ou envia. Dado de quem não está cadastrado espera o sim.
 
 ### Passo 4
 
@@ -280,7 +280,7 @@ Respondi pelo e-mail em que o pedido chegou. Mandei nomes e horário. Não mande
 - Dado sensível não vira texto de memória, de nota nem de comentário na negociação. Ele fica no cadastro e na resposta enviada.
 - A hospedagem que pede os dados também libera o acesso com base neles: um erro no documento trava a entrada.
 - A busca por bairro parece bastar. O centro da busca é o endereço exato, e a nota alta não mostra o risco que as avaliações baixas mostram.
-- A data da viagem parece vir antes. A cotação decide a data.
+
 
 ## Scripts disponíveis
 
