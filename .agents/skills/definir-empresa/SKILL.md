@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.9.5"
+  version: "0.9.6"
   related:
     - definir-grafia
     - definir-perfil-social
@@ -67,7 +67,7 @@ Uma compra pontual, como uma refeição em restaurante, não exige conhecer o do
 
 O cadastro mínimo de recebedora financeira não valida a fornecedora para relacionamento comercial. Nele, site e razão social completa ausentes ficam como pendências, sem impedir o vínculo com o pagamento. O contato responsável ausente só vira pendência quando há relacionamento continuado. Não invente esses dados nem trate a instituição de pagamento como recebedora.
 
-Fornecedora que ainda será testada, como a de uma peça para produzir em pequeno volume, pode precisar crescer se o produto vender bem. Pergunte à pessoa se isso vale a pena registrar e, com o sim, grave nas notas o mínimo por pedido e a dúvida pendente sobre aumentar o volume depois, sem afirmar o que a fornecedora não disse. Quem pergunta à fornecedora e por qual canal é decisão da pessoa. Um formulário de cadastro sem campo de observações não é lugar para isso, e o aviso vai pelo canal de atendimento ou pela primeira mensagem, com o sim dela.
+Fornecedora que ainda será testada, como a de uma peça para produzir em pequeno volume, pode precisar crescer se o produto vender bem. Grave nas notas o mínimo por pedido e a dúvida pendente sobre aumentar o volume depois, sem afirmar o que a fornecedora não disse. Um formulário de cadastro sem campo de observações não é lugar para isso: a dúvida que o formulário não cobre vai pelo canal de atendimento da fornecedora, identificando quem escreve e o protocolo, sem pedir o sim da pessoa a cada dúvida, porque ela já deixou isso autorizado. A resposta entra em comentário datado, e uma promessa de volume que a fornecedora não fez fica como pendência.
 
 Depois de enviar um cadastro no site da fornecedora, ou de a fornecedora escrever, confira na mesma hora o e-mail e o WhatsApp da conta usada no cadastro, sem esperar a pessoa avisar. Uma resposta que chegou, como a confirmação de recebimento com o protocolo, entra em comentário datado na página da empresa. Siga `rotular-item` para a conversa lida, mesmo que o pedido fosse só enviar. Canal que a sessão não alcança, como um WhatsApp sem conector, a resposta diz que não conferiu.
 
@@ -243,7 +243,7 @@ Contei que achávamos "Design Print", fica perto da Avenida Pedro II e imprime e
 - Cadastro mínimo de recebedora: registre como pendência o que faltar, salvo o contato numa compra pontual, e devolva a página para vincular o pagamento. Não dê a validação comercial por concluída.
 - A pessoa já existe: aponte o registro. Não crie outra.
 - O cadastro no site da fornecedora acabou de ser enviado: confira o e-mail e o WhatsApp antes de dizer que falta algo. O envio nem sempre mostra tudo na tela, e a confirmação por e-mail traz dados que a página não traz, como a razão social usada.
-- A fornecedora é só um teste e o produto pode escalar: registre nas notas o mínimo por pedido e a dúvida sobre aumentar o volume. Não prometa volume à fornecedora nem afirme nas notas que ela aceita.
+- A fornecedora é só um teste e o produto pode escalar: registre nas notas o mínimo por pedido e a dúvida sobre aumentar o volume, e leve a dúvida ao atendimento dela sem perguntar à pessoa. Não prometa volume à fornecedora nem afirme nas notas que ela aceita.
 - O tipo de público já tem outros valores: acrescente a opção de fornecedor quando fizer sentido. Não apague os outros.
 - As empresas relacionadas já mostram a empresa: não relacione de novo.
 - A empresa não apareceu nas empresas relacionadas: relacione.
