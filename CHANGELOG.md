@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.108.0](https://github.com/jimmyandrade/harness/compare/v1.107.0...v1.108.0) (2026-11-24)
+
+
+### Features
+
+* **escrever-codigo:** use design tokens and flag a missing token ([#1471](https://github.com/jimmyandrade/harness/issues/1471)) ([62c16ef](https://github.com/jimmyandrade/harness/commit/62c16efc03cc47622830fd2d3758843387416207))
+* **formalizar-decisao:** search the sources before asking the person ([#1469](https://github.com/jimmyandrade/harness/issues/1469)) ([af8c788](https://github.com/jimmyandrade/harness/commit/af8c788a67ca49e3c4bcb879968b4fc6b74c874f))
+
 ## [1.107.0](https://github.com/jimmyandrade/harness/compare/v1.106.0...v1.107.0) (2026-11-24)
 
 
