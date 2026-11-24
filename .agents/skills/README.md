@@ -541,6 +541,7 @@ flowchart LR
   definir_hospedagem --> conversar_no_whatsapp
   definir_hospedagem --> definir_pessoa
   definir_hospedagem --> definir_viagem
+  definir_hospedagem --> lancar_despesa_da_empresa
   definir_hospedagem --> procurar_email
   definir_hospedagem --> redigir_com_tom_de_voz
   definir_idioma_da_conversa --> definir_pessoa
