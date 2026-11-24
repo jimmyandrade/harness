@@ -3,7 +3,7 @@ name: definir-hospedagem
 description: Define a hospedagem de uma viagem, da cotação que decide a data até o que ela pede depois da reserva, como nome e documento dos hóspedes, veículo e chegada, e a resposta a quem hospeda, com o sim se leva dado pessoal. Usada quando o anfitrião ou o hotel escreve, ou a pessoa pede para agradecer ou avisar. Não serve para ler a reserva, registrar a viagem nem redigir no tom da marca.
 metadata:
   author: jimmyandrade
-  version: "0.27.0"
+  version: "0.28.0"
   aliases:
     - responder-pedido-da-hospedagem
   related:
@@ -105,8 +105,8 @@ Falta antes de enviar: <o que a pessoa ainda precisa informar, ou "nada">
 Posso enviar? <pergunta que pede o sim>
 ```
 O texto da resposta passa por `redigir-com-tom-de-voz` antes de ser mostrado. A resposta traz só o pedido: quem chega, o veículo se foi pedido e o horário previsto. Não acrescente dado que a hospedagem não pediu.
-Quando a pessoa dita o texto, como um agradecimento ou um aviso de chegada, e ele não leva dado pessoal nem promessa além do que ela disse, o pedido já é o sim: envie pelo canal da reserva, sem a tela de confirmação, e diga o que enviou. Devolver só o rascunho nesse caso deixa o envio para a pessoa.
-Quando a resposta leva dado pessoal, mostre o rascunho completo, com o que falta, e espere o sim. Enviar dado pessoal a outra empresa é ação que só a pessoa autoriza, e o sim dado a um dado não vale para o seguinte.
+Quando a pessoa dita o texto, como um agradecimento ou um aviso de chegada, e ele não leva dado pessoal nem promessa além do que ela disse, o pedido já é o sim: envie pelo canal da reserva, sem a tela de confirmação, e diga o que enviou.
+Quando a hospedagem pede dado de hóspedes já cadastrados na hospedagem do Notion, monte o rascunho completo sem perguntar. Documento e placa você nunca digita, nem em formulário nem em link que o anfitrião mandou: a pessoa os digita ou envia, com o rascunho já pronto. Dado de quem não está cadastrado espera o sim.
 
 ### Passo 4
 
@@ -239,7 +239,7 @@ Se você responder o anfitrião de plataforma por e-mail, ou o hotel pela plataf
 Se você devolver só o rascunho de um agradecimento ou de um aviso que a pessoa ditou, ela tem de copiar e colar o texto, e o anfitrião fica sem resposta.
 
 1. Texto ditado, sem dado pessoal nem promessa além do dito: envie pelo canal da reserva e confira que saiu.
-2. Dado pessoal na resposta: mostre o rascunho e espere o sim.
+2. Dado de hóspede cadastrado: monte o rascunho pronto, sem perguntar, e a pessoa digita o documento.
 3. Diga o que enviou e onde.
 
 ## Exemplos de entrada e saída
@@ -272,15 +272,15 @@ Respondi pelo e-mail em que o pedido chegou. Mandei nomes e horário. Não mande
 
 - A reserva da plataforma parece mostrar a estadia vivida. Quem trocou de lugar no meio mostra o período reservado, e o vivido é o que a pessoa conta.
 - A conta da plataforma que está logada parece ter todas as reservas. Cada pessoa tem a sua, e as viagens de outra só aparecem na conta dela.
-- A hospedagem de um parente parece não precisar de avaliação. A decisão de não voltar vale também para ela, e o motivo é o que a pessoa disse.
+- A hospedagem de um parente parece não precisar de avaliação. A decisão de não voltar vale também para ela, com o motivo da pessoa.
 - A reserva feita à mão não cria página no Notion, e o banco de viagens e o de hospedagens podem nem ter onde registrar quem viaja e o veículo. Quem viaja e o transporte podem não estar em lugar nenhum.
 - A vaga que a hospedagem oferece parece valer a qualquer hora. A garagem de um parceiro tem horário, e quem volta à noite precisa saber até quando ela abre e se deve interfonar.
 - O pedido de documento costuma vir antes do check-in e some da lista de mensagens com a tradução automática. Leia a mensagem original, não a prévia da lista.
 - O cadastro tem o nome completo e o nome civil de registro. Quem tem nome social se cadastra e é tratada por ele, e tratá-la pelo nome civil a constrange. O nome civil só sai com `Nome civil na resposta` em `sim`, ou se a pessoa pedir.
 - Dado sensível não vira texto de memória, de nota nem de comentário na negociação. Ele fica no cadastro e na resposta enviada.
 - A hospedagem que pede os dados também libera o acesso com base neles: um erro no documento trava a entrada.
-- A busca por bairro parece bastar. O endereço exato do compromisso é o centro da busca, e a nota alta de uma candidata não mostra o risco que as avaliações baixas mostram.
-- A data da viagem parece vir antes da hospedagem. A cotação vem antes e decide a data.
+- A busca por bairro parece bastar. O centro da busca é o endereço exato, e a nota alta não mostra o risco que as avaliações baixas mostram.
+- A data da viagem parece vir antes. A cotação decide a data.
 
 ## Scripts disponíveis
 
