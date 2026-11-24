@@ -3,7 +3,7 @@ name: definir-hospedagem
 description: Define a hospedagem de uma viagem, da cotação que decide a data até o que ela pede depois da reserva, como nome e documento dos hóspedes, veículo e chegada, e a resposta a quem hospeda, com o sim se leva dado pessoal. Usada quando o anfitrião ou o hotel escreve, ou a pessoa pede para agradecer ou avisar. Não serve para ler a reserva, registrar a viagem nem redigir no tom da marca.
 metadata:
   author: jimmyandrade
-  version: "0.23.0"
+  version: "0.24.0"
   aliases:
     - responder-pedido-da-hospedagem
   related:
@@ -13,6 +13,7 @@ metadata:
     - acompanhar-retornos-pendentes
     - definir-viagem
     - evoluir-habilidade
+    - lancar-despesa-da-empresa
     - procurar-email
     - redigir-com-tom-de-voz
 ---
@@ -160,6 +161,8 @@ Todo link de hospedagem que você mostrar leva as datas da viagem e o número de
 O preço de uma candidata é o total do período que a página do anúncio mostra para as datas e os hóspedes, lido nela e não no cartão da busca. Com desconto, diga o total e o preço original riscado, como "R$ 1.130, de R$ 1.288", e diga se a plataforma mostra taxas separadas. Nunca cite só um dos dois valores.
 
 Na falta de candidata boa, ou antes de buscar na plataforma, procure entre as hospedagens anteriores da mesma localidade a avaliada como voltaria, porque a pessoa já conhece e se sente confortável nela. Mostre a distância em km dela até o compromisso e compare, lado a lado, o preço da diária, a distância e a avaliação, para a pessoa equilibrar os três.
+
+O preço de uma hospedagem anterior vem da despesa dela, ligada à viagem, e não de um campo da hospedagem: some as despesas de hospedagem da viagem e divida pelas noites. Sem a despesa, leia o valor, as noites e as taxas no extrato ou no recibo da plataforma e registre-a por `lancar-despesa-da-empresa`, com o recibo, para o histórico servir à próxima comparação.
 
 Antes de sugerir onde ficar, leia a avaliação e o motivo de todas as hospedagens anteriores, de qualquer lugar, porque um incidente de uma cidade vale para as outras. A avaliada como evitar não é sugerida, e a avaliada como talvez vem com o motivo.
 A avaliação tem o motivo, o dia e quem avaliou, cada um na sua propriedade. Grave quando a pessoa a disser, com o nome de quem decidiu. A casa de um parente segue a mesma regra.
