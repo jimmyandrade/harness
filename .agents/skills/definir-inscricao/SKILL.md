@@ -5,13 +5,14 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet. A busca na lista de inscrições usa notion-ai-search no servidor notion.
 metadata:
   author: jimmyandrade
-  version: "0.20.2"
+  version: "0.21.0"
   aliases:
     - atualizar-inscricao
   related:
     - anexar-arquivo-no-notion
     - definir-grafia
     - definir-negociacao
+    - definir-pagamento-da-inscricao
     - definir-tarefa
     - garantir-ingresso
     - inscrever-na-oportunidade
@@ -27,8 +28,7 @@ metadata:
 ## Parâmetros de configuração
 
 ```yaml
-# `Prazo curto para pagar` é o tempo que falta até o prazo máximo de pagamento, abaixo do qual o prazo conta como em cima da hora. Com o prazo curto, a mensagem à organização não pergunta de desconto nem de condição.
-"Prazo curto para pagar": "48 horas"
+{}
 ```
 
 ## Instruções
@@ -83,17 +83,7 @@ Desfecho. O status é o de perdida quando não conseguimos concluir a inscriçã
 
 ### Passo 5
 
-Prazos. Ao tratar participação, reserva de vaga, taxa, sinal, boleto ou lista de espera, procure o prazo máximo para responder ou confirmar interesse e o prazo máximo para pagar, e diferencie os dois.
-
-Procure em todas as fontes: propriedades, comentários datados, e-mail por `procurar-email`, canal já registrado, edital, regulamento, formulário, site e PDF. Uma regra relativa, como "até 2 dias após a confirmação", não responde o prazo de confirmação.
-
-A vaga se confirma depois do pagamento. Antes dele, a mensagem à organização pede só o que falta para pagar, como o valor, a chave Pix e o titular. Depois de enviar o comprovante, ela pede que a organização confirme que a vaga está reservada. Perguntar da reserva antes de pagar não faz sentido.
-
-Para confirmar o valor, a mensagem pede que a organização o informe e não repete o valor que a marca calculou, porque o valor dela pode ser outro e a conta da marca soaria como uma exigência. A conta da marca fica para a pessoa conferir contra a resposta.
-
-Com o prazo de pagamento dentro de `Prazo curto para pagar`, a mensagem não pergunta de desconto nem de outra condição: o desconto que a organização já ofereceu por escrito vale como ela disse, e a mensagem pede só o que falta para pagar. Qualquer dúvida sobre o desconto fica para depois do pagamento, com o comprovante.
-
-Sem data nem regra confiável, sinalize isso antes de qualquer recomendação, sugira perguntar à organização e não considere a participação segura, salvo se já estiver confirmada e paga. Nunca invente a data. O pagamento vai por `lancar-despesa-da-empresa`. Toda pendência acionável vira tarefa por `definir-tarefa`.
+Prazos e pagamento. O prazo máximo para responder e para pagar, o pedido à organização antes do pagamento e a conferência do titular da chave Pix seguem `definir-pagamento-da-inscricao`. O pagamento feito vai por `lancar-despesa-da-empresa`. Toda pendência acionável vira tarefa por `definir-tarefa`.
 
 Com a taxa paga, mande o comprovante à organização e peça a confirmação do recebimento e da vaga, sem esperar a pessoa lembrar. O comprovante já está no Notion antes de sair. As outras perguntas pendentes da participação só vão depois dessa confirmação.
 
@@ -189,14 +179,6 @@ Se você só comemorar porque a pessoa disse que a inscrição foi confirmada, o
 2. Uma inscrição casa: atualize essa e comemore. Mais de uma: pergunte qual.
 3. Não pare na comemoração.
 
-### Pedido à organização antes do pagamento
-
-Se você perguntar da reserva antes de pagar, escrever o valor da marca no pedido de confirmação ou perguntar do desconto com o prazo curto, a organização estranha o pedido, esconde o valor dela atrás de um sim ou gasta o tempo que falta.
-
-1. Antes do pagamento, peça só o que falta para pagar, e que a organização informe o valor, sem escrever o número da marca.
-2. Dentro de `Prazo curto para pagar`, não toque no desconto.
-3. Confira a resposta contra a conta da marca: se divergirem, mostre os dois à pessoa e não pague. A reserva e a dúvida do desconto vão na mensagem do comprovante.
-
 ### Pedido da tiqueteira sem o e-mail
 
 Se você gravar a inscrição só com o print do pedido, o número, o código e o marcador da oportunidade ficam fora, e a despesa perde a evidência.
@@ -256,7 +238,6 @@ busquei a inscrição da Loja Exemplo como expositora no Festival Rota Sul 2026.
 - O print do pedido parece bastar para a inscrição. O e-mail da tiqueteira traz o número, o código e o remetente que o print não prova.
 - O telefone de quem vai ao palco parece o contato da inscrição. Na inscrição da empresa, o contato é o da empresa.
 - A tabela do que foi enviado, mostrada na resposta, parece bastar. Quem abre a inscrição depois não vê a conversa: as respostas enviadas vão para o corpo da inscrição.
-- Perguntar da reserva ou do desconto parece prudência antes de pagar. A reserva vem do pagamento, e com o prazo curto o desconto já oferecido por escrito vale como foi dito.
 - Uma restrição a uma pessoa parece mais segura quanto mais ampla. A política diz em que caso perguntar, e fora dele a pessoa aparece normalmente.
 - O campo opcional parece dispensável. Quem seleciona lê o formulário inteiro, e o campo vazio é uma chance perdida.
 - A data da confirmação só entra com a resposta da organização, dita pela pessoa ou lida nela, ou se `garantir-ingresso` viu o pedido confirmado na tela. O envio não conta.
