@@ -3,7 +3,7 @@ name: definir-hospedagem
 description: Define a hospedagem de uma viagem, da cotação que decide a data até o que ela pede depois da reserva, como nome e documento dos hóspedes, veículo e chegada, e a resposta a quem hospeda, com o sim se leva dado pessoal. Usada quando o anfitrião ou o hotel escreve, ou a pessoa pede para agradecer ou avisar. Não serve para ler a reserva, registrar a viagem nem redigir no tom da marca.
 metadata:
   author: jimmyandrade
-  version: "0.9.0"
+  version: "0.10.0"
   aliases:
     - responder-pedido-da-hospedagem
   related:
@@ -137,6 +137,8 @@ Registre o check-in e o check-out com data e hora, os hóspedes, o anfitrião qu
 Uma viagem pode ter várias hospedagens, cada uma com o seu registro. Viagem longa com poucas noites cadastradas é lacuna: pergunte onde a pessoa ficou nas outras.
 
 Antes de decidir a data de uma viagem, cote a hospedagem das datas candidatas: cada opção é uma hospedagem em cotação, ligada à viagem, e a data sai da comparação.
+
+As datas candidatas vêm das preferências de viagem: leia os dias para não viajar e os preferenciais da localidade, e os melhores dias de cada pessoa que viaja, nas propriedades que o mapeamento de dados do projeto indica. Data que cai num dia a evitar não é candidata. Sem essas propriedades no mapeamento, diga a limitação e pergunte à pessoa os dias.
 
 Antes de sugerir onde ficar, leia a avaliação das hospedagens anteriores no mesmo lugar e com o mesmo anfitrião. A avaliada como evitar não é sugerida, e a avaliada como talvez vem com o motivo.
 A avaliação tem o motivo, o dia e quem avaliou, cada um na sua propriedade. Grave quando a pessoa a disser, com o nome de quem decidiu. A casa de um parente segue a mesma regra.
