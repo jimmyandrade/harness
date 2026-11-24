@@ -3,7 +3,7 @@ name: definir-hospedagem
 description: Define a hospedagem de uma viagem, da cotação que decide a data até o que ela pede depois da reserva, como nome e documento dos hóspedes, veículo e chegada, e a resposta a quem hospeda, com o sim se leva dado pessoal. Usada quando o anfitrião ou o hotel escreve, ou a pessoa pede para agradecer ou avisar. Não serve para ler a reserva, registrar a viagem nem redigir no tom da marca.
 metadata:
   author: jimmyandrade
-  version: "0.16.0"
+  version: "0.17.0"
   aliases:
     - responder-pedido-da-hospedagem
   related:
@@ -143,7 +143,7 @@ Antes de decidir a data de uma viagem, cote a hospedagem das datas candidatas: c
 As datas candidatas vêm das preferências de viagem: leia os dias para não viajar e os preferenciais da localidade, e os melhores dias de cada pessoa que viaja, nas propriedades que o mapeamento de dados do projeto indica. Data que cai num dia a evitar não é candidata. Sem essas propriedades no mapeamento, diga a limitação e pergunte à pessoa os dias. Com `Política de viagem` preenchida, leia também a política e siga as regras gerais dela, como a antecedência e o dia da volta.
 
 Antes de buscar, leia no cadastro de cada pessoa que viaja as necessidades e as preferências, como cama de casal, ar-condicionado e sensibilidade a barulho, e pergunte uma vez só o que o cadastro não diz: se vão de carro próprio, se a cama precisa ser de casal ou podem ser duas camas, e qual é o teto por noite. De carro, a hospedagem precisa de estacionamento e o veículo entra na viagem.
-Busque pelo endereço exato do compromisso, não pelo bairro, e filtre a busca pelo que o cadastro e a pessoa pedem, como estacionamento, ar-condicionado e a cama preferida. Candidata sem a cama preferida não entra na tabela: a pessoa a recusa sem precisar dizer.
+Busque pelo endereço exato do compromisso, não pelo bairro: digite o endereço completo na busca da plataforma, centre o mapa nele e anote a distância de cada candidata até o local. A busca pelo nome do bairro ou por um retângulo do bairro no mapa não é a busca pelo endereço. Filtre a busca pelo que o cadastro e a pessoa pedem, como estacionamento, ar-condicionado e a cama preferida. Candidata sem a cama preferida não entra na tabela: a pessoa a recusa sem precisar dizer.
 
 Classifique cada candidata lendo primeiro as avaliações mais baixas, para ver o risco. Na plataforma que ordena as avaliações, ordene pelas mais baixas e leia as piores, em vez de ler as mais relevantes. Confira nas comodidades se o que é necessidade não aparece como indisponível. Avaliação que cita colchão manchado, sem lençol ou com plástico conta como incidente de colchão e descarta a candidata.
 
