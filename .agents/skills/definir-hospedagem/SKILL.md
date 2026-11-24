@@ -3,7 +3,7 @@ name: definir-hospedagem
 description: Define a hospedagem de uma viagem, da cotação que decide a data até o que ela pede depois da reserva, como nome e documento dos hóspedes, veículo e chegada, e a resposta a quem hospeda, com o sim se leva dado pessoal. Usada quando o anfitrião ou o hotel escreve, ou a pessoa pede para agradecer ou avisar. Não serve para ler a reserva, registrar a viagem nem redigir no tom da marca.
 metadata:
   author: jimmyandrade
-  version: "0.19.0"
+  version: "0.20.0"
   aliases:
     - responder-pedido-da-hospedagem
   related:
@@ -152,6 +152,8 @@ Classifique cada candidata lendo primeiro as avaliações mais baixas, para ver 
 Com poucas avaliações a ordenação não abre: leia todas, diga que a evidência é pouca e não trate a nota máxima como segurança. Anfitrião com pouca história se verifica pelos outros anúncios e avaliações dele, para saber se o perfil é real. Descarte a que cair numa regra da política ou numa sensibilidade de quem viaja, lida no cadastro de cada pessoa, como o histórico de mofo ou o barulho extremo para quem não tolera barulho.
 
 Todo link de hospedagem que você mostrar leva as datas da viagem e o número de hóspedes já preenchidos, como `?check_in=AAAA-MM-DD&check_out=AAAA-MM-DD&adults=N` no Airbnb, para a pessoa abrir o preço e a disponibilidade do período. Sem o formato da plataforma, mostre o link simples e diga que as datas não vêm preenchidas.
+
+O preço de uma candidata é o total do período que a página do anúncio mostra para as datas e os hóspedes, lido nela e não no cartão da busca. Com desconto, diga o total e o preço original riscado, como "R$ 1.130, de R$ 1.288", e diga se a plataforma mostra taxas separadas. Nunca cite só um dos dois valores.
 
 Antes de sugerir onde ficar, leia a avaliação e o motivo de todas as hospedagens anteriores, de qualquer lugar, porque um incidente de uma cidade vale para as outras. A avaliada como evitar não é sugerida, e a avaliada como talvez vem com o motivo.
 A avaliação tem o motivo, o dia e quem avaliou, cada um na sua propriedade. Grave quando a pessoa a disser, com o nome de quem decidiu. A casa de um parente segue a mesma regra.
