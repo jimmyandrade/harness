@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.12.0"
+  version: "0.12.1"
   related:
     - abordar-contato
     - acompanhar-retornos-pendentes
@@ -65,6 +65,8 @@ Com negócio, a negociação é uma por oportunidade, a edição com data. Ache 
 Negociação que nasceu de uma ata de reunião, com o nome padrão e as propriedades vazias, não está pronta. Complete-a já: o nome diz o que se negocia e com quem, a data de início é a do primeiro contato, e a empresa abordada e a pessoa abordada vêm dos cadastros. O que a ata decidiu vira comentário datado. O que nenhuma fonte diz fica vazio, com aviso.
 
 Outra empresa que passa a cotar o item que a primeira não faz é negociação própria, com a conversa dela. A negociação da primeira registra a mudança.
+
+Especificação passada ou combinada numa negociação, como grade, cores, modelagem, quantidade, prazo ou tamanho do lote, vai para a página da negociação no sistema de conhecimento do projeto, em comentário datado, ou na propriedade própria quando existe. A memória do assistente e o histórico da conversa não são onde ela mora: a pessoa e as outras sessões só a acham no sistema de conhecimento. Grave a especificação na mesma resposta em que ela chega, e diga o link do registro.
 
 ### Passo 3
 
@@ -142,6 +144,14 @@ Se você gravar a primeira troca com o canal que a mensagem parecia ter, o regis
 2. No WhatsApp, leia o número ou escreva que está pendente de confirmação.
 3. Compare o canal e o número gravados com a evidência antes de concluir.
 
+### Especificação só na memória ou na conversa
+
+Se você deixar a grade, as cores ou a modelagem só na memória ou na conversa, a próxima sessão e a pessoa que abre a negociação não as acham, e a fornecedora recebe uma pergunta repetida.
+
+1. Grave a especificação na discussão da página da negociação, ou na propriedade própria.
+2. Antes de perguntar de novo, leia a negociação.
+3. Mande o link do registro na resposta.
+
 ### Histórico no corpo da página
 
 Se você gravar o histórico no corpo da página ou num comentário de propriedade, ele some do topo da página e quebra a linha do tempo.
@@ -217,6 +227,7 @@ Conferi se a pessoa abordada aceita mais de uma pessoa antes de somar Isadora Ri
 - A pessoa avisa de um contato por um canal sem conector e sem colar o texto: leia a conversa pelo navegador do app e, se não abrir, pela extensão do navegador. Não peça o texto antes.
 - Nenhum canal consegue ler a conversa: peça a colagem e diga o que falhou em cada canal.
 - A conversa não tem data: use `Data aproximada:` e diga de onde veio.
+- A pessoa passa uma especificação de grade, cores, modelagem ou quantidade na conversa: grave na negociação já, mesmo sem a empresa ter respondido. Não deixe só na memória.
 - A mensagem colada não diz o canal: pergunte antes do primeiro registro. Não presuma Instagram, WhatsApp nem e-mail.
 - Várias mensagens no mesmo dia e assunto: um comentário só, com os horários.
 - A pessoa corrige um fato já gravado: novo comentário datado com a correção. Não apague o anterior.
@@ -233,6 +244,7 @@ Conferi se a pessoa abordada aceita mais de uma pessoa antes de somar Isadora Ri
 - O mesmo fato pode estar no WhatsApp, no e-mail e no manual com horários diferentes. A data mais recente não é automaticamente a certa.
 - A mensagem anterior parece valer como está hoje. O "hoje" e o "estamos" dela eram do dia em que foi enviada, e o canal dela pode não ser o de agora.
 - Sem conector do canal, parece que só a pessoa tem a mensagem. A conta dela está logada no navegador do app e na extensão do navegador, e a leitura é sua.
+- A especificação dita na conversa parece já guardada porque o assistente a repete. Só o registro na negociação a guarda para as outras sessões.
 - A empresa abordada e a pessoa abordada são relações. Telefone e grafias vêm por rollup e não se gravam aqui.
 
 ## Scripts disponíveis
