@@ -3,7 +3,7 @@ name: inscrever-na-oportunidade
 description: Preenche o cadastro ou o formulário que a organização de uma oportunidade pede para a inscrição, com os dados da empresa, no formato de cada campo, e envia só com o sim da pessoa. Usada quando a inscrição ou o cadastro de uma oportunidade está para ser feito. NÃO serve para registrar a inscrição no Notion, ler o regulamento, escrever à organização, salvo a resposta que confirma o envio, nem escrever o projeto que a inscrição pede.
 metadata:
   author: jimmyandrade
-  version: "0.5.2"
+  version: "0.5.3"
   related:
     - acompanhar-retornos-pendentes
     - analisar-regulamento-da-oportunidade
@@ -30,6 +30,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Modo de aprendizado": "perguntar"
 # `Estrutura de exposição a perguntar` diz o que perguntar à organização sobre o que a marca pode levar, quando o convite não traz. Vazio, não pergunta.
 "Estrutura de exposição a perguntar": ""
+# `Pessoa que responde pela empresa` é o nome da pessoa dona que responde pela marca nas inscrições. Vazio, e com mais de uma dona, pergunta.
+"Pessoa que responde pela empresa": ""
 ```
 
 ## Instruções
@@ -51,9 +53,9 @@ Um convite da organização por mensagem, que a marca vai aceitar, segue o mesmo
 ### Passo 2
 
 Os dados vêm do cadastro, sem perguntar à pessoa.
-O responsável pela marca é a pessoa dona da empresa do negócio: leia no cadastro de pessoas o nome, o apelido, a data de nascimento, o endereço, os pronomes e tudo o mais que o formulário pedir dela.
+O responsável pela marca é a `Pessoa que responde pela empresa`, ou a dona da empresa do negócio: leia no cadastro de pessoas o nome, o apelido, a data de nascimento, o endereço, os pronomes e tudo o mais que o formulário pedir dela.
 O que o cadastro tem nunca vai para a lista do que falta, nem como pergunta à pessoa.
-O nome da marca, o telefone, o WhatsApp e o e-mail vêm do cadastro da empresa. Com mais de uma dona, pergunte qual responde.
+O nome da marca, o telefone, o WhatsApp e o e-mail vêm do cadastro da empresa. Com mais de uma dona e o parâmetro vazio, pergunte qual responde. A pessoa que responde pela organização do evento não é a responsável pela marca que se inscreve, mesmo sendo sócia dela.
 O contato de uma inscrição é sempre o da empresa, nunca o telefone nem o e-mail pessoal de um sócio, mesmo quando o campo é do responsável. Sem o contato da empresa no cadastro, pare e peça, e não complete com o da pessoa.
 Diga em qual página do cadastro cada dado está, com o link, e o que o cadastro não tem. O dado que falta vira recomendação de campo, sem criá-lo.
 
