@@ -1110,6 +1110,7 @@ flowchart LR
   rascunhar_mensagem --> enviar_email
   rascunhar_mensagem --> escrever_link
   rascunhar_mensagem --> procurar_agenda
+  rascunhar_mensagem --> prospectar_oportunidades
   rascunhar_mensagem --> redigir_com_tom_de_voz
   rascunhar_mensagem --> rotular_item
   rascunhar_mensagem --> usar_whatsapp_web
