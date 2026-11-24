@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.27.0"
+  version: "0.28.0"
   related:
     - procurar-oportunidade
     - procurar-inscricao
@@ -20,6 +20,7 @@ metadata:
     - definir-cronograma
     - revisar-oportunidade
     - definir-inscricao
+    - inscrever-na-oportunidade
     - organizar-emails
     - triar-conversas
     - anexar-arquivo-no-notion
@@ -116,7 +117,7 @@ Mostre o título, a data, o grupo, quando há, o nome da etiqueta de e-mail, os 
 
 Procure por `procurar-inscricao` uma inscrição em outra oportunidade na mesma data da edição nova. Havendo, avise do conflito: diga as duas oportunidades, a data com o dia da semana e o status de cada inscrição, e que quem vai em cada uma é decisão da pessoa, caso a marca seja selecionada nas duas. Não decida isso e não crie tarefa.
 
-Na edição nova de um grupo, mostre as lições das notas do grupo, cada uma com a data, como pontos de atenção da próxima participação. A decisão humana fica vazia e não vira pergunta nem pendência na resposta: ela é da revisão das oportunidades, quando a pessoa quiser. Não organize a participação. Não inscreva. Não crie tarefa. A resposta não pede para nomear a habilidade.
+Na edição nova de um grupo, mostre as lições das notas do grupo, cada uma com a data, como pontos de atenção da próxima participação. A decisão humana fica vazia e não vira pergunta nem pendência na resposta: ela é da revisão das oportunidades, quando a pessoa quiser. Não organize a participação. Não crie tarefa. Com o link do formulário no comunicado, siga `inscrever-na-oportunidade` na mesma resposta. A resposta não pede para nomear a habilidade.
 
 ### Passo 9
 
