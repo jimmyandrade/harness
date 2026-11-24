@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.9.1"
+  version: "0.9.2"
   related:
     - definir-grafia
     - definir-perfil-social
@@ -72,6 +72,8 @@ Quando a lista exige a cidade da empresa e ninguém a informou, pesquise na inte
 O site, o CNPJ e o WhatsApp da empresa que as fontes respondem entram na mesma rodada do cadastro, sem avisar a pessoa antes. Pesquise o site e o perfil social oficial, o link da bio do perfil, o que o convite ou o formulário trazem e, para o CNPJ, a internet. Grave o que achou e diga as fontes. Só o que a busca não respondeu vira pendência, com o motivo e o que a resolve, como o contrato. Não liste como pendência o que ninguém tentou achar.
 
 A inscrição estadual vale por UF e tem dígito verificador. Antes de gravá-la na empresa ou de usá-la num formulário, confirme o número, pelo CNPJ, na consulta pública do cadastro de contribuintes da UF do endereço, como o Sintegra da UF.
+
+Procure antes, nos arquivos conectados do projeto, o comprovante da inscrição estadual ou o protocolo do pedido. Um comprovante da consulta da UF, com data, vale como fonte, e a resposta diz a data dele.
 
 Número que essa fonte não confirma não se grava nem se reenvia: corrija o registro pela fonte.
 
@@ -153,7 +155,7 @@ Se você cadastrar a empresa e listar o site, o CNPJ ou o WhatsApp como pendênc
 
 Se você usar a inscrição estadual como veio de um cadastro antigo, ou trocar o número só porque o formulário o recusou, o dado errado continua no registro ou o certo é apagado.
 
-1. Consulte a UF do endereço, pelo CNPJ, antes de gravar ou de usar o número.
+1. Procure o comprovante nos arquivos conectados e consulte a UF do endereço, pelo CNPJ, antes de gravar ou de usar o número.
 2. A fonte diverge: grave o número confirmado e corrija o registro antigo. A fonte confirma: não mude o registro e leve a recusa do formulário à pessoa.
 3. Captcha na consulta: peça à pessoa que o resolva.
 
