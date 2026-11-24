@@ -3,7 +3,7 @@ name: definir-hospedagem
 description: Define a hospedagem de uma viagem, da cotação que decide a data até o que ela pede depois da reserva, como nome e documento dos hóspedes, veículo e chegada, e a resposta a quem hospeda, com o sim se leva dado pessoal. Usada quando o anfitrião ou o hotel escreve, ou a pessoa pede para agradecer ou avisar. Não serve para ler a reserva, registrar a viagem nem redigir no tom da marca.
 metadata:
   author: jimmyandrade
-  version: "0.24.2"
+  version: "0.24.3"
   aliases:
     - responder-pedido-da-hospedagem
   related:
@@ -146,7 +146,7 @@ As datas candidatas vêm das preferências de viagem: leia os dias para não via
 Antes de buscar, leia no cadastro de cada pessoa que viaja as necessidades e as preferências, como cama de casal, ar-condicionado e sensibilidade a barulho, e pergunte uma vez só o que o cadastro não diz: se vão de carro próprio, e se a cama precisa ser de casal ou podem ser duas camas. De carro, a hospedagem precisa de estacionamento e o veículo entra na viagem.
 
 O teto por noite é o que a pessoa disser. Sem ele, não pergunte: use o maior valor por noite das hospedagens anteriores da mesma localidade, lido nas propriedades de preço e de noites que o mapeamento de dados do projeto indica, e diga que o teto veio do histórico. Sem histórico da localidade ou sem essas propriedades no mapeamento, diga a limitação e pergunte o teto.
-Busque pelo endereço exato do compromisso, não pelo bairro: digite o endereço completo na busca da plataforma, centre o mapa nele e anote a distância de cada candidata até o local. A busca pelo nome do bairro ou por um retângulo do bairro no mapa não é a busca pelo endereço. Filtre a busca pelo que o cadastro e a pessoa pedem, como estacionamento, ar-condicionado e a cama preferida. Candidata sem a cama preferida não entra na tabela: a pessoa a recusa sem precisar dizer.
+Busque pelo endereço exato do compromisso, não pelo bairro: digite o endereço completo na busca da plataforma, centre o mapa nele e anote a distância de cada candidata até o local. A busca pelo nome do bairro ou por um retângulo do bairro no mapa não é a busca pelo endereço. Filtre a busca pelo que o cadastro e a pessoa pedem, como estacionamento, ar-condicionado e a cama preferida. Candidata sem a cama preferida não entra na tabela: a pessoa a recusa sem precisar dizer. Cama queen ou king vale como cama de casal.
 
 Classifique cada candidata lendo primeiro as avaliações mais baixas, para ver o risco. Na plataforma que ordena as avaliações, ordene pelas mais baixas e leia as piores, em vez de ler as mais relevantes.
 
@@ -156,7 +156,7 @@ Confira na página de comodidades de cada candidata, uma a uma, se o que é nece
 
 Com poucas avaliações a ordenação não abre: leia todas, diga que a evidência é pouca e não trate a nota máxima como segurança. Anfitrião com pouca história se verifica pelos outros anúncios e avaliações dele, para saber se o perfil é real. Descarte a que cair numa regra da política ou numa sensibilidade de quem viaja, lida no cadastro de cada pessoa, como o histórico de mofo ou o barulho extremo para quem não tolera barulho.
 
-Todo link de hospedagem que você mostrar leva as datas da viagem e o número de hóspedes já preenchidos, como `?check_in=AAAA-MM-DD&check_out=AAAA-MM-DD&adults=N` no Airbnb, para a pessoa abrir o preço e a disponibilidade do período. Sem o formato da plataforma, mostre o link simples e diga que as datas não vêm preenchidas.
+Toda vez que citar uma hospedagem, na tabela ou no texto, cite-a como link, e todo link leva as datas da viagem e o número de hóspedes já preenchidos, como `?check_in=AAAA-MM-DD&check_out=AAAA-MM-DD&adults=N` no Airbnb, para a pessoa abrir o preço e a disponibilidade do período. Sem o formato da plataforma, mostre o link simples e diga que as datas não vêm preenchidas.
 
 O preço de uma candidata é o total do período que a página do anúncio mostra para as datas e os hóspedes, lido nela e não no cartão da busca. Com desconto, diga o total e o preço original riscado, como "R$ 1.130, de R$ 1.288", e diga se a plataforma mostra taxas separadas. Nunca cite só um dos dois valores.
 
