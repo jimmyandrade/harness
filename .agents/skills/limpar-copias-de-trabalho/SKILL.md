@@ -3,7 +3,7 @@ name: limpar-copias-de-trabalho
 description: Remove as cópias de trabalho do git e as branches locais já mescladas na base, inclusive as de outras sessões, depois de conferir que nada se perde. Usada ao terminar o trabalho de uma sessão ou quando sobram cópias de trabalho ou branches locais de código. Não serve para liberar espaço em disco em geral nem para apagar arquivo da pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.6.1"
+  version: "0.7.0"
   related:
     - criar-copia-de-trabalho
     - criar-pull-request
@@ -89,6 +89,7 @@ Uma conferência que falha não vira "limpo": a resposta lista o que sobrou, com
 Cada branch ou cópia que a resposta cita nessas linhas e nos comandos prontos leva o link do PR dela, `[#123](url)`: o nome da branch sozinho obriga a pessoa a procurar o PR.
 Esta habilidade apaga só a cópia e a branch local que passaram no Passo 3.
 A branch remota, e o que o resto da lista mostra, pode ser de outra sessão ou de outra pessoa: fica para a pessoa, como lista com o comando pronto.
+O comando pronto é um só, `git push origin --delete` com todas as branches remotas que sobraram, para a pessoa apagá-las de uma vez. Um comando por branch obriga a pessoa a rodar vários.
 O modo automático pode negar ação destrutiva, e a negação não se contorna.
 
 ### Passo 5
@@ -213,7 +214,7 @@ Só a cópia principal existia, e sobraram quatro branches `renovate/*`. Três P
 ## Casos-limite
 
 - O repositório só tem a cópia principal e nenhuma branch local sobrando: não há o que remover. Diga isso numa linha.
-- A branch remota do PR mesclado continua no remoto: a conferência 3 do Passo 4 falha, e a resposta traz o comando pronto para apagá-la.
+- A branch remota do PR mesclado continua no remoto: a conferência 3 do Passo 4 falha, e a resposta traz o comando pronto para apagá-la, junto com as outras que sobraram, num comando só.
 - Há branches de PRs antigos, de outra sessão ou de outra pessoa: elas entram na lista do que se acumulou, com o comando pronto, e a habilidade não as apaga.
 - O pull request mesclou outro commit e o commit da ponta local está no GitHub: pode apagar, salvo se a pessoa está continuando o trabalho.
 - A frase de processo diz o fim normal.
@@ -263,6 +264,6 @@ Só a cópia principal existia, e sobraram quatro branches `renovate/*`. Três P
 - `git -C <repositório> worktree list`, `git -C <repositório> branch --list <branch>` e `git -C <repositório> fetch --prune origin && git -C <repositório> branch -r --list origin/<branch>`: conferências 1, 2 e 3 do Passo 4. Saída vazia passa.
 - `git -C <repositório> rev-list --count origin/<base>..origin/<branch>`: zero é sem commit à frente da base, para a categoria 4 do que se acumulou no Passo 4.
 - `git -C <clone> status -sb`: conferência 4 do Passo 4. A branch é a de antes e não há arquivo novo.
-- `git -C <repositório> push origin --delete <branch>`: comando que a resposta entrega para a branch remota que sobrou. A pessoa o roda.
+- `git -C <repositório> push origin --delete <branch1> <branch2> …`: comando único que a resposta entrega para todas as branches remotas que sobraram. A pessoa o roda.
 
 1. Liste e meça, separe pelo dono, confira cada cópia e cada branch local, remova as aprovadas, limpe o registro e meça de novo.
