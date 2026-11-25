@@ -60,6 +60,12 @@
       "prompt": "Analise o Instagram da Feira do Mercado Novo.",
       "expected_output": "O nome que a lista traz para a feira é só um alias e não abre no Instagram. A habilidade procura o perfil oficial citado na página da oportunidade, confere que ele abre e lê com a conta que o navegador da pessoa já tem logada, sem pedir login nem credencial. Como a conta é a do espaço onde a feira acontece, o contexto diz isso e os sinais vermelhos listam que nenhum post lido fala da feira. Nomes que a captura não deixa ler ficam como não lidos.",
       "files": []
+    },
+    {
+      "id": "conta-lista-e-bio-cortada",
+      "prompt": "Analise o Instagram de uma feira pequena que marca dezenas de expositores na legenda e tem a bio cortada em \"mais\".",
+      "expected_output": "A habilidade abre a bio inteira antes de gravá-la no cadastro. Conta as contas marcadas na lista antes de escrever o número e escreve só as datas que leu. Para um post visto só pela miniatura, escreve o mês ou a idade que a plataforma mostra, sem inventar um dia.",
+      "files": []
     }
   ]
 }

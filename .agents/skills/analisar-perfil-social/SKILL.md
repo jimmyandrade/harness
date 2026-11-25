@@ -4,7 +4,7 @@ description: Analisa o perfil social de uma pessoa, marca, feira ou evento pela 
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.10.2"
+  version: "0.10.3"
   related:
     - definir-perfil-social
     - reconhecer-imagem
@@ -76,7 +76,7 @@ Abra o perfil. Se o navegador da pessoa já abre o perfil logado, siga sem pedir
 
 Com a ferramenta de credencial do gerenciador de senhas na sessão, ofereça o login por ela e espere o sim da pessoa. A pessoa aprova o item no próprio gerenciador, o valor entra direto na página e você nunca o vê, nem o código de verificação. Sem essa ferramenta, a pessoa entra pelo navegador. Nunca peça nem digite a senha da pessoa.
 
-Leia o perfil inteiro, não só o último post: a bio e o link da bio, o grid, os destaques, os posts fixados e os `Posts recentes a olhar`, com legendas e comentários. Destaque e post fixado contam como identidade do perfil, porque ficam ali mesmo depois de anos.
+Leia o perfil inteiro, não só o último post: a bio inteira, também o trecho depois do "mais", e o link da bio, o grid, os destaques, os posts fixados e os `Posts recentes a olhar`, com legendas e comentários. Destaque e post fixado contam como identidade do perfil, porque ficam ali mesmo depois de anos.
 
 Conte os destaques do perfil. Antes de abrir, siga `Destaques com a conta logada`. Com `nunca`, ou com a pessoa dizendo não, nenhum destaque abre e todos ficam em `Limites da análise`, sem dedução pelo título.
 
@@ -111,6 +111,8 @@ Perfil privado, bloqueado ou fora do ar: diga que não analisou e por quê, e pe
 ### Passo 4
 
 Preencha cada seção só com o que o perfil mostra. Cada sinal cita o post ou o destaque e a data que o sustenta.
+
+Conte na lista ou na tela antes de escrever um número, como as contas que um post marca. Escreva só a data que leu: sem ela, escreva o mês ou a idade que a plataforma mostra.
 
 Nome de perfil ou de pessoa que a captura não deixa ler não entra: escreva que não conseguiu ler. Conteúdo cujo sentido depende de contexto que o perfil não dá fica como hipótese: diga o que está visível, liste as leituras possíveis e não afirme a intenção da pessoa nem o valor que ela defende. A decisão é de quem lê a análise.
 
@@ -250,7 +252,6 @@ Li o posicionamento da marca, abri a bio, os destaques e os 12 posts recentes e 
 - O perfil é de pessoa: use todas as seções do modelo.
 - O perfil é de feira, evento ou marca: omita o encaixe com o produto e a aproximação.
 - O canal não é o Instagram: leia o equivalente de bio, destaques, fixados e posts recentes, e diga o que o canal não oferece.
-- Os quadros de um destaque abrem pretos: o destaque conta como não lido. Diga isso e ofereça ler no navegador da pessoa.
 - O canal abre com aviso de login: peça à pessoa que entre na conta antes de ler, e ofereça o gerenciador de senhas quando a sessão tem a ferramenta. Se ela não quiser, siga com o que está visível e diga o que ficou de fora.
 - Mais de um perfil da mesma feira ou pessoa: analise cada um e junte no veredito.
 - A pessoa pede a nota sem o posicionamento da marca: pergunte onde está e pare.
@@ -264,7 +265,6 @@ Li o posicionamento da marca, abri a bio, os destaques e os 12 posts recentes e 
 - A ferramenta de credencial do gerenciador de senhas parece valer em qualquer navegador da sessão. Ela age só no navegador da própria pessoa, não no embutido no aplicativo, e pode estar sem conexão com o gerenciador. Sem ela, a pessoa entra pela aba.
 - A página da pessoa ou da empresa parece o lugar natural da análise. A estética e o público mudam de um canal para outro, então a análise fica na página do perfil de cada canal.
 - O destaque aberto parece lido. No navegador embutido no aplicativo os quadros podem abrir pretos, e o título do destaque não diz o que há nele.
-- O destaque parece conteúdo antigo e menos importante. Ele fica fixo no perfil e pesa tanto quanto o último post.
 - A estética do feed parece a estética do evento. O perfil mostra a apresentação digital, não a presença no local.
 - Um número de seguidores alto parece bom sinal. A qualidade da conversa nos comentários pesa mais.
 - Um perfil sem post recente parece abandonado. Pode ser um perfil que publica só perto da edição, e a frequência é um sinal, não um veredito.
