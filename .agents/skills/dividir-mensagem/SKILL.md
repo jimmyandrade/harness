@@ -3,7 +3,7 @@ name: dividir-mensagem
 description: Decide como o rascunho de uma mensagem sai, em mensagens curtas por ideia, numa só ou em partes numeradas pelo limite de caracteres, e devolve as mensagens na ordem do envio com a contagem de cada uma. Usada quando um texto de WhatsApp vai ser mostrado ou enviado, ou quando passa do limite. Não serve para escrever o texto, enviar a mensagem nem decidir o tom.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.2.1"
   related:
     - rascunhar-mensagem
     - comunicar-novidade-do-produto
@@ -54,6 +54,8 @@ A frase nasce do próprio texto, como a pergunta que a pessoa quer ver respondid
 
 A despedida, como um abraço ou um agradecimento, vai no fim da mensagem anterior, e a frase que convida a abrir não repete o que a mensagem anterior já disse. Um rascunho de uma mensagem só ganha essa frase como segunda mensagem. O limite do Passo 2 vale para a frase.
 
+Quando o texto termina num pedido, o pedido é a própria frase que convida a abrir: ele sai como a última mensagem, curto e com o motivo de a pessoa responder já, e não fica num parágrafo da mensagem anterior. O agradecimento e o resto ficam na mensagem anterior. Mostre o rascunho já dividido assim, em blocos separados, e não numa mensagem só.
+
 ### Passo 2
 
 Conte os caracteres de cada mensagem do texto aprovado. Acima de `Limite de caracteres por mensagem`, divida em partes que cabem no limite, na mesma ordem, cortando só entre parágrafos ou entre itens de lista, nunca no meio de uma frase nem de um item numerado. Numa lista numerada, cada parte mantém o número do item.
@@ -81,6 +83,14 @@ Se você mandar numa mensagem só o texto que passa do limite, o canal corta o f
 1. Conte os caracteres de cada mensagem antes de pedir o sim.
 2. Acima do limite, divida entre parágrafos ou itens de lista.
 3. Mostre as partes numeradas com a contagem de cada uma.
+
+### Pedido escondido no parágrafo da mensagem anterior
+
+Se você mostrar o rascunho numa mensagem só, com o pedido num parágrafo do meio, a pessoa que aprova corrige à mão e a lista de conversas mostra um texto longo.
+
+1. Divida antes de mostrar: o agradecimento numa mensagem, o pedido noutra.
+2. Feche com o pedido curto e o motivo de responder já, como "Pode nos confirmar o valor à vista? Só falta essa informação para fazermos o Pix".
+3. Mostre as duas mensagens em blocos separados, com a contagem de cada uma.
 
 ### Dois assuntos no mesmo parágrafo
 
