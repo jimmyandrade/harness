@@ -3,7 +3,7 @@ name: definir-hospedagem
 description: Define a hospedagem de uma viagem, da cotação que decide a data até o que ela pede depois da reserva, como nome e documento dos hóspedes, veículo e chegada, e a resposta a quem hospeda, com o sim se leva dado pessoal. Usada quando o anfitrião ou o hotel escreve, ou a pessoa pede para agradecer ou avisar. Não serve para ler a reserva, registrar a viagem nem redigir no tom da marca.
 metadata:
   author: jimmyandrade
-  version: "0.28.2"
+  version: "0.28.3"
   aliases:
     - responder-pedido-da-hospedagem
   related:
@@ -106,12 +106,12 @@ Posso enviar? <pergunta que pede o sim>
 ```
 O texto da resposta passa por `redigir-com-tom-de-voz` antes de ser mostrado. A resposta traz só o pedido: quem chega, o veículo se foi pedido e o horário previsto. Não acrescente dado que a hospedagem não pediu.
 Quando a pessoa dita o texto, como um agradecimento ou um aviso de chegada, e ele não leva dado pessoal nem promessa além do que ela disse, o pedido já é o sim: envie pelo canal da reserva, sem a tela de confirmação, e diga o que enviou.
-Quando a hospedagem pede dado de hóspedes já cadastrados na hospedagem do Notion, monte o rascunho completo sem perguntar. Abra o link do anfitrião sem perguntar e monte o rascunho nos campos dele. Preencha tudo o que o rascunho tem, menos o número do documento, que a pessoa digita, e não conclua o registro. Dado de quem não está cadastrado espera o sim.
+Quando a hospedagem pede dado de hóspedes já cadastrados na hospedagem do Notion, abra o link do anfitrião sem perguntar e preencha tudo o que o rascunho tem nos campos dele, menos o número do documento, que a pessoa digita. Não conclua o registro sem a pessoa. Dado de quem não está cadastrado espera o sim.
 
 ### Passo 4
 
 Com o sim, envie pelo canal em que o pedido chegou e confira na conversa que a mensagem saiu. Na plataforma de hospedagem, a conversa mostra a mensagem como enviada e lida.
-Registre na hospedagem do Notion que os dados foram enviados e quando, sem repetir o documento nem a placa. Se a hospedagem prometeu algo em troca, como liberar a portaria ou a vaga, registre o combinado e o prazo na viagem.
+Depois de um registro em formulário do anfitrião, capture a tela da conclusão e envie-a na conversa da reserva, dizendo o que a pessoa preencheu fora do padrão, como o mesmo veículo em dois campos, e pedindo a confirmação do recebimento. Registre na hospedagem do Notion que os dados foram enviados e quando, sem repetir o documento nem a placa. Se a hospedagem prometeu algo em troca, como liberar a portaria ou a vaga, registre o combinado e o prazo na viagem.
 
 ### Passo 5
 
@@ -248,7 +248,7 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### o anfitrião pediu, na conversa da reserva, o nome do segundo hóspede, o CPF de ambos e os dados do carro
 
-Li o pedido na conversa da plataforma, pelo navegador, na aba em que a pessoa já estava.
+Li o pedido na conversa da plataforma, na aba em que a pessoa já estava.
 
 A viagem não traz o segundo hóspede e o transporte não está definido: perguntei quem é e se vão de carro.
 
@@ -264,9 +264,8 @@ Respondi pelo e-mail em que o pedido chegou. Mandei nomes e horário. Não mande
 - A hospedagem pede um dado que o cadastro não tem e a pessoa não sabe: avise a pessoa, não envie a resposta pela metade e registre a pendência na viagem.
 - A pessoa não vai de carro: a resposta diz isso só se a hospedagem perguntou pelo veículo.
 - O pedido chegou por um canal que a sessão não alcança: entregue o texto pronto e diga onde colar.
-- A pessoa já respondeu à mão: leia a conversa, não repita os dados e só registre o envio.
+- A pessoa já respondeu à mão: leia a conversa, não repita os dados e registre o envio.
 - O pedido é só uma pergunta de confirmação, sem dado pessoal: responda sem o modelo.
-- A pessoa dita um agradecimento ou um aviso, como a hora em que chegou: envie sem a tela de confirmação, pelo canal da reserva.
 
 ## Pegadinhas
 
@@ -275,11 +274,11 @@ Respondi pelo e-mail em que o pedido chegou. Mandei nomes e horário. Não mande
 - A hospedagem de um parente parece não precisar de avaliação. A decisão de não voltar vale também para ela, com o motivo da pessoa.
 - A reserva feita à mão não cria página no Notion, e o banco de viagens e o de hospedagens podem nem ter onde registrar quem viaja e o veículo. Quem viaja e o transporte podem não estar em lugar nenhum.
 - A vaga que a hospedagem oferece parece valer a qualquer hora. A garagem de um parceiro tem horário, e quem volta à noite precisa saber até quando ela abre e se deve interfonar.
-- O pedido de documento costuma vir antes do check-in e some da lista de mensagens com a tradução automática. Leia a mensagem original, não a prévia da lista.
+- O pedido de documento costuma vir antes do check-in e some da lista com a tradução automática. Leia a mensagem original.
 - O cadastro tem o nome completo e o nome civil de registro. Quem tem nome social se cadastra e é tratada por ele, e tratá-la pelo nome civil a constrange. O nome civil só sai com `Nome civil na resposta` em `sim`, ou se a pessoa pedir.
 - Dado sensível não vira texto de memória, de nota nem de comentário na negociação. Ele fica no cadastro e na resposta enviada.
-- A hospedagem que pede os dados também libera o acesso com base neles: um erro no documento trava a entrada.
-- A busca por bairro parece bastar. O centro da busca é o endereço exato, e a nota alta não mostra o risco que as avaliações baixas mostram.
+- A hospedagem libera o acesso com base nos dados que pede: um erro no documento trava a entrada.
+- A busca por bairro parece bastar. O centro da busca é o endereço exato, e a nota alta esconde o risco que as avaliações baixas mostram.
 
 
 ## Scripts disponíveis
