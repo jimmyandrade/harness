@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.112.0](https://github.com/jimmyandrade/harness/compare/v1.111.0...v1.112.0) (2026-11-25)
+
+
+### Features
+
+* **definir-tecido:** limit how many weaves a fabric links ([#1525](https://github.com/jimmyandrade/harness/issues/1525)) ([1111da6](https://github.com/jimmyandrade/harness/commit/1111da6b1c22863725ee3f96be03207c7eb2370b))
+
+
+### Bug Fixes
+
+* **agents:** convert a UTC timestamp to the person's day before saying today ([#1527](https://github.com/jimmyandrade/harness/issues/1527)) ([0d04813](https://github.com/jimmyandrade/harness/commit/0d048137ebf3034f6070529e78c3c702ce0ad69b))
+* **limpar-copias-de-trabalho:** link the pull request of every branch the cleanup lists ([#1526](https://github.com/jimmyandrade/harness/issues/1526)) ([8fe9910](https://github.com/jimmyandrade/harness/commit/8fe99109bf9e45efedcfd214dc31295a2eb648bf))
+
 ## [1.111.0](https://github.com/jimmyandrade/harness/compare/v1.110.0...v1.111.0) (2026-11-24)
 
 
