@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.114.0](https://github.com/jimmyandrade/harness/compare/v1.113.0...v1.114.0) (2026-11-25)
+
+
+### Features
+
+* **pedir-cotacao-ao-fornecedor:** add the supplier quote skill with CNPJ, email and one channel per company ([#1540](https://github.com/jimmyandrade/harness/issues/1540)) ([1858772](https://github.com/jimmyandrade/harness/commit/1858772cad381432844fb2a54edc32364a372f71))
+
+
+### Bug Fixes
+
+* **definir-artigo-da-base-de-conhecimento:** go on with a database that has no article fields and use photos for device steps ([#1537](https://github.com/jimmyandrade/harness/issues/1537)) ([d885e5b](https://github.com/jimmyandrade/harness/commit/d885e5b4b2441853504f8871833cedceb87f5f7e))
+* **definir-artigo-da-base-de-conhecimento:** prepare the login screen and record findings after the person signs in ([#1507](https://github.com/jimmyandrade/harness/issues/1507)) ([143c4cc](https://github.com/jimmyandrade/harness/commit/143c4cc4e716e003a1890be8e5ad2c87d1d081d2))
+
 ## [1.113.0](https://github.com/jimmyandrade/harness/compare/v1.112.0...v1.113.0) (2026-11-25)
 
 
