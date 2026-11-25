@@ -3,7 +3,7 @@ name: definir-hospedagem
 description: Define a hospedagem de uma viagem, da cotação que decide a data até o que ela pede depois da reserva, como nome e documento dos hóspedes, veículo e chegada, e a resposta a quem hospeda, com o sim se leva dado pessoal. Usada quando o anfitrião ou o hotel escreve, ou a pessoa pede para agradecer ou avisar. Não serve para ler a reserva, registrar a viagem nem redigir no tom da marca.
 metadata:
   author: jimmyandrade
-  version: "0.28.4"
+  version: "0.28.5"
   aliases:
     - responder-pedido-da-hospedagem
   related:
@@ -112,7 +112,7 @@ Quando a hospedagem pede dado de hóspedes já cadastrados na hospedagem do Noti
 Com o sim, envie pelo canal em que o pedido chegou e confira na conversa que a mensagem saiu. Na plataforma de hospedagem, a conversa mostra a mensagem como enviada e lida.
 Depois de um registro em formulário do anfitrião, capture a tela da conclusão e anexe-a na conversa da reserva, com o texto que diz o que a pessoa preencheu fora do padrão, como o mesmo veículo em dois campos, e pede a confirmação do recebimento.
 
-Antes de anexar, analise como a página faz o upload e tente pelos eventos de clique e de upload do botão. Se não der, entregue o print salvo à pessoa e envie o texto só quando ela disser que anexou. Registre na hospedagem do Notion o envio dos dados e quando, sem repetir o documento nem a placa. Se a hospedagem prometeu algo em troca, como liberar a portaria ou a vaga, registre na viagem o combinado e o prazo.
+Anexe com `anexar-arquivo` e envie o texto só depois que o anexo estiver na conversa. Registre na hospedagem do Notion o envio dos dados e quando, sem repetir o documento nem a placa. Se a hospedagem prometeu algo em troca, como liberar a portaria ou a vaga, registre na viagem o combinado e o prazo.
 
 ### Passo 5
 
