@@ -3,7 +3,7 @@ name: enviar-email
 description: Monta e envia um e-mail em nome de uma pessoa, com a assinatura certa, o destinatário principal e as cópias, o anexo vindo do Notion e o envio só com o sim. Usada quando uma pessoa contata uma organização por e-mail, inclusive com comprovante. Não serve para escrever no tom da marca, achar um e-mail nem triar a caixa.
 metadata:
   author: jimmyandrade
-  version: "0.7.4"
+  version: "0.8.0"
   related:
     - conversar-no-whatsapp
     - definir-pessoa
@@ -25,6 +25,8 @@ metadata:
 
 ```yaml
 "Modo de aprendizado": "perguntar"
+# Design System do business que o e-mail segue. Vazio, o envio para a escolha da pessoa antes de montar o rascunho.
+"Design System de e-mail": ""
 # Globais: os nomes das propriedades da lista de pessoas que guardam a janela de contato. Vazio não impõe regra.
 "Dias sem contato": ""
 "Sem contato a partir de": ""
@@ -106,9 +108,11 @@ O `definir-vocabulario` guarda cada correção dessas.
 
 O texto passa por `redigir-com-tom-de-voz`.
 
+O e-mail sai com o Design System do business, o valor de `Design System de e-mail` nas instruções do projeto. Monte o corpo em HTML com esse Design System e envie-o por `htmlBody`; o texto puro segue em `body` como alternativa. Sem o valor, pergunte qual Design System usar antes de montar o rascunho, e não mande texto puro sem essa escolha.
+
 Confira a janela de contato de cada destinatário, como `definir-janela-de-contato` manda, antes de pedir o sim e de novo na hora do envio. Fora da janela de qualquer um, o e-mail não sai: o rascunho fica na caixa e a pessoa escolhe entre deixá-lo ou agendar o envio para o próximo horário permitido, como `definir-janela-de-contato` manda. O conector de e-mail pode não agendar: use a tarefa agendada.
 
-Mostre o rascunho inteiro, com o remetente, o Para, as cópias, o assunto, o anexo e a assinatura, e pergunte se pode enviar.
+Mostre o rascunho inteiro, com o remetente, o Para, as cópias, o assunto, o anexo, a assinatura e o Design System usado, e pergunte se pode enviar.
 O sim vale para esse texto e esses destinatários.
 
 Toda vez que perguntar se pode enviar, repita o link do rascunho no texto da resposta, antes da pergunta.
