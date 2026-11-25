@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.27.2"
+  version: "0.28.0"
   related:
     - definir-empresa
     - definir-grafia
@@ -37,6 +37,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Fontes para resolver identidade": ""
 # `Cadastro na loja` é `sim`, que também cria ou atualiza a pessoa como cliente na loja do projeto, física ou virtual, mesmo sem compra, ou `não`.
 "Cadastro na loja": "não"
+# `Tipos de público sem cadastro na loja` lista os tipos de público que não viram cliente na loja. Vazio, vale `Cadastro na loja` para todos.
+"Tipos de público sem cadastro na loja": []
 # `Campo do cliente na loja` é o nome da propriedade da lista de pessoas que guarda o link do cliente na loja. Vazio, o link fica nas notas.
 "Campo do cliente na loja": ""
 # `Campos da pessoa em arquivo` lista os campos que o arquivo local guarda de cada pessoa. O projeto acrescenta os que o negócio dele usa.
@@ -101,7 +103,7 @@ O nome completo é o nome da pessoa. O handle não entra nesse nome. Não invent
 
 Telefone vai no formato internacional. Celular do Brasil tem 9 dígitos depois do DDD: o contato antigo do WhatsApp mostra o número sem o 9. Número de 8 dígitos começado por 6, 7, 8 ou 9 é celular sem o 9: confira na conversa e grave com o 9 na frente, dizendo que o acrescentou. Pergunte só se não for celular.
 
-Com `Cadastro na loja` em `sim`, o cliente da pessoa na loja segue `definir-cliente-da-loja`, e o link dele vai em `Campo do cliente na loja`, ou nas notas quando o campo está vazio. O histórico das conversas fica nos comentários da página da pessoa, não na nota do cliente.
+Com `Cadastro na loja` em `sim`, o cliente da pessoa na loja segue `definir-cliente-da-loja`, e o link dele vai em `Campo do cliente na loja`, ou nas notas quando o campo está vazio. Tipo de público em `Tipos de público sem cadastro na loja` não ganha cliente nem pendência.
 
 Todo perfil social que a pessoa informar, em link, print ou handle, como o LinkedIn, o Instagram ou o WhatsApp que ela passou para contato, é cadastrado por `definir-perfil-social` na mesma resposta e relacionado nos perfis sociais relacionados. O link do perfil nunca vai nas notas, e a skill não deixa o perfil de fora.
 
@@ -258,11 +260,9 @@ A Tula não estava na lista de pessoas. Criei a página dela, com o papel nas ob
 
 ## Pegadinhas
 
-- A empresa citada parece só contexto da pessoa. Sem página na lista de empresas, ela é cadastrada por `definir-empresa` na mesma rodada.
 - O número do WhatsApp parece o telefone completo. Num celular do Brasil, ele pode vir sem o 9 depois do DDD.
 
 - Um perfil colado parece só contexto para a resposta. É o pedido de cadastro: grave no mesmo turno.
-- Corrigir a frase parece cadastrar. A pessoa ausente ganha página na lista de pessoas.
 - O nome exibido com o nicho parece o nome completo. O nome completo é o nome da pessoa. O restante fica no perfil.
 - O handle parece o título da pessoa. Ele fica no perfil.
 - O primeiro nome do nome completo nem sempre é como a pessoa é chamada: um texto que usa o primeiro nome erra o nome dela.
