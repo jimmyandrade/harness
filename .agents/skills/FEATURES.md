@@ -113,6 +113,7 @@ How these skills relate is in `README.md`, in this folder.
   - When merging, writes one analysis with the new date, keeps the post and date of each signal, follows the reading that covered more of the profile when the scores differ, and records the earlier scores with their date
   - Checks that the handle opens before reading, looks for the official profile cited on the opportunity page when the list only has an alias, says when the profile is the venue and not the fair, and reads with the browser account that is already signed in without asking for a login
   - Does not complete a name it could not read in a capture, and reads a scanned document as images instead of counting it as read
+  - Opens the whole bio past the "more" cut before saving it, counts a list before writing a number, and writes only the dates it read, or the month or age the platform shows
   - Returns the analysis without publishing, and says so, when the social profile list is not in the connected workspace
   - Says it did not analyze a private, blocked, or missing profile, and does not infer aesthetics or values from a name
   - Does not register the profile, measure metrics in depth, or write the approach message
