@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.113.0](https://github.com/jimmyandrade/harness/compare/v1.112.0...v1.113.0) (2026-11-25)
+
+
+### Features
+
+* **abordar-contato:** check the company profile before the first message ([#1529](https://github.com/jimmyandrade/harness/issues/1529)) ([9c8cdd7](https://github.com/jimmyandrade/harness/commit/9c8cdd7edae0a07ba302dd60c9d839806a61e308))
+* **definir-tarefa:** name the task by its result, not by the meeting ([#1522](https://github.com/jimmyandrade/harness/issues/1522)) ([017835c](https://github.com/jimmyandrade/harness/commit/017835c91c285db89ac7fb1b3b4c7f53f60e01a9))
+* **enviar-email:** send emails with the business design system ([#1530](https://github.com/jimmyandrade/harness/issues/1530)) ([b463ddb](https://github.com/jimmyandrade/harness/commit/b463ddb892e5ff629a6f03805ae822030b9abb04))
+* **limpar-copias-de-trabalho:** hand over one command that deletes every leftover remote branch ([#1536](https://github.com/jimmyandrade/harness/issues/1536)) ([4ff70bc](https://github.com/jimmyandrade/harness/commit/4ff70bcc32cd3e4c5648f6f411e216e3f5df3d93))
+
+
+### Bug Fixes
+
+* **conversar-no-whatsapp:** bring the retrospective when the contact asks how an event went ([#1492](https://github.com/jimmyandrade/harness/issues/1492)) ([fbaef4a](https://github.com/jimmyandrade/harness/commit/fbaef4a5a268a1901ced90bfda8e950d5514dac7))
+* **lancar-despesa-da-empresa:** read the platform charge before leaving the payment pending ([#1532](https://github.com/jimmyandrade/harness/issues/1532)) ([edf4d46](https://github.com/jimmyandrade/harness/commit/edf4d4692bf466828f3ad2ecd9455ada5a0b39a3))
+* **manter-contato-no-whatsapp:** read the tone profile before showing a text, even one brought by another session ([#1535](https://github.com/jimmyandrade/harness/issues/1535)) ([0f43dd2](https://github.com/jimmyandrade/harness/commit/0f43dd2fba780e344e3d8bc9a257a4f00aaf9c9e))
+* **rotular-item:** make Sem fit replace the previous status label ([#1533](https://github.com/jimmyandrade/harness/issues/1533)) ([3bf87b9](https://github.com/jimmyandrade/harness/commit/3bf87b9928b5c47be873f62b27f3802c8060b219))
+
 ## [1.112.0](https://github.com/jimmyandrade/harness/compare/v1.111.0...v1.112.0) (2026-11-25)
 
 
