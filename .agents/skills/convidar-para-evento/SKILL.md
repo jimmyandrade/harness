@@ -3,7 +3,7 @@ name: convidar-para-evento
 description: Convida uma pessoa ou um grupo para uma reunião, um show, uma feira ou um lançamento, lendo o evento da agenda e mandando o convite pelos canais que alcançam a pessoa, só com o sim da pessoa. Usada quando alguém deve ser convidado ou confirmou uma call. Não serve para criar o evento, cadastrar o convidado nem ler a conversa.
 metadata:
   author: jimmyandrade
-  version: "0.4.3"
+  version: "0.4.4"
   related:
     - rascunhar-mensagem
     - acompanhar-resposta-no-whatsapp
@@ -41,6 +41,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 Peça o que falta do compromisso: quem convida, quem recebe o convite, pessoa ou grupo, e o que é, como uma reunião, um show, uma feira ou um lançamento. Leia o evento na agenda antes de pedir qualquer outro dado: o título, o início, o término, o local ou o link da chamada e os convidados vêm dele.
 
 O evento existe antes do convite. Sem evento, siga `definir-agenda` e volte aqui com ele criado. Um convite com horário que não está na agenda deixa a pessoa com um compromisso que ninguém guarda.
+
+Quando a outra pessoa já mandou o próprio convite para o mesmo horário, ou diz que vai mandar e ele chega, não convide: aceite o dela na agenda, apague o evento nosso que ficou duplicado e guarde a descrição útil dele em comentário no cadastro dela. Confirme a participação a ela pelo canal em que combinamos, com o texto aprovado.
 
 Antes de convidar por qualquer canal, confira a janela de contato de cada pessoa convidada, como `definir-janela-de-contato` manda, e de novo na hora do envio. O convite do Google Agenda também conta: ele chega à pessoa quando ela entra como convidada do evento. Fora da janela, nenhum convite sai, por nenhum canal, e ele espera o próximo horário permitido. O evento na agenda fica como está.
 
@@ -100,6 +102,14 @@ Se você montar o convite de cada canal à mão, a pessoa recebe horários ou li
 
 1. Leia o título, o dia, a hora e o local ou o link do evento na agenda.
 2. Use os mesmos dados em todos os canais.
+
+### Convite duplicado com o da outra pessoa
+
+Se você mantiver o evento nosso e o convite que a outra pessoa mandou para o mesmo horário, a agenda mostra dois compromissos e ninguém sabe em qual link entrar.
+
+1. Aceite o convite dela e confirme na agenda que o aceite valeu.
+2. Apague o evento nosso e guarde a descrição útil em comentário no cadastro dela.
+3. Confirme a participação a ela pelo canal em que combinamos, com o texto aprovado.
 
 ### Link só no cartão do evento
 
