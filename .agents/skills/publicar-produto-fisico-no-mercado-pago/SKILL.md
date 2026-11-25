@@ -4,7 +4,7 @@ description: Cadastra e atualiza um produto físico no catálogo do Mercado Pago
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.6.0"
   related:
     - registrar-preco-de-produto-fisico
     - publicar-produto-fisico-na-loja-virtual
@@ -45,7 +45,9 @@ O catálogo guarda cópia da foto. Foto trocada na fonte depois não chega ao ca
 
 O formato é sempre o cadastro com variações, mesmo para um produto de uma variante só, para que uma variação nova entre depois sem refazer o produto. O produto único nunca se usa: ele não vira produto com variações, e o catálogo recusa um SKU repetido, então refazer pede excluir o produto único antes, com o sim da pessoa.
 
-O nome do produto é o do registro, sem o tamanho. O tamanho entra como o atributo da variação, e o catálogo compõe o título de cada variante com o nome e o valor, como "Colete Asa Curta 16-bit P". Cada variante do registro que tem unidade em estoque é uma variação, com o SKU, o preço, o custo e o estoque dela. Variante prevista e ainda não produzida fica de fora: o catálogo cobra o que existe, e a loja virtual pode mostrar a variante prevista com estoque zero sem que o catálogo a tenha. O cadastro aceita até 3 atributos entre tamanho, peso, cor, sabor, voltagem, material e personalizado.
+O nome do produto é o do registro, sem o tamanho. O tamanho entra como o atributo da variação, e o catálogo compõe o título de cada variante com o nome e o valor, como "Colete Asa Curta 16-bit P". Cada variante do registro que tem unidade em estoque é uma variação, com o SKU, o preço, o custo e o estoque dela.
+
+Variante prevista e ainda não produzida fica de fora, salvo quando a pessoa pede o cadastro dela: então entra com estoque zero, e a resposta diz que o zero é de peça ainda não pronta. O catálogo cobra o que existe, e a loja virtual pode mostrar a variante prevista com estoque zero. O cadastro aceita até 3 atributos entre tamanho, peso, cor, sabor, voltagem, material e personalizado.
 
 Cadastro por planilha e por XML também existem e não foram exploradas.
 
@@ -66,13 +68,21 @@ Os endpoints, todos no domínio do painel e com a sessão: ler uma variante com 
 
 A lista e a leitura devolvem cada variante como um item: `type` variante, `attributes` com o tamanho, `family_id`, `family_name` com o nome do produto, `picture_id`, preço, custo, descrição, SKU, quantidade, `unit_measure` e `segment` varejo. A atualização com o mesmo corpo foi validada.
 
-A criação do produto com variações é pelo formulário. Uma chamada de criação com o tipo variante e o tamanho respondeu 400, e o endpoint do formulário de variações não foi achado. A criação por `POST /products/api/products` serve ao produto único, que não se usa.
+O produto com variações se cria com `POST /products/api/variations`, que responde 201 mesmo quando falha: leia o campo `status` do corpo, `SUCCESS` ou `ERROR`. O corpo leva `title`, `unit_measure` com `un`, `attributes` com `{"id":"SIZE"}` e `variations`, cada uma com `price`, `quantity`, `sku` quando houver e `attributes` com `{"id":"SIZE","value_name":"M"}`. Leva também `description` e `picture_id`, o id que a subida da foto devolveu. A criação por `POST /products/api/products` serve ao produto único, que não se usa.
+
+A foto vai da fonte ao catálogo no mesmo script: busque o endereço dela de dentro da página, envie o arquivo pela subida e use o id no corpo, sem baixar à mão. Um `ERROR` sem detalhe, como `NO_MAPPED_ERROR`, veio num caso de uma letra fora do latim comum na descrição, o ẽ do guarani: troque por e.
+
+A listagem devolve 50 itens por página: peça as seguintes com `{"pagination":{"page":2}}`, até `pagination.quantity_pages`. Cada criação leva alguns segundos, então grave em lotes de uns 10 produtos por script e confira a lista no fim.
+
+A descrição é do produto e não da variante: a leitura e o `PUT` da variante não a mudam, e a de um produto já criado se muda pela tela de dados básicos da família. Um `PUT` com o corpo lido apagou o SKU de uma variante: envie o SKU junto, ou grave o campo pela tela, e releia o SKU. Uma variação nova num produto que já existe entra pela tela, com Adicionar valores no atributo Tamanho e depois Adicionar dados em cada variação, e o campo de preço da tela só aceita o valor digitado.
 
 O catálogo normaliza o título: o nome "aGue’i" voltou como "Aguei", sem o apóstrofo e com a maiúscula no começo. O cadastro com variações manteve as quebras de parágrafo da descrição. Releia o título e a descrição e diga o que foi gravado.
 
 ### Passo 5
 
 Antes de criar, liste o catálogo e procure o SKU do produto. Achou: é atualização, mostre a diferença campo a campo e grave só o que a pessoa pediu. Não achou: crie, com variações. O catálogo recusa um SKU repetido, e nunca se cria um segundo produto com o mesmo SKU.
+
+O SKU do registro só vale quando é de uma variante só: o mesmo SKU em variantes de produtos diferentes, como dois produtos com o mesmo código, o catálogo recusa ou mistura. Nesse caso grave a variação sem SKU e diga qual é o conflito, para a pessoa corrigir no registro.
 
 O preço do catálogo é o preço de etiqueta, o cheio a prazo, e nunca o preço à vista que a equipe dá na hora. Quando o registro, a loja virtual e o que a pessoa disse divergem, pergunte qual vale antes de gravar. Mudança de preço segue `registrar-preco-de-produto-fisico`.
 
@@ -127,6 +137,20 @@ Se você copiar o cookie da sessão para chamar a API fora do navegador, expõe 
 1. Chame de dentro da página do painel.
 2. Sem navegador logado, peça à pessoa que entre.
 
+### Descrição recusada sem motivo
+
+Se você receber `ERROR` sem detalhe na criação e tentar de novo com o mesmo texto, o produto não nasce.
+
+1. Procure na descrição uma letra fora do latim comum, como o ẽ.
+2. Troque por e e tente de novo, e diga o que trocou.
+
+### Corpo lido e devolvido apaga o SKU
+
+Se você mudar o preço com o corpo que leu, a variante pode perder o SKU.
+
+1. Envie o SKU junto, ou grave pela tela.
+2. Releia o SKU depois de gravar.
+
 ### Preço escolhido em silêncio
 
 Se você grava o primeiro preço que achou, a maquininha cobra um valor que a pessoa não decidiu.
@@ -137,6 +161,10 @@ Se você grava o primeiro preço que achou, a maquininha cobra um valor que a pe
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
+
+### cadastre os produtos da planilha no Mercado Pago
+
+Listei o catálogo, que tinha 5 produtos, e montei o corpo de cada produto que faltava com o preço da coluna que a pessoa indicou. Subi a foto da loja virtual quando havia e gravei em lotes pela criação de variações. Mandei sem SKU o que o registro repetia em produtos diferentes e com estoque zero o que ainda não estava pronto. Reli a lista inteira, por página, e diferenciei o que ficou sem foto, sem descrição e sem SKU.
 
 ### lance o Colete Asa Curta 16-bit P no Mercado Pago, com a foto do Shopify
 
@@ -151,19 +179,22 @@ Procurei o SKU no catálogo e não achei. Copiei a única foto da loja virtual e
 - Sem navegador logado: peça à pessoa que entre no painel.
 - A pessoa pede planilha ou XML: diga que não foram validados e peça o sim.
 - Um produto único já existe com o SKU: exclua-o antes, com o sim da pessoa, porque o catálogo recusa o SKU repetido.
-- A variante está prevista no registro e não foi produzida: não entra no catálogo. Diga que ela entra quando houver uma unidade.
+- A variante está prevista no registro e não foi produzida: não entra no catálogo, a menos que a pessoa peça. Com o pedido, entra com estoque zero.
+- O mesmo SKU aparece em produtos diferentes do registro: grave sem SKU e diga o conflito.
 - O produto ainda não está no catálogo quando o preço muda: diga e pergunte se o lança, com o preço de etiqueta.
 
 ## Pegadinhas
 
 - O catálogo parece guardar várias fotos. Ele guarda uma só, e o seletor de arquivo não aceita mais de um.
-- A variante prevista parece pedir um lugar no catálogo, como na loja virtual. O catálogo cobra na hora, então só entra o que tem unidade em estoque.
+- A variante prevista parece pedir um lugar no catálogo, como na loja virtual. O catálogo cobra na hora, então só entra o que tem unidade em estoque, ou a variante que a pessoa pediu, com estoque zero.
 - O campo de preço do formulário parece aceitar o valor escrito de fora. Ele só aceita o que é digitado na tela, e a chamada de API não tem esse limite.
 - A lista de preços parece o lugar do preço à vista. Com os preços sincronizados, ela segue o preço base na mesma proporção, e o final combinado se perde.
 - O painel parece ter API pública para o catálogo. A documentação pública não traz um endpoint de produtos, e o painel usa endpoints do próprio domínio.
 - A descrição do produto único perdeu a quebra de parágrafo, e a do cadastro com variações a manteve.
 - O título volta normalizado: o apóstrofo some e a maiúscula muda.
 - A categoria não vem pronta: a pessoa cria as categorias no painel.
+- A resposta 201 da criação parece sucesso. O sucesso está no campo `status` do corpo.
+- A lista parece devolver o catálogo inteiro. Ela devolve 50 itens por página.
 
 ## Scripts disponíveis
 
