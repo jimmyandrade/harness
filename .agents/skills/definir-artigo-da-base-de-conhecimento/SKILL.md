@@ -4,7 +4,7 @@ description: Cria, revisa e atualiza o artigo da base de conhecimento que respon
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.8.4"
+  version: "0.8.5"
   related:
     - criar-habilidade
     - definir-historia-de-usuario
@@ -141,6 +141,8 @@ Mostre na tela o estado do passo, como o menu aberto ou a janela com o botão, a
 Capture em tamanho cheio, sem reduzir a escala: um print reduzido sobe ilegível ao artigo.
 Numa tela de login que a pessoa preenche, capture cada estado enquanto ela avança, porque depois do login não dá para voltar a essa tela sem sair da conta.
 Quando a pessoa precisa fazer um passo à mão, como entrar numa tela com a própria senha, a mesma mensagem traz o passo a passo completo: o atalho ou o clique até a tela (inclusive como abrir uma janela anônima), o endereço por extenso, o que digitar em cada campo, o que deve aparecer e o que me mandar de volta.
+Antes de pedir, deixe a tela pronta: saia da conta, abra a tela de entrada e deixe os campos à vista, e a pessoa só digita a senha.
+Quando a pessoa avisar que entrou, leia o resultado na tela, capture o que o passo mostra e registre o achado nos artigos que ele toca, na mesma sessão, sem esperar outro pedido.
 Numa tela que muda dados, abra o passo, capture e cancele. O passo que só aparece depois de salvar fica sem print.
 Antes de subir, cubra no print ou na foto o nome, o e-mail, o telefone, o nome do computador e outro dado pessoal de quem aparece, com um rótulo neutro como "e-mail pessoal", e confira a imagem coberta.
 Se a imagem mostra um desses dados e não dá para cobri-lo, deixe-a de fora e descreva o passo no texto.
