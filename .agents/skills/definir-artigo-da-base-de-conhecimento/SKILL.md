@@ -4,8 +4,9 @@ description: Cria, revisa e atualiza o artigo da base de conhecimento que respon
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.8.6"
+  version: "0.9.0"
   related:
+    - capturar-tela-de-passo-a-passo
     - criar-habilidade
     - definir-historia-de-usuario
     - definir-tarefa
@@ -100,6 +101,7 @@ Abra o desenho no Figma, abra a tela ou o Storybook do pull request na versão d
 O artigo diz a causa confirmada e usa o caso conferido como exemplo, não só o que a conversa contou.
 Só deixe "a verificar" o que depende de uma decisão de outra pessoa ou de um acesso que a sessão não tem, e diga qual dos dois.
 Nunca deixe "a verificar" o que as ferramentas da sessão conseguem conferir.
+Antes de publicar, leia de novo o estado atual da fonte, como o último commit do pull request, porque ela pode ter mudado enquanto você escrevia.
 No Confluence, ignore a conferência de modelo abaixo: o espaço não tem lista de modelos.
 Confira se uma página é modelo do banco pela lista de modelos do data source, que a API do Notion devolve.
 O texto de exemplo das seções no corpo não prova que é modelo, porque alguém pode criar uma página a partir de um modelo e não mudar nada.
@@ -141,30 +143,13 @@ Quando o artigo trata de uma feature toggle ou flag, o nome exato dela aparece e
 
 ### Passo 7
 
-Sempre que criar ou atualizar um passo a passo de uma tela, capture um print de cada passo.
-Mostre na tela o estado do passo, como o menu aberto ou a janela com o botão, antes de capturar.
-Capture em tamanho cheio, sem reduzir a escala: um print reduzido sobe ilegível ao artigo.
-Numa tela de login que a pessoa preenche, capture cada estado enquanto ela avança, porque depois do login não dá para voltar a essa tela sem sair da conta.
-Quando a pessoa precisa fazer um passo à mão, como entrar numa tela com a própria senha, a mesma mensagem traz o passo a passo completo: o atalho ou o clique até a tela (inclusive como abrir uma janela anônima), o endereço por extenso, o que digitar em cada campo, o que deve aparecer e o que me mandar de volta.
-Antes de pedir, deixe a tela pronta: saia da conta, abra a tela de entrada e deixe os campos à vista, e a pessoa só digita a senha.
-Quando a pessoa avisar que entrou, leia o resultado na tela, capture o que o passo mostra e registre o achado nos artigos que ele toca, na mesma sessão, sem esperar outro pedido.
-Numa tela que muda dados, abra o passo, capture e cancele. O passo que só aparece depois de salvar fica sem print.
-Antes de subir, cubra no print ou na foto o nome, o e-mail, o telefone, o nome do computador e outro dado pessoal de quem aparece, com um rótulo neutro como "e-mail pessoal", e confira a imagem coberta.
-Se a imagem mostra um desses dados e não dá para cobri-lo, deixe-a de fora e descreva o passo no texto.
-Quando o navegador deixa, cubra antes de capturar: troque na própria página o texto do nome, do e-mail e do telefone pelo rótulo neutro e esconda as fotos de perfil, e capture com a página já coberta.
-Uma lista com várias pessoas também é coberta, linha por linha.
+Para cada passo de uma tela, siga `capturar-tela-de-passo-a-passo` e use o print que ela devolver.
 Suba cada imagem pelo upload de arquivo da ferramenta da base.
+Depois de subir, abra cada imagem do artigo e confira o conteúdo dela, não só que ela carrega.
 Ponha a imagem logo abaixo do passo que ela mostra, num bloco próprio.
 Escreva a legenda com o que a tela mostra: o menu, a janela, o campo e o nome da pasta ou da arte quando aparece.
 A imagem que a pessoa mandou entra do mesmo jeito, no passo que ela mostra.
-Num passo de aparelho físico, como ligar uma impressora ou encaixar o papel, não há tela para capturar: a foto que a pessoa manda é o print do passo, e a legenda diz o que ela mostra, como a cor da luz.
-Peça a foto no próprio passo, com o aparelho no estado dele, em vez de esperar o fim do teste.
-Não pergunte se pode capturar: capture.
-Antes de dizer que não consegue capturar um passo, abra a tela em cada navegador que a sessão tenha, inclusive o que usa os logins da pessoa, e capture o estado do passo. A tela de login num navegador não encerra a tentativa: passe para o próximo.
-Só deixe um passo sem print depois dessa tentativa, e diga qual ficou sem print e o que a tentativa mostrou, como um login que nenhum navegador da sessão tem ou uma ferramenta da base sem upload de arquivo.
-Nunca escreva que não deu para capturar sem ter aberto a tela.
-Ilustre com o máximo de prints úteis, não só os passos: o desenho de referência, cada estado do caso lado a lado e a ferramenta de apoio, como a aba de acessibilidade.
-Uma comparação em imagem explica o que uma lista de passos não explica.
+Só deixe um passo sem print depois da tentativa que `capturar-tela-de-passo-a-passo` manda, e diga qual ficou sem print e o que a tentativa mostrou, como uma ferramenta da base sem upload de arquivo.
 
 ### Passo 8
 
@@ -177,6 +162,7 @@ Antes de concluir, confira o artigo com esta lista:
 - [ ] Cada passo de tela tem o print logo abaixo, com legenda, ou o motivo de não ter, depois de uma tentativa de captura.
 - [ ] O caso real foi conferido na fonte, no desenho, na tela ou no Storybook e no código do pull request, e cada "a verificar" que sobrou depende de uma pessoa ou de um acesso que faltou.
 - [ ] Cada estado do caso e o desenho de referência têm print, com legenda.
+- [ ] Cada print mostra o conteúdo completo, sem imagem em branco nem carregamento pela metade, conferido depois de subir.
 - [ ] Nenhum print nem foto mostra nome, e-mail, telefone, nome do computador ou outro dado pessoal.
 - [ ] A pessoa sabe o que fazer, onde fazer e o que evitar sem abrir outro documento.
 - [ ] A ferramenta está ligada quando a dúvida é sobre ela.
@@ -214,17 +200,9 @@ Se você copiar os critérios de aceite de uma skill para o artigo, a pessoa lê
 
 Se você escrever o passo a passo de uma tela só com texto, a pessoa não reconhece o botão nem o menu.
 
-1. Abra a tela no estado de cada passo.
-2. Capture, suba e ponha a imagem logo abaixo do passo.
+1. Capture cada passo como manda `capturar-tela-de-passo-a-passo`.
+2. Suba e ponha a imagem logo abaixo do passo.
 3. Escreva a legenda com o que a tela mostra.
-
-### Print dispensado sem tentar
-
-Se você escrever que o passo ficou sem print sem ter aberto a tela, o artigo sai sem imagem por uma suposição, e a pessoa descobre que o print era possível.
-
-1. Abra a tela em cada navegador que a sessão tenha, inclusive o que usa os logins da pessoa, e capture o estado do passo.
-2. Só com a tentativa feita em todos, diga qual ficou sem print e o que ela mostrou.
-3. Ponha o aviso no topo do artigo com esse motivo.
 
 ### Banco indicado sem os campos de artigo
 
@@ -281,11 +259,9 @@ Os critérios ficaram de fora. Cada guardrail virou item do diagnóstico rápido
 ## Casos-limite
 
 - O pedido é uma instrução para a IA, uma regra operacional ou uma entrega: siga o fluxograma do Passo 2.
-- A pessoa mandou prints: use-os nos passos que eles mostram e capture os que faltam.
-- A tela não abre na conexão, mesmo depois da tentativa de capturá-la: escreva o passo, diga qual ficou sem print e o que a tentativa mostrou.
+- A pessoa mandou prints: use-os nos passos que eles mostram e capture os que faltam, como manda `capturar-tela-de-passo-a-passo`.
 - O artigo existente responde a pergunta: atualize. Não crie outro.
 - O passo não é de tela, como uma regra ou uma decisão: não precisa de print.
-- O passo é de um aparelho físico: não há tela. Peça a foto do passo à pessoa e use-a, com a legenda do que ela mostra.
 - A pessoa indica um banco sem os campos de artigo: siga com ele, como o Passo 1 manda.
 
 ## Pegadinhas
@@ -293,10 +269,6 @@ Os critérios ficaram de fora. Cada guardrail virou item do diagnóstico rápido
 - O upload da imagem parece aceitar o link do print. A imagem precisa ser enviada como arquivo pelo upload de arquivo da ferramenta, e o bloco de imagem cita o arquivo enviado.
 - A resposta do upload devolve a referência do arquivo, que é o que o bloco da imagem cita. Guarde-a ao subir: sem ela, o arquivo sobe de novo.
 - A imagem colada na mesma linha do passo parece ficar abaixo dele. Ela só vira bloco próprio com uma linha em branco antes e depois.
-- O print da tela inicial parece bastar. O passo mostra o estado em que a pessoa clica: o menu aberto, o submenu, a janela de busca.
-- Esperar os prints da pessoa, ou perguntar se pode capturar, parece o caminho seguro. Quem escreve o artigo captura os prints que faltam, sem perguntar.
-- A tela de login num navegador parece encerrar a tentativa. Outro navegador da sessão pode já ter o login da pessoa.
-- Dizer que não dá para capturar parece uma resposta honesta. Sem a tentativa de abrir a tela, é uma suposição.
 - Uma página com o título genérico da ferramenta e o corpo só com o texto de exemplo parece um rascunho esquecido, e também pode ser o modelo do banco. Só a lista de modelos do data source diz qual dos dois é.
 - O apelido da ferramenta, como "o IP" ou "o portal", parece bastar porque a conversa já o usou. A pessoa que lê o artigo não estava nela, então o endereço vai por extenso.
 - Um artigo encontrado e completo parece encerrar o trabalho. Se a pessoa vai executar a tarefa em seguida, a execução é a conferência: o que ela mostra e o artigo não diz entra nele.

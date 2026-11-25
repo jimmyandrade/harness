@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.115.0](https://github.com/jimmyandrade/harness/compare/v1.114.1...v1.115.0) (2026-11-25)
+
+
+### Features
+
+* **capturar-tela-de-passo-a-passo:** split the screen capture rules out of the article skill ([#1545](https://github.com/jimmyandrade/harness/issues/1545)) ([8dc453d](https://github.com/jimmyandrade/harness/commit/8dc453d59e0c9227016884b08929f6b320130f93))
+* **convidar-para-evento:** accept the other person's invite and drop ours when both land on the same time ([#1547](https://github.com/jimmyandrade/harness/issues/1547)) ([e9f9a42](https://github.com/jimmyandrade/harness/commit/e9f9a42e3cff21b93a833515798a8189e8eebf7b))
+
 ## [1.114.1](https://github.com/jimmyandrade/harness/compare/v1.114.0...v1.114.1) (2026-11-25)
 
 
