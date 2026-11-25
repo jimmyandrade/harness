@@ -3,12 +3,14 @@ name: definir-hospedagem
 description: Define a hospedagem de uma viagem, da cotação que decide a data até o que ela pede depois da reserva, como nome e documento dos hóspedes, veículo e chegada, e a resposta a quem hospeda, com o sim se leva dado pessoal. Usada quando o anfitrião ou o hotel escreve, ou a pessoa pede para agradecer ou avisar. Não serve para ler a reserva, registrar a viagem nem redigir no tom da marca.
 metadata:
   author: jimmyandrade
-  version: "0.24.1"
+  version: "0.27.0"
   aliases:
     - responder-pedido-da-hospedagem
   related:
     - acompanhar-veiculo
     - conversar-no-whatsapp
+    - definir-empresa
+    - definir-perfil-social
     - definir-pessoa
     - acompanhar-retornos-pendentes
     - definir-viagem
@@ -136,7 +138,7 @@ Esse tempo ensina quando conferir.
 
 O dado da hospedagem vai nas propriedades da página, nunca no corpo dela.
 Uma hospedagem nova nasce do modelo de hospedagem do banco, cujo aviso no topo repete essa regra.
-Registre o check-in e o check-out com data e hora, os hóspedes, o anfitrião quando se sabe quem é, e o endereço.
+As propriedades da hospedagem seguem o `registro-da-hospedagem`.
 Uma viagem pode ter várias hospedagens, cada uma com o seu registro. Viagem longa com poucas noites cadastradas é lacuna: pergunte onde a pessoa ficou nas outras.
 
 Antes de decidir a data de uma viagem, cote a hospedagem das datas candidatas: cada opção é uma hospedagem em cotação, ligada à viagem, e a data sai da comparação.
@@ -146,19 +148,23 @@ As datas candidatas vêm das preferências de viagem: leia os dias para não via
 Antes de buscar, leia no cadastro de cada pessoa que viaja as necessidades e as preferências, como cama de casal, ar-condicionado e sensibilidade a barulho, e pergunte uma vez só o que o cadastro não diz: se vão de carro próprio, e se a cama precisa ser de casal ou podem ser duas camas. De carro, a hospedagem precisa de estacionamento e o veículo entra na viagem.
 
 O teto por noite é o que a pessoa disser. Sem ele, não pergunte: use o maior valor por noite das hospedagens anteriores da mesma localidade, lido nas propriedades de preço e de noites que o mapeamento de dados do projeto indica, e diga que o teto veio do histórico. Sem histórico da localidade ou sem essas propriedades no mapeamento, diga a limitação e pergunte o teto.
-Busque pelo endereço exato do compromisso, não pelo bairro: digite o endereço completo na busca da plataforma, centre o mapa nele e anote a distância de cada candidata até o local. A busca pelo nome do bairro ou por um retângulo do bairro no mapa não é a busca pelo endereço. Filtre a busca pelo que o cadastro e a pessoa pedem, como estacionamento, ar-condicionado e a cama preferida. Candidata sem a cama preferida não entra na tabela: a pessoa a recusa sem precisar dizer.
+Busque pelo endereço exato do compromisso, não pelo bairro: digite o endereço completo na busca da plataforma, centre o mapa nele e anote a distância de cada candidata até o local. A busca pelo nome do bairro ou por um retângulo do bairro no mapa não é a busca pelo endereço. Filtre a busca pelo que o cadastro e a pessoa pedem, como estacionamento, ar-condicionado e a cama preferida. Candidata sem a cama preferida não entra na tabela. Cama queen ou king vale como cama de casal.
 
 Classifique cada candidata lendo primeiro as avaliações mais baixas, para ver o risco. Na plataforma que ordena as avaliações, ordene pelas mais baixas e leia as piores, em vez de ler as mais relevantes.
 
-Leia cada avaliação baixa inteira, abrindo o "Mostrar mais" e conferindo que o texto não foi cortado, porque a queixa costuma vir no fim, depois dos elogios. Uma avaliação de 4★ ou 3★ pode trazer o problema, como o acesso difícil por falta de biometria para hóspede, e vale tanto quanto uma de 1★. Nunca declare "sem queixa" por um trecho cortado.
+Leia cada avaliação baixa inteira, abrindo o "Mostrar mais" e conferindo que o texto não foi cortado, porque a queixa costuma vir no fim, depois dos elogios. Uma avaliação de 4★ ou 3★ pode trazer o problema, como o acesso difícil por falta de biometria para hóspede, e vale tanto quanto uma de 1★. Nunca declare "sem queixa" por um trecho cortado. Leia também a resposta do anfitrião a cada avaliação baixa: culpar o hóspede, ser passivo-agressivo, ignorar a queixa ou colar um texto de IA é sinal de risco.
+
+Guarde no Notion toda candidata lida na sessão, também a descartada, sem esperar pedido, no formato do `registro-da-hospedagem`. De toda hospedagem usada, guarde o link do anúncio na própria hospedagem, para a pessoa poder voltar a ela.
+
+Cadastre também o anfitrião de toda candidata lida: o perfil da plataforma, por `definir-perfil-social`, com o ID do perfil como chave, ligado à hospedagem. A pessoa, por `definir-pessoa`, só entra com nome e sobrenome, para evitar ambiguidade. Anfitrião empresa liga o perfil à empresa, por `definir-empresa`. Outro anúncio de anfitrião conhecido: diga que é o mesmo e o que já se sabe dele.
 
 Confira na página de comodidades de cada candidata, uma a uma, se o que é necessidade existe e não aparece como indisponível: o filtro da busca não garante, e a candidata que passou no filtro pode listar "Indisponível: Ar-condicionado". Avaliação que cita colchão manchado, sem lençol ou com plástico conta como incidente de colchão e descarta a candidata.
 
 Com poucas avaliações a ordenação não abre: leia todas, diga que a evidência é pouca e não trate a nota máxima como segurança. Anfitrião com pouca história se verifica pelos outros anúncios e avaliações dele, para saber se o perfil é real. Descarte a que cair numa regra da política ou numa sensibilidade de quem viaja, lida no cadastro de cada pessoa, como o histórico de mofo ou o barulho extremo para quem não tolera barulho.
 
-Todo link de hospedagem que você mostrar leva as datas da viagem e o número de hóspedes já preenchidos, como `?check_in=AAAA-MM-DD&check_out=AAAA-MM-DD&adults=N` no Airbnb, para a pessoa abrir o preço e a disponibilidade do período. Sem o formato da plataforma, mostre o link simples e diga que as datas não vêm preenchidas.
+Toda vez que citar uma hospedagem, na tabela ou no texto, cite-a como link, e todo link leva as datas da viagem e o número de hóspedes já preenchidos, como `?check_in=AAAA-MM-DD&check_out=AAAA-MM-DD&adults=N` no Airbnb, para a pessoa abrir o preço e a disponibilidade do período. Sem esse formato, mostre o link simples e avise que as datas não vêm.
 
-O preço de uma candidata é o total do período que a página do anúncio mostra para as datas e os hóspedes, lido nela e não no cartão da busca. Com desconto, diga o total e o preço original riscado, como "R$ 1.130, de R$ 1.288", e diga se a plataforma mostra taxas separadas. Nunca cite só um dos dois valores.
+O preço de uma candidata é o total do período que a página do anúncio mostra, lido nela e não no cartão da busca, e com desconto cite o total e o original. Com duas ou mais candidatas vivas, ofereça o `comparativo-de-hospedagens`.
 
 Na falta de candidata boa, ou antes de buscar na plataforma, procure entre as hospedagens anteriores da mesma localidade a avaliada como voltaria, porque a pessoa já conhece e se sente confortável nela. Mostre a distância em km dela até o compromisso e compare, lado a lado, o preço da diária, a distância e a avaliação, para a pessoa equilibrar os três.
 
@@ -169,7 +175,7 @@ A avaliação tem o motivo, o dia e quem avaliou, cada um na sua propriedade. Gr
 Incidente que a pessoa conta, como mofo, colchão com plástico ou tratamento na portaria, é motivo da avaliação da hospedagem em que aconteceu: pergunte qual foi se não souber, e não o deixe só numa política, porque as avaliações são a fonte que guia a busca seguinte.
 Avaliação que a pessoa ainda não fez fica como pendência: não a preencha por ela.
 
-Antes de gravar a avaliação ou uma despesa, identifique a hospedagem pela reserva, com o nome do anúncio, o código e as datas, que a página da reserva da plataforma mostra, e não pelo bairro que a pessoa citou: dois endereços do mesmo bairro podem ser estadias diferentes. A linha do extrato só traz o valor, as datas e a cidade, então abra a reserva antes de perguntar à pessoa.
+Antes de gravar a avaliação ou uma despesa, e antes de criar uma página, procure a hospedagem já cadastrada nas hospedagens da viagem pelas datas e pelo código, porque o cadastro pode ter só o anfitrião no título. Identifique a hospedagem pela reserva, com o nome do anúncio, o código e as datas, que a página da reserva da plataforma mostra, e não pelo bairro que a pessoa citou: dois endereços do mesmo bairro podem ser estadias diferentes. A linha do extrato só traz o valor, as datas e a cidade, então abra a reserva antes de perguntar à pessoa.
 Estadia deixada antes do fim ou trocada por outra registra o check-out do dia em que a pessoa saiu, não o da reserva, e o motivo da troca vai no motivo da avaliação, com o que deu errado e o que foi resolvido.
 
 ### Passo 7
@@ -179,8 +185,9 @@ Leia só datas, horários e o primeiro nome do anfitrião, nunca valor, document
 A reserva vale mais que a cotação: a data e o status vêm dela, e a cotação fica como histórico.
 Hospedagem paga por terceiro, como a de uma missão ou de um evento, não aparece na plataforma: pergunte quem foi e quem pagou, em vez de concluir que falta.
 A tabela do que achou cita, em cada linha, a viagem e o ponto de contato, ou diz que não há. Viagem sem ponto de contato, como uma formatura, também é viagem, e se cadastra por `definir-viagem`.
-Com só o primeiro nome do anfitrião, não cadastre a pessoa: o nome vai no título da hospedagem e a relação fica vazia.
+Com só o primeiro nome do anfitrião, não cadastre a pessoa: fica o perfil da plataforma ligado à hospedagem.
 Grave só depois que a pessoa aprovar a tabela.
+Antes de enviar um pedido de reserva, pergunte a forma de pagamento, Pix ou cartão, e confirme o total. Depois, confira a conversa com o anfitrião no intervalo que a pessoa disser e registre no Notion o que ele responder sobre as pendências, como garagem e água quente, até ele responder e aceitar ou recusar.
 
 ### Passo 8
 

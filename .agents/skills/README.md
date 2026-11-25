@@ -544,6 +544,8 @@ flowchart LR
   definir_hospedagem --> acompanhar_retornos_pendentes
   definir_hospedagem --> acompanhar_veiculo
   definir_hospedagem --> conversar_no_whatsapp
+  definir_hospedagem --> definir_empresa
+  definir_hospedagem --> definir_perfil_social
   definir_hospedagem --> definir_pessoa
   definir_hospedagem --> definir_viagem
   definir_hospedagem --> lancar_despesa_da_empresa
