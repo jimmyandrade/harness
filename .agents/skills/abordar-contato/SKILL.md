@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.4.5"
+  version: "0.5.0"
   related:
     - definir-empresa
     - definir-negociacao
@@ -53,6 +53,10 @@ Com formulário aberto, tente a inscrição já. Antes de abrir o formulário, c
 
 Com ou sem inscrição, proponha também o contato direto, pelo canal em que a organização responde, para a marca se apresentar e avisar da inscrição. O texto cita quem indicou a marca quando a pessoa contar, e não inventa indicação. Ele sai por `redigir-com-tom-de-voz`.
 
+Antes de propor o texto, olhe o perfil da empresa no canal por onde a mensagem vai: a foto do perfil, que pode trazer um comunicado, como férias coletivas ou fim de ano, o horário de funcionamento, a descrição e o aviso de que a conta é gerida por um serviço. Diga à pessoa o que o perfil mostra e como isso muda o texto e o momento do envio: empresa fechada ou de férias não responde, e uma mensagem que ignora o comunicado soa como gafe.
+
+Um horário que aparece como fechado todos os dias é um perfil sem horário preenchido, não uma empresa fechada: confirme no site ou no Instagram antes de contar com ele.
+
 A primeira mensagem se apresenta em primeira pessoa por quem assina, com nome e papel, e não só pela marca. Quem assina vem do cadastro de pessoas e das instruções do projeto, que dizem quem representa a marca e quando outra pessoa pode aparecer. Leia essas fontes antes de perguntar: o nome de quem representa a marca, citado em terceira pessoa por quem pede o texto, é o de quem assina. Sem essa fonte, pergunte. Não ponha uma segunda pessoa sem a condição que a fonte pede.
 
 A organização e quem a dirige costumam ter perfis separados. Procure o perfil de cada um, na bio, no site de links e nas publicações, e proponha uma mensagem para cada, escrita para quem lê aquele perfil: o perfil da organização recebe um texto para a equipe, no plural, e o perfil pessoal recebe um texto com o nome da pessoa. Não mande ao perfil da organização um texto endereçado a uma pessoa.
@@ -91,6 +95,14 @@ Os dois textos saem por `redigir-com-tom-de-voz` e só com o sim da pessoa. A co
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
+
+### Primeira mensagem sem olhar o perfil
+
+Se você propuser o texto sem abrir o perfil da empresa, a mensagem pode chegar durante um comunicado de férias ou fora do horário e ficar sem resposta, ou ignorar um aviso que a empresa já fez e gerar atrito.
+
+1. Abra o perfil no canal e leia a foto, o horário, a descrição e os avisos.
+2. Diga à pessoa o que mostra e ajuste o texto e o momento do envio.
+3. Horário fechado em todos os dias é perfil sem horário: confirme em outra fonte.
 
 ### Contato frio respondido por inteiro
 
