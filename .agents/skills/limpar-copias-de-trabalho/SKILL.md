@@ -3,7 +3,7 @@ name: limpar-copias-de-trabalho
 description: Remove as cópias de trabalho do git e as branches locais já mescladas na base, inclusive as de outras sessões, depois de conferir que nada se perde. Usada ao terminar o trabalho de uma sessão ou quando sobram cópias de trabalho ou branches locais de código. Não serve para liberar espaço em disco em geral nem para apagar arquivo da pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.6.1"
   related:
     - criar-copia-de-trabalho
     - criar-pull-request
@@ -86,6 +86,7 @@ Cruze `gh pr list --head <branch> --state all` com `fetch --prune` e liste, numa
 
 Não suponha que a plataforma limpa: um repositório com a opção de apagar a branch ao mesclar ligada ainda pode ter branch de PR mesclado.
 Uma conferência que falha não vira "limpo": a resposta lista o que sobrou, com o comando pronto.
+Cada branch ou cópia que a resposta cita nessas linhas e nos comandos prontos leva o link do PR dela, `[#123](url)`: o nome da branch sozinho obriga a pessoa a procurar o PR.
 Esta habilidade apaga só a cópia e a branch local que passaram no Passo 3.
 A branch remota, e o que o resto da lista mostra, pode ser de outra sessão ou de outra pessoa: fica para a pessoa, como lista com o comando pronto.
 O modo automático pode negar ação destrutiva, e a negação não se contorna.
@@ -95,6 +96,7 @@ O modo automático pode negar ação destrutiva, e a negação não se contorna.
 Responda com o espaço que voltou e uma tabela das cópias e das branches: removida ou mantida, e o motivo de cada uma, com o link do PR quando houver.
 Cada branch é uma linha.
 Depois da tabela, uma linha por conferência e por categoria do que se acumulou, como o Passo 4 manda, com o resultado de cada uma.
+Cada branch, cópia e comando pronto dessas linhas leva o link do PR dela, mesclado ou fechado.
 A que ficou porque o pull request mesclou outro commit diz se pode apagar.
 Pode apagar quando o commit está no GitHub, mesmo com comportamento de produto que o resultado aprovado não tem.
 Processo: o pull request chegou ao fim normal.
@@ -157,6 +159,14 @@ Se você listar as branches locais de outras tarefas como "não toquei", a pesso
 3. Na resposta, cada branch é uma linha da tabela, com a decisão e o link do PR quando houver. A que ficou porque o pull request mesclou outro commit entra do mesmo jeito: uma frase, pode apagar ou o comportamento que só existe nela.
 4. Não liste, sem a pessoa pedir, todos os arquivos e commits: a explicação fica longa.
 5. Não junte o conjunto numa frase e não ofereça listá-lo depois.
+
+### Branch citada sem o link do PR
+
+Se você listar uma branch que ficou, ou entregar o comando para apagá-la, só pelo nome, a pessoa pergunta qual é o PR dela e a limpeza não termina.
+
+1. Ache o PR da branch com `gh pr list --head <branch> --state all`.
+2. Ponha o link `[#123](url)` do PR, mesclado ou fechado, na linha da branch e junto do comando pronto.
+3. Vale também para a cópia de trabalho e para a pergunta de uma pendência, como "posso apagar?".
 
 ### Diff no lugar da decisão
 
@@ -234,6 +244,7 @@ Só a cópia principal existia, e sobraram quatro branches `renovate/*`. Três P
 - A pasta atual da sessão não pode ser removida: o shell perde o diretório de trabalho.
 - "Não conferi a sessão" ou "não achei o pull request" parece motivo para manter. Não é conferência. A conferência é a lista de sessões e a lista de pull requests abertos e mesclados.
 - Um conjunto grande de branches mantidas parece caber numa frase, com a oferta de listar depois. Cada uma continua uma linha da tabela.
+- Um PR já encerrado parece dispensar o link, porque o assunto acabou. A pessoa decide se apaga a branch olhando o PR, então o link vai em toda branch e em todo comando pronto.
 - Explicar o diff de cada branch parece completar a linha. A linha é a decisão: pode apagar, ou o comportamento que só existe na branch.
 
 ## Scripts disponíveis
