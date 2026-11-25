@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.114.1](https://github.com/jimmyandrade/harness/compare/v1.114.0...v1.114.1) (2026-11-25)
+
+
+### Bug Fixes
+
+* **definir-artigo-da-base-de-conhecimento:** verify the case at the source and illustrate it with prints ([#1541](https://github.com/jimmyandrade/harness/issues/1541)) ([378f270](https://github.com/jimmyandrade/harness/commit/378f2709920a81d30daffc0fe45ca9f6d9744cab))
+* **pedir-cotacao-ao-fornecedor:** read the buyer's CNPJ and email from the company page instead of asking ([#1542](https://github.com/jimmyandrade/harness/issues/1542)) ([c1fc8d5](https://github.com/jimmyandrade/harness/commit/c1fc8d57eb78231ae116073b0d07d82af7c22135))
+
 ## [1.114.0](https://github.com/jimmyandrade/harness/compare/v1.113.0...v1.114.0) (2026-11-25)
 
 
