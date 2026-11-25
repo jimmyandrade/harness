@@ -153,6 +153,7 @@ flowchart LR
     mesclar_registro["mesclar-registro"]
     organizar_emails["organizar-emails"]
     organizar_ponto_de_contato["organizar-ponto-de-contato"]
+    pedir_cotacao_ao_fornecedor["pedir-cotacao-ao-fornecedor"]
     pedir_revisao_de_pr_no_slack["pedir-revisao-de-pr-no-slack"]
     perfilar_tom_de_voz["perfilar-tom-de-voz"]
     pesquisar_compra["pesquisar-compra"]
@@ -963,6 +964,15 @@ flowchart LR
   organizar_ponto_de_contato --> procurar_oportunidade
   organizar_ponto_de_contato --> sincronizar_cronograma
   organizar_ponto_de_contato --> triar_conversas
+  pedir_cotacao_ao_fornecedor --> anexar_arquivo_no_whatsapp
+  pedir_cotacao_ao_fornecedor --> conversar_no_whatsapp
+  pedir_cotacao_ao_fornecedor --> definir_empresa
+  pedir_cotacao_ao_fornecedor --> definir_negociacao
+  pedir_cotacao_ao_fornecedor --> definir_orcamento_de_fornecedor
+  pedir_cotacao_ao_fornecedor --> definir_requisito_de_compra
+  pedir_cotacao_ao_fornecedor --> definir_viagem
+  pedir_cotacao_ao_fornecedor --> gerenciar_estoque
+  pedir_cotacao_ao_fornecedor --> pesquisar_compra
   pedir_revisao_de_pr_no_slack --> criar_pull_request
   pedir_revisao_de_pr_no_slack --> enviar_mensagem_no_slack
   pedir_revisao_de_pr_no_slack --> escrever_link
@@ -972,7 +982,6 @@ flowchart LR
   perfilar_tom_de_voz --> definir_vocabulario
   perfilar_tom_de_voz --> redigir_com_tom_de_voz
   perfilar_tom_de_voz --> rotular_item
-  pesquisar_compra --> anexar_arquivo_no_whatsapp
   pesquisar_compra --> conversar_no_whatsapp
   pesquisar_compra --> definir_ativo_imobilizado
   pesquisar_compra --> definir_empresa
@@ -982,6 +991,7 @@ flowchart LR
   pesquisar_compra --> gerenciar_estoque
   pesquisar_compra --> identificar_duplicata
   pesquisar_compra --> lancar_despesa_da_empresa
+  pesquisar_compra --> pedir_cotacao_ao_fornecedor
   pesquisar_compra --> realizar_compra
   planejar_calendario_de_conteudo --> criar_ideia_de_conteudo
   planejar_calendario_de_conteudo --> definir_campanha_de_conteudo

@@ -1,0 +1,11 @@
+{
+  "skill_name": "pedir-cotacao-ao-fornecedor",
+  "evals": [
+    {
+      "id": "cotacao-com-cnpj-email-e-um-canal-so",
+      "prompt": "Peça cotação de etiqueta à gráfica que achamos. Uma atendente da gráfica já respondeu no chat dela, e o chat geral da empresa não tem nada.",
+      "expected_output": "O agente confere o cadastro, o rótulo e a nota do contato antes do envio, lê as conversas antigas e a especificação, e leva a quantidade calculada pelas unidades das peças à pessoa para confirmar. A mensagem explica o item e para que serve, traz material, formato, medida, quantidade, prazo e a pergunta do pedido mínimo, e termina com o CNPJ e o e-mail de quem compra, lidos da página da empresa na lista de empresas do projeto, sem pedi-los à pessoa. Como a atendente já respondeu, ele segue no chat dela, manda só o que falta e não repete o texto no chat geral. Pede o sim da pessoa antes de enviar e não conta onde a pessoa está nem que viaja.",
+      "files": []
+    }
+  ]
+}

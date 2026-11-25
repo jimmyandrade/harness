@@ -4,7 +4,7 @@ description: Cria, revisa e atualiza o artigo da base de conhecimento que respon
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.8.4"
+  version: "0.8.6"
   related:
     - criar-habilidade
     - definir-historia-de-usuario
@@ -95,6 +95,11 @@ Só crie um artigo novo quando nenhum responde.
 Quando a pessoa executa a tarefa que um artigo ensina, acompanhe a execução contra o artigo, passo a passo.
 Cada diferença que a execução mostra, como uma tela que mudou, um custo, uma aprovação ou um caso que o artigo não prevê, entra no artigo na mesma sessão, sem esperar outro pedido.
 Um assunto novo que a execução levanta vira outro artigo, como manda o Passo 3.
+Quando a dúvida nasce de um caso visual ou de comportamento, como uma tela, um componente ou um pull request, confira o caso na fonte antes de escrever.
+Abra o desenho no Figma, abra a tela ou o Storybook do pull request na versão dele, leia o código do pull request e meça o que a pessoa viu, como as cores calculadas no navegador.
+O artigo diz a causa confirmada e usa o caso conferido como exemplo, não só o que a conversa contou.
+Só deixe "a verificar" o que depende de uma decisão de outra pessoa ou de um acesso que a sessão não tem, e diga qual dos dois.
+Nunca deixe "a verificar" o que as ferramentas da sessão conseguem conferir.
 No Confluence, ignore a conferência de modelo abaixo: o espaço não tem lista de modelos.
 Confira se uma página é modelo do banco pela lista de modelos do data source, que a API do Notion devolve.
 O texto de exemplo das seções no corpo não prova que é modelo, porque alguém pode criar uma página a partir de um modelo e não mudar nada.
@@ -141,6 +146,8 @@ Mostre na tela o estado do passo, como o menu aberto ou a janela com o botão, a
 Capture em tamanho cheio, sem reduzir a escala: um print reduzido sobe ilegível ao artigo.
 Numa tela de login que a pessoa preenche, capture cada estado enquanto ela avança, porque depois do login não dá para voltar a essa tela sem sair da conta.
 Quando a pessoa precisa fazer um passo à mão, como entrar numa tela com a própria senha, a mesma mensagem traz o passo a passo completo: o atalho ou o clique até a tela (inclusive como abrir uma janela anônima), o endereço por extenso, o que digitar em cada campo, o que deve aparecer e o que me mandar de volta.
+Antes de pedir, deixe a tela pronta: saia da conta, abra a tela de entrada e deixe os campos à vista, e a pessoa só digita a senha.
+Quando a pessoa avisar que entrou, leia o resultado na tela, capture o que o passo mostra e registre o achado nos artigos que ele toca, na mesma sessão, sem esperar outro pedido.
 Numa tela que muda dados, abra o passo, capture e cancele. O passo que só aparece depois de salvar fica sem print.
 Antes de subir, cubra no print ou na foto o nome, o e-mail, o telefone, o nome do computador e outro dado pessoal de quem aparece, com um rótulo neutro como "e-mail pessoal", e confira a imagem coberta.
 Se a imagem mostra um desses dados e não dá para cobri-lo, deixe-a de fora e descreva o passo no texto.
@@ -156,6 +163,8 @@ Não pergunte se pode capturar: capture.
 Antes de dizer que não consegue capturar um passo, abra a tela em cada navegador que a sessão tenha, inclusive o que usa os logins da pessoa, e capture o estado do passo. A tela de login num navegador não encerra a tentativa: passe para o próximo.
 Só deixe um passo sem print depois dessa tentativa, e diga qual ficou sem print e o que a tentativa mostrou, como um login que nenhum navegador da sessão tem ou uma ferramenta da base sem upload de arquivo.
 Nunca escreva que não deu para capturar sem ter aberto a tela.
+Ilustre com o máximo de prints úteis, não só os passos: o desenho de referência, cada estado do caso lado a lado e a ferramenta de apoio, como a aba de acessibilidade.
+Uma comparação em imagem explica o que uma lista de passos não explica.
 
 ### Passo 8
 
@@ -166,6 +175,8 @@ Antes de concluir, confira o artigo com esta lista:
 - [ ] Não tem jargão técnico sem explicação nem nome interno que a pessoa não vê na tela.
 - [ ] Usa o caso real como exemplo quando a dúvida veio de um.
 - [ ] Cada passo de tela tem o print logo abaixo, com legenda, ou o motivo de não ter, depois de uma tentativa de captura.
+- [ ] O caso real foi conferido na fonte, no desenho, na tela ou no Storybook e no código do pull request, e cada "a verificar" que sobrou depende de uma pessoa ou de um acesso que faltou.
+- [ ] Cada estado do caso e o desenho de referência têm print, com legenda.
 - [ ] Nenhum print nem foto mostra nome, e-mail, telefone, nome do computador ou outro dado pessoal.
 - [ ] A pessoa sabe o que fazer, onde fazer e o que evitar sem abrir outro documento.
 - [ ] A ferramenta está ligada quando a dúvida é sobre ela.
@@ -222,6 +233,15 @@ Se você parar porque o banco que a pessoa indicou não tem pergunta, variaçõe
 1. Siga com o banco: o título leva a pergunta e o status é o de concluído do banco.
 2. Ponha as variações em `Quando usar esse artigo` e a ferramenta e os vizinhos como menção no corpo.
 3. Diga quais propriedades faltaram e como você as supriu. Não crie propriedade sem pedido.
+
+### Caso conferido só pela conversa
+
+Se você escrever o artigo só com o que a conversa contou, a causa fica como suposição e o artigo repete a dúvida em vez de resolvê-la.
+
+1. Abra o desenho, a tela ou o Storybook do caso e leia o código do pull request.
+2. Meça o que a pessoa viu e ponha a causa confirmada no artigo.
+3. Ilustre com os prints do desenho e de cada estado, lado a lado.
+4. Deixe "a verificar" só o que depende de outra pessoa ou de um acesso que a sessão não tem.
 
 ### Artigo repetido
 
@@ -281,6 +301,8 @@ Os critérios ficaram de fora. Cada guardrail virou item do diagnóstico rápido
 - O apelido da ferramenta, como "o IP" ou "o portal", parece bastar porque a conversa já o usou. A pessoa que lê o artigo não estava nela, então o endereço vai por extenso.
 - Um artigo encontrado e completo parece encerrar o trabalho. Se a pessoa vai executar a tarefa em seguida, a execução é a conferência: o que ela mostra e o artigo não diz entra nele.
 - O link escrito antes do quadro de encerramento parece entregar o artigo. A pessoa lê a mensagem final, então o link vai nela.
+- Um caso visual parece bem descrito pela conversa e pelo print do pull request. O print do pull request pode mostrar outra variante, com o mesmo nome, e só o Storybook aberto e o código mostram qual é qual.
+- No Confluence, subir o arquivo pela API chamada de dentro da página falha na verificação de origem. O conector devolve um comando de envio que sobe o arquivo, e a lista de anexos da página devolve a referência de cada um para o bloco da imagem.
 - Um artigo que manda usar uma ferramenta parece valer para todo mundo. Antes de dizer que uma orientação contradiz o artigo, confira a ordem dos acessos: quem ainda não recebeu a ferramenta segue outro caminho.
 
 ## Scripts disponíveis
