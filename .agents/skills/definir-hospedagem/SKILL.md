@@ -3,7 +3,7 @@ name: definir-hospedagem
 description: Define a hospedagem de uma viagem, da cotação que decide a data até o que ela pede depois da reserva, como nome e documento dos hóspedes, veículo e chegada, e a resposta a quem hospeda, com o sim se leva dado pessoal. Usada quando o anfitrião ou o hotel escreve, ou a pessoa pede para agradecer ou avisar. Não serve para ler a reserva, registrar a viagem nem redigir no tom da marca.
 metadata:
   author: jimmyandrade
-  version: "0.28.1"
+  version: "0.28.2"
   aliases:
     - responder-pedido-da-hospedagem
   related:
@@ -72,7 +72,7 @@ O nome de cada hóspede é o nome completo do cadastro, que em quem tem nome soc
 Com `Nome civil na resposta` em `não`, o nome civil de registro não vai na resposta nem na tela de confirmação, e nenhuma mensagem trata a pessoa por ele.
 Com `sim`, o nome civil entra entre parênteses só onde o documento o exige, e o tratamento segue o nome social.
 
-Documento, placa e telefone são dados sensíveis: leia do cadastro, mostre na tela de confirmação e nunca copie para outro lugar além da resposta.
+Documento, placa e telefone são dados sensíveis: leia do cadastro, mostre na tela de confirmação e só copie para a resposta ou para o formulário do anfitrião.
 Dado que falta no cadastro, pergunte uma vez, com o nome da pessoa, e grave a resposta por `definir-pessoa`.
 
 O banco da viagem ou da hospedagem sem propriedade para as pessoas ou para os veículos é limitação do banco.
@@ -106,7 +106,7 @@ Posso enviar? <pergunta que pede o sim>
 ```
 O texto da resposta passa por `redigir-com-tom-de-voz` antes de ser mostrado. A resposta traz só o pedido: quem chega, o veículo se foi pedido e o horário previsto. Não acrescente dado que a hospedagem não pediu.
 Quando a pessoa dita o texto, como um agradecimento ou um aviso de chegada, e ele não leva dado pessoal nem promessa além do que ela disse, o pedido já é o sim: envie pelo canal da reserva, sem a tela de confirmação, e diga o que enviou.
-Quando a hospedagem pede dado de hóspedes já cadastrados na hospedagem do Notion, monte o rascunho completo sem perguntar. Abra o link do anfitrião sem perguntar, para ler os campos e o domínio e montar o rascunho nos campos dele. Documento e placa você nunca digita: a pessoa os digita ou envia. Dado de quem não está cadastrado espera o sim.
+Quando a hospedagem pede dado de hóspedes já cadastrados na hospedagem do Notion, monte o rascunho completo sem perguntar. Abra o link do anfitrião sem perguntar e monte o rascunho nos campos dele. Preencha tudo o que o rascunho tem, menos o número do documento, que a pessoa digita, e não conclua o registro. Dado de quem não está cadastrado espera o sim.
 
 ### Passo 4
 
