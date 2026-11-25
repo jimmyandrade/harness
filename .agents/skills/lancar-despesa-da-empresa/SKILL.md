@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.13.1"
+  version: "0.13.2"
   aliases:
     - definir-despesa
     - lancar-despesa
@@ -60,13 +60,15 @@ flowchart LR
   A -->|tipo incerto| C[Confirme no mapeamento ou no contexto antes de chamar]
 ```
 
-Preserve as URLs retornadas. Não transforme o UUID de uma fonte em URL de banco ou página. Um modelo é uma página: seu `parent.url` identifica a fonte, não a URL do banco. Leia o esquema da fonte antes de consultar ou gravar suas propriedades. Confira nele cada nome do mapeamento. Um nome que o esquema não mostra, como um título renomeado, não entra na consulta nem na gravação: ache a propriedade equivalente pelo tipo e pela descrição, como a única de tipo título, use o nome do esquema e avise a divergência para corrigir o mapeamento. Sem equivalente seguro, pergunte antes de gravar.
+Preserve as URLs retornadas. Não transforme o UUID de uma fonte em URL de banco ou página. Um modelo é uma página: seu `parent.url` identifica a fonte, não a URL do banco. Leia o esquema da fonte antes de consultar ou gravar suas propriedades. Confira nele cada nome do mapeamento. Um nome que o esquema não mostra, como um título renomeado, não entra na consulta nem na gravação: ache a equivalente pelo tipo e pela descrição, como a única de tipo título, use o nome do esquema e avise a divergência para corrigir o mapeamento. Sem equivalente seguro, pergunte antes de gravar.
 
-Erro genérico de acesso descreve a chamada que falhou, não prova a causa nem a falta de acesso ao banco inteiro. Confira os argumentos e o tipo da entidade, e corrija a chamada só com evidência de incompatibilidade: não repita a mesma chamada, não alterne carregadores por tentativa e não contorne uma negativa real.
+Erro genérico de acesso descreve a chamada que falhou, não prova a causa nem a falta de acesso ao banco. Confira os argumentos e o tipo da entidade, e corrija a chamada só com evidência de incompatibilidade: não repita a mesma chamada, não alterne carregadores por tentativa e não contorne uma negativa real.
 
-Uma leitura bem-sucedida prova a leitura desse recurso, não o acesso a todos os registros nem a escrita. Com a fonte carregada, continue a busca de duplicata e o fluxo do gasto, sem pedir a liberação de um acesso cuja ausência não foi demonstrada. Se a chamada correta continuar bloqueada, informe a operação e o erro retornado, diga que a causa não foi informada e não afirme que houve lançamento.
+Uma leitura bem-sucedida prova a leitura desse recurso, não a escrita. Com a fonte carregada, continue a busca de duplicata e o fluxo do gasto, sem pedir liberação de um acesso cuja ausência não foi demonstrada. Se a chamada correta continuar bloqueada, informe a operação e o erro, diga que a causa não foi informada e não afirme que houve lançamento.
 
-Quando a pessoa disser que o gasto saiu de uma conta de pagamento, como o Mercado Pago, ou faltar valor, hora, recebedor ou comprovante, leia o extrato dessa conta antes de perguntar: abra o detalhe e baixe o comprovante como `conciliar-recebimento` faz com a venda. Lançar do extrato ou pagar pela conta já autoriza baixar o comprovante, sem pedir sim.
+Quando a pessoa disser que o gasto saiu de uma conta de pagamento, como o Mercado Pago, ou de uma plataforma que cobra, como o Airbnb, ou faltar valor, data, hora, recebedor ou comprovante, leia o extrato ou a página de pagamentos antes de perguntar e de deixar a data vazia: abra o detalhe e baixe o comprovante como `conciliar-recebimento` faz com a venda. Lançar do extrato ou pagar pela conta já autoriza baixar o comprovante, sem pedir sim.
+
+A sessão de navegador da pessoa vale como acesso. Só deixe o pagamento pendente depois de abrir a página e não achar a cobrança, e diga isso.
 
 Cruze a descrição da pessoa com as movimentações do dia. Uma compatível é a evidência, e mais de uma, ou nenhuma, vira pergunta com as candidatas. O extrato não traz o produto nem a finalidade. No navegador, não acione a ação de imprimir: ela trava a aba.
 
@@ -163,7 +165,7 @@ flowchart LR
   E -->|não| H[Propõe o cadastro e pede só o dado ou a autorização necessária]
 ```
 
-Não encerre com apenas "empresa não cadastrada" ou "vínculo pendente": entregue a ação realizada ou a proposta concreta e o bloqueio. Reaproveite a leitura e os comprovantes; cadastrar a recebedora não cria outra despesa. Nome no título, no assunto do comprovante ou nas observações não substitui a relação com a empresa. Preserve a conta, a pessoa pagadora e os anexos já confirmados. Não infira que o nome exibido no Pix seja dono, contato ou responsável pela empresa.
+Não encerre com "vínculo pendente": entregue a ação realizada ou a proposta e o bloqueio. Reaproveite a leitura e os comprovantes; cadastrar a recebedora não cria outra despesa. Nome no título, no assunto do comprovante ou nas observações não substitui a relação com a empresa. Preserve a conta, a pessoa pagadora e os anexos já confirmados. Não infira que o nome exibido no Pix seja dono, contato ou responsável pela empresa.
 
 Compare cada identificador do comprovante com o que o cadastro da recebedora guarda: chave Pix, CNPJ, nome, instituição e conta. Uma diferença, mesmo de uma letra, é discrepância. Avise a pessoa antes de seguir, com os dois valores lado a lado, porque pode ser tentativa de golpe. A pessoa decide qual vale. Corrija o cadastro só depois da decisão dela, e diga o que mudou.
 
@@ -185,9 +187,9 @@ Grave os dados nas propriedades mapeadas, não no corpo. Separe a data do docume
 
 Desconto por antecipação, juros e multa mudam o valor pago, não o original: grave o valor cheio da cobrança no valor original e o efetivamente pago no valor final. Juros e multa vão nos campos deles quando a evidência os separa. Campo opcional ausente fica pendente; produto, finalidade e informação necessária à classificação não são opcionais. Preserve o modelo da página.
 
-Anexe os originais na propriedade mapeada de comprovantes na mesma execução do lançamento, sem novo reconhecimento e sem pedir confirmação adicional. O arquivo local sobe como `anexar-arquivo-no-notion` manda. Recupere os anexos já enviados do histórico antes de declarar que estão inacessíveis. Use a referência de arquivo aceita pela ferramenta; um ID de anexo da conversa não é necessariamente um ID de arquivo do Notion.
-Erro de arquivo não encontrado exige conferir a referência original e usar o formato suportado, não pedir novo envio nem tratar a falha de referência como falta do comprovante. Se a ferramenta recusar o arquivo enviado ao criar a página, crie a página sem o anexo, com a conciliação em `A conciliar`, anexe o arquivo ao lançamento já criado e confira o anexo na página salva antes de marcar como comprovado.
-Mantenha as evidências anteriores ao complementar um lançamento. Preserve os dados confirmados já gravados e pergunte sobre conflito antes de sobrescrevê-los. Uma transação ainda em processamento não equivale a conciliação concluída; uma cobrança sem confirmação não equivale a pagamento.
+Anexe os originais na propriedade mapeada de comprovantes na mesma execução do lançamento, sem novo reconhecimento e sem pedir confirmação adicional. O arquivo local sobe como `anexar-arquivo-no-notion` manda. Recupere os anexos já enviados do histórico antes de declarar que estão inacessíveis. Use a referência de arquivo aceita pela ferramenta: um ID de anexo da conversa não é um ID de arquivo do Notion.
+Erro de arquivo não encontrado exige conferir a referência original e usar o formato suportado, sem pedir novo envio nem tratar a falha como falta do comprovante. Se a ferramenta recusar o arquivo enviado ao criar a página, crie a página sem o anexo, com a conciliação em `A conciliar`, anexe o arquivo ao lançamento já criado e confira o anexo na página salva antes de marcar como comprovado.
+Ao complementar, mantenha as evidências e os dados confirmados já gravados, e pergunte sobre conflito antes de sobrescrevê-los. Uma transação ainda em processamento não equivale a conciliação concluída; uma cobrança sem confirmação não equivale a pagamento.
 
 Todo comprovante fica no Notion antes de ir por e-mail ou mensagem: primeiro grave, depois envie, e o anexo sai do arquivo da despesa.
 
@@ -195,7 +197,7 @@ Pagamento numa moeda de `Moedas estrangeiras`: grave o valor na moeda estrangeir
 
 ### Passo 4
 
-Confira o registro salvo, os anexos na propriedade de comprovantes e os vínculos da empresa recebedora, do veículo e da viagem aplicáveis ao gasto. Só remova a pendência de anexo e atualize a conciliação depois de confirmar a gravação das evidências. Entregue a página do lançamento e as pendências, distinguindo o dado que falta de um cadastro ainda não encaminhado. Diga o que foi encontrado, criado ou complementado; não apresente transcrição como lançamento. O lançamento é a origem financeira da compra. A página do bem, a separação entre ativo e estoque e a compra de item controlável ficam com `definir-ativo-imobilizado`.
+Confira o registro salvo, os anexos na propriedade de comprovantes e os vínculos da empresa recebedora, do veículo e da viagem aplicáveis ao gasto. Só remova a pendência de anexo e atualize a conciliação depois de confirmar a gravação das evidências. Entregue a página do lançamento e as pendências, distinguindo o dado que falta de um cadastro ainda não encaminhado. Diga o que foi encontrado, criado ou complementado; não apresente transcrição como lançamento. A página do bem e a separação entre ativo e estoque ficam com `definir-ativo-imobilizado`.
 
 ## Problemas comuns
 
@@ -274,8 +276,7 @@ Avisei que as duas chaves diferem por uma letra e que isso pode ser tentativa de
 ## Casos-limite
 
 - A lista de despesas e investimentos não está no workspace conectado: pare. Não use a lista de outro workspace.
-- O pedido é a página do bem durável: `definir-ativo-imobilizado`. Não crie o ativo aqui.
-- Compra de item controlável ou separação entre ativo e estoque: `definir-ativo-imobilizado`. Não reescreva essas regras aqui.
+- O pedido é a página do bem durável, a compra de item controlável ou a separação entre ativo e estoque: `definir-ativo-imobilizado`. Não crie o ativo aqui.
 - Falta conta de origem opcional, mas a identificação, a classificação e os dados financeiros estão sustentados: registre e entregue a pendência, sem adivinhar.
 - Valor, data e natureza da empresa estão confirmados, mas falta o que foi pago ou sua finalidade: pergunte e aguarde antes de gravar.
 - Venda ou frase mista: `definir-lancamento-financeiro`. Não grave a venda aqui.
@@ -284,7 +285,6 @@ Avisei que as duas chaves diferem por uma letra e que isso pode ser tentativa de
 ## Pegadinhas
 
 - Rastrear o lançamento parece criar o ativo. O lançamento fica aqui. A página do bem fica em `definir-ativo-imobilizado`.
-- Item controlável parece esta habilidade decidir o destino. A separação entre ativo e estoque fica em `definir-ativo-imobilizado`.
 - Venda recebida na hora parece este gasto. A frase mista começa em `definir-lancamento-financeiro`.
 - O comprovante identifica a transferência, não necessariamente a compra. Recebedor e Pix não são produto nem finalidade.
 - Nota fiscal e print de cartão podem ser o mesmo gasto. Dois arquivos não são duas despesas.
