@@ -1,5 +1,35 @@
 # Changelog
 
+## [1.112.0](https://github.com/jimmyandrade/harness/compare/v1.111.0...v1.112.0) (2026-11-25)
+
+
+### Features
+
+* **definir-tecido:** limit how many weaves a fabric links ([#1525](https://github.com/jimmyandrade/harness/issues/1525)) ([1111da6](https://github.com/jimmyandrade/harness/commit/1111da6b1c22863725ee3f96be03207c7eb2370b))
+
+
+### Bug Fixes
+
+* **agents:** convert a UTC timestamp to the person's day before saying today ([#1527](https://github.com/jimmyandrade/harness/issues/1527)) ([0d04813](https://github.com/jimmyandrade/harness/commit/0d048137ebf3034f6070529e78c3c702ce0ad69b))
+* **limpar-copias-de-trabalho:** link the pull request of every branch the cleanup lists ([#1526](https://github.com/jimmyandrade/harness/issues/1526)) ([8fe9910](https://github.com/jimmyandrade/harness/commit/8fe99109bf9e45efedcfd214dc31295a2eb648bf))
+
+## [1.111.0](https://github.com/jimmyandrade/harness/compare/v1.110.0...v1.111.0) (2026-11-24)
+
+
+### Features
+
+* **conversar-no-whatsapp:** correct how the contact describes the brand and ask if it fits their curation ([#1505](https://github.com/jimmyandrade/harness/issues/1505)) ([4e3220e](https://github.com/jimmyandrade/harness/commit/4e3220e2c9fe54555e09f0f2b3e7dc87b205fa9b))
+* **conversar-no-whatsapp:** list the action points when a conversation offers a spot at a fair or event ([#1503](https://github.com/jimmyandrade/harness/issues/1503)) ([9de0b90](https://github.com/jimmyandrade/harness/commit/9de0b90ce7cac866ca49227bb83eeab0fa09f4c5))
+* **escrever-codigo:** check the repository convention before choosing a name ([#1516](https://github.com/jimmyandrade/harness/issues/1516)) ([af11e7f](https://github.com/jimmyandrade/harness/commit/af11e7fe3ee94501dd39916b2c5df64df0e168a5))
+
+
+### Bug Fixes
+
+* **consultar-vocabulario:** repair the glossary order instead of skipping the validation ([#1509](https://github.com/jimmyandrade/harness/issues/1509)) ([df2baf0](https://github.com/jimmyandrade/harness/commit/df2baf0d261fe287a8c1c3eba0a6244d71949121))
+* **definir-hospedagem:** search the trip lodgings by dates and code before creating a page ([#1502](https://github.com/jimmyandrade/harness/issues/1502)) ([ee7d8c6](https://github.com/jimmyandrade/harness/commit/ee7d8c60cb93245f14f1eef5b277fd8573bb6a1c))
+* **definir-issue-do-github:** warn that an artifact name accepts only letters, numbers, spaces, periods, hyphens and underscores ([#1521](https://github.com/jimmyandrade/harness/issues/1521)) ([827ba82](https://github.com/jimmyandrade/harness/commit/827ba8281fa2ac2b25fc25cdd449150f9427fa72))
+* **formalizar-decisao:** read who reacted and do not consult on settled decisions ([#1512](https://github.com/jimmyandrade/harness/issues/1512)) ([4d39723](https://github.com/jimmyandrade/harness/commit/4d39723efbd2c4ca9e8c6f8d8c2e30f12df22145))
+
 ## [1.110.0](https://github.com/jimmyandrade/harness/compare/v1.109.0...v1.110.0) (2026-11-24)
 
 

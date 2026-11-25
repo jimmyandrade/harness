@@ -356,8 +356,10 @@ flowchart LR
   conversar_no_whatsapp --> enviar_email
   conversar_no_whatsapp --> escrever_link
   conversar_no_whatsapp --> lancar_despesa_da_empresa
+  conversar_no_whatsapp --> manter_contato_no_whatsapp
   conversar_no_whatsapp --> procurar_agenda
   conversar_no_whatsapp --> procurar_tarefa
+  conversar_no_whatsapp --> prospectar_oportunidades
   conversar_no_whatsapp --> rascunhar_mensagem
   conversar_no_whatsapp --> reconhecer_imagem
   conversar_no_whatsapp --> redigir_com_tom_de_voz

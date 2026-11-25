@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, e lê o pedido, quem pediu, a data, o que o contato afirmou e o que falta. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp ou conferir o que alguém pediu. Não serve para escrever ou enviar a mensagem, redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.44.0"
+  version: "0.44.2"
   aliases:
     - redigir-mensagem-de-whatsapp
   related:
@@ -24,9 +24,11 @@ metadata:
     - enviar-email
     - escrever-link
     - evoluir-habilidade
+    - manter-contato-no-whatsapp
     - lancar-despesa-da-empresa
     - procurar-agenda
     - procurar-tarefa
+    - prospectar-oportunidades
     - rascunhar-mensagem
     - reconhecer-imagem
     - redigir-com-tom-de-voz
@@ -68,6 +70,8 @@ No WhatsApp Web, todo acesso segue `usar-whatsapp-web`: o Chrome da pessoa, a ab
 
 Espere a lista de conversas carregar antes de ler. Com `Etiqueta das conversas` preenchida, filtre a lista por essa etiqueta antes de procurar. Ache a conversa pelo nome na lista ou pela busca. Um pedido costuma estar em mais de uma conversa: na de quem pediu, na da pessoa envolvida e num grupo. Abra cada conversa ligada ao assunto e leia o texto da conversa aberta, não só a prévia da lista. Logo depois de ler cada uma, rotule-a por `rotular-item`, antes do resumo ou de qualquer pergunta. O contexto é o do assunto que a pessoa trata: quem só fica a par não recebe o de quem cuida dele.
 
+Na mesma rodada, antes do resumo, siga a lista de `manter-contato-no-whatsapp` em cada conversa aberta, também numa leitura só: a pessoa e a empresa procuradas no data source pelo nome e pelo telefone, e cadastradas quando faltam; o número sem nome salvo nos contatos; a nota com o link da página. A resposta diz o resultado de cada item. Não espere a pessoa cobrar, nem o envio.
+
 Uma conversa com mensagens não lidas segue `Não lidas antes de enviar`. Com `ler e mostrar`, leia as não lidas e mostre primeiro o que pede ação da pessoa, como uma menção, uma pergunta ou um pedido para ela, e depois o resto em uma linha. Antes de enviar nessa conversa, pergunte se envia agora ou espera. Com `perguntar antes de abrir`, diga que abrir marca essas mensagens como lidas, também para quem enviou, e pergunte se pode abrir.
 
 Um áudio na conversa lida vira texto: baixe-o e transcreva-o como o Passo 2 de `triar-conversas` manda, sem perguntar, e mostre o texto inteiro, sem resumir, e a palavra que pode estar errada. Com `Reação ao áudio transcrito` preenchida, reaja ao áudio, sem perguntar.
@@ -85,6 +89,8 @@ Para cada pendência, diga de qual lado ela está e há quanto tempo espera, da 
 A data vem do separador do dia na conversa. "Hoje" e "Ontem" contam a partir de hoje. Separador com dia da semana, como "sexta-feira", é o último dia com esse nome antes de hoje. Separador com data fica como está. Escreva a data no `Formato da data com dia da semana`, com o dia calculado como a regra do dia da semana manda.
 
 Separe o que o contato afirmou do que a mensagem dele não diz. O que quem fala pela organização afirma, como "terá feira na sexta, sábado e domingo", está confirmado por ela: diga como confirmado, com as palavras dela e o horário. O que falta vai em outra linha, como pendência, e só ela fica sem confirmação, como a data exata, o mapa e o valor. Um "ainda não está confirmado" só vale para o que ninguém da organização afirmou. A pergunta de um membro do grupo, como "está confirmada?", fica respondida quando a organização afirma depois.
+
+Quando o contato pergunta como foi uma participação, como a experiência numa feira, num festival ou num evento, leia o retorno da empresa na página da edição, quase sempre a retrospectiva no bloco de notas de reunião, como `prospectar-oportunidades` manda. Esse retorno entra no que vai para `rascunhar-mensagem`, e a resposta já sai completa: a pessoa só é perguntada sobre o que o registro não diz. Sem retorno registrado, diga isso antes de perguntar.
 
 Antes de repassar o resumo de outra sessão ou de um subagente, compare cada "não confirmado" e "não achei" com a mensagem que ele citou. Se a mensagem afirma o fato, corrija o resumo antes de mostrá-lo à pessoa.
 
@@ -134,6 +140,22 @@ Cada leitura de conversa com mensagem nova também vira comentário datado na p�
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ## Problemas comuns
+
+### Opinião sobre a participação perguntada à pessoa
+
+Se você deixar entre colchetes, ou perguntar à pessoa, o que ela achou de um evento que já tem retrospectiva registrada, o rascunho sai incompleto e ela repete o que já disse.
+
+1. Abra a página da edição e leia o bloco de notas de reunião inteiro.
+2. Leve o que valeu a pena e a ressalva para o rascunho.
+3. Pergunte só o que o registro não diz.
+
+### Contato deixado sem cadastro
+
+Se você ler ou responder a um número sem nome e não seguir `manter-contato-no-whatsapp`, a pessoa fica fora do data source e do WhatsApp, e quem usa a habilidade precisa cobrar.
+
+1. Procure a pessoa e a empresa no data source pelo nome e pelo telefone, e cadastre o que falta.
+2. Salve o contato e grave a nota com o link da página.
+3. Confira os rótulos e diga o resultado de cada item.
 
 ### Pedido em uma conversa só
 

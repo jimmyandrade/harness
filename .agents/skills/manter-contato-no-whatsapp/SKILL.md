@@ -3,7 +3,7 @@ name: manter-contato-no-whatsapp
 description: Mantém o contato de uma conversa do WhatsApp Web em dia depois de ler ou enviar, com o link da página da pessoa na nota, o número salvo no padrão de nome e a lista de conferência da conversa. Usada pela sessão dona do WhatsApp Web depois de cada leitura ou envio, mesmo sem dizer contato. Não serve para abrir a aba, achar a conversa, redigir a mensagem nem rotular sozinha.
 metadata:
   author: jimmyandrade
-  version: "0.3.1"
+  version: "0.3.2"
   related:
     - conversar-no-whatsapp
     - definir-empresa
@@ -62,7 +62,7 @@ Ao abrir uma conversa, antes de redigir ou enviar a primeira mensagem nossa, con
 - [ ] o rótulo de estado e o de contexto, por `rotular-item`;
 - [ ] o nome do contato;
 - [ ] a nota com o link da página;
-- [ ] o perfil de tom, por `perfilar-tom-de-voz`;
+- [ ] o perfil de tom, por `perfilar-tom-de-voz`: leia-o nas notas do contato e na página da pessoa antes de redigir ou de mostrar um texto, inclusive o que outra sessão trouxe pronto, e compare o texto com ele. Sem perfil, diga que falta;
 - [ ] o registro no data source, por `definir-negociacao`;
 - [ ] a reação ao áudio.
 
