@@ -3,7 +3,7 @@ name: investigar-problema
 description: Conduz a investigação de um problema, como um acesso bloqueado, um cadastro que falha em portal alheio ou um erro, com tarefa, fatos e hipóteses, e oferece artigo e post-mortem. Use sempre que alguém relatar um problema, como um preço errado, ou pedir "investigue isso" com um link, antes de ler. NÃO use para escrever o artigo, o post-mortem nem corrigir código.
 metadata:
   author: jimmyandrade
-  version: "0.4.3"
+  version: "0.4.4"
   related:
     - procurar-tarefa
     - definir-tarefa
@@ -90,6 +90,8 @@ Uma reprodução num exemplo mínimo prova o mecanismo, não o ambiente real. Di
 Quando o código que reporta o erro já manda campos específicos, como o ponto da falha, o módulo e o status, e o monitor agrupa por um campo genérico, a causa do ruído está na definição do monitor e da métrica que ele lê.
 Leia as duas antes de propor mudar o erro, porque a métrica gerada pode ter só algumas quebras.
 Quando não achar o autor de um erro, deixe-o como hipótese, com os indícios que você viu e o que o repositório não tem. Não proponha descartá-lo nem corrigi-lo antes de confirmar.
+Uma consulta que devolve zero linhas pode ter o nome do campo errado: confirme o nome numa busca de eventos crus antes de tirar conclusão do vazio.
+Para provar uma pista, compare as sessões que a têm com a base: conte quantas sessões com o erro carregam a pista e qual é a taxa dela entre as sessões sem o erro.
 Quando um erro é esperado ou não, quando uma taxa é alta ou normal, a resposta traz o número e a comparação, nunca "não verifiquei".
 Cruze a sua conclusão com a da investigação paralela: diga onde concordam, onde divergem e o que cada uma viu que a outra não viu.
 Quando a outra achou algo que você perdeu, corrija a sua conclusão e diga que mudou. Não proteja a primeira resposta.
@@ -246,6 +248,7 @@ Abri o monitor e li a consulta: ele soma os erros por tipo e compara com semanas
 - Um erro de certificado ou de rota num preview parece falha da mudança testada. O ambiente compartilhado pode ter caído e estar sendo apagado, e o aviso do time está no canal.
 - Uma lista de "não verificado" parece honestidade. Cada item que uma consulta ao seu alcance resolve é investigação por fazer: rode-o antes de responder.
 - O texto de um alerta de anomalia parece dizer que houve um pico. O monitor compara com semanas passadas, então o valor da mesma hora dos dias anteriores é que diz se há um.
+- Uma consulta vazia parece provar que não há nada. Um campo agrupado com o nome errado descarta tudo: leia um evento cru e copie o nome do campo dele.
 - A mensagem de um erro do navegador parece dizer de quem ele é. A pilha diz: o começo do endereço dos arquivos mostra a extensão, o aplicativo ou o script de terceiro que o escreveu.
 - Uma investigação curta parece não pedir registro. A pergunta pelos registros vale para toda investigação.
 
