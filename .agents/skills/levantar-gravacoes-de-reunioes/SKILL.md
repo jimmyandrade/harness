@@ -3,7 +3,7 @@ name: levantar-gravacoes-de-reunioes
 description: Acha a fonte de uma reunião, o documento de anotações, o registro da ferramenta de reunião ou a gravação local, e diz o estado de cada gravação, se tem transcrição local, registro e página publicada. Usada quando a reunião não tem transcrição à mão ou a pessoa pede o levantamento das gravações, mesmo sem dizer gravação. NÃO serve para transcrever, registrar nem escrever a ata.
 metadata:
   author: jimmyandrade
-  version: "0.2.1"
+  version: "0.2.2"
   related:
     - definir-registro-de-reuniao
     - evoluir-habilidade
@@ -53,6 +53,10 @@ A fonte achada segue `definir-registro-de-reuniao`, que a usa como registro. A a
 Sem documento, procure a gravação nas `Pastas das gravações das reuniões`.
 Com a lista vazia, pule este passo e diga que a busca local não está configurada.
 Procure pela data e pelo horário no nome do arquivo e, na falta deles, pela data de modificação, que marca o fim da gravação e não o começo.
+Uma reunião pode passar do horário do evento: o fim do evento e o fim da sessão da ferramenta de reunião não provam que a conversa acabou.
+Antes de dizer que uma gravação está fora da agenda, compare o assunto e as pessoas dela com o evento que terminou antes de ela começar e com o seguinte.
+Se batem, a gravação é a extensão desse evento e vale o título e os participantes dele.
+Se não se resolve, pergunte uma vez com os fatos, sem afirmar que são reuniões diferentes.
 Só considere os arquivos com uma das `Extensões das gravações`.
 
 ### Passo 3
@@ -97,6 +101,14 @@ Se você parar no documento de anotações, ou só na ferramenta de reunião, pe
 
 1. Procure nas duas fontes mesmo achando uma.
 2. Cruze as duas e diga o que diverge.
+
+### Gravação declarada fora da agenda
+
+Se você disser que a gravação está fora da agenda porque ela começa depois do fim do evento, a pessoa corrige que era o mesmo evento, que se estendeu.
+
+1. Compare o assunto e as pessoas com o evento imediatamente anterior ao início da gravação e com o seguinte.
+2. Com correspondência, trate como extensão do evento e registre com o título dele.
+3. Sem resolver, pergunte uma vez, nunca afirme que são reuniões diferentes.
 
 ### Reunião citada só pela data
 
@@ -148,6 +160,7 @@ Listei as gravações das pastas configuradas, cruzei com os registros e com as 
 ## Pegadinhas
 
 - A data de modificação parece o começo da reunião. Ela é o fim da gravação.
+- O horário do evento parece o limite da reunião. Ela pode passar dele, até por cima de outro compromisso. Compare o assunto e as pessoas antes de dizer que a gravação está fora da agenda.
 - Um arquivo com o horário no nome parece bastar. O horário de criação do registro também é aproximado, então cruze com a agenda.
 - A ferramenta de reunião parece listar todas as reuniões da pessoa. Ela só lista as que recebeu, então a ausência não prova nada.
 - Uma transcrição local parece registro. Ela ainda não identifica quem fala e não está no armazenamento dos registros.
