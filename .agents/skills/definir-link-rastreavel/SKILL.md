@@ -3,7 +3,7 @@ name: definir-link-rastreavel
 description: Monta, revisa ou corrige os parâmetros UTM de um link, do jeito que o padrão define, sem dado interno nem pessoal. Usada quando alguém vai divulgar um link e quer medir de onde vêm os acessos, ou quando um link, um gerador ou um código monta UTM fora do padrão. Não serve para encurtar o link, criar o post nem ler o relatório do Analytics.
 metadata:
   author: jimmyandrade
-  version: "0.10.0"
+  version: "0.10.1"
   aliases:
     - definir-link-utm
     - definir-parametros-utm
@@ -137,7 +137,7 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 ### o QR Code da tag de produto leva à loja, e a campanha já existe no Shopify
 
-Com `Idioma dos valores` em `en` e `Parâmetro do ID da campanha da plataforma` em `ambos`, o link saiu com `utm_source=qr_code`, `utm_medium=product_tag`, `utm_content=hangtag` e o ID da campanha, lido da página dela, em `utm_campaign` e em `utm_id`. `utm_term` e `utm_marketing_tactic` ficaram de fora, porque não há palavra-chave paga nem pessoa do time divulgando.
+Com `Idioma dos valores` em `en` e `Parâmetro do ID da campanha da plataforma` em `utm_campaign`, o link saiu só com `utm_source=qr_code`, `utm_medium=product_tag` e o ID da campanha, lido da página dela, em `utm_campaign`. `utm_content`, `utm_id`, `utm_term` e `utm_marketing_tactic` ficaram de fora: a pessoa pediu o link curto, o ID já está em `utm_campaign`, não há palavra-chave paga e nenhuma pessoa do time divulga.
 
 ### o botão de ingressos da página do artista manda o id do evento em utm_term
 
@@ -151,6 +151,7 @@ O id interno do evento sai de `utm_term`. `utm_id` leva o id público da campanh
 - Uma pessoa do time divulga com o próprio perfil: o @ público dela é o promotor no nome da campanha, e o papel dela vai em `utm_marketing_tactic`. O nome dela não entra no link. Papel fora de `Táticas`: pergunte.
 - A campanha é de um evento divulgado por um artista ou um influencer, e o projeto ainda não gera id para essa combinação: `utm_id` fica vazio. Não monte o id com o UUID.
 - A campanha não tem nome público: pergunte o nome. Não use o id, salvo o ID da campanha da plataforma no parâmetro que `Parâmetro do ID da campanha da plataforma` manda.
+- A pessoa pede o link curto, como o de um QR Code, que fica mais denso quanto maior o endereço: entregue só `utm_source`, `utm_medium` e `utm_campaign`, sem `utm_content` e sem repetir o ID em `utm_id`. O pedido de "todas as UTMs" não vale junto com esse.
 - A campanha da plataforma é um rascunho sem nome: o ID dela basta para o link. Diga que o relatório mostra o ID até a campanha ganhar nome.
 - O histórico da plataforma já tem valores com outro separador ou outro idioma: siga os parâmetros, e diga que o relatório mostra o valor antigo e o novo em linhas separadas.
 - O link já chega com UTM de outra campanha: preserve, e não sobrescreva sem pedido.
