@@ -4,7 +4,7 @@ description: Cria, revisa e atualiza o artigo da base de conhecimento que respon
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.8.4"
+  version: "0.8.5"
   related:
     - criar-habilidade
     - definir-historia-de-usuario
