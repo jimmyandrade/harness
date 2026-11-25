@@ -218,6 +218,20 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses mailbox filters, marking a message as spam, and saving the setting in the admin console
 
+### capturar-tela-de-passo-a-passo
+- **Stability**: experimental
+- **Description**: Capture the screenshot of each on-screen step with the step state in view, the loading finished, and personal data covered
+- **Properties**:
+  - Lives at `.agents/skills/capturar-tela-de-passo-a-passo/SKILL.md`
+  - Waits for the page to finish loading, looks at the capture itself, and captures again when a photo came out blank
+  - Captures each state of a case side by side and the reference design, not only the steps
+  - Covers names, emails, phones, and other personal data before delivering, or leaves the image out
+  - Tries every browser of the session before leaving a step without a screenshot, and says which step stayed without one
+  - Asks the person for a photo on a physical-device step instead of looking for a screen
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses the visual proof of a pull request and uploading the image
+
 ### comunicar-novidade-do-produto
 - **Stability**: experimental
 - **Description**: Decide whether merged work brings anything new for the people who use the product and, when it does, write the announcement without technical terms
@@ -628,7 +642,7 @@ How these skills relate is in `README.md`, in this folder.
   - Reads the data source name, the field names, the initial status, the top notice, and the article sections from the project instructions
   - Searches the existing articles by question, variations, and topic, and updates the one that already answers
   - Keeps one question per article and links neighboring articles through the related field
-  - Captures a screenshot of each on-screen step, uploads it, and places it right below the step with a caption of what the screen shows
+  - Follows capturar-tela-de-passo-a-passo for each on-screen step, uploads the image, and places it right below the step with a caption of what the screen shows
   - Turns acceptance criteria from a skill or playbook into a checklist, a warning, or a step, never BDD inside the article
   - Writes without technical jargon, names the database, page, or property the person sees, and explains the difference between similar databases when it avoids a mistake
   - Reads the page in `Fonte de estratégia e cultura`, when the project sets one, before an article that guides a decision or a behavior

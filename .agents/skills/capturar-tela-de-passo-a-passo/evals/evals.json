@@ -1,0 +1,11 @@
+{
+  "skill_name": "capturar-tela-de-passo-a-passo",
+  "evals": [
+    {
+      "id": "captura-espera-a-foto-carregar",
+      "prompt": "Capture o card de artigos nos dois temas para o artigo. A foto de capa vem de um endereço externo.",
+      "expected_output": "O agente abre cada tema, espera a foto de capa carregar, olha cada captura e refaz a que saiu com espaço vazio no lugar da foto. Entrega as imagens em tamanho cheio, com o desenho de referência ao lado, sem dado pessoal e sem perguntar se pode capturar.",
+      "files": []
+    }
+  ]
+}

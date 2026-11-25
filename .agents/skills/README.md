@@ -31,6 +31,7 @@ flowchart LR
     avaliar_atualizacoes_de_dependencia["avaliar-atualizacoes-de-dependencia"]
     bloquear_remetente_de_spam["bloquear-remetente-de-spam"]
     cadastrar_foto_de_moda["cadastrar-foto-de-moda"]
+    capturar_tela_de_passo_a_passo["capturar-tela-de-passo-a-passo"]
     classificar_estado_do_termo["classificar-estado-do-termo"]
     classificar_melhoria_tecnica["classificar-melhoria-tecnica"]
     completar_despesa_de_compra["completar-despesa-de-compra"]
@@ -307,6 +308,8 @@ flowchart LR
   cadastrar_foto_de_moda --> definir_pessoa
   cadastrar_foto_de_moda --> escrever_link
   cadastrar_foto_de_moda --> tratar_foto_de_moda
+  capturar_tela_de_passo_a_passo --> definir_artigo_da_base_de_conhecimento
+  capturar_tela_de_passo_a_passo --> registrar_evidencia_visual
   classificar_estado_do_termo --> definir_vocabulario
   classificar_estado_do_termo --> gravar_termos_no_vocabulario
   classificar_estado_do_termo --> validar_plano_de_vocabulario
@@ -458,6 +461,7 @@ flowchart LR
   definir_aplicacao_textil --> identificar_duplicata
   definir_aplicacao_textil --> procurar_banco_de_dados
   definir_arquivos_da_habilidade --> criar_habilidade
+  definir_artigo_da_base_de_conhecimento --> capturar_tela_de_passo_a_passo
   definir_artigo_da_base_de_conhecimento --> criar_habilidade
   definir_artigo_da_base_de_conhecimento --> definir_historia_de_usuario
   definir_artigo_da_base_de_conhecimento --> definir_politica
