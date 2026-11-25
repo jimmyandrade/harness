@@ -5,8 +5,10 @@ Funcionalidade: Cotação ao fornecedor
 
     Exemplo: A mensagem sai com os dois dados
       Dado que a pessoa aprovou o texto da cotação
+      E a página da empresa de quem compra tem o CNPJ e o e-mail
       Quando a habilidade envia a mensagem à empresa
-      Então a mensagem termina com o CNPJ e o e-mail de quem compra
+      Então a mensagem termina com o CNPJ e o e-mail lidos dessa página
+      E a habilidade não pede os dois à pessoa
 
   Regra: a empresa recebe cada informação num canal só
 

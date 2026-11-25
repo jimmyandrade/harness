@@ -3,7 +3,7 @@ name: pedir-cotacao-ao-fornecedor
 description: Prepara e envia o primeiro contato de cotação a cada empresa que pode vender ou fazer o item, e lê e responde o que ela devolve. Usada quando uma pesquisa de compra chega à hora de falar com a empresa, mesmo sem dizer cotação. NÃO serve para pesquisar opções, cadastrar a empresa, registrar o orçamento recebido nem pagar.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
   related:
     - anexar-arquivo-no-whatsapp
     - conversar-no-whatsapp
@@ -24,9 +24,8 @@ metadata:
 Leia cada valor nas instruções do projeto: primeiro na entrada com o nome desta habilidade, depois na entrada `Global` ou no primeiro nível do bloco. Quando um valor não estiver lá, use o padrão abaixo.
 
 ```yaml
-# `CNPJ de quem compra` e `E-mail de quem compra` são os dados que toda mensagem de cotação traz, para a empresa não precisar perguntar. Vazio, a skill pede os dois à pessoa antes do primeiro envio.
-"CNPJ de quem compra": ""
-"E-mail de quem compra": ""
+# `Empresa de quem compra` é o nome, na lista de empresas do projeto, da empresa que compra. O CNPJ e o e-mail que toda mensagem de cotação traz vêm da página dela. Vazio, é a empresa dona do projeto.
+"Empresa de quem compra": ""
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -46,7 +45,8 @@ Antes de contatar, veja se já houve conversa com ela, seguindo `conversar-no-wh
 A primeira mensagem explica o que é o item e para que a pessoa o usa, com o link do anúncio ou da compra quando houver. Uma empresa que não conhece o item não consegue dizer se atende: explique antes de pedir indicação.
 A mensagem já traz o que a empresa vai perguntar: o material, o formato, a medida, a quantidade e o prazo. Antes de enviar, confira nos registros o que já se sabe e pergunte à pessoa só o que falta, como a quantidade, para a empresa não abrir uma segunda rodada de perguntas.
 
-Toda mensagem de cotação traz o `CNPJ de quem compra` e o `E-mail de quem compra`, no fim, para a empresa emitir o orçamento sem perguntar. Sem os dois nos parâmetros, peça-os à pessoa antes do primeiro envio.
+Toda mensagem de cotação traz o CNPJ e o e-mail de quem compra, no fim, para a empresa emitir o orçamento sem perguntar. Leia os dois na página da `Empresa de quem compra`, na lista de empresas do mapeamento de dados do projeto, e nunca os peça à pessoa.
+Só quando a página não tem um dos dois, diga qual falta e peça só esse, depois de procurar no site, no perfil e nas notas fiscais dela.
 
 O que a mensagem traz vem da especificação fechada em `definir-requisito-de-compra` e do cadastro do item lido na pesquisa, como a medida de um bem que já temos. A empresa que pede um dado que um dos dois cobre o recebe dele, sem perguntar à pessoa.
 A que pede um dado que nenhum cobre leva a dúvida de volta a `definir-requisito-de-compra`, com a pergunta à pessoa. A foto do item segue `anexar-arquivo-no-whatsapp`, com o sim da pessoa.
@@ -93,8 +93,8 @@ Se você deixar sem mensagem a empresa cujo site traz só telefone fixo, ela fic
 
 Se você enviar a cotação sem o CNPJ e o e-mail de quem compra, a empresa pergunta os dois antes de orçar e a resposta atrasa.
 
-1. Leia os parâmetros `CNPJ de quem compra` e `E-mail de quem compra`.
-2. Sem eles, peça à pessoa antes do primeiro envio.
+1. Leia o CNPJ e o e-mail na página da `Empresa de quem compra`, na lista de empresas do projeto.
+2. Não os peça à pessoa: a página tem os dois.
 3. Ponha os dois no fim da mensagem.
 
 ### Mesma informação em dois chats da empresa
@@ -134,7 +134,7 @@ Segui no chat do atendente e mandei só o que faltava. Não repeti o texto no ch
 ## Casos-limite
 
 - A empresa só tem telefone fixo: use o e-mail ou o formulário. Ligue só sem canal de texto.
-- Os parâmetros do CNPJ e do e-mail estão vazios: peça à pessoa antes do primeiro envio.
+- A página da empresa de quem compra não tem o CNPJ ou o e-mail: procure no site, no perfil e nas notas fiscais, e peça à pessoa só o que continuar faltando.
 - A empresa pede um dado que a especificação não cobre: volte a `definir-requisito-de-compra`.
 - O mínimo da empresa passa da quantidade necessária: diga o excesso à pessoa, sem mudar a quantidade.
 - A mensagem saiu com dado a mais: edite a mensagem e não mande outra.
@@ -142,7 +142,7 @@ Segui no chat do atendente e mandei só o que faltava. Não repeti o texto no ch
 ## Pegadinhas
 
 - A mesma informação parece mais segura em dois chats da empresa. Ela é lida duas vezes e respondida em dois lugares: siga no chat onde a pessoa da empresa já respondeu.
-- A empresa que pergunta o CNPJ e o e-mail mostra que a cotação saiu sem eles. Leve os dois em toda mensagem.
+- A empresa que pergunta o CNPJ e o e-mail mostra que a cotação saiu sem eles. Leve os dois em toda mensagem, lidos da página de quem compra, sem perguntar à pessoa.
 - O mínimo de uma empresa parece o padrão do mercado. Ele vale só para ela e não decide a quantidade da pessoa.
 - Uma frase dita horas antes sobre a disponibilidade pode ter deixado de valer. Confira no momento do envio.
 
