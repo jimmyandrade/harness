@@ -4,7 +4,7 @@ description: Cadastra e atualiza um produto físico no catálogo do Mercado Pago
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.6.1"
   related:
     - registrar-preco-de-produto-fisico
     - publicar-produto-fisico-na-loja-virtual
@@ -74,7 +74,7 @@ A foto vai da fonte ao catálogo no mesmo script: busque o endereço dela de den
 
 A listagem devolve 50 itens por página: peça as seguintes com `{"pagination":{"page":2}}`, até `pagination.quantity_pages`. Cada criação leva alguns segundos, então grave em lotes de uns 10 produtos por script e confira a lista no fim.
 
-A descrição é do produto e não da variante: a leitura e o `PUT` da variante não a mudam, e a de um produto já criado se muda pela tela de dados básicos da família. Um `PUT` com o corpo lido apagou o SKU de uma variante: envie o SKU junto, ou grave o campo pela tela, e releia o SKU. Uma variação nova num produto que já existe entra pela tela, com Adicionar valores no atributo Tamanho e depois Adicionar dados em cada variação, e o campo de preço da tela só aceita o valor digitado.
+A descrição é do produto e não da variante: a leitura e o `PUT` da variante não a mudam, e a de um produto já criado se muda pela tela de dados básicos da família. Um `PUT` com o corpo lido e a edição da descrição pela tela da família apagaram o SKU de uma variante: envie o SKU junto, ou grave o campo pela tela, e releia o SKU depois de qualquer edição. Uma variação nova num produto que já existe entra pela tela, com Adicionar valores no atributo Tamanho e depois Adicionar dados em cada variação, e o campo de preço da tela só aceita o valor digitado.
 
 O catálogo normaliza o título: o nome "aGue’i" voltou como "Aguei", sem o apóstrofo e com a maiúscula no começo. O cadastro com variações manteve as quebras de parágrafo da descrição. Releia o título e a descrição e diga o que foi gravado.
 
@@ -146,7 +146,7 @@ Se você receber `ERROR` sem detalhe na criação e tentar de novo com o mesmo t
 
 ### Corpo lido e devolvido apaga o SKU
 
-Se você mudar o preço com o corpo que leu, a variante pode perder o SKU.
+Se você mudar o preço com o corpo que leu, ou a descrição pela tela da família, a variante pode perder o SKU.
 
 1. Envie o SKU junto, ou grave pela tela.
 2. Releia o SKU depois de gravar.
