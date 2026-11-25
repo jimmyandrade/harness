@@ -3,7 +3,7 @@ name: definir-hospedagem
 description: Define a hospedagem de uma viagem, da cotação que decide a data até o que ela pede depois da reserva, como nome e documento dos hóspedes, veículo e chegada, e a resposta a quem hospeda, com o sim se leva dado pessoal. Usada quando o anfitrião ou o hotel escreve, ou a pessoa pede para agradecer ou avisar. Não serve para ler a reserva, registrar a viagem nem redigir no tom da marca.
 metadata:
   author: jimmyandrade
-  version: "0.28.3"
+  version: "0.28.4"
   aliases:
     - responder-pedido-da-hospedagem
   related:
@@ -64,9 +64,8 @@ Anfitrião de plataforma responde na própria conversa da reserva.
 Junte só o que a hospedagem pediu, nesta ordem de busca: a viagem e a hospedagem no Notion, o cadastro de cada pessoa e, para o veículo, o cadastro que `acompanhar-veiculo` usa.
 
 Quem viaja vem das pessoas da viagem ou dos hóspedes da hospedagem, e o veículo vem dos veículos da viagem, nas propriedades que o mapeamento de dados do projeto indica.
-O banco de veículos tem a placa como título e a pessoa proprietária.
 
-Sem a lista de quem viaja, pergunte, e não suponha uma pessoa pelo histórico de outra viagem.
+Sem a lista de quem viaja, pergunte, sem supor pessoa pelo histórico de outra viagem.
 
 O nome de cada hóspede é o nome completo do cadastro, que em quem tem nome social é o nome social: a pessoa se cadastra na hospedagem com ele e é tratada por ele.
 Com `Nome civil na resposta` em `não`, o nome civil de registro não vai na resposta nem na tela de confirmação, e nenhuma mensagem trata a pessoa por ele.
@@ -111,7 +110,9 @@ Quando a hospedagem pede dado de hóspedes já cadastrados na hospedagem do Noti
 ### Passo 4
 
 Com o sim, envie pelo canal em que o pedido chegou e confira na conversa que a mensagem saiu. Na plataforma de hospedagem, a conversa mostra a mensagem como enviada e lida.
-Depois de um registro em formulário do anfitrião, capture a tela da conclusão e envie-a na conversa da reserva, dizendo o que a pessoa preencheu fora do padrão, como o mesmo veículo em dois campos, e pedindo a confirmação do recebimento. Registre na hospedagem do Notion que os dados foram enviados e quando, sem repetir o documento nem a placa. Se a hospedagem prometeu algo em troca, como liberar a portaria ou a vaga, registre o combinado e o prazo na viagem.
+Depois de um registro em formulário do anfitrião, capture a tela da conclusão e anexe-a na conversa da reserva, com o texto que diz o que a pessoa preencheu fora do padrão, como o mesmo veículo em dois campos, e pede a confirmação do recebimento.
+
+Antes de anexar, analise como a página faz o upload e tente pelos eventos de clique e de upload do botão. Se não der, entregue o print salvo à pessoa e envie o texto só quando ela disser que anexou. Registre na hospedagem do Notion o envio dos dados e quando, sem repetir o documento nem a placa. Se a hospedagem prometeu algo em troca, como liberar a portaria ou a vaga, registre na viagem o combinado e o prazo.
 
 ### Passo 5
 
@@ -197,7 +198,7 @@ Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 ### Mensagem do anfitrião sem ninguém lendo
 
-Se você deixar para a pessoa abrir a conversa da plataforma, a mensagem com a senha ou com uma exigência chega e fica sem leitura até o dia da chegada.
+Se você deixar para a pessoa abrir a conversa da plataforma, a mensagem com a senha ou uma exigência fica sem leitura até a chegada.
 
 1. Etiquete a conversa e acrescente a linha ao registro, sem criar rotina.
 2. A rotina do canal avisa a pessoa e a sessão a cada mensagem nova, sem escrever a senha.
@@ -205,7 +206,7 @@ Se você deixar para a pessoa abrir a conversa da plataforma, a mensagem com a s
 
 ### Dado inventado
 
-Se você preencher o nome de quem viaja com a pessoa da última viagem ou completar um documento que falta, a hospedagem libera o acesso para a pessoa errada.
+Se você preencher quem viaja com a pessoa da última viagem ou completar um documento que falta, a hospedagem libera o acesso à pessoa errada.
 
 1. Leia quem viaja na viagem do Notion.
 2. Dado que falta fica marcado como falta.
@@ -213,7 +214,7 @@ Se você preencher o nome de quem viaja com a pessoa da última viagem ou comple
 
 ### Documento fora da tela de confirmação
 
-Se você enviar o documento ou a placa sem mostrá-los antes, a pessoa não decide o que sai da empresa.
+Se você enviar o documento ou a placa sem mostrá-los antes, a pessoa não decide o que sai.
 
 1. Mostre o rascunho completo com cada dado sensível.
 2. Espere o sim.
@@ -221,7 +222,7 @@ Se você enviar o documento ou a placa sem mostrá-los antes, a pessoa não deci
 
 ### Dado a mais
 
-Se você mandar telefone, endereço ou documento que a hospedagem não pediu, a resposta expõe a pessoa sem necessidade.
+Se você mandar telefone, endereço ou documento que a hospedagem não pediu, a resposta expõe a pessoa à toa.
 
 1. Releia o pedido.
 2. Mande só o que ele lista.
@@ -229,10 +230,10 @@ Se você mandar telefone, endereço ou documento que a hospedagem não pediu, a 
 
 ### Resposta fora do canal
 
-Se você responder o anfitrião de plataforma por e-mail, ou o hotel pela plataforma, a hospedagem não vê a resposta e o acesso não sai.
+Se você responder o anfitrião de plataforma por e-mail, ou o hotel pela plataforma, a hospedagem não vê a resposta.
 
 1. Responda no canal em que o pedido chegou.
-2. Sem acesso a esse canal, entregue o texto pronto e diga onde colar.
+2. Sem acesso ao canal, entregue o texto pronto e diga onde colar.
 
 ### Rascunho no lugar do envio
 
@@ -272,11 +273,11 @@ Respondi pelo e-mail em que o pedido chegou. Mandei nomes e horário. Não mande
 - A reserva da plataforma parece mostrar a estadia vivida. Quem trocou de lugar no meio mostra o período reservado, e o vivido é o que a pessoa conta.
 - A conta da plataforma que está logada parece ter todas as reservas. Cada pessoa tem a sua, e as viagens de outra só aparecem na conta dela.
 - A hospedagem de um parente parece não precisar de avaliação. A decisão de não voltar vale também para ela, com o motivo da pessoa.
-- A reserva feita à mão não cria página no Notion, e o banco de viagens e o de hospedagens podem nem ter onde registrar quem viaja e o veículo. Quem viaja e o transporte podem não estar em lugar nenhum.
+- A reserva feita à mão não cria página no Notion, e os bancos de viagens e de hospedagens podem nem ter onde registrar quem viaja e o veículo.
 - A vaga que a hospedagem oferece parece valer a qualquer hora. A garagem de um parceiro tem horário, e quem volta à noite precisa saber até quando ela abre e se deve interfonar.
 - O pedido de documento costuma vir antes do check-in e some da lista com a tradução automática. Leia a mensagem original.
 - O cadastro tem o nome completo e o nome civil de registro. Quem tem nome social se cadastra e é tratada por ele, e tratá-la pelo nome civil a constrange. O nome civil só sai com `Nome civil na resposta` em `sim`, ou se a pessoa pedir.
-- Dado sensível não vira texto de memória, de nota nem de comentário na negociação. Ele fica no cadastro e na resposta enviada.
+- Dado sensível não vira texto de memória, de nota nem de comentário na negociação: fica no cadastro e na resposta enviada.
 - A hospedagem libera o acesso com base nos dados que pede: um erro no documento trava a entrada.
 - A busca por bairro parece bastar. O centro da busca é o endereço exato, e a nota alta esconde o risco que as avaliações baixas mostram.
 
