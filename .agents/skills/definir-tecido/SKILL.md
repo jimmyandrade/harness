@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.7.2"
+  version: "0.8.0"
   related:
     - acompanhar-producao-de-produto-fisico
     - anexar-arquivo-no-notion
@@ -39,6 +39,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Campo da foto do tecido": ""
 # `Data de corte para cadastro completo`: o tecido criado antes dela não é cobrado do que falta. Vazia, todo tecido é cobrado.
 "Data de corte para cadastro completo": ""
+# `Tramas por tecido`: quantas tramas a página de um tecido liga, como sarja ou cetim. `sem limite` serve a quem usa tecido de mais de uma trama.
+"Tramas por tecido": 1
 # `Siglas das fibras`: a sigla de cada fibra no nome da linha de composição.
 "Siglas das fibras": {"algodão": "CO", "viscose": "CV", "poliéster": "PES", "poliamida": "PA", "elastano": "PUE", "linho": "LI", "seda": "SE"}
 ```
@@ -60,6 +62,8 @@ Leia o arquivo inteiro. Uma ficha de nota fiscal traz vários tecidos, cada um a
 Leia de novo agora o `Banco de tecidos` filtrado pela empresa e pelo nome do tecido. A pessoa pode ter renomeado ou criado páginas desde a última leitura. Antes de criar uma página, busque com `identificar-duplicata`.
 
 Cada cor de um tecido da ficha é uma página: o mesmo tecido em duas cores são duas páginas, com a mesma composição e a mesma ficha. Pergunte a cor que a ficha não diz. O nome segue o das páginas vizinhas, com o nome do tecido e a cor. A página leva a empresa.
+
+A trama também é do tecido: a página liga até `Tramas por tecido` tramas. Pergunte a trama que a ficha não diz. Uma trama além do limite não entra: pergunte qual fica. Se a relação do banco aceita mais tramas que o parâmetro, avise a pessoa, sem mudar o banco.
 
 A estampa é do tecido, não do produto: a página do tecido liga a estampa, e a variante do produto chega a ela pelo tecido. Pergunte qual é a estampa quando o tecido parece estampado e a ficha não diz. Estampa que falta em `Banco de estampas`, ou com o banco vazio, pergunte antes de criar, por `definir-estampa`. Não grave a estampa no produto nem na variante.
 
@@ -164,6 +168,7 @@ A etiqueta não tem ficha. Gravei a composição dela, com o link da fonte, e di
 - A ficha não diz a cor: pergunte. Não crie página sem cor quando o tecido tem mais de uma.
 - O mesmo tecido em duas cores tem duas páginas, mas conta uma vez na etiqueta da variante, como `definir-composicao-textil` monta.
 - A ficha diz que o tecido é estampado e a estampa não está em `Banco de estampas`: pergunte antes de criar.
+- A ficha ou a pessoa dá duas tramas, como sarja e cetim, e `Tramas por tecido` é 1: pergunte qual fica. Não grave as duas.
 - A fibra não tem sigla em `Siglas das fibras`: pergunte a sigla antes de criar a linha.
 - A composição vem só da etiqueta, sem ficha: grave a composição e cobre a ficha e os dados técnicos.
 - A composição está só na nota fiscal ou na cotação: grave com o link da fonte e cobre os cuidados que faltam.
