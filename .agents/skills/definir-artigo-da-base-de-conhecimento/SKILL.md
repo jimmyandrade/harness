@@ -4,7 +4,7 @@ description: Cria, revisa e atualiza o artigo da base de conhecimento que respon
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.8.3"
+  version: "0.8.4"
   related:
     - criar-habilidade
     - definir-historia-de-usuario
@@ -56,7 +56,8 @@ Procure no workspace conectado o data source com o nome `Nome do data source de 
 Abra o data source e leia o esquema.
 Só peça o link se a busca não achar nenhum ou achar mais de um.
 Não use um banco de outro workspace.
-No data source, se `Nome do data source de artigos`, `Campos da base de artigos` ou `Status inicial` estiver vazio, pergunte uma vez e pare.
+No data source, se `Nome do data source de artigos`, `Campos da base de artigos` ou `Status inicial` estiver vazio, procure no workspace os bancos que parecem guardar artigos, mostre os candidatos com o link, pergunte uma vez e pare.
+Quando a pessoa indica um banco que não tem as propriedades de `Campos da base de artigos`, como um banco de aulas ou de anotações, siga com ele: o título leva a pergunta, as variações entram na seção `Quando usar esse artigo`, e a ferramenta e os artigos vizinhos entram no corpo como menção. O banco ganha uma propriedade só se a pessoa pedir.
 Com `Onde ficam os artigos` em `espaço do Confluence`, o artigo é uma página desse espaço e não há data source nem esquema.
 Procure o espaço pelo nome ou pela chave de `Nome do data source de artigos` e busque as páginas pela busca do Confluence, antes de perguntar qualquer coisa.
 Os `Campos da base de artigos` e o `Status inicial` não se aplicam.
@@ -127,6 +128,7 @@ Não presuma que a pessoa conhece a modelagem dos dados: diga o nome do banco, d
 Quando dois bancos parecidos causam erro, explique a diferença entre eles.
 Quando a dúvida vem de uma conversa, um print, uma reunião ou um caso real, use esse caso como exemplo concreto no artigo, sem nome de pessoa nem dado pessoal.
 Ao criar, use o `Status inicial`.
+Num banco sem os campos de artigo, que a pessoa indicou, use o status de concluído que o banco oferece quando o artigo passou na conferência do Passo 8, e diga qual valor usou.
 Uma decisão tomada que o artigo conta, de comportamento, de padrão ou de quem liga o quê, é registrada como manda `formalizar-decisao`, no `Registro de decisão`, e nunca em parágrafo corrido.
 Se a decisão ainda está aberta, ela fica pendente, como a mesma habilidade manda.
 Quando o artigo trata de uma feature toggle ou flag, o nome exato dela aparece entre crases na seção de abertura, em cada passo, decisão e observação que fala dela, e no título ou nas variações quando couber.
@@ -140,13 +142,16 @@ Capture em tamanho cheio, sem reduzir a escala: um print reduzido sobe ilegível
 Numa tela de login que a pessoa preenche, capture cada estado enquanto ela avança, porque depois do login não dá para voltar a essa tela sem sair da conta.
 Quando a pessoa precisa fazer um passo à mão, como entrar numa tela com a própria senha, a mesma mensagem traz o passo a passo completo: o atalho ou o clique até a tela (inclusive como abrir uma janela anônima), o endereço por extenso, o que digitar em cada campo, o que deve aparecer e o que me mandar de volta.
 Numa tela que muda dados, abra o passo, capture e cancele. O passo que só aparece depois de salvar fica sem print.
-Antes de subir, cubra no print o nome, o e-mail, o telefone e outro dado pessoal de quem aparece, com um rótulo neutro como "e-mail pessoal", e confira a imagem coberta.
+Antes de subir, cubra no print ou na foto o nome, o e-mail, o telefone, o nome do computador e outro dado pessoal de quem aparece, com um rótulo neutro como "e-mail pessoal", e confira a imagem coberta.
+Se a imagem mostra um desses dados e não dá para cobri-lo, deixe-a de fora e descreva o passo no texto.
 Quando o navegador deixa, cubra antes de capturar: troque na própria página o texto do nome, do e-mail e do telefone pelo rótulo neutro e esconda as fotos de perfil, e capture com a página já coberta.
 Uma lista com várias pessoas também é coberta, linha por linha.
 Suba cada imagem pelo upload de arquivo da ferramenta da base.
 Ponha a imagem logo abaixo do passo que ela mostra, num bloco próprio.
 Escreva a legenda com o que a tela mostra: o menu, a janela, o campo e o nome da pasta ou da arte quando aparece.
 A imagem que a pessoa mandou entra do mesmo jeito, no passo que ela mostra.
+Num passo de aparelho físico, como ligar uma impressora ou encaixar o papel, não há tela para capturar: a foto que a pessoa manda é o print do passo, e a legenda diz o que ela mostra, como a cor da luz.
+Peça a foto no próprio passo, com o aparelho no estado dele, em vez de esperar o fim do teste.
 Não pergunte se pode capturar: capture.
 Antes de dizer que não consegue capturar um passo, abra a tela em cada navegador que a sessão tenha, inclusive o que usa os logins da pessoa, e capture o estado do passo. A tela de login num navegador não encerra a tentativa: passe para o próximo.
 Só deixe um passo sem print depois dessa tentativa, e diga qual ficou sem print e o que a tentativa mostrou, como um login que nenhum navegador da sessão tem ou uma ferramenta da base sem upload de arquivo.
@@ -161,7 +166,7 @@ Antes de concluir, confira o artigo com esta lista:
 - [ ] Não tem jargão técnico sem explicação nem nome interno que a pessoa não vê na tela.
 - [ ] Usa o caso real como exemplo quando a dúvida veio de um.
 - [ ] Cada passo de tela tem o print logo abaixo, com legenda, ou o motivo de não ter, depois de uma tentativa de captura.
-- [ ] Nenhum print mostra nome, e-mail, telefone ou outro dado pessoal.
+- [ ] Nenhum print nem foto mostra nome, e-mail, telefone, nome do computador ou outro dado pessoal.
 - [ ] A pessoa sabe o que fazer, onde fazer e o que evitar sem abrir outro documento.
 - [ ] A ferramenta está ligada quando a dúvida é sobre ela.
 - [ ] O endereço de acesso da ferramenta aparece por extenso, como link clicável, em cada passo que manda abri-lo.
@@ -210,6 +215,14 @@ Se você escrever que o passo ficou sem print sem ter aberto a tela, o artigo sa
 2. Só com a tentativa feita em todos, diga qual ficou sem print e o que ela mostrou.
 3. Ponha o aviso no topo do artigo com esse motivo.
 
+### Banco indicado sem os campos de artigo
+
+Se você parar porque o banco que a pessoa indicou não tem pergunta, variações, ferramentas nem relacionados, ela responde o que já disse e o artigo não sai.
+
+1. Siga com o banco: o título leva a pergunta e o status é o de concluído do banco.
+2. Ponha as variações em `Quando usar esse artigo` e a ferramenta e os vizinhos como menção no corpo.
+3. Diga quais propriedades faltaram e como você as supriu. Não crie propriedade sem pedido.
+
 ### Artigo repetido
 
 Se você criar o artigo sem buscar, a base fica com duas respostas para a mesma pergunta.
@@ -252,10 +265,13 @@ Os critérios ficaram de fora. Cada guardrail virou item do diagnóstico rápido
 - A tela não abre na conexão, mesmo depois da tentativa de capturá-la: escreva o passo, diga qual ficou sem print e o que a tentativa mostrou.
 - O artigo existente responde a pergunta: atualize. Não crie outro.
 - O passo não é de tela, como uma regra ou uma decisão: não precisa de print.
+- O passo é de um aparelho físico: não há tela. Peça a foto do passo à pessoa e use-a, com a legenda do que ela mostra.
+- A pessoa indica um banco sem os campos de artigo: siga com ele, como o Passo 1 manda.
 
 ## Pegadinhas
 
 - O upload da imagem parece aceitar o link do print. A imagem precisa ser enviada como arquivo pelo upload de arquivo da ferramenta, e o bloco de imagem cita o arquivo enviado.
+- A resposta do upload devolve a referência do arquivo, que é o que o bloco da imagem cita. Guarde-a ao subir: sem ela, o arquivo sobe de novo.
 - A imagem colada na mesma linha do passo parece ficar abaixo dele. Ela só vira bloco próprio com uma linha em branco antes e depois.
 - O print da tela inicial parece bastar. O passo mostra o estado em que a pessoa clica: o menu aberto, o submenu, a janela de busca.
 - Esperar os prints da pessoa, ou perguntar se pode capturar, parece o caminho seguro. Quem escreve o artigo captura os prints que faltam, sem perguntar.
