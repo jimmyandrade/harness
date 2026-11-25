@@ -3,7 +3,7 @@ name: definir-tarefa
 description: Use essa habilidade sempre que for cadastrar, revisar, validar, editar ou mesclar tarefas a pedido, mesmo sem dizer definir. NÃO use para só saber se ela já existe, revisar tarefas por gatilho em um cronograma ou na base de dados, varrer a lista, marcar tarefa como concluída, nem transformar uma regra sem entrega em tarefa.
 metadata:
   author: jimmyandrade
-  version: "0.18.2"
+  version: "0.19.0"
   aliases:
     - criar-tarefa
     - revisar-tarefa
@@ -50,7 +50,9 @@ Se for tarefa que já existe, leia o título, o prazo, o status, a definição d
 
 Aplique estes critérios ao gravar e ao julgar.
 
-Comece o título com um verbo no infinitivo. O verbo é o trabalho. "Sair para ir nas gráficas" não conta. "Ir às gráficas" também não passa: não diz o que será realizado. Não invente o que será realizado. Se começar com substantivo solto, reescreva: "Benchmarking" vira "Fazer benchmarking"; "Relatório" vira "Escrever relatório"; "Reunião" vira "Agendar reunião".
+Comece o título com um verbo no infinitivo. O verbo é o trabalho. "Sair para ir nas gráficas" não conta. "Ir às gráficas" também não passa: não diz o que será realizado. Não invente o que será realizado. Se começar com substantivo solto, reescreva: "Benchmarking" vira "Fazer benchmarking"; "Relatório" vira "Escrever relatório"; "Orçamento" vira "Pedir orçamento".
+
+O título diz o resultado, não o meio. Reunião, ligação e visita são meios: "Reunir sobre os cuidados" vira "Definir os cuidados de cada variante". O meio vai para as observações, e `procurar-tarefa` busca pelo resultado.
 
 A frase é curta, fácil de ler na lista, sem contexto a mais. Diz o objeto ou o escopo. Quando fizer sentido, diz o artefato que resulta, como a lista pronta, o orçamento ou o comparativo.
 
