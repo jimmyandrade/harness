@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.9.1"
+  version: "0.9.7"
   related:
     - definir-grafia
     - definir-perfil-social
@@ -67,15 +67,25 @@ Uma compra pontual, como uma refeição em restaurante, não exige conhecer o do
 
 O cadastro mínimo de recebedora financeira não valida a fornecedora para relacionamento comercial. Nele, site e razão social completa ausentes ficam como pendências, sem impedir o vínculo com o pagamento. O contato responsável ausente só vira pendência quando há relacionamento continuado. Não invente esses dados nem trate a instituição de pagamento como recebedora.
 
+Fornecedora que ainda será testada, como a de uma peça para produzir em pequeno volume, pode precisar crescer se o produto vender bem. Grave nas notas o mínimo por pedido e a dúvida pendente sobre aumentar o volume depois, sem afirmar o que a fornecedora não disse. Um formulário de cadastro sem campo de observações não é lugar para isso: a dúvida que o formulário não cobre vai pelo canal de atendimento da fornecedora, identificando quem escreve e o protocolo, sem pedir o sim da pessoa a cada dúvida, porque ela já deixou isso autorizado. A resposta entra em comentário datado, e uma promessa de volume que a fornecedora não fez fica como pendência.
+
+Depois de enviar um cadastro no site da fornecedora, ou de a fornecedora escrever, confira na mesma hora o e-mail e o WhatsApp da conta usada no cadastro, sem esperar a pessoa avisar. Uma resposta que chegou, como a confirmação de recebimento com o protocolo, entra em comentário datado na página da empresa. Siga `rotular-item` para a conversa lida, mesmo que o pedido fosse só enviar. Canal que a sessão não alcança, como um WhatsApp sem conector, a resposta diz que não conferiu.
+
+Cadastro enviado que espera a aprovação da fornecedora não fica esperando a pessoa voltar. Procure uma rotina que já leia a mesma caixa e, se não houver, crie uma com `definir-rotina`, com prazo de fim e sem enviar nada em nome da pessoa. A resposta diz o nome da rotina e que a pessoa a pausa por ele quando a ferramenta não deixa a execução pausar a si mesma. Não diga que a sessão não consegue agendar sem ter procurado a ferramenta de agendamento.
+
 Quando a lista exige a cidade da empresa e ninguém a informou, pesquise na internet, no site oficial e em fontes confiáveis, antes de usar uma localidade mais ampla. Empresa com uma só sede ou um só endereço: relacione essa cidade. Empresa que atua em várias cidades, com unidades ou escritórios regionais e sem unidade na `Praça prioritária do endereço`: relacione a localidade mais ampla que as cobre, como o país, e diga nas notas que é de propósito e quais fontes mostraram as unidades.
 
 O site, o CNPJ e o WhatsApp da empresa que as fontes respondem entram na mesma rodada do cadastro, sem avisar a pessoa antes. Pesquise o site e o perfil social oficial, o link da bio do perfil, o que o convite ou o formulário trazem e, para o CNPJ, a internet. Grave o que achou e diga as fontes. Só o que a busca não respondeu vira pendência, com o motivo e o que a resolve, como o contrato. Não liste como pendência o que ninguém tentou achar.
 
 A inscrição estadual vale por UF e tem dígito verificador. Antes de gravá-la na empresa ou de usá-la num formulário, confirme o número, pelo CNPJ, na consulta pública do cadastro de contribuintes da UF do endereço, como o Sintegra da UF.
 
+Procure antes, nos arquivos conectados do projeto, o comprovante da inscrição estadual ou o protocolo do pedido. Um comprovante da consulta da UF, com data, vale como fonte, e a resposta diz a data dele.
+
 Número que essa fonte não confirma não se grava nem se reenvia: corrija o registro pela fonte.
 
-Número que a fonte confirma e o formulário recusa fica como está no registro: o formulário pode validar o formato de outro jeito, e a pessoa decide se tenta de novo ou fala com o suporte do site.
+Grave a inscrição como texto, com o tamanho que a UF define e com os zeros à esquerda. Uma fonte que mostra o número sem os zeros, como o cadastro nacional de contribuintes, pode estar cortando o início: confira o tamanho na página da Secretaria da Fazenda da UF e os dígitos verificadores antes de gravar ou de desconfiar do formulário.
+
+Número que a fonte confirma e o formulário recusa fica como está no registro, depois de conferir o tamanho: o formulário pode validar o formato de outro jeito, e a pessoa decide se tenta de novo ou fala com o suporte do site.
 
 A consulta com captcha é da pessoa: peça que ela a resolva e leia o resultado depois.
 
@@ -153,8 +163,8 @@ Se você cadastrar a empresa e listar o site, o CNPJ ou o WhatsApp como pendênc
 
 Se você usar a inscrição estadual como veio de um cadastro antigo, ou trocar o número só porque o formulário o recusou, o dado errado continua no registro ou o certo é apagado.
 
-1. Consulte a UF do endereço, pelo CNPJ, antes de gravar ou de usar o número.
-2. A fonte diverge: grave o número confirmado e corrija o registro antigo. A fonte confirma: não mude o registro e leve a recusa do formulário à pessoa.
+1. Procure o comprovante nos arquivos conectados e consulte a UF do endereço, pelo CNPJ, antes de gravar ou de usar o número. Confira o tamanho da inscrição na UF e complete os zeros à esquerda.
+2. A fonte diverge, ou só cortou os zeros: grave o número confirmado e corrija o registro antigo. A fonte confirma: não mude o registro e leve a recusa do formulário à pessoa.
 3. Captcha na consulta: peça à pessoa que o resolva.
 
 ### Cidade preenchida sem pesquisar
@@ -234,6 +244,9 @@ Contei que achávamos "Design Print", fica perto da Avenida Pedro II e imprime e
 - A exigência de contato segue o flowchart do Passo 2. Não invente o nome nem confunda contato operacional com dono.
 - Cadastro mínimo de recebedora: registre como pendência o que faltar, salvo o contato numa compra pontual, e devolva a página para vincular o pagamento. Não dê a validação comercial por concluída.
 - A pessoa já existe: aponte o registro. Não crie outra.
+- O cadastro enviado espera aprovação: crie ou ajuste a rotina de acompanhamento por `definir-rotina` em vez de pedir à pessoa que avise quando a resposta chegar.
+- O cadastro no site da fornecedora acabou de ser enviado: confira o e-mail e o WhatsApp antes de dizer que falta algo. O envio nem sempre mostra tudo na tela, e a confirmação por e-mail traz dados que a página não traz, como a razão social usada.
+- A fornecedora é só um teste e o produto pode escalar: registre nas notas o mínimo por pedido e a dúvida sobre aumentar o volume, e leve a dúvida ao atendimento dela sem perguntar à pessoa. Não prometa volume à fornecedora nem afirme nas notas que ela aceita.
 - O tipo de público já tem outros valores: acrescente a opção de fornecedor quando fizer sentido. Não apague os outros.
 - As empresas relacionadas já mostram a empresa: não relacione de novo.
 - A empresa não apareceu nas empresas relacionadas: relacione.
