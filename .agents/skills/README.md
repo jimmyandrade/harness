@@ -295,6 +295,7 @@ flowchart LR
   atender_revisao_de_pull_request --> publicar_resposta_de_revisao
   atender_revisao_de_pull_request --> publicar_revisao_de_codigo
   atender_revisao_de_pull_request --> registrar_evidencia_visual
+  atender_revisao_de_pull_request --> rotular_item
   atualizar_branch_do_pull_request --> atender_revisao_de_pull_request
   atualizar_branch_do_pull_request --> criar_pull_request
   atualizar_branch_do_pull_request --> fechar_pull_request
@@ -1078,6 +1079,7 @@ flowchart LR
   publicar_resposta_de_revisao --> escrever_link
   publicar_resposta_de_revisao --> escrever_texto_da_revisao
   publicar_resposta_de_revisao --> mencionar_pessoa
+  publicar_resposta_de_revisao --> registrar_evidencia_visual
   publicar_revisao_de_codigo --> enviar_mensagem_no_slack
   publicar_revisao_de_codigo --> escrever_link
   publicar_revisao_de_codigo --> escrever_texto_da_revisao

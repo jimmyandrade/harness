@@ -3,13 +3,14 @@ name: publicar-resposta-de-revisao
 description: Publica a resposta a uma revisão recebida, de pessoa ou de bot, de preferência num comentário inline. Marca o login e, com a leitura antes de publicar desligada, publica sem pedir confirmação. NÃO serve para aplicar a sugestão no código nem para revisar o PR de outra pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.4.3"
+  version: "0.5.0"
   related:
     - atender-revisao-de-pull-request
     - definir-pessoa
     - mencionar-pessoa
     - escrever-link
     - escrever-texto-da-revisao
+    - registrar-evidencia-visual
 ---
 
 # Publicar resposta de revisão
@@ -49,6 +50,7 @@ Sem thread, abra uma revisão sua com esse comentário na linha.
 A conversa do PR fica para o que não tem linha no diff.
 Sem preferência no registro e com esse parâmetro em `o idioma do comentário` ou em `o de quem revisou`, a resposta sai no idioma do comentário.
 A resposta diz o que mudou.
+Quando a mudança altera o que se vê, confira na tela antes de publicar, como `registrar-evidencia-visual` manda, e a resposta diz o que viu. Nunca publique que não conferiu na tela: confira, e só então responda.
 Quando o texto mudou, ela mostra as linhas alteradas num bloco, com o que saiu e o que entrou.
 Ela cita o commit pelo SHA curto linkado, como `[`abc1234`](URL do commit)`, ou diz por que não muda. Toda thread tratada fica com uma resposta registrada, inclusive a de bot e a decidida fora do PR. Comentário desatualizado ganha a explicação do que mudou desde então. Discordância e fora de escopo viram pergunta, nunca veredito.
 
