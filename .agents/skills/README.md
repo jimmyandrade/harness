@@ -1079,6 +1079,7 @@ flowchart LR
   publicar_resposta_de_revisao --> escrever_link
   publicar_resposta_de_revisao --> escrever_texto_da_revisao
   publicar_resposta_de_revisao --> mencionar_pessoa
+  publicar_resposta_de_revisao --> registrar_evidencia_visual
   publicar_revisao_de_codigo --> enviar_mensagem_no_slack
   publicar_revisao_de_codigo --> escrever_link
   publicar_revisao_de_codigo --> escrever_texto_da_revisao
