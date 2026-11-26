@@ -329,6 +329,7 @@ flowchart LR
   conciliar_recebimento --> lancar_venda
   conciliar_recebimento --> procurar_banco_de_dados
   conciliar_recebimento --> rotular_item
+  conferir_termo_de_lingua_indigena --> definir_referencia_cultural
   conferir_termo_de_lingua_indigena --> procurar_banco_de_dados
   configurar_harness_de_negocio --> criar_pull_request
   configurar_harness_de_negocio --> definir_issue_do_github

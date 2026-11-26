@@ -1,10 +1,10 @@
 ---
 name: definir-referencia-cultural
-description: Busca e registra, no banco de referências do projeto, uma fonte sobre uma referência cultural, como palavra de língua indígena, grafismo, mito, obra ou artigo, com o nível da fonte, o crédito e se o uso é aberto, restrito ou sagrado. Usada quando uma fonte sobre nome, estampa ou conceito de uma coleção é achada, descartada ou precisa ser achada de novo, mesmo sem dizer referência. NÃO serve para conferir o significado de uma palavra, escolher o nome, criar a estampa nem cadastrar a coleção.
+description: Registra, no banco de referências do projeto, uma fonte sobre uma referência cultural, como palavra indígena, grafismo, mito ou obra, com o nível, o crédito e o uso. Usada quando uma fonte sobre nome, estampa ou conceito é achada, descartada ou procurada de novo, mesmo sem dizer referência. NÃO serve para conferir o significado, escolher o nome nem criar a estampa.
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
   related:
     - procurar-banco-de-dados
     - identificar-duplicata
@@ -23,7 +23,6 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Níveis da fonte": ["comunidade", "obra de referência", "pesquisa acadêmica", "instituição", "site colaborativo", "pista"]
 # `Usos` lista as opções de uso de um símbolo ou nome. `sagrado` e `restrito` pedem consulta à comunidade antes de uso comercial.
 "Usos": ["aberto", "restrito", "sagrado", "não conferido"]
-"Modo de aprendizado": "perguntar"
 ```
 
 ## Instruções
@@ -48,7 +47,7 @@ Quando a propriedade que o registro pede não existe no banco, como a língua, o
 
 ### Passo 5
 
-Diga na resposta o link de cada registro criado ou atualizado, o nível de cada fonte e o que ficou sem conferir. Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
+Diga na resposta o link de cada registro criado ou atualizado, o nível de cada fonte e o que ficou sem conferir.
 
 ## Problemas comuns
 
