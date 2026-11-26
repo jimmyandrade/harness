@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.116.0](https://github.com/jimmyandrade/harness/compare/v1.115.0...v1.116.0) (2026-11-25)
+
+
+### Features
+
+* **definir-pessoa:** let a project skip the store customer for chosen audience types ([#1554](https://github.com/jimmyandrade/harness/issues/1554)) ([344e224](https://github.com/jimmyandrade/harness/commit/344e224dd833ae78f080c8edada451d1667c6c15))
+
+
+### Bug Fixes
+
+* **analisar-perfil-social:** open the whole bio and write only counts and dates it read ([#1539](https://github.com/jimmyandrade/harness/issues/1539)) ([305c196](https://github.com/jimmyandrade/harness/commit/305c1961325dba2194d19618870342b3b945078f))
+* **levantar-gravacoes-de-reunioes:** read the tool transcript to its end and look for local media even when notes exist ([#1550](https://github.com/jimmyandrade/harness/issues/1550)) ([74f578f](https://github.com/jimmyandrade/harness/commit/74f578f30eb2557e282adc12ccf46de9b01505b5))
+
 ## [1.115.0](https://github.com/jimmyandrade/harness/compare/v1.114.1...v1.115.0) (2026-11-25)
 
 
