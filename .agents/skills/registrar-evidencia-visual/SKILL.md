@@ -3,7 +3,7 @@ name: registrar-evidencia-visual
 description: Registra o que a pessoa passa a ver quando um trabalho termina, no pull request e no card. Usada quando a entrega muda a tela, no Storybook, no ambiente local, na pré-produção ou na produção, mesmo sem dizer print. NÃO serve para mudança sem percepção visual, para medir performance, para ler texto de imagem nem para mandar a mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.15.0"
+  version: "0.16.0"
   models:
     - evidencia-visual-do-pr
   related:
@@ -85,7 +85,7 @@ Quando a simulação é a única imagem possível, a legenda diz que é simulaç
 Numa correção de bug, a evidência refaz o caminho do relato, antes e depois.
 Quando o bug acontece numa interação, como rolar e tocar, grave um vídeo curto desse caminho.
 Antes de capturar, confira que a story cobre cada tema da lista, para o componente alterado e para cada componente que usa o código alterado.
-Se faltar, acrescente a story, porque ela também dá a base da regressão visual, e só então capture.
+Se faltar, acrescente a story ao pull request, e ela fica lá, porque dá a base da regressão visual. Só então capture.
 A imagem de um tema sem story não substitui a story.
 Antes de capturar, leia o texto que a tela vai mostrar.
 Ele vem do negócio ou do conteúdo real, nunca inventado por você.
