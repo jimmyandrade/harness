@@ -3,7 +3,7 @@ name: levantar-gravacoes-de-reunioes
 description: Acha a fonte de uma reunião, o documento de anotações, o registro da ferramenta de reunião ou a gravação local, e diz o estado de cada gravação, se tem transcrição local, registro e página publicada. Usada quando a reunião não tem transcrição à mão ou a pessoa pede o levantamento das gravações, mesmo sem dizer gravação. NÃO serve para transcrever, registrar nem escrever a ata.
 metadata:
   author: jimmyandrade
-  version: "0.2.2"
+  version: "0.2.3"
   related:
     - definir-registro-de-reuniao
     - evoluir-habilidade
