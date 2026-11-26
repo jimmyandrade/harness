@@ -3,7 +3,7 @@ name: enviar-mensagem-no-slack
 description: Redige uma mensagem de Slack, num canal, thread ou DM, e entrega o rascunho com o link do destino. Só envia com a autorização explícita da pessoa e, depois do envio, compara o proposto com o aplicado para alimentar o vocabulário. Usada quando a pessoa pede uma mensagem ou resposta no Slack. Não serve para achar conversa antiga nem cadastrar pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.12.0"
+  version: "0.12.1"
   related:
     - definir-agenda
     - definir-pessoa
@@ -124,6 +124,7 @@ Termos proibidos e alternativas vêm do vocabulário, não desta habilidade.
 **Menção e link**
 
 - Quem é citado vira menção real, como manda `definir-pessoa`.
+- Quem pediu ajuda à pessoa sobre o assunto da mensagem, por DM, thread ou tarefa, também leva a menção real, mesmo sem ser o destinatário do pedido, para acompanhar a resposta. Procure essas pessoas na conversa e na tarefa antes de redigir. Se a conversa não diz quem pediu, pergunte uma vez.
 - O destinatário de uma DM 1:1 não precisa de menção, os terceiros citados nela e todos em canal levam.
 - A mesma pessoa citada duas vezes leva a menção real na primeira, e a segunda pode ser só o nome.
 - Sem o ID, mantenha o nome em texto e avise.
@@ -205,6 +206,14 @@ Se você criar um segundo rascunho num canal que já tem um, o Slack aceita e ap
 1. Conte os rascunhos que você criou no canal.
 2. No limite, avise e entregue o segundo texto pronto para colar.
 3. Mude o limite só quando a pessoa disser que o Slack passou a aceitar mais de um.
+
+### Quem pediu ajuda ficou de fora
+
+Se você marcar só o destinatário do pedido, quem pediu a ajuda não vê a resposta chegar e precisa perguntar o andamento.
+
+1. Antes de redigir, liste as pessoas que pediram a ajuda, na conversa e na tarefa.
+2. Marque cada uma com a menção real, ao lado do destinatário.
+3. Se a conversa não disser quem pediu, pergunte uma vez.
 
 ## Exemplos de entrada e saída
 
