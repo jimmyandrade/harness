@@ -130,6 +130,7 @@ How these skills relate is in `README.md`, in this folder.
   - Reads the context sheet from levantar-contexto-do-pull-request: review threads, review bodies such as a bot's summary, and conversation comments
   - Checks each comment against the current head of the pull request, and marks it valid, already fixed, outdated, or duplicate
   - Classifies each suggestion, from a person or a bot, as structural, a behavior change, a disagreement, or out of scope. A behavior change waits for the approval of the person, and a disagreement becomes a question
+  - When a reviewer questions whether the pull request should exist, takes the decision to the person and keeps the pull request open, as a draft, with `Rótulo de PR a rever` (`revisit` by default), until the person decides
   - Works in a separate copy of the repository, validates before committing, and never pushes a change that breaks the validation. Does not rewrite the content of commits already in the pull request on its own
   - When the branch is behind the base, rebases onto the remote base, resolves the conflict, and replaces the published branch without asking. The attendance is the authorization that criar-pull-request requires. Updating the branch is not approval to apply a behavior change
   - Records a lesson that outlives the pull request in the project instructions
@@ -144,6 +145,7 @@ How these skills relate is in `README.md`, in this folder.
   - Ends with a tally of accepted, declined, outdated, and open comments by author, and hands back to the caller. The merge, and whether failing checks block it, stay with criar-pull-request
 - **Test Criteria**:
   - [ ] A comment that still applies is fixed, answered, and resolved
+  - [ ] A review that questions whether the pull request should exist leaves it open, as a draft, with the revisit label
   - [ ] A comment that no longer applies is answered with why, and resolved
   - [ ] A suggestion that changes behavior is shown to the person and not applied without approval
   - [ ] A thread without an answer stays open and shows in the tally
