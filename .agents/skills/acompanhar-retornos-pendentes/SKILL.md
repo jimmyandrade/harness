@@ -3,7 +3,7 @@ name: acompanhar-retornos-pendentes
 description: Mantém uma rotina por canal, como e-mail, WhatsApp e site ou aplicativo, que lê as conversas em espera, o aviso que uma tarefa espera e a condição que um painel deve mostrar, avisa quando chegam e entrega o resultado à sessão. Usada quando uma mensagem espera resposta, uma tarefa espera um aviso ou um status precisa mudar num painel. Não serve para escrever a resposta, entrar com senha nem criar uma rotina por mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.9.2"
+  version: "0.9.4"
   related:
     - acompanhar-resposta-no-whatsapp
     - definir-hospedagem
@@ -143,6 +143,10 @@ O resumo diz quais páginas mudaram, com o link de cada uma.
 Quando o aviso de uma tarefa chega, a rotina etiqueta a conversa por `rotular-item`, como concluída se só confirma o que já se sabe e como ação pendente se pede um passo do negócio, depois de ler o corpo, e atualiza a tarefa no rastreador do projeto, com os nomes das propriedades do mapeamento de dados dele.
 Ela marca na definição de concluído só os itens que a mensagem prova e escreve nas observações o que chegou e quando, no presente.
 Um item que depende de uma ação da pessoa, como guardar um comprovante, fica sem marca.
+
+O aviso que chega sozinho pelo WhatsApp, como a confirmação automática de um cadastro, abre uma conversa que a rotina leu, e ela sai com estado e contexto, como a do e-mail, por `rotular-item`, antes do resumo à sessão.
+Um aviso de recebimento que diz que o contato vai analisar e responder é ação esperada.
+O WhatsApp Web é acessado pela sessão dona, como `usar-whatsapp-web` manda: sem ela, o aviso diz que a conversa ficou sem rótulo e qual falta.
 
 Com `Concluir a tarefa pelo aviso` em `sim` e todos os itens provados, a rotina leva a tarefa a concluída e preenche a data da conclusão.
 Sem isso, a tarefa fica em andamento e o aviso diz o que falta.
