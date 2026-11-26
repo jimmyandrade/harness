@@ -1,12 +1,11 @@
 ---
 name: conferir-termo-de-lingua-indigena
-description: Confere o significado de uma palavra de língua indígena, como tupi antigo, guarani ou nheengatu, por língua e variedade, com a fonte de cada afirmação, e diz o que ficou sem conferir. Usada quando um nome, uma estampa ou um texto cita uma palavra indígena e alguém diz que ela significa algo, mesmo sem dizer conferir. NÃO serve para escolher o nome, traduzir um texto, registrar a fonte no banco nem decidir se um símbolo é sagrado.
+description: Confere o significado de uma palavra de língua indígena, como tupi antigo ou guarani, por língua e variedade, com a fonte de cada afirmação. Usada quando um nome, uma estampa ou um texto cita uma palavra indígena com um significado, mesmo sem dizer conferir. NÃO serve para escolher o nome, traduzir, registrar a fonte nem decidir se um símbolo é sagrado.
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.0"
+  version: "0.1.1"
   related:
-    - definir-referencia-cultural
     - procurar-banco-de-dados
 ---
 
@@ -18,7 +17,6 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 ```yaml
 # `Fontes por confiança` lista os tipos de fonte, do mais confiável ao menos confiável. Resumo gerado por IA nunca passa de pista.
 "Fontes por confiança": ["falante ou comunidade", "dicionário ou gramática de referência", "pesquisa acadêmica", "instituição", "site colaborativo", "pista"]
-"Modo de aprendizado": "perguntar"
 ```
 
 ## Instruções
@@ -29,7 +27,7 @@ Receba a palavra, o sentido que alguém afirmou e onde ela será usada. Pergunte
 
 ### Passo 2
 
-Procure o termo no banco de referências do projeto antes de pesquisar na web, como `definir-referencia-cultural` manda. Se já foi conferido, use o registro e diga a data da consulta. Sem o banco na conexão, siga com a pesquisa e diga que não consultou o banco.
+Procure o termo no banco de referências do projeto antes de pesquisar na web. Se já foi conferido, use o registro e diga a data da consulta. Sem o banco na conexão, siga com a pesquisa e diga que não consultou o banco.
 
 ### Passo 3
 
@@ -44,7 +42,7 @@ Quando uma palavra só foi achada numa língua, não a atribua a outra. Quando o
 
 ### Passo 5
 
-Cada fonte achada, usada ou descartada, segue `definir-referencia-cultural` para ser registrada. Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
+Cada fonte achada, usada ou descartada, é registrada no banco de referências do projeto.
 
 ## Problemas comuns
 
