@@ -5,13 +5,14 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet. A busca na lista de inscrições usa notion-ai-search no servidor notion.
 metadata:
   author: jimmyandrade
-  version: "0.20.0"
+  version: "0.21.0"
   aliases:
     - atualizar-inscricao
   related:
     - anexar-arquivo-no-notion
     - definir-grafia
     - definir-negociacao
+    - definir-pagamento-da-inscricao
     - definir-tarefa
     - garantir-ingresso
     - inscrever-na-oportunidade
@@ -82,11 +83,7 @@ Desfecho. O status é o de perdida quando não conseguimos concluir a inscriçã
 
 ### Passo 5
 
-Prazos. Ao tratar participação, reserva de vaga, taxa, sinal, boleto ou lista de espera, procure o prazo máximo para responder ou confirmar interesse e o prazo máximo para pagar, e diferencie os dois.
-
-Procure em todas as fontes: propriedades, comentários datados, e-mail por `procurar-email`, canal já registrado, edital, regulamento, formulário, site e PDF. Uma regra relativa, como "até 2 dias após a confirmação", não responde o prazo de confirmação.
-
-Sem data nem regra confiável, sinalize isso antes de qualquer recomendação, sugira perguntar à organização e não considere a participação segura, salvo se já estiver confirmada e paga. Nunca invente a data. O pagamento vai por `lancar-despesa-da-empresa`. Toda pendência acionável vira tarefa por `definir-tarefa`.
+Prazos e pagamento. O prazo máximo para responder e para pagar, o pedido à organização antes do pagamento e a conferência do titular da chave Pix seguem `definir-pagamento-da-inscricao`. O pagamento feito vai por `lancar-despesa-da-empresa`. Toda pendência acionável vira tarefa por `definir-tarefa`.
 
 Com a taxa paga, mande o comprovante à organização e peça a confirmação do recebimento e da vaga, sem esperar a pessoa lembrar. O comprovante já está no Notion antes de sair. As outras perguntas pendentes da participação só vão depois dessa confirmação.
 
