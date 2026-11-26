@@ -3,7 +3,7 @@ name: atender-revisao-de-pull-request
 description: Atende a revisão recebida num pull request, de pessoa ou de bot. Lê os comentários abertos, classifica cada sugestão, aplica o que é seguro e pede a resposta a `publicar-resposta-de-revisao`. Sem PR informado, lista os seus que precisam de atenção. Não serve para revisar o PR de outra pessoa nem para abrir o PR.
 metadata:
   author: jimmyandrade
-  version: "0.29.0"
+  version: "0.29.1"
   aliases:
     - resolver-comentarios-de-revisao
     - apply-pr-review
@@ -51,8 +51,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 # `Idioma do relatório` e `Agrupar o relatório por prioridade` mandam no relatório final.
 "Agrupar o relatório por prioridade": "não"
 "Recriar PR aberto por agente de código": "não"
-# `Rótulo de PR a rever` marca o PR que fica aberto enquanto a pessoa decide se a mudança deve existir. Vazio, o PR fica sem rótulo.
-"Rótulo de PR a rever": "revisit"
+# `Rótulo de PR a rever` marca o PR que fica aberto enquanto a pessoa decide se a mudança deve existir. O padrão é um rótulo que o GitHub já cria em todo repositório. Vazio, o PR fica sem rótulo.
+"Rótulo de PR a rever": "question"
 # `Cópia de trabalho` é `Global` e cada skill pode sobrescrevê-lo. `worktree` trabalha num git worktree novo da `main`, nunca no clone da pessoa. Vazio trabalha onde a pessoa já está.
 "Cópia de trabalho": "worktree"
 "Modo de aprendizado": "perguntar"
@@ -81,7 +81,7 @@ Decida cada comentário válido pelo que ele aponta. O bot vê só o diff. Use a
 - **Muda comportamento:** o que a `Régua de mudança de comportamento` aponta, ou, sem régua, qualquer mudança de resultado, de borda, de validação ou de efeito. Com `Aprovação para mudar comportamento` em `pedir`, não aplique sem a aprovação da pessoa: mostre o que muda, o risco e a recomendação.
 - **Discordância:** a sugestão parece errada, contradiz a convenção do repositório ou quebra o escopo do PR. Não aplique. Responda em forma de pergunta, com o motivo.
 - **Fora de escopo:** boa ideia que não é deste PR. Não aplique e proponha registrá-la à parte.
-- **Existência do PR:** quem revisa questiona se a mudança deve existir, como uma skill que talvez não faça sentido. A decisão é da pessoa: leve a pergunta com as opções. Até ela decidir, o PR fica aberto e em rascunho, com o `Rótulo de PR a rever` seguindo `rotular-item`, e a thread fica aberta. Não feche o PR nem apague a branch por conta própria.
+- **Existência do PR:** quem revisa questiona se a mudança deve existir, como uma skill que talvez não faça sentido. A decisão é da pessoa: leve a pergunta com as opções. Até ela decidir, o PR fica aberto e em rascunho, com o `Rótulo de PR a rever` seguindo `rotular-item`, que usa o rótulo existente de mesmo sentido em vez de criar um parecido, e a thread fica aberta. Não feche o PR nem apague a branch por conta própria.
 - **Promessa do autor:** o comentário do próprio autor, num self-review ou numa resposta, diz que vai deixar uma evidência visual, testar no navegador ou atualizar a descrição. É tarefa sua, não da pessoa: gere a evidência com `registrar-evidencia-visual` para aquele cenário, inclusive hover, foco e variantes como com e sem link, peça o sim, grave na descrição do PR e responda a thread com o link. Um "atualizar na descrição" ou "isso tem que estar na descrição" vira edição da descrição.
 
 As perguntas do próprio autor num self-review são perguntas de revisão como as de qualquer pessoa. Leia cada uma com a lente de `publicar-revisao-de-codigo/references/lente-de-revisao.md`.
