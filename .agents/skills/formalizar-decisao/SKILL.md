@@ -3,7 +3,7 @@ name: formalizar-decisao
 description: Leva uma decisão de comportamento a quem decide, com a dúvida, a hipótese e o que já está definido, e formaliza a resposta na tarefa e no pull request, em qualquer canal e em qualquer momento, do refinamento ao desk check. Usada quando surge uma dúvida ou uma escolha de comportamento que não é sua, mesmo sem dizer decisão. Não serve para dúvida de código, status de entrega nem para escrever o texto da mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.6.3"
+  version: "0.6.4"
   aliases:
     - abrir-thread-de-decisao
   related:
