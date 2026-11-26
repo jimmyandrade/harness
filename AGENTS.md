@@ -1,6 +1,6 @@
 ---
 metadata:
-  version: "1.74.3"
+  version: "1.74.4"
   parameters:
     "Global":
       "Organização": "jimmyandrade"
@@ -78,6 +78,7 @@ metadata:
 - Todo texto gravado no Notion, em propriedade ou no corpo, escreve o cifrão de um valor com barra invertida, como `R\$ 62,87`. O Notion lê o trecho entre dois cifrões sem barra como fórmula e o texto sai ilegível. Releia o campo depois de gravar um texto com valor em reais.
 - Distinga a restrição explícita de descoberta, a busca sem resultado e o erro de permissão que a ferramenta devolveu. Não chame uma restrição das instruções de falta de acesso nem prometa que um pull request remove uma restrição do ambiente.
 - Ao receber uma correção sobre o seu comportamento, siga `evoluir-habilidade` na mesma conversa e transforme o feedback em correção no repositório de origem, não na cópia instalada, em vez de só explicar o erro. Com pedido de pull request, abra-o e diga o que mudou e o que ainda não foi validado.
+- Tarefa que uma habilidade cobre, como cadastrar pessoa, passa por ela antes de gravar arquivo: à mão, pula as fontes e os campos que ela exige.
 - Ao começar a trabalhar num repositório, antes do primeiro passo, siga `levantar-ambiente-do-repositorio`: liste as habilidades do próprio repositório e as que chegam por dependência ou plugin, como as deste repositório, e abra as que a tarefa vai usar. A ausência na lista da sessão não prova que ela não existe.
 - As tarefas deste repositório são as issues do GitHub dele. Um harness de negócio faz o mesmo com as issues do próprio repositório. Não há banco de tarefas à parte.
 - Depois que a release de um plugin que a pessoa usa sair, com a PR de release mesclada e a tag publicada, atualize o plugin instalado sem esperar um pedido: atualize o marketplace, atualize o plugin e diga que a sessão precisa reiniciar para valer. Vale para o plugin deste repositório e para o de um harness de negócio. A habilidade nova só chega à sessão depois disso.
