@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.117.0](https://github.com/jimmyandrade/harness/compare/v1.116.0...v1.117.0) (2026-11-26)
+
+
+### Features
+
+* **definir-hospedagem:** prepare the data of registered guests without asking and never type their documents ([#1519](https://github.com/jimmyandrade/harness/issues/1519)) ([73a46a1](https://github.com/jimmyandrade/harness/commit/73a46a13631a43db3ae53c741938a45eda014b13))
+* **definir-pagamento-da-inscricao:** split the payment step out and confirm the key holder before paying ([#1480](https://github.com/jimmyandrade/harness/issues/1480)) ([8abc8b4](https://github.com/jimmyandrade/harness/commit/8abc8b406f5dd89933d0067719777d966d994cb2))
+
+
+### Bug Fixes
+
+* **acompanhar-retornos-pendentes:** label WhatsApp notices that arrive on their own ([#1493](https://github.com/jimmyandrade/harness/issues/1493)) ([f96b851](https://github.com/jimmyandrade/harness/commit/f96b851a9e17bc255559c2047ecc525244ad5516))
+* **definir-empresa:** look for the state registration proof in connected files first ([#1484](https://github.com/jimmyandrade/harness/issues/1484)) ([7e32517](https://github.com/jimmyandrade/harness/commit/7e32517bebd028d659a050a4bc2986bcede4756a))
+* **dividir-mensagem:** close with the request itself and show the draft already split ([#1481](https://github.com/jimmyandrade/harness/issues/1481)) ([84ee1c1](https://github.com/jimmyandrade/harness/commit/84ee1c134bcecff5dfaf6a4e0941481dcb879e99))
+
 ## [1.116.0](https://github.com/jimmyandrade/harness/compare/v1.115.0...v1.116.0) (2026-11-25)
 
 
