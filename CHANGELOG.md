@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.117.1](https://github.com/jimmyandrade/harness/compare/v1.117.0...v1.117.1) (2026-11-26)
+
+
+### Bug Fixes
+
+* **agents:** call the skill before writing the records it covers ([#1559](https://github.com/jimmyandrade/harness/issues/1559)) ([c724760](https://github.com/jimmyandrade/harness/commit/c724760117e0f3dcd38bf80f0ceeda140bfa1bad))
+* **enviar-mensagem-no-slack:** mention the people who asked for help ([#1558](https://github.com/jimmyandrade/harness/issues/1558)) ([4850861](https://github.com/jimmyandrade/harness/commit/4850861c90d53595fcd3b83201d8e0fbd0dcce01))
+
 ## [1.117.0](https://github.com/jimmyandrade/harness/compare/v1.116.0...v1.117.0) (2026-11-26)
 
 
