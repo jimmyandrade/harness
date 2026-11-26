@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.118.0](https://github.com/jimmyandrade/harness/compare/v1.117.1...v1.118.0) (2026-11-26)
+
+
+### Features
+
+* **atender-revisao-de-pull-request:** keep a questioned pull request open as a draft with a label ([#1560](https://github.com/jimmyandrade/harness/issues/1560)) ([324b349](https://github.com/jimmyandrade/harness/commit/324b349e9d1c92b69d1fd673476f187ba67c8476))
+
 ## [1.117.1](https://github.com/jimmyandrade/harness/compare/v1.117.0...v1.117.1) (2026-11-26)
 
 
