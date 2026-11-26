@@ -528,8 +528,10 @@ flowchart LR
   definir_data_significativa --> procurar_data_significativa
   definir_empresa --> definir_grafia
   definir_empresa --> definir_perfil_social
+  definir_empresa --> definir_rotina
   definir_empresa --> identificar_duplicata
   definir_empresa --> mesclar_registro
+  definir_empresa --> rotular_item
   definir_estampa --> anexar_arquivo_no_notion
   definir_estampa --> definir_composicao_textil
   definir_estampa --> definir_tecido
