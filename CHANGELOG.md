@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.118.1](https://github.com/jimmyandrade/harness/compare/v1.118.0...v1.118.1) (2026-11-26)
+
+
+### Bug Fixes
+
+* **publicar-resposta-de-revisao:** check the screen before replying about a visual change ([#1564](https://github.com/jimmyandrade/harness/issues/1564)) ([e7cdc88](https://github.com/jimmyandrade/harness/commit/e7cdc88b28dadf22dc32c4a2500a508d6a1d9671))
+* **registrar-evidencia-visual:** keep the story added to validate a change in the pull request ([#1562](https://github.com/jimmyandrade/harness/issues/1562)) ([766a622](https://github.com/jimmyandrade/harness/commit/766a622d447866ed23058c8e0aafa5b8f96ee172))
+
 ## [1.118.0](https://github.com/jimmyandrade/harness/compare/v1.117.1...v1.118.0) (2026-11-26)
 
 
