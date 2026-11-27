@@ -5,11 +5,13 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.12.1"
+  version: "0.13.0"
   related:
     - abordar-contato
     - acompanhar-retornos-pendentes
     - definir-agenda
+    - definir-empresa
+    - definir-pessoa
     - diagnosticar-funil
     - evoluir-habilidade
     - inscrever-na-oportunidade
@@ -85,6 +87,10 @@ Registre o comentário datado em cada página relacionada e aplicável, como a d
 Quando o e-mail da empresa diz que o status se acompanha num painel, a pendência segue `acompanhar-retornos-pendentes`, que registra também o painel.
 
 Depois de enviar uma mensagem, um e-mail ou um comprovante de pagamento a uma empresa ou pessoa, registre a troca na mesma rodada, sem perguntar se deve registrar. Na resposta, diga o que registrou, com o link da página, e o que não registrou e por quê.
+
+Quem recebeu a mensagem e ainda não tem página na lista de pessoas é cadastrado na mesma rodada, por `definir-pessoa`, sem perguntar. A empresa ou a organização que ela representa e que não tem página na lista de empresas é cadastrada por `definir-empresa`, com a pessoa nas pessoas responsáveis. O comentário da troca entra na discussão das duas páginas. Pergunte só o dado que nenhuma fonte responde, como o sobrenome, e deixe-o pendente no cadastro.
+
+No WhatsApp, a conversa sai com todos os rótulos por `rotular-item`, na mesma rodada: o de estado, o de contexto e o da cidade, quando o projeto tem rótulo para ela. Confira na própria conversa, depois de rotular, que cada rótulo aparece, e a resposta diz os que aplicou e os que faltaram.
 
 Quando a empresa recusa, a recusa fica em três lugares, na mesma rodada: o comentário da troca, com as palavras dela; a nota do contato no WhatsApp, com a data e o que ela recusou; e a conversa, que leva o rótulo de estado de concluída, por `rotular-item`. Diga o que a recusa não deixou claro, como a que pode valer só para um material. Quando a decisão é da marca, como o veto de uma feira ou o cliente dispensado, o estado é `Sem fit`, por `rotular-item`, com o motivo no comentário.
 
@@ -176,6 +182,14 @@ Se você enviar a mensagem e só oferecer registrar a troca, a negociação fica
 2. Diga na resposta o que registrou, com o link, e o que não registrou.
 3. Um pagamento já registrado como despesa entra no comentário com o link da despesa.
 
+### Cadastro e rótulos que esperam pergunta
+
+Se você enviar a mensagem e perguntar se cadastra a pessoa ou a empresa no Notion, ou deixar a conversa só com o rótulo de estado, a pessoa tem de pedir o cadastro e os rótulos que já eram óbvios.
+
+1. Cadastre a pessoa por `definir-pessoa` e a empresa por `definir-empresa` na mesma rodada do envio, sem perguntar.
+2. Aplique por `rotular-item` o estado, o contexto e a cidade, e confira na conversa que os três aparecem.
+3. Diga na resposta o que cadastrou, com o link, o que ficou pendente e os rótulos aplicados.
+
 ### Negociação que junta edições
 
 Se você gravar a conversa de uma edição nova na negociação de outra, o histórico, a taxa, o prazo e a decisão de duas oportunidades ficam misturados.
@@ -230,6 +244,7 @@ Conferi se a pessoa abordada aceita mais de uma pessoa antes de somar Isadora Ri
 - A pessoa passa uma especificação de grade, cores, modelagem ou quantidade na conversa: grave na negociação já, mesmo sem a empresa ter respondido. Não deixe só na memória.
 - A mensagem colada não diz o canal: pergunte antes do primeiro registro. Não presuma Instagram, WhatsApp nem e-mail.
 - Várias mensagens no mesmo dia e assunto: um comentário só, com os horários.
+- Quem recebeu a mensagem não tem página na lista de pessoas, nem a organização que ela representa na lista de empresas: cadastre as duas na mesma rodada do envio, sem perguntar, e deixe pendente o dado que nenhuma fonte responde.
 - A pessoa corrige um fato já gravado: novo comentário datado com a correção. Não apague o anterior.
 - A mensagem anterior chega colada, sem data nem canal: pergunte os dois antes de escrever a retomada. Não presuma que o canal é o mesmo do atual.
 - O canal do contato mudou, como do Instagram para o WhatsApp: o texto diz o canal do contato anterior e a origem do novo, como a pessoa contou.
@@ -245,6 +260,7 @@ Conferi se a pessoa abordada aceita mais de uma pessoa antes de somar Isadora Ri
 - A mensagem anterior parece valer como está hoje. O "hoje" e o "estamos" dela eram do dia em que foi enviada, e o canal dela pode não ser o de agora.
 - Sem conector do canal, parece que só a pessoa tem a mensagem. A conta dela está logada no navegador do app e na extensão do navegador, e a leitura é sua.
 - A especificação dita na conversa parece já guardada porque o assistente a repete. Só o registro na negociação a guarda para as outras sessões.
+- Perguntar "cadastro a pessoa?" depois do envio parece cuidado. O cadastro e os rótulos da conversa são parte do envio, e a pessoa só decide o que nenhuma fonte responde.
 - A empresa abordada e a pessoa abordada são relações. Telefone e grafias vêm por rollup e não se gravam aqui.
 
 ## Scripts disponíveis
