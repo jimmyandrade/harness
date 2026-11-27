@@ -3,11 +3,12 @@ name: acompanhar-resposta-no-whatsapp
 description: Acompanha, por uma rotina que lê as conversas com a etiqueta de ação esperada, se o contato respondeu a uma mensagem enviada no WhatsApp, avisa quando a resposta chega e troca a etiqueta. Usada quando a mensagem espera resposta, como uma pergunta, um pedido ou um prazo, ou quando a pessoa pergunta se alguém já respondeu. Não serve para ler, redigir nem enviar a mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.8.0"
+  version: "0.9.0"
   related:
     - rascunhar-mensagem
     - acompanhar-retornos-pendentes
     - conversar-no-whatsapp
+    - definir-negociacao
     - definir-rotina
     - evoluir-habilidade
     - rotular-item
@@ -66,6 +67,8 @@ A conversa que passa de `Dias sem resposta para avisar` sem resposta ganha um av
 Sem nenhuma conversa na etiqueta, a rotina diz isso em uma linha.
 Conversa cuja última mensagem é nossa e é só uma abertura, como "Oi", mandada sem passar pelo Claude e sem linha no registro, deixa o assunto sem seguimento. A rotina avisa a pessoa, lê o cadastro e o histórico da pessoa ou da empresa, e propõe a mensagem de conteúdo, como `rascunhar-mensagem` manda, para a pessoa dar o sim. Ela não envia sozinha.
 Ao avisar, a rotina traz o que a pessoa decide, e não só o que mudou: a pergunta que falta responder, o rascunho proposto e o prazo.
+
+O rascunho que espera o sim da pessoa fica onde o resto do assunto vive, como comentário datado na página da negociação, da pessoa ou da empresa, por `definir-negociacao`, com o canal, o destino, o texto e o que falta decidir. Um arquivo local só guarda o que a rotina leva ao próximo disparo, como a leitura da lista, nunca o rascunho. Sem página do assunto, a rotina a procura antes de gravar e, não achando, avisa a pessoa em vez de deixar o rascunho num arquivo.
 Uma resposta que fecha o assunto, como uma confirmação ou um ok, não é a última palavra: para fechar o loop, a última mensagem de toda conversa é nossa, com um agradecimento curto. Ao avisar a pessoa que a resposta chegou, a sessão propõe essa mensagem, como `conversar-no-whatsapp` manda para o texto e o sim, com a janela de contato conferida como `rascunhar-mensagem` manda, e a conversa só ganha a etiqueta de assunto concluído depois que ela sai.
 A mensagem de fechamento só agradece. Se citar dia, horário ou compromisso, usa o que a conversa e o cadastro confirmaram, com o dia conferido na conversa: nunca acrescenta uma data que ninguém confirmou.
 Uma mensagem que espera resposta e saiu sem a etiqueta, porque a pergunta do sim não citou o acompanhamento ou porque a etiqueta ficou para depois, não sai dos próximos passos da resposta até a conversa ser etiquetada ou a pessoa recusar. Ao perceber a falta, confira antes a lista de conversas: a resposta pode já ter chegado.
@@ -125,6 +128,14 @@ Se você só anotar que a contagem subiu, a conversa nova fica sem dono e a pess
 1. Compare os nomes com a leitura anterior.
 2. Abra e leia cada conversa nova.
 3. Diga o nome e o que cada uma pede.
+
+### Rascunho pendente num arquivo local
+
+Se você deixar o rascunho que espera o sim num arquivo Markdown, ele sai do histórico do assunto e a próxima sessão não o vê ao abrir a página da pessoa.
+
+1. Ache a página da negociação, da pessoa ou da empresa.
+2. Grave o rascunho como comentário datado nela, com o canal, o destino e o que falta decidir.
+3. Quando o rascunho sair ou for recusado, comente o desfecho na mesma discussão.
 
 ## Exemplos de entrada e saída
 
