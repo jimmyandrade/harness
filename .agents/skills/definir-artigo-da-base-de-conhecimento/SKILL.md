@@ -4,7 +4,7 @@ description: Cria, revisa e atualiza o artigo da base de conhecimento que respon
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.9.0"
+  version: "0.9.1"
   related:
     - capturar-tela-de-passo-a-passo
     - criar-habilidade
@@ -98,6 +98,7 @@ Cada diferença que a execução mostra, como uma tela que mudou, um custo, uma 
 Um assunto novo que a execução levanta vira outro artigo, como manda o Passo 3.
 Quando a dúvida nasce de um caso visual ou de comportamento, como uma tela, um componente ou um pull request, confira o caso na fonte antes de escrever.
 Abra o desenho no Figma, abra a tela ou o Storybook do pull request na versão dele, leia o código do pull request e meça o que a pessoa viu, como as cores calculadas no navegador.
+Legende cada quadro do desenho pela estrutura, a linha, a coluna e o estado dele, e não pela aparência: um quadro que parece outro desenho pode ser o hover de um que já está na página.
 O artigo diz a causa confirmada e usa o caso conferido como exemplo, não só o que a conversa contou.
 Só deixe "a verificar" o que depende de uma decisão de outra pessoa ou de um acesso que a sessão não tem, e diga qual dos dois.
 Nunca deixe "a verificar" o que as ferramentas da sessão conseguem conferir.

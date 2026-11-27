@@ -1,11 +1,11 @@
 ---
 name: definir-perfil-social
 description: Use essa habilidade sempre que for cadastrar ou consolidar um perfil social, mesmo sem dizer perfil ou handle. NÃO use para só checar se já existe, mesclar um registro de outra lista, cravar a grafia de pessoa ou empresa, nem apagar sem ordem.
-allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-data-sources notion:notion-create-pages notion:notion-update-page notion:notion-create-comment
+allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-data-sources notion:notion-create-pages notion:notion-update-page notion:notion-create-comment notion:notion-create-file-upload
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.10.0"
+  version: "0.10.1"
   related:
     - analisar-perfil-social
     - definir-grafia
@@ -44,6 +44,8 @@ Crie o perfil pelo modelo do canal, quando a lista tem um. No WhatsApp, o títul
 Instagram e canal de handle: o título fica sem `@`, em minúsculas e sem espaços. Website: a URL completa fica na URL do perfil. O título não recebe essa URL. Não invente o título a partir do domínio.
 
 Um print da grafia que mostra um perfil ausente cadastra esse perfil na mesma resposta. Grave o que o print mostra e a lista já tem: o canal, o nome exibido, a bio, o link da bio, os seguidores, os seguindo e os posts. A URL do perfil é a do canal, não o link da bio. O print entra nas capturas de tela. Não grave o print no corpo. Não invente o que o print não trouxe. A pessoa do nome segue `definir-pessoa` e entra na pessoa do perfil. Já existe: use esse perfil. Não crie outro.
+
+O print que a pessoa envia na conversa já é um arquivo salvo no computador, no caminho que a imagem informa. Suba esse arquivo para o Notion, com o nome do handle, do canal e da data, e ponha-o nas capturas de tela do perfil. Só diga que o print não coube se o envio falhar, e então cite o erro. "A imagem só existe na conversa" não é limitação.
 
 ### Passo 3
 
@@ -88,6 +90,14 @@ Se você usar o print só para corrigir a frase, o perfil que ele mostra fica fo
 1. Busque o handle.
 2. Ausente: crie o perfil e grave o que o print mostra.
 3. O print entra nas capturas de tela. A pessoa segue `definir-pessoa`.
+
+### Print não anexado
+
+Se você disser que o print só existe na conversa e deixar as capturas de tela vazias, a pessoa precisa reenviar um arquivo que a sessão já tem, e o perfil fica sem a evidência.
+
+1. Ache o arquivo no caminho que a imagem informa.
+2. Suba-o para o Notion e ponha-o nas capturas de tela do perfil.
+3. Só se o envio falhar, diga o erro e deixe a pendência.
 
 ### Cadastro oferecido em vez de feito
 
@@ -139,6 +149,7 @@ Liguei os dois em Não confundir com na hora. A variação de nome recebeu a for
 - O `@` parece parte do nome. No título de handle ele sai. A busca usa a forma com `@` em Variações de nome.
 - A URL do website parece o título. Ela fica na URL do perfil.
 - Não confundir com parece um comentário no chat. O vínculo entra na propriedade na hora e a variação separa a busca.
+- O print parece existir só na conversa. É um arquivo no computador, e a skill o sobe para as capturas de tela.
 - Um perfil só parece pessoa única. A pessoa relacionada pode estar duplicada na lista de pessoas. Essa checagem fica com `identificar-duplicata`.
 
 ## Scripts disponíveis

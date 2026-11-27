@@ -3,7 +3,7 @@ name: consultar-vocabulario
 description: Use essa habilidade sempre que, antes de escrever ou conferir um texto da marca, for preciso ler o vocabulário do tom de voz, por palavra e por expressão inteira, com as tags de quem fala, do evento e do canal, mesmo sem dizer glossário. NÃO use para cadastrar ou corrigir termo, escrever o texto, nem decidir o nível de um termo.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.4.0"
   related:
     - redigir-com-tom-de-voz
     - definir-vocabulario
@@ -68,9 +68,9 @@ Se você ler só o nível do termo e ignorar o `when`, um termo que vale em um c
 
 Se você seguir sem validar quando a ferramenta recusa a consulta com o erro de que um termo está fora da ordem alfabética, o texto sai sem a checagem, e dava para consertar.
 
-1. O erro cita um termo do arquivo do idioma que alguém acrescentou fora de lugar. Corrija: reordene as linhas, sem mudar o conteúdo, pelo critério do arquivo, que ignora acento e maiúsculas, e confira que uma linha só mudou de lugar.
+1. O erro cita um termo do arquivo do idioma que alguém acrescentou fora de lugar. Rode o script de ordenação do glossário: ele reordena as linhas pelo critério do arquivo, que ignora acento e maiúsculas, recusa gravar se alguma linha mudar de conteúdo e devolve os termos que mudaram de lugar. Não reescreva a lógica à mão.
 2. Rode a consulta de novo. Se o arquivo tem alterações sem commit de outra sessão, a reordenação não as altera, e a resposta diz o que foi movido.
-3. Só diga que não validou se a ferramenta continuar falhando por outro motivo, e diga qual.
+3. Só diga que não validou se a ferramenta continuar falhando por outro motivo, e diga qual. Se o script quebrar, evolua o script para cobrir o caso, e não só a cópia da sessão.
 
 ### Vocabulário de outro negócio
 
@@ -102,6 +102,7 @@ Consultei com as tags do canal e de quem fala, cada expressão inteira e a class
 
 ## Scripts disponíveis
 
+- `python3 scripts/sort_glossary.py <arquivo do glossário>` reordena as linhas do glossário pelo critério da ferramenta, sem mudar o conteúdo, e devolve em JSON quantas linhas mudaram de lugar.
 - `node node_modules/harness/vocabulary/dist/cli.js lookup --language <idioma> --term <termo> --tags <tag>` lê um termo e devolve se ele existe e a linha guardada.
 - `node node_modules/harness/vocabulary/dist/cli.js exists --language <idioma> --text <trecho> --tags <tag>` devolve só o registro de cada token do trecho para se ele existe.
 - Com `case_matches` falso, a caixa do texto não é a guardada. Escreva a grafia de `term`.
@@ -113,3 +114,4 @@ Consultei com as tags do canal e de quem fala, cada expressão inteira e a class
 
 1. Com terminal e a CLI instalada, na pasta do harness do negócio, rode `classify-text` com o texto, `lookup-terms` com cada expressão que o texto pode usar e `lookup` para cada termo que precisar da linha inteira, com as tags de quem fala, do evento e do canal. Escreva o comando inteiro em cada chamada.
 2. Sem terminal, ou quando a CLI não está disponível, chame `classify_text`, `lookup_term` e `lookup_terms` com os mesmos campos.
+3. Se a consulta for recusada por termo fora de ordem, rode `sort_glossary.py` no arquivo do idioma e repita o passo 1 ou o 2.
