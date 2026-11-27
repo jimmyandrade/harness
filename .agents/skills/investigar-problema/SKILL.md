@@ -3,7 +3,7 @@ name: investigar-problema
 description: Conduz a investigação de um problema, como um acesso bloqueado, um cadastro que falha em portal alheio ou um erro, com tarefa, fatos e hipóteses, e oferece artigo e post-mortem. Use sempre que alguém relatar um problema, como um preço errado, ou pedir "investigue isso" com um link, antes de ler. NÃO use para escrever o artigo, o post-mortem nem corrigir código.
 metadata:
   author: jimmyandrade
-  version: "0.4.2"
+  version: "0.4.5"
   related:
     - procurar-tarefa
     - definir-tarefa
@@ -71,6 +71,12 @@ Quando o que falha é um ambiente compartilhado, como um preview, o cluster de d
 O ambiente pode ter caído, e ser apagado e recriado, por um motivo que não vem da mudança que você testa.
 Enquanto não souber o estado dele, não peça mais carga a ele, como publicar mais aplicações.
 
+Quando o relato é o alerta de um monitor de anomalia, abra o monitor e leia a consulta, o agrupamento e a janela.
+Compare o valor do alerta com a mesma hora dos dias anteriores antes de concluir que houve um pico: o monitor compara com um padrão de semanas passadas, e um valor dentro do normal desta semana pode disparar quando o tráfego sobe.
+
+Quando o problema é um erro vindo do navegador de quem usa o site, leia a pilha: o começo do endereço de cada arquivo mostra quem escreveu o código, como uma extensão do navegador, o navegador interno de um aplicativo, um script de terceiro ou o pacote do próprio site.
+Corte os eventos por navegador, dispositivo e versão e conte quantos eventos da família a pista cobre antes de propor um filtro.
+
 ### Passo 3
 
 Liste as hipóteses, da que a evidência mais apoia para a que menos apoia.
@@ -78,8 +84,17 @@ Confira cada uma na fonte: a tela da ferramenta, o registro, a configuração ou
 Só leia nesse passo. Uma correção que muda algo, como uma permissão, um pagamento ou uma configuração, espera o sim da pessoa, com o que muda e o risco.
 Cada hipótese e cada ponto que você ainda não conferiu e que dá para conferir, você confere antes de responder, no código, nos dados e nas ferramentas ao seu alcance. O objetivo é achar a causa.
 Só fica como "não verificado" o que depende de um acesso que nenhum caminho ao seu alcance dá: diga qual fonte falta e quem tem.
+Antes de responder, releia o que ficou sem conferir: o item que uma consulta ao seu alcance resolve volta para a investigação, e a resposta só sai quando a lista restante é de acesso que falta.
 O limite que fala do ambiente em que algo roda, como o sistema, a arquitetura ou a versão, tem fonte própria: os registros das execuções reais, como o job de integração contínua, o nome do executor e o log do build. Leia-os antes de listar o limite.
 Uma reprodução num exemplo mínimo prova o mecanismo, não o ambiente real. Diga o que ela cobre e rode no ambiente real o que estiver ao seu alcance.
+Quando o código que reporta o erro já manda campos específicos, como o ponto da falha, o módulo e o status, e o monitor agrupa por um campo genérico, a causa do ruído está na definição do monitor e da métrica que ele lê.
+Leia as duas antes de propor mudar o erro, porque a métrica gerada pode ter só algumas quebras.
+Quando não achar o autor de um erro, deixe-o como hipótese, com os indícios que você viu e o que o repositório não tem. Não proponha descartá-lo nem corrigi-lo antes de confirmar.
+Uma consulta que devolve zero linhas pode ter o nome do campo errado: confirme o nome numa busca de eventos crus antes de tirar conclusão do vazio.
+Para provar uma pista, compare as sessões que a têm com a base: conte quantas sessões com o erro carregam a pista e qual é a taxa dela entre as sessões sem o erro.
+Ao propor descartar ou filtrar dados de uma ferramenta de monitoramento, como erros, logs ou alertas, diga o que se perde e meça quantos eventos o filtro atinge e quantos deles trazem também o rastro de outra origem.
+Ofereça antes a alternativa de marcar o evento e agrupá-lo, que mantém o dado e tira o ruído dos monitores.
+O filtro por origem olha o quadro onde o erro nasce na pilha, não qualquer ponto dela.
 Quando um erro é esperado ou não, quando uma taxa é alta ou normal, a resposta traz o número e a comparação, nunca "não verifiquei".
 Cruze a sua conclusão com a da investigação paralela: diga onde concordam, onde divergem e o que cada uma viu que a outra não viu.
 Quando a outra achou algo que você perdeu, corrija a sua conclusão e diga que mudou. Não proteja a primeira resposta.
@@ -156,6 +171,7 @@ Se você entregar uma lista do que não conferiu, como se um erro é esperado ou
 7. Quando o próximo passo é um teste ou uma consulta ao seu alcance, rode-o no mesmo turno em vez de propô-lo. Proponha à pessoa só o que depende de acesso ou de decisão dela.
 8. Um limite que fala do ambiente de execução, como o sistema, a arquitetura ou a versão, confere-se nos registros das execuções reais, como o job de integração contínua e o log do build, antes de aparecer como pendência.
 9. Uma reprodução num exemplo mínimo cobre o mecanismo. Diga isso, e rode no ambiente real o que estiver ao seu alcance. O que exige subir uma branch ou um pull request, diga qual é e pergunte.
+10. Antes de responder, releia o que ficou sem conferir. O que uma consulta ao seu alcance resolve volta para a investigação.
 
 ### Investigação sem a habilidade
 
@@ -180,6 +196,23 @@ Se você diagnosticar a falha de um preview ou de um cluster compartilhado só p
 2. Enquanto o estado do ambiente for desconhecido, não peça carga a ele, como publicar mais aplicações.
 3. Diga na conclusão o que o ambiente estava passando, com o link do aviso.
 
+### Alerta de anomalia tratado como incidente
+
+Se você concluir pelo texto do alerta de anomalia, sem o monitor nem a linha de base, um valor normal para a semana vira um incidente e o ruído do monitor continua.
+
+1. Abra o monitor e leia a consulta, o agrupamento e a janela.
+2. Compare o valor com a mesma hora dos dias anteriores.
+3. Se o código já manda campos específicos e o monitor agrupa por um campo genérico, leia também a métrica que ele consulta: a causa do ruído está nas duas definições.
+
+### Erro de navegador filtrado sem achar o autor
+
+Se você propuser descartar um erro do navegador pelo texto da mensagem, sem ler a pilha, o filtro pode esconder um erro do próprio site ou deixar passar o resto da família.
+
+1. Leia o começo do endereço dos arquivos da pilha e diga quem escreveu o código.
+2. Corte por navegador, dispositivo e versão e conte quantos eventos da família a pista cobre.
+3. Sem o autor confirmado, mantenha o erro e deixe o autor como hipótese, com os indícios.
+4. Antes de descartar, diga o que se perde e ofereça marcar o evento e agrupá-lo. O filtro olha o quadro onde o erro nasce na pilha.
+
 ### Aprendizado perdido
 
 Se você encerrar sem perguntar pelos registros, a próxima pessoa com o mesmo problema começa do zero.
@@ -195,11 +228,16 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 Não havia tarefa: criei e respondi a quem relatou com o link. O print mostrava que um administrador precisava aprovar o anúncio. Conferi na tela de pessoas da conta quem administra e gravei a causa na tarefa. Perguntei se a pessoa queria um artigo, um post-mortem ou os dois.
 
+### o monitor de anomalia de erros disparou, investiga?
+
+Abri o monitor e li a consulta: ele soma os erros por tipo e compara com semanas passadas. O grupo que disparou estava dentro do normal da mesma hora dos dias anteriores, e o tráfego tinha subido. Li a pilha da família maior de erros, cujos arquivos vinham do navegador interno de um aplicativo, e contei quantos eventos o prefixo cobria. Do outro erro não achei o autor: deixei-o como hipótese, com os indícios, e não propus filtro.
+
 ## Casos-limite
 
 - A causa não aparece depois de conferir todas as fontes ao seu alcance: grave o que foi descartado e o próximo passo, e pergunte pelos registros do mesmo jeito.
 - A correção depende de outra pessoa, como quem administra a conta: diga quem e o que pedir.
 - Já existe artigo sobre o problema: proponha atualizá-lo em vez de criar outro.
+- O autor de um erro do navegador não aparece depois de ler a pilha e cortar os eventos: mantenha o erro, escreva o autor como hipótese com os indícios e diga o que confirmaria.
 
 ## Pegadinhas
 
@@ -212,6 +250,11 @@ Não havia tarefa: criei e respondi a quem relatou com o link. O print mostrava 
 - Perguntar a quem relatou parece o passo seguinte quando falta um dado. O horário do relato e o que a ferramenta registrou nele costumam bastar para achá-lo.
 - A reprodução num exemplo mínimo parece provar o caso real. Ela prova o mecanismo, e o ambiente real está nos registros das execuções: leia-os antes de listar o limite como "não provado".
 - Um erro de certificado ou de rota num preview parece falha da mudança testada. O ambiente compartilhado pode ter caído e estar sendo apagado, e o aviso do time está no canal.
+- Uma lista de "não verificado" parece honestidade. Cada item que uma consulta ao seu alcance resolve é investigação por fazer: rode-o antes de responder.
+- O texto de um alerta de anomalia parece dizer que houve um pico. O monitor compara com semanas passadas, então o valor da mesma hora dos dias anteriores é que diz se há um.
+- Descartar parece o jeito de tirar o ruído. O descarte apaga o dado para sempre, e marcar o evento mantém o dado e tira o ruído só dos monitores.
+- Uma consulta vazia parece provar que não há nada. Um campo agrupado com o nome errado descarta tudo: leia um evento cru e copie o nome do campo dele.
+- A mensagem de um erro do navegador parece dizer de quem ele é. A pilha diz: o começo do endereço dos arquivos mostra a extensão, o aplicativo ou o script de terceiro que o escreveu.
 - Uma investigação curta parece não pedir registro. A pergunta pelos registros vale para toda investigação.
 
 ## Scripts disponíveis
