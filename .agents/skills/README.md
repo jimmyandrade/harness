@@ -574,6 +574,7 @@ flowchart LR
   definir_hospedagem --> redigir_com_tom_de_voz
   definir_idioma_da_conversa --> definir_pessoa
   definir_inscricao --> anexar_arquivo_no_notion
+  definir_inscricao --> definir_agenda
   definir_inscricao --> definir_grafia
   definir_inscricao --> definir_negociacao
   definir_inscricao --> definir_pagamento_da_inscricao
@@ -581,6 +582,7 @@ flowchart LR
   definir_inscricao --> garantir_ingresso
   definir_inscricao --> inscrever_na_oportunidade
   definir_inscricao --> lancar_despesa_da_empresa
+  definir_inscricao --> procurar_agenda
   definir_inscricao --> procurar_email
   definir_inscricao --> procurar_inscricao
   definir_inscricao --> procurar_oportunidade
