@@ -1,5 +1,35 @@
 # Changelog
 
+## [1.119.0](https://github.com/jimmyandrade/harness/compare/v1.118.1...v1.119.0) (2026-11-27)
+
+
+### Features
+
+* **anexar-arquivo-no-whatsapp:** attach a PDF or a photo by pasting the file from the clipboard ([#1487](https://github.com/jimmyandrade/harness/issues/1487)) ([9f6b3b6](https://github.com/jimmyandrade/harness/commit/9f6b3b662325bf340f1b824559ad9181c6db5dd3))
+* **conferir-termo-de-outro-idioma:** add skill to check the meaning of a word from another language ([#1491](https://github.com/jimmyandrade/harness/issues/1491)) ([6418a33](https://github.com/jimmyandrade/harness/commit/6418a33b9524ac2609a9b0a53eb70fde97b14ca2))
+* **consultar-vocabulario:** save the glossary reorder as a script of the skill ([#1511](https://github.com/jimmyandrade/harness/issues/1511)) ([1d0d487](https://github.com/jimmyandrade/harness/commit/1d0d487674b91df04279bb86af5e1e7228ad25bf))
+* **definir-link-rastreavel:** add UTM value language and platform campaign ID parameters ([#1534](https://github.com/jimmyandrade/harness/issues/1534)) ([7e3df69](https://github.com/jimmyandrade/harness/commit/7e3df69101eff0a0f78a45ec65aca6d7b59c3af4))
+* **definir-negociacao:** register the person and the company and apply every label right after the contact ([#1556](https://github.com/jimmyandrade/harness/issues/1556)) ([7428d8d](https://github.com/jimmyandrade/harness/commit/7428d8df2e9e0224dc8b6dda999553dc78f94f3f))
+* **definir-referencia-cultural:** add skill to record cultural reference sources ([#1490](https://github.com/jimmyandrade/harness/issues/1490)) ([6e2209b](https://github.com/jimmyandrade/harness/commit/6e2209be5ccbc9ba32deeef34d123d5266f7eed3))
+* **evoluir-habilidade:** save the script written during a run and evolve a script that breaks ([#1510](https://github.com/jimmyandrade/harness/issues/1510)) ([ae16f68](https://github.com/jimmyandrade/harness/commit/ae16f680a3753d48e1fe4caeb9ee45c652bba684))
+* **manter-contato-no-whatsapp:** label the group an organizer adds us to ([#1489](https://github.com/jimmyandrade/harness/issues/1489)) ([e77f09d](https://github.com/jimmyandrade/harness/commit/e77f09dfb0c0b6c3153c0f1026c49acd38ff1b75))
+* **publicar-produto-fisico-no-mercado-pago:** create products with variations through the panel API and handle batches ([#1551](https://github.com/jimmyandrade/harness/issues/1551)) ([cd6a955](https://github.com/jimmyandrade/harness/commit/cd6a95560692ae7a7077d17af4ad0830e7d496f5))
+
+
+### Bug Fixes
+
+* **acompanhar-producao-de-produto-fisico:** compare the variation's counts with its units before numbering new ones ([#1552](https://github.com/jimmyandrade/harness/issues/1552)) ([b0d583a](https://github.com/jimmyandrade/harness/commit/b0d583ae420dc26d46f0bea08a62fe2740e1bdd1))
+* **conversar-no-whatsapp:** skip the fit question when the contact already invited the brand ([#1506](https://github.com/jimmyandrade/harness/issues/1506)) ([e4d1fcb](https://github.com/jimmyandrade/harness/commit/e4d1fcb0e1b36556605ee66edc92927a0cfa6e89))
+* **enviar-mensagem-no-slack:** classify the draft before delivering it ([#1524](https://github.com/jimmyandrade/harness/issues/1524)) ([25e164a](https://github.com/jimmyandrade/harness/commit/25e164ae32164b016d0fbe635d387884d330efe0))
+* **formalizar-decisao:** read the design by structure before asking who decides ([#1548](https://github.com/jimmyandrade/harness/issues/1548)) ([7d288e1](https://github.com/jimmyandrade/harness/commit/7d288e1f3a345bcf35bde5816d30a48c9d469f9f))
+* **formalizar-decisao:** search the tracker for the card before logging an open point about someone else's work ([#1514](https://github.com/jimmyandrade/harness/issues/1514)) ([8a369ad](https://github.com/jimmyandrade/harness/commit/8a369ad5e13320e868f07b77a1b22956d332450d))
+* **investigar-problema:** check the anomaly baseline, read the browser error stack and keep an unconfirmed author as a hypothesis ([#1553](https://github.com/jimmyandrade/harness/issues/1553)) ([a309a5f](https://github.com/jimmyandrade/harness/commit/a309a5f03092c161f6e4df5164a75f482594b0b9))
+* **investigar-problema:** read the real run logs and the team notice before listing limits or diagnosing ([#1515](https://github.com/jimmyandrade/harness/issues/1515)) ([c954cf8](https://github.com/jimmyandrade/harness/commit/c954cf831fceb41f92f9733f8254c6eb5f5f58e5))
+* **meeting-skills:** keep a recording with its event and an unremembered confirmation inferred ([#1518](https://github.com/jimmyandrade/harness/issues/1518)) ([441347c](https://github.com/jimmyandrade/harness/commit/441347c8438b56d549f8a501ef30870c2b4dbad6))
+* **rascunhar-mensagem:** do not reconfirm what the contact already confirmed back ([#1508](https://github.com/jimmyandrade/harness/issues/1508)) ([47023ac](https://github.com/jimmyandrade/harness/commit/47023acca3628cd1f711b8554e73a1d230cbd45e))
+* **rascunhar-mensagem:** show the full text of every message on each draft round ([#1513](https://github.com/jimmyandrade/harness/issues/1513)) ([18aa69e](https://github.com/jimmyandrade/harness/commit/18aa69ec445b0d682b0484a631918ba3e5352627))
+* **redigir-com-tom-de-voz:** mirror the warmth of the contact's message, not only the nicknames ([#1520](https://github.com/jimmyandrade/harness/issues/1520)) ([2c1b714](https://github.com/jimmyandrade/harness/commit/2c1b714079417778f9e57be0eed5f40bdea2a353))
+
 ## [1.118.1](https://github.com/jimmyandrade/harness/compare/v1.118.0...v1.118.1) (2026-11-26)
 
 
