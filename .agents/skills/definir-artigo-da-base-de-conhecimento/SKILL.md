@@ -4,7 +4,7 @@ description: Cria, revisa e atualiza o artigo da base de conhecimento que respon
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.9.3"
+  version: "0.9.4"
   related:
     - capturar-tela-de-passo-a-passo
     - criar-habilidade
@@ -177,6 +177,7 @@ Antes de concluir, confira o artigo com esta lista:
 
 Corrija o que falhar e confira de novo.
 A mensagem final da resposta traz o link de cada artigo criado ou alterado, em markdown com o título da página, como texto próprio dela.
+Logo depois, a mesma mensagem lista os artigos que a base já tem, cada um com o título como link, e marca os do turno como criado ou atualizado. A pessoa vê o conjunto sem precisar pedir.
 O link escrito antes de um quadro de encerramento, como o de `wrap_up`, ou "o link está acima" não conta, porque a pessoa pode não ver esse trecho.
 Uma página publicada sem link na mensagem final deixa o turno aberto.
 
@@ -248,6 +249,7 @@ Se você escrever o link do artigo antes do quadro de encerramento e a mensagem 
 1. Ponha o link do artigo, em markdown com o título da página, na mensagem final.
 2. Repita o link ali mesmo que já tenha aparecido antes.
 3. Releia a mensagem final antes de enviar e confira que cada página criada ou alterada tem o link.
+4. Confira que a lista dos artigos que a base já tem também está na mensagem.
 
 ### Endereço da ferramenta só por apelido
 
