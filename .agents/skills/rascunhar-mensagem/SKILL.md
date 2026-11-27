@@ -3,7 +3,7 @@ name: rascunhar-mensagem
 description: Escreve, mostra e envia a mensagem de WhatsApp depois de a conversa ser lida, com o destino, o texto, a divisão e o comprovante conferidos. Usada quando a pessoa quer responder, mandar ou corrigir uma mensagem. NÃO serve para ler a conversa, redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.4.8"
+  version: "0.4.9"
   aliases:
     - entregar-rascunho-de-mensagem
     - rascunhar-mensagem-no-whatsapp
@@ -187,7 +187,7 @@ Se você mostrar o rascunho sem classificá-lo, ele traz palavra que o vocabulá
 
 Se você disser que o rascunho está pronto sem mostrar o texto, ou o mostrar só num bloco de código, a pessoa não confere nem corrige antes do envio, pergunta pela prévia, não consegue editar cada mensagem e precisa copiar o texto à mão.
 
-1. Mostre o texto inteiro na resposta do chat, num bloco de código.
+1. Mostre o texto inteiro de todas as mensagens na resposta, num bloco de código, também quando só uma mudou.
 2. Com a ferramenta de widget na sessão, mostre sempre também o texto editável, com copiar e aprovar. O widget não substitui o bloco. Faça isso também na sessão que só rascunha, como a dona do WhatsApp Web.
    Com a ferramenta de artefato, publique também os rascunhos que esperam o sim num artefato só, atualizado a cada rodada, porque o widget sobe com a conversa e some. A resposta traz o link do artefato e lista os rascunhos que ainda esperam.
 3. Pergunte se pode enviar só depois do texto, na mesma resposta. A versão editada no widget substitui o rascunho.
@@ -259,11 +259,11 @@ Li a resposta como a da pergunta: o carro pode entrar na montagem, em qualquer j
 - O rascunho parece certo porque soa natural. Soar natural não é estar no vocabulário: a classificação mostra a palavra que a pessoa já recusou, como a forma que marca gênero.
 - O nome de quem atendeu parece óbvio. O nome que o cadastro ou a conversa antiga traz pode não ser o de quem falou na visita. Confirme com quem a pessoa falou antes de usar o nome, e sem fonte escreva a mensagem sem nome.
 - O widget parece guardar o rascunho. Ele sobe com a conversa e some, e a pessoa não acha o que ficou pendente. O artefato com os rascunhos pendentes fica no mesmo endereço.
-- Um bloco de código parece prévia suficiente. Com a ferramenta de widget na sessão, a pessoa também espera o widget editável, com copiar e aprovar.
-- Uma resposta curta parece incompleta quando não repete o detalhe que a conversa já traz. Ela responde a pergunta como foi escrita: confira o texto da pergunta antes de achar que falta algo.
+- Um bloco de código parece prévia suficiente. Com a ferramenta de widget, a pessoa também espera o widget editável, com copiar e aprovar.
+- Uma resposta curta parece incompleta quando não repete o detalhe que a conversa já traz. Ela responde a pergunta como foi escrita: confira o texto dela antes de achar que falta algo.
 - Ao dividir uma lista numerada, o campo pode renumerar o item solto e a parte que continua a lista voltar para "1.". Confira no print e, no WhatsApp Web, siga `usar-whatsapp-web`.
 - A caixa de marcar parece só do agente. A pessoa também a marca, e a marca dela não se desfaz.
-- A mensagem parece pedir assinatura como um e-mail. A conversa já mostra quem escreve.
+- A mensagem parece pedir assinatura. A conversa já mostra quem escreve.
 - Uma chave Pix em forma de e-mail parece só um destino de pagamento. Quando a organização a mandou para pagar, o comprovante vai para esse endereço, e perguntar se ele serve repete o que ela já disse.
 
 ## Scripts disponíveis
