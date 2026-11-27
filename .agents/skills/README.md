@@ -143,6 +143,7 @@ flowchart LR
     lancar_despesa_da_empresa["lancar-despesa-da-empresa"]
     lancar_despesa_pessoal["lancar-despesa-pessoal"]
     lancar_venda["lancar-venda"]
+    ler_anexo_da_conversa["ler-anexo-da-conversa"]
     levantar_ambiente_do_repositorio["levantar-ambiente-do-repositorio"]
     levantar_contexto_do_pull_request["levantar-contexto-do-pull-request"]
     levantar_gravacoes_de_reunioes["levantar-gravacoes-de-reunioes"]
@@ -373,6 +374,7 @@ flowchart LR
   conversar_no_whatsapp --> enviar_email
   conversar_no_whatsapp --> escrever_link
   conversar_no_whatsapp --> lancar_despesa_da_empresa
+  conversar_no_whatsapp --> ler_anexo_da_conversa
   conversar_no_whatsapp --> manter_contato_no_whatsapp
   conversar_no_whatsapp --> procurar_agenda
   conversar_no_whatsapp --> procurar_tarefa
@@ -919,6 +921,12 @@ flowchart LR
   lancar_venda --> registrar_ciclo_do_ativo
   lancar_venda --> registrar_preco_de_produto_fisico
   lancar_venda --> rotular_item
+  ler_anexo_da_conversa --> conversar_no_whatsapp
+  ler_anexo_da_conversa --> definir_tecido
+  ler_anexo_da_conversa --> reconhecer_imagem
+  ler_anexo_da_conversa --> transcrever_audio_e_video
+  ler_anexo_da_conversa --> triar_conversas
+  ler_anexo_da_conversa --> usar_whatsapp_web
   levantar_ambiente_do_repositorio --> criar_commit
   levantar_ambiente_do_repositorio --> criar_pull_request
   levantar_ambiente_do_repositorio --> escrever_codigo
