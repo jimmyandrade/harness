@@ -3,12 +3,14 @@ name: acompanhar-resposta-no-whatsapp
 description: Acompanha, por uma rotina que lê as conversas com a etiqueta de ação esperada, se o contato respondeu a uma mensagem enviada no WhatsApp, avisa quando a resposta chega e troca a etiqueta. Usada quando a mensagem espera resposta, como uma pergunta, um pedido ou um prazo, ou quando a pessoa pergunta se alguém já respondeu. Não serve para ler, redigir nem enviar a mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.9.1"
+  version: "0.10.0"
   related:
     - rascunhar-mensagem
     - acompanhar-retornos-pendentes
     - conversar-no-whatsapp
     - definir-negociacao
+    - definir-pessoa
+    - identificar-duplicata
     - definir-rotina
     - evoluir-habilidade
     - rotular-item
@@ -68,7 +70,7 @@ Sem nenhuma conversa na etiqueta, a rotina diz isso em uma linha.
 Conversa cuja última mensagem é nossa e é só uma abertura, como "Oi", mandada sem passar pelo Claude e sem linha no registro, deixa o assunto sem seguimento. A rotina avisa a pessoa, lê o cadastro e o histórico da pessoa ou da empresa, e propõe a mensagem de conteúdo, como `rascunhar-mensagem` manda, para a pessoa dar o sim. Ela não envia sozinha.
 Ao avisar, a rotina traz o que a pessoa decide, e não só o que mudou: a pergunta que falta responder, o rascunho proposto e o prazo.
 
-O rascunho que espera o sim da pessoa fica onde o resto do assunto vive, como comentário datado na página da negociação, da pessoa ou da empresa, por `definir-negociacao`, com o canal, o destino, o texto e o que falta decidir. Um arquivo local só guarda o que a rotina leva ao próximo disparo, como a leitura da lista, nunca o rascunho. Sem página do assunto, a rotina a procura antes de gravar e, não achando, avisa a pessoa em vez de deixar o rascunho num arquivo.
+O rascunho que espera o sim da pessoa fica onde o resto do assunto vive, como comentário datado na página da negociação, da pessoa ou da empresa, por `definir-negociacao`, com o canal, o destino, o texto e o que falta decidir. Um arquivo local só guarda o que a rotina leva ao próximo disparo, como a leitura da lista, nunca o rascunho. O destino é a página da pessoa, ou da empresa quando o contato fala por ela. Antes de gravar, a rotina procura essa página no banco de pessoas, por `identificar-duplicata`: achando uma, reaproveita; sem nenhuma, cria com `definir-pessoa`; com duas ou mais, desambigua pelo telefone, pelo perfil social e pela empresa, e pergunta à pessoa quando não decidir, sem gravar na página errada. A negociação do assunto recebe o resumo, e o texto do rascunho fica na página da pessoa. Sem página possível, a rotina avisa a pessoa em vez de deixar o rascunho num arquivo.
 
 Há um só comentário por mensagem. Quando a pessoa muda o texto, a rotina edita esse comentário no lugar, sem acrescentar outro, e a versão antiga não fica no Notion. Quando a mensagem sai, o comentário passa a ser o registro dela: o texto exatamente como foi enviado, com `Data da mensagem:`, o canal e quem falou. O rascunho recusado ou substituído por outra abordagem é apagado ou resolvido, e o desfecho não deixa texto que nunca saiu.
 Uma resposta que fecha o assunto, como uma confirmação ou um ok, não é a última palavra: para fechar o loop, a última mensagem de toda conversa é nossa, com um agradecimento curto. Ao avisar a pessoa que a resposta chegou, a sessão propõe essa mensagem, como `conversar-no-whatsapp` manda para o texto e o sim, com a janela de contato conferida como `rascunhar-mensagem` manda, e a conversa só ganha a etiqueta de assunto concluído depois que ela sai.
@@ -135,7 +137,7 @@ Se você só anotar que a contagem subiu, a conversa nova fica sem dono e a pess
 
 Se você deixar o rascunho que espera o sim num arquivo Markdown, ele sai do histórico do assunto e a próxima sessão não o vê ao abrir a página da pessoa.
 
-1. Ache a página da negociação, da pessoa ou da empresa.
+1. Procure a pessoa no banco de pessoas: reaproveite a que existe, crie a que falta, desambigue a duplicada.
 2. Grave o rascunho como comentário datado nela, com o canal, o destino e o que falta decidir.
 3. Mudança de texto edita o mesmo comentário. Quando o rascunho sair, ele vira o registro do texto enviado. Recusado, é apagado ou resolvido.
 
