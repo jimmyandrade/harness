@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.53.0"
+  version: "0.53.1"
   related:
     - convidar-para-evento
     - definir-agenda-de-popstar
@@ -94,7 +94,7 @@ Negócio ou reunião comercial, compromisso interno, prazo e entrega gravam aqui
 
 Antes de criar, busque no Google Agenda se o evento já existe.
 Use o nome, a data, a organização, a oportunidade relacionada ou outro identificador mínimo que o pedido trouxer. Sem nenhum desses, peça. Não crie.
-A busca inclui variação de nome, e não depende só do título exato.
+A busca inclui variação de nome e cobre todas as agendas, menos as `ignorada`. Achado em outra, altere lá.
 
 ```mermaid
 flowchart LR
@@ -312,7 +312,7 @@ Conferi a grafia. O título usou o nome canônico e o papel do encontro. A descr
 - Não pedir o Meet parece garantir um evento sem chamada. Com convidado, o Google Agenda pode anexá-lo sozinho.
 - Um evento criado parece completo sem a pergunta dos convidados. A pessoa que usa a agenda pode precisar do convite por e-mail, e a organização do ponto, do convite do evento do ponto, não do da montagem.
 - O horário de montagem parece decisão de quem expõe. É da organização, e a fonte dele vai na descrição do evento, com o link quando houver.
-- A busca vazia parece prova de que o compromisso não existe. Quando a pessoa o deu como marcado, é a agenda que falta, e o próximo passo é criar.
+- A busca vazia parece prova de que o compromisso não existe. Dado como marcado e nada achado em nenhuma agenda: crie.
 
 ## Scripts disponíveis
 
