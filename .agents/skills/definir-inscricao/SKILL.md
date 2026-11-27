@@ -5,18 +5,20 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-create-
 compatibility: Precisa de internet. A busca na lista de inscrições usa notion-ai-search no servidor notion.
 metadata:
   author: jimmyandrade
-  version: "0.21.0"
+  version: "0.22.0"
   aliases:
     - atualizar-inscricao
   related:
     - anexar-arquivo-no-notion
     - definir-grafia
+    - definir-agenda
     - definir-negociacao
     - definir-pagamento-da-inscricao
     - definir-tarefa
     - garantir-ingresso
     - inscrever-na-oportunidade
     - lancar-despesa-da-empresa
+    - procurar-agenda
     - procurar-email
     - procurar-inscricao
     - procurar-oportunidade
@@ -66,6 +68,10 @@ A linha nova nasce do modelo de página padrão da lista, quando a lista tem um,
 Quem fez a inscrição é a pessoa que pediu, mesmo quando o Claude preencheu e enviou, e não o usuário da conexão do agente. A tela de confirmação do envio de um formulário entra nos comprovantes sem perguntar.
 
 Quando a mensagem ou a foto confirma a participação, ou a taxa já foi paga, inteira ou em parcela, o status da inscrição passa ao de inscrição confirmada. Se a própria plataforma avisa que registrar interesse não garante participação, o status é o de pré-cadastro até a organização selecionar. O valor é um status que a lista já tem. Não invente status. Não escreva o status nas observações nem no corpo.
+
+Quando o status passa a inscrição confirmada, aprovada ou paga, ou quando a oportunidade nasce já com a inscrição confirmada, o mesmo fluxo garante o compromisso no Google Agenda. Busque o evento por `procurar-agenda`, pelo nome canônico e pela data da edição. Se faltar, crie-o por `definir-agenda`, com a montagem e os horários que a organização informou, a descrição com o link da página canônica da oportunidade e a pergunta de quem entra como convidado quando mais de uma pessoa participa. 
+
+Ao criar, confira os outros eventos da agenda no mesmo período e conte os conflitos. Não apague nem mova nenhum sem ordem da pessoa.
 
 A foto do pedido que ela enviou entra nos comprovantes na mesma gravação, mesmo sem ela nomear essa propriedade. Não grave a foto no corpo. O arquivo sobe por upload e entra numa atualização da página depois de criá-la: a criação não aceita o arquivo enviado. O arquivo local sobe como `anexar-arquivo-no-notion` manda.
 
@@ -119,7 +125,11 @@ Encerramento. Quando a inscrição encerrou, por formulário fechado, edital enc
 
 Depois de gravar, leia a página de volta e confira cada propriedade gravada contra o que você quis gravar: o status, as datas, as observações e os comprovantes. Diga o que a leitura mostrou, inclusive o que ficou fora do esperado, como o título que não acompanha o status. Não diga que gravou sem essa leitura.
 
-Diga a página, o status que ela tinha e o status que ela tem agora. Na linha nova, diga que a edição já está cadastrada, com as datas e o dia da semana, que a busca na lista de inscrições não achou essa edição, e que a inscrição entrou no registro. Dê o link da inscrição. Se a foto entrou, diga que ela está nos comprovantes. Diga que, se foi engano, a pessoa desfaz. Se a foto não trouxer quem fez a inscrição nem para quem ela foi feita, diga a edição e não cadastre. Exija essas duas marcações. Não diga que o evento inteiro foi confirmado. Se o status já era esse, diga, comemore e não grave de novo. Liste os valores que ficaram sem propriedade. Quando a pessoa escreveu o pedido sem nomear a habilidade, termine indicando `/definir-inscricao` para a próxima vez. Na foto sem esses nomes, feche nas duas marcações.
+Diga a página, o status que ela tinha e o status que ela tem agora. Na linha nova, diga que a edição já está cadastrada, com as datas e o dia da semana, que a busca na lista de inscrições não achou essa edição, e que a inscrição entrou no registro. Dê o link da inscrição. Se a foto entrou, diga que ela está nos comprovantes.
+
+Diga o evento da agenda que existia ou que você criou, com o link, e quantos conflitos achou.
+
+Diga que, se foi engano, a pessoa desfaz. Se a foto não trouxer quem fez a inscrição nem para quem ela foi feita, diga a edição e não cadastre. Exija essas duas marcações. Não diga que o evento inteiro foi confirmado. Se o status já era esse, diga, comemore e não grave de novo. Liste os valores que ficaram sem propriedade. Quando a pessoa escreveu o pedido sem nomear a habilidade, termine indicando `/definir-inscricao` para a próxima vez. Na foto sem esses nomes, feche nas duas marcações.
 
 ## Problemas comuns
 
@@ -194,6 +204,14 @@ Se você perguntar se pode cadastrar, ou parar porque a linha não existe, a ins
 2. Nenhuma casa, e já há quem fez a inscrição e para quem ela foi feita: crie a linha e comemore. Sem isso, não cadastre e exija as duas marcações.
 3. Uma casa: atualize essa. Não crie outra.
 
+### Confirmada sem o compromisso na agenda
+
+Se você gravar o status de inscrição confirmada e parar, a feira fica sem evento na agenda e a pessoa só descobre dias depois, quando pergunta por ela.
+
+1. Busque o evento na agenda quando o status passar a confirmada, aprovada ou paga.
+2. Se faltar, crie-o por `definir-agenda` e conte os conflitos, sem apagar nada.
+3. Diga o que foi criado.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
@@ -242,6 +260,7 @@ busquei a inscrição da Loja Exemplo como expositora no Festival Rota Sul 2026.
 - O campo opcional parece dispensável. Quem seleciona lê o formulário inteiro, e o campo vazio é uma chance perdida.
 - A data da confirmação só entra com a resposta da organização, dita pela pessoa ou lida nela, ou se `garantir-ingresso` viu o pedido confirmado na tela. O envio não conta.
 - A criação da página parece aceitar o arquivo enviado nos comprovantes. Ela recusa: o arquivo entra na atualização seguinte.
+- A inscrição confirmada parece fechar no Notion. O compromisso também precisa estar na agenda, e quem confere é este fluxo, não a pessoa dias depois.
 - A taxa paga parece fechar o assunto. O comprovante ainda precisa chegar à organização, com o pedido de confirmar o recebimento e a vaga.
 
 ## Scripts disponíveis
