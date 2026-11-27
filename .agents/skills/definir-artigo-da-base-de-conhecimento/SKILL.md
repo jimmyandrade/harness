@@ -4,7 +4,7 @@ description: Cria, revisa e atualiza o artigo da base de conhecimento que respon
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.9.2"
+  version: "0.9.4"
   related:
     - capturar-tela-de-passo-a-passo
     - criar-habilidade
@@ -177,6 +177,7 @@ Antes de concluir, confira o artigo com esta lista:
 
 Corrija o que falhar e confira de novo.
 A mensagem final da resposta traz o link de cada artigo criado ou alterado, em markdown com o título da página, como texto próprio dela.
+Logo depois, a mesma mensagem lista os artigos que a base já tem, cada um com o título como link, e marca os do turno como criado ou atualizado. A pessoa vê o conjunto sem precisar pedir.
 O link escrito antes de um quadro de encerramento, como o de `wrap_up`, ou "o link está acima" não conta, porque a pessoa pode não ver esse trecho.
 Uma página publicada sem link na mensagem final deixa o turno aberto.
 
@@ -248,6 +249,7 @@ Se você escrever o link do artigo antes do quadro de encerramento e a mensagem 
 1. Ponha o link do artigo, em markdown com o título da página, na mensagem final.
 2. Repita o link ali mesmo que já tenha aparecido antes.
 3. Releia a mensagem final antes de enviar e confira que cada página criada ou alterada tem o link.
+4. Confira que a lista dos artigos que a base já tem também está na mensagem.
 
 ### Endereço da ferramenta só por apelido
 
@@ -288,6 +290,7 @@ Os critérios ficaram de fora. Cada guardrail virou item do diagnóstico rápido
 - O link escrito antes do quadro de encerramento parece entregar o artigo. A pessoa lê a mensagem final, então o link vai nela.
 - Um caso visual parece bem descrito pela conversa e pelo print do pull request. O print do pull request pode mostrar outra variante, com o mesmo nome, e só o Storybook aberto e o código mostram qual é qual.
 - No Confluence, subir o arquivo pela API chamada de dentro da página falha na verificação de origem. O conector devolve um comando de envio que sobe o arquivo, e a lista de anexos da página devolve a referência de cada um para o bloco da imagem.
+- Uma página publicada com os blocos de imagem parece ter as imagens. Um conector antigo do Confluence descarta o bloco sem erro e a página sai só com o texto: releia o corpo salvo, conte os blocos de imagem e, se faltarem, republique pelo conector principal antes de dizer que está pronto.
 - Um artigo que manda usar uma ferramenta parece valer para todo mundo. Antes de dizer que uma orientação contradiz o artigo, confira a ordem dos acessos: quem ainda não recebeu a ferramenta segue outro caminho.
 
 ## Scripts disponíveis

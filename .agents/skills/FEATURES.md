@@ -1896,6 +1896,21 @@ How these skills relate is in `README.md`, in this folder.
   - [ ] Divergent sources produce a per-field diff before any change
   - [ ] An empty database parameter makes the skill call the database lookup skill and not ask for the name first
 
+### ler-anexo-da-conversa
+- **Stability**: experimental
+- **Description**: Open each attachment of a conversation, such as audio, video with speech, PDF, and photo, and hand it to the skill that can read it, recording the result in the conversation record and in the subject's registry
+- **Properties**:
+  - Lives at `.agents/skills/ler-anexo-da-conversa/SKILL.md`
+  - Opens every attachment in the same reading, in any task and without waiting for a request, instead of listing only its name and size
+  - Sends audio and speech video to transcrever-audio-e-video and images to reconhecer-imagem, and reads the text of a document and the images inside it
+  - Shows the whole transcription with the doubtful word marked as uncertain, and records it as the dated comment of the conversation
+  - Reacts to a transcribed audio only when the reaction parameter is filled
+  - Saves the document's data in the registry the subject's skill names, with the file in its file field, and says what changed and what does not match
+  - Asks for the order status when a price list cites an item the person ordered
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [ ] Three cases validated with the person
+
 ### limpar-copias-de-trabalho
 - **Stability**: experimental
 - **Description**: Remove the git worktrees and the local branches already merged into the base, including those of other sessions, after checking that nothing is lost
