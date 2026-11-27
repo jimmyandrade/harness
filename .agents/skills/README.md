@@ -104,6 +104,7 @@ flowchart LR
     definir_prestacao_de_contas["definir-prestacao-de-contas"]
     definir_recurso_de_aprendizado["definir-recurso-de-aprendizado"]
     definir_reel_do_instagram["definir-reel-do-instagram"]
+    definir_referencia_cultural["definir-referencia-cultural"]
     definir_registro_de_reuniao["definir-registro-de-reuniao"]
     definir_requisito_de_compra["definir-requisito-de-compra"]
     definir_reserva["definir-reserva"]
@@ -328,6 +329,7 @@ flowchart LR
   conciliar_recebimento --> lancar_venda
   conciliar_recebimento --> procurar_banco_de_dados
   conciliar_recebimento --> rotular_item
+  conferir_termo_de_outro_idioma --> definir_referencia_cultural
   conferir_termo_de_outro_idioma --> procurar_banco_de_dados
   configurar_harness_de_negocio --> criar_pull_request
   configurar_harness_de_negocio --> definir_issue_do_github
@@ -679,6 +681,11 @@ flowchart LR
   definir_reel_do_instagram --> definir_roteiro_de_video
   definir_reel_do_instagram --> escrever_legenda_do_post
   definir_reel_do_instagram --> planejar_calendario_de_conteudo
+  definir_referencia_cultural --> conferir_termo_de_outro_idioma
+  definir_referencia_cultural --> definir_localidade_geografica
+  definir_referencia_cultural --> escrever_link
+  definir_referencia_cultural --> identificar_duplicata
+  definir_referencia_cultural --> procurar_banco_de_dados
   definir_registro_de_reuniao --> definir_agenda
   definir_registro_de_reuniao --> definir_grafia
   definir_registro_de_reuniao --> definir_pessoa

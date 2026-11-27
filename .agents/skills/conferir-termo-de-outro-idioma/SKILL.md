@@ -4,10 +4,11 @@ description: Confere o significado de uma palavra de outro idioma, como uma lín
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.2.1"
   aliases:
     - conferir-termo-de-lingua-indigena
   related:
+    - definir-referencia-cultural
     - procurar-banco-de-dados
 ---
 
@@ -29,7 +30,7 @@ Receba a palavra, o sentido que alguém afirmou e onde ela será usada. Pergunte
 
 ### Passo 2
 
-Procure o termo no banco de referências do projeto antes de pesquisar na web. Se já foi conferido, use o registro e diga a data da consulta. Sem o banco na conexão, siga com a pesquisa e diga que não consultou o banco.
+Procure o termo no banco de referências do projeto antes de pesquisar na web, como `definir-referencia-cultural` manda. Se já foi conferido, use o registro e diga a data da consulta. Sem o banco na conexão, siga com a pesquisa e diga que não consultou o banco.
 
 ### Passo 3
 
@@ -44,7 +45,7 @@ Quando uma palavra só foi achada numa língua, não a atribua a outra. Quando o
 
 ### Passo 5
 
-Cada fonte achada, usada ou descartada, é registrada no banco de referências do projeto.
+Cada fonte achada, usada ou descartada, segue `definir-referencia-cultural` para ser registrada.
 
 ## Problemas comuns
 
