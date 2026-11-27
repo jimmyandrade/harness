@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.15.0"
+  version: "0.15.1"
   aliases:
     - definir-despesa
     - lancar-despesa
@@ -196,8 +196,9 @@ Se você gravar só com recebedor, valor e data, a despesa entra sem saber o que
 Se você corrigir sozinho o identificador que diverge do cadastro, a pessoa não sabe que a chave ou o documento mudou, e um golpe passa como engano.
 
 1. Compare a chave Pix, o CNPJ, o nome e a instituição do comprovante com o cadastro da recebedora.
-2. Mostre os dois valores lado a lado e avise que pode ser golpe.
-3. Corrija depois da decisão da pessoa.
+2. Consulte o CNPJ no registro público, como `identificar-pagamento` manda. Se for a mesma empresa, atualize o cadastro e diga a fonte.
+3. Sem essa confirmação, mostre os dois valores lado a lado e avise que pode ser golpe.
+4. Corrija depois da decisão da pessoa.
 
 ### Categoria deixada vazia
 
