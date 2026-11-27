@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.13.0"
+  version: "0.14.0"
   related:
     - abordar-contato
     - acompanhar-retornos-pendentes
@@ -18,6 +18,7 @@ metadata:
     - organizar-ponto-de-contato
     - procurar-banco-de-dados
     - procurar-email
+    - perfilar-tom-de-voz
     - procurar-oportunidade
     - redigir-com-tom-de-voz
     - rotular-item
@@ -79,6 +80,10 @@ Grave cada troca como um comentário na discussão da página da negociação, o
 Não deduza o canal da mensagem. Se a pessoa não o disse e a evidência não deixa claro se veio por Instagram, WhatsApp, e-mail ou outro, pergunte o canal antes do primeiro registro. Antes de concluir, compare o canal e o identificador gravados com a evidência e corrija qualquer dedução.
 
 Com o canal WhatsApp confirmado, veja se o número foi dado. Sem ele, leia-o no WhatsApp Web, por `usar-whatsapp-web`, e só pergunte se nada o traz. Enquanto não houver o número, escreva "número de WhatsApp pendente de confirmação" no comentário, sem preencher o telefone com dado incerto nem reaproveitar outro número.
+
+Quando a pessoa entrega o histórico de uma conversa, como uma exportação, um zip, um print ou um texto colado, ela pede também, sem dizer, que tudo o que faz sentido nele fique no Notion, na mesma rodada e sem perguntar. Leia o histórico todo, leia antes os comentários que já existem e grave um comentário datado por data ou bloco de mensagens, com a pendência de cada bloco. Ele entra na página da pessoa e, quando aplicável, na da empresa, da oportunidade ou do grupo.
+
+Chave Pix, documento e outro dado sensível ficam de fora. O perfil do tom segue `perfilar-tom-de-voz`, também na mesma rodada. A resposta diz o que persistiu, com os links, e o que ficou de fora, com o motivo.
 
 Ao registrar ou retomar uma negociação comercial, diga em que etapa do funil ela está, por `diagnosticar-funil`.
 
@@ -174,6 +179,14 @@ Se você só relatar a recusa, a empresa volta à lista na próxima compra e a c
 2. Escreva a data e o que ela recusou na nota do contato no WhatsApp.
 3. Aplique o rótulo de estado de concluída, por `rotular-item`.
 
+### Histórico entregue só lido
+
+Se você ler o histórico que a pessoa entregou só para ajustar o rascunho, os blocos que a página não tem ficam de fora do Notion, e a pessoa descobre quando cobra.
+
+1. Compare o histórico todo com os comentários que já existem.
+2. Grave um comentário datado por bloco que falta, sem dado sensível e com a pendência, e siga `perfilar-tom-de-voz`.
+3. Diga o que persistiu e o que ficou de fora.
+
 ### Registro que espera pergunta
 
 Se você enviar a mensagem e só oferecer registrar a troca, a negociação fica sem o que o negócio disse e a pessoa tem de pedir o registro.
@@ -229,6 +242,10 @@ Não havia conector do Instagram. Não pedi o texto: abri a conversa no navegado
 
 A mensagem colada não tinha data. Li os comentários: foi enviada pelo Instagram em 9 de maio, e a retomada sai seis meses depois, pelo WhatsApp. Troquei o "hoje" dela pelo que mudou desde então, escrevi "no Instagram" para o contato anterior e perguntei como o número foi achado antes de afirmar a origem.
 
+### segue o zip da conversa com a Bia, organizadora da Feira Exemplo
+
+A página dela só tinha a troca de setembro. Gravei um comentário por bloco que faltava: a conversa de maio e junho, os combinados financeiros de junho e os pagamentos de julho a setembro, cada um com a data, o canal e a pendência, sem a chave Pix. Perfilei o tom por `perfilar-tom-de-voz` e disse que um áudio não transcrito ficou de fora.
+
 ### a Isadora também respondeu pela Feira Exemplo
 
 Conferi se a pessoa abordada aceita mais de uma pessoa antes de somar Isadora Ribeiro à negociação.
@@ -243,6 +260,7 @@ Conferi se a pessoa abordada aceita mais de uma pessoa antes de somar Isadora Ri
 - A conversa não tem data: use `Data aproximada:` e diga de onde veio.
 - A pessoa passa uma especificação de grade, cores, modelagem ou quantidade na conversa: grave na negociação já, mesmo sem a empresa ter respondido. Não deixe só na memória.
 - A mensagem colada não diz o canal: pergunte antes do primeiro registro. Não presuma Instagram, WhatsApp nem e-mail.
+- A pessoa entrega o histórico de uma conversa: grave os blocos que faltam e perfile o tom na mesma rodada, sem perguntar, mesmo que ela só tenha pedido o rascunho.
 - Várias mensagens no mesmo dia e assunto: um comentário só, com os horários.
 - Quem recebeu a mensagem não tem página na lista de pessoas, nem a organização que ela representa na lista de empresas: cadastre as duas na mesma rodada do envio, sem perguntar, e deixe pendente o dado que nenhuma fonte responde.
 - A pessoa corrige um fato já gravado: novo comentário datado com a correção. Não apague o anterior.
@@ -260,6 +278,7 @@ Conferi se a pessoa abordada aceita mais de uma pessoa antes de somar Isadora Ri
 - A mensagem anterior parece valer como está hoje. O "hoje" e o "estamos" dela eram do dia em que foi enviada, e o canal dela pode não ser o de agora.
 - Sem conector do canal, parece que só a pessoa tem a mensagem. A conta dela está logada no navegador do app e na extensão do navegador, e a leitura é sua.
 - A especificação dita na conversa parece já guardada porque o assistente a repete. Só o registro na negociação a guarda para as outras sessões.
+- O histórico entregue parece contexto do rascunho. Ele pede o registro de tudo o que faz sentido e o perfil do tom, e só a troca mais recente na página não basta.
 - Perguntar "cadastro a pessoa?" depois do envio parece cuidado. O cadastro e os rótulos da conversa são parte do envio, e a pessoa só decide o que nenhuma fonte responde.
 - A empresa abordada e a pessoa abordada são relações. Telefone e grafias vêm por rollup e não se gravam aqui.
 

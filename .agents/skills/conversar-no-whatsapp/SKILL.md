@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, e lê o pedido, quem pediu, a data, o que o contato afirmou e o que falta. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp ou conferir o que alguém pediu. Não serve para escrever ou enviar a mensagem, redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.44.5"
+  version: "0.45.1"
   aliases:
     - redigir-mensagem-de-whatsapp
   related:
@@ -18,6 +18,7 @@ metadata:
     - definir-pessoa
     - definir-rotina
     - definir-tarefa
+    - definir-tecido
     - definir-viagem
     - definir-vocabulario
     - diagnosticar-funil
@@ -81,6 +82,12 @@ Todo áudio, e todo vídeo curto com fala, que aparece na conversa lida, exporta
 Mostre o texto inteiro, sem resumir, com a palavra que pode estar errada marcada como incerta. A transcrição entra no registro da conversa, como o comentário datado, e no que você conclui dela: nunca escreva que o áudio "não foi transcrito" quando a transcrição roda local e sem custo. Só a falha da transcrição, dita com o que falhou, ou o programa ou o modelo por instalar, que pede o sim, deixam o áudio sem texto.
 
 Com `Reação ao áudio transcrito` preenchida, reaja ao áudio, sem perguntar.
+
+Um documento de dados técnicos que um contato manda, como a ficha técnica de um tecido em PDF, a etiqueta, a lista de preços ou a foto de uma amostra, também entra na leitura, sem esperar pedido. Baixe cada anexo como o áudio, abra e leia o conteúdo, e não liste só o nome e o tamanho. No WhatsApp Web, o download do documento segue `usar-whatsapp-web`, e uma imagem segue `reconhecer-imagem`.
+
+Depois de ler, extraia os dados, grave-os no cadastro que a skill do assunto manda, como `definir-tecido` para a ficha de um tecido, com o anexo no campo de arquivo dele, e diga à pessoa o que mudou e o que não bate, como o código da etiqueta diferente do código da lista de preços.
+
+Quando a lista de preços cita um item que a pessoa encomendou, pergunte a situação do pedido, como a cor, o pagamento e a chegada, e grave-a na página do item, como `definir-tecido` manda.
 
 Se o canal não mostrar o histórico inteiro, diga que ele pode estar incompleto; no WhatsApp Web, siga `usar-whatsapp-web`. Procure noutro lugar só se a pessoa pedir.
 
@@ -158,6 +165,14 @@ Se você deixar entre colchetes, ou perguntar à pessoa, o que ela achou de um e
 1. Abra a página da edição e leia o bloco de notas de reunião inteiro.
 2. Leve o que valeu a pena e a ressalva para o rascunho.
 3. Pergunte só o que o registro não diz.
+
+### Anexo do contato listado sem abrir
+
+Se você listar só o nome e o tamanho dos PDFs, das etiquetas ou das fotos que o contato mandou, a pessoa pergunta se você chegou a vê-los e os dados ficam fora do cadastro.
+
+1. Baixe e leia cada anexo na mesma leitura, sem esperar pedido.
+2. Grave os dados no cadastro do assunto e o anexo no campo de arquivo dele.
+3. Diga o que mudou e o que não bate entre os anexos, e pergunte a situação do pedido que a lista de preços cita.
 
 ### Contato deixado sem cadastro
 
@@ -245,6 +260,10 @@ Pus a correção como primeiro ponto de ação: a marca não é um brechó, é u
 
 Transcrevi o áudio na mesma rodada, sem perguntar, pelos dois motores. O comentário datado do registro traz o texto inteiro, com uma palavra marcada como incerta, e o histórico foi lido já com o que o áudio diz.
 
+### a fornecedora de tecidos mandou três PDFs de ficha técnica às 16h24
+
+Baixei e li os três PDFs na mesma leitura, sem a pessoa pedir. Cadastrei cada tecido por `definir-tecido`, com a ficha no campo de arquivo, e avisei que o código da etiqueta de um deles não bate com o da lista de preços. A lista citava um tecido que a pessoa encomendou, e perguntei se ele já foi pago e se já chegou, para gravar na página dele.
+
 ## Casos-limite
 
 - Nenhuma aba do WhatsApp Web e o QR code na tela, ou a extensão sem resposta: pare, peça a conexão e crie a rotina de lembrete, como `usar-whatsapp-web` manda.
@@ -263,6 +282,7 @@ Transcrevi o áudio na mesma rodada, sem perguntar, pelos dois motores. O coment
 - Uma resposta sem data nem valor parece não confirmar nada. O que ela afirma está confirmado, e só o que ela omite é pendência.
 
 - O áudio parece pedir licença porque a conversa foi só entregue para registro ou perfil. A transcrição é local e gratuita e muda a leitura do histórico: faça-a na mesma rodada.
+- Um anexo listado com nome e tamanho parece uma leitura feita. Sem abrir o conteúdo, o dado do documento não chegou ao cadastro e a pessoa tem de cobrar.
 
 ## Scripts disponíveis
 
