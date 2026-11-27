@@ -246,7 +246,10 @@ flowchart LR
   acompanhar_producao_de_produto_fisico --> procurar_banco_de_dados
   acompanhar_resposta_no_whatsapp --> acompanhar_retornos_pendentes
   acompanhar_resposta_no_whatsapp --> conversar_no_whatsapp
+  acompanhar_resposta_no_whatsapp --> definir_negociacao
+  acompanhar_resposta_no_whatsapp --> definir_pessoa
   acompanhar_resposta_no_whatsapp --> definir_rotina
+  acompanhar_resposta_no_whatsapp --> identificar_duplicata
   acompanhar_resposta_no_whatsapp --> rascunhar_mensagem
   acompanhar_resposta_no_whatsapp --> rotular_item
   acompanhar_resposta_no_whatsapp --> usar_whatsapp_web
