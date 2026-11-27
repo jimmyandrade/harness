@@ -3,7 +3,7 @@ name: manter-contato-no-whatsapp
 description: Mantém o contato de uma conversa do WhatsApp Web em dia depois de ler ou enviar, com o link da página da pessoa na nota, o número salvo no padrão de nome e a lista de conferência da conversa. Usada pela sessão dona do WhatsApp Web depois de cada leitura ou envio, mesmo sem dizer contato. Não serve para abrir a aba, achar a conversa, redigir a mensagem nem rotular sozinha.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.4.1"
   related:
     - conversar-no-whatsapp
     - definir-empresa
@@ -51,6 +51,7 @@ Depois de enviar e depois de receber, a troca entra num comentário datado na p�
 ### Passo 3
 
 Com `Salvar contato sem número salvo` em `sim`, salve o número de uma conversa que ainda não está nos contatos, no `Padrão do nome do contato`, com o nome e a organização lidos da página da pessoa ou da conversa.
+Salvar o contato não pede pergunta nem "sim" e não espera o rascunho: acontece assim que o número entra na conversa, antes de redigir, mesmo quando o envio ainda espera a aprovação. Só o envio de mensagem a terceiros espera o "sim".
 O contato salvo sem a organização recebe-a no nome. Sem a organização, pergunte à pessoa.
 
 A conversa cujo nome de exibição é só o número é contato sem nome, e vale para qualquer leitura ou envio, inclusive a triagem e o pedido de outra sessão. Antes de salvar, procure a empresa e a pessoa no data source e confira o cadastro: o telefone com o 9, o link `wa.me` e a pessoa responsável. O que falta é cadastrado ou completado por `definir-pessoa` e `definir-empresa`. Depois de salvar, grave a nota com o link da página e mostre a lista do Passo 4 com o resultado de cada item. Sem o nome da pessoa, use o setor ou o papel que a conversa mostra, e pergunte só quando nem isso houver.
@@ -59,7 +60,7 @@ Celular do Brasil leva o 9 depois do DDD, mesmo quando a conversa antiga mostra 
 
 ### Passo 4
 
-Ao abrir uma conversa, antes de redigir ou enviar a primeira mensagem nossa, confira a lista: o contato, a nota e os rótulos não esperam o envio. Depois de ler ou enviar, inclusive num envio que outra sessão pediu, confira de novo antes de responder a quem pediu, uma vez:
+Ao abrir uma conversa, antes de redigir a primeira mensagem nossa, confira a lista e faça o que falta: o contato salvo, a pessoa ou a empresa cadastrada, a nota e os rótulos de contexto. Nada disso pede pergunta nem espera o "sim" do rascunho, porque só o envio a terceiros espera. Depois de ler ou enviar, inclusive num envio que outra sessão pediu, confira de novo antes de responder a quem pediu, uma vez:
 - [ ] o rótulo de estado e o de contexto, por `rotular-item`;
 - [ ] o nome do contato;
 - [ ] a nota com o link da página;
@@ -99,11 +100,12 @@ Se você ler uma conversa a pedido de outra sessão e responder sem rotular, a p
 
 ### Primeira mensagem antes do contato
 
-Se você enviar a primeira mensagem a um número novo e deixar o contato, a nota e os rótulos para depois, a conversa fica sem nome, sem link da página e sem estado, e a pessoa cobra o que devia ter vindo antes.
+Se você deixar o contato, a nota e os rótulos de um número novo para depois do "sim" do rascunho, ou perguntar se pode salvar, a conversa fica sem nome, sem link da página e sem estado, e a pessoa cobra o que devia ter vindo antes. Salvar o contato não pede aprovação e não espera o rascunho.
 
 1. Ao abrir a conversa, confira a lista do Passo 4 antes de redigir.
-2. Salve o contato, grave a nota e rotule, e só então envie.
-3. Diga a quem pediu o que ficou feito.
+2. Salve o contato, cadastre a pessoa ou a empresa que faltar, grave a nota e rotule, sem perguntar.
+3. Redija e mostre o rascunho, e só o envio espera o "sim".
+4. Diga a quem pediu o que ficou feito.
 
 ### Número sem nome na leitura
 
@@ -129,12 +131,17 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 Li a conversa e, antes de responder, conferi a lista: rotulei com estado e contexto, a nota do contato já abria com o link da página, o registro no data source estava feito. Disse à sessão que pediu os rótulos que ficaram.
 
+### primeira mensagem a um número novo indicado por um contato
+
+Recebi o número da Gráfica Exemplo, indicada pela Ana. Antes de redigir, sem perguntar, salvei o contato como "Bia (Gráfica Exemplo)", cadastrei a empresa e a pessoa por `definir-empresa` e `definir-pessoa`, gravei a nota com o link da página e o `wa.me` e apliquei os rótulos de contexto. Depois mostrei o rascunho e esperei o "sim" só para enviar.
+
 ### conversa com um número que não está nos contatos
 
 Com `Salvar contato sem número salvo` em `sim`, salvei como "Caio (Casa Azul)", com a organização lida da página da pessoa, e gravei na página o link da conversa.
 
 ## Casos-limite
 
+- O número é novo e o envio espera o "sim" do rascunho: salve o contato, cadastre, grave a nota e rotule antes de redigir, sem perguntar. Só o envio espera.
 - A pessoa não tem página no data source: cadastre-a por `definir-pessoa` ou `definir-empresa` antes da nota, sem perguntar.
 - A conversa é um grupo: sem nota de contato, o que ela guardaria vai para o registro no data source.
 - `Salvar contato sem número salvo` em `não`: deixe o número como está, diga que não salvou e inclua o contato no relatório para a pessoa salvar.
@@ -144,6 +151,7 @@ Com `Salvar contato sem número salvo` em `sim`, salvei como "Caio (Casa Azul)",
 ## Pegadinhas
 
 - A sessão que pediu a leitura não vê o que a dona fez no contato: diga o que mudou.
+- Salvar o contato parece uma ação que espera o "sim" do rascunho, junto com o envio. Não espera: só o envio a terceiros espera.
 - Salvar o contato parece o fim. Sem o cadastro conferido e a nota gravada, a pessoa não vê o que foi verificado.
 - A leitura de triagem parece só olhar, então deixar o número sem nome parece inofensivo. Abrir a conversa já pede o nome salvo.
 - Senha, código e documento de pessoa nunca entram na nota.
