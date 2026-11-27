@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.3.1"
   aliases:
     - acompanhar-producao-de-produto
     - acompanhar-producao-de-peca
@@ -100,6 +100,8 @@ flowchart LR
 
 Some só a quantidade dita. Sem número, a quantidade é 1 só quando a pessoa falou de uma unidade. Caso contrário, pergunte. Não preencha o título da linha: ele é gerado.
 
+Antes de criar linhas no `Banco de unidades`, compare a quantidade cortada e a produzida da variação com as unidades que já existem ligadas a ela. O número da unidade entra no número de série da etiqueta e do QR, então a próxima numeração só sai dessa conta. Se a quantidade da variação for maior que a de unidades cadastradas, ou menor, pare, mostre a diferença e pergunte antes de numerar. Não renumere unidade que já existe sem o sim da pessoa.
+
 ### Passo 4
 
 Molde e molde-base são relações do produto. Relacione o registro que já existe. O molde-base é o ponto de partida. O molde é o final do produto, mesmo quando é o mesmo registro. Não crie o molde sem pedir.
@@ -139,6 +141,14 @@ Se você gravar a unidade sem o tamanho, ela não cai em nenhuma linha e o SKU p
 1. Pergunte cada tamanho, como XGG.
 2. Grave só depois da resposta.
 
+### Numeração sem conferir a variação
+
+Se você numerar as unidades novas pelas linhas do `Banco de unidades` sem olhar a quantidade cortada e a produzida da variação, uma peça que nunca foi cadastrada fica de fora e o número do QR sai errado.
+
+1. Compare a quantidade da variação com as unidades ligadas a ela antes de criar a primeira.
+2. Se divergirem, mostre a diferença e pergunte, antes de criar e não depois.
+3. Renumerar o que já foi criado só com o sim da pessoa.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
@@ -159,8 +169,13 @@ Confirmei o tamanho XGG e relacionei o molde da camisa. Não criei tarefa.
 
 Acrescentei os dois tipos em Etiquetas costuradas da unidade da blusa M. O status da produção ficou como estava.
 
+### cadastra 10 unidades da variação que marca 2 cortadas e tem 1 unidade no banco
+
+Mostrei a diferença, uma peça sem cadastro, e perguntei se ela entra antes de numerar as 10 novas. Não criei nenhuma antes da resposta.
+
 ## Casos-limite
 
+- A quantidade da variação não bate com as unidades cadastradas: pergunte antes de numerar. Não renumere o que existe sem o sim.
 - Banco de produtos ou de variações e produção fora do workspace conectado: pare.
 - O produto não existe: diga e pergunte. Não crie aqui.
 - Produzidas passaria de previstas: pergunte antes de gravar.
@@ -172,6 +187,7 @@ Acrescentei os dois tipos em Etiquetas costuradas da unidade da blusa M. O statu
 
 - O produto tem o status da produção, mas a quantidade por tamanho fica no banco de variações e produção.
 - Falta de produção, total produzido, total previsto e progresso são fórmulas. Não grave nelas.
+- Numerar a partir da última unidade parece certo. A variação pode ter peça que nunca virou unidade, e o número vai para a etiqueta e o QR.
 - Imprimir parece etiquetar. A unidade só conta como etiquetada com os tipos exigidos em `Etiquetas costuradas`.
 
 ## Scripts disponíveis
