@@ -12,6 +12,12 @@
       "prompt": "Envie uma pergunta ao contato no WhatsApp e acompanhe a resposta",
       "expected_output": "A conversa recebe a etiqueta Ação esperada por rotular-item. A rotina que já lê o WhatsApp Web não é criada de novo nem editada. Quando o contato responde, a rotina avisa e troca Ação esperada por Respondida.",
       "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Enviei a mensagem à Ana por WhatsApp e a lista mostra uma resposta nova dela, com 1 não lida. Veja o que ela disse",
+      "expected_output": "A sessão não pergunta se pode ler: o pedido de envio já autoriza. Ela abre a conversa, lê a resposta da Ana, diz que a conversa ficou marcada como lida e traz na mesma resposta o que a Ana pede, o que a pessoa ou a sessão precisa fazer, com o registro e a leitura já adiantados, e o texto da próxima mensagem pronto para o sim. Só pergunta antes de enviar a terceiros, pagar, aceitar termos ou apagar algo.",
+      "files": []
     }
   ]
 }

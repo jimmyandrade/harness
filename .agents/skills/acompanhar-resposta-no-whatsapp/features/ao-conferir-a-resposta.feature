@@ -34,3 +34,19 @@ Funcionalidade: Acompanhar pela etiqueta
       Quando a linha do contato mostra a resposta
       Então a rotina avisa o horário e a prévia
       E troca a etiqueta Ação esperada por Respondida
+
+Funcionalidade: Ler a resposta sem pedir confirmação
+
+  Regra: depois de enviar a pedido da pessoa, a sessão lê a resposta nova sozinha
+
+    Exemplo: o contato respondeu logo depois do envio
+      Dado que a sessão acabou de enviar uma mensagem a pedido da pessoa
+      Quando a lista mostra uma resposta nova do contato, com contador de não lidas
+      Então a sessão abre a conversa e lê a resposta sem perguntar
+      E diz que a conversa ficou marcada como lida
+      E traz na mesma resposta o que a resposta pede, o que falta fazer e o texto da próxima mensagem pronto para o sim
+
+    Exemplo: a resposta pede uma mensagem a um terceiro
+      Dado que a sessão leu a resposta do contato
+      Quando a resposta pede que a pessoa avise outra pessoa
+      Então a sessão propõe o texto e espera o sim antes de enviar
