@@ -3,7 +3,7 @@ name: evoluir-habilidade
 description: Muda uma skill ou as instruções do projeto a pedido ou pelo feedback de uma execução, como falha ou correção da pessoa, e abre o pull request no repositório de origem. Usada ao pedir uma regra nova, mesmo sem dizer evoluir, e ao fim de cada skill. Não serve para testar a skill, criar a primeira versão, ver se a descrição dispara, só revisar nem gravar no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.36.0"
+  version: "0.36.1"
   related:
     - criar-commit
     - criar-habilidade
@@ -58,6 +58,8 @@ flowchart LR
 ```
 
 Renomear uma skill não quebra, porque cada nome anterior entra em `metadata.aliases`, sem tirar os que já existiam. A versão sobe como mudança nova, e o assunto do commit não leva `!`. Tirar um alias ou renomear sem manter o nome antigo quebra: siga o fluxo de breaking, com `!` e `BREAKING CHANGE:` com o nome antigo e o novo.
+
+Antes de commitar o rename, procure o nome antigo em `FEATURES.md`, em `README.md` e nas `related` de toda skill, na branch da mudança e em cada branch de PR aberto que a carrega, como as camadas de uma pilha de PRs. O PR aberto que ainda o cita vai na resposta com o link, para a pessoa decidir como atualizá-lo.
 
 Antes de cada commit e de cada push numa branch que já teve PR, inclusive a segunda lição do mesmo pedido, confira o estado do PR como o Passo 4 manda.
 
@@ -196,6 +198,7 @@ Se você renomear o `name` e não gravar o nome antigo em `metadata.aliases`, qu
 1. Grave cada nome anterior em `metadata.aliases` e mantenha os que já existiam.
 2. Suba a versão como mudança nova, sem `!` no assunto.
 3. Se o nome antigo não puder ficar, trate como breaking: suba o major e zere minor e patch, ou o segundo número em `0.x`, ponha `!` depois do tipo e comece o rodapé com `BREAKING CHANGE:`, citando o nome antigo e o novo.
+4. Procure o nome antigo nos arquivos e nos PRs abertos, como o Passo 1 manda. Um `FEATURES.md` de outra branch que ainda o cita faz a pessoa achar que o rename ficou pela metade.
 
 ### Feedback sem edição
 
