@@ -982,7 +982,7 @@ How these skills relate is in `README.md`, in this folder.
   - Resolves names in dictated commands accompanying images, including expense requests, before the caller writes them
   - Returns the canonical name, record link, and search variants to the caller without altering the original evidence or executing the operation
   - Treats phonetic similarity as a candidate, not identity confirmation; an explicit correction pointing at a record confirms the match
-  - Resolves a product nickname from a team phrase, searching the product pages, the variants, and the stock units, before a text to a third party, writes the canonical product name, proposes adding the nickname to the product name variations without writing until the person agrees, and asks when a nickname points to more than one product
+  - Resolves a product name from a team phrase, searching the product pages, the variants, and the stock units, before a text to a third party, shows the names found and asks which is canonical instead of trusting the registry title, writes the canonical name after the yes, and proposes moving the old title to the name variations without writing until the person agrees
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses creating the company, renaming the record, and executing the destination operation
