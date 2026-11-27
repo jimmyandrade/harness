@@ -3,7 +3,7 @@ name: investigar-problema
 description: Conduz a investigação de um problema, como um acesso bloqueado, um cadastro que falha em portal alheio ou um erro, com tarefa, fatos e hipóteses, e oferece artigo e post-mortem. Use sempre que alguém relatar um problema, como um preço errado, ou pedir "investigue isso" com um link, antes de ler. NÃO use para escrever o artigo, o post-mortem nem corrigir código.
 metadata:
   author: jimmyandrade
-  version: "0.4.5"
+  version: "0.4.6"
   related:
     - procurar-tarefa
     - definir-tarefa
@@ -71,8 +71,9 @@ Quando o que falha é um ambiente compartilhado, como um preview, o cluster de d
 O ambiente pode ter caído, e ser apagado e recriado, por um motivo que não vem da mudança que você testa.
 Enquanto não souber o estado dele, não peça mais carga a ele, como publicar mais aplicações.
 
-Quando o relato é o alerta de um monitor de anomalia, abra o monitor e leia a consulta, o agrupamento e a janela.
-Compare o valor do alerta com a mesma hora dos dias anteriores antes de concluir que houve um pico: o monitor compara com um padrão de semanas passadas, e um valor dentro do normal desta semana pode disparar quando o tráfego sobe.
+Quando o relato é o alerta de um monitor, de anomalia ou de limite, abra o monitor e leia a consulta, o agrupamento e a janela.
+Compare o valor do alerta com a mesma hora dos dias anteriores, em contagem e em taxa sobre o total, antes de concluir que houve um pico: o monitor de anomalia compara com um padrão de semanas passadas, o de limite conta o valor absoluto, e os dois disparam quando só o tráfego sobe.
+Procure um lançamento no período: conte o tráfego por versão, que mostra quando uma versão nova começou a receber eventos, e diga qual fonte de lançamento ficou de fora, como o serviço de trás, que o dado do navegador não mostra.
 
 Quando o problema é um erro vindo do navegador de quem usa o site, leia a pilha: o começo do endereço de cada arquivo mostra quem escreveu o código, como uma extensão do navegador, o navegador interno de um aplicativo, um script de terceiro ou o pacote do próprio site.
 Corte os eventos por navegador, dispositivo e versão e conte quantos eventos da família a pista cobre antes de propor um filtro.
@@ -96,6 +97,8 @@ Ao propor descartar ou filtrar dados de uma ferramenta de monitoramento, como er
 Ofereça antes a alternativa de marcar o evento e agrupá-lo, que mantém o dado e tira o ruído dos monitores.
 O filtro por origem olha o quadro onde o erro nasce na pilha, não qualquer ponto dela.
 Quando um erro é esperado ou não, quando uma taxa é alta ou normal, a resposta traz o número e a comparação, nunca "não verifiquei".
+Quando o código de erro que domina é uma regra do negócio, como cupom recusado ou item sem estoque, procure antes de chamar de configuração errada a mensagem do time dono da regra e a do time de monitoramento, nos canais do alerta e do assunto: a regra pode ser proposital, e o monitor pode já ter sido ajustado por isso.
+Diga o que o dado do navegador não traz, como o código do cupom, e onde ele estaria, como o registro do serviço de trás.
 Cruze a sua conclusão com a da investigação paralela: diga onde concordam, onde divergem e o que cada uma viu que a outra não viu.
 Quando a outra achou algo que você perdeu, corrija a sua conclusão e diga que mudou. Não proteja a primeira resposta.
 Confira na fonte o que só a outra afirma antes de repetir como fato.
@@ -198,10 +201,10 @@ Se você diagnosticar a falha de um preview ou de um cluster compartilhado só p
 
 ### Alerta de anomalia tratado como incidente
 
-Se você concluir pelo texto do alerta de anomalia, sem o monitor nem a linha de base, um valor normal para a semana vira um incidente e o ruído do monitor continua.
+Se você concluir pelo texto do alerta, de anomalia ou de limite, sem o monitor nem a linha de base, um valor normal para o dia vira um incidente e o ruído do monitor continua.
 
 1. Abra o monitor e leia a consulta, o agrupamento e a janela.
-2. Compare o valor com a mesma hora dos dias anteriores.
+2. Compare o valor com a mesma hora dos dias anteriores, em contagem e em taxa, e confira por versão se um lançamento entrou no período.
 3. Se o código já manda campos específicos e o monitor agrupa por um campo genérico, leia também a métrica que ele consulta: a causa do ruído está nas duas definições.
 
 ### Erro de navegador filtrado sem achar o autor
@@ -251,7 +254,8 @@ Abri o monitor e li a consulta: ele soma os erros por tipo e compara com semanas
 - A reprodução num exemplo mínimo parece provar o caso real. Ela prova o mecanismo, e o ambiente real está nos registros das execuções: leia-os antes de listar o limite como "não provado".
 - Um erro de certificado ou de rota num preview parece falha da mudança testada. O ambiente compartilhado pode ter caído e estar sendo apagado, e o aviso do time está no canal.
 - Uma lista de "não verificado" parece honestidade. Cada item que uma consulta ao seu alcance resolve é investigação por fazer: rode-o antes de responder.
-- O texto de um alerta de anomalia parece dizer que houve um pico. O monitor compara com semanas passadas, então o valor da mesma hora dos dias anteriores é que diz se há um.
+- O texto de um alerta parece dizer que houve um pico. O monitor de anomalia compara com semanas passadas e o de limite conta o valor absoluto, então a mesma hora dos dias anteriores, em taxa, é que diz se há um.
+- Um código de erro que domina parece defeito. Numa regra do negócio ele pode ser proposital: leia o que o time dono da regra disse antes de falar em configuração errada.
 - Descartar parece o jeito de tirar o ruído. O descarte apaga o dado para sempre, e marcar o evento mantém o dado e tira o ruído só dos monitores.
 - Uma consulta vazia parece provar que não há nada. Um campo agrupado com o nome errado descarta tudo: leia um evento cru e copie o nome do campo dele.
 - A mensagem de um erro do navegador parece dizer de quem ele é. A pilha diz: o começo do endereço dos arquivos mostra a extensão, o aplicativo ou o script de terceiro que o escreveu.
