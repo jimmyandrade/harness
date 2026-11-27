@@ -5,10 +5,11 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.8.0"
+  version: "0.9.0"
   related:
     - acompanhar-producao-de-produto-fisico
     - anexar-arquivo-no-notion
+    - conversar-no-whatsapp
     - definir-composicao-textil
     - definir-estampa
     - definir-tarefa
@@ -41,6 +42,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Data de corte para cadastro completo": ""
 # `Tramas por tecido`: quantas tramas a página de um tecido liga, como sarja ou cetim. `sem limite` serve a quem usa tecido de mais de uma trama.
 "Tramas por tecido": 1
+# `Campo da situação do pedido`: campo do cadastro de tecidos que guarda se o tecido foi encomendado, em quais cores, se foi pago e se chegou. Vazio, a situação vai no corpo da página, na seção do pedido.
+"Campo da situação do pedido": ""
 # `Siglas das fibras`: a sigla de cada fibra no nome da linha de composição.
 "Siglas das fibras": {"algodão": "CO", "viscose": "CV", "poliéster": "PES", "poliamida": "PA", "elastano": "PUE", "linho": "LI", "seda": "SE"}
 ```
@@ -49,7 +52,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 
 ### Passo 1
 
-Peça a ficha técnica ou a etiqueta e o fornecedor. Sem a ficha à mão, procure antes de pedir ao fornecedor: a cotação e a despesa da compra, a nota fiscal, as páginas dos produtos que usam o tecido, as fotos do tecido, as conversas com o fornecedor, inclusive os documentos delas, e o e-mail.
+Peça a ficha técnica ou a etiqueta e o fornecedor. Quando o fornecedor a mandou numa conversa, ela já está lá: a conversa lida por `conversar-no-whatsapp` traz o PDF, e você o abre sem esperar pedido. Sem a ficha à mão, procure antes de pedir ao fornecedor: a cotação e a despesa da compra, a nota fiscal, as páginas dos produtos que usam o tecido, as fotos do tecido, as conversas com o fornecedor, inclusive os documentos delas, e o e-mail.
 
 Mostre o que achou, com o link de cada fonte, e redija o pedido ao fornecedor só com o que faltar.
 
@@ -93,6 +96,11 @@ Na resposta, dê o link de cada página e de cada linha de composição criada, 
 
 ### Passo 5
 
+Quando a lista de preços ou a ficha cita um tecido que a pessoa encomendou, pergunte a situação do pedido: as cores encomendadas, se foi pago e se chegou. Grave a resposta em `Campo da situação do pedido`, com a data, na página de cada cor. Não deduza a situação da lista de preços.
+
+
+### Passo 6
+
 Antes de encerrar, cobre da pessoa o que falta de cada tecido novo. Tecido novo é o criado depois de `Data de corte para cadastro completo`. Não grave como completo o que está incompleto.
 
 - [ ] A composição, quando nem a ficha nem a etiqueta a trazem.
@@ -101,7 +109,7 @@ Antes de encerrar, cobre da pessoa o que falta de cada tecido novo. Tecido novo 
 
 Com a foto de um tecido estampado, cadastre a estampa por `definir-estampa`, ligada ao tecido. Sem a foto, o tecido fica pendente: diga o que falta e não invente. O tecido criado antes da data de corte não é cobrado e o que falta nele não vira pendência, porque a foto e a ficha de muitos tecidos antigos não existem.
 
-### Passo 6
+### Passo 7
 
 Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 

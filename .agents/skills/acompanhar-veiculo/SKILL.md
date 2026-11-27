@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.8.1"
+  version: "0.9.0"
   related:
     - acompanhar-retornos-pendentes
     - definir-obrigacao-financeira
@@ -65,6 +65,8 @@ Sem o extrato, o pagamento do acordo fica ligado à obrigação existente, com o
 
 Aviso recebido não é situação conferida. `Canais das pendências` diz, para cada tipo de pendência, onde ela chega ou se consulta: e-mail, aplicativo ou site do órgão. Pendência que não chega por e-mail ganha uma consulta no canal indicado, com `Frequência da consulta nos canais`, e a ausência de e-mail não vale como situação em dia. Tipo ausente do parâmetro: pergunte uma vez onde ele se consulta. Multa, pontos, IPVA e licenciamento se conferem no órgão de trânsito do estado de registro ou no sistema nacional de trânsito; pedágio sem praça, na concessionária ou na tag; parcela, na administradora. Diga de onde veio cada situação. Pontos caem na habilitação de quem a pessoa indicar como condutor; sem indicação, pergunte. Pedágio eletrônico sem praça gera cobrança posterior com prazo: diga o prazo que a concessionária informar, sem inventar outro.
 
+Ao responder a tarifa de um pedágio com desconto por frequência, conte as passagens pelos registros de despesa e pelas leituras da viagem, por praça e por sentido, dentro do período do desconto. Diga quantas passagens os registros provam e quais não, como a passagem sem despesa lançada e a que não mostra se foi pela tag. O valor da passagem seguinte só entra na resposta quando a concessionária o divulga. Para as demais, diga a faixa que ela publica e onde conferir, como o extrato da tag, sem inventar o valor.
+
 Uma pendência que só se resolve num painel, como a tag que continua inativa depois do pagamento, entra em `acompanhar-retornos-pendentes` com o prazo que a empresa informou. A pessoa não confere à mão.
 
 ### Passo 5
@@ -112,6 +114,14 @@ Se você der a carência e a decisão de não contratar à pessoa e não gravar 
 2. Preencha o raio de cobertura quando a empresa disser o limite.
 3. Diga na resposta qual página mudou, com o link.
 
+### Tarifa respondida sem contar as passagens
+
+Se você der o valor do pedágio sem contar as passagens anteriores, a pessoa lança um valor que pode ser o da primeira passagem, quando já vale o desconto por frequência.
+
+1. Conte as passagens por praça e por sentido no período do desconto.
+2. Diga quais passagens os registros provam e quais não.
+3. Dê só o valor que a concessionária divulga e aponte onde conferir o resto.
+
 ### Planilha copiada sem conferir
 
 Se você migrar o plano sem somar as parcelas, uma diferença de digitação vira dívida no sistema.
@@ -134,6 +144,10 @@ Registrei como despesa pessoal, ligada ao carro e à viagem, com o prazo de paga
 ### a proteção só cobre a assistência até 200 km, e a extensão tem carência de 30 dias
 
 A carência termina depois da viagem do fim de semana, então a extensão não a cobre. A pessoa decidiu não contratar. Gravei no veículo as regras do produto adicional, o limite de 200 km e a decisão com a data e o motivo, e preenchi o raio de cobertura. Não avisei a projeção de caixa, porque não foi recusa por caixa.
+
+### qual é a tarifa do pedágio que acabamos de passar, se a gente usa a tag
+
+Contei as passagens do mês na mesma praça e no mesmo sentido pelas despesas e pelas leituras. Uma viagem anterior passou pela praça, mas não havia despesa lançada nem prova de que foi pela tag. Disse que a passagem de agora podia ser a segunda do mês e que a concessionária só divulga o valor de algumas passagens. Dei a tarifa com o desconto da tag e apontei o extrato da tag para o valor cobrado, sem inventar o intermediário.
 
 ## Casos-limite
 

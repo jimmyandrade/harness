@@ -27,6 +27,15 @@ Funcionalidade: Manter o contato no WhatsApp
       Quando a dona vai salvar o contato
       Então ela pergunta à pessoa
 
+  Regra: Salvar o contato não pede pergunta nem espera o rascunho
+
+    Exemplo: Número novo com envio pendente de aprovação
+      Dado que Salvar contato sem número salvo está em sim
+      E que o número é novo e a primeira mensagem ainda espera o sim do rascunho
+      Quando a dona abre a conversa
+      Então ela salva o contato, cadastra a pessoa ou a empresa que faltar, grava a nota e rotula antes de redigir, sem perguntar
+      E só o envio espera o sim
+
   Regra: Toda conversa lida fecha a lista de conferência
 
     Exemplo: Leitura pedida por outra sessão
