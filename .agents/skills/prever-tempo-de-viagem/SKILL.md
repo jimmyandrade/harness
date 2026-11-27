@@ -50,7 +50,9 @@ Recomende a faixa e deixe a escolha com a pessoa. Se a margem do cenário base f
 
 Com a viagem em andamento, a pergunta sobre a posição, o pedágio ou a chegada se responde depois de ler a viagem ativa, o veículo e as leituras já registradas, sem perguntar a quem dirige o que o registro já diz. Leia a localização do celular quando a sessão tiver ferramenta para isso, e diga o que ela não informa: o sentido da pista e se a praça ou o posto já ficou para trás. Pergunte o sentido só quando a viagem ativa não o diz.
 
-A previsão do aplicativo de navegação que a pessoa informa, com km restantes, tempo restante e hora de chegada, é uma leitura da viagem, como a do computador de bordo. Registre-a onde o projeto guarda as leituras da viagem, em linha própria, com a fonte e sem apagar as leituras anteriores. Quando o banco não tiver as propriedades de km restantes, tempo restante, previsão de chegada e fonte da previsão, proponha criá-las e pare antes de gravar no corpo da página. Quando a previsão do aplicativo e a sua diferirem, mostre as duas e a diferença, e prefira a do aplicativo para o trecho que falta, porque ela vê a pista agora. Diga quando a sua estimativa saiu mais pessimista ou mais otimista.
+A previsão do aplicativo de navegação que a pessoa informa, com km restantes, tempo restante e hora de chegada, é uma leitura da viagem, como a do computador de bordo. Registre-a onde o projeto guarda as leituras da viagem, em linha própria, com a fonte e sem apagar as leituras anteriores. Quando o banco não tiver as propriedades de km restantes, tempo restante, previsão de chegada e fonte da previsão, proponha criá-las e pare antes de gravar no corpo da página.
+
+Quando a previsão do aplicativo e a sua diferirem, mostre as duas e a diferença, e prefira a do aplicativo para o trecho que falta, porque ela vê a pista agora. Diga quando a sua estimativa saiu mais pessimista ou mais otimista.
 
 ### Passo 7
 
