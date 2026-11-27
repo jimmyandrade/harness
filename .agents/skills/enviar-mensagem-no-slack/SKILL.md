@@ -3,7 +3,7 @@ name: enviar-mensagem-no-slack
 description: Redige uma mensagem de Slack, num canal, thread ou DM, e entrega o rascunho com o link do destino. Só envia com a autorização explícita da pessoa e, depois do envio, compara o proposto com o aplicado para alimentar o vocabulário. Usada quando a pessoa pede uma mensagem ou resposta no Slack. Não serve para achar conversa antiga nem cadastrar pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.12.1"
+  version: "0.12.2"
   related:
     - definir-agenda
     - definir-pessoa
@@ -208,8 +208,7 @@ Se você enviar uma mensagem porque a pessoa pediu o texto, ela perde a chance d
 Se você escrever o rascunho com as frases do vocabulário de cabeça e não classificar o texto inteiro, um termo proibido passa e a pessoa o acha ao ler.
 
 1. Classifique o texto inteiro antes de criar o rascunho, também o aviso curto de status.
-2. Troque o que vier proibido e classifique de novo.
-3. Só então entregue o texto e o link.
+2. Troque o que vier proibido, classifique de novo e só então entregue.
 
 ### Segundo rascunho no mesmo canal
 
