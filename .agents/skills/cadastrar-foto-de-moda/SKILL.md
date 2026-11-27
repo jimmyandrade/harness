@@ -4,7 +4,7 @@ description: Registra e classifica cada foto de moda, com tipo, ângulo, cena, v
 compatibility: O rascunho local do texto alternativo precisa de Python e de um macOS 27 ou superior com swiftc.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.4.0"
   aliases:
     - definir-foto-de-moda
   related:
@@ -34,6 +34,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 A lista de fotos de moda do mapeamento de dados é a fonte da verdade das fotos originais, das tratadas, dos nomes de arquivo, dos textos alternativos, do status e das observações de fidelidade. Sem ela, pergunte e pare. Não use a lista de outro workspace.
 
 Salve cada foto original na hora, quando a peça ou o look puder ser identificado com segurança. Não guarde na memória da conversa se a foto era de frente, costas ou detalhe. Se a peça, o look, o ângulo ou o tipo não estiverem seguros, pergunte antes de gravar.
+
+Quando outro trabalho precisa das fotos de um produto, como um material para um terceiro, procure antes na lista de fotos de moda e nos campos de foto do produto, tratada e bruta. Se estão vazios, diga na hora que o produto não tem foto no cadastro e qual é a fonte provável, como o álbum da marca num serviço de fotos, e peça à pessoa o link do álbum ou os arquivos. Não tente abrir um serviço que a sessão não tem conector para acessar, e não comece o material sem foto nem invente uma.
 
 ### Passo 2
 
@@ -144,6 +146,14 @@ Se você gravar o texto alternativo que o modelo local devolveu, a foto fica com
 2. Corrija o que a imagem contradiz e troque "peça" pelo nome da peça.
 3. Mostre a proposta e grave só com o sim da pessoa.
 
+### Foto procurada só depois do material
+
+Se você começar um material com fotos de produto sem olhar os campos de foto do cadastro, a falta só aparece no meio do trabalho.
+
+1. Confira a lista de fotos de moda e os campos de foto do produto antes de começar.
+2. Com os campos vazios, diga a fonte provável e peça o link do álbum ou os arquivos.
+3. Não tente acessar um serviço sem conector.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
@@ -158,6 +168,7 @@ Gerei um rascunho de cada foto no próprio computador, com a peça, o tipo e o �
 
 ## Casos-limite
 
+- Um material precisa de fotos de produtos e os campos de foto estão vazios: diga a fonte provável, peça o link do álbum ou os arquivos e não acesse um serviço sem conector.
 - A foto mostra uma pessoa e a pessoa não está no cadastro: não crie nem vincule em silêncio, pergunte.
 - O arquivo não abre: diga, não confirme o ângulo e deixe `Precisa revisar`.
 - A sessão não é local, o macOS é anterior ao 27, ou o modelo local não está disponível ou recusa a imagem: não rode nem conserte o script, escreva a proposta a partir da imagem aberta e diga que não houve rascunho local.
