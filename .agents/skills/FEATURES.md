@@ -1807,6 +1807,21 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses consolidating names, deleting, creating the record, locking spelling, and choosing among similar records
 
+### identificar-pagamento
+- **Stability**: experimental
+- **Description**: Identify who received an expense already paid and from which account the money left, and link both to the same expense
+- **Properties**:
+  - Lives at `.agents/skills/identificar-pagamento/SKILL.md`
+  - Resolves the recipient company by the name and the tax number on the evidence, and never takes the payment institution or a deduced legal name for it
+  - Uses identificar-duplicata before creating, and definir-empresa only with proven data
+  - Compares each identifier on the receipt with the registered recipient and shows both values side by side before going on when one differs, even by a letter
+  - Links the source account only when the receipt identifies it unambiguously or the person confirmed it for this payment
+  - Crosses the type and visible digits of the account holder's document with the registered documents, respecting the mask
+  - Keeps the link empty and reports the gap while the account is unknown, without blocking the entry
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses the signup for a fair or event, registering the company or the account, and choosing the category
+
 ### investigar-problema
 - **Stability**: experimental
 - **Description**: Investigate a reported problem with a task, facts, checked hypotheses, and feedback to the reporter, then offer an article and a post-mortem
@@ -1834,7 +1849,7 @@ How these skills relate is in `README.md`, in this folder.
   - Records an absent expense in the same execution when its business purpose is confirmed or inferable from context, and asks when that purpose is uncertain
   - Keeps original evidence in the mapped attachment property and reports missing optional fields without inventing them
   - Searches the cost category by product and purpose before leaving it empty, links the one that fits, proposes the most specific when several fit, and suggests creating a category with a name and group when none fits, creating it only after the person agrees
-  - Resolves the recipient company through identificar-duplicata and definir-empresa, reuses or registers it and links it to the same expense, or explicitly proposes registration and asks only what blocks it
+  - Leaves the recipient company and the source account to identificar-pagamento, which links both to the same expense without blocking the entry while the account is unknown
   - Uses a vehicle plate only to find the existing vehicle, links the expense to it through the mapped relation, checking the vehicle side too, keeps the trip relation apart, keeps the plate out of the expense title, description, and notes, and reports the limitation instead of writing the plate as free text when no relation is mapped
   - Verifies the saved entry before reporting that it was recorded
   - Traces the financial entry that originated the purchase or acquisition of a durable asset
@@ -1847,7 +1862,6 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description refuses the opportunity, the signup update, the task, the agenda, and registering the asset
   - [ ] A confirmed or inferable business expense is recorded after an existence search; an existing expense is reused
-  - [ ] A missing recipient is registered and linked when identified and permitted; otherwise the response proposes registration rather than leaving an unexplained pending link
   - [ ] A mixed purchase from image evidence excludes the personal item and identifies the person with the confirmed canonical name
 
 ### lancar-despesa-pessoal
