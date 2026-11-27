@@ -3,7 +3,7 @@ name: redigir-com-tom-de-voz
 description: Use essa habilidade sempre que for criar, redigir, editar, revisar ou responder texto da marca no tom de voz, mesmo sem dizer copy. NÃO use para responder quem conversa com a IA, descrever uma skill, titular tarefa ou oportunidade, cravar a grafia, alterar formato de conteúdo, nem assumir cliente, peça, oportunidade ou histórico.
 metadata:
   author: jimmyandrade
-  version: "0.30.1"
+  version: "0.30.2"
   aliases:
     - escreva-usando-o-tom-de-voz
   related:
@@ -88,7 +88,7 @@ Mensagem para uma pessoa não revela contexto interno que ela não precisa saber
 
 A mensagem chama a pessoa como o cadastro de `definir-pessoa` diz que ela é chamada. Um apelido que a pessoa nunca usou conosco e que o cadastro não confirma, mesmo vindo de quem pede o texto, fica de fora: diga isso e use o nome do cadastro. Sem cadastro, use o nome que a pessoa usa para se apresentar. Sem nenhum dos dois, não chame por nome: o nome de um perfil ou de uma conta, como o de uma organização, não é o de quem responde.
 
-O tratamento carinhoso que a própria pessoa usa conosco, como "meu querido", "amiga" ou um diminutivo afetuoso, volta na mesma medida: é rapport, e não apelido inventado. Leia as últimas mensagens dela antes de rascunhar e devolva o mesmo grau de calor, de risada e de emoji, dentro do vocabulário, sem perguntar a quem escreve se pode. Quem é cordial e formal recebe o mesmo tom, e o calor não se oferece a quem não o deu primeiro.
+O tratamento carinhoso que a própria pessoa usa conosco, como "meu querido", "amiga" ou um diminutivo afetuoso, volta na mesma medida: é rapport, e não apelido inventado. Leia as últimas mensagens dela antes de rascunhar e devolva o mesmo calor, também o do conteúdo (agradecimento, entusiasmo, exclamações), a risada e o emoji, dentro do vocabulário, sem perguntar se pode. Quem é cordial e formal recebe o mesmo tom, e o calor não se oferece a quem não o deu primeiro. A mensagem longa e calorosa não recebe só o pedido: abra com um retorno ao que disse.
 
 Isso vale também quando a pessoa tem perfil de tom no vocabulário: os termos do perfil, como "te", entram, e o calor vem das últimas mensagens da conversa de agora, que o perfil não guarda. Pedir "o perfil dela" não é pedir que a mensagem a chame pelo nome.
 
@@ -286,7 +286,7 @@ O título ficou específico, com o nome canônico que a fonte já tinha. Não vi
 - Um sinônimo parece resolver o clichê. A troca é imagem, cena, ação, efeito ou situação. A palavra literal, a frase rejeitada e o termo ligado ficam de fora.
 - O motivo verdadeiro de uma mudança parece transparência. Contado a quem chega, como a troca frequente de pessoas no papel, ele é contexto interno e gera desconforto. O motivo neutro entra no lugar.
 - Assunto de e-mail parece legenda. No celular ele é notificação: curto, pessoal e com curiosidade.
-- Um apelido inventado por quem escreve parece deixar a mensagem calorosa, mas pode soar íntimo demais: só o cadastro confirma como a pessoa é chamada. O tratamento carinhoso que ela mesma usa conosco é outra coisa, e devolvê-lo é o rapport que esta habilidade pede.
+- Um apelido inventado por quem escreve parece deixar a mensagem calorosa, mas pode soar íntimo demais: só o cadastro confirma como a pessoa é chamada. O tratamento carinhoso que ela usa conosco é rapport e volta.
 - Oferecer disponibilidade no fim parece cortesia. "Se preferir, me fala" e "qualquer dúvida, me chama" deixam a pessoa com mais uma tarefa. Peça uma ação simples ou deixe-a livre para ajustar.
 - O dado que a conversa já citou parece confirmado. Cliente, peça, oportunidade e histórico comercial vêm da fonte que a pessoa indicou.
 - Título publicitário parece o tom de voz. O texto pede intenção, recorte e conexão, e recusa a fórmula genérica. A busca precisa continuar achando o nome canônico.
