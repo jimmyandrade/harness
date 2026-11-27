@@ -50,3 +50,12 @@ Funcionalidade: Ler a resposta sem pedir confirmação
       Dado que a sessão leu a resposta do contato
       Quando a resposta pede que a pessoa avise outra pessoa
       Então a sessão propõe o texto e espera o sim antes de enviar
+
+  Regra: uma conversa ou grupo não lido sobre um assunto aberto também é lido sozinho
+
+    Exemplo: um grupo cobra material de divulgação até hoje
+      Dado que a lista mostra um grupo com uma não lida sobre um assunto aberto da pessoa
+      Quando a sessão vê a prévia do grupo
+      Então a sessão abre e lê o grupo sem perguntar
+      E cruza com o e-mail e a agenda do assunto
+      E traz o que falta fazer com o próximo passo pronto

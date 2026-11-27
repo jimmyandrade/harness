@@ -3,7 +3,7 @@ name: acompanhar-resposta-no-whatsapp
 description: Acompanha, por uma rotina que lê as conversas com a etiqueta de ação esperada, se o contato respondeu a uma mensagem enviada no WhatsApp, avisa quando a resposta chega e troca a etiqueta. Usada quando a mensagem espera resposta, como uma pergunta, um pedido ou um prazo, ou quando a pessoa pergunta se alguém já respondeu. Não serve para ler, redigir nem enviar a mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.7.4"
+  version: "0.7.5"
   related:
     - rascunhar-mensagem
     - acompanhar-retornos-pendentes
@@ -69,6 +69,8 @@ Depois de enviar a pedido da pessoa, a sessão que enviou não pergunta se acomp
 
 Abrir só marca a conversa como lida, e a resposta diz isso. Na mesma resposta ela traz o que o contato pede e o que falta fazer, já com o próximo passo adiantado quando é leitura ou registro, como o registro da conversa por `definir-negociacao` e a agenda, e propõe o texto da próxima mensagem pronto para o sim. Pergunta só o que exige decisão da pessoa ou envia a terceiros, paga, aceita termos ou apaga algo.
 
+O mesmo vale para qualquer conversa ou grupo da conta que mostre mensagem não lida ou prévia nova e tenha relação com um assunto aberto da pessoa, mesmo que não seja resposta a uma mensagem nossa: a sessão abre e lê sozinha, sem perguntar "quer que eu abra?". Ela cruza o que leu com as outras fontes do assunto, como o e-mail, a agenda e o cadastro, e traz o que precisa ser feito, com o próximo passo pronto.
+
 Quando o prazo da mensagem vence hoje, a conferência não espera a resposta aparecer na lista. Ela confere a conversa no mesmo turno, pela dona, a cada espera que dobra a partir de `Primeira espera com prazo no dia`, e diz cada mudança, como uma resposta que chegou ou uma pergunta que ficou sem resposta. A conferência segue `Ao conferir a resposta`. Passado o prazo, ou o tempo que o sim disse, confira a lista de conversas por outro caminho antes de encerrar o turno, e diga o estado da conversa e o que a pessoa decide a seguir.
 
 ### Passo 4
@@ -95,7 +97,7 @@ Se você trocar o contato ou o prazo no texto da rotina a cada mensagem, cada tr
 
 ### Acompanhamento ou leitura perguntados depois do envio
 
-Se você perguntar "quer que eu volte a olhar?" ou "leio a resposta agora?" depois de enviar uma mensagem, a pessoa precisa dizer sim a algo que já tinha aprovado, o prazo corre sem ninguém olhar a conversa e ela fica fazendo o trabalho de confirmar.
+Se você perguntar "quer que eu volte a olhar?" ou "leio a resposta agora?" ou "quer que eu abra o grupo?" depois de enviar uma mensagem, a pessoa precisa dizer sim a algo que já tinha aprovado, o prazo corre sem ninguém olhar a conversa e ela fica fazendo o trabalho de confirmar.
 
 1. Não pergunte: o sim do envio vale para o acompanhamento e para a leitura da resposta.
 2. Confira a conversa no mesmo turno, em esperas que dobram a partir de `Primeira espera com prazo no dia` quando o prazo é hoje.
@@ -126,6 +128,10 @@ Não perguntei se acompanho. Conferi a prévia da conversa pela dona a cada 10 s
 
 A lista mostrou a Bia com 1 não lida logo depois do meu envio. Não perguntei se podia ler: abri a conversa, li a resposta, disse que ela ficou marcada como lida e contei na mesma mensagem que a Bia pedia o orçamento até sexta. Registrei a conversa, adiantei o que faltava e deixei o texto do envio do orçamento pronto para o sim da pessoa.
 
+### Um grupo de organizadores cobra material até hoje
+
+A lista mostrou o grupo com 1 não lida e a prévia "Mandei por e-mail…". Não perguntei se abria: abri o grupo, li a cobrança, cruzei com o e-mail de seleção, que dava o prazo e o que enviar, e trouxe a lista do que ainda falta, com a mensagem de resposta pronta para o sim.
+
 ### O contato respondeu copiando o que enviamos
 
 A prévia da linha repetia o nosso texto sobre a montagem. Pedi à dona que abrisse a conversa e li as mensagens dele desde a nossa. Tirei as cópias: o texto novo respondia o cadastro e a montagem, e a entrada do carro seguia sem resposta. Avisei a pessoa e disse que a conversa ficou marcada como lida.
@@ -138,6 +144,7 @@ A prévia da linha repetia o nosso texto sobre a montagem. Pedi à dona que abri
 - A pessoa recusa o acompanhamento: a conversa não leva `Ação esperada` e a mensagem sai dos próximos passos.
 - Nenhuma conversa com a etiqueta: a rotina diz isso em uma linha e termina.
 - O prazo vence hoje e a pessoa já está na sessão: confira a conversa e não pergunte se acompanha.
+- Um grupo ou conversa com não lida sobre um assunto aberto, sem mensagem nossa antes: abra e leia sem perguntar, e cruze com as outras fontes do assunto.
 - A resposta pede enviar algo a outra pessoa, pagar ou aceitar termos: a leitura e o registro já estão feitos, e só o envio, o pagamento ou o aceite espera o sim, com o texto pronto.
 
 ## Pegadinhas
