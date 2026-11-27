@@ -39,7 +39,6 @@ flowchart LR
     conciliar_recebimento["conciliar-recebimento"]
     conferir_termo_de_outro_idioma["conferir-termo-de-outro-idioma"]
     configurar_harness_de_negocio["configurar-harness-de-negocio"]
-    consultar_contabilidade["consultar-contabilidade"]
     consultar_responsavel_pela_oportunidade["consultar-responsavel-pela-oportunidade"]
     consultar_vocabulario["consultar-vocabulario"]
     conversar_no_whatsapp["conversar-no-whatsapp"]
@@ -335,7 +334,6 @@ flowchart LR
   configurar_harness_de_negocio --> criar_pull_request
   configurar_harness_de_negocio --> definir_issue_do_github
   configurar_harness_de_negocio --> levantar_ambiente_do_repositorio
-  consultar_contabilidade --> lancar_despesa_da_empresa
   consultar_responsavel_pela_oportunidade --> acompanhar_retornos_pendentes
   consultar_responsavel_pela_oportunidade --> analisar_regulamento_da_oportunidade
   consultar_responsavel_pela_oportunidade --> definir_agenda
@@ -886,7 +884,6 @@ flowchart LR
   lancar_despesa_da_empresa --> anexar_arquivo_no_notion
   lancar_despesa_da_empresa --> completar_despesa_de_compra
   lancar_despesa_da_empresa --> conciliar_recebimento
-  lancar_despesa_da_empresa --> consultar_contabilidade
   lancar_despesa_da_empresa --> definir_ativo_imobilizado
   lancar_despesa_da_empresa --> definir_cartao
   lancar_despesa_da_empresa --> definir_empresa
