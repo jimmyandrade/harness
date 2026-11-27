@@ -4,7 +4,7 @@ description: Cria, revisa e atualiza o artigo da base de conhecimento que respon
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.9.1"
+  version: "0.9.2"
   related:
     - capturar-tela-de-passo-a-passo
     - criar-habilidade
@@ -102,6 +102,10 @@ Legende cada quadro do desenho pela estrutura, a linha, a coluna e o estado dele
 O artigo diz a causa confirmada e usa o caso conferido como exemplo, não só o que a conversa contou.
 Só deixe "a verificar" o que depende de uma decisão de outra pessoa ou de um acesso que a sessão não tem, e diga qual dos dois.
 Nunca deixe "a verificar" o que as ferramentas da sessão conseguem conferir.
+Antes de listar o que falta para o artigo, ou de perguntar se pode abrir a ferramenta, abra a ferramenta e leia o que ela mostra, como o histórico de versões, a configuração e as telas dos passos.
+Abrir para ler não pede licença: tente o conector, a linha de comando e cada navegador disponível, o do aplicativo e o da pessoa por extensão.
+Só diga que falta acesso depois de tentar, e conte o que cada caminho devolveu.
+Numa tela de login, peça à pessoa que entre na própria janela e retome.
 Antes de publicar, leia de novo o estado atual da fonte, como o último commit do pull request, porque ela pode ter mudado enquanto você escrevia.
 No Confluence, ignore a conferência de modelo abaixo: o espaço não tem lista de modelos.
 Confira se uma página é modelo do banco pela lista de modelos do data source, que a API do Notion devolve.
@@ -221,6 +225,14 @@ Se você escrever o artigo só com o que a conversa contou, a causa fica como su
 2. Meça o que a pessoa viu e ponha a causa confirmada no artigo.
 3. Ilustre com os prints do desenho e de cada estado, lado a lado.
 4. Deixe "a verificar" só o que depende de outra pessoa ou de um acesso que a sessão não tem.
+
+### Faltas listadas sem abrir a ferramenta
+
+Se você disser que falta o que a ferramenta mostra, ou perguntar se pode abri-la, sem ter aberto, a pessoa recebe uma lista de pendências que uma tentativa resolveria.
+
+1. Abra a ferramenta e leia o histórico, a configuração e as telas dos passos.
+2. Liste como faltante só o que depende de uma pessoa ou de um acesso que a tentativa não deu.
+3. Diga o que cada caminho devolveu.
 
 ### Artigo repetido
 
