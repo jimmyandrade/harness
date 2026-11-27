@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, e lê o pedido, quem pediu, a data, o que o contato afirmou e o que falta. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp ou conferir o que alguém pediu. Não serve para escrever ou enviar a mensagem, redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.45.0"
+  version: "0.46.0"
   aliases:
     - redigir-mensagem-de-whatsapp
   related:
@@ -93,6 +93,10 @@ Mapa, tabela de preços e comunicado em imagem entram na leitura: se o canal nã
 Extraia quem pediu, o que pediu, para quem, a data e o horário de cada mensagem que importa, o que já foi respondido ou confirmado e o que ficou sem resposta. Um prazo que vence hoje, na mensagem do contato, abre a resposta, com a hora e quanto falta.
 
 Para cada pendência, diga de qual lado ela está e há quanto tempo espera, da última mensagem até agora: a pessoa que usa a habilidade espera o contato, ou o contato espera a pessoa. O tempo de espera acompanha a conversa e não avalia ninguém. Não guarde o tempo de resposta de alguém num perfil nem no vocabulário.
+
+Pedido ou prazo dirigido à marca, lido numa conversa, num grupo, num e-mail ou num áudio, como enviar material, pagar ou confirmar presença, é conferido antes do resumo na tarefa, no cronograma da oportunidade e na agenda. O que não consta, quem leu registra na hora, sem esperar a cobrança: a tarefa por `definir-tarefa` ou a etapa por `definir-cronograma`, com o prazo e a fonte (quem disse, onde e quando), e a data na agenda por `definir-agenda` quando o prazo tem data. Pedido sem prazo também entra, com o prazo vazio.
+
+O mesmo resumo diz o que pediram, até quando e se o prazo já passou. Em grupo, liste pelo nome as marcas ou pessoas cobradas e diga se a marca está entre elas. A oferta de vaga sem o sim da pessoa segue o Passo 4.
 
 A data vem do separador do dia na conversa. "Hoje" e "Ontem" contam a partir de hoje. Separador com dia da semana, como "sexta-feira", é o último dia com esse nome antes de hoje. Separador com data fica como está. Escreva a data no `Formato da data com dia da semana`, com o dia calculado como a regra do dia da semana manda.
 
@@ -222,6 +226,14 @@ Se você resumir a oferta de uma vaga e parar no que o contato disse, a pessoa d
 
 1. Termine o resumo com os pontos de ação do Passo 4, cada um com a habilidade que o cumpre.
 2. Sem o sim à participação, não lance nem grave: só liste.
+
+### Prazo dito só na conversa
+
+Se você resumir a cobrança do grupo e deixar o prazo na conversa, nenhum registro o mostra e a marca perde a entrega, como as imagens de um card de divulgação cobradas "até hoje" pela primeira vez na manhã do prazo.
+
+1. Confira a tarefa, o cronograma e a agenda do assunto.
+2. Registre o que falta, com o prazo e a fonte, sem esperar a cobrança.
+3. Diga no resumo o que pediram, até quando, se já passou e se a marca está entre as cobradas.
 
 ## Exemplos de entrada e saída
 
