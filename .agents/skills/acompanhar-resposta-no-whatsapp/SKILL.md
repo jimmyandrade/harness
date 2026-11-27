@@ -3,7 +3,7 @@ name: acompanhar-resposta-no-whatsapp
 description: Acompanha, por uma rotina que lê as conversas com a etiqueta de ação esperada, se o contato respondeu a uma mensagem enviada no WhatsApp, avisa quando a resposta chega e troca a etiqueta. Usada quando a mensagem espera resposta, como uma pergunta, um pedido ou um prazo, ou quando a pessoa pergunta se alguém já respondeu. Não serve para ler, redigir nem enviar a mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.10.1"
+  version: "0.10.2"
   related:
     - rascunhar-mensagem
     - acompanhar-retornos-pendentes
@@ -80,7 +80,13 @@ Uma resposta que fecha o assunto, como uma confirmação ou um ok, não é a úl
 A mensagem de fechamento só agradece. Se citar dia, horário ou compromisso, usa o que a conversa e o cadastro confirmaram, com o dia conferido na conversa: nunca acrescenta uma data que ninguém confirmou.
 Uma mensagem que espera resposta e saiu sem a etiqueta, porque a pergunta do sim não citou o acompanhamento ou porque a etiqueta ficou para depois, não sai dos próximos passos da resposta até a conversa ser etiquetada ou a pessoa recusar. Ao perceber a falta, confira antes a lista de conversas: a resposta pode já ter chegado.
 
-Quando o prazo da mensagem vence hoje, a sessão que enviou não pergunta se acompanha: o sim do envio já valeu para isso. Ela confere a conversa no mesmo turno, pela dona, a cada espera que dobra a partir de `Primeira espera com prazo no dia`, e diz cada mudança, como uma resposta que chegou ou uma pergunta que ficou sem resposta. A conferência segue `Ao conferir a resposta`. Passado o prazo, ou o tempo que o sim disse, confira a lista de conversas por outro caminho antes de encerrar o turno, e diga o estado da conversa e o que a pessoa decide a seguir.
+Depois de enviar a pedido da pessoa, a sessão que enviou não pergunta se acompanha nem se lê a resposta: o pedido de envio já autoriza as duas coisas. Ela confere a conversa no mesmo turno e, com resposta nova do contato, abre a conversa e lê sozinha, mesmo com `Ao conferir a resposta` em `ler a lista`, que vale para a rotina sem ninguém na sessão.
+
+Abrir só marca a conversa como lida, e a resposta diz isso. Na mesma resposta ela traz o que o contato pede e o que falta fazer, já com o próximo passo adiantado quando é leitura ou registro, como o registro da conversa por `definir-negociacao` e a agenda, e propõe o texto da próxima mensagem pronto para o sim. Pergunta só o que exige decisão da pessoa ou envia a terceiros, paga, aceita termos ou apaga algo.
+
+O mesmo vale para qualquer conversa ou grupo da conta que mostre mensagem não lida ou prévia nova e tenha relação com um assunto aberto da pessoa, mesmo que não seja resposta a uma mensagem nossa: a sessão abre e lê sozinha, sem perguntar "quer que eu abra?". Ela cruza o que leu com as outras fontes do assunto, como o e-mail, a agenda e o cadastro, e traz o que precisa ser feito, com o próximo passo pronto.
+
+Quando o prazo da mensagem vence hoje, a conferência não espera a resposta aparecer na lista. Ela confere a conversa no mesmo turno, pela dona, a cada espera que dobra a partir de `Primeira espera com prazo no dia`, e diz cada mudança, como uma resposta que chegou ou uma pergunta que ficou sem resposta. A conferência segue `Ao conferir a resposta`. Passado o prazo, ou o tempo que o sim disse, confira a lista de conversas por outro caminho antes de encerrar o turno, e diga o estado da conversa e o que a pessoa decide a seguir.
 
 ### Passo 4
 
@@ -104,13 +110,14 @@ Se você trocar o contato ou o prazo no texto da rotina a cada mensagem, cada tr
 2. Não edite a rotina.
 3. Quando o contato responder, a rotina troca a etiqueta por `Respondida`.
 
-### Acompanhamento perguntado com prazo no dia
+### Acompanhamento ou leitura perguntados depois do envio
 
-Se você perguntar "quer que eu volte a olhar?" depois de enviar uma mensagem com prazo hoje, a pessoa precisa dizer sim a algo que já tinha aprovado, e o prazo corre sem ninguém olhar a conversa.
+Se você perguntar "quer que eu volte a olhar?" ou "leio a resposta agora?" ou "quer que eu abra o grupo?" depois de enviar uma mensagem, a pessoa precisa dizer sim a algo que já tinha aprovado, o prazo corre sem ninguém olhar a conversa e ela fica fazendo o trabalho de confirmar.
 
-1. Não pergunte: o sim do envio vale para o acompanhamento.
-2. Confira a conversa no mesmo turno, em esperas que dobram a partir de `Primeira espera com prazo no dia`.
-3. Diga cada mudança e, ao fim, o estado da conversa.
+1. Não pergunte: o sim do envio vale para o acompanhamento e para a leitura da resposta.
+2. Confira a conversa no mesmo turno, em esperas que dobram a partir de `Primeira espera com prazo no dia` quando o prazo é hoje.
+3. Com resposta nova, abra, leia e traga na mesma resposta o que ela pede, o que falta fazer e o texto da próxima mensagem pronto para o sim.
+4. Diga cada mudança e, ao fim, o estado da conversa.
 
 ### Resposta que copia a nossa mensagem
 
@@ -156,6 +163,14 @@ A rotina filtrou a lista pela etiqueta `Ação esperada` e leu a prévia de cada
 
 Não perguntei se acompanho. Conferi a prévia da conversa pela dona a cada 10 s, 20 s, 40 s e 80 s, sem abrir a conversa, e disse a cada passo que a última mensagem ainda era a minha, sem resposta. Ao fim, confirmei na lista que nada tinha chegado e disse a hora, o prazo e o que a pessoa decide a seguir.
 
+### A Bia respondeu logo depois do envio
+
+A lista mostrou a Bia com 1 não lida logo depois do meu envio. Não perguntei se podia ler: abri a conversa, li a resposta, disse que ela ficou marcada como lida e contei na mesma mensagem que a Bia pedia o orçamento até sexta. Registrei a conversa, adiantei o que faltava e deixei o texto do envio do orçamento pronto para o sim da pessoa.
+
+### Um grupo de organizadores cobra material até hoje
+
+A lista mostrou o grupo com 1 não lida e a prévia "Mandei por e-mail…". Não perguntei se abria: abri o grupo, li a cobrança, cruzei com o e-mail de seleção, que dava o prazo e o que enviar, e trouxe a lista do que ainda falta, com a mensagem de resposta pronta para o sim.
+
 ### O contato respondeu copiando o que enviamos
 
 A prévia da linha repetia o nosso texto sobre a montagem. Pedi à dona que abrisse a conversa e li as mensagens dele desde a nossa. Tirei as cópias: o texto novo respondia o cadastro e a montagem, e a entrada do carro seguia sem resposta. Avisei a pessoa e disse que a conversa ficou marcada como lida.
@@ -168,11 +183,13 @@ A prévia da linha repetia o nosso texto sobre a montagem. Pedi à dona que abri
 - A pessoa recusa o acompanhamento: a conversa não leva `Ação esperada` e a mensagem sai dos próximos passos.
 - Nenhuma conversa com a etiqueta: a rotina diz isso em uma linha e termina.
 - O prazo vence hoje e a pessoa já está na sessão: confira a conversa e não pergunte se acompanha.
+- Um grupo ou conversa com não lida sobre um assunto aberto, sem mensagem nossa antes: abra e leia sem perguntar, e cruze com as outras fontes do assunto.
+- A resposta pede enviar algo a outra pessoa, pagar ou aceitar termos: a leitura e o registro já estão feitos, e só o envio, o pagamento ou o aceite espera o sim, com o texto pronto.
 
 ## Pegadinhas
 
 - Abrir a conversa para ver se chegou resposta parece inofensivo. Marca as mensagens como lidas no celular de quem mandou. Com `Ao conferir a resposta` em `ler a lista`, a rotina não abre a conversa.
-- Perguntar "quer que eu volte a olhar?" parece cortesia. Com prazo no dia, o sim do envio já cobre o acompanhamento, e a pergunta só atrasa a conferência.
+- Perguntar "quer que eu volte a olhar?" ou "leio a resposta agora?" parece cortesia. O sim do envio já cobre o acompanhamento e a leitura, e a pergunta só atrasa a conferência e passa o trabalho para a pessoa.
 - Editar a rotina parece o jeito de acompanhar um contato novo. A etiqueta faz isso, e a rotina fica como está.
 - Perguntar se cria a rotina parece deixar a decisão com a pessoa. Quando a conversa segue para outro assunto, a pergunta some e a resposta do contato espera sem ninguém ver.
 - A rotina agendada roda numa sessão nova, sem as abas da sessão anterior, e pede a leitura à dona, como `usar-whatsapp-web` manda, em vez de abrir a própria aba. Um prompt que diz "a aba que já estiver aberta ou uma nova" leva a rotina a abrir a própria: a dona pode ter outro título, como "Sessão centralizada para WhatsApp Web", e a rotina deve achá-la pela lista de sessões.
