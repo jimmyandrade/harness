@@ -3,7 +3,7 @@ name: escrever-texto-da-revisao
 description: Escreve o texto de uma revisão de pull request, o corpo e os comentários inline, no idioma da pessoa que recebe, com a postura de pergunta e o `@login` de quem abriu. Usada por quem publica uma revisão. Não serve para achar os problemas, decidir a ação da revisão nem publicar.
 metadata:
   author: jimmyandrade
-  version: "0.1.1"
+  version: "0.1.2"
   related:
     - definir-idioma-da-conversa
     - evoluir-habilidade
@@ -43,6 +43,9 @@ O idioma sai desse perfil, com o histórico dos textos dela, e nunca do idioma d
 
 Antes de escrever, inclusive no rascunho agendado, consulte o vocabulário com `redigir-com-tom-de-voz`: agradecimento e fecho vêm dele, nunca de memória. Um comentário de achado diz o que você viu, por que importa e o que muda para quem usa ou mantém o código, e termina convidando a pessoa a responder.
 
+Antes de mostrar ou publicar, classifique o corpo, cada comentário e a tradução como `redigir-com-tom-de-voz` manda, e troque o que vier proibido.
+Um texto que não passou pela classificação não é mostrado.
+
 Uma aprovação sem achado não é a descrição do PR: abre com o `@login` de quem abriu, agradece a ajuda concreta deste PR, diz que a revisão não achou nada bloqueante e só então lista, em tópicos, o que o PR faz.
 
 O agradecimento é por uma ajuda concreta deste PR, nunca por algo trivial, como avisar na descrição o que qualquer PR já diz. Sem ajuda concreta, agradeça só o PR, com a frase do vocabulário.
@@ -78,6 +81,14 @@ Se você publicar uma aprovação sem achado que não marca quem abriu, não diz
 3. A frase de idioma fica num PS no fim, com a redação do vocabulário, e segue a quantidade.
 4. Corrija o comentário já publicado.
 5. PR aberto por bot segue `Voz em PR aberto por bot` e não leva `@`.
+
+### Texto mostrado sem classificação
+
+Se você mostrar o texto da revisão só com as frases do vocabulário e sem classificar, um termo proibido chega ao pedido de ajuste e a pessoa corrige depois.
+
+1. Classifique o corpo, cada comentário e a tradução antes de mostrar.
+2. Troque o que vier proibido e classifique de novo.
+3. Só então mostre ou publique.
 
 ### Código no corpo da review
 

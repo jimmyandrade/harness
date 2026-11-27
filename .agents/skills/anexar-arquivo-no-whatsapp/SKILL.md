@@ -3,7 +3,7 @@ name: anexar-arquivo-no-whatsapp
 description: Anexa e envia um arquivo já aprovado pelo WhatsApp Web, imagem como foto e nunca como figurinha, ou documento, numa conversa, num grupo ou num canal, e confere o envio. Usada quando a pessoa aprova mandar um comprovante, um convite com imagem, uma postagem ou um documento. Não serve para redigir o texto, escolher o destino nem enviar só texto.
 metadata:
   author: jimmyandrade
-  version: "0.5.1"
+  version: "0.6.0"
   aliases:
     - enviar-imagem-no-whatsapp
   related:
@@ -51,6 +51,12 @@ O menu Anexar tem Documento, Fotos e vídeos e Nova figurinha. A única entrada 
 - [ ] Rode o script de restauração.
 - [ ] Releia a lista de conversas: a prévia da linha diz "Foto" ou o nome do documento, nunca "Figurinha".
 
+Documento e foto, sem o script de captura: copie o arquivo para a área de transferência do computador e cole no campo de mensagem do destino. No macOS, `osascript -e 'set the clipboard to (POSIX file "<caminho>")'` copia o arquivo, e `cmd+v` no campo abre a pré-visualização com o campo de legenda.
+
+O arquivo precisa estar numa pasta que a sessão lê, como a pasta da sessão. Este caminho serve de primeira escolha para um PDF, que a entrada de figurinhas recusa com "o arquivo não é compatível".
+
+Confira a pré-visualização, digite a legenda no campo dela e envie. A conferência da lista de conversas do fim do Passo 2 vale igual.
+
 ### Passo 3
 
 O texto aprovado junto da imagem vai no campo de legenda. Texto que a pessoa aprovou como mensagem separada segue `rascunhar-mensagem`.
@@ -95,7 +101,7 @@ Avisei a pessoa e propus apagar para todos e reenviar como foto. Esperei o sim e
 
 ## Casos-limite
 
-- Vídeo, áudio e documento sem teste de ponta a ponta: diga isso à pessoa antes de enviar.
+- Documento: o PDF colado da área de transferência foi enviado de ponta a ponta. Vídeo e áudio sem teste de ponta a ponta: diga isso à pessoa antes de enviar.
 - Mais de um arquivo: a entrada de foto aceita vários, e cada arquivo é uma imagem do mesmo envio.
 - Status e figurinha de propósito: não são esta habilidade.
 

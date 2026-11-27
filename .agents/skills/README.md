@@ -37,6 +37,7 @@ flowchart LR
     completar_despesa_de_compra["completar-despesa-de-compra"]
     comunicar_novidade_do_produto["comunicar-novidade-do-produto"]
     conciliar_recebimento["conciliar-recebimento"]
+    conferir_termo_de_outro_idioma["conferir-termo-de-outro-idioma"]
     configurar_harness_de_negocio["configurar-harness-de-negocio"]
     consultar_responsavel_pela_oportunidade["consultar-responsavel-pela-oportunidade"]
     consultar_vocabulario["consultar-vocabulario"]
@@ -103,6 +104,7 @@ flowchart LR
     definir_prestacao_de_contas["definir-prestacao-de-contas"]
     definir_recurso_de_aprendizado["definir-recurso-de-aprendizado"]
     definir_reel_do_instagram["definir-reel-do-instagram"]
+    definir_referencia_cultural["definir-referencia-cultural"]
     definir_registro_de_reuniao["definir-registro-de-reuniao"]
     definir_requisito_de_compra["definir-requisito-de-compra"]
     definir_reserva["definir-reserva"]
@@ -327,6 +329,8 @@ flowchart LR
   conciliar_recebimento --> lancar_venda
   conciliar_recebimento --> procurar_banco_de_dados
   conciliar_recebimento --> rotular_item
+  conferir_termo_de_outro_idioma --> definir_referencia_cultural
+  conferir_termo_de_outro_idioma --> procurar_banco_de_dados
   configurar_harness_de_negocio --> criar_pull_request
   configurar_harness_de_negocio --> definir_issue_do_github
   configurar_harness_de_negocio --> levantar_ambiente_do_repositorio
@@ -358,6 +362,7 @@ flowchart LR
   conversar_no_whatsapp --> definir_tarefa
   conversar_no_whatsapp --> definir_viagem
   conversar_no_whatsapp --> definir_vocabulario
+  conversar_no_whatsapp --> diagnosticar_funil
   conversar_no_whatsapp --> dividir_mensagem
   conversar_no_whatsapp --> enviar_email
   conversar_no_whatsapp --> escrever_link
@@ -604,6 +609,8 @@ flowchart LR
   definir_negociacao --> abordar_contato
   definir_negociacao --> acompanhar_retornos_pendentes
   definir_negociacao --> definir_agenda
+  definir_negociacao --> definir_empresa
+  definir_negociacao --> definir_pessoa
   definir_negociacao --> diagnosticar_funil
   definir_negociacao --> inscrever_na_oportunidade
   definir_negociacao --> organizar_ponto_de_contato
@@ -675,6 +682,11 @@ flowchart LR
   definir_reel_do_instagram --> definir_roteiro_de_video
   definir_reel_do_instagram --> escrever_legenda_do_post
   definir_reel_do_instagram --> planejar_calendario_de_conteudo
+  definir_referencia_cultural --> conferir_termo_de_outro_idioma
+  definir_referencia_cultural --> definir_localidade_geografica
+  definir_referencia_cultural --> escrever_link
+  definir_referencia_cultural --> identificar_duplicata
+  definir_referencia_cultural --> procurar_banco_de_dados
   definir_registro_de_reuniao --> definir_agenda
   definir_registro_de_reuniao --> definir_grafia
   definir_registro_de_reuniao --> definir_pessoa
@@ -917,6 +929,7 @@ flowchart LR
   manter_contato_no_whatsapp --> definir_pessoa
   manter_contato_no_whatsapp --> perfilar_tom_de_voz
   manter_contato_no_whatsapp --> rotular_item
+  manter_contato_no_whatsapp --> triar_conversas
   manter_contato_no_whatsapp --> usar_whatsapp_web
   medir_habilidade --> testar_habilidade
   mencionar_pessoa --> definir_pessoa
