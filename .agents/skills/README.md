@@ -37,7 +37,7 @@ flowchart LR
     completar_despesa_de_compra["completar-despesa-de-compra"]
     comunicar_novidade_do_produto["comunicar-novidade-do-produto"]
     conciliar_recebimento["conciliar-recebimento"]
-    conferir_termo_de_lingua_indigena["conferir-termo-de-lingua-indigena"]
+    conferir_termo_de_outro_idioma["conferir-termo-de-outro-idioma"]
     configurar_harness_de_negocio["configurar-harness-de-negocio"]
     consultar_responsavel_pela_oportunidade["consultar-responsavel-pela-oportunidade"]
     consultar_vocabulario["consultar-vocabulario"]
@@ -328,7 +328,7 @@ flowchart LR
   conciliar_recebimento --> lancar_venda
   conciliar_recebimento --> procurar_banco_de_dados
   conciliar_recebimento --> rotular_item
-  conferir_termo_de_lingua_indigena --> procurar_banco_de_dados
+  conferir_termo_de_outro_idioma --> procurar_banco_de_dados
   configurar_harness_de_negocio --> criar_pull_request
   configurar_harness_de_negocio --> definir_issue_do_github
   configurar_harness_de_negocio --> levantar_ambiente_do_repositorio

@@ -267,15 +267,16 @@ How these skills relate is in `README.md`, in this folder.
   - [ ] A missing sale detail stops the skill with a question and the gross is not recorded as received
   - [ ] An entry without a sale that is a card withdrawal is not registered as a sale
 
-### conferir-termo-de-lingua-indigena
+### conferir-termo-de-outro-idioma
 - **Stability**: experimental
-- **Description**: Check the meaning of an indigenous-language word by language and variety, with the source of each claim and what stayed unchecked
+- **Description**: Check the meaning of a word from another language, such as an indigenous language, Japanese or Yoruba, by language, variety and spelling, with the source of each claim and what stayed unchecked
 - **Properties**:
-  - Lives at `.agents/skills/conferir-termo-de-lingua-indigena/SKILL.md`
+  - Lives at `.agents/skills/conferir-termo-de-outro-idioma/SKILL.md`
   - Asks the language and variety once when no source gives them, and never completes them by guess
   - Looks in the reference base before the web and uses a registered check with its date
   - Searches by confidence, and keeps an AI summary, a collaborative list, and an unsigned portal as a lead only
   - Does not treat an article that uses the word as proof of its meaning
+  - Checks the exact spelling, with the tones, accents or original characters, and marks as unchecked a meaning that depends on a sign the request did not bring
   - Answers in three blocks: checked, lead, and unchecked, each claim with language, variety, source, and link
   - Says that the community must be consulted before commercial use when a symbol seems sacred or restricted, and does not decide for it
   - Sends each source to definir-referencia-cultural to be recorded
