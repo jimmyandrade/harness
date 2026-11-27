@@ -3,7 +3,7 @@ name: preparar-tarefa-do-pull-request
 description: Garante a tarefa da demanda antes do pull request e confere se a descrição de qualquer card segue o modelo do tipo. Usada quando falta a tarefa, quando o PR já existe sem ela, ao implementar uma issue e ao escrever ou editar um card, mesmo subtarefa. Não cria sozinha nem escolhe o projeto por um card parecido. Não serve para abrir o PR.
 metadata:
   author: jimmyandrade
-  version: "0.12.0"
+  version: "0.13.0"
   related:
     - definir-tarefa
     - evoluir-habilidade
@@ -37,7 +37,7 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 # `Padrão do título do card` diz como o projeto escreve o título, como etiquetas de módulo e de plataforma antes do nome. Vazio, a habilidade não impõe formato.
 "Padrão do título do card": ""
 "Formato dos critérios de aceitação": ""
-# `Critério de validação da mudança` é o último critério de uma tarefa que muda código de um app com ambiente de teste por PR.
+# `Critério de validação da mudança` é o último critério de uma tarefa que muda código de um app com ambiente de teste por PR. Numa tarefa atualizada depois de o trabalho estar feito, só entra com o registro já no card.
 "Critério de validação da mudança": ""
 # `Mapa de permissões` diz onde ler e gravar o que a pessoa pode fazer em cada projeto (criar, editar, comentar, atribuir, transicionar), com `sim`, `não` ou `desconhecido`.
 "Mapa de permissões": ""
@@ -75,7 +75,9 @@ Toda demanda tem uma tarefa. Não pule por causa do estado do PR, como rascunho 
 
 Siga `procurar-tarefa` antes de sugerir qualquer criação, com palavras da demanda e, quando houver PR, o nome da branch. Se achar uma tarefa que cobre a demanda, não sugira uma nova. Se a pessoa só perguntou se a tarefa existe, mostre o nome, o status e o link, e pare.
 
-Se a pessoa vai trabalhar nessa tarefa, ou pediu para implementar, leia a descrição e o modelo do tipo em `Modelos de descrição`, com o `Formato dos critérios de aceitação`. A descrição está no modelo quando tem as seções do modelo, cada critério é um título com "deve" ou "não deve" e os três itens Dado que, Quando e Então, e, quando a tarefa muda código de um app com ambiente de teste por PR, o último critério é o `Critério de validação da mudança`. Fora do modelo, reescreva a descrição para o modelo nesse turno, sem inventar escopo e sem descartar decisão que já estava escrita. Diga o que mudou. Não comece o código enquanto a descrição estiver fora do modelo. Dentro do modelo, diga isso e siga.
+Se a pessoa vai trabalhar nessa tarefa, ou pediu para implementar, leia a descrição e o modelo do tipo em `Modelos de descrição`, com o `Formato dos critérios de aceitação`. A descrição está no modelo quando tem as seções do modelo, cada critério é um título com "deve" ou "não deve" e os três itens Dado que, Quando e Então, e, quando a tarefa muda código de um app com ambiente de teste por PR, o último critério é o `Critério de validação da mudança`, salvo na tarefa retroativa sem o registro dele.
+
+Fora do modelo, reescreva a descrição para o modelo nesse turno, sem inventar escopo e sem descartar decisão que já estava escrita. Diga o que mudou. Não comece o código enquanto a descrição estiver fora do modelo. Dentro do modelo, diga isso e siga.
 
 ### Passo 4
 
@@ -95,6 +97,9 @@ Monte a tarefa com `definir-tarefa`, que cuida da boa escrita: título, prazo, d
 - O escopo é fatiado, e cada parte entrega valor cedo. Separe o obrigatório do que fica de fora agora, com `priorizar-itens`, para cada subtarefa caber num PR.
 - A tarefa guarda o que se espera: o escopo e os critérios de aceitação, que dizem o que fica pronto e quando. Como foi feito e por que cada decisão foi tomada ficam na descrição do PR, não na tarefa. Quando uma pergunta de revisão muda o comportamento, atualize o critério afetado, em Dado, Quando e Então, e a descrição do PR ganha a decisão.
 - Os critérios de aceitação seguem o `Formato dos critérios de aceitação`. Uma tarefa que muda código de um app com ambiente de teste por PR termina com o `Critério de validação da mudança`. O registro diz o que foi procurado e o que foi encontrado, nunca só que não há regressão.
+- Ao levar ao modelo uma tarefa cujo trabalho já foi feito, ou que já está concluída, o `Critério de validação da mudança` só entra se o registro que ele pede já está na tarefa.
+Sem o registro, o critério fica de fora, e a resposta diz que ficou de fora e por quê.
+Um critério que ninguém cumpriu, numa tarefa concluída, deixa uma pendência que não existe.
 - Antes de escrever ou editar a descrição de qualquer card, leia o modelo do tipo em `Modelos de descrição` e o `Formato dos critérios de aceitação`. Vale também para subtarefa e para card que nasce de um achado, sem PR. A descrição segue as seções do modelo, na ordem. Sem modelo para o tipo, os critérios usam o mesmo formato: um título com "deve" ou "não deve" e os itens Dado que, Quando e Então. Nunca lista solta de bullets. Um reforço do projeto soma ao modelo do tipo e nunca o substitui, e não vale numa tarefa criada no projeto de reserva.
 - Ao atualizar um card que já existe depois de uma reunião, padronize primeiro o título pelo `Padrão do título do card`, na mesma grafia dos cards irmãos. Com o parâmetro vazio, siga só a grafia dos cards irmãos e não imponha um formato.
 - Nesse card, adapte a descrição ao modelo do tipo sem perder nenhuma informação: o que não cabe numa seção do modelo vai para `Contexto` ou `Pontos em aberto`, nunca é apagado.
@@ -179,6 +184,14 @@ Se você só comentar o link do registro da reunião, a tarefa continua dizendo 
 2. Ponha na descrição o que a reunião trouxe e ela não diz, e no título o que o descreve de novo.
 3. Sem novidade, comente só e diga que conferiu.
 
+### Critério de validação em tarefa retroativa
+
+Se você acrescentar o `Critério de validação da mudança` numa tarefa cujo trabalho já foi feito e que não tem o registro dele, a tarefa concluída passa a ter um critério que ninguém cumpriu.
+
+1. Procure na tarefa o comentário com o que foi conferido e o que foi encontrado.
+2. Sem esse registro, deixe o critério de fora.
+3. Diga na resposta que ele ficou de fora e por quê, e deixe a pessoa decidir se quer o registro depois.
+
 ### Chave na branch contra a convenção
 
 Se você puser a chave da tarefa no nome da branch num repositório que a proíbe, o check da branch falha.
@@ -214,6 +227,7 @@ O PR está aberto, em rascunho. Procurei e não achei. Sugeri criar a tarefa a p
 - Falta permissão de criação: use o projeto de reserva, ou diga e pare.
 - A pessoa não deu contexto suficiente: pergunte de novo, sem criar.
 - O repositório proíbe a chave no nome da branch: a convenção vale, e a chave fica só no corpo do PR.
+- A tarefa já está concluída e a pessoa pede só o modelo: o critério de validação entra apenas se o registro dele já está na tarefa.
 - O card é uma subtarefa, ou nasce de um achado no meio de outro trabalho, sem PR: o modelo do tipo vale do mesmo jeito.
 - Não há modelo para o tipo: os critérios usam Dado que, Quando e Então, com o título em "deve" ou "não deve".
 
@@ -229,6 +243,7 @@ O PR está aberto, em rascunho. Procurei e não achei. Sugeri criar a tarefa a p
 - Um card parecido noutro projeto parece resolver o projeto. Não resolve. Pergunte a chave, salvo quando `Prefixo da chave do projeto` tem um único valor.
 - Vários prefixos parecem autorização para escolher um sozinho. Não são. A pessoa escolhe.
 - O exemplo `PROJ` e `OUTRO` no comentário do parâmetro não é prefixo configurado. Vazio continua vazio.
+- O modelo manda o critério de validação em todo card que muda código, e isso parece valer também para a tarefa já concluída. Nela, o critério só entra com o registro já feito.
 
 ## Scripts disponíveis
 

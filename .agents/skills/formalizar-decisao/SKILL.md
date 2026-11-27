@@ -3,7 +3,7 @@ name: formalizar-decisao
 description: Leva uma decisão de comportamento a quem decide, com a dúvida, a hipótese e o que já está definido, e formaliza a resposta na tarefa e no pull request, em qualquer canal e em qualquer momento, do refinamento ao desk check. Usada quando surge uma dúvida ou uma escolha de comportamento que não é sua, mesmo sem dizer decisão. Não serve para dúvida de código, status de entrega nem para escrever o texto da mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.6.2"
+  version: "0.6.4"
   aliases:
     - abrir-thread-de-decisao
   related:
@@ -38,7 +38,9 @@ Reconheça a decisão: uma dúvida, uma hipótese ou uma escolha entre opções 
 
 ### Passo 2
 
-Antes de perguntar, procure a resposta em `Fontes antes de perguntar`: os comentários, as páginas e os arquivos ligados do desenho, o que ele liga a tokens e a variáveis, a data da última mudança, os registros de refinamento e de reunião, o card com os comentários dele, cada ata ou página que o card cita e a conversa.
+Antes de perguntar, procure a resposta em `Fontes antes de perguntar`: os comentários, as páginas e os arquivos ligados do desenho, o que ele liga a tokens e a variáveis, a data da última mudança, os registros de refinamento e de reunião, o card com os comentários dele, cada ata ou página que o card cita, a busca no rastreador por cards do mesmo assunto e a conversa.
+Leia o desenho pela estrutura: o nome de cada linha, de cada coluna e de cada estado, a posição de cada quadro e as notas dizem qual é cada um.
+Um quadro com cara de desenho à parte pode ser só um estado de outro, como o hover. Só trate como opção a decidir o que a estrutura não explica.
 Uma fonte que responde, com data e autor, vira decisão já tomada: siga o Passo 7 e não pergunte.
 Uma fonte que responde só em parte reduz a pergunta ao que falta.
 Fontes que se contradizem entram no pedido como contradição, cada uma com o seu link.
@@ -46,6 +48,10 @@ Fontes que se contradizem entram no pedido como contradição, cada uma com o se
 Uma proposta de implementação que difere de uma decisão já registrada, como um contrato de dados que não segue a história, não é contradição entre fontes nem pergunta a quem decidiu.
 Aponte a diferença a quem propôs, cite a fonte da decisão e peça o ajuste.
 Pergunte a quem decide só o que nenhuma fonte responde.
+
+Quando alguém cita trabalho de outra pessoa, como "o Luan ia olhar isso", procure o card ou a issue desse trabalho antes de registrar um ponto em aberto.
+Busque no rastreador pela palavra do assunto e pela pessoa, e leia o que o card achado diz.
+Achado, cite o card no ponto em aberto. Não achado, diga onde procurou.
 
 Monte o pedido: o que já está definido e onde você achou, o que foi procurado e não respondeu, a dúvida ou a hipótese, as opções e a sua recomendação quando houver, e a evidência de cada caso, como uma imagem ou um número. Faça uma pergunta só, no fim.
 
@@ -108,7 +114,7 @@ O que ficou ambíguo entra como pendente.
 
 Se você perguntar a uma pessoa o que o desenho, o registro de refinamento, o card ou a conversa já diziam, ela responde de memória, perde tempo, e a resposta pode contradizer a fonte sem ninguém notar.
 
-1. Procure em `Fontes antes de perguntar` antes de montar o pedido.
+1. Procure em `Fontes antes de perguntar` antes de montar o pedido, e leia o desenho pela estrutura.
 2. Achou a resposta, com data e autor: formalize pelo Passo 7 e não pergunte.
 3. Não achou, ou achou em parte: pergunte só o que falta e diga na pergunta o que foi procurado e onde.
 
@@ -151,6 +157,14 @@ Se você perguntar a quem decide o que a história, o desenho ou uma ata já res
 1. Abra cada ata ou página que o card cita, além do card e do desenho, antes de escrever a pergunta.
 2. Compare a proposta com a decisão registrada. Se ela difere, aponte a diferença a quem propôs, com a fonte, e peça o ajuste.
 3. Leve a quem decide só o que nenhuma fonte responde, e marque o resto como já decidido, com o link.
+
+### Ponto em aberto sem procurar o card
+
+Se você registrar como ponto em aberto o que alguém disse que outra pessoa ia olhar, sem buscar o card, o time vê um item solto que talvez já tenha dono, causa e evidência no rastreador.
+
+1. Busque no rastreador pela palavra do assunto e pela pessoa citada.
+2. Leia o card achado e cite-o no ponto em aberto, com o que ele já mostra.
+3. Sem card, diga onde procurou e que não achou.
 
 ### Reação atribuída a quem não reagiu
 
@@ -216,6 +230,7 @@ Perguntei só o que as fontes não respondiam: "A nota de 12/03 é a versão fin
 - A dúvida é de código: ela vai para o pull request, não para esta habilidade.
 - A fonte que responde é mais antiga que uma mudança posterior no mesmo assunto: não a use como decisão. Leve a data das duas à pessoa.
 - A proposta de quem implementa difere da história, do desenho ou de uma ata: não consulte quem decidiu. Aponte a diferença a quem propôs e peça o ajuste.
+- Alguém diz que outra pessoa ia olhar um assunto: busque o card antes de registrar o ponto em aberto, e cite o que achar ou onde procurou.
 - A thread mostra uma reação e a ferramenta não lista quem reagiu: diga que não sabe quem foi e não a atribua a ninguém.
 - A ferramenta de desenho não mostra o histórico de versões: diga que não foi possível ler, com o que o arquivo mostra no lugar, e não conclua que o desenho é final.
 
@@ -223,11 +238,13 @@ Perguntei só o que as fontes não respondiam: "A nota de 12/03 é a versão fin
 
 - Uma thread geral de status parece o lugar mais rápido para perguntar. A decisão se perde nela.
 - Uma proposta de implementação que não bate com a história parece uma dúvida de produto. A decisão já existe, e quem propôs ajusta.
+- "O fulano ia olhar" parece um ponto em aberto novo. O trabalho pode já ter card, com causa e evidência, e a busca no rastreador acha antes de a pessoa precisar apontar.
 - Um joinha numa thread parece vir de quem foi consultado. A leitura da thread não diz quem reagiu: leia a lista antes de citar um nome.
 - O Slack parece a única ferramenta. O negócio pode conversar também em outra, com ou sem thread.
 - A resposta na conversa parece registrar a decisão. O registro é a área de decisões da tarefa e do pull request.
 - A decisão tomada no desk check parece pequena demais para formalizar. Ela muda o critério e a evidência do mesmo jeito.
 - Um post novo parece barulho no canal. Uma thread por assunto mantém cada decisão achável.
+- Um quadro do desenho com cara de terceira opção parece uma escolha para a designer. Pela linha, pela coluna e pelo estado, pode ser o hover de outro quadro, e a pergunta nem existe.
 - Perguntar parece mais seguro que procurar. A pessoa responde de memória, e a fonte já tinha a resposta com data e autor.
 - A ausência de comentário depois da nota parece prova de versão final. Ela só mostra que ninguém comentou, e a pergunta continua valendo, dita com o que foi procurado.
 

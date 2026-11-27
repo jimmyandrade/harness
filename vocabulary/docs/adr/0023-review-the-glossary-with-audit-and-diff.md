@@ -23,4 +23,4 @@ Two read-only operations review a glossary.
 
 A review after an import is one command, and the findings are a list a person can settle one by one. `audit` does not say which side is wrong: a finding names the row and the forbidden term, and a person decides whether the example or the ban changes.
 
-`audit` flags a term that a row without tags forbids even where a tagged row allows it, so a context rule can show up as a finding. A later change can pass the tags of a context to `audit`, as `lookup` does.
+`audit` reads no context, so it leaves out a spelling that a tagged row allows: the forbidden row of `eu` is not checked, because `eu` is allowed when a person speaks for themselves. A spelling with no tagged exception is still checked. A later change can pass the tags of a context to `audit`, as `lookup` does, to check the excepted spellings too.
