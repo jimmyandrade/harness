@@ -4,7 +4,7 @@ description: Varre as conversas com mensagem nova nos canais configurados, como 
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.12.1"
+  version: "0.12.2"
   models:
     - arvore-de-decisao-da-triagem
     - relatorio-de-conversas
@@ -80,7 +80,9 @@ Com a etiqueta preenchida e a lista fora da conta, nenhum grupo é lido, e a var
 
 Em cada conversa, leia as mensagens desde o ponto de leitura dela: o `Lido até` do relatório anterior ou, sem ele, o marcador de não lidas ou o período da cadência. Leia a conversa aberta, não a prévia da lista. Uma conversa sem mensagem nova no período entra no relatório com a frase "Não houve interação".
 
-O WhatsApp Web não toca o áudio, mas guarda o arquivo. Todo áudio, e todo vídeo curto com fala, se transcreve, sempre, sem perguntar: baixe cada um pela aba, como `usar-whatsapp-web` manda, e siga `transcrever-audio-e-video`. Grave o texto em `Pasta das transcrições`, com a conversa, quem mandou, a data e a hora, e leia o arquivo antes de seguir. Classifique o áudio pelo texto, como as outras mensagens. Sem o arquivo ou sem a transcrição, diga o resultado real da tentativa, liste quem mandou e a hora como ponto de atenção e peça a transcrição à pessoa.
+O WhatsApp Web não toca o áudio, mas guarda o arquivo. Todo áudio, e todo vídeo curto com fala, se transcreve, sem perguntar: baixe cada um pela aba, como `usar-whatsapp-web` manda, e siga `transcrever-audio-e-video`. 
+
+Grave o texto em `Pasta das transcrições`, com a conversa, quem mandou, a data e a hora, e leia o arquivo antes de seguir. Classifique o áudio pelo texto, como as outras mensagens. Sem o arquivo ou sem a transcrição, diga o resultado real da tentativa, liste quem mandou e a hora como ponto de atenção e peça a transcrição à pessoa.
 
 O documento e a imagem de uma conversa individual que pedem ação seguem `Baixar documento e imagem`. Em `perguntar`, liste o arquivo como ponto de atenção, com o nome, o tamanho e o que o texto da mensagem já diz dele, diga que não foi lido e peça o sim para baixar.
 
@@ -174,7 +176,7 @@ Se você gravar a intercorrência no corpo da edição ou nas notas de curadoria
 
 ### Áudio classificado sem transcrever
 
-Se você classificar um áudio pela prévia ou pela duração, uma reclamação passa como sem relevância.
+Se você classificar um áudio pela prévia ou pela duração ou não o tentar, uma reclamação passa como sem relevância.
 
 1. Baixe o áudio e transcreva, como o Passo 2 manda.
 2. Sem o arquivo ou sem a transcrição, liste quem mandou e a hora como ponto de atenção e peça o texto.
@@ -230,7 +232,7 @@ Segui `procurar-oportunidade`, que não achou a edição, e cadastrei a oportuni
 
 ### veja o que chegou nas conversas
 
-No WhatsApp, o grupo da Feira Exemplo teve um áudio de uma expositora às 09h08. Listei o áudio como ponto de atenção e pedi a transcrição. No Slack, um pedido de revisão de PR foi para `procurar-pedido-de-revisao`. As outras conversas não tiveram interação.
+No WhatsApp, o grupo da Feira Exemplo teve um áudio de uma expositora às 09h08. Transcrevi o áudio e o classifiquei pelo texto. No Slack, um pedido de revisão de PR foi para `procurar-pedido-de-revisao`. As outras conversas não tiveram interação.
 
 ### o áudio era a expositora reclamando que puseram a barraca dela fora do setor de joias
 

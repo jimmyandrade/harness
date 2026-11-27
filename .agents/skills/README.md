@@ -246,7 +246,10 @@ flowchart LR
   acompanhar_producao_de_produto_fisico --> procurar_banco_de_dados
   acompanhar_resposta_no_whatsapp --> acompanhar_retornos_pendentes
   acompanhar_resposta_no_whatsapp --> conversar_no_whatsapp
+  acompanhar_resposta_no_whatsapp --> definir_negociacao
+  acompanhar_resposta_no_whatsapp --> definir_pessoa
   acompanhar_resposta_no_whatsapp --> definir_rotina
+  acompanhar_resposta_no_whatsapp --> identificar_duplicata
   acompanhar_resposta_no_whatsapp --> rascunhar_mensagem
   acompanhar_resposta_no_whatsapp --> rotular_item
   acompanhar_resposta_no_whatsapp --> usar_whatsapp_web
@@ -378,6 +381,7 @@ flowchart LR
   conversar_no_whatsapp --> reconhecer_imagem
   conversar_no_whatsapp --> redigir_com_tom_de_voz
   conversar_no_whatsapp --> rotular_item
+  conversar_no_whatsapp --> transcrever_audio_e_video
   conversar_no_whatsapp --> triar_conversas
   conversar_no_whatsapp --> usar_whatsapp_web
   convidar_para_evento --> acompanhar_resposta_no_whatsapp
@@ -618,6 +622,7 @@ flowchart LR
   definir_negociacao --> diagnosticar_funil
   definir_negociacao --> inscrever_na_oportunidade
   definir_negociacao --> organizar_ponto_de_contato
+  definir_negociacao --> perfilar_tom_de_voz
   definir_negociacao --> procurar_banco_de_dados
   definir_negociacao --> procurar_email
   definir_negociacao --> procurar_oportunidade
@@ -998,6 +1003,7 @@ flowchart LR
   pedir_revisao_de_pr_no_slack --> preparar_tarefa_do_pull_request
   pedir_revisao_de_pr_no_slack --> registrar_evidencia_visual
   pedir_revisao_de_pr_no_slack --> registrar_resultados_da_validacao_na_tarefa
+  perfilar_tom_de_voz --> definir_negociacao
   perfilar_tom_de_voz --> definir_vocabulario
   perfilar_tom_de_voz --> redigir_com_tom_de_voz
   perfilar_tom_de_voz --> rotular_item
