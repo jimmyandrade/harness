@@ -3,7 +3,7 @@ name: formalizar-decisao
 description: Leva uma decisão de comportamento a quem decide, com a dúvida, a hipótese e o que já está definido, e formaliza a resposta na tarefa e no pull request, em qualquer canal e em qualquer momento, do refinamento ao desk check. Usada quando surge uma dúvida ou uma escolha de comportamento que não é sua, mesmo sem dizer decisão. Não serve para dúvida de código, status de entrega nem para escrever o texto da mensagem.
 metadata:
   author: jimmyandrade
-  version: "0.6.3"
+  version: "0.6.4"
   aliases:
     - abrir-thread-de-decisao
   related:
@@ -39,6 +39,8 @@ Reconheça a decisão: uma dúvida, uma hipótese ou uma escolha entre opções 
 ### Passo 2
 
 Antes de perguntar, procure a resposta em `Fontes antes de perguntar`: os comentários, as páginas e os arquivos ligados do desenho, o que ele liga a tokens e a variáveis, a data da última mudança, os registros de refinamento e de reunião, o card com os comentários dele, cada ata ou página que o card cita, a busca no rastreador por cards do mesmo assunto e a conversa.
+Leia o desenho pela estrutura: o nome de cada linha, de cada coluna e de cada estado, a posição de cada quadro e as notas dizem qual é cada um.
+Um quadro com cara de desenho à parte pode ser só um estado de outro, como o hover. Só trate como opção a decidir o que a estrutura não explica.
 Uma fonte que responde, com data e autor, vira decisão já tomada: siga o Passo 7 e não pergunte.
 Uma fonte que responde só em parte reduz a pergunta ao que falta.
 Fontes que se contradizem entram no pedido como contradição, cada uma com o seu link.
@@ -112,7 +114,7 @@ O que ficou ambíguo entra como pendente.
 
 Se você perguntar a uma pessoa o que o desenho, o registro de refinamento, o card ou a conversa já diziam, ela responde de memória, perde tempo, e a resposta pode contradizer a fonte sem ninguém notar.
 
-1. Procure em `Fontes antes de perguntar` antes de montar o pedido.
+1. Procure em `Fontes antes de perguntar` antes de montar o pedido, e leia o desenho pela estrutura.
 2. Achou a resposta, com data e autor: formalize pelo Passo 7 e não pergunte.
 3. Não achou, ou achou em parte: pergunte só o que falta e diga na pergunta o que foi procurado e onde.
 
@@ -242,6 +244,7 @@ Perguntei só o que as fontes não respondiam: "A nota de 12/03 é a versão fin
 - A resposta na conversa parece registrar a decisão. O registro é a área de decisões da tarefa e do pull request.
 - A decisão tomada no desk check parece pequena demais para formalizar. Ela muda o critério e a evidência do mesmo jeito.
 - Um post novo parece barulho no canal. Uma thread por assunto mantém cada decisão achável.
+- Um quadro do desenho com cara de terceira opção parece uma escolha para a designer. Pela linha, pela coluna e pelo estado, pode ser o hover de outro quadro, e a pergunta nem existe.
 - Perguntar parece mais seguro que procurar. A pessoa responde de memória, e a fonte já tinha a resposta com data e autor.
 - A ausência de comentário depois da nota parece prova de versão final. Ela só mostra que ninguém comentou, e a pergunta continua valendo, dita com o que foi procurado.
 
