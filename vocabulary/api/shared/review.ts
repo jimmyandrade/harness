@@ -106,15 +106,25 @@ function escaped(text: string): string {
 /**
  * Review the glossary of one language. A row that is not forbidden is flagged
  * when an example, an alternative, or its substitution holds a term that a row
- * without tags forbids, as a whole word. A row is also flagged for each field
+ * without tags forbids, as a whole word. A spelling that a tagged row allows is
+ * left out: the context decides it, and the audit reads no context. A row is also flagged for each field
  * its level expects and lacks, unless the row records no decision: the rows the
  * glossary made on its own are incomplete by design, so they are counted and
  * not listed.
  */
 export function auditGlossary(directory: string, language: string): Audit {
   const { tag, entries } = entriesOf(directory, language)
+  const excepted = new Set(
+    entries.filter((entry) => entry.state !== "forbidden" && (entry.tags ?? []).length > 0).map((entry) => entry.term.toLocaleLowerCase()),
+  )
   const forbidden = entries
-    .filter((entry) => entry.state === "forbidden" && (entry.tags ?? []).length === 0 && entry.stateless !== true)
+    .filter(
+      (entry) =>
+        entry.state === "forbidden" &&
+        (entry.tags ?? []).length === 0 &&
+        entry.stateless !== true &&
+        !excepted.has(entry.term.toLocaleLowerCase()),
+    )
     .map((entry) => ({ term: entry.term, pattern: new RegExp(`(?<![\\p{L}\\p{N}])${escaped(entry.term)}(?![\\p{L}\\p{N}])`, "iu") }))
   const findings: AuditFinding[] = []
   const hold = (entry: Entry, texts: readonly string[], kind: AuditFinding["kind"]): void => {
