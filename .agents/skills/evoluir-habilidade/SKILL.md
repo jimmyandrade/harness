@@ -3,7 +3,7 @@ name: evoluir-habilidade
 description: Muda uma skill ou as instruções do projeto a pedido ou pelo feedback de uma execução, como falha ou correção da pessoa, e abre o pull request no repositório de origem. Usada ao pedir uma regra nova, mesmo sem dizer evoluir, e ao fim de cada skill. Não serve para testar a skill, criar a primeira versão, ver se a descrição dispara, só revisar nem gravar no Notion.
 metadata:
   author: jimmyandrade
-  version: "0.35.2"
+  version: "0.36.0"
   related:
     - criar-commit
     - criar-habilidade
@@ -100,7 +100,9 @@ Antes de commitar, releia as linhas que a edição acrescentou. Cada parágrafo 
 ### Passo 3
 
 Sempre que a skill for executada, compare os rastros do agente entre os casos. Se ele reinventar sozinho a mesma lógica em cada execução, como gerar um gráfico, analisar um formato ou validar a saída, avise a pessoa.
-Proponha um script testado uma vez. Com o aceite, grave em `scripts/` quando só esta skill usa, ou em `.agents/scripts/<nome>/` quando várias usam. Passe a chamá-lo. A lógica deixa de ser reescrita a cada execução. O script que valida as próprias skills é o caso global: a checagem roda igual, em vez de o agente rederivar as regras.
+Script escrito na hora para uma execução não morre com a sessão: teste-o uma vez, grave-o no mesmo turno em `scripts/` quando só esta skill usa, ou em `.agents/scripts/<nome>/` quando várias usam, liste-o em `Scripts disponíveis` da skill e passe a chamá-lo. A resposta diz onde ele ficou. A lógica deixa de ser reescrita a cada execução, e o token de montar o script não se gasta de novo. O script que valida as próprias skills é o caso global: a checagem roda igual, em vez de o agente rederivar as regras.
+
+Script que quebra, escrito na hora ou já salvo, não se corrige só para a sessão: evolua o script no repositório de origem, para ele cobrir o caso que quebrou e mais de uma situação, e suba a versão da skill. A resposta diz por que ele quebrou e que agora cobre também esse caso, como "o script quebrou com arquivo fora de ordem; evoluí o script e ele também reordena".
 
 O nome e o lugar do script, desde a proposta, seguem `definir-arquivos-da-habilidade`, inclusive o `Idioma do nome dos scripts`.
 
@@ -205,11 +207,19 @@ Se você só anotar o teste, ou só anotar o que a pessoa respondeu, e não edit
 
 ### Lógica reinventada
 
-Se você deixar o agente reescrever a mesma lógica em cada caso, a saída muda sem mudança na tarefa.
+Se você deixar o agente reescrever a mesma lógica em cada caso, a saída muda sem mudança na tarefa, e cada execução gasta token de novo.
 
 1. Compare os rastros entre os casos.
-2. Avise a pessoa e proponha um script em `scripts/`, ou em `.agents/scripts/<nome>/` se várias skills usam, com o nome e o lugar que `definir-arquivos-da-habilidade` manda.
-3. Com o aceite, teste o script uma vez e passe a chamá-lo.
+2. Grave o script em `scripts/`, ou em `.agents/scripts/<nome>/` se várias skills usam, com o nome e o lugar que `definir-arquivos-da-habilidade` manda, e diga à pessoa onde ficou.
+3. Teste o script uma vez e passe a chamá-lo.
+
+### Script consertado só na sessão
+
+Se você corrigir um script que quebrou só na cópia da sessão, a próxima execução quebra do mesmo jeito, e a lógica de consertar se gasta de novo.
+
+1. Evolua o script no repositório de origem, para cobrir o caso que quebrou e outros parecidos.
+2. Suba a versão da skill que o chama.
+3. Diga por que ele quebrou e que agora cobre também esse caso.
 
 ## Exemplos de entrada e saída
 
@@ -224,7 +234,7 @@ A skill mudou no repositório de origem e o pull request saiu no mesmo turno, em
 - O pedido não traz nome nem caminho da skill: pare e peça.
 - A mesma lógica aparece numa execução só: não proponha script.
 - A pessoa recusa o script: a lógica fica na instrução.
-- O script já existe: chame o script em vez de reescrever a lógica.
+- O script já existe: chame o script em vez de reescrever a lógica. Se ele quebrar, evolua-o, como o Passo 3 manda.
 - O pedido é testar a skill: use `testar-habilidade`. O resultado volta aqui e edita a skill validada no repositório de origem, na mesma conversa.
 - O pedido é saber se um prompt dispara a skill: use `descrever-habilidade-ou-schema`.
 - O pedido é só revisar, sem executar: use `revisar-habilidade`.
@@ -245,7 +255,8 @@ A skill mudou no repositório de origem e o pull request saiu no mesmo turno, em
 - Conferir a cada lição parece necessário. A conferência é uma vez, depois do push.
 - O corpo cheio parece pedir uma skill nova. Quando o trecho é forma, como a estrutura de um arquivo, um modelo de saída resolve sem pesar no catálogo.
 - Uma mudança pedida parece exigir execução antes. Ela entra direto. A validação vem depois, com um caso real.
-- A mesma lógica reescrita em cada caso vira script, com o aceite da pessoa. Script de várias skills fica em `.agents/scripts/<nome>/`.
+- A mesma lógica reescrita em cada caso vira script salvo e listado na skill, no mesmo turno. Script de várias skills fica em `.agents/scripts/<nome>/`.
+- Consertar o script na sessão parece resolver. O conserto que não volta ao repositório se refaz na próxima execução.
 - Pedido feito numa cópia, sincronizada ou instalada por dependência ou plugin, parece permissão para gravá-la. A cópia é só leitura. A edição vai no repositório de origem. Siga `criar-commit`.
 - Pedir o repositório parece o passo que falta. A skill fica em `Pasta das habilidades`, no repositório de origem. A cópia instalada não é esse repositório. Sem acesso, a mudança pronta é a entrega.
 
