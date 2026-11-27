@@ -4,13 +4,13 @@ description: Registra, no banco de referências do projeto, uma fonte sobre uma 
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.1.1"
+  version: "0.1.2"
   related:
     - procurar-banco-de-dados
     - identificar-duplicata
     - definir-localidade-geografica
     - escrever-link
-    - conferir-termo-de-lingua-indigena
+    - conferir-termo-de-outro-idioma
 ---
 
 # Definir referência cultural
