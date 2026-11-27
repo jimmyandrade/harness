@@ -621,6 +621,7 @@ flowchart LR
   definir_negociacao --> diagnosticar_funil
   definir_negociacao --> inscrever_na_oportunidade
   definir_negociacao --> organizar_ponto_de_contato
+  definir_negociacao --> perfilar_tom_de_voz
   definir_negociacao --> procurar_banco_de_dados
   definir_negociacao --> procurar_email
   definir_negociacao --> procurar_oportunidade
@@ -1001,6 +1002,7 @@ flowchart LR
   pedir_revisao_de_pr_no_slack --> preparar_tarefa_do_pull_request
   pedir_revisao_de_pr_no_slack --> registrar_evidencia_visual
   pedir_revisao_de_pr_no_slack --> registrar_resultados_da_validacao_na_tarefa
+  perfilar_tom_de_voz --> definir_negociacao
   perfilar_tom_de_voz --> definir_vocabulario
   perfilar_tom_de_voz --> redigir_com_tom_de_voz
   perfilar_tom_de_voz --> rotular_item
