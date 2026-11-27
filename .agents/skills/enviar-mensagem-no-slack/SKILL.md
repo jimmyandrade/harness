@@ -3,7 +3,7 @@ name: enviar-mensagem-no-slack
 description: Redige uma mensagem de Slack, num canal, thread ou DM, e entrega o rascunho com o link do destino. Só envia com a autorização explícita da pessoa e, depois do envio, compara o proposto com o aplicado para alimentar o vocabulário. Usada quando a pessoa pede uma mensagem ou resposta no Slack. Não serve para achar conversa antiga nem cadastrar pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.12.1"
+  version: "0.12.2"
   related:
     - definir-agenda
     - definir-pessoa
@@ -159,6 +159,10 @@ Ajuste o formato do Slack, valendo para qualquer texto:
 
 ### Passo 5
 
+Antes de entregar, classifique o texto inteiro como `redigir-com-tom-de-voz` manda, com as tags do Passo 3, e leia `words` e `expressions`.
+Troque todo termo ou expressão proibida pela alternativa e classifique de novo.
+Um rascunho que não passou pela classificação não é entregue, nem o aviso curto de status.
+
 Entregue o texto inteiro, com o link direto da thread ou da mensagem onde ele vai: o endereço absoluto do Slack, com o canal e o horário da mensagem sem o ponto, depois de um `p`, e, numa resposta, o da thread-pai. Não diga só que o rascunho está pronto.
 
 Crie o rascunho no Slack. Antes, conte os que você já criou nesse canal nesta sessão: um rascunho de resposta numa thread conta no canal inteiro. No `Limite de rascunhos por canal`, não crie outro, porque o Slack apagaria um existente sem avisar. Nunca diga que há vários rascunhos no mesmo canal.
@@ -198,6 +202,13 @@ Se você enviar uma mensagem porque a pessoa pediu o texto, ela perde a chance d
 1. Mostre o texto e o destino.
 2. Espere o sim a essa mensagem.
 3. Depois de enviar, devolva o link.
+
+### Rascunho sem classificação
+
+Se você escrever o rascunho com as frases do vocabulário de cabeça e não classificar o texto inteiro, um termo proibido passa e a pessoa o acha ao ler.
+
+1. Classifique o texto inteiro antes de criar o rascunho, também o aviso curto de status.
+2. Troque o que vier proibido, classifique de novo e só então entregue.
 
 ### Segundo rascunho no mesmo canal
 
