@@ -3,7 +3,7 @@ name: definir-hospedagem
 description: Define a hospedagem de uma viagem, da cotação que decide a data até o que ela pede depois da reserva, como nome e documento dos hóspedes, veículo e chegada, e a resposta a quem hospeda, com o sim se leva dado pessoal. Usada quando o anfitrião ou o hotel escreve, ou a pessoa pede para agradecer ou avisar. Não serve para ler a reserva, registrar a viagem nem redigir no tom da marca.
 metadata:
   author: jimmyandrade
-  version: "0.28.5"
+  version: "0.28.6"
   aliases:
     - responder-pedido-da-hospedagem
   related:
@@ -17,6 +17,7 @@ metadata:
     - evoluir-habilidade
     - lancar-despesa-da-empresa
     - procurar-email
+    - realizar-compra
     - redigir-com-tom-de-voz
 ---
 
@@ -188,7 +189,9 @@ Hospedagem paga por terceiro, como a de uma missão ou de um evento, não aparec
 A tabela do que achou cita, em cada linha, a viagem e o ponto de contato, ou diz que não há. Viagem sem ponto de contato, como uma formatura, também é viagem, e se cadastra por `definir-viagem`.
 Com só o primeiro nome do anfitrião, não cadastre a pessoa: fica o perfil da plataforma ligado à hospedagem.
 Grave só depois que a pessoa aprovar a tabela.
-Antes de enviar um pedido de reserva, pergunte a forma de pagamento, Pix ou cartão, e confirme o total. Depois, confira a conversa com o anfitrião no intervalo que a pessoa disser e registre no Notion o que ele responder sobre as pendências, como garagem e água quente, até ele responder e aceitar ou recusar.
+Na tela de pagamento de uma reserva, não escolha, não troque nem confirme a forma de pagamento e não pague: quem paga é a pessoa. A forma que a plataforma deixa marcada, ou que lista só pelos quatro últimos dígitos, como uma chave Pix, não vale como resposta. Pergunte qual forma a pessoa usa e em qual conta, mostre o total e pare. A compra de um item segue `realizar-compra`.
+
+Depois que a pessoa pagar, confira a conversa com o anfitrião no intervalo que a pessoa disser e registre no Notion o que ele responder sobre as pendências, como garagem e água quente, até ele responder e aceitar ou recusar.
 
 ### Passo 8
 
@@ -235,6 +238,14 @@ Se você responder o anfitrião de plataforma por e-mail, ou o hotel pela plataf
 1. Responda no canal em que o pedido chegou.
 2. Sem acesso ao canal, entregue o texto pronto e diga onde colar.
 
+### Forma de pagamento escolhida pela plataforma
+
+Se você aceitar a forma que a plataforma marca ou lista e seguir para pagar, a pessoa paga por uma forma ou conta que não escolheu.
+
+1. Pare na tela de pagamento da reserva.
+2. Pergunte a forma e a conta e mostre o total, pois a forma marcada ou listada pelos quatro últimos dígitos, como uma chave Pix, não é a resposta dela.
+3. Deixe o pagamento para a pessoa.
+
 ### Rascunho no lugar do envio
 
 Se você devolver só o rascunho de um agradecimento ou de um aviso que a pessoa ditou, ela tem de copiar e colar o texto, e o anfitrião fica sem resposta.
@@ -264,7 +275,6 @@ Respondi pelo e-mail em que o pedido chegou. Mandei nomes e horário. Não mande
 
 - A hospedagem pede um dado que o cadastro não tem e a pessoa não sabe: avise a pessoa, não envie a resposta pela metade e registre a pendência na viagem.
 - A pessoa não vai de carro: a resposta diz isso só se a hospedagem perguntou pelo veículo.
-- O pedido chegou por um canal que a sessão não alcança: entregue o texto pronto e diga onde colar.
 - A pessoa já respondeu à mão: leia a conversa, não repita os dados e registre o envio.
 - O pedido é só uma pergunta de confirmação, sem dado pessoal: responda sem o modelo.
 
@@ -272,14 +282,10 @@ Respondi pelo e-mail em que o pedido chegou. Mandei nomes e horário. Não mande
 
 - A reserva da plataforma parece mostrar a estadia vivida. Quem trocou de lugar no meio mostra o período reservado, e o vivido é o que a pessoa conta.
 - A conta da plataforma que está logada parece ter todas as reservas. Cada pessoa tem a sua, e as viagens de outra só aparecem na conta dela.
-- A hospedagem de um parente parece não precisar de avaliação. A decisão de não voltar vale também para ela, com o motivo da pessoa.
-- A reserva feita à mão não cria página no Notion, e os bancos de viagens e de hospedagens podem nem ter onde registrar quem viaja e o veículo.
 - A vaga que a hospedagem oferece parece valer a qualquer hora. A garagem de um parceiro tem horário, e quem volta à noite precisa saber até quando ela abre e se deve interfonar.
 - O pedido de documento costuma vir antes do check-in e some da lista com a tradução automática. Leia a mensagem original.
 - O cadastro tem o nome completo e o nome civil de registro. Quem tem nome social se cadastra e é tratada por ele, e tratá-la pelo nome civil a constrange. O nome civil só sai com `Nome civil na resposta` em `sim`, ou se a pessoa pedir.
 - Dado sensível não vira texto de memória, de nota nem de comentário na negociação: fica no cadastro e na resposta enviada.
-- A hospedagem libera o acesso com base nos dados que pede: um erro no documento trava a entrada.
-- A busca por bairro parece bastar. O centro da busca é o endereço exato, e a nota alta esconde o risco que as avaliações baixas mostram.
 
 
 ## Scripts disponíveis
