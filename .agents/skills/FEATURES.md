@@ -969,7 +969,7 @@ How these skills relate is in `README.md`, in this folder.
 
 ### definir-grafia
 - **Stability**: experimental
-- **Description**: Settle the spelling of a person or a company and keep a newly seen wrong form
+- **Description**: Settle the spelling of a person, a company, or a product named by the team, and keep a newly seen wrong form
 - **Properties**:
   - Lives at `.agents/skills/definir-grafia/SKILL.md`
   - Says which name goes in each use: the civil name for a form that asks for the official document, the social name for a registration that accepts it and for every message, and stops to ask when the civil name is empty
@@ -982,6 +982,7 @@ How these skills relate is in `README.md`, in this folder.
   - Resolves names in dictated commands accompanying images, including expense requests, before the caller writes them
   - Returns the canonical name, record link, and search variants to the caller without altering the original evidence or executing the operation
   - Treats phonetic similarity as a candidate, not identity confirmation; an explicit correction pointing at a record confirms the match
+  - Resolves a product nickname from a team phrase, searching the product pages, the variants, and the stock units, before a text to a third party, writes the canonical product name, proposes adding the nickname to the product name variations without writing until the person agrees, and asks when a nickname points to more than one product
 - **Test Criteria**:
   - [x] The skill is present at that path
   - [x] The description refuses creating the company, renaming the record, and executing the destination operation

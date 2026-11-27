@@ -1,11 +1,11 @@
 ---
 name: definir-grafia
-description: Use essa habilidade sempre que for verificar nome de pessoa ou empresa, inclusive transcrito de comando por voz ou usado numa despesa, ou guardar uma forma errada. Um print de pessoa ou perfil segue o cadastro do que falta. NÃO use para criar empresa, renomear registro (use mesclar-registro) nem executar a operação de destino.
+description: Use essa habilidade sempre que for verificar nome de pessoa, de empresa ou de produto dito pela equipe, inclusive transcrito de comando por voz ou usado numa despesa, ou guardar uma forma errada. Um print de pessoa ou perfil segue o cadastro do que falta. NÃO use para criar empresa, renomear registro (use mesclar-registro) nem executar a operação de destino.
 allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-update-page
 compatibility: Precisa de internet. A busca semântica nas listas usa notion-ai-search no servidor notion.
 metadata:
   author: jimmyandrade
-  version: "0.10.1"
+  version: "0.11.0"
   aliases:
     - procurar-grafia
   related:
@@ -73,6 +73,14 @@ flowchart LR
 
 O print que mostra a grafia cadastra o que falta. Pessoa ausente segue `definir-pessoa`. Perfil ausente segue `definir-perfil-social`. Os dois, quando o print traz os dois. Já existe: use o registro. Não crie outro. Sem print, diga que o nome não está na lista e não crie.
 
+### Passo 6
+
+Um produto que a equipe cita numa frase, como "o colete X", e que vai num texto a um terceiro, como um e-mail ou uma mensagem, passa por esta conferência antes de a habilidade de origem escrever o nome. O nome dito pode ser um apelido: a equipe chama a peça de um jeito, e o cadastro guarda outro. O produto fica na lista de produtos, e a lista de variantes e a de unidades de estoque vêm do mapeamento de dados do projeto, no workspace conectado.
+
+Busque o nome dito e as variações dele nas três listas, por consulta direta e por busca semântica: a página do produto, as variantes e as unidades de estoque. O apelido pode aparecer só no nome de uma unidade de estoque. Siga `identificar-duplicata` para ligar a unidade ou a variante à página do produto. Escreva no texto o nome do produto, o canônico, e nunca o apelido nem o nome de uma unidade.
+
+Se o apelido não consta nas variações de nome do produto, proponha acrescentá-lo ali, com o nome do produto e o apelido, e só grave com o sim da pessoa. Se o apelido aponta para mais de um produto, liste cada um e pergunte qual é, sem escolher. Se nenhuma lista tem o nome, diga isso e pergunte antes de escrever. Não conclua que o produto não existe só porque nenhuma página tem o título dito.
+
 ## Problemas comuns
 
 ### Grafia inventada
@@ -139,6 +147,14 @@ Se você ler o endereço de e-mail como o nome da pessoa, a caixa vira o cadastr
 2. Nome civil só entra se a propriedade tiver valor e a pessoa pedir esse nome.
 3. Não invente o nome civil a partir do e-mail. O endereço continua na busca.
 
+### Apelido de produto no texto
+
+Se você escrever a um terceiro o nome de um produto como a equipe o disse, o texto cita uma peça que não existe no cadastro, e só a conferência depois do rascunho mostra o erro.
+
+1. Antes de escrever, busque o nome dito e as variações nas páginas de produto, nas variantes e nas unidades de estoque.
+2. Escreva o nome canônico do produto.
+3. Proponha registrar o apelido nas variações de nome do produto e só grave com o sim. Apelido de mais de um produto vira pergunta.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
@@ -157,6 +173,7 @@ na lista de pessoas, o nome completo é Bia Moreira. Bia é o apelido correto, B
 - A pessoa pediu o nome civil: só se a propriedade tiver valor.
 - Nada nessa lista e não há print de pessoa ou de perfil: diga que não está. Não crie.
 - O print mostra pessoa ou perfil ausente: siga `definir-pessoa` e `definir-perfil-social` para o que falta. Não crie outro se já existe.
+- O produto vem de uma frase da equipe e vai a um terceiro: siga o Passo 6. O apelido pode estar só numa unidade de estoque.
 - A pergunta é o e-mail, a inscrição ou a tarefa: devolva as formas de busca e a forma da frase. A busca não fica só na forma da frase.
 - O nome chegou no título de um evento ou no comando de uma despesa: devolva a forma canônica e o registro à habilidade de origem. Não grave a operação.
 
@@ -169,6 +186,7 @@ na lista de pessoas, o nome completo é Bia Moreira. Bia é o apelido correto, B
 - Nome civil vazio não se completa com o e-mail.
 - Grafia de empresa não mora na lista de pessoas. Mora na lista de empresas, nas variações de grafia dela.
 - A forma escrita no pedido, inclusive por ditado, pode ser erro de transcrição. A forma canônica sai do cadastro confirmado, não da semelhança sonora.
+- O nome de produto dito pela equipe parece o nome da página. Pode ser o apelido que só consta numa unidade de estoque: o texto leva o nome canônico.
 - A pessoa ausente parece motivo para só corrigir a frase. O print cadastra a pessoa e o perfil que ele mostra.
 
 ## Scripts disponíveis
