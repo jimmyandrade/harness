@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.13.2"
+  version: "0.14.0"
   aliases:
     - definir-despesa
     - lancar-despesa
@@ -123,6 +123,8 @@ Antes de qualquer gravação, confira e marque este checklist com o que a evidê
 O recebedor e a modalidade Pix não identificam o produto nem sua finalidade. Dizer apenas “despesa pessoal” ou “despesa da empresa” só confirma a natureza. Consulte o contexto e os registros relacionados; reúna as perguntas que faltam, espere as respostas e só depois grave. Não repita perguntas já respondidas nem exija campos sem relação com o gasto. Não use nome genérico de recebedor como substituto da identificação.
 
 Quem pagou é quem arcou com o dinheiro, não o titular da conta. Um débito da empresa pode sair do dinheiro de outra pessoa que só passou pela conta, como a venda dela numa maquininha da empresa. Quando essa pessoa aceitou arcar com o débito, grave-a como pessoa pagadora e conte nas observações de onde veio o dinheiro. Sem esse aceite, pergunte: o valor é uma dívida com ela.
+
+Estorno, reembolso, cancelamento com devolução, ressarcimento ou auxílio de terceiro é tratado pelo agente `contabilidade`, e o parecer dele vai à pessoa antes de o lançamento seguir.
 
 Compra online ou no cartão, com recebedora, comprovante ou pagador por completar, segue `completar-despesa-de-compra`, e o cartão fica em `definir-cartao`.
 
