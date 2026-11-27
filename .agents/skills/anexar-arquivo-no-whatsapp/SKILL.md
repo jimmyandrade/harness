@@ -3,7 +3,7 @@ name: anexar-arquivo-no-whatsapp
 description: Anexa e envia um arquivo já aprovado pelo WhatsApp Web, imagem como foto e nunca como figurinha, ou documento, numa conversa, num grupo ou num canal, e confere o envio. Usada quando a pessoa aprova mandar um comprovante, um convite com imagem, uma postagem ou um documento. Não serve para redigir o texto, escolher o destino nem enviar só texto.
 metadata:
   author: jimmyandrade
-  version: "0.6.0"
+  version: "0.7.0"
   aliases:
     - enviar-imagem-no-whatsapp
   related:
@@ -36,6 +36,14 @@ flowchart LR
 Quem chama já tem o destino, o arquivo e o sim da pessoa a essa imagem e a esse destino. Sem o sim, não envie.
 O acesso ao WhatsApp Web segue `usar-whatsapp-web`: a mesma aba, o aviso de outra janela, o QR code e a sessão dona. O anexo e os scripts de captura e restauração são desta habilidade.
 Antes de anexar, confira no cabeçalho o nome do destino: a aba pode estar noutra conversa. Use PNG ou JPEG. Converta o WebP antes, por exemplo com `sips -s format png <arquivo> --out <pasta da sessão>/<nome>.png`.
+
+A um terceiro, como um fornecedor, vai só o que ele pediu e que é do interesse dele. O comprovante do pagamento que a empresa fez a esse terceiro, pelo serviço dele, é do interesse dele. O comprovante de uma despesa interna, como o de uma corrida de entrega paga pela empresa a outro prestador, é controle financeiro: nunca vai ao terceiro que só pediu outra coisa. O mesmo vale para lançamento de despesa, nota e print interno. O arquivo que a pessoa manda para lançar uma despesa vai só ao registro da despesa, e só vai ao terceiro se ela pedir.
+
+O que o terceiro pediu e o que é interno têm nomes diferentes, e a mensagem à pessoa usa o nome exato de cada um, como "print do app" e "comprovante de pagamento", nunca a mesma palavra para os dois.
+
+Antes de anexar qualquer imagem a um terceiro, abra-a e confira o que ela mostra: valor, conta, CPF, cartão, nome do titular. Só envie o que o terceiro pediu. Quando a imagem mostra dado interno, corte-a ou peça outra captura, e não a mande como está.
+
+A pergunta do sim diz o que será anexado, pelo nome exato, e que o dado interno ficou de fora.
 
 ### Passo 2
 
@@ -95,9 +103,28 @@ Estes exemplos ilustram fatos. Eles podem não estar no data source.
 
 Converti o WebP para PNG, capturei a entrada de Fotos e vídeos, enviei o arquivo, vi a legenda na pré-visualização e enviei. A lista do Caio passou a dizer "Foto". Restaurei a aba.
 
+### a gráfica pede o nome do motorista e o print da corrida, e a pessoa manda o comprovante bancário da corrida
+
+Separei os dois: o print do app, que a gráfica pediu, e o comprovante de pagamento, que é da despesa. Abri o print do app e conferi que não mostra valor nem conta. Perguntei se podia enviar o print do app e disse que o comprovante de pagamento ficou de fora e vai só ao lançamento da despesa.
+
 ### a lista diz Figurinha depois do envio
 
 Avisei a pessoa e propus apagar para todos e reenviar como foto. Esperei o sim e não apaguei antes.
+
+### Comprovante interno mandado ao fornecedor
+
+Se você escrever ao fornecedor que vai mandar "o print", e a pessoa mandou à sessão o comprovante bancário de uma despesa interna, as duas imagens se confundem e o comprovante pode sair para quem não precisa saber do valor nem da conta.
+
+1. Chame cada imagem pelo nome exato, "print do app" ou "comprovante de pagamento", na mensagem à pessoa e na pergunta do sim.
+2. Abra a imagem e confira o que ela mostra antes de anexar.
+3. Anexe só o que o terceiro pediu. O comprovante que a pessoa mandou para lançar a despesa vai ao registro dela.
+
+### O print do app mostra dado interno
+
+Se o print que o terceiro pediu mostra valor, conta, CPF ou cartão, enviá-lo expõe o dado interno.
+
+1. Corte a imagem ou peça outra captura.
+2. Diga na pergunta do sim o que ficou de fora.
 
 ## Casos-limite
 
@@ -110,6 +137,7 @@ Avisei a pessoa e propus apagar para todos e reenviar como foto. Esperei o sim e
 - A imagem enviada pela entrada que já existe na página vira figurinha, mesmo com a pré-visualização aberta. O campo de legenda é o que diferencia.
 - O menu de anexos fica aberto atrás da pré-visualização, e o botão de enviar continua funcionando.
 - O botão "Usar nesta janela" derruba a conexão da janela da pessoa. Avise ao terminar.
+- "O print da corrida" e "o comprovante da corrida" parecem a mesma coisa. Um é o que o terceiro pediu, o outro é controle interno, e só o primeiro sai.
 - A prévia da lista de conversas mostra "Foto" no lugar do texto quando a imagem é a última mensagem.
 
 ## Scripts disponíveis
