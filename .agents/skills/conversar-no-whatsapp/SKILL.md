@@ -258,7 +258,7 @@ Pus a correção como primeiro ponto de ação: a marca não é um brechó, é u
 
 ### a pessoa entregou a exportação da conversa com a Vera, que tem um áudio dela, e pediu só o registro
 
-Transcrevi o áudio na mesma rodada, sem perguntar, pelos dois motores. O comentário datado do registro traz o texto inteiro, com uma palavra marcada como incerta, e o histórico foi lido já com o que o áudio diz.
+Transcrevi o áudio na mesma rodada, sem perguntar, pelos dois motores. O comentário datado do registro traz o texto inteiro, com uma palavra marcada como incerta.
 
 ### a fornecedora de tecidos mandou três PDFs de ficha técnica às 16h24
 
@@ -281,7 +281,6 @@ Baixei e li os três PDFs na mesma leitura, sem a pessoa pedir. Cadastrei cada t
 - Uma imagem que o canal não lê parece um dado que não existe. O mapa e os valores podem estar nela, e quem fala pela organização pode prometer o que já mandou: leia a imagem antes de dizer que falta.
 - Uma resposta sem data nem valor parece não confirmar nada. O que ela afirma está confirmado, e só o que ela omite é pendência.
 
-- O áudio parece pedir licença porque a conversa foi só entregue para registro ou perfil. A transcrição é local e gratuita e muda a leitura do histórico: faça-a na mesma rodada.
 - Um anexo listado com nome e tamanho parece uma leitura feita. Sem abrir o conteúdo, o dado do documento não chegou ao cadastro e a pessoa tem de cobrar.
 
 ## Scripts disponíveis
