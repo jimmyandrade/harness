@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, e lê o pedido, quem pediu, a data, o que o contato afirmou e o que falta. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp ou conferir o que alguém pediu. Não serve para escrever ou enviar a mensagem, redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.44.4"
+  version: "0.45.0"
   aliases:
     - redigir-mensagem-de-whatsapp
   related:
@@ -18,6 +18,7 @@ metadata:
     - definir-pessoa
     - definir-rotina
     - definir-tarefa
+    - definir-tecido
     - definir-viagem
     - definir-vocabulario
     - diagnosticar-funil
@@ -76,6 +77,12 @@ Na mesma rodada, antes do resumo, siga a lista de `manter-contato-no-whatsapp` e
 Uma conversa com mensagens não lidas segue `Não lidas antes de enviar`. Com `ler e mostrar`, leia as não lidas e mostre primeiro o que pede ação da pessoa, como uma menção, uma pergunta ou um pedido para ela, e depois o resto em uma linha. Antes de enviar nessa conversa, pergunte se envia agora ou espera. Com `perguntar antes de abrir`, diga que abrir marca essas mensagens como lidas, também para quem enviou, e pergunte se pode abrir.
 
 Um áudio na conversa lida vira texto: baixe-o e transcreva-o como o Passo 2 de `triar-conversas` manda, sem perguntar, e mostre o texto inteiro, sem resumir, e a palavra que pode estar errada. Com `Reação ao áudio transcrito` preenchida, reaja ao áudio, sem perguntar.
+
+Um documento de dados técnicos que um contato manda, como a ficha técnica de um tecido em PDF, a etiqueta, a lista de preços ou a foto de uma amostra, também entra na leitura, sem esperar pedido. Baixe cada anexo como o áudio, abra e leia o conteúdo, e não liste só o nome e o tamanho. No WhatsApp Web, o download do documento segue `usar-whatsapp-web`, e uma imagem segue `reconhecer-imagem`.
+
+Depois de ler, extraia os dados, grave-os no cadastro que a skill do assunto manda, como `definir-tecido` para a ficha de um tecido, com o anexo no campo de arquivo dele, e diga à pessoa o que mudou e o que não bate, como o código da etiqueta diferente do código da lista de preços.
+
+Quando a lista de preços cita um item que a pessoa encomendou, pergunte a situação do pedido, como a cor, o pagamento e a chegada, e grave-a na página do item, como `definir-tecido` manda.
 
 Se o canal não mostrar o histórico inteiro, diga que ele pode estar incompleto; no WhatsApp Web, siga `usar-whatsapp-web`. Procure noutro lugar só se a pessoa pedir.
 
@@ -154,6 +161,14 @@ Se você deixar entre colchetes, ou perguntar à pessoa, o que ela achou de um e
 2. Leve o que valeu a pena e a ressalva para o rascunho.
 3. Pergunte só o que o registro não diz.
 
+### Anexo do contato listado sem abrir
+
+Se você listar só o nome e o tamanho dos PDFs, das etiquetas ou das fotos que o contato mandou, a pessoa pergunta se você chegou a vê-los e os dados ficam fora do cadastro.
+
+1. Baixe e leia cada anexo na mesma leitura, sem esperar pedido.
+2. Grave os dados no cadastro do assunto e o anexo no campo de arquivo dele.
+3. Diga o que mudou e o que não bate entre os anexos, e pergunte a situação do pedido que a lista de preços cita.
+
 ### Contato deixado sem cadastro
 
 Se você ler ou responder a um número sem nome e não seguir `manter-contato-no-whatsapp`, a pessoa fica fora do data source e do WhatsApp, e quem usa a habilidade precisa cobrar.
@@ -228,6 +243,10 @@ Resumi o que ela afirmou e o que falta. Fechei com os pontos de ação, sem grav
 
 Pus a correção como primeiro ponto de ação: a marca não é um brechó, é uma marca de moda autoral que produz as próprias peças, nas palavras do posicionamento. Como ela já tinha convidado e cobrava o sinal, a resposta não negou o brechó dela nem perguntou pelo encaixe na curadoria: disse o que a marca é e avançou a reserva, com contrato, desmontagem e dados de público.
 
+### a fornecedora de tecidos mandou três PDFs de ficha técnica às 16h24
+
+Baixei e li os três PDFs na mesma leitura, sem a pessoa pedir. Cadastrei cada tecido por `definir-tecido`, com a ficha no campo de arquivo, e avisei que o código da etiqueta de um deles não bate com o da lista de preços. A lista citava um tecido que a pessoa encomendou, e perguntei se ele já foi pago e se já chegou, para gravar na página dele.
+
 ## Casos-limite
 
 - Nenhuma aba do WhatsApp Web e o QR code na tela, ou a extensão sem resposta: pare, peça a conexão e crie a rotina de lembrete, como `usar-whatsapp-web` manda.
@@ -243,6 +262,8 @@ Pus a correção como primeiro ponto de ação: a marca não é um brechó, é u
 - O texto que a leitura devolve parece dizer quem falou. Ele só traz as frases. Antes de atribuir uma fala ou um dado, como onde alguém trabalhou, confira o lado da bolha na captura: a verde, à direita, é nossa, e a cinza, à esquerda, é do contato.
 - Uma imagem que o canal não lê parece um dado que não existe. O mapa e os valores podem estar nela, e quem fala pela organização pode prometer o que já mandou: leia a imagem antes de dizer que falta.
 - Uma resposta sem data nem valor parece não confirmar nada. O que ela afirma está confirmado, e só o que ela omite é pendência.
+
+- Um anexo listado com nome e tamanho parece uma leitura feita. Sem abrir o conteúdo, o dado do documento não chegou ao cadastro e a pessoa tem de cobrar.
 
 ## Scripts disponíveis
 

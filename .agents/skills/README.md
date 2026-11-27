@@ -360,6 +360,7 @@ flowchart LR
   conversar_no_whatsapp --> definir_pessoa
   conversar_no_whatsapp --> definir_rotina
   conversar_no_whatsapp --> definir_tarefa
+  conversar_no_whatsapp --> definir_tecido
   conversar_no_whatsapp --> definir_viagem
   conversar_no_whatsapp --> definir_vocabulario
   conversar_no_whatsapp --> diagnosticar_funil
@@ -713,6 +714,7 @@ flowchart LR
   definir_tarefa --> procurar_tarefa
   definir_tecido --> acompanhar_producao_de_produto_fisico
   definir_tecido --> anexar_arquivo_no_notion
+  definir_tecido --> conversar_no_whatsapp
   definir_tecido --> definir_composicao_textil
   definir_tecido --> definir_estampa
   definir_tecido --> definir_tarefa
