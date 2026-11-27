@@ -45,3 +45,12 @@ Funcionalidade: Produção por unidade e tamanho
       Então ela chama a habilidade de procurar banco de dados
       E diz a ela para que serve o banco e quais propriedades ele precisa ter
       Mas não pergunta o nome à pessoa antes
+
+  Regra: a numeração confere a variação antes
+
+    Exemplo: Variação com mais peças que unidades
+      Dado que a variação tem 2 em Cortadas e 2 em Produzidas
+      E o banco de unidades tem 1 unidade ligada a ela
+      Quando a pessoa pede para cadastrar 10 unidades novas
+      Então a resposta mostra a diferença e pergunta antes de numerar
+      E nenhuma unidade é criada antes da resposta
