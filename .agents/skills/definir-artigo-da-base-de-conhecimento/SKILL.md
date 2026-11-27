@@ -4,7 +4,7 @@ description: Cria, revisa e atualiza o artigo da base de conhecimento que respon
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.9.2"
+  version: "0.9.3"
   related:
     - capturar-tela-de-passo-a-passo
     - criar-habilidade
@@ -288,6 +288,7 @@ Os critérios ficaram de fora. Cada guardrail virou item do diagnóstico rápido
 - O link escrito antes do quadro de encerramento parece entregar o artigo. A pessoa lê a mensagem final, então o link vai nela.
 - Um caso visual parece bem descrito pela conversa e pelo print do pull request. O print do pull request pode mostrar outra variante, com o mesmo nome, e só o Storybook aberto e o código mostram qual é qual.
 - No Confluence, subir o arquivo pela API chamada de dentro da página falha na verificação de origem. O conector devolve um comando de envio que sobe o arquivo, e a lista de anexos da página devolve a referência de cada um para o bloco da imagem.
+- Uma página publicada com os blocos de imagem parece ter as imagens. Um conector antigo do Confluence descarta o bloco sem erro e a página sai só com o texto: releia o corpo salvo, conte os blocos de imagem e, se faltarem, republique pelo conector principal antes de dizer que está pronto.
 - Um artigo que manda usar uma ferramenta parece valer para todo mundo. Antes de dizer que uma orientação contradiz o artigo, confira a ordem dos acessos: quem ainda não recebeu a ferramenta segue outro caminho.
 
 ## Scripts disponíveis
