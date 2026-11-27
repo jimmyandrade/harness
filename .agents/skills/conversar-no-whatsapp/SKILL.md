@@ -3,7 +3,7 @@ name: conversar-no-whatsapp
 description: Encontra a conversa no WhatsApp, por um conector ou pelo WhatsApp Web, e lê o pedido, quem pediu, a data, o que o contato afirmou e o que falta. Usada quando a pessoa quer achar uma demanda que chegou pelo WhatsApp ou conferir o que alguém pediu. Não serve para escrever ou enviar a mensagem, redigir no tom de voz, criar a tarefa nem cadastrar a pessoa.
 metadata:
   author: jimmyandrade
-  version: "0.44.4"
+  version: "0.44.5"
   aliases:
     - redigir-mensagem-de-whatsapp
   related:
@@ -31,6 +31,7 @@ metadata:
     - procurar-tarefa
     - prospectar-oportunidades
     - rascunhar-mensagem
+    - transcrever-audio-e-video
     - reconhecer-imagem
     - redigir-com-tom-de-voz
     - rotular-item
@@ -75,7 +76,11 @@ Na mesma rodada, antes do resumo, siga a lista de `manter-contato-no-whatsapp` e
 
 Uma conversa com mensagens não lidas segue `Não lidas antes de enviar`. Com `ler e mostrar`, leia as não lidas e mostre primeiro o que pede ação da pessoa, como uma menção, uma pergunta ou um pedido para ela, e depois o resto em uma linha. Antes de enviar nessa conversa, pergunte se envia agora ou espera. Com `perguntar antes de abrir`, diga que abrir marca essas mensagens como lidas, também para quem enviou, e pergunte se pode abrir.
 
-Um áudio na conversa lida vira texto: baixe-o e transcreva-o como o Passo 2 de `triar-conversas` manda, sem perguntar, e mostre o texto inteiro, sem resumir, e a palavra que pode estar errada. Com `Reação ao áudio transcrito` preenchida, reaja ao áudio, sem perguntar.
+Todo áudio, e todo vídeo curto com fala, que aparece na conversa lida, exportada, colada ou recebida vira texto na mesma rodada, em qualquer tarefa, inclusive só ler, perfilar o tom ou registrar o histórico: baixe-o, ou pegue-o no arquivo da exportação, e transcreva-o por `transcrever-audio-e-video`, como o Passo 2 de `triar-conversas` manda, sem perguntar e sem esperar a cobrança.
+
+Mostre o texto inteiro, sem resumir, com a palavra que pode estar errada marcada como incerta. A transcrição entra no registro da conversa, como o comentário datado, e no que você conclui dela: nunca escreva que o áudio "não foi transcrito" quando a transcrição roda local e sem custo. Só a falha da transcrição, dita com o que falhou, ou o programa ou o modelo por instalar, que pede o sim, deixam o áudio sem texto.
+
+Com `Reação ao áudio transcrito` preenchida, reaja ao áudio, sem perguntar.
 
 Se o canal não mostrar o histórico inteiro, diga que ele pode estar incompleto; no WhatsApp Web, siga `usar-whatsapp-web`. Procure noutro lugar só se a pessoa pedir.
 
@@ -208,6 +213,14 @@ Se você resumir a oferta de uma vaga e parar no que o contato disse, a pessoa d
 1. Termine o resumo com os pontos de ação do Passo 4, cada um com a habilidade que o cumpre.
 2. Sem o sim à participação, não lance nem grave: só liste.
 
+### Áudio deixado sem transcrever
+
+Se você registrar que o áudio "não foi transcrito", ou esperar a pessoa cobrar, a leitura do histórico sai errada e o registro e o perfil de tom ficam sem a fala.
+
+1. Transcreva todo áudio da conversa na mesma rodada, também o da exportação ou o colado, como o Passo 2 manda.
+2. Grave a transcrição no registro e use-a na conclusão, com o trecho incerto marcado.
+3. Pergunte só para instalar programa ou baixar modelo, ou para um arquivo que não é de conversa.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
@@ -228,11 +241,16 @@ Resumi o que ela afirmou e o que falta. Fechei com os pontos de ação, sem grav
 
 Pus a correção como primeiro ponto de ação: a marca não é um brechó, é uma marca de moda autoral que produz as próprias peças, nas palavras do posicionamento. Como ela já tinha convidado e cobrava o sinal, a resposta não negou o brechó dela nem perguntou pelo encaixe na curadoria: disse o que a marca é e avançou a reserva, com contrato, desmontagem e dados de público.
 
+### a pessoa entregou a exportação da conversa com a Vera, que tem um áudio dela, e pediu só o registro
+
+Transcrevi o áudio na mesma rodada, sem perguntar, pelos dois motores. O comentário datado do registro traz o texto inteiro, com uma palavra marcada como incerta, e o histórico foi lido já com o que o áudio diz.
+
 ## Casos-limite
 
 - Nenhuma aba do WhatsApp Web e o QR code na tela, ou a extensão sem resposta: pare, peça a conexão e crie a rotina de lembrete, como `usar-whatsapp-web` manda.
 - Duas conversas com o mesmo nome: mostre as duas e pergunte qual é.
 - O pedido está num grupo: leia só as mensagens do assunto, com quem escreveu cada uma.
+- A exportação traz o áudio como arquivo, ou a conversa colada só cita o áudio: transcreva o arquivo; se a exportação veio sem mídia, diga que o áudio não veio e peça o arquivo.
 
 ## Pegadinhas
 
@@ -243,6 +261,8 @@ Pus a correção como primeiro ponto de ação: a marca não é um brechó, é u
 - O texto que a leitura devolve parece dizer quem falou. Ele só traz as frases. Antes de atribuir uma fala ou um dado, como onde alguém trabalhou, confira o lado da bolha na captura: a verde, à direita, é nossa, e a cinza, à esquerda, é do contato.
 - Uma imagem que o canal não lê parece um dado que não existe. O mapa e os valores podem estar nela, e quem fala pela organização pode prometer o que já mandou: leia a imagem antes de dizer que falta.
 - Uma resposta sem data nem valor parece não confirmar nada. O que ela afirma está confirmado, e só o que ela omite é pendência.
+
+- O áudio parece pedir licença porque a conversa foi só entregue para registro ou perfil. A transcrição é local e gratuita e muda a leitura do histórico: faça-a na mesma rodada.
 
 ## Scripts disponíveis
 
