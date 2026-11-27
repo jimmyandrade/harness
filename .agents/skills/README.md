@@ -137,6 +137,7 @@ flowchart LR
     gerenciar_pedidos_de_delivery["gerenciar-pedidos-de-delivery"]
     gravar_termos_no_vocabulario["gravar-termos-no-vocabulario"]
     identificar_duplicata["identificar-duplicata"]
+    identificar_pagamento["identificar-pagamento"]
     inscrever_na_oportunidade["inscrever-na-oportunidade"]
     investigar_problema["investigar-problema"]
     lancar_despesa_da_empresa["lancar-despesa-da-empresa"]
@@ -859,6 +860,9 @@ flowchart LR
   identificar_duplicata --> definir_grafia
   identificar_duplicata --> definir_perfil_social
   identificar_duplicata --> mesclar_registro
+  identificar_pagamento --> definir_empresa
+  identificar_pagamento --> identificar_duplicata
+  identificar_pagamento --> lancar_despesa_da_empresa
   inscrever_na_oportunidade --> acompanhar_itens_do_ponto_de_contato
   inscrever_na_oportunidade --> acompanhar_retornos_pendentes
   inscrever_na_oportunidade --> analisar_regulamento_da_oportunidade
@@ -892,6 +896,7 @@ flowchart LR
   lancar_despesa_da_empresa --> definir_lancamento_financeiro
   lancar_despesa_da_empresa --> definir_prestacao_de_contas
   lancar_despesa_da_empresa --> identificar_duplicata
+  lancar_despesa_da_empresa --> identificar_pagamento
   lancar_despesa_da_empresa --> lancar_despesa_pessoal
   lancar_despesa_da_empresa --> reconhecer_imagem
   lancar_despesa_pessoal --> anexar_arquivo_no_notion

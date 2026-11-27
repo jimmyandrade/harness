@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch notion:notion-query-d
 compatibility: Precisa de internet.
 metadata:
   author: jimmyandrade
-  version: "0.14.0"
+  version: "0.15.0"
   aliases:
     - definir-despesa
     - lancar-despesa
@@ -20,6 +20,7 @@ metadata:
     - definir-lancamento-financeiro
     - definir-prestacao-de-contas
     - identificar-duplicata
+    - identificar-pagamento
     - lancar-despesa-pessoal
     - reconhecer-imagem
 ---
@@ -154,36 +155,7 @@ flowchart LR
 
 A falta da relação não autoriza copiar a placa para texto livre nem declarar a associação concluída. Ao corrigir um lançamento, preserve valor, pagamento, comprovantes e viagem; retire a placa redundante do texto sem criar outra despesa.
 
-Resolva a empresa recebedora com o nome e o CNPJ da evidência, inclusive ao complementar uma despesa já salva. Use `identificar-duplicata` antes de criar. A instituição de pagamento não é a empresa recebedora. Não deduza a razão social completa de um nome comercial.
-
-```mermaid
-flowchart LR
-  A[Busca a empresa pelo nome, variações e CNPJ] --> B{Resultado}
-  B -->|equivalente confirmado| C[Vincula a empresa existente à despesa]
-  B -->|identidade ambígua| D[Pergunta qual empresa antes de criar ou vincular]
-  B -->|nenhum equivalente| E{Identificação suficiente e cadastro permitido?}
-  E -->|sim| F[Segue definir-empresa com os dados comprovados]
-  F --> G[Vincula a página devolvida à mesma despesa]
-  E -->|não| H[Propõe o cadastro e pede só o dado ou a autorização necessária]
-```
-
-Não encerre com "vínculo pendente": entregue a ação realizada ou a proposta e o bloqueio. Reaproveite a leitura e os comprovantes; cadastrar a recebedora não cria outra despesa. Nome no título, no assunto do comprovante ou nas observações não substitui a relação com a empresa. Preserve a conta, a pessoa pagadora e os anexos já confirmados. Não infira que o nome exibido no Pix seja dono, contato ou responsável pela empresa.
-
-Compare cada identificador do comprovante com o que o cadastro da recebedora guarda: chave Pix, CNPJ, nome, instituição e conta. Uma diferença, mesmo de uma letra, é discrepância. Avise a pessoa antes de seguir, com os dois valores lado a lado, porque pode ser tentativa de golpe. A pessoa decide qual vale. Corrija o cadastro só depois da decisão dela, e diga o que mudou.
-
-Vincule a conta de origem somente quando os dados da conta no comprovante identificarem inequivocamente um cadastro ou quando a pessoa já tiver confirmado a conta deste pagamento. Nome do titular e instituição, sozinhos, indicam uma candidata, não a conta usada: podem existir contas pessoais e empresariais no mesmo banco.
-
-Cruze também o tipo e os dígitos visíveis do CPF ou CNPJ do titular da conta de origem com os documentos dos cadastros, respeitando as posições da máscara e sem completar dígitos ocultos. Use o documento do pagador, não o do recebedor nem o da instituição. Identificar o titular não identifica uma conta específica: combine-o com a instituição e os demais dados da conta na evidência. Se o conjunto identificar inequivocamente a conta, vincule sem perguntar; se houver colisão de trechos, mais de uma conta compatível ou identificação insuficiente, confirme com a pessoa.
-
-```mermaid
-flowchart LR
-  A{Conta identificada no comprovante ou confirmada para este pagamento?} -->|sim| B[Vincula a conta sem perguntar de novo]
-  A -->|não| C[Pergunta qual conta foi usada]
-  C --> D[Registra o gasto identificado com a conta pendente]
-  D --> E[Com a resposta, vincula a conta à mesma despesa]
-```
-
-A falta de identificação da conta não bloqueia o lançamento quando os demais dados obrigatórios estão sustentados. Até a resposta, mantenha o vínculo vazio e informe a pendência. Uma confirmação vale para o pagamento confirmado, não vira regra para outros pagamentos do mesmo banco. Ao receber a resposta, complemente a mesma despesa sem duplicá-la nem alterar os comprovantes.
+Quem recebeu e de qual conta saiu o dinheiro segue `identificar-pagamento`: ele vincula a empresa recebedora e a conta de origem à mesma despesa, sem bloquear o lançamento quando a conta ainda não foi identificada.
 
 Grave os dados nas propriedades mapeadas, não no corpo. Separe a data do documento da data de pagamento. Não invente valor, data, conta, finalidade, categoria nem parcelas. Um valor ou uma data que a pessoa informa de memória e que diverge da evidência, como o extrato ou o comprovante, não substitui o da evidência: grave o da evidência e aponte a diferença na resposta.
 
