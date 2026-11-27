@@ -6,6 +6,7 @@ skills:
   - completar-despesa-de-compra
   - definir-lancamento-financeiro
   - conciliar-recebimento
+  - consultar-contabilidade
   - definir-prestacao-de-contas
   - definir-ativo-imobilizado
   - registrar-ciclo-do-ativo

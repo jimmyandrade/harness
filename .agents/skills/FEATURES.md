@@ -267,6 +267,23 @@ How these skills relate is in `README.md`, in this folder.
   - [ ] A missing sale detail stops the skill with a question and the gross is not recorded as received
   - [ ] An entry without a sale that is a card withdrawal is not registered as a sale
 
+### conferir-termo-de-outro-idioma
+- **Stability**: experimental
+- **Description**: Check the meaning of a word from another language, such as an indigenous language, Japanese or Yoruba, by language, variety and spelling, with the source of each claim and what stayed unchecked
+- **Properties**:
+  - Lives at `.agents/skills/conferir-termo-de-outro-idioma/SKILL.md`
+  - Asks the language and variety once when no source gives them, and never completes them by guess
+  - Looks in the reference base before the web and uses a registered check with its date
+  - Searches by confidence, and keeps an AI summary, a collaborative list, and an unsigned portal as a lead only
+  - Does not treat an article that uses the word as proof of its meaning
+  - Checks the exact spelling, with the tones, accents or original characters, and marks as unchecked a meaning that depends on a sign the request did not bring
+  - Answers in three blocks: checked, lead, and unchecked, each claim with language, variety, source, and link
+  - Says that the community must be consulted before commercial use when a symbol seems sacred or restricted, and does not decide for it
+  - Sends each source to definir-referencia-cultural to be recorded
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses choosing the name, translating a text, recording the source, and deciding what is sacred
+
 ### configurar-harness-de-negocio
 - **Stability**: experimental
 - **Description**: Set up a new business harness by following the core runbooks in order, including the sync of the skills with Notion, and check each screen from the person's screenshot. The core is already set up and is not a target
@@ -1308,6 +1325,21 @@ How these skills relate is in `README.md`, in this folder.
   - [x] A price change adds a row and an old row is never edited
   - [x] A group price lists the stock of the place and waits for confirmation
   - [x] An empty destination parameter makes the skill ask and not choose
+
+### definir-referencia-cultural
+- **Stability**: experimental
+- **Description**: Search for and record a source about a cultural reference in the project's reference base, with source level, credit, and open, restricted, or sacred use
+- **Properties**:
+  - Lives at `.agents/skills/definir-referencia-cultural/SKILL.md`
+  - Looks in the reference base before searching the web and reuses a source that already exists, even under another title or spelling
+  - Records every source found, including the discarded ones, with the reason, the consult date, what the source says, and what it does not bring
+  - Ranks each source by level, and keeps an AI summary and an unsigned list of names as a lead only
+  - Marks the use of a symbol or name as open, restricted, sacred, or unchecked, and says the community must be consulted before commercial use when it is not open
+  - Never creates schema and never writes a value without a property into the page body: it lists the missing property at the end and suggests creating it
+  - Leaves the check of a word's meaning to conferir-termo-de-outro-idioma
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses checking the meaning, choosing the name, creating the art, and registering the collection
 
 ### definir-recurso-de-aprendizado
 - **Stability**: experimental
