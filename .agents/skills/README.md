@@ -137,6 +137,7 @@ flowchart LR
     gerenciar_pedidos_de_delivery["gerenciar-pedidos-de-delivery"]
     gravar_termos_no_vocabulario["gravar-termos-no-vocabulario"]
     identificar_duplicata["identificar-duplicata"]
+    identificar_pagamento["identificar-pagamento"]
     inscrever_na_oportunidade["inscrever-na-oportunidade"]
     investigar_problema["investigar-problema"]
     lancar_despesa_da_empresa["lancar-despesa-da-empresa"]
@@ -181,6 +182,7 @@ flowchart LR
     publicar_resposta_de_revisao["publicar-resposta-de-revisao"]
     publicar_revisao_de_codigo["publicar-revisao-de-codigo"]
     rascunhar_mensagem["rascunhar-mensagem"]
+    rascunhar_pedido_de_suporte["rascunhar-pedido-de-suporte"]
     realizar_compra["realizar-compra"]
     reconhecer_imagem["reconhecer-imagem"]
     redigir_com_tom_de_voz["redigir-com-tom-de-voz"]
@@ -244,7 +246,10 @@ flowchart LR
   acompanhar_producao_de_produto_fisico --> procurar_banco_de_dados
   acompanhar_resposta_no_whatsapp --> acompanhar_retornos_pendentes
   acompanhar_resposta_no_whatsapp --> conversar_no_whatsapp
+  acompanhar_resposta_no_whatsapp --> definir_negociacao
+  acompanhar_resposta_no_whatsapp --> definir_pessoa
   acompanhar_resposta_no_whatsapp --> definir_rotina
+  acompanhar_resposta_no_whatsapp --> identificar_duplicata
   acompanhar_resposta_no_whatsapp --> rascunhar_mensagem
   acompanhar_resposta_no_whatsapp --> rotular_item
   acompanhar_resposta_no_whatsapp --> usar_whatsapp_web
@@ -360,6 +365,7 @@ flowchart LR
   conversar_no_whatsapp --> definir_pessoa
   conversar_no_whatsapp --> definir_rotina
   conversar_no_whatsapp --> definir_tarefa
+  conversar_no_whatsapp --> definir_tecido
   conversar_no_whatsapp --> definir_viagem
   conversar_no_whatsapp --> definir_vocabulario
   conversar_no_whatsapp --> diagnosticar_funil
@@ -564,6 +570,7 @@ flowchart LR
   definir_hospedagem --> definir_viagem
   definir_hospedagem --> lancar_despesa_da_empresa
   definir_hospedagem --> procurar_email
+  definir_hospedagem --> realizar_compra
   definir_hospedagem --> redigir_com_tom_de_voz
   definir_idioma_da_conversa --> definir_pessoa
   definir_inscricao --> anexar_arquivo_no_notion
@@ -714,6 +721,7 @@ flowchart LR
   definir_tarefa --> procurar_tarefa
   definir_tecido --> acompanhar_producao_de_produto_fisico
   definir_tecido --> anexar_arquivo_no_notion
+  definir_tecido --> conversar_no_whatsapp
   definir_tecido --> definir_composicao_textil
   definir_tecido --> definir_estampa
   definir_tecido --> definir_tarefa
@@ -856,6 +864,9 @@ flowchart LR
   identificar_duplicata --> definir_grafia
   identificar_duplicata --> definir_perfil_social
   identificar_duplicata --> mesclar_registro
+  identificar_pagamento --> definir_empresa
+  identificar_pagamento --> identificar_duplicata
+  identificar_pagamento --> lancar_despesa_da_empresa
   inscrever_na_oportunidade --> acompanhar_itens_do_ponto_de_contato
   inscrever_na_oportunidade --> acompanhar_retornos_pendentes
   inscrever_na_oportunidade --> analisar_regulamento_da_oportunidade
@@ -889,6 +900,7 @@ flowchart LR
   lancar_despesa_da_empresa --> definir_lancamento_financeiro
   lancar_despesa_da_empresa --> definir_prestacao_de_contas
   lancar_despesa_da_empresa --> identificar_duplicata
+  lancar_despesa_da_empresa --> identificar_pagamento
   lancar_despesa_da_empresa --> lancar_despesa_pessoal
   lancar_despesa_da_empresa --> reconhecer_imagem
   lancar_despesa_pessoal --> anexar_arquivo_no_notion
@@ -1113,9 +1125,14 @@ flowchart LR
   rascunhar_mensagem --> enviar_email
   rascunhar_mensagem --> escrever_link
   rascunhar_mensagem --> procurar_agenda
+  rascunhar_mensagem --> rascunhar_pedido_de_suporte
   rascunhar_mensagem --> redigir_com_tom_de_voz
   rascunhar_mensagem --> rotular_item
   rascunhar_mensagem --> usar_whatsapp_web
+  rascunhar_pedido_de_suporte --> anexar_arquivo_no_whatsapp
+  rascunhar_pedido_de_suporte --> rascunhar_mensagem
+  rascunhar_pedido_de_suporte --> redigir_com_tom_de_voz
+  rascunhar_pedido_de_suporte --> usar_whatsapp_web
   realizar_compra --> completar_despesa_de_compra
   realizar_compra --> definir_ativo_imobilizado
   realizar_compra --> definir_rotina
