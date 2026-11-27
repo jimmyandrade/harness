@@ -182,6 +182,7 @@ flowchart LR
     publicar_resposta_de_revisao["publicar-resposta-de-revisao"]
     publicar_revisao_de_codigo["publicar-revisao-de-codigo"]
     rascunhar_mensagem["rascunhar-mensagem"]
+    rascunhar_pedido_de_suporte["rascunhar-pedido-de-suporte"]
     realizar_compra["realizar-compra"]
     reconhecer_imagem["reconhecer-imagem"]
     redigir_com_tom_de_voz["redigir-com-tom-de-voz"]
@@ -1119,9 +1120,14 @@ flowchart LR
   rascunhar_mensagem --> enviar_email
   rascunhar_mensagem --> escrever_link
   rascunhar_mensagem --> procurar_agenda
+  rascunhar_mensagem --> rascunhar_pedido_de_suporte
   rascunhar_mensagem --> redigir_com_tom_de_voz
   rascunhar_mensagem --> rotular_item
   rascunhar_mensagem --> usar_whatsapp_web
+  rascunhar_pedido_de_suporte --> anexar_arquivo_no_whatsapp
+  rascunhar_pedido_de_suporte --> rascunhar_mensagem
+  rascunhar_pedido_de_suporte --> redigir_com_tom_de_voz
+  rascunhar_pedido_de_suporte --> usar_whatsapp_web
   realizar_compra --> completar_despesa_de_compra
   realizar_compra --> definir_ativo_imobilizado
   realizar_compra --> definir_rotina
