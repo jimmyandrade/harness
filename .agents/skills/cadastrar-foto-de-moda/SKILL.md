@@ -4,7 +4,7 @@ description: Registra e classifica cada foto de moda, com tipo, ângulo, cena, v
 compatibility: O rascunho local do texto alternativo precisa de Python e de um macOS 27 ou superior com swiftc.
 metadata:
   author: jimmyandrade
-  version: "0.4.0"
+  version: "0.5.0"
   aliases:
     - definir-foto-de-moda
   related:
@@ -36,6 +36,12 @@ A lista de fotos de moda do mapeamento de dados é a fonte da verdade das fotos 
 Salve cada foto original na hora, quando a peça ou o look puder ser identificado com segurança. Não guarde na memória da conversa se a foto era de frente, costas ou detalhe. Se a peça, o look, o ângulo ou o tipo não estiverem seguros, pergunte antes de gravar.
 
 Quando outro trabalho precisa das fotos de um produto, como um material para um terceiro, procure antes na lista de fotos de moda e nos campos de foto do produto, tratada e bruta. Se estão vazios, diga na hora que o produto não tem foto no cadastro e qual é a fonte provável, como o álbum da marca num serviço de fotos, e peça à pessoa o link do álbum ou os arquivos. Não tente abrir um serviço que a sessão não tem conector para acessar, e não comece o material sem foto nem invente uma.
+
+Quando o produto tem um álbum de fotos, seja o link no registro do produto ou um link que a pessoa passa, grave o link no campo do álbum do produto e confira o álbum contra as mídias brutas do produto, sem esperar o material pedir. Liste as fotos do álbum e as mídias brutas já cadastradas do produto, e compare por nome de arquivo ou por conteúdo, sem baixar o que já existe.
+
+Diga à pessoa quantas fotos o álbum tem, quantas já têm equivalente nas mídias brutas e quais faltam, pelo nome do arquivo. Cadastre a que falta como mídia bruta, ligada ao produto, só depois do sim da pessoa para baixar os arquivos, que diz o nome, a origem e o tamanho de cada um. Sem conector para o álbum na sessão, peça o link ou os arquivos, em vez de tentar acessar o serviço. Foto bruta nunca vai para o campo da foto tratada.
+
+Quando a página do álbum não permite contar as fotos sem rolar, peça a contagem à pessoa ou conte rolando a página, e diga que a contagem pode estar incompleta.
 
 ### Passo 2
 
@@ -102,6 +108,7 @@ Valide antes de responder. Corrija e repita até passar.
 - [ ] Os vínculos da peça, do look e da pessoa modelo existem dos dois lados.
 - [ ] A tratada não repete as originais, e o status vale o estágio real.
 - [ ] O histórico está nos comentários.
+- [ ] O produto com álbum tem o link gravado, e a resposta diz quantas fotos o álbum tem, quantas têm equivalente nas mídias brutas e quais faltam.
 - [ ] Cada registro que a resposta cita, inclusive os de um lote, leva o link da página, como `escrever-link` manda.
 
 ### Passo 11
@@ -154,6 +161,14 @@ Se você começar um material com fotos de produto sem olhar os campos de foto d
 2. Com os campos vazios, diga a fonte provável e peça o link do álbum ou os arquivos.
 3. Não tente acessar um serviço sem conector.
 
+### Álbum do produto sem equivalente no cadastro
+
+Se você confiar que o produto tem as fotos porque existe um álbum, o cadastro fica sem mídia bruta e a falta só aparece no meio de outro trabalho.
+
+1. Grave o link do álbum no campo do álbum do produto.
+2. Compare as fotos do álbum com as mídias brutas do produto e diga quantas faltam, pelo nome do arquivo.
+3. Cadastre as que faltam só depois do sim para baixar os arquivos, e nunca no campo da tratada.
+
 ## Exemplos de entrada e saída
 
 Estes exemplos ilustram fatos. Eles podem não estar no data source.
@@ -166,9 +181,15 @@ Abri as três. Criei dois registros: um da peça isolada com as duas originais e
 
 Gerei um rascunho de cada foto no próprio computador, com a peça, o tipo e o ângulo do registro como contexto. O rascunho do boné dizia "manga curta", e a imagem mostrava só o boné e a camiseta: corrigi. Mostrei cada proposta com o link do registro e não gravei nenhuma antes do sim.
 
+### o colete X tem um álbum de fotos, mas o registro não tem mídia bruta
+
+Gravei o link do álbum no registro do colete X. O álbum tem 12 fotos, 0 têm equivalente nas mídias brutas, e faltam as 12, de `colete-x-frente-01` a `colete-x-detalhe-12`. Para cadastrá-las como mídia bruta do colete preciso baixar os 12 arquivos do álbum, e peço o seu sim com o nome, a origem e o tamanho de cada um. A foto tratada ficou vazia.
+
 ## Casos-limite
 
 - Um material precisa de fotos de produtos e os campos de foto estão vazios: diga a fonte provável, peça o link do álbum ou os arquivos e não acesse um serviço sem conector.
+- O produto tem um álbum e nenhuma mídia bruta cadastrada, ou só parte: grave o link do álbum, diga quantas fotos faltam pelo nome do arquivo e cadastre só depois do sim para baixar.
+- A página do álbum não deixa contar as fotos sem rolar: peça a contagem ou conte rolando, e diga que ela pode estar incompleta.
 - A foto mostra uma pessoa e a pessoa não está no cadastro: não crie nem vincule em silêncio, pergunte.
 - O arquivo não abre: diga, não confirme o ângulo e deixe `Precisa revisar`.
 - A sessão não é local, o macOS é anterior ao 27, ou o modelo local não está disponível ou recusa a imagem: não rode nem conserte o script, escreva a proposta a partir da imagem aberta e diga que não houve rascunho local.
@@ -182,6 +203,8 @@ Gerei um rascunho de cada foto no próprio computador, com a peça, o tipo e o �
 - Um registro com a mesma pessoa e cenas diferentes parece uma coisa só. Cena e finalidade decidem, não a pessoa.
 - A sugestão de título é leitura humana. Ela tem maiúscula, acento e travessão, e não serve de nome de arquivo sem normalizar.
 - Um título em formato humano parece inofensivo. Ele quebra a busca e o nome do arquivo.
+
+- Um álbum com fotos parece um cadastro completo. Só as mídias brutas ligadas ao produto contam, e a comparação por nome de arquivo ou por conteúdo diz quais faltam.
 
 - O rascunho do modelo local parece descrever a foto. Ele chama a peça de "peça", inventa manga e troca o enquadramento, e só a imagem aberta decide.
 - A leitura local falha em silêncio dentro de um sandbox e devolve rótulos vazios. Rode o script fora dele antes de concluir que a imagem não tem o que ler.
