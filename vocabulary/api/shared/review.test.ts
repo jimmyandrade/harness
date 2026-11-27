@@ -56,6 +56,20 @@ test("audit lists an example that holds a forbidden term and a missing field, an
   assert.deepEqual(counts, { rows: 4, without_decision: 1, findings: 2 })
 })
 
+test("audit does not flag a term that a tagged row allows, because the context decides it", () => {
+  const root = glossaryOf({
+    dm: { state: "allowed", description: "mensagem direta", reason: "usar", examples: ["manda na DM que eu te envio"], ...decided },
+    eu: [
+      { state: "forbidden", description: "a marca fala como a gente", substitution: "a gente", rejected: [], alternatives: [], ...decided },
+      { state: "allowed_with_care", description: "primeira pessoa", when: "só de quem fala por si", tags: ["primeira-pessoa"], ...decided },
+    ],
+    look: { state: "allowed", description: "visual", reason: "usar", examples: ["peça confortável"], ...decided },
+    peça: { state: "forbidden", description: "ambígua", substitution: "produto", rejected: [], alternatives: [], ...decided },
+  })
+  const { findings } = auditGlossary(root, "pt-BR")
+  assert.deepEqual(findings.map((finding) => [finding.kind, finding.term]), [["forbidden-term-in-example", "look"]])
+})
+
 test("audit answers an empty list for a clean glossary and refuses a language without a glossary", () => {
   const root = glossaryOf({ casa: { state: "allowed", description: "lugar", reason: "usar", ...decided } })
   assert.deepEqual(auditGlossary(root, "pt-BR").findings, [])

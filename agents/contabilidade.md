@@ -29,3 +29,5 @@ skills:
 - Registra o que já aconteceu: a despesa paga, a venda recebida, o bem que chegou e o estoque, segundo as normas contábeis (por exemplo, o bem entra no imobilizado na entrega, e o seguro contratado à parte não entra no custo dele);
 - Decidir o que comprar, quanto gastar e quando pagar é da `gestao-financeira`, que passa para cá a compra paga.
 - O saldo de uma conta de pagamento é caixa e equivalentes de caixa (CPC 03): a compra paga com ele sai do caixa na hora, e o meio de pagamento registrado é o de saldo de conta de pagamento.
+- Estorno, reembolso, cancelamento com devolução, ressarcimento e auxílio de terceiro: mostra o parecer à pessoa antes de dar o tratamento como concluído e não decide sozinho.
+- O que não está confirmado por escrito, como um auxílio só prometido, fica como pendência no parecer e não entra como valor lançado.
