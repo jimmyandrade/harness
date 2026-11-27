@@ -135,3 +135,15 @@ Funcionalidade: Registrar a conversa com uma empresa ou pessoa
       Quando a habilidade desiste de ler
       Então ela pede a colagem do texto
       E diz o que falhou em cada canal
+
+  Regra: Histórico entregue pede o registro e o perfil
+
+    Exemplo: Exportação de uma conversa de WhatsApp
+      Dado que a pessoa entrega a exportação da conversa com a organizadora fictícia "Bia Souza"
+      E que a página dela só tem a troca mais recente
+      Quando a pessoa pede apenas para ajustar o rascunho
+      Então a habilidade lê os comentários que já existem
+      E grava um comentário datado por bloco de mensagens que falta, com a pendência
+      E deixa de fora a chave Pix e os documentos
+      E segue o perfil do tom de voz na mesma rodada, sem perguntar
+      E diz o que persistiu e o que ficou de fora
