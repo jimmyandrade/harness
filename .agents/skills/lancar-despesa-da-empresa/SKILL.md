@@ -13,7 +13,6 @@ metadata:
     - anexar-arquivo-no-notion
     - completar-despesa-de-compra
     - conciliar-recebimento
-    - consultar-contabilidade
     - definir-ativo-imobilizado
     - definir-cartao
     - definir-empresa
@@ -125,7 +124,7 @@ O recebedor e a modalidade Pix não identificam o produto nem sua finalidade. Di
 
 Quem pagou é quem arcou com o dinheiro, não o titular da conta. Um débito da empresa pode sair do dinheiro de outra pessoa que só passou pela conta, como a venda dela numa maquininha da empresa. Quando essa pessoa aceitou arcar com o débito, grave-a como pessoa pagadora e conte nas observações de onde veio o dinheiro. Sem esse aceite, pergunte: o valor é uma dívida com ela.
 
-Estorno, reembolso, cancelamento com devolução, ressarcimento ou auxílio de terceiro segue `consultar-contabilidade`.
+Estorno, reembolso, cancelamento com devolução, ressarcimento ou auxílio de terceiro é tratado pelo agente `contabilidade`, e o parecer dele vai à pessoa antes de o lançamento seguir.
 
 Compra online ou no cartão, com recebedora, comprovante ou pagador por completar, segue `completar-despesa-de-compra`, e o cartão fica em `definir-cartao`.
 
