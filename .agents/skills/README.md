@@ -919,6 +919,7 @@ flowchart LR
   manter_contato_no_whatsapp --> definir_pessoa
   manter_contato_no_whatsapp --> perfilar_tom_de_voz
   manter_contato_no_whatsapp --> rotular_item
+  manter_contato_no_whatsapp --> triar_conversas
   manter_contato_no_whatsapp --> usar_whatsapp_web
   medir_habilidade --> testar_habilidade
   mencionar_pessoa --> definir_pessoa
