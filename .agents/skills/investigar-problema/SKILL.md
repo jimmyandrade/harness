@@ -3,7 +3,7 @@ name: investigar-problema
 description: Conduz a investigação de um problema, como um acesso bloqueado, um cadastro que falha em portal alheio ou um erro, com tarefa, fatos e hipóteses, e oferece artigo e post-mortem. Use sempre que alguém relatar um problema, como um preço errado, ou pedir "investigue isso" com um link, antes de ler. NÃO use para escrever o artigo, o post-mortem nem corrigir código.
 metadata:
   author: jimmyandrade
-  version: "0.4.6"
+  version: "0.4.7"
   related:
     - procurar-tarefa
     - definir-tarefa
@@ -86,6 +86,10 @@ Só leia nesse passo. Uma correção que muda algo, como uma permissão, um paga
 Cada hipótese e cada ponto que você ainda não conferiu e que dá para conferir, você confere antes de responder, no código, nos dados e nas ferramentas ao seu alcance. O objetivo é achar a causa.
 Só fica como "não verificado" o que depende de um acesso que nenhum caminho ao seu alcance dá: diga qual fonte falta e quem tem.
 Antes de responder, releia o que ficou sem conferir: o item que uma consulta ao seu alcance resolve volta para a investigação, e a resposta só sai quando a lista restante é de acesso que falta.
+Quando o que se procura é onde algo está no código, como um texto, uma constante ou um código de cupom visto no site, busque nos arquivos versionados (`git grep`), não na árvore inteira: as pastas de build, como `.next` e `dist`, enchem a lista e escondem o resultado.
+Leia a saída inteira, ou tire as pastas de build, antes de dizer que não achou: uma lista cortada não prova ausência.
+Sem resultado no repositório aberto, amplie sem perguntar: os outros repositórios locais da pessoa e a busca de código da organização no GitHub (`gh search code`).
+Diga o que cada busca devolveu e quais repositórios foram descartados, e abra o arquivo achado antes de afirmar que ele é o ponto do relato.
 O limite que fala do ambiente em que algo roda, como o sistema, a arquitetura ou a versão, tem fonte própria: os registros das execuções reais, como o job de integração contínua, o nome do executor e o log do build. Leia-os antes de listar o limite.
 Uma reprodução num exemplo mínimo prova o mecanismo, não o ambiente real. Diga o que ela cobre e rode no ambiente real o que estiver ao seu alcance.
 Quando o código que reporta o erro já manda campos específicos, como o ponto da falha, o módulo e o status, e o monitor agrupa por um campo genérico, a causa do ruído está na definição do monitor e da métrica que ele lê.
@@ -175,6 +179,13 @@ Se você entregar uma lista do que não conferiu, como se um erro é esperado ou
 8. Um limite que fala do ambiente de execução, como o sistema, a arquitetura ou a versão, confere-se nos registros das execuções reais, como o job de integração contínua e o log do build, antes de aparecer como pendência.
 9. Uma reprodução num exemplo mínimo cobre o mecanismo. Diga isso, e rode no ambiente real o que estiver ao seu alcance. O que exige subir uma branch ou um pull request, diga qual é e pergunte.
 10. Antes de responder, releia o que ficou sem conferir. O que uma consulta ao seu alcance resolve volta para a investigação.
+
+### Código procurado só até onde a lista cabe
+
+Se você disser que não achou algo no código depois de uma busca cortada ou cheia de arquivos de build, a pessoa recebe uma negativa falsa.
+
+1. Busque nos arquivos versionados e leia a saída inteira.
+2. Sem resultado, amplie para os outros repositórios e para a busca de código da organização, sem esperar o pedido.
 
 ### Investigação sem a habilidade
 
