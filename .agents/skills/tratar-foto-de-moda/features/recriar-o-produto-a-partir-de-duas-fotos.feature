@@ -27,3 +27,9 @@ Funcionalidade: Recriar o produto a partir de duas fotos
     Quando a próxima ferramenta da lista gera a mesma peça com as mesmas fotos
     Então as imagens saem lado a lado com a ferramenta de cada uma
     E só a escolhida avança, e as outras ficam nas observações de fidelidade
+
+  Cenário: A apresentação é escolhida antes de gerar
+    Dado que a peça vai ser mostrada vestida
+    Quando o pedido de geração é escrito
+    Então a silhueta e a proporção vêm da foto no manequim
+    E um detalhe que só existe com a peça aberta fica de fora

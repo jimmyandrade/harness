@@ -30,6 +30,12 @@
       "prompt": "Recrie o produto isolado destas duas peças. A ferramenta principal acabou de barrar a geração pelo limite do plano: <anexos>",
       "expected_output": "A habilidade lê a lista de ferramentas de geração, segue para a próxima com as mesmas fotos e o mesmo pedido e pede a aprovação do custo se ela cobrar. Se duas ferramentas geram a mesma peça, entrega lado a lado com a ferramenta de cada uma e deixa a pessoa escolher, registrando as outras como tentativas nas observações. Só para quando a lista acaba, sem gerar só por texto.",
       "files": []
+    },
+    {
+      "id": "escolher-a-apresentacao-antes-de-gerar",
+      "prompt": "Recrie a peça vestida usando a foto da peça aberta e a foto no manequim: <anexos>",
+      "expected_output": "A habilidade escolhe a apresentação antes de gerar, tira a silhueta e a proporção da foto no manequim e da peça aberta só a cor, o acabamento e a gola, e deixa de fora um detalhe que só existe aberto. Lê as características de fotografia da peça antes e as manda no pedido. Entrega as candidatas lado a lado, a pessoa escolhe, a foto fica Precisa revisar até a aprovação explícita e a avaliação vira comentário datado, sem criar propriedade.",
+      "files": []
     }
   ]
 }
