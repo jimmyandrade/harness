@@ -647,6 +647,7 @@ flowchart LR
   definir_orcamento_de_fornecedor --> reconhecer_imagem
   definir_orcamento_de_fornecedor --> redigir_com_tom_de_voz
   definir_orcamento_de_fornecedor --> usar_whatsapp_web
+  definir_pagamento_da_inscricao --> definir_agenda
   definir_pagamento_da_inscricao --> definir_inscricao
   definir_pagamento_da_inscricao --> definir_negociacao
   definir_pagamento_da_inscricao --> definir_tarefa
@@ -654,6 +655,7 @@ flowchart LR
   definir_pagamento_da_inscricao --> lancar_despesa_da_empresa
   definir_pagamento_da_inscricao --> procurar_email
   definir_pagamento_da_inscricao --> rascunhar_mensagem
+  definir_pagamento_da_inscricao --> redigir_com_tom_de_voz
   definir_perfil_social --> analisar_perfil_social
   definir_perfil_social --> definir_grafia
   definir_perfil_social --> definir_pessoa
