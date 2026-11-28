@@ -3,7 +3,7 @@ name: tratar-foto-de-moda
 description: Trata e recria a foto de uma peça ou look a partir da foto enviada, preservando a fidelidade do produto, a identidade da pessoa modelo e a apresentação profissional. Usada ao gerar, tratar, corrigir ou revisar uma imagem de moda, mesmo sem dizer tratar. NÃO serve para registrar ou classificar a foto nem para publicá-la.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.4.0"
   related:
     - cadastrar-foto-de-moda
     - escrever-link
@@ -39,13 +39,15 @@ Antes de gerar, analise as imagens e leia a peça: modelagem, materiais, cores, 
 
 Confirme o fechamento, se é botão, zíper, os dois ou outro aviamento, e não os confunda mesmo com a imagem pouco nítida. Na dúvida sobre fechamento, bolso, gola ou decote, pergunte se há bolso, quantos e onde, e se a gola é assimétrica. Enquanto não houver confirmação, não crie bolso nem simetria.
 
+Antes de gerar, leia as características de fotografia da peça registradas nos comentários da página do produto e nas observações de fidelidade das fotos já avaliadas, e leve-as no pedido.
+
 A ferramenta de imagem recebe as fotos de referência como links ou anexos, sem subir arquivo à parte. Um link temporário de arquivo, como o que o Notion devolve e que vale 1 hora, serve se a geração rodar logo. Mostre à pessoa o custo em créditos de cada geração e rode só com o sim dela. Resolução e raciocínio alto podem custar mais que a estimativa inicial, e um plano gratuito pode barrar a segunda ou a terceira geração.
 
 Quando a ferramenta principal de `Ferramentas de geração de imagem` falhar por limite do plano, crédito ou indisponibilidade, siga para a próxima da lista, sempre com as mesmas fotos de referência e o mesmo pedido, e peça a aprovação do custo quando ela cobrar.
 
 Ferramenta de conversa no navegador, sem API, vem por último, e a foto de referência sobe por arquivo, nunca por um link da conta de quem pediu.
 
-Quando mais de uma ferramenta gerar a mesma peça, entregue todas lado a lado, com o registro de qual ferramenta fez cada uma, e a pessoa escolhe a melhor. Só a escolhida avança no registro, e as outras ficam como tentativas nas observações de fidelidade.
+Quando mais de uma ferramenta gerar a mesma peça, entregue todas lado a lado, com o registro de qual ferramenta fez cada uma, e a pessoa escolhe, comparando as candidatas lado a lado. A escolha é humana e vale a mais natural, não a mais nítida. Só a escolhida avança no registro, e as outras ficam como tentativas nas observações de fidelidade.
 
 Pare só quando a lista acabar: diga quais peças ficaram sem foto e não troque por uma geração só de texto, que não preserva a peça.
 
@@ -68,6 +70,8 @@ Remover o manequim de uma peça com gola ou decote exige uma foto do acabamento 
 A boa referência para recriar o produto isolado sem manequim são duas fotos juntas: a peça aberta sobre uma superfície, que mostra o interior da gola e o acabamento e cumpre esta exigência sem foto extra, e a mesma peça no manequim, de frente. Pé ou chão na borda da peça aberta saem na geração, e isso não é pessoa usando.
 
 O pedido de geração diz qual foto governa cada detalhe em que as duas diferem, como uma faixa amarrada no manequim e solta na peça aberta: "como na imagem 1" não basta, e o modelo pode escolher a faixa amarrada. Escreva lado esquerdo e direito sempre com os dois pontos de vista, como "lado direito de quem veste, esquerdo da imagem".
+
+Escolha a apresentação, vestida ou peça aberta, antes de gerar, e não misture geometria. A silhueta e a proporção vêm da foto no manequim, e a peça aberta serve a cor, o acabamento e o interior da gola, porque ela alarga e alonga o corpo e a barra sai comprida demais. Uma peça de base que afunila não vira base quadrada. Um detalhe que só existe com a peça aberta ou dobrada, como uma faixa cruzada, não entra na versão vestida: vestida, a faixa fica amarrada como cinto ou pendurada.
 
 Nunca entregue só o fundo removido sobre a mesma silhueta torta. Reconstrua a apresentação como uma produção de moda faria: alinhe cós, fechamento, barra, mangas e ombros, centralize e equilibre a peça, sem alterar comprimento, largura, modelagem, volume, assimetria real, bolso, fechamento ou textura. Na dúvida se um desvio é da peça ou da montagem, pergunte.
 
@@ -107,7 +111,13 @@ Corrigir um erro não pode apagar outro detalhe: escreva o novo pedido de geraç
 
 ### Passo 10
 
-O registro da foto, o status e o histórico seguem `cadastrar-foto-de-moda`. Uma foto gerada entra na lista das fotos tratadas com status `Precisa revisar`, o tipo e o ângulo, a peça, a ligação às duas mídias brutas usadas como referência e as observações de fidelidade, que listam o que comparar. Proponha o texto alternativo e só o grave com o sim da pessoa. Aqui, uma imagem com falha de fidelidade fica `Precisa revisar`, e uma que a ferramenta só consegue recortar sem deformar a peça fica `Precisa gerar`. Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
+O registro da foto, o status e o histórico seguem `cadastrar-foto-de-moda`. Uma foto gerada entra na lista das fotos tratadas com status `Precisa revisar`, o tipo e o ângulo, a peça, a ligação às duas mídias brutas usadas como referência e as observações de fidelidade, que listam o que comparar. Proponha o texto alternativo e só o grave com o sim da pessoa.
+
+A foto fica `Precisa revisar` até a aprovação explícita da pessoa.
+
+Depois da avaliação humana, registre a avaliação como comentário datado na página do produto, na página de cada foto e nas mídias brutas de referência, e as características da peça como comentário do produto.
+
+Nunca crie propriedade nova: se faltar no produto um campo de guia de fotografia, diga a limitação e recomende o campo. Aqui, uma imagem com falha de fidelidade fica `Precisa revisar`, e uma que a ferramenta só consegue recortar sem deformar a peça fica `Precisa gerar`. Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 Todo registro de foto que a resposta citar leva o link da página, como `escrever-link` manda.
 
@@ -127,6 +137,13 @@ Se você escrever o pedido só com o erro apontado, a nova geração perde zípe
 1. Liste o que corrigir e o que deve ficar intacto.
 2. Revise de novo o conjunto.
 
+### Geometria misturada
+
+Se você gerar a peça vestida com a foto da peça aberta como forma, a barra fica comprida, o corpo alarga e um detalhe que só existe aberto aparece.
+
+1. Escolha a apresentação antes de gerar.
+2. Tire a silhueta da foto no manequim e da peça aberta só a cor, o acabamento e a gola.
+
 ### Pessoa que vira outra
 
 Se você priorizar o visual de catálogo, o rosto e o cabelo mudam e a foto parece outra pessoa.
@@ -140,6 +157,14 @@ Se você esconder uma falha de geração com um acabamento, um bolso ou um botã
 
 1. Trate como falha de fidelidade.
 2. Peça referência ou confirmação.
+
+### Ferramenta de estúdio de imagem e vídeo
+
+Se você supor o comportamento da ferramenta, perde créditos e arquivos. Uma delas não aceita o formato 4:5, só 3:4 e 9:16, e pergunta o formato antes de gerar. Gera duas candidatas por padrão. O download sai na resolução original, e a ampliada custa mais. A lista de imagens troca de posição ao navegar.
+
+1. Pergunte o formato, ou escolha 3:4, e conte as duas candidatas na estimativa de custo.
+2. Baixe uma imagem por vez e confira o arquivo baixado.
+3. Suba os arquivos de referência dois por vez, por causa do limite de tamanho da chamada.
 
 ## Exemplos de entrada e saída
 
@@ -156,6 +181,7 @@ Aceitei o manequim preto, perguntei se o fechamento é zíper ou botão, alinhei
 - A ferramenta não preserva o rosto: enquadramento sem rosto ou nova referência, nunca identidade alterada.
 - Não há ferramenta de imagem na sessão: diga o que fazer à mão e não simule o resultado.
 - O plano da ferramenta barra a geração depois de algumas peças: siga para a próxima ferramenta da lista, e só quando a lista acabar diga quais peças ficaram sem foto, sem gerar só por texto.
+- Faltam as características de fotografia da peça no produto: diga a limitação, recomende o campo e não crie propriedade.
 - Duas ferramentas geram a mesma peça: mostre as duas lado a lado, com a ferramenta de cada uma, e só a escolhida avança.
 - A peça aberta e a peça no manequim diferem num detalhe: o pedido diz qual foto governa esse detalhe.
 - A pessoa não confirma o bolso: trate como não confirmado e não o inclua.
@@ -165,6 +191,7 @@ Aceitei o manequim preto, perguntei se o fechamento é zíper ou botão, alinhei
 - A foto amadora parece motivo para pedir nova foto. Só um trecho que impede a leitura fiel pede foto complementar.
 - A assimetria da peça parece erro de montagem. Confirme antes de corrigir.
 - Uma imagem bonita parece pronta. Fidelidade e apresentação são avaliadas à parte.
+- A foto da peça aberta parece boa forma para a versão vestida. Ela dá cor, acabamento e gola, e a forma vem do manequim.
 - Uma ferramenta que falha parece fim da tarefa. A lista de ferramentas tem alternativas, e a pessoa escolhe entre os resultados.
 - Um resultado fiel à primeira vista parece aprovado. Contar botões, bolsos e aplicações em tamanho real acha o que a miniatura esconde.
 - Uma imagem gerada por IA não prova o produto real. Ela é referência até a validação.
