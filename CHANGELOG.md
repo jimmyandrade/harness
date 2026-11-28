@@ -1,5 +1,38 @@
 # Changelog
 
+## [1.120.0](https://github.com/jimmyandrade/harness/compare/v1.119.0...v1.120.0) (2026-11-28)
+
+
+### Features
+
+* **conversar-no-whatsapp:** read the contact's technical attachments and record them without being asked ([#1593](https://github.com/jimmyandrade/harness/issues/1593)) ([326012b](https://github.com/jimmyandrade/harness/commit/326012bda77c9a9688a131305ea381a035a5c6d8))
+* **lancar-despesa-da-empresa:** send reversals and third-party aid to the accounting agent ([#1577](https://github.com/jimmyandrade/harness/issues/1577)) ([fcd7fb1](https://github.com/jimmyandrade/harness/commit/fcd7fb10bedc5bfc7b97c25acc75a66739e2413b))
+* **rascunhar-pedido-de-suporte:** add skill to draft a support request about a screen ([#1578](https://github.com/jimmyandrade/harness/issues/1578)) ([28601a7](https://github.com/jimmyandrade/harness/commit/28601a781133a136226c8cb631a9f4ae3ee75287))
+* **skills:** answer in-trip questions from the active trip and the navigation app forecast ([#1572](https://github.com/jimmyandrade/harness/issues/1572)) ([29bdcf2](https://github.com/jimmyandrade/harness/commit/29bdcf2b4649d2ad56138a8c43db879e7db9e279))
+* **tratar-foto-de-moda:** choose the presentation before generating and record the human evaluation as dated comments ([#1612](https://github.com/jimmyandrade/harness/issues/1612)) ([c74736c](https://github.com/jimmyandrade/harness/commit/c74736c9f9bf2972c943d4a44f42255d647d1c8c))
+
+
+### Bug Fixes
+
+* **acompanhar-resposta-no-whatsapp:** read the conversation when the contact wrote and name every new chat ([#1580](https://github.com/jimmyandrade/harness/issues/1580)) ([e86126b](https://github.com/jimmyandrade/harness/commit/e86126b1d11aa4e993d3ac4cae767c8ef2cafded))
+* **acompanhar-resposta-no-whatsapp:** read the reply after sending without asking and bring the next step ready ([#1584](https://github.com/jimmyandrade/harness/issues/1584)) ([f6fd637](https://github.com/jimmyandrade/harness/commit/f6fd63703c99d3ac07e005ac290d73d8401ea8f9))
+* **agents:** show a period as separate start and end date columns ([#1586](https://github.com/jimmyandrade/harness/issues/1586)) ([eee08d3](https://github.com/jimmyandrade/harness/commit/eee08d3e7642f2f4d5b5274f32fd600b17368096))
+* **cadastrar-foto-de-moda:** check a product photo album against the raw media records and report what is missing ([#1609](https://github.com/jimmyandrade/harness/issues/1609)) ([00319ac](https://github.com/jimmyandrade/harness/commit/00319ac1a366fc2f11c6c678fd112a58f030bfe2))
+* **cadastrar-foto-de-moda:** check the product photo fields first and ask for the source when they are empty ([#1607](https://github.com/jimmyandrade/harness/issues/1607)) ([0e7aace](https://github.com/jimmyandrade/harness/commit/0e7aacef36e3552a3a796409a99e402525129700))
+* **conversar-no-whatsapp:** transcribe every chat audio in the same round, in any task ([#1589](https://github.com/jimmyandrade/harness/issues/1589)) ([6346006](https://github.com/jimmyandrade/harness/commit/634600654c38dccf05d439c78d1fd7f526afc9c0))
+* **definir-agenda:** search every calendar before saying an event does not exist ([#1579](https://github.com/jimmyandrade/harness/issues/1579)) ([460193e](https://github.com/jimmyandrade/harness/commit/460193edbdde03ab82a4f05d8ef29a6b168b2bde))
+* **definir-grafia:** resolve a product nickname to the canonical name before writing to a third party ([#1606](https://github.com/jimmyandrade/harness/issues/1606)) ([a85e7cd](https://github.com/jimmyandrade/harness/commit/a85e7cd4837f7fe14b31a30c1d327905f512938e))
+* **definir-hospedagem:** never choose or confirm the payment method on a booking ([#1575](https://github.com/jimmyandrade/harness/issues/1575)) ([ac67e47](https://github.com/jimmyandrade/harness/commit/ac67e47d16cc654cac32458a172b1490544430bc))
+* **definir-perfil-social:** upload the screenshot file instead of saying it only exists in the chat ([#1574](https://github.com/jimmyandrade/harness/issues/1574)) ([72cb8bd](https://github.com/jimmyandrade/harness/commit/72cb8bdf9d8fdac1e200db2f342e47337f8c857b))
+* **evoluir-habilidade:** look for the old name in open pull request branches when renaming a skill ([#1582](https://github.com/jimmyandrade/harness/issues/1582)) ([27a5250](https://github.com/jimmyandrade/harness/commit/27a52501d920f0b845f1cf4e3fd2c2aa5491dbc3))
+* **investigar-problema:** compare rate and releases for any monitor alert and read the owning team's word before blaming a business-rule error ([#1587](https://github.com/jimmyandrade/harness/issues/1587)) ([ee0c78d](https://github.com/jimmyandrade/harness/commit/ee0c78da1507f7aae6744e4322b4300764971500))
+* **investigar-problema:** search tracked files and widen to other repositories before saying code was not found ([#1594](https://github.com/jimmyandrade/harness/issues/1594)) ([b1e9132](https://github.com/jimmyandrade/harness/commit/b1e9132f31261e147896ee2d78e94bb4021fa284))
+* **manter-contato-no-whatsapp:** save the contact as soon as the number enters the conversation, without asking or waiting for the draft approval ([#1590](https://github.com/jimmyandrade/harness/issues/1590)) ([59ab06d](https://github.com/jimmyandrade/harness/commit/59ab06dc8542291ae326e35098e26bacfad05c29))
+* **perfilar-tom-de-voz:** treat a delivered conversation history as a request to profile the tone and persist the history ([#1588](https://github.com/jimmyandrade/harness/issues/1588)) ([e9dc20e](https://github.com/jimmyandrade/harness/commit/e9dc20ee7f1475b3297b68076168f04f2eda0789))
+* **preparar-tarefa-do-pull-request:** skip the validation criterion on retroactive cards without the record ([#1570](https://github.com/jimmyandrade/harness/issues/1570)) ([430ce9a](https://github.com/jimmyandrade/harness/commit/430ce9af8a6969a62339e9ddad8d8183965f0677))
+* **tratar-foto-de-moda:** recreate a product from an open-piece and a mannequin photo, fall back to other generation tools and compare details at full size ([#1611](https://github.com/jimmyandrade/harness/issues/1611)) ([e4e2954](https://github.com/jimmyandrade/harness/commit/e4e2954fcfde04e17db89fc377d4d57fd0eb4e3e))
+* **vocabulary:** leave out of the audit a term that a tagged row allows ([#1573](https://github.com/jimmyandrade/harness/issues/1573)) ([e167ee4](https://github.com/jimmyandrade/harness/commit/e167ee42b6a2fc14ef74c1411100c6c8cc3ac4bf))
+
 ## [1.119.0](https://github.com/jimmyandrade/harness/compare/v1.118.1...v1.119.0) (2026-11-27)
 
 
