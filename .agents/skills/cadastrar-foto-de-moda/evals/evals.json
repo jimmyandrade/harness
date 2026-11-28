@@ -24,6 +24,12 @@
       "prompt": "O colete X tem um álbum de fotos no Google Fotos, mas no registro dele não há mídia bruta. Garanta que cada foto bruta do álbum tenha equivalente no cadastro: <link do álbum>",
       "expected_output": "A habilidade grava o link do álbum no campo do álbum do produto, lista as fotos do álbum e as mídias brutas do produto e compara por nome de arquivo ou por conteúdo. Diz quantas fotos o álbum tem, quantas têm equivalente e quais faltam, pelo nome do arquivo. Pede o sim da pessoa, com nome, origem e tamanho, antes de baixar e cadastrar as que faltam como mídia bruta ligada ao produto. Sem conector do álbum, pede o link ou os arquivos em vez de acessar o serviço. Não coloca foto bruta no campo da tratada. Se a página não permite contar sem rolar, pede a contagem ou conta rolando e diz que pode estar incompleta.",
       "files": []
+    },
+    {
+      "id": "midia-bruta-do-album-preenchida-na-mesma-execucao",
+      "prompt": "Pode baixar e cadastrar as fotos que faltam do álbum do colete X como mídia bruta: <link do álbum>",
+      "expected_output": "A habilidade lê cada arquivo pela miniatura numerada na orientação certa e cadastra cada mídia bruta já com tipo, ângulo e texto alternativo, sem perguntar de novo, porque o sim do cadastro vale para o lote. Perfil esquerdo ou direito segue o lado de quem veste e entra nas observações. Peça aberta sobre uma superfície com pés na borda é produto isolado. Nenhum dos três fica em branco como pendência.",
+      "files": []
     }
   ]
 }
