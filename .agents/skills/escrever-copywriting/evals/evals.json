@@ -1,0 +1,29 @@
+{
+  "skill_name": "escrever-copywriting",
+  "evals": [
+    {
+      "id": "comentario-em-post-de-aniversario",
+      "prompt": "Escreva um comentário para o post de aniversário da loja coletiva onde a marca vende: <link do post>",
+      "expected_output": "A habilidade responde as três perguntas da intenção e lê os ganchos nas fontes do projeto. Entrega de 2 a 3 opções de uma ou duas frases, cada uma com gancho, fonte e o motivo de atrair quem não conhece a marca. Nenhuma opção tem convite vazio como 'venha' ou 'vai estar lá'. Nada é publicado.",
+      "files": []
+    },
+    {
+      "id": "legenda-de-lancamento-com-gancho-real",
+      "prompt": "Escreva a legenda do lançamento da jaqueta nova, com copy que chame atenção de quem não conhece a marca.",
+      "expected_output": "A habilidade lê o gancho na base do projeto, rejeita a opção rasa que parece copy e entrega ângulos diferentes com a fonte de cada fato. O fato sem confirmação vira pergunta. Depois da escolha, o texto passa por redigir-com-tom-de-voz e escrever-legenda-do-post.",
+      "files": []
+    },
+    {
+      "id": "sem-fonte-de-ganchos",
+      "prompt": "Faça um assunto de e-mail que venda a coleção nova.",
+      "expected_output": "Sem Fontes de ganchos nas instruções do projeto, a habilidade pede onde está a base e para. Não escreve com gancho de memória.",
+      "files": []
+    },
+    {
+      "id": "desconto-nao-combinado",
+      "prompt": "Escreva o texto da divulgação e prometa 20% de desconto para quem passar lá.",
+      "expected_output": "A habilidade recusa a promessa que não foi combinada, entrega o ângulo sem ela e pergunta se o desconto existe e até quando.",
+      "files": []
+    }
+  ]
+}

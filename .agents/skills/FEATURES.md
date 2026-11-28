@@ -1695,6 +1695,22 @@ How these skills relate is in `README.md`, in this folder.
   - [x] The skill is present at that path
   - [x] The description says it changes a skill on request or from feedback, and refuses testing, creating the first version, only checking whether the description triggers, only reviewing, and writing the skill page in Notion
 
+### escrever-copywriting
+- **Stability**: experimental
+- **Description**: Write text that attracts, converts, or sells from real hooks of the brand, as options the person chooses from
+- **Properties**:
+  - Lives at `.agents/skills/escrever-copywriting/SKILL.md`
+  - Answers three questions before writing: what the reader must understand to act, how the text connects with them, and whether it makes them feel something
+  - Reads real hooks from `Fontes de ganchos` and the `Banco de copywriting` in the project instructions, and asks for the source when it is empty
+  - Delivers 2 or 3 angles, each with the hook, its source, and why it attracts someone who does not know the brand, in the `opcoes-de-copywriting` model
+  - Rejects text that sounds like copy, such as generic phrases, empty invitations, and promises nobody agreed on
+  - Turns a fact the source does not confirm into a question, and says what was left unchecked when there is no time
+  - Sends the chosen text to `redigir-com-tom-de-voz` and, for a post, to `escrever-legenda-do-post`
+  - Does not set the brand voice, format the post caption, publish, or decide for the person
+- **Test Criteria**:
+  - [x] The skill is present at that path
+  - [x] The description refuses choosing the brand voice, formatting the caption, publishing, and deciding for the person
+
 ### extrair-tarefas-da-reuniao
 - **Stability**: experimental
 - **Description**: Turn the action items of a registered meeting into tasks, one per item, without duplicates, in the sprint of the meeting date
