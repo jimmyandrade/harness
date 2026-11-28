@@ -1,10 +1,10 @@
 ---
 name: cadastrar-foto-de-moda
 description: Registra e classifica cada foto de moda, com tipo, ângulo, cena, vínculos, nome do arquivo, texto alternativo, status e histórico. Usada quando uma foto de peça ou look chega, é migrada, revisada ou aprovada, mesmo sem dizer registro. NÃO serve para tratar ou recriar a imagem nem para publicar a foto.
-compatibility: O rascunho local do texto alternativo precisa de Python e de um macOS 27 ou superior com swiftc.
+compatibility: A leitura local da foto e o rascunho do texto alternativo precisam de Python e de um macOS com swiftc, o rascunho a partir do macOS 27. O envio ao Notion precisa da linha de comando `ntn`.
 metadata:
   author: jimmyandrade
-  version: "0.5.0"
+  version: "0.6.0"
   aliases:
     - definir-foto-de-moda
   related:
@@ -39,19 +39,23 @@ Quando outro trabalho precisa das fotos de um produto, como um material para um 
 
 Quando o produto tem um álbum de fotos, seja o link no registro do produto ou um link que a pessoa passa, grave o link no campo do álbum do produto e confira o álbum contra as mídias brutas do produto, sem esperar o material pedir. Liste as fotos do álbum e as mídias brutas já cadastradas do produto, e compare por nome de arquivo ou por conteúdo, sem baixar o que já existe.
 
-Diga à pessoa quantas fotos o álbum tem, quantas já têm equivalente nas mídias brutas e quais faltam, pelo nome do arquivo. Cadastre a que falta como mídia bruta, ligada ao produto, só depois do sim da pessoa para baixar os arquivos, que diz o nome, a origem e o tamanho de cada um. Sem conector para o álbum na sessão, peça o link ou os arquivos, em vez de tentar acessar o serviço. Foto bruta nunca vai para o campo da foto tratada.
+Diga à pessoa quantas fotos o álbum tem, quantas já têm equivalente nas mídias brutas e quais faltam, pelo nome do arquivo. Cadastre a que falta como mídia bruta, ligada ao produto, só depois do sim da pessoa para baixar os arquivos, que diz o nome, a origem e o tamanho de cada um.
+
+Esse sim autoriza o lote inteiro: nesta mesma execução, preencha de cada mídia o tipo, o ângulo e o texto alternativo, a partir da leitura visual do arquivo, e grave tudo com o cadastro. Nenhum dos três fica em branco como pendência nem volta à pessoa como pergunta. Sem conector para o álbum na sessão, peça o link ou os arquivos, em vez de tentar acessar o serviço.
+
+Para enviar o arquivo ao Notion e criar a página da mídia, use o envio por script, com o corpo da página montado com os nomes do mapeamento de dados do projeto. Foto bruta nunca vai para o campo da foto tratada.
 
 Quando a página do álbum não permite contar as fotos sem rolar, peça a contagem à pessoa ou conte rolando a página, e diga que a contagem pode estar incompleta.
 
 ### Passo 2
 
-Abra e analise cada arquivo antes de responder ou gravar tipo, ângulo, cena, nome, texto alternativo ou observações. Nome de arquivo, título, fórmula, propriedade legada e classificação anterior não bastam. A leitura visual vence o metadado herdado, e a inconsistência vai para a pessoa antes de aprovar.
+Leia cada arquivo com a leitura por script, que devolve a orientação, a data, o tamanho como a pessoa vê e a leitura do Vision, e gera uma miniatura já na orientação certa. Num lote, abra as miniaturas numeradas em vez dos originais, para não confundir foto girada com foto deitada. Abra e analise cada arquivo antes de responder ou gravar tipo, ângulo, cena, nome, texto alternativo ou observações. Nome de arquivo, título, fórmula, propriedade legada e classificação anterior não bastam. A leitura visual vence o metadado herdado, e a inconsistência vai para a pessoa antes de aprovar.
 
 Sem conseguir abrir um arquivo, diga isso, não afirme com certeza e deixe o status em `Precisa revisar`.
 
 ### Passo 3
 
-Leia os tipos de `Fonte dos tipos de fotografia de moda` e classifique cada imagem. Pessoa, corpo, rosto, mão, braço, tatuagem ou alguém segurando a peça nunca é produto isolado: use o tipo com pessoa. Peça dobrada ou empilhada recebe o ângulo `Dobrado`, sem trocar o tipo, e `dobrado` entra no nome do arquivo.
+Leia os tipos de `Fonte dos tipos de fotografia de moda` e classifique cada imagem. Pessoa, corpo, rosto, mão, braço, tatuagem ou alguém segurando a peça nunca é produto isolado: use o tipo com pessoa. Peça dobrada ou empilhada recebe o ângulo `Dobrado`, sem trocar o tipo, e `dobrado` entra no nome do arquivo. Peça aberta sobre uma superfície com pés ou pernas na borda do quadro continua produto isolado, nunca pessoa usando. Perfil esquerdo ou direito segue o lado de quem veste a peça, e o lado entra nas observações.
 
 Tipo, ângulo, nome do arquivo e texto alternativo descrevem a mesma imagem e a mesma finalidade. Confira os quatro juntos antes de concluir.
 
@@ -83,7 +87,7 @@ O texto alternativo descreve só aquela imagem e os elementos visíveis nela. Qu
 
 Uma foto sem texto alternativo recebe uma proposta, sem esperar o pedido. Numa sessão local num macOS 27 ou superior, gere o rascunho com o script de rascunho local, que usa a leitura do Vision e o modelo do Foundation Models com a imagem anexada, e dê a peça, o tipo e o ângulo do registro como contexto. Fora disso, ou quando o script diz que o rascunho local não está disponível, escreva a proposta a partir da imagem aberta e diga isso.
 
-O rascunho local é ponto de partida: confira cada afirmação dele contra a imagem aberta e corrija antes de mostrar. Mostre a proposta ao lado do link do registro e só grave o texto com o sim da pessoa.
+O rascunho local é ponto de partida: confira cada afirmação dele contra a imagem aberta e corrija antes de mostrar. Mostre a proposta ao lado do link do registro e só grave o texto com o sim da pessoa. Numa mídia bruta cadastrada de um álbum, o sim ao cadastro, ou ao texto de uma foto do lote, autoriza o lote todo: grave o texto de cada uma sem perguntar de novo.
 
 ### Passo 8
 
@@ -103,7 +107,7 @@ Valide antes de responder. Corrija e repita até passar.
 
 - [ ] Cada imagem foi aberta e analisada, ou a limitação foi dita.
 - [ ] Tipo, ângulo, nome do arquivo e texto alternativo descrevem a mesma imagem.
-- [ ] Cada foto sem texto alternativo tem uma proposta conferida contra a imagem, ainda não gravada sem o sim.
+- [ ] Cada foto sem texto alternativo tem uma proposta conferida contra a imagem, ainda não gravada sem o sim. Numa mídia bruta de um álbum com o cadastro autorizado, o texto já está gravado, junto com o tipo e o ângulo.
 - [ ] Cada registro tem uma cena e uma finalidade, e nenhuma imagem útil foi apagada.
 - [ ] Os vínculos da peça, do look e da pessoa modelo existem dos dois lados.
 - [ ] A tratada não repete as originais, e o status vale o estágio real.
@@ -161,6 +165,14 @@ Se você começar um material com fotos de produto sem olhar os campos de foto d
 2. Com os campos vazios, diga a fonte provável e peça o link do álbum ou os arquivos.
 3. Não tente acessar um serviço sem conector.
 
+### Mídia bruta cadastrada em branco
+
+Se você cadastrar as mídias de um álbum sem tipo, ângulo e texto alternativo, a pessoa recebe um lote para preencher à mão.
+
+1. Leia cada arquivo pela miniatura na orientação certa.
+2. Preencha os três na mesma execução, porque o sim do cadastro vale para o lote.
+3. Peça só o que a imagem não mostra, como uma peça ou uma pessoa que você não consegue identificar.
+
 ### Álbum do produto sem equivalente no cadastro
 
 Se você confiar que o produto tem as fotos porque existe um álbum, o cadastro fica sem mídia bruta e a falta só aparece no meio de outro trabalho.
@@ -204,6 +216,8 @@ Gravei o link do álbum no registro do colete X. O álbum tem 12 fotos, 0 têm e
 - A sugestão de título é leitura humana. Ela tem maiúscula, acento e travessão, e não serve de nome de arquivo sem normalizar.
 - Um título em formato humano parece inofensivo. Ele quebra a busca e o nome do arquivo.
 
+- Uma mídia bruta cadastrada sem tipo, ângulo e texto alternativo parece um cuidado para depois. O sim do cadastro já autorizou os três, e deixar em branco é pendência inventada.
+- Uma foto girada parece deitada, e a largura e a altura do arquivo enganam: a orientação EXIF de 5 a 8 troca os lados. Leia a miniatura já na orientação certa.
 - Um álbum com fotos parece um cadastro completo. Só as mídias brutas ligadas ao produto contam, e a comparação por nome de arquivo ou por conteúdo diz quais faltam.
 
 - O rascunho do modelo local parece descrever a foto. Ele chama a peça de "peça", inventa manga e troca o enquadramento, e só a imagem aberta decide.
@@ -212,9 +226,14 @@ Gravei o link do álbum no registro do colete X. O álbum tem 12 fotos, 0 têm e
 
 ## Scripts disponíveis
 
+- `read_photo.py` imprime em JSON a orientação e a data EXIF, o tamanho como a pessoa vê, os rótulos do Vision, as pessoas, o texto e a área de atenção de uma foto, e grava a miniatura na orientação certa. Só roda num macOS com `swiftc`.
+- `read_photo.swift` é compilado por `read_photo.py`. Não rode este arquivo direto.
+- `notion_upload.py` envia um arquivo ao Notion e cria uma página pela linha de comando `ntn`, com a entrada fechada. Não conhece lista nem propriedade: o corpo da página vem do mapeamento do projeto.
 - `draft_alt_text.py` imprime em JSON os rótulos do Vision, o número de pessoas e o rascunho do texto alternativo de uma foto. Só roda numa sessão local num macOS 27 ou superior, com `swiftc`.
 - `draft_alt_text.swift` é compilado por `draft_alt_text.py`. Não rode este arquivo direto.
 
-1. Numa sessão local num macOS 27 ou superior, com o repositório: `python3 -I scripts/draft_alt_text.py "<imagem>" "<peça, tipo e ângulo do registro>"`, fora do sandbox.
-2. A primeira execução compila com `swiftc` e guarda o binário. Não usa rede. As seguintes usam o cache.
-3. Quando o script responde `local draft unavailable`, e em qualquer outro ambiente, como o Notion, não há rascunho local: o passo segue pela imagem aberta.
+1. Para ler uma foto, num macOS, fora do sandbox: `python3 -I scripts/read_photo.py "<imagem>" --thumbnail "<miniatura.jpg>" --side 512`. A primeira execução compila e guarda o binário.
+2. Para enviar um arquivo: `python3 -I scripts/notion_upload.py upload "<arquivo>"`, que devolve o id do envio. Para criar a página: `python3 -I scripts/notion_upload.py create-page "<corpo.json>"`. Sem `ntn`, use o conector do Notion.
+3. Para o rascunho do texto alternativo, numa sessão local num macOS 27 ou superior, com o repositório: `python3 -I scripts/draft_alt_text.py "<imagem>" "<peça, tipo e ângulo do registro>"`, fora do sandbox.
+4. A primeira execução compila com `swiftc` e guarda o binário. Não usa rede. As seguintes usam o cache.
+5. Quando um script responde `local draft unavailable` ou `photo reader unavailable`, e em qualquer outro ambiente, como o Notion, não há rascunho local: o passo segue pela imagem aberta.
