@@ -123,6 +123,7 @@ flowchart LR
     enviar_email["enviar-email"]
     enviar_mensagem_no_slack["enviar-mensagem-no-slack"]
     escrever_codigo["escrever-codigo"]
+    escrever_copywriting["escrever-copywriting"]
     escrever_legenda_do_post["escrever-legenda-do-post"]
     escrever_link["escrever-link"]
     escrever_teste["escrever-teste"]
@@ -794,6 +795,11 @@ flowchart LR
   escrever_codigo --> escrever_teste
   escrever_codigo --> levantar_ambiente_do_repositorio
   escrever_codigo --> preparar_tarefa_do_pull_request
+  escrever_copywriting --> criar_carrossel_do_instagram
+  escrever_copywriting --> criar_ideia_de_conteudo
+  escrever_copywriting --> definir_reel_do_instagram
+  escrever_copywriting --> escrever_legenda_do_post
+  escrever_copywriting --> redigir_com_tom_de_voz
   escrever_legenda_do_post --> criar_carrossel_do_instagram
   escrever_legenda_do_post --> definir_reel_do_instagram
   escrever_legenda_do_post --> redigir_com_tom_de_voz
