@@ -18,6 +18,12 @@
       "prompt": "Gere a foto de lookbook com a modelo a partir destas referências. O rosto saiu diferente na última tentativa.",
       "expected_output": "A habilidade trata a identidade como restrição primária, separa a função de cada referência e compara a nova imagem com a referência de identidade. Se a ferramenta não preservar o rosto, reduz a ambição, com enquadramento de torso ou nova referência de frente. Registra a falha, mantém Precisa revisar e não aprova.",
       "files": []
+    },
+    {
+      "id": "recriar-peca-sem-manequim-por-duas-fotos",
+      "prompt": "Recrie o produto isolado deste colete a partir da foto da peça aberta sobre a cama e da foto dele no manequim: <anexos>",
+      "expected_output": "A habilidade usa as duas fotos como referência e dispensa foto extra do acabamento da gola. O pedido diz qual foto governa cada detalhe em que as duas diferem, como a faixa, e escreve esquerdo e direito com os dois pontos de vista. Mostra o custo da geração e só roda com o sim. Na revisão conta botões, bolsos e aplicações e compara posição e tamanho em tamanho real, registra o tecido reinterpretado, salva como Precisa revisar ligada às duas mídias brutas e propõe o texto alternativo sem gravá-lo.",
+      "files": []
     }
   ]
 }
