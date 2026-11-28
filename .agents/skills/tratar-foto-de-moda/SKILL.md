@@ -3,7 +3,7 @@ name: tratar-foto-de-moda
 description: Trata e recria a foto de uma peça ou look a partir da foto enviada, preservando a fidelidade do produto, a identidade da pessoa modelo e a apresentação profissional. Usada ao gerar, tratar, corrigir ou revisar uma imagem de moda, mesmo sem dizer tratar. NÃO serve para registrar ou classificar a foto nem para publicá-la.
 metadata:
   author: jimmyandrade
-  version: "0.2.0"
+  version: "0.3.0"
   related:
     - cadastrar-foto-de-moda
     - escrever-link
@@ -20,6 +20,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Fonte dos tipos de fotografia de moda": ""
 # `Tipos que não servem a um conjunto de peças` lista os tipos de apresentação inadequados para uma foto que combina duas ou mais peças vendidas juntas.
 "Tipos que não servem a um conjunto de peças": "Packshot, produto isolado, manequim, flat lay"
+# `Ferramentas de geração de imagem` lista as ferramentas em ordem: a principal primeiro e as alternativas depois. O valor de cada projeto fica nas instruções do projeto. Vazia, use a ferramenta de imagem que a sessão tiver e diga qual.
+"Ferramentas de geração de imagem": []
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -37,7 +39,15 @@ Antes de gerar, analise as imagens e leia a peça: modelagem, materiais, cores, 
 
 Confirme o fechamento, se é botão, zíper, os dois ou outro aviamento, e não os confunda mesmo com a imagem pouco nítida. Na dúvida sobre fechamento, bolso, gola ou decote, pergunte se há bolso, quantos e onde, e se a gola é assimétrica. Enquanto não houver confirmação, não crie bolso nem simetria.
 
-A ferramenta de imagem recebe as fotos de referência como links ou anexos, sem subir arquivo à parte. Um link temporário de arquivo, como o que o Notion devolve e que vale 1 hora, serve se a geração rodar logo. Mostre à pessoa o custo em créditos de cada geração e rode só com o sim dela. Resolução e raciocínio alto podem custar mais que a estimativa inicial, e um plano gratuito pode barrar a segunda ou a terceira geração. Quando barrar, pare, diga quais peças ficaram sem foto e não troque por uma geração só de texto, que não preserva a peça.
+A ferramenta de imagem recebe as fotos de referência como links ou anexos, sem subir arquivo à parte. Um link temporário de arquivo, como o que o Notion devolve e que vale 1 hora, serve se a geração rodar logo. Mostre à pessoa o custo em créditos de cada geração e rode só com o sim dela. Resolução e raciocínio alto podem custar mais que a estimativa inicial, e um plano gratuito pode barrar a segunda ou a terceira geração.
+
+Quando a ferramenta principal de `Ferramentas de geração de imagem` falhar por limite do plano, crédito ou indisponibilidade, siga para a próxima da lista, sempre com as mesmas fotos de referência e o mesmo pedido, e peça a aprovação do custo quando ela cobrar.
+
+Ferramenta de conversa no navegador, sem API, vem por último, e a foto de referência sobe por arquivo, nunca por um link da conta de quem pediu.
+
+Quando mais de uma ferramenta gerar a mesma peça, entregue todas lado a lado, com o registro de qual ferramenta fez cada uma, e a pessoa escolhe a melhor. Só a escolhida avança no registro, e as outras ficam como tentativas nas observações de fidelidade.
+
+Pare só quando a lista acabar: diga quais peças ficaram sem foto e não troque por uma geração só de texto, que não preserva a peça.
 
 ### Passo 3
 
@@ -145,7 +155,8 @@ Aceitei o manequim preto, perguntei se o fechamento é zíper ou botão, alinhei
 - A peça é transparente e a pessoa quer fundo preto: gere como teste e mantenha o branco.
 - A ferramenta não preserva o rosto: enquadramento sem rosto ou nova referência, nunca identidade alterada.
 - Não há ferramenta de imagem na sessão: diga o que fazer à mão e não simule o resultado.
-- O plano da ferramenta barra a geração depois de algumas peças: pare, diga quais ficaram sem foto e não gere só por texto.
+- O plano da ferramenta barra a geração depois de algumas peças: siga para a próxima ferramenta da lista, e só quando a lista acabar diga quais peças ficaram sem foto, sem gerar só por texto.
+- Duas ferramentas geram a mesma peça: mostre as duas lado a lado, com a ferramenta de cada uma, e só a escolhida avança.
 - A peça aberta e a peça no manequim diferem num detalhe: o pedido diz qual foto governa esse detalhe.
 - A pessoa não confirma o bolso: trate como não confirmado e não o inclua.
 
@@ -154,6 +165,7 @@ Aceitei o manequim preto, perguntei se o fechamento é zíper ou botão, alinhei
 - A foto amadora parece motivo para pedir nova foto. Só um trecho que impede a leitura fiel pede foto complementar.
 - A assimetria da peça parece erro de montagem. Confirme antes de corrigir.
 - Uma imagem bonita parece pronta. Fidelidade e apresentação são avaliadas à parte.
+- Uma ferramenta que falha parece fim da tarefa. A lista de ferramentas tem alternativas, e a pessoa escolhe entre os resultados.
 - Um resultado fiel à primeira vista parece aprovado. Contar botões, bolsos e aplicações em tamanho real acha o que a miniatura esconde.
 - Uma imagem gerada por IA não prova o produto real. Ela é referência até a validação.
 
