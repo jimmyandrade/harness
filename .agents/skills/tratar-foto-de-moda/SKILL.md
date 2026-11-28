@@ -3,7 +3,7 @@ name: tratar-foto-de-moda
 description: Trata e recria a foto de uma peça ou look a partir da foto enviada, preservando a fidelidade do produto, a identidade da pessoa modelo e a apresentação profissional. Usada ao gerar, tratar, corrigir ou revisar uma imagem de moda, mesmo sem dizer tratar. NÃO serve para registrar ou classificar a foto nem para publicá-la.
 metadata:
   author: jimmyandrade
-  version: "0.1.3"
+  version: "0.3.0"
   related:
     - cadastrar-foto-de-moda
     - escrever-link
@@ -20,6 +20,8 @@ Leia cada valor nas instruções do projeto: primeiro na entrada com o nome dest
 "Fonte dos tipos de fotografia de moda": ""
 # `Tipos que não servem a um conjunto de peças` lista os tipos de apresentação inadequados para uma foto que combina duas ou mais peças vendidas juntas.
 "Tipos que não servem a um conjunto de peças": "Packshot, produto isolado, manequim, flat lay"
+# `Ferramentas de geração de imagem` lista as ferramentas em ordem: a principal primeiro e as alternativas depois. O valor de cada projeto fica nas instruções do projeto. Vazia, use a ferramenta de imagem que a sessão tiver e diga qual.
+"Ferramentas de geração de imagem": []
 "Modo de aprendizado": "perguntar"
 ```
 
@@ -37,6 +39,16 @@ Antes de gerar, analise as imagens e leia a peça: modelagem, materiais, cores, 
 
 Confirme o fechamento, se é botão, zíper, os dois ou outro aviamento, e não os confunda mesmo com a imagem pouco nítida. Na dúvida sobre fechamento, bolso, gola ou decote, pergunte se há bolso, quantos e onde, e se a gola é assimétrica. Enquanto não houver confirmação, não crie bolso nem simetria.
 
+A ferramenta de imagem recebe as fotos de referência como links ou anexos, sem subir arquivo à parte. Um link temporário de arquivo, como o que o Notion devolve e que vale 1 hora, serve se a geração rodar logo. Mostre à pessoa o custo em créditos de cada geração e rode só com o sim dela. Resolução e raciocínio alto podem custar mais que a estimativa inicial, e um plano gratuito pode barrar a segunda ou a terceira geração.
+
+Quando a ferramenta principal de `Ferramentas de geração de imagem` falhar por limite do plano, crédito ou indisponibilidade, siga para a próxima da lista, sempre com as mesmas fotos de referência e o mesmo pedido, e peça a aprovação do custo quando ela cobrar.
+
+Ferramenta de conversa no navegador, sem API, vem por último, e a foto de referência sobe por arquivo, nunca por um link da conta de quem pediu.
+
+Quando mais de uma ferramenta gerar a mesma peça, entregue todas lado a lado, com o registro de qual ferramenta fez cada uma, e a pessoa escolhe a melhor. Só a escolhida avança no registro, e as outras ficam como tentativas nas observações de fidelidade.
+
+Pare só quando a lista acabar: diga quais peças ficaram sem foto e não troque por uma geração só de texto, que não preserva a peça.
+
 ### Passo 3
 
 Numa foto que combina duas ou mais peças, pergunte o tipo de apresentação, lendo `Fonte dos tipos de fotografia de moda`, e não presuma. Um conjunto vendido junto não usa os `Tipos que não servem a um conjunto de peças`. Se a pessoa pedir um deles, explique e redirecione para o estilo de vida ou o editorial, que mostram todas as peças do conjunto.
@@ -52,6 +64,10 @@ Aceite o manequim preto como suporte. Torne o manequim e a sombra interna o meno
 ### Passo 5
 
 Remover o manequim de uma peça com gola ou decote exige uma foto do acabamento interno da gola, em flat lay ou em outro arranjo simples. Salve-a como detalhe, com a função dela nas observações, e use-a na geração e na revisão. Sem a foto, não finalize nem aprove. Dispense-a só quando o acabamento já aparece em outra referência, registrando a justificativa.
+
+A boa referência para recriar o produto isolado sem manequim são duas fotos juntas: a peça aberta sobre uma superfície, que mostra o interior da gola e o acabamento e cumpre esta exigência sem foto extra, e a mesma peça no manequim, de frente. Pé ou chão na borda da peça aberta saem na geração, e isso não é pessoa usando.
+
+O pedido de geração diz qual foto governa cada detalhe em que as duas diferem, como uma faixa amarrada no manequim e solta na peça aberta: "como na imagem 1" não basta, e o modelo pode escolher a faixa amarrada. Escreva lado esquerdo e direito sempre com os dois pontos de vista, como "lado direito de quem veste, esquerdo da imagem".
 
 Nunca entregue só o fundo removido sobre a mesma silhueta torta. Reconstrua a apresentação como uma produção de moda faria: alinhe cós, fechamento, barra, mangas e ombros, centralize e equilibre a peça, sem alterar comprimento, largura, modelagem, volume, assimetria real, bolso, fechamento ou textura. Na dúvida se um desvio é da peça ou da montagem, pergunte.
 
@@ -81,14 +97,17 @@ Revise visualmente antes de salvar como aprovada, com a silhueta no tamanho de p
 - [ ] Nenhum acabamento, bolso, botão, zíper, costura ou etiqueta inventado.
 - [ ] Zíper, puxador, botões e demais aviamentos intactos.
 - [ ] O lado da assimetria é o da referência, sem espelhar nem inverter.
+- [ ] A contagem de botões, bolsos e aplicações é a da referência, e a posição e o tamanho relativo de cada aplicação, como um bordado no ombro, batem com ela, comparados em tamanho real.
 - [ ] Cós, fechamento, quadril, pernas, barras e eixo estão alinhados, sem aparência de recorte amador.
 - [ ] A pessoa modelo parece a mesma, comparada com a referência.
+
+Tecido manchado, estampado ou desfiado é reinterpretado pela geração, que simplifica o padrão e o desfiado. Registre isso nas observações de fidelidade e nunca aprove sem a comparação humana, em tamanho real, com as fotos de referência.
 
 Corrigir um erro não pode apagar outro detalhe: escreva o novo pedido de geração equilibrando o que corrigir com o que deve ficar intacto. Reprove, regenere e registre cada falha. A imagem não avança para aprovada se uma correção criou outro erro.
 
 ### Passo 10
 
-O registro da foto, o status e o histórico seguem `cadastrar-foto-de-moda`. Aqui, uma imagem com falha de fidelidade fica `Precisa revisar`, e uma que a ferramenta só consegue recortar sem deformar a peça fica `Precisa gerar`. Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
+O registro da foto, o status e o histórico seguem `cadastrar-foto-de-moda`. Uma foto gerada entra na lista das fotos tratadas com status `Precisa revisar`, o tipo e o ângulo, a peça, a ligação às duas mídias brutas usadas como referência e as observações de fidelidade, que listam o que comparar. Proponha o texto alternativo e só o grave com o sim da pessoa. Aqui, uma imagem com falha de fidelidade fica `Precisa revisar`, e uma que a ferramenta só consegue recortar sem deformar a peça fica `Precisa gerar`. Ao terminar, siga `evoluir-habilidade` conforme `Modo de aprendizado`.
 
 Todo registro de foto que a resposta citar leva o link da página, como `escrever-link` manda.
 
@@ -136,6 +155,9 @@ Aceitei o manequim preto, perguntei se o fechamento é zíper ou botão, alinhei
 - A peça é transparente e a pessoa quer fundo preto: gere como teste e mantenha o branco.
 - A ferramenta não preserva o rosto: enquadramento sem rosto ou nova referência, nunca identidade alterada.
 - Não há ferramenta de imagem na sessão: diga o que fazer à mão e não simule o resultado.
+- O plano da ferramenta barra a geração depois de algumas peças: siga para a próxima ferramenta da lista, e só quando a lista acabar diga quais peças ficaram sem foto, sem gerar só por texto.
+- Duas ferramentas geram a mesma peça: mostre as duas lado a lado, com a ferramenta de cada uma, e só a escolhida avança.
+- A peça aberta e a peça no manequim diferem num detalhe: o pedido diz qual foto governa esse detalhe.
 - A pessoa não confirma o bolso: trate como não confirmado e não o inclua.
 
 ## Pegadinhas
@@ -143,6 +165,8 @@ Aceitei o manequim preto, perguntei se o fechamento é zíper ou botão, alinhei
 - A foto amadora parece motivo para pedir nova foto. Só um trecho que impede a leitura fiel pede foto complementar.
 - A assimetria da peça parece erro de montagem. Confirme antes de corrigir.
 - Uma imagem bonita parece pronta. Fidelidade e apresentação são avaliadas à parte.
+- Uma ferramenta que falha parece fim da tarefa. A lista de ferramentas tem alternativas, e a pessoa escolhe entre os resultados.
+- Um resultado fiel à primeira vista parece aprovado. Contar botões, bolsos e aplicações em tamanho real acha o que a miniatura esconde.
 - Uma imagem gerada por IA não prova o produto real. Ela é referência até a validação.
 
 ## Scripts disponíveis
