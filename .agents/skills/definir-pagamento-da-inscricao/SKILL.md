@@ -5,7 +5,7 @@ allowed-tools: notion:notion-ai-search notion:notion-fetch
 compatibility: Precisa de internet e, para conferir o titular, do app de pagamento da empresa aberto no navegador.
 metadata:
   author: jimmyandrade
-  version: "0.3.0"
+  version: "0.3.1"
   related:
     - definir-inscricao
     - definir-negociacao
@@ -67,7 +67,7 @@ Depois do pagamento e do evento na agenda, procure o post de divulgação da org
 
 Leia o post pelo navegador: o texto, a data, o horário, o local e os comentários que já existem, em tom e tamanho. Use esses dados para completar o evento na agenda, por `definir-agenda`, e o registro do evento, conferindo contra o que já está lá. Dado que diverge do que já está registrado vai à pessoa, não se grava sozinho.
 
-Redija o comentário curto, por `redigir-com-tom-de-voz`, no tom da marca e do perfil que comenta, conferido na tela de quem está logado antes de escrever. A frase da marca entra quando as instruções do projeto a definem como obrigatória. O comentário combina com os que já existem, não promete o que não foi combinado e não leva palavra que o vocabulário proíbe.
+Redija o comentário curto, por `redigir-com-tom-de-voz`, no tom da marca e do perfil que comenta, conferido na tela de quem está logado antes de escrever. A frase da marca só entra no comentário se tiver conexão com o assunto do post, como `redigir-com-tom-de-voz` trata a frase. Na dúvida, não entra, e você diz à pessoa que a deixou de fora e por quê. Um comentário curto de parabéns não leva a frase. O comentário combina com os que já existem, não promete o que não foi combinado e não leva palavra que o vocabulário proíbe.
 
 Mostre o comentário completo à pessoa no mesmo turno em que pede o sim. Comentário público em nome da marca é publicação: só publique com o sim dela, pelo perfil logado. Depois de publicar, confira na tela que o comentário apareceu e registre-o, por `definir-negociacao`, como comentário datado na página do evento, com o texto e o link do post.
 
@@ -117,7 +117,7 @@ Consultei a chave na tela de conferência do app de pagamento, sem pagar. O titu
 
 ### A taxa da feira foi paga, o evento está na agenda e a pessoa passou o link do post de divulgação da organização.
 
-Li o post pelo navegador: o texto, a data, o horário, o local e os três comentários que já existiam, curtos e informais. Conferi a data e o horário contra o evento e completei o local que faltava. Conferi o perfil logado, redigi o comentário curto no tom da marca e mostrei o texto completo à pessoa, pedindo o sim no mesmo turno. Publiquei só depois do sim, conferi que o comentário apareceu e o registrei em comentário datado na página do evento, com o texto e o link do post.
+Li o post pelo navegador: o texto, a data, o horário, o local e os três comentários que já existiam, curtos e informais. Conferi a data e o horário contra o evento e completei o local que faltava. Conferi o perfil logado, redigi o comentário curto de parabéns no tom da marca, sem a frase da marca, porque ela não tinha conexão com o post, e disse isso à pessoa. Mostrei o texto completo à pessoa, pedindo o sim no mesmo turno. Publiquei só depois do sim, conferi que o comentário apareceu e o registrei em comentário datado na página do evento, com o texto e o link do post.
 
 ## Casos-limite
 
@@ -127,6 +127,7 @@ Li o post pelo navegador: o texto, a data, o horário, o local e os três coment
 - A chave é de um CNPJ e o nome da tela é um MEI com o número no nome: é o formato normal desse cadastro. Compare o documento e o banco com o que a organização disse.
 - Não há post de divulgação da organização, ou a pessoa não passou o link e o perfil da organização não o mostra: não proponha comentário.
 - O post tem comentários que pedem resposta, ou a pessoa pede para curtir: comentário da marca não é resposta. Só responda ou curta com o pedido dela.
+- A frase da marca não combina com o assunto do post: deixe-a de fora e diga à pessoa que a omitiu e por quê.
 - O perfil logado não é o da marca, ou a tela não mostra qual é: não publique. Diga qual perfil está logado e peça a decisão.
 
 ## Pegadinhas
@@ -134,6 +135,7 @@ Li o post pelo navegador: o texto, a data, o horário, o local e os três coment
 - Perguntar da reserva ou do desconto parece prudência antes de pagar. A reserva vem do pagamento, e com o prazo curto o desconto já oferecido por escrito vale como foi dito.
 - Consultar a chave parece o primeiro passo de pagar. A tela de conferência só mostra o titular: pagar começa em "Continuar", e quem continua é a pessoa.
 - A busca na internet pelo titular costuma voltar vazia para MEI. A tela de conferência do app de pagamento é a fonte.
+- A frase da marca parece obrigatória em todo comentário. Ela só entra quando se conecta ao post: replicá-la sem conexão soa forçado.
 - O comentário parece só um agrado. É publicação pública em nome da marca: o texto inteiro vai à pessoa antes, e só sai com o sim.
 - O post da organização parece só divulgação. Ele também traz data, horário e local que completam o evento e o registro.
 
